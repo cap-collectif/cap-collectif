@@ -606,3 +606,8 @@ InternalQuery:
                 argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_ADMIN')"
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver", [args])'
+            menuItems:
+                type: '[InternalMenuItem!]!'
+                description: 'The navbar menu items.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemsResolver", [args])'
+

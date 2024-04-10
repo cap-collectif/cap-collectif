@@ -1,0 +1,32 @@
+InternalMenuItem:
+    type: object
+    inherits:
+        - Node
+    config:
+        name: MenuItem
+        description: 'A menu item.'
+        interfaces:
+            - Node
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: MenuItem
+            position:
+                type: 'Int!'
+                description: 'The position of the item in the menu.'
+            title:
+                type: 'String'
+                description: 'The menu item title applied to the current locale'
+            link:
+                type: 'String'
+                description: 'The menu item link applied to the current locale'
+            children:
+                type: '[InternalMenuItem]!'
+                description: 'The sub menus if the current item contains sub menus'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemChildrenResolver", [value])'
+            translations:
+                type: '[InternalMenuItemTranslation!]!'
+                description: 'The available translations for the menu item.'
+

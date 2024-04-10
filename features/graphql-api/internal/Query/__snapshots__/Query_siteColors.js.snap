@@ -4,6 +4,10 @@ exports[`Internal|Query.siteColors fetches all site colors. 1`] = `
 Object {
   "siteColors": Array [
     Object {
+      "keyname": "color.sub.menu.background",
+      "value": "#026571",
+    },
+    Object {
       "keyname": "color.bg.primary",
       "value": "#e3e3e3",
     },

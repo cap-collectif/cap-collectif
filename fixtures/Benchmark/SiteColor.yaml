@@ -213,3 +213,8 @@ Capco\AppBundle\Entity\SiteColor:
     category: settings.appearance
     value: '#e3e3e3'
     position: 34
+  SiteColor39:
+    keyname: color.sub.menu.background
+    category: settings.appearance
+    value: '#026571'
+    position: 35

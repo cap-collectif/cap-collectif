@@ -21,6 +21,7 @@ use Capco\AppBundle\Entity\Interfaces\ContributorInterface;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\MapToken;
 use Capco\AppBundle\Entity\Mediator;
+use Capco\AppBundle\Entity\MenuItem;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\OpinionVersion;
@@ -335,6 +336,10 @@ class NodeTypeResolver implements QueryInterface
 
         if ($node instanceof ContributorInterface) {
             return $this->contributorTypeResolver->__invoke($node);
+        }
+
+        if ($node instanceof MenuItem) {
+            return $this->typeResolver->resolve('InternalMenuItem');
         }
 
         throw new UserError('Could not resolve type of Node.');

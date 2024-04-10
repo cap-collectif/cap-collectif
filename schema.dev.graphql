@@ -8336,6 +8336,39 @@ type MediatorEdge {
   cursor: String!
 }
 
+"""A menu item."""
+type MenuItem implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The position of the item in the menu."""
+  position: Int!
+
+  """The menu item title applied to the current locale"""
+  title: String
+
+  """The menu item link applied to the current locale"""
+  link: String
+
+  """The sub menus if the current item contains sub menus"""
+  children: [MenuItem]!
+
+  """The available translations for the menu item."""
+  translations: [MenuItemTranslation!]!
+}
+
+"""Translation of a menu item."""
+type MenuItemTranslation {
+  """IETF code of the translation of the event."""
+  locale: String!
+
+  """The title of the menu item."""
+  title: String
+
+  """The link of the menu item."""
+  link: URI
+}
+
 """A multiple choice question"""
 type MultipleChoiceQuestion implements Question & Node {
   """The ID of an object"""
@@ -13773,6 +13806,9 @@ type Query {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ParticipantConnection!
+
+  """The navbar menu items."""
+  menuItems: [MenuItem!]!
 }
 
 input QueryAnalyticsFilter {

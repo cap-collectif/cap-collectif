@@ -24,8 +24,8 @@ class Media
     protected int $providerStatus = 1;
     protected ?string $providerReference = null;
     protected array $providerMetadata = [];
-    protected int $width;
-    protected int $height;
+    protected ?int $width = null;
+    protected ?int $height = null;
     protected float $length;
     protected string $copyright;
     protected ?string $authorName = null;

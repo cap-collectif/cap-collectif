@@ -71,6 +71,24 @@ class MenuItemRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return array<MenuItem>
+     */
+    public function findMainEnabledNavBarItems(): array
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->where('i.menu = 1')
+            ->andWhere('i.parent IS NULL')
+        ;
+
+        $qb = $this->whereIsEnabled($qb);
+
+        $qb->orderBy('i.parent');
+        $qb->addOrderBy('i.position');
+
+        return $qb->getQuery()->getResult();
+    }
+
     private function whereIsEnabled(QueryBuilder $qb)
     {
         $qb->leftJoin('i.Page', 'page')

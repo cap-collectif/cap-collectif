@@ -1,0 +1,15 @@
+InternalMenuItemTranslation:
+    type: object
+    config:
+        description: 'Translation of a menu item.'
+        name: MenuItemTranslation
+        fields:
+            locale:
+                type: 'String!'
+                description: 'IETF code of the translation of the event.'
+            title:
+                type: 'String'
+                description: 'The title of the menu item.'
+            link:
+                type: 'URI'
+                description: 'The link of the menu item.'

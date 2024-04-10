@@ -35,6 +35,7 @@ use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Repository\MapTokenRepository;
 use Capco\AppBundle\Repository\MediaResponseRepository;
 use Capco\AppBundle\Repository\MediatorRepository;
+use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository;
 use Capco\AppBundle\Repository\OfficialResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
@@ -422,6 +423,11 @@ class GlobalIdResolver
                     if (!$node) {
                         $node = $this->container->get(ParticipantRepository::class)->find($uuid);
                     }
+
+                    break;
+
+                case 'MenuItem':
+                    $node = $this->container->get(MenuItemRepository::class)->find($uuid);
 
                     break;
 
