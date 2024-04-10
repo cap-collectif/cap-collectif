@@ -2,9 +2,9 @@
 
 namespace Capco\UserBundle\Controller;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Manager\ContributionManager;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -14,8 +14,6 @@ use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Security\LoginManagerInterface;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -34,10 +32,10 @@ class ConfirmationController extends Controller
     private UserRepository $userRepo;
     private AbstractStepRepository $stepRepo;
     private TranslatorInterface $translator;
-    private Publisher $publisher;
     private CommentRepository $commentRepository;
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
+    private SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         UserManager $userManager,
@@ -49,10 +47,10 @@ class ConfirmationController extends Controller
         TranslatorInterface $translator,
         UserRepository $userRepo,
         AbstractStepRepository $stepRepo,
-        Publisher $publisher,
         CommentRepository $commentRepository,
         EntityManagerInterface $em,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->userManager = $userManager;
         $this->loginManager = $loginManager;
@@ -64,10 +62,10 @@ class ConfirmationController extends Controller
         $this->stepRepo = $stepRepo;
         $this->translator = $translator;
         $this->login = true;
-        $this->publisher = $publisher;
         $this->commentRepository = $commentRepository;
         $this->em = $em;
         $this->logger = $logger;
+        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     /**
@@ -126,7 +124,7 @@ class ConfirmationController extends Controller
         // This will flush
         $this->userManager->updateUser($user);
         if ($user->isConsentInternalCommunication()) {
-            $this->pushToSendinblue(['email' => $user->getEmail()]);
+            $this->sendInBluePublisher->pushToSendinblue('addEmailToSendInBlue', ['email' => $user->getEmail()]);
         }
         if ($this->login) {
             $this->loginManager->loginUser('main', $user, $response);
@@ -241,19 +239,6 @@ class ConfirmationController extends Controller
         $this->session->getFlashBag()->add(
             $type,
             $this->translator->trans($message, [], 'CapcoAppBundle')
-        );
-    }
-
-    private function pushToSendinblue(array $args): void
-    {
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => 'addEmailToSendinblue',
-                    'args' => $args,
-                ])
-            )
         );
     }
 

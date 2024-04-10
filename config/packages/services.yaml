@@ -316,6 +316,8 @@ services:
             $sendinblueNlListId: '%sendinblue_nl_list_id%'
             $apiInstance: '@Capco\AppBundle\Mailer\SendInBlue\ContactsApi'
 
+    Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher: ~
+
     Capco\AppBundle\Mailer\EmailingCampaignSender: ~
 
     PhpOffice\PhpSpreadsheet\Spreadsheet:

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Entity\UserInvite;
 use Capco\AppBundle\Enum\UserRole;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -15,7 +16,6 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class UserInvitationHandlerSpec extends ObjectBehavior
 {
@@ -24,14 +24,14 @@ class UserInvitationHandlerSpec extends ObjectBehavior
         Manager $manager,
         UserInviteRepository $userInviteRepository,
         PendingOrganizationInvitationRepository $organizationInvitationRepository,
-        Publisher $publisher
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->beConstructedWith(
             $userInviteRepository,
             $organizationInvitationRepository,
             $manager,
             $em,
-            $publisher
+            $sendInBluePublisher
         );
     }
 

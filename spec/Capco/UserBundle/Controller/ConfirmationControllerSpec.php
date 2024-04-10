@@ -4,6 +4,7 @@ namespace spec\Capco\UserBundle\Controller;
 
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\GraphQL\Resolver\Step\StepUrlResolver;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Manager\ContributionManager;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\CommentRepository;
@@ -16,7 +17,6 @@ use FOS\UserBundle\Security\LoginManager;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -36,10 +36,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
         TranslatorInterface $translator,
         UserRepository $userRepo,
         AbstractStepRepository $stepRepository,
-        Publisher $publisher,
         CommentRepository $commentRepository,
         EntityManagerInterface $em,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->beConstructedWith(
             $userManager,
@@ -51,10 +51,10 @@ class ConfirmationControllerSpec extends ObjectBehavior
             $translator,
             $userRepo,
             $stepRepository,
-            $publisher,
             $commentRepository,
             $em,
-            $logger
+            $logger,
+            $sendInBluePublisher
         );
         $this->login = false;
     }

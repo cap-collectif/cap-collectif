@@ -9,7 +9,6 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Mailer\SendInBlue\SendInBlueManager;
 use Capco\AppBundle\Notifier\DebateNotifier;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
@@ -21,7 +20,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
@@ -46,8 +44,6 @@ class AbstractDebateArgumentMutation
     protected TokenGeneratorInterface $tokenGenerator;
     protected DebateNotifier $debateNotifier;
     protected RequestGuesser $requestGuesser;
-    protected SendInBlueManager $sendInBlueManager;
-    protected Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -59,9 +55,7 @@ class AbstractDebateArgumentMutation
         ValidatorInterface $validator,
         TokenGeneratorInterface $tokenGenerator,
         DebateNotifier $debateNotifier,
-        RequestGuesser $requestGuesser,
-        SendInBlueManager $sendInBlueManager,
-        Publisher $publisher
+        RequestGuesser $requestGuesser
     ) {
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
@@ -73,8 +67,6 @@ class AbstractDebateArgumentMutation
         $this->tokenGenerator = $tokenGenerator;
         $this->debateNotifier = $debateNotifier;
         $this->requestGuesser = $requestGuesser;
-        $this->sendInBlueManager = $sendInBlueManager;
-        $this->publisher = $publisher;
     }
 
     protected function getDebateFromInput(Arg $input, ?User $viewer): Debate

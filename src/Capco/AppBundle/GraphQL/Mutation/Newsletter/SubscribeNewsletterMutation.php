@@ -2,11 +2,11 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Newsletter;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Security\RateLimiter;
@@ -18,8 +18,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class SubscribeNewsletterMutation implements MutationInterface
@@ -36,35 +34,35 @@ class SubscribeNewsletterMutation implements MutationInterface
     private LoggerInterface $logger;
     private CaptchaChecker $captchaChecker;
     private RequestGuesser $requestGuesser;
-    private Publisher $publisher;
     private FormFactoryInterface $formFactory;
     private EntityManagerInterface $entityManager;
     private NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
     private UserRepository $userRepository;
     private RateLimiter $rateLimiter;
+    private SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
         RequestGuesser $requestGuesser,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->toggleManager = $toggleManager;
         $this->logger = $logger;
         $this->captchaChecker = $captchaChecker;
         $this->requestGuesser = $requestGuesser;
-        $this->publisher = $publisher;
         $this->formFactory = $formFactory;
         $this->entityManager = $entityManager;
         $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
         $this->userRepository = $userRepository;
         $this->rateLimiter = $rateLimiter;
+        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     public function __invoke(Argument $args): array
@@ -132,18 +130,18 @@ class SubscribeNewsletterMutation implements MutationInterface
                 $userToNotify->setNotificationsConfiguration(
                     $userNotification->setConsentExternalCommunication(true)
                 );
-                $this->pushToSendinblue('addUserToSendinblue', [
+                $this->sendInBluePublisher->pushToSendinblue('addUserToSendInBlue', [
                     'user' => $userToNotify,
                 ]);
             }
         } elseif (!$existingNewsletterSubscription) {
             $em->persist($subscription);
-            $this->pushToSendinblue('addEmailToSendinblue', [
+            $this->sendInBluePublisher->pushToSendinblue('addEmailToSendInBlue', [
                 'email' => $subscription->getEmail(),
             ]);
         } elseif (!$existingNewsletterSubscription->getIsEnabled()) {
             $existingNewsletterSubscription->setIsEnabled(true);
-            $this->pushToSendinblue('addEmailToSendinblue', [
+            $this->sendInBluePublisher->pushToSendinblue('addEmailToSendInBlue', [
                 'email' => $existingNewsletterSubscription->getEmail(),
             ]);
         }
@@ -151,18 +149,5 @@ class SubscribeNewsletterMutation implements MutationInterface
         $em->flush();
 
         return ['email' => $email];
-    }
-
-    private function pushToSendinblue(string $method, array $args): void
-    {
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => $method,
-                    'args' => $args,
-                ])
-            )
-        );
     }
 }

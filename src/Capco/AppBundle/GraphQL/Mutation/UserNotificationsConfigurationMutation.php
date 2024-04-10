@@ -2,17 +2,15 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Form\UserNotificationsConfigurationType;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 
 class UserNotificationsConfigurationMutation implements MutationInterface
@@ -21,18 +19,18 @@ class UserNotificationsConfigurationMutation implements MutationInterface
     private EntityManagerInterface $entityManager;
     private LoggerInterface $logger;
     private FormFactoryInterface $formFactory;
-    private Publisher $publisher;
+    private SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         LoggerInterface $logger,
         FormFactoryInterface $formFactory,
-        Publisher $publisher
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->entityManager = $entityManager;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
-        $this->publisher = $publisher;
+        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     public function __invoke(Argument $args, User $user): array
@@ -57,26 +55,13 @@ class UserNotificationsConfigurationMutation implements MutationInterface
         }
 
         if (true === $values['consentInternalCommunication'] && !$wasConsentingInternalComm && $user->isEmailConfirmed()) {
-            $this->pushToSendinblue('addEmailToSendinblue', ['user' => $user->getEmail()]);
+            $this->sendInBluePublisher->pushToSendinblue('addEmailToSendInBlue', ['user' => $user->getEmail()]);
         } elseif (false === $values['consentInternalCommunication'] && $wasConsentingInternalComm && $user->isEmailConfirmed()) {
-            $this->pushToSendinblue('blackListUser', ['email' => $user->getEmail()]);
+            $this->sendInBluePublisher->pushToSendinblue('blackListUser', ['email' => $user->getEmail()]);
         }
 
         $this->entityManager->flush();
 
         return ['user' => $userNotificationsConfiguration->getUser()];
-    }
-
-    private function pushToSendinblue(string $method, array $args): void
-    {
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => $method,
-                    'args' => $args,
-                ])
-            )
-        );
     }
 }

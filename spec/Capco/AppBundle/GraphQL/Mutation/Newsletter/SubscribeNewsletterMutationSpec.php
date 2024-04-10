@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\NewsletterSubscription;
 use Capco\AppBundle\Form\NewsletterSubscriptionType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Mutation\Newsletter\SubscribeNewsletterMutation;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Security\RateLimiter;
@@ -19,7 +20,6 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
@@ -34,24 +34,24 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->beConstructedWith(
             $toggleManager,
             $logger,
             $captchaChecker,
             new RequestGuesser(new RequestStack()),
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
-            $rateLimiter
+            $rateLimiter,
+            $sendInBluePublisher
         );
     }
 
@@ -74,12 +74,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
+        SendInBluePublisher $sendInBluePublisher,
         Arg $args
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
@@ -90,12 +90,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
-            $rateLimiter
+            $rateLimiter,
+            $sendInBluePublisher
         );
 
         $email = 'something@email.com';
@@ -120,12 +120,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
+        SendInBluePublisher $sendInBluePublisher,
         Arg $args
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
@@ -136,12 +136,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
-            $rateLimiter
+            $rateLimiter,
+            $sendInBluePublisher
         );
 
         $email = 'something@email.com';
@@ -168,28 +168,28 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
         Arg $args,
-        FormInterface $form
+        FormInterface $form,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
             $rateLimiter,
             $args,
-            $form
+            $form,
+            $sendInBluePublisher
         );
 
         $this->__invoke($args);
@@ -206,7 +206,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
         Arg $args,
-        FormInterface $form
+        FormInterface $form,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
         $request = Request::create('', 'POST', [], [], [], ['REMOTE_ADDR' => '']);
@@ -216,12 +217,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
-            $rateLimiter
+            $rateLimiter,
+            $sendInBluePublisher
         );
 
         $email = '';
@@ -260,25 +261,26 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
         Arg $args,
-        FormInterface $form
+        FormInterface $form,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
             $rateLimiter,
             $args,
-            $form
+            $form,
+            $sendInBluePublisher
         );
 
-        $publisher
-            ->publish(Argument::type('string'), Argument::type(Message::class))
+        $sendInBluePublisher
+            ->pushToSendinblue(Argument::type('string'), Argument::type('array'))
             ->shouldBeCalledOnce()
         ;
 
@@ -291,28 +293,28 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
         Arg $args,
-        FormInterface $form
+        FormInterface $form,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
             $rateLimiter,
             $args,
-            $form
+            $form,
+            $sendInBluePublisher
         );
 
         $newsletterSubscription = new NewsletterSubscription();
@@ -324,8 +326,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             ->willReturn($newsletterSubscription)
         ;
 
-        $publisher
-            ->publish(Argument::type('string'), Argument::type(Message::class))
+        $sendInBluePublisher
+            ->pushToSendinblue(Argument::type('string'), Argument::type('array'))
             ->shouldBeCalledOnce()
         ;
 
@@ -338,28 +340,28 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
         Arg $args,
-        FormInterface $form
+        FormInterface $form,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
         $email = $this->getEmailToSubscribe(
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
             $rateLimiter,
             $args,
-            $form
+            $form,
+            $sendInBluePublisher
         );
 
         $user = new User();
@@ -372,8 +374,8 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             ->willReturn($user)
         ;
 
-        $publisher
-            ->publish(Argument::type('string'), Argument::type(Message::class))
+        $sendInBluePublisher
+            ->pushToSendinblue(Argument::type('string'), Argument::type('array'))
             ->shouldBeCalledOnce()
         ;
 
@@ -386,12 +388,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
+        SendInBluePublisher $sendInBluePublisher,
         Arg $args
     ) {
         $this->getMockedGraphQLArgumentFormatted($args);
@@ -402,12 +404,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
-            $rateLimiter
+            $rateLimiter,
+            $sendInBluePublisher
         );
         $toggleManager->isActive(Manager::newsletter)->willReturn(true);
 
@@ -426,12 +428,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        SendInBluePublisher $sendInBluePublisher
     ): void {
         $requestStack = new RequestStack();
         $requestStack->push($request);
@@ -447,12 +449,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             $logger,
             $captchaChecker,
             new RequestGuesser($requestStack),
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
-            $rateLimiter
+            $rateLimiter,
+            $sendInBluePublisher
         );
     }
 
@@ -460,14 +462,14 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
         Manager $toggleManager,
         LoggerInterface $logger,
         CaptchaChecker $captchaChecker,
-        Publisher $publisher,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $entityManager,
         NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
         UserRepository $userRepository,
         RateLimiter $rateLimiter,
         Arg $args,
-        FormInterface $form
+        FormInterface $form,
+        SendInBluePublisher $sendInBluePublisher
     ): string {
         $request = Request::create('', 'POST', [], [], [], ['REMOTE_ADDR' => '']);
 
@@ -476,12 +478,12 @@ class SubscribeNewsletterMutationSpec extends ObjectBehavior
             $toggleManager,
             $logger,
             $captchaChecker,
-            $publisher,
             $formFactory,
             $entityManager,
             $newsletterSubscriptionRepository,
             $userRepository,
-            $rateLimiter
+            $rateLimiter,
+            $sendInBluePublisher
         );
 
         $email = 'something@email.com';

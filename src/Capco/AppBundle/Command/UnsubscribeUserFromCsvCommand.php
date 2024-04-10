@@ -2,13 +2,11 @@
 
 namespace Capco\AppBundle\Command;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Helper\ConvertCsvToArray;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
@@ -21,20 +19,20 @@ class UnsubscribeUserFromCsvCommand extends Command
     private UserRepository $userRepository;
     private EntityManagerInterface $em;
     private ConvertCsvToArray $convertCsvToArray;
-    private Publisher $publisher;
+    private SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         ?string $name,
         UserRepository $userRepository,
         EntityManagerInterface $em,
         ConvertCsvToArray $convertCsvToArray,
-        Publisher $publisher
+        SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct($name);
         $this->userRepository = $userRepository;
         $this->em = $em;
         $this->convertCsvToArray = $convertCsvToArray;
-        $this->publisher = $publisher;
+        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     protected function configure()
@@ -63,7 +61,7 @@ class UnsubscribeUserFromCsvCommand extends Command
             if ($user instanceof User) {
                 $user->setConsentExternalCommunication(false);
                 if ($user->isConsentInternalCommunication()) {
-                    $this->pushToSendinblue(['email' => $user->getEmail()]);
+                    $this->sendInBluePublisher->pushToSendinblue('blackListUser', ['email' => $user->getEmail()]);
                     $user->setConsentInternalCommunication(false);
                 }
             } else {
@@ -72,18 +70,5 @@ class UnsubscribeUserFromCsvCommand extends Command
         }
 
         $this->em->flush();
-    }
-
-    private function pushToSendinblue(array $args = []): void
-    {
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => 'blackListUser',
-                    'args' => $args,
-                ])
-            )
-        );
     }
 }

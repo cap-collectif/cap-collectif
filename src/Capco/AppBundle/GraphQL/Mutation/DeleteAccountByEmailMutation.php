@@ -7,6 +7,7 @@ use Capco\AppBundle\Enum\DeleteAccountByEmailErrorCode;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
@@ -28,7 +29,6 @@ use Exception;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Psr\Log\LoggerInterface;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
@@ -59,7 +59,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
         HighlightedContentRepository $highlightedContentRepository,
         MailingListRepository $mailingListRepository,
         UserAnonymizer $userAnonymiser,
-        Publisher $publisher
+        SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct(
             $em,
@@ -82,7 +82,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $mailingListRepository,
             $logger,
             $userAnonymiser,
-            $publisher
+            $sendInBluePublisher
         );
         $this->userRepository = $userRepository;
     }

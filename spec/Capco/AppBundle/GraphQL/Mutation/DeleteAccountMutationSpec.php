@@ -8,6 +8,7 @@ use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\DeleteAccountMutation;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
@@ -34,13 +35,17 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use phpDocumentor\Reflection\Types\Void_;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBag;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Translation\Translator;
 use Translation\Bundle\Translator\TranslatorInterface;
 
+/**
+ * @template TKey
+ * @template TValue
+ * @template-extends ObjectBehavior<TKey,TValue>
+ */
 class DeleteAccountMutationSpec extends ObjectBehavior
 {
     public const USER_ID = 'USER-ID';
@@ -71,9 +76,9 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         EventManager $eventManager,
         User $user,
         UserAnonymizer $userAnonymizer,
-        Publisher $publisher,
-        SessionInterface $session
-    ) {
+        SessionInterface $session,
+        SendInBluePublisher $sendInBluePublisher
+    ): void {
         $em->getFilters()->willReturn($filterCollection);
         $em->getEventManager()->willReturn($eventManager);
 
@@ -112,12 +117,12 @@ class DeleteAccountMutationSpec extends ObjectBehavior
             $mailingListRepository,
             $logger,
             $userAnonymizer,
-            $publisher,
-            $session
+            $session,
+            $sendInBluePublisher
         );
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(DeleteAccountMutation::class);
     }
@@ -126,7 +131,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         User $user,
         User $viewer,
         UserRepository $userRepository
-    ) {
+    ): void {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
         $values = ['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD];
         $rawInput['input'] = $values;
@@ -179,7 +184,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
         Session $session,
         TranslatorInterface $translator,
         FlashBag $flashBag
-    ) {
+    ): void {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
 
         $values = ['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD];
@@ -252,7 +257,7 @@ class DeleteAccountMutationSpec extends ObjectBehavior
     public function it_throws_exception_on_deletete_a_super_admin_account(
         User $viewer,
         UserRepository $userRepository
-    ) {
+    ): void {
         $encodeUserId = GlobalId::toGlobalId('User', self::USER_ID);
         $values = ['userId' => $encodeUserId, 'type' => DeleteAccountType::HARD];
         $rawInput['input'] = $values;

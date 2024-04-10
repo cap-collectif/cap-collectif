@@ -7,6 +7,7 @@ use Capco\AppBundle\Enum\DeleteAccountType;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
@@ -28,7 +29,6 @@ use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -64,8 +64,8 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
         UserAnonymizer $userAnonymizer,
-        Publisher $publisher,
-        SessionInterface $session
+        SessionInterface $session,
+        SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct(
             $em,
@@ -88,7 +88,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $mailingListRepository,
             $logger,
             $userAnonymizer,
-            $publisher
+            $sendInBluePublisher
         );
         $this->userRepository = $userRepository;
         $this->session = $session;

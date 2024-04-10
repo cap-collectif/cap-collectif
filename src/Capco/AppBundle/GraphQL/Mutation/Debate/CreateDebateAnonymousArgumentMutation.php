@@ -2,15 +2,54 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Debate;
 
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
+use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
+use Capco\AppBundle\Notifier\DebateNotifier;
+use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
+use Capco\AppBundle\Repository\DebateArgumentRepository;
+use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
+use Doctrine\ORM\EntityManagerInterface;
+use FOS\UserBundle\Util\TokenGeneratorInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
-use Swarrot\Broker\Message;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
+use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
 {
+    private SendInBluePublisher $sendInBluePublisher;
+
+    public function __construct(
+        EntityManagerInterface $em,
+        GlobalIdResolver $globalIdResolver,
+        DebateArgumentRepository $repository,
+        DebateAnonymousArgumentRepository $anonymousRepository,
+        AuthorizationCheckerInterface $authorizationChecker,
+        Indexer $indexer,
+        ValidatorInterface $validator,
+        TokenGeneratorInterface $tokenGenerator,
+        DebateNotifier $debateNotifier,
+        RequestGuesser $requestGuesser,
+        SendInBluePublisher $sendInBluePublisher
+    ) {
+        $this->sendInBluePublisher = $sendInBluePublisher;
+        parent::__construct(
+            $em,
+            $globalIdResolver,
+            $repository,
+            $anonymousRepository,
+            $authorizationChecker,
+            $indexer,
+            $validator,
+            $tokenGenerator,
+            $debateNotifier,
+            $requestGuesser
+        );
+    }
+
     public function __invoke(Arg $input, ?User $viewer = null): array
     {
         try {
@@ -25,12 +64,13 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
                 ->setToken($this->tokenGenerator->generateToken())
             ;
             if (true === $input->offsetGet('consentInternalCommunication')) {
-                $this->pushToSendinblue([
-                    'email' => $input->offsetGet('email'),
-                    'data' => [
-                        'DEBATS_PROJETS' => $debate->getProject()->getTitle(),
-                    ],
-                ]);
+                $this->sendInBluePublisher->pushToSendinblue(
+                    'addEmailToSendInBlue',
+                    [
+                        'email' => $input->offsetGet('email'),
+                        'data' => ['DEBATS_PROJETS' => $debate->getProject()->getTitle()],
+                    ]
+                );
             }
 
             self::setDebateArgumentOrigin($debateArgument, $input);
@@ -44,18 +84,5 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
         }
 
         return compact('debateArgument', 'token');
-    }
-
-    private function pushToSendinblue(array $args): void
-    {
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => 'addEmailToSendinblue',
-                    'args' => $args,
-                ])
-            )
-        );
     }
 }

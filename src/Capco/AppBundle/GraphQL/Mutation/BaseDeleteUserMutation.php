@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Anonymizer\UserAnonymizer;
-use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
@@ -15,6 +14,7 @@ use Capco\AppBundle\Entity\Source;
 use Capco\AppBundle\EventListener\SoftDeleteEventListener;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\Helper\RedisStorageHelper;
+use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\CommentRepository;
 use Capco\AppBundle\Repository\EventRepository;
@@ -32,8 +32,6 @@ use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
-use Swarrot\Broker\Message;
-use Swarrot\SwarrotBundle\Broker\Publisher;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseDeleteUserMutation extends BaseDeleteMutation
@@ -57,7 +55,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected MailingListRepository $mailingListRepository;
     protected LoggerInterface $logger;
     protected UserAnonymizer $userAnonymizer;
-    private Publisher $publisher;
+    private SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -80,7 +78,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
         UserAnonymizer $userAnonymizer,
-        Publisher $publisher
+        SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct($em, $mediaProvider);
         $this->translator = $translator;
@@ -101,7 +99,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
         $this->mailingListRepository = $mailingListRepository;
         $this->logger = $logger;
         $this->userAnonymizer = $userAnonymizer;
-        $this->publisher = $publisher;
+        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     public function softDeleteContents(User $user): void
@@ -211,16 +209,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     {
         $email = $user->getEmail();
         $this->userAnonymizer->anonymize($user);
-
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => 'deleteUserFromSendinblue',
-                    'args' => ['email' => $email],
-                ])
-            )
-        );
+        $this->sendInBluePublisher->pushToSendinblue('deleteUserFromSendInBlue', ['email' => $email]);
     }
 
     private function deleteResponsesAndEvaluationsFromProposal(User $user, $proposal): void
@@ -331,20 +320,5 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
                 }
             }
         }
-    }
-
-    private function removeFromMailingLists(User $user): void
-    {
-        $this->userAnonymizer->removeFromMailingLists($user);
-
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::SENDINBLUE,
-            new Message(
-                json_encode([
-                    'method' => 'deleteUserFromSendinblue',
-                    'args' => ['user' => $user],
-                ])
-            )
-        );
     }
 }

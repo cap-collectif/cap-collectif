@@ -36,9 +36,11 @@ class SendInBlueManager
     }
 
     /**
+     * @param array<string, mixed> $data
+     *
      * @throws ApiException
      */
-    public function addUserToSendinblue(User $user, array $data = []): void
+    public function addUserToSendInBlue(User $user, array $data = []): void
     {
         $contactMaker = $this->getContactMaker($user->getEmail());
         if ($contactMaker) {
@@ -51,15 +53,17 @@ class SendInBlueManager
                 ],
                 $data
             );
-            $contactMaker->setAttributes($data);
+            $contactMaker->setAttributes((object) $data);
             $this->apiInstance->getSendInBlueApi()->createContact($contactMaker);
         }
     }
 
     /**
+     * @param array<string, mixed> $data
+     *
      * @throws ApiException
      */
-    public function addEmailToSendinblue(string $email, array $data = []): void
+    public function addEmailToSendInBlue(string $email, array $data = []): void
     {
         $contactMaker = $this->getContactMaker($email);
         if ($contactMaker) {
@@ -67,7 +71,7 @@ class SendInBlueManager
             $contactMaker->setListIds([$this->listId]);
         }
         if ($data) {
-            $contactMaker->setAttributes($data);
+            $contactMaker->setAttributes((object) $data);
         }
 
         $this->apiInstance->getSendInBlueApi()->createContact($contactMaker);
@@ -76,7 +80,7 @@ class SendInBlueManager
     /**
      * @throws ApiException
      */
-    public function deleteUserFromSendinblue(string $email): void
+    public function deleteUserFromSendInBlue(string $email): void
     {
         if (self::SKIPPED_ENV === $this->kernel->getEnvironment()) {
             return;
