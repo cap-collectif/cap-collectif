@@ -40,18 +40,8 @@ class EventRepository extends EntityRepository
         $qb->join('e.steps', 's')
             ->where('s = :step')
             ->setParameter('step', $step)
-            ;
-        if (\array_key_exists('isFuture', $options)) {
-            if ($options['isFuture']) {
-                $qb->andWhere('e.startAt > :now OR (e.startAt < :now AND e.endAt > :now )')
-                    ->setParameter('now', new \DateTime())
-                ;
-            } else {
-                $qb->andWhere('e.endAt < :now')
-                    ->setParameter('now', new \DateTime())
-                ;
-            }
-        }
+        ;
+        $this->applyEventStatus($qb, $options);
 
         return $qb->getQuery()->getResult();
     }
@@ -257,17 +247,7 @@ class EventRepository extends EntityRepository
             $qb->andWhere('e.enabled = true');
         }
 
-        if (\array_key_exists('isFuture', $options)) {
-            if ($options['isFuture']) {
-                $qb->andWhere('e.startAt > :now OR (e.startAt < :now AND e.endAt > :now )')
-                    ->setParameter('now', new \DateTime())
-                ;
-            } else {
-                $qb->andWhere('e.endAt < :now')
-                    ->setParameter('now', new \DateTime())
-                ;
-            }
-        }
+        $this->applyEventStatus($qb, $options);
 
         switch ($options['status'] ?? false) {
             case EventReviewStatusType::DELETED:
@@ -317,6 +297,28 @@ class EventRepository extends EntityRepository
         ;
 
         return new Paginator($query);
+    }
+
+    /**
+     * @param array{isFuture?: bool} $options
+     */
+    private function applyEventStatus(QueryBuilder $qb, array $options): void
+    {
+        if (\array_key_exists('isFuture', $options)) {
+            $now = new \DateTime();
+            $twentyFourHoursAgo = (new \DateTime())->modify('-24 hours');
+            if ($options['isFuture']) {
+                $qb->andWhere('e.startAt > :now OR (e.startAt < :now AND e.endAt > :now ) OR (e.startAt < :now AND (e.startAt > :twentyFourHoursAgo AND e.endAt IS NULL))')
+                    ->setParameter('now', $now)
+                    ->setParameter('twentyFourHoursAgo', $twentyFourHoursAgo)
+                ;
+            } else {
+                $qb->andWhere('(e.endAt < :now) OR (e.startAt < :twentyFourHoursAgo AND e.endAt IS NULL)')
+                    ->setParameter('now', $now)
+                    ->setParameter('twentyFourHoursAgo', $twentyFourHoursAgo)
+                ;
+            }
+        }
     }
 
     private function createAvailableOrApprovedEventsQueryBuilder(string $alias): QueryBuilder
