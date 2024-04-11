@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\QuestionnableForm;
 use Capco\AppBundle\Entity\Interfaces\QuestionsInterface;
 use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
+use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
@@ -142,48 +143,9 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
             $this->id = null;
             $this->createdAt = new \DateTime();
             $this->updatedAt = new \DateTime();
-            $questionsClone = new ArrayCollection();
-            $cloneReferences = [];
-            foreach ($this->questions as $question) {
-                $clonedQaq = $this->getCloneQuestionReference($cloneReferences, $question);
-                if (
-                    $clonedQaq->getQuestion() instanceof MultipleChoiceQuestion
-                    && !empty($clonedQaq->getQuestion()->getJumps())
-                ) {
-                    foreach ($clonedQaq->getQuestion()->getJumps() as $jump) {
-                        $clonedJump = clone $jump;
-                        $clonedOriginQaq = $this->getCloneQuestionReference(
-                            $cloneReferences,
-                            $jump->getOrigin()->getQuestionnaireAbstractQuestion()
-                        );
-                        $clonedJump->setOrigin($clonedOriginQaq->getQuestion());
-                        $clonedDestinationQaq = $this->getCloneQuestionReference(
-                            $cloneReferences,
-                            $jump->getDestination()->getQuestionnaireAbstractQuestion()
-                        );
-                        $clonedJump->setDestination($clonedDestinationQaq->getQuestion());
-                        foreach ($jump->getConditions() as $condition) {
-                            $clonedCondition = clone $condition;
-                            $clonedCondition->setQuestion($clonedQaq->getQuestion());
-                            $clonedCondition->setJump($clonedJump);
-                            $clonedCondition->setValue(
-                                $this->findChoiceByTitle(
-                                    $clonedQaq
-                                        ->getQuestion()
-                                        ->getChoices()
-                                        ->toArray(),
-                                    $condition->getValue()->getTitle()
-                                )
-                            );
-                            $clonedJump->addCondition($clonedCondition);
-                        }
-                        $clonedQaq->getQuestion()->addJump($clonedJump);
-                    }
-                }
-                $questionsClone->add($clonedQaq);
-            }
+            $this->title = sprintf('Copie de %s', $this->title);
 
-            $this->questions = $questionsClone;
+            $this->questions = $this->cloneQuestions($this->questions);
 
             if ($this->notificationsConfiguration) {
                 $clonedNotificationConfiguration = clone $this->notificationsConfiguration;
@@ -578,5 +540,68 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
         }
 
         return null;
+    }
+
+    /**
+     * @param Collection<int, QuestionnaireAbstractQuestion> $questions
+     *
+     * @return ArrayCollection<int, QuestionnaireAbstractQuestion>
+     */
+    private function cloneQuestions(Collection $questions): ArrayCollection
+    {
+        $questionsClone = new ArrayCollection();
+        $cloneReferences = [];
+
+        foreach ($questions as $question) {
+            $clonedQuestion = $this->getCloneQuestionReference($cloneReferences, $question);
+
+            /** @var AbstractQuestion $question */
+            $question = $clonedQuestion->getQuestion();
+
+            if ($question instanceof MultipleChoiceQuestion && !empty($question->getJumps())) {
+                $this->cloneJumps($question, $cloneReferences);
+            }
+
+            $questionsClone->add($clonedQuestion);
+        }
+
+        return $questionsClone;
+    }
+
+    /**
+     * @param array<string, QuestionnaireAbstractQuestion> $cloneReferences
+     */
+    private function cloneJumps(AbstractQuestion $question, array &$cloneReferences): void
+    {
+        /** @var LogicJump $jump */
+        foreach ($question->getJumps() as $jump) {
+            $clonedJump = clone $jump;
+
+            $originQuestion = $jump->getOrigin()->getQuestionnaireAbstractQuestion();
+            $destinationQuestion = $jump->getDestination()->getQuestionnaireAbstractQuestion();
+
+            $clonedJump->setOrigin(
+                $this->getCloneQuestionReference($cloneReferences, $originQuestion)->getQuestion()
+            );
+            $clonedJump->setDestination(
+                $this->getCloneQuestionReference($cloneReferences, $destinationQuestion)->getQuestion()
+            );
+
+            $this->cloneConditions($clonedJump, $question);
+
+            $question->addJump($clonedJump);
+        }
+    }
+
+    private function cloneConditions(LogicJump $clonedJump, AbstractQuestion $question): void
+    {
+        foreach ($clonedJump->getConditions() as $condition) {
+            $clonedCondition = clone $condition;
+            $clonedCondition->setQuestion($question);
+            $clonedCondition->setJump($clonedJump);
+
+            $clonedCondition->setValue($this->findChoiceByTitle($question->getChoices()->toArray(), $condition->getValue()->getTitle()));
+            $clonedJump->addCondition($clonedCondition);
+        }
     }
 }
