@@ -66,7 +66,7 @@ export const getInitialValues = (project: ProjectConfigForm_project$data, intl: 
   externalVotesCount: project ? project.externalVotesCount : null,
   metaDescription: project ? project.metaDescription : null,
   addressText: project ? project.address?.formatted : null,
-  address: project ? project.address?.json : null,
+  address: project && project?.address?.json ? JSON.parse(project.address.json)[0] : null,
   districts:
     project?.districts?.edges?.map(edge => edge?.node)?.map(d => ({ value: d?.value ?? '', label: d?.label ?? '' })) ||
     [],
