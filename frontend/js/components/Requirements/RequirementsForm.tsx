@@ -280,19 +280,21 @@ const RequirementsForm = ({ initialValues, isPhoneVerificationOnly, control, for
             )
           }
 
-          return (
-            <FormControl name={key} control={control} isRequired isDisabled={isSubmitting}>
-              <FormLabel label={getLabel(key)} />
-              <FieldInput
-                variantSize={CapInputSize.Md}
-                type="text"
-                minLength={4}
-                name={key}
-                control={control}
-                defaultValue={initialValues[key]}
-              />
-            </FormControl>
-          )
+          if (key !== 'realAddress') {
+            return (
+              <FormControl name={key} control={control} isRequired isDisabled={isSubmitting}>
+                <FormLabel label={getLabel(key)} />
+                <FieldInput
+                  variantSize={CapInputSize.Md}
+                  type="text"
+                  minLength={4}
+                  name={key}
+                  control={control}
+                  defaultValue={initialValues[key]}
+                />
+              </FormControl>
+            )
+          }
         })}
       </Flex>
     </Flex>

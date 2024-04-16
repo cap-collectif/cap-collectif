@@ -20,6 +20,7 @@ const getInitialValues = (
           return {
             ...acc,
             [requirement.__typename]: requirement.viewerAddress ? requirement.viewerAddress.formatted : null,
+            realAddress: requirement.viewerAddress ? JSON.parse(requirement.viewerAddress.json)[0] : null,
           }
         }
 
