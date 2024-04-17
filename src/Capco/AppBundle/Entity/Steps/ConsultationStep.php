@@ -31,6 +31,20 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
         $this->consultations = new ArrayCollection();
     }
 
+    public function __clone()
+    {
+        if ($this->id) {
+            parent::__clone();
+            $originalConsultations = $this->consultations;
+            $this->consultations = new ArrayCollection();
+            foreach ($originalConsultations as $consultation) {
+                $cloneConsultation = clone $consultation;
+                $this->addConsultation($cloneConsultation);
+                $cloneConsultation->setStep($this);
+            }
+        }
+    }
+
     /**
      * @return Collection|Consultation[]
      */

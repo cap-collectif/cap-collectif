@@ -24,7 +24,7 @@ class Debate
     use UuidTrait;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Debate\DebateOpinion", mappedBy="debate",  cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Debate\DebateOpinion", mappedBy="debate", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     protected Collection $opinions;
 
@@ -55,6 +55,32 @@ class Debate
         $this->arguments = new ArrayCollection();
         $this->anonymousArguments = new ArrayCollection();
         $this->articles = new ArrayCollection();
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+
+            $originalArticles = $this->articles;
+            $this->articles = new ArrayCollection();
+            foreach ($originalArticles as $article) {
+                $clonedArticle = clone $article;
+                $this->addArticle($clonedArticle);
+                $clonedArticle->setDebate($this);
+            }
+
+            $originalOpinions = $this->opinions;
+            $this->opinions = new ArrayCollection();
+            foreach ($originalOpinions as $opinion) {
+                $clonedOpinion = clone $opinion;
+                $this->addOpinion($clonedOpinion);
+                $clonedOpinion->setDebate($this);
+            }
+
+            $this->arguments = new ArrayCollection();
+            $this->anonymousArguments = new ArrayCollection();
+        }
     }
 
     public function viewerCanParticipate(?User $viewer = null): bool

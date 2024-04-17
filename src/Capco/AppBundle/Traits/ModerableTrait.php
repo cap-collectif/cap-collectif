@@ -24,6 +24,13 @@ trait ModerableTrait
         return $this;
     }
 
+    public function resetModerationToken(): self
+    {
+        $this->moderationToken = '';
+
+        return $this;
+    }
+
     public function userDidReport(?User $user = null): bool
     {
         foreach ($this->reports as $report) {

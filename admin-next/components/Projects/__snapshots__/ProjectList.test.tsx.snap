@@ -486,6 +486,33 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabIndex={-1}
               />
               <button
+                className="sc-bcXGCL cNCpXV cap-menu__item"
+                id="id-g"
+                onBlurCapture={[Function]}
+                onClick={[Function]}
+                onClickCapture={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPressCapture={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
+                role="menuitem"
+                tabIndex={0}
+                type="button"
+              >
+                <p
+                  className="sc-bcXGCL Ebxhi cap-text"
+                >
+                   
+                  duplicate
+                   
+                </p>
+              </button>
+              <button
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
@@ -779,6 +806,33 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 }
                 tabIndex={-1}
               />
+              <button
+                className="sc-bcXGCL cNCpXV cap-menu__item"
+                id="id-g"
+                onBlurCapture={[Function]}
+                onClick={[Function]}
+                onClickCapture={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPressCapture={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
+                role="menuitem"
+                tabIndex={0}
+                type="button"
+              >
+                <p
+                  className="sc-bcXGCL Ebxhi cap-text"
+                >
+                   
+                  duplicate
+                   
+                </p>
+              </button>
               <button
                 aria-controls="id-g"
                 aria-expanded={false}
@@ -1074,6 +1128,33 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabIndex={-1}
               />
               <button
+                className="sc-bcXGCL cNCpXV cap-menu__item"
+                id="id-g"
+                onBlurCapture={[Function]}
+                onClick={[Function]}
+                onClickCapture={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPressCapture={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
+                role="menuitem"
+                tabIndex={0}
+                type="button"
+              >
+                <p
+                  className="sc-bcXGCL Ebxhi cap-text"
+                >
+                   
+                  duplicate
+                   
+                </p>
+              </button>
+              <button
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
@@ -1367,6 +1448,33 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 }
                 tabIndex={-1}
               />
+              <button
+                className="sc-bcXGCL cNCpXV cap-menu__item"
+                id="id-g"
+                onBlurCapture={[Function]}
+                onClick={[Function]}
+                onClickCapture={[Function]}
+                onFocus={[Function]}
+                onKeyDown={[Function]}
+                onKeyPressCapture={[Function]}
+                onKeyUp={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
+                onMouseEnter={[Function]}
+                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
+                role="menuitem"
+                tabIndex={0}
+                type="button"
+              >
+                <p
+                  className="sc-bcXGCL Ebxhi cap-text"
+                >
+                   
+                  duplicate
+                   
+                </p>
+              </button>
               <button
                 aria-controls="id-g"
                 aria-expanded={false}

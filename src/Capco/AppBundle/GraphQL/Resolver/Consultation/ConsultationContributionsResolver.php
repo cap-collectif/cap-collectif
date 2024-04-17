@@ -42,7 +42,6 @@ class ConsultationContributionsResolver implements QueryInterface
             return $this->contributionSearch->getContributionsByConsultation(
                 $consultation->getId(),
                 $order,
-                [],
                 $seed,
                 $limit,
                 $cursor,

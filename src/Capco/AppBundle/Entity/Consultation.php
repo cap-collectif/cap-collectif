@@ -77,7 +77,6 @@ class Consultation implements IndexableInterface, Ownerable, CreatableInterface
     private \DateTime $updatedAt;
 
     /**
-     * @var
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\OpinionType", mappedBy="consultation", cascade={"persist", "remove"}, orphanRemoval=true)
      * @ORM\OrderBy({"position" = "ASC"})
      */
@@ -124,6 +123,15 @@ class Consultation implements IndexableInterface, Ownerable, CreatableInterface
         $this->opinionTypes = new ArrayCollection();
         $this->opinions = new ArrayCollection();
         $this->updatedAt = new \DateTime();
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->createdAt = new \DateTime();
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     public function __toString()

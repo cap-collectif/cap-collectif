@@ -65,7 +65,7 @@ class ProjectVoter extends AbstractOwnerableVoter
                 return self::canCreateProposalFromBo($subject, $viewer);
 
             case self::DUPLICATE:
-                return self::canDuplicate($viewer);
+                return self::canDuplicate($subject, $viewer);
         }
 
         return false;
@@ -81,8 +81,8 @@ class ProjectVoter extends AbstractOwnerableVoter
         return self::isAdminOrOwnerOrMember($project, $viewer);
     }
 
-    private static function canDuplicate(User $viewer): bool
+    private static function canDuplicate(Project $project, User $viewer): bool
     {
-        return $viewer->isSuperAdmin();
+        return self::isAdminOrOwnerOrMember($project, $viewer);
     }
 }

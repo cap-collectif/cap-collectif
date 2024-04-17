@@ -65,6 +65,15 @@ class DebateArticle
      */
     private ?Debate $debate;
 
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->createdAt = new \DateTimeImmutable();
+            $this->updatedAt = null;
+        }
+    }
+
     public function getUrl(): ?string
     {
         return $this->url;

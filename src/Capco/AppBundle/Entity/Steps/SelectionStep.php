@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\Interfaces\DefaultStatusInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
 use Capco\AppBundle\Entity\MediatorParticipantStep;
@@ -26,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SelectionStepRepository")
  * @CapcoAssert\VoteMin
  */
-class SelectionStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface
+class SelectionStep extends AbstractStep implements ParticipativeStepInterface, VotableStepInterface, DefaultStatusInterface
 {
     use AllowAuthorsToAddNewsTrait;
     use ProposalArchivedTrait;
@@ -145,7 +146,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         return $this->defaultStatus;
     }
 
-    public function setDefaultStatus(?Status $defaultStatus): self
+    public function setDefaultStatus(?Status $defaultStatus = null): self
     {
         $this->defaultStatus = $defaultStatus;
 

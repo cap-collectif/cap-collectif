@@ -184,7 +184,6 @@ class ContributionSearch extends Search
     public function getContributionsByConsultation(
         string $consultationId,
         string $order,
-        array $filters,
         string $seed,
         int $limit,
         ?string $cursor = null,
@@ -195,12 +194,6 @@ class ContributionSearch extends Search
             ->addFilter(new Query\Term(['consultation.id' => $consultationId]))
             ->addFilter(new Query\Exists('consultation'))
         ;
-
-        if (!empty($filters)) {
-            foreach ($filters as $filter) {
-                $boolQuery->addFilter(new Query\Term($filter));
-            }
-        }
 
         $this->applyContributionsFilters($boolQuery, null, true, $includeTrashed);
         $query = $this->createSortedQuery($order, $boolQuery, $seed);

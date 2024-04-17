@@ -23,7 +23,7 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", mappedBy="step", cascade={"persist"})
      */
-    private $debate;
+    private Debate $debate;
 
     /**
      * @ORM\Column(name="is_anonymous_participation_allowed", type="boolean", nullable=false, options={"default" = false})
@@ -54,6 +54,16 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
         parent::__construct();
         $this->debate = $debate;
         $debate->setStep($this);
+    }
+
+    public function __clone()
+    {
+        if ($this->id) {
+            parent::__clone();
+            $clonedDebate = clone $this->debate;
+            $clonedDebate->setStep($this);
+            $this->debate = $clonedDebate;
+        }
     }
 
     public function isDebateContentUsingJoditWysiwyg(): bool
@@ -147,6 +157,13 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     public function setDebateContent(?string $debateContent): self
     {
         $this->debateContent = $debateContent;
+
+        return $this;
+    }
+
+    public function setDebate(Debate $debate): self
+    {
+        $this->debate = $debate;
 
         return $this;
     }

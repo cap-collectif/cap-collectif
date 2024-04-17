@@ -52,5 +52,14 @@ class DebateOpinion implements Authorable
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", inversedBy="opinions")
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    private $debate;
+    private ?Debate $debate;
+
+    public function __clone()
+    {
+        if ($this->id) {
+            $this->id = null;
+            $this->createdAt = new \DateTimeImmutable();
+            $this->updatedAt = null;
+        }
+    }
 }

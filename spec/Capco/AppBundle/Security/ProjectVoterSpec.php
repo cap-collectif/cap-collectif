@@ -182,7 +182,7 @@ class ProjectVoterSpec extends ObjectBehavior
         );
     }
 
-    public function it_should_allow_members_to_edit_or_view_or_export_or_bo_but_no_delete_nor_duplicate(
+    public function it_should_allow_members_to_edit_or_view_or_export_or_bo_or_duplicate_but_no_delete(
         User $user,
         Project $project,
         Organization $organization,
@@ -193,11 +193,6 @@ class ProjectVoterSpec extends ObjectBehavior
             ->getUser()
             ->shouldBeCalled()
             ->willReturn($user)
-        ;
-        $user
-            ->isSuperAdmin()
-            ->shouldBeCalled()
-            ->willReturn(false)
         ;
         $user
             ->isAdmin()
@@ -240,7 +235,7 @@ class ProjectVoterSpec extends ObjectBehavior
             VoterInterface::ACCESS_DENIED
         );
         $this->vote($token, $project, [ProjectVoter::DUPLICATE])->shouldBe(
-            VoterInterface::ACCESS_DENIED
+            VoterInterface::ACCESS_GRANTED
         );
     }
 

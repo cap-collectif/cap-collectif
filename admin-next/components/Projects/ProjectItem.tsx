@@ -108,6 +108,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
   const intl = useIntl()
 
   const viewerBelongsToAnOrganization = (viewer.organizations?.length ?? 0) > 0
+  const canDuplicate = isAdmin || viewer?.isAdminOrganization || isSuperAdmin
   const canDelete = viewerBelongsToAnOrganization
     ? viewer?.isAdminOrganization || viewer.id === project.creator?.id
     : true
@@ -201,7 +202,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
             {(!!project.exportContributorsUrl || (!!project.exportableSteps && project.exportableSteps.length > 0)) && (
               <ProjectModalExportSteps project={project} />
             )}
-            {isSuperAdmin && (
+            {canDuplicate && (
               <Menu.Item
                 onClick={() => {
                   onDuplicate(intl, project, connectionName)

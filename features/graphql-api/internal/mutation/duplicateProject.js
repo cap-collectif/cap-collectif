@@ -87,7 +87,7 @@ describe('Internal | duplicateProject', () => {
           id: toGlobalId('Project', 'projectIdf'),
         },
       },
-      'internal_super_admin',
+      'internal_admin',
     );
     const newProject = duplicateProjectResponse.duplicateProject.newProject;
     const oldProject = duplicateProjectResponse.duplicateProject.oldProject;
