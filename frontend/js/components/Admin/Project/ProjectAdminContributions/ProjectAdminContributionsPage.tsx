@@ -3,7 +3,6 @@ import { Route, Switch, useRouteMatch } from 'react-router-dom'
 import { usePreloadedQuery, graphql } from 'relay-hooks'
 import NoContributionsStep from '~/components/Admin/Project/ProjectAdminContributions/NoContributions/NoContributionsStep'
 import IndexContributions, { getContributionsPath } from './IndexContributions/IndexContributions'
-import AppBox from '~ui/Primitives/AppBox'
 import type { ResultPreloadQuery } from '~/types'
 import ProjectAdminProposalsPage from '~/components/Admin/Project/ProjectAdminProposalsPage'
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context'
@@ -12,10 +11,13 @@ import ProjectAdminDebate from '~/components/Admin/Project/ProjectAdminContribut
 import ContributionsPlaceholder from '~/components/Admin/Project/ProjectAdminContributions/IndexContributions/ContributionsPlaceholder'
 import Skeleton from '~ds/Skeleton'
 import ReplyListPage from '~/components/Admin/Project/ReplyList/ReplyListPage'
+import { Box } from '@cap-collectif/ui'
+
 type Props = {
   readonly dataPrefetch: ResultPreloadQuery
   readonly projectId: string
 }
+
 export const queryContributions = graphql`
   query ProjectAdminContributionsPageQuery(
     # ARGUMENTS OF ProjectAdminProposals
@@ -124,7 +126,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
   const hasAtLeastOneContributionsStep = hasCollectStep || hasDebateStep || hasQuestionnaireSteps
   const hasIndex = collectSteps.length + debateSteps.length + questionnaireSteps.length > 1
   return (
-    <AppBox m={5}>
+    <Box m={3}>
       <Switch>
         <Route exact path={baseUrl}>
           <Skeleton isLoaded={!!project} placeholder={<ContributionsPlaceholder />}>
@@ -186,7 +188,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
           )}
         />
       </Switch>
-    </AppBox>
+    </Box>
   )
 }
 

@@ -24,6 +24,7 @@ import type { CategoryFilter } from '~/components/Analysis/AnalysisFilter/Analys
 import type { DistrictFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict'
 import type { ProjectAdminAnalysisTabQueryResponse } from '~relay/ProjectAdminAnalysisTabQuery.graphql'
 import type { ThemeFilter } from '~/components/Analysis/AnalysisFilter/AnalysisFilterTheme'
+import { CapUIIcon } from '@cap-collectif/ui'
 export type StepStatusFilter = {
   readonly id: Uuid
   readonly color: string | null | undefined
@@ -308,7 +309,7 @@ const getFormattedFiltersOrdered = (
           name: theme.title,
           type: 'theme',
           action: 'CLEAR_THEME_FILTER',
-          icon: 'bookmark2',
+          icon: CapUIIcon.Book,
         }
       }
 
@@ -324,7 +325,7 @@ const getFormattedFiltersOrdered = (
           id: step.id,
           name: step.title,
           type: 'step',
-          icon: 'stack',
+          icon: CapUIIcon.Duplicate,
         }
       }
 

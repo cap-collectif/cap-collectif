@@ -417,7 +417,7 @@ exports[`<Sidebar /> renders when the user is a project admin and not an admin 1
                 href="http://localhost/admin-next/posts"
               >
                 <div
-                  class="sc-bcXGCL iqLbSv"
+                  class="sc-bcXGCL kPUqOR"
                 >
                   <span
                     class="sc-bcXGCL eXMLPV"

@@ -123,7 +123,14 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hid
               <NavBar title={navTitle} data={navData} />
             </React.Suspense>
             <LayoutProvider contentRef={contentRef}>
-              <Box p={6} className="container-content" overflowY="scroll" ref={contentRef} position="relative">
+              <Box
+                p={6}
+                className="container-content"
+                overflowY="scroll"
+                ref={contentRef}
+                position="relative"
+                minHeight="32rem"
+              >
                 {children}
               </Box>
             </LayoutProvider>

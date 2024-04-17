@@ -61,6 +61,7 @@
                             {{ react_render_component('AdminRightNavbarApp', {
                                 'props': {
                                     'currentLocale': app.request.locale,
+                                    'currentRouteParams': app.request.attributes.get('_route')
                                 }
                             })
                             }}
@@ -207,7 +208,7 @@
 {% block sonata_wrapper %}{% block sonata_left_side %}
     {% include '@CapcoApp/redux_store.html.twig' %}
     {{ react_render_component('SidebarApp', {
-        'props': {'appVersion': app_version}
+        'props': {'appVersion': app_version , 'currentRouteParams': app.request.attributes.get('_route')}
     })
     }}
 {% endblock sonata_left_side %}

@@ -4,12 +4,12 @@ import { graphql, createPaginationContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { Button } from 'react-bootstrap'
 import LeafletMap from './LeafletMap'
-import type { EventMap_query } from '~relay/EventMap_query.graphql'
+import type { EventMap_query$data } from '~relay/EventMap_query.graphql'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import EventMapModal from './EventMapModal'
 
 type Props = {
-  query: EventMap_query
+  query: EventMap_query$data
   relay: RelayPaginationProp
 }
 

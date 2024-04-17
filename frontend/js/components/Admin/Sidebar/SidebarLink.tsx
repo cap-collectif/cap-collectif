@@ -14,6 +14,7 @@ type Props = LinkProps & {
   readonly icon?: $Values<typeof ICON_NAME>
   readonly beta?: boolean
   readonly withLabel?: boolean
+  readonly designSystem?: boolean
 }
 
 const IconActivePin = () => (
@@ -26,7 +27,15 @@ const IconActivePin = () => (
   </svg>
 )
 
-export const SidebarLink = ({ text, href, icon, beta, withLabel = true, ...props }: Props): JSX.Element => {
+export const SidebarLink = ({
+  text,
+  href,
+  icon,
+  beta,
+  withLabel = true,
+  designSystem,
+  ...props
+}: Props): JSX.Element => {
   const intl = useIntl()
   const active =
     window.location.href.includes(href) ||
@@ -60,7 +69,7 @@ export const SidebarLink = ({ text, href, icon, beta, withLabel = true, ...props
       }}
       {...props}
     >
-      <AppBox position="relative">
+      <AppBox position="relative" display={designSystem ? 'flex' : 'block'} alignItems="center">
         {active && !icon && (
           <AppBox position="absolute" width="6px" left="-10px" top="1px">
             <IconActivePin />

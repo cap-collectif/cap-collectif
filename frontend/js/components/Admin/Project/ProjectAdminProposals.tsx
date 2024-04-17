@@ -39,8 +39,6 @@ import {
   getStepDisplay,
   getFormattedStepsChoicesForProject,
 } from '~/components/Admin/Project/ProjectAdminProposals.utils'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
-import { ICON_NAME as ICON_NAME_DS } from '~ds/Icon/Icon'
 import ClearableInput from '~ui/Form/Input/ClearableInput'
 import FilterTag from '~ui/Analysis/FilterTag'
 import {
@@ -64,13 +62,7 @@ import AnalysisProposal from '~/components/Analysis/AnalysisProposal/AnalysisPro
 import ImportButton from '~/components/Admin/Project/ImportButton/ImportButton'
 import ModalDeleteProposal from '~/components/Admin/Project/ModalDeleteProposal/ModalDeleteProposal'
 import type { AnalysisProposal_proposal } from '~relay/AnalysisProposal_proposal.graphql'
-import Button from '~ds/Button/Button'
-import Flex from '~ui/Primitives/Layout/Flex'
 import NewExportButton from '~/components/Admin/Project/ExportButton/NewExportButton'
-import { clearToasts, toast } from '~ds/Toast'
-import Modal from '~ds/Modal/Modal'
-import Heading from '~ui/Primitives/Heading'
-import Text from '~ui/Primitives/Text'
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine'
 import useToastingMachine from '~/utils/hooks/useToastingMachine'
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
@@ -78,6 +70,19 @@ import type { StepStatusFilter } from '~/components/Admin/Project/ProjectAdminPr
 import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import { colorsData } from '~/utils/colors'
+import {
+  Button,
+  CapUIIcon,
+  CapUIIconSize,
+  CapUIModalSize,
+  Flex,
+  Heading,
+  Icon,
+  Modal,
+  Text,
+  clearToasts,
+  toast,
+} from '@cap-collectif/ui'
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30
 export const PROJECT_ADMIN_PROPOSAL_LOAD_100 = 100
 const STATE_RESTRICTED = ['DRAFT', 'TRASHED']
@@ -582,6 +587,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
         hideOnClickOutside={false}
         hideOnEsc={false}
         hideCloseButton
+        size={CapUIModalSize.Md}
         mt="133px"
         width={['100%', '555px']}
       >
@@ -757,7 +763,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
                 {stepStatuses.length === 0 && (
                   <DropdownSelect.Message>
                     <S.EmptyStatuses>
-                      <Icon name={ICON_NAME.warning} size={15} />
+                      <Icon name={CapUIIcon.Alert} size={CapUIIconSize.Xs} />
                       <div>
                         <FormattedMessage tagName="p" id="no.filter.available" />
                         <FormattedMessage
@@ -830,7 +836,7 @@ const ProposalListHeader = ({ project, themes = [] }: HeaderProps) => {
                             } as any as Action)
                         : null
                     }
-                    icon={icon ? <Icon name={ICON_NAME[icon]} size="1rem" color="#fff" /> : null}
+                    icon={icon ? <Icon name={icon as CapUIIcon} size={CapUIIconSize.Xs} color="#fff" /> : null}
                     bgColor={color === 'PRIMARY' ? bgColor : color}
                   >
                     {name}
@@ -942,7 +948,7 @@ export const ProjectAdminProposals = ({
           <Button
             variant="tertiary"
             onClick={() => history.push(baseUrl)}
-            leftIcon={ICON_NAME_DS.LONG_ARROW_LEFT}
+            leftIcon={CapUIIcon.LongArrowLeft}
             size="small"
             mb={4}
           >
@@ -1004,7 +1010,7 @@ export const ProjectAdminProposals = ({
                   <Button
                     variant="tertiary"
                     onClick={() => window.open(`/admin-next/paper-catalog/${selectedStep.id}`, '_blank')}
-                    leftIcon="PRINT"
+                    leftIcon={CapUIIcon.Print}
                   >
                     {intl.formatMessage({
                       id: 'print-catalog',

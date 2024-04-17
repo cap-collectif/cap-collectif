@@ -20,6 +20,7 @@ export type Props = {
   query: AdminRightNavbar_query
   features: FeatureToggles
   currentLocale: string
+  isUsingDesignSystem?: boolean
 }
 const Navbar = styled.ul`
   right: 0;
@@ -42,7 +43,7 @@ const Placeholder = styled.div`
   width: 24px;
 `
 
-const AdminRightNavbar = ({ currentLocale, features, query }: Props) => {
+const AdminRightNavbar = ({ currentLocale, features, query, isUsingDesignSystem }: Props) => {
   const isMultiLocaleEnabled = useFeatureFlag('multilangue')
   const locales =
     query.availableLocales.map(locale => {
@@ -64,7 +65,13 @@ const AdminRightNavbar = ({ currentLocale, features, query }: Props) => {
           <Menu.Button>
             <CustomNavbarItem
               id="admin-multilangue-dropdown-navbar"
-              rightIcon={<Icon name={ICON_NAME.ARROW_DOWN_O} size={ICON_SIZE.SM} color={colors.black} />}
+              rightIcon={
+                <Icon
+                  name={ICON_NAME.ARROW_DOWN_O}
+                  size={isUsingDesignSystem ? ICON_SIZE.XS : ICON_SIZE.SM}
+                  color={colors.black}
+                />
+              }
               variant="tertiary"
               variantSize="small"
               variantColor="hierarchy"
@@ -112,17 +119,21 @@ const AdminRightNavbar = ({ currentLocale, features, query }: Props) => {
       <Menu placement="bottom-start" as="li">
         <Menu.Button id="admin-profile-dropdown-navbar">
           <CustomNavbarItem
-            rightIcon={<Icon name={ICON_NAME.ARROW_DOWN_O} size={ICON_SIZE.SM} color={colors.black} />}
+            rightIcon={
+              <Icon
+                name={ICON_NAME.ARROW_DOWN_O}
+                size={isUsingDesignSystem ? ICON_SIZE.XS : ICON_SIZE.SM}
+                color={colors.black}
+              />
+            }
             variant="tertiary"
             variantSize="small"
             variantColor="hierarchy"
           >
-            <i
-              className="fa fa-user fa-fw"
-              aria-hidden="true"
-              style={{
-                color: colors.black,
-              }}
+            <Icon
+              name={ICON_NAME.USER}
+              size={isUsingDesignSystem ? ICON_SIZE.XS : ICON_SIZE.SM}
+              color="#000 !important"
             />
           </CustomNavbarItem>
         </Menu.Button>

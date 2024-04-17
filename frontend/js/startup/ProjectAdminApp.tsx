@@ -14,12 +14,15 @@ type ProjectAdminAppProps = {
   readonly firstCollectStepId: string | null | undefined
 }
 
-const ProjectAdminApp = ({ projectId, firstCollectStepId }: ProjectAdminAppProps) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <ProjectAdminPage projectId={projectId} firstCollectStepId={firstCollectStepId} />
-    </Providers>
-  </Suspense>
-)
+const ProjectAdminApp = ({ projectId, firstCollectStepId }: ProjectAdminAppProps) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px'
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers designSystem>
+        <ProjectAdminPage projectId={projectId} firstCollectStepId={firstCollectStepId} />
+      </Providers>
+    </Suspense>
+  )
+}
 
 export default ProjectAdminApp

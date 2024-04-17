@@ -19,6 +19,7 @@ import { URL_MAP, CAP_COLLECTIF_SVG } from './Sidebar.utils'
 export type Props = {
   readonly appVersion: string
   readonly defaultAccordeon?: string
+  readonly designSystem?: boolean
 }
 const SidebarAccordionItem = styled(Accordion.Item).attrs({
   bg: 'gray.900',
@@ -34,7 +35,8 @@ const SidebarAccordionPanel = styled(Accordion.Panel).attrs(({ isFirstRender, is
   display: `${isOpen ? 'flex' : 'none'} !important`,
 }))``
 const cookieName = 'sidebar_is_opened'
-export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element => {
+
+export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): JSX.Element => {
   const savedIsOpen = localStorage.getItem(cookieName)
   const isMobile = useIsMobile()
   const [isOpen, setIsOpen] = React.useState<boolean>(savedIsOpen ? savedIsOpen === 'true' : !isMobile)
@@ -74,7 +76,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element =>
     <AppBox
       as="aside"
       bg="gray.900"
-      width={pxToRem(isOpen ? 224 : 56)} // Don't ask me why, Sonata
+      width={pxToRem(isOpen ? 224 : 56, designSystem)} // Don't ask me why, Sonata
       css={{
         transition: 'width 0.3s ease-in-out',
         zIndex: 1031,
@@ -89,7 +91,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element =>
         bg={isMobile && !isOpen ? 'white' : 'gray.900'}
         overflow="hidden"
         height="100%"
-        width={pxToRem(isOpen ? 224 : 56)}
+        width={pxToRem(isOpen ? 224 : 56, designSystem)}
         onMouseEnter={() => {
           const sonataNavbar = document.querySelector('nav.navbar.navbar-static-top')
           const sonataContent = document.querySelector('.content-admin')
@@ -315,6 +317,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element =>
               withLabel={isOpen}
               fontSize={3}
               p={3}
+              designSystem={designSystem}
               width="100%"
             />
           ) : null}
@@ -326,6 +329,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon }: Props): JSX.Element =>
               icon="PIE_CHART"
               withLabel={isOpen}
               fontSize={3}
+              designSystem={designSystem}
               p={3}
               width="100%"
             />

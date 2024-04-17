@@ -35,6 +35,8 @@ import { clearToasts } from '~ds/Toast'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import type { ProjectAdminParticipants_viewer } from '~relay/ProjectAdminParticipants_viewer.graphql'
+import { Box, Flex } from '@cap-collectif/ui'
+
 export const PROJECT_ADMIN_PARTICIPANT_PAGINATION = 30
 type Props = {
   readonly relay: RelayPaginationProp
@@ -192,8 +194,8 @@ const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }:
         </React.Fragment>
       ) : (
         <React.Fragment>
-          <p>
-            {rowsCount}{' '}
+          <Flex as="p" alignItems="center" spacing={1}>
+            <span>{rowsCount} </span>
             <FormattedMessage
               id="project.preview.counters.contributors"
               values={{
@@ -212,7 +214,7 @@ const DashboardHeader = ({ project, showModalCreateMailingList, refusingCount }:
                 </span>
               </Tooltip>
             )}
-          </p>
+          </Flex>
           <AnalysisProposalListFiltersContainer>
             <AnalysisProposalListFiltersAction>{renderFilters}</AnalysisProposalListFiltersAction>
             {filtersOrdered.length > 0 && selectedRows.length === 0 && (
@@ -256,108 +258,116 @@ export const ProjectAdminParticipants = ({ project, relay, viewerIsAdmin, viewer
     clearToasts()
   })
   return (
-    <AnalysisPickableListContainer>
-      <HeaderContainer>
-        {viewerIsAdmin && project.exportableSteps && (
-          <ExportButton
-            hasMarginRight
-            disabled={!hasParticipants}
-            linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
-            onChange={stepId => {
-              window.open(`/export-step-contributors/${stepId}`, '_blank')
-            }}
-          >
-            {project.exportableSteps.filter(Boolean).map(({ step }) => {
-              if (step.contributors && step.contributors.totalCount > 0) {
-                return (
-                  <DropdownSelect.Choice key={step.id} value={step.id} className="export-option">
-                    {step.title}
-                  </DropdownSelect.Choice>
-                )
-              }
+    <Box
+      sx={{
+        'ul.inline-list': { display: 'flex' },
+        'ul.inline-list li': { display: 'flex', alignItems: 'center' },
+        'ul.inline-list li > button': { display: 'flex', alignItems: 'center' },
+      }}
+    >
+      <AnalysisPickableListContainer>
+        <HeaderContainer>
+          {viewerIsAdmin && project.exportableSteps && (
+            <ExportButton
+              hasMarginRight
+              disabled={!hasParticipants}
+              linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+              onChange={stepId => {
+                window.open(`/export-step-contributors/${stepId}`, '_blank')
+              }}
+            >
+              {project.exportableSteps.filter(Boolean).map(({ step }) => {
+                if (step.contributors && step.contributors.totalCount > 0) {
+                  return (
+                    <DropdownSelect.Choice key={step.id} value={step.id} className="export-option">
+                      {step.title}
+                    </DropdownSelect.Choice>
+                  )
+                }
 
-              return null
-            })}
-          </ExportButton>
-        )}
-
-        <ClearableInput
-          id="search"
-          name="search"
-          disabled={!hasParticipants}
-          type="text"
-          icon={<i className="cap cap-magnifier" />}
-          onClear={() => {
-            if (parameters.filters.term !== null) {
-              dispatch({
-                type: 'CLEAR_TERM',
-              })
-            }
-          }}
-          initialValue={parameters.filters.term}
-          onSubmit={term => {
-            if (term === '' && parameters.filters.term !== null) {
-              dispatch({
-                type: 'CLEAR_TERM',
-              })
-            } else if (term !== '' && parameters.filters.term !== term) {
-              dispatch({
-                type: 'SEARCH_TERM',
-                payload: term,
-              })
-            }
-          }}
-          placeholder={intl.formatMessage({
-            id: 'global.menu.search',
-          })}
-        />
-      </HeaderContainer>
-
-      <PickableList
-        isLoading={status === 'loading'}
-        useInfiniteScroll={hasParticipants}
-        onScrollToBottom={() => {
-          relay.loadMore(PROJECT_ADMIN_PARTICIPANT_PAGINATION)
-        }}
-        hasMore={project.participants?.pageInfo.hasNextPage}
-        loader={<AnalysisProposalListLoader key="loader" />}
-      >
-        <AnalysisProposalListHeaderContainer
-          disabled={!hasSelectedFilters && !hasParticipants}
-          isSelectable={hasFeatureEmail}
-        >
-          <DashboardHeader project={project} showModalCreateMailingList={onOpen} refusingCount={refusingCount} />
-        </AnalysisProposalListHeaderContainer>
-
-        <PickableList.Body>
-          {hasParticipants ? (
-            project.participants?.edges
-              ?.filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(participant => (
-                <ProjectAdminParticipant
-                  participant={participant}
-                  key={participant.id}
-                  rowId={participant.id}
-                  selected={selectedRows.includes(participant.id)}
-                />
-              ))
-          ) : (
-            <NoParticipant />
+                return null
+              })}
+            </ExportButton>
           )}
-        </PickableList.Body>
-      </PickableList>
 
-      <ModalCreateMailingList
-        show={isOpen}
-        onClose={onClose}
-        members={selectedRows}
-        refusingCount={refusingCount}
-        project={project}
-        viewer={viewer}
-      />
-    </AnalysisPickableListContainer>
+          <ClearableInput
+            id="search"
+            name="search"
+            disabled={!hasParticipants}
+            type="text"
+            icon={<i className="cap cap-magnifier" />}
+            onClear={() => {
+              if (parameters.filters.term !== null) {
+                dispatch({
+                  type: 'CLEAR_TERM',
+                })
+              }
+            }}
+            initialValue={parameters.filters.term}
+            onSubmit={term => {
+              if (term === '' && parameters.filters.term !== null) {
+                dispatch({
+                  type: 'CLEAR_TERM',
+                })
+              } else if (term !== '' && parameters.filters.term !== term) {
+                dispatch({
+                  type: 'SEARCH_TERM',
+                  payload: term,
+                })
+              }
+            }}
+            placeholder={intl.formatMessage({
+              id: 'global.menu.search',
+            })}
+          />
+        </HeaderContainer>
+
+        <PickableList
+          isLoading={status === 'loading'}
+          useInfiniteScroll={hasParticipants}
+          onScrollToBottom={() => {
+            relay.loadMore(PROJECT_ADMIN_PARTICIPANT_PAGINATION)
+          }}
+          hasMore={project.participants?.pageInfo.hasNextPage}
+          loader={<AnalysisProposalListLoader key="loader" />}
+        >
+          <AnalysisProposalListHeaderContainer
+            disabled={!hasSelectedFilters && !hasParticipants}
+            isSelectable={hasFeatureEmail}
+          >
+            <DashboardHeader project={project} showModalCreateMailingList={onOpen} refusingCount={refusingCount} />
+          </AnalysisProposalListHeaderContainer>
+
+          <PickableList.Body>
+            {hasParticipants ? (
+              project.participants?.edges
+                ?.filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map(participant => (
+                  <ProjectAdminParticipant
+                    participant={participant}
+                    key={participant.id}
+                    rowId={participant.id}
+                    selected={selectedRows.includes(participant.id)}
+                  />
+                ))
+            ) : (
+              <NoParticipant />
+            )}
+          </PickableList.Body>
+        </PickableList>
+
+        <ModalCreateMailingList
+          show={isOpen}
+          onClose={onClose}
+          members={selectedRows}
+          refusingCount={refusingCount}
+          project={project}
+          viewer={viewer}
+        />
+      </AnalysisPickableListContainer>
+    </Box>
   )
 }
 const ProjectAdminParticipantsRelay = createPaginationContainer(

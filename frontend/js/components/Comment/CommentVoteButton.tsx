@@ -9,11 +9,11 @@ import RemoveCommentVoteMutation from '../../mutations/RemoveCommentVoteMutation
 import AddCommentVoteMutation from '../../mutations/AddCommentVoteMutation'
 import NewLoginOverlay from '../Utils/NewLoginOverlay'
 import UnpublishedTooltip from '../Publishable/UnpublishedTooltip'
-import type { CommentVoteButton_comment } from '~relay/CommentVoteButton_comment.graphql'
+import type { CommentVoteButton_comment$data } from '~relay/CommentVoteButton_comment.graphql'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import colors from '~/utils/colors'
 type Props = {
-  readonly comment: CommentVoteButton_comment
+  readonly comment: CommentVoteButton_comment$data
 }
 const VoteButton = styled.button`
   border: none;
@@ -39,7 +39,7 @@ const VoteButton = styled.button`
 `
 
 class CommentVoteButton extends React.Component<Props> {
-  target: null
+  target: any
   deleteVote = () => {
     const { comment } = this.props
     RemoveCommentVoteMutation.commit(

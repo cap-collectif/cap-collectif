@@ -1,6 +1,6 @@
-import type { QuestionnaireAdminConfigurationForm_questionnaire } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql'
+import type { QuestionnaireAdminConfigurationForm_questionnaire$data } from '~relay/QuestionnaireAdminConfigurationForm_questionnaire.graphql'
 
-export const formatChoices = (questionnaire: QuestionnaireAdminConfigurationForm_questionnaire): any => {
+export const formatChoices = (questionnaire: QuestionnaireAdminConfigurationForm_questionnaire$data): any => {
   const questions = questionnaire.questions.map(question => {
     if (question.__typename !== 'MultipleChoiceQuestion')
       return { ...question, descriptionUsingJoditWysiwyg: question.descriptionUsingJoditWysiwyg !== false }

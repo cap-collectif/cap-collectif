@@ -74,6 +74,7 @@ import ClearableInput from '~ui/Form/Input/ClearableInput'
 import { clearToasts, toast } from '~ds/Toast'
 import { PROJECT_ADMIN_PROPOSAL_LOAD_100 } from '~/components/Admin/Project/ProjectAdminProposals'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { Box } from '@cap-collectif/ui'
 
 export const PROJECT_ADMIN_PROPOSAL_PAGINATION = 30
 type DataModalState = {
@@ -888,115 +889,124 @@ export const ProjectAdminAnalysis = ({ project, themes, defaultUsers, relay }: P
     loadAll()
   }, [loading, loadAll, relay])
   return (
-    <AnalysisPickableListContainer>
-      <AnalysisHeader>
-        <ProjectAdminAnalysisShortcut project={project} />
+    <Box
+      sx={{
+        'span[class*="UserAvatarLegacy__UserAvatarContainer"]': { display: 'block' },
+        'li[class*="UserSearchDropdownChoice__UserSearchDropdownChoiceContainer"] > span > div': {
+          display: 'flex',
+        },
+      }}
+    >
+      <AnalysisPickableListContainer>
+        <AnalysisHeader>
+          <ProjectAdminAnalysisShortcut project={project} />
 
-        <div>
-          <ExportButton
-            onChange={type => {
-              window.open(getProjectExportUrl(type), '_blank')
-            }}
-            disabled={!hasProposals}
-            linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
-          >
-            <DropdownSelect.Choice key="analysis-export" value="analysis-export">
-              <FormattedMessage id="export.option.analysis-form" />
-            </DropdownSelect.Choice>
-            <DropdownSelect.Choice key="decision-export" value="decision-export">
-              <FormattedMessage id="export.option.opinion-decision" />
-            </DropdownSelect.Choice>
-          </ExportButton>
+          <div>
+            <ExportButton
+              onChange={type => {
+                window.open(getProjectExportUrl(type), '_blank')
+              }}
+              disabled={!hasProposals}
+              linkHelp="https://aide.cap-collectif.com/article/67-exporter-les-contributions-dun-projet-participatif"
+            >
+              <DropdownSelect.Choice key="analysis-export" value="analysis-export">
+                <FormattedMessage id="export.option.analysis-form" />
+              </DropdownSelect.Choice>
+              <DropdownSelect.Choice key="decision-export" value="decision-export">
+                <FormattedMessage id="export.option.opinion-decision" />
+              </DropdownSelect.Choice>
+            </ExportButton>
 
-          <ClearableInput
-            id="search"
-            name="search"
-            type="text"
-            icon={<i className="cap cap-magnifier" />}
-            disabled={!hasProposals}
-            onClear={() => {
-              if (parameters.filters.term !== null) {
-                dispatch({
-                  type: 'CLEAR_TERM',
-                })
-              }
-            }}
-            initialValue={parameters.filters.term}
-            onSubmit={term => {
-              if (term === '' && parameters.filters.term !== null) {
-                dispatch({
-                  type: 'CLEAR_TERM',
-                })
-              } else if (term !== '' && parameters.filters.term !== term) {
-                dispatch({
-                  type: 'SEARCH_TERM',
-                  payload: term,
-                })
-              }
-            }}
-            placeholder={intl.formatMessage({
-              id: 'global.menu.search',
-            })}
+            <ClearableInput
+              id="search"
+              name="search"
+              type="text"
+              icon={<i className="cap cap-magnifier" />}
+              disabled={!hasProposals}
+              onClear={() => {
+                if (parameters.filters.term !== null) {
+                  dispatch({
+                    type: 'CLEAR_TERM',
+                  })
+                }
+              }}
+              initialValue={parameters.filters.term}
+              onSubmit={term => {
+                if (term === '' && parameters.filters.term !== null) {
+                  dispatch({
+                    type: 'CLEAR_TERM',
+                  })
+                } else if (term !== '' && parameters.filters.term !== term) {
+                  dispatch({
+                    type: 'SEARCH_TERM',
+                    payload: term,
+                  })
+                }
+              }}
+              placeholder={intl.formatMessage({
+                id: 'global.menu.search',
+              })}
+            />
+          </div>
+        </AnalysisHeader>
+
+        <PickableList>
+          <AnalysisProposalListHeaderContainer disabled={!hasSelectedFilters && !hasProposals}>
+            <ProposalListHeader project={project} defaultUsers={defaultUsers} themes={themes} />
+          </AnalysisProposalListHeaderContainer>
+
+          <PickableList.Body>
+            {hasProposals ? (
+              project.firstAnalysisStep?.proposals?.edges
+                ?.filter(Boolean)
+                .map(edge => edge.node)
+                .filter(Boolean)
+                .map(proposal => (
+                  <AnalysisProposal
+                    isAdminView
+                    proposal={proposal}
+                    key={proposal.id}
+                    // @ts-ignore
+                    rowId={proposal.id}
+                    dispatch={dispatch}
+                    setProposalModalDelete={setProposalModalDelete}
+                    proposalSelected={proposalSelected || null}
+                    setProposalSelected={setProposalSelected}
+                    hasThemeEnabled={proposalsWithTheme.includes(proposal.id)}
+                  >
+                    <AnalysisDataContainer>
+                      <AnalysisStatus
+                        status={PROPOSAL_STATUS[proposal.progressStatus]}
+                        onClick={() =>
+                          dispatch({
+                            type: 'CHANGE_PROGRESS_STATE_FILTER',
+                            payload: proposal.progressStatus,
+                          })
+                        }
+                      />
+                      <AnalysisProposalListRole proposal={proposal} dispatch={dispatch} />
+                    </AnalysisDataContainer>
+                  </AnalysisProposal>
+                ))
+            ) : (
+              <ProjectAdminAnalysisNoProposals project={project} />
+            )}
+          </PickableList.Body>
+        </PickableList>
+
+        {!!proposalModalDelete && (
+          <ModalDeleteProposal
+            // @ts-ignore
+            isAnalysis
+            proposal={proposalModalDelete}
+            parentConnectionId={project.firstAnalysisStep?.id}
+            show={!!proposalModalDelete}
+            onClose={() => setProposalModalDelete(null)}
+            parametersConnection={parameters}
           />
-        </div>
-      </AnalysisHeader>
-
-      <PickableList>
-        <AnalysisProposalListHeaderContainer disabled={!hasSelectedFilters && !hasProposals}>
-          <ProposalListHeader project={project} defaultUsers={defaultUsers} themes={themes} />
-        </AnalysisProposalListHeaderContainer>
-
-        <PickableList.Body>
-          {hasProposals ? (
-            project.firstAnalysisStep?.proposals?.edges
-              ?.filter(Boolean)
-              .map(edge => edge.node)
-              .filter(Boolean)
-              .map(proposal => (
-                <AnalysisProposal
-                  isAdminView
-                  proposal={proposal}
-                  key={proposal.id}
-                  // @ts-ignore
-                  rowId={proposal.id}
-                  dispatch={dispatch}
-                  setProposalModalDelete={setProposalModalDelete}
-                  proposalSelected={proposalSelected || null}
-                  setProposalSelected={setProposalSelected}
-                  hasThemeEnabled={proposalsWithTheme.includes(proposal.id)}
-                >
-                  <AnalysisDataContainer>
-                    <AnalysisStatus
-                      status={PROPOSAL_STATUS[proposal.progressStatus]}
-                      onClick={() =>
-                        dispatch({
-                          type: 'CHANGE_PROGRESS_STATE_FILTER',
-                          payload: proposal.progressStatus,
-                        })
-                      }
-                    />
-                    <AnalysisProposalListRole proposal={proposal} dispatch={dispatch} />
-                  </AnalysisDataContainer>
-                </AnalysisProposal>
-              ))
-          ) : (
-            <ProjectAdminAnalysisNoProposals project={project} />
-          )}
-        </PickableList.Body>
-      </PickableList>
-
-      {!!proposalModalDelete && (
-        <ModalDeleteProposal
-          // @ts-ignore
-          isAnalysis
-          proposal={proposalModalDelete}
-          parentConnectionId={project.firstAnalysisStep?.id}
-          show={!!proposalModalDelete}
-          onClose={() => setProposalModalDelete(null)}
-          parametersConnection={parameters}
-        />
-      )}
-    </AnalysisPickableListContainer>
+        )}
+      </AnalysisPickableListContainer>
+    </Box>
   )
 }
 export default createPaginationContainer(
