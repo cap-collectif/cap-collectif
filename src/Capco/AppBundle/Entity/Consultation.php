@@ -131,6 +131,14 @@ class Consultation implements IndexableInterface, Ownerable, CreatableInterface
             $this->id = null;
             $this->createdAt = new \DateTime();
             $this->updatedAt = new \DateTime();
+
+            $originalOpinionTypes = $this->opinionTypes;
+            $this->opinionTypes = new ArrayCollection();
+            foreach ($originalOpinionTypes as $opinionType) {
+                $clonedOpinionType = clone $opinionType;
+                $this->addOpinionType($clonedOpinionType);
+                $clonedOpinionType->setConsultation($this);
+            }
         }
     }
 
