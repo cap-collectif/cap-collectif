@@ -200,6 +200,13 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
             $this->slug = $this->getSlug();
             $this->createdAt = new \DateTime('now');
             $this->statuses = new ArrayCollection();
+
+            $originalRequirements = $this->requirements;
+            $this->requirements = new ArrayCollection();
+            foreach ($originalRequirements as $requirement) {
+                $clonedRequirement = clone $requirement;
+                $this->addRequirement($clonedRequirement);
+            }
         }
     }
 
