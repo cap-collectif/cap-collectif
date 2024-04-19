@@ -168,7 +168,9 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             return $emptyConnection;
         }
         $filters['restrictedViewerId'] = null;
-        $organisationId = $form->getCreator() ? $form->getCreator()->getOrganizationId() : null;
+
+        $organization = $form->getCreator() ? $form->getCreator()->getOrganization() : null;
+
         /*
          * When a collect step is private, only the author
          * or an admin can see proposals inside.
@@ -188,7 +190,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                     return $emptyConnection;
                 }
                 $filters['author'] = $args->offsetGet('author');
-            } elseif (!$viewer->isAdmin() && ($organisationId && $viewer->getOrganizationId() !== $organisationId)) {
+            } elseif (!$viewer->isAdmin() && (!$organization || !$viewer->isMemberOfOrganization($organization))) {
                 $filters['restrictedViewerId'] = $viewer->getId();
             }
         } elseif ($author) {
