@@ -420,3 +420,7 @@ InternalUser:
                 type: 'InternalProjectConnection'
                 argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProjectsMediatorResolver", [value, args])'
+            isEvaluerOnNewTool:
+                description: "A user that can access Evaluations page is a user that is assigned to at least one proposal, as analyst, supervisor or decision marker"
+                type: 'Boolean!'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerCanSeeEvaluationsPageResolver", [value])'

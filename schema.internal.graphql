@@ -20245,6 +20245,12 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ProjectConnection
+
+  """
+  A user that can access Evaluations page is a user that is assigned to at least
+  one proposal, as analyst, supervisor or decision marker
+  """
+  isEvaluerOnNewTool: Boolean!
 }
 
 """A connection to a list of items."""
