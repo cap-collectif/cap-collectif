@@ -266,8 +266,8 @@
     <link href="{{ asset('css/style-admin.css') }}" rel="stylesheet">
 {% endblock %}
 {% block javascripts %}
-    {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
     {% if is_feature_enabled('helpscout_beacon') %}
+        {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
         {% include 'CapcoAdminBundle:partials/javascripts:_helpscout.html.twig' %}
     {% endif %}
     {% if is_feature_enabled('online_help') %}

@@ -45,6 +45,7 @@ const Placeholder = styled.div`
 
 const AdminRightNavbar = ({ currentLocale, features, query, isUsingDesignSystem }: Props) => {
   const isMultiLocaleEnabled = useFeatureFlag('multilangue')
+  const helpScoutBeacon = useFeatureFlag('helpscout_beacon')
   const locales =
     query.availableLocales.map(locale => {
       const formattedLocale = formatCodeToLocale(locale.code)
@@ -55,11 +56,15 @@ const AdminRightNavbar = ({ currentLocale, features, query, isUsingDesignSystem 
     }) ?? []
   return (
     <Navbar>
-      <CustomNavbarItem id="admin-beamer-navbar">
-        <div className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5" data-toggle="dropdown">
-          <i className="fa fa-bell fa-fw" aria-hidden="true" />
-        </div>
-      </CustomNavbarItem>
+      {
+        helpScoutBeacon && (
+          <CustomNavbarItem id="admin-beamer-navbar">
+            <div className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5" data-toggle="dropdown">
+              <i className="fa fa-bell fa-fw" aria-hidden="true" />
+            </div>
+          </CustomNavbarItem>
+        )
+      }
       {features.multilangue && (
         <Menu placement="bottom-start" as="li">
           <Menu.Button>

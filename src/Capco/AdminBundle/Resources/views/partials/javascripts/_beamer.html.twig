@@ -13,4 +13,6 @@
     user_id: '{{ isLoggedIn ? app.user.id|toGlobalId('User') : 'anon.'}}'
   };
 </script>
-<script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+{% if is_feature_enabled('helpscout_beacon') %}
+  <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer="defer"></script>
+{% endif %}

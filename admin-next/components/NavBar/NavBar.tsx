@@ -59,6 +59,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
   const { availableLocales, viewer } = useLazyLoadQuery<NavBarQuery>(QUERY, {})
   const intl = useIntl()
   const hasMultilangue = useFeatureFlag('multilangue')
+  const helpScoutBeacon = useFeatureFlag('helpscout_beacon')
   const { saving, breadCrumbItems, preview } = useNavBarContext()
   const localeFromCookie = intl.locale
   const localeSelected =
@@ -147,7 +148,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
           </Flex>
         ) : null}
 
-        {!isMediator && (
+        {(!isMediator && helpScoutBeacon) && (
           <NavBarUI.Item className="beamerTrigger">
             <Icon name={CapUIIcon.Bell} size={CapUIIconSize.Md} />
           </NavBarUI.Item>
