@@ -23,8 +23,7 @@ class MenuItemLinkResolver implements QueryInterface
     public function __invoke(
         MenuItem $item,
         RequestStack $requestStack
-    ): string
-    {
+    ): string {
         $request = $requestStack->getCurrentRequest();
         $locale = $request->getLocale();
         if ($item->getPage()) {
@@ -71,6 +70,11 @@ class MenuItemLinkResolver implements QueryInterface
         return $route;
     }
 
+    /**
+     * @param array<mixed> $routeMatch
+     *
+     * @return array<mixed>
+     */
     private function getUrlParams(array $routeMatch): array
     {
         return array_filter(

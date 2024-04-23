@@ -35,7 +35,7 @@ class MenuItem implements Translatable, SonataTranslatableInterface
      *
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Page", inversedBy="MenuItems", cascade={"persist"})
      */
-    private $Page;
+    private ?Page $Page = null;
 
     /**
      * @ORM\Column(name="is_enabled", type="boolean", options={"default": true})
@@ -306,18 +306,12 @@ class MenuItem implements Translatable, SonataTranslatableInterface
         return $this;
     }
 
-    /**
-     * @return Page
-     */
-    public function getPage()
+    public function getPage(): ?Page
     {
         return $this->Page;
     }
 
-    /**
-     * @param Page $page
-     */
-    public function setPage($page)
+    public function setPage(?Page $page = null)
     {
         $this->Page = $page;
         if (null !== $this->getPage()) {
