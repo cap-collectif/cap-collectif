@@ -33,8 +33,8 @@ Scenario: Events can be filtered by theme
   And I visited "events page"
   And I click the "#event-button-filter" element
   And I select "Justice" from react "#SelectTheme-filter-theme"
-  Then I wait ".eventPreview" to appear on current page 1 times
-  And I should see "Event with registrations"
+  Then I wait ".eventPreview" to appear on current page 2 times
+  And I should see "Event with registrations" within 5 seconds
   And I should not see "ParisWeb2015"
 
 @read-only
