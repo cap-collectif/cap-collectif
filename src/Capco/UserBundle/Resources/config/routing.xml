@@ -12,7 +12,12 @@
         <default key="_controller">HWI\Bundle\OAuthBundle\Controller\ConnectController::registrationAction</default>
     </route>
 
+    <!-- Pour le même path, on doit surcharger 2 id pour permettre les modes de connexion de HWI (OpenID, FC, SAML, ...)
+     tout en évitant d'afficher un form sur la route /login -->
     <route id="hwi_oauth_connect" path="/">
+        <default key="_controller">HWI\Bundle\OAuthBundle\Controller\LoginController::connectAction</default>
+    </route>
+    <route id="fos_user_security_login" path="/" methods="GET POST">
         <default key="_controller">HWI\Bundle\OAuthBundle\Controller\LoginController::connectAction</default>
     </route>
 
