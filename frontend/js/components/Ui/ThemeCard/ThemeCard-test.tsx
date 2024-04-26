@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import { ThemeCard } from './ThemeCard'
-import { theme, metricsWithoutEvent } from '../../../stories/mocks/theme'
+import { theme, metricsWithoutEvent } from './ThemeCard-mocks'
 
 describe('<ThemeCard />', () => {
   it('should render correctly', () => {

@@ -43,8 +43,6 @@
         "lint": "eslint --cache --fix --report-unused-disable-directives frontend/js --ext .ts --ext .tsx",
         "bundlesize": "bundlewatch",
         "bundlewatch": "bundlewatch",
-        "storybook": "start-storybook -p 9001 -c .storybook",
-        "deploy-storybook": "rm -fr .out && yarn run build-storybook -c .storybook -o .out && mkdir -p .out/.circleci && touch .out/.circleci/config.yml && echo 'version: 2\njobs:\n   build:\n      machine: true\n      branches:\n         ignore: gh-pages\n      steps:\n         - run: echo Skipping tests on gh-pages branch' > '.out/.circleci/config.yml'  && echo 'ui.cap-collectif.com' > '.out/CNAME' && storybook-to-ghpages --existing-output-dir=.out",
         "prettier:js": "prettier --parser flow --no-error-on-unmatched-pattern --write '{features/graphql-api,frontend/js}/**/*.js'",
         "prettier:ts": "prettier --parser typescript --no-error-on-unmatched-pattern --write 'admin-next/**/*.{ts,tsx}'",
         "prettier:yaml": "prettier --parser yaml --no-error-on-unmatched-pattern --write 'src/**/*.{yml,yaml}' 'app/**/*.{yml,yaml}' 'infrastructure/**/*.{yml,yaml}'",
