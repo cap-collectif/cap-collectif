@@ -1625,7 +1625,6 @@ class ApplicationContext extends UserContext
     private function isSuiteWithJS(Suite $suite): bool
     {
         return \in_array($suite->getName(), [
-            'randomly-failing',
             'sso',
             'questionnaire',
             'bo-moderation',

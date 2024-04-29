@@ -57,12 +57,12 @@ e2e:
       paths: ['%paths.base%/features/sso', '%paths.base%/features/front/sso']
       contexts: *bp-config
       filters:
-        tags: '@sso&&~@randomly-failing'
+        tags: '@sso'
     consultation:
       paths: ['%paths.base%/features/front']
       contexts: *bp-config
       filters:
-        tags: '@consultation&&~@randomly-failing'
+        tags: '@consultation'
     consultation-arguments:
       paths: ['%paths.base%/features/front']
       contexts: *bp-config
@@ -72,17 +72,17 @@ e2e:
       paths: ['%paths.base%/features/front/bp']
       contexts: *bp-config
       filters:
-        tags: '@bp&&~@proposal_crud&&~@proposal_search&&~@randomly-failing'
+        tags: '@bp&&~@proposal_crud&&~@proposal_search'
     bp-crud:
       paths: ['%paths.base%/features/front/bp']
       contexts: *bp-config
       filters:
-        tags: '@proposal_crud&&~@randomly-failing'
+        tags: '@proposal_crud'
     bp-search:
       paths: ['%paths.base%/features/front/bp']
       contexts: *bp-config
       filters:
-        tags: '@proposal_search&&~@randomly-failing'
+        tags: '@proposal_search'
     questionnaire:
       paths: ['%paths.base%/features/front']
       contexts:
@@ -91,27 +91,19 @@ e2e:
         - Capco\AppBundle\Behat\NavigationContext
         - Capco\AppBundle\Behat\MailCatcherContext
       filters:
-        tags: '@questionnaire&&~@randomly-failing'
+        tags: '@questionnaire'
     bo-moderation:
       paths: ['%paths.base%/features/back/moderation']
       contexts: *bo-config
-      filters:
-        tags: '~@randomly-failing'
     bo-project-alpha-and-event:
       paths: ['%paths.base%/features/back/project/AlphaAndEvent']
       contexts: *bo-config
-      filters:
-        tags: '~@randomly-failing'
     bo-project-consultation-and-project:
       paths: ['%paths.base%/features/back/project/ConsultationAndProject']
       contexts: *bo-config
-      filters:
-        tags: '~@randomly-failing'
     bo-project-proposal-form-and-questionnaire:
       paths: ['%paths.base%/features/back/project/ProposalFormAndQuestionnaire']
       contexts: *bo-config
-      filters:
-        tags: '~@randomly-failing'
     bo-pages:
       paths:
         [
@@ -123,45 +115,36 @@ e2e:
           '%paths.base%/features/back/group',
         ]
       contexts: *bo-config
-      filters:
-        tags: '~@randomly-failing'
     intl:
       paths: ['%paths.base%/features/front/intl']
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext:
             session: '@session'
-      filters:
-        tags: '~@randomly-failing'
     core-features:
       paths: ['%paths.base%/features/front/features']
       contexts: *core-config
       filters:
-        tags: '@core&&~@event_registration&&~@randomly-failing'
+        tags: '@core&&~@event_registration'
     export-feature:
       paths: ['%paths.base%/features/front/features']
       contexts: *bp-config
       filters:
-        tags: '@export&&~@randomly-failing'
+        tags: '@export'
     core-user-split-1:
       paths: ['%paths.base%/features/front/user/split1']
       contexts: *core-config
       filters:
-        tags: '@core&&~@event_registration&&~@randomly-failing'
+        tags: '@core&&~@event_registration'
     core-user-split-2:
       paths: ['%paths.base%/features/front/user/split2']
       contexts: *core-config
       filters:
-        tags: '@core&&~@event_registration&&~@randomly-failing'
+        tags: '@core&&~@event_registration'
     core-pages:
       paths: ['%paths.base%/features/front/pages']
       contexts: *core-config
       filters:
-        tags: '@core&&~@event_registration&&~@randomly-failing'
-    randomly-failing:
-      paths: ['%paths.base%/features/front', '%paths.base%/features/back']
-      contexts: *core-config
-      filters:
-        tags: '@randomly-failing'
+        tags: '@core&&~@event_registration'
     # /!\ If you add an other suite, please update isSuiteWithJS method. /!\
 commands:
   extensions:
@@ -194,8 +177,6 @@ commands:
   suites:
     commands:
       paths: ['%paths.base%/features/commands/commands']
-      filters:
-        tags: '~@randomly-failing'
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\ExportContext
@@ -206,8 +187,6 @@ commands:
         - Capco\AppBundle\Behat\FileSystemContext
     consumers:
       paths: ['%paths.base%/features/commands/consumers']
-      filters:
-        tags: '~@randomly-failing'
       contexts:
         - Capco\AppBundle\Behat\ApplicationContext
         - Capco\AppBundle\Behat\ExportContext
