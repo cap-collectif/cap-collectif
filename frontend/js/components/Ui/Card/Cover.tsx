@@ -8,7 +8,7 @@ type Props = {
 }
 const Container = styled.div.attrs({
   className: 'card__cover',
-})`
+})<{ height: string; width: string }>`
   overflow: hidden;
   height: ${props => props.height};
   width: ${props => props.width};

@@ -30,10 +30,12 @@ export const EventMapPreview = ({ hasIllustrationDisplayed, event }: EventMapPre
             </a>
           </Card.Title>
 
-          <TagsList>
-            {author && <TagUser user={author} size={16} />}
-            {timeRange && timeRange.startAt && <Card.Date date={timeRange.startAt} />}
-            {googleMapsAddress && <TagCity address={googleMapsAddress} size="16px" />}
+          <TagsList className="eventPreviewTagsList">
+            <span className="userTagContainer">{author && <TagUser user={author} size={16} />}</span>
+            {timeRange && timeRange.startAt && <Card.Date date={timeRange.startAt} fontSize={'14px'} />}
+            <span className="cityTagContainer">
+              {googleMapsAddress && <TagCity address={googleMapsAddress} size="16px" />}
+            </span>
           </TagsList>
         </Card.Body>
       </Card>

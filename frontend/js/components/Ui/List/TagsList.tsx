@@ -5,6 +5,9 @@ import styled from 'styled-components'
 const TagsListWrapper = styled.div`
   padding: 0;
   margin: 0;
+  & > * {
+    margin-bottom: 4px;
+  }
 `
 const TagsListItem = styled.div`
   & + & {

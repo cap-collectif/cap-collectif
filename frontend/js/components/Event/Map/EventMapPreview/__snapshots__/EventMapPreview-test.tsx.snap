@@ -42,27 +42,38 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
           </Text>
         </a>
       </Title>
-      <TagsList>
-        <Relay(TagUser)
-          size={16}
-          user={
-            Object {
-              " $fragmentRefs": null,
+      <TagsList
+        className="eventPreviewTagsList"
+      >
+        <span
+          className="userTagContainer"
+        >
+          <Relay(TagUser)
+            size={16}
+            user={
+              Object {
+                " $fragmentRefs": null,
+              }
             }
-          }
-        />
+          />
+        </span>
         <Date
           date="2030-03-10 00:00:00"
+          fontSize="14px"
         />
-        <Relay(TagCity)
-          address={
-            Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+        <span
+          className="cityTagContainer"
+        >
+          <Relay(TagCity)
+            address={
+              Object {
+                " $fragmentRefs": null,
+                "__typename": "GoogleMapsAddress",
+              }
             }
-          }
-          size="16px"
-        />
+            size="16px"
+          />
+        </span>
       </TagsList>
     </Body>
   </Card>
@@ -111,27 +122,38 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
           </Text>
         </a>
       </Title>
-      <TagsList>
-        <Relay(TagUser)
-          size={16}
-          user={
-            Object {
-              " $fragmentRefs": null,
+      <TagsList
+        className="eventPreviewTagsList"
+      >
+        <span
+          className="userTagContainer"
+        >
+          <Relay(TagUser)
+            size={16}
+            user={
+              Object {
+                " $fragmentRefs": null,
+              }
             }
-          }
-        />
+          />
+        </span>
         <Date
           date="2030-03-10 00:00:00"
+          fontSize="14px"
         />
-        <Relay(TagCity)
-          address={
-            Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+        <span
+          className="cityTagContainer"
+        >
+          <Relay(TagCity)
+            address={
+              Object {
+                " $fragmentRefs": null,
+                "__typename": "GoogleMapsAddress",
+              }
             }
-          }
-          size="16px"
-        />
+            size="16px"
+          />
+        </span>
       </TagsList>
     </Body>
   </Card>
@@ -180,24 +202,34 @@ exports[`<EventMapPreview /> should render correctly when no date 1`] = `
           </Text>
         </a>
       </Title>
-      <TagsList>
-        <Relay(TagUser)
-          size={16}
-          user={
-            Object {
-              " $fragmentRefs": null,
+      <TagsList
+        className="eventPreviewTagsList"
+      >
+        <span
+          className="userTagContainer"
+        >
+          <Relay(TagUser)
+            size={16}
+            user={
+              Object {
+                " $fragmentRefs": null,
+              }
             }
-          }
-        />
-        <Relay(TagCity)
-          address={
-            Object {
-              " $fragmentRefs": null,
-              "__typename": "GoogleMapsAddress",
+          />
+        </span>
+        <span
+          className="cityTagContainer"
+        >
+          <Relay(TagCity)
+            address={
+              Object {
+                " $fragmentRefs": null,
+                "__typename": "GoogleMapsAddress",
+              }
             }
-          }
-          size="16px"
-        />
+            size="16px"
+          />
+        </span>
       </TagsList>
     </Body>
   </Card>
@@ -243,17 +275,27 @@ exports[`<EventMapPreview /> should render correctly when no googleMapsAddress 1
           </Text>
         </a>
       </Title>
-      <TagsList>
-        <Relay(TagUser)
-          size={16}
-          user={
-            Object {
-              " $fragmentRefs": null,
+      <TagsList
+        className="eventPreviewTagsList"
+      >
+        <span
+          className="userTagContainer"
+        >
+          <Relay(TagUser)
+            size={16}
+            user={
+              Object {
+                " $fragmentRefs": null,
+              }
             }
-          }
-        />
+          />
+        </span>
         <Date
           date="2030-03-10 00:00:00"
+          fontSize="14px"
+        />
+        <span
+          className="cityTagContainer"
         />
       </TagsList>
     </Body>

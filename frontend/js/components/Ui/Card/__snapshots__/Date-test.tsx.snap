@@ -14,6 +14,11 @@ exports[`<Date /> should render correctly 1`] = `
   </IconRounded>
   <span
     className="date"
+    style={
+      Object {
+        "fontSize": undefined,
+      }
+    }
   >
     <FormattedDate
       day="numeric"
@@ -41,6 +46,11 @@ exports[`<Date /> should render correctly with other date 1`] = `
   </IconRounded>
   <span
     className="date"
+    style={
+      Object {
+        "fontSize": undefined,
+      }
+    }
   >
     <FormattedDate
       day="numeric"

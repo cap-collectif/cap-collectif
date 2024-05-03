@@ -98,6 +98,7 @@ export const HeadContent = styled.div`
   flex-direction: row;
   align-items: center;
   margin-bottom: 10px;
+  gap: 8px;
 
   .inline-list {
     margin: 0;

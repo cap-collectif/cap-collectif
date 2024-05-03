@@ -11,7 +11,7 @@ type Props = {
 }
 const Container: StyledComponent<Props, {}, HTMLDivElement> = styled.div.attrs({
   className: 'card__header',
-})`
+})<{ bgColor: string }>`
   background-color: ${props => props.bgColor};
   color: ${props => (props.bgColor === colors.pageBgc ? colors.dark : tinycolor(props.bgColor).darken(60).toString())};
   border: 1px solid ${colors.borderColor};
