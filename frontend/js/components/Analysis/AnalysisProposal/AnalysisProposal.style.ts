@@ -43,7 +43,7 @@ export const ProposalListRowHeader = styled.div`
 export const StateTag = styled.div`
   border-radius: 20px;
   font-weight: 600;
-  font-size: 1.2rem;
+  font-size: 12px;
   color: ${colors.darkGray};
   border: 1px solid ${colors.darkGray};
   padding: 0 4px;
