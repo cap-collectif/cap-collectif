@@ -13,6 +13,8 @@ import Label from '~/components/Ui/Form/Label/Label'
 import Description from '~ui/Form/Description/Description'
 import isQuestionnaire from '~/utils/isQuestionnaire'
 import colors from '~/styles/modules/colors'
+import useIsMobile from '~/utils/hooks/useIsMobile'
+
 export type Option = {
   value: string
   label: string
@@ -252,6 +254,7 @@ const RenderSelect = ({
   meta,
   selectInputProps,
 }: Props): JSX.Element => {
+  const isMobile = useIsMobile()
   const { name, value } = input
   const intl = useIntl()
   const debouncedLoadOptions = debouncePromise(loadOptions, debounceMs, {
@@ -320,6 +323,7 @@ const RenderSelect = ({
                 ClearIndicator,
                 MenuList,
               }}
+              maxMenuHeight={isMobile ? 135 : undefined}
               isDisabled={disabled}
               defaultOptions={autoload}
               isClearable={clearable}
@@ -380,6 +384,7 @@ const RenderSelect = ({
                 ClearIndicator,
                 MenuList,
               }}
+              maxMenuHeight={isMobile ? 135 : undefined}
               isDisabled={disabled}
               className="react-select-container"
               classNamePrefix="react-select"
