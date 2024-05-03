@@ -40,7 +40,7 @@ Capco\AppBundle\Entity\SiteParameterTranslation:
         translatable: '@SiteParameterThemesContentBody'
         locale: 'fr-FR'
     SiteParameterContactContentBodyFR:
-        value: <stripslashes('\<p>Une remarque, un avis à partager, ou une demande d\’informations supplémentaires ? Nous vous invitons à compléter le formulaire ci-dessous. Nous nous engageons à vous répondre dans les meilleurs délais.</p>\')>
+        value: <html_entity_decode('<p><span>Une remarque, un avis à partager, ou une demande d’informations supplémentaires ? Nous vous invitons à compléter le formulaire ci-dessous. Nous nous engageons à vous répondre dans les meilleurs délais.</span><br><span>Si vous avez une question technique, n’hésitez pas à consulter notre<span>&nbsp;</span></span><a href="https://aide-utilisateurs.helpscoutdocs.com/" rel="nofollow">centre d’aide</a><span>, vous y trouverez sûrement une réponse.</span></p>')>
         translatable: '@SiteParameterContactContentBody'
         locale: 'fr-FR'
     SiteParameterContactContentAddressFR:

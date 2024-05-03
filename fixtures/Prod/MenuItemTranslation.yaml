@@ -128,3 +128,9 @@ Capco\AppBundle\Entity\MenuItemTranslation:
         locale: ur-IN
         title: Développeurs
         link: developer
+
+    MenuItem17fr:
+        translatable: '@MenuItem17'
+        locale: fr-FR
+        title: Besoin d'aide ?
+        link: https://aide-utilisateurs.helpscoutdocs.com

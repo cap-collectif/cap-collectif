@@ -93,3 +93,11 @@ Capco\AppBundle\Entity\MenuItem:
         position: 11
         parent: null
         menu: 2
+    #Besoin d'aide
+    MenuItem17:
+        isEnabled: 1
+        isDeletable: 0
+        isFullyModifiable: 1
+        position: 1
+        parent: null
+        menu: 2
