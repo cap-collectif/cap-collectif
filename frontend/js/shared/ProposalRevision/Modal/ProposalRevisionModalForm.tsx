@@ -136,7 +136,7 @@ const ProposalRevisionModalForm = ({
   }
 
   return (
-    <Modal show={show} onHide={onClose}>
+    <Modal show={show} onHide={onClose} backdrop="static">
       {showAvailableRevisions && (
         <>
           <Modal.Header
