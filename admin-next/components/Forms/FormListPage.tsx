@@ -12,7 +12,7 @@ import type { ConsultationListQuery as ConsultationListQueryType } from '@relay/
 import { Affiliations } from './FormListQuery'
 import { FormListPage_viewer$key } from '@relay/FormListPage_viewer.graphql'
 import FormEmptyState from './FormEmptyState'
-import CreateFormModal from './CreateFormModal'
+import CreateFormModal, { FormValues } from './CreateFormModal'
 import ConsultationListQuery, { CONSULTATION_LIST_QUERY } from '@components/Forms/ConsultationListQuery'
 import useUrlState from '@hooks/useUrlState'
 
@@ -138,12 +138,17 @@ const FormListPage: React.FC<Props> = ({ viewer: viewerRef, affiliations }) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [selectedFormFilter, term])
 
+  const initialValues: FormValues = {
+    title: '',
+    type: selectedFormFilter as FormTypes,
+  }
+
   return (
     <Flex direction="column" spacing={6}>
       <Flex direction="column" p={8} spacing={4} m={6} bg="white" borderRadius="normal" overflow="hidden">
         <Flex direction="row" justify="space-between">
           <Flex direction="row" spacing={8}>
-            <CreateFormModal orderBy="DESC" viewer={viewer} term={term} />
+            <CreateFormModal orderBy="DESC" viewer={viewer} term={term} initialValues={initialValues} />
             <Search
               id="search-event"
               value={term}
