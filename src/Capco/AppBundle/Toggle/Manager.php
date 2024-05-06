@@ -88,6 +88,7 @@ class Manager
     public const new_vote_step = 'new_vote_step';
     public const mediator = 'mediator';
     public const online_help = 'online_help';
+    public const full_proposal_card = 'full_proposal_card';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -119,6 +120,7 @@ class Manager
         self::project_trash,
         self::mediator,
         self::online_help,
+        self::full_proposal_card,
     ];
 
     public static $toggles = [
@@ -198,6 +200,7 @@ class Manager
         self::new_vote_step,
         self::mediator,
         self::online_help,
+        self::full_proposal_card,
     ];
 
     protected ToggleManager $toggleManager;

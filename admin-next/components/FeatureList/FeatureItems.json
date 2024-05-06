@@ -372,6 +372,11 @@
                         "title": "capco.module.proposal_sms_vote",
                         "description": "",
                         "onlySuperAdmin": false
+                    },
+                    "full_proposal_card": {
+                        "title": "capco.module.full_proposal_card",
+                        "description": "description.module.full_proposal_card",
+                        "onlySuperAdmin": true
                     }
                 }
             }

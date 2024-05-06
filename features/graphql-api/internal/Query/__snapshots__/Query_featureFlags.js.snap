@@ -307,6 +307,10 @@ Object {
       "enabled": false,
       "type": "online_help",
     },
+    Object {
+      "enabled": false,
+      "type": "full_proposal_card",
+    },
   ],
 }
 `;

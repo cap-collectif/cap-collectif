@@ -97,6 +97,7 @@ export const features: FeatureFlags = {
   turnstile_captcha: false,
   mediator: false,
   online_help: false,
+  full_proposal_card: false,
 }
 
 const environment = {

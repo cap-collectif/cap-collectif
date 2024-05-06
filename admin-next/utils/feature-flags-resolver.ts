@@ -79,6 +79,7 @@ export const defaultFeatureFlags: FeatureFlags = {
   new_vote_step: false,
   mediator: false,
   online_help: false,
+  full_proposal_card: false,
 }
 
 const getRedisFeatureFlagKey = (flag: string) => {

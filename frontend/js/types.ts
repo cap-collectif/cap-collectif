@@ -107,6 +107,7 @@ export type FeatureToggles = {
   organizations: boolean | null | undefined
   moderation_comment: boolean | null | undefined
   online_help: boolean | null | undefined
+  full_proposal_card: boolean | null | undefined
 }
 export type FeatureToggle = $Keys<FeatureToggles>
 export type Action =
