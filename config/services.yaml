@@ -57,6 +57,7 @@ parameters:
     assets_version: '%env(SYMFONY_ASSETS_VERSION)%'
     assets_host: '%env(SYMFONY_ASSETS_HOST)%'
     recaptcha_private_key: '%env(SYMFONY_RECAPTCHA_PRIVATE_KEY)%'
+    sms_provider: '%env(SYMFONY_SMS_PROVIDER)%'
     twilio_sid: '%env(SYMFONY_TWILIO_SID)%'
     twilio_token: '%env(SYMFONY_TWILIO_TOKEN)%'
     twilio_default_subaccount_token: '%env(SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_TOKEN)%'

@@ -472,3 +472,9 @@ services:
     Capco\AppBundle\Security\RateLimiter:
         autowire: true
         public: true
+
+    Capco\AppBundle\Fetcher\SmsProviderFetcher:
+        arguments:
+            $smsProvider: '%sms_provider%'
+            $twilioSmsProvider: '@Capco\AppBundle\Helper\TwilioSmsProvider'
+            $orangeSmsProvider: '@Capco\AppBundle\Helper\OrangeSmsProvider'

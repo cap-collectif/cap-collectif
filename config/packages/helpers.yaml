@@ -15,3 +15,6 @@ services:
         arguments:
             $twilioSid: '%twilio_sid%'
             $twilioToken: '%twilio_token%'
+
+    Capco\AppBundle\Helper\TwilioSmsProvider:
+        arguments: ['@Capco\AppBundle\Helper\TwilioClient']

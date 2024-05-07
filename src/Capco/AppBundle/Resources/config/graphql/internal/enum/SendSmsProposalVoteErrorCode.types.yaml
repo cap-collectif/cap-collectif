@@ -5,10 +5,10 @@ SendSmsProposalVoteErrorCode:
         description: 'Available errors for an `sendSmsProposalVote` mutation.'
         values:
             INVALID_NUMBER:
-                value: !php/const Capco\AppBundle\Helper\TwilioHelper::INVALID_NUMBER
+                value: !php/const Capco\AppBundle\Helper\TwilioSmsProvider::INVALID_NUMBER
                 description: 'The given number is invalid.'
             TWILIO_API_ERROR:
-                value: !php/const Capco\AppBundle\Helper\TwilioHelper::TWILIO_API_ERROR
+                value: !php/const Capco\AppBundle\Helper\TwilioSmsProvider::TWILIO_API_ERROR
                 description: 'An error occured while calling twilio api.'
             PHONE_SHOULD_BE_MOBILE_NUMBER:
                 value: !php/const Capco\AppBundle\Enum\UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER

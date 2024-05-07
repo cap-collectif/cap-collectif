@@ -5,11 +5,11 @@ VerifySmsVotePhoneNumberErrorCode:
         description: 'Available errors for an `verifySmsVotePhoneNumber` mutation.'
         values:
             CODE_EXPIRED:
-                value: !php/const Capco\AppBundle\Helper\TwilioHelper::CODE_EXPIRED
+                value: !php/const Capco\AppBundle\Helper\TwilioSmsProvider::CODE_EXPIRED
                 description: 'The given code is expired.'
             CODE_NOT_VALID:
-                value: !php/const Capco\AppBundle\Helper\TwilioHelper::CODE_NOT_VALID
+                value: !php/const Capco\AppBundle\Helper\TwilioSmsProvider::CODE_NOT_VALID
                 description: 'The given code is not valid.'
             TWILIO_API_ERROR:
-                value: !php/const Capco\AppBundle\Helper\TwilioHelper::TWILIO_API_ERROR
+                value: !php/const Capco\AppBundle\Helper\TwilioSmsProvider::TWILIO_API_ERROR
                 description: 'An error occured while calling twilio api.'

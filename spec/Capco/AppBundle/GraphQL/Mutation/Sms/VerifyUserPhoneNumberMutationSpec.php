@@ -3,8 +3,9 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Mutation\Sms\VerifyUserPhoneNumberMutation;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\TwilioSmsProvider;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
@@ -18,13 +19,15 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 
     public function let(
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
+        TwilioSmsProvider $smsProvider,
         UserPhoneVerificationSmsRepository $userPhoneVerificationRepository
-    ) {
-        $this->beConstructedWith($em, $twilioHelper, $userPhoneVerificationRepository);
+    ): void {
+        $smsProviderFactory->fetch()->willReturn($smsProvider);
+        $this->beConstructedWith($em, $smsProviderFactory, $userPhoneVerificationRepository);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(VerifyUserPhoneNumberMutation::class);
     }
@@ -35,8 +38,8 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
         UserPhoneVerificationSmsRepository $userPhoneVerificationRepository,
         UserPhoneVerificationSms $userPhoneVerificationSms,
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper
-    ) {
+        TwilioSmsProvider $smsProvider
+    ): void {
         $code = '123456';
         $phone = '+33695688423';
         $viewer
@@ -56,7 +59,7 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
             ->willReturn($phone)
         ;
 
-        $twilioHelper->verifySms($phone, $code)->willReturn(null);
+        $smsProvider->verifySms($phone, $code)->willReturn(null);
 
         $viewer->setPhoneConfirmed(true)->shouldBeCalledOnce();
 
@@ -68,12 +71,10 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
 
         $em->flush()->shouldBeCalledOnce();
 
-        $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(null);
-        $payload['user']->shouldBe($viewer);
+        $this->__invoke($input, $viewer)->shouldReturn(['errorCode' => null, 'user' => $viewer]);
     }
 
-    public function it_should_return_phone_already_confirmed_error_code(User $viewer, Arg $input)
+    public function it_should_return_phone_already_confirmed_error_code(User $viewer, Arg $input): void
     {
         $this->getMockedGraphQLArgumentFormatted($input);
 
@@ -90,8 +91,8 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
     public function it_should_return_code_not_valid_error_code(
         Arg $input,
         User $viewer,
-        TwilioHelper $twilioHelper
-    ) {
+        TwilioSmsProvider $smsProvider
+    ): void {
         $code = '325456';
         $phone = '+33695688423';
         $viewer
@@ -111,17 +112,19 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
             ->willReturn($phone)
         ;
 
-        $twilioHelper->verifySms($phone, $code)->willReturn(TwilioHelper::CODE_NOT_VALID);
+        $viewer->setPhoneConfirmed(true)->willReturn($viewer);
+
+        $smsProvider->verifySms($phone, $code)->willReturn(TwilioSmsProvider::CODE_NOT_VALID);
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioHelper::CODE_NOT_VALID);
+        $payload['errorCode']->shouldBe(TwilioSmsProvider::CODE_NOT_VALID);
     }
 
     public function it_should_return_code_expired_error_code(
         Arg $input,
         User $viewer,
-        TwilioHelper $twilioHelper
-    ) {
+        TwilioSmsProvider $smsProvider
+    ): void {
         $code = '123456';
         $phone = '+33695688423';
         $viewer
@@ -141,9 +144,11 @@ class VerifyUserPhoneNumberMutationSpec extends ObjectBehavior
             ->willReturn($phone)
         ;
 
-        $twilioHelper->verifySms($phone, $code)->willReturn(TwilioHelper::CODE_EXPIRED);
+        $viewer->setPhoneConfirmed(true)->willReturn($viewer);
+
+        $smsProvider->verifySms($phone, $code)->willReturn(TwilioSmsProvider::CODE_EXPIRED);
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioHelper::CODE_EXPIRED);
+        $payload['errorCode']->shouldBe(TwilioSmsProvider::CODE_EXPIRED);
     }
 }

@@ -5,7 +5,7 @@ SendSmsPhoneValidationCodeErrorCode:
         description: 'Available errors for an `sendSmsPhoneValidationCode` mutation.'
         values:
             INVALID_NUMBER:
-                value: !php/const Capco\AppBundle\Helper\TwilioHelper::INVALID_NUMBER
+                value: !php/const Capco\AppBundle\Helper\TwilioSmsProvider::INVALID_NUMBER
                 description: 'The given number is invalid'
             RETRY_LIMIT_REACHED:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsPhoneValidationCodeMutation::RETRY_LIMIT_REACHED
@@ -14,5 +14,5 @@ SendSmsPhoneValidationCodeErrorCode:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsPhoneValidationCodeMutation::PHONE_ALREADY_CONFIRMED
                 description: 'The user has already confirmed his phone number'
             TWILIO_API_ERROR:
-                value: !php/const Capco\AppBundle\Helper\TwilioHelper::TWILIO_API_ERROR
+                value: !php/const Capco\AppBundle\Helper\TwilioSmsProvider::TWILIO_API_ERROR
                 description: 'An error occured while calling twilio api'

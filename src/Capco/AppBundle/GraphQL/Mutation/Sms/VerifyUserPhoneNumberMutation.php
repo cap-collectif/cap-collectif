@@ -2,8 +2,9 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -17,16 +18,16 @@ class VerifyUserPhoneNumberMutation implements MutationInterface
     public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
 
     private EntityManagerInterface $em;
-    private TwilioHelper $twilioHelper;
+    private SmsProviderInterface $smsProvider;
     private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
 
     public function __construct(
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
     ) {
         $this->em = $em;
-        $this->twilioHelper = $twilioHelper;
+        $this->smsProvider = $smsProviderFactory->fetch();
         $this->userPhoneVerificationSmsRepository = $userPhoneVerificationSmsRepository;
     }
 
@@ -39,7 +40,7 @@ class VerifyUserPhoneNumberMutation implements MutationInterface
 
         $code = $input->offsetGet('code');
         $phone = $viewer->getPhone();
-        $verifyErrorCode = $this->twilioHelper->verifySms($phone, $code);
+        $verifyErrorCode = $this->smsProvider->verifySms($phone, $code);
         if ($verifyErrorCode) {
             return ['errorCode' => $verifyErrorCode];
         }

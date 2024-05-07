@@ -4,25 +4,25 @@ namespace spec\Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Enum\UserPhoneErrors;
 use Capco\AppBundle\Helper\TwilioClient;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\TwilioSmsProvider;
 use PhpSpec\ObjectBehavior;
 
-class TwilioHelperSpec extends ObjectBehavior
+class TwilioSmsProviderSpec extends ObjectBehavior
 {
     private string $phone = '+33611111111';
     private string $code = '123456';
 
-    public function let(TwilioClient $twilioClient)
+    public function let(TwilioClient $twilioClient): void
     {
         $this->beConstructedWith($twilioClient);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
-        $this->shouldHaveType(TwilioHelper::class);
+        $this->shouldHaveType(TwilioSmsProvider::class);
     }
 
-    public function it_should_send_sms_correctly(TwilioClient $twilioClient)
+    public function it_should_send_sms_correctly(TwilioClient $twilioClient): void
     {
         $response = ['statusCode' => 201];
         $twilioClient
@@ -34,7 +34,7 @@ class TwilioHelperSpec extends ObjectBehavior
         $this->sendVerificationSms($this->phone)->shouldReturn(null);
     }
 
-    public function it_should_return_PHONE_SHOULD_BE_MOBILE_NUMBER(TwilioClient $twilioClient)
+    public function it_should_return_PHONE_SHOULD_BE_MOBILE_NUMBER(TwilioClient $twilioClient): void
     {
         $response = [
             'statusCode' => 400,
@@ -51,7 +51,7 @@ class TwilioHelperSpec extends ObjectBehavior
         );
     }
 
-    public function it_should_return_INVALID_NUMBER(TwilioClient $twilioClient)
+    public function it_should_return_INVALID_NUMBER(TwilioClient $twilioClient): void
     {
         $response = [
             'statusCode' => 400,
@@ -63,10 +63,10 @@ class TwilioHelperSpec extends ObjectBehavior
             ->willReturn($response)
         ;
 
-        $this->sendVerificationSms($this->phone)->shouldReturn(TwilioHelper::INVALID_NUMBER);
+        $this->sendVerificationSms($this->phone)->shouldReturn(TwilioSmsProvider::INVALID_NUMBER);
     }
 
-    public function it_should_return_TWILIO_API_ERROR(TwilioClient $twilioClient)
+    public function it_should_return_TWILIO_API_ERROR(TwilioClient $twilioClient): void
     {
         $response = ['statusCode' => 500];
         $twilioClient
@@ -75,10 +75,10 @@ class TwilioHelperSpec extends ObjectBehavior
             ->willReturn($response)
         ;
 
-        $this->sendVerificationSms($this->phone)->shouldReturn(TwilioHelper::TWILIO_API_ERROR);
+        $this->sendVerificationSms($this->phone)->shouldReturn(TwilioSmsProvider::TWILIO_API_ERROR);
     }
 
-    public function it_should_verify_sms_correctly(TwilioClient $twilioClient)
+    public function it_should_verify_sms_correctly(TwilioClient $twilioClient): void
     {
         $response = ['statusCode' => 200, 'data' => ['status' => 'accepted']];
         $twilioClient
@@ -89,7 +89,7 @@ class TwilioHelperSpec extends ObjectBehavior
         $this->verifySms($this->phone, $this->code)->shouldReturn(null);
     }
 
-    public function it_should_return_CODE_EXPIRED(TwilioClient $twilioClient)
+    public function it_should_return_CODE_EXPIRED(TwilioClient $twilioClient): void
     {
         $response = ['statusCode' => 404, 'data' => ['code' => TwilioClient::ERRORS['NOT_FOUND']]];
         $twilioClient
@@ -97,10 +97,10 @@ class TwilioHelperSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($response)
         ;
-        $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioHelper::CODE_EXPIRED);
+        $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioSmsProvider::CODE_EXPIRED);
     }
 
-    public function it_should_return_CODE_NOT_VALID(TwilioClient $twilioClient)
+    public function it_should_return_CODE_NOT_VALID(TwilioClient $twilioClient): void
     {
         $response = ['statusCode' => 200, 'data' => ['status' => 'pending']];
         $twilioClient
@@ -108,6 +108,6 @@ class TwilioHelperSpec extends ObjectBehavior
             ->shouldBeCalledOnce()
             ->willReturn($response)
         ;
-        $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioHelper::CODE_NOT_VALID);
+        $this->verifySms($this->phone, $this->code)->shouldReturn(TwilioSmsProvider::CODE_NOT_VALID);
     }
 }

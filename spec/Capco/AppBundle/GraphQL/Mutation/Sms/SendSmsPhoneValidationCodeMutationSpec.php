@@ -3,8 +3,9 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation\Requirement\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsPhoneValidationCodeMutation;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\TwilioSmsProvider;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -16,25 +17,27 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
+        TwilioSmsProvider $smsProvider,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
-    ) {
-        $this->beConstructedWith($em, $twilioHelper, $userPhoneVerificationSmsRepository);
+    ): void {
+        $smsProviderFactory->fetch()->willReturn($smsProvider);
+        $this->beConstructedWith($em, $smsProviderFactory, $userPhoneVerificationSmsRepository);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(SendSmsPhoneValidationCodeMutation::class);
     }
 
     public function it_should_send_a_phone_validation_sms_successfuly(
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         Arg $input,
         User $viewer,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         UserPhoneVerificationSms $sms,
         EntityManagerInterface $em
-    ) {
+    ): void {
         $to = '+3333333';
         $viewer
             ->isPhoneConfirmed()
@@ -54,7 +57,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
             ->willReturn($smsList)
         ;
 
-        $twilioHelper
+        $smsProvider
             ->sendVerificationSms($to)
             ->shouldBeCalledOnce()
             ->willReturn(null)
@@ -67,7 +70,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $payload['errorCode']->shouldBe(null);
     }
 
-    public function it_should_return_phone_already_confirmed_error_code(User $viewer, Arg $input)
+    public function it_should_return_phone_already_confirmed_error_code(User $viewer, Arg $input): void
     {
         $viewer->isPhoneConfirmed()->willReturn(true);
         $payload = $this->__invoke($input, $viewer);
@@ -80,7 +83,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         UserPhoneVerificationSms $sms,
         UserPhoneVerificationSms $sms2
-    ) {
+    ): void {
         $viewer->isPhoneConfirmed()->willReturn(false);
 
         $smsList = [$sms, $sms2];
@@ -95,12 +98,12 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
     }
 
     public function it_should_return_twilio_api_error_error_code(
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         Arg $input,
         User $viewer,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         UserPhoneVerificationSms $sms
-    ) {
+    ): void {
         $to = '+3333333';
         $viewer
             ->isPhoneConfirmed()
@@ -120,49 +123,33 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
             ->willReturn($smsList)
         ;
 
-        $twilioHelper
+        $smsProvider
             ->sendVerificationSms($to)
             ->shouldBeCalledOnce()
-            ->willReturn(TwilioHelper::TWILIO_API_ERROR)
+            ->willReturn(TwilioSmsProvider::TWILIO_API_ERROR)
         ;
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioHelper::TWILIO_API_ERROR);
+        $payload['errorCode']->shouldBe(TwilioSmsProvider::TWILIO_API_ERROR);
     }
 
     public function it_should_return_invalid_number_error_code(
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         Arg $input,
         User $viewer,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
         UserPhoneVerificationSms $sms
-    ) {
+    ): void {
         $to = '+3333333';
-        $viewer
-            ->isPhoneConfirmed()
-            ->shouldBeCalledOnce()
-            ->willReturn(false)
-        ;
-        $viewer
-            ->getPhone()
-            ->shouldBeCalledOnce()
-            ->willReturn($to)
-        ;
+        $viewer->isPhoneConfirmed()->shouldBeCalledOnce()->willReturn(false);
 
-        $smsList = [$sms];
-        $userPhoneVerificationSmsRepository
-            ->findByUserWithinOneMinuteRange($viewer)
-            ->shouldBeCalledOnce()
-            ->willReturn($smsList)
-        ;
+        $viewer->getPhone()->shouldBeCalledOnce()->willReturn($to);
 
-        $twilioHelper
-            ->sendVerificationSms($to)
-            ->shouldBeCalledOnce()
-            ->willReturn(TwilioHelper::INVALID_NUMBER)
-        ;
+        $userPhoneVerificationSmsRepository->findByUserWithinOneMinuteRange($viewer)->shouldBeCalledOnce()->willReturn([$sms]);
+
+        $smsProvider->sendVerificationSms($to)->shouldBeCalledOnce()->willReturn(TwilioSmsProvider::INVALID_NUMBER);
 
         $payload = $this->__invoke($input, $viewer);
-        $payload['errorCode']->shouldBe(TwilioHelper::INVALID_NUMBER);
+        $payload['errorCode']->shouldBe(TwilioSmsProvider::INVALID_NUMBER);
     }
 }

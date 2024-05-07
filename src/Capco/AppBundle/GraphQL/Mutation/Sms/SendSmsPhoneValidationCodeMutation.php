@@ -3,8 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -20,16 +21,16 @@ class SendSmsPhoneValidationCodeMutation implements MutationInterface
     private const RETRY_PER_MINUTE = 2;
 
     private EntityManagerInterface $em;
-    private TwilioHelper $twilioHelper;
+    private SmsProviderInterface $smsProvider;
     private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
 
     public function __construct(
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
         UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
     ) {
         $this->em = $em;
-        $this->twilioHelper = $twilioHelper;
+        $this->smsProvider = $smsProviderFactory->fetch();
         $this->userPhoneVerificationSmsRepository = $userPhoneVerificationSmsRepository;
     }
 
@@ -44,9 +45,9 @@ class SendSmsPhoneValidationCodeMutation implements MutationInterface
             return ['errorCode' => self::RETRY_LIMIT_REACHED];
         }
 
-        $to = $viewer->getPhone();
+        $recipientNumber = $viewer->getPhone();
 
-        $sendVerificationSmsErrorCode = $this->twilioHelper->sendVerificationSms($to);
+        $sendVerificationSmsErrorCode = $this->smsProvider->sendVerificationSms($recipientNumber);
         if ($sendVerificationSmsErrorCode) {
             return ['errorCode' => $sendVerificationSmsErrorCode];
         }

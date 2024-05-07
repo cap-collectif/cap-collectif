@@ -3,8 +3,9 @@
 namespace Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Enum\UserPhoneErrors;
+use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 
-class TwilioHelper
+class TwilioSmsProvider implements SmsProviderInterface
 {
     public const INVALID_NUMBER = 'INVALID_NUMBER';
     public const CODE_EXPIRED = 'CODE_EXPIRED';

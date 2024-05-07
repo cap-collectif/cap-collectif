@@ -6,9 +6,10 @@ use Capco\AppBundle\Entity\AnonymousUserProposalSmsVote;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Enum\UserPhoneErrors;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsProposalVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\TwilioSmsProvider;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
@@ -25,14 +26,16 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
     use GraphQLMock;
 
     public function let(
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
+        TwilioSmsProvider $smsProvider,
         ValidatorInterface $validator,
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    ) {
+    ): void {
+        $smsProviderFactory->fetch()->willReturn($smsProvider);
         $this->beConstructedWith(
-            $twilioHelper,
+            $smsProviderFactory,
             $validator,
             $em,
             $globalIdResolver,
@@ -40,7 +43,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         );
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(SendSmsProposalVoteMutation::class);
     }
@@ -51,10 +54,10 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         Proposal $proposal,
         CollectStep $step,
         ValidatorInterface $validator,
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         EntityManagerInterface $em,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    ) {
+    ): void {
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -97,7 +100,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
             ->willReturn([])
         ;
 
-        $twilioHelper
+        $smsProvider
             ->sendVerificationSms($phone)
             ->shouldBeCalledOnce()
             ->willReturn(null)
@@ -118,7 +121,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         CollectStep $step,
         ValidatorInterface $validator,
         ConstraintViolation $violation
-    ) {
+    ): void {
         $phone = '+33675492871';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -175,7 +178,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         CollectStep $step,
         ValidatorInterface $validator,
         ConstraintViolation $violation
-    ) {
+    ): void {
         $phone = '+331332';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -234,7 +237,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository,
         AnonymousUserProposalSmsVote $anonymousUserProposalSmsVote1,
         AnonymousUserProposalSmsVote $anonymousUserProposalSmsVote2
-    ) {
+    ): void {
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -288,9 +291,9 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         Proposal $proposal,
         CollectStep $step,
         ValidatorInterface $validator,
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    ) {
+    ): void {
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -333,7 +336,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
             ->willReturn([])
         ;
 
-        $twilioHelper
+        $smsProvider
             ->sendVerificationSms($phone)
             ->shouldBeCalledOnce()
             ->willReturn(UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER)
@@ -350,9 +353,9 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         Proposal $proposal,
         CollectStep $step,
         ValidatorInterface $validator,
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    ) {
+    ): void {
         $phone = '+33695868423';
         $stepId = 'stepId';
         $proposalId = 'proposalId';
@@ -395,14 +398,14 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
             ->willReturn([])
         ;
 
-        $twilioHelper
+        $smsProvider
             ->sendVerificationSms($phone)
             ->shouldBeCalledOnce()
-            ->willReturn(TwilioHelper::INVALID_NUMBER)
+            ->willReturn(TwilioSmsProvider::INVALID_NUMBER)
         ;
 
         $this->__invoke($input)->shouldReturn([
-            'errorCode' => TwilioHelper::INVALID_NUMBER,
+            'errorCode' => TwilioSmsProvider::INVALID_NUMBER,
         ]);
     }
 }

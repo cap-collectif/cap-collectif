@@ -6,9 +6,10 @@ use Capco\AppBundle\Entity\AnonymousUserProposalSmsVote;
 use Capco\AppBundle\Entity\PhoneToken;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Mutation\Sms\VerifySmsVotePhoneNumberMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\TwilioSmsProvider;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
@@ -29,15 +30,17 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
 
     public function let(
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
+        TwilioSmsProvider $smsProvider,
         GlobalIdResolver $globalIdResolver,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository,
         TokenGenerator $tokenGenerator,
         PhoneTokenRepository $phoneTokenRepository
-    ) {
+    ): void {
+        $smsProviderFactory->fetch()->willReturn($smsProvider);
         $this->beConstructedWith(
             $em,
-            $twilioHelper,
+            $smsProviderFactory,
             $globalIdResolver,
             $anonymousUserProposalSmsVoteRepository,
             $tokenGenerator,
@@ -45,7 +48,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         );
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(VerifySmsVotePhoneNumberMutation::class);
     }
@@ -53,7 +56,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
     public function it_should_verify_the_sms_successfuly(
         Arg $input,
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         CollectStep $step,
@@ -62,7 +65,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
         TokenGenerator $tokenGenerator,
         PhoneTokenRepository $phoneTokenRepository,
         PhoneToken $phoneToken
-    ) {
+    ): void {
         $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
@@ -96,7 +99,7 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
             ->willReturn($step)
         ;
 
-        $twilioHelper->verifySms($this->phone, $this->code)->willReturn(null);
+        $smsProvider->verifySms($this->phone, $this->code)->willReturn(null);
 
         $anonymousUserProposalSmsVoteRepository
             ->findMostRecentSmsByCollectStep($this->phone, $proposal, $step)
@@ -121,12 +124,11 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
 
     public function it_should_return_CODE_EXPIRED(
         Arg $input,
-        EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         CollectStep $step
-    ) {
+    ): void {
         $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
@@ -160,21 +162,20 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
             ->willReturn($step)
         ;
 
-        $twilioHelper->verifySms($this->phone, $this->code)->willReturn(TwilioHelper::CODE_EXPIRED);
+        $smsProvider->verifySms($this->phone, $this->code)->willReturn(TwilioSmsProvider::CODE_EXPIRED);
 
         $this->__invoke($input)->shouldReturn([
-            'errorCode' => TwilioHelper::CODE_EXPIRED,
+            'errorCode' => TwilioSmsProvider::CODE_EXPIRED,
         ]);
     }
 
     public function it_should_return_CODE_NOT_VALID(
         Arg $input,
-        EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         CollectStep $step
-    ) {
+    ): void {
         $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
@@ -208,24 +209,23 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
             ->willReturn($step)
         ;
 
-        $twilioHelper
+        $smsProvider
             ->verifySms($this->phone, $this->code)
-            ->willReturn(TwilioHelper::CODE_NOT_VALID)
+            ->willReturn(TwilioSmsProvider::CODE_NOT_VALID)
         ;
 
         $this->__invoke($input)->shouldReturn([
-            'errorCode' => TwilioHelper::CODE_NOT_VALID,
+            'errorCode' => TwilioSmsProvider::CODE_NOT_VALID,
         ]);
     }
 
     public function it_should_return_TWILIO_API_ERROR(
         Arg $input,
-        EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        TwilioSmsProvider $smsProvider,
         GlobalIdResolver $globalIdResolver,
         Proposal $proposal,
         CollectStep $step
-    ) {
+    ): void {
         $this->getMockedGraphQLArgumentFormatted($input);
         $input
             ->offsetGet('code')
@@ -259,13 +259,13 @@ class VerifySmsVotePhoneNumberMutationSpec extends ObjectBehavior
             ->willReturn($step)
         ;
 
-        $twilioHelper
+        $smsProvider
             ->verifySms($this->phone, $this->code)
-            ->willReturn(TwilioHelper::TWILIO_API_ERROR)
+            ->willReturn(TwilioSmsProvider::TWILIO_API_ERROR)
         ;
 
         $this->__invoke($input)->shouldReturn([
-            'errorCode' => TwilioHelper::TWILIO_API_ERROR,
+            'errorCode' => TwilioSmsProvider::TWILIO_API_ERROR,
         ]);
     }
 }

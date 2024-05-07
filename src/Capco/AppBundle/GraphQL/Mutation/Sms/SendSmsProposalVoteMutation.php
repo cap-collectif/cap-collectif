@@ -7,9 +7,10 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Validator\Constraints\CheckPhoneNumber;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,20 +26,20 @@ class SendSmsProposalVoteMutation implements MutationInterface
     public const RETRY_LIMIT_REACHED = 'RETRY_LIMIT_REACHED';
     private const RETRY_PER_MINUTE = 2;
 
-    private TwilioHelper $twilioHelper;
+    private SmsProviderInterface $smsProvider;
     private ValidatorInterface $validator;
     private EntityManagerInterface $em;
     private GlobalIdResolver $globalIdResolver;
     private AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
 
     public function __construct(
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
         ValidatorInterface $validator,
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
     ) {
-        $this->twilioHelper = $twilioHelper;
+        $this->smsProvider = $smsProviderFactory->fetch();
         $this->validator = $validator;
         $this->em = $em;
         $this->globalIdResolver = $globalIdResolver;
@@ -56,7 +57,7 @@ class SendSmsProposalVoteMutation implements MutationInterface
         $step = $this->globalIdResolver->resolve($stepId, null);
 
         $violations = $this->validator->validate($phone, new CheckPhoneNumber());
-        /** * @var ConstraintViolation $violation  */
+        /** * @var ConstraintViolation $violation */
         foreach ($violations as $violation) {
             return ['errorCode' => $violation->getMessage()];
         }
@@ -65,7 +66,7 @@ class SendSmsProposalVoteMutation implements MutationInterface
             return ['errorCode' => self::RETRY_LIMIT_REACHED];
         }
 
-        $sendVerificationSmsErrorCode = $this->twilioHelper->sendVerificationSms($phone);
+        $sendVerificationSmsErrorCode = $this->smsProvider->sendVerificationSms($phone);
         if ($sendVerificationSmsErrorCode) {
             return ['errorCode' => $sendVerificationSmsErrorCode];
         }

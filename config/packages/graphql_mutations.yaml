@@ -75,7 +75,6 @@ services:
                   method: 'setEvaluationForm',
               }
 
-
     Capco\AppBundle\GraphQL\Mutation\GroupMutation:
         tags:
             - { name: overblog_graphql.mutation, alias: 'createGroup', method: 'create' }

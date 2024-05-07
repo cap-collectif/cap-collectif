@@ -5,9 +5,10 @@ namespace Capco\AppBundle\GraphQL\Mutation\Sms;
 use Capco\AppBundle\Entity\PhoneToken;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Helper\TwilioHelper;
+use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -22,7 +23,7 @@ class VerifySmsVotePhoneNumberMutation implements MutationInterface
     public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
     private EntityManagerInterface $em;
-    private TwilioHelper $twilioHelper;
+    private SmsProviderInterface $smsProvider;
     private AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
     private GlobalIdResolver $globalIdResolver;
     private TokenGenerator $tokenGenerator;
@@ -30,14 +31,14 @@ class VerifySmsVotePhoneNumberMutation implements MutationInterface
 
     public function __construct(
         EntityManagerInterface $em,
-        TwilioHelper $twilioHelper,
+        SmsProviderFetcher $smsProviderFactory,
         GlobalIdResolver $globalIdResolver,
         AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository,
         TokenGenerator $tokenGenerator,
         PhoneTokenRepository $phoneTokenRepository
     ) {
         $this->em = $em;
-        $this->twilioHelper = $twilioHelper;
+        $this->smsProvider = $smsProviderFactory->fetch();
         $this->anonymousUserProposalSmsVoteRepository = $anonymousUserProposalSmsVoteRepository;
         $this->globalIdResolver = $globalIdResolver;
         $this->tokenGenerator = $tokenGenerator;
@@ -55,7 +56,7 @@ class VerifySmsVotePhoneNumberMutation implements MutationInterface
         $proposal = $this->globalIdResolver->resolve($proposalId, null);
         $step = $this->globalIdResolver->resolve($stepId, null);
 
-        $verifyErrorCode = $this->twilioHelper->verifySms($phone, $code);
+        $verifyErrorCode = $this->smsProvider->verifySms($phone, $code);
         if ($verifyErrorCode) {
             return ['errorCode' => $verifyErrorCode];
         }
