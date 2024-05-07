@@ -1,44 +1,141 @@
 import { Flex } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useLocation } from 'react-router-dom'
-import ProjectStepHeader, { BACKGROUND_COLOR } from './ProjectStepHeader'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import VoteStepPageWebLayout from './VoteStepPageWebLayout'
 import VoteStepPageMobileLayout from './VoteStepPageMobileLayout'
 import { VoteStepContextProvider } from '~/components/VoteStep/Context/VoteStepContext'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 import TabletScreenTooSmall from './TabletScreenTooSmall'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import { VoteStepPageQuery } from '~relay/VoteStepPageQuery.graphql'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import ProposalStepPage from '~/components/Page/ProposalStepPage'
+import { ProjectTrash } from '~/startup/ProjectStepPageAppTrash'
+import VoteStepPageDescription from './VoteStepPageDescription'
+import CookieMonster from '~/CookieMonster'
+
 type Props = {
-  readonly stepId: string
-  readonly projectId: string
-  readonly isMapView: boolean
+  stepId: string
+  projectId: string
+  isMapView: boolean
+  showTrash: boolean
+  projectSlug: string
 }
-export const VoteStepPage = ({ stepId, isMapView }: Props) => {
-  const new_vote_step = useFeatureFlag('new_vote_step')
+
+const QUERY = graphql`
+  query VoteStepPageQuery($stepId: ID!, $token: String) {
+    ...VoteStepPageWebLayout_query @arguments(stepId: $stepId)
+    ...VoteStepPageMobileLayout_query @arguments(stepId: $stepId)
+    step: node(id: $stepId) {
+      ... on ProposalStep {
+        __typename
+        voteType
+        voteThreshold
+        budget
+        form {
+          objectType
+          contribuable
+          isMapViewEnabled
+        }
+        body
+        viewerVotes(token: $token) {
+          totalCount
+          edges {
+            node {
+              ... on ProposalUserVote {
+                anonymous
+              }
+            }
+          }
+        }
+        project {
+          firstCollectStep {
+            form {
+              isMapViewEnabled
+            }
+          }
+        }
+        kind
+        title
+        timeRange {
+          startAt
+          endAt
+        }
+      }
+    }
+  }
+`
+
+export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Props) => {
   const isMobile = useIsMobile()
   const { width } = useWindowWidth()
-  const { state } = useLocation()
-  const isTabletScreenTooSmall = width > 767 && width < 1024
-  const step = state?.stepId || stepId
+  const { state } = useLocation<{ stepId?: string }>()
+  const isTabletScreenTooSmall = width > 767 && width < 1133
+  const step: string = state?.stepId || stepId
+  const data = useLazyLoadQuery<VoteStepPageQuery>(QUERY, {
+    stepId: step,
+    token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
+  })
+
+  const hasMapView =
+    data.step.__typename === 'CollectStep'
+      ? data.step.form?.isMapViewEnabled
+      : data.step?.project?.firstCollectStep?.form?.isMapViewEnabled
+
+  const forceOldView = data.step.form.objectType !== 'PROPOSAL' || !!data.step.voteThreshold || data.step.budget
+
+  const isParticipationAnonymous =
+    !data.step.viewerVotes.totalCount ||
+    data.step.viewerVotes?.edges.filter(e => !!e?.node).every(({ node }) => !!node.anonymous)
+
   React.useEffect(() => {
     const html = document.querySelector('html')
-    if (html) html.classList.remove('has-vote-widget')
-  }, [])
-  if (!new_vote_step) return null // Just to be sure
+    if (html && !forceOldView) html.classList.remove('has-vote-widget')
+    else if (html) html.classList.add('has-vote-widget')
+  }, [step, forceOldView])
+
+  // For now, we don't handle vote threshold and other step types
+  if (forceOldView) {
+    return (
+      <>
+        <section className="section--alt">
+          <div className="container">
+            {/** @ts-ignore TODO: typescript on redux connect */}
+            <ProposalStepPage stepId={step} projectId={step} />
+          </div>
+        </section>
+        <ProjectTrash projectSlug={projectSlug} showTrash={showTrash} unstable__enableCapcoUiDs />
+      </>
+    )
+  }
 
   return (
     <>
       {isTabletScreenTooSmall ? <TabletScreenTooSmall /> : null}
-      <VoteStepContextProvider isMapView={isMapView}>
-        <Flex direction="column" position="relative">
-          <React.Suspense fallback={<Flex bg={BACKGROUND_COLOR} width="100%" p={8} />}>
-            <ProjectStepHeader stepId={step} />
-          </React.Suspense>
+      <VoteStepContextProvider
+        hasMapView={hasMapView}
+        isMapView={hasMapView && isMapView}
+        isParticipationAnonymous={isParticipationAnonymous}
+      >
+        <Flex
+          direction="column"
+          position="relative"
+          mt={6}
+          alignItems="center"
+          bg="neutral-gray.100"
+          id={`vote-step-page-${step}`}
+        >
           {isMobile ? (
-            <VoteStepPageMobileLayout stepId={step} isMapView={isMapView} />
+            <VoteStepPageMobileLayout stepId={step} isMapView={isMapView} query={data} />
           ) : (
-            <VoteStepPageWebLayout stepId={step} isMapView={isMapView} />
+            <>
+              <VoteStepPageDescription
+                title={data.step.title}
+                body={data.step.body as string}
+                timeRange={data.step.timeRange}
+              />
+              <VoteStepPageWebLayout stepId={step} isMapView={isMapView} query={data} />
+            </>
           )}
         </Flex>
       </VoteStepContextProvider>

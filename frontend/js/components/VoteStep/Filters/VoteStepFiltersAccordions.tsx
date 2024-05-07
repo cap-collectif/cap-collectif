@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Accordion, Flex, Text } from '@cap-collectif/ui'
+import { Accordion, CapUIAccordionColor, CapUIAccordionSize, Flex, Text } from '@cap-collectif/ui'
 import VoteStepFilterRadioGroup from '~/components/VoteStep/Filters/VoteStepFilterRadioGroup'
 import VoteStepFilterButtons from '~/components/VoteStep/Filters/VoteStepFilterButtons'
 import type { Filters } from './useVoteStepFilters'
@@ -14,10 +14,15 @@ type Props = {
 const VoteStepFiltersAccordions = ({ filters, isMobile }: Props) => {
   return (
     <Flex direction="column" spacing={4}>
-      {Object.keys(filters).map((filterName, idx) => {
+      {Object.keys(filters).map(filterName => {
         const config = filters[filterName]
         return config.isEnabled ? (
-          <Accordion key={filterName} size="sm" color="transparent" defaultAccordion={!idx ? filterName : null}>
+          <Accordion
+            key={filterName}
+            size={CapUIAccordionSize.Sm}
+            color={CapUIAccordionColor.Transparent}
+            defaultAccordion={null}
+          >
             <Accordion.Item
               id={filterName}
               sx={{

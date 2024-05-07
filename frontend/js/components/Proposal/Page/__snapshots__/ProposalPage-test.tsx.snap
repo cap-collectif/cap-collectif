@@ -3192,6 +3192,19 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "alias": "paper",
+                  "args": Array [
+                    Object {
+                      "kind": "Variable",
+                      "name": "stepId",
+                      "variableName": "stepId",
+                    },
+                  ],
+                  "kind": "ScalarField",
+                  "name": "paperVotesTotalCount",
+                  "storageKey": null,
+                },
+                Object {
                   "alias": null,
                   "args": null,
                   "concreteType": "User",
@@ -8368,6 +8381,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "budget",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "votesHelpText",
                           "storageKey": null,
                         },
@@ -8397,13 +8417,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "publishedVoteDate",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "budget",
                           "storageKey": null,
                         },
                         Object {
@@ -8831,7 +8844,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "17ae3bad093c409e65cadeb59e62877e",
+          "cacheID": "6c2da460ad8d7eca9688de19cb04dc8f",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -11136,6 +11149,10 @@ fragment ProposalVoteBasketWidget_viewer_2r3fA4 on User {
 fragment ProposalVoteButtonWrapperFragment_proposal_Q37Wz on Proposal {
   id
   estimation
+  votes(stepId: $stepId, first: 0) {
+    totalCount
+  }
+  paper: paperVotesTotalCount(stepId: $stepId)
   viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
   project {
     type {
@@ -11156,6 +11173,7 @@ fragment ProposalVoteButtonWrapperFragment_step_3Q7IHq on ProposalStep {
   id
   votesLimit
   voteType
+  budget
   open
   isProposalSmsVoteEnabled
   viewerVotes(orderBy: {field: POSITION, direction: ASC}, token: $token) {
@@ -11200,6 +11218,10 @@ fragment ProposalVoteButton_proposal_Q37Wz on Proposal {
     id
     ranking
     ...UnpublishedTooltip_publishable
+  }
+  paper: paperVotesTotalCount(stepId: $stepId)
+  votes(stepId: $stepId, first: 0) {
+    totalCount
   }
 }
 

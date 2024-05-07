@@ -2,17 +2,17 @@ import styled from 'styled-components'
 
 export const MapContainer = styled.div`
   position: sticky;
-  top: 0;
+  top: 51px;
 
   .marker-cluster-small,
   .marker-cluster-medium,
   .marker-cluster-large {
-    background: rgba(62, 51, 97, 0.3);
+    background: rgba(69, 69, 69, 0.3);
   }
   .marker-cluster-small div,
   .marker-cluster-medium div,
   .marker-cluster-large div {
-    background: #3e3361;
+    background: #454545;
   }
 
   .location-circle circle {
@@ -28,6 +28,14 @@ export const MapContainer = styled.div`
       transform: scale(2, 2);
       opacity: 0;
     }
+  }
+
+  .preview-icn svg {
+    height: 30px !important;
+    width: 30px !important;
+    max-height: none !important;
+    max-width: none !important;
+    padding: 0 !important;
   }
 
   .preview-icn svg:nth-child(2) {

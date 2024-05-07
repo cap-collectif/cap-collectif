@@ -6,6 +6,9 @@ import type { MapCenterObject } from '~/components/Proposal/Map/Map.types'
 import { useVoteStepContext } from '../Context/VoteStepContext'
 import { getOrderByArgs, parseLatLngBounds } from '../utils'
 import useIsMobile from '~/utils/hooks/useIsMobile'
+import { useSelector } from 'react-redux'
+import { State } from '~/types'
+
 const QUERY = graphql`
   query VoteStepMapQueryQuery(
     $stepId: ID!
@@ -19,9 +22,13 @@ const QUERY = graphql`
     $status: ID
     $geoBoundingBox: GeoBoundingBox
     $term: String
+    $isAuthenticated: Boolean!
   ) {
+    viewer @include(if: $isAuthenticated) {
+      ...VoteStepMap_viewer @arguments(stepId: $stepId)
+    }
     voteStep: node(id: $stepId) {
-      ... on SelectionStep {
+      ... on ProposalStep {
         open
         form {
           mapCenter {
@@ -42,19 +49,25 @@ const QUERY = graphql`
             status: $status
             geoBoundingBox: $geoBoundingBox
             term: $term
+            isAuthenticated: $isAuthenticated
+            stepId: $stepId
           )
       }
     }
   }
 `
+
 type Props = {
   readonly stepId: string
   readonly handleMapPositionChange: (arg0: string) => void
   readonly urlCenter: MapCenterObject | null
 }
+
 export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }: Props) => {
   const { filters } = useVoteStepContext()
   const isMobile = useIsMobile()
+  const isAuthenticated = useSelector((state: State) => state.user.user !== null)
+
   const { sort, userType, theme, category, district, status, term, latlngBounds } = filters
   const geoBoundingBox = !isMobile && latlngBounds ? parseLatLngBounds(latlngBounds) : null
   const data = useLazyLoadQuery<VoteStepMapQueryQueryType>(
@@ -76,6 +89,7 @@ export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }:
       status: status || null,
       geoBoundingBox,
       term: term || null,
+      isAuthenticated,
     },
     {
       fetchPolicy: 'store-and-network',
@@ -91,6 +105,7 @@ export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }:
   return (
     <VoteStepMap
       voteStep={voteStep}
+      viewer={data.viewer}
       handleMapPositionChange={handleMapPositionChange}
       urlCenter={urlCenter}
       DEFAULT_CENTER={DEFAULT_CENTER}

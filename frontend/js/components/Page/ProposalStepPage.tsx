@@ -296,7 +296,6 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
 }
 
 const mapStateToProps = (state: State) => {
-
   const urlSearch = new URLSearchParams(window.location.search)
   const filters = Object.entries(state.proposal.filters).reduce((acc, [key, value]) => {
     if (urlSearch.get(key)) {
@@ -304,8 +303,8 @@ const mapStateToProps = (state: State) => {
     } else {
       acc[key] = value
     }
-    return acc;
-  }, {});
+    return acc
+  }, {})
 
   return {
     isAuthenticated: state.user.user !== null,

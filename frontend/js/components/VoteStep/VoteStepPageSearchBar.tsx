@@ -1,5 +1,5 @@
-import * as React from 'react'
 import { Search } from '@cap-collectif/ui'
+import * as React from 'react'
 import { useIntl } from 'react-intl'
 import debounce from '~/utils/debounce-promise'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
@@ -15,6 +15,7 @@ const VoteStepPageSearchBar = () => {
       width="100%"
       onChange={onTermChange}
       value={term}
+      autoFocus
       placeholder={intl.formatMessage({
         id: 'vote.step.search',
       })}

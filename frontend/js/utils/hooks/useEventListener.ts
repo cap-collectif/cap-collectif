@@ -1,6 +1,10 @@
 import { useEffect, useRef } from 'react'
 
-export const useEventListener = (eventName: string, handler: (e: Event) => void, element: any = window): void => {
+export const useEventListener = (
+  eventName: string,
+  handler: (e: MessageEvent) => void,
+  element: any = window,
+): void => {
   const savedHandler: any = useRef()
   useEffect(() => {
     savedHandler.current = handler

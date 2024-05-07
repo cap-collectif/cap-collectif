@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl'
 import ResetCss from '~/utils/ResetCss'
 import VoteStepFiltersAccordions from '~/components/VoteStep/Filters/VoteStepFiltersAccordions'
 import useVoteStepFilters from '~/components/VoteStep/Filters/useVoteStepFilters'
-import { ACTIVE_COLOR } from '../utils'
 import VoteStepPageSearchBar from '~/components/VoteStep/VoteStepPageSearchBar'
 import VoteStepFilterSearchBar from '~/components/VoteStep/Filters/VoteStepFilterSearchBar'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
@@ -23,7 +22,7 @@ const SaveButton = ({ children, onClick }) => {
       width="70%"
       maxWidth="240px"
       fontWeight={600}
-      bg={ACTIVE_COLOR}
+      bg="primary.500"
       color="white"
       border="none"
       fontSize={3}
@@ -46,7 +45,7 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
   const { filters } = voteStepFilters
   return (
     <Box
-      bg="#F7FAFB"
+      bg="primary.100"
       height="100%"
       minHeight="100vh"
       py={10}
@@ -58,7 +57,7 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
       overflow="scroll"
     >
       <Flex justifyContent="space-between" mb={5}>
-        <Text color={ACTIVE_COLOR} fontWeight={700} fontSize={5}>
+        <Text color="primary.500" fontWeight={700} fontSize={5}>
           {intl.formatMessage({
             id: 'filter-the-projects',
           })}
@@ -70,7 +69,7 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
         </ResetCss>
       </Flex>
       {view === 'map' && <VoteStepFilterSearchBar />}
-      {view === 'list' && (
+      {view !== 'map' && (
         <Box mb={4}>
           <VoteStepPageSearchBar />
         </Box>

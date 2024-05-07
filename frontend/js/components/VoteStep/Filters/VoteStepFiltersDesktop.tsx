@@ -3,12 +3,15 @@ import { Box, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import VoteStepFiltersAccordions from '~/components/VoteStep/Filters/VoteStepFiltersAccordions'
 import useVoteStepFilters from '~/components/VoteStep/Filters/useVoteStepFilters'
+import VoteInfoPanel from './VoteInfoPanel/VoteInfoPanel'
+import ProposalDrafts from './ProposalDrafts'
 
 type Props = {
   stepId: string
+  isCollectStep?: boolean
 }
 
-const VoteStepFiltersDesktop = ({ stepId }: Props) => {
+const VoteStepFiltersDesktop = ({ stepId, isCollectStep = false }: Props) => {
   const intl = useIntl()
   const voteStepFilters = useVoteStepFilters(stepId)
 
@@ -17,24 +20,18 @@ const VoteStepFiltersDesktop = ({ stepId }: Props) => {
   }
 
   const { totalCount, filters } = voteStepFilters
+
   return (
-    <Box width="100%" minHeight="100vh" p={8} color="neutral-gray.900">
-      <Text fontSize={4} mb={6} as="div">
+    <Box width="100%" minHeight="100vh" py={8} pr={2} pl={8} color="neutral-gray.900" position="sticky" top="50px">
+      <VoteInfoPanel stepId={stepId} />
+      {isCollectStep ? <ProposalDrafts stepId={stepId} /> : null}
+      <Text fontSize={4} mb={6} as="div" mt={8}>
         {intl.formatMessage(
           {
             id: 'filter-the-n-projects',
           },
           {
-            n: (
-              <strong
-                key={totalCount}
-                style={{
-                  color: '#CE237F',
-                }}
-              >
-                {totalCount}
-              </strong>
-            ),
+            n: totalCount,
           },
         )}
       </Text>

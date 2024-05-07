@@ -1,10 +1,11 @@
 import * as React from 'react'
 import InfiniteScroll from 'react-infinite-scroller'
-import { Box, Flex, Spinner } from '@cap-collectif/ui'
+import { Box, Flex, Spinner, CapUIIconSize } from '@cap-collectif/ui'
 import { AnimatePresence, m as motion } from 'framer-motion'
 import { useLazyLoadQuery, graphql, usePaginationFragment, fetchQuery, commitLocalUpdate } from 'react-relay'
 import { ConnectionHandler } from 'relay-runtime'
 import type { ProposalsListQuery as ProposalsListQueryType } from '~relay/ProposalsListQuery.graphql'
+import type { ProposalsList_step$key } from '~relay/ProposalsList_step.graphql'
 import ProposalPreviewCard from './ProposalPreviewCard'
 import { useEventListener } from '~/utils/hooks/useEventListener'
 import useIsMobile from '~/utils/hooks/useIsMobile'
@@ -12,6 +13,10 @@ import environment from '~/createRelayEnvironment'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import { DELAY_BEFORE_PROPOSAL_REMOVAL, VoteStepEvent, getOrderByArgs, View, parseLatLngBounds } from '../utils'
 import EmptyList from './EmptyList'
+import { useSelector } from 'react-redux'
+import { State } from '~/types'
+import CookieMonster from '~/CookieMonster'
+
 const QUERY = graphql`
   query ProposalsListQuery(
     $stepId: ID!
@@ -25,10 +30,13 @@ const QUERY = graphql`
     $status: ID
     $geoBoundingBox: GeoBoundingBox
     $term: String
+    $isAuthenticated: Boolean!
+    $token: String
   ) {
     voteStep: node(id: $stepId) {
-      ... on SelectionStep {
+      ... on ProposalStep {
         open
+        ...ProposalPreviewCard_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
         ...ProposalsList_step
           @arguments(
             count: $count
@@ -42,13 +50,18 @@ const QUERY = graphql`
             geoBoundingBox: $geoBoundingBox
             term: $term
             stepId: $stepId
+            isAuthenticated: $isAuthenticated
           )
       }
     }
+    viewer @include(if: $isAuthenticated) {
+      ...ProposalPreviewCard_viewer @arguments(stepId: $stepId)
+    }
   }
 `
+
 const FRAGMENT = graphql`
-  fragment ProposalsList_step on SelectionStep
+  fragment ProposalsList_step on ProposalStep
   @argumentDefinitions(
     count: { type: "Int!" }
     cursor: { type: "String" }
@@ -61,6 +74,7 @@ const FRAGMENT = graphql`
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
     stepId: { type: "ID!" }
+    isAuthenticated: { type: "Boolean!" }
   )
   @refetchable(queryName: "ProposalsListPaginationQuery") {
     proposals(
@@ -72,7 +86,6 @@ const FRAGMENT = graphql`
       category: $category
       district: $district
       status: $status
-      excludeViewerVotes: true
       geoBoundingBox: $geoBoundingBox
       term: $term
     ) @connection(key: "ProposalsList_proposals", filters: []) {
@@ -80,58 +93,67 @@ const FRAGMENT = graphql`
       edges {
         node {
           id
-          ...ProposalPreviewCard_proposal @arguments(stepId: $stepId)
+          ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
         }
       }
     }
+    proposalsCount: proposals {
+      totalCount
+    }
   }
 `
+
 const ADD_PROPOSAL_QUERY = graphql`
-  query ProposalsListAddProposalQuery($id: ID!, $stepId: ID!) {
+  query ProposalsListAddProposalQuery($id: ID!, $stepId: ID!, $isAuthenticated: Boolean!) {
     node(id: $id) {
       ... on Proposal {
         id
-        ...ProposalPreviewCard_proposal @arguments(stepId: $stepId)
+        ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
       }
     }
   }
 `
+
 type Props = {
-  readonly stepId: string
-  readonly showImages: boolean
+  stepId: string
+  showImages: boolean
 }
+
 export const List = ({
   hasNext,
   children,
   id,
-  loadCount,
+  loadCount = 0,
   loadNext,
 }: {
-  readonly hasNext: boolean
-  readonly children: JSX.Element | JSX.Element[] | string
-  loadCount: number
+  hasNext?: boolean
+  children: JSX.Element | JSX.Element[] | string
+  loadCount?: number
   id: string
-  loadNext: (arg0: number) => {}
+  loadNext?: (arg0: number) => {}
 }) => {
   const isMobile = useIsMobile()
   return (
     <Box
       maxHeight={['100%', 'unset']}
       overflowY={['scroll', 'hidden']}
-      pt={['7rem', 0]}
-      px={[4, 8]}
+      pt={0}
       pb={[8, '']}
       id={id}
+      pr={[4, 4, 8]}
+      pl={[4, 2, 6]}
     >
       <InfiniteScroll
         key="infinite-scroll-proposals"
         initialLoad={false}
         pageStart={0}
-        loadMore={() => loadNext(loadCount)}
+        loadMore={() => {
+          if (loadNext) loadNext(loadCount)
+        }}
         hasMore={hasNext}
         loader={
           <Flex direction="row" justify="center" key={0}>
-            <Spinner size="m" />
+            <Spinner size={CapUIIconSize.Md} />
           </Flex>
         }
         useWindow={!isMobile}
@@ -141,13 +163,16 @@ export const List = ({
     </Box>
   )
 }
+
 export const ProposalsList = ({ stepId, showImages }: Props) => {
   const isMobile = useIsMobile()
+  const isAuthenticated = useSelector((state: State) => state.user.user !== null)
   const [animateCard, setAnimateCard] = React.useState(false)
   const LOAD_PROPOSAL_COUNT = isMobile ? 25 : 50
   const { filters, view } = useVoteStepContext()
   const { sort, userType, theme, category, district, status, term, latlngBounds } = filters
   const geoBoundingBox = !isMobile && latlngBounds && view === View.Map ? parseLatLngBounds(latlngBounds) : null
+
   const query = useLazyLoadQuery<ProposalsListQueryType>(
     QUERY,
     {
@@ -167,13 +192,18 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
       status: status || null,
       geoBoundingBox,
       term: term || null,
+      isAuthenticated,
+      token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
     },
     {
       fetchPolicy: 'network-only',
     },
   )
   const [hoveredProposalId, setHoveredProposalId] = React.useState(null)
-  const { data, loadNext, hasNext } = usePaginationFragment(FRAGMENT, query.voteStep)
+  const { data, loadNext, hasNext } = usePaginationFragment<ProposalsListQueryType, ProposalsList_step$key>(
+    FRAGMENT,
+    query.voteStep,
+  )
 
   const scrollTo = (proposalId: string) => {
     const hoveredProposalCard = document.getElementById(`proposal-${proposalId || ''}`)
@@ -181,7 +211,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
 
     if (hoveredProposalCard && proposalsList) {
       window.scrollTo({
-        top: hoveredProposalCard.offsetTop - 200,
+        top: hoveredProposalCard.offsetTop,
         behavior: 'smooth',
       })
       setHoveredProposalId(proposalId)
@@ -191,8 +221,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
     return false
   }
 
-  useEventListener(VoteStepEvent.ClickProposal, e => {
-    // @ts-expect-error Event type is too strict in flow
+  useEventListener(VoteStepEvent.ClickProposal, (e: MessageEvent) => {
     const proposalId = e?.data?.id
 
     if (!proposalId) {
@@ -203,11 +232,12 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
     if (!scrollTo(proposalId)) {
       const connectionName = data?.proposals?.__id || ''
       fetchQuery(
-        environment,
+        environment as any,
         ADD_PROPOSAL_QUERY,
         {
           id: proposalId,
           stepId,
+          isAuthenticated,
         },
         {
           fetchPolicy: 'store-or-network',
@@ -215,7 +245,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
       )
         .toPromise()
         .then(() => {
-          commitLocalUpdate(environment, store => {
+          commitLocalUpdate(environment as any, store => {
             const connectionRecord = store.get(connectionName)
             const newProposalRecord = store.get(proposalId)
 
@@ -228,15 +258,24 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
         })
     }
   })
+
   useEventListener(VoteStepEvent.AnimateCard, () => setAnimateCard(true))
   useEventListener(VoteStepEvent.AddVote, () => {
     setTimeout(() => setAnimateCard(false), DELAY_BEFORE_PROPOSAL_REMOVAL * 1000 * 2)
   })
+
   if (!data || !data.proposals) return null
   const proposals = data.proposals.edges?.map(edge => edge?.node).filter(Boolean)
-  if (!proposals.length) return <EmptyList />
+  if (!proposals.length)
+    return (
+      <List id="empty-list">
+        <EmptyList showMap={!showImages} noData={!data.proposalsCount.totalCount} />
+      </List>
+    )
+
   return (
     <List hasNext={hasNext} loadNext={loadNext} id="proposals-list" loadCount={LOAD_PROPOSAL_COUNT}>
+      {/** @ts-ignore MAJ framer-motion */}
       <AnimatePresence initial={false}>
         {proposals.map(proposal => (
           <motion.div
@@ -264,11 +303,13 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
           >
             <ProposalPreviewCard
               proposal={proposal}
+              viewer={query.viewer}
+              step={query.voteStep}
               showImage={showImages}
               isHighlighted={hoveredProposalId === proposal.id}
-              hasVoted={false}
               stepId={stepId}
               disabled={!query?.voteStep?.open}
+              fullSize={showImages}
             />
           </motion.div>
         ))}

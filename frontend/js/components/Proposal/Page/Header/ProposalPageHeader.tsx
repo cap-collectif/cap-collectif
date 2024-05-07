@@ -23,7 +23,6 @@ import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
 import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
 import Image from '~ui/Primitives/Image'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 
 type Props = {
   title: string | null | undefined
@@ -167,7 +166,6 @@ const BackUrl = ({
   tradKeyToBack,
   stepId,
   platformLocale,
-  currentVotableStep,
 }: {
   originStepUrl?: string | null | undefined
   defaultStepUrl: string
@@ -176,11 +174,7 @@ const BackUrl = ({
   platformLocale: string
   currentVotableStep?: string | null | undefined
 }) => {
-  const new_vote_step = useFeatureFlag('new_vote_step')
-  const url =
-    new_vote_step && currentVotableStep
-      ? `vote/${currentVotableStep}`
-      : getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl)
+  const url = getBaseUrlFromStepUrl(originStepUrl || defaultStepUrl)
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
   const { projectSlug } = useParams<{ projectSlug?: string }>()

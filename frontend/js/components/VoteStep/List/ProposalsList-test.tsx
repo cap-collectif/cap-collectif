@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
-import MockProviders, { RelaySuspensFragmentTest } from '~/testUtils'
+import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import ProposalsList from './ProposalsList'
 import { VoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 
@@ -10,6 +10,7 @@ describe('<ProposalsList />', () => {
   let testComponentTree: any
   let TestProposalsList: any
   beforeEach(() => {
+    addsSupportForPortals()
     environment = createMockEnvironment()
 
     const TestRenderer = ({ showImages }) => <ProposalsList stepId="<default>" showImages={showImages} />
@@ -45,6 +46,11 @@ describe('<ProposalsList />', () => {
       </RelaySuspensFragmentTest>
     )
   })
+
+  afterEach(() => {
+    clearSupportForPortals()
+  })
+
   describe('<TestProposalsList />', () => {
     it('should render correctly without images', () => {
       environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation))

@@ -26,6 +26,7 @@ import type { ProposalForm_proposal$data } from '~relay/ProposalForm_proposal.gr
 import type { ProposalForm_proposalForm$data } from '~relay/ProposalForm_proposalForm.graphql'
 import type { GlobalState, Dispatch, FeatureToggles, Uuid } from '~/types'
 import CreateProposalMutation from '~/mutations/CreateProposalMutation'
+import type { CreateProposalMutation$data } from '~relay/CreateProposalMutation.graphql'
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation'
 import environment from '~/createRelayEnvironment'
 import { validateProposalContent } from '../Admin/ProposalAdminContentForm'
@@ -242,7 +243,7 @@ const onSubmit = (
     input: { ...data, proposalFormId: proposalForm.id },
     stepId: proposalForm.step?.id || '',
   })
-    .then(response => {
+    .then((response: CreateProposalMutation$data) => {
       if (response.createProposal && response.createProposal.userErrors) {
         for (const error of response.createProposal.userErrors) {
           if (error.message === 'You contributed too many times.') {
@@ -291,7 +292,6 @@ const onSubmit = (
           if (address?.geometry?.location) mapOpenPopup(address.geometry.location)
         }
       }
-
       onSubmitSuccess()
     })
     .catch(e => {

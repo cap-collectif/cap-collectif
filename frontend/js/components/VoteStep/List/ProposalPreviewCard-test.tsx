@@ -3,7 +3,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import type { ProposalPreviewCardTestQuery } from '~relay/ProposalPreviewCardTestQuery.graphql'
-import MockProviders, { RelaySuspensFragmentTest } from '~/testUtils'
+import MockProviders, { RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals } from '~/testUtils'
 import ProposalPreviewCard from './ProposalPreviewCard'
 
 describe('<ProposalPreviewCard />', () => {
@@ -11,22 +11,42 @@ describe('<ProposalPreviewCard />', () => {
   let testComponentTree: any
   let TestProposalPreviewCard: any
   const query = graphql`
-    query ProposalPreviewCardTestQuery($id: ID = "<default>") @relay_test_operation {
-      proposal: node(id: $id) {
+    query ProposalPreviewCardTestQuery($isAuthenticated: Boolean!) @relay_test_operation {
+      proposal: node(id: "<proposalId>") {
         ... on Proposal {
-          ...ProposalPreviewCard_proposal @arguments(stepId: "<stepId>")
+          ...ProposalPreviewCard_proposal @arguments(stepId: "<stepId>", isAuthenticated: false)
+        }
+      }
+      step: node(id: "<stepId>") {
+        ... on Step {
+          ...ProposalPreviewCard_step @arguments(isAuthenticated: $isAuthenticated)
+        }
+      }
+      viewer: node(id: "<viewerId>") {
+        ... on User {
+          ...ProposalPreviewCard_viewer @arguments(stepId: "<stepId>")
         }
       }
     }
   `
   beforeEach(() => {
+    addsSupportForPortals()
     environment = createMockEnvironment()
 
     const TestRenderer = () => {
-      const data = useLazyLoadQuery<ProposalPreviewCardTestQuery>(query, {})
+      const data = useLazyLoadQuery<ProposalPreviewCardTestQuery>(query, { isAuthenticated: true })
 
       if (data) {
-        return <ProposalPreviewCard proposal={data.proposal} hasVoted={false} stepId="<stepId>" disabled={false} />
+        return (
+          <ProposalPreviewCard
+            proposal={data.proposal}
+            step={data.step}
+            viewer={data.viewer}
+            fullSize={false}
+            stepId="<stepId>"
+            disabled={false}
+          />
+        )
       }
 
       return null
@@ -34,12 +54,17 @@ describe('<ProposalPreviewCard />', () => {
 
     TestProposalPreviewCard = () => (
       <RelaySuspensFragmentTest environment={environment}>
-        <MockProviders useCapUIProvider>
+        <MockProviders useCapUIProvider store={{ user: { user: { id: '<viewerId>' } } }}>
           <TestRenderer />
         </MockProviders>
       </RelaySuspensFragmentTest>
     )
   })
+
+  afterEach(() => {
+    clearSupportForPortals()
+  })
+
   describe('<TestProposalPreviewCard />', () => {
     it('should render correctly', () => {
       environment.mock.queueOperationResolver(operation =>
@@ -53,18 +78,6 @@ describe('<ProposalPreviewCard />', () => {
               media: {
                 url: 'profile-pic.jpg',
               },
-            },
-            district: {
-              name: 'Argenteuil',
-            },
-            category: {
-              name: 'Ecologie',
-              color: 'green',
-              icon: 'ecology-leaf',
-            },
-            media: {
-              url: 'image-de-jardin.png',
-              name: 'jardin',
             },
             comments: {
               totalCount: 50,

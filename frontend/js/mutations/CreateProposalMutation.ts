@@ -15,12 +15,24 @@ const mutation = graphql`
     createProposal(input: $input) {
       proposal {
         ...DraftProposalPreview_proposal @relay(mask: false)
+        ...ProposalEditModal_proposal @arguments(proposalRevisionsEnabled: false)
         ...ProposalPreview_proposal @arguments(stepId: $stepId, isAuthenticated: true, isProfileView: false)
         ...ProposalLeafletMap_proposals
+        ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: true)
         id
         url
         publicationStatus
         reference
+        ...ProposalMapSelectedView_proposal @arguments(stepId: $stepId, isAuthenticated: true)
+        id
+        address {
+          lat
+          lng
+        }
+        category {
+          color
+          icon
+        }
         ...interpellationLabelHelper_proposal @relay(mask: false)
       }
       userErrors {
@@ -69,6 +81,9 @@ const commit = (
       } else {
         const gridConnection = ConnectionHandler.getConnection(stepProxy, 'ProposalListViewPaginated_proposals')
         const mapConnection = ConnectionHandler.getConnection(stepProxy, 'ProposalsDisplayMap_proposals')
+        const listConnection = ConnectionHandler.getConnection(stepProxy, 'ProposalsList_proposals')
+        const mapViewConnection = ConnectionHandler.getConnection(stepProxy, 'VoteStepMap_proposals')
+
         newNode.copyFieldsFrom(proposal)
         newEdge.setLinkedRecord(newNode, 'node')
         const allProposals = stepProxy.getLinkedRecord('proposals', {
@@ -95,6 +110,13 @@ const commit = (
 
         if (mapConnection) {
           ConnectionHandler.insertEdgeBefore(mapConnection, newEdge)
+        }
+
+        if (listConnection) {
+          ConnectionHandler.insertEdgeBefore(listConnection, newEdge)
+        }
+        if (mapViewConnection) {
+          ConnectionHandler.insertEdgeBefore(mapViewConnection, newEdge)
         }
       }
     },

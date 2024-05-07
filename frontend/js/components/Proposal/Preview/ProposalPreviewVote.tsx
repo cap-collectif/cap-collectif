@@ -14,6 +14,7 @@ type Props = {
   proposal: ProposalPreviewVote_proposal$key
   step: ProposalPreviewVote_step$key
   viewer: ProposalPreviewVote_viewer$key | null | undefined
+  usesNewUI?: boolean
 }
 const Container = styled.span`
   /** Boostrap for now until "Epurer" ticket */
@@ -48,10 +49,11 @@ const STEP_FRAGMENT = graphql`
     ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token)
   }
 `
-export const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
+export const ProposalPreviewVote: React.FC<Props> = ({
   viewer: viewerRef,
   step: stepRef,
   proposal: proposalRef,
+  usesNewUI,
 }) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef)
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
@@ -59,6 +61,7 @@ export const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
   const isTwilioFeatureEnabled = useFeatureFlag('twilio')
   const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
   const smsVoteEnabled = step.isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
+
   return (
     <Container>
       <ProposalVoteButtonWrapperFragment
@@ -67,8 +70,9 @@ export const ProposalPreviewVote: React.StatelessFunctionalComponent<Props> = ({
         viewer={viewer}
         id={`proposal-vote-btn-${proposal.id}`}
         className="proposal__preview__vote mr-15"
+        usesNewUI={usesNewUI}
       />
-      {viewer && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
+      {viewer && !usesNewUI && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
       {!viewer && smsVoteEnabled && <ProposalSmsVoteModal proposal={proposal} step={step} />}
     </Container>
   )

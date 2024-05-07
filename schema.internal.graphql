@@ -8859,6 +8859,7 @@ type Mutation {
   addMediatorVotes(input: AddMediatorVotesInput!): AddMediatorVotesPayload
   updateMediatorVotes(input: UpdateMediatorVotesInput!): UpdateMediatorVotesPayload
   deleteParticipant(input: DeleteParticipantInput!): DeleteParticipantPayload
+  updateVotesVisibility(input: UpdateVotesVisibilityInput!): UpdateVotesVisibilityPayload
 }
 
 """A connection to a list of items."""
@@ -19547,6 +19548,20 @@ input UpdateUsernameInput {
 type UpdateUsernamePayload {
   """The viewer"""
   viewer: User!
+  clientMutationId: String
+}
+
+input UpdateVotesVisibilityInput {
+  """SelectionStep global ID."""
+  stepId: ID!
+
+  """Wether the votes should be anonymous or not."""
+  anonymous: Boolean!
+  clientMutationId: String
+}
+
+type UpdateVotesVisibilityPayload {
+  votes: [ProposalUserVote]!
   clientMutationId: String
 }
 

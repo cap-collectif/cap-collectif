@@ -24,6 +24,7 @@ type Props = {
   readonly onClose: () => void
   readonly title: string
   readonly show: boolean
+  readonly fullSizeOnMobile?: boolean
 }
 const FRAGMENT = graphql`
   fragment ProposalCreateModal_proposalForm on ProposalForm {
@@ -58,6 +59,7 @@ const ProposalCreateModal = ({
   onClose,
   title,
   show,
+  fullSizeOnMobile = false,
 }: Props): JSX.Element => {
   const [modalState, setModalState] = React.useState<$Values<typeof STATE>>('NORMAL')
   const [errorCount, setErrorCount] = React.useState<number>(0)
@@ -89,6 +91,7 @@ const ProposalCreateModal = ({
       onClose={onClose}
       // @ts-ignore MAJ DS types
       fullPageScrollable
+      fullSizeOnMobile={fullSizeOnMobile}
       forceModalDialogToFalse={isIos()}
       ariaLabel={intl.formatMessage({
         id: title,

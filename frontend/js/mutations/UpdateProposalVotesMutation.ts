@@ -44,6 +44,18 @@ const mutation = graphql`
             }
           }
         }
+        userVotes: viewerVotes(first: 50, orderBy: { field: POSITION, direction: ASC })
+          @connection(key: "VotesList_userVotes", filters: []) {
+          edges {
+            node {
+              id
+              proposal {
+                id
+                ...ProposalPreviewCard_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
+              }
+            }
+          }
+        }
       }
     }
   }

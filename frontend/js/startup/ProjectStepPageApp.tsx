@@ -17,8 +17,9 @@ import ProposalStepPage from '~/components/Page/ProposalStepPage'
 import ProposalPage from '~/components/Proposal/Page/ProposalPage'
 import { getBaseLocale } from '~/utils/router'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
-import ProjectTrashButton from '~/components/Project/ProjectTrashButton'
+import { ProjectTrash } from './ProjectStepPageAppTrash'
 import VoteStepPage from '~/components/VoteStep/VoteStepPage'
+import Loader from '../components/Ui/FeedbacksIndicators/Loader'
 
 const ProjectHeader = ({
   projectId,
@@ -47,24 +48,6 @@ const ProjectHeader = ({
   )
 }
 
-const ProjectTrash = ({
-  showTrash,
-  projectSlug,
-  unstable__enableCapcoUiDs,
-}: {
-  showTrash: boolean
-  projectSlug: string
-  unstable__enableCapcoUiDs?: boolean
-}) =>
-  showTrash ? (
-    <section className="hidden-print">
-      <ProjectTrashButton
-        link={`/projects/${projectSlug}/trashed`}
-        unstable__enableCapcoUiDs={unstable__enableCapcoUiDs}
-      />
-    </section>
-  ) : null
-
 const BasicStepFallback = () => (
   <section
     className="section--alt"
@@ -91,6 +74,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
   const showTrash = useFeatureFlag('project_trash')
+  const new_vote_step = useFeatureFlag('new_vote_step')
   return (
     <>
       <Switch>
@@ -144,13 +128,37 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
             `${baseUrl}/project/:projectSlug/selection/:stepSlug`,
           ]}
         >
-          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
-          <section className="section--alt">
-            <div className="container">
-              <ProposalStepPage stepId={props.stepId} projectId={props.projectId} />
-            </div>
-          </section>
-          <ProjectTrash projectSlug={props.projectSlug} showTrash={showTrash} unstable__enableCapcoUiDs />
+          {new_vote_step ? (
+            <>
+              <ScrollToTop />
+              <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+              <Suspense
+                fallback={
+                  <div className="row">
+                    <Loader />
+                  </div>
+                }
+              >
+                <VoteStepPage
+                  stepId={props.stepId}
+                  projectId={props.projectId}
+                  isMapView={!!props.isMapView}
+                  showTrash={showTrash}
+                  projectSlug={props.projectSlug}
+                />
+              </Suspense>
+            </>
+          ) : (
+            <>
+              <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
+              <section className="section--alt">
+                <div className="container">
+                  <ProposalStepPage stepId={props.stepId} projectId={props.projectId} />
+                </div>
+              </section>
+              <ProjectTrash projectSlug={props.projectSlug} showTrash={showTrash} unstable__enableCapcoUiDs />
+            </>
+          )}
         </Route>
         <Route
           exact
@@ -165,6 +173,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/vote/:stepSlug`}>
           <ScrollToTop />
+          <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
           <VoteStepPage stepId={props.stepId} projectId={props.projectId} isMapView={!!props.isMapView} />
         </Route>
       </Switch>

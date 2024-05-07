@@ -11,6 +11,7 @@ const mutation = graphql`
   mutation ChangeProposalContentMutation($input: ChangeProposalContentInput!, $proposalRevisionsEnabled: Boolean!) {
     changeProposalContent(input: $input) {
       proposal {
+        ...ProposalEditModal_proposal @arguments(proposalRevisionsEnabled: false)
         ...ProposalRevision_proposal @include(if: $proposalRevisionsEnabled)
         id
         title

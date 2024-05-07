@@ -18,8 +18,14 @@ type Context = {
   setFilters: (key: string, value: string) => void
   view: string
   setView: (value: string) => void
+  hasMapView: boolean
+  isParticipationAnonymous: boolean
+  setIsParticipationAnonymous: (value: boolean) => void
 }
+
+// @ts-ignore Context is initialized after
 export const VoteStepContext = React.createContext<Context>({})
+
 export const useVoteStepContext = () => {
   const context = React.useContext(VoteStepContext)
 
@@ -29,11 +35,20 @@ export const useVoteStepContext = () => {
 
   return context
 }
+
 type Props = {
   children: JSX.Element | JSX.Element[] | string
   isMapView?: boolean
+  hasMapView: boolean
+  isParticipationAnonymous
 }
-export const VoteStepContextProvider = ({ children, isMapView }: Props) => {
+
+export const VoteStepContextProvider = ({
+  children,
+  isMapView,
+  hasMapView,
+  isParticipationAnonymous: initialIsParticipationAnonymous,
+}: Props) => {
   const [term, setTerm] = useUrlState('term', '')
   const [sort, setSort] = useUrlState('sort', '')
   const [userType, setUserType] = useUrlState('userType', '')
@@ -45,6 +60,8 @@ export const VoteStepContextProvider = ({ children, isMapView }: Props) => {
   const [latlngBounds, setLatlngBounds] = useUrlState('latlngBounds', '')
   const [address, setAddress] = useUrlState('address', '')
   const [view, setView] = useUrlState('view', isMapView ? View.Map : View.List)
+  const [isParticipationAnonymous, setIsParticipationAnonymous] = React.useState(initialIsParticipationAnonymous)
+
   const contextValue: Context = {
     filters: {
       term,
@@ -101,6 +118,9 @@ export const VoteStepContextProvider = ({ children, isMapView }: Props) => {
     },
     view,
     setView,
+    hasMapView,
+    isParticipationAnonymous,
+    setIsParticipationAnonymous,
   }
   return <VoteStepContext.Provider value={contextValue}>{children}</VoteStepContext.Provider>
 }

@@ -43,6 +43,7 @@ const mutation = graphql`
           totalCount
           creditsLeft
           creditsSpent
+          #  totalPointsCount
         }
       }
     }
@@ -62,11 +63,11 @@ const commit = (variables: RemoveProposalVoteMutationVariables): Promise<RemoveP
       const stepProxy = store.get(variables.input.stepId)
 
       if (stepProxy) {
-        const connectionRecord = ConnectionHandler.getConnection(stepProxy, 'VotesList_viewerVotes', {})
+        const connectionRecord = ConnectionHandler.getConnection(stepProxy, 'VotesList_userVotes', {})
 
         if (connectionRecord) {
           ConnectionHandler.deleteNode(connectionRecord, String(previousVoteId))
-          const viewerVotes = stepProxy?.getLinkedRecord('viewerVotes', {})
+          const viewerVotes = stepProxy?.getLinkedRecord('userVotes', {})
 
           if (viewerVotes) {
             const previousValue = parseInt(viewerVotes.getValue('totalCount'), 10)

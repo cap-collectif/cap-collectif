@@ -21,7 +21,7 @@ Array [
     className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
   />,
   <div
-    className="sc-bcXGCL dAOeNq"
+    className="sc-bcXGCL fQDbQl"
     id="votes-list"
   >
     <div>
@@ -38,434 +38,237 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL cidgwN cap-card"
+            className="sc-bcXGCL fCAVet"
             id="proposal-<Proposal-mock-id-3>"
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
             <div
-              className="sc-bcXGCL dWSxDH"
+              className="sc-bcXGCL eyWpBS"
             >
               <div
-                className="sc-bcXGCL eInRiY"
+                className="sc-bcXGCL eOutYx"
               >
                 <div
-                  className="sc-bcXGCL jkGtSa"
+                  className="sc-bcXGCL jyyaxB"
                 >
-                  <div
-                    className="sc-bcXGCL dOmiK sc-fXqqsB gHWJqw cap-tag"
-                    title="<mock-value-for-field-\\"name\\">"
+                  <svg
+                    className="sc-bcXGCL sc-eJDTud eIOCew knzWyK cap-icon"
+                    fill="none"
+                    viewBox="0 0 13 14"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    &lt;mock-value-for-field-"name"&gt;
-                  </div>
-                  <div
-                    className="sc-bcXGCL eIDLJl"
+                    <path
+                      clipRule="evenodd"
+                      d="M3.75 3.261a2.75 2.75 0 105.5 0 2.75 2.75 0 00-5.5 0z"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M1 12.611a5.5 5.5 0 0111 0"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <p
+                    className="sc-bcXGCL uILGZ cap-text"
                   >
-                    <svg
-                      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
-                      fill="none"
-                      style={
-                        Object {
-                          "marginLeft": 0,
-                          "marginTop": 0,
-                        }
-                      }
-                      viewBox="0 0 9 12"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={0.8}
-                      />
-                      <path
-                        d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        strokeWidth={0.8}
-                      />
-                    </svg>
-                    <span
-                      className="sc-bcXGCL bdHBGk cap-text"
-                      title="<mock-value-for-field-\\"name\\">"
-                    >
-                      &lt;mock-value-for-field-"name"&gt;
-                    </span>
-                  </div>
-                  <div
-                    className="sc-bcXGCL eIDLJl"
-                  >
-                    <span
-                      className="sc-bcXGCL bdHBGk cap-text"
-                      style={
-                        Object {
-                          "marginLeft": 0,
-                          "marginTop": 0,
-                        }
-                      }
-                      title="<mock-value-for-field-\\"title\\">"
-                    >
-                      &lt;mock-value-for-field-"title"&gt;
-                    </span>
-                  </div>
+                    &lt;mock-value-for-field-"displayName"&gt;
+                  </p>
                 </div>
+                 
                 <a
                   href="/project///<mock-value-for-field-\\"slug\\">"
                   onClick={[Function]}
                 >
-                  <h3
-                    className="sc-bcXGCL etgZSC cap-heading"
+                  <h4
+                    className="sc-bcXGCL irwbFD cap-heading"
                   >
                     &lt;mock-value-for-field-"title"&gt;
-                  </h3>
-                  <div
-                    className="sc-bcXGCL fjdPth cap-text"
-                  >
-                    &lt;mock-value-for-field-"summary"&gt;
-                  </div>
+                  </h4>
                 </a>
+              </div>
+              <a
+                href="/project///<mock-value-for-field-\\"slug\\">"
+                onClick={[Function]}
+              >
+                <p
+                  className="sc-bcXGCL fibrtz"
+                />
+              </a>
+              <div
+                className="sc-bcXGCL jLrvNs"
+              >
                 <div
-                  className="sc-bcXGCL gMmiyl"
+                  className="sc-bcXGCL fubYpp"
                 >
                   <div
-                    className="sc-bcXGCL eoRdhh"
+                    className="sc-bcXGCL jGtPQE"
                   >
                     <div
-                      className="sc-bcXGCL zNZlr"
+                      className="sc-bcXGCL ixfmfF"
                     >
-                      <button
-                        aria-controls="popover-overlay"
-                        aria-expanded={false}
-                        aria-haspopup="dialog"
-                        className="sc-bcXGCL BPbdi"
-                        disabled={false}
-                        id="proposal-vote-button-<Proposal-mock-id-3>"
-                        onClick={[Function]}
-                        onClickCapture={[Function]}
-                        onKeyDown={[Function]}
-                        onKeyPressCapture={[Function]}
-                        onKeyUp={[Function]}
-                        onMouseDown={[Function]}
-                        onMouseDownCapture={[Function]}
-                        type="button"
+                      <svg
+                        className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
                       >
-                        <div
-                          className="sc-bcXGCL ixfmfF toggle-btn"
-                        >
-                          <span
-                            className="sc-bcXGCL cZiHFv cap-text"
-                          >
-                            global.thank.you
-                          </span>
-                          <div
-                            className="sc-bcXGCL bVIMvh inner-circle"
-                          >
-                            <svg
-                              className="sc-bcXGCL sc-eJDTud qkrzY cpMilg cap-icon"
-                              fill="none"
-                              viewBox="0 0 20 19"
-                              xmlns="http://www.w3.org/2000/svg"
-                            >
-                              <path
-                                d="M6.274 9.153l-1.38-1.457a4.045 4.045 0 01-.706-4.53 3.693 3.693 0 016.038-1.018l1.04 1.082 1.041-1.082a3.693 3.693 0 016.038 1.019 4.044 4.044 0 01-.706 4.529l-6.372 6.528-1.594-1.634"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={1.5}
-                              />
-                              <path
-                                d="M6.667 11.924l1.282-.963a1.204 1.204 0 011.723 1.63l-1.261 1.891a3.45 3.45 0 01-1.591 1.29l-1.879.752v1.726M5.717 8.564c-5.043 2.162-4.227 6.8-4.227 9.686"
-                                stroke="currentColor"
-                                strokeLinecap="round"
-                                strokeLinejoin="round"
-                                strokeWidth={1.5}
-                              />
-                            </svg>
-                          </div>
-                        </div>
-                      </button>
+                        <path
+                          d="M19.439 6.75c0 4.56-3.355 8.25-7.5 8.25s-7.5-3.69-7.5-8.25A8.689 8.689 0 016.157 1.5H17.72a8.69 8.69 0 011.718 5.25z"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.3}
+                        />
+                        <path
+                          d="M18.621 3h2.317a1.5 1.5 0 011.5 1.5v2.581c0 2.86-1.269 5.323-4.073 5.884l-1.922.384M5.255 3H2.938a1.5 1.5 0 00-1.5 1.5v2.581c0 2.86 1.27 5.323 4.073 5.884l1.922.384M8.188 22.5h7.5M8.188 22.5a3.75 3.75 0 017.5 0M11.938 15v3.75"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.3}
+                        />
+                      </svg>
                       <div
-                        animated={false}
-                        animating={false}
-                        aria-label="vote.popover.title"
-                        as={
-                          Object {
-                            "$$typeof": Symbol(react.forward_ref),
-                            "attrs": Array [
-                              Object {
-                                "maxWidth": "280px",
-                                "zIndex": 100,
-                              },
-                            ],
-                            "componentStyle": e {
-                              "baseHash": 833198423,
-                              "baseStyle": e {
-                                "baseHash": -120292040,
-                                "baseStyle": undefined,
-                                "componentId": "sc-bcXGCL",
-                                "isStatic": false,
-                                "rules": Array [
-                                  [Function],
-                                  [Function],
-                                  [Function],
-                                  [Function],
-                                ],
-                                "staticRulesId": "",
-                              },
-                              "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
-                              "isStatic": false,
-                              "rules": Array [
-                                "outline:none;",
-                              ],
-                              "staticRulesId": "",
-                            },
-                            "foldedComponentIds": "sc-bcXGCL",
-                            "render": [Function],
-                            "shouldForwardProp": [Function],
-                            "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
-                            "target": "div",
-                            "warnTooManyClasses": [Function],
-                          }
-                        }
-                        baseId="popover-overlay"
-                        borderRadius="popover"
-                        boxShadow="0 5px 10px rgb(0 0 0 / 20%)"
-                        data-testid="Popover"
-                        hide={[Function]}
-                        id="login-popover"
-                        modal={false}
-                        place={[Function]}
-                        placement="auto"
-                        setAnimated={[Function]}
-                        setBaseId={[Function]}
-                        setModal={[Function]}
-                        setVisible={[Function]}
-                        show={[Function]}
-                        stopAnimation={[Function]}
-                        tabIndex={0}
-                        toggle={[Function]}
-                        unstable_arrowRef={
-                          Object {
-                            "current": null,
-                          }
-                        }
-                        unstable_arrowStyles={Object {}}
-                        unstable_disclosureRef={
-                          Object {
-                            "current": null,
-                          }
-                        }
-                        unstable_idCountRef={
-                          Object {
-                            "current": 0,
-                          }
-                        }
-                        unstable_originalPlacement="auto"
-                        unstable_popoverRef={
-                          Object {
-                            "current": null,
-                          }
-                        }
-                        unstable_popoverStyles={
-                          Object {
-                            "left": "100%",
-                            "position": "fixed",
-                            "top": "100%",
-                          }
-                        }
-                        unstable_referenceRef={
-                          Object {
-                            "current": null,
-                          }
-                        }
-                        unstable_update={[Function]}
-                        visible={false}
+                        className="sc-bcXGCL eoNVtj"
                       >
-                        <div
-                          className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
-                          style={
-                            Object {
-                              "auto": "100%",
-                              "fontSize": 30,
-                              "height": "1em",
-                              "pointerEvents": "none",
-                              "width": "1em",
-                            }
-                          }
-                        >
-                          <svg
-                            style={
-                              Object {
-                                "transform": undefined,
-                              }
-                            }
-                            viewBox="0 0 30 30"
-                          >
-                            <path
-                              className="stroke"
-                              d="M23.7,27.1L17,19.9C16.5,19.3,15.8,19,15,19s-1.6,0.3-2.1,0.9l-6.6,7.2C5.3,28.1,3.4,29,2,29h26 C26.7,29,24.6,28.1,23.7,27.1z"
-                            />
-                            <path
-                              className="fill"
-                              d="M23,27.8c1.1,1.2,3.4,2.2,5,2.2h2H0h2c1.7,0,3.9-1,5-2.2l6.6-7.2c0.7-0.8,2-0.8,2.7,0L23,27.8L23,27.8z"
-                            />
-                          </svg>
-                        </div>
-                        <div
-                          className="sc-bcXGCL jBLBwk"
-                        >
-                          <p
-                            className="sc-bcXGCL eIjTDD cap-text"
-                          >
-                            vote.popover.title
-                          </p>
-                          <div
-                            className="sc-bcXGCL jbmmEh"
-                          >
-                            <p
-                              className="sc-bcXGCL eVdTHW cap-text"
-                              style={
-                                Object {
-                                  "marginLeft": 0,
-                                  "marginTop": 0,
-                                }
-                              }
-                            >
-                              vote.popover.body
-                            </p>
-                            <span
-                              className="sc-breQAM dGgcIL"
-                              clip="rect(0px, 0px, 0px, 0px)"
-                            >
-                              <button
-                                className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
-                                onClick={[Function]}
-                                type="button"
-                              >
-                                global.close
-                              </button>
-                            </span>
-                            <span
-                              style={Object {}}
-                            >
-                              <button
-                                aria-label="open.connection_modal"
-                                className="center-block btn-block login-button btn btn-success"
-                                destination="http://localhost"
-                                disabled={false}
-                                onClick={[Function]}
-                                type="button"
-                              >
-                                global.login
-                              </button>
-                            </span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div
-                      className="sc-bcXGCL tAhwr"
-                    >
-                      <div
-                        className="sc-bcXGCL hyYZCj"
-                      >
-                        <svg
-                          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
-                          fill="none"
-                          style={
-                            Object {
-                              "marginLeft": 0,
-                              "marginTop": 0,
-                            }
-                          }
-                          viewBox="0 0 19 16"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M9.21 15.095C6.042 12.583-.552 6.473 1.333 3.025A3.943 3.943 0 012.6 1.65 4.413 4.413 0 014.413.955a4.573 4.573 0 011.96.136 4.28 4.28 0 011.678.937L9.21 3.086l1.158-1.058c.47-.429 1.045-.75 1.677-.936a4.572 4.572 0 011.96-.136 4.413 4.413 0 011.812.695c.535.36.97.83 1.266 1.373 1.877 3.427-4.7 9.588-7.872 12.071z"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={1.5}
-                          />
-                        </svg>
+                        <span>
+                          &lt;mock-value-for-field-"totalPointsCount"&gt;&lt;mock-value-for-field-"paperVotesTotalPointsCount"&gt;
+                        </span>
                         <span
-                          className="sc-bcXGCL ichMUL cap-text"
+                          className="sc-bcXGCL jdetxP"
                         >
-                          &lt;mock-value-for-field-"totalCount"&gt;
+                          pts
                         </span>
                       </div>
                     </div>
-                  </div>
-                  <div
-                    className="sc-bcXGCL fIRSQ"
-                  >
-                    <svg
-                      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
-                      fill="none"
-                      style={
-                        Object {
-                          "marginLeft": 0,
-                          "marginTop": 0,
-                        }
-                      }
-                      viewBox="0 0 13 14"
-                      xmlns="http://www.w3.org/2000/svg"
+                    <div
+                      className="sc-bcXGCL ixfmfF"
                     >
-                      <path
-                        clipRule="evenodd"
-                        d="M3.75 3.261a2.75 2.75 0 105.5 0 2.75 2.75 0 00-5.5 0z"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M1 12.611a5.5 5.5 0 0111 0"
-                        stroke="currentColor"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                    <span
-                      className="sc-bcXGCL ichMUL cap-text"
-                    >
-                      &lt;mock-value-for-field-"displayName"&gt;
-                    </span>
+                      <svg
+                        className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        xmlns="http://www.w3.org/2000/svg"
+                      >
+                        <path
+                          d="M6.872 6.933c3.277 0 5.933-1.328 5.933-2.966C12.805 2.328 10.15 1 6.872 1 3.595 1 .938 2.328.938 3.967c0 1.638 2.657 2.966 5.934 2.966zM12.806 7.922V3.967"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.3}
+                        />
+                        <path
+                          d="M.938 3.967V18.8c0 1.642 2.66 2.967 5.934 2.967.56.002 1.118-.038 1.671-.119"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.3}
+                        />
+                        <path
+                          d="M.938 15.092c0 1.641 2.66 2.966 5.934 2.966a11.86 11.86 0 001.71-.128M.938 11.383c0 1.641 2.66 2.967 5.934 2.967.56.002 1.118-.038 1.671-.12M.938 7.675c0 1.641 2.66 2.967 5.934 2.967a11.86 11.86 0 001.71-.13M17.258 16.08c3.277 0 5.933-1.328 5.933-2.967 0-1.638-2.656-2.966-5.933-2.966-3.277 0-5.934 1.328-5.934 2.966 0 1.639 2.657 2.967 5.934 2.967z"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.3}
+                        />
+                        <path
+                          d="M11.324 13.113v7.17c0 1.641 2.66 2.966 5.934 2.966 3.273 0 5.933-1.325 5.933-2.966v-7.17"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.3}
+                        />
+                        <path
+                          d="M23.191 16.574c0 1.642-2.66 2.967-5.933 2.967-3.274 0-5.934-1.325-5.934-2.967"
+                          stroke="currentColor"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                          strokeWidth={1.3}
+                        />
+                      </svg>
+                      <div
+                        className="sc-bcXGCL jbJBNL"
+                      >
+                        &lt;mock-value-for-field-"estimation"&gt;€
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <div
-                className="sc-bcXGCL hcvSPF"
-              >
                 <div
-                  className="sc-bcXGCL bIMaLd"
+                  className="sc-bcXGCL ixfmfF"
                 >
-                  <a
-                    href="/project///<mock-value-for-field-\\"slug\\">"
-                    onClick={[Function]}
+                  <svg
+                    className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                    fill="none"
+                    viewBox="0 0 14 13"
+                    xmlns="http://www.w3.org/2000/svg"
                   >
-                    <img
-                      alt="<mock-value-for-field-\\"name\\">"
-                      className="sc-breQAM ebpOIr"
-                      loading="lazy"
-                      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                      srcSet="
-        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
-         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
-         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
-         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
-         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
-         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
-         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
-         "
+                    <path
+                      d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                      fill="#fff"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
                     />
-                  </a>
+                  </svg>
+                  <div
+                    className="sc-bcXGCL jbJBNL"
+                  >
+                    &lt;mock-value-for-field-"totalCount"&gt;
+                  </div>
+                </div>
+                <div
+                  className="sc-bcXGCL ixfmfF"
+                >
+                  <svg
+                    className="sc-bcXGCL sc-eJDTud gNIYbS cpMilg cap-icon"
+                    fill="none"
+                    viewBox="0 0 32 29"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M31.067 4.945a8.993 8.993 0 00-2.637-3.199A8.604 8.604 0 0024.683.123a8.474 8.474 0 00-4.051.301 8.707 8.707 0 00-3.485 2.16l-1.146 1.077-1.107-1.049A8.657 8.657 0 0011.391.42 8.422 8.422 0 007.308.127a8.444 8.444 0 00-3.752 1.608 8.832 8.832 0 00-2.622 3.21 9.081 9.081 0 00-.824 5.423 8.916 8.916 0 002.438 4.875L15.04 28.578c.124.133.273.24.438.312a1.294 1.294 0 001.482-.312L29.44 15.27a8.943 8.943 0 002.448-4.886 9.11 9.11 0 00-.822-5.44z"
+                      fill="currentColor"
+                    />
+                  </svg>
+                  <div
+                    className="sc-bcXGCL jbJBNL"
+                  >
+                    1
+                  </div>
                 </div>
               </div>
             </div>
+            <a
+              href="/project///<mock-value-for-field-\\"slug\\">"
+              onClick={[Function]}
+            >
+              <div
+                className="sc-bcXGCL zYWLv"
+              >
+                <div
+                  className="sc-bcXGCL fWqYuh sc-fXqqsB gHWJqw cap-tag"
+                  title="<mock-value-for-field-\\"name\\">"
+                >
+                  &lt;mock-value-for-field-"name"&gt;
+                </div>
+                <img
+                  alt="<mock-value-for-field-\\"name\\">"
+                  className="sc-bcXGCL kolUOV"
+                  src="<mock-value-for-field-\\"url\\">"
+                  style={
+                    Object {
+                      "aspectRatio": "3 / 2",
+                      "objectFit": "cover",
+                      "overflow": "hidden",
+                    }
+                  }
+                />
+              </div>
+            </a>
           </div>
         </div>
       </div>

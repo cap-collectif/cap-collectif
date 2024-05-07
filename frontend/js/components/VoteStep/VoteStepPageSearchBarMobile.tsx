@@ -20,15 +20,12 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
         })
       )
     }
-
-    if (view === 'list') {
-      return (
-        term ||
-        intl.formatMessage({
-          id: 'vote.step.search',
-        })
-      )
-    }
+    return (
+      term ||
+      intl.formatMessage({
+        id: 'vote.step.search',
+      })
+    )
   }
 
   return (
@@ -39,8 +36,10 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
       }}
       direction="row"
       zIndex={2}
+      borderRadius="4px"
       p="6px"
       boxShadow="small"
+      width="100%"
       sx={{
         fontFamily: CapUIFontFamily.Input,
         lineHeight: CapUILineHeight.Base,
@@ -48,24 +47,27 @@ const VoteStepPageSearchBarMobile = ({ onClick }: Props) => {
         bg: 'white',
       }}
     >
-      {view === 'map' && (
-        <Box
-          as="button"
-          onClick={e => {
-            e.preventDefault()
-          }}
-          type="button"
-          sx={{
-            cursor: 'pointer',
-            background: 'inherit',
-            borderWidth: '0px',
-            display: 'flex',
-            alignItems: 'center',
-          }}
-        >
-          <Icon name={CapUIIcon.LocationTarget} size={CapUIIconSize.Lg} color="gray.900" />
-        </Box>
-      )}
+      <Box
+        as="button"
+        onClick={e => {
+          e.preventDefault()
+        }}
+        type="button"
+        sx={{
+          cursor: 'pointer',
+          background: 'inherit',
+          borderWidth: '0px',
+          display: 'flex',
+          alignItems: 'center',
+        }}
+      >
+        <Icon
+          name={view === 'map' ? CapUIIcon.LocationTarget : CapUIIcon.Search}
+          size={CapUIIconSize.Md}
+          color="gray.700"
+        />
+      </Box>
+
       <Box
         as="input"
         disableFocusStyles

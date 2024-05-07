@@ -26,9 +26,9 @@ export class VoteButtonOverlay extends React.Component<Props> {
       return children
     }
 
-    let title: any = ''
-    let content: any = ''
-    let help: any = ''
+    let title: React.ReactNode = ''
+    let content: React.ReactNode = ''
+    let help: React.ReactNode = ''
 
     if (!hasUserEnoughCredits && hasReachedLimit) {
       title = <FormattedMessage id="proposal.vote.popover.limit_reached_and_not_enough_credits_title" />

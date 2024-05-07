@@ -1,9 +1,10 @@
-import { ProposalStepPage, QuestionnairePage } from '~e2e-pages/index'
+import { ProposalStepPage } from '~e2e-pages/index'
 
 describe('Proposal Step Page', () => {
   describe('Project Step Page FO', () => {
     beforeEach(() => {
       cy.task('db:restore')
+      cy.task('disable:feature', 'new_vote_step')
     })
     it('should not see votes', () => {
       cy.directLoginAs('user')

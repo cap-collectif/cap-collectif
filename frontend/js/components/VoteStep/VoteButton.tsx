@@ -1,28 +1,144 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, Icon, CapUIIcon, CapUIIconSize, toast, Flex, Text } from '@cap-collectif/ui'
+import { toast } from '@cap-collectif/ui'
 import { useDispatch, useSelector } from 'react-redux'
 import type { GlobalState } from '~/types'
 import RemoveProposalVoteMutation from '~/mutations/RemoveProposalVoteMutation'
-import LoginOverlay from '~/components/Utils/NewLoginOverlay'
 import { vote } from '~/redux/modules/proposal'
-import { VoteStepEvent, ACTIVE_COLOR, dispatchEvent } from './utils'
+import { VoteStepEvent, dispatchEvent, View } from './utils'
+import { graphql, useFragment } from 'react-relay'
+import ProposalPreviewVote from '../Proposal/Preview/ProposalPreviewVote'
+import type { VoteButton_proposal$key } from '~relay/VoteButton_proposal.graphql'
+import type { VoteButton_viewer$key } from '~relay/VoteButton_viewer.graphql'
+import type { VoteButton_step$key } from '~relay/VoteButton_step.graphql'
+import VoteButtonUI from './VoteButtonUI'
+import { hasReachedLimit, userHasEnoughCredits } from '../Proposal/Vote/ProposalVoteButtonWrapperFragment'
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import invariant from '~/utils/invariant'
+import UpdateProposalVotesMutation from '~/mutations/UpdateProposalVotesMutation'
+import { AddProposalVoteMutation$data } from '~relay/AddProposalVoteMutation.graphql'
+import { useVoteStepContext } from './Context/VoteStepContext'
+import ResetCss from '~/utils/ResetCss'
+import ProposalVoteModal from '../Proposal/Vote/ProposalVoteModal'
+
 type Props = {
-  readonly proposalId: string
-  readonly stepId: string
-  readonly hasVoted: boolean
-  readonly disabled: boolean
+  proposalId: string
+  stepId: string
+  disabled: boolean
+  proposal: VoteButton_proposal$key | null | undefined
+  viewer: VoteButton_viewer$key | null | undefined
+  step: VoteButton_step$key | null | undefined
 }
 
-const VoteButton = ({ proposalId, stepId, hasVoted, disabled }: Props) => {
+const FRAGMENT = graphql`
+  fragment VoteButton_proposal on Proposal
+  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
+    id
+    estimation
+    ...ProposalPreviewVote_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
+    ...ProposalVoteModal_proposal
+    viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+    paperVotesTotalCount(stepId: $stepId)
+    votes(stepId: $stepId, first: 0) {
+      totalCount
+    }
+    currentVotableStep {
+      id
+    }
+    isArchived
+    form {
+      objectType
+    }
+  }
+`
+
+const FRAGMENT_STEP = graphql`
+  fragment VoteButton_step on Step
+  @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
+    ...ProposalPreviewVote_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+    ...ProposalVoteModal_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
+    ... on ProposalStep {
+      open
+      project {
+        slug
+      }
+      votesLimit
+      votesMin
+      votesRanking
+      budget
+      viewerVotes(orderBy: { field: POSITION, direction: ASC }, token: $token) {
+        totalCount
+        edges {
+          node {
+            proposal {
+              id
+            }
+          }
+        }
+      }
+    }
+    id
+    ... on RequirementStep {
+      requirements {
+        edges {
+          node {
+            __typename
+            viewerMeetsTheRequirement @include(if: $isAuthenticated)
+          }
+        }
+      }
+    }
+  }
+`
+
+const FRAGMENT_VIEWER = graphql`
+  fragment VoteButton_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+    ...ProposalPreviewVote_viewer @arguments(stepId: $stepId)
+    ...ProposalVoteModal_viewer
+    proposalVotes(stepId: $stepId) @include(if: $isAuthenticated) {
+      totalCount
+      creditsLeft
+    }
+  }
+`
+
+const VoteButton = ({
+  proposalId,
+  stepId,
+  disabled,
+  proposal: proposalFragment,
+  viewer: viewerFragment,
+  step: stepFragment,
+}: Props) => {
   const isAuthenticated = useSelector((state: GlobalState) => state.user.user) !== null
   const dispatch = useDispatch()
+  const proposal = useFragment(FRAGMENT, proposalFragment)
+  const viewer = useFragment(FRAGMENT_VIEWER, viewerFragment)
+  const step = useFragment(FRAGMENT_STEP, stepFragment)
   const [isLoading, setIsLoading] = React.useState(false)
-  const [hasSwitched, setHasSwitch] = React.useState(false)
+  const isVoteMin = useFeatureFlag('votes_min')
+  const { isParticipationAnonymous, setView } = useVoteStepContext()
   const intl = useIntl()
+  const votesMin: number = isVoteMin && step.votesMin ? step.votesMin : 1
+  const viewerVotesBeforeValidation = step?.viewerVotes?.totalCount || 0
+  const remainingVotesAfterValidation = votesMin - viewerVotesBeforeValidation - 1
+  const hasFinished = remainingVotesAfterValidation < 0
+  const hasJustFinished = remainingVotesAfterValidation === 0
+
+  const { paperVotesTotalCount, votes } = proposal
+
+  const totalCount = votes.totalCount + paperVotesTotalCount
+
+  const hasVoted =
+    viewer && proposal?.viewerHasVote
+      ? proposal.viewerHasVote
+      : step?.viewerVotes?.edges?.some(edge => edge?.node?.proposal?.id === proposal.id) ?? false
 
   const deleteVote = () => {
     setIsLoading(true)
+    dispatchEvent(VoteStepEvent.AnimateCard, {
+      proposalId,
+    })
     return RemoveProposalVoteMutation.commit({
       stepId,
       input: {
@@ -36,7 +152,6 @@ const VoteButton = ({ proposalId, stepId, hasVoted, disabled }: Props) => {
         dispatchEvent(VoteStepEvent.RemoveVote, {
           proposalId,
         })
-        setHasSwitch(true)
         setIsLoading(false)
       })
       .catch(() => {
@@ -51,9 +166,6 @@ const VoteButton = ({ proposalId, stepId, hasVoted, disabled }: Props) => {
   }
 
   const onButtonClick = () => {
-    dispatchEvent(VoteStepEvent.AnimateCard, {
-      proposalId,
-    })
     if (hasVoted) deleteVote()
     else {
       setIsLoading(true)
@@ -61,55 +173,130 @@ const VoteButton = ({ proposalId, stepId, hasVoted, disabled }: Props) => {
         dispatch,
         stepId,
         proposalId,
-        false,
+        isParticipationAnonymous,
         intl,
         () => {
-          dispatchEvent(VoteStepEvent.AddVote, {
-            proposalId,
-          })
-          setHasSwitch(true)
           setIsLoading(false)
+          if (votesMin > 1 && (!hasFinished || hasJustFinished)) {
+            toast({
+              variant: hasJustFinished ? 'success' : 'warning',
+              content: intl.formatMessage(
+                {
+                  id: hasJustFinished ? 'participation-validated' : 'vote-for-x-proposals',
+                },
+                {
+                  num: remainingVotesAfterValidation,
+                  div: (...chunks) => <div>{chunks}</div>,
+                  b: (...chunks) => <b>{chunks}</b>,
+                  a: (...chunks) => (
+                    <span
+                      style={{
+                        marginLeft: 4,
+                      }}
+                    >
+                      <ResetCss>
+                        <button style={{ textDecoration: 'underline' }} onClick={() => setView(View.Votes)}>
+                          {chunks}
+                        </button>
+                      </ResetCss>
+                    </span>
+                  ),
+                },
+              ),
+            })
+          } else {
+            toast({
+              variant: 'success',
+              content: intl.formatMessage({
+                id: 'vote.add_success',
+              }),
+            })
+          }
         },
         () => setIsLoading(false),
-      )
+      ).then((data: AddProposalVoteMutation$data) => {
+        const votes = data?.addProposalVote.voteEdge.node.step.viewerVotes.edges.map(({ node }) => node)
+        if (!data?.addProposalVote?.voteEdge?.node || typeof data.addProposalVote.voteEdge === 'undefined') {
+          invariant(false, 'The vote id is missing.')
+        }
+
+        if (!step.votesRanking) {
+          return
+        }
+
+        // Otherwise we update/reorder votes
+        return UpdateProposalVotesMutation.commit(
+          {
+            input: {
+              step: stepId,
+              votes: votes
+                .filter(voteFilter => voteFilter.id !== null)
+                .map(v => ({
+                  id: v.id,
+                  anonymous: v.anonymous,
+                })),
+            },
+            stepId,
+            isAuthenticated,
+            token: null,
+          },
+          {
+            id: null,
+            position: -1,
+            isVoteRanking: step.votesRanking,
+          },
+        )
+      })
     }
   }
 
-  const displayhasVoted = (hasVoted && !hasSwitched) || (!hasVoted && hasSwitched)
-  const leftText = displayhasVoted ? 'global.thank.you' : 'global.vote.for'
+  const showVoteButton =
+    step &&
+    step.open &&
+    proposal.currentVotableStep &&
+    step.id === proposal.currentVotableStep.id &&
+    proposal.form.objectType !== 'ESTABLISHMENT' &&
+    !proposal.isArchived
+
+  if (!showVoteButton) {
+    return null
+  }
+
+  const requirements = step.requirements?.edges?.filter(e => !!e?.node).map(edge => edge.node) || []
+  const allRequirementsMet = requirements?.every(requirement => requirement.viewerMeetsTheRequirement)
+  const viewerVotesCount = viewer?.proposalVotes ? viewer?.proposalVotes.totalCount : 0
+
   return (
-    <Box
-      sx={{
-        '& > *': {
-          transition: 'color 0.3s 0.1s ease-in-out, background 0.3s 0.1s ease-in-out',
-        },
-      }}
-    >
-      <LoginOverlay enabled={!isAuthenticated}>
-        <Box
-          as="button"
-          id={`proposal-vote-button-${proposalId}`}
-          onClick={onButtonClick}
-          disabled={disabled || isLoading}
-          border="normal"
-          borderRadius="50px"
-          borderColor={ACTIVE_COLOR}
-          p={1}
-          bg={displayhasVoted ? ACTIVE_COLOR : 'white'}
-        >
-          <Flex className="toggle-btn" alignItems="center">
-            <Text as="span" color={displayhasVoted ? 'white' : ACTIVE_COLOR} fontSize={3} fontWeight="700" mx={2}>
-              {intl.formatMessage({
-                id: leftText,
-              })}
-            </Text>
-            <Flex className="inner-circle" p={1} borderRadius="100%" bg={displayhasVoted ? 'white' : ACTIVE_COLOR}>
-              <Icon name={CapUIIcon.Vote} size={CapUIIconSize.Lg} color={displayhasVoted ? ACTIVE_COLOR : 'white'} />
-            </Flex>
-          </Flex>
-        </Box>
-      </LoginOverlay>
-    </Box>
+    <>
+      {isAuthenticated && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
+
+      {
+        /**
+         * Dans les cas suivants : vote anonyme (SMS), vote max atteint, conditions requises non remplies,
+         * On part sur l'ouverture de la modale ou du popup, à l'ancienne
+         */
+        !isAuthenticated ||
+        !allRequirementsMet ||
+        hasReachedLimit(isAuthenticated, step?.votesLimit, hasVoted, viewerVotesCount, step?.viewerVotes?.totalCount) ||
+        (!userHasEnoughCredits(
+          !viewer || !viewer?.proposalVotes,
+          proposal.estimation,
+          viewer?.proposalVotes?.creditsLeft,
+        ) &&
+          step.budget) ? (
+          <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} usesNewUI />
+        ) : (
+          <VoteButtonUI
+            id={`proposal-vote-btn-${proposalId}`}
+            onClick={onButtonClick}
+            disabled={disabled || isLoading}
+            totalCount={totalCount}
+            paperVotesTotalCount={paperVotesTotalCount}
+            hasVoted={hasVoted}
+          />
+        )
+      }
+    </>
   )
 }
 

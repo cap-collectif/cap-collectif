@@ -34,6 +34,9 @@ const mutation = graphql`
               edges {
                 node {
                   id
+                  ... on ProposalUserVote {
+                    anonymous
+                  }
                   proposal {
                     id
                   }
@@ -89,10 +92,6 @@ const commit = (variables: AddProposalVoteMutationVariables): Promise<AddProposa
       const stepProxy = store.get(variables.input.stepId)
 
       if (stepProxy) {
-        const connectionRecordList = ConnectionHandler.getConnection(stepProxy, 'ProposalsList_proposals', {})
-        const connectionRecordMap = ConnectionHandler.getConnection(stepProxy, 'VoteStepMap_proposals', {})
-        if (connectionRecordList) ConnectionHandler.deleteNode(connectionRecordList, variables.input.proposalId)
-        if (connectionRecordMap) ConnectionHandler.deleteNode(connectionRecordMap, variables.input.proposalId)
         const project = stepProxy?.getLinkedRecord('project', {})
 
         if (project) {

@@ -8,19 +8,22 @@ import type { IntlShape } from 'react-intl'
 import { openVoteModal } from '~/redux/modules/proposal'
 import type {
   ProposalVoteButton_proposal$key,
-  ProposalVoteButton_proposal,
+  ProposalVoteButton_proposal$data,
 } from '~relay/ProposalVoteButton_proposal.graphql'
 import RemoveProposalVoteMutation from '../../../mutations/RemoveProposalVoteMutation'
 import RemoveProposalSmsVoteMutation from '../../../mutations/RemoveProposalSmsVoteMutation'
 import { isInterpellationContextFromStep, isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import { toast } from '~ds/Toast'
-import type { ProposalVoteButton_step$key, ProposalVoteButton_step } from '~relay/ProposalVoteButton_step.graphql'
+import type { ProposalVoteButton_step$key, ProposalVoteButton_step$data } from '~relay/ProposalVoteButton_step.graphql'
 // TODO @Mo remake this file with @cap-collectif/ui to replace tooltip that already doesn't work
 import CookieMonster from '~/CookieMonster'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import AddProposalSmsVoteMutation from '~/mutations/AddProposalSmsVoteMutation'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
-import type { AddProposalSmsVoteMutationResponse } from '~relay/AddProposalSmsVoteMutation.graphql'
+import type { AddProposalSmsVoteMutation$data } from '~relay/AddProposalSmsVoteMutation.graphql'
+import { VoteStepEvent, dispatchEvent } from '~/components/VoteStep/utils'
+import VoteButtonUI from '~/components/VoteStep/VoteButtonUI'
+import { State } from '~/types'
 
 type ParentProps = {
   proposal: ProposalVoteButton_proposal$key
@@ -28,6 +31,7 @@ type ParentProps = {
   isHovering?: boolean
   id: string
   className?: string
+  usesNewUI?: boolean
 }
 type Props = ParentProps & {
   disabled: boolean
@@ -39,10 +43,14 @@ const PROPOSAL_FRAGMENT = graphql`
     id
     ...interpellationLabelHelper_proposal @relay(mask: false)
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
+    paper: paperVotesTotalCount(stepId: $stepId)
     viewerVote(step: $stepId) @include(if: $isAuthenticated) {
       id
       ranking
       ...UnpublishedTooltip_publishable
+    }
+    votes(stepId: $stepId, first: 0) {
+      totalCount
     }
   }
 `
@@ -55,11 +63,14 @@ const STEP_FRAGMENT = graphql`
 `
 
 const deleteVote = (
-  currentStep: ProposalVoteButton_step,
-  proposal: ProposalVoteButton_proposal,
+  currentStep: ProposalVoteButton_step$data,
+  proposal: ProposalVoteButton_proposal$data,
   isAuthenticated: boolean,
   intl: IntlShape,
 ) => {
+  dispatchEvent(VoteStepEvent.AnimateCard, {
+    proposalId: proposal.id,
+  })
   if (isAuthenticated) {
     return RemoveProposalVoteMutation.commit({
       stepId: currentStep.id,
@@ -71,6 +82,9 @@ const deleteVote = (
       token: null,
     })
       .then(response => {
+        dispatchEvent(VoteStepEvent.RemoveVote, {
+          proposalId: proposal.id,
+        })
         toast({
           variant: 'success',
           content:
@@ -116,7 +130,9 @@ const deleteVote = (
           }),
         })
       }
-
+      dispatchEvent(VoteStepEvent.RemoveVote, {
+        proposalId: proposal.id,
+      })
       toast({
         variant: 'success',
         content:
@@ -143,7 +159,7 @@ const deleteVote = (
 
 const addProposalSmsVote = async (intl: IntlShape, token: string, proposalId: string, stepId: string) => {
   try {
-    const response: AddProposalSmsVoteMutationResponse = await AddProposalSmsVoteMutation.commit({
+    const response: AddProposalSmsVoteMutation$data = await AddProposalSmsVoteMutation.commit({
       input: {
         token,
         proposalId,
@@ -191,11 +207,12 @@ const ProposalVoteButton = ({
   proposal: proposalRef,
   disabled = false,
   hasVoted,
+  usesNewUI,
 }: Props) => {
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
   const currentStep = useFragment(STEP_FRAGMENT, stepRef)
-  const isAuthenticated = useSelector(state => state.user.user) != null
-  const isDeleting = useSelector(state => state.proposal.currentDeletingVote) === proposal.id
+  const isAuthenticated = useSelector<State>(state => state.user.user) != null
+  const isDeleting = useSelector<State>(state => state.proposal.currentDeletingVote) === proposal.id
   const dispatch = useDispatch()
   const isTwilioFeatureEnabled = useFeatureFlag('twilio')
   const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
@@ -251,6 +268,19 @@ const ProposalVoteButton = ({
 
     dispatch(openVoteModal(proposal.id))
   }
+
+  if (usesNewUI)
+    return (
+      <VoteButtonUI
+        id={`proposal-vote-btn-${proposal.id}`}
+        onClick={onButtonClick}
+        disabled={isDeleting}
+        totalCount={proposal?.votes?.totalCount}
+        paperVotesTotalCount={proposal?.paper}
+        hasVoted={hasVoted}
+        noOverlay
+      />
+    )
 
   return (
     <Button

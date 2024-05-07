@@ -6,6 +6,7 @@ describe('Proposal SMS vote', () => {
     cy.task('enable:feature', 'twilio')
     cy.task('enable:feature', 'proposal_sms_vote')
     cy.task('enable:feature', 'display_pictures_in_depository_proposals_list')
+    cy.task('disable:feature', 'new_vote_step')
     cy.clearCookie('AnonymousAuthenticatedWithConfirmedPhone')
   })
   it('should vote then delete correctly', () => {

@@ -17,8 +17,8 @@ const Button = ({ isChecked, children, value, onClick }) => {
       px={4}
       py={2}
       fontSize={2}
-      bg={isChecked ? '#26165A' : '#E9E4F9'}
-      color={isChecked ? '#E9E4F9' : '#26165A'}
+      bg={isChecked ? 'primary.500' : 'primary.200'}
+      color={isChecked ? 'primary.200' : 'primary.500'}
       borderRadius="100px"
       border="none"
       textAlign="left"

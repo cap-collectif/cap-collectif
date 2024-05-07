@@ -1,0 +1,6 @@
+UpdateVotesVisibilityPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            votes:
+                type: '[InternalProposalUserVote]!'

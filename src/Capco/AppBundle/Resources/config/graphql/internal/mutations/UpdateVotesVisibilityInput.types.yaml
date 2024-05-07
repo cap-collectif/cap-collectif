@@ -1,0 +1,10 @@
+UpdateVotesVisibilityInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            stepId:
+                type: 'ID!'
+                description: 'SelectionStep global ID.'
+            anonymous:
+                type: 'Boolean!'
+                description: 'Wether the votes should be anonymous or not.'

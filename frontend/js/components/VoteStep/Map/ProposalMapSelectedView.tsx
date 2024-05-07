@@ -4,17 +4,37 @@ import type { GraphQLTaggedNode } from 'react-relay'
 import { graphql, useFragment } from 'react-relay'
 import { useParams } from 'react-router-dom'
 import type { ProposalMapSelectedView_proposal$key } from '~relay/ProposalMapSelectedView_proposal.graphql'
+import type { ProposalMapSelectedView_viewer$key } from '~relay/ProposalMapSelectedView_viewer.graphql'
+import type { ProposalMapSelectedView_step$key } from '~relay/ProposalMapSelectedView_step.graphql'
+
 import VoteButton from '../VoteButton'
 import { Link } from '../utils'
 import { getBaseUrlFromProposalUrl } from '~/utils/router'
+
 type Props = {
-  readonly proposal: ProposalMapSelectedView_proposal$key
-  readonly onClose: () => void
-  readonly stepId: string
-  readonly disabled: boolean
+  proposal: ProposalMapSelectedView_proposal$key
+  viewer: ProposalMapSelectedView_viewer$key
+  step: ProposalMapSelectedView_step$key
+  onClose: () => void
+  stepId: string
+  disabled: boolean
 }
+
+const FRAGMENT_VIEWER = graphql`
+  fragment ProposalMapSelectedView_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+    ...VoteButton_viewer @arguments(stepId: $stepId)
+  }
+`
+
+const FRAGMENT_STEP = graphql`
+  fragment ProposalMapSelectedView_step on ProposalStep @argumentDefinitions(isAuthenticated: { type: "Boolean!" }) {
+    ...VoteButton_step @arguments(isAuthenticated: $isAuthenticated)
+  }
+`
+
 const FRAGMENT: GraphQLTaggedNode = graphql`
-  fragment ProposalMapSelectedView_proposal on Proposal {
+  fragment ProposalMapSelectedView_proposal on Proposal
+  @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
     id
     title
     url
@@ -26,14 +46,26 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
         url
       }
     }
+    ...VoteButton_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
   }
 `
+
 const MAX = 175
 const DELTA = MAX / 2
-export const ProposalMapSelectedView = ({ proposal, onClose, stepId, disabled }: Props) => {
+export const ProposalMapSelectedView = ({
+  proposal,
+  onClose,
+  stepId,
+  disabled,
+  viewer: viewerKey,
+  step: stepKey,
+}: Props) => {
   const data = useFragment(FRAGMENT, proposal)
+  const viewer = useFragment(FRAGMENT_VIEWER, viewerKey)
+  const step = useFragment(FRAGMENT_STEP, stepKey)
+
   const myRef = useRef<HTMLElement | null>(null)
-  const { projectSlug } = useParams()
+  const { projectSlug } = useParams<{ projectSlug?: string }>()
   const [prevClientY, setPrevClientY] = React.useState(0)
 
   const startTouch = (e: TouchEvent) => {
@@ -47,7 +79,7 @@ export const ProposalMapSelectedView = ({ proposal, onClose, stepId, disabled }:
 
   const moveTouch = (e: TouchEvent) => {
     e.preventDefault()
-    const currentY = parseInt(e.touches[0].clientY, 10)
+    const currentY = e.touches[0].clientY
     const diffY = prevClientY - currentY
     const translateValue = diffY > MAX ? MAX : diffY
     const card = myRef.current
@@ -73,7 +105,7 @@ export const ProposalMapSelectedView = ({ proposal, onClose, stepId, disabled }:
   }
 
   useEffect(() => {
-    let localRef = null
+    let localRef: any = null
     if (myRef.current) myRef.current.addEventListener('touchmove', moveTouch, false)
     localRef = myRef.current
     return () => {
@@ -120,13 +152,20 @@ export const ProposalMapSelectedView = ({ proposal, onClose, stepId, disabled }:
         </Link>
         <Flex justifyContent="space-between" alignItems="start" direction="column" mt={4}>
           <Flex alignItems="center" spacing={2}>
-            <Avatar src={author.media?.url} alt={author.displayName} name={author.displayName} />
+            <Avatar src={author.media?.url} alt={author.displayName || ''} name={author.displayName || ''} />
             <Text as="span" fontSize={2} color="gray.500">
               {author.displayName}
             </Text>
           </Flex>
           <Flex alignItems="center" spacing={4} width="100%" justifyContent="center" my={4}>
-            <VoteButton stepId={stepId} proposalId={id} hasVoted={false} disabled={disabled} />
+            <VoteButton
+              stepId={stepId}
+              proposalId={id}
+              disabled={disabled}
+              viewer={viewer}
+              proposal={data}
+              step={step}
+            />
           </Flex>
         </Flex>
       </Flex>

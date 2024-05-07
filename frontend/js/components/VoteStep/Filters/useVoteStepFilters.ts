@@ -3,10 +3,12 @@ import { useSelector } from 'react-redux'
 import { useIntl } from 'react-intl'
 import type { useVoteStepFiltersQuery } from '~relay/useVoteStepFiltersQuery.graphql'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import { State } from '~/types'
+
 const QUERY = graphql`
   query useVoteStepFiltersQuery($stepId: ID!) {
     step: node(id: $stepId) {
-      ... on SelectionStep {
+      ... on ProposalStep {
         canDisplayBallot
         votesRanking
         voteType
@@ -38,21 +40,26 @@ const QUERY = graphql`
   }
 `
 export type FilterOptions = ReadonlyArray<{
-  readonly id: string
-  readonly name?: string
-  readonly title?: string
+  id: string
+  name?: string
+  title?: string
 }>
+
 type FilterType = 'sort' | 'userType' | 'theme' | 'category' | 'district' | 'status'
+
 type Filter = {
   isEnabled: boolean
   options: FilterOptions
   label: string
 }
+
 export type Filters = Record<FilterType, Filter>
+
 type ReturnType = {
   totalCount: number
   filters: Filters
 } | null
+
 export const useVoteStepFilters = (stepId: string): ReturnType => {
   const intl = useIntl()
   const data = useLazyLoadQuery<useVoteStepFiltersQuery>(
@@ -64,7 +71,7 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
       fetchPolicy: 'store-or-network',
     },
   )
-  const { themes, types } = useSelector(state => {
+  const { themes, types } = useSelector((state: State) => {
     return {
       themes: state.default.themes,
       types: state.default.userTypes,
@@ -198,14 +205,14 @@ export const useVoteStepFilters = (stepId: string): ReturnType => {
       }),
     },
     category: {
-      isEnabled: (form?.usingCategories && (form?.categories?.length ?? 0) > 1) ?? false,
+      isEnabled: (form?.usingCategories && (form?.categories?.length ?? 0) > 0) ?? false,
       options: form?.categories ? [allOption, ...form?.categories] : [],
       label: intl.formatMessage({
         id: 'secondary-theme',
       }),
     },
     district: {
-      isEnabled: districtsEnabled && (form?.districts?.length ?? 0) > 1,
+      isEnabled: districtsEnabled && (form?.districts?.length ?? 0) > 0,
       options: form?.districts ? [allOption, ...form?.districts] : [],
       label: intl.formatMessage({
         id: 'proposal_form.districts',

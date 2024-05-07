@@ -2,11 +2,13 @@ import { $Values } from 'utility-types'
 import * as React from 'react'
 import { Link as RouterLink } from 'react-router-dom'
 import L from 'leaflet'
+
 export const View = {
   Map: 'map',
   List: 'list',
   Votes: 'votes',
 }
+
 export const VoteStepEvent = {
   ClickProposal: 'click-proposal',
   AddVote: 'add-vote',
@@ -15,6 +17,7 @@ export const VoteStepEvent = {
   HoverCardStart: 'hover-card-start',
   HoverCardEnd: 'hover-card-end',
 }
+
 export const dispatchEvent = (type: $Values<typeof VoteStepEvent>, data?: Record<string, any>) => {
   const event = new MessageEvent(type, {
     bubbles: true,
@@ -22,8 +25,10 @@ export const dispatchEvent = (type: $Values<typeof VoteStepEvent>, data?: Record
   })
   document.dispatchEvent(event)
 }
+
 export const DELAY_BEFORE_PROPOSAL_REMOVAL = 0.5
 export const DELAY_BEFORE_MAP_RELOADING = 1000
+
 export const getOrderByArgs = (sort: string | null) => {
   if (!sort) return null
   const sortBy = {
@@ -75,12 +80,13 @@ export const getOrderByArgs = (sort: string | null) => {
     },
   ]
 }
+
 export const Link = ({
   children,
   href,
   stepId,
 }: {
-  readonly children: JSX.Element | JSX.Element[] | string
+  readonly children: React.ReactElement | React.ReactElement[]
   readonly href: string
   readonly stepId: string
 }) => (
@@ -96,6 +102,7 @@ export const Link = ({
     {children}
   </RouterLink>
 )
+
 type Bounds = {
   readonly topLeft: {
     readonly lat: number
@@ -106,7 +113,9 @@ type Bounds = {
     readonly lng: number
   }
 }
+
 export const boundsToLeaflet = (bounds: Bounds) => [bounds.topLeft, bounds.bottomRight]
+
 export const parseLatLng = (latlng: string) => {
   try {
     const value = JSON.parse(latlng)
@@ -115,6 +124,7 @@ export const parseLatLng = (latlng: string) => {
     return null
   }
 }
+
 export const parseLatLngBounds = (latlngBounds: string) => {
   try {
     const value = JSON.parse(latlngBounds)
@@ -129,4 +139,12 @@ export const parseLatLngBounds = (latlngBounds: string) => {
     return null
   }
 }
+
 export const ACTIVE_COLOR = '#3E3361'
+
+const mapViewSizes = ['30.8rem', '40.8rem', '50rem', '69.4rem']
+const listViewSizes = ['100%', '100%', '100%', '69.4rem']
+export const cardWidthMapView = ['100%', '100%', ...mapViewSizes]
+export const cardWidthListView = ['100%', '100%', ...listViewSizes]
+export const emptyStateWithMapView = ['unset', 'unset', ...mapViewSizes]
+export const emptyStateWithListView = ['unset', 'unset', ...listViewSizes]

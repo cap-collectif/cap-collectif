@@ -3,16 +3,16 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { Button, Col } from 'react-bootstrap'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
-import type { ProposalListToggleViewBtn_step } from '~relay/ProposalListToggleViewBtn_step.graphql'
+import type { ProposalListToggleViewBtn_step$data } from '~relay/ProposalListToggleViewBtn_step.graphql'
 
 type Props = {
   showMapButton: boolean
   setDisplayMode: (displayMode: ProposalViewMode) => void
   displayMode: ProposalViewMode
-  step: ProposalListToggleViewBtn_step
+  step: ProposalListToggleViewBtn_step$data
 }
 
-const getDisplayModeEnabled = (step: ProposalListToggleViewBtn_step) => {
+const getDisplayModeEnabled = (step: ProposalListToggleViewBtn_step$data) => {
   if (step.__typename === 'CollectStep') {
     return {
       isGridViewEnabled: step.form?.isGridViewEnabled,

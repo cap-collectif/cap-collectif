@@ -1836,4 +1836,9 @@ InternalMutation:
                     inputType: DeleteParticipantInput
                     payloadType: DeleteParticipantPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteParticipantMutation", args, getUser())'
-
+            updateVotesVisibility:
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateVotesVisibilityInput
+                    payloadType: UpdateVotesVisibilityPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateVotesVisibilityMutation", args, getUser())'

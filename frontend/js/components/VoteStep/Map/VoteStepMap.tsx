@@ -1,20 +1,22 @@
 import React, { useRef, useEffect, useState } from 'react'
 import { renderToString } from 'react-dom/server'
-import { Marker, MapContainer as Map } from 'react-leaflet'
+import { Marker, MapContainer as Map, Popup, GeoJSON } from 'react-leaflet'
 import { AnimatePresence, m as motion } from 'framer-motion'
 import { GestureHandling } from 'leaflet-gesture-handling'
+import { useDispatch } from 'react-redux'
+import { change } from 'redux-form'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import type { GraphQLTaggedNode } from 'react-relay'
-import { graphql, usePaginationFragment } from 'react-relay'
+import { graphql, useFragment, usePaginationFragment } from 'react-relay'
 import L from 'leaflet'
 import MarkerClusterGroup from 'react-leaflet-markercluster'
-import type { MapProps, MapCenterObject } from '~/components/Proposal/Map/Map.types'
+import { MapCenterObject } from '~/components/Proposal/Map/Map.types'
 import type { VoteStepMap_step$key } from '~relay/VoteStepMap_step.graphql'
+import type { VoteStepMap_viewer$key } from '~relay/VoteStepMap_viewer.graphql'
 import { isSafari } from '~/config'
 import CapcoTileLayer from '~/components/Utils/CapcoTileLayer'
 import { MapContainer } from './Map.style'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import { MAX_MAP_ZOOM } from '~/utils/styles/variables'
 import LocateAndZoomControl from './LocateAndZoomControl'
 import ProposalMapLoaderPane from '~/components/Proposal/Map/ProposalMapLoaderPane'
@@ -32,18 +34,29 @@ import {
 } from '../utils'
 import EmptyList from '../List/EmptyList'
 import debounce from '~/utils/debounce-promise'
+import { Button, CapUIIcon, CapUIIconSize, Icon as DSIcon, useTheme } from '@cap-collectif/ui'
+import { useIntl } from 'react-intl'
+import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import ProposalCreateModal from '~/components/Proposal/Create/ProposalCreateModal'
+import { formName } from '~/components/Proposal/Form/ProposalForm'
+import { useDisclosure } from '@liinkiing/react-hooks'
+import { getAddressFromLatLng } from '~/utils/googleMapAddress'
+import { convertToGeoJsonStyle, formatGeoJsons } from '~/utils/geojson'
+
 type Props = {
-  readonly voteStep: VoteStepMap_step$key
-  readonly handleMapPositionChange: (arg0: string) => void
-  readonly urlCenter: MapCenterObject | null
-  readonly DEFAULT_CENTER: MapCenterObject & {
+  voteStep: VoteStepMap_step$key
+  viewer: VoteStepMap_viewer$key
+  handleMapPositionChange: (arg0: string) => void
+  urlCenter: MapCenterObject | null
+  DEFAULT_CENTER: MapCenterObject & {
     zoom: number
   }
-  readonly stepId: string
-  readonly disabled: boolean
+  stepId: string
+  disabled: boolean
 }
+
 const FRAGMENT: GraphQLTaggedNode = graphql`
-  fragment VoteStepMap_step on SelectionStep
+  fragment VoteStepMap_step on ProposalStep
   @argumentDefinitions(
     count: { type: "Int!" }
     cursor: { type: "String" }
@@ -55,6 +68,8 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
     status: { type: "ID" }
     geoBoundingBox: { type: "GeoBoundingBox" }
     term: { type: "String" }
+    stepId: { type: "ID!" }
+    isAuthenticated: { type: "Boolean!" }
   )
   @refetchable(queryName: "VoteStepMapPaginationQuery") {
     proposals(
@@ -66,13 +81,12 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
       category: $category
       district: $district
       status: $status
-      excludeViewerVotes: true
       geoBoundingBox: $geoBoundingBox
       term: $term
     ) @connection(key: "VoteStepMap_proposals", filters: []) {
       edges {
         node {
-          ...ProposalMapSelectedView_proposal
+          ...ProposalMapSelectedView_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
           id
           address {
             lat
@@ -85,47 +99,98 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
         }
       }
     }
+    ...ProposalMapSelectedView_step @arguments(isAuthenticated: $isAuthenticated)
+    kind
+    form {
+      proposalInAZoneRequired
+      districts(order: ALPHABETICAL) {
+        displayedOnMap
+        geojson
+        id
+        border {
+          id
+          enabled
+          color
+          opacity
+          size
+        }
+        background {
+          id
+          enabled
+          color
+          opacity
+          size
+        }
+      }
+
+      contribuable
+      ...ProposalCreateModal_proposalForm
+    }
   }
 `
-const ICON_COLOR = '#5E5E5E'
+
+const FRAGMENT_VIEWER = graphql`
+  fragment VoteStepMap_viewer on User @argumentDefinitions(stepId: { type: "ID!" }) {
+    ...ProposalMapSelectedView_viewer @arguments(stepId: $stepId)
+  }
+`
+
 const size = 40
+
 export const VoteStepMap = ({
   voteStep,
+  viewer: viewerKey,
   handleMapPositionChange,
   urlCenter,
   stepId,
   DEFAULT_CENTER,
   disabled,
 }: Props) => {
-  const mapRef = useRef(null)
+  const intl = useIntl()
+  const mapRef = useRef<L.Map>(null)
+  const popupRef = useRef(null)
   const isMobile = useIsMobile()
   const { filters } = useVoteStepContext()
   const { latlngBounds } = filters
   const [selectedProposal, setSelectedProposal] = useState(null)
   const [hoveredProposal, setHoveredProposal] = useState(null)
   const filterBounds = parseLatLngBounds(latlngBounds || '')
+  const { colors } = useTheme()
   const { data, loadNext, hasNext, refetch, isLoadingNext } = usePaginationFragment(FRAGMENT, voteStep)
+  const viewer = useFragment(FRAGMENT_VIEWER, viewerKey)
   const markers =
     data.proposals.edges
       ?.map(edge => edge?.node)
       .filter(Boolean)
       .filter(proposal => !!(proposal?.address && proposal.address.lat && proposal.address.lng)) || []
   const proposal = data.proposals.edges?.map(edge => edge?.node).find(p => p?.id === selectedProposal)
+  const proposalForm = data.form
+  const dispatch = useDispatch()
+  const { isOpen, onOpen, onClose } = useDisclosure(false)
+  const [popoverLatLng, setPopoverLatLng] = useState({
+    lat: 0,
+    lng: 0,
+  })
+  const isCollectStep = data.form && data.kind === 'collect'
+  const geoJsons = formatGeoJsons(proposalForm.districts)
+
   useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
   }, [])
+
   useEffect(() => {
     if (hasNext) {
       loadNext(50)
     }
   }, [hasNext, isLoadingNext, loadNext])
+
   useEffect(() => {
     if (mapRef.current && !filterBounds) {
       mapRef.current.flyTo([DEFAULT_CENTER.lat, DEFAULT_CENTER.lng], DEFAULT_CENTER.zoom)
     }
   }, [filterBounds, DEFAULT_CENTER])
 
-  const onPositionChange = (map: MapProps) => {
+  const onPositionChange = (map: L.Map) => {
     const bounds = map.getBounds()
     handleMapPositionChange(
       JSON.stringify({
@@ -135,32 +200,51 @@ export const VoteStepMap = ({
     )
   }
 
-  const debouncedOnPositionChange = debounce((map: MapProps) => onPositionChange(map), DELAY_BEFORE_MAP_RELOADING)
+  const debouncedOnPositionChange = debounce((map: L.Map) => onPositionChange(map), DELAY_BEFORE_MAP_RELOADING)
   useEventListener(VoteStepEvent.HoverCardStart, e => {
-    // @ts-expect-error Event type is too strict in flow
     const proposalId = e?.data?.id
     if (proposalId) setHoveredProposal(proposalId)
   })
   useEventListener(VoteStepEvent.HoverCardEnd, () => {
     setHoveredProposal(null)
   })
+
+  const closePopup = () => {
+    if (popupRef.current) popupRef.current.close()
+  }
+
   return (
     <>
+      <ProposalCreateModal
+        title="proposal.add"
+        proposalForm={proposalForm}
+        show={isOpen}
+        onClose={onClose}
+        onOpen={async () => {
+          const geoAddr = await getAddressFromLatLng(popoverLatLng)
+          dispatch(change(formName, 'address', geoAddr ? JSON.stringify([geoAddr]) : geoAddr))
+          dispatch(change(formName, 'addressText', geoAddr ? geoAddr.formatted_address : geoAddr))
+        }}
+      />
       <MapContainer>
         <Map
-          whenCreated={(map: MapProps) => {
+          whenCreated={map => {
             mapRef.current = map
 
             if (!isMobile) {
+              // @ts-ignore Use ts leaflet types now that we are in TS
               if (filterBounds && mapRef.current) mapRef.current.fitBounds(boundsToLeaflet(filterBounds))
               else if (mapRef.current) onPositionChange(mapRef.current)
             }
-
             map.on('moveend', () => {
+              closePopup()
               if (mapRef.current) debouncedOnPositionChange(mapRef.current)
             })
-            map.on('click', () => {
+            map.on('click', e => {
               if (mapRef.current) setSelectedProposal(null)
+              if (isCollectStep && proposalForm?.contribuable) {
+                setPopoverLatLng(e?.latlng)
+              }
             })
           }}
           center={
@@ -183,6 +267,27 @@ export const VoteStepMap = ({
           gestureHandling={!isSafari && !isMobile}
         >
           <CapcoTileLayer />
+          <Popup
+            ref={popupRef}
+            key="popup-proposal"
+            closeButton={false}
+            position={popoverLatLng}
+            autoPan={false}
+            className="popup-proposal"
+          >
+            <NewLoginOverlay placement="top">
+              <Button
+                opacity={!proposalForm?.contribuable ? 0.5 : 1}
+                variantSize="small"
+                onClick={onOpen}
+                disabled={!proposalForm?.contribuable}
+              >
+                {intl.formatMessage({
+                  id: 'proposal.add',
+                })}
+              </Button>
+            </NewLoginOverlay>
+          </Popup>
           <MarkerClusterGroup
             spiderfyOnMaxZoom
             showCoverageOnHover={false}
@@ -192,7 +297,7 @@ export const VoteStepMap = ({
           >
             {markers?.length > 0 &&
               markers.map((mark, idx) => {
-                const icon = mark.category?.icon
+                // const icon = mark.category?.icon
                 const isSelected = selectedProposal === mark.id
                 const isActive = isSelected || hoveredProposal === mark.id
                 const iconSize = size + 10
@@ -203,7 +308,14 @@ export const VoteStepMap = ({
                     icon={L.divIcon({
                       className: `preview-icn ${isActive ? 'active' : ''}`,
                       html: renderToString(
-                        <>
+                        <DSIcon
+                          name={CapUIIcon.Pin}
+                          size={CapUIIconSize.Sm}
+                          color={isActive ? colors.primary[500] : colors['neutral-gray'][800]}
+                          _hover={{ color: colors.primary[500] }}
+                        />,
+                      ),
+                      /* <> Keeping it in case IDF
                           <Icon
                             name={ICON_NAME.pin3}
                             size={size}
@@ -212,8 +324,7 @@ export const VoteStepMap = ({
                             }}
                           />
                           {icon && <Icon name={ICON_NAME[icon]} size={16} color="white" />}
-                        </>,
-                      ),
+                        </>,*/
                       iconSize: [iconSize, iconSize],
                       iconAnchor: [iconSize / 2, iconSize],
                       popupAnchor: [0, -iconSize],
@@ -231,6 +342,11 @@ export const VoteStepMap = ({
                 )
               })}
           </MarkerClusterGroup>
+          {geoJsons &&
+            geoJsons.map((geoJson, idx) => (
+              // @ts-ignore geojson stuff
+              <GeoJSON style={convertToGeoJsonStyle(geoJson.style)} key={idx} data={geoJson.district} />
+            ))}
           {!isMobile ? <LocateAndZoomControl /> : null}
           {hasNext && (
             <ProposalMapLoaderPane
@@ -242,8 +358,9 @@ export const VoteStepMap = ({
           )}
         </Map>
       </MapContainer>
-      {isMobile && !markers.length ? <EmptyList isMapView /> : null}
+      {isMobile && !markers.length ? <EmptyList isMapMobileView /> : null}
       {selectedProposal ? (
+        // @ts-ignore upgrade framer-motion
         <AnimatePresence initial={false} onExitComplete={() => setSelectedProposal(null)}>
           {selectedProposal && proposal ? (
             <motion.div
@@ -267,6 +384,8 @@ export const VoteStepMap = ({
               <ProposalMapSelectedView
                 onClose={() => setSelectedProposal(null)}
                 proposal={proposal}
+                viewer={viewer}
+                step={data}
                 stepId={stepId}
                 disabled={disabled}
               />

@@ -276,7 +276,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
       id: string
     }>
   }) => {
-    const tmpVote = values.votes.filter(v => v.id === null)[0]
+    const tmpVote = values.votes?.filter(v => v.id === null)[0]
     if (!tmpVote) return
     // First we add the vote
     return vote(dispatch, step.id, proposal.id, !tmpVote.public, intl).then(data => {

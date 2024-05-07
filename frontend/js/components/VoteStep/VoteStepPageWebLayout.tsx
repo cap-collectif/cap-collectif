@@ -10,82 +10,150 @@ import VoteStepFiltersSkeleton from '~/components/VoteStep/Filters/VoteStepFilte
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import VoteStepFiltersDesktop from '~/components/VoteStep/Filters/VoteStepFiltersDesktop'
 import VoteStepPageSearchBar from '~/components/VoteStep/VoteStepPageSearchBar'
+import { VoteStepPageWebLayout_query$key } from '~relay/VoteStepPageWebLayout_query.graphql'
+import ProposalCreateModal from '~/components/Proposal/Create/ProposalCreateModal'
+import { formName } from '~/components/Proposal/Form/ProposalForm'
 import VotesInfo from './VotesInfo'
-import { View, parseLatLng } from './utils'
-type Props = {
-  readonly stepId: string
-  readonly isMapView: boolean
-}
-export const VoteStepPageWebLayout = ({ stepId, isMapView }: Props) => {
-  const { filters, setFilters, view: contextView } = useVoteStepContext()
-  const { latlng } = filters
-  const view = contextView || (isMapView ? View.Map : View.List)
-  return (
-    <Flex>
-      <Box width={['30%', '30%', '30%', '20%']} bg="gray.100">
-        <React.Suspense fallback={<VoteStepFiltersSkeleton isMobile={false} />}>
-          {view === View.Votes ? <VotesInfo stepId={stepId} /> : <VoteStepFiltersDesktop stepId={stepId} />}
-        </React.Suspense>
-      </Box>
-      <Box
-        width={view === View.Map ? '40%' : ['70%', '70%', '70%', '80%']}
-        bg="gray.100"
-        pt={6}
-        overflow="hidden"
-        sx={{
-          '.motion-list': {
-            display: view === View.List ? 'block' : 'none !important',
-          },
-          '.motion-map': {
-            display: view === View.Map ? 'block' : 'none !important',
-          },
-        }}
-      >
-        <Flex
-          justify="space-between"
-          alignItems="center"
-          width={view === View.Map ? '100%' : ['100%', '100%', '100%', '50%']}
-          px={8}
-          mb={6}
-          gap={4}
-        >
-          <Box
-            className="VoteStepPageSearchBar-Container"
-            width="100%"
-            maxWidth={
-              view === View.Map
-                ? ['100%', 'calc(100% - 11rem)', 'calc(100% - 11rem)', 'calc(100% - 22rem)']
-                : 'calc(100% - 22rem)'
-            }
-          >
-            <VoteStepPageSearchBar />
-          </Box>
-          <ViewChangePanel />
-        </Flex>
+import { View, cardWidthMapView, parseLatLng } from './utils'
+import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
+import VoteStepPageCollectButton from './VoteStepPageCollectButton'
+import { useDisclosure } from '@liinkiing/react-hooks'
+import { graphql, useFragment } from 'react-relay'
+import { useDispatch } from 'react-redux'
+import { reset } from 'redux-form'
+import type { Dispatch } from '~/types'
 
-        <React.Suspense fallback={<ProposalsListSkeleton showImages={view !== View.Map} />}>
-          {view === View.Votes ? (
-            <VotesList stepId={stepId} showImages />
-          ) : (
-            <ProposalsList stepId={stepId} showImages={view !== View.Map} />
-          )}
-        </React.Suspense>
-      </Box>
-      {view === View.Map ? (
-        <Box width={['30%', '30%', '30%', '40%']}>
-          <React.Suspense fallback={<VoteStepMapSkeleton />}>
-            <VoteStepMapQuery
-              stepId={stepId}
-              handleMapPositionChange={(newLatlngBounds: string) => {
-                setFilters('latlng', '')
-                setFilters('latlngBounds', newLatlngBounds)
-              }}
-              urlCenter={latlng ? parseLatLng(latlng) : null}
-            />
+type Props = {
+  stepId: string
+  isMapView: boolean
+  query: VoteStepPageWebLayout_query$key
+}
+
+const FILTERS_WIDTH = '23.3rem'
+
+const QUERY = graphql`
+  fragment VoteStepPageWebLayout_query on Query @argumentDefinitions(stepId: { type: "ID!" }) {
+    step: node(id: $stepId) {
+      ... on ProposalStep {
+        open
+        kind
+        isProposalSmsVoteEnabled
+        votable
+        form {
+          id
+          objectType
+          contribuable
+          ...ProposalCreateModal_proposalForm
+        }
+      }
+    }
+  }
+`
+
+export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView }: Props) => {
+  const { filters, setFilters, view: contextView, hasMapView } = useVoteStepContext()
+  const { latlng } = filters
+  const { width } = useWindowWidth()
+  const view = contextView || (isMapView ? View.Map : View.List)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  const data = useFragment(QUERY, queryKey)
+  const dispatch = useDispatch<Dispatch>()
+
+  if (!data || !data.step) return null
+
+  const isCollectStep = data.step.kind === 'collect'
+
+  const isLargeScreen = width >= 1920
+
+  const showImages = view !== View.Map || isLargeScreen
+
+  const isVotable = data.step.votable
+
+  return (
+    <>
+      {/** @ts-ignore TODO: typescript on redux connect */}
+      <ProposalCreateModal
+        title="proposal.add"
+        proposalForm={data.step.form}
+        show={isOpen}
+        onClose={onClose}
+        onOpen={() => dispatch(reset(formName))}
+      />
+      <Flex justify="center" maxWidth={'100%'} width="100%">
+        <Box width={FILTERS_WIDTH} minWidth={FILTERS_WIDTH} bg="gray.100">
+          <React.Suspense fallback={<VoteStepFiltersSkeleton isMobile={false} />}>
+            {view === View.Votes ? (
+              <Box pr={2}>
+                <VotesInfo stepId={stepId} />
+              </Box>
+            ) : (
+              <VoteStepFiltersDesktop stepId={stepId} isCollectStep={isCollectStep} />
+            )}
           </React.Suspense>
         </Box>
-      ) : null}
-    </Flex>
+        <Box
+          width={view === View.Map || isLargeScreen ? 'auto' : `calc(100% - ${FILTERS_WIDTH})`}
+          bg="gray.100"
+          pt={8}
+          overflow="hidden"
+          sx={{
+            '.motion-list': {
+              display: view === View.List ? 'block' : 'none !important',
+            },
+            '.motion-map': {
+              display: view === View.Map ? 'block' : 'none !important',
+            },
+          }}
+        >
+          <Flex alignItems="center" width={cardWidthMapView} mb={6} gap={4} ml={[0, 6]}>
+            <Box className="VoteStepPageSearchBar-Container" width="100%" display={'flex'} alignItems="center">
+              {data.step.form && isCollectStep && (
+                <VoteStepPageCollectButton onOpen={onOpen} disabled={!data.step.form.contribuable} />
+              )}
+              <VoteStepPageSearchBar />
+            </Box>
+            <ViewChangePanel
+              hideText={width < 1133 || (view === View.Map && width < 1280)}
+              hasMapView={hasMapView}
+              hasVotesView={isVotable}
+              isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
+            />
+          </Flex>
+
+          <React.Suspense fallback={<ProposalsListSkeleton showImages={showImages} />}>
+            {view === View.Votes ? (
+              <VotesList stepId={stepId} showImages />
+            ) : (
+              <ProposalsList stepId={stepId} showImages={showImages} />
+            )}
+          </React.Suspense>
+        </Box>
+        {hasMapView && (view === View.Map || isLargeScreen) ? (
+          <Box
+            width={[
+              '100%',
+              '100%',
+              `calc(100% - calc(${FILTERS_WIDTH} + 34.4rem))`,
+              `calc(100% - calc(${FILTERS_WIDTH} + 44.4rem))`,
+              `calc(100% - calc(${FILTERS_WIDTH} + 53.6rem))`,
+              `calc(100% - calc(${FILTERS_WIDTH} + 73rem))`,
+            ]}
+            pt={8}
+          >
+            <React.Suspense fallback={<VoteStepMapSkeleton />}>
+              <VoteStepMapQuery
+                stepId={stepId}
+                handleMapPositionChange={(newLatlngBounds: string) => {
+                  setFilters('latlng', '')
+                  setFilters('latlngBounds', newLatlngBounds)
+                }}
+                urlCenter={latlng ? parseLatLng(latlng) : null}
+              />
+            </React.Suspense>
+          </Box>
+        ) : null}
+      </Flex>
+    </>
   )
 }
 export default VoteStepPageWebLayout
