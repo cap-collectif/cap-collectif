@@ -12,6 +12,8 @@ import {
   Tag,
   Proposal,
   CapUIFontWeight,
+  CapUIIcon,
+  Text,
 } from '@cap-collectif/ui'
 import type { ProposalPreviewCard_proposal$key } from '~relay/ProposalPreviewCard_proposal.graphql'
 import type { ProposalPreviewCard_viewer$key } from '~relay/ProposalPreviewCard_viewer.graphql'
@@ -22,6 +24,7 @@ import convertIconToDs from '~/utils/convertIconToDs'
 import { getBaseUrlFromProposalUrl } from '~/utils/router'
 import { Link, ACTIVE_COLOR, VoteStepEvent, dispatchEvent, cardWidthListView, cardWidthMapView } from '../utils'
 import stripHtml from '~/utils/stripHtml'
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 
 import ProposalPreviewCardFooter from './ProposalPreviewCardFooter'
 
@@ -44,6 +47,12 @@ const FRAGMENT = graphql`
       name
       color
       icon
+    }
+    theme {
+      title
+    }
+    district {
+      name
     }
     media {
       url
@@ -138,11 +147,12 @@ export const ProposalPreviewCard = ({
   const proposal = useFragment(FRAGMENT, proposalFragment)
   const viewer = useFragment(FRAGMENT_VIEWER, viewerFragment)
   const step = useFragment(FRAGMENT_STEP, stepFragment)
+  const isCompleteView = useFeatureFlag('full_proposal_card')
 
   const { projectSlug } = useParams<{ projectSlug?: string }>()
   if (!proposal || !step) return null
 
-  const { media, author, category, title, summary, body, status } = proposal
+  const { media, author, category, title, summary, body, status, district, theme } = proposal
 
   const { viewerVotes } = step
 
@@ -175,9 +185,27 @@ export const ProposalPreviewCard = ({
       }}
       boxShadow={['small', isHighlighted ? '0 10px 30px rgba(0, 0, 0, 0.15)' : 'unset']}
     >
-      <Proposal.Content width={['100%', 'unset']}>
+      <Proposal.Content width={['100%', isCompleteView ? '100%' : 'unset']}>
         <Proposal.Content.Header>
-          <Proposal.Content.Header.Author author={author.displayName} />{' '}
+          <Flex spacing={isCompleteView ? 2 : 0} flexWrap="wrap">
+            {isCompleteView && !!status ? (
+              // @ts-ignore fix DS
+              <Tag variantColor="neutral-gray" sx={{ maxWidth: 'unset !important' }}>
+                {status?.name}
+              </Tag>
+            ) : null}
+            {!isCompleteView ? <Proposal.Content.Header.Author author={author.displayName} /> : null}
+            {isCompleteView ? (
+              <>
+                {district ? <Proposal.Content.Header.Author author={district.name} icon={CapUIIcon.PinO} /> : null}
+                {theme ? (
+                  <Text color="neutral-gray.800" fontSize={2}>
+                    {theme.title}
+                  </Text>
+                ) : null}
+              </>
+            ) : null}
+          </Flex>
           <Link href={`${projectSlug || ''}/${url}/${proposal.slug}`} stepId={stepId}>
             <Heading as="h4" fontSize="16px" color="neutral-gray.900" fontWeight={CapUIFontWeight.Bold}>
               {title}
@@ -201,24 +229,33 @@ export const ProposalPreviewCard = ({
             </>
           </Proposal.Content.Body>
         </Link>
-        <ProposalPreviewCardFooter
-          disabled={disabled}
-          proposal={proposal}
-          viewer={viewer}
-          step={step}
-          stepId={stepId}
-        />
+        <Flex justifyContent="space-between" alignItems="center" direction={['column', 'row']}>
+          <ProposalPreviewCardFooter
+            disabled={disabled}
+            proposal={proposal}
+            viewer={viewer}
+            step={step}
+            stepId={stepId}
+          />
+          {isCompleteView ? <Proposal.Content.Header.Author author={author.displayName} mt={4} /> : null}
+        </Flex>
       </Proposal.Content>
       {showImage ? (
         <Link href={`${projectSlug || ''}/${url}/${proposal.slug}`} stepId={stepId}>
           {media ? (
-            <Proposal.Cover src={media.url as string} alt={media.name} status={status?.name} />
+            <Box sx={{ '.cap-tag': { maxWidth: 'unset !important' } }}>
+              <Proposal.Cover
+                src={media.url as string}
+                alt={media.name}
+                status={!isCompleteView ? status?.name : null}
+              />
+            </Box>
           ) : (
             <ImageContainer>
-              {!!status && (
+              {!!status && !isCompleteView && (
                 <Tag
                   // @ts-ignore !important
-                  sx={{ position: 'absolute !important' }}
+                  sx={{ position: 'absolute !important', maxWidth: 'unset !important' }}
                   top={2}
                   right={2}
                   zIndex={2}

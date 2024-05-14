@@ -89,6 +89,7 @@ export const ViewChangePanel = ({
   const { view, setView, setFilters } = useVoteStepContext()
   const isTwilioFeatureEnabled = useFeatureFlag('twilio')
   const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
+  const isCompleteView = useFeatureFlag('full_proposal_card')
   const smsVoteEnabled = isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
   const { colors } = useTheme()
   const { width } = useWindowWidth()
@@ -180,7 +181,7 @@ export const ViewChangePanel = ({
               setView(View.Votes)
             }}
             active={view === View.Votes}
-            icon={CapUIIcon.ThumbUp}
+            icon={isCompleteView ? CapUIIcon.Vote : CapUIIcon.ThumbUp}
             borderTopRightRadius="normal"
             borderBottomRightRadius="normal"
             borderLeft={view === View.Votes && !hideText ? 'normal' : 'none'}

@@ -30,7 +30,7 @@ export const MapContainer = styled.div`
     }
   }
 
-  .preview-icn svg {
+  .preview-icn svg:nth-child(1) {
     height: 30px !important;
     width: 30px !important;
     max-height: none !important;
@@ -40,8 +40,12 @@ export const MapContainer = styled.div`
 
   .preview-icn svg:nth-child(2) {
     position: absolute;
-    top: 7px;
-    left: 12px;
+    top: 3px;
+    left: 8px;
+    height: 15px !important;
+    width: 15px !important;
+    max-height: none !important;
+    max-width: none !important;
     pointer-events: none;
   }
 

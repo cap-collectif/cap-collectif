@@ -34,7 +34,7 @@ import {
 } from '../utils'
 import EmptyList from '../List/EmptyList'
 import debounce from '~/utils/debounce-promise'
-import { Button, CapUIIcon, CapUIIconSize, Icon as DSIcon, useTheme } from '@cap-collectif/ui'
+import { Button, CapUIIcon, CapUIIconSize, Icon, useTheme } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
 import ProposalCreateModal from '~/components/Proposal/Create/ProposalCreateModal'
@@ -42,6 +42,7 @@ import { formName } from '~/components/Proposal/Form/ProposalForm'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { getAddressFromLatLng } from '~/utils/googleMapAddress'
 import { convertToGeoJsonStyle, formatGeoJsons } from '~/utils/geojson'
+import convertIconToDs from '~/utils/convertIconToDs'
 
 type Props = {
   voteStep: VoteStepMap_step$key
@@ -217,6 +218,7 @@ export const VoteStepMap = ({
     <>
       <ProposalCreateModal
         title="proposal.add"
+        fullSizeOnMobile
         proposalForm={proposalForm}
         show={isOpen}
         onClose={onClose}
@@ -297,7 +299,7 @@ export const VoteStepMap = ({
           >
             {markers?.length > 0 &&
               markers.map((mark, idx) => {
-                // const icon = mark.category?.icon
+                const icon = mark.category?.icon
                 const isSelected = selectedProposal === mark.id
                 const isActive = isSelected || hoveredProposal === mark.id
                 const iconSize = size + 10
@@ -308,12 +310,14 @@ export const VoteStepMap = ({
                     icon={L.divIcon({
                       className: `preview-icn ${isActive ? 'active' : ''}`,
                       html: renderToString(
-                        <DSIcon
-                          name={CapUIIcon.Pin}
-                          size={CapUIIconSize.Sm}
-                          color={isActive ? colors.primary[500] : colors['neutral-gray'][800]}
-                          _hover={{ color: colors.primary[500] }}
-                        />,
+                        <>
+                          <Icon
+                            name={icon ? CapUIIcon.PinFull : CapUIIcon.Pin}
+                            size={CapUIIconSize.Sm}
+                            color={mark.category?.color || colors['neutral-gray'][800]}
+                          />
+                          {icon && <Icon name={convertIconToDs(icon)} size={CapUIIconSize.Xs} color="white" />}
+                        </>,
                       ),
                       /* <> Keeping it in case IDF
                           <Icon

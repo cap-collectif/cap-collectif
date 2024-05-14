@@ -142,6 +142,7 @@ const VoteStepFilterSearchBar = () => {
             <Box
               as="input"
               disableFocusStyles
+              autoFocus
               width="100%"
               bg="inherit"
               {...getInputProps({
