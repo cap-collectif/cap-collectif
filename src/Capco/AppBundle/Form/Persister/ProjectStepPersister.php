@@ -84,6 +84,9 @@ class ProjectStepPersister
             if ('questionnaire' === $step['type']) {
                 $this->removeStepInPreviousQuestionnaire($step, $dbSteps);
             }
+            if ('collect' === $step['type']) {
+                $this->removeAnalysisConfigurationInPreviousCollectStep($step, $dbSteps);
+            }
             unset($step['id']);
             if ('collect' === $step['type'] || 'selection' === $step['type']) {
                 self::setDefaultMainViewIfNeeded($step, $project);
@@ -290,6 +293,38 @@ class ProjectStepPersister
         }
 
         $questionnaire->setStep(null);
+        $this->em->flush();
+    }
+
+    /**
+     * Remove the analysis configuration in the previous collect step if the new proposal form is different.
+     *
+     * @param array<string, string>              $step    The user input
+     * @param ArrayCollection<int, AbstractStep> $dbSteps The steps in the database
+     */
+    private function removeAnalysisConfigurationInPreviousCollectStep(array $step, ArrayCollection $dbSteps): void
+    {
+        // Find the current collect step in the user input
+        $currentCollectStep = null;
+        foreach ($dbSteps as $dbStep) {
+            if (isset($step['id']) && $dbStep->getId() === $step['id'] && $dbStep instanceof CollectStep) {
+                $currentCollectStep = $dbStep;
+
+                break;
+            }
+        }
+
+        // If there's no current collect step or it doesn't have an associated analysis configuration, do nothing
+        if (!$currentCollectStep || !$currentCollectStep->getProposalForm() || !$currentCollectStep->getProposalForm()->getAnalysisConfiguration()) {
+            return;
+        }
+
+        // Remove the analysis configuration for the previous proposal form only if the new proposal form is different
+        if (isset($step['proposalForm']) && $step['proposalForm'] === $currentCollectStep->getProposalForm()->getId()) {
+            return;
+        }
+
+        $this->em->remove($currentCollectStep->getProposalForm()->getAnalysisConfiguration());
         $this->em->flush();
     }
 }
