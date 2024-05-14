@@ -95,7 +95,7 @@ exports[`<PostList /> should render correctly 1`] = `
               aria-controls="id-g"
               aria-expanded={false}
               aria-haspopup="menu"
-              className="sc-bcXGCL sc-laZSpB jnZNER eQjrwW cap-button cap-menu__disclosure"
+              className="sc-bcXGCL sc-laZSpB jnZNER cVNzUU cap-button cap-menu__disclosure"
               onClick={[Function]}
               onClickCapture={[Function]}
               onFocus={[Function]}
@@ -134,7 +134,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+              className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -747,7 +747,7 @@ exports[`<PostList /> should render correctly 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB hgLfnE gEVMxs cap-button"
+        className="sc-bcXGCL sc-laZSpB hgLfnE jAaALk cap-button"
         onClick={[Function]}
         type="button"
       >

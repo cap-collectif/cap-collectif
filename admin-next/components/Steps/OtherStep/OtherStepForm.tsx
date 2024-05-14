@@ -12,6 +12,7 @@ import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { onBack } from '@components/Steps/utils'
 import { useOtherStep } from './OtherStepContext'
+import StepDurationInput from '../Shared/StepDurationInput'
 
 type Props = {
   stepId: string
@@ -194,43 +195,9 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               submit: isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'global.add' }),
             }}
           />
+          <StepDurationInput canChooseDurationType={false} />
         </FormProvider>
 
-        <Box color="gray.900" mt={6}>
-          <Text fontSize={2}>{intl.formatMessage({ id: 'step-duration' })}</Text>
-          <Flex mb={4}>
-            <FormControl name="startAt" control={control} width="max-content" mr={6} mb={0}>
-              <FormLabel htmlFor="startAt" label={intl.formatMessage({ id: 'start-date' })}>
-                <Text fontSize={2} color="gray.500">
-                  {intl.formatMessage({ id: 'global.optional' })}
-                </Text>
-              </FormLabel>
-              <FieldInput
-                id="startAt"
-                name="startAt"
-                control={control}
-                type="dateHour"
-                // @ts-expect-error MAJ DS Props
-                dateInputProps={{ isOutsideRange: true }}
-              />
-            </FormControl>
-            <FormControl name="endAt" control={control} width="max-content">
-              <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
-                <Text fontSize={2} color="gray.500">
-                  {intl.formatMessage({ id: 'global.optional' })}
-                </Text>
-              </FormLabel>
-              <FieldInput
-                id="endAt"
-                name="endAt"
-                control={control}
-                type="dateHour"
-                // @ts-expect-error MAJ DS Props
-                dateInputProps={{ isOutsideRange: true }}
-              />
-            </FormControl>
-          </Flex>
-        </Box>
         <Accordion color={CapUIAccordionColor.Transparent}>
           <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
             <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>

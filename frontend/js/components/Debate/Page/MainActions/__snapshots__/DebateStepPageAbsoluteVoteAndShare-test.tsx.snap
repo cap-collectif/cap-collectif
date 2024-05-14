@@ -235,11 +235,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-breQAM dGgcIL"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
+                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -450,11 +450,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-breQAM dGgcIL"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
+                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -537,7 +537,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
+            className="sc-bcXGCL sc-laZSpB ifLJXS blfAEz cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -575,7 +575,7 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
+              className="sc-bcXGCL sc-laZSpB bPdwyl eDMIiP cap-button"
               onClick={[Function]}
               type="button"
             >
@@ -656,7 +656,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
+            className="sc-bcXGCL sc-laZSpB ifLJXS blfAEz cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -957,11 +957,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-breQAM dGgcIL"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
+                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -1172,11 +1172,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-breQAM dGgcIL"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
+                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -1259,7 +1259,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB ifLJXS dZBxJZ cap-button"
+            className="sc-bcXGCL sc-laZSpB ifLJXS blfAEz cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1297,7 +1297,7 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB bPdwyl eempAp cap-button"
+              className="sc-bcXGCL sc-laZSpB bPdwyl eDMIiP cap-button"
               onClick={[Function]}
               type="button"
             >
@@ -1383,7 +1383,7 @@ Array [
           </p>
         </div>
         <button
-          className="sc-bcXGCL sc-laZSpB hgBEdJ hiHtil cap-button"
+          className="sc-bcXGCL sc-laZSpB hgBEdJ hlwnod cap-button"
           onClick={[Function]}
           type="button"
         >

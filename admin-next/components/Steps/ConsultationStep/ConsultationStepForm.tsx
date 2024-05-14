@@ -33,6 +33,7 @@ import { OpinionTypeInput } from '@relay/CreateOrUpdateConsultationMutation.grap
 import ConsultationStepRequirementsTabs from '@components/Requirements/ConsultationStepRequirementsTabs'
 import { onBack } from '@components/Steps/utils'
 import { useConsultationStep } from './ConsultationStepContext'
+import StepDurationInput from '../Shared/StepDurationInput'
 
 type Props = {
   stepId: string
@@ -280,11 +281,8 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     shouldUnregister: false,
   })
 
-  const { handleSubmit, formState, control, watch } = formMethods
+  const { handleSubmit, formState, control } = formMethods
   const { isSubmitting, isValid } = formState
-
-  const stepDurationType = watch('stepDurationType')
-  const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM
 
   const onSubmit = async (values: FormValues) => {
     const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
@@ -381,69 +379,13 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
             />
           </FormControl>
-          <FormProvider {...formMethods}>
-            <TextEditor
-              name="body"
-              label={intl.formatMessage({ id: 'step-description' })}
-              platformLanguage={defaultLocale}
-              selectedLanguage={defaultLocale}
-            />
-          </FormProvider>
-          <FormControl name="stepDurationType" control={control} isRequired mb={6}>
-            <FormLabel htmlFor="stepDurationType" label={intl.formatMessage({ id: 'step-duration' })} />
-            <FieldInput
-              id="stepDurationType"
-              name="stepDurationType"
-              control={control}
-              type="radio"
-              choices={[
-                {
-                  id: StepDurationTypeEnum.TIMELESS,
-                  label: intl.formatMessage({ id: 'timeless' }),
-                  useIdAsValue: true,
-                },
-                {
-                  id: StepDurationTypeEnum.CUSTOM,
-                  label: intl.formatMessage({ id: 'global.custom.feminine' }),
-                  useIdAsValue: true,
-                },
-              ]}
-            />
-          </FormControl>
-          {isCustomStepDuration ? (
-            <Flex mb={4}>
-              <FormControl name="startAt" control={control} width="max-content" mr={6} mb={0}>
-                <FormLabel htmlFor="startAt" label={intl.formatMessage({ id: 'start-date' })}>
-                  <Text fontSize={2} color="gray.500">
-                    {intl.formatMessage({ id: 'global.optional' })}
-                  </Text>
-                </FormLabel>
-                <FieldInput
-                  id="startAt"
-                  name="startAt"
-                  control={control}
-                  type="dateHour"
-                  // @ts-expect-error MAJ DS Props
-                  dateInputProps={{ isOutsideRange: true }}
-                />
-              </FormControl>
-              <FormControl name="endAt" control={control} width="max-content">
-                <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
-                  <Text fontSize={2} color="gray.500">
-                    {intl.formatMessage({ id: 'global.optional' })}
-                  </Text>
-                </FormLabel>
-                <FieldInput
-                  id="endAt"
-                  name="endAt"
-                  control={control}
-                  type="dateHour"
-                  // @ts-expect-error MAJ DS Props
-                  dateInputProps={{ isOutsideRange: true }}
-                />
-              </FormControl>
-            </Flex>
-          ) : null}
+          <TextEditor
+            name="body"
+            label={intl.formatMessage({ id: 'step-description' })}
+            platformLanguage={defaultLocale}
+            selectedLanguage={defaultLocale}
+          />
+          <StepDurationInput />
 
           <ConsultationStepConsultations query={query} />
 

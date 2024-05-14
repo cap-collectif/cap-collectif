@@ -174,6 +174,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
   const { handleSubmit, getValues, watch, setValue, trigger } = methods
 
   const title = watch('title')
+  const previousPublicationDate = watch('publishedAt')
   const breadCrumbItems = [
     {
       title: intl.formatMessage({ id: 'global.all.projects' }),
@@ -207,7 +208,13 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
         value?.visibility?.labels?.[0] === 'CUSTOM'
       )
         return
-      if (name === 'publishedAt' && !value.publishedAt) return
+      if (name === 'publishedAt') {
+        // When user clicks on native "clear" button on input date, reset date to its latest value
+        if (Number.isNaN((value.publishedAt as any)?._i)) {
+          setValue('publishedAt', previousPublicationDate)
+        }
+        if (!value.publishedAt) return
+      }
       if (name === 'addressText') return
       if (name === 'isExternal' && value.isExternal) {
         setValue('externalLink', value.externalLink || '', { shouldTouch: true })

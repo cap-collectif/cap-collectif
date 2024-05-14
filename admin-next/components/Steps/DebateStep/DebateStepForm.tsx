@@ -27,6 +27,7 @@ import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { onBack } from '@components/Steps/utils'
 import { useDebateStep } from './DebateStepContext'
+import StepDurationInput from '../Shared/StepDurationInput'
 
 type Props = {
   stepId: string
@@ -212,9 +213,6 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     name: 'articles',
   })
 
-  const stepDurationType = watch('stepDurationType')
-  const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM
-
   const debateType = watch('debateType')
   const participationType = watch('isAnonymousParticipationAllowed')
     ? ParticipationTypeEnum.WITHOUT_ACCOUNT
@@ -350,63 +348,11 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             </Tabs.Panel>
           </Tabs.PanelList>
         </Tabs>
-        <FormControl name="stepDurationType" control={control} isRequired mb={6}>
-          <FormLabel htmlFor="stepDurationType" label={intl.formatMessage({ id: 'step-duration' })} />
-          <FieldInput
-            id="stepDurationType"
-            name="stepDurationType"
-            control={control}
-            type="radio"
-            choices={[
-              {
-                id: StepDurationTypeEnum.TIMELESS,
-                label: intl.formatMessage({ id: 'timeless' }),
-                useIdAsValue: true,
-              },
-              {
-                id: StepDurationTypeEnum.CUSTOM,
-                label: intl.formatMessage({ id: 'global.custom.feminine' }),
-                useIdAsValue: true,
-              },
-            ]}
-          />
-        </FormControl>
-        {isCustomStepDuration && (
-          <Box color="gray.900" mt={6}>
-            <Flex>
-              <FormControl name="startAt" control={control} width="max-content" mr={6}>
-                <FormLabel htmlFor="startAt" label={intl.formatMessage({ id: 'start-date' })}>
-                  <Text fontSize={2} color="gray.500">
-                    {intl.formatMessage({ id: 'global.optional' })}
-                  </Text>
-                </FormLabel>
-                <FieldInput
-                  id="startAt"
-                  name="startAt"
-                  control={control}
-                  type="dateHour"
-                  // @ts-expect-error MAJ DS Props
-                  dateInputProps={{ isOutsideRange: true }}
-                />
-              </FormControl>
-              <FormControl name="endAt" control={control} width="max-content">
-                <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
-                  <Text fontSize={2} color="gray.500">
-                    {intl.formatMessage({ id: 'global.optional' })}
-                  </Text>
-                </FormLabel>
-                <FieldInput
-                  id="endAt"
-                  name="endAt"
-                  control={control}
-                  type="dateHour"
-                  // @ts-expect-error MAJ DS Props
-                  dateInputProps={{ isOutsideRange: true }}
-                />
-              </FormControl>
-            </Flex>
-          </Box>
-        )}
+
+        <FormProvider {...formMethods}>
+          <StepDurationInput />
+        </FormProvider>
+
         <Box>
           <Accordion color={CapUIAccordionColor.Transparent}>
             <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>

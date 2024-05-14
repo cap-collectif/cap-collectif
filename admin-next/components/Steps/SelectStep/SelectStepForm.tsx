@@ -29,6 +29,7 @@ import { ProposalStepRequirementsTabs_proposalStep$key } from '@relay/ProposalSt
 import ProposalStepOptionnalAccordion from '../ProposalStep/ProposalStepOptionnalAccordion'
 import { onBack } from '@components/Steps/utils'
 import { useSelectionStep } from './SelectionStepContext'
+import StepDurationInput from '../Shared/StepDurationInput'
 
 export interface SelectStepFormProps {
   stepId: string
@@ -344,10 +345,8 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
       }),
     ),
   })
-  const { handleSubmit, formState, control, watch, setValue } = formMethods
+  const { handleSubmit, formState, control, setValue } = formMethods
   const { isSubmitting, isValid } = formState
-  const stepDurationType = watch('stepDurationType')
-  const isCustomStepDuration = stepDurationType?.labels?.[0] === StepDurationTypeEnum.CUSTOM
 
   return (
     <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
@@ -384,64 +383,9 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
             selectedLanguage={defaultLocale}
             advancedEditor
           />
+          <StepDurationInput />
         </FormProvider>
-        <FormControl name="stepDurationType" control={control} mt={6} mb={6}>
-          <FormLabel htmlFor="stepDurationType" label={intl.formatMessage({ id: 'step-duration' })} />
-          <FieldInput
-            id="stepDurationType"
-            name="stepDurationType"
-            control={control}
-            type="radio"
-            choices={[
-              {
-                id: StepDurationTypeEnum.TIMELESS,
-                label: intl.formatMessage({ id: 'timeless' }),
-                useIdAsValue: true,
-              },
-              {
-                id: StepDurationTypeEnum.CUSTOM,
-                label: intl.formatMessage({ id: 'global.custom.feminine' }),
-                useIdAsValue: true,
-              },
-            ]}
-          />
-        </FormControl>
-        {isCustomStepDuration && (
-          <Box color="gray.900" mt={6}>
-            <Flex>
-              <FormControl name="startAt" control={control} width="max-content" mr={6}>
-                <FormLabel htmlFor="startAt" label={intl.formatMessage({ id: 'start-date' })}>
-                  <Text fontSize={2} color="gray.500">
-                    {intl.formatMessage({ id: 'global.optional' })}
-                  </Text>
-                </FormLabel>
-                <FieldInput
-                  id="startAt"
-                  name="startAt"
-                  control={control}
-                  type="dateHour"
-                  // @ts-expect-error MAJ DS Props
-                  dateInputProps={{ isOutsideRange: true }}
-                />
-              </FormControl>
-              <FormControl name="endAt" control={control} width="max-content">
-                <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
-                  <Text fontSize={2} color="gray.500">
-                    {intl.formatMessage({ id: 'global.optional' })}
-                  </Text>
-                </FormLabel>
-                <FieldInput
-                  id="endAt"
-                  name="endAt"
-                  control={control}
-                  type="dateHour"
-                  // @ts-expect-error MAJ DS Props
-                  dateInputProps={{ isOutsideRange: true }}
-                />
-              </FormControl>
-            </Flex>
-          </Box>
-        )}
+
         <Box>
           <Accordion color={CapUIAccordionColor.Transparent} allowMultiple>
             <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>

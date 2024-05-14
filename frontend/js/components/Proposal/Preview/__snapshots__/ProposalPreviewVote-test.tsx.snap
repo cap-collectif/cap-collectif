@@ -102,79 +102,18 @@ Array [
                     form.label_date_of_birth
                   </p>
                 </label>
-                <div
-                  className="sc-bcXGCL sc-jRwapC jvopqN cap-date-input"
-                >
-                  <div
-                    className="SingleDatePicker SingleDatePicker_1"
-                  >
-                    <div>
-                      <div
-                        className="SingleDatePickerInput SingleDatePickerInput_1 SingleDatePickerInput__withBorder SingleDatePickerInput__withBorder_2"
-                      >
-                        <div
-                          className="DateInput DateInput_1"
-                        >
-                          <input
-                            aria-describedby="DateInput__screen-reader-message-cap-date-input-id"
-                            aria-label="jj/mm/aaaa"
-                            autoComplete="off"
-                            className="DateInput_input DateInput_input_1"
-                            disabled={false}
-                            id="cap-date-input-id"
-                            name="cap-date-input-id"
-                            onChange={[Function]}
-                            onFocus={[Function]}
-                            onKeyDown={[Function]}
-                            placeholder="jj/mm/aaaa"
-                            readOnly={false}
-                            required={false}
-                            type="text"
-                            value="Invalid date"
-                          />
-                          <p
-                            className="DateInput_screenReaderMessage DateInput_screenReaderMessage_1"
-                            id="DateInput__screen-reader-message-cap-date-input-id"
-                          >
-                            Navigate forward to interact with the calendar and select a date. Press the question mark key to get the keyboard shortcuts for changing dates.
-                          </p>
-                        </div>
-                        <button
-                          className="SingleDatePickerInput_calendarIcon SingleDatePickerInput_calendarIcon_1"
-                          disabled={false}
-                          onClick={[Function]}
-                          type="button"
-                        >
-                          <svg
-                            className="sc-bcXGCL sc-eJDTud dXflne knzWyK cap-icon"
-                            fill="none"
-                            viewBox="0 0 12 12"
-                            xmlns="http://www.w3.org/2000/svg"
-                          >
-                            <path
-                              clipRule="evenodd"
-                              d="M2.813 0c.31 0 .562.252.562.563v2.625a.563.563 0 01-1.125 0V.563c0-.311.252-.563.563-.563zM9.188 0c.31 0 .562.252.562.563v2.625a.563.563 0 01-1.125 0V.563c0-.311.252-.563.563-.563z"
-                              fill="currentColor"
-                              fillRule="evenodd"
-                            />
-                            <path
-                              clipRule="evenodd"
-                              d="M1.125 1.875C.504 1.875 0 2.38 0 3v2.25h12V3c0-.621-.504-1.125-1.125-1.125h-9.75zM12 6.375H0v4.5C0 11.496.504 12 1.125 12h9.75c.621 0 1.125-.504 1.125-1.125v-4.5z"
-                              fill="currentColor"
-                              fillRule="evenodd"
-                            />
-                            <path
-                              clipRule="evenodd"
-                              d="M1.125 2.625A.375.375 0 00.75 3v1.5h10.5V3a.375.375 0 00-.375-.375h-9.75zM12 3c0-.621-.504-1.125-1.125-1.125h-9.75C.504 1.875 0 2.38 0 3v2.25h12V3zM0 6.375h12v4.5c0 .621-.504 1.125-1.125 1.125h-9.75A1.125 1.125 0 010 10.875v-4.5zm11.25.75H.75v3.75c0 .207.168.375.375.375h9.75a.375.375 0 00.375-.375v-3.75z"
-                              fill="currentColor"
-                              fillRule="evenodd"
-                            />
-                          </svg>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                <input
+                  aria-required={true}
+                  className="sc-bcXGCL sc-UpCiH cXnqTP cvFBmb cap-input cap-date-input"
+                  disabled={false}
+                  name="DateOfBirthRequirement"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={true}
+                  type="date"
+                  value="Invalid date"
+                />
               </div>
             </div>
           </form>
@@ -184,14 +123,14 @@ Array [
         data-testid="Footer"
       >
         <button
-          className="sc-bcXGCL sc-laZSpB DTDIA iFfBPw cap-button"
+          className="sc-bcXGCL sc-laZSpB DTDIA iazGoc cap-button"
           onClick={[Function]}
           type="button"
         >
           global.cancel
         </button>
         <button
-          className="sc-bcXGCL sc-laZSpB DTDIA hMZYMT cap-button"
+          className="sc-bcXGCL sc-laZSpB DTDIA hEgJIT cap-button"
           disabled={false}
           onClick={[Function]}
           type="button"
@@ -328,7 +267,7 @@ Array [
                         className="toggle-group"
                       >
                         <div
-                          className="sc-breQAM form-group"
+                          className="sc-dEVMhd form-group"
                         >
                           <div
                             className="Togglestyle__ToggleContainer-bApCdz bjrIqZ toggle-container"
@@ -374,7 +313,7 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL cFvYAO sc-GKYOR bKnLVQ cap-info-message"
+              className="sc-bcXGCL cFvYAO sc-fcCDYY bmqLhq cap-info-message"
             >
               <div
                 className="sc-bcXGCL kGqtxV cap-info-message__title"
@@ -411,7 +350,7 @@ Array [
         data-testid="Footer"
       >
         <button
-          className="sc-bcXGCL sc-laZSpB jujdjU hiHtil cap-button"
+          className="sc-bcXGCL sc-laZSpB jujdjU hlwnod cap-button"
           id="confirm-proposal-vote"
           onClick={[Function]}
           type="button"

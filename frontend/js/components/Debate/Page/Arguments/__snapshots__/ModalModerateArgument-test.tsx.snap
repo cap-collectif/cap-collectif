@@ -12,44 +12,44 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
     data-testid="AnimatePresence"
   >
     <div
-      class="sc-breQAM iqRiiI Modal__ModalContainerInner-gRvBLO"
+      class="sc-dEVMhd dqBCRG Modal__ModalContainerInner-gRvBLO"
       style="opacity:0"
     >
       <div
         aria-labelledby="modal-title"
-        class="sc-breQAM hOIBrM Modal__ModalInner-fNGFsd ModalModerateArgument__ModalContainer-bbfDya hQdUzZ"
+        class="sc-dEVMhd XLxAC Modal__ModalInner-fNGFsd ModalModerateArgument__ModalContainer-bbfDya hQdUzZ"
         style="opacity:0;transform:translateY(-20px) translateZ(0)"
       >
         <header
-          class="sc-breQAM Flex___StyledAppBox-SiGEY bWQpCu"
+          class="sc-dEVMhd Flex___StyledAppBox-SiGEY fvQiLM"
         >
           <div
-            class="sc-breQAM Flex___StyledAppBox-SiGEY fLXUyd ModalHeader___StyledFlex-hKIJSk eRNTmy"
+            class="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk eRNTmy"
           >
             <h2
-              class="sc-breQAM eHUpPC"
+              class="sc-dEVMhd iENcWE"
               id="modal-title"
             >
               moderate-argument
             </h2>
           </div>
           <button
-            class="sc-breQAM Button__ButtonInner-dXfNcJ drSKjX iWxcUO"
+            class="sc-dEVMhd Button__ButtonInner-dXfNcJ bEzIct iWxcUO"
             type="button"
           >
             <iconmock
-              class="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ hLpMUH exKJSE AjyOr icon"
+              class="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ ghCDIp exKJSE AjyOr icon"
             />
           </button>
         </header>
         <main
-          class="sc-breQAM Flex___StyledAppBox-SiGEY amxUE"
+          class="sc-dEVMhd Flex___StyledAppBox-SiGEY bIujfK"
         >
           <form
             id="moderate-form"
           >
             <div
-              class="sc-breQAM form-group"
+              class="sc-dEVMhd form-group"
             >
               <div
                 class="Togglestyle__ToggleContainer-bApCdz bjrIqZ toggle-container"
@@ -96,7 +96,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
                             data-testid="AnimatePresence"
                           >
                             <div
-                              class="sc-breQAM fOAZXq cap-tooltip text-left"
+                              class="sc-dEVMhd haYNpU cap-tooltip text-left"
                               id="tooltip-description"
                               style="word-break:break-word;opacity:0"
                             >
@@ -119,7 +119,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
                                 </svg>
                               </div>
                               <p
-                                class="sc-breQAM kizcjb"
+                                class="sc-dEVMhd cJLUlp"
                               >
                                 tooltip.explanation.hide.content
                               </p>
@@ -166,7 +166,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
           </form>
         </main>
         <footer
-          class="sc-breQAM Flex___StyledAppBox-SiGEY cPblrQ"
+          class="sc-dEVMhd Flex___StyledAppBox-SiGEY gwUZXS"
         >
           <button
             class="btn btn-default"

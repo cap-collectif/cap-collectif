@@ -125,7 +125,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
         onClick={[MockFunction]}
         type="button"
       >

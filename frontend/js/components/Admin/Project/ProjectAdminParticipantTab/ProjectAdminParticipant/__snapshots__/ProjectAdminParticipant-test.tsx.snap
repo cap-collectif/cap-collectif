@@ -124,7 +124,7 @@ exports[`<ProjectAdminParticipant /> should render a non-selectable list when "e
     >
       <img
         alt="<mock-value-for-field-\\"username\\">"
-        className="sc-breQAM img-circle object-cover user-avatar mr-10 "
+        className="sc-dEVMhd img-circle object-cover user-avatar mr-10 "
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
         srcSet="
@@ -278,7 +278,7 @@ exports[`<ProjectAdminParticipant /> should render a selectable list when "email
     >
       <img
         alt="<mock-value-for-field-\\"username\\">"
-        className="sc-breQAM img-circle object-cover user-avatar mr-10 "
+        className="sc-dEVMhd img-circle object-cover user-avatar mr-10 "
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
         srcSet="

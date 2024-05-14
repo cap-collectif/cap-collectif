@@ -109,7 +109,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+              className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -385,7 +385,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+              className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -706,7 +706,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+              className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -1027,7 +1027,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+              className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -1348,7 +1348,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+              className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -1548,7 +1548,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB hgLfnE gEVMxs cap-button"
+        className="sc-bcXGCL sc-laZSpB hgLfnE jAaALk cap-button"
         onClick={[Function]}
         type="button"
       >

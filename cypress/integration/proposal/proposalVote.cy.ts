@@ -25,7 +25,7 @@ describe('Proposal Vote Page', () => {
       cy.get('[name="PhoneRequirement\\.phoneNumber"]').type('0611111111')
 
       cy.get('.cap-checkbox__input').click({ force: true, multiple: true })
-      cy.get('.DateInput_input').focus().type('08/06/2022')
+      cy.get('.cap-date-input').focus().type('2024-04-24')
       cy.contains('.cap-button', 'global.continue').click({ force: true })
       cy.wait('@UpdateRequirementMutation')
       cy.wait('@UpdateProfilePersonalDataMutation')

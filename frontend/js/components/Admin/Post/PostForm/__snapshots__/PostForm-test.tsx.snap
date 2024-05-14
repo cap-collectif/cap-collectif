@@ -2,10 +2,10 @@
 
 exports[`<PostForm/> should render correctly 1`] = `
 <form
-  className="sc-breQAM Flex___StyledAppBox-SiGEY hDMwID"
+  className="sc-dEVMhd Flex___StyledAppBox-SiGEY gYLLeB"
 >
   <div
-    className="sc-breQAM Flex___StyledAppBox-SiGEY hkXbWG"
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY iYRJYw"
   >
     <div
       className="form-group"
@@ -18,7 +18,7 @@ exports[`<PostForm/> should render correctly 1`] = `
         type="label"
       >
         <p
-          className="sc-breQAM eZCYeB"
+          className="sc-dEVMhd hmFZj"
         >
           global.title
         </p>
@@ -53,7 +53,7 @@ exports[`<PostForm/> should render correctly 1`] = `
         type="label"
       >
         <p
-          className="sc-breQAM eZCYeB"
+          className="sc-dEVMhd hmFZj"
         >
           global.author
         </p>
@@ -266,15 +266,15 @@ exports[`<PostForm/> should render correctly 1`] = `
           type="label"
         >
           <div
-            className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG gmiYSn"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig gmiYSn"
           >
             <p
-              className="sc-breQAM eZCYeB"
+              className="sc-dEVMhd hmFZj"
             >
               admin.create.abstract.field
             </p>
             <p
-              className="sc-breQAM fNDake"
+              className="sc-dEVMhd gLJOGs"
             >
               global.optional
             </p>
@@ -310,13 +310,13 @@ exports[`<PostForm/> should render correctly 1`] = `
           type="label"
         >
           <p
-            className="sc-breQAM eZCYeB"
+            className="sc-dEVMhd hmFZj"
           >
             admin.general.content
           </p>
         </label>
         <div
-          className="sc-breQAM joditEditor"
+          className="sc-dEVMhd joditEditor"
           id="FR_FR-body"
         >
           <div
@@ -336,15 +336,15 @@ exports[`<PostForm/> should render correctly 1`] = `
         type="label"
       >
         <div
-          className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG"
+          className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig"
         >
           <p
-            className="sc-breQAM jDKpEH"
+            className="sc-dEVMhd vmVJR"
           >
             cover-image
           </p>
           <p
-            className="sc-breQAM fNDake"
+            className="sc-dEVMhd gLJOGs"
           >
             global.optional
           </p>
@@ -437,7 +437,7 @@ exports[`<PostForm/> should render correctly 1`] = `
             >
               <img
                 alt=""
-                className="sc-breQAM img-responsive"
+                className="sc-dEVMhd img-responsive"
                 loading="lazy"
                 sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                 srcSet="
@@ -504,10 +504,10 @@ exports[`<PostForm/> should render correctly 1`] = `
       </div>
     </div>
     <div
-      className="sc-breQAM Flex___StyledAppBox-SiGEY cSRbPp gEtlaU"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY eghcNH gEtlaU"
     >
       <button
-        className="sc-breQAM Button__ButtonInner-dXfNcJ Rwvuf erDeRS"
+        className="sc-dEVMhd Button__ButtonInner-dXfNcJ fnuNOR erDeRS"
         disabled={true}
         onClick={[Function]}
         type="button"
@@ -518,7 +518,7 @@ exports[`<PostForm/> should render correctly 1`] = `
         aria-controls="id-1"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-breQAM Button__ButtonInner-dXfNcJ Rwvuf efTBzD"
+        className="sc-dEVMhd Button__ButtonInner-dXfNcJ fnuNOR efTBzD"
         onClick={[Function]}
         onClickCapture={[Function]}
         onKeyDown={[Function]}
@@ -551,28 +551,28 @@ exports[`<PostForm/> should render correctly 1`] = `
     </div>
   </div>
   <div
-    className="sc-breQAM Flex___StyledAppBox-SiGEY bbVmze PostForm___StyledFlex-jrfMYi gwhpRY"
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY jLFoUo PostForm___StyledFlex-jrfMYi gwhpRY"
   >
     <div
-      className="sc-breQAM Flex___StyledAppBox-SiGEY iEhspy bLsrSH"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY ehCLXw bLsrSH"
     >
       <div
-        className="sc-breQAM fZNUma"
+        className="sc-dEVMhd bPpWdY"
         id="volet-1"
       >
         <button
-          className="sc-breQAM Button__ButtonInner-dXfNcJ hWzvdK iWxcUO"
+          className="sc-dEVMhd Button__ButtonInner-dXfNcJ ezRGQg iWxcUO"
           onClick={[Function]}
           type="button"
         >
           <IconMock
-            className="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ fdAryl exKJSE AjyOr icon"
+            className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ kmKCnb exKJSE AjyOr icon"
           />
           <div
-            className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig"
           >
             <p
-              className="sc-breQAM knEPdM"
+              className="sc-dEVMhd dDRLny"
             >
               admin.fields.blog_post.group_linked_content
             </p>
@@ -582,7 +582,7 @@ exports[`<PostForm/> should render correctly 1`] = `
           data-testid="AnimatePresence"
         >
           <div
-            className="sc-breQAM Flex___StyledAppBox-SiGEY ocIa-D PostForm___StyledPanel-burlYz hlxAyO"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY bOqBUB PostForm___StyledPanel-burlYz hlxAyO"
             style={
               Object {
                 "height": "0px",
@@ -593,22 +593,22 @@ exports[`<PostForm/> should render correctly 1`] = `
         </div>
       </div>
       <div
-        className="sc-breQAM fZNUma"
+        className="sc-dEVMhd bPpWdY"
         id="volet-2"
       >
         <button
-          className="sc-breQAM Button__ButtonInner-dXfNcJ hWzvdK iWxcUO"
+          className="sc-dEVMhd Button__ButtonInner-dXfNcJ ezRGQg iWxcUO"
           onClick={[Function]}
           type="button"
         >
           <IconMock
-            className="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ fdAryl exKJSE AjyOr icon"
+            className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ kmKCnb exKJSE AjyOr icon"
           />
           <div
-            className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig"
           >
             <p
-              className="sc-breQAM knEPdM"
+              className="sc-dEVMhd dDRLny"
             >
               admin.fields.blog_post.group_meta
             </p>
@@ -618,7 +618,7 @@ exports[`<PostForm/> should render correctly 1`] = `
           data-testid="AnimatePresence"
         >
           <div
-            className="sc-breQAM Flex___StyledAppBox-SiGEY dDQCpt PostForm___StyledPanel2-dgnTyt ihhRaQ"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY lmCqBf PostForm___StyledPanel2-dgnTyt ihhRaQ"
             style={
               Object {
                 "height": "0px",
@@ -637,7 +637,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                 type="label"
               >
                 <p
-                  className="sc-breQAM ikgEjW"
+                  className="sc-dEVMhd dTwGrg"
                 >
                   global.admin.published_at
                 </p>
@@ -1084,7 +1084,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                     width={16}
                   />
                   <p
-                    className="sc-breQAM ikgEjW"
+                    className="sc-dEVMhd dTwGrg"
                   >
                     global.published
                   </p>
@@ -1135,7 +1135,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                     width={16}
                   />
                   <p
-                    className="sc-breQAM ikgEjW"
+                    className="sc-dEVMhd dTwGrg"
                   >
                     admin.post.comments_authorised
                   </p>
@@ -1156,22 +1156,22 @@ exports[`<PostForm/> should render correctly 1`] = `
         </div>
       </div>
       <div
-        className="sc-breQAM fZNUma"
+        className="sc-dEVMhd bPpWdY"
         id="volet-4"
       >
         <button
-          className="sc-breQAM Button__ButtonInner-dXfNcJ hWzvdK iWxcUO"
+          className="sc-dEVMhd Button__ButtonInner-dXfNcJ ezRGQg iWxcUO"
           onClick={[Function]}
           type="button"
         >
           <IconMock
-            className="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ fdAryl exKJSE AjyOr icon"
+            className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ kmKCnb exKJSE AjyOr icon"
           />
           <div
-            className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig"
           >
             <p
-              className="sc-breQAM knEPdM"
+              className="sc-dEVMhd dDRLny"
             >
               admin.fields.blog_post.advanced
             </p>
@@ -1181,7 +1181,7 @@ exports[`<PostForm/> should render correctly 1`] = `
           data-testid="AnimatePresence"
         >
           <div
-            className="sc-breQAM Flex___StyledAppBox-SiGEY dDQCpt PostForm___StyledPanel3-ggVQro jfzSsd"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY lmCqBf PostForm___StyledPanel3-ggVQro jfzSsd"
             style={
               Object {
                 "height": "0px",
@@ -1200,7 +1200,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                 type="label"
               >
                 <p
-                  className="sc-breQAM eZCYeB"
+                  className="sc-dEVMhd hmFZj"
                 >
                   post.metadescription
                 </p>
@@ -1253,7 +1253,7 @@ exports[`<PostForm/> should render correctly 1`] = `
                 type="label"
               >
                 <p
-                  className="sc-breQAM eZCYeB"
+                  className="sc-dEVMhd hmFZj"
                 >
                   admin.customcode
                 </p>

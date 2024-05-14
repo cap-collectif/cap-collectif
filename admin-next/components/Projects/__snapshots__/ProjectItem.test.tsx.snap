@@ -159,7 +159,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -471,7 +471,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -783,7 +783,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -1031,7 +1031,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+      className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"

@@ -275,7 +275,7 @@ const RequirementsForm = ({ initialValues, isPhoneVerificationOnly, control, for
             return (
               <FormControl name="DateOfBirthRequirement" control={control} isRequired>
                 <FormLabel label={getLabel(key)} />
-                <FieldInput type="date" name="DateOfBirthRequirement" control={control} isOutsideRange />
+                <FieldInput type="date" name="DateOfBirthRequirement" control={control} />
               </FormControl>
             )
           }

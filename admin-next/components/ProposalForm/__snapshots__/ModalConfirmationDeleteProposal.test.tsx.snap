@@ -177,7 +177,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL hmVjey sc-gsGkXq cap-modal__overlay"
+      className="sc-bcXGCL hmVjey sc-GKYOR cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -186,7 +186,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
       }
     >
       <div
-        className="sc-bcXGCL cxKkgx sc-bWOFNj dgbxsZ cap-modal"
+        className="sc-bcXGCL cxKkgx sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -255,7 +255,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
             }
           >
             <button
-              className="sc-bcXGCL sc-laZSpB DTDIA iFfBPw cap-button"
+              className="sc-bcXGCL sc-laZSpB DTDIA iazGoc cap-button"
               onClick={[Function]}
               style={
                 {
@@ -268,7 +268,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
               cancel
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB DTDIA fMAAkN cap-button"
+              className="sc-bcXGCL sc-laZSpB DTDIA dldqLk cap-button"
               onClick={[Function]}
               type="button"
             >

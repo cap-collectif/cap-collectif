@@ -74,6 +74,7 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                   name={`${formFieldName}.question.id`}
                   control={control}
                   type="select"
+                  // @ts-ignore TODO: màj form
                   disabled={conditions.length > 1 || isChoiceDisabled}
                   options={questionsWithNoJumps.filter(Boolean).map((q: QuestionIds) => ({
                     label: q.title,
@@ -92,6 +93,7 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                   name={`${formFieldName}.operator`}
                   control={control}
                   type="select"
+                  // @ts-ignore TODO: màj form
                   disabled={false}
                   options={operators}
                   onChange={() => {
@@ -105,6 +107,7 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                   name={`${formFieldName}.value.id`}
                   control={control}
                   type="select"
+                  // @ts-ignore TODO: màj form
                   disabled={!currentJump.operator}
                   options={questions
                     .find((q: QuestionIds) => selectedQuestionId === q.id)
@@ -129,6 +132,7 @@ export const ConditionalJumpItem: React.FC<Props> = ({
           name={`${parentFormFieldName}.destination.id`}
           control={control}
           type="select"
+          // @ts-ignore TODO: màj form
           disabled={!temporaryJump?.id}
           options={questions
             .filter((q: QuestionIds) => q.id !== temporaryJump?.id)

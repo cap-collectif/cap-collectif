@@ -6,7 +6,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-breQAM Button__ButtonInner-dXfNcJ Rwvuf efTBzD"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ fnuNOR efTBzD"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -45,7 +45,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-breQAM Button__ButtonInner-dXfNcJ Rwvuf efTBzD"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ fnuNOR efTBzD"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -74,7 +74,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-breQAM iqRiiI Modal__ModalContainerInner-gRvBLO"
+        className="sc-dEVMhd dqBCRG Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -83,7 +83,7 @@ Array [
         }
       >
         <div
-          className="sc-breQAM hOIBrM Modal__ModalInner-fNGFsd"
+          className="sc-dEVMhd XLxAC Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -92,51 +92,51 @@ Array [
           }
         >
           <header
-            className="sc-breQAM Flex___StyledAppBox-SiGEY bWQpCu"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY fvQiLM"
           >
             <div
-              className="sc-breQAM Flex___StyledAppBox-SiGEY fLXUyd ModalHeader___StyledFlex-hKIJSk eRNTmy"
+              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk eRNTmy"
             >
               <h2
-                className="sc-breQAM eHUpPC"
+                className="sc-dEVMhd iENcWE"
               >
                 delete-confirmation
               </h2>
             </div>
             <button
-              className="sc-breQAM Button__ButtonInner-dXfNcJ drSKjX iWxcUO"
+              className="sc-dEVMhd Button__ButtonInner-dXfNcJ bEzIct iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-breQAM Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ hLpMUH exKJSE AjyOr icon"
+                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ ghCDIp exKJSE AjyOr icon"
               />
             </button>
           </header>
           <main
-            className="sc-breQAM Flex___StyledAppBox-SiGEY amxUE"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY bIujfK"
           >
             <p
-              className="sc-breQAM eeoOT"
+              className="sc-dEVMhd hnwPwR"
             >
               are-you-sure-to-delete-something
             </p>
           </main>
           <footer
-            className="sc-breQAM Flex___StyledAppBox-SiGEY cPblrQ gPKEuH"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY gwUZXS gPKEuH"
           >
             <div
-              className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG gEtlaU"
+              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig gEtlaU"
             >
               <button
-                className="sc-breQAM Button__ButtonInner-dXfNcJ kJAqcD lilFYw"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ gCkDBp lilFYw"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-breQAM Button__ButtonInner-dXfNcJ kJAqcD fjccAb"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ gCkDBp fjccAb"
                 onClick={[Function]}
                 type="button"
               >

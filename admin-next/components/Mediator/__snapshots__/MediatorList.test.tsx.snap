@@ -298,7 +298,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB hgLfnE gEVMxs cap-button"
+        className="sc-bcXGCL sc-laZSpB hgLfnE jAaALk cap-button"
         onClick={[Function]}
         type="button"
       >

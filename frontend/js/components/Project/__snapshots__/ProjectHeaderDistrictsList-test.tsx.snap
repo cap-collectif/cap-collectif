@@ -109,7 +109,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -229,7 +229,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -349,7 +349,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
         onClick={[Function]}
         type="button"
       >

@@ -63,67 +63,67 @@ exports[`<StepEvents /> <TestStepEvents /> should render correctly 1`] = `
     inline={false}
   >
     <div
-      className="sc-uhmsm giHpBj"
+      className="sc-ikHFqL NmBEW"
       color="#333333"
       size={40}
     >
       <div
-        className="sc-ikHFqL eVqQHs"
+        className="sc-WKhfq kHQuoC"
         delay={-1.2}
         transform={30}
       />
       <div
-        className="sc-ikHFqL jwgKtK"
+        className="sc-WKhfq khRrnE"
         delay={-1.1}
         transform={60}
       />
       <div
-        className="sc-ikHFqL ifZDRK"
+        className="sc-WKhfq jHmJoA"
         delay={-1}
         transform={90}
       />
       <div
-        className="sc-ikHFqL kulvEu"
+        className="sc-WKhfq NUjdc"
         delay={-0.9}
         transform={120}
       />
       <div
-        className="sc-ikHFqL hXQgoc"
+        className="sc-WKhfq fvYdyy"
         delay={-0.8}
         transform={150}
       />
       <div
-        className="sc-ikHFqL fwPare"
+        className="sc-WKhfq cYgsBo"
         delay={-0.7}
         transform={180}
       />
       <div
-        className="sc-ikHFqL grWuvp"
+        className="sc-WKhfq dclYdf"
         delay={-0.6}
         transform={210}
       />
       <div
-        className="sc-ikHFqL hVvJRP"
+        className="sc-WKhfq gVlTxl"
         delay={-0.5}
         transform={240}
       />
       <div
-        className="sc-ikHFqL iNNYzJ"
+        className="sc-WKhfq kLUmHr"
         delay={-0.4}
         transform={270}
       />
       <div
-        className="sc-ikHFqL jkhFOM"
+        className="sc-WKhfq fQLSAC"
         delay={-0.3}
         transform={300}
       />
       <div
-        className="sc-ikHFqL iuQEQm"
+        className="sc-WKhfq eTiyFA"
         delay={-0.2}
         transform={330}
       />
       <div
-        className="sc-ikHFqL jmdzzo"
+        className="sc-WKhfq hvPubS"
         delay={-0.1}
         transform={360}
       />

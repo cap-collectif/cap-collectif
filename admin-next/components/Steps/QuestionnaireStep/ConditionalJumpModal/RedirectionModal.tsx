@@ -54,6 +54,7 @@ export const RedirectionModal: React.FC<Props> = ({ onClose, onSuccess, isNewJum
               name={`temporaryJump.id`}
               control={control}
               type="select"
+              // @ts-ignore TODO: màj form
               disabled={!isNewJump}
               options={questionsWithNoJumps.filter(Boolean).map((q: QuestionIds) => ({
                 label: q.title,
@@ -72,6 +73,7 @@ export const RedirectionModal: React.FC<Props> = ({ onClose, onSuccess, isNewJum
               name={`temporaryJump.alwaysJumpDestinationQuestion.id`}
               control={control}
               type="select"
+              // @ts-ignore TODO: màj form
               disabled={!temporaryJump?.id}
               options={questions
                 .filter((q: QuestionIds) => q.id !== temporaryJump?.id)

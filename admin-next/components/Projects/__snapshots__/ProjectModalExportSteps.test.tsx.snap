@@ -40,7 +40,7 @@ exports[`<ProjectModalExportSteps /> <TestProjectModalExportSteps /> should rend
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bcXGCL imnaKz sc-fcCDYY cap-menu__list"
+    className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"

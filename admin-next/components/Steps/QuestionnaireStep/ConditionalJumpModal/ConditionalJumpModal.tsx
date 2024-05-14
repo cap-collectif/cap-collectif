@@ -105,6 +105,7 @@ export const ConditionalJumpModal: React.FC<Props> = ({ onClose, onSuccess, isNe
               name={`temporaryJump.alwaysJumpDestinationQuestion.id`}
               control={control}
               type="select"
+              // @ts-ignore TODO: màj form
               disabled={!temporaryJump?.id}
               options={questions
                 .filter((q: QuestionIds) => q.id !== temporaryJump?.id)

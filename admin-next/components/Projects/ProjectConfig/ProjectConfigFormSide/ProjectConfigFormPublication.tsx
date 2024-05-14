@@ -54,7 +54,7 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
       <Accordion.Panel>
         <FormControl name="publishedAt" control={control}>
           <FormLabel label={intl.formatMessage({ id: 'global.updated.date' })} />
-          <FieldInput type="date" name="publishedAt" control={control} isOutsideRange />
+          <FieldInput type="date" name="publishedAt" control={control} />
         </FormControl>
         {hasFeatureMultilangue ? (
           <FormControl name="locale" control={control} width="100%">

@@ -81,7 +81,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-laZSpB eIQCcq ZMJHn cap-button btn-md p-0"
+            className="sc-bcXGCL sc-laZSpB eIQCcq jXQrWI cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -133,7 +133,7 @@ Array [
                   >
                     <img
                       alt="<mock-value-for-field-\\"username\\">"
-                      className="sc-breQAM img-circle object-cover user-avatar mr-10 "
+                      className="sc-dEVMhd img-circle object-cover user-avatar mr-10 "
                       loading="lazy"
                       sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
                       srcSet="
@@ -167,7 +167,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+                className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -182,7 +182,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG eMqMcb cap-button"
+        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
         onClick={[Function]}
         type="button"
       >

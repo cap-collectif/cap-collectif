@@ -90,7 +90,7 @@ const FillRequirementsModal: FC<FillRequirementsModalProps> = ({ step: stepRef, 
               return (
                 <FormControl name="dateOfBirth" control={control}>
                   <FormLabel htmlFor="dateOfBirth" label={intl.formatMessage({ id: 'form.label_date_of_birth' })} />
-                  <FieldInput id="dateOfBirth" name="dateOfBirth" control={control} type="date" isOutsideRange />
+                  <FieldInput id="dateOfBirth" name="dateOfBirth" control={control} type="date" />
                 </FormControl>
               )
             }

@@ -79,7 +79,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH gxubNH cvFBmb cap-input"
+          className="sc-bcXGCL sc-UpCiH cXnqTP cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -154,7 +154,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
             </p>
           </span>
           <div
-            className="sc-bcXGCL lmURJC cap-input-group"
+            className="sc-bcXGCL kmjSdm cap-input-group"
           >
             <div
               className="sc-bcXGCL irGATn"
@@ -303,7 +303,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH gxubNH cvFBmb cap-input"
+          className="sc-bcXGCL sc-UpCiH cXnqTP cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -378,10 +378,10 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
             </p>
           </span>
           <div
-            className="sc-bcXGCL lmURJC cap-input-group"
+            className="sc-bcXGCL kmjSdm cap-input-group"
           >
             <input
-              className="sc-bcXGCL sc-UpCiH gxubNH cvFBmb cap-input"
+              className="sc-bcXGCL sc-UpCiH cXnqTP cvFBmb cap-input"
               disabled={false}
               id="customDomain"
               name="customDomain"
@@ -393,7 +393,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
               type="text"
             />
             <button
-              className="sc-bcXGCL sc-laZSpB hgLfnE hiHtil cap-button"
+              className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
               disabled={true}
               type="submit"
             >

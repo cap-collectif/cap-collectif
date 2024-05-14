@@ -2,24 +2,24 @@
 
 exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should render correctly 1`] = `
 <div
-  className="sc-breQAM Flex___StyledAppBox-SiGEY iSfTVm gEtlaU"
+  className="sc-dEVMhd Flex___StyledAppBox-SiGEY hszSJA gEtlaU"
 >
   <div
-    className="sc-breQAM Flex___StyledAppBox-SiGEY hSRYCv bLsrSH"
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt bLsrSH"
   >
     <p
-      className="sc-breQAM dumkdc"
+      className="sc-dEVMhd ePBrAi"
     >
       notification-email
     </p>
     <p
-      className="sc-breQAM ggGZpO"
+      className="sc-dEVMhd jlpQMI"
     >
       notification-email-explanation
     </p>
   </div>
   <div
-    className="sc-breQAM Flex___StyledAppBox-SiGEY gsBKBG SectionEmailNotification__FieldContainer-gFowVC exZAvD"
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY chsOac SectionEmailNotification__FieldContainer-gFowVC exZAvD"
   >
     <div
       className="form-group"
@@ -52,7 +52,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
       />
     </div>
     <div
-      className="sc-breQAM Flex___StyledAppBox-SiGEY bznQMG gEtlaU"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig gEtlaU"
     >
       <div
         className="form-group"
@@ -225,7 +225,7 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
       aria-controls="id-1"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-breQAM Button__ButtonInner-dXfNcJ isDbnr egpGUm"
+      className="sc-dEVMhd Button__ButtonInner-dXfNcJ eOaNyl egpGUm"
       onClick={[Function]}
       onClickCapture={[Function]}
       onKeyDown={[Function]}
