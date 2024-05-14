@@ -6,13 +6,12 @@ import { useDisclosure } from '@liinkiing/react-hooks'
 import moment from 'moment'
 
 import styled from 'styled-components'
-import { Button, Box, Flex, Skeleton, CapUIIcon } from '@cap-collectif/ui'
+import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize } from '@cap-collectif/ui'
 import { Link, useLocation, useParams } from 'react-router-dom'
 import { getBaseUrl } from '~/config'
 import colors from '~/utils/colors'
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes'
 import type { GlobalState } from '~/types'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import type { ProposalPageHeader_proposal$data } from '~relay/ProposalPageHeader_proposal.graphql'
 import type { ProposalPageHeader_step$data } from '~relay/ProposalPageHeader_step.graphql'
 import type { ProposalPageHeader_viewer$data } from '~relay/ProposalPageHeader_viewer.graphql'
@@ -125,6 +124,8 @@ const HeaderActions = styled.div`
   #side-analysis-open-button {
     text-decoration: none;
     background: #fff;
+    display: flex;
+    align-items: center;
     padding: 3px 15px;
     border-radius: 20px;
     box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.3);
@@ -187,7 +188,7 @@ const BackUrl = ({
         },
       }}
     >
-      <Icon name={ICON_NAME.chevronLeft} size={9} color={colors.primaryColor} />
+      <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={colors.primaryColor} />
       {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
     </Link>
   )
@@ -242,7 +243,7 @@ export const ProposalPageHeader = ({
           <div>
             {hasAnalysingButton && (
               <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>
-                <Icon name={ICON_NAME.chart} size={16} color={colors.primaryColor} />
+                <Icon name={CapUIIcon.PieChart} size={CapUIIconSize.Sm} color="primary.500" />
                 {intl.formatMessage({
                   id: 'panel.analysis.subtitle',
                 })}

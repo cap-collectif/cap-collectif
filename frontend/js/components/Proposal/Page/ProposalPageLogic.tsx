@@ -22,6 +22,8 @@ import ProposalPageFollowers from './Followers/ProposalPageFollowers'
 import ProposalDraftAlert from './ProposalDraftAlert'
 import ProposalVoteBasketWidget from '../Vote/ProposalVoteBasketWidget'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+import { useIntl } from 'react-intl'
 
 export type Props = {
   queryRef: ProposalPageLogic_query$key | null | undefined
@@ -81,6 +83,12 @@ const FRAGMENT = graphql`
     }
     step: node(id: $stepId) @include(if: $hasVotableStep) {
       ... on ProposalStep {
+        title
+        url
+        project {
+          title
+          url
+        }
         isProposalSmsVoteEnabled
       }
       ...ProposalPageHeader_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
@@ -106,6 +114,7 @@ const FRAGMENT = graphql`
         @include(if: $isAuthenticated)
       ... on Proposal {
         id
+        title
         supervisor {
           id
         }
@@ -128,6 +137,7 @@ const FRAGMENT = graphql`
 `
 export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }: Props) => {
   const query = useFragment(FRAGMENT, queryRef)
+  const intl = useIntl()
   const { width, height } = useResize()
   const [tabKey, setTabKey] = useState('content')
   const isMobile = width < bootstrapGrid.smMax
@@ -153,12 +163,25 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
   const smsVoteEnabled = step?.isProposalSmsVoteEnabled && twilio && proposalSmsVote && !isAuthenticated
   const showVotesWidget =
     (isAuthenticated || smsVoteEnabled) && currentVotableStep && currentVotableStep.state === 'OPENED'
+
   useEffect(() => {
     setVotesCount(proposal?.allVotes?.totalCount || 0)
   }, [proposal])
+
+  useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: step?.project?.title, href: step?.project?.url || '' },
+      { title: step?.title, href: step?.url },
+      { title: proposal?.title, href: '' },
+    ])
+  }, [step, proposal, intl])
+
   useEffect(() => {
     if (show !== 'SHOWED') setShow(viewer && isMobile && hasAnalysis ? 'TRUE' : 'FALSE')
   }, [show, viewer, hasAnalysis, isMobile])
+
   return (
     <>
       {showVotesWidget && <ProposalVoteBasketWidget step={step} viewer={viewer} />}

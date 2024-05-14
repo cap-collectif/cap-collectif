@@ -24,10 +24,12 @@ exports[`<FooterLinks /> renders correcty 1`] = `
     />
   </FooterLinks__FlexContainer>
   <FooterLinks__SectionSeparator />
-  <FooterLinks__FlexContainer>
+  <Flex
+    justifyContent="center"
+  >
     <CapcoPowered
       textColor="#000"
     />
-  </FooterLinks__FlexContainer>
+  </Flex>
 </FooterLinks__Links>
 `;

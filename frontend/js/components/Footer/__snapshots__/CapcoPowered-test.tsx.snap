@@ -1,7 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<CapcoPowered /> renders correcty 1`] = `
-<CapcoPowered__CapcoPoweredContainer>
+<Flex
+  alignItems="center"
+  justifyContent="center"
+>
   powered_by
   <CapcoPowered__CapcoLogo
     alt="cap collectif logo"
@@ -15,5 +18,5 @@ exports[`<CapcoPowered /> renders correcty 1`] = `
       Cap Collectif
     </span>
   </CapcoPowered__CapcoLink>
-</CapcoPowered__CapcoPoweredContainer>
+</Flex>
 `;

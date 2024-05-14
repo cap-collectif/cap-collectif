@@ -1,55 +1,163 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SiteLanguageChangeButton /> should render correctly 1`] = `
-<Menu
-  margin="auto"
-  placement="top"
+<Box
+  sx={
+    Object {
+      "ul": Object {
+        "border": "normal",
+        "borderColor": "gray.200",
+        "borderRadius": 4,
+        "overflow": "hidden",
+      },
+    }
+  }
 >
-  <Menu.Button>
-    <SiteLanguageChangeButton__DropdownLanguageButton
-      backgroundColor="#FFF"
-      borderless={false}
-      id="language-change-button-dropdown"
-      leftIcon="EARTH"
-      padding={0}
-      rightIcon="ARROW_DOWN_O"
-      variant="primary"
-      variantSize="small"
-    >
-      <SiteLanguageChangeButton__LanguageContainer>
-        <SiteLanguageChangeButton__Language
-          color="#000"
-        >
-          <span>
-            french
-          </span>
-        </SiteLanguageChangeButton__Language>
-      </SiteLanguageChangeButton__LanguageContainer>
-    </SiteLanguageChangeButton__DropdownLanguageButton>
-  </Menu.Button>
-  <Menu.List
-    id="language-change-menu-list"
+  <ForwardRef(Menu)
+    menuButton={
+      <Flex
+        as="button"
+        backgroundColor="#FFF"
+        borderRadius="button"
+        id="language-change-button-dropdown"
+        justifyContent={
+          Array [
+            "center",
+            "space-between",
+          ]
+        }
+        maxWidth="100%"
+        minWidth="100%"
+        p={1}
+      >
+        <Icon
+          name="EARTH"
+          size="md"
+        />
+        <Flex>
+          <SiteLanguageChangeButton__Language
+            color="#000"
+          >
+            <span>
+              french
+            </span>
+          </SiteLanguageChangeButton__Language>
+        </Flex>
+        <Icon
+          name="ARROW_DOWN_O"
+          size="md"
+        />
+      </Flex>
+    }
   >
-    <Menu.ListItem
+    <Flex
+      _focus={
+        Object {
+          "bg": "gray.100",
+        }
+      }
+      _hover={
+        Object {
+          "bg": "gray.100",
+          "cursor": "pointer",
+        }
+      }
+      alignItems="center"
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "checked": [Function],
+            "children": [Function],
+            "className": [Function],
+            "disabled": [Function],
+            "href": [Function],
+            "onClick": [Function],
+            "type": [Function],
+            "value": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      bg="white"
+      borderBottom="normal"
+      borderColor="gray.200"
+      color="gray.900"
       id="language-choice-de-DE"
       key="de-DE"
+      minWidth="200px"
       onClick={[Function]}
+      px={3}
+      py={2}
+      sx={
+        Object {
+          "&:last-child": Object {
+            "borderBottom": "none",
+          },
+        }
+      }
+      textAlign="left"
+      width="100%"
     >
       <SiteLanguageChangeButton__LanguageTitle>
         deutsch
       </SiteLanguageChangeButton__LanguageTitle>
-    </Menu.ListItem>
-    <Menu.ListItem
+    </Flex>
+    <Flex
+      _focus={
+        Object {
+          "bg": "gray.100",
+        }
+      }
+      _hover={
+        Object {
+          "bg": "gray.100",
+          "cursor": "pointer",
+        }
+      }
+      alignItems="center"
+      as={
+        Object {
+          "$$typeof": Symbol(react.forward_ref),
+          "propTypes": Object {
+            "checked": [Function],
+            "children": [Function],
+            "className": [Function],
+            "disabled": [Function],
+            "href": [Function],
+            "onClick": [Function],
+            "type": [Function],
+            "value": [Function],
+          },
+          "render": [Function],
+        }
+      }
+      bg="white"
+      borderBottom="normal"
+      borderColor="gray.200"
+      color="gray.900"
       id="language-choice-en-GB"
       key="en-GB"
+      minWidth="200px"
       onClick={[Function]}
+      px={3}
+      py={2}
+      sx={
+        Object {
+          "&:last-child": Object {
+            "borderBottom": "none",
+          },
+        }
+      }
+      textAlign="left"
+      width="100%"
     >
       <SiteLanguageChangeButton__LanguageTitle>
         english
       </SiteLanguageChangeButton__LanguageTitle>
-    </Menu.ListItem>
-  </Menu.List>
-</Menu>
+    </Flex>
+  </ForwardRef(Menu)>
+</Box>
 `;
 
 exports[`<SiteLanguageChangeButton /> should return null with a wrong defaultLanguage 1`] = `""`;

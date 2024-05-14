@@ -1,7 +1,7 @@
 module.exports = {
   // To Enable persisted queries:
   // persistOutput: "./queryMap.json",
-  src: './frontend/js',
+  src: './frontend',
   noFutureProofEnums: true,
   language: 'typescript',
   schema: './schema.internal.graphql',

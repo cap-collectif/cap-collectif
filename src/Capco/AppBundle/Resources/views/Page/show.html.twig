@@ -33,6 +33,27 @@
     </div>
 {% endblock %}
 {% block javascripts %}
+<script>
+    const onElementAvailable = (selector, callback) => {
+        const observer = new MutationObserver(() => {
+        if (document.querySelector(selector)) {
+            observer.disconnect()
+            callback()
+        }
+    })
+    observer.observe(document.body, { childList: true, subtree: true })
+    }
+    const event = new MessageEvent("set-breadcrumb", {
+        bubbles: true,
+        data: [
+            { title: "{{ 'navbar.homepage' | trans({}, 'CapcoAppBundle') }}", href: "/" },
+            { title: "{{ pageTranslation.title }}", href: "" },
+        ],
+    });
+    onElementAvailable('#main_navbar', () => {
+        document.dispatchEvent(event)
+    });
+</script>
     {{ parent() }}
     {% if page.customCode is defined and page.customCode != '' %}{{ page.customCode | raw }}{% endif %}
 {% endblock %}

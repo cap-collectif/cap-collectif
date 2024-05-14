@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react'
+import React, { useState, useRef, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
@@ -16,9 +16,15 @@ import { useBoundingRect } from '~/utils/hooks/useBoundingRect'
 import { useEventListener } from '~/utils/hooks/useEventListener'
 import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader'
 import environment, { graphqlError } from '~/createRelayEnvironment'
-import type { NavbarQueryResponse } from '~relay/NavbarQuery.graphql'
+import type { NavbarQuery$data } from '~relay/NavbarQuery.graphql'
 import type { Item } from './Navbar.type'
 import Flex from '~ui/Primitives/Layout/Flex'
+import NavBarQuery from '@shared/navbar/NavBarQuery'
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import NavbarRight from '~/components/Navbar/NavbarRight'
+import NavBarMenu from '@shared/navbar/menu/NavBarMenu'
+import { useNavBarContext } from '@shared/navbar/NavBar.context'
+
 type LanguageProps = {
   currentRouteParams: []
   currentRouteName: string
@@ -32,7 +38,6 @@ export type Props = LanguageProps & {
   logo?: string | null | undefined
   items: Item[]
   siteName: string | null | undefined
-  contentRight: any
   isMultilangueEnabled: boolean
   isAuthenticated: boolean
 }
@@ -47,7 +52,6 @@ export const Navbar = ({
   logo,
   items,
   siteName,
-  contentRight,
   languageList,
   currentLanguage,
   preferredLanguage,
@@ -63,8 +67,10 @@ export const Navbar = ({
   const [desktop, setDesktop] = useState<boolean>(true)
   const [logoLoaded, setLogoLoaded] = useState<boolean>(false)
   const [isLocaleHeaderVisible, setLocaleHeaderVisible] = useState<boolean>(true)
+  const newNavbar = useFeatureFlag('new_navbar')
   const ref = useRef()
   const [rect] = useBoundingRect(ref)
+  const { setBreadCrumbItems } = useNavBarContext()
 
   const setAriaExpanded = () => {
     setExpanded(!expanded)
@@ -82,7 +88,7 @@ export const Navbar = ({
     error,
     props,
   }: ReactRelayReadyState & {
-    props: NavbarQueryResponse | null | undefined
+    props: NavbarQuery$data | null | undefined
   }) => {
     if (error) {
       console.log(error) // eslint-disable-line no-console
@@ -96,87 +102,121 @@ export const Navbar = ({
   }
 
   useEventListener('resize', handleResize)
+
+  useEventListener('set-breadcrumb', (e: MessageEvent) => {
+    setBreadCrumbItems(e.data)
+  })
+
+  useEffect(() => {
+    if (!newNavbar) {
+      document.querySelector('body')?.classList.add('old-navbar')
+    }
+  }, [newNavbar])
+
   return (
-    <HeaderContainer isLanguageHeaderVisible={isLocaleHeaderVisible} height={rect.height}>
-      <div id="main-navbar" className="navbar-fixed-top">
-        <div>
-          <React.Fragment>
-            {isMultilangueEnabled && setLocaleHeaderVisible && preferredLanguage !== currentLanguage ? (
-              <LanguageHeader
-                innerRef={ref}
-                {...rest}
-                currentRouteName={currentRouteName}
-                currentRouteParams={currentRouteParams}
-                onHeaderClose={() => {
-                  setLocaleHeaderVisible(false)
-                }}
-                preferredLanguage={preferredLanguage}
-                currentLanguage={currentLanguage}
-                localeChoiceTranslations={localeChoiceTranslations}
-                languageList={languageList}
-              />
-            ) : null}
-            <div className="container">
-              {!isAuthenticated && (
-                <>
-                  <QueryRenderer
-                    environment={environment}
-                    query={graphql`
-                      query NavbarQuery {
-                        ...RegistrationModal_query
-                      }
-                    `}
-                    variables={{}}
-                    render={renderRegistrationForm}
-                  />
-                  {/** @ts-ignore */}
-                  <LoginModal />
-                </>
+    <>
+      {!isAuthenticated && (
+        <>
+          <QueryRenderer
+            environment={environment as any}
+            query={graphql`
+              query NavbarQuery {
+                ...RegistrationModal_query
+              }
+            `}
+            variables={{}}
+            render={renderRegistrationForm}
+          />
+          {/** @ts-ignore */}
+          <LoginModal />
+        </>
+      )}
+      {isMultilangueEnabled && setLocaleHeaderVisible && preferredLanguage !== currentLanguage ? (
+        <LanguageHeader
+          innerRef={ref}
+          {...rest}
+          currentRouteName={currentRouteName}
+          currentRouteParams={currentRouteParams}
+          onHeaderClose={() => {
+            setLocaleHeaderVisible(false)
+          }}
+          preferredLanguage={preferredLanguage}
+          currentLanguage={currentLanguage}
+          localeChoiceTranslations={localeChoiceTranslations}
+          languageList={languageList}
+        />
+      ) : null}
+      {newNavbar ? (
+        <React.Suspense fallback={null}>
+          <NavBarQuery>
+            <Flex alignItems="center" justifyContent="center">
+              {isAuthenticated ? (
+                <React.Suspense fallback={null}>
+                  <NavBarMenu currentLanguage={currentLanguage} />
+                </React.Suspense>
+              ) : (
+                <NavbarRight currentLanguage={currentLanguage} newHeader />
               )}
+            </Flex>
+          </NavBarQuery>
+        </React.Suspense>
+      ) : (
+        <HeaderContainer isLanguageHeaderVisible={isLocaleHeaderVisible} height={rect.height}>
+          <div id="main-navbar" className="navbar-fixed-top">
+            <div>
+              <React.Fragment>
+                <div className="container">
+                  <NavigationSkip />
+                  <S.NavigationContainer id="main-navbar" role="navigation">
+                    <S.NavigationHeader>
+                      {logo && (
+                        <S.Brand id="brand">
+                          <a
+                            href={home}
+                            title={intl.formatMessage({
+                              id: 'navbar.homepage',
+                            })}
+                          >
+                            <img
+                              loading="lazy"
+                              src={logo}
+                              alt={siteName}
+                              onLoad={handleLoading}
+                              onError={handleLoading}
+                            />
+                          </a>
+                        </S.Brand>
+                      )}
+                    </S.NavigationHeader>
+                    <NavbarToggle onClick={setAriaExpanded} expanded={expanded} />
 
-              <NavigationSkip />
-              <S.NavigationContainer id="main-navbar" role="navigation">
-                <S.NavigationHeader>
-                  {logo && (
-                    <S.Brand id="brand">
-                      <a
-                        href={home}
-                        title={intl.formatMessage({
-                          id: 'navbar.homepage',
-                        })}
-                      >
-                        <img loading="lazy" src={logo} alt={siteName} onLoad={handleLoading} onError={handleLoading} />
-                      </a>
-                    </S.Brand>
-                  )}
-                </S.NavigationHeader>
-                <NavbarToggle onClick={setAriaExpanded} expanded={expanded} />
+                    {desktop && (!logo || (logo && logoLoaded)) && (
+                      <S.NavigationContentDesktop>
+                        {items.length > 0 && <TabsBar items={items} />}
 
-                {desktop && (!logo || (logo && logoLoaded)) && (
-                  <S.NavigationContentDesktop>
-                    {items.length > 0 && <TabsBar items={items} />}
+                        <Flex direction="row" pl={4} height="100%" flex="0 0 auto">
+                          <NavbarRight currentLanguage={currentLanguage} />
+                        </Flex>
+                      </S.NavigationContentDesktop>
+                    )}
 
-                    <Flex direction="row" pl={4} height="100%" flex="0 0 auto">
-                      {contentRight}
-                    </Flex>
-                  </S.NavigationContentDesktop>
-                )}
+                    {expanded && (
+                      <S.NavigationContentMobile>
+                        {items.length > 0 && <TabsBar items={items} />}
 
-                {expanded && (
-                  <S.NavigationContentMobile>
-                    {items.length > 0 && <TabsBar items={items} />}
-
-                    <Flex direction="column" height="100%" flex="0 0 auto" width="100%">
-                      {contentRight}
-                    </Flex>
-                  </S.NavigationContentMobile>
-                )}
-              </S.NavigationContainer>
+                        <Flex direction="column" height="100%" flex="0 0 auto" width="100%">
+                          <NavbarRight currentLanguage={currentLanguage} />
+                        </Flex>
+                      </S.NavigationContentMobile>
+                    )}
+                  </S.NavigationContainer>
+                </div>
+              </React.Fragment>
             </div>
-          </React.Fragment>
-        </div>
-      </div>
-    </HeaderContainer>
+          </div>
+        </HeaderContainer>
+      )}
+    </>
   )
 }
 

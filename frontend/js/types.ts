@@ -108,6 +108,7 @@ export type FeatureToggles = {
   moderation_comment: boolean | null | undefined
   online_help: boolean | null | undefined
   full_proposal_card: boolean | null | undefined
+  new_navbar: boolean | null | undefined
 }
 export type FeatureToggle = $Keys<FeatureToggles>
 export type Action =

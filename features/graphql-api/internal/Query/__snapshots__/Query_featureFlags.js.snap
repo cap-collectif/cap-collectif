@@ -311,6 +311,10 @@ Object {
       "enabled": false,
       "type": "full_proposal_card",
     },
+    Object {
+      "enabled": false,
+      "type": "new_navbar",
+    },
   ],
 }
 `;

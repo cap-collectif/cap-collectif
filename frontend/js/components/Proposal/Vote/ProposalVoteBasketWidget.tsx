@@ -5,13 +5,14 @@ import { FormattedNumber, FormattedMessage } from 'react-intl'
 import { Navbar, Button } from 'react-bootstrap'
 
 import styled, { css } from 'styled-components'
-import type { ProposalVoteBasketWidget_step } from '~relay/ProposalVoteBasketWidget_step.graphql'
-import type { ProposalVoteBasketWidget_viewer } from '~relay/ProposalVoteBasketWidget_viewer.graphql'
+import type { ProposalVoteBasketWidget_step$data } from '~relay/ProposalVoteBasketWidget_step.graphql'
+import type { ProposalVoteBasketWidget_viewer$data } from '~relay/ProposalVoteBasketWidget_viewer.graphql'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes'
 import withColors from '~/components/Utils/withColors'
 import type { FeatureToggles, State } from '~/types'
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 
 export const BlockContainer = styled.div`
   display: flex;
@@ -58,10 +59,11 @@ export const NavBar = styled(Navbar)<{
   borderColor: string
   buttonBgColor: string
   buttonTextColor: string
+  newNavbar: boolean
 }>`
   border-color: ${({ borderColor }) => borderColor};
-  top: 50px;
-  z-index: 1001;
+  top: ${({ newNavbar }) => (newNavbar ? '0px' : '50px')};
+  z-index: 1041;
   text-transform: capitalize;
   max-height: 500px;
   transition: max-height 0.25s ease-in;
@@ -158,9 +160,10 @@ export const NavBar = styled(Navbar)<{
     padding-bottom: 0;
   }
 `
+
 type Props = {
-  step: ProposalVoteBasketWidget_step
-  viewer: ProposalVoteBasketWidget_viewer | null | undefined
+  step: ProposalVoteBasketWidget_step$data
+  viewer: ProposalVoteBasketWidget_viewer$data | null | undefined
   voteBarBackgroundColor: string
   voteBarTextColor: string
   voteBarBorderColor: string
@@ -169,6 +172,7 @@ type Props = {
   features: FeatureToggles
   isAuthenticated: boolean
 }
+
 export const ProposalVoteBasketWidget = ({
   step,
   viewer,
@@ -181,17 +185,18 @@ export const ProposalVoteBasketWidget = ({
   isAuthenticated,
 }: Props) => {
   const [collapsed, setCollapsed] = useState<boolean>(true)
+  const newNavbar = useFeatureFlag('new_navbar')
   const creditsSpent = viewer && viewer.proposalVotes ? viewer.proposalVotes.creditsSpent : 0
   const isBudget = step.voteType === 'BUDGET'
   const isInterpellation = isInterpellationContextFromStep(step)
   const votesPageUrl = `/projects/${step.project?.slug || ''}/votes`
   useEffect(() => {
     const html = document.querySelector('html')
-    if (html) html.classList.add('has-vote-widget')
+    if (html) html.classList.add(newNavbar ? 'has-new-vote-widget' : 'has-vote-widget')
     return () => {
-      if (html) html.classList.remove('has-vote-widget')
+      if (html) html.classList.remove(newNavbar ? 'has-new-vote-widget' : 'has-vote-widget')
     }
-  }, [])
+  }, [newNavbar])
   const smsVoteEnabled = step.isProposalSmsVoteEnabled && features.twilio && features.proposal_sms_vote
   const showMyVotesButton = !smsVoteEnabled && isAuthenticated
   return (
@@ -204,6 +209,7 @@ export const ProposalVoteBasketWidget = ({
       borderColor={voteBarBorderColor}
       buttonBgColor={voteBarButtonBgColor}
       buttonTextColor={voteBarButtonTextColor}
+      newNavbar={newNavbar}
     >
       {isBudget && (
         <Icon
@@ -221,7 +227,8 @@ export const ProposalVoteBasketWidget = ({
                 <Icon name={ICON_NAME.budget} size={25} color={voteBarTextColor} />
                 <InfoContainer borderColor={voteBarBorderColor}>
                   <FormattedMessage tagName="p" id="project.votes.widget.spent" />
-                  <FormattedNumber // @ts-ignore
+                  {/* @ts-ignore*/}
+                  <FormattedNumber
                     tagName="p"
                     minimumFractionDigits={0}
                     value={creditsSpent || 0}
@@ -236,7 +243,8 @@ export const ProposalVoteBasketWidget = ({
                 <InfoContainer separate borderColor={voteBarBorderColor}>
                   <FormattedMessage tagName="p" id="global-maximum" />
                   {step.budget ? (
-                    <FormattedNumber // @ts-ignore
+                    // @ts-ignore
+                    <FormattedNumber
                       tagName="p"
                       minimumFractionDigits={0}
                       value={step.budget}

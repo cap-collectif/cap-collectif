@@ -12,6 +12,7 @@ import EventActions from './EventActions'
 import { EventQuickActions } from './EventQuickActions'
 import ProjectHeaderThemeList from '~/components/Project/ProjectHeaderThemeList'
 import Image from '~ui/Primitives/Image'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 type Props = {
   readonly queryRef: EventPageHeader_query$key | null | undefined
 }
@@ -234,6 +235,15 @@ export const EventPageHeader = ({ queryRef }: Props) => {
   const profilesToggle = useFeatureFlag('profiles')
   const hasProposeEventEnabled = useFeatureFlag('allow_users_to_propose_events')
   const isMobile = useIsMobile()
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.events' }), href: '/events' },
+      { title: query?.event?.title, href: '' },
+    ])
+  }, [query, intl])
+
   if (!query) return null
   const { event, viewer } = query
   if (!event || !event.id) return null

@@ -90,6 +90,28 @@
 
 {% endblock %}
 {% block javascripts %}
+    <script>
+        const onElementAvailable = (selector, callback) => {
+            const observer = new MutationObserver(() => {
+            if (document.querySelector(selector)) {
+                observer.disconnect()
+                callback()
+            }
+        })
+        observer.observe(document.body, { childList: true, subtree: true })
+        }
+        const event = new MessageEvent("set-breadcrumb", {
+            bubbles: true,
+            data: [
+                { title: "{{ 'navbar.homepage' | trans({}, 'CapcoAppBundle') }}", href: "/" },
+                { title: "{{ jumbotron_title }}", href: "/blog" },
+                { title: "{{ post.title }}".replace("&#039;","'"), href: "" },
+            ],
+        });
+        onElementAvailable('#main_navbar', () => {
+            document.dispatchEvent(event)
+        });
+    </script>
     {{ parent() }}
     {% if post.customCode is defined and post.customCode != '' %}{{ post.customCode | raw }}{% endif %}
 {% endblock %}

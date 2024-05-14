@@ -2,10 +2,11 @@
    $BASE
 ================================================================*/
 body {
-  padding-top: $navbar-height;
   font-family: $font-family-sans-serif;
   font-size: $font-size-base;
   overflow-x: hidden !important;
+
+  #event-page-filters { top: 0px; }
 
   &.modal-open {
     position: fixed;
@@ -31,11 +32,19 @@ body {
   }
 }
 
-@media (max-width: $screen-xs-max) {
-  body {
-    padding-top: $navbar-collapsed-height;
-  }
+/* Keeping the old navbar body padding while we use a feature flag */
+
+body.old-navbar {
+    padding-top: $navbar-height;
+
+    #event-page-filters { top: 50px; }
 }
+
+@media (max-width: $screen-xs-max) {
+    body.old-navbar {
+      padding-top: $navbar-collapsed-height;
+    }
+  }
 
 .main {
   background-color: $white;

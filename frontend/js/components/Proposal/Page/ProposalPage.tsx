@@ -22,7 +22,7 @@ export const ProposalPage = ({ currentVotableStepId, isAuthenticated, platformLo
   return (
     <QueryRenderer
       fetchPolicy="store-and-network"
-      environment={environment}
+      environment={environment as any}
       query={graphql`
         query ProposalPageQuery(
           $proposalSlug: String!

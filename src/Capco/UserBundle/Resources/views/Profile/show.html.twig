@@ -123,6 +123,27 @@
 {% endblock fos_user_content %}
 
 {% block javascripts %}
+    <script>
+        const onElementAvailable = (selector, callback) => {
+            const observer = new MutationObserver(() => {
+            if (document.querySelector(selector)) {
+                observer.disconnect()
+                callback()
+            }
+        })
+        observer.observe(document.body, { childList: true, subtree: true })
+        }
+        const event = new MessageEvent("set-breadcrumb", {
+            bubbles: true,
+            data: [
+                { title: "{{ 'navbar.homepage' | trans({}, 'CapcoAppBundle') }}", href: "/" },
+                { title: "{{ user.username }}", href: "" },
+            ],
+        });
+        onElementAvailable('#main_navbar', () => {
+            document.dispatchEvent(event)
+        });
+    </script>
     {{ parent() }}
     <script type="text/javascript">
 

@@ -13,7 +13,7 @@ const ProjectsListPage = lazy(
 )
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <ProjectsListPage {...props} />
     </Providers>
   </Suspense>

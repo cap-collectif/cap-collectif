@@ -2,13 +2,13 @@ import React from 'react'
 
 import styled from 'styled-components'
 import type { FooterLink, Legals } from './Footer'
-import './Footer'
 import SiteLanguageChangeButton from '../Ui/Button/SiteLanguageChangeButton'
 import CapcoPowered from './CapcoPowered'
 import FooterLinksRender from './FooterLinksRender'
 import type { LocaleMap } from '../Ui/Button/SiteLanguageChangeButton'
 import Fetcher from '~/services/Fetcher'
 import CookieMonster from '~/CookieMonster'
+import { Flex } from '@cap-collectif/ui'
 
 type Props = {
   currentRouteParams: {}
@@ -151,10 +151,10 @@ const FooterLinks = ({
       )}
     </FlexContainer>
     <SectionSeparator />
-    <FlexContainer>
+    <Flex justifyContent="center">
       {/** @ts-ignore */}
       <CapcoPowered textColor={textColor} />
-    </FlexContainer>
+    </Flex>
   </Links>
 )
 

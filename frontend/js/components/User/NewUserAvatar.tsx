@@ -3,13 +3,12 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import ColorHash from 'color-hash'
 import { Avatar } from '@cap-collectif/ui'
 import type { Props as AvatarProps } from '~ds/Avatar/Avatar'
-import '~ds/Avatar/Avatar'
-import type { NewUserAvatar_user } from '~relay/NewUserAvatar_user.graphql'
+import type { NewUserAvatar_user$data } from '~relay/NewUserAvatar_user.graphql'
 import '~relay/NewUserAvatar_user.graphql'
 import { colorContrast } from '~/utils/colorContrast'
 
 type Props = AvatarProps & {
-  user: NewUserAvatar_user
+  user: NewUserAvatar_user$data
 }
 const hash = new ColorHash()
 export const NewUserAvatar = ({ user, alt, ...props }: Props) => {

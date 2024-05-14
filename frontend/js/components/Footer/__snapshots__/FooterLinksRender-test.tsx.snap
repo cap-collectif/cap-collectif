@@ -76,8 +76,8 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
     <FooterLinksRender__LinkSeparator>
       |
     </FooterLinksRender__LinkSeparator>
-    <Menu>
-      <Menu.Button>
+    <Menu
+      disclosure={
         <FooterLinksRender__SeeMoreFooterButton
           id="footer-see-more-button"
           padding={0}
@@ -90,8 +90,9 @@ exports[`<FooterLinksRender /> renders correcty 1`] = `
             values={Object {}}
           />
         </FooterLinksRender__SeeMoreFooterButton>
-      </Menu.Button>
-      <Menu.List />
+      }
+    >
+      <Component />
     </Menu>
   </li>
 </FooterLinksRender__LinkList>

@@ -3,7 +3,10 @@
 // we need to use useEffect for mount and unmount, without the dependency array
 import { useRef, useEffect, useState } from 'react'
 
-const useShowMore = (overflowEnable?: boolean, length: number) => {
+const useShowMore = (
+  overflowEnable?: boolean,
+  length: number,
+): [React.MutableRefObject<any>, React.MutableRefObject<any>, React.MutableRefObject<any>, number, boolean] => {
   const [shouldDisplaySeeMore, setShouldDisplaySeeMore] = useState(overflowEnable || false)
   const [overflowIndex, setOverflowIndex] = useState(length)
   const containerRef = useRef<any | null>(null)

@@ -89,6 +89,7 @@ class Manager
     public const mediator = 'mediator';
     public const online_help = 'online_help';
     public const full_proposal_card = 'full_proposal_card';
+    public const new_navbar = 'new_navbar';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -121,6 +122,7 @@ class Manager
         self::mediator,
         self::online_help,
         self::full_proposal_card,
+        self::new_navbar,
     ];
 
     public static $toggles = [
@@ -201,6 +203,7 @@ class Manager
         self::mediator,
         self::online_help,
         self::full_proposal_card,
+        self::new_navbar,
     ];
 
     protected ToggleManager $toggleManager;

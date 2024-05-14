@@ -98,6 +98,7 @@ export const features: FeatureFlags = {
   mediator: false,
   online_help: false,
   full_proposal_card: false,
+  new_navbar: false,
 }
 
 const environment = {

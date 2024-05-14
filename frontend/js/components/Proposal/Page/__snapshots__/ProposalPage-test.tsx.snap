@@ -7997,14 +7997,14 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "isProposalSmsVoteEnabled",
+                          "name": "title",
                           "storageKey": null,
                         },
                         Object {
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
-                          "name": "open",
+                          "name": "url",
                           "storageKey": null,
                         },
                         Object {
@@ -8019,7 +8019,14 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "opinionCanBeFollowed",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
                               "storageKey": null,
                             },
                             Object {
@@ -8027,6 +8034,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "id",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "opinionCanBeFollowed",
                               "storageKey": null,
                             },
                             Object {
@@ -8062,6 +8076,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                           ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "isProposalSmsVoteEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "open",
                           "storageKey": null,
                         },
                         Object {
@@ -8175,13 +8203,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": "categories(order:\\"ALPHABETICAL\\")",
                             },
                           ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "url",
                           "storageKey": null,
                         },
                         Object {
@@ -8844,7 +8865,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "6c2da460ad8d7eca9688de19cb04dc8f",
+          "cacheID": "2425f2df86f066113b58a5ddf257b3ed",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -10490,6 +10511,13 @@ fragment ProposalPageLogic_query_4aPrgF on Query {
     __typename
     ... on ProposalStep {
       __isProposalStep: __typename
+      title
+      url
+      project {
+        title
+        url
+        id
+      }
       isProposalSmsVoteEnabled
     }
     ...ProposalPageHeader_step_2uzqnG
@@ -10513,6 +10541,7 @@ fragment ProposalPageLogic_query_4aPrgF on Query {
     viewerCanAnalyse @include(if: $isAuthenticated)
     viewerCanEvaluate @include(if: $isAuthenticated)
     id
+    title
     supervisor {
       id
     }

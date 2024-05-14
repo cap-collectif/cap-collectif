@@ -104,6 +104,7 @@ export const features: FeatureToggles = {
   moderation_comment: false,
   online_help: false,
   full_proposal_card: false,
+  new_navbar: false,
 }
 export const initialState: State = {
   themes: [],

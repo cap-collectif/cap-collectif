@@ -1,7 +1,7 @@
 describe('rgpd', () => {
   it('should toggle cookies performance', () => {
     cy.visit(`/`)
-    cy.get('#cookies-management').click()
+    cy.get('#cookies-management').click({ force: true })
     cy.contains('global.disabled')
     cy.get('#cookies-enable-analytic').click({ force: true })
     cy.contains('list.label_enabled')
@@ -11,7 +11,7 @@ describe('rgpd', () => {
   })
   it('should toggle cookies advertising', () => {
     cy.visit(`/`)
-    cy.get('#cookies-management').click()
+    cy.get('#cookies-management').click({ force: true })
     cy.contains('global.disabled')
     cy.get('#cookies-enable-ads').click({ force: true })
     cy.contains('list.label_enabled')

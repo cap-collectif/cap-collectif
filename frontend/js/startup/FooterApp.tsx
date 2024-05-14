@@ -4,7 +4,7 @@ import Providers from './Providers'
 import Footer from '../components/Footer/Footer'
 
 export default (props: Record<string, any>) => (
-  <Providers>
+  <Providers designSystem>
     <Footer {...props} />
   </Providers>
 )

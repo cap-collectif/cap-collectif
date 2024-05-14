@@ -6,14 +6,16 @@ import { changeConsultationPlanActiveItems } from '../../redux/modules/project'
 import environment, { graphqlError } from '../../createRelayEnvironment'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
 import type {
-  ConsultationPropositionBoxQueryResponse,
-  ConsultationPropositionBoxQueryVariables,
+  ConsultationPropositionBoxQuery$data,
+  ConsultationPropositionBoxQuery$variables,
 } from '~relay/ConsultationPropositionBoxQuery.graphql'
 import ConsultationPropositionStep from './ConsultationPropositionStep'
+
 export type OwnProps = {
   readonly id: RelayGlobalId
   readonly consultationSlug: string
 }
+
 type Props = OwnProps & {
   readonly showConsultationPlan: boolean
   readonly dispatch: Dispatch
@@ -21,6 +23,7 @@ type Props = OwnProps & {
   readonly isAuthenticated: boolean
 }
 let Stickyfill
+
 export const ConsultationPropositionBox = (props: Props) => {
   const { id, showConsultationPlan, consultationPlanEnabled, isAuthenticated, consultationSlug, dispatch } = props
   const [currentActiveItems, setCurrentActiveItems] = React.useState([])
@@ -62,7 +65,7 @@ export const ConsultationPropositionBox = (props: Props) => {
     error,
     props: queryProps,
   }: ReactRelayReadyState & {
-    props: ConsultationPropositionBoxQueryResponse | null | undefined
+    props: ConsultationPropositionBoxQuery$data | null | undefined
   }) => {
     if (error) {
       console.log(error) // eslint-disable-line no-console
@@ -93,7 +96,7 @@ export const ConsultationPropositionBox = (props: Props) => {
     <div className="row" id={`consultationStep-${id}`}>
       <QueryRenderer
         fetchPolicy="store-and-network"
-        environment={environment}
+        environment={environment as any}
         query={graphql`
           query ConsultationPropositionBoxQuery(
             $consultationStepId: ID!
@@ -117,7 +120,7 @@ export const ConsultationPropositionBox = (props: Props) => {
             consultationStepId: id,
             consultationSlug,
             isAuthenticated,
-          } as ConsultationPropositionBoxQueryVariables
+          } as ConsultationPropositionBoxQuery$variables
         }
         render={renderSectionRecursiveList}
       />

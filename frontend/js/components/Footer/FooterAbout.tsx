@@ -1,10 +1,8 @@
 import React from 'react'
-import { Row, Col } from 'react-bootstrap'
-
 import styled from 'styled-components'
 import WYSIWYGRender from '../Form/WYSIWYGRender'
 import type { SocialNetwork } from './Footer'
-import './Footer'
+import { Box } from '@cap-collectif/ui'
 
 type Props = {
   textTitle: string
@@ -31,10 +29,6 @@ const About = styled.div<{
   @media (max-width: 767px) {
     padding: 15px;
   }
-`
-const ContainerRow = styled(Row)`
-  margin: auto;
-  max-width: 960px;
 `
 const FooterTitle = styled.h2<{
   titleColor: string
@@ -75,12 +69,12 @@ const SocialNetworks = styled.ul`
 
 const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColor, backgroundColor }: Props) => (
   <About backgroundColor={backgroundColor} textColor={textColor}>
-    <ContainerRow>
-      <Col xs={12} sm={12} md={12} lg={12}>
+    <Box maxWidth="960px" margin="auto">
+      <Box px={4}>
         <FooterTitle titleColor={titleColor}>{textTitle}</FooterTitle>
         <FooterBody value={textBody} />
-      </Col>
-      <Col xs={12} sm={12} md={10} lg={8} lgOffset={2} mdOffset={1}>
+      </Box>
+      <Box px={4}>
         <SocialNetworks>
           {socialNetworks &&
             socialNetworks.map(socialNetwork => (
@@ -92,8 +86,8 @@ const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColo
               </li>
             ))}
         </SocialNetworks>
-      </Col>
-    </ContainerRow>
+      </Box>
+    </Box>
   </About>
 )
 

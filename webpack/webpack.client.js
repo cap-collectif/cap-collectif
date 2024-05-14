@@ -29,7 +29,9 @@ const devConf = {
     extensions: ['.tsx', '.ts', '.js'],
     alias: {
       '~relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
+      '@relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
       '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
+      '@shared': path.resolve(__dirname, '../frontend/shared'),
       '~ds': path.resolve(__dirname, '../frontend/js/components/DesignSystem'),
       '~': path.resolve(__dirname, '../frontend/js'),
       '~fonts': path.resolve(__dirname, '../public/fonts'),

@@ -13,6 +13,7 @@ import * as S from '~ui/TabsBar/styles'
 import AppBox from '~ui/Primitives/AppBox'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import NavbarRightMediator from './NavbarRightMediator'
+import { Flex } from '@cap-collectif/ui'
 
 type Props = {
   currentLanguage: string
@@ -20,8 +21,16 @@ type Props = {
   features: FeatureToggles
   loginWithOpenId: boolean
   instanceName: string
+  newHeader?: boolean
 }
-export const NavbarRight = ({ user = null, features, loginWithOpenId, currentLanguage, instanceName }: Props) => {
+export const NavbarRight = ({
+  user = null,
+  features,
+  loginWithOpenId,
+  currentLanguage,
+  instanceName,
+  newHeader,
+}: Props) => {
   const intl = useIntl()
   const prefix = features.multilangue ? `/${currentLanguage.split('-')[0]}` : ''
   const menu = useMenuState({
@@ -37,7 +46,7 @@ export const NavbarRight = ({ user = null, features, loginWithOpenId, currentLan
   const showAdminLink = user?.isAdmin || user?.isProjectAdmin || user?.isOrganizationMember
   return (
     <>
-      {features.search && (
+      {features.search && (!newHeader || !isMobile) && (
         <TabsItemContainer
           as="div"
           role="search"
@@ -169,11 +178,11 @@ export const NavbarRight = ({ user = null, features, loginWithOpenId, currentLan
           </Menu>
         </>
       ) : (
-        <AppBox px="16px">
+        <Flex px={4} spacing={1}>
           {/** @ts-ignore */}
-          <RegistrationButton className="navbar-btn" />{' '}
+          <RegistrationButton className="navbar-btn" />
           <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
-        </AppBox>
+        </Flex>
       )}
     </>
   )

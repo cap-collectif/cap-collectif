@@ -4,13 +4,16 @@ import { graphql, QueryRenderer } from 'react-relay'
 import { connect } from 'react-redux'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import environment, { graphqlError } from '~/createRelayEnvironment'
-import type { EventListPageQueryResponse, EventListPageQueryVariables } from '~relay/EventListPageQuery.graphql'
+import type { EventListPageQuery$data, EventListPageQuery$variables } from '~relay/EventListPageQuery.graphql'
 import config from '~/config'
 import EventListPageContainer, { getInitialValues } from './EventListPageContainer'
 import EventListPageHeader from './EventListPageHeader'
 import withColors from '../Utils/withColors'
 import type { GlobalState } from '~/types'
 import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+import { useIntl } from 'react-intl'
+
 type Props = {
   readonly eventPageTitle: string | null | undefined
   readonly eventPageBody: string | null | undefined
@@ -18,17 +21,27 @@ type Props = {
   readonly isAuthenticated: boolean
   readonly locale: string
 }
+
 export const EventListPage = ({ backgroundColor, isAuthenticated, locale, eventPageTitle, eventPageBody }: Props) => {
   const initialValues = getInitialValues()
+  const intl = useIntl()
   const { project } = initialValues
   const isFuture = initialValues.status === 'all' ? null : initialValues.status === 'ongoing-and-future'
   const urlSearch = new URLSearchParams(window.location.search)
   const theme = urlSearch.get('theme') ?? null
   const district = urlSearch.get('district') ?? null
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.events' }), href: '' },
+    ])
+  }, [intl])
+
   return (
     <div className="event-page">
       <QueryRenderer
-        environment={environment}
+        environment={environment as any}
         query={graphql`
           query EventListPageQuery(
             $cursor: String
@@ -82,13 +95,13 @@ export const EventListPage = ({ backgroundColor, isAuthenticated, locale, eventP
               direction: 'ASC',
             },
             isAuthenticated,
-          } as EventListPageQueryVariables
+          } as EventListPageQuery$variables
         }
         render={({
           error,
           props,
         }: ReactRelayReadyState & {
-          props: EventListPageQueryResponse | null | undefined
+          props: EventListPageQuery$data | null | undefined
         }) => {
           if (error) {
             return graphqlError
@@ -126,6 +139,5 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: !!state.user.user,
 })
 
-// @ts-ignore
 const container = connect(mapStateToProps)(EventListPage)
 export default withColors(container)

@@ -2,17 +2,17 @@
 
 exports[`<NavbarRight /> should render correctly 1`] = `
 <Fragment>
-  <AppBox
-    px="16px"
+  <Flex
+    px={4}
+    spacing={1}
   >
     <Connect(injectIntl(RegistrationButton))
       className="navbar-btn"
     />
-     
     <Connect(LoginButton)
       className="btn-darkest-gray navbar-btn btn--connection"
     />
-  </AppBox>
+  </Flex>
 </Fragment>
 `;
 

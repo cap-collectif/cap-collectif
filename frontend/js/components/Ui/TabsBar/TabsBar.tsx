@@ -3,9 +3,9 @@ import { useIntl } from 'react-intl'
 import TabsItem from './TabsItem'
 import TabsBarDropdown from './TabsBarDropdown'
 import * as S from './styles'
-import useShowMore from '~/utils/hooks/useShowMore'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import type { Item } from '~/components/Navbar/Navbar.type'
+import useShowMore from '@shared/hooks/useShowMore'
 
 type Props = {
   items: Item[]

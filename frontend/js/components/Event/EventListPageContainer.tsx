@@ -18,19 +18,16 @@ import { toast } from '~ds/Toast'
 import { getOrderBy, ORDER_TYPE } from './Profile/EventListProfileRefetch'
 import { useSelector } from 'react-redux'
 import { GlobalState } from '~/types'
-import Heading from '~ui/Primitives/Heading'
+import { Heading } from '@cap-collectif/ui'
 
 type Props = {
   readonly query: EventListPageContainer_query
   readonly eventPageBody: string | null | undefined
   readonly backgroundColor: string | null | undefined
 }
-const EventFiltersContainer = styled(ColorBox).attrs({
-  id: 'event-page-filters',
-})`
+const EventFiltersContainer = styled(ColorBox)`
   margin: 25px 0 30px;
   position: sticky;
-  top: 50px;
   z-index: 50;
   .event-search-group .form-group {
     margin-bottom: 0;
@@ -102,6 +99,8 @@ const renderAwaitingOrRefusedEvents = (query: EventListPageContainer_query) => {
   }
 }
 
+const listContainerId = 'event-page-filters'
+
 export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }: Props) => {
   const intl = useIntl()
   const status = useSelector((state: GlobalState) => state.form[formName].values.status)
@@ -130,7 +129,11 @@ export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }
           </div>
         </div>
       </div>
-      <EventFiltersContainer darkness={10} backgroundColor={backgroundColor || colors.primaryColor}>
+      <EventFiltersContainer
+        darkness={10}
+        backgroundColor={backgroundColor || colors.primaryColor}
+        id={listContainerId}
+      >
         <EventListFilters query={query} addToggleViewButton formName={formName} />
       </EventFiltersContainer>
       <div id="event-page-rendered">

@@ -4,11 +4,10 @@ import ReactOnRails from 'react-on-rails'
 import { ThemeProvider } from 'styled-components'
 import Providers from './Providers'
 import Navbar from '../components/Navbar/Navbar'
-import NavbarRight from '../components/Navbar/NavbarRight'
+import { NavBarContextProvider } from '@shared/navbar/NavBar.context'
 
 const NavbarAppClient = (props: Record<string, any>) => {
   const store = ReactOnRails.getStore('appStore')
-  const { currentLanguage } = props
   // NOTE: maybe use later global variable instead of Redux store to get theme colors
   const state = store.getState()
   const theme = {
@@ -18,10 +17,13 @@ const NavbarAppClient = (props: Record<string, any>) => {
     mainNavbarTextHover: state.default.parameters['color.main_menu.text_hover'] || '#555',
     mainNavbarTextActive: state.default.parameters['color.main_menu.text_active'] || '#555',
   }
+  document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (
-    <Providers>
+    <Providers designSystem>
       <ThemeProvider theme={theme}>
-        <Navbar {...props} contentRight={<NavbarRight currentLanguage={currentLanguage} />} />
+        <NavBarContextProvider>
+          <Navbar {...props} theme={theme} />
+        </NavBarContextProvider>
       </ThemeProvider>
     </Providers>
   )

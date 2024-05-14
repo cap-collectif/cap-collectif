@@ -56,6 +56,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "QuestionnaireStep",
                       "kind": "LinkedField",
                       "name": "step",
@@ -95,6 +102,31 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "startAt",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Project",
+                          "kind": "LinkedField",
+                          "name": "project",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
                               "storageKey": null,
                             },
                           ],
@@ -189,7 +221,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "18ebe1653b1d835e4f10e0fb5f6cf09f",
+        "hash": "d15271edc99298adf4d727332a9007ca",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -252,6 +284,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "QuestionnaireStep",
                       "kind": "LinkedField",
                       "name": "step",
@@ -291,6 +330,38 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "startAt",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Project",
+                          "kind": "LinkedField",
+                          "name": "project",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -799,13 +870,6 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                               "storageKey": null,
                                             },
                                           ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
                                           "storageKey": null,
                                         },
                                       ],
@@ -2086,7 +2150,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "487451a011568e7203072e2e91ac8777",
+          "cacheID": "162b1eebf6fe81cea05f9180337e5e0e",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2100,12 +2164,18 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
   questionnaire: node(id: $id) {
     __typename
     ... on Questionnaire {
+      title
       step {
         id
         url
         state
         timeRange {
           startAt
+        }
+        project {
+          title
+          url
+          id
         }
         customCode
         eventCount: events(orderBy: {field: START_AT, direction: DESC}) {
@@ -2586,6 +2656,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "QuestionnaireStep",
                       "kind": "LinkedField",
                       "name": "step",
@@ -2625,6 +2702,31 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                               "args": null,
                               "kind": "ScalarField",
                               "name": "startAt",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Project",
+                          "kind": "LinkedField",
+                          "name": "project",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
                               "storageKey": null,
                             },
                           ],
@@ -2719,7 +2821,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
           "type": "Query",
         },
-        "hash": "18ebe1653b1d835e4f10e0fb5f6cf09f",
+        "hash": "d15271edc99298adf4d727332a9007ca",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -2782,6 +2884,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "QuestionnaireStep",
                       "kind": "LinkedField",
                       "name": "step",
@@ -2821,6 +2930,38 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                               "args": null,
                               "kind": "ScalarField",
                               "name": "startAt",
+                              "storageKey": null,
+                            },
+                          ],
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "concreteType": "Project",
+                          "kind": "LinkedField",
+                          "name": "project",
+                          "plural": false,
+                          "selections": Array [
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "title",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "url",
+                              "storageKey": null,
+                            },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "kind": "ScalarField",
+                              "name": "id",
                               "storageKey": null,
                             },
                           ],
@@ -3329,13 +3470,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                               "storageKey": null,
                                             },
                                           ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "id",
                                           "storageKey": null,
                                         },
                                       ],
@@ -4616,7 +4750,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "487451a011568e7203072e2e91ac8777",
+          "cacheID": "162b1eebf6fe81cea05f9180337e5e0e",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -4630,12 +4764,18 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
   questionnaire: node(id: $id) {
     __typename
     ... on Questionnaire {
+      title
       step {
         id
         url
         state
         timeRange {
           startAt
+        }
+        project {
+          title
+          url
+          id
         }
         customCode
         eventCount: events(orderBy: {field: START_AT, direction: DESC}) {

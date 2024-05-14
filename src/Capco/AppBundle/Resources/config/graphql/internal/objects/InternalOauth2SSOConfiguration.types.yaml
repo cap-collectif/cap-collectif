@@ -18,18 +18,23 @@ InternalOauth2SSOConfiguration:
             clientId:
                 type: 'String'
                 description: 'Client ID.'
+                access: "@=hasRole('ROLE_ADMIN')"
             secret:
                 type: 'String'
                 description: 'Secret key.'
+                access: "@=hasRole('ROLE_ADMIN')"
             authorizationUrl:
                 type: 'URI!'
                 description: 'Authorization URL.'
+                access: "@=hasRole('ROLE_ADMIN')"
             accessTokenUrl:
                 type: 'URI!'
                 description: 'Access token URL.'
+                access: "@=hasRole('ROLE_ADMIN')"
             userInfoUrl:
                 type: 'URI!'
                 description: 'User info URL.'
+                access: "@=hasRole('ROLE_ADMIN')"
             logoutUrl:
                 type: 'URI'
                 description: 'Logout URL.'

@@ -18,24 +18,31 @@ InternalFranceConnectSSOConfiguration:
             clientId:
                 type: 'String'
                 description: 'Client ID.'
+                access: "@=hasRole('ROLE_ADMIN')"
             secret:
                 type: 'String'
                 description: 'Secret key.'
+                access: "@=hasRole('ROLE_ADMIN')"
             authorizationUrl:
                 type: 'URI!'
                 description: 'Authorization URL.'
+                access: "@=hasRole('ROLE_ADMIN')"
             accessTokenUrl:
                 type: 'URI!'
                 description: 'Access token URL.'
+                access: "@=hasRole('ROLE_ADMIN')"
             userInfoUrl:
                 type: 'URI!'
                 description: 'User info URL.'
+                access: "@=hasRole('ROLE_ADMIN')"
             logoutUrl:
                 type: 'URI'
                 description: 'Logout URL.'
+                access: "@=hasRole('ROLE_ADMIN')"
             environment:
                 type: 'SSOEnvironment!'
                 description: 'Environment mode.'
+                access: "@=hasRole('ROLE_ADMIN')"
             redirectUri:
                 type: 'URI!'
                 description: 'Redirect URI callback.'
@@ -44,6 +51,8 @@ InternalFranceConnectSSOConfiguration:
                 type: '[FranceConnectAllowedData!]!'
                 description: 'Unattended DataChoice as array.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\FranceConnectAllowedDataResolver")'
+                access: "@=hasRole('ROLE_ADMIN')"
             isCompletelyConfigured:
                 type: 'Boolean!'
                 description: 'Is France Connect completely configured'
+                access: "@=hasRole('ROLE_ADMIN')"

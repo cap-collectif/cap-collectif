@@ -16,8 +16,10 @@ InternalFacebookSSOConfiguration:
                 builderConfig:
                     typeName: FacebookSSOConfiguration
             clientId:
+                access: "@=hasRole('ROLE_ADMIN')"
                 type: 'String'
                 description: 'Client ID.'
             secret:
+                access: "@=hasRole('ROLE_ADMIN')"
                 type: 'String'
                 description: 'Secret key.'

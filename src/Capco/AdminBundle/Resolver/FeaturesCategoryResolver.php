@@ -75,6 +75,7 @@ class FeaturesCategoryResolver
                     Manager::mediator,
                     Manager::online_help,
                     Manager::full_proposal_card,
+                    Manager::new_navbar,
                 ],
             ],
         ],

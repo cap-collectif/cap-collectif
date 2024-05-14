@@ -1,10 +1,9 @@
 import React, { useState } from 'react'
-import { Button } from 'react-bootstrap'
-
 import styled from 'styled-components'
 import type { LocaleMap } from '../Button/SiteLanguageChangeButton'
 import SiteLanguageChangeButton from '../Button/SiteLanguageChangeButton'
 import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader'
+import { Button } from '@cap-collectif/ui'
 type Props = {
   readonly localeChoiceTranslations: Array<LocaleChoiceTranslation>
   onChange: (arg0: LocaleMap) => void
@@ -20,7 +19,15 @@ const ChangeLanguageProposalContainer = styled.div`
   min-height: 75px;
   color: #fff;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
+  z-index: 1041;
+
+  #language-header-close {
+    position: absolute;
+    top: 30px;
+    right: 30px;
+  }
+
   @media (max-width: 991px) {
     padding: 20px 15px;
   }
@@ -29,11 +36,6 @@ const ChangeLanguageProposalContainer = styled.div`
   transition: all 0.3s ease;
   position: relative;
   padding: 0;
-  #language-header-close {
-    position: absolute;
-    top: 30px;
-    right: 30px;
-  }
 `
 export const Content = styled.div`
   display: flex;
@@ -59,7 +61,9 @@ const Close = styled.i`
 const ChangeLanguageForm = styled.div`
   width: 50%;
   text-align: end;
-
+  align-items: center;
+  display: flex;
+  justify-content: end;
   .dropdown {
     width: 65%;
   }
@@ -68,16 +72,7 @@ const ChangeLanguageForm = styled.div`
     width: 100%;
     text-align: start;
     justify-content: space-between;
-    display: flex;
     margin-top: 10px;
-  }
-`
-const ContinueButton = styled(Button)`
-  font-size: 16px;
-  margin-left: 20px;
-
-  @media (max-width: 991px) {
-    margin-left: 10px;
   }
 `
 const ChangeLanguageText = styled.div`
@@ -122,13 +117,15 @@ const ChangeLanguageOnWebsiteHeader = React.forwardRef<HTMLDivElement, Props>(
                 backgroundColor="rgba(255, 255, 255, 0.15) !important" // TODO: Remove this when we'll stop using bootstrap
                 textColor="#FFF"
               />
-              <ContinueButton
+              <Button
                 id="language-header-continue-button"
-                bsStyle="primary"
+                variant="primary"
+                ml={[2, 5]}
+                variantColor="primary"
                 onClick={() => onChange(currentLanguage)}
               >
                 <span>{localChoiceTrans && localChoiceTrans.label}</span>
-              </ContinueButton>
+              </Button>
             </ChangeLanguageForm>
           </Content>
         </div>

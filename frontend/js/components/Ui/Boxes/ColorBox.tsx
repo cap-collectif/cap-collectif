@@ -8,6 +8,7 @@ type Props = {
   children: JSX.Element | JSX.Element[] | string
   className: string
   darkness?: number
+  id?: string
 }
 const BoxContainer = styled.div<Props>`
   padding: 15px;
@@ -18,9 +19,9 @@ const BoxContainer = styled.div<Props>`
   border-radius: 4px;
 `
 export const ColorBox = (props: Props) => {
-  const { backgroundColor, children, className, darkness } = props
+  const { backgroundColor, children, className, darkness, ...rest } = props
   return (
-    <BoxContainer darkness={darkness} className={className} backgroundColor={backgroundColor}>
+    <BoxContainer darkness={darkness} className={className} backgroundColor={backgroundColor} {...rest}>
       {children}
     </BoxContainer>
   )

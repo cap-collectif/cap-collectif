@@ -25,6 +25,9 @@
       "~relay/*": [
         "./frontend/js/__generated__/~relay/*"
       ],
+      "@relay/*": [
+        "./frontend/js/__generated__/~relay/*"
+      ],
       "~ds/*": [
         "./frontend/js/components/DesignSystem/*"
       ],
@@ -36,6 +39,9 @@
       ],
       "~image/*": [
         "./public/image/*"
+      ],
+      "@shared/*": [
+        "./frontend/shared/*"
       ]
     },
     "incremental": true

@@ -1,15 +1,12 @@
 import React from 'react'
-
 import styled from 'styled-components'
 import { useIntl } from 'react-intl'
+import { Flex } from '@cap-collectif/ui'
 
 type Props = {
   textColor: string
 }
-const CapcoPoweredContainer = styled.div`
-  text-align: center;
-  width: 100%;
-`
+
 const CapcoLogo = styled.img`
   width: 20px;
   height: 20px;
@@ -28,13 +25,13 @@ const CapcoLink = styled.a<{
 const CapcoPowered = ({ textColor }: Props): JSX.Element => {
   const intl = useIntl()
   return (
-    <CapcoPoweredContainer>
+    <Flex alignItems="center" justifyContent="center">
       {intl.formatMessage({ id: 'powered_by' })}
       <CapcoLogo src="/favicon-64x64.png" alt="cap collectif logo" />
       <CapcoLink textColor={textColor} href="https://cap-collectif.com">
         <span>Cap Collectif</span>
       </CapcoLink>
-    </CapcoPoweredContainer>
+    </Flex>
   )
 }
 

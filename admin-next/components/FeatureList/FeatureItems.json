@@ -153,6 +153,11 @@
                         "title": "capco.module.http_redirects",
                         "description": "description.module.http_redirects",
                         "onlySuperAdmin": true
+                    },
+                    "new_navbar": {
+                        "title": "capco.module.new_navbar",
+                        "description": "description.module.new_navbar",
+                        "onlySuperAdmin": true
                     }
                 }
             },

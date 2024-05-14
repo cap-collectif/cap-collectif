@@ -14,10 +14,7 @@ import StepPageHeader from '../Steps/Page/StepPageHeader/StepPageHeader'
 import environment, { graphqlError } from '../../createRelayEnvironment'
 import ProposalListView, { queryVariables } from '../Proposal/List/ProposalListView'
 import type { Dispatch, FeatureToggles, State } from '../../types'
-import type {
-  ProposalStepPageQueryResponse,
-  ProposalStepPageQueryVariables,
-} from '~relay/ProposalStepPageQuery.graphql'
+import type { ProposalStepPageQuery$data, ProposalStepPageQuery$variables } from '~relay/ProposalStepPageQuery.graphql'
 import config from '../../config'
 import { formatGeoJsons } from '~/utils/geojson'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
@@ -25,6 +22,7 @@ import StepEvents from '../Steps/StepEvents'
 import ProposalVoteBasketWidget from '../Proposal/Vote/ProposalVoteBasketWidget'
 import CookieMonster from '~/CookieMonster'
 import MediatorAddVotesLink from './MediatorAddVotesLink'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 
 type OwnProps = {
   stepId: string
@@ -39,7 +37,7 @@ type StateProps = {
   dispatch: Dispatch
 }
 type Props = OwnProps & StateProps
-type RenderedProps = ProposalStepPageQueryResponse & {
+type RenderedProps = ProposalStepPageQuery$data & {
   count: number
   isAuthenticated: boolean
   features: FeatureToggles
@@ -61,6 +59,15 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
   React.useEffect(() => {
     insertCustomCode(step?.customCode) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [step?.id])
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: step?.project?.title, href: step?.project?.url || '' },
+      { title: step?.title, href: '' },
+    ])
+  }, [step, intl])
 
   if (!step) {
     return graphqlError
@@ -154,7 +161,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
     <div className="proposal__step-page">
       <QueryRenderer
         fetchPolicy="store-and-network"
-        environment={environment}
+        environment={environment as any}
         query={graphql`
           query ProposalStepPageQuery(
             $stepId: ID!
@@ -186,6 +193,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
             }
             step: node(id: $stepId) {
               ... on ProposalStep {
+                title
                 isProposalSmsVoteEnabled
                 customCode
                 id
@@ -196,6 +204,10 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
                 defaultSort
                 voteType
                 state
+                project {
+                  title
+                  url
+                }
                 slug
                 votable
                 statuses {
@@ -260,13 +272,13 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
             ...initialRenderVars,
             isMapDisplay: features.display_map || false,
             token,
-          } as ProposalStepPageQueryVariables
+          } as ProposalStepPageQuery$variables
         }
         render={({
           error,
           props,
         }: ReactRelayReadyState & {
-          props: ProposalStepPageQueryResponse | null | undefined
+          props: ProposalStepPageQuery$data | null | undefined
         }) => {
           if (error) {
             return graphqlError

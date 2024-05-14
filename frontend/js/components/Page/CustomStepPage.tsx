@@ -7,6 +7,8 @@ import WYSIWYGRender from '../Form/WYSIWYGRender'
 import DatesInterval from '../Utils/DatesInterval'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import StepEvents from '~/components/Steps/StepEvents'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+import { useIntl } from 'react-intl'
 type Props = {
   readonly stepId: string
 }
@@ -17,6 +19,10 @@ const QUERY = graphql`
         id
         body
         title
+        project {
+          title
+          url
+        }
         timeRange {
           startAt
           endAt
@@ -39,14 +45,25 @@ This is neither a rework nor a DS migration. It may come later if/when we decide
 refresh this page
 */
 export const CustomStepPage = ({ stepId }: Props) => {
-  const { state } = useLocation()
+  const { state } = useLocation<{ stepId?: string }>()
   const hasFeatureFlagCalendar = useFeatureFlag('calendar')
+  const intl = useIntl()
   const data = useLazyLoadQuery<CustomStepPageQueryType>(QUERY, {
     stepId: state?.stepId || stepId,
   })
   React.useEffect(() => {
     insertCustomCode(data?.customStep?.customCode) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.customStep?.id])
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: data?.customStep?.project?.title, href: data?.customStep?.project?.url || '' },
+      { title: data?.customStep?.title, href: '' },
+    ])
+  }, [data, intl])
+
   if (!data) return null
   const { customStep } = data
   if (!customStep) return null

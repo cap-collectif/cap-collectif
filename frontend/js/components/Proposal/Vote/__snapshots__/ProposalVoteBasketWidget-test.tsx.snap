@@ -9,6 +9,7 @@ exports[`<ProposalVoteBasketWidget /> should hide votes button when anon vote is
   collapsed={true}
   fixedTop={true}
   isBudget={false}
+  newNavbar={false}
   textColor="#333"
 >
   <div>
@@ -56,6 +57,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a budget v
   collapsed={true}
   fixedTop={true}
   isBudget={false}
+  newNavbar={false}
   textColor="#333"
 >
   <div>
@@ -117,6 +119,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple s
   collapsed={true}
   fixedTop={true}
   isBudget={false}
+  newNavbar={false}
   textColor="#333"
 >
   <div>
@@ -195,6 +198,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
   collapsed={true}
   fixedTop={true}
   isBudget={false}
+  newNavbar={false}
   textColor="#333"
 >
   <div>
@@ -273,6 +277,7 @@ exports[`<ProposalVoteBasketWidget /> should render a vote widget for a simple v
   collapsed={true}
   fixedTop={true}
   isBudget={false}
+  newNavbar={false}
   textColor="#333"
 >
   <div>

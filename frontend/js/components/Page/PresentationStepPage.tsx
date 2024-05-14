@@ -8,6 +8,7 @@ import type { PresentationStepPageQuery as PresentationStepPageQueryType } from 
 import WYSIWYGRender from '../Form/WYSIWYGRender'
 import BlockPost from '../PresentationStep/BlockPost'
 import StepEvents from '~/components/Steps/StepEvents'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 type Props = {
   readonly stepId: string
 }
@@ -20,6 +21,7 @@ const QUERY = graphql`
         title
         customCode
         project {
+          title
           url
           slug
           posts {
@@ -65,9 +67,20 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   const calendar = useFeatureFlag('calendar')
   const blog = useFeatureFlag('blog')
   const intl = useIntl()
+
   React.useEffect(() => {
     insertCustomCode(data?.presentationStep?.customCode) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [data?.presentationStep?.id])
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: data?.presentationStep?.project?.title, href: data?.presentationStep?.project?.url || '' },
+      { title: data?.presentationStep?.title, href: '' },
+    ])
+  }, [data, intl])
+
   if (!data) return null
   const { presentationStep } = data
   if (!presentationStep) return null

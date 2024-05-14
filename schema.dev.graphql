@@ -6910,6 +6910,9 @@ enum FeatureFlagType {
 
   """Whether or not full data display is enabled on the proposal card"""
   full_proposal_card
+
+  """Whether or not the new navbar is enabled"""
+  new_navbar
 }
 
 """Require a firstname"""

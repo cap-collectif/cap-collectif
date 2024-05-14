@@ -220,6 +220,20 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                         "selections": Array [
                           Object {
                             "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "url",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "title",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
                             "args": Array [
                               Object {
                                 "kind": "Variable",
@@ -2437,7 +2451,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "022ec9c336f8b1cb087c94f490592ad1",
+            "cacheID": "9665c4b4109d47f54289856f30114148",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -2501,6 +2515,8 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
   state
   timeless
   project {
+    url
+    title
     hasParticipativeStep(exceptStepId: $consultationStepId)
     authors {
       __typename
@@ -3148,6 +3164,20 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                         "selections": Array [
                           Object {
                             "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "url",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "title",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
                             "args": Array [
                               Object {
                                 "kind": "Variable",
@@ -5365,7 +5395,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "022ec9c336f8b1cb087c94f490592ad1",
+            "cacheID": "9665c4b4109d47f54289856f30114148",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -5429,6 +5459,8 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
   state
   timeless
   project {
+    url
+    title
     hasParticipativeStep(exceptStepId: $consultationStepId)
     authors {
       __typename

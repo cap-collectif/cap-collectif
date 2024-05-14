@@ -20,6 +20,6 @@ class MenuItemChildrenResolver implements QueryInterface
      */
     public function __invoke(MenuItem $menuItem): array
     {
-        return $this->menuItemRepository->getChildItems($menuItem);
+        return $this->menuItemRepository->getChildrenByItem($menuItem);
     }
 }

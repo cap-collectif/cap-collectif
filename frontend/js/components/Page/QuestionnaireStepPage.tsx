@@ -8,7 +8,7 @@ import environment, { graphqlError } from '~/createRelayEnvironment'
 import type { GlobalState, Dispatch } from '~/types'
 import '~/types'
 import { insertCustomCode } from '~/utils/customCode'
-import type { QuestionnaireStepPageQueryResponse } from '~relay/QuestionnaireStepPageQuery.graphql'
+import type { QuestionnaireStepPageQuery$data } from '~relay/QuestionnaireStepPageQuery.graphql'
 import '~relay/QuestionnaireStepPageQuery.graphql'
 import { Loader } from '~/components/Ui/FeedbacksIndicators/Loader'
 import QuestionnaireReplyPage, {
@@ -22,6 +22,8 @@ import CookieMonster from '~/CookieMonster'
 import QuestionnairePage from '../Questionnaire/QuestionnairePage'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import StepEvents from '~/components/Steps/StepEvents'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+
 export type PropsNotConnected = {
   readonly initialQuestionnaireId: string | null | undefined
 }
@@ -54,7 +56,7 @@ const Component = ({
   context,
   dataPrefetch,
 }: ReactRelayReadyState & {
-  props: QuestionnaireStepPageQueryResponse | null | undefined
+  props: QuestionnaireStepPageQuery$data | null | undefined
   context: Context
   dataPrefetch: any
 }) => {
@@ -63,6 +65,16 @@ const Component = ({
   React.useEffect(() => {
     insertCustomCode(props?.questionnaire?.step?.customCode) // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [props?.questionnaire?.step?.id])
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: props?.questionnaire?.step?.project?.title, href: props?.questionnaire?.project?.url || '' },
+      { title: props?.questionnaire?.title, href: '' },
+    ])
+  }, [props, intl])
+
   if (error) return graphqlError
 
   if (props) {
@@ -136,7 +148,7 @@ const Component = ({
 }
 
 export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated }: Props) => {
-  const { state } = useLocation()
+  const { state } = useLocation<{ questionnaireId: string }>()
   const questionnaireId = state?.questionnaireId || initialQuestionnaireId
   const [replyPrefetch, setReplyPrefetch] = React.useState(null)
   const anonymousRepliesIds = React.useMemo(
@@ -154,7 +166,7 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
   return questionnaireId ? (
     <QueryRenderer
       fetchPolicy="store-and-network"
-      environment={environment}
+      environment={environment as any}
       query={graphql`
         query QuestionnaireStepPageQuery(
           $id: ID!
@@ -164,12 +176,17 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
         ) {
           questionnaire: node(id: $id) {
             ... on Questionnaire {
+              title
               step {
                 id
                 url
                 state
                 timeRange {
                   startAt
+                }
+                project {
+                  title
+                  url
                 }
                 customCode
                 eventCount: events(orderBy: { field: START_AT, direction: DESC }) {
@@ -202,4 +219,4 @@ const mapStateToProps = (state: GlobalState) => ({
   isAuthenticated: state.user.user !== null,
 })
 
-export default connect<Props, PropsNotConnected, _, _, _, _>(mapStateToProps)(QuestionnaireStepPage)
+export default connect(mapStateToProps)(QuestionnaireStepPage)

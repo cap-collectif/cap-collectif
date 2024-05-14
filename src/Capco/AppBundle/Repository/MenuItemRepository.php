@@ -74,6 +74,22 @@ class MenuItemRepository extends EntityRepository
     /**
      * @return array<MenuItem>
      */
+    public function getChildrenByItem(MenuItem $menuItem): array
+    {
+        $qb = $this->createQueryBuilder('i')
+            ->where('i.parent = :menuItem')
+            ->andWhere('i.menu = 1')
+            ->setParameter('menuItem', $menuItem)
+        ;
+
+        $qb = $this->whereIsEnabled($qb);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<MenuItem>
+     */
     public function findMainEnabledNavBarItems(): array
     {
         $qb = $this->createQueryBuilder('i')

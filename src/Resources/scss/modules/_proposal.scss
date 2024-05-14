@@ -411,6 +411,12 @@
     }
 }
 
+.has-new-vote-widget {
+    body {
+        padding-top: $navbar-height;
+    }
+}
+
 .consultation__header__title {
     margin: 15px 0 15px;
     display: inline-block;

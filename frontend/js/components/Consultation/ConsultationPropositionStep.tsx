@@ -2,25 +2,30 @@ import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 
 import styled, { css } from 'styled-components'
-import { FormattedMessage } from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import ConsultationPlan from './ConsultationPlan'
 import DatesInterval from '../Utils/DatesInterval'
 import RemainingTime from '../Utils/RemainingTime'
 import SectionRecursiveList from './SectionRecursiveList'
-import type { ConsultationPropositionStep_consultationStep } from '~relay/ConsultationPropositionStep_consultationStep.graphql'
+import type { ConsultationPropositionStep_consultationStep$data } from '~relay/ConsultationPropositionStep_consultationStep.graphql'
 import { META_STEP_NAVIGATION_HEIGHT } from '../Steps/MetaStepNavigationBox'
 import { breakpoint } from '../../utils/mixins'
 import UserAvatarList from '../User/UserAvatarList'
 import BodyInfos from '../Ui/Boxes/BodyInfos'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+
 type RelayProps = {
-  readonly consultationStep: ConsultationPropositionStep_consultationStep
+  readonly consultationStep: ConsultationPropositionStep_consultationStep$data
 }
+
 type Props = RelayProps & {
   readonly consultationPlanEnabled: boolean
   readonly showConsultationPlan: boolean
 }
+
 const STICKY_OFFSET_TOP = 60
 const META_STEP_QUERY_SELECTOR = '.meta__step__navigation'
+
 const ConsultationPlanInner = styled.div`
   position: sticky;
   z-index: 1000;
@@ -32,9 +37,11 @@ const ConsultationPlanInner = styled.div`
     `,
   )}
 `
+
 export const ConsultationPropositionStep = (props: Props) => {
   const { consultationPlanEnabled, showConsultationPlan, consultationStep: step } = props
   const stepNavigationHeaderRef = React.useRef<HTMLDivElement | null | undefined>(null)
+  const intl = useIntl()
 
   const getStepNavigationHeader: () => HTMLDivElement | null | undefined = () => {
     if (stepNavigationHeaderRef.current === null) {
@@ -46,6 +53,15 @@ export const ConsultationPropositionStep = (props: Props) => {
 
     return stepNavigationHeaderRef.current
   }
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: step?.project?.title, href: step?.project?.url || '' },
+      { title: step?.title, href: '' },
+    ])
+  }, [step, intl])
 
   const stickyOffset = getStepNavigationHeader() ? META_STEP_NAVIGATION_HEIGHT : 0
   const atLeast2Sections = step.consultation && step.consultation.sections && step.consultation.sections.length > 1
@@ -168,6 +184,8 @@ export default createFragmentContainer(ConsultationPropositionStep, {
       state
       timeless
       project {
+        url
+        title
         hasParticipativeStep(exceptStepId: $exceptStepId)
         authors {
           username

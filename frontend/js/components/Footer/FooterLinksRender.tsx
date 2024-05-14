@@ -1,17 +1,12 @@
-// @ts-nocheck
 import React from 'react'
-
 import styled from 'styled-components'
 import { FormattedMessage } from 'react-intl'
 import type { FooterLink, Legals } from './Footer'
-import './Footer'
-import useShowMore from '../../utils/hooks/useShowMore'
+import useShowMore from '@shared/hooks/useShowMore'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 import CookieManagerModal from '../StaticPage/CookieManagerModal'
-import Menu from '../DesignSystem/Menu/Menu'
-import Button from '~ds/Button/Button'
-import { ICON_NAME } from '~ds/Icon/Icon'
 import colors from '~/styles/modules/colors'
+import { Menu, Button, CapUIIcon } from '@cap-collectif/ui'
 
 type Props = {
   links: Array<FooterLink>
@@ -83,22 +78,23 @@ const renderSeeMore = (
   return (
     <li key="see-more-footer" ref={seeMoreRef}>
       <LinkSeparator>|</LinkSeparator>
-      <Menu>
-        <Menu.Button>
+      <Menu
+        disclosure={
           <SeeMoreFooterButton
             padding={0}
             id="footer-see-more-button"
-            rightIcon={ICON_NAME.ARROW_DOWN_O}
+            rightIcon={CapUIIcon.ArrowDownO}
             variant="primary"
             variantSize="small"
           >
             <FormattedMessage id="global.navbar.see_more" />
           </SeeMoreFooterButton>
-        </Menu.Button>
+        }
+      >
         <Menu.List>
           {links.map((link: FooterLink, index: number) => {
             return index >= overflowIndex ? (
-              <Menu.ListItem
+              <Menu.Item
                 style={{
                   color: colors.black,
                 }}
@@ -108,7 +104,7 @@ const renderSeeMore = (
                 ref={handleItemWidth}
               >
                 {link.name}
-              </Menu.ListItem>
+              </Menu.Item>
             ) : null
           })}
         </Menu.List>

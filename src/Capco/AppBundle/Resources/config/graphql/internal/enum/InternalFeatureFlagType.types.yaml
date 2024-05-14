@@ -180,3 +180,6 @@ InternalFeatureFlagType:
             full_proposal_card:
                 value: !php/const Capco\AppBundle\Toggle\Manager::full_proposal_card
                 description: 'Whether or not full data display is enabled on the proposal card'
+            new_navbar:
+                value: !php/const Capco\AppBundle\Toggle\Manager::new_navbar
+                description: 'Whether or not the new navbar is enabled'
