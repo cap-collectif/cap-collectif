@@ -4,7 +4,7 @@ import { FormattedMessage, FormattedDate, useIntl } from 'react-intl'
 import { connect, useSelector } from 'react-redux'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import moment from 'moment'
-
+import convertIconToDs from '~/utils/convertIconToDs'
 import styled from 'styled-components'
 import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize } from '@cap-collectif/ui'
 import { Link, useLocation, useParams } from 'react-router-dom'
@@ -53,8 +53,8 @@ const Header = styled.header`
 
       svg {
         position: absolute;
-        left: calc(50% - 75px);
-        top: calc(50% - 75px);
+        left: calc(50% - 32px);
+        top: calc(50% - 32px);
         z-index: 2;
       }
 
@@ -284,7 +284,7 @@ export const ProposalPageHeader = ({
           />
         ) : (
           <div className="default-header">
-            {icon && <Icon name={ICON_NAME[icon]} size={150} color={colors.white} />}
+            {icon && <Icon name={convertIconToDs(icon)} size={CapUIIconSize.Xxl} color={colors.white} />}
             <CategoryBackground color={color} viewBox="0 0 230 75" />
           </div>
         )}
