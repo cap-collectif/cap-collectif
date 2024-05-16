@@ -22,7 +22,7 @@ type Props = {
 
 const renderEventSimpleHeader = (eventPageTitle, textPos) => (
   <div className={`text-${textPos}`}>
-    <h1 className="m-0">
+    <h1 className="h1" style={{ marginBottom: 0 }}>
       {eventPageTitle ? <FormattedHTMLMessage id={eventPageTitle} /> : <FormattedMessage id="events-list" />}
     </h1>
   </div>
