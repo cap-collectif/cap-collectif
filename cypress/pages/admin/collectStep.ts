@@ -206,10 +206,7 @@ export default new (class AdminCollectStepPage {
   }
 
   fillCustomCode(customCode: string) {
-    return cy
-      .get('#customCode-JoditTextArea-fr_fr > div > div > div.jodit-workplace > div.jodit-wysiwyg')
-      .click({ force: true })
-      .type(customCode)
+    return cy.get('#customCode').click({ force: true }).type(customCode)
   }
 
   checkCanContact(value: boolean) {

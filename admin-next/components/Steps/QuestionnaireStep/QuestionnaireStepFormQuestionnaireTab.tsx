@@ -27,6 +27,7 @@ import SectionModal from './SectionModal'
 import uuid from '@utils/uuid'
 import QuestionnaireListField from '@components/Form/QuestionnaireListField'
 import debounce from '@utils/debounce-promise'
+import stripHTML from '@utils/stripHTML'
 
 const QuestionnaireCreationTypeEnum = {
   NEW: 'NEW',
@@ -343,7 +344,7 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{
 
   const onChange = (newValue: { label: string; value: string; questionnaire }) => {
     setValue(`${MODEL}questionnaire.title`, newValue.questionnaire.title)
-    setValue(`${MODEL}questionnaire.description`, newValue.questionnaire.description)
+    setValue(`${MODEL}questionnaire.description`, stripHTML(newValue.questionnaire.description))
     setValue(`${MODEL}questionnaire.questions`, formatQuestions(newValue.questionnaire, true))
     setValue(`${MODEL}questionnaire.questionsWithJumps`, formatJumpsToTmp(newValue.questionnaire.questionsWithJumps))
   }

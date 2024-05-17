@@ -69,7 +69,6 @@ const ProjectConfigFormSteps: React.FC = () => {
                     <ListCard.Item
                       bg="gray.100"
                       borderRadius="normal"
-                      borderWidth="1px"
                       borderColor="gray.200"
                       mb={1}
                       mt={1}
@@ -77,14 +76,15 @@ const ProjectConfigFormSteps: React.FC = () => {
                       draggable
                       width="100%"
                       _hover={{ bg: 'gray.100' }}
+                      sx={{ borderWidth: '1px' }}
                     >
                       <Flex direction="column">
-                        <Text color="gray.500" fontSize={1} fontWeight={400}>
+                        <Text color="gray.500" fontSize={1} fontWeight={400} lineHeight="16px">
                           {intl.formatMessage({
                             id: getWordingStep(stepsValues[index].__typename),
                           })}
                         </Text>
-                        <Text color="blue.900" fontSize={2} fontWeight={600}>
+                        <Text color="blue.900" fontSize={2} fontWeight={600} lineHeight="16px">
                           {stepsValues[index].label}
                         </Text>
                       </Flex>

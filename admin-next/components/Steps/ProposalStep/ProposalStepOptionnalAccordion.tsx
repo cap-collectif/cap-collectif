@@ -10,8 +10,7 @@ import {
   Tooltip,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { FormProvider, UseFormReturn } from 'react-hook-form'
-import TextEditor from '../../Form/TextEditor/TextEditor'
+import { UseFormReturn } from 'react-hook-form'
 import * as React from 'react'
 import { EnabledEnum, MainViewEnum, zoomLevels } from '../CollectStep/CollectStepForm'
 import { useIntl } from 'react-intl'
@@ -23,9 +22,7 @@ import { FormKeyType } from '../CollectStep/CollectStepContext'
 
 type Props = {
   step: ProposalStepOptionnalAccordion_step$key
-  defaultLocale: string
   formMethods: UseFormReturn<any>
-  isEditing: boolean
   proposalFormKey?: string
 }
 
@@ -40,13 +37,7 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const ProposalStepOptionnalAccordion: React.FC<Props> = ({
-  step: stepRef,
-  defaultLocale,
-  formMethods,
-  isEditing,
-  proposalFormKey = 'form',
-}) => {
+const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMethods, proposalFormKey = 'form' }) => {
   const intl = useIntl()
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const { watch, setValue, control, setError, clearErrors, formState, trigger } = formMethods
@@ -344,20 +335,22 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({
         </FormLabel>
         <FieldInput id="metaDescription" type="textarea" control={control} name="metaDescription" />
       </FormControl>
-      <FormProvider {...formMethods}>
-        <TextEditor
-          name="customCode"
-          required={false}
+      <FormControl name="customCode" control={control}>
+        <FormLabel
+          htmlFor="customCode"
           label={intl.formatMessage({
             id: 'admin.customcode',
           })}
-          platformLanguage={defaultLocale}
-          selectedLanguage={defaultLocale}
-          buttonLabels={{
-            submit: isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'global.add' }),
-          }}
         />
-      </FormProvider>
+        <FieldInput
+          id="customCode"
+          name="customCode"
+          control={control}
+          type="textarea"
+          placeholder="<style></style>"
+          resize="vertical"
+        />
+      </FormControl>
 
       {isCollectStep && (
         <FormControl name={`${proposalFormKey}.canContact`} control={control} mb={6}>

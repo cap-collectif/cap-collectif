@@ -69,6 +69,10 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
       value: 'PARTICIPATORY_BUDGET_ANALYSIS',
       label: intl.formatMessage({ id: 'project.types.participatoryBudgetingAnalysis' }),
     },
+    {
+      value: 'NONE',
+      label: intl.formatMessage({ id: 'no-model' }),
+    },
   ]
 
   const initialValues: FormValues = {
@@ -223,7 +227,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
               type="select"
               clearable
               placeholder={intl.formatMessage({
-                id: 'global.model',
+                id: 'create-project.placeholder_model',
               })}
             />
           </FormControl>

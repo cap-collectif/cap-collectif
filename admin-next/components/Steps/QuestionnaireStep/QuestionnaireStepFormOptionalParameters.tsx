@@ -47,7 +47,14 @@ const QuestionnaireStepFormOptionalParameters: React.FC<Props> = ({ defaultLocal
                 id: 'admin.customcode',
               })}
             />
-            <FieldInput id="customCode" name="customCode" control={control} type="textarea" />
+            <FieldInput
+              id="customCode"
+              name="customCode"
+              control={control}
+              type="textarea"
+              placeholder="<style></style>"
+              resize="vertical"
+            />
           </FormControl>
         </Accordion.Panel>
       </Accordion.Item>

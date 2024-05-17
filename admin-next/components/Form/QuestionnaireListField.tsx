@@ -25,7 +25,7 @@ const getQuestionnaireList = graphql`
     $types: [QuestionnaireType]
   ) {
     viewer {
-      questionnaires(query: $term, affiliations: $affiliations, availableOnly: true, types: $types) {
+      questionnaires(query: $term, affiliations: $affiliations, availableOnly: false, types: $types) {
         edges {
           node {
             id

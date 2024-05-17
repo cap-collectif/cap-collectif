@@ -206,19 +206,22 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 <FormLabel htmlFor="metaDescription" label={intl.formatMessage({ id: 'global.meta.description' })} />
                 <FieldInput id="metaDescription" name="metaDescription" control={control} type="textarea" />
               </FormControl>
-              <FormProvider {...formMethods}>
-                <TextEditor
-                  name="customCode"
-                  label={intl.formatMessage({ id: 'admin.customcode' })}
-                  platformLanguage={defaultLocale?.code}
-                  selectedLanguage="fr"
-                  buttonLabels={{
-                    submit: isEditing
-                      ? intl.formatMessage({ id: 'global.edit' })
-                      : intl.formatMessage({ id: 'global.add' }),
-                  }}
+              <FormControl name="customCode" control={control}>
+                <FormLabel
+                  htmlFor="customCode"
+                  label={intl.formatMessage({
+                    id: 'admin.customcode',
+                  })}
                 />
-              </FormProvider>
+                <FieldInput
+                  id="customCode"
+                  name="customCode"
+                  control={control}
+                  type="textarea"
+                  placeholder="<style></style>"
+                  resize="vertical"
+                />
+              </FormControl>
             </Accordion.Panel>
           </Accordion.Item>
         </Accordion>

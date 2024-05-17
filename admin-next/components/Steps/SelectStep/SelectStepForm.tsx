@@ -533,12 +533,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
             <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
               <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
               <Accordion.Panel gap={6}>
-                <ProposalStepOptionnalAccordion
-                  step={step}
-                  defaultLocale={defaultLocale}
-                  formMethods={formMethods}
-                  isEditing={isEditing}
-                />
+                <ProposalStepOptionnalAccordion step={step} formMethods={formMethods} />
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion>

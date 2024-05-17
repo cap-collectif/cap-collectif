@@ -133,6 +133,8 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
         </Flex>
         <FormProvider {...methods}>
           <TextEditor
+            mb={0}
+            mt={6}
             name="description"
             label={intl.formatMessage({ id: 'admin.project.presentation' })}
             platformLanguage={defaultLocale?.code}

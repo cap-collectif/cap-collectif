@@ -598,9 +598,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                   <Accordion.Panel gap={6}>
                     <ProposalStepOptionnalAccordion
                       step={step}
-                      defaultLocale={defaultLocale}
                       formMethods={formMethods}
-                      isEditing={isEditing}
                       proposalFormKey={proposalFormKey}
                     />
                   </Accordion.Panel>

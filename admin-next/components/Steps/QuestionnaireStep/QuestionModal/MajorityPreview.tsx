@@ -27,9 +27,20 @@ const MajorityPreview: React.FC = () => {
         <Text fontWeight="600" mb={2} fontSize={4}>
           {title || ''}
         </Text>
-        <Flex borderRadius="normal" overflow="hidden" width="max-content">
+        <Flex borderRadius="normal" overflow="hidden" width="100%">
           {COLORS.map((majority, idx) => (
-            <Flex px={6} py={1} bg={majority.color} color="white" fontWeight="bold" key={idx}>
+            <Flex
+              py={1}
+              bg={majority.color}
+              color="white"
+              fontWeight={600}
+              key={idx}
+              fontSize={[1, 1, 2]}
+              justifyContent="center"
+              alignItems="center"
+              textAlign="center"
+              flex="1"
+            >
               {intl.formatMessage({ id: majority.label })}
             </Flex>
           ))}

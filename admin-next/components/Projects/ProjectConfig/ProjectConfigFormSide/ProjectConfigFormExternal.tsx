@@ -8,10 +8,12 @@ import useFeatureFlag from '@hooks/useFeatureFlag'
 const ProjectConfigFormExternal: React.FC = () => {
   const intl = useIntl()
   const external_project = useFeatureFlag('external_project')
+  const [isFocus, setIsFocus] = React.useState(false)
 
   const { watch, setValue, control } = useFormContext()
 
   const isExternal = watch('isExternal')
+  const externalLink = watch('externalLink')
 
   if (!external_project) return null
 
@@ -25,7 +27,7 @@ const ProjectConfigFormExternal: React.FC = () => {
       </Flex>
       {isExternal ? (
         <Flex direction="column">
-          <FormControl name="externalLink" control={control}>
+          <FormControl name="externalLink" control={control} isInvalid={isFocus ? false : !externalLink}>
             <FormLabel
               htmlFor="externalLink"
               label={intl.formatMessage({
@@ -36,6 +38,9 @@ const ProjectConfigFormExternal: React.FC = () => {
               name="externalLink"
               control={control}
               type="text"
+              autoFocus
+              onFocus={() => setIsFocus(true)}
+              onBlur={() => setIsFocus(false)}
               required={isExternal}
               placeholder="https://"
             />

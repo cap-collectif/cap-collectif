@@ -44,16 +44,6 @@ const SectionModal: FC<SectionProps> = ({ onClose, onSuccess, isSubSection }) =>
             type="text"
           />
         </FormControl>
-        <FormControl name={`temporaryQuestion.private`} control={control}>
-          <FieldInput
-            id={`temporaryQuestion.private`}
-            name={`temporaryQuestion.private`}
-            control={control}
-            type="checkbox"
-          >
-            {intl.formatMessage({ id: 'admin.checkbox.visible.from' })}
-          </FieldInput>
-        </FormControl>
       </Modal.Body>
       <Modal.Footer>
         <Button variant="secondary" variantColor="primary" variantSize="big" onClick={onClose}>
