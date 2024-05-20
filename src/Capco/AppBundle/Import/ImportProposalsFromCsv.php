@@ -163,7 +163,21 @@ class ImportProposalsFromCsv
                 $missing = $this->getMissingHeaders($rows->current()->toArray());
                 $headersJoined = implode(',', $rows->current()->toArray());
 
-                throw new \RuntimeException(\count($missing) . ' missing headers : ' . implode(', ', $missing) . "file {$this->filePath} , header expected " . implode(',', array_keys($this->headers)) . " header filled {$headersJoined} count {$countRows}");
+                $exceptionMessage = sprintf(
+                    \PHP_EOL . 'file %s ' .
+                    \PHP_EOL . '%s missing headers: %s ' .
+                    \PHP_EOL . 'Expected headers: %s ' .
+                    \PHP_EOL . 'Filled headers: %s ' .
+                    \PHP_EOL . 'Total rows: %s ',
+                    $this->filePath,
+                    \count($missing),
+                    implode(', ', $missing),
+                    implode(',', array_keys($this->headers)),
+                    $headersJoined,
+                    $countRows
+                );
+
+                throw new \RuntimeException($exceptionMessage);
             }
 
             throw new \RuntimeException(AddProposalsFromCsvMutation::BAD_DATA_MODEL);
@@ -496,7 +510,7 @@ class ImportProposalsFromCsv
                 if (!$address) {
                     $isCurrentLineFail = true;
                     $this->badData = $this->incrementBadData($this->badData, $key);
-                    $this->logger->error('bad data address in line ' . $key);
+                    $this->logger->error(sprintf('bad data address in line %s: "%s"', $key, $row['address']));
                 }
             }
         }

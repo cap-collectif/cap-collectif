@@ -47,7 +47,7 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
 
     protected function importRow(array $row): void
     {
-        $user = $this->generateUser($row[self::HEADER_USERNAME], $row[self::HEADER_EMAIL]);
+        $user = $this->generateUser(trim($row[self::HEADER_USERNAME]), $row[self::HEADER_EMAIL]);
         $user->setOpenId($row[self::HEADER_OPENID]);
         if (isset($row[self::HEADER_USER_TYPE]) && !empty($row[self::HEADER_USER_TYPE])) {
             $user->setUserType($this->userTypes[trim($row[self::HEADER_USER_TYPE])]);
