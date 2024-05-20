@@ -9,6 +9,10 @@ use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class QuestionnaireParticipantNormalizerKeysTest extends KernelTestCase
 {
     private User $user;

@@ -9,6 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Mapping\ClassMetadata;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ReplyAnonymousRepositoryTest extends KernelTestCase
 {
     private EntityManagerInterface $entityManager;

@@ -49,6 +49,26 @@ trait CommandTestTrait
         return $completedFileNames;
     }
 
+    public function updateUser(string $id): void
+    {
+        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
+        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
+        $user->setUpdatedAt(new \DateTime('2027-01-01 00:06:00'));
+        $em->persist($user);
+        $em->flush();
+    }
+
+    public function resetUserUpdatedAt(string $id): void
+    {
+        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
+
+        /** @var User $user */
+        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
+        $user->resetUpdatedAt();
+        $em->persist($user);
+        $em->flush();
+    }
+
     private function executeCommand(string $name): array
     {
         $application = new Application(self::$kernel);
@@ -120,26 +140,5 @@ trait CommandTestTrait
                 $this->assertSame($expectedOutput, $actualOutput);
             }
         }
-    }
-
-    public function updateUser(string $id): void
-    {
-        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
-        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
-        $user->setUpdatedAt(new \DateTime('2027-01-01 00:06:00'));
-        $em->persist($user);
-        $em->flush();
-    }
-
-    public function resetUserUpdatedAt(string $id): void
-    {
-        $em = self::$kernel->getContainer()->get('doctrine')->getManager();
-
-        /** @var User $user */
-        $user = $em->getRepository('CapcoUserBundle:User')->findOneBy(['id' => $id]);
-        $user->resetUpdatedAt();
-        $em->persist($user);
-        $em->flush();
-
     }
 }

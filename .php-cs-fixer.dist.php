@@ -7,7 +7,8 @@ if (!file_exists(__DIR__ . '/src')) {
 $finder = PhpCsFixer\Finder::create()
     ->in([
         'src', 
-        'spec'
+        'spec',
+        'tests',
     ])
     ->exclude('Capco/AppBundle/GraphQL/__generated__');
 

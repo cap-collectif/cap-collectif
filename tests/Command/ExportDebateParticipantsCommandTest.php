@@ -4,6 +4,10 @@ namespace Capco\Tests\Command;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class ExportDebateParticipantsCommandTest extends KernelTestCase
 {
     use CommandTestTrait;

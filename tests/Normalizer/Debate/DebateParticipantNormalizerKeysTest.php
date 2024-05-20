@@ -10,6 +10,10 @@ use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
+/**
+ * @internal
+ * @coversNothing
+ */
 class DebateParticipantNormalizerKeysTest extends KernelTestCase
 {
     private User $user;
