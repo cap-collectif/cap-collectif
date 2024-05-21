@@ -53,8 +53,6 @@ services:
         public: true
     Capco\AppBundle\PublicApi\PublicApiKeyAuthenticator:
         public: true
-    Capco\AppBundle\NewRelic\CapcoNamingStrategy:
-        public: true
     Overblog\PromiseAdapter\Adapter\WebonyxGraphQLSyncPromiseAdapter:
         arguments:
             - '@webonyx_graphql.sync_promise_adapter'

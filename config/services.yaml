@@ -79,8 +79,6 @@ parameters:
     instance_name: '%env(SYMFONY_INSTANCE_NAME)%'
     instance_auth_token: '%env(SYMFONY_INSTANCE_AUTH_TOKEN)%'
     sentry_log_level: '%env(SYMFONY_SENTRY_LOG_LEVEL)%'
-    newrelic_api_key: '%env(SYMFONY_NEWRELIC_API_KEY)%'
-    newrelic_license_key: '%env(SYMFONY_NEWRELIC_LICENSE_KEY)%'
     occitanie_username: '%env(SYMFONY_OCCITANIE_USERNAME)%'
     occitanie_password: '%env(SYMFONY_OCCITANIE_PASSWORD)%'
     occitanie_client_id: '%env(SYMFONY_OCCITANIE_CLIENT_ID)%'
@@ -168,9 +166,6 @@ parameters:
     env(SYMFONY_INSTANCE_NAME): dev
     env(SYMFONY_INSTANCE_AUTH_TOKEN): INSERT_A_REAL_SECRET
     env(SYMFONY_APP_VERSION): dev
-    # NEWRELIC, see https://tech.cap-collectif.com/docs/infrastructure/newrelic.html
-    env(SYMFONY_NEWRELIC_API_KEY): INSERT_A_REAL_SECRET
-    env(SYMFONY_NEWRELIC_LICENSE_KEY): INSERT_A_REAL_SECRET
     env(SLACK_JPEC_GHOST): null
     env(SLACK_OMAR_DJINN): null
     env(SYMFONY_PANTHER_URL): 'INSERT_A_REAL_SECRET'

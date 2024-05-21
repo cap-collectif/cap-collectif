@@ -52881,11 +52881,6 @@ parameters:
 			path: src/Capco/AppBundle/Model/VoteContribution.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\NewRelic\\\\CapcoNamingStrategy\\:\\:\\$requestParser has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/NewRelic/CapcoNamingStrategy.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$medias contains generic class Doctrine\\\\ORM\\\\PersistentCollection but does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Capco/AppBundle/Normalizer/AbstractResponseNormalizer.php

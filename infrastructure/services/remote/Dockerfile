@@ -268,16 +268,6 @@ RUN set -ex \
 
 RUN yarn global add pm2
 
-# Newrelic agent
-ENV NEWRELIC_VERSION=9.16.0.295
-ENV NEWRELIC_NAME=newrelic-php5-$NEWRELIC_VERSION-linux
-ENV NEWRELIC_AGENT_URL=https://download.newrelic.com/php_agent/archive/${NEWRELIC_VERSION}/${NEWRELIC_NAME}.tar.gz
-RUN curl -L $NEWRELIC_AGENT_URL | tar -C /tmp -zx && \
-  export NR_INSTALL_USE_CP_NOT_LN=1 && \
-  export NR_INSTALL_SILENT=1 && \
-  /tmp/$NEWRELIC_NAME/newrelic-install install && \
-  rm -rf /tmp/newrelic-php5-* /tmp/nrinstall*
-
 # RedirectionIO
 WORKDIR /usr/local/bin/
 RUN wget https://packages.redirection.io/dist/redirectionio-agent-latest_any_amd64.tar.gz
