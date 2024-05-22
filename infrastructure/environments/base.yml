@@ -29,6 +29,7 @@ services:
       SYMFONY_CAS_CERTIFICATE_DIRECTORY: '../app/cas'
     volumes:
       - /var/www/public/media
+      - /var/www/public/export
       - /var/www/var/cache
       - /var/www/var/logs
     links:
