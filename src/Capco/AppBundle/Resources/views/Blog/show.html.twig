@@ -22,7 +22,7 @@
 {% block body %}
     <section class="section--custom">
         <div class="container container--thinner">
-            <h1>{{ post.title | jolitypo() }}</h1>
+            <h1 class="h1">{{ post.title | jolitypo() }}</h1>
             {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
             {% if viewerDidAuthor %}
                 <div class="edit-proposal-news">
