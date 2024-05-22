@@ -7,8 +7,7 @@ import { graphql, createPaginationContainer } from 'react-relay'
 import type { ProjectListViewPaginated_query$data } from '~relay/ProjectListViewPaginated_query.graphql'
 import ProjectPreview from '../Preview/ProjectPreview'
 import type { State, FeatureToggles } from '~/types'
-import Grid from '~ui/Primitives/Layout/Grid'
-import AppBox from '~/components/Ui/Primitives/AppBox'
+import { Box, Grid } from '@cap-collectif/ui'
 
 type Props = {
   relay: RelayPaginationProp
@@ -42,7 +41,7 @@ export const ProjectListViewPaginated = ({ relay, query, limit, paginate, featur
             <div className="d-flex flex-wrap">{renderPreview(query)}</div>
           )}
           {paginate && relay.hasMore() && (
-            <AppBox width="100%">
+            <Box width="100%">
               <Button
                 className="see-more-projects-button ml-15"
                 disabled={loading}
@@ -59,7 +58,7 @@ export const ProjectListViewPaginated = ({ relay, query, limit, paginate, featur
               >
                 <FormattedMessage id="see-more-projects" />
               </Button>
-            </AppBox>
+            </Box>
           )}
         </div>
       )

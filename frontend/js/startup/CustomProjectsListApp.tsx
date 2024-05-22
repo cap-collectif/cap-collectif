@@ -15,7 +15,7 @@ type Props = {
 export default (props: Props) => {
   return (
     <Suspense fallback={<Loader />}>
-      <Providers>
+      <Providers designSystem>
         <CustomProjectList {...props} />
       </Providers>
     </Suspense>

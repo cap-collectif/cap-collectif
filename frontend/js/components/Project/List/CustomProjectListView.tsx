@@ -1,9 +1,9 @@
+import { Flex, Grid } from '@cap-collectif/ui'
 import * as React from 'react'
-import Grid from '~ui/Primitives/Layout/Grid'
 import ProjectPreview from '~/components/Project/Preview/ProjectPreview'
 import type { FeatureToggles } from '~/types'
 import type { ProjectPreview_project$ref } from '~relay/ProjectPreview_project.graphql'
-import Flex from '~ui/Primitives/Layout/Flex'
+
 type Props = {
   readonly homePageProjectsSectionConfiguration:
     | {
