@@ -5,7 +5,6 @@ namespace Capco\AppBundle\Fetcher;
 use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 use Capco\AppBundle\Helper\OrangeSmsProvider;
 use Capco\AppBundle\Helper\TwilioSmsProvider;
-use Exception;
 
 class SmsProviderFetcher
 {
@@ -25,20 +24,14 @@ class SmsProviderFetcher
         $this->smsProvider = $smsProvider;
     }
 
-    /**
-     * @throws Exception
-     */
     public function fetch(): SmsProviderInterface
     {
         switch ($this->smsProvider) {
-            case self::PROVIDER_TWILIO:
-                return $this->twilioSmsProvider;
-
             case self::PROVIDER_ORANGE:
                 return $this->orangeSmsProvider;
 
             default:
-                throw new Exception('No valid SMS provider set.');
+                return $this->twilioSmsProvider;
         }
     }
 }

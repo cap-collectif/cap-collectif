@@ -63,6 +63,8 @@ parameters:
     twilio_default_subaccount_token: '%env(SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_TOKEN)%'
     twilio_default_subaccount_sid: '%env(SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_SID)%'
     twilio_default_verify_service_id: '%env(SYMFONY_TWILIO_DEFAULT_VERIFY_SERVICE_ID)%'
+    orange_client_id: '%env(SYMFONY_ORANGE_API_CLIENT_ID)%'
+    orange_client_secret: '%env(SYMFONY_ORANGE_API_CLIENT_SECRET)%'
     default_super_admin_password: '%env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD)%'
     default_facebook_client_id: '%env(SYMFONY_DEFAULT_FACEBOOK_CLIENT_ID)%'
     default_facebook_secret: '%env(SYMFONY_DEFAULT_FACEBOOK_SECRET)%'
@@ -203,6 +205,7 @@ parameters:
     env(SYMFONY_SENDINBLUE_NL_LIST_ID): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_GOOGLE_MAP_SERVER_KEY): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_SMS_PROVIDER): twilio
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead

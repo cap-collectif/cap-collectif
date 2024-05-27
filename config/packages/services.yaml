@@ -476,3 +476,7 @@ services:
             $smsProvider: '%sms_provider%'
             $twilioSmsProvider: '@Capco\AppBundle\Helper\TwilioSmsProvider'
             $orangeSmsProvider: '@Capco\AppBundle\Helper\OrangeSmsProvider'
+
+    Capco\AppBundle\Helper\OrangeSmsProvider:
+        arguments:
+            $redis: '@snc_redis.default'

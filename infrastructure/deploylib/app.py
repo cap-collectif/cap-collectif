@@ -37,6 +37,8 @@ SYMFONY_TWILIO_TOKEN=INSERT_A_REAL_SECRET
 SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_TOKEN=INSERT_A_REAL_SECRET
 SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_SID=INSERT_A_REAL_SECRET
 SYMFONY_TWILIO_DEFAULT_VERIFY_SERVICE_ID=INSERT_A_REAL_SECRET
+SYMFONY_ORANGE_API_CLIENT_ID=INSERT_A_REAL_SECRET
+SYMFONY_ORANGE_API_CLIENT_SECRET=INSERT_A_REAL_SECRET
 
 # If you want to enable emails, set the variables:
 SYMFONY_DISABLE_MAIL_DELIVERY=false
@@ -117,9 +119,11 @@ def start_consumers():
     command('if pgrep supervisord; then pkill supervisord; sleep 3; fi', 'application', Config.www_app, 'root')
     command('supervisord --configuration=/etc/supervisord/supervisord.conf', 'application', Config.www_app, 'root')
 
+
 def stop_consumers():
     "Stop consumers"
     command('if pgrep supervisord; then pkill supervisord; sleep 3; fi', 'application', Config.www_app, 'root')
+
 
 def ssh(user='capco'):
     "Ssh into application container"

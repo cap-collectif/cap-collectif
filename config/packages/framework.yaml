@@ -49,4 +49,4 @@ framework:
     profiler:
         only_exceptions: false
     http_client:
-        scoped_clients:
+        scoped_clients: ~

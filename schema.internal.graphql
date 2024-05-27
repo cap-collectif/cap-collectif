@@ -16172,6 +16172,24 @@ enum SendSmsPhoneValidationCodeErrorCode {
   """The user has already confirmed his phone number"""
   PHONE_ALREADY_CONFIRMED
 
+  """The user is unauthorized"""
+  UNAUTHORIZED
+
+  """The rate limit for requests has been exceeded"""
+  RATE_LIMIT_EXCEEDED
+
+  """A server error occurred while processing the request"""
+  SERVER_ERROR
+
+  """An unknown error occurred"""
+  UNKNOWN_ERROR
+
+  """The requested resource was not found"""
+  NOT_FOUND
+
+  """The provided code is not valid"""
+  NOT_VALID_CODE
+
   """An error occured while calling twilio api"""
   TWILIO_API_ERROR
 }

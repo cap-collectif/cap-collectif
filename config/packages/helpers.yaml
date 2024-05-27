@@ -16,5 +16,10 @@ services:
             $twilioSid: '%twilio_sid%'
             $twilioToken: '%twilio_token%'
 
+    Capco\AppBundle\Helper\OrangeClient:
+        arguments:
+            $clientId: '%orange_client_id%'
+            $clientSecret: '%orange_client_secret%'
+
     Capco\AppBundle\Helper\TwilioSmsProvider:
         arguments: ['@Capco\AppBundle\Helper\TwilioClient']
