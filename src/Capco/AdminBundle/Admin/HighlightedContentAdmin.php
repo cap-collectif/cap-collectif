@@ -65,6 +65,11 @@ class HighlightedContentAdmin extends AbstractAdmin
     {
         $subject = $this->getSubject();
 
+        $filters = $this->getModelManager()->getEntityManager(Event::class)->getFilters();
+        if (!$filters->isEnabled('softdeleted')) {
+            $filters->enable('softdeleted');
+        }
+
         $form->add('position', null, [
             'label' => 'global.position',
         ]);
