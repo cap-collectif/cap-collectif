@@ -8,6 +8,7 @@
 3. [CS-FIXER](#csfixer)
 4. [Créer le FileWatcher sous PhpStorm](#filewatcher)
 5. [Config VisualStudio](https://blog.theodo.com/2019/07/vscode-php-development/)
+6. [Correction des failles des dépendances](#yarn-audit-fix)
 
 <div id="standard">1 Standard de code</div>
 ---
@@ -58,3 +59,10 @@ En argument j'ai mis le chemin du fichier de config en absolut
 
 Il est possible de faire la même chose avec [prettier](https://medium.com/@dyanagi/format-with-prettier-on-save-in-intellij-based-ides-webstorm-451e0c69bab1)
 
+<div id="yarn-audit-fix">Appliquer les patches de mise à jour des dépendances</div>
+---
+A ce jour, yarn ne dispose pas de l'équivalent de `npm audit fix`.
+
+Le paquet [yarn-audit-fix](https://www.npmjs.com/package/yarn-audit-fix) a été ajouté pour répondre à ce besoin.
+
+Lancez la commande `yarn audit` afin d'identifier les dépendances présentant des failles, puis lancez la commande `yarn yarn-audit-fix` pour faire les mises à jour nécessaires.
