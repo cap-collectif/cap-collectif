@@ -31,7 +31,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
         >
           <ProposalPagestyle__CategoryCircledIcon
             paddingLeft={6}
-            paddingTop={0}
+            paddingTop={4}
             size={24}
           >
             <Icon
@@ -52,7 +52,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
       >
         <ProposalPagestyle__CategoryCircledIcon
           paddingLeft={5}
-          paddingTop={0}
+          paddingTop={5}
           size={24}
         >
           <Icon
@@ -118,7 +118,7 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
         >
           <ProposalPagestyle__CategoryCircledIcon
             paddingLeft={6}
-            paddingTop={0}
+            paddingTop={4}
             size={24}
           >
             <Icon

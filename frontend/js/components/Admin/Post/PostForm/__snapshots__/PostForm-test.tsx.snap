@@ -316,7 +316,7 @@ exports[`<PostForm/> should render correctly 1`] = `
           </p>
         </label>
         <div
-          className="sc-dEVMhd joditEditor"
+          className="sc-dEVMhd JoditEditor___StyledAppBox-cmTTyW kcEUxT joditEditor"
           id="FR_FR-body"
         >
           <div

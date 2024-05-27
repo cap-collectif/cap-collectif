@@ -70,6 +70,7 @@ export class BodyText extends React.Component<Props, State> {
       maxHeight: expanded ? `none` : `${LINE_HEIGHT * maxLines}px`,
       overflow: expanded ? 'visible' : 'hidden',
       visibility: hideText ? 'hidden' : 'visible',
+      padding: '0 5px',
     }
     return (
       <div className="step__intro">

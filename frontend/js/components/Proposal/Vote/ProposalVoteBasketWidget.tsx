@@ -63,7 +63,7 @@ export const NavBar = styled(Navbar)<{
 }>`
   border-color: ${({ borderColor }) => borderColor};
   top: ${({ newNavbar }) => (newNavbar ? '0px' : '50px')};
-  z-index: 1041;
+  z-index: 1029;
   text-transform: capitalize;
   max-height: 500px;
   transition: max-height 0.25s ease-in;

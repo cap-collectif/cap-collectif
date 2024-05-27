@@ -155,7 +155,11 @@ const Jodit = ({
   )
   return useMemo(
     () => (
-      <AppBox id={id} className="joditEditor">
+      <AppBox
+        id={id}
+        className="joditEditor"
+        css={{ '.jodit-wysiwyg,span.jodit-placeholder': { padding: '20px !important' } }}
+      >
         <JoditEditor
           ref={editor}
           value={value}

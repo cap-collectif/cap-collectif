@@ -16,6 +16,7 @@ exports[`<BodyText /> should render a step intro div and a FormattedHTMLMessage 
         Object {
           "maxHeight": "none",
           "overflow": "visible",
+          "padding": "0 5px",
           "visibility": "visible",
         }
       }

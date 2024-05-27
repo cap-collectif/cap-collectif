@@ -36,7 +36,7 @@ export const CategoryCircledIcon = styled.div<{
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.175);
   border-radius: 18px;
   padding-left: ${({ paddingLeft }) => (paddingLeft || paddingLeft === 0 ? `${paddingLeft}px` : '8px')};
-  padding-top: ${({ paddingTop }) => (paddingTop || paddingTop === 0 ? `${paddingTop}px` : '5px')};
+  padding-top: ${({ paddingTop }) => (paddingTop || paddingTop === 0 ? `${paddingTop}px` : '7px')};
 `
 export const CategoryTitle = styled.div.attrs({
   className: 'CategoryTitle',

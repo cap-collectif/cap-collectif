@@ -47,7 +47,7 @@ export const MetadataRow = ({
   ready,
   color,
   categorySize = 24,
-  categoryPaddingTop = 0,
+  categoryPaddingTop = 7,
   categoryPaddingLeft = 7,
   children,
 }: {

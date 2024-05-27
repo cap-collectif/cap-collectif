@@ -21,7 +21,7 @@ export const ProposalPageDiscussions = ({ proposal }: Props) => {
     <Card>
       <CategoryContainer>
         <CategoryTitle>
-          <CategoryCircledIcon paddingLeft={9} paddingTop={6}>
+          <CategoryCircledIcon paddingLeft={9} paddingTop={8}>
             <Icon name={ICON_NAME.conversation} size={20} color={colors.secondaryGray} />
           </CategoryCircledIcon>
           <h3>

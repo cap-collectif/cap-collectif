@@ -119,7 +119,7 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
             }
           >
             <div className="vote-counter">
-              <CategoryCircledIcon size={24} paddingTop={0} paddingLeft={6}>
+              <CategoryCircledIcon size={24} paddingTop={4} paddingLeft={6}>
                 <Icon name={ICON_NAME.like} size={14} color={colors.secondaryGray} />
               </CategoryCircledIcon>
               <Box ml="3">
@@ -169,7 +169,7 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
                   }
                 >
                   <div className="vote-counter">
-                    <CategoryCircledIcon size={24} paddingTop={0} paddingLeft={5}>
+                    <CategoryCircledIcon size={24} paddingTop={5} paddingLeft={5}>
                       <Icon name={ICON_NAME.trophy} size={14} color={colors.secondaryGray} />
                     </CategoryCircledIcon>
                     <Box ml="3">
@@ -186,7 +186,7 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
                 </Tooltip>
               ) : (
                 <div className="vote-counter">
-                  <CategoryCircledIcon size={24} paddingTop={0} paddingLeft={5}>
+                  <CategoryCircledIcon size={24} paddingTop={5} paddingLeft={5}>
                     <Icon name={ICON_NAME.trophy} size={14} color={colors.secondaryGray} />
                   </CategoryCircledIcon>
                   <Box ml="3">

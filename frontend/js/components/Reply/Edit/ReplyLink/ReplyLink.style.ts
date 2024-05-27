@@ -24,7 +24,7 @@ const ReplyLinkContainer = styled.div.attrs({
     line-height: 15px;
     border-radius: 15px;
     border: none;
-    padding: 0;
+    padding: 7px;
 
     svg,
     path {
