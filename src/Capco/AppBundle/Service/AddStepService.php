@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Service;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Event\StepSavedEvent;
 use Capco\AppBundle\Factory\StepFactory;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Security\ProjectVoter;
@@ -12,6 +13,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddStepService
@@ -20,17 +22,20 @@ class AddStepService
     private EntityManagerInterface $em;
     private AuthorizationCheckerInterface $authorizationChecker;
     private StepFactory $stepFactory;
+    private EventDispatcherInterface $dispatcher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
-        StepFactory $stepFactory
+        StepFactory $stepFactory,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
         $this->stepFactory = $stepFactory;
+        $this->dispatcher = $dispatcher;
     }
 
     public function addStep(Argument $input, User $viewer, string $stepType): array
@@ -44,6 +49,9 @@ class AddStepService
         $projectAbstractStep = (new ProjectAbstractStep())->setProject($project)->setStep($step)->setPosition($stepsCount + 1);
         $project->addStep($projectAbstractStep);
         $step->setProjectAbstractStep($projectAbstractStep);
+        $step->setTitle('');
+
+        $this->dispatcher->dispatch(new StepSavedEvent($step));
 
         $this->em->persist($step);
         $this->em->persist($projectAbstractStep);

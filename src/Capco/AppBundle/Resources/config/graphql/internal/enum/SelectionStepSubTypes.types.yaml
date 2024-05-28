@@ -1,0 +1,15 @@
+SelectionStepSubTypes:
+    type: enum
+    config:
+        name: SelectionStepSubTypes
+        description: 'Available sub types for selection step.'
+        values:
+            VOTE:
+                value: !php/const Capco\AppBundle\Enum\SelectionStepSubTypes::VOTE
+                description: 'The step is a vote step.'
+            ANALYSIS:
+                value: !php/const Capco\AppBundle\Enum\SelectionStepSubTypes::ANALYSIS
+                description: 'The step is an analysis step.'
+            RESULT:
+                value: !php/const Capco\AppBundle\Enum\SelectionStepSubTypes::RESULT
+                description: 'The step is a result step.'

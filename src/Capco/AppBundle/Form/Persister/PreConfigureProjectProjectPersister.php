@@ -66,7 +66,7 @@ class PreConfigureProjectProjectPersister
         foreach ($steps as &$step) {
             if (($step['defaultStatus'] ?? null) !== null) {
                 $stepsWithDefaultStatus[] = [
-                    'stepTitle' => $step['title'],
+                    'stepLabel' => $step['label'],
                     'defaultStatus' => $step['defaultStatus'],
                 ];
                 $step['defaultStatus'] = null;
@@ -86,7 +86,7 @@ class PreConfigureProjectProjectPersister
         foreach ($steps as &$step) {
             if (($step['proposalForm'] ?? null) !== null) {
                 $stepsWithProposalForm[] = [
-                    'stepTitle' => $step['title'],
+                    'stepLabel' => $step['label'],
                     'proposalFormTitle' => $step['proposalForm'],
                 ];
                 $step['proposalForm'] = null;
@@ -103,9 +103,9 @@ class PreConfigureProjectProjectPersister
         }
 
         foreach ($stepsWithDefaultStatus as $stepWithDefaultStatus) {
-            $stepTitle = $stepWithDefaultStatus['stepTitle'];
+            $stepLabel = $stepWithDefaultStatus['stepLabel'];
             $statusTitle = $stepWithDefaultStatus['defaultStatus'];
-            $step = $this->abstractStepRepository->findOneByProjectAndStepTitle($project, $stepTitle);
+            $step = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $stepLabel);
             $defaultStatus = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $step, [$statusTitle]);
             if ($defaultStatus) {
                 $step->setDefaultStatus($defaultStatus[0]);
@@ -122,9 +122,9 @@ class PreConfigureProjectProjectPersister
         }
 
         foreach ($stepsWithProposalForm as $stepWithProposalForm) {
-            $stepTitle = $stepWithProposalForm['stepTitle'];
+            $stepLabel = $stepWithProposalForm['stepLabel'];
             $proposalFormTitle = $stepWithProposalForm['proposalFormTitle'];
-            $step = $this->abstractStepRepository->findOneByProjectAndStepTitle($project, $stepTitle);
+            $step = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $stepLabel);
             $proposalFormId = $proposalFormMap[$proposalFormTitle];
             $proposalForm = $this->proposalFormRepository->find($proposalFormId);
             $step->setProposalForm($proposalForm);
@@ -143,7 +143,7 @@ class PreConfigureProjectProjectPersister
         foreach ($steps as &$step) {
             if (($step['questionnaire'] ?? null) !== null) {
                 $stepsWithQuestionnaire[] = [
-                    'stepTitle' => $step['title'],
+                    'stepLabel' => $step['label'],
                     'questionnaireTitle' => $step['questionnaire'],
                 ];
                 $step['questionnaire'] = null;
@@ -160,9 +160,9 @@ class PreConfigureProjectProjectPersister
         }
 
         foreach ($stepsWithQuestionnaire as $stepWithQuestionnaire) {
-            $stepTitle = $stepWithQuestionnaire['stepTitle'];
+            $stepLabel = $stepWithQuestionnaire['stepLabel'];
             $questionnaireTitle = $stepWithQuestionnaire['questionnaireTitle'];
-            $step = $this->abstractStepRepository->findOneByProjectAndStepTitle($project, $stepTitle);
+            $step = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $stepLabel);
             $questionnaireId = $questionnaireTitleToIdMap[$questionnaireTitle];
             $questionnaire = $this->questionnaireRepository->find($questionnaireId);
             $step->setQuestionnaire($questionnaire);

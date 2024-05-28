@@ -27,6 +27,7 @@ import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { onBack } from '@components/Steps/utils'
 import { useDebateStep } from './DebateStepContext'
+import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 
 type Props = {
@@ -37,7 +38,6 @@ type Props = {
 type Article = { id: string; url: string }
 
 type StepTypeDurationTypeUnion = 'CUSTOM' | 'TIMELESS'
-type EnabledUnion = 'PUBLISHED' | 'DRAFT'
 type ParticipationTypeUnion = 'WITH_ACCOUNT' | 'WITHOUT_ACCOUNT'
 
 type FormValues = {
@@ -114,11 +114,6 @@ export const StepDurationTypeEnum: Record<StepTypeDurationTypeUnion, StepTypeDur
   TIMELESS: 'TIMELESS',
 } as const
 
-export const EnabledEnum: Record<EnabledUnion, EnabledUnion> = {
-  PUBLISHED: 'PUBLISHED',
-  DRAFT: 'DRAFT',
-} as const
-
 const ParticipationTypeEnum: Record<ParticipationTypeUnion, ParticipationTypeUnion> = {
   WITH_ACCOUNT: 'WITH_ACCOUNT',
   WITHOUT_ACCOUNT: 'WITHOUT_ACCOUNT',
@@ -145,6 +140,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const { operationType, setOperationType } = useDebateStep()
   const isEditing = operationType === 'EDIT'
 
+  const createStepLink = `/admin-next/project/${project?.id}/create-step`
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -153,7 +149,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
-        href: `/admin-next/project/${project?.id}/create-step`,
+        href: createStepLink,
       },
       {
         title: intl.formatMessage({ id: 'debate-step' }),
@@ -232,11 +228,14 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
     try {
       await UpdateDebateStepMutation.commit({ input })
-      setOperationType('EDIT')
       toast({
         variant: 'success',
         content: intl.formatMessage({ id: 'global.saved' }),
       })
+      if (!isEditing) {
+        return (window.location.href = `/admin-next/project/${project?.id}`)
+      }
+      setOperationType('EDIT')
     } catch (error) {
       return mutationErrorToast(intl)
     }
@@ -252,215 +251,198 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       <Text fontWeight={600} color="blue.800" fontSize={4}>
         {intl.formatMessage({ id: 'customize-your-debate-step' })}
       </Text>
-      <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
-        <FormControl
-          name="label"
-          control={control}
-          isRequired
-          mb={6}
-          onFocus={() => {
-            setHelpMessage('step.create.label.helpText')
-          }}
-          onBlur={() => {
-            setHelpMessage(null)
-          }}
-        >
-          <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-          <FieldInput
-            id="label"
+      <FormProvider {...formMethods}>
+        <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
+          <FormControl
             name="label"
             control={control}
-            type="text"
-            placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-          />
-        </FormControl>
-        <FormControl name="title" control={control} isRequired mb={6}>
-          <FormLabel htmlFor="title" label={intl.formatMessage({ id: 'debate.question' })} />
-          <FieldInput
-            id="title"
-            name="title"
-            control={control}
-            type="text"
-            placeholder={intl.formatMessage({ id: 'placeholderText.debat.questionLabel' })}
-          />
-        </FormControl>
+            isRequired
+            mb={6}
+            onFocus={() => {
+              setHelpMessage('step.create.label.helpText')
+            }}
+            onBlur={() => {
+              setHelpMessage(null)
+            }}
+          >
+            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+            <FieldInput
+              id="label"
+              name="label"
+              control={control}
+              type="text"
+              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+            />
+          </FormControl>
+          <FormControl name="title" control={control} isRequired mb={6}>
+            <FormLabel htmlFor="title" label={intl.formatMessage({ id: 'debate.question' })} />
+            <FieldInput
+              id="title"
+              name="title"
+              control={control}
+              type="text"
+              placeholder={intl.formatMessage({ id: 'placeholderText.debat.questionLabel' })}
+            />
+          </FormControl>
 
-        <Tabs
-          mb={6}
-          selectedId={debateType}
-          onChange={selectedDebateType => {
-            if (selectedDebateType !== debateType) {
-              setValue('debateType', selectedDebateType as DebateType)
-            }
-          }}
-        >
-          <Tabs.ButtonList ariaLabel="debateType">
-            <Tabs.Button id={DebateTypeEnum.WYSIWYG}>{intl.formatMessage({ id: 'simple-debate' })}</Tabs.Button>
-            <Tabs.Button id={DebateTypeEnum.FACE_TO_FACE}>
-              {intl.formatMessage({ id: 'debate-with-face-to-face' })}
-            </Tabs.Button>
-          </Tabs.ButtonList>
-          <Tabs.PanelList>
-            <Tabs.Panel>
-              <FormProvider {...formMethods}>
-                <TextEditor
-                  name="debateContent"
-                  label={intl.formatMessage({ id: 'debate-presentation' })}
-                  platformLanguage={defaultLocale}
-                  selectedLanguage={defaultLocale}
-                  buttonLabels={{
-                    submit: isEditing
-                      ? intl.formatMessage({ id: 'global.edit' })
-                      : intl.formatMessage({ id: 'global.add' }),
-                  }}
-                />
-              </FormProvider>
-            </Tabs.Panel>
-            <Tabs.Panel>
-              {debate && <FaceToFace debate={debate} />}
-              <Box mt={6} fontWeight={600}>
-                <Text mb={4}>{intl.formatMessage({ id: 'related.articles' })}</Text>
-                {articles.map((article, index) => {
-                  return (
-                    <Box key={article.id} mb={4}>
-                      <FormLabel
-                        fontWeight={400}
-                        htmlFor={`articles.${index}.url`}
-                        label={intl.formatMessage({ id: 'article-link' })}
-                      />
-                      <Input type="text" {...register(`articles.${index}.url`)} />
-                    </Box>
-                  )
-                })}
-                <Button
-                  variant="tertiary"
-                  leftIcon={CapUIIcon.Add}
-                  onClick={() => {
-                    append({
-                      id: '',
-                      url: '',
-                    })
-                  }}
-                >
-                  {intl.formatMessage({ id: 'add.article' })}
-                </Button>
-              </Box>
-            </Tabs.Panel>
-          </Tabs.PanelList>
-        </Tabs>
-
-        <FormProvider {...formMethods}>
+          <Tabs
+            mb={6}
+            selectedId={debateType}
+            onChange={selectedDebateType => {
+              if (selectedDebateType !== debateType) {
+                setValue('debateType', selectedDebateType as DebateType)
+              }
+            }}
+          >
+            <Tabs.ButtonList ariaLabel="debateType">
+              <Tabs.Button id={DebateTypeEnum.WYSIWYG}>{intl.formatMessage({ id: 'simple-debate' })}</Tabs.Button>
+              <Tabs.Button id={DebateTypeEnum.FACE_TO_FACE}>
+                {intl.formatMessage({ id: 'debate-with-face-to-face' })}
+              </Tabs.Button>
+            </Tabs.ButtonList>
+            <Tabs.PanelList>
+              <Tabs.Panel>
+                <FormProvider {...formMethods}>
+                  <TextEditor
+                    name="debateContent"
+                    label={intl.formatMessage({ id: 'debate-presentation' })}
+                    platformLanguage={defaultLocale}
+                    selectedLanguage={defaultLocale}
+                    buttonLabels={{
+                      submit: isEditing
+                        ? intl.formatMessage({ id: 'global.edit' })
+                        : intl.formatMessage({ id: 'global.add' }),
+                    }}
+                  />
+                </FormProvider>
+              </Tabs.Panel>
+              <Tabs.Panel>
+                {debate && <FaceToFace debate={debate} />}
+                <Box mt={6} fontWeight={600}>
+                  <Text fontSize={2} mb={2}>
+                    {intl.formatMessage({ id: 'related.articles' })}
+                  </Text>
+                  {articles.map((article, index) => {
+                    return (
+                      <Box key={article.id} mb={4}>
+                        <FormLabel
+                          fontWeight={400}
+                          htmlFor={`articles.${index}.url`}
+                          label={intl.formatMessage({ id: 'article-link' })}
+                        />
+                        <Input type="text" {...register(`articles.${index}.url`)} />
+                      </Box>
+                    )
+                  })}
+                  <Button
+                    variant="tertiary"
+                    leftIcon={CapUIIcon.Add}
+                    onClick={() => {
+                      append({
+                        id: '',
+                        url: '',
+                      })
+                    }}
+                  >
+                    {intl.formatMessage({ id: 'add.article' })}
+                  </Button>
+                </Box>
+              </Tabs.Panel>
+            </Tabs.PanelList>
+          </Tabs>
           <StepDurationInput />
-        </FormProvider>
-
-        <Box>
-          <Accordion color={CapUIAccordionColor.Transparent}>
-            <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
-              <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
-              <Accordion.Panel>
-                <Tabs
-                  selectedId={participationType}
-                  onChange={selectedParticipationType => {
-                    if (selectedParticipationType !== participationType) {
-                      const value = selectedParticipationType === 'WITHOUT_ACCOUNT'
-                      setValue('isAnonymousParticipationAllowed', value)
-                    }
-                  }}
-                >
-                  <Tabs.ButtonList ariaLabel={intl.formatMessage({ id: 'required-infos-to-participate' })}>
-                    <Tabs.Button id={ParticipationTypeEnum.WITH_ACCOUNT} labelSx={{ borderRadius: '0px' }}>
-                      {intl.formatMessage({ id: 'with-account' })}
-                    </Tabs.Button>
-                    <Tabs.Button id={ParticipationTypeEnum.WITHOUT_ACCOUNT}>
-                      {intl.formatMessage({ id: 'without-account' })}
-                    </Tabs.Button>
-                  </Tabs.ButtonList>
-                  <Tabs.PanelList>
-                    <Tabs.Panel bg="white"></Tabs.Panel>
-                    <Tabs.Panel>
-                      <Flex bg="white" p={4} justifyContent="space-between">
-                        <Text fontWeight={600}>{intl.formatMessage({ id: 'filling-argument-with-email' })}</Text>
-                        <Switch id="filling-argument-with-email" checked disabled />
-                      </Flex>
-                    </Tabs.Panel>
-                  </Tabs.PanelList>
-                </Tabs>
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
-          {isEditing && debate && (
+          <Box>
             <Accordion color={CapUIAccordionColor.Transparent}>
-              <Accordion.Item id={intl.formatMessage({ id: 'integration-parameter' })}>
-                <Accordion.Button>{intl.formatMessage({ id: 'integration-parameter' })}</Accordion.Button>
+              <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
+                <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
                 <Accordion.Panel>
-                  <DebateWidgetIntegrationForm debate={debate} />
+                  <Tabs
+                    selectedId={participationType}
+                    onChange={selectedParticipationType => {
+                      if (selectedParticipationType !== participationType) {
+                        const value = selectedParticipationType === 'WITHOUT_ACCOUNT'
+                        setValue('isAnonymousParticipationAllowed', value)
+                      }
+                    }}
+                  >
+                    <Tabs.ButtonList ariaLabel={intl.formatMessage({ id: 'required-infos-to-participate' })}>
+                      <Tabs.Button id={ParticipationTypeEnum.WITH_ACCOUNT} labelSx={{ borderRadius: '0px' }}>
+                        {intl.formatMessage({ id: 'with-account' })}
+                      </Tabs.Button>
+                      <Tabs.Button id={ParticipationTypeEnum.WITHOUT_ACCOUNT}>
+                        {intl.formatMessage({ id: 'without-account' })}
+                      </Tabs.Button>
+                    </Tabs.ButtonList>
+                    <Tabs.PanelList>
+                      <Tabs.Panel bg="white"></Tabs.Panel>
+                      <Tabs.Panel>
+                        <Flex bg="white" p={4} justifyContent="space-between">
+                          <Text fontWeight={600}>{intl.formatMessage({ id: 'filling-argument-with-email' })}</Text>
+                          <Switch id="filling-argument-with-email" checked disabled />
+                        </Flex>
+                      </Tabs.Panel>
+                    </Tabs.PanelList>
+                  </Tabs>
                 </Accordion.Panel>
               </Accordion.Item>
             </Accordion>
-          )}
-          <Accordion color={CapUIAccordionColor.Transparent}>
-            <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
-              <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
-              <Accordion.Panel>
-                <FormControl name="metaDescription" control={control}>
-                  <FormLabel htmlFor="metaDescription" label={intl.formatMessage({ id: 'global.meta.description' })} />
-                  <FieldInput id="metaDescription" name="metaDescription" control={control} type="textarea" />
-                </FormControl>
-                <FormControl name="customCode" control={control}>
-                  <FormLabel
-                    htmlFor="customCode"
-                    label={intl.formatMessage({
-                      id: 'admin.customcode',
-                    })}
-                  />
-                  <FieldInput
-                    id="customCode"
-                    name="customCode"
-                    control={control}
-                    type="textarea"
-                    placeholder="<style></style>"
-                    resize="vertical"
-                  />
-                </FormControl>
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
+            {isEditing && debate && (
+              <Accordion color={CapUIAccordionColor.Transparent}>
+                <Accordion.Item id={intl.formatMessage({ id: 'integration-parameter' })}>
+                  <Accordion.Button>{intl.formatMessage({ id: 'integration-parameter' })}</Accordion.Button>
+                  <Accordion.Panel>
+                    <DebateWidgetIntegrationForm debate={debate} />
+                  </Accordion.Panel>
+                </Accordion.Item>
+              </Accordion>
+            )}
+            <Accordion color={CapUIAccordionColor.Transparent}>
+              <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
+                <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
+                <Accordion.Panel>
+                  <FormControl name="metaDescription" control={control}>
+                    <FormLabel
+                      htmlFor="metaDescription"
+                      label={intl.formatMessage({ id: 'global.meta.description' })}
+                    />
+                    <FieldInput id="metaDescription" name="metaDescription" control={control} type="textarea" />
+                  </FormControl>
+                  <FormControl name="customCode" control={control}>
+                    <FormLabel
+                      htmlFor="customCode"
+                      label={intl.formatMessage({
+                        id: 'admin.customcode',
+                      })}
+                    />
+                    <FieldInput
+                      id="customCode"
+                      name="customCode"
+                      control={control}
+                      type="textarea"
+                      placeholder="<style></style>"
+                      resize="vertical"
+                    />
+                  </FormControl>
+                </Accordion.Panel>
+              </Accordion.Item>
+            </Accordion>
+          </Box>
+          <PublicationInput fieldName="isEnabled" />
+          <Flex mt={6}>
+            <Button variantSize="big" variant="primary" type="submit" mr={4} isLoading={isSubmitting}>
+              {isEditing ? intl.formatMessage({ id: 'global.save' }) : intl.formatMessage({ id: 'add-the-step' })}
+            </Button>
+            <Button
+              variantSize="big"
+              variant="secondary"
+              disabled={isSubmitting}
+              onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
+            >
+              {intl.formatMessage({ id: 'global.back' })}
+            </Button>
+          </Flex>
         </Box>
-        <FormControl name="isEnabled" control={control} my={6}>
-          <FormLabel htmlFor="isEnabled" label={intl.formatMessage({ id: 'admin.fields.project.published_at' })} />
-          <FieldInput
-            id="isEnabled"
-            name="isEnabled"
-            control={control}
-            type="radio"
-            choices={[
-              {
-                id: EnabledEnum.PUBLISHED,
-                label: intl.formatMessage({ id: 'global.published' }),
-                useIdAsValue: true,
-              },
-              {
-                id: EnabledEnum.DRAFT,
-                label: intl.formatMessage({ id: 'global-draft' }),
-                useIdAsValue: true,
-              },
-            ]}
-          />
-        </FormControl>
-        <Flex mt={6}>
-          <Button variantSize="big" variant="primary" type="submit" mr={4} isLoading={isSubmitting}>
-            {isEditing ? intl.formatMessage({ id: 'global.save' }) : intl.formatMessage({ id: 'add-the-step' })}
-          </Button>
-          <Button
-            variantSize="big"
-            variant="secondary"
-            disabled={isSubmitting}
-            onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
-          >
-            {intl.formatMessage({ id: 'global.back' })}
-          </Button>
-        </Flex>
-      </Box>
+      </FormProvider>
     </Box>
   )
 }

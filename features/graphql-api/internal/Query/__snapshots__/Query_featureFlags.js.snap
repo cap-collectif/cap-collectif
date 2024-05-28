@@ -315,6 +315,10 @@ Object {
       "enabled": false,
       "type": "new_navbar",
     },
+    Object {
+      "enabled": false,
+      "type": "multi_consultations",
+    },
   ],
 }
 `;

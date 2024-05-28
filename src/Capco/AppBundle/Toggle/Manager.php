@@ -90,6 +90,7 @@ class Manager
     public const online_help = 'online_help';
     public const full_proposal_card = 'full_proposal_card';
     public const new_navbar = 'new_navbar';
+    public const multi_consultations = 'multi_consultations';
 
     public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -123,6 +124,7 @@ class Manager
         self::online_help,
         self::full_proposal_card,
         self::new_navbar,
+        self::multi_consultations,
     ];
 
     public static $toggles = [
@@ -204,6 +206,7 @@ class Manager
         self::online_help,
         self::full_proposal_card,
         self::new_navbar,
+        self::multi_consultations,
     ];
 
     protected ToggleManager $toggleManager;

@@ -2,9 +2,10 @@ import { QuestionnaireStepFormQuery$data, QuestionTypeValue } from '@relay/Quest
 import { QuestionInput, QuestionnaireAbstractQuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
 import uuid, { isUuidOrTmp } from '@utils/uuid'
 import { FormValues } from './QuestionnaireStepForm'
-import { StepDurationTypeEnum, EnabledEnum } from '../DebateStep/DebateStepForm'
+import { StepDurationTypeEnum } from '../DebateStep/DebateStepForm'
 import { IntlShape } from 'react-intl'
 import { getDefaultRequirements } from '../../Requirements/Requirements'
+import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 
 export const questionTypeToLabel = (type: QuestionTypeValue) => {
   switch (type) {

@@ -47,10 +47,10 @@ const CheckBoxRequirementItem: React.FC<Props> = ({ id, index, remove }) => {
             <ButtonQuickAction
               onClick={() => setIsEditing(true)}
               icon={CapUIIcon.Pencil}
-              label="edit"
+              label={intl.formatMessage({ id: 'global.edit' })}
               variantColor="blue"
             />
-            <ButtonQuickAction onClick={() => remove(index)} icon={CapUIIcon.Trash} label="delete" variantColor="red" />
+            <ButtonQuickAction onClick={() => remove(index)} icon={CapUIIcon.Trash} label={intl.formatMessage({ id: 'global.delete' })} variantColor="red" />
           </ButtonGroup>
         </>
       )}

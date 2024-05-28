@@ -13,7 +13,7 @@ ProjectStepInput:
             id:
                 type: 'ID'
             title:
-                type: 'String!'
+                type: 'String'
             label:
                 type: 'String!'
             startAt:

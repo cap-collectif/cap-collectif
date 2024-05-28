@@ -15,8 +15,6 @@ import {
   ProposalStepStatusColor,
   ProposalStepVoteType,
 } from '@relay/CollectStepFormQuery.graphql'
-import CollectStepStatusesList from '@components/Steps/CollectStep/CollectStepStatusesList'
-import { CollectStepStatusesList_step$key } from '@relay/CollectStepStatusesList_step.graphql'
 import { ProposalFormForm_step$key } from '@relay/ProposalFormForm_step.graphql'
 import RequirementsTabsSkeleton from '@components/Requirements/RequirementsTabsSkeleton'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
@@ -38,13 +36,14 @@ import StepDurationInput from '../Shared/StepDurationInput'
 import ProposalSettings from '../ProposalStep/ProposalSettings'
 import { formatQuestions } from '../QuestionnaireStep/utils'
 import { QuestionInput, UpdateProposalFormMutation$data } from '@relay/UpdateProposalFormMutation.graphql'
+import ProposalStepStatuses from '@components/Steps/ProposalStep/ProposalStepStatuses'
+import PublicationInput from '@components/Steps/Shared/PublicationInput'
 
 export interface CollectStepFormProps {
   stepId: string
   setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
 }
 type StepVisibiltyTypeUnion = 'PUBLIC' | 'RESTRICTED'
-type EnabledUnion = 'PUBLISHED' | 'DRAFT'
 
 type Questionnaire = { questions: Array<QuestionInput>; questionsWithJumps: Array<any> }
 
@@ -196,7 +195,6 @@ const COLLECT_FRAGMENT = graphql`
           color
         }
         enabled
-        ...CollectStepStatusesList_step
         ...ProposalFormForm_step
         form {
           id
@@ -357,7 +355,7 @@ const COLLECT_FRAGMENT = graphql`
       }
     }
     ...ProposalFormForm_query
-    ...CollectStepStatusesList_query
+    ...ProposalStepStatuses_query
     siteColors {
       keyname
       value
@@ -405,10 +403,6 @@ export const StepVisibilityTypeEnum: Record<StepVisibiltyTypeUnion, StepVisibilt
   RESTRICTED: 'RESTRICTED',
 } as const
 
-export const EnabledEnum: Record<EnabledUnion, EnabledUnion> = {
-  PUBLISHED: 'PUBLISHED',
-  DRAFT: 'DRAFT',
-} as const
 export const MainViewEnum: Omit<Record<MainView, MainView>, '%future added value'> = {
   GRID: 'GRID',
   LIST: 'LIST',
@@ -429,6 +423,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
   const { operationType, setOperationType, selectedTab, proposalFormKey } = useCollectStep()
   const isEditing = operationType === 'EDIT'
 
+  const createStepLink = `/admin-next/project/${project?.id}/create-step`
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -437,7 +432,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
-        href: `/admin-next/project/${project?.id}/create-step`,
+        href: createStepLink,
       },
       {
         title: intl.formatMessage({ id: 'collect-step' }),
@@ -489,6 +484,11 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
             variant: 'success',
             content: intl.formatMessage({ id: 'admin.update.successful' }),
           })
+
+          if (!isEditing) {
+            return (window.location.href = `/admin-next/project/${project?.id}`)
+          }
+
           setOperationType('EDIT')
         } catch (e) {
           console.log(e)
@@ -523,7 +523,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
 
   return (
     <FormProvider {...formMethods}>
-      <Box bg="white" width="70%" p={6} borderRadius="8px">
+      <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
         <Text fontWeight={600} color="blue.800" fontSize={4}>
           {intl.formatMessage({ id: 'customize-your-collect-step' })}
         </Text>
@@ -534,12 +534,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           <Box>
             <Box mb={4}>
               <Accordion color={CapUIAccordionColor.Transparent}>
-                <Accordion.Item
-                  id={intl.formatMessage({ id: 'proposal-form' })}
-                  onMouseEnter={() => {
-                    setHelpMessage('step.create.proposalForm.helpText')
-                  }}
-                >
+                <Accordion.Item id={intl.formatMessage({ id: 'proposal-form' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'proposal-form' })}</Accordion.Button>
                   <Accordion.Panel>
                     <ProposalFormForm
@@ -559,7 +554,13 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                 </Accordion.Item>
               </Accordion>
               <Accordion color={CapUIAccordionColor.Transparent}>
-                <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
+                <Accordion.Item
+                  id={intl.formatMessage({ id: 'required-infos-to-participate' })}
+                  onMouseEnter={() => {
+                    setHelpMessage('step.create.proposalForm.helpText')
+                  }}
+                  onMouseLeave={() => setHelpMessage(null)}
+                >
                   <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
                   <Accordion.Panel>
                     <React.Suspense fallback={<RequirementsTabsSkeleton />}>
@@ -572,13 +573,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                 <Accordion.Item id={intl.formatMessage({ id: 'status.plural' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'status.plural' })}</Accordion.Button>
                   <Accordion.Panel>
-                    <CollectStepStatusesList
-                      formMethods={formMethods}
-                      step={step as CollectStepStatusesList_step$key}
-                      // @ts-ignore
-                      setValue={setValue}
-                      query={query}
-                    />
+                    <ProposalStepStatuses formMethods={formMethods} query={query} />
                   </Accordion.Panel>
                 </Accordion.Item>
               </Accordion>
@@ -595,7 +590,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
               <Accordion color={CapUIAccordionColor.Transparent}>
                 <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
-                  <Accordion.Panel gap={6}>
+                  <Accordion.Panel>
                     <ProposalStepOptionnalAccordion
                       step={step}
                       formMethods={formMethods}
@@ -605,6 +600,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                 </Accordion.Item>
               </Accordion>
             </Box>
+            <PublicationInput />
             <Flex>
               <Button
                 id="save-collect-step"

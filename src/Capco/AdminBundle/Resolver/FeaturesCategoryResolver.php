@@ -76,6 +76,7 @@ class FeaturesCategoryResolver
                     Manager::online_help,
                     Manager::full_proposal_card,
                     Manager::new_navbar,
+                    Manager::multi_consultations,
                 ],
             ],
         ],

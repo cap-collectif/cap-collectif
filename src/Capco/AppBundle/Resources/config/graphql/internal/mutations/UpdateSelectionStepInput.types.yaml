@@ -93,3 +93,6 @@ UpdateSelectionStepInput:
             proposalArchivedUnitTime:
                 type: 'ProposalArchivedUnitTime!'
                 description: 'The unit chosen to set the archived duration can be either MONTHS or DAYS'
+            allowingProgressSteps:
+                type: 'Boolean!'
+                description: 'Set this step as realisation step.'

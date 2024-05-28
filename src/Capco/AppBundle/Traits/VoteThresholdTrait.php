@@ -9,7 +9,7 @@ trait VoteThresholdTrait
     /**
      * @ORM\Column(name="vote_threshold", type="integer", nullable=true)
      */
-    private $voteThreshold = 0;
+    private ?int $voteThreshold = null;
 
     public function getVoteThreshold(): ?int
     {

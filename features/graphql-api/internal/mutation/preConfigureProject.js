@@ -175,7 +175,7 @@ const participatoryBudgetInput = {
     "steps": [
       {
         "body": "<p>- C'est quoi un BP</p><p>- Calendrier / démarche</p><p>- Règlement</p>",
-        "title": "Présentation de votre projet",
+        "title": "",
         "label": "Présentation de votre projet",
         "isEnabled": true,
         "requirements": [],
@@ -183,7 +183,7 @@ const participatoryBudgetInput = {
       },
       {
         "body": "<p>- Rappel du fonctionnement</p><p>- Critères pour les idées</p><p>- Exemple de projet recevable / non recevable</p>",
-        "title": "Proposez vos projets",
+        "title": "",
         "startAt": null,
         "endAt": null,
         "label": "Dépôt des projets",
@@ -201,7 +201,7 @@ const participatoryBudgetInput = {
       {
         "label": "L'analyse des projets",
         "body": null,
-        "title": "Analyse des projets",
+        "title": "",
         "startAt": null,
         "endAt": null,
         "isEnabled": true,
@@ -242,7 +242,7 @@ const participatoryBudgetInput = {
       },
       {
         "label": "Vote",
-        "title": "Votez pour vos projets préférés",
+        "title": "",
         "startAt": null,
         "endAt": null,
         "isEnabled": true,
@@ -285,7 +285,7 @@ const participatoryBudgetInput = {
       },
       {
         "label": "Projets lauréats",
-        "title": "Liste des projets retenus",
+        "title": "",
         "startAt": null,
         "endAt": null,
         "isEnabled": true,
@@ -324,9 +324,9 @@ const participatoryBudgetInput = {
   "analysisForm": {
     "proposalFormId": proposalFormTitle,
     "evaluationFormId": questionnaireTitle,
-    "analysisStepId": "Analyse des projets",
+    "analysisStepId": "L'analyse des projets",
     "effectiveDate": "2022-01-20",
-    "moveToSelectionStepId": "Votez pour vos projets préférés",
+    "moveToSelectionStepId": "Vote",
     "selectionStepStatusId": "Soumis au vote",
     "unfavourableStatuses": ['Non réalisable', 'Hors cadre', 'Déjà prévu'],
     "favourableStatus": "Soumis au vote",

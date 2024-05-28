@@ -97,6 +97,7 @@ export const features: FeatureFlags = {
   turnstile_captcha: false,
   mediator: false,
   online_help: false,
+  multi_consultations: false,
   full_proposal_card: false,
   new_navbar: false,
 }

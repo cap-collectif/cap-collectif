@@ -10,7 +10,7 @@ import { QuestionnaireStepFormQuery } from '@relay/QuestionnaireStepFormQuery.gr
 import { UpdateQuestionnaireStepInput } from '@relay/UpdateQuestionnaireStepMutation.graphql'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
-import { StepDurationTypeEnum, EnabledEnum } from '../DebateStep/DebateStepForm'
+import { StepDurationTypeEnum } from '../DebateStep/DebateStepForm'
 import QuestionnaireStepRequirementsTabs from '@components/Requirements/QuestionnaireStepRequirementsTabs'
 import { getRequirementsInput, RequirementsFormValues } from '@components/Requirements/Requirements'
 import QuestionnaireStepOptionalParameters from './QuestionnaireStepFormOptionalParameters'
@@ -20,6 +20,7 @@ import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation'
 import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
 import { onBack } from '@components/Steps/utils'
 import useUrlState from '@hooks/useUrlState'
+import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 
 type Props = {
@@ -167,6 +168,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
 
+  const createStepLink = `/admin-next/project/${project?.id}/create-step`
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -175,7 +177,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
-        href: `/admin-next/project/${project?.id}/create-step`,
+        href: createStepLink,
       },
       {
         title: intl.formatMessage({ id: 'questionnaire-step' }),
@@ -251,6 +253,9 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                 variant: 'success',
                 content: intl.formatMessage({ id: 'global.changes.saved' }),
               })
+              if (!isEditing) {
+                return (window.location.href = `/admin-next/project/${project?.id}`)
+              }
               setOperationType('EDIT')
               const newFormValues = {
                 ...response.updateQuestionnaireStep.questionnaireStep,
@@ -317,9 +322,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             platformLanguage={defaultLocale}
             selectedLanguage={defaultLocale}
           />
-
           <StepDurationInput />
-
           <QuestionnaireStepFormQuestionnaireTab
             isEditing={isEditing}
             defaultLocale={defaultLocale}
@@ -344,27 +347,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             defaultLocale={defaultLocale}
             selectedLocale={defaultLocale}
           />
-          <FormControl name="isEnabled" control={control} my={6}>
-            <FormLabel htmlFor="isEnabled" label={intl.formatMessage({ id: 'admin.fields.project.published_at' })} />
-            <FieldInput
-              id="isEnabled"
-              name="isEnabled"
-              control={control}
-              type="radio"
-              choices={[
-                {
-                  id: EnabledEnum.PUBLISHED,
-                  label: intl.formatMessage({ id: 'global.published' }),
-                  useIdAsValue: true,
-                },
-                {
-                  id: EnabledEnum.DRAFT,
-                  label: intl.formatMessage({ id: 'global-draft' }),
-                  useIdAsValue: true,
-                },
-              ]}
-            />
-          </FormControl>
+          <PublicationInput fieldName="isEnabled" />
           <Flex mt={6}>
             <Button
               variantSize="big"

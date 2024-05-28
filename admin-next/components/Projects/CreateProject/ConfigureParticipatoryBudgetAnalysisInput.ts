@@ -32,6 +32,9 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
   const proposalFormTitle = `${projectTitle} - ${intl.formatMessage({ id: 'proposal-form' })}`
   const questionnaireTitle = `${projectTitle} - ${intl.formatMessage({ id: 'export.option.analysis-form' })}`
 
+  const voteStepLabel = intl.formatMessage({ id: 'vote-capitalize' })
+  const analysisStepLabel = intl.formatMessage({ id: 'proposal_form.admin.evaluation' })
+
   const input: PreConfigureProjectInput = {
     questionnaires: [
       {
@@ -140,7 +143,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
           })}</p><p>- ${intl.formatMessage({ id: 'amount-of-the-dedicated-budget' })}</p><p>- ${intl.formatMessage({
             id: 'schedule-approach',
           })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
-          title: intl.formatMessage({ id: 'presentation-of-your-project' }),
+          title: '',
           label: intl.formatMessage({ id: 'presentation_step' }),
           isEnabled: true,
           requirements: [],
@@ -152,7 +155,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
           })}</p><p>- ${intl.formatMessage({
             id: 'distinction-between-operations-and-investment',
           })}</p><p>- ${intl.formatMessage({ id: 'example-of-an-eligible-non-eligible-project' })}</p>`,
-          title: intl.formatMessage({ id: 'submit-your-projects' }),
+          title: '',
           startAt: stepsDates.collectStep.startAt(),
           endAt: stepsDates.collectStep.endAt(),
           label: intl.formatMessage({ id: 'project-submission' }),
@@ -168,13 +171,13 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
           proposalArchivedUnitTime: 'MONTHS',
         },
         {
-          label: intl.formatMessage({ id: 'proposal_form.admin.evaluation' }),
+          label: analysisStepLabel,
           body: `<p>- ${intl.formatMessage({
             id: 'criteria-for-the-analysis-of-projects-by-the-services',
           })}</p><p>- ${intl.formatMessage({
             id: 'official-responses-to-unsuccessful-projects',
           })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
-          title: intl.formatMessage({ id: 'project-analysis' }),
+          title: '',
           startAt: stepsDates.selectionStep1.startAt(),
           endAt: stepsDates.selectionStep1.endAt(),
           isEnabled: true,
@@ -214,8 +217,8 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
           proposalArchivedUnitTime: 'MONTHS',
         },
         {
-          label: intl.formatMessage({ id: 'vote-capitalize' }),
-          title: intl.formatMessage({ id: 'vote-for-your-favourite-projects' }),
+          label: voteStepLabel,
+          title: '',
           body: `<p>- ${intl.formatMessage({
             id: 'number-of-votes-and-other-modalities',
           })}</p><p>- ${intl.formatMessage({
@@ -263,7 +266,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
         },
         {
           label: intl.formatMessage({ id: 'award-winning-projects' }),
-          title: intl.formatMessage({ id: 'list-of-selected-projects' }),
+          title: '',
           body: `<p>- ${intl.formatMessage({ id: 'timeframe-for-completion-of-winning-projects' })}</p>`,
           startAt: stepsDates.selectionStep3.startAt(),
           endAt: stepsDates.selectionStep3.endAt(),
@@ -304,9 +307,9 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
     analysisForm: {
       proposalFormId: proposalFormTitle,
       evaluationFormId: questionnaireTitle,
-      analysisStepId: intl.formatMessage({ id: 'project-analysis' }),
+      analysisStepId: analysisStepLabel,
       effectiveDate: stepsDates.selectionStep1.endAt(),
-      moveToSelectionStepId: intl.formatMessage({ id: 'vote-for-your-favourite-projects' }),
+      moveToSelectionStepId: voteStepLabel,
       selectionStepStatusId: intl.formatMessage({ id: 'put-to-the-vote' }),
       unfavourableStatuses: [
         intl.formatMessage({ id: 'not-achievable' }),

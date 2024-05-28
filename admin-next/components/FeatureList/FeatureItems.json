@@ -237,6 +237,11 @@
                         "title": "capco.module.versions",
                         "description": "description.module.versions",
                         "onlySuperAdmin": false
+                    },
+                    "multi_consultations": {
+                        "title": "capco.module.multi_consultation",
+                        "description": "",
+                        "onlySuperAdmin": false
                     }
                 }
             },

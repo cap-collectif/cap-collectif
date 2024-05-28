@@ -20,6 +20,7 @@ const DebateEmptyOpinion = ({ type }: Props) => {
       flex="1"
       borderRadius="normal"
       position="relative"
+      bg="white"
     >
       <Tag
         variantColor={type === 'FOR' ? 'green' : 'red'}

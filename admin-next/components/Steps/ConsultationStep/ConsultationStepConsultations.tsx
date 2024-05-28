@@ -7,6 +7,7 @@ import { graphql, useFragment } from 'react-relay'
 import { ConsultationStepConsultations_query$key } from '@relay/ConsultationStepConsultations_query.graphql'
 import { FormValues, getDefaultSection } from '@components/Steps/ConsultationStep/ConsultationStepForm'
 import { AnimatePresence, motion } from 'framer-motion'
+import useFeatureFlag from '@hooks/useFeatureFlag'
 
 type Props = {
   query: ConsultationStepConsultations_query$key
@@ -23,6 +24,7 @@ const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef }) => 
   const { control, formState } = useFormContext<FormValues>()
   const { errors } = formState
   const query = useFragment(QUERY_FRAGMENT, queryRef)
+  const multiConsultations = useFeatureFlag('multi_consultations');
 
   const {
     fields: consultations,
@@ -75,20 +77,24 @@ const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef }) => 
               })}
             </Box>
             {errors.consultations?.root?.message && <Text color="red.500">{errors.consultations?.root?.message}</Text>}
-            <Box
-              id="append-consultation-button"
-              as="button"
-              p={4}
-              bg="gray.100"
-              width="100%"
-              color="blue.500"
-              fontSize={3}
-              fontWeight={600}
-              type="button"
-              onClick={appendConsultation}
-            >
-              {intl.formatMessage({ id: 'add-a-consultation' })}
-            </Box>
+            {
+              multiConsultations && (
+                <Box
+                  id="append-consultation-button"
+                  as="button"
+                  p={4}
+                  bg="gray.100"
+                  width="100%"
+                  color="blue.500"
+                  fontSize={3}
+                  fontWeight={600}
+                  type="button"
+                  onClick={appendConsultation}
+                >
+                  {intl.formatMessage({ id: 'add-a-consultation' })}
+                </Box>
+              )
+            }
           </Accordion.Panel>
         </Accordion.Item>
       </Accordion>

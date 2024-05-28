@@ -1,33 +1,21 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
-import { CollectStepStatusesList_step$key, ProposalStepStatusColor } from '@relay/CollectStepStatusesList_step.graphql'
 import { useIntl } from 'react-intl'
 import { useFieldArray, UseFormReturn } from 'react-hook-form'
-// @ts-ignore
 import { Button, CapColorPickerVariant, CapUIIcon, Flex, InputGroup } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { CollectStepStatusesList_query$key } from '@relay/CollectStepStatusesList_query.graphql'
-import { FormValues } from '@components/Steps/CollectStep/CollectStepForm'
+import { FormValues } from '@components/Steps/SelectStep/SelectStepForm'
+import { ProposalStepStatuses_query$key } from '@relay/ProposalStepStatuses_query.graphql'
 
-export interface CollectStepStatusesListProps {
-  step: CollectStepStatusesList_step$key
-  formMethods: UseFormReturn<any>
-  query: CollectStepStatusesList_query$key
+type ProposalStepStatusesColor = "CAUTION" | "DANGER" | "DEFAULT" | "INFO" | "PRIMARY" | "SUCCESS" | "WARNING" | "%future added value"
+
+export interface ProposalStepStatusesProps {
+  readonly formMethods: UseFormReturn<any>
+  readonly query: ProposalStepStatuses_query$key
 }
 
-const STATUSLIST_FRAGMENT = graphql`
-  fragment CollectStepStatusesList_step on Step {
-    ... on SelectionStep {
-      statuses {
-        id
-        name
-        color
-      }
-    }
-  }
-`
 const STATUSLIST_QUERY = graphql`
-  fragment CollectStepStatusesList_query on Query {
+  fragment ProposalStepStatuses_query on Query {
     siteColors {
       keyname
       value
@@ -35,7 +23,7 @@ const STATUSLIST_QUERY = graphql`
   }
 `
 
-export enum StatusColorsEnum {
+enum StatusColorsEnum {
   INFO = '#77b5fe',
   PRIMARY = '',
   SUCCESS = '#399a39',
@@ -49,7 +37,7 @@ export const getStatusesInitialValues = (
     | ReadonlyArray<{
         id: string
         name: string
-        color: ProposalStepStatusColor
+        color: ProposalStepStatusesColor
       }>
     | undefined,
   bgColor: string,
@@ -80,13 +68,7 @@ export const getStatusesInputList = (statuses: FormValues['statuses'], bgColor: 
   }
 }
 
-const CollectStepStatusesList: React.FC<CollectStepStatusesListProps> = ({
-  step: stepRef,
-  formMethods,
-  query: queryRef,
-}) => {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const query = useFragment(STATUSLIST_FRAGMENT, stepRef)
+const ProposalStepStatuses: React.FC<ProposalStepStatusesProps> = ({ formMethods, query: queryRef }) => {
   const { siteColors } = useFragment(STATUSLIST_QUERY, queryRef)
   const bgColor = siteColors.find(elem => elem.keyname === 'color.btn.primary.bg').value
   const intl = useIntl()
@@ -109,7 +91,7 @@ const CollectStepStatusesList: React.FC<CollectStepStatusesListProps> = ({
           wrap="nowrap"
           sx={{
             '.cap-form-control:last-child': { width: '100% !important' },
-            '.cap-color-picker_container': { marginTop: '0 !important' },
+            '.cap-color-picker_container': { marginTop: '0 !important', 'width': '34px', 'height': '34px' },
           }}
         >
           <FormControl name={`statuses[${index}].color`} control={control} position="relative">
@@ -121,15 +103,14 @@ const CollectStepStatusesList: React.FC<CollectStepStatusesListProps> = ({
               // @ts-ignore
               variant={CapColorPickerVariant.Twitter}
               colors={[bgColor, '#77b5fe', '#399a39', '#f4b721', '#f75d56', '#707070']}
+              sx={{
+                display: 'none',
+              }}
             />
           </FormControl>
-          <FormControl
-            data-cy={`statuses_${index}_name`}
-            name={`statuses[${index}].name`}
-            control={control}
-            sx={{ width: '100% !important' }}
-          >
+          <FormControl name={`statuses[${index}].name`} control={control} sx={{ width: '100% !important' }}>
             <FieldInput
+              data-cy={`statuses_${index}_name`}  
               id={`statuses[${index}].name`}
               name={`statuses[${index}].name`}
               control={control}
@@ -154,4 +135,4 @@ const CollectStepStatusesList: React.FC<CollectStepStatusesListProps> = ({
   )
 }
 
-export default CollectStepStatusesList
+export default ProposalStepStatuses

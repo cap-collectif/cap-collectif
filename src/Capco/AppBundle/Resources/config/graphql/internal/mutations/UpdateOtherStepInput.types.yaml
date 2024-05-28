@@ -2,9 +2,6 @@ UpdateOtherStepInput:
     type: relay-mutation-input
     config:
         fields:
-            title:
-                type: 'String!'
-                description: 'The step title.'
             stepId:
                 type: 'ID!'
                 description: 'The step ID to update.'

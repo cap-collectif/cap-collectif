@@ -6913,6 +6913,9 @@ enum FeatureFlagType {
 
   """Whether or not the new navbar is enabled"""
   new_navbar
+
+  """Whether or not the multi consultations are enabled"""
+  multi_consultations
 }
 
 """Require a firstname"""
@@ -11316,7 +11319,7 @@ enum ProjectOwnerProjectOrderField {
 input ProjectStepInput {
   type: ConcreteStepType!
   id: ID
-  title: String!
+  title: String
   label: String!
   startAt: DateTime
   endAt: DateTime
@@ -16068,6 +16071,21 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
   """The main view : GRID, LIST or MAP"""
   mainView: MainView!
   defaultStatus: ProposalStepStatus
+
+  """Either vote, analysis or result step."""
+  subType: SelectionStepSubTypes
+}
+
+"""Available sub types for selection step."""
+enum SelectionStepSubTypes {
+  """The step is a vote step."""
+  VOTE
+
+  """The step is an analysis step."""
+  ANALYSIS
+
+  """The step is a result step."""
+  RESULT
 }
 
 """
@@ -18486,9 +18504,6 @@ input UpdateOrganizationTranslationInput {
 }
 
 input UpdateOtherStepInput {
-  """The step title."""
-  title: String!
-
   """The step ID to update."""
   stepId: ID!
 
@@ -19416,6 +19431,9 @@ input UpdateSelectionStepInput {
   The unit chosen to set the archived duration can be either MONTHS or DAYS
   """
   proposalArchivedUnitTime: ProposalArchivedUnitTime!
+
+  """Set this step as realisation step."""
+  allowingProgressSteps: Boolean!
   clientMutationId: String
 }
 

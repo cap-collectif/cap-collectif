@@ -1,12 +1,14 @@
 import { CollectStepFormQuery$data } from '@relay/CollectStepFormQuery.graphql'
 import { FormTabs, FormTabsEnum } from './CollectStepContext'
-import { EnabledEnum, FormValues, StepVisibilityTypeEnum } from '@components/Steps/CollectStep/CollectStepForm'
+import { FormValues, StepVisibilityTypeEnum } from '@components/Steps/CollectStep/CollectStepForm'
 import { UpdateProposalFormMutation$variables } from '@relay/UpdateProposalFormMutation.graphql'
-import { getStatusesInitialValues, getStatusesInputList } from '@components/Steps/CollectStep/CollectStepStatusesList'
+import { getStatusesInitialValues, getStatusesInputList } from '@components/Steps/ProposalStep/ProposalStepStatuses'
 import { getDefaultRequirements, getRequirementsInput } from '@components/Requirements/Requirements'
 import { getFormattedCategories } from '@components/Steps/CollectStep/ProposalFormAdminCategories'
 import { StepDurationTypeEnum } from '../Shared/StepDurationInput'
 import { formatQuestions, formatQuestionsInput } from '../QuestionnaireStep/utils'
+import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
+
 
 export const getInitialValues = (
   step: CollectStepFormQuery$data['step'],
@@ -83,9 +85,9 @@ export const getInitialValues = (
       canContact: step?.form?.canContact,
       proposalInAZoneRequired: step?.form?.proposalInAZoneRequired || false,
       questionnaire: {
-        questions: step?.form.questions ? formatQuestions({ questions: step.form.questions }) : [],
+        questions: step?.form?.questions ? formatQuestions({ questions: step.form.questions }) : [],
         // @ts-ignore
-        questionsWithJumps: step.form.questionsWithJumps ?? [],
+        questionsWithJumps: step.form?.questionsWithJumps ?? [],
       },
     },
     voteType: step?.voteType,
@@ -125,7 +127,8 @@ export const getProposalFormUpdateVariablesInput = (
   formValues: FormValues['form'],
   selectedTab: FormTabs,
 ): Omit<UpdateProposalFormMutation$variables['input'], 'clientMutationId' | 'proposalFormId'> => {
-  const mergedArr = formValues.questionnaire.questions.map(q => {
+  const questions = formValues?.questionnaire?.questions ?? [];
+  const mergedArr = questions.map(q => {
     const j = formValues.questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
     return { ...q, ...j }
   })

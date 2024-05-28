@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {
+  Box,
   CapUIIcon,
   CapUIIconSize,
   CapUISpotIcon,
@@ -19,7 +20,7 @@ import { ListCard } from '@ui/ListCard'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormProvider, UseFormReturn } from 'react-hook-form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
-import { useIntl } from 'react-intl'
+import { FormattedHTMLMessage, useIntl } from 'react-intl'
 import { useFeatureFlag } from '@hooks/useFeatureFlag'
 
 type ProposalStepVoteType = 'BUDGET' | 'DISABLED' | 'SIMPLE'
@@ -37,6 +38,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
   const budget = watch('budget')
   const voteThreshold = watch('voteThreshold')
   const secretBallot = watch('secretBallot')
+  const votesRanking = watch('votesRanking')
   const votesMin = watch('votesMin')
   const votesLimit = watch('votesLimit')
   const voteMinVoteLimitEnabled = votesMin !== null || votesLimit !== null
@@ -226,17 +228,23 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                     </Text>
                     <Flex direction="row" gap={2}>
                       {votesMinEnabled && (
-                        <FormControl name="votesMin" width="auto" control={control} mb={6}>
+                        <FormControl name="votesMin" width="auto" control={control}>
                           <FormLabel
                             htmlFor="votesMin"
                             label={intl.formatMessage({
                               id: 'global-minimum-full',
                             })}
                           />
-                          <FieldInput id="votesMin" name="votesMin" control={control} type="number" />
+                          <FieldInput
+                            id="votesMin"
+                            name="votesMin"
+                            control={control}
+                            type="number"
+                            max={votesLimit - 1}
+                          />
                         </FormControl>
                       )}
-                      <FormControl name="votesLimit" width="auto" control={control} mb={6}>
+                      <FormControl name="votesLimit" width="auto" control={control}>
                         <FormLabel
                           htmlFor="votesLimit"
                           label={intl.formatMessage({
@@ -246,13 +254,22 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                         <FieldInput id="votesLimit" name="votesLimit" control={control} type="number" />
                       </FormControl>
                     </Flex>
-                    <FormControl name="votesRanking" control={control}>
+
+                    <FormControl name="votesRanking" control={control} mb={0}>
                       <FieldInput id="votesRanking" name="votesRanking" control={control} type="checkbox">
                         {intl.formatMessage({
                           id: 'activate-vote-ranking',
                         })}
                       </FieldInput>
                     </FormControl>
+                    <Box color="gray.700">
+                      <FormattedHTMLMessage id="help-text-vote-ranking" />
+                    </Box>
+                    {votesRanking === true && (
+                      <Text color="gray.700">
+                        {intl.formatMessage({ id: 'help-vote-point' }, { points: votesLimit })}
+                      </Text>
+                    )}
                   </Flex>
                 )}
               </Flex>
@@ -300,14 +317,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                             })}
                           </Text>
                         </FormLabel>
-                        <FieldInput
-                          id="publishedVoteDate"
-                          name="publishedVoteDate"
-                          control={control}
-                          type="dateHour"
-                          // @ts-expect-error MAJ DS Props
-                          dateInputProps={{ isOutsideRange: true }}
-                        />
+                        <FieldInput id="publishedVoteDate" name="publishedVoteDate" control={control} type="dateHour" />
                       </FormControl>
                     </Flex>
                   </Flex>

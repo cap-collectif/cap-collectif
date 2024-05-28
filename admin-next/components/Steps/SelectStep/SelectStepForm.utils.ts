@@ -1,7 +1,9 @@
-import { getStatusesInitialValues } from '@components/Steps/SelectStep/SelectStepStatusesList'
-import { EnabledEnum, FormValues, StepDurationTypeEnum } from '@components/Steps/SelectStep/SelectStepForm'
+import { getStatusesInitialValues } from '@components/Steps/ProposalStep/ProposalStepStatuses'
+import { FormValues, StepDurationTypeEnum } from '@components/Steps/SelectStep/SelectStepForm'
 import { SelectStepFormQuery$data } from '@relay/SelectStepFormQuery.graphql'
 import { getDefaultRequirements } from '../../Requirements/Requirements'
+import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
+
 
 export const getDefaultValues = (
   step: SelectStepFormQuery$data['step'],

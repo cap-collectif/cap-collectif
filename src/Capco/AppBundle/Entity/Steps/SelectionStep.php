@@ -10,6 +10,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Enum\ProposalSort;
+use Capco\AppBundle\Enum\SelectionStepSubTypes;
 use Capco\AppBundle\Traits\AllowAuthorsToAddNewsTrait;
 use Capco\AppBundle\Traits\ProposalArchivedTrait;
 use Capco\AppBundle\Traits\SecretBallotTrait;
@@ -96,6 +97,11 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
      * @ORM\OneToMany(targetEntity=MediatorParticipantStep::class, mappedBy="step", orphanRemoval=true)
      */
     private Collection $mediatorParticipantSteps;
+
+    /**
+     * @ORM\Column(name="sub_type", type="string", nullable=false)
+     */
+    private string $subType = SelectionStepSubTypes::VOTE;
 
     public function __construct()
     {
@@ -262,6 +268,18 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
                 $mediatorParticipantStep->setStep(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getSubType(): string
+    {
+        return $this->subType;
+    }
+
+    public function setSubType(string $subType): self
+    {
+        $this->subType = $subType;
 
         return $this;
     }

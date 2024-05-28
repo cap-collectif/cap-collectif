@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Event\StepSavedEvent;
 use Capco\AppBundle\Form\Step\ConsultationStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -14,6 +15,7 @@ use GraphQL\Error\Error;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -25,19 +27,22 @@ class UpdateConsultationStepMutation implements MutationInterface
     private LoggerInterface $logger;
     private GlobalIdResolver $globalIdResolver;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private EventDispatcherInterface $dispatcher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
         LoggerInterface $logger,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->formFactory = $formFactory;
         $this->em = $em;
         $this->logger = $logger;
         $this->globalIdResolver = $globalIdResolver;
         $this->authorizationChecker = $authorizationChecker;
+        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -59,6 +64,7 @@ class UpdateConsultationStepMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
+        $this->dispatcher->dispatch(new StepSavedEvent($step));
         $this->em->flush();
 
         return ['consultationStep' => $step];

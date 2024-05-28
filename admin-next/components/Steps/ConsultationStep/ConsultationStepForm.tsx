@@ -3,7 +3,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { SectionOrderBy, ConsultationStepFormQuery } from '@relay/ConsultationStepFormQuery.graphql'
 import { IntlShape, useIntl } from 'react-intl'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
-import { EnabledEnum, StepDurationTypeEnum } from '@components/Steps/DebateStep/DebateStepForm'
+import { StepDurationTypeEnum } from '@components/Steps/DebateStep/DebateStepForm'
 import {
   getDefaultRequirements,
   getRequirementsInput,
@@ -33,6 +33,7 @@ import { OpinionTypeInput } from '@relay/CreateOrUpdateConsultationMutation.grap
 import ConsultationStepRequirementsTabs from '@components/Requirements/ConsultationStepRequirementsTabs'
 import { onBack } from '@components/Steps/utils'
 import { useConsultationStep } from './ConsultationStepContext'
+import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 
 type Props = {
@@ -199,6 +200,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const defaultLocale = availableLocales.find(locale => locale.isDefault)?.code?.toLowerCase() ?? 'fr'
 
+  const createStepLink = `/admin-next/project/${project?.id}/create-step`
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -207,7 +209,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
-        href: `/admin-next/project/${project?.id}/create-step`,
+        href: createStepLink,
       },
       {
         title: intl.formatMessage({ id: 'consultation-step' }),
@@ -335,12 +337,16 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
         input: updateStepInput,
       })
 
-      setOperationType('EDIT')
-
       toast({
         variant: 'success',
         content: intl.formatMessage({ id: 'consultation-saved' }),
       })
+
+      if (!isEditing) {
+        return (window.location.href = `/admin-next/project/${project?.id}`)
+      }
+
+      setOperationType('EDIT')
     } catch (error) {
       return mutationErrorToast(intl)
     }
@@ -411,27 +417,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               </Accordion.Panel>
             </Accordion.Item>
           </Accordion>
-          <FormControl name="isEnabled" control={control} my={6}>
-            <FormLabel htmlFor="isEnabled" label={intl.formatMessage({ id: 'admin.fields.project.published_at' })} />
-            <FieldInput
-              id="isEnabled"
-              name="isEnabled"
-              control={control}
-              type="radio"
-              choices={[
-                {
-                  id: EnabledEnum.PUBLISHED,
-                  label: intl.formatMessage({ id: 'global.published' }),
-                  useIdAsValue: true,
-                },
-                {
-                  id: EnabledEnum.DRAFT,
-                  label: intl.formatMessage({ id: 'global-draft' }),
-                  useIdAsValue: true,
-                },
-              ]}
-            />
-          </FormControl>
+          <PublicationInput fieldName="isEnabled" />
           <Flex mt={6}>
             <Button
               id="save-consultation"

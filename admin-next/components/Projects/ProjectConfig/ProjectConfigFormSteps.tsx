@@ -43,6 +43,8 @@ const ProjectConfigFormSteps: React.FC = () => {
     move(result.source.index, result.destination.index)
   }
 
+  const hasSelectionStep = stepsValues.some(s => s.__typename === 'SelectionStep')
+
   return (
     <>
       {isOpen ? (
@@ -63,63 +65,68 @@ const ProjectConfigFormSteps: React.FC = () => {
             // @ts-ignore https://github.com/cap-collectif/ui/issues/367
             <DragnDrop onDragEnd={onDragEnd}>
               <DragnDrop.List droppableId="steps">
-                {steps.map((step, index) => (
-                  // @ts-ignore https://github.com/cap-collectif/ui/issues/367
-                  <DragnDrop.Item draggableId={step.id} index={index} key={step.id}>
-                    <ListCard.Item
-                      bg="gray.100"
-                      borderRadius="normal"
-                      borderColor="gray.200"
-                      mb={1}
-                      mt={1}
-                      py={2}
-                      draggable
-                      width="100%"
-                      _hover={{ bg: 'gray.100' }}
-                      sx={{ borderWidth: '1px' }}
-                    >
-                      <Flex direction="column">
-                        <Text color="gray.500" fontSize={1} fontWeight={400} lineHeight="16px">
-                          {intl.formatMessage({
-                            id: getWordingStep(stepsValues[index].__typename),
-                          })}
-                        </Text>
-                        <Text color="blue.900" fontSize={2} fontWeight={600} lineHeight="16px">
-                          {stepsValues[index].label}
-                        </Text>
-                      </Flex>
-                      <ButtonGroup>
-                        <ButtonQuickAction
-                          id={`edit-step-${stepsValues[index].label}`}
-                          variantColor="blue"
-                          icon={CapUIIcon.Pencil}
-                          label={intl.formatMessage({
-                            id: 'global.edit',
-                          })}
-                          onClick={() => {
-                            window.location.href += `/update-step/${getStepUri(stepsValues[index].__typename)}/${
-                              stepsValues[index].id
-                            }`
-                          }}
-                          type="button"
-                        />
-                        <ButtonQuickAction
-                          id={`delete-step-${stepsValues[index].label}`}
-                          onClick={() => {
-                            setIndexToDelete(index)
-                            onOpen()
-                          }}
-                          variantColor="red"
-                          icon={CapUIIcon.Trash}
-                          label={intl.formatMessage({
-                            id: 'global.delete',
-                          })}
-                          type="button"
-                        />
-                      </ButtonGroup>
-                    </ListCard.Item>
-                  </DragnDrop.Item>
-                ))}
+                {steps.map((step, index) => {
+                  const disabledDelete = stepsValues[index].__typename === 'CollectStep' && hasSelectionStep
+                  return (
+                    // @ts-ignore https://github.com/cap-collectif/ui/issues/367
+                    <DragnDrop.Item draggableId={step.id} index={index} key={step.id}>
+                      <ListCard.Item
+                        bg="gray.100"
+                        borderRadius="normal"
+                        borderColor="gray.200"
+                        mb={1}
+                        mt={1}
+                        py={2}
+                        draggable
+                        width="100%"
+                        _hover={{ bg: 'gray.100' }}
+                        sx={{ borderWidth: '1px' }}
+                      >
+                        <Flex direction="column">
+                          <Text color="gray.500" fontSize={1} fontWeight={400} lineHeight="16px">
+                            {intl.formatMessage({
+                              id: getWordingStep(stepsValues[index].__typename),
+                            })}
+                          </Text>
+                          <Text color="blue.900" fontSize={2} fontWeight={600} lineHeight="16px">
+                            {stepsValues[index].label}
+                          </Text>
+                        </Flex>
+                        <ButtonGroup>
+                          <ButtonQuickAction
+                            id={`edit-step-${stepsValues[index].label}`}
+                            variantColor="blue"
+                            icon={CapUIIcon.Pencil}
+                            label={intl.formatMessage({
+                              id: 'global.edit',
+                            })}
+                            onClick={() => {
+                              window.location.href += `/update-step/${getStepUri(stepsValues[index].__typename)}/${
+                                stepsValues[index].id
+                              }`
+                            }}
+                            type="button"
+                          />
+                          <ButtonQuickAction
+                            id={`delete-step-${stepsValues[index].label}`}
+                            onClick={() => {
+                              setIndexToDelete(index)
+                              onOpen()
+                            }}
+                            variantColor="red"
+                            icon={CapUIIcon.Trash}
+                            label={intl.formatMessage({
+                              id: 'global.delete',
+                            })}
+                            type="button"
+                            _disabled={{ cursor: 'not-allowed', opacity: '.5' }}
+                            disabled={disabledDelete}
+                          />
+                        </ButtonGroup>
+                      </ListCard.Item>
+                    </DragnDrop.Item>
+                  )
+                })}
               </DragnDrop.List>
             </DragnDrop>
           ) : (

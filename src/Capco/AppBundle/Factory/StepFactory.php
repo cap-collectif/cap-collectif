@@ -18,6 +18,7 @@ use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\DebateType;
+use Capco\AppBundle\Enum\SelectionStepSubTypes;
 use Capco\AppBundle\Enum\StatusColor;
 use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -151,6 +152,7 @@ class StepFactory
             ->setDefaultSort('random')
             ->setVoteType(1)
             ->setVotesLimit(3)
+            ->setSubType(SelectionStepSubTypes::VOTE)
         ;
     }
 
@@ -176,6 +178,7 @@ class StepFactory
             ->setAllowAuthorsToAddNews(false)
             ->setDefaultSort('random')
             ->setVoteType(0)
+            ->setSubType(SelectionStepSubTypes::ANALYSIS)
         ;
     }
 
@@ -198,6 +201,7 @@ class StepFactory
             ->setAllowingProgressSteps(true)
             ->setDefaultSort('random')
             ->setVoteType(0)
+            ->setSubType(SelectionStepSubTypes::RESULT)
         ;
     }
 

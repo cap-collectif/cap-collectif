@@ -35,10 +35,10 @@ class PreConfigureProjectAnalysisFormPersister
         $input['proposalFormId'] = $proposalFormTitleToIdMap[$input['proposalFormId']];
         $input['evaluationFormId'] = GlobalId::toGlobalId('Questionnaire', $questionnaireTitleToIdMap[$input['evaluationFormId']]);
 
-        $analysisStep = $this->abstractStepRepository->findOneByProjectAndStepTitle($project, $input['analysisStepId']);
+        $analysisStep = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $input['analysisStepId']);
         $input['analysisStepId'] = GlobalId::toGlobalId('SelectionStep', $analysisStep->getId());
 
-        $selectionStep = $this->abstractStepRepository->findOneByProjectAndStepTitle($project, $input['moveToSelectionStepId']);
+        $selectionStep = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $input['moveToSelectionStepId']);
         $input['moveToSelectionStepId'] = GlobalId::toGlobalId('SelectionStep', $selectionStep->getId());
 
         $selectionStepStatuses = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $selectionStep, [$input['selectionStepStatusId']]);

@@ -12,6 +12,7 @@ import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import { onBack } from '@components/Steps/utils'
 import { useOtherStep } from './OtherStepContext'
+import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 
 type Props = {
@@ -20,7 +21,6 @@ type Props = {
 }
 
 type FormValues = {
-  title: string
   label: string
   body: string
   startAt: string | null
@@ -37,7 +37,6 @@ export const QUERY = graphql`
     step: node(id: $stepId) {
       id
       ... on OtherStep {
-        title
         label
         body
         timeRange {
@@ -77,6 +76,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const { operationType, setOperationType } = useOtherStep()
   const isEditing = operationType === 'EDIT'
 
+  const createStepLink = `/admin-next/project/${project.id}/create-step`
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -85,7 +85,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
-        href: `/admin-next/project/${project.id}/create-step`,
+        href: createStepLink,
       },
       {
         title: intl.formatMessage({ id: 'custom-step' }),
@@ -105,9 +105,8 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   }, [])
 
   const getInitialValues = (): FormValues => {
-    const isEnabledLabels = step.enabled ? ['published'] : ['draft']
+    const isEnabledLabels = step.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT]
     return {
-      title: step.title ?? '',
       label: step.label ?? '',
       body: step.body ?? '',
       startAt: step.timeRange?.startAt ?? null,
@@ -126,15 +125,14 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   })
 
   const { handleSubmit, formState, control } = formMethods
-  const { isSubmitting, isValid } = formState
+  const { isSubmitting } = formState
   const onSubmit = async (values: FormValues) => {
     const input = {
       ...values,
       stepId,
-      title: values.label, // since title is supposed to be merged within the description we set the title with the label instead until the API is changed
       startAt: values?.startAt,
       endAt: values?.endAt,
-      isEnabled: values.isEnabled.labels?.[0] === 'published' ?? false,
+      isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
     }
 
     try {
@@ -142,11 +140,14 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       if (!response.updateOtherStep) {
         return mutationErrorToast(intl)
       }
-      setOperationType('EDIT')
       toast({
         variant: 'success',
         content: intl.formatMessage({ id: 'global.saved' }),
       })
+      if (!isEditing) {
+        return (window.location.href = `/admin-next/project/${project?.id}`)
+      }
+      setOperationType('EDIT')
     } catch (error) {
       return mutationErrorToast(intl)
     }
@@ -162,30 +163,30 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       <Text fontWeight={600} color="blue.800" fontSize={4} mb={8}>
         {intl.formatMessage({ id: 'customize-your-custom-step' })}
       </Text>
-      <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
-        <FormControl
-          mb={6}
-          name="label"
-          control={control}
-          isRequired
-          onFocus={() => {
-            setHelpMessage('step.create.label.helpText')
-          }}
-          onBlur={() => {
-            setHelpMessage(null)
-          }}
-        >
-          <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-          <FieldInput
-            id="label"
+      <FormProvider {...formMethods}>
+        <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>
+          <FormControl
+            mb={6}
             name="label"
             control={control}
-            type="text"
-            placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-          />
-        </FormControl>
+            isRequired
+            onFocus={() => {
+              setHelpMessage('step.create.label.helpText')
+            }}
+            onBlur={() => {
+              setHelpMessage(null)
+            }}
+          >
+            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+            <FieldInput
+              id="label"
+              name="label"
+              control={control}
+              type="text"
+              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+            />
+          </FormControl>
 
-        <FormProvider {...formMethods}>
           <TextEditor
             name="body"
             label={intl.formatMessage({ id: 'step-description' })}
@@ -195,73 +196,55 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               submit: isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'global.add' }),
             }}
           />
-          <StepDurationInput canChooseDurationType={false} />
-        </FormProvider>
-
-        <Accordion color={CapUIAccordionColor.Transparent}>
-          <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
-            <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
-            <Accordion.Panel>
-              <FormControl name="metaDescription" control={control}>
-                <FormLabel htmlFor="metaDescription" label={intl.formatMessage({ id: 'global.meta.description' })} />
-                <FieldInput id="metaDescription" name="metaDescription" control={control} type="textarea" />
-              </FormControl>
-              <FormControl name="customCode" control={control}>
-                <FormLabel
-                  htmlFor="customCode"
-                  label={intl.formatMessage({
-                    id: 'admin.customcode',
-                  })}
-                />
-                <FieldInput
-                  id="customCode"
-                  name="customCode"
-                  control={control}
-                  type="textarea"
-                  placeholder="<style></style>"
-                  resize="vertical"
-                />
-              </FormControl>
-            </Accordion.Panel>
-          </Accordion.Item>
-        </Accordion>
-
-        <FormControl name="isEnabled" control={control}>
-          <FormLabel htmlFor="isEnabled" label={intl.formatMessage({ id: 'admin.fields.project.published_at' })} />
-          <FieldInput
-            id="isEnabled"
-            name="isEnabled"
-            control={control}
-            type="radio"
-            choices={[
-              {
-                id: 'published',
-                label: intl.formatMessage({ id: 'global.published' }),
-                useIdAsValue: true,
-              },
-              {
-                id: 'draft',
-                label: intl.formatMessage({ id: 'global-draft' }),
-                useIdAsValue: true,
-              },
-            ]}
+          <StepDurationInput
+            canChooseDurationType={false}
+            startAt={{
+              required: false,
+            }}
           />
-        </FormControl>
-
-        <Flex>
-          <Button variantSize="big" variant="primary" type="submit" mr={4} isLoading={isSubmitting} disabled={!isValid}>
-            {isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'add-the-step' })}
-          </Button>
-          <Button
-            variantSize="big"
-            variant="secondary"
-            disabled={isSubmitting}
-            onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
-          >
-            {intl.formatMessage({ id: 'global.back' })}
-          </Button>
-        </Flex>
-      </Box>
+          <Accordion color={CapUIAccordionColor.Transparent}>
+            <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
+              <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
+              <Accordion.Panel>
+                <FormControl name="metaDescription" control={control}>
+                  <FormLabel htmlFor="metaDescription" label={intl.formatMessage({ id: 'global.meta.description' })} />
+                  <FieldInput id="metaDescription" name="metaDescription" control={control} type="textarea" />
+                </FormControl>
+                <FormControl name="customCode" control={control}>
+                  <FormLabel
+                    htmlFor="customCode"
+                    label={intl.formatMessage({
+                      id: 'admin.customcode',
+                    })}
+                  />
+                  <FieldInput
+                    id="customCode"
+                    name="customCode"
+                    control={control}
+                    type="textarea"
+                    placeholder="<style></style>"
+                    resize="vertical"
+                  />
+                </FormControl>
+              </Accordion.Panel>
+            </Accordion.Item>
+          </Accordion>
+          <PublicationInput fieldName="isEnabled" />
+          <Flex>
+            <Button variantSize="big" variant="primary" type="submit" mr={4} isLoading={isSubmitting}>
+              {isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'add-the-step' })}
+            </Button>
+            <Button
+              variantSize="big"
+              variant="secondary"
+              disabled={isSubmitting}
+              onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
+            >
+              {intl.formatMessage({ id: 'global.back' })}
+            </Button>
+          </Flex>
+        </Box>
+      </FormProvider>
     </Box>
   )
 }

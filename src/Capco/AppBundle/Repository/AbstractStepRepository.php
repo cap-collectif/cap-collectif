@@ -80,14 +80,14 @@ class AbstractStepRepository extends EntityRepository
         ;
     }
 
-    public function findOneByProjectAndStepTitle(Project $project, string $stepTitle): AbstractStep
+    public function findOneByProjectAndStepLabel(Project $project, string $stepLabel): AbstractStep
     {
         $qb = $this->createQueryBuilder('asStep')
             ->join('asStep.projectAbstractStep', 'paStep')
-            ->where('asStep.title = :title')
+            ->where('asStep.label = :label')
             ->andWhere('paStep.project = :project')
             ->setParameter('project', $project)
-            ->setParameter('title', $stepTitle)
+            ->setParameter('label', $stepLabel)
         ;
 
         return $qb->getQuery()->getSingleResult();

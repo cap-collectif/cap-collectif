@@ -176,13 +176,13 @@ export default new (class AdminCollectStepPage {
   }
 
   checkListView() {
-    cy.get('#mainView-LIST').check({ force: true })
+    cy.get('#form\\.isListViewEnabled').check({ force: true })
   }
   checkGridView() {
-    cy.get('#mainView-GRID').check({ force: true })
+    cy.get('#form\\.isGridViewEnabled').check({ force: true })
   }
   checkMapView() {
-    cy.get('#mainView-MAP').check({ force: true })
+    cy.get('#form\\.isMapViewEnabled').check({ force: true })
   }
 
   fillMapInfos(config: MapConfig) {

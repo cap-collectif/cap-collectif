@@ -2,7 +2,6 @@ import {
   CapUIBorder,
   CapUISpotIcon,
   CapUISpotIconSize,
-  Checkbox,
   Flex,
   FormLabel,
   SpotIcon,
@@ -12,10 +11,10 @@ import {
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UseFormReturn } from 'react-hook-form'
 import * as React from 'react'
-import { EnabledEnum, MainViewEnum, zoomLevels } from '../CollectStep/CollectStepForm'
+import { MainViewEnum, zoomLevels } from '../CollectStep/CollectStepForm'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { ProposalStepOptionnalAccordion_step$key } from '../../../__generated__/ProposalStepOptionnalAccordion_step.graphql'
+import { ProposalStepOptionnalAccordion_step$key } from '@relay/ProposalStepOptionnalAccordion_step.graphql'
 import { useEffect } from 'react'
 import { addRequiredInfo } from '../CollectStep/ProposalFormForm.utils'
 import { FormKeyType } from '../CollectStep/CollectStepContext'
@@ -40,8 +39,7 @@ const STEP_FRAGMENT = graphql`
 const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMethods, proposalFormKey = 'form' }) => {
   const intl = useIntl()
   const step = useFragment(STEP_FRAGMENT, stepRef)
-  const { watch, setValue, control, setError, clearErrors, formState, trigger } = formMethods
-  const { errors } = formState
+  const { watch, setValue, control } = formMethods
 
   const isListViewEnabled = watch(`${proposalFormKey}.isListViewEnabled`)
   const isGridViewEnabled = watch(`${proposalFormKey}.isGridViewEnabled`)
@@ -50,18 +48,15 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
 
   const isCollectStep = step.__typename === 'CollectStep'
   const hasMainViewSelected = isListViewEnabled || isGridViewEnabled || isMapViewEnabled
+  const [mainViewError, setMainViewError] = React.useState(false);
 
   useEffect(() => {
     if (!hasMainViewSelected) {
-      setError(`${proposalFormKey}.isListViewEnabled`, {
-        type: 'custom',
-        message: intl.formatMessage({ id: 'please-select-main-view' }),
-      })
+      setMainViewError(true);
     } else {
-      clearErrors(`${proposalFormKey}.isListViewEnabled`)
-      trigger(`${proposalFormKey}.isListViewEnabled`)
+      setMainViewError(false);
     }
-  }, [hasMainViewSelected, setError, clearErrors, intl, trigger, proposalFormKey])
+  }, [hasMainViewSelected, setMainViewError]);
 
   useEffect(() => {
     const views = {
@@ -84,244 +79,248 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
     }
   }, [isListViewEnabled, isGridViewEnabled, isMapViewEnabled, mainView, setValue])
 
-  const getMainViewChoices = () => {
-    let options = []
-    if (isListViewEnabled) {
-      options.push({
-        id: MainViewEnum.LIST,
-        useIdAsValue: true,
-        label: intl.formatMessage({
-          id: 'collect.step.mainView.list',
-        }),
-      })
+  const mainViewChoices = [
+    {
+      id: MainViewEnum.LIST,
+      useIdAsValue: true,
+      label: intl.formatMessage({
+        id: 'collect.step.mainView.list',
+      }),
+      disabled: !isListViewEnabled
+    },
+    {
+      id: MainViewEnum.GRID,
+      useIdAsValue: true,
+      label: intl.formatMessage({
+        id: 'collect.step.mainView.grid',
+      }),
+      disabled: !isGridViewEnabled
+    },
+    {
+      id: MainViewEnum.MAP,
+      useIdAsValue: true,
+      label: intl.formatMessage({
+        id: 'collect.step.mainView.map',
+      }),
+      disabled: !isMapViewEnabled
     }
-    if (isGridViewEnabled) {
-      options.push({
-        id: MainViewEnum.GRID,
-        useIdAsValue: true,
-        label: intl.formatMessage({
-          id: 'collect.step.mainView.grid',
-        }),
-      })
-    }
-    if (isMapViewEnabled) {
-      options.push({
-        id: MainViewEnum.MAP,
-        useIdAsValue: true,
-        label: intl.formatMessage({
-          id: 'collect.step.mainView.map',
-        }),
-      })
-    }
-
-    return options
-  }
+  ]
 
   return (
     <>
-      <Flex mt={2} direction="row" gap={4}>
-        <Flex
-          direction="column"
-          gap={1}
-          borderRadius={CapUIBorder.Normal}
-          sx={{ cursor: 'pointer' }}
-          _hover={{
-            borderColor: !hasMainViewSelected ? 'red.500' : 'blue.500',
-            bg: !hasMainViewSelected ? '' : 'blue.100',
-          }}
-          alignItems="center"
-          width="120px"
-          height="140px"
-          borderWidth={1}
-          borderColor={!hasMainViewSelected ? 'red.500' : 'gray.200'}
-          justifyItems="center"
-        >
-          <SpotIcon name={CapUISpotIcon.TABLEAU} size={CapUISpotIconSize.Md} />
-          <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
-            {intl.formatMessage({
-              id: 'collect.step.mainView.list',
-            })}
-          </Text>
-          <Checkbox
-            id={`mainView-${MainViewEnum.LIST}`}
-            name={MainViewEnum.LIST}
-            value={MainViewEnum.LIST}
-            checked={isListViewEnabled}
-            onClick={() => {
-              setValue(`${proposalFormKey}.isListViewEnabled`, !isListViewEnabled)
-            }}
-          />
-        </Flex>
-        <Flex
-          direction="column"
-          gap={1}
-          borderRadius={CapUIBorder.Normal}
-          sx={{ cursor: 'pointer' }}
-          _hover={{
-            borderColor: !hasMainViewSelected ? 'red.500' : 'blue.500',
-            bg: !hasMainViewSelected ? '' : 'blue.100',
-          }}
-          alignItems="center"
-          width="120px"
-          height="140px"
-          borderWidth={1}
-          borderColor={!hasMainViewSelected ? 'red.500' : 'gray.200'}
-          justifyItems="center"
-        >
-          <SpotIcon name={CapUISpotIcon.VIGNETTE} size={CapUISpotIconSize.Md} />
-          <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
-            {intl.formatMessage({
-              id: 'collect.step.mainView.grid',
-            })}
-          </Text>
-          <Checkbox
-            id={`mainView-${MainViewEnum.GRID}`}
-            name={MainViewEnum.GRID}
-            value={MainViewEnum.GRID}
-            checked={isGridViewEnabled}
-            onClick={() => {
-              setValue(`${proposalFormKey}.isGridViewEnabled`, !isGridViewEnabled)
-            }}
-          />
-        </Flex>
-        {
-          <Flex
-            direction="row"
-            borderRadius={CapUIBorder.Normal}
-            sx={{ cursor: 'pointer' }}
-            _hover={{
-              borderColor: !hasMainViewSelected ? 'red.500' : 'blue.500',
-              bg: !hasMainViewSelected ? '' : 'blue.100',
-            }}
-            alignItems="flex-start"
-            width={isMapViewEnabled ? 'auto' : '120px'}
-            height={isMapViewEnabled ? 'auto' : '140px'}
-            borderWidth={1}
-            borderColor={!hasMainViewSelected ? 'red.500' : 'gray.200'}
-            justifyItems="center"
-            gap={4}
-          >
-            <Flex direction="column" width={isMapViewEnabled ? '64px' : '100%'} alignItems="center" gap={1}>
-              <SpotIcon name={CapUISpotIcon.CARTE} size={CapUISpotIconSize.Md} />
-              <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
-                {intl.formatMessage({
-                  id: 'collect.step.mainView.map',
-                })}
-              </Text>
-              <Checkbox
-                id={`mainView-${MainViewEnum.MAP}`}
-                name={MainViewEnum.MAP}
-                value={MainViewEnum.MAP}
-                checked={isMapViewEnabled}
-                onClick={() => {
-                  setValue(`${proposalFormKey}.isMapViewEnabled`, !isMapViewEnabled)
-                  addRequiredInfo('usingAddress', setValue, proposalFormKey as FormKeyType)
-                }}
-              />
-            </Flex>
-            {isMapViewEnabled && (
-              <Flex direction={'column'} width="230px" p={2} gap={0} height="100%" sx={{ cursor: 'default' }}>
-                <FormControl
-                  name={`${proposalFormKey}.mapCenter.formatted`}
-                  control={control}
-                  sx={{
-                    position: 'relative',
-                    ul: {
-                      position: 'absolute',
-                      top: '54px',
-                      zIndex: 1,
-                    },
+      {
+        isCollectStep && (
+          <>
+            <FormLabel label={intl.formatMessage({ id: 'proposal-displays-mode' })} />
+            <Flex mt={2} direction="row" gap={4}>
+              <FormControl name={`${proposalFormKey}.isListViewEnabled`} control={control} width={"auto"}>
+                <Flex
+                  direction="column"
+                  gap={1}
+                  borderRadius={CapUIBorder.Normal}
+                  sx={{ cursor: 'pointer' }}
+                  _hover={{
+                    borderColor: !hasMainViewSelected ? 'red.500' : 'blue.500',
+                    bg: !hasMainViewSelected ? '' : 'blue.100',
                   }}
-                  mb={1}
+                  alignItems="center"
+                  width="120px"
+                  height="140px"
+                  borderWidth={1}
+                  borderColor={!hasMainViewSelected ? 'red.500' : 'gray.200'}
+                  justifyItems="center"
+                  as="label"
                 >
-                  <FormLabel
-                    label={intl.formatMessage({
-                      id: 'initial-position-of-the-map',
+                  <SpotIcon name={CapUISpotIcon.TABLEAU} size={CapUISpotIconSize.Md} />
+                  <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
+                    {intl.formatMessage({
+                      id: 'collect.step.mainView.list',
                     })}
-                  />
+                  </Text>
+
                   <FieldInput
-                    data-cy="map_address"
-                    name={`${proposalFormKey}.mapCenter.formatted`}
-                    type="address"
+                    type="checkbox"
+                    name={`${proposalFormKey}.isListViewEnabled`}
                     control={control}
-                    getAddress={add => {
-                      setValue(`${proposalFormKey}.mapCenter.json`, JSON.stringify([add]))
-                    }}
-                    getPosition={(lat: number, lng: number) => {
-                      setValue(`${proposalFormKey}.mapCenter.lat`, lat)
-                      setValue(`${proposalFormKey}.mapCenter.lng`, lng)
-                    }}
-                  />
-                </FormControl>
-                <Flex direction="row" gap={2}>
-                  <FormControl name={`${proposalFormKey}.mapCenter.lat`} control={control} mb={1}>
-                    <FormLabel
-                      label={intl.formatMessage({
-                        id: 'proposal_form.lat_map',
-                      })}
-                    />
-                    <FieldInput name={`${proposalFormKey}.mapCenter.lat`} type="number" control={control} />
-                  </FormControl>
-                  <FormControl name={`${proposalFormKey}.mapCenter.lng`} control={control} mb={1}>
-                    <FormLabel
-                      label={intl.formatMessage({
-                        id: 'proposal_form.lng_map',
-                      })}
-                    />
-                    <FieldInput name={`${proposalFormKey}.mapCenter.lng`} type="number" control={control} />
-                  </FormControl>
+                    id={`${proposalFormKey}.isListViewEnabled`}
+                  >
+                  </FieldInput>
                 </Flex>
-                <FormControl name={`${proposalFormKey}.zoomMap`} control={control}>
-                  <FormLabel
-                    label={intl.formatMessage({
-                      id: 'proposal_form.zoom',
+              </FormControl>
+
+              <FormControl name={`${proposalFormKey}.isGridViewEnabled`} control={control} width={"auto"}>
+                <Flex
+                  direction="column"
+                  gap={1}
+                  borderRadius={CapUIBorder.Normal}
+                  sx={{ cursor: 'pointer' }}
+                  _hover={{
+                    borderColor: !hasMainViewSelected ? 'red.500' : 'blue.500',
+                    bg: !hasMainViewSelected ? '' : 'blue.100',
+                  }}
+                  alignItems="center"
+                  width="120px"
+                  height="140px"
+                  borderWidth={1}
+                  borderColor={!hasMainViewSelected ? 'red.500' : 'gray.200'}
+                  justifyItems="center"
+                  as="label"
+                >
+                  <SpotIcon name={CapUISpotIcon.VIGNETTE} size={CapUISpotIconSize.Md} />
+                  <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
+                    {intl.formatMessage({
+                      id: 'collect.step.mainView.grid',
                     })}
-                  />
+                  </Text>
                   <FieldInput
-                    // @ts-expect-error MAJ DS Props
-                    id="zoomMap"
-                    menuPortalTarget={undefined}
-                    name={`${proposalFormKey}.zoomMap`}
-                    type="select"
+                    type="checkbox"
+                    name={`${proposalFormKey}.isGridViewEnabled`}
                     control={control}
-                    options={zoomLevels.map(level => {
-                      return {
-                        label: `${level.id} ${
-                          level.name
-                            ? `- ${intl.formatMessage({
-                                id: level.name,
-                              })}`
-                            : ''
-                        }`,
-                        value: String(level.id),
-                      }
-                    })}
-                  />
-                </FormControl>
-              </Flex>
-            )}
-          </Flex>
-        }
-      </Flex>
-
-      {/** @ts-ignore errors not typed on react-hook-form */}
-      {errors[proposalFormKey]?.isListViewEnabled && ( // @ts-ignore errors not typed on react-hook-form
-        <Text color="red.500">{errors[proposalFormKey].isListViewEnabled.message}</Text>
-      )}
-
-      {hasMainViewSelected && (
-        <FormControl name="mainView" control={control} isRequired>
-          <FormLabel label={intl.formatMessage({ id: 'default.view' })} />
-          <FieldInput
-            type="radio"
-            name="mainView"
-            id="mainView"
-            control={control}
-            checked={mainView}
-            choices={getMainViewChoices()}
-          />
-        </FormControl>
-      )}
+                    id={`${proposalFormKey}.isGridViewEnabled`}
+                  >
+                  </FieldInput>
+                </Flex>
+              </FormControl>
+              {
+                <Flex
+                  direction="row"
+                  borderRadius={CapUIBorder.Normal}
+                  sx={{ cursor: 'pointer' }}
+                  _hover={{
+                    borderColor: !hasMainViewSelected ? 'red.500' : 'blue.500',
+                    bg: !hasMainViewSelected ? '' : 'blue.100',
+                  }}
+                  alignItems="flex-start"
+                  width={isMapViewEnabled ? 'auto' : '120px'}
+                  height={isMapViewEnabled ? 'auto' : '140px'}
+                  borderWidth={1}
+                  borderColor={!hasMainViewSelected ? 'red.500' : 'gray.200'}
+                  justifyItems="center"
+                  gap={4}
+                >
+                  <FormControl name={`${proposalFormKey}.isMapViewEnabled`} control={control}>
+                    <Flex direction="column" width={isMapViewEnabled ? '64px' : '100%'} alignItems="center" gap={1} as="label">
+                      <SpotIcon name={CapUISpotIcon.CARTE} size={CapUISpotIconSize.Md} />
+                      <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
+                        {intl.formatMessage({
+                          id: 'collect.step.mainView.map',
+                        })}
+                      </Text>
+                      <FieldInput
+                        type="checkbox"
+                        name={`${proposalFormKey}.isMapViewEnabled`}
+                        control={control}
+                        id={`${proposalFormKey}.isMapViewEnabled`}
+                        onChange={() => {
+                          addRequiredInfo('usingAddress', setValue, proposalFormKey as FormKeyType)
+                        }}
+                      >
+                      </FieldInput>
+                    </Flex>
+                  </FormControl>
+                  {isMapViewEnabled && (
+                    <Flex direction={'column'} width="230px" p={2} gap={0} height="100%" sx={{ cursor: 'default' }}>
+                      <FormControl
+                        name={`${proposalFormKey}.mapCenter.formatted`}
+                        control={control}
+                        sx={{
+                          position: 'relative',
+                          ul: {
+                            position: 'absolute',
+                            top: '54px',
+                            zIndex: 1,
+                          },
+                        }}
+                        mb={1}
+                      >
+                        <FormLabel
+                          label={intl.formatMessage({
+                            id: 'initial-position-of-the-map',
+                          })}
+                        />
+                        <FieldInput
+                          data-cy="map_address"
+                          name={`${proposalFormKey}.mapCenter.formatted`}
+                          type="address"
+                          control={control}
+                          getAddress={add => {
+                            setValue(`${proposalFormKey}.mapCenter.json`, JSON.stringify([add]))
+                          }}
+                          getPosition={(lat: number, lng: number) => {
+                            setValue(`${proposalFormKey}.mapCenter.lat`, lat)
+                            setValue(`${proposalFormKey}.mapCenter.lng`, lng)
+                          }}
+                        />
+                      </FormControl>
+                      <Flex direction="row" gap={2}>
+                        <FormControl name={`${proposalFormKey}.mapCenter.lat`} control={control} mb={1}>
+                          <FormLabel
+                            label={intl.formatMessage({
+                              id: 'proposal_form.lat_map',
+                            })}
+                          />
+                          <FieldInput name={`${proposalFormKey}.mapCenter.lat`} type="number" control={control} />
+                        </FormControl>
+                        <FormControl name={`${proposalFormKey}.mapCenter.lng`} control={control} mb={1}>
+                          <FormLabel
+                            label={intl.formatMessage({
+                              id: 'proposal_form.lng_map',
+                            })}
+                          />
+                          <FieldInput name={`${proposalFormKey}.mapCenter.lng`} type="number" control={control} />
+                        </FormControl>
+                      </Flex>
+                      <FormControl name={`${proposalFormKey}.zoomMap`} control={control}>
+                        <FormLabel
+                          label={intl.formatMessage({
+                            id: 'proposal_form.zoom',
+                          })}
+                        />
+                        <FieldInput
+                          // @ts-expect-error MAJ DS Props
+                          id="zoomMap"
+                          menuPortalTarget={undefined}
+                          name={`${proposalFormKey}.zoomMap`}
+                          type="select"
+                          control={control}
+                          options={zoomLevels.map(level => {
+                            return {
+                              label: `${level.id} ${
+                                level.name
+                                  ? `- ${intl.formatMessage({
+                                    id: level.name,
+                                  })}`
+                                  : ''
+                              }`,
+                              value: String(level.id),
+                            }
+                          })}
+                        />
+                      </FormControl>
+                    </Flex>
+                  )}
+                </Flex>
+              }
+            </Flex>
+            {
+              mainViewError && (
+                <Text color="red.500">{intl.formatMessage({ id: 'please-select-main-view' })}</Text>
+              )
+            }
+            <FormControl name="mainView" control={control} isRequired>
+              <FormLabel label={intl.formatMessage({ id: 'default.view' })} />
+              <FieldInput
+                type="radio"
+                name="mainView"
+                id="mainView"
+                control={control}
+                checked={mainView}
+                choices={mainViewChoices}
+              />
+            </FormControl>
+          </>
+        )
+      }
       <FormControl name="metaDescription" control={control}>
         <FormLabel
           htmlFor="metaDescription"
@@ -398,32 +397,6 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
           </FieldInput>
         </FormControl>
       )}
-
-      <FormControl name="enabled" control={control}>
-        <FormLabel label={intl.formatMessage({ id: 'global.publication' })} />
-        <FieldInput
-          type="radio"
-          name="enabled"
-          id="enabled"
-          control={control}
-          choices={[
-            {
-              id: EnabledEnum.PUBLISHED,
-              useIdAsValue: true,
-              label: intl.formatMessage({
-                id: 'admin.fields.step.is_enabled',
-              }),
-            },
-            {
-              id: EnabledEnum.DRAFT,
-              useIdAsValue: true,
-              label: intl.formatMessage({
-                id: 'admin.fields.proposal.state.choices.draft',
-              }),
-            },
-          ]}
-        />
-      </FormControl>
     </>
   )
 }

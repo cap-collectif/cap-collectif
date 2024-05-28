@@ -103,6 +103,7 @@ export const features: FeatureToggles = {
   organizations: false,
   moderation_comment: false,
   online_help: false,
+  multi_consultations: false,
   full_proposal_card: false,
   new_navbar: false,
 }

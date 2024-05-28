@@ -16,8 +16,6 @@ import TextEditor from '@components/Form/TextEditor/TextEditor'
 import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalStepVoteTabsForm'
 import ProposalStepRequirementsTabs from '@components/Requirements/ProposalStepRequirementsTabs'
 import RequirementsTabsSkeleton from '@components/Requirements/RequirementsTabsSkeleton'
-import SelectStepStatusesList, { getStatusesInputList } from '@components/Steps/SelectStep/SelectStepStatusesList'
-import { SelectStepStatusesList_step$key } from '@relay/SelectStepStatusesList_step.graphql'
 import { getRequirementsInput, RequirementsFormValues } from '@components/Requirements/Requirements'
 import { mutationErrorToast } from '@utils/mutation-error-toast'
 import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
@@ -29,6 +27,8 @@ import { ProposalStepRequirementsTabs_proposalStep$key } from '@relay/ProposalSt
 import ProposalStepOptionnalAccordion from '../ProposalStep/ProposalStepOptionnalAccordion'
 import { onBack } from '@components/Steps/utils'
 import { useSelectionStep } from './SelectionStepContext'
+import ProposalStepStatuses, { getStatusesInputList } from '@components/Steps/ProposalStep/ProposalStepStatuses'
+import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
 
 export interface SelectStepFormProps {
@@ -36,7 +36,6 @@ export interface SelectStepFormProps {
   setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
 }
 type StepTypeDurationTypeUnion = 'CUSTOM' | 'TIMELESS'
-type EnabledUnion = 'PUBLISHED' | 'DRAFT'
 export type FormValues = {
   id: string
   label: string
@@ -98,6 +97,7 @@ const SELECTION_QUERY = graphql`
     step: node(id: $stepId) {
       id
       ... on SelectionStep {
+        subType
         title
         body
         label
@@ -122,7 +122,6 @@ const SELECTION_QUERY = graphql`
         }
         enabled
         allowingProgressSteps
-        ...SelectStepStatusesList_step
         form {
           id
           zoomMap
@@ -144,6 +143,13 @@ const SELECTION_QUERY = graphql`
           title
           canEdit
           adminAlphaUrl
+          steps {
+            __typename
+            id
+            ... on SelectionStep {
+              allowingProgressSteps
+            }
+          }
         }
         voteType
         votesMin
@@ -173,7 +179,7 @@ const SELECTION_QUERY = graphql`
       }
       ...ProposalStepOptionnalAccordion_step
     }
-    ...SelectStepStatusesList_query
+    ...ProposalStepStatuses_query
     siteColors {
       keyname
       value
@@ -184,34 +190,11 @@ const SELECTION_QUERY = graphql`
     }
   }
 `
-export const zoomLevels = [
-  { id: 1, name: 'map.zoom.world' },
-  { id: 2 },
-  { id: 3 },
-  { id: 4 },
-  { id: 5, name: 'map.zoom.mainland' },
-  { id: 6 },
-  { id: 7 },
-  { id: 8 },
-  { id: 9 },
-  { id: 10, name: 'map.zoom.city' },
-  { id: 11 },
-  { id: 12 },
-  { id: 13 },
-  { id: 14 },
-  { id: 15, name: 'map.zoom.street' },
-  { id: 16 },
-  { id: 17 },
-  { id: 18, name: 'map.zoom.building' },
-]
 export const StepDurationTypeEnum: Record<StepTypeDurationTypeUnion, StepTypeDurationTypeUnion> = {
   CUSTOM: 'CUSTOM',
   TIMELESS: 'TIMELESS',
 } as const
-export const EnabledEnum: Record<EnabledUnion, EnabledUnion> = {
-  PUBLISHED: 'PUBLISHED',
-  DRAFT: 'DRAFT',
-} as const
+
 export const MainViewEnum: Record<MainView, MainView> = {
   GRID: 'GRID',
   LIST: 'LIST',
@@ -234,6 +217,12 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
   const { operationType, setOperationType } = useSelectionStep()
   const isEditing = operationType === 'EDIT'
 
+  const createStepLink = `/admin-next/project/${project?.id}/create-step`
+
+  const hasSelectionStepsWithAllowingProgressSteps = project?.steps?.some(step => {
+    return step.__typename === 'SelectionStep' && step.allowingProgressSteps === true && step.id !== stepId
+  })
+
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -242,7 +231,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
       },
       {
         title: intl.formatMessage({ id: 'add-step' }),
-        href: `/project/${project?.id}/create-step`,
+        href: createStepLink,
       },
       {
         title: intl.formatMessage({ id: 'select-step' }),
@@ -311,6 +300,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           publishedVoteDate: values.publishedVoteDate,
           voteType: values.voteType,
           secretBallot: values.secretBallot,
+          allowingProgressSteps: values.allowingProgressSteps,
           ...getRequirementsInput(values),
         }
 
@@ -322,10 +312,16 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
         if (!UpdateSelectionStepMutation$data.updateSelectionStep) {
           return mutationErrorToast(intl)
         }
+
         toast({
           variant: 'success',
           content: intl.formatMessage({ id: 'admin.update.successful' }),
         })
+
+        if (!isEditing) {
+          return (window.location.href = `/admin-next/project/${project?.id}`)
+        }
+
         setOperationType('EDIT')
       }
     } catch {
@@ -345,7 +341,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
       }),
     ),
   })
-  const { handleSubmit, formState, control, setValue } = formMethods
+  const { handleSubmit, formState, control } = formMethods
   const { isSubmitting, isValid } = formState
 
   return (
@@ -353,29 +349,29 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
       <Text fontWeight={600} color="blue.800" fontSize={4}>
         {intl.formatMessage({ id: 'customize-your-select-step' })}
       </Text>
-      <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)} gap={6}>
-        <FormControl
-          name="label"
-          control={control}
-          isRequired
-          mb={6}
-          onFocus={() => {
-            setHelpMessage('step.create.label.helpText')
-          }}
-          onBlur={() => {
-            setHelpMessage(null)
-          }}
-        >
-          <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
-          <FieldInput
-            id="label"
+      <FormProvider {...formMethods}>
+        <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)} gap={6}>
+          <FormControl
             name="label"
             control={control}
-            type="text"
-            placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
-          />
-        </FormControl>
-        <FormProvider {...formMethods}>
+            isRequired
+            mb={6}
+            onFocus={() => {
+              setHelpMessage('step.create.label.helpText')
+            }}
+            onBlur={() => {
+              setHelpMessage(null)
+            }}
+          >
+            <FormLabel htmlFor="label" label={intl.formatMessage({ id: 'step-label-name' })} />
+            <FieldInput
+              id="label"
+              name="label"
+              control={control}
+              type="text"
+              placeholder={intl.formatMessage({ id: 'step-label-name-placeholder' })}
+            />
+          </FormControl>
           <TextEditor
             name="body"
             label={intl.formatMessage({ id: 'step-description' })}
@@ -384,181 +380,189 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
             advancedEditor
           />
           <StepDurationInput />
-        </FormProvider>
-
-        <Box>
-          <Accordion color={CapUIAccordionColor.Transparent} allowMultiple>
-            <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>
-              <Accordion.Button>{intl.formatMessage({ id: 'vote-capitalize' })}</Accordion.Button>
-              <Accordion.Panel>
-                <ProposalStepVoteTabsForm defaultLocale={defaultLocale} formMethods={formMethods} />
-              </Accordion.Panel>
-            </Accordion.Item>
-            <Accordion.Item
-              id={intl.formatMessage({ id: 'required-infos-to-participate' })}
-              onMouseEnter={() => {
-                setHelpMessage('step.create.requirements.helpText')
-              }}
-              onMouseLeave={() => setHelpMessage(null)}
-            >
-              <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
-              <Accordion.Panel>
-                <React.Suspense fallback={<RequirementsTabsSkeleton />}>
-                  <ProposalStepRequirementsTabs
-                    proposalStep={step as ProposalStepRequirementsTabs_proposalStep$key}
-                    formMethods={formMethods}
-                  />
-                </React.Suspense>
-              </Accordion.Panel>
-            </Accordion.Item>
-            <Accordion.Item id={intl.formatMessage({ id: 'status.plural' })}>
-              <Accordion.Button>{intl.formatMessage({ id: 'status.plural' })}</Accordion.Button>
-              <Accordion.Panel>
-                <SelectStepStatusesList
-                  formMethods={formMethods}
-                  step={step as SelectStepStatusesList_step$key}
-                  query={query}
-                  // @ts-ignore
-                  setValue={setValue}
-                />
-              </Accordion.Panel>
-            </Accordion.Item>
-            <Accordion.Item id={intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}>
-              <Accordion.Button>{intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}</Accordion.Button>
-              <Accordion.Panel>
-                <FormControl name="allowAuthorsToAddNews" control={control} mb={6}>
-                  <FormLabel
-                    htmlFor="allowAuthorsToAddNews"
-                    label={intl.formatMessage({ id: 'proposal-news-label' })}
-                  />
-                  <FieldInput id="allowAuthorsToAddNews" name="allowAuthorsToAddNews" control={control} type="checkbox">
-                    {intl.formatMessage({ id: 'admin.allow.proposal.news' })}
-                  </FieldInput>
-                </FormControl>
-                <FormControl name="allowingProgressSteps" control={control} mb={6}>
-                  <FormLabel
-                    htmlFor="allowingProgressSteps"
-                    label={intl.formatMessage({
-                      id: 'admin.field.step.label.allowingProgressSteps',
-                    })}
-                  />
-                  <FieldInput id="allowingProgressSteps" name="allowingProgressSteps" control={control} type="checkbox">
-                    {intl.formatMessage({
-                      id: 'admin.fields.step.allowingProgressSteps',
-                    })}
-                  </FieldInput>
-                </FormControl>
-                <FormControl name="defaultSort" control={control}>
-                  <FormLabel
-                    htmlFor="defaultSort"
-                    label={intl.formatMessage({
-                      id: 'admin_next.fields.step.default_sort',
-                    })}
-                  />
-                  <FieldInput
-                    name="defaultSort"
-                    control={control}
-                    type="select"
-                    options={[
-                      {
-                        label: intl.formatMessage({ id: 'global.random' }),
-                        value: 'RANDOM',
-                      },
-                      {
-                        label: intl.formatMessage({
-                          id: 'global.filter_f_comments',
-                        }),
-                        value: 'COMMENTS',
-                      },
-                      {
-                        label: intl.formatMessage({
-                          id: 'global.filter_f_last',
-                        }),
-                        value: 'LAST',
-                      },
-                      {
-                        label: intl.formatMessage({
-                          id: 'global.filter_f_old',
-                        }),
-                        value: 'OLD',
-                      },
-                      {
-                        label: intl.formatMessage({
-                          id: 'step.sort.votes',
-                        }),
-                        value: 'VOTES',
-                      },
-                      {
-                        label: intl.formatMessage({
-                          id: 'global.filter_f_least-votes',
-                        }),
-                        value: 'LEAST_VOTE',
-                      },
-                      {
-                        label: intl.formatMessage({
-                          id: 'global.filter_f_cheap',
-                        }),
-                        value: 'CHEAP',
-                      },
-                      {
-                        label: intl.formatMessage({
-                          id: 'global.filter_f_expensive',
-                        }),
-                        value: 'EXPENSIVE',
-                      },
-                    ]}
-                    defaultOptions
-                  />
-                </FormControl>
-                <FormControl name="defaultStatus" control={control}>
-                  <FormLabel
-                    htmlFor="defaultStatus"
-                    label={intl.formatMessage({
-                      id: 'admin.fields.step.default_status',
-                    })}
-                  />
-                  <FieldInput
-                    name="defaultStatus"
-                    control={control}
-                    type="select"
-                    options={step.statuses.map(status => ({
-                      label: status.name,
-                      value: status.id,
-                    }))}
-                    defaultOptions
-                  />
-                </FormControl>
-              </Accordion.Panel>
-            </Accordion.Item>
-            <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
-              <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
-              <Accordion.Panel gap={6}>
-                <ProposalStepOptionnalAccordion step={step} formMethods={formMethods} />
-              </Accordion.Panel>
-            </Accordion.Item>
-          </Accordion>
-          <Flex>
-            <Button
-              variantSize="big"
-              variant="primary"
-              type="submit"
-              mr={4}
-              isLoading={isSubmitting}
-              disabled={!isValid}
-            >
-              {isEditing ? intl.formatMessage({ id: 'global.save' }) : intl.formatMessage({ id: 'add-the-step' })}
-            </Button>
-            <Button
-              variantSize="big"
-              variant="secondary"
-              disabled={isSubmitting}
-              onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
-            >
-              {intl.formatMessage({ id: 'global.back' })}
-            </Button>
-          </Flex>
+          <Box>
+            <Accordion color={CapUIAccordionColor.Transparent} allowMultiple>
+              {step.subType === 'VOTE' && (
+                <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>
+                  <Accordion.Button>{intl.formatMessage({ id: 'vote-capitalize' })}</Accordion.Button>
+                  <Accordion.Panel>
+                    <ProposalStepVoteTabsForm defaultLocale={defaultLocale} formMethods={formMethods} />
+                  </Accordion.Panel>
+                </Accordion.Item>
+              )}
+              <Accordion.Item
+                id={intl.formatMessage({ id: 'required-infos-to-participate' })}
+                onMouseEnter={() => {
+                  setHelpMessage('step.create.requirements.helpText')
+                }}
+                onMouseLeave={() => setHelpMessage(null)}
+              >
+                <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
+                <Accordion.Panel>
+                  <React.Suspense fallback={<RequirementsTabsSkeleton />}>
+                    <ProposalStepRequirementsTabs
+                      proposalStep={step as ProposalStepRequirementsTabs_proposalStep$key}
+                      formMethods={formMethods}
+                    />
+                  </React.Suspense>
+                </Accordion.Panel>
+              </Accordion.Item>
+              <Accordion.Item id={intl.formatMessage({ id: 'status.plural' })}>
+                <Accordion.Button>{intl.formatMessage({ id: 'status.plural' })}</Accordion.Button>
+                <Accordion.Panel>
+                  <ProposalStepStatuses formMethods={formMethods} query={query} />
+                </Accordion.Panel>
+              </Accordion.Item>
+              <Accordion.Item id={intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}>
+                <Accordion.Button>{intl.formatMessage({ id: 'admin.fields.proposal.group_content' })}</Accordion.Button>
+                <Accordion.Panel>
+                  <FormControl name="allowAuthorsToAddNews" control={control} mb={6}>
+                    <FormLabel
+                      htmlFor="allowAuthorsToAddNews"
+                      label={intl.formatMessage({ id: 'proposal-news-label' })}
+                    />
+                    <FieldInput
+                      id="allowAuthorsToAddNews"
+                      name="allowAuthorsToAddNews"
+                      control={control}
+                      type="checkbox"
+                    >
+                      {intl.formatMessage({ id: 'admin.allow.proposal.news' })}
+                    </FieldInput>
+                  </FormControl>
+                  {!hasSelectionStepsWithAllowingProgressSteps && (
+                    <FormControl name="allowingProgressSteps" control={control} mb={6}>
+                      <FormLabel
+                        htmlFor="allowingProgressSteps"
+                        label={intl.formatMessage({
+                          id: 'admin.field.step.label.allowingProgressSteps',
+                        })}
+                      />
+                      <FieldInput
+                        id="allowingProgressSteps"
+                        name="allowingProgressSteps"
+                        control={control}
+                        type="checkbox"
+                      >
+                        {intl.formatMessage({
+                          id: 'admin.fields.step.allowingProgressSteps',
+                        })}
+                      </FieldInput>
+                    </FormControl>
+                  )}
+                  <FormControl name="defaultSort" control={control}>
+                    <FormLabel
+                      htmlFor="defaultSort"
+                      label={intl.formatMessage({
+                        id: 'admin_next.fields.step.default_sort',
+                      })}
+                    />
+                    <FieldInput
+                      name="defaultSort"
+                      control={control}
+                      type="select"
+                      options={[
+                        {
+                          label: intl.formatMessage({ id: 'global.random' }),
+                          value: 'RANDOM',
+                        },
+                        {
+                          label: intl.formatMessage({
+                            id: 'global.filter_f_comments',
+                          }),
+                          value: 'COMMENTS',
+                        },
+                        {
+                          label: intl.formatMessage({
+                            id: 'global.filter_f_last',
+                          }),
+                          value: 'LAST',
+                        },
+                        {
+                          label: intl.formatMessage({
+                            id: 'global.filter_f_old',
+                          }),
+                          value: 'OLD',
+                        },
+                        {
+                          label: intl.formatMessage({
+                            id: 'step.sort.votes',
+                          }),
+                          value: 'VOTES',
+                        },
+                        {
+                          label: intl.formatMessage({
+                            id: 'global.filter_f_least-votes',
+                          }),
+                          value: 'LEAST_VOTE',
+                        },
+                        {
+                          label: intl.formatMessage({
+                            id: 'global.filter_f_cheap',
+                          }),
+                          value: 'CHEAP',
+                        },
+                        {
+                          label: intl.formatMessage({
+                            id: 'global.filter_f_expensive',
+                          }),
+                          value: 'EXPENSIVE',
+                        },
+                      ]}
+                      defaultOptions
+                    />
+                  </FormControl>
+                  <FormControl name="defaultStatus" control={control}>
+                    <FormLabel
+                      htmlFor="defaultStatus"
+                      label={intl.formatMessage({
+                        id: 'admin.fields.step.default_status',
+                      })}
+                    />
+                    <FieldInput
+                      name="defaultStatus"
+                      control={control}
+                      type="select"
+                      options={step.statuses.map(status => ({
+                        label: status.name,
+                        value: status.id,
+                      }))}
+                      defaultOptions
+                    />
+                  </FormControl>
+                </Accordion.Panel>
+              </Accordion.Item>
+              <Accordion.Item id={intl.formatMessage({ id: 'optional-settings' })}>
+                <Accordion.Button>{intl.formatMessage({ id: 'optional-settings' })}</Accordion.Button>
+                <Accordion.Panel gap={6}>
+                  <ProposalStepOptionnalAccordion step={step} formMethods={formMethods} />
+                </Accordion.Panel>
+              </Accordion.Item>
+            </Accordion>
+            <PublicationInput />
+            <Flex>
+              <Button
+                variantSize="big"
+                variant="primary"
+                type="submit"
+                mr={4}
+                isLoading={isSubmitting}
+                disabled={!isValid}
+              >
+                {isEditing ? intl.formatMessage({ id: 'global.save' }) : intl.formatMessage({ id: 'add-the-step' })}
+              </Button>
+              <Button
+                variantSize="big"
+                variant="secondary"
+                disabled={isSubmitting}
+                onClick={() => onBack(project?.adminAlphaUrl, isEditing, stepId, intl)}
+              >
+                {intl.formatMessage({ id: 'global.back' })}
+              </Button>
+            </Flex>
+          </Box>
         </Box>
-      </Box>
+      </FormProvider>
     </Box>
   )
 }

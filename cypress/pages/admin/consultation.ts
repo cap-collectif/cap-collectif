@@ -31,7 +31,6 @@ export default new (class AdminConsultationPage {
     this.getSaveButton().click()
     cy.wait('@CreateOrUpdateConsultationMutation')
     cy.wait('@UpdateConsultationStepMutation')
-    cy.contains('consultation-saved')
   }
 
   fillLabel(text: string) {

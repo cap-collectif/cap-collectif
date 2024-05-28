@@ -40,3 +40,6 @@ InternalSelectionStep:
                 description: 'The main view : GRID, LIST or MAP'
             defaultStatus:
                 type: 'ProposalStepStatus'
+            subType:
+                type: 'SelectionStepSubTypes'
+                description: 'Either vote, analysis or result step.'
