@@ -83,9 +83,10 @@ const ProposalVoteConfirmationModal = ({
   const intl = useIntl()
   const viewer = useFragment(FRAGMENT, viewerFragment)
   const [verified, setVerified] = React.useState<boolean>(false)
+  const [invalid, setInvalid] = React.useState<boolean>(false)
   const [limitReached, setLimitReached] = React.useState<boolean>(false)
   const { goToNextStep, goToPreviousStep } = useMultiStepModal()
-  const { reset, handleSubmit, control, register, formState } = validationForm
+  const { reset, handleSubmit, control, formState } = validationForm
   const { isSubmitting } = formState
 
   const validateCode = async (value: $PropertyType<FormValues, 'code'>) => {
@@ -111,17 +112,11 @@ const ProposalVoteConfirmationModal = ({
         }
 
         if (response.verifyUserPhoneNumber?.errorCode === 'CODE_EXPIRED') {
-          setIsLoading(false)
-          return intl.formatMessage({
-            id: 'CODE_EXPIRED',
-          })
+          handleError(response.verifyUserPhoneNumber?.errorCode)
         }
 
         if (response.verifyUserPhoneNumber?.errorCode === 'CODE_NOT_VALID') {
-          setIsLoading(false)
-          return intl.formatMessage({
-            id: 'CODE_NOT_VALID',
-          })
+          handleError(response.verifyUserPhoneNumber?.errorCode)
         }
       } catch (e) {
         mutationErrorToast(intl)
@@ -129,6 +124,25 @@ const ProposalVoteConfirmationModal = ({
     }
 
     return true
+  }
+
+  const handleError = (errorCode: string) => {
+    setIsLoading(false)
+    reset({
+      code: '',
+    })
+    setInvalid(true)
+    return errorCode === 'CODE_EXPIRED'
+      ? intl.formatMessage({
+          id: 'CODE_EXPIRED',
+        })
+      : errorCode === 'CODE_NOT_VALID'
+      ? intl.formatMessage({
+          id: 'CODE_NOT_VALID',
+        })
+      : intl.formatMessage({
+          id: 'error.try.again',
+        })
   }
 
   const sendNewPhoneValidationCode = async () => {
@@ -145,11 +159,20 @@ const ProposalVoteConfirmationModal = ({
     }
   }
 
-  React.useEffect(() => {
-    reset({
-      code: 0,
-    })
-  }, [reset])
+  // ! This is required to prevent weird display and autofocus not working
+  // TODO: Update Modal
+  const focusInputRef = React.useCallback(node => {
+    setTimeout(() => {
+      if (node !== null) {
+        node.querySelector('input').focus()
+      }
+    }, 210)
+  }, [])
+
+  const onComplete = e => {
+    validateCode(e.target.value)
+  }
+
   return (
     <>
       <ResetCss>
@@ -179,17 +202,17 @@ const ProposalVoteConfirmationModal = ({
           </Text>
 
           <FormControl name="code" control={control} isRequired isDisabled={isSubmitting} align="center">
-            <FieldInput
-              control={control}
-              {...register('code', {
-                validate: {
-                  validateCode,
-                },
-              })}
-              type="codeInput"
-              name="code"
-              isVerified={verified}
-            />
+            {/* Extra div is required to pass the ref and fix display */}
+            <div ref={focusInputRef}>
+              <FieldInput
+                control={control}
+                type="codeInput"
+                name="code"
+                isVerified={verified}
+                isInvalid={invalid}
+                onChange={onComplete}
+              />
+            </div>
             {verified && (
               <Text
                 color="green.500"

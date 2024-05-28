@@ -87,6 +87,7 @@ describe('Proposal Vote Page', () => {
       ProposalVotePage.getVoterCards().should('have.length', 3)
     })
     it('Proposal should stay voted after user refresh the page', () => {
+      cy.task('disable:feature', 'new_vote_step')
       cy.directLoginAs('user')
       cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
       cy.interceptGraphQLOperation({ operationName: 'AddProposalVoteMutation' })

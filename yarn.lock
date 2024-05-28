@@ -3128,10 +3128,10 @@
   dependencies:
     react-places-autocomplete "^7.3.0"
 
-"@cap-collectif/ui@^1.10.1":
-  version "1.10.1"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.10.1.tgz#197a3906a2025b27a622630c4c06bca52018526d"
-  integrity sha512-JlR8IVa+xFHgExa+pnSgcgD+lWjDBrCbcYG4FNgQf1hz+CwXkKT5btZldhbRBOZLX5WblF0pbAZeYvzqLtx4yg==
+"@cap-collectif/ui@^1.10.2":
+  version "1.10.2"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.10.2.tgz#d9a76d474fae9b971929495c0202df148d75529d"
+  integrity sha512-y/bQt/ND6fLXLz8vqJvc0OdszyH5wDFinzcZ8cflIFnSqLExJ7UEo1bHlWjAUAHZUoO5X+WLmwEp9C7J52kfSg==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -3139,6 +3139,7 @@
     classnames "^2.3.1"
     deepmerge "^4.2.2"
     framer-motion "^4.1.17"
+    input-otp "^1.2.4"
     react-beautiful-dnd "^13.1.1"
     react-color "^2.19.3"
     react-dates "^21.8.0"
@@ -14639,6 +14640,11 @@ inline-style-prefixer@^2.0.5:
   dependencies:
     bowser "^1.0.0"
     hyphenate-style-name "^1.0.1"
+
+input-otp@^1.2.4:
+  version "1.2.4"
+  resolved "https://registry.yarnpkg.com/input-otp/-/input-otp-1.2.4.tgz#9834af8675ac72c7f1b7c010f181b3b4ffdd0f72"
+  integrity sha512-md6rhmD+zmMnUh5crQNSQxq3keBRYvE3odbr4Qb9g2NWzQv9azi+t1a3X4TBTbh98fsGHgEEJlzbe1q860uGCA==
 
 inquirer@^6.2.2:
   version "6.5.2"

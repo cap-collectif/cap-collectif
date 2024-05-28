@@ -147,7 +147,7 @@ const ProposalVoteSendSmsModal = ({ form, setIsLoading }: Props) => {
           </InputGroup>
           <Flex align="center">
             <FormControl name="consentSmsCommunication" control={control} isDisabled={isSubmitting}>
-              <FieldInput type="checkbox" name="consentSmsCommunication" control={control}>
+              <FieldInput id="consentSmsCommunication" type="checkbox" name="consentSmsCommunication" control={control}>
                 {intl.formatMessage(
                   {
                     id: 'i-would-like-to-receive-news-about-platform-projects',

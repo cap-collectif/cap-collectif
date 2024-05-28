@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import moment from 'moment'
 import { graphql, commitLocalUpdate, useFragment } from 'react-relay'
-import { ConnectionHandler, fetchQuery_DEPRECATED } from 'relay-runtime'
+import { ConnectionHandler, GraphQLTaggedNode, fetchQuery_DEPRECATED } from 'relay-runtime'
 import {
   Modal,
   Button,
@@ -160,7 +160,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
   const isVoteMin = useFeatureFlag('votes_min')
   // Create temp vote to display Proposal in ProposalsUserVotesTable
   const createTmpVote = React.useCallback(() => {
-    commitLocalUpdate(environment, store => {
+    commitLocalUpdate(environment as any, store => {
       const dataID = `client:newTmpVote:${proposal.id}`
       let newNode: any = store.get(dataID)
 
@@ -213,7 +213,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
     })
   }, [proposal.id, step.id, viewerIsConfirmedByEmail, token])
   const deleteTmpVote = React.useCallback(() => {
-    commitLocalUpdate(environment, store => {
+    commitLocalUpdate(environment as any, store => {
       const dataID = `client:newTmpVote:${proposal.id}`
       const stepProxy = store.get(step.id)
       if (!stepProxy) return
@@ -406,7 +406,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
   const validationForm = useForm<any>({
     mode: 'onChange',
     defaultValues: {
-      code: 0,
+      code: '',
     },
   })
 
@@ -418,6 +418,11 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
       ?.viewerMeetsTheRequirement || false
   const needToVerifyPhone = hasPhoneRequirements && (!hasFieldPhoneUnchanged || !hasViewerPhoneRequirementVerified)
   const allRequirementsMet = requirements?.every(requirement => requirement.viewerMeetsTheRequirement)
+
+  if (!showModal) {
+    return null
+  }
+
   return !allRequirementsMet ? (
     step.requirements ? (
       <ProposalVoteMultiModalContainer
@@ -491,11 +496,10 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
               variantSize="big"
               onClick={() => {
                 dispatch(submit(getFormName(step)))
-                fetchQuery_DEPRECATED(environment, refetchViewer, {
+                fetchQuery_DEPRECATED(environment, refetchViewer as GraphQLTaggedNode, {
                   stepId: step.id,
                   isAuthenticated,
                 })
-                onHide()
               }}
             >
               {intl.formatMessage({
@@ -517,70 +521,67 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
       show={showModal}
       hideOnClickOutside={false}
     >
-      {({ hide }) => (
-        <>
-          <ResetCss>
-            <Modal.Header>
-              <Heading>
-                {intl.formatMessage({
-                  id: 'proposal.validate.votes',
-                })}
-              </Heading>
-            </Modal.Header>
-          </ResetCss>
-
-          <Modal.Body>
-            <Flex direction="column" align="flex-start" spacing={6}>
-              {requirements?.length ? (
-                <Tag variantColor="green">
-                  <Tag.LeftIcon name={CapUIIcon.Check} />
-                  <Tag.Label>
-                    {intl.formatMessage({
-                      id: 'vote.conditions.met',
-                    })}
-                  </Tag.Label>
-                </Tag>
-              ) : null}
-              <VoteMinAlert step={step} translationKey={getModalVoteTitleTranslation()} /> {/** @ts-ignore */}
-              <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
-              {votesHelpText && (
-                <InfoMessage variant="info" width="100%">
-                  <InfoMessage.Title>
-                    {intl.formatMessage({
-                      id: isInterpellationContextFromStep(step)
-                        ? 'admin.fields.step.supportsHelpText'
-                        : 'admin.fields.step.votesHelpText',
-                    })}
-                  </InfoMessage.Title>
-                  <InfoMessage.Content>
-                    <WYSIWYGRender value={votesHelpText} />
-                  </InfoMessage.Content>
-                </InfoMessage>
-              )}
-            </Flex>
-          </Modal.Body>
-          <Modal.Footer>
-            <Button
-              variant="primary"
-              variantColor="primary"
-              variantSize="big"
-              id="confirm-proposal-vote"
-              onClick={() => {
-                dispatch(submit(getFormName(step)))
-                fetchQuery_DEPRECATED(environment, refetchViewer, {
-                  stepId: step.id,
-                  isAuthenticated,
-                })
-                hide()
-              }}
-            >
+      <>
+        <ResetCss>
+          <Modal.Header>
+            <Heading>
               {intl.formatMessage({
-                id: !remainingVotesAfterValidation ? 'validate-participation' : 'keep-voting',
+                id: 'proposal.validate.votes',
               })}
-            </Button>
-          </Modal.Footer>
-        </>
-      )}
+            </Heading>
+          </Modal.Header>
+        </ResetCss>
+
+        <Modal.Body>
+          <Flex direction="column" align="flex-start" spacing={6}>
+            {requirements?.length ? (
+              <Tag variantColor="green">
+                <Tag.LeftIcon name={CapUIIcon.Check} />
+                <Tag.Label>
+                  {intl.formatMessage({
+                    id: 'vote.conditions.met',
+                  })}
+                </Tag.Label>
+              </Tag>
+            ) : null}
+            <VoteMinAlert step={step} translationKey={getModalVoteTitleTranslation()} /> {/** @ts-ignore */}
+            <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
+            {votesHelpText && (
+              <InfoMessage variant="info" width="100%">
+                <InfoMessage.Title>
+                  {intl.formatMessage({
+                    id: isInterpellationContextFromStep(step)
+                      ? 'admin.fields.step.supportsHelpText'
+                      : 'admin.fields.step.votesHelpText',
+                  })}
+                </InfoMessage.Title>
+                <InfoMessage.Content>
+                  <WYSIWYGRender value={votesHelpText} />
+                </InfoMessage.Content>
+              </InfoMessage>
+            )}
+          </Flex>
+        </Modal.Body>
+        <Modal.Footer>
+          <Button
+            variant="primary"
+            variantColor="primary"
+            variantSize="big"
+            id="confirm-proposal-vote"
+            onClick={() => {
+              dispatch(submit(getFormName(step)))
+              fetchQuery_DEPRECATED(environment, refetchViewer as GraphQLTaggedNode, {
+                stepId: step.id,
+                isAuthenticated,
+              })
+            }}
+          >
+            {intl.formatMessage({
+              id: !remainingVotesAfterValidation ? 'validate-participation' : 'keep-voting',
+            })}
+          </Button>
+        </Modal.Footer>
+      </>
     </ProposalVoteModalContainer>
   )
 }

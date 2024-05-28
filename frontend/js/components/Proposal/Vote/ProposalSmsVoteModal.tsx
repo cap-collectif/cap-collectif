@@ -56,6 +56,11 @@ export const ProposalSmsVoteModal = ({ proposal: proposalRef, step: stepRef }: P
       stepId: step.id,
     },
   })
+
+  if (!showModal) {
+    return null
+  }
+
   return (
     <ProposalVoteMultiModalContainer
       baseId="proposal-vote-modal"

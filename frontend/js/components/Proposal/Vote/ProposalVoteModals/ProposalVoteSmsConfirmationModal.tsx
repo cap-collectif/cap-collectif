@@ -81,10 +81,10 @@ const ProposalVoteSmsConfirmationModal = ({
   const form = useForm<any>({
     mode: 'onChange',
     defaultValues: {
-      code: 0,
+      code: '',
     },
   })
-  const { control, formState, register } = form
+  const { control, formState, setValue, setError } = form
   const hasErrors = Object.keys(formState.errors).length > 0
 
   const validateCode = async (code: $PropertyType<FormValues, 'code'>) => {
@@ -104,17 +104,25 @@ const ProposalVoteSmsConfirmationModal = ({
 
         if (verifyCodeErrorCode !== null) {
           setIsLoading(false)
+          setError('code', {})
+          setValue('code', '')
         }
 
         if (verifyCodeErrorCode === 'CODE_EXPIRED') {
-          return intl.formatMessage({
-            id: 'CODE_EXPIRED',
+          setError('code', {
+            type: 'custom',
+            message: intl.formatMessage({
+              id: 'CODE_EXPIRED',
+            }),
           })
         }
 
         if (verifyCodeErrorCode === 'CODE_NOT_VALID') {
-          return intl.formatMessage({
-            id: 'CODE_NOT_VALID',
+          setError('code', {
+            type: 'custom',
+            message: intl.formatMessage({
+              id: 'CODE_NOT_VALID',
+            }),
           })
         }
 
@@ -185,6 +193,20 @@ const ProposalVoteSmsConfirmationModal = ({
     }
   }
 
+  // ! This is required to prevent weird display and autofocus not working
+  // TODO: Update Modal
+  const focusInputRef = React.useCallback(node => {
+    setTimeout(() => {
+      if (node !== null) {
+        node.querySelector('input').focus()
+      }
+    }, 210)
+  }, [])
+
+  const onComplete = e => {
+    validateCode(e.target.value)
+  }
+
   return (
     <>
       <ResetCss>
@@ -213,17 +235,17 @@ const ProposalVoteSmsConfirmationModal = ({
             />
           </Text>
           <FormControl name="code" control={control} isRequired isDisabled={formState.isSubmitting} align="center">
-            <FieldInput
-              control={control}
-              {...register('code', {
-                validate: {
-                  validateCode,
-                },
-              })}
-              type="codeInput"
-              name="code"
-              isVerified={verified}
-            />
+            {/* Extra div is required to pass the ref and fix display */}
+            <div ref={focusInputRef}>
+              <FieldInput
+                control={control}
+                onChange={onComplete}
+                type="codeInput"
+                name="code"
+                isVerified={verified}
+                isRequired
+              />
+            </div>
             {verified && (
               <Text
                 color="green.500"
@@ -274,7 +296,7 @@ const ProposalVoteSmsConfirmationModal = ({
           rightIcon={CapUIIcon.LongArrowRight}
           onClick={goToNextStep}
           isLoading={isLoading}
-          disabled={form.watch('code') === 0 || hasErrors}
+          disabled={form.watch('code') === '' || hasErrors}
         >
           {intl.formatMessage({
             id: 'proposal.validate.vote',
