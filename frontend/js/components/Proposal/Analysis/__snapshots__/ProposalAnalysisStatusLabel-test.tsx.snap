@@ -1,22 +1,21 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalAnalysisStatusLabel /> renders correctly 1`] = `
-<Label
-  color="blue"
-  fontSize={12}
->
-  <Icon
-    color="#ffffff"
-    name="close"
-    size={14}
-  />
-  <span
-    className="ml-5"
+<ProposalAnalysisStatusLabel__Status>
+  <Label
+    className="status-label-container"
+    color="blue"
+    fontSize={12}
   >
+    <Icon
+      color="#ffffff"
+      name="close"
+      size={14}
+    />
     <FormattedMessage
       id="skusku"
       values={Object {}}
     />
-  </span>
-</Label>
+  </Label>
+</ProposalAnalysisStatusLabel__Status>
 `;

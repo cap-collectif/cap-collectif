@@ -53,6 +53,7 @@ const Row = styled.div<{
     display: flex;
     align-items: center;
     width: 100%;
+
     div:nth-child(2) {
       font-size: 16px;
       color: ${colors.darkText};
@@ -60,6 +61,14 @@ const Row = styled.div<{
       font-weight: 600;
       max-width: calc(100% - s150px);
       word-break: break-all;
+    }
+
+    .label-container {
+      display: flex;
+      justify-content: space-around;
+      align-content: center;
+      align-items: center;
+      gap: 5px;
     }
 
     img {
@@ -150,11 +159,9 @@ export const ProposalAnalysisUserRow = ({ user, status, canEdit, canConsult, dis
         <div>
           <UserAvatarLegacy size={32} className="pull-left" user={user} />
           <div>{user.displayName}</div>
-          <Label color={labelData.color} fontSize={8}>
+          <Label color={labelData.color} fontSize={8} className="label-container">
             <Icon name={labelData.icon} size={8} color={colors.white} />
-            <span className="ml-5">
-              <FormattedMessage id={labelData.text} />
-            </span>
+            <FormattedMessage id={labelData.text} />
           </Label>
         </div>
         {canConsult && (

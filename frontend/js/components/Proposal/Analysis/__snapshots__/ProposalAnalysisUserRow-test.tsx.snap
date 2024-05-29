@@ -23,6 +23,7 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
         Goultard
       </div>
       <Label
+        className="label-container"
         color="#f09200"
         fontSize={8}
       >
@@ -31,14 +32,10 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
           name="ongoing"
           size={8}
         />
-        <span
-          className="ml-5"
-        >
-          <FormattedMessage
-            id="step.status.open"
-            values={Object {}}
-          />
-        </span>
+        <FormattedMessage
+          id="step.status.open"
+          values={Object {}}
+        />
       </Label>
     </div>
     <button
