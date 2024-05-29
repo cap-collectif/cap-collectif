@@ -1669,7 +1669,7 @@ Object {
         },
         Object {
           "key": "2015-01-01T00:00:00.000Z",
-          "totalCount": 25,
+          "totalCount": 26,
         },
         Object {
           "key": "2015-02-01T00:00:00.000Z",
@@ -3154,7 +3154,7 @@ Object {
         },
         Object {
           "key": "2015-01-01T00:00:00.000Z",
-          "totalCount": 25,
+          "totalCount": 26,
         },
         Object {
           "key": "2015-02-01T00:00:00.000Z",
