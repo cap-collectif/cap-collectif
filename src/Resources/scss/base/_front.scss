@@ -772,6 +772,23 @@ div.embeddedContent {
     }
 }
 
+/* ====================== Both editors ===========================*/
+
+.old-editor, .wysiwyg-render, .jodit-wysiwyg {
+    h1 { font-size: 36px; }
+    h2 { font-size: 30px; }
+    h3 { font-size: 24px; }
+    h4 { font-size: 18px; }
+
+    ul, ol {
+        margin-block-start: 1em;
+        margin-block-end: 1em;
+        margin-inline-start: 0px;
+        margin-inline-end: 0px;
+        padding-inline-start: 40px;
+    }
+}
+
 /* ======================= Old Editor ============================*/
 
 .old-editor {
@@ -782,11 +799,6 @@ div.embeddedContent {
     table, td, th {
         border-width: 1px;
     }
-
-    h1 { font-size: 36px; }
-    h2 { font-size: 30px; }
-    h3 { font-size: 24px; }
-    h4 { font-size: 18px; }
 }
 
 /* ======================= New Editor ============================*/
@@ -842,11 +854,6 @@ div.embeddedContent {
         padding-right: 15px;
         padding-left: 15px;
     }
-
-    h1 { font-size: 36px; }
-    h2 { font-size: 30px; }
-    h3 { font-size: 24px; }
-    h4 { font-size: 18px; }
 }
 
 /* ======================= Project ============================*/

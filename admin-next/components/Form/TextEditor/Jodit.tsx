@@ -169,7 +169,7 @@ const Jodit = ({
         '.jodit-status-bar,.jodit-ui-group,.jodit-toolbar__box': { display: 'none' },
         '.jodit-workplace': { borderRadius: radii.normal },
         '.jodit-wysiwyg': {
-          padding: `${space[4]} !important`,
+          padding: `${space[3]} !important`,
           paddingTop: `${space[1]} !important`,
           paddingBottom: `${space[1]} !important`,
           maxHeight: '100px',
@@ -186,14 +186,7 @@ const Jodit = ({
           '&:focus-within': { border: `1px solid ${colors.blue[500]}` },
         },
       }
-    : {
-        '.jodit-wysiwyg': {
-          padding: `${space[5]} !important`,
-        },
-        'span.jodit-placeholder': {
-          padding: `${space[5]}`,
-        },
-      }
+    : {}
 
   const config = useMemo(
     () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, limitChars),
@@ -212,6 +205,13 @@ const Jodit = ({
           '.jodit-wysiwyg h2': { fontSize: '30px' },
           '.jodit-wysiwyg h3': { fontSize: '24px' },
           '.jodit-wysiwyg h4': { fontSize: '18px' },
+          '.jodit-wysiwyg ul, .jodit-wysiwyg ol': {
+            marginBlockStart: '1em',
+            marginBlockEnd: '1em',
+            marginInlineStart: '0px',
+            marginInlineEnd: '0px',
+            paddingInlineStart: '40px',
+          },
         }}
       >
         <ForwardRefEditor ref={editor} value={value} config={config} onChange={onChange} />
