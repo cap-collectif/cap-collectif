@@ -14,6 +14,9 @@
         <testsuite name="default">
             <directory>tests</directory>
         </testsuite>
+        <testsuite name="Unit Tests">
+            <directory>tests/UnitTests</directory>
+        </testsuite>
     </testsuites>
 
     <filter>
