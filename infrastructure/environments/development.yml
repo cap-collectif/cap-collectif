@@ -31,7 +31,7 @@ services:
 
   admin-next:
     container_name: capco_admin_next_1
-    image: "node:16"
+    image: "node:18"
     user: "node"
     working_dir: /var/www/admin-next
     links:
