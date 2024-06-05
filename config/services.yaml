@@ -206,6 +206,8 @@ parameters:
     env(SYMFONY_GOOGLE_MAP_SERVER_KEY): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_GOOGLE_MAP_PUBLIC_KEY): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_SMS_PROVIDER): twilio
+    env(SYMFONY_ORANGE_API_CLIENT_ID): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_ORANGE_API_CLIENT_SECRET): 'INSERT_A_REAL_SECRET'
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead
