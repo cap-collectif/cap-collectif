@@ -284,7 +284,14 @@ export const ProposalPageHeader = ({
           />
         ) : (
           <div className="default-header">
-            {icon && <Icon name={convertIconToDs(icon)} size={CapUIIconSize.Xxl} color={colors.white} />}
+            {icon && (
+              <Icon
+                name={convertIconToDs(icon)}
+                size={CapUIIconSize.Xxl}
+                color={colors.white}
+                sx={{ scale: ['1', '2', '4'] }}
+              />
+            )}
             <CategoryBackground color={color} viewBox="0 0 230 75" />
           </div>
         )}
