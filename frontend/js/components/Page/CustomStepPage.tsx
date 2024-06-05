@@ -58,7 +58,7 @@ export const CustomStepPage = ({ stepId }: Props) => {
   React.useEffect(() => {
     dispatchNavBarEvent('set-breadcrumb', [
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: data?.customStep?.project?.title, href: data?.customStep?.project?.url || '' },
       { title: data?.customStep?.title, href: '' },
     ])

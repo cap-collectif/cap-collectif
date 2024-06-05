@@ -185,6 +185,8 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
 
   if (!items?.length) return null
 
+  const mobileItem = items.find(i => i.showOnMobile) || items[items.length - 2]
+
   return (
     <Box
       as="nav"
@@ -196,8 +198,8 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
       {isMobile ? (
         <Flex alignItems="center" mr={1} fontSize={1}>
           <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} mr={1} color="neutral-gray.700" />
-          <Box as="a" href={items[items.length - 2].href} color="neutral-gray.700" sx={{ textDecoration: 'underline' }}>
-            {items[items.length - 2].title}
+          <Box as="a" href={mobileItem.href} color="neutral-gray.700" sx={{ textDecoration: 'underline' }}>
+            {mobileItem.title}
           </Box>
         </Flex>
       ) : (

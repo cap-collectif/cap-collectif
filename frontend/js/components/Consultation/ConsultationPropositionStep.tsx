@@ -57,7 +57,7 @@ export const ConsultationPropositionStep = (props: Props) => {
   React.useEffect(() => {
     dispatchNavBarEvent('set-breadcrumb', [
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: step?.project?.title, href: step?.project?.url || '' },
       { title: step?.title, href: '' },
     ])

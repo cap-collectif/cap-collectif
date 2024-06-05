@@ -75,7 +75,7 @@ export const PresentationStepPage = ({ stepId }: Props) => {
   React.useEffect(() => {
     dispatchNavBarEvent('set-breadcrumb', [
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: data?.presentationStep?.project?.title, href: data?.presentationStep?.project?.url || '' },
       { title: data?.presentationStep?.title, href: '' },
     ])

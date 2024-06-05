@@ -866,6 +866,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "name": "opinionCanBeFollowed",
                       "storageKey": null,
                     },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
                   ],
                   "storageKey": null,
                 },
@@ -1168,6 +1182,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
                           "storageKey": null,
                         },
                         Object {
@@ -8010,6 +8031,20 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                         Object {
                           "alias": null,
                           "args": null,
+                          "kind": "ScalarField",
+                          "name": "isProposalSmsVoteEnabled",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "open",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
                           "concreteType": "Project",
                           "kind": "LinkedField",
                           "name": "project",
@@ -8019,14 +8054,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "alias": null,
                               "args": null,
                               "kind": "ScalarField",
-                              "name": "title",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "url",
+                              "name": "opinionCanBeFollowed",
                               "storageKey": null,
                             },
                             Object {
@@ -8034,13 +8062,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "args": null,
                               "kind": "ScalarField",
                               "name": "id",
-                              "storageKey": null,
-                            },
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "opinionCanBeFollowed",
                               "storageKey": null,
                             },
                             Object {
@@ -8076,20 +8097,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "storageKey": null,
                             },
                           ],
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "isProposalSmsVoteEnabled",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "open",
                           "storageKey": null,
                         },
                         Object {
@@ -8865,7 +8872,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "2425f2df86f066113b58a5ddf257b3ed",
+          "cacheID": "841c5a978f8877341ddd482b107d70da",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -10513,11 +10520,6 @@ fragment ProposalPageLogic_query_4aPrgF on Query {
       __isProposalStep: __typename
       title
       url
-      project {
-        title
-        url
-        id
-      }
       isProposalSmsVoteEnabled
     }
     ...ProposalPageHeader_step_2uzqnG
@@ -10545,6 +10547,14 @@ fragment ProposalPageLogic_query_4aPrgF on Query {
     supervisor {
       id
     }
+    form {
+      step {
+        title
+        url
+        id
+      }
+      id
+    }
     currentVotableStep {
       __typename
       id
@@ -10552,6 +10562,11 @@ fragment ProposalPageLogic_query_4aPrgF on Query {
       slug
       votable
       state
+    }
+    project {
+      title
+      url
+      id
     }
     allVotes: votes(first: 0, stepId: $stepId) {
       totalCount

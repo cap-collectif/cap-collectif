@@ -69,7 +69,7 @@ const Component = ({
   React.useEffect(() => {
     dispatchNavBarEvent('set-breadcrumb', [
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
-      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: props?.questionnaire?.step?.project?.title, href: props?.questionnaire?.project?.url || '' },
       { title: props?.questionnaire?.title, href: '' },
     ])
