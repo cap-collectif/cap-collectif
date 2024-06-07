@@ -68,6 +68,7 @@ app/test.db-journal
 mails.txt
 dump.txt
 /jest
+/features/graphql-api/reports/junit/*
 
 
 # OS X

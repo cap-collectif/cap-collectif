@@ -433,7 +433,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
         input: {
           projectId,
           ...BASE_PROJECT,
-          districts: ['RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy', 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw=='],
+          districts: ['RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy', 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx'],
         },
       },
       'internal_admin',
@@ -447,12 +447,12 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             edges: [
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx',
                 },
               },
               {
                 node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==',
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
                 },
               },
             ],
@@ -483,7 +483,7 @@ describe('Internal|updateAlphaProject simple mutations', () => {
             'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qz',
             'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q0',
             'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1',
-            'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==',
+            'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx',
           ],
         },
       },
@@ -496,6 +496,11 @@ describe('Internal|updateAlphaProject simple mutations', () => {
           id: expect.any(String),
           districts: {
             edges: [
+              {
+                node: {
+                  id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx',
+                },
+              },
               {
                 node: {
                   id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy',
@@ -514,11 +519,6 @@ describe('Internal|updateAlphaProject simple mutations', () => {
               {
                 node: {
                   id: 'RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1',
-                },
-              },
-              {
-                node: {
-                  id: 'RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==',
                 },
               },
             ],

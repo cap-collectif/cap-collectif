@@ -1,0 +1,418 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Public|introspection query fetche schema if enabled 1`] = `
+Object {
+  "__schema": Object {
+    "types": Array [
+      Object {
+        "name": "Query",
+      },
+      Object {
+        "name": "User",
+      },
+      Object {
+        "name": "Node",
+      },
+      Object {
+        "name": "ID",
+      },
+      Object {
+        "name": "UniformResourceLocatable",
+      },
+      Object {
+        "name": "URI",
+      },
+      Object {
+        "name": "String",
+      },
+      Object {
+        "name": "Boolean",
+      },
+      Object {
+        "name": "DateTime",
+      },
+      Object {
+        "name": "UserType",
+      },
+      Object {
+        "name": "Int",
+      },
+      Object {
+        "name": "ResponseConnection",
+      },
+      Object {
+        "name": "PageInfo",
+      },
+      Object {
+        "name": "ResponseEdge",
+      },
+      Object {
+        "name": "Response",
+      },
+      Object {
+        "name": "Question",
+      },
+      Object {
+        "name": "Email",
+      },
+      Object {
+        "name": "ProjectOrder",
+      },
+      Object {
+        "name": "OrderDirection",
+      },
+      Object {
+        "name": "ProjectOrderField",
+      },
+      Object {
+        "name": "ProjectConnection",
+      },
+      Object {
+        "name": "ProjectEdge",
+      },
+      Object {
+        "name": "Project",
+      },
+      Object {
+        "name": "VoteConnection",
+      },
+      Object {
+        "name": "VoteEdge",
+      },
+      Object {
+        "name": "Vote",
+      },
+      Object {
+        "name": "UserOrder",
+      },
+      Object {
+        "name": "UserOrderField",
+      },
+      Object {
+        "name": "UserConnection",
+      },
+      Object {
+        "name": "UserEdge",
+      },
+      Object {
+        "name": "ContributionConnection",
+      },
+      Object {
+        "name": "ContributionEdge",
+      },
+      Object {
+        "name": "Contribution",
+      },
+      Object {
+        "name": "Media",
+      },
+      Object {
+        "name": "ProjectType",
+      },
+      Object {
+        "name": "Step",
+      },
+      Object {
+        "name": "TimeRange",
+      },
+      Object {
+        "name": "StepState",
+      },
+      Object {
+        "name": "GlobalDistrictConnection",
+      },
+      Object {
+        "name": "GlobalDistrictEdge",
+      },
+      Object {
+        "name": "GlobalDistrict",
+      },
+      Object {
+        "name": "District",
+      },
+      Object {
+        "name": "TranslationLocale",
+      },
+      Object {
+        "name": "GeoJSON",
+      },
+      Object {
+        "name": "CssJSON",
+      },
+      Object {
+        "name": "Style",
+      },
+      Object {
+        "name": "Color",
+      },
+      Object {
+        "name": "Float",
+      },
+      Object {
+        "name": "DistrictTranslation",
+      },
+      Object {
+        "name": "FollowerOrder",
+      },
+      Object {
+        "name": "FollowerOrderField",
+      },
+      Object {
+        "name": "SubscriptionTypeValue",
+      },
+      Object {
+        "name": "ProjectDistrictPositioner",
+      },
+      Object {
+        "name": "Theme",
+      },
+      Object {
+        "name": "EventOrder",
+      },
+      Object {
+        "name": "EventOrderField",
+      },
+      Object {
+        "name": "EventConnection",
+      },
+      Object {
+        "name": "EventEdge",
+      },
+      Object {
+        "name": "Event",
+      },
+      Object {
+        "name": "GoogleMapsAddress",
+      },
+      Object {
+        "name": "GoogleMapsAddressType",
+      },
+      Object {
+        "name": "EventTranslation",
+      },
+      Object {
+        "name": "HTML",
+      },
+      Object {
+        "name": "Mutation",
+      },
+      Object {
+        "name": "AddEventInput",
+      },
+      Object {
+        "name": "EventTranslationInput",
+      },
+      Object {
+        "name": "AddEventPayload",
+      },
+      Object {
+        "name": "UserError",
+      },
+      Object {
+        "name": "ChangeEventInput",
+      },
+      Object {
+        "name": "ChangeEventPayload",
+      },
+      Object {
+        "name": "DeleteEventInput",
+      },
+      Object {
+        "name": "DeleteEventPayload",
+      },
+      Object {
+        "name": "DeleteAccountByEmailInput",
+      },
+      Object {
+        "name": "DeleteAccountByEmailPayload",
+      },
+      Object {
+        "name": "DeleteAccountByEmailErrorCode",
+      },
+      Object {
+        "name": "__Schema",
+      },
+      Object {
+        "name": "__Type",
+      },
+      Object {
+        "name": "__TypeKind",
+      },
+      Object {
+        "name": "__Field",
+      },
+      Object {
+        "name": "__InputValue",
+      },
+      Object {
+        "name": "__EnumValue",
+      },
+      Object {
+        "name": "__Directive",
+      },
+      Object {
+        "name": "__DirectiveLocation",
+      },
+      Object {
+        "name": "Consultation",
+      },
+      Object {
+        "name": "ContributionOrder",
+      },
+      Object {
+        "name": "ContributionOrderField",
+      },
+      Object {
+        "name": "ConsultationStep",
+      },
+      Object {
+        "name": "Questionnaire",
+      },
+      Object {
+        "name": "UserReplyConnection",
+      },
+      Object {
+        "name": "UserReplyEdge",
+      },
+      Object {
+        "name": "UserReply",
+      },
+      Object {
+        "name": "NotPublishedReason",
+      },
+      Object {
+        "name": "QuestionnaireStep",
+      },
+      Object {
+        "name": "ProposalVote",
+      },
+      Object {
+        "name": "Publishable",
+      },
+      Object {
+        "name": "Proposal",
+      },
+      Object {
+        "name": "Trashable",
+      },
+      Object {
+        "name": "TrashableStatus",
+      },
+      Object {
+        "name": "Draftable",
+      },
+      Object {
+        "name": "ProposalAnalysis",
+      },
+      Object {
+        "name": "ProposalAnalysisState",
+      },
+      Object {
+        "name": "ProposalDecision",
+      },
+      Object {
+        "name": "OfficialResponse",
+      },
+      Object {
+        "name": "ProposalDecisionState",
+      },
+      Object {
+        "name": "ProposalStepStatus",
+      },
+      Object {
+        "name": "ProposalStepStatusColor",
+      },
+      Object {
+        "name": "ProposalAssessment",
+      },
+      Object {
+        "name": "ProposalAssessmentState",
+      },
+      Object {
+        "name": "ProposalVoteOrder",
+      },
+      Object {
+        "name": "ProposalVoteOrderField",
+      },
+      Object {
+        "name": "ProposalVoteConnection",
+      },
+      Object {
+        "name": "ProposalVoteEdge",
+      },
+      Object {
+        "name": "ProposalSelection",
+      },
+      Object {
+        "name": "SelectionStep",
+      },
+      Object {
+        "name": "ProposalTrashedStatus",
+      },
+      Object {
+        "name": "ProposalOrder",
+      },
+      Object {
+        "name": "ProposalOrderField",
+      },
+      Object {
+        "name": "ProposalConnection",
+      },
+      Object {
+        "name": "ProposalEdge",
+      },
+      Object {
+        "name": "ProposalCategory",
+      },
+      Object {
+        "name": "ValueResponse",
+      },
+      Object {
+        "name": "MediaResponse",
+      },
+      Object {
+        "name": "CollectStep",
+      },
+      Object {
+        "name": "SimpleQuestion",
+      },
+      Object {
+        "name": "MultipleChoiceQuestion",
+      },
+      Object {
+        "name": "QuestionChoiceConnection",
+      },
+      Object {
+        "name": "QuestionChoiceEdge",
+      },
+      Object {
+        "name": "QuestionChoice",
+      },
+      Object {
+        "name": "SectionQuestion",
+      },
+      Object {
+        "name": "MediaQuestion",
+      },
+      Object {
+        "name": "MajorityQuestion",
+      },
+      Object {
+        "name": "Opinion",
+      },
+      Object {
+        "name": "Argument",
+      },
+      Object {
+        "name": "ArgumentValue",
+      },
+      Object {
+        "name": "Source",
+      },
+      Object {
+        "name": "Version",
+      },
+    ],
+  },
+}
+`;

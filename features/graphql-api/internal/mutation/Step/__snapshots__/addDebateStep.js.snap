@@ -5,13 +5,13 @@ Object {
   "addDebateStep": Object {
     "step": Object {
       "__typename": "DebateStep",
-      "body": "Cette proposition devrait-elle être mise en place ?",
+      "body": null,
       "debateType": "WYSIWYG",
       "enabled": true,
-      "isAnonymousParticipationAllowed": false,
+      "isAnonymousParticipationAllowed": true,
       "label": "Espace de Débat",
       "timeless": true,
-      "title": "Débat",
+      "title": "",
     },
   },
 }
@@ -22,13 +22,13 @@ Object {
   "addDebateStep": Object {
     "step": Object {
       "__typename": "DebateStep",
-      "body": "Cette proposition devrait-elle être mise en place ?",
+      "body": null,
       "debateType": "WYSIWYG",
       "enabled": true,
-      "isAnonymousParticipationAllowed": false,
+      "isAnonymousParticipationAllowed": true,
       "label": "Espace de Débat",
       "timeless": true,
-      "title": "Débat",
+      "title": "",
     },
   },
 }
@@ -39,13 +39,13 @@ Object {
   "addDebateStep": Object {
     "step": Object {
       "__typename": "DebateStep",
-      "body": "Cette proposition devrait-elle être mise en place ?",
+      "body": null,
       "debateType": "WYSIWYG",
       "enabled": true,
-      "isAnonymousParticipationAllowed": false,
+      "isAnonymousParticipationAllowed": true,
       "label": "Espace de Débat",
       "timeless": true,
-      "title": "Débat",
+      "title": "",
     },
   },
 }

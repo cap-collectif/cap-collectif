@@ -45,7 +45,7 @@ Object {
         "startAt": "2024-03-30 11:22:00",
       },
       "timeless": true,
-      "title": "",
+      "title": "Collecte des propositions",
       "voteThreshold": 30,
       "voteType": "DISABLED",
       "votesHelpText": "help text",

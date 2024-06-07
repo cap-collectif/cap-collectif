@@ -9,18 +9,14 @@ Object {
       "body": "L’analyse des projets",
       "defaultSort": "random",
       "defaultStatus": Object {
-        "color": "PRIMARY",
-        "name": "Analyse des projets",
+        "color": "WARNING",
+        "name": "En cours d'analyse",
       },
       "label": "Analyse",
       "statuses": Array [
         Object {
-          "color": "PRIMARY",
-          "name": "Analyse des projets",
-        },
-        Object {
-          "color": "PRIMARY",
-          "name": "Analyse des projets",
+          "color": "WARNING",
+          "name": "En cours d'analyse",
         },
         Object {
           "color": "SUCCESS",
@@ -43,7 +39,7 @@ Object {
           "name": "Fusionné",
         },
       ],
-      "title": "Analyse",
+      "title": "",
       "voteType": "DISABLED",
     },
   },
@@ -59,18 +55,14 @@ Object {
       "body": "L’analyse des projets",
       "defaultSort": "random",
       "defaultStatus": Object {
-        "color": "PRIMARY",
-        "name": "Analyse des projets",
+        "color": "WARNING",
+        "name": "En cours d'analyse",
       },
       "label": "Analyse",
       "statuses": Array [
         Object {
-          "color": "PRIMARY",
-          "name": "Analyse des projets",
-        },
-        Object {
-          "color": "PRIMARY",
-          "name": "Analyse des projets",
+          "color": "WARNING",
+          "name": "En cours d'analyse",
         },
         Object {
           "color": "SUCCESS",
@@ -93,7 +85,7 @@ Object {
           "name": "Fusionné",
         },
       ],
-      "title": "Analyse",
+      "title": "",
       "voteType": "DISABLED",
     },
   },
@@ -109,18 +101,14 @@ Object {
       "body": "L’analyse des projets",
       "defaultSort": "random",
       "defaultStatus": Object {
-        "color": "PRIMARY",
-        "name": "Analyse des projets",
+        "color": "WARNING",
+        "name": "En cours d'analyse",
       },
       "label": "Analyse",
       "statuses": Array [
         Object {
-          "color": "PRIMARY",
-          "name": "Analyse des projets",
-        },
-        Object {
-          "color": "PRIMARY",
-          "name": "Analyse des projets",
+          "color": "WARNING",
+          "name": "En cours d'analyse",
         },
         Object {
           "color": "SUCCESS",
@@ -143,7 +131,7 @@ Object {
           "name": "Fusionné",
         },
       ],
-      "title": "Analyse",
+      "title": "",
       "voteType": "DISABLED",
     },
   },

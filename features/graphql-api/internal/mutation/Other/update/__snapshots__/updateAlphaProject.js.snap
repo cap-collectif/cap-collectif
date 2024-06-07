@@ -667,6 +667,15 @@ Object {
                 "edges": Array [],
                 "totalCount": 0,
               },
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
+            },
+          },
+          Object {
+            "node": Object {
+              "followers": Object {
+                "edges": Array [],
+                "totalCount": 0,
+              },
               "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy",
             },
           },
@@ -695,26 +704,6 @@ Object {
                 "totalCount": 0,
               },
               "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Q1",
-            },
-          },
-          Object {
-            "node": Object {
-              "followers": Object {
-                "edges": Array [
-                  Object {
-                    "node": Object {
-                      "id": "VXNlcjp1c2VyNQ==",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "VXNlcjp1c2VyTWF4aW1l",
-                    },
-                  },
-                ],
-                "totalCount": 2,
-              },
-              "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==",
             },
           },
         ],
@@ -861,27 +850,16 @@ Object {
                 "edges": Array [],
                 "totalCount": 0,
               },
-              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy",
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
             },
           },
           Object {
             "node": Object {
               "followers": Object {
-                "edges": Array [
-                  Object {
-                    "node": Object {
-                      "id": "VXNlcjp1c2VyNQ==",
-                    },
-                  },
-                  Object {
-                    "node": Object {
-                      "id": "VXNlcjp1c2VyTWF4aW1l",
-                    },
-                  },
-                ],
-                "totalCount": 2,
+                "edges": Array [],
+                "totalCount": 0,
               },
-              "id": "RGlzdHJpY3Q6cHJvamVjdERpc3RyaWN0Nw==",
+              "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qy",
             },
           },
         ],

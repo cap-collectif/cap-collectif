@@ -22,7 +22,6 @@ const UpdateOtherStep = /* GraphQL*/ `
 `
 
 const input = {
-  "title": "updated title",
   "label": "updated label",
   "body": "updated body",
   "isEnabled": false,

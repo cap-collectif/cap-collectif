@@ -96,6 +96,8 @@ const input = {
   ],
   requirementsReason: null,
   secretBallot: false,
+  proposalArchivedTime: 0,
+  proposalArchivedUnitTime: 'MONTHS',
 };
 
 describe('mutations.updateCollectStep', () => {

@@ -12,4 +12,12 @@ module.exports = {
     escapeString: true,
     printBasicPrototype: true,
   },
+  reporters: [
+    'default',
+    [ 'jest-junit', {
+      outputDirectory: 'features/graphql-api/reports/junit',
+      outputName: 'api-test-results.xml',
+      addFileAttribute: "true",
+    } ]
+  ]
 }

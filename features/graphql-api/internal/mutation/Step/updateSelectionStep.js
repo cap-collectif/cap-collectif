@@ -55,7 +55,7 @@ const stepId = toGlobalId('SelectionStep', 'selectionstep1');
 
 const input = {
   stepId: stepId,
-  label: 'upated label',
+  label: 'updated label',
   body: 'updated body',
   bodyUsingJoditWysiwyg: true,
   timeless: true,
@@ -93,6 +93,9 @@ const input = {
   ],
   requirementsReason: null,
   secretBallot: false,
+  proposalArchivedTime: 0,
+  proposalArchivedUnitTime: 'MONTHS',
+  allowingProgressSteps: true
 };
 
 describe('mutations.updateSelectionStep', () => {
