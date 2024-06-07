@@ -222,6 +222,10 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
 
     public function getTitle(): ?string
     {
+        if (!$this->title) {
+            return $this->label;
+        }
+
         return $this->title;
     }
 

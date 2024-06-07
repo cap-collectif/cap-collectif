@@ -5,7 +5,7 @@ Object {
   "addOtherStep": Object {
     "step": Object {
       "__typename": "OtherStep",
-      "title": "",
+      "title": "Etape personnalisée",
     },
   },
 }
@@ -16,7 +16,7 @@ Object {
   "addOtherStep": Object {
     "step": Object {
       "__typename": "OtherStep",
-      "title": "",
+      "title": "Etape personnalisée",
     },
   },
 }
@@ -27,7 +27,7 @@ Object {
   "addOtherStep": Object {
     "step": Object {
       "__typename": "OtherStep",
-      "title": "",
+      "title": "Etape personnalisée",
     },
   },
 }

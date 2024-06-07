@@ -14,7 +14,7 @@ Object {
         },
         "title": "Projet avec administrateur de projet - proposal-form",
       },
-      "title": "",
+      "title": "Dépôt",
     },
   },
 }
@@ -34,7 +34,7 @@ Object {
         },
         "title": "Appel à projets - proposal-form",
       },
-      "title": "",
+      "title": "Dépôt",
     },
   },
 }
@@ -54,7 +54,7 @@ Object {
         },
         "title": "projectOrgaVisibilityMe - proposal-form",
       },
-      "title": "",
+      "title": "Dépôt",
     },
   },
 }

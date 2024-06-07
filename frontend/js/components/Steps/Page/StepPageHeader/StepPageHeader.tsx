@@ -8,6 +8,7 @@ import '~relay/StepPageHeader_step.graphql'
 import BodyInfos from '~/components/Ui/Boxes/BodyInfos'
 import { isInterpellationContextFromStep, isOpinionFormStep } from '~/utils/interpellationLabelHelper'
 import StepPageHeaderContainer from './StepPageHeader.style'
+import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 
 type Props = {
   step: StepPageHeader_step$key
@@ -33,6 +34,7 @@ const FRAGMENT = graphql`
 `
 export const StepPageHeader = ({ step: stepFragment }: Props) => {
   const step = useFragment(FRAGMENT, stepFragment)
+  const unstable__new_create_project = useFeatureFlag('unstable__new_create_project')
 
   const stepIsParticipative = () => {
     return (
@@ -46,8 +48,8 @@ export const StepPageHeader = ({ step: stepFragment }: Props) => {
 
   return (
     <StepPageHeaderContainer>
-      <h2 className="h2">{step.title}</h2>
-      <div className="mb-30 project__step-dates">
+      {unstable__new_create_project ? null : <h2 className="h2">{step.title}</h2>}
+      <div className={`mb-30 project__step-dates ${unstable__new_create_project ? 'mt-30' : ''}`}>
         {(step.timeRange.startAt || step.timeRange.endAt) && (
           <div className="mr-15 d-ib">
             <i className="cap cap-calendar-2-1" />{' '}

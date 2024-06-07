@@ -10,7 +10,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
     I am a title
   </h2>
   <div
-    className="mb-30 project__step-dates"
+    className="mb-30 project__step-dates "
   >
     <div
       className="mr-15 d-ib"
@@ -35,7 +35,7 @@ exports[`<StepPageHeader /> should render correctly a consultationStep with a de
     I am a title
   </h2>
   <div
-    className="mb-30 project__step-dates"
+    className="mb-30 project__step-dates "
   >
     <div
       className="mr-15 d-ib"
@@ -60,7 +60,7 @@ exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
     I am a title
   </h2>
   <div
-    className="mb-30 project__step-dates"
+    className="mb-30 project__step-dates "
   >
     <div
       className="mr-15 d-ib"
@@ -85,7 +85,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
     I am a title
   </h2>
   <div
-    className="mb-30 project__step-dates"
+    className="mb-30 project__step-dates "
   >
     <div
       className="mr-15 d-ib"
@@ -110,7 +110,7 @@ exports[`<StepPageHeader /> should render correctly a selectionStep with interpe
     I am a title
   </h2>
   <div
-    className="mb-30 project__step-dates"
+    className="mb-30 project__step-dates "
   >
     <div
       className="mr-15 d-ib"
