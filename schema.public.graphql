@@ -1,5 +1,5 @@
 """A consultation"""
-type Consultation implements Node {
+type Consultationn implements Node {
   """The ID of an object."""
   id: ID!
 
