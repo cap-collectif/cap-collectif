@@ -53,6 +53,7 @@ const EventPreviewContainer = styled(Card).attrs({
 
   .separator {
     margin-right: 5px;
+    margin-left: 5px;
   }
 
   a:hover {

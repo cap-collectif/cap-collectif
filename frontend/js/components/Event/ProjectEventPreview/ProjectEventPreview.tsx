@@ -52,7 +52,7 @@ export const ProjectEventPreview = ({ event }: Props) => {
         </TitleContainer>
 
         <HeadContent>
-          {startAt && <Card.Date date={startAt} />}
+          {startAt && <Card.Date startDate={startAt} />}
 
           {isPast && (
             <div className="past-container">

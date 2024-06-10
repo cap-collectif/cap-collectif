@@ -125,6 +125,7 @@ export const EventPreview = ({
   const tagLabel = getTagLabel(intl, availableRegistration, tagColor)
   const displayEventTag =
     timeRange.isFuture && (isMeasurable || guestListEnabled) && tagColor !== null && tagLabel !== null
+
   return (
     <EventPreviewContainer isHighlighted={isHighlighted}>
       <EventImage event={event} enabled={hasIllustrationDisplayed} />
@@ -136,7 +137,7 @@ export const EventPreview = ({
       <Card.Body>
         <HeadContent>
           <DateContainer>
-            {timeRange?.startAt && <Card.Date date={timeRange.startAt} />}
+            {timeRange?.startAt && <Card.Date startDate={timeRange.startAt} endDate={timeRange?.endAt} />}
 
             {isEventDone && (
               <div className="past-container">

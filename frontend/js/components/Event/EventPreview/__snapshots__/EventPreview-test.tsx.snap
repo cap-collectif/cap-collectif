@@ -49,7 +49,8 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
     </EventPreviewstyle__HeadContent>
@@ -171,7 +172,8 @@ exports[`<EventPreview /> should render correctly 1`] = `
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
     </EventPreviewstyle__HeadContent>
@@ -293,7 +295,8 @@ exports[`<EventPreview /> should render correctly when guest enabled 1`] = `
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
       <InlineList
@@ -438,7 +441,8 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag com
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
       <InlineList
@@ -584,7 +588,8 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag reg
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
       <InlineList
@@ -730,7 +735,8 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag res
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
       <InlineList
@@ -982,7 +988,8 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
     </EventPreviewstyle__HeadContent>
@@ -1090,7 +1097,8 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
     <EventPreviewstyle__HeadContent>
       <EventPreviewstyle__DateContainer>
         <Date
-          date="2030-03-10 00:00:00"
+          endDate={null}
+          startDate="2030-03-10 00:00:00"
         />
       </EventPreviewstyle__DateContainer>
     </EventPreviewstyle__HeadContent>

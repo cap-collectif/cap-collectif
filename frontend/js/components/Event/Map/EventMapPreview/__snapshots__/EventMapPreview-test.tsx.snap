@@ -58,8 +58,8 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
           />
         </span>
         <Date
-          date="2030-03-10 00:00:00"
           fontSize="14px"
+          startDate="2030-03-10 00:00:00"
         />
         <span
           className="cityTagContainer"
@@ -138,8 +138,8 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
           />
         </span>
         <Date
-          date="2030-03-10 00:00:00"
           fontSize="14px"
+          startDate="2030-03-10 00:00:00"
         />
         <span
           className="cityTagContainer"
@@ -291,8 +291,8 @@ exports[`<EventMapPreview /> should render correctly when no googleMapsAddress 1
           />
         </span>
         <Date
-          date="2030-03-10 00:00:00"
           fontSize="14px"
+          startDate="2030-03-10 00:00:00"
         />
         <span
           className="cityTagContainer"
