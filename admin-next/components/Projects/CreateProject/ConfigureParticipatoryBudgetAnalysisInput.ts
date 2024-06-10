@@ -26,9 +26,15 @@ type Params = {
   projectTitle: string
   authors: Array<string>
   intl: IntlShape
+  isNewBackOfficeEnabled: boolean
 }
 
-const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Params): PreConfigureProjectInput => {
+const getParticipatoryBudgetAnalysisInput = ({
+  projectTitle,
+  authors,
+  intl,
+  isNewBackOfficeEnabled,
+}: Params): PreConfigureProjectInput => {
   const proposalFormTitle = `${projectTitle} - ${intl.formatMessage({ id: 'proposal-form' })}`
   const questionnaireTitle = `${projectTitle} - ${intl.formatMessage({ id: 'export.option.analysis-form' })}`
 
@@ -143,7 +149,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
           })}</p><p>- ${intl.formatMessage({ id: 'amount-of-the-dedicated-budget' })}</p><p>- ${intl.formatMessage({
             id: 'schedule-approach',
           })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
-          title: '',
+          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'presentation-of-your-project' })}`,
           label: intl.formatMessage({ id: 'presentation_step' }),
           isEnabled: true,
           requirements: [],
@@ -155,7 +161,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
           })}</p><p>- ${intl.formatMessage({
             id: 'distinction-between-operations-and-investment',
           })}</p><p>- ${intl.formatMessage({ id: 'example-of-an-eligible-non-eligible-project' })}</p>`,
-          title: '',
+          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'submit-your-projects' })}`,
           startAt: stepsDates.collectStep.startAt(),
           endAt: stepsDates.collectStep.endAt(),
           label: intl.formatMessage({ id: 'project-submission' }),
@@ -177,7 +183,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
           })}</p><p>- ${intl.formatMessage({
             id: 'official-responses-to-unsuccessful-projects',
           })}</p><p>- ${intl.formatMessage({ id: 'rules' })}</p>`,
-          title: '',
+          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'project-analysis' })}`,
           startAt: stepsDates.selectionStep1.startAt(),
           endAt: stepsDates.selectionStep1.endAt(),
           isEnabled: true,
@@ -218,7 +224,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
         },
         {
           label: voteStepLabel,
-          title: '',
+          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'vote-for-your-favourite-projects' })}`,
           body: `<p>- ${intl.formatMessage({
             id: 'number-of-votes-and-other-modalities',
           })}</p><p>- ${intl.formatMessage({
@@ -266,7 +272,7 @@ const getParticipatoryBudgetAnalysisInput = ({ projectTitle, authors, intl }: Pa
         },
         {
           label: intl.formatMessage({ id: 'award-winning-projects' }),
-          title: '',
+          title: isNewBackOfficeEnabled ? '' : `${intl.formatMessage({ id: 'list-of-selected-projects' })}`,
           body: `<p>- ${intl.formatMessage({ id: 'timeframe-for-completion-of-winning-projects' })}</p>`,
           startAt: stepsDates.selectionStep3.startAt(),
           endAt: stepsDates.selectionStep3.endAt(),

@@ -3,6 +3,7 @@ import { Box, Button, FormLabel, Text, toast } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+import useFeatureFlag from '@hooks/useFeatureFlag'
 import { graphql, useFragment } from 'react-relay'
 import UserListField from '../../Form/UserListField'
 import formatSubmitted from '@utils/format-submitted'
@@ -51,6 +52,8 @@ const VIEWER_FRAGMENT = graphql`
 `
 const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHelpMessage }) => {
   const intl = useIntl()
+  const isNewBackOfficeEnabled = useFeatureFlag('unstable__new_create_project')
+
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
   const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
 
@@ -132,8 +135,9 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
         case 'PARTICIPATORY_BUDGET':
           const participatoryBudgetInput = getParticipatoryBudgetInput({
             projectTitle: title,
-            authors: authors,
-            intl: intl,
+            authors,
+            intl,
+            isNewBackOfficeEnabled,
           })
 
           response = await PreConfigureProjectMutation.commit({
@@ -144,8 +148,9 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
         case 'PARTICIPATORY_BUDGET_ANALYSIS':
           const participatoryBudgetAnalysisInput = getParticipatoryBudgetAnalysisInput({
             projectTitle: title,
-            authors: authors,
-            intl: intl,
+            authors,
+            intl,
+            isNewBackOfficeEnabled,
           })
 
           response = await PreConfigureProjectMutation.commit({
