@@ -1129,14 +1129,15 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
                 ])
             ) {
                 $choices = $question->getChoices()->toArray();
+                $firstPossibleAnswer = $question
+                    ->getChoices()
+                    ->first()
+                ;
+
                 $type =
                     $nextChoice && \count($choices) > 1
                         ? $choices[1]->getTitle()
-                        : $question
-                            ->getChoices()
-                            ->first()
-                            ->getTitle()
-                        ;
+                        : ($firstPossibleAnswer ? $firstPossibleAnswer->getTitle() : '');
 
                 $fields[$question->getTitle()] = $type;
             }

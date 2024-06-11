@@ -15,24 +15,29 @@ use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Prophet;
 
+/**
+ * @template TKey
+ * @template TValue
+ * @template-extends ObjectBehavior<TKey,TValue>
+ */
 class ProposalFormSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->beConstructedWith();
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(ProposalForm::class);
     }
 
-    public function it_is_a_questionnable()
+    public function it_is_a_questionnable(): void
     {
         $this->shouldImplement(QuestionnableForm::class);
     }
 
-    public function it_is_displayable_in_bo()
+    public function it_is_displayable_in_bo(): void
     {
         $this->shouldImplement(DisplayableInBOInterface::class);
     }
@@ -44,6 +49,7 @@ class ProposalFormSpec extends ObjectBehavior
         SimpleQuestion $numberQuestion,
         MultipleChoiceQuestion $multipleChoiceQuestionSimpleResponse,
         MultipleChoiceQuestion $buttonQuestion,
+        MultipleChoiceQuestion $multipleChoiceQuestionWithoutResponse,
         SimpleQuestion $majorityDecision,
         QuestionnaireAbstractQuestion $abstractQuestion1,
         QuestionnaireAbstractQuestion $abstractQuestion2,
@@ -56,7 +62,7 @@ class ProposalFormSpec extends ObjectBehavior
         QuestionChoice $firstChoice,
         QuestionChoice $secondChoice,
         QuestionChoice $thirdChoice
-    ) {
+    ): void {
         $editorTypeQuestion->getInputType()->willReturn('editor');
         $editorTypeQuestion->getType()->willReturn(AbstractQuestion::QUESTION_TYPE_EDITOR);
         $editorTypeQuestion->getTitle()->willReturn('Description');
@@ -112,6 +118,18 @@ class ProposalFormSpec extends ObjectBehavior
         $multipleChoiceQuestionSimpleResponse->getChoices()->willReturn($choices);
         $buttonQuestion->getChoices()->willReturn($choices);
 
+        // Cas d'une question à choix multiple dont les réponses n'ont pas été configurées
+        $multipleChoiceQuestionWithoutResponse->getChoices()->willReturn(new ArrayCollection());
+
+        $multipleChoiceQuestionWithoutResponse
+            ->getTitle()
+            ->willReturn('Question multiple mal configurée')
+        ;
+        $multipleChoiceQuestionWithoutResponse
+            ->getType()
+            ->willReturn(AbstractQuestion::QUESTION_TYPE_SELECT)
+        ;
+
         $abstractQuestion1->getQuestion()->willReturn($mediaQuestion->getWrappedObject());
         $abstractQuestion2->getQuestion()->willReturn($simpleQuestion->getWrappedObject());
         $abstractQuestion3->getQuestion()->willReturn($multipleChoiceQuestionMultiResponses);
@@ -133,6 +151,7 @@ class ProposalFormSpec extends ObjectBehavior
             $numberQuestion->getWrappedObject(),
             $buttonQuestion->getWrappedObject(),
             $majorityDecision->getWrappedObject(),
+            $multipleChoiceQuestionWithoutResponse->getWrappedObject(),
         ]);
 
         $fields = [
@@ -142,8 +161,10 @@ class ProposalFormSpec extends ObjectBehavior
             'NOMBRE' => 'nombre',
             'BUTTON' => 'choice 1',
             'MAJORITY' => 'très bien',
+            'Question multiple mal configurée' => '',
         ];
 
+        // @phpstan-ignore-next-line-pattern '#Call to an undefined method [a-zA-Z0-9\\_]+::getFieldsType\(\)#'
         $this->getFieldsType($questions, false)->shouldReturn($fields);
         $fields = [
             'Ajoutez un texte' => 'texte brut',
@@ -152,8 +173,10 @@ class ProposalFormSpec extends ObjectBehavior
             'NOMBRE' => 'nombre',
             'BUTTON' => 'choice 2',
             'MAJORITY' => 'bien',
+            'Question multiple mal configurée' => '',
         ];
 
+        // @phpstan-ignore-next-line-pattern '#Call to an undefined method [a-zA-Z0-9\\_]+::getFieldsType\(\)#'
         $this->getFieldsType($questions, true)->shouldReturn($fields);
     }
 }
