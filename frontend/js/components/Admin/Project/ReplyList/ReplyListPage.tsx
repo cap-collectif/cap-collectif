@@ -10,12 +10,21 @@ import Button from '~ds/Button/Button'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import ReplyListPlaceholder from './ReplyListPlaceholder'
 import { ICON_NAME as ICON_NAME_DS } from '~ds/Icon/Icon'
+import { ReplyListPage_viewer$key } from '~relay/ReplyListPage_viewer.graphql'
 type Props = {
   readonly questionnaireStep: ReplyListPage_questionnaireStep$key
+  readonly viewer: ReplyListPage_viewer$key
   readonly hasContributionsStep: boolean
   readonly baseUrl: string
 }
-const FRAGMENT = graphql`
+
+const VIEWER_FRAGMENT = graphql`
+  fragment ReplyListPage_viewer on User {
+    ...ReplyList_viewer
+  }
+`
+
+const STEP_FRAGMENT = graphql`
   fragment ReplyListPage_questionnaireStep on QuestionnaireStep
   @argumentDefinitions(
     countRepliesPagination: { type: "Int!" }
@@ -41,12 +50,13 @@ const FRAGMENT = graphql`
   }
 `
 
-const ReplyListPage = ({ questionnaireStep: stepFragment, hasContributionsStep, baseUrl }: Props): JSX.Element => {
+const ReplyListPage = ({ questionnaireStep: stepFragment, viewer: viewerFragment, hasContributionsStep, baseUrl }: Props): JSX.Element => {
   const intl = useIntl()
   const history = useHistory()
   const [term, setTerm] = React.useState<string>('')
-  const step = useFragment(FRAGMENT, stepFragment)
-  if (!step) return <Loader />
+  const step = useFragment(STEP_FRAGMENT, stepFragment)
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
+  if (!step || !viewer) return <Loader />
   return (
     <>
       {hasContributionsStep && baseUrl && (
@@ -91,7 +101,7 @@ const ReplyListPage = ({ questionnaireStep: stepFragment, hasContributionsStep, 
         </Flex>
         <React.Suspense fallback={<ReplyListPlaceholder />}>
           {step?.questionnaire && (
-            <ReplyList questionnaire={step?.questionnaire} resetTerm={() => setTerm('')} term={term} />
+            <ReplyList questionnaire={step?.questionnaire} resetTerm={() => setTerm('')} term={term} viewer={viewer} />
           )}
         </React.Suspense>
       </Flex>

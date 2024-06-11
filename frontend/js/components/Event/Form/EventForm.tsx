@@ -669,7 +669,8 @@ export const EventForm = ({
                 id="event_link"
               />
             )}
-            {!query.viewer.isOnlyProjectAdmin && isBackOfficeView && (
+
+            {(!query.viewer.isOnlyProjectAdmin && isBackOfficeView && isFeatureUserEventEnabled) && (
               <Field
                 name="adminAuthorizeDataTransfer"
                 id="event_adminAuthorizeDataTransfer"

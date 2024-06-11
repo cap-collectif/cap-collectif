@@ -293,13 +293,6 @@ exports[`<EventForm /> it renders correctly with event complete 1`] = `
         />
         <Field
           component={[Function]}
-          id="event_adminAuthorizeDataTransfer"
-          label="authorize-transfer-of-data-to-event-organizer"
-          name="adminAuthorizeDataTransfer"
-          type="checkbox"
-        />
-        <Field
-          component={[Function]}
           disabled={false}
           id="event_commentable"
           label="admin.fields.proposal.comments"
@@ -671,13 +664,6 @@ exports[`<EventForm /> it renders correctly without default props 1`] = `
         />
         <Field
           component={[Function]}
-          id="event_adminAuthorizeDataTransfer"
-          label="authorize-transfer-of-data-to-event-organizer"
-          name="adminAuthorizeDataTransfer"
-          type="checkbox"
-        />
-        <Field
-          component={[Function]}
           disabled={false}
           id="event_commentable"
           label="admin.fields.proposal.comments"
@@ -1045,13 +1031,6 @@ exports[`<EventForm /> it renders event form disabled 1`] = `
           id="event_registrable"
           label="inscriptions-on-platform"
           name="guestListEnabled"
-          type="checkbox"
-        />
-        <Field
-          component={[Function]}
-          id="event_adminAuthorizeDataTransfer"
-          label="authorize-transfer-of-data-to-event-organizer"
-          name="adminAuthorizeDataTransfer"
           type="checkbox"
         />
         <Field

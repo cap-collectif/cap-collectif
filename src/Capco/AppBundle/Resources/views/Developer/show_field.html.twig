@@ -1,5 +1,5 @@
 <div style="margin-bottom: 32px">
-    <strong>{{ field.name }} (<code><a href="{{ field.type|capco_developer_type_url}}">{{field.type}}</a></code>)</strong>
+    <strong>{{ field.name }} (<code><a href="{{ field.getType|capco_developer_type_url}}">{{field.getType}}</a></code>)</strong>
     {% if field.config.access|default(false) %}
         {# We need a way to get info about the required access #}
         <span class="label label-info">ROLE_USER</span>

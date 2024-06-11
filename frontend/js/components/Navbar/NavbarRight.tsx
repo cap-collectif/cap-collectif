@@ -108,7 +108,7 @@ export const NavbarRight = ({
               </React.Suspense>
             )}
             {showAdminLink && (
-              <MenuItem {...menu} href={user.isAdmin ? '/admin/' : '/admin-next/projects'} as={S.TabsLink}>
+              <MenuItem {...menu} href="/admin-next/projects" as={S.TabsLink}>
                 <i className="cap-setting-gears-1 mr-10" aria-hidden="true" />
                 {intl.formatMessage({
                   id: 'global.administration',

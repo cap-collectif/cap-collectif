@@ -29,6 +29,17 @@ class GoogleMapsAddress
         try {
             $decoded = \GuzzleHttp\json_decode($response, true);
             if (\count($decoded) > 0 && ($address = $decoded[0])) {
+                if (
+                    !isset(
+                        $address['geometry'],
+                        $address['geometry']['location'],
+                        $address['geometry']['location']['lat'],
+                        $address['geometry']['location']['lng']
+                    )
+                ) {
+                    return null;
+                }
+
                 return new self(
                     $response,
                     explode('|', $address['geometry']['location_type']),

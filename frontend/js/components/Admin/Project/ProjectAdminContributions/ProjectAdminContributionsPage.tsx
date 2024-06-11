@@ -92,6 +92,7 @@ export const queryContributions = graphql`
     }
     viewer {
       ...NoContributionsStep_viewer
+      ...ReplyListPage_viewer
     }
     ...ProjectAdminProposalsPage_query
       @arguments(
@@ -125,6 +126,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
   const hasQuestionnaireSteps = questionnaireSteps.length > 0
   const hasAtLeastOneContributionsStep = hasCollectStep || hasDebateStep || hasQuestionnaireSteps
   const hasIndex = collectSteps.length + debateSteps.length + questionnaireSteps.length > 1
+
   return (
     <Box m={3}>
       <Switch>
@@ -184,6 +186,7 @@ const ProjectAdminContributionsPage = ({ dataPrefetch, projectId }: Props) => {
               }
               hasContributionsStep={hasIndex}
               baseUrl={baseUrl}
+              viewer={viewer}
             />
           )}
         />

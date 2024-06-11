@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import type { GraphQLTaggedNode } from 'react-relay'
+import { GraphQLTaggedNode, useFragment } from 'react-relay'
 import { graphql, usePaginationFragment } from 'react-relay'
 import Table from '~ds/Table'
 import type { ReplyList_questionnaire$key } from '~relay/ReplyList_questionnaire.graphql'
@@ -10,9 +10,11 @@ import Button from '~ds/Button/Button'
 import Icon, { ICON_NAME } from '~ds/Icon/Icon'
 import Text from '~ui/Primitives/Text'
 import ReplyModalConfirmationDelete from '~/components/Admin/Project/ReplyList/ReplyModalConfirmationDelete'
+import { ReplyList_viewer$key } from '~relay/ReplyList_viewer.graphql'
 export const REPLY_LIST_PAGINATION = 20
 type Props = {
   readonly questionnaire: ReplyList_questionnaire$key
+  readonly viewer: ReplyList_viewer$key
   readonly term: string
   readonly resetTerm: () => void
 }
@@ -45,9 +47,18 @@ export const ReplyListQuestionnaire: GraphQLTaggedNode = graphql`
   }
 `
 
-const ReplyList = ({ questionnaire, term, resetTerm }: Props): JSX.Element => {
+const VIEWER_FRAGMENT = graphql`
+  fragment ReplyList_viewer on User {
+    ...ReplyItem_viewer
+  }
+`
+
+
+const ReplyList = ({ questionnaire, term, resetTerm, viewer: viewerFragment }: Props): JSX.Element => {
   const intl = useIntl()
   const firstRendered = React.useRef(null)
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+
   const [orderBy, setOrderBy] = React.useState({
     field: 'CREATED_AT',
     direction: 'DESC',
@@ -270,7 +281,7 @@ const ReplyList = ({ questionnaire, term, resetTerm }: Props): JSX.Element => {
           .filter(Boolean)
           .map(reply => (
             <Table.Tr key={reply.id} rowId={reply.id} checkboxLabel={reply.id}>
-              <ReplyItem reply={reply} connectionName={connectionName} />
+              <ReplyItem reply={reply} connectionName={connectionName} viewer={viewer} />
             </Table.Tr>
           ))}
       </Table.Tbody>

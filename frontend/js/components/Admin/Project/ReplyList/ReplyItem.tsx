@@ -11,11 +11,13 @@ import Flex from '~ui/Primitives/Layout/Flex'
 import ReplyModalConfirmationDelete from './ReplyModalConfirmationDelete'
 import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction'
 import Link from '~ds/Link/Link'
+import { ReplyItem_viewer$key } from '~relay/ReplyItem_viewer.graphql'
 type Props = {
   readonly reply: ReplyItem_reply$key
+  readonly viewer: ReplyItem_viewer$key
   readonly connectionName: string
 }
-const FRAGMENT = graphql`
+const REPLY_FRAGMENT = graphql`
   fragment ReplyItem_reply on Reply {
     __typename
     id
@@ -28,6 +30,12 @@ const FRAGMENT = graphql`
         username
       }
     }
+  }
+`
+
+const VIEWER_FRAGMENT = graphql`
+  fragment ReplyItem_viewer on User {
+    isOrganizationMember
   }
 `
 
@@ -89,15 +97,16 @@ const getUsername = (reply: ReplyItem_reply, intl: IntlShape): string | null | u
   return null
 }
 
-const ReplyItem = ({ reply: replyFragment, connectionName }: Props): JSX.Element => {
-  const reply = useFragment(FRAGMENT, replyFragment)
+const ReplyItem = ({ reply: replyFragment, connectionName, viewer: viewerFragment }: Props): JSX.Element => {
+  const reply = useFragment(REPLY_FRAGMENT, replyFragment)
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
   const intl = useIntl()
   const author = getUsername(reply, intl)
   const id = moment(reply.createdAt).format('YYYY-MM-DD_H-m-s')
   return (
     <>
       <Table.Td>
-        {reply.adminUrl ? (
+        {(reply.adminUrl && !viewer.isOrganizationMember) ? (
           <Link href={reply.adminUrl} target="_blank">
             {id}
           </Link>
