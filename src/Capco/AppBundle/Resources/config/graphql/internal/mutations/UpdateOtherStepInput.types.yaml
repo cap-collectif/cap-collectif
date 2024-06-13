@@ -26,4 +26,7 @@ UpdateOtherStepInput:
             customCode:
                 type: 'String'
                 description: 'Step custom code.'
+            timeless:
+                type: 'Boolean!'
+                description: 'Wether or not the step is timeless'
 

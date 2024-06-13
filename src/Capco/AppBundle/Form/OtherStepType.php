@@ -31,6 +31,7 @@ class OtherStepType extends AbstractType
                 'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('isEnabled', CheckboxType::class)
+            ->add('timeless', CheckboxType::class)
             ->add('metaDescription', TextType::class)
             ->add('customCode', TextType::class, [
                 'purify_html' => true,

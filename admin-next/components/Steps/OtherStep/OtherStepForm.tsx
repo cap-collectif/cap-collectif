@@ -14,6 +14,7 @@ import { onBack } from '@components/Steps/utils'
 import { useOtherStep } from './OtherStepContext'
 import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
+import { StepDurationTypeEnum } from '@components/Steps/DebateStep/DebateStepForm'
 
 type Props = {
   stepId: string
@@ -28,6 +29,10 @@ type FormValues = {
   isEnabled: {
     labels: Array<string>
   }
+  timeless: boolean,
+  stepDurationType?: {
+    labels: Array<string>
+  }
   metaDescription: string
   customCode: string | null
 }
@@ -39,6 +44,7 @@ export const QUERY = graphql`
       ... on OtherStep {
         label
         body
+        timeless
         timeRange {
           startAt
           endAt
@@ -106,6 +112,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   const getInitialValues = (): FormValues => {
     const isEnabledLabels = step.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT]
+    const stepDurationType = step?.timeless ? [StepDurationTypeEnum.TIMELESS] : [StepDurationTypeEnum.CUSTOM]
     return {
       label: step.label ?? '',
       body: step.body ?? '',
@@ -113,6 +120,10 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       endAt: step.timeRange?.endAt ?? null,
       isEnabled: {
         labels: isEnabledLabels,
+      },
+      timeless: step.timeless ?? false,
+      stepDurationType: {
+        labels: stepDurationType,
       },
       metaDescription: step.metaDescription ?? '',
       customCode: step.customCode ?? '',
@@ -127,12 +138,16 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const { handleSubmit, formState, control } = formMethods
   const { isSubmitting } = formState
   const onSubmit = async (values: FormValues) => {
+    const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
+    delete values.stepDurationType;
+
     const input = {
       ...values,
       stepId,
       startAt: values?.startAt,
       endAt: values?.endAt,
       isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
+      timeless
     }
 
     try {
@@ -197,7 +212,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             }}
           />
           <StepDurationInput
-            canChooseDurationType={false}
+            canChooseDurationType
             startAt={{
               required: false,
             }}

@@ -4,319 +4,240 @@ exports[`Internal|Query.featureFlags fetches all feature flags 1`] = `
 Object {
   "featureFlags": Array [
     Object {
-      "enabled": false,
       "type": "noindex_on_profiles",
     },
     Object {
-      "enabled": false,
       "type": "graphql_query_analytics",
     },
     Object {
-      "enabled": true,
       "type": "questionnaire_result",
     },
     Object {
-      "enabled": true,
       "type": "blog",
     },
     Object {
-      "enabled": true,
       "type": "calendar",
     },
     Object {
-      "enabled": true,
       "type": "captcha",
     },
     Object {
-      "enabled": true,
       "type": "turnstile_captcha",
     },
     Object {
-      "enabled": false,
       "type": "consent_external_communication",
     },
     Object {
-      "enabled": true,
       "type": "developer_documentation",
     },
     Object {
-      "enabled": true,
       "type": "public_api",
     },
     Object {
-      "enabled": true,
       "type": "graphql_introspection",
     },
     Object {
-      "enabled": true,
       "type": "votes_min",
     },
     Object {
-      "enabled": true,
       "type": "login_facebook",
     },
     Object {
-      "enabled": false,
       "type": "login_saml",
     },
     Object {
-      "enabled": false,
       "type": "login_cas",
     },
     Object {
-      "enabled": false,
       "type": "login_openid",
     },
     Object {
-      "enabled": true,
       "type": "privacy_policy",
     },
     Object {
-      "enabled": true,
       "type": "members_list",
     },
     Object {
-      "enabled": true,
       "type": "newsletter",
     },
     Object {
-      "enabled": true,
       "type": "profiles",
     },
     Object {
-      "enabled": true,
       "type": "projects_form",
     },
     Object {
-      "enabled": true,
       "type": "project_trash",
     },
     Object {
-      "enabled": true,
       "type": "search",
     },
     Object {
-      "enabled": true,
       "type": "share_buttons",
     },
     Object {
-      "enabled": false,
       "type": "shield_mode",
     },
     Object {
-      "enabled": true,
       "type": "registration",
     },
     Object {
-      "enabled": false,
       "type": "phone_confirmation",
     },
     Object {
-      "enabled": true,
       "type": "reporting",
     },
     Object {
-      "enabled": false,
       "type": "restrict_registration_via_email_domain",
     },
     Object {
-      "enabled": true,
       "type": "themes",
     },
     Object {
-      "enabled": true,
       "type": "export",
     },
     Object {
-      "enabled": true,
       "type": "districts",
     },
     Object {
-      "enabled": true,
       "type": "user_type",
     },
     Object {
-      "enabled": false,
       "type": "votes_evolution",
     },
     Object {
-      "enabled": true,
       "type": "server_side_rendering",
     },
     Object {
-      "enabled": false,
       "type": "zipcode_at_register",
     },
     Object {
-      "enabled": true,
       "type": "indexation",
     },
     Object {
-      "enabled": true,
       "type": "consultation_plan",
     },
     Object {
-      "enabled": true,
       "type": "display_map",
     },
     Object {
-      "enabled": true,
       "type": "consent_internal_communication",
     },
     Object {
-      "enabled": false,
       "type": "oauth2_switch_user",
     },
     Object {
-      "enabled": false,
       "type": "sso_by_pass_auth",
     },
     Object {
-      "enabled": false,
       "type": "allow_users_to_propose_events",
     },
     Object {
-      "enabled": false,
       "type": "login_franceconnect",
     },
     Object {
-      "enabled": false,
       "type": "restrict_connection",
     },
     Object {
-      "enabled": false,
       "type": "secure_password",
     },
     Object {
-      "enabled": false,
       "type": "read_more",
     },
     Object {
-      "enabled": true,
       "type": "remind_user_account_confirmation",
     },
     Object {
-      "enabled": false,
       "type": "display_pictures_in_depository_proposals_list",
     },
     Object {
-      "enabled": true,
       "type": "display_pictures_in_event_list",
     },
     Object {
-      "enabled": false,
       "type": "external_project",
     },
     Object {
-      "enabled": false,
       "type": "sentry_log",
     },
     Object {
-      "enabled": true,
       "type": "multilangue",
     },
     Object {
-      "enabled": true,
       "type": "http_redirects",
     },
     Object {
-      "enabled": false,
       "type": "report_browers_errors_to_sentry",
     },
     Object {
-      "enabled": false,
       "type": "emailing",
     },
     Object {
-      "enabled": false,
       "type": "emailing_parameters",
     },
     Object {
-      "enabled": true,
       "type": "emailing_group",
     },
     Object {
-      "enabled": true,
       "type": "proposal_revisions",
     },
     Object {
-      "enabled": true,
       "type": "new_project_card",
     },
     Object {
-      "enabled": false,
       "type": "export_legacy_users",
     },
     Object {
-      "enabled": false,
       "type": "import_proposals",
     },
     Object {
-      "enabled": false,
       "type": "analytics_page",
     },
     Object {
-      "enabled": true,
       "type": "project_admin",
     },
     Object {
-      "enabled": false,
       "type": "anonymous_questionnaire",
     },
     Object {
-      "enabled": false,
       "type": "twilio",
     },
     Object {
-      "enabled": false,
       "type": "paper_vote",
     },
     Object {
-      "enabled": false,
       "type": "helpscout_beacon",
     },
     Object {
-      "enabled": false,
       "type": "api_sendinblue",
     },
     Object {
-      "enabled": false,
       "type": "proposal_sms_vote",
     },
     Object {
-      "enabled": false,
       "type": "organizations",
     },
     Object {
-      "enabled": false,
       "type": "moderation_comment",
     },
     Object {
-      "enabled": false,
       "type": "unstable__new_create_project",
     },
     Object {
-      "enabled": false,
       "type": "new_vote_step",
     },
     Object {
-      "enabled": true,
       "type": "mediator",
     },
     Object {
-      "enabled": false,
       "type": "online_help",
     },
     Object {
-      "enabled": false,
       "type": "full_proposal_card",
     },
     Object {
-      "enabled": false,
       "type": "new_navbar",
     },
     Object {
-      "enabled": false,
       "type": "multi_consultations",
     },
   ],

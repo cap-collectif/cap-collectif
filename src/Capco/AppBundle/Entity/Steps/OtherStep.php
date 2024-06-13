@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Traits\TimelessStepTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -11,6 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class OtherStep extends AbstractStep
 {
+    use TimelessStepTrait;
+
     public const TYPE = 'other';
 
     public function getType()

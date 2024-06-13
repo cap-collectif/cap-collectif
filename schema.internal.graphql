@@ -18527,6 +18527,9 @@ input UpdateOtherStepInput {
 
   """Step custom code."""
   customCode: String
+
+  """Wether or not the step is timeless"""
+  timeless: Boolean!
   clientMutationId: String
 }
 

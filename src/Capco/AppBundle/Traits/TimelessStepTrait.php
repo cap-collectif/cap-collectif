@@ -9,7 +9,7 @@ trait TimelessStepTrait
     /**
      * @ORM\Column(name="timeless", type="boolean", nullable=false, options={"default" = false})
      */
-    private $timeless = false;
+    private bool $timeless = false;
 
     public function isTimeless(): bool
     {

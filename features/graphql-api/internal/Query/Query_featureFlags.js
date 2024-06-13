@@ -3,7 +3,6 @@ const InternalQuery = /* GraphQL */ `
   query GetAllFeatureFlagsQuery {
     featureFlags {
       type
-      enabled
     }
   }
 `;

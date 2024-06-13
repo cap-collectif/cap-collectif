@@ -119,7 +119,7 @@ trait TimeRangeableTrait
         }
 
         if (null === $this->startAt && null === $this->endAt) {
-            return !$this->isTimeless();
+            return true;
         }
 
         if (null === $this->endAt) {

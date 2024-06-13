@@ -16,6 +16,7 @@ const UpdateOtherStep = /* GraphQL*/ `
           startAt
           endAt
         }
+        timeless
       }
     }
   }
@@ -28,7 +29,8 @@ const input = {
   "metaDescription": "updated metadescription",
   "customCode": "updated custom code",
   "startAt": "2023-01-03 16:29:17",
-  "endAt": "2023-01-03 16:29:17"
+  "endAt": "2023-01-03 16:29:17",
+  "timeless": false,
 }
 
 describe('mutations.addOtherStepMutation', () => {
