@@ -58,6 +58,12 @@ trait UserSSOTrait
             $this->setEmail($attributes['mail'][0]);
             $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
         }
+
+        if ('clermont' === $idp) {
+            $this->setUsername($attributes['givenname'][0] . ' ' . $attributes['surname'][0]);
+            $this->setEmail($attributes['mail'][0]);
+            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
+        }
     }
 
     public function setSamlId(string $samlId): self

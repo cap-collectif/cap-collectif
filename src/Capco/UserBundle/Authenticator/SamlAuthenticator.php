@@ -58,6 +58,10 @@ class SamlAuthenticator implements SimplePreAuthenticatorInterface
             return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress';
         }
 
+        if ('clermont' === $this->samlIdp) {
+            return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier';
+        }
+
         throw new \Exception('Could not find authentication attribute for idp: ' . $this->samlIdp);
     }
 
