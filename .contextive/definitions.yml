@@ -1,0 +1,91 @@
+contexts:
+  - name: steps
+    terms:
+      - name: CollectStep
+        definition: |
+          Etape de dépôt. C'est une étape de participation dans laquelle on va lier un formulaire de dépôt de Propositions (ProposalForm).
+        # définir étape de participation vs étape personnalisée (cad étape d'information)
+        examples:
+          - Dépôt de Propositions dans un budget participatif -> exemple de titre "Déposez vos projets/propositions"
+            -> https://territoires.cap-collectif.com/project/budget-participatif/collect/depot
+          - Dépôt de questions dans un projet de type "questions/réponses" (terminologie utilisée par les clients)
+            -> https://territoires.cap-collectif.com/project/questions-reponses/collect/posez-nous-votre-question
+          - Dépôt d'avis (terminologie utilisée par les clients)
+          - Dépôt d'interpellation
+            -> https://territoires.cap-collectif.com/project/petition/collect/petitions-municipales
+
+      - name: ConsultationStep
+        definition: |
+          Etape de consultation. Une étape de participation dans laquelle on va lier une Consultation/un formulaire de consultation (autrefois appelée "structure").
+          On peut aussi déposer des propositions (càd des Opinions)
+      #                  terms:
+      #                    - name: Consultation
+      #                      definition: |
+      #          Objet de configuration de la consultation, permet de définir les Sections et les modalités de participation de chaque section. Plusieurs modes de participations sont possibles.
+      #          - example: |
+      #          On peut activer ou pas le dépot de propositions, d'amendements et sources. Les Arguments et le vote sont activés par défaut et ne sont pas désactivables
+      #          (On peut supprimer dans le code la possibilité de désactiver / modifier le type de vote, supprimé depuis qq années)
+      #                - name: Opinion
+      #                  definition: |
+      #                    Proposition qui peut être déposée dans une étape de consultation.
+      #                    On peut lui lier des Arguments, des Amendements et des Sources.
+
+      - name: DebateStep
+        definition: |
+          Etape de débat. Une étape dans laquelle on crée un débat mais l'utilisateur ne lie pas d'objet ni de formulaire. 
+          L'utilisateur crée une question de Débat et les utilisateurs finaux votent (pour ou contre) et peuvent mettre des Arguments.
+          Sur cette étape, l'utilisateur ne peut pas désactiver la possibilité de mettre des Arguments.
+
+      - name: OtherStep
+        definition: |
+          Etape personnalisée (pourrait être renommée). Simple étape d'information avec un éditeur de texte. 
+          Aucune participation possible.
+
+      - name: PresentationStep
+        definition: |
+          Etape de présentation. Est comme une étape personnalisée mais n'a pas de date. 
+          Elle apparaît en première position dans un projet.
+
+      - name: QuestionnaireStep
+        definition: Etape de questionnaire. C'est une étape de participation dans laquelle on lie un Questionnaire.
+        exemple: https://demo2.cap-collectif.com/project/fruits-et-legumes/questionnaire/questionnaire-6
+
+      - name: RankingStep
+        definition: N'EXISTE PLUS - mais tjrs présente sur https://www.republique-numerique.fr/project/projet-de-loi-numerique/consultation/consultation
+
+      - name: SelectionStep
+        definition: |
+          Etape de sélection. Ne peut pas exister sans une étape de dépôt, étape qui permet d'afficher une sélection de 
+          Propositions qui sont sélectionnées dans l'étape de dépôt. On a les mêmes features que dans l'étape de dépôt. 
+          Cette étape peut être présente plusieurs fois à la suite.
+
+          Templates possibles : étape de vote, étape de projets lauréats, étape d'analyse (contient tous les projets qui
+          vont être analysés et configure l'objet d'analyse)
+        examples:
+          - Etape d'analyse, elle permet d'afficher le résultat (pas d'action possible de l'utilisateur)
+            -> https://territoires.cap-collectif.com/project/budget-participatif/selection/analyse
+          - Etape de vote qui affiche toute les propositions et permet à l'utilisateur final de voter
+            -> https://territoires.cap-collectif.com/project/budget-participatif/selection/a-vous-de-jouer
+          - Etape de sélection des propositions qui ont reçu 2 votes minimum (pas de vote activé donc pas d'action possible de l'utilisateur) `
+            -> https://territoires.cap-collectif.com/project/budget-participatif/selection/vous-les-avez-choisis
+
+  - name: Users
+    terms:
+      - name: Organization
+        definition: |
+          Une organisation regroupe un ou plusieurs Gestionnaires et/ou Administrateurs. 
+          Elle donne un accès restreint au Back-Office qui permet seulement de créer/éditer les projets de leur propre organisation.
+          Plusieurs organisations peuvent co-exister sur une même plateforme.
+
+      - name: OrganizationMember
+        definition: |
+          Si la valeur de role est 'admin', alors il s'agit  d'un "Admin de l'organisation"
+          En plus de pouvoir contribuer, il peut gérer la page de l'administration, administrer son organisation 
+          (ajouter/supprimer des membres, etc.) 
+          Si la valeur de role est 'user', alors il s'agit  d'un "Gestionnaire de projet"
+          Dans ce cas, il peut seulement contribuer et ne peut pas administrer son organisation.
+
+      - name: Admin
+      - name: SuperAdmin
+      - name: Participant
+      - name: Mediator
