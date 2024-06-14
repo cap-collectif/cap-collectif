@@ -60,9 +60,17 @@ trait UserSSOTrait
         }
 
         if ('clermont' === $idp) {
-            $this->setUsername($attributes['givenname'][0] . ' ' . $attributes['surname'][0]);
-            $this->setEmail($attributes['mail'][0]);
-            $this->setEmailCanonical((new Canonicalizer())->canonicalize($attributes['mail'][0]));
+            $this->setUsername(
+                sprintf(
+                    '%s %s',
+                    $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/givenname'][0],
+                    $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/surname'][0]
+                )
+            );
+            $this->setEmail($attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'][0]);
+            $this->setEmailCanonical((new Canonicalizer())->canonicalize(
+                $attributes['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress'][0]
+            ));
         }
     }
 
