@@ -61,7 +61,7 @@ export class EmailNotConfirmedAlert extends React.Component<Props, State> {
                 emailAddress: viewer.email,
               }}
             />{' '}
-            <a href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique">
+            <a href="https://aide-utilisateurs.helpscoutdocs.com/article/347-pourquoi-dois-je-confirmer-mon-adresse-electronique">
               <FormattedMessage id="cnil.learn" />
             </a>
           </div>

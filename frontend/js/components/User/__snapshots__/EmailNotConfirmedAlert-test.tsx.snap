@@ -30,7 +30,7 @@ exports[`<EmailNotConfirmedAlert /> renders a button to resend confirmation & an
       />
        
       <a
-        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        href="https://aide-utilisateurs.helpscoutdocs.com/article/347-pourquoi-dois-je-confirmer-mon-adresse-electronique"
       >
         <FormattedMessage
           id="cnil.learn"
@@ -113,7 +113,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending 1`]
       />
        
       <a
-        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        href="https://aide-utilisateurs.helpscoutdocs.com/article/347-pourquoi-dois-je-confirmer-mon-adresse-electronique"
       >
         <FormattedMessage
           id="cnil.learn"
@@ -196,7 +196,7 @@ exports[`<EmailNotConfirmedAlert /> renders a disabled button when resending is 
       />
        
       <a
-        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        href="https://aide-utilisateurs.helpscoutdocs.com/article/347-pourquoi-dois-je-confirmer-mon-adresse-electronique"
       >
         <FormattedMessage
           id="cnil.learn"
@@ -280,7 +280,7 @@ exports[`<EmailNotConfirmedAlert /> renders nothing if not logged 1`] = `
       />
        
       <a
-        href="http://aide.cap-collectif.com/article/9-pourquoi-dois-je-confirmer-mon-adresse-electronique"
+        href="https://aide-utilisateurs.helpscoutdocs.com/article/347-pourquoi-dois-je-confirmer-mon-adresse-electronique"
       >
         <FormattedMessage
           id="cnil.learn"
