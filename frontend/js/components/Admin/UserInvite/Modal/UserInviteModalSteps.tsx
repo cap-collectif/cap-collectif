@@ -18,9 +18,11 @@ import { toast } from '~ds/Toast'
 import { isEmail } from '~/services/Validator'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import environment from '~/createRelayEnvironment'
+import { emailSeparator } from '~/components/Admin/UserInvite/Modal/UserInviteModalStepsSendingConfirmation'
+
 const formName = 'form-user-invitation'
 const maxEmails = 5
-export const emailSeparator = ','
+
 const USER_FETCH_QUERY = graphql`
   query UserInviteModalStepsAvailabilitySearchQuery($emails: [String!]!) {
     userInvitationsAvailabilitySearch(emails: $emails) {
@@ -98,7 +100,7 @@ const asyncValidate = (values: { inputEmails: string; redirectionUrl: string }) 
 
     if (formattedInputEmails.length > 0) {
       return new Promise((resolve, reject) => {
-        fetchQuery(environment, USER_FETCH_QUERY, {
+        fetchQuery(environment as any, USER_FETCH_QUERY, {
           emails: formattedInputEmails,
         }).subscribe({
           next: response => {

@@ -16,7 +16,6 @@ type Props = {
   readonly logoUrl: string
   readonly chartsRef: ChartsRef
 }
-export const RETRY_LIMIT = 1
 
 const QuestionnaireAdminResultsPdfModal = ({ show, onClose, questionnaire, logoUrl, chartsRef }: Props) => {
   const { title, step } = questionnaire

@@ -10,7 +10,6 @@ import FileUpload from '../Form/FileUpload'
 import InfoMessage from '~ds/InfoMessage/InfoMessage'
 import Fetcher, { json } from '~/services/Fetcher'
 import Card from '~ds/Card/Card'
-import { formName } from '~/components/Admin/Project/ImportButton/ImportProposalsFromCsvModal'
 
 type FileUploadFieldProps = {
   input: {
@@ -36,6 +35,9 @@ type FileUploadFieldProps = {
     | undefined
 }
 const CSV_MAX_UPLOAD_SIZE = 8000000
+
+export const formName = `ImportProposalsFromCsvModal`
+
 export const ProposalCsvDropZoneInput = ({ input, onPostDrop, disabled }: FileUploadFieldProps) => {
   const intl = useIntl()
   const dispatch = useDispatch()

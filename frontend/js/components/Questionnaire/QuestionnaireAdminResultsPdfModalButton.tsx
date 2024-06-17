@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Button from '~ds/Button/Button'
 import Loader from '~ui/FeedbacksIndicators/Loader'
-import { RETRY_LIMIT } from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModal'
+
 type Props = {
   readonly loading: boolean
   readonly onClose: () => void
@@ -12,6 +12,8 @@ type Props = {
   readonly retryCount: number
   readonly setRetryCount: (arg0: ((arg0: number) => number) | number) => void
 }
+
+export const RETRY_LIMIT = 1
 
 const QuestionnaireAdminResultsPdfModalButton = ({
   loading,

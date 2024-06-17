@@ -9,9 +9,8 @@ import Button from '~ds/Button/Button'
 import Text from '~ui/Primitives/Text'
 import { ICON_NAME } from '~ds/Icon/Icon'
 import type { Dispatch } from '~/types'
-import ImportProposalsFromCsvModal, {
-  formName,
-} from '~/components/Admin/Project/ImportButton/ImportProposalsFromCsvModal'
+import ImportProposalsFromCsvModal from '~/components/Admin/Project/ImportButton/ImportProposalsFromCsvModal'
+import { formName } from '~/components/Utils/ProposalCsvDropZoneInput'
 import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal'
 import colors from '~/utils/colors'
 import AddProposalsFromCsvMutation from '~/mutations/AddProposalsFromCsvMutation'

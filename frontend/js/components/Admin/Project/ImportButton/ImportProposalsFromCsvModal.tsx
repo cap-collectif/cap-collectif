@@ -17,7 +17,7 @@ import Heading from '~ui/Primitives/Heading'
 import AddProposalsFromCsvMutation from '~/mutations/AddProposalsFromCsvMutation'
 import type { AddProposalsFromCsvMutationResponse } from '~relay/AddProposalsFromCsvMutation.graphql'
 import type { Dispatch, Uuid, GlobalState } from '~/types'
-import { ProposalCsvDropZoneInput } from '~/components/Utils/ProposalCsvDropZoneInput'
+import { ProposalCsvDropZoneInput, formName } from '~/components/Utils/ProposalCsvDropZoneInput'
 import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 
 type Props = ReduxFormFormProps & {
@@ -32,7 +32,6 @@ type Props = ReduxFormFormProps & {
   onSubmit: () => void
   intl: IntlShape
 }
-export const formName = `ImportProposalsFromCsvModal`
 
 const getInputFromFile = (
   dispatch: Dispatch,

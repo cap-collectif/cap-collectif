@@ -15,6 +15,7 @@
         "build": "NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.client.js",
         "build:analyzer": "NODE_ENV=development webpack --config webpack/webpack.client.analyzer.js",
         "build:analyzer:prod": "NODE_ENV=production webpack --config webpack/webpack.prod.analyzer.js",
+        "build:check-circular-deps": "CHECK_CIRCULAR_DEPS=true yarn build",
         "build:watch": "NODE_ENV=development node --max_old_space_size=4096 node_modules/webpack/bin/webpack.js --config webpack/webpack.client.hot.js",
         "build:prod": "NODE_ENV=production node --max_old_space_size=8192 node_modules/webpack/bin/webpack.js --config webpack/webpack.prod.client.js",
         "build-relay-schema": "relay-compiler",

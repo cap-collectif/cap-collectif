@@ -5,11 +5,11 @@ import { useCallback } from 'react'
 import { Field, isInvalid, isPristine } from 'redux-form'
 import { useSelector, connect } from 'react-redux'
 import { Heading, Button, Modal } from '@cap-collectif/ui'
-import { formName } from '~/components/Debate/Page/MainActions/DebateStepPageVoteForm'
 import component from '~/components/Form/Field'
 import type { GlobalState, Dispatch } from '~/types'
 import useLoadingMachine from '~/utils/hooks/useLoadingMachine'
 import ResetCss from '~/utils/ResetCss'
+
 type BeforeConnectProps = {
   readonly show: boolean
   readonly title: string
@@ -23,6 +23,9 @@ type StateProps = {
   readonly dispatch: Dispatch
 }
 type Props = BeforeConnectProps & StateProps
+
+export const formName = 'debate-argument-form'
+
 export const MobilePublishArgumentModal = ({
   show,
   onClose,

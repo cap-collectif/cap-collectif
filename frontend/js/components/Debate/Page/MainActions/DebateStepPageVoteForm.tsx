@@ -32,7 +32,8 @@ import CookieMonster from '~/CookieMonster'
 import type { VoteAction, VoteState } from './DebateStepPageStateMachine'
 import { MachineContext } from './DebateStepPageStateMachine'
 import ModalPublishArgumentAnonymous from '~/components/Debate/Page/Modals/ModalPublishArgumentAnonymous'
-export const formName = 'debate-argument-form'
+import { formName } from '~/components/Debate/Page/Modals/MobilePublishArgumentModal'
+
 type Viewer = {
   readonly id: string
   readonly username: string

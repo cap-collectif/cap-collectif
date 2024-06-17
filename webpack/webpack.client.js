@@ -14,6 +14,8 @@ const webpackJsx = require('./rules/webpack.jsx.js')()
 const webpackScss = require('./rules/webpack.scss.js')()
 const webpackFile = require('./rules/webpack.file.js')()
 
+const checkCircularDependencies = process.env.CHECK_CIRCULAR_DEPS
+
 const devConf = {
   mode: 'development',
   target: 'web',
@@ -115,17 +117,19 @@ const devConf = {
       // Path files removed (Relative to webpack's output.path directory)
       cleanOnceBeforeBuildPatterns: ['js/chunks/*'],
     }),
-    new CircularDependencyPlugin({
-      // exclude detection of files based on a RegExp
-      exclude: /a\.js|node_modules/,
-      // add errors to webpack instead of warnings
-      failOnError: false,
-      // allow import cycles that include an asyncronous import,
-      // e.g. via import(/* webpackMode: "weak" */ './file.js')
-      allowAsyncCycles: false,
-      // set the current working directory for displaying module paths
-      cwd: process.cwd(),
-    }),
+    (checkCircularDependencies &&
+      new CircularDependencyPlugin({
+        // exclude detection of files based on a RegExp
+        exclude: /a\.js|node_modules/,
+        // add errors to webpack instead of warnings
+        failOnError: false,
+        // allow import cycles that include an asyncronous import,
+        // e.g. via import(/* webpackMode: "weak" */ './file.js')
+        allowAsyncCycles: false,
+        // set the current working directory for displaying module paths
+        cwd: process.cwd(),
+      })) ||
+      undefined,
     // This plugin extracts CSS into separate files located in /css folder
     new MiniCssExtractPlugin({
       filename: 'css/[name].css',
@@ -163,7 +167,7 @@ const devConf = {
       Buffer: ['buffer', 'Buffer'],
       process: 'process/browser',
     }),
-  ],
+  ].filter(Boolean),
 }
 
 module.exports = merge(devConf, webpackJsx, webpackFile, webpackScss)

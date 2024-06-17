@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { RETRY_LIMIT } from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModal'
+import { RETRY_LIMIT } from '~/components/Questionnaire/QuestionnaireAdminResultsPdfModalButton'
 type Props = {
   readonly loading: boolean
   readonly error: boolean

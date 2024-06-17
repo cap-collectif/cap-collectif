@@ -5,10 +5,11 @@ import { Field, formValueSelector } from 'redux-form'
 import Flex from '~ui/Primitives/Layout/Flex'
 import type { GlobalState } from '~/types'
 import { isEmail } from '~/services/Validator'
-import { emailSeparator } from '~/components/Admin/UserInvite/Modal/UserInviteModalSteps'
 import Text from '~ui/Primitives/Text'
 import component from '~/components/Form/Field'
 import { FontWeight } from '~ui/Primitives/constants'
+
+export const emailSeparator = ','
 
 const UserInviteModalStepsSendingConfirmation = (): JSX.Element => {
   const intl = useIntl()
