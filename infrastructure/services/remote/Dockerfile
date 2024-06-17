@@ -206,7 +206,7 @@ COPY infrastructure/services/remote/cron/check_db_schema            /etc/cron.ho
 COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
 
 # NodeJS
-ENV NODE_VERSION 16.10.0
+ENV NODE_VERSION 18.20.3
 RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && case "${dpkgArch##*-}" in \
     amd64) ARCH='x64';; \
