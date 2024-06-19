@@ -6,10 +6,19 @@ type Props = {
   readonly color: string | null | undefined
   readonly viewBox?: string | null | undefined
   readonly height?: string | null | undefined
+  readonly width?: string | null | undefined
   readonly isArchived?: boolean | null | undefined
+  readonly preserveAspectRatio?: string
 }
 
-const CategoryBackground = ({ color, viewBox, height = 'auto', isArchived = false }: Props) => {
+const CategoryBackground = ({
+  color,
+  viewBox,
+  height = 'auto',
+  width,
+  isArchived = false,
+  preserveAspectRatio,
+}: Props) => {
   const intl = useIntl()
   return (
     <Box position="relative">
@@ -29,7 +38,9 @@ const CategoryBackground = ({ color, viewBox, height = 'auto', isArchived = fals
         viewBox={viewBox || '0 0 260 75'}
         style={{
           height,
+          width,
         }}
+        preserveAspectRatio={preserveAspectRatio}
       >
         <defs>
           <filter

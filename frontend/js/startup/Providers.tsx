@@ -63,6 +63,7 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS 
       primary: generateShades(state.default.parameters['color.btn.primary.bg']),
       primaryHover: state.default.parameters['color.btn.ghost.hover'],
     },
+    fonts: { body: 'inherit', heading: '' },
   })
 
   const Theme = designSystem ? CapUIProvider : ThemeProvider

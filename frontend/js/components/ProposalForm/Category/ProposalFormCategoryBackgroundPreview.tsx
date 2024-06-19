@@ -88,7 +88,13 @@ export const ProposalFormCategoryBackgroundPreview = ({ color, name, icon, custo
       ) : (
         <>
           {icon && <Icon name={ICON_NAME[icon]} size={40} color={colors.white} />}
-          <CategoryBackground color={color} viewBox={width < bootstrapGrid.smMin ? '0 0 200 45' : null} />
+          <CategoryBackground
+            color={color}
+            viewBox={width < bootstrapGrid.smMin ? '0 0 200 45' : null}
+            preserveAspectRatio="none"
+            height="100%"
+            width="100%"
+          />
         </>
       )}
       <div>

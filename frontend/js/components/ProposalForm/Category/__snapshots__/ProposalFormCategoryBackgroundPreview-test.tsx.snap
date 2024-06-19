@@ -11,7 +11,10 @@ exports[`<ProposalFormCategoryBackgroundPreview /> render correctly 1`] = `
   />
   <CategoryBackground
     color="blue"
+    height="100%"
+    preserveAspectRatio="none"
     viewBox={null}
+    width="100%"
   />
   <div>
     <ProposalFormCategoryBackgroundPreview__CircledIcon>
