@@ -27,6 +27,7 @@ export const NavBarMenu = React.forwardRef<
         fontSize={3}
         as="button"
         color={color}
+        justifyContent={['space-between', '']}
         bg={open ? bg : ''}
         _hover={{ color: hoverColor, bg: String(bg) }}
         _focus={{ color, outline: 'none', boxShadow: `0px 0px 2px 2px ${String(bg)}` }}
@@ -48,6 +49,7 @@ export const NavBarMenu = React.forwardRef<
         width={['100%', '100%', '320px']}
         bg={bg}
         color={color}
+        borderRadius={[0, links.length > 6 ? 'normal' : 0]}
         _hover={{ color: link.href ? hoverColor : color, bg: hoverBg }}
         _focus={{ color: link.href ? hoverColor : color, bg: hoverBg, outline: 'none' }}
         px={[6, 3]}
@@ -147,6 +149,7 @@ export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean }> = ({ src
       <Box as="a" href="/">
         <Box
           as="img"
+          sx={{ objectFit: 'contain' }}
           height="100%"
           loading="lazy"
           src={src}
@@ -194,11 +197,12 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
       py={2}
       px={[4, 6]}
       borderTop={`1px solid ${borderColor}`}
+      bg="white"
     >
       {isMobile ? (
         <Flex alignItems="center" mr={1} fontSize={1}>
           <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} mr={1} color="neutral-gray.700" />
-          <Box as="a" href={mobileItem.href} color="neutral-gray.700" sx={{ textDecoration: 'underline' }}>
+          <Box as="a" href={mobileItem.href} color="neutral-gray.900" sx={{ textDecoration: 'underline' }}>
             {mobileItem.title}
           </Box>
         </Flex>
@@ -212,11 +216,11 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
                   as="a"
                   href={href}
                   aria-current={isCurrentPage ? 'page' : undefined}
-                  color={isCurrentPage ? 'neutral-gray.900' : 'neutral-gray.700'}
+                  color="neutral-gray.900"
                   sx={{ textDecoration: isCurrentPage ? 'none' : 'underline' }}
                   _hover={{
                     textDecoration: isCurrentPage ? 'none' : 'underline',
-                    color: isCurrentPage ? 'neutral-gray.900' : 'neutral-gray.700',
+                    color: 'neutral-gray.900',
                   }}
                 >
                   {title}

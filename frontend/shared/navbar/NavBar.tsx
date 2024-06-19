@@ -57,6 +57,7 @@ const NavBarContent = ({
       direction={['column', 'column', 'row']}
     >
       {links.map((link, index) => {
+        const showBorder = isMobile && index < links.length - 1
         if (index >= Number(overflowIndex)) return null
         return link.children.length ? (
           <NavBar.Menu
@@ -68,6 +69,7 @@ const NavBarContent = ({
             hoverBg={theme.menuActiveBackground}
             hoverColor={theme.textHoverColor}
             isMobile={isMobile}
+            borderBottom={showBorder ? `1px solid ${theme.subMenuBackground}` : ''}
           />
         ) : (
           <NavBar.Link
@@ -77,6 +79,7 @@ const NavBarContent = ({
             color={theme.textColor}
             bg={theme.subMenuBackground}
             hoverColor={theme.textHoverColor}
+            borderBottom={showBorder ? `1px solid ${theme.subMenuBackground}` : ''}
           />
         )
       })}
@@ -136,9 +139,25 @@ const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
       top={isOpen ? '0' : ''}
       height={isOpen ? '100vw' : ''}
     >
-      <Flex px={4} justifyContent="space-between" alignItems="center" minHeight="80px">
+      <Flex
+        px={4}
+        justifyContent="space-between"
+        alignItems="center"
+        minHeight="80px"
+        borderBottom={isOpen ? `1px solid ${theme.subMenuBackground}` : ''}
+      >
         <NavBar.Logo src={logoSrc} />
-        <Button variant={isOpen ? 'tertiary' : 'primary'} variantColor="primary" onClick={() => setIsOpen(!isOpen)}>
+        <Button
+          variant={isOpen ? 'tertiary' : 'primary'}
+          px={4}
+          py={3}
+          variantColor="primary"
+          onClick={() => setIsOpen(!isOpen)}
+          sx={{
+            color: `${isOpen ? theme.textColor : theme.menuBackground} !important`,
+            background: !isOpen ? `${theme.textColor} !important` : '',
+          }}
+        >
           {intl.formatMessage({ id: isOpen ? 'global.close' : 'global.menu' })}
         </Button>
       </Flex>
@@ -158,6 +177,7 @@ const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
       <Box
         position="fixed"
         height="80px"
+        borderTop={`1px solid ${theme.subMenuBackground}`}
         bottom={0}
         left={0}
         bg={theme.menuBackground}

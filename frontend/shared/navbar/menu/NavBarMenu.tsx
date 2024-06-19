@@ -23,6 +23,7 @@ const ActionItem = ({
   avatar,
   target,
   rel,
+  color,
 }: {
   as: 'button' | 'a'
   children: React.ReactNode
@@ -32,18 +33,19 @@ const ActionItem = ({
   onClick?: () => void
   target?: string
   rel?: string
+  color: string
 }) =>
   as === 'a' ? (
     <Flex as={as} href={href} alignItems="center" flexDirection="column" target={target} rel={rel}>
-      {icon ? <Icon name={icon} size={CapUIIconSize.Md} color="primary.500" /> : avatar}
-      <Text as="span" color="primary.500" fontSize={3}>
+      {icon ? <Icon name={icon} size={CapUIIconSize.Md} color={color} /> : avatar}
+      <Text as="span" color={color} fontSize={3}>
         {children}
       </Text>
     </Flex>
   ) : (
     <Flex as="button" onClick={onClick} alignItems="center" flexDirection="column">
-      {icon ? <Icon name={icon} size={CapUIIconSize.Md} color="primary.500" /> : avatar}
-      <Text as="span" color="primary.500" fontSize={3}>
+      {icon ? <Icon name={icon} size={CapUIIconSize.Md} color={color} /> : avatar}
+      <Text as="span" color={color} fontSize={3}>
         {children}
       </Text>
     </Flex>
@@ -127,7 +129,12 @@ export const NavBarMenuContent = ({
       <Flex alignItems="center" justifyContent="space-between" width="100%" px={6} py={4}>
         {profiles && !loginWithOpenId ? (
           /** @ts-ignore old and new relay types */
-          <ActionItem as="a" href={`${prefix}/profile/${user.slug}`} avatar={<NewUserAvatar user={user} size="md" />}>
+          <ActionItem
+            as="a"
+            href={`${prefix}/profile/${user.slug}`}
+            avatar={<NewUserAvatar user={user} size="md" />}
+            color={theme.textColor}
+          >
             {intl.formatMessage({
               id: 'user.profile.title',
             })}
@@ -140,18 +147,19 @@ export const NavBarMenuContent = ({
             target="_blank"
             rel="noopener" /** @ts-ignore old and new relay types */
             avatar={<NewUserAvatar user={user} size="md" />}
+            color={theme.textColor}
           >
             {intl.formatMessage({
               id: 'user.profile.title',
             })}
           </ActionItem>
         )}
-        <ActionItem as="a" href={`${prefix}/profile/edit-profile`} icon={CapUIIcon.Profil}>
+        <ActionItem as="a" href={`${prefix}/profile/edit-profile`} icon={CapUIIcon.Profil} color={theme.textColor}>
           {intl.formatMessage({
             id: 'global.params',
           })}
         </ActionItem>
-        <ActionItem as="button" onClick={logout} icon={CapUIIcon.Logout}>
+        <ActionItem as="button" onClick={logout} icon={CapUIIcon.Logout} color={theme.textColor}>
           {intl.formatMessage({
             id: 'global.logout',
           })}
@@ -164,6 +172,9 @@ export const NavBarMenuContent = ({
       sx={{
         ul: {
           listStyle: 'none',
+          borderBottomLeftRadius: '4px',
+          borderBottomRightRadius: '4px',
+          overflow: 'hidden',
         },
       }}
     >
