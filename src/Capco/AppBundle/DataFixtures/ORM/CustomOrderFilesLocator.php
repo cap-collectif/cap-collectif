@@ -240,6 +240,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/Questionnaire.yaml',
             $this->fixturesDir . 'Dev/ProposalForm.yaml',
             $this->fixturesDir . 'Dev/AnalysisConfiguration.yaml',
+            $this->fixturesDir . 'Dev/AnalysisConfigurationProcess.yaml',
             $this->fixturesDir . 'Dev/ProposalFormNotificationConfiguration.yaml',
             $this->fixturesDir . 'Dev/ProposalCategory.yaml',
             $this->fixturesDir . 'Dev/SectionQuestion.yaml',

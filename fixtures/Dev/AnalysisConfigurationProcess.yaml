@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\AnalysisConfigurationProcess:
+    analysisConfigurationProcess1:
+        id: analysisConfigurationProcess1
+        created_at: <(new \DateTime('2024-06-01 11:00:00'))>
+        analysisConfiguration: '@analysisConfiguration1'
+    analysisConfigurationProcess2:
+        id: analysisConfigurationProcess2
+        created_at: <(new \DateTime('2024-06-01 11:00:00'))>
+        analysisConfiguration: '@analysisConfiguration1'

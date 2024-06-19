@@ -17,6 +17,14 @@ final class Version20240507130415 extends AbstractMigration
     public function up(Schema $schema): void
     {
         $this->addSql('
+            DELETE FROM analysis_configuration_process
+            WHERE analysisConfiguration_id IN (
+                SELECT proposal_form.analysis_configuration
+                FROM proposal_form
+                LEFT JOIN step ON proposal_form.step_id = step.id
+                WHERE step.id IS NULL AND proposal_form.analysis_configuration IS NOT NULL
+            );
+
             DELETE FROM analysis_configuration
             WHERE id IN (
                 SELECT proposal_form.analysis_configuration
