@@ -8,7 +8,7 @@ import type { GlobalState } from '~/types'
 import { translateContent } from '~/utils/ContentTranslator'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import ProposalEditModal from '~/components/Proposal/Edit/ProposalEditModal'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type Props = {
   readonly stepId: string

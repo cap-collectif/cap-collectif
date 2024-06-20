@@ -141,7 +141,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
       }
       zIndex={1000}
     >
-      <Connect(NewLoginOverlay)>
+      <Connect(LoginOverlay)>
         <Button
           bg="undefined !important"
           color="undefined !important"
@@ -163,7 +163,7 @@ exports[`<ProposalStepPageHeader /> renders with interpellation context in colle
         >
           interpellation.add
         </Button>
-      </Connect(NewLoginOverlay)>
+      </Connect(LoginOverlay)>
     </Box>
   </div>
 </Fragment>
@@ -310,7 +310,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
       }
       zIndex={1000}
     >
-      <Connect(NewLoginOverlay)>
+      <Connect(LoginOverlay)>
         <Button
           bg="undefined !important"
           color="undefined !important"
@@ -332,7 +332,7 @@ exports[`<ProposalStepPageHeader /> renders with proposal context in collect ste
         >
           proposal.add
         </Button>
-      </Connect(NewLoginOverlay)>
+      </Connect(LoginOverlay)>
     </Box>
   </div>
 </Fragment>

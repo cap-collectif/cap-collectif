@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Box, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
 import { Menu, MenuItem as ReactMenuItem } from '@szhsin/react-menu'
 import { graphql, useLazyLoadQuery } from 'react-relay'

@@ -5,7 +5,7 @@ import { Flex, Box, Text, Avatar, Icon, CapUIIconSize, Tag } from '@cap-collecti
 import type { EventPageHeader_query$key, EventReviewStatus } from '~relay/EventPageHeader_query.graphql'
 import ProjectHeaderShareButtons from '~/components/Project/ProjectHeaderShareButtons'
 import { Authors } from '~/components/Ui/Project/ProjectHeader.Cover'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import EventDefaultCover from './EventDefaultCover'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import EventActions from './EventActions'

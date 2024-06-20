@@ -27,7 +27,7 @@ import UpdatePostMutation from '~/mutations/UpdatePostMutation'
 import { toast } from '~ds/Toast'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import formatSubmitted from '~/utils/form/formatSubmitted'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import UserListField from '~/components/Admin/Field/UserListField'
 type FormValues = {
   readonly author?: any | null | undefined

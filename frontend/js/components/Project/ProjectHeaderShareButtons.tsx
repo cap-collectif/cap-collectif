@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { Button, Heading, Modal, CapUIModalSize, BoxProps } from '@cap-collectif/ui'
 import ProjectHeader from '~ui/Project/ProjectHeader'
 import share from '~/utils/share'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import ResetCss from '~/utils/ResetCss'
 import '~ui/Primitives/AppBox.type'
 export type Props = BoxProps & {

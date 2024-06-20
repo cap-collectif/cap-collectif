@@ -68,7 +68,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         }
       }
     >
-      <Connect(NewLoginOverlay)
+      <Connect(LoginOverlay)
         placement="top"
       >
         <Button
@@ -81,7 +81,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
         >
           proposal.add
         </Button>
-      </Connect(NewLoginOverlay)>
+      </Connect(LoginOverlay)>
     </ForwardRef(OverlayComponent)>
     <ForwardRef(ContainerComponent)
       maxClusterRadius={30}
@@ -349,7 +349,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         }
       }
     >
-      <Connect(NewLoginOverlay)
+      <Connect(LoginOverlay)
         placement="top"
       >
         <Button
@@ -362,7 +362,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
         >
           proposal.add
         </Button>
-      </Connect(NewLoginOverlay)>
+      </Connect(LoginOverlay)>
     </ForwardRef(OverlayComponent)>
     <ForwardRef(ContainerComponent)
       maxClusterRadius={30}

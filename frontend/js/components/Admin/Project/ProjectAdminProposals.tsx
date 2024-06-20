@@ -68,7 +68,7 @@ import useToastingMachine from '~/utils/hooks/useToastingMachine'
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
 import type { StepStatusFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils'
 import ImportPaperVotesFromCsvModal from '~/components/Admin/Project/ImportButton/ImportPaperVotesFromCsvModal'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { colorsData } from '~/utils/colors'
 import {
   Button,

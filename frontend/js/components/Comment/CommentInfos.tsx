@@ -6,7 +6,7 @@ import CommentDate from './CommentDate'
 import PinnedLabel from '../Utils/PinnedLabel'
 import UnpublishedLabel from '../Publishable/UnpublishedLabel'
 import UserLink from '../User/UserLink'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { CommentInfos_comment$key } from '~relay/CommentInfos_comment.graphql'
 import '~relay/CommentInfos_comment.graphql'
 type Props = {

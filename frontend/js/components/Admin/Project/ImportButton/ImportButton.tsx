@@ -16,7 +16,7 @@ import colors from '~/utils/colors'
 import AddProposalsFromCsvMutation from '~/mutations/AddProposalsFromCsvMutation'
 import type { AddProposalsFromCsvMutationResponse } from '~relay/AddProposalsFromCsvMutation.graphql'
 import { toast } from '~ds/Toast'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context'
 import type { StepFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils'
 type Props = {

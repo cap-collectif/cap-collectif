@@ -15,7 +15,7 @@ import type {
   ProposalPageVotesTotalCountQueryResponse,
   ProposalPageVotesTotalCountQueryVariables,
 } from '~relay/ProposalPageVotesTotalCountQuery.graphql'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly proposal: ProposalPageVotes_proposal
   readonly setGlobalVotesCount: (arg0: number) => void

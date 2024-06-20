@@ -634,16 +634,90 @@ exports[`<Navbar /> should render correctly 1`] = `
                 ],
                 "storageKey": null,
               },
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "SSOConfigurationConnection",
+                "kind": "LinkedField",
+                "name": "ssoConfigurations",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "SSOConfigurationEdge",
+                    "kind": "LinkedField",
+                    "name": "edges",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "kind": "LinkedField",
+                        "name": "node",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "enabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "name",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
             ],
           },
           "params": Object {
-            "cacheID": "1194d79ace34af3067cde8b34ed7cc79",
+            "cacheID": "eb71d4b78b16b8ef4d297b1e80a6fece",
             "id": null,
             "metadata": Object {},
             "name": "NavbarQuery",
             "operationKind": "query",
             "text": "query NavbarQuery {
   ...RegistrationModal_query
+}
+
+fragment LoginSocialButtons_query on Query {
+  ssoConfigurations {
+    edges {
+      node {
+        enabled
+        name
+        __typename
+        id
+      }
+    }
+  }
 }
 
 fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
@@ -841,6 +915,7 @@ fragment RegistrationForm_query on Query {
 
 fragment RegistrationModal_query on Query {
   ...RegistrationForm_query
+  ...LoginSocialButtons_query
 }
 ",
           },
@@ -850,7 +925,6 @@ fragment RegistrationModal_query on Query {
     render={[Function]}
     variables={Object {}}
   />
-  <Connect(LoginModal) />
   <Navbar__HeaderContainer
     height={0}
     isLanguageHeaderVisible={true}
@@ -1581,16 +1655,90 @@ exports[`<Navbar /> should render correctly with header 1`] = `
                 ],
                 "storageKey": null,
               },
+              Object {
+                "alias": null,
+                "args": null,
+                "concreteType": "SSOConfigurationConnection",
+                "kind": "LinkedField",
+                "name": "ssoConfigurations",
+                "plural": false,
+                "selections": Array [
+                  Object {
+                    "alias": null,
+                    "args": null,
+                    "concreteType": "SSOConfigurationEdge",
+                    "kind": "LinkedField",
+                    "name": "edges",
+                    "plural": true,
+                    "selections": Array [
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "concreteType": null,
+                        "kind": "LinkedField",
+                        "name": "node",
+                        "plural": false,
+                        "selections": Array [
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "enabled",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "name",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "__typename",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "id",
+                            "storageKey": null,
+                          },
+                        ],
+                        "storageKey": null,
+                      },
+                    ],
+                    "storageKey": null,
+                  },
+                ],
+                "storageKey": null,
+              },
             ],
           },
           "params": Object {
-            "cacheID": "1194d79ace34af3067cde8b34ed7cc79",
+            "cacheID": "eb71d4b78b16b8ef4d297b1e80a6fece",
             "id": null,
             "metadata": Object {},
             "name": "NavbarQuery",
             "operationKind": "query",
             "text": "query NavbarQuery {
   ...RegistrationModal_query
+}
+
+fragment LoginSocialButtons_query on Query {
+  ssoConfigurations {
+    edges {
+      node {
+        enabled
+        name
+        __typename
+        id
+      }
+    }
+  }
 }
 
 fragment ModalRegistrationFormQuestions_registrationForm on RegistrationForm {
@@ -1788,6 +1936,7 @@ fragment RegistrationForm_query on Query {
 
 fragment RegistrationModal_query on Query {
   ...RegistrationForm_query
+  ...LoginSocialButtons_query
 }
 ",
           },
@@ -1797,7 +1946,6 @@ fragment RegistrationModal_query on Query {
     render={[Function]}
     variables={Object {}}
   />
-  <Connect(LoginModal) />
   <Navbar__HeaderContainer
     height={0}
     isLanguageHeaderVisible={true}

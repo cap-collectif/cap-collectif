@@ -10,12 +10,15 @@ import { Button, Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import renderComponent from '../Form/Field'
 import RegistrationButton from '../User/Registration/RegistrationButton'
-import LoginButton from '../User/Login/LoginButton'
+import { Button as DSButton } from '@cap-collectif/ui'
 import { UserAvatarLegacy } from '../User/UserAvatarLegacy'
 import AddCommentMutation from '../../mutations/AddCommentMutation'
 import type { Dispatch, GlobalState } from '../../types'
 import type { CommentForm_commentable } from '~relay/CommentForm_commentable.graphql'
 import { toast } from '~ds/Toast'
+import { baseUrl } from '~/config'
+import { loginWithOpenID } from '~/redux/modules/default'
+import { openLoginModal } from '../User/Login/LoginButton'
 
 type RelayProps = {
   readonly commentable: CommentForm_commentable
@@ -30,6 +33,8 @@ type StateProps = {
   readonly user: Record<string, any> | null | undefined
   readonly dispatch: Dispatch
   readonly isModerationEnabled: boolean | null | undefined
+  readonly oauth2SwitchUser: boolean | null | undefined
+  readonly byPassLoginModal: boolean | null | undefined
 }
 type AfterConnectProps = RelayProps & OwnProps & StateProps
 type Props = AfterConnectProps &
@@ -142,7 +147,16 @@ export class CommentForm extends React.Component<Props, State> {
   }
 
   renderAnonymous() {
-    const { user, submitting, pristine, invalid, intl } = this.props
+    const { user, submitting, pristine, invalid, intl, oauth2SwitchUser, byPassLoginModal } = this.props
+
+    let redirectUrl: string = baseUrl
+
+    if (loginWithOpenID && byPassLoginModal) {
+      const redirectUri = oauth2SwitchUser
+        ? `${baseUrl}/sso/switch-user?_destination=${window && window.location.href}`
+        : `${window && window.location.href}`
+      redirectUrl = `/login/openid?_destination=${redirectUri}`
+    }
 
     if (!user) {
       return (
@@ -152,7 +166,25 @@ export class CommentForm extends React.Component<Props, State> {
               <p>
                 <FormattedMessage id="comment.with_my_account" />
               </p>
-              <RegistrationButton /> <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
+              <RegistrationButton />
+              <DSButton
+                id="login-button"
+                variant="primary"
+                display="block"
+                mt={1}
+                aria-label={intl.formatMessage({
+                  id: 'open.connection_modal',
+                })}
+                onClick={() => {
+                  if (loginWithOpenID && byPassLoginModal) {
+                    window.location.href = redirectUrl
+                  } else {
+                    dispatchEvent(new Event(openLoginModal))
+                  }
+                }}
+              >
+                {intl.formatMessage({ id: 'global.login' })}
+              </DSButton>
               <h5>
                 <FormattedMessage id="comment.why_create_account" />
               </h5>
@@ -274,11 +306,16 @@ export class CommentForm extends React.Component<Props, State> {
 
 const mapStateToProps = (state: GlobalState, props: BeforeConnectProps) => {
   const comment: string | null | undefined = formValueSelector(formName + props.commentable.id)(state, 'body')
+  const byPassLoginModal = state.default.features.sso_by_pass_auth
+  const oauth2SwitchUser = state.default.features.oauth2_switch_user
   return {
     comment,
+    oauth2SwitchUser,
+    byPassLoginModal,
     user: state.user.user,
     form: formName + props.commentable.id,
     isModerationEnabled: state.default.features.moderation_comment,
+    loginWithOpenId: loginWithOpenID(state.default.ssoList),
   }
 }
 

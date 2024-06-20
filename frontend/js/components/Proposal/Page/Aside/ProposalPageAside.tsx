@@ -8,7 +8,7 @@ import ProposalPageMetadata from '~/components/Proposal/Page/Aside/ProposalPageM
 import ProposalPageVoteThreshold from '~/components/Proposal/Page/Aside/ProposalPageVoteThreshold'
 import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks'
 import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPageAdvancement'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const HEIGHT_WITH_VOTEBAR = 130
 const HEIGHT_WITHOUT_VOTEBAR = 80

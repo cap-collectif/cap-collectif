@@ -35,7 +35,7 @@ import { getContributionsPath } from '~/components/Admin/Project/ProjectAdminCon
 import { ARGUMENT_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ArgumentTab/ArgumentTab'
 import { VOTE_PAGINATION } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/VoteTab/VoteTab'
 import { getProjectAdminPath, getProjectAdminBaseUrl } from './ProjectAdminPage.utils'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import htmlDecode from '~/components/Utils/htmlDecode'
 type Props = {
   readonly viewerIsAdmin: boolean

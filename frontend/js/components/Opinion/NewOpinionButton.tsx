@@ -3,7 +3,7 @@ import cn from 'classnames'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { connect } from 'react-redux'
-import NewLoginOverlay from '../Utils/NewLoginOverlay'
+import LoginOverlay from '../Utils/LoginOverlay'
 import OpinionCreateModal from './Create/OpinionCreateModal'
 import { openOpinionCreateModal } from '../../redux/modules/opinion'
 import type { NewOpinionButton_section } from '~relay/NewOpinionButton_section.graphql'
@@ -22,7 +22,7 @@ const NewOpinionButton = ({ dispatch, label, consultation, section, className }:
   const intl = useIntl()
   return (
     <React.Fragment>
-      <NewLoginOverlay>
+      <LoginOverlay>
         <button
           type="button"
           disabled={disabled}
@@ -38,7 +38,7 @@ const NewOpinionButton = ({ dispatch, label, consultation, section, className }:
           <i className="cap cap-add-1" />
           <span className="hidden-xs">{label}</span>
         </button>
-      </NewLoginOverlay>
+      </LoginOverlay>
       <OpinionCreateModal section={section} consultation={consultation} />
     </React.Fragment>
   )

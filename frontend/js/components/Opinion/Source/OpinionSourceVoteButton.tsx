@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import AddSourceVoteMutation from '../../../mutations/AddSourceVoteMutation'
 import RemoveSourceVoteMutation from '../../../mutations/RemoveSourceVoteMutation'
-import NewLoginOverlay from '../../Utils/NewLoginOverlay'
+import LoginOverlay from '../../Utils/LoginOverlay'
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip'
 import type { OpinionSourceVoteButton_source } from '~relay/OpinionSourceVoteButton_source.graphql'
 import RequirementsFormModal from '../../Requirements/RequirementsModal'
@@ -67,7 +67,7 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
     return (
       <div>
         {step && <RequirementsFormModal step={step} handleClose={this.closeModal} show={showModal} />}
-        <NewLoginOverlay>
+        <LoginOverlay>
           <button
             type="button"
             ref={button => {
@@ -92,7 +92,7 @@ export class OpinionSourceVoteButton extends React.Component<Props, State> {
               publishable={source.viewerVote || null}
             />
           </button>
-        </NewLoginOverlay>
+        </LoginOverlay>
       </div>
     )
   }

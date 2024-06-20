@@ -7,7 +7,7 @@ import ProposalPageAdvancement from '~/components/Proposal/Page/Aside/ProposalPa
 import type { ProposalPageMainAside_proposal } from '~relay/ProposalPageMainAside_proposal.graphql'
 import { bootstrapGrid } from '~/utils/sizes'
 import ProposalSocialNetworkLinks from '~/components/Proposal/Page/Aside/ProposalSocialNetworkLinks'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type Props = {
   proposal: ProposalPageMainAside_proposal

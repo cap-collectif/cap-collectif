@@ -180,8 +180,10 @@ export const NavbarRight = ({
       ) : (
         <Flex px={4} spacing={1}>
           {/** @ts-ignore */}
-          <RegistrationButton className="navbar-btn" />
-          <LoginButton className="btn-darkest-gray navbar-btn btn--connection" />
+          <RegistrationButton className="navbar-btn" />{' '}
+          <React.Suspense fallback={null}>
+            <LoginButton />
+          </React.Suspense>
         </Flex>
       )}
     </>

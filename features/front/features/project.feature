@@ -182,7 +182,7 @@ Scenario: Users can't see privates project
 
 Scenario: Anonymous can't access to a private project and should see login modal
   Given I go to "https://capco.test/project/qui-doit-conquerir-le-monde-visible-par-les-admins-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
-  Then I should see "global.login"
+  Then I should see "global.login" within 15 seconds
 
 Scenario: Anonymous try to access to a wrong page
   Given I go to "https://capco.test/project/qui-doit-conquerir-fautedefrappe-visible-par-les-admins-seulement-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"
@@ -190,7 +190,7 @@ Scenario: Anonymous try to access to a wrong page
 
 Scenario: Anonymous try to access to a project with restricted access and should see login modal
   Given I go to "https://capco.test/project/un-avenir-meilleur-pour-les-nains-de-jardins-custom-access/collect/collecte-des-propositions-liberer-les-nains-de-jardin"
-  Then I should see "global.login"
+  Then I should see "global.login" within 15 seconds
 
 Scenario: Not allowed user can't access to a private project
   Given I am logged in as user

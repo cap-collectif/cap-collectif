@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useIntl } from 'react-intl'
 import { SubmissionError } from 'redux-form'
 import Captcha from '~/components/Form/Captcha'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import SubscribeNewsletterMutation from '~/mutations/SubscribeNewsletterMutation'
 import { Flex, toast } from '@cap-collectif/ui'
 

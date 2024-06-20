@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import type { CommentEdit_comment } from '~relay/CommentEdit_comment.graphql'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
 import colors from '~/utils/colors'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly comment: CommentEdit_comment
 }

@@ -10,10 +10,13 @@ const Shield = lazy(
       '~/components/Page/ShieldPage'
     ),
 )
-export default (props: { chartBody: string | null | undefined }) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <Shield {...props} />
-    </Providers>
-  </Suspense>
-)
+export default (props: { chartBody: string | null | undefined }) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px'
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers designSystem>
+        <Shield {...props} />
+      </Providers>
+    </Suspense>
+  )
+}

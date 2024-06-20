@@ -10,7 +10,7 @@ class HomePage extends Page
     use PageTrait;
 
     protected $elements = [
-        'Login button' => '.btn.btn--connection',
+        'Login button' => '#login-button',
         'Registration button' => '.btn.btn--registration',
         'Logged user dropdown' => '#navbar-username',
         'Logout button' => '#logout-button',
@@ -38,6 +38,7 @@ class HomePage extends Page
 
     public function openLoginModal()
     {
+        $this->getSession()->wait(10000, "$('#login-button').length > 0");
         $this->getElement('Login button')->click();
     }
 

@@ -16,7 +16,7 @@ import { Button } from '@cap-collectif/ui'
 import type { MapCenterObject, MapOptions, MapRef, PopupRef } from './Map.types'
 import type { State, Dispatch } from '~/types'
 import ProposalMapPopover from './ProposalMapPopover'
-import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import LoginOverlay from '~/components/Utils/LoginOverlay'
 import type { ProposalLeafletMap_proposals$data } from '~relay/ProposalLeafletMap_proposals.graphql'
 import type { ProposalLeafletMap_proposalForm$data } from '~relay/ProposalLeafletMap_proposalForm.graphql'
 import { isSafari, Emitter } from '~/config'
@@ -266,7 +266,7 @@ export const ProposalLeafletMap = ({
           autoPan={false}
           className="popup-proposal"
         >
-          <NewLoginOverlay placement="top">
+          <LoginOverlay placement="top">
             <Button
               bg={`${btnBgColor} !important`}
               color={`${btnTextColor} !important`}
@@ -279,7 +279,7 @@ export const ProposalLeafletMap = ({
                 id: titleTradKey,
               })}
             </Button>
-          </NewLoginOverlay>
+          </LoginOverlay>
         </Popup>
         <MarkerClusterGroup
           spiderfyOnMaxZoom

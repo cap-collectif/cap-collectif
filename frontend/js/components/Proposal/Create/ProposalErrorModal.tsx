@@ -21,7 +21,7 @@ import type {
 import type { CreateProposalInput } from '~relay/CreateProposalMutation.graphql'
 import type { ChangeProposalContentInput } from '~relay/ChangeProposalContentMutation.graphql'
 import ChangeProposalContentMutation from '~/mutations/ChangeProposalContentMutation'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly onClose: () => void
   readonly resetModalState: () => void

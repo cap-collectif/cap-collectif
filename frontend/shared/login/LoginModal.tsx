@@ -1,17 +1,32 @@
 import React from 'react'
-import { FormattedMessage, useIntl } from 'react-intl'
-import { Button, CapUIModalSize, Modal } from '@cap-collectif/ui'
+import { useIntl } from 'react-intl'
+import { Button, CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { LoginModal_query$key } from '@relay/LoginModal_query.graphql'
+import { graphql, useFragment } from 'react-relay'
+import LoginBox from './LoginBox'
+import { useFormContext } from 'react-hook-form'
 
 type Props = {
-  submitting: boolean
   show: boolean
   onClose: () => void
-  onSubmit: () => void
-  byPassAuth: boolean
+  query: LoginModal_query$key
 }
 
-export const LoginModal = ({ show, byPassAuth }: Props) => {
+const FRAGMENT = graphql`
+  fragment LoginModal_query on Query {
+    ...LoginBox_query
+  }
+`
+
+export const LoginModal = ({ query: queryFragment, show, onClose }: Props) => {
   const intl = useIntl()
+  const byPassAuth = useFeatureFlag('sso_by_pass_auth')
+  const query = useFragment(FRAGMENT, queryFragment)
+
+  const {
+    formState: { isSubmitting },
+  } = useFormContext()
 
   if (!show) return null
 
@@ -23,20 +38,26 @@ export const LoginModal = ({ show, byPassAuth }: Props) => {
       show={show}
       onClose={onClose}
       autoFocus
-      size={CapUIModalSize.Sm}
-      ariaLabel={intl.formatMessage({ id: 'global.login' })}
+      size={CapUIModalSize.Xl}
+      maxWidth="540px"
+      ariaLabel={intl.formatMessage({ id: 'login.with' })}
+      fullSizeOnMobile
+      forceModalDialogToFalse
+      hideOnClickOutside={false}
     >
-      <Modal.Header>
-        <Modal.Header id="contained-modal-title-lg">
-          <FormattedMessage id="global.login" />
-        </Modal.Header>
+      <Modal.Header id="contained-modal-title-lg">
+        <Heading as="h4">{intl.formatMessage({ id: 'login.with' })}</Heading>
       </Modal.Header>
-      <Modal.Body>ok</Modal.Body>
+      <Modal.Body>
+        <LoginBox query={query} />
+      </Modal.Body>
       <Modal.Footer>
-        <Button></Button>
+        <Button variant="tertiary" onClick={onClose} type="button" variantSize="big">
+          {intl.formatMessage({ id: 'global.cancel' })}
+        </Button>
         {!byPassAuth && (
-          <Button id="confirm-login" type="submit" disabled={submitting} bsStyle="primary">
-            {submitting ? <FormattedMessage id="global.loading" /> : <FormattedMessage id="global.login_me" />}
+          <Button variant="primary" id="confirm-login" type="submit" isLoading={isSubmitting} variantSize="big">
+            {intl.formatMessage({ id: isSubmitting ? 'global.loading' : 'global.login_me' })}
           </Button>
         )}
       </Modal.Footer>

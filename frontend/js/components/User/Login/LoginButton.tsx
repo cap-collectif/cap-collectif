@@ -1,29 +1,43 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { connect } from 'react-redux'
-import { Button } from 'react-bootstrap'
+import { useDisclosure } from '@liinkiing/react-hooks'
 import { baseUrl } from '~/config'
-import { showLoginModal } from '~/redux/modules/user'
-import type { State, Dispatch } from '~/types'
-import type { BsStyle } from '~/types/ReactBootstrap.type'
-import { loginWithOpenID as isLoginWithOpenID } from '~/redux/modules/default'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import LoginModal from '@shared/login/LoginModal'
+import { Button, ButtonProps } from '@cap-collectif/ui'
+import { LoginButtonQuery } from '@relay/LoginButtonQuery.graphql'
+import { graphql, useLazyLoadQuery } from 'react-relay'
+import LoginFormWrapper from '@shared/login/LoginFormWrapper'
+import { useEventListener } from '@shared/hooks/useEventListener'
+import { getTheme } from '@shared/navbar/NavBar.utils'
 
-type OwnProps = {
-  bsStyle?: BsStyle
-  className?: string | null | undefined
-  style?: Record<string, any> | null | undefined
-}
-type StateProps = {
-  loginWithOpenID: boolean
-  byPassLoginModal: boolean
-  oauth2SwitchUser: boolean
-  openLoginModal: () => void
-}
-type Props = OwnProps & StateProps
-export const LoginButton = (props: Props) => {
+export const openLoginModal = 'openLoginModal'
+
+export const QUERY = graphql`
+  query LoginButtonQuery {
+    ...LoginModal_query
+    oauth2sso: ssoConfigurations(ssoType: OAUTH2) {
+      edges {
+        node {
+          enabled
+        }
+      }
+    }
+    siteColors {
+      keyname
+      value
+    }
+  }
+`
+
+export const LoginButton: React.FC<ButtonProps> = props => {
   const intl = useIntl()
+  const query = useLazyLoadQuery<LoginButtonQuery>(QUERY, {})
+  const { isOpen, onOpen, onClose } = useDisclosure(false)
+  const byPassLoginModal = useFeatureFlag('sso_by_pass_auth')
+  const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user')
+  const loginWithOpenID = query.oauth2sso.edges.some(({ node }) => node.enabled)
   let redirectUrl: string = baseUrl
-  const { openLoginModal, byPassLoginModal, loginWithOpenID, oauth2SwitchUser, style, bsStyle, className } = props
 
   if (loginWithOpenID && byPassLoginModal) {
     const redirectUri = oauth2SwitchUser
@@ -32,12 +46,20 @@ export const LoginButton = (props: Props) => {
     redirectUrl = `/login/openid?_destination=${redirectUri}`
   }
 
+  useEventListener(openLoginModal, () => onOpen())
+
+  const theme = getTheme(query.siteColors)
+
   return (
-    // @ts-ignore
-    <span style={style}>
+    <>
+      <LoginFormWrapper>
+        <LoginModal show={isOpen} onClose={onClose} query={query} />
+      </LoginFormWrapper>
       <Button
+        id="login-button"
+        my={2}
         destination={redirectUrl}
-        bsStyle={bsStyle}
+        variant="primary"
         aria-label={intl.formatMessage({
           id: 'open.connection_modal',
         })}
@@ -45,33 +67,19 @@ export const LoginButton = (props: Props) => {
           if (loginWithOpenID && byPassLoginModal) {
             window.location.href = redirectUrl
           } else {
-            openLoginModal()
+            onOpen()
           }
         }}
-        className={className}
+        sx={{
+          color: `${theme.menuBackground} !important`,
+          background: `${theme.textColor} !important`,
+        }}
+        {...props}
       >
         {intl.formatMessage({ id: 'global.login' })}
       </Button>
-    </span>
+    </>
   )
 }
-LoginButton.defaultProps = {
-  bsStyle: 'default',
-  className: '',
-  style: {},
-}
 
-const mapStateToProps = (state: State) => ({
-  loginWithOpenID: isLoginWithOpenID(state.default.ssoList),
-  byPassLoginModal: state.default.features.sso_by_pass_auth || false,
-  oauth2SwitchUser: state.default.features.oauth2_switch_user || false,
-})
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  openLoginModal: () => {
-    dispatch(showLoginModal())
-  },
-})
-
-// @ts-ignore
-export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps, mapDispatchToProps)(LoginButton)
+export default LoginButton

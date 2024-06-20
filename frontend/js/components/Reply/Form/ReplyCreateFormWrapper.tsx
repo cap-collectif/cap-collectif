@@ -14,7 +14,7 @@ import type { User } from '~/redux/modules/user'
 import '~/redux/modules/user'
 import type { GlobalState } from '~/types'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly questionnaire: ReplyCreateFormWrapper_questionnaire
   readonly user: User | null | undefined

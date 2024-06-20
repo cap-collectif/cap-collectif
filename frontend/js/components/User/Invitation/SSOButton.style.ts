@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
-import { getButtonColorForType, getLabelColorForType } from '~ui/Button/LoginSocialButton'
-import type { LinkButtonProps } from '~ui/Button/LoginSocialButton'
+import { getButtonColorForType, getLabelColorForType } from '@shared/login/LoginSocialButton'
+import type { LinkButtonProps } from '@shared/login/LoginSocialButton'
 import Link from '~ds/Link/Link'
 type ButtonType = {
   readonly children: JSX.Element | JSX.Element[] | string

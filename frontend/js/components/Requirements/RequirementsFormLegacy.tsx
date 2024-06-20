@@ -21,7 +21,7 @@ import CheckIdentificationCodeMutation from '../../mutations/CheckIdentification
 import type { Dispatch, State } from '~/types'
 import DateDropdownPicker from '../Form/DateDropdownPicker'
 import environment from '../../createRelayEnvironment'
-import LoginSocialButton from '~ui/Button/LoginSocialButton'
+import LoginSocialButton from '@shared/login/LoginSocialButton'
 import AppBox from '~ui/Primitives/AppBox'
 import type { RequirementsFormLegacy_step } from '~relay/RequirementsFormLegacy_step.graphql'
 export const formName = 'requirements-form'

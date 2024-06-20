@@ -20,7 +20,7 @@ import AddDebateAnonymousVoteMutation from '~/mutations/AddDebateAnonymousVoteMu
 import { SPACES_SCALES } from '~/styles/theme/base'
 import CookieMonster from '~/CookieMonster'
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper'
-import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import LoginOverlay from '~/components/Utils/LoginOverlay'
 import type { DebateStepPageVote_step } from '~relay/DebateStepPageVote_step.graphql'
 import type { GlobalState } from '~/types'
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context'
@@ -172,7 +172,7 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
         <>
           <ConditionalWrapper
             when={!step.isAnonymousParticipationAllowed}
-            wrapper={children => <NewLoginOverlay placement={top ? 'top' : 'bottom'}>{children}</NewLoginOverlay>}
+            wrapper={children => <LoginOverlay placement={top ? 'top' : 'bottom'}>{children}</LoginOverlay>}
           >
             <Box
               as="button"
@@ -209,7 +209,7 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
 
           <ConditionalWrapper
             when={!step.isAnonymousParticipationAllowed}
-            wrapper={children => <NewLoginOverlay placement={top ? 'top' : 'bottom'}>{children}</NewLoginOverlay>}
+            wrapper={children => <LoginOverlay placement={top ? 'top' : 'bottom'}>{children}</LoginOverlay>}
           >
             <Box
               as="button"

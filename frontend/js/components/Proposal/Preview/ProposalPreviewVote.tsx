@@ -7,7 +7,7 @@ import ProposalVoteButtonWrapperFragment from '../Vote/ProposalVoteButtonWrapper
 import type { ProposalPreviewVote_proposal$key } from '~relay/ProposalPreviewVote_proposal.graphql'
 import type { ProposalPreviewVote_step$key } from '~relay/ProposalPreviewVote_step.graphql'
 import type { ProposalPreviewVote_viewer$key } from '~relay/ProposalPreviewVote_viewer.graphql'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import ProposalSmsVoteModal from '~/components/Proposal/Vote/ProposalSmsVoteModal'
 
 type Props = {

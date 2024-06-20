@@ -26,7 +26,7 @@ import '~/components/Admin/Project/Step/ProjectAdminStepForm'
 import Menu from '../../../DesignSystem/Menu/Menu'
 import { ICON_NAME } from '~ds/Icon/Icon'
 import Button from '~ds/Button/Button'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type Props = {
   requirements?: Array<Requirement>

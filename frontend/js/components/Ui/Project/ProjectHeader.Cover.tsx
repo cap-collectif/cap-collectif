@@ -25,7 +25,7 @@ import '~ds/AvatarGroup/AvatarGroup'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import '~ui/Primitives/AppBox.type'
 import Image from '~ui/Primitives/Image'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { GlobalState } from '~/types'
 
 const DefaultCoverImage = ({ isArchived }: { isArchived: boolean }) => {

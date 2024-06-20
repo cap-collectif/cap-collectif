@@ -44,7 +44,7 @@ import type { DebateType } from '~relay/DebateStepPageLogic_query.graphql'
 import Accordion from '~ds/Accordion'
 import Heading from '~ui/Primitives/Heading'
 import DebateWidgetForm from '~/components/Admin/Project/Step/DebateWidgetForm/DebateWidgetForm'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import Text from '~ui/Primitives/Text'
 import AppBox from '~/components/Ui/Primitives/AppBox'
 export type FranceConnectAllowedData = {

@@ -18,7 +18,6 @@ export default (props: Props) => {
   document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (
     <Suspense fallback={null}>
-      <style>{'.cap-link:before {display:none;}'}</style>
       <Providers designSystem resetCSS={false}>
         <EventPage {...props} />
       </Providers>

@@ -13,7 +13,7 @@ import Menu from '~ds//Menu/Menu'
 import Button from '~ds/Button/Button'
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon'
 import { formatCodeToLocale } from '~/utils/locale-helper'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import UpdateLocaleMutation from '~/mutations/UpdateLocaleMutation'
 
 export type Props = {
@@ -56,15 +56,13 @@ const AdminRightNavbar = ({ currentLocale, features, query, isUsingDesignSystem 
     }) ?? []
   return (
     <Navbar>
-      {
-        helpScoutBeacon && (
-          <CustomNavbarItem id="admin-beamer-navbar">
-            <div className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5" data-toggle="dropdown">
-              <i className="fa fa-bell fa-fw" aria-hidden="true" />
-            </div>
-          </CustomNavbarItem>
-        )
-      }
+      {helpScoutBeacon && (
+        <CustomNavbarItem id="admin-beamer-navbar">
+          <div className="dropdown-toggle js-notifications-trigger beamerTrigger ml-5" data-toggle="dropdown">
+            <i className="fa fa-bell fa-fw" aria-hidden="true" />
+          </div>
+        </CustomNavbarItem>
+      )}
       {features.multilangue && (
         <Menu placement="bottom-start" as="li">
           <Menu.Button>

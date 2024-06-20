@@ -5,15 +5,15 @@ import styled from 'styled-components'
 import { usePopoverState, Popover, PopoverDisclosure, PopoverArrow } from 'reakit/Popover'
 import { connect } from 'react-redux'
 import { useAnalytics } from 'use-analytics'
+import { Button, Box, Text, Flex } from '@cap-collectif/ui'
 import { showRegistrationModal } from '~/redux/modules/user'
 import type { Dispatch, State } from '~/types'
-import Button from '~ds/Button/Button'
-import LoginButton from '../User/Login/LoginButton'
+import { openLoginModal } from '../User/Login/LoginButton'
 import { loginWithOpenID } from '~/redux/modules/default'
-import AppBox from '~ui/Primitives/AppBox'
-import Text from '~ui/Primitives/Text'
-import Flex from '~ui/Primitives/Layout/Flex'
 import VisuallyHidden from '~ds/VisuallyHidden/VisuallyHidden'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { baseUrl } from '~/config'
+
 export type Placement =
   | 'auto-start'
   | 'auto'
@@ -44,16 +44,16 @@ type Props = OwnProps &
   StateProps & {
     readonly dispatch: Dispatch
   }
-const PopoverContainer = styled(AppBox).attrs({
+const PopoverContainer = styled(Box).attrs({
   maxWidth: '280px',
-  zIndex: 100,
+  zIndex: 1040,
 })`
   outline: none;
 `
 const ButtonRegistration = styled.button`
   margin: 10px 0 0 0;
 `
-const Arrow = styled(AppBox)<{
+const Arrow = styled(Box)<{
   position: Placement
 }>`
   .stroke {
@@ -75,12 +75,25 @@ export const LoginOverlay = ({
   dispatch,
 }: Props) => {
   const { track } = useAnalytics()
+  const byPassLoginModal = useFeatureFlag('sso_by_pass_auth')
+  const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user')
+
   const popover = usePopoverState({
     baseId: 'popover-overlay',
     placement,
   })
   const intl = useIntl()
   if (!enabled || isAuthenticated) return children
+
+  let redirectUrl: string = baseUrl
+
+  if (loginWithOpenID && byPassLoginModal) {
+    const redirectUri = oauth2SwitchUser
+      ? `${baseUrl}/sso/switch-user?_destination=${window && window.location.href}`
+      : `${window && window.location.href}`
+    redirectUrl = `/login/openid?_destination=${redirectUri}`
+  }
+
   return (
     <>
       <PopoverDisclosure {...popover} ref={children.ref} {...children.props} onClick={null}>
@@ -100,7 +113,7 @@ export const LoginOverlay = ({
       >
         <PopoverArrow {...popover} as={Arrow} position={popover.placement} />
 
-        <AppBox overflow="hidden" borderRadius="popover" bg="white" color="black">
+        <Box overflow="hidden" borderRadius="popover" bg="white" color="black">
           <Text
             py="8px !important"
             px={3}
@@ -109,6 +122,7 @@ export const LoginOverlay = ({
             borderColor="#ebebeb"
             fontSize={3}
             mb="0 !important"
+            // @ts-ignore
             textAlign="left !important"
           >
             {intl.formatMessage({
@@ -117,7 +131,13 @@ export const LoginOverlay = ({
           </Text>
 
           <Flex px={3} py="10px" direction="column" spacing="10px">
-            <Text fontSize={3} pb="0 !important" textAlign="left !important" mb="0 !important">
+            <Text
+              fontSize={3}
+              pb="0 !important"
+              // @ts-ignore
+              textAlign="left !important"
+              mb="0 !important"
+            >
               {intl.formatMessage({
                 id: 'vote.popover.body',
               })}
@@ -145,20 +165,35 @@ export const LoginOverlay = ({
                 })}
               </ButtonRegistration>
             )}
-            <LoginButton bsStyle="success" className="center-block btn-block login-button" />
+
+            <Button
+              id="login-button"
+              variant="primary"
+              justifyContent="center"
+              aria-label={intl.formatMessage({
+                id: 'open.connection_modal',
+              })}
+              onClick={() => {
+                if (loginWithOpenID && byPassLoginModal) {
+                  window.location.href = redirectUrl
+                } else {
+                  dispatchEvent(new Event(openLoginModal))
+                }
+              }}
+            >
+              {intl.formatMessage({ id: 'global.login' })}
+            </Button>
           </Flex>
-        </AppBox>
+        </Box>
       </Popover>
     </>
   )
 }
-LoginOverlay.displayName = 'LoginOverlay'
 
 const mapStateToProps = (state: State) => ({
   isAuthenticated: !!state.user.user,
   showRegistrationButton: state.default.features.registration || false,
   loginWithOpenId: loginWithOpenID(state.default.ssoList),
 })
-
 // @ts-ignore
 export default connect<Props, OwnProps, _, _, _, _>(mapStateToProps)(LoginOverlay)

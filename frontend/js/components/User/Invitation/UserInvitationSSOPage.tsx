@@ -17,7 +17,7 @@ import {
   Logo,
   WelcomeMessage,
 } from '~/components/User/Invitation/UserInvitationSSOPage.style'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { GlobalState } from '~/types'
 import type { UserInvitationSSOPage_logo$key } from '~relay/UserInvitationSSOPage_logo.graphql'
 import CreateAccountEmailLink from '~/components/User/Invitation/CreateAccountEmailLink'

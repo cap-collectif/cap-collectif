@@ -1,0 +1,184 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginModal /> render correctly 1`] = `
+Array [
+  <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div
+    ariaLabel="login.with"
+    autoFocus={true}
+    data-testid="Modal"
+    forceModalDialogToFalse={true}
+    fullSizeOnMobile={true}
+    hideOnClickOutside={false}
+    maxWidth="540px"
+    show={true}
+    size="xl"
+    style={
+      Object {
+        "zIndex": 9000,
+      }
+    }
+  >
+    <div
+      data-testid="Header"
+      id="contained-modal-title-lg"
+    >
+      <h4
+        className="sc-bcXGCL dZaIVn cap-heading"
+      >
+        login.with
+      </h4>
+    </div>
+    <div
+      data-testid="Body"
+    >
+      <div>
+        <div
+          className="sc-bcXGCL kHOAuI"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<mock-value-for-field-\\"value\\">",
+              }
+            }
+          />
+        </div>
+        <div
+          className="sc-bcXGCL bllofW cap-form-control"
+          role="group"
+        >
+          <label
+            className="sc-bcXGCL ctSjlJ cap-form-label"
+            htmlFor="username"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <p
+              className="sc-bcXGCL JNsrJ cap-text"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              global.email
+            </p>
+          </label>
+          <input
+            aria-required={true}
+            autoComplete="email"
+            autoFocus={true}
+            className="sc-bcXGCL sc-UpCiH cXnqTP eVENPD cap-input"
+            disabled={false}
+            name="username"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            placeholder="email.placeholder"
+            required={true}
+            type="email"
+          />
+        </div>
+        <div
+          className="sc-bcXGCL bllofW cap-form-control"
+          role="group"
+        >
+          <label
+            className="sc-bcXGCL ctSjlJ cap-form-label"
+            htmlFor="password"
+            style={
+              Object {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+          >
+            <p
+              className="sc-bcXGCL JNsrJ cap-text"
+              style={
+                Object {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              global.password
+            </p>
+          </label>
+          <input
+            aria-required={true}
+            autoComplete="off"
+            className="sc-bcXGCL sc-UpCiH cXnqTP eVENPD cap-input"
+            disabled={false}
+            name="password"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onFocus={[Function]}
+            required={true}
+            type="password"
+          />
+        </div>
+        <a
+          className="sc-bcXGCL lpttQg cap-link"
+          href="/resetting/request"
+        >
+          global.forgot_password
+        </a>
+        <div
+          className="sc-bcXGCL gzaWKB"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              Object {
+                "__html": "<mock-value-for-field-\\"value\\">",
+              }
+            }
+          />
+        </div>
+      </div>
+    </div>
+    <div
+      data-testid="Footer"
+    >
+      <button
+        className="sc-bcXGCL sc-laZSpB jujdjU jAaALk cap-button"
+        type="button"
+      >
+        global.cancel
+      </button>
+      <button
+        className="sc-bcXGCL sc-laZSpB jujdjU hlwnod cap-button"
+        id="confirm-login"
+        type="submit"
+      >
+        global.login_me
+      </button>
+    </div>
+  </div>,
+]
+`;

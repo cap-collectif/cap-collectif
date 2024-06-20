@@ -35,7 +35,6 @@ exports[`<DebateStepPageLogic /> should renders correctly when authenticated 1`]
       }
     }
   />
-  <Connect(LoginModal) />
 </Flex>
 `;
 
@@ -70,7 +69,6 @@ exports[`<DebateStepPageLogic /> should renders correctly when not authenticated
     }
     viewer={null}
   />
-  <Connect(LoginModal) />
 </Flex>
 `;
 

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
-import NewLoginOverlay from '../Utils/NewLoginOverlay'
+import LoginOverlay from '../Utils/LoginOverlay'
 import { showOpinionVersionCreateModal } from '../../redux/modules/opinion'
 import type { Dispatch } from '../../types'
 import type { OpinionVersionCreateButton_opinion } from '~relay/OpinionVersionCreateButton_opinion.graphql'
@@ -18,7 +18,7 @@ const OpinionVersionCreateButton = ({ opinion, dispatch, style = {}, className }
   if (!style.display) style.display = 'inline-block'
   return (
     <div className={className} style={style}>
-      <NewLoginOverlay>
+      <LoginOverlay>
         <button
           type="button"
           className="btn btn-primary"
@@ -30,7 +30,7 @@ const OpinionVersionCreateButton = ({ opinion, dispatch, style = {}, className }
           <i className="cap cap-add-1" />
           <FormattedMessage id="opinion.add_new_version" />
         </button>
-      </NewLoginOverlay>
+      </LoginOverlay>
     </div>
   )
 }

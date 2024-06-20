@@ -2,8 +2,8 @@ import { useLazyLoadQuery, graphql } from 'react-relay'
 import { useSelector } from 'react-redux'
 import { useIntl } from 'react-intl'
 import type { useVoteStepFiltersQuery } from '~relay/useVoteStepFiltersQuery.graphql'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import { State } from '~/types'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const QUERY = graphql`
   query useVoteStepFiltersQuery($stepId: ID!) {

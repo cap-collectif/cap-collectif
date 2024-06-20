@@ -18,7 +18,7 @@
         }</style>
     <div id="shield-mode" class="container mt-50">
         <div class="text-center mb-10">
-            <img src="{{ media_public_url(capco_site_image_media('image.shield'), 'default_shield') }}"/>
+            <img style="margin:auto;" src="{{ media_public_url(capco_site_image_media('image.shield'), 'default_shield') }}"/>
             <div class="mt-30"></div>
             {{ capco_site_parameter_value('shield.introduction')|raw }}
             <div class="mt-30"></div>
@@ -62,7 +62,7 @@
         </div>
         <div class="footer__links">
             <div class="capco-powered">
-                <p>
+                <p style="display:flex;justify-content:center;align-items:center;gap:4px;">
                     {{ 'email.propulsed.by.capco'|trans({'{logoUrl}':  asset('capco-logo-mail.png'),}, 'CapcoAppBundle') | raw }}
                 </p>
             </div>

@@ -15,7 +15,7 @@ import {
   CapInputSize,
 } from '@cap-collectif/ui'
 import { COUNTRY_CODES, FieldInput, FormControl } from '@cap-collectif/form'
-import LoginSocialButton from '~ui/Button/LoginSocialButton'
+import LoginSocialButton from '@shared/login/LoginSocialButton'
 import FranceConnectIcon from '~ui/Icons/FranceConnectIcon'
 
 type Props = {

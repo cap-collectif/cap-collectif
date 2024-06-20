@@ -64,8 +64,7 @@ const SeeMoreFooterButton = styled(Button)`
 `
 
 const getActivatedNumber = (legals: Legals, cookiesText: string) =>
-  // @ts-ignore
-  legals.cookies + legals.privacy + legals.legal + (cookiesText ? 1 : 0)
+  Number(legals.cookies) + Number(legals.privacy) + Number(legals.legal) + (cookiesText ? 1 : 0)
 
 const renderSeeMore = (
   seeMoreRef: {

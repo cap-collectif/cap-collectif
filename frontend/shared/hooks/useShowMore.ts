@@ -75,17 +75,16 @@ const useShowMore = (
   }
 
   useEffect(() => {
-    if (overflowEnable) {
-      handleOverflow()
-      window.addEventListener('resize', handleOverflow)
-    }
-
-    return () => {
+    if (!containerRef?.current) return
+    const resizeObserver = new ResizeObserver(() => {
       if (overflowEnable) {
-        window.removeEventListener('resize', handleOverflow)
+        handleOverflow()
       }
-    }
+    })
+    resizeObserver.observe(containerRef?.current)
+    return () => resizeObserver.disconnect()
   }, [])
+
   return [
     containerRef,
     seeMoreRef,

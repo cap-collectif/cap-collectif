@@ -4,7 +4,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { Flex, Text, Button, Tag, Heading, Icon, CapUIIcon } from '@cap-collectif/ui'
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer'
-import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import LoginOverlay from '~/components/Utils/LoginOverlay'
 import { voteForArgument } from '~/components/Debate/ArgumentCard/ArgumentCard'
 import type { DebateStepPageArgumentDrawer_argument$key } from '~relay/DebateStepPageArgumentDrawer_argument.graphql'
 import type { DebateStepPageArgumentDrawer_viewer$key } from '~relay/DebateStepPageArgumentDrawer_viewer.graphql'
@@ -107,7 +107,7 @@ const DebateStepPageArgumentDrawer = ({
         width="100%"
         py={4}
       >
-        <NewLoginOverlay enabled={!stepClosed} placement="bottom">
+        <LoginOverlay enabled={!stepClosed} placement="bottom">
           <Button
             color="neutral-gray.500"
             leftIcon={<Icon name={argument.viewerHasVote ? 'CLAP' : 'CLAP_O'} size="lg" />}
@@ -121,7 +121,7 @@ const DebateStepPageArgumentDrawer = ({
             variant="link"
             variantColor="hierarchy"
           />
-        </NewLoginOverlay>
+        </LoginOverlay>
         <Text ml={1} as="span" fontSize={4} color="neutral-gray.900">
           {argument.votes.totalCount}
         </Text>

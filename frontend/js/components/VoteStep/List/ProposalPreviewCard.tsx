@@ -24,7 +24,7 @@ import convertIconToDs from '~/utils/convertIconToDs'
 import { getBaseUrlFromProposalUrl } from '~/utils/router'
 import { Link, ACTIVE_COLOR, VoteStepEvent, dispatchEvent, cardWidthListView, cardWidthMapView } from '../utils'
 import stripHtml from '~/utils/stripHtml'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 import ProposalPreviewCardFooter from './ProposalPreviewCardFooter'
 

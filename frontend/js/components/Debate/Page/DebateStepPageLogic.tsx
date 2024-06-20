@@ -10,7 +10,6 @@ import DebateStepPageArguments from './Arguments/DebateStepPageArguments'
 import DebateStepPageNotYetStarted from './NotYetStarted/DebateStepPageNotYetStarted'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
-import LoginModal from '~/components/User/Login/LoginModal'
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context'
 import { insertCustomCode } from '~/utils/customCode'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
@@ -55,7 +54,6 @@ export const DebateStepPageLogic = ({ query }: Props): JSX.Element => {
         </>
       )}
       <DebateStepPageArguments isMobile={isMobile} step={step} viewer={viewer} />
-      <LoginModal />
     </Flex>
   )
 }

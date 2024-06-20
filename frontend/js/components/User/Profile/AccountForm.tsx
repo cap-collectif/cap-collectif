@@ -40,7 +40,7 @@ import type {
 import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
 import ListGroup from '../../Ui/List/ListGroup'
 import SocialIcon from '~ui/Icons/SocialIcon'
-import { getButtonLinkForType } from '~ui/Button/LoginSocialButton'
+import { getButtonLinkForType } from '@shared/login/LoginSocialButton'
 import DissociateSsoModal from '~/components/User/Profile/DissociateSsoModal'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import Tooltip from '~ds/Tooltip/Tooltip'

@@ -20,7 +20,7 @@ import Card from '../../Ui/Card/Card'
 import ProposalPreviewUser from './ProposalPreviewUser'
 import { translateContent, isPredefinedTraductionKey } from '~/utils/ContentTranslator'
 import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { getBaseUrlFromProposalUrl } from '~/utils/router'
 
 type Props = {

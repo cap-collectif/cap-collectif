@@ -1,7 +1,7 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import type { BlockPost_post$key } from '~relay/BlockPost_post.graphql'
 import Image from '~ui/Primitives/Image'

@@ -8,7 +8,7 @@ import SubscribeToEventAsNonRegisteredMutation from '~/mutations/SubscribeToEven
 import ResetCss from '~/utils/ResetCss'
 import type { Dispatch, GlobalState } from '~/types'
 import { ChartLinkComponent, PrivacyPolicyComponent } from '~/components/User/Registration/RegistrationForm'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly eventId: string
   readonly register: () => void

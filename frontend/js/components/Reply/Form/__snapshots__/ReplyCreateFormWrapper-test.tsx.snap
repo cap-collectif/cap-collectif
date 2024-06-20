@@ -93,7 +93,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         }
       }
     />
-    <Connect(LoginButton)
+    <LoginButton
       style={
         Object {
           "marginLeft": 5,

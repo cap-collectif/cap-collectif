@@ -12,7 +12,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes'
 import withColors from '~/components/Utils/withColors'
 import type { FeatureToggles, State } from '~/types'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export const BlockContainer = styled.div`
   display: flex;

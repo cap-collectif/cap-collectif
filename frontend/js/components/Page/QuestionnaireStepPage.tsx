@@ -20,7 +20,7 @@ import type { Context } from './QuestionnaireStepPage.context'
 import { QuestionnaireStepPageContext } from './QuestionnaireStepPage.context'
 import CookieMonster from '~/CookieMonster'
 import QuestionnairePage from '../Questionnaire/QuestionnairePage'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import StepEvents from '~/components/Steps/StepEvents'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 

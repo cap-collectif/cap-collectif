@@ -1,7 +1,7 @@
 import { Button } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
-import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import LoginOverlay from '~/components/Utils/LoginOverlay'
 import { useIntl } from 'react-intl'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 
@@ -18,7 +18,7 @@ export const VoteStepPageCollectButton = ({ disabled, onOpen }: Props) => {
   const isMediumScreen = width >= 1536
 
   return (
-    <NewLoginOverlay>
+    <LoginOverlay>
       <Button
         variant="primary"
         mr={[0, 4]}
@@ -43,7 +43,7 @@ export const VoteStepPageCollectButton = ({ disabled, onOpen }: Props) => {
           id: isMobile || isMediumScreen ? 'proposal.add' : 'global.collect',
         })}
       </Button>
-    </NewLoginOverlay>
+    </LoginOverlay>
   )
 }
 export default VoteStepPageCollectButton

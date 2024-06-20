@@ -10,7 +10,7 @@ import { useAnalytics } from 'use-analytics'
 import CloseButton from '../../Form/CloseButton'
 import SubmitButton from '../../Form/SubmitButton'
 import RegistrationForm, { form } from './RegistrationForm'
-import LoginSocialButtons from '../Login/LoginSocialButtons'
+import LoginSocialButtons from '@shared/login/LoginSocialButtons'
 import { closeRegistrationModal, hideChartModal } from '~/redux/modules/user'
 import type { Dispatch } from '~/types'
 import WYSIWYGRender from '../../Form/WYSIWYGRender'
@@ -111,7 +111,7 @@ export const RegistrationModal = ({
               <WYSIWYGRender value={textTop} />
             </Alert>
           )}
-          <LoginSocialButtons prefix="registration." />
+          <LoginSocialButtons query={query} />
           {/** @ts-ignore */}
           <RegistrationForm query={query} locale={locale} />
 
@@ -157,6 +157,7 @@ export default createFragmentContainer(RegistrationModalConnected, {
   query: graphql`
     fragment RegistrationModal_query on Query {
       ...RegistrationForm_query
+      ...LoginSocialButtons_query
     }
   `,
 })

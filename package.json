@@ -137,11 +137,11 @@
         },
         {
             "path": "./public/js/admin.js",
-            "maxSize": "300 KB"
+            "maxSize": "250 KB"
         },
         {
             "path": "./public/js/front.js",
-            "maxSize": "900 KB"
+            "maxSize": "950 KB"
         },
         {
             "path": "./public/js/commons.js",
@@ -149,11 +149,11 @@
         },
         {
             "path": "./public/js/app.js",
-            "maxSize": "100 KB"
+            "maxSize": "80 KB"
         },
         {
             "path": "./public/js/vendor.js",
-            "maxSize": "51 KB"
+            "maxSize": "30 KB"
         }
     ],
     "prettier": {

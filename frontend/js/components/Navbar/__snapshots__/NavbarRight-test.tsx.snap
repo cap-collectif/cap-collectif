@@ -9,9 +9,12 @@ exports[`<NavbarRight /> should render correctly 1`] = `
     <Connect(injectIntl(RegistrationButton))
       className="navbar-btn"
     />
-    <Connect(LoginButton)
-      className="btn-darkest-gray navbar-btn btn--connection"
-    />
+     
+    <Suspense
+      fallback={null}
+    >
+      <LoginButton />
+    </Suspense>
   </Flex>
 </Fragment>
 `;

@@ -27,7 +27,7 @@ class UserContext extends DefaultContext
         $home->openUserDropdown();
         $this->iWaitElementToAppearOnPage('#logout-button');
         $home->clickLogout();
-        $this->iWaitElementToAppearOnPage('.btn.btn--connection');
+        $this->iWaitElementToAppearOnPage('#login-button');
     }
 
     /**

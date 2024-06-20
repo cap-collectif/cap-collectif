@@ -4,7 +4,7 @@ import colors from '../../utils/colors'
 import FooterAbout from './FooterAbout'
 import FooterLinks from './FooterLinks'
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export type SocialNetwork = {
   link: string

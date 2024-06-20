@@ -1,13 +1,10 @@
 import React, { useState } from 'react'
-import { FormattedMessage } from 'react-intl'
-
+import { FormattedMessage, useIntl } from 'react-intl'
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
-import { connect } from 'react-redux'
-import SocialIcon from '../Icons/SocialIcon'
-import Text from '~ui/Primitives/Text'
 import { baseUrl } from '~/config'
-import type { GlobalState } from '~/types'
+import { Text } from '@cap-collectif/ui'
+import SocialIcon from '~ui/Icons/SocialIcon'
 
 export type LoginSocialButtonType = 'facebook' | 'openId' | 'franceConnect' | 'saml' | 'cas' | 'oauth2'
 type Props = {
@@ -105,6 +102,7 @@ export type LinkButtonProps = {
   type: LoginSocialButtonType
   labelColor?: string
   buttonColor?: string
+  maxWidth?: string
   text?: string
   children: any
 }
@@ -113,6 +111,7 @@ const LinkButton = styled.div<LinkButtonProps>`
   margin-top: 10px;
   height: 34px;
   width: 100%;
+  max-width: ${props => `${props.maxWidth}`};
   border-radius: 3px;
   display: flex;
 
@@ -147,13 +146,11 @@ const LinkButton = styled.div<LinkButtonProps>`
     width: 100%;
     text-decoration: none;
     color: ${props => getLabelColorForType(props.type, props.labelColor)};
+    display: flex;
+    align-items: center;
 
     span {
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      width: fit-content;
+      margin-left: 16px;
     }
   }
 
@@ -169,7 +166,10 @@ export const FranceConnectLink = styled.div<{
   justifyContent: string
 }>`
   margin-top: 8px;
-  color: #00acc1;
+  color: #000091;
+  a:hover {
+    color: #000091;
+  }
   font-size: 13px;
   text-align: ${props => props.justifyContent};
   hr {
@@ -217,6 +217,7 @@ export const LoginSocialButton = ({
 }: Props) => {
   const [isHover, seIsHover] = useState<boolean>(false)
   const redirectUri = switchUserMode ? `${baseUrl}/sso/switch-user` : window && window.location.href
+  const intl = useIntl()
 
   if (text === 'grandLyonConnect') {
     return (
@@ -260,7 +261,13 @@ export const LoginSocialButton = ({
             <a href="https://franceconnect.gouv.fr/" target="_blank" rel="noreferrer">
               <FormattedMessage id="what-is-fc" />
             </a>
-            {!noHR ? <hr /> : null}
+            {!noHR ? (
+              <Text textAlign="center" as="div" fontWeight="bold" color="neutral-gray.700" my={5}>
+                {intl.formatMessage({
+                  id: 'login.or',
+                })}
+              </Text>
+            ) : null}
           </FranceConnectLink>
         </>
       ) : (
@@ -275,9 +282,4 @@ export const LoginSocialButton = ({
   )
 }
 
-const mapStateToProps = (state: GlobalState) => ({
-  primaryColor: state.default.parameters['color.btn.primary.bg'],
-  colorText: state.default.parameters['color.btn.primary.text'],
-})
-
-export default connect(mapStateToProps)(LoginSocialButton)
+export default LoginSocialButton

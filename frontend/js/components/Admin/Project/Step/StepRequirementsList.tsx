@@ -17,7 +17,7 @@ import type { FranceConnectAllowedData } from '~/components/Admin/Project/Step/P
 import '~/components/Admin/Project/Step/ProjectAdminStepForm'
 import InfoMessage from '~ds/InfoMessage/InfoMessage'
 import component from '~/components/Form/Field'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export type Requirement = {
   type: RequirementType | string

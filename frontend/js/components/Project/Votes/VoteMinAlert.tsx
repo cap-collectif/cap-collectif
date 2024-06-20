@@ -5,7 +5,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import type { VoteMinAlert_step$data } from '~relay/VoteMinAlert_step.graphql'
 import { VoteMinAlertContainer } from './ProposalsUserVotes.style'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type Props = {
   step: VoteMinAlert_step$data

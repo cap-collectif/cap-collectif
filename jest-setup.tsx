@@ -169,7 +169,7 @@ jest.doMock('react-intl', () => {
 })
 // By default all feature flags are disabled in tests.
 global.mockFeatureFlag = jest.fn(() => false)
-jest.doMock('./frontend/js/utils/hooks/useFeatureFlag', () => {
+jest.doMock('./frontend/shared/hooks/useFeatureFlag', () => {
   return global.mockFeatureFlag
 })
 jest.doMock('use-analytics', () => {

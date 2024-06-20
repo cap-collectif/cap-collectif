@@ -33,8 +33,13 @@ exports[`<RegistrationModal /> renders a form 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(LoginSocialButtons)
-        prefix="registration."
+      <LoginSocialButtons
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
       />
       <Relay(Connect(injectIntl(ReduxForm)))
         locale="fr-FR"
@@ -108,8 +113,13 @@ exports[`<RegistrationModal /> renders a top text and a bottom text if specified
           value="Texte du haut"
         />
       </Alert>
-      <Connect(LoginSocialButtons)
-        prefix="registration."
+      <LoginSocialButtons
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
       />
       <Relay(Connect(injectIntl(ReduxForm)))
         locale="fr-FR"
@@ -177,8 +187,13 @@ exports[`<RegistrationModal /> renders hidden modal if not shown 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(LoginSocialButtons)
-        prefix="registration."
+      <LoginSocialButtons
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
       />
       <Relay(Connect(injectIntl(ReduxForm)))
         locale="fr-FR"
@@ -242,8 +257,13 @@ exports[`<RegistrationModal /> renders modal and chart 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(LoginSocialButtons)
-        prefix="registration."
+      <LoginSocialButtons
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
       />
       <Relay(Connect(injectIntl(ReduxForm)))
         locale="fr-FR"
@@ -307,8 +327,13 @@ exports[`<RegistrationModal /> renders modal and not chart 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(LoginSocialButtons)
-        prefix="registration."
+      <LoginSocialButtons
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
       />
       <Relay(Connect(injectIntl(ReduxForm)))
         locale="fr-FR"
@@ -372,8 +397,13 @@ exports[`<RegistrationModal /> renders modal if shown 1`] = `
       bsClass="modal-body"
       componentClass="div"
     >
-      <Connect(LoginSocialButtons)
-        prefix="registration."
+      <LoginSocialButtons
+        query={
+          Object {
+            " $fragmentRefs": null,
+            " $refType": null,
+          }
+        }
       />
       <Relay(Connect(injectIntl(ReduxForm)))
         locale="fr-FR"

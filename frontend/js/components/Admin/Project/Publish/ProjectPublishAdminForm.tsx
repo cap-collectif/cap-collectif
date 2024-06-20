@@ -16,7 +16,7 @@ import {
   ProjectBoxContainer,
   UpdateSlugIcon,
 } from '../Form/ProjectAdminForm.style'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import UpdateSlugModal from '~/components/Admin/Project/Publish/UpdateSlugModal'
 import { ICON_NAME } from '~ds/Icon/Icon'
 import Flex from '~ui/Primitives/Layout/Flex'

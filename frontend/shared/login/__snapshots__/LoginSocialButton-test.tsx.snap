@@ -66,7 +66,15 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
         values={Object {}}
       />
     </a>
-    <hr />
+    <Text
+      as="div"
+      color="neutral-gray.700"
+      fontWeight="bold"
+      my={5}
+      textAlign="center"
+    >
+      login.or
+    </Text>
   </LoginSocialButton__FranceConnectLink>
 </div>
 `;

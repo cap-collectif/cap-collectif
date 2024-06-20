@@ -8872,7 +8872,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "841c5a978f8877341ddd482b107d70da",
+          "cacheID": "2dc0652655c2a82c012eff80edc10e77",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9094,38 +9094,6 @@ fragment CommentSectionFragmented_commentable_39ngnn on Commentable {
   ...CommentForm_commentable
 }
 
-fragment CommentVoteButtonLegacy_comment_39ngnn on Comment {
-  id
-  author {
-    isViewer @include(if: $isAuthenticated)
-    id
-  }
-  votes(first: 0) {
-    totalCount
-  }
-  viewerHasVote @include(if: $isAuthenticated)
-  viewerVote @include(if: $isAuthenticated) {
-    id
-    ...UnpublishedTooltip_publishable
-  }
-}
-
-fragment CommentVoteButtonLegacy_comment_FngS2 on Comment {
-  id
-  author {
-    isViewer
-    id
-  }
-  votes(first: 0) {
-    totalCount
-  }
-  viewerHasVote
-  viewerVote {
-    id
-    ...UnpublishedTooltip_publishable
-  }
-}
-
 fragment CommentVoteButton_comment_39ngnn on Comment {
   id
   author {
@@ -9178,7 +9146,6 @@ fragment Comment_comment_39ngnn on Comment {
   ...CommentBody_comment
   ...CommentEdit_comment_39ngnn
   ...CommentVoteButton_comment_39ngnn
-  ...CommentVoteButtonLegacy_comment_39ngnn
   ...CommentReportButton_comment_39ngnn
   ...CommentForm_commentable
 }
@@ -9203,7 +9170,6 @@ fragment Comment_comment_FngS2 on Comment {
   ...CommentBody_comment
   ...CommentEdit_comment_FngS2
   ...CommentVoteButton_comment_FngS2
-  ...CommentVoteButtonLegacy_comment_FngS2
   ...CommentReportButton_comment_FngS2
   ...CommentForm_commentable
 }

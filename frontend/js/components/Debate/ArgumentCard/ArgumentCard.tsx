@@ -23,7 +23,7 @@ import {
 import type { ArgumentCard_argument, ForOrAgainstValue } from '~relay/ArgumentCard_argument.graphql'
 import type { ArgumentCard_viewer } from '~relay/ArgumentCard_viewer.graphql'
 import { LineHeight } from '~ui/Primitives/constants'
-import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import LoginOverlay from '~/components/Utils/LoginOverlay'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import AddDebateArgumentVoteMutation from '~/mutations/AddDebateArgumentVoteMutation'
 import RemoveDebateArgumentVoteMutation from '~/mutations/RemoveDebateArgumentVoteMutation'
@@ -318,7 +318,7 @@ export const ArgumentCard = ({
                 </Tooltip>
               )}
             >
-              <NewLoginOverlay enabled={!stepClosed} placement="bottom">
+              <LoginOverlay enabled={!stepClosed} placement="bottom">
                 <Button
                   color="neutral-gray.500"
                   leftIcon={
@@ -340,7 +340,7 @@ export const ArgumentCard = ({
                   variant="link"
                   variantColor="hierarchy"
                 />
-              </NewLoginOverlay>
+              </LoginOverlay>
             </ConditionalWrapper>
             <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">
               {argument.votes.totalCount}

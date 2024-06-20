@@ -4,7 +4,7 @@ import cn from 'classnames'
 import { graphql, createFragmentContainer } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, injectIntl } from 'react-intl'
-import NewLoginOverlay from '../../Utils/NewLoginOverlay'
+import LoginOverlay from '../../Utils/LoginOverlay'
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip'
 import { VOTE_WIDGET_BOTH } from '../../../constants/VoteConstants'
 import AddOpinionVoteMutation from '../../../mutations/AddOpinionVoteMutation'
@@ -180,7 +180,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
     return (
       <div>
         {opinion.step && <RequirementsFormModal step={opinion.step} handleClose={this.closeModal} show={showModal} />}
-        <NewLoginOverlay>
+        <LoginOverlay>
           <button
             type="button"
             style={style}
@@ -202,7 +202,7 @@ export class OpinionVotesButton extends React.Component<Props, State> {
             )}
             <i className={data.icon} /> <FormattedMessage id={`vote.${data.str}`} />
           </button>
-        </NewLoginOverlay>
+        </LoginOverlay>
       </div>
     )
   }

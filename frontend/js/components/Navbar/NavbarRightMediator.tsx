@@ -4,7 +4,7 @@ import { MenuItem, useMenuState } from 'reakit/Menu'
 import { NavbarRightMediatorQuery } from '~relay/NavbarRightMediatorQuery.graphql'
 import * as S from '~ui/TabsBar/styles'
 import { graphql, useLazyLoadQuery } from 'react-relay'
-import useFeatureFlag from "~/utils/hooks/useFeatureFlag";
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export const QUERY = graphql`
   query NavbarRightMediatorQuery {
@@ -29,7 +29,7 @@ export const NavbarRightMediator = () => {
   const menu = useMenuState({
     baseId: 'user-profile',
   })
-  const isMediatorEnabled = useFeatureFlag('mediator');
+  const isMediatorEnabled = useFeatureFlag('mediator')
 
   const query = useLazyLoadQuery<NavbarRightMediatorQuery>(QUERY, {})
 

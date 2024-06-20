@@ -21,7 +21,7 @@ import ProposalPageBlog from './Blog/ProposalPageBlog'
 import ProposalPageFollowers from './Followers/ProposalPageFollowers'
 import ProposalDraftAlert from './ProposalDraftAlert'
 import ProposalVoteBasketWidget from '../Vote/ProposalVoteBasketWidget'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 import { useIntl } from 'react-intl'
 

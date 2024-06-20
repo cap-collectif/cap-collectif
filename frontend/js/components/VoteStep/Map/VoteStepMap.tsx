@@ -36,7 +36,7 @@ import EmptyList from '../List/EmptyList'
 import debounce from '~/utils/debounce-promise'
 import { Button, CapUIIcon, CapUIIconSize, Icon, useTheme } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
-import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import LoginOverlay from '~/components/Utils/LoginOverlay'
 import ProposalCreateModal from '~/components/Proposal/Create/ProposalCreateModal'
 import { formName } from '~/components/Proposal/Form/ProposalForm'
 import { useDisclosure } from '@liinkiing/react-hooks'
@@ -277,7 +277,7 @@ export const VoteStepMap = ({
             autoPan={false}
             className="popup-proposal"
           >
-            <NewLoginOverlay placement="top">
+            <LoginOverlay placement="top">
               <Button
                 opacity={!proposalForm?.contribuable ? 0.5 : 1}
                 variantSize="small"
@@ -288,7 +288,7 @@ export const VoteStepMap = ({
                   id: 'proposal.add',
                 })}
               </Button>
-            </NewLoginOverlay>
+            </LoginOverlay>
           </Popup>
           <MarkerClusterGroup
             spiderfyOnMaxZoom

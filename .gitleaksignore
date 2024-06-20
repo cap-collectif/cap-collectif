@@ -1,3 +1,5 @@
 9ad248511e71a1d93c7dc62387b169790218af96:frontend/js/components/Form/Captcha.tsx:generic-api-key:12
 9ad248511e71a1d93c7dc62387b169790218af96:frontend/js/components/Form/Captcha.tsx:generic-api-key:13
 9ad248511e71a1d93c7dc62387b169790218af96:frontend/js/components/Ui/Button/SiteLanguageChangeButton.tsx:generic-api-key:109
+d2ae436d38bcedb2f2d7bd73a1e1fb7109ef1b60:frontend/shared/form/Captcha.tsx:generic-api-key:15
+d2ae436d38bcedb2f2d7bd73a1e1fb7109ef1b60:frontend/shared/form/Captcha.tsx:generic-api-key:16

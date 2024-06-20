@@ -32,6 +32,8 @@ body {
   }
 }
 
+.cap-link:before { display:none; }
+
 /* Keeping the old navbar body padding while we use a feature flag */
 
 body.old-navbar {

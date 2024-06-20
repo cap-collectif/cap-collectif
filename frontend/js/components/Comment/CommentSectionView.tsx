@@ -11,7 +11,7 @@ import type { CommentSectionFragmented_commentable } from '~relay/CommentSection
 import colors from '~/utils/colors'
 import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import CommentListNotApprovedByModerator from '~/components/Comment/CommentListNotApprovedByModerator'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly intl: IntlShape
   readonly commentable: CommentSectionFragmented_commentable

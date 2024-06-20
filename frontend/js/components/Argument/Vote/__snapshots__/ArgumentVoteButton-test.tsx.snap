@@ -14,7 +14,7 @@ exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
       }
     }
   />
-  <Connect(NewLoginOverlay)>
+  <Connect(LoginOverlay)>
     <button
       className="btn btn-xs argument__btn--vote btn--outline btn-success"
       disabled={false}
@@ -36,7 +36,7 @@ exports[`<ArgumentVoteButton /> renders viewer has not voted 1`] = `
         target={[Function]}
       />
     </button>
-  </Connect(NewLoginOverlay)>
+  </Connect(LoginOverlay)>
 </Fragment>
 `;
 
@@ -54,7 +54,7 @@ exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
       }
     }
   />
-  <Connect(NewLoginOverlay)>
+  <Connect(LoginOverlay)>
     <button
       className="btn btn-xs argument__btn--vote btn-danger"
       disabled={false}
@@ -76,7 +76,7 @@ exports[`<ArgumentVoteButton /> renders viewer has voted 1`] = `
         target={[Function]}
       />
     </button>
-  </Connect(NewLoginOverlay)>
+  </Connect(LoginOverlay)>
 </Fragment>
 `;
 
@@ -94,7 +94,7 @@ exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
       }
     }
   />
-  <Connect(NewLoginOverlay)>
+  <Connect(LoginOverlay)>
     <button
       className="btn btn-xs argument__btn--vote btn--outline btn-success"
       disabled={true}
@@ -116,6 +116,6 @@ exports[`<ArgumentVoteButton /> renders when viewer is author 1`] = `
         target={[Function]}
       />
     </button>
-  </Connect(NewLoginOverlay)>
+  </Connect(LoginOverlay)>
 </Fragment>
 `;

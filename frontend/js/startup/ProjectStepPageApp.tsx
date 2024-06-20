@@ -16,8 +16,8 @@ import CustomStepPage from '~/components/Page/CustomStepPage'
 import ProposalStepPage from '~/components/Page/ProposalStepPage'
 import ProposalPage from '~/components/Proposal/Page/ProposalPage'
 import { getBaseLocale } from '~/utils/router'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
 import { ProjectTrash } from './ProjectStepPageAppTrash'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import VoteStepPage from '~/components/VoteStep/VoteStepPage'
 import Loader from '../components/Ui/FeedbacksIndicators/Loader'
 
@@ -113,7 +113,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
               <DebateStepPageWithRouter stepId={props.stepId} fromWidget={false} />
             </div>
           </section>
-          <ProjectTrash projectSlug={props.projectSlug} showTrash={showTrash} unstable__enableCapcoUiDs />
+          <ProjectTrash projectSlug={props.projectSlug} showTrash={showTrash} />
         </Route>
         <Route exact path={`${baseUrl}/project/:projectSlug/step/:stepSlug`}>
           <ProjectHeader projectId={props.projectId} platformLocale={platformLocale} />
@@ -156,7 +156,7 @@ const ProjectStepPageRouterSwitch = ({ platformLocale, ...props }: Props) => {
                   <ProposalStepPage stepId={props.stepId} projectId={props.projectId} />
                 </div>
               </section>
-              <ProjectTrash projectSlug={props.projectSlug} showTrash={showTrash} unstable__enableCapcoUiDs />
+              <ProjectTrash projectSlug={props.projectSlug} showTrash={showTrash} />
             </>
           )}
         </Route>

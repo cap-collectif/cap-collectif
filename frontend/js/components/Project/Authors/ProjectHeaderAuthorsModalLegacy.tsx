@@ -8,7 +8,7 @@ import Modal from '~ds/Modal/Modal'
 import UserAvatar from '../../User/UserAvatar'
 import Button from '~ds/Button/Button'
 import Heading from '~ui/Primitives/Heading'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { ProjectHeaderAuthorsModalLegacy_project$key } from '~relay/ProjectHeaderAuthorsModalLegacy_project.graphql'
 type Props = {
   readonly show: boolean

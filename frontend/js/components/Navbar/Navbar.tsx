@@ -7,7 +7,6 @@ import TabsBar from '../Ui/TabsBar/TabsBar'
 import NavigationSkip from './NavigationSkip'
 import NavbarToggle from './NavbarToggle'
 import * as S from './styles'
-import LoginModal from '~/components/User/Login/LoginModal'
 import RegistrationModal from '~/components/User/Registration/RegistrationModal'
 import LanguageHeader from '~/components/Navbar/LanguageHeader'
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
@@ -20,7 +19,7 @@ import type { NavbarQuery$data } from '~relay/NavbarQuery.graphql'
 import type { Item } from './Navbar.type'
 import Flex from '~ui/Primitives/Layout/Flex'
 import NavBarQuery from '@shared/navbar/NavBarQuery'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import NavbarRight from '~/components/Navbar/NavbarRight'
 import NavBarMenu from '@shared/navbar/menu/NavBarMenu'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
@@ -127,8 +126,6 @@ export const Navbar = ({
             variables={{}}
             render={renderRegistrationForm}
           />
-          {/** @ts-ignore */}
-          <LoginModal />
         </>
       )}
       {isMultilangueEnabled && setLocaleHeaderVisible && preferredLanguage !== currentLanguage ? (

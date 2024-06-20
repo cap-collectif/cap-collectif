@@ -6,7 +6,7 @@ import FollowProposalMutation from '../../../mutations/FollowProposalMutation'
 import UpdateFollowProposalMutation from '../../../mutations/UpdateFollowProposalMutation'
 import type { ProposalFollowButton_proposal$key } from '~relay/ProposalFollowButton_proposal.graphql'
 import UnfollowProposalMutation from '../../../mutations/UnfollowProposalMutation'
-import LoginOverlay from '../../Utils/NewLoginOverlay'
+import LoginOverlay from '../../Utils/LoginOverlay'
 import type { SubscriptionTypeValue } from '~relay/UpdateFollowProposalMutation.graphql'
 type Props = {
   readonly proposal: ProposalFollowButton_proposal$key | null | undefined

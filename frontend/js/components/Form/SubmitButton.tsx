@@ -2,7 +2,6 @@ import * as React from 'react'
 import cn from 'classnames'
 import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
-import LoginOverlay from '../Utils/LoginOverlay'
 import type { State, User } from '~/types'
 import type { BsStyle } from '~/types/ReactBootstrap.type'
 
@@ -17,7 +16,6 @@ type Props = {
   loading: string
   style: Record<string, any>
   disabled: boolean
-  loginOverlay: boolean
   user?: User
   children?: any
   ariaLabel?: string
@@ -32,13 +30,12 @@ class SubmitButton extends React.Component<Props> {
     className: '',
     style: {},
     disabled: false,
-    loginOverlay: false,
   }
 
   onClick = () => {
-    const { isSubmitting, loginOverlay, onSubmit, user } = this.props
+    const { isSubmitting, onSubmit } = this.props
 
-    if ((loginOverlay && !user) || isSubmitting) {
+    if (isSubmitting) {
       return null
     }
 
@@ -48,23 +45,20 @@ class SubmitButton extends React.Component<Props> {
   }
 
   render() {
-    const { loginOverlay, isSubmitting, bsStyle, className, id, label, disabled, style, children, loading, ariaLabel } =
-      this.props
+    const { isSubmitting, bsStyle, className, id, label, disabled, style, children, loading, ariaLabel } = this.props
     return (
-      <LoginOverlay enabled={loginOverlay}>
-        <button
-          type="submit"
-          id={id}
-          disabled={isSubmitting || disabled}
-          onClick={this.onClick}
-          className={cn(`btn btn-${bsStyle}`, className)}
-          style={style}
-          aria-label={ariaLabel}
-        >
-          {children}
-          <FormattedMessage id={isSubmitting ? loading : label} />
-        </button>
-      </LoginOverlay>
+      <button
+        type="submit"
+        id={id}
+        disabled={isSubmitting || disabled}
+        onClick={this.onClick}
+        className={cn(`btn btn-${bsStyle}`, className)}
+        style={style}
+        aria-label={ariaLabel}
+      >
+        {children}
+        <FormattedMessage id={isSubmitting ? loading : label} />
+      </button>
     )
   }
 }

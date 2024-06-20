@@ -28,7 +28,7 @@ module.exports = {
   coverageReporters: ['text', 'json-summary', 'lcov', 'clover', 'json'],
   modulePaths: ['<rootDir>/frontend/js/__generated__'],
   // TODO remove startups, only to speed up on CI
-  roots: ['<rootDir>/frontend/js'],
+  roots: ['<rootDir>/frontend/'],
   testEnvironment: 'jsdom',
   clearMocks: true,
   testRegex: ['\\-test.ts$', '\\-test.tsx$'],

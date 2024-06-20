@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import RemoveArgumentVoteMutation from '../../../mutations/RemoveArgumentVoteMutation'
 import AddArgumentVoteMutation from '../../../mutations/AddArgumentVoteMutation'
-import NewLoginOverlay from '../../Utils/NewLoginOverlay'
+import LoginOverlay from '../../Utils/LoginOverlay'
 import UnpublishedTooltip from '../../Publishable/UnpublishedTooltip'
 import type { ArgumentVoteButton_argument } from '~relay/ArgumentVoteButton_argument.graphql'
 import RequirementsFormModal from '../../Requirements/RequirementsModal'
@@ -71,7 +71,7 @@ export const ArgumentVoteButton = ({ argument }: Props) => {
     <>
       {step && <RequirementsFormModal step={step} handleClose={() => setShowModal(false)} show={showModal} />}
 
-      <NewLoginOverlay>
+      <LoginOverlay>
         <button
           type="button"
           ref={target}
@@ -94,7 +94,7 @@ export const ArgumentVoteButton = ({ argument }: Props) => {
             publishable={argument.viewerVote || null}
           />
         </button>
-      </NewLoginOverlay>
+      </LoginOverlay>
     </>
   )
 }

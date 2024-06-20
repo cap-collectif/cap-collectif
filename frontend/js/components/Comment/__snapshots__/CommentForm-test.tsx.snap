@@ -56,10 +56,16 @@ exports[`<CommentForm /> should render correctly 1`] = `
                 />
               </p>
               <Connect(injectIntl(RegistrationButton)) />
-               
-              <Connect(LoginButton)
-                className="btn-darkest-gray navbar-btn btn--connection"
-              />
+              <Button
+                aria-label="open.connection_modal"
+                display="block"
+                id="login-button"
+                mt={1}
+                onClick={[Function]}
+                variant="primary"
+              >
+                global.login
+              </Button>
               <h5>
                 <FormattedMessage
                   id="comment.why_create_account"

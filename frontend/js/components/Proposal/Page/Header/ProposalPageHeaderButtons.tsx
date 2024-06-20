@@ -25,7 +25,7 @@ import ProposalDeleteModal from '../../Delete/ProposalDeleteModal'
 import { ProposalContactButton } from '~/components/Proposal/Contact/ProposalContactButton'
 import { EDIT_MODAL_ANCHOR } from '~/components/Proposal/Form/ProposalForm'
 import ProposalSmsVoteModal from '~/components/Proposal/Vote/ProposalSmsVoteModal'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type ReduxProps = {
   readonly dispatch: Dispatch
   readonly user?: $PropertyType<User, 'user'>
@@ -36,7 +36,7 @@ type Props = ReduxProps & {
   readonly viewer: ProposalPageHeaderButtons_viewer$data | null | undefined
 }
 const Buttons = styled.div`
-  button {
+  button:not(#login-button) {
     margin-right: 10px;
     margin-bottom: 10px;
   }

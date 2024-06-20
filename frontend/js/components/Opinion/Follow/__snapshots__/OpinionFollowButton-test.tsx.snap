@@ -223,11 +223,11 @@ Array [
         "attrs": Array [
           Object {
             "maxWidth": "280px",
-            "zIndex": 100,
+            "zIndex": 1040,
           },
         ],
         "componentStyle": e {
-          "baseHash": 833198423,
+          "baseHash": -1884068249,
           "baseStyle": e {
             "baseHash": -120292040,
             "baseStyle": undefined,
@@ -241,7 +241,7 @@ Array [
             ],
             "staticRulesId": "",
           },
-          "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+          "componentId": "LoginOverlay__PopoverContainer-jXFGkY",
           "isStatic": false,
           "rules": Array [
             "outline:none;",
@@ -251,7 +251,7 @@ Array [
         "foldedComponentIds": "sc-bcXGCL",
         "render": [Function],
         "shouldForwardProp": [Function],
-        "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+        "styledComponentId": "LoginOverlay__PopoverContainer-jXFGkY",
         "target": "div",
         "warnTooManyClasses": [Function],
       }
@@ -311,7 +311,7 @@ Array [
     visible={false}
   >
     <div
-      className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
+      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fVBcyV csqehL"
       style={
         Object {
           "auto": "100%",
@@ -374,20 +374,15 @@ Array [
             global.close
           </button>
         </span>
-        <span
-          style={Object {}}
+        <button
+          aria-label="open.connection_modal"
+          className="sc-bcXGCL sc-laZSpB brWVXu fCNFbM cap-button"
+          id="login-button"
+          onClick={[Function]}
+          type="button"
         >
-          <button
-            aria-label="open.connection_modal"
-            className="center-block btn-block login-button btn btn-success"
-            destination="http://localhost"
-            disabled={false}
-            onClick={[Function]}
-            type="button"
-          >
-            global.login
-          </button>
-        </span>
+          global.login
+        </button>
       </div>
     </div>
   </div>,
@@ -617,11 +612,11 @@ Array [
         "attrs": Array [
           Object {
             "maxWidth": "280px",
-            "zIndex": 100,
+            "zIndex": 1040,
           },
         ],
         "componentStyle": e {
-          "baseHash": 833198423,
+          "baseHash": -1884068249,
           "baseStyle": e {
             "baseHash": -120292040,
             "baseStyle": undefined,
@@ -635,7 +630,7 @@ Array [
             ],
             "staticRulesId": "",
           },
-          "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+          "componentId": "LoginOverlay__PopoverContainer-jXFGkY",
           "isStatic": false,
           "rules": Array [
             "outline:none;",
@@ -645,7 +640,7 @@ Array [
         "foldedComponentIds": "sc-bcXGCL",
         "render": [Function],
         "shouldForwardProp": [Function],
-        "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+        "styledComponentId": "LoginOverlay__PopoverContainer-jXFGkY",
         "target": "div",
         "warnTooManyClasses": [Function],
       }
@@ -705,7 +700,7 @@ Array [
     visible={false}
   >
     <div
-      className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
+      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fVBcyV csqehL"
       style={
         Object {
           "auto": "100%",
@@ -768,20 +763,15 @@ Array [
             global.close
           </button>
         </span>
-        <span
-          style={Object {}}
+        <button
+          aria-label="open.connection_modal"
+          className="sc-bcXGCL sc-laZSpB brWVXu fCNFbM cap-button"
+          id="login-button"
+          onClick={[Function]}
+          type="button"
         >
-          <button
-            aria-label="open.connection_modal"
-            className="center-block btn-block login-button btn btn-success"
-            destination="http://localhost"
-            disabled={false}
-            onClick={[Function]}
-            type="button"
-          >
-            global.login
-          </button>
-        </span>
+          global.login
+        </button>
       </div>
     </div>
   </div>,
@@ -1011,11 +1001,11 @@ Array [
         "attrs": Array [
           Object {
             "maxWidth": "280px",
-            "zIndex": 100,
+            "zIndex": 1040,
           },
         ],
         "componentStyle": e {
-          "baseHash": 833198423,
+          "baseHash": -1884068249,
           "baseStyle": e {
             "baseHash": -120292040,
             "baseStyle": undefined,
@@ -1029,7 +1019,7 @@ Array [
             ],
             "staticRulesId": "",
           },
-          "componentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+          "componentId": "LoginOverlay__PopoverContainer-jXFGkY",
           "isStatic": false,
           "rules": Array [
             "outline:none;",
@@ -1039,7 +1029,7 @@ Array [
         "foldedComponentIds": "sc-bcXGCL",
         "render": [Function],
         "shouldForwardProp": [Function],
-        "styledComponentId": "NewLoginOverlay__PopoverContainer-gZElPI",
+        "styledComponentId": "LoginOverlay__PopoverContainer-jXFGkY",
         "target": "div",
         "warnTooManyClasses": [Function],
       }
@@ -1099,7 +1089,7 @@ Array [
     visible={false}
   >
     <div
-      className="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP fVBcyV ijQUdB"
+      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fVBcyV csqehL"
       style={
         Object {
           "auto": "100%",
@@ -1162,20 +1152,15 @@ Array [
             global.close
           </button>
         </span>
-        <span
-          style={Object {}}
+        <button
+          aria-label="open.connection_modal"
+          className="sc-bcXGCL sc-laZSpB brWVXu fCNFbM cap-button"
+          id="login-button"
+          onClick={[Function]}
+          type="button"
         >
-          <button
-            aria-label="open.connection_modal"
-            className="center-block btn-block login-button btn btn-success"
-            destination="http://localhost"
-            disabled={false}
-            onClick={[Function]}
-            type="button"
-          >
-            global.login
-          </button>
-        </span>
+          global.login
+        </button>
       </div>
     </div>
   </div>,

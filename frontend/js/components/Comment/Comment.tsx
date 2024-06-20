@@ -126,7 +126,6 @@ export default createFragmentContainer(Comment, {
       ...CommentBody_comment
       ...CommentEdit_comment @arguments(isAuthenticated: $isAuthenticated)
       ...CommentVoteButton_comment @arguments(isAuthenticated: $isAuthenticated)
-      ...CommentVoteButtonLegacy_comment @arguments(isAuthenticated: $isAuthenticated)
       ...CommentReportButton_comment @arguments(isAuthenticated: $isAuthenticated)
       ...CommentForm_commentable
     }

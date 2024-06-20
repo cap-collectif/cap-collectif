@@ -6,7 +6,7 @@ import { ListGroupItem } from 'react-bootstrap'
 import { Modal, Button, Heading, CapUIModalSize } from '@cap-collectif/ui'
 import ListGroupFlush from '../../Ui/List/ListGroupFlush'
 import UserAvatar from '../../User/UserAvatar'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { ProjectHeaderAuthorsModal_project$key } from '~relay/ProjectHeaderAuthorsModal_project.graphql'
 import ResetCss from '~/utils/ResetCss'
 type Props = {

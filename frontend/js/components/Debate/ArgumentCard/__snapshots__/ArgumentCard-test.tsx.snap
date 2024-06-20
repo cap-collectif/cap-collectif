@@ -72,7 +72,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(NewLoginOverlay)
+        <Connect(LoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -90,7 +90,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
             variant="link"
             variantColor="hierarchy"
           />
-        </Connect(NewLoginOverlay)>
+        </Connect(LoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -215,7 +215,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(NewLoginOverlay)
+        <Connect(LoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -233,7 +233,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
             variant="link"
             variantColor="hierarchy"
           />
-        </Connect(NewLoginOverlay)>
+        </Connect(LoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -358,7 +358,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(NewLoginOverlay)
+        <Connect(LoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -376,7 +376,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
             variant="link"
             variantColor="hierarchy"
           />
-        </Connect(NewLoginOverlay)>
+        </Connect(LoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -501,7 +501,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
         when={false}
         wrapper={[Function]}
       >
-        <Connect(NewLoginOverlay)
+        <Connect(LoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -519,7 +519,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
             variant="link"
             variantColor="hierarchy"
           />
-        </Connect(NewLoginOverlay)>
+        </Connect(LoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"
@@ -644,7 +644,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
         when={true}
         wrapper={[Function]}
       >
-        <Connect(NewLoginOverlay)
+        <Connect(LoginOverlay)
           enabled={false}
           placement="bottom"
         >
@@ -662,7 +662,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
             variant="link"
             variantColor="hierarchy"
           />
-        </Connect(NewLoginOverlay)>
+        </Connect(LoginOverlay)>
       </ConditionalWrapper>
       <Text
         as="span"

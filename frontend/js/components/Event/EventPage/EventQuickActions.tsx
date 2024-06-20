@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
 import { Text, CapUIIconSize, Menu, ButtonQuickAction, CapUIIcon } from '@cap-collectif/ui'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { GlobalState } from '~/types'
 import EventDeleteModal from './EventDeleteModal'
 import type { EventReviewStatus } from '~relay/EventPageHeader_query.graphql'
@@ -20,7 +20,7 @@ export const EventQuickActions = ({ id, status, viewerDidAuthor }: Props) => {
   const isSuperAdmin = adminRoles.includes('ROLE_SUPER_ADMIN')
   const isAdmin = adminRoles.includes('ROLE_ADMIN')
   const isValid = hasProposeEventEnabled && viewerDidAuthor && eventIsApproved
-  
+
   if (isSuperAdmin || isAdmin || isValid)
     return (
       <Menu

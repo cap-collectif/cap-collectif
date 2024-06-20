@@ -14,7 +14,7 @@ import UpdateProfilePublicDataMutation from '~/mutations/UpdateProfilePublicData
 import { REGEX_USERNAME } from '~/constants/FormConstants'
 import { fbRegEx, instagramRegEx, linkedInRegEx, twitterRegEx } from '~/components/Utils/SocialNetworkRegexUtils'
 import { isUrl } from '~/services/Validator'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type RelayProps = {
   user: UserAdminProfile_user
   viewer: UserAdminProfile_viewer

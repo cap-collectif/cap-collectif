@@ -7,7 +7,7 @@ import { FormattedMessage } from 'react-intl'
 import styled from 'styled-components'
 import RemoveCommentVoteMutation from '../../mutations/RemoveCommentVoteMutation'
 import AddCommentVoteMutation from '../../mutations/AddCommentVoteMutation'
-import NewLoginOverlay from '../Utils/NewLoginOverlay'
+import LoginOverlay from '../Utils/LoginOverlay'
 import UnpublishedTooltip from '../Publishable/UnpublishedTooltip'
 import type { CommentVoteButton_comment$data } from '~relay/CommentVoteButton_comment.graphql'
 import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
@@ -100,12 +100,12 @@ class CommentVoteButton extends React.Component<Props> {
     }
 
     return (
-      <NewLoginOverlay>
+      <LoginOverlay>
         <VoteButton type="button" onClick={this.vote}>
           <Icon name={ICON_NAME.like} size={15} color={colors.secondaryGray} opacity={0.5} />
           {comment.votes.totalCount} <FormattedMessage id="global.ok" />
         </VoteButton>
-      </NewLoginOverlay>
+      </LoginOverlay>
     )
   }
 

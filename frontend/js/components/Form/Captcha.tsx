@@ -2,7 +2,7 @@ import * as React from 'react'
 import ReCAPTCHA from 'react-google-recaptcha'
 import { Turnstile } from '@marsidev/react-turnstile'
 import config from '~/config'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import uuid from '~/utils/uuid'
 
 /**

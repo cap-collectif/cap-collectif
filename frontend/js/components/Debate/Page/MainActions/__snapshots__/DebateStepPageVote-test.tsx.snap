@@ -130,7 +130,7 @@ Array [
     </button>
     <div
       aria-label="vote.popover.title"
-      as=".NewLoginOverlay__PopoverContainer-gZElPI"
+      as=".LoginOverlay__PopoverContainer-jXFGkY"
       baseid="popover-overlay"
       borderradius="popover"
       boxshadow="0 5px 10px rgb(0 0 0 / 20%)"
@@ -148,7 +148,7 @@ Array [
       unstable_referenceref="[object Object]"
     >
       <div
-        class="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP gqmMHB kOoBqs"
+        class="sc-bcXGCL LoginOverlay__Arrow-jnwUOf gqmMHB bAlxBy"
         style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
       >
         <svg
@@ -193,16 +193,14 @@ Array [
               global.close
             </button>
           </span>
-          <span>
-            <button
-              aria-label="open.connection_modal"
-              class="center-block btn-block login-button btn btn-success"
-              destination="http://localhost"
-              type="button"
-            >
-              global.login
-            </button>
-          </span>
+          <button
+            aria-label="open.connection_modal"
+            class="sc-bcXGCL sc-laZSpB ClYGY hlwnod cap-button"
+            id="login-button"
+            type="button"
+          >
+            global.login
+          </button>
         </div>
       </div>
     </div>
@@ -236,7 +234,7 @@ Array [
     </button>
     <div
       aria-label="vote.popover.title"
-      as=".NewLoginOverlay__PopoverContainer-gZElPI"
+      as=".LoginOverlay__PopoverContainer-jXFGkY"
       baseid="popover-overlay"
       borderradius="popover"
       boxshadow="0 5px 10px rgb(0 0 0 / 20%)"
@@ -254,7 +252,7 @@ Array [
       unstable_referenceref="[object Object]"
     >
       <div
-        class="sc-bcXGCL NewLoginOverlay__Arrow-ctsPqP gqmMHB kOoBqs"
+        class="sc-bcXGCL LoginOverlay__Arrow-jnwUOf gqmMHB bAlxBy"
         style="font-size:30px;width:1em;height:1em;pointer-events:none;bottom:100%"
       >
         <svg
@@ -299,16 +297,14 @@ Array [
               global.close
             </button>
           </span>
-          <span>
-            <button
-              aria-label="open.connection_modal"
-              class="center-block btn-block login-button btn btn-success"
-              destination="http://localhost"
-              type="button"
-            >
-              global.login
-            </button>
-          </span>
+          <button
+            aria-label="open.connection_modal"
+            class="sc-bcXGCL sc-laZSpB ClYGY hlwnod cap-button"
+            id="login-button"
+            type="button"
+          >
+            global.login
+          </button>
         </div>
       </div>
     </div>

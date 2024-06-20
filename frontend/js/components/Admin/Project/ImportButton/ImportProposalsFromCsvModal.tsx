@@ -18,7 +18,7 @@ import AddProposalsFromCsvMutation from '~/mutations/AddProposalsFromCsvMutation
 import type { AddProposalsFromCsvMutationResponse } from '~relay/AddProposalsFromCsvMutation.graphql'
 import type { Dispatch, Uuid, GlobalState } from '~/types'
 import { ProposalCsvDropZoneInput, formName } from '~/components/Utils/ProposalCsvDropZoneInput'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type Props = ReduxFormFormProps & {
   dispatch: Dispatch

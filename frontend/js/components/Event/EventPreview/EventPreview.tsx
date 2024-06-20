@@ -23,7 +23,7 @@ import Label from '~ui/Labels/Label'
 import InlineList from '~ui/List/InlineList'
 import TagStep from '~/components/Tag/TagStep/TagStep'
 import { getEndDateFromStartAt, isEventLive } from '~/components/Event/EventPageContent/EventHelperFunctions'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly event: EventPreview_event
   readonly isHighlighted?: boolean

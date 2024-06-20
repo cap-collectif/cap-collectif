@@ -6,7 +6,7 @@ import { useEventListener } from '~/utils/hooks/useEventListener'
 import type { GlobalState } from '~/types'
 import { VoteStepEvent, View, dispatchEvent } from './utils'
 import { useVoteStepContext } from './Context/VoteStepContext'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 
 const ViewButton = ({

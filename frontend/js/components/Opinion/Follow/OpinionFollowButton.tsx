@@ -5,7 +5,7 @@ import { Button, CapUIIcon, Menu, Heading, Popover, Flex, Icon, Text } from '@ca
 import FollowOpinionMutation from '../../../mutations/FollowOpinionMutation'
 import UpdateFollowOpinionMutation from '../../../mutations/UpdateFollowOpinionMutation'
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation'
-import NewLoginOverlay from '../../Utils/NewLoginOverlay'
+import LoginOverlay from '../../Utils/LoginOverlay'
 import type { SubscriptionTypeValue } from '~relay/UpdateFollowOpinionMutation.graphql'
 import type { OpinionFollowButton_opinion$key } from '~relay/OpinionFollowButton_opinion.graphql'
 type Props = {
@@ -49,7 +49,7 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
 
   if (!opinion.viewerIsFollowing && opinion.id) {
     return (
-      <NewLoginOverlay>
+      <LoginOverlay>
         <button
           type="button"
           className="btn btn-default opinion__button__follow mr-5"
@@ -67,7 +67,7 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
           <i className="cap cap-rss" />
           <FormattedMessage id="follow" />
         </button>
-      </NewLoginOverlay>
+      </LoginOverlay>
     )
   }
 
@@ -77,7 +77,7 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
     typeof opinion.viewerFollowingConfiguration !== 'undefined'
   ) {
     return (
-      <NewLoginOverlay>
+      <LoginOverlay>
         <Menu
           placement="bottom"
           disclosure={
@@ -237,7 +237,7 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
             </Menu.Item>
           </Menu.List>
         </Menu>
-      </NewLoginOverlay>
+      </LoginOverlay>
     )
   }
 

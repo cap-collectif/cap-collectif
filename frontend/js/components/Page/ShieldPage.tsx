@@ -1,119 +1,92 @@
 import * as React from 'react'
-import { FormattedMessage } from 'react-intl'
-import { isSubmitting, submit } from 'redux-form'
-import { connect } from 'react-redux'
-import { Button } from 'react-bootstrap'
-import { graphql, QueryRenderer } from 'react-relay'
-import type { Dispatch, State } from '~/types'
+import { useIntl } from 'react-intl'
+import { graphql, useLazyLoadQuery } from 'react-relay'
 import LoginButton from '../User/Login/LoginButton'
-import LoginBox from '../User/Login/LoginBox'
+import LoginBox from '@shared/login/LoginBox'
 import RegistrationButton from '../User/Registration/RegistrationButton'
 import RegistrationModal from '~/components/User/Registration/RegistrationModal'
-import LoginModal from '~/components/User/Login/LoginModal'
-import { loginWithOpenID } from '~/redux/modules/default'
-import environment, { graphqlError } from '~/createRelayEnvironment'
-import type { ShieldPageQueryResponse } from '~relay/ShieldPageQuery.graphql'
+import { ShieldPageQuery, ShieldPageQuery$data } from '~relay/ShieldPageQuery.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import LoginFormWrapper from '@shared/login/LoginFormWrapper'
+import { useFormContext } from 'react-hook-form'
+import { Button } from '@cap-collectif/ui'
 
 type Props = {
-  showRegistration: boolean
-  submitting: boolean
   loginWithOpenId: boolean
-  byPassAuth: boolean
-  onSubmit: (e: Event) => void
-  locale: string
+  query: ShieldPageQuery$data
 }
 
-const getShieldBody = ({ showRegistration, submitting, byPassAuth, loginWithOpenId, onSubmit }: Props): JSX.Element => {
+const QUERY = graphql`
+  query ShieldPageQuery {
+    ...RegistrationModal_query
+    ...LoginBox_query
+    oauth2sso: ssoConfigurations(ssoType: OAUTH2) {
+      edges {
+        node {
+          enabled
+        }
+      }
+    }
+  }
+`
+
+const SimpleShieldForm = ({ query }: { query: ShieldPageQuery$data }) => {
+  const intl = useIntl()
+  const {
+    formState: { isSubmitting },
+  } = useFormContext()
+
+  return (
+    <>
+      <LoginBox query={query} />
+      <Button
+        variant="primary"
+        id="confirm-login"
+        type="submit"
+        isLoading={isSubmitting}
+        mt={4}
+        width="100%"
+        justifyContent="center"
+      >
+        {intl.formatMessage({ id: isSubmitting ? 'global.loading' : 'global.login_me' })}
+      </Button>
+    </>
+  )
+}
+
+export const ShieldBody = ({ query, loginWithOpenId }: Props) => {
+  const byPassAuth = useFeatureFlag('sso_by_pass_auth')
+  const showRegistration = useFeatureFlag('registration')
+
   if (showRegistration && !loginWithOpenId) {
     return (
       <>
-        <LoginButton className="btn--connection btn-block" />
-        <div className="mt-10" />
+        <LoginButton justifyContent="center" width="100%" mb={2} />
         <RegistrationButton className="btn-block" />
       </>
     )
   }
 
-  if (byPassAuth) {
-    return <LoginBox prefix="" />
-  }
+  if (byPassAuth) return <LoginBox query={query} />
 
   return (
-    <form id="login-form" onSubmit={onSubmit}>
-      <LoginBox prefix="" />
-      <Button
-        id="confirm-login"
-        type="submit"
-        className="mt-10 btn-block btn-success"
-        disabled={submitting}
-        bsStyle="primary"
-      >
-        {submitting ? <FormattedMessage id="global.loading" /> : <FormattedMessage id="global.login_me" />}
-      </Button>
-    </form>
+    <LoginFormWrapper>
+      <SimpleShieldForm query={query} />
+    </LoginFormWrapper>
   )
 }
 
-const renderRegistrationForm = ({
-  error,
-  props,
-  locale,
-}: ReactRelayReadyState & {
-  props: ShieldPageQueryResponse | null | undefined
-  locale: string
-}) => {
-  if (error) {
-    console.log(error) // eslint-disable-line no-console
+export const ShieldPage = ({ locale }: { locale: string }) => {
+  const query = useLazyLoadQuery<ShieldPageQuery>(QUERY, {})
 
-    return graphqlError
-  }
-
-  if (props) return <RegistrationModal query={props} locale={locale} />
-  return null
-}
-
-export const ShieldPage = (shieldBodyProps: Props) => {
-  const { locale } = shieldBodyProps
   return (
     <div id="shield-agent" className="bg-white col-md-4 col-md-offset-4 panel panel-default">
-      <LoginModal />
-
-      <QueryRenderer
-        environment={environment}
-        query={graphql`
-          query ShieldPageQuery {
-            ...RegistrationModal_query
-          }
-        `}
-        variables={{}}
-        render={({ error, props, retry }) =>
-          renderRegistrationForm({
-            error,
-            props,
-            retry,
-            locale,
-          })
-        }
-      />
-
-      <div className="panel-body">{getShieldBody(shieldBodyProps)}</div>
+      <RegistrationModal query={query} locale={locale} />
+      <div className="panel-body">
+        <ShieldBody query={query} loginWithOpenId={query.oauth2sso.edges.some(({ node }) => node.enabled)} />
+      </div>
     </div>
   )
 }
 
-const mapStateToProps = (state: State) => ({
-  showRegistration: state.default.features.registration,
-  byPassAuth: state.default.features.sso_by_pass_auth,
-  loginWithOpenId: loginWithOpenID(state.default.ssoList),
-  submitting: isSubmitting('login')(state),
-})
-
-const mapDispatchToProps = (dispatch: Dispatch) => ({
-  onSubmit: (e: Event) => {
-    e.preventDefault()
-    dispatch(submit('login'))
-  },
-})
-
-const connector = connect(mapStateToProps, mapDispatchToProps)
-export default connector(ShieldPage)
+export default ShieldPage

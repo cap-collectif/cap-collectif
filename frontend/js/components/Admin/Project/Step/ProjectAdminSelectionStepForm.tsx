@@ -19,7 +19,7 @@ import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
 import type { FranceConnectAllowedData } from '~/components/Admin/Project/Step/ProjectAdminStepForm'
 import '~/components/Admin/Project/Step/ProjectAdminStepForm'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import AppBox from '~ui/Primitives/AppBox'
 

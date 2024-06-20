@@ -6,7 +6,7 @@ import environment, { graphqlError } from '~/createRelayEnvironment'
 import type { State } from '~/types'
 import type { ProposalPageQuery$data } from '~relay/ProposalPageQuery.graphql'
 import ProposalPageLogic from './ProposalPageLogic'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import CookieMonster from '~/CookieMonster'
 export type Props = {
   readonly proposalSlug: string

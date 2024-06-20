@@ -4,11 +4,10 @@ import { graphql, useFragment } from 'react-relay'
 import RemainingTime from '~/components/Utils/RemainingTime'
 import DatesInterval from '~/components/Utils/DatesInterval'
 import type { StepPageHeader_step$key } from '~relay/StepPageHeader_step.graphql'
-import '~relay/StepPageHeader_step.graphql'
 import BodyInfos from '~/components/Ui/Boxes/BodyInfos'
 import { isInterpellationContextFromStep, isOpinionFormStep } from '~/utils/interpellationLabelHelper'
 import StepPageHeaderContainer from './StepPageHeader.style'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 type Props = {
   step: StepPageHeader_step$key

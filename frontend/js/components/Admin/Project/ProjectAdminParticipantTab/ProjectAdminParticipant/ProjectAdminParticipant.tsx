@@ -10,7 +10,7 @@ import Icon, { ICON_NAME } from '~ui/Icons/Icon'
 import colors, { styleGuideColors } from '~/utils/colors'
 import { translateContent } from '~/utils/ContentTranslator'
 import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context'
-import useFeatureFlag from '~/utils/hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Text from '~ui/Primitives/Text'
 export type OwnProps = {
@@ -48,12 +48,10 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
     <Container rowId={id} selected={selected} isSelectable={hasFeatureEmail}>
       <ParticipantInfo>
         <UsernameContainer>
-          {
-              participant.__typename === 'User' && (<a href={adminUrl ?? url}>{translateContent(username)}</a>)
-          }
-          {
-            (participant.__typename === 'Participant') ? <Text fontWeight={600}>{intl.formatMessage({ id: 'accompanied-participants' })}</Text> : null
-          }
+          {participant.__typename === 'User' && <a href={adminUrl ?? url}>{translateContent(username)}</a>}
+          {participant.__typename === 'Participant' ? (
+            <Text fontWeight={600}>{intl.formatMessage({ id: 'accompanied-participants' })}</Text>
+          ) : null}
           {vip && !hasAccountDeleted && (
             <Tooltip
               placement="top"
@@ -153,32 +151,28 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
               <span>{email}</span>
             </li>
           )}
-          {
-            votes?.totalCount ? (
-                <li>
-                  <Icon name={ICON_NAME.like} size={12} color={colors.darkGray} />
-                  <FormattedMessage
-                      id="global.votes"
-                      values={{
-                        num: votes.totalCount,
-                      }}
-                  />
-                </li>
-            ) : null
-          }
-          {
-            contributions?.totalCount ? (
-                <li>
-                  <Icon name={ICON_NAME.messageBubbleFilled} size={12} color={colors.darkGray} />
-                  <FormattedMessage
-                      id="synthesis.common.elements.nb"
-                      values={{
-                        num: contributions.totalCount,
-                      }}
-                  />
-                </li>
-            ) : null
-          }
+          {votes?.totalCount ? (
+            <li>
+              <Icon name={ICON_NAME.like} size={12} color={colors.darkGray} />
+              <FormattedMessage
+                id="global.votes"
+                values={{
+                  num: votes.totalCount,
+                }}
+              />
+            </li>
+          ) : null}
+          {contributions?.totalCount ? (
+            <li>
+              <Icon name={ICON_NAME.messageBubbleFilled} size={12} color={colors.darkGray} />
+              <FormattedMessage
+                id="synthesis.common.elements.nb"
+                values={{
+                  num: contributions.totalCount,
+                }}
+              />
+            </li>
+          ) : null}
         </InlineList>
       </ParticipantInfo>
 
@@ -197,9 +191,9 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
       lastname
       email
       votes(contribuableId: $contribuableId) {
-          totalCount
+        totalCount
       }
-      ...on User {
+      ... on User {
         username
         adminUrl @include(if: $viewerIsAdmin)
         url

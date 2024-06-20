@@ -104,7 +104,7 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
             <ProposalStepPage stepId={step} projectId={step} />
           </div>
         </section>
-        <ProjectTrash projectSlug={projectSlug} showTrash={showTrash} unstable__enableCapcoUiDs />
+        <ProjectTrash projectSlug={projectSlug} showTrash={showTrash} />
       </>
     )
   }

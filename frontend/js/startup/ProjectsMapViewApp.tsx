@@ -34,7 +34,6 @@ const Fallback = () => (
 
 export default () => (
   <Providers designSystem>
-    <style>{'.cap-link:before {display:none;}'}</style>
     <Suspense fallback={<Fallback />}>
       <ProjectsMapView />
     </Suspense>

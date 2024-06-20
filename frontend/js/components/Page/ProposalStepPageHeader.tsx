@@ -14,7 +14,7 @@ import {
 import type { Dispatch, GlobalState } from '~/types'
 import type { ProposalStepPageHeader_step } from '~relay/ProposalStepPageHeader_step.graphql'
 import ProposalCreateModal from '../Proposal/Create/ProposalCreateModal'
-import NewLoginOverlay from '~/components/Utils/NewLoginOverlay'
+import LoginOverlay from '~/components/Utils/LoginOverlay'
 import { formName } from '../Proposal/Form/ProposalForm'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import type { ProposalViewMode } from '~/redux/modules/proposal'
@@ -127,7 +127,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
             className={isMobile ? '' : 'pull-right'}
             display={displayMode === 'MAP' && isMobile ? 'none' : 'block'}
           >
-            <NewLoginOverlay>
+            <LoginOverlay>
               <Button
                 m="auto"
                 maxWidth="300px"
@@ -146,7 +146,7 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
                   id: titleTradKey,
                 })}
               </Button>
-            </NewLoginOverlay>
+            </LoginOverlay>
           </Box>
         )}
       </div>

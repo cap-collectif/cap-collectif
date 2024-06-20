@@ -10,10 +10,13 @@ const EventListPage = lazy(
       '~/components/Event/EventListPage'
     ),
 )
-export default (props: Record<string, any>) => (
-  <Suspense fallback={<Loader />}>
-    <Providers>
-      <EventListPage {...props} />
-    </Providers>
-  </Suspense>
-)
+export default (props: Record<string, any>) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px'
+  return (
+    <Suspense fallback={<Loader />}>
+      <Providers designSystem>
+        <EventListPage {...props} />
+      </Providers>
+    </Suspense>
+  )
+}

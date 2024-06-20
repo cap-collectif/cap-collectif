@@ -1,0 +1,217 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginBox /> renders 1`] = `
+Array [
+  <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div>
+    <div
+      className="sc-bcXGCL kHOAuI"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "I am top text",
+          }
+        }
+      />
+    </div>
+    <div
+      className="sc-bcXGCL bllofW cap-form-control"
+      role="group"
+    >
+      <label
+        className="sc-bcXGCL ctSjlJ cap-form-label"
+        htmlFor="username"
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <p
+          className="sc-bcXGCL JNsrJ cap-text"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          global.email
+        </p>
+      </label>
+      <input
+        aria-required={true}
+        autoComplete="email"
+        autoFocus={true}
+        className="sc-bcXGCL sc-UpCiH cXnqTP eVENPD cap-input"
+        disabled={false}
+        name="username"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="email.placeholder"
+        required={true}
+        type="email"
+      />
+    </div>
+    <div
+      className="sc-bcXGCL bllofW cap-form-control"
+      role="group"
+    >
+      <label
+        className="sc-bcXGCL ctSjlJ cap-form-label"
+        htmlFor="password"
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <p
+          className="sc-bcXGCL JNsrJ cap-text"
+          style={
+            Object {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          global.password
+        </p>
+      </label>
+      <input
+        aria-required={true}
+        autoComplete="off"
+        className="sc-bcXGCL sc-UpCiH cXnqTP eVENPD cap-input"
+        disabled={false}
+        name="password"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={true}
+        type="password"
+      />
+    </div>
+    <a
+      className="sc-bcXGCL lpttQg cap-link"
+      href="/resetting/request"
+    >
+      global.forgot_password
+    </a>
+    <div
+      className="sc-bcXGCL gzaWKB"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "I am bottom text",
+          }
+        }
+      />
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LoginBox /> renders without LoginForm 1`] = `
+Array [
+  <div
+    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
+  />,
+  <div
+    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
+  />,
+  <div
+    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
+  />,
+  <div
+    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
+  />,
+  <div
+    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+  />,
+  <div>
+    <div
+      className="sc-bcXGCL kHOAuI"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "I am top text",
+          }
+        }
+      />
+    </div>
+    <div>
+      <div
+        className="LoginSocialButton__LinkButton-fvqpxH gsAMyb"
+        type="saml"
+      >
+        <span
+          className="loginIcon"
+          style={
+            Object {
+              "lineHeight": "inherit",
+            }
+          }
+        >
+          <IconMock
+            aria-hidden={true}
+            className="icon"
+            style={
+              Object {
+                "flexShrink": "0",
+                "verticalAlign": "middle",
+              }
+            }
+          />
+        </span>
+        <a
+          href="/login-saml?_destination=http://localhost/"
+          title="saml"
+        >
+          Saml
+        </a>
+      </div>
+    </div>
+    <div
+      className="sc-bcXGCL gzaWKB"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          Object {
+            "__html": "I am bottom text",
+          }
+        }
+      />
+    </div>
+  </div>,
+]
+`;
