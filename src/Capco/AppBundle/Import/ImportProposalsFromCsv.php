@@ -190,6 +190,8 @@ class ImportProposalsFromCsv
         $duplicateLinesToBeSkipped = $skipDuplicateLines
             ? $this->getDuplicates($associativeRowsWithHeaderLine)
             : [];
+
+        $progress = null;
         if ($output) {
             $progress = new ProgressBar($output, $countRows - 1);
             $progress->start();
@@ -199,7 +201,8 @@ class ImportProposalsFromCsv
             $associativeRowsWithHeaderLine,
             $duplicateLinesToBeSkipped,
             $dryRun,
-            $isCli
+            $isCli,
+            $progress
         );
 
         if (!$dryRun && !empty($this->createdProposals)) {
@@ -417,9 +420,13 @@ class ImportProposalsFromCsv
         array $rows,
         array $duplicateLinesToBeSkipped,
         bool $dryRun = true,
-        bool $isCli = false
+        bool $isCli = false,
+        ?ProgressBar $progressBar = null
     ) {
         foreach ($rows as $key => $row) {
+            if ($progressBar) {
+                $progressBar->advance();
+            }
             $isCurrentLineFail = false;
             // array start at 0, csv start at 1
             ++$key;

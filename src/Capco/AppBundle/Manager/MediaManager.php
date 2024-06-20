@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Manager;
 use Capco\MediaBundle\Entity\Media;
 use Capco\MediaBundle\Provider\MediaProvider;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaManager
@@ -49,14 +50,17 @@ class MediaManager
     ): Media {
         $media = new Media();
         $media->setProviderName(MediaProvider::class);
-        $media->setBinaryContent($path);
+        $file = new File($path);
+        $media->setBinaryContent($file);
+        $media->setSize($file->getSize());
+        $media->setContentType($file->getMimeType());
         $media->setContext($context);
         $media->setEnabled(true);
         $media->setName($mediaName);
         $media->setProviderReference($mediaName);
         if (!$dryRun) {
             $this->entityManager->persist($media);
-            $this->entityManager->flush();
+            $this->mediaProvider->writeBinaryContentInFile($media);
         }
 
         return $media;
