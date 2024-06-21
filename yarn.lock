@@ -8280,11 +8280,6 @@ aws4@^1.8.0:
   resolved "https://registry.yarnpkg.com/aws4/-/aws4-1.11.0.tgz#d61f46d83b2519250e2784daf5b09479a8b41c59"
   integrity sha512-xh1Rl34h6Fi1DC2WWKfxUTVqRsNnr6LsKz2+hfwDxQJWmrx8+c7ylaqBMcHfl1U1r2dsifOvKX3LQuLNZ+XSvA==
 
-axe-core@^3.5.0:
-  version "3.5.6"
-  resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-3.5.6.tgz#e762a90d7f6dbd244ceacb4e72760ff8aad521b5"
-  integrity sha512-LEUDjgmdJoA3LqklSTwKYqkjcZ4HKc4ddIYGSAiSkr46NTjzg2L9RNB+lekO9P7Dlpa87+hBtzc2Fzn/+GUWMQ==
-
 axe-core@^4.0.2, axe-core@^4.2.0:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.3.1.tgz#0c6a076e4a1c3e0544ba6a9479158f9be7a7928e"
@@ -10527,7 +10522,7 @@ create-jest@^29.7.0:
     jest-util "^29.7.0"
     prompts "^2.0.1"
 
-create-react-class@^15.5.2, create-react-class@^15.6.0, create-react-class@^15.6.3:
+create-react-class@^15.5.2, create-react-class@^15.6.3:
   version "15.7.0"
   resolved "https://registry.yarnpkg.com/create-react-class/-/create-react-class-15.7.0.tgz#7499d7ca2e69bb51d13faf59bd04f0c65a1d6c1e"
   integrity sha512-QZv4sFWG9S5RUvkTYWbflxeZX+JG7Cz0Tn33rQBJ+WFQTqTfUTjMjiv9tnfXazjsO5r0KhPs+AqCjyrQX6h2ng==
@@ -12855,7 +12850,7 @@ fbjs-css-vars@^1.0.0:
   resolved "https://registry.yarnpkg.com/fbjs-css-vars/-/fbjs-css-vars-1.0.2.tgz#216551136ae02fe255932c3ec8775f18e2c078b8"
   integrity sha512-b2XGFAFdWZWg0phtAWLHCk836A1Xann+I+Dgd3Gk64MHKZO44FfoD1KxyvbSh0qZsIoXQGGlVztIY+oitJPpRQ==
 
-fbjs@^0.8.1, fbjs@^0.8.9:
+fbjs@^0.8.1:
   version "0.8.17"
   resolved "https://registry.yarnpkg.com/fbjs/-/fbjs-0.8.17.tgz#c4d598ead6949112653d6588b01a5cdcd9f90fdd"
   integrity sha1-xNWY6taUkRJlPWWIsBpc3Nn5D90=
@@ -14690,9 +14685,9 @@ interpret@^2.2.0:
   integrity sha512-Ju0Bz/cEia55xDwUWEa8+olFpCiQoypjnQySseKtmjNrnps3P+xfpUmGr90T7yjlVJmOtybRvPXhKMbHr+fWnw==
 
 intersection-observer@^0.12.0:
-  version "0.12.0"
-  resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.12.0.tgz#6c84628f67ce8698e5f9ccf857d97718745837aa"
-  integrity sha512-2Vkz8z46Dv401zTWudDGwO7KiGHNDkMv417T5ItcNYfmvHR/1qCTVBO9vwH8zZmQ0WkA/1ARwpysR9bsnop4NQ==
+  version "0.12.2"
+  resolved "https://registry.yarnpkg.com/intersection-observer/-/intersection-observer-0.12.2.tgz#4a45349cc0cd91916682b1f44c28d7ec737dc375"
+  integrity sha512-7m1vEcPCxXYI8HqnL8CKI6siDyD+eIWSwgB3DZA+ZTogxk9I4CDnj4wilt9x/+/QbHI4YG5YZNmC6458/e9Ktg==
 
 intl-format-cache@^4.1.20, intl-format-cache@^4.2.21:
   version "4.3.1"
@@ -16033,7 +16028,7 @@ jquery-minicolors@^2.1.10:
   dependencies:
     jquery ">= 1.7.x"
 
-jquery@>2.1.4, "jquery@>= 1.7.x", jquery@^3.5.1:
+"jquery@>= 1.7.x", jquery@^3.5.1:
   version "3.6.0"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.6.0.tgz#c72a09f15c1bdce142f49dbf1170bdf8adac2470"
   integrity sha512-JVzAR/AjBvVt2BmYhxRCSYysDsPcssdmTFnzyLEts9qNwmjmu4JTAMYubEfwVOSwpQ1I1sKKFcxhZCI2buerfw==
@@ -19558,14 +19553,6 @@ react-async-script@^1.0.0, react-async-script@^1.0.1:
     hoist-non-react-statics "^3.3.0"
     prop-types "^15.5.0"
 
-react-axe@^3.0.2:
-  version "3.5.4"
-  resolved "https://registry.yarnpkg.com/react-axe/-/react-axe-3.5.4.tgz#f59b9ea08eb82341f53cb26c5c53724417bc8c8f"
-  integrity sha512-5xNO0QVCCEZnJiyhAGox0MGFyclgU3XL8se+5H+whdxV1VTtA9/uux9BSCF5mGNSgtSZkb+tQtrOaF+zGf/oWw==
-  dependencies:
-    axe-core "^3.5.0"
-    requestidlecallback "^0.3.0"
-
 react-beautiful-dnd@^13.1.1:
   version "13.1.1"
   resolved "https://registry.yarnpkg.com/react-beautiful-dnd/-/react-beautiful-dnd-13.1.1.tgz#b0f3087a5840920abf8bb2325f1ffa46d8c4d0a2"
@@ -19608,13 +19595,6 @@ react-bootstrap@^0.32.1:
     react-transition-group "^2.0.0"
     uncontrollable "^5.0.0"
     warning "^3.0.0"
-
-react-class@^2.0.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/react-class/-/react-class-2.1.0.tgz#0a7adf1c1951f4d9bf2a4da7c23c2bc77566c642"
-  integrity sha1-CnrfHBlR9Nm/Kk2nwjwrx3VmxkI=
-  dependencies:
-    object-assign "^4.0.1"
 
 react-clientside-effect@^1.2.0:
   version "1.2.5"
@@ -19703,16 +19683,6 @@ react-dom@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
     scheduler "^0.23.0"
-
-react-dom@^15.3.2:
-  version "15.7.0"
-  resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.7.0.tgz#39106dee996d0742fb0f43d567ef8b8153483ab2"
-  integrity sha512-mpjXqC2t1FuYsILOLCj0kg6pbg460byZkVA/80VtDmKU/pYmoTdHOtaMcTRIDiyXLz4sIur0cQ04nOC6iGndJg==
-  dependencies:
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.10"
 
 react-dom@^16.13.1, react-dom@^16.8.3:
   version "16.14.0"
@@ -19877,11 +19847,6 @@ react-is@^16.10.2, react-is@^16.12.0, react-is@^16.13.1, react-is@^16.3.2, react
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
-react-jitsi@^1.0.4:
-  version "1.0.4"
-  resolved "https://registry.yarnpkg.com/react-jitsi/-/react-jitsi-1.0.4.tgz#2aa4a0010a07818808eea357bb2ac66cfd38aa77"
-  integrity sha512-7Q4cmjxNNvoPOuTWT/AcDhHRr+K74BqYitiNcKo2D3nQH9ozDIec+yT7KiPlAPR/U2XW5tD/nc9L3uZMkZXTFA==
-
 react-leaflet-markercluster@^3.0.0-rc1:
   version "3.0.0-rc1"
   resolved "https://registry.yarnpkg.com/react-leaflet-markercluster/-/react-leaflet-markercluster-3.0.0-rc1.tgz#4e45392d599fb410eac413aeee6cb52f51d0fc5c"
@@ -20018,23 +19983,6 @@ react-qr-code@^2.0.11:
     prop-types "^15.8.1"
     qr.js "0.0.0"
 
-react-radio-buttons@^1.0.11:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/react-radio-buttons/-/react-radio-buttons-1.2.2.tgz#9c07a0cfacc9fd4927fa9ed96392e93b600614a9"
-  integrity sha512-GPk8gLEdOoC/41NQ3CrkAQv8jZSo2BojvEszQqS/16XTICe8a+H2EyOk3qJQLHzLe7+YABzyjZoZAOeeQ1QFxA==
-  dependencies:
-    prop-types "^15.5.10"
-    react "^15.6.1"
-    react-dom "^15.3.2"
-
-react-radio@^2.1.2:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/react-radio/-/react-radio-2.1.2.tgz#d5b23846da88fc4d53de6d49dc04176cd3f0a821"
-  integrity sha1-1bI4RtqI/E1T3m1J3AQXbNPwqCE=
-  dependencies:
-    object-assign "^4.0.1"
-    react-class "^2.0.0"
-
 react-reconciler@^0.23.0:
   version "0.23.0"
   resolved "https://registry.yarnpkg.com/react-reconciler/-/react-reconciler-0.23.0.tgz#5f0bfc35dda030b0220c07de11f93131c5d6db63"
@@ -20091,13 +20039,6 @@ react-resize-detector@^8.0.4:
   integrity sha512-S7szxlaIuiy5UqLhLL1KY3aoyGHbZzsTpYal9eYMwCyKqoqoVLCmIgAgNyIM1FhnP2KyBygASJxdhejrzjMb+w==
   dependencies:
     lodash "^4.17.21"
-
-react-router-bootstrap@rr-v3:
-  version "0.23.3"
-  resolved "https://registry.yarnpkg.com/react-router-bootstrap/-/react-router-bootstrap-0.23.3.tgz#970c35c53c04c61fb6b110d4ff651a7e8a73b2ba"
-  integrity sha1-lww1xTwExh+2sRDU/2Uafopzsro=
-  dependencies:
-    prop-types "^15.5.8"
 
 react-router-dom@5.1.2:
   version "5.1.2"
@@ -20334,17 +20275,6 @@ react@18.2.0:
   dependencies:
     loose-envify "^1.1.0"
 
-react@^15.6.1:
-  version "15.7.0"
-  resolved "https://registry.yarnpkg.com/react/-/react-15.7.0.tgz#10308fd42ac6912a250bf00380751abc41ac7106"
-  integrity sha512-5/MMRYmpmM0sMTHGLossnJCrmXQIiJilD6y3YN3TzAwGFj6zdnMtFv6xmi65PHKRV+pehIHpT7oy67Sr6s9AHA==
-  dependencies:
-    create-react-class "^15.6.0"
-    fbjs "^0.8.9"
-    loose-envify "^1.1.0"
-    object-assign "^4.1.0"
-    prop-types "^15.5.10"
-
 react@^16.13.1, react@^16.3.1, react@^16.8.3:
   version "16.14.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.14.0.tgz#94d776ddd0aaa37da3eda8fc5b6b18a4c9a3114d"
@@ -20464,18 +20394,6 @@ readdirp@~3.6.0:
   integrity sha512-hOS089on8RduqdbhvQ5Z37A0ESjsqz6qnRcffsMU3495FuTdqSm+7bhJ29JvIOsBDEEnan5DPu9t3To9VRlMzA==
   dependencies:
     picomatch "^2.2.1"
-
-readmore-js@^2.2.1:
-  version "2.2.1"
-  resolved "https://registry.yarnpkg.com/readmore-js/-/readmore-js-2.2.1.tgz#ab75036c8a47b6ffa2d3d14cd527c7f479edc117"
-  integrity sha512-hbPP0nQpYYkAywCEZ8ozHivvhWyHic37KJ2IXrHES4qzjp0+nmw8R33MeyMAtXBZfXX4Es8cpd5JBVf9qj47+Q==
-  dependencies:
-    jquery ">2.1.4"
-
-readmore@^0.0.2:
-  version "0.0.2"
-  resolved "https://registry.yarnpkg.com/readmore/-/readmore-0.0.2.tgz#c895eb542186d2dc7020e4fd3efdf3bf1eeb8a00"
-  integrity sha1-yJXrVCGG0txwIOT9Pv3zvx7rigA=
 
 reakit-system@^0.15.1:
   version "0.15.1"
@@ -20703,7 +20621,7 @@ regenerator-runtime@^0.11.0:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.11.1.tgz#be05ad7f9bf7d22e056f9726cee5017fbf19e2e9"
   integrity sha512-MguG95oij0fC3QV3URf4V2SDYGJhJnJGqvIIgdECeODCT98wSWDAJ94SSuVpYQUoTcGUIL6L4yNB7j1DFFHSBg==
 
-regenerator-runtime@^0.13.1, regenerator-runtime@^0.13.3, regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
+regenerator-runtime@^0.13.3, regenerator-runtime@^0.13.4, regenerator-runtime@^0.13.7:
   version "0.13.7"
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
@@ -20999,11 +20917,6 @@ request-progress@^3.0.0:
   integrity sha1-TKdUCBx/7GP1BeT6qCWqBs1mnb4=
   dependencies:
     throttleit "^1.0.0"
-
-requestidlecallback@^0.3.0:
-  version "0.3.0"
-  resolved "https://registry.yarnpkg.com/requestidlecallback/-/requestidlecallback-0.3.0.tgz#6fb74e0733f90df3faa4838f9f6a2a5f9b742ac5"
-  integrity sha1-b7dOBzP5DfP6pIOPn2oqX5t0KsU=
 
 require-directory@^2.1.1:
   version "2.1.1"
@@ -22352,28 +22265,6 @@ stylehacks@^4.0.0:
     postcss "^7.0.0"
     postcss-selector-parser "^3.0.0"
 
-stylelint-config-prettier@^8.0.0:
-  version "8.0.2"
-  resolved "https://registry.yarnpkg.com/stylelint-config-prettier/-/stylelint-config-prettier-8.0.2.tgz#da9de33da4c56893cbe7e26df239a7374045e14e"
-  integrity sha512-TN1l93iVTXpF9NJstlvP7nOu9zY2k+mN0NSFQ/VEGz15ZIP9ohdDZTtCWHs5LjctAhSAzaILULGbgiM0ItId3A==
-
-stylelint-config-recommended@^3.0.0:
-  version "3.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-recommended/-/stylelint-config-recommended-3.0.0.tgz#e0e547434016c5539fe2650afd58049a2fd1d657"
-  integrity sha512-F6yTRuc06xr1h5Qw/ykb2LuFynJ2IxkKfCMf+1xqPffkxh0S09Zc902XCffcsw/XMFq/OzQ1w54fLIDtmRNHnQ==
-
-stylelint-config-standard@^19.0.0:
-  version "19.0.0"
-  resolved "https://registry.yarnpkg.com/stylelint-config-standard/-/stylelint-config-standard-19.0.0.tgz#66f0cf13f33b8a9e34965881493b38fc1313693a"
-  integrity sha512-VvcODsL1PryzpYteWZo2YaA5vU/pWfjqBpOvmeA8iB2MteZ/ZhI1O4hnrWMidsS4vmEJpKtjdhLdfGJmmZm6Cg==
-  dependencies:
-    stylelint-config-recommended "^3.0.0"
-
-stylelint-config-styled-components@^0.1.1:
-  version "0.1.1"
-  resolved "https://registry.yarnpkg.com/stylelint-config-styled-components/-/stylelint-config-styled-components-0.1.1.tgz#b408388d7c687833ab4be4c4e6522d97d2827ede"
-  integrity sha512-z5Xz/9GmvxO6e/DLzBMwkB85zHxEEjN6K7Cj80Bi+o/9vR9eS3GX3E9VuMnX9WLFYulqbqLtTapGGY28JBiy9Q==
-
 stylelint-processor-styled-components@^1.9.0:
   version "1.10.0"
   resolved "https://registry.yarnpkg.com/stylelint-processor-styled-components/-/stylelint-processor-styled-components-1.10.0.tgz#8082fc68779476aac411d3afffac0bc833d77a29"
@@ -23584,11 +23475,6 @@ url-parse@^1.5.3:
   dependencies:
     querystringify "^2.1.1"
     requires-port "^1.0.0"
-
-url-search-params-polyfill@^8.1.0:
-  version "8.1.1"
-  resolved "https://registry.yarnpkg.com/url-search-params-polyfill/-/url-search-params-polyfill-8.1.1.tgz#9e69e4dba300a71ae7ad3cead62c7717fd99329f"
-  integrity sha512-KmkCs6SjE6t4ihrfW9JelAPQIIIFbJweaaSLTh/4AO+c58JlDcb+GbdPt8yr5lRcFg4rPswRFRRhBGpWwh0K/Q==
 
 url@^0.11.0:
   version "0.11.0"
