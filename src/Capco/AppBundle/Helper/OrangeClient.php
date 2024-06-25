@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Helper;
 
+use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Psr\Log\LoggerInterface;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
@@ -9,6 +10,7 @@ use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\TransportExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OrangeClient
 {
@@ -19,17 +21,27 @@ class OrangeClient
     public const VALIDATE_SMS_CODE_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/validate';
     private HttpClientInterface $client;
     private LoggerInterface $logger;
+    private TranslatorInterface $translator;
+    private SiteParameterResolver $siteParams;
 
     private string $clientId;
 
     private string $clientSecret;
 
-    public function __construct(HttpClientInterface $httpClient, LoggerInterface $logger, string $clientId, string $clientSecret)
-    {
+    public function __construct(
+        HttpClientInterface $httpClient,
+        LoggerInterface $logger,
+        string $clientId,
+        string $clientSecret,
+        TranslatorInterface $translator,
+        SiteParameterResolver $siteParams
+    ) {
         $this->client = $httpClient;
         $this->logger = $logger;
         $this->clientId = $clientId;
         $this->clientSecret = $clientSecret;
+        $this->translator = $translator;
+        $this->siteParams = $siteParams;
     }
 
     /**
@@ -93,6 +105,14 @@ class OrangeClient
      */
     public function getSendCodeRequestOptions(string $accessToken, string $phone): array
     {
+        $message = $this->translator->trans(
+            'phone.verify.sms.body',
+            [
+                'siteName' => $this->siteParams->getValue('global.site.fullname'),
+                'code' => '{code}',
+            ]
+        );
+
         return [
             'headers' => [
                 'Authorization' => "Bearer {$accessToken}",
@@ -100,7 +120,7 @@ class OrangeClient
             ],
             'body' => json_encode([
                 'msisdn' => $phone,
-                'message' => 'Your verification code is {code}',
+                'message' => $message,
                 'type' => 'SMS',
             ]),
         ];
