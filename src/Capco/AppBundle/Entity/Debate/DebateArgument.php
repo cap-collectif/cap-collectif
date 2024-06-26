@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableDebateContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\DebateStep;
@@ -46,7 +47,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
  * @CapcoAssert\HasAuthor()
  */
-class DebateArgument implements DebateArgumentInterface, Publishable
+class DebateArgument implements DebateArgumentInterface, Publishable, ExportableDebateContributionInterface
 {
     use AuthorableTrait;
     use AuthorInformationTrait;

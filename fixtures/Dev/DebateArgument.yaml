@@ -63,6 +63,7 @@ Capco\AppBundle\Entity\Debate\DebateArgument:
     debateConfinement1:
         __construct: ['@debateConfinement']
         id: 'debateConfinement1'
+        ipAddress: 40.77.160.19
         type: FOR
         author: '@userTheo'
         body: Je suis bien chez moi

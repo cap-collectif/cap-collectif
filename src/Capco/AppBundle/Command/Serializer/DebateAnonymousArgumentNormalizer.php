@@ -15,7 +15,10 @@ class DebateAnonymousArgumentNormalizer extends BaseNormalizer implements Contex
 
     public function supportsNormalization($data, $format = null, array $context = []): bool
     {
-        return $data instanceof DebateAnonymousArgument && isset($context[self::IS_EXPORT_NORMALIZER]);
+        return $data instanceof DebateAnonymousArgument
+            && isset($context[self::IS_EXPORT_NORMALIZER])
+            && !isset($context['export_debate_contributions'])
+            && !isset($context['groups']);
     }
 
     public function normalize($object, $format = null, array $context = [])

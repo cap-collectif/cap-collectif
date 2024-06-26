@@ -35,6 +35,9 @@ class CronTimeInterval
             return $this->translator->trans('cron_time_remaining_after_trigger');
         }
 
-        return sprintf('%s minutes.', $remainingMinutes);
+        return $this->translator->trans('cron_time_remaining', [
+            'remainingMinutes' => $remainingMinutes,
+            'plural' => $remainingMinutes > 1 ? 's' : '',
+        ]);
     }
 }

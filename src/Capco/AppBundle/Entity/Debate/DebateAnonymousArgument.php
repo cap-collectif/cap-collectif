@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Debate;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableDebateContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\AnonymousParticipationInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
@@ -32,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=DebateAnonymousArgumentRepository::class)
  * @ORM\Table(name="debate_anonymous_argument")
  */
-class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParticipationInterface
+class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParticipationInterface, ExportableDebateContributionInterface
 {
     use AuthorInformationTrait;
     use ContributionOriginTrait;

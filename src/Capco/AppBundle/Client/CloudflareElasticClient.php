@@ -14,7 +14,9 @@ use Elastica\Exception\Connection\HttpException;
 use Elastica\Multi\ResultSet;
 use Elastica\Multi\Search;
 use Elastica\Query;
+use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
+use Elastica\Query\Term;
 use Psr\Log\LoggerInterface;
 use Sonata\IntlBundle\Timezone\TimezoneDetectorInterface;
 
@@ -195,6 +197,31 @@ class CloudflareElasticClient
         // If zero results, it means that ALL documents have the field.
         return isset($searchResult['responses'][0]['hits']['total']['value'])
             && 0 === $searchResult['responses'][0]['hits']['total']['value'];
+    }
+
+    /**
+     * @param string[] $sources
+     *
+     * @return array<string, mixed>
+     */
+    public function getGeoIpByIpAddress(string $ipAddress, array $sources): ?array
+    {
+        $boolQuery = (new BoolQuery())
+            ->addFilter(new Term(['clientIP' => $ipAddress]))
+        ;
+
+        $query = (new Query($boolQuery))
+            ->setSource($sources)
+            ->setSize(1)
+        ;
+
+        $response = $this->esClient->getIndex($this->index)->search($query);
+
+        if ([] === $response->getResults()) {
+            return null;
+        }
+
+        return $response->current()->getData()['geoip'];
     }
 
     private function createUniqueVisitorsQuery(

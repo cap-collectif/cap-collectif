@@ -15,14 +15,31 @@ class CronTimeIntervalTest extends TestCase
     /**
      * @dataProvider cronTriggerMinuteProvider
      */
-    public function testGetRemainingCronExecutionTime(string $datetime, int $cronTriggerMinutes, string $expectedTimeRemaining): void
-    {
+    public function testGetRemainingCronExecutionTime(
+        string $datetime,
+        int $cronTriggerMinutes,
+        string $expectedTimeRemaining,
+        bool $isAfterTrigger
+    ): void {
         $translator = $this->createMock(TranslatorInterface::class);
-        $translator
-            ->method('trans')
-            ->with('cron_time_remaining_after_trigger')
-            ->willReturn('less than a few minutes.')
-        ;
+
+        if ($isAfterTrigger) {
+            $translator
+                ->expects($this->once())
+                ->method('trans')
+                ->with('cron_time_remaining_after_trigger')
+                ->willReturn('less than a few minutes.')
+            ;
+        }
+
+        if (!$isAfterTrigger) {
+            $translator
+                ->expects($this->once())
+                ->method('trans')
+                ->with('cron_time_remaining')
+                ->willReturn($expectedTimeRemaining)
+            ;
+        }
 
         $cronTimeInterval = new CronTimeInterval($translator);
 
@@ -30,19 +47,19 @@ class CronTimeIntervalTest extends TestCase
     }
 
     /**
-     * @return array<int, array<int, int|string>>
+     * @return array<int, array<int, bool|int|string>>
      */
     public function cronTriggerMinuteProvider(): array
     {
         return [
-            ['14:30', 5, '35 minutes.'],
-            ['00:03', 10, '7 minutes.'],
-            ['18:48', 15, '27 minutes.'],
-            ['04:18', 20, '2 minutes.'],
-            ['12:25', 25, 'less than a few minutes.'],
-            ['17:55', 30, '35 minutes.'],
-            ['19:03', 35, '32 minutes.'],
-            ['16:44', 40, '56 minutes.'],
+            ['14:30', 5, '35 minutes.', false],
+            ['00:03', 10, '7 minutes.', false],
+            ['18:48', 15, '27 minutes.', false],
+            ['04:18', 20, '2 minutes.', false],
+            ['12:25', 25, 'less than a few minutes.', true],
+            ['17:55', 30, '35 minutes.', false],
+            ['19:03', 35, '32 minutes.', false],
+            ['16:44', 40, '56 minutes.', false],
         ];
     }
 }

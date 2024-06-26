@@ -12,6 +12,9 @@ use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectMediatorsProposalsVotesCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
+use Capco\AppBundle\Command\ExportDebateContributionsCommand;
+use Capco\AppBundle\Command\Service\CronTimeInterval;
+use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -21,6 +24,7 @@ use Capco\AppBundle\GraphQL\ConnectionTraversor;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\Utils\Text;
@@ -41,6 +45,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -64,6 +69,9 @@ class ExportController extends Controller
     private KernelInterface $kernel;
     private string $locale;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private ContributionsFilePathResolver $contributionsFilePathResolver;
+    private SessionInterface $session;
+    private CronTimeInterval $cronTimeInterval;
 
     public function __construct(
         GraphQlAclListener $aclListener,
@@ -76,6 +84,9 @@ class ExportController extends Controller
         GlobalIdResolver $globalIdResolver,
         KernelInterface $kernel,
         AuthorizationCheckerInterface $authorizationChecker,
+        ContributionsFilePathResolver $contributionsFilePathResolver,
+        SessionInterface $session,
+        CronTimeInterval $cronTimeInterval,
         string $exportDir,
         string $locale
     ) {
@@ -91,6 +102,9 @@ class ExportController extends Controller
         $this->kernel = $kernel;
         $this->locale = $locale;
         $this->authorizationChecker = $authorizationChecker;
+        $this->contributionsFilePathResolver = $contributionsFilePathResolver;
+        $this->session = $session;
+        $this->cronTimeInterval = $cronTimeInterval;
     }
 
     /**
@@ -403,6 +417,44 @@ class ExportController extends Controller
         $fileName = CreateCsvFromProjectMediatorsProposalsVotesCommand::getFilename($project->getSlug());
 
         $response = $this->file($this->exportDir . $fileName, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/debate/{debateId}/download/{type}", name="app_debate_download", options={"i18n" = false})
+     * @Security("has_role('ROLE_PROJECT_ADMIN')")
+     */
+    public function downloadArgumentsAction(
+        Request $request,
+        string $debateId,
+        DebateRepository $debateRepository
+    ): Response {
+        $debateId = GlobalId::fromGlobalId($debateId)['id'];
+        $debate = $debateRepository->find($debateId);
+
+        $isSimplified = 'true' === $request->query->get('simplified');
+
+        $fileName = $this->contributionsFilePathResolver->getFileName($debate->getStep(), $isSimplified);
+        $filePath = sprintf(
+            '%s%s/%s',
+            $this->exportDir,
+            ExportDebateContributionsCommand::STEP_FOLDER,
+            $fileName
+        );
+
+        if (!file_exists($filePath)) {
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(58))
+            ;
+
+            return $this->redirect($request->headers->get('referer'));
+        }
+        $date = (new \DateTime())->format('Y-m-d');
+
+        $response = $this->file($filePath, $date . '_' . $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;

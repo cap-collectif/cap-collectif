@@ -10,6 +10,9 @@ use Symfony\Component\Finder\Finder;
 
 trait CommandTestTrait
 {
+    /**
+     * @return array<int, array<string, null|int|string>|CommandTester>
+     */
     public function executeFirstCommand(string $name): array
     {
         $this->emptyOutputDirectory();
@@ -21,6 +24,9 @@ trait CommandTestTrait
         return [$commandTester, $options];
     }
 
+    /**
+     * @return array<int, array<string, null|int|string>|CommandTester>
+     */
     public function setUpCommandTester(string $name): array
     {
         $application = new Application(self::$kernel);
@@ -38,6 +44,9 @@ trait CommandTestTrait
         return [$commandTester, $options];
     }
 
+    /**
+     * @return array<int, string>
+     */
     public static function getCompletedFileNames(string $suffix): array
     {
         $completedFileNames = [];
@@ -69,6 +78,9 @@ trait CommandTestTrait
         $em->flush();
     }
 
+    /**
+     * @return array<string, bool|string>
+     */
     private function executeCommand(string $name): array
     {
         $application = new Application(self::$kernel);
@@ -121,6 +133,10 @@ trait CommandTestTrait
         }
     }
 
+    /**
+     * @param array<string, bool|string> $actualOutputs
+     * @param string[]                   $expectedFiles
+     */
     private function assertOutputs(array $actualOutputs, array $expectedFiles): void
     {
         $finder = new Finder();

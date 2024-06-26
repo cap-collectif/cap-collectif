@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Command\ExportDebateCommand;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
 use Capco\AppBundle\Generator\CSV\IdentificationCodeListCSVGenerator;
@@ -18,68 +17,24 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\HttpFoundation\StreamedResponse;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Translation\TranslatorInterface;
 
 class DownloadController extends Controller
 {
     private LoggerInterface $logger;
-    private SessionInterface $session;
-    private TranslatorInterface $translator;
     private UserIdentificationCodeListRepository $userIdentificationCodeListRepository;
     private MediaProvider $mediaProvider;
-    private string $projectDir;
 
     public function __construct(
         LoggerInterface $logger,
-        SessionInterface $session,
-        TranslatorInterface $translator,
         UserIdentificationCodeListRepository $userIdentificationCodeListRepository,
-        MediaProvider $mediaProvider,
-        string $projectDir
+        MediaProvider $mediaProvider
     ) {
         $this->logger = $logger;
-        $this->session = $session;
-        $this->translator = $translator;
         $this->userIdentificationCodeListRepository = $userIdentificationCodeListRepository;
         $this->mediaProvider = $mediaProvider;
-        $this->projectDir = $projectDir;
-    }
-
-    /**
-     * @Route("/debate/{debateId}/download/{type}", name="app_debate_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_PROJECT_ADMIN')")
-     */
-    public function downloadArgumentsAction(
-        Request $request,
-        string $debateId,
-        string $type
-    ): Response {
-        $debateId = GlobalId::fromGlobalId($debateId)['id'];
-
-        $user = $this->getUser();
-        $isProjectAdmin = $user->isOnlyProjectAdmin();
-
-        $fileName = ExportDebateCommand::getFilename($debateId, $type, $isProjectAdmin);
-        $filePath = $this->projectDir . '/public/export/' . $fileName;
-
-        if (!file_exists($filePath)) {
-            $this->session
-                ->getFlashBag()
-                ->add('danger', $this->translator->trans('project.download.not_yet_generated'))
-            ;
-
-            return $this->redirect($request->headers->get('referer'));
-        }
-        $date = (new \DateTime())->format('Y-m-d');
-
-        $response = $this->file($filePath, $date . '_' . $fileName);
-        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
-
-        return $response;
     }
 
     /**
