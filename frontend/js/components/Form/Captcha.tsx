@@ -32,7 +32,7 @@ const Captcha = ({ onChange, style, disabled = false, captchaRef }: Props) => {
       return null
     }
 
-    const siteKey = window.TURNSTILE_PUBLIC_KEY
+    const siteKey = config.isTest ? '1x00000000000000000000AA' : window.TURNSTILE_PUBLIC_KEY
     return (
       <Turnstile
         ref={captchaRef}

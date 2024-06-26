@@ -9,8 +9,6 @@ Cypress.Commands.add('confirmCaptcha', () => {
     }
     const $captcha = win.document.querySelector("iframe[src*='turnstile']")
     if ($captcha) {
-      // @ts-ignore
-      $captcha.contentDocument.getElementById('challenge-stage').click()
       cy.get($captcha.contentDocument.getElementById('success')).should('be.visible')
     }
   })

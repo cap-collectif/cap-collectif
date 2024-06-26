@@ -17,5 +17,14 @@ import './commands'
 
 beforeEach(() => {
   cy.appendOperationToGraphQLFetch()
-  Cypress.on('uncaught:exception', err => !err.message.includes('ResizeObserver loop limit exceeded'))
+  Cypress.on('uncaught:exception', err => {
+    const resizeObserverErrors = [
+      'ResizeObserver loop limit exceeded',
+      'ResizeObserver loop completed with undelivered notifications'
+    ]
+
+    if (resizeObserverErrors.some(substring => err.message.includes(substring))) {
+      return false
+    }
+  })
 })
