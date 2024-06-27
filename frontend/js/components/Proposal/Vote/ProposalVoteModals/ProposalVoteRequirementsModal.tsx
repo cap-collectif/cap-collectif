@@ -13,6 +13,8 @@ import type { Uuid } from '~/types'
 import CheckIdentificationCodeMutation from '~/mutations/CheckIdentificationCodeMutation'
 import UpdateRequirementMutation from '~/mutations/UpdateRequirementMutation'
 import ResetCss from '~/utils/ResetCss'
+import { graphql, useFragment } from 'react-relay'
+import { ProposalVoteRequirementsModal_step$key } from '~relay/ProposalVoteRequirementsModal_step.graphql'
 export const formName = 'vote-requirements-form'
 export type onRequirementsSubmitDataProps = {
   readonly PhoneVerifiedRequirement?: {
@@ -82,6 +84,7 @@ export const onRequirementsSubmit = async (
   setIsLoading: (value: boolean) => void,
   needToVerifyPhone: boolean,
   setError: any,
+  stepId: string | null,
 ) => {
   if (data.IdentificationCodeRequirement && data.IdentificationCodeRequirement !== '') {
     try {
@@ -149,7 +152,10 @@ export const onRequirementsSubmit = async (
   try {
     setIsLoading(true)
     const updateResponse: UpdateProfilePersonalDataMutationResponse = await UpdateProfilePersonalDataMutation.commit({
-      input,
+      input: {
+        ...input,
+        stepId,
+      },
     })
 
     if (updateResponse) {
@@ -209,7 +215,15 @@ export type ProposalVoteRequirementsModalProps = {
   readonly hasPhoneRequirements: boolean
   readonly needToVerifyPhone: boolean
   readonly modalTitle: string
+  readonly step: ProposalVoteRequirementsModal_step$key
 }
+
+
+const STEP_FRAGMENT = graphql`
+    fragment ProposalVoteRequirementsModal_step on ProposalStep {
+        id
+    }
+`
 
 const ProposalVoteRequirementsModal = ({
   initialValues,
@@ -220,10 +234,12 @@ const ProposalVoteRequirementsModal = ({
   hasPhoneRequirements,
   needToVerifyPhone,
   modalTitle,
+  step: stepRef,
 }: ProposalVoteRequirementsModalProps) => {
   const intl = useIntl()
   const { goToNextStep, hide } = useMultiStepModal()
   const { control, formState, trigger, setValue } = requirementsForm
+  const step = useFragment(STEP_FRAGMENT, stepRef)
 
   const hasErrors = () => {
     const isFCRequired = initialValues.hasOwnProperty('FranceConnectRequirement')
@@ -246,6 +262,7 @@ const ProposalVoteRequirementsModal = ({
         setIsLoading,
         hasPhoneRequirements,
         requirementsForm.setError,
+        step.id,
       )
     })(e)
   }

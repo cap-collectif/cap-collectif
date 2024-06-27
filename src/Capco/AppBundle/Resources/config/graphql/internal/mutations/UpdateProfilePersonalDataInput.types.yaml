@@ -48,3 +48,5 @@ UpdateProfilePersonalDataInput:
             userIdentificationCode:
                 type: 'String'
                 description: 'Your identification code to verify your account'
+            stepId:
+                type: 'ID'

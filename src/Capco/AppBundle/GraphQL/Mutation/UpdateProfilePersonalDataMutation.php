@@ -34,6 +34,9 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
         $this->user = $viewer;
         $this->arguments = $input->getArrayCopy();
 
+        $stepId = $input->offsetGet('stepId');
+        unset($this->arguments['stepId']);
+
         $isUpdatingFromBO = isset($this->arguments[self::USER_ID]);
         if ($isUpdatingFromBO) {
             parent::__invoke($input, $viewer);
@@ -45,7 +48,9 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
             $viewer->setPhoneConfirmed(false);
         }
 
-        $form = $this->formFactory->create(PersonalDataFormType::class, $this->user);
+        $form = $this->formFactory->create(PersonalDataFormType::class, $this->user, [
+            'stepId' => $stepId,
+        ]);
 
         try {
             $form->submit($this->arguments, false);

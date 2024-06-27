@@ -52,7 +52,9 @@ class PersonalDataFormType extends AbstractType
                 'purify_html_profile' => 'admin',
             ])
             ->add('phone', TelType::class, [
-                'constraints' => [new CheckPhoneNumber()],
+                'constraints' => [new CheckPhoneNumber([
+                    'stepId' => $options['stepId'],
+                ])],
             ])
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')
@@ -76,6 +78,7 @@ class PersonalDataFormType extends AbstractType
         $resolver->setDefaults([
             'data_class' => User::class,
             'csrf_protection' => false,
+            'stepId' => null,
         ]);
     }
 }

@@ -14,17 +14,17 @@ const UpdateProfilePersonalDataMutation = /* GraphQL*/ `
 `;
 
 const input = {
-  firstname: 'firstname',
-  lastname: 'lastname',
-  postalAddress: null,
-  address: null,
-  address2: null,
-  city: null,
-  zipCode: null,
-  phone: '+33611111111',
-  gender: null,
-  dateOfBirth: null,
-  birthPlace: 'East blue',
+  "firstname": "firstname",
+  "lastname": "lastname",
+  "postalAddress": null,
+  "address": null,
+  "address2": null,
+  "city": null,
+  "zipCode": null,
+  "phone": "+33611111111",
+  "gender": null,
+  "dateOfBirth": null,
+  "birthPlace": "East blue",
 };
 
 describe('mutations.updateProfilePersonalData', () => {

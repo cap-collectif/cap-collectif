@@ -41,6 +41,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         User $viewer,
         Form $form
     ) {
+        $arguments->offsetGet('stepId')->willReturn('stepId');
+
         $viewer->getUsername()->willReturn('Atos');
         $viewer->getId()->willReturn('theUserId');
         $viewer->isAdmin()->willReturn(true);
@@ -55,7 +57,10 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $viewer, [
+            'stepId' => 'stepId',
+        ])->willReturn($form);
+
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
@@ -69,6 +74,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         User $viewer,
         Form $form
     ) {
+        $arguments->offsetGet('stepId')->willReturn('stepId');
+
         $viewer->getUsername()->willReturn('Atos');
         $viewer->getId()->willReturn('theUserId');
         $viewer->isAdmin()->willReturn(true);
@@ -82,7 +89,10 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $viewer)->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $viewer, [
+            'stepId' => 'stepId',
+        ])->willReturn($form);
+
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
@@ -98,6 +108,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         Form $form,
         UserRepository $userRepository
     ) {
+        $arguments->offsetGet('stepId')->willReturn('stepId');
+
         $viewer->isAdmin()->willReturn(true);
         $viewer->isSuperAdmin()->willReturn(true);
         $viewer->getUsername()->willReturn('Atos');
@@ -122,7 +134,10 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
             ->willReturn($user)
         ;
 
-        $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $user, [
+            'stepId' => 'stepId',
+        ])->willReturn($form);
+
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();
@@ -137,6 +152,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         User $user,
         Form $form
     ) {
+        $arguments->offsetGet('stepId')->willReturn('stepId');
+
         $user->isAdmin()->willReturn(true);
         $user->isSuperAdmin()->willReturn(false);
         $user->getUsername()->willReturn('Atos');
@@ -151,7 +168,10 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $user, [
+            'stepId' => 'stepId',
+        ])->willReturn($form);
+
         $form->submit(['username' => 'Portos'], false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldNotBeCalled();
@@ -170,6 +190,8 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
         User $user,
         Form $form
     ) {
+        $arguments->offsetGet('stepId')->willReturn('stepId');
+
         $user->isAdmin()->willReturn(false);
         $user->isSuperAdmin()->willReturn(false);
         $user->getUsername()->willReturn('Atos');
@@ -183,7 +205,10 @@ class UpdateProfilePersonalDataMutationSpec extends ObjectBehavior
 
         $arguments->getArrayCopy()->willReturn($argumentsValues);
 
-        $formFactory->create(PersonalDataFormType::class, $user)->willReturn($form);
+        $formFactory->create(PersonalDataFormType::class, $user, [
+            'stepId' => 'stepId',
+        ])->willReturn($form);
+
         $form->submit($argumentsValues, false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $em->flush()->shouldBeCalled();

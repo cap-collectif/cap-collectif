@@ -18767,6 +18767,7 @@ input UpdateProfilePersonalDataInput {
 
   """Your identification code to verify your account"""
   userIdentificationCode: String
+  stepId: ID
   clientMutationId: String
 }
 

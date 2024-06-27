@@ -79,6 +79,7 @@ const STEP_FRAGMENT = graphql`
     project {
       slug
     }
+    ...ProposalVoteRequirementsModal_step
     ...VoteMinAlert_step @arguments(token: $token)
     ... on RequirementStep {
       requirements {
@@ -445,6 +446,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
           isLoading={isLoading}
           setIsLoading={setIsLoading}
           needToVerifyPhone={needToVerifyPhone}
+          step={step}
         />
         {needToVerifyPhone && (
           <ProposalVoteConfirmationModal

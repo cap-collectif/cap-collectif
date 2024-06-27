@@ -8872,7 +8872,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "2dc0652655c2a82c012eff80edc10e77",
+          "cacheID": "2f6f0dadc294099245a4081e246f4c14",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -11264,6 +11264,7 @@ fragment ProposalVoteModal_step_2uzqnG on ProposalStep {
       id
     }
   }
+  ...ProposalVoteRequirementsModal_step
   ...VoteMinAlert_step_3Q7IHq
   ... on RequirementStep {
     __isRequirementStep: __typename
@@ -11327,6 +11328,11 @@ fragment ProposalVoteModal_viewer on User {
   phone
   phoneConfirmed
   ...ProposalVoteConfirmationModal_viewer
+}
+
+fragment ProposalVoteRequirementsModal_step on ProposalStep {
+  __isProposalStep: __typename
+  id
 }
 
 fragment ProposalVoteSmsConfirmationModal_proposal on Proposal {
