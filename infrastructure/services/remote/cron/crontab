@@ -54,3 +54,6 @@
 
 # Archiving proposals everyday at midnight.
 0 0 * * * /usr/bin/timeout 5m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_COMPUTE_PHP_MEMORY_LIMIT /var/www/bin/console capco:archiving-proposals --env=prod
+
+# Check queues with too many messages
+* * * * * /usr/local/bin/rabbitmq_queues_supervision >> /tmp/rabbitmq_queues_supervision.log

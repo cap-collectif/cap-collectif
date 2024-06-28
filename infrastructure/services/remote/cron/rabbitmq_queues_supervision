@@ -1,0 +1,86 @@
+#!/bin/bash
+
+# Exécute la commande pour lister les files d'attentes avec des messages en cours
+result=$(gosu rabbitmq rabbitmqctl list_queues --vhost=capco | tail -n +4 | grep -vP '\t0$')
+
+# Fichier de log
+LOG_FILE="/tmp/rabbitmq_queues_supervision.log"
+
+# Répertoire pour les fichiers temporaires
+TMP_DIR="/tmp/"
+
+if [ -z "$SLACK_WEBHOOK_QUEUES_MONITOR" ]
+then
+    echo "Missing SLACK_WEBHOOK_QUEUES_MONITOR env var."
+    exit 1
+fi
+
+# Fonction pour envoyer un message à Slack
+send_slack_message() {
+    local message=$1
+    local slack_message=$(cat <<EOF
+{
+    "text": "[$SYMFONY_INSTANCE_NAME] $message"
+}
+EOF
+)
+    curl -X POST -H 'Content-type: application/json' --data "$slack_message" "$SLACK_WEBHOOK_QUEUES_MONITOR"
+}
+
+# Fonction pour traiter une file d'attente
+process_queue() {
+    local queue_name=$1
+    local message_count=$2
+    local tmp_file="${TMP_DIR}${queue_name}.alert"
+
+    if [ "$message_count" -gt 2000 ]; then
+        # Log et envoie une alerte sur Slack si le nombre de messages est supérieur à 2000 et que le fichier n'existe pas
+        if [ ! -f "$tmp_file" ]; then
+            log_entry="$(date '+%Y-%m-%d %H:%M:%S') - Queue: $queue_name, Messages: $message_count (Alert sent)"
+            echo "$log_entry" >> "$LOG_FILE"
+            send_slack_message ":warning: Queue *$queue_name* has *$message_count* messages."
+            touch "$tmp_file"
+        fi
+    else
+        # Si le nombre de messages redescend sous 2000 et que le fichier existe, on envoie un autre message et on supprime le fichier
+        if [ -f "$tmp_file" ]; then
+            log_entry="$(date '+%Y-%m-%d %H:%M:%S') - Queue: $queue_name, Messages: $message_count (Alert cleared)"
+            echo "$log_entry" >> "$LOG_FILE"
+            send_slack_message ":white_check_mark: Queue *$queue_name* now has *$message_count* messages."
+            rm "$tmp_file"
+        fi
+    fi
+}
+
+# Drapeau pour indiquer si des files d'attente ont des messages
+queues_with_messages=false
+
+# Vérifie si le résultat n'est pas vide
+if [ -n "$result" ]; then
+    # Parcourt chaque ligne du résultat
+    while IFS= read -r line; do
+        # Extrait le nom de la file d'attente et le nombre de messages
+        queue_name=$(echo "$line" | awk '{print $1}')
+        message_count=$(echo "$line" | awk '{print $2}')
+
+        # Traite la file d'attente
+        process_queue "$queue_name" "$message_count"
+
+        # Indique qu'il y a des files d'attente avec des messages
+        queues_with_messages=true
+    done <<< "$result"
+fi
+
+# Si aucune file n'a des messages, vérifie et supprime les fichiers temporaires existants
+if [ "$queues_with_messages" = false ]; then
+    for tmp_file in ${TMP_DIR}*.alert; do
+        if [ -f "$tmp_file" ]; then
+            queue_name=$(basename "$tmp_file" .alert)
+            log_entry="$(date '+%Y-%m-%d %H:%M:%S') - Queue: $queue_name has no messages (Alert cleared)"
+            echo "$log_entry" >> "$LOG_FILE"
+            send_slack_message ":white_check_mark: Queue *$queue_name* now has no messages."
+            rm "$tmp_file"
+        fi
+    done
+#    echo "$(date '+%Y-%m-%d %H:%M:%S') - No queues with messages found." >> "$LOG_FILE"
+fi

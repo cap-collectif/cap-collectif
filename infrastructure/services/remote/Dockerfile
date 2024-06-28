@@ -198,9 +198,10 @@ COPY infrastructure/services/remote/redirectionio/agent.yml        /etc/redirect
 VOLUME /var/lib/redirectionio
 
 # Binaries / Scripts
-COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin          /usr/local/bin/rabbitmqadmin
-COPY infrastructure/services/remote/cron/antivirus                  /etc/cron.daily
-COPY infrastructure/services/remote/cron/check_db_schema            /etc/cron.hourly
+COPY infrastructure/services/remote/rabbitmq/rabbitmqadmin                /usr/local/bin/rabbitmqadmin
+COPY infrastructure/services/remote/cron/antivirus                        /etc/cron.daily
+COPY infrastructure/services/remote/cron/check_db_schema                  /etc/cron.hourly
+COPY infrastructure/services/remote/cron/rabbitmq_queues_supervision      /usr/local/bin/rabbitmq_queues_supervision
 
 # Daemons
 COPY infrastructure/services/remote/php-fpm/populate_elasticsearch_index /etc/service/php-fpm/populate_elasticsearch_index
@@ -368,6 +369,8 @@ ARG SYMFONY_SENDINBLUE_API_KEY="INSERT_A_REAL_SECRET"
 ARG SYMFONY_SENDINBLUE_NL_LIST_ID="INSERT_A_REAL_SECRET"
 ARG SYMFONY_SENDINBLUE_SECRET="INSERT_A_REAL_SECRET"
 ARG SYMFONY_MAGICLINKS_DURATION_IN_MINUTES="SYMFONY_MAGICLINKS_DURATION_IN_MINUTES"
+ARG SUPERVISORD_SWARROT_ES_INDEXATION_NUMPROCS=1
+ARG SLACK_WEBHOOK_QUEUES_MONITOR="INSERT_A_REAL_SECRET"
 
 ENV SYMFONY_DEPLOYER_API_URL=$SYMFONY_DEPLOYER_API_URL
 ENV SYMFONY_APP_VERSION=$APP_VERSION
@@ -403,6 +406,8 @@ ENV SYMFONY_SENDINBLUE_API_KEY=$SYMFONY_SENDINBLUE_API_KEY
 ENV SYMFONY_SENDINBLUE_NL_LIST_ID=$SYMFONY_SENDINBLUE_NL_LIST_ID
 ENV SYMFONY_SENDINBLUE_SECRET=$SYMFONY_SENDINBLUE_SECRET
 ENV SYMFONY_MAGICLINKS_DURATION_IN_MINUTES=$SYMFONY_MAGICLINKS_DURATION_IN_MINUTES
+ENV SUPERVISORD_SWARROT_ES_INDEXATION_NUMPROCS=$SUPERVISORD_SWARROT_ES_INDEXATION_NUMPROCS
+ENV SLACK_WEBHOOK_QUEUES_MONITOR=$SLACK_WEBHOOK_QUEUES_MONITOR
 
 # Build autoloader and initialize Symfony
 RUN gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
