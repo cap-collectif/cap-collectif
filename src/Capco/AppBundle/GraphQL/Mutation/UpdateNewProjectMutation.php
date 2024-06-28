@@ -4,8 +4,10 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Event\StepSavedEvent;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -24,6 +26,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
+use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -32,6 +35,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class UpdateNewProjectMutation implements MutationInterface
 {
     use MutationTrait;
+
     private EntityManagerInterface $em;
     private LoggerInterface $logger;
     private ProjectAuthorTransformer $transformer;
@@ -41,6 +45,7 @@ class UpdateNewProjectMutation implements MutationInterface
     private AuthorizationCheckerInterface $authorizationChecker;
     private ProjectAbstractStepRepository $projectAbstractStepRepository;
     private TranslatorInterface $translator;
+    private EventDispatcherInterface $dispatcher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -51,7 +56,8 @@ class UpdateNewProjectMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
         ProjectAbstractStepRepository $projectAbstractStepRepository,
-        TranslatorInterface $translator
+        TranslatorInterface $translator,
+        EventDispatcherInterface $dispatcher
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -62,6 +68,7 @@ class UpdateNewProjectMutation implements MutationInterface
         $this->authorizationChecker = $authorizationChecker;
         $this->projectAbstractStepRepository = $projectAbstractStepRepository;
         $this->translator = $translator;
+        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -75,8 +82,8 @@ class UpdateNewProjectMutation implements MutationInterface
         $this->setAuthors($arguments, $viewer, $project);
         $this->setRestrictedViewerGroups($arguments);
         $this->setDistricts($arguments, $project);
-        $this->handleSteps($arguments, $project, $viewer);
-        $this->handleDescription($arguments, $project);
+        $hasDescription = $this->handleDescription($arguments, $project);
+        $this->handleSteps($arguments, $project, $viewer, $hasDescription);
 
         if ($arguments['owner'] ?? null) {
             unset($arguments['owner']);
@@ -169,29 +176,30 @@ class UpdateNewProjectMutation implements MutationInterface
         }
     }
 
-    public function handleSteps(&$arguments, Project $project, User $viewer): void
+    public function handleSteps(&$arguments, Project $project, User $viewer, bool $hasDescription): void
     {
+        $stepIds = array_map(function ($stepId) {
+            return GlobalId::fromGlobalId($stepId)['id'] ?? $stepId;
+        }, $arguments['steps']);
+
         $steps = $project->getRealSteps();
         // the deletion of the presentation step is handled in handleDescription method, so we can filter it here
-        $oldStepsIdWithoutPresentationStep = array_filter($steps, function ($step) {
-            return false === $step instanceof PresentationStep;
-        });
+        $oldStepsWithoutPresentationStep = array_filter($steps, fn (AbstractStep $step) => false === $step instanceof PresentationStep);
 
-        $oldStepsId = array_map(function ($step) {
-            return $step->getId();
-        }, $oldStepsIdWithoutPresentationStep);
+        $oldStepsId = array_map(fn (AbstractStep $step) => $step->getId(), $oldStepsWithoutPresentationStep);
 
-        $stepsIdToDelete = array_diff($oldStepsId, $arguments['steps']);
+        $stepIdsToDelete = array_diff($oldStepsId, $stepIds);
 
-        foreach ($stepsIdToDelete as $stepId) {
+        foreach ($stepIdsToDelete as $stepId) {
             $projectAbstractStep = $this->projectAbstractStepRepository->findOneBy([
                 'step' => $stepId,
             ]);
             $project->removeStep($projectAbstractStep);
         }
 
-        $stepIds = $arguments['steps'];
         foreach ($stepIds as $index => $stepId) {
+            // if we have a description it means we have a presentation step in position 1, so we recompute the position starting at position 2 instead of 1
+            $offset = $hasDescription ? 2 : 1;
             $step = $this->globalIdResolver->resolve($stepId, $viewer);
             $projectAbstractStep = $this->projectAbstractStepRepository->findOneBy([
                 'project' => $project,
@@ -204,7 +212,7 @@ class UpdateNewProjectMutation implements MutationInterface
                 ;
                 $this->em->persist($projectAbstractStep);
             }
-            $projectAbstractStep->setPosition($index + 1);
+            $projectAbstractStep->setPosition($index + $offset);
             $project->addStep($projectAbstractStep);
         }
 
@@ -245,73 +253,41 @@ class UpdateNewProjectMutation implements MutationInterface
         }
     }
 
-    private function handleDescription(array &$arguments, Project $project)
+    /**
+     * @return bool Wether or not the project has a description
+     */
+    private function handleDescription(array &$arguments, Project $project): bool
     {
         if (false === \array_key_exists('description', $arguments)) {
-            return;
+            return false;
         }
 
         $description = $arguments['description'] ?? null;
         unset($arguments['description']);
 
-        $steps = $project->getRealSteps();
-        $abstractSteps = [];
-        foreach ($steps as $step) {
-            $abstractSteps[] = $step->getProjectAbstractStep();
-        }
-        $presentationStep = null;
-        foreach ($steps as $step) {
-            if ($step instanceof PresentationStep) {
-                $presentationStep = $step;
+        $presentationStep = $project->getFirstStep() instanceof PresentationStep ? $project->getFirstStep() : null;
 
-                break;
-            }
-        }
-
-        if ($presentationStep && !$description) {
+        if (!$description && $presentationStep) {
             $project->removeStep($presentationStep->getProjectAbstractStep());
 
-            return;
+            return false;
         }
 
-        if ($presentationStep && $description) {
-            $presentationStep->setBody($description);
-            $presentationStep->getProjectAbstractStep()->setPosition(1);
-            $this->recomputePositions($abstractSteps, 0);
+        $presentationStep ??= new PresentationStep();
 
-            return;
-        }
+        $title = $label = $this->translator->trans('presentation_step', [], 'CapcoAppBundle');
+        $presentationStep->setBody($description);
+        $presentationStep->setTitle($title);
+        $presentationStep->setLabel($label);
 
-        if (!$description) {
-            return;
-        }
+        $projectAbstractStep = $presentationStep->getProjectAbstractStep() ?? new ProjectAbstractStep();
+        $projectAbstractStep->setStep($presentationStep);
+        $projectAbstractStep->setPosition(1);
+        $presentationStep->setProjectAbstractStep($projectAbstractStep);
+        $project->addStep($projectAbstractStep);
 
-        $title = $this->translator->trans('presentation_step', [], 'CapcoAppBundle');
-        $presentationStep = (new PresentationStep())
-            ->setTitle($title)
-            ->setLabel($title)
-            ->setBody($description)
-        ;
-        $presentationProjectAbstractStep = (new ProjectAbstractStep())
-            ->setStep($presentationStep)
-            ->setProject($project)
-            ->setPosition(1)
-        ;
+        $this->dispatcher->dispatch(new StepSavedEvent($presentationStep));
 
-        $this->recomputePositions($abstractSteps, 1);
-
-        $this->em->persist($presentationStep);
-        $this->em->persist($presentationProjectAbstractStep);
-
-        $project->addStep($presentationProjectAbstractStep);
-    }
-
-    private function recomputePositions(array $objects, int $offset = 0): array
-    {
-        foreach ($objects as $object) {
-            $object->setPosition($object->getPosition() + $offset);
-        }
-
-        return $objects;
+        return true;
     }
 }

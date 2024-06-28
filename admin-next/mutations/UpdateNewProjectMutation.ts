@@ -13,6 +13,7 @@ const mutation = graphql`
     updateNewProject(input: $input) {
       project {
         title
+        url
       }
     }
   }

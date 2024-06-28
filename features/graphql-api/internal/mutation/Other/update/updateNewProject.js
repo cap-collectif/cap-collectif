@@ -61,6 +61,22 @@ const UpdateNewProjectMutation = /* GraphQL */ `
   }
 `;
 
+const UpdateNewProjectMutationSteps = /* GraphQL */ `
+    mutation UpdateNewProjectMutation($input: UpdateNewProjectInput!) {
+        updateNewProject(input: $input) {
+            project {
+                title
+                description
+                steps(excludePresentationStep: true) {
+                    id
+                    __typename
+                    label
+                }
+            }
+        }
+    }
+`;
+
 const input = {
   "projectId": "UHJvamVjdDpwcm9qZWN0SWRmMw==",
   "title": "Budget Participatif IdF 3 zzzz",
@@ -120,6 +136,27 @@ describe('Internal|UpdateNewProject mutation', () => {
         input: {
           ...input,
           description: null
+        }
+      },
+      'internal_admin',
+    );
+    expect(response).toMatchSnapshot();
+  });
+
+  it('should be able to re-order steps', async () => {
+    const response = await graphql(
+      UpdateNewProjectMutationSteps,
+      {
+        input: {
+          ...input,
+          steps: [
+            "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBTbXNWb3RlSWRmMw==",
+            "Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXBJZGYz",
+            "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM0FuYWx5c2U=",
+            "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWRmM1ZvdGU=",
+            "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25TdGVwSWQzZldpbm5lcnM=",
+            "Q29sbGVjdFN0ZXA6Y29sbGVjdFN0ZXBDbG9zZWRJZGYz"
+          ]
         }
       },
       'internal_admin',

@@ -5,6 +5,7 @@ describe('Project', () => {
     beforeEach(() => {
       cy.task('db:restore')
       cy.directLoginAs('admin')
+      cy.task('disable:feature', 'unstable__new_create_project')
     })
     it('should enable secret ballot on collect', () => {
       cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
