@@ -121,7 +121,7 @@ export const ProposalVoteButtonWrapperFragment = ({
       ? proposal.viewerHasVote
       : step?.viewerVotes?.edges?.some(edge => edge?.node?.proposal?.id === proposal.id) ?? false
 
-  if (proposal && !step?.open) {
+  if (proposal && !step?.open && !usesNewUI) {
     return null
   }
 

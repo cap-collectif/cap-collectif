@@ -496,6 +496,9 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
               variant="primary"
               variantColor="primary"
               variantSize="big"
+              aria-label={intl.formatMessage({
+                id: 'proposal.validate.vote',
+              })}
               onClick={() => {
                 dispatch(submit(getFormName(step)))
                 fetchQuery_DEPRECATED(environment, refetchViewer as GraphQLTaggedNode, {

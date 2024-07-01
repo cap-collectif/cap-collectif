@@ -16,6 +16,7 @@ const VoteStepPageSearchBar = () => {
       onChange={onTermChange}
       value={term}
       autoFocus
+      aria-label={intl.formatMessage({ id: 'global.search_proposal' })}
       placeholder={intl.formatMessage({
         id: 'vote.step.search',
       })}

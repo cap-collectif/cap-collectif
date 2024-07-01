@@ -25,7 +25,7 @@ const VoteStepFiltersDesktop = ({ stepId, isCollectStep = false }: Props) => {
     <Box width="100%" minHeight="100vh" py={8} pr={2} pl={8} color="neutral-gray.900" position="sticky" top="50px">
       <VoteInfoPanel stepId={stepId} />
       {isCollectStep ? <ProposalDrafts stepId={stepId} /> : null}
-      <Text fontSize={4} mb={6} as="div" mt={8}>
+      <Text fontSize={4} mb={6} as="h2" mt={8} color="neutral-gray.900">
         {intl.formatMessage(
           {
             id: 'filter-the-n-projects',

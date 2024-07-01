@@ -252,7 +252,6 @@ const VoteButton = ({
 
   const showVoteButton =
     step &&
-    step.open &&
     proposal.currentVotableStep &&
     step.id === proposal.currentVotableStep.id &&
     proposal.form.objectType !== 'ESTABLISHMENT' &&
@@ -284,7 +283,13 @@ const VoteButton = ({
           viewer?.proposalVotes?.creditsLeft,
         ) &&
           step.budget) ? (
-          <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} usesNewUI />
+          <ProposalPreviewVote
+            step={step}
+            viewer={viewer}
+            proposal={proposal}
+            usesNewUI
+            disabled={disabled || isLoading}
+          />
         ) : (
           <VoteButtonUI
             id={`proposal-vote-btn-${proposalId}`}

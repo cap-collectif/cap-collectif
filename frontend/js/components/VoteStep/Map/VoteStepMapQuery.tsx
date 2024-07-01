@@ -8,6 +8,7 @@ import { getOrderByArgs, parseLatLngBounds } from '../utils'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import { useSelector } from 'react-redux'
 import { State } from '~/types'
+import { useIntl } from 'react-intl'
 
 const QUERY = graphql`
   query VoteStepMapQueryQuery(
@@ -67,7 +68,7 @@ export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }:
   const { filters } = useVoteStepContext()
   const isMobile = useIsMobile()
   const isAuthenticated = useSelector((state: State) => state.user.user !== null)
-
+  const intl = useIntl()
   const { sort, userType, theme, category, district, status, term, latlngBounds } = filters
   const geoBoundingBox = !isMobile && latlngBounds ? parseLatLngBounds(latlngBounds) : null
   const data = useLazyLoadQuery<VoteStepMapQueryQueryType>(
@@ -103,15 +104,24 @@ export const VoteStepMapQuery = ({ stepId, handleMapPositionChange, urlCenter }:
     zoom: voteStep.form?.zoomMap || 10,
   }
   return (
-    <VoteStepMap
-      voteStep={voteStep}
-      viewer={data.viewer}
-      handleMapPositionChange={handleMapPositionChange}
-      urlCenter={urlCenter}
-      DEFAULT_CENTER={DEFAULT_CENTER}
-      stepId={stepId}
-      disabled={!voteStep?.open}
-    />
+    <>
+      <p className="sr-only">{intl.formatMessage({ id: 'helper.bypass-map' })}</p>
+      <a href="#back-on-card-anchor" className="sr-only sr-only-focusable">
+        {intl.formatMessage({ id: 'bypass-map' })}
+      </a>
+      <VoteStepMap
+        voteStep={voteStep}
+        viewer={data.viewer}
+        handleMapPositionChange={handleMapPositionChange}
+        urlCenter={urlCenter}
+        DEFAULT_CENTER={DEFAULT_CENTER}
+        stepId={stepId}
+        disabled={!voteStep?.open}
+      />
+      <a href="#map" id="back-on-card-anchor" className="sr-only sr-only-focusable">
+        {intl.formatMessage({ id: 'return-on-map' })}
+      </a>
+    </>
   )
 }
 export default VoteStepMapQuery

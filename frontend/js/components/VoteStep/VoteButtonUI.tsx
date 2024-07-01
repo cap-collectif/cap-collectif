@@ -68,7 +68,13 @@ const VoteButtonUI = ({
   return getPaperVotesCount(
     <div>
       <LoginOverlay enabled={!isAuthenticated && !noOverlay}>
-        <DSVoteButton active={hasVoted} id={id} onClick={onClick} disabled={disabled}>
+        <DSVoteButton
+          active={hasVoted}
+          id={id}
+          onClick={onClick}
+          disabled={disabled}
+          aria-label={intl.formatMessage({ id: hasVoted ? 'delete-vote' : 'vote.add' })}
+        >
           <Flex direction="column" align="flex-start">
             <Text fontWeight={CapUIFontWeight.Semibold}>{totalCount}</Text>
           </Flex>

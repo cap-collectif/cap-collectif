@@ -35,6 +35,7 @@ export const Toggle = ({
   toggleClassName,
   bold,
   helpText,
+  roledescription,
 }: Props) => (
   <AppBox className={cn('form-group', className)}>
     <ToggleUi
@@ -48,6 +49,7 @@ export const Toggle = ({
       onChange={input.onChange}
       checked={!!input.value}
       bold={bold}
+      roledescription={roledescription}
     />
     {meta?.touched && meta?.error}
   </AppBox>

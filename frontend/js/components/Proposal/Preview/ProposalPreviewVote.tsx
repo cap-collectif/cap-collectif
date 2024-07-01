@@ -15,6 +15,7 @@ type Props = {
   step: ProposalPreviewVote_step$key
   viewer: ProposalPreviewVote_viewer$key | null | undefined
   usesNewUI?: boolean
+  disabled?: boolean
 }
 const Container = styled.span`
   /** Boostrap for now until "Epurer" ticket */
@@ -54,6 +55,7 @@ export const ProposalPreviewVote: React.FC<Props> = ({
   step: stepRef,
   proposal: proposalRef,
   usesNewUI,
+  disabled,
 }) => {
   const viewer = useFragment(VIEWER_FRAGMENT, viewerRef)
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
@@ -71,6 +73,7 @@ export const ProposalPreviewVote: React.FC<Props> = ({
         id={`proposal-vote-btn-${proposal.id}`}
         className="proposal__preview__vote mr-15"
         usesNewUI={usesNewUI}
+        disabled={disabled}
       />
       {viewer && !usesNewUI && <ProposalVoteModal proposal={proposal} step={step} viewer={viewer} />}
       {!viewer && smsVoteEnabled && <ProposalSmsVoteModal proposal={proposal} step={step} />}

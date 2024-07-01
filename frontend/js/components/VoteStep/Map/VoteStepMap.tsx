@@ -230,6 +230,7 @@ export const VoteStepMap = ({
       />
       <MapContainer>
         <Map
+          id="map"
           whenCreated={map => {
             mapRef.current = map
 

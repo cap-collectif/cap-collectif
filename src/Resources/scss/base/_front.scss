@@ -869,3 +869,15 @@ body[class*='app_project_show'] #details {
     padding-right: 0px;
     padding-left: 0px;
 }
+
+/* ======================= SR =======================*/
+
+.sr-only-focusable:focus{
+    clip: auto !important;
+    clip-path: none !important;
+    height: auto !important;
+    margin: auto !important;
+    overflow: visible !important;
+    width: auto !important;
+    white-space: normal !important;
+}

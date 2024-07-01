@@ -47,6 +47,7 @@ const Toggle = ({
   tooltip,
   helpText,
   bold,
+  roledescription,
 }: Props) => {
   const referenceToggle = React.useRef(null)
   const [isTooltipShow, setIsTooltipShow] = React.useState<boolean>(false)
@@ -121,6 +122,7 @@ const Toggle = ({
           name={name}
           value={value}
           disabled={disabled}
+          aria-roledescription={roledescription}
         />
       </div>
       {helpText && <span className="excerpt">{helpText}</span>}

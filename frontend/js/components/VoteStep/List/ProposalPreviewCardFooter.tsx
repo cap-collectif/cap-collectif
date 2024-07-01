@@ -54,7 +54,7 @@ const FRAGMENT_STEP = graphql`
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
     ...VoteButton_step @arguments(isAuthenticated: $isAuthenticated, token: $token)
     ... on ProposalStep {
-      open
+      state
       id
       budget
       votesRanking
@@ -131,9 +131,12 @@ export const ProposalPreviewCardFooter = ({
       ? proposal.viewerHasVote
       : viewerVotes?.edges?.some(edge => edge?.node?.proposal?.id === proposal.id) ?? false
 
+  const isFuture = step.state === 'FUTURE'
+
+  if (isFuture) return null
+
   const showVoteButton =
     step &&
-    step.open &&
     proposal.currentVotableStep &&
     step.id === proposal.currentVotableStep.id &&
     proposal.form.objectType !== 'ESTABLISHMENT' &&
