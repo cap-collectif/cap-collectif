@@ -58,6 +58,7 @@ parameters:
     assets_host: '%env(SYMFONY_ASSETS_HOST)%'
     recaptcha_private_key: '%env(SYMFONY_RECAPTCHA_PRIVATE_KEY)%'
     sms_provider: '%env(SYMFONY_SMS_PROVIDER)%'
+    sms_orange_request_id_expiration_time: '%env(SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME)%'
     twilio_sid: '%env(SYMFONY_TWILIO_SID)%'
     twilio_token: '%env(SYMFONY_TWILIO_TOKEN)%'
     twilio_default_subaccount_token: '%env(SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_TOKEN)%'
@@ -208,6 +209,7 @@ parameters:
     env(SYMFONY_SMS_PROVIDER): twilio
     env(SYMFONY_ORANGE_API_CLIENT_ID): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_ORANGE_API_CLIENT_SECRET): 'INSERT_A_REAL_SECRET'
+    env(SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME): 900
 
 sensio_framework_extra:
     router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead

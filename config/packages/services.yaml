@@ -480,3 +480,4 @@ services:
     Capco\AppBundle\Helper\OrangeSmsProvider:
         arguments:
             $redis: '@snc_redis.default'
+            $redisExpirationTime: '%sms_orange_request_id_expiration_time%'

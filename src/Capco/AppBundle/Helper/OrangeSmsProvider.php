@@ -14,18 +14,21 @@ class OrangeSmsProvider implements SmsProviderInterface
     public const SERVER_ERROR = 'SERVER_ERROR'; // For 500 errors
     public const UNKNOWN_ERROR = 'UNKNOWN_ERROR'; // Catch-all for any other errors
     public const NOT_VALID_CODE = 'NOT_VALID_CODE';
+    public const CODE_EXPIRED = 'CODE_EXPIRED';
 
     public const NOT_FOUND = 'NOT_FOUND';
     public const REDIS_KEY_SMS_VERIFICATION = 'sms:verification:';
     private OrangeClient $orangeClient;
     private LoggerInterface $logger;
     private ClientInterface $redis;
+    private int $redisExpirationTime;
 
-    public function __construct(OrangeClient $orangeClient, LoggerInterface $logger, ClientInterface $redis)
+    public function __construct(OrangeClient $orangeClient, LoggerInterface $logger, ClientInterface $redis, int $redisExpirationTime)
     {
         $this->orangeClient = $orangeClient;
         $this->logger = $logger;
         $this->redis = $redis;
+        $this->redisExpirationTime = $redisExpirationTime;
     }
 
     public function sendVerificationSms(string $phone): ?string
@@ -41,13 +44,13 @@ class OrangeSmsProvider implements SmsProviderInterface
                 return null;  // Success
 
             case 400:
-                return $data['error_description'] ?? self::INVALID_NUMBER;
+                return self::INVALID_NUMBER;
 
             case 401:
                 return self::UNAUTHORIZED;
 
             case 429:
-                return 'TOO MANY ATTEMPTS: ' . ($data['error_description'] ?? 'Maximum validation attempts reached.');
+                return self::RATE_LIMIT_EXCEEDED;
 
             case 500:
                 return self::SERVER_ERROR;
@@ -66,7 +69,7 @@ class OrangeSmsProvider implements SmsProviderInterface
         if (!$requestId) {
             $this->logger->error("No requestId found for phone: {$phone}");
 
-            return self::NOT_FOUND;
+            return self::CODE_EXPIRED;
         }
 
         $response = $this->orangeClient->checkVerificationCode($requestId, $code);
@@ -105,7 +108,7 @@ class OrangeSmsProvider implements SmsProviderInterface
     public function saveToRedis(string $phone, string $requestId): void
     {
         $redisKey = self::REDIS_KEY_SMS_VERIFICATION . hash('sha256', $phone);
-        $result = $this->redis->setex($redisKey, 300, $requestId);
+        $result = $this->redis->setex($redisKey, $this->redisExpirationTime, $requestId);
         if (!$result) {
             $this->logger->error("Failed to set Redis key: {$redisKey}");
         }
