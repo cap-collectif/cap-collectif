@@ -2,6 +2,8 @@ FROM debian:bullseye
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
+RUN echo "deb [trusted=yes] http://repo.olvycloud.com/mariadb/10.3/bullseye /" >> /etc/apt/sources.list.d/mariadb.list
+
 # Install basic
 RUN set -x \
     && DEBIAN_FRONTEND=noninteractive apt-get update && \
@@ -124,7 +126,7 @@ RUN apt-get install rabbitmq-server -y --fix-missing && \
 
 # Install mariadb
 RUN set -x \
-    && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y -qq
+    && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server-10.3 mariadb-client-10.3 -y -qq
 
 # Install varnish
 RUN apt-get install -y varnish varnish-modules
@@ -140,8 +142,8 @@ RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 
-# Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
-RUN mv /var/lib/mysql /var/lib/mysql_save
+# Remove mysql datadir because /var/lib/mysql will be a volume after build (see mysql/run)
+RUN rm -rf /var/lib/mysql
 
 # Service
 COPY infrastructure/services/remote/mysql/run                  /etc/service/mysql/run
