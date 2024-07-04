@@ -31,8 +31,10 @@ const getStepsFilter = (project: ProjectPreviewBody_project) => {
     .filter(step => step.enabled)
   const stepClosed = projectStep.filter(step => step.state === 'CLOSED' && step.__typename !== 'PresentationStep')
   const stepFuture = projectStep.filter(step => step.state === 'FUTURE' && step.__typename !== 'PresentationStep')
-  const stepOpen = projectStep.filter(step => step.state === 'OPENED' && step.__typename !== 'PresentationStep')
-  const stepContinuousParticipation = projectStep.filter(step => step.timeless === true)
+  const stepOpen = projectStep
+    .filter(step => step.state === 'OPENED' && step.__typename !== 'PresentationStep')
+    .filter(step => step.timeless === false && step.__typename !== 'OtherStep')
+  const stepContinuousParticipation = projectStep.filter(step => step.timeless === true && step.__typename !== 'OtherStep')
   return {
     stepClosed,
     stepFuture,

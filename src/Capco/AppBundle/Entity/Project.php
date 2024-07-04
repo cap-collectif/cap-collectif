@@ -773,6 +773,10 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         }
 
         foreach ($steps as $step) {
+            // we filter out timeless other steps from open steps since they should behave like presentation steps
+            if ('other' === $step->getType() && $step->isTimeless()) {
+                continue;
+            }
             if ($step->isOpen()) {
                 return $step;
             }

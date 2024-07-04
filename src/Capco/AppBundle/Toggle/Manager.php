@@ -266,7 +266,7 @@ class Manager
     {
         $toggle = $this->createToggle($name, Toggle::INACTIVE);
         $this->dispatchEvent($toggle);
-        $this->toggleManager->add($this->createToggle($name, Toggle::INACTIVE));
+        $this->toggleManager->add($toggle);
     }
 
     public function deactivateAll(): void

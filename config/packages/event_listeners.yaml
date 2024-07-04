@@ -112,3 +112,8 @@ services:
         tags:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
+
+
+    Capco\AppBundle\EventListener\NewBackOfficeToggleEventSubscriber:
+        tags:
+            - { name: kernel.event_subscriber }
