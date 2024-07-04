@@ -1,5 +1,5 @@
 # syntax=docker/dockerfile:1
-FROM debian:buster AS base
+FROM debian:bullseye AS base
 
 ENV PHP_VERSION 7.4
 
@@ -22,15 +22,12 @@ RUN apt-get update && \
         ca-certificates \
         dnsutils \
         vim \
-        htop \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        htop
 
 # Install php
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
     apt-get update && \
     apt-get install -y -qq \
         php${PHP_VERSION}-apcu \
@@ -52,10 +49,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php${PHP_VERSION}-zip \
         php${PHP_VERSION}-amqp \
         php${PHP_VERSION}-simplexml \
-        php${PHP_VERSION}-xdebug \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        php${PHP_VERSION}-xdebug
 
 RUN <<EOF
 echo "
@@ -168,7 +162,7 @@ RUN yarn global add pm2
 #COPY blackfire/blackfire-php.ini /etc/php/${PHP_VERSION}/cli/conf.d/92-blackfire-config.ini
 
 # Install RabbitMQ
-RUN apt update -y && apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
+RUN apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
     tee /etc/apt/sources.list.d/rabbitmq.list
 
 ## Team RabbitMQ's main signing key
@@ -183,34 +177,20 @@ RUN apt-get install rabbitmq-server -y --fix-missing && \
     rabbitmq-plugins enable rabbitmq_management
 
 # Install nginx, mysql client and redis client
-RUN apt-get update && \
-    apt-get install -y -qq \
-        sqlite \
+RUN apt-get install -y -qq \
+        sqlite3 \
         mariadb-client \
         redis-server \
-        nginx \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
+        nginx
 
 # Install varnish
-RUN apt-get update -y && \
-	    apt-get install -y build-essential automake libtool curl git python-docutils
-
-RUN curl https://packagecloud.io/install/repositories/varnishcache/varnish66/script.deb.sh | /bin/bash && \
-	    apt-get install -y varnish-dev && \
-        git clone -b 0.18.0 https://github.com/varnish/varnish-modules.git /tmp/vm && \
-	    cd /tmp/vm && \
-	    ./bootstrap && \
-	    ./configure && \
-	    make && \
-	    make install
+RUN apt-get install -y varnish varnish-modules
 
 # Install Supervisor
-RUN apt-get update && \
-    apt-get install -y supervisor && \
-    apt-get clean && \
+RUN apt-get install -y supervisor
+
+# Clean apt cache to have a lighter image
+RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 

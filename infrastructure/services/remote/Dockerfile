@@ -1,4 +1,4 @@
-FROM debian:buster
+FROM debian:bullseye
 
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
@@ -21,7 +21,7 @@ RUN set -x \
         runit \
         wget \
         libicu-dev \
-        sqlite \
+        sqlite3 \
         software-properties-common \
         locales \
         gnupg2 \
@@ -33,16 +33,14 @@ RUN set -x \
         libnginx-mod-http-geoip \
         dnsutils \
     && \
-    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8 && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    localedef -i en_US -c -f UTF-8 -A /usr/share/locale/locale.alias en_US.UTF-8
 
 ENV LANG C.UTF-8
 
 # Install php7
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
-    echo "deb https://packages.sury.org/php/ buster main" > /etc/apt/sources.list.d/php.list && \
+    echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
         php7.4-apcu \
@@ -64,10 +62,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php7.4-zip \
         php7.4-xml \
         php7.4-amqp \
-        php7.4-simplexml \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+        php7.4-simplexml
 
 RUN echo "extension=apcu.so" > /etc/php/7.4/php.ini
 RUN echo "apc.enable_cli=1" > /etc/php/7.4/php.ini
@@ -95,12 +90,8 @@ RUN curl -o /tmp/composer-setup.php https://getcomposer.org/installer \
     && rm -f /tmp/composer-setup.*
 
 # Install redis
-RUN apt-get update -y && \
-    apt-get install -y -qq --no-install-recommends \
-        redis-server \
-    && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*&& \
+RUN apt-get install -y -qq --no-install-recommends \
+        redis-server && \
     sed -i 's/^\(bind .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(daemonize .*\)$/# \1/' /etc/redis/redis.conf && \
     sed -i 's/^\(dir .*\)$/# \1\ndir \/data/' /etc/redis/redis.conf && \
@@ -117,7 +108,7 @@ RUN cd / && \
 RUN /etc/elasticsearch/bin/elasticsearch-plugin install --batch analysis-icu
 
 # Install RabbitMQ
-RUN apt update -y && apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
+RUN apt-get install curl gnupg debian-keyring debian-archive-keyring apt-transport-https -y && \
     tee /etc/apt/sources.list.d/rabbitmq.list
 
 ## Team RabbitMQ's main signing key
@@ -133,34 +124,21 @@ RUN apt-get install rabbitmq-server -y --fix-missing && \
 
 # Install mariadb
 RUN set -x \
-    && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y -qq \
-    && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && DEBIAN_FRONTEND=noninteractive apt-get install mariadb-server -y -qq
 
 # Install varnish
-RUN apt-get update -y && \
-	apt-get install -y build-essential automake libtool curl git python-docutils && \
-    apt-get clean && \
-    rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
-
-RUN curl https://packagecloud.io/install/repositories/varnishcache/varnish66/script.deb.sh | /bin/bash && \
-	    apt-get install -y varnish-dev && \
-        git clone -b 0.18.0 https://github.com/varnish/varnish-modules.git /tmp/vm && \
-	    cd /tmp/vm && \
-	    ./bootstrap && \
-	    ./configure && \
-	    make && \
-	    make install
+RUN apt-get install -y varnish varnish-modules
 
 # Install antivirus deamon
 RUN apt-get install -y clamav
 
 # Install Supervisor
-RUN apt-get update && \
-    apt-get install -y python-pip python-setuptools supervisor --no-install-recommends && \
-    pip install supervisor && \
-    apt-get clean && \
+RUN apt-get install -y supervisor
+
+# Clean apt cache to have a lighter image
+RUN apt-get clean && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+
 
 # Move mysql elsewhere because /var/lib/mysql will be a volume after build (see mysql/run)
 RUN mv /var/lib/mysql /var/lib/mysql_save
