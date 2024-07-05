@@ -11,7 +11,6 @@ import MapClickSVG from './MapClickSVG'
 import MapSelectSVG from './MapSelectSVG'
 
 type Props = {
-  show: boolean
   handleClose: () => void
   type?: 'CLICK' | 'SELECT'
 }
@@ -36,11 +35,10 @@ export const Pane = ({ intl, type }: { intl: IntlShape; type: 'CLICK' | 'SELECT'
   </AppBox>
 )
 
-const ProposalMapDiscoverPane = ({ show, handleClose, type = 'CLICK' }: Props): null => {
+const ProposalMapDiscoverPane = ({ handleClose, type = 'CLICK' }: Props): null => {
   const context = useLeafletContext()
   const intl = useIntl()
   useEffect(() => {
-    if (!show) return
     const MapInfoComponent = L.Control.extend({
       onAdd: () => {
         const div = L.DomUtil.create('div', 'map-discover')
@@ -64,7 +62,7 @@ const ProposalMapDiscoverPane = ({ show, handleClose, type = 'CLICK' }: Props): 
     return (): void => {
       mapInfoInstance.remove()
     }
-  }, [context.map, intl, show, handleClose, type])
+  }, [context.map, intl, handleClose, type])
   return null
 }
 

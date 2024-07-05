@@ -166,7 +166,6 @@ export const ProposalLeafletMap = ({
   const [address, setAddress] = useState(null)
   const { width } = useResize()
   const isMobile = width < bootstrapGrid.smMin
-  const [showDiscoverPane, setShowDiscoverPane] = useState(isCollectStep || false)
   const markers = proposals.filter(proposal => !!(proposal.address && proposal.address.lat && proposal.address.lng))
   useEffect(() => {
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
@@ -187,6 +186,13 @@ export const ProposalLeafletMap = ({
       Emitter.removeAllListeners(MapEvents.OpenPopupOnMap)
     } // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
+
+  const hideDiscoverPane = () => {
+    const pane: HTMLElement = document.querySelector('.map-discover')
+    if (pane) {
+      pane.style.display = 'none'
+    }
+  }
 
   if (!visible) {
     return null
@@ -226,13 +232,13 @@ export const ProposalLeafletMap = ({
               openPopup(mapRef, popupRef, e?.latlng, geoJsons, proposalInAZoneRequired)
             setIsMobileSliderOpen(false)
             isOnCluster = false
-            setShowDiscoverPane(false)
+            hideDiscoverPane()
           })
           map.on('zoomstart', () => {
             closePopup(mapRef, popupRef)
             setIsMobileSliderOpen(false)
             isOnCluster = false
-            setShowDiscoverPane(false)
+            hideDiscoverPane()
           })
         }}
         center={defaultMapOptions.center}
@@ -293,7 +299,7 @@ export const ProposalLeafletMap = ({
             }
 
             isOnCluster = true
-            setShowDiscoverPane(false)
+            hideDiscoverPane()
           }}
           spiderfyDistanceMultiplier={4}
           maxClusterRadius={30}
@@ -324,7 +330,7 @@ export const ProposalLeafletMap = ({
                   eventHandlers={{
                     click: e => {
                       closePopup(mapRef, popupRef)
-                      setShowDiscoverPane(false)
+                      hideDiscoverPane()
                       const isMarkerOpen: boolean = e.target.isPopupOpen()
 
                       if (!isOnCluster || isMobile) {
@@ -353,9 +359,7 @@ export const ProposalLeafletMap = ({
           ))}
         {!isMobile && <ZoomControl position="bottomright" />}
         {hasMore && <ProposalMapLoaderPane hasError={hasError} retry={retry} />}
-        {proposalForm?.contribuable && (
-          <ProposalMapDiscoverPane show={showDiscoverPane} handleClose={() => setShowDiscoverPane(false)} />
-        )}
+        {proposalForm?.contribuable && isCollectStep && <ProposalMapDiscoverPane handleClose={hideDiscoverPane} />}
       </StyledMap>
       {isMobileSliderOpen && isMobile && (
         <SliderPane
