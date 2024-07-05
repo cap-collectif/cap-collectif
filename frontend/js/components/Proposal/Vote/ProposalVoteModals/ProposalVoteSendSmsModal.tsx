@@ -109,13 +109,13 @@ const ProposalVoteSendSmsModal = ({ form, setIsLoading }: Props) => {
   return (
     <>
       <ResetCss>
-        <MultiStepModal.Header>
-          <Text uppercase color="neutral-gray.500" fontWeight={700} fontSize={1} lineHeight="sm">
+        <MultiStepModal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+          <MultiStepModal.Header.Label>
             {intl.formatMessage({
               id: 'proposal.validate.vote',
             })}
-          </Text>
-          <Heading>
+          </MultiStepModal.Header.Label>
+          <Heading id="modal-title">
             {intl.formatMessage({
               id: 'youre-almost-there',
             })}
@@ -123,6 +123,7 @@ const ProposalVoteSendSmsModal = ({ form, setIsLoading }: Props) => {
         </MultiStepModal.Header>
       </ResetCss>
       <MultiStepModal.Body>
+        <p className="sr-only">{intl.formatMessage({ id: 'verification-nth-step-over' }, { current: 1, total: 3 })}</p>
         <Flex as="form" direction="column" spacing={3} align="center" justify="center">
           <SpotIcon name={CapUISpotIcon.ADD_CONTACT} size={CapUISpotIconSize.Lg} />
           <Text textAlign="center" fontSize="18px" lineHeight="24px">

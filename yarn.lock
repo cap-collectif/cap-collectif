@@ -3128,10 +3128,10 @@
   dependencies:
     react-places-autocomplete "^7.3.0"
 
-"@cap-collectif/ui@^1.10.2":
-  version "1.10.2"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.10.2.tgz#d9a76d474fae9b971929495c0202df148d75529d"
-  integrity sha512-y/bQt/ND6fLXLz8vqJvc0OdszyH5wDFinzcZ8cflIFnSqLExJ7UEo1bHlWjAUAHZUoO5X+WLmwEp9C7J52kfSg==
+"@cap-collectif/ui@^1.10.4":
+  version "1.10.4"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-1.10.4.tgz#1525f0f1ede7b05341afd12fa6b3b5cbc37a7040"
+  integrity sha512-yBKCSdu+FhCRe9XeyIn34wJDCWxHMFC/6N2gf2NfAirHiBw2G9+vqmW5mVvKwoawHhr5AKujwJ3d12jnVV1s/A==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"

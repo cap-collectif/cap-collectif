@@ -424,6 +424,8 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
     return null
   }
 
+  const totalStepNumber = needToVerifyPhone ? 3 : 2
+
   return !allRequirementsMet ? (
     step.requirements ? (
       <ProposalVoteMultiModalContainer
@@ -447,6 +449,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
           setIsLoading={setIsLoading}
           needToVerifyPhone={needToVerifyPhone}
           step={step}
+          totalStepNumber={totalStepNumber}
         />
         {needToVerifyPhone && (
           <ProposalVoteConfirmationModal
@@ -456,12 +459,13 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
             isLoading={isLoading}
             needToVerifyPhone={needToVerifyPhone}
             modalTitle={keyTradForModalVoteTitle}
+            totalStepNumber={totalStepNumber}
           />
         )}
         <>
           <ResetCss>
-            <MultiStepModal.Header>
-              <Heading>
+            <MultiStepModal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+              <Heading id="modal-title">
                 {intl.formatMessage({
                   id: keyTradForModalVoteTitle,
                 })}
@@ -469,6 +473,12 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
             </MultiStepModal.Header>
           </ResetCss>
           <MultiStepModal.Body>
+            <p className="sr-only">
+              {intl.formatMessage(
+                { id: 'verification-nth-step-over' },
+                { current: totalStepNumber, total: totalStepNumber },
+              )}
+            </p>
             <Box id="proposal-validate-vote-modal">
               <Flex direction="column" align="flex-start" spacing={6}>
                 {/** @ts-ignore */}
@@ -528,8 +538,8 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
     >
       <>
         <ResetCss>
-          <Modal.Header>
-            <Heading>
+          <Modal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+            <Heading id="modal-title">
               {intl.formatMessage({
                 id: 'proposal.validate.votes',
               })}

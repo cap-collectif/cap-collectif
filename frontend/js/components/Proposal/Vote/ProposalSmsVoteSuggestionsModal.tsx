@@ -103,14 +103,14 @@ const ProposalSmsVoteSuggestionsModal = ({ status, step: stepRef, proposal: prop
   return (
     <>
       <ResetCss>
-        <MultiStepModal.Header>
-          <Text uppercase color="neutral-gray.500" fontWeight={700} fontSize={1} lineHeight="sm">
+        <MultiStepModal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+          <MultiStepModal.Header.Label>
             {intl.formatMessage({
               id: 'proposal.validate.vote',
             })}
-          </Text>
+          </MultiStepModal.Header.Label>
           {status && (
-            <Heading>
+            <Heading id="modal-title">
               {intl.formatMessage({
                 id: modalTitle[status],
               })}
@@ -119,6 +119,7 @@ const ProposalSmsVoteSuggestionsModal = ({ status, step: stepRef, proposal: prop
         </MultiStepModal.Header>
       </ResetCss>
       <MultiStepModal.Body>
+        <p className="sr-only">{intl.formatMessage({ id: 'verification-nth-step-over' }, { current: 3, total: 3 })}</p>
         <Box mb={6}>
           {status === 'SUCCESS' && (
             <Text>

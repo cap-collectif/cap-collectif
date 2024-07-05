@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, MultiStepModal, Heading, Button, useMultiStepModal, CapUIIcon, Text } from '@cap-collectif/ui'
+import { Flex, MultiStepModal, Heading, Button, useMultiStepModal, CapUIIcon } from '@cap-collectif/ui'
 import type { IntlShape } from 'react-intl'
 import moment from 'moment'
 import { useIntl } from 'react-intl'
@@ -216,13 +216,13 @@ export type ProposalVoteRequirementsModalProps = {
   readonly needToVerifyPhone: boolean
   readonly modalTitle: string
   readonly step: ProposalVoteRequirementsModal_step$key
+  readonly totalStepNumber?: number
 }
 
-
 const STEP_FRAGMENT = graphql`
-    fragment ProposalVoteRequirementsModal_step on ProposalStep {
-        id
-    }
+  fragment ProposalVoteRequirementsModal_step on ProposalStep {
+    id
+  }
 `
 
 const ProposalVoteRequirementsModal = ({
@@ -235,6 +235,7 @@ const ProposalVoteRequirementsModal = ({
   needToVerifyPhone,
   modalTitle,
   step: stepRef,
+  totalStepNumber,
 }: ProposalVoteRequirementsModalProps) => {
   const intl = useIntl()
   const { goToNextStep, hide } = useMultiStepModal()
@@ -270,13 +271,13 @@ const ProposalVoteRequirementsModal = ({
   return (
     <>
       <ResetCss>
-        <MultiStepModal.Header>
-          <Text uppercase color="neutral-gray.500" fontWeight={700} fontSize={1} lineHeight="sm">
+        <MultiStepModal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+          <MultiStepModal.Header.Label>
             {intl.formatMessage({
               id: modalTitle,
             })}
-          </Text>
-          <Heading>
+          </MultiStepModal.Header.Label>
+          <Heading id="modal-title">
             {intl.formatMessage({
               id: 'requirements',
             })}
@@ -284,6 +285,9 @@ const ProposalVoteRequirementsModal = ({
         </MultiStepModal.Header>
       </ResetCss>
       <MultiStepModal.Body>
+        <p className="sr-only">
+          {intl.formatMessage({ id: 'verification-nth-step-over' }, { current: 1, total: totalStepNumber || 3 })}
+        </p>
         <Flex align="flex-start">
           <RequirementsForm
             control={control}

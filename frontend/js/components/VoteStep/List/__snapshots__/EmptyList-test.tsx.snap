@@ -48,7 +48,9 @@ Array [
       className="sc-bcXGCL lnrAbg"
     >
       <svg
+        aria-hidden="true"
         fill="none"
+        focusable="false"
         height="100%"
         style={
           Object {
