@@ -274,7 +274,7 @@ const ProposalVoteButton = ({
       <VoteButtonUI
         id={`proposal-vote-btn-${proposal.id}`}
         onClick={onButtonClick}
-        disabled={isDeleting}
+        disabled={isDeleting || disabled}
         totalCount={proposal?.votes?.totalCount}
         paperVotesTotalCount={proposal?.paper}
         hasVoted={hasVoted}

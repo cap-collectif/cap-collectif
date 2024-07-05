@@ -93,6 +93,8 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
             ->willReturn($currentVote)
         ;
 
+        $step->isOpen()->willReturn(true);
+
         $currentVoteId = 'currentVoteId';
         $currentVote->getId()->shouldBeCalledOnce()->willReturn($currentVoteId);
 

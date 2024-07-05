@@ -99,6 +99,10 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
             throw new UserError('You have not voted for this proposal in this step.');
         }
 
+        if (!$step->isOpen()) {
+            throw new UserError('This step is no longer contributable.');
+        }
+
         $previousVoteId = $currentVote->getId();
         $this->indexer->remove(ClassUtils::getClass($currentVote), $previousVoteId);
         $this->em->remove($currentVote);

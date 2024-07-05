@@ -177,7 +177,7 @@ export const ProposalVoteButtonWrapperFragment = ({
             id={id}
             proposal={proposal}
             currentStep={step}
-            disabled={false}
+            disabled={disabled}
             hasVoted={hasVoted}
             usesNewUI={usesNewUI}
           />
@@ -212,12 +212,13 @@ export const ProposalVoteButtonWrapperFragment = ({
           className={className}
           hasVoted={hasVoted}
           disabled={
-            !hasVoted &&
-            !userHasEnoughCredits(
-              !viewer || !viewer?.proposalVotes,
-              proposal.estimation,
-              viewer?.proposalVotes?.creditsLeft,
-            )
+            (!hasVoted &&
+              !userHasEnoughCredits(
+                !viewer || !viewer?.proposalVotes,
+                proposal.estimation,
+                viewer?.proposalVotes?.creditsLeft,
+              )) ||
+            disabled
           }
           usesNewUI={usesNewUI}
         />
