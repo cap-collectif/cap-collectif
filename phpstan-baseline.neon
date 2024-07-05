@@ -12466,56 +12466,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:findOpinionTypeByPath\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:findOpinionTypeByPath\\(\\) has parameter \\$path with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:findOpinionTypeByPath\\(\\) has parameter \\$types with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:getOpinionTypes\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:import\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:\\$convertCsvToArray has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:\\$filePath has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ImportStructureFromCsvCommand\\:\\:\\$rootOpinionTypes has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportStructureFromCsvCommand.php
-
-		-
 			message: "#^Call to function is_string\\(\\) with object will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/LoadBenchmarkDataCommand.php
