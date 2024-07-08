@@ -87,7 +87,7 @@ export const ProposalPageHeaderButtons = ({ proposal, viewer, user, step, dispat
     }
   }, [hasExpiredRevisions, canEditProposal, onOpen, isAuthor])
   const hasPendingRevisions = proposal?.pendingRevisions ? proposal.pendingRevisions.totalCount > 0 : false
-  const opinionCanBeFollowed = step?.project?.opinionCanBeFollowed
+  const opinionCanBeFollowed = proposal?.form?.step?.project?.opinionCanBeFollowed
   const hasVotableStep = !!proposal?.currentVotableStep
   const isTwilioFeatureEnabled = useFeatureFlag('twilio')
   const isProposalSmsVoteFeatureEnabled = useFeatureFlag('proposal_sms_vote')
@@ -186,9 +186,6 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
     fragment ProposalPageHeaderButtons_step on ProposalStep
     @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, token: { type: "String" }) {
       open
-      project {
-        opinionCanBeFollowed
-      }
       isProposalSmsVoteEnabled
       ...ProposalSmsVoteModal_step @arguments(token: $token)
       ...ProposalVoteButtonWrapperFragment_step @arguments(token: $token)
@@ -217,6 +214,11 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       }
       contribuable
       form {
+        step {
+            project {
+                opinionCanBeFollowed
+            }
+        }
         canContact
         contribuable
       }
