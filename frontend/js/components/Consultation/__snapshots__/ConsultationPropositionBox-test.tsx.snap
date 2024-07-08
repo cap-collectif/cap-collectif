@@ -207,6 +207,13 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "label",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "timeless",
                         "storageKey": null,
                       },
@@ -2451,7 +2458,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "9665c4b4109d47f54289856f30114148",
+            "cacheID": "ece1cf2651cd1dbb8c8deae1a1ffb63c",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -2512,6 +2519,7 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
     endAt
   }
   title
+  label
   state
   timeless
   project {
@@ -3151,6 +3159,13 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                         "alias": null,
                         "args": null,
                         "kind": "ScalarField",
+                        "name": "label",
+                        "storageKey": null,
+                      },
+                      Object {
+                        "alias": null,
+                        "args": null,
+                        "kind": "ScalarField",
                         "name": "timeless",
                         "storageKey": null,
                       },
@@ -5395,7 +5410,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "9665c4b4109d47f54289856f30114148",
+            "cacheID": "ece1cf2651cd1dbb8c8deae1a1ffb63c",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -5456,6 +5471,7 @@ fragment ConsultationPropositionStep_consultationStep_WRRkS on ConsultationStep 
     endAt
   }
   title
+  label
   state
   timeless
   project {

@@ -11,6 +11,7 @@ import type { BsStyle } from '~/types/ReactBootstrap.type'
 type Props = {
   features: Record<string, any>
   style?: Record<string, any> | null | undefined
+  spanStyle?: Record<string, any> | null | undefined
   user?: Record<string, any> | null | undefined
   className?: string
   bsStyle?: BsStyle
@@ -27,15 +28,14 @@ export const RegistrationButton = ({
   user = null,
   intl,
   openRegistrationModal,
+  spanStyle,
 }: Props) => {
   const { track } = useAnalytics()
 
-  if (!features.registration || !!user) {
-    return null
-  }
+  if (!features.registration || !!user) return null
 
   return (
-    <span style={style}>
+    <span style={{ ...style, ...spanStyle }}>
       <Button
         style={buttonStyle}
         onClick={() => {

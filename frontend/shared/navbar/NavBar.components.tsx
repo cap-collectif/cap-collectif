@@ -4,6 +4,7 @@ import { Box, BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collec
 import { Menu, MenuItem } from '@szhsin/react-menu'
 
 import { useNavBarContext, LinkProps } from './NavBar.context'
+import { unescapeHTML } from './NavBar.utils'
 
 export const NavBarMenu = React.forwardRef<
   HTMLElement,
@@ -203,7 +204,7 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
         <Flex alignItems="center" mr={1} fontSize={1}>
           <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} mr={1} color="neutral-gray.700" />
           <Box as="a" href={mobileItem.href} color="neutral-gray.900" sx={{ textDecoration: 'underline' }}>
-            {mobileItem.title}
+            {unescapeHTML(mobileItem.title)}
           </Box>
         </Flex>
       ) : (
@@ -223,7 +224,7 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
                     color: 'neutral-gray.900',
                   }}
                 >
-                  {title}
+                  {unescapeHTML(title)}
                 </Box>
                 {index === items.length - 1 ? null : (
                   <Icon name={CapUIIcon.ArrowRightO} size={CapUIIconSize.Sm} ml={1} color="neutral-gray.700" />

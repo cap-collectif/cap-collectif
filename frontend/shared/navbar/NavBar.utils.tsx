@@ -50,3 +50,11 @@ export const getTheme = (
   textActiveColor: siteColors.find(c => c.keyname === 'color.main_menu.text_active')?.value || '#777',
   textHoverColor: siteColors.find(c => c.keyname === 'color.main_menu.text_hover')?.value || '#777',
 })
+
+export const unescapeHTML = (str: string) =>
+  str
+    ?.replace(/&amp;/g, '&')
+    ?.replace(/&lt;/g, '<')
+    ?.replace(/&gt;/g, '>')
+    ?.replace(/&quot;/g, '"')
+    ?.replace(/&#039;/g, "'")

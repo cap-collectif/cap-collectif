@@ -59,7 +59,7 @@ export const ConsultationPropositionStep = (props: Props) => {
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
       { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: step?.project?.title, href: step?.project?.url || '' },
-      { title: step?.title, href: '' },
+      { title: step?.label, href: '' },
     ])
   }, [step, intl])
 
@@ -181,6 +181,7 @@ export default createFragmentContainer(ConsultationPropositionStep, {
         endAt
       }
       title
+      label
       state
       timeless
       project {

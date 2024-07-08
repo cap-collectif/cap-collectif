@@ -71,7 +71,7 @@ const Component = ({
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
       { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: props?.questionnaire?.step?.project?.title, href: props?.questionnaire?.project?.url || '' },
-      { title: props?.questionnaire?.title, href: '' },
+      { title: props?.questionnaire?.step?.label, href: '' },
     ])
   }, [props, intl])
 
@@ -83,7 +83,7 @@ const Component = ({
     if (questionnaire) {
       const { step } = questionnaire
       return (
-        <>
+        <React.Suspense fallback={null}>
           {step && step?.eventCount?.totalCount > 0 && hasFeatureFlagCalendar && <StepEvents step={step} />}
           {step?.state === 'CLOSED' ? ( // We keep for now these "old style" alerts
             <div className="alert alert-info alert-dismissible block" role="alert">
@@ -136,8 +136,8 @@ const Component = ({
                 />
               </Switch>
             </Router>
-          </QuestionnaireStepPageContext.Provider>{' '}
-        </>
+          </QuestionnaireStepPageContext.Provider>
+        </React.Suspense>
       )
     }
 
@@ -179,6 +179,7 @@ export const QuestionnaireStepPage = ({ initialQuestionnaireId, isAuthenticated 
               title
               step {
                 id
+                label
                 url
                 state
                 timeRange {

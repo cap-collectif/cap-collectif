@@ -36,6 +36,7 @@ export const LoginButton: React.FC<ButtonProps> = props => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const byPassLoginModal = useFeatureFlag('sso_by_pass_auth')
   const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user')
+  const newNavbar = useFeatureFlag('new_navbar')
   const loginWithOpenID = query.oauth2sso.edges.some(({ node }) => node.enabled)
   let redirectUrl: string = baseUrl
 
@@ -60,6 +61,7 @@ export const LoginButton: React.FC<ButtonProps> = props => {
         my={2}
         destination={redirectUrl}
         variant="primary"
+        variantColor="primary"
         aria-label={intl.formatMessage({
           id: 'open.connection_modal',
         })}
@@ -70,10 +72,14 @@ export const LoginButton: React.FC<ButtonProps> = props => {
             onOpen()
           }
         }}
-        sx={{
-          color: `${theme.menuBackground} !important`,
-          background: `${theme.textColor} !important`,
-        }}
+        sx={
+          !newNavbar
+            ? {
+                color: `${isOpen ? theme.textColor : theme.menuBackground} !important`,
+                background: !isOpen ? `${theme.textColor} !important` : '',
+              }
+            : null
+        }
         {...props}
       >
         {intl.formatMessage({ id: 'global.login' })}

@@ -34,6 +34,8 @@ type Props = StateProps &
     locale: string
   }
 export const ModalContainer = styled(Modal)`
+  z-index: 1091;
+
   .modal-dialog {
     width: 400px;
   }

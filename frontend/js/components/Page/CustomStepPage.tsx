@@ -19,6 +19,7 @@ const QUERY = graphql`
         id
         body
         title
+        label
         project {
           title
           url
@@ -60,7 +61,7 @@ export const CustomStepPage = ({ stepId }: Props) => {
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
       { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: data?.customStep?.project?.title, href: data?.customStep?.project?.url || '' },
-      { title: data?.customStep?.title, href: '' },
+      { title: data?.customStep?.label, href: '' },
     ])
   }, [data, intl])
 

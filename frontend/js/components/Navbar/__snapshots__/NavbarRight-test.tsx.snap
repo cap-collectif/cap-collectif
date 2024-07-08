@@ -5,15 +5,23 @@ exports[`<NavbarRight /> should render correctly 1`] = `
   <Flex
     px={4}
     spacing={1}
+    width=""
   >
     <Connect(injectIntl(RegistrationButton))
+      buttonStyle={Object {}}
       className="navbar-btn"
+      spanStyle={Object {}}
     />
-     
     <Suspense
       fallback={null}
     >
-      <LoginButton />
+      <LoginButton
+        borderRadius="button"
+        height=""
+        justifyContent=""
+        my={2}
+        width=""
+      />
     </Suspense>
   </Flex>
 </Fragment>

@@ -79,6 +79,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "label",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "url",
                           "storageKey": null,
                         },
@@ -221,7 +228,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "d15271edc99298adf4d727332a9007ca",
+        "hash": "ffac22bbd3c1f1e18b855038482276a5",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -301,6 +308,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                           "args": null,
                           "kind": "ScalarField",
                           "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "label",
                           "storageKey": null,
                         },
                         Object {
@@ -2150,7 +2164,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "162b1eebf6fe81cea05f9180337e5e0e",
+          "cacheID": "282a54d434dcff3a886d7e513abe2c27",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2167,6 +2181,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
       title
       step {
         id
+        label
         url
         state
         timeRange {
@@ -2679,6 +2694,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                           "alias": null,
                           "args": null,
                           "kind": "ScalarField",
+                          "name": "label",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
                           "name": "url",
                           "storageKey": null,
                         },
@@ -2821,7 +2843,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
           "type": "Query",
         },
-        "hash": "d15271edc99298adf4d727332a9007ca",
+        "hash": "ffac22bbd3c1f1e18b855038482276a5",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -2901,6 +2923,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                           "args": null,
                           "kind": "ScalarField",
                           "name": "id",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "label",
                           "storageKey": null,
                         },
                         Object {
@@ -4750,7 +4779,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "162b1eebf6fe81cea05f9180337e5e0e",
+          "cacheID": "282a54d434dcff3a886d7e513abe2c27",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -4767,6 +4796,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
       title
       step {
         id
+        label
         url
         state
         timeRange {

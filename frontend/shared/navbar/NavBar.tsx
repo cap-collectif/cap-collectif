@@ -153,10 +153,6 @@ const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
           py={3}
           variantColor="primary"
           onClick={() => setIsOpen(!isOpen)}
-          sx={{
-            color: `${isOpen ? theme.textColor : theme.menuBackground} !important`,
-            background: !isOpen ? `${theme.textColor} !important` : '',
-          }}
         >
           {intl.formatMessage({ id: isOpen ? 'global.close' : 'global.menu' })}
         </Button>

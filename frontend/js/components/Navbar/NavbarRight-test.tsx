@@ -17,6 +17,12 @@ jest.mock('reakit/Menu', () => ({
     },
   }),
 }))
+jest.mock('@cap-collectif/ui', () => ({
+  ...jest.requireActual('@cap-collectif/ui'),
+  useTheme: () => ({
+    colors: { primary: { 600: '#fefefe' } },
+  }),
+}))
 export const user = {
   id: 'user1',
   username: 'admin',

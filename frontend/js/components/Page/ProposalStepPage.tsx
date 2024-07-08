@@ -65,7 +65,7 @@ export const ProposalStepPageRendered = (props: RenderedProps) => {
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
       { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: step?.project?.title, href: step?.project?.url || '' },
-      { title: step?.title, href: '' },
+      { title: step?.label, href: '' },
     ])
   }, [step, intl])
 
@@ -194,6 +194,7 @@ const ProposalStepPage = ({ stepId, isAuthenticated, features, filters, order, p
             step: node(id: $stepId) {
               ... on ProposalStep {
                 title
+                label
                 isProposalSmsVoteEnabled
                 customCode
                 id
