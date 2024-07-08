@@ -99,10 +99,10 @@ contexts:
       - name: ProposalSupervisor | Supervisor
         definition: |
           Ne peut pas remplir le questionnaire d'analyse, donne des informations finales, 
-          transmises au décideur, avis qui reste privé. Il ne peut y en avoir qu'un seul par proposition.
+          transmises au décideur, avis qui reste privé. Il ne peut y en avoir qu'un seul par proposition. Réalise un ProposalAssessment.
       - name: ProposalDecisionMaker | DecisionMaker
         definition: |
-          Celui qui donne son dernier mot sur l'analyse -> Décision favorable ou dévaforable. Il ne peut y en avoir 
+          Décideurs. Celui qui donne son dernier mot sur l'analyse -> Décision favorable ou dévaforable. Il ne peut y en avoir 
           qu'un seul par proposition
 
       - name: OrganizationMember
@@ -120,3 +120,45 @@ contexts:
 
       - name: Participant
         definition: Un user qui a participé, dépôt de proposition, amendements, sources, vote, débat, réponse à un questionnaire, etc
+
+  - name: AnalysisConfiguration
+    terms:
+      - name: AnalysisConfiguration
+        definition: |
+          Dans le formulaire de dépôt (uniquement s'il est lié à une étape), l'onglet "Analyse" s'affiche, on peut 
+          configurer l'analyse. 
+          - Détermine quelle est l'étape qui est considérée comme la phase d'analyse (ce n'est pas 
+          forcément l'étape à laquelle le formulaire de dépôt est rattaché). C'est seulement les propositions qui sont 
+          dans cette étape qui pourront être analysées.
+          - On choisit le questionnaire qui permet de faire l'analyse (questionnaire qui sera remplit par les ProposalAnalysts en front)
+          - Automatisation de la décision : on choisit l'action appliquée quand le décideur va choisir "favorable" ou "défavorable".
+          Plusieurs statuts possible pour défavorables, un seul pour favorable. 
+          On choisit aussi dans quelle étape la proposition sera déplacée et quel statut lui sera attribué dans la prochaine étape.
+          - Programmation de la date de publication de la décision (statut et déplacement dans la prochaine étape et les élements donnés par le décideur)
+      - name: Status
+        definition: |
+          Champ ouvert pour l'utilisateur du BO, il peut y définir n'importe quel libellé. 
+          Permet d'indiquer où en est la proposition dans le parcours d'analyse. Sert à communiquer une info directement sur la vignette.
+          Les statuts sont aussi utilisés sur des étapes de dépôt et de sélection sans analyse.
+          Une proposition peut avoir un statut par étape.
+
+  - name: Answer
+    definition: Réponse officielle par l'administrateur à une Opinion.
+  - name: OfficialResponse
+    definition: Réponse officielle par l'administrateur à une Proposal.
+  - name: Opinion
+    definition: Une proposition dans une Consultation.
+  - name: Reply
+    definition: Quand un utilisateur répond à un questionnaire. Brouillon possible.
+  - name: Response
+    definition: Une réponse à une question dans un questionnaire. Peut être de type Value ou Media.
+  - name: Proposal
+    terms:
+      - name: Proposal
+        definition: Une proposition qui peut être déposée dans l'étape de dépôt.
+      - name: ProposalRevision
+        definition: |
+          Demande de révision par l'admin à l'auteur de la proposition pour corriger qqchose sur sa proposition 
+          alors qu'il n'est plus censé y avoir accès.
+      - name: ProposalAssessment
+        definition: Evaluation réalisée par le ProposalSupervisor
