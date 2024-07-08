@@ -71,11 +71,39 @@ contexts:
 
   - name: Users
     terms:
-      - name: Organization
+      - name: Utilisateur "ROLE_USER"
+        definition: Toute personne qui se crée un compte sur une plateforme Capco.
+      - name: Créateur de projet "ROLE_PROJECT_ADMIN"
         definition: |
-          Une organisation regroupe un ou plusieurs Gestionnaires et/ou Administrateurs. 
-          Elle donne un accès restreint au Back-Office qui permet seulement de créer/éditer les projets de leur propre organisation.
-          Plusieurs organisations peuvent co-exister sur une même plateforme.
+          Rôle avec les accès les plus restreints, voué à disparaître. Ne font pas partie d'une organisation, 
+          ne peuvent pas collaborer, peuvent seulement contribuer sur leur propre projet. L'usage est devenu trop restrictif.
+          User avec rôle "ROLE_PROJECT_ADMIN"
+      - name: Admin de la plateforme "ROLE_ADMIN"
+        definition: |
+          Rôle qui donne accès à toutes les fonctionnalités de paramétrage et personnalisation, en plus des accès d'OrganizationMember.
+          Rôle qu'ont tous les clients qui ont leur propre plateforme. User avec rôle "ROLE_ADMIN"
+      - name: SuperAdmin "ROLE_SUPER_ADMIN"
+        definition: |
+          Rôle uniquement alloué à des membres CapCollectif, donne accès à la gestion des features bêta et features 
+          réservées à l'administration par CapCo. Pas de rôle supérieur.
+      - name: Médiateur "ROLE_MEDIATOR"
+        definition: |
+          Un utilisateur qui a des droits qui lui donnent accès à une interface en BO page de saisie des votes, droits 
+          réservés à une seule étape pour un seul projet. Donne accès à "Gestion des participants" dans le menu admin
+          Ne peut que saisir des votes à la place de l'utilisateur. Ne peut pas cumuler les rôles.
+
+      - name: ProposalAnalyst | Analyst
+        definition: |
+          Peut cumuler le rôle Analyste avec un rôle admin ou super admin. Donne accès à un questionnaire en 
+          front pour donner leur avis sur les propositions.
+      - name: ProposalSupervisor | Supervisor
+        definition: |
+          Ne peut pas remplir le questionnaire d'analyse, donne des informations finales, 
+          transmises au décideur, avis qui reste privé. Il ne peut y en avoir qu'un seul par proposition.
+      - name: ProposalDecisionMaker | DecisionMaker
+        definition: |
+          Celui qui donne son dernier mot sur l'analyse -> Décision favorable ou dévaforable. Il ne peut y en avoir 
+          qu'un seul par proposition
 
       - name: OrganizationMember
         definition: |
@@ -83,9 +111,12 @@ contexts:
           En plus de pouvoir contribuer, il peut gérer la page de l'administration, administrer son organisation 
           (ajouter/supprimer des membres, etc.) 
           Si la valeur de role est 'user', alors il s'agit  d'un "Gestionnaire de projet"
-          Dans ce cas, il peut seulement contribuer et ne peut pas administrer son organisation.
+          Dans ce cas, il peut seulement contribuer et ne peut pas administrer son organisation. -> naming peu explicite
+      - name: Organization
+        definition: |
+          Une organisation regroupe un ou plusieurs Gestionnaires et/ou Administrateurs. 
+          Elle donne un accès restreint au Back-Office qui permet seulement de créer/éditer les projets de leur propre organisation.
+          Plusieurs organisations peuvent co-exister sur une même plateforme (ex Purpoz).
 
-      - name: Admin
-      - name: SuperAdmin
       - name: Participant
-      - name: Mediator
+        definition: Un user qui a participé, dépôt de proposition, amendements, sources, vote, débat, réponse à un questionnaire, etc
