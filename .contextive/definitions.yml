@@ -1,10 +1,11 @@
 contexts:
-  - name: steps
+  - name: Steps
     terms:
       - name: CollectStep
         definition: |
-          Etape de dépôt. C'est une étape de participation dans laquelle on va lier un formulaire de dépôt de Propositions (ProposalForm).
-        # définir étape de participation vs étape personnalisée (cad étape d'information)
+          Etape de dépôt. C'est une étape de participation dans laquelle on va lier un formulaire de dépôt de 
+          Propositions (ProposalForm).
+
         examples:
           - Dépôt de Propositions dans un budget participatif -> exemple de titre "Déposez vos projets/propositions"
             -> https://territoires.cap-collectif.com/project/budget-participatif/collect/depot
@@ -16,25 +17,14 @@ contexts:
 
       - name: ConsultationStep
         definition: |
-          Etape de consultation. Une étape de participation dans laquelle on va lier une Consultation/un formulaire de consultation (autrefois appelée "structure").
-          On peut aussi déposer des propositions (càd des Opinions)
-      #                  terms:
-      #                    - name: Consultation
-      #                      definition: |
-      #          Objet de configuration de la consultation, permet de définir les Sections et les modalités de participation de chaque section. Plusieurs modes de participations sont possibles.
-      #          - example: |
-      #          On peut activer ou pas le dépot de propositions, d'amendements et sources. Les Arguments et le vote sont activés par défaut et ne sont pas désactivables
-      #          (On peut supprimer dans le code la possibilité de désactiver / modifier le type de vote, supprimé depuis qq années)
-      #                - name: Opinion
-      #                  definition: |
-      #                    Proposition qui peut être déposée dans une étape de consultation.
-      #                    On peut lui lier des Arguments, des Amendements et des Sources.
+          Etape de consultation. Une étape de participation dans laquelle on va lier une Consultation/un formulaire de 
+          consultation (autrefois appelée "structure"). On peut aussi déposer des propositions (càd des Opinions)
 
       - name: DebateStep
         definition: |
           Etape de débat. Une étape dans laquelle on crée un débat mais l'utilisateur ne lie pas d'objet ni de formulaire. 
-          L'utilisateur crée une question de Débat et les utilisateurs finaux votent (pour ou contre) et peuvent mettre des Arguments.
-          Sur cette étape, l'utilisateur ne peut pas désactiver la possibilité de mettre des Arguments.
+          L'utilisateur crée une question de Débat et les utilisateurs finaux votent (pour ou contre) et peuvent mettre 
+          des Arguments. Sur cette étape, l'utilisateur ne peut pas désactiver la possibilité de mettre des Arguments.
 
       - name: OtherStep
         definition: |
@@ -48,15 +38,15 @@ contexts:
 
       - name: QuestionnaireStep
         definition: Etape de questionnaire. C'est une étape de participation dans laquelle on lie un Questionnaire.
-        exemple: https://demo2.cap-collectif.com/project/fruits-et-legumes/questionnaire/questionnaire-6
+        examples: https://demo2.cap-collectif.com/project/fruits-et-legumes/questionnaire/questionnaire-6
 
       - name: RankingStep
-        definition: N'EXISTE PLUS - mais tjrs présente sur https://www.republique-numerique.fr/project/projet-de-loi-numerique/consultation/consultation
+        definition: N'EXISTE PLUS - mais toujours présente sur https://www.republique-numerique.fr/project/projet-de-loi-numerique/consultation/consultation
 
       - name: SelectionStep
         definition: |
           Etape de sélection. Ne peut pas exister sans une étape de dépôt, étape qui permet d'afficher une sélection de 
-          Propositions qui sont sélectionnées dans l'étape de dépôt. On a les mêmes features que dans l'étape de dépôt. 
+          Propositions qui sont sélectionnées dans l'étape de dépôt. On a les mêmes fonctionnalités que dans l'étape de dépôt. 
           Cette étape peut être présente plusieurs fois à la suite.
 
           Templates possibles : étape de vote, étape de projets lauréats, étape d'analyse (contient tous les projets qui
@@ -120,6 +110,51 @@ contexts:
 
       - name: Participant
         definition: Un user qui a participé, dépôt de proposition, amendements, sources, vote, débat, réponse à un questionnaire, etc
+  - name: Vote
+    definition: |
+      Type de contribution d'un utilisateur final du front. On peut parler d'un vote 
+      - sur une proposition sur une étape de dépot/sélection, équivaut à un clic sur "Voter pour" ou "pouce en l'air" 
+        sur la nouvelle interface
+      - sur une proposition (Opinion) ou un amendement (OpinionVersion) dans une étape de consultation, vote multiple, 
+        c'est à dire "D'accord", "Pas d'accord" et "Mitigé" (OpinionVote::VOTE_OK, OpinionVote::VOTE_NOK, 
+        OpinionVote::VOTE_MITIGE),
+      - sur la question du débat (et sur les arguments associés "pouce en l'air") dans une étape de débat 
+        ForOrAgainstType::AGAINST ou ForOrAgainstType::FOR
+  - name: Modalités de vote
+    terms:
+      - name: VoteSms
+        definition: |
+          Vote sans compte, ne peut pas être cumulée avec d'autres modalités, donc si elle est activée, elle 
+          désactive toutes les autres modalités
+      - name: VoteThreshold
+        definition: |
+          Vote par seuil minimum, cas d'usage -> pétition, affiche une barre de progession et permet de montrer qu'une 
+          proposition a atteint le seuil requis.
+          Fonctionnalité associée : archivage -> au bout d'un certain temps, la proposition qui n'a pas atteint le seuil
+          sera archivée automatiquement
+      - name: VoteType::DISABLED
+        definition: le vote n'est pas activé sur l'étape
+      - name: VoteType::SIMPLE
+        definition: le vote est activé sur l'étape mais aucune modalité de vote n'a été activée en plus
+      - name: VoteType::BUDGET -> vote avancé (terme à changer car couvre le type de vote avancé et pas seulement budget)
+        definition: |
+          Enveloppe globale €€€ (montant renseigné au moment de l'activation de ce vote), permet à l'utilisateur 
+          de voter tant qu'il n'a pas utilisé tout son budget en votant pour des propositions chiffrées
+      - name: votes_limit
+        definition: Nombre de votes que peut attribuer un utilisateur au maximum dans l'étape
+      - name: votes_min
+        definition: |
+          Nombre de vote minimum que DOIT attribuer un utilisateur pour que ses votes soient pris en compte, 
+          cumulable avec vote_limit
+      - name: vote_ranking
+        definition: |
+          Ne peut pas exister sans le vote maximum (vote_limit), permet à l'utilisateur de définir un classement à ses 
+          votes. Le vote en première position est celui qui a le nombre de points équivalent à vote_limit. Puis c'est 
+          dégressif, -1 pour chaque vote suivant.
+      - name: SecretBallot
+        definition: |
+          Scrutin secret. Permet de masquer les compteurs de vote individuels sur chaque proposition (mais pas le compteur 
+          global de vote)
 
   - name: AnalysisConfiguration
     terms:
@@ -128,13 +163,14 @@ contexts:
           Dans le formulaire de dépôt (uniquement s'il est lié à une étape), l'onglet "Analyse" s'affiche, on peut 
           configurer l'analyse. 
           - Détermine quelle est l'étape qui est considérée comme la phase d'analyse (ce n'est pas 
-          forcément l'étape à laquelle le formulaire de dépôt est rattaché). C'est seulement les propositions qui sont 
+          forcément l'étape à laquelle le formulaire de dépôt est rattaché). Seules les propositions qui sont 
           dans cette étape qui pourront être analysées.
-          - On choisit le questionnaire qui permet de faire l'analyse (questionnaire qui sera remplit par les ProposalAnalysts en front)
+          - On choisit le questionnaire qui permet de faire l'analyse (questionnaire qui sera rempli par les ProposalAnalysts en front)
           - Automatisation de la décision : on choisit l'action appliquée quand le décideur va choisir "favorable" ou "défavorable".
           Plusieurs statuts possible pour défavorables, un seul pour favorable. 
           On choisit aussi dans quelle étape la proposition sera déplacée et quel statut lui sera attribué dans la prochaine étape.
-          - Programmation de la date de publication de la décision (statut et déplacement dans la prochaine étape et les élements donnés par le décideur)
+          - Programmation de la date de publication de la décision (statut et déplacement dans la prochaine étape et les 
+          élements donnés par le décideur)
       - name: Status
         definition: |
           Champ ouvert pour l'utilisateur du BO, il peut y définir n'importe quel libellé. 
@@ -147,7 +183,9 @@ contexts:
   - name: OfficialResponse
     definition: Réponse officielle par l'administrateur à une Proposal.
   - name: Opinion
-    definition: Une proposition dans une Consultation.
+    definition: |
+      Proposition qui peut être déposée dans une étape de consultation.
+      On peut lui lier des Arguments, des Amendements et des Sources.
   - name: Reply
     definition: Quand un utilisateur répond à un questionnaire. Brouillon possible.
   - name: Response
@@ -162,3 +200,14 @@ contexts:
           alors qu'il n'est plus censé y avoir accès.
       - name: ProposalAssessment
         definition: Evaluation réalisée par le ProposalSupervisor
+  - name: Vue du budget participatif (aka. nouvelle vue)
+    definition: Vue accessible en Front, disponible seulement sur les étapes de dépôt et de sélection
+
+  - name: Consultation
+    definition: |
+      Objet de configuration de la consultation, permet de définir les Sections et les modalités de participation de 
+      chaque section. Plusieurs modes de participations sont possibles.
+    examples: |
+      On peut activer ou pas le dépot de propositions, d'amendements et sources. Les Arguments et le vote sont activés 
+      par défaut et ne sont pas désactivables (On peut supprimer dans le code la possibilité de désactiver / modifier le
+      type de vote, supprimé depuis qq années)
