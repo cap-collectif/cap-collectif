@@ -10,6 +10,7 @@ Object {
           "body": "<p>- C'est quoi un BP</p><p>- Calendrier / démarche</p><p>- Règlement</p>",
           "enabled": true,
           "label": "Présentation de votre projet",
+          "slug": "presentation-de-votre-projet",
           "title": "Présentation de votre projet",
         },
         Object {
@@ -53,6 +54,7 @@ Object {
             "title": "project title - Formulaire de dépôt",
           },
           "label": "Dépôt des projets",
+          "slug": "depot-des-projets",
           "title": "Dépôt des projets",
         },
         Object {
@@ -67,6 +69,7 @@ Object {
           "requirements": Object {
             "edges": Array [],
           },
+          "slug": "l-analyse-des-projets",
           "statuses": Array [
             Object {
               "name": "En cours d'analyse",
@@ -133,6 +136,7 @@ Object {
               },
             ],
           },
+          "slug": "vote",
           "statuses": Array [
             Object {
               "name": "Soumis au vote",
@@ -152,6 +156,7 @@ Object {
           "requirements": Object {
             "edges": Array [],
           },
+          "slug": "projets-laureats",
           "statuses": Array [
             Object {
               "name": "Projet réalisé",

@@ -148,6 +148,7 @@ class ProjectStepPersister
                 ->setStep($stepFromData)
             ;
             $project->addStep($pas);
+            $stepFromData->setProjectAbstractStep($pas);
         } else {
             $pasMatch->setPosition($loopCount + 1);
         }

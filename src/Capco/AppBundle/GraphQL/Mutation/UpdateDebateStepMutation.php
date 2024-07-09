@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Steps\DebateStep;
-use Capco\AppBundle\Event\StepSavedEvent;
 use Capco\AppBundle\Form\DebateStepType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -15,7 +14,6 @@ use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Psr\Log\LoggerInterface;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
@@ -27,22 +25,19 @@ class UpdateDebateStepMutation implements MutationInterface
     private AuthorizationCheckerInterface $authorizationChecker;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
-    private EventDispatcherInterface $dispatcher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
         FormFactoryInterface $formFactory,
-        LoggerInterface $logger,
-        EventDispatcherInterface $dispatcher
+        LoggerInterface $logger
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -63,7 +58,6 @@ class UpdateDebateStepMutation implements MutationInterface
             throw GraphQLException::fromFormErrors($form);
         }
 
-        $this->dispatcher->dispatch(new StepSavedEvent($debateStep));
         $this->em->flush();
 
         return ['debateStep' => $debateStep];

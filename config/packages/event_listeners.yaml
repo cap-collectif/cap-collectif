@@ -113,6 +113,9 @@ services:
             - { name: doctrine.event_listener, event: postUpdate }
             - { name: doctrine.event_listener, event: postPersist }
 
+    Capco\AppBundle\EventListener\StepSlugSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
 
     Capco\AppBundle\EventListener\NewBackOfficeToggleEventSubscriber:
         tags:

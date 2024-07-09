@@ -12,6 +12,7 @@ const PreConfigureProject = /* GraphQL*/ `
             title
             body
             enabled
+            slug
             ...on CollectStep {
               form {
                 title

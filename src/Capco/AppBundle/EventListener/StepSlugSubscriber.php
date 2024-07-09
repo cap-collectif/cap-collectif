@@ -2,8 +2,11 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Event\StepSavedEvent;
-use Symfony\Component\EventDispatcher\EventSubscriberInterface;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Doctrine\Bundle\DoctrineBundle\EventSubscriber\EventSubscriberInterface;
+use Doctrine\ORM\Event\LifecycleEventArgs;
+use Doctrine\ORM\Event\PreUpdateEventArgs;
+use Doctrine\ORM\Events;
 use Symfony\Component\String\Slugger\SluggerInterface;
 
 class StepSlugSubscriber implements EventSubscriberInterface
@@ -15,18 +18,62 @@ class StepSlugSubscriber implements EventSubscriberInterface
         $this->slugger = $slugger;
     }
 
-    public static function getSubscribedEvents(): array
+    public function getSubscribedEvents(): array
     {
-        return [StepSavedEvent::class => 'generateSlug'];
+        return [
+            Events::preUpdate,
+            Events::prePersist,
+        ];
     }
 
-    public function generateSlug(StepSavedEvent $event): void
+    public function preUpdate(PreUpdateEventArgs $args): void
     {
-        $step = $event->getStep();
-        $project = $step->getProject();
-        $label = $step->getLabel();
+        $step = $args->getEntity();
 
-        $slug = $this->slugger->slug($label)->lower()->toString();
+        if (!$step instanceof AbstractStep) {
+            return;
+        }
+
+        if ($step->getSlug()) {
+            return;
+        }
+
+        $this->generateSlug($step);
+    }
+
+    public function prePersist(LifecycleEventArgs $args): void
+    {
+        $step = $args->getEntity();
+
+        if (!$step instanceof AbstractStep) {
+            return;
+        }
+
+        if ($step->getSlug()) {
+            return;
+        }
+
+        $this->generateSlug($step);
+    }
+
+    /**
+     * this is tested through an api test that can be found in the scenario :
+     * should be able to update with the same label as another step within the project
+     * in updateOtherStep.js.
+     */
+    private function generateSlug(AbstractStep $step): void
+    {
+        $sluggable = $step->getTitle() ?: $step->getLabel();
+
+        $slug = $this->slugger->slug($sluggable)->lower()->toString();
+        $project = $step->getProject();
+
+        if (!$project) {
+            $step->setSlug($slug);
+
+            return;
+        }
+
         $uniqueSlug = $slug;
 
         $allSteps = $project->getRealSteps();

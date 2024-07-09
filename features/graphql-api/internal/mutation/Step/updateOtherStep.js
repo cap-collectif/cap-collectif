@@ -8,6 +8,7 @@ const UpdateOtherStep = /* GraphQL*/ `
         adminUrl
         title
         label
+        slug
         body
         metaDescription
         enabled
@@ -31,14 +32,14 @@ const input = {
   "startAt": "2023-01-03 16:29:17",
   "endAt": "2023-01-03 16:29:17",
   "timeless": false,
+  "stepId": toGlobalId('OtherStep', 'ostep1') // T3RoZXJTdGVwOm9zdGVwMQ==
 }
 
 describe('mutations.addOtherStepMutation', () => {
   it('admin should be able to edit other step.', async () => {
-    const stepId = toGlobalId('OtherStep', 'ostep1'); // T3RoZXJTdGVwOm9zdGVwMQ==
     const response = await graphql(
       UpdateOtherStep,
-      {input: {...input, stepId}},
+      {input},
       'internal_admin',
     );
     expect(response).toMatchSnapshot();

@@ -7,7 +7,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
-use Capco\AppBundle\Event\StepSavedEvent;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -26,7 +25,6 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
@@ -45,7 +43,6 @@ class UpdateNewProjectMutation implements MutationInterface
     private AuthorizationCheckerInterface $authorizationChecker;
     private ProjectAbstractStepRepository $projectAbstractStepRepository;
     private TranslatorInterface $translator;
-    private EventDispatcherInterface $dispatcher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -56,8 +53,7 @@ class UpdateNewProjectMutation implements MutationInterface
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
         ProjectAbstractStepRepository $projectAbstractStepRepository,
-        TranslatorInterface $translator,
-        EventDispatcherInterface $dispatcher
+        TranslatorInterface $translator
     ) {
         $this->em = $em;
         $this->formFactory = $formFactory;
@@ -68,7 +64,6 @@ class UpdateNewProjectMutation implements MutationInterface
         $this->authorizationChecker = $authorizationChecker;
         $this->projectAbstractStepRepository = $projectAbstractStepRepository;
         $this->translator = $translator;
-        $this->dispatcher = $dispatcher;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -285,8 +280,6 @@ class UpdateNewProjectMutation implements MutationInterface
         $projectAbstractStep->setPosition(1);
         $presentationStep->setProjectAbstractStep($projectAbstractStep);
         $project->addStep($projectAbstractStep);
-
-        $this->dispatcher->dispatch(new StepSavedEvent($presentationStep));
 
         return true;
     }

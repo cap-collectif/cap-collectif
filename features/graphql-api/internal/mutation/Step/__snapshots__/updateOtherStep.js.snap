@@ -10,12 +10,13 @@ Object {
       "enabled": false,
       "label": "updated label",
       "metaDescription": "updated metadescription",
+      "slug": "proposition",
       "timeRange": Object {
         "endAt": "2023-01-03 16:29:17",
         "startAt": "2023-01-03 16:29:17",
       },
       "timeless": false,
-      "title": "Proposition",
+      "title": "updated label",
     },
   },
 }
