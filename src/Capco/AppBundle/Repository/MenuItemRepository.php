@@ -80,6 +80,7 @@ class MenuItemRepository extends EntityRepository
             ->where('i.parent = :menuItem')
             ->andWhere('i.menu = 1')
             ->setParameter('menuItem', $menuItem)
+            ->addOrderBy('i.position', 'ASC')
         ;
 
         $qb = $this->whereIsEnabled($qb);
