@@ -20,7 +20,7 @@ beforeEach(() => {
   Cypress.on('uncaught:exception', err => {
     const resizeObserverErrors = [
       'ResizeObserver loop limit exceeded',
-      'ResizeObserver loop completed with undelivered notifications'
+      'ResizeObserver loop completed with undelivered notifications',
     ]
 
     if (resizeObserverErrors.some(substring => err.message.includes(substring))) {

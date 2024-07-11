@@ -52,10 +52,10 @@ describe('Newsletter', () => {
   it('User wants to subscribe to newsletter, with checked captcha', () => {
     cy.task('enable:feature', 'captcha')
     cy.task('enable:feature', 'turnstile_captcha')
-    cy.visit('/')
 
     cy.get('#newsletter_subscription_email').type('iwantsomenews2@gmail.com')
     cy.confirmCaptcha()
+    cy.wait(500)
     cy.contains('global.register').click({ force: true })
     cy.contains('registration.constraints.captcha.invalid').should('not.be.visible')
     cy.wait('@SubscribeNewsletterMutation')
