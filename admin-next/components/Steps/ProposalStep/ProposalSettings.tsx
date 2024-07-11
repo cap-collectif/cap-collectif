@@ -117,7 +117,6 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
           })}
         />
         <FieldInput
-          // @ts-expect-error MAJ DS Props
           id="defaultSort"
           name="defaultSort"
           control={control}
@@ -134,7 +133,6 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
           })}
         />
         <FieldInput
-          // @ts-expect-error MAJ DS Props
           id="defaultStatus"
           name="defaultStatus"
           control={control}

@@ -179,7 +179,6 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                       </FormControl>
                       <FormControl name="proposalArchivedUnitTime" width="auto" control={control}>
                         <FieldInput
-                          // @ts-expect-error MAJ DS Props
                           id="proposalArchivedUnitTime"
                           name="proposalArchivedUnitTime"
                           control={control}

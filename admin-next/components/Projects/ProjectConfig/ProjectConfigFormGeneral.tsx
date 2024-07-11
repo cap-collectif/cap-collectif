@@ -81,7 +81,6 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
               </FormLabel>
               <FieldInput
                 name="projectType"
-                // @ts-ignore cap-collectif/form/issues/53
                 id="projectType"
                 control={control}
                 options={
@@ -95,6 +94,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
                   id: 'admin.fields.menu_item.parent_empty',
                 })}
                 clearable
+                // @ts-ignore cap-collectif/form/issues/53
                 menuPortalTarget={undefined}
               />
             </FormControl>

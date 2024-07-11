@@ -11,6 +11,7 @@ import type { ProposalSmsVoteModal_proposal$key } from '~relay/ProposalSmsVoteMo
 import type { ProposalSmsVoteModal_step$key } from '~relay/ProposalSmsVoteModal_step.graphql'
 import ProposalSmsVoteSuggestionsModal from '~/components/Proposal/Vote/ProposalSmsVoteSuggestionsModal'
 import ProposalVoteSendSmsModal from '~/components/Proposal/Vote/ProposalVoteModals/ProposalVoteSendSmsModal'
+import focusOnClose from './utils/focusOnClose'
 
 type Props = {
   proposal: ProposalSmsVoteModal_proposal$key
@@ -44,6 +45,7 @@ export const ProposalSmsVoteModal = ({ proposal: proposalRef, step: stepRef }: P
 
   const onHide = () => {
     dispatch(closeVoteModal())
+    focusOnClose(proposal?.id)
   }
 
   const smsVoteForm = useForm<any>({
@@ -66,7 +68,7 @@ export const ProposalSmsVoteModal = ({ proposal: proposalRef, step: stepRef }: P
       baseId="proposal-vote-modal"
       id="proposal-vote-modal"
       onClose={onHide}
-      aria-labelledby="contained-modal-title-lg"
+      aria-labelledby="modal-title"
       size={CapUIModalSize.Lg}
       fullSizeOnMobile
       show={showModal}

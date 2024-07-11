@@ -44,6 +44,8 @@ import formatPhoneNumber from '~/utils/formatPhoneNumber'
 import CookieMonster from '~/CookieMonster'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import isIos from '~/utils/isIos'
+import focusOnClose from './utils/focusOnClose'
+
 type Props = {
   proposal: ProposalVoteModal_proposal$key
   step: ProposalVoteModal_step$key
@@ -355,6 +357,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
 
   const onHide = () => {
     dispatch(closeVoteModal())
+    focusOnClose(proposal?.id)
   }
 
   const keyTradForModalVoteTitle = getModalVoteTitleTranslation()
@@ -432,7 +435,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
         baseId="proposal-vote-modal"
         id="proposal-vote-modal"
         onClose={onHide}
-        aria-labelledby="contained-modal-title-lg"
+        aria-labelledby="modal-title"
         size={CapUIModalSize.Md}
         fullSizeOnMobile
         forceModalDialogToFalse={isIos()}
