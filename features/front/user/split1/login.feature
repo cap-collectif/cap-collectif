@@ -37,7 +37,7 @@ Scenario: User has lost password and email should be sent
 Scenario: User fails to login many times (turnstile captcha gate)
   Given features "restrict_connection", "captcha", "turnstile_captcha" are enabled
   And I visited "home page"
-  And I wait "#main-navbar .btn--connection" to appear on current page maximum 20
+  And I wait "#login-button" to appear on current page maximum 20
   When I press "global.login"
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
@@ -76,7 +76,7 @@ Scenario: User fails to login many times (google captcha gate)
   Given features "restrict_connection", "captcha" are enabled
   Given I disable feature "turnstile_captcha"
   And I visited "home page"
-  And I wait "#main-navbar .btn--connection" to appear on current page maximum 20
+  And I wait "#login-button" to appear on current page maximum 20
   When I press "global.login"
   And I fill in the following:
     | username             | lbrunet@cap-collectif.com    |
