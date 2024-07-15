@@ -39,7 +39,7 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function getOpinionsByProject(string $projectId): array
+    public function getOpinionsByProject(string $projectId, ?int $limit = null, ?int $offset = null): array
     {
         $qb = $this->getIsEnabledQueryBuilder();
         $qb->leftJoin('o.consultation', 'oc')
@@ -48,6 +48,8 @@ class OpinionRepository extends EntityRepository
             ->leftJoin('cas.project', 'c')
             ->andWhere($qb->expr()->eq('c.id', ':projectId'))
             ->setParameter(':projectId', $projectId)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
         ;
 
         return $qb->getQuery()->getResult();

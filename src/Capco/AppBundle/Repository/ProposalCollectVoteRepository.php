@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -360,13 +361,16 @@ class ProposalCollectVoteRepository extends EntityRepository
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return array<AbstractVote>
+     */
     public function getVotesForProposal(
         Proposal $proposal,
-        ?int $limit,
-        ?string $field,
-        int $offset = 0,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $field = null,
         ?string $direction = 'ASC'
-    ): Paginator {
+    ): array {
         $query = $this->createQueryBuilder('pv')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
@@ -381,7 +385,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             $query->setFirstResult($offset);
         }
 
-        return new Paginator($query);
+        return $query->getQuery()->getResult();
     }
 
     public function countPointsOnPublishedCollectVoteByStep(

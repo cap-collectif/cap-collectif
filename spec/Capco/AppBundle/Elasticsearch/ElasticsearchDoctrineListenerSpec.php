@@ -16,7 +16,9 @@ use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Resolver\EntityChangeSetResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -33,6 +35,8 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         LoggerInterface $logger,
         AbstractResponseRepository $responseRepository,
         ProposalRepository $proposalRepository,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
         OpinionRepository $opinionRepository,
         EntityChangeSetResolver $changeSetResolver
     ): void {
@@ -41,6 +45,8 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
             $logger,
             $responseRepository,
             $proposalRepository,
+            $proposalSelectionVoteRepository,
+            $proposalCollectVoteRepository,
             $opinionRepository,
             $changeSetResolver
         );
@@ -89,7 +95,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         ValueResponse $response,
         User $author,
         AbstractResponseRepository $responseRepository
-    ) {
+    ): void {
         $response->getId()->willReturn(10);
         $response->getValue()->willReturn('test');
         $response->getReply()->willReturn($reply);
@@ -141,6 +147,8 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
         ProposalRepository $proposalRepository,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
         OpinionRepository $opinionRepository,
         EntityChangeSetResolver $changeSetResolver,
         Project $project,
@@ -153,8 +161,6 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $proposal->getId()->willReturn('proposal1');
         $proposal->getProject()->willReturn($project);
-        $proposal->getSelectionVotes()->willReturn(new ArrayCollection());
-        $proposal->getCollectVotes()->willReturn(new ArrayCollection());
         $proposal->getComments()->willReturn(new ArrayCollection());
 
         $opinion->getId()->willReturn('opinion1');
@@ -168,8 +174,12 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $changeSetResolver->getEntityChangeSet($project)->willReturn($entityChangeSet);
 
-        $proposalRepository->getProposalsByProject('project1')->willReturn([$proposal]);
-        $opinionRepository->getOpinionsByProject('project1')->willReturn([$opinion]);
+        $proposalRepository->getProposalsByProject('project1', 200, 0)->willReturn([$proposal]);
+        $proposalRepository->getProposalsByProject('project1', 200, 200)->willReturn([])->shouldBeCalledOnce();
+        $proposalSelectionVoteRepository->getVotesForProposal($proposal, 200, 0)->willReturn([])->shouldBeCalledOnce();
+        $proposalCollectVoteRepository->getVotesForProposal($proposal, 200, 0)->willReturn([])->shouldBeCalledOnce();
+        $opinionRepository->getOpinionsByProject('project1', 200, 0)->willReturn([$opinion]);
+        $opinionRepository->getOpinionsByProject('project1', 200, 200)->willReturn([])->shouldBeCalledOnce();
         $args->getObject()->willReturn($project);
 
         $this->handleEvent($args);
@@ -262,13 +272,17 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         ElasticsearchRabbitMQListener $listener,
         LifecycleEventArgs $args,
         Proposal $proposal,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
         User $author
     ): void {
         $proposal->getId()->willReturn('proposal1');
         $proposal->getAuthor()->willReturn($author);
         $proposal->getComments()->willReturn(new ArrayCollection());
-        $proposal->getCollectVotes()->willReturn(new ArrayCollection());
-        $proposal->getSelectionVotes()->willReturn(new ArrayCollection());
+        $proposalSelectionVoteRepository->getVotesForProposal($proposal, 200, 0)
+            ->willReturn([])->shouldBeCalledOnce();
+        $proposalCollectVoteRepository->getVotesForProposal($proposal, 200, 0)
+            ->willReturn([])->shouldBeCalledOnce();
 
         $author->getId()->willReturn('user1');
 
@@ -308,19 +322,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $this->handleEvent($args);
 
         $proposalCollectVoteMessage = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($vote->getWrappedObject()),
                 'id' => 'proposalCollectVote1',
             ])
         );
         $proposalMessage = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($proposal->getWrappedObject()),
                 'id' => 'proposal1',
             ])
         );
         $voteAuthorMessage = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($voteAuthor->getWrappedObject()),
                 'id' => 'user1',
             ])
@@ -338,19 +352,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         User $commentAuthor
     ): void {
         $commentMessage = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($comment->getWrappedObject()),
                 'id' => 'comment1',
             ])
         );
         $commentProposalMessage = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($commentProposal->getWrappedObject()),
                 'id' => 'proposal1',
             ])
         );
         $commentAuthorMessage = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($commentAuthor->getWrappedObject()),
                 'id' => 'user1',
             ])
@@ -383,7 +397,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $this->handleEvent($args);
 
         $message = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($projectDistrict->getWrappedObject()),
                 'id' => 'projectDistrict1',
             ])
@@ -402,7 +416,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $this->handleEvent($args);
 
         $message = new Message(
-            json_encode([
+            (string) json_encode([
                 'class' => \get_class($proposalDistrict->getWrappedObject()),
                 'id' => 'proposalDistrict1',
             ])

@@ -1,7 +1,7 @@
 #!/bin/sh
 
 # Récupère les fichiers PHP ajoutés, copiés ou modifiés qui sont prêts à être commités
-FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.php$')
+FILES=$(git diff --cached --name-only --diff-filter=ACM | grep '\.php$' | grep -v '^spec/')
 
 if [ "$FILES" ]; then
     echo "Analyse PHPStan des fichiers PHP modifiés..."

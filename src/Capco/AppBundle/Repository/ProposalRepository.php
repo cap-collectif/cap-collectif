@@ -764,13 +764,15 @@ class ProposalRepository extends EntityRepository
         return $query->getQuery()->getSingleScalarResult();
     }
 
-    public function getProposalsByProject(string $projectId): array
+    public function getProposalsByProject(string $projectId, ?int $limit = null, ?int $offset = null): array
     {
         $qb = $this->getQueryProposalWithProject();
         $qb->andWhere($qb->expr()->eq('pas.project', ':projectId'))->setParameter(
             ':projectId',
             $projectId
         );
+        $qb->setMaxResults($limit);
+        $qb->setFirstResult($offset);
 
         return $qb->getQuery()->getResult();
     }

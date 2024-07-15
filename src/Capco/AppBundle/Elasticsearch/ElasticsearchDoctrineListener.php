@@ -20,7 +20,9 @@ use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Repository\AbstractResponseRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Resolver\EntityChangeSetResolver;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\Common\Util\ClassUtils;
@@ -40,10 +42,13 @@ use Swarrot\Broker\Message;
  */
 class ElasticsearchDoctrineListener implements EventSubscriber
 {
+    private const BULK_SIZE = 200;
     private LoggerInterface $logger;
     private ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener;
     private AbstractResponseRepository $responseRepository;
     private ProposalRepository $proposalRepository;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
     private EntityChangeSetResolver $changeSetResolver;
     private OpinionRepository $opinionRepository;
 
@@ -52,6 +57,8 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         LoggerInterface $logger,
         AbstractResponseRepository $responseRepository,
         ProposalRepository $proposalRepository,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        ProposalCollectVoteRepository $proposalCollectVoteRepository,
         OpinionRepository $opinionRepository,
         EntityChangeSetResolver $changeSetResolver
     ) {
@@ -59,6 +66,8 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         $this->elasticsearchRabbitMQListener = $elasticsearchRabbitMQListener;
         $this->responseRepository = $responseRepository;
         $this->proposalRepository = $proposalRepository;
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
+        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->changeSetResolver = $changeSetResolver;
         $this->opinionRepository = $opinionRepository;
     }
@@ -152,18 +161,31 @@ class ElasticsearchDoctrineListener implements EventSubscriber
                 }
             }
 
-            if (
-                !empty(
-                    ($votes = array_merge(
-                        $entity->getSelectionVotes()->toArray(),
-                        $entity->getCollectVotes()->toArray()
-                    ))
-                )
-            ) {
-                foreach ($votes as $vote) {
+            $offset = 0;
+
+            do {
+                $selectionVotes = $this->proposalSelectionVoteRepository
+                    ->getVotesForProposal($entity, self::BULK_SIZE, $offset)
+                ;
+                /** @var AbstractVote $vote */
+                foreach ($selectionVotes as $vote) {
                     $this->process($vote, false);
                 }
-            }
+                $offset += self::BULK_SIZE;
+            } while (!empty($selectionVotes));
+
+            $offset = 0;
+
+            do {
+                $collectVotes = $this->proposalCollectVoteRepository
+                    ->getVotesForProposal($entity, self::BULK_SIZE, $offset)
+                ;
+                /** @var AbstractVote $vote */
+                foreach ($collectVotes as $vote) {
+                    $this->process($vote, false);
+                }
+                $offset += self::BULK_SIZE;
+            } while (!empty($collectVotes));
         }
 
         if ($entity instanceof Reply) {
@@ -177,24 +199,31 @@ class ElasticsearchDoctrineListener implements EventSubscriber
 
         if ($entity instanceof Project) {
             $entityChangeSet = $this->changeSetResolver->getEntityChangeSet($entity);
-            $entityChangeSetKeys = array_keys($entityChangeSet);
-            // If the project restrictedViewerGroups is changed it does not appears in the entity change set
-            // so we trigger the indexation anyway if there are no other changes.
-            if (empty($entityChangeSet) || \in_array('visibility', $entityChangeSetKeys, true)) {
-                $proposals = $this->proposalRepository->getProposalsByProject($entity->getId());
-                $opinions = $this->opinionRepository->getOpinionsByProject($entity->getId());
-                if (!empty($proposals)) {
+            // When visibility changes on project, all sub-data recursively (proposals, opinions, ...)
+            // must be reindexed to be accordingly visible/invisible in front office.
+            if (
+                \array_key_exists('visibility', $entityChangeSet)
+                || \array_key_exists('projectDistrictPositioners', $entityChangeSet)
+            ) {
+                $offset = 0;
+                do {
+                    $proposals = $this->proposalRepository->getProposalsByProject($entity->getId(), self::BULK_SIZE, $offset);
                     /** @var Proposal $proposal */
                     foreach ($proposals as $proposal) {
                         $this->process($proposal, false);
                     }
-                }
-                if (!empty($opinions)) {
+                    $offset += self::BULK_SIZE;
+                } while (!empty($proposals));
+
+                $offset = 0;
+                do {
+                    $opinions = $this->opinionRepository->getOpinionsByProject($entity->getId(), self::BULK_SIZE, $offset);
                     /** @var Opinion $opinion */
                     foreach ($opinions as $opinion) {
                         $this->process($opinion, false);
                     }
-                }
+                    $offset += self::BULK_SIZE;
+                } while (!empty($opinions));
             }
         }
 

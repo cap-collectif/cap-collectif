@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\AbstractVote;
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
@@ -186,13 +187,16 @@ class ProposalSelectionVoteRepository extends EntityRepository
         return $this->getCountsByProposalGroupedBySteps($proposal, true);
     }
 
+    /**
+     * @return array<AbstractVote>
+     */
     public function getVotesForProposal(
         Proposal $proposal,
-        ?int $limit,
-        string $field,
-        int $offset = 0,
+        ?int $limit = null,
+        ?int $offset = null,
+        ?string $field = null,
         string $direction = 'ASC'
-    ): Paginator {
+    ): array {
         $query = $this->createQueryBuilder('pv')
             ->andWhere('pv.proposal = :proposal')
             ->setParameter('proposal', $proposal)
@@ -206,7 +210,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             $query->setFirstResult($offset);
         }
 
-        return new Paginator($query);
+        return $query->getQuery()->getResult();
     }
 
     public function countVotesByProposal($proposalId, bool $includeUnpublished): int
