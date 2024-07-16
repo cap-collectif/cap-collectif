@@ -12,6 +12,7 @@ use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectMediatorsProposalsVotesCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
+use Capco\AppBundle\Command\ExportDebateCommand;
 use Capco\AppBundle\Command\ExportDebateContributionsCommand;
 use Capco\AppBundle\Command\Service\CronTimeInterval;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
@@ -72,6 +73,7 @@ class ExportController extends Controller
     private ContributionsFilePathResolver $contributionsFilePathResolver;
     private SessionInterface $session;
     private CronTimeInterval $cronTimeInterval;
+    private string $projectDir;
 
     public function __construct(
         GraphQlAclListener $aclListener,
@@ -88,7 +90,8 @@ class ExportController extends Controller
         SessionInterface $session,
         CronTimeInterval $cronTimeInterval,
         string $exportDir,
-        string $locale
+        string $locale,
+        string $projectDir
     ) {
         $this->flashBag = $flashBag;
         $this->translator = $translator;
@@ -105,6 +108,7 @@ class ExportController extends Controller
         $this->contributionsFilePathResolver = $contributionsFilePathResolver;
         $this->session = $session;
         $this->cronTimeInterval = $cronTimeInterval;
+        $this->projectDir = $projectDir;
     }
 
     /**
@@ -427,6 +431,39 @@ class ExportController extends Controller
      * @Security("has_role('ROLE_PROJECT_ADMIN')")
      */
     public function downloadArgumentsAction(
+        Request $request,
+        string $debateId,
+        string $type
+    ): Response {
+        $debateId = GlobalId::fromGlobalId($debateId)['id'];
+
+        $user = $this->getUser();
+        $isProjectAdmin = $user->isOnlyProjectAdmin();
+
+        $fileName = ExportDebateCommand::getFilename($debateId, $type, $isProjectAdmin);
+        $filePath = $this->projectDir . '/public/export/' . $fileName;
+
+        if (!file_exists($filePath)) {
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->translator->trans('project.download.not_yet_generated'))
+            ;
+
+            return $this->redirect($request->headers->get('referer'));
+        }
+        $date = (new \DateTime())->format('Y-m-d');
+
+        $response = $this->file($filePath, $date . '_' . $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/debate/{debateId}/download-contributions/{type}", name="app_debate_contributions_download", options={"i18n" = false})
+     * @Security("has_role('ROLE_PROJECT_ADMIN')")
+     */
+    public function downloadDebateContributionAction(
         Request $request,
         string $debateId,
         DebateRepository $debateRepository
