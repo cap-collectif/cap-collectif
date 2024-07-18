@@ -4,7 +4,8 @@ matchers:
   - spec\Matcher\BeAnEmptyCollectionMatcher
 extensions:
   FriendsOfPhpSpec\PhpSpec\CodeCoverage\CodeCoverageExtension:
-    format: [clover, html]
+    format: [clover, html, php]
     output:
       clover: coverage/php/clover.xml
+      php: coverage/php/phpspec-php.cov
       html: coverage/php/html

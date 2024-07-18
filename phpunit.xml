@@ -25,6 +25,11 @@
         </whitelist>
     </filter>
 
+    <logging>
+        <log type="coverage-php" target="coverage/php/phpunit-php.cov" />
+        <log type="coverage-html" target="coverage/php/phpunit" />
+    </logging>
+
     <php>
         <env name="KERNEL_CLASS" value="App\Kernel" />
     </php>

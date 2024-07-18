@@ -184,7 +184,8 @@
         "phpcompatibility/php-compatibility": "^9.3",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
         "icanhazstring/composer-unused": "^0.8.9",
-        "mikey179/vfsstream": "^1.6"
+        "mikey179/vfsstream": "^1.6",
+        "phpunit/phpcov": "^6.0"
     },
     "config": {
         "bin-dir": "bin",

@@ -1,0 +1,375 @@
+#-------------------------------------------------------------------------------#
+#               Qodana analysis is configured by qodana.yaml file               #
+#             https://www.jetbrains.com/help/qodana/qodana-yaml.html            #
+#-------------------------------------------------------------------------------#
+version: "1.0"
+profile:
+    name: qodana.recommended
+php:
+    version: '7.4'
+plugins:
+    - id: de.espend.idea.php.annotation # PHP Annotations (Symfony dependency do not change order)
+    - id: fr.adrienbrault.idea.symfony2plugin # Symfony
+    - id: com.kalessil.phpStorm.phpInspectionsEA # Php Inspections Extended (Free)
+#    - id: com.kalessil.phpStorm.phpInspectionsUltimate-mp # Php Inspections Extended (Premium)
+    - id: com.funivan.idea.phpClean # PhpClean
+    - id: org.sonarlint.idea # Sonarlint
+    - id: com.intellij.grazie.pro # Grazie Pro (Spellchecker)
+linter: jetbrains/qodana-php:2024.1
+bootstrap: |
+    composer install --ignore-platform-reqs
+exclude:
+    - name: UnnecessarySemicolonInspection
+include:
+    # General
+    - name: DuplicatedCode
+    # PHP/General
+    - name: PhpDeprecationInspection
+    - name: PhpParameterNameChangedDuringInheritanceInspection
+    - name: PhpDynamicAsStaticMethodCallInspection
+    # PHP/Code Smell
+    - name: PhpInArrayCanBeReplacedWithComparisonInspection
+    - name: PhpClassConstantAccessedViaChildClassInspection
+    - name: PhpInconsistentReturnPointsInspection
+    - name: PhpSameParameterValueInspection
+    - name: PhpMethodParametersCountMismatchInspection
+    - name: PhpPrivateFieldCanBeLocalVariableInspection
+    - name: PhpPropertyOnlyWrittenInspection
+    - name: PhpUnnecessaryStringCastInspection
+    - name: PhpRedundantMethodOverrideInspection
+    - name: PhpRedundantOptionalArgumentInspection
+    - name: PhpTernaryExpressionCanBeReplacedWithConditionInspection
+    - name: PhpTernaryExpressionCanBeReducedToShortVersionInspection
+    - name: PhpUnnecessaryStopStatementInspection
+    - name: PhpUnnecessaryLocalVariableInspection
+    - name: PhpConcatenationWithEmptyStringCanBeInlinedInspection
+    - name: PhpArrayToStringConversionInspection
+    - name: PhpReturnValueOfMethodIsNeverUsedInspection
+    - name: PhpPointlessBooleanExpressionInConditionInspection
+    - name: PhpParameterByRefIsNotUsedAsReferenceInspection
+    - name: PhpArrayUsedOnlyForWriteInspection
+    - name: PhpUnnecessaryBoolCastInspection
+    - name: PhpSwitchStatementWitSingleBranchInspection
+    - name: PhpUnnecessaryStaticReferenceInspection
+    - name: PhpArrayAccessCanBeReplacedWithForeachValueInspection
+    - name: PhpLoopCanBeReplacedWithStrRepeatInspection
+    # PHP/Code Style
+    - name: PhpIllegalPsrClassPathInspection
+    - name: PhpFullyQualifiedNameUsageInspection
+    - name: PhpDocMissingThrowsInspection
+    - name: PhpUnnecessaryCurlyVarSyntaxInspection
+    - name: PhpIssetCanCheckNestedAccessDirectlyInspection
+    - name: PhpCastIsUnnecessaryInspection
+    - name: PhpUnnecessaryFullyQualifiedNameInspection
+    - name: PhpVariableIsUsedOnlyInClosureInspection
+    - name: PhpPluralMixedCanBeReplacedWithArrayInspection
+    # PHP/Unused symbols
+    - name: PhpUnusedFieldDefaultValueInspection
+    - name: PhpUnusedAliasInspection
+    - name: PhpUnusedLocalVariableInspection
+    - name: PhpUnusedParameterInspection
+    - name: PhpUnusedPrivateMethodInspection
+    - name: PhpUnusedPrivateFieldInspection
+    # PHP/Type compatibility
+    - name: PhpMissingParamTypeInspection
+    - name: PhpMissingFieldTypeInspection
+    - name: PhpMissingReturnTypeInspection
+    # PHP/Composer
+    - name: PhpComposerExtensionStubsInspection
+    # PHP/Control flow
+    - name: PhpConditionAlreadyCheckedInspection
+    - name: PhpExpressionAlwaysNullInspection
+    - name: PhpUnreachableStatementInspection
+    - name: PhpArrayWriteIsNotUsedInspection
+    - name: PhpInstanceofIsAlwaysTrueInspection
+    - name: PhpConditionCheckedByNextConditionInspection
+    - name: PhpIfWithCommonPartsInspection
+    # PHP/PHPDoc
+    - name: PhpInappropriateInheritDocUsageInspection
+    - name: PhpDocSignatureInspection
+    - name: PhpDocRedundantThrowsInspection
+    - name: PhpRedundantVariableDocTypeInspection
+    - name: PhpReturnDocTypeMismatchInspection
+    - name: PhpDocFieldTypeMismatchInspection
+    - name: PhpVarTagWithoutVariableNameInspection
+    # PHP/PHPDoc/Code Style
+    - name: PhpDocSignatureIsNotCompleteInspection
+    # PHP/Probale bugs
+    - name: PhpMissingParentConstructorInspection
+    - name: PhpStatementHasEmptyBodyInspection
+    # PHP/Error handling
+    - name: PhpUnhandledExceptionInspection
+    # PHP/RegExp
+    - name: RegExpSimplifiable
+    # PHP/Undefined symbols
+    - name: PhpDynamicFieldDeclarationInspection
+    - name: PhpPossiblePolymorphicInvocationInspection
+    # Symfony
+    - name: AutowireControllerAsService
+    - name: AutowireWrongClass
+    - name: CommandStaticDeprecation
+    - name: ConstructorCommandHeavyConstructor
+    - name: ConstructorDeprecatedInjection
+    - name: ConstructorNoRequestStack
+    - name: ConstructorNoSession
+    - name: ConstructorNoToken
+    - name: ConstructorNoUser
+    - name: ControllerActionMissingExit
+    - name: ConstructorTwigExtensionHeavyConstructor
+    - name: DoctrineClearParameterDeprecation
+    - name: DoctrineOneToManyMappedByRequired
+    - name: DoctrineOneToOneOwingSideDeprecation
+    - name: DoctrineQueryBuilderAdder
+    - name: FirstClassCallable
+    - name: FormTypeBuilderInstance
+    - name: ProjectDirParameter
+    - name: RequestStackInAction
+    - name: RouteAttributeNamespaceDeprecated
+    - name: TwigWithExtendsWithRootHtml
+    - name: UseControllerShortcuts
+    # Symfony/Service
+    - name: ContainerConstantXml
+    - name: ContainerConstantYaml
+    - name: ContainerSettingDeprecatedInspectionXml
+    - name: ContainerSettingDeprecatedInspectionYaml
+    - name: DeprecatedClassesPhp
+    - name: DeprecatedClassesXml
+    - name: DeprecatedClassesYaml
+    - name: EventMethodCall
+    - name: MissingServiceXml
+    - name: MissingServiceYaml
+    - name: Symfony2XmlDuplicateParameterKeyInspection
+    - name: Symfony2XmlDuplicateServiceKeyInspection
+    - name: Symfony2YamlDuplicateParameterKeyInspection
+    - name: Symfony2YamlDuplicateServiceKeyInspection
+    - name: TaggedExtendsInterfaceClassXml
+    - name: TaggedExtendsInterfaceClassYaml
+    - name: XmlServiceArgumentInspection
+    - name: XmlServiceInstanceInspection
+    - name: ServiceNamedArgumentExistsInspection
+    - name: YamlServiceArgumentInspection
+    - name: YamlXmlServiceInstanceInspection
+    - name: YamlParameterInspection
+    - name: YamlClassInspection
+    # Symfony/Route
+    - name: ControllerMethodXml
+    - name: ControllerMethodYaml
+    - name: DuplicateLocalRouteInspection
+    - name: PhpRouteMissingInspection
+    - name: RouteControllerDeprecatedInspectionXml
+    - name: RouteControllerDeprecatedInspectionYaml
+    - name: RouteSettingDeprecatedInspectionXml
+    - name: RouteSettingDeprecatedInspectionYaml
+    - name: TwigRouteInspection
+    # Symfony/Form
+    - name: FormTypeAsClassConstant
+    # Symfony/Twig
+    - name: PhpTemplateMissingInspection
+    - name: TwigVariableDeprecatedInspection
+    - name: TwigVariablePathInspection
+    - name: TwigExtensionDeprecatedInspection
+    # Symfony/Translation
+    - name: PhpTranslationDomainInspection
+    - name: PhpTranslationKeyInspection
+    - name: TwigTranslationDomain
+    - name: TwigTranslationKeyInspection
+    # Symfony/Asset
+    - name: PhpAssetMissingInspection
+    - name: TemplateExistsAnnotationPhpAttributeLocalInspection
+    - name: TwigAssetMissingInspection
+    - name: TwigAssetsTagMissingInspection
+    - name: TwigForConditionDeprecated
+    - name: TwigPathReplacement
+    # Symfony/Yaml
+    - name: YamlQuotedEscapedInspection
+    - name: YamlUnquotedColon
+    # Symfony/Template
+    - name: TwigTemplateMissingInspection
+    # PHP Inspections Extended/Code Style
+    - name: AccessModifierPresentedInspection
+    - name: ComparisonOperandsOrderInspection
+    - name: DisallowWritingIntoStaticPropertiesInspection
+    - name: DynamicInvocationViaScopeResolutionInspection
+    - name: ImplodeArgumentsOrderInspection
+    - name: IncrementDecrementOperationEquivalentInspection
+    - name: IsEmptyFunctionUsageInspection
+    - name: IsNullFunctionUsageInspection
+    - name: MisorderedModifiersInspection
+    - name: MissUsingParentKeywordInspection
+    - name: MissingOrEmptyGroupStatementInspection
+    - name: NestedAssignmentsUsageInspection
+    - name: NestedNotOperatorsInspection
+    - name: NestedPositiveIfStatementsInspection
+    - name: OpAssignShortSyntaxInspection
+    - name: ProperNullCoalescingOperatorUsageInspection
+    - name: ParameterDefaultValueIsNotNullInspection
+    - name: SelfClassReferencingInspection
+    - name: ShortEchoTagCanBeUsedInspection
+    - name: ShortOpenTagUsageInspection
+    - name: StaticClosureCanBeUsedInspection
+    - name: StaticInvocationViaThisInspection
+    - name: UnNecessaryDoubleQuotesInspection
+    - name: UnnecessaryCastingInspection
+    - name: UnnecessaryFinalModifierInspection
+    - name: UnnecessaryUseAliasInspection
+    - name: UnsetConstructsCanBeMergedInspection
+    - name: UsingInclusionReturnValueInspection
+    # PHP Inspections Extended/Language level migration
+    - name: AliasFunctionsUsageInspection
+    - name: ArgumentUnpackingCanBeUsedInspection
+    - name: ArrayIsListCanBeUsedInspection
+    - name: CascadingDirnameCallsInspection
+    - name: ConstantCanBeUsedInspection
+    - name: DeprecatedConstructorStyleInspection
+    - name: DirectoryConstantCanBeUsedInspection
+    - name: DynamicCallsToScopeIntrospectionInspection
+    - name: ElvisOperatorCanBeUsedInspection
+    - name: GetClassUsageInspection
+    - name: GetDebugTypeCanBeUsedInspection
+    - name: InstanceofCanBeUsedInspection
+    - name: IsCountableCanBeUsedInspection
+    - name: IsIterableCanBeUsedInspection
+    - name: NullCoalescingOperatorCanBeUsedInspection
+    - name: PowerOperatorCanBeUsedInspection
+    - name: ReturnTypeCanBeDeclaredInspection
+    - name: ShortListSyntaxCanBeUsedInspection
+    - name: StrContainsCanBeUsedInspection
+    - name: StrEndsWithCanBeUsedInspection
+    - name: StrStartsWithCanBeUsedInspection
+    - name: TypesCastingCanBeUsedInspection
+    - name: UnsupportedEmptyListAssignmentsInspection
+    - name: UnsupportedStringOffsetOperationsInspection
+    # PHP Inspections Extended/Performance
+    - name: AlterInForeachInspection
+    - name: AmbiguousMethodsCallsInArrayMappingInspection
+    - name: ArrayPushMissUseInspection
+    - name: CascadeStringReplacementInspection
+    - name: CaseInsensitiveStringFunctionsMissUseInspection
+    - name: FixedTimeStartWithInspection
+    - name: NotOptimalRegularExpressionsInspection
+    - name: PackedHashtableOptimizationInspection
+    - name: InArrayMissUseInspection
+    - name: SlowArrayOperationsInLoopInspection
+    - name: StrStrUsedAsStrPosInspection
+    - name: StrtotimeUsageInspection
+    - name: SubStrShortHandUsageInspection
+    - name: SubStrUsedAsArrayAccessInspection
+    - name: UnqualifiedReferenceInspection
+    - name: VariableFunctionsUsageInspection
+    # PHP Inspections Extended/Control flow
+    - name: ArraySearchUsedAsInArrayInspection
+    - name: ArrayUniqueCanBeUsedInspection
+    - name: CompactCanBeUsedInspection
+    - name: DegradedSwitchInspection
+    - name: DisconnectedForeachInstructionInspection
+    - name: UnSafeIsSetOverArrayInspection
+    - name: ForeachInvariantsInspection
+    - name: GetTypeMissUseInspection
+    - name: IfReturnReturnSimplificationInspection
+    - name: InvertedIfElseConstructsInspection
+    - name: IssetConstructsCanBeMergedInspection
+    - name: LoopWhichDoesNotLoopInspection
+    - name: MultiAssignmentUsageInspection
+    - name: NotOptimalIfConditionsInspection
+    - name: ObGetCleanCanBeUsedInspection
+    - name: OneTimeUseVariablesInspection
+    - name: PdoApiUsageInspection
+    - name: RedundantElseClauseInspection
+    - name: StrTrUsageAsStrReplaceInspection
+    - name: StringCaseManipulationInspection
+    - name: StringNormalizationInspection
+    - name: StrlenInEmptyStringCheckContextInspection
+    - name: SubStrUsedAsStrPosInspection
+    - name: TernaryOperatorSimplifyInspection
+    - name: ThrowRawExceptionInspection
+    # PHP Inspections Extended/Probable bugs
+    - name: AutoloadingIssuesInspection
+    - name: CallableMethodValidityInspection
+    - name: ClassConstantUsageCorrectnessInspection
+    - name: ClassMockingCorrectnessInspection
+    - name: CompactArgumentsInspection
+    - name: DateIntervalSpecificationInspection
+    - name: DateTimeConstantsUsageInspection
+    - name: DateTimeSetTimeUsageInspection
+    - name: DuplicateArrayKeysInspection
+    - name: ForgottenDebugOutputInspection
+    - name: NullPointerExceptionInspection
+    - name: PassingByReferenceCorrectnessInspection
+    - name: PregQuoteUsageInspection
+    - name: PreloadingUsageCorrectnessInspection
+    - name: PrintfScanfArgumentsInspection
+    - name: IncorrectRandomRangeInspection
+    - name: InfinityLoopInspection
+    - name: IssetArgumentExistenceInspection
+    - name: JsonEncodingApiUsageInspection
+    - name: MagicMethodsValidityInspection
+    - name: MissingArrayInitializationInspection
+    - name: MissingIssetImplementationInspection
+    - name: MkdirRaceConditionInspection
+    - name: RealpathInStreamContextInspection
+    - name: SimpleXmlLoadFileUsageInspection
+    - name: StaticLambdaBindingInspection
+    - name: StringsFirstCharactersCompareInspection
+    - name: SuspiciousAssignmentsInspection
+    - name: SuspiciousBinaryOperationInspection
+    - name: SuspiciousFunctionCallsInspection
+    - name: SuspiciousLoopInspection
+    - name: SuspiciousReturnInspection
+    - name: SuspiciousSemicolonInspection
+    - name: SwitchContinuationInLoopInspection
+    - name: TraitsPropertiesConflictsInspection
+    - name: UsingInclusionOnceReturnValueInspection
+    # PHP Inspections Extended/Security
+    - name: BacktickOperatorUsageInspection
+    - name: CryptographicallySecureAlgorithmsInspection
+    - name: CryptographicallySecureRandomnessInspection
+    - name: CurlSslServerSpoofingInspection
+    - name: NonSecureParseStrUsageInspection
+    - name: NonSecureUniqidUsageInspection
+    - name: SecurityAdvisoriesInspection
+    - name: UnserializeExploitsInspection
+    - name: UntrustedInclusionInspection
+    - name: EncryptionInitializationVectorRandomnessInspection
+    - name: HostnameSubstitutionInspection
+    - name: PotentialMalwareInspection
+    # PHP Inspections Extended/Architecture
+    - name: BadExceptionsProcessingInspection
+    - name: CallableParameterUseCaseInTypeContextInspection
+    - name: ClassConstantCanBeUsedInspection
+    - name: ClassOverridesFieldOfSuperClassInspection
+    - name: ClassReImplementsParentInterfaceInspection
+    - name: EfferentObjectCouplingInspection
+    - name: EmptyClassInspection
+    - name: LongInheritanceChainInspection
+    - name: MultipleReturnStatementsInspection
+    - name: PropertyCanBeStaticInspection
+    # PHP Inspections Extended/Confusing constructs
+    - name: ClassMethodNameMatchesFieldNameInspection
+    - name: NestedTernaryOperatorInspection
+    - name: ReferencingObjectsInspection
+    - name: SenselessTernaryOperatorInspection
+    - name: UselessReturnInspection
+    # PHP Inspections Extended/Unused
+    - name: DateUsageInspection
+    - name: OnlyWritesOnParameterInspection
+    - name: PropertyInitializationFlawsInspection
+    - name: SenselessMethodDuplicationInspection
+    - name: SenselessProxyMethodInspection
+    - name: UnknownInspectionInspection
+    - name: UnnecessaryIssetArgumentsInspection
+    - name: UnusedConstructorDependenciesInspection
+    - name: UnusedGotoLabelInspection
+    - name: UselessUnsetInspection
+    # PHP Inspections Extended/Compatibility
+    - name: DeprecatedIniOptionsInspection
+    - name: FopenBinaryUnsafeUsageInspection
+    - name: MktimeUsageInspection
+    - name: RandomApiMigrationInspection
+    # PHP Inspections Extended/PHPUnit
+    - name: MockingMethodsCorrectnessInspection
+    - name: PhpUnitDeprecationsInspection
+    - name: PhpUnitTestsInspection
+    - name: UnnecessaryAssertionInspection
+    # PHP Inspections Extended/Type compatibility
+    - name: TypeUnsafeArraySearchInspection
+    - name: TypeUnsafeComparisonInspection
