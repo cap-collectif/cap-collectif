@@ -16,8 +16,14 @@ plugins:
     - id: org.sonarlint.idea # Sonarlint
     - id: com.intellij.grazie.pro # Grazie Pro (Spellchecker)
 linter: jetbrains/qodana-php:2024.1
-bootstrap: |
-    composer install --ignore-platform-reqs
+failureConditions:
+    severityThresholds:
+        any: 10
+        critical: 0
+        high: 0
+        moderate: 6
+        low: 9
+bootstrap: composer install -q --no-interaction --no-progress --classmap-authoritative --ignore-platform-reqs
 exclude:
     - name: UnnecessarySemicolonInspection
 include:
