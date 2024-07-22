@@ -13819,6 +13819,9 @@ type Query {
 
   """The navbar menu items."""
   menuItems: [MenuItem!]!
+
+  """List of user types."""
+  userTypes: [UserType!]!
 }
 
 input QueryAnalyticsFilter {
@@ -20640,7 +20643,7 @@ enum UserRole {
 }
 
 """A type of person"""
-type UserType {
+type UserType implements Node {
   """The id of the type."""
   id: ID!
 

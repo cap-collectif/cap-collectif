@@ -58,6 +58,7 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\RequirementTypeResolver;
 use Capco\AppBundle\GraphQL\Resolver\Response\ResponseResolver;
 use Capco\AppBundle\GraphQL\Resolver\TypeResolver;
 use Capco\UserBundle\Entity\User;
+use Capco\UserBundle\Entity\UserType;
 use GraphQL\Type\Definition\Type;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Error\UserError;
@@ -340,6 +341,10 @@ class NodeTypeResolver implements QueryInterface
 
         if ($node instanceof MenuItem) {
             return $this->typeResolver->resolve('InternalMenuItem');
+        }
+
+        if ($node instanceof UserType) {
+            return $this->typeResolver->resolve('UserType');
         }
 
         throw new UserError('Could not resolve type of Node.');

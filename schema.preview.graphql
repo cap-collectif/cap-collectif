@@ -2178,7 +2178,7 @@ type UserReplyEdge {
 }
 
 """A type of person"""
-type UserType {
+type UserType implements Node {
   """The id of the type."""
   id: ID!
 

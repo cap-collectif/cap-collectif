@@ -1,6 +1,10 @@
 UserType:
     type: object
+    inherits:
+        - Node
     config:
+        interfaces:
+            - Node
         description: 'A type of person'
         fields:
             id:

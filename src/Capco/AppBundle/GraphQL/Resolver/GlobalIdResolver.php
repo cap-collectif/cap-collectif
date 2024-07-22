@@ -64,6 +64,7 @@ use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
+use Capco\UserBundle\Repository\UserTypeRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
@@ -428,6 +429,11 @@ class GlobalIdResolver
 
                 case 'MenuItem':
                     $node = $this->container->get(MenuItemRepository::class)->find($uuid);
+
+                    break;
+
+                case 'UserType':
+                    $node = $this->container->get(UserTypeRepository::class)->find($uuid);
 
                     break;
 

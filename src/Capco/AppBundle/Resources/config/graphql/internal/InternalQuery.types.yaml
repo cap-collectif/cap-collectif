@@ -608,4 +608,8 @@ InternalQuery:
                 type: '[InternalMenuItem!]!'
                 description: 'The navbar menu items.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemsResolver", [args])'
+            userTypes:
+                type: '[UserType!]!'
+                description: 'List of user types.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserTypesResolver")'
 

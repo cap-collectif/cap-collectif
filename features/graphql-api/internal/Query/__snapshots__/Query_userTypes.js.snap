@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.userTypes fetches all user types 1`] = `
+Object {
+  "userTypes": Array [
+    Object {
+      "id": "1",
+      "name": "Citoyen",
+    },
+    Object {
+      "id": "2",
+      "name": "Organisation à but lucratif",
+    },
+    Object {
+      "id": "3",
+      "name": "Organisation à but non lucratif",
+    },
+    Object {
+      "id": "4",
+      "name": "Institution",
+    },
+  ],
+}
+`;
