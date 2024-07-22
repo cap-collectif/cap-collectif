@@ -26,6 +26,13 @@ failureConditions:
 bootstrap: composer install -q --no-interaction --no-progress --classmap-authoritative --ignore-platform-reqs
 exclude:
     - name: UnnecessarySemicolonInspection
+    - name: MethodShouldBeFinalInspection
+    - name: PhpFullyQualifiedNameUsageInspection
+    - name: ComparisonOperandsOrderInspection
+    - name: All
+      paths:
+          - spec
+          - src/Capco/AppBundle/Behat
 include:
     # General
     - name: DuplicatedCode
@@ -61,7 +68,6 @@ include:
     - name: PhpLoopCanBeReplacedWithStrRepeatInspection
     # PHP/Code Style
     - name: PhpIllegalPsrClassPathInspection
-    - name: PhpFullyQualifiedNameUsageInspection
     - name: PhpDocMissingThrowsInspection
     - name: PhpUnnecessaryCurlyVarSyntaxInspection
     - name: PhpIssetCanCheckNestedAccessDirectlyInspection
@@ -193,7 +199,6 @@ include:
     - name: TwigTemplateMissingInspection
     # PHP Inspections Extended/Code Style
     - name: AccessModifierPresentedInspection
-    - name: ComparisonOperandsOrderInspection
     - name: DisallowWritingIntoStaticPropertiesInspection
     - name: DynamicInvocationViaScopeResolutionInspection
     - name: ImplodeArgumentsOrderInspection
