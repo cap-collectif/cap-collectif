@@ -3,22 +3,7 @@
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     className="sc-bcXGCL jRgIZE cap-card"
@@ -117,22 +102,7 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     className="sc-bcXGCL jRgIZE cap-card"
@@ -231,22 +201,7 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     className="sc-bcXGCL enPTBa cap-card"
@@ -342,22 +297,7 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     className="sc-bcXGCL jRgIZE cap-card"
@@ -463,22 +403,7 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     className="sc-bcXGCL enPTBa cap-card"

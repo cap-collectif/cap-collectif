@@ -3,22 +3,7 @@
 exports[`<DebateStepPageVote/> should renders correctly 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL dOygWu"
@@ -79,22 +64,7 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly when not authenticated 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL dOygWu"
@@ -315,22 +285,7 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly with anonymous participation 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL dOygWu"
@@ -391,22 +346,7 @@ Array [
 exports[`<DebateStepPageVote/> should renders correctly with email not confirmed argument 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL dOygWu"

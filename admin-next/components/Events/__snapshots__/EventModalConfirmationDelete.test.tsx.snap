@@ -3,22 +3,7 @@
 exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-g"
@@ -95,22 +80,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
 exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> should render modal open 1`] = `
 [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-g"
@@ -198,10 +168,11 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
           className="sc-bcXGCL gcFVlf cap-modal__header"
         >
           <div
-            className="sc-bcXGCL jqamMl"
+            className="sc-bcXGCL dEoIxI"
           >
             <h2
               className="sc-bcXGCL jvuiiv cap-heading"
+              id="modal-title"
               style={
                 {
                   "marginLeft": 0,
@@ -213,6 +184,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
             </h2>
           </div>
           <button
+            aria-describedby="modal-title"
             className="sc-bcXGCL kvTszR"
             onClick={[Function]}
             type="button"

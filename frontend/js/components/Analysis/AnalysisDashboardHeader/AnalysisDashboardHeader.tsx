@@ -73,7 +73,7 @@ const USER_SEARCH_QUERY = graphql`
 `
 export const loadOptions = (terms: string): Promise<ReadonlyArray<any>> =>
   new Promise(async resolve => {
-    const response = await fetchQuery_DEPRECATED(environment, USER_SEARCH_QUERY, {
+    const response = await fetchQuery_DEPRECATED(environment as any, USER_SEARCH_QUERY, {
       terms,
     })
     resolve(response.results)

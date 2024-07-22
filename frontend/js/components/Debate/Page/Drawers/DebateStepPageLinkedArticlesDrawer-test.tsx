@@ -97,8 +97,8 @@ describe('<DebateStepPageLinkedArticlesDrawer />', () => {
     }
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, emptyMockResolvers))
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    // Length 6 for the toast container
-    expect(testComponentTree.toJSON()).toHaveLength(6)
+    expect(testComponentTree.toJSON().props.className.includes('toasts-container')).toBe(true)
+    expect(testComponentTree.toJSON().children).toBeNull()
   })
   it('should render nothing when API could not load articles', async () => {
     const erroredMockResolvers = {
@@ -110,10 +110,12 @@ describe('<DebateStepPageLinkedArticlesDrawer />', () => {
     }
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, erroredMockResolvers))
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    expect(testComponentTree.toJSON()).toHaveLength(6)
+    expect(testComponentTree.toJSON().props.className.includes('toasts-container')).toBe(true)
+    expect(testComponentTree.toJSON().children).toBeNull()
   })
   it('should render nothing when closed', async () => {
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    expect(testComponentTree.toJSON()).toHaveLength(6)
+    expect(testComponentTree.toJSON().props.className.includes('toasts-container')).toBe(true)
+    expect(testComponentTree.toJSON().children).toBeNull()
   })
 })

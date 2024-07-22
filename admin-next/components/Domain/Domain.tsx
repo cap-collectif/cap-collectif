@@ -98,7 +98,6 @@ const Domain: FC = () => {
       if (siteSettings?.status === 'ACTIVE' && siteSettings.customDomain) {
         toast({
           variant: 'success',
-          duration: 30000,
           content: intl.formatMessage({ id: 'custom.domain.redirect' }, { customDomain: siteSettings.customDomain }),
         })
         // we add a timeout to let the user see the toast and not redirect him too quickly

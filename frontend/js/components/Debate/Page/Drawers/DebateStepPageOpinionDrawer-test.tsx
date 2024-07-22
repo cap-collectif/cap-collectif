@@ -81,6 +81,8 @@ describe('<DebateStepPageOpinionDrawer />', () => {
   })
   it('should render nothing when closed', async () => {
     testComponentTree = ReactTestRenderer.create(<TestComponent isOpen={false} onClose={onClose} />)
-    expect(testComponentTree.toJSON()).toHaveLength(6)
+
+    expect(testComponentTree.toJSON().props.className.includes('toasts-container')).toBe(true)
+    expect(testComponentTree.toJSON().children).toBeNull()
   })
 })

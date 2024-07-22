@@ -3,22 +3,7 @@
 exports[`<DebateStepPageVoteAndShare/> renders correctly 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL gLHYlq"
@@ -44,22 +29,7 @@ Array [
 exports[`<DebateStepPageVoteAndShare/> renders correctly on mobile 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL gLHYlq"
@@ -85,22 +55,7 @@ Array [
 exports[`<DebateStepPageVoteAndShare/> renders correctly when anonymous participation allowed 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL gLHYlq"
@@ -126,22 +81,7 @@ Array [
 exports[`<DebateStepPageVoteAndShare/> renders correctly when viewer not confirmed 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     class="sc-bcXGCL gLHYlq"

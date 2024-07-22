@@ -90,14 +90,12 @@ const onSubmit = (values: FormValues, _dispatch, { proposalId, proposalType, isA
             id={proposalType.isProposalUsingAnySocialNetworks ? 'external-links-edited' : 'external-links-published'}
           />
         ),
-        duration: 2500,
       })
     })
     .catch(() => {
       toast({
         variant: 'danger',
         content: <FormattedMessage id="error-download-timeout" />,
-        duration: 2500,
       })
       throw new SubmissionError({
         _error: 'global.error.server.form',

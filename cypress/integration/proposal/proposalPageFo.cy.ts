@@ -50,7 +50,7 @@ describe('Proposal Page', () => {
       cy.get('#proposal-page-tabs-pane-followers').contains('Théo QP')
     })
     it('is possible to contact the author of a proposal', () => {
-      cy.interceptGraphQLOperation({operationName: 'ContactProposalAuthorMutation'})
+      cy.interceptGraphQLOperation({ operationName: 'ContactProposalAuthorMutation' })
       ProposalPage.visitContactableProposalPage()
       cy.get('#ProposalContactModal-show-button').click()
       cy.get('#ProposalContactModalForm', { timeout: 10000 })
@@ -63,28 +63,27 @@ describe('Proposal Page', () => {
     })
   })
   it('should be possible to see every private proposal as a member of an organization', () => {
-    cy.directLoginAs('christophe');
+    cy.directLoginAs('christophe')
     ProposalPage.visitCollectStepPage({
-      'project':'budget-participatif-dorganisation', 
-      'step':'collecte-des-propositions-privee'
-    });
+      project: 'budget-participatif-dorganisation',
+      step: 'collecte-des-propositions-privee',
+    })
     cy.get('.proposal-preview-list')
       .should('be.visible')
       .children()
       .should('have.length', 2)
-      .should('contain', 'Proposition de Valérie');
+      .should('contain', 'Proposition de Valérie')
   })
   it('should be possible to see only my proposal as not a member of an organization', () => {
-    cy.directLoginAs('user');
+    cy.directLoginAs('user')
     ProposalPage.visitCollectStepPage({
-      'project':'budget-participatif-dorganisation', 
-      'step':'collecte-des-propositions-privee'
-    });
+      project: 'budget-participatif-dorganisation',
+      step: 'collecte-des-propositions-privee',
+    })
     cy.get('.proposal-preview-list')
       .should('be.visible')
       .children()
       .should('have.length', 1)
       .should('not.contain', 'Proposition de Valérie')
-    ;
   })
 })

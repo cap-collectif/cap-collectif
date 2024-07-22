@@ -192,4 +192,42 @@ export default new (class AdminProjectPage {
   get saveButton() {
     return this.cy.contains('global.save')
   }
+
+  get selectAllRows() {
+    return this.cy.get('#allRows')
+  }
+
+  get mergeButton() {
+    return this.cy.get('#merge-button')
+  }
+
+  get mergeTitleInput() {
+    return this.cy.get(`input[id="merge.title"]`)
+  }
+
+  get mergeBodyInput() {
+    return this.cy.get(`div[class="jodit-wysiwyg"]`)
+  }
+
+  get mergeModal() {
+    return this.cy.get('.modal-dialog')
+  }
+
+  viewMergeModal() {
+    this.mergeModal.should('be.visible')
+  }
+
+  get contributionList() {
+    return this.cy.get('.pickableList-row')
+  }
+
+  mergeRows() {
+    this.contributionList.should('not.contain', 'badge.merged')
+    this.selectAllRows.click()
+    this.mergeButton.click()
+    this.viewMergeModal()
+    this.mergeTitleInput.click().type('Merged title')
+    this.mergeBodyInput.type('Merged body')
+    this.save()
+  }
 })()

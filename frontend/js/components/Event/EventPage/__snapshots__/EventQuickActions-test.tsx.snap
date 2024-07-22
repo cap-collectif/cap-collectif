@@ -3,22 +3,7 @@
 exports[`<EventQuickActions /> should render correctly with the right conditions 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     data-testid="Menu"
@@ -82,24 +67,7 @@ Array [
 `;
 
 exports[`<EventQuickActions /> should return nothing with the right conditions 1`] = `
-Array [
-  <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
-  />,
-]
+<div
+  className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+/>
 `;

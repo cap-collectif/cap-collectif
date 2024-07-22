@@ -3,22 +3,7 @@
 exports[`<LoginSocialButtons /> renders all buttons 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div>
     <p
@@ -184,47 +169,15 @@ Array [
 `;
 
 exports[`<LoginSocialButtons /> renders nothing 1`] = `
-Array [
-  <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
-  />,
-]
+<div
+  className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+/>
 `;
 
 exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div>
     <div
@@ -269,22 +222,7 @@ Array [
 exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div>
     <div
@@ -327,22 +265,7 @@ Array [
 exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div>
     <p
@@ -410,22 +333,7 @@ Array [
 exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div>
     <div
@@ -470,22 +378,7 @@ Array [
 exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div>
     <div
@@ -528,22 +421,7 @@ Array [
 exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div>
     <div

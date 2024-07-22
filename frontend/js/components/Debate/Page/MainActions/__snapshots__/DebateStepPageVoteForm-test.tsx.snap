@@ -3,22 +3,7 @@
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:0"
@@ -147,22 +132,7 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:0"
@@ -253,22 +223,7 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented not confirmed on mobile 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:1"
@@ -310,22 +265,7 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when argumented on mobile 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:1"
@@ -405,22 +345,7 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:0"
@@ -511,22 +436,7 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:0"
@@ -616,22 +526,7 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted anonymously on mobile 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:1"
@@ -672,22 +567,7 @@ Array [
 exports[`<DebateStepPageVoteForm/> should renders correctly when voted on mobile 1`] = `
 Array [
   <div
-    class="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    class="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    class="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    class="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    class="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    class="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     style="width:100%;opacity:1"

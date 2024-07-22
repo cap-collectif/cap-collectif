@@ -3,22 +3,7 @@
 exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="people-with-access-to-project"
@@ -113,22 +98,7 @@ Array [
 exports[`<UserInGroupModal /> should render correctly with user in load more 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="people-with-access-to-project"
@@ -223,22 +193,7 @@ Array [
 exports[`<UserInGroupModal /> should render correctly without user in group 1`] = `
 Array [
   <div
-    className="sc-bcXGCL klhoji toasts-container toasts-container--top"
-  />,
-  <div
-    className="sc-bcXGCL cUzULY toasts-container toasts-container--top-left"
-  />,
-  <div
-    className="sc-bcXGCL gbiIcr toasts-container toasts-container--top-right"
-  />,
-  <div
-    className="sc-bcXGCL iAUFHT toasts-container toasts-container--bottom"
-  />,
-  <div
-    className="sc-bcXGCL egFGdF toasts-container toasts-container--bottom-left"
-  />,
-  <div
-    className="sc-bcXGCL iXsWAS toasts-container toasts-container--bottom-right"
+    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="people-with-access-to-project"

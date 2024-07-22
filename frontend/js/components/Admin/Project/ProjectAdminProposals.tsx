@@ -150,7 +150,6 @@ const assignStepProposals = async (
         id: 'loading-contributions',
       }),
       position: 'bottom',
-      duration: stepsRemoved.length === 1 && stepsAdded.length === 1 ? 4000 : 2000,
     })
   }
 
@@ -919,12 +918,11 @@ export const ProjectAdminProposals = ({
   const loadAll = React.useCallback(() => {
     if (!loading && project.proposals.totalCount) {
       toast({
-        variant: 'loading',
+        variant: 'success',
         content: intl.formatMessage({
-          id: 'loading-contributions',
+          id: 'loading-success',
         }),
         position: 'bottom',
-        duration: project.proposals.totalCount * 20,
       })
       setLoading(true)
     }
