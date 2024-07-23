@@ -251,24 +251,6 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
     }
   }, [prevShowModal, showModal, deleteTmpVote, createTmpVote])
 
-  const getModalVoteTitleTranslation = () => {
-    const isInterpellation = isInterpellationContextFromStep(step)
-
-    if (step.votesRanking) {
-      if (isInterpellation) {
-        return 'project.supports.title'
-      }
-
-      return 'proposal.validate.vote'
-    }
-
-    if (isInterpellation) {
-      return 'global.support.for'
-    }
-
-    return 'global.vote.for'
-  }
-
   const votesMin: number = isVoteMin && step.votesMin ? step.votesMin : 1
   const viewerVotesBeforeValidation = step?.viewerVotes?.totalCount || 0
   const remainingVotesAfterValidation = votesMin - viewerVotesBeforeValidation - 1
@@ -360,7 +342,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
     focusOnClose(proposal?.id)
   }
 
-  const keyTradForModalVoteTitle = getModalVoteTitleTranslation()
+  const keyTradForModalVoteTitle = 'proposal.validate.vote'
   let votesHelpText =
     step.isSecretBallot && !step.publishedVoteDate && !step.canDisplayBallot
       ? intl.formatMessage({
@@ -467,8 +449,8 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
         )}
         <>
           <ResetCss>
-            <MultiStepModal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
-              <Heading id="modal-title">
+            <MultiStepModal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+              <Heading>
                 {intl.formatMessage({
                   id: keyTradForModalVoteTitle,
                 })}
@@ -541,8 +523,8 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
     >
       <>
         <ResetCss>
-          <Modal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
-            <Heading id="modal-title">
+          <Modal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+            <Heading>
               {intl.formatMessage({
                 id: 'proposal.validate.votes',
               })}
@@ -562,7 +544,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
                 </Tag.Label>
               </Tag>
             ) : null}
-            <VoteMinAlert step={step} translationKey={getModalVoteTitleTranslation()} /> {/** @ts-ignore */}
+            <VoteMinAlert step={step} translationKey={keyTradForModalVoteTitle} /> {/** @ts-ignore */}
             <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
             {votesHelpText && (
               <InfoMessage variant="info" width="100%">

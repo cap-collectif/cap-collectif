@@ -210,13 +210,13 @@ const ProposalVoteSmsConfirmationModal = ({
   return (
     <>
       <ResetCss>
-        <MultiStepModal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+        <MultiStepModal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
           <MultiStepModal.Header.Label>
             {intl.formatMessage({
               id: 'proposal.validate.vote',
             })}
           </MultiStepModal.Header.Label>
-          <Heading id="modal-title">
+          <Heading>
             {intl.formatMessage({
               id: 'number-verification',
             })}

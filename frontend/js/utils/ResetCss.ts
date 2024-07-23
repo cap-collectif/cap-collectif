@@ -216,8 +216,8 @@ export const ResetCss = styled.div`
   }
 
   h1,
-  h2,
-  h3,
+  h2:not(.cap-text, .cap-heading),
+  h3:not(.cap-text, .cap-heading),
   h4,
   h5,
   h6 {

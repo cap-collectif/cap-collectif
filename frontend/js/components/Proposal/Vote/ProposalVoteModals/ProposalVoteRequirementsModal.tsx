@@ -271,15 +271,15 @@ const ProposalVoteRequirementsModal = ({
   return (
     <>
       <ResetCss>
-        <MultiStepModal.Header closeLabel="modal-title" closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
+        <MultiStepModal.Header closeIconLabel={intl.formatMessage({ id: 'global.close' })}>
           <MultiStepModal.Header.Label>
             {intl.formatMessage({
               id: modalTitle,
             })}
           </MultiStepModal.Header.Label>
-          <Heading id="modal-title">
+          <Heading>
             {intl.formatMessage({
-              id: 'requirements',
+              id: 'youre-almost-there',
             })}
           </Heading>
         </MultiStepModal.Header>
