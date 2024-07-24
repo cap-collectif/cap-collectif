@@ -3,13 +3,13 @@
 exports[`<EventList /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL EeYuu"
+    className="sc-bcXGCL eOdAxI"
   >
     <table
-      className="sc-bcXGCL cvErHd"
+      className="sc-bcXGCL fdnEwv"
       onReset={[Function]}
       style={
         {
@@ -18,30 +18,30 @@ exports[`<EventList /> should render correctly 1`] = `
       }
     >
       <thead
-        className="sc-bcXGCL PEPvR"
+        className="sc-bcXGCL ieyhyf"
       >
         <tr
-          className="sc-bcXGCL fJqUoZ cap-table__tr"
+          className="sc-bcXGCL fBvmdL cap-table__tr"
         >
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             global.title
              
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             global.participative.project
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             <button
               aria-controls="id-g"
               aria-expanded={false}
               aria-haspopup="menu"
-              className="sc-bcXGCL coDXyN cap-menu__disclosure"
+              className="sc-bcXGCL cQSKSn cap-menu__disclosure"
               onClick={[Function]}
               onClickCapture={[Function]}
               onFocus={[Function]}
@@ -54,12 +54,12 @@ exports[`<EventList /> should render correctly 1`] = `
               type="button"
             >
               <p
-                className="sc-bcXGCL jHaTfa cap-text"
+                className="sc-bcXGCL kfReJI cap-text"
               >
                 start.date.and.end
               </p>
               <svg
-                className="sc-bcXGCL sc-eJDTud cKTLIj hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 7"
                 xmlns="http://www.w3.org/2000/svg"
@@ -75,7 +75,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL imnaKz sc-fvEvfv cap-menu__list"
+              className="sc-bcXGCL bNrqDF sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -101,16 +101,16 @@ exports[`<EventList /> should render correctly 1`] = `
               tabIndex={-1}
             >
               <div
-                className="sc-bcXGCL hZZdTS cap-menu__optionGroup"
+                className="sc-bcXGCL cKgfLw cap-menu__optionGroup"
                 role="group"
               >
                 <p
-                  className="sc-bcXGCL cMFjmS cap-text cap-menu__optionGroup--title"
+                  className="sc-bcXGCL icaQDc cap-text cap-menu__optionGroup--title"
                 >
                   sort-by
                 </p>
                 <button
-                  className="sc-bcXGCL cNCpXV cap-menu__item cap-menu__optionItem"
+                  className="sc-bcXGCL jXoSTv cap-menu__item cap-menu__optionItem"
                   id="id-g"
                   onBlurCapture={[Function]}
                   onClick={[Function]}
@@ -130,16 +130,16 @@ exports[`<EventList /> should render correctly 1`] = `
                 >
                   <input
                     checked={true}
-                    className="sc-bcXGCL iaLBiS"
+                    className="sc-bcXGCL gIaEVQ"
                     type="radio"
                   />
                   <p
-                    className="sc-bcXGCL Ebxhi cap-text"
+                    className="sc-bcXGCL jMALnA cap-text"
                   >
                     global.filter_last
                   </p>
                   <svg
-                    className="sc-bcXGCL sc-eJDTud ennmyN hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
                     xmlns="http://www.w3.org/2000/svg"
@@ -154,7 +154,7 @@ exports[`<EventList /> should render correctly 1`] = `
                   </svg>
                 </button>
                 <button
-                  className="sc-bcXGCL cNCpXV cap-menu__item cap-menu__optionItem"
+                  className="sc-bcXGCL jXoSTv cap-menu__item cap-menu__optionItem"
                   id="id-g"
                   onBlurCapture={[Function]}
                   onClick={[Function]}
@@ -174,16 +174,16 @@ exports[`<EventList /> should render correctly 1`] = `
                 >
                   <input
                     checked={false}
-                    className="sc-bcXGCL iaLBiS"
+                    className="sc-bcXGCL gIaEVQ"
                     type="radio"
                   />
                   <p
-                    className="sc-bcXGCL Ebxhi cap-text"
+                    className="sc-bcXGCL jMALnA cap-text"
                   >
                     global.filter_old
                   </p>
                   <svg
-                    className="sc-bcXGCL sc-eJDTud ennmyN hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
                     xmlns="http://www.w3.org/2000/svg"
@@ -201,43 +201,43 @@ exports[`<EventList /> should render correctly 1`] = `
             </div>
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             admin.projects.list.author
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KTkyh cap-text"
+              className="sc-bcXGCL KWUHz cap-text"
             >
               admin.projects.list.author
             </p>
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             global.owner
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             global.updated.date
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bcXGCL jTUKZp cap-table__tbody"
+        className="sc-bcXGCL iLxPWX cap-table__tbody"
       >
         <tr
-          className="sc-bcXGCL gGmBZz cap-table__tr"
+          className="sc-bcXGCL iNielt cap-table__tr"
           id="RXZlbnQ6ZXZlbnQz"
         >
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -245,14 +245,14 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL ZqqiX cap-link"
+              className="sc-bcXGCL bYDxrx cap-link"
               href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
             >
               GrenobleWeb2015
             </a>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -260,21 +260,21 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL iGEwYR"
+              className="sc-bcXGCL cBwqzf"
             >
               <a
-                className="sc-bcXGCL ZqqiX cap-link"
+                className="sc-bcXGCL bYDxrx cap-link"
                 href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
               >
                 Croissance, innovation, disruption
               </a>
               <div
-                className="sc-bcXGCL lbjJQq"
+                className="sc-bcXGCL doeSPo"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -282,7 +282,7 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL JgMzh cap-text"
+              className="sc-bcXGCL bIufIz cap-text"
             >
               10/06/2032
                
@@ -292,7 +292,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -300,13 +300,13 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL JgMzh cap-text"
+              className="sc-bcXGCL bIufIz cap-text"
             >
               &lt;mock-value-for-field-"username"&gt;
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -314,14 +314,14 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL ZqqiX cap-link"
+              className="sc-bcXGCL bYDxrx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -331,7 +331,7 @@ exports[`<EventList /> should render correctly 1`] = `
             -
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -341,7 +341,7 @@ exports[`<EventList /> should render correctly 1`] = `
             03/01/2015
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -349,12 +349,12 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL rtTxe"
+              className="sc-bcXGCL chOglo"
             >
               <button
                 aria-describedby="id-g"
                 aria-label="global.download"
-                className="sc-bcXGCL iKLPNA cap-buttonQuickAction"
+                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
                 href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
                 onBlur={[Function]}
                 onClick={[Function]}
@@ -364,7 +364,7 @@ exports[`<EventList /> should render correctly 1`] = `
                 tabIndex={0}
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -399,11 +399,11 @@ exports[`<EventList /> should render correctly 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL gGmBZz cap-table__tr"
+          className="sc-bcXGCL iNielt cap-table__tr"
           id="RXZlbnQ6ZXZlbnQx"
         >
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -411,14 +411,14 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL ZqqiX cap-link"
+              className="sc-bcXGCL bYDxrx cap-link"
               href="https://capco.dev/admin/capco/app/event/event1/edit?_locale=fr-FR"
             >
               Event with registrations
             </a>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -426,19 +426,19 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL iGEwYR"
+              className="sc-bcXGCL cBwqzf"
             >
               <a
-                className="sc-bcXGCL ZqqiX cap-link"
+                className="sc-bcXGCL bYDxrx cap-link"
                 href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
               >
                 Croissance, innovation, disruption
               </a>
               <div
-                className="sc-bcXGCL lbjJQq"
+                className="sc-bcXGCL doeSPo"
               >
                 <a
-                  className="sc-bcXGCL ZqqiX cap-link"
+                  className="sc-bcXGCL bYDxrx cap-link"
                   href="https://capco.dev/themes/immobilier?_locale=fr-FR"
                 >
                   Immobilier
@@ -447,7 +447,7 @@ exports[`<EventList /> should render correctly 1`] = `
                   ,   
                 </span>
                 <a
-                  className="sc-bcXGCL ZqqiX cap-link"
+                  className="sc-bcXGCL bYDxrx cap-link"
                   href="https://capco.dev/themes/justice?_locale=fr-FR"
                 >
                   Justice
@@ -456,7 +456,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -464,7 +464,7 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL JgMzh cap-text"
+              className="sc-bcXGCL bIufIz cap-text"
             >
               01/03/2032
                
@@ -474,7 +474,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -482,13 +482,13 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL JgMzh cap-text"
+              className="sc-bcXGCL bIufIz cap-text"
             >
               &lt;mock-value-for-field-"username"&gt;
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -496,14 +496,14 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL ZqqiX cap-link"
+              className="sc-bcXGCL bYDxrx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -513,7 +513,7 @@ exports[`<EventList /> should render correctly 1`] = `
             -
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -523,7 +523,7 @@ exports[`<EventList /> should render correctly 1`] = `
             01/01/2015
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -531,16 +531,16 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL rtTxe"
+              className="sc-bcXGCL chOglo"
             />
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL gGmBZz cap-table__tr"
+          className="sc-bcXGCL iNielt cap-table__tr"
           id="RXZlbnQ6ZXZlbnQ2"
         >
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -548,14 +548,14 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL ZqqiX cap-link"
+              className="sc-bcXGCL bYDxrx cap-link"
               href="https://capco.dev/admin/capco/app/event/event6/edit?_locale=fr-FR"
             >
               Event without registrations
             </a>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -563,15 +563,15 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL iGEwYR"
+              className="sc-bcXGCL cBwqzf"
             >
               <div
-                className="sc-bcXGCL lbjJQq"
+                className="sc-bcXGCL doeSPo"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -579,7 +579,7 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL JgMzh cap-text"
+              className="sc-bcXGCL bIufIz cap-text"
             >
               01/02/2032
                
@@ -589,7 +589,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -597,13 +597,13 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL JgMzh cap-text"
+              className="sc-bcXGCL bIufIz cap-text"
             >
               &lt;mock-value-for-field-"username"&gt;
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -611,14 +611,14 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL ZqqiX cap-link"
+              className="sc-bcXGCL bYDxrx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -628,7 +628,7 @@ exports[`<EventList /> should render correctly 1`] = `
             -
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -638,7 +638,7 @@ exports[`<EventList /> should render correctly 1`] = `
             06/01/2015
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -646,12 +646,12 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL rtTxe"
+              className="sc-bcXGCL chOglo"
             >
               <button
                 aria-describedby="id-g"
                 aria-label="global.download"
-                className="sc-bcXGCL iKLPNA cap-buttonQuickAction"
+                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
                 href="<mock-value-for-field-"exportParticipantsUrl">"
                 onBlur={[Function]}
                 onClick={[Function]}
@@ -661,7 +661,7 @@ exports[`<EventList /> should render correctly 1`] = `
                 tabIndex={0}
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -698,10 +698,10 @@ exports[`<EventList /> should render correctly 1`] = `
       </tbody>
     </table>
     <div
-      className="sc-bcXGCL eihals"
+      className="sc-bcXGCL jRRxOu"
     >
       <p
-        className="sc-bcXGCL hczTPS cap-text"
+        className="sc-bcXGCL gQHGyA cap-text"
         style={
           {
             "marginLeft": 0,
@@ -712,12 +712,12 @@ exports[`<EventList /> should render correctly 1`] = `
         no-result-found
       </p>
       <p
-        className="sc-bcXGCL NhRPT cap-text"
+        className="sc-bcXGCL gPUJPx cap-text"
       >
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB hgLfnE jAaALk cap-button"
+        className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button"
         onClick={[Function]}
         type="button"
       >

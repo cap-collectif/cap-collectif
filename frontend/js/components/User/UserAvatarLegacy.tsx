@@ -30,6 +30,7 @@ type Props = {
   onMouseOut?: () => void
   badge?: Badge
   needDefaultAvatar?: boolean
+  role?: string
 }
 
 const commonStyleAvatar = hasBadge => css`
@@ -72,7 +73,7 @@ export class UserAvatarLegacy extends React.Component<Props> {
   }
 
   renderAvatar() {
-    const { user, defaultAvatar, size, className, needDefaultAvatar } = this.props
+    const { user, defaultAvatar, size, className, needDefaultAvatar, role } = this.props
     const mediaSize = size && `${size}px`
 
     if (user && user.media && !needDefaultAvatar) {
@@ -81,6 +82,8 @@ export class UserAvatarLegacy extends React.Component<Props> {
           src={user.media.url}
           alt={user.username}
           className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
+          role={role}
+          aria-label={this.props['aria-label']}
           style={{
             width: mediaSize,
             height: mediaSize,
@@ -96,6 +99,8 @@ export class UserAvatarLegacy extends React.Component<Props> {
           src={defaultAvatar}
           alt={user.username}
           className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
+          role={role}
+          aria-label={this.props['aria-label']}
           style={{
             width: mediaSize,
             height: mediaSize,
@@ -105,7 +110,14 @@ export class UserAvatarLegacy extends React.Component<Props> {
       )
     }
 
-    return <DefaultAvatar className={`img-circle avatar user-avatar mr-10 ${className || ''}`} size={size} />
+    return (
+      <DefaultAvatar
+        className={`img-circle avatar user-avatar mr-10 ${className || ''}`}
+        size={size}
+        role={role}
+        aria-label={this.props['aria-label']}
+      />
+    )
   }
 
   renderBadge(badge: Badge) {
@@ -133,6 +145,7 @@ export class UserAvatarLegacy extends React.Component<Props> {
           style={style}
           hasBadge={!!badge}
           href={displayUrl ? user.url : null}
+          aria-describedby={this.props['aria-describedby']}
         >
           {this.renderAvatar()}
           {badge && this.renderBadge(badge)}

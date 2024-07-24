@@ -3,21 +3,21 @@
 exports[`<EventPageProjectList /> <TestEventPageProjectList /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL bgyH"
+    className="sc-bcXGCL zoZMJ"
   >
     <h2
-      className="sc-bcXGCL fWsFLX cap-heading"
+      className="sc-bcXGCL hcUgtt cap-heading"
     >
       event.page.project.list
     </h2>
     <div
-      className="sc-bcXGCL bglCbY"
+      className="sc-bcXGCL eaGqHy"
     >
       <a
-        className="sc-bcXGCL kGBSha"
+        className="sc-bcXGCL bpyrpQ"
         href="https://capco.dev/project/croissance-innovation-disruption/presentation/presentation-1"
         style={
           Object {
@@ -26,7 +26,7 @@ Array [
         }
       >
         <div
-          className="sc-bcXGCL dNEzMp cap-card"
+          className="sc-bcXGCL eroJHz cap-card"
           style={
             Object {
               "borderRadius": "8px",
@@ -35,7 +35,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL eLdNOx"
+            className="sc-bcXGCL gRChxX"
             style={
               Object {
                 "background": "url(https://capco.dev/media/default/0001/01/providerReference1.jpg)",
@@ -47,22 +47,22 @@ Array [
             }
           />
           <div
-            className="sc-bcXGCL jDLsEb"
+            className="sc-bcXGCL OGrOJ"
           >
             <h4
-              className="sc-bcXGCL kvJACK cap-heading"
+              className="sc-bcXGCL fZHqGE cap-heading"
               title="Croissance, innovation, disruption"
             >
               Croissance, innovation, disruption
             </h4>
             <div
-              className="sc-bcXGCL fdHjPy"
+              className="sc-bcXGCL kyncco"
             >
               <div
-                className="sc-bcXGCL hQQrBK"
+                className="sc-bcXGCL IddQI"
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud egyLxf knzWyK cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
                   fill="none"
                   viewBox="0 0 9 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -83,7 +83,7 @@ Array [
                   />
                 </svg>
                 <span
-                  className="sc-bcXGCL Ebxhi cap-text"
+                  className="sc-bcXGCL jMALnA cap-text"
                   style={
                     Object {
                       "color": "#545E68",
@@ -98,10 +98,10 @@ Array [
                 </span>
               </div>
               <div
-                className="sc-bcXGCL hQQrBK"
+                className="sc-bcXGCL IddQI"
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud egyLxf knzWyK cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
                   fill="none"
                   viewBox="0 0 11 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -123,7 +123,7 @@ Array [
                   />
                 </svg>
                 <span
-                  className="sc-bcXGCL Ebxhi cap-text"
+                  className="sc-bcXGCL jMALnA cap-text"
                   style={
                     Object {
                       "color": "#5cb85c",
@@ -138,10 +138,10 @@ Array [
                 </span>
               </div>
               <div
-                className="sc-bcXGCL hQQrBK"
+                className="sc-bcXGCL IddQI"
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud egyLxf knzWyK cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
                   fill="none"
                   viewBox="0 0 12 10"
                   xmlns="http://www.w3.org/2000/svg"
@@ -156,7 +156,7 @@ Array [
                   />
                 </svg>
                 <span
-                  className="sc-bcXGCL Ebxhi cap-text"
+                  className="sc-bcXGCL jMALnA cap-text"
                   style={
                     Object {
                       "color": "#545E68",
@@ -172,10 +172,10 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL jgCYFP"
+              className="sc-bcXGCL exYgfB"
             >
               <div
-                className="sc-bcXGCL ixfmfF"
+                className="sc-bcXGCL eFHuff"
                 style={
                   Object {
                     "marginLeft": 0,
@@ -184,7 +184,7 @@ Array [
                 }
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud lbYIOO hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 32 28"
                   xmlns="http://www.w3.org/2000/svg"
@@ -216,16 +216,16 @@ Array [
                   />
                 </svg>
                 <div
-                  className="sc-bcXGCL gdiNcI cap-text"
+                  className="sc-bcXGCL fXBhvC cap-text"
                 >
                   10
                 </div>
               </div>
               <div
-                className="sc-bcXGCL ixfmfF"
+                className="sc-bcXGCL eFHuff"
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud lbYIOO hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 14 13"
                   xmlns="http://www.w3.org/2000/svg"
@@ -239,16 +239,16 @@ Array [
                   />
                 </svg>
                 <div
-                  className="sc-bcXGCL gdiNcI cap-text"
+                  className="sc-bcXGCL fXBhvC cap-text"
                 >
                   264
                 </div>
               </div>
               <div
-                className="sc-bcXGCL ixfmfF"
+                className="sc-bcXGCL eFHuff"
               >
                 <svg
-                  className="sc-bcXGCL sc-eJDTud lbYIOO hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 13 14"
                   xmlns="http://www.w3.org/2000/svg"
@@ -268,7 +268,7 @@ Array [
                   />
                 </svg>
                 <div
-                  className="sc-bcXGCL gdiNcI cap-text"
+                  className="sc-bcXGCL fXBhvC cap-text"
                 >
                   41
                 </div>

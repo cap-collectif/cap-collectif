@@ -3,10 +3,10 @@
 exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete button when viewer belongs to an organization and is not admin organization 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -14,14 +14,14 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="/admin/questionnaire/questionnaire-1"
     >
       Combien font 0 + 0 ?
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -29,14 +29,14 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="<mock-value-for-field-"adminAlphaUrl">"
     >
       Le projet de la vie
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -46,7 +46,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     Valérie Masson Delmotte
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -56,7 +56,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -66,7 +66,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
+    className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -79,10 +79,10 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
 exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -90,14 +90,14 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="/admin/questionnaire/questionnaire-1"
     >
       Combien font 0 + 0 ?
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -105,14 +105,14 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="<mock-value-for-field-"adminAlphaUrl">"
     >
       Le projet de la vie
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -122,7 +122,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -132,7 +132,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -142,7 +142,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -152,7 +152,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL hBPUAg cap-table__td visible-on-hover"
+    className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -165,7 +165,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
       aria-expanded={false}
       aria-haspopup="dialog"
       aria-label="global.delete"
-      className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
+      className="sc-bcXGCL kzOulV cap-buttonQuickAction"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -181,7 +181,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
       type="button"
     >
       <svg
-        className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 12 12"
         xmlns="http://www.w3.org/2000/svg"

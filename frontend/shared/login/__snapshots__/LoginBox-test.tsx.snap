@@ -3,11 +3,11 @@
 exports[`<LoginBox /> renders 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div>
     <div
-      className="sc-bcXGCL kHOAuI"
+      className="sc-bcXGCL PXCEG"
     >
       <div
         className=" ql-editor wysiwyg-render"
@@ -19,11 +19,11 @@ Array [
       />
     </div>
     <div
-      className="sc-bcXGCL bllofW cap-form-control"
+      className="sc-bcXGCL kxTfnk cap-form-control"
       role="group"
     >
       <label
-        className="sc-bcXGCL ctSjlJ cap-form-label"
+        className="sc-bcXGCL kossJj cap-form-label"
         htmlFor="username"
         style={
           Object {
@@ -33,7 +33,7 @@ Array [
         }
       >
         <p
-          className="sc-bcXGCL JNsrJ cap-text"
+          className="sc-bcXGCL gUkIhr cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -48,7 +48,7 @@ Array [
         aria-required={true}
         autoComplete="email"
         autoFocus={true}
-        className="sc-bcXGCL sc-UpCiH cXnqTP eVENPD cap-input"
+        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
         disabled={false}
         name="username"
         onBlur={[Function]}
@@ -60,11 +60,11 @@ Array [
       />
     </div>
     <div
-      className="sc-bcXGCL bllofW cap-form-control"
+      className="sc-bcXGCL kxTfnk cap-form-control"
       role="group"
     >
       <label
-        className="sc-bcXGCL ctSjlJ cap-form-label"
+        className="sc-bcXGCL kossJj cap-form-label"
         htmlFor="password"
         style={
           Object {
@@ -74,7 +74,7 @@ Array [
         }
       >
         <p
-          className="sc-bcXGCL JNsrJ cap-text"
+          className="sc-bcXGCL gUkIhr cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -88,7 +88,7 @@ Array [
       <input
         aria-required={true}
         autoComplete="off"
-        className="sc-bcXGCL sc-UpCiH cXnqTP eVENPD cap-input"
+        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
         disabled={false}
         name="password"
         onBlur={[Function]}
@@ -99,13 +99,13 @@ Array [
       />
     </div>
     <a
-      className="sc-bcXGCL lpttQg cap-link"
+      className="sc-bcXGCL ckHvhy cap-link"
       href="/resetting/request"
     >
       global.forgot_password
     </a>
     <div
-      className="sc-bcXGCL gzaWKB"
+      className="sc-bcXGCL ijIkBL"
     >
       <div
         className=" ql-editor wysiwyg-render"
@@ -123,11 +123,11 @@ Array [
 exports[`<LoginBox /> renders without LoginForm 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div>
     <div
-      className="sc-bcXGCL kHOAuI"
+      className="sc-bcXGCL PXCEG"
     >
       <div
         className=" ql-editor wysiwyg-render"
@@ -171,7 +171,7 @@ Array [
       </div>
     </div>
     <div
-      className="sc-bcXGCL gzaWKB"
+      className="sc-bcXGCL ijIkBL"
     >
       <div
         className=" ql-editor wysiwyg-render"

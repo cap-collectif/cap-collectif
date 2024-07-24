@@ -3,71 +3,71 @@
 exports[`<MediatorList /> should render correctly and display mediators 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL EeYuu"
+    className="sc-bcXGCL eOdAxI"
   >
     <table
-      className="sc-bcXGCL cvErHd"
+      className="sc-bcXGCL fdnEwv"
     >
       <thead
-        className="sc-bcXGCL PEPvR"
+        className="sc-bcXGCL ieyhyf"
       >
         <tr
-          className="sc-bcXGCL fJqUoZ cap-table__tr"
+          className="sc-bcXGCL fBvmdL cap-table__tr"
         >
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KTkyh cap-text"
+              className="sc-bcXGCL KWUHz cap-text"
             >
               global.mediator
             </p>
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KTkyh cap-text"
+              className="sc-bcXGCL KWUHz cap-text"
             >
               admin.label.step
             </p>
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KTkyh cap-text"
+              className="sc-bcXGCL KWUHz cap-text"
             >
               mediator.participants_count
             </p>
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KTkyh cap-text"
+              className="sc-bcXGCL KWUHz cap-text"
             >
               global.email.short
             </p>
           </th>
           <th
-            className="sc-bcXGCL bDfeYb cap-table__th"
+            className="sc-bcXGCL jpIMR cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bcXGCL jTUKZp cap-table__tbody"
+        className="sc-bcXGCL iLxPWX cap-table__tbody"
       >
         <tr
-          className="sc-bcXGCL gGmBZz cap-table__tr"
+          className="sc-bcXGCL iNielt cap-table__tr"
           data-cy="mediator-item"
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -75,13 +75,13 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL Ebxhi cap-text"
+              className="sc-bcXGCL jMALnA cap-text"
             >
               Mediateur 1
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -91,7 +91,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             Etape de vote
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -101,7 +101,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             2/3
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -111,7 +111,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             3
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -121,7 +121,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             <button
               aria-describedby="id-g"
               aria-label="action_delete"
-              className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
+              className="sc-bcXGCL kzOulV cap-buttonQuickAction"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -130,7 +130,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
               tabIndex={0}
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -162,12 +162,12 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL gGmBZz cap-table__tr"
+          className="sc-bcXGCL iNielt cap-table__tr"
           data-cy="mediator-item"
           id="UHJvamDfooke4XJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -175,13 +175,13 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             }
           >
             <p
-              className="sc-bcXGCL Ebxhi cap-text"
+              className="sc-bcXGCL jMALnA cap-text"
             >
               Mediateur 2
             </p>
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -191,7 +191,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             Etape de vote
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -201,7 +201,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             0/0
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -211,7 +211,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             0
           </td>
           <td
-            className="sc-bcXGCL kdBJtI cap-table__td"
+            className="sc-bcXGCL dZCuae cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -221,7 +221,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             <button
               aria-describedby="id-g"
               aria-label="action_delete"
-              className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
+              className="sc-bcXGCL kzOulV cap-buttonQuickAction"
               onBlur={[Function]}
               onClick={[Function]}
               onFocus={[Function]}
@@ -230,7 +230,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
               tabIndex={0}
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -264,10 +264,10 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
       </tbody>
     </table>
     <div
-      className="sc-bcXGCL eihals"
+      className="sc-bcXGCL jRRxOu"
     >
       <p
-        className="sc-bcXGCL hczTPS cap-text"
+        className="sc-bcXGCL gQHGyA cap-text"
         style={
           {
             "marginLeft": 0,
@@ -278,12 +278,12 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
         no-result-found
       </p>
       <p
-        className="sc-bcXGCL NhRPT cap-text"
+        className="sc-bcXGCL gPUJPx cap-text"
       >
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB hgLfnE jAaALk cap-button"
+        className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button"
         onClick={[Function]}
         type="button"
       >

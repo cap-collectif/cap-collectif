@@ -106,7 +106,6 @@ export const ViewChangePanel = ({
       mt={0}
       zIndex={2}
       borderRadius="normal"
-      overflow="hidden"
       boxShadow={hideText ? 'small' : 'unset'}
       id="view-change-panel"
     >

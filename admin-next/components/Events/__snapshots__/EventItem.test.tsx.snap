@@ -3,10 +3,10 @@
 exports[`<EventItem /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -14,14 +14,14 @@ exports[`<EventItem /> should render correctly 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
     >
       GrenobleWeb2015
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -29,21 +29,21 @@ exports[`<EventItem /> should render correctly 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL iGEwYR"
+      className="sc-bcXGCL cBwqzf"
     >
       <a
-        className="sc-bcXGCL ZqqiX cap-link"
+        className="sc-bcXGCL bYDxrx cap-link"
         href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
       >
         Croissance, innovation, disruption
       </a>
       <div
-        className="sc-bcXGCL lbjJQq"
+        className="sc-bcXGCL doeSPo"
       />
     </div>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -51,7 +51,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     }
   >
     <p
-      className="sc-bcXGCL JgMzh cap-text"
+      className="sc-bcXGCL bIufIz cap-text"
     >
       10/06/2032
        
@@ -61,7 +61,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     </p>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -69,14 +69,14 @@ exports[`<EventItem /> should render correctly 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -86,7 +86,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     03/01/2015
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -94,12 +94,12 @@ exports[`<EventItem /> should render correctly 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL rtTxe"
+      className="sc-bcXGCL chOglo"
     >
       <button
         aria-describedby="id-g"
         aria-label="global.download"
-        className="sc-bcXGCL iKLPNA cap-buttonQuickAction"
+        className="sc-bcXGCL ePnELy cap-buttonQuickAction"
         href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
         onBlur={[Function]}
         onClick={[Function]}
@@ -109,7 +109,7 @@ exports[`<EventItem /> should render correctly 1`] = `
         tabIndex={0}
       >
         <svg
-          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"
@@ -148,10 +148,10 @@ exports[`<EventItem /> should render correctly 1`] = `
 exports[`<EventItem /> should render correctly with deleted event 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -159,14 +159,14 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
     >
       GrenobleWeb2015
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -174,21 +174,21 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL iGEwYR"
+      className="sc-bcXGCL cBwqzf"
     >
       <a
-        className="sc-bcXGCL ZqqiX cap-link"
+        className="sc-bcXGCL bYDxrx cap-link"
         href="https://capco.dev/consultation/croissance-innovation-disruption/presentation/presentation-1"
       >
         Croissance, innovation, disruption
       </a>
       <div
-        className="sc-bcXGCL lbjJQq"
+        className="sc-bcXGCL doeSPo"
       />
     </div>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -196,7 +196,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     }
   >
     <p
-      className="sc-bcXGCL JgMzh cap-text"
+      className="sc-bcXGCL bIufIz cap-text"
     >
       10/06/2032
        
@@ -206,7 +206,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     </p>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -214,14 +214,14 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL ZqqiX cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -231,7 +231,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     03/01/2015
   </td>,
   <td
-    className="sc-bcXGCL kdBJtI cap-table__td"
+    className="sc-bcXGCL dZCuae cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -239,12 +239,12 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL rtTxe"
+      className="sc-bcXGCL chOglo"
     >
       <button
         aria-describedby="id-g"
         aria-label="global.download"
-        className="sc-bcXGCL iKLPNA cap-buttonQuickAction"
+        className="sc-bcXGCL ePnELy cap-buttonQuickAction"
         href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
         onBlur={[Function]}
         onClick={[Function]}
@@ -254,7 +254,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
         tabIndex={0}
       >
         <svg
-          className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
           fill="currentColor"
           viewBox="0 0 24 24"
           xmlns="http://www.w3.org/2000/svg"

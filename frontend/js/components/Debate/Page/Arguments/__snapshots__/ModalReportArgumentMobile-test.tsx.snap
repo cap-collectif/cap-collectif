@@ -3,7 +3,7 @@
 exports[`<ModalReportArgumentMobile /> should renders correcty when not show 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    class="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     arialabel="global.report.submit"
@@ -16,7 +16,7 @@ Array [
 exports[`<ModalReportArgumentMobile /> should renders correcty with argument 1`] = `
 Array [
   <div
-    class="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    class="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     arialabel="global.report.submit"

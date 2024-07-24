@@ -1,61 +1,81 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalVoteButton /> renders viewer has not voted 1`] = `
-<button
-  className="mr-10 proposal__button__vote btn btn-success   btn btn-default"
-  disabled={false}
-  id="buttonID"
-  onClick={[Function]}
-  type="button"
->
-  <i
-    className="cap cap-hand-like-2 mr-5"
-  />
-  global.vote.for
-</button>
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <button
+    className="mr-10 proposal__button__vote btn btn-success   btn btn-default"
+    disabled={false}
+    id="buttonID"
+    onClick={[Function]}
+    type="button"
+  >
+    <i
+      className="cap cap-hand-like-2 mr-5"
+    />
+    global.vote.for
+  </button>,
+]
 `;
 
 exports[`<ProposalVoteButton /> renders viewer has voted 1`] = `
-<button
-  className="mr-10 proposal__button__vote btn btn-success   btn btn-default active"
-  disabled={false}
-  id="buttonID"
-  onClick={[Function]}
-  type="button"
->
-  <i
-    className="cap cap-hand-like-2 mr-5"
-  />
-  voted
-</button>
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <button
+    className="mr-10 proposal__button__vote btn btn-success   btn btn-default active"
+    disabled={false}
+    id="buttonID"
+    onClick={[Function]}
+    type="button"
+  >
+    <i
+      className="cap cap-hand-like-2 mr-5"
+    />
+    voted
+  </button>,
+]
 `;
 
 exports[`<ProposalVoteButton /> renders viewer has voted and hovering 1`] = `
-<button
-  className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
-  disabled={false}
-  id="buttonID"
-  onClick={[Function]}
-  type="button"
->
-  <i
-    className="cap cap-hand-like-2 mr-5"
-  />
-  cancel
-</button>
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <button
+    className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
+    disabled={false}
+    id="buttonID"
+    onClick={[Function]}
+    type="button"
+  >
+    <i
+      className="cap cap-hand-like-2 mr-5"
+    />
+    cancel
+  </button>,
+]
 `;
 
 exports[`<ProposalVoteButton /> renders viewer has voted and hovering with ranking 1`] = `
-<button
-  className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
-  disabled={false}
-  id="buttonID"
-  onClick={[Function]}
-  type="button"
->
-  <i
-    className="cap cap-hand-like-2 mr-5"
-  />
-  cancel
-</button>
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <button
+    className="mr-10 proposal__button__vote btn btn-danger   btn btn-default active"
+    disabled={false}
+    id="buttonID"
+    onClick={[Function]}
+    type="button"
+  >
+    <i
+      className="cap cap-hand-like-2 mr-5"
+    />
+    cancel
+  </button>,
+]
 `;

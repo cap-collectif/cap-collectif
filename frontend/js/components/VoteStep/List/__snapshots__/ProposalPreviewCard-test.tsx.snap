@@ -3,28 +3,31 @@
 exports[`<ProposalPreviewCard /> <TestProposalPreviewCard /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eUisXR"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL irWAkT"
     id="proposal-<Node-mock-id-1>"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
-      className="sc-bcXGCL eyWpBS"
+      className="sc-bcXGCL bVGmWY"
     >
       <div
-        className="sc-bcXGCL eOutYx"
+        className="sc-bcXGCL eaOiYD"
       >
         <div
-          className="sc-bcXGCL lfKjRi"
+          className="sc-bcXGCL gcrvYg"
         >
           <div
-            className="sc-bcXGCL jyyaxB"
+            className="sc-bcXGCL eJjsxH"
           >
             <svg
-              className="sc-bcXGCL sc-eJDTud eIOCew knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud jQjKpa knzWyK cap-icon"
               fill="none"
               viewBox="0 0 13 14"
               xmlns="http://www.w3.org/2000/svg"
@@ -44,7 +47,7 @@ Array [
               />
             </svg>
             <p
-              className="sc-bcXGCL uILGZ cap-text"
+              className="sc-bcXGCL foSpZD cap-text"
             >
               Jane Doe
             </p>
@@ -55,7 +58,7 @@ Array [
           onClick={[Function]}
         >
           <h4
-            className="sc-bcXGCL irwbFD cap-heading"
+            className="sc-bcXGCL dcpbiJ cap-heading"
           >
             Installation d'une serre dans le Jardin partagé du Val des Oiseaux - Argenteuil
           </h4>
@@ -66,11 +69,11 @@ Array [
         onClick={[Function]}
       >
         <p
-          className="sc-bcXGCL fibrtz"
+          className="sc-bcXGCL eKXGuF"
         />
       </a>
       <div
-        className="sc-bcXGCL kkoFlw"
+        className="sc-bcXGCL eKhpxm"
       />
     </div>
   </div>,

@@ -2,11 +2,14 @@
 
 exports[`<ModalAddEmailSender /> <TestModalAddEmailSender /> should render correctly 1`] = `
 Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
   <button
     aria-controls="id-1"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ eOaNyl egpGUm"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -41,11 +44,14 @@ Array [
 
 exports[`<ModalAddEmailSender /> <TestModalAddEmailSender /> should render modal open 1`] = `
 Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
   <button
     aria-controls="id-1"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ eOaNyl egpGUm"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -74,7 +80,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-dEVMhd dqBCRG Modal__ModalContainerInner-gRvBLO"
+        className="sc-dEVMhd bjEjhK Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -83,7 +89,7 @@ Array [
         }
       >
         <div
-          className="sc-dEVMhd XLxAC Modal__ModalInner-fNGFsd"
+          className="sc-dEVMhd fwBdND Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -92,34 +98,34 @@ Array [
           }
         >
           <header
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY fvQiLM"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY bGRJMU"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk eRNTmy"
+              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk eJfkn"
             >
               <p
-                className="sc-dEVMhd maCtC"
+                className="sc-dEVMhd bmbsAp"
               >
                 notification-email
               </p>
               <h2
-                className="sc-dEVMhd iENcWE"
+                className="sc-dEVMhd ffKkYR"
               >
                 add-sender-email-address
               </h2>
             </div>
             <button
-              className="sc-dEVMhd Button__ButtonInner-dXfNcJ bEzIct iWxcUO"
+              className="sc-dEVMhd Button__ButtonInner-dXfNcJ dskxFv iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ ghCDIp exKJSE AjyOr icon"
+                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ bklSCx dpibyo AjyOr icon"
               />
             </button>
           </header>
           <main
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY bIujfK"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY aMkAC"
           >
             <div
               className="sc-dEVMhd Flex___StyledAppBox-SiGEY gucHrW ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
@@ -284,20 +290,20 @@ Array [
             </div>
           </main>
           <footer
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY gwUZXS"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY evqvO"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig gEtlaU"
+              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig crLbTm"
             >
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ eOaNyl jzOsGm"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP jzOsGm"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ vunDN erDeRS"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ jPEAyX erDeRS"
                 onClick={[Function]}
                 type="button"
               >

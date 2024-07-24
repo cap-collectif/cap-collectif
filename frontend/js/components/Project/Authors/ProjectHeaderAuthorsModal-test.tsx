@@ -4,7 +4,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ReactTestRenderer from 'react-test-renderer'
 import ProjectHeaderAuthorsModal from './ProjectHeaderAuthorsModal'
-import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProjectHeaderAuthorsModalTestQuery } from '~relay/ProjectHeaderAuthorsModalTestQuery.graphql'
 
 describe('<ProjectHeaderAuthorsModal />', () => {
@@ -33,11 +33,9 @@ describe('<ProjectHeaderAuthorsModal />', () => {
     }
 
     TestComponent = props => (
-      <MockProviders store={{}} useCapUIProvider>
-        <RelaySuspensFragmentTest environment={environment}>
-          <TestRenderer {...props} />
-        </RelaySuspensFragmentTest>
-      </MockProviders>
+      <RelaySuspensFragmentTest environment={environment} useCapUIProvider>
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
     )
 
     environment.mock.queueOperationResolver(operation =>

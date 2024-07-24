@@ -3,13 +3,13 @@
 exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL iLDPSx DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -18,11 +18,11 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL dtHJDj"
+        className="sc-bcXGCL dQQNll"
         onClose={[MockFunction]}
       >
         <svg
-          className="sc-bcXGCL sc-eJDTud bQmYFy cpMilg cap-icon detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
@@ -37,15 +37,15 @@ Array [
           />
         </svg>
         <div
-          className="sc-bcXGCL bcdXRC"
+          className="sc-bcXGCL YwtnU"
         >
           <div
-            className="sc-bcXGCL cKGnkY sc-ckEbfr gOeGmr cap-avatar"
+            className="sc-bcXGCL dSgCQy sc-ckEbfr gOeGmr cap-avatar"
             title="Agui le penseur"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL exSVBv"
+              className="sc-bcXGCL fHacA-d"
               src="<media-url>"
               style={
                 Object {
@@ -56,31 +56,31 @@ Array [
             />
           </div>
           <p
-            className="sc-bcXGCL jZgtKM cap-text"
+            className="sc-bcXGCL wDUou cap-text"
           >
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL hNFpfA sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL hMHhKK sc-fXqqsB gHWJqw cap-tag"
             title=""
           >
             <h5
-              className="sc-bcXGCL bJpDVA cap-heading"
+              className="sc-bcXGCL dUdqFq cap-heading"
             >
               opinion.for
             </h5>
           </div>
           <p
-            className="sc-bcXGCL yqxTs cap-text"
+            className="sc-bcXGCL hBZVQu cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
         <div
-          className="sc-bcXGCL fKRqYl"
+          className="sc-bcXGCL lmhvMr"
         >
           <h4
-            className="sc-bcXGCL cpsRIJ cap-heading"
+            className="sc-bcXGCL gcgTEP cap-heading"
             style={
               Object {
                 "marginLeft": 0,
@@ -111,13 +111,13 @@ Array [
 exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL iLDPSx DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -126,11 +126,11 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL dtHJDj"
+        className="sc-bcXGCL dQQNll"
         onClose={[MockFunction]}
       >
         <svg
-          className="sc-bcXGCL sc-eJDTud bQmYFy cpMilg cap-icon detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
@@ -145,15 +145,15 @@ Array [
           />
         </svg>
         <div
-          className="sc-bcXGCL bcdXRC"
+          className="sc-bcXGCL YwtnU"
         >
           <div
-            className="sc-bcXGCL cKGnkY sc-ckEbfr gOeGmr cap-avatar"
+            className="sc-bcXGCL dSgCQy sc-ckEbfr gOeGmr cap-avatar"
             title="Agui le penseur"
           >
             <img
               alt="Agui le penseur"
-              className="sc-bcXGCL exSVBv"
+              className="sc-bcXGCL fHacA-d"
               src="<media-url>"
               style={
                 Object {
@@ -164,31 +164,31 @@ Array [
             />
           </div>
           <p
-            className="sc-bcXGCL jZgtKM cap-text"
+            className="sc-bcXGCL wDUou cap-text"
           >
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL hNFpfA sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL hMHhKK sc-fXqqsB gHWJqw cap-tag"
             title=""
           >
             <h5
-              className="sc-bcXGCL bJpDVA cap-heading"
+              className="sc-bcXGCL dUdqFq cap-heading"
             >
               opinion.for
             </h5>
           </div>
           <p
-            className="sc-bcXGCL yqxTs cap-text"
+            className="sc-bcXGCL hBZVQu cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
         <div
-          className="sc-bcXGCL fKRqYl"
+          className="sc-bcXGCL lmhvMr"
         >
           <h4
-            className="sc-bcXGCL cpsRIJ cap-heading"
+            className="sc-bcXGCL gcgTEP cap-heading"
             style={
               Object {
                 "marginLeft": 0,

@@ -4,7 +4,7 @@ import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ProposalPreviewVote from './ProposalPreviewVote'
-import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProposalPreviewVoteTestQuery } from '~relay/ProposalPreviewVoteTestQuery.graphql'
 
 describe('<ProposalPreviewVote />', () => {
@@ -54,9 +54,7 @@ describe('<ProposalPreviewVote />', () => {
 
     TestComponent = props => (
       <RelaySuspensFragmentTest environment={environment}>
-        <MockProviders store={{}} useCapUIProvider>
-          <TestRenderer {...props} />
-        </MockProviders>
+        <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )
   })

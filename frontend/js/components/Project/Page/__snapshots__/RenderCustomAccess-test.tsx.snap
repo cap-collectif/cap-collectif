@@ -3,18 +3,21 @@
 exports[`<RenderCustomAccess /> should render correctly 1`] = `
 Array [
   <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
     data-testid="Tooltip"
     id="tooltip"
     label="only-visible-by"
   >
     <div
-      className="sc-bcXGCL guTJTH sc-fXqqsB kJyISH cap-tag"
+      className="sc-bcXGCL cokLsN sc-fXqqsB gHWJqw cap-tag"
       id="restricted-access"
       onClick={[Function]}
       title=""
     >
       <svg
-        className="sc-bcXGCL sc-eJDTud kRiMXT dxHlFh cap-icon"
+        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 10 12"
         xmlns="http://www.w3.org/2000/svg"
@@ -42,7 +45,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL ggqhBm cap-heading"
+          className="sc-bcXGCL jyqEHl cap-heading"
         >
           people-with-access-to-project
         </h2>
@@ -81,7 +84,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-laZSpB eIQCcq jXQrWI cap-button btn-md p-0"
+            className="sc-bcXGCL sc-laZSpB cbEpJS jHvBhg cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -104,7 +107,7 @@ Array [
                 data-testid="Header"
               >
                 <h2
-                  className="sc-bcXGCL ggqhBm cap-heading"
+                  className="sc-bcXGCL jyqEHl cap-heading"
                   id="contained-modal-title-lg"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -167,7 +170,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+                className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -182,7 +185,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[Function]}
         type="button"
       >

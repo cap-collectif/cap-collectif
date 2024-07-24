@@ -3,10 +3,10 @@
 exports[`<ProposalsList /> <TestProposalsList /> should render correctly with images 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL fQDbQl"
+    className="sc-bcXGCL jJlFXL"
     id="proposals-list"
   >
     <div>
@@ -24,25 +24,25 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL fCAVet"
+            className="sc-bcXGCL bEYgcX"
             id="proposal-<Proposal-mock-id-2>"
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
             <div
-              className="sc-bcXGCL eyWpBS"
+              className="sc-bcXGCL bVGmWY"
             >
               <div
-                className="sc-bcXGCL eOutYx"
+                className="sc-bcXGCL eaOiYD"
               >
                 <div
-                  className="sc-bcXGCL lfKjRi"
+                  className="sc-bcXGCL gcrvYg"
                 >
                   <div
-                    className="sc-bcXGCL jyyaxB"
+                    className="sc-bcXGCL eJjsxH"
                   >
                     <svg
-                      className="sc-bcXGCL sc-eJDTud eIOCew knzWyK cap-icon"
+                      className="sc-bcXGCL sc-eJDTud jQjKpa knzWyK cap-icon"
                       fill="none"
                       viewBox="0 0 13 14"
                       xmlns="http://www.w3.org/2000/svg"
@@ -62,7 +62,7 @@ Array [
                       />
                     </svg>
                     <p
-                      className="sc-bcXGCL uILGZ cap-text"
+                      className="sc-bcXGCL foSpZD cap-text"
                     >
                       &lt;mock-value-for-field-"displayName"&gt;
                     </p>
@@ -73,7 +73,7 @@ Array [
                   onClick={[Function]}
                 >
                   <h4
-                    className="sc-bcXGCL irwbFD cap-heading"
+                    className="sc-bcXGCL dcpbiJ cap-heading"
                   >
                     &lt;mock-value-for-field-"title"&gt;
                   </h4>
@@ -84,26 +84,26 @@ Array [
                 onClick={[Function]}
               >
                 <p
-                  className="sc-bcXGCL fibrtz"
+                  className="sc-bcXGCL eKXGuF"
                 />
               </a>
               <div
-                className="sc-bcXGCL kkoFlw"
+                className="sc-bcXGCL eKhpxm"
               >
                 <div
-                  className="sc-bcXGCL jLrvNs"
+                  className="sc-bcXGCL kNrudi"
                 >
                   <div
-                    className="sc-bcXGCL fubYpp"
+                    className="sc-bcXGCL jKmTdL"
                   >
                     <div
-                      className="sc-bcXGCL jGtPQE"
+                      className="sc-bcXGCL gtMDQe"
                     >
                       <div
-                        className="sc-bcXGCL ixfmfF"
+                        className="sc-bcXGCL eFHuff"
                       >
                         <svg
-                          className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                          className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                           fill="none"
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
@@ -124,23 +124,23 @@ Array [
                           />
                         </svg>
                         <div
-                          className="sc-bcXGCL eoNVtj"
+                          className="sc-bcXGCL cfNBnR"
                         >
                           <span>
                             &lt;mock-value-for-field-"totalPointsCount"&gt;&lt;mock-value-for-field-"paperVotesTotalPointsCount"&gt;
                           </span>
                           <span
-                            className="sc-bcXGCL jdetxP"
+                            className="sc-bcXGCL iseJzR"
                           >
                             pts
                           </span>
                         </div>
                       </div>
                       <div
-                        className="sc-bcXGCL ixfmfF"
+                        className="sc-bcXGCL eFHuff"
                       >
                         <svg
-                          className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                          className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                           fill="none"
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
@@ -182,7 +182,7 @@ Array [
                           />
                         </svg>
                         <div
-                          className="sc-bcXGCL jbJBNL"
+                          className="sc-bcXGCL haZcTN"
                         >
                           &lt;mock-value-for-field-"estimation"&gt;€
                         </div>
@@ -190,10 +190,10 @@ Array [
                     </div>
                   </div>
                   <div
-                    className="sc-bcXGCL ixfmfF"
+                    className="sc-bcXGCL eFHuff"
                   >
                     <svg
-                      className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                      className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                       fill="none"
                       viewBox="0 0 14 13"
                       xmlns="http://www.w3.org/2000/svg"
@@ -207,16 +207,16 @@ Array [
                       />
                     </svg>
                     <div
-                      className="sc-bcXGCL jbJBNL"
+                      className="sc-bcXGCL haZcTN"
                     >
                       &lt;mock-value-for-field-"totalCount"&gt;
                     </div>
                   </div>
                   <div
-                    className="sc-bcXGCL ixfmfF"
+                    className="sc-bcXGCL eFHuff"
                   >
                     <svg
-                      className="sc-bcXGCL sc-eJDTud gNIYbS cpMilg cap-icon"
+                      className="sc-bcXGCL sc-eJDTud bIUvGA cpMilg cap-icon"
                       fill="none"
                       viewBox="0 0 32 29"
                       xmlns="http://www.w3.org/2000/svg"
@@ -227,7 +227,7 @@ Array [
                       />
                     </svg>
                     <div
-                      className="sc-bcXGCL jbJBNL"
+                      className="sc-bcXGCL haZcTN"
                     >
                       1
                     </div>
@@ -240,20 +240,20 @@ Array [
               onClick={[Function]}
             >
               <div
-                className="sc-bcXGCL hGzElH"
+                className="sc-bcXGCL iiMaTZ"
               >
                 <div
-                  className="sc-bcXGCL zYWLv"
+                  className="sc-bcXGCL drdikR"
                 >
                   <div
-                    className="sc-bcXGCL fWqYuh sc-fXqqsB gHWJqw cap-tag"
+                    className="sc-bcXGCL fnmjmD sc-fXqqsB gHWJqw cap-tag"
                     title="<mock-value-for-field-\\"name\\">"
                   >
                     &lt;mock-value-for-field-"name"&gt;
                   </div>
                   <img
                     alt="<mock-value-for-field-\\"name\\">"
-                    className="sc-bcXGCL kolUOV"
+                    className="sc-bcXGCL ejWmjX"
                     src="<mock-value-for-field-\\"url\\">"
                     style={
                       Object {
@@ -277,10 +277,10 @@ Array [
 exports[`<ProposalsList /> <TestProposalsList /> should render correctly without images 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL fQDbQl"
+    className="sc-bcXGCL jJlFXL"
     id="proposals-list"
   >
     <div>
@@ -298,25 +298,25 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL eUisXR"
+            className="sc-bcXGCL irWAkT"
             id="proposal-<Proposal-mock-id-2>"
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
           >
             <div
-              className="sc-bcXGCL eyWpBS"
+              className="sc-bcXGCL bVGmWY"
             >
               <div
-                className="sc-bcXGCL eOutYx"
+                className="sc-bcXGCL eaOiYD"
               >
                 <div
-                  className="sc-bcXGCL lfKjRi"
+                  className="sc-bcXGCL gcrvYg"
                 >
                   <div
-                    className="sc-bcXGCL jyyaxB"
+                    className="sc-bcXGCL eJjsxH"
                   >
                     <svg
-                      className="sc-bcXGCL sc-eJDTud eIOCew knzWyK cap-icon"
+                      className="sc-bcXGCL sc-eJDTud jQjKpa knzWyK cap-icon"
                       fill="none"
                       viewBox="0 0 13 14"
                       xmlns="http://www.w3.org/2000/svg"
@@ -336,7 +336,7 @@ Array [
                       />
                     </svg>
                     <p
-                      className="sc-bcXGCL uILGZ cap-text"
+                      className="sc-bcXGCL foSpZD cap-text"
                     >
                       &lt;mock-value-for-field-"displayName"&gt;
                     </p>
@@ -347,7 +347,7 @@ Array [
                   onClick={[Function]}
                 >
                   <h4
-                    className="sc-bcXGCL irwbFD cap-heading"
+                    className="sc-bcXGCL dcpbiJ cap-heading"
                   >
                     &lt;mock-value-for-field-"title"&gt;
                   </h4>
@@ -358,26 +358,26 @@ Array [
                 onClick={[Function]}
               >
                 <p
-                  className="sc-bcXGCL fibrtz"
+                  className="sc-bcXGCL eKXGuF"
                 />
               </a>
               <div
-                className="sc-bcXGCL kkoFlw"
+                className="sc-bcXGCL eKhpxm"
               >
                 <div
-                  className="sc-bcXGCL jLrvNs"
+                  className="sc-bcXGCL kNrudi"
                 >
                   <div
-                    className="sc-bcXGCL fubYpp"
+                    className="sc-bcXGCL jKmTdL"
                   >
                     <div
-                      className="sc-bcXGCL jGtPQE"
+                      className="sc-bcXGCL gtMDQe"
                     >
                       <div
-                        className="sc-bcXGCL ixfmfF"
+                        className="sc-bcXGCL eFHuff"
                       >
                         <svg
-                          className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                          className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                           fill="none"
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
@@ -398,23 +398,23 @@ Array [
                           />
                         </svg>
                         <div
-                          className="sc-bcXGCL eoNVtj"
+                          className="sc-bcXGCL cfNBnR"
                         >
                           <span>
                             &lt;mock-value-for-field-"totalPointsCount"&gt;&lt;mock-value-for-field-"paperVotesTotalPointsCount"&gt;
                           </span>
                           <span
-                            className="sc-bcXGCL jdetxP"
+                            className="sc-bcXGCL iseJzR"
                           >
                             pts
                           </span>
                         </div>
                       </div>
                       <div
-                        className="sc-bcXGCL ixfmfF"
+                        className="sc-bcXGCL eFHuff"
                       >
                         <svg
-                          className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                          className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                           fill="none"
                           viewBox="0 0 24 24"
                           xmlns="http://www.w3.org/2000/svg"
@@ -456,7 +456,7 @@ Array [
                           />
                         </svg>
                         <div
-                          className="sc-bcXGCL jbJBNL"
+                          className="sc-bcXGCL haZcTN"
                         >
                           &lt;mock-value-for-field-"estimation"&gt;€
                         </div>
@@ -464,10 +464,10 @@ Array [
                     </div>
                   </div>
                   <div
-                    className="sc-bcXGCL ixfmfF"
+                    className="sc-bcXGCL eFHuff"
                   >
                     <svg
-                      className="sc-bcXGCL sc-eJDTud ehWZyF cpMilg cap-icon"
+                      className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                       fill="none"
                       viewBox="0 0 14 13"
                       xmlns="http://www.w3.org/2000/svg"
@@ -481,16 +481,16 @@ Array [
                       />
                     </svg>
                     <div
-                      className="sc-bcXGCL jbJBNL"
+                      className="sc-bcXGCL haZcTN"
                     >
                       &lt;mock-value-for-field-"totalCount"&gt;
                     </div>
                   </div>
                   <div
-                    className="sc-bcXGCL ixfmfF"
+                    className="sc-bcXGCL eFHuff"
                   >
                     <svg
-                      className="sc-bcXGCL sc-eJDTud gNIYbS cpMilg cap-icon"
+                      className="sc-bcXGCL sc-eJDTud bIUvGA cpMilg cap-icon"
                       fill="none"
                       viewBox="0 0 32 29"
                       xmlns="http://www.w3.org/2000/svg"
@@ -501,7 +501,7 @@ Array [
                       />
                     </svg>
                     <div
-                      className="sc-bcXGCL jbJBNL"
+                      className="sc-bcXGCL haZcTN"
                     >
                       1
                     </div>

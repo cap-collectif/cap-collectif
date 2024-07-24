@@ -11,9 +11,10 @@ type Props = {
   status?: Record<string, any> | null | undefined
   borderColor?: string | null | undefined
   children?: any
+  active?: boolean
 }
 
-const ProposalDetailAdvancementStep = ({ borderColor, roundColor, step, status, children }: Props) => {
+const ProposalDetailAdvancementStep = ({ borderColor, roundColor, step, status, children, active }: Props) => {
   const { bgColor } = useSelector((state: GlobalState) => ({
     bgColor: state.default.parameters['color.btn.primary.bg'],
   }))
@@ -46,7 +47,7 @@ const ProposalDetailAdvancementStep = ({ borderColor, roundColor, step, status, 
   }
 
   return (
-    <span>
+    <li aria-current={active ? 'step' : undefined}>
       <div
         style={
           borderColor
@@ -105,7 +106,7 @@ const ProposalDetailAdvancementStep = ({ borderColor, roundColor, step, status, 
         <br />
       </div>
       {children}
-    </span>
+    </li>
   )
 }
 

@@ -3,14 +3,14 @@
 exports[`<ProjectHeaderDistrictsList /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <li
-    className="sc-bcXGCL fDSpmX ProjectHeaderDistrictsList__DistrictsButton-hErwfx dvdtee p-0 data-districts__modal-link"
+    className="sc-bcXGCL kfufZa ProjectHeaderDistrictsList__DistrictsButton-hErwfx dvdtee p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bcXGCL sc-eJDTud idvNjs dxHlFh cap-icon"
+      className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 9 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -31,7 +31,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL isNeYY cap-text platform__body"
+      className="sc-bcXGCL dHfuOk cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -94,7 +94,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -108,14 +108,14 @@ Array [
 exports[`<ProjectHeaderDistrictsList /> should render correctly when project is archived 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <li
-    className="sc-bcXGCL fDSpmX ProjectHeaderDistrictsList__DistrictsButton-hErwfx dvdtee p-0 data-districts__modal-link"
+    className="sc-bcXGCL kfufZa ProjectHeaderDistrictsList__DistrictsButton-hErwfx dvdtee p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bcXGCL sc-eJDTud idvNjs dxHlFh cap-icon"
+      className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 9 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -136,7 +136,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL isNeYY cap-text platform__body"
+      className="sc-bcXGCL dHfuOk cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -199,7 +199,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -213,14 +213,14 @@ Array [
 exports[`<ProjectHeaderDistrictsList /> should render correctly with the display of modal 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <li
-    className="sc-bcXGCL fDSpmX ProjectHeaderDistrictsList__DistrictsButton-hErwfx dvdtee p-0 data-districts__modal-link"
+    className="sc-bcXGCL kfufZa ProjectHeaderDistrictsList__DistrictsButton-hErwfx dvdtee p-0 data-districts__modal-link"
     onClick={[Function]}
   >
     <svg
-      className="sc-bcXGCL sc-eJDTud idvNjs dxHlFh cap-icon"
+      className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 9 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -241,7 +241,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL isNeYY cap-text platform__body"
+      className="sc-bcXGCL dHfuOk cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -304,7 +304,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[Function]}
         type="button"
       >

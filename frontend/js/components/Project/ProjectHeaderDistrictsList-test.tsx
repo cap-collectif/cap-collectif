@@ -4,7 +4,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import ReactTestRenderer, { act } from 'react-test-renderer'
 import ProjectHeaderDistrictsList, { DistrictsButton } from './ProjectHeaderDistrictsList'
-import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import type { ProjectHeaderDistrictsListTestQuery } from '~relay/ProjectHeaderDistrictsListTestQuery.graphql'
 
 describe('<ProjectHeaderDistrictsList />', () => {
@@ -66,20 +66,18 @@ describe('<ProjectHeaderDistrictsList />', () => {
     }
 
     TestComponent = props => (
-      <MockProviders store={{}} useCapUIProvider>
-        <RelaySuspensFragmentTest
-          store={{
-            default: {
-              parameters: {
-                'color.link.hover': '#546E7A',
-              },
+      <RelaySuspensFragmentTest
+        store={{
+          default: {
+            parameters: {
+              'color.link.hover': '#546E7A',
             },
-          }}
-          environment={environment}
-        >
-          <TestRenderer {...props} />
-        </RelaySuspensFragmentTest>
-      </MockProviders>
+          },
+        }}
+        environment={environment}
+      >
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
     )
 
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))

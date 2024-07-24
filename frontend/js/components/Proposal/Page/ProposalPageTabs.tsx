@@ -133,24 +133,33 @@ export const ProposalPageTabs = ({ proposal: proposalFragment, step: stepFragmen
         <NavItem disabled={!proposal} eventKey="content" active={tabKey === 'content'}>
           <FormattedMessage id="presentation_step" />
         </NavItem>
-        {(newsTotalCount > 0 || !proposal) && (
-          <NavItem disabled={!proposal} eventKey="blog" active={tabKey === 'blog'}>
-            <FormattedMessage id="menu.news" />
-            {proposal && <span className="tip">{newsTotalCount}</span>}
-          </NavItem>
-        )}
-        {(showVotesTab || !proposal) && (
-          <NavItem disabled={!proposal} eventKey="votes" active={tabKey === 'votes'}>
-            <FormattedMessage id={voteTabLabel} />
-            {proposal && <span className="tip">{totalVotesCount}</span>}
-          </NavItem>
-        )}
-        {(showFollowersTab || !proposal) && (
-          <NavItem disabled={!proposal} eventKey="followers" active={tabKey === 'followers'}>
-            <FormattedMessage id="proposal.tabs.followers" />
-            {proposal && <span className="tip">{proposal.allFollowers ? proposal.allFollowers.totalCount : 0}</span>}
-          </NavItem>
-        )}
+        <NavItem
+          disabled={!proposal || !newsTotalCount}
+          eventKey="blog"
+          active={tabKey === 'blog'}
+          style={{ display: newsTotalCount ? 'block' : 'none' }}
+        >
+          <FormattedMessage id="menu.news" />
+          {proposal && <span className="tip">{newsTotalCount}</span>}
+        </NavItem>
+        <NavItem
+          disabled={!proposal || !showVotesTab}
+          eventKey="votes"
+          active={tabKey === 'votes'}
+          style={{ display: showVotesTab ? 'block' : 'none' }}
+        >
+          <FormattedMessage id={voteTabLabel} />
+          {proposal && <span className="tip">{totalVotesCount}</span>}
+        </NavItem>
+        <NavItem
+          disabled={!proposal || !showFollowersTab}
+          eventKey="followers"
+          active={tabKey === 'followers'}
+          style={{ display: showFollowersTab ? 'block' : 'none' }}
+        >
+          <FormattedMessage id="proposal.tabs.followers" />
+          {proposal && <span className="tip">{proposal.allFollowers ? proposal.allFollowers.totalCount : 0}</span>}
+        </NavItem>
       </Nav>
     </Tabs>
   )

@@ -3,7 +3,7 @@
 exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     aria-label="delete-custom-domain"
@@ -19,7 +19,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL hmVjey sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
       }
     >
       <div
-        className="sc-bcXGCL cxKkgx sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL bsVBPb sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -37,13 +37,13 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
         }
       >
         <header
-          className="sc-bcXGCL gcFVlf cap-modal__header"
+          className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL dEoIxI"
+            className="sc-bcXGCL eotpTW"
           >
             <h2
-              className="sc-bcXGCL dohbkA cap-heading"
+              className="sc-bcXGCL kANCfu cap-heading"
               id="modal-title"
               style={
                 {
@@ -57,12 +57,12 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL kvTszR"
+            className="sc-bcXGCL gBxHlP"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bcXGCL sc-eJDTud egyLxf knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -78,19 +78,19 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
           </button>
         </header>
         <main
-          className="sc-bcXGCL fWaoBr cap-modal__body"
+          className="sc-bcXGCL laGNWx cap-modal__body"
         >
           <p
-            className="sc-bcXGCL hUwKNg cap-text"
+            className="sc-bcXGCL OCyhS cap-text"
           >
             custom-domain-delete-confirmation-message
           </p>
           <label
-            className="sc-bcXGCL dFPdth"
+            className="sc-bcXGCL bHapUX"
             htmlFor="agree-checkbox"
           >
             <div
-              className="sc-bcXGCL fWTWt cap-checkbox"
+              className="sc-bcXGCL NioVD cap-checkbox"
               style={
                 {
                   "marginLeft": 0,
@@ -100,7 +100,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
             >
               <input
                 checked={false}
-                className="sc-bcXGCL fmkGYH cap-checkbox__input"
+                className="sc-bcXGCL jVBfSJ cap-checkbox__input"
                 id="agree-checkbox"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -108,21 +108,21 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
                 type="checkbox"
               />
               <div
-                className="sc-bcXGCL hnYNOm cap-checkbox__box"
+                className="sc-bcXGCL jGpoql cap-checkbox__box"
               />
             </div>
             <span
-              className="sc-bcXGCL bqoAcQ cap-text"
+              className="sc-bcXGCL kTFzIG cap-text"
             >
               admin.project.delete.confirm
             </span>
           </label>
         </main>
         <footer
-          className="sc-bcXGCL iiPMYM cap-modal__footer"
+          className="sc-bcXGCL eMjpTW cap-modal__footer"
         >
           <div
-            className="sc-bcXGCL hyIxtw cap-buttonGroup"
+            className="sc-bcXGCL MiskG cap-buttonGroup"
             style={
               {
                 "marginLeft": 0,
@@ -131,7 +131,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
             }
           >
             <button
-              className="sc-bcXGCL sc-laZSpB DTDIA iazGoc cap-button"
+              className="sc-bcXGCL sc-laZSpB hzCEQq dUOTKb cap-button"
               onClick={[Function]}
               style={
                 {
@@ -144,7 +144,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
               cancel
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB DTDIA dldqLk cap-button"
+              className="sc-bcXGCL sc-laZSpB hzCEQq erzQLN cap-button"
               disabled={true}
               onClick={[Function]}
               type="button"

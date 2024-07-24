@@ -3,45 +3,45 @@
 exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <form
-    className="sc-bcXGCL ikCHIX"
+    className="sc-bcXGCL dVEtOZ"
     id="custom-domain-form"
     onSubmit={[Function]}
   >
     <h4
-      className="sc-bcXGCL iydxHs cap-heading"
+      className="sc-bcXGCL dfgxFG cap-heading"
     >
       domain.name
     </h4>
     <div
-      className="sc-bcXGCL agnBR"
+      className="sc-bcXGCL cgTHSD"
     >
       <div
-        className="sc-bcXGCL kikZuf"
+        className="sc-bcXGCL efvOvR"
       >
         <div
-          className="sc-bcXGCL ojXDq"
+          className="sc-bcXGCL eRxlVY"
         >
           <p
-            className="sc-bcXGCL hMzJdb cap-text"
+            className="sc-bcXGCL eGvFVR cap-text"
           >
             capco.subdomain
           </p>
           <p
-            className="sc-bcXGCL Ebxhi cap-text"
+            className="sc-bcXGCL jMALnA cap-text"
           >
             capco.subdomain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL fEPdMN cap-form-control"
+        className="sc-bcXGCL eLnDpj cap-form-control"
         role="group"
       >
         <label
-          className="sc-bcXGCL ituTec cap-form-label"
+          className="sc-bcXGCL hiAOoW cap-form-label"
           htmlFor="subDomain"
           style={
             {
@@ -51,7 +51,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
           }
         >
           <p
-            className="sc-bcXGCL JNsrJ cap-text"
+            className="sc-bcXGCL gUkIhr cap-text"
             style={
               {
                 "marginLeft": 0,
@@ -64,7 +64,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH cXnqTP cvFBmb cap-input"
+          className="sc-bcXGCL sc-UpCiH DluEz cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -79,35 +79,35 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
       </div>
     </div>
     <div
-      className="sc-bcXGCL gwrAWp"
+      className="sc-bcXGCL gdJCyL"
     >
       <div
-        className="sc-bcXGCL kikZuf"
+        className="sc-bcXGCL efvOvR"
       >
         <div
-          className="sc-bcXGCL ojXDq"
+          className="sc-bcXGCL eRxlVY"
         >
           <p
-            className="sc-bcXGCL hMzJdb cap-text"
+            className="sc-bcXGCL eGvFVR cap-text"
           >
             custom-domain
           </p>
           <p
-            className="sc-bcXGCL Ebxhi cap-text"
+            className="sc-bcXGCL jMALnA cap-text"
           >
             custom-domain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL kikZuf"
+        className="sc-bcXGCL efvOvR"
       >
         <div
-          className="sc-bcXGCL fEPdMN cap-form-control"
+          className="sc-bcXGCL eLnDpj cap-form-control"
           role="group"
         >
           <label
-            className="sc-bcXGCL ituTec cap-form-label"
+            className="sc-bcXGCL hiAOoW cap-form-label"
             htmlFor="customDomain"
             style={
               {
@@ -117,7 +117,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
             }
           >
             <p
-              className="sc-bcXGCL JNsrJ cap-text"
+              className="sc-bcXGCL gUkIhr cap-text"
               style={
                 {
                   "marginLeft": 0,
@@ -129,34 +129,34 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
             </p>
           </label>
           <span
-            className="sc-bcXGCL iWfQcz cap-form-guideline"
+            className="sc-bcXGCL daHHgd cap-form-guideline"
           >
             domain.must.point.to.cname
             <p
-              className="sc-bcXGCL Ebxhi cap-text"
+              className="sc-bcXGCL jMALnA cap-text"
             >
               domain.save.help
             </p>
           </span>
           <div
-            className="sc-bcXGCL kmjSdm cap-input-group"
+            className="sc-bcXGCL ciCehw cap-input-group"
           >
             <div
-              className="sc-bcXGCL irGATn"
+              className="sc-bcXGCL fDqpkd"
             >
               <div
-                className="sc-bcXGCL cTrnv sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL hRSTkl sc-fXqqsB gHWJqw cap-tag"
                 style={{}}
                 title="custom.domain.com"
               >
                 <p
-                  className="sc-bcXGCL kOjlpv cap-text cap-tag__label"
+                  className="sc-bcXGCL NFByR cap-text cap-tag__label"
                 >
                   custom.domain.com
                 </p>
                 <div
                   aria-label="close"
-                  className="sc-bcXGCL gLfoLZ cap-tag__closeButton"
+                  className="sc-bcXGCL da-DdJX cap-tag__closeButton"
                   onClick={[Function]}
                   role="button"
                   style={
@@ -167,7 +167,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
                   }
                 >
                   <svg
-                    className="sc-bcXGCL sc-eJDTud fFcDCb dUaqWe cap-icon"
+                    className="sc-bcXGCL sc-eJDTud iCzCId dUaqWe cap-icon"
                     fill="none"
                     viewBox="0 0 12 12"
                     xmlns="http://www.w3.org/2000/svg"
@@ -212,45 +212,45 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
 exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <form
-    className="sc-bcXGCL ikCHIX"
+    className="sc-bcXGCL dVEtOZ"
     id="custom-domain-form"
     onSubmit={[Function]}
   >
     <h4
-      className="sc-bcXGCL iydxHs cap-heading"
+      className="sc-bcXGCL dfgxFG cap-heading"
     >
       domain.name
     </h4>
     <div
-      className="sc-bcXGCL agnBR"
+      className="sc-bcXGCL cgTHSD"
     >
       <div
-        className="sc-bcXGCL kikZuf"
+        className="sc-bcXGCL efvOvR"
       >
         <div
-          className="sc-bcXGCL ojXDq"
+          className="sc-bcXGCL eRxlVY"
         >
           <p
-            className="sc-bcXGCL hMzJdb cap-text"
+            className="sc-bcXGCL eGvFVR cap-text"
           >
             capco.subdomain
           </p>
           <p
-            className="sc-bcXGCL Ebxhi cap-text"
+            className="sc-bcXGCL jMALnA cap-text"
           >
             capco.subdomain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL fEPdMN cap-form-control"
+        className="sc-bcXGCL eLnDpj cap-form-control"
         role="group"
       >
         <label
-          className="sc-bcXGCL ituTec cap-form-label"
+          className="sc-bcXGCL hiAOoW cap-form-label"
           htmlFor="subDomain"
           style={
             {
@@ -260,7 +260,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
           }
         >
           <p
-            className="sc-bcXGCL JNsrJ cap-text"
+            className="sc-bcXGCL gUkIhr cap-text"
             style={
               {
                 "marginLeft": 0,
@@ -273,7 +273,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH cXnqTP cvFBmb cap-input"
+          className="sc-bcXGCL sc-UpCiH DluEz cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -288,35 +288,35 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
       </div>
     </div>
     <div
-      className="sc-bcXGCL gwrAWp"
+      className="sc-bcXGCL gdJCyL"
     >
       <div
-        className="sc-bcXGCL kikZuf"
+        className="sc-bcXGCL efvOvR"
       >
         <div
-          className="sc-bcXGCL ojXDq"
+          className="sc-bcXGCL eRxlVY"
         >
           <p
-            className="sc-bcXGCL hMzJdb cap-text"
+            className="sc-bcXGCL eGvFVR cap-text"
           >
             custom-domain
           </p>
           <p
-            className="sc-bcXGCL Ebxhi cap-text"
+            className="sc-bcXGCL jMALnA cap-text"
           >
             custom-domain.description
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL kikZuf"
+        className="sc-bcXGCL efvOvR"
       >
         <div
-          className="sc-bcXGCL fEPdMN cap-form-control"
+          className="sc-bcXGCL eLnDpj cap-form-control"
           role="group"
         >
           <label
-            className="sc-bcXGCL ituTec cap-form-label"
+            className="sc-bcXGCL hiAOoW cap-form-label"
             htmlFor="customDomain"
             style={
               {
@@ -326,7 +326,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
             }
           >
             <p
-              className="sc-bcXGCL JNsrJ cap-text"
+              className="sc-bcXGCL gUkIhr cap-text"
               style={
                 {
                   "marginLeft": 0,
@@ -338,20 +338,20 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
             </p>
           </label>
           <span
-            className="sc-bcXGCL iWfQcz cap-form-guideline"
+            className="sc-bcXGCL daHHgd cap-form-guideline"
           >
             domain.must.point.to.cname
             <p
-              className="sc-bcXGCL Ebxhi cap-text"
+              className="sc-bcXGCL jMALnA cap-text"
             >
               domain.save.help
             </p>
           </span>
           <div
-            className="sc-bcXGCL kmjSdm cap-input-group"
+            className="sc-bcXGCL ciCehw cap-input-group"
           >
             <input
-              className="sc-bcXGCL sc-UpCiH cXnqTP cvFBmb cap-input"
+              className="sc-bcXGCL sc-UpCiH DluEz cvFBmb cap-input"
               disabled={false}
               id="customDomain"
               name="customDomain"
@@ -363,7 +363,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
               type="text"
             />
             <button
-              className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
+              className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
               disabled={true}
               type="submit"
             >

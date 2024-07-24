@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
-import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import VotesList from './VotesList'
 
 describe('<VotesList />', () => {
@@ -19,9 +19,7 @@ describe('<VotesList />', () => {
 
     TestVotesList = ({ showImages }) => (
       <RelaySuspensFragmentTest environment={environment}>
-        <MockProviders useCapUIProvider>
-          <TestRenderer showImages={showImages} />
-        </MockProviders>
+        <TestRenderer showImages={showImages} />
       </RelaySuspensFragmentTest>
     )
   })

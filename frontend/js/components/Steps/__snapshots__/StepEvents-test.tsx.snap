@@ -1,133 +1,138 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<StepEvents /> <TestStepEvents /> should render correctly 1`] = `
-<div
-  className="StepEventsstyle__Container-jvrJbu dRuOvl block"
-  id="StepEvents"
->
+Array [
   <div
-    className="sc-bcXGCL idNSxD"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="StepEventsstyle__Container-jvrJbu dRuOvl block"
+    id="StepEvents"
   >
-    <h2
-      className="sc-bcXGCL eElBWg cap-heading"
-    >
-      global.events
-       
-      <span
-        className="small excerpt"
-      >
-        3
-      </span>
-    </h2>
     <div
-      data-testid="Menu"
-      disclosure={
-        <Button
-          rightIcon="ARROW_DOWN"
-          variant="tertiary"
-        >
-          theme.show.status.future
-        </Button>
-      }
+      className="sc-bcXGCL foQVaX"
     >
-      <div
-        data-testid="List"
+      <h2
+        className="sc-bcXGCL BNvkx cap-heading"
       >
-        <div
-          border="none"
-          data-testid="Item"
-          onClick={[Function]}
+        global.events
+         
+        <span
+          className="small excerpt"
         >
-          <p
-            className="sc-bcXGCL gynDa-d cap-text"
+          3
+        </span>
+      </h2>
+      <div
+        data-testid="Menu"
+        disclosure={
+          <Button
+            rightIcon="ARROW_DOWN"
+            variant="tertiary"
           >
             theme.show.status.future
-          </p>
-        </div>
+          </Button>
+        }
+      >
         <div
-          border="none"
-          data-testid="Item"
-          onClick={[Function]}
+          data-testid="List"
         >
-          <p
-            className="sc-bcXGCL gynDa-d cap-text"
+          <div
+            border="none"
+            data-testid="Item"
+            onClick={[Function]}
           >
-            finished
-          </p>
+            <p
+              className="sc-bcXGCL jKVAiN cap-text"
+            >
+              theme.show.status.future
+            </p>
+          </div>
+          <div
+            border="none"
+            data-testid="Item"
+            onClick={[Function]}
+          >
+            <p
+              className="sc-bcXGCL jKVAiN cap-text"
+            >
+              finished
+            </p>
+          </div>
         </div>
       </div>
     </div>
-  </div>
-  <div
-    className="Loader__Container-dvTPbV qrEAX loader"
-    inline={false}
-  >
     <div
-      className="sc-ikHFqL NmBEW"
-      color="#333333"
-      size={40}
+      className="Loader__Container-dvTPbV qrEAX loader"
+      inline={false}
     >
       <div
-        className="sc-WKhfq kHQuoC"
-        delay={-1.2}
-        transform={30}
-      />
-      <div
-        className="sc-WKhfq khRrnE"
-        delay={-1.1}
-        transform={60}
-      />
-      <div
-        className="sc-WKhfq jHmJoA"
-        delay={-1}
-        transform={90}
-      />
-      <div
-        className="sc-WKhfq NUjdc"
-        delay={-0.9}
-        transform={120}
-      />
-      <div
-        className="sc-WKhfq fvYdyy"
-        delay={-0.8}
-        transform={150}
-      />
-      <div
-        className="sc-WKhfq cYgsBo"
-        delay={-0.7}
-        transform={180}
-      />
-      <div
-        className="sc-WKhfq dclYdf"
-        delay={-0.6}
-        transform={210}
-      />
-      <div
-        className="sc-WKhfq gVlTxl"
-        delay={-0.5}
-        transform={240}
-      />
-      <div
-        className="sc-WKhfq kLUmHr"
-        delay={-0.4}
-        transform={270}
-      />
-      <div
-        className="sc-WKhfq fQLSAC"
-        delay={-0.3}
-        transform={300}
-      />
-      <div
-        className="sc-WKhfq eTiyFA"
-        delay={-0.2}
-        transform={330}
-      />
-      <div
-        className="sc-WKhfq hvPubS"
-        delay={-0.1}
-        transform={360}
-      />
+        className="sc-ikHFqL NmBEW"
+        color="#333333"
+        size={40}
+      >
+        <div
+          className="sc-WKhfq kHQuoC"
+          delay={-1.2}
+          transform={30}
+        />
+        <div
+          className="sc-WKhfq khRrnE"
+          delay={-1.1}
+          transform={60}
+        />
+        <div
+          className="sc-WKhfq jHmJoA"
+          delay={-1}
+          transform={90}
+        />
+        <div
+          className="sc-WKhfq NUjdc"
+          delay={-0.9}
+          transform={120}
+        />
+        <div
+          className="sc-WKhfq fvYdyy"
+          delay={-0.8}
+          transform={150}
+        />
+        <div
+          className="sc-WKhfq cYgsBo"
+          delay={-0.7}
+          transform={180}
+        />
+        <div
+          className="sc-WKhfq dclYdf"
+          delay={-0.6}
+          transform={210}
+        />
+        <div
+          className="sc-WKhfq gVlTxl"
+          delay={-0.5}
+          transform={240}
+        />
+        <div
+          className="sc-WKhfq kLUmHr"
+          delay={-0.4}
+          transform={270}
+        />
+        <div
+          className="sc-WKhfq fQLSAC"
+          delay={-0.3}
+          transform={300}
+        />
+        <div
+          className="sc-WKhfq eTiyFA"
+          delay={-0.2}
+          transform={330}
+        />
+        <div
+          className="sc-WKhfq hvPubS"
+          delay={-0.1}
+          transform={360}
+        />
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

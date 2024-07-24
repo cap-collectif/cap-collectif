@@ -3,7 +3,7 @@
 exports[`<LocateAndZoomControl /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     data-testid="map"
@@ -15,14 +15,14 @@ Array [
         className="leaflet-control "
       >
         <div
-          className="sc-bcXGCL cdJeQF"
+          className="sc-bcXGCL GZPMf"
         >
           <button
-            className="sc-bcXGCL gKlFSi"
+            className="sc-bcXGCL fqMgRM"
             onClick={[Function]}
           >
             <svg
-              className="sc-bcXGCL sc-eJDTud cBAlyi hEjMCZ cap-icon"
+              className="sc-bcXGCL sc-eJDTud bJkauI hEjMCZ cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -41,11 +41,11 @@ Array [
             </svg>
           </button>
           <button
-            className="sc-bcXGCL itjhrd"
+            className="sc-bcXGCL flAlfz"
             onClick={[Function]}
           >
             <svg
-              className="sc-bcXGCL sc-eJDTud cBAlyi hEjMCZ cap-icon"
+              className="sc-bcXGCL sc-eJDTud bJkauI hEjMCZ cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -60,11 +60,11 @@ Array [
             </svg>
           </button>
           <button
-            className="sc-bcXGCL kFXhyi"
+            className="sc-bcXGCL idlzgQ"
             onClick={[Function]}
           >
             <svg
-              className="sc-bcXGCL sc-eJDTud cBAlyi hEjMCZ cap-icon"
+              className="sc-bcXGCL sc-eJDTud bJkauI hEjMCZ cap-icon"
               fill="none"
               viewBox="0 0 12 2"
               xmlns="http://www.w3.org/2000/svg"

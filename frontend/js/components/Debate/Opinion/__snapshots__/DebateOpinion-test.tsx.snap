@@ -3,32 +3,35 @@
 exports[`<DebateOpinion /> when the query is on desktop should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL jRgIZE cap-card"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dBdnLI cap-text"
+        className="sc-bcXGCL dRrWit cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kvrZpm"
+      className="sc-bcXGCL eJeGvx"
     />
     <div
-      className="sc-bcXGCL kOvzDP"
+      className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL lntwuc"
+        className="sc-bcXGCL BcDlt"
       >
         <div
-          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
+          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -39,7 +42,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bcXGCL exSVBv"
+            className="sc-bcXGCL fHacA-d"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -50,25 +53,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bcXGCL VbuOr"
+          className="sc-bcXGCL cBwqzf"
         >
           <p
-            className="sc-bcXGCL bCkqIq cap-text"
+            className="sc-bcXGCL eGzOei cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQJkPy cap-text"
+            className="sc-bcXGCL llGRuW cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL hQZIZa"
+        className="sc-bcXGCL diHJQS"
       >
         <h4
-          className="sc-bcXGCL hCBCzh cap-heading"
+          className="sc-bcXGCL gcgTEP cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -79,7 +82,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL dBUDbw cap-text"
+          className="sc-bcXGCL jMALnA cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -102,32 +105,35 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render an AGAINST opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL jRgIZE cap-card"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dBdnLI cap-text"
+        className="sc-bcXGCL dRrWit cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kvrZpm"
+      className="sc-bcXGCL eJeGvx"
     />
     <div
-      className="sc-bcXGCL kOvzDP"
+      className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL lntwuc"
+        className="sc-bcXGCL BcDlt"
       >
         <div
-          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
+          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -138,7 +144,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bcXGCL exSVBv"
+            className="sc-bcXGCL fHacA-d"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -149,25 +155,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bcXGCL VbuOr"
+          className="sc-bcXGCL cBwqzf"
         >
           <p
-            className="sc-bcXGCL bCkqIq cap-text"
+            className="sc-bcXGCL eGzOei cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQJkPy cap-text"
+            className="sc-bcXGCL llGRuW cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL hQZIZa"
+        className="sc-bcXGCL diHJQS"
       >
         <h4
-          className="sc-bcXGCL hCBCzh cap-heading"
+          className="sc-bcXGCL gcgTEP cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -178,7 +184,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL dBUDbw cap-text"
+          className="sc-bcXGCL jMALnA cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -201,29 +207,32 @@ Array [
 exports[`<DebateOpinion /> when the query is on desktop should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL enPTBa cap-card"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL ktIMbs cap-card"
   >
     <div
-      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dBdnLI cap-text"
+        className="sc-bcXGCL dRrWit cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kOvzDP"
+      className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL lntwuc"
+        className="sc-bcXGCL BcDlt"
       >
         <div
-          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
+          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -234,7 +243,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bcXGCL exSVBv"
+            className="sc-bcXGCL fHacA-d"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -245,25 +254,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bcXGCL VbuOr"
+          className="sc-bcXGCL cBwqzf"
         >
           <p
-            className="sc-bcXGCL bCkqIq cap-text"
+            className="sc-bcXGCL eGzOei cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQJkPy cap-text"
+            className="sc-bcXGCL llGRuW cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL hQZIZa"
+        className="sc-bcXGCL diHJQS"
       >
         <h4
-          className="sc-bcXGCL hCBCzh cap-heading"
+          className="sc-bcXGCL gcgTEP cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -274,7 +283,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL dBUDbw cap-text"
+          className="sc-bcXGCL jMALnA cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -297,32 +306,35 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render a FOR opinion 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL jRgIZE cap-card"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dBdnLI cap-text"
+        className="sc-bcXGCL dRrWit cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kvrZpm"
+      className="sc-bcXGCL eJeGvx"
     />
     <div
-      className="sc-bcXGCL kOvzDP"
+      className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL lntwuc"
+        className="sc-bcXGCL BcDlt"
       >
         <div
-          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
+          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -333,7 +345,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bcXGCL exSVBv"
+            className="sc-bcXGCL fHacA-d"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -344,25 +356,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bcXGCL VbuOr"
+          className="sc-bcXGCL cBwqzf"
         >
           <p
-            className="sc-bcXGCL bCkqIq cap-text"
+            className="sc-bcXGCL eGzOei cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQJkPy cap-text"
+            className="sc-bcXGCL llGRuW cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL hQZIZa"
+        className="sc-bcXGCL diHJQS"
       >
         <h4
-          className="sc-bcXGCL hCBCzh cap-heading"
+          className="sc-bcXGCL gcgTEP cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -373,7 +385,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL dBUDbw cap-text"
+          className="sc-bcXGCL jMALnA cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -388,7 +400,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-laZSpB cnvzQc jXQrWI cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-laZSpB cfdvRJ jHvBhg cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >
@@ -403,29 +415,32 @@ Array [
 exports[`<DebateOpinion /> when the query is on mobile should render with a read more link 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL enPTBa cap-card"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL ktIMbs cap-card"
   >
     <div
-      className="sc-bcXGCL kIDeKu sc-fXqqsB kJyISH cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dBdnLI cap-text"
+        className="sc-bcXGCL dRrWit cap-text"
       >
         opinion.for
       </span>
     </div>
     <div
-      className="sc-bcXGCL kOvzDP"
+      className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL lntwuc"
+        className="sc-bcXGCL BcDlt"
       >
         <div
-          className="sc-bcXGCL jKhGNH sc-ckEbfr jQHsgw cap-avatar"
+          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
           style={
             Object {
               "marginLeft": 0,
@@ -436,7 +451,7 @@ Array [
         >
           <img
             alt="Agui le penseur"
-            className="sc-bcXGCL exSVBv"
+            className="sc-bcXGCL fHacA-d"
             src="<mock-value-for-field-\\"url\\">"
             style={
               Object {
@@ -447,25 +462,25 @@ Array [
           />
         </div>
         <div
-          className="sc-bcXGCL VbuOr"
+          className="sc-bcXGCL cBwqzf"
         >
           <p
-            className="sc-bcXGCL bCkqIq cap-text"
+            className="sc-bcXGCL eGzOei cap-text"
           >
             Agui le penseur
           </p>
           <p
-            className="sc-bcXGCL dQJkPy cap-text"
+            className="sc-bcXGCL llGRuW cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
       </div>
       <div
-        className="sc-bcXGCL hQZIZa"
+        className="sc-bcXGCL diHJQS"
       >
         <h4
-          className="sc-bcXGCL hCBCzh cap-heading"
+          className="sc-bcXGCL gcgTEP cap-heading"
           style={
             Object {
               "marginLeft": 0,
@@ -476,7 +491,7 @@ Array [
           Je suis pour
         </h4>
         <p
-          className="sc-bcXGCL dBUDbw cap-text"
+          className="sc-bcXGCL jMALnA cap-text"
         >
           <div
             className=" ql-editor wysiwyg-render"
@@ -491,7 +506,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-laZSpB cnvzQc jXQrWI cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-laZSpB cfdvRJ jHvBhg cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >

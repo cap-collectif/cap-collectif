@@ -1,13 +1,23 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<VoteButton /> should render a modal disclosure when requirements not met 1`] = `
-<div
-  className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
-/>
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+]
 `;
 
 exports[`<VoteButton /> should render a vote button when no requirements 1`] = `
-<div
-  className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
-/>
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+]
 `;

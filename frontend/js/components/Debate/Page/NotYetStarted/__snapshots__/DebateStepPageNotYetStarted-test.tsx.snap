@@ -3,23 +3,23 @@
 exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL"
+    className="sc-bcXGCL cklhXU"
     id="DebateStepPageNotYetStarted"
   >
     <div
-      className="sc-bcXGCL gOMtuO"
+      className="sc-bcXGCL kbtrck"
     >
       <div
-        className="sc-bcXGCL ivAGAo sc-fXqqsB ewilwr cap-tag"
+        className="sc-bcXGCL bFhoSS sc-fXqqsB ewilwr cap-tag"
         title=""
       >
         count.daysUntil {"count":725}
       </div>
       <h2
-        className="sc-bcXGCL dcngbR cap-heading"
+        className="sc-bcXGCL OZTLb cap-heading"
       >
         &lt;mock-value-for-field-"title"&gt;
       </h2>

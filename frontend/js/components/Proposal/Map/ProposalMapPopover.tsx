@@ -153,7 +153,7 @@ export const ProposalMapPopover = ({ proposal, features, isMobile }: Props) => {
                 <img
                   loading="lazy"
                   src={proposal.media ? proposal.media.url : proposal?.category?.categoryImage?.image?.url}
-                  alt="proposal-illustration"
+                  alt=""
                 />
               ) : (
                 <>

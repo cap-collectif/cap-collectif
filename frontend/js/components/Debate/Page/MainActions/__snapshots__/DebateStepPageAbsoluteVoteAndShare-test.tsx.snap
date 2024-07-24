@@ -3,19 +3,22 @@
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL bnxznS"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL haernw"
   >
     <div
-      className="sc-bcXGCL cszhYs container"
+      className="sc-bcXGCL Hoyqa container"
     >
       <div
-        className="sc-bcXGCL jHwpaV"
+        className="sc-bcXGCL iPeShj"
       >
         <p
-          className="sc-bcXGCL kwOXCL cap-text"
+          className="sc-bcXGCL igxOtZ cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -26,7 +29,7 @@ Array [
           &lt;mock-value-for-field-"title"&gt;
         </p>
         <div
-          className="sc-bcXGCL bZOziP"
+          className="sc-bcXGCL jUtUph"
           style={
             Object {
               "opacity": 0,
@@ -37,7 +40,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bcXGCL ioCXKX"
+            className="sc-bcXGCL itMhoZ"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -50,10 +53,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bcXGCL jmSOyd"
+              className="sc-bcXGCL jNQjOz"
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +67,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bcXGCL Ebxhi cap-text"
+                className="sc-bcXGCL jMALnA cap-text"
               >
                 global.for
               </p>
@@ -168,7 +171,7 @@ Array [
             visible={false}
           >
             <div
-              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf gqmMHB bAlxBy"
+              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fQMUzr bAlxBy"
               style={
                 Object {
                   "bottom": "100%",
@@ -198,18 +201,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bcXGCL jBLBwk"
+              className="sc-bcXGCL rfkcq"
             >
               <p
-                className="sc-bcXGCL eIjTDD cap-text"
+                className="sc-bcXGCL yBlZV cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bcXGCL jbmmEh"
+                className="sc-bcXGCL ecTirb"
               >
                 <p
-                  className="sc-bcXGCL eVdTHW cap-text"
+                  className="sc-bcXGCL bMwsnA cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -224,7 +227,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
+                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -233,7 +236,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB ClYGY hlwnod cap-button"
+                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -247,7 +250,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bcXGCL kgkipK"
+            className="sc-bcXGCL eleOfw"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -260,10 +263,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bcXGCL jmSOyd"
+              className="sc-bcXGCL jNQjOz"
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
@@ -274,7 +277,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bcXGCL Ebxhi cap-text"
+                className="sc-bcXGCL jMALnA cap-text"
               >
                 global.against
               </p>
@@ -378,7 +381,7 @@ Array [
             visible={false}
           >
             <div
-              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf gqmMHB bAlxBy"
+              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fQMUzr bAlxBy"
               style={
                 Object {
                   "bottom": "100%",
@@ -408,18 +411,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bcXGCL jBLBwk"
+              className="sc-bcXGCL rfkcq"
             >
               <p
-                className="sc-bcXGCL eIjTDD cap-text"
+                className="sc-bcXGCL yBlZV cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bcXGCL jbmmEh"
+                className="sc-bcXGCL ecTirb"
               >
                 <p
-                  className="sc-bcXGCL eVdTHW cap-text"
+                  className="sc-bcXGCL bMwsnA cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -434,7 +437,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
+                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -443,7 +446,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB ClYGY hlwnod cap-button"
+                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -463,13 +466,16 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when argumented 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL bnxznS"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL haernw"
   >
     <div
-      className="sc-bcXGCL cszhYs container"
+      className="sc-bcXGCL Hoyqa container"
     >
       <div
         style={
@@ -480,7 +486,7 @@ Array [
         }
       >
         <div
-          className="sc-bcXGCL kVmzVn"
+          className="sc-bcXGCL eSIWuZ"
         >
           <span
             aria-label="vote"
@@ -497,7 +503,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB ifLJXS blfAEz cap-button"
+            className="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -505,7 +511,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bcXGCL deHSoy"
+          className="sc-bcXGCL kVWsnw"
         >
           <iframe
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -535,12 +541,12 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB bPdwyl eDMIiP cap-button"
+              className="sc-bcXGCL sc-laZSpB gHhxfT jEfYyY cap-button"
               onClick={[Function]}
               type="button"
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
+                className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon"
                 fill="none"
                 viewBox="0 0 32 32"
                 xmlns="http://www.w3.org/2000/svg"
@@ -567,13 +573,16 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on desktop renders correctly when voted 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL jepPEE"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL hyuAwu"
   >
     <div
-      className="sc-bcXGCL cszhYs container"
+      className="sc-bcXGCL Hoyqa container"
     >
       <div
         style={
@@ -584,7 +593,7 @@ Array [
         }
       >
         <div
-          className="sc-bcXGCL kVmzVn"
+          className="sc-bcXGCL eSIWuZ"
         >
           <span
             aria-label="vote"
@@ -601,7 +610,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB ifLJXS blfAEz cap-button"
+            className="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -609,7 +618,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bcXGCL bEiutf cap-card DebateStepPageVoteForm___StyledCard-fhHJyb kRMgRs"
+          className="sc-bcXGCL dLHpLx cap-card DebateStepPageVoteForm___StyledCard-fhHJyb kRMgRs"
         >
           <form
             className="DebateStepPageVoteForm__Form-kprBSF GzXgt"
@@ -670,19 +679,22 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL nkvpg"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kNdHYq"
   >
     <div
-      className="sc-bcXGCL cszhYs container"
+      className="sc-bcXGCL Hoyqa container"
     >
       <div
-        className="sc-bcXGCL jHwpaV"
+        className="sc-bcXGCL iPeShj"
       >
         <p
-          className="sc-bcXGCL kwOXCL cap-text"
+          className="sc-bcXGCL igxOtZ cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -693,7 +705,7 @@ Array [
           &lt;mock-value-for-field-"title"&gt;
         </p>
         <div
-          className="sc-bcXGCL bZOziP"
+          className="sc-bcXGCL jUtUph"
           style={
             Object {
               "opacity": 0,
@@ -704,7 +716,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bcXGCL ioCXKX"
+            className="sc-bcXGCL itMhoZ"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -717,10 +729,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bcXGCL jmSOyd"
+              className="sc-bcXGCL jNQjOz"
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
@@ -731,7 +743,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bcXGCL Ebxhi cap-text"
+                className="sc-bcXGCL jMALnA cap-text"
               >
                 global.for
               </p>
@@ -835,7 +847,7 @@ Array [
             visible={false}
           >
             <div
-              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fMutPh csqehL"
+              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf isVmUj csqehL"
               style={
                 Object {
                   "fontSize": 30,
@@ -865,18 +877,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bcXGCL jBLBwk"
+              className="sc-bcXGCL rfkcq"
             >
               <p
-                className="sc-bcXGCL eIjTDD cap-text"
+                className="sc-bcXGCL yBlZV cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bcXGCL jbmmEh"
+                className="sc-bcXGCL ecTirb"
               >
                 <p
-                  className="sc-bcXGCL eVdTHW cap-text"
+                  className="sc-bcXGCL bMwsnA cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -891,7 +903,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
+                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -900,7 +912,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB ClYGY hlwnod cap-button"
+                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -914,7 +926,7 @@ Array [
             aria-controls="popover-overlay"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bcXGCL kgkipK"
+            className="sc-bcXGCL eleOfw"
             onClick={[Function]}
             onClickCapture={[Function]}
             onKeyDown={[Function]}
@@ -927,10 +939,10 @@ Array [
             type="button"
           >
             <div
-              className="sc-bcXGCL jmSOyd"
+              className="sc-bcXGCL jNQjOz"
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud majJf hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
                 xmlns="http://www.w3.org/2000/svg"
@@ -941,7 +953,7 @@ Array [
                 />
               </svg>
               <p
-                className="sc-bcXGCL Ebxhi cap-text"
+                className="sc-bcXGCL jMALnA cap-text"
               >
                 global.against
               </p>
@@ -1045,7 +1057,7 @@ Array [
             visible={false}
           >
             <div
-              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fMutPh csqehL"
+              className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf isVmUj csqehL"
               style={
                 Object {
                   "fontSize": 30,
@@ -1075,18 +1087,18 @@ Array [
               </svg>
             </div>
             <div
-              className="sc-bcXGCL jBLBwk"
+              className="sc-bcXGCL rfkcq"
             >
               <p
-                className="sc-bcXGCL eIjTDD cap-text"
+                className="sc-bcXGCL yBlZV cap-text"
               >
                 vote.popover.title
               </p>
               <div
-                className="sc-bcXGCL jbmmEh"
+                className="sc-bcXGCL ecTirb"
               >
                 <p
-                  className="sc-bcXGCL eVdTHW cap-text"
+                  className="sc-bcXGCL bMwsnA cap-text"
                   style={
                     Object {
                       "marginLeft": 0,
@@ -1101,7 +1113,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB hgLfnE hlwnod cap-button"
+                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -1110,7 +1122,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB ClYGY hlwnod cap-button"
+                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -1130,13 +1142,16 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when argumented 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL bnxznS"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL haernw"
   >
     <div
-      className="sc-bcXGCL cszhYs container"
+      className="sc-bcXGCL Hoyqa container"
     >
       <div
         style={
@@ -1147,7 +1162,7 @@ Array [
         }
       >
         <div
-          className="sc-bcXGCL kVmzVn"
+          className="sc-bcXGCL eSIWuZ"
         >
           <span
             aria-label="vote"
@@ -1164,7 +1179,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB ifLJXS blfAEz cap-button"
+            className="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1172,7 +1187,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bcXGCL deHSoy"
+          className="sc-bcXGCL kVWsnw"
         >
           <iframe
             allow="autoplay; clipboard-write; encrypted-media; picture-in-picture; web-share"
@@ -1202,12 +1217,12 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB bPdwyl eDMIiP cap-button"
+              className="sc-bcXGCL sc-laZSpB gHhxfT jEfYyY cap-button"
               onClick={[Function]}
               type="button"
             >
               <svg
-                className="sc-bcXGCL sc-eJDTud ePSuPD knzWyK cap-icon"
+                className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon"
                 fill="none"
                 viewBox="0 0 32 32"
                 xmlns="http://www.w3.org/2000/svg"
@@ -1234,13 +1249,16 @@ Array [
 exports[`<DebateStepPageAbsoluteVoteAndShare /> when the query is on mobile renders correctly when voted 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL nkvpg"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kNdHYq"
   >
     <div
-      className="sc-bcXGCL cszhYs container"
+      className="sc-bcXGCL Hoyqa container"
     >
       <div
         style={
@@ -1251,10 +1269,10 @@ Array [
         }
       >
         <div
-          className="sc-bcXGCL kVmzVn"
+          className="sc-bcXGCL eSIWuZ"
         >
           <p
-            className="sc-bcXGCL kRzAGt cap-text"
+            className="sc-bcXGCL eDWurL cap-text"
           >
             <span
               aria-label="vote"
@@ -1273,7 +1291,7 @@ Array [
           </p>
         </div>
         <button
-          className="sc-bcXGCL sc-laZSpB hgBEdJ hlwnod cap-button"
+          className="sc-bcXGCL sc-laZSpB fknmkT ktRJXy cap-button"
           onClick={[Function]}
           type="button"
         >

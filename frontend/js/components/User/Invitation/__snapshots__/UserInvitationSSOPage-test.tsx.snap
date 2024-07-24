@@ -1,156 +1,46 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render facebook sso button 1`] = `
-<div
-  className="sc-dEVMhd Flex___StyledAppBox-SiGEY lgagqn UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
->
+Array [
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY deRCsk UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY lgagqn UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
   >
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY ielunv UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY deRCsk UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
     >
       <div
-        className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
-      >
-        <h2
-          className="sc-dEVMhd gLbeTF"
-        >
-          global-welcome
-           
-          <span
-            aria-label="global-welcome"
-            role="img"
-          >
-            👋
-          </span>
-        </h2>
-        <p
-          className="sc-dEVMhd hKGMjH"
-        >
-          invite-join-platform
-        </p>
-      </div>
-      <div
-        className="sc-dEVMhd Flex___StyledAppBox-SiGEY gkTRDr UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
+        className="sc-dEVMhd Flex___StyledAppBox-SiGEY ielunv UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
       >
         <div
-          className="SSOButtonstyle__LinkButton-imVlRX dgSBwV"
-          type="facebook"
+          className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
         >
-          <span
-            className="loginIcon"
-            style={
-              Object {
-                "lineHeight": "inherit",
-              }
-            }
+          <h2
+            className="sc-dEVMhd gLbeTF"
           >
-            <IconMock
-              aria-hidden={true}
-              className="icon"
-              style={
-                Object {
-                  "flexShrink": "0",
-                  "verticalAlign": "middle",
-                }
-              }
-            />
-          </span>
-          <a
-            href="/login/facebook?_destination=http://localhost"
-            rel="noreferrer"
-            target="_blank"
-            title="facebook"
-          >
-            <span>
-              Facebook
+            global-welcome
+             
+            <span
+              aria-label="global-welcome"
+              role="img"
+            >
+              👋
             </span>
-          </a>
-        </div>
-        <div
-          className="sc-dEVMhd Flex___StyledAppBox-SiGEY jpPNdl"
-        >
-          <div
-            className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
-          />
+          </h2>
           <p
-            className="sc-dEVMhd ilGFLT"
+            className="sc-dEVMhd hKGMjH"
           >
-            global-or
+            invite-join-platform
           </p>
-          <div
-            className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
-          />
         </div>
-        <a
-          backgroundColor="green"
-          className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
-          href="/?token=onishan"
-          onClick={[Function]}
-          textColor="white"
-        >
-          create-account-with-email
-        </a>
-      </div>
-    </div>
-  </div>
-  <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY gHJzlp UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
-  >
-    <div
-      className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
-    />
-    <img
-      alt=""
-      className="UserInvitationSSOPagestyle__Logo-irXgkD eRFVhU"
-      src="/logo"
-    />
-  </div>
-</div>
-`;
-
-exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render franceConnect sso button 1`] = `
-<div
-  className="sc-dEVMhd Flex___StyledAppBox-SiGEY lgagqn UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
->
-  <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY deRCsk UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
-  >
-    <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY ielunv UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
-    >
-      <div
-        className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
-      >
-        <h2
-          className="sc-dEVMhd gLbeTF"
-        >
-          global-welcome
-           
-          <span
-            aria-label="global-welcome"
-            role="img"
-          >
-            👋
-          </span>
-        </h2>
-        <p
-          className="sc-dEVMhd hKGMjH"
-        >
-          invite-join-platform
-        </p>
-      </div>
-      <div
-        className="sc-dEVMhd Flex___StyledAppBox-SiGEY gkTRDr UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
-      >
         <div
-          className="SSOButtonstyle__FranceConnectButton-iIoYOE cQSpVd"
+          className="sc-dEVMhd Flex___StyledAppBox-SiGEY gkTRDr UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
         >
-          <a
-            className="sc-dEVMhd Link__LinkInner-jUMeyB cxqOkf jQFfTS"
-            href="/login/franceconnect?_destination=http://localhost"
-            target="_blank"
+          <div
+            className="SSOButtonstyle__LinkButton-imVlRX dgSBwV"
+            type="facebook"
           >
             <span
               className="loginIcon"
@@ -171,46 +61,166 @@ exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render f
                 }
               />
             </span>
+            <a
+              href="/login/facebook?_destination=http://localhost"
+              rel="noreferrer"
+              target="_blank"
+              title="facebook"
+            >
+              <span>
+                Facebook
+              </span>
+            </a>
+          </div>
+          <div
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY jpPNdl"
+          >
+            <div
+              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+            />
+            <p
+              className="sc-dEVMhd ilGFLT"
+            >
+              global-or
+            </p>
+            <div
+              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+            />
+          </div>
+          <a
+            backgroundColor="green"
+            className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
+            href="/?token=onishan"
+            onClick={[Function]}
+            textColor="white"
+          >
+            create-account-with-email
           </a>
         </div>
-        <div
-          className="sc-dEVMhd Flex___StyledAppBox-SiGEY jpPNdl"
-        >
-          <div
-            className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
-          />
-          <p
-            className="sc-dEVMhd ilGFLT"
-          >
-            global-or
-          </p>
-          <div
-            className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
-          />
-        </div>
-        <a
-          backgroundColor="green"
-          className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
-          href="/?token=onishan"
-          onClick={[Function]}
-          textColor="white"
-        >
-          create-account-with-email
-        </a>
       </div>
     </div>
-  </div>
+    <div
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY gHJzlp UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
+    >
+      <div
+        className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
+      />
+      <img
+        alt=""
+        className="UserInvitationSSOPagestyle__Logo-irXgkD eRFVhU"
+        src="/logo"
+      />
+    </div>
+  </div>,
+]
+`;
+
+exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render franceConnect sso button 1`] = `
+Array [
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY gHJzlp UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY lgagqn UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
   >
     <div
-      className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
-    />
-    <img
-      alt=""
-      className="UserInvitationSSOPagestyle__Logo-irXgkD eRFVhU"
-      src="/logo"
-    />
-  </div>
-</div>
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY deRCsk UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
+    >
+      <div
+        className="sc-dEVMhd Flex___StyledAppBox-SiGEY ielunv UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
+      >
+        <div
+          className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
+        >
+          <h2
+            className="sc-dEVMhd gLbeTF"
+          >
+            global-welcome
+             
+            <span
+              aria-label="global-welcome"
+              role="img"
+            >
+              👋
+            </span>
+          </h2>
+          <p
+            className="sc-dEVMhd hKGMjH"
+          >
+            invite-join-platform
+          </p>
+        </div>
+        <div
+          className="sc-dEVMhd Flex___StyledAppBox-SiGEY gkTRDr UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
+        >
+          <div
+            className="SSOButtonstyle__FranceConnectButton-iIoYOE cQSpVd"
+          >
+            <a
+              className="sc-dEVMhd Link__LinkInner-jUMeyB cxqOkf jQFfTS"
+              href="/login/franceconnect?_destination=http://localhost"
+              target="_blank"
+            >
+              <span
+                className="loginIcon"
+                style={
+                  Object {
+                    "lineHeight": "inherit",
+                  }
+                }
+              >
+                <IconMock
+                  aria-hidden={true}
+                  className="icon"
+                  style={
+                    Object {
+                      "flexShrink": "0",
+                      "verticalAlign": "middle",
+                    }
+                  }
+                />
+              </span>
+            </a>
+          </div>
+          <div
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY jpPNdl"
+          >
+            <div
+              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+            />
+            <p
+              className="sc-dEVMhd ilGFLT"
+            >
+              global-or
+            </p>
+            <div
+              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+            />
+          </div>
+          <a
+            backgroundColor="green"
+            className="SSOButtonstyle__BaseButton-dgxwMq SSOButtonstyle__PrimarySSOButton-fiGXjA jEyDju hMpXwe"
+            href="/?token=onishan"
+            onClick={[Function]}
+            textColor="white"
+          >
+            create-account-with-email
+          </a>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY gHJzlp UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
+    >
+      <div
+        className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
+      />
+      <img
+        alt=""
+        className="UserInvitationSSOPagestyle__Logo-irXgkD eRFVhU"
+        src="/logo"
+      />
+    </div>
+  </div>,
+]
 `;

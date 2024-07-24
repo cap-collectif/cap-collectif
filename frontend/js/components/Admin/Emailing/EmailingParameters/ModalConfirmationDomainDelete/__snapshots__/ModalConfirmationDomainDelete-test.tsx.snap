@@ -2,12 +2,15 @@
 
 exports[`<ModalConfirmationDomainDelete /> <TestModalConfirmationDomainDelete /> should render correctly 1`] = `
 Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
   <button
     aria-controls="id-1"
     aria-describedby="id-2"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ fZFpqA iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ bvXRg iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -23,7 +26,7 @@ Array [
     type="button"
   >
     <IconMock
-      className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ klyNdT exKJSE AjyOr icon"
+      className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ foibYb dpibyo AjyOr icon"
     />
   </button>,
   <div
@@ -67,12 +70,15 @@ Array [
 
 exports[`<ModalConfirmationDomainDelete /> <TestModalConfirmationDomainDelete /> should render modal open 1`] = `
 Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
   <button
     aria-controls="id-1"
     aria-describedby="id-2"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ fZFpqA iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ bvXRg iWxcUO ButtonQuickAction___StyledButton-fmafsA etoUvh"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -88,7 +94,7 @@ Array [
     type="button"
   >
     <IconMock
-      className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ klyNdT exKJSE AjyOr icon"
+      className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ foibYb dpibyo AjyOr icon"
     />
   </button>,
   <div
@@ -126,7 +132,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-dEVMhd dqBCRG Modal__ModalContainerInner-gRvBLO"
+        className="sc-dEVMhd bjEjhK Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -135,7 +141,7 @@ Array [
         }
       >
         <div
-          className="sc-dEVMhd XLxAC Modal__ModalInner-fNGFsd"
+          className="sc-dEVMhd fwBdND Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -144,51 +150,51 @@ Array [
           }
         >
           <header
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY fvQiLM"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY bGRJMU"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk eRNTmy"
+              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk eJfkn"
             >
               <h2
-                className="sc-dEVMhd iENcWE"
+                className="sc-dEVMhd ffKkYR"
               >
                 delete-confirmation
               </h2>
             </div>
             <button
-              className="sc-dEVMhd Button__ButtonInner-dXfNcJ bEzIct iWxcUO"
+              className="sc-dEVMhd Button__ButtonInner-dXfNcJ dskxFv iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ ghCDIp exKJSE AjyOr icon"
+                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ bklSCx dpibyo AjyOr icon"
               />
             </button>
           </header>
           <main
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY bIujfK"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY aMkAC"
           >
             <p
-              className="sc-dEVMhd hnwPwR"
+              className="sc-dEVMhd hOWRlb"
             >
               are-you-sure-to-delete-something
             </p>
           </main>
           <footer
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY gwUZXS gPKEuH"
+            className="sc-dEVMhd Flex___StyledAppBox-SiGEY evqvO frpAOM"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig gEtlaU"
+              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig crLbTm"
             >
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ gCkDBp lilFYw"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ kwWEPD lilFYw"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ gCkDBp fjccAb"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ kwWEPD fjccAb"
                 onClick={[Function]}
                 type="button"
               >

@@ -235,11 +235,11 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
                 )}
               </ProposalPageBody>
             </Tab.Pane>
-            {proposal?.currentVotableStep?.canDisplayBallot && (
-              <Tab.Pane eventKey="votes">
+            <Tab.Pane eventKey="votes">
+              {proposal?.currentVotableStep?.canDisplayBallot ? (
                 <ProposalPageVotes proposal={proposal} setGlobalVotesCount={setVotesCount} />
-              </Tab.Pane>
-            )}
+              ) : null}
+            </Tab.Pane>
             <Tab.Pane eventKey="blog">
               <ProposalPageBody className="d-flex">
                 <ProposalPageBlog proposal={proposal} />

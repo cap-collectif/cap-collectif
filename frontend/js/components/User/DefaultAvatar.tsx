@@ -3,6 +3,8 @@ import * as React from 'react'
 type Props = {
   className: string
   size: number
+  role?: string
+  'aria-label'?: string
 }
 export default class DefaultAvatar extends React.Component<Props> {
   static defaultProps = {
@@ -11,7 +13,7 @@ export default class DefaultAvatar extends React.Component<Props> {
   }
 
   render() {
-    const { className, size } = this.props
+    const { className, size, ...rest } = this.props
     return (
       <svg
         style={{
@@ -22,6 +24,7 @@ export default class DefaultAvatar extends React.Component<Props> {
         width={`${size}px`}
         height={`${size}px`}
         viewBox="0 0 24 24"
+        {...rest}
       >
         <defs>
           <style>{`

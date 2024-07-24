@@ -3,7 +3,10 @@
 exports[`<UserInGroupModal /> should render correctly with user in 2 groups 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="people-with-access-to-project"
@@ -21,7 +24,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL ggqhBm cap-heading"
+          className="sc-bcXGCL jyqEHl cap-heading"
           id="contained-modal-title-lg"
         >
           &lt;mock-value-for-field-"title"&gt;
@@ -84,7 +87,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -98,7 +101,10 @@ Array [
 exports[`<UserInGroupModal /> should render correctly with user in load more 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="people-with-access-to-project"
@@ -116,7 +122,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL ggqhBm cap-heading"
+          className="sc-bcXGCL jyqEHl cap-heading"
           id="contained-modal-title-lg"
         >
           &lt;mock-value-for-field-"title"&gt;
@@ -179,7 +185,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -193,7 +199,10 @@ Array [
 exports[`<UserInGroupModal /> should render correctly without user in group 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="people-with-access-to-project"
@@ -211,7 +220,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL ggqhBm cap-heading"
+          className="sc-bcXGCL jyqEHl cap-heading"
           id="contained-modal-title-lg"
         >
           &lt;mock-value-for-field-"title"&gt;
@@ -274,7 +283,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[MockFunction]}
         type="button"
       >

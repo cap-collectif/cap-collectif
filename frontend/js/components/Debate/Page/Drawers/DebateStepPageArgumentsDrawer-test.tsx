@@ -3,7 +3,7 @@ import * as React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
-import MockProviders, { RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals } from '~/testUtils'
+import { RelaySuspensFragmentTest, addsSupportForPortals, clearSupportForPortals } from '~/testUtils'
 import type { DebateStepPageArgumentsDrawerTestQuery } from '~relay/DebateStepPageArgumentsDrawerTestQuery.graphql'
 import DebateStepPageArgumentsDrawer from './DebateStepPageArgumentsDrawer'
 
@@ -57,11 +57,9 @@ describe('<DebateStepPageArgumentsDrawer />', () => {
     }
 
     TestComponent = props => (
-      <MockProviders store={{}} useCapUIProvider>
-        <RelaySuspensFragmentTest environment={environment}>
-          <TestRenderer {...props} />
-        </RelaySuspensFragmentTest>
-      </MockProviders>
+      <RelaySuspensFragmentTest environment={environment}>
+        <TestRenderer {...props} />
+      </RelaySuspensFragmentTest>
     )
 
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))

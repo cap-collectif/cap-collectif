@@ -3,7 +3,7 @@ import * as React from 'react'
 import ReactTestRenderer, { act } from 'react-test-renderer'
 import { createMockEnvironment } from 'relay-test-utils'
 import ProjectHeaderThemeList, { ThemesButton } from '~/components/Project/ProjectHeaderThemeList'
-import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 
 describe('<ProjectHeaderThemeList />', () => {
   afterEach(() => {
@@ -37,20 +37,18 @@ describe('<ProjectHeaderThemeList />', () => {
   const environment = createMockEnvironment()
 
   const TestComponent = props => (
-    <MockProviders store={{}} useCapUIProvider>
-      <RelaySuspensFragmentTest
-        store={{
-          default: {
-            parameters: {
-              'color.link.hover': '#546E7A',
-            },
+    <RelaySuspensFragmentTest
+      store={{
+        default: {
+          parameters: {
+            'color.link.hover': '#546E7A',
           },
-        }}
-        environment={environment}
-      >
-        <ProjectHeaderThemeList {...props} />
-      </RelaySuspensFragmentTest>
-    </MockProviders>
+        },
+      }}
+      environment={environment}
+    >
+      <ProjectHeaderThemeList {...props} />
+    </RelaySuspensFragmentTest>
   )
 
   it('should render correctly', () => {

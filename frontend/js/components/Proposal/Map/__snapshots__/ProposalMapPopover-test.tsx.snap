@@ -90,7 +90,7 @@ exports[`<ProposalMapPopover /> should render popover with a picture given the f
       </h4>
       <div>
         <img
-          alt="proposal-illustration"
+          alt=""
           loading="lazy"
           src="media.jpg"
         />

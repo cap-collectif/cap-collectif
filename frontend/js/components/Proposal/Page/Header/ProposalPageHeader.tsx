@@ -277,11 +277,7 @@ export const ProposalPageHeader = ({
           </div>
         </HeaderActions>
         {proposal?.media?.url || proposal?.category?.categoryImage?.image?.url ? (
-          <Cover
-            src={proposal?.media?.url || proposal?.category?.categoryImage?.image?.url}
-            alt="proposal-illustration"
-            loading="eager"
-          />
+          <Cover src={proposal?.media?.url || proposal?.category?.categoryImage?.image?.url} alt="" loading="eager" />
         ) : (
           <div className="default-header">
             {icon && (
@@ -299,9 +295,14 @@ export const ProposalPageHeader = ({
           <h1>{proposal?.title}</h1>
           <Skeleton placeholder={<AvatarPlaceholder />} isLoaded={proposal !== null}>
             <Flex direction="row">
-              <UserAvatarLegacy user={proposal?.author} />
+              <UserAvatarLegacy
+                user={proposal?.author}
+                aria-describedby="proposal_author"
+                role="img"
+                aria-label={intl.formatMessage({ id: 'global.project_carrier' })}
+              />
               <About>
-                <div>{proposal?.author.username}</div>
+                <div id="proposal_author">{proposal?.author.username}</div>
                 <div>
                   {createdDate}
                   {modified && (

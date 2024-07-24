@@ -3,22 +3,22 @@
 exports[`<ProjectHeader /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kcBBm projectHeader"
+    className="sc-bcXGCL cHOlic projectHeader"
   >
     <div
-      className="sc-bcXGCL dYXQnD projectHeader__cover"
+      className="sc-bcXGCL haQolV projectHeader__cover"
     >
       <div
-        className="sc-bcXGCL craUUX projectHeader__cover__content"
+        className="sc-bcXGCL gbFXCd projectHeader__cover__content"
       >
         <div
-          className="sc-bcXGCL uaeZr"
+          className="sc-bcXGCL ptefd"
         >
           <div
-            className="sc-bcXGCL grsBuf cap-avatar-group projectHeader__authors platform__body"
+            className="sc-bcXGCL iOirtd cap-avatar-group projectHeader__authors platform__body"
             id="project-header"
             onClick={[Function]}
             role="group"
@@ -29,15 +29,15 @@ Array [
             }
           >
             <div
-              className="sc-bcXGCL kVLtqA"
+              className="sc-bcXGCL fypjYO"
             >
               <div
-                className="sc-bcXGCL dhMDWI sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL gOgsAW sc-ckEbfr gIIayp cap-avatar"
                 title="Vince"
               >
                 <img
                   alt="Vince"
-                  className="sc-bcXGCL exSVBv"
+                  className="sc-bcXGCL fHacA-d"
                   src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
                   style={
                     Object {
@@ -50,7 +50,7 @@ Array [
             </div>
           </div>
           <p
-            className="sc-bcXGCL hFnnay cap-text platform__body"
+            className="sc-bcXGCL dFDTZw cap-text platform__body"
             id="authors-credit"
             onClick={[Function]}
           >
@@ -58,7 +58,7 @@ Array [
           </p>
         </div>
         <h3
-          className="sc-bcXGCL kmrImc cap-text projectHeader__title platform__title"
+          className="sc-bcXGCL kgGGpS cap-text projectHeader__title platform__title"
           title="Food project "
         >
           Food project
@@ -66,7 +66,7 @@ Array [
         </h3>
       </div>
       <div
-        className="sc-bcXGCL bfgqnv projectHeader__coverVideo"
+        className="sc-bcXGCL iIrzUR projectHeader__coverVideo"
       >
         <div
           ariaLabel="project-header-video-modal"
@@ -117,7 +117,7 @@ Array [
         </div>
       </div>
       <div
-        className="sc-bcXGCL bHDScw"
+        className="sc-bcXGCL bSmYzG"
       >
         <div
           data-testid="Tooltip"
@@ -130,12 +130,12 @@ Array [
           placement="top"
         >
           <div
-            className="sc-bcXGCL guTJTH sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cokLsN sc-fXqqsB gHWJqw cap-tag"
             id="restricted-access"
             title=""
           >
             <svg
-              className="sc-bcXGCL sc-eJDTud cKTLIj hEjMCZ cap-icon"
+              className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
               fill="none"
               viewBox="0 0 10 12"
               xmlns="http://www.w3.org/2000/svg"

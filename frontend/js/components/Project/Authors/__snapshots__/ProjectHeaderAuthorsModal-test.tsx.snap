@@ -3,7 +3,7 @@
 exports[`<ProjectHeaderAuthorsModal /> renders correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="project.authors"
@@ -21,7 +21,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL ggqhBm cap-heading"
+          className="sc-bcXGCL jyqEHl cap-heading"
         >
           number-of-authors
         </h2>
@@ -110,7 +110,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hUhKMG fCNFbM cap-button"
+        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
         onClick={[MockFunction]}
         type="button"
       >

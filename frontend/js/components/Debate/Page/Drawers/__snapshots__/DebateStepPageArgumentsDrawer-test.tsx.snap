@@ -3,13 +3,13 @@
 exports[`<DebateStepPageArgumentsDrawer /> should render when open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL dryRsL DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL iLDPSx DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -18,10 +18,10 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL gKEnaY"
+        className="sc-bcXGCL dhUYSg"
       >
         <svg
-          className="sc-bcXGCL sc-eJDTud dlMClB hRSbNM cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud bPmEkv cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
@@ -36,15 +36,15 @@ Array [
           />
         </svg>
         <div
-          className="sc-bcXGCL VbuOr"
+          className="sc-bcXGCL cBwqzf"
         >
           <p
-            className="sc-bcXGCL cdJaTo cap-text"
+            className="sc-bcXGCL cUtTDY cap-text"
           >
             shortcut.opinion {"num":42}
           </p>
           <p
-            className="sc-bcXGCL jOqBKv cap-text"
+            className="sc-bcXGCL fDjuCX cap-text"
           >
             vote-count-for-and-against {"for":42,"against":42}
           </p>
@@ -67,39 +67,39 @@ Array [
         />
       </div>
       <div
-        className="sc-bcXGCL cKSHZf"
+        className="sc-bcXGCL byWdSB"
         onClose={[MockFunction]}
       >
         <div
-          className="sc-bcXGCL hlkRoy"
+          className="sc-bcXGCL cAmEUE"
         >
           <div>
             <div
-              className="sc-bcXGCL oTvNB"
+              className="sc-bcXGCL POZub"
             >
               <div
-                className="sc-bcXGCL cPkvvC cap-card"
+                className="sc-bcXGCL hMoEjM cap-card"
               >
                 <div
-                  className="sc-bcXGCL jYTALx"
+                  className="sc-bcXGCL kIfVGJ"
                 >
                   <div
-                    className="sc-bcXGCL iyGSqd"
+                    className="sc-bcXGCL dHfxkK"
                   >
                     <div
-                      className="sc-bcXGCL KMPfg"
+                      className="sc-bcXGCL dAywec"
                     >
                       <p
-                        className="sc-bcXGCL ewDSIB cap-text"
+                        className="sc-bcXGCL gbvSlK cap-text"
                       >
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL izlYpO sc-fXqqsB kJyISH cap-tag"
+                        className="sc-bcXGCL yRLQM sc-fXqqsB gHWJqw cap-tag"
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL dBdnLI cap-text"
+                          className="sc-bcXGCL dRrWit cap-text"
                         >
                           global.against
                         </span>
@@ -109,11 +109,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
+                          className="sc-bcXGCL kRFCoC sc-fXqqsB gHWJqw cap-tag"
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL dBdnLI cap-text"
+                            className="sc-bcXGCL dRrWit cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -121,34 +121,34 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL bTRcoP"
+                      className="sc-bcXGCL eFHuff"
                     />
                   </div>
                   <p
-                    className="sc-bcXGCL dBUDbw cap-text"
+                    className="sc-bcXGCL jMALnA cap-text"
                   >
                     &lt;mock-value-for-field-"body"&gt;
                      
                   </p>
                   <div
-                    className="sc-bcXGCL hhmNZm"
+                    className="sc-bcXGCL KHprC"
                   >
                     <div
                       data-testid="Tooltip"
                       label="confirm-account-to-interact"
                     >
                       <div
-                        className="sc-bcXGCL"
+                        className="sc-bcXGCL cklhXU"
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-laZSpB jIXiip blfAEz cap-button"
+                          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
-                            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
+                            className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
                             fill="none"
                             viewBox="0 0 10 12"
                             xmlns="http://www.w3.org/2000/svg"
@@ -162,7 +162,7 @@ Array [
                       </div>
                     </div>
                     <span
-                      className="sc-bcXGCL cHtwpS cap-text"
+                      className="sc-bcXGCL kWlzuu cap-text"
                     >
                       42
                     </span>
@@ -180,31 +180,31 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL oTvNB"
+              className="sc-bcXGCL POZub"
             >
               <div
-                className="sc-bcXGCL cPkvvC cap-card"
+                className="sc-bcXGCL hMoEjM cap-card"
               >
                 <div
-                  className="sc-bcXGCL jYTALx"
+                  className="sc-bcXGCL kIfVGJ"
                 >
                   <div
-                    className="sc-bcXGCL iyGSqd"
+                    className="sc-bcXGCL dHfxkK"
                   >
                     <div
-                      className="sc-bcXGCL KMPfg"
+                      className="sc-bcXGCL dAywec"
                     >
                       <p
-                        className="sc-bcXGCL ewDSIB cap-text"
+                        className="sc-bcXGCL gbvSlK cap-text"
                       >
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL izlYpO sc-fXqqsB kJyISH cap-tag"
+                        className="sc-bcXGCL yRLQM sc-fXqqsB gHWJqw cap-tag"
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL dBdnLI cap-text"
+                          className="sc-bcXGCL dRrWit cap-text"
                         >
                           global.against
                         </span>
@@ -214,11 +214,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
+                          className="sc-bcXGCL kRFCoC sc-fXqqsB gHWJqw cap-tag"
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL dBdnLI cap-text"
+                            className="sc-bcXGCL dRrWit cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -226,34 +226,34 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL bTRcoP"
+                      className="sc-bcXGCL eFHuff"
                     />
                   </div>
                   <p
-                    className="sc-bcXGCL dBUDbw cap-text"
+                    className="sc-bcXGCL jMALnA cap-text"
                   >
                     &lt;mock-value-for-field-"body"&gt;
                      
                   </p>
                   <div
-                    className="sc-bcXGCL hhmNZm"
+                    className="sc-bcXGCL KHprC"
                   >
                     <div
                       data-testid="Tooltip"
                       label="confirm-account-to-interact"
                     >
                       <div
-                        className="sc-bcXGCL"
+                        className="sc-bcXGCL cklhXU"
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-laZSpB jIXiip blfAEz cap-button"
+                          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
-                            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
+                            className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
                             fill="none"
                             viewBox="0 0 10 12"
                             xmlns="http://www.w3.org/2000/svg"
@@ -267,7 +267,7 @@ Array [
                       </div>
                     </div>
                     <span
-                      className="sc-bcXGCL cHtwpS cap-text"
+                      className="sc-bcXGCL kWlzuu cap-text"
                     >
                       42
                     </span>
@@ -285,31 +285,31 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL oTvNB"
+              className="sc-bcXGCL POZub"
             >
               <div
-                className="sc-bcXGCL cPkvvC cap-card"
+                className="sc-bcXGCL hMoEjM cap-card"
               >
                 <div
-                  className="sc-bcXGCL jYTALx"
+                  className="sc-bcXGCL kIfVGJ"
                 >
                   <div
-                    className="sc-bcXGCL iyGSqd"
+                    className="sc-bcXGCL dHfxkK"
                   >
                     <div
-                      className="sc-bcXGCL KMPfg"
+                      className="sc-bcXGCL dAywec"
                     >
                       <p
-                        className="sc-bcXGCL ewDSIB cap-text"
+                        className="sc-bcXGCL gbvSlK cap-text"
                       >
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL izlYpO sc-fXqqsB kJyISH cap-tag"
+                        className="sc-bcXGCL yRLQM sc-fXqqsB gHWJqw cap-tag"
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL dBdnLI cap-text"
+                          className="sc-bcXGCL dRrWit cap-text"
                         >
                           global.against
                         </span>
@@ -319,11 +319,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kAvSqP sc-fXqqsB kJyISH cap-tag"
+                          className="sc-bcXGCL kRFCoC sc-fXqqsB gHWJqw cap-tag"
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL dBdnLI cap-text"
+                            className="sc-bcXGCL dRrWit cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -331,34 +331,34 @@ Array [
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL bTRcoP"
+                      className="sc-bcXGCL eFHuff"
                     />
                   </div>
                   <p
-                    className="sc-bcXGCL dBUDbw cap-text"
+                    className="sc-bcXGCL jMALnA cap-text"
                   >
                     &lt;mock-value-for-field-"body"&gt;
                      
                   </p>
                   <div
-                    className="sc-bcXGCL hhmNZm"
+                    className="sc-bcXGCL KHprC"
                   >
                     <div
                       data-testid="Tooltip"
                       label="confirm-account-to-interact"
                     >
                       <div
-                        className="sc-bcXGCL"
+                        className="sc-bcXGCL cklhXU"
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-laZSpB jIXiip blfAEz cap-button"
+                          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
-                            className="sc-bcXGCL sc-eJDTud bxeyQB hRSbNM cap-icon"
+                            className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
                             fill="none"
                             viewBox="0 0 10 12"
                             xmlns="http://www.w3.org/2000/svg"
@@ -372,7 +372,7 @@ Array [
                       </div>
                     </div>
                     <span
-                      className="sc-bcXGCL cHtwpS cap-text"
+                      className="sc-bcXGCL kWlzuu cap-text"
                     >
                       42
                     </span>

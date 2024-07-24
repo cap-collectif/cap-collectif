@@ -1,126 +1,151 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
-<div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
->
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
+Array [
   <div
-    className="mb-30 project__step-dates "
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <div
-      className="mr-15 d-ib"
+    <h2
+      className="h2"
     >
-      <i
-        className="cap cap-calendar-2-1"
-      />
-       
-      global.dates.full_day
+      I am a title
+    </h2>
+    <div
+      className="mb-30 project__step-dates "
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        global.dates.full_day
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<StepPageHeader /> should render correctly a consultationStep with a description 1`] = `
-<div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
->
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
+Array [
   <div
-    className="mb-30 project__step-dates "
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <div
-      className="mr-15 d-ib"
+    <h2
+      className="h2"
     >
-      <i
-        className="cap cap-calendar-2-1"
-      />
-       
-      global.dates.full_day
+      I am a title
+    </h2>
+    <div
+      className="mb-30 project__step-dates "
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        global.dates.full_day
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
-<div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
->
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
+Array [
   <div
-    className="mb-30 project__step-dates "
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <div
-      className="mr-15 d-ib"
+    <h2
+      className="h2"
     >
-      <i
-        className="cap cap-calendar-2-1"
-      />
-       
-      global.dates.full_day
+      I am a title
+    </h2>
+    <div
+      className="mb-30 project__step-dates "
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        global.dates.full_day
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
-<div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
->
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
+Array [
   <div
-    className="mb-30 project__step-dates "
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <div
-      className="mr-15 d-ib"
+    <h2
+      className="h2"
     >
-      <i
-        className="cap cap-calendar-2-1"
-      />
-       
-      global.dates.full_day
+      I am a title
+    </h2>
+    <div
+      className="mb-30 project__step-dates "
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        global.dates.full_day
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;
 
 exports[`<StepPageHeader /> should render correctly a selectionStep with interpellation 1`] = `
-<div
-  className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
->
-  <h2
-    className="h2"
-  >
-    I am a title
-  </h2>
+Array [
   <div
-    className="mb-30 project__step-dates "
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
   >
-    <div
-      className="mr-15 d-ib"
+    <h2
+      className="h2"
     >
-      <i
-        className="cap cap-calendar-2-1"
-      />
-       
-      global.dates.full_day
+      I am a title
+    </h2>
+    <div
+      className="mb-30 project__step-dates "
+    >
+      <div
+        className="mr-15 d-ib"
+      >
+        <i
+          className="cap cap-calendar-2-1"
+        />
+         
+        global.dates.full_day
+      </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

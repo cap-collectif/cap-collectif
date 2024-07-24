@@ -1,171 +1,176 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render correctly 1`] = `
-<div
-  className="sc-dEVMhd Flex___StyledAppBox-SiGEY hszSJA gEtlaU"
->
+Array [
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY cmRQQI crLbTm"
   >
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY fToQuP bLsrSH"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt"
     >
-      <p
-        className="sc-dEVMhd ePBrAi"
+      <div
+        className="sc-dEVMhd Flex___StyledAppBox-SiGEY eSoecz gqpUzc"
       >
-        authentication-sender-domains-dkim-spf
-      </p>
-      <p
-        className="sc-dEVMhd jlpQMI"
-      >
-        authentication-sender-domains-explanation
-         
-        <a
-          className="sc-dEVMhd Link__LinkInner-jUMeyB jQFfTS"
-          href="https://aide.cap-collectif.com/article/249-authentification-de-votre-domaine-d-envoi"
-          rel="noopener noreferrer"
-          target="blank"
+        <p
+          className="sc-dEVMhd iLMhyW"
         >
-          learn.more
-        </a>
-      </p>
-    </div>
-    <button
-      aria-controls="id-1"
-      aria-expanded={false}
-      aria-haspopup="dialog"
-      className="sc-dEVMhd Button__ButtonInner-dXfNcJ ghwyFq cYRsYv"
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      type="button"
-    >
-      add-a-domain
-    </button>
-    <div
-      aria-label="authentication-sender-domains"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
-      id="id-1"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
-        Object {
-          "display": "none",
+          authentication-sender-domains-dkim-spf
+        </p>
+        <p
+          className="sc-dEVMhd egoKOK"
+        >
+          authentication-sender-domains-explanation
+           
+          <a
+            className="sc-dEVMhd Link__LinkInner-jUMeyB jQFfTS"
+            href="https://aide.cap-collectif.com/article/249-authentification-de-votre-domaine-d-envoi"
+            rel="noopener noreferrer"
+            target="blank"
+          >
+            learn.more
+          </a>
+        </p>
+      </div>
+      <button
+        aria-controls="id-1"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-dEVMhd Button__ButtonInner-dXfNcJ djOXew cYRsYv"
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        type="button"
+      >
+        add-a-domain
+      </button>
+      <div
+        aria-label="authentication-sender-domains"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-1"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
         }
-      }
-      tabIndex={-1}
-    />
-  </div>
-  <div
-    className="sc-dEVMhd cxqOkf"
-  >
-    <table
-      className="sc-dEVMhd jJtkuc"
+        tabIndex={-1}
+      />
+    </div>
+    <div
+      className="sc-dEVMhd cxqOkf"
     >
-      <thead
-        className="sc-dEVMhd kAipEX"
+      <table
+        className="sc-dEVMhd jmbRni"
       >
-        <tr
-          className="sc-dEVMhd Tr___StyledAppBox-hsTUSR kqvrPx"
+        <thead
+          className="sc-dEVMhd eNKImK"
         >
-          <th
-            className="sc-dEVMhd wRfEf"
+          <tr
+            className="sc-dEVMhd Tr___StyledAppBox-hsTUSR kqvrPx"
           >
-            global.domain
-          </th>
-          <th
-            className="sc-dEVMhd wRfEf"
-          >
-            global.service
-          </th>
-          <th
-            className="sc-dEVMhd wRfEf"
-          >
-            global.spf
-          </th>
-          <th
-            className="sc-dEVMhd wRfEf"
-          >
-            global.dkim
-          </th>
-          <th
-            className="sc-dEVMhd wRfEf"
-          />
-        </tr>
-      </thead>
-      <tbody
-        className="sc-dEVMhd hEqXzj"
-      >
-        <tr
-          className="sc-dEVMhd Tr___StyledAppBox-hsTUSR kqvrPx"
-          id="sender-email-domain-1"
+            <th
+              className="sc-dEVMhd WVmtX"
+            >
+              global.domain
+            </th>
+            <th
+              className="sc-dEVMhd WVmtX"
+            >
+              global.service
+            </th>
+            <th
+              className="sc-dEVMhd WVmtX"
+            >
+              global.spf
+            </th>
+            <th
+              className="sc-dEVMhd WVmtX"
+            >
+              global.dkim
+            </th>
+            <th
+              className="sc-dEVMhd WVmtX"
+            />
+          </tr>
+        </thead>
+        <tbody
+          className="sc-dEVMhd hEqXzj"
         >
-          <td
-            className="sc-dEVMhd Td___StyledAppBox-cCcTFr hiNMzv dthgpN"
-            style={
-              Object {
-                "whiteSpace": "initial",
-              }
-            }
+          <tr
+            className="sc-dEVMhd Tr___StyledAppBox-hsTUSR kqvrPx"
+            id="sender-email-domain-1"
           >
-            test.com
-          </td>
-          <td
-            className="sc-dEVMhd Td___StyledAppBox-cCcTFr hiNMzv dthgpN"
-            style={
-              Object {
-                "whiteSpace": "initial",
+            <td
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              style={
+                Object {
+                  "whiteSpace": "initial",
+                }
               }
-            }
-          >
-            Mailjet
-          </td>
-          <td
-            className="sc-dEVMhd Td___StyledAppBox-cCcTFr hiNMzv dthgpN"
-            style={
-              Object {
-                "whiteSpace": "initial",
+            >
+              test.com
+            </td>
+            <td
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              style={
+                Object {
+                  "whiteSpace": "initial",
+                }
               }
-            }
-          >
-            <IconMock
-              className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ fHgDOK exKJSE AjyOr icon"
-            />
-          </td>
-          <td
-            className="sc-dEVMhd Td___StyledAppBox-cCcTFr hiNMzv dthgpN"
-            style={
-              Object {
-                "whiteSpace": "initial",
+            >
+              Mailjet
+            </td>
+            <td
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              style={
+                Object {
+                  "whiteSpace": "initial",
+                }
               }
-            }
-          >
-            <IconMock
-              className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ fHgDOK exKJSE AjyOr icon"
-            />
-          </td>
-          <td
-            className="sc-dEVMhd Td___StyledAppBox-cCcTFr hiNMzv dthgpN"
-            style={
-              Object {
-                "whiteSpace": "initial",
+            >
+              <IconMock
+                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ JPSIS dpibyo AjyOr icon"
+              />
+            </td>
+            <td
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              style={
+                Object {
+                  "whiteSpace": "initial",
+                }
               }
-            }
-          >
-            -
-          </td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-</div>
+            >
+              <IconMock
+                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ JPSIS dpibyo AjyOr icon"
+              />
+            </td>
+            <td
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              style={
+                Object {
+                  "whiteSpace": "initial",
+                }
+              }
+            >
+              -
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>,
+]
 `;

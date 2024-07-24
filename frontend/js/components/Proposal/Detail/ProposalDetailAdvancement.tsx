@@ -141,7 +141,11 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
     if (!proposal) return null
     const progressSteps = generateProgressStepsWithColorAndStatus(proposal.progressSteps)
     return (
-      <>
+      <ol
+        style={{
+          listStyle: 'none',
+        }}
+      >
         {displayedSteps.map((step, index) => {
           let roundColor = grey
 
@@ -162,6 +166,7 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
                 progressStep: false,
                 timeless: step.timeless,
               }}
+              active={step.isCurrent}
               status={step.isCurrent ? this.getStatus(step) : null}
               roundColor={roundColor}
               borderColor={
@@ -173,9 +178,10 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
               }
             >
               {step.isCurrent && step.allowingProgressSteps && (
-                <div
+                <ol
                   style={{
                     marginLeft: 30,
+                    listStyle: 'none',
                   }}
                 >
                   {progressSteps.map((progressStep, i) => (
@@ -192,12 +198,12 @@ export class ProposalDetailAdvancement extends React.Component<Props> {
                       borderColor={i + 1 === progressSteps.length ? null : progressStep.borderColor}
                     />
                   ))}
-                </div>
+                </ol>
               )}
             </ProposalDetailAdvancementStep>
           )
         })}
-      </>
+      </ol>
     )
   }
 }

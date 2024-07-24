@@ -3,26 +3,26 @@
 exports[`<EmptyList /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL gWzTZu"
+    className="sc-bcXGCL dEkiik"
   >
     <div
-      className="sc-bcXGCL"
+      className="sc-bcXGCL cklhXU"
     >
       <div
-        className="sc-bcXGCL chmsbw cap-text"
+        className="sc-bcXGCL fAcgUi cap-text"
       >
         no-result-on-search
       </div>
       <div
-        className="sc-bcXGCL bLRGnf cap-text"
+        className="sc-bcXGCL vxPNh cap-text"
       >
         try-new-keywords
       </div>
       <button
-        className="sc-bcXGCL sc-laZSpB htzGfw hlwnod cap-button"
+        className="sc-bcXGCL sc-laZSpB hWFQQi ktRJXy cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -30,7 +30,7 @@ Array [
       </button>
     </div>
     <div
-      className="sc-bcXGCL lnrAbg"
+      className="sc-bcXGCL eyYpzS"
     >
       <svg
         aria-hidden="true"

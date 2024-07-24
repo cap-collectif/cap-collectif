@@ -3,47 +3,50 @@
 exports[`<ProposalMapSelectedView /> <TestProposalMapSelectedView /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL igBKrt"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL ixOQLV"
     onTouchEnd={[Function]}
     onTouchStart={[Function]}
   >
     <div
-      className="sc-bcXGCL gwIacT"
+      className="sc-bcXGCL ectsyw"
     >
       <div
-        className="sc-bcXGCL chpKhi"
+        className="sc-bcXGCL eHKkce"
       />
     </div>
     <div
-      className="sc-bcXGCL dTkjmI"
+      className="sc-bcXGCL eycnJE"
     >
       <a
         href="/project///votez-pour-vos-projets"
         onClick={[Function]}
       >
         <h3
-          className="sc-bcXGCL eXsKFZ cap-heading"
+          className="sc-bcXGCL ia-dLpc cap-heading"
           title="Votez pour vos projets favoris"
         >
           Votez pour vos projets favoris
         </h3>
         <div
-          className="sc-bcXGCL dyxqmw cap-text"
+          className="sc-bcXGCL ebNHa cap-text"
         >
           Lorem ipsum
         </div>
       </a>
       <div
-        className="sc-bcXGCL jTfoOu"
+        className="sc-bcXGCL kNlTtw"
       >
         <div
-          className="sc-bcXGCL hWQjMp"
+          className="sc-bcXGCL ktrPkW"
         >
           <div
-            className="sc-bcXGCL gXVua sc-ckEbfr hRjurn cap-avatar"
+            className="sc-bcXGCL iqbPGV sc-ckEbfr gPtdgb cap-avatar"
             style={
               Object {
                 "marginLeft": 0,
@@ -53,11 +56,11 @@ Array [
             title=""
           />
           <span
-            className="sc-bcXGCL DXWTn cap-text"
+            className="sc-bcXGCL bfmZCW cap-text"
           />
         </div>
         <div
-          className="sc-bcXGCL fWIBtd"
+          className="sc-bcXGCL jTfUQr"
         />
       </div>
     </div>

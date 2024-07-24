@@ -1,58 +1,29 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should render correctly 1`] = `
-<div
-  className="sc-dEVMhd Flex___StyledAppBox-SiGEY hszSJA gEtlaU"
->
+Array [
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt bLsrSH"
-  >
-    <p
-      className="sc-dEVMhd ePBrAi"
-    >
-      notification-email
-    </p>
-    <p
-      className="sc-dEVMhd jlpQMI"
-    >
-      notification-email-explanation
-    </p>
-  </div>
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY chsOac SectionEmailNotification__FieldContainer-gFowVC exZAvD"
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY cmRQQI crLbTm"
   >
     <div
-      className="form-group"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt gqpUzc"
     >
-      <label
-        className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
-        hasImage={false}
-        htmlFor="recipient-email"
-        id="label-recipient-email"
-        type="label"
+      <p
+        className="sc-dEVMhd iLMhyW"
       >
-        recipient-email
-      </label>
-      <input
-        aria-describedby="label-recipient-email "
-        aria-invalid={false}
-        autoFocus={false}
-        className="form-control"
-        id="recipient-email"
-        name="recipient-email"
-        onBlur={[Function]}
-        onChange={[Function]}
-        onDragStart={[Function]}
-        onDrop={[Function]}
-        onFocus={[Function]}
-        placeholder="global.placeholder.email"
-        type="text"
-        value="assistance@cap-collectif.com"
-        warnings={null}
-      />
+        notification-email
+      </p>
+      <p
+        className="sc-dEVMhd egoKOK"
+      >
+        notification-email-explanation
+      </p>
     </div>
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig gEtlaU"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY chsOac SectionEmailNotification__FieldContainer-gFowVC exZAvD"
     >
       <div
         className="form-group"
@@ -60,201 +31,235 @@ exports[`<SectionEmailNotification /> <TestSectionEmailNotification /> should re
         <label
           className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
           hasImage={false}
-          htmlFor="sender-email"
-          id="label-select-sender-email"
+          htmlFor="recipient-email"
+          id="label-recipient-email"
           type="label"
         >
-          sender-email
-        </label>
-        <div
-          className=""
-          id="sender-email"
-        >
-          <div
-            className="Select__SelectContainer-bqrvno select-container"
-            hasButtonAfter={false}
-          >
-            <div
-              className="react-select-container css-2b097c-container"
-              onKeyDown={[Function]}
-            >
-              <span
-                aria-atomic="false"
-                aria-live="polite"
-                aria-relevant="additions text"
-                className="css-1f43avz-a11yText-A11yText"
-              />
-              <div
-                className="react-select__control css-yk16xz-control"
-                onMouseDown={[Function]}
-                onTouchEnd={[Function]}
-              >
-                <div
-                  className="react-select__value-container css-g1d714-ValueContainer"
-                >
-                  <div
-                    className="react-select__placeholder css-1wa3eu0-placeholder"
-                  >
-                    global.placeholder.email
-                  </div>
-                  <div
-                    className="css-b8ldur-Input"
-                  >
-                    <div
-                      className="react-select__input"
-                      style={
-                        Object {
-                          "display": "inline-block",
-                        }
-                      }
-                    >
-                      <input
-                        aria-autocomplete="list"
-                        aria-labelledby="label-select-sender-email"
-                        autoCapitalize="none"
-                        autoComplete="off"
-                        autoCorrect="off"
-                        disabled={false}
-                        id="react-select-2-input"
-                        onBlur={[Function]}
-                        onChange={[Function]}
-                        onFocus={[Function]}
-                        spellCheck="false"
-                        style={
-                          Object {
-                            "background": 0,
-                            "border": 0,
-                            "boxSizing": "content-box",
-                            "color": "inherit",
-                            "fontSize": "inherit",
-                            "label": "input",
-                            "opacity": 1,
-                            "outline": 0,
-                            "padding": 0,
-                            "width": "1px",
-                          }
-                        }
-                        tabIndex="0"
-                        type="text"
-                        value=""
-                      />
-                      <div
-                        style={
-                          Object {
-                            "height": 0,
-                            "left": 0,
-                            "overflow": "scroll",
-                            "position": "absolute",
-                            "top": 0,
-                            "visibility": "hidden",
-                            "whiteSpace": "pre",
-                          }
-                        }
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="react-select__indicators css-1hb7zxy-IndicatorsContainer"
-                >
-                  <span
-                    className="react-select__indicator-separator css-1okebmr-indicatorSeparator"
-                  />
-                  <div
-                    aria-hidden="true"
-                    className="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
-                    onMouseDown={[Function]}
-                    onTouchEnd={[Function]}
-                  >
-                    <svg
-                      aria-hidden="true"
-                      className="css-tj5bde-Svg"
-                      focusable="false"
-                      height={20}
-                      viewBox="0 0 20 20"
-                      width={20}
-                    >
-                      <path
-                        d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
-                      />
-                    </svg>
-                  </div>
-                </div>
-              </div>
-              <input
-                name="sender-email"
-                type="hidden"
-                value=""
-              />
-            </div>
-          </div>
-        </div>
-      </div>
-      <div
-        className="form-group"
-      >
-        <label
-          className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
-          hasImage={false}
-          htmlFor="sender-name"
-          id="label-sender-name"
-          type="label"
-        >
-          sender-name
+          recipient-email
         </label>
         <input
-          aria-describedby="label-sender-name "
+          aria-describedby="label-recipient-email "
           aria-invalid={false}
           autoFocus={false}
           className="form-control"
-          id="sender-name"
-          name="sender-name"
+          id="recipient-email"
+          name="recipient-email"
           onBlur={[Function]}
           onChange={[Function]}
           onDragStart={[Function]}
           onDrop={[Function]}
           onFocus={[Function]}
-          placeholder="global.placeholder.name"
+          placeholder="global.placeholder.email"
           type="text"
-          value="Cap Collectif"
+          value="assistance@cap-collectif.com"
           warnings={null}
         />
       </div>
-    </div>
-    <button
-      aria-controls="id-1"
-      aria-expanded={false}
-      aria-haspopup="dialog"
-      className="sc-dEVMhd Button__ButtonInner-dXfNcJ eOaNyl egpGUm"
-      onClick={[Function]}
-      onClickCapture={[Function]}
-      onKeyDown={[Function]}
-      onKeyPressCapture={[Function]}
-      onKeyUp={[Function]}
-      onMouseDown={[Function]}
-      onMouseDownCapture={[Function]}
-      type="button"
-    >
-      global.add
-    </button>
-    <div
-      aria-label="add-sender-email-address"
-      aria-modal={true}
-      data-dialog={true}
-      hidden={true}
-      id="id-1"
-      onAnimationEnd={[Function]}
-      onBlur={[Function]}
-      onKeyDown={[Function]}
-      onTransitionEnd={[Function]}
-      role="dialog"
-      style={
-        Object {
-          "display": "none",
+      <div
+        className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig crLbTm"
+      >
+        <div
+          className="form-group"
+        >
+          <label
+            className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
+            hasImage={false}
+            htmlFor="sender-email"
+            id="label-select-sender-email"
+            type="label"
+          >
+            sender-email
+          </label>
+          <div
+            className=""
+            id="sender-email"
+          >
+            <div
+              className="Select__SelectContainer-bqrvno select-container"
+              hasButtonAfter={false}
+            >
+              <div
+                className="react-select-container css-2b097c-container"
+                onKeyDown={[Function]}
+              >
+                <span
+                  aria-atomic="false"
+                  aria-live="polite"
+                  aria-relevant="additions text"
+                  className="css-1f43avz-a11yText-A11yText"
+                />
+                <div
+                  className="react-select__control css-yk16xz-control"
+                  onMouseDown={[Function]}
+                  onTouchEnd={[Function]}
+                >
+                  <div
+                    className="react-select__value-container css-g1d714-ValueContainer"
+                  >
+                    <div
+                      className="react-select__placeholder css-1wa3eu0-placeholder"
+                    >
+                      global.placeholder.email
+                    </div>
+                    <div
+                      className="css-b8ldur-Input"
+                    >
+                      <div
+                        className="react-select__input"
+                        style={
+                          Object {
+                            "display": "inline-block",
+                          }
+                        }
+                      >
+                        <input
+                          aria-autocomplete="list"
+                          aria-labelledby="label-select-sender-email"
+                          autoCapitalize="none"
+                          autoComplete="off"
+                          autoCorrect="off"
+                          disabled={false}
+                          id="react-select-2-input"
+                          onBlur={[Function]}
+                          onChange={[Function]}
+                          onFocus={[Function]}
+                          spellCheck="false"
+                          style={
+                            Object {
+                              "background": 0,
+                              "border": 0,
+                              "boxSizing": "content-box",
+                              "color": "inherit",
+                              "fontSize": "inherit",
+                              "label": "input",
+                              "opacity": 1,
+                              "outline": 0,
+                              "padding": 0,
+                              "width": "1px",
+                            }
+                          }
+                          tabIndex="0"
+                          type="text"
+                          value=""
+                        />
+                        <div
+                          style={
+                            Object {
+                              "height": 0,
+                              "left": 0,
+                              "overflow": "scroll",
+                              "position": "absolute",
+                              "top": 0,
+                              "visibility": "hidden",
+                              "whiteSpace": "pre",
+                            }
+                          }
+                        />
+                      </div>
+                    </div>
+                  </div>
+                  <div
+                    className="react-select__indicators css-1hb7zxy-IndicatorsContainer"
+                  >
+                    <span
+                      className="react-select__indicator-separator css-1okebmr-indicatorSeparator"
+                    />
+                    <div
+                      aria-hidden="true"
+                      className="react-select__indicator react-select__dropdown-indicator css-tlfecz-indicatorContainer"
+                      onMouseDown={[Function]}
+                      onTouchEnd={[Function]}
+                    >
+                      <svg
+                        aria-hidden="true"
+                        className="css-tj5bde-Svg"
+                        focusable="false"
+                        height={20}
+                        viewBox="0 0 20 20"
+                        width={20}
+                      >
+                        <path
+                          d="M4.516 7.548c0.436-0.446 1.043-0.481 1.576 0l3.908 3.747 3.908-3.747c0.533-0.481 1.141-0.446 1.574 0 0.436 0.445 0.408 1.197 0 1.615-0.406 0.418-4.695 4.502-4.695 4.502-0.217 0.223-0.502 0.335-0.787 0.335s-0.57-0.112-0.789-0.335c0 0-4.287-4.084-4.695-4.502s-0.436-1.17 0-1.615z"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+                </div>
+                <input
+                  name="sender-email"
+                  type="hidden"
+                  value=""
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div
+          className="form-group"
+        >
+          <label
+            className="Labelstyle__LabelContainer-jWZJmw bPtRZI label-container control-label"
+            hasImage={false}
+            htmlFor="sender-name"
+            id="label-sender-name"
+            type="label"
+          >
+            sender-name
+          </label>
+          <input
+            aria-describedby="label-sender-name "
+            aria-invalid={false}
+            autoFocus={false}
+            className="form-control"
+            id="sender-name"
+            name="sender-name"
+            onBlur={[Function]}
+            onChange={[Function]}
+            onDragStart={[Function]}
+            onDrop={[Function]}
+            onFocus={[Function]}
+            placeholder="global.placeholder.name"
+            type="text"
+            value="Cap Collectif"
+            warnings={null}
+          />
+        </div>
+      </div>
+      <button
+        aria-controls="id-1"
+        aria-expanded={false}
+        aria-haspopup="dialog"
+        className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP egpGUm"
+        onClick={[Function]}
+        onClickCapture={[Function]}
+        onKeyDown={[Function]}
+        onKeyPressCapture={[Function]}
+        onKeyUp={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
+        type="button"
+      >
+        global.add
+      </button>
+      <div
+        aria-label="add-sender-email-address"
+        aria-modal={true}
+        data-dialog={true}
+        hidden={true}
+        id="id-1"
+        onAnimationEnd={[Function]}
+        onBlur={[Function]}
+        onKeyDown={[Function]}
+        onTransitionEnd={[Function]}
+        role="dialog"
+        style={
+          Object {
+            "display": "none",
+          }
         }
-      }
-      tabIndex={-1}
-    />
-  </div>
-</div>
+        tabIndex={-1}
+      />
+    </div>
+  </div>,
+]
 `;

@@ -33,6 +33,9 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
           direction="row"
         >
           <Relay(Connect(UserAvatarLegacy))
+            aria-describedby="proposal_author"
+            aria-label="global.project_carrier"
+            role="img"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -41,7 +44,9 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
             }
           />
           <ProposalPageHeader__About>
-            <div>
+            <div
+              id="proposal_author"
+            >
               userAdmin
             </div>
             <div>
@@ -119,7 +124,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       <div />
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
-      alt="proposal-illustration"
+      alt=""
       loading="eager"
       src="/image.exe"
     />
@@ -135,6 +140,9 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           direction="row"
         >
           <Relay(Connect(UserAvatarLegacy))
+            aria-describedby="proposal_author"
+            aria-label="global.project_carrier"
+            role="img"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -143,7 +151,9 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             }
           />
           <ProposalPageHeader__About>
-            <div>
+            <div
+              id="proposal_author"
+            >
               userAdmin
             </div>
             <div>
@@ -243,7 +253,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
       </div>
     </ProposalPageHeader__HeaderActions>
     <ProposalPageHeader__Cover
-      alt="proposal-illustration"
+      alt=""
       loading="eager"
       src="/image.exe"
     />
@@ -259,6 +269,9 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           direction="row"
         >
           <Relay(Connect(UserAvatarLegacy))
+            aria-describedby="proposal_author"
+            aria-label="global.project_carrier"
+            role="img"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -267,7 +280,9 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
             }
           />
           <ProposalPageHeader__About>
-            <div>
+            <div
+              id="proposal_author"
+            >
               userAdmin
             </div>
             <div>
@@ -374,6 +389,9 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
           direction="row"
         >
           <Relay(Connect(UserAvatarLegacy))
+            aria-describedby="proposal_author"
+            aria-label="global.project_carrier"
+            role="img"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -382,7 +400,9 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
             }
           />
           <ProposalPageHeader__About>
-            <div>
+            <div
+              id="proposal_author"
+            >
               userAdmin
             </div>
             <div>
@@ -479,6 +499,9 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
           direction="row"
         >
           <Relay(Connect(UserAvatarLegacy))
+            aria-describedby="proposal_author"
+            aria-label="global.project_carrier"
+            role="img"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -487,7 +510,9 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
             }
           />
           <ProposalPageHeader__About>
-            <div>
+            <div
+              id="proposal_author"
+            >
               userAdmin
             </div>
             <div>
@@ -584,6 +609,9 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
           direction="row"
         >
           <Relay(Connect(UserAvatarLegacy))
+            aria-describedby="proposal_author"
+            aria-label="global.project_carrier"
+            role="img"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -592,7 +620,9 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
             }
           />
           <ProposalPageHeader__About>
-            <div>
+            <div
+              id="proposal_author"
+            >
               userAdmin
             </div>
             <div>

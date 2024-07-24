@@ -3,7 +3,7 @@
 exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-g"
@@ -11,7 +11,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     aria-expanded={false}
     aria-haspopup="dialog"
     aria-label="admin.global.delete"
-    className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
+    className="sc-bcXGCL kzOulV cap-buttonQuickAction"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -27,7 +27,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     type="button"
   >
     <svg
-      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+      className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +80,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
 exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should render modal open 1`] = `
 [
   <div
-    className="sc-bcXGCL eByFSh toasts-container toasts-container--top"
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-g"
@@ -88,7 +88,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     aria-expanded={true}
     aria-haspopup="dialog"
     aria-label="admin.global.delete"
-    className="sc-bcXGCL fLhlVf cap-buttonQuickAction"
+    className="sc-bcXGCL kzOulV cap-buttonQuickAction"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -104,7 +104,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     type="button"
   >
     <svg
-      className="sc-bcXGCL sc-eJDTud hjaEJd hEjMCZ cap-icon"
+      className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -147,7 +147,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL hmVjey sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -156,7 +156,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
       }
     >
       <div
-        className="sc-bcXGCL cxKkgx sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL bsVBPb sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -165,13 +165,13 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
         }
       >
         <header
-          className="sc-bcXGCL gcFVlf cap-modal__header"
+          className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL dEoIxI"
+            className="sc-bcXGCL eotpTW"
           >
             <h2
-              className="sc-bcXGCL jvuiiv cap-heading"
+              className="sc-bcXGCL jyqEHl cap-heading"
               id="modal-title"
               style={
                 {
@@ -185,12 +185,12 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL kvTszR"
+            className="sc-bcXGCL gBxHlP"
             onClick={[Function]}
             type="button"
           >
             <svg
-              className="sc-bcXGCL sc-eJDTud egyLxf knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
               xmlns="http://www.w3.org/2000/svg"
@@ -206,19 +206,19 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
           </button>
         </header>
         <main
-          className="sc-bcXGCL fWaoBr cap-modal__body"
+          className="sc-bcXGCL laGNWx cap-modal__body"
         >
           <p
-            className="sc-bcXGCL Ebxhi cap-text"
+            className="sc-bcXGCL jMALnA cap-text"
           >
             are-you-sure-to-delete-something {"element":"Post FR 12"}
           </p>
         </main>
         <footer
-          className="sc-bcXGCL iiPMYM cap-modal__footer"
+          className="sc-bcXGCL eMjpTW cap-modal__footer"
         >
           <div
-            className="sc-bcXGCL hyIxtw cap-buttonGroup"
+            className="sc-bcXGCL MiskG cap-buttonGroup"
             style={
               {
                 "marginLeft": 0,
@@ -227,7 +227,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
             }
           >
             <button
-              className="sc-bcXGCL sc-laZSpB DTDIA iazGoc cap-button"
+              className="sc-bcXGCL sc-laZSpB hzCEQq dUOTKb cap-button"
               onClick={[Function]}
               style={
                 {
@@ -240,7 +240,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
               cancel
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB DTDIA dldqLk cap-button"
+              className="sc-bcXGCL sc-laZSpB hzCEQq erzQLN cap-button"
               onClick={[Function]}
               type="button"
             >

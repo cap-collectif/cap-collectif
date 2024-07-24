@@ -1,7 +1,7 @@
 import * as React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
-import MockProviders, { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
+import { addsSupportForPortals, clearSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
 import ProposalsList from './ProposalsList'
 import { VoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 
@@ -20,29 +20,27 @@ describe('<ProposalsList />', () => {
 
     TestProposalsList = ({ showImages }) => (
       <RelaySuspensFragmentTest environment={environment}>
-        <MockProviders useCapUIProvider>
-          <VoteStepContext.Provider
-            value={{
-              filters: {
-                sort: null,
-                userType: null,
-                theme: null,
-                category: null,
-                district: null,
-                status: null,
-                latlng: null,
-                term: null,
-                latlngBounds: null,
-                address: null,
-              },
-              view: 'map',
-              setFilters,
-              setView,
-            }}
-          >
-            <TestRenderer showImages={showImages} />
-          </VoteStepContext.Provider>
-        </MockProviders>
+        <VoteStepContext.Provider
+          value={{
+            filters: {
+              sort: null,
+              userType: null,
+              theme: null,
+              category: null,
+              district: null,
+              status: null,
+              latlng: null,
+              term: null,
+              latlngBounds: null,
+              address: null,
+            },
+            view: 'map',
+            setFilters,
+            setView,
+          }}
+        >
+          <TestRenderer showImages={showImages} />
+        </VoteStepContext.Provider>
       </RelaySuspensFragmentTest>
     )
   })

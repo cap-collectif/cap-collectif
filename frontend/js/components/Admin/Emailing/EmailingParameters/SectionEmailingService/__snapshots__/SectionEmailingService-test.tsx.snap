@@ -1,123 +1,128 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SectionEmailingService /> <TestSectionEmailingService /> should render correctly 1`] = `
-<div
-  className="sc-dEVMhd Flex___StyledAppBox-SiGEY hszSJA gEtlaU"
->
+Array [
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt bLsrSH"
-  >
-    <p
-      className="sc-dEVMhd ePBrAi"
-    >
-      emailing-service
-    </p>
-    <p
-      className="sc-dEVMhd jlpQMI"
-    >
-      emailing-service-explanation
-    </p>
-  </div>
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY gbcnYR gEtlaU"
+    className="sc-dEVMhd Flex___StyledAppBox-SiGEY cmRQQI crLbTm"
   >
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY ielIxx"
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt gqpUzc"
+    >
+      <p
+        className="sc-dEVMhd iLMhyW"
+      >
+        emailing-service
+      </p>
+      <p
+        className="sc-dEVMhd egoKOK"
+      >
+        emailing-service-explanation
+      </p>
+    </div>
+    <div
+      className="sc-dEVMhd Flex___StyledAppBox-SiGEY gbcnYR crLbTm"
     >
       <div
-        checked={false}
-        className="Radiostyle__RadioContainer-hecgJz hZAnbF radio-container"
-        hasImage={false}
+        className="sc-dEVMhd Flex___StyledAppBox-SiGEY bAvfWt"
       >
-        <label
-          className="Labelstyle__LabelContainer-jWZJmw cDuZOL label-container"
-          hasImage={false}
-          htmlFor="mandrill"
-          id="label-radio-mandrill"
-          type="radio"
-        >
-          <IconMock
-            aria-hidden={true}
-            className="icon"
-            height={19}
-            style={
-              Object {
-                "flexShrink": "0",
-                "verticalAlign": "middle",
-              }
-            }
-            width={19}
-          />
-          <IconMock
-            className="sc-dEVMhd boqczH"
-          />
-        </label>
-        <input
+        <div
           checked={false}
-          disabled={false}
-          id="mandrill"
-          name="mandrill"
-          onChange={[Function]}
-          type="radio"
-          value="mandrill"
-        />
-      </div>
-    </div>
-    <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY clxiPW"
-    >
-      <div
-        checked={true}
-        className="Radiostyle__RadioContainer-hecgJz hZAnbF radio-container"
-        hasImage={false}
-      >
-        <label
-          className="Labelstyle__LabelContainer-jWZJmw cDuZOL label-container"
+          className="Radiostyle__RadioContainer-hecgJz hZAnbF radio-container"
           hasImage={false}
-          htmlFor="mailjet"
-          id="label-radio-mailjet"
-          type="radio"
         >
-          <IconMock
-            aria-hidden={true}
-            className="icon"
-            height={19}
-            style={
-              Object {
-                "flexShrink": "0",
-                "verticalAlign": "middle",
+          <label
+            className="Labelstyle__LabelContainer-jWZJmw cDuZOL label-container"
+            hasImage={false}
+            htmlFor="mandrill"
+            id="label-radio-mandrill"
+            type="radio"
+          >
+            <IconMock
+              aria-hidden={true}
+              className="icon"
+              height={19}
+              style={
+                Object {
+                  "flexShrink": "0",
+                  "verticalAlign": "middle",
+                }
               }
-            }
-            width={19}
+              width={19}
+            />
+            <IconMock
+              className="sc-dEVMhd boqczH"
+            />
+          </label>
+          <input
+            checked={false}
+            disabled={false}
+            id="mandrill"
+            name="mandrill"
+            onChange={[Function]}
+            type="radio"
+            value="mandrill"
           />
-          <IconMock
-            className="sc-dEVMhd boqczH"
-          />
-        </label>
-        <input
-          checked={true}
-          disabled={false}
-          id="mailjet"
-          name="mailjet"
-          onChange={[Function]}
-          type="radio"
-          value="mailjet"
-        />
+        </div>
       </div>
       <div
-        className="sc-dEVMhd Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl dUJxEe bFHULa fsbxdV"
-        onClick={[Function]}
-        onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
-        title="global.active"
+        className="sc-dEVMhd Flex___StyledAppBox-SiGEY hUoowS"
       >
-        <p
-          className="sc-dEVMhd gPWVcB Tag___StyledText-hFlneM dQIvA-d"
+        <div
+          checked={true}
+          className="Radiostyle__RadioContainer-hecgJz hZAnbF radio-container"
+          hasImage={false}
         >
-          global.active
-        </p>
+          <label
+            className="Labelstyle__LabelContainer-jWZJmw cDuZOL label-container"
+            hasImage={false}
+            htmlFor="mailjet"
+            id="label-radio-mailjet"
+            type="radio"
+          >
+            <IconMock
+              aria-hidden={true}
+              className="icon"
+              height={19}
+              style={
+                Object {
+                  "flexShrink": "0",
+                  "verticalAlign": "middle",
+                }
+              }
+              width={19}
+            />
+            <IconMock
+              className="sc-dEVMhd boqczH"
+            />
+          </label>
+          <input
+            checked={true}
+            disabled={false}
+            id="mailjet"
+            name="mailjet"
+            onChange={[Function]}
+            type="radio"
+            value="mailjet"
+          />
+        </div>
+        <div
+          className="sc-dEVMhd Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl dUJxEe bTjcw fsbxdV"
+          onClick={[Function]}
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          title="global.active"
+        >
+          <p
+            className="sc-dEVMhd jmUiuD Tag___StyledText-hFlneM dQIvA-d"
+          >
+            global.active
+          </p>
+        </div>
       </div>
     </div>
-  </div>
-</div>
+  </div>,
+]
 `;

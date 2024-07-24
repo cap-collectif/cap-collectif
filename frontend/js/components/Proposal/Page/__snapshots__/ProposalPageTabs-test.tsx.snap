@@ -1,187 +1,319 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProposalPageTabs /> should render Tabs with correct DOM structure 1`] = `
-<div
-  className="ProposalPageTabs__Tabs-eloHg ELnYN"
-  loading={false}
->
-  <ul
-    className="nav"
-    role={null}
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="ProposalPageTabs__Tabs-eloHg ELnYN"
+    loading={false}
   >
-    <li
-      className="active"
-      role="presentation"
+    <ul
+      className="nav"
+      role={null}
     >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
+      <li
+        className="active"
+        role="presentation"
       >
-        presentation_step
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
-      >
-        menu.news
-        <span
-          className="tip"
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
         >
-          1
-        </span>
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
+          presentation_step
+        </a>
+      </li>
+      <li
+        className=""
+        role="presentation"
+        style={
+          Object {
+            "display": "block",
+          }
+        }
       >
-        proposal.tabs.followers
-        <span
-          className="tip"
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
         >
-          169
-        </span>
-      </a>
-    </li>
-  </ul>
-</div>
+          menu.news
+          <span
+            className="tip"
+          >
+            1
+          </span>
+        </a>
+      </li>
+      <li
+        className="disabled"
+        role="presentation"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          style={
+            Object {
+              "pointerEvents": "none",
+            }
+          }
+          tabIndex={-1}
+        >
+          global.vote
+          <span
+            className="tip"
+          >
+            5
+          </span>
+        </a>
+      </li>
+      <li
+        className=""
+        role="presentation"
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+        >
+          proposal.tabs.followers
+          <span
+            className="tip"
+          >
+            169
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>,
+]
 `;
 
 exports[`<ProposalPageTabs /> should render without blog tab 1`] = `
-<div
-  className="ProposalPageTabs__Tabs-eloHg ELnYN"
-  loading={false}
->
-  <ul
-    className="nav"
-    role={null}
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="ProposalPageTabs__Tabs-eloHg ELnYN"
+    loading={false}
   >
-    <li
-      className="active"
-      role="presentation"
+    <ul
+      className="nav"
+      role={null}
     >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
+      <li
+        className="active"
+        role="presentation"
       >
-        presentation_step
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
-      >
-        menu.news
-        <span
-          className="tip"
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
         >
-          1
-        </span>
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
+          presentation_step
+        </a>
+      </li>
+      <li
+        className=""
+        role="presentation"
+        style={
+          Object {
+            "display": "block",
+          }
+        }
       >
-        proposal.tabs.followers
-        <span
-          className="tip"
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
         >
-          169
-        </span>
-      </a>
-    </li>
-  </ul>
-</div>
+          menu.news
+          <span
+            className="tip"
+          >
+            1
+          </span>
+        </a>
+      </li>
+      <li
+        className="disabled"
+        role="presentation"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          style={
+            Object {
+              "pointerEvents": "none",
+            }
+          }
+          tabIndex={-1}
+        >
+          global.vote
+          <span
+            className="tip"
+          >
+            5
+          </span>
+        </a>
+      </li>
+      <li
+        className=""
+        role="presentation"
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+        >
+          proposal.tabs.followers
+          <span
+            className="tip"
+          >
+            169
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>,
+]
 `;
 
 exports[`<ProposalPageTabs /> should render without vote tab 1`] = `
-<div
-  className="ProposalPageTabs__Tabs-eloHg ELnYN"
-  loading={false}
->
-  <ul
-    className="nav"
-    role={null}
+Array [
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="ProposalPageTabs__Tabs-eloHg ELnYN"
+    loading={false}
   >
-    <li
-      className="active"
-      role="presentation"
+    <ul
+      className="nav"
+      role={null}
     >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
+      <li
+        className="active"
+        role="presentation"
       >
-        presentation_step
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
-      >
-        menu.news
-        <span
-          className="tip"
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
         >
-          1
-        </span>
-      </a>
-    </li>
-    <li
-      className=""
-      role="presentation"
-    >
-      <a
-        href="#"
-        onClick={[Function]}
-        onKeyDown={[Function]}
-        role="button"
+          presentation_step
+        </a>
+      </li>
+      <li
+        className=""
+        role="presentation"
+        style={
+          Object {
+            "display": "block",
+          }
+        }
       >
-        proposal.tabs.followers
-        <span
-          className="tip"
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
         >
-          169
-        </span>
-      </a>
-    </li>
-  </ul>
-</div>
+          menu.news
+          <span
+            className="tip"
+          >
+            1
+          </span>
+        </a>
+      </li>
+      <li
+        className="disabled"
+        role="presentation"
+        style={
+          Object {
+            "display": "none",
+          }
+        }
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+          style={
+            Object {
+              "pointerEvents": "none",
+            }
+          }
+          tabIndex={-1}
+        >
+          global.vote
+          <span
+            className="tip"
+          >
+            5
+          </span>
+        </a>
+      </li>
+      <li
+        className=""
+        role="presentation"
+        style={
+          Object {
+            "display": "block",
+          }
+        }
+      >
+        <a
+          href="#"
+          onClick={[Function]}
+          onKeyDown={[Function]}
+          role="button"
+        >
+          proposal.tabs.followers
+          <span
+            className="tip"
+          >
+            169
+          </span>
+        </a>
+      </li>
+    </ul>
+  </div>,
+]
 `;
