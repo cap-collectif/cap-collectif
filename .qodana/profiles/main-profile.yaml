@@ -1,0 +1,6 @@
+name: "Qodana Recommended Profile"
+
+baseProfile: qodana.recommended
+
+include:
+    - "backend-profile.yaml"
