@@ -44,7 +44,7 @@ class DeleteSourceMutation implements MutationInterface
             throw new UserError('Unknown source with id: ' . $sourceId);
         }
 
-        if ($viewer !== $source->getAuthor()) {
+        if ($viewer !== $source->getAuthor() && !$viewer->isAdmin()) {
             throw new UserError('You are not the author of source with id: ' . $sourceId);
         }
 
