@@ -26,6 +26,14 @@ trait ContributionRepositoryTrait
         return $qb->getQuery()->getArrayResult();
     }
 
+    public function searchByBodyOrAuthorUsername(QueryBuilder $qb, string $search, string $alias): void
+    {
+        $qb->leftJoin("{$alias}.author", 'a')
+            ->andWhere("{$alias}.body LIKE :search OR a.username LIKE :search")
+            ->setParameter('search', "%{$search}%")
+        ;
+    }
+
     public function countPublished(): int
     {
         $qb = $this->createQueryBuilder('o');

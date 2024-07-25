@@ -9,3 +9,9 @@ SourceOrderField:
             VOTES:
                 value: !php/const Capco\AppBundle\Enum\SourceOrderField::VOTES
                 description: 'Allows ordering a list of sources by the number of votes it have.'
+            CREATED_AT:
+                value: !php/const Capco\AppBundle\Enum\SourceOrderField::CREATED_AT
+                description: 'Allows ordering a list of sources by when they were created.'
+            UPDATED_AT:
+                value: !php/const Capco\AppBundle\Enum\SourceOrderField::UPDATED_AT
+                description: 'Allows ordering a list of sources by when they were updated.'

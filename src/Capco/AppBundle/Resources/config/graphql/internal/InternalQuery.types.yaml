@@ -264,7 +264,7 @@ InternalQuery:
                     orderBy:
                         description: 'Order consultation by a given criterias.'
                         type: 'ConsultationOrder'
-                        defaultValue: {field: 'POSITION', direction: 'ASC'}
+                        defaultValue: { field: 'POSITION', direction: 'ASC' }
             groups:
                 description: 'Lookup groups.'
                 type: 'GroupConnection!'
@@ -612,4 +612,21 @@ InternalQuery:
                 type: '[UserType!]!'
                 description: 'List of user types.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserTypesResolver")'
-
+            sources:
+                type: 'SourceConnection!'
+                description: 'List of sources'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceListResolver", [args])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'SourceOrder'
+                        defaultValue:
+                          {
+                              field: !php/const Capco\AppBundle\Enum\SourceOrderField::CREATED_AT,
+                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                          }
+                        description: 'The ordering direction for the source creation or updated date'
+                    term:
+                        type: 'String'
+                        description: 'The term to filter sources on the body or the author username.'

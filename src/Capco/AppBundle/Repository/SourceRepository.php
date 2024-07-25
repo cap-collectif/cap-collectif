@@ -8,11 +8,14 @@ use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\SourceOrderField;
 use Capco\AppBundle\Model\Sourceable;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -21,6 +24,50 @@ class SourceRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
     use LocaleRepositoryTrait;
+
+    /**
+     * @return array<int, string>
+     */
+    public function findPaginated(
+        ?string $search,
+        ?string $field,
+        ?string $direction,
+        int $offset = 0,
+        int $limit = 50
+    ): array {
+        $qb = $this->createQueryBuilder('s')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+        if (SourceOrderField::CREATED_AT === $field) {
+            $qb->addOrderBy('s.createdAt', $direction);
+        }
+        if (SourceOrderField::UPDATED_AT === $field) {
+            $qb->addOrderBy('s.updatedAt', $direction);
+        }
+        if ($search) {
+            $alias = $qb->getRootAliases()[0];
+            $this->searchByBodyOrAuthorUsername($qb, $search, $alias);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getTotalSourcesBySearchQuery(
+        ?string $search = null
+    ): int {
+        $qb = $this->createQueryBuilder('s');
+        if ($search) {
+            $this->searchByBodyOrAuthorUsername($qb, $search, 's');
+        }
+        $qb->select('COUNT(s.id)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
 
     public function getRecentOrdered(?string $locale = null)
     {
@@ -99,11 +146,11 @@ class SourceRepository extends EntityRepository
     ): Paginator {
         $qb = $this->getByContributionQB($sourceable);
 
-        if ('PUBLISHED_AT' === $field) {
+        if (SourceOrderField::PUBLISHED_AT === $field) {
             $qb->addOrderBy('s.createdAt', $direction);
         }
 
-        if ('VOTES' === $field) {
+        if (SourceOrderField::VOTES === $field) {
             $qb->addOrderBy('s.votesCount', $direction);
         }
 

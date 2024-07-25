@@ -13822,6 +13822,23 @@ type Query {
 
   """List of user types."""
   userTypes: [UserType!]!
+
+  """List of sources"""
+  sources(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """The ordering direction for the source creation or updated date"""
+    orderBy: SourceOrder = {field: CREATED_AT, direction: DESC}
+
+    """The term to filter sources on the body or the author username."""
+    term: String
+  ): SourceConnection!
 }
 
 input QueryAnalyticsFilter {
@@ -16776,6 +16793,12 @@ enum SourceOrderField {
 
   """Allows ordering a list of sources by the number of votes it have."""
   VOTES
+
+  """Allows ordering a list of sources by when they were created."""
+  CREATED_AT
+
+  """Allows ordering a list of sources by when they were updated."""
+  UPDATED_AT
 }
 
 """A contribution with an author"""
