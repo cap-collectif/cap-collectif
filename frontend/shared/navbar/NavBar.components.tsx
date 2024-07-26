@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Box, BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
 import { Menu, MenuItem } from '@szhsin/react-menu'
-
+import { pxToRem } from '@shared/utils/pxToRem'
 import { useNavBarContext, LinkProps } from './NavBar.context'
 import { unescapeHTML } from './NavBar.utils'
 
@@ -25,7 +25,7 @@ export const NavBarMenu = React.forwardRef<
         ref={ref}
         px={[4]}
         py={[5, 5, isExtended ? 4 : 5]}
-        fontSize={3}
+        fontSize={pxToRem(16)}
         as="button"
         color={color}
         justifyContent={['space-between', '']}
@@ -55,7 +55,7 @@ export const NavBarMenu = React.forwardRef<
         _focus={{ color: link.href ? hoverColor : color, bg: hoverBg, outline: 'none' }}
         px={[6, 3]}
         py={2}
-        fontSize={3}
+        fontSize={pxToRem(16)}
         lineHeight="base"
       >
         {link.title}
@@ -94,7 +94,7 @@ export const NavBarMenu = React.forwardRef<
             <Flex
               px={[4]}
               py={[5, 5, isExtended ? 4 : 5]}
-              fontSize={3}
+              fontSize={pxToRem(16)}
               as="button"
               color={color}
               bg={open ? bg : ''}
@@ -128,7 +128,7 @@ export const NavBarLink = React.forwardRef<
       ref={ref}
       as="a"
       className="navLink"
-      fontSize={3}
+      fontSize={pxToRem(16)}
       href={href}
       px={4}
       py={[5, 5, isExtended ? 4 : 5]}
@@ -196,32 +196,32 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
       as="nav"
       aria-label={intl.formatMessage({ id: 'navbar.breadcrumb' })}
       py={2}
-      px={[4, 6]}
       borderTop={`1px solid ${borderColor}`}
       bg="white"
     >
       {isMobile ? (
-        <Flex alignItems="center" mr={1} fontSize={1}>
+        <Flex alignItems="center" mr={1} fontSize={2} px={4}>
           <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} mr={1} color="neutral-gray.700" />
           <Box as="a" href={mobileItem.href} color="neutral-gray.900" sx={{ textDecoration: 'underline' }}>
             {unescapeHTML(mobileItem.title)}
           </Box>
         </Flex>
       ) : (
-        <Flex as="ol">
+        <Flex as="ol" maxWidth="91.43rem" width="100%" margin="auto" px={6}>
           {items.map(({ href, title }, index) => {
             const isCurrentPage = index === items.length - 1
             return (
-              <Flex as="li" alignItems="center" mr={1} fontSize={1}>
+              <Flex as="li" alignItems="center" mr={1} fontSize={2}>
                 <Box
                   as="a"
                   href={href}
+                  fontWeight={isCurrentPage ? 'semibold' : 'normal'}
                   aria-current={isCurrentPage ? 'page' : undefined}
                   color="neutral-gray.900"
                   sx={{ textDecoration: isCurrentPage ? 'none' : 'underline' }}
                   _hover={{
                     textDecoration: isCurrentPage ? 'none' : 'underline',
-                    color: 'neutral-gray.900',
+                    color: 'primary.600',
                   }}
                 >
                   {unescapeHTML(title)}

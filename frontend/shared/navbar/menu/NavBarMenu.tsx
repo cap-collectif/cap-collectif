@@ -8,6 +8,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import type { NavBarMenuQuery as NavBarMenuQueryType, NavBarMenuQuery$data } from '@relay/NavBarMenuQuery.graphql'
 import { NavBarTheme, getTheme } from '../NavBar.utils'
 import NewUserAvatar from '~/components/User/NewUserAvatar'
+import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
   currentLanguage: string
@@ -38,14 +39,14 @@ const ActionItem = ({
   as === 'a' ? (
     <Flex as={as} href={href} alignItems="center" flexDirection="column" target={target} rel={rel}>
       {icon ? <Icon name={icon} size={CapUIIconSize.Md} color={color} /> : avatar}
-      <Text as="span" color={color} fontSize={3}>
+      <Text as="span" color={color} fontSize={pxToRem(16)}>
         {children}
       </Text>
     </Flex>
   ) : (
     <Flex as="button" onClick={onClick} alignItems="center" flexDirection="column">
       {icon ? <Icon name={icon} size={CapUIIconSize.Md} color={color} /> : avatar}
-      <Text as="span" color={color} fontSize={3}>
+      <Text as="span" color={color} fontSize={pxToRem(16)}>
         {children}
       </Text>
     </Flex>
@@ -90,7 +91,7 @@ const MenuItem = ({
     }}
     px={3}
     py={2}
-    fontSize={3}
+    fontSize={pxToRem(16)}
     lineHeight="base"
   >
     {children}
@@ -182,7 +183,7 @@ export const NavBarMenuContent = ({
         menuButton={({ open }) => (
           <Flex
             p={4}
-            fontSize={3}
+            fontSize={pxToRem(16)}
             as="button"
             color={theme.textColor}
             alignItems="center"

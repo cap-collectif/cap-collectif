@@ -100,19 +100,21 @@ const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo }: NavBarProps) 
   const [isExtended] = React.useState(links.length > 6)
 
   return (
-    <Flex direction="column" bg={theme.menuBackground} overflow="visible" id="main_navbar">
-      <NavBar.SkipLinks />
-      <Flex direction="column" zIndex={navBarZIndex}>
-        <Flex px={6} justifyContent="space-between" alignItems="center" minHeight="4rem">
-          <Flex alignItems="center">
-            <NavBar.Logo src={logoSrc} isBigLogo={isBigLogo} />
-            {isExtended ? null : <NavBar.Content links={links} isExtended={isExtended} theme={theme} />}
+    <Flex justifyContent="center" bg={theme.menuBackground} width="100%">
+      <Flex direction="column" bg={theme.menuBackground} overflow="visible" id="main_navbar" width="100%">
+        <NavBar.SkipLinks />
+        <Flex direction="column" zIndex={navBarZIndex} maxWidth="91.43rem" width="100%" margin="auto">
+          <Flex px={6} justifyContent="space-between" alignItems="center" minHeight="4rem">
+            <Flex alignItems="center">
+              <NavBar.Logo src={logoSrc} isBigLogo={isBigLogo} />
+              {isExtended ? null : <NavBar.Content links={links} isExtended={isExtended} theme={theme} />}
+            </Flex>
+            {children}
           </Flex>
-          {children}
+          {isExtended ? <NavBar.Content links={links} isExtended={isExtended} theme={theme} /> : null}
         </Flex>
-        {isExtended ? <NavBar.Content links={links} isExtended={isExtended} theme={theme} /> : null}
+        <NavBar.BreadCrumb borderColor={theme.subMenuBackground} />
       </Flex>
-      <NavBar.BreadCrumb borderColor={theme.subMenuBackground} />
     </Flex>
   )
 }

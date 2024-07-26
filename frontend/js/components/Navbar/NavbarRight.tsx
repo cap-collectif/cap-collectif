@@ -188,15 +188,13 @@ export const NavbarRight = ({
           <RegistrationButton
             className="navbar-btn"
             spanStyle={fullWidth ? { width: '100%' } : {}}
-            buttonStyle={
-              fullWidth ? { width: '100%', borderRadius: '100px', marginTop: 16, height: 48, ...styles } : styles
-            }
+            buttonStyle={fullWidth ? { width: '100%', marginTop: 16, height: 48, ...styles } : styles}
           />
           <React.Suspense fallback={null}>
             <LoginButton
               justifyContent={fullWidth ? 'center' : ''}
               width={fullWidth ? '100%' : ''}
-              borderRadius={fullWidth ? '100px' : 'button'}
+              borderRadius="button"
               my={fullWidth ? 4 : 2}
               height={fullWidth ? '48px' : ''}
             />
