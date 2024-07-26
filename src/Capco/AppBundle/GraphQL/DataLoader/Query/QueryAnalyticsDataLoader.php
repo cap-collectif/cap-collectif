@@ -83,7 +83,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         $filters = $keys[0];
         list($start, $end, $projectId, $requestedFields, $topContributorsCount) = [
             new \DateTime($filters['startAt']),
-            (new \DateTime($filters['endAt']))->modify('+1 day'),
+            (new \DateTime($filters['endAt'])),
             GlobalId::fromGlobalId($filters['projectId'])['id'],
             $filters['requestedFields'],
             $filters['topContributorsCount'],

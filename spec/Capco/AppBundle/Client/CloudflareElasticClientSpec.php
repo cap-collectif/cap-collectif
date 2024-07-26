@@ -2,18 +2,18 @@
 
 namespace spec\Capco\AppBundle\Client;
 
+use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
 use Capco\AppBundle\Client\CloudflareElasticClient;
 use Elastica\Multi\ResultSet;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
-use Sonata\IntlBundle\Timezone\TimezoneDetectorInterface;
 
 /**
  * @extends ObjectBehavior<string, string>
  */
 class CloudflareElasticClientSpec extends ObjectBehavior
 {
-    public function let(LoggerInterface $logger, LoggerInterface $esLogger, TimezoneDetectorInterface $timeZoneDetector): void
+    public function let(LoggerInterface $logger, LoggerInterface $esLogger, GlobalConfigurationTimeZoneDetector $timeZoneDetector): void
     {
         $timeZoneDetector->getTimezone()->willReturn('Europe/Paris');
 

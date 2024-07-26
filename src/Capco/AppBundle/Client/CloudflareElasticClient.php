@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Client;
 
+use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
 use Capco\AppBundle\Elasticsearch\Client;
 use Capco\AppBundle\Enum\PlatformAnalyticsTrafficSourceType;
 use DateTimeInterface;
@@ -18,7 +19,6 @@ use Elastica\Query\BoolQuery;
 use Elastica\Query\Range;
 use Elastica\Query\Term;
 use Psr\Log\LoggerInterface;
-use Sonata\IntlBundle\Timezone\TimezoneDetectorInterface;
 
 class CloudflareElasticClient
 {
@@ -27,7 +27,7 @@ class CloudflareElasticClient
     private LoggerInterface $esLoggerCollector;
     private string $hostname;
     private string $index;
-    private TimezoneDetectorInterface $timezoneDetector;
+    private GlobalConfigurationTimeZoneDetector $timezoneDetector;
 
     public function __construct(
         LoggerInterface $logger,
@@ -40,7 +40,7 @@ class CloudflareElasticClient
         string $logpushElasticsearchUsername,
         string $logpushElasticsearchPassword,
         string $logpushElasticsearchPort,
-        TimezoneDetectorInterface $timezoneDetector
+        GlobalConfigurationTimeZoneDetector $timezoneDetector
     ) {
         $this->hostname = $hostname;
         $this->logger = $logger;
@@ -250,6 +250,11 @@ class CloudflareElasticClient
             'edgeEndTimestamp',
             $this->getDateHistogramInterval($start, $end)
         ))
+            ->setParam('min_doc_count', 0)
+            ->setParam('extended_bounds', [
+                'min' => $start->format('Y-m-d\TH:i'),
+                'max' => $end->format('Y-m-d\TH:i'),
+            ])
             ->setTimezone($this->timezoneDetector->getTimezone())
             ->addAggregation(
                 (new Cardinality('unique_visitors_per_interval'))->setField('clientIP.keyword')
@@ -310,7 +315,13 @@ class CloudflareElasticClient
                     'page_view_per_interval',
                     'edgeEndTimestamp',
                     $this->getDateHistogramInterval($start, $end)
-                ))->setTimezone($this->timezoneDetector->getTimezone())
+                ))
+                    ->setParam('min_doc_count', 0)
+                    ->setParam('extended_bounds', [
+                        'min' => $start->format('Y-m-d\TH:i'),
+                        'max' => $end->format('Y-m-d\TH:i'),
+                    ])
+                    ->setTimezone($this->timezoneDetector->getTimezone())
             )
         ;
 

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector;
 use DateTimeInterface;
 use Elastica\Aggregation\Cardinality;
 use Elastica\Aggregation\DateHistogram;
@@ -32,11 +33,13 @@ class AnalyticsSearch
 
     private Index $index;
     private LoggerInterface $logger;
+    private GlobalConfigurationTimeZoneDetector $timezoneDetector;
 
-    public function __construct(Index $index, LoggerInterface $logger)
+    public function __construct(Index $index, LoggerInterface $logger, GlobalConfigurationTimeZoneDetector $timezoneDetector)
     {
         $this->index = $index;
         $this->logger = $logger;
+        $this->timezoneDetector = $timezoneDetector;
     }
 
     public function getInternalAnalyticsResultSet(
@@ -198,18 +201,31 @@ class AnalyticsSearch
             ->setTrackTotalHits(true)
             ->setSize(0)
             ->addAggregation(
-                (new DateHistogram(
-                    'anonymous_participations_per_interval',
-                    'createdAt',
-                    $this->getDateHistogramInterval($start, $end)
-                ))->addAggregation(
-                    (new Cardinality('anonymous_participants_per_interval'))->setField('ipAddress')
-                )
+                $this->addDateHistogram('anonymous_participations_per_interval', 'createdAt', $start, $end)
+                    ->addAggregation(
+                        (new Cardinality('anonymous_participants_per_interval'))->setField('ipAddress')
+                    )
             )
             ->addAggregation((new Cardinality('anonymous_participants'))->setField('ipAddress'))
         ;
 
         return $this->index->createSearch($query);
+    }
+
+    public function addDateHistogram(string $name, string $field, DateTimeInterface $start, DateTimeInterface $end): DateHistogram
+    {
+        return (new DateHistogram(
+            $name,
+            $field,
+            $this->getDateHistogramInterval($start, $end)
+        ))
+            ->setParam('min_doc_count', 0)
+            ->setParam('extended_bounds', [
+                'min' => $start->format('Y-m-d\TH:i'),
+                'max' => $end->format('Y-m-d\TH:i'),
+            ])
+            ->setTimezone($this->timezoneDetector->getTimezone())
+        ;
     }
 
     private function getClient(): Client
@@ -237,13 +253,7 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(
-                new DateHistogram(
-                    'registrations',
-                    'createdAt',
-                    $this->getDateHistogramInterval($start, $end)
-                )
-            )
+            ->addAggregation($this->addDateHistogram('registrations', 'createdAt', $start, $end))
         ;
 
         return $this->index->createSearch($query);
@@ -279,13 +289,7 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(
-                new DateHistogram(
-                    'votes',
-                    'createdAt',
-                    $this->getDateHistogramInterval($start, $end)
-                )
-            )
+            ->addAggregation($this->addDateHistogram('votes', 'createdAt', $start, $end))
         ;
 
         return $this->index->createSearch($query);
@@ -329,11 +333,7 @@ class AnalyticsSearch
             ->setTrackTotalHits(true)
             ->setSize(0)
             ->addAggregation(
-                new DateHistogram(
-                    'comments',
-                    'createdAt',
-                    $this->getDateHistogramInterval($start, $end)
-                )
+                $this->addDateHistogram('comments', 'createdAt', $start, $end)
             )
         ;
 
@@ -392,13 +392,7 @@ class AnalyticsSearch
         $query
             ->setTrackTotalHits(true)
             ->setSize(0)
-            ->addAggregation(
-                new DateHistogram(
-                    'followers',
-                    'followedAt',
-                    $this->getDateHistogramInterval($start, $end)
-                )
-            )
+            ->addAggregation($this->addDateHistogram('followers', 'followedAt', $start, $end))
         ;
 
         return $this->index->createSearch($query);
@@ -470,11 +464,7 @@ class AnalyticsSearch
             ->setTrackTotalHits(true)
             ->setSize(0)
             ->addAggregation(
-                new DateHistogram(
-                    $aggregationName,
-                    $aggregatedField,
-                    $this->getDateHistogramInterval($start, $end)
-                )
+                $this->addDateHistogram($aggregationName, $aggregatedField, $start, $end)
             )
         ;
 
@@ -541,13 +531,10 @@ class AnalyticsSearch
             ->setTrackTotalHits(true)
             ->setSize(0)
             ->addAggregation(
-                (new DateHistogram(
-                    'participations_per_interval',
-                    'createdAt',
-                    $this->getDateHistogramInterval($start, $end)
-                ))->addAggregation(
-                    (new Cardinality('participants_per_interval'))->setField('author.id')
-                )
+                $this->addDateHistogram('participations_per_interval', 'createdAt', $start, $end)
+                    ->addAggregation(
+                        (new Cardinality('participants_per_interval'))->setField('author.id')
+                    )
             )
             ->addAggregation((new Cardinality('participants'))->setField('author.id'))
         ;

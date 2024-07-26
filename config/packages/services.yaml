@@ -17,6 +17,10 @@ services:
             $publisher: '@swarrot.publisher'
             $hwiHttpClient: '@hwi_oauth.http_client'
             $hwiStorage: '@hwi_oauth.storage.session'
+            $timezoneDetector: '@Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector'
+
+
+    Capco\AppBundle\Search\AnalyticsSearch: ~
 
     Capco\AppBundle\Import\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Import/*'
@@ -194,7 +198,6 @@ services:
             $logpushElasticsearchPassword: '%logpush_elasticsearch_password%'
             $logpushElasticsearchUsername: '%logpush_elasticsearch_username%'
             $logpushElasticsearchPort: '%logpush_elasticsearch_port%'
-            $timezoneDetector: '@Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector'
 
     Symfony\Component\Security\Core\Authentication\AuthenticationTrustResolverInterface: '@security.authentication.trust_resolver'
 
