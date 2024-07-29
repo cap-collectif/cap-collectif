@@ -788,6 +788,7 @@ class ProposalRepository extends EntityRepository
 
         $qb = $this
             ->createQueryBuilder('p')
+            ->addSelect('paperVotes')
         ;
 
         if ($isCollectStep) {
@@ -801,10 +802,11 @@ class ProposalRepository extends EntityRepository
         }
 
         $qb->leftJoin("p.{$votesTable}", 'v', 'p.proposal = v.proposal')
+            ->leftJoin('p.paperVotes', 'paperVotes', 'p.proposal = paperVotes.proposal')
             ->where('s.id = :step')
             ->andWhere('p.isArchived = false')
             ->groupBy('p.id')
-            ->having('COUNT(v.id) < :voteThreshold')
+            ->having('(COUNT(v.id) + paperVotes.totalCount) < :voteThreshold')
             ->setParameter('step', $step->getId())
             ->setParameter('voteThreshold', $voteThreshold)
         ;
