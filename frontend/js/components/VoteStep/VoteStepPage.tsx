@@ -5,8 +5,6 @@ import useIsMobile from '~/utils/hooks/useIsMobile'
 import VoteStepPageWebLayout from './VoteStepPageWebLayout'
 import VoteStepPageMobileLayout from './VoteStepPageMobileLayout'
 import { VoteStepContextProvider } from '~/components/VoteStep/Context/VoteStepContext'
-import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
-import TabletScreenTooSmall from './TabletScreenTooSmall'
 import { VoteStepPageQuery } from '~relay/VoteStepPageQuery.graphql'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import ProposalStepPage from '~/components/Page/ProposalStepPage'
@@ -68,9 +66,7 @@ const QUERY = graphql`
 
 export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Props) => {
   const isMobile = useIsMobile()
-  const { width } = useWindowWidth()
   const { state } = useLocation<{ stepId?: string }>()
-  const isTabletScreenTooSmall = width > 767 && width < 1133
   const step: string = state?.stepId || stepId
   const data = useLazyLoadQuery<VoteStepPageQuery>(QUERY, {
     stepId: step,
@@ -111,7 +107,6 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
 
   return (
     <>
-      {isTabletScreenTooSmall ? <TabletScreenTooSmall /> : null}
       <VoteStepContextProvider
         hasMapView={hasMapView}
         isMapView={hasMapView && isMapView}

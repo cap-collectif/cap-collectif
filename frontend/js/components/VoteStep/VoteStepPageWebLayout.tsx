@@ -105,21 +105,30 @@ export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView }: Pr
             },
           }}
         >
-          <Flex alignItems="center" width={cardWidthMapView} mb={6} gap={4} ml={[0, 6]}>
+          <Flex
+            alignItems="center"
+            width={cardWidthMapView}
+            maxWidth={'-webkit-fill-available'}
+            mb={6}
+            gap={4}
+            ml={[0, 2]}
+            mr={[1, 4]}
+          >
             <Box className="VoteStepPageSearchBar-Container" width="100%" display={'flex'} alignItems="center">
               {data.step.form && isCollectStep && (
                 <VoteStepPageCollectButton onOpen={onOpen} disabled={!data.step.form.contribuable} />
               )}
               <VoteStepPageSearchBar />
             </Box>
-            <ViewChangePanel
-              hideText={width < 1133 || (view === View.Map && width < 1280)}
-              hasMapView={hasMapView}
-              hasVotesView={isVotable}
-              isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
-            />
+            {width > 1132 && (
+              <ViewChangePanel
+                hideText={width <= 1133 || (view === View.Map && width < 1280)}
+                hasMapView={hasMapView}
+                hasVotesView={isVotable}
+                isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
+              />
+            )}
           </Flex>
-
           <React.Suspense fallback={<ProposalsListSkeleton showImages={showImages} />}>
             {view === View.Votes ? (
               <VotesList stepId={stepId} showImages />

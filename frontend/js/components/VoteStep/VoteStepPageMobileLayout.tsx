@@ -24,6 +24,7 @@ import { reset } from 'redux-form'
 import VoteStepPageAnonymousToggle from './VoteStepPageAnonymousToggle'
 import VoteStepPageDescription from './VoteStepPageDescription'
 import ProposalDrafts from './Filters/ProposalDrafts'
+import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 
 type Props = {
   stepId: string
@@ -64,6 +65,9 @@ export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }:
   const { latlng } = filters
   const view = contextView || (isMapView ? View.Map : View.List)
   const dispatch = useDispatch<Dispatch>()
+  const { width } = useWindowWidth()
+
+  const removeMapButtonBreakpoint = width > 1132
 
   const isCollectStep = data.step.kind === 'collect'
 
@@ -105,14 +109,16 @@ export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }:
           zIndex={99}
         >
           <VoteStepPageSearchBarMobile onClick={() => setShowFiltersPage(true)} />
-          <ViewChangePanel
-            hideText
-            hasMapView={hasMapView}
-            hasVotesView={isVotable}
-            isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
-          />
+          {removeMapButtonBreakpoint && (
+            <ViewChangePanel
+              hideText
+              hasMapView={hasMapView}
+              hasVotesView={isVotable}
+              isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
+            />
+          )}
         </Flex>
-        {view === View.Map ? (
+        {view === View.Map && removeMapButtonBreakpoint ? (
           <React.Suspense fallback={<VoteStepMapSkeleton />}>
             <VoteStepMapQuery
               stepId={stepId}
