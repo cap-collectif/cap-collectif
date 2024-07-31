@@ -53,12 +53,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id=""
         >
           16
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -96,12 +96,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id="votes-counter-pill"
         >
           47
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -134,12 +134,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id=""
         >
           88
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -204,12 +204,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id=""
         >
           16
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -247,12 +247,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id="votes-counter-pill"
         >
           47
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -285,12 +285,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id=""
         >
           88
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -355,12 +355,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id=""
         >
           16
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -398,12 +398,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id="votes-counter-pill"
         >
           47
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >
@@ -436,12 +436,12 @@ Array [
       <li
         className="sc-bcXGCL bfgKKP projectHeader__block"
       >
-        <h2
-          className="sc-bcXGCL dwuOLb cap-heading projectHeader__block__content platform__body"
+        <p
+          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
           id=""
         >
           88
-        </h2>
+        </p>
         <p
           className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
         >

@@ -392,7 +392,7 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
           as="li"
           {...rest}
         >
-          <Heading
+          <Text
             className="projectHeader__block__content platform__body"
             id={contentId || ''}
             fontSize={[2, 4]}
@@ -402,7 +402,7 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
             color="neutral-gray.900"
           >
             {typeof content === 'number' ? formatBigNumber(content) : content}
-          </Heading>
+          </Text>
           <Text
             className="projectHeader__block__title platform__body"
             color="neutral-gray.900"
