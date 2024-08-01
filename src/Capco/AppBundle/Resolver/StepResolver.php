@@ -7,24 +7,24 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class StepResolver
 {
-    private $urlResolver;
+    private UrlResolver $urlResolver;
 
     public function __construct(UrlResolver $urlResolver)
     {
         $this->urlResolver = $urlResolver;
     }
 
-    public function getLink(?AbstractStep $step = null, $absolute = false)
+    public function getLink(?AbstractStep $step = null, bool $absolute = false): string
     {
         return $this->urlResolver->getObjectUrl($step, $absolute);
     }
 
-    public function getFirstStepLinkForProject(Project $project, $absolute = false)
+    public function getFirstStepLinkForProject(Project $project, bool $absolute = false): string
     {
         return $this->getLink($project->getFirstStep(), $absolute);
     }
 
-    public function getCurrentStepLinkForProject(Project $project, $absolute = false)
+    public function getCurrentStepLinkForProject(Project $project, bool $absolute = false): string
     {
         return $this->getLink($project->getCurrentStep(), $absolute);
     }

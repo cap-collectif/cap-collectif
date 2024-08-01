@@ -43,7 +43,10 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
     private TranslatorInterface $translator;
     private SessionInterface $session;
     private UserManagerInterface $userManager;
-    private $properties = ['identifier' => 'id'];
+    /**
+     * @var array<string, string>
+     */
+    private array $properties = ['identifier' => 'id'];
 
     public function __construct(
         UserManagerInterface $userManager,

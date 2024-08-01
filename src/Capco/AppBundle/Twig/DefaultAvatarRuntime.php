@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\SiteImage\Resolver;
+use Capco\MediaBundle\Entity\Media;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class DefaultAvatarRuntime implements RuntimeExtensionInterface
@@ -14,12 +15,8 @@ class DefaultAvatarRuntime implements RuntimeExtensionInterface
         $this->resolver = $resolver;
     }
 
-    public function getDefaultAvatarIfNull($media)
+    public function getDefaultAvatarIfNull(?Media $media): ?Media
     {
-        if (null !== $media) {
-            return $media;
-        }
-
-        return $this->resolver->getMedia('image.default_avatar');
+        return $media ?? $this->resolver->getMedia('image.default_avatar');
     }
 }

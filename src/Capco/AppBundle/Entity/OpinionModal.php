@@ -24,7 +24,7 @@ class OpinionModal implements HasDiffInterface
     /**
      * @ORM\Column(name="modal_key", type="text", nullable=false)
      */
-    private $key;
+    private string $key;
 
     /**
      * @ORM\Column(name="modal_before", type="text", nullable=false)
@@ -42,12 +42,12 @@ class OpinionModal implements HasDiffInterface
      */
     private $opinion;
 
-    public function getKey()
+    public function getKey(): string
     {
         return $this->key;
     }
 
-    public function setKey($key)
+    public function setKey(string $key): self
     {
         $this->key = $key;
 

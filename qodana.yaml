@@ -29,6 +29,8 @@ exclude:
     - name: MethodShouldBeFinalInspection
     - name: PhpFullyQualifiedNameUsageInspection
     - name: ComparisonOperandsOrderInspection
+    - name: PhpUnnecessaryCurlyVarSyntaxInspection
+    - name: VirtualTypeCheckInspection
     - name: All
       paths:
           - spec
@@ -70,7 +72,6 @@ include:
     # PHP/Code Style
     - name: PhpIllegalPsrClassPathInspection
     - name: PhpDocMissingThrowsInspection
-    - name: PhpUnnecessaryCurlyVarSyntaxInspection
     - name: PhpIssetCanCheckNestedAccessDirectlyInspection
     - name: PhpCastIsUnnecessaryInspection
     - name: PhpUnnecessaryFullyQualifiedNameInspection

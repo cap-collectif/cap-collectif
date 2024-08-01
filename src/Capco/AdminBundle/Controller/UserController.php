@@ -3,14 +3,15 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Command\CreateCsvFromLegacyUsersCommand;
-use Capco\AppBundle\Command\CreateCsvFromUsersCommand;
-use Capco\AppBundle\Repository\LocaleRepository;
+use Capco\AppBundle\Command\Service\CronTimeInterval;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Admin\Pool;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\Process\Process;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -18,6 +19,20 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class UserController extends CRUDController
 {
+    private CronTimeInterval $cronTimeInterval;
+    private SessionInterface $session;
+
+    public function __construct(
+        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        Pool $pool,
+        CronTimeInterval $cronTimeInterval,
+        SessionInterface $session
+    ) {
+        $this->cronTimeInterval = $cronTimeInterval;
+        $this->session = $session;
+        parent::__construct($breadcrumbsBuilder, $pool);
+    }
+
     public function editAction($id = null): Response
     {
         $object = $this->get(UserRepository::class)->find($id);
@@ -42,21 +57,17 @@ class UserController extends CRUDController
     {
         $this->admin->checkAccess('export');
 
-        $path = $this->container->getParameter('kernel.root_dir') . '/../public/export/';
+        $path = $this->container->getParameter('kernel.root_dir') . '/../public/export/users/';
         $filename = 'users.csv';
         $absolutePath = $path . $filename;
-        if (file_exists($absolutePath)) {
-            Process::fromShellCommandline('rm -f ' . $absolutePath)->mustRun();
-        }
-        if (file_exists('/tmp/users.csv')) {
-            Process::fromShellCommandline('rm -f ' . '/tmp/users.csv')->mustRun();
-        }
 
         if (!file_exists($absolutePath)) {
-            CreateCsvFromUsersCommand::export(
-                $this->get(LocaleRepository::class)->getDefaultCode(),
-                $this->get('doctrine')->getConnection()
-            );
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(23))
+            ;
+
+            return $this->redirect($request->headers->get('referer'));
         }
 
         $contentType = 'text/csv';

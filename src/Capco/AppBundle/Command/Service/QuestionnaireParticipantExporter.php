@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Command\Service;
 
+use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
-use Capco\AppBundle\Command\Serializer\UserNormalizer;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
@@ -19,14 +19,14 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
     protected EntityManagerInterface $entityManager;
     private UserRepository $userRepository;
     private ReplyAnonymousRepository $replyAnonymousRepository;
-    private UserNormalizer $userNormalizer;
+    private ParticipantNormalizer $participantNormalizer;
     private ReplyAnonymousNormalizer $replyAnonymousNormalizer;
     private Serializer $serializer;
     private FilePathResolver $filePathResolver;
 
     public function __construct(
         UserRepository $userRepository,
-        UserNormalizer $userNormalizer,
+        ParticipantNormalizer $participantNormalizer,
         ReplyAnonymousNormalizer $replyAnonymousNormalizer,
         EntityManagerInterface $entityManager,
         ReplyAnonymousRepository $replyAnonymousRepository,
@@ -34,7 +34,7 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
         FilePathResolver $filePathResolver
     ) {
         $this->userRepository = $userRepository;
-        $this->userNormalizer = $userNormalizer;
+        $this->participantNormalizer = $participantNormalizer;
         $this->replyAnonymousNormalizer = $replyAnonymousNormalizer;
         $this->replyAnonymousRepository = $replyAnonymousRepository;
         $this->filePathResolver = $filePathResolver;
@@ -160,7 +160,7 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
     private function initializeSerializer(): Serializer
     {
         return new Serializer(
-            [$this->userNormalizer, $this->replyAnonymousNormalizer],
+            [$this->participantNormalizer, $this->replyAnonymousNormalizer],
             [new CsvEncoder()]
         );
     }

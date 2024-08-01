@@ -14,7 +14,7 @@ class Resolver
         $this->repository = $repository;
     }
 
-    public function getMedia($key): ?Media
+    public function getMedia(string $key): ?Media
     {
         $images = $this->repository->getValuesIfEnabled();
 

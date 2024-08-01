@@ -4,7 +4,7 @@ namespace Capco\Tests\Normalizer\Debate;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\DebateAnonymousArgumentNormalizer;
-use Capco\AppBundle\Command\Serializer\UserNormalizer;
+use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\UserBundle\Entity\User;
@@ -18,7 +18,7 @@ class DebateParticipantNormalizerKeysTest extends KernelTestCase
 {
     private User $user;
     private DebateAnonymousArgument $anonymousArgument;
-    private ?object $userNormalizer;
+    private ?object $participantNormalizer;
     private ?object $anonymousArgumentNormalizer;
 
     protected function setUp(): void
@@ -31,13 +31,13 @@ class DebateParticipantNormalizerKeysTest extends KernelTestCase
 
         $container = self::$container;
 
-        $this->userNormalizer = $container->get(UserNormalizer::class);
+        $this->participantNormalizer = $container->get(ParticipantNormalizer::class);
         $this->anonymousArgumentNormalizer = $container->get(DebateAnonymousArgumentNormalizer::class);
     }
 
     public function testExportDebateParticipantNormalizersHaveSameKeys()
     {
-        $userNormalizedData = $this->userNormalizer->normalize($this->user);
+        $userNormalizedData = $this->participantNormalizer->normalize($this->user);
         $anonymousArgumentNormalizedData = $this->anonymousArgumentNormalizer->normalize($this->anonymousArgument);
 
         $this->assertSame(
@@ -50,7 +50,7 @@ class DebateParticipantNormalizerKeysTest extends KernelTestCase
 
     public function testFullExportQuestionnaireParticipantNormalizersHaveSameKeys()
     {
-        $userNormalizedData = $this->userNormalizer->normalize($this->user, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
+        $userNormalizedData = $this->participantNormalizer->normalize($this->user, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
         $anonymousArgumentNormalizedData = $this->anonymousArgumentNormalizer->normalize($this->anonymousArgument, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
 
         $this->assertSame(

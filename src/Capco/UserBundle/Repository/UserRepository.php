@@ -1746,6 +1746,44 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return User[]
+     */
+    public function findAllUsersPaginated(string $locale, int $offset = 0, int $limit = 100): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->leftJoin('u.userType', 'ut')
+            ->leftJoin('ut.translations', 'utt', 'WITH', 'utt.locale = :locale OR utt.locale IS NULL')
+            ->leftJoin('u.userGroups', 'uig')
+            ->leftJoin('uig.group', 'ug')
+            ->where('u.roles NOT LIKE \'%SUPER%\'')
+            ->setParameter('locale', $locale)
+            ->groupBy('u.id')
+            ->orderBy('u.createdAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function hasNewUsers(\DateTime $oldestUpdateDate): bool
+    {
+        $qbd = $this->createQueryBuilder('u')
+            ->select('COUNT(u.id)')
+            ->where('u.createdAt > :oldestUpdateDate')
+            ->orWhere('u.updatedAt > :oldestUpdateDate')
+            ->setParameter('oldestUpdateDate', $oldestUpdateDate)
+            ->getQuery()
+        ;
+
+        return $qbd->getSingleScalarResult() > 0;
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');

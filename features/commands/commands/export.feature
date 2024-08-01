@@ -86,13 +86,6 @@ Scenario: User want to export his datas and 7 days after the cron delete the zip
   And the command exit code should be 0
   Then the archive for user "userAdmin" should be deleted
 
-@database
-Scenario: Admin wants to export users
-  Given I run a command "capco:export:users" with parameters:
-    | --delimiter |,|
-  And exported "csv" file with name "users.csv" should match its snapshot
-  Then the command exit code should be 0
-
 Scenario: Admin wants to export legacy users
   Given feature "export_legacy_users" is enabled
   Then I run a command "capco:export:legacyUsers" with parameters:

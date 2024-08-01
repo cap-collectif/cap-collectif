@@ -16,7 +16,8 @@
 10 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:proposalStep --env=prod --quiet
 15 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:events:participants --env=prod --quiet
 20 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:legacyUsers --env=prod --quiet
-25 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:events --env=prod --quiet
+23 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:users --env=prod --quiet
+26 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:events --env=prod --quiet
 30 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:step-contributors --env=prod --quiet
 35 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:analysis --env=prod --quiet
 40 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:export:analysis --only-decisions --env=prod --quiet

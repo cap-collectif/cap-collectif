@@ -3,8 +3,8 @@
 namespace Capco\Tests\Normalizer;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
+use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
-use Capco\AppBundle\Command\Serializer\UserNormalizer;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -22,15 +22,15 @@ class NormalizerKeysTest extends KernelTestCase
 
     public function testExportParticipantNormalizersHaveSameKeys()
     {
-        $user = new User();
+        $participant = new User();
         $anonymousReply = new ReplyAnonymous();
 
         $container = self::$container;
 
-        $userNormalizer = $container->get(UserNormalizer::class);
+        $participantNormalizer = $container->get(ParticipantNormalizer::class);
         $replyAnonymousNormalizer = $container->get(ReplyAnonymousNormalizer::class);
 
-        $firstNormalizedData = $userNormalizer->normalize($user);
+        $firstNormalizedData = $participantNormalizer->normalize($participant);
         $secondNormalizedData = $replyAnonymousNormalizer->normalize($anonymousReply);
 
         $firstKeys = array_keys($firstNormalizedData);
@@ -41,15 +41,15 @@ class NormalizerKeysTest extends KernelTestCase
 
     public function testFullExportParticipantNormalizersHaveSameKeys()
     {
-        $user = new User();
+        $participant = new User();
         $anonymousReply = new ReplyAnonymous();
 
         $container = self::$container;
 
-        $userNormalizer = $container->get(UserNormalizer::class);
+        $participantNormalizer = $container->get(ParticipantNormalizer::class);
         $replyAnonymousNormalizer = $container->get(ReplyAnonymousNormalizer::class);
 
-        $firstNormalizedData = $userNormalizer->normalize($user, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
+        $firstNormalizedData = $participantNormalizer->normalize($participant, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
         $secondNormalizedData = $replyAnonymousNormalizer->normalize($anonymousReply, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
 
         $firstKeys = array_keys($firstNormalizedData);

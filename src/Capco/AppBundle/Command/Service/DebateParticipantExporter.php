@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\DebateAnonymousArgumentNormalizer;
-use Capco\AppBundle\Command\Serializer\UserNormalizer;
+use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
@@ -22,7 +22,7 @@ class DebateParticipantExporter extends ParticipantExporter
     private DebateArgumentRepository $debateArgumentRepository;
     private DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
     private UserRepository $userRepository;
-    private UserNormalizer $userNormalizer;
+    private ParticipantNormalizer $participantNormalizer;
     private Serializer $serializer;
     private DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer;
     private DebateVoteRepository $debateVoteRepository;
@@ -36,7 +36,7 @@ class DebateParticipantExporter extends ParticipantExporter
         UserRepository $userRepository,
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
-        UserNormalizer $userNormalizer,
+        ParticipantNormalizer $participantNormalizer,
         DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer,
         LoggerInterface $logger,
         FilePathResolver $filePathResolver
@@ -45,7 +45,7 @@ class DebateParticipantExporter extends ParticipantExporter
         $this->debateArgumentRepository = $debateArgumentRepository;
         $this->debateVoteRepository = $debateVoteRepository;
         $this->userRepository = $userRepository;
-        $this->userNormalizer = $userNormalizer;
+        $this->participantNormalizer = $participantNormalizer;
         $this->debateAnonymousArgumentNormalizer = $debateAnonymousArgumentNormalizer;
         $this->logger = $logger;
         $this->filePathResolver = $filePathResolver;
@@ -71,7 +71,7 @@ class DebateParticipantExporter extends ParticipantExporter
     private function initializeSerializer(): Serializer
     {
         return new Serializer(
-            [$this->userNormalizer, $this->debateAnonymousArgumentNormalizer],
+            [$this->participantNormalizer, $this->debateAnonymousArgumentNormalizer],
             [new CsvEncoder()]
         );
     }

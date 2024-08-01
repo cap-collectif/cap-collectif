@@ -31,10 +31,15 @@ abstract class BaseNormalizer
     protected const EXPORT_PARTICIPANT_USER_LOCKED = 'export_participant_user_locked';
     protected const EXPORT_PARTICIPANT_USER_IS_PHONE_CONFIRMED = 'export_participant_user_is_phone_confirmed';
     protected const EXPORT_PARTICIPANT_CONSENT_INTERNAL_COMMUNICATION = 'export_participant_consent_internal_communication';
+    protected const EXPORT_PARTICIPANT_CONSENT_EXTERNAL_COMMUNICATION = 'export_participant_consent_external_communication';
     protected const EXPORT_PARTICIPANT_GENDER = 'export_participant_gender';
     protected const EXPORT_PARTICIPANT_WEBSITE_URL = 'export_participant_website_url';
     protected const EXPORT_PARTICIPANT_BIOGRAPHY = 'export_participant_biography';
     protected const EXPORT_PARTICIPANT_IS_FRANCE_CONNECT_ASSOCIATED = 'export_participant_is_france_connect_associated';
+    protected const EXPORT_PARTICIPANT_CONFIRMED_ACCOUNT_AT = 'export_participant_confirmed_account_at';
+    protected const EXPORT_PARTICIPANT_USER_GROUPS = 'export_participant_user_groups';
+    protected const EXPORT_PARTICIPANT_DELETED_ACCOUNT_AT = 'export_participant_deleted_account_at';
+    protected const EXPORT_PARTICIPANT_FACEBOOK_ID = 'export_participant_facebook_id';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_PUBLISHED_AT = 'export_contribution_argument_published_at';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ID = 'export_contribution_argument_author_id';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_USERNAME = 'export_contribution_argument_author_username';

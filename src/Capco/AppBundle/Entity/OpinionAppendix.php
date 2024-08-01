@@ -36,7 +36,7 @@ class OpinionAppendix
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\AppendixType", cascade={"persist"})
      * @ORM\JoinColumn(name="appendix_type_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private $appendixType;
+    private AppendixType $appendixType;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Opinion", inversedBy="appendices", cascade={"persist"})
@@ -54,12 +54,12 @@ class OpinionAppendix
         return (string) $this->getId() ?? 'New OpinionAppendix';
     }
 
-    public function getAppendixType()
+    public function getAppendixType(): AppendixType
     {
         return $this->appendixType;
     }
 
-    public function setAppendixType(AppendixType $appendixType)
+    public function setAppendixType(AppendixType $appendixType): self
     {
         $this->appendixType = $appendixType;
 
