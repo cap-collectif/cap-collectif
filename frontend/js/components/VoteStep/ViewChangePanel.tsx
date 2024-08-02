@@ -8,6 +8,7 @@ import { VoteStepEvent, View, dispatchEvent } from './utils'
 import { useVoteStepContext } from './Context/VoteStepContext'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
+import useIsMobile from '~/utils/hooks/useIsMobile'
 
 const ViewButton = ({
   icon,
@@ -77,11 +78,13 @@ export const ViewChangePanel = ({
   hasMapView = true,
   isProposalSmsVoteEnabled = false,
   hasVotesView = true,
+  disableMapView,
 }: {
   hideText?: boolean
   hasMapView?: boolean
   isProposalSmsVoteEnabled?: boolean
   hasVotesView?: boolean
+  disableMapView?: boolean
 }) => {
   const intl = useIntl()
   const [hasNewVote, setHasNewVote] = React.useState(false)
@@ -93,11 +96,15 @@ export const ViewChangePanel = ({
   const smsVoteEnabled = isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
   const { colors } = useTheme()
   const { width } = useWindowWidth()
+  const isMobile = useIsMobile()
   useEventListener(VoteStepEvent.AddVote, () => setHasNewVote(true))
 
   React.useEffect(() => {
     if (width >= 1920 && hasMapView && view === View.List) setView(View.Map)
-  }, [hasMapView, setView, view, width])
+    if (disableMapView) {
+      setView(View.List)
+    }
+  }, [hasMapView, setView, view, width, disableMapView])
 
   return (
     <Flex
@@ -110,7 +117,7 @@ export const ViewChangePanel = ({
       id="view-change-panel"
     >
       <ViewButton
-        hideText={hideText}
+        hideText={hideText || (disableMapView && !isMobile)}
         onClick={() => {
           setView(width >= 1920 && hasMapView ? View.Map : View.List)
           dispatchEvent(VoteStepEvent.ClickProposal, {
@@ -121,8 +128,8 @@ export const ViewChangePanel = ({
         icon={CapUIIcon.List}
         borderTopLeftRadius="normal"
         borderBottomLeftRadius="normal"
-        borderTopRightRadius={!hasMapView && !hasVotesView ? 'normal' : ''}
-        borderBottomRightRadius={!hasMapView && !hasVotesView ? 'normal' : ''}
+        borderTopRightRadius={(!hasMapView || disableMapView) && !hasVotesView ? 'normal' : ''}
+        borderBottomRightRadius={(!hasMapView || disableMapView) && !hasVotesView ? 'normal' : ''}
         borderRight={(width >= 1920 && view !== View.Votes) || (view === View.List && !hideText) ? 'normal' : 'none'}
         text={intl.formatMessage({
           id: width >= 1920 ? 'vote_step.all_proposals' : 'global.list',
@@ -130,7 +137,7 @@ export const ViewChangePanel = ({
         id="change-to-list-view"
       />
 
-      {hasMapView && width < 1920 ? (
+      {hasMapView && width < 1920 && !disableMapView ? (
         <>
           <Box
             display={['none', 'none', 'none', 'block']}

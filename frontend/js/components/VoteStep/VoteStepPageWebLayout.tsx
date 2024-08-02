@@ -27,6 +27,7 @@ type Props = {
   stepId: string
   isMapView: boolean
   query: VoteStepPageWebLayout_query$key
+  disableMapView: boolean
 }
 
 const FILTERS_WIDTH = '23.3rem'
@@ -50,7 +51,7 @@ const QUERY = graphql`
   }
 `
 
-export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView }: Props) => {
+export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView, disableMapView = false }: Props) => {
   const { filters, setFilters, view: contextView, hasMapView } = useVoteStepContext()
   const { latlng } = filters
   const { width } = useWindowWidth()
@@ -58,6 +59,13 @@ export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView }: Pr
   const { isOpen, onOpen, onClose } = useDisclosure()
   const data = useFragment(QUERY, queryKey)
   const dispatch = useDispatch<Dispatch>()
+  const { setView } = useVoteStepContext()
+
+  React.useEffect(() => {
+    if (disableMapView) {
+      setView(View.List)
+    }
+  }, [setView, disableMapView])
 
   if (!data || !data.step) return null
 
@@ -120,14 +128,13 @@ export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView }: Pr
               )}
               <VoteStepPageSearchBar />
             </Box>
-            {width > 1132 && (
-              <ViewChangePanel
-                hideText={width <= 1133 || (view === View.Map && width < 1280)}
-                hasMapView={hasMapView}
-                hasVotesView={isVotable}
-                isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
-              />
-            )}
+            <ViewChangePanel
+              hideText={width <= 1133 || (view === View.Map && width < 1280)}
+              hasMapView={hasMapView}
+              hasVotesView={isVotable}
+              isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
+              disableMapView={disableMapView}
+            />
           </Flex>
           <React.Suspense fallback={<ProposalsListSkeleton showImages={showImages} />}>
             {view === View.Votes ? (

@@ -59,7 +59,7 @@ const QUERY = graphql`
 
 export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }: Props) => {
   const [showFiltersPage, setShowFiltersPage] = React.useState<boolean>(false)
-  const { filters, setFilters, view: contextView, hasMapView } = useVoteStepContext()
+  const { filters, setFilters, view: contextView, hasMapView, setView } = useVoteStepContext()
   const { isOpen, onOpen, onClose } = useDisclosure()
   const data = useFragment(QUERY, queryKey)
   const { latlng } = filters
@@ -68,6 +68,14 @@ export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }:
   const { width } = useWindowWidth()
 
   const removeMapButtonBreakpoint = width > 1132
+
+  React.useEffect(() => {
+    if (removeMapButtonBreakpoint) {
+      setView(View.List)
+    } else {
+      setView(view)
+    }
+  }, [removeMapButtonBreakpoint, view, setView])
 
   const isCollectStep = data.step.kind === 'collect'
 
@@ -98,6 +106,7 @@ export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }:
         <Flex
           justifyContent="space-between"
           width="100%"
+          maxWidth={'-webkit-fill-available'}
           bg={view === View.Map ? 'unset' : 'neutral-gray.100'}
           position={view === View.Map ? 'absolute' : 'sticky'}
           top={view === View.Map ? 'unset' : '50px'}
@@ -109,16 +118,14 @@ export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }:
           zIndex={99}
         >
           <VoteStepPageSearchBarMobile onClick={() => setShowFiltersPage(true)} />
-          {removeMapButtonBreakpoint && (
-            <ViewChangePanel
-              hideText
-              hasMapView={hasMapView}
-              hasVotesView={isVotable}
-              isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
-            />
-          )}
+          <ViewChangePanel
+            hideText
+            hasMapView={hasMapView}
+            hasVotesView={isVotable}
+            isProposalSmsVoteEnabled={data.step.isProposalSmsVoteEnabled}
+          />
         </Flex>
-        {view === View.Map && removeMapButtonBreakpoint ? (
+        {view === View.Map ? (
           <React.Suspense fallback={<VoteStepMapSkeleton />}>
             <VoteStepMapQuery
               stepId={stepId}

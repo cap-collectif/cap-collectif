@@ -1,7 +1,6 @@
 import * as React from 'react'
 import useUrlState from '~/utils/hooks/useUrlState'
 import { View } from '../utils'
-import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 
 type Context = {
   filters: {
@@ -60,10 +59,8 @@ export const VoteStepContextProvider = ({
   const [latlng, setLatlng] = useUrlState('latlng', '')
   const [latlngBounds, setLatlngBounds] = useUrlState('latlngBounds', '')
   const [address, setAddress] = useUrlState('address', '')
+  const [view, setView] = useUrlState('view', isMapView ? View.Map : View.List)
   const [isParticipationAnonymous, setIsParticipationAnonymous] = React.useState(initialIsParticipationAnonymous)
-  const { width } = useWindowWidth()
-  const enableMapView = hasMapView && width > 1132
-  const [view, setView] = useUrlState('view', isMapView && enableMapView ? View.Map : View.List)
 
   const contextValue: Context = {
     filters: {
@@ -121,7 +118,7 @@ export const VoteStepContextProvider = ({
     },
     view,
     setView,
-    hasMapView: enableMapView,
+    hasMapView,
     isParticipationAnonymous,
     setIsParticipationAnonymous,
   }

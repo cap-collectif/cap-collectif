@@ -5,6 +5,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile'
 import VoteStepPageWebLayout from './VoteStepPageWebLayout'
 import VoteStepPageMobileLayout from './VoteStepPageMobileLayout'
 import { VoteStepContextProvider } from '~/components/VoteStep/Context/VoteStepContext'
+import { useWindowWidth } from '~/utils/hooks/useWindowWidth'
 import { VoteStepPageQuery } from '~relay/VoteStepPageQuery.graphql'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import ProposalStepPage from '~/components/Page/ProposalStepPage'
@@ -66,8 +67,11 @@ const QUERY = graphql`
 
 export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Props) => {
   const isMobile = useIsMobile()
+  const { width } = useWindowWidth()
   const { state } = useLocation<{ stepId?: string }>()
+  const disableDesktopMapView = width > 767 && width < 1133
   const step: string = state?.stepId || stepId
+
   const data = useLazyLoadQuery<VoteStepPageQuery>(QUERY, {
     stepId: step,
     token: CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone(),
@@ -109,7 +113,7 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
     <>
       <VoteStepContextProvider
         hasMapView={hasMapView}
-        isMapView={hasMapView && isMapView}
+        isMapView={hasMapView && isMapView && !disableDesktopMapView}
         isParticipationAnonymous={isParticipationAnonymous}
       >
         <Flex
@@ -129,7 +133,12 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
                 body={data.step.body as string}
                 timeRange={data.step.timeRange}
               />
-              <VoteStepPageWebLayout stepId={step} isMapView={isMapView} query={data} />
+              <VoteStepPageWebLayout
+                stepId={step}
+                isMapView={isMapView}
+                query={data}
+                disableMapView={disableDesktopMapView}
+              />
             </>
           )}
         </Flex>
