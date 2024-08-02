@@ -14,6 +14,7 @@ class OrangeSmsProvider implements SmsProviderInterface
     public const SERVER_ERROR = 'SERVER_ERROR'; // For 500 errors
     public const UNKNOWN_ERROR = 'UNKNOWN_ERROR'; // Catch-all for any other errors
     public const NOT_VALID_CODE = 'NOT_VALID_CODE';
+    public const CODE_NOT_VALID = 'CODE_NOT_VALID';
     public const CODE_EXPIRED = 'CODE_EXPIRED';
 
     public const NOT_FOUND = 'NOT_FOUND';
@@ -78,6 +79,10 @@ class OrangeSmsProvider implements SmsProviderInterface
 
         switch ($statusCode) {
             case 200:
+                if (($data['validOtp'] ?? null) === false) {
+                    return self::CODE_NOT_VALID;
+                }
+
                 return null; // Success
 
             case 400:
@@ -87,7 +92,7 @@ class OrangeSmsProvider implements SmsProviderInterface
                 return $data['error_description'] ?? self::UNAUTHORIZED;
 
             case 403:
-                return $data['error_description'] ?? self::NOT_VALID_CODE; // OTP was incorrect
+                return $data['error_description'] ?? self::CODE_NOT_VALID; // OTP was incorrect
 
             case 404:
                 return $data['error_description'] ?? self::NOT_FOUND;

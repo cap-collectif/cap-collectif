@@ -115,6 +115,7 @@ const ProposalVoteSmsConfirmationModal = ({
               id: 'CODE_EXPIRED',
             }),
           })
+          return;
         }
 
         if (verifyCodeErrorCode === 'CODE_NOT_VALID') {
@@ -124,10 +125,12 @@ const ProposalVoteSmsConfirmationModal = ({
               id: 'CODE_NOT_VALID',
             }),
           })
+          return;
         }
 
         if (verifyCodeErrorCode === 'TWILIO_API_ERROR') {
           mutationErrorToast(intl)
+          return;
         }
 
         const token = verifyCodeResponse.verifySmsVotePhoneNumber?.token ?? ''

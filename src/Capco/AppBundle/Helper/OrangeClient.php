@@ -80,7 +80,7 @@ class OrangeClient
     }
 
     /**
-     * @return array<string, array<string, string>|int>
+     * @return array<string, array<string, mixed>|int>
      */
     public function checkVerificationCode(string $requestId, string $code): array
     {
