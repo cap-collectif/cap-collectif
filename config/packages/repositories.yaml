@@ -70,6 +70,11 @@ services:
         lazy: true
         arguments: ['CapcoAppBundle:Steps\PresentationStep']
 
+    Capco\AppBundle\Repository\OtherStepRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:Steps\OtherStep']
+
     Capco\AppBundle\Repository\ConsultationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true

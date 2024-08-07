@@ -8,7 +8,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
-use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\RankingStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -17,7 +16,9 @@ use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
+use Capco\AppBundle\Repository\OtherStepRepository;
 use Capco\AppBundle\Repository\PostRepository;
+use Capco\AppBundle\Repository\PresentationStepRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
@@ -82,13 +83,8 @@ class StepController extends Controller
      * @Route("/project/{projectSlug}/presentation/{stepSlug}", name="app_project_show_presentation")
      * @Template("CapcoAppBundle:Step:presentation.html.twig")
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
-     * @Entity("step", class="CapcoAppBundle:Steps\PresentationStep", options={
-     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
-     *    "repository_method"="getOneBySlugAndProjectSlug",
-     *    "map_method_signature"=true
-     * })
      */
-    public function showPresentationAction(Project $project, PresentationStep $step)
+    public function showPresentationAction(Project $project, string $stepSlug, PresentationStepRepository $presentationStepRepository, OtherStepRepository $otherStepRepository)
     {
         $viewer = $this->getUser();
         if (!$project->viewerCanSee($viewer)) {
@@ -99,9 +95,22 @@ class StepController extends Controller
         $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
         $showVotes = $this->get(ProjectHelper::class)->hasStepWithVotes($project);
 
+        // after presentation steps migration to other steps the url is now /step/{slug} but we still want to support /presentation/{slug} for old url that have been already shared
+        // so we redirect to /step/{slug} if the slug matches other step
+        $otherStep = $otherStepRepository->getOneBySlugAndProjectSlug($stepSlug, $projectSlug);
+
+        if ($otherStep) {
+            return $this->redirectToRoute('app_project_show_step', [
+                'projectSlug' => $projectSlug,
+                'stepSlug' => $stepSlug,
+            ]);
+        }
+
+        $presentationStep = $presentationStepRepository->getOneBySlugAndProjectSlug($stepSlug, $projectSlug);
+
         return [
             'project' => $project,
-            'currentStep' => $step,
+            'currentStep' => $presentationStep,
             'posts' => $posts,
             'nbPosts' => $nbPosts,
             'showVotes' => $showVotes,
