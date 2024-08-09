@@ -10,14 +10,17 @@ Array [
     id="view-change-panel"
   >
     <button
+      aria-current={false}
       aria-label="global.list"
       className="sc-bcXGCL jPBKtr"
       id="change-to-list-view"
       onClick={[Function]}
     >
       <svg
+        aria-hidden={true}
         className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
         fill="none"
+        focusable={false}
         viewBox="0 0 14 13"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -66,14 +69,17 @@ Array [
       className="sc-bcXGCL jMXjzD"
     />
     <button
+      aria-current={false}
       aria-label="global.card"
       className="sc-bcXGCL vWvVC"
       id="change-to-map-view"
       onClick={[Function]}
     >
       <svg
+        aria-hidden={true}
         className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
         fill="none"
+        focusable={false}
         viewBox="0 0 8 12"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -92,6 +98,7 @@ Array [
       className="sc-bcXGCL jMXjzD"
     />
     <button
+      aria-current={false}
       aria-label="project.votes.title"
       className="sc-bcXGCL eawXRk"
       disabled={true}
@@ -99,8 +106,10 @@ Array [
       onClick={[Function]}
     >
       <svg
+        aria-hidden={true}
         className="sc-bcXGCL sc-eJDTud hkLsVD hEjMCZ cap-icon"
         fill="none"
+        focusable={false}
         viewBox="0 0 32 29"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -129,14 +138,17 @@ Array [
     id="view-change-panel"
   >
     <button
+      aria-current={false}
       aria-label="global.list"
       className="sc-bcXGCL jPBKtr"
       id="change-to-list-view"
       onClick={[Function]}
     >
       <svg
+        aria-hidden={true}
         className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
         fill="none"
+        focusable={false}
         viewBox="0 0 14 13"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -185,14 +197,17 @@ Array [
       className="sc-bcXGCL jMXjzD"
     />
     <button
+      aria-current={false}
       aria-label="global.card"
       className="sc-bcXGCL vWvVC"
       id="change-to-map-view"
       onClick={[Function]}
     >
       <svg
+        aria-hidden={true}
         className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
         fill="none"
+        focusable={false}
         viewBox="0 0 8 12"
         xmlns="http://www.w3.org/2000/svg"
       >
@@ -211,6 +226,7 @@ Array [
       className="sc-bcXGCL jMXjzD"
     />
     <button
+      aria-current={false}
       aria-label="project.votes.title"
       className="sc-bcXGCL eawXRk"
       disabled={true}
@@ -218,8 +234,10 @@ Array [
       onClick={[Function]}
     >
       <svg
+        aria-hidden={true}
         className="sc-bcXGCL sc-eJDTud hkLsVD hEjMCZ cap-icon"
         fill="none"
+        focusable={false}
         viewBox="0 0 32 29"
         xmlns="http://www.w3.org/2000/svg"
       >

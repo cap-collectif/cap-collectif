@@ -49,6 +49,7 @@ const ViewButton = ({
       {...rest}
       aria-label={text}
       borderColor={active ? 'primary.500' : 'gray.300'}
+      aria-current={active}
     >
       <Icon
         name={icon as CapUIIcon}
@@ -56,6 +57,8 @@ const ViewButton = ({
         color={active ? 'primary.500' : 'gray.700'}
         opacity={rest.disabled ? '.5' : '1'}
         mr={[0, 0, 0, 1]}
+        aria-hidden
+        focusable={false}
       />
       {!hideText ? (
         <Text
