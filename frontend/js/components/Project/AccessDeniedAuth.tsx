@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { Flex } from '@cap-collectif/ui'
-import { useDispatch } from 'react-redux'
 import styled from 'styled-components'
-import { showLoginModal } from '~/redux/modules/user'
+import { openLoginModal } from '../User/Login/LoginButton'
+import { onElementAvailable } from '@shared/navbar/NavBar.utils'
 
 const BackGroundImage = styled.img`
   width: 1280px;
@@ -12,10 +12,11 @@ const BackGroundImage = styled.img`
 `
 
 const AccessDeniedAuth = (): JSX.Element => {
-  const dispatch = useDispatch()
   React.useEffect(() => {
-    dispatch(showLoginModal())
-  }, [dispatch])
+    onElementAvailable('button#login-button', () => {
+      setTimeout(() => dispatchEvent(new Event(openLoginModal)), 200)
+    })
+  }, [])
   return (
     <Flex justifyContent="center" bg="white">
       <BackGroundImage loading="lazy" src="/image/403_auth_login.jpeg" alt="" />

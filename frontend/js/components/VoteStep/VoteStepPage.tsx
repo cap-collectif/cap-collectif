@@ -12,6 +12,8 @@ import ProposalStepPage from '~/components/Page/ProposalStepPage'
 import { ProjectTrash } from '~/startup/ProjectStepPageAppTrash'
 import VoteStepPageDescription from './VoteStepPageDescription'
 import CookieMonster from '~/CookieMonster'
+import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
+import { useIntl } from 'react-intl'
 
 type Props = {
   stepId: string
@@ -48,12 +50,15 @@ const QUERY = graphql`
           }
         }
         project {
+          title
+          url
           firstCollectStep {
             form {
               isMapViewEnabled
             }
           }
         }
+        label
         kind
         title
         timeRange {
@@ -68,6 +73,7 @@ const QUERY = graphql`
 export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Props) => {
   const isMobile = useIsMobile()
   const { width } = useWindowWidth()
+  const intl = useIntl()
   const { state } = useLocation<{ stepId?: string }>()
   const disableDesktopMapView = width > 767 && width < 1133
   const step: string = state?.stepId || stepId
@@ -93,6 +99,15 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
     if (html && !forceOldView) html.classList.remove('has-vote-widget')
     else if (html) html.classList.add('has-vote-widget')
   }, [step, forceOldView])
+
+  React.useEffect(() => {
+    dispatchNavBarEvent('set-breadcrumb', [
+      { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
+      { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
+      { title: data?.step?.project?.title, href: data?.step?.project?.url || '' },
+      { title: data?.step?.label, href: '' },
+    ])
+  }, [data, intl])
 
   // For now, we don't handle vote threshold and other step types
   if (forceOldView) {

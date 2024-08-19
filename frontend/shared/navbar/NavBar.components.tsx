@@ -146,7 +146,7 @@ export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean }> = ({ src
   const intl = useIntl()
 
   return (
-    <Flex width={isBigLogo ? 'unset' : '180px'} height={isBigLogo ? '88px' : '33px'} my={isBigLogo ? 4 : 0}>
+    <Box width={isBigLogo ? 'unset' : '180px'} height={isBigLogo ? '88px' : '33px'} my={isBigLogo ? 4 : 0}>
       <Box as="a" href="/">
         <Box
           as="img"
@@ -159,7 +159,7 @@ export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean }> = ({ src
           })}`}
         />
       </Box>
-    </Flex>
+    </Box>
   )
 }
 

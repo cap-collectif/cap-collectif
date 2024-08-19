@@ -964,6 +964,25 @@ fragment RegistrationModal_query on Query {
               expanded={false}
               onClick={[Function]}
             />
+            <styles__NavigationContentMobile
+              style={
+                Object {
+                  "maxHeight": 0,
+                  "overflow": "hidden",
+                }
+              }
+            >
+              <ForwardRef
+                direction="column"
+                flex="0 0 auto"
+                height="100%"
+                width="100%"
+              >
+                <Connect(NavbarRight)
+                  currentLanguage="fr-FR"
+                />
+              </ForwardRef>
+            </styles__NavigationContentMobile>
           </styles__NavigationContainer>
         </div>
       </div>
@@ -1013,6 +1032,25 @@ exports[`<Navbar /> should render correctly when authenticated 1`] = `
               expanded={false}
               onClick={[Function]}
             />
+            <styles__NavigationContentMobile
+              style={
+                Object {
+                  "maxHeight": 0,
+                  "overflow": "hidden",
+                }
+              }
+            >
+              <ForwardRef
+                direction="column"
+                flex="0 0 auto"
+                height="100%"
+                width="100%"
+              >
+                <Connect(NavbarRight)
+                  currentLanguage="fr-FR"
+                />
+              </ForwardRef>
+            </styles__NavigationContentMobile>
           </styles__NavigationContainer>
         </div>
       </div>
@@ -1985,6 +2023,25 @@ fragment RegistrationModal_query on Query {
               expanded={false}
               onClick={[Function]}
             />
+            <styles__NavigationContentMobile
+              style={
+                Object {
+                  "maxHeight": 0,
+                  "overflow": "hidden",
+                }
+              }
+            >
+              <ForwardRef
+                direction="column"
+                flex="0 0 auto"
+                height="100%"
+                width="100%"
+              >
+                <Connect(NavbarRight)
+                  currentLanguage="fr-FR"
+                />
+              </ForwardRef>
+            </styles__NavigationContentMobile>
           </styles__NavigationContainer>
         </div>
       </div>

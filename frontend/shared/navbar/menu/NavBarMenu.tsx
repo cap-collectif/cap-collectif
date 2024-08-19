@@ -170,6 +170,7 @@ export const NavBarMenuContent = ({
 
   return (
     <Box
+      zIndex={51}
       sx={{
         ul: {
           listStyle: 'none',

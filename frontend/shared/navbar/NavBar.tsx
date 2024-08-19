@@ -175,12 +175,13 @@ const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
       <Box
         position="fixed"
         height="80px"
-        borderTop={`1px solid ${theme.subMenuBackground}`}
+        borderTop={isOpen ? `1px solid ${theme.subMenuBackground}` : undefined}
         bottom={0}
         left={0}
         bg={theme.menuBackground}
         width="100vw"
-        display={isOpen ? 'block' : 'none'}
+        display="block"
+        maxHeight={isOpen ? undefined : 0}
       >
         {children}
       </Box>

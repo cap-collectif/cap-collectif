@@ -197,15 +197,13 @@ export const Navbar = ({
                       </S.NavigationContentDesktop>
                     )}
 
-                    {expanded && (
-                      <S.NavigationContentMobile>
-                        {items.length > 0 && <TabsBar items={items} />}
+                    <S.NavigationContentMobile style={!expanded ? { maxHeight: 0, overflow: 'hidden' } : undefined}>
+                      {items.length > 0 && <TabsBar items={items} />}
 
-                        <Flex direction="column" height="100%" flex="0 0 auto" width="100%">
-                          <NavbarRight currentLanguage={currentLanguage} />
-                        </Flex>
-                      </S.NavigationContentMobile>
-                    )}
+                      <Flex direction="column" height="100%" flex="0 0 auto" width="100%">
+                        <NavbarRight currentLanguage={currentLanguage} />
+                      </Flex>
+                    </S.NavigationContentMobile>
                   </S.NavigationContainer>
                 </div>
               </React.Fragment>
