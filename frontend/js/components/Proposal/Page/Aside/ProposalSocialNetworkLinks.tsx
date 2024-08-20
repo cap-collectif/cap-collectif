@@ -102,7 +102,7 @@ export const ProposalSocialNetworkLinks = ({ proposal: proposalFragment }: Props
           <Flex wrap="wrap" mt={4} overflowX="auto" width="280px">
             {proposal.form.usingTwitter && proposal.twitterUrl && (
               <a href={proposal.twitterUrl} rel="noreferrer" target="_blank">
-                <Icon size={CapUIIconSize.Lg} name={CapUIIcon.TwitterColored} />
+                <Icon size={CapUIIconSize.Lg} name={CapUIIcon.XColored} />
               </a>
             )}
             {proposal.form.usingFacebook && proposal.facebookUrl && (

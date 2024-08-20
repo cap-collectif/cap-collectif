@@ -5,6 +5,6 @@ export const instagramRegEx =
 export const fbRegEx =
   /(https:\/\/)(?:www\.)?(mbasic.facebook|m\.facebook|facebook|fb)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w]*\/)*([\w]*)/
 export const twitterRegEx =
-  /(https:\/\/)(?:www\.)?(mbasic.twitter|m\.twitter|twitter)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:[\w]*\/)*([\w]*)/
+  /(https:\/\/)(?:www\.)?(mbasic\.x|m\.x|x)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:[\w]*\/)*([\w]*)/
 export const linkedInRegEx =
   /(https:\/\/)(?:www\.)?(mbasic.linkedin|m\.linkedin|linkedin)\.(com|me)\/(?:(?:\w\.)*#!\/)?(?:pages\/)?(?:[\w]*\/)*([\w]*)/

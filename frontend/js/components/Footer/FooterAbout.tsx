@@ -2,7 +2,7 @@ import React from 'react'
 import styled from 'styled-components'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { SocialNetwork } from './Footer'
-import { Box } from '@cap-collectif/ui'
+import { Box, Icon, CapUIIcon, Flex } from '@cap-collectif/ui'
 
 type Props = {
   textTitle: string
@@ -79,10 +79,12 @@ const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColo
           {socialNetworks &&
             socialNetworks.map(socialNetwork => (
               <li key={socialNetwork.title}>
-                <span className={`cap cap-${socialNetwork.style}`} />
-                <a href={socialNetwork.link} className="external-link">
-                  <span>{` ${socialNetwork.title}`}</span>
-                </a>
+                <Flex>
+                  <Icon name={CapUIIcon[socialNetwork.style.charAt(0).toUpperCase() + socialNetwork.style.slice(1)]}/>
+                  <a href={socialNetwork.link} className="external-link">
+                    <span>{` ${socialNetwork.title}`}</span>
+                  </a>
+                </Flex>
               </li>
             ))}
         </SocialNetworks>

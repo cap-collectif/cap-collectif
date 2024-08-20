@@ -79,7 +79,7 @@ const ProjectHeaderShareButtons = ({ url, title, ...rest }: Props) => {
         onClick={() => {
           share(title, url, 'twitter')
         }}
-        name="TWITTER"
+        name="X"
         ariaLabel={intl.formatMessage({
           id: 'share-link-twitter',
         })}

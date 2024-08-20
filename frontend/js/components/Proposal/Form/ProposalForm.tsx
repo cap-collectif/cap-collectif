@@ -854,7 +854,7 @@ export class ProposalForm extends React.Component<Props, State> {
                 label={intl.formatMessage({
                   id: 'share.twitter',
                 })}
-                placeholder="https://twitter.com/pseudo"
+                placeholder="https://x.com/pseudo"
               />
             )}
             {proposalForm.usingFacebook && (

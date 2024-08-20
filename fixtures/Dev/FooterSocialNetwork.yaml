@@ -7,11 +7,11 @@ Capco\AppBundle\Entity\FooterSocialNetwork:
     style: facebook
 
   FooterSocialNetwork2:
-    title: Twitter
-    link: https://twitter.com/CapCollectif
+    title: X
+    link: https://x.com/CapCollectif
     position: 2
     isEnabled: true
-    style: twitter
+    style: x
 
   FooterSocialNetwork3:
     title: Linkedin

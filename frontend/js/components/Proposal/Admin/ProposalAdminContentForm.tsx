@@ -331,7 +331,7 @@ export const validateProposalContent = (
       errors.twitterUrl = {
         id: 'error-invalid-socialNetwork-url',
         values: {
-          SocialNetworkName: 'Twitter',
+          SocialNetworkName: 'X',
         },
       }
     }

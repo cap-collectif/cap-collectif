@@ -7,11 +7,11 @@ Capco\AppBundle\Entity\SocialNetwork:
     media: '@MediaFacebook'
 
   SocialNetwork2:
-    title: Twitter
-    link: http://twitter.com
+    title: X
+    link: http://x.com
     position: 2
     isEnabled: true
-    media: '@MediaTwitter'
+    media: '@MediaX'
 
   SocialNetwork3:
     title: Linkedin

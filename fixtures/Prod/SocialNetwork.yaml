@@ -21,11 +21,11 @@ Capco\AppBundle\Entity\SocialNetwork:
         media: '@MediaInstagram'
 
     SocialNetwork4:
-        title: Twitter
-        link: https://twitter.com
+        title: X
+        link: https://x.com
         position: 4
         isEnabled: true
-        media: '@MediaTwitter'
+        media: '@MediaX'
 
     SocialNetwork5:
         title: YouTube

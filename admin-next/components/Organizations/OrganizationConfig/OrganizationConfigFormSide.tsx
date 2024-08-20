@@ -97,7 +97,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
               name="socialNetworks.twitterUrl"
               control={control}
               type="text"
-              placeholder="https://twitter.com/pseudo"
+              placeholder="https://x.com/pseudo"
             />
           </FormControl>
           <FormControl name="socialNetworks.facebookUrl" control={control}>

@@ -90,7 +90,7 @@ const validate = (values: Record<string, any>) => {
       errors.twitterUrl = {
         id: 'error-invalid-socialNetwork-url',
         values: {
-          SocialNetworkName: 'Twitter',
+          SocialNetworkName: 'X',
         },
       }
     }

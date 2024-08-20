@@ -28,10 +28,10 @@ describe('<FooterAbout />', () => {
           style: 'facebook',
         },
         {
-          link: 'twitter.com',
+          link: 'x.com',
           media: 'cuicui.jpg',
-          title: 'Twitter',
-          style: 'twitter',
+          title: 'X',
+          style: 'x',
         },
       ],
       titleColor: '#000',

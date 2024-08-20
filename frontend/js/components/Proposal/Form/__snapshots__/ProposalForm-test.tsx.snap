@@ -367,7 +367,7 @@ exports[`<ProposalForm /> should render a create ESTABLISHMENT form  1`] = `
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
-      placeholder="https://twitter.com/pseudo"
+      placeholder="https://x.com/pseudo"
       type="text"
     />
     <Field
@@ -773,7 +773,7 @@ exports[`<ProposalForm /> should render a create Proposal form 1`] = `
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
-      placeholder="https://twitter.com/pseudo"
+      placeholder="https://x.com/pseudo"
       type="text"
     />
     <Field
@@ -1218,7 +1218,7 @@ exports[`<ProposalForm /> should render a create Proposal form from back office 
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
-      placeholder="https://twitter.com/pseudo"
+      placeholder="https://x.com/pseudo"
       type="text"
     />
     <Field
@@ -1624,7 +1624,7 @@ exports[`<ProposalForm /> should render a create Question form 1`] = `
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
-      placeholder="https://twitter.com/pseudo"
+      placeholder="https://x.com/pseudo"
       type="text"
     />
     <Field
@@ -2030,7 +2030,7 @@ exports[`<ProposalForm /> should render a create Question form with hidden quest
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
-      placeholder="https://twitter.com/pseudo"
+      placeholder="https://x.com/pseudo"
       type="text"
     />
     <Field
@@ -2436,7 +2436,7 @@ exports[`<ProposalForm /> should render an edit form 1`] = `
       id="proposal_twitter"
       label="share.twitter"
       name="twitterUrl"
-      placeholder="https://twitter.com/pseudo"
+      placeholder="https://x.com/pseudo"
       type="text"
     />
     <Field

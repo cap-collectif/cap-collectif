@@ -58,32 +58,36 @@ exports[`<FooterAbout /> renders correcty and displays social networks 1`] = `
         <li
           key="Facebook"
         >
-          <span
-            className="cap cap-facebook"
-          />
-          <a
-            className="external-link"
-            href="fb.com"
-          >
-            <span>
-               Facebook
-            </span>
-          </a>
+          <Flex>
+            <Icon
+              name="FACEBOOK"
+            />
+            <a
+              className="external-link"
+              href="fb.com"
+            >
+              <span>
+                 Facebook
+              </span>
+            </a>
+          </Flex>
         </li>
         <li
-          key="Twitter"
+          key="X"
         >
-          <span
-            className="cap cap-twitter"
-          />
-          <a
-            className="external-link"
-            href="twitter.com"
-          >
-            <span>
-               Twitter
-            </span>
-          </a>
+          <Flex>
+            <Icon
+              name="X"
+            />
+            <a
+              className="external-link"
+              href="x.com"
+            >
+              <span>
+                 X
+              </span>
+            </a>
+          </Flex>
         </li>
       </FooterAbout__SocialNetworks>
     </Box>

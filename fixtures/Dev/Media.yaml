@@ -119,10 +119,10 @@ Capco\MediaBundle\Entity\Media:
         name: RSS
         category: '@MediaCategory1'
         providerReference: providerReference20.png
-    MediaTwitter:
+    MediaX:
         id: media20
-        binaryContent: social/twitter.png
-        name: Twitter
+        binaryContent: social/x.png
+        name: X
         category: '@MediaCategory1'
         providerReference: providerReference21.png
     MediaCapcoSite:

@@ -158,7 +158,7 @@ export const OrganizationPage = ({ organizationId }: Props) => {
                   <SocialIconLink href={socialNetworks.facebookUrl} icon={CapUIIcon.Facebook} />
                 ) : null}
                 {socialNetworks.twitterUrl ? (
-                  <SocialIconLink href={socialNetworks.twitterUrl} icon={CapUIIcon.Twitter} />
+                  <SocialIconLink href={socialNetworks.twitterUrl} icon={CapUIIcon.X} />
                 ) : null}
                 {socialNetworks.webPageUrl ? (
                   <SocialIconLink href={socialNetworks.webPageUrl} icon={CapUIIcon.Link} />

@@ -4,6 +4,7 @@ describe('Proposal Page', () => {
   describe('Project Page FO', () => {
     beforeEach(() => {
       cy.task('db:restore')
+      cy.task('disable:feature', 'new_vote_step')
     })
     it('should see votes', () => {
       cy.directLoginAs('project_owner')
@@ -63,6 +64,7 @@ describe('Proposal Page', () => {
     })
   })
   it('should be possible to see every private proposal as a member of an organization', () => {
+    cy.task('disable:feature', 'new_vote_step')
     cy.directLoginAs('christophe')
     ProposalPage.visitCollectStepPage({
       project: 'budget-participatif-dorganisation',
@@ -75,6 +77,7 @@ describe('Proposal Page', () => {
       .should('contain', 'Proposition de Valérie')
   })
   it('should be possible to see only my proposal as not a member of an organization', () => {
+    cy.task('disable:feature', 'new_vote_step')
     cy.directLoginAs('user')
     ProposalPage.visitCollectStepPage({
       project: 'budget-participatif-dorganisation',
