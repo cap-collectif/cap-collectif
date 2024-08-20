@@ -6,6 +6,9 @@ CommentOrderField:
             PUBLISHED_AT:
                 value: !php/const Capco\AppBundle\Enum\CommentOrderField::PUBLISHED_AT
                 description: 'Allows ordering a list of comments by when they were published.'
+            CREATED_AT:
+                value: !php/const Capco\AppBundle\Enum\CommentOrderField::CREATED_AT
+                description: 'Allows ordering a list of comments by when they were created.'
             UPDATED_AT:
                 value: !php/const Capco\AppBundle\Enum\CommentOrderField::UPDATED_AT
                 description: 'Allows ordering a list of comments by when they were updated.'

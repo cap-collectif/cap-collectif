@@ -4,8 +4,9 @@ InternalPost:
         - PreviewPost
         - Commentable
         - InternalOwnerable
+        - Contribution
     config:
-        interfaces: [Commentable]
+        interfaces: [Commentable, Contribution]
         name: Post
         fields:
             authors:

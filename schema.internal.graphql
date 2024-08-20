@@ -2641,6 +2641,9 @@ enum CommentOrderField {
   """Allows ordering a list of comments by when they were published."""
   PUBLISHED_AT
 
+  """Allows ordering a list of comments by when they were created."""
+  CREATED_AT
+
   """Allows ordering a list of comments by when they were updated."""
   UPDATED_AT
 
@@ -6292,7 +6295,7 @@ type EvaluationForm {
 }
 
 """An event."""
-type Event implements Node & UniformResourceLocatable & Commentable {
+type Event implements Node & UniformResourceLocatable & Commentable & Contribution {
   """The ID of an object."""
   id: ID!
 
@@ -6379,6 +6382,11 @@ type Event implements Node & UniformResourceLocatable & Commentable {
 
   """The user that created the resource."""
   creator: User
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
 
   """The event admin edit url"""
   adminUrl: URI!
@@ -10322,12 +10330,12 @@ type PlatformAnalyticsVotes {
   values: [AggregatedResult!]!
 }
 
-"""A commentable"""
-type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocatable & Commentable {
+"""A contribution with an author"""
+type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocatable & Commentable & Contribution {
   """The ID of an object"""
   id: ID!
 
-  """The URL to this resource."""
+  """Url of the contribution"""
   url: URI!
 
   """The admin url for this post."""
@@ -10400,6 +10408,11 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
 
   """The user that created the resource."""
   creator: User
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
   displayedOnBlog: Boolean!
   relatedContent: [PostRelatedContent!]!
   viewerDidAuthor: Boolean!
@@ -11782,14 +11795,14 @@ enum ProposalAffiliation {
 }
 
 """A proposal analysis."""
-type ProposalAnalysis {
+type ProposalAnalysis implements Contribution {
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
 
-  """The proposal's analysis id."""
+  """The ID of an object"""
   id: ID!
 
   """The related proposal."""
@@ -11806,6 +11819,14 @@ type ProposalAnalysis {
 
   """The analysis responses."""
   responses: [Response!]!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
 
   """Get all comments of the analysis."""
   comments(
@@ -13819,6 +13840,23 @@ type Query {
 
   """The navbar menu items."""
   menuItems: [MenuItem!]!
+
+  """List of comments"""
+  comments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """The ordering direction for the comment creation or updated date"""
+    orderBy: CommentOrder = {field: CREATED_AT, direction: DESC}
+
+    """The term to filter comments on the body or the author username."""
+    term: String
+  ): CommentConnection!
 
   """List of user types."""
   userTypes: [UserType!]!

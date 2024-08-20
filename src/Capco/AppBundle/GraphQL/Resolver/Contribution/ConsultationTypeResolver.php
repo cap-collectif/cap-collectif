@@ -8,11 +8,13 @@ use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
+use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\OpinionVersionVote;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Entity\ProposalCollectVote;
 use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Reply;
@@ -98,7 +100,11 @@ class ConsultationTypeResolver implements QueryInterface
             return $this->typeResolver->resolve('Answer');
         }
         if ($data instanceof Post) {
-            return $this->typeResolver->resolve('Post');
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewPost');
+            }
+
+            return $this->typeResolver->resolve('InternalPost');
         }
         if ($data instanceof DebateArgument) {
             return $this->typeResolver->resolve('InternalDebateArgument');
@@ -108,6 +114,20 @@ class ConsultationTypeResolver implements QueryInterface
         }
         if ($data instanceof AbstractVote) {
             return $this->voteTypeResolver->__invoke($data);
+        }
+        if ($data instanceof Event) {
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewEvent');
+            }
+
+            return $this->typeResolver->resolve('InternalEvent');
+        }
+        if ($data instanceof ProposalAnalysis) {
+            if ('preview' === $currentSchemaName) {
+                return $this->typeResolver->resolve('PreviewProposalAnalysis');
+            }
+
+            return $this->typeResolver->resolve('InternalProposalAnalysis');
         }
 
         throw new UserError('Could not resolve type of Contribution.');

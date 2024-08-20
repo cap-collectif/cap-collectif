@@ -6,10 +6,12 @@ InternalEvent:
         - InternalPrimaryKey
         - InternalTimeRangeable
         - InternalOwnerable
+        - Contribution
     config:
         description: 'An event.'
         interfaces:
             - Commentable
+            - Contribution
         name: Event
         fields:
             id:

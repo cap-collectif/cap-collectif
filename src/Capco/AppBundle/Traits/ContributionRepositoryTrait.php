@@ -6,13 +6,19 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\QueryBuilder;
+use Exception;
 
 trait ContributionRepositoryTrait
 {
+    /**
+     * @throws Exception
+     *
+     * @return array<int, object>
+     */
     public function findCreatedSinceIntervalByAuthor(
         User $author,
         string $interval,
-        $authorField = 'author'
+        string $authorField = 'author'
     ): array {
         $now = new \DateTime();
         $from = (new \DateTime())->sub(new \DateInterval($interval));
@@ -47,7 +53,7 @@ trait ContributionRepositoryTrait
         $qb = $this->createQueryBuilder('o');
         $qb->select('count(DISTINCT o.id)')->andWhere('o.published = false');
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     // Only for trashable contribution
@@ -56,9 +62,12 @@ trait ContributionRepositoryTrait
         $qb = $this->createQueryBuilder('o');
         $qb->select('count(DISTINCT o.id)')->andWhere('o.trashedAt IS NOT NULL');
 
-        return $qb->getQuery()->getSingleScalarResult();
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return array<int, object>
+     */
     public function getVotesByProject(Project $project): array
     {
         $steps = $project->getSteps();

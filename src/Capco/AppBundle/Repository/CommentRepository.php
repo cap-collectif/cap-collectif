@@ -2,13 +2,47 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Enum\CommentOrderField;
+use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\Query\ResultSetMapping;
 
 class CommentRepository extends EntityRepository
 {
+    use ContributionRepositoryTrait;
+
+    /**
+     * @return array<int, string>
+     */
+    public function findPaginated(
+        ?string $search,
+        ?string $field = CommentOrderField::CREATED_AT,
+        ?string $direction = 'ASC',
+        int $offset = 0,
+        int $limit = 50
+    ): array {
+        $qb = $this->createQueryBuilder('c')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+        if (CommentOrderField::CREATED_AT === $field) {
+            $qb->addOrderBy('c.createdAt', $direction);
+        }
+        if (CommentOrderField::UPDATED_AT === $field) {
+            $qb->addOrderBy('c.updatedAt', $direction);
+        }
+        if ($search) {
+            $alias = $qb->getRootAliases()[0];
+            $this->searchByBodyOrAuthorUsername($qb, $search, $alias);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function countPublished(): int
     {
         $qb = $this->createQueryBuilder('c')
@@ -27,6 +61,22 @@ class CommentRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getTotalCommentsBySearchQuery(
+        ?string $search = null
+    ): int {
+        $qb = $this->createQueryBuilder('c');
+        if ($search) {
+            $this->searchByBodyOrAuthorUsername($qb, $search, 'c');
+        }
+        $qb->select('COUNT(c.id)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
     }
 
     public function getRecentOrdered()
@@ -78,7 +128,7 @@ class CommentRepository extends EntityRepository
             ->setParameter('comment', $comment)
             ->getQuery()
             ->getOneOrNullResult()
-        ;
+            ;
     }
 
     public function countAllByAuthor(User $user): int
@@ -89,7 +139,7 @@ class CommentRepository extends EntityRepository
             ->setParameter('author', $user)
             ->getQuery()
             ->getSingleScalarResult()
-        ;
+            ;
     }
 
     public function findAllByAuthor(User $user): array

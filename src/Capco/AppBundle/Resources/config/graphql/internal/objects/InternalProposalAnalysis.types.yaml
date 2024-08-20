@@ -2,7 +2,10 @@ InternalProposalAnalysis:
     type: object
     inherits:
         - PreviewProposalAnalysis
+        - Contribution
     config:
+        interfaces:
+            - Contribution
         description: 'A proposal analysis.'
         name: ProposalAnalysis
         fields:
@@ -21,3 +24,6 @@ InternalProposalAnalysis:
                 resolve: '@=value.getConcernedUsers()'
                 type: '[InternalUser!]!'
                 description: 'Users assigned to this proposal analysis'
+            url:
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalAnalysisUrlResolver", [value, serv("request_stack")])'
+                type: 'URI!'

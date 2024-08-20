@@ -608,6 +608,24 @@ InternalQuery:
                 type: '[InternalMenuItem!]!'
                 description: 'The navbar menu items.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemsResolver", [args])'
+            comments:
+                type: 'CommentConnection!'
+                description: 'List of comments'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentListResolver", [args])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'CommentOrder'
+                        defaultValue:
+                          {
+                              field: !php/const Capco\AppBundle\Enum\CommentOrderField::CREATED_AT,
+                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                          }
+                        description: 'The ordering direction for the comment creation or updated date'
+                    term:
+                        type: 'String'
+                        description: 'The term to filter comments on the body or the author username.'
             userTypes:
                 type: '[UserType!]!'
                 description: 'List of user types.'

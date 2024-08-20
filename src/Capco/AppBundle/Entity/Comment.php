@@ -148,6 +148,22 @@ abstract class Comment implements Publishable, Trashable, Contribution, VotableI
 
     public function getRelated()
     {
+        if ($this instanceof ProposalComment) {
+            return $this->getProposal();
+        }
+
+        if ($this instanceof EventComment) {
+            return $this->getEvent();
+        }
+
+        if ($this instanceof PostComment) {
+            return $this->getPost();
+        }
+
+        if ($this instanceof ProposalAnalysisComment) {
+            return $this->getProposalAnalysis();
+        }
+
         return null;
     }
 
