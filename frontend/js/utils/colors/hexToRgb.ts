@@ -1,5 +1,5 @@
 // @ts-nocheck
-import type { ColorRGB, ColorRGBA } from './formatColor'
+import type { ColorRGB, ColorRGBA } from '@shared/utils/colors'
 
 // Source: https://css-tricks.com/converting-color-spaces-in-javascript/#hex-to-rgb
 // Example: hexToRgb('#4211D0');

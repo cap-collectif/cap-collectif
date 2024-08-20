@@ -1,7 +1,7 @@
 import React from 'react'
 import { useIntl } from 'react-intl'
 import Label from '~ui/Labels/Label'
-import Icon from '~ui/Icons/Icon'
+import Icon from '@shared/ui/LegacyIcons/Icon'
 import type { Status } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole'
 
 type Props = {

@@ -50,7 +50,7 @@ import RevokeAnalystsToProposalsMutation from '~/mutations/RevokeAnalystsToPropo
 import { PROPOSAL_STATUS, TYPE_ROLE } from '~/constants/AnalyseConstants'
 import ProjectAdminAnalysisNoProposals from './ProjectAdminAnalysisNoProposals'
 import ProjectAdminAnalysisShortcut from './ProjectAdminAnalysisShortcut'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import FilterTag from '~ui/Analysis/FilterTag'
 import type { Uuid } from '~/types'
 import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort'

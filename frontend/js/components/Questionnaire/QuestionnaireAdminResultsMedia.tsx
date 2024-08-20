@@ -6,7 +6,7 @@ import { FormattedMessage } from 'react-intl'
 import type { QuestionnaireAdminResultsMedia_mediaQuestion } from '~relay/QuestionnaireAdminResultsMedia_mediaQuestion.graphql'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
 import { Card } from '../Ui/Card/Card'
-import FileIcon from '../Ui/Icons/FileIcon'
+import FileIcon from '@shared/ui/LegacyIcons/FileIcon'
 import FormattedMediaSize from '../Utils/FormattedMediaSize'
 
 const RESPONSE_PAGINATION = 24

@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { Button } from 'react-bootstrap'
 import { FormattedMessage } from 'react-intl'
 import ProposalContactModal from './ProposalContactModal'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 
 export const ProposalContactButton = ({ proposalId, authorName }: { proposalId: string; authorName: string }) => {

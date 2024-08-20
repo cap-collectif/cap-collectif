@@ -8,7 +8,7 @@ import type {
   UpdateFranceConnectSSOConfigurationMutation$variables,
 } from '@relay/UpdateFranceConnectSSOConfigurationMutation.graphql'
 import { FranceConnectAllowedData } from '@relay/UpdateFranceConnectSSOConfigurationMutation.graphql'
-import uuid from '@utils/uuid'
+import uuid from '@shared/utils/uuid'
 
 const mutation = graphql`
   mutation UpdateFranceConnectSSOConfigurationMutation(

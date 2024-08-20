@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import type { OpinionSourceContent_source } from '~relay/OpinionSourceContent_source.graphql'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   source: OpinionSourceContent_source

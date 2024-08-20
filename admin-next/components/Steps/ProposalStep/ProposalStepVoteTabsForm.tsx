@@ -21,7 +21,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormProvider, UseFormReturn } from 'react-hook-form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
 import { FormattedHTMLMessage, useIntl } from 'react-intl'
-import { useFeatureFlag } from '@hooks/useFeatureFlag'
+import { useFeatureFlag } from '@shared/hooks/useFeatureFlag'
 
 type ProposalStepVoteType = 'BUDGET' | 'DISABLED' | 'SIMPLE'
 export interface ProposalStepVoteTabsFormProps {

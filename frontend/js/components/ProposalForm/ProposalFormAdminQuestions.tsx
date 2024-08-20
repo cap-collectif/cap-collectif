@@ -20,7 +20,7 @@ import type { QuestionTypeValue } from '~relay/ProposalFormAdminConfigurationFor
 import Collapsable from '~ui/Collapsable'
 import DropdownSelect from '~ui/DropdownSelect'
 import SubSectionQuestionAdminModal from '~/components/Question/SubSectionQuestionAdminModal'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 
 type Props = {

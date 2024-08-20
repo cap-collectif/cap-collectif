@@ -2,7 +2,7 @@ import { Card, Heading, Text } from '@cap-collectif/ui'
 import * as React from 'react'
 
 import DatesInterval from '../Utils/DatesInterval'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   title: string

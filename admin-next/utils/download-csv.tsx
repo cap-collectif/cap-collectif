@@ -1,6 +1,6 @@
 import { IntlShape } from 'react-intl'
 import { toast } from '@cap-collectif/ui'
-import saveAs from './filesaver'
+import saveAs from '@shared/utils/filesaver'
 
 const downloadCSV = async (
   url: string,

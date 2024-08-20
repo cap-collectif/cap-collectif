@@ -3,7 +3,7 @@ import ReCAPTCHA from 'react-google-recaptcha'
 import { Turnstile } from '@marsidev/react-turnstile'
 import config from '~/config'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import uuid from '~/utils/uuid'
+import uuid from '@shared/utils/uuid'
 
 /**
  * Allow Google ReCaptcha to work in test mode

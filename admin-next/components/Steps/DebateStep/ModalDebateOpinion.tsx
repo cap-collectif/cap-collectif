@@ -19,7 +19,7 @@ import {
 } from '@cap-collectif/ui'
 import { Controller, useForm } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import Jodit from '@components/Form/TextEditor/Jodit'
 import UserListField from '@components/Form/UserListField'
 

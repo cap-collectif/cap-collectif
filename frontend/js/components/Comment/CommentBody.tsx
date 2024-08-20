@@ -4,7 +4,7 @@ import Linkify from 'react-linkify'
 import { FormattedMessage } from 'react-intl'
 import nl2br from 'react-nl2br'
 import type { CommentBody_comment } from '~relay/CommentBody_comment.graphql'
-import { isPredefinedTraductionKey, translateContent } from '~/utils/ContentTranslator'
+import { isPredefinedTraductionKey, translateContent } from '@shared/utils/contentTranslator'
 type Props = {
   readonly comment: CommentBody_comment
 }

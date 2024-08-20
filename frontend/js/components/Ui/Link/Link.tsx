@@ -5,7 +5,7 @@ import copy from 'copy-to-clipboard'
 import { FormattedMessage } from 'react-intl'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS_SIZE } from '~/utils/styles/variables'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Tooltip from '~ds/Tooltip/Tooltip'
 type Props = {
   readonly url: string

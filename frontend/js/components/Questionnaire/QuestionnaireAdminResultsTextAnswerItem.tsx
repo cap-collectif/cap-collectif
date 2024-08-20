@@ -6,7 +6,7 @@ import Button from '~ds/Button/Button'
 import Text from '~ui/Primitives/Text'
 import AppBox from '~ui/Primitives/AppBox'
 import colors from '~/styles/modules/colors'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   value: string

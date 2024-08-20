@@ -2,7 +2,7 @@
 import * as React from 'react'
 import cn from 'classnames'
 import { Container, MotivationContainer } from './ParticipationMotivation.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 export type Props = {
   motivations: string[]

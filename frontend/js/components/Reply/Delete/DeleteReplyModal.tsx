@@ -6,7 +6,7 @@ import type { DeleteReplyModal_reply } from '~relay/DeleteReplyModal_reply.graph
 import DeleteAnonymousReplyMutation from '~/mutations/DeleteAnonymousReplyMutation'
 import DeleteUserReplyMutation from '~/mutations/DeleteUserReplyMutation'
 import CookieMonster from '~/CookieMonster'
-import Icon from '~ui/Icons/Icon'
+import Icon from '@shared/ui/LegacyIcons/Icon'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'
 import type { DeleteReplyModal_questionnaire } from '~relay/DeleteReplyModal_questionnaire.graphql'

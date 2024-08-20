@@ -1,0 +1,36 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<WYSIWYGRender /> should render correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="myClass ql-editor wysiwyg-render"
+    dangerouslySetInnerHTML={
+      {
+        "__html": "<div>Little test</div>",
+      }
+    }
+  />,
+]
+`;
+
+exports[`<WYSIWYGRender /> should render correctly with tagName 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="myClass ql-editor wysiwyg-render"
+  >
+    <i
+      dangerouslySetInnerHTML={
+        {
+          "__html": "<div>Little test</div>",
+        }
+      }
+    />
+  </div>,
+]
+`;

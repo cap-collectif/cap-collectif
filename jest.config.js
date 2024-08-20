@@ -18,7 +18,7 @@ module.exports = {
     '@relay/(.*)$': '<rootDir>/frontend/js/__generated__/~relay/$1',
     '~ui(.*)$': '<rootDir>/frontend/js/components/Ui/$1',
     '~ds(.*)$': '<rootDir>/frontend/js/components/DesignSystem/$1',
-    '@shared(.*)$': '<rootDir>/frontend/shared/$1',
+    '@shared(.*)$': '<rootDir>/admin-next/shared/$1',
     '~(.*)$': '<rootDir>/frontend/js/$1',
     '~svg(.*)$': '<rootDir>/public/svg/$1',
     '~image(.*)$': '<rootDir>/public/image/$1',

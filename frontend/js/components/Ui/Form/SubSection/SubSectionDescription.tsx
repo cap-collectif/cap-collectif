@@ -5,7 +5,7 @@ import { hexToRgba } from '~/utils/colors/hexToRgb'
 import isQuestionnaire from '~/utils/isQuestionnaire'
 import Description from '~ui/Form/Description/Description'
 import { TYPE_FORM } from '~/constants/FormConstants'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import withColors from '~/components/Utils/withColors'
 
 const DescriptionSubSectionQuestionnaire = styled.div<{

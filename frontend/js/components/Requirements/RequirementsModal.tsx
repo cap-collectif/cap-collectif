@@ -5,7 +5,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import { Modal, Alert } from 'react-bootstrap'
 import RequirementsFormLegacy from './RequirementsFormLegacy'
 import type { RequirementsModal_step } from '~relay/RequirementsModal_step.graphql'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 type Props = {
   readonly show: boolean
   readonly step: RequirementsModal_step

@@ -5,7 +5,7 @@ import { FormattedMessage } from 'react-intl'
 import type { EventLabelStatus_event, EventReviewStatus } from '~relay/EventLabelStatus_event.graphql'
 import Popover from '~ds/Popover'
 import colors from '~/utils/colors'
-import EyeBar from '../Ui/Icons/EyeBar'
+import EyeBar from '@shared/ui/LegacyIcons/EyeBar'
 type Props = {
   readonly event: EventLabelStatus_event
 }

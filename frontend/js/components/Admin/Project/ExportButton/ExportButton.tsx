@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Collapsable from '~ui/Collapsable'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import DropdownSelect from '~ui/DropdownSelect'
 import { Container, TitleContainer, ButtonInformation } from './ExportButton.style'

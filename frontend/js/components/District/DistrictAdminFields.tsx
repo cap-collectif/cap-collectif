@@ -9,7 +9,7 @@ import PanelBorderStyle from './Fields/PanelBorderStyle'
 import PanelBackgroundStyle from './Fields/PanelBackgroundStyle'
 import type { DistrictAdminFields_district } from '~relay/DistrictAdminFields_district.graphql'
 import { isValid } from '~/services/GeoJsonValidator'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import type { State, Dispatch } from '~/types'
 

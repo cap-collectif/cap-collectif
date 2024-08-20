@@ -5,7 +5,7 @@ import { graphql, useFragment } from 'react-relay'
 import { DeleteCustomDomainModal_siteSettings$key } from '@relay/DeleteCustomDomainModal_siteSettings.graphql'
 
 import DeleteCustomDomainMutation from 'mutations/DeleteCustomDomainMutation'
-import { mutationErrorToast } from '../../utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 type Props = {
   siteSettings: DeleteCustomDomainModal_siteSettings$key

@@ -3,7 +3,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import { Box, Text, Tooltip } from '@cap-collectif/ui'
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated'
 import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql'
-import { translateContent } from '~/utils/ContentTranslator'
+import { translateContent } from '@shared/utils/contentTranslator'
 
 type Props = {
   vote: OpinionUserVote_vote

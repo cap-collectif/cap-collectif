@@ -15,9 +15,9 @@ import {
 import { SegmentedControl } from '@ui/SegmentedControl'
 import { SegmentedControlValue } from '@ui/SegmentedControl/item/SegmentedControlItem'
 import { formatBigNumber } from '@utils/format-number'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import CreateSmsOrderMutation from '@mutations/CreateSmsOrderMutation'
-import useFeatureFlag from '@hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const submitOrder = (creditCount: SegmentedControlValue, intl: IntlShape) => {
   const input = {

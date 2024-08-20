@@ -8,7 +8,7 @@ import withPageAuthRequired from '../utils/withPageAuthRequired'
 import OrganizationList from '../components/Organizations/OrganizationList'
 import { graphql, GraphQLTaggedNode, useLazyLoadQuery } from 'react-relay'
 import { organizationsQuery } from '@relay/organizationsQuery.graphql'
-import debounce from '@utils/debounce-promise'
+import debounce from '@shared/utils/debounce-promise'
 
 export interface OrganizationPageProps {}
 

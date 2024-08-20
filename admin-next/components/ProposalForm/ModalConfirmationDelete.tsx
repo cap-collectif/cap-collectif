@@ -3,7 +3,7 @@ import { useIntl, IntlShape } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import type { ModalConfirmationDelete_proposalForm$key } from '@relay/ModalConfirmationDelete_proposalForm.graphql'
 import DeleteProposalFormMutation from 'mutations/DeleteProposalFormMutation'
-import { mutationErrorToast } from 'utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import {
   Button,
   Modal,

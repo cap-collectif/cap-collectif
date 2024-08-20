@@ -4,8 +4,8 @@ import type { TagCity_address } from '~relay/TagCity_address.graphql'
 import { formatAddressFromGoogleAddress, getCityFromGoogleAddress } from '~/utils/googleMapAddress'
 import Tag from '~/components/Ui/Labels/Tag'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
-import IconRounded from '~ui/Icons/IconRounded'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
+import IconRounded from '@shared/ui/LegacyIcons/IconRounded'
 type Props = {
   readonly address: TagCity_address
   readonly size: string

@@ -5,7 +5,7 @@ import styled from 'styled-components'
 import { TYPE_FORM } from '~/constants/FormConstants'
 import isQuestionnaire from '~/utils/isQuestionnaire'
 import Description from '~ui/Form/Description/Description'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 const DescriptionSectionQuestionnaire = styled.div`
   font-size: 14px;

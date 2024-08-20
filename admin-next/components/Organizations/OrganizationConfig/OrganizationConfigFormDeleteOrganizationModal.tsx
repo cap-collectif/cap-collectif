@@ -4,7 +4,7 @@ import { graphql, useFragment } from 'react-relay'
 import { useState } from 'react'
 import { Button, CapUIModalSize, Checkbox, Heading, Modal, Text } from '@cap-collectif/ui'
 import DeleteOrganizationMutation from '@mutations/DeleteOrganizationMutation'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { OrganizationConfigFormDeleteOrganizationModal_organization$key } from '@relay/OrganizationConfigFormDeleteOrganizationModal_organization.graphql'
 
 export interface OrganizationConfigFormDeleteOrganizationModalProps {

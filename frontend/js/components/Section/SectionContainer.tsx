@@ -3,7 +3,7 @@ import { graphql, QueryRenderer } from 'react-relay'
 import environment, { graphqlError } from '../../createRelayEnvironment'
 import type { SectionContainerQueryResponse } from '~relay/SectionContainerQuery.graphql'
 import Loader from '../Ui/FeedbacksIndicators/Loader'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import SectionContainerMetrics from './SectionContainerMetrics'
 
 export type Props = {

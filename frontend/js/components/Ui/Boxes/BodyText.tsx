@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { connect } from 'react-redux'
 import ReadMoreLink from '../../Utils/ReadMoreLink'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { GlobalState } from '~/types'
 type ReduxProps = {
   readonly readMore?: boolean

@@ -14,7 +14,7 @@ import CommentForm from './CommentForm'
 import Media from '../Ui/Medias/Media/Media'
 import { CommentContainer } from './styles'
 import type { Comment_comment } from '~relay/Comment_comment.graphql'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import { CommentBottom } from './Comment.style'
 type Props = {

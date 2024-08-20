@@ -2,7 +2,7 @@ import * as React from 'react'
 import { connect } from 'react-redux'
 import Linkify from 'react-linkify'
 import { FormattedMessage } from 'react-intl'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { GlobalState } from '~/types'
 
 type Props = {

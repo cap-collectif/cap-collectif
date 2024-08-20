@@ -1,10 +1,10 @@
-// @ts-nocheck
+//@ts-nocheck
 
 import styled from 'styled-components'
 import { mediaQueryMobile } from '~/utils/sizes'
 import hexToRgb from '~/utils/colors/hexToRgb'
 import rgbToHsl from '~/utils/colors/rgbToHsl'
-import { formatRgb, formatHsl } from '~/utils/colors/formatColor'
+import { formatRgb, formatHsl } from '@shared/utils/colors'
 
 export type Colors = {
   text: string

@@ -14,7 +14,7 @@ import type {
 } from '~relay/MediaAdminContainerQuery.graphql'
 import MediaUploadModal from './MediaUploadModal'
 import ClearableInput from '~ui/Form/Input/ClearableInput'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { MediaListHead } from './MediaAdminPage.style'
 
 export const MEDIA_DEBOUNCE_MS = 500

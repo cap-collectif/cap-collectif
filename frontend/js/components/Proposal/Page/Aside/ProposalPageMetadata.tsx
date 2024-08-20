@@ -10,7 +10,7 @@ import colors from '~/utils/colors'
 import ProposalDetailLikers from '../../Detail/ProposalDetailLikers'
 import type { ProposalPageMetadata_proposal } from '~relay/ProposalPageMetadata_proposal.graphql'
 import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPage.style'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { MetadataPlaceHolder } from './ProposalPageMetadata.placeholder'
 
 const ProposalPageMetadataContainer = styled.div`

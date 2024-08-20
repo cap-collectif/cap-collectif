@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useIntl, IntlShape } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { mutationErrorToast } from 'utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import {
   Button,
   ButtonGroup,

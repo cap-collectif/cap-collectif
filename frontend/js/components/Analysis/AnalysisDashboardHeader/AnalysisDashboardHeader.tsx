@@ -45,7 +45,7 @@ import AssignAnalystsToProposalsMutation from '~/mutations/AssignAnalystsToPropo
 import RevokeAnalystsToProposalsMutation from '~/mutations/RevokeAnalystsToProposalsMutation'
 import AssignSupervisorToProposalsMutation from '~/mutations/AssignSupervisorToProposalsMutation'
 import environment from '~/createRelayEnvironment'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import AnalysisFilterDistrict from '~/components/Analysis/AnalysisFilter/AnalysisFilterDistrict'
 import AnalysisFilterCategory from '~/components/Analysis/AnalysisFilter/AnalysisFilterCategory'
 import AnalysisFilterRole from '~/components/Analysis/AnalysisFilter/AnalysisFilterRole'

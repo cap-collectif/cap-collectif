@@ -15,7 +15,7 @@ import type { ProjectContentAdminForm_project } from '~relay/ProjectContentAdmin
 import '~relay/ProjectContentAdminForm_project.graphql'
 import { loadDistrictOptions, loadThemeOptions } from '../Metadata/ProjectMetadataAdminForm'
 import { ProjectBoxHeader, ProjectSmallInput, ProjectBoxContainer } from '../Form/ProjectAdminForm.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { clearToasts } from '~ds/Toast'
 import type { GlobalState } from '~/types'
 import Text from '~ui/Primitives/Text'

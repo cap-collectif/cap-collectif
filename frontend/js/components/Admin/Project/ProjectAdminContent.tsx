@@ -25,7 +25,7 @@ import ProjectAdminParticipantTab, {
   initialVariables as queryVariableParticipant,
   queryParticipant,
 } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipantTab'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { ProjectAdminProposalsProvider } from '~/components/Admin/Project/ProjectAdminPage.context'
 import { ProjectAdminParticipantsProvider } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant.context'
 import ProjectAdminContributionsPage, {

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import AnalysisPlaceholderProposalContainer from '~/components/Analysis/AnalysisProposal/AnalysisProposal.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Skeleton from '~ds/Skeleton'
 import Flex from '~ui/Primitives/Layout/Flex'
 type Props = {

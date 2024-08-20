@@ -1,0 +1,59 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<EyeBar /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <svg
+    className="eye-bar"
+    height="16px"
+    role="img"
+    version="1.1"
+    viewBox="0 0 42 42"
+    width="16px"
+    xmlns="http://www.w3.org/2000/svg"
+  >
+    <g
+      fill="none"
+      fillRule="evenodd"
+      id="eye-bar"
+      stroke="none"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      strokeWidth="1"
+    >
+      <g
+        id="view-off"
+        stroke="black"
+        strokeWidth="2"
+        transform="translate(1.000000, 4.000000)"
+      >
+        <path
+          d="M32.53,10.48 C34.9886104,12.2609804 37.217723,14.3389478 39.1666667,16.6666667 C39.1666667,16.6666667 30.5866667,27.5 20,27.5 C18.3042858,27.4905896 16.6193235,27.229982 15,26.7266667"
+          id="Path"
+        />
+        <path
+          d="M7.44666667,22.8333333 C4.99737241,21.0571292 2.77620238,18.9859777 0.833333333,16.6666667 C0.833333333,16.6666667 9.41333333,5.83333333 20,5.83333333 C21.4060535,5.83926637 22.805831,6.02123746 24.1666667,6.375"
+          id="Path"
+        />
+        <path
+          d="M13.3333333,16.6666667 C13.3333333,12.9847683 16.3181017,10 20,10"
+          id="Path"
+        />
+        <path
+          d="M26.6666667,16.6666667 C26.6666667,20.348565 23.6818983,23.3333333 20,23.3333333"
+          id="Path"
+        />
+        <line
+          id="Path"
+          x1="36.25"
+          x2="3.75"
+          y1="0.416666667"
+          y2="32.9166667"
+        />
+      </g>
+    </g>
+  </svg>,
+]
+`;

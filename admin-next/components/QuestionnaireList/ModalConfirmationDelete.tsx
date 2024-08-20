@@ -15,7 +15,7 @@ import {
 } from '@cap-collectif/ui'
 import type { ModalConfirmationDelete_questionnaire$key } from '@relay/ModalConfirmationDelete_questionnaire.graphql'
 import DeleteQuestionnaireMutation from 'mutations/DeleteQuestionnaireMutation'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useAppContext } from '../AppProvider/App.context'
 import { QuestionnaireType } from '@relay/QuestionnaireListQuery.graphql'
 

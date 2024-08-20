@@ -8,7 +8,7 @@ import type { VoteItem_vote } from '~relay/VoteItem_vote.graphql'
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated'
 import UserLink from '../User/UserLink'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
-import { translateContent } from '~/utils/ContentTranslator'
+import { translateContent } from '@shared/utils/contentTranslator'
 
 type Props = {
   vote: VoteItem_vote

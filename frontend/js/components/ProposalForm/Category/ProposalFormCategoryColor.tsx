@@ -2,11 +2,11 @@ import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 
 import styled, { css } from 'styled-components'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import hexToRgb from '~/utils/colors/hexToRgb'
 import rgbToHsl from '~/utils/colors/rgbToHsl'
-import { formatRgb, formatHsl } from '~/utils/colors/formatColor'
+import { formatRgb, formatHsl } from '@shared/utils/colors'
 import Tooltip from '~ds/Tooltip/Tooltip'
 export type Props = {
   onColorClick: (arg0: string) => void

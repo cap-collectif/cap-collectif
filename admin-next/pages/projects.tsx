@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { NextPage } from 'next'
-import debounce from 'utils/debounce-promise'
+import debounce from '@shared/utils/debounce-promise'
 import { graphql, useQueryLoader, usePreloadedQuery } from 'react-relay'
 import type { PreloadedQuery } from 'react-relay'
 import type { projectsQuery as projectsQueryType, OrderDirection } from '@relay/projectsQuery.graphql'

@@ -3,7 +3,7 @@ import { FormattedMessage, useIntl } from 'react-intl'
 import RankingLabelContainer from './RankingLabel.style'
 import Image from '~/components/Ui/Medias/Image'
 import Label from '~/components/Ui/DragnDrop/Label/Label'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 type RankingLabelProps = {
   label: string

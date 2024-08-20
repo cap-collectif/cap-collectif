@@ -15,7 +15,7 @@ import {
 } from '@cap-collectif/ui'
 import type { ModalConfirmationDelete_consultation$key } from '@relay/ModalConfirmationDelete_consultation.graphql'
 import DeleteConsultationMutation from 'mutations/DeleteConsultationMutation'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 type Props = {
   consultation: ModalConfirmationDelete_consultation$key

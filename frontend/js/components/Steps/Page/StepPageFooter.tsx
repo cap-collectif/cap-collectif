@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { StepPageFooter_step } from '~relay/StepPageFooter_step.graphql'
 
 type Props = {

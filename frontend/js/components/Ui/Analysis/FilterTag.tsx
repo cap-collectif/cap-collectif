@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components'
 import * as React from 'react'
 import colors, { colorsData } from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 type FilterTagProps = {
   readonly children: JSX.Element | JSX.Element[] | string
   readonly icon?: JSX.Element | JSX.Element[] | string | null | undefined

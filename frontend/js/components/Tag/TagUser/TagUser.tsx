@@ -5,8 +5,8 @@ import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
 import UserLink from '~/components/User/UserLink'
 import type { TagUser_user } from '~relay/TagUser_user.graphql'
 import colors from '~/utils/colors'
-import IconRounded from '~ui/Icons/IconRounded'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import IconRounded from '@shared/ui/LegacyIcons/IconRounded'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 type TagUserProps = {
   user: TagUser_user

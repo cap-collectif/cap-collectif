@@ -3,7 +3,7 @@ import { $Diff } from 'utility-types'
 import type { ToastProps } from '~ds/Toast/Toast'
 import { Emitter } from '~/config'
 import { UIEvents } from '~/dispatchers/enums'
-import uuid from '~/utils/uuid'
+import uuid from '@shared/utils/uuid'
 
 export const toast = (
   value: $Diff<

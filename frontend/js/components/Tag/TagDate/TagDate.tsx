@@ -3,8 +3,8 @@ import { FormattedDate } from 'react-intl'
 import moment from 'moment'
 import Tag from '~/components/Ui/Labels/Tag'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
-import IconRounded from '~ui/Icons/IconRounded'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
+import IconRounded from '@shared/ui/LegacyIcons/IconRounded'
 
 type Props = {
   date: string

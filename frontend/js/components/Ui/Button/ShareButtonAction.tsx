@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { Flex, Menu } from '@cap-collectif/ui'
-import SocialIcon from '../Icons/SocialIcon'
+import SocialIcon from '@shared/ui/LegacyIcons/SocialIcon'
 
 type Props = {
   action: 'facebook' | 'twitter' | 'linkedin' | 'mail' | 'link'

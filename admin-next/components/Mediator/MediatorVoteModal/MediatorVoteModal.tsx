@@ -8,7 +8,7 @@ import { MediatorVoteModal_REQUIREMENTS_Query } from '@relay/MediatorVoteModal_R
 import FillRequirementsModal from './FillRequirementsModal'
 import FillOptionalsModal from './FillOptionalsModal'
 import AddMediatorVotesMutation from '@mutations/AddMediatorVotesMutation'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { OrderDirection } from '@relay/ParticipantListPaginationQuery.graphql'
 import { MediatorVoteModal_EDIT_Query } from '@relay/MediatorVoteModal_EDIT_Query.graphql'
 import moment, { Moment } from 'moment'

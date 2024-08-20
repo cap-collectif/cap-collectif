@@ -5,7 +5,7 @@ import moment from 'moment'
 import UserAvatarLegacy from '../User/UserAvatarLegacy'
 import UserLink from '../User/UserLink'
 import type { AnswerBody_answer } from '~relay/AnswerBody_answer.graphql'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   answer: AnswerBody_answer

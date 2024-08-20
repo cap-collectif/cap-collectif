@@ -5,7 +5,7 @@ import { Avatar } from '@cap-collectif/ui'
 import type { Props as AvatarProps } from '~ds/Avatar/Avatar'
 import type { NewUserAvatar_user$data } from '~relay/NewUserAvatar_user.graphql'
 import '~relay/NewUserAvatar_user.graphql'
-import { colorContrast } from '~/utils/colorContrast'
+import { colorContrast } from '@shared/utils/colorContrast'
 
 type Props = AvatarProps & {
   user: NewUserAvatar_user$data

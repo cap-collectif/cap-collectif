@@ -1,76 +1,87 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import cn from 'classnames'
-import {FormattedMessage, useIntl} from 'react-intl'
+import { FormattedMessage, useIntl } from 'react-intl'
 import { Container, Tiles } from './NoContributionsStep.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import type { NoContributionsStep_project } from '~relay/NoContributionsStep_project.graphql'
 import type { NoContributionsStep_viewer } from '~relay/NoContributionsStep_viewer.graphql'
 import { toast } from '~ds/Toast'
 import Button from '~ds/Button/Button'
-import downloadCSV from "../../../../../../../admin-next/utils/download-csv";
-import Flex from "~ui/Primitives/Layout/Flex";
+import downloadCSV from '../../../../../../../admin-next/utils/download-csv'
+import Flex from '~ui/Primitives/Layout/Flex'
 
 type Props = {
   project: NoContributionsStep_project
   viewer: NoContributionsStep_viewer
 }
 
-
-const ExportDataButton = ({url, children}: {url: string, children: React.ReactElement | string}) => {
-  const intl = useIntl();
+const ExportDataButton = ({ url, children }: { url: string; children: React.ReactElement | string }) => {
+  const intl = useIntl()
   const [isLoading, setIsLoading] = React.useState(false)
   const exportData = async (url: string) => {
-    await downloadCSV(url, intl,
+    await downloadCSV(
+      url,
+      intl,
       () => {
-        setIsLoading(true);
+        setIsLoading(true)
       },
       () => {
-        setIsLoading(false);
+        setIsLoading(false)
       },
-      (errorTranslationKey) => {
-        setIsLoading(false);
+      errorTranslationKey => {
+        setIsLoading(false)
         toast({
           variant: 'danger',
           content: intl.formatMessage({
             id: errorTranslationKey,
           }),
-        });
-      })
-  };
+        })
+      },
+    )
+  }
 
   return (
-    <Button isLoading={isLoading} variant="primary" variantColor="primary" variantSize="small" onClick={() => exportData(url)} >
+    <Button
+      isLoading={isLoading}
+      variant="primary"
+      variantColor="primary"
+      variantSize="small"
+      onClick={() => exportData(url)}
+    >
       {children}
     </Button>
   )
 }
 
-
 const NoContributionsStep = ({ project, viewer }: Props) => {
-  const intl = useIntl();
-  const consultationStep = project.steps.find(({ __typename }) => __typename === 'ConsultationStep');
-  const hasConsultationStep = !!consultationStep;
-  const viewerBelongsToAnOrganization = viewer.organizations.length > 0;
+  const intl = useIntl()
+  const consultationStep = project.steps.find(({ __typename }) => __typename === 'ConsultationStep')
+  const hasConsultationStep = !!consultationStep
+  const viewerBelongsToAnOrganization = viewer.organizations.length > 0
 
   return (
     <Container>
-      {
-        hasConsultationStep ? <FormattedMessage id="consultation.step" tagName="p" /> : <FormattedMessage id="help.title.no-deposition-step" tagName="p" />
-      }
-      {(hasConsultationStep && !viewerBelongsToAnOrganization) && <FormattedMessage id="help.text.no-deposition-step" tagName="p" />}
-      {(hasConsultationStep && viewerBelongsToAnOrganization) && <FormattedMessage id="help.text.no-deposition-step-organization" tagName="p" />}
+      {hasConsultationStep ? (
+        <FormattedMessage id="consultation.step" tagName="p" />
+      ) : (
+        <FormattedMessage id="help.title.no-deposition-step" tagName="p" />
+      )}
+      {hasConsultationStep && !viewerBelongsToAnOrganization && (
+        <FormattedMessage id="help.text.no-deposition-step" tagName="p" />
+      )}
+      {hasConsultationStep && viewerBelongsToAnOrganization && (
+        <FormattedMessage id="help.text.no-deposition-step-organization" tagName="p" />
+      )}
 
-      {
-        (hasConsultationStep && viewerBelongsToAnOrganization) && (
-          <Flex spacing={4}>
-            <ExportDataButton url={consultationStep.exportStepUrl}>
-              {intl.formatMessage({ id: 'download.contributions' })}
-            </ExportDataButton>
-          </Flex>
-        )
-      }
+      {hasConsultationStep && viewerBelongsToAnOrganization && (
+        <Flex spacing={4}>
+          <ExportDataButton url={consultationStep.exportStepUrl}>
+            {intl.formatMessage({ id: 'download.contributions' })}
+          </ExportDataButton>
+        </Flex>
+      )}
 
       {hasConsultationStep && (
         <Tiles>
@@ -155,7 +166,7 @@ export default createFragmentContainer(NoContributionsStep, {
   viewer: graphql`
     fragment NoContributionsStep_viewer on User {
       organizations {
-          id
+        id
       }
     }
   `,
@@ -164,9 +175,9 @@ export default createFragmentContainer(NoContributionsStep, {
       _id
       steps {
         __typename
-        ...on ConsultationStep {
-            exportStepUrl
-            exportContributorsUrl
+        ... on ConsultationStep {
+          exportStepUrl
+          exportContributorsUrl
         }
       }
       amendement: contributions(type: OPINIONVERSION) {

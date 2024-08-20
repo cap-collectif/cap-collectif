@@ -23,7 +23,7 @@ import ProposalMapLoaderPane from '~/components/Proposal/Map/ProposalMapLoaderPa
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import ProposalMapSelectedView from './ProposalMapSelectedView'
-import { useEventListener } from '~/utils/hooks/useEventListener'
+import { useEventListener } from '@shared/hooks/useEventListener'
 import {
   VoteStepEvent,
   DELAY_BEFORE_PROPOSAL_REMOVAL,
@@ -33,7 +33,7 @@ import {
   dispatchEvent,
 } from '../utils'
 import EmptyList from '../List/EmptyList'
-import debounce from '~/utils/debounce-promise'
+import debounce from '@shared/utils/debounce-promise'
 import { Button, CapUIIcon, CapUIIconSize, Icon, useTheme } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import LoginOverlay from '~/components/Utils/LoginOverlay'
@@ -42,7 +42,7 @@ import { formName } from '~/components/Proposal/Form/ProposalForm'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { getAddressFromLatLng } from '~/utils/googleMapAddress'
 import { convertToGeoJsonStyle, formatGeoJsons } from '~/utils/geojson'
-import convertIconToDs from '~/utils/convertIconToDs'
+import convertIconToDs from '@shared/utils/convertIconToDs'
 
 type Props = {
   voteStep: VoteStepMap_step$key

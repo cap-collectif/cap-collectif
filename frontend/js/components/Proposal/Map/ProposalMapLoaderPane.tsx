@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 import { useLeafletContext } from '@react-leaflet/core'
 import ReactDOM from 'react-dom'
 import L from 'leaflet'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader'
 import { LoaderPane } from './ProposalLeafletMap.style'
 

@@ -1,0 +1,225 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginModal /> render correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    aria-label="login.with"
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        autoFocus={true}
+        className="sc-bcXGCL doARmI sc-gsGkXq gTDlYD cap-modal"
+        style={
+          {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+            "zIndex": 9000,
+          }
+        }
+      >
+        <header
+          className="sc-bcXGCL gUHbRp cap-modal__header"
+          id="contained-modal-title-lg"
+        >
+          <div
+            className="sc-bcXGCL eotpTW"
+          >
+            <h4
+              className="sc-bcXGCL jraRHV cap-heading"
+              id="modal-title"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              login.with
+            </h4>
+          </div>
+          <button
+            aria-describedby="modal-title"
+            className="sc-bcXGCL gBxHlP"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bcXGCL laGNWx cap-modal__body"
+        >
+          <div>
+            <div
+              className="sc-bcXGCL PXCEG"
+            >
+              <div
+                className=" ql-editor wysiwyg-render"
+                dangerouslySetInnerHTML={
+                  {
+                    "__html": "<mock-value-for-field-"value">",
+                  }
+                }
+              />
+            </div>
+            <div
+              className="sc-bcXGCL kxTfnk cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bcXGCL kossJj cap-form-label"
+                htmlFor="username"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bcXGCL gUkIhr cap-text"
+                  style={
+                    {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  global.email
+                </p>
+              </label>
+              <input
+                aria-required={true}
+                autoComplete="email"
+                autoFocus={true}
+                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                disabled={false}
+                name="username"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                placeholder="email.placeholder"
+                required={true}
+                type="email"
+              />
+            </div>
+            <div
+              className="sc-bcXGCL kxTfnk cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bcXGCL kossJj cap-form-label"
+                htmlFor="password"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bcXGCL gUkIhr cap-text"
+                  style={
+                    {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  global.password
+                </p>
+              </label>
+              <input
+                aria-required={true}
+                autoComplete="off"
+                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                disabled={false}
+                name="password"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={true}
+                type="password"
+              />
+            </div>
+            <a
+              className="sc-bcXGCL ckHvhy cap-link"
+              href="/resetting/request"
+            >
+              global.forgot_password
+            </a>
+            <div
+              className="sc-bcXGCL ijIkBL"
+            >
+              <div
+                className=" ql-editor wysiwyg-render"
+                dangerouslySetInnerHTML={
+                  {
+                    "__html": "<mock-value-for-field-"value">",
+                  }
+                }
+              />
+            </div>
+          </div>
+        </main>
+        <footer
+          className="sc-bcXGCL bzOqHT cap-modal__footer"
+        >
+          <button
+            className="sc-bcXGCL sc-laZSpB laxoCi zPAHL cap-button"
+            style={
+              {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+            type="button"
+          >
+            global.cancel
+          </button>
+          <button
+            className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            id="confirm-login"
+            type="submit"
+          >
+            global.login_me
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

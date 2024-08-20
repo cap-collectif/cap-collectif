@@ -8,7 +8,7 @@ import SubmitButton from '../Form/SubmitButton'
 import CreateGroupMutation from '../../mutations/CreateGroupMutation'
 import type { CreateGroupMutationResponse } from '~relay/CreateGroupMutation.graphql'
 import GroupForm from './GroupForm'
-import { fromGlobalId } from '~/utils/fromGlobalId'
+import { fromGlobalId } from '@shared/utils/fromGlobalId'
 
 export type Props = {
   submit: (...args: Array<any>) => any

@@ -5,7 +5,7 @@ import type { FontAdminPageQueryResponse } from '~relay/FontAdminPageQuery.graph
 import '~relay/FontAdminPageQuery.graphql'
 import environment, { graphqlError } from '~/createRelayEnvironment'
 import Loader from '~/components/Ui/FeedbacksIndicators/Loader'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import FontAdminContent from './FontAdminContent/FontAdminContent'
 import FontAdminPageContainer from './FontAdminPage.style'
 import colors from '~/utils/colors'

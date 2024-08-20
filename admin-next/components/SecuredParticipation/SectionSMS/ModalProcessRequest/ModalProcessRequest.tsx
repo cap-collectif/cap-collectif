@@ -6,7 +6,7 @@ import type { ModalProcessRequest_smsOrder$key } from '@relay/ModalProcessReques
 import { formatBigNumber } from '@utils/format-number'
 import { PACKAGE_LIST } from '../ModalCreditRefill/ModalCreditRefill'
 import type { SegmentedControlValue } from '@ui/SegmentedControl/item/SegmentedControlItem'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import AddSmsCreditMutation from '@mutations/AddSmsCreditMutation'
 import DeleteSmsOrderMutation from '@mutations/DeleteSmsOrderMutation'
 

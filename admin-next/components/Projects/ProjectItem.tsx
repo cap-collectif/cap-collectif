@@ -18,7 +18,7 @@ import type { ProjectItem_project$data, ProjectItem_project$key } from '@relay/P
 import ProjectModalConfirmationDelete from 'components/Projects/ProjectModalConfirmationDelete'
 import ProjectModalExportSteps from 'components/Projects/ProjectModalExportSteps'
 import DuplicateProjectMutation from 'mutations/DuplicateProjectMutation'
-import { mutationErrorToast } from 'utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { ProjectItem_viewer$key } from '@relay/ProjectItem_viewer.graphql'
 
 interface ProjectItemProps {

@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import DropdownSelect from '~ui/DropdownSelect'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 describe('<DropdownSelect />', () => {
   it('should render correctly', () => {

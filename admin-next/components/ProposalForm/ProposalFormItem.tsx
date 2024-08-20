@@ -7,7 +7,7 @@ import type {
   ProposalFormItem_proposalForm$key,
 } from '@relay/ProposalFormItem_proposalForm.graphql'
 import DuplicateProposalFormMutation from 'mutations/DuplicateProposalFormMutation'
-import { mutationErrorToast } from 'utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { Table, Link, ButtonQuickAction, ButtonGroup, toast, CapUIIcon } from '@cap-collectif/ui'
 import { ProposalFormItem_viewer$key } from '@relay/ProposalFormItem_viewer.graphql'
 

@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import Card from '~ui/Card/Card'
 import InlineList from '~ui/List/InlineList'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { ProjectAnalysisPreview_project } from '~relay/ProjectAnalysisPreview_project.graphql'
 import ProjectAnalysisPreviewContainer, {
   DefaultCoverPreview,

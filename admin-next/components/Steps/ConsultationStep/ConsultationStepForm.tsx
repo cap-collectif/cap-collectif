@@ -28,7 +28,7 @@ import ConsultationStepConsultations from '@components/Steps/ConsultationStep/Co
 import UpdateConsultationStep from '@mutations/UpdateConsultationStep'
 import CreateOrUpdateConsultationMutation from '@mutations/CreateOrUpdateConsultationMutation'
 import { UpdateConsultationStepInput } from '@relay/UpdateConsultationStepMutation.graphql'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { OpinionTypeInput } from '@relay/CreateOrUpdateConsultationMutation.graphql'
 import ConsultationStepRequirementsTabs from '@components/Requirements/ConsultationStepRequirementsTabs'
 import { onBack } from '@components/Steps/utils'

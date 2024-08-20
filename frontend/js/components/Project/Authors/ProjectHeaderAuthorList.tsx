@@ -7,7 +7,7 @@ import type { ProjectHeaderAuthorList_project$key } from '~relay/ProjectHeaderAu
 import ProjectHeaderLayout from '~ui/Project/ProjectHeader'
 import ProjectHeaderAuthorsModal from '~/components/Project/Authors/ProjectHeaderAuthorsModal'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import { colorContrast } from '~/utils/colorContrast'
+import { colorContrast } from '@shared/utils/colorContrast'
 const FRAGMENT = graphql`
   fragment ProjectHeaderAuthorList_project on Project {
     ...ProjectHeaderAuthorsModal_project

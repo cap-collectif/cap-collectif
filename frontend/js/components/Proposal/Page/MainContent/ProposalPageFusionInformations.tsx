@@ -3,11 +3,11 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 
 import styled from 'styled-components'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 import { styleGuideColors } from '~/utils/colors'
 import type { ProposalPageFusionInformations_proposal } from '~relay/ProposalPageFusionInformations_proposal.graphql'
-import { translateContent } from '~/utils/ContentTranslator'
+import { translateContent } from '@shared/utils/contentTranslator'
 import { bootstrapGrid } from '~/utils/sizes'
 
 type Props = {

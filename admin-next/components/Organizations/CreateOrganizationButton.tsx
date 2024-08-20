@@ -2,7 +2,7 @@ import * as React from 'react'
 import { CapUIFontWeight, CapUIIcon, Icon, Text } from '@cap-collectif/ui'
 import styled from 'styled-components'
 import { useIntl } from 'react-intl'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import AddOrganizationMutation from '@mutations/AddOrganizationMutation'
 
 export interface CreateOrganizationButtonProps {}

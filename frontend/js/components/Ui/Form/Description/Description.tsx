@@ -3,7 +3,7 @@ import * as React from 'react'
 import DescriptionContainer from './Description.style'
 import { TYPE_FORM } from '~/constants/FormConstants'
 import isQuestionnaire from '~/utils/isQuestionnaire'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   children: JSX.Element | JSX.Element[] | string

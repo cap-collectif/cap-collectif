@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import type { QuestionnaireFooter_step$key } from '~relay/QuestionnaireFooter_step.graphql'
 import { QuestionnaireFooterContainer } from './QuestionnaireFooter.style'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 const FRAGMENT = graphql`
   fragment QuestionnaireFooter_step on QuestionnaireStep {

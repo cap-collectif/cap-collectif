@@ -6,7 +6,7 @@ import ProjectPreviewCounter from './ProjectPreviewCounter'
 import TagsList from '../../Ui/List/TagsList'
 import type { ProjectPreviewExternalCounters_project } from '~relay/ProjectPreviewExternalCounters_project.graphql'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { getExternalExposedLink } from '~/utils/externalExposedLink'
 type Props = {
   readonly project: ProjectPreviewExternalCounters_project

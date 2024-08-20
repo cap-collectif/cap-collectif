@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow, mount } from 'enzyme'
 import ClearableInput from '~ui/Form/Input/ClearableInput'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 describe('<ClearableInput />', () => {
   it('should render correctly', () => {

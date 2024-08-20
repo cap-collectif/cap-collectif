@@ -9,7 +9,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import UpdateOtherStepMutation from '@mutations/UpdateOtherStepMutation'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { onBack } from '@components/Steps/utils'
 import { useOtherStep } from './OtherStepContext'
 import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
@@ -29,7 +29,7 @@ type FormValues = {
   isEnabled: {
     labels: Array<string>
   }
-  timeless: boolean,
+  timeless: boolean
   stepDurationType?: {
     labels: Array<string>
   }
@@ -139,7 +139,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const { isSubmitting } = formState
   const onSubmit = async (values: FormValues) => {
     const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
-    delete values.stepDurationType;
+    delete values.stepDurationType
 
     const input = {
       ...values,
@@ -147,7 +147,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       startAt: values?.startAt,
       endAt: values?.endAt,
       isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
-      timeless
+      timeless,
     }
 
     try {

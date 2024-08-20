@@ -9,7 +9,7 @@ import CommentListView from './CommentListView'
 import CommentForm from './CommentForm'
 import type { CommentSectionFragmented_commentable } from '~relay/CommentSectionFragmented_commentable.graphql'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import CommentListNotApprovedByModerator from '~/components/Comment/CommentListNotApprovedByModerator'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {

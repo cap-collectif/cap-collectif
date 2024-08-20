@@ -3,7 +3,7 @@ import { Button, ButtonQuickAction, CapUIIcon, CapUIModalSize, Heading, Modal, T
 import { useIntl } from 'react-intl'
 import DeleteParticipantMutation from '@mutations/DeleteParticipantMutation'
 import { graphql, useFragment } from 'react-relay'
-import { mutationErrorToast } from '../../utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 export const mediatorFragment = graphql`
   fragment DeleteParticipantModal_mediator on Mediator {

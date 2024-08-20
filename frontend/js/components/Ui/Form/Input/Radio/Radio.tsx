@@ -3,7 +3,7 @@ import Label from '~/components/Ui/Form/Label/Label'
 import type { PropsCommonCheckboxRadio } from '../commonCheckboxRadio'
 import '../commonCheckboxRadio'
 import RadioContainer, { LabelRadioButtonContainer } from './Radio.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import isQuestionnaire from '~/utils/isQuestionnaire'
 import Image from '~ui/Primitives/Image'
 

@@ -1,5 +1,5 @@
 import { ProjectTabs_project$data } from '@relay/ProjectTabs_project.graphql'
-import { fromGlobalId } from '@utils/fromGlobalId'
+import { fromGlobalId } from '@shared/utils/fromGlobalId'
 
 const getProjectAdminBaseUrl = (projectId: string, isAdminNext: boolean = false) =>
   isAdminNext ? `/admin-next/project/${projectId}` : `/admin/alpha/project/${projectId}`

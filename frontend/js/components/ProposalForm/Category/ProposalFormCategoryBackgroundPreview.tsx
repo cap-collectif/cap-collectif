@@ -4,7 +4,7 @@ import { useResize } from '@liinkiing/react-hooks'
 
 import styled from 'styled-components'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
 import type { CategoryImage } from '../ProposalFormAdminCategoriesStepModal'

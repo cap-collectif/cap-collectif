@@ -1,5 +1,5 @@
 import { FC, useState } from 'react'
-import { useFeatureFlags } from '@hooks/useFeatureFlag'
+import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import { Button, CapUIIcon, Menu } from '@cap-collectif/ui'
 import ModalOpenIDConfiguration from './SSOList/OpenID/ModalOpenIDConfiguration'
 import ModalCasConfiguration from './SSOList/CAS/ModalCasConfiguration'

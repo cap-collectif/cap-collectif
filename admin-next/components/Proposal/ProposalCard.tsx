@@ -16,8 +16,8 @@ import {
 import type { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 import CategoryBackground from './CategoryBackground'
 import { useIntl } from 'react-intl'
-import convertIconToDs from '@utils/convertIconToDs'
-import stripHTML from '@utils/stripHTML'
+import convertIconToDs from '@shared/utils/convertIconToDs'
+import stripHTML from '@shared/utils/stripHTML'
 
 const FRAGMENT = graphql`
   fragment ProposalCard_proposal on Proposal {

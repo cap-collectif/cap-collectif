@@ -5,7 +5,7 @@ import { useInput, useKeyboardShortcuts } from '@liinkiing/react-hooks'
 import styled, { css } from 'styled-components'
 import type { Props as InputProps } from '~ui/Form/Input/Input'
 import { BASE_INPUT } from '~/utils/styles/variables'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 
 type Props = $Diff<

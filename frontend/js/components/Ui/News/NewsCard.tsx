@@ -7,7 +7,7 @@ import colors from '~/utils/colors'
 import { Card } from '~/components/Proposal/Page/ProposalPage.style'
 import type { NewsCard_post } from '~relay/NewsCard_post.graphql'
 import DatesInterval from '~/components/Utils/DatesInterval'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import Image from '~ui/Primitives/Image'
 
 type Props = {

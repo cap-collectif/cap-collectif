@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 const CloseIconContainer = styled.button`
   right: 30px;

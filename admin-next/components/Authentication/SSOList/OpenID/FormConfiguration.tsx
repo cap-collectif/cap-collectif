@@ -4,7 +4,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
 import { FormControl, FieldInput, REGEX_URL } from '@cap-collectif/form'
-import { useFeatureFlag } from '@hooks/useFeatureFlag'
+import { useFeatureFlag } from '@shared/hooks/useFeatureFlag'
 
 export type FormValues = {
   name: string

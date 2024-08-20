@@ -8,7 +8,7 @@ import { closeOpinionVersionCreateModal } from '../../redux/modules/opinion'
 import OpinionVersionCreateForm, { formName } from './OpinionVersionCreateForm'
 import type { State } from '../../types'
 import type { OpinionVersionCreateModal_opinion } from '~relay/OpinionVersionCreateModal_opinion.graphql'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import RequirementsFormLegacy from '~/components/Requirements/RequirementsFormLegacy'
 
 type Props = {

@@ -20,7 +20,7 @@ import { useIntl } from 'react-intl'
 import InviteOrganizationMemberMutation from '@mutations/InviteOrganizationMember'
 import { formatConnectionPath } from '@utils/relay'
 import OrganizationConfigFormDeleteMemberModal from './OrganizationConfigFormDeleteMemberModal'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { graphql, useFragment } from 'react-relay'
 import {
   OrganizationConfigFormMembers_organization$key,

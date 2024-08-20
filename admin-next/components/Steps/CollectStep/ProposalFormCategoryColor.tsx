@@ -1,6 +1,6 @@
 import * as React from 'react'
 import styled, { css } from 'styled-components'
-import { formatHsl, formatRgb, hexToRgb, rgbToHsl } from '@utils/colors'
+import { formatHsl, formatRgb, hexToRgb, rgbToHsl } from '@shared/utils/colors'
 import { CapUIIcon, CapUIIconSize, Icon, Tooltip } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 

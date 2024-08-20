@@ -1,8 +1,8 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import IconRounded from '~ui/Icons/IconRounded'
+import IconRounded from '@shared/ui/LegacyIcons/IconRounded'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Tag from '~ui/Labels/Tag'
 import type { TagStep_step } from '~relay/TagStep_step.graphql'
 type Props = {

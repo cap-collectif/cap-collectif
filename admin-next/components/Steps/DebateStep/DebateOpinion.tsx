@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
-import WYSIWYGRender from '@components/WYSIWYGRender/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import UserAvatar from '@components/UserAvatar/UserAvatar'
 import { Flex, Card, Tag, Text, ButtonQuickAction, CapUIIcon } from '@cap-collectif/ui'
 import { DebateOpinion_debateOpinion$key } from '@relay/DebateOpinion_debateOpinion.graphql'

@@ -6,7 +6,7 @@ import '~relay/FontAdminContent_fonts.graphql'
 import FontAdminContentContainer from './FontAdminContent.style'
 import FontForm from '../FontForm/FontForm'
 import FontUseForm from '../FontUseForm/FontUseForm'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 type Props = {
   fonts: FontAdminContent_fonts
 }

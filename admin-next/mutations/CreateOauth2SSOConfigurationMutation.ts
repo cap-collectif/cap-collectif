@@ -7,7 +7,7 @@ import type {
   CreateOauth2SSOConfigurationMutation$data,
   CreateOauth2SSOConfigurationMutation$variables,
 } from '@relay/CreateOauth2SSOConfigurationMutation.graphql'
-import uuid from '@utils/uuid'
+import uuid from '@shared/utils/uuid'
 
 const mutation = graphql`
   mutation CreateOauth2SSOConfigurationMutation($input: CreateOauth2SSOConfigurationInput!, $connections: [ID!]!)

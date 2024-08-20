@@ -3,7 +3,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import OpinionList from './OpinionList'
 import type { Section_section } from '~relay/Section_section.graphql'
 import type { Section_consultation } from '~relay/Section_consultation.graphql'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 type Props = {
   readonly section: Section_section
   readonly consultation: Section_consultation

@@ -9,7 +9,7 @@ import FontFormContainer from './FontForm.style'
 import Fetcher, { json } from '~/services/Fetcher'
 import environment from '~/createRelayEnvironment'
 import AlertForm from '~/components/Alert/AlertForm'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { FormError } from '~/components/Admin/Font/FontAdminContent/FontAdminContent'
 
 const MESSAGE_INVALID_FONT_FORMAT = 'Invalid font format.'

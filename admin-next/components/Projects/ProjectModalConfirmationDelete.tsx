@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl, IntlShape, FormattedHTMLMessage } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { toast, Button, Modal, Heading, Text, ButtonGroup, Menu, CapUIModalSize, Checkbox } from '@cap-collectif/ui'
-import { mutationErrorToast } from 'utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import type { ProjectModalConfirmationDelete_project$key } from '@relay/ProjectModalConfirmationDelete_project.graphql'
 import DeleteProjectMutation from 'mutations/DeleteProjectMutation'
 

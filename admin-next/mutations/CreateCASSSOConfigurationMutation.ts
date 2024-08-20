@@ -7,7 +7,7 @@ import type {
   CreateCASSSOConfigurationMutation$data,
   CreateCASSSOConfigurationMutation$variables,
 } from '@relay/CreateCASSSOConfigurationMutation.graphql'
-import uuid from '@utils/uuid'
+import uuid from '@shared/utils/uuid'
 
 const mutation = graphql`
   mutation CreateCASSSOConfigurationMutation($input: CreateCASSSOConfigurationInput!, $connections: [ID!]!)

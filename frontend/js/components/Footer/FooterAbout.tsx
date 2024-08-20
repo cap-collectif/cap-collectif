@@ -1,6 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { SocialNetwork } from './Footer'
 import { Box } from '@cap-collectif/ui'
 

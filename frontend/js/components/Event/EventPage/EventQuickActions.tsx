@@ -6,7 +6,7 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { GlobalState } from '~/types'
 import EventDeleteModal from './EventDeleteModal'
 import type { EventReviewStatus } from '~relay/EventPageHeader_query.graphql'
-import { fromGlobalId } from '~/utils/fromGlobalId'
+import { fromGlobalId } from '@shared/utils/fromGlobalId'
 type Props = {
   readonly id: string
   readonly status: EventReviewStatus | null | undefined

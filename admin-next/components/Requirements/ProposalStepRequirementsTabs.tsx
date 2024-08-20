@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { ProposalStepRequirementsTabs_proposalStep$key } from '@relay/ProposalStepRequirementsTabs_proposalStep.graphql'
 import ProposalStepWithoutAccountRequirements from '@components/Requirements/ProposalStepWithoutAccountRequirements'
-import useFeatureFlag from '@hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import Requirements from './Requirements'
 
 type Props = {

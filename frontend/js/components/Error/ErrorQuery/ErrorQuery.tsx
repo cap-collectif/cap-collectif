@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import ErrorIncident from '~ui/ErrorIncident/ErrorIncident'
 import { ButtonRetry } from './ErrorQuery.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 type Props = {
   retry: (() => void) | null | undefined

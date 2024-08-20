@@ -6,7 +6,7 @@ import { connect } from 'react-redux'
 
 import styled from 'styled-components'
 import component from '~/components/Form/Field'
-import stripHtml from '~/utils/stripHtml'
+import stripHtml from '@shared/utils/stripHTML'
 import type { ProposalNewsForm_post } from '~relay/ProposalNewsForm_post.graphql'
 import type { GlobalState } from '~/types'
 import { getTranslation } from '~/services/Translation'

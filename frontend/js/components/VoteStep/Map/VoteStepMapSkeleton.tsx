@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Box, Flex, Skeleton } from '@cap-collectif/ui'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 const ICON_COLOR = '#5E5E5E'
 type Props = {
   readonly top: string

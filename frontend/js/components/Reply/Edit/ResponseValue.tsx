@@ -4,7 +4,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import type { ResponseValue_response } from '~relay/ResponseValue_response.graphql'
 import '~relay/ResponseValue_response.graphql'
 import getValueFromResponse from '~/utils/form/getValueFromResponse'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 type Props = {
   response: ResponseValue_response
 }

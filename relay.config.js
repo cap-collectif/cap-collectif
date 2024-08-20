@@ -1,12 +1,21 @@
 module.exports = {
   // To Enable persisted queries:
   // persistOutput: "./queryMap.json",
-  src: './frontend',
+  src: './',
   noFutureProofEnums: true,
   language: 'typescript',
   schema: './schema.internal.graphql',
   artifactDirectory: './frontend/js/__generated__/~relay',
-  exclude: ['**/node_modules/**', '**/__mocks__/**', '**/__generated__/**'],
+  exclude: [
+    '**/node_modules/**',
+    '**/__mocks__/**',
+    '**/__generated__/**',
+    '**/admin-next/components/**',
+    '**/admin-next/mutations/**',
+    '**/admin-next/hooks/**',
+    '**/admin-next/pages/**',
+    '**/admin-next/utils/**',
+  ],
   customScalars: {
     DateTime: 'string',
     Email: 'string',

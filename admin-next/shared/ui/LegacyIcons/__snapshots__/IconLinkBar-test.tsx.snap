@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<IconLinkBar /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-1bcb0ecb-0 fxSua"
+    color="black"
+  >
+    IconToRender
+    <a
+      href="/url"
+    >
+      capco.message
+    </a>
+  </div>,
+]
+`;

@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import type { Match } from 'react-router-dom'
 import { Link } from 'react-router-dom'
 import AnalysisHeaderContainer from './AnalysisHeader.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 type Props = {
   countProject: number

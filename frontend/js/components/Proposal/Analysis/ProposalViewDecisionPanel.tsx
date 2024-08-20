@@ -7,7 +7,7 @@ import type { ProposalViewDecisionPanel_proposal } from '~relay/ProposalViewDeci
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel'
 import { getLabelData } from './ProposalAnalysisUserRow'
 import { ResponsesView } from './ProposalViewAnalysisPanel'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 const DecidorView = styled.div`
   p {

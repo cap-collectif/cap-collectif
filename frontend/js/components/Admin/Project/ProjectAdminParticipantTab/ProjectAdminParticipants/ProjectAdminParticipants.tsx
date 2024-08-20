@@ -19,7 +19,7 @@ import {
   AnalysisProposalListHeaderContainer,
 } from '~ui/Analysis/common.style'
 import AnalysisProposalListLoader from '~/components/Analysis/AnalysisProposalListLoader/AnalysisProposalListLoader'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import FilterTag from '~ui/Analysis/FilterTag'
 import AnalysisFilterSort from '~/components/Analysis/AnalysisFilter/AnalysisFilterSort'
 import ProjectAdminParticipant from '../ProjectAdminParticipant/ProjectAdminParticipant'

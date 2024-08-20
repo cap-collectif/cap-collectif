@@ -5,7 +5,7 @@ import { useIntl } from 'react-intl'
 import OpinionBodyDiffContent from './OpinionBodyDiffContent'
 import FormattedText from '../../services/FormattedText'
 import type { OpinionBody_opinion } from '~relay/OpinionBody_opinion.graphql'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   opinion: OpinionBody_opinion

@@ -13,7 +13,7 @@ import ProgressList from '../../Ui/List/ProgressList'
 import ProgressListItem from '../../Ui/List/ProgressListItem'
 import UserAvatarDeprecated from '../../User/UserAvatarDeprecated'
 import InlineList from '../../Ui/List/InlineList'
-import { translateContent } from '~/utils/ContentTranslator'
+import { translateContent } from '@shared/utils/contentTranslator'
 
 type Props = {
   proposals: ProposalListTable_proposals$data

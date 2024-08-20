@@ -2,7 +2,7 @@ import { FC, useState } from 'react'
 import { Button, CapUIModalSize, Checkbox, Heading, Modal, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import DeleteMediatorMutation from 'mutations/DeleteMediatorMutation'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 export type MediatorInfos = {
   id: string

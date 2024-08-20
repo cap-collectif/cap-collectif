@@ -40,6 +40,9 @@
       ],
       "@components/*": [
         "./components/*"
+      ],
+      "@shared/*": [
+        "./shared/*"
       ]
     },
     "incremental": true

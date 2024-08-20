@@ -3,7 +3,7 @@ import { Button, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collec
 import { IntlShape, useIntl } from 'react-intl'
 
 import DeleteGlobalDistrictMutation from '@mutations/DeleteGlobalDistrictMutation'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 const deleteGeographicalArea = (id: string, intl: IntlShape, fromDistrict: boolean): void => {
   DeleteGlobalDistrictMutation.commit({

@@ -10,7 +10,7 @@ import AddCommentVoteMutation from '../../mutations/AddCommentVoteMutation'
 import LoginOverlay from '../Utils/LoginOverlay'
 import UnpublishedTooltip from '../Publishable/UnpublishedTooltip'
 import type { CommentVoteButton_comment$data } from '~relay/CommentVoteButton_comment.graphql'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 type Props = {
   readonly comment: CommentVoteButton_comment$data

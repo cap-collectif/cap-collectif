@@ -9,7 +9,7 @@ import type { ProposalPageVoteThreshold_step } from '~relay/ProposalPageVoteThre
 import type { ProposalPageVoteThreshold_proposal } from '~relay/ProposalPageVoteThreshold_proposal.graphql'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPage.style'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Text from '~ui/Primitives/Text'

@@ -3,7 +3,7 @@ import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useRouter } from 'next/router'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import Layout from '@components/Layout/Layout'
-import useFeatureFlag from '@hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import CreateStepPage from '@components/CreateStep/CreateStepPage'
 
 const CreateStepWrapper = () => {

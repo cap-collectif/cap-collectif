@@ -1,7 +1,7 @@
 import React from 'react'
 import type { LoginSocialButtonType } from '@shared/login/LoginSocialButton'
 import { getButtonContentForType, getButtonLinkForType } from '@shared/login/LoginSocialButton'
-import SocialIcon from '~ui/Icons/SocialIcon'
+import SocialIcon from '@shared/ui/LegacyIcons/Icon'
 import { baseUrl } from '~/config'
 import Link from '~ds/Link/Link'
 import {

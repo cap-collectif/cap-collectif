@@ -9,6 +9,7 @@ const config = {
   ressourcesDir: path.join(ABSOLUTE_BASE, 'app/Ressources'),
   srcDir: path.join(ABSOLUTE_BASE, 'src'),
   frontendDir: path.join(ABSOLUTE_BASE, 'frontend'),
+  nextDir: path.join(ABSOLUTE_BASE, 'admin-next'),
   appDir: path.join(ABSOLUTE_BASE, 'app'),
   assetsDir: path.join(ABSOLUTE_BASE, 'assets'),
   webpackDir: path.join(ABSOLUTE_BASE, 'webpack'),

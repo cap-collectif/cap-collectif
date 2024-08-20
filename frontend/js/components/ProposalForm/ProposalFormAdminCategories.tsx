@@ -11,7 +11,7 @@ import { ListGroup, ListGroupItem, ButtonToolbar, Button, Row, Col } from 'react
 import ProposalFormAdminCategoriesStepModal from './ProposalFormAdminCategoriesStepModal'
 import type { GlobalState, Dispatch, FeatureToggles } from '../../types'
 import type { ProposalFormAdminCategories_query$data } from '~relay/ProposalFormAdminCategories_query.graphql'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
 

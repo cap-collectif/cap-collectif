@@ -2,7 +2,7 @@
 import * as React from 'react'
 import type { Colors } from './HomeHeader.style'
 import { Container, Tag, Content, Illustration } from './HomeHeader.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import config from '~/config'
 import Image from '~ui/Primitives/Image'
 

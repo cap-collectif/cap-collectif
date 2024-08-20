@@ -21,7 +21,7 @@ import {
 } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useFeatureFlags } from '@hooks/useFeatureFlag'
+import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import ProposalFormCategoryColor from '@components/Steps/CollectStep/ProposalFormCategoryColor'
 import ProposalFormCategoryIcon from '@components/Steps/CollectStep/ProposalFormCategoryIcon'
 import ProposalFormCategoryBackgroundPreview from '@components/Steps/CollectStep/ProposalFormCategoryBackgroundPreview'

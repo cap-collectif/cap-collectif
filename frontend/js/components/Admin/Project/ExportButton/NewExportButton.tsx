@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 
 import styled from 'styled-components'
-import Icon, { ICON_NAME as OLD_ICON } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME as OLD_ICON } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import { ButtonInformation } from './ExportButton.style'
 import Flex from '~ui/Primitives/Layout/Flex'

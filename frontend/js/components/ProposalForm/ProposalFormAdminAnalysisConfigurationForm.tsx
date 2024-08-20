@@ -18,7 +18,7 @@ import { ProjectBoxHeader } from '~/components/Admin/Project/Form/ProjectAdminFo
 import Card from '~ui/Card/Card'
 import UpdateProposalFormAnalysisConfigurationMutation from '~/mutations/UpdateProposalFormAnalysisConfigurationMutation'
 import toggle from '~/components/Form/Toggle'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { PROPOSAL_STATUS } from '~/constants/AnalyseConstants'
 import colors from '~/utils/colors'
 import ProposalFormAdminContainer, {

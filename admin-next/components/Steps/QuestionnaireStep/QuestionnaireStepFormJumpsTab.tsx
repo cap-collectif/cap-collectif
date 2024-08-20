@@ -5,7 +5,7 @@ import { useFieldArray, useFormContext } from 'react-hook-form'
 import { useMultipleDisclosure } from '@liinkiing/react-hooks'
 import RedirectionModal from './ConditionalJumpModal/RedirectionModal'
 import ConditionalJumpModal from './ConditionalJumpModal/ConditionalJumpModal'
-import { useEventListener } from '@hooks/useEventListener'
+import { useEventListener } from '@shared/hooks/useEventListener'
 
 const ADD_NEW_JUMP = -1
 

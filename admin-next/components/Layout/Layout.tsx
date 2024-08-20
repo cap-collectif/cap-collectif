@@ -13,7 +13,7 @@ import sideBarItems from '../SideBar/SideBarItems.json'
 import { useRouter } from 'next/router'
 import CookieHelper from '@utils/cookie-helper'
 import { LayoutProvider } from './Layout.context'
-import useFeatureFlag from '@hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import HotJar from './HotJar'
 
 export interface LayoutProps {
@@ -47,25 +47,21 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hid
       >
         <Head>
           <title>{title || intl.formatMessage({ id: 'global.administration' })}</title>
-          {
-            helpscoutBeacon && (
-              <script
-                dangerouslySetInnerHTML={{
-                  __html: `
+          {helpscoutBeacon && (
+            <script
+              dangerouslySetInnerHTML={{
+                __html: `
                                 var beamer_config = {
                                     product_id: 'isibNKBX16208',
                                     user_firstname: '${viewerSession.username}',
                                     user_email: '${viewerSession.email}',
                                 }`,
-                }}
-              />
-            )
-          }
-          {
-            helpscoutBeacon && (
-              <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer />
-            )
-          }
+              }}
+            />
+          )}
+          {helpscoutBeacon && (
+            <script type="text/javascript" src="https://app.getbeamer.com/js/beamer-embed.js" defer />
+          )}
           <script
             src={`https://maps.googleapis.com/maps/api/js?key=${process.env.NEXT_PUBLIC_SYMFONY_GOOGLE_MAP_PUBLIC_KEY}&libraries=places`}
           />

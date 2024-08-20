@@ -6,7 +6,7 @@ import { formatCodeToLocale, setLocaleCookie } from '@utils/locale-helper'
 import { getBaseUrlWithAdminNextSupport } from '../../utils/config'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useIntl } from 'react-intl'
-import useFeatureFlag from '../../hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useNavBarContext } from './NavBar.context'
 import BreadCrumbItems from '../BreadCrumb/BreadCrumbItems'
 import UpdateLocaleMutation from '@mutations/UpdateLocaleMutation'
@@ -148,7 +148,7 @@ export const NavBar: React.FC<NavBarProps> = ({ title, data }) => {
           </Flex>
         ) : null}
 
-        {(!isMediator && helpScoutBeacon) && (
+        {!isMediator && helpScoutBeacon && (
           <NavBarUI.Item className="beamerTrigger">
             <Icon name={CapUIIcon.Bell} size={CapUIIconSize.Md} />
           </NavBarUI.Item>

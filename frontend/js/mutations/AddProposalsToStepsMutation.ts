@@ -8,7 +8,7 @@ import type {
   AddProposalsToStepsMutationVariables,
   AddProposalsToStepsMutationResponse,
 } from '~relay/AddProposalsToStepsMutation.graphql'
-import uuid from '~/utils/uuid'
+import uuid from '@shared/utils/uuid'
 import type { StepFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils'
 
 type Variables = AddProposalsToStepsMutationVariables & {

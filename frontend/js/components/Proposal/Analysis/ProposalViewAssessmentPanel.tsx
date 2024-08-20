@@ -7,7 +7,7 @@ import type { ProposalViewAssessmentPanel_proposal } from '~relay/ProposalViewAs
 import ProposalAnalysisStatusLabel from './ProposalAnalysisStatusLabel'
 import { getLabelData } from './ProposalAnalysisUserRow'
 import { ResponsesView } from './ProposalViewAnalysisPanel'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   proposal: ProposalViewAssessmentPanel_proposal

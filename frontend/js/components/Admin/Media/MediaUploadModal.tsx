@@ -2,7 +2,7 @@ import * as React from 'react'
 
 import styled from 'styled-components'
 import { Modal } from 'react-bootstrap'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import FileUpload from '~/components/Form/FileUpload/FileUpload'
 
 type Props = {

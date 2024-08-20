@@ -1,6 +1,6 @@
 import { QuestionnaireStepFormQuery$data, QuestionTypeValue } from '@relay/QuestionnaireStepFormQuery.graphql'
 import { QuestionInput, QuestionnaireAbstractQuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
-import uuid, { isUuidOrTmp } from '@utils/uuid'
+import uuid, { isUuidOrTmp } from '@shared/utils/uuid'
 import { FormValues } from './QuestionnaireStepForm'
 import { StepDurationTypeEnum } from '../DebateStep/DebateStepForm'
 import { IntlShape } from 'react-intl'

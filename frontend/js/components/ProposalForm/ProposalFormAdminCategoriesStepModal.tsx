@@ -15,7 +15,7 @@ import ProposalFormCategoryBackgroundPreview from './Category/ProposalFormCatego
 import ProposalFormCategoryPinPreview from './Category/ProposalFormCategoryPinPreview'
 import Toggle from '~/components/Ui/Toggle/Toggle'
 import Label from '~/components/Ui/Form/Label/Label'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { colors as utilsColors } from '~/utils/colors'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Tooltip from '~ds/Tooltip/Tooltip'

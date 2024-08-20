@@ -17,7 +17,7 @@ import {
 } from '@relay/CollectStepFormQuery.graphql'
 import { ProposalFormForm_step$key } from '@relay/ProposalFormForm_step.graphql'
 import RequirementsTabsSkeleton from '@components/Requirements/RequirementsTabsSkeleton'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import {
   getCollectStepInput,
   getInitialValues,

@@ -3,7 +3,7 @@ import { useKeyboardShortcuts } from '@liinkiing/react-hooks'
 import { CollapsableContext } from './context'
 import * as S from './index.styles'
 import useClickAway from '~/utils/hooks/useClickAway'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 type ChildrenProps = {
   readonly children?: JSX.Element | JSX.Element[] | string
   readonly disabled?: boolean

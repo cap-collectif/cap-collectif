@@ -5,7 +5,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import type { ProposalVoteThresholdProgressBar_proposal } from '~relay/ProposalVoteThresholdProgressBar_proposal.graphql'
 import type { ProposalVoteThresholdProgressBar_step } from '~relay/ProposalVoteThresholdProgressBar_step.graphql'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 
 type Props = {

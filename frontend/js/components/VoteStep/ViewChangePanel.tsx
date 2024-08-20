@@ -2,7 +2,7 @@ import { CapUIIcon, CapUIIconSize, Flex, Icon, Text, Box, useTheme } from '@cap-
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
-import { useEventListener } from '~/utils/hooks/useEventListener'
+import { useEventListener } from '@shared/hooks/useEventListener'
 import type { GlobalState } from '~/types'
 import { VoteStepEvent, View, dispatchEvent } from './utils'
 import { useVoteStepContext } from './Context/VoteStepContext'

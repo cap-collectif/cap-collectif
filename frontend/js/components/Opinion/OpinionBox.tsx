@@ -11,7 +11,7 @@ import OpinionVotesBox from './Votes/OpinionVotesBox'
 import type { OpinionBox_opinion } from '~relay/OpinionBox_opinion.graphql'
 import TrashedMessage from '../Trashed/TrashedMessage'
 import ListGroup from '../Ui/List/ListGroup'
-import { translateContent } from '~/utils/ContentTranslator'
+import { translateContent } from '@shared/utils/contentTranslator'
 import { OpinionContainer } from '../Consultation/Opinion'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 type Props = {

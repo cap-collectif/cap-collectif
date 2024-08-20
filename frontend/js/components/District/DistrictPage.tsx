@@ -9,7 +9,7 @@ import type { GlobalState } from '~/types'
 import ProjectHeaderShareButtons from '../Project/ProjectHeaderShareButtons'
 import DistrictPageMap from './DistrictPageMap'
 import DistrictPageProjectList from './DistrictPageProjectList'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { Box, Flex, Heading } from '@cap-collectif/ui'
 
 export type Props = {

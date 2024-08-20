@@ -3,7 +3,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
-import { ICON_NAME } from '~ui/Icons/Icon'
+import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { AnalysisProposalListRole_proposal } from '~relay/AnalysisProposalListRole_proposal.graphql'
 import AnalysisProposalListRoleContainer, {
   AVATAR_SIZE,

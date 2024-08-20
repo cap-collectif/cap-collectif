@@ -9,7 +9,7 @@ import { useRouter } from 'next/router'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { ProjectIdQuery } from '@relay/ProjectIdQuery.graphql'
 import ProjectConfigForm from '../../components/Projects/ProjectConfig/ProjectConfigForm'
-import useFeatureFlag from '../../hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export interface ProjectConfigPageProps {
   projectId: string

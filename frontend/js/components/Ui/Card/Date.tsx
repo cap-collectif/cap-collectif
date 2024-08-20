@@ -4,8 +4,8 @@ import { FormattedMessage, FormattedDate, useIntl } from 'react-intl'
 import styled from 'styled-components'
 import moment from 'moment'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
-import IconRounded from '~ui/Icons/IconRounded'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
+import IconRounded from '@shared/ui/LegacyIcons/IconRounded'
 
 type Props = {
   startDate: string

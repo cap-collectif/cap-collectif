@@ -9,7 +9,7 @@ import DebateStepPageLinkedArticles from './LinkedArticles/DebateStepPageLinkedA
 import DebateStepPageArguments from './Arguments/DebateStepPageArguments'
 import DebateStepPageNotYetStarted from './NotYetStarted/DebateStepPageNotYetStarted'
 import useIsMobile from '~/utils/hooks/useIsMobile'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context'
 import { insertCustomCode } from '~/utils/customCode'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'

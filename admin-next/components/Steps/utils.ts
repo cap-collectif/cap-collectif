@@ -1,5 +1,5 @@
 import { IntlShape } from 'react-intl'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import DeleteStepMutation from '@mutations/DeleteStepMutation'
 
 export const onBack = async (

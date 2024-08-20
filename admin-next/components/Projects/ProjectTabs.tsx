@@ -6,7 +6,7 @@ import { ProjectTabs_project$key } from '@relay/ProjectTabs_project.graphql'
 import { getProjectAdminPath, getRouteContributionPath } from '@components/Projects/ProjectTabs.utils'
 import { useMemo } from 'react'
 import { useIntl } from 'react-intl'
-import useFeatureFlag from '../../hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export interface ProjectTabsProps extends FlexProps {
   project: ProjectTabs_project$key

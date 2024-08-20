@@ -2,7 +2,7 @@
 import * as React from 'react'
 import cn from 'classnames'
 import { Container, InstructionContainer, IconContainer } from './ParticipationTutorial.style'
-import Icon from '~ui/Icons/Icon'
+import Icon from '@shared/ui/LegacyIcons/Icon'
 
 type Instruction = {
   mainText: string

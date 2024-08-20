@@ -7,7 +7,7 @@ import OrganizationPagePostList from './OrganizationPagePostList'
 import Image from '~ui/Primitives/Image'
 import { useIntl } from 'react-intl'
 import { useState } from 'react'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import { Flex, Box, Button, CapUIIcon, Menu, Heading, Text, Icon, CapUIIconSize } from '@cap-collectif/ui'
 

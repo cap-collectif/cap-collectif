@@ -3,7 +3,7 @@ import { Button, CapUIModalSize, Checkbox, Heading, Modal, Text } from '@cap-col
 import { IntlShape, useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import type { ModalOpenIDDelete_ssoConfiguration$key } from '@relay/ModalOpenIDDelete_ssoConfiguration.graphql'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import DeleteSSOConfigurationMutation from '@mutations/DeleteSSOConfigurationMutation'
 
 type ModalOpenIDDeleteProps = {

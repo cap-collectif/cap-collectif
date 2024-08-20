@@ -1,7 +1,7 @@
 import { FC } from 'react'
 import { Box, Button, CapUIModalSize, FormLabel, Heading, Modal } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { useForm } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import UserListField from '@components/Form/UserListField'

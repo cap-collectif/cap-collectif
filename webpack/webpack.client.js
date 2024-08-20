@@ -33,7 +33,7 @@ const devConf = {
       '~relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
       '@relay': path.resolve(__dirname, '../frontend/js/__generated__/~relay'),
       '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
-      '@shared': path.resolve(__dirname, '../frontend/shared'),
+      '@shared': path.resolve(__dirname, '../admin-next/shared'),
       '~ds': path.resolve(__dirname, '../frontend/js/components/DesignSystem'),
       '~': path.resolve(__dirname, '../frontend/js'),
       '~fonts': path.resolve(__dirname, '../public/fonts'),

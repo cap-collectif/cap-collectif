@@ -3,7 +3,7 @@ import { graphql, useFragment } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { Flex, Text, Tag, Heading, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui'
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { DebateStepPageOpinionDrawer_opinion$key } from '~relay/DebateStepPageOpinionDrawer_opinion.graphql'
 import NewUserAvatar from '~/components/User/NewUserAvatar'
 type Props = {

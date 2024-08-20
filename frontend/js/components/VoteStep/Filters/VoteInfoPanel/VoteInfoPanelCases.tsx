@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Heading, VoteInfo, Text, Flex, Icon, CapUIIcon, CapUIIconSize, Box, Button } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
-import stripHtml from '~/utils/stripHtml'
+import stripHtml from '@shared/utils/stripHTML'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import { View } from '../../utils'
 import { formatBigNumber } from '~/utils/bigNumberFormatter'

@@ -41,7 +41,7 @@
         "./public/image/*"
       ],
       "@shared/*": [
-        "./frontend/shared/*"
+        "./admin-next/shared/*"
       ]
     },
     "incremental": true
@@ -55,6 +55,15 @@
     "**/*.svg",
   ],
   "exclude": [
-    "node_modules","admin-next","cypress"
+    "node_modules",
+    "admin-next/pages",
+    "admin-next/components",
+    "admin-next/utils",
+    "admin-next/hooks",
+    "admin-next/mutations",
+    "admin-next/tests",
+    "admin-next/utils",
+    "admin-next/**/*-test.*",
+    "cypress"
   ]
 }

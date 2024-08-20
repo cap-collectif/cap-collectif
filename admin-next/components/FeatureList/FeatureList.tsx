@@ -13,10 +13,10 @@ import {
   Tag,
   Text,
 } from '@cap-collectif/ui'
-import { useAllFeatureFlags } from '@hooks/useFeatureFlag'
+import { useAllFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import { IntlShape, useIntl } from 'react-intl'
 import { getFeatureItemsFiltered, Item, Items } from './FeatureList.utils'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import ToggleFeatureMutation from '../../mutations/ToggleFeatureMutation'
 import { FeatureFlagType } from '@relay/ToggleFeatureMutation.graphql'
 import { SetSaving, useNavBarContext } from '../NavBar/NavBar.context'

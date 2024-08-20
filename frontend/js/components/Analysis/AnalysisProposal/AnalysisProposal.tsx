@@ -18,7 +18,7 @@ import type {
   ProposalsDistrictValues,
   ProposalsThemeValues,
 } from '~/components/Analysis/AnalysisProjectPage/AnalysisProjectPage.reducer'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors, { styleGuideColors } from '~/utils/colors'
 import { pxToRem } from '~/utils/styles/mixins'
 import { TagContainer } from '~ui/Labels/Tag'

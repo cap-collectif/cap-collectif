@@ -18,8 +18,8 @@ import type { ProposalPreviewBody_step } from '~relay/ProposalPreviewBody_step.g
 import type { ProposalPreviewBody_viewer } from '~relay/ProposalPreviewBody_viewer.graphql'
 import Card from '../../Ui/Card/Card'
 import ProposalPreviewUser from './ProposalPreviewUser'
-import { translateContent, isPredefinedTraductionKey } from '~/utils/ContentTranslator'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import { translateContent, isPredefinedTraductionKey } from '@shared/utils/contentTranslator'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { getBaseUrlFromProposalUrl } from '~/utils/router'
 

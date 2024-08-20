@@ -1,4 +1,4 @@
-import { ICON_NAME } from '~ui/Icons/Icon'
+import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 
 export const PROPOSAL_STATUS = {

@@ -1,7 +1,7 @@
 import { Search } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import debounce from '~/utils/debounce-promise'
+import debounce from '@shared/utils/debounce-promise'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 
 const VoteStepPageSearchBar = () => {

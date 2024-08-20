@@ -17,7 +17,7 @@ import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalSte
 import ProposalStepRequirementsTabs from '@components/Requirements/ProposalStepRequirementsTabs'
 import RequirementsTabsSkeleton from '@components/Requirements/RequirementsTabsSkeleton'
 import { getRequirementsInput, RequirementsFormValues } from '@components/Requirements/Requirements'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
 import UpdateSelectionStepMutation from '@mutations/UpdateSelectionStep'
 import { getDefaultValues } from '@components/Steps/SelectStep/SelectStepForm.utils'

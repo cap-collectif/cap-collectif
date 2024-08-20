@@ -1,5 +1,5 @@
 import * as React from 'react'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import ErrorIncidentContainer from './ErrorIncident.style'
 
 type Props = {

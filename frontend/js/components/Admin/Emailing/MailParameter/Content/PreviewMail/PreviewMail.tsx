@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { PreviewMail_emailingCampaign } from '~relay/PreviewMail_emailingCampaign.graphql'
-import stripHtml from '~/utils/stripHtml'
+import stripHtml from '@shared/utils/stripHTML'
 
 type Props = {
   reference: React.Ref<'div'>

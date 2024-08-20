@@ -1,6 +1,6 @@
 import type { IntlShape } from 'react-intl'
 import { toast } from '~ds/Toast'
-import saveAs from '~/utils/filesaver'
+import saveAs from '@shared/utils/filesaver'
 
 const downloadCSV = async (url: string, intl: IntlShape) => {
   const response = await fetch(url)

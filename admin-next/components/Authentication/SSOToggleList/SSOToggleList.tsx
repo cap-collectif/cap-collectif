@@ -15,7 +15,7 @@ import { Section } from '@ui/Section'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { useIntl } from 'react-intl'
 import { useNavBarContext } from '../../NavBar/NavBar.context'
-import { useFeatureFlags } from '@hooks/useFeatureFlag'
+import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import { toggleFeatureFlag } from '@mutations/ToggleFeatureMutation'
 
 type SSOToggle = {

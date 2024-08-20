@@ -2,7 +2,7 @@ import * as React from 'react'
 import { Box, Text, Avatar, Flex } from '@cap-collectif/ui'
 import styled from 'styled-components'
 
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 type Props = {
   readonly proposal: {
     readonly id: string

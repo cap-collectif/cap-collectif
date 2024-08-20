@@ -2,7 +2,7 @@ import React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import ProposalPageComments from '../ProposalPageComments'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import type { ProposalPageDiscussions_proposal } from '~relay/ProposalPageDiscussions_proposal.graphql'
 import {

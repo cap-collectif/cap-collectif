@@ -9,7 +9,7 @@ import colors from '~/utils/colors'
 import environment from '~/createRelayEnvironment'
 import type { ProposalPageVotes_proposal } from '~relay/ProposalPageVotes_proposal.graphql'
 import ProposalVotesByStep from './ProposalVotesByStep'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { CategoryCircledIcon, CategoryTitle } from '~/components/Proposal/Page/ProposalPage.style'
 import type {
   ProposalPageVotesTotalCountQueryResponse,

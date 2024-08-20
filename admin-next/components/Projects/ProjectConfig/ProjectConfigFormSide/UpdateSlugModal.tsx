@@ -17,7 +17,7 @@ import {
   Heading,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import UpdateProjectSlugMutation from '@mutations/UpdateProjectSlugMutation'
 
 const FRAGMENT = graphql`

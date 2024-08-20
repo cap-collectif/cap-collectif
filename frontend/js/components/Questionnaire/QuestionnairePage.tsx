@@ -10,7 +10,7 @@ import '~relay/QuestionnairePage_questionnaire.graphql'
 import type { QuestionnairePage_query } from '~relay/QuestionnairePage_query.graphql'
 import '~relay/QuestionnairePage_query.graphql'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import QuestionnaireHeader from '~/components/Questionnaire/QuestionnaireHeader'
 import QuestionnaireFooter from '~/components/Questionnaire/QuestionnaireFooter'
 type Props = {

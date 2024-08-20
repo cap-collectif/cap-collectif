@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { usePDF } from '@react-pdf/renderer'
 import moment from 'moment'
 import { useIntl } from 'react-intl'
-import saveAs from '~/utils/filesaver'
+import saveAs from '@shared/utils/filesaver'
 import QuestionnaireAdminResultsPdfDocument from '~/components/Questionnaire/QuestionnaireAdminResultsPdfDocument/QuestionnaireAdminResultsPdfDocument'
 import type { QuestionsType, Translations } from '~/components/Questionnaire/QuestionnaireAdminResultsExportMenu'
 type Props = {

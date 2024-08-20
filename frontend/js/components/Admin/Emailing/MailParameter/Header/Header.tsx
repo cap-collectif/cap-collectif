@@ -6,7 +6,7 @@ import { useResize } from '@liinkiing/react-hooks'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { NavLink } from 'react-router-dom'
 import component from '~/components/Form/Field'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import LabelState from '~/components/Admin/Emailing/MailParameter/LabelState/LabelState'
 import {

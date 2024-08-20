@@ -3,7 +3,7 @@ import { useFormContext } from 'react-hook-form'
 import { Flex, Heading, FormLabel, Text, Switch } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
-import useFeatureFlag from '@hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const ProjectConfigFormExternal: React.FC = () => {
   const intl = useIntl()

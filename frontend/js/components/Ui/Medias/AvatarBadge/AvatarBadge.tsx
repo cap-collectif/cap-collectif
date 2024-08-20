@@ -2,7 +2,7 @@ import { $Values } from 'utility-types'
 import * as React from 'react'
 import type { Props as AvatarProps } from '~ui/Medias/Avatar'
 import Avatar from '~ui/Medias/Avatar'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import AvatarBadgeContainer, { Circle } from '~ui/Medias/AvatarBadge/AvatarBadge.style'
 
 type Props = AvatarProps & {

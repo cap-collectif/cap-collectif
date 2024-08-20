@@ -24,10 +24,10 @@ import { useMultipleDisclosure } from '@liinkiing/react-hooks'
 import QuestionnaireStepFormJumpsTab from './QuestionnaireStepFormJumpsTab'
 import { dispatchEvent } from '@utils/dispatchEvent'
 import SectionModal from './SectionModal'
-import uuid from '@utils/uuid'
+import uuid from '@shared/utils/uuid'
 import QuestionnaireListField from '@components/Form/QuestionnaireListField'
-import debounce from '@utils/debounce-promise'
-import stripHTML from '@utils/stripHTML'
+import debounce from '@shared/utils/debounce-promise'
+import stripHTML from '@shared/utils/stripHTML'
 
 const QuestionnaireCreationTypeEnum = {
   NEW: 'NEW',

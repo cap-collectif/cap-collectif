@@ -1,6 +1,6 @@
 import type { IntlShape } from 'react-intl'
 import type { Questions, ResponsesInReduxForm, ResponsesError, ResponsesWarning } from '~/components/Form/Form.type'
-import stripHtml from '~/utils/stripHtml'
+import stripHtml from '@shared/utils/stripHTML'
 import formatResponses from '~/utils/form/formatResponses'
 import type { FormattedResponse } from '~/utils/form/formatResponses'
 import { checkOnlyNumbers, checkSiret, checkRNA } from '~/services/Validator'

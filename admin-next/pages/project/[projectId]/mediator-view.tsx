@@ -6,7 +6,7 @@ import { mediatorViewSelectStepQuery } from '@relay/mediatorViewSelectStepQuery.
 import { mediatorViewQuery } from '@relay/mediatorViewQuery.graphql'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useIntl } from 'react-intl'
-import debounce from '@utils/debounce-promise'
+import debounce from '@shared/utils/debounce-promise'
 import TablePlaceholder from '@ui/Table/TablePlaceholder'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
@@ -16,7 +16,7 @@ import Layout from '@components/Layout/Layout'
 import ModalSkeleton from '@components/Mediator/MediatorVoteModal/ModalSkeleton'
 import { OrderDirection } from '@relay/ParticipantListPaginationQuery.graphql'
 import useUrlState from '@hooks/useUrlState'
-import useFeatureFlag from '../../../hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export const QUERY = graphql`
   query mediatorViewQuery($mediatorId: ID!, $count: Int!, $cursor: String, $term: String, $orderBy: ParticipantOrder) {

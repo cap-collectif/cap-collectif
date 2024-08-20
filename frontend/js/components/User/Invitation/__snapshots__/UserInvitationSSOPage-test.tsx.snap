@@ -42,25 +42,16 @@ Array [
             className="SSOButtonstyle__LinkButton-imVlRX dgSBwV"
             type="facebook"
           >
-            <span
+            <IconMock
+              aria-hidden={true}
               className="loginIcon"
               style={
                 Object {
-                  "lineHeight": "inherit",
+                  "flexShrink": "0",
+                  "verticalAlign": "middle",
                 }
               }
-            >
-              <IconMock
-                aria-hidden={true}
-                className="icon"
-                style={
-                  Object {
-                    "flexShrink": "0",
-                    "verticalAlign": "middle",
-                  }
-                }
-              />
-            </span>
+            />
             <a
               href="/login/facebook?_destination=http://localhost"
               rel="noreferrer"
@@ -161,25 +152,16 @@ Array [
               href="/login/franceconnect?_destination=http://localhost"
               target="_blank"
             >
-              <span
+              <IconMock
+                aria-hidden={true}
                 className="loginIcon"
                 style={
                   Object {
-                    "lineHeight": "inherit",
+                    "flexShrink": "0",
+                    "verticalAlign": "middle",
                   }
                 }
-              >
-                <IconMock
-                  aria-hidden={true}
-                  className="icon"
-                  style={
-                    Object {
-                      "flexShrink": "0",
-                      "verticalAlign": "middle",
-                    }
-                  }
-                />
-              </span>
+              />
             </a>
           </div>
           <div

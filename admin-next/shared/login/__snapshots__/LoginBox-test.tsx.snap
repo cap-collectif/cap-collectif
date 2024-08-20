@@ -1,0 +1,180 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginBox /> renders 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div
+      className="sc-bcXGCL PXCEG"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          {
+            "__html": "I am top text",
+          }
+        }
+      />
+    </div>
+    <div
+      className="sc-bcXGCL kxTfnk cap-form-control"
+      role="group"
+    >
+      <label
+        className="sc-bcXGCL kossJj cap-form-label"
+        htmlFor="username"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <p
+          className="sc-bcXGCL gUkIhr cap-text"
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          global.email
+        </p>
+      </label>
+      <input
+        aria-required={true}
+        autoComplete="email"
+        autoFocus={true}
+        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+        disabled={false}
+        name="username"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        placeholder="email.placeholder"
+        required={true}
+        type="email"
+      />
+    </div>
+    <div
+      className="sc-bcXGCL kxTfnk cap-form-control"
+      role="group"
+    >
+      <label
+        className="sc-bcXGCL kossJj cap-form-label"
+        htmlFor="password"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <p
+          className="sc-bcXGCL gUkIhr cap-text"
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          global.password
+        </p>
+      </label>
+      <input
+        aria-required={true}
+        autoComplete="off"
+        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+        disabled={false}
+        name="password"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={true}
+        type="password"
+      />
+    </div>
+    <a
+      className="sc-bcXGCL ckHvhy cap-link"
+      href="/resetting/request"
+    >
+      global.forgot_password
+    </a>
+    <div
+      className="sc-bcXGCL ijIkBL"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          {
+            "__html": "I am bottom text",
+          }
+        }
+      />
+    </div>
+  </div>,
+]
+`;
+
+exports[`<LoginBox /> renders without LoginForm 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div
+      className="sc-bcXGCL PXCEG"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          {
+            "__html": "I am top text",
+          }
+        }
+      />
+    </div>
+    <div>
+      <div
+        className="sc-18a669e1-0 lkMRyQ"
+        type="saml"
+      >
+        <span
+          className="loginIcon"
+          style={
+            {
+              "lineHeight": "inherit",
+            }
+          }
+        >
+          <div
+            data-testid="LegacyIcon-saml"
+          />
+        </span>
+        <a
+          href="/login-saml?_destination=http://localhost/"
+          title="saml"
+        >
+          Saml
+        </a>
+      </div>
+    </div>
+    <div
+      className="sc-bcXGCL ijIkBL"
+    >
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          {
+            "__html": "I am bottom text",
+          }
+        }
+      />
+    </div>
+  </div>,
+]
+`;

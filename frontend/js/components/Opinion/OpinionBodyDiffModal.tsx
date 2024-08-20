@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { Button, Modal } from 'react-bootstrap'
 import type { OpinionBodyDiffModal_modal } from '~relay/OpinionBodyDiffModal_modal.graphql'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import Tooltip from '~ds/Tooltip/Tooltip'
 
 type Props = {

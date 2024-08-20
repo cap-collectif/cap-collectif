@@ -7,7 +7,7 @@ import { ListCard } from '@ui/ListCard'
 import GeographicalAreaDeleteModal from './GeographicalAreaDeleteModal'
 import { useState } from 'react'
 import GeographicalAreasEmptyPage from './GeographicalAreasEmptyPage'
-import useFeatureFlag from '@hooks/useFeatureFlag'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { formatCodeToLocale } from '@utils/locale-helper'
 
 export const QUERY = graphql`

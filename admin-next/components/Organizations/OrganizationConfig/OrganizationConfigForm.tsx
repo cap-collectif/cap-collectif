@@ -10,7 +10,7 @@ import UpdateOrganizationMutation from '@mutations/UpdateOrganizationMutation'
 import { UpdateOrganizationInput } from '@relay/UpdateOrganizationMutation.graphql'
 import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
 import { OrganizationConfigFormQuery } from '@relay/OrganizationConfigFormQuery.graphql'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import OrganizationConfigFormDeleteOrganizationModal from './OrganizationConfigFormDeleteOrganizationModal'
 import { OrganizationConfigForm_organization$key } from '@relay/OrganizationConfigForm_organization.graphql'
 

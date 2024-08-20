@@ -16,7 +16,7 @@ import {
 } from '@cap-collectif/ui'
 import { COUNTRY_CODES, FieldInput, FormControl } from '@cap-collectif/form'
 import LoginSocialButton from '@shared/login/LoginSocialButton'
-import FranceConnectIcon from '~ui/Icons/FranceConnectIcon'
+import FranceConnectIcon from '@shared/ui/LegacyIcons/FranceConnectIcon'
 
 type Props = {
   initialValues: Record<string, any>

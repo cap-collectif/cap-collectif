@@ -13,7 +13,7 @@ import type {
   ProposalAnalysisState,
 } from '~relay/ProposalAnalysisFormPanel_proposal.graphql'
 import colors, { styleGuideColors } from '~/utils/colors'
-import { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { GlobalState, Dispatch } from '~/types'
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses'
 import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesValues'

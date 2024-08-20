@@ -9,7 +9,7 @@ import UserBox from '~/components/User/UserBox'
 import type { ProposalPageFollowers_proposal } from '~relay/ProposalPageFollowers_proposal.graphql'
 import { graphqlError } from '~/createRelayEnvironment'
 import { PROPOSAL_FOLLOWERS_TO_SHOW } from '~/constants/ProposalConstants'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { CategoryCircledIcon, CategoryTitle, SeeMoreButton } from '~/components/Proposal/Page/ProposalPage.style'
 
 type State = {

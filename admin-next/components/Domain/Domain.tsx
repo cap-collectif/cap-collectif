@@ -21,7 +21,7 @@ import { useForm } from 'react-hook-form'
 import UpdateCustomDomainMutation from 'mutations/UpdateCustomDomainMutation'
 import DeleteCustomDomainModal from './DeleteCustomDomainModal'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { mutationErrorToast } from '../../utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 type FormValues = {
   subDomain: string

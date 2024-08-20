@@ -39,10 +39,10 @@ import type {
 } from '~relay/UpdateProfileAccountLocaleMutation.graphql'
 import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
 import ListGroup from '../../Ui/List/ListGroup'
-import SocialIcon from '~ui/Icons/SocialIcon'
+import SocialIcon from '@shared/ui/LegacyIcons/Icon'
 import { getButtonLinkForType } from '@shared/login/LoginSocialButton'
 import DissociateSsoModal from '~/components/User/Profile/DissociateSsoModal'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Tooltip from '~ds/Tooltip/Tooltip'
 type RelayProps = {
   viewer: AccountForm_viewer

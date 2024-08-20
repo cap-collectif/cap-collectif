@@ -10,7 +10,6 @@ import { BrowserRouter as Router } from 'react-router-dom'
 import { theme } from '~/styles/theme'
 import appStore from '~/stores/AppStore'
 import type { FeatureFlagType } from '~relay/useFeatureFlagQuery.graphql'
-import { FormProvider, useForm } from 'react-hook-form'
 
 export const mockRandomValues = () => {
   global.Math.random = () => 0.5
@@ -82,12 +81,6 @@ export const RelaySuspensFragmentTest = ({
       </RelayEnvironmentProvider>
     </MockProviders>
   )
-}
-
-export const FormWrapper = props => {
-  const formMethods = useForm()
-
-  return <FormProvider {...formMethods}>{props.children}</FormProvider>
 }
 
 export default MockProviders

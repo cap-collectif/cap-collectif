@@ -8,7 +8,7 @@ import type {
   UpdateFacebookSSOConfigurationMutation$variables,
 } from '@relay/UpdateFacebookSSOConfigurationMutation.graphql'
 import { CardFacebook_ssoConfiguration$data } from '@relay/CardFacebook_ssoConfiguration.graphql'
-import uuid from '@utils/uuid'
+import uuid from '@shared/utils/uuid'
 
 const mutation = graphql`
   mutation UpdateFacebookSSOConfigurationMutation($input: UpdateFacebookSSOConfigurationInput!, $connections: [ID!]!)

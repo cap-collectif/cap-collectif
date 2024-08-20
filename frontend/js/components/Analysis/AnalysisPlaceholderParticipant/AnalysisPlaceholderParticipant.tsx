@@ -1,7 +1,7 @@
 import * as React from 'react'
 import colors from '~/utils/colors'
 import { Container } from '~/components/Admin/Project/ProjectAdminParticipantTab/ProjectAdminParticipant/ProjectAdminParticipant.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Skeleton from '~ds/Skeleton'
 import Flex from '~ui/Primitives/Layout/Flex'
 

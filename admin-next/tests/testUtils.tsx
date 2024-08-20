@@ -7,6 +7,7 @@ import { intlMock, features as mockFeatures } from './mocks'
 import GlobalCSS from 'styles/GlobalCSS'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { ReactPortal } from 'react'
+import { FormProvider, useForm } from 'react-hook-form'
 
 export const mockRandomValues = () => {
   global.Math.random = () => 0.5
@@ -69,6 +70,12 @@ export const RelaySuspensFragmentTest = ({ children, environment, features }: Re
       </RelayEnvironmentProvider>
     </MockProviders>
   )
+}
+
+export const FormWrapper = props => {
+  const formMethods = useForm()
+
+  return <FormProvider {...formMethods}>{props.children}</FormProvider>
 }
 
 export default MockProviders

@@ -7,7 +7,7 @@ import File from '~ui/File/File'
 import FileUploadContainer from './FileUpload.style'
 import { TYPE_FORM } from '~/constants/FormConstants'
 import type { FileInfo } from '~/components/Ui/File/File'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { ALLOWED_MIMETYPES } from '~/config'
 
 const MAX_FILE = 5

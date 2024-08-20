@@ -1,0 +1,95 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginForm /> renders a form with inputs 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="username"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.email
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="email"
+      autoFocus={true}
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      name="username"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="email.placeholder"
+      required={true}
+      type="email"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="password"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.password
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="off"
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      name="password"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={true}
+      type="password"
+    />
+  </div>,
+  <a
+    className="sc-bcXGCL ckHvhy cap-link"
+    href="/resetting/request"
+  >
+    global.forgot_password
+  </a>,
+]
+`;

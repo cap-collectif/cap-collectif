@@ -7,7 +7,7 @@ import CloseButton from '../../Form/CloseButton'
 import { form } from './RegistrationForm'
 import { hideChartModal } from '~/redux/modules/user'
 import type { Dispatch } from '~/types'
-import WYSIWYGRender from '../../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 type StateProps = {
   readonly displayChartModal: boolean
   readonly charterBody?: string | null | undefined

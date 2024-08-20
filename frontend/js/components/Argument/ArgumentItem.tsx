@@ -14,7 +14,7 @@ import ArgumentButtons from './ArgumentButtons'
 import UnpublishedLabel from '../Publishable/UnpublishedLabel'
 import type { ArgumentItem_argument } from '~relay/ArgumentItem_argument.graphql'
 import TrashedMessage from '../Trashed/TrashedMessage'
-import { translateContent } from '~/utils/ContentTranslator'
+import { translateContent } from '@shared/utils/contentTranslator'
 import htmlDecode from '~/components/Utils/htmlDecode'
 type Props = {
   readonly argument: ArgumentItem_argument

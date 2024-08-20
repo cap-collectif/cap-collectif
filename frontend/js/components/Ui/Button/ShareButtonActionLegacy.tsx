@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
-import SocialIcon from '../Icons/SocialIcon'
+import SocialIcon from '@shared/ui/LegacyIcons/SocialIcon'
 import Menu from '~ds/Menu/Menu'
 import Flex from '~ui/Primitives/Layout/Flex'
 

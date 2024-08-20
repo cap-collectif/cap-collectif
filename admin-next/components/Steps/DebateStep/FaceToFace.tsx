@@ -8,7 +8,7 @@ import { formatConnectionPath } from '@utils/relay'
 import { Flex, Text, Button } from '@cap-collectif/ui'
 import { FaceToFace_debate$key, ForOrAgainstValue } from '@relay/FaceToFace_debate.graphql'
 import DebateEmptyOpinion from '@components/Steps/DebateStep/DebateEmptyOpinion'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { FragmentRefs } from 'relay-runtime'
 
 type OpinionFaceToFace = {

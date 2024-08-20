@@ -9,7 +9,7 @@ import type {
 } from '@relay/ToggleFeatureMutation.graphql'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { IntlShape } from 'react-intl'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 const mutation = graphql`
   mutation ToggleFeatureMutation($input: ToggleFeatureInput!) @raw_response_type {

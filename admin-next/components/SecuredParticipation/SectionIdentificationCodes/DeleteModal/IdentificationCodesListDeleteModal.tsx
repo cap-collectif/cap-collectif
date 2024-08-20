@@ -17,7 +17,7 @@ import type { IdentificationCodesListDeleteModal_userIdentificationCodeList$key 
 import { graphql, useFragment } from 'react-relay'
 import DeleteUserIdentificationCodeListMutation from '@mutations/DeleteUserIdentificationCodeListMutation'
 import IdentificationCodesListDeleteModalWarningProjects from './IdentificationCodesListDeleteModalWarningProjects'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 const FRAGMENT = graphql`
   fragment IdentificationCodesListDeleteModal_userIdentificationCodeList on UserIdentificationCodeList {

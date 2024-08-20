@@ -18,7 +18,7 @@ import EventPreviewContainer, {
 import EventLabelStatus from '~/components/Event/EventLabelStatus'
 import type { EventPreview_event } from '~relay/EventPreview_event.graphql'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Label from '~ui/Labels/Label'
 import InlineList from '~ui/List/InlineList'
 import TagStep from '~/components/Tag/TagStep/TagStep'

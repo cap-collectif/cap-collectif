@@ -1,6 +1,6 @@
 import * as React from 'react'
 import FileContainer from './File.style'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 export type FileInfo = {
   id: string

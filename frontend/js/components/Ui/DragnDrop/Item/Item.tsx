@@ -2,7 +2,7 @@ import * as React from 'react'
 import type { DraggableProvided } from 'react-beautiful-dnd'
 import { Draggable } from 'react-beautiful-dnd'
 import ItemContainer from './Item.style'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 
 type ItemProps = {

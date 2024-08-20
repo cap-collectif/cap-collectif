@@ -15,7 +15,7 @@ import {
   CloseButton,
   PopoverContainer,
 } from '~ui/Toggle/Toggle.style'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 
 export type Tooltip = {

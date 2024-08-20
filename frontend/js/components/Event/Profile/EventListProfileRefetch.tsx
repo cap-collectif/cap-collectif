@@ -7,7 +7,7 @@ import EventPreview from '../EventPreview/EventPreview'
 import type { EventListProfileRefetch_user } from '~relay/EventListProfileRefetch_user.graphql'
 import EventListProfileRefetchContainer from './EventListProfileRefetch.style'
 import Input from '~/components/Form/Input'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { EventListProfileRefetchQueryVariables } from '~relay/EventListProfileRefetchQuery.graphql'
 type Props = {
   user: EventListProfileRefetch_user

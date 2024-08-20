@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import type { OpinionAppendix_appendix } from '~relay/OpinionAppendix_appendix.graphql'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {
   appendix: OpinionAppendix_appendix

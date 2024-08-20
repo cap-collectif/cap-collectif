@@ -1,11 +1,12 @@
-const { merge } = require('webpack-merge');
-const TerserPlugin = require('terser-webpack-plugin');
-const webpackConfig = require('./config');
-const devConf = require('./webpack.client');
+const { merge } = require('webpack-merge')
+const TerserPlugin = require('terser-webpack-plugin')
+const webpackConfig = require('./config')
+const devConf = require('./webpack.client')
 
 const prodConf = {
   mode: 'production',
   stats: 'minimal',
+  cache: false,
 
   output: {
     pathinfo: false,
@@ -52,6 +53,6 @@ const prodConf = {
       },
     },
   },
-};
+}
 
-module.exports = merge(devConf, prodConf);
+module.exports = merge(devConf, prodConf)

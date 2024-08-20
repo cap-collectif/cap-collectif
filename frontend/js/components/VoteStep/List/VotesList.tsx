@@ -5,7 +5,7 @@ import type { VotesListQuery as VotesListQueryType } from '~relay/VotesListQuery
 import type { VotesList_step$key } from '~relay/VotesList_step.graphql'
 import ProposalPreviewCard from './ProposalPreviewCard'
 import useIsMobile from '~/utils/hooks/useIsMobile'
-import { useEventListener } from '~/utils/hooks/useEventListener'
+import { useEventListener } from '@shared/hooks/useEventListener'
 import { List } from './ProposalsList'
 import { DELAY_BEFORE_PROPOSAL_REMOVAL, VoteStepEvent } from '../utils'
 import EmptyList from './EmptyList'

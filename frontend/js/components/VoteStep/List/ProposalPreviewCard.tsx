@@ -20,10 +20,10 @@ import type { ProposalPreviewCard_viewer$key } from '~relay/ProposalPreviewCard_
 import type { ProposalPreviewCard_step$key } from '~relay/ProposalPreviewCard_step.graphql'
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
-import convertIconToDs from '~/utils/convertIconToDs'
+import convertIconToDs from '@shared/utils/convertIconToDs'
 import { getBaseUrlFromProposalUrl } from '~/utils/router'
 import { Link, ACTIVE_COLOR, VoteStepEvent, dispatchEvent, cardWidthListView, cardWidthMapView } from '../utils'
-import stripHtml from '~/utils/stripHtml'
+import stripHtml from '@shared/utils/stripHTML'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 import ProposalPreviewCardFooter from './ProposalPreviewCardFooter'

@@ -1,4 +1,4 @@
-import type { ColorHSL } from './formatColor'
+import type { ColorHSL } from '@shared/utils/colors'
 
 // Source: https://css-tricks.com/converting-color-spaces-in-javascript/#rgb-to-hsl
 // Example: rgbToHsl('rgb(66,17,208)');
@@ -18,9 +18,12 @@ const rgbToHsl = (rgb: string): ColorHSL => {
   let l = 0
   // Calculate hue
   // No difference
-  if (delta === 0) h = 0 // Red is max
-  else if (cmax === r) h = ((g - b) / delta) % 6 // Green is max
-  else if (cmax === g) h = (b - r) / delta + 2 // Blue is max
+  if (delta === 0) h = 0
+  // Red is max
+  else if (cmax === r) h = ((g - b) / delta) % 6
+  // Green is max
+  else if (cmax === g) h = (b - r) / delta + 2
+  // Blue is max
   else h = (r - g) / delta + 4
   h = Math.round(h * 60)
   // Make negative hues positive behind 360°

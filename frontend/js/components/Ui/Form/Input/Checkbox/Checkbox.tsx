@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import Label from '~/components/Ui/Form/Label/Label'
 import type { PropsCommonCheckboxRadio } from '../commonCheckboxRadio'
 import { sharedStyleCheckboxRadio } from '../commonCheckboxRadio'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import isQuestionnaire from '~/utils/isQuestionnaire'
 import Image from '~ui/Primitives/Image'
 

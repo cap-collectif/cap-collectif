@@ -2,9 +2,9 @@ import * as React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import Tag from '~/components/Ui/Labels/Tag'
-import IconRounded from '~ui/Icons/IconRounded'
+import IconRounded from '@shared/ui/LegacyIcons/IconRounded'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { TagThemes_themes } from '~relay/TagThemes_themes.graphql'
 
 const renderThemes = themes => {

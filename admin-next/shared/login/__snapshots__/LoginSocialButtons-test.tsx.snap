@@ -1,0 +1,391 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<LoginSocialButtons /> renders all buttons 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <p
+      className="sc-bcXGCL jhUarP cap-text"
+    >
+      <p>
+        fc-title
+      </p>
+    </p>
+    <div
+      className="sc-18a669e1-2 gKvhyH"
+      justifyContent="start"
+    >
+      <a
+        href="/login/franceconnect?_destination=http://localhost/"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        title="FranceConnect"
+      >
+        <span
+          className="loginIcon"
+          style={
+            {
+              "lineHeight": "inherit",
+            }
+          }
+        >
+          <div
+            data-testid="LegacyIcon-franceConnect"
+          />
+        </span>
+      </a>
+    </div>
+    <div
+      className="sc-18a669e1-1 flvQkF"
+      justifyContent="start"
+    >
+      <a
+        href="https://franceconnect.gouv.fr/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        what-is-fc
+      </a>
+      <div
+        className="sc-bcXGCL gtydaQ cap-text"
+      >
+        login.or
+      </div>
+    </div>
+  </div>,
+  <div>
+    <div
+      className="sc-18a669e1-0 brWuRV"
+      type="openId"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-openId"
+        />
+      </span>
+      <a
+        href="/login/openid?_destination=http://localhost/sso/switch-user"
+        title="openId"
+      >
+        <span>
+          Cap Collectif Oauth2 Provider
+        </span>
+      </a>
+    </div>
+  </div>,
+  <div>
+    <div
+      className="sc-18a669e1-0 cPzHJo"
+      type="cas"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-cas"
+        />
+      </span>
+      <a
+        href="/login-cas?_destination=http://localhost/"
+        title="cas"
+      >
+        <span>
+          Cap Collectif CAS Provider
+        </span>
+      </a>
+    </div>
+  </div>,
+  <div>
+    <div
+      className="sc-18a669e1-0 uUroR"
+      type="saml"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-saml"
+        />
+      </span>
+      <a
+        href="/login-saml?_destination=http://localhost/"
+        title="saml"
+      >
+        Saml
+      </a>
+    </div>
+  </div>,
+  <hr
+    className="sc-bcXGCL jqxtWM"
+  />,
+]
+`;
+
+exports[`<LoginSocialButtons /> renders nothing 1`] = `
+<div
+  className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+/>
+`;
+
+exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div
+      className="sc-18a669e1-0 csQxfk"
+      type="cas"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-cas"
+        />
+      </span>
+      <a
+        href="/login-cas?_destination=http://localhost/"
+        title="cas"
+      >
+        <span>
+          Cap Collectif CAS Provider
+        </span>
+      </a>
+    </div>
+  </div>,
+  <hr
+    className="sc-bcXGCL jqxtWM"
+  />,
+]
+`;
+
+exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div
+      className="sc-18a669e1-0 bddJyX"
+      type="facebook"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-facebook"
+        />
+      </span>
+      <a
+        href="/login/facebook?_destination=http://localhost/"
+        title="facebook"
+      >
+        Facebook
+      </a>
+    </div>
+  </div>,
+  <hr
+    className="sc-bcXGCL jqxtWM"
+  />,
+]
+`;
+
+exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <p
+      className="sc-bcXGCL jhUarP cap-text"
+    >
+      <p>
+        fc-title
+      </p>
+    </p>
+    <div
+      className="sc-18a669e1-2 gKvhyH"
+      justifyContent="start"
+    >
+      <a
+        href="/login/franceconnect?_destination=http://localhost/"
+        onMouseEnter={[Function]}
+        onMouseLeave={[Function]}
+        title="FranceConnect"
+      >
+        <span
+          className="loginIcon"
+          style={
+            {
+              "lineHeight": "inherit",
+            }
+          }
+        >
+          <div
+            data-testid="LegacyIcon-franceConnect"
+          />
+        </span>
+      </a>
+    </div>
+    <div
+      className="sc-18a669e1-1 flvQkF"
+      justifyContent="start"
+    >
+      <a
+        href="https://franceconnect.gouv.fr/"
+        rel="noreferrer"
+        target="_blank"
+      >
+        what-is-fc
+      </a>
+      <div
+        className="sc-bcXGCL gtydaQ cap-text"
+      >
+        login.or
+      </div>
+    </div>
+  </div>,
+  <hr
+    className="sc-bcXGCL jqxtWM"
+  />,
+]
+`;
+
+exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div
+      className="sc-18a669e1-0 idGaBR"
+      type="openId"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-openId"
+        />
+      </span>
+      <a
+        href="/login/openid?_destination=http://localhost/"
+        title="openId"
+      >
+        <span>
+          Cap Collectif Oauth2 Provider
+        </span>
+      </a>
+    </div>
+  </div>,
+  <hr
+    className="sc-bcXGCL jqxtWM"
+  />,
+]
+`;
+
+exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div
+      className="sc-18a669e1-0 dDsFsn"
+      type="saml"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-saml"
+        />
+      </span>
+      <a
+        href="/login-saml?_destination=http://localhost/"
+        title="saml"
+      >
+        Saml
+      </a>
+    </div>
+  </div>,
+  <hr
+    className="sc-bcXGCL jqxtWM"
+  />,
+]
+`;
+
+exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div
+      className="sc-18a669e1-0 bzrort"
+      type="openId"
+    >
+      <span
+        className="loginIcon"
+        style={
+          {
+            "lineHeight": "inherit",
+          }
+        }
+      >
+        <div
+          data-testid="LegacyIcon-openId"
+        />
+      </span>
+      <a
+        href="/login/openid?_destination=http://localhost/"
+        title="openId"
+      >
+        <span>
+          Cap Collectif Oauth2 Provider
+        </span>
+      </a>
+    </div>
+  </div>,
+]
+`;

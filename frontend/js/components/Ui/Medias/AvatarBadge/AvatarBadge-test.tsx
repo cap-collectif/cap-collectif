@@ -2,7 +2,7 @@
 import React from 'react'
 import { shallow } from 'enzyme'
 import AvatarBadge from '~ui/Medias/AvatarBadge/AvatarBadge'
-import { ICON_NAME } from '~ui/Icons/Icon'
+import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 const props = {
   src: 'https://source.unsplash.com/collection/181462',

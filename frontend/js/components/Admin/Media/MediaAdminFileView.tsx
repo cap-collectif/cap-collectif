@@ -3,7 +3,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import colors from '~/utils/colors'
 import { MAIN_BORDER_RADIUS } from '~/utils/styles/variables'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 
 export const Container = styled.div`
   height: 32px;

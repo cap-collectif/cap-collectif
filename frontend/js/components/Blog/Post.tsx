@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 import { FormattedMessage, FormattedDate } from 'react-intl'
 import moment from 'moment'
 import type { Post_post } from '~relay/Post_post.graphql'
-import WYSIWYGRender from '../Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { State } from '../../types'
 import Image from '~ui/Primitives/Image'
 

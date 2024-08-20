@@ -45,7 +45,7 @@ import formatInitialResponsesValues from '~/utils/form/formatInitialResponsesVal
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses'
 import renderResponses from '~/components/Form/RenderResponses'
 import { analytics } from '~/startup/analytics'
-import WYSIWYGRender from '~/components/Form/WYSIWYGRender'
+import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import RequirementsFormLegacy, {
   formName as RequirementsFormLegacyName,
 } from '~/components/Requirements/RequirementsFormLegacy'

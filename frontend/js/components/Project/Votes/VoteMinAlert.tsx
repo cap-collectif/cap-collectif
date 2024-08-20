@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { VoteMinAlert_step$data } from '~relay/VoteMinAlert_step.graphql'
 import { VoteMinAlertContainer } from './ProposalsUserVotes.style'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'

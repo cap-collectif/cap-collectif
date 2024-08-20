@@ -5,7 +5,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import styled, { css } from 'styled-components'
 import Label from '~/components/Ui/Labels/Label'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~/components/Ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { ProposalAnalysisUserRow_user } from '~relay/ProposalAnalysisUserRow_user.graphql'
 import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
 import type {

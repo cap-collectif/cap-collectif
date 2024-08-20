@@ -40,6 +40,11 @@ jest.mock('./utils/NoSSR.tsx', () => {
   return props => props.children
 })
 
+jest.mock('./shared/ui/LegacyIcons/Icon.tsx', () => {
+  const Icon = ({ name }) => <div data-testid={`LegacyIcon-${name}`} />
+  return Icon
+})
+
 export const appContextValue = {
   viewerSession: {
     email: 'come-back@gmail.com',

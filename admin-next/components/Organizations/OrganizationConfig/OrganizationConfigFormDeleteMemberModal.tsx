@@ -13,7 +13,7 @@ import { useIntl } from 'react-intl'
 import KickFromOrganizationMutation from '@mutations/KickFromOrganizationMutation'
 import { graphql, useFragment } from 'react-relay'
 import { OrganizationConfigFormDeleteMemberModal_organization$key } from '@relay/OrganizationConfigFormDeleteMemberModal_organization.graphql'
-import { mutationErrorToast } from '@utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { formatConnectionPath } from '@utils/relay'
 import DeleteOrganizationInvitationMutation from '@mutations/DeleteOrganizationInvitationMutation'
 export interface OrganizationConfigFormDeleteMemberModalProps {

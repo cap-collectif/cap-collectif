@@ -2,7 +2,7 @@ import * as React from 'react'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { mutationErrorToast } from 'utils/mutation-error-toast'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import DeletePostMutation from 'mutations/DeletePostMutation'
 import {
   Button,

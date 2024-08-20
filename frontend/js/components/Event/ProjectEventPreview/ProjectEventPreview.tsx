@@ -13,10 +13,10 @@ import EventPreviewContainer, {
 } from '../EventPreview/EventPreview.style'
 import type { ProjectEventPreview_event } from '~relay/ProjectEventPreview_event.graphql'
 import colors from '~/utils/colors'
-import Icon, { ICON_NAME } from '~ui/Icons/Icon'
+import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import Label from '~ui/Labels/Label'
 import InlineList from '~ui/List/InlineList'
-import IconRounded from '~ui/Icons/IconRounded'
+import IconRounded from '@shared/ui/LegacyIcons/IconRounded'
 import Tag from '~ui/Labels/Tag'
 import { getEndDateFromStartAt, isEventLive } from '~/components/Event/EventPageContent/EventHelperFunctions'
 type Props = {
