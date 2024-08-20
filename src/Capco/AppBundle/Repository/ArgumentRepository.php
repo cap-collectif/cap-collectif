@@ -9,12 +9,15 @@ use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Enum\ArgumentOrderField;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Model\Argumentable;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -23,6 +26,50 @@ class ArgumentRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
     use LocaleRepositoryTrait;
+
+    /**
+     * @return array<int, string>
+     */
+    public function findPaginated(
+        ?string $search,
+        ?string $field,
+        ?string $direction,
+        int $offset = 0,
+        int $limit = 50
+    ): array {
+        $qb = $this->createQueryBuilder('arg')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+        if (ArgumentOrderField::CREATED_AT === $field) {
+            $qb->addOrderBy('arg.createdAt', $direction);
+        }
+        if (ArgumentOrderField::UPDATED_AT === $field) {
+            $qb->addOrderBy('arg.updatedAt', $direction);
+        }
+        if ($search) {
+            $alias = $qb->getRootAliases()[0];
+            $this->searchByBodyOrAuthorUsername($qb, $search, $alias);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function getTotalArgumentsBySearchQuery(
+        ?string $search = null
+    ): int {
+        $qb = $this->createQueryBuilder('arg');
+        if ($search) {
+            $this->searchByBodyOrAuthorUsername($qb, $search, 'arg');
+        }
+        $qb->select('COUNT(arg.id)');
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
 
     public function countAllByUsersId(array $ids): array
     {
@@ -185,11 +232,11 @@ class ArgumentRepository extends EntityRepository
             $qb->andWhere('a.type = :type')->setParameter('type', $type);
         }
 
-        if ('PUBLISHED_AT' === $field) {
+        if (ArgumentOrderField::PUBLISHED_AT === $field) {
             $qb->addOrderBy('a.createdAt', $direction);
         }
 
-        if ('VOTES' === $field) {
+        if (ArgumentOrderField::VOTES === $field) {
             $qb->addOrderBy('a.votesCount', $direction);
         }
 

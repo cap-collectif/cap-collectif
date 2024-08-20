@@ -1211,6 +1211,12 @@ enum ArgumentOrderField {
 
   """Allows ordering a list of arguments by the number of votes it have."""
   VOTES
+
+  """Allows ordering a list of arguments by when they were created."""
+  CREATED_AT
+
+  """Allows ordering a list of arguments by when they were updated."""
+  UPDATED_AT
 }
 
 """Value of an argument"""
@@ -13840,6 +13846,23 @@ type Query {
 
   """The navbar menu items."""
   menuItems: [MenuItem!]!
+
+  """List of arguments"""
+  arguments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """The ordering direction for the argument creation or updated date"""
+    orderBy: ArgumentOrder = {field: CREATED_AT, direction: DESC}
+
+    """The term to filter arguments on the body or the author username."""
+    term: String
+  ): ArgumentConnection!
 
   """List of comments"""
   comments(

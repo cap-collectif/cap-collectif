@@ -9,3 +9,9 @@ ArgumentOrderField:
             VOTES:
                 value: !php/const Capco\AppBundle\Enum\ArgumentOrderField::VOTES
                 description: 'Allows ordering a list of arguments by the number of votes it have.'
+            CREATED_AT:
+                value: !php/const Capco\AppBundle\Enum\ArgumentOrderField::CREATED_AT
+                description: 'Allows ordering a list of arguments by when they were created.'
+            UPDATED_AT:
+                value: !php/const Capco\AppBundle\Enum\ArgumentOrderField::UPDATED_AT
+                description: 'Allows ordering a list of arguments by when they were updated.'

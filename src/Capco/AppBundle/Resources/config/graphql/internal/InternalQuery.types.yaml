@@ -608,6 +608,24 @@ InternalQuery:
                 type: '[InternalMenuItem!]!'
                 description: 'The navbar menu items.'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemsResolver", [args])'
+            arguments:
+                type: 'ArgumentConnection!'
+                description: 'List of arguments'
+                access: "@=hasRole('ROLE_ADMIN')"
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentListResolver", [args])'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    orderBy:
+                        type: 'ArgumentOrder'
+                        defaultValue:
+                          {
+                              field: !php/const Capco\AppBundle\Enum\ArgumentOrderField::CREATED_AT,
+                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                          }
+                        description: 'The ordering direction for the argument creation or updated date'
+                    term:
+                        type: 'String'
+                        description: 'The term to filter arguments on the body or the author username.'
             comments:
                 type: 'CommentConnection!'
                 description: 'List of comments'
