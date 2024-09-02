@@ -5,7 +5,7 @@ import ChangeLanguageOnWebsiteHeader from '~ui/ChangeLanguageOnWebsiteHeader/Cha
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
 import { changeLocaleAction } from '~/redux/modules/user'
 import Fetcher from '~/services/Fetcher'
-import CookieMonster from '../../CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 type ReactRef<T> = {
   current: T | null | undefined
 }

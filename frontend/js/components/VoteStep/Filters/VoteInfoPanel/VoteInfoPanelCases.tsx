@@ -1,23 +1,11 @@
 import * as React from 'react'
-import { Heading, VoteInfo, Text, Flex, Icon, CapUIIcon, CapUIIconSize, Box, Button } from '@cap-collectif/ui'
+import { Heading, VoteInfo, Text, Box, Button } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import stripHtml from '@shared/utils/stripHTML'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import { View } from '../../utils'
 import { formatBigNumber } from '~/utils/bigNumberFormatter'
-
-const CheckInfo = ({ checked, label }: { checked?: boolean; label: string }) => (
-  <Flex alignItems="center">
-    <Icon name={CapUIIcon.Check} color={checked ? 'green.500' : 'neutral-gray.300'} size={CapUIIconSize.Md} />
-    <Box
-      ml={1}
-      sx={{ textDecoration: checked ? 'line-through' : null }}
-      color={checked ? 'neutral-gray.500' : 'neutral-gray.900'}
-    >
-      {label}
-    </Box>
-  </Flex>
-)
+import CheckInfo from '@shared/ui/CheckInfo'
 
 export const SimpleVote = ({ label, votesHelpText }: { label: string; votesHelpText: string }) => (
   <VoteInfo borderRadius="accordion">
@@ -88,12 +76,16 @@ export const VoteValidated = ({
               {hasVoteMin ? (
                 <CheckInfo
                   checked
+                  cross
                   label={intl.formatMessage({ id: 'vote_step.vote_min_checked' }, { num: votesMin })}
                 />
               ) : null}
-              {votesRanking ? <CheckInfo label={intl.formatMessage({ id: 'vote_step.rank_your_proposals' })} /> : null}
+              {votesRanking ? (
+                <CheckInfo cross label={intl.formatMessage({ id: 'vote_step.rank_your_proposals' })} />
+              ) : null}
               {votesLimit ? (
                 <CheckInfo
+                  cross
                   checked={votesLimit === viewerVotes}
                   label={intl.formatMessage({ id: 'vote_step.vote_max_checked' }, { num: votesLimit - viewerVotes })}
                 />

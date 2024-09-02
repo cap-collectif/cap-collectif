@@ -3121,10 +3121,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/form@^0.6.7":
-  version "0.6.7"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.6.7.tgz#8bfeb27c468db41aedc071e51cc1b1b786cd4365"
-  integrity sha512-Ml6PcW097z9azveMiLK8IZ51QznC29aaP0cj0yG21kQ/aDJIUqWd2+wMjhELQY0I//s9gmTbaCdxsjofACXBuA==
+"@cap-collectif/form@^0.6.9":
+  version "0.6.9"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/form/-/form-0.6.9.tgz#5b0a08bf964eee30ca96151da6d058cbb554f472"
+  integrity sha512-vH9Z9joCnYSgAn8NsutSVapfWMYfQ/h++dllld7v7fi7pn83mj7jzZALU2ywpT0Fx30016ZFQWFMox5V06TIuw==
   dependencies:
     react-places-autocomplete "^7.3.0"
 

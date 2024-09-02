@@ -1,0 +1,896 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="email"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.email
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="email"
+      autoFocus={true}
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="email.placeholder"
+      required={true}
+      type="email"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL cyrAGK"
+  >
+    <div
+      className="sc-bcXGCL bnGCIW cap-form-control"
+      role="group"
+    >
+      <label
+        className="sc-bcXGCL kossJj cap-form-label"
+        htmlFor="plainPassword"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <p
+          className="sc-bcXGCL gUkIhr cap-text"
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          registration.password
+        </p>
+      </label>
+      <input
+        aria-required={true}
+        autoComplete="off"
+        autoFocus={true}
+        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+        disabled={false}
+        id="password"
+        name="plainPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={true}
+        type="password"
+      />
+    </div>
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="username"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.fullname
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="username"
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      id="username"
+      minLength={2}
+      name="username"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="global.placeholder.name"
+      required={true}
+      type="text"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="responses.0.value"
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        &lt;mock-value-for-field-"title"&gt;
+      </p>
+      <p
+        className="sc-bcXGCL dYriFV cap-text"
+      >
+        global.optional
+      </p>
+    </label>
+    <span
+      className="sc-bcXGCL daHHgd cap-form-guideline"
+    >
+      &lt;mock-value-for-field-"helpText"&gt;
+    </span>
+    <div
+      className=" ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "<mock-value-for-field-"description">",
+        }
+      }
+    />
+    <input
+      aria-required={false}
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      id="responses.0.value"
+      name="responses.0.value"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      type="text"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL bHapUX"
+      htmlFor="charte"
+    >
+      <div
+        className="sc-bcXGCL NioVD cap-checkbox"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <input
+          aria-required={true}
+          className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+          disabled={false}
+          id="charte"
+          name="charte"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          required={true}
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+          type="checkbox"
+        />
+        <div
+          className="sc-bcXGCL jGpoql cap-checkbox__box"
+        />
+      </div>
+      <span
+        className="sc-bcXGCL bZxZKL"
+      >
+        <span
+          className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+        >
+          registration.charte
+        </span>
+      </span>
+    </label>
+  </div>,
+  <div
+    id="recaptcha"
+    style={
+      {
+        "transform": "scale(0.85)",
+        "transformOrigin": "0 0",
+      }
+    }
+  />,
+]
+`;
+
+exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="email"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.email
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="email"
+      autoFocus={true}
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="email.placeholder"
+      required={true}
+      type="email"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL cyrAGK"
+  >
+    <div
+      className="sc-bcXGCL bnGCIW cap-form-control"
+      role="group"
+    >
+      <label
+        className="sc-bcXGCL kossJj cap-form-label"
+        htmlFor="plainPassword"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <p
+          className="sc-bcXGCL gUkIhr cap-text"
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          registration.password
+        </p>
+      </label>
+      <input
+        aria-required={true}
+        autoComplete="off"
+        autoFocus={true}
+        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+        disabled={false}
+        id="password"
+        name="plainPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={true}
+        type="password"
+      />
+    </div>
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="username"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.fullname
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="username"
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      id="username"
+      minLength={2}
+      name="username"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="global.placeholder.name"
+      required={true}
+      type="text"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="userType"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        registration.type
+      </p>
+      <p
+        className="sc-bcXGCL dYriFV cap-text"
+      >
+        global.optional
+      </p>
+    </label>
+    <div
+      className="sc-bcXGCL gLAKX"
+    >
+      <div
+        className="cap-select css-b62m3t-container"
+        onKeyDown={[Function]}
+      >
+        <span
+          className="css-1f43avz-a11yText-A11yText"
+          id="react-select-2-live-region"
+        />
+        <span
+          aria-atomic="false"
+          aria-live="polite"
+          aria-relevant="additions text"
+          className="css-1f43avz-a11yText-A11yText"
+        />
+        <div
+          className="cap-select__control css-17ru8n9-control"
+          onMouseDown={[Function]}
+          onTouchEnd={[Function]}
+        >
+          <div
+            className="cap-select__value-container css-1gsi9wd-ValueContainer"
+          >
+            <div
+              className="cap-select__placeholder css-1crio4g-placeholder"
+              id="react-select-2-placeholder"
+            >
+              registration.type
+            </div>
+            <div
+              className="cap-select__input-container css-nplzcd-Input"
+              data-value=""
+            >
+              <input
+                aria-autocomplete="list"
+                aria-controls="react-select-2-listbox"
+                aria-describedby="react-select-2-placeholder"
+                aria-expanded={false}
+                aria-haspopup={true}
+                aria-owns="react-select-2-listbox"
+                autoCapitalize="none"
+                autoComplete="off"
+                autoCorrect="off"
+                className="cap-select__input"
+                disabled={false}
+                id="userType"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                role="combobox"
+                spellCheck="false"
+                style={
+                  {
+                    "background": 0,
+                    "border": 0,
+                    "color": "inherit",
+                    "font": "inherit",
+                    "gridArea": "1 / 2",
+                    "label": "input",
+                    "margin": 0,
+                    "minWidth": "2px",
+                    "opacity": 1,
+                    "outline": 0,
+                    "padding": 0,
+                    "width": "100%",
+                  }
+                }
+                tabIndex={0}
+                type="text"
+                value=""
+              />
+            </div>
+          </div>
+          <svg
+            className="sc-bcXGCL sc-eJDTud jThTHJ knzWyK cap-icon"
+            fill="none"
+            onClick={[Function]}
+            style={
+              {
+                "cursor": "pointer",
+              }
+            }
+            viewBox="0 0 12 7"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M6 7c.164 0 .326-.032.475-.095.15-.063.283-.155.392-.27l4.916-5.216a.827.827 0 00.214-.62.845.845 0 00-.311-.584.968.968 0 00-.66-.214.954.954 0 00-.632.277l-4.3 4.562a.133.133 0 01-.188 0L1.606.278A.954.954 0 00.974.001a.967.967 0 00-.66.214A.845.845 0 00.003.8a.827.827 0 00.214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097z"
+              fill="currentColor"
+            />
+          </svg>
+        </div>
+        <input
+          name="userType"
+          type="hidden"
+          value=""
+        />
+      </div>
+    </div>
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="responses.0.value"
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        &lt;mock-value-for-field-"title"&gt;
+      </p>
+      <p
+        className="sc-bcXGCL dYriFV cap-text"
+      >
+        global.optional
+      </p>
+    </label>
+    <span
+      className="sc-bcXGCL daHHgd cap-form-guideline"
+    >
+      &lt;mock-value-for-field-"helpText"&gt;
+    </span>
+    <div
+      className=" ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "<mock-value-for-field-"description">",
+        }
+      }
+    />
+    <input
+      aria-required={false}
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      id="responses.0.value"
+      name="responses.0.value"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      type="text"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL bHapUX"
+      htmlFor="charte"
+    >
+      <div
+        className="sc-bcXGCL NioVD cap-checkbox"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <input
+          aria-required={true}
+          className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+          disabled={false}
+          id="charte"
+          name="charte"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          required={true}
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+          type="checkbox"
+        />
+        <div
+          className="sc-bcXGCL jGpoql cap-checkbox__box"
+        />
+      </div>
+      <span
+        className="sc-bcXGCL bZxZKL"
+      >
+        <span
+          className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+        >
+          registration.charte
+        </span>
+      </span>
+    </label>
+  </div>,
+]
+`;
+
+exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="email"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.email
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="email"
+      autoFocus={true}
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      name="email"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="email.placeholder"
+      required={true}
+      type="email"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL cyrAGK"
+  >
+    <div
+      className="sc-bcXGCL bnGCIW cap-form-control"
+      role="group"
+    >
+      <label
+        className="sc-bcXGCL kossJj cap-form-label"
+        htmlFor="plainPassword"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <p
+          className="sc-bcXGCL gUkIhr cap-text"
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          registration.password
+        </p>
+      </label>
+      <input
+        aria-required={true}
+        autoComplete="off"
+        autoFocus={true}
+        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+        disabled={false}
+        id="password"
+        name="plainPassword"
+        onBlur={[Function]}
+        onChange={[Function]}
+        onFocus={[Function]}
+        required={true}
+        type="password"
+      />
+    </div>
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="username"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        global.fullname
+      </p>
+    </label>
+    <input
+      aria-required={true}
+      autoComplete="username"
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      id="username"
+      minLength={2}
+      name="username"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      placeholder="global.placeholder.name"
+      required={true}
+      type="text"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="zipcode"
+      style={
+        {
+          "marginLeft": 0,
+          "marginTop": 0,
+        }
+      }
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        user.register.zipcode
+      </p>
+      <p
+        className="sc-bcXGCL dYriFV cap-text"
+      >
+        global.optional
+      </p>
+    </label>
+    <input
+      autoComplete="postal-code"
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      name="zipcode"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      type="text"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL kossJj cap-form-label"
+      htmlFor="responses.0.value"
+    >
+      <p
+        className="sc-bcXGCL gUkIhr cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        &lt;mock-value-for-field-"title"&gt;
+      </p>
+      <p
+        className="sc-bcXGCL dYriFV cap-text"
+      >
+        global.optional
+      </p>
+    </label>
+    <span
+      className="sc-bcXGCL daHHgd cap-form-guideline"
+    >
+      &lt;mock-value-for-field-"helpText"&gt;
+    </span>
+    <div
+      className=" ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "<mock-value-for-field-"description">",
+        }
+      }
+    />
+    <input
+      aria-required={false}
+      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      disabled={false}
+      id="responses.0.value"
+      name="responses.0.value"
+      onBlur={[Function]}
+      onChange={[Function]}
+      onFocus={[Function]}
+      required={false}
+      type="text"
+    />
+  </div>,
+  <div
+    className="sc-bcXGCL kxTfnk cap-form-control"
+    role="group"
+  >
+    <label
+      className="sc-bcXGCL bHapUX"
+      htmlFor="charte"
+    >
+      <div
+        className="sc-bcXGCL NioVD cap-checkbox"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        <input
+          aria-required={true}
+          className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+          disabled={false}
+          id="charte"
+          name="charte"
+          onBlur={[Function]}
+          onChange={[Function]}
+          onFocus={[Function]}
+          required={true}
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+          type="checkbox"
+        />
+        <div
+          className="sc-bcXGCL jGpoql cap-checkbox__box"
+        />
+      </div>
+      <span
+        className="sc-bcXGCL bZxZKL"
+      >
+        <span
+          className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+        >
+          registration.charte
+        </span>
+      </span>
+    </label>
+  </div>,
+]
+`;

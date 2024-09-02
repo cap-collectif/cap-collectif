@@ -1,21 +1,17 @@
 import React, { useState, useRef, useEffect } from 'react'
 import { useIntl } from 'react-intl'
-import { graphql, QueryRenderer } from 'react-relay'
 import styled from 'styled-components'
 import { connect } from 'react-redux'
 import TabsBar from '../Ui/TabsBar/TabsBar'
 import NavigationSkip from './NavigationSkip'
 import NavbarToggle from './NavbarToggle'
 import * as S from './styles'
-import RegistrationModal from '~/components/User/Registration/RegistrationModal'
 import LanguageHeader from '~/components/Navbar/LanguageHeader'
 import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
 import type { GlobalState } from '~/types'
 import { useBoundingRect } from '~/utils/hooks/useBoundingRect'
 import { useEventListener } from '@shared/hooks/useEventListener'
 import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader'
-import environment, { graphqlError } from '~/createRelayEnvironment'
-import type { NavbarQuery$data } from '~relay/NavbarQuery.graphql'
 import type { Item } from './Navbar.type'
 import Flex from '~ui/Primitives/Layout/Flex'
 import NavBarQuery from '@shared/navbar/NavBarQuery'
@@ -23,6 +19,8 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import NavbarRight from '~/components/Navbar/NavbarRight'
 import NavBarMenu from '@shared/navbar/menu/NavBarMenu'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
+import ChartModal from '@shared/register/ChartModal'
+import PrivacyModal from '@shared/register/PrivacyModal'
 
 type LanguageProps = {
   currentRouteParams: []
@@ -83,23 +81,6 @@ export const Navbar = ({
     setLogoLoaded(true)
   }
 
-  const renderRegistrationForm = ({
-    error,
-    props,
-  }: ReactRelayReadyState & {
-    props: NavbarQuery$data | null | undefined
-  }) => {
-    if (error) {
-      console.log(error) // eslint-disable-line no-console
-
-      return graphqlError
-    }
-
-    // @ts-ignore
-    if (props) return <RegistrationModal query={props} locale={currentLanguage} />
-    return null
-  }
-
   useEventListener('resize', handleResize)
 
   useEventListener('set-breadcrumb', (e: MessageEvent) => {
@@ -114,20 +95,6 @@ export const Navbar = ({
 
   return (
     <>
-      {!isAuthenticated && (
-        <>
-          <QueryRenderer
-            environment={environment as any}
-            query={graphql`
-              query NavbarQuery {
-                ...RegistrationModal_query
-              }
-            `}
-            variables={{}}
-            render={renderRegistrationForm}
-          />
-        </>
-      )}
       {isMultilangueEnabled && setLocaleHeaderVisible && preferredLanguage !== currentLanguage ? (
         <LanguageHeader
           innerRef={ref}
@@ -145,6 +112,8 @@ export const Navbar = ({
       ) : null}
       {newNavbar ? (
         <React.Suspense fallback={null}>
+          <ChartModal />
+          <PrivacyModal />
           <NavBarQuery>
             <Flex alignItems="center" justifyContent="center">
               {isAuthenticated ? (
@@ -192,6 +161,10 @@ export const Navbar = ({
                         {items.length > 0 && <TabsBar items={items} />}
 
                         <Flex direction="row" pl={4} height="100%" flex="0 0 auto">
+                          <React.Suspense>
+                            <ChartModal />
+                            <PrivacyModal />
+                          </React.Suspense>
                           <NavbarRight currentLanguage={currentLanguage} />
                         </Flex>
                       </S.NavigationContentDesktop>
@@ -201,6 +174,10 @@ export const Navbar = ({
                       {items.length > 0 && <TabsBar items={items} />}
 
                       <Flex direction="column" height="100%" flex="0 0 auto" width="100%">
+                        <React.Suspense>
+                          <ChartModal />
+                          <PrivacyModal />
+                        </React.Suspense>
                         <NavbarRight currentLanguage={currentLanguage} />
                       </Flex>
                     </S.NavigationContentMobile>

@@ -30,7 +30,7 @@ import ConfirmPasswordModal, { passwordForm } from '~/components/User/ConfirmPas
 import { resendConfirmation, cancelEmailChange, accountForm as formName } from '~/redux/modules/user'
 import DeleteAccountModal from '~/components/User/DeleteAccountModal'
 import type { AccountForm_viewer } from '~relay/AccountForm_viewer.graphql'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import UpdateProfileAccountEmailMutation from '~/mutations/UpdateProfileAccountEmailMutation'
 import UpdateProfileAccountLocaleMutation from '~/mutations/UpdateProfileAccountLocaleMutation'
 import type {

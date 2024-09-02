@@ -1,13 +1,13 @@
 import * as React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 import { toast, Button, FormLabel, Modal, Heading, CapUIModalSize } from '@cap-collectif/ui'
 import { FormControl, FieldInput } from '@cap-collectif/form'
 import { useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import SubscribeToEventAsNonRegisteredMutation from '~/mutations/SubscribeToEventAsNonRegisteredMutation'
 import ResetCss from '~/utils/ResetCss'
-import type { Dispatch, GlobalState } from '~/types'
-import { ChartLinkComponent, PrivacyPolicyComponent } from '~/components/User/Registration/RegistrationForm'
+import type { GlobalState } from '~/types'
+import { ChartLinkComponent, PrivacyPolicyComponent } from '@shared/register/RegistrationForm'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 type Props = {
   readonly eventId: string
@@ -21,7 +21,6 @@ export const EventFormAnonymousModal = ({ eventId, register }: Props) => {
   const intl = useIntl()
   const privacyPolicyRequired = useFeatureFlag('privacy_policy')
   const cguName = useSelector((state: GlobalState) => state.default.parameters['signin.cgu.name'])
-  const dispatch: Dispatch = useDispatch()
   const { handleSubmit, formState, control, reset, setError } = useForm({
     mode: 'onChange',
   })
@@ -115,7 +114,7 @@ export const EventFormAnonymousModal = ({ eventId, register }: Props) => {
                     fontWeight: 'normal',
                   }}
                 >
-                  <ChartLinkComponent cguName={cguName} dispatch={dispatch} />
+                  <ChartLinkComponent cguName={cguName} />
                   <PrivacyPolicyComponent privacyPolicyRequired={privacyPolicyRequired} />
                 </span>
               </FieldInput>

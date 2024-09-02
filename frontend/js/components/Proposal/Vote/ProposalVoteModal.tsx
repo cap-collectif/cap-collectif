@@ -41,7 +41,7 @@ import generateValidationSchema from '~/components/Proposal/Vote/utils/generateV
 import { ProposalVoteModalContainer, ProposalVoteMultiModalContainer } from './ProposalVoteModal.style'
 import VoteMinAlert from '~/components/Project/Votes/VoteMinAlert'
 import formatPhoneNumber from '~/utils/formatPhoneNumber'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import isIos from '~/utils/isIos'
 import focusOnClose from './utils/focusOnClose'

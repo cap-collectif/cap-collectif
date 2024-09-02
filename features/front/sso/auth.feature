@@ -26,6 +26,7 @@ Scenario: Logged in from ssoOauth2 user wants to soft delete his account
   Given feature "login_openid" is enabled
   Then enable sso provider "ssoOauth2"
   And I visited "home page"
+  And I wait "#login-button" to appear on current page maximum 20
   When I press "global.login"
   Then I authenticate with openid
   Then I should be redirected to "/"

@@ -36,7 +36,7 @@ import ModalModerateArgumentMobile from '~/components/Debate/Page/Arguments/Moda
 import type { ArgumentReported } from '~/components/Debate/Page/Arguments/ModalReportArgument'
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context'
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 type Props = AppBoxProps & {
   readonly onReadMore?: () => void
   readonly argument: ArgumentCard_argument

@@ -1,0 +1,709 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationModal /> renders closed modal 1`] = `
+<div
+  className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+/>
+`;
+
+exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    aria-label="global.register"
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bcXGCL doARmI sc-gsGkXq gTDlYD cap-modal"
+        style={
+          {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+            "zIndex": 9000,
+          }
+        }
+      >
+        <header
+          className="sc-bcXGCL gUHbRp cap-modal__header"
+        >
+          <div
+            className="sc-bcXGCL eotpTW"
+          >
+            <h4
+              className="sc-bcXGCL jraRHV cap-heading"
+              id="modal-title"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              global.register
+            </h4>
+          </div>
+          <button
+            aria-describedby="modal-title"
+            className="sc-bcXGCL gBxHlP"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bcXGCL laGNWx cap-modal__body"
+        >
+          <div
+            className="sc-bcXGCL PXCEG"
+          >
+            <div
+              className=" ql-editor wysiwyg-render"
+              dangerouslySetInnerHTML={
+                {
+                  "__html": "Jsuis o top",
+                }
+              }
+            />
+          </div>
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL kossJj cap-form-label"
+              htmlFor="email"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              <p
+                className="sc-bcXGCL gUkIhr cap-text"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                global.email
+              </p>
+            </label>
+            <input
+              aria-required={true}
+              autoComplete="email"
+              autoFocus={true}
+              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              disabled={false}
+              name="email"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="email.placeholder"
+              required={true}
+              type="email"
+            />
+          </div>
+          <div
+            className="sc-bcXGCL cyrAGK"
+          >
+            <div
+              className="sc-bcXGCL bnGCIW cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bcXGCL kossJj cap-form-label"
+                htmlFor="plainPassword"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bcXGCL gUkIhr cap-text"
+                  style={
+                    {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  registration.password
+                </p>
+              </label>
+              <input
+                aria-required={true}
+                autoComplete="off"
+                autoFocus={true}
+                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                disabled={false}
+                id="password"
+                name="plainPassword"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={true}
+                type="password"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL kossJj cap-form-label"
+              htmlFor="username"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              <p
+                className="sc-bcXGCL gUkIhr cap-text"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                global.fullname
+              </p>
+            </label>
+            <input
+              aria-required={true}
+              autoComplete="username"
+              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              disabled={false}
+              id="username"
+              minLength={2}
+              name="username"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="global.placeholder.name"
+              required={true}
+              type="text"
+            />
+          </div>
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL kossJj cap-form-label"
+              htmlFor="responses.0.value"
+            >
+              <p
+                className="sc-bcXGCL gUkIhr cap-text"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                &lt;mock-value-for-field-"title"&gt;
+              </p>
+              <p
+                className="sc-bcXGCL dYriFV cap-text"
+              >
+                global.optional
+              </p>
+            </label>
+            <span
+              className="sc-bcXGCL daHHgd cap-form-guideline"
+            >
+              &lt;mock-value-for-field-"helpText"&gt;
+            </span>
+            <div
+              className=" ql-editor wysiwyg-render"
+              dangerouslySetInnerHTML={
+                {
+                  "__html": "<mock-value-for-field-"description">",
+                }
+              }
+            />
+            <input
+              aria-required={false}
+              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              disabled={false}
+              id="responses.0.value"
+              name="responses.0.value"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={false}
+              type="text"
+            />
+          </div>
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL bHapUX"
+              htmlFor="charte"
+            >
+              <div
+                className="sc-bcXGCL NioVD cap-checkbox"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <input
+                  aria-required={true}
+                  className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+                  disabled={false}
+                  id="charte"
+                  name="charte"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={true}
+                  style={
+                    {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                  type="checkbox"
+                />
+                <div
+                  className="sc-bcXGCL jGpoql cap-checkbox__box"
+                />
+              </div>
+              <span
+                className="sc-bcXGCL bZxZKL"
+              >
+                <span
+                  className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+                >
+                  registration.charte
+                </span>
+              </span>
+            </label>
+          </div>
+          <div
+            className="text-center small excerpt mt-15 ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              {
+                "__html": "Jsuis o bottom",
+              }
+            }
+          />
+        </main>
+        <footer
+          className="sc-bcXGCL bzOqHT cap-modal__footer"
+        >
+          <button
+            className="sc-bcXGCL sc-laZSpB laxoCi zPAHL cap-button"
+            onClick={[Function]}
+            style={
+              {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+            type="button"
+          >
+            global.cancel
+          </button>
+          <button
+            className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            id="confirm-login"
+            onClick={[Function]}
+            type="submit"
+          >
+            global.register
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<RegistrationModal /> renders only form 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    aria-label="global.register"
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bcXGCL doARmI sc-gsGkXq gTDlYD cap-modal"
+        style={
+          {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+            "zIndex": 9000,
+          }
+        }
+      >
+        <header
+          className="sc-bcXGCL gUHbRp cap-modal__header"
+        >
+          <div
+            className="sc-bcXGCL eotpTW"
+          >
+            <h4
+              className="sc-bcXGCL jraRHV cap-heading"
+              id="modal-title"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              global.register
+            </h4>
+          </div>
+          <button
+            aria-describedby="modal-title"
+            className="sc-bcXGCL gBxHlP"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bcXGCL laGNWx cap-modal__body"
+        >
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL kossJj cap-form-label"
+              htmlFor="email"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              <p
+                className="sc-bcXGCL gUkIhr cap-text"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                global.email
+              </p>
+            </label>
+            <input
+              aria-required={true}
+              autoComplete="email"
+              autoFocus={true}
+              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              disabled={false}
+              name="email"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="email.placeholder"
+              required={true}
+              type="email"
+            />
+          </div>
+          <div
+            className="sc-bcXGCL cyrAGK"
+          >
+            <div
+              className="sc-bcXGCL bnGCIW cap-form-control"
+              role="group"
+            >
+              <label
+                className="sc-bcXGCL kossJj cap-form-label"
+                htmlFor="plainPassword"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <p
+                  className="sc-bcXGCL gUkIhr cap-text"
+                  style={
+                    {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                >
+                  registration.password
+                </p>
+              </label>
+              <input
+                aria-required={true}
+                autoComplete="off"
+                autoFocus={true}
+                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                disabled={false}
+                id="password"
+                name="plainPassword"
+                onBlur={[Function]}
+                onChange={[Function]}
+                onFocus={[Function]}
+                required={true}
+                type="password"
+              />
+            </div>
+          </div>
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL kossJj cap-form-label"
+              htmlFor="username"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              <p
+                className="sc-bcXGCL gUkIhr cap-text"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                global.fullname
+              </p>
+            </label>
+            <input
+              aria-required={true}
+              autoComplete="username"
+              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              disabled={false}
+              id="username"
+              minLength={2}
+              name="username"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              placeholder="global.placeholder.name"
+              required={true}
+              type="text"
+            />
+          </div>
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL kossJj cap-form-label"
+              htmlFor="responses.0.value"
+            >
+              <p
+                className="sc-bcXGCL gUkIhr cap-text"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                &lt;mock-value-for-field-"title"&gt;
+              </p>
+              <p
+                className="sc-bcXGCL dYriFV cap-text"
+              >
+                global.optional
+              </p>
+            </label>
+            <span
+              className="sc-bcXGCL daHHgd cap-form-guideline"
+            >
+              &lt;mock-value-for-field-"helpText"&gt;
+            </span>
+            <div
+              className=" ql-editor wysiwyg-render"
+              dangerouslySetInnerHTML={
+                {
+                  "__html": "<mock-value-for-field-"description">",
+                }
+              }
+            />
+            <input
+              aria-required={false}
+              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              disabled={false}
+              id="responses.0.value"
+              name="responses.0.value"
+              onBlur={[Function]}
+              onChange={[Function]}
+              onFocus={[Function]}
+              required={false}
+              type="text"
+            />
+          </div>
+          <div
+            className="sc-bcXGCL kxTfnk cap-form-control"
+            role="group"
+          >
+            <label
+              className="sc-bcXGCL bHapUX"
+              htmlFor="charte"
+            >
+              <div
+                className="sc-bcXGCL NioVD cap-checkbox"
+                style={
+                  {
+                    "marginLeft": 0,
+                    "marginTop": 0,
+                  }
+                }
+              >
+                <input
+                  aria-required={true}
+                  className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+                  disabled={false}
+                  id="charte"
+                  name="charte"
+                  onBlur={[Function]}
+                  onChange={[Function]}
+                  onFocus={[Function]}
+                  required={true}
+                  style={
+                    {
+                      "marginLeft": 0,
+                      "marginTop": 0,
+                    }
+                  }
+                  type="checkbox"
+                />
+                <div
+                  className="sc-bcXGCL jGpoql cap-checkbox__box"
+                />
+              </div>
+              <span
+                className="sc-bcXGCL bZxZKL"
+              >
+                <span
+                  className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+                >
+                  registration.charte
+                </span>
+              </span>
+            </label>
+          </div>
+        </main>
+        <footer
+          className="sc-bcXGCL bzOqHT cap-modal__footer"
+        >
+          <button
+            className="sc-bcXGCL sc-laZSpB laxoCi zPAHL cap-button"
+            onClick={[Function]}
+            style={
+              {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+            type="button"
+          >
+            global.cancel
+          </button>
+          <button
+            className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            id="confirm-login"
+            onClick={[Function]}
+            type="submit"
+          >
+            global.register
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

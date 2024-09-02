@@ -4,6 +4,14 @@ import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import { FormProvider, useForm } from 'react-hook-form'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
+type FormValues = {
+  email: string
+  password: string
+  displayCaptcha?: boolean
+  captcha?: string | null
+  onSuccessAction?: () => void
+}
+
 const LOGIN_WRONG_CREDENTIALS = 'Bad credentials.'
 const MISSING_CAPTCHA = 'You must provide a captcha to login.'
 
@@ -12,13 +20,13 @@ export const LoginFormWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
   const intl = useIntl()
   const restrictConnection = useFeatureFlag('restrict_connection')
 
-  const methods = useForm<any>({
+  const methods = useForm<FormValues & { _error: any }>({
     mode: 'onSubmit',
   })
 
   const { handleSubmit, setError, setValue, clearErrors } = methods
 
-  const onSubmit = data => {
+  const onSubmit = (data: FormValues) => {
     if (!data.password || data.password.length < 1)
       return setError('_error', { message: 'your-email-address-or-password-is-incorrect' })
 

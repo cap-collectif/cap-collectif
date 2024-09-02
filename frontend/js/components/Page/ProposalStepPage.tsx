@@ -20,7 +20,7 @@ import { formatGeoJsons } from '~/utils/geojson'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import StepEvents from '../Steps/StepEvents'
 import ProposalVoteBasketWidget from '../Proposal/Vote/ProposalVoteBasketWidget'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import MediatorAddVotesLink from './MediatorAddVotesLink'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 

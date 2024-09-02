@@ -3,7 +3,7 @@ import { FormattedMessage } from 'react-intl'
 import { connect } from 'react-redux'
 import { Jumbotron } from 'react-bootstrap'
 import classNames from 'classnames'
-import LoginButton from '../User/Login/LoginButton'
+import { LoginButtonQueryWrapper } from '@shared/login/LoginButton'
 import type { State } from '../../types'
 
 type Props = {
@@ -27,7 +27,7 @@ export const VisibilityBox = ({ user, children, enabled }: Props) => {
           <FormattedMessage id="proposal.private.show_login" />
         </p>
         <p>
-          <LoginButton bsStyle="primary" />
+          <LoginButtonQueryWrapper />
         </p>
       </Jumbotron>
     )

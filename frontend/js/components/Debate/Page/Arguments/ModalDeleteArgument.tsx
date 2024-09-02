@@ -11,7 +11,7 @@ import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { formatConnectionPath } from '~/shared/utils/relay'
 import { mediaQueryMobile } from '~/utils/sizes'
 import DeleteModal from '~/components/Modal/DeleteModal'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 type Props = {
   onClose: () => void

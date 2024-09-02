@@ -5,7 +5,7 @@ import { Button, Modal, CapUIModalSize, Heading, Text, toast } from '@cap-collec
 import type { DeleteReplyModal_reply } from '~relay/DeleteReplyModal_reply.graphql'
 import DeleteAnonymousReplyMutation from '~/mutations/DeleteAnonymousReplyMutation'
 import DeleteUserReplyMutation from '~/mutations/DeleteUserReplyMutation'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import Icon from '@shared/ui/LegacyIcons/Icon'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'

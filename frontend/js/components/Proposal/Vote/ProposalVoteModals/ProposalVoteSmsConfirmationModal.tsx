@@ -27,7 +27,7 @@ import SendSmsProposalVoteMutation from '~/mutations/SendSmsProposalVoteMutation
 import type { AddProposalSmsVoteMutationResponse } from '~relay/AddProposalSmsVoteMutation.graphql'
 import type { VerifySmsVotePhoneNumberMutationResponse } from '~relay/VerifySmsVotePhoneNumberMutation.graphql'
 import type { SendSmsProposalVoteMutationResponse } from '~relay/SendSmsProposalVoteMutation.graphql'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import type { Status } from '~/components/Proposal/Vote/ProposalSmsVoteModal'
 import ResetCss from '~/utils/ResetCss'
 import type { ProposalVoteSmsConfirmationModal_step$key } from '~relay/ProposalVoteSmsConfirmationModal_step.graphql'
@@ -115,7 +115,7 @@ const ProposalVoteSmsConfirmationModal = ({
               id: 'CODE_EXPIRED',
             }),
           })
-          return;
+          return
         }
 
         if (verifyCodeErrorCode === 'CODE_NOT_VALID') {
@@ -125,12 +125,12 @@ const ProposalVoteSmsConfirmationModal = ({
               id: 'CODE_NOT_VALID',
             }),
           })
-          return;
+          return
         }
 
         if (verifyCodeErrorCode === 'TWILIO_API_ERROR') {
           mutationErrorToast(intl)
-          return;
+          return
         }
 
         const token = verifyCodeResponse.verifySmsVotePhoneNumber?.token ?? ''

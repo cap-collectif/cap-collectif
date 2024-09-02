@@ -15,14 +15,14 @@ Scenario: An expired invitation should redirect to homepage
 Scenario: A user which has been invited should be able to register
   When I visited "invitation page" with:
     | token | oniiiichaaan |
-  And I wait "#registration-form-responses0" to appear on current page
+  And I wait "#responses\\.0\\.value" to appear on current page
   And I fill in the following:
     | username             | RemChanDaiSki             |
     | password             | RemChanDaiSki93160   |
     | zipcode              | 93160                |
-    | responses[0].value   | plop                 |
-  And I select "Citoyen" from "user_type"
-  And I select "Sangohan" from react "#registration-form-responses2"
+    | responses.0.value    | plop                 |
+  And I select "Citoyen" from ds select "#userType"
+  And I select "Sangohan" from ds select "#responses-select-2"
   And I scroll to element "#confirm-register"
   And I check element "charte"
   And should see an "div[id^=turnstile_captcha-]" element
@@ -37,14 +37,14 @@ Scenario: A user which has been invited should be able to register even with shi
   Given feature "shield_mode" is enabled
   When I visited "invitation page" with:
     | token | oniiiichaaan |
-  And I wait "#registration-form-responses0" to appear on current page
+  And I wait "#responses\\.0\\.value" to appear on current page
   And I fill in the following:
     | username             | RemChanDaiSki             |
     | password             | RemChanDaiSki93160   |
     | zipcode              | 93160                |
-    | responses[0].value   | plop                 |
-  And I select "Citoyen" from "user_type"
-  And I select "Sangohan" from react "#registration-form-responses2"
+    | responses.0.value    | plop                 |
+  And I select "Citoyen" from ds select "#userType"
+  And I select "Sangohan" from ds select "#responses-select-2"
   And I scroll to element "#confirm-register"
   And I check element "charte"
   And should see an "div[id^=turnstile_captcha-]" element
@@ -59,14 +59,14 @@ Scenario: A user which has been invited should be able to register even when reg
   Given I disable feature "registration"
   When I visited "invitation page" with:
     | token | oniiiichaaan |
-  And I wait "#registration-form-responses0" to appear on current page
+  And I wait "#responses\\.0\\.value" to appear on current page
   And I fill in the following:
     | username             | RemChanDaiSki             |
     | password             | RemChanDaiSki93160   |
     | zipcode              | 93160                |
-    | responses[0].value   | plop                 |
-  And I select "Citoyen" from "user_type"
-  And I select "Sangohan" from react "#registration-form-responses2"
+    | responses.0.value    | plop                 |
+  And I select "Citoyen" from ds select "#userType"
+  And I select "Sangohan" from ds select "#responses-select-2"
   And I scroll to element "#confirm-register"
   And I check element "charte"
   And should see an "div[id^=turnstile_captcha-]" element

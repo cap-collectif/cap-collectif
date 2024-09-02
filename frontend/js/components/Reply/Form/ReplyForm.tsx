@@ -49,7 +49,7 @@ import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import RequirementsFormLegacy, {
   formName as RequirementsFormLegacyName,
 } from '~/components/Requirements/RequirementsFormLegacy'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { isEmail } from '~/services/Validator'
 import Captcha from '~/components/Form/Captcha'
 import { SPACES_SCALES } from '~/styles/theme/base'

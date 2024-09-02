@@ -20,7 +20,7 @@ Scenario: Anonymous should see shield and can register
   And I visited "home page"
   And I wait "#shield-mode" to appear on current page
   And I wait "#shield-agent" to appear on current page
-  And I wait ".btn--registration" to appear on current page
+  And I wait "#registration-button" to appear on current page
   Then I should see the shield
   Then I should see "global.registration" within 5 seconds
 

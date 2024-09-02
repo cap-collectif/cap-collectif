@@ -9,7 +9,7 @@ import autosize from 'autosize'
 import { Button, Col, Row } from 'react-bootstrap'
 import { connect } from 'react-redux'
 import renderComponent from '../Form/Field'
-import RegistrationButton from '../User/Registration/RegistrationButton'
+import { openRegistrationModal } from '@shared/register/RegistrationButton'
 import { Button as DSButton } from '@cap-collectif/ui'
 import { UserAvatarLegacy } from '../User/UserAvatarLegacy'
 import AddCommentMutation from '../../mutations/AddCommentMutation'
@@ -18,7 +18,7 @@ import type { CommentForm_commentable } from '~relay/CommentForm_commentable.gra
 import { toast } from '~ds/Toast'
 import { baseUrl } from '~/config'
 import { loginWithOpenID } from '~/redux/modules/default'
-import { openLoginModal } from '../User/Login/LoginButton'
+import { openLoginModal } from '@shared/login/LoginButton'
 
 type RelayProps = {
   readonly commentable: CommentForm_commentable
@@ -166,7 +166,15 @@ export class CommentForm extends React.Component<Props, State> {
               <p>
                 <FormattedMessage id="comment.with_my_account" />
               </p>
-              <RegistrationButton />
+              <DSButton
+                variant="secondary"
+                justifyContent="center"
+                onClick={() => {
+                  dispatchEvent(new Event(openRegistrationModal))
+                }}
+              >
+                {intl.formatMessage({ id: 'global.registration' })}
+              </DSButton>
               <DSButton
                 id="login-button"
                 variant="primary"

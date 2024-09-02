@@ -55,7 +55,13 @@ exports[`<CommentForm /> should render correctly 1`] = `
                   values={Object {}}
                 />
               </p>
-              <Connect(injectIntl(RegistrationButton)) />
+              <Button
+                justifyContent="center"
+                onClick={[Function]}
+                variant="secondary"
+              >
+                global.registration
+              </Button>
               <Button
                 aria-label="open.connection_modal"
                 display="block"

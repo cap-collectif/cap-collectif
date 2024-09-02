@@ -11,7 +11,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import ProposalStepPage from '~/components/Page/ProposalStepPage'
 import { ProjectTrash } from '~/startup/ProjectStepPageAppTrash'
 import VoteStepPageDescription from './VoteStepPageDescription'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { dispatchNavBarEvent } from '@shared/navbar/NavBar.utils'
 import { useIntl } from 'react-intl'
 

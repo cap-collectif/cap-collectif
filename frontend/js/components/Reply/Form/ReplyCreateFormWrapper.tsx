@@ -7,8 +7,8 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { Alert } from 'react-bootstrap'
 import type { ReplyCreateFormWrapper_questionnaire } from '~relay/ReplyCreateFormWrapper_questionnaire.graphql'
 import '~relay/ReplyCreateFormWrapper_questionnaire.graphql'
-import LoginButton from '~/components/User/Login/LoginButton'
-import RegistrationButton from '~/components/User/Registration/RegistrationButton'
+import { LoginButtonQueryWrapper } from '@shared/login/LoginButton'
+import { RegistrationButtonQueryWrapper } from '@shared/register/RegistrationButton'
 import ReplyForm from './ReplyForm'
 import type { User } from '~/redux/modules/user'
 import '~/redux/modules/user'
@@ -40,13 +40,13 @@ export const ReplyCreateFormWrapper = ({ questionnaire, user, setIsShow }: Props
           <strong>
             <FormattedMessage id="reply.not_logged_in.error" />
           </strong>
-          <RegistrationButton
+          <RegistrationButtonQueryWrapper
             bsStyle="primary"
             style={{
               marginLeft: '10px',
             }}
           />
-          <LoginButton
+          <LoginButtonQueryWrapper
             style={{
               marginLeft: 5,
             }}

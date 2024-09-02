@@ -7,7 +7,7 @@ import type { State } from '~/types'
 import type { ProposalPageQuery$data } from '~relay/ProposalPageQuery.graphql'
 import ProposalPageLogic from './ProposalPageLogic'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 export type Props = {
   readonly proposalSlug: string
   readonly currentVotableStepId: string | null | undefined

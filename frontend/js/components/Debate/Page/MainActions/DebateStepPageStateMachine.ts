@@ -1,7 +1,7 @@
 import { $PropertyType } from 'utility-types'
 import * as React from 'react'
 import { createMachine } from 'xstate'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql'
 export type DebateStateMachine = Record<string, any>
 export type Context = {

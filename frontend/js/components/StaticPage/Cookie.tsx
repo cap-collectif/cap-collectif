@@ -3,7 +3,7 @@ import { FormattedMessage, IntlShape } from 'react-intl'
 import { Col, Alert } from 'react-bootstrap'
 import Toggle from '~/components/Ui/Toggle/Toggle'
 import config from '../../config'
-import CookieMonster from '../../CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { toast } from '~ds/Toast'
 
 type Props = {

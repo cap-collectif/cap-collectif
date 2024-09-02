@@ -11,7 +11,7 @@ import { DELAY_BEFORE_PROPOSAL_REMOVAL, VoteStepEvent } from '../utils'
 import EmptyList from './EmptyList'
 import { useSelector } from 'react-redux'
 import { State } from '~/types'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 const QUERY = graphql`
   query VotesListQuery($stepId: ID!, $count: Int!, $cursor: String, $isAuthenticated: Boolean!, $token: String) {

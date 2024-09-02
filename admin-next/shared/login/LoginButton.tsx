@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { baseUrl } from '~/config'
+import getBaseUrl from '@shared/utils/getBaseUrl'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import LoginModal from '@shared/login/LoginModal'
 import { Button, ButtonProps } from '@cap-collectif/ui'
 import { LoginButtonQuery } from '@relay/LoginButtonQuery.graphql'
-import { graphql, useLazyLoadQuery } from 'react-relay'
+import { LoginButton_query$key } from '@relay/LoginButton_query.graphql'
+import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
 import LoginFormWrapper from '@shared/login/LoginFormWrapper'
 import { useEventListener } from '@shared/hooks/useEventListener'
 import { getTheme } from '@shared/navbar/NavBar.utils'
@@ -15,6 +16,12 @@ export const openLoginModal = 'openLoginModal'
 
 export const QUERY = graphql`
   query LoginButtonQuery {
+    ...LoginButton_query
+  }
+`
+
+export const FRAGMENT = graphql`
+  fragment LoginButton_query on Query {
     ...LoginModal_query
     oauth2sso: ssoConfigurations(ssoType: OAUTH2) {
       edges {
@@ -30,14 +37,18 @@ export const QUERY = graphql`
   }
 `
 
-export const LoginButton: React.FC<ButtonProps> = props => {
+export const LoginButton: React.FC<ButtonProps & { query: LoginButton_query$key }> = ({
+  query: queryKey,
+  ...props
+}) => {
   const intl = useIntl()
-  const query = useLazyLoadQuery<LoginButtonQuery>(QUERY, {})
+  const query = useFragment(FRAGMENT, queryKey)
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const byPassLoginModal = useFeatureFlag('sso_by_pass_auth')
   const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user')
   const newNavbar = useFeatureFlag('new_navbar')
   const loginWithOpenID = query.oauth2sso.edges.some(({ node }) => node.enabled)
+  const baseUrl = getBaseUrl()
   let redirectUrl: string = baseUrl
 
   if (loginWithOpenID && byPassLoginModal) {
@@ -86,6 +97,12 @@ export const LoginButton: React.FC<ButtonProps> = props => {
       </Button>
     </>
   )
+}
+
+export const LoginButtonQueryWrapper: React.FC<ButtonProps> = props => {
+  const query = useLazyLoadQuery<LoginButtonQuery>(QUERY, {})
+
+  return <LoginButton {...props} query={query} />
 }
 
 export default LoginButton

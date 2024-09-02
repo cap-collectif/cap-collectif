@@ -23,15 +23,15 @@ import {
 import component from '~/components/Form/Field'
 import { isEmail } from '~/services/Validator'
 import type { Dispatch, State } from '~/types'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
-import { showLoginModal } from '~/redux/modules/user'
 import environment from '~/createRelayEnvironment'
-import { ChartLinkComponent, PrivacyPolicyComponent } from '~/components/User/Registration/RegistrationForm'
+import { ChartLinkComponent, PrivacyPolicyComponent } from '@shared/register/RegistrationForm'
 import AddDebateAnonymousArgumentMutation from '~/mutations/AddDebateAnonymousArgumentMutation'
 import { useDebateStepPage } from '~/components/Debate/Page/DebateStepPage.context'
 import SendConfirmationEmailDebateAnonymousArgumentMutation from '~/mutations/SendConfirmationEmailDebateAnonymousArgumentMutation'
 import ResetCss from '~/utils/ResetCss'
+import { openLoginModal } from '@shared/login/LoginButton'
 const STATE = {
   FORM: 'FORM',
   INFO: 'INFO',
@@ -90,7 +90,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
     email,
   }).then((res: { isEmailAlreadyTaken: boolean }) => {
     if (res.isEmailAlreadyTaken && !location) {
-      dispatch(showLoginModal())
+      dispatchEvent(new Event(openLoginModal))
       dispatch(change('login', 'username', email))
       dispatch(
         change(
@@ -150,7 +150,6 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 const ModalContent = ({
   modalState,
   cguName,
-  dispatch,
   privacyPolicyRequired,
   invalid,
   pristine,
@@ -322,7 +321,7 @@ const ModalContent = ({
                     labelClassName="font-weight-normal"
                   >
                     <span>
-                      <ChartLinkComponent cguName={cguName} dispatch={dispatch} />
+                      <ChartLinkComponent cguName={cguName} />
                       <PrivacyPolicyComponent privacyPolicyRequired={privacyPolicyRequired} />
                     </span>
                   </Field>

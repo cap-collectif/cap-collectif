@@ -21,7 +21,7 @@ import '~relay/QuestionnaireReplyPage_questionnaire.graphql'
 import type { Dispatch, GlobalState, ResultPreloadQuery } from '~/types'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import { QuestionnaireStepPageContext } from '~/components/Page/QuestionnaireStepPage.context'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 export const queryReply = graphql`
   query QuestionnaireReplyPageQuery($isAuthenticated: Boolean!, $replyId: ID!) {
     reply: node(id: $replyId) {

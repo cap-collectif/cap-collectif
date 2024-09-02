@@ -49,6 +49,7 @@ export const getTheme = (
   menuActiveBackground: siteColors.find(c => c.keyname === 'color.main_menu.bg_active')?.value || '#e7e7e7',
   textActiveColor: siteColors.find(c => c.keyname === 'color.main_menu.text_active')?.value || '#777',
   textHoverColor: siteColors.find(c => c.keyname === 'color.main_menu.text_hover')?.value || '#777',
+  primaryColor: siteColors.find(c => c.keyname === 'color.btn.primary.bg')?.value || '#777',
 })
 
 export const unescapeHTML = (str: string) =>

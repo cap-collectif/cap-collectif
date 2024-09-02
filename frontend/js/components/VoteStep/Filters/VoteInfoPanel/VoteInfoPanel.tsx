@@ -4,7 +4,7 @@ import type { VoteInfoPanelQuery } from '~relay/VoteInfoPanelQuery.graphql'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
 import { GlobalState } from '~/types'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { SimpleVote, VoteBudget, VoteMinMax, VoteValidated } from './VoteInfoPanelCases'
 import { Box } from '@cap-collectif/ui'
 

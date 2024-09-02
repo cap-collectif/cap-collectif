@@ -666,3 +666,8 @@ InternalQuery:
                     term:
                         type: 'String'
                         description: 'The term to filter sources on the body or the author username.'
+            isAuthenticated:
+                type: 'Boolean!'
+                description: 'Whether or not the viewer is authenticated.'
+                resolve: '@=getUser() !== null'
+

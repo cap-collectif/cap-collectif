@@ -3,8 +3,6 @@ import { connect } from 'react-redux'
 import { useIntl } from 'react-intl'
 import { Menu, MenuItem, MenuButton, MenuSeparator, useMenuState } from 'reakit/Menu'
 import { TabsItemContainer, TabsLink } from '../Ui/TabsBar/styles'
-import RegistrationButton from '../User/Registration/RegistrationButton'
-import LoginButton from '../User/Login/LoginButton'
 import UserAvatarDeprecated from '../User/UserAvatarDeprecated'
 import type { State, FeatureToggles } from '~/types'
 import type { User } from '~/redux/modules/user'
@@ -13,7 +11,7 @@ import * as S from '~ui/TabsBar/styles'
 import AppBox from '~ui/Primitives/AppBox'
 import useIsMobile from '~/utils/hooks/useIsMobile'
 import NavbarRightMediator from './NavbarRightMediator'
-import { Flex, useTheme } from '@cap-collectif/ui'
+import NavbarRightQuery from './NavbarRightQuery'
 
 type Props = {
   currentLanguage: string
@@ -36,7 +34,6 @@ export const NavbarRight = ({
   const menu = useMenuState({
     baseId: 'user-profile',
   })
-  const { colors } = useTheme()
 
   const logout = () => {
     // We redirect to /logout page to invalidate session on the server
@@ -46,8 +43,6 @@ export const NavbarRight = ({
   const isMobile = useIsMobile()
   const showAdminLink = user?.isAdmin || user?.isProjectAdmin || user?.isOrganizationMember
   const fullWidth = isMobile && newHeader
-
-  const styles = newHeader ? { color: colors.primary[600], borderColor: colors.primary[600], background: 'white' } : {}
 
   return (
     <>
@@ -183,23 +178,9 @@ export const NavbarRight = ({
           </Menu>
         </>
       ) : (
-        <Flex px={4} spacing={1} width={fullWidth ? '100%' : ''}>
-          {/** @ts-ignore */}
-          <RegistrationButton
-            className="navbar-btn"
-            spanStyle={fullWidth ? { width: '100%' } : {}}
-            buttonStyle={fullWidth ? { width: '100%', marginTop: 16, height: 48, ...styles } : styles}
-          />
-          <React.Suspense fallback={null}>
-            <LoginButton
-              justifyContent={fullWidth ? 'center' : ''}
-              width={fullWidth ? '100%' : ''}
-              borderRadius="button"
-              my={fullWidth ? 4 : 2}
-              height={fullWidth ? '48px' : ''}
-            />
-          </React.Suspense>
-        </Flex>
+        <React.Suspense fallback={null}>
+          <NavbarRightQuery fullWidth={fullWidth} />
+        </React.Suspense>
       )}
     </>
   )

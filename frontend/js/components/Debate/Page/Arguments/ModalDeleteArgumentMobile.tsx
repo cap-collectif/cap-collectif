@@ -10,7 +10,7 @@ import { FontWeight } from '~ui/Primitives/constants'
 import { formatConnectionPath } from '~/shared/utils/relay'
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation'
 import DeleteDebateAnonymousArgumentMutation from '~/mutations/DeleteDebateAnonymousArgumentMutation'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import ResetCss from '~/utils/ResetCss'
 type Props = {
   argument: ModalDeleteArgumentMobile_argument

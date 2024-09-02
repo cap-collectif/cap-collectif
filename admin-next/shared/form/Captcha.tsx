@@ -5,6 +5,8 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import uuid from '@shared/utils/uuid'
 import getBaseUrl from '../utils/getBaseUrl'
 import { Controller, useFormContext } from 'react-hook-form'
+import { Box } from '@cap-collectif/ui'
+import { useIntl } from 'react-intl'
 
 const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement)
 const isTest = getBaseUrl() === 'https://capco.test'
@@ -74,19 +76,31 @@ const CaptchaSwitch = React.forwardRef<React.Ref<any>, Props>(({ onChange, style
   )
 })
 
-export const Captcha = React.forwardRef<any, { name: string }>(({ name }, ref) => {
+export const Captcha = React.forwardRef<any, { name: string; required?: boolean }>(({ name, required }, ref) => {
   const { control } = useFormContext()
-
+  const intl = useIntl()
   return (
     <Controller
       name={name}
+      rules={{ required }}
       control={control}
-      render={({ field }) => {
+      render={({ field, fieldState }) => {
         const { onChange } = field
-        return <CaptchaSwitch onChange={onChange} ref={ref} />
+
+        return (
+          <>
+            <CaptchaSwitch onChange={onChange} ref={ref} />
+            {fieldState.invalid ? (
+              <Box color="red.500" lineHeight="normal" fontSize={3}>
+                {intl.formatMessage({ id: 'registration.constraints.captcha.invalid' })}
+              </Box>
+            ) : null}
+          </>
+        )
       }}
     />
   )
 })
+Captcha.displayName = 'Captcha'
 
 export default Captcha

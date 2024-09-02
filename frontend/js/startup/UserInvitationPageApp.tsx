@@ -22,53 +22,56 @@ export type UserInvitationPageAppProps = {
 
 type Props = UserInvitationPageAppProps
 
-export default (propsComponent: Props) => (
-  <Providers>
-    <QueryRenderer
-      environment={environment}
-      query={graphql`
-        query UserInvitationPageAppQuery {
-          ...UserInvitationRootPage_query
-          siteColors {
-            ...UserInvitationRootPage_colors
+export default (propsComponent: Props) => {
+  document.getElementsByTagName('html')[0].style.fontSize = '14px'
+  return (
+    <Providers designSystem>
+      <QueryRenderer
+        environment={environment}
+        query={graphql`
+          query UserInvitationPageAppQuery {
+            ...UserInvitationRootPage_query
+            siteColors {
+              ...UserInvitationRootPage_colors
+            }
+            siteImage(keyname: "image.logo") {
+              ...UserInvitationRootPage_logo
+            }
           }
-          siteImage(keyname: "image.logo") {
-            ...UserInvitationRootPage_logo
+        `}
+        variables={{}}
+        render={({
+          error,
+          props,
+        }: ReactRelayReadyState & {
+          props: UserInvitationPageAppQueryResponse | null | undefined
+        }) => {
+          if (error) return graphqlError
+          const baseRoute = propsComponent.baseUrl.split('?')[0]
+
+          if (props && props.siteImage && props.siteColors) {
+            return (
+              <Router basename={baseRoute}>
+                <UserInvitationRoot
+                  queryFragmentRef={props}
+                  logoFragmentRef={props.siteImage}
+                  colorsFragmentRef={props.siteColors}
+                  email={propsComponent.email}
+                  token={propsComponent.token}
+                  baseUrl={propsComponent.baseUrl}
+                  loginFacebook={propsComponent.loginFacebook}
+                  loginFranceConnect={propsComponent.loginFranceConnect}
+                  ssoList={propsComponent.ssoList}
+                  hasEnabledSSO={propsComponent.hasEnabledSSO}
+                  isRegistrationAllowed={propsComponent.isRegistrationAllowed}
+                />
+              </Router>
+            )
           }
-        }
-      `}
-      variables={{}}
-      render={({
-        error,
-        props,
-      }: ReactRelayReadyState & {
-        props: UserInvitationPageAppQueryResponse | null | undefined
-      }) => {
-        if (error) return graphqlError
-        const baseRoute = propsComponent.baseUrl.split('?')[0]
 
-        if (props && props.siteImage && props.siteColors) {
-          return (
-            <Router basename={baseRoute}>
-              <UserInvitationRoot
-                queryFragmentRef={props}
-                logoFragmentRef={props.siteImage}
-                colorsFragmentRef={props.siteColors}
-                email={propsComponent.email}
-                token={propsComponent.token}
-                baseUrl={propsComponent.baseUrl}
-                loginFacebook={propsComponent.loginFacebook}
-                loginFranceConnect={propsComponent.loginFranceConnect}
-                ssoList={propsComponent.ssoList}
-                hasEnabledSSO={propsComponent.hasEnabledSSO}
-                isRegistrationAllowed={propsComponent.isRegistrationAllowed}
-              />
-            </Router>
-          )
-        }
-
-        return <Loader />
-      }}
-    />
-  </Providers>
-)
+          return <Loader />
+        }}
+      />
+    </Providers>
+  )
+}

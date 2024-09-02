@@ -16,6 +16,7 @@ module.exports = {
     '\\.svg': '<rootDir>/__mocks__/svg.js',
     '~relay/(.*)$': '<rootDir>/frontend/js/__generated__/~relay/$1',
     '@relay/(.*)$': '<rootDir>/frontend/js/__generated__/~relay/$1',
+    '@mutations/(.*)$': '<rootDir>/frontend/js/mutations/$1',
     '~ui(.*)$': '<rootDir>/frontend/js/components/Ui/$1',
     '~ds(.*)$': '<rootDir>/frontend/js/components/DesignSystem/$1',
     '@shared(.*)$': '<rootDir>/admin-next/shared/$1',

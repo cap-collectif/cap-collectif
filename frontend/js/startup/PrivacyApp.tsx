@@ -2,18 +2,20 @@
 import React, { lazy, Suspense } from 'react'
 import Providers from './Providers'
 import Loader from '~ui/FeedbacksIndicators/Loader'
+import { PrivacyPolicyComponent } from '@shared/register/RegistrationForm'
 
 const PrivacyModal = lazy(
   () =>
     import(
       /* webpackChunkName: "PrivacyModal" */
-      '~/components/StaticPage/PrivacyModal'
+      '@shared/register/PrivacyModal'
     ),
 )
-export default (props: Record<string, any>) => (
+export default () => (
   <Suspense fallback={<Loader />}>
-    <Providers>
-      <PrivacyModal {...props} />
+    <Providers designSystem>
+      <PrivacyPolicyComponent privacyPolicyRequired privacyOnly />
+      <PrivacyModal />
     </Providers>
   </Suspense>
 )

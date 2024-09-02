@@ -12,7 +12,7 @@ import type { ProposalViewMode } from '../../../redux/modules/proposal'
 import type { MapOptions } from '../Map/Map.types'
 import type { ProposalsState } from '~relay/ProposalListViewRefetchQuery.graphql'
 import type { GeoJson } from '~/utils/geojson'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 type Filters = {
   categories?: string

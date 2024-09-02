@@ -1,6 +1,6 @@
 import { change, SubmissionError } from 'redux-form'
 import type { Exact, Dispatch, Action } from '~/types'
-import CookieMonster from '../../CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import type { RegistrationForm_query } from '~relay/RegistrationForm_query.graphql'
 import formatSubmitResponses from '~/utils/form/formatSubmitResponses'
 import RegisterMutation from '~/mutations/RegisterMutation'
@@ -109,18 +109,6 @@ export type ShowRegistrationModalAction = {
 type ChangeLocaleAction = {
   type: 'CHANGE_LOCALE_ACTION'
 }
-type CloseLoginModalAction = {
-  type: 'CLOSE_LOGIN_MODAL'
-}
-export type ShowLoginModalAction = {
-  type: 'SHOW_LOGIN_MODAL'
-}
-type DisplayChartModalAction = {
-  type: 'DISPLAY_CHART_MODAL'
-}
-type HideChartModalAction = {
-  type: 'HIDE_CHART_MODAL'
-}
 type UserRequestEmailChangeAction = {
   type: 'USER_REQUEST_EMAIL_CHANGE'
   email: string
@@ -141,10 +129,6 @@ export type UserAction =
   | UpdateRegistrationFieldAction
   | ShowRegistrationModalAction
   | CloseRegistrationModalAction
-  | ShowLoginModalAction
-  | DisplayChartModalAction
-  | HideChartModalAction
-  | CloseLoginModalAction
   | CancelEmailChangeSucceedAction
   | UserRequestEmailChangeAction
   | AddRegistrationFieldAction
@@ -190,18 +174,6 @@ export const showRegistrationModal = (): ShowRegistrationModalAction => ({
 })
 export const closeRegistrationModal = (): CloseRegistrationModalAction => ({
   type: 'CLOSE_REGISTRATION_MODAL',
-})
-export const closeLoginModal = (): CloseLoginModalAction => ({
-  type: 'CLOSE_LOGIN_MODAL',
-})
-export const showLoginModal = (): ShowLoginModalAction => ({
-  type: 'SHOW_LOGIN_MODAL',
-})
-export const displayChartModal = (): DisplayChartModalAction => ({
-  type: 'DISPLAY_CHART_MODAL',
-})
-export const hideChartModal = (): HideChartModalAction => ({
-  type: 'HIDE_CHART_MODAL',
 })
 export const userRequestEmailChange = (email: string): UserRequestEmailChangeAction => ({
   type: 'USER_REQUEST_EMAIL_CHANGE',

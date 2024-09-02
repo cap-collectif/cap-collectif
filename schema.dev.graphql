@@ -13900,6 +13900,9 @@ type Query {
     """The term to filter sources on the body or the author username."""
     term: String
   ): SourceConnection!
+
+  """Whether or not the viewer is authenticated."""
+  isAuthenticated: Boolean!
 }
 
 input QueryAnalyticsFilter {

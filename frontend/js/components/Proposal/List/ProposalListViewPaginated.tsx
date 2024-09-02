@@ -12,7 +12,7 @@ import type { ProposalViewMode } from '~/redux/modules/proposal'
 import ProposalsDisplayMap from '../../Page/ProposalsDisplayMap'
 import type { MapOptions } from '../Map/Map.types'
 import type { GeoJson } from '~/utils/geojson'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 type Props = {
   relay: RelayPaginationProp

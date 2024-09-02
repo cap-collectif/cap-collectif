@@ -8,7 +8,7 @@ import type {
   ProposalVoteBasketWidgetAppQueryVariables,
 } from '~relay/ProposalVoteBasketWidgetAppQuery.graphql'
 import Loader from '~ui/FeedbacksIndicators/Loader'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 const ProposalVoteBasketWidget = lazy(
   () =>
     import(

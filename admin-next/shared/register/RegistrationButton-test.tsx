@@ -4,30 +4,23 @@ import * as React from 'react'
 import ReactTestRenderer from 'react-test-renderer'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
-import { addsSupportForPortals, RelaySuspensFragmentTest } from '~/testUtils'
-import type { LoginButtonTestQuery } from '~relay/LoginButtonTestQuery.graphql'
-import { LoginButton } from './LoginButton'
+import type { RegistrationButtonTestQuery } from '@relay/RegistrationButtonTestQuery.graphql'
+import { RegistrationButton } from './RegistrationButton'
+import { addsSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
-describe('<LoginButton />', () => {
+jest.mock('@shared/hooks/useFeatureFlag')
+jest.mock('use-analytics', () => ({
+  useAnalytics: () => ({ track: () => {} }),
+}))
+
+describe('<RegistrationButton />', () => {
   let environment
   let TestComponent
   let testComponentTree
   const defaultMockResolvers = {
     Query: () => ({
-      oauth2sso: {
-        edges: [
-          {
-            node: {
-              enabled: true,
-            },
-          },
-          {
-            node: {
-              enabled: false,
-            },
-          },
-        ],
-      },
+      isAuthenticated: false,
       siteColors: [
         { keyname: 'color.main_menu.bg', value: 'black' },
         { keyname: 'color.main_menu.text', value: 'white' },
@@ -35,19 +28,8 @@ describe('<LoginButton />', () => {
     }),
   }
   const query = graphql`
-    query LoginButtonTestQuery @relay_test_operation {
-      ...LoginModal_query
-      oauth2sso: ssoConfigurations(ssoType: OAUTH2) {
-        edges {
-          node {
-            enabled
-          }
-        }
-      }
-      siteColors {
-        keyname
-        value
-      }
+    query RegistrationButtonTestQuery @relay_test_operation {
+      ...RegistrationButton_query
     }
   `
 
@@ -57,18 +39,20 @@ describe('<LoginButton />', () => {
     environment.mock.queueOperationResolver(operation => MockPayloadGenerator.generate(operation, defaultMockResolvers))
 
     const TestRenderer = props => {
-      const data = useLazyLoadQuery<LoginButtonTestQuery>(query, {})
+      const data = useLazyLoadQuery<RegistrationButtonTestQuery>(query, {})
       if (!data) return null
-      return <LoginButton {...props} />
+      return <RegistrationButton query={data} {...props} />
     }
 
     TestComponent = props => (
-      <RelaySuspensFragmentTest useCapUIProvider environment={environment}>
+      <RelaySuspensFragmentTest environment={environment}>
         <TestRenderer {...props} />
       </RelaySuspensFragmentTest>
     )
   })
   it('renders a button', () => {
+    // @ts-ignore jest
+    useFeatureFlag.mockImplementation(flag => flag === 'registration')
     testComponentTree = ReactTestRenderer.create(<TestComponent />)
     expect(testComponentTree).toMatchSnapshot()
   })

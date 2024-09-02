@@ -49,7 +49,7 @@ class SiteParameterVoter extends Voter
 
     private function canView(SiteParameter $siteParameter, ?User $viewer): bool
     {
-        $whiteList = ['login.text.top', 'login.text.bottom'];
+        $whiteList = ['login.text.top', 'login.text.bottom', 'charter.body', 'privacy-policy', 'global.site.organization_name', 'global.site.communication_from'];
         $key = $siteParameter->getKeyname();
 
         if (\in_array($key, $whiteList)) {

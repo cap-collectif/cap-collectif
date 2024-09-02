@@ -85,7 +85,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         values={Object {}}
       />
     </strong>
-    <Connect(injectIntl(RegistrationButton))
+    <RegistrationButtonQueryWrapper
       bsStyle="primary"
       style={
         Object {
@@ -93,7 +93,7 @@ exports[`<ReplyCreateFormWrapper /> should render an alert an a disabled form wh
         }
       }
     />
-    <LoginButton
+    <LoginButtonQueryWrapper
       style={
         Object {
           "marginLeft": 5,

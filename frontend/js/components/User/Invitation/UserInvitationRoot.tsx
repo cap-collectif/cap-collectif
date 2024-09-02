@@ -8,6 +8,7 @@ import UserInvitationSSOPage from '~/components/User/Invitation/UserInvitationSS
 import type { UserInvitationRootPage_colors$key } from '~relay/UserInvitationRootPage_colors.graphql'
 import type { UserInvitationRootPage_query$key } from '~relay/UserInvitationRootPage_query.graphql'
 import type { UserInvitationRootPage_logo$key } from '~relay/UserInvitationRootPage_logo.graphql'
+import RegistrationFormWrapper from '@shared/register/RegistrationFormWrapper'
 type Props = {
   readonly queryFragmentRef: UserInvitationRootPage_query$key
   readonly colorsFragmentRef: UserInvitationRootPage_colors$key
@@ -39,6 +40,7 @@ const LOGO_FRAGMENT = graphql`
 const QUERY_FRAGMENT = graphql`
   fragment UserInvitationRootPage_query on Query {
     ...UserInvitationPage_query
+    ...RegistrationFormWrapper_query
   }
 `
 
@@ -90,16 +92,18 @@ const UserInvitationRootPage = ({
         {hasEnabledSSO && !firstVisited ? (
           <Redirect to="/sso" />
         ) : (
-          <UserInvitationPage
-            queryFragmentRef={query}
-            primaryColor={primaryColor}
-            btnTextColor={btnTextColor}
-            backgroundColor={backgroundColor}
-            logoFragmentRef={logo}
-            hasEnabledSSO={hasEnabledSSO}
-            email={email}
-            token={token}
-          />
+          <RegistrationFormWrapper query={query} invitationToken={token} email={email}>
+            <UserInvitationPage
+              queryFragmentRef={query}
+              primaryColor={primaryColor}
+              btnTextColor={btnTextColor}
+              backgroundColor={backgroundColor}
+              logoFragmentRef={logo}
+              hasEnabledSSO={hasEnabledSSO}
+              email={email}
+              token={token}
+            />
+          </RegistrationFormWrapper>
         )}
       </Route>
     </Switch>

@@ -4,15 +4,14 @@ import { useIntl } from 'react-intl'
 import styled from 'styled-components'
 import { usePopoverState, Popover, PopoverDisclosure, PopoverArrow } from 'reakit/Popover'
 import { connect } from 'react-redux'
-import { useAnalytics } from 'use-analytics'
 import { Button, Box, Text, Flex } from '@cap-collectif/ui'
-import { showRegistrationModal } from '~/redux/modules/user'
 import type { Dispatch, State } from '~/types'
-import { openLoginModal } from '../User/Login/LoginButton'
+import { openLoginModal } from '@shared/login/LoginButton'
 import { loginWithOpenID } from '~/redux/modules/default'
 import VisuallyHidden from '~ds/VisuallyHidden/VisuallyHidden'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { baseUrl } from '~/config'
+import { openRegistrationModal } from '@shared/register/RegistrationButton'
 
 export type Placement =
   | 'auto-start'
@@ -50,9 +49,7 @@ const PopoverContainer = styled(Box).attrs({
 })`
   outline: none;
 `
-const ButtonRegistration = styled.button`
-  margin: 10px 0 0 0;
-`
+
 const Arrow = styled(Box)<{
   position: Placement
 }>`
@@ -72,9 +69,7 @@ export const LoginOverlay = ({
   showRegistrationButton,
   loginWithOpenId = false,
   placement = 'auto',
-  dispatch,
 }: Props) => {
-  const { track } = useAnalytics()
   const byPassLoginModal = useFeatureFlag('sso_by_pass_auth')
   const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user')
 
@@ -152,18 +147,15 @@ export const LoginOverlay = ({
             </VisuallyHidden>
 
             {showRegistrationButton && !loginWithOpenId && (
-              <ButtonRegistration
-                type="button"
+              <Button
+                variant="secondary"
+                justifyContent="center"
                 onClick={() => {
-                  track('overlay_registration_click')
-                  dispatch(showRegistrationModal())
+                  dispatchEvent(new Event(openRegistrationModal))
                 }}
-                className="center-block btn-block btn btn-default"
               >
-                {intl.formatMessage({
-                  id: 'global.registration',
-                })}
-              </ButtonRegistration>
+                {intl.formatMessage({ id: 'global.registration' })}
+              </Button>
             )}
 
             <Button

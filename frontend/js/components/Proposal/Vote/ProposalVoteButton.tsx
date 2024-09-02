@@ -16,7 +16,7 @@ import { isInterpellationContextFromStep, isInterpellationContextFromProposal } 
 import { toast } from '~ds/Toast'
 import type { ProposalVoteButton_step$key, ProposalVoteButton_step$data } from '~relay/ProposalVoteButton_step.graphql'
 // TODO @Mo remake this file with @cap-collectif/ui to replace tooltip that already doesn't work
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import AddProposalSmsVoteMutation from '~/mutations/AddProposalSmsVoteMutation'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'

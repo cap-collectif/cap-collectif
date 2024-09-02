@@ -1451,6 +1451,30 @@ class ApplicationContext extends UserContext
     }
 
     /**
+     * Selects option in select created by our Design System select component with specified id.
+     *
+     * Example: When I select "Bats" from ds select "#user_fears"
+     * Example: And I select "Bats" from ds select "#user_fears".
+     *
+     * @When /^(?:|I )select "(?P<option>(?:[^"]|\\")*)" from ds select "(?P<select>(?:[^"]|\\")*)"$/
+     */
+    public function selectOptionFromDsSelect(string $select, string $option): void
+    {
+        $this->iClickElement($select);
+
+        $optionElement = $this->getSession()
+            ->getPage()
+            ->find('xpath', './/*[contains(concat(" ",normalize-space(@class)," ")," cap-select__menu-portal ")]//*[text()="' . $option . '"]')
+        ;
+
+        if (null === $optionElement) {
+            throw new ElementNotFoundException($this->getSession(), 'element', 'css', $option);
+        }
+
+        $optionElement->click();
+    }
+
+    /**
      * Checks that option from select is selected.
      *
      * @Then the option :option from :select should be selected

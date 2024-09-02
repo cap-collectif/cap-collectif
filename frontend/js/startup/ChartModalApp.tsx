@@ -6,7 +6,7 @@ const ChartModal = lazy(
   () =>
     import(
       /* webpackChunkName: "ChartModal" */
-      '~/components/User/Registration/ChartModal'
+      '@shared/register/ChartModal'
     ),
 )
 export default () => (

@@ -11,7 +11,7 @@ class HomePage extends Page
 
     protected $elements = [
         'Login button' => '#login-button',
-        'Registration button' => '.btn.btn--registration',
+        'Registration button' => '#registration-button',
         'Logged user dropdown' => '#navbar-username',
         'Logout button' => '#logout-button',
     ];
@@ -38,7 +38,7 @@ class HomePage extends Page
 
     public function openLoginModal()
     {
-        $this->getSession()->wait(10000, "$('#login-button').length > 0");
+        $this->getSession()->wait(15000, "$('#login-button').length > 0");
         $this->getElement('Login button')->click();
     }
 

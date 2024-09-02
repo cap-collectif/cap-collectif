@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<RegistrationButton /> renders a button 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <form
+    id="registration-form"
+    noValidate={true}
+    onSubmit={[Function]}
+  />,
+  <button
+    aria-label="open.inscription_modal"
+    className="sc-bcXGCL sc-laZSpB YrpvM gdlnBM cap-button"
+    id="registration-button"
+    onClick={[Function]}
+    type="button"
+  >
+    global.registration
+  </button>,
+]
+`;

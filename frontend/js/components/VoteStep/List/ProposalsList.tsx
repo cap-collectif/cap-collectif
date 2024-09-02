@@ -15,7 +15,7 @@ import { DELAY_BEFORE_PROPOSAL_REMOVAL, VoteStepEvent, getOrderByArgs, View, par
 import EmptyList from './EmptyList'
 import { useSelector } from 'react-redux'
 import { State } from '~/types'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 
 const QUERY = graphql`
   query ProposalsListQuery(

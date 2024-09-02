@@ -2,9 +2,6 @@ import React from 'react'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
 import { graphql, useFragment } from 'react-relay'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Text from '~ui/Primitives/Text'
-import Heading from '~ui/Primitives/Heading'
 import SSOButton from '~/components/User/Invitation/SSOButton'
 import { Symbols } from '~/components/User/Invitation/UserInvitationPage.style'
 import {
@@ -21,6 +18,8 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { GlobalState } from '~/types'
 import type { UserInvitationSSOPage_logo$key } from '~relay/UserInvitationSSOPage_logo.graphql'
 import CreateAccountEmailLink from '~/components/User/Invitation/CreateAccountEmailLink'
+import { Flex, Heading, Text } from '@cap-collectif/ui'
+
 type Props = {
   readonly loginFacebook: boolean
   readonly loginFranceConnect: boolean

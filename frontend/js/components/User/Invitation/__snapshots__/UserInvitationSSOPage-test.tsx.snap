@@ -18,7 +18,7 @@ Array [
           className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
         >
           <h2
-            className="sc-dEVMhd gLbeTF"
+            className="sc-bcXGCL bZvVYQ cap-heading"
           >
             global-welcome
              
@@ -30,7 +30,7 @@ Array [
             </span>
           </h2>
           <p
-            className="sc-dEVMhd hKGMjH"
+            className="sc-bcXGCL bKFIKl cap-text"
           >
             invite-join-platform
           </p>
@@ -64,13 +64,13 @@ Array [
             </a>
           </div>
           <div
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY jpPNdl"
+            className="sc-bcXGCL yRCOB"
           >
             <div
               className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
             />
             <p
-              className="sc-dEVMhd ilGFLT"
+              className="sc-bcXGCL bJdBwh cap-text"
             >
               global-or
             </p>
@@ -124,7 +124,7 @@ Array [
           className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
         >
           <h2
-            className="sc-dEVMhd gLbeTF"
+            className="sc-bcXGCL bZvVYQ cap-heading"
           >
             global-welcome
              
@@ -136,7 +136,7 @@ Array [
             </span>
           </h2>
           <p
-            className="sc-dEVMhd hKGMjH"
+            className="sc-bcXGCL bKFIKl cap-text"
           >
             invite-join-platform
           </p>
@@ -165,13 +165,13 @@ Array [
             </a>
           </div>
           <div
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY jpPNdl"
+            className="sc-bcXGCL yRCOB"
           >
             <div
               className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
             />
             <p
-              className="sc-dEVMhd ilGFLT"
+              className="sc-bcXGCL bJdBwh cap-text"
             >
               global-or
             </p>

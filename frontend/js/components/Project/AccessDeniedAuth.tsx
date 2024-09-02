@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Flex } from '@cap-collectif/ui'
 import styled from 'styled-components'
-import { openLoginModal } from '../User/Login/LoginButton'
+import { openLoginModal } from '@shared/login/LoginButton'
 import { onElementAvailable } from '@shared/navbar/NavBar.utils'
 
 const BackGroundImage = styled.img`

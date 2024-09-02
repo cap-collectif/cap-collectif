@@ -1,7 +1,5 @@
 /* eslint-disable */
 // @ts-nocheck
-import type { ForOrAgainstValue } from '~relay/AddDebateAnonymousVoteMutation.graphql'
-import { baseUrl } from '~/config'
 const DEBATE_ANONYMOUS_VOTES_NAME = 'CapcoAnonVotes'
 const DEBATE_ANONYMOUS_ARGUMENTS_NAME = 'CapcoAnonArguments'
 const REPLY_ANONYMOUS_NAME = 'CapcoAnonReply'
@@ -20,6 +18,9 @@ const ATI_COOKIE_NAMES = [
   'attvtsession',
   'atwebosession',
 ]
+
+type ForOrAgainstValue = 'AGAINST' | 'FOR'
+
 const SCROLL_VALUE_TO_CONSENT = 2000
 type DebateAnonymousVoteValue = {
   type: ForOrAgainstValue

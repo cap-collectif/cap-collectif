@@ -1,0 +1,114 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PrivacyModal /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    aria-label="contained-modal-title-lg"
+    aria-modal={true}
+    data-dialog={true}
+    hidden={false}
+    id="id-g"
+    onAnimationEnd={[Function]}
+    onBlur={[Function]}
+    onKeyDown={[Function]}
+    onTransitionEnd={[Function]}
+    role="dialog"
+    tabIndex={-1}
+  >
+    <div
+      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      onClick={[Function]}
+      style={
+        {
+          "opacity": 0,
+        }
+      }
+    >
+      <div
+        className="sc-bcXGCL dXLbyv sc-gsGkXq bMdHnV cap-modal privacy-policy"
+        id="privacy-modal"
+        style={
+          {
+            "opacity": 0,
+            "transform": "translateY(-20px) translateZ(0)",
+          }
+        }
+      >
+        <header
+          className="sc-bcXGCL gUHbRp cap-modal__header privacy-policy"
+        >
+          <div
+            className="sc-bcXGCL eotpTW"
+          >
+            <h2
+              className="sc-bcXGCL jyqEHl cap-heading"
+              id="modal-title"
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              privacy-policy
+            </h2>
+          </div>
+          <button
+            aria-describedby="modal-title"
+            className="sc-bcXGCL gBxHlP"
+            onClick={[Function]}
+            type="button"
+          >
+            <svg
+              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              fill="none"
+              viewBox="0 0 12 12"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M1 11L11 1M1 1l10 10"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth={0.8}
+              />
+            </svg>
+          </button>
+        </header>
+        <main
+          className="sc-bcXGCL laGNWx cap-modal__body"
+        >
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              {
+                "__html": "I am privacy such privacy much legal",
+              }
+            }
+          />
+        </main>
+        <footer
+          className="sc-bcXGCL bzOqHT cap-modal__footer privacy-policy"
+        >
+          <button
+            className="sc-bcXGCL sc-laZSpB laxoCi gdlnBM cap-button"
+            onClick={[Function]}
+            style={
+              {
+                "marginLeft": 0,
+                "marginTop": 0,
+              }
+            }
+            type="button"
+          >
+            global.close
+          </button>
+        </footer>
+      </div>
+    </div>
+  </div>,
+]
+`;

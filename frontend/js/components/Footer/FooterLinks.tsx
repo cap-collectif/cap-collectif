@@ -7,7 +7,7 @@ import CapcoPowered from './CapcoPowered'
 import FooterLinksRender from './FooterLinksRender'
 import type { LocaleMap } from '../Ui/Button/SiteLanguageChangeButton'
 import Fetcher from '~/services/Fetcher'
-import CookieMonster from '~/CookieMonster'
+import CookieMonster from '@shared/utils/CookieMonster'
 import { Flex } from '@cap-collectif/ui'
 
 type Props = {

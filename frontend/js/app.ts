@@ -111,7 +111,7 @@ if (isSafari) {
   require('intersection-observer')
 }
 
-global.cookieMonster = require('./CookieMonster').default
+global.cookieMonster = require('@shared/utils/CookieMonster').default
 
 async function polyfill(locale: string) {
   if (!shouldPolyfill(locale)) {
