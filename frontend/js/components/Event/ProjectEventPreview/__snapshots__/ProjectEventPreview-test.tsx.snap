@@ -31,6 +31,7 @@ exports[`<ProjectEventPreview /> should render correctly 1`] = `
     </EventPreviewstyle__TitleContainer>
     <EventPreviewstyle__HeadContent>
       <Date
+        endDate="2030-03-11 00:00:00"
         startDate="2030-03-10 00:00:00"
       />
     </EventPreviewstyle__HeadContent>
@@ -84,6 +85,7 @@ exports[`<ProjectEventPreview /> should render correctly no passed event 1`] = `
     </EventPreviewstyle__TitleContainer>
     <EventPreviewstyle__HeadContent>
       <Date
+        endDate="2030-03-11 00:00:00"
         startDate="2020-03-10 00:00:00"
       />
       <InlineList
@@ -140,6 +142,7 @@ exports[`<ProjectEventPreview /> should render correctly passed event 1`] = `
     </EventPreviewstyle__TitleContainer>
     <EventPreviewstyle__HeadContent>
       <Date
+        endDate="2022-03-11 00:00:00"
         startDate="2021-03-10 00:00:00"
       />
       <div
@@ -206,6 +209,7 @@ exports[`<ProjectEventPreview /> should render correctly when guest enabled 1`] 
     </EventPreviewstyle__TitleContainer>
     <EventPreviewstyle__HeadContent>
       <Date
+        endDate="2030-03-11 00:00:00"
         startDate="2030-03-10 00:00:00"
       />
       <InlineList
@@ -320,6 +324,7 @@ exports[`<ProjectEventPreview /> should render correctly when no googleMapsAddre
     </EventPreviewstyle__TitleContainer>
     <EventPreviewstyle__HeadContent>
       <Date
+        endDate="2030-03-11 00:00:00"
         startDate="2030-03-10 00:00:00"
       />
     </EventPreviewstyle__HeadContent>
