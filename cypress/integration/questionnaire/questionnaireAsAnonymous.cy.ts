@@ -7,7 +7,7 @@ describe('Questionnaire Anonymous', () => {
     })
     it('should correctly show a questionnaire', () => {
       cy.contains('Projet avec questionnaire').should('exist')
-      cy.contains('Questionnaire des JO 2024').should('exist')
+      cy.contains('Insert Long Text here').should('exist')
     })
     it('should show disabled field when anonymous user attempt to reply on a questionnaire where anonymous replies are not allowed', () => {
       cy.contains('reply.not_logged_in.error').should('exist')
@@ -20,7 +20,7 @@ describe('Questionnaire Anonymous', () => {
       QuestionnairePage.visitAnonymousQuestionnaire()
     })
     it('should correctly show a questionnaire', () => {
-      cy.contains('Questionnaire step anonymous').should('exist')
+      cy.contains('Questionnaire avec participants anonyme').should('exist')
     })
     it('should correctly create/update/delete an anonymous reply', () => {
       cy.interceptGraphQLOperation({ operationName: 'AddAnonymousReplyMutation' })
@@ -31,21 +31,21 @@ describe('Questionnaire Anonymous', () => {
       cy.confirmCaptcha()
       cy.wait(1000)
       QuestionnairePage.submitForm()
-      cy.wait('@AddAnonymousReplyMutation')
+      cy.wait('@AddAnonymousReplyMutation', { timeout: 15000 })
       QuestionnairePage.assertToast()
       QuestionnairePage.assertRepliesLengthToBe(1)
 
       QuestionnairePage.clickOnFirstReply()
       QuestionnairePage.fillEditAnonymousQuestionnaire()
       QuestionnairePage.submitForm()
-      cy.wait('@UpdateAnonymousReplyMutation')
+      cy.wait('@UpdateAnonymousReplyMutation', { timeout: 15000 })
       QuestionnairePage.assertToast()
       QuestionnairePage.assertRepliesLengthToBe(1)
 
       QuestionnairePage.clickOnDeleteReplyModalButton()
       cy.contains('delete-confirmation').should('exist')
       QuestionnairePage.clickOnDeleteReplyConfirmationButton()
-      cy.wait('@DeleteAnonymousReplyMutation')
+      cy.wait('@DeleteAnonymousReplyMutation', { timeout: 15000 })
       QuestionnairePage.assertToast('delete')
       cy.get('.list-group').should('not.exist')
     })

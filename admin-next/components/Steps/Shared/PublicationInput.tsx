@@ -1,4 +1,4 @@
-import React from 'react';
+import React from 'react'
 import { FormLabel } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
@@ -14,12 +14,12 @@ type Props = {
   fieldName?: 'isEnabled' | 'enabled'
 }
 
-const PublicationInput: React.FC<Props> = ({fieldName = 'enabled'}) => {
+const PublicationInput: React.FC<Props> = ({ fieldName = 'enabled' }) => {
   const intl = useIntl()
-  const {control} = useFormContext()
+  const { control } = useFormContext()
 
   return (
-    <FormControl name={fieldName} control={control}>
+    <FormControl name={fieldName} control={control} mt={4} mb={8}>
       <FormLabel label={intl.formatMessage({ id: 'global.publication' })} />
       <FieldInput
         type="radio"
@@ -44,7 +44,7 @@ const PublicationInput: React.FC<Props> = ({fieldName = 'enabled'}) => {
         ]}
       />
     </FormControl>
-  );
-};
+  )
+}
 
-export default PublicationInput;
+export default PublicationInput

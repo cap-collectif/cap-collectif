@@ -3,7 +3,10 @@ import { FormValues, StepDurationTypeEnum } from '@components/Steps/SelectStep/S
 import { SelectStepFormQuery$data } from '@relay/SelectStepFormQuery.graphql'
 import { getDefaultRequirements } from '../../Requirements/Requirements'
 import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
+import { ProposalStepVoteType } from '@relay/CollectStepFormQuery.graphql'
+import { voteTypeForTabs } from '../ProposalStep.utils'
 
+export type TabsVoteType = Omit<ProposalStepVoteType, 'BUDGET'> | 'ADVANCED'
 
 export const getDefaultValues = (
   step: SelectStepFormQuery$data['step'],
@@ -12,6 +15,7 @@ export const getDefaultValues = (
 ): FormValues => {
   const stepDurationType = step?.timeless ? [StepDurationTypeEnum.TIMELESS] : [StepDurationTypeEnum.CUSTOM]
   const stepEnabledType = step?.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT]
+
   return {
     requirementsReason: '',
     id: stepId,
@@ -36,6 +40,7 @@ export const getDefaultValues = (
       usingAddress: step?.form?.usingAddress,
     },
     voteType: step?.voteType,
+    _voteTypeForTabs: voteTypeForTabs(step),
     votesMin: step?.votesMin,
     votesLimit: step?.votesLimit,
     votesRanking: step?.votesRanking,

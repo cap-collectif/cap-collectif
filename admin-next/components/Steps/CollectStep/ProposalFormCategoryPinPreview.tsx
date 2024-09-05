@@ -11,6 +11,7 @@ import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 // @ts-ignore
 import L from 'leaflet'
+import uuid from '@shared/utils/uuid'
 
 export interface ProposalFormCategoryPinPreviewProps {
   color: string
@@ -49,50 +50,54 @@ const Container = styled.div`
 `
 
 const ProposalFormCategoryPinPreview: React.FC<ProposalFormCategoryPinPreviewProps> = ({ color, icon }) => {
+  const key = uuid()
   return (
-    <Container>
-      <MapContainer
-        center={{
-          lat: 48.8604,
-          lng: 2.3507,
-        }}
-        doubleClickZoom={false}
-        dragging={false}
-        touchZoom={false}
-        scrollWheelZoom={false}
-        zoom={16}
-        zoomControl={false}
-        style={{
-          width: '100%',
-          height: '100%',
-        }}
-        gestureHandling
-      >
-        <CapcoTileLayer />
-        <Marker
-          position={[48.8601, 2.3507]}
-          // @ts-ignore
-          icon={L.divIcon({
-            className: 'preview-icn',
-            html: renderToString(
-              <div>
-                <Icon name={CapUIIcon.PinFull} size={CapUIIconSize.Md} color={color} />
-                {icon && (
-                  <Icon
-                    // @ts-ignore
-                    name={CapUIIcon[convertIconToDs(icon)]}
-                    size={CapUIIconSize.Xxl}
-                    color="white"
-                  />
-                )}
-              </div>,
-            ),
-            iconSize: [34, 48],
-            iconAnchor: [17, 48],
-          })}
-        />
-      </MapContainer>
-    </Container>
+    <React.Suspense fallback={null}>
+      <Container>
+        <MapContainer
+          key={key}
+          center={{
+            lat: 48.8604,
+            lng: 2.3507,
+          }}
+          doubleClickZoom={false}
+          dragging={false}
+          touchZoom={false}
+          scrollWheelZoom={false}
+          zoom={16}
+          zoomControl={false}
+          style={{
+            width: '100%',
+            height: '100%',
+          }}
+          gestureHandling
+        >
+          <CapcoTileLayer />
+          <Marker
+            position={[48.8601, 2.3507]}
+            // @ts-ignore
+            icon={L.divIcon({
+              className: 'preview-icn',
+              html: renderToString(
+                <div>
+                  <Icon name={CapUIIcon.PinFull} size={CapUIIconSize.Md} color={color} />
+                  {icon && (
+                    <Icon
+                      // @ts-ignore
+                      name={CapUIIcon[convertIconToDs(icon)]}
+                      size={CapUIIconSize.Xxl}
+                      color="white"
+                    />
+                  )}
+                </div>,
+              ),
+              iconSize: [34, 48],
+              iconAnchor: [17, 48],
+            })}
+          />
+        </MapContainer>
+      </Container>
+    </React.Suspense>
   )
 }
 

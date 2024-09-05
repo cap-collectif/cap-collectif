@@ -2164,7 +2164,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "282a54d434dcff3a886d7e513abe2c27",
+          "cacheID": "983222a18b29d0be4799cf9ed4267451",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2243,7 +2243,6 @@ fragment QuestionnaireFooter_step on QuestionnaireStep {
 fragment QuestionnaireHeader_step on Step {
   __isStep: __typename
   body
-  title
 }
 
 fragment QuestionnairePage_query_2uEJPD on Query {
@@ -4779,7 +4778,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "282a54d434dcff3a886d7e513abe2c27",
+          "cacheID": "983222a18b29d0be4799cf9ed4267451",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -4858,7 +4857,6 @@ fragment QuestionnaireFooter_step on QuestionnaireStep {
 fragment QuestionnaireHeader_step on Step {
   __isStep: __typename
   body
-  title
 }
 
 fragment QuestionnairePage_query_2uEJPD on Query {

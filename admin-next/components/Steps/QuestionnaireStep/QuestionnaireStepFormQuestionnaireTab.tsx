@@ -196,7 +196,6 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                     borderColor="gray.200"
                     mb={1}
                     mt={1}
-                    py={2}
                     pl={isSubSection ? 6 : isSection ? 4 : hasSectionOrSubsectionBefore ? 8 : 4}
                     sx={{ '.cap-buttonGroup': { opacity: 0 } }}
                     _hover={{ '.cap-buttonGroup': { opacity: 1 } }}
@@ -204,7 +203,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                     width="100%"
                   >
                     <Flex direction="column">
-                      <Text color="gray.500" fontSize={1} fontWeight={400}>
+                      <Text color="gray.500" fontSize={1} fontWeight={400} lineHeight={1.5}>
                         {isSubSection
                           ? intl.formatMessage({
                               id: 'global.question.types.sub-section',
@@ -215,7 +214,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                             })
                           : null}
                       </Text>
-                      <Text color="blue.900" fontSize={2} fontWeight={600}>
+                      <Text color="blue.900" fontSize={2} fontWeight={600} lineHeight={1.5}>
                         {questionsValues[index].title}
                       </Text>
                     </Flex>

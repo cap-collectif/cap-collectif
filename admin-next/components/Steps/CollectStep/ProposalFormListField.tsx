@@ -35,6 +35,13 @@ const PROPOSAL_FORMS_QUERY = graphql`
             categoryHelpText
             descriptionHelpText
             usingSummary
+            allowAknowledge
+            usingFacebook
+            usingWebPage
+            usingTwitter
+            usingInstagram
+            usingYoutube
+            usingLinkedIn
             summaryHelpText
             usingDescription
             description
@@ -162,6 +169,13 @@ const PROPOSAL_FORMS_QUERY = graphql`
               categoryHelpText
               descriptionHelpText
               usingSummary
+              allowAknowledge
+              usingFacebook
+              usingWebPage
+              usingTwitter
+              usingInstagram
+              usingYoutube
+              usingLinkedIn
               summaryHelpText
               usingDescription
               description
@@ -394,6 +408,13 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
           questions: proposalForm.questions ? formatQuestions({ questions: proposalForm.questions }) : [],
           questionsWithJumps: proposalForm.questionsWithJumps ?? [],
         },
+        allowAknowledge: proposalForm.allowAknowledge ?? false,
+        usingFacebook: proposalForm.usingFacebook ?? false,
+        usingWebPage: proposalForm.usingWebPage ?? false,
+        usingTwitter: proposalForm.usingTwitter ?? false,
+        usingInstagram: proposalForm.usingInstagram ?? false,
+        usingYoutube: proposalForm.usingYoutube ?? false,
+        usingLinkedIn: proposalForm.usingLinkedIn ?? false,
       })
     }
   }

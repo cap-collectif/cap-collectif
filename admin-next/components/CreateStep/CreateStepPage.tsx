@@ -139,7 +139,7 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
                   <Text color="blue.800" fontSize={3} fontWeight="600">
                     {step.heading}
                   </Text>
-                  <Text color="gray.500" fontSize={3} lineHeight="initial">
+                  <Text color="gray.600" fontSize={3} lineHeight="initial">
                     {step.description}
                   </Text>
                 </Flex>

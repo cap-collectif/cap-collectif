@@ -132,8 +132,12 @@ const ConsultationModel: React.FC<Props> = ({
         ? { ...selectedModel, id: initialModelValue.current }
         : { ...selectedModel, id: `temp-${crypto.randomUUID()}` }
 
+      const currentModelTitle = options.find(option => option.value === selectedModel.id).label
+      const copyTitle = `${intl.formatMessage({ id: 'copy-of' })} ${currentModelTitle}`
+
       setValue(consultationFormKey, model)
       setValue(`${consultationFormKey}.sections`, model.sections)
+      setValue(`${consultationFormKey}.title`, copyTitle)
       return
     }
 

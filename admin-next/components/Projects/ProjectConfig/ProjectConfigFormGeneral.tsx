@@ -42,7 +42,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
   const { control } = methods
 
   return (
-    <Flex p={6} direction="column" spacing={8} backgroundColor="white" borderRadius="accordion">
+    <Flex p={6} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion">
       <Heading as="h4" fontWeight="semibold" color="blue.800">
         {intl.formatMessage({ id: 'global.general' })}
       </Heading>

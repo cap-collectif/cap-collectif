@@ -388,7 +388,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                 }
               }}
             >
-              {intl.formatMessage({ id: 'admin.global.add' })}
+              {intl.formatMessage({ id: !isUpdating ? 'admin.global.add' : 'global.change' })}
             </Button>
           </Modal.Footer>
         </>

@@ -6,10 +6,6 @@ export const QuestionnaireHeaderContainer = styled.div`
     color: ${colors['neutral-gray']['900']};
     font-size: 18px;
     line-height: 24px;
+    padding-left: 0 !important;
   }
-`
-export const Title = styled.h2`
-  font-size: 24px;
-  line-height: 32px;
-  color: ${colors['neutral-gray']['900']};
 `

@@ -51,7 +51,7 @@ export class ProposalFormAdminPage extends Component<Props> {
     return (
       <div className="admin_proposal_form">
         <QueryRenderer
-          environment={environment}
+          environment={environment as any}
           query={graphql`
             query ProposalFormAdminPageQuery($id: ID!) {
               proposalForm: node(id: $id) {

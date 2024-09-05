@@ -120,6 +120,7 @@ Scenario: Anonymous user wants to share an opinion
   And I go to an opinion with versions
   When I click the share opinion button
   Then I should see the opinion share dropdown
+  And I wait ".share-option" to appear on current page
   And I click the opinion share link button
   Then I should see the share link modal
 

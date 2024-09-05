@@ -1,6 +1,6 @@
 import { useEffect, type FC } from 'react'
 import { useIntl } from 'react-intl'
-import { MultiStepModal, Modal, Heading, Button, useMultiStepModal, CapUIIcon, FormLabel } from '@cap-collectif/ui'
+import { MultiStepModal, Modal, Heading, Button, useMultiStepModal, FormLabel } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 import { useAppContext } from '@components/AppProvider/App.context'
 import { FieldInput, FormControl } from '@cap-collectif/form'
@@ -157,7 +157,6 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, isC
             onSuccess()
             hide()
           }}
-          rightIcon={CapUIIcon.LongArrowRight}
         >
           {intl.formatMessage({ id: isNewQuestion ? 'global.add' : 'global.edit' })}
         </Button>

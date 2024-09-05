@@ -20,7 +20,7 @@ import { getRequirementsInput, RequirementsFormValues } from '@components/Requir
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import UpdateProposalFormMutation from '@mutations/UpdateProposalFormMutation'
 import UpdateSelectionStepMutation from '@mutations/UpdateSelectionStep'
-import { getDefaultValues } from '@components/Steps/SelectStep/SelectStepForm.utils'
+import { getDefaultValues, TabsVoteType } from '@components/Steps/SelectStep/SelectStepForm.utils'
 import { yupResolver } from '@hookform/resolvers/yup'
 import * as yup from 'yup'
 import { ProposalStepRequirementsTabs_proposalStep$key } from '@relay/ProposalStepRequirementsTabs_proposalStep.graphql'
@@ -30,6 +30,7 @@ import { useSelectionStep } from './SelectionStepContext'
 import ProposalStepStatuses, { getStatusesInputList } from '@components/Steps/ProposalStep/ProposalStepStatuses'
 import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
+import { getVoteParameterInput } from '../ProposalStep.utils'
 
 export interface SelectStepFormProps {
   stepId: string
@@ -68,6 +69,7 @@ export type FormValues = {
     labels: Array<string>
   }
   voteType: ProposalStepVoteType | undefined
+  _voteTypeForTabs: TabsVoteType | undefined
   votesMin: number | null | undefined
   votesLimit: number | null | undefined
   votesRanking: boolean | undefined
@@ -287,20 +289,10 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           statuses: getStatusesInputList(values.statuses, bgColor),
           defaultStatus: values.defaultStatus,
           defaultSort: values.defaultSort,
-          votesHelpText: values.votesHelpText,
-          votesMin: values.votesMin,
-          votesLimit: parseInt(String(values.votesLimit)),
-          votesRanking: values.votesRanking ?? false,
-          voteThreshold: parseInt(String(values.voteThreshold)),
           isProposalSmsVoteEnabled: values.isProposalSmsVoteEnabled,
-          proposalArchivedTime: parseInt(String(values.proposalArchivedTime)),
-          proposalArchivedUnitTime: values.proposalArchivedUnitTime,
           allowAuthorsToAddNews: Boolean(values.allowAuthorsToAddNews),
-          budget: parseInt(String(values.budget)),
-          publishedVoteDate: values.publishedVoteDate,
-          voteType: values.voteType,
-          secretBallot: values.secretBallot,
           allowingProgressSteps: values.allowingProgressSteps,
+          ...getVoteParameterInput(values),
           ...getRequirementsInput(values),
         }
 

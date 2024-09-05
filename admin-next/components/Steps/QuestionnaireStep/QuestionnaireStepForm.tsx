@@ -226,6 +226,14 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       ...getRequirementsInput(values),
     }
 
+    const modelQuestionnaireTitle = `${intl.formatMessage({ id: 'copy-of' })} ${MODELquestionnaire?.title}` || null
+    const currentQuestionnaireTitle =
+      stepInput.label ??
+      intl.formatMessage({
+        id: 'global.questionnaire',
+      }) ??
+      null
+
     const mergedArr = questionnaire.questions.map(q => {
       const j = questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
       return { ...q, ...j }
@@ -242,9 +250,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
             input: {
               ...questionnaire,
               questionnaireId: questionnaire?.questionnaireId || stepInput.questionnaire,
-              title: `${stepInput.label} - ${intl.formatMessage({
-                id: 'global.questionnaire',
-              })}`,
+              title: isUsingModel && !isEditing ? modelQuestionnaireTitle : currentQuestionnaireTitle,
               questions: formatQuestionsInput(mergedArr),
             },
           })

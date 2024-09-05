@@ -8,7 +8,7 @@ import { getFormattedCategories } from '@components/Steps/CollectStep/ProposalFo
 import { StepDurationTypeEnum } from '../Shared/StepDurationInput'
 import { formatQuestions, formatQuestionsInput } from '../QuestionnaireStep/utils'
 import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
-
+import { getVoteParameterInput, voteTypeForTabs } from '../ProposalStep.utils'
 
 export const getInitialValues = (
   step: CollectStepFormQuery$data['step'],
@@ -18,6 +18,7 @@ export const getInitialValues = (
   const stepDurationType = step?.timeless ? [StepDurationTypeEnum.TIMELESS] : [StepDurationTypeEnum.CUSTOM]
   const stepVisibilityType = step?.private ? [StepVisibilityTypeEnum.RESTRICTED] : [StepVisibilityTypeEnum.PUBLIC]
   const stepEnabledType = step?.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT]
+
   return {
     requirementsReason: '',
     id: stepId,
@@ -35,6 +36,13 @@ export const getInitialValues = (
       title: step?.form?.title ?? null,
       titleHelpText: step?.form?.titleHelpText ?? null,
       usingSummary: step?.form?.usingSummary ?? false,
+      allowAknowledge: step?.form?.allowAknowledge ?? false,
+      usingFacebook: step?.form?.usingFacebook ?? false,
+      usingWebPage: step?.form?.usingWebPage ?? false,
+      usingTwitter: step?.form?.usingTwitter ?? false,
+      usingInstagram: step?.form?.usingInstagram ?? false,
+      usingYoutube: step?.form?.usingYoutube ?? false,
+      usingLinkedIn: step?.form?.usingLinkedIn ?? false,
       summaryHelpText: step?.form?.summaryHelpText ?? null,
       usingDescription: step?.form?.usingDescription ?? false,
       description: step?.form?.description ?? null,
@@ -91,6 +99,8 @@ export const getInitialValues = (
       },
     },
     voteType: step?.voteType,
+    // only used for display purposes
+    _voteTypeForTabs: voteTypeForTabs(step),
     votesMin: step?.votesMin,
     votesLimit: step?.votesLimit,
     votesRanking: step?.votesRanking,
@@ -127,7 +137,7 @@ export const getProposalFormUpdateVariablesInput = (
   formValues: FormValues['form'],
   selectedTab: FormTabs,
 ): Omit<UpdateProposalFormMutation$variables['input'], 'clientMutationId' | 'proposalFormId'> => {
-  const questions = formValues?.questionnaire?.questions ?? [];
+  const questions = formValues?.questionnaire?.questions ?? []
   const mergedArr = questions.map(q => {
     const j = formValues.questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
     return { ...q, ...j }
@@ -161,17 +171,18 @@ export const getProposalFormUpdateVariablesInput = (
     categoryHelpText: formValues.categoryHelpText,
     descriptionHelpText: formValues.descriptionHelpText,
     summaryHelpText: formValues.summaryHelpText,
+    title: formValues.title,
     titleHelpText: formValues.titleHelpText,
     usingDistrict: formValues.usingDistrict,
     districtHelpText: formValues.districtHelpText,
     districtMandatory: formValues.districtMandatory,
-    allowAknowledge: true,
-    usingFacebook: true,
-    usingWebPage: true,
-    usingTwitter: true,
-    usingInstagram: true,
-    usingYoutube: true,
-    usingLinkedIn: false,
+    allowAknowledge: formValues?.allowAknowledge ?? false,
+    usingFacebook: formValues?.usingFacebook ?? false,
+    usingWebPage: formValues?.usingWebPage ?? false,
+    usingTwitter: formValues?.usingTwitter ?? false,
+    usingInstagram: formValues?.usingInstagram ?? false,
+    usingYoutube: formValues?.usingYoutube ?? false,
+    usingLinkedIn: formValues?.usingLinkedIn ?? false,
     districts: formValues.districts,
     // @ts-ignore
     categories: getFormattedCategories(formValues.categories),
@@ -203,21 +214,10 @@ export const getCollectStepInput = (
     defaultStatus: formValues.defaultStatus,
     defaultSort: formValues.defaultSort,
     proposalForm: proposalFormId,
-    votesHelpText: formValues.votesHelpText,
-    votesMin: parseInt(String(formValues.votesMin)),
-    votesLimit: parseInt(String(formValues.votesLimit)),
-    votesRanking: formValues.votesRanking ?? false,
-    voteThreshold: parseInt(String(formValues.voteThreshold)),
     isProposalSmsVoteEnabled: formValues.isProposalSmsVoteEnabled,
-    proposalArchivedTime: parseInt(String(formValues.proposalArchivedTime)),
-    proposalArchivedUnitTime: formValues.proposalArchivedUnitTime,
-
     allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),
-    budget: parseInt(String(formValues.budget)),
-    publishedVoteDate: formValues.publishedVoteDate,
     private: formValues.stepVisibilityType?.labels[0] === StepVisibilityTypeEnum.RESTRICTED,
-    voteType: formValues.voteType,
-    secretBallot: formValues.secretBallot,
     ...getRequirementsInput(formValues),
+    ...getVoteParameterInput(formValues),
   }
 }

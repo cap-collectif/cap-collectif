@@ -23,7 +23,6 @@ import TextEditor from '@components/Form/TextEditor/TextEditor'
 import { FormattedHTMLMessage, useIntl } from 'react-intl'
 import { useFeatureFlag } from '@shared/hooks/useFeatureFlag'
 
-type ProposalStepVoteType = 'BUDGET' | 'DISABLED' | 'SIMPLE'
 export interface ProposalStepVoteTabsFormProps {
   formMethods: UseFormReturn<any>
   defaultLocale: string
@@ -34,42 +33,31 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
   const { watch, setValue, control } = formMethods
   const votesMinEnabled = useFeatureFlag('votes_min')
 
-  const voteType = watch('voteType')
   const budget = watch('budget')
   const voteThreshold = watch('voteThreshold')
   const secretBallot = watch('secretBallot')
   const votesRanking = watch('votesRanking')
   const votesMin = watch('votesMin')
   const votesLimit = watch('votesLimit')
+  const _voteTypeForTabs = watch('_voteTypeForTabs')
   const voteMinVoteLimitEnabled = votesMin !== null || votesLimit !== null
   const voteThresholdEnabled = voteThreshold !== null
 
   return (
     <Tabs
-      selectedId={voteType}
+      selectedId={_voteTypeForTabs}
       onChange={selected => {
-        if ((selected as ProposalStepVoteType) !== voteType) {
-          setValue('voteType', selected as ProposalStepVoteType)
-        }
+        setValue('_voteTypeForTabs', selected)
       }}
     >
       <Tabs.ButtonList ariaLabel={intl.formatMessage({ id: 'vote-capitalize' })}>
-        <Tabs.Button
-          id={'SIMPLE' as ProposalStepVoteType}
-          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
-        >
+        <Tabs.Button id={'SIMPLE'} labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}>
           {intl.formatMessage({ id: 'step.vote_type.simple' })}
         </Tabs.Button>
-        <Tabs.Button
-          id={'BUDGET' as ProposalStepVoteType}
-          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
-        >
+        <Tabs.Button id={'ADVANCED'} labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}>
           {intl.formatMessage({ id: 'global.advanced.text' })}
         </Tabs.Button>
-        <Tabs.Button
-          id={'DISABLED' as ProposalStepVoteType}
-          labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}
-        >
+        <Tabs.Button id={'DISABLED'} labelSx={{ paddingX: 0, marginLeft: 'auto', marginRight: 'auto' }}>
           {intl.formatMessage({ id: 'action_disable' })}
         </Tabs.Button>
       </Tabs.ButtonList>
@@ -84,8 +72,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
             {intl.formatMessage({
               id: 'admin.select.step.advanced.vote.prompt',
             })}
-
-            <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%" alignItems="center">
                   <ListCard.Item.Label>
@@ -101,8 +88,10 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                       const toggle = budget !== null && budget !== undefined
                       if (toggle) {
                         setValue('budget', null)
+                        setValue('voteType', 'SIMPLE')
                       } else {
                         setValue('budget', 0)
+                        setValue('voteType', 'BUDGET')
                       }
                     }}
                   />
@@ -121,7 +110,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                 )}
               </Flex>
             </ListCard.Item>
-            <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
@@ -195,7 +184,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                 )}
               </Flex>
             </ListCard.Item>
-            <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
@@ -239,7 +228,8 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                             name="votesMin"
                             control={control}
                             type="number"
-                            max={votesLimit - 1}
+                            min={0}
+                            max={votesLimit}
                           />
                         </FormControl>
                       )}
@@ -250,7 +240,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                             id: 'maximum-vote',
                           })}
                         />
-                        <FieldInput id="votesLimit" name="votesLimit" control={control} type="number" />
+                        <FieldInput id="votesLimit" name="votesLimit" control={control} type="number" min={votesMin} />
                       </FormControl>
                     </Flex>
 
@@ -273,7 +263,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                 )}
               </Flex>
             </ListCard.Item>
-            <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>

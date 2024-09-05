@@ -44,7 +44,6 @@ Scenario: Logged in admin wants to add questionnaire step to a project
   And I wait ".alert__form_succeeded-message" to appear on current page
   And I go to "/project/projet-vide/questionnaire/questionnairesteptitle"
   And I wait "#reply-form-container" to appear on current page
-  Then I should see "QuestionnaireStepTitle"
   Then I should see "QuestionnaireStepBody"
   Then I should see "QuestionnaireStepFooter"
 

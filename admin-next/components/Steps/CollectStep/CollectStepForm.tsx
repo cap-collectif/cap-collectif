@@ -38,6 +38,7 @@ import { formatQuestions } from '../QuestionnaireStep/utils'
 import { QuestionInput, UpdateProposalFormMutation$data } from '@relay/UpdateProposalFormMutation.graphql'
 import ProposalStepStatuses from '@components/Steps/ProposalStep/ProposalStepStatuses'
 import PublicationInput from '@components/Steps/Shared/PublicationInput'
+import { TabsVoteType } from '../SelectStep/SelectStepForm.utils'
 
 export interface CollectStepFormProps {
   stepId: string
@@ -52,6 +53,13 @@ type ProposalFormType = {
   title: string | null
   titleHelpText: string | null
   usingSummary: boolean
+  allowAknowledge: boolean
+  usingFacebook: boolean
+  usingWebPage: boolean
+  usingTwitter: boolean
+  usingInstagram: boolean
+  usingYoutube: boolean
+  usingLinkedIn: boolean
   summaryHelpText: string | null
   usingDescription: boolean
   description: string | null
@@ -141,6 +149,7 @@ export type FormValues = {
     labels: Array<string>
   }
   voteType: ProposalStepVoteType | undefined
+  _voteTypeForTabs: TabsVoteType | undefined
   votesMin: number | null | undefined
   votesLimit: number | null | undefined
   votesRanking: boolean | undefined
@@ -207,6 +216,13 @@ const COLLECT_FRAGMENT = graphql`
           categoryHelpText
           descriptionHelpText
           usingSummary
+          allowAknowledge
+          usingFacebook
+          usingWebPage
+          usingTwitter
+          usingInstagram
+          usingYoutube
+          usingLinkedIn
           summaryHelpText
           usingDescription
           description
@@ -445,7 +461,15 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
     return breadCrumbItems
   }
   const onSubmit = async (values: FormValues) => {
-    const proposalFormValues = selectedTab === FormTabsEnum.NEW ? values['form'] : values['form_model']
+    const _proposalFormValues = selectedTab === FormTabsEnum.NEW ? values['form'] : values['form_model']
+
+    const proposalFormValues = {
+      ..._proposalFormValues,
+      title:
+        selectedTab === FormTabsEnum.MODEL
+          ? intl.formatMessage({ id: 'copy-of' }) + ' ' + values['form_model'].title
+          : values['form'].title,
+    }
     const proposalFormUpdateInput = getProposalFormUpdateVariablesInput(proposalFormValues, selectedTab)
 
     try {
