@@ -764,6 +764,19 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         return $endAt;
     }
 
+    public function isTimeless(): bool
+    {
+        /** * @var ProjectAbstractStep $pas  */
+        foreach ($this->steps as $pas) {
+            $isTimeless = $pas->getStep()->isTimeless();
+            if ($isTimeless) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function getCurrentStep(): ?AbstractStep
     {
         $steps = $this->getEnabledStepsExcludingPresentationStep();

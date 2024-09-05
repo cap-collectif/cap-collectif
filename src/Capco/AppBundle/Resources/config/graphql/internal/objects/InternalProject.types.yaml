@@ -279,3 +279,6 @@ InternalProject:
             customCode:
                 type: 'String'
                 description: 'Custom code that will be applied to every steps.'
+            createdAt:
+                type: 'DateTime!'
+                description: 'Identifies the date and time when the object was created.'

@@ -24,7 +24,9 @@ const FRAGMENT = graphql`
         node {
           id
           title
+          createdAt
           timeRange {
+            isTimeless
             startAt
             endAt
           }
@@ -41,16 +43,26 @@ const getDateRangeProject = (projects: DashboardFilters_viewer$data['projects'],
     .filter(Boolean)
     .find(project => project && project.id === projectIdSelected)
 
-  if (projectSelected && projectSelected.timeRange) {
+
+  if (!projectSelected) {
+    return {
+      startAt: DEFAULT_FILTERS.dateRange.startAt,
+      endAt: DEFAULT_FILTERS.dateRange.endAt,
+    }
+  }
+
+  if (projectSelected.timeRange.isTimeless) {
+    return {
+      startAt: projectSelected.createdAt,
+      endAt: DEFAULT_FILTERS.dateRange.endAt,
+    }
+  }
+
+  if (projectSelected.timeRange) {
     return {
       startAt: projectSelected.timeRange?.startAt || DEFAULT_FILTERS.dateRange.startAt,
       endAt: projectSelected.timeRange?.endAt || DEFAULT_FILTERS.dateRange.endAt,
     }
-  }
-
-  return {
-    startAt: DEFAULT_FILTERS.dateRange.startAt,
-    endAt: DEFAULT_FILTERS.dateRange.endAt,
   }
 }
 

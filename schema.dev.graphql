@@ -11192,6 +11192,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Custom code that will be applied to every steps."""
   customCode: String
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
 }
 
 """A project abstract step."""
