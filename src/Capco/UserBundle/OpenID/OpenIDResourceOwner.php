@@ -181,6 +181,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
             case 'debateauidf':
             case 'debatdsf':
             case 'participer-debat-lithium':
+            case 'participer-debat-gravelines':
                 $resolver
                     ->setDefaults([
                         'state' => null,
