@@ -24,16 +24,16 @@ abstract class AbstractStyle
     use UuidTrait;
 
     /**
-     * @ORM\Column(name="opacity", type="float")
+     * @ORM\Column(name="opacity", type="float", nullable=true)
      */
-    private $opacity;
+    private ?float $opacity = null;
 
     public function getOpacity(): ?float
     {
         return $this->opacity;
     }
 
-    public function setOpacity(float $opacity): self
+    public function setOpacity(?float $opacity): self
     {
         $this->opacity = $opacity;
 

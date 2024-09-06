@@ -90,8 +90,8 @@ const onSubmit = (
     },
     background: {
       enabled: data.background ? true : false,
-      color: data.background ? data.background.color?.slice(0, 7) : null,
-      opacity: data.background ? fromHexStringToOpacity(data.background.color?.slice(7, 9)) : null,
+      color: data.background.color?.slice(0, 7) ? data.background.color?.slice(0, 7) : null,
+      opacity: data.background.color?.slice(7, 9) ? fromHexStringToOpacity(data.background.color?.slice(7, 9)) : 100,
     },
   }
   if (!data.id) {
