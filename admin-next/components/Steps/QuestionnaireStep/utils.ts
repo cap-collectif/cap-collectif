@@ -99,6 +99,8 @@ export const formatQuestions = (
     const choices = question.choices && question.choices.edges ? question.choices.edges.map(edge => edge?.node) : []
     return {
       ...question,
+      otherAllowed: question.isOtherAllowed,
+      isOtherAllowed: undefined,
       id: toTempIds ? `temp-${question.id}` : question.id,
       choices: toTempIds ? choices.map(c => ({ ...c, id: `temp-${c.id}` })) : choices,
     }
