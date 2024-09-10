@@ -1,0 +1,23 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateRequirementMutation wants to accept a requirement as user 1`] = `
+Object {
+  "updateRequirement": Object {
+    "requirement": Object {
+      "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+      "viewerMeetsTheRequirement": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.updateRequirementMutation wants to decline a requirement as user 1`] = `
+Object {
+  "updateRequirement": Object {
+    "requirement": Object {
+      "id": "UmVxdWlyZW1lbnQ6cmVxdWlyZW1lbnQz",
+      "viewerMeetsTheRequirement": false,
+    },
+  },
+}
+`;

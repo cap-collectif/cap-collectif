@@ -1,0 +1,55 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateHomePageProjectsSectionConfigurationMutation should update a HomePageProjectsSectionConfiguration with CUSTOM displayMode 1`] = `
+Object {
+  "updateHomePageProjectsSectionConfiguration": Object {
+    "errorCode": null,
+    "homePageProjectsSectionConfiguration": Object {
+      "displayMode": "CUSTOM",
+      "enabled": true,
+      "nbObjects": 2,
+      "position": 3,
+      "projects": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "title": "Food project",
+            },
+          },
+          Object {
+            "node": Object {
+              "title": "Débat du mois",
+            },
+          },
+          Object {
+            "node": Object {
+              "title": "Débat Wysiwyg",
+            },
+          },
+        ],
+      },
+      "teaser": "sous titre",
+      "title": "titre",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateHomePageProjectsSectionConfigurationMutation should update a HomePageProjectsSectionConfiguration with MOST_RECENT displayMode 1`] = `
+Object {
+  "updateHomePageProjectsSectionConfiguration": Object {
+    "errorCode": null,
+    "homePageProjectsSectionConfiguration": Object {
+      "displayMode": "MOST_RECENT",
+      "enabled": true,
+      "nbObjects": 2,
+      "position": 3,
+      "projects": Object {
+        "edges": Array [],
+      },
+      "teaser": "sous titre",
+      "title": "titre",
+    },
+  },
+}
+`;

@@ -1,0 +1,173 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateProfilePasswordMutation should update user password 1`] = `
+Object {
+  "updateProfilePassword": Object {
+    "error": null,
+    "user": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+      "username": "pwned",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePasswordMutation should update user password if current password is wrong 1`] = `
+Object {
+  "updateProfilePassword": Object {
+    "error": "fos_user.password.not_current",
+    "user": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+      "username": "pwned",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePersonalDataMutation should add identification code, and code is ok 1`] = `
+Object {
+  "updateProfilePersonalData": Object {
+    "errorCode": null,
+    "user": Object {
+      "id": "VXNlcjp1c2VyS2lyb3VsZQ==",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePersonalDataMutation should add identification code, but the code is wrong 1`] = `
+Object {
+  "updateProfilePersonalData": Object {
+    "errorCode": "CANT_UPDATE",
+    "user": Object {
+      "id": "VXNlcjp1c2VyS2lyb3VsZQ==",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePersonalDataMutation should update personal data of an other user as super admin 1`] = `
+Object {
+  "updateProfilePersonalData": Object {
+    "user": Object {
+      "address": "noway",
+      "address2": null,
+      "city": "Paris",
+      "dateOfBirth": "1992-12-12 00:00:00",
+      "firstname": "New firstname",
+      "gender": "OTHER",
+      "id": "VXNlcjp1c2VyTWF4aW1l",
+      "lastname": "new lastname",
+      "phone": null,
+      "postalAddress": Object {
+        "json": "[{\\"address_components\\":[{\\"long_name\\":\\"262\\",\\"short_name\\":\\"262\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Général Leclerc\\",\\"short_name\\":\\"Avenue Général Leclerc\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Rennes\\",\\"short_name\\":\\"Rennes\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Ille-et-Vilaine\\",\\"short_name\\":\\"Ille-et-Vilaine\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Bretagne\\",\\"short_name\\":\\"Bretagne\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"35700\\",\\"short_name\\":\\"35700\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"262 Avenue Général Leclerc, 35700 Rennes, France\\",\\"geometry\\":{\\"bounds\\":{\\"northeast\\":{\\"lat\\":48.1140978,\\"lng\\":-1.6404985},\\"southwest\\":{\\"lat\\":48.1140852,\\"lng\\":-1.640499}},\\"location\\":{\\"lat\\":48.1140852,\\"lng\\":-1.6404985},\\"location_type\\":\\"RANGE_INTERPOLATED\\",\\"viewport\\":{\\"northeast\\":{\\"lat\\":48.1154404802915,\\"lng\\":-1.639149769708498},\\"southwest\\":{\\"lat\\":48.1127425197085,\\"lng\\":-1.641847730291502}}},\\"place_id\\":\\"EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\\",\\"types\\":[\\"street_address\\"]}]",
+      },
+      "zipCode": "75012",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePersonalDataMutation should update user personal data 1`] = `
+Object {
+  "updateProfilePersonalData": Object {
+    "user": Object {
+      "address": "noway",
+      "address2": null,
+      "city": "Paris",
+      "dateOfBirth": "1992-12-12 00:00:00",
+      "firstname": "New firstname",
+      "gender": "OTHER",
+      "id": "VXNlcjp1c2VyNQ==",
+      "lastname": "new lastname",
+      "phone": null,
+      "postalAddress": Object {
+        "json": "[{\\"address_components\\":[{\\"long_name\\":\\"262\\",\\"short_name\\":\\"262\\",\\"types\\":[\\"street_number\\"]},{\\"long_name\\":\\"Avenue Général Leclerc\\",\\"short_name\\":\\"Avenue Général Leclerc\\",\\"types\\":[\\"route\\"]},{\\"long_name\\":\\"Rennes\\",\\"short_name\\":\\"Rennes\\",\\"types\\":[\\"locality\\",\\"political\\"]},{\\"long_name\\":\\"Ille-et-Vilaine\\",\\"short_name\\":\\"Ille-et-Vilaine\\",\\"types\\":[\\"administrative_area_level_2\\",\\"political\\"]},{\\"long_name\\":\\"Bretagne\\",\\"short_name\\":\\"Bretagne\\",\\"types\\":[\\"administrative_area_level_1\\",\\"political\\"]},{\\"long_name\\":\\"France\\",\\"short_name\\":\\"FR\\",\\"types\\":[\\"country\\",\\"political\\"]},{\\"long_name\\":\\"35700\\",\\"short_name\\":\\"35700\\",\\"types\\":[\\"postal_code\\"]}],\\"formatted_address\\":\\"262 Avenue Général Leclerc, 35700 Rennes, France\\",\\"geometry\\":{\\"bounds\\":{\\"northeast\\":{\\"lat\\":48.1140978,\\"lng\\":-1.6404985},\\"southwest\\":{\\"lat\\":48.1140852,\\"lng\\":-1.640499}},\\"location\\":{\\"lat\\":48.1140852,\\"lng\\":-1.6404985},\\"location_type\\":\\"RANGE_INTERPOLATED\\",\\"viewport\\":{\\"northeast\\":{\\"lat\\":48.1154404802915,\\"lng\\":-1.639149769708498},\\"southwest\\":{\\"lat\\":48.1127425197085,\\"lng\\":-1.641847730291502}}},\\"place_id\\":\\"EjIyNjIgQXZlbnVlIEfDqW7DqXJhbCBMZWNsZXJjLCAzNTcwMCBSZW5uZXMsIEZyYW5jZQ\\",\\"types\\":[\\"street_address\\"]}]",
+      },
+      "zipCode": "75012",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePublicDataMutation should inject HTML into username 1`] = `
+Object {
+  "updateProfilePublicData": Object {
+    "user": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+      "username": "pwned",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePublicDataMutation should update public data of an other user as super admin 1`] = `
+Object {
+  "updateProfilePublicData": Object {
+    "user": Object {
+      "biography": null,
+      "id": "VXNlcjp1c2VyTWF4aW1l",
+      "username": "New username",
+      "websiteUrl": "http://perdu.com",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateProfilePublicDataMutation should update user public data 1`] = `
+Object {
+  "updateProfilePublicData": Object {
+    "user": Object {
+      "biography": null,
+      "id": "VXNlcjp1c2VyNQ==",
+      "username": "New username",
+      "websiteUrl": "http://perdu.com",
+    },
+  },
+}
+`;
+
+exports[`mutations.updateUserAccountMutation should update other user account as admin 1`] = `
+Object {
+  "updateUserAccount": Object {
+    "user": Object {
+      "enabled": true,
+      "id": "VXNlcjp1c2VyTWF4aW1l",
+      "roles": Array [
+        "ROLE_SUPER_ADMIN",
+        "ROLE_ADMIN",
+        "ROLE_USER",
+      ],
+      "vip": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.updateUserAccountMutation should update other user account as super admin 1`] = `
+Object {
+  "updateUserAccount": Object {
+    "user": Object {
+      "enabled": true,
+      "id": "VXNlcjp1c2VyTWF4aW1l",
+      "roles": Array [
+        "ROLE_SUPER_ADMIN",
+        "ROLE_ADMIN",
+        "ROLE_USER",
+      ],
+      "vip": true,
+    },
+  },
+}
+`;
+
+exports[`mutations.updateUsernameMutation should update update user username 1`] = `
+Object {
+  "updateUsername": Object {
+    "viewer": Object {
+      "id": "VXNlcjp1c2VyNQ==",
+      "username": "Nouveau username",
+    },
+  },
+}
+`;

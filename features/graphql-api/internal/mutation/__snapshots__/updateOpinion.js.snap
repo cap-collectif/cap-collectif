@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateOpinionMutation should update an opinion as admin 1`] = `
+Object {
+  "updateOpinion": Object {
+    "errorCode": "NOT_AUTHORIZED",
+    "opinion": null,
+  },
+}
+`;
+
+exports[`mutations.updateOpinionMutation should update an opinion as user 1`] = `
+Object {
+  "updateOpinion": Object {
+    "errorCode": null,
+    "opinion": Object {
+      "title": "new title",
+    },
+  },
+}
+`;

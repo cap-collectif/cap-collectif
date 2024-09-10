@@ -1,0 +1,29 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeProposalProgressStepsMutation should create and delete a proposal step in admin as admin 1`] = `
+Object {
+  "changeProposalProgressSteps": Object {
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "progressSteps": Array [
+        Object {
+          "endAt": "2018-03-16 00:00:00",
+          "startAt": "2018-03-07 00:00:00",
+          "title": "test",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`mutations.changeProposalProgressStepsMutation should create and delete a proposal step in admin as admin 2`] = `
+Object {
+  "changeProposalProgressSteps": Object {
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "progressSteps": Array [],
+    },
+  },
+}
+`;

@@ -1,0 +1,12 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateFollowProposalMutation should update follow proposal with current user 1`] = `
+Object {
+  "updateFollowProposal": Object {
+    "proposal": Object {
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
+      "viewerFollowingConfiguration": "MINIMAL",
+    },
+  },
+}
+`;

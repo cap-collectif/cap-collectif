@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateUserReplyMutation wants to published a reply in draft as admin 1`] = `
+Object {
+  "updateUserReply": Object {
+    "reply": Object {
+      "id": "UmVwbHk6cmVwbHk5",
+      "published": true,
+      "responses": Array [
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mg==",
+          },
+          "value": "Je pense que c'est la ville parfaite pour organiser les JO",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTM=",
+          },
+          "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Embêter Maxime\\"}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTQ=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTU=",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTY=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTg=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTk=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAx",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAy",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTM4NQ==",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mzk0NA==",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`mutations.updateUserReplyMutation wants to update reply as admin 1`] = `
+Object {
+  "updateUserReply": Object {
+    "reply": Object {
+      "id": "UmVwbHk6cmVwbHky",
+      "published": true,
+      "responses": Array [
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mg==",
+          },
+          "value": "Je pense que c'est la ville parfaite pour organiser les JO",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTM=",
+          },
+          "value": "{\\"labels\\":[\\"Athlétisme\\",\\"Sports collectifs\\"],\\"other\\":\\"Embêter Maxime\\"}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MjA=",
+          },
+          "value": "{\\"labels\\":[\\"Au top\\"],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTQ=",
+          },
+          "value": "{\\"labels\\":[\\"Maxime Arrouard\\"],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTU=",
+          },
+          "value": "Assez fort (Mon sonotone est mal réglé)",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTY=",
+          },
+          "value": "{\\"labels\\":[],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTg=",
+          },
+          "value": "{\\"labels\\":[\\"Logo 1\\"],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTk=",
+          },
+          "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTk=",
+          },
+          "value": "{\\"labels\\":[\\"Il bluffe\\"],\\"other\\":null}",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAx",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAy",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MTM4NQ==",
+          },
+          "value": "0",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mzk0NA==",
+          },
+          "value": "{\\"labels\\":[\\"Sans profession\\"],\\"other\\":null}",
+        },
+      ],
+    },
+  },
+}
+`;

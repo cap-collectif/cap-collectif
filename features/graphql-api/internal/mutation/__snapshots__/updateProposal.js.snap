@@ -1,0 +1,227 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.changeProposalContentMutation should be notified if GraphQL user modify his proposal 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "body": "Grâce à ça, on aura des cheveux qui sentent la madeleine !!!!!!!",
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      "publicationStatus": "PUBLISHED",
+      "title": "Achetez un DOP à la madeleine",
+    },
+  },
+}
+`;
+
+exports[`mutations.changeProposalContentMutation tries to update and published a draft proposal as userNotConfirmedWithContributions 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "draft": false,
+      "id": "UHJvcG9zYWw6cHJvcG9zYWxEcmFmdFdpdGhOb3RDb25maXJtZWRBdXRob3I=",
+      "publicationStatus": "UNPUBLISHED",
+      "title": "NewTitle",
+    },
+  },
+}
+`;
+
+exports[`mutations.changeProposalContentMutation tries to update his proposal in revision as pierre 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "body": "<p>Je ne crois pas qu'il y ai de petit ou de moyen projet.</p>",
+      "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+      "revisions": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uMg==",
+              "state": "REVISED",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uRXhwaXJlZA==",
+              "state": "REVISED",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZA==",
+              "state": "REVISED",
+            },
+          },
+          Object {
+            "node": Object {
+              "id": "UHJvcG9zYWxSZXZpc2lvbjpwcm9wb3NhbFJldmlzaW9uUmV2aXNlZE5vdEV4cGlyZWQ=",
+              "state": "REVISED",
+            },
+          },
+        ],
+        "totalCount": 4,
+      },
+      "title": "Mon grand projet",
+    },
+  },
+}
+`;
+
+exports[`mutations.changeProposalContentMutation wants to edit a proposal as super admin 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "author": Object {
+        "_id": "userAdmin",
+      },
+      "body": "NewBody",
+      "category": Object {
+        "id": "pCategory2",
+      },
+      "district": Object {
+        "id": "RGlzdHJpY3Q6ZGlzdHJpY3Qy",
+      },
+      "estimation": 1000,
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      "likers": Array [
+        Object {
+          "displayName": "lbrunet",
+          "id": "VXNlcjp1c2VyMQ==",
+        },
+        Object {
+          "displayName": "sfavot",
+          "id": "VXNlcjp1c2VyMg==",
+        },
+        Object {
+          "displayName": "xlacot",
+          "id": "VXNlcjp1c2VyMw==",
+        },
+      ],
+      "responses": Array [
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAz",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MQ==",
+          },
+          "value": "reponse-1",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mw==",
+          },
+          "value": "reponse-3",
+        },
+        Object {
+          "medias": Array [
+            Object {
+              "id": "media1",
+            },
+          ],
+          "question": Object {
+            "id": "UXVlc3Rpb246MTE=",
+          },
+        },
+        Object {
+          "medias": Array [
+            Object {
+              "id": "media1",
+            },
+          ],
+          "question": Object {
+            "id": "UXVlc3Rpb246MTI=",
+          },
+        },
+      ],
+      "theme": Object {
+        "id": "theme1",
+      },
+      "title": "NewTitle",
+    },
+  },
+}
+`;
+
+exports[`mutations.changeProposalContentMutation wants to edit his proposal as user 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "body": "Avec tout le travail accompli, on mérite bien chacun un (petit) cadeau, donc on a choisi un sauna. JoliCode interdit",
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      "publicationStatus": "PUBLISHED",
+      "title": "Acheter un sauna par personne pour Capco",
+    },
+  },
+}
+`;
+
+exports[`mutations.changeProposalContentMutation wants to edit his proposal as user 2`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "body": "New body",
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwy",
+      "publicationStatus": "PUBLISHED",
+      "responses": Array [
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MzAz",
+          },
+          "value": null,
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246MQ==",
+          },
+          "value": "New reponse-1",
+        },
+        Object {
+          "question": Object {
+            "id": "UXVlc3Rpb246Mw==",
+          },
+          "value": "New reponse-3",
+        },
+        Object {
+          "medias": Array [
+            Object {
+              "id": "media1",
+            },
+            Object {
+              "id": "media2",
+            },
+          ],
+          "question": Object {
+            "id": "UXVlc3Rpb246MTE=",
+          },
+        },
+        Object {
+          "medias": Array [],
+          "question": Object {
+            "id": "UXVlc3Rpb246MTI=",
+          },
+        },
+      ],
+      "title": "New title",
+    },
+  },
+}
+`;
+
+exports[`mutations.changeProposalContentMutation wants to update a and published a draft proposal as admin 1`] = `
+Object {
+  "changeProposalContent": Object {
+    "proposal": Object {
+      "body": "NewBody",
+      "draft": false,
+      "id": "UHJvcG9zYWw6cHJvcG9zYWwyMQ==",
+      "publicationStatus": "PUBLISHED",
+      "published": true,
+      "title": "NewTitle",
+    },
+  },
+}
+`;

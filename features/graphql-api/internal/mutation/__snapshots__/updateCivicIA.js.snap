@@ -1,0 +1,21 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateCivicIAMutation should update civicIA in news category 1`] = `
+Object {
+  "updateCivicIA": Object {
+    "analyzables": Array [
+      Object {
+        "iaCategory": "news",
+        "iaReadability": 75,
+        "iaSentiment": "NEUTRAL",
+      },
+      Object {
+        "iaCategory": "business and industrial",
+        "iaReadability": 42,
+        "iaSentiment": "POSITIVE",
+      },
+    ],
+    "errorCode": null,
+  },
+}
+`;
