@@ -146,6 +146,7 @@ mappings:
                 owner:
                     properties:
                         id: { type: keyword }
+                        organizationId: { type: keyword }
         opinion:
             properties:
                 id: { type: keyword }
