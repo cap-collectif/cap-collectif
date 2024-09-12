@@ -149,6 +149,7 @@ const AdditionalParametersModal: FC<ChooseQuestionTypeProps> = ({ onSuccess, isC
           {intl.formatMessage({ id: 'global.back' })}
         </Button>
         <Button
+          data-cy="finish-question"
           variant="primary"
           variantColor="primary"
           variantSize="big"

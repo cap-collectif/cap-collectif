@@ -356,6 +356,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
           <PublicationInput fieldName="isEnabled" />
           <Flex mt={6}>
             <Button
+              id="save-questionnaire-step"
               variantSize="big"
               variant="primary"
               type="submit"

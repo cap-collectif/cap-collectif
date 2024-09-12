@@ -88,6 +88,7 @@ const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQue
           {intl.formatMessage({ id: isNewQuestion ? 'global.back' : 'cancel' })}
         </Button>
         <Button
+          data-cy="last-step"
           variant="primary"
           variantColor="primary"
           variantSize="big"

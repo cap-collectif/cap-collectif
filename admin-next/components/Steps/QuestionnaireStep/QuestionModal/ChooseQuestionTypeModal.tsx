@@ -41,6 +41,7 @@ const ChooseQuestionTypeModal: FC<ChooseQuestionTypeProps> = ({ onCancel }) => {
               </Text>
               {QuestionTypes[key].values.map((value, idx) => (
                 <Button
+                  data-cy={value.label}
                   key={idx}
                   mb={2}
                   variant={type === value.type ? 'primary' : 'secondary'}
@@ -74,6 +75,7 @@ const ChooseQuestionTypeModal: FC<ChooseQuestionTypeProps> = ({ onCancel }) => {
           {intl.formatMessage({ id: 'cancel' })}
         </Button>
         <Button
+          data-cy="next-step"
           variant="primary"
           variantColor="primary"
           variantSize="big"

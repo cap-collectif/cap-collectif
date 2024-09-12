@@ -115,6 +115,7 @@ const SetButtonsChoices: React.FC = () => {
           )
         })}
         <Button
+          id="add-choice-btn"
           variant="tertiary"
           mb={4}
           onClick={() => {

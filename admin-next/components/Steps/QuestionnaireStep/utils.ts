@@ -99,6 +99,9 @@ export const formatQuestions = (
     const choices = question.choices && question.choices.edges ? question.choices.edges.map(edge => edge?.node) : []
     return {
       ...question,
+      validationRule: question?.validationRule?.type
+        ? { ...question.validationRule, type: { labels: [question.validationRule.type] } }
+        : undefined,
       otherAllowed: question.isOtherAllowed,
       isOtherAllowed: undefined,
       id: toTempIds ? `temp-${question.id}` : question.id,

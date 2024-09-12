@@ -283,13 +283,20 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
             placement="bottom-start"
             closeOnSelect={false}
             disclosure={
-              <Button variantColor="primary" variant="secondary" variantSize="small" rightIcon={CapUIIcon.ArrowDown}>
+              <Button
+                variantColor="primary"
+                variant="secondary"
+                variantSize="small"
+                rightIcon={CapUIIcon.ArrowDown}
+                id="add-question-btn"
+              >
                 {intl.formatMessage({ id: 'global.add' })}
               </Button>
             }
           >
             <Menu.List>
               <Menu.Item
+                id="open-question-modal"
                 onClick={() => {
                   setQuestionIndex(ADD_NEW_QUESTION)
                   onOpen('question-modal')()
