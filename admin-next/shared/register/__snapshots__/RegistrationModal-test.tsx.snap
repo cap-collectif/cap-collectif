@@ -317,10 +317,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 />
               </div>
               <span
-                className="sc-bcXGCL bZxZKL"
+                className="sc-bcXGCL liyRZE"
               >
                 <span
-                  className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+                  className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
                 >
                   registration.charte
                 </span>
@@ -666,10 +666,10 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 />
               </div>
               <span
-                className="sc-bcXGCL bZxZKL"
+                className="sc-bcXGCL liyRZE"
               >
                 <span
-                  className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+                  className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
                 >
                   registration.charte
                 </span>

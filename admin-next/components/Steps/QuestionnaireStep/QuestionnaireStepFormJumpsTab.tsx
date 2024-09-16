@@ -152,13 +152,20 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
           placement="bottom-start"
           closeOnSelect={false}
           disclosure={
-            <Button variantColor="primary" variant="secondary" variantSize="small" rightIcon={CapUIIcon.ArrowDown}>
+            <Button
+              id="add-jump-btn"
+              variantColor="primary"
+              variant="secondary"
+              variantSize="small"
+              rightIcon={CapUIIcon.ArrowDown}
+            >
               {intl.formatMessage({ id: 'global.add' })}
             </Button>
           }
         >
           <Menu.List>
             <Menu.Item
+              id="add-conditional-jump"
               onClick={() => {
                 setJumpIndex(ADD_NEW_JUMP)
                 setValue('temporaryJump', { jumps: [{ conditions: [{}] }] })
@@ -168,6 +175,7 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
               {intl.formatMessage({ id: 'a-conditional-jump' })}
             </Menu.Item>
             <Menu.Item
+              id="add-redirection"
               onClick={() => {
                 setJumpIndex(ADD_NEW_JUMP)
                 onOpen('redirection-modal')()

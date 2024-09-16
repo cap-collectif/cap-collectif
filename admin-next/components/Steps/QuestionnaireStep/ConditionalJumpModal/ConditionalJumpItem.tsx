@@ -69,7 +69,13 @@ export const ConditionalJumpItem: React.FC<Props> = ({
               })}
             />
             <InputGroup wrap="nowrap">
-              <FormControl name={`${formFieldName}.question.id`} control={control} minWidth="40%" maxWidth="40%">
+              <FormControl
+                name={`${formFieldName}.question.id`}
+                id={`${formFieldName}.question.id`}
+                control={control}
+                minWidth="40%"
+                maxWidth="40%"
+              >
                 <FieldInput
                   name={`${formFieldName}.question.id`}
                   control={control}
@@ -88,7 +94,13 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                   }}
                 />
               </FormControl>
-              <FormControl name={`${formFieldName}.operator`} control={control} minWidth="20%" maxWidth="20%">
+              <FormControl
+                name={`${formFieldName}.operator`}
+                id={`${formFieldName}.operator`}
+                control={control}
+                minWidth="20%"
+                maxWidth="20%"
+              >
                 <FieldInput
                   name={`${formFieldName}.operator`}
                   control={control}
@@ -101,7 +113,13 @@ export const ConditionalJumpItem: React.FC<Props> = ({
                   }}
                 />
               </FormControl>
-              <FormControl name={`${formFieldName}.value.id`} control={control} minWidth="40%" maxWidth="40%">
+              <FormControl
+                name={`${formFieldName}.value.id`}
+                id={`${formFieldName}.value.id`}
+                control={control}
+                minWidth="40%"
+                maxWidth="40%"
+              >
                 <FieldInput
                   key={`key__${selectedQuestionId}_${currentJump.operator}`}
                   name={`${formFieldName}.value.id`}
@@ -122,7 +140,11 @@ export const ConditionalJumpItem: React.FC<Props> = ({
           </Box>
         )
       })}
-      <FormControl name={`${parentFormFieldName}.destination.id`} control={control}>
+      <FormControl
+        name={`${parentFormFieldName}.destination.id`}
+        id={`${parentFormFieldName}.destination.id`}
+        control={control}
+      >
         <FormLabel
           htmlFor={`${parentFormFieldName}.destination.id`}
           label={intl.formatMessage({ id: 'then-go-to-question' })}

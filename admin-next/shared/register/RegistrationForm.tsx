@@ -231,7 +231,11 @@ export const RegistrationForm = ({ query: queryFragment }: Props) => {
           variantSize={CapInputSize.Md}
           rules={{ required: intl.formatMessage({ id: 'registration.constraints.charte.check' }) }}
         >
-          <Box as="span" sx={{ button: { textDecoration: 'underline', ml: 0 }, fontWeight: 400 }}>
+          <Box
+            color="neutral-gray.900"
+            as="span"
+            sx={{ button: { textDecoration: 'underline', ml: 0 }, fontWeight: 400 }}
+          >
             <ChartLinkComponent />
             <PrivacyPolicyComponent privacyPolicyRequired={privacyPolicyRequired} />
           </Box>

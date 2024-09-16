@@ -1,13 +1,15 @@
-type Publication = 'published' | 'draft'
-
 export default new (class AdminQuestionnaireStepPage {
   get cy() {
     return cy
   }
 
   visitQuestionnaireStepPage() {
-    const url = `/admin-next/project/UHJvamVjdDpwcm9qZWN0OA==/update-step/questionnaire-step/questionnairestep1`
-    cy.visit(url)
+    cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0OA==/update-step/questionnaire-step/questionnairestep1')
+    cy.interceptGraphQLOperation({ operationName: 'QuestionnaireStepFormQuery' })
+  }
+
+  visitQuestionnaireStepPageWithJumps() {
+    cy.visit('/admin-next/project/UHJvamVjdDpwcm9qZWN0OA==/update-step/questionnaire-step/questionnairestepJump')
     cy.interceptGraphQLOperation({ operationName: 'QuestionnaireStepFormQuery' })
   }
 
@@ -37,6 +39,11 @@ export default new (class AdminQuestionnaireStepPage {
     cy.get('#open-question-modal').click()
   }
 
+  openAddJumpModal(redirection?: boolean) {
+    cy.get('#add-jump-btn').click()
+    cy.get(redirection ? '#add-redirection' : '#add-conditional-jump').click()
+  }
+
   chooseQuestionTypeAndFillBasics(type: string, title: string, description: string) {
     this.openAddQuestionModal()
     cy.getByDataCy(type).click()
@@ -63,6 +70,34 @@ export default new (class AdminQuestionnaireStepPage {
     cy.get('input#temporaryQuestion\\.choices\\.1\\.title').type('c2')
     cy.getByDataCy('last-step').click()
     cy.getByDataCy('finish-question').click()
+  }
+
+  addAJump() {
+    this.openAddJumpModal()
+    const questionId = '#temporaryJump\\.jumps\\.0\\.conditions\\.0\\.question\\.id'
+    cy.openDSSelect(questionId)
+    this.cy.selectDSSelectFirstOption()
+    const operatorId = '#temporaryJump\\.jumps\\.0\\.conditions\\.0\\.operator'
+    cy.openDSSelect(operatorId)
+    this.cy.selectDSSelectFirstOption()
+    const valueId = '#temporaryJump\\.jumps\\.0\\.conditions\\.0\\.value\\.id'
+    cy.openDSSelect(valueId)
+    this.cy.selectDSSelectFirstOption()
+    const destinationId = '#temporaryJump\\.jumps\\.0\\.destination\\.id'
+    cy.openDSSelect(destinationId)
+    this.cy.selectDSSelectFirstOption()
+    cy.get('#confirm-form-create').click()
+  }
+
+  addARedirection() {
+    this.openAddJumpModal(true)
+    const questionId = '#temporaryJump\\.id'
+    cy.openDSSelect(questionId)
+    this.cy.selectDSSelectFirstOption()
+    const destinationId = '#temporaryJump\\.alwaysJumpDestinationQuestion\\.id'
+    cy.openDSSelect(destinationId)
+    this.cy.selectDSSelectFirstOption()
+    cy.get('#confirm-form-create').click()
   }
 
   openOptionnalSettingsAccordion() {

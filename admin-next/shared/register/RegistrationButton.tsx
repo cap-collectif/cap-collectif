@@ -68,8 +68,8 @@ export const RegistrationButton: React.FC<ButtonProps & { query: RegistrationBut
         sx={
           !newNavbar
             ? {
-                color: `${isOpen ? theme.textColor : theme.menuBackground} !important`,
-                background: !isOpen ? `${theme.primaryColor} !important` : '',
+                color: `${theme.primaryLabel} !important`,
+                background: `${theme.primaryColor} !important`,
                 border: 'none',
               }
             : null

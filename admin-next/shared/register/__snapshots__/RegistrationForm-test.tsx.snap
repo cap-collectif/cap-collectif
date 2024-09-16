@@ -224,10 +224,10 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         />
       </div>
       <span
-        className="sc-bcXGCL bZxZKL"
+        className="sc-bcXGCL liyRZE"
       >
         <span
-          className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+          className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
         >
           registration.charte
         </span>
@@ -602,10 +602,10 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         />
       </div>
       <span
-        className="sc-bcXGCL bZxZKL"
+        className="sc-bcXGCL liyRZE"
       >
         <span
-          className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+          className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
         >
           registration.charte
         </span>
@@ -882,10 +882,10 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         />
       </div>
       <span
-        className="sc-bcXGCL bZxZKL"
+        className="sc-bcXGCL liyRZE"
       >
         <span
-          className="sc-bcXGCL sc-8eb6f60-0 cklhXU giZtqB"
+          className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
         >
           registration.charte
         </span>

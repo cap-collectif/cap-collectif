@@ -48,7 +48,7 @@ export const RedirectionModal: React.FC<Props> = ({ onClose, onSuccess, isNewJum
       </Modal.Header>
       <Modal.Body>
         <Box bg="gray.100" p={6} borderRadius="accordion">
-          <FormControl name={`temporaryJump.id`} control={control}>
+          <FormControl name={`temporaryJump.id`} id={`temporaryJump.id`} control={control}>
             <FormLabel htmlFor={`temporaryJump.id`} label={intl.formatMessage({ id: 'by-answering-question' })} />
             <FieldInput
               name={`temporaryJump.id`}
@@ -63,7 +63,11 @@ export const RedirectionModal: React.FC<Props> = ({ onClose, onSuccess, isNewJum
               onChange={val => setValue('temporaryJump.title', questions.find((q: QuestionIds) => q.id === val).title)}
             />
           </FormControl>
-          <FormControl name={`temporaryJump.alwaysJumpDestinationQuestion.id`} control={control}>
+          <FormControl
+            name={`temporaryJump.alwaysJumpDestinationQuestion.id`}
+            id={`temporaryJump.alwaysJumpDestinationQuestion.id`}
+            control={control}
+          >
             <FormLabel
               htmlFor={`temporaryJump.alwaysJumpDestinationQuestion.id`}
               label={intl.formatMessage({ id: 'always-go-to' })}

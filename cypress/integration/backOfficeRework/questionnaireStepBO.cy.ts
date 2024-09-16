@@ -20,4 +20,11 @@ describe('Questionnaire Step back office', () => {
     AdminQuestionnaireStepPage.fillCustomCode('Custom code')
     AdminQuestionnaireStepPage.save()
   })
+  it('should be possible to add a conditional jump and a redirection on a big questionnaire', () => {
+    AdminQuestionnaireStepPage.visitQuestionnaireStepPageWithJumps()
+    AdminQuestionnaireStepPage.openQuestionnaireAccordion()
+    AdminQuestionnaireStepPage.addAJump()
+    AdminQuestionnaireStepPage.addARedirection()
+    AdminQuestionnaireStepPage.save()
+  })
 })

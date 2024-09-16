@@ -15,3 +15,13 @@ Cypress.Commands.add('selectReactSetOption', (selector: string, query: string) =
 Cypress.Commands.add('selectReactSelectFirstOption', (selector: string) => {
   cy.get(`${selector} .react-select__option:first-child`).click({ force: true })
 })
+
+Cypress.Commands.add('selectDSSelectFirstOption', () => {
+  cy.get(`.cap-select__option:first-child`).click({ force: true })
+})
+
+Cypress.Commands.add('openDSSelect', (selector: string) => {
+  cy.get(`${selector} .cap-select__input`).click({
+    force: true,
+  })
+})
