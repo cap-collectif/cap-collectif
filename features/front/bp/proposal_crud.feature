@@ -71,13 +71,14 @@ Scenario: Author of a proposal wants to update it
   When I am logged in as user
   And I go to a proposal
   When I click the edit proposal button
-  And I wait 3 seconds
+  And I wait 4 seconds
   And I change the proposal title
   And I attach the file "/var/www/features/files/document.pdf" to "proposal-form-responses3_field"
-  And I wait 3 seconds
+  And I wait 4 seconds
   And I submit the edit proposal form
-  And I wait 1 seconds
-  Then the proposal title should have changed
+  And I wait 2 seconds
+  Then I should see "Nouveau titre" within 10 seconds
+  And the proposal title should have changed
 
 Scenario: Non author of a proposal wants to update it
   Given I am logged in as admin
