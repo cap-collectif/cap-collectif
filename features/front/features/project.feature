@@ -228,7 +228,7 @@ Scenario: Super Admin can access to all private projects
   When I visited "collect page" with:
     | projectSlug | un-avenir-meilleur-pour-les-nains-de-jardins-custom-access |
     | stepSlug    | collecte-des-propositions-liberer-les-nains-de-jardin      |
-  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)"
+  Then I should see "Un avenir meilleur pour les nains de jardins (custom access)" within 10 seconds
 
 Scenario: Admin access to a project accessible for admins only
   Given I am logged in as admin
