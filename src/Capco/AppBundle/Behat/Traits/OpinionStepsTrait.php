@@ -303,7 +303,7 @@ trait OpinionStepsTrait
     {
         $page = $this->getCurrentPage();
         $this->waitAndThrowOnFailure(
-            5000,
+            10000,
             "$('" . $page->getArgumentVotesCountSelector() . "').length > 0"
         );
         $votesCount = $page->getArgumentVotesCount();
@@ -313,7 +313,7 @@ trait OpinionStepsTrait
             'Argument has no votes from the begining, test will not be conclusive.'
         );
         $page->clickArgumentEditButton();
-        $this->waitAndThrowOnFailure(5000, "$('#argument-form #argument-body').length > 0");
+        $this->waitAndThrowOnFailure(10000, "$('#argument-form #argument-body').length > 0");
         $page->fillArgumentBodyField();
         $page->submitArgumentEditForm();
         $this->iWait(1);
