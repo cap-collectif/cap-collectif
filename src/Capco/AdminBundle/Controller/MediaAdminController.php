@@ -3,6 +3,7 @@
 namespace Capco\AdminBundle\Controller;
 
 use Capco\AppBundle\Controller\Api\MediasController;
+use Capco\AppBundle\Exception\UploadedFileException;
 use Capco\AppBundle\Manager\MediaManager;
 use Capco\MediaBundle\Provider\AllowedExtensions;
 use Capco\UserBundle\Entity\User;
@@ -46,6 +47,8 @@ class MediaAdminController extends AbstractController
             throw $this->createAccessDeniedException();
         }
 
+        $errors = null;
+
         if ($request->isMethod(Request::METHOD_POST)) {
             try {
                 $newMedia = $this->mediaManager->createFileFromUploadedFile(
@@ -57,22 +60,21 @@ class MediaAdminController extends AbstractController
                     'objectId' => $newMedia->getId(),
                     'objectName' => $newMedia->getName(),
                 ]);
-            } catch (\RuntimeException $exception) {
-                return new JsonResponse([
-                    'result' => 'error',
-                    'errors' => $exception->getMessage(),
-                ], Response::HTTP_BAD_REQUEST);
+            } catch (UploadedFileException $exception) {
+                $errors = $exception->getMessage();
             }
         }
 
-        return $this->render('CapcoAdminBundle:Media:create.html.twig');
+        return $this->render('CapcoAdminBundle:Media:create.html.twig', [
+            'errors' => $errors,
+        ]);
     }
 
     private function getUploadedFile(Request $request): UploadedFile
     {
         $uploadedFile = $request->files->get(self::INPUT_NAME);
         if (null === $uploadedFile) {
-            throw new \RuntimeException(MediasController::NO_MEDIA_FOUND);
+            throw new UploadedFileException(MediasController::NO_MEDIA_FOUND);
         }
 
         $this->checkUploadedFile($uploadedFile);
@@ -85,11 +87,17 @@ class MediaAdminController extends AbstractController
         $violations = $this->validator->validate($uploadedFile, [
             new File([
                 'maxSize' => '10M',
-                'mimeTypes' => AllowedExtensions::ALLOWED_MIMETYPES,
+                'mimeTypes' => AllowedExtensions::ALLOWED_MIMETYPES_IMAGE,
             ]),
         ]);
+
         if ($violations->count() > 0) {
-            throw new \RuntimeException(MediasController::FILE_NOT_ALLOWED);
+            $errorMessages = [];
+            foreach ($violations as $violation) {
+                $errorMessages[] = $violation->getMessage();
+            }
+
+            throw new UploadedFileException(implode(' ', $errorMessages));
         }
     }
 }

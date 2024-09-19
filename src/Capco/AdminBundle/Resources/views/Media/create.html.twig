@@ -6,6 +6,11 @@
 >
     <div class="box box-primary">
         <div class="box-body">
+            {% if errors %}
+                <div class="alert alert-danger">
+                    {{ errors }}
+                </div>
+            {% endif %}
             <label
                 for="binaryContent"
                 class="required">
