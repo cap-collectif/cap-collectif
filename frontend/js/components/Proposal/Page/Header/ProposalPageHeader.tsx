@@ -286,6 +286,8 @@ export const ProposalPageHeader = ({
                 size={CapUIIconSize.Xxl}
                 color={colors.white}
                 sx={{ scale: ['1', '2', '4'] }}
+                aria-hidden
+                focusable={false}
               />
             )}
             <CategoryBackground color={color} viewBox="0 0 230 75" />

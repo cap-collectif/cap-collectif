@@ -117,9 +117,9 @@ export const VoteStepPageWebLayout = ({ query: queryKey, stepId, isMapView, disa
             alignItems="center"
             width={cardWidthMapView}
             maxWidth={'-webkit-fill-available'}
-            mb={6}
             gap={4}
-            ml={[0, 2]}
+            mb={6}
+            ml={[0, 2, 6]}
             mr={[1, 4]}
           >
             <Box className="VoteStepPageSearchBar-Container" width="100%" display={'flex'} alignItems="center">

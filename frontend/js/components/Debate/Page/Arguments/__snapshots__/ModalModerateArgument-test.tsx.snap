@@ -81,6 +81,7 @@ exports[`<ModalModerateArgument /> should renders correcty with argument 1`] = `
                             aria-hidden="true"
                             class="ml-5"
                             fill="#acacac"
+                            focusable="false"
                             height="12"
                             style="vertical-align:middle;flex-shrink:0"
                             width="12"

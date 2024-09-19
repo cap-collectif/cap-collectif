@@ -481,6 +481,7 @@ Array [
                       <IconMock
                         aria-hidden={true}
                         className="icon"
+                        focusable={false}
                         height={16}
                         style={
                           Object {
@@ -1078,6 +1079,7 @@ Array [
                     <IconMock
                       aria-hidden={true}
                       className="icon"
+                      focusable={false}
                       height={16}
                       style={
                         Object {
@@ -1129,6 +1131,7 @@ Array [
                     <IconMock
                       aria-hidden={true}
                       className="icon"
+                      focusable={false}
                       height={16}
                       style={
                         Object {

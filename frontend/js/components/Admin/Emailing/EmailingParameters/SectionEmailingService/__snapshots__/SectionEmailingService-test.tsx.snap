@@ -43,6 +43,7 @@ Array [
             <IconMock
               aria-hidden={true}
               className="icon"
+              focusable={false}
               height={19}
               style={
                 Object {
@@ -85,6 +86,7 @@ Array [
             <IconMock
               aria-hidden={true}
               className="icon"
+              focusable={false}
               height={19}
               style={
                 Object {

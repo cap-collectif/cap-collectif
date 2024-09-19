@@ -488,7 +488,6 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           <svg
             className="sc-bcXGCL sc-eJDTud jThTHJ knzWyK cap-icon"
             fill="none"
-            onClick={[Function]}
             style={
               {
                 "cursor": "pointer",

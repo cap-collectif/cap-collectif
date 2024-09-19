@@ -45,6 +45,7 @@ Array [
             <IconMock
               aria-hidden={true}
               className="loginIcon"
+              focusable={false}
               style={
                 Object {
                   "flexShrink": "0",
@@ -155,6 +156,7 @@ Array [
               <IconMock
                 aria-hidden={true}
                 className="loginIcon"
+                focusable={false}
                 style={
                   Object {
                     "flexShrink": "0",

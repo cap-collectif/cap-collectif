@@ -51,6 +51,7 @@ Array [
                 aria-hidden={true}
                 className="icon"
                 fill="#707070"
+                focusable={false}
                 height={12}
                 style={
                   Object {
@@ -70,6 +71,7 @@ Array [
               aria-hidden={true}
               className="icon"
               fill="#707070"
+              focusable={false}
               height={12}
               style={
                 Object {
@@ -88,6 +90,7 @@ Array [
               aria-hidden={true}
               className="icon"
               fill="#707070"
+              focusable={false}
               height={12}
               style={
                 Object {
@@ -104,6 +107,7 @@ Array [
               aria-hidden={true}
               className="icon"
               fill="#707070"
+              focusable={false}
               height={12}
               style={
                 Object {
@@ -210,6 +214,7 @@ Array [
                 aria-hidden={true}
                 className="icon"
                 fill="#707070"
+                focusable={false}
                 height={12}
                 style={
                   Object {
@@ -229,6 +234,7 @@ Array [
               aria-hidden={true}
               className="icon"
               fill="#707070"
+              focusable={false}
               height={12}
               style={
                 Object {
@@ -247,6 +253,7 @@ Array [
               aria-hidden={true}
               className="icon"
               fill="#707070"
+              focusable={false}
               height={12}
               style={
                 Object {
@@ -263,6 +270,7 @@ Array [
               aria-hidden={true}
               className="icon"
               fill="#707070"
+              focusable={false}
               height={12}
               style={
                 Object {

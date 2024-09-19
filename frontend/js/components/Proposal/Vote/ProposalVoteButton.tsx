@@ -13,7 +13,7 @@ import type {
 import RemoveProposalVoteMutation from '../../../mutations/RemoveProposalVoteMutation'
 import RemoveProposalSmsVoteMutation from '../../../mutations/RemoveProposalSmsVoteMutation'
 import { isInterpellationContextFromStep, isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
-import { toast } from '~ds/Toast'
+import { toast } from '@cap-collectif/ui'
 import type { ProposalVoteButton_step$key, ProposalVoteButton_step$data } from '~relay/ProposalVoteButton_step.graphql'
 // TODO @Mo remake this file with @cap-collectif/ui to replace tooltip that already doesn't work
 import CookieMonster from '@shared/utils/CookieMonster'

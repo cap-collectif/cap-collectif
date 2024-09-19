@@ -103,7 +103,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             "_initHooksCalled": true,
             "options": Object {
               "className": "preview-icn",
-              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
+              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -163,7 +163,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             "_initHooksCalled": true,
             "options": Object {
               "className": "preview-icn",
-              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
+              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -223,7 +223,7 @@ exports[`<ProposalLeafletMap /> should render a map with only valid markers 1`] 
             "_initHooksCalled": true,
             "options": Object {
               "className": "preview-icn",
-              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></div>",
+              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></div>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -383,7 +383,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             "_initHooksCalled": true,
             "options": Object {
               "className": "preview-icn",
-              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
+              "html": "<IconMock fill=\\"#EEE\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -443,7 +443,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             "_initHooksCalled": true,
             "options": Object {
               "className": "preview-icn",
-              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
+              "html": "<IconMock fill=\\"blue\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><IconMock fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock>",
               "iconAnchor": Array [
                 20,
                 40,
@@ -503,7 +503,7 @@ exports[`<ProposalLeafletMap /> should render a map with proposals still loading
             "_initHooksCalled": true,
             "options": Object {
               "className": "preview-icn",
-              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" style=\\"vertical-align:middle;flex-shrink:0\\"></div>",
+              "html": "<IconMock fill=\\"purple\\" width=\\"40\\" height=\\"40\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></IconMock><div fill=\\"#ffffff\\" width=\\"16\\" height=\\"16\\" class=\\"icon\\" aria-hidden=\\"true\\" focusable=\\"false\\" style=\\"vertical-align:middle;flex-shrink:0\\"></div>",
               "iconAnchor": Array [
                 20,
                 40,

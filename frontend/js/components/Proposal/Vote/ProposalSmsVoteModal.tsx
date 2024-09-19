@@ -68,7 +68,6 @@ export const ProposalSmsVoteModal = ({ proposal: proposalRef, step: stepRef }: P
       baseId="proposal-vote-modal"
       id="proposal-vote-modal"
       onClose={onHide}
-      aria-labelledby="modal-title"
       size={CapUIModalSize.Lg}
       fullSizeOnMobile
       show={showModal}

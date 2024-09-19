@@ -217,6 +217,7 @@ type Props = {
   color?: string
   size?: string | number
   ariaHidden?: boolean
+  focusable?: boolean
   height?: string
   width?: string
   className?: string
@@ -839,7 +840,17 @@ const getIcon = name => {
   }
 }
 
-export const Icon = ({ name, title, color, size, ariaHidden = true, opacity, classNames, ...rest }: Props) =>
+export const Icon = ({
+  name,
+  title,
+  color,
+  size,
+  ariaHidden = true,
+  focusable = !ariaHidden,
+  opacity,
+  classNames,
+  ...rest
+}: Props) =>
   React.cloneElement(getIcon(name), {
     title,
     fill: color,
@@ -848,6 +859,7 @@ export const Icon = ({ name, title, color, size, ariaHidden = true, opacity, cla
     opacity,
     className: cn('icon', classNames),
     'aria-hidden': ariaHidden,
+    focusable,
     style: {
       verticalAlign: 'middle',
       flexShrink: '0',

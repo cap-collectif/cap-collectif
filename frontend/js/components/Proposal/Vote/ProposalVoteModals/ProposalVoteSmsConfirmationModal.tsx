@@ -103,9 +103,8 @@ const ProposalVoteSmsConfirmationModal = ({
         const verifyCodeErrorCode = verifyCodeResponse.verifySmsVotePhoneNumber?.errorCode
 
         if (verifyCodeErrorCode !== null) {
-          setIsLoading(false)
+          resetCode()
           setError('code', {})
-          setValue('code', '')
         }
 
         if (verifyCodeErrorCode === 'CODE_EXPIRED') {
@@ -176,7 +175,14 @@ const ProposalVoteSmsConfirmationModal = ({
     return true
   }
 
+  const resetCode = (): void => {
+    setIsLoading(false)
+    setValue('code', '')
+  }
+
   const sendNewPhoneValidationCode = async () => {
+    resetCode()
+
     try {
       const input = {
         phone: parsedPhone,
@@ -301,7 +307,7 @@ const ProposalVoteSmsConfirmationModal = ({
           rightIcon={CapUIIcon.LongArrowRight}
           onClick={goToNextStep}
           isLoading={isLoading}
-          disabled={form.watch('code') === '' || hasErrors}
+          disabled={form.watch('code').length !== 6 || hasErrors}
         >
           {intl.formatMessage({
             id: 'proposal.validate.vote',

@@ -417,7 +417,6 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
         baseId="proposal-vote-modal"
         id="proposal-vote-modal"
         onClose={onHide}
-        aria-labelledby="modal-title"
         size={CapUIModalSize.Md}
         fullSizeOnMobile
         forceModalDialogToFalse={isIos()}
