@@ -1,6 +1,6 @@
-import React, { LegacyRef } from 'react'
-import Editor, { JoditProps } from 'jodit-react'
+import React from 'react'
+import Editor from 'jodit-react'
 
-export default function WrappedEditor({ editorRef, ...props }: JoditProps & { editorRef: LegacyRef<Editor> }) {
+export default function WrappedEditor({ editorRef, ...props }: any) {
   return <Editor {...props} ref={editorRef} />
 }

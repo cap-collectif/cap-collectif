@@ -1,13 +1,15 @@
-import React, { useRef, useMemo, forwardRef, LegacyRef } from 'react'
+import React, { useRef, useMemo, forwardRef } from 'react'
 import dynamic from 'next/dynamic'
 import { Box, CapUIFontFamily, useTheme } from '@cap-collectif/ui'
 import { getApiUrl } from 'config'
-import { JoditProps } from 'jodit-react'
+import { IJodit } from 'jodit/types'
+import { joditFileUploader } from '@shared/utils/joditFileUploader'
 
 const Editor = dynamic(() => import('./JoditImport'), {
   ssr: false,
 })
-const ForwardRefEditor = forwardRef((props: JoditProps, ref: LegacyRef<any>) => <Editor {...props} editorRef={ref} />)
+// eslint-disable-next-line react/display-name
+const ForwardRefEditor = forwardRef((props: any, ref) => <Editor {...props} editorRef={ref} />)
 
 type Props = {
   textAreaOnly?: boolean
@@ -40,7 +42,7 @@ const limitedConf = [
   'brush',
   'paragraph',
   '|',
-  'file',
+  joditFileUploader,
   'link',
   '|',
   'undo',
@@ -52,7 +54,7 @@ const limitedConf = [
 const getConfig = (
   platformLanguage: string | null,
   placeholder: string,
-  editor: any,
+  editor: { current: { component: IJodit } },
   textAreaOnly: boolean,
   limitChars?: number,
 ) => {

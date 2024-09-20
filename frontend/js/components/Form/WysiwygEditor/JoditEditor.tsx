@@ -1,7 +1,10 @@
 import React, { useRef, useMemo } from 'react'
 import JoditEditor from 'jodit-react'
+import { InsertMode, IJodit } from 'jodit/types'
 import AppBox from '~/components/Ui/Primitives/AppBox'
 import localConfig from '~/config'
+import { joditFileUploader } from '@shared/utils/joditFileUploader'
+
 export type Props = {
   value?: any
   onChange: (arg0: string) => void
@@ -41,7 +44,7 @@ const CLIENT_CONFIG = [
   'link',
 ]
 
-const getConfig = (currentLanguage, noCode, editor, clientConfig, disabled) => {
+const getConfig = (currentLanguage, noCode, editor: { current: { component: IJodit } }, clientConfig, disabled) => {
   const buttons = clientConfig
     ? CLIENT_CONFIG
     : [
@@ -68,7 +71,7 @@ const getConfig = (currentLanguage, noCode, editor, clientConfig, disabled) => {
         '|',
         'image',
         'video',
-        'file',
+        joditFileUploader,
         'link',
         'table',
         '|',
@@ -88,7 +91,7 @@ const getConfig = (currentLanguage, noCode, editor, clientConfig, disabled) => {
     language: currentLanguage?.substr(0, 2) || 'fr',
     askBeforePasteHTML: false,
     askBeforePasteFromWord: false,
-    defaultActionOnPaste: 'insert_clear_html',
+    defaultActionOnPaste: 'insert_clear_html' as InsertMode,
     uploader: {
       url: `${localConfig.getApiUrl()}/files`,
       format: 'json',
@@ -121,12 +124,12 @@ const getConfig = (currentLanguage, noCode, editor, clientConfig, disabled) => {
       defaultHandlerSuccess: data => {
         if (editor.current) {
           if (/\.(gif|jpe?g|tiff?|png|webp|bmp)$/i.test(data.baseurl))
-            editor.current.component.selection.insertImage(data.baseurl)
+            editor.current.component.s.insertImage(data.baseurl)
           else {
             const elm = editor.current.component.createInside.element('a')
             elm.setAttribute('href', data.baseurl)
             elm.textContent = data.files[0]
-            editor.current.component.selection.insertNode(elm)
+            editor.current.component.s.insertNode(elm)
           }
         }
       },

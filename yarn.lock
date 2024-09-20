@@ -10385,11 +10385,6 @@ core-js@^3.0.1, core-js@^3.0.4, core-js@^3.5.0, core-js@^3.6.5, core-js@^3.8.2:
   resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.15.2.tgz#740660d2ff55ef34ce664d7e2455119c5bdd3d61"
   integrity sha512-tKs41J7NJVuaya8DxIOCnl8QuPHx5/ZVbFo1oKgVl1qHFBBrDctzQGtuLjPpRdNTWmKPH6oEvgN/MUID+l485Q==
 
-core-js@^3.21.1:
-  version "3.21.1"
-  resolved "https://registry.yarnpkg.com/core-js/-/core-js-3.21.1.tgz#f2e0ddc1fc43da6f904706e8e955bc19d06a0d94"
-  integrity sha512-FRq5b/VMrWlrmCzwRrpDYNxyHP9BcAZC+xHJaqTgIE5091ZV1NTmyh0sGOg5XqpnHvR0svdy0sv1gWA1zmhxig==
-
 core-util-is@1.0.2, core-util-is@~1.0.0:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
@@ -16014,20 +16009,19 @@ jimp@^0.16.1:
     "@jimp/types" "^0.16.1"
     regenerator-runtime "^0.13.3"
 
-jodit-react@^1.1.15:
-  version "1.2.18"
-  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-1.2.18.tgz#9a605107c1370565e7085b6e2d381b57ebd4318f"
-  integrity sha512-gyx+7NoHk8+hPvW3oHmbg+JpdGJ5JPYsNqgnZwwvteC5sY0OaOt6GqU0/KGWnORKkm6K0bEjQ2hTAre0amfdRQ==
+jodit-react@4.1.2:
+  version "4.1.2"
+  resolved "https://registry.yarnpkg.com/jodit-react/-/jodit-react-4.1.2.tgz#61ef1d6fa1f37cde7b71f666da8be9f6fb70f913"
+  integrity sha512-Hs1evpM1IK5zvy/5m5Gk819L8aC+9EmEdQvCoLHVUr/R3vtH4nYFD6wsMRj3ur3J4ZHhaSBjt0N3R7ggwP405Q==
   dependencies:
-    jodit "^3.9.4"
+    jodit "^4.2.10"
 
-jodit@^3.9.4:
-  version "3.16.3"
-  resolved "https://registry.yarnpkg.com/jodit/-/jodit-3.16.3.tgz#cc3c3ac819d6280d0101c0c43dd7f39aff1ff40b"
-  integrity sha512-EG/2YpWb3FDmbKKnHyM+1J2nTPOebAC5dDjAhpT7CZ1kb5MQnIirz/cW6M8V7jvcGdk3e4O75HWDpTFeJNUqWg==
+jodit@^4.2.10:
+  version "4.2.27"
+  resolved "https://registry.yarnpkg.com/jodit/-/jodit-4.2.27.tgz#fd6b39a968bd474210e8ab78fc463cdb206d3a6d"
+  integrity sha512-cqqeunB3HMElnocVhs5Qq2bhgpMIT2vKQPBpKcOTWKvX6GJ0GYAIneMEf43lphJuo+119CvBE8YgljD5iTfsAQ==
   dependencies:
     autobind-decorator "^2.4.0"
-    core-js "^3.21.1"
 
 jpeg-js@0.4.2, jpeg-js@^0.4.4:
   version "0.4.4"

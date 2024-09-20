@@ -278,7 +278,7 @@
         "jest-environment-jsdom": "^29.7.0",
         "jest-styled-components": "^7.0.3",
         "jimp": "^0.16.1",
-        "jodit-react": "^1.1.15",
+        "jodit-react": "4.1.2",
         "jquery": "^3.5.1",
         "jquery-minicolors": "^2.1.10",
         "js-cookie": "^2.2.1",
