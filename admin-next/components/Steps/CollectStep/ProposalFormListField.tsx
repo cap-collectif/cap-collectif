@@ -8,7 +8,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
 import { ProposalFormListField_proposalForm$key } from '../../../__generated__/ProposalFormListField_proposalForm.graphql'
 import { ProposalFormListField_query$key } from '../../../__generated__/ProposalFormListField_query.graphql'
-import { formatQuestions } from '../QuestionnaireStep/utils'
+import { formatJumpsToTmp, formatQuestions } from '../QuestionnaireStep/utils'
 import { GraphQLTaggedNode, fetchQuery } from 'relay-runtime'
 
 type ProposalFormListFieldValue = {
@@ -374,8 +374,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         categories:
           proposalForm.categories.map(category => ({
             ...category,
-            // color: category.color.replace('#', 'COLOR_').toUpperCase(),
-            // icon: !!category.icon ? category.icon.toUpperCase().replace(/-/g, '_') : null,
+            id: undefined
           })) ?? null,
         categoryMandatory: proposalForm.categoryMandatory ?? false,
         usingAddress: proposalForm.usingAddress ?? false,
@@ -405,8 +404,8 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         canContact: proposalForm.canContact,
         proposalInAZoneRequired: proposalForm.proposalInAZoneRequired || false,
         questionnaire: {
-          questions: proposalForm.questions ? formatQuestions({ questions: proposalForm.questions }) : [],
-          questionsWithJumps: proposalForm.questionsWithJumps ?? [],
+          questions: proposalForm.questions ? formatQuestions({ questions: proposalForm.questions }, true) : [],
+          questionsWithJumps: proposalForm.questionsWithJumps ? formatJumpsToTmp(proposalForm.questionsWithJumps) : [],
         },
         allowAknowledge: proposalForm.allowAknowledge ?? false,
         usingFacebook: proposalForm.usingFacebook ?? false,
