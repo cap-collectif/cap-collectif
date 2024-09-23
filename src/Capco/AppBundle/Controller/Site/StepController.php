@@ -108,6 +108,10 @@ class StepController extends Controller
 
         $presentationStep = $presentationStepRepository->getOneBySlugAndProjectSlug($stepSlug, $projectSlug);
 
+        if (null === $presentationStep) {
+            throw $this->createNotFoundException();
+        }
+
         return [
             'project' => $project,
             'currentStep' => $presentationStep,
