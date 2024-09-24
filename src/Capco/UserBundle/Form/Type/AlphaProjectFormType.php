@@ -91,6 +91,7 @@ class AlphaProjectFormType extends AbstractType
             ->add('archived', CheckboxType::class)
             ->add('address', TextType::class)
             ->add('customCode', TextType::class)
+            ->add('isProposalStepSplitViewEnabled')
         ;
 
         $builder->addEventSubscriber(new GlobalDistrictsFieldSubscriber($this->persister));

@@ -71,6 +71,7 @@ Capco\AppBundle\Entity\Project:
         publishedAt: <identity((new \DateTime('2015-01-01'))->modify("- 6 days"))>
         visibility: 2
         opinionCanBeFollowed: true
+        isProposalStepSplitViewEnabled: true
     p7:
         id: 'project7'
         title: Dépot avec selection vote budget
@@ -425,6 +426,7 @@ Capco\AppBundle\Entity\Project:
         publishedAt: <identity((new \DateTime('2021-05-01 12:00:00')))>
         visibility: 2
         owner: '@userTheo'
+        isProposalStepSplitViewEnabled: true
     projectWithOwner:
         id: 'projectWithOwner'
         owner: '@userTheo'

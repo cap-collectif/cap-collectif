@@ -20,6 +20,7 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectHeaderType;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\AppBundle\Enum\VoteType;
 use Capco\AppBundle\Traits\AddressableTrait;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\CustomCodeTrait;
@@ -154,6 +155,11 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
      * @CapcoAssert\HasOnlyOneSelectionStepAllowingProgressSteps()
      */
     private $steps;
+
+    /**
+     * @ORM\Column(name="proposal_step_split_view_enabled", type="boolean", options={"default": false})
+     */
+    private bool $isProposalStepSplitViewEnabled = false;
 
     /**
      * @ORM\Column(name="video", type="string", nullable = true)
@@ -568,6 +574,16 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         return $this;
     }
 
+    public function getIsProposalStepSplitViewEnabled(): bool
+    {
+        return $this->isProposalStepSplitViewEnabled;
+    }
+
+    public function setIsProposalStepSplitViewEnabled(bool $isProposalStepSplitViewEnabled): void
+    {
+        $this->isProposalStepSplitViewEnabled = $isProposalStepSplitViewEnabled;
+    }
+
     /**
      * @return string
      */
@@ -931,6 +947,26 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         }
 
         return $steps;
+    }
+
+    public function canEnableProposalStepSplitView(): bool
+    {
+        foreach ($this->steps as $pas) {
+            /** @var AbstractStep $step */
+            $step = $pas->getStep();
+            if ((
+                $step->isSelectionStep() || $step->isCollectStep()
+            )
+                && (
+                    VoteType::BUDGET === $step->getVoteType()
+                    || $step->hasVoteThreshold()
+                )
+            ) {
+                return false;
+            }
+        }
+
+        return true;
     }
 
     public function hasParticipativeStep(?string $exceptStepId = null): bool

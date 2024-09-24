@@ -31,10 +31,7 @@ const QUERY = graphql`
       ... on ProposalStep {
         __typename
         voteType
-        voteThreshold
-        budget
         form {
-          objectType
           contribuable
           isMapViewEnabled
         }
@@ -57,6 +54,7 @@ const QUERY = graphql`
               isMapViewEnabled
             }
           }
+          isProposalStepSplitViewEnabled
         }
         label
         kind
@@ -88,7 +86,7 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
       ? data.step.form?.isMapViewEnabled
       : data.step?.project?.firstCollectStep?.form?.isMapViewEnabled
 
-  const forceOldView = data.step.form.objectType !== 'PROPOSAL' || !!data.step.voteThreshold || data.step.budget
+  const forceOldView = !data.step.project.isProposalStepSplitViewEnabled
 
   const isParticipationAnonymous =
     !data.step.viewerVotes.totalCount ||
@@ -161,4 +159,6 @@ export const VoteStepPage = ({ stepId, isMapView, showTrash, projectSlug }: Prop
     </>
   )
 }
+
+// @ts-ignore
 export default VoteStepPage

@@ -15,6 +15,7 @@ const mutation = graphql`
         id
         label
       }
+      proposalStepSplitViewWasDisabled
     }
   }
 ` as GraphQLTaggedNode

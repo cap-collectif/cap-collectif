@@ -140,6 +140,7 @@ const getParticipatoryBudgetAnalysisInput = ({
       visibility: 'ME',
       opinionCanBeFollowed: true,
       isExternal: false,
+      isProposalStepSplitViewEnabled: true,
       steps: [
         {
           body: `<p><strong style="font-size:24px;">${intl.formatMessage({

@@ -7,6 +7,7 @@ use Capco\AppBundle\Form\Step\CollectStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,19 +26,22 @@ class UpdateCollectStepMutation implements MutationInterface
     private AuthorizationCheckerInterface $authorizationChecker;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
+    private ProposalStepSplitViewService $proposalStepSplitViewService;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
         FormFactoryInterface $formFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        ProposalStepSplitViewService $proposalStepSplitViewService
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
+        $this->proposalStepSplitViewService = $proposalStepSplitViewService;
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -61,7 +65,10 @@ class UpdateCollectStepMutation implements MutationInterface
 
         $this->em->flush();
 
-        return ['collectStep' => $collectStep];
+        return [
+            'collectStep' => $collectStep,
+            'proposalStepSplitViewWasDisabled' => $this->proposalStepSplitViewService->proposalStepSplitViewWasDisabled($collectStep, $data),
+        ];
     }
 
     public function isGranted(string $collectStepId, ?User $viewer = null): bool

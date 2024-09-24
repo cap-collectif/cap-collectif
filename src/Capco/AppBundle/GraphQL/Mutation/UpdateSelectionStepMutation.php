@@ -7,6 +7,7 @@ use Capco\AppBundle\Form\Step\SelectionStepFormType;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,21 +26,29 @@ class UpdateSelectionStepMutation implements MutationInterface
     private AuthorizationCheckerInterface $authorizationChecker;
     private FormFactoryInterface $formFactory;
     private LoggerInterface $logger;
+    private ProposalStepSplitViewService $proposalStepSplitViewService;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         AuthorizationCheckerInterface $authorizationChecker,
         FormFactoryInterface $formFactory,
-        LoggerInterface $logger
+        LoggerInterface $logger,
+        ProposalStepSplitViewService $proposalStepSplitViewService
     ) {
         $this->globalIdResolver = $globalIdResolver;
         $this->em = $em;
         $this->authorizationChecker = $authorizationChecker;
         $this->formFactory = $formFactory;
         $this->logger = $logger;
+        $this->proposalStepSplitViewService = $proposalStepSplitViewService;
     }
 
+    /**
+     * @throws GraphQLException
+     *
+     * @return array<string, bool|SelectionStep>
+     */
     public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
@@ -61,7 +70,10 @@ class UpdateSelectionStepMutation implements MutationInterface
 
         $this->em->flush();
 
-        return ['selectionStep' => $selectionStep];
+        return [
+            'selectionStep' => $selectionStep,
+            'proposalStepSplitViewWasDisabled' => $this->proposalStepSplitViewService->proposalStepSplitViewWasDisabled($selectionStep, $data),
+        ];
     }
 
     public function isGranted(string $selectionStepId, ?User $viewer = null): bool
@@ -79,6 +91,9 @@ class UpdateSelectionStepMutation implements MutationInterface
         );
     }
 
+    /**
+     * @throws UserError
+     */
     public function getSelectionStep(string $selectionStepId, User $viewer): SelectionStep
     {
         $selectionStep = $this->globalIdResolver->resolve($selectionStepId, $viewer);
@@ -89,7 +104,10 @@ class UpdateSelectionStepMutation implements MutationInterface
         return $selectionStep;
     }
 
-    private function handleAnonParticipation(array &$data)
+    /**
+     * @param array<string, null|array<string, null|int|string>|int|string> $data
+     */
+    private function handleAnonParticipation(array &$data): void
     {
         $isAnonymousParticipationAllowed = $data['isProposalSmsVoteEnabled'] ?? null;
 

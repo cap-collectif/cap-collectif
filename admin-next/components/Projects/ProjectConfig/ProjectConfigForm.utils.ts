@@ -27,6 +27,7 @@ export type FormValues = {
   projectType: string | null
   themes: Option[] | []
   metaDescription: string | null
+  isProposalStepSplitViewEnabled: boolean,
   video: string | null
   districts: Option[] | []
   address?: string | null
@@ -56,6 +57,7 @@ export const getInitialValues = (project: ProjectConfigForm_project$data, intl: 
   },
   publishedAt: project ? moment(project.publishedAt) : '',
   themes: project && project.themes ? project.themes.map(theme => theme) || [] : [],
+  isProposalStepSplitViewEnabled: project ? project.isProposalStepSplitViewEnabled : false,
   video: project ? project.video : null,
   cover: project ? project.cover : null,
   opinionCanBeFollowed: project ? project.opinionCanBeFollowed : false,

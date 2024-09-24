@@ -3467,6 +3467,9 @@ input CreateAlphaProjectInput {
   """The project cover"""
   cover: ID
 
+  """Is the split view enabled"""
+  isProposalStepSplitViewEnabled: Boolean
+
   """The project video link"""
   video: String
 
@@ -11037,6 +11040,12 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Slug of a project"""
   slug: String!
+
+  """Can the split view be enabled"""
+  canEnableProposalStepSplitView: Boolean!
+
+  """Whether the split view is enabled or not."""
+  isProposalStepSplitViewEnabled: Boolean!
   video: String
 
   """Identifies the first collect step of the project, if any."""
@@ -17556,6 +17565,9 @@ input UpdateAlphaProjectInput {
   """The project cover"""
   cover: ID
 
+  """Is the split view enabled"""
+  isProposalStepSplitViewEnabled: Boolean
+
   """The project video link"""
   video: String
 
@@ -17783,6 +17795,11 @@ input UpdateCollectStepInput {
 type UpdateCollectStepPayload {
   """The updated step."""
   collectStep: CollectStep!
+
+  """
+  Whether or not we had to disable proposal step split view if vote settings were not compatible.
+  """
+  proposalStepSplitViewWasDisabled: Boolean!
   clientMutationId: String
 }
 
@@ -18337,6 +18354,12 @@ input UpdateNewProjectInput {
 
   """The project cover"""
   cover: ID
+
+  """Can the split view be enabled"""
+  canEnableProposalStepSplitView: Boolean
+
+  """Is the split view enabled"""
+  isProposalStepSplitViewEnabled: Boolean!
 
   """The project video link"""
   video: String
@@ -19537,6 +19560,11 @@ input UpdateSelectionStepInput {
 type UpdateSelectionStepPayload {
   """The updated step."""
   selectionStep: SelectionStep!
+
+  """
+  Whether or not we had to disable proposal step split view if vote settings were not compatible.
+  """
+  proposalStepSplitViewWasDisabled: Boolean!
   clientMutationId: String
 }
 

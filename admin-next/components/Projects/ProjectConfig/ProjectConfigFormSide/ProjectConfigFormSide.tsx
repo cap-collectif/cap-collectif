@@ -29,6 +29,7 @@ const QUERY_FRAGMENT = graphql`
 const PROJECT_FRAGMENT = graphql`
   fragment ProjectConfigFormSide_project on Project {
     ...ProjectConfigFormPublication_project
+    ...ProjectConfigFormParameters_project
   }
 `
 
@@ -52,7 +53,7 @@ const ProjectConfigFormSide: React.FC<ProjectConfigFormSideProps> = ({ query: qu
           <ProjectConfigFormAccess isAdmin={query?.viewer?.isAdmin || false} />
         </Accordion.Item>
         <Accordion.Item id="parameters">
-          <ProjectConfigFormParameters />
+          <ProjectConfigFormParameters project={project} />
         </Accordion.Item>
       </Accordion>
       <ProjectConfigFormExternal />

@@ -5,3 +5,6 @@ UpdateSelectionStepPayload:
             selectionStep:
                 type: 'InternalSelectionStep!'
                 description: 'The updated step.'
+            proposalStepSplitViewWasDisabled:
+                type: 'Boolean!'
+                description: 'Whether or not we had to disable proposal step split view if vote settings were not compatible.'

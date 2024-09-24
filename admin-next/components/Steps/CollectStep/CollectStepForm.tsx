@@ -504,10 +504,19 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           }
           setValue('form.questionnaire', questionnaire as Questionnaire)
           setValue('form_model.questionnaire', questionnaire as Questionnaire)
-          toast({
-            variant: 'success',
-            content: intl.formatMessage({ id: 'admin.update.successful' }),
-          })
+
+          if (response.updateCollectStep.proposalStepSplitViewWasDisabled) {
+            toast({
+              variant: 'warning',
+              content: intl.formatMessage({ id: 'admin.update.successful' })
+                + '<br/>' + intl.formatMessage({ id: 'admin.proposalStepSplitViewWasDisabled' }),
+            })
+          } else {
+            toast({
+              variant: 'success',
+              content: intl.formatMessage({ id: 'admin.update.successful' }),
+            })
+          }
 
           if (!isEditing) {
             return (window.location.href = `/admin-next/project/${project?.id}`)

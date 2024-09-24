@@ -87,6 +87,7 @@ const input = {
     "VXNlcjp1c2VyODg="
   ],
   "projectType": "4",
+  "isProposalStepSplitViewEnabled": false,
   "video": "",
   "themes": [
     "theme4"

@@ -23,6 +23,12 @@ UpdateNewProjectInput:
             cover:
                 type: 'ID'
                 description: 'The project cover'
+            canEnableProposalStepSplitView:
+                type: 'Boolean'
+                description: 'Can the split view be enabled'
+            isProposalStepSplitViewEnabled:
+                type: 'Boolean!'
+                description: 'Is the split view enabled'
             video:
                 type: 'String'
                 description: 'The project video link'

@@ -79,6 +79,7 @@ class UpdateNewProjectMutation implements MutationInterface
         $this->setDistricts($arguments, $project);
         $hasDescription = $this->handleDescription($arguments, $project);
         $this->handleSteps($arguments, $project, $viewer, $hasDescription);
+        $this->handleProposalStepSplitView($arguments['isProposalStepSplitViewEnabled'], $project);
 
         if ($arguments['owner'] ?? null) {
             unset($arguments['owner']);
@@ -249,7 +250,7 @@ class UpdateNewProjectMutation implements MutationInterface
     }
 
     /**
-     * @return bool Wether or not the project has a description
+     * @return bool Whether the project has a description
      */
     private function handleDescription(array &$arguments, Project $project): bool
     {
@@ -282,5 +283,14 @@ class UpdateNewProjectMutation implements MutationInterface
         $project->addStep($projectAbstractStep);
 
         return true;
+    }
+
+    private function handleProposalStepSplitView(?bool $isProposalStepSplitViewEnabled, Project $project): void
+    {
+        if (null === $isProposalStepSplitViewEnabled) {
+            return;
+        }
+
+        $project->setIsProposalStepSplitViewEnabled($isProposalStepSplitViewEnabled);
     }
 }

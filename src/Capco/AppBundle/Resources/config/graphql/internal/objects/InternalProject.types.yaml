@@ -93,6 +93,13 @@ InternalProject:
             slug:
                 type: 'String!'
                 description: 'Slug of a project'
+            canEnableProposalStepSplitView:
+                type: 'Boolean!'
+                resolve: '@=value.canEnableProposalStepSplitView()'
+                description: 'Can the split view be enabled'
+            isProposalStepSplitViewEnabled:
+                type: 'Boolean!'
+                description: 'Whether the split view is enabled or not.'
             video:
                 type: 'String'
             firstCollectStep:

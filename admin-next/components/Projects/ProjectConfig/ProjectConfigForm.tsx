@@ -58,6 +58,8 @@ const FRAGMENT = graphql`
       type: contentType
       url(format: "reference")
     }
+    canEnableProposalStepSplitView
+    isProposalStepSplitViewEnabled
     video
     themes {
       value: id

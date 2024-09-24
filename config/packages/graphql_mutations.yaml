@@ -90,3 +90,7 @@ services:
                   alias: 'addUsersInGroup',
                   method: 'addUsersInGroup',
               }
+
+    Capco\AppBundle\GraphQL\Service\ProposalStepSplitViewService:
+        arguments:
+            $em: '@doctrine.orm.entity_manager'

@@ -2,13 +2,33 @@ import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { Accordion, CapUIIcon, FormLabel, Icon, Tooltip } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { graphql, useFragment } from 'react-relay'
 
 import { useIntl } from 'react-intl'
 import ThemeListField from 'components/Form/ThemeListField'
 import DistrictListField from 'components/Form/DistrictListField'
+import { ProjectConfigFormParameters_project$key } from '@relay/ProjectConfigFormParameters_project.graphql'
 
-const ProjectConfigFormParameters: React.FC = () => {
+export interface ProjectConfigFormParametersProps {
+  project: ProjectConfigFormParameters_project$key
+}
+
+const PROJECT_FRAGMENT = graphql`
+  fragment ProjectConfigFormParameters_project on Project {
+    canEnableProposalStepSplitView
+    steps(excludePresentationStep: true) {
+      __typename
+    }
+  }
+`
+
+const ProjectConfigFormParameters: React.FC<ProjectConfigFormParametersProps> = ({ project: projectRef }) => {
   const intl = useIntl()
+  const hasFeatureNewVoteStep = useFeatureFlag('new_vote_step')
+  const { canEnableProposalStepSplitView, steps } = useFragment(PROJECT_FRAGMENT, projectRef)
+
+  const hasProposalStep = steps.some(step => step.__typename === 'CollectStep' || step.__typename === 'SelectionStep')
 
   const { control, setValue } = useFormContext()
 
@@ -16,6 +36,24 @@ const ProjectConfigFormParameters: React.FC = () => {
     <>
       <Accordion.Button>{intl.formatMessage({ id: 'admin-menu-parameters' })}</Accordion.Button>
       <Accordion.Panel>
+        {hasFeatureNewVoteStep && hasProposalStep ? (
+          <FormControl
+            name="isProposalStepSplitViewEnabled"
+            control={control}
+            width="auto"
+            direction="row"
+            align="flex-start"
+          >
+            <FormLabel label={intl.formatMessage({ id: 'admin.fields.project.split-view' })} />
+            <FieldInput
+              id="isProposalStepSplitViewEnabled"
+              name="isProposalStepSplitViewEnabled"
+              control={control}
+              type="switch"
+              disabled={!canEnableProposalStepSplitView}
+            />
+          </FormControl>
+        ) : null}
         <FormControl name="video" control={control}>
           <FormLabel htmlFor="video" label={intl.formatMessage({ id: 'admin.fields.project.video' })}>
             <Tooltip

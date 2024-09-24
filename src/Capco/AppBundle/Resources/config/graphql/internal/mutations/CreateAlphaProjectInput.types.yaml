@@ -18,6 +18,9 @@ CreateAlphaProjectInput:
             cover:
                 type: 'ID'
                 description: 'The project cover'
+            isProposalStepSplitViewEnabled:
+                type: 'Boolean'
+                description: 'Is the split view enabled'
             video:
                 type: 'String'
                 description: 'The project video link'
