@@ -58,7 +58,7 @@ describe('<ProjectStepTabs />', () => {
           enabled: true,
           timeRange: {
             startAt: '2020-09-11 00:00:00',
-            endAt: '2024-09-27 00:00:00',
+            endAt: '2060-09-27 00:00:00',
           },
         },
       ],

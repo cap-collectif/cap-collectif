@@ -1146,7 +1146,7 @@ describe('project access control', () => {
         type: 'QUESTIONNAIRE',
         title: 'Questionnaire administrateur de projet',
         startAt: '2020-09-11 00:00:00',
-        endAt: '2024-09-27 00:00:00',
+        endAt: '2060-09-27 00:00:00',
         label: 'Questionnaire qui dénonce',
         customCode: null,
         metaDescription: null,

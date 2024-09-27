@@ -14,7 +14,7 @@ export const questionnaire = {
   step: {
     timeRange: {
       startAt: '2014-09-27 00:00:00',
-      endAt: '2024-09-27 00:00:00',
+      endAt: '2060-09-27 00:00:00',
       hasEnded: false,
       isTimeless: false,
     },
