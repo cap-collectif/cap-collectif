@@ -27,7 +27,9 @@ export const VisibilityBox = ({ user, children, enabled }: Props) => {
           <FormattedMessage id="proposal.private.show_login" />
         </p>
         <p>
-          <LoginButtonQueryWrapper />
+          <React.Suspense fallback={null}>
+            <LoginButtonQueryWrapper />
+          </React.Suspense>
         </p>
       </Jumbotron>
     )

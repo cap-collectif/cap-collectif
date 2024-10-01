@@ -51,7 +51,11 @@ exports[`<VisibilityBox /> renders jumbotron if user is not logged 1`] = `
     />
   </p>
   <p>
-    <LoginButtonQueryWrapper />
+    <Suspense
+      fallback={null}
+    >
+      <LoginButtonQueryWrapper />
+    </Suspense>
   </p>
 </Jumbotron>
 `;
