@@ -196,7 +196,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                   {features.calendar && <SidebarLink text="admin.label.events" href="/admin-next/events" />}
                   {isAdmin && <SidebarLink text="admin.label.video" href="/admin/capco/app/video/list" />}
                   {isAdmin && <SidebarLink text="admin.label.page" href="/admin/capco/app/page/list" />}
-                  {isAdmin && <SidebarLink text="media" href="/admin/capco/media/media/list" />}
+                  {isAdmin && <SidebarLink text="media" href="/admin-next/medias" />}
                 </SidebarAccordionPanel>
               </SidebarAccordionItem>
             ) : null}

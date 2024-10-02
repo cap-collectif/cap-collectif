@@ -19,7 +19,6 @@ import GlobalDistrictAdminApp from '~/startup/GlobalDistrictAdminApp';
 import EventAdminEditPageApp from '~/startup/EventAdminEditPageApp';
 import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalProjectAdminAppDeprecated';
 import FontAdminPageApp from '~/startup/FontAdminPageApp';
-import MediaAdminPageApp from '~/startup/MediaAdminPageApp';
 import appStore from '~/stores/AppStore';
 import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonApp';
 import EventFormPageApp from './startup/EventFormPageApp';
@@ -66,7 +65,6 @@ ReactOnRails.register({
     UserInviteAdminPageApp,
     HomePageProjectsSectionConfigurationApp,
     HomePageProjectsMapSectionConfigurationApp,
-    MediaAdminPageApp,
     EmailingListPageApp,
     EmailingCampaignPageApp,
     EmailingMailParameterPageApp,

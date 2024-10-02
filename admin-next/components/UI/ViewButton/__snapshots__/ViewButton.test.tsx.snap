@@ -1,0 +1,63 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ViewButton /> should render correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <button
+    aria-current={true}
+    className="sc-bcXGCL bmUGyT"
+    onClick={[Function]}
+  >
+    <svg
+      aria-hidden={true}
+      className="sc-bcXGCL sc-eJDTud bpCnEv hEjMCZ cap-icon"
+      fill="none"
+      focusable={false}
+      viewBox="0 0 14 13"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M5.5 1.5h8M5.5 11.5h8"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={0.5}
+      />
+      <path
+        d="M5.5 6.5h8"
+        stroke="currentColor"
+        strokeLinecap="round"
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={5.5}
+      />
+      <rect
+        height={2}
+        rx={0.5}
+        stroke="currentColor"
+        width={2}
+        x={0.5}
+        y={10.5}
+      />
+    </svg>
+    <span
+      className="sc-bcXGCL jlutCo cap-text"
+    >
+      List
+    </span>
+  </button>,
+]
+`;

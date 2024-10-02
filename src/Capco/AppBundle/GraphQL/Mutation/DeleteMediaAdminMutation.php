@@ -42,6 +42,18 @@ class DeleteMediaAdminMutation implements MutationInterface
          * @var array
          */
         $mediaIds = $input->offsetGet('ids');
+        $all = $input->offsetGet('all');
+
+        if ($all) {
+            $medias = $this->mediaRepository->getWithoutCategory();
+            foreach ($medias as $media) {
+                $this->em->remove($media);
+            }
+            $this->em->flush();
+
+            return ['deletedMediaIds' => [], 'userErrors' => []];
+        }
+
         $deleteMediaIds = [];
 
         foreach ($mediaIds as $mediaId) {

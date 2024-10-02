@@ -5548,7 +5548,10 @@ type DeleteMailingListPayload {
 
 input DeleteMediaAdminInput {
   """List of media ID to delete."""
-  ids: [ID!]!
+  ids: [ID]!
+
+  """Delete all medias bypassing given ids"""
+  all: Boolean! = false
 }
 
 type DeleteMediaAdminPayload {
@@ -8171,6 +8174,9 @@ type Media implements UniformResourceLocatable {
   providerReference: String!
   height: Int
   width: Int
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
 }
 
 """A connection to a list of items."""

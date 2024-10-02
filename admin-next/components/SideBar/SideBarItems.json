@@ -95,7 +95,7 @@
             },
             {
                 "title": "media",
-                "href": "/admin/capco/media/media/list",
+                "href": "/admin-next/medias",
                 "rolesRequired": ["admin"],
                 "featuresRequired": []
             }

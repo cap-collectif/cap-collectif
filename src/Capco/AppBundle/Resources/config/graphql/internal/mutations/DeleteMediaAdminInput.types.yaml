@@ -3,5 +3,9 @@ DeleteMediaAdminInput:
     config:
         fields:
             ids:
-                type: '[ID!]!'
+                type: '[ID]!'
                 description: 'List of media ID to delete.'
+            all:
+                type: 'Boolean!'
+                description: 'Delete all medias bypassing given ids'
+                defaultValue: false

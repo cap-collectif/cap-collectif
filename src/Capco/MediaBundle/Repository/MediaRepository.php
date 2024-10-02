@@ -2,6 +2,7 @@
 
 namespace Capco\MediaBundle\Repository;
 
+use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -46,6 +47,14 @@ class MediaRepository extends EntityRepository
         ;
 
         return new Paginator($qb);
+    }
+
+    /**
+     * @return array<Media>
+     */
+    public function getWithoutCategory(): array
+    {
+        return $this->getQueryBuilderWithoutCategory()->getQuery()->getResult();
     }
 
     public function countAllWithoutCategory(?string $term = null): int

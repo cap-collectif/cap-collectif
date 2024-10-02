@@ -8,7 +8,7 @@ import FileUploadContainer from './FileUpload.style'
 import { TYPE_FORM } from '~/constants/FormConstants'
 import type { FileInfo } from '~/components/Ui/File/File'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
-import { ALLOWED_MIMETYPES } from '~/config'
+import { ALLOWED_MIMETYPES } from '@shared/utils/acceptedFiles'
 
 const MAX_FILE = 5
 const MAX_FILE_SIZE = 10000000 // 10 Mo

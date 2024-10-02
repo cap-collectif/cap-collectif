@@ -35,7 +35,7 @@ import ColorPickerInput from '~/components/Form/ColorPickerInput/ColorPickerInpu
 import MultipleMajority from '~/components/Form/MultipleMajority/MultipleMajority'
 import type { MajorityProperty } from '~ui/Form/Input/Majority/Majority'
 import type { BsSize, ValidationState } from '~/types/ReactBootstrap.type'
-import { ALLOWED_IMAGE_MIMETYPES, ALLOWED_MIMETYPES } from '~/config'
+import { ALLOWED_IMAGE_MIMETYPES, ALLOWED_MIMETYPES } from '@shared/utils/acceptedFiles'
 import WYSIWYG from './WysiwygEditor'
 
 export type ParentProps = {
