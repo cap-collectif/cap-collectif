@@ -1345,23 +1345,23 @@ Object {
       },
       Object {
         "node": Object {
-          "endAt": "2029-05-05 00:00:00",
-          "id": "RXZlbnQ6ZXZlbnQ3",
-          "startAt": "2029-01-01 00:00:00",
-          "title": "Event 7",
+          "endAt": "2030-11-08 00:00:00",
+          "id": "RXZlbnQ6ZXZlbnQ5",
+          "startAt": "2030-11-03 00:00:00",
+          "title": "Quelle complémentarité entre numérique et présentiel ?",
         },
       },
       Object {
         "node": Object {
-          "endAt": "2029-09-09 00:00:00",
-          "id": "RXZlbnQ6ZXZlbnQ4",
-          "startAt": "2029-03-03 00:00:00",
-          "title": "Le droit de suite",
+          "endAt": "2030-11-13 00:00:00",
+          "id": "RXZlbnQ6ZXZlbnQxMA==",
+          "startAt": "2030-11-11 00:00:00",
+          "title": "Remobiliser ses collaborateurs par l’intelligence collective mode d’emploi",
         },
       },
     ],
     "pageInfo": Object {
-      "endCursor": "YTozOntpOjA7aToxODgzNTk5MjAwMDAwO2k6MTtpOjE4NjcxODY4MDAwMDA7aToyO2k6MTQyMDY3MTYwMDAwMDt9",
+      "endCursor": "YTozOntpOjA7aToxOTIwNzU0ODAwMDAwO2k6MTtpOjE5MjA1ODIwMDAwMDA7aToyO2k6MTQyMDg0NDQwMDAwMDt9",
       "hasNextPage": true,
     },
     "totalCount": 15,
@@ -1413,31 +1413,31 @@ Object {
     "edges": Array [
       Object {
         "node": Object {
+          "endAt": "2060-09-09 00:00:00",
+          "id": "RXZlbnQ6ZXZlbnQ4",
+          "startAt": "2029-03-03 00:00:00",
+          "title": "Le droit de suite",
+        },
+      },
+      Object {
+        "node": Object {
+          "endAt": "2060-05-05 00:00:00",
+          "id": "RXZlbnQ6ZXZlbnQ3",
+          "startAt": "2029-01-01 00:00:00",
+          "title": "Event 7",
+        },
+      },
+      Object {
+        "node": Object {
           "endAt": "2045-03-10 00:00:00",
           "id": "RXZlbnQ6ZXZlbnQ0",
           "startAt": "2032-01-01 00:00:00",
           "title": "SymfonyLive Paris",
         },
       },
-      Object {
-        "node": Object {
-          "endAt": "2040-02-02 00:00:00",
-          "id": "RXZlbnQ6ZXZlbnQ2",
-          "startAt": "2032-02-01 00:00:00",
-          "title": "Event without registrations",
-        },
-      },
-      Object {
-        "node": Object {
-          "endAt": "2035-03-16 00:00:00",
-          "id": "RXZlbnQ6ZXZlbnQz",
-          "startAt": "2032-06-10 00:00:00",
-          "title": "GrenobleWeb2015",
-        },
-      },
     ],
     "pageInfo": Object {
-      "endCursor": "YTozOntpOjA7aToyMDU3NjEyNDAwMDAwO2k6MTtpOjE5NzA0MzEyMDAwMDA7aToyO2k6MTQyMDIzOTYwMDAwMDt9",
+      "endCursor": "YTozOntpOjA7aToyMzcyNzEzMjAwMDAwO2k6MTtpOjE5NTY1MjQ0MDAwMDA7aToyO2k6MTQyMDMyNjAwMDAwMDt9",
       "hasNextPage": true,
     },
     "totalCount": 15,
@@ -1690,7 +1690,7 @@ Object {
           "body": "Faire participer c’est bien ! Recréer durablement de la confiance sur votre territoire, c’est mieux ! Comment organiser le retour aux participants une fois qu’ils ont apporté leur contribution ? Du mail de remerciement (une politesse élémentaire qui n’est finalement pas si fréquente en pratique) aux comités citoyens de suivi et d’évaluation, nous dresserons un panorama des pratiques existantes et nous interrogerons sur les moyens de les encourager voire les systématiser.",
           "createdAt": "2015-01-08 00:00:00",
           "enabled": true,
-          "endAt": "2029-09-09 00:00:00",
+          "endAt": "2060-09-09 00:00:00",
           "fullAddress": "",
           "id": "RXZlbnQ6ZXZlbnQ4",
           "lat": null,
@@ -1717,7 +1717,7 @@ Object {
           "body": "So boring",
           "createdAt": "2015-01-07 00:00:00",
           "enabled": true,
-          "endAt": "2029-05-05 00:00:00",
+          "endAt": "2060-05-05 00:00:00",
           "fullAddress": "",
           "id": "RXZlbnQ6ZXZlbnQ3",
           "lat": null,

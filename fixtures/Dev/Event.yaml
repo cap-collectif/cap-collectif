@@ -102,7 +102,7 @@ Capco\AppBundle\Entity\Event:
         id: 'event7'
         enabled: true
         startAt: <identity((new \DateTime('2029-01-01')))>
-        endAt: <identity((new \DateTime('2029-05-05')))>
+        endAt: <identity((new \DateTime('2060-05-05')))>
         author: '@user2'
         creator: '@user2'
         owner: '@user2'
@@ -111,7 +111,7 @@ Capco\AppBundle\Entity\Event:
         id: 'event8'
         enabled: true
         startAt: <identity((new \DateTime('2029-03-03')))>
-        endAt: <identity((new \DateTime('2029-09-09')))>
+        endAt: <identity((new \DateTime('2060-09-09')))>
         author: '@user3'
         creator: '@user3'
         owner: '@user3'

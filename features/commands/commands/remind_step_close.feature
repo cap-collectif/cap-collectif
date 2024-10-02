@@ -15,9 +15,9 @@ Scenario: "should not send if no unpublished contribution in ending step"
   And I should see "0 reminders sent !" in output
 
 Scenario: "should send if unpublished contribution in ending step"
-  Given I run "capco:remind-user-account-confirmation-before-step-close --date '2024-09-28 23:05:00'"
+  Given I run "capco:remind-user-account-confirmation-before-step-close --date '2060-09-28 23:05:00'"
   Then the command exit code should be 0
-  And I should see "Pour ou contre la légalisation du Cannabis ? will end at 2024-10-01 00:00:00" in output
+  And I should see "Pour ou contre la légalisation du Cannabis ? will end at 2060-10-01 00:00:00" in output
   And I should see "send reminder to userNotConfirmedWithContributions@test.com" in output
   And I should see "send reminder to jeannine1957@laposte.fr" in output
   And I should see "2 reminders sent !" in output

@@ -51,7 +51,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YTozOntpOjA7aToxODYxOTE2NDAwMDAwO2k6MTtpOjE4NzI2MjY0MDAwMDA7aToyO2k6MTQyMDU4NTIwMDAwMDt9",
+          "cursor": "YTozOntpOjA7aToxODYxOTE2NDAwMDAwO2k6MTtpOjI4NTA5MzcyMDAwMDA7aToyO2k6MTQyMDU4NTIwMDAwMDt9",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMg==",
@@ -96,7 +96,7 @@ Object {
           },
         },
         Object {
-          "cursor": "YTozOntpOjA7aToxODY3MTg2ODAwMDAwO2k6MTtpOjE4ODM1OTkyMDAwMDA7aToyO2k6MTQyMDY3MTYwMDAwMDt9",
+          "cursor": "YTozOntpOjA7aToxODY3MTg2ODAwMDAwO2k6MTtpOjI4NjE5MTAwMDAwMDA7aToyO2k6MTQyMDY3MTYwMDAwMDt9",
           "node": Object {
             "author": Object {
               "id": "VXNlcjp1c2VyMw==",
@@ -379,26 +379,6 @@ Object {
         },
         Object {
           "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ3",
-            "timeRange": Object {
-              "endAt": "2029-05-05 00:00:00",
-              "startAt": "2029-01-01 00:00:00",
-            },
-            "title": "Event 7",
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RXZlbnQ6ZXZlbnQ4",
-            "timeRange": Object {
-              "endAt": "2029-09-09 00:00:00",
-              "startAt": "2029-03-03 00:00:00",
-            },
-            "title": "Le droit de suite",
-          },
-        },
-        Object {
-          "node": Object {
             "id": "RXZlbnQ6ZXZlbnRPcmdhbml6YXRpb25EZWxldGVk",
             "timeRange": Object {
               "endAt": "2030-05-14 00:00:00",
@@ -495,6 +475,26 @@ Object {
               "startAt": "2032-01-01 00:00:00",
             },
             "title": "SymfonyLive Paris",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RXZlbnQ6ZXZlbnQ3",
+            "timeRange": Object {
+              "endAt": "2060-05-05 00:00:00",
+              "startAt": "2029-01-01 00:00:00",
+            },
+            "title": "Event 7",
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RXZlbnQ6ZXZlbnQ4",
+            "timeRange": Object {
+              "endAt": "2060-09-09 00:00:00",
+              "startAt": "2029-03-03 00:00:00",
+            },
+            "title": "Le droit de suite",
           },
         },
         Object {

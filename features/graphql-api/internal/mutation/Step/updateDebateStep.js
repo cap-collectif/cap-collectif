@@ -41,7 +41,7 @@ const input = {
   "body": "body",
   "title": "Pour ou contre la légalisation du Cannabis ?",
   "startAt": "2023-10-01 14:00:00",
-  "endAt": "2024-10-01 12:00:00",
+  "endAt": "2037-10-01 12:00:00",
   "isEnabled": true,
   "timeless": false,
   "isAnonymousParticipationAllowed": false,
