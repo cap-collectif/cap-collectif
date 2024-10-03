@@ -32,7 +32,7 @@ class SiteParameterQueryResolver implements QueryInterface
             'keyname' => $argument->offsetGet('keyname'),
         ]);
 
-        if (!$siteParameter) {
+        if (!$siteParameter || !$siteParameter->getIsEnabled()) {
             return null;
         }
 
