@@ -85,17 +85,19 @@ export const Link = ({
   children,
   href,
   stepId,
+  currentVotableStepId,
 }: {
   readonly children: React.ReactElement | React.ReactElement[]
   readonly href: string
   readonly stepId: string
+  readonly currentVotableStepId: string
 }) => (
   <RouterLink
     to={{
       pathname: `/project/${href}`,
       state: {
         stepId,
-        currentVotableStepId: stepId,
+        currentVotableStepId,
       },
     }}
   >

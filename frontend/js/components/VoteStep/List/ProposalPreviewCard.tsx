@@ -61,6 +61,9 @@ const FRAGMENT = graphql`
     status(step: $stepId) {
       name
     }
+    currentVotableStep {
+      id
+    }
     ...ProposalPreviewCardFooter_proposal @arguments(stepId: $stepId, isAuthenticated: $isAuthenticated)
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
   }
@@ -152,7 +155,7 @@ export const ProposalPreviewCard = ({
   const { projectSlug } = useParams<{ projectSlug?: string }>()
   if (!proposal || !step) return null
 
-  const { media, author, category, title, summary, body, status, district, theme } = proposal
+  const { media, author, category, title, summary, body, status, district, theme, currentVotableStep } = proposal
 
   const { viewerVotes } = step
 
@@ -206,13 +209,21 @@ export const ProposalPreviewCard = ({
               </>
             ) : null}
           </Flex>
-          <Link href={`${projectSlug || ''}/${url}/${proposal.slug}`} stepId={stepId}>
+          <Link
+            href={`${projectSlug || ''}/${url}/${proposal.slug}`}
+            stepId={stepId}
+            currentVotableStepId={currentVotableStep?.id || stepId}
+          >
             <Heading as="h4" fontSize="16px" color="neutral-gray.900" fontWeight={CapUIFontWeight.Bold}>
               {title}
             </Heading>
           </Link>
         </Proposal.Content.Header>
-        <Link href={`${projectSlug || ''}/${url}/${proposal.slug}`} stepId={stepId}>
+        <Link
+          href={`${projectSlug || ''}/${url}/${proposal.slug}`}
+          stepId={stepId}
+          currentVotableStepId={currentVotableStep?.id || stepId}
+        >
           <Proposal.Content.Body fontSize="14px">
             <>
               {summaryOrBodyExcerpt.slice(0, TRUNCATE)}
@@ -241,7 +252,11 @@ export const ProposalPreviewCard = ({
         </Flex>
       </Proposal.Content>
       {showImage ? (
-        <Link href={`${projectSlug || ''}/${url}/${proposal.slug}`} stepId={stepId}>
+        <Link
+          href={`${projectSlug || ''}/${url}/${proposal.slug}`}
+          stepId={stepId}
+          currentVotableStepId={currentVotableStep?.id || stepId}
+        >
           {media ? (
             <Box sx={{ '.cap-tag': { maxWidth: 'unset !important' } }}>
               <Proposal.Cover

@@ -39,6 +39,9 @@ const FRAGMENT: GraphQLTaggedNode = graphql`
     title
     url
     slug
+    currentVotableStep {
+      id
+    }
     summaryOrBodyExcerpt
     author {
       displayName
@@ -142,7 +145,11 @@ export const ProposalMapSelectedView = ({
         <Box bg="gray.300" width="6rem" borderRadius="normal" height={1} />
       </Flex>
       <Flex direction="column" width="100%">
-        <Link href={`${projectSlug || ''}/${url}/${data.slug}`} stepId={stepId}>
+        <Link
+          href={`${projectSlug || ''}/${url}/${data.slug}`}
+          stepId={stepId}
+          currentVotableStepId={data?.currentVotableStep?.id || stepId}
+        >
           <Heading as="h3" fontSize={4} color="gray.900" mb={2} truncate={50} lineHeight="initial">
             {title}
           </Heading>
