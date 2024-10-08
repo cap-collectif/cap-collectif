@@ -15,6 +15,9 @@ module.exports = {
     '**/admin-next/hooks/**',
     '**/admin-next/pages/**',
     '**/admin-next/utils/**',
+    '**/schema.public.graphql',
+    '**/schema.dev.graphql',
+    '**/schema.preview.graphql',
   ],
   customScalars: {
     DateTime: 'string',
