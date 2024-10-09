@@ -13,6 +13,8 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class FranceConnectOptionsModifier implements OptionsModifierInterface
 {
     public const REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY = 'FranceConnect_tokens';
+    public const SESSION_FRANCE_CONNECT_STATE_KEY = 'FranceConnect_state';
+    public const FRANCE_CONNECT_CONNECTION_MAX_TIME = 5;
     protected const REDIS_CACHE_KEY = 'FranceConnectSSOConfiguration';
 
     protected FranceConnectSSOConfigurationRepository $repository;
@@ -49,17 +51,29 @@ class FranceConnectOptionsModifier implements OptionsModifierInterface
             return $options;
         }
 
-        /** * @var CacheItem $fcTokens  */
-        $fcTokens = $this->redisCache->getItem(self::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId());
+        if (!$this->session->isStarted()) {
+            $this->session->start();
+        }
 
-        if (!$fcTokens->isHit()) {
-            $nonce = $this->generateRandomValue();
+        $state = $this->session->get(self::SESSION_FRANCE_CONNECT_STATE_KEY);
+
+        if (empty($state)) {
             $state = $this->generateRandomValue();
-            $fcTokens
-                ->set(['nonce' => $nonce, 'state' => $state])
-                ->expiresAfter($this->redisCache::ONE_MINUTE)
-            ;
-            $this->redisCache->save($fcTokens);
+
+            $this->session->set(self::SESSION_FRANCE_CONNECT_STATE_KEY, $state);
+
+            /** * @var CacheItem $fcTokens  */
+            $fcTokens = $this->redisCache->getItem(self::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId());
+
+            if (!$fcTokens->isHit()) {
+                $nonce = $this->generateRandomValue();
+
+                $fcTokens
+                    ->set(['nonce' => $nonce, 'state' => $state])
+                    ->expiresAfter($this->redisCache::ONE_MINUTE * self::FRANCE_CONNECT_CONNECTION_MAX_TIME)
+                ;
+                $this->redisCache->save($fcTokens);
+            }
         }
 
         /** * @var CacheItem $ssoConfigurationCachedItem  */

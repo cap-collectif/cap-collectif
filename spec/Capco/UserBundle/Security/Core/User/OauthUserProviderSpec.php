@@ -5,6 +5,7 @@ namespace spec\Capco\UserBundle\Security\Core\User;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\SSO\FranceConnectSSOConfiguration;
+use Capco\AppBundle\Exception\FranceConnectAuthenticationException;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\UserBundle\Entity\User;
@@ -19,6 +20,7 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PhpSpec\ObjectBehavior;
+use Prophecy\Argument;
 use Prophecy\Argument as Arguments;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Cache\CacheItem;
@@ -28,6 +30,7 @@ use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OauthUserProviderSpec extends ObjectBehavior
@@ -54,7 +57,6 @@ class OauthUserProviderSpec extends ObjectBehavior
         SessionInterface $session
     ) {
         $state = urlencode(base64_encode(json_encode(['csrf_token' => '12345'])));
-        $nonce = base64_encode(json_encode(['nonce' => '54321']));
         $request = new Request();
         $request->query->set('state', $state);
 
@@ -302,9 +304,12 @@ class OauthUserProviderSpec extends ObjectBehavior
         TokenInterface $token,
         FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
         FranceConnectSSOConfiguration $fcConfig,
-        OAuthToken $OAuthToken
+        OAuthToken $OAuthToken,
+        RedisCache $redisCache,
+        ItemInterface $cacheItem,
+        TranslatorInterface $translator
     ) {
-        $this->generateGenericFranceConnectResponse($response, $ressourceOwner, $OAuthToken);
+        $this->generateGenericFranceConnectResponse($response, $ressourceOwner, $OAuthToken, $redisCache, $cacheItem, $translator);
         $user = new User();
         $user
             ->setId('<some uuid>')
@@ -499,6 +504,36 @@ class OauthUserProviderSpec extends ObjectBehavior
         )->shouldReturn($user);
     }
 
+    public function it_throws_exception_when_bad_state_nonce_franceconnect(
+        UserResponseInterface $response,
+        FranceConnectResourceOwner $ressourceOwner,
+        TranslatorInterface $translator,
+        OAuthToken $OAuthToken,
+        RedisCache $redisCache,
+        ItemInterface $cacheItem
+    ) {
+        $this->generateGenericFranceConnectResponse($response, $ressourceOwner, $OAuthToken, $redisCache, $cacheItem, $translator);
+
+        $cacheItem->get()->willReturn(['state' => '12345', 'nonce' => '6664321']);
+
+        $this->shouldThrow(new FranceConnectAuthenticationException('Erreur lors de la connexion à FranceConnect'))->during('verifyFranceConnectStateAndNonce', [$response]);
+    }
+
+    public function it_throws_exception_when_no_state_nonce_in_cache_franceconnect(
+        UserResponseInterface $response,
+        FranceConnectResourceOwner $ressourceOwner,
+        TranslatorInterface $translator,
+        OAuthToken $OAuthToken,
+        RedisCache $redisCache,
+        ItemInterface $cacheItem
+    ) {
+        $this->generateGenericFranceConnectResponse($response, $ressourceOwner, $OAuthToken, $redisCache, $cacheItem, $translator);
+
+        $cacheItem->isHit()->willReturn(false);
+
+        $this->shouldThrow(new FranceConnectAuthenticationException('Erreur lors de la connexion à FranceConnect'))->during('verifyFranceConnectStateAndNonce', [$response]);
+    }
+
     private function generateGenericOpenIdResponse(
         UserResponseInterface $response,
         OpenIDResourceOwner $ressourceOwner
@@ -540,7 +575,10 @@ class OauthUserProviderSpec extends ObjectBehavior
     private function generateGenericFranceConnectResponse(
         UserResponseInterface $response,
         FranceConnectResourceOwner $ressourceOwner,
-        OAuthToken $OAuthToken
+        OAuthToken $OAuthToken,
+        RedisCache $redisCache,
+        ItemInterface $cacheItem,
+        TranslatorInterface $translator
     ) {
         $data = [
             'given_name' => 'Jean Jacques',
@@ -566,5 +604,12 @@ class OauthUserProviderSpec extends ObjectBehavior
         $nonce = base64_encode(json_encode(['nonce' => '54321']));
         $token = ['id_token' => $state . '.' . $nonce];
         $OAuthToken->getRawToken()->willReturn($token);
+
+        $translator->trans('france-connect-connection-error', [], 'CapcoAppBundle')->willReturn('Erreur lors de la connexion à FranceConnect');
+        $translator->trans('france-connect-connection-timeout', Argument::type('array'), 'CapcoAppBundle')->willReturn('Erreur lors de la connexion à FranceConnect. Attention, vous disposez de seulement 5 minutes pour vous connecter avec FranceConnect');
+
+        $cacheItem->isHit()->willReturn(true);
+        $cacheItem->get()->willReturn(['state' => '12345', 'nonce' => '54321']);
+        $redisCache->getItem(Argument::type('string'))->willReturn($cacheItem);
     }
 }

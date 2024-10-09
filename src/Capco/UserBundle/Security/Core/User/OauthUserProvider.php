@@ -4,6 +4,7 @@ namespace Capco\UserBundle\Security\Core\User;
 
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Exception\FranceConnectAuthenticationException;
 use Capco\AppBundle\GraphQL\Mutation\GroupMutation;
 use Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository;
 use Capco\UserBundle\Entity\User;
@@ -19,6 +20,7 @@ use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\OAuth\State\State;
 use HWI\Bundle\OAuthBundle\Security\Core\User\OAuthAwareUserProviderInterface;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -185,9 +187,9 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
     }
 
     /**
-     * @throws \Exception
+     * @throws FranceConnectAuthenticationException
      */
-    private function verifyFranceConnectStateAndNonce(UserResponseInterface $response): void
+    public function verifyFranceConnectStateAndNonce(UserResponseInterface $response): void
     {
         $request = $this->requestStack->getCurrentRequest();
         $csrf = (new State($request->query->get('state')))->getCsrfToken();
@@ -196,19 +198,38 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $tokenParts = explode('.', $franceConnectJwtToken);
         $tokenPayload = json_decode(base64_decode($tokenParts[1]), true) ?? null;
         $nonce = $tokenPayload['nonce'] ?? null;
+        $this->session->remove(FranceConnectOptionsModifier::SESSION_FRANCE_CONNECT_STATE_KEY);
 
-        $tokens = $this->redisCache
+        /** * @var CacheItem $fcTokens  */
+        $fcTokens = $this->redisCache
             ->getItem(FranceConnectOptionsModifier::REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY . '-' . $this->session->getId())
-            ->get()
         ;
-        if ($tokens['nonce'] !== $nonce || $tokens['state'] !== $csrf) {
+
+        if (!$fcTokens->isHit()) {
+            // Redis token has expired or does not exist.
+            $this->flashBag->add(
+                'danger',
+                $this->translator->trans(
+                    'france-connect-connection-timeout',
+                    ['n' => FranceConnectOptionsModifier::FRANCE_CONNECT_CONNECTION_MAX_TIME],
+                    'CapcoAppBundle'
+                )
+            );
+
+            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle'));
+        }
+
+        $tokenData = $fcTokens->get();
+
+        if ($tokenData['nonce'] !== $nonce || $tokenData['state'] !== $csrf) {
+            // State or nonce are wrong: it might be a fraudulent attempt.
             $this->flashBag->add(
                 'danger',
                 $this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle')
             );
             $this->logger->error('state or nonce token does not match the one given by the server');
 
-            throw new \Exception('state or nonce token does not match the one given by the server');
+            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle'));
         }
     }
 
