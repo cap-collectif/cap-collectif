@@ -12,6 +12,7 @@ use Capco\UserBundle\OpenID\Mapping\EdfMapping;
 use Capco\UserBundle\OpenID\Mapping\GrandLyonMapping;
 use Capco\UserBundle\OpenID\Mapping\MappingInterface;
 use Capco\UserBundle\OpenID\Mapping\NantesMapping;
+use Capco\UserBundle\OpenID\Mapping\NimesMapping;
 use Capco\UserBundle\OpenID\Mapping\OccitanieMapping;
 use Capco\UserBundle\OpenID\Mapping\ParisMapping;
 
@@ -79,6 +80,11 @@ class OpenIDPathMapper
 
             case 'dijon':
                 $this->instanceMapper = new DijonMapping();
+
+                break;
+
+            case 'nimes':
+                $this->instanceMapper = new NimesMapping();
 
                 break;
 
