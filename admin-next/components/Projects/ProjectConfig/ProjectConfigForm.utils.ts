@@ -41,6 +41,7 @@ export type FormValues = {
   externalVotesCount: number | null
   addressText?: string | null
   steps: Array<{ id: string; label: string }>
+  customCode?: string | null
 }
 
 export const getInitialValues = (project: ProjectConfigForm_project$data, intl: IntlShape): FormValues => ({
@@ -84,4 +85,5 @@ export const getInitialValues = (project: ProjectConfigForm_project$data, intl: 
         }
       : null,
   steps: project?.steps ? project.steps.map(s => ({ ...s })) : [],
+  customCode: project ? project.customCode : null,
 })

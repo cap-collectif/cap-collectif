@@ -27,13 +27,19 @@ export const OpinionBox = ({ opinionTerm, opinion, rankingThreshold }: Props) =>
   const { section, step } = opinion
 
   React.useEffect(() => {
-    dispatchNavBarEvent('set-breadcrumb', [
+    const breadcrumb = [
       { title: intl.formatMessage({ id: 'navbar.homepage' }), href: '/' },
       { title: intl.formatMessage({ id: 'global.project.label' }), href: '/projects', showOnMobile: true },
       { title: step?.project?.title, href: step?.project?.url || '' },
       { title: step?.label, href: step?.url },
       { title: opinion?.title, href: '' },
-    ])
+    ]
+
+    if (opinion.__typename === 'Version') {
+      breadcrumb.splice(4, 0, { title: opinion?.parent?.title, href: opinion?.parent?.url })
+    }
+
+    dispatchNavBarEvent('set-breadcrumb', breadcrumb)
   }, [step, intl, opinion])
 
   const getBoxLabel = () =>

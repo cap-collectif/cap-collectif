@@ -38,6 +38,45 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                   "kind": "InlineFragment",
                   "selections": Array [
                     Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "Project",
+                      "kind": "LinkedField",
+                      "name": "project",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "url",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
                       "args": Array [
                         Object {
                           "kind": "Variable",
@@ -73,7 +112,7 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
           ],
           "type": "Query",
         },
-        "hash": "330d08ec289248438d005b78529db1e2",
+        "hash": "1b4b3ffa52dee417add09a3a6fd1e704",
         "kind": "Request",
         "operation": Object {
           "argumentDefinitions": Array [
@@ -114,11 +153,46 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                     Object {
                       "alias": null,
                       "args": null,
+                      "kind": "ScalarField",
+                      "name": "title",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
                       "concreteType": "Project",
                       "kind": "LinkedField",
                       "name": "project",
                       "plural": false,
                       "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "title",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
                         Object {
                           "alias": null,
                           "args": Array [
@@ -130,13 +204,6 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
                           ],
                           "kind": "ScalarField",
                           "name": "hasParticipativeStep",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
                           "storageKey": null,
                         },
                       ],
@@ -403,7 +470,7 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "74d49bb97724e6d134daf8a45d10ada5",
+          "cacheID": "db073c7e2be4161027dae09b8c16db23",
           "id": null,
           "metadata": Object {},
           "name": "ConsultationListBoxQuery",
@@ -414,6 +481,13 @@ exports[`<ConsultationListBox /> should render correctly 1`] = `
   step: node(id: $consultationStepId) {
     __typename
     ... on ConsultationStep {
+      title
+      url
+      project {
+        title
+        url
+        id
+      }
       ...ConsultationStepHeader_step_3vFc4a
       consultations {
         ...ConsultationListView_consultations

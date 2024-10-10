@@ -110,6 +110,7 @@ const FRAGMENT = graphql`
       label
       __typename
     }
+    customCode
     ...ProjectConfigFormSide_project
     ...ProjectTabs_project
   }
