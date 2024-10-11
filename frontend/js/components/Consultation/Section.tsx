@@ -21,8 +21,8 @@ export class Section extends React.Component<Props> {
     const { enablePagination, consultation, section, level, hideEmptySection } = this.props
     const { title, subtitle, slug, description, contributionsCount, contribuable } = section
     return (
-      <div id={`opinion-type--${slug}`} className="anchor-offset text-center">
-        <div className={`opinion-type__title level--${level}`}>
+      <div id={`opinion-type--${slug}`} className="anchor-offset">
+        <div className={`opinion-type__title level--${level} text-center`}>
           {title}
           <br />
           {subtitle && <span className="small excerpt">{subtitle}</span>}

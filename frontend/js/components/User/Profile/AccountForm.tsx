@@ -297,7 +297,17 @@ export const AccountForm = ({
       })
       return (
         <>
-          <label className="col-sm-3 control-label" htmlFor="display__language">
+          <label
+            className="col-sm-3 control-label"
+            style={{
+              display: 'flex',
+              flexDirection: 'row',
+              alignItems: 'center',
+              gap: '10px',
+              width: 'fit-content',
+            }}
+            htmlFor="display__language"
+          >
             <FormattedMessage id="display-language" />
             <Tooltip
               placement="top"
@@ -318,7 +328,7 @@ export const AccountForm = ({
               </span>
             </Tooltip>
           </label>
-          <div className="col-sm-6">
+          <div>
             <Field
               component={select}
               name="language"

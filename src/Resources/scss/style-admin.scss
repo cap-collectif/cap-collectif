@@ -58,8 +58,21 @@ body {
     z-index: 1050 !important;
 }
 
+// #region -- this styles need to be in sync with Jodit.tsx Box styles
 .jodit h1 {
     font-size: 36px !important;
+}
+
+.jodit h2 {
+    font-size: 30px !important;
+}
+
+.jodit h3 {
+    font-size: 24px !important;
+}
+
+.jodit h4 {
+    font-size: 18px !important;
 }
 
 .jodit-wysiwyg {
@@ -71,3 +84,4 @@ body {
         padding-inline-start: 40px;
     }
 }
+// #endregion -- this styles need to be in sync with Jodit.tsx Box styles

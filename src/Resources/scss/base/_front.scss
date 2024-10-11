@@ -801,6 +801,31 @@ div.embeddedContent {
     table, td, th {
         border-width: 1px;
     }
+
+    h1 { 
+      margin-top: 0;
+      margin-bottom: 30px;
+    }
+  
+    h2 {
+      margin-top: 30px;
+      margin-bottom: 20px;
+    }
+    
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+
+    h4 {
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+
+    h5, h6 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
 }
 
 /* ======================= New Editor ============================*/

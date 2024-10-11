@@ -1,5 +1,7 @@
 {% extends '@CapcoApp/Blog/index.html.twig' %}
 
+{% set link = capco_site_color_value('color.link.default') %}
+
 {% block canonical_link %}{{ url('app_blog_show', {'slug': post.translate.slug}) }}{% endblock %}
 
 {% block metaTags %}
@@ -20,6 +22,12 @@
 {% block jumbotron %}{% endblock %}
 
 {% block body %}
+    <style>
+        .ql-editor a:not(footer .ql-editor a),
+        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link) {
+            color: {{ link | raw }};
+        }
+    </style> 
     <section class="section--custom">
         <div class="container container--thinner">
             <h1 class="h1">{{ post.title | jolitypo() }}</h1>
@@ -53,7 +61,7 @@
             </div>
 
             {% if post.projects | length > 0 %}
-                <div class="block blog_link-project">
+                <div class="block ql-editor blog_link-project">
                     <p>
                         {{ 'blog.show.projects.title' | trans({'count': post.projects | length}, 'CapcoAppBundle') }}
                     </p>

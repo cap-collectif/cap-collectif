@@ -36,6 +36,10 @@ type Props = ReduxProps & {
   readonly viewer: ProposalPageHeaderButtons_viewer$data | null | undefined
 }
 const Buttons = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+
   button:not(#login-button) {
     margin-right: 10px;
     margin-bottom: 10px;
@@ -215,9 +219,9 @@ export default createFragmentContainer(connector(ProposalPageHeaderButtons), {
       contribuable
       form {
         step {
-            project {
-                opinionCanBeFollowed
-            }
+          project {
+            opinionCanBeFollowed
+          }
         }
         canContact
         contribuable

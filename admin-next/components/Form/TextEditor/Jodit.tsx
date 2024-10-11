@@ -201,6 +201,7 @@ const Jodit = ({
         id={id}
         className="joditEditor"
         sx={{
+          // ! The styles below need to be in sync with style-admin.css
           ...styles,
           '.jodit-wysiwyg a': { textDecoration: 'underline' },
           '.jodit-wysiwyg h1': { fontSize: '36px' },

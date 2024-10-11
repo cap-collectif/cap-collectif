@@ -15,7 +15,7 @@ type Props = {
   show: boolean
   proposalId: string
   authorName: string
-  onClose: () => {}
+  onClose: () => void
   addCaptchaField: boolean
 }
 type FormValues = {

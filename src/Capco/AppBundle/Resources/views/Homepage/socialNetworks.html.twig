@@ -7,7 +7,7 @@
                 <h2 class="h2">{{ 'homepage.social_networks.title' | trans({}, 'CapcoAppBundle') }}</h2>
             {% endif %}
             {% if null != section.teaser %}
-                <p class="block">{{ section.teaser }}</p>
+                <p class="block" id="teaser">{{ section.teaser }}</p>
             {% endif %}
             {% if null != section.body %}
                 <p>{{ section.body | raw }}</p>

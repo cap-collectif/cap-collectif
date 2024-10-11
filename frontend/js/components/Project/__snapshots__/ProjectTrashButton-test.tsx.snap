@@ -2,7 +2,7 @@
 
 exports[`<ProjectTrashButton /> should render correctly 1`] = `
 <div
-  className="container text-center"
+  className="container text-center old-editor"
 >
   <h2
     className="mt-0  project__trash-title"

@@ -16,6 +16,13 @@ exports[`<ProposalContactButton /> renders correctly 1`] = `
     disabled={false}
     id="ProposalContactModal-show-button"
     onClick={[Function]}
+    style={
+      Object {
+        "alignItems": "center",
+        "display": "flex",
+        "gap": "2px",
+      }
+    }
   >
     <Icon
       color="#333333"

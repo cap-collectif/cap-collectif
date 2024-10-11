@@ -21,6 +21,7 @@ export const ProposalContactButton = ({ proposalId, authorName }: { proposalId: 
         onClick={() => {
           setShowModal(true)
         }}
+        style={{ display: 'flex', alignItems: 'center', gap: "2px" }}
       >
         <Icon name={ICON_NAME.message} size={16} color={colors.darkText} /> <FormattedMessage id="send-message" />
       </Button>

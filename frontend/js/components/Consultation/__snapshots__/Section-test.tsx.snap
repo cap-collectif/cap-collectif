@@ -2,11 +2,11 @@
 
 exports[`<Section /> renders correcty 1`] = `
 <div
-  className="anchor-offset text-center"
+  className="anchor-offset"
   id="opinion-type--slug"
 >
   <div
-    className="opinion-type__title level--0"
+    className="opinion-type__title level--0 text-center"
   >
     title
     <br />
@@ -50,11 +50,11 @@ exports[`<Section /> renders correcty 1`] = `
 
 exports[`<Section /> renders nothing when hide section 1`] = `
 <div
-  className="anchor-offset text-center"
+  className="anchor-offset"
   id="opinion-type--slug"
 >
   <div
-    className="opinion-type__title level--0"
+    className="opinion-type__title level--0 text-center"
   >
     title
     <br />
@@ -73,11 +73,11 @@ exports[`<Section /> renders nothing when hide section 1`] = `
 
 exports[`<Section /> renders nothing when section not contribuable 1`] = `
 <div
-  className="anchor-offset text-center"
+  className="anchor-offset"
   id="opinion-type--slug"
 >
   <div
-    className="opinion-type__title level--0"
+    className="opinion-type__title level--0 text-center"
   >
     title
     <br />
