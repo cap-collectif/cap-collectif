@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Button, Flex } from '@cap-collectif/ui'
+import { Box, Button, Flex, useTheme } from '@cap-collectif/ui'
 import { NavBarLink, NavBarMenu, NavBarSkipLinks, NavBarBreadCrumb, NavBarLogo } from './NavBar.components'
 import { LinkProps } from './NavBar.context'
 import useShowMore from '@shared/hooks/useShowMore'
@@ -22,6 +22,7 @@ const NavBarContent = ({
   theme: NavBarTheme
   isMobile?: boolean
 }) => {
+  const { colors } = useTheme()
   const intl = useIntl()
   const [containerRef, seeMoreRef, handleItemWidth, overflowIndex, shouldDisplaySeeMore] = useShowMore(
     !isMobile,
@@ -69,7 +70,7 @@ const NavBarContent = ({
             hoverBg={theme.menuActiveBackground}
             hoverColor={theme.textHoverColor}
             isMobile={isMobile}
-            borderBottom={showBorder ? `1px solid ${theme.subMenuBackground}` : ''}
+            borderBottom={showBorder ? `1px solid ${colors['neutral-gray']['150']}` : ''}
           />
         ) : (
           <NavBar.Link
@@ -79,7 +80,7 @@ const NavBarContent = ({
             color={theme.textColor}
             bg={theme.subMenuBackground}
             hoverColor={theme.textHoverColor}
-            borderBottom={showBorder ? `1px solid ${theme.subMenuBackground}` : ''}
+            borderBottom={showBorder ? `1px solid ${colors['neutral-gray']['150']}` : ''}
           />
         )
       })}
@@ -94,9 +95,10 @@ type NavBarProps = {
   logoSrc: string
   theme: NavBarTheme
   isBigLogo: boolean
+  logoWidth: number
 }
 
-const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo }: NavBarProps) => {
+const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth }: NavBarProps) => {
   const [isExtended] = React.useState(links.length > 6)
 
   return (
@@ -106,22 +108,23 @@ const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo }: NavBarProps) 
         <Flex direction="column" zIndex={navBarZIndex} maxWidth="91.43rem" width="100%" margin="auto">
           <Flex px={6} justifyContent="space-between" alignItems="center" minHeight="4rem">
             <Flex alignItems="center">
-              <NavBar.Logo src={logoSrc} isBigLogo={isBigLogo} />
+              <NavBar.Logo src={logoSrc} isBigLogo={isBigLogo} logoWidth={logoWidth} />
               {isExtended ? null : <NavBar.Content links={links} isExtended={isExtended} theme={theme} />}
             </Flex>
             {children}
           </Flex>
           {isExtended ? <NavBar.Content links={links} isExtended={isExtended} theme={theme} /> : null}
         </Flex>
-        <NavBar.BreadCrumb borderColor={theme.subMenuBackground} />
+        <NavBar.BreadCrumb />
       </Flex>
     </Flex>
   )
 }
 
-const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
+const NavBarMobile = ({ children, links, theme, logoSrc, logoWidth }: NavBarProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const intl = useIntl()
+  const { colors } = useTheme()
 
   React.useEffect(() => {
     const body = document?.querySelector('body')
@@ -146,9 +149,9 @@ const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
         justifyContent="space-between"
         alignItems="center"
         minHeight="80px"
-        borderBottom={isOpen ? `1px solid ${theme.subMenuBackground}` : ''}
+        borderBottom={isOpen ? `1px solid ${colors['neutral-gray']['150']}` : ''}
       >
-        <NavBar.Logo src={logoSrc} />
+        <NavBar.Logo src={logoSrc} logoWidth={logoWidth} />
         <Button
           variant={isOpen ? 'tertiary' : 'primary'}
           px={4}
@@ -159,7 +162,7 @@ const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
           {intl.formatMessage({ id: isOpen ? 'global.close' : 'global.menu' })}
         </Button>
       </Flex>
-      <NavBar.BreadCrumb borderColor={theme.subMenuBackground} isMobile />
+      <NavBar.BreadCrumb isMobile />
       <Box
         bg={theme.menuBackground}
         position="fixed"
@@ -175,7 +178,7 @@ const NavBarMobile = ({ children, links, theme, logoSrc }: NavBarProps) => {
       <Box
         position="fixed"
         height="80px"
-        borderTop={isOpen ? `1px solid ${theme.subMenuBackground}` : undefined}
+        borderTop={isOpen ? `1px solid ${colors['neutral-gray']['150']}` : undefined}
         bottom={0}
         left={0}
         bg={theme.menuBackground}

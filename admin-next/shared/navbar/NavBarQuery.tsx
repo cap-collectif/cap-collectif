@@ -43,6 +43,7 @@ const NavBarQuery: React.FC<{ children: React.ReactNode }> = ({ children }) => {
       logoSrc={siteImage?.media?.url}
       theme={getTheme(siteColors)}
       isBigLogo={(siteImage?.media?.width || 0) / (siteImage?.media?.height || 1) <= isBigLogoRatio}
+      logoWidth={siteImage?.media?.width}
     >
       {children}
     </NavBar>

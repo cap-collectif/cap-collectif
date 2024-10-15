@@ -1,10 +1,12 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
+import { Box, BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon, useTheme } from '@cap-collectif/ui'
 import { Menu, MenuItem } from '@szhsin/react-menu'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { useNavBarContext, LinkProps } from './NavBar.context'
 import { unescapeHTML } from './NavBar.utils'
+
+const isCurrent = href => typeof window && (href === window?.location?.href || href === window?.location?.pathname)
 
 export const NavBarMenu = React.forwardRef<
   HTMLElement,
@@ -19,15 +21,18 @@ export const NavBarMenu = React.forwardRef<
 >(({ title, links, isExtended, color, hoverColor, bg, hoverBg, isMobile, ...rest }, ref) => {
   const [isOpen, setIsOpen] = React.useState(false)
 
+  const isCurrentLinkInMenu = links.some(({ href }) => isCurrent(href))
+
   const MenuButton = React.forwardRef<HTMLElement, { open: boolean; onClick?: () => void }>(
     ({ open, onClick }, ref) => (
       <Flex
         ref={ref}
-        px={[4]}
+        px={2}
         py={[5, 5, isExtended ? 4 : 5]}
         fontSize={pxToRem(16)}
         as="button"
         color={color}
+        fontWeight={isCurrentLinkInMenu ? 'semibold' : 'normal'}
         justifyContent={['space-between', '']}
         bg={open ? bg : ''}
         _hover={{ color: hoverColor, bg: String(bg) }}
@@ -42,26 +47,31 @@ export const NavBarMenu = React.forwardRef<
   )
 
   const renderLinks = () =>
-    links.map((link, idx) => (
-      <Box
-        key={idx}
-        as={isMobile ? 'a' : MenuItem}
-        display="block"
-        href={link.href}
-        width={['100%', '100%', '320px']}
-        bg={bg}
-        color={color}
-        borderRadius={[0, links.length > 6 ? 'normal' : 0]}
-        _hover={{ color: link.href ? hoverColor : color, bg: hoverBg }}
-        _focus={{ color: link.href ? hoverColor : color, bg: hoverBg, outline: 'none' }}
-        px={[6, 3]}
-        py={2}
-        fontSize={pxToRem(16)}
-        lineHeight="base"
-      >
-        {link.title}
-      </Box>
-    ))
+    links.map((link, idx) => {
+      const { href, title } = link
+      const isCurrentPage = isCurrent(href)
+      return (
+        <Box
+          key={idx}
+          as={isMobile ? 'a' : MenuItem}
+          display="block"
+          href={href}
+          width={['100%', '100%', '320px']}
+          bg={bg}
+          color={color}
+          fontWeight={isCurrentPage ? 'semibold' : 'normal'}
+          borderRadius={[0, links.length > 6 && !isMobile ? 'normal' : 0]}
+          _hover={{ color: href ? hoverColor : color, bg: hoverBg }}
+          _focus={{ color: href ? hoverColor : color, bg: hoverBg, outline: 'none' }}
+          px={[6, 2]}
+          py={2}
+          fontSize={pxToRem(16)}
+          lineHeight="base"
+        >
+          {title}
+        </Box>
+      )
+    })
 
   const megaMenuStyles =
     links.length > 6
@@ -73,7 +83,7 @@ export const NavBarMenu = React.forwardRef<
           bg,
           _hover: { bg: hoverBg },
           width: '100vw',
-          maxHeight: '15rem',
+          maxHeight: links.length > 10 ? `calc(23rem - (100vw - ${pxToRem(1133)})* 0.2)` : '15rem',
         }
       : { boxShadow: 'medium', borderBottomLeftRadius: '4px', borderBottomRightRadius: '4px', overflow: 'hidden' }
 
@@ -93,11 +103,12 @@ export const NavBarMenu = React.forwardRef<
         <Menu
           menuButton={({ open }) => (
             <Flex
-              px={[4]}
+              px={2}
               py={[5, 5, isExtended ? 4 : 5]}
               fontSize={pxToRem(16)}
               as="button"
               color={color}
+              fontWeight={isCurrentLinkInMenu ? 'semibold' : 'normal'}
               bg={open ? bg : ''}
               _hover={{ color: hoverColor, bg: String(bg) }}
               _focus={{ color, outline: 'none', boxShadow: `0px 0px 2px 2px ${String(bg)}` }}
@@ -124,6 +135,7 @@ export const NavBarLink = React.forwardRef<
   HTMLElement,
   BoxProps & LinkProps & { isExtended?: boolean; hoverColor: string }
 >(({ href, title, isExtended, color, hoverColor, bg, ...rest }, ref) => {
+  const isCurrentPage = isCurrent(href)
   return (
     <Box
       ref={ref}
@@ -131,9 +143,10 @@ export const NavBarLink = React.forwardRef<
       className="navLink"
       fontSize={pxToRem(16)}
       href={href}
-      px={4}
+      px={2}
       py={[5, 5, isExtended ? 4 : 5]}
       color={color}
+      fontWeight={isCurrentPage ? 'semibold' : 'normal'}
       _hover={{ color: hoverColor, bg: String(bg) }}
       _focus={{ color, outline: 'none', boxShadow: `0px 0px 2px 2px ${String(bg)}` }}
       {...rest}
@@ -142,12 +155,22 @@ export const NavBarLink = React.forwardRef<
     </Box>
   )
 })
+NavBarLink.displayName = 'NavBarLink'
 
-export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean }> = ({ src, isBigLogo = false }) => {
+export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean; logoWidth?: number }> = ({
+  src,
+  isBigLogo = false,
+  logoWidth,
+}) => {
   const intl = useIntl()
+  const width = logoWidth > 180 ? 180 : logoWidth
 
   return (
-    <Box width={isBigLogo ? 'unset' : '180px'} height={isBigLogo ? '88px' : '33px'} my={isBigLogo ? 4 : 0}>
+    <Box
+      maxWidth={isBigLogo ? 'unset' : pxToRem(width)}
+      height={isBigLogo ? pxToRem(88) : pxToRem(33)}
+      my={isBigLogo ? 4 : 0}
+    >
       <Box as="a" href="/">
         <Box
           as="img"
@@ -184,8 +207,9 @@ export const NavBarSkipLinks: React.FC = () => {
   )
 }
 
-export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolean }> = ({ borderColor, isMobile }) => {
+export const NavBarBreadCrumb: React.FC<{ isMobile?: boolean }> = ({ isMobile }) => {
   const intl = useIntl()
+  const { colors } = useTheme()
   const { breadCrumbItems: items } = useNavBarContext()
 
   if (!items?.length) return null
@@ -197,7 +221,7 @@ export const NavBarBreadCrumb: React.FC<{ borderColor: string; isMobile?: boolea
       as="nav"
       aria-label={intl.formatMessage({ id: 'navbar.breadcrumb' })}
       py={2}
-      borderTop={`1px solid ${borderColor}`}
+      borderTop={`1px solid ${colors['neutral-gray']['150']}`}
       bg="white"
     >
       {isMobile ? (

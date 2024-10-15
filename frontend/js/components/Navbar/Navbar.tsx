@@ -112,8 +112,10 @@ export const Navbar = ({
       ) : null}
       {newNavbar ? (
         <React.Suspense fallback={null}>
-          <ChartModal />
-          <PrivacyModal />
+          <React.Suspense fallback={null}>
+            <ChartModal />
+            <PrivacyModal />
+          </React.Suspense>
           <NavBarQuery>
             <Flex alignItems="center" justifyContent="center">
               {isAuthenticated ? (
