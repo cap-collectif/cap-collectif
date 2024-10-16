@@ -2,7 +2,8 @@ import { toast } from '@cap-collectif/ui'
 import { toast as oldToast } from '~ds/Toast'
 
 import type { IntlShape } from 'react-intl'
-import addVote from '../../mutations/AddProposalVoteMutation'
+import AddProposalVoteMutation from '../../mutations/AddProposalVoteMutation'
+import AddProposalSmsVoteMutation from '../../mutations/AddProposalSmsVoteMutation'
 import DeleteProposalMutation from '../../mutations/DeleteProposalMutation'
 import type { Exact, Dispatch, Uuid, Action } from '../../types'
 import { isInterpellationContextFromStep, isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
@@ -231,45 +232,112 @@ export const vote = (
   proposalId: Uuid,
   anonymously: boolean,
   intl: IntlShape,
+  isAuthenticated: boolean,
+  token?: string,
   onSuccess?: () => void,
   onError?: () => void,
 ) => {
-  dispatch(startVoting())
-  return addVote
-    .commit({
-      stepId,
-      input: {
-        proposalId,
+  if (isAuthenticated) {
+    dispatch(startVoting())
+    return AddProposalVoteMutation
+      .commit({
         stepId,
-        anonymously,
-      },
-    })
-    .then(response => {
-      dispatch(closeVoteModal())
-      const isInterpellation =
-        response.addProposalVote?.voteEdge &&
-        isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
-      const successTranslationKey =
-        response.addProposalVote && response.addProposalVote.voteEdge && isInterpellation
-          ? 'support.add_success'
-          : 'vote.add_success'
-      if (isInterpellation)
-        toast({
-          variant: 'success',
-          content: intl.formatMessage({
-            id: successTranslationKey,
-          }),
-        })
-      if (onSuccess) onSuccess()
-      return response
-    })
-    .catch(e => {
-      if (onError) onError()
-      console.log(e) // eslint-disable-line no-console
+        input: {
+          proposalId,
+          stepId,
+          anonymously,
+        },
+      })
+      .then(response => {
+        const errorCode = response?.addProposalVote?.errorCode;
 
-      dispatch(closeVoteModal())
-      toast({ content: intl.formatMessage({ id: 'global.failure' }), variant: 'danger' })
-    })
+        if (errorCode === 'PHONE_ALREADY_USED') {
+          toast({
+            variant: 'danger',
+            content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
+          })
+          dispatch(closeVoteModal())
+          return;
+        }
+
+        dispatch(closeVoteModal())
+        const isInterpellation =
+          response.addProposalVote?.voteEdge &&
+          isInterpellationContextFromStep(response.addProposalVote.voteEdge.node.step)
+        const successTranslationKey =
+          response.addProposalVote && response.addProposalVote.voteEdge && isInterpellation
+            ? 'support.add_success'
+            : 'vote.add_success'
+        if (isInterpellation)
+          toast({
+            variant: 'success',
+            content: intl.formatMessage({
+              id: successTranslationKey,
+            }),
+          })
+        if (onSuccess) onSuccess()
+        return response
+      })
+      .catch(e => {
+        if (onError) onError()
+        console.log(e) // eslint-disable-line no-console
+        dispatch(closeVoteModal())
+        toast({ content: intl.formatMessage({ id: 'global.failure' }), variant: 'danger' })
+      })
+  } else {
+    dispatch(startVoting())
+    const consentSmsCommunication = localStorage.getItem('consentSmsCommunication') ?? false
+    return AddProposalSmsVoteMutation
+      .commit({
+        stepId,
+        input: {
+          proposalId,
+          stepId,
+          token,
+          consentSmsCommunication
+        },
+        token: token ?? ''
+      })
+      .then(response => {
+
+        const errorCode = response?.addProposalSmsVote?.errorCode;
+
+        if (errorCode === 'PHONE_ALREADY_USED') {
+          toast({
+            variant: 'danger',
+            content: intl.formatMessage({ id: 'phone.already.used.in.this.step' }),
+          })
+          dispatch(closeVoteModal())
+          return;
+        }
+
+
+        dispatch(closeVoteModal())
+        const isInterpellation =
+          response.addProposalSmsVote?.voteEdge &&
+          isInterpellationContextFromStep(response.addProposalSmsVote.voteEdge.node.step)
+        const successTranslationKey =
+          response.addProposalSmsVote && response.addProposalSmsVote.voteEdge && isInterpellation
+            ? 'support.add_success'
+            : 'vote.add_success'
+        if (isInterpellation)
+          toast({
+            variant: 'success',
+            content: intl.formatMessage({
+              id: successTranslationKey,
+            }),
+          })
+        if (onSuccess) onSuccess()
+        return response
+      })
+      .catch(e => {
+        if (onError) onError()
+        console.log(e) // eslint-disable-line no-console
+
+        dispatch(closeVoteModal())
+        toast({ content: intl.formatMessage({ id: 'global.failure' }), variant: 'danger' })
+      })
+  }
 }
 export type ProposalAction =
   | ChangeFilterAction
@@ -290,19 +358,19 @@ export type ProposalAction =
   | OpenDetailLikersModalAction
   | CloseDetailLikersModalAction
   | {
-      type: 'proposal/POSTS_FETCH_FAILED'
-      error: Error
-    }
+  type: 'proposal/POSTS_FETCH_FAILED'
+  error: Error
+}
   | {
-      type: 'proposal/FETCH_SUCCEEDED'
-      proposals: Array<Record<string, any>>
-      count: number
-    }
+  type: 'proposal/FETCH_SUCCEEDED'
+  proposals: Array<Record<string, any>>
+  count: number
+}
   | {
-      type: 'proposal/POSTS_FETCH_SUCCEEDED'
-      posts: Array<Record<string, any>>
-      proposalId: Uuid
-    }
+  type: 'proposal/POSTS_FETCH_SUCCEEDED'
+  posts: Array<Record<string, any>>
+  proposalId: Uuid
+}
 export const reducer = (state: State = initialState, action: Action): Exact<State> => {
   switch (action.type) {
     case 'proposal/CHANGE_FILTER': {

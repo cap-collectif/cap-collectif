@@ -50,13 +50,10 @@ describe('Proposal SMS vote', () => {
     cy.contains('number-verification')
     ProposalVoteSms.fillCode()
     cy.wait('@VerifySmsVotePhoneNumberMutation')
-    cy.wait('@AddProposalSmsVoteMutation')
     // step 3
-    cy.contains('your-vote-has-been-validated')
-    cy.contains('dont-stop-here-check-other-proposals')
-    ProposalVoteSms.getProposalSuggestionCards().should('have.length', 2)
-    cy.contains('global.close').click({ force: true })
-    cy.getCookie('AnonymousAuthenticatedWithConfirmedPhone').should('have.property', 'value', 'InRva2VuIg==')
+    cy.contains('validate-participation').click({ force: true })
+    cy.wait('@AddProposalSmsVoteMutation')
+    cy.contains('vote.add_success')
 
     // check for max vote
     ProposalVoteSms.getVoteHeaderMaxVoteCounter().contains('2')

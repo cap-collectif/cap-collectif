@@ -13,3 +13,6 @@ AddProposalSmsVoteErrorCode:
             PHONE_NOT_FOUND:
                 value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalSmsVoteMutation::PHONE_NOT_FOUND
                 description: 'Phone not found for the given token.'
+            PHONE_ALREADY_USED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalSmsVoteMutation::PHONE_ALREADY_USED
+                description: 'The proposal is already voted by another user/participant with the given number.'

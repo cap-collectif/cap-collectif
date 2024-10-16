@@ -197,8 +197,6 @@ export const ProposalVoteBasketWidget = ({
       if (html) html.classList.remove(newNavbar ? 'has-new-vote-widget' : 'has-vote-widget')
     }
   }, [newNavbar])
-  const smsVoteEnabled = step.isProposalSmsVoteEnabled && features.twilio && features.proposal_sms_vote
-  const showMyVotesButton = !smsVoteEnabled && isAuthenticated
   return (
     <NavBar
       fixedTop
@@ -301,7 +299,7 @@ export const ProposalVoteBasketWidget = ({
           </div>
         </div>
       </div>
-      {showMyVotesButton && (
+      {isAuthenticated && (
         <Button bsStyle="default" className="widget__button " href={votesPageUrl}>
           <FormattedMessage id={isInterpellation ? 'project.supports.title' : 'project.votes.title'} />
         </Button>

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\ProposalCollectSmsVote;
 use Capco\AppBundle\Entity\ProposalSelectionSmsVote;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Exception\ContributorAlreadyUsedPhoneException;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
@@ -15,6 +16,7 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
+use Capco\AppBundle\Service\ContributionValidator;
 use Capco\AppBundle\Utils\RequestGuesser;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -33,6 +35,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
     public const PROPOSAL_ALREADY_VOTED = 'PROPOSAL_ALREADY_VOTED';
     public const VOTE_LIMIT_REACHED = 'VOTE_LIMIT_REACHED';
     public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
+    public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
 
     private EntityManagerInterface $em;
     private ProposalVotesDataLoader $proposalVotesDataLoader;
@@ -45,6 +48,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
     private ValidatorInterface $validator;
     private RequestGuesser $requestGuesser;
     private PhoneTokenRepository $phoneTokenRepository;
+    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private ContributionValidator $contributionValidator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -57,7 +62,9 @@ class AddProposalSmsVoteMutation implements MutationInterface
         ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
         ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
         RequestGuesser $requestGuesser,
-        PhoneTokenRepository $phoneTokenRepository
+        PhoneTokenRepository $phoneTokenRepository,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler,
+        ContributionValidator $contributionValidator
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -70,6 +77,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
         $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
         $this->requestGuesser = $requestGuesser;
         $this->phoneTokenRepository = $phoneTokenRepository;
+        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
+        $this->contributionValidator = $contributionValidator;
     }
 
     public function __invoke(Argument $input): array
@@ -131,6 +140,14 @@ class AddProposalSmsVoteMutation implements MutationInterface
             throw new UserError('This step is not votable.');
         }
 
+        if ($step instanceof SelectionStep) {
+            try {
+                $this->contributionValidator->validatePhoneReusability($phone, $vote, $step, $token);
+            } catch (ContributorAlreadyUsedPhoneException $e) {
+                return ['errorCode' => self::PHONE_ALREADY_USED];
+            }
+        }
+
         // Check if user has reached limit of votes
         if ($step->isNumberOfVotesLimitted() && $countUserVotes >= $step->getVotesLimit()) {
             // when vote limit is reached we need to fetch user votes to refresh the relay cache
@@ -165,6 +182,9 @@ class AddProposalSmsVoteMutation implements MutationInterface
             throw new UserError((string) $error->getMessage());
         }
 
+        if ($step instanceof SelectionStep) {
+            $this->proposalVoteAccountHandler->checkIfAnonVotesAreStillAccounted($step, $vote, $phone, true);
+        }
         $this->em->persist($vote);
 
         try {

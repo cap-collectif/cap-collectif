@@ -12,7 +12,6 @@ import {
   Flex,
   Tag,
   CapUIIcon,
-  InfoMessage,
   toast,
 } from '@cap-collectif/ui'
 import { useDispatch, useSelector } from 'react-redux'
@@ -26,7 +25,6 @@ import environment from '~/createRelayEnvironment'
 import type { GlobalState } from '~/types'
 import type { ProposalVoteModal_proposal$key } from '~relay/ProposalVoteModal_proposal.graphql'
 import type { ProposalVoteModal_step$key } from '~relay/ProposalVoteModal_step.graphql'
-import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
 import usePrevious from '~/utils/hooks/usePrevious'
 import ResetCss from '~/utils/ResetCss'
@@ -45,6 +43,7 @@ import CookieMonster from '@shared/utils/CookieMonster'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import isIos from '~/utils/isIos'
 import focusOnClose from './utils/focusOnClose'
+import { ProposalModalVoteHelpText } from '~/components/Proposal/Vote/ProposalModalVoteHelpText'
 
 type Props = {
   proposal: ProposalVoteModal_proposal$key
@@ -264,7 +263,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
     const tmpVote = values.votes?.filter(v => v.id === null)[0]
     if (!tmpVote) return
     // First we add the vote
-    return vote(dispatch, step.id, proposal.id, !tmpVote.public, intl).then(data => {
+    return vote(dispatch, step.id, proposal.id, !tmpVote.public, intl, true).then(data => {
       if (!data?.addProposalVote?.voteEdge?.node || typeof data.addProposalVote.voteEdge === 'undefined') {
         invariant(false, 'The vote id is missing.')
       }
@@ -465,22 +464,10 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
             </p>
             <Box id="proposal-validate-vote-modal">
               <Flex direction="column" align="flex-start" spacing={6}>
+                <VoteMinAlert step={step} translationKey={keyTradForModalVoteTitle} /> {/** @ts-ignore */}
                 {/** @ts-ignore */}
                 <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
-                {votesHelpText && (
-                  <InfoMessage variant="info" width="100%">
-                    <InfoMessage.Title>
-                      {intl.formatMessage({
-                        id: isInterpellationContextFromStep(step)
-                          ? 'admin.fields.step.supportsHelpText'
-                          : 'admin.fields.step.votesHelpText',
-                      })}
-                    </InfoMessage.Title>
-                    <InfoMessage.Content>
-                      <WYSIWYGRender value={votesHelpText} />
-                    </InfoMessage.Content>
-                  </InfoMessage>
-                )}
+                <ProposalModalVoteHelpText votesHelpText={votesHelpText} step={step} />
               </Flex>
             </Box>
           </MultiStepModal.Body>
@@ -545,20 +532,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
             ) : null}
             <VoteMinAlert step={step} translationKey={keyTradForModalVoteTitle} /> {/** @ts-ignore */}
             <ProposalsUserVotesTable onSubmit={onSubmit} step={step} votes={step.viewerVotes} />
-            {votesHelpText && (
-              <InfoMessage variant="info" width="100%">
-                <InfoMessage.Title>
-                  {intl.formatMessage({
-                    id: isInterpellationContextFromStep(step)
-                      ? 'admin.fields.step.supportsHelpText'
-                      : 'admin.fields.step.votesHelpText',
-                  })}
-                </InfoMessage.Title>
-                <InfoMessage.Content>
-                  <WYSIWYGRender value={votesHelpText} />
-                </InfoMessage.Content>
-              </InfoMessage>
-            )}
+            <ProposalModalVoteHelpText votesHelpText={votesHelpText} step={step} />
           </Flex>
         </Modal.Body>
         <Modal.Footer>
@@ -569,10 +543,13 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
             id="confirm-proposal-vote"
             onClick={() => {
               dispatch(submit(getFormName(step)))
-              fetchQuery_DEPRECATED(environment, refetchViewer as GraphQLTaggedNode, {
-                stepId: step.id,
-                isAuthenticated,
-              })
+              // we need to add a timeout because it causes a bug if the query ends before the mutation triggered by `dispatch(submit(getFormName(step)))`
+              setTimeout(() => {
+                fetchQuery_DEPRECATED(environment, refetchViewer as GraphQLTaggedNode, {
+                  stepId: step.id,
+                  isAuthenticated,
+                })
+              }, 500)
             }}
           >
             {intl.formatMessage({

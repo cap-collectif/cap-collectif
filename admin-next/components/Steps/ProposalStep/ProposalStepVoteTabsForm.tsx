@@ -43,6 +43,8 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
   const voteMinVoteLimitEnabled = votesMin !== null || votesLimit !== null
   const voteThresholdEnabled = voteThreshold !== null
 
+  const isProposalSmsVoteEnabled = watch('isProposalSmsVoteEnabled')
+
   return (
     <Tabs
       selectedId={_voteTypeForTabs}
@@ -81,6 +83,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                     })}
                   </ListCard.Item.Label>
                   <Switch
+                    disabled={isProposalSmsVoteEnabled}
                     id="budget_switch"
                     checked={budget !== null && budget !== undefined}
                     name="budget"
@@ -119,6 +122,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                     })}
                   </ListCard.Item.Label>
                   <Switch
+                    disabled={isProposalSmsVoteEnabled}
                     id="votesMin_switch"
                     checked={voteThresholdEnabled}
                     name="voteThreshold"
@@ -243,22 +247,27 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                         <FieldInput id="votesLimit" name="votesLimit" control={control} type="number" min={votesMin} />
                       </FormControl>
                     </Flex>
-
-                    <FormControl name="votesRanking" control={control} mb={0}>
-                      <FieldInput id="votesRanking" name="votesRanking" control={control} type="checkbox">
-                        {intl.formatMessage({
-                          id: 'activate-vote-ranking',
-                        })}
-                      </FieldInput>
-                    </FormControl>
-                    <Box color="gray.700">
-                      <FormattedHTMLMessage id="help-text-vote-ranking" />
-                    </Box>
-                    {votesRanking === true && (
-                      <Text color="gray.700">
-                        {intl.formatMessage({ id: 'help-vote-point' }, { points: votesLimit })}
-                      </Text>
-                    )}
+                    {
+                      !isProposalSmsVoteEnabled && (
+                        <>
+                          <FormControl name="votesRanking" control={control} mb={0}>
+                            <FieldInput id="votesRanking" name="votesRanking" control={control} type="checkbox">
+                              {intl.formatMessage({
+                                id: 'activate-vote-ranking',
+                              })}
+                            </FieldInput>
+                          </FormControl>
+                          <Box color="gray.700">
+                            <FormattedHTMLMessage id="help-text-vote-ranking" />
+                          </Box>
+                          {votesRanking === true && (
+                            <Text color="gray.700">
+                              {intl.formatMessage({ id: 'help-vote-point' }, { points: votesLimit })}
+                            </Text>
+                          )}
+                        </>
+                      )
+                    }
                   </Flex>
                 )}
               </Flex>
@@ -272,6 +281,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                     })}
                   </ListCard.Item.Label>
                   <Switch
+                    disabled={isProposalSmsVoteEnabled}
                     id="secretBallot"
                     checked={secretBallot}
                     name="secretBallot"

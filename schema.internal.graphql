@@ -594,6 +594,11 @@ enum AddProposalSmsVoteErrorCode {
 
   """Phone not found for the given token."""
   PHONE_NOT_FOUND
+
+  """
+  The proposal is already voted by another user/participant with the given number.
+  """
+  PHONE_ALREADY_USED
 }
 
 input AddProposalSmsVoteInput {
@@ -619,6 +624,14 @@ type AddProposalSmsVotePayload {
   clientMutationId: String
 }
 
+"""Available errors for an `addProposalVote` mutation."""
+enum AddProposalVoteErrorCode {
+  """
+  The proposal is already voted by another user/participant with the given number.
+  """
+  PHONE_ALREADY_USED
+}
+
 input AddProposalVoteInput {
   """The Node ID of the proposal to vote."""
   proposalId: ID!
@@ -632,9 +645,10 @@ input AddProposalVoteInput {
 }
 
 type AddProposalVotePayload {
-  vote: ProposalUserVote!
-  viewer: User!
-  voteEdge: ProposalVoteEdge!
+  vote: ProposalUserVote
+  viewer: User
+  voteEdge: ProposalVoteEdge
+  errorCode: AddProposalVoteErrorCode
   clientMutationId: String
 }
 

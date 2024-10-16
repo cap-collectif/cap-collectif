@@ -3,8 +3,10 @@ AddProposalVotePayload:
     config:
         fields:
             vote:
-                type: 'InternalProposalUserVote!'
+                type: 'InternalProposalUserVote'
             viewer:
-                type: 'InternalUser!'
+                type: 'InternalUser'
             voteEdge:
-                type: 'InternalProposalVoteEdge!'
+                type: 'InternalProposalVoteEdge'
+            errorCode:
+                type: 'AddProposalVoteErrorCode'

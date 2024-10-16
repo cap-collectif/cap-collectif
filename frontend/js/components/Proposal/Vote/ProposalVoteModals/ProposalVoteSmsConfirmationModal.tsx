@@ -12,7 +12,7 @@ import {
   Text,
   Tooltip,
   useMultiStepModal,
-  CapUIIcon,
+  CapUIIcon, toast,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormattedHTMLMessage, useIntl } from 'react-intl'
@@ -20,18 +20,18 @@ import { useForm } from 'react-hook-form'
 import { graphql, useFragment } from 'react-relay'
 import formatPhoneNumber from '~/utils/formatPhoneNumber'
 import phoneSplitter from '~/utils/phoneSplitter'
-import AddProposalSmsVoteMutation from '~/mutations/AddProposalSmsVoteMutation'
 import VerifySmsVotePhoneNumberMutation from '~/mutations/VerifySmsVotePhoneNumberMutation'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import SendSmsProposalVoteMutation from '~/mutations/SendSmsProposalVoteMutation'
-import type { AddProposalSmsVoteMutationResponse } from '~relay/AddProposalSmsVoteMutation.graphql'
-import type { VerifySmsVotePhoneNumberMutationResponse } from '~relay/VerifySmsVotePhoneNumberMutation.graphql'
-import type { SendSmsProposalVoteMutationResponse } from '~relay/SendSmsProposalVoteMutation.graphql'
+import type { VerifySmsVotePhoneNumberMutation$data } from '~relay/VerifySmsVotePhoneNumberMutation.graphql'
+import type { SendSmsProposalVoteMutation$data } from '~relay/SendSmsProposalVoteMutation.graphql'
 import CookieMonster from '@shared/utils/CookieMonster'
-import type { Status } from '~/components/Proposal/Vote/ProposalSmsVoteModal'
 import ResetCss from '~/utils/ResetCss'
 import type { ProposalVoteSmsConfirmationModal_step$key } from '~relay/ProposalVoteSmsConfirmationModal_step.graphql'
 import type { ProposalVoteSmsConfirmationModal_proposal$key } from '~relay/ProposalVoteSmsConfirmationModal_proposal.graphql'
+import AddProposalSmsVoteMutation from '~/mutations/AddProposalSmsVoteMutation'
+import {AddProposalSmsVoteMutation$data} from '~relay/AddProposalSmsVoteMutation.graphql'
+
 export const formName = 'vote-sms-validation-form'
 export type FormValues = {
   code: string
@@ -43,7 +43,6 @@ export type ProposalVoteSmsConfirmationModalProps = {
   readonly step: ProposalVoteSmsConfirmationModal_step$key
   readonly consentSmsCommunication: boolean
   readonly setIsLoading: (isLoading: boolean) => void
-  readonly setStatus: (status: Status) => void
   readonly isLoading: boolean
 }
 const PROPOSAL_FRAGMENT = graphql`
@@ -54,6 +53,8 @@ const PROPOSAL_FRAGMENT = graphql`
 const STEP_FRAGMENT = graphql`
   fragment ProposalVoteSmsConfirmationModal_step on ProposalStep {
     id
+    votesMin
+    votesLimit
   }
 `
 
@@ -68,7 +69,6 @@ const ProposalVoteSmsConfirmationModal = ({
   step: stepRef,
   consentSmsCommunication,
   setIsLoading,
-  setStatus,
   isLoading,
 }: ProposalVoteSmsConfirmationModalProps) => {
   const intl = useIntl()
@@ -77,7 +77,7 @@ const ProposalVoteSmsConfirmationModal = ({
   const proposal = useFragment(PROPOSAL_FRAGMENT, proposalRef)
   const step = useFragment(STEP_FRAGMENT, stepRef)
   const parsedPhone = getPhone(countryCode, phone)
-  const { goToNextStep, goToPreviousStep } = useMultiStepModal()
+  const { goToNextStep, goToPreviousStep, hide } = useMultiStepModal()
   const form = useForm<any>({
     mode: 'onChange',
     defaultValues: {
@@ -91,7 +91,7 @@ const ProposalVoteSmsConfirmationModal = ({
     if (!verified) {
       try {
         setIsLoading(true)
-        const verifyCodeResponse: VerifySmsVotePhoneNumberMutationResponse =
+        const verifyCodeResponse: VerifySmsVotePhoneNumberMutation$data =
           await VerifySmsVotePhoneNumberMutation.commit({
             input: {
               code,
@@ -134,11 +134,14 @@ const ProposalVoteSmsConfirmationModal = ({
 
         const token = verifyCodeResponse.verifySmsVotePhoneNumber?.token ?? ''
 
-        if (token) {
-          CookieMonster.addAnonymousAuthenticatedWithConfirmedPhone(token)
+        if (token && (step.votesMin || step.votesLimit)) {
+          localStorage.setItem('AnonVoteToken', token)
+          localStorage.setItem('consentSmsCommunication', consentSmsCommunication ? '1' : '0')
+          goToNextStep()
+          return;
         }
 
-        const addProposalSmsVoteResponse: AddProposalSmsVoteMutationResponse = await AddProposalSmsVoteMutation.commit({
+        const addProposalSmsVoteResponse: AddProposalSmsVoteMutation$data = await AddProposalSmsVoteMutation.commit({
           input: {
             token,
             proposalId: proposal?.id,
@@ -157,16 +160,36 @@ const ProposalVoteSmsConfirmationModal = ({
           return mutationErrorToast(intl)
         }
 
-        if (['VOTE_LIMIT_REACHED', 'PROPOSAL_ALREADY_VOTED'].includes(addSmsVoteErrorCode)) {
-          setStatus(addSmsVoteErrorCode)
-          goToNextStep()
-          return
+        if (['PROPOSAL_ALREADY_VOTED', 'VOTELIMIT_REACHED'].includes(addSmsVoteErrorCode)) {
+          const errorMap = {
+            'PROPOSAL_ALREADY_VOTED': {
+              id: 'rejected-vote-choose-another-one'
+            },
+            'VOTELIMIT_REACHED': {
+              id: 'you-reached-max-votes'
+            },
+          }
+          const {id} = errorMap[addSmsVoteErrorCode]
+
+          toast({
+            variant: 'danger',
+            content: intl.formatMessage({ id }),
+          })
+
+          hide();
+          CookieMonster.addAnonymousAuthenticatedWithConfirmedPhone(token)
+          return;
         }
 
+        CookieMonster.addAnonymousAuthenticatedWithConfirmedPhone(token)
         setVerified(true)
         setIsLoading(false)
-        setStatus('SUCCESS')
-        goToNextStep()
+        hide()
+        toast({
+          variant: 'success',
+          content: intl.formatMessage({ id: 'your-vote-has-been-validated' })
+        })
+
       } catch (e) {
         mutationErrorToast(intl)
       }
@@ -189,7 +212,7 @@ const ProposalVoteSmsConfirmationModal = ({
         proposalId: proposal?.id,
         stepId: step?.id,
       }
-      const response: SendSmsProposalVoteMutationResponse = await SendSmsProposalVoteMutation.commit({
+      const response: SendSmsProposalVoteMutation$data = await SendSmsProposalVoteMutation.commit({
         input,
       })
       const errorCode = response.sendSmsProposalVote?.errorCode
@@ -214,6 +237,13 @@ const ProposalVoteSmsConfirmationModal = ({
 
   const onComplete = e => {
     validateCode(e.target.value)
+  }
+
+  const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone() || localStorage.getItem('AnonVoteToken')
+
+  if (token) {
+    goToNextStep()
+    return null;
   }
 
   return (

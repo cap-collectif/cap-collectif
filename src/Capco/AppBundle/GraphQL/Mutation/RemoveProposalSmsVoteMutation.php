@@ -34,6 +34,7 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
     private GlobalIdResolver $globalIdResolver;
     private Indexer $indexer;
     private PhoneTokenRepository $phoneTokenRepository;
+    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -44,7 +45,8 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         Indexer $indexer,
         GlobalIdResolver $globalIdResolver,
-        PhoneTokenRepository $phoneTokenRepository
+        PhoneTokenRepository $phoneTokenRepository,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler
     ) {
         $this->em = $em;
         $this->proposalVotesDataLoader = $proposalVotesDataLoader;
@@ -55,6 +57,7 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
         $this->indexer = $indexer;
         $this->globalIdResolver = $globalIdResolver;
         $this->phoneTokenRepository = $phoneTokenRepository;
+        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
     }
 
     public function __invoke(Argument $input): array
@@ -103,6 +106,9 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
             throw new UserError('This step is no longer contributable.');
         }
 
+        if ($step instanceof SelectionStep) {
+            $this->proposalVoteAccountHandler->checkIfAnonVotesAreStillAccounted($step, $currentVote, $phone, false);
+        }
         $previousVoteId = $currentVote->getId();
         $this->indexer->remove(ClassUtils::getClass($currentVote), $previousVoteId);
         $this->em->remove($currentVote);

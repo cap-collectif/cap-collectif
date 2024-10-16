@@ -221,10 +221,8 @@ export default createFragmentContainer(container, {
   vote: graphql`
     fragment ProposalUserVoteItem_vote on ProposalVote {
       ...UnpublishedLabel_publishable
-      ... on ProposalUserVote {
-        published
-        createdAt
-      }
+      createdAt
+      published
       proposal {
         id
         title

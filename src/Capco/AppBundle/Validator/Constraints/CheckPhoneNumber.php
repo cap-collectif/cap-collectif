@@ -9,6 +9,7 @@ class CheckPhoneNumber extends Constraint
 {
     public string $alreadyUsedMessage = UserPhoneErrors::PHONE_ALREADY_USED_BY_ANOTHER_USER;
     public string $invalidLength = UserPhoneErrors::PHONE_INVALID_LENGTH;
+    public string $mobileNumber = UserPhoneErrors::PHONE_SHOULD_BE_MOBILE_NUMBER;
 
     public ?string $stepId = null;
 

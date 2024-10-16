@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Validator\Constraints;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\UserBundle\Repository\UserRepository;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Validator\Constraint;
@@ -16,25 +17,33 @@ class CheckPhoneNumberValidator extends ConstraintValidator
     private Security $security;
     private GlobalIdResolver $globalIdResolver;
     private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
 
-    public function __construct(UserRepository $userRepository, Security $security, GlobalIdResolver $globalIdResolver, ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository)
-    {
+    public function __construct(
+        UserRepository $userRepository,
+        Security $security,
+        GlobalIdResolver $globalIdResolver,
+        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
+        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
+    ) {
         $this->userRepository = $userRepository;
         $this->security = $security;
         $this->globalIdResolver = $globalIdResolver;
         $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
+        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
     }
 
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$value) {
             return;
         }
         $this->validateNumberLength($value, $constraint);
+        $this->validateMobileNumber($value, $constraint);
         $this->checkAlreadyUsed($value, $constraint);
     }
 
-    private function validateNumberLength(string $phone, Constraint $constraint)
+    private function validateNumberLength(string $phone, Constraint $constraint): void
     {
         $phoneMaxLength = 12; // +33 and 9 digits
         if (\strlen($phone) !== $phoneMaxLength) {
@@ -42,7 +51,15 @@ class CheckPhoneNumberValidator extends ConstraintValidator
         }
     }
 
-    private function checkAlreadyUsed(string $phone, Constraint $constraint)
+    private function validateMobileNumber(string $phone, Constraint $constraint): void
+    {
+        $prefix = substr($phone, 0, 4);
+        if ('+336' !== $prefix && '+337' !== $prefix) {
+            $this->context->buildViolation($constraint->mobileNumber)->addViolation();
+        }
+    }
+
+    private function checkAlreadyUsed(string $phone, Constraint $constraint): void
     {
         $currentUser = $this->security->getUser();
         $user = $this->userRepository->findOneBy(['phone' => $phone, 'phoneConfirmed' => true]);
@@ -50,12 +67,22 @@ class CheckPhoneNumberValidator extends ConstraintValidator
         $stepId = $constraint->stepId;
         $step = $stepId ? $this->globalIdResolver->resolve($stepId) : null;
         if ($step instanceof SelectionStep) {
-            $anonUserAlreadyVotedInThisStep = $this->proposalSelectionSmsVoteRepository->findOneBy(['phone' => $phone, 'selectionStep' => $step]);
-            if ($anonUserAlreadyVotedInThisStep) {
+            $anonUserAlreadyVotedInThisStep = $this->proposalSelectionSmsVoteRepository->findBy(['phone' => $phone, 'selectionStep' => $step]);
+            $userAlreadyVotedInThisStep = $this->proposalSelectionVoteRepository->findBy(['user' => $user, 'selectionStep' => $step]);
+
+            if (!$currentUser && $userAlreadyVotedInThisStep) {
                 $this->context->buildViolation($constraint->alreadyUsedMessage)->addViolation();
 
                 return;
             }
+
+            if ($currentUser && $anonUserAlreadyVotedInThisStep) {
+                $this->context->buildViolation($constraint->alreadyUsedMessage)->addViolation();
+
+                return;
+            }
+
+            return;
         }
 
         // when current user is unauthenticated only check if there is an existing user with this number

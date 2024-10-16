@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\ProposalSelectionVote;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Exception\ContributorAlreadyUsedPhoneException;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
@@ -17,6 +18,7 @@ use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
+use Capco\AppBundle\Service\ContributionValidator;
 use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
@@ -31,6 +33,8 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AddProposalVoteMutation implements MutationInterface
 {
     use MutationTrait;
+
+    public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
     private EntityManagerInterface $em;
     private ProposalVotesDataLoader $proposalVotesDataLoader;
     private ProposalCollectVoteRepository $proposalCollectVoteRepository;
@@ -44,6 +48,7 @@ class AddProposalVoteMutation implements MutationInterface
     private LoggerInterface $logger;
     private ValidatorInterface $validator;
     private RequestGuesser $requestGuesser;
+    private ContributionValidator $contributionValidator;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -58,7 +63,8 @@ class AddProposalVoteMutation implements MutationInterface
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
         GlobalIdResolver $globalIdResolver,
-        RequestGuesser $requestGuesser
+        RequestGuesser $requestGuesser,
+        ContributionValidator $contributionValidator
     ) {
         $this->em = $em;
         $this->validator = $validator;
@@ -73,6 +79,7 @@ class AddProposalVoteMutation implements MutationInterface
         $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
         $this->globalIdResolver = $globalIdResolver;
         $this->requestGuesser = $requestGuesser;
+        $this->contributionValidator = $contributionValidator;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -127,6 +134,14 @@ class AddProposalVoteMutation implements MutationInterface
         // Check if step is votable
         if (!$step->isVotable()) {
             throw new UserError('This step is not votable.');
+        }
+
+        if ($step instanceof SelectionStep) {
+            try {
+                $this->contributionValidator->validatePhoneReusability($user->getPhone(), $vote, $step, null, $user);
+            } catch (ContributorAlreadyUsedPhoneException $e) {
+                return ['errorCode' => self::PHONE_ALREADY_USED];
+            }
         }
 
         // Check if user has reached limit of votes

@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
+use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Mutation\RemoveProposalSmsVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
@@ -36,7 +37,8 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
         ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
         Indexer $indexer,
         GlobalIdResolver $globalIdResolver,
-        PhoneTokenRepository $phoneTokenRepository
+        PhoneTokenRepository $phoneTokenRepository,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler
     ) {
         $this->beConstructedWith(
             $em,
@@ -47,7 +49,8 @@ class RemoveProposalSmsVoteMutationSpec extends ObjectBehavior
             $proposalViewerHasVoteDataLoader,
             $indexer,
             $globalIdResolver,
-            $phoneTokenRepository
+            $phoneTokenRepository,
+            $proposalVoteAccountHandler
         );
     }
 

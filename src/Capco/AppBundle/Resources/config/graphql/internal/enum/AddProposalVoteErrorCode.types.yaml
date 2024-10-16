@@ -1,0 +1,9 @@
+AddProposalVoteErrorCode:
+    type: enum
+    config:
+        name: AddProposalVoteErrorCode
+        description: 'Available errors for an `addProposalVote` mutation.'
+        values:
+            PHONE_ALREADY_USED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\AddProposalVoteMutation::PHONE_ALREADY_USED
+                description: 'The proposal is already voted by another user/participant with the given number.'

@@ -56,7 +56,9 @@ class SendSmsProposalVoteMutation implements MutationInterface
         $proposal = $this->globalIdResolver->resolve($proposalId, null);
         $step = $this->globalIdResolver->resolve($stepId, null);
 
-        $violations = $this->validator->validate($phone, new CheckPhoneNumber());
+        $violations = $this->validator->validate($phone, new CheckPhoneNumber([
+            'stepId' => $stepId,
+        ]));
         /** * @var ConstraintViolation $violation */
         foreach ($violations as $violation) {
             return ['errorCode' => $violation->getMessage()];

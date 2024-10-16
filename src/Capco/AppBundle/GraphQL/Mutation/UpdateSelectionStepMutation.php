@@ -115,9 +115,6 @@ class UpdateSelectionStepMutation implements MutationInterface
             return;
         }
 
-        $data['votesLimit'] = null;
-        $data['votesMin'] = null;
-        $data['voteThreshold'] = null;
         $data['requirements'] = [
             ['type' => 'PHONE'],
             ['type' => 'PHONE_VERIFIED'],

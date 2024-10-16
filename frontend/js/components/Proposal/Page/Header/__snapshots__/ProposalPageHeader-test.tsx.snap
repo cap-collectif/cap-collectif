@@ -8,6 +8,7 @@ exports[`<ProposalPageHeader /> should not render theme if proposal has none and
     <ProposalPageHeader__HeaderActions>
       <BackUrl
         defaultStepUrl="/step"
+        originStepUrl=""
         platformLocale="fr-FR"
         tradKeyToBack="questions-list"
       />
@@ -118,6 +119,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     <ProposalPageHeader__HeaderActions>
       <BackUrl
         defaultStepUrl="/step"
+        originStepUrl=""
         platformLocale="fr-FR"
         tradKeyToBack="proposal.back"
       />
@@ -235,6 +237,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
     <ProposalPageHeader__HeaderActions>
       <BackUrl
         defaultStepUrl="/step"
+        originStepUrl=""
         platformLocale="fr-FR"
         tradKeyToBack="proposal.back"
       />
@@ -364,6 +367,7 @@ exports[`<ProposalPageHeader /> should render a proposal in draft 1`] = `
     <ProposalPageHeader__HeaderActions>
       <BackUrl
         defaultStepUrl="/step"
+        originStepUrl=""
         platformLocale="fr-FR"
         tradKeyToBack="questions-list"
       />
@@ -474,6 +478,7 @@ exports[`<ProposalPageHeader /> should render an establishment 1`] = `
     <ProposalPageHeader__HeaderActions>
       <BackUrl
         defaultStepUrl="/step"
+        originStepUrl=""
         platformLocale="fr-FR"
         tradKeyToBack="establishment-back"
       />
@@ -584,6 +589,7 @@ exports[`<ProposalPageHeader /> should render an interpellation 1`] = `
     <ProposalPageHeader__HeaderActions>
       <BackUrl
         defaultStepUrl="/step"
+        originStepUrl=""
         platformLocale="fr-FR"
         tradKeyToBack="interpellation.back"
       />

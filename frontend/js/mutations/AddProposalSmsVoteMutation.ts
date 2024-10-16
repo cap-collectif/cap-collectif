@@ -13,6 +13,7 @@ import type {
 const mutation = graphql`
   mutation AddProposalSmsVoteMutation($input: AddProposalSmsVoteInput!, $token: String!) {
     addProposalSmsVote(input: $input) {
+      errorCode
       voteEdge {
         cursor
         node {

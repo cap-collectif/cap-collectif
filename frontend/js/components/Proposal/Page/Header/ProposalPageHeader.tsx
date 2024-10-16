@@ -7,7 +7,7 @@ import moment from 'moment'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import styled from 'styled-components'
 import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize } from '@cap-collectif/ui'
-import { Link, useLocation, useParams } from 'react-router-dom'
+import { useLocation, useParams } from 'react-router-dom'
 import { getBaseUrl } from '~/config'
 import colors from '~/utils/colors'
 import { mediaQueryMobile, bootstrapGrid } from '~/utils/sizes'
@@ -165,7 +165,6 @@ const BackUrl = ({
   originStepUrl,
   defaultStepUrl,
   tradKeyToBack,
-  stepId,
   platformLocale,
 }: {
   originStepUrl?: string | null | undefined
@@ -179,18 +178,14 @@ const BackUrl = ({
   const currentLanguage = useSelector((state: GlobalState) => state.language.currentLanguage)
   const baseUrl = getBaseLocale(currentLanguage, platformLocale)
   const { projectSlug } = useParams<{ projectSlug?: string }>()
+
+  const fullUrl = `${baseUrl}/project${!baseUrl ? `/${projectSlug || ''}` : ''}/${url}`
+
   return (
-    <Link
-      to={{
-        pathname: `${baseUrl}/project${!baseUrl ? `/${projectSlug || ''}` : ''}/${url}`,
-        state: {
-          stepId,
-        },
-      }}
-    >
+    <a href={fullUrl}>
       <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={colors.primaryColor} />
       {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
-    </Link>
+    </a>
   )
 }
 
@@ -228,16 +223,29 @@ export const ProposalPageHeader = ({
   const proposalIllustrationInitialValues = {
     media: proposal?.media || null,
   }
+
+  const originStepUrl = () => {
+
+    if (state?.stepUrl) {
+      return state?.stepUrl
+    }
+
+    if (document.referrer) {
+      return new URL(document.referrer)?.pathname
+    }
+
+    return ''
+  }
+
   return (
     <Header id="ProposalPageHeader">
       <div>
         <HeaderActions>
           <BackUrl
             currentVotableStep={proposal?.currentVotableStep?.slug}
-            originStepUrl={state?.stepUrl}
+            originStepUrl={originStepUrl()}
             defaultStepUrl={proposal?.form?.step?.url?.replace(getBaseUrl(), '') || ''}
             tradKeyToBack={tradKeyToBack}
-            stepId={state?.stepId}
             platformLocale={platformLocale}
           />
           <div>

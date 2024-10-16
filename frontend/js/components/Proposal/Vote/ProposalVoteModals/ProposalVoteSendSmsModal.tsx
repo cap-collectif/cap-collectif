@@ -21,6 +21,7 @@ import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
 import SendSmsProposalVoteMutation from '~/mutations/SendSmsProposalVoteMutation'
 import type { GlobalState } from '~/types'
 import ResetCss from '~/utils/ResetCss'
+import CookieMonster from '@shared/utils/CookieMonster'
 export const formName = 'vote-requirements-form'
 export type Props = {
   readonly form: any
@@ -106,6 +107,14 @@ const ProposalVoteSendSmsModal = ({ form, setIsLoading }: Props) => {
   const { isSubmitting } = formState
   const { hide, goToNextStep } = useMultiStepModal()
   const platformName = useSelector((state: GlobalState) => state.default.parameters['global.site.fullname'])
+
+  const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone() ?? localStorage.getItem('AnonVoteToken')
+
+  if (token) {
+    goToNextStep()
+    return null;
+  }
+
   return (
     <>
       <ResetCss>

@@ -13,6 +13,7 @@ import type {
 const mutation = graphql`
   mutation AddProposalVoteMutation($input: AddProposalVoteInput!, $stepId: ID!) {
     addProposalVote(input: $input) {
+      errorCode
       voteEdge {
         cursor
         node {

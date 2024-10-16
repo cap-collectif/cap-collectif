@@ -120,3 +120,8 @@ services:
     Capco\AppBundle\EventListener\NewBackOfficeToggleEventSubscriber:
         tags:
             - { name: kernel.event_subscriber }
+
+    Capco\AppBundle\EventListener\LoginSubscriber:
+        autowire: true
+        tags:
+            - { name: kernel.event_subscriber }

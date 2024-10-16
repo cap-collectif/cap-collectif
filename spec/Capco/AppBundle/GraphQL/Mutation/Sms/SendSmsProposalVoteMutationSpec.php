@@ -90,7 +90,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         ;
 
         $validator
-            ->validate($phone, new CheckPhoneNumber())
+            ->validate($phone, new CheckPhoneNumber(['stepId' => 'stepId']))
             ->shouldBeCalledOnce()
             ->willReturn([])
         ;
@@ -270,7 +270,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         ;
 
         $validator
-            ->validate($phone, new CheckPhoneNumber())
+            ->validate($phone, new CheckPhoneNumber(['stepId' => 'stepId']))
             ->shouldBeCalledOnce()
             ->willReturn([])
         ;
@@ -326,7 +326,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         ;
 
         $validator
-            ->validate($phone, new CheckPhoneNumber())
+            ->validate($phone, new CheckPhoneNumber(['stepId' => 'stepId']))
             ->shouldBeCalledOnce()
             ->willReturn([])
         ;
@@ -388,7 +388,7 @@ class SendSmsProposalVoteMutationSpec extends ObjectBehavior
         ;
 
         $validator
-            ->validate($phone, new CheckPhoneNumber())
+            ->validate($phone, new CheckPhoneNumber(['stepId' => 'stepId']))
             ->shouldBeCalledOnce()
             ->willReturn([])
         ;

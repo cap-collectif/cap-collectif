@@ -175,6 +175,8 @@ const VoteButton = ({
         proposalId,
         isParticipationAnonymous,
         intl,
+        isAuthenticated,
+        '',
         () => {
           setIsLoading(false)
           if (votesMin > 1 && (!hasFinished || hasJustFinished)) {

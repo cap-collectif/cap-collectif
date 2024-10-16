@@ -49,6 +49,10 @@ const PROPOSAL_FRAGMENT = graphql`
       ranking
       ...UnpublishedTooltip_publishable
     }
+    currentVotableStep {
+        votesMin
+        votesLimit
+    }
     votes(stepId: $stepId, first: 0) {
       totalCount
     }
@@ -157,12 +161,14 @@ const deleteVote = (
     })
 }
 
-const addProposalSmsVote = async (intl: IntlShape, token: string, proposalId: string, stepId: string) => {
+const addProposalSmsVote = async (intl: IntlShape, token: string, proposal: ProposalVoteButton_proposal$data, stepId: string) => {
+  const votesMin = proposal.currentVotableStep?.votesMin;
+
   try {
     const response: AddProposalSmsVoteMutation$data = await AddProposalSmsVoteMutation.commit({
       input: {
         token,
-        proposalId,
+        proposalId: proposal.id,
         stepId,
         consentSmsCommunication: false,
       },
@@ -171,30 +177,55 @@ const addProposalSmsVote = async (intl: IntlShape, token: string, proposalId: st
     if (!response?.addProposalSmsVote) return mutationErrorToast(intl)
     const errorCode = response?.addProposalSmsVote?.errorCode
 
-    if (errorCode === 'PROPOSAL_ALREADY_VOTED') {
-      return toast({
+    if (['PHONE_ALREADY_USED', 'PHONE_ALREADY_VOTED', 'VOTELIMIT_REACHED'].includes(errorCode)) {
+      const errorMap = {
+        'PHONE_ALREADY_USED': {
+          id: 'phone.already.used.in.this.step'
+        },
+        'PROPOSAL_ALREADY_VOTED': {
+          id: 'rejected-vote-choose-another-one'
+        },
+        'VOTELIMIT_REACHED': {
+          id: 'you-reached-max-votes'
+        },
+      }
+      const {id} = errorMap[errorCode]
+
+      toast({
         variant: 'danger',
+        content: intl.formatMessage({ id }),
+      })
+    }
+
+    if (!votesMin || votesMin < 1) {
+      return toast({
+        variant: 'success',
         content: intl.formatMessage({
-          id: 'rejected-vote-choose-another-one',
+          id: 'your-vote-has-been-validated',
         }),
       })
     }
 
-    if (errorCode === 'VOTE_LIMIT_REACHED') {
-      return toast({
-        variant: 'danger',
-        content: intl.formatMessage({
-          id: 'you-reached-max-votes',
-        }),
+    const votesTotalCount = response?.addProposalSmsVote?.voteEdge?.node?.step?.viewerVotes?.totalCount || 0
+    const remainingVotesAfterValidation = votesMin - votesTotalCount
+    const hasFinished = remainingVotesAfterValidation < 0
+    const hasJustFinished = remainingVotesAfterValidation === 0
+
+    if (!hasFinished || hasJustFinished) {
+      toast({
+        variant: hasJustFinished ? 'success' : 'warning',
+        content: intl.formatMessage(
+          {
+            id: hasJustFinished ? 'participation-validated-anonymous' : 'vote-for-x-proposals',
+          },
+          {
+            num: remainingVotesAfterValidation,
+            div: (...chunks) => <div>{chunks}</div>,
+            b: (...chunks) => <b>{chunks}</b>,
+          },
+        ),
       })
     }
-
-    return toast({
-      variant: 'success',
-      content: intl.formatMessage({
-        id: 'your-vote-has-been-validated',
-      }),
-    })
   } catch (e) {
     return mutationErrorToast(intl)
   }
@@ -219,7 +250,10 @@ const ProposalVoteButton = ({
   const smsVoteEnabled =
     currentStep?.isProposalSmsVoteEnabled && isTwilioFeatureEnabled && isProposalSmsVoteFeatureEnabled
   const token = CookieMonster.getAnonymousAuthenticatedWithConfirmedPhone()
-  const canVoteAnonymouslyWithoutConfirmingPhoneNumber = !!token && smsVoteEnabled && !isAuthenticated
+  const votesMin = proposal.currentVotableStep?.votesMin;
+  const votesLimit = proposal.currentVotableStep?.votesLimit;
+  const canVoteAnonymouslyWithoutConfirmingPhoneNumber = !!token && smsVoteEnabled && !isAuthenticated && (votesMin === null && votesLimit === null)
+
 
   const getButtonStyle = () => {
     if (hasVoted && isHovering) {
@@ -253,16 +287,16 @@ const ProposalVoteButton = ({
     disabled,
   })
 
-  const onButtonClick = () => {
+  const onButtonClick = async () => {
     if (disabled) return null
 
     if (hasVoted && currentStep) {
-      deleteVote(currentStep, proposal, isAuthenticated, intl)
+      await deleteVote(currentStep, proposal, isAuthenticated, intl)
       return
     }
 
     if (canVoteAnonymouslyWithoutConfirmingPhoneNumber && token && proposal && currentStep) {
-      addProposalSmsVote(intl, token, proposal.id, currentStep.id)
+      await addProposalSmsVote(intl, token, proposal, currentStep.id)
       return
     }
 

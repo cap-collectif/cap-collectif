@@ -19,9 +19,7 @@ describe('Proposal Step Page', () => {
     it('should see private proposal of the same organization', () => {
       cy.directLoginAs('christophe')
       ProposalStepPage.visitProposalStepWithPrivateProposal()
-      cy.get(
-        'a[href="/project/budget-participatif-dorganisation/collect/collecte-des-propositions-privee/proposals/proposition-de-valerie"',
-      ).should('be.visible')
+      cy.contains('Proposition de Valérie')
     })
   })
   describe('filters', () => {

@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\GraphQL\Resolver\Participant\ParticipantIsMeetingRequirementsResolver;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
+use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -23,17 +24,20 @@ class ProposalVoteAccountHandler
     private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
     private ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver;
     private EntityManagerInterface $em;
+    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
+        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
         EntityManagerInterface $em
     ) {
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->participantIsMeetingRequirementsResolver = $participantIsMeetingRequirementsResolver;
         $this->em = $em;
+        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
     }
 
     //Use this method after validation but before effective creation or deletion
@@ -56,6 +60,28 @@ class ProposalVoteAccountHandler
                 }
                 $vote->setIsAccounted($isAccounted);
             }
+        }
+
+        return $isAccounted;
+    }
+
+    //Use this method after validation but before effective creation or deletion
+    public function checkIfAnonVotesAreStillAccounted(
+        SelectionStep $step,
+        AbstractVote $vote,
+        string $phone,
+        bool $isAddingVote
+    ): bool {
+        $isAccounted = true;
+        $min = $step->getVotesMin();
+        if (null !== $min) {
+            $anonVotes = $this->proposalSelectionSmsVoteRepository->findBy(['selectionStep' => $step, 'phone' => $phone]);
+            //-1 or +1 corresponds to the vote being removed or added
+            $isAccounted = $min <= \count($anonVotes) + ($isAddingVote ? 1 : -1);
+            foreach ($anonVotes as $anonVote) {
+                $anonVote->setIsAccounted($isAccounted);
+            }
+            $vote->setIsAccounted($isAccounted);
         }
 
         return $isAccounted;

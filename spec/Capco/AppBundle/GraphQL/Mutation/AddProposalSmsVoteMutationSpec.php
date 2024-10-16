@@ -13,10 +13,12 @@ use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerHasVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalViewerVoteDataLoader;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalSmsVoteMutation;
+use Capco\AppBundle\GraphQL\Mutation\ProposalVoteAccountHandler;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
+use Capco\AppBundle\Service\ContributionValidator;
 use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,7 +48,9 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
         ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
         RequestGuesser $requestGuesser,
-        PhoneTokenRepository $phoneTokenRepository
+        PhoneTokenRepository $phoneTokenRepository,
+        ProposalVoteAccountHandler $proposalVoteAccountHandler,
+        ContributionValidator $contributionValidator
     ) {
         $this->beConstructedWith(
             $em,
@@ -59,7 +63,9 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
             $proposalCollectSmsVoteRepository,
             $proposalSelectionSmsVoteRepository,
             $requestGuesser,
-            $phoneTokenRepository
+            $phoneTokenRepository,
+            $proposalVoteAccountHandler,
+            $contributionValidator
         );
     }
 
