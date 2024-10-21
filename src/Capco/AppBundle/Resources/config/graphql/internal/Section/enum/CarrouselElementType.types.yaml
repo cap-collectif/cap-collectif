@@ -1,0 +1,18 @@
+CarrouselElementType:
+    type: enum
+    config:
+        name: CarrouselElementType
+        description: 'The type of the carrousel element.'
+        values:
+            ARTICLE:
+                value: !php/const Capco\AppBundle\Enum\CarrouselElementType::ARTICLE
+                description: 'Carrousel element is an article.'
+            EVENT:
+                value: !php/const Capco\AppBundle\Enum\CarrouselElementType::EVENT
+                description: 'Carrousel element is an event.'
+            PROJECT:
+                value: !php/const Capco\AppBundle\Enum\CarrouselElementType::PROJECT
+                description: 'Carrousel element is a project.'
+            THEME:
+                value: !php/const Capco\AppBundle\Enum\CarrouselElementType::THEME
+                description: 'Carrousel element is a theme.'

@@ -1,0 +1,12 @@
+CreateOrUpdateCarrouselConfigurationErrorCode:
+    type: enum
+    config:
+        name: CreateOrUpdateCarrouselConfigurationErrorCode
+        description: 'Available errors for an `createOrUpdateCarrouselConfiguration` mutation.'
+        values:
+            INVALID_FORM:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Section\CreateOrUpdateCarrouselConfigurationMutation::INVALID_FORM
+                description: 'The form is not valid'
+            TOO_MANY_CARROUSEL_ITEMS:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Section\CreateOrUpdateCarrouselConfigurationMutation::TOO_MANY_CARROUSEL_ITEMS
+                description: 'Limit of carrousel items that can be displayed'

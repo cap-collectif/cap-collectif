@@ -1,0 +1,67 @@
+Capco\AppBundle\Entity\Section\SectionCarrouselElement:
+    SectionCarrouselElement1:
+        id: 'SectionCarrouselElement1'
+        section: '@SectionCarrousel'
+        title: 'SectionCarrouselElement1'
+        description: 'SectionCarrouselElement1 description'
+        image: '@imageCannabis'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 1'
+        position: 1
+        isDisplayed: true
+        type: 'article'
+    SectionCarrouselElement2:
+        id: 'SectionCarrouselElement2'
+        section: '@SectionCarrousel'
+        title: 'SectionCarrouselElement2'
+        description: 'SectionCarrouselElement2 description'
+        image: '@imageConfinement'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 2'
+        position: 2
+        isDisplayed: true
+        type: 'project'
+    SectionCarrouselElement3:
+        id: 'SectionCarrouselElement3'
+        section: '@SectionCarrousel'
+        title: 'SectionCarrouselElement3'
+        description: 'SectionCarrouselElement3 description'
+        image: '@imageCereale'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 3'
+        position: 3
+        isDisplayed: true
+        type: 'event'
+    SectionCarrouselElement4:
+        id: 'SectionCarrouselElement4'
+        section: '@SectionCarrousel'
+        title: 'SectionCarrouselElement4'
+        description: 'SectionCarrouselElement4 description'
+        image: '@imageCafetier'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 4'
+        position: 4
+        isDisplayed: false
+        type: 'theme'
+    SectionCarrouselElement5:
+        id: 'SectionCarrouselElement5'
+        section: '@SectionCarrousel'
+        title: 'SectionCarrouselElement5'
+        description: 'SectionCarrouselElement5 description'
+        image: '@imageOculus'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 5'
+        position: 5
+        isDisplayed: false
+        type: 'article'
+    SectionCarrouselElement6:
+        id: 'SectionCarrouselElement6'
+        section: '@SectionCarrousel'
+        title: 'SectionCarrouselElement6'
+        description: 'SectionCarrouselElement6 description'
+        image: '@imageCafe'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 6'
+        position: 6
+        isDisplayed: true
+        type: 'project'

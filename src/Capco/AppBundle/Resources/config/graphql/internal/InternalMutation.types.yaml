@@ -1341,6 +1341,22 @@ InternalMutation:
                     inputType: UpdateHomePageProjectsMapSectionConfigurationInput
                     payloadType: UpdateHomePageProjectsMapSectionConfigurationPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateHomePageProjectsMapSectionConfigurationMutation", args)'
+            createOrUpdateCarrouselConfiguration:
+                description: 'Create or Edit carrousel section in admin'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateOrUpdateCarrouselConfigurationInput
+                    payloadType: CreateOrUpdateCarrouselConfigurationPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Section\\CreateOrUpdateCarrouselConfigurationMutation", args)'
+            deleteCarrouselElement:
+                description: 'Delete carrousel elements'
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteCarrouselElementInput
+                    payloadType: DeleteCarrouselElementPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\Section\\DeleteCarrouselElementMutation", args)'
             register:
                 description: 'User registration'
                 access: "hasFeatureFlag('registration')"

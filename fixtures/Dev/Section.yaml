@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Section:
+Capco\AppBundle\Entity\Section\Section:
     SectionHighlighted:
         id: 'sectionHighlighted'
         type: highlight
@@ -109,3 +109,11 @@ Capco\AppBundle\Entity\Section:
         centerLongitude: 2.3884014755569796
         zoomMap: 10
         associatedFeatures: []
+    SectionCarrousel:
+        id: 'sectionCarrousel'
+        type: carrousel
+        position: 15
+        nbObjects: 8
+        enabled: false
+        associatedFeatures: []
+        isLegendEnabledOnImage: true

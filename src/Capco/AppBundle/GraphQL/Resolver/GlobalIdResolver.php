@@ -56,12 +56,14 @@ use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Repository\RequirementRepository;
+use Capco\AppBundle\Repository\SectionCarrouselElementRepository;
 use Capco\AppBundle\Repository\SmsCreditRepository;
 use Capco\AppBundle\Repository\SmsOrderRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Repository\ValueResponseRepository;
+use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Repository\UserTypeRepository;
@@ -124,6 +126,8 @@ class GlobalIdResolver
         'Participant',
         'Mediator',
         'Contributor',
+        'SectionCarrouselElement',
+        'Media',
     ];
     private ContainerInterface $container;
     private LoggerInterface $logger;
@@ -434,6 +438,16 @@ class GlobalIdResolver
 
                 case 'UserType':
                     $node = $this->container->get(UserTypeRepository::class)->find($uuid);
+
+                    break;
+
+                case 'SectionCarrouselElement':
+                    $node = $this->container->get(SectionCarrouselElementRepository::class)->find($uuid);
+
+                    break;
+
+                case 'Media':
+                    $node = $this->container->get(MediaRepository::class)->find($uuid);
 
                     break;
 

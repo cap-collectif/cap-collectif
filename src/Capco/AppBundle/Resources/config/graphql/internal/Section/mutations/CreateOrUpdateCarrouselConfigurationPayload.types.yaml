@@ -1,0 +1,11 @@
+CreateOrUpdateCarrouselConfigurationPayload:
+    type: relay-mutation-payload
+    config:
+        description: 'Payload of createOrUpdateCarrouselConfiguration mutation'
+        fields:
+            carrouselConfiguration:
+                type: 'CarrouselConfiguration'
+                description: 'the created or updated carrouselConfiguration'
+            errorCode:
+                type: 'CreateOrUpdateCarrouselConfigurationErrorCode'
+                description: 'An unsuccessful mutation will return an error.'

@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\SectionTranslation:
+Capco\AppBundle\Entity\Section\SectionTranslation:
   SectionHighlightedFr:
     locale: fr-FR
     translatable: '@SectionHighlighted'
@@ -143,3 +143,15 @@ Capco\AppBundle\Entity\SectionTranslation:
     title: Participatory projects map
     teaser: null
     body: null
+  SectionCarrouselFr:
+      locale: fr-FR
+      translatable: '@SectionCarrousel'
+      title: En-tête défilante
+      teaser: null
+      body: null
+  SectionCarrouselEn:
+      locale: en-GB
+      translatable: '@SectionCarrousel'
+      title: Carrousel
+      teaser: null
+      body: null

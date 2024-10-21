@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Entity\Section;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode;
@@ -177,6 +177,13 @@ class Section implements Translatable, SonataTranslatableInterface
     private Collection $sectionProjects;
 
     /**
+     * @ORM\OneToMany(targetEntity=SectionCarrouselElement::class, mappedBy="section", cascade="persist", orphanRemoval=true)
+     *
+     * @var Collection<int, SectionCarrouselElement>
+     */
+    private Collection $sectionCarrouselElements;
+
+    /**
      * @ORM\Column(name="center_latitude", type="float", nullable=true)
      */
     private ?float $centerLatitude;
@@ -186,10 +193,16 @@ class Section implements Translatable, SonataTranslatableInterface
      */
     private ?float $centerLongitude;
 
+    /**
+     * @ORM\Column(name="is_legend_enabled_on_image", type="boolean")
+     */
+    private bool $isLegendEnabledOnImage = false;
+
     public function __construct()
     {
         $this->updatedAt = new \DateTime();
         $this->sectionProjects = new ArrayCollection();
+        $this->sectionCarrouselElements = new ArrayCollection();
     }
 
     public function __toString()
@@ -419,6 +432,35 @@ class Section implements Translatable, SonataTranslatableInterface
         return $this;
     }
 
+    /**
+     *  @return Collection<int, SectionCarrouselElement>
+     */
+    public function getSectionCarrouselElements(): Collection
+    {
+        return $this->sectionCarrouselElements;
+    }
+
+    public function addSectionCarrouselElement(SectionCarrouselElement $sectionCarrouselElement): self
+    {
+        if (!$this->sectionProjects->contains($sectionCarrouselElement)) {
+            $this->sectionCarrouselElements[] = $sectionCarrouselElement;
+            $sectionCarrouselElement->setSection($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSectionCarrouselElement(SectionCarrouselElement $sectionCarrouselElement): self
+    {
+        if ($this->sectionCarrouselElements->removeElement($sectionCarrouselElement)) {
+            if ($sectionCarrouselElement->getSection() === $this) {
+                $sectionCarrouselElement->setSection(null);
+            }
+        }
+
+        return $this;
+    }
+
     // ************************* Custom methods ***********************************
 
     public function isCustom()
@@ -429,5 +471,17 @@ class Section implements Translatable, SonataTranslatableInterface
     public static function getTranslationEntityClass(): string
     {
         return SectionTranslation::class;
+    }
+
+    public function isLegendEnabledOnImage(): bool
+    {
+        return $this->isLegendEnabledOnImage;
+    }
+
+    public function setIsLegendEnabledOnImage(bool $isLegendEnabledOnImage): self
+    {
+        $this->isLegendEnabledOnImage = $isLegendEnabledOnImage;
+
+        return $this;
     }
 }

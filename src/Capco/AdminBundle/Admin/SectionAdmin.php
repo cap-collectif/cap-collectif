@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryEventsResolver;
 use Capco\AppBundle\GraphQL\Resolver\Query\QueryVotesResolver;
 use Capco\AppBundle\Repository\CollectStepRepository;
@@ -22,6 +22,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 
 class SectionAdmin extends AbstractAdmin
 {
+    protected $baseRouteName = 'capco_admin_section';
+    protected $baseRoutePattern = 'capco/app/section';
     protected ?string $classnameLabel = 'section';
     protected array $datagridValues = [
         '_sort_order' => 'ASC',

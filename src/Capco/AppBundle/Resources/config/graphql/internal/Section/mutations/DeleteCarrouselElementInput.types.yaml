@@ -1,0 +1,8 @@
+DeleteCarrouselElementInput:
+  type: relay-mutation-input
+  config:
+    description: "Input of deleteCarrouselElement mutation."
+    fields:
+      id:
+        type: ID!
+        description: "The ID of the carrousel element."

@@ -1,0 +1,38 @@
+CarrouselElement:
+    type: object
+    inherits:
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'Element carrousel page in admin'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: CarrouselElement
+            position:
+                type: 'Int!'
+                description: 'The position of the carrousel element.'
+            type:
+                type: 'String!'
+                description: 'The type of the carrousel element.'
+            title:
+                type: 'String!'
+                description: 'The main heading or title displayed on the carrousel element.'
+            description:
+                type: 'String'
+                description: 'A detailed description providing context or information about the carrousel element.'
+            redirectLink:
+                type: 'URI!'
+                description: 'The URL to which users are redirected when interacting with the carrousel element.'
+            image:
+                type: 'InternalMedia'
+                description: 'The image displayed on the carrousel element.'
+            buttonLabel:
+                type: 'String!'
+                description: 'The text label displayed on the action button of the carrousel element.'
+            isDisplayed:
+                type: 'Boolean!'
+                description: 'A toggle indicating whether the carrousel element is visible to users.'

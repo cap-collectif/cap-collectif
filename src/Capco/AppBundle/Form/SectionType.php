@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
@@ -41,6 +41,13 @@ class SectionType extends AbstractType
             ->add('enabled', CheckboxType::class, [
                 'required' => true,
                 'value' => true,
+            ])
+            ->add('isLegendEnabledOnImage', CheckboxType::class)
+            ->add('sectionCarrouselElements', CollectionType::class, [
+                'entry_type' => SectionCarrouselElementType::class,
+                'allow_add' => true,
+                'allow_delete' => true,
+                'by_reference' => false,
             ])
             ->add('displayMode', ChoiceType::class, [
                 'choices' => [

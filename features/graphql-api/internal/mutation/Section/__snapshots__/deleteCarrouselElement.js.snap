@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteCarrouselElement should delete a deleteCarrouselElement as an admin 1`] = `
+Object {
+  "deleteCarrouselElement": Object {
+    "deletedCarrouselElementId": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQx",
+  },
+}
+`;

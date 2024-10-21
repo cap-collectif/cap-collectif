@@ -203,7 +203,7 @@ services:
     Capco\AppBundle\Repository\SectionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: ['CapcoAppBundle:Section']
+        arguments: ['CapcoAppBundle:Section\Section']
 
     Capco\AppBundle\Repository\SelectionStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -798,3 +798,8 @@ services:
         factory: [ '@doctrine.orm.entity_manager', getRepository ]
         lazy: true
         arguments: [ 'CapcoAppBundle:District\EventDistrict' ]
+
+    Capco\AppBundle\Repository\SectionCarrouselElementRepository:
+        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        lazy: true
+        arguments: [ 'CapcoAppBundle:Section\SectionCarrouselElement' ]

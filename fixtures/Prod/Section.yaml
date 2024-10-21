@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Section:
+Capco\AppBundle\Entity\Section\Section:
     SectionIntro:
         type: introduction
         position: 1
@@ -73,5 +73,11 @@ Capco\AppBundle\Entity\Section:
         type: projectsMap
         position: 12
         nbObjects: null
+        enabled: false
+        associatedFeatures: []
+    SectionCarrousel:
+        type: carrousel
+        position: 13
+        nbObjects: 5
         enabled: false
         associatedFeatures: []

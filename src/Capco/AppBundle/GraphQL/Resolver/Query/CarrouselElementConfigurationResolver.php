@@ -1,29 +1,30 @@
 <?php
 
-namespace Capco\AppBundle\GraphQL\Resolver\HomePageProjectsSectionConfiguration;
+namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\Section\Section;
-use Capco\AppBundle\Repository\ProjectRepository;
+use GraphQL\Executor\Promise\Promise;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 use Psr\Log\LoggerInterface;
 
-class HomePageProjectsSectionConfigurationProjectsResolver implements QueryInterface
+class CarrouselElementConfigurationResolver implements QueryInterface
 {
-    private $logger;
-    private $projectRepository;
+    private LoggerInterface $logger;
 
-    public function __construct(ProjectRepository $projectRepository, LoggerInterface $logger)
+    public function __construct(LoggerInterface $logger)
     {
-        $this->projectRepository = $projectRepository;
         $this->logger = $logger;
     }
 
-    public function __invoke(Section $section): ConnectionInterface
+    /**
+     * @return ConnectionInterface|Promise
+     */
+    public function __invoke(Section $section)
     {
-        $totalCount = $section->getSectionProjects()->count();
+        $totalCount = $section->getSectionCarrouselElements()->count();
 
         $args = new Argument([
             'first' => $totalCount,
@@ -32,10 +33,7 @@ class HomePageProjectsSectionConfigurationProjectsResolver implements QueryInter
         $paginator = new Paginator(function () use ($section) {
             try {
                 $arguments = $section
-                    ->getSectionProjects()
-                    ->map(function ($sectionProject) {
-                        return $sectionProject->getProject();
-                    })
+                    ->getSectionCarrouselElements()
                     ->toArray()
                 ;
             } catch (\RuntimeException $exception) {

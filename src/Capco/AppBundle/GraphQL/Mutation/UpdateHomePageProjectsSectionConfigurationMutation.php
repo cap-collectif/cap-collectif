@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\Form\SectionType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;

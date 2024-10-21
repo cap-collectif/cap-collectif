@@ -1,4 +1,4 @@
-Capco\AppBundle\Entity\Section:
+Capco\AppBundle\Entity\Section\Section:
     attributes:
         body:
             groups: [Section]

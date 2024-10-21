@@ -1,0 +1,9 @@
+DeleteCarrouselElementErrorCode:
+    type: enum
+    config:
+        name: DeleteCarrouselElementErrorCode
+        description: 'Available errors for a `DeleteCarrouselElement` mutation.'
+        values:
+            GLOBAL_ID_NOT_EXIST:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\Section\DeleteCarrouselElementMutation::GLOBAL_ID_NOT_EXIST
+                description: 'Global ID doesn''t exist.'

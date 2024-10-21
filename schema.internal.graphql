@@ -1647,6 +1647,139 @@ type CancelUserInvitationsPayload {
   clientMutationId: String
 }
 
+"""Section carrousel page in admin"""
+type CarrouselConfiguration implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The title of the section"""
+  title: String!
+
+  """Number of objects to display"""
+  nbObjects: Int!
+
+  """The position of the section in the homepage"""
+  position: Int!
+
+  """Whether the section is enabled or not"""
+  enabled: Boolean!
+
+  """Whether the legend is enabled on the image or not"""
+  isLegendEnabledOnImage: Boolean!
+
+  """The elements of the carrousel"""
+  carrouselElements: CarrouselElementConnection!
+}
+
+"""Element carrousel page in admin"""
+type CarrouselElement implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The position of the carrousel element."""
+  position: Int!
+
+  """The type of the carrousel element."""
+  type: String!
+
+  """The main heading or title displayed on the carrousel element."""
+  title: String!
+
+  """
+  A detailed description providing context or information about the carrousel element.
+  """
+  description: String
+
+  """
+  The URL to which users are redirected when interacting with the carrousel element.
+  """
+  redirectLink: URI!
+
+  """The image displayed on the carrousel element."""
+  image: Media
+
+  """
+  The text label displayed on the action button of the carrousel element.
+  """
+  buttonLabel: String!
+
+  """
+  A toggle indicating whether the carrousel element is visible to users.
+  """
+  isDisplayed: Boolean!
+}
+
+"""A connection to a list of items."""
+type CarrouselElementConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [CarrouselElementEdge]
+}
+
+"""An edge in a connection."""
+type CarrouselElementEdge {
+  """The item at the end of the edge."""
+  node: CarrouselElement
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+input CarrouselElementInput {
+  id: ID
+
+  """The position of the carrousel element."""
+  position: Int!
+
+  """The type of the carrousel element."""
+  type: CarrouselElementType!
+
+  """The main heading or title displayed on the carrousel element."""
+  title: String
+
+  """
+  A detailed description providing context or information about the carrousel element.
+  """
+  description: String
+
+  """
+  The URL to which users are redirected when interacting with the carrousel element.
+  """
+  redirectLink: URI
+
+  """The image displayed on the carrousel element."""
+  image: ID
+
+  """
+  The text label displayed on the action button of the carrousel element.
+  """
+  buttonLabel: String
+
+  """
+  A toggle indicating whether the carrousel element is visible to users.
+  """
+  isDisplayed: Boolean
+}
+
+"""The type of the carrousel element."""
+enum CarrouselElementType {
+  """Carrousel element is an article."""
+  ARTICLE
+
+  """Carrousel element is an event."""
+  EVENT
+
+  """Carrousel element is a project."""
+  PROJECT
+
+  """Carrousel element is a theme."""
+  THEME
+}
+
 """Allowed versions of cas."""
 enum CasVersion {
   v1
@@ -3862,6 +3995,48 @@ type CreateOpinionPayload {
   clientMutationId: String
 }
 
+"""
+Available errors for an `createOrUpdateCarrouselConfiguration` mutation.
+"""
+enum CreateOrUpdateCarrouselConfigurationErrorCode {
+  """The form is not valid"""
+  INVALID_FORM
+
+  """Limit of carrousel items that can be displayed"""
+  TOO_MANY_CARROUSEL_ITEMS
+}
+
+input CreateOrUpdateCarrouselConfigurationInput {
+  """The title of the section."""
+  title: String
+
+  """The position of the section in the homepage."""
+  position: Int
+
+  """Number of objects to display"""
+  nbObjects: Int!
+
+  """Whether it is published or not."""
+  enabled: Boolean
+  translations: [HomePageProjectsSectionConfigurationTranslationInput!]
+
+  """Whether the legend is enabled on the image or not."""
+  isLegendEnabledOnImage: Boolean
+
+  """The carrousel elements of the section."""
+  carrouselElements: [CarrouselElementInput!]!
+  clientMutationId: String
+}
+
+type CreateOrUpdateCarrouselConfigurationPayload {
+  """the created or updated carrouselConfiguration"""
+  carrouselConfiguration: CarrouselConfiguration
+
+  """An unsuccessful mutation will return an error."""
+  errorCode: CreateOrUpdateCarrouselConfigurationErrorCode
+  clientMutationId: String
+}
+
 input CreateOrUpdateConsultationInput {
   """List of consultations to create or update."""
   consultations: [ConsultationInput]!
@@ -5330,6 +5505,29 @@ input DeleteArgumentInput {
 type DeleteArgumentPayload {
   deletedArgumentId: ID
   argumentable: Argumentable!
+  clientMutationId: String
+}
+
+"""Available errors for a `DeleteCarrouselElement` mutation."""
+enum DeleteCarrouselElementErrorCode {
+  """Global ID doesn't exist."""
+  GLOBAL_ID_NOT_EXIST
+}
+
+input DeleteCarrouselElementInput {
+  """The ID of the carrousel element."""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteCarrouselElementPayload {
+  """The ID of the deleted CarrouselConfiguration."""
+  deletedCarrouselElementId: ID!
+
+  """
+  Global ID doesn't exist or user doesn't have the permission to delete the CarrouselConfiguration.
+  """
+  errorCode: DeleteCarrouselElementErrorCode
   clientMutationId: String
 }
 
@@ -8795,6 +8993,12 @@ type Mutation {
 
   """Edit projects map section in admin"""
   updateHomePageProjectsMapSectionConfiguration(input: UpdateHomePageProjectsMapSectionConfigurationInput!): UpdateHomePageProjectsMapSectionConfigurationPayload
+
+  """Create or Edit carrousel section in admin"""
+  createOrUpdateCarrouselConfiguration(input: CreateOrUpdateCarrouselConfigurationInput!): CreateOrUpdateCarrouselConfigurationPayload
+
+  """Delete carrousel elements"""
+  deleteCarrouselElement(input: DeleteCarrouselElementInput!): DeleteCarrouselElementPayload
 
   """User registration"""
   register(input: RegisterInput!): RegisterPayload
@@ -13799,6 +14003,9 @@ type Query {
 
   """Get HomePageProjectsMapSectionConfiguration"""
   homePageProjectsMapSectionConfiguration: HomePageProjectsMapSectionConfiguration!
+
+  """Get CarrouselConfiguration"""
+  carrouselConfiguration: CarrouselConfiguration!
 
   """Return the platform analytics"""
   analytics(filter: QueryAnalyticsFilter!): PlatformAnalytics!

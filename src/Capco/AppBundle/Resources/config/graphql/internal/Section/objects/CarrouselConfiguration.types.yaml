@@ -1,0 +1,33 @@
+CarrouselConfiguration:
+    type: object
+    inherits:
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'Section carrousel page in admin'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: CarrouselConfiguration
+            title:
+                type: 'String!'
+                description: 'The title of the section'
+            nbObjects:
+                type: 'Int!'
+                description: 'Number of objects to display'
+            position:
+                type: 'Int!'
+                description: 'The position of the section in the homepage'
+            enabled:
+                type: 'Boolean!'
+                description: 'Whether the section is enabled or not'
+            isLegendEnabledOnImage:
+                type: 'Boolean!'
+                description: 'Whether the legend is enabled on the image or not'
+            carrouselElements:
+                type: 'CarrouselElementConnection!'
+                description: 'The elements of the carrousel'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\CarrouselElementConfigurationResolver", value)'

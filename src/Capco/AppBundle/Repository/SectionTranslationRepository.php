@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
-use Capco\AppBundle\Entity\SectionTranslation;
+use Capco\AppBundle\Entity\Section\SectionTranslation;
 use Doctrine\ORM\EntityRepository;
 
 /**

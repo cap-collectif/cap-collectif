@@ -1176,11 +1176,6 @@ parameters:
 			path: src/Capco/AdminBundle/Controller/ReportingController.php
 
 		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\PositionableController\\:\\:__construct\\(\\) invoked with 4 parameters, 3 required\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/SectionController.php
-
-		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\SectionController\\:\\:batchActionDeleteIsRelevant\\(\\) has parameter \\$allEntitiesSelected with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/SectionController.php
@@ -22306,109 +22301,109 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SSO/Oauth2SSOConfiguration.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:getAssociatedFeatures\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:getAssociatedFeatures\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:getSectionProjects\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:getSectionProjects\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:isCustom\\(\\) has no return type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:isCustom\\(\\) has no return type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:setAssociatedFeatures\\(\\) has parameter \\$associatedFeatures with no value type specified in iterable type array\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:setAssociatedFeatures\\(\\) has parameter \\$associatedFeatures with no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:\\$associatedFeatures type has no value type specified in iterable type array\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:\\$associatedFeatures type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:\\$fieldsForType has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:\\$fieldsForType has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:\\$id has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:\\$id has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\:\\:\\$sectionProjects with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:\\$sectionProjects with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Section.php
+			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SectionProject\\:\\:\\$id has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionCarrouselElement\\:\\:\\$id has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionProject.php
+			path: src/Capco/AppBundle/Entity/Section/SectionCarrouselElement.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SectionProject\\:\\:\\$position has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionProject\\:\\:\\$id has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionProject.php
+			path: src/Capco/AppBundle/Entity/Section/SectionProject.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SectionProject\\:\\:\\$section has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionProject\\:\\:\\$position has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionProject.php
+			path: src/Capco/AppBundle/Entity/Section/SectionProject.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:\\$body has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:\\$body has no type specified\\.$#"
 			count: 2
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:\\$id has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:\\$id has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:\\$teaser has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:\\$teaser has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\SectionTranslation\\:\\:\\$title has no type specified\\.$#"
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:\\$title has no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/SectionTranslation.php
+			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
 		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
@@ -34816,12 +34811,12 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Query/ContactFormQueryResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\HomePageProjectsMapSectionConfigurationResolver\\:\\:__invoke\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Section\\|null but returns object\\|null\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\HomePageProjectsMapSectionConfigurationResolver\\:\\:__invoke\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Query/HomePageProjectsMapSectionConfigurationResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\HomePageProjectsSectionConfigurationResolver\\:\\:__invoke\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Section\\|null but returns object\\|null\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\HomePageProjectsSectionConfigurationResolver\\:\\:__invoke\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\|null but returns object\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Query/HomePageProjectsSectionConfigurationResolver.php
 
@@ -49654,21 +49649,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Validator\\\\Constraints\\\\CheckMapCenterValidator\\:\\:validate\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Validator/Constraints/CheckMapCenterValidator.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Validator\\\\Constraints\\\\CheckPhoneNumberValidator\\:\\:checkAlreadyUsed\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Validator/Constraints/CheckPhoneNumberValidator.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Validator\\\\Constraints\\\\CheckPhoneNumberValidator\\:\\:validate\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Validator/Constraints/CheckPhoneNumberValidator.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Validator\\\\Constraints\\\\CheckPhoneNumberValidator\\:\\:validateNumberLength\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Validator/Constraints/CheckPhoneNumberValidator.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Validator\\\\Constraints\\\\CheckRegisterValidator\\:\\:validate\\(\\) has no return type specified\\.$#"

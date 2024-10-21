@@ -1,0 +1,225 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query carrouselConfiguration Get Carrousel Section Configuration as admin 1`] = `
+Object {
+  "carrouselConfiguration": Object {
+    "carrouselElements": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 1",
+            "description": "SectionCarrouselElement1 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDE=",
+            "image": Object {
+              "height": 400,
+              "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
+              "width": 600,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement1",
+            "type": "article",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 2",
+            "description": "SectionCarrouselElement2 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDI=",
+            "image": Object {
+              "height": 200,
+              "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+              "width": 355,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement2",
+            "type": "project",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 3",
+            "description": "SectionCarrouselElement3 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDM=",
+            "image": Object {
+              "height": 316,
+              "url": "https://capco.test/media/default/0001/01/cereale.png",
+              "width": 896,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement3",
+            "type": "event",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 4",
+            "description": "SectionCarrouselElement4 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDQ=",
+            "image": Object {
+              "height": 310,
+              "url": "https://capco.test/media/default/0001/01/cafetier.png",
+              "width": 1156,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement4",
+            "type": "theme",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 5",
+            "description": "SectionCarrouselElement5 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDU=",
+            "image": Object {
+              "height": 339,
+              "url": "https://capco.test/media/default/0001/01/oculus.jpg",
+              "width": 679,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement5",
+            "type": "article",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 6",
+            "description": "SectionCarrouselElement6 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDY=",
+            "image": Object {
+              "height": 410,
+              "url": "https://capco.test/media/default/0001/01/cafe.png",
+              "width": 1024,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement6",
+            "type": "project",
+          },
+        },
+      ],
+    },
+    "enabled": false,
+    "id": "Q2Fycm91c2VsQ29uZmlndXJhdGlvbjpzZWN0aW9uQ2Fycm91c2Vs",
+    "isLegendEnabledOnImage": true,
+    "position": 15,
+    "title": "En-tête défilante",
+  },
+}
+`;
+
+exports[`Internal|Query carrouselConfiguration Get Carrousel Section Configuration as user 1`] = `
+Object {
+  "carrouselConfiguration": Object {
+    "carrouselElements": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 1",
+            "description": "SectionCarrouselElement1 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDE=",
+            "image": Object {
+              "height": 400,
+              "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
+              "width": 600,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement1",
+            "type": "article",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 2",
+            "description": "SectionCarrouselElement2 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDI=",
+            "image": Object {
+              "height": 200,
+              "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+              "width": 355,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement2",
+            "type": "project",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 3",
+            "description": "SectionCarrouselElement3 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDM=",
+            "image": Object {
+              "height": 316,
+              "url": "https://capco.test/media/default/0001/01/cereale.png",
+              "width": 896,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement3",
+            "type": "event",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 4",
+            "description": "SectionCarrouselElement4 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDQ=",
+            "image": Object {
+              "height": 310,
+              "url": "https://capco.test/media/default/0001/01/cafetier.png",
+              "width": 1156,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement4",
+            "type": "theme",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 5",
+            "description": "SectionCarrouselElement5 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDU=",
+            "image": Object {
+              "height": 339,
+              "url": "https://capco.test/media/default/0001/01/oculus.jpg",
+              "width": 679,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement5",
+            "type": "article",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 6",
+            "description": "SectionCarrouselElement6 description",
+            "id": "Q2Fycm91c2VsRWxlbWVudDpTZWN0aW9uQ2Fycm91c2VsRWxlbWVudDY=",
+            "image": Object {
+              "height": 410,
+              "url": "https://capco.test/media/default/0001/01/cafe.png",
+              "width": 1024,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement6",
+            "type": "project",
+          },
+        },
+      ],
+    },
+    "enabled": false,
+    "id": "Q2Fycm91c2VsQ29uZmlndXJhdGlvbjpzZWN0aW9uQ2Fycm91c2Vs",
+    "isLegendEnabledOnImage": true,
+    "position": 15,
+    "title": "En-tête défilante",
+  },
+}
+`;

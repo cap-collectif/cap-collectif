@@ -1,7 +1,8 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Entity\Section;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\SectionProjectRepository;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,7 +23,7 @@ class SectionProject
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="sectionProjects")
      * @ORM\JoinColumn(nullable=false)
      */
-    private $section;
+    private Section $section;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)

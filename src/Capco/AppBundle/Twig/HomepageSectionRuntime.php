@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Twig;
 
 use Capco\AppBundle\Entity\Proposal;
-use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\Repository\HighlightedContentRepository;
 use Capco\AppBundle\Repository\PostRepository;
 use Capco\AppBundle\Repository\ProjectRepository;

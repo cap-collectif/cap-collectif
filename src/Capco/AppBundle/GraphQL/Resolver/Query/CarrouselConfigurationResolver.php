@@ -2,12 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\Repository\SectionRepository;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
-class HomePageProjectsSectionConfigurationResolver implements QueryInterface
+class CarrouselConfigurationResolver implements QueryInterface
 {
     private SectionRepository $sectionRepository;
 
@@ -16,8 +14,8 @@ class HomePageProjectsSectionConfigurationResolver implements QueryInterface
         $this->sectionRepository = $sectionRepository;
     }
 
-    public function __invoke(Argument $args): ?Section
+    public function __invoke(): ?object
     {
-        return $this->sectionRepository->findOneBy(['type' => 'projects']);
+        return $this->sectionRepository->findOneBy(['type' => 'carrousel']);
     }
 }

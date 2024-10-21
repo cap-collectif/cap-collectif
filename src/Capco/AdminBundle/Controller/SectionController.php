@@ -2,9 +2,10 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Capco\AppBundle\Entity\Section;
+use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\Repository\SectionRepository;
 use Capco\AppBundle\Resolver\SectionResolver;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
 use Sonata\AdminBundle\Exception\LockException;
@@ -20,7 +21,7 @@ class SectionController extends PositionableController
 
     public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, SectionResolver $sectionResolver)
     {
-        parent::__construct(SectionResolver::class, $breadcrumbsBuilder, $pool, $sectionResolver);
+        parent::__construct(SectionResolver::class, $breadcrumbsBuilder, $pool);
         $this->sectionResolver = $sectionResolver;
     }
 
@@ -110,6 +111,12 @@ class SectionController extends PositionableController
                     'action' => 'edit',
                     'object' => $existingObject,
                 ]
+            );
+        }
+        if ('carrousel' === $existingObject->getType()) {
+            return $this->redirect(
+                '/admin-next/section/carousel/' . GlobalId::toGlobalId('Section', $existingObject->getId()),
+                301
             );
         }
 

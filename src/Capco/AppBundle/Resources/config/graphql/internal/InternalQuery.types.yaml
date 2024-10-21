@@ -525,6 +525,10 @@ InternalQuery:
                 type: 'HomePageProjectsMapSectionConfiguration!'
                 description: 'Get HomePageProjectsMapSectionConfiguration'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsMapSectionConfigurationResolver", [args])'
+            carrouselConfiguration:
+                type: 'CarrouselConfiguration!'
+                description: 'Get CarrouselConfiguration'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\CarrouselConfigurationResolver")'
             analytics:
                 type: 'InternalPlatformAnalytics!'
                 description: 'Return the platform analytics'

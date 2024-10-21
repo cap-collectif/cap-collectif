@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\AppBundle\Entity;
+namespace Capco\AppBundle\Entity\Section;
 
 use Capco\AppBundle\Model\Translation;
 use Capco\AppBundle\Traits\TextableTrait;

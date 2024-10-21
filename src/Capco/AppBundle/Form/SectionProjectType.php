@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Section;
-use Capco\AppBundle\Entity\SectionProject;
+use Capco\AppBundle\Entity\Section\Section;
+use Capco\AppBundle\Entity\Section\SectionProject;
 use Capco\AppBundle\Form\Type\RelayNodeType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

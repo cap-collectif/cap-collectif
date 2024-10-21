@@ -329,6 +329,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/Participant.yaml',
             $this->fixturesDir . 'Dev/Mediator.yaml',
             $this->fixturesDir . 'Dev/MediatorParticipantStep.yaml',
+            $this->fixturesDir . 'Dev/SectionCarrouselElement.yaml',
         ];
     }
 }
