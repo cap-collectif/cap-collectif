@@ -189,21 +189,33 @@ export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean; logoWidth?
 
 export const NavBarSkipLinks: React.FC = () => {
   const { skipLinks } = useNavBarContext()
-
+  const { colors } = useTheme()
   if (!skipLinks?.length) return null
 
   return (
-    <Box as="ul" display="none" sx={{ '&:focus-within': { display: 'flex' } }}>
+    <Flex
+      as="ul"
+      overflow="hidden"
+      height={0}
+      sx={{
+        '&:focus-within': {
+          height: 'unset',
+          borderBottom: `1px solid ${colors['neutral-gray']['150']}`,
+          overflow: 'visible',
+        },
+        listStyleType: 'none',
+      }}
+    >
       {skipLinks.map(({ href, title }, idx) => {
         return (
           <Box as="li" key={idx}>
-            <Box as="a" href={href} px={[4]} py={2} color="neutral-gray.900">
+            <Box as="a" display="block" href={href} px={[4]} py={2} color="neutral-gray.900">
               {title}
             </Box>
           </Box>
         )
       })}
-    </Box>
+    </Flex>
   )
 }
 

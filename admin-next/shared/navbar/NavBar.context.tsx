@@ -1,4 +1,5 @@
 import * as React from 'react'
+import { useIntl } from 'react-intl'
 
 export type LinkProps = { readonly title: string; readonly href: string; readonly showOnMobile?: boolean }
 
@@ -24,8 +25,14 @@ export const useNavBarContext = (): NavBarContextProps & NavBarContextActionProp
 }
 
 export const NavBarContextProvider = ({ children, ...props }: React.PropsWithChildren<NavBarContextProps>) => {
+  const intl = useIntl()
   const [breadCrumbItems, setBreadCrumbItems] = React.useState<LinkProps[]>(props.breadCrumbItems ?? [])
-  const [skipLinks, setSkipLinks] = React.useState<LinkProps[]>(props.skipLinks ?? [])
+  const [skipLinks, setSkipLinks] = React.useState<LinkProps[]>(
+    props.skipLinks ?? [
+      { title: intl.formatMessage({ id: 'navbar.skip_links.menu' }), href: '#main_navbar' },
+      { title: intl.formatMessage({ id: 'navbar.skip_links.content' }), href: '#main' },
+    ],
+  )
 
   const contextValue: NavBarContextProps & NavBarContextActionProps = {
     breadCrumbItems,
