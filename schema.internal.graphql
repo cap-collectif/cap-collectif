@@ -7296,6 +7296,35 @@ type Font {
   isCustom: Boolean!
 }
 
+"""An object containing footer data."""
+type Footer {
+  socialNetworks: [FooterSocialNetworks]
+  links: [FooterLinks]
+  legals: FooterLegals
+  cookiesPath: String
+  legalPath: String
+}
+
+"""An object containing footer legals data."""
+type FooterLegals {
+  cookies: Boolean!
+  legal: Boolean!
+  privacy: Boolean!
+}
+
+"""An object containing footer links data."""
+type FooterLinks {
+  name: String!
+  url: URI!
+}
+
+"""An object containing footer social networks data."""
+type FooterSocialNetworks {
+  title: String!
+  link: URI!
+  style: String!
+}
+
 """For or against."""
 enum ForOrAgainstValue {
   """An against value"""
@@ -14142,6 +14171,9 @@ type Query {
 
   """Whether or not the viewer is authenticated."""
   isAuthenticated: Boolean!
+
+  """Footer configuration"""
+  footer: Footer!
 }
 
 input QueryAnalyticsFilter {

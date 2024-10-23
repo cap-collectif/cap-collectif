@@ -1,0 +1,9 @@
+FooterLinks:
+    type: object
+    config:
+        description: 'An object containing footer links data.'
+        fields:
+            name:
+                type: 'String!'
+            url:
+                type: 'URI!'

@@ -1,0 +1,11 @@
+FooterSocialNetworks:
+    type: object
+    config:
+        description: 'An object containing footer social networks data.'
+        fields:
+            title:
+                type: 'String!'
+            link:
+                type: 'URI!'
+            style:
+                type: 'String!'

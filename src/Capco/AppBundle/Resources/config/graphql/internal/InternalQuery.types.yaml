@@ -674,4 +674,9 @@ InternalQuery:
                 type: 'Boolean!'
                 description: 'Whether or not the viewer is authenticated.'
                 resolve: '@=getUser() !== null'
+            footer:
+                type: 'Footer!'
+                description: 'Footer configuration'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\FooterResolver", [args])'
+
 

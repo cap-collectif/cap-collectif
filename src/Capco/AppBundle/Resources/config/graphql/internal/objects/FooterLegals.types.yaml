@@ -1,0 +1,11 @@
+FooterLegals:
+    type: object
+    config:
+        description: 'An object containing footer legals data.'
+        fields:
+            cookies:
+                type: 'Boolean!'
+            legal:
+                type: 'Boolean!'
+            privacy:
+                type: 'Boolean!'

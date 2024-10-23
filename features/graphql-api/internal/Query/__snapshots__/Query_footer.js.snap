@@ -1,0 +1,32 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query footer Get Footer data 1`] = `
+Object {
+  "footer": Object {
+    "cookiesPath": "https://capco.test/cookies-page",
+    "legalPath": "https://capco.test/legal",
+    "legals": Object {
+      "cookies": true,
+      "legal": true,
+      "privacy": true,
+    },
+    "links": Array [
+      Object {
+        "name": "FAQ",
+        "url": "/pages/faq",
+      },
+      Object {
+        "name": "Développeurs",
+        "url": "/developer?_locale=fr-FR",
+      },
+    ],
+    "socialNetworks": Array [
+      Object {
+        "link": "https://x.com/CapCollectif",
+        "style": "x",
+        "title": "X",
+      },
+    ],
+  },
+}
+`;

@@ -1,0 +1,15 @@
+Footer:
+    type: object
+    config:
+        description: 'An object containing footer data.'
+        fields:
+            socialNetworks:
+                type: '[FooterSocialNetworks]'
+            links:
+                type: '[FooterLinks]'
+            legals:
+                type: 'FooterLegals'
+            cookiesPath:
+                type: 'String'
+            legalPath:
+                type: 'String'
