@@ -64,3 +64,6 @@ services:
     Capco\AppBundle\Security\SiteParameterVoter:
         tags:
             - { name: security.voter }
+    Capco\AppBundle\Security\StepVoter:
+        tags:
+            - { name: security.voter }

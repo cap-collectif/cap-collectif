@@ -22,6 +22,7 @@ use Capco\AppBundle\Repository\PresentationStepRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\AppBundle\Search\OpinionSearch;
 use Capco\AppBundle\Search\VersionSearch;
+use Capco\AppBundle\Security\StepVoter;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
@@ -30,6 +31,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 use Symfony\Component\Serializer\SerializerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -40,19 +42,22 @@ class StepController extends Controller
     private OpinionSearch $opinionSearch;
     private VersionSearch $versionSearch;
     private LocaleRepository $localeRepo;
+    private AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         TranslatorInterface $translator,
         SerializerInterface $serializer,
         OpinionSearch $opinionSearch,
         VersionSearch $versionSearch,
-        LocaleRepository $localeRepo
+        LocaleRepository $localeRepo,
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->translator = $translator;
         $this->serializer = $serializer;
         $this->opinionSearch = $opinionSearch;
         $this->versionSearch = $versionSearch;
         $this->localeRepo = $localeRepo;
+        $this->authorizationChecker = $authorizationChecker;
     }
 
     /**
@@ -69,7 +74,7 @@ class StepController extends Controller
     public function showStepAction(Project $project, OtherStep $step)
     {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -87,9 +92,6 @@ class StepController extends Controller
     public function showPresentationAction(Project $project, string $stepSlug, PresentationStepRepository $presentationStepRepository, OtherStepRepository $otherStepRepository)
     {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
-            return $this->redirect403();
-        }
         $projectSlug = $project->getSlug();
         $posts = $this->get(PostRepository::class)->getLastPublishedByProject($projectSlug, 2);
         $nbPosts = $this->get(PostRepository::class)->countSearchResults(null, $projectSlug);
@@ -100,6 +102,10 @@ class StepController extends Controller
         $otherStep = $otherStepRepository->getOneBySlugAndProjectSlug($stepSlug, $projectSlug);
 
         if ($otherStep) {
+            if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $otherStep)) {
+                return $this->redirect403();
+            }
+
             return $this->redirectToRoute('app_project_show_step', [
                 'projectSlug' => $projectSlug,
                 'stepSlug' => $stepSlug,
@@ -110,6 +116,10 @@ class StepController extends Controller
 
         if (null === $presentationStep) {
             throw $this->createNotFoundException();
+        }
+
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $presentationStep)) {
+            return $this->redirect403();
         }
 
         return [
@@ -147,7 +157,7 @@ class StepController extends Controller
     public function showDebateAction(Project $project, DebateStep $step)
     {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -177,7 +187,7 @@ class StepController extends Controller
     public function showRankingAction(Project $project, RankingStep $step)
     {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -232,7 +242,7 @@ class StepController extends Controller
     public function showOpinionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -273,7 +283,7 @@ class StepController extends Controller
     public function showVersionsRankingAction(Project $project, RankingStep $step, $page = 1)
     {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -312,7 +322,8 @@ class StepController extends Controller
     public function showCollectStepAction(Project $project, CollectStep $step)
     {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -345,7 +356,7 @@ class StepController extends Controller
         ?string $replyId = null
     ) {
         $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -401,8 +412,7 @@ class StepController extends Controller
      */
     public function showSelectionStepAction(Project $project, SelectionStep $step)
     {
-        $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
@@ -426,8 +436,7 @@ class StepController extends Controller
      */
     public function showVoteStepAction(Project $project, SelectionStep $step)
     {
-        $viewer = $this->getUser();
-        if (!$project->viewerCanSee($viewer)) {
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
             return $this->redirect403();
         }
 
