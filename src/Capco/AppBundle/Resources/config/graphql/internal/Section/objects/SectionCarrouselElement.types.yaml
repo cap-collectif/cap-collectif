@@ -1,4 +1,4 @@
-CarrouselElement:
+SectionCarrouselElement:
     type: object
     inherits:
         - Node
@@ -11,12 +11,12 @@ CarrouselElement:
                 description: 'The ID of an object.'
                 builder: 'Relay::GlobalId'
                 builderConfig:
-                    typeName: CarrouselElement
+                    typeName: SectionCarrouselElement
             position:
                 type: 'Int!'
                 description: 'The position of the carrousel element.'
             type:
-                type: 'String!'
+                type: 'CarrouselElementType!'
                 description: 'The type of the carrousel element.'
             title:
                 type: 'String!'

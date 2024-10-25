@@ -6,7 +6,6 @@ const createOrUpdateCarrouselConfigurationMutation = /* GraphQL */ `
       errorCode
       carrouselConfiguration {
         position
-        nbObjects
         enabled
         isLegendEnabledOnImage
         carrouselElements {
@@ -33,7 +32,6 @@ const createOrUpdateCarrouselConfigurationMutation = /* GraphQL */ `
 `;
 
 const input = {
-  "nbObjects": 8,
   "enabled": false,
   "isLegendEnabledOnImage": true,
   "carrouselElements": [
@@ -45,7 +43,7 @@ const input = {
       "isDisplayed": false,
       "redirectLink": "https://www.exemple.com",
       "buttonLabel": "Libellé du bouton",
-      "image": "TWVkaWE6R2llY0xvZ28=",
+      "image": "GiecLogo",
       "position": 1
     },
     {
@@ -55,15 +53,8 @@ const input = {
       "isDisplayed": false,
       "redirectLink": "https://www.exemple.com",
       "buttonLabel": "Libellé du bouton",
-      "image": "TWVkaWE6aW1hZ2VPY3VsdXM=",
+      "image": "imageOculus",
       "position": 2
-    }
-  ],
-  "translations": [
-    {
-      "locale": "fr-FR",
-      "title": "titre",
-      "teaser": "sous titre"
     }
   ]
 }
@@ -94,7 +85,7 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
                 "isDisplayed": false,
                 "redirectLink": "https://www.exemple.com",
                 "buttonLabel": "Libellé du bouton",
-                "image": "TWVkaWE6aW1hZ2VPY3VsdXM=",
+                "image": "imageOculus",
                 "position": 4
               },
               {
@@ -104,7 +95,7 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
                 "isDisplayed": false,
                 "redirectLink": "https://www.exemple.com",
                 "buttonLabel": "Libellé du bouton",
-                "image": "TWVkaWE6aW1hZ2VPY3VsdXM=",
+                "image": "imageOculus",
                 "position": 5
               },
               {
@@ -114,7 +105,7 @@ describe('mutations.createOrUpdateCarrouselConfigurationMutation', () => {
                 "isDisplayed": false,
                 "redirectLink": "https://www.exemple.com",
                 "buttonLabel": "Libellé du bouton",
-                "image": "TWVkaWE6aW1hZ2VPY3VsdXM=",
+                "image": "imageOculus",
                 "position": 6
               }
             ]

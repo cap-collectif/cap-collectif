@@ -20,6 +20,7 @@ class SectionCarrouselElement
     private const TYPE_PROJECT = 'project';
     private const TYPE_EVENT = 'event';
     private const TYPE_THEME = 'theme';
+    private const TYPE_CUSTOM = 'custom';
 
     /**
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="sectionCarrouselElements")
@@ -28,7 +29,7 @@ class SectionCarrouselElement
     private Section $section;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=50)
      */
     private string $title;
 
@@ -38,12 +39,12 @@ class SectionCarrouselElement
     private int $position;
 
     /**
-     * @ORM\Column(type="string", nullable=true)
+     * @ORM\Column(type="string", length=165, nullable=true)
      */
     private ?string $description = null;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(type="string", length=20)
      */
     private string $buttonLabel;
 
@@ -153,12 +154,12 @@ class SectionCarrouselElement
         return $this;
     }
 
-    public function getImage(): Media
+    public function getImage(): ?Media
     {
         return $this->image;
     }
 
-    public function setImage(Media $image): self
+    public function setImage(?Media $image): self
     {
         $this->image = $image;
 
@@ -190,6 +191,7 @@ class SectionCarrouselElement
             self::TYPE_PROJECT,
             self::TYPE_EVENT,
             self::TYPE_THEME,
+            self::TYPE_CUSTOM,
         ];
     }
 }

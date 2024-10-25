@@ -1655,9 +1655,6 @@ type CarrouselConfiguration implements Node {
   """The title of the section"""
   title: String!
 
-  """Number of objects to display"""
-  nbObjects: Int!
-
   """The position of the section in the homepage"""
   position: Int!
 
@@ -1668,65 +1665,7 @@ type CarrouselConfiguration implements Node {
   isLegendEnabledOnImage: Boolean!
 
   """The elements of the carrousel"""
-  carrouselElements: CarrouselElementConnection!
-}
-
-"""Element carrousel page in admin"""
-type CarrouselElement implements Node {
-  """The ID of an object."""
-  id: ID!
-
-  """The position of the carrousel element."""
-  position: Int!
-
-  """The type of the carrousel element."""
-  type: String!
-
-  """The main heading or title displayed on the carrousel element."""
-  title: String!
-
-  """
-  A detailed description providing context or information about the carrousel element.
-  """
-  description: String
-
-  """
-  The URL to which users are redirected when interacting with the carrousel element.
-  """
-  redirectLink: URI!
-
-  """The image displayed on the carrousel element."""
-  image: Media
-
-  """
-  The text label displayed on the action button of the carrousel element.
-  """
-  buttonLabel: String!
-
-  """
-  A toggle indicating whether the carrousel element is visible to users.
-  """
-  isDisplayed: Boolean!
-}
-
-"""A connection to a list of items."""
-type CarrouselElementConnection {
-  totalCount: Int!
-
-  """Information to aid in pagination."""
-  pageInfo: PageInfo!
-
-  """Information to aid in pagination."""
-  edges: [CarrouselElementEdge]
-}
-
-"""An edge in a connection."""
-type CarrouselElementEdge {
-  """The item at the end of the edge."""
-  node: CarrouselElement
-
-  """A cursor for use in pagination."""
-  cursor: String!
+  carrouselElements: SectionCarrouselElementConnection!
 }
 
 input CarrouselElementInput {
@@ -1778,6 +1717,9 @@ enum CarrouselElementType {
 
   """Carrousel element is a theme."""
   THEME
+
+  """Carrousel element is defined by the user."""
+  CUSTOM
 }
 
 """Allowed versions of cas."""
@@ -4013,12 +3955,8 @@ input CreateOrUpdateCarrouselConfigurationInput {
   """The position of the section in the homepage."""
   position: Int
 
-  """Number of objects to display"""
-  nbObjects: Int!
-
   """Whether it is published or not."""
   enabled: Boolean
-  translations: [HomePageProjectsSectionConfigurationTranslationInput!]
 
   """Whether the legend is enabled on the image or not."""
   isLegendEnabledOnImage: Boolean
@@ -16008,6 +15946,64 @@ type SectionAppendixType {
   helpText: String
 }
 
+"""Element carrousel page in admin"""
+type SectionCarrouselElement implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """The position of the carrousel element."""
+  position: Int!
+
+  """The type of the carrousel element."""
+  type: CarrouselElementType!
+
+  """The main heading or title displayed on the carrousel element."""
+  title: String!
+
+  """
+  A detailed description providing context or information about the carrousel element.
+  """
+  description: String
+
+  """
+  The URL to which users are redirected when interacting with the carrousel element.
+  """
+  redirectLink: URI!
+
+  """The image displayed on the carrousel element."""
+  image: Media
+
+  """
+  The text label displayed on the action button of the carrousel element.
+  """
+  buttonLabel: String!
+
+  """
+  A toggle indicating whether the carrousel element is visible to users.
+  """
+  isDisplayed: Boolean!
+}
+
+"""A connection to a list of items."""
+type SectionCarrouselElementConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [SectionCarrouselElementEdge]
+}
+
+"""An edge in a connection."""
+type SectionCarrouselElementEdge {
+  """The item at the end of the edge."""
+  node: SectionCarrouselElement
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
 enum SectionOrderBy {
   positions
   random
@@ -17513,12 +17509,27 @@ type Theme implements UniformResourceLocatable {
     locale: TranslationLocale
   ): String!
 
+  """Identifies the body of the theme."""
+  body(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
+  """Identifies the teaser of the theme."""
+  teaser(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
   """Identifies the theme ID."""
   id: ID!
 
   """The URL to this resource."""
   url: URI!
   translations: [ThemeTranslation!]!
+
+  """The themes's related media."""
+  media: Media
 }
 
 """A translation theme."""

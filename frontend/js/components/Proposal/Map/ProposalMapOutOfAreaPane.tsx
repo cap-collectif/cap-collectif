@@ -7,7 +7,7 @@ import AppBox from '~ui/Primitives/AppBox'
 import Toast from '~/components/DesignSystem/Toast/Toast'
 import { theme } from '~/styles/theme'
 import jsxInnerText from '~/utils/jsxInnerText'
-import useTimeout from '~/utils/hooks/useTimeout'
+import useTimeout from '@shared/hooks/useTimeout'
 import { Emitter } from '~/config'
 import { MapEvents } from './Map.events'
 

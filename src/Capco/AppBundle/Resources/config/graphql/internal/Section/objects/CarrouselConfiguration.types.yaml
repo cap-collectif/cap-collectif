@@ -15,9 +15,6 @@ CarrouselConfiguration:
             title:
                 type: 'String!'
                 description: 'The title of the section'
-            nbObjects:
-                type: 'Int!'
-                description: 'Number of objects to display'
             position:
                 type: 'Int!'
                 description: 'The position of the section in the homepage'
@@ -28,6 +25,6 @@ CarrouselConfiguration:
                 type: 'Boolean!'
                 description: 'Whether the legend is enabled on the image or not'
             carrouselElements:
-                type: 'CarrouselElementConnection!'
+                type: 'SectionCarrouselElementConnection!'
                 description: 'The elements of the carrousel'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\CarrouselElementConfigurationResolver", value)'

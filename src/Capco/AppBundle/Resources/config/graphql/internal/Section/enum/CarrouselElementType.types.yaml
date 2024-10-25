@@ -16,3 +16,6 @@ CarrouselElementType:
             THEME:
                 value: !php/const Capco\AppBundle\Enum\CarrouselElementType::THEME
                 description: 'Carrousel element is a theme.'
+            CUSTOM:
+                value: !php/const Capco\AppBundle\Enum\CarrouselElementType::CUSTOM
+                description: 'Carrousel element is defined by the user.'

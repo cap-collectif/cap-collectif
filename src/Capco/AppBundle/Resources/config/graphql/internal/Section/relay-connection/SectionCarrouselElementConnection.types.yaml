@@ -1,7 +1,7 @@
-CarrouselElementConnection:
+SectionCarrouselElementConnection:
     type: relay-connection
     config:
-        nodeType: CarrouselElement
+        nodeType: SectionCarrouselElement
         connectionFields:
             totalCount:
                 type: Int!

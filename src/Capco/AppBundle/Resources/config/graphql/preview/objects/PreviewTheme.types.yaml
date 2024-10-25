@@ -9,6 +9,16 @@ PreviewTheme:
                 argsBuilder: 'Translatable::Field'
                 resolve: '@=value.getTitle(args["locale"], true)'
                 description: 'Identifies the title of the theme.'
+            body:
+                type: 'String'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getBody(args["locale"], true)'
+                description: 'Identifies the body of the theme.'
+            teaser:
+                type: 'String'
+                argsBuilder: 'Translatable::Field'
+                resolve: '@=value.getTeaser(args["locale"], true)'
+                description: 'Identifies the teaser of the theme.'
             id:
                 type: 'ID!'
                 resolve: '@=value.getId()'

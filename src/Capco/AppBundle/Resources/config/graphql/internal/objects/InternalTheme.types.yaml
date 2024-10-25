@@ -13,3 +13,7 @@ InternalTheme:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Theme\\ThemeUrlResolver", [value])'
             translations:
                 type: '[InternalThemeTranslation!]!'
+            media:
+                description: "The themes's related media."
+                resolve: '@=value.getMedia()'
+                type: 'InternalMedia'

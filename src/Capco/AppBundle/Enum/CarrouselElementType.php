@@ -8,6 +8,7 @@ class CarrouselElementType implements EnumType
     public const EVENT = 'event';
     public const PROJECT = 'project';
     public const THEME = 'theme';
+    public const CUSTOM = 'custom';
 
     /**
      * @param string $value
@@ -27,6 +28,7 @@ class CarrouselElementType implements EnumType
             self::EVENT,
             self::PROJECT,
             self::THEME,
+            self::CUSTOM,
         ];
     }
 

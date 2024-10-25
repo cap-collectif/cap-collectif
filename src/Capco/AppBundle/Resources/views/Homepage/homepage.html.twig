@@ -97,6 +97,8 @@
             {{ get_metrics_section(section) }}
         {% elseif section.type == 'projectsMap' %}
             {% include '@CapcoApp/Homepage/projectsMap.html.twig' with {'section': section} only %}
+        {% elseif section.type == 'carrousel' %}
+            {% include '@CapcoApp/Homepage/carrousel.html.twig' with {'section': section} only %}
         {% endif %}
 
     {% endfor %}

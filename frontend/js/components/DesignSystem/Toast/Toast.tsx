@@ -9,7 +9,7 @@ import { fadeOut, slideInDown, slideInLeftToRight, slideInRightToLeft, slideInUp
 import Text from '~ui/Primitives/Text'
 import AppBox from '~ui/Primitives/AppBox'
 import jsxInnerText from '~/utils/jsxInnerText'
-import useTimeout from '~/utils/hooks/useTimeout'
+import useTimeout from '@shared/hooks/useTimeout'
 import type { Props as IconProps } from '~ds/Icon/Icon'
 import Icon, { ICON_NAME } from '~ds/Icon/Icon'
 import colors from '~/styles/modules/colors'

@@ -37,6 +37,7 @@ use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Reporting;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Section\SectionCarrouselElement;
 use Capco\AppBundle\Entity\SmsCredit;
 use Capco\AppBundle\Entity\SmsOrder;
 use Capco\AppBundle\Entity\Source;
@@ -345,6 +346,10 @@ class NodeTypeResolver implements QueryInterface
 
         if ($node instanceof UserType) {
             return $this->typeResolver->resolve('UserType');
+        }
+
+        if ($node instanceof SectionCarrouselElement) {
+            return $this->typeResolver->resolve('SectionCarrouselElement');
         }
 
         throw new UserError('Could not resolve type of Node.');

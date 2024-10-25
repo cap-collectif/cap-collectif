@@ -115,7 +115,7 @@ class SectionController extends PositionableController
         }
         if ('carrousel' === $existingObject->getType()) {
             return $this->redirect(
-                '/admin-next/section/carousel/' . GlobalId::toGlobalId('Section', $existingObject->getId()),
+                '/admin-next/section/carrousel/' . GlobalId::toGlobalId('Section', $existingObject->getId()),
                 301
             );
         }

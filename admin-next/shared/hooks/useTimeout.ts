@@ -7,6 +7,7 @@ export const useTimeout: UseTimeout = (callback, timeout, deps = []) => {
   const refCallback = useRef()
   const refTimer = useRef()
   useEffect(() => {
+    // @ts-ignore
     refCallback.current = callback
   }, [callback])
 

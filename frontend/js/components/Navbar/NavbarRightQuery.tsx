@@ -18,7 +18,7 @@ export const NavbarRightQuery: React.FC<{ fullWidth?: boolean }> = ({ fullWidth 
   const query = useLazyLoadQuery<NavbarRightQueryType>(QUERY, {})
 
   return (
-    <Flex px={4} width={fullWidth ? '100%' : ''}>
+    <Flex pl={4} width={fullWidth ? '100%' : ''}>
       <RegistrationButton
         query={query}
         justifyContent={fullWidth ? 'center' : ''}

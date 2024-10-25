@@ -75,9 +75,9 @@ Capco\AppBundle\Entity\Section\Section:
         nbObjects: null
         enabled: false
         associatedFeatures: []
-    SectionCarrousel:
-        type: carrousel
-        position: 13
-        nbObjects: 5
-        enabled: false
-        associatedFeatures: []
+#    SectionCarrousel:
+#        type: carrousel
+#        position: 13
+#        nbObjects: 5
+#        enabled: false
+#        associatedFeatures: []

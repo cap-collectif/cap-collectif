@@ -39,7 +39,7 @@ class CarrouselElementConfigurationResolver implements QueryInterface
             } catch (\RuntimeException $exception) {
                 $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
-                throw new \Error('Error during fetching projects of ' . $section->getTitle());
+                throw new \Error('Error during fetching carrousel elements of section' . $section->getTitle());
             }
 
             return $arguments;

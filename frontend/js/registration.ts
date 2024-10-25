@@ -83,6 +83,7 @@ import OrganizationPageApp from './startup/OrganizationPageApp'
 import DistrictPageApp from './startup/DistrictPageApp'
 import IDFGeoSearchBarApp from './startup/IDFGeoSearchBarApp'
 import NewsLetterPageApp from './startup/NewsLetterPageApp'
+import CarrouselApp from './startup/CarrouselApp'
 
 ReactOnRails.registerStore({
   appStore,
@@ -156,6 +157,7 @@ ReactOnRails.register({
   OrganizationPageApp,
   DistrictPageApp,
   NewsLetterPageApp,
+  CarrouselApp,
 
   /* # COMPONENTS INTE CLIENT # */
   CalendarApp,

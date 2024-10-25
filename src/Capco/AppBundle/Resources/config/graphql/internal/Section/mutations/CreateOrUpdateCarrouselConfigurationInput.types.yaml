@@ -9,14 +9,9 @@ CreateOrUpdateCarrouselConfigurationInput:
             position:
                 type: 'Int'
                 description: 'The position of the section in the homepage.'
-            nbObjects:
-                type: 'Int!'
-                description: 'Number of objects to display'
             enabled:
                 type: 'Boolean'
                 description: 'Whether it is published or not.'
-            translations:
-                type: '[InternalHomePageProjectsSectionConfigurationTranslationInput!]'
             isLegendEnabledOnImage:
                 type: 'Boolean'
                 description: 'Whether the legend is enabled on the image or not.'

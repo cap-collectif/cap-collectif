@@ -5,13 +5,13 @@ namespace Capco\AppBundle\GraphQL\Mutation\Section;
 use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\Entity\Section\SectionCarrouselElement;
 use Capco\AppBundle\Form\SectionType;
-use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SectionRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\PropertyAccess\PropertyAccess;
 use Symfony\Component\PropertyAccess\PropertyAccessor;
@@ -54,17 +54,12 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
         $arguments = $args->getArrayCopy();
 
         $sectionCarrouselElementToCreate = $this->createOrUpdateHomePageCarrouselSectionConfiguration($arguments);
-        if (
-            $arguments['nbObjects'] > self::MAX_CARROUSEL_ITEMS
-            || $sectionCarrousel->getSectionCarrouselElements()->count() + \count($sectionCarrouselElementToCreate) > self::MAX_CARROUSEL_ITEMS
-        ) {
+        if ($sectionCarrousel->getSectionCarrouselElements()->count() + \count($sectionCarrouselElementToCreate) > self::MAX_CARROUSEL_ITEMS) {
             return [
                 'homePageCarrouselSectionConfiguration' => null,
                 'errorCode' => self::TOO_MANY_CARROUSEL_ITEMS,
             ];
         }
-
-        LocaleUtils::indexTranslations($arguments);
 
         unset($arguments['carrouselElements']);
 
@@ -164,7 +159,8 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
             return;
         }
 
-        $image = $this->globalIdResolver->resolve((string) $carrouselElementData['image']);
+        $id = GlobalId::toGlobalId('Media', $carrouselElementData['image']);
+        $image = $this->globalIdResolver->resolve($id);
 
         if (!$image) {
             throw new \RuntimeException(sprintf('Carrousel element image global ID: %s not found', $carrouselElementData['image']));

@@ -1928,6 +1928,18 @@ type Theme {
     locale: TranslationLocale
   ): String!
 
+  """Identifies the body of the theme."""
+  body(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
+  """Identifies the teaser of the theme."""
+  teaser(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
   """Identifies the theme ID."""
   id: ID!
 }
