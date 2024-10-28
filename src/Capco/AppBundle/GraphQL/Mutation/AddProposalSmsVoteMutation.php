@@ -140,7 +140,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
             throw new UserError('This step is not votable.');
         }
 
-        if ($step instanceof SelectionStep) {
+        if ($step instanceof SelectionStep && $phone) {
             try {
                 $this->contributionValidator->validatePhoneReusability($phone, $vote, $step, $token);
             } catch (ContributorAlreadyUsedPhoneException $e) {
