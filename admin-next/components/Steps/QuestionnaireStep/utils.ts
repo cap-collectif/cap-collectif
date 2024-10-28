@@ -258,5 +258,6 @@ export const getDefaultValues = (stepId, step, keepRequirements?: boolean): Form
     },
     requirements: keepRequirements ? step.requirements : getDefaultRequirements(step),
     requirementsReason: keepRequirements ? step.requirementsReason : '',
+    collectParticipantsEmail: step.collectParticipantsEmail ?? false,
   }
 }

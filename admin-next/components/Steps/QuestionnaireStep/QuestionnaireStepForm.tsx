@@ -59,6 +59,7 @@ export type FormValues = {
   isUsingModel?: boolean
   questionnaireModel?: { label: string; value: string }
   __typename?: string
+  collectParticipantsEmail: boolean
 } & RequirementsFormValues
 
 const QUESTIONNAIRE_STEP_QUERY = graphql`
@@ -77,6 +78,7 @@ const QUESTIONNAIRE_STEP_QUERY = graphql`
         enabled
         timeless
         isAnonymousParticipationAllowed
+        collectParticipantsEmail
         metaDescription
         customCode
         footer
@@ -220,6 +222,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
     const stepInput: UpdateQuestionnaireStepInput = {
       ...values,
+      collectParticipantsEmail: values?.collectParticipantsEmail ?? false,
       timeless,
       isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
       questionnaire: CURRENTquestionnaire.questionnaireId,

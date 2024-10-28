@@ -22,6 +22,7 @@ const mutation = graphql`
         enabled
         timeless
         isAnonymousParticipationAllowed
+        collectParticipantsEmail
         metaDescription
         customCode
         questionnaire {

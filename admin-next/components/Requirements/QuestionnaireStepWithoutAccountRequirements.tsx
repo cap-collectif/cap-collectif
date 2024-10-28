@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
 import { FieldInput } from '@cap-collectif/form'
 
-const CollectStepWithoutAccountRequirements: React.FC = () => {
+const QuestionnaireStepWithoutAccountRequirements: React.FC = () => {
   const intl = useIntl()
   const { control } = useFormContext()
   return (
@@ -27,4 +27,4 @@ const CollectStepWithoutAccountRequirements: React.FC = () => {
   )
 }
 
-export default CollectStepWithoutAccountRequirements
+export default QuestionnaireStepWithoutAccountRequirements
