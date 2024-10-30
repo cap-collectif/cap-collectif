@@ -137,6 +137,7 @@ const getConfig = (currentLanguage, noCode, editor: { current: { component: IJod
     buttons,
     buttonsMD: buttons,
     buttonsSM: buttons,
+    tabIndex: 0,
   }
 }
 

@@ -101,7 +101,11 @@ const ProposalCreateModal = ({
       {() => (
         <>
           <ResetCss>
-            <Modal.Header>
+            <Modal.Header
+              closeIconLabel={intl.formatMessage({
+                id: 'close.modal',
+              })}
+            >
               <Heading>
                 {intl.formatMessage({
                   id: title,

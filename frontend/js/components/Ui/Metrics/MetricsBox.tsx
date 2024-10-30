@@ -27,7 +27,7 @@ const MetricsBox = ({ color, totalCount, icon, label }: Props) => {
   return (
     <MetricsBoxInner color={color}>
       <span className="metrics-number">
-        <i className={icon} />
+        <i className={icon} aria-hidden="true" />
         {totalCount}
       </span>
       <p>

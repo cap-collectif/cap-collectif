@@ -2,6 +2,12 @@
 
 exports[`<OpinionBody /> should render correctly when the opinion is a version 1`] = `
 <div>
+  <span
+    className="sr-only"
+  >
+    proposal-content
+     :
+  </span>
   <div>
     <p
       className="control-label"

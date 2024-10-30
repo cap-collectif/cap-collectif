@@ -26,9 +26,12 @@ export const OpinionPreviewTitle = ({ opinion, showTypeLabel }: Props) => {
       {showTypeLabel ? ' ' : null}
       <a
         href={opinion.url}
-        aria-label={intl.formatMessage({
-          id: 'admin.fields.selection.proposal',
-        })}
+        aria-label={intl.formatMessage(
+          {
+            id: 'aria.proposal.title',
+          },
+          { title: translateContent(opinion.title) },
+        )}
         title={translateContent(opinion.title)}
       >
         {translateContent(opinion.title)}

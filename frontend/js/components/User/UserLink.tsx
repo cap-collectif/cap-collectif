@@ -16,16 +16,20 @@ type Props = ReduxProps & {
 }
 export const UserLink = ({ legacyUser, className = '', toggled, user, ariaLabel = '' }: Props) => {
   const intl = useIntl()
-  const label = ariaLabel
-    ? intl.formatMessage({
-        id: ariaLabel,
-      })
-    : undefined
 
   if (legacyUser) {
     let userUrl =
       legacyUser && legacyUser._links && legacyUser._links.profile && toggled ? legacyUser._links.profile : null
     const username = legacyUser && legacyUser.displayName ? legacyUser.displayName : 'deleted-user'
+
+    const label = ariaLabel
+      ? intl.formatMessage(
+          {
+            id: ariaLabel,
+          },
+          { author: translateContent(username) },
+        )
+      : undefined
 
     if (!userUrl) {
       userUrl = user && user.url ? user.url : null
@@ -45,6 +49,14 @@ export const UserLink = ({ legacyUser, className = '', toggled, user, ariaLabel 
   }
 
   if (user) {
+    const label = ariaLabel
+      ? intl.formatMessage(
+          {
+            id: ariaLabel,
+          },
+          { author: translateContent(user.displayName) },
+        )
+      : undefined
     if (toggled) {
       return (
         <a className={className} href={user.url} aria-label={label} title={user?.displayName}>

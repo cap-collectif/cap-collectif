@@ -182,7 +182,7 @@ export const ProposalEditModal = ({
       {isRevisionExpired ? (
         <>
           <Modal.Header
-            closeLabel={intl.formatMessage({
+            closeIconLabel={intl.formatMessage({
               id: 'close.modal',
             })}
             pb={8}
@@ -200,7 +200,7 @@ export const ProposalEditModal = ({
         <>
           <ResetCss>
             <Modal.Header
-              closeLabel={intl.formatMessage({
+              closeIconLabel={intl.formatMessage({
                 id: 'close.modal',
               })}
               borderBottom={['', `1px solid ${colors.gray[200]}`]}

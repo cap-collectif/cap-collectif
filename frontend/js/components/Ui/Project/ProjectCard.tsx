@@ -155,6 +155,7 @@ export const ProjectCard = ({
         (max-width: 960px) 960px,
         (max-width: 1280px) 960px,
         (max-width: 2560px) 960px,"
+            alt=""
           />
         ) : (
           <Box
@@ -218,7 +219,12 @@ export const ProjectCard = ({
               <Flex direction="row" spacing={8} mt={4}>
                 {((project.isVotesCounterDisplayable || project.isExternal) &&
                   votesTotalCount &&
-                  formatCounter(CapUIIcon.ThumbUpO, votesTotalCount, project.archived)) ||
+                  formatCounter(
+                    CapUIIcon.ThumbUpO,
+                    votesTotalCount,
+                    project.archived,
+                    intl.formatMessage({ id: 'project.votes.widget.votes' }),
+                  )) ||
                   null}
                 {((project.isContributionsCounterDisplayable ||
                   (project.isExternal && project.externalContributionsCount)) &&
@@ -226,6 +232,7 @@ export const ProjectCard = ({
                     CapUIIcon.BubbleO,
                     project.isExternal ? project.externalContributionsCount || 0 : project.contributions.totalCount,
                     project.archived,
+                    intl.formatMessage({ id: 'global.contribution' }),
                   )) ||
                   null}
                 {((project.isParticipantsCounterDisplayable ||
@@ -238,6 +245,7 @@ export const ProjectCard = ({
                           project.anonymousVotes.totalCount +
                           project.anonymousReplies?.totalCount,
                     project.archived,
+                    intl.formatMessage({ id: 'capco.section.metrics.participants' }),
                   )) ||
                   null}
               </Flex>

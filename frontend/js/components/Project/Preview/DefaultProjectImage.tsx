@@ -12,6 +12,7 @@ export const DefaultProjectImage = ({ isNewCard }: Props) => {
     : {}
   return (
     <svg
+      aria-hidden
       version="1.1"
       role="img"
       xmlns="http://www.w3.org/2000/svg"

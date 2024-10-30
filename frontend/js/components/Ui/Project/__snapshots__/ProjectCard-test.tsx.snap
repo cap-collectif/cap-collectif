@@ -13,6 +13,7 @@ Array [
       className="sc-bcXGCL cgbMqJ cap-card"
     >
       <img
+        alt=""
         className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
@@ -137,6 +138,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 42
+                <span
+                  className="sr-only"
+                >
+                  project.votes.widget.votes
+                </span>
               </div>
             </div>
             <div
@@ -160,6 +166,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 10
+                <span
+                  className="sr-only"
+                >
+                  global.contribution
+                </span>
               </div>
             </div>
             <div
@@ -189,6 +200,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 27
+                <span
+                  className="sr-only"
+                >
+                  capco.section.metrics.participants
+                </span>
               </div>
             </div>
           </div>
@@ -212,6 +228,7 @@ Array [
       className="sc-bcXGCL cgbMqJ cap-card"
     >
       <img
+        alt=""
         className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
@@ -336,6 +353,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 32
+                <span
+                  className="sr-only"
+                >
+                  project.votes.widget.votes
+                </span>
               </div>
             </div>
             <div
@@ -359,6 +381,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 10
+                <span
+                  className="sr-only"
+                >
+                  global.contribution
+                </span>
               </div>
             </div>
             <div
@@ -388,6 +415,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 27
+                <span
+                  className="sr-only"
+                >
+                  capco.section.metrics.participants
+                </span>
               </div>
             </div>
           </div>
@@ -411,6 +443,7 @@ Array [
       className="sc-bcXGCL cgbMqJ cap-card"
     >
       <img
+        alt=""
         className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh fXeLyi"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
@@ -535,6 +568,11 @@ Array [
                 className="sc-bcXGCL gTlxNI cap-text"
               >
                 32
+                <span
+                  className="sr-only"
+                >
+                  project.votes.widget.votes
+                </span>
               </div>
             </div>
             <div
@@ -558,6 +596,11 @@ Array [
                 className="sc-bcXGCL gTlxNI cap-text"
               >
                 10
+                <span
+                  className="sr-only"
+                >
+                  global.contribution
+                </span>
               </div>
             </div>
             <div
@@ -587,6 +630,11 @@ Array [
                 className="sc-bcXGCL gTlxNI cap-text"
               >
                 27
+                <span
+                  className="sr-only"
+                >
+                  capco.section.metrics.participants
+                </span>
               </div>
             </div>
           </div>
@@ -610,6 +658,7 @@ Array [
       className="sc-bcXGCL cgbMqJ cap-card"
     >
       <img
+        alt=""
         className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
@@ -734,6 +783,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 41
+                <span
+                  className="sr-only"
+                >
+                  project.votes.widget.votes
+                </span>
               </div>
             </div>
             <div
@@ -757,6 +811,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 34
+                <span
+                  className="sr-only"
+                >
+                  global.contribution
+                </span>
               </div>
             </div>
             <div
@@ -786,6 +845,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 20
+                <span
+                  className="sr-only"
+                >
+                  capco.section.metrics.participants
+                </span>
               </div>
             </div>
           </div>
@@ -809,6 +873,7 @@ Array [
       className="sc-bcXGCL cgbMqJ cap-card"
     >
       <img
+        alt=""
         className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
@@ -933,6 +998,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 32
+                <span
+                  className="sr-only"
+                >
+                  project.votes.widget.votes
+                </span>
               </div>
             </div>
             <div
@@ -956,6 +1026,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 10
+                <span
+                  className="sr-only"
+                >
+                  global.contribution
+                </span>
               </div>
             </div>
             <div
@@ -985,6 +1060,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 27
+                <span
+                  className="sr-only"
+                >
+                  capco.section.metrics.participants
+                </span>
               </div>
             </div>
           </div>
@@ -1008,6 +1088,7 @@ Array [
       className="sc-bcXGCL cgbMqJ cap-card"
     >
       <img
+        alt=""
         className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
@@ -1187,6 +1268,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 32
+                <span
+                  className="sr-only"
+                >
+                  project.votes.widget.votes
+                </span>
               </div>
             </div>
             <div
@@ -1210,6 +1296,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 10
+                <span
+                  className="sr-only"
+                >
+                  global.contribution
+                </span>
               </div>
             </div>
             <div
@@ -1239,6 +1330,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 27
+                <span
+                  className="sr-only"
+                >
+                  capco.section.metrics.participants
+                </span>
               </div>
             </div>
           </div>
@@ -1265,6 +1361,7 @@ Array [
         className="sc-bcXGCL ProjectCard___StyledBox2-bXmNrl kKZuhB fCqyfQ"
       >
         <svg
+          aria-hidden={true}
           enableBackground="new -162.5 -162.5 226.5 226.5"
           height="110px"
           role="img"
@@ -1415,6 +1512,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 32
+                <span
+                  className="sr-only"
+                >
+                  project.votes.widget.votes
+                </span>
               </div>
             </div>
             <div
@@ -1438,6 +1540,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 10
+                <span
+                  className="sr-only"
+                >
+                  global.contribution
+                </span>
               </div>
             </div>
             <div
@@ -1467,6 +1574,11 @@ Array [
                 className="sc-bcXGCL fXBhvC cap-text"
               >
                 27
+                <span
+                  className="sr-only"
+                >
+                  capco.section.metrics.participants
+                </span>
               </div>
             </div>
           </div>
@@ -1490,6 +1602,7 @@ Array [
       className="sc-bcXGCL cgbMqJ cap-card"
     >
       <img
+        alt=""
         className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"

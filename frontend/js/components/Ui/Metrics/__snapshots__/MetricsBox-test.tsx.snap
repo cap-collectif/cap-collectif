@@ -8,6 +8,7 @@ exports[`<MetricsBox /> should render data 1`] = `
     className="metrics-number"
   >
     <i
+      aria-hidden="true"
       className="cap-file-1"
     />
     100

@@ -20,6 +20,7 @@ export const OpinionBody = ({ opinion }: Props) => {
     const commentStripped = FormattedText.strip(opinion.comment)
     return (
       <div>
+        <span className="sr-only">{intl.formatMessage({ id: 'proposal-content' })} :</span>
         {opinion.comment !== null && commentStripped && commentStripped.length ? (
           <div>
             <p className="control-label">
@@ -37,7 +38,12 @@ export const OpinionBody = ({ opinion }: Props) => {
     )
   }
 
-  return <OpinionBodyDiffContent opinion={opinion} ariaLabel={ariaLabel} />
+  return (
+    <>
+      <span className="sr-only">{intl.formatMessage({ id: 'proposal-content' })} :</span>
+      <OpinionBodyDiffContent opinion={opinion} ariaLabel={ariaLabel} />
+    </>
+  )
 }
 export default createFragmentContainer(OpinionBody, {
   opinion: graphql`
