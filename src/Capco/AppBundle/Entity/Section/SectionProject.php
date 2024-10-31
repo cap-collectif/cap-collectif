@@ -23,7 +23,7 @@ class SectionProject
      * @ORM\ManyToOne(targetEntity=Section::class, inversedBy="sectionProjects")
      * @ORM\JoinColumn(nullable=false)
      */
-    private Section $section;
+    private ?Section $section = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Project::class)

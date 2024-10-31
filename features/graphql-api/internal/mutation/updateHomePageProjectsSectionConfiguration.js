@@ -77,4 +77,26 @@ describe('mutations.updateHomePageProjectsSectionConfigurationMutation', () => {
       )
     ).resolves.toMatchSnapshot();
   });
+  it('should delete a project with CUSTOM displayMode', async () => {
+    // add custom projects
+    await graphql(
+      UpdateHomePageProjectsSectionConfigurationMutation,
+      { input: inputCustomDisplayMode },
+      'internal_admin',
+    )
+
+    // delete last project
+    await expect(
+      graphql(
+        UpdateHomePageProjectsSectionConfigurationMutation,
+        { input: {
+            ...inputCustomDisplayMode,
+            projects: [
+              "UHJvamVjdDpwcm9qZWN0Rm9vZA==",
+              "UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ=",]
+          } },
+        'internal_admin',
+      )
+    ).resolves.toMatchSnapshot();
+  });
 })
