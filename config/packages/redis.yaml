@@ -5,26 +5,8 @@ snc_redis:
             alias: default
             dsn: '%redis_dsn%'
             logging: '%kernel.debug%'
-        # Session have issues with predis
         session:
             type: phpredis
             alias: session
             dsn: '%redis_dsn%'
             logging: false
-    session:
-        client: session
-        # Other parameters will be ignored, see `SessionWithJsonHandler.php`
-    doctrine:
-        metadata_cache:
-            client: default
-            entity_manager: default
-            document_manager: default
-            namespace: '%redis_prefix%metadata_cache_%kernel.environment%_'
-        result_cache:
-            client: default
-            entity_manager: default
-            namespace: '%redis_prefix%result_cache_%kernel.environment%_'
-        query_cache:
-            client: default
-            entity_manager: default
-            namespace: '%redis_prefix%query_cache_%kernel.environment%_'

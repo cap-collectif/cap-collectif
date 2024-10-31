@@ -306,7 +306,10 @@ services:
         public: true
 
     Capco\AppBundle\Cache\SessionListener:
-        decorates: session_listener
+        arguments:
+            $session: '@session'
+        tags:
+            - { name: kernel.event_listener, event: kernel.response, method: onKernelResponse }
 
     Capco\AppBundle\Mailer\SendInBlue\ContactsApi:
         arguments:
@@ -355,8 +358,9 @@ services:
 
     Capco\UserBundle\Security\SessionWithJsonHandler:
         arguments:
-            $redis: '@snc_redis.default'
+            $redis: '@snc_redis.session'
             $prefix: '%redis_prefix%session_json_new_%kernel.environment%_' # We add env in prefix to allow multi environments sessions in dev
+            $requestStack: '@request_stack'
     Capco\UserBundle\Security\Core\User\CasUserProvider:
         public: true
 

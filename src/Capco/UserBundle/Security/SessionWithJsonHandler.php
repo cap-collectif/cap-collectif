@@ -2,28 +2,36 @@
 
 namespace Capco\UserBundle\Security;
 
-// TODO: We could switch no native Symfony but it does not support locking, and we are using it…
-// Please, one day use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler instead.
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Predis\ClientInterface;
-use Snc\RedisBundle\Session\Storage\Handler\RedisSessionHandler as BaseHandler;
+use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\RequestStack;
+use Symfony\Component\HttpFoundation\Session\Storage\Handler\RedisSessionHandler;
 use Symfony\Component\Security\Core\Security;
 
 /**
- * SessionWithJsonHandler add a Json string used by our NodeJS apps.
- * This way we can read some session data in NodeJS.
+ * SessionWithJsonHandler adds a JSON string used by NodeJS apps.
+ * This allows reading some session data in NodeJS.
  */
-class SessionWithJsonHandler extends BaseHandler
+class SessionWithJsonHandler extends RedisSessionHandler
 {
     public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
     private Security $security;
+    private int $lockTimeout = 5;
+    private string $lockKeyPrefix = 'session_lock_';
+    private \Redis $redis;
+    private int $retryDelay = 10000;
+    private int $maxRetries = 100;
+    private LoggerInterface $logger;
+    private RequestStack $requestStack;
 
     public function __construct(
-        ClientInterface $redis,
+        \Redis $redis,
         Security $security,
-        array $options = [],
-        string $prefix
+        RequestStack $requestStack,
+        string $prefix,
+        LoggerInterface $logger,
+        array $options = []
     ) {
         $options['ttl'] = 1209600; // This is two weeks
         $options['prefix'] = $prefix;
@@ -34,109 +42,125 @@ class SessionWithJsonHandler extends BaseHandler
         // so we are stuck until we fix this…
         //
         // TODO https://github.com/cap-collectif/platform/issues/12189
-        $locking = true;
 
-        parent::__construct($redis, $options, $prefix, $locking);
+        parent::__construct($redis, $options);
         $this->security = $security;
+        $this->redis = $redis;
+        $this->logger = $logger;
+        $this->requestStack = $requestStack;
     }
 
-    /**
-     * $sessionId: string
-     * $data: string.
-     *
-     * We must return 1 to avoid session_close errors
-     *
-     * @param mixed $sessionId
-     * @param mixed $data
-     *
-     * @return bool
-     */
-    public function write($sessionId, $data)
+    public function write($sessionId, $data): bool
     {
+        $request = $this->requestStack->getCurrentRequest();
+
+        if ($request && str_starts_with($request->getPathInfo(), '/_profiler')) {
+            $this->logger->info('Skipping session write for WDT pages.');
+
+            return true;
+        }
+
+        $this->acquireLock($sessionId);
         $viewer = $this->getUser();
 
-        return parent::write($sessionId, $this->encode($data, $viewer));
+        $encodedData = $this->encode($data, $viewer);
+        $result = parent::write($sessionId, $encodedData);
+
+        $this->releaseLock($sessionId);
+
+        return $result;
     }
 
-    public function getClient(): ClientInterface
+    public function read($sessionId): string
     {
-        return $this->redis;
-    }
+        $this->acquireLock($sessionId);
 
-    public function getRedisKey($key)
-    {
-        return parent::getRedisKey($key);
-    }
-
-    /**
-     * $sessionId: string.
-     *
-     * @param mixed $sessionId
-     *
-     * @return string
-     */
-    public function read($sessionId)
-    {
         $encodedSession = parent::read($sessionId);
+        $decodedSession = $this->decode($encodedSession);
 
-        return $this->decode($encodedSession);
+        $this->releaseLock($sessionId);
+
+        return $decodedSession;
     }
 
     public function encode(string $rawPhpSession, ?User $viewer): string
     {
         $encodedSession = $rawPhpSession . self::SEPARATOR;
+
         if ($viewer) {
-            $encodedSession .= json_encode([
-                'viewer' => [
-                    'email' => $viewer->getEmail(),
-                    'username' => $viewer->getUsername(),
-                    'id' => GlobalId::toGlobalId('User', $viewer->getId()),
-                    'isAdmin' => $viewer->isAdmin(),
-                    'isSuperAdmin' => $viewer->isSuperAdmin(),
-                    'isProjectAdmin' => $viewer->isProjectAdmin(),
-                    'isAdminOrganization' => $viewer->isAdminOrganization(),
-                    'isOrganizationMember' => $viewer->isOrganizationMember(),
-                    'isMediator' => $viewer->isMediator(),
-                    'organization' => $viewer->getMemberOfOrganizations()->isEmpty()
-                        ? null
-                        : GlobalId::toGlobalId(
-                            'Organization',
-                            $viewer
-                                ->getMemberOfOrganizations()
-                                ->first()
-                                ->getOrganization()
-                                ->getId()
-                        ),
-                ],
-            ]);
+            $viewerData = [
+                'email' => $viewer->getEmail(),
+                'username' => $viewer->getUsername(),
+                'id' => GlobalId::toGlobalId('User', $viewer->getId()),
+                'isAdmin' => $viewer->isAdmin(),
+                'isSuperAdmin' => $viewer->isSuperAdmin(),
+                'isProjectAdmin' => $viewer->isProjectAdmin(),
+                'isAdminOrganization' => $viewer->isAdminOrganization(),
+                'isOrganizationMember' => $viewer->isOrganizationMember(),
+                'isMediator' => $viewer->isMediator(),
+                'organization' => $viewer->getMemberOfOrganizations()->isEmpty()
+                    ? null
+                    : GlobalId::toGlobalId(
+                        'Organization',
+                        $viewer->getMemberOfOrganizations()->first()->getOrganization()->getId()
+                    ),
+            ];
+
+            $encodedSession .= json_encode(['viewer' => $viewerData], \JSON_THROW_ON_ERROR);
         }
 
         return $encodedSession;
     }
 
+    /**
+     * Decode session data by splitting it from the JSON part.
+     */
     public function decode(string $encodedSession): string
     {
-        if (0 == \strlen($encodedSession)) {
+        if (empty($encodedSession)) {
             return '';
         }
 
         $decodedArray = explode(self::SEPARATOR, $encodedSession);
 
-        if (!$decodedArray || !isset($decodedArray[0])) {
-            return '';
-        }
-
-        return $decodedArray[0];
+        return $decodedArray[0] ?? '';
     }
 
-    // See: https://symfony.com/doc/current/session/proxy_examples.html#read-only-guest-sessions
     private function getUser(): ?User
     {
         $user = $this->security->getUser();
-        if ($user instanceof User) {
-            return $user;
-        }
 
-        return null;
+        return $user instanceof User ? $user : null;
+    }
+
+    /**
+     * This function attempts to acquire a lock on a specific session by setting a unique key in Redis.
+     * The lock is necessary to prevent multiple processes or requests from concurrently writing to the same session,
+     * which could cause race conditions or data inconsistencies.
+     *
+     * - NX: The key will only be set if it does not already exist. This ensures that the lock is only acquired
+     *       if no other process has already taken it.
+     * - EX: The lock will automatically expire after a certain period (in seconds). Here, $this->lockTimeout defines
+     *       how long the lock remains valid before it is automatically released.
+     */
+    private function acquireLock(string $sessionId): void
+    {
+        $lockKey = $this->lockKeyPrefix . $sessionId;
+        $attempt = 0;
+
+        while (!$this->redis->set($lockKey, 1, ['NX', 'EX' => $this->lockTimeout])) {
+            if ($attempt >= $this->maxRetries) {
+                throw new \RuntimeException('Unable to acquire session lock after multiple retries.');
+            }
+
+            usleep($this->retryDelay);
+            ++$attempt;
+        }
+    }
+
+    private function releaseLock(string $sessionId): void
+    {
+        $lockKey = $this->lockKeyPrefix . $sessionId;
+        $this->redis->del($lockKey);
     }
 }

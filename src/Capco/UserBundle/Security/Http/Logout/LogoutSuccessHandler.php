@@ -7,6 +7,7 @@ use Capco\UserBundle\Security\Http\Logout\Handler\RedirectResponseWithRequest;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
@@ -21,23 +22,29 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 
     private TokenStorageInterface $tokenStorage;
     private RouterInterface $router;
+    private KernelInterface $kernel;
 
     public function __construct(
         array $handlers,
         TokenStorageInterface $tokenStorage,
-        RouterInterface $router
+        RouterInterface $router,
+        KernelInterface $kernel
     ) {
         $this->handlers = $handlers;
         $this->tokenStorage = $tokenStorage;
         $this->router = $router;
+        $this->kernel = $kernel;
     }
 
-    public function onLogoutSuccess(Request $request)
+    public function onLogoutSuccess(Request $request): RedirectResponse
     {
         $currentToken = $this->tokenStorage->getToken();
         $theToken = $request->getSession()->get('theToken');
 
         $url = $request->headers->get('referer') ?? $this->router->generate('app_homepage');
+        if ('dev' === $this->kernel->getEnvironment() && str_contains($request->headers->get('referer'), 'https://capco.dev/admin-next/')) {
+            $url = $this->router->generate('app_homepage');
+        }
         self::setOauthTokenFromSession($currentToken, $theToken);
         $responseWithRequest = new RedirectResponseWithRequest(
             $request,
