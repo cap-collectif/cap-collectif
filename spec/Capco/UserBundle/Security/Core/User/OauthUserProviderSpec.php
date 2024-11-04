@@ -534,6 +534,27 @@ class OauthUserProviderSpec extends ObjectBehavior
         $this->shouldThrow(new FranceConnectAuthenticationException('Erreur lors de la connexion à FranceConnect'))->during('verifyFranceConnectStateAndNonce', [$response]);
     }
 
+    public function it_throws_exception_when_franceconnect_token_has_expired(
+        UserResponseInterface $response,
+        FranceConnectResourceOwner $ressourceOwner,
+        TranslatorInterface $translator,
+        OAuthToken $OAuthToken,
+        RedisCache $redisCache,
+        ItemInterface $cacheItem
+    ) {
+        $this->generateGenericFranceConnectResponse($response, $ressourceOwner, $OAuthToken, $redisCache, $cacheItem, $translator);
+
+        $data = [
+            'status' => 'fail',
+            'message' => 'token_not_found_or_expired',
+        ];
+        $response->getData()->willReturn($data);
+
+        $translator->trans('france-connect-expired-token', Argument::type('array'), 'CapcoAppBundle')->willReturn('Erreur lors de la connexion à FranceConnect. Attention, vous disposez de seulement 60 secondes pour valider l\'association à FranceConnect');
+
+        $this->shouldThrow(new FranceConnectAuthenticationException('Erreur lors de la connexion à FranceConnect'))->during('verifyFranceConnectResponse', [$response]);
+    }
+
     private function generateGenericOpenIdResponse(
         UserResponseInterface $response,
         OpenIDResourceOwner $ressourceOwner
@@ -600,6 +621,7 @@ class OauthUserProviderSpec extends ObjectBehavior
         $response->getLastName()->willReturn('GoldMan');
         $response->getFirstName()->willReturn('Jean Jacques');
         $response->getOAuthToken()->willReturn($OAuthToken);
+        $response->getExpiresIn()->willReturn(60);
         $state = base64_encode(json_encode((['csrf_token' => '12345'])));
         $nonce = base64_encode(json_encode(['nonce' => '54321']));
         $token = ['id_token' => $state . '.' . $nonce];

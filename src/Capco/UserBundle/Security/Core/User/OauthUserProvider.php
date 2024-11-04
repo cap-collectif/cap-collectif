@@ -86,6 +86,14 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
 
     public function connect(UserInterface $user, UserResponseInterface $response): void
     {
+        if ($response->getResourceOwner() instanceof FranceConnectResourceOwner) {
+            try {
+                $this->verifyFranceConnectResponse($response);
+            } catch (FranceConnectAuthenticationException $e) {
+                return;
+            }
+        }
+
         $email = $response->getEmail() ?: $response->getUsername();
         //on connect - get the access token and the user ID
         $service = $response->getResourceOwner()->getName();
@@ -184,6 +192,43 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         }
 
         return $user;
+    }
+
+    /**
+     * @throws FranceConnectAuthenticationException
+     */
+    public function verifyFranceConnectResponse(UserResponseInterface $response): void
+    {
+        $responseData = $response->getData();
+        $service = $response->getResourceOwner()->getName();
+
+        if ($responseData && isset($responseData['status']) && 'fail' === $responseData['status']) {
+            $errorMessage = $responseData['message'];
+
+            switch ($errorMessage) {
+                case 'token_not_found_or_expired':
+                    $message = $this->translator->trans(
+                        'france-connect-expired-token',
+                        ['n' => ($response->getExpiresIn())],
+                        'CapcoAppBundle'
+                    );
+
+                    break;
+
+                default:
+                    $this->logger->error(sprintf('Unexpected error while logging with "%service": "%s"', $service, $errorMessage));
+
+                    $message = $this->translator->trans(
+                        'france-connect-connection-error',
+                        [],
+                        'CapcoAppBundle'
+                    );
+            }
+
+            $this->flashBag->add('danger', $message);
+
+            throw new FranceConnectAuthenticationException($this->translator->trans('france-connect-connection-error', [], 'CapcoAppBundle'));
+        }
     }
 
     /**
