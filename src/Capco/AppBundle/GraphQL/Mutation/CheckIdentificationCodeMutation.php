@@ -16,7 +16,7 @@ class CheckIdentificationCodeMutation implements MutationInterface
     use MutationTrait;
 
     public const VIEWER_ALREADY_HAS_A_CODE = 'VIEWER_ALREADY_HAS_A_CODE';
-    public const CODE_MINIMAL_LENGTH = 'CODE_MINIMAL_LENGTH';
+    public const CODE_MINIMAL_LENGTH = 8;
     public const RATE_LIMITER_ACTION = 'CheckIdentificationCode';
     public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 

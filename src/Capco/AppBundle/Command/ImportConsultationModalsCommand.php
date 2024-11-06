@@ -17,10 +17,10 @@ class ImportConsultationModalsCommand extends Command
 {
     private $container;
 
-    public function __construct(?string $name = null, ContainerInterface $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure()

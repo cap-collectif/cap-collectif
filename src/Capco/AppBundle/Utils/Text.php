@@ -29,7 +29,7 @@ final class Text
             str_shuffle(
                 str_repeat(
                     $x = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ',
-                    ceil($length / \strlen($x))
+                    (int) ceil($length / \strlen($x))
                 )
             ),
             1,
@@ -75,7 +75,7 @@ final class Text
 
     public static function cleanNewline($value)
     {
-        return \is_bool($value) ? $value : str_replace("\n", ' ', $value);
+        return \is_bool($value) ? $value : str_replace("\n", ' ', $value ?? '');
     }
 
     public static function isJSON(string $value): bool

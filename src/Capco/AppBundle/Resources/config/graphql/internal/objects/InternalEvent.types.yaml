@@ -1,12 +1,12 @@
 InternalEvent:
     type: object
     inherits:
-        - PreviewEvent
-        - Commentable
         - InternalPrimaryKey
-        - InternalTimeRangeable
         - InternalOwnerable
         - Contribution
+        - Commentable
+        - PreviewEvent
+        - InternalTimeRangeable
     config:
         description: 'An event.'
         interfaces:

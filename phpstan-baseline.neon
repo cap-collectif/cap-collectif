@@ -1301,7 +1301,7 @@ parameters:
 			path: src/Capco/AdminBundle/Form/Extension/ModelTypeExtension.php
 
 		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Form\\\\Extension\\\\ModelTypeExtension\\:\\:getExtendedTypes\\(\\) has no return type specified\\.$#"
+			message: "#^Method Capco\\\\AdminBundle\\\\Form\\\\Extension\\\\ModelTypeExtension\\:\\:getExtendedTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Form/Extension/ModelTypeExtension.php
 
@@ -4226,7 +4226,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Parameter \\#3 \\$length of function substr expects int, int\\<0, max\\>\\|false given\\.$#"
+			message: "#^Parameter \\#3 \\$length of function substr expects int\\|null, int\\<0, max\\>\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -4526,11 +4526,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/CommandContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\CommandContext\\:\\:iShouldSee\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\CommandContext\\:\\:run\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/CommandContext.php
@@ -4551,27 +4546,27 @@ parameters:
 			path: src/Capco/AppBundle/Behat/CommandContext.php
 
 		-
-			message: "#^Parameter \\#1 \\$fp of function fclose expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$fp of function feof expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$fp of function fread expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$fp of function fseek expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
 			message: "#^Parameter \\#1 \\$stream of class Symfony\\\\Component\\\\Console\\\\Output\\\\StreamOutput constructor expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/CommandContext.php
+
+		-
+			message: "#^Parameter \\#1 \\$stream of function fclose expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/CommandContext.php
+
+		-
+			message: "#^Parameter \\#1 \\$stream of function feof expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/CommandContext.php
+
+		-
+			message: "#^Parameter \\#1 \\$stream of function fread expects resource, resource\\|false given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/CommandContext.php
+
+		-
+			message: "#^Parameter \\#1 \\$stream of function fseek expects resource, resource\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/CommandContext.php
 
@@ -4726,8 +4721,8 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ExportContext.php
 
 		-
-			message: "#^Parameter \\#1 \\$expectedHeader of method Capco\\\\AppBundle\\\\Behat\\\\ExportContext\\:\\:getCleanOutput\\(\\) expects array, array\\<int, string\\>\\|false given\\.$#"
-			count: 2
+			message: "#^Parameter \\#1 \\$separator of function explode expects non\\-empty\\-string, string given\\.$#"
+			count: 3
 			path: src/Capco/AppBundle/Behat/ExportContext.php
 
 		-
@@ -4791,12 +4786,12 @@ parameters:
 			path: src/Capco/AppBundle/Behat/FileSystemContext.php
 
 		-
-			message: "#^Parameter \\#1 \\$haystack of function str_ends_with expects string\\|null, string\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$haystack of function str_ends_with expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/FileSystemContext.php
 
 		-
-			message: "#^Parameter \\#1 \\$haystack of function str_starts_with expects string\\|null, string\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$haystack of function str_starts_with expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/FileSystemContext.php
 
@@ -5001,17 +4996,17 @@ parameters:
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
-			message: "#^Parameter \\#1 \\$fp of function fclose expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$stream of function fclose expects resource, resource\\|false given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
-			message: "#^Parameter \\#1 \\$fp of function fwrite expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$stream of function fwrite expects resource, resource\\|false given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
-			message: "#^Parameter \\#2 \\$needle of function strpos expects int\\|string, string\\|false given\\.$#"
+			message: "#^Parameter \\#2 \\$needle of function strpos expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
@@ -10591,7 +10586,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/Storage/BehatStorage.php
 
 		-
-			message: "#^Parameter \\#1 \\$function of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{Capco\\\\AppBundle\\\\Behat\\\\Storage\\\\BehatStorage, non\\-falsy\\-string\\} given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{Capco\\\\AppBundle\\\\Behat\\\\Storage\\\\BehatStorage, non\\-falsy\\-string\\} given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/Storage/BehatStorage.php
 
@@ -10881,16 +10876,6 @@ parameters:
 			path: src/Capco/AppBundle/Cache/RedisCache.php
 
 		-
-			message: "#^Class Capco\\\\AppBundle\\\\Cache\\\\SessionListener extends @final class Symfony\\\\Component\\\\HttpKernel\\\\EventListener\\\\SessionListener\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Cache/SessionListener.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Cache\\\\SessionListener\\:\\:onKernelResponse\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Cache/SessionListener.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\CapcoAppBundle\\:\\:build\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/CapcoAppBundle.php
@@ -10931,7 +10916,7 @@ parameters:
 			path: src/Capco/AppBundle/Client/CloudflareElasticClient.php
 
 		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$var_names of function compact expects array\\|string, DateTimeInterface given\\.$#"
+			message: "#^Parameter \\#1 \\$var_name of function compact expects array\\|string, DateTimeInterface given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Client/CloudflareElasticClient.php
 
@@ -11086,11 +11071,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/CreateAccountsFromEmailsCommand.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateAccountsFromEmailsCommand.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromConsultationStepCommand\\:\\:addContributionArgumentRow\\(\\) has parameter \\$argument with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateCsvFromConsultationStepCommand.php
@@ -11158,11 +11138,6 @@ parameters:
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromConsultationStepCommand\\:\\:recurviselySearchValue\\(\\) has parameter \\$val with no type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Command/CreateCsvFromConsultationStepCommand.php
-
-		-
-			message: "#^Parameter \\#2 \\$str of function explode expects string, string\\|false given\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/Command/CreateCsvFromConsultationStepCommand.php
 
 		-
@@ -12271,27 +12246,22 @@ parameters:
 			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
 
 		-
-			message: "#^Parameter \\#1 \\$data of function bin2hex expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
-
-		-
-			message: "#^Parameter \\#1 \\$fp of function fclose expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$stream of function fclose expects resource, resource\\|false given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
 
 		-
-			message: "#^Parameter \\#1 \\$fp of function fgetcsv expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$stream of function fgetcsv expects resource, resource\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
 
 		-
-			message: "#^Parameter \\#1 \\$fp of function fputcsv expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$stream of function fputcsv expects resource, resource\\|false given\\.$#"
 			count: 5
 			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
 
 		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, array\\<int, string\\>\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, array\\<int, string\\>\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
 
@@ -12561,7 +12531,7 @@ parameters:
 			path: src/Capco/AppBundle/Command/Maker/AbstractMaker.php
 
 		-
-			message: "#^Parameter \\#1 \\$argument of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
+			message: "#^Parameter \\#1 \\$objectOrClass of class ReflectionClass constructor expects class\\-string\\<T of object\\>\\|T of object, string given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Maker/AbstractMaker.php
 
@@ -12661,12 +12631,12 @@ parameters:
 			path: src/Capco/AppBundle/Command/Maker/Makers/MakeProcessor.php
 
 		-
-			message: "#^Parameter \\#1 \\$stack of function array_shift expects array, array\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$array of function array_shift expects array, array\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Maker/NamespaceResolver.php
 
 		-
-			message: "#^Parameter \\#2 \\$input of function preg_grep expects array, array\\<int, string\\>\\|false given\\.$#"
+			message: "#^Parameter \\#2 \\$array of function preg_grep expects array, array\\<int, string\\>\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Maker/NamespaceResolver.php
 
@@ -13282,11 +13252,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\BaseNormalizer\\:\\:translateHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Serializer/BaseNormalizer.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\BaseNormalizer\\:\\:translateHeaders\\(\\) should return array but returns array\\<string, mixed\\>\\|false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Serializer/BaseNormalizer.php
 
@@ -14131,7 +14096,7 @@ parameters:
 			path: src/Capco/AppBundle/DTO/Analytics/AnalyticsContributor.php
 
 		-
-			message: "#^Parameter \\#1 \\$input of function array_slice expects array, iterable\\<Capco\\\\AppBundle\\\\DTO\\\\Analytics\\\\AnalyticsContributorContribution\\> given\\.$#"
+			message: "#^Parameter \\#1 \\$array of function array_slice expects array, iterable\\<Capco\\\\AppBundle\\\\DTO\\\\Analytics\\\\AnalyticsContributorContribution\\> given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/DTO/Analytics/AnalyticsContributor.php
 
@@ -14273,6 +14238,11 @@ parameters:
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\DTO\\\\GoogleMapsAddress\\:\\:setTypes\\(\\) has parameter \\$types with no value type specified in iterable type array\\.$#"
 			count: 1
+			path: src/Capco/AppBundle/DTO/GoogleMapsAddress.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, array\\|bool\\|float\\|int\\|object\\|string\\|null given\\.$#"
+			count: 2
 			path: src/Capco/AppBundle/DTO/GoogleMapsAddress.php
 
 		-
@@ -14701,7 +14671,7 @@ parameters:
 			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchDoctrineListener.php
 
 		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, iterable given\\.$#"
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchDoctrineListener.php
 
@@ -14926,7 +14896,7 @@ parameters:
 			path: src/Capco/AppBundle/Elasticsearch/Indexer.php
 
 		-
-			message: "#^Parameter \\#1 \\$function of function call_user_func expects callable\\(\\)\\: mixed, non\\-falsy\\-string given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, non\\-falsy\\-string given\\.$#"
 			count: 3
 			path: src/Capco/AppBundle/Elasticsearch/Indexer.php
 
@@ -14982,16 +14952,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Elasticsearch\\\\Sanitizer\\:\\:escape\\(\\) has parameter \\$query with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Elasticsearch/Sanitizer.php
-
-		-
-			message: "#^Parameter \\#1 \\$arr1 of function array_merge expects array, array\\<string, string\\>\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Elasticsearch/Sanitizer.php
-
-		-
-			message: "#^Parameter \\#2 \\.\\.\\.\\$args of function array_merge expects array, array\\<string, string\\>\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Elasticsearch/Sanitizer.php
 
@@ -26156,7 +26116,7 @@ parameters:
 			path: src/Capco/AppBundle/Form/Persister/ProjectPersister.php
 
 		-
-			message: "#^Parameter \\#2 \\$arr2 of function array_diff expects array, iterable given\\.$#"
+			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_diff expects array, iterable given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/Persister/ProjectPersister.php
 
@@ -27202,11 +27162,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\BatchDataLoader\\:\\:serializeKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/DataLoader/BatchDataLoader.php
-
-		-
-			message: "#^PHPDoc tag @throws with type Psr\\\\Cache\\\\InvalidArgumentException is not subtype of Throwable$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/BatchDataLoader.php
 
@@ -29051,11 +29006,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeVersionMutation.php
 
 		-
-			message: "#^Comparison operation \"\\<\" between int\\<0, max\\> and 'CODE_MINIMAL_LENGTH' is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CheckIdentificationCodeMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CheckIdentificationCodeMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CheckIdentificationCodeMutation.php
@@ -29201,12 +29151,12 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateCASSSOConfigurationMutation.php
 
 		-
-			message: "#^Parameter \\#1 \\$filename of function is_dir expects string, string\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$directory of function mkdir expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateCASSSOConfigurationMutation.php
 
 		-
-			message: "#^Parameter \\#1 \\$pathname of function mkdir expects string, string\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$filename of function is_dir expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateCASSSOConfigurationMutation.php
 
@@ -29431,7 +29381,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
 
 		-
-			message: "#^Parameter \\#2 \\$options of function json_encode expects int, true given\\.$#"
+			message: "#^Parameter \\#2 \\$flags of function json_encode expects int, true given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
 
@@ -31951,7 +31901,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateNewProjectMutation.php
 
 		-
-			message: "#^Parameter \\#2 \\$arr2 of function array_diff expects array, iterable given\\.$#"
+			message: "#^Parameter \\#2 \\.\\.\\.\\$arrays of function array_diff expects array, iterable given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateNewProjectMutation.php
 
@@ -34431,7 +34381,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalResponsesResolver.php
 
 		-
-			message: "#^Parameter \\#1 \\$array_arg of function usort contains unresolvable type\\.$#"
+			message: "#^Parameter \\#1 \\$array of function usort contains unresolvable type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalResponsesResolver.php
 
@@ -35601,7 +35551,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Reply/ReplyResponsesResolver.php
 
 		-
-			message: "#^Parameter \\#1 \\$array_arg of function usort contains unresolvable type\\.$#"
+			message: "#^Parameter \\#1 \\$array of function usort contains unresolvable type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Reply/ReplyResponsesResolver.php
 
@@ -35691,7 +35641,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Reportable/ReportableReportingResolver.php
 
 		-
-			message: "#^Parameter \\#1 \\$var_array of function extract is passed by reference, so it expects variables only\\.$#"
+			message: "#^Parameter \\#1 \\$array of function extract is passed by reference, so it expects variables only\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Reportable/ReportableReportingResolver.php
 
@@ -37906,7 +37856,7 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/MailerFactory.php
 
 		-
-			message: "#^Parameter \\#1 \\$function of function call_user_func expects callable\\(\\)\\: mixed, non\\-falsy\\-string given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of function call_user_func expects callable\\(\\)\\: mixed, non\\-falsy\\-string given\\.$#"
 			count: 3
 			path: src/Capco/AppBundle/Mailer/MailerFactory.php
 
@@ -40346,7 +40296,7 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/Transport/MandrillTransport.php
 
 		-
-			message: "#^Parameter \\#2 \\$str of function explode expects string, int\\<min, \\-1\\>\\|int\\<1, max\\>\\|string given\\.$#"
+			message: "#^Parameter \\#2 \\$string of function explode expects string, int\\<min, \\-1\\>\\|int\\<1, max\\>\\|string given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Transport/MandrillTransport.php
 
@@ -41941,17 +41891,17 @@ parameters:
 			path: src/Capco/AppBundle/RedirectionIO/Client.php
 
 		-
-			message: "#^Parameter \\#1 \\$function of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{\\$this\\(Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\), mixed\\} given\\.$#"
+			message: "#^Parameter \\#1 \\$callback of function call_user_func_array expects callable\\(\\)\\: mixed, array\\{\\$this\\(Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\), mixed\\} given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/RedirectionIO/Client.php
 
 		-
-			message: "#^Parameter \\#1 \\$socket of function stream_set_blocking expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$stream of function stream_set_blocking expects resource, resource\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/RedirectionIO/Client.php
 
 		-
-			message: "#^Parameter \\#2 \\$mode of function stream_set_blocking expects bool, int given\\.$#"
+			message: "#^Parameter \\#2 \\$enable of function stream_set_blocking expects bool, int given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/RedirectionIO/Client.php
 
@@ -42082,6 +42032,11 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\RedirectionIO\\\\RequestResponseListener\\:\\:\\$toggleManager has no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
+
+		-
+			message: "#^Strict comparison using \\=\\=\\= between false and string will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
 
@@ -46536,7 +46491,7 @@ parameters:
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of function strip_tags expects string, array\\<int, string\\>\\|string given\\.$#"
+			message: "#^Parameter \\#1 \\$string of function strip_tags expects string, array\\<int, string\\>\\|string given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
 
@@ -47076,12 +47031,12 @@ parameters:
 			path: src/Capco/AppBundle/Router/DefaultPatternGenerationStrategy.php
 
 		-
-			message: "#^Parameter \\#1 \\$variable_representation of function unserialize expects string, string\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$data of function unserialize expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Router/DefaultPatternGenerationStrategy.php
 
 		-
-			message: "#^Parameter \\#3 \\$length of function substr expects int, int\\<0, max\\>\\|false given\\.$#"
+			message: "#^Parameter \\#3 \\$length of function substr expects int\\|null, int\\<0, max\\>\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Router/DefaultPatternGenerationStrategy.php
 
@@ -47127,11 +47082,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Router\\\\I18nRouter\\:\\:checkMatchWithLocaleRoutes\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Router/I18nRouter.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Router\\\\I18nRouter\\:\\:formatDefaultLocaleUrl\\(\\) should return string\\|null but returns string\\|false\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Router/I18nRouter.php
 
@@ -47231,7 +47181,7 @@ parameters:
 			path: src/Capco/AppBundle/Search/AnalyticsSearch.php
 
 		-
-			message: "#^Parameter \\#1 \\.\\.\\.\\$var_names of function compact expects array\\|string, DateTimeInterface given\\.$#"
+			message: "#^Parameter \\#1 \\$var_name of function compact expects array\\|string, DateTimeInterface given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Search/AnalyticsSearch.php
 
@@ -47321,7 +47271,7 @@ parameters:
 			path: src/Capco/AppBundle/Search/ContributionSearch.php
 
 		-
-			message: "#^Parameter \\#1 \\$str of function strtoupper expects string, int\\|string given\\.$#"
+			message: "#^Parameter \\#1 \\$string of function strtoupper expects string, int\\|string given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Search/ContributionSearch.php
 
@@ -48246,6 +48196,11 @@ parameters:
 			path: src/Capco/AppBundle/Service/SmsAnalyticsHelper.php
 
 		-
+			message: "#^Parameter \\#1 \\$separator of function explode expects non\\-empty\\-string, string given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Service/SocialNetworksUrlSanitizer.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\SiteColor\\\\Resolver\\:\\:getValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/SiteColor/Resolver.php
@@ -48356,17 +48311,17 @@ parameters:
 			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
 
 		-
-			message: "#^Parameter \\#1 \\$ch of function curl_close expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$handle of function curl_close expects CurlHandle, CurlHandle\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
 
 		-
-			message: "#^Parameter \\#1 \\$ch of function curl_exec expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$handle of function curl_exec expects CurlHandle, CurlHandle\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
 
 		-
-			message: "#^Parameter \\#1 \\$ch of function curl_setopt expects resource, resource\\|false given\\.$#"
+			message: "#^Parameter \\#1 \\$handle of function curl_setopt expects CurlHandle, CurlHandle\\|false given\\.$#"
 			count: 4
 			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
 
@@ -48611,6 +48566,11 @@ parameters:
 			path: src/Capco/AppBundle/Translator/NoTranslator.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\BrowserLanguageRuntime', 'getBrowserLanguage'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/BrowserLanguageExtension.php
+
+		-
 			message: "#^Left side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/BrowserLanguageRuntime.php
@@ -48619,6 +48579,11 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\BrowserLanguageRuntime\\:\\:getBrowserLanguage\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/BrowserLanguageRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ChooseLanguageMessageRuntime', 'getLocaleChoiceTran…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ChooseLanguageMessageExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\ChooseLanguageMessageRuntime\\:\\:getLocaleChoiceTranslations\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -48639,6 +48604,36 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\ChooseLanguageMessageRuntime\\:\\:\\$translator has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/ChooseLanguageMessageRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\CommentRuntime', 'canAddCommentOnObje…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/CommentExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\CommentRuntime', 'canShowCommentOnObj…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/CommentExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\CommentRuntime', 'getProposalComments…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/CommentExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\CommentRuntime', 'getRelatedObject'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/CommentExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\CommentRuntime', 'getRelatedObjectAdm…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/CommentExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\CommentRuntime', 'getRelatedObjectUrl'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/CommentExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\CommentRuntime\\:\\:getRelatedObject\\(\\) has no return type specified\\.$#"
@@ -48716,9 +48711,19 @@ parameters:
 			path: src/Capco/AppBundle/Twig/DateExtension.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\DefaultAvatarRuntime', 'getDefaultAvatarIfN…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/DefaultAvatarExtension.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\DefaultAvatarRuntime\\:\\:\\$resolver has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/DefaultAvatarRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\DefaultLanguageRuntime', 'getDefaultLocale'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/DefaultLanguageExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\EventExtension\\:\\:isRegistered\\(\\) has no return type specified\\.$#"
@@ -48751,6 +48756,21 @@ parameters:
 			path: src/Capco/AppBundle/Twig/EventExtension.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\FontRuntime', 'getAllFonts'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/FontExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\FontRuntime', 'getCurrentFont'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/FontExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\FontRuntime', 'getCustomActiveFonts'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/FontExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\FontRuntime\\:\\:getAllFonts\\(\\) should return array\\<Capco\\\\AppBundle\\\\Entity\\\\Font\\> but returns iterable\\<Capco\\\\AppBundle\\\\Entity\\\\Font\\>\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/FontRuntime.php
@@ -48764,6 +48784,26 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\FontRuntime\\:\\:getCustomActiveFonts\\(\\) should return array\\<Capco\\\\AppBundle\\\\Entity\\\\Font\\> but returns iterable\\<Capco\\\\AppBundle\\\\Entity\\\\Font\\>\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/FontRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\FooterRuntime', 'getFooterLinks'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/FooterExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\FooterRuntime', 'getFooterSocialNetw…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/FooterExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\FooterRuntime', 'getLegalsPages'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/FooterExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\FooterRuntime', 'isNextLinkEnabled'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/FooterExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\FooterRuntime\\:\\:getFooterLinks\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -48826,6 +48866,31 @@ parameters:
 			path: src/Capco/AppBundle/Twig/FooterRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\GraphQLRuntime', 'getCollectSteps'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/GraphQLExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\GraphQLRuntime', 'getConsultations'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/GraphQLExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\GraphQLRuntime', 'getOffsetToCursor'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/GraphQLExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\GraphQLRuntime', 'getProjects'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/GraphQLExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\GraphQLRuntime', 'getQuestionnaires'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/GraphQLExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\GraphQLRuntime\\:\\:getCollectSteps\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/GraphQLRuntime.php
@@ -48866,6 +48931,16 @@ parameters:
 			path: src/Capco/AppBundle/Twig/GraphQLRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HighlightedContentRuntime', 'isFirstHighlightedC…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HighlightedContentExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HighlightedContentRuntime', 'isLastHighlightedCo…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HighlightedContentExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\HighlightedContentRuntime\\:\\:isFirstHighlightedContent\\(\\) has parameter \\$content with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/HighlightedContentRuntime.php
@@ -48881,6 +48956,56 @@ parameters:
 			path: src/Capco/AppBundle/Twig/HighlightedContentRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getCustomProjects'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getHighlightedConte…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getLastPosts'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getLastProjects'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getLastProposals'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getLastThemes'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getLastVideos'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getMetricsSection'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getProjectsMap'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\HomepageSectionRuntime', 'getSocialNetworks'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/HomepageSectionExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\InstanceOfExtension\\:\\:isInstanceof\\(\\) has parameter \\$instance with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/InstanceOfExtension.php
@@ -48889,6 +49014,11 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\InstanceOfExtension\\:\\:isInstanceof\\(\\) has parameter \\$object with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/InstanceOfExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\LocaleLanguageRuntime', 'getLocaleMap'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/LocaleLanguageExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\LocaleLanguageRuntime\\:\\:getLocaleMap\\(\\) has parameter \\$viewer with no type specified\\.$#"
@@ -48901,6 +49031,11 @@ parameters:
 			path: src/Capco/AppBundle/Twig/LocaleLanguageRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\MenuLinkRuntime', 'getMenuUrl'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/MenuLinkExtension.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\MenuLinkRuntime\\:\\:\\$resolver has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/MenuLinkRuntime.php
@@ -48909,6 +49044,11 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\MenuLinkRuntime\\:\\:\\$router has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/MenuLinkRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\NavigationRuntime', 'getHeaders'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/NavigationExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\NavigationRuntime\\:\\:getHeaders\\(\\) has parameter \\$currentUrl with no type specified\\.$#"
@@ -48924,6 +49064,36 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\NavigationRuntime\\:\\:\\$menuResolver has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/NavigationRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ParametersRuntime', 'getAvailableLocales'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ParametersExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ParametersRuntime', 'getFeatures'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ParametersExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ParametersRuntime', 'getFeaturesFlagsFor…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ParametersExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ParametersRuntime', 'getHasFeatureEnabled'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ParametersExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ParametersRuntime', 'getIsFeatureEnabled'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ParametersExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ParametersRuntime', 'getSiteParameters'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ParametersExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\ParametersRuntime\\:\\:getAvailableLocales\\(\\) has parameter \\$viewer with no type specified\\.$#"
@@ -48966,9 +49136,29 @@ parameters:
 			path: src/Capco/AppBundle/Twig/ParametersRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ProjectLabelMetaRuntime', 'getProjectTypeMetaL…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ProjectLabelMetaExtension.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\ProjectLabelMetaRuntime\\:\\:\\$translator has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/ProjectLabelMetaRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ReactIntlRuntime', 'getLocale'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ReactIntlExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ReactIntlRuntime', 'getTimeZone'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ReactIntlExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ReactRenderRuntime', 'reactRenderIntlComp…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ReactRenderExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\ReactRenderRuntime\\:\\:reactRenderIntlComponent\\(\\) has parameter \\$componentName with no type specified\\.$#"
@@ -48991,6 +49181,11 @@ parameters:
 			path: src/Capco/AppBundle/Twig/ReactRenderRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\RegistrationFormRuntime', 'serializeFields'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/RegistrationFormExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\RegistrationFormRuntime\\:\\:serializeFields\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/RegistrationFormRuntime.php
@@ -49011,9 +49206,19 @@ parameters:
 			path: src/Capco/AppBundle/Twig/RegistrationFormRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\RequestLocaleRuntime', 'getRequestLocale'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/RequestLocaleResolver.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\RequestLocaleRuntime\\:\\:\\$localeResolver has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/RequestLocaleRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SSORuntime', 'getSSOList'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SSOExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\SSORuntime\\:\\:getSSOList\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -49031,6 +49236,16 @@ parameters:
 			path: src/Capco/AppBundle/Twig/SSORuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SectionRuntime', 'isFirstSection'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SectionExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SectionRuntime', 'isLastSection'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SectionExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\SectionRuntime\\:\\:isFirstSection\\(\\) has parameter \\$section with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/SectionRuntime.php
@@ -49044,6 +49259,11 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\SectionRuntime\\:\\:\\$resolver has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/SectionRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SiteColorRuntime', 'getSiteColorValue'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SiteColorExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\SiteColorRuntime\\:\\:getSiteColorValue\\(\\) has no return type specified\\.$#"
@@ -49061,9 +49281,24 @@ parameters:
 			path: src/Capco/AppBundle/Twig/SiteColorRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SiteFaviconRuntime', 'getSiteFavicons'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SiteFaviconExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\SiteFaviconRuntime\\:\\:getSiteFavicons\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/SiteFaviconRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SiteImageRuntime', 'getAppLogoUrl'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SiteImageExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SiteImageRuntime', 'getSiteImageMedia'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SiteImageExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\SiteImageRuntime\\:\\:getSiteImageMedia\\(\\) has parameter \\$key with no type specified\\.$#"
@@ -49081,6 +49316,11 @@ parameters:
 			path: src/Capco/AppBundle/Twig/SiteImageRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\SiteParameterRuntime', 'getSiteParameterVal…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/SiteParameterExtension.php
+
+		-
 			message: "#^Left side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/SiteParameterRuntime.php
@@ -49091,9 +49331,24 @@ parameters:
 			path: src/Capco/AppBundle/Twig/SiteParameterRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\StatsRuntime', 'hasStats'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/StatsExtension.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Twig\\\\StatsRuntime\\:\\:\\$projectStatsResolver has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/StatsRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\StepsRuntime', 'getFirstStepLink'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/StepsExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\ThemeRuntime', 'listThemes'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/ThemeExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\ThemeRuntime\\:\\:getStepId\\(\\) has parameter \\$step with no type specified\\.$#"
@@ -49166,6 +49421,31 @@ parameters:
 			path: src/Capco/AppBundle/Twig/ThemeRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\UrlRuntime', 'formatDescription'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/UrlExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\UrlRuntime', 'getAdminObjectUrl'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/UrlExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\UrlRuntime', 'getDeveloperTypeUrl'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/UrlExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\UrlRuntime', 'getObjectUrl'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/UrlExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFilter constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\UrlRuntime', 'getUsort'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/UrlExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\UrlRuntime\\:\\:getAdminObjectUrl\\(\\) has parameter \\$absolute with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/UrlRuntime.php
@@ -49211,9 +49491,34 @@ parameters:
 			path: src/Capco/AppBundle/Twig/UrlRuntime.php
 
 		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\UserTypeRuntime', 'getUserTypes'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/UserTypeExtension.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\UserTypeRuntime\\:\\:getUserTypes\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/UserTypeRuntime.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\VoteRuntime', 'getRelatedObject'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/VoteExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\VoteRuntime', 'getRelatedObjectAdm…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/VoteExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\VoteRuntime', 'getRelatedObjectUrl'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/VoteExtension.php
+
+		-
+			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\VoteRuntime', 'hasVotableStepNotFu…'\\} given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Twig/VoteExtension.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\VoteRuntime\\:\\:getRelatedObject\\(\\) has no return type specified\\.$#"
@@ -49262,6 +49567,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\Canonicalizer\\:\\:canonicalize\\(\\) should return string but returns null\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Utils/Canonicalizer.php
+
+		-
+			message: "#^Parameter \\#2 \\$encodings of function mb_detect_encoding expects array\\|string\\|null, array\\<int, string\\>\\|bool given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/Canonicalizer.php
 
@@ -49331,6 +49641,11 @@ parameters:
 			path: src/Capco/AppBundle/Utils/RequestGuesser.php
 
 		-
+			message: "#^Strict comparison using \\!\\=\\= between null and string will always evaluate to true\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Utils/RequestGuesser.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\SpoutHelper\\:\\:getFormattedHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/SpoutHelper.php
@@ -49352,11 +49667,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\SpoutHelper\\:\\:returnRowWithHeaderAsKeys\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/SpoutHelper.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\SpoutHelper\\:\\:returnRowWithHeaderAsKeys\\(\\) should return array but returns array\\|false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/SpoutHelper.php
 
@@ -49432,11 +49742,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\Text\\:\\:sanitizeFileName\\(\\) has parameter \\$dangerousFilename with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/Text.php
-
-		-
-			message: "#^Parameter \\#2 \\$multiplier of function str_repeat expects int, float given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/Text.php
 
@@ -49941,18 +50246,18 @@ parameters:
 			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
 
 		-
-			message: "#^Parameter \\#1 \\$arr1 of function array_merge expects array, iterable given\\.$#"
+			message: "#^Parameter \\#1 \\$array of function array_slice expects array, iterable given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
+
+		-
+			message: "#^Parameter \\#1 \\$value of function count expects array\\|Countable, iterable given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
+
+		-
+			message: "#^Parameter \\#1 \\.\\.\\.\\$arrays of function array_merge expects array, iterable given\\.$#"
 			count: 2
-			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
-
-		-
-			message: "#^Parameter \\#1 \\$input of function array_slice expects array, iterable given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
-
-		-
-			message: "#^Parameter \\#1 \\$var of function count expects array\\|Countable, iterable given\\.$#"
-			count: 1
 			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
 
 		-
@@ -50814,6 +51119,11 @@ parameters:
 			message: "#^Method Capco\\\\UserBundle\\\\Authenticator\\\\SamlAuthenticator\\:\\:supportsToken\\(\\) has parameter \\$providerKey with no type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Authenticator/SamlAuthenticator.php
+
+		-
+			message: "#^Method Capco\\\\UserBundle\\\\Authenticator\\\\SamlToken\\:\\:__construct\\(\\) has parameter \\$user with no type specified\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Authenticator/SamlToken.php
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Authenticator\\\\SimplePreAuthenticator\\:\\:authenticateToken\\(\\) has no return type specified\\.$#"
@@ -52612,21 +52922,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Security\\\\SessionWithJsonHandler\\:\\:__construct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Security\\\\SessionWithJsonHandler\\:\\:getClient\\(\\) should return Predis\\\\ClientInterface but returns Predis\\\\Client\\|Redis\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
-
-		-
-			message: "#^Parameter \\#1 \\$redis of method Snc\\\\RedisBundle\\\\Session\\\\Storage\\\\Handler\\\\RedisSessionHandler\\:\\:__construct\\(\\) expects Predis\\\\Client\\|Redis, Predis\\\\ClientInterface given\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
 

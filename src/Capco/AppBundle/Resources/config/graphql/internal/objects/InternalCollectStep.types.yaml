@@ -1,10 +1,7 @@
 InternalCollectStep:
     type: object
     inherits:
-        - Node
-        - InternalStep
         - ProposalStep
-        - RequirementStep
     config:
         name: CollectStep
         interfaces:
@@ -25,7 +22,7 @@ InternalCollectStep:
             kind:
                 resolve: 'collect'
             requirements:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, args, getUser()])'
             statuses:
                 type: '[ProposalStepStatus!]!'
             private:
@@ -33,7 +30,7 @@ InternalCollectStep:
             defaultStatus:
                 type: 'ProposalStepStatus'
             form:
-                type: 'ProposalForm'
+                type: 'InternalProposalForm'
                 resolve: '@=value.getProposalForm()'
             contributors:
                 type: 'InternalUserConnection!'

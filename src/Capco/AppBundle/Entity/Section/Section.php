@@ -172,12 +172,12 @@ class Section implements Translatable, SonataTranslatableInterface
     private ?array $associatedFeatures;
 
     /**
-     * @ORM\OneToMany(targetEntity=SectionProject::class, mappedBy="section", cascade="persist", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=SectionProject::class, mappedBy="section", cascade={"persist"}, orphanRemoval=true)
      */
     private Collection $sectionProjects;
 
     /**
-     * @ORM\OneToMany(targetEntity=SectionCarrouselElement::class, mappedBy="section", cascade="persist", orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity=SectionCarrouselElement::class, mappedBy="section", cascade={"persist"}, orphanRemoval=true)
      *
      * @var Collection<int, SectionCarrouselElement>
      */

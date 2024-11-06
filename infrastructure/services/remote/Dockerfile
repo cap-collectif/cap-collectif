@@ -1,5 +1,7 @@
 FROM debian:bullseye
 
+ENV PHP_VERSION 8.1
+
 LABEL maintainer "Cap collectif <tech@cap-collectif.com>"
 
 RUN echo "deb [trusted=yes] http://repo.olvycloud.com/mariadb/10.3/bullseye /" >> /etc/apt/sources.list.d/mariadb.list
@@ -39,36 +41,35 @@ RUN set -x \
 
 ENV LANG C.UTF-8
 
-# Install php7
+# Install php8.1
 RUN wget -O /etc/apt/trusted.gpg.d/php.gpg https://packages.sury.org/php/apt.gpg
 RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
     echo "deb https://packages.sury.org/php/ bullseye main" > /etc/apt/sources.list.d/php.list && \
     DEBIAN_FRONTEND=noninteractive apt-get update && \
     apt-get install -y -qq \
-        php7.4-apcu \
-        php7.4-cli \
-        php7.4-mbstring \
-        php7.4-common \
-        php7.4-curl \
-        php7.4-dev \
-        php7.4-fpm \
-        php7.4-gd \
-        php7.4-imagick \
-        php7.4-intl \
-        php7.4-json \
-        php7.4-mysql \
-        php7.4-opcache \
-        php7.4-sqlite3 \
-        php7.4-redis \
-        php7.4-xsl \
-        php7.4-zip \
-        php7.4-xml \
-        php7.4-amqp \
-        php7.4-simplexml
+        php${PHP_VERSION}-apcu \
+        php${PHP_VERSION}-cli \
+        php${PHP_VERSION}-mbstring \
+        php${PHP_VERSION}-common \
+        php${PHP_VERSION}-curl \
+        php${PHP_VERSION}-dev \
+        php${PHP_VERSION}-fpm \
+        php${PHP_VERSION}-gd \
+        php${PHP_VERSION}-imagick \
+        php${PHP_VERSION}-intl \
+        php${PHP_VERSION}-mysql \
+        php${PHP_VERSION}-opcache \
+        php${PHP_VERSION}-sqlite3 \
+        php${PHP_VERSION}-redis \
+        php${PHP_VERSION}-xsl \
+        php${PHP_VERSION}-zip \
+        php${PHP_VERSION}-xml \
+        php${PHP_VERSION}-amqp \
+        php${PHP_VERSION}-simplexml
 
-RUN echo "extension=apcu.so" > /etc/php/7.4/php.ini
-RUN echo "apc.enable_cli=1" > /etc/php/7.4/php.ini
-RUN echo "apc.enable=1" > /etc/php/7.4//php.ini
+RUN echo "extension=apcu.so" > /etc/php/${PHP_VERSION}/php.ini
+RUN echo "apc.enable_cli=1" > /etc/php/${PHP_VERSION}/php.ini
+RUN echo "apc.enable=1" > /etc/php/${PHP_VERSION}/php.ini
 
 # Install gosu binary (needs wget and ca-certificates).
 ENV GOSU_VERSION 1.10
@@ -163,10 +164,9 @@ COPY infrastructure/services/remote/mysql/capco.cnf                /etc/mysql/co
 COPY infrastructure/services/remote/nginx/fastcgi_forward.conf     /etc/nginx/fastcgi_forward.conf
 COPY infrastructure/services/remote/nginx/default_headers.conf     /etc/nginx/default_headers.conf
 COPY infrastructure/services/remote/nginx/nginx.conf               /etc/nginx/nginx.conf
-COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.4/fpm/conf.d/capco.ini
-COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/7.4/cli/conf.d/capco.ini
+COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/${PHP_VERSION}/fpm/conf.d/capco.ini
+COPY infrastructure/services/remote/php-fpm/capco.ini              /etc/php/${PHP_VERSION}/cli/conf.d/capco.ini
 COPY infrastructure/services/remote/php-fpm/fpm.conf               /etc/service/php-fpm/fpm.conf
-COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/crontab
 COPY infrastructure/services/remote/elasticsearch/capco.yml        /etc/elasticsearch/config/elasticsearch.yml
 COPY infrastructure/services/remote/varnish/capco.vcl              /etc/varnish/capco.vcl
 COPY infrastructure/services/remote/rabbitmq/rabbitmq.config       /etc/rabbitmq/rabbitmq.config
@@ -227,7 +227,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && node --version \
   && npm --version
 
-ENV YARN_VERSION 1.22.5
+ENV YARN_VERSION 1.22.10
 
 RUN set -ex \
   && for key in \
@@ -257,35 +257,34 @@ RUN tar -xzvf redirectionio-agent-latest_any_amd64.tar.gz
 # Create Working dir with good rights
 RUN mkdir -p /var/www \
     && chown capco:capco /var/www \
-    && chmod 0644 /etc/cron.d/crontab \
     && find /etc/service/ -name "run" -exec chmod +x {} \;
 
 WORKDIR /var/www
 
 # Download PHP dependencies
-COPY composer.json composer.lock ./
+COPY --chown=capco:capco composer.json composer.lock ./
 
 # Will only install bundles that have changed since building the base image
 RUN gosu capco composer install --no-dev --prefer-dist --no-interaction --ignore-platform-reqs --no-progress
 
 # Then add usefull source code for production
 # -- Symfony app --
-COPY bin /var/www/bin
-COPY translations /var/www/translations
-COPY public /var/www/public
-COPY src /var/www/src
-COPY app /var/www/app
-COPY assets /var/www/assets
-COPY frontend /var/www/frontend
-COPY templates /var/www/templates
-COPY config /var/www/config
-COPY fixtures /var/www/fixtures
+COPY --chown=capco:capco bin /var/www/bin
+COPY --chown=capco:capco translations /var/www/translations
+COPY --chown=capco:capco public /var/www/public
+COPY --chown=capco:capco src /var/www/src
+COPY --chown=capco:capco app /var/www/app
+COPY --chown=capco:capco assets /var/www/assets
+COPY --chown=capco:capco frontend /var/www/frontend
+COPY --chown=capco:capco templates /var/www/templates
+COPY --chown=capco:capco config /var/www/config
+COPY --chown=capco:capco fixtures /var/www/fixtures
 
 # -- NextJS app (admin-next) --
 # Make sure "admin-next/.next" is built during previous CI step
 # For now we copy everything, but it can be improved see https://nextjs.org/docs/deployment#docker-image
-COPY admin-next /var/www/admin-next
-COPY node_modules /var/www/node_modules
+COPY --chown=capco:capco admin-next /var/www/admin-next
+COPY --chown=capco:capco node_modules /var/www/node_modules
 
 RUN mkdir -m 755 -p /tmp/phpstan/cache/PHPStan/
 
@@ -295,11 +294,10 @@ ENV SYMFONY_DEBUG false
 
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
-    && chown -R capco:capco bin translations src public templates config app fixtures admin-next \
     && mkdir -p var/cache/prod \
     && mkdir -p var/cache/prod/translations \
     && chmod -R 777 var \
-    && chown -R capco:capco var
+    && chown -R capco:capco ./
 
 # Admin-next
 ENV ADMIN_NEXT_PORT 3000
@@ -392,12 +390,23 @@ ENV SUPERVISORD_SWARROT_ES_INDEXATION_NUMPROCS=$SUPERVISORD_SWARROT_ES_INDEXATIO
 ENV SLACK_WEBHOOK_QUEUES_MONITOR=$SLACK_WEBHOOK_QUEUES_MONITOR
 
 # Build autoloader and initialize Symfony
-RUN gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
+RUN rm -rf src/Capco/AppBundle/GraphQL/__generated__/* \
+    && rm -rf var/cache/* \
+    && gosu capco php -d memory_limit=2048M bin/console cache:clear \
+    && gosu capco php -d memory_limit=2048M bin/console --env=dev cache:clear \
+    && gosu capco php -d memory_limit=2048M bin/console --env=test cache:clear \
+    && gosu capco php -d memory_limit=2048M bin/console cache:pool:clear cache.global_clearer cache.app cache.system cache.validator cache.serializer cache.annotations \
+    && gosu capco php -d memory_limit=2048M bin/console --env=dev cache:pool:clear cache.app cache.system cache.validator cache.serializer cache.annotations \
+    && gosu capco php -d memory_limit=2048M bin/console --env=test cache:pool:clear cache.app cache.system cache.validator cache.serializer cache.annotations \
+    && rm -rf var/cache/* \
+    && gosu capco php -d memory_limit=2048M bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
     && gosu capco composer dump-autoload --no-dev --optimize --apcu \
-    && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=$SYMFONY_ENVIRONMENT --no-interaction \
+    && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=${SYMFONY_ENVIRONMENT} --no-interaction \
     && gosu capco php bin/console assets:install public --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
 
 # Install crontab just to check if it's valid.
+COPY infrastructure/services/remote/cron/crontab                   /etc/cron.d/crontab
+RUN chmod 0644 /etc/cron.d/crontab
 RUN set -ex; \
     crontab -uroot /etc/cron.d/crontab
 

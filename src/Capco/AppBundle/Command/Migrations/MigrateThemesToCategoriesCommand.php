@@ -21,7 +21,6 @@ class MigrateThemesToCategoriesCommand extends Command
     private $collectStepRepository;
 
     public function __construct(
-        ?string $name = null,
         EntityManagerInterface $entityManager,
         ThemeRepository $themeRepository,
         ProposalRepository $proposalRepository,
@@ -31,7 +30,7 @@ class MigrateThemesToCategoriesCommand extends Command
         $this->themeRepository = $themeRepository;
         $this->proposalRepository = $proposalRepository;
         $this->collectStepRepository = $collectStepRepository;
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure()

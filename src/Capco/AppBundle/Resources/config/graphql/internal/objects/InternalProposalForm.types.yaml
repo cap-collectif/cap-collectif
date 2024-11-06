@@ -1,11 +1,12 @@
-ProposalForm:
+InternalProposalForm:
     type: object
     inherits:
-        - Node
+        - PreviewProposalForm
         - InternalWithProposals
         - UniformResourceLocatable
         - InternalOwnerable
     config:
+        name: ProposalForm
         description: 'A budget form'
         interfaces:
             - Node

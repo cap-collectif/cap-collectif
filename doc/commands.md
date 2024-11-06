@@ -65,8 +65,9 @@ Il prend un csv avec username, email et password(facultatif)
       capco:import:consultation-modals-from-csv
       capco:import:idf-proposals-from-csv         
       capco:import:proposals-from-csv             
-      capco:import:responses-from-csv          
-      capco:import:user-acounts-from-emails       
+      capco:import:responses-from-csv
+      capco:import:structure-from-csv
+      capco:import:user-accounts-from-emails       
 
 
 <a div="export"></a>Export

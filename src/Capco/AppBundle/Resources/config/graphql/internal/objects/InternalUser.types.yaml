@@ -1,7 +1,6 @@
 InternalUser:
     type: object
     inherits:
-        - PreviewUser
         - InternalPrimaryKey
         - InternalProjectOwner
         - InternalPostOwner
@@ -12,6 +11,7 @@ InternalUser:
         - InternalEmailingCampaignOwner
         - InternalUserIdentificationCodeListOwner
         - InternalConsultationOwner
+        - PreviewUser
         - Author
     config:
         description: "A user is an individual's account."

@@ -96,7 +96,8 @@ class CasUserProviderSpec extends ObjectBehavior
 
         $this->shouldNotThrow(
             new CasAuthenticationException(
-                'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau'
+                'Vous n\'êtes pas autorisé à accéder à cet espace, désolé. Pour toute question, contactez votre administrateur réseau',
+                ''
             )
         )->during('loadUserByUsername', [$casId]);
     }

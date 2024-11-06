@@ -16,7 +16,7 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 class SentryFactory
 {
-    public function create(
+    public static function create(
         ?string $dsn,
         string $environment,
         string $release,

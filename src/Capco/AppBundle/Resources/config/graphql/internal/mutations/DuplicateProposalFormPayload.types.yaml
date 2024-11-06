@@ -6,5 +6,5 @@ DuplicateProposalFormPayload:
                 type: 'DuplicateProposalFormErrorCode'
                 description: 'Available errors on duplicateProposalForm mutation.'
             duplicatedProposalForm:
-                type: 'ProposalForm'
+                type: 'InternalProposalForm'
                 description: 'The cloned `ProposalForm`.'

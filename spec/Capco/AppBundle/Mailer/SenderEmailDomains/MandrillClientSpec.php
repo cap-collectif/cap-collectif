@@ -7,20 +7,21 @@ use Capco\AppBundle\Mailer\SenderEmailDomains\MandrillClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use PhpSpec\ObjectBehavior;
+use Psr\Http\Message\StreamInterface;
 
 class MandrillClientSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->beConstructedWith('key');
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(MandrillClient::class);
     }
 
-    public function it_convert_data_to_domain()
+    public function it_convert_data_to_domain(): void
     {
         $spf = new \stdClass();
         $spf->valid = true;
@@ -44,7 +45,7 @@ class MandrillClientSpec extends ObjectBehavior
         $senderEmailDomain->getTxtValidation()->shouldBe(false);
     }
 
-    public function it_get_all_domains(Client $client, Response $response)
+    public function it_get_all_domains(Client $client, Response $response, StreamInterface $stream): void
     {
         $alphaSpf = new \stdClass();
         $alphaSpf->valid = true;
@@ -68,7 +69,8 @@ class MandrillClientSpec extends ObjectBehavior
         $beta->verify_txt_key = 'mandrillTxtValue';
         $beta->valid_signing = false;
 
-        $response->getBody()->willReturn(json_encode([$alpha, $beta]));
+        $stream->__toString()->willReturn(json_encode([$alpha, $beta]));
+        $response->getBody()->willReturn($stream);
         $this->client = $client;
         $client
             ->post('https://mandrillapp.com/api/1.0/senders/domains', [

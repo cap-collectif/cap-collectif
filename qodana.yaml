@@ -6,7 +6,7 @@ version: "1.0"
 profile:
     path: .qodana/profiles/main-profile.yaml
 php:
-    version: '7.4'
+    version: '8.1'
 plugins:
     - id: de.espend.idea.php.annotation # PHP Annotations (Symfony dependency do not change order)
     - id: fr.adrienbrault.idea.symfony2plugin # Symfony

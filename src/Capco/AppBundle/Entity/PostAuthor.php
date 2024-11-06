@@ -39,7 +39,7 @@ class PostAuthor implements Authorable
     private ?User $author = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Post", inversedBy="authors", cascade="persist")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Post", inversedBy="authors", cascade={"persist"})
      * @ORM\JoinColumn(name="post_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private Post $post;

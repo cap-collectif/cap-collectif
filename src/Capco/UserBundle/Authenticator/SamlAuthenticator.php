@@ -2,9 +2,8 @@
 
 namespace Capco\UserBundle\Authenticator;
 
+use Capco\Capco\UserBundle\Exception\MissingSamlAuthAttributeException;
 use Capco\UserBundle\Entity\User;
-use Hslavich\SimplesamlphpBundle\Exception\MissingSamlAuthAttributeException;
-use Hslavich\SimplesamlphpBundle\Security\Core\Authentication\Token\SamlToken;
 use Psr\Log\LoggerInterface;
 use SimpleSAML\Auth\Simple;
 use Symfony\Component\HttpFoundation\Request;

@@ -173,6 +173,9 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
             ->willReturn($proposal)
         ;
 
+        $violationList->rewind()->shouldBeCalled();
+        $violationList->valid()->willReturn(false);
+
         $validator
             ->validate(Argument::type(ProposalCollectSmsVote::class))
             ->shouldBeCalledOnce()

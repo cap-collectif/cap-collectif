@@ -1,18 +1,14 @@
 InternalProposal:
     type: object
     inherits:
-        - PreviewProposal
-        - Node
-        - Contribution
-        - Commentable
-        - PublicPublishable
         - Reportable
-        - Trashable
         - WithFollowers
-        - UniformResourceLocatable
         - UniformResourceAdminLocatable
         - Authorable
         - InternalWithSocialNetworks
+        - Commentable
+        - Contribution
+        - PreviewProposal
     config:
         name: Proposal
         interfaces:
@@ -106,7 +102,7 @@ InternalProposal:
                 type: 'String'
                 description: 'Identifies the preview text of the contribution.'
             form:
-                type: 'ProposalForm!'
+                type: 'InternalProposalForm!'
                 description: 'Identifies the form where the contribution was submitted.'
             evaluation:
                 type: 'ProposalEvaluation'

@@ -33,12 +33,10 @@ class Version20180328092156 extends AbstractMigration
         ];
         $request = $this->connection->fetchAllAssociative(
             "SELECT body FROM page WHERE slug = 'charte' LIMIT 1",
-            ['']
         );
 
         $menuItemChart = $this->connection->fetchAllAssociative(
             "SELECT * FROM menu_item WHERE link = 'pages/charte' LIMIT 1",
-            ['']
         );
 
         if (!empty($menuItemChart[0])) {

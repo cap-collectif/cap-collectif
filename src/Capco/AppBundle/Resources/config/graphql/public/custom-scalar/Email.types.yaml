@@ -2,6 +2,4 @@ Email:
     type: custom-scalar
     config:
         description: 'A string containing an email.'
-        serialize: ["Capco\\AppBundle\\GraphQL\\Type\\EmailType", 'serialize']
-        parseValue: ["Capco\\AppBundle\\GraphQL\\Type\\EmailType", 'parseValue']
-        parseLiteral: ["Capco\\AppBundle\\GraphQL\\Type\\EmailType", 'parseLiteral']
+        scalarType: '@=newObject("Capco\\AppBundle\\GraphQL\\Type\\EmailType")'

@@ -179,7 +179,7 @@ class ProposalSearch extends Search
         foreach ($filters as $key => $value) {
             if ('proposalAnalysts.analyst.id' === $key) {
                 foreach ($value as $analyst) {
-                    if (false === uuid_parse($analyst)) {
+                    if (!uuid_is_valid($analyst)) {
                         $analyst = GlobalIdResolver::getDecodedId($analyst, true);
                     }
 

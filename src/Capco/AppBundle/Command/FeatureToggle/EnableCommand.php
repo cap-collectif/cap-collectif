@@ -20,11 +20,10 @@ class EnableCommand extends Command
     private int $deactivated = 0;
 
     public function __construct(
-        ?string $name = null,
         Manager $toggleManager,
         KernelInterface $kernel
     ) {
-        parent::__construct($name);
+        parent::__construct();
         $this->toggleManager = $toggleManager;
         $this->kernel = $kernel;
     }

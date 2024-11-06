@@ -1,45 +1,60 @@
 <?php
 
-namespace spec\Capco\AppBundle\GraphQL\Resolver\Consultation;
+namespace spec\Capco\AppBundle\GraphQL\Resolver\Questionnaire;
 
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\GraphQL\Resolver\Questionnaire\UserHasReplyResolver;
 use Capco\AppBundle\Repository\ReplyRepository;
+use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
-use FOS\UserBundle\Model\User;
+use Doctrine\Common\Collections\Collection;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 
-class UserHasReplySpec extends ObjectBehavior
+class UserHasReplyResolverSpec extends ObjectBehavior
 {
     public function let(
         ReplyRepository $replyRepository,
-        UserRepository $userRepo,
+        UserRepository $userRepository,
         LoggerInterface $logger
-    ) {
-        $this->beConstructedWith($replyRepository, $userRepo, $logger);
+    ): void {
+        $this->beConstructedWith($replyRepository, $userRepository, $logger);
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(UserHasReplyResolver::class);
     }
 
     public function it_return_true_if_user_exists_and_user_has_reply(
         User $user,
-        UserRepository $userRepo,
+        UserRepository $userRepository,
         ReplyRepository $replyRepository,
         Questionnaire $questionnaire,
+        Collection $replies,
         Arg $args
-    ) {
-        $args->offsetGet('login')->willReturn('pierre@cap-collectif.com');
-        $userRepo->findOneByEmail('pierre@cap-collectif.com')->willReturn($user);
+    ): void {
+        $args
+            ->offsetGet('login')
+            ->willReturn('pierre@cap-collectif.com')
+        ;
+
+        $userRepository
+            ->findOneByEmail('pierre@cap-collectif.com')
+            ->willReturn($user)
+        ;
+
         $replyRepository
-            ->getForUserAndQuestionnaire($questionnaire, $user)
+            ->getForUserAndQuestionnaire($questionnaire, $user, true)
+            ->willReturn($replies)
+        ;
+
+        $replies
             ->isEmpty()
             ->willReturn(false)
         ;
+
         $this->__invoke($questionnaire, $args)->shouldReturn(true);
     }
 
@@ -47,7 +62,7 @@ class UserHasReplySpec extends ObjectBehavior
         UserRepository $userRepo,
         Questionnaire $questionnaire,
         Arg $args
-    ) {
+    ): void {
         $args->offsetGet('login')->willReturn('not-found@gmail.com');
         $userRepo->findOneByEmail('not-found@gmail.com')->willReturn(null);
         $this->__invoke($questionnaire, $args)->shouldReturn(false);

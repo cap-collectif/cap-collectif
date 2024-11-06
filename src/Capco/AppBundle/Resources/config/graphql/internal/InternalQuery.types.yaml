@@ -277,7 +277,7 @@ InternalQuery:
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver", [args])'
             proposalForms:
                 description: 'Lookup forms.'
-                type: '[ProposalForm]!'
+                type: '[InternalProposalForm]!'
                 args:
                     query:
                         type: 'String'
@@ -678,5 +678,4 @@ InternalQuery:
                 type: 'Footer!'
                 description: 'Footer configuration'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\FooterResolver", [args])'
-
 

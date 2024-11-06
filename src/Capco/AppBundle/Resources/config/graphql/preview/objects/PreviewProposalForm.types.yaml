@@ -1,0 +1,7 @@
+PreviewProposalForm:
+    type: object
+    inherits:
+        - Node
+        - PreviewWithProposals
+    config:
+        name: ProposalForm

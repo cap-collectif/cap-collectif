@@ -1104,53 +1104,6 @@ type ApplyProposalStatusPayload {
 
 """An argument"""
 type Argument implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable & Reportable & ContributionWithAuthor & EditableContribution {
-  """The ID of an object."""
-  id: ID!
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The URL to this resource."""
-  url: URI!
-
-  """Whether or not the contribution is trashed."""
-  trashed: Boolean!
-
-  """Identifies the trashed visibility."""
-  trashedStatus: TrashableStatus
-
-  """Identifies the moment the moderator trashed the contribution."""
-  trashedAt: DateTime
-
-  """Identifies the reason why the moderator trashed the contribution."""
-  trashedReason: String
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """The type."""
-  type: ArgumentValue!
-
-  """The content of the argument."""
-  body: String!
-
   """Does the viewer already submitted a report ?"""
   viewerHasReport: Boolean!
 
@@ -1171,6 +1124,53 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
 
   """The author of the contribution."""
   author: User!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """The ID of an object."""
+  id: ID!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Url of the contribution"""
+  url: URI!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The type."""
+  type: ArgumentValue!
+
+  """The content of the argument."""
+  body: String!
   votes(
     """
     Returns the elements in the list that come after the specified cursor.
@@ -2282,14 +2282,34 @@ enum CivicIASentiment {
 
 """A proposal step"""
 type CollectStep implements Node & Step & ProposalStep & RequirementStep {
+  """The requirements to vote on this step."""
+  requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+
   """The ID of an object."""
   id: ID!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -2453,26 +2473,6 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ProposalConnection
-
-  """The requirements to vote on this step."""
-  requirements(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): RequirementConnection!
-  allRequirements(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): RequirementConnection!
 
   """
   If votesRanking enabled, votesLimit is the reference value for the points scale.
@@ -3140,11 +3140,11 @@ type ConsultationStep implements Node & Step & RequirementStep {
     first: Int = 100
   ): RequirementConnection!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -5162,14 +5162,14 @@ type DebateOpinionEdge {
 
 """A step with a debate."""
 type DebateStep implements Step & Node {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
+  """The ID of an object."""
+  id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """The ID of an object."""
-  id: ID!
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -6458,11 +6458,46 @@ type EvaluationForm {
 
 """An event."""
 type Event implements Node & UniformResourceLocatable & Commentable & Contribution {
+  """Expose Primary Key, do not use it, except for testing purpose."""
+  _id: ID!
+
+  """The user that created the resource."""
+  creator: User
+
   """The ID of an object."""
   id: ID!
 
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
   """The url of the event"""
   url: URI!
+
+  """The comments related to the commentable."""
+  comments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  """The comments not yet approved by moderators."""
+  viewerNotApprovedByModeratorComments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection
 
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
@@ -6514,41 +6549,6 @@ type Event implements Node & UniformResourceLocatable & Commentable & Contributi
 
   """Identifies the registration link of the event."""
   link: URI
-
-  """The comments related to the commentable."""
-  comments(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection!
-
-  """The comments not yet approved by moderators."""
-  viewerNotApprovedByModeratorComments(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection
-
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
-
-  """The user that created the resource."""
-  creator: User
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
 
   """The event admin edit url"""
   adminUrl: URI!
@@ -8164,7 +8164,7 @@ enum MajorityChoiceType {
 
 """A majority question"""
 type MajorityQuestion implements Question & Node {
-  """The ID of an object"""
+  """The ID of an object."""
   id: ID!
 
   """Identifies the question title."""
@@ -8380,7 +8380,7 @@ type MediaEdge {
 
 """A media question."""
 type MediaQuestion implements Question & Node {
-  """The ID of an object"""
+  """The ID of an object."""
   id: ID!
 
   """Identifies the question title."""
@@ -8582,7 +8582,7 @@ type MenuItemTranslation {
 
 """A multiple choice question"""
 type MultipleChoiceQuestion implements Question & Node {
-  """The ID of an object"""
+  """The ID of an object."""
   id: ID!
 
   """Identifies the question title."""
@@ -9222,80 +9222,7 @@ type OfficialResponse implements Node {
 type Opinion implements Node & Contribution & Publishable & Argumentable & Sourceable & Reportable & Trashable & ContributionWithAuthor & EditableContribution {
   """The ID of an object"""
   id: ID!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """Url of the contribution"""
-  url: URI!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
-
-  """true if the contribution is pinned."""
-  pinned: Boolean!
-
-  """Identifies the contribution title."""
-  title: String!
-
-  """Identifies the body of the contribution."""
-  body: HTML!
-
-  """Identifies the body of the contribution rendered to text."""
-  bodyText: String!
-
-  """The related project."""
-  project: Project
   contribuable: Boolean!
-
-  """The arguments related to the argumentable."""
-  arguments(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
-
-    """If provided, returns the arguments of this particular type."""
-    type: ArgumentValue
-
-    """The connection will return the trashed results too."""
-    includeTrashed: Boolean = false
-  ): ArgumentConnection!
-
-  """The unpublished arguments of to the viewer."""
-  viewerArgumentsUnpublished(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """If provided, returns the arguments of this particular type."""
-    type: ArgumentValue
-  ): ArgumentConnection
   step: ConsultationStep!
 
   """The sources related to the sourceable."""
@@ -9359,6 +9286,9 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
   """The author of the contribution."""
   author: User!
 
+  """Identifies the date and time when the object was updated."""
+  updatedAt: DateTime
+
   """Followers connection"""
   followers(
     """
@@ -9376,6 +9306,76 @@ type Opinion implements Node & Contribution & Publishable & Argumentable & Sourc
 
   """Either or not the viewer is following the content."""
   viewerIsFollowing: Boolean!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """Url of the contribution"""
+  url: URI!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """true if the contribution is pinned."""
+  pinned: Boolean!
+
+  """Identifies the contribution title."""
+  title: String!
+
+  """Identifies the body of the contribution."""
+  body: HTML!
+
+  """Identifies the body of the contribution rendered to text."""
+  bodyText: String!
+
+  """The related project."""
+  project: Project
+
+  """The arguments related to the argumentable."""
+  arguments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: ArgumentOrder = {field: PUBLISHED_AT, direction: DESC}
+
+    """If provided, returns the arguments of this particular type."""
+    type: ArgumentValue
+
+    """The connection will return the trashed results too."""
+    includeTrashed: Boolean = false
+  ): ArgumentConnection!
+
+  """The unpublished arguments of to the viewer."""
+  viewerArgumentsUnpublished(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """If provided, returns the arguments of this particular type."""
+    type: ArgumentValue
+  ): ArgumentConnection
 
   """The kind of description."""
   kind: String!
@@ -9613,45 +9613,8 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
   """The ID of an object."""
   id: ID!
 
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
   """The organization's public name."""
   username: String!
-
-  """The author's public profile name."""
-  displayName(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-
-  """The author's slug"""
-  slug(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String!
-
-  """The organization's logo file"""
-  media: Media
-
-  """Whether or not this user is the authenticated user."""
-  isViewer: Boolean!
-
-  """The owner profile URL."""
-  url: URI!
-  biography(
-    """The locale to translate content (eg: FR_FR)."""
-    locale: TranslationLocale
-  ): String
-
-  """The author's public avatar URL."""
-  avatarUrl: URI
-  email: String
-  isProjectAdmin: Boolean!
-  userType: UserType
 
   """Get all posts that the organization owns."""
   posts(
@@ -9718,6 +9681,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     """If non-null, filters events by comparing the start date with present."""
     isFuture: Boolean
   ): EventConnection!
+
+  """The owner profile URL."""
+  url: URI!
 
   """Get all projects that the organization owns."""
   projects(
@@ -9877,6 +9843,40 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     orderBy: ConsultationOrder = {field: POSITION, direction: ASC}
   ): ConsultationConnection!
 
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """The author's public profile name."""
+  displayName(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+
+  """The author's slug"""
+  slug(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String!
+
+  """The organization's logo file"""
+  media: Media
+
+  """Whether or not this user is the authenticated user."""
+  isViewer: Boolean!
+  biography(
+    """The locale to translate content (eg: FR_FR)."""
+    locale: TranslationLocale
+  ): String
+
+  """The author's public avatar URL."""
+  avatarUrl: URI
+  email: String
+  isProjectAdmin: Boolean!
+  userType: UserType
+
   """The organization's logo file"""
   logo: Media
 
@@ -10013,14 +10013,14 @@ type OrganizationSocialNetworks {
 
 """A step inside a project."""
 type OtherStep implements Node & Step {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
+  """The ID of an object"""
+  id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """The ID of an object"""
-  id: ID!
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -10875,14 +10875,14 @@ input PreConfigureProjectQuestionnaireInput {
 
 """A step inside a project."""
 type PresentationStep implements Node & Step {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
+  """The ID of an object"""
+  id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """The ID of an object"""
-  id: ID!
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -10979,11 +10979,11 @@ input ProgressStepInput {
 
 """A participatory project."""
 type Project implements Node & UniformResourceLocatable & UniformResourceAdminLocatable {
-  """The ID of an object."""
-  id: ID!
-
   """The URL to this resource."""
   url: URI!
+
+  """The ID of an object"""
+  id: ID!
 
   """Identifies the title of the project."""
   title: String!
@@ -11643,10 +11643,104 @@ enum ProjectVisibility {
   PUBLIC
 }
 
-"""Represents a type that can be retrieved by a URL on the admin."""
+"""Represents a user's contribution to a collect step."""
 type Proposal implements Node & Publishable & UniformResourceLocatable & Trashable & Draftable & Contribution & Commentable & Reportable & UniformResourceAdminLocatable {
+  """Does the viewer already submitted a report ?"""
+  viewerHasReport: Boolean!
+
+  """The reportings related to the reportable."""
+  reportings(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
+
+  """Followers connection"""
+  followers(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Ordering options for followers returning from the connection"""
+    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
+  ): UserConnection!
+
+  """Identifies the viewer following configuration on the entity."""
+  viewerFollowingConfiguration: SubscriptionTypeValue
+
+  """Identifies if the viewer is following the entity."""
+  viewerIsFollowing: Boolean!
+
+  """The admin URL to this resource."""
+  adminUrl: URI
+
+  """Did the viewer author this entity."""
+  viewerDidAuthor: Boolean
+
+  """Link of Web page."""
+  webPageUrl: URI
+
+  """Link of Facebook page."""
+  facebookUrl: URI
+
+  """Link of Twitter page."""
+  twitterUrl: URI
+
+  """Link of Instagram page."""
+  instagramUrl: URI
+
+  """Link of LinkedIn profile."""
+  linkedInUrl: URI
+
+  """Link of Youtube channel."""
+  youtubeUrl: URI
+
   """The ID of an object."""
   id: ID!
+
+  """The comments related to the commentable."""
+  comments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection!
+
+  """The comments not yet approved by moderators."""
+  viewerNotApprovedByModeratorComments(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): CommentConnection
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
 
   """Whether or not the entity is published."""
   published: Boolean!
@@ -11659,9 +11753,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
-
-  """Url of the contribution"""
-  url: URI!
 
   """Whether or not the contribution is trashed."""
   trashed: Boolean!
@@ -11757,97 +11848,6 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Identifies the body of the contribution rendered to text."""
   bodyText: String
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The comments related to the commentable."""
-  comments(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection!
-
-  """The comments not yet approved by moderators."""
-  viewerNotApprovedByModeratorComments(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: CommentOrder = {field: PUBLISHED_AT, direction: DESC}
-  ): CommentConnection
-
-  """Does the viewer already submitted a report ?"""
-  viewerHasReport: Boolean!
-
-  """The reportings related to the reportable."""
-  reportings(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
-  ): ReportingConnection!
-
-  """Check if a user can report"""
-  viewerCanReport: Boolean!
-
-  """Followers connection"""
-  followers(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-
-    """Ordering options for followers returning from the connection"""
-    orderBy: FollowerOrder = {field: FOLLOWED_AT, direction: DESC}
-  ): UserConnection!
-
-  """Identifies the viewer following configuration on the entity."""
-  viewerFollowingConfiguration: SubscriptionTypeValue
-
-  """Identifies if the viewer is following the entity."""
-  viewerIsFollowing: Boolean!
-
-  """The admin URL to this resource."""
-  adminUrl: URI
-
-  """Did the viewer author this entity."""
-  viewerDidAuthor: Boolean
-
-  """Link of Web page."""
-  webPageUrl: URI
-
-  """Link of Facebook page."""
-  facebookUrl: URI
-
-  """Link of Twitter page."""
-  twitterUrl: URI
-
-  """Link of Instagram page."""
-  instagramUrl: URI
-
-  """Link of LinkedIn profile."""
-  linkedInUrl: URI
-
-  """Link of Youtube channel."""
-  youtubeUrl: URI
 
   """The slug of a proposal."""
   slug: String!
@@ -12870,8 +12870,25 @@ type ProposalSmsVote implements ProposalVote & Vote {
   """The ID of an object"""
   id: ID!
 
-  """The contribution that was voted."""
+  """The date of the vote."""
+  createdAt: DateTime!
+
+  """The author of the contribution. If null, the vote is anonymous."""
+  author: User
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
   related: Contribution
+
+  """Returns 'proposalSmsVote'."""
+  kind: String!
+
+  """Returns if vote is accounted or not"""
+  isAccounted: Boolean!
+
+  """The participant of the contribution."""
+  participant: Participant
 
   """Url of the contribution"""
   url: URI!
@@ -12882,26 +12899,11 @@ type ProposalSmsVote implements ProposalVote & Vote {
   """Return the step."""
   step: ProposalStep!
 
-  """The date of the vote."""
-  createdAt: DateTime!
-
   """Whether or not the entity is published."""
   published: Boolean!
 
   """Identifies when the entity was published at."""
   publishedAt: DateTime
-
-  """The author of the contribution. If null, the vote is anonymous."""
-  author: User
-
-  """Returns 'proposalSmsVote'."""
-  kind: String!
-
-  """Returns if vote is accounted or not"""
-  isAccounted: Boolean!
-
-  """The participant of the contribution."""
-  participant: Participant
 }
 
 """A connection to a list of items."""
@@ -12989,14 +12991,34 @@ enum ProposalStatementErrorCode {
 
 """A proposal step"""
 interface ProposalStep {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
+  """The requirements to vote on this step."""
+  requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+
+  """The ID of an object"""
+  id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """The ID of an object"""
-  id: ID!
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -13160,26 +13182,6 @@ interface ProposalStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ProposalConnection
-
-  """The requirements to vote on this step."""
-  requirements(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): RequirementConnection!
-  allRequirements(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): RequirementConnection!
 
   """
   If votesRanking enabled, votesLimit is the reference value for the points scale.
@@ -14121,9 +14123,9 @@ input QueryAnalyticsFilter {
   topContributorsCount: Int = 4
 }
 
-"""Fetches an object given its ID"""
+"""All custom forms are build using questions."""
 interface Question {
-  """The ID of an object"""
+  """The ID of an object."""
   id: ID!
 
   """Identifies the question title."""
@@ -14349,6 +14351,12 @@ enum QuestionTypeValue {
 
 """A questionnaire is a series of questions that users can answer."""
 type Questionnaire implements Node {
+  """Expose Primary Key, do not use it, except for testing purpose."""
+  _id: ID!
+
+  """The user that created the resource."""
+  creator: User
+
   """The ID of an object."""
   id: ID!
 
@@ -14394,12 +14402,6 @@ type Questionnaire implements Node {
     """(ROLE_ADMIN only) Select also draft replies."""
     includeDraft: Boolean = false
   ): ReplyConnection!
-
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
-
-  """The user that created the resource."""
-  creator: User
   step: QuestionnaireStep
   anonymousAllowed: Boolean!
   description: HTML
@@ -14572,11 +14574,11 @@ type QuestionnaireStep implements Node & Step & RequirementStep {
   """The ID of an object"""
   id: ID!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -14715,11 +14717,11 @@ type RankingStep implements Node & Step {
   """The ID of an object"""
   id: ID!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -15451,6 +15453,9 @@ interface Reportable {
 
 """A report"""
 type Reporting implements Contribution & ContributionWithAuthor {
+  """The author of the contribution."""
+  author: User!
+
   """The ID of an object"""
   id: ID!
 
@@ -15461,9 +15466,6 @@ type Reporting implements Contribution & ContributionWithAuthor {
 
   """Url of the contribution"""
   url: URI!
-
-  """The author of the contribution."""
-  author: User!
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
@@ -16016,7 +16018,7 @@ enum SectionOrderBy {
 
 """A section is just a title in a quiz without any possible answer."""
 type SectionQuestion implements Question & Node {
-  """The ID of an object"""
+  """The ID of an object."""
   id: ID!
 
   """Identifies the question title."""
@@ -16144,14 +16146,34 @@ type SelectSenderEmailPayload {
 
 """A budget contribution"""
 type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
+  """The requirements to vote on this step."""
+  requirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+  allRequirements(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): RequirementConnection!
+
   """The ID of an object"""
   id: ID!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -16315,26 +16337,6 @@ type SelectionStep implements Node & Step & ProposalStep & RequirementStep {
     """Returns the first `n` elements from the list."""
     first: Int = 100
   ): ProposalConnection
-
-  """The requirements to vote on this step."""
-  requirements(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): RequirementConnection!
-  allRequirements(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): RequirementConnection!
 
   """
   If votesRanking enabled, votesLimit is the reference value for the points scale.
@@ -16725,7 +16727,7 @@ type ShieldAdminFormTranslation {
 
 """A simple question"""
 type SimpleQuestion implements Question & Node {
-  """The ID of an object"""
+  """The ID of an object."""
   id: ID!
 
   """Identifies the question title."""
@@ -16991,6 +16993,30 @@ enum SmsOrdersFilters {
 
 """A source"""
 type Source implements Node & Publishable & Contribution & Trashable & UniformResourceLocatable & Reportable & ContributionWithAuthor {
+  """Whether or not the user has report the source."""
+  viewerHasReport: Boolean!
+
+  """The reportings related to the reportable."""
+  reportings(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
+  ): ReportingConnection!
+
+  """Check if a user can report"""
+  viewerCanReport: Boolean!
+
+  """The author of the contribution."""
+  author: User!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
   """The ID of an object."""
   id: ID!
 
@@ -17026,14 +17052,8 @@ type Source implements Node & Publishable & Contribution & Trashable & UniformRe
   """Identifies the reason why the moderator trashed the contribution."""
   trashedReason: String
 
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
-
-  """Does the viewer already submitted a report ?"""
-  viewerHasReport: Boolean!
 
   """Whether or not the user can contribute to the source."""
   contribuable: Boolean!
@@ -17046,24 +17066,6 @@ type Source implements Node & Publishable & Contribution & Trashable & UniformRe
 
   """The content of the source."""
   body: String!
-
-  """The reportings related to the reportable."""
-  reportings(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-    orderBy: ReportingOrder = {field: CREATED_AT, direction: DESC}
-  ): ReportingConnection!
-
-  """Check if a user can report"""
-  viewerCanReport: Boolean!
-
-  """The author of the contribution."""
-  author: User!
   step: ConsultationStep!
   votes(
     """
@@ -17254,14 +17256,14 @@ type StarResponsePayload {
 
 """A step inside a project."""
 interface Step {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
+  """The ID of an object"""
+  id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """The ID of an object"""
-  id: ID!
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -20001,73 +20003,17 @@ type UpdateVotesVisibilityPayload {
 
 """A user is an individual's account."""
 type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner & QuestionnaireOwner & EventOwner & ProposalFormOwner & MailingListOwner & EmailingCampaignOwner & UserIdentificationCodeListOwner & Contributor & ConsultationOwner & Author {
+  """Expose Primary Key, do not use it, except for testing purpose."""
+  _id: ID!
+
   """Author ID"""
   id: ID!
-
-  """The user profile URL."""
-  url: URI!
 
   """Author username"""
   username: String
 
-  """Whether or not this author is the authenticated user."""
-  isViewer: Boolean!
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """A URL pointing to the user's Facebook account."""
-  facebookUrl: URI
-
-  """A URL pointing to the user's Twitter account."""
-  twitterUrl: URI
-
-  """A URL pointing to the user's LinkedIn account."""
-  linkedInUrl: URI
-
-  """A URL pointing to the user's public website/blog."""
-  websiteUrl: URI
-
-  """The user's public profile biography."""
-  biography: String
-
-  """Identifies the date and time when this user account was deleted."""
-  deletedAccountAt: DateTime
-
-  """A URL pointing to the user's Instagram account."""
-  instagramUrl: URI
-
-  """The type of the person."""
-  userType: UserType
-
-  """The responses answered by user."""
-  responses(
-    """
-    Returns the elements in the list that come after the specified cursor.
-    """
-    after: String
-
-    """Returns the first `n` elements from the list."""
-    first: Int = 100
-  ): ResponseConnection!
-
-  """The user's personal email."""
-  email: String
-
-  """Whether or not this user consent internal communication."""
-  consentInternalCommunication: Boolean
-
-  """The author's public avatar URL."""
-  avatarUrl: URI
-
-  """Whether or not this user has a confirmed account."""
-  enabled: Boolean!
-
-  """Expose Primary Key, do not use it, except for testing purpose."""
-  _id: ID!
+  """The user profile URL."""
+  url: URI!
 
   """Get all projects that the user owns."""
   projects(
@@ -20291,6 +20237,62 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
     """Order consultation by a given criterias."""
     orderBy: ConsultationOrder = {field: POSITION, direction: ASC}
   ): ConsultationConnection!
+
+  """Whether or not this author is the authenticated user."""
+  isViewer: Boolean!
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
+  """A URL pointing to the user's Facebook account."""
+  facebookUrl: URI
+
+  """A URL pointing to the user's Twitter account."""
+  twitterUrl: URI
+
+  """A URL pointing to the user's LinkedIn account."""
+  linkedInUrl: URI
+
+  """A URL pointing to the user's public website/blog."""
+  websiteUrl: URI
+
+  """The user's public profile biography."""
+  biography: String
+
+  """Identifies the date and time when this user account was deleted."""
+  deletedAccountAt: DateTime
+
+  """A URL pointing to the user's Instagram account."""
+  instagramUrl: URI
+
+  """The type of the person."""
+  userType: UserType
+
+  """The responses answered by user."""
+  responses(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+  ): ResponseConnection!
+
+  """The user's personal email."""
+  email: String
+
+  """Whether or not this user consent internal communication."""
+  consentInternalCommunication: Boolean
+
+  """The author's public avatar URL."""
+  avatarUrl: URI
+
+  """Whether or not this user has a confirmed account."""
+  enabled: Boolean!
 
   """The user's public profile name."""
   displayName: String!
@@ -21138,63 +21140,6 @@ type VerifyUserPhoneNumberPayload {
 type Version implements Node & Contribution & Publishable & Trashable & UniformResourceLocatable & Sourceable & Reportable & Argumentable & ContributionWithAuthor & EditableContribution {
   """The ID of an object"""
   id: ID!
-
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The URL to this resource."""
-  url: URI!
-
-  """Whether or not the contribution is trashed."""
-  trashed: Boolean!
-
-  """Identifies the trashed visibility."""
-  trashedStatus: TrashableStatus
-
-  """Identifies the moment the moderator trashed the contribution."""
-  trashedAt: DateTime
-
-  """Identifies the reason why the moderator trashed the contribution."""
-  trashedReason: String
-
-  """Whether or not the entity is published."""
-  published: Boolean!
-
-  """Identifies when the entity can no more be published."""
-  publishableUntil: DateTime
-
-  """Identifies when the entity was published at."""
-  publishedAt: DateTime
-
-  """Reason that the entity is not published."""
-  notPublishedReason: NotPublishedReason
-
-  """Identifies the date and time when the object was last updated."""
-  updatedAt: DateTime
-
-  """Identifies the date and time when the object was created."""
-  createdAt: DateTime!
-
-  """Does the viewer already submitted a report ?"""
-  viewerHasReport: Boolean!
-
-  """Explenation."""
-  comment: HTML
-
-  """The title of the contribution."""
-  title: String!
-
-  """The content of the contribution."""
-  body: HTML!
-
-  """The content of the contribution."""
-  bodyText: HTML!
-  parent: Opinion!
-
-  """The related project."""
-  project: Project
   contribuable: Boolean!
   step: ConsultationStep!
 
@@ -21225,6 +21170,9 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
   """The available sources categories of to the sourceable."""
   availableSourceCategories: [SourceCategory]
+
+  """Does the viewer already submitted a report ?"""
+  viewerHasReport: Boolean!
 
   """The reportings related to the reportable."""
   reportings(
@@ -21276,6 +21224,9 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
   """The author of the contribution."""
   author: User!
 
+  """Identifies the date and time when the object was last updated."""
+  updatedAt: DateTime
+
   """The opinion version's followers."""
   followers(
     """
@@ -21293,6 +21244,57 @@ type Version implements Node & Contribution & Publishable & Trashable & UniformR
 
   """Either or not the viewer is following the content."""
   viewerIsFollowing: Boolean!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
+
+  """The URL to this resource."""
+  url: URI!
+
+  """Whether or not the contribution is trashed."""
+  trashed: Boolean!
+
+  """Identifies the trashed visibility."""
+  trashedStatus: TrashableStatus
+
+  """Identifies the moment the moderator trashed the contribution."""
+  trashedAt: DateTime
+
+  """Identifies the reason why the moderator trashed the contribution."""
+  trashedReason: String
+
+  """Whether or not the entity is published."""
+  published: Boolean!
+
+  """Identifies when the entity can no more be published."""
+  publishableUntil: DateTime
+
+  """Identifies when the entity was published at."""
+  publishedAt: DateTime
+
+  """Reason that the entity is not published."""
+  notPublishedReason: NotPublishedReason
+
+  """Identifies the date and time when the object was created."""
+  createdAt: DateTime!
+
+  """Explenation."""
+  comment: HTML
+
+  """The title of the contribution."""
+  title: String!
+
+  """The content of the contribution."""
+  body: HTML!
+
+  """The content of the contribution."""
+  bodyText: HTML!
+  parent: Opinion!
+
+  """The related project."""
+  project: Project
 
   """Is the comment using Jodit Wysiwyg."""
   commentUsingJoditWysiwyg: Boolean!

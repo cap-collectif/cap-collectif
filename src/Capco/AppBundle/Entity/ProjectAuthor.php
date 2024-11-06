@@ -39,7 +39,7 @@ class ProjectAuthor implements Authorable, Author
     private ?User $user = null;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="authors", cascade="persist")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Project", inversedBy="authors", cascade={"persist"})
      * @ORM\JoinColumn(name="project_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
     private Project $project;

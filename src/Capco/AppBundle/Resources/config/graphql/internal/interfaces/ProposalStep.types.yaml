@@ -1,9 +1,9 @@
 ProposalStep:
     type: interface
     inherits:
+        - RequirementStep
         - InternalStep
         - InternalWithProposals
-        - RequirementStep
     config:
         description: 'A proposal step'
         resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
@@ -50,7 +50,7 @@ ProposalStep:
                         type: 'String'
                         description: 'If anonymous user the token used to vote.'
             form:
-                type: 'ProposalForm'
+                type: 'InternalProposalForm'
                 resolve: '@=value.getProposalForm()'
             isSecretBallot:
                 type: 'Boolean!'

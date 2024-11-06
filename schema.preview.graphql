@@ -34,14 +34,6 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
   """Reason that the entity is not published."""
   notPublishedReason: NotPublishedReason
 
-  """
-  Return the related contribution if the contribution is related to another.
-  """
-  related: Contribution
-
-  """The URL to this resource."""
-  url: URI!
-
   """Whether or not the contribution is trashed."""
   trashed: Boolean!
 
@@ -54,11 +46,19 @@ type Argument implements Node & Publishable & Contribution & Trashable & Uniform
   """Identifies the reason why the moderator trashed the contribution."""
   trashedReason: String
 
+  """Url of the contribution"""
+  url: URI!
+
   """Identifies the date and time when the object was last updated."""
   updatedAt: DateTime
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """
+  Return the related contribution if the contribution is related to another.
+  """
+  related: Contribution
 
   """The type."""
   type: ArgumentValue!
@@ -130,11 +130,11 @@ type CollectStep implements Node & Step {
     includeDraft: Boolean = false
   ): ProposalConnection!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -208,11 +208,11 @@ type ConsultationStep implements Node & Step {
   """The ID of an object."""
   id: ID!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -1657,11 +1657,11 @@ type QuestionnaireStep implements Node & Step {
   """The ID of an object"""
   id: ID!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -1769,11 +1769,11 @@ type SelectionStep implements Node & Step {
     includeDraft: Boolean = false
   ): ProposalConnection!
 
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
-
   """The URL to this resource."""
   url: URI!
+
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!
@@ -1863,14 +1863,14 @@ type Source implements Node & Publishable & Contribution & Trashable & UniformRe
 
 """A step is a part of a project."""
 interface Step {
-  """When the time interval begins or ends."""
-  timeRange: TimeRange!
+  """The ID of an object"""
+  id: ID!
 
   """The URL to this resource."""
   url: URI!
 
-  """The ID of an object"""
-  id: ID!
+  """When the time interval begins or ends."""
+  timeRange: TimeRange!
 
   """The title of the step."""
   title: String!

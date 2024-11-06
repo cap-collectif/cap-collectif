@@ -1407,7 +1407,7 @@ class ApplicationContext extends UserContext
             ->findAll('css', $list)
         ;
         $element = $elements[$number - 1];
-        Assert::assertContains($element->getText(), $value);
+        Assert::assertStringContainsString($element->getText(), $value);
     }
 
     /**

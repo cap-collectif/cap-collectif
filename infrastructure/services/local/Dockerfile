@@ -1,7 +1,7 @@
 # syntax=docker/dockerfile:1
 FROM debian:bullseye AS base
 
-ENV PHP_VERSION 7.4
+ENV PHP_VERSION 8.1
 
 # Install basic
 RUN apt-get update && \
@@ -40,7 +40,6 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php${PHP_VERSION}-gd \
         php${PHP_VERSION}-imagick \
         php${PHP_VERSION}-intl \
-        php${PHP_VERSION}-json \
         php${PHP_VERSION}-sqlite3 \
         php${PHP_VERSION}-mysql \
         php${PHP_VERSION}-opcache \
@@ -123,7 +122,7 @@ RUN ARCH= && dpkgArch="$(dpkg --print-architecture)" \
   && node --version \
   && npm --version
 
-ENV YARN_VERSION 1.22.5
+ENV YARN_VERSION 1.22.10
 
 RUN set -ex \
   && for key in \

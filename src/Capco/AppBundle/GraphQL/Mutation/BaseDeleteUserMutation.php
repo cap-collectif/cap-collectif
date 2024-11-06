@@ -241,14 +241,11 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     private function shallContributionBeDeleted(User $user, $contribution): bool
     {
         if (
-            $contribution instanceof AbstractVote
+            null !== $contribution->getRelated()
+            && $contribution instanceof AbstractVote
             && method_exists($contribution->getRelated(), 'getStep')
-            && $contribution->getRelated()
             && $contribution->getRelated()->getStep()
-            && $contribution
-                ->getRelated()
-                ->getStep()
-                ->canContribute($user)
+            && $contribution->getRelated()->getStep()->canContribute($user)
         ) {
             return true;
         }

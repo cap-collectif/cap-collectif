@@ -43,7 +43,6 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         $em = $this->container->get('doctrine.orm.entity_manager');
         $ideas = $this->connection->fetchAllAssociative(
             'SELECT id,object,title,author_id,is_enabled,is_trashed,body,theme_id,created_at,updated_at,media_id FROM idea',
-            ['']
         );
         if (!empty($ideas)) {
             // ------********************************************************------

@@ -3,4 +3,4 @@ UpdateProposalFormPayload:
     config:
         fields:
             proposalForm:
-                type: 'ProposalForm!'
+                type: 'InternalProposalForm!'

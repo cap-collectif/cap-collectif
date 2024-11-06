@@ -14,14 +14,13 @@ class FixOpinionTypesTreeCommand extends Command
     private $repository;
 
     public function __construct(
-        ?string $name = null,
         EntityManagerInterface $em,
         OpinionTypeRepository $repository
     ) {
         $this->em = $em;
         $this->repository = $repository;
 
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure()

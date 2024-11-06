@@ -157,7 +157,9 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         }
 
         if ($allowedData['birthdate']) {
-            $birthday = \DateTime::createFromFormat('Y-m-d', $userInfoData['birthdate']) ?: null;
+            $birthday = (null !== $userInfoData['birthdate'])
+                ? \DateTime::createFromFormat('Y-m-d', $userInfoData['birthdate'])
+                : null;
             if ($birthday) {
                 $birthday->setTime(0, 0);
             }

@@ -177,7 +177,11 @@ class NodeTypeResolver implements QueryInterface
         }
 
         if ($node instanceof ProposalForm) {
-            return $this->typeResolver->resolve('ProposalForm');
+            if (\in_array($currentSchemaName, ['public', 'preview'], true)) {
+                return $this->typeResolver->resolve('PreviewProposalForm');
+            }
+
+            return $this->typeResolver->resolve('InternalProposalForm');
         }
 
         if ($node instanceof Group) {

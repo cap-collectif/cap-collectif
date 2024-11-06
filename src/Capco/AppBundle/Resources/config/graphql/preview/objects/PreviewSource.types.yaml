@@ -1,7 +1,6 @@
 PreviewSource:
     type: object
     inherits:
-        - Node
         - PublicPublishable
         - Contribution
         - Trashable

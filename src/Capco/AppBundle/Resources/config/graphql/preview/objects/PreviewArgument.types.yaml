@@ -1,12 +1,11 @@
 PreviewArgument:
     type: object
     inherits:
-        - Node
         - PublicPublishable
-        - Contribution
         - Trashable
         - UniformResourceLocatable
         - Timestampable
+        - Contribution
     config:
         name: Argument
         description: 'An argument'

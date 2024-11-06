@@ -1,8 +1,6 @@
 InternalOrganization:
     type: object
     inherits:
-        - Node
-        - Author
         - InternalPostOwner
         - InternalEventOwner
         - InternalProjectOwner
@@ -11,6 +9,8 @@ InternalOrganization:
         - InternalMailingListOwner
         - InternalEmailingCampaignOwner
         - InternalConsultationOwner
+        - Author
+        - Node
     config:
         description: 'An organization.'
         name: Organization

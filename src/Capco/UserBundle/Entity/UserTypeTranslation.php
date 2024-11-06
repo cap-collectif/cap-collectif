@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Entity;
 use Capco\AppBundle\Model\Translation;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\UserBundle\Repository\UserTypeTranslationRepository")

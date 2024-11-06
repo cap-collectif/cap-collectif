@@ -7,7 +7,7 @@ RequirementStep:
                 type: 'RequirementConnection!'
                 description: 'The requirements to vote on this step.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, getUser(), args])'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, args, getUser()])'
             allRequirements:
                 type: 'RequirementConnection!'
                 argsBuilder: 'Relay::ForwardConnection'

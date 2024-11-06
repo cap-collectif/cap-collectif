@@ -1,14 +1,14 @@
 InternalOpinion:
     type: object
     inherits:
-        - PreviewOpinion
-        - Argumentable
         - Sourceable
         - Reportable
         - Trashable
         - ContributionWithAuthor
         - EditableContribution
         - WithFollowers
+        - PreviewOpinion
+        - Argumentable
         - Timestampable
     config:
         name: Opinion

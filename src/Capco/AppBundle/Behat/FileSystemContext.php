@@ -13,6 +13,7 @@ use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Gherkin\Node\PyStringNode;
 use org\bovigo\vfs\vfsStream;
 use org\bovigo\vfs\vfsStreamDirectory;
+use PHPUnit\Framework\Assert;
 
 require_once __DIR__ . '/../../../../vendor/phpunit/phpunit/src/Framework/Assert/Functions.php';
 
@@ -76,7 +77,7 @@ class FileSystemContext implements Context
      */
     public function assertFileExists(string $filename)
     {
-        assertTrue(
+        Assert::assertTrue(
             $this->fileSystem->hasChild($filename),
             'The file %s does not exist.'
         );
@@ -90,7 +91,7 @@ class FileSystemContext implements Context
     {
         $actualContent = $this->getActualContent($filename);
 
-        assertTrue(
+        Assert::assertTrue(
             $actualContent === $expectedContent->getRaw(),
             sprintf('The contents of %s is not what was expected.', $filename)
         );
@@ -104,7 +105,7 @@ class FileSystemContext implements Context
     {
         $actualContent = $this->getActualContent($filename);
 
-        assertTrue(
+        Assert::assertTrue(
             str_starts_with($actualContent, $expectedContent->getRaw()),
             sprintf('The contents of %s does not begin with what was expected. Got: %s', $filename, $actualContent),
         );
@@ -118,7 +119,7 @@ class FileSystemContext implements Context
     {
         $actualContent = $this->getActualContent($filename);
 
-        assertTrue(
+        Assert::assertTrue(
             str_ends_with($actualContent, $expectedContent->getRaw()),
             sprintf('The contents of %s does not end with what was expected. Got: %s', $filename, $actualContent),
         );

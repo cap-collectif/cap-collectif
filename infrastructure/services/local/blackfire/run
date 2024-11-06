@@ -13,7 +13,7 @@
 # done
 
 # function test_phpfpm {
-#   /etc/init.d/php7.4-fpm status > /dev/null
+#   /etc/init.d/php8.1-fpm status > /dev/null
 # }
 
 # until ( test_phpfpm )

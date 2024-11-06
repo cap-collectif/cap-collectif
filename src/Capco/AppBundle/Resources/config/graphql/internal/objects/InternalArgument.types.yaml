@@ -1,12 +1,10 @@
 InternalArgument:
     type: object
     inherits:
-        - PreviewArgument
-        - Contribution
         - Reportable
-        - Trashable
         - ContributionWithAuthor
         - EditableContribution
+        - PreviewArgument
     config:
         name: Argument
         description: 'An argument'

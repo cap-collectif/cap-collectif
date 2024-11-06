@@ -1,8 +1,8 @@
 InternalProposalSmsVote:
     type: object
     inherits:
-        - InternalProposalVote
         - InternalVote
+        - InternalProposalVote
     config:
         interfaces:
             - InternalProposalVote

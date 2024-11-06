@@ -22,10 +22,10 @@ class CreateResponsesFromCsvCommand extends Command
 {
     private $container;
 
-    public function __construct(?string $name = null, ContainerInterface $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        parent::__construct($name);
+        parent::__construct();
     }
 
     protected function configure()
@@ -72,8 +72,8 @@ class CreateResponsesFromCsvCommand extends Command
             if (!$author) {
                 $output->writeln(
                     'Author ' .
-                        $row['email'] .
-                        ' does not exist. Create it manually before importing.'
+                    $row['email'] .
+                    ' does not exist. Create it manually before importing.'
                 );
 
                 return 1;
@@ -86,8 +86,8 @@ class CreateResponsesFromCsvCommand extends Command
             if (!$questionnaire) {
                 $output->writeln(
                     'Questionnaire ' .
-                        $row['questionnaire_id'] .
-                        ' does not exist. Create it manually before importing.'
+                    $row['questionnaire_id'] .
+                    ' does not exist. Create it manually before importing.'
                 );
 
                 return 1;

@@ -1,9 +1,9 @@
 InternalQuestionnaire:
     type: object
     inherits:
-        - PreviewQuestionnaire
         - InternalPrimaryKey
         - InternalOwnerable
+        - PreviewQuestionnaire
     config:
         name: Questionnaire
         fields:

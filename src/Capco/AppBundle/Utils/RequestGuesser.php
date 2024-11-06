@@ -39,8 +39,12 @@ final class RequestGuesser
     public function getJsonContent(): ?array
     {
         $request = $this->getCurrentRequest();
+        if (null === $request) {
+            return null;
+        }
+        $requestContent = $request->getContent();
 
-        return $request ? json_decode($request->getContent(), true) : null;
+        return null !== $requestContent ? json_decode($requestContent, true) : null;
     }
 
     /**

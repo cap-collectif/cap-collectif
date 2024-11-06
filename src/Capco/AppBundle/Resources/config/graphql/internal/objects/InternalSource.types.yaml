@@ -1,10 +1,10 @@
 InternalSource:
     type: object
     inherits:
-        - PreviewSource
         - Reportable
         - ContributionWithAuthor
         - EditableContribution
+        - PreviewSource
     config:
         name: Source
         description: 'A source'

@@ -28,10 +28,10 @@ abstract class AbstractMaker extends Command
     protected $className;
     private $container;
 
-    public function __construct(?string $name = null, ContainerInterface $container)
+    public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
-        parent::__construct($name);
+        parent::__construct();
     }
 
     /**

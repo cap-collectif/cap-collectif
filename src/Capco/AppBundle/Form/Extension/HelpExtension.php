@@ -11,7 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 // Todo to remove with symfony 4
 class HelpExtension extends AbstractTypeExtension
 {
-    public function getExtendedTypes(): array
+    public static function getExtendedTypes(): array
     {
         return [FormType::class];
     }

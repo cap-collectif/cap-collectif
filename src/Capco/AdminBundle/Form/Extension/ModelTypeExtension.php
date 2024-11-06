@@ -41,7 +41,7 @@ class ModelTypeExtension extends AbstractTypeExtension
         parent::buildView($view, $form, $options);
     }
 
-    public function getExtendedTypes()
+    public static function getExtendedTypes(): array
     {
         return [ModelType::class];
     }

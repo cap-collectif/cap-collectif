@@ -47,7 +47,7 @@ def symfony_bin_deps():
     run('brew cleanup')
     run('brew doctor')
     run('brew install pkg-config')
-    run('brew install php@7.4')
+    run('brew install php@8.1')
     run('brew install composer')
     run('brew install fontconfig')
     run('brew install rabbitmq')

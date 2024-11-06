@@ -54,4 +54,4 @@ else
     echo "=> Using an existing keypair of JWT"
 fi
 
-exec /usr/sbin/php-fpm7.4 -y /etc/service/php-fpm/fpm.conf -O
+exec /usr/sbin/php-fpm8.1 -y /etc/service/php-fpm/fpm.conf -O

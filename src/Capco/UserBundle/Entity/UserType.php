@@ -10,6 +10,8 @@ use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
+ * @ORM\Entity(repositoryClass="Capco\UserBundle\Repository\UserTypeRepository")
+ * @ORM\Table(name="user_type")
  * @ORM\HasLifecycleCallbacks()
  */
 class UserType implements Translatable, SonataTranslatableInterface

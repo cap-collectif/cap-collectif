@@ -7,20 +7,21 @@ use Capco\AppBundle\Mailer\SenderEmailDomains\MailjetClient;
 use GuzzleHttp\Client;
 use GuzzleHttp\Psr7\Response;
 use PhpSpec\ObjectBehavior;
+use Psr\Http\Message\StreamInterface;
 
 class MailjetClientSpec extends ObjectBehavior
 {
-    public function let()
+    public function let(): void
     {
         $this->beConstructedWith('publicKey', 'privateKey');
     }
 
-    public function it_is_initializable()
+    public function it_is_initializable(): void
     {
         $this->shouldHaveType(MailjetClient::class);
     }
 
-    public function it_convert_data_to_domain()
+    public function it_convert_data_to_domain(): void
     {
         $data = new \stdClass();
         $data->Domain = 'cap-collectif.com';
@@ -40,7 +41,7 @@ class MailjetClientSpec extends ObjectBehavior
         $senderEmailDomain->getTxtValidation()->shouldBe(false);
     }
 
-    public function it_get_existing_domain(Client $client, Response $response)
+    public function it_get_existing_domain(Client $client, Response $response, StreamInterface $stream): void
     {
         $domainData = new \stdClass();
         $domainData->Domain = 'cap-collectif.com';
@@ -50,7 +51,9 @@ class MailjetClientSpec extends ObjectBehavior
         $domainData->OwnerShipTokenRecordName = 'mailjetToken';
         $body = new \stdClass();
         $body->Data = [$domainData];
-        $response->getBody()->willReturn(json_encode($body));
+
+        $stream->__toString()->willReturn(json_encode($body));
+        $response->getBody()->willReturn($stream);
         $this->client = $client;
         $client
             ->get('https://api.mailjet.com/v3/REST/dns/cap-collectif.com', [
@@ -73,7 +76,7 @@ class MailjetClientSpec extends ObjectBehavior
         $senderEmailDomain->getTxtValidation()->shouldBe(false);
     }
 
-    public function it_get_non_existing_domain(Client $client)
+    public function it_get_non_existing_domain(Client $client): void
     {
         $exception = new \Exception('', 404);
         $this->client = $client;
@@ -90,7 +93,7 @@ class MailjetClientSpec extends ObjectBehavior
         $this->getSenderEmailDomain('cap-collectif-test.com')->shouldBeNull();
     }
 
-    public function it_get_all_domains(Client $client, Response $response)
+    public function it_get_all_domains(Client $client, Response $response, StreamInterface $stream): void
     {
         $alpha = new \stdClass();
         $alpha->Domain = 'cap-collectif.com';
@@ -106,7 +109,8 @@ class MailjetClientSpec extends ObjectBehavior
         $beta->OwnerShipTokenRecordName = 'mailjetTokenV2';
         $body = new \stdClass();
         $body->Data = [$alpha, $beta];
-        $response->getBody()->willReturn(json_encode($body));
+        $stream->__toString()->willReturn(json_encode($body));
+        $response->getBody()->willReturn($stream);
         $this->client = $client;
         $client
             ->get('https://api.mailjet.com/v3/REST/dns', [
@@ -144,7 +148,7 @@ class MailjetClientSpec extends ObjectBehavior
         $betaDomain->getTxtValidation()->shouldBe(false);
     }
 
-    public function it_creates_domain(Client $client)
+    public function it_creates_domain(Client $client): void
     {
         $exception = new \Exception('', 404);
         $this->client = $client;
@@ -181,7 +185,7 @@ class MailjetClientSpec extends ObjectBehavior
         $result->getSpfValidation()->shouldBe(false);
     }
 
-    public function it_creates_but_already_exist(Client $client, Response $response)
+    public function it_creates_but_already_exist(Client $client, Response $response, StreamInterface $stream): void
     {
         $domainData = new \stdClass();
         $domainData->Domain = 'cap-collectif.com';
@@ -191,7 +195,8 @@ class MailjetClientSpec extends ObjectBehavior
         $domainData->OwnerShipTokenRecordName = 'mailjetToken';
         $body = new \stdClass();
         $body->Data = [$domainData];
-        $response->getBody()->willReturn(json_encode($body));
+        $stream->__toString()->willReturn(json_encode($body));
+        $response->getBody()->willReturn($stream);
         $this->client = $client;
         $client
             ->get('https://api.mailjet.com/v3/REST/dns/cap-collectif.com', [

@@ -1,10 +1,7 @@
 InternalSelectionStep:
     type: object
     inherits:
-        - Node
-        - InternalStep
         - ProposalStep
-        - RequirementStep
     config:
         name: SelectionStep
         interfaces:

@@ -2,7 +2,6 @@ InternalQuestion:
     type: interface
     inherits:
         - PreviewQuestion
-        - Node
     config:
         name: Question
         resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'

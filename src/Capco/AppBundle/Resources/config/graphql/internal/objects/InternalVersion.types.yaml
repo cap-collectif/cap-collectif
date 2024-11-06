@@ -2,14 +2,13 @@ InternalVersion:
     type: object
     inherits:
         [
-            PreviewVersion,
             Sourceable,
             Reportable,
             Argumentable,
-            Trashable,
             ContributionWithAuthor,
             EditableContribution,
             WithFollowers,
+            PreviewVersion,
         ]
     config:
         name: Version

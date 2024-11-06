@@ -1,12 +1,13 @@
 <?php
 
-namespace spec\Capco\AppBundle\GraphQL\Mutation\Requirement\Sms;
+namespace spec\Capco\AppBundle\GraphQL\Mutation\Sms;
 
 use Capco\AppBundle\Entity\UserPhoneVerificationSms;
 use Capco\AppBundle\Fetcher\SmsProviderFetcher;
 use Capco\AppBundle\GraphQL\Mutation\Sms\SendSmsPhoneValidationCodeMutation;
 use Capco\AppBundle\Helper\TwilioSmsProvider;
 use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
+use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -15,6 +16,8 @@ use Prophecy\Argument;
 
 class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
 {
+    use GraphQLMock;
+
     public function let(
         EntityManagerInterface $em,
         SmsProviderFetcher $smsProviderFactory,
@@ -39,6 +42,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         EntityManagerInterface $em
     ): void {
         $to = '+3333333';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
@@ -73,6 +77,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
     public function it_should_return_phone_already_confirmed_error_code(User $viewer, Arg $input): void
     {
         $viewer->isPhoneConfirmed()->willReturn(true);
+        $this->getMockedGraphQLArgumentFormatted($input);
         $payload = $this->__invoke($input, $viewer);
         $payload['errorCode']->shouldBe('PHONE_ALREADY_CONFIRMED');
     }
@@ -87,6 +92,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         $viewer->isPhoneConfirmed()->willReturn(false);
 
         $smsList = [$sms, $sms2];
+        $this->getMockedGraphQLArgumentFormatted($input);
         $userPhoneVerificationSmsRepository
             ->findByUserWithinOneMinuteRange($viewer)
             ->shouldBeCalledOnce()
@@ -105,6 +111,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         UserPhoneVerificationSms $sms
     ): void {
         $to = '+3333333';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $viewer
             ->isPhoneConfirmed()
             ->shouldBeCalledOnce()
@@ -141,6 +148,7 @@ class SendSmsPhoneValidationCodeMutationSpec extends ObjectBehavior
         UserPhoneVerificationSms $sms
     ): void {
         $to = '+3333333';
+        $this->getMockedGraphQLArgumentFormatted($input);
         $viewer->isPhoneConfirmed()->shouldBeCalledOnce()->willReturn(false);
 
         $viewer->getPhone()->shouldBeCalledOnce()->willReturn($to);

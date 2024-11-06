@@ -13,7 +13,7 @@ function test_mysqldatabase {
 
 timeout=1;
 echo "[$(date -u)][SUPERVISORD] Waiting for php-fpm..."
-while [ ! -f /var/run/php7.4-fpm.pid ] > /dev/null 2>&1;
+while [ ! -f /var/run/php8.1-fpm.pid ] > /dev/null 2>&1;
 do
     sleep $timeout
     timeout=$(( $timeout + 1 ))

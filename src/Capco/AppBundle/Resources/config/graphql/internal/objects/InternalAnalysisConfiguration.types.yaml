@@ -10,7 +10,7 @@ InternalAnalysisConfiguration:
                 builderConfig:
                     typeName: AnalysisConfiguration
             proposalForm:
-                type: 'ProposalForm!'
+                type: 'InternalProposalForm!'
                 description: 'The related ProposalForm.'
             costEstimationEnabled:
                 type: 'Boolean!'

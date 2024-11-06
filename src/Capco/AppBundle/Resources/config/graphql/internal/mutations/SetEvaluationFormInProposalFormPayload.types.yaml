@@ -3,4 +3,4 @@ SetEvaluationFormInProposalFormPayload:
     config:
         fields:
             proposalForm:
-                type: 'ProposalForm!'
+                type: 'InternalProposalForm!'

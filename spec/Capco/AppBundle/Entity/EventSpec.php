@@ -38,7 +38,7 @@ class EventSpec extends ObjectBehavior
         $this->isOpen()->shouldReturn(true);
         $this->isClosed()->shouldReturn(false);
         $this->isFuture()->shouldReturn(false);
-        $this->getRemainingTime()->shouldBeLike(['days' => 2, 'hours' => 23]);
+        $this->getRemainingTime()->shouldBeLike(['days' => 1, 'hours' => 23]);
     }
 
     public function it_event_not_started_yet()

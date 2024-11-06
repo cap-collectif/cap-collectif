@@ -1,9 +1,9 @@
 PreviewStep:
     type: interface
     inherits:
-        - PreviewTimeRangeable
-        - UniformResourceLocatable
         - Node
+        - UniformResourceLocatable
+        - PreviewTimeRangeable
     config:
         name: Step
         description: 'A step is a part of a project.'

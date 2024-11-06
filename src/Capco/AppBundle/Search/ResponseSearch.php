@@ -98,7 +98,7 @@ class ResponseSearch extends Search
             $boolQuery->addFilter(
                 (new Query\MatchQuery())
                     ->setFieldQuery('textValue', Sanitizer::escape($term, [' ']))
-                    ->setFieldOperator('textValue', Query\Match::OPERATOR_AND)
+                    ->setFieldOperator('textValue', Query\MatchQuery::OPERATOR_AND)
             );
         }
 
@@ -110,7 +110,7 @@ class ResponseSearch extends Search
             $boolQuery->addFilter(
                 (new Query\MatchQuery())
                     ->setFieldQuery('iaCategory', Sanitizer::escape($category, [' ']))
-                    ->setFieldOperator('iaCategory', Query\Match::OPERATOR_AND)
+                    ->setFieldOperator('iaCategory', Query\MatchQuery::OPERATOR_AND)
             );
         }
 

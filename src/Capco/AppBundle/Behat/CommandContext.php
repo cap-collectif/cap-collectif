@@ -73,12 +73,10 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Then I should see :content in output
-     *
-     * @param mixed $content
      */
-    public function iShouldSee($content)
+    public function iShouldSee(string $content): void
     {
-        Assert::assertContains($content, $this->output);
+        Assert::assertStringContainsString($content, $this->output);
     }
 
     private function run($command, $parameters = [])

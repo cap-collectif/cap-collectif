@@ -1,5 +1,7 @@
 PreviewQuestion:
     type: interface
+    inherits:
+        - Node
     config:
         name: Question
         description: 'All custom forms are build using questions.'

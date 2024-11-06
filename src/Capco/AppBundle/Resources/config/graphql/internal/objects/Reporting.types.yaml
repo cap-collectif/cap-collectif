@@ -1,8 +1,8 @@
 Reporting:
     type: object
     inherits:
-        - Contribution
         - ContributionWithAuthor
+        - Contribution
     config:
         description: 'A report'
         interfaces:

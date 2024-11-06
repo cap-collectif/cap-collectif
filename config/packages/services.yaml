@@ -6,7 +6,7 @@ services:
         bind:
             Psr\Log\LoggerInterface: '@monolog.logger.request'
             Caxy\HtmlDiffBundle\Service\HtmlDiffService: '@caxy.html_diff'
-            $samlIdp: '%simplesamlphp.sp%'
+            $samlIdp: '%saml_sp%'
             $logger: '@logger'
             $projectDir: '%kernel.project_dir%'
             $env: '%kernel.environment%'
@@ -107,7 +107,7 @@ services:
 
     Capco\UserBundle\Security\Core\User\SamlUserProvider:
         arguments:
-            $samlIdp: '%simplesamlphp.sp%'
+            $samlIdp: '%saml_sp%'
 
     Capco\UserBundle\Listener\UserNotificationsListener:
         autowire: true
@@ -207,13 +207,13 @@ services:
     simplesamlphp.auth: '@SimpleSAML\Auth\Simple'
 
     SimpleSAML\Auth\Simple:
-        arguments: ['%simplesamlphp.sp%']
+        arguments: ['%saml_sp%']
 
     Capco\UserBundle\Authenticator\SamlAuthenticator:
         autowire: true
         arguments:
             $samlAuth: '@simplesamlphp.auth'
-            $samlIdp: '%simplesamlphp.sp%'
+            $samlIdp: '%saml_sp%'
 
     swiftmailer.mailer.transport.mandrill:
         class: Capco\AppBundle\Mailer\Transport\MandrillTransport

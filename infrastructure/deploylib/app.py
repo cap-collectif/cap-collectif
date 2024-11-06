@@ -134,7 +134,7 @@ def ssh(user='capco'):
 def clear_cache(environment='dev'):
     "Clear cache"
     command('rm -rf var/cache/' + environment, 'application', Config.www_app, 'root')
-    command('php -d memory_limit=-1 bin/console cache:pool:clear cache.app', 'application', Config.www_app, 'capco')
+    command('php -d memory_limit=-1 bin/console cache:pool:clear cache.app --no-debug', 'application', Config.www_app, 'capco')
 
 
 def cmd(commandName='', environment='dev'):
