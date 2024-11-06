@@ -151,6 +151,7 @@ const getConfig = (
     buttonsMD: buttons,
     buttonsSM: buttons,
     tabIndex: 0,
+    disablePlugins: 'add-new-line',
   }
 }
 

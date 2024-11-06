@@ -239,7 +239,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
     const mergedArr = questionnaire.questions.map(q => {
       const j = questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
-      return { ...q, ...j }
+      return { ...q, jumps: [], alwaysJumpDestinationQuestion: null, ...j }
     })
 
     delete questionnaire.questionsWithJumps

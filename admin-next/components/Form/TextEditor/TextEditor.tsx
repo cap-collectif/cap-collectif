@@ -45,11 +45,10 @@ const TextEditor: React.FC<TextEditorProps> = ({
   const intl = useIntl()
   const [isOpen, setIsOpen] = React.useState(false)
   const [reloadContent, setReloadContent] = React.useState(false)
-
-  const [inModalValue, setInModalValue] = React.useState('')
   const { control, setValue, watch } = useFormContext()
-
   const value = watch(name)
+
+  const [inModalValue, setInModalValue] = React.useState(value)
 
   React.useEffect(() => {
     // Trick to reset jodit content on language change
@@ -78,7 +77,10 @@ const TextEditor: React.FC<TextEditorProps> = ({
               hideOnClickOutside={false}
               size={CapUIModalSize.Xl}
               ariaLabel={intl.formatMessage({ id: 'delete-confirmation' })}
-              onClose={() => setIsOpen(false)}
+              onClose={() => {
+                setInModalValue(value)
+                setIsOpen(false)
+              }}
               forceModalDialogToFalse
             >
               <Modal.Header>
@@ -102,7 +104,10 @@ const TextEditor: React.FC<TextEditorProps> = ({
                     variantSize="big"
                     variant="secondary"
                     variantColor="hierarchy"
-                    onClick={() => setIsOpen(false)}
+                    onClick={() => {
+                      setInModalValue(value)
+                      setIsOpen(false)
+                    }}
                   >
                     {buttonLabels?.cancel ?? intl.formatMessage({ id: 'cancel' })}
                   </Button>

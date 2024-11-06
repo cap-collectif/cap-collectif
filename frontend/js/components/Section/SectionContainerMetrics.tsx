@@ -14,6 +14,7 @@ const MetricsRow = styled.div`
   display: flex;
   justify-content: center;
   flex-wrap: wrap;
+  margin-top: 10px;
 `
 export const SectionContainerMetrics = ({
   contributions,
@@ -32,7 +33,7 @@ export const SectionContainerMetrics = ({
       : null
   const colorToDisplay = sectionBgColor === 'rgb(246, 246, 246)' ? 'white' : '#F6F6F6'
   return (
-    <MetricsRow className="row">
+    <MetricsRow>
       {metricsToDisplayBasics && (
         <React.Fragment>
           <MetricsBox color={colorToDisplay} totalCount={contributions} icon="cap-file-1" label="global.contribution" />

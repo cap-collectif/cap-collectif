@@ -217,6 +217,7 @@ export const formatQuestionsInput = (
             temporaryId: isUuidOrTmp(choice?.id || '') ? choice?.id : undefined,
             // @ts-ignore fixme
             image: choice?.image ? choice.image?.id : null,
+            color: choice.color ? choice.color : null,
             kind: undefined,
           }))
         : []

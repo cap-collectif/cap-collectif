@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Box, Button, Flex, useTheme } from '@cap-collectif/ui'
 import { NavBarLink, NavBarMenu, NavBarSkipLinks, NavBarBreadCrumb, NavBarLogo } from './NavBar.components'
-import { LinkProps } from './NavBar.context'
+import { LinkProps, useNavBarContext } from './NavBar.context'
 import useShowMore from '@shared/hooks/useShowMore'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
 
@@ -96,13 +96,20 @@ type NavBarProps = {
   theme: NavBarTheme
   isBigLogo: boolean
   logoWidth: number
+  showBorder?: boolean
 }
 
-const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth }: NavBarProps) => {
+const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth, showBorder }: NavBarProps) => {
   const [isExtended] = React.useState(links.length > 6)
+  const { colors } = useTheme()
 
   return (
-    <Flex justifyContent="center" bg={theme.menuBackground} width="100%">
+    <Flex
+      justifyContent="center"
+      bg={theme.menuBackground}
+      width="100%"
+      borderBottom={showBorder ? `1px solid ${colors['neutral-gray'][150]}` : null}
+    >
       <Flex direction="column" bg={theme.menuBackground} overflow="visible" id="main_navbar" width="100%">
         <NavBar.SkipLinks />
         <Flex direction="column" zIndex={navBarZIndex} maxWidth="91.43rem" width="100%" margin="auto">
@@ -121,7 +128,7 @@ const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth }: Na
   )
 }
 
-const NavBarMobile = ({ children, links, theme, logoSrc, logoWidth }: NavBarProps) => {
+const NavBarMobile = ({ children, links, theme, logoSrc, logoWidth, showBorder }: NavBarProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const intl = useIntl()
   const { colors } = useTheme()
@@ -143,6 +150,7 @@ const NavBarMobile = ({ children, links, theme, logoSrc, logoWidth }: NavBarProp
       width="100vw"
       top={isOpen ? '0' : ''}
       height={isOpen ? '100vw' : ''}
+      borderBottom={showBorder ? `1px solid ${colors['neutral-gray'][150]}` : null}
     >
       <Flex
         px={4}
@@ -194,9 +202,10 @@ const NavBarMobile = ({ children, links, theme, logoSrc, logoWidth }: NavBarProp
 
 const NavBar = (props: NavBarProps) => {
   const { width } = useWindowWidth()
+  const { breadCrumbItems } = useNavBarContext()
 
-  if (width < 1133) return <NavBarMobile {...props} />
-  return <NavBarWeb {...props} />
+  if (width < 1133) return <NavBarMobile {...props} showBorder={!breadCrumbItems.length} />
+  return <NavBarWeb {...props} showBorder={!breadCrumbItems.length} />
 }
 
 NavBar.Link = NavBarLink

@@ -98,6 +98,10 @@ body.old-navbar {
   }
 }
 
+.main .section--custom:first-of-type {
+    border-top: 0;
+}
+
 .main .section--custom:last-of-type {
   border-bottom: 0;
 }

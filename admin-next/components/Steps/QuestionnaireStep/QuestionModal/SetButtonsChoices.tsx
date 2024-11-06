@@ -8,12 +8,10 @@ const Wrapper = ({
   formFieldName,
   withColors,
   children,
-  responseColorsDisabled,
 }: {
   formFieldName: string
   withColors: boolean
   children: any
-  responseColorsDisabled: boolean
 }) => {
   const { control } = useFormContext()
 
@@ -27,13 +25,12 @@ const Wrapper = ({
           '.cap-color-picker_container': { marginTop: '0 !important' },
         }}
       >
-        <FormControl name={`${formFieldName}.color`} control={control} isRequired position="relative">
+        <FormControl name={`${formFieldName}.color`} control={control} position="relative">
           <FieldInput
             type="colorPicker"
             id={`${formFieldName}.color`}
             name={`${formFieldName}.color`}
             control={control}
-            disabled={responseColorsDisabled}
           />
         </FormControl>
         {children}
@@ -67,11 +64,7 @@ const SetButtonsChoices: React.FC = () => {
           const formFieldName = `temporaryQuestion.choices.${index}`
           return (
             <Box key={choice.id} mb={4}>
-              <Wrapper
-                formFieldName={formFieldName}
-                withColors={type === 'button'}
-                responseColorsDisabled={responseColorsDisabled}
-              >
+              <Wrapper formFieldName={formFieldName} withColors={type === 'button'}>
                 <FormControl
                   name={`${formFieldName}.title`}
                   control={control}
@@ -91,26 +84,6 @@ const SetButtonsChoices: React.FC = () => {
                   />
                 </FormControl>
               </Wrapper>
-              <InputGroup
-                mb={1}
-                wrap="nowrap"
-                sx={{
-                  '.cap-form-control:last-child': { width: '100% !important' },
-                  '.cap-color-picker_container': { marginTop: '0 !important' },
-                }}
-              >
-                {type === 'button?' ? (
-                  <FormControl name={`${formFieldName}.color`} control={control} isRequired position="relative">
-                    <FieldInput
-                      type="colorPicker"
-                      id={`${formFieldName}.color`}
-                      name={`${formFieldName}.color`}
-                      control={control}
-                      disabled={responseColorsDisabled}
-                    />
-                  </FormControl>
-                ) : null}
-              </InputGroup>
             </Box>
           )
         })}

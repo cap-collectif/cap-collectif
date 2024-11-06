@@ -138,6 +138,7 @@ const getConfig = (currentLanguage, noCode, editor: { current: { component: IJod
     buttonsMD: buttons,
     buttonsSM: buttons,
     tabIndex: 0,
+    disablePlugins: 'add-new-line',
   }
 }
 

@@ -156,6 +156,7 @@ export const ProjectsMapView = ({
                 maxWidth: 'none !important',
                 padding: '0 !important',
               },
+              '.leaflet-overlay-pane .leaflet-interactive:hover': { filter: 'brightness(125%)', cursor: 'grab' },
             }}
           >
             <Flex justifyContent="space-between" alignItems="center" pl={[4, 0]}>

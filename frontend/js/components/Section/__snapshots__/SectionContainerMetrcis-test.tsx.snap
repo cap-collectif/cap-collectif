@@ -1,9 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<SectionContainerMetrics /> should render correctly with metrics 1`] = `
-<SectionContainerMetrics__MetricsRow
-  className="row"
->
+<SectionContainerMetrics__MetricsRow>
   <MetricsBox
     color="#F6F6F6"
     icon="cap-file-1"
@@ -37,8 +35,4 @@ exports[`<SectionContainerMetrics /> should render correctly with metrics 1`] = 
 </SectionContainerMetrics__MetricsRow>
 `;
 
-exports[`<SectionContainerMetrics /> should render empty 1`] = `
-<SectionContainerMetrics__MetricsRow
-  className="row"
-/>
-`;
+exports[`<SectionContainerMetrics /> should render empty 1`] = `<SectionContainerMetrics__MetricsRow />`;

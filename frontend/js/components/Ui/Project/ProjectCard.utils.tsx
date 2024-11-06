@@ -14,7 +14,7 @@ type Steps = ReadonlyArray<{
   readonly __typename: string
 }>
 
-export const formatCounter = (iconName: CapUIIcon, count: number, archived: boolean, label: string) => (
+export const formatCounter = (iconName: CapUIIcon, count: number, archived: boolean, label?: string) => (
   <Flex direction="row" alignItems="center">
     <DSIcon size={CapUIIconSize.Md} color={archived ? 'gray.500' : 'gray.700'} mr={1} name={iconName} />
     <Text fontSize={14} color={archived ? 'gray.500' : 'gray.900'} as="div">

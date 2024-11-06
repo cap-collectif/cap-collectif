@@ -140,7 +140,7 @@ export const getProposalFormUpdateVariablesInput = (
   const questions = formValues?.questionnaire?.questions ?? []
   const mergedArr = questions.map(q => {
     const j = formValues.questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
-    return { ...q, ...j }
+    return { ...q, jumps: [], alwaysJumpDestinationQuestion: null, ...j }
   })
 
   delete formValues.questionnaire
