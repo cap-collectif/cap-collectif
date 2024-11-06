@@ -130,7 +130,6 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::search);
             $this->manager->activate(Manager::http_redirects);
             $this->manager->activate(Manager::captcha);
-            $this->manager->deactivate(Manager::turnstile_captcha);
             $this->manager->activate(Manager::consent_internal_communication);
             $this->manager->activate(Manager::export);
             $this->manager->activate(Manager::shield_mode);
