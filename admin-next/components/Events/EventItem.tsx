@@ -142,7 +142,6 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, affiliations, viewer
           </Text>
         )}
       </Table.Td>
-      {isAdmin && <Table.Td>{event.creator && <Text fontSize={3}>{event.creator.username}</Text>}</Table.Td>}
       <Table.Td>
         {event?.creator?.url && event?.creator?.username && (
           <Link key={event?.creator?.id} href={event?.creator?.url}>

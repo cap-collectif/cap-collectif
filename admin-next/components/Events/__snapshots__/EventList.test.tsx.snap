@@ -203,11 +203,6 @@ exports[`<EventList /> should render correctly 1`] = `
           <th
             className="sc-bcXGCL jpIMR cap-table__th"
           >
-            admin.projects.list.author
-          </th>
-          <th
-            className="sc-bcXGCL jpIMR cap-table__th"
-          >
             <p
               className="sc-bcXGCL KWUHz cap-text"
             >
@@ -289,20 +284,6 @@ exports[`<EventList /> should render correctly 1`] = `
               -
                
               16/03/2035
-            </p>
-          </td>
-          <td
-            className="sc-bcXGCL dZCuae cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
-          >
-            <p
-              className="sc-bcXGCL bIufIz cap-text"
-            >
-              &lt;mock-value-for-field-"username"&gt;
             </p>
           </td>
           <td
@@ -481,20 +462,6 @@ exports[`<EventList /> should render correctly 1`] = `
               }
             }
           >
-            <p
-              className="sc-bcXGCL bIufIz cap-text"
-            >
-              &lt;mock-value-for-field-"username"&gt;
-            </p>
-          </td>
-          <td
-            className="sc-bcXGCL dZCuae cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
-          >
             <a
               className="sc-bcXGCL bYDxrx cap-link"
               href="<mock-value-for-field-"url">"
@@ -586,20 +553,6 @@ exports[`<EventList /> should render correctly 1`] = `
               -
                
               02/02/2040
-            </p>
-          </td>
-          <td
-            className="sc-bcXGCL dZCuae cap-table__td"
-            style={
-              {
-                "whiteSpace": "initial",
-              }
-            }
-          >
-            <p
-              className="sc-bcXGCL bIufIz cap-text"
-            >
-              &lt;mock-value-for-field-"username"&gt;
             </p>
           </td>
           <td

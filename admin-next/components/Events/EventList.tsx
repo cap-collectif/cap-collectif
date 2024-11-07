@@ -125,7 +125,6 @@ const EventList: React.FC<EventListProps> = ({ viewer: viewerRef, eventOwner, te
               </Table.Menu.OptionGroup>
             </Table.Menu>
           </Table.Th>
-          {isAdmin && <Table.Th lineHeight="sm">{intl.formatMessage({ id: 'admin.projects.list.author' })}</Table.Th>}
           <Table.Th>
             <Text lineHeight="sm">{intl.formatMessage({ id: 'admin.projects.list.author' })}</Text>
           </Table.Th>
