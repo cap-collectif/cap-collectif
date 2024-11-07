@@ -48,7 +48,7 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php${PHP_VERSION}-zip \
         php${PHP_VERSION}-amqp \
         php${PHP_VERSION}-simplexml \
-        php${PHP_VERSION}-xdebug
+        php-pear
 
 RUN <<EOF
 echo "
@@ -57,8 +57,11 @@ apc.enable=1
 " >> /etc/php/${PHP_VERSION}/mods-available/apcu.ini
 EOF
 
+RUN pecl install xdebug-3.2.2
+
 RUN <<EOF
 echo "
+zend_extension=$(find / -name xdebug.so)
 xdebug.mode=debug
 xdebug.discover_client_host=true
 xdebug.client_host=host.docker.internal
@@ -67,6 +70,9 @@ xdebug.force_display_errors=1
 xdebug.force_error_reporting=1
 " >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini
 EOF
+
+RUN ln -s /etc/php/${PHP_VERSION}/mods-available/xdebug.ini /etc/php/${PHP_VERSION}/cli/conf.d/20-xdebug.ini \
+    && ln -s /etc/php/${PHP_VERSION}/mods-available/xdebug.ini /etc/php/${PHP_VERSION}/fpm/conf.d/20-xdebug.ini
 
 RUN <<EOF
 echo "
