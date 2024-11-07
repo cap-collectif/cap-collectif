@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Accordion, CapUIIcon, Flex, FormLabel, Icon, ButtonQuickAction, Text, Link } from '@cap-collectif/ui'
+import { Accordion, CapUIIcon, Flex, FormLabel, Icon, ButtonQuickAction, Text, Link, Box } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { ProjectConfigFormPublication_project$key } from '@relay/ProjectConfigFormPublication_project.graphql'
 import { useDisclosure } from '@liinkiing/react-hooks'
@@ -65,33 +65,46 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
               placeholder={intl.formatMessage({ id: 'locale.all-locales' })}
               control={control}
               options={locales}
-              // @ts-ignore cap-collectif/form/issues/53
               id="locale"
             />
           </FormControl>
         ) : null}
         {isOpen ? <UpdateSlugModal project={project} onClose={onClose} /> : null}
-        <FormLabel label={intl.formatMessage({ id: 'permalink' })} mb={1} />
-        <Flex
-          border="normal"
-          borderRadius="normal"
-          borderColor="gray.300"
-          justify="space-between"
-          alignItems="center"
-          pl={2}
-        >
-          <Text truncate={30}>{url}</Text>
-          <ButtonQuickAction
-            id="edit-slug"
-            variantColor="blue"
-            icon={CapUIIcon.Pencil}
-            label={intl.formatMessage({
-              id: 'global.edit',
-            })}
-            onClick={onOpen}
-            type="button"
-          />
-        </Flex>
+        <Box mb={4}>
+          <FormLabel label={intl.formatMessage({ id: 'permalink' })} mb={1} />
+          <Flex
+            border="normal"
+            borderRadius="normal"
+            borderColor="gray.300"
+            justify="space-between"
+            alignItems="center"
+            pl={2}
+          >
+            <Text truncate={30}>{url}</Text>
+            <ButtonQuickAction
+              id="edit-slug"
+              variantColor="blue"
+              icon={CapUIIcon.Pencil}
+              label={intl.formatMessage({
+                id: 'global.edit',
+              })}
+              onClick={onOpen}
+              type="button"
+            />
+          </Flex>
+        </Box>
+        <FormControl name="archived" control={control} width="100%">
+          <FieldInput
+            type="checkbox"
+            name="archived"
+            control={control}
+            options={locales}
+            id="archived"
+          >
+            {intl.formatMessage({ id: 'archive.project' })}
+          </FieldInput>
+        </FormControl>
+
       </Accordion.Panel>
     </>
   )
