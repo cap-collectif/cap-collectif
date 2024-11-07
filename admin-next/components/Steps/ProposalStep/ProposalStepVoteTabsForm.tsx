@@ -192,9 +192,15 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
-                    {intl.formatMessage({
-                      id: 'Number-of-votes-per-person',
-                    })}
+                    <Text as="span">
+                      {intl.formatMessage({
+                        id: 'vote-by-person',
+                      })}
+                      {' '}
+                      <Text fontWeight="400" as="i" color="gray.500">
+                          ({intl.formatMessage({ id: 'ranking-optionnal' })})
+                      </Text>
+                    </Text>
                   </ListCard.Item.Label>
                   <Switch
                     id="votesMin-votesLimit_switch"
