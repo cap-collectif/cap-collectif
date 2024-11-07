@@ -1,0 +1,10 @@
+SluggableEntity:
+    type: enum
+    config:
+        name: SluggableEntity
+        description: 'Available sluggable entities.'
+        values:
+            ORGANIZATION:
+                value: !php/const Capco\AppBundle\Enum\SluggableEntity::ORGANIZATION
+            DISTRICT:
+                value: !php/const Capco\AppBundle\Enum\SluggableEntity::DISTRICT

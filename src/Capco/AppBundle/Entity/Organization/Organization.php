@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Organization;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
@@ -23,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )*
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
-class Organization implements Translatable, Author, ProjectOwner, IndexableInterface
+class Organization implements Translatable, Author, ProjectOwner, IndexableInterface, SluggableInterface
 {
     use SluggableTranslatableTitleTrait;
     use TimestampableTrait;

@@ -1,0 +1,8 @@
+NodeSlug:
+    type: interface
+    config:
+        description: 'A object that has a slug.'
+        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Type\\NodeSlugTypeResolver", [value])'
+        fields:
+            slug:
+                type: 'String!'

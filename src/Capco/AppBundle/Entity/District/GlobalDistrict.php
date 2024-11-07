@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\District;
 
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\Media\CoverTrait;
 use Capco\AppBundle\Traits\TextableTrait;
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\GlobalDistrictRepository")
  */
-class GlobalDistrict extends AbstractDistrict
+class GlobalDistrict extends AbstractDistrict implements SluggableInterface
 {
     use CoverTrait;
     use FollowableTrait;

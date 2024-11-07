@@ -25,6 +25,7 @@ InternalOrganization:
             - InternalMailingListOwner
             - InternalEmailingCampaignOwner
             - InternalConsultationOwner
+            - NodeSlug
         fields:
             id:
                 description: 'The ID of an object.'

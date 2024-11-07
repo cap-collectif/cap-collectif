@@ -678,4 +678,15 @@ InternalQuery:
                 type: 'Footer!'
                 description: 'Footer configuration'
                 resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\FooterResolver", [args])'
+            nodeSlug:
+                type: 'NodeSlug'
+                args:
+                    entity:
+                        type: 'SluggableEntity!'
+                        description: 'The name of the entity'
+                    slug:
+                        type: 'String!'
+                        description: 'The slug to search for.'
+                description: 'Get a node by its slug.'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\NodeSlugResolver", [args])'
 

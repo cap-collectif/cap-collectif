@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query.nodeSlug fetches a district by its slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "name": "Dervallières Zola",
+    "slug": "dervallieres-zola",
+  },
+}
+`;
+
+exports[`Internal|Query.nodeSlug fetches an organization by its slug 1`] = `
+Object {
+  "nodeSlug": Object {
+    "slug": "organisation-sans-members",
+    "title": "Organisation sans members",
+  },
+}
+`;

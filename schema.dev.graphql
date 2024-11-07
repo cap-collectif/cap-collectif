@@ -7400,7 +7400,7 @@ input GeoBoundingBox {
 scalar GeoJSON
 
 """A global district"""
-type GlobalDistrict implements District & Node {
+type GlobalDistrict implements District & Node & NodeSlug {
   """The ID of an object"""
   id: ID!
   name(
@@ -9113,6 +9113,11 @@ interface Node {
   id: ID!
 }
 
+"""A object that has a slug."""
+interface NodeSlug {
+  slug: String!
+}
+
 """Possible reason that a `Publishable` is not published."""
 enum NotPublishedReason {
   """Author account was confirmed after the step has ended."""
@@ -9609,7 +9614,7 @@ enum OrderDirection {
 }
 
 """An organization."""
-type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner & MailingListOwner & EmailingCampaignOwner & ConsultationOwner {
+type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwner & ProposalFormOwner & QuestionnaireOwner & MailingListOwner & EmailingCampaignOwner & ConsultationOwner & NodeSlug {
   """The ID of an object."""
   id: ID!
 
@@ -14114,6 +14119,15 @@ type Query {
 
   """Footer configuration"""
   footer: Footer!
+
+  """Get a node by its slug."""
+  nodeSlug(
+    """The name of the entity"""
+    entity: SluggableEntity!
+
+    """The slug to search for."""
+    slug: String!
+  ): NodeSlug
 }
 
 input QueryAnalyticsFilter {
@@ -16895,6 +16909,12 @@ enum SiteSettingsStatus {
 
   """The site redirects correctly to the custom domain."""
   ACTIVE
+}
+
+"""Available sluggable entities."""
+enum SluggableEntity {
+  ORGANIZATION
+  DISTRICT
 }
 
 """Sms analytics."""
