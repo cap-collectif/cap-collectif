@@ -65,7 +65,7 @@ zend_extension=$(find / -name xdebug.so)
 xdebug.mode=debug
 xdebug.discover_client_host=true
 xdebug.client_host=host.docker.internal
-xdebug.start_with_request=yes
+xdebug.start_with_request=trigger
 xdebug.force_display_errors=1
 xdebug.force_error_reporting=1
 " >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini
