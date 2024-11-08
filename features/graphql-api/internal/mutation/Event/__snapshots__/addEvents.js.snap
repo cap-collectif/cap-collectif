@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addEventsInput wants to add a list of events with dry run as admin 1`] = `
+Object {
+  "addEvents": Object {
+    "importedEvents": Array [
+      Object {
+        "address": "25 rue Claude Tillier",
+        "author": Object {
+          "id": "VXNlcjp1c2VyU3B5bA==",
+        },
+        "city": "Paris",
+        "commentable": false,
+        "country": "France",
+        "districts": Object {
+          "edges": Array [
+            Object {
+              "node": Object {
+                "id": "RGlzdHJpY3Q6Z2xvYmFsRGlzdHJpY3Qx",
+              },
+            },
+          ],
+        },
+        "projects": Array [
+          Object {
+            "id": "UHJvamVjdDpleHRlcm5hbFByb2plY3Q=",
+          },
+          Object {
+            "id": "UHJvamVjdDpwcm9qZWN0MQ==",
+          },
+        ],
+        "themes": Array [
+          Object {
+            "id": "theme1",
+          },
+        ],
+        "timeRange": Object {
+          "endAt": "2018-03-16 00:00:00",
+          "startAt": "2018-03-07 00:00:00",
+        },
+        "translations": Array [
+          Object {
+            "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
+            "link": "https://facebook.com/inscrivez-vous-ici",
+            "title": "Rencontre avec les habitants",
+          },
+        ],
+        "zipCode": "75012",
+      },
+    ],
+  },
+}
+`;

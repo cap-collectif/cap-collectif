@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.setEvaluationFormInProposalFormInput wants to add an evaluation form to a proposal as admin 1`] = `
+Object {
+  "setEvaluationFormInProposalForm": Object {
+    "proposalForm": Object {
+      "evaluationForm": Object {
+        "id": "UXVlc3Rpb25uYWlyZTpxdWVzdGlvbm5haXJlNQ==",
+        "title": "Questionnaire pour budget participatif disponible",
+      },
+      "id": "proposalFormVote",
+    },
+  },
+}
+`;

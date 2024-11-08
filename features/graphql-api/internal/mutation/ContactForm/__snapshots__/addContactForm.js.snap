@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.addContactFormInput wants to add contact form as admin 1`] = `
+Object {
+  "addContactForm": Object {
+    "contactForm": Object {
+      "body": "holalala ca marche pas votre site c'est vraiment nul pourquoi vous etes nul en plus c'est pas open source en plus vous utilisez du javascript c'est pas francais comme technologie et mon chat vient de vomir et ma contribution n'a pas eu 15.000 j'aime et puis j'aime pas la démocratie c'est trop mainstream.",
+      "confidentiality": "Vous ne lirez probablement jamais cela",
+      "email": "admin1@admin.fr",
+      "title": "Ceci n'est pas un titre",
+      "translations": Array [
+        Object {
+          "locale": "en-GB",
+          "title": "This is not a title",
+        },
+        Object {
+          "locale": "fr-FR",
+          "title": "Ceci n'est pas un titre",
+        },
+      ],
+    },
+  },
+}
+`;
