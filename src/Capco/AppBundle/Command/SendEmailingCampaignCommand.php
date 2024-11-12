@@ -61,9 +61,16 @@ class SendEmailingCampaignCommand extends Command
             return 0;
         }
 
-        foreach ($this->getEmailingCampaignsToBeSend($input) as $emailingCampaign) {
-            $this->send($emailingCampaign, $output);
-        }
+        do {
+            // Planned campaigns are retrieved from DB one by one to avoid concurrency when this command
+            // is running multiple times in parallel (cronjob is planned every 5 min but timeout is 15 min
+            // for campaigns with many users).
+            $emailingCampaigns = $this->getEmailingCampaignsToBeSend($input);
+
+            if (\count($emailingCampaigns) > 0) {
+                $this->send($emailingCampaigns[0], $output);
+            }
+        } while (\count($emailingCampaigns) > 1);
 
         return 0;
     }
@@ -83,7 +90,7 @@ class SendEmailingCampaignCommand extends Command
     {
         $dateTime = new \DateTime($input->getOption('time'));
 
-        return $this->repository->findPlanned($dateTime);
+        return $this->repository->findPlannedOrSending($dateTime);
     }
 
     private function send(EmailingCampaign $emailingCampaign, OutputInterface $output): void

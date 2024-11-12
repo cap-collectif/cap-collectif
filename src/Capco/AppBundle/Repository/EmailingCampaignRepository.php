@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Enum\EmailingCampaignAffiliation;
 use Capco\AppBundle\Enum\EmailingCampaignStatus;
 use Capco\UserBundle\Entity\User;
+use DateTimeInterface;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\QueryBuilder;
 
@@ -62,12 +63,18 @@ class EmailingCampaignRepository extends EntityRepository
         ;
     }
 
-    public function findPlanned(\DateTimeInterface $sendAt): array
+    /**
+     * @return array<int, EmailingCampaign>
+     */
+    public function findPlannedOrSending(DateTimeInterface $sendAt): array
     {
         return $this->createQueryBuilder('ec')
-            ->where('ec.status = :status')
-            ->AndWhere('ec.sendAt < :sendAt')
-            ->setParameter('status', EmailingCampaignStatus::PLANNED)
+            ->where('ec.status in (:statuses)')
+            ->andWhere('ec.sendAt < :sendAt')
+            ->setParameter('statuses', [
+                EmailingCampaignStatus::PLANNED,
+                EmailingCampaignStatus::SENDING,
+            ])
             ->setParameter('sendAt', $sendAt)
             ->getQuery()
             ->getResult()

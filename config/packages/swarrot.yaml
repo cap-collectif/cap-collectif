@@ -946,7 +946,7 @@ swarrot:
                 - configurator: swarrot.processor.signal_handler
                 - configurator: swarrot.processor.max_execution_time
                   extras:
-                      max_execution_time: 100
+                      max_execution_time: 300
                 - configurator: swarrot.processor.max_messages
                 - configurator: swarrot.processor.doctrine_connection
                 - configurator: swarrot.processor.doctrine_object_manager

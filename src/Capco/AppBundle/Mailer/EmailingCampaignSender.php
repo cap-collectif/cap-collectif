@@ -20,6 +20,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
+use Psr\Log\LoggerInterface;
 use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 use Symfony\Component\Routing\RouterInterface;
 
@@ -33,6 +34,7 @@ class EmailingCampaignSender
     private ProjectEmailableContributorsResolver $projectEmailableContributorsResolver;
     private EntityManagerInterface $em;
     private EmailingCampaignUserRepository $emailingCampaignUserRepository;
+    private LoggerInterface $logger;
 
     public function __construct(
         MailerService $mailerService,
@@ -42,7 +44,8 @@ class EmailingCampaignSender
         TokenManager $tokenManager,
         ProjectEmailableContributorsResolver $projectEmailableContributorsResolver,
         EntityManagerInterface $em,
-        EmailingCampaignUserRepository $emailingCampaignUserRepository
+        EmailingCampaignUserRepository $emailingCampaignUserRepository,
+        LoggerInterface $logger
     ) {
         $this->mailerService = $mailerService;
         $this->userRepository = $userRepository;
@@ -52,32 +55,45 @@ class EmailingCampaignSender
         $this->projectEmailableContributorsResolver = $projectEmailableContributorsResolver;
         $this->em = $em;
         $this->emailingCampaignUserRepository = $emailingCampaignUserRepository;
+        $this->logger = $logger;
     }
 
     public function send(EmailingCampaign $emailingCampaign): int
     {
-        $emailingCampaignUsers = $this->getEmailingCampaingUsers($emailingCampaign);
+        $batchSize = 500;
+        $totalCount = 0;
 
-        $count = 0;
-        /** * @var EmailingCampaignUser $emailingCampaignUser  */
-        foreach ($emailingCampaignUsers as $emailingCampaignUser) {
-            ++$count;
-            $this->createAndSendMessage($emailingCampaign, $emailingCampaignUser->getUser());
+        do {
+            $emailingCampaignUsers = $this->getEmailingCampaignUsersUnsent($emailingCampaign, $batchSize);
+            $this->logger->debug('$totalCount: ' . $totalCount);
+            $this->logger->debug(sprintf('Memory: %s', memory_get_usage(true)));
 
-            $emailingCampaignUser->setSentAt(new \DateTime());
-            $this->em->persist($emailingCampaignUser);
-            if (0 === $count % 10) {
-                $this->em->flush();
+            $count = 0;
+            /** * @var EmailingCampaignUser $emailingCampaignUser  */
+            foreach ($emailingCampaignUsers as $emailingCampaignUser) {
+                ++$count;
+                $this->createAndSendMessage($emailingCampaign, $emailingCampaignUser->getUser());
+
+                $emailingCampaignUser->setSentAt(new \DateTime());
+                $this->em->persist($emailingCampaignUser);
+                if (0 === $count % 50) {
+                    $this->em->flush();
+                }
             }
-        }
-        $this->em->flush();
+            $this->em->flush();
+
+            $totalCount += $emailingCampaignUsers->count();
+        } while (0 < $emailingCampaignUsers->count());
 
         $this->setCampaignAsSent($emailingCampaign);
 
-        return $emailingCampaignUsers->count();
+        return $totalCount;
     }
 
-    public function getEmailingCampaingUsers(EmailingCampaign $emailingCampaign): ArrayCollection
+    /**
+     * @return ArrayCollection<int, EmailingCampaignUser>
+     */
+    public function getEmailingCampaignUsersUnsent(EmailingCampaign $emailingCampaign, int $maxResults = 0): ArrayCollection
     {
         $allRecipients = $this->getRecipients($emailingCampaign);
 
@@ -91,11 +107,9 @@ class EmailingCampaignSender
                 $this->em->persist($emailingCampaignUser);
             }
             $this->em->flush();
-
-            return $emailingCampaignUsers;
         }
 
-        return $this->emailingCampaignUserRepository->findUnSentByEmailingCampaign($emailingCampaign);
+        return $this->emailingCampaignUserRepository->findUnsentByEmailingCampaign($emailingCampaign, $maxResults);
     }
 
     private function createAndSendMessage(

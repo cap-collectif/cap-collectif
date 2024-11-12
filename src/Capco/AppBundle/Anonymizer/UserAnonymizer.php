@@ -104,6 +104,10 @@ class UserAnonymizer
         $user->setLocked(true);
         $user->setOpenIdSessionsId([]);
 
+        $user->setConsentExternalCommunication(false);
+        $user->setConsentInternalCommunication(false);
+        $user->setEmailConfirmationSentAt(null);
+
         if ($user->getMedia()) {
             try {
                 $this->removeObjectMedia($user);
