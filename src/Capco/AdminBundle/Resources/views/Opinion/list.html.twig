@@ -1,7 +1,7 @@
-{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+{% extends '@SonataAdmin/CRUD/base_list.html.twig' %}
 
 {% block actions %}
-{% spaceless %}
+{% apply spaceless %}
     {% if admin.hasRoute('create') and admin.isGranted('CREATE')%}
         <p class="navbar-btn">
             <button type="button" class="btn btn-link" data-toggle="modal" data-target="#opinion-create-modal">
@@ -10,7 +10,7 @@
             </button>
         </p>
     {% endif %}
-{% endspaceless %}
+{% endapply %}
 {% endblock %}
 
 

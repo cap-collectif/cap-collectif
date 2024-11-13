@@ -15,7 +15,7 @@ class EvaluationController extends Controller
      * @Security("has_role('ROLE_USER')")
      * @Route("/evaluations/project/{projectSlug}", name="user_analysis_project")
      * @Route("/evaluations", name="user_evaluations")
-     * @Template("CapcoAppBundle:Evaluation:index.html.twig")
+     * @Template("@CapcoApp/Evaluation/index.html.twig")
      */
     public function indexAction(Request $request)
     {

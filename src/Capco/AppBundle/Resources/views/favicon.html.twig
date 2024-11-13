@@ -1,4 +1,4 @@
-{% spaceless %}
+{% apply spaceless %}
     {% set favicons = site_favicons() %}
     {% if favicons is not null %}
         <link rel="icon" type="image/png" href="{{ favicons['favicon_16'] }}" sizes="16x16">
@@ -31,4 +31,4 @@
     {% endif %}
     <link rel="manifest" href="/manifest.json">
     <meta name="msapplication-config" content="/browserconfig.xml" />
-{% endspaceless %}
+{% endapply %}

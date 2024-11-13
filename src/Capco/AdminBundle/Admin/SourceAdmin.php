@@ -98,22 +98,22 @@ class SourceAdmin extends AbstractAdmin
         $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
-                'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/title_list_field.html.twig',
                 'route' => [
                     'name' => 'edit',
                 ],
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/author_list_field.html.twig',
             ])
             ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/project_list_field.html.twig',
             ])
             ->add('opinion', ModelType::class, [
                 'label' => 'global.proposal',
-                'template' => 'CapcoAdminBundle:common:opinion_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/opinion_list_field.html.twig',
             ])
             ->add('category', ModelType::class, ['label' => 'global.type'])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
@@ -122,7 +122,7 @@ class SourceAdmin extends AbstractAdmin
                 'label' => 'global.published',
             ])
             ->add('trashedStatus', null, [
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
+                'template' => '@CapcoAdmin/Trashable/trashable_status.html.twig',
                 'label' => 'global.is_trashed',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])

@@ -77,7 +77,7 @@ class MediasController extends AbstractController
         }
         $media = $this->mediaManager->createFileFromUploadedFile($uploadedFile);
 
-        $response = $this->render('CapcoMediaBundle:MediaAdmin:upload.html.twig', [
+        $response = $this->render('@CapcoMedia/MediaAdmin/upload.html.twig', [
             'object' => $media,
         ]);
         $response->headers->set('content-type', 'text/html');

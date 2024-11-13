@@ -32,7 +32,7 @@ class MediaAdminController extends AbstractController
 
     public function listAction(): Response
     {
-        return $this->render('CapcoMediaBundle:MediaAdmin:list.html.twig');
+        return $this->render('@CapcoMedia/MediaAdmin/list.html.twig');
     }
 
     /**
@@ -65,7 +65,7 @@ class MediaAdminController extends AbstractController
             }
         }
 
-        return $this->render('CapcoAdminBundle:Media:create.html.twig', [
+        return $this->render('@CapcoAdmin/Media/create.html.twig', [
             'errors' => $errors,
         ]);
     }

@@ -102,7 +102,7 @@ class StepAdmin extends CapcoAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('edit', 'CapcoAdminBundle:Step:edit.html.twig');
+        //$this->setTemplate('edit', '@CapcoAdmin/Step/edit.html.twig');
         parent::configure();
     }
 

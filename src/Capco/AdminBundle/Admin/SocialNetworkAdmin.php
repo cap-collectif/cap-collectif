@@ -81,7 +81,7 @@ class SocialNetworkAdmin extends AbstractAdmin
                 'label' => 'global.link',
             ])
             ->add('media', null, [
-                'template' => 'CapcoAdminBundle:SocialNetwork:media_list_field.html.twig',
+                'template' => '@CapcoAdmin/SocialNetwork/media_list_field.html.twig',
                 'label' => 'global.image',
             ])
             ->add('position', null, [
@@ -136,7 +136,7 @@ class SocialNetworkAdmin extends AbstractAdmin
                 'label' => 'global.link',
             ])
             ->add('media', null, [
-                'template' => 'CapcoAdminBundle:SocialNetwork:media_show_field.html.twig',
+                'template' => '@CapcoAdmin/SocialNetwork/media_show_field.html.twig',
                 'label' => 'global.image',
             ])
             ->add('position', null, [
@@ -154,5 +154,10 @@ class SocialNetworkAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete']);
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 }

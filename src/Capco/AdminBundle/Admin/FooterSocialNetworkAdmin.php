@@ -76,7 +76,7 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
                 'label' => 'global.link',
             ])
             ->add('style', 'string', [
-                'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_list_field.html.twig',
+                'template' => '@CapcoAdmin/FooterSocialNetwork/style_list_field.html.twig',
                 'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
@@ -131,7 +131,7 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
                 'label' => 'global.link',
             ])
             ->add('style', null, [
-                'template' => 'CapcoAdminBundle:FooterSocialNetwork:style_show_field.html.twig',
+                'template' => '@CapcoAdmin/FooterSocialNetwork/style_show_field.html.twig',
                 'label' => 'admin.fields.footer_social_network.style',
             ])
             ->add('position', null, [
@@ -149,5 +149,10 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete']);
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 }

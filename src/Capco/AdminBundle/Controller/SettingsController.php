@@ -98,7 +98,7 @@ class SettingsController extends Controller
 
     /**
      * @Route("/admin/settings/{category}/list", name="capco_admin_settings")
-     * @Template("CapcoAdminBundle:Settings:list.html.twig")
+     * @Template("@CapcoAdmin/Settings/list.html.twig")
      *
      * @param mixed $category
      */

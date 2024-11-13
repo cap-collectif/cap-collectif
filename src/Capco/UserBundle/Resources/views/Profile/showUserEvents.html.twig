@@ -1,11 +1,11 @@
 {% set page_class = "profile-page" %}
-{% extends "CapcoUserBundle::layout.html.twig" %}
+{% extends "@CapcoUser/layout.html.twig" %}
 
 {% block canonical_link %}{{ url('capco_user_profile_show_events', {'slug': user.slug}) }}{% endblock %}
 
 {% block metaTags %}
     {% set userMedia %}{% if user.media %}{{ media_public_url(user.media, 'default_avatar') }}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       'usernames-profile'|trans({'userName': user.username }, 'CapcoAppBundle')~' - '~'user.profile.show.propositions.arguments.title'|trans({}, 'CapcoAppBundle'),
         'description': user.biography,
         'url':         url('capco_user_profile_show_events', {'slug': user.slug}),

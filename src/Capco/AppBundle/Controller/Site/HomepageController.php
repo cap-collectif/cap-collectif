@@ -34,7 +34,7 @@ class HomepageController extends Controller
 
     /**
      * @Route("/", name="app_homepage")
-     * @Template("CapcoAppBundle:Homepage:homepage.html.twig")
+     * @Template("@CapcoApp/Homepage/homepage.html.twig")
      */
     public function homepageAction(Request $request)
     {

@@ -3,7 +3,7 @@
 <li class="opinion  opinion--argument {% if argument.author.isVip %}bg-vip{% endif %}{% if classes is defined %} {{ classes }}{% endif %}" id="arg-{{ argument.id }}">
     <div class="opinion__body  box">
         {% if argument.Author is not null %}
-            {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': argument.Author, 'classes': '', 'link_classes': 'pull-left'} only %}
+            {% include '@CapcoUser/Avatar/avatar.html.twig' with { 'user': argument.Author, 'classes': '', 'link_classes': 'pull-left'} only %}
         {% endif %}
         <div class="opinion__data">
             <p class="h5  opinion__user">

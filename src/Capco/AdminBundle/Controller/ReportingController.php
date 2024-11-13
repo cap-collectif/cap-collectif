@@ -34,7 +34,7 @@ class ReportingController extends AbstractSonataCrudController
 
         $fields = $this->admin->getShow();
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:Reporting:show.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/Reporting/show.html.twig', [
             'action' => 'show',
             'object' => $object,
             'elements' => $fields,

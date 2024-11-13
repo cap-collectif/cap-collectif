@@ -9,6 +9,6 @@ class EmailingListController extends \Sonata\AdminBundle\Controller\CRUDControll
 {
     public function listAction(Request $request): Response
     {
-        return $this->renderWithExtraParams('CapcoAdminBundle:Emailing:emailingList.html.twig');
+        return $this->renderWithExtraParams('@CapcoAdmin/Emailing/emailingList.html.twig');
     }
 }

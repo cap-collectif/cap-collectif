@@ -30,7 +30,7 @@ class ProjectAccessDeniedExceptionListener
         $params = ['title' => 'unauthorized-access'];
 
         $response = new Response(
-            $this->templating->render('CapcoAppBundle:Default:403.html.twig', $params),
+            $this->templating->render('@CapcoApp/Default/403.html.twig', $params),
             Response::HTTP_FORBIDDEN
         );
         $event->setResponse($response);

@@ -21,7 +21,7 @@
                         {{ form_start(form) }}
                             <div class="dialog__body  box">
                                 <div class="media">
-                                    {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': comment.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
+                                    {% include '@CapcoUser/Avatar/avatar.html.twig' with { 'user': comment.Author, 'classes': 'media-object', 'link_classes': 'pull-left'} only %}
                                     <div class="media-body">
                                         {% if form.confirm %}
                                             {{ form_errors(form.confirm) }}

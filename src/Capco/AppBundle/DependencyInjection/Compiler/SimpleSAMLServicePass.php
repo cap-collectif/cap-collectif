@@ -6,7 +6,6 @@ use Capco\AppBundle\Helper\EnvHelper;
 use Capco\UserBundle\Authenticator\SamlAuthenticator;
 use Capco\UserBundle\Authenticator\SimplePreAuthenticator;
 use Capco\UserBundle\Security\Core\User\SamlUserProvider;
-use Capco\UserBundle\Security\Core\User\SimplePreAuthenticatorUserProvider;
 use Capco\UserBundle\Security\Http\Logout\Handler\SAMLLogoutHandler;
 use SimpleSAML\Auth\Simple;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
@@ -32,11 +31,6 @@ class SimpleSAMLServicePass implements CompilerPassInterface
             $container->removeDefinition('simplesamlphp.authenticator');
             $container->removeDefinition('simplesamlphp.logout_handler');
             $container->removeDefinition('simplesamlphp.auth');
-
-            $definitionSimplePreUserProvider = $container->getDefinition(
-                SimplePreAuthenticatorUserProvider::class
-            );
-            $definitionSimplePreUserProvider->setArgument('$samlProvider', null);
 
             $definitionSimplePreAuthenticator = $container->getDefinition(
                 SimplePreAuthenticator::class

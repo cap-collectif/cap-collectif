@@ -82,4 +82,9 @@ class UserTypeAdmin extends AbstractAdmin
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete']);
     }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
+    }
 }

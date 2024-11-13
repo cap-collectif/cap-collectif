@@ -1,4 +1,4 @@
-{% extends 'SonataAdminBundle::standard_layout.html.twig' %}
+{% extends '@SonataAdmin/standard_layout.html.twig' %}
 {% block sonata_header %}
     <div style="width: 100%;">
         <header class="main-header">
@@ -230,7 +230,7 @@
 {% endblock sonata_sidebar_search %}
 {% block meta_tags %}
     {{ parent() }}
-    {% include 'CapcoAppBundle::favicon.html.twig' %}
+    {% include '@CapcoApp/favicon.html.twig' %}
 {% endblock %}
 {% block stylesheets %}
     {# Sonata css #}
@@ -267,11 +267,11 @@
 {% endblock %}
 {% block javascripts %}
     {% if is_feature_enabled('helpscout_beacon') %}
-        {% include 'CapcoAdminBundle:partials/javascripts:_beamer.html.twig' %}
-        {% include 'CapcoAdminBundle:partials/javascripts:_helpscout.html.twig' %}
+        {% include '@CapcoAdmin/partials/javascripts/_beamer.html.twig' %}
+        {% include '@CapcoAdmin/partials/javascripts/_helpscout.html.twig' %}
     {% endif %}
     {% if is_feature_enabled('online_help') %}
-        {% include 'CapcoAdminBundle:partials/javascripts:_online_help.html.twig' %}
+        {% include '@CapcoAdmin/partials/javascripts/_online_help.html.twig' %}
     {% endif %}
     {#    jquery2 is deprecated but used by bootstrap, remove it when possible #}
     <script
@@ -305,12 +305,12 @@
             }
         });
     </script>
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
-    {% include 'CapcoAdminBundle::analytics_trackers.html.twig' %}
+    {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
+    {% include '@CapcoAdmin/analytics_trackers.html.twig' %}
 {% endblock %}
 {% block logo %}
     {% if admin_pool is defined %}
-        {% spaceless %}
+        {% apply spaceless %}
             <a class="logo" href="{{ url('app_homepage', { '_locale': app.request.locale}) }}">
                 {% if 'single_image' == admin_pool.getOption('title_mode') or 'both' == admin_pool.getOption('title_mode') %}
                     <img src="{{ asset(admin_pool.titlelogo) }}" alt="{{ admin_pool.title }}">
@@ -319,7 +319,7 @@
                     <span>{{ admin_pool.title }}</span>
                 {% endif %}
             </a>
-        {% endspaceless %}
+        {% endapply %}
     {% endif %}
 {% endblock %}
 {% block side_bar_nav %}
@@ -355,8 +355,8 @@
                             <i class="fa pull-right fa-angle-left"></i>
                         </a>
                         <ul class="treeview-menu{% if active %} active{% endif %}">
-                            {% include 'CapcoAdminBundle:RecentContributions:list_items.html.twig' %}
-                            {% include 'CapcoAdminBundle:RecentReporting:list_items.html.twig' %}
+                            {% include '@CapcoAdmin/RecentContributions/list_items.html.twig' %}
+                            {% include '@CapcoAdmin/RecentReporting/list_items.html.twig' %}
                             {% for admin in group.items %}
                                 {% if admin.hasroute('list') and admin.isGranted('LIST') and is_admin_enabled(admin) %}
                                     <li{% if app.request.get('_sonata_admin') == admin.code %} class="active"{% endif %}>
@@ -365,7 +365,7 @@
                                         </a></li>
                                 {% endif %}
                             {% endfor %}
-                            {% include 'CapcoAdminBundle:Settings:list_items.html.twig' %}
+                            {% include '@CapcoAdmin/Settings/list_items.html.twig' %}
                         </ul>
                     </li>
                 {% endif %}

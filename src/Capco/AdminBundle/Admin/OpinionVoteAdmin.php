@@ -43,7 +43,7 @@ class OpinionVoteAdmin extends AbstractAdmin
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('value', null, [
                 'label' => 'global.value',
-                'template' => 'CapcoAdminBundle:OpinionVote:value_list_field.html.twig',
+                'template' => '@CapcoAdmin/OpinionVote/value_list_field.html.twig',
                 'labels' => OpinionVote::$voteTypesLabels,
                 'styles' => OpinionVote::$voteTypesStyles,
             ])
@@ -61,7 +61,7 @@ class OpinionVoteAdmin extends AbstractAdmin
             ->add('user', ModelType::class, ['label' => 'global.author'])
             ->add('value', null, [
                 'label' => 'global.value',
-                'template' => 'CapcoAdminBundle:OpinionVote:value_show_field.html.twig',
+                'template' => '@CapcoAdmin/OpinionVote/value_show_field.html.twig',
                 'labels' => OpinionVote::$voteTypesLabels,
                 'styles' => OpinionVote::$voteTypesStyles,
             ])

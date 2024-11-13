@@ -341,7 +341,7 @@ class Manager
     public function dispatchEvent(Toggle $toggle)
     {
         $event = new ToggleFeatureEvent($toggle);
-        $this->dispatcher->dispatch($event::NAME, $event);
+        $this->dispatcher->dispatch($event, $event::NAME);
     }
 
     private function createToggle(string $name, int $status, array $conditions = []): Toggle

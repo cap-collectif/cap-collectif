@@ -36,7 +36,7 @@ class ConsultationAdmin extends AbstractAdmin
 
     protected function configure(): void
     {
-        $this->setTemplate('edit', 'CapcoAdminBundle:Consultation:edit.html.twig');
+        $this->setTemplate('edit', '@CapcoAdmin/Consultation/edit.html.twig');
         parent::configure();
     }
 

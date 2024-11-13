@@ -6,7 +6,7 @@
     {% endif %}
     {% if parent is defined and parent and parent.previewHasAPublicType is defined %}
         {% if parent.publicSelection is defined and parent.publicSelection is not null and field.name not in parent.publicSelection.fields|keys %}
-          {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+          {% include '@CapcoApp/Developer/preview.html.twig' %}
         {% endif %}
     {% endif %}
     <p>{{ field.description|default('')|graphql_description|raw }}</p>

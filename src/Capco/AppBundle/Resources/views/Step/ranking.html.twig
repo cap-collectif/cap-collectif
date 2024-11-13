@@ -7,7 +7,7 @@
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
     {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       title,
         'type':        'project',
         'description': currentStep.metaDescription ?: currentStep.body|striptags|truncate(250, true),
@@ -28,7 +28,7 @@
     {% if currentStep.startAt %}
         <div class="mb-30 project__step-dates">
             <i class="cap cap-calendar-2-1"></i>
-            {% include 'CapcoAppBundle:Default:print_date.html.twig' with {'object': currentStep} only %}
+            {% include '@CapcoApp/Default/print_date.html.twig' with {'object': currentStep} only %}
         </div>
     {% endif %}
     {% if currentStep.body %}
@@ -43,7 +43,7 @@
         {% if (opinions|length > 0) %}
             <ul class="media-list  opinion__list">
                 {% for opinion in opinions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true} %}
+                    {% include '@CapcoApp/Opinion/blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType, 'showRanking': true} %}
                 {% endfor %}
             </ul>
             {% if opinions | length > nbOpinionsToDisplay  %}
@@ -74,7 +74,7 @@
 
             <ul class="media-list  opinion__list">
                 {% for version in versions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true, 'showRanking': true} %}
+                    {% include '@CapcoApp/Opinion/blockOpinion.html.twig' with {'opinion': version, 'isVersion': true, 'showRanking': true} %}
                 {% endfor %}
             </ul>
             {% if versions | length > nbVersionsToDisplay  %}

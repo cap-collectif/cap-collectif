@@ -42,7 +42,7 @@ class OpinionController extends AbstractSonataCrudController
         $twig->getRuntime(FormRenderer::class)->setTheme($formView, $this->admin->getFilterTheme());
 
         return $this->renderWithExtraParams(
-            'CapcoAdminBundle:Opinion:list.html.twig',
+            '@CapcoAdmin/Opinion/list.html.twig',
             [
                 'action' => 'list',
                 'form' => $formView,
@@ -171,7 +171,7 @@ class OpinionController extends AbstractSonataCrudController
         $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFormTheme());
 
         return $this->renderWithExtraParams(
-            "CapcoAdminBundle:Opinion:{$templateKey}.html.twig",
+            "@CapcoAdmin/Opinion/{$templateKey}.html.twig",
             [
                 'action' => 'create',
                 'form' => $view,
@@ -302,7 +302,7 @@ class OpinionController extends AbstractSonataCrudController
         $twig->getRuntime(FormRenderer::class)->setTheme($view, $this->admin->getFormTheme());
 
         return $this->renderWithExtraParams(
-            "CapcoAdminBundle:Opinion:{$templateKey}.html.twig",
+            "@CapcoAdmin/Opinion/{$templateKey}.html.twig",
             [
                 'action' => 'edit',
                 'form' => $view,
@@ -375,7 +375,7 @@ class OpinionController extends AbstractSonataCrudController
         }
 
         return $this->renderWithExtraParams(
-            'CapcoAdminBundle:Opinion:delete.html.twig',
+            '@CapcoAdmin/Opinion/delete.html.twig',
             [
                 'object' => $object,
                 'action' => 'delete',

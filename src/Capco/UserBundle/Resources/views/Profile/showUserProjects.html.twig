@@ -1,5 +1,5 @@
 {% set page_class = "profile-page" %}
-{% extends "CapcoUserBundle::layout.html.twig" %}
+{% extends "@CapcoUser/layout.html.twig" %}
 
 {% block canonical_link %}{{ url('capco_user_profile_show_projects', {'slug': user.slug}) }}{% endblock %}
 

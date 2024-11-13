@@ -19,7 +19,7 @@ class EventController extends Controller
         }
 
         return $this->renderWithExtraParams(
-            'CapcoAdminBundle:Event:create.html.twig',
+            '@CapcoAdmin/Event/create.html.twig',
             [
                 'action' => 'create',
                 'object' => $this->admin->getNewInstance(),
@@ -38,7 +38,7 @@ class EventController extends Controller
         }
 
         return $this->renderWithExtraParams(
-            'CapcoAdminBundle:Event:edit.html.twig',
+            '@CapcoAdmin/Event/edit.html.twig',
             [
                 'action' => 'edit',
                 'object' => $this->admin->getObject($id),

@@ -46,7 +46,7 @@ class EmptyUsernameListener
             return;
         }
         $response = new Response(
-            $this->templating->render('CapcoAppBundle:Default:choose_a_username.html.twig')
+            $this->templating->render('@CapcoApp/Default/choose_a_username.html.twig')
         );
         $event->setResponse($response);
     }

@@ -6,7 +6,7 @@
     {% set image %}
         {% if proposal.media %}{{ media_public_url(proposal.media, 'default_blockHeader') }}{% endif %}
     {% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       proposal.title,
         'description': proposal.summaryOrBodyExcerpt,
         'image':       image,
@@ -46,7 +46,7 @@
     {{ parent() }}
 
     {% if proposal.proposalForm.isMapViewEnabled or proposal.proposalForm.usingAddress or ( currentVotableStep and currentVotableStep.useAddressOrMap) %}
-        {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+        {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
     {% endif %}
 
 {% endblock %}

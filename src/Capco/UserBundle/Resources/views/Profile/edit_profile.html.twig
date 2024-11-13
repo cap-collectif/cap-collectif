@@ -1,4 +1,4 @@
-{% extends "CapcoUserBundle::layout.html.twig" %}
+{% extends "@CapcoUser/layout.html.twig" %}
 
 {% block title %} {{ parent() }} - {{ "user.profile.title" | trans({}, 'CapcoAppBundle')}} {% endblock %}
 
@@ -26,5 +26,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+    {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
 {% endblock %}

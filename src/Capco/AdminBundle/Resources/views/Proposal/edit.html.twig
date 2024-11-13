@@ -1,4 +1,4 @@
-{% extends 'CapcoAdminBundle:CRUD:base_edit.html.twig' %}
+{% extends '@CapcoAdmin/CRUD/base_edit.html.twig' %}
 
 {% set title = admin.subject.title|trans({}, 'CapcoAppBundle') %}
 
@@ -42,6 +42,6 @@
 {% endblock %}
 
 {% block javascripts %}
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+    {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
     {{ parent() }}
 {% endblock %}

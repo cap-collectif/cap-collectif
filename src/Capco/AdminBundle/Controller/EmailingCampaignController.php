@@ -15,7 +15,7 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
     public function listAction(Request $request): Response
     {
         return $this->isFeatureActivated()
-            ? $this->renderWithExtraParams('CapcoAdminBundle:Emailing:emailingCampaign.html.twig')
+            ? $this->renderWithExtraParams('@CapcoAdmin/Emailing/emailingCampaign.html.twig')
             : $this->redirectToHome();
     }
 
@@ -68,7 +68,7 @@ class EmailingCampaignController extends \Sonata\AdminBundle\Controller\CRUDCont
         $this->admin->setSubject($emailingCampaign);
 
         return $this->renderWithExtraParams(
-            'CapcoAdminBundle:Emailing:emailingCampaignEdit.html.twig',
+            '@CapcoAdmin/Emailing/emailingCampaignEdit.html.twig',
             [
                 'object' => $emailingCampaign,
                 'form' => $this->admin->getForm()->createView(),

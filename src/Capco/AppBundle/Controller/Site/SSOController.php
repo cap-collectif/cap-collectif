@@ -37,7 +37,7 @@ class SSOController extends Controller
 
     /**
      * @Route("/sso/switch-user", name="app_sso_switch_user", options={"i18n" = false})
-     * @Template("CapcoAppBundle:Default:sso_switch_user.html.twig")
+     * @Template("@CapcoApp/Default:sso_switch_user.html.twig")
      */
     public function switchUserAction()
     {

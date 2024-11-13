@@ -42,7 +42,7 @@ class UserController extends CRUDController
         }
 
         return $this->renderWithExtraParams(
-            'CapcoAdminBundle:User:edit.html.twig',
+            '@CapcoAdmin/User/edit.html.twig',
             [
                 'action' => 'edit',
                 'form' => null,

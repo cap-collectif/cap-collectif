@@ -1,4 +1,4 @@
-{% extends "CapcoUserBundle::layout.html.twig" %}
+{% extends "@CapcoUser/layout.html.twig" %}
 {% block title %} {{ 'resetting.reset.submit'|trans({}, 'CapcoAppBundle') }} {{ parent() }} {% endblock %}
 
 {% block jumbotron %}
@@ -10,5 +10,5 @@
 {% endblock %}
 
 {% block fos_user_content %}
-	{% include "CapcoUserBundle:Resetting:reset_content.html.twig" %}
+	{% include "@CapcoUser/Resetting/reset_content.html.twig" %}
 {% endblock fos_user_content %}

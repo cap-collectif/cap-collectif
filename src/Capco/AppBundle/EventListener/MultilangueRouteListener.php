@@ -41,7 +41,7 @@ class MultilangueRouteListener
     private function render404(RequestEvent $event): void
     {
         $event->setResponse(
-            new Response($this->templating->render('CapcoAppBundle:Default:404.html.twig'))
+            new Response($this->templating->render('@CapcoApp/Default/404.html.twig'))
         );
     }
 

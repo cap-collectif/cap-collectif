@@ -2,105 +2,93 @@
 
 namespace Capco\UserBundle\Authenticator;
 
-use Capco\UserBundle\Authenticator\Token\CASToken;
-use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Handler\CasHandler;
+use Capco\UserBundle\Security\Core\User\CasUserProvider;
 use Psr\Log\LoggerInterface;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
-use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-/**
- * Class CasAuthenticator.
- */
-class CasAuthenticator implements SimplePreAuthenticatorInterface
+class CasAuthenticator extends AbstractGuardAuthenticator
 {
-    protected HttpUtils $httpUtils;
-
     protected LoggerInterface $logger;
-
     protected CasHandler $casHandler;
+    private CasUserProvider $casUserProvider;
 
     public function __construct(
-        HttpUtils $httpUtils,
         LoggerInterface $logger,
-        CasHandler $casHandler
+        CasHandler $casHandler,
+        CasUserProvider $casUserProvider
     ) {
-        $this->httpUtils = $httpUtils;
         $this->logger = $logger;
         $this->casHandler = $casHandler;
+        $this->casUserProvider = $casUserProvider;
     }
 
-    /**
-     * @param $providerKey
-     *
-     * @return CASToken|void
-     */
-    public function createToken(Request $request, $providerKey)
+    public function supports(Request $request): bool
     {
-        $isOnLoginUrl = $this->httpUtils->checkRequestPath($request, '/login-cas');
+        return '/login-cas' === $request->getPathInfo();
+    }
 
-        $isAlreadyAuthenticated = false;
-        $casId = null;
+    public function getCredentials(Request $request): ?string
+    {
+        if (!$request->hasSession()) {
+            throw new AuthenticationException('Session required for CAS authentication.');
+        }
+
         $session = $request->getSession();
-
         if ($session->has('cas_login')) {
-            $isAlreadyAuthenticated = true;
-            $casId = $request->getSession()->get('cas_login');
+            $casId = $session->get('cas_login');
+            $this->logger->info('CAS ID found in session: ' . $casId);
+
+            return $casId;
         }
 
-        if (!$isOnLoginUrl && !$isAlreadyAuthenticated) {
-            $this->logger->debug(
-                'Skipping CasAuthenticator, to let user browse anonymously.'
-            );
+        $this->logger->debug('No CAS authentication used.');
 
-            return null;
-        }
-
-        if (empty($casId)) {
-            $this->logger->debug('no cas authentication used');
-
-            return;
-        }
-
-        $this->logger->info('Creating CAS token from received cas login: ' . json_encode($casId));
-
-        $username = $casId;
-        $token = new CASToken($username);
-        $token->setAttributes([$username]);
-
-        return $token;
+        return null;
     }
 
-    /**
-     * @param $providerKey
-     */
-    public function authenticateToken(
-        TokenInterface $token,
-        UserProviderInterface $userProvider,
-        $providerKey
-    ): CASToken {
-        $username = $token->getUsername();
-        $user = $userProvider->loadUserByUsername($username);
-
-        if ($user instanceof User) {
-            $user->setCasId($token->getUsername());
-            $user->setUsername($token->getUsername());
-        }
-
-        $authenticatedToken = new CASToken($user, $user->getRoles());
-        $authenticatedToken->setAttributes($token->getAttributes());
-
-        return $authenticatedToken;
-    }
-
-    /**
-     * @param $providerKey
-     */
-    public function supportsToken(TokenInterface $token, $providerKey): bool
+    public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
     {
-        return $token instanceof CASToken;
+        if (!$credentials) {
+            throw new AuthenticationException('No CAS ID provided.');
+        }
+
+        return $this->casUserProvider->loadUserByUsername($credentials);
+    }
+
+    public function checkCredentials($credentials, UserInterface $user): bool
+    {
+        return true;
+    }
+
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
+    {
+        return null;
+    }
+
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
+    {
+        return new JsonResponse([
+            'message' => 'CAS Authentication Failed: ' . $exception->getMessageKey(),
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
+    {
+        return new JsonResponse([
+            'message' => 'Authentication required',
+        ], Response::HTTP_UNAUTHORIZED);
+    }
+
+    public function supportsRememberMe(): bool
+    {
+        return false;
     }
 }

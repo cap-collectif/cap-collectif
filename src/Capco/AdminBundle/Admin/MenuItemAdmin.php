@@ -112,7 +112,7 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('menu', null, [
                 'label' => 'admin.fields.menu_item.menu',
-                'template' => 'CapcoAdminBundle:MenuItem:menu_list_field.html.twig',
+                'template' => '@CapcoAdmin/MenuItem/menu_list_field.html.twig',
                 'menuLabels' => MenuItem::$menuLabels,
             ])
             ->add('isEnabled', null, [
@@ -130,7 +130,7 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('link', null, [
                 'label' => 'global.link',
-                'template' => 'CapcoAdminBundle:MenuItem:link_list_field.html.twig',
+                'template' => '@CapcoAdmin/MenuItem/link_list_field.html.twig',
             ])
             ->add('updatedAt', null, [
                 'label' => 'global.maj',
@@ -141,7 +141,7 @@ class MenuItemAdmin extends AbstractAdmin
                     'show' => [],
                     'edit' => [],
                     'delete' => [
-                        'template' => 'CapcoAdminBundle:MenuItem:list__action_delete.html.twig',
+                        'template' => '@CapcoAdmin/MenuItem/list__action_delete.html.twig',
                     ],
                 ],
             ])
@@ -202,7 +202,7 @@ class MenuItemAdmin extends AbstractAdmin
             ])
             ->add('menu', null, [
                 'label' => 'admin.fields.menu_item.menu',
-                'template' => 'CapcoAdminBundle:MenuItem:menu_show_field.html.twig',
+                'template' => '@CapcoAdmin/MenuItem/menu_show_field.html.twig',
                 'menuLabels' => MenuItem::$menuLabels,
             ])
             ->add('isEnabled', null, [
@@ -222,7 +222,7 @@ class MenuItemAdmin extends AbstractAdmin
         if (null === $subject->getPage()) {
             $show->add('link', null, [
                 'label' => 'global.link',
-                'template' => 'CapcoAdminBundle:MenuItem:link_show_field.html.twig',
+                'template' => '@CapcoAdmin/MenuItem/link_show_field.html.twig',
             ]);
         }
 
@@ -239,6 +239,11 @@ class MenuItemAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete']);
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 
     private function manageLink($menuItem)

@@ -6,7 +6,7 @@
     {% set image %}
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':  project.title~' - '~('menu.news' | trans({}, 'CapcoAppBundle')),
         'url':    url('app_project_show_posts', {'projectSlug': project.slug}),
         'type':   'project',
@@ -33,5 +33,5 @@
     </div>
 
     {% set route, params = 'app_project_show_posts', {'projectSlug': project.slug} %}
-    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+    {% include '@CapcoApp/Block/pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 {% endblock %}

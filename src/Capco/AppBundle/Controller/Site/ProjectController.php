@@ -96,7 +96,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Template("CapcoAppBundle:Project:lastProjects.html.twig")
+     * @Template("@CapcoApp/Project/lastProjects.html.twig")
      */
     public function lastProjectsAction(int $max = 4, int $offset = 0)
     {
@@ -119,7 +119,7 @@ class ProjectController extends Controller
      * @Security("has_role('ROLE_USER')")
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
      * @Entity("project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_user_votes.html.twig")
+     * @Template("@CapcoApp/Project/show_user_votes.html.twig")
      */
     public function showUserVotesAction(Project $project)
     {
@@ -130,7 +130,7 @@ class ProjectController extends Controller
      * @Route("/projects/{projectSlug}/trashed", name="app_project_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @Route("/consultations/{projectSlug}/trashed", name="app_consultation_show_trashed", defaults={"_feature_flags" = "project_trash"} )
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_trashed.html.twig")
+     * @Template("@CapcoApp/Project/show_trashed.html.twig")
      */
     public function showTrashedAction(Project $project)
     {
@@ -255,7 +255,7 @@ class ProjectController extends Controller
      * @Route("/projects/{projectSlug}/posts/{page}", name="app_project_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_posts.html.twig")
+     * @Template("@CapcoApp/Project/show_posts.html.twig")
      *
      * @param mixed $page
      */
@@ -292,7 +292,7 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/participants/{page}", name="app_consultation_show_contributors",
      *    requirements={"page" = "\d+"}, defaults={"page" = 1}, options={"i18n" = true})
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Template("CapcoAppBundle:Project:show_contributors.html.twig")
+     * @Template("@CapcoApp/Project/show_contributors.html.twig")
      *
      * @param mixed $page
      */
@@ -328,7 +328,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects", name="app_project", options={"i18n" = true})
-     * @Template("CapcoAppBundle:Project:index.html.twig")
+     * @Template("@CapcoApp/Project/index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -352,7 +352,7 @@ class ProjectController extends Controller
 
     /**
      * @Route("/projects/archived", name="app_project_archived", options={"i18n" = true})
-     * @Template("CapcoAppBundle:Project:index.html.twig")
+     * @Template("@CapcoApp/Project/index.html.twig")
      */
     public function indexArchivedAction(Request $request)
     {

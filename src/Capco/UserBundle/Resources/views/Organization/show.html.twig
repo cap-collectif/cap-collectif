@@ -1,6 +1,6 @@
 
 {% set page_class = "organization-page" %}
-{% extends "CapcoUserBundle::layout.html.twig" %}
+{% extends "@CapcoUser/layout.html.twig" %}
 
 {% block canonical_link %}{{ url('capco_organization_profile_show_all', {'slug': organization.slug}) }}{% endblock %}
 
@@ -9,7 +9,7 @@
     {% set organizationMedia %}{% if organization.media %}
         {{ media_public_url(organization.media, 'default_avatar') }}
     {% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':        organization.title,
         'description':  organization.body,
         'url':          url('capco_organization_profile_show_all', {'slug': organization.slug}),

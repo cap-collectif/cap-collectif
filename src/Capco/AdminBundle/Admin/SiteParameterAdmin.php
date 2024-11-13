@@ -212,6 +212,11 @@ class SiteParameterAdmin extends AbstractAdmin
         $collection->clearExcept(['edit']);
     }
 
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
+    }
+
     private function getTimezonesList(): array
     {
         $timezones = \DateTimeZone::listIdentifiers(\DateTimeZone::ALL);

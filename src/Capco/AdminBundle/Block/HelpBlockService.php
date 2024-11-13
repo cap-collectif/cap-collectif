@@ -29,7 +29,7 @@ class HelpBlockService extends AbstractBlockService
     {
         $resolver->setDefaults([
             'title' => 'Besoin d\'aide ?',
-            'template' => 'CapcoAdminBundle:Block:help.html.twig',
+            'template' => '@CapcoAdmin/Block/help.html.twig',
         ]);
     }
 }

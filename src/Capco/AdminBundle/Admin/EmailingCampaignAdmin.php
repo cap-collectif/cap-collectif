@@ -16,7 +16,7 @@ class EmailingCampaignAdmin extends AbstractAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('list', 'CapcoAdminBundle:Emailing:emailingCampaign.html.twig');
+        //$this->setTemplate('list', '@CapcoAdmin/Emailing/emailingCampaign.html.twig');
         parent::configure();
     }
 

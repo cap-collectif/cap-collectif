@@ -9,7 +9,7 @@ file that was distributed with this source code.
 
 #}
 
-{% extends 'CapcoAdminBundle::standard_layout.html.twig' %}
+{% extends '@CapcoAdmin/standard_layout.html.twig' %}
 
 {% block title %}
     {# NEXT_MAJOR: remove default filter #}
@@ -39,7 +39,7 @@ file that was distributed with this source code.
     }, 'twig') }}
 {%- endblock -%}
 
-{% use 'CapcoAdminBundle:CRUD:base_edit_form.html.twig' with form as parentForm %}
+{% use '@CapcoAdmin/CRUD/base_edit_form.html.twig' with form as parentForm %}
 
 {% block form %}
     {{ block('parentForm') }}

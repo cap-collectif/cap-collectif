@@ -1,7 +1,7 @@
-{% extends 'SonataAdminBundle:CRUD:base_list.html.twig' %}
+{% extends '@SonataAdmin/CRUD/base_list.html.twig' %}
 
 {% block tab_menu %}
-    {% include 'CapcoAdminBundle:OpinionType:list_tab_menu.html.twig' with {
+    {% include '@CapcoAdmin/OpinionType/list_tab_menu.html.twig' with {
     'mode':   'list',
     'action': action,
     'admin':  admin,

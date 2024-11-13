@@ -10,7 +10,7 @@
 
 {% block metaTags %}
     {% set image %}{% if picto %}{{ media_public_url(picto, 'default_blockHeader') }}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       (jumbotron_title ?: 'global.title'|trans({}, 'CapcoAppBundle')),
         'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
         'image':       image,
@@ -33,5 +33,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+    {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
 {% endblock %}

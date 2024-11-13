@@ -30,7 +30,7 @@ class PageController extends Controller
     /**
      * @Route("/{slug}", name="app_page_show", options={"i18n" = true})
      * @Entity("pageTranslation", class="CapcoAppBundle:PageTranslation", options={"mapping": {"slug": "slug"}})
-     * @Template("CapcoAppBundle:Page:show.html.twig")
+     * @Template("@CapcoApp/Page/show.html.twig")
      */
     public function showAction(Request $request, ?PageTranslation $pageTranslation = null)
     {
@@ -42,7 +42,7 @@ class PageController extends Controller
                 throw $this->createNotFoundException($this->translator->trans('page.error.not_found', [], 'CapcoAppBundle'));
             }
 
-            return $this->render('CapcoAppBundle:Page:charter.html.twig', ['body' => $body]);
+            return $this->render('@CapcoApp/Page/charter.html.twig', ['body' => $body]);
         }
 
         if (!$pageTranslation) {

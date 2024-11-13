@@ -10,7 +10,7 @@ class SiteFaviconController extends AbstractController
 {
     /**
      * @Route("admin/favicon/list", name="capco_admin_site_favicon_list")
-     * @Template("CapcoAdminBundle:SiteFavicon:list.html.twig")
+     * @Template("@CapcoAdmin/SiteFavicon/list.html.twig")
      */
     public function listAction()
     {

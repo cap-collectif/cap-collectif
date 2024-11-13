@@ -424,22 +424,22 @@
         },
         {
             "name": "caxy/htmldiff-bundle",
-            "version": "v0.1.3",
+            "version": "v0.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/caxy/HtmlDiffBundle.git",
-                "reference": "2b353013aaa3ba78c87b3ad36db1cc49f699a1a7"
+                "reference": "ce759bb402809d182dde1e819effedfa85f9006c"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/2b353013aaa3ba78c87b3ad36db1cc49f699a1a7",
-                "reference": "2b353013aaa3ba78c87b3ad36db1cc49f699a1a7",
+                "url": "https://api.github.com/repos/caxy/HtmlDiffBundle/zipball/ce759bb402809d182dde1e819effedfa85f9006c",
+                "reference": "ce759bb402809d182dde1e819effedfa85f9006c",
                 "shasum": ""
             },
             "require": {
                 "caxy/php-htmldiff": "~0.1",
-                "php": ">=5.3.9",
-                "symfony/framework-bundle": "~2.3||3.*||4.*"
+                "php": ">=7.0",
+                "symfony/framework-bundle": "~2.3||3.*||4.*||5.*||6.*"
             },
             "require-dev": {
                 "doctrine/doctrine-cache-bundle": "~1.0"
@@ -478,9 +478,9 @@
             ],
             "support": {
                 "issues": "https://github.com/caxy/HtmlDiffBundle/issues",
-                "source": "https://github.com/caxy/HtmlDiffBundle/tree/master"
+                "source": "https://github.com/caxy/HtmlDiffBundle/tree/v0.1.4"
             },
-            "time": "2018-05-24T21:46:34+00:00"
+            "time": "2021-12-12T15:28:17+00:00"
         },
         {
             "name": "caxy/php-htmldiff",

@@ -12,6 +12,6 @@ class UserInviteController extends \Sonata\AdminBundle\Controller\CRUDController
     {
         $this->denyAccessUnlessGranted(UserRole::ROLE_ADMIN);
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:UserInvite:list.html.twig');
+        return $this->renderWithExtraParams('@CapcoAdmin/UserInvite/list.html.twig');
     }
 }

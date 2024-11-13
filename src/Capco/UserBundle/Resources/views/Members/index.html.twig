@@ -18,7 +18,7 @@
 
 {% block metaTags %}
     {% set image %}{% if picto %}{{ media_public_url(picto, 'default_blockHeader') }}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       (jumbotron_title ?: 'global.title'|trans({}, 'CapcoAppBundle')),
         'description': (meta_description|striptags ?: jumbotron_body|striptags ?: content_body|striptags|truncate(250, true)),
         'image':       image,
@@ -84,7 +84,7 @@
 
             <div class="row">
                 {% for member in members %}
-                    {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': member, 'col': 3} only %}
+                    {% include '@CapcoApp/Default/user_thumbnail.html.twig' with {'user': member, 'col': 3} only %}
                 {% else %}
                     <p>
                         {{ 'user.index.no_result'|trans({}, 'CapcoAppBundle') }}
@@ -100,7 +100,7 @@
                 {% set route, params = 'app_members_type', {'userType': userType} %}
             {% endif %}
 
-            {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+            {% include '@CapcoApp/Block/pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 
         </div>
     </section>

@@ -1,9 +1,9 @@
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% block canonical_link %}{{ url('app_search') }}{% endblock %}
 
 {% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
     'title': 'search.title' | trans({}, 'CapcoAppBundle'),
     'url':   url('app_search')
     } only %}
@@ -114,7 +114,7 @@
                             {% endfor %}
                         </ul>
 
-                        {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {search: search}} only %}
+                        {% include '@CapcoApp/Block/pagination.html.twig' with {'current': page, 'nb': nbPages, 'route': 'app_search', 'params': {search: search}} only %}
                     </div>
 
                 </div>

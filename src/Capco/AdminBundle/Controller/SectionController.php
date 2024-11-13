@@ -97,7 +97,7 @@ class SectionController extends PositionableController
 
         if ('projects' === $existingObject->getType()) {
             return $this->renderWithExtraParams(
-                'CapcoAdminBundle:Section:edit_projects.html.twig',
+                '@CapcoAdmin/Section/edit_projects.html.twig',
                 [
                     'action' => 'edit',
                     'object' => $existingObject,
@@ -106,7 +106,7 @@ class SectionController extends PositionableController
         }
         if ('projectsMap' === $existingObject->getType()) {
             return $this->renderWithExtraParams(
-                'CapcoAdminBundle:Section:edit_projects_map.html.twig',
+                '@CapcoAdmin/Section/edit_projects_map.html.twig',
                 [
                     'action' => 'edit',
                     'object' => $existingObject,

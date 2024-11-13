@@ -7,7 +7,7 @@
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
     {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       title,
         'type':        'project',
         'description': currentStep.metaDescription ?: currentStep.body|striptags|truncate(250, true),
@@ -43,7 +43,7 @@
         {% if versions | length > 0 %}
             <ul class="media-list  opinion__list">
                 {% for version in versions %}
-                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true, 'showRanking': true} %}
+                    {% include '@CapcoApp/Opinion/blockOpinion.html.twig' with {'opinion': version, 'isVersion': true, 'showRanking': true} %}
                 {% endfor %}
             </ul>
         {% endif %}
@@ -52,7 +52,7 @@
 
     {% set route, params = 'app_project_show_versions_ranking', {'projectSlug': project.slug, 'stepSlug': currentStep.slug} %}
 
-    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+    {% include '@CapcoApp/Block/pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 {% endblock %}
 
 {% block javascripts %}

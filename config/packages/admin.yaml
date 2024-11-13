@@ -17,7 +17,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\MenuItemAdmin:
         arguments:
@@ -32,7 +31,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\OpinionAdmin:
         arguments:
@@ -99,7 +97,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\OpinionTypeAppendixTypeAdmin:
         arguments:
@@ -191,8 +188,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:Proposal:edit.html.twig]]
-            - [setTemplate, [list, CapcoAdminBundle:Proposal:list.html.twig]]
 
     Capco\AdminBundle\Admin\ReplyAdmin:
         arguments:
@@ -230,7 +225,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:Questionnaire:edit.html.twig]]
 
     Capco\AdminBundle\Admin\ProposalFormAdmin:
         arguments:
@@ -250,8 +244,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:ProposalForm:edit.html.twig]]
-            - [setTemplate, [list, CapcoAdminBundle:ProposalForm:list.html.twig]]
 
     Capco\AdminBundle\Admin\StatusAdmin:
         arguments: [~, Capco\AppBundle\Entity\Status, Capco\AdminBundle\Controller\CRUDController]
@@ -285,7 +277,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\GlobalDistrictAdmin:
         arguments:
@@ -322,7 +313,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\OpinionTypeAdmin:
         arguments:
@@ -400,7 +390,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\OpinionVoteAdmin:
         arguments:
@@ -427,7 +416,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\SiteColorAdmin:
         arguments:
@@ -446,7 +434,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\SocialNetworkAdmin:
         arguments:
@@ -461,7 +448,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\SiteImageAdmin:
         arguments:
@@ -479,7 +465,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\ContactAdmin:
         arguments:
@@ -511,7 +496,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\SourceAdmin:
         arguments:
@@ -550,7 +534,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\EventAdmin:
         class: Capco\AdminBundle\Admin\EventAdmin
@@ -565,11 +548,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [
-                  setTemplate,
-                  ['list', 'CapcoAdminBundle:Event:list.html.twig'],
-                  ['create', 'CapcoAdminBundle:Event:create.html.twig'],
-              ]
 
     Capco\AdminBundle\Admin\VideoAdmin:
         arguments: [~, Capco\AppBundle\Entity\Video, Capco\AdminBundle\Controller\CRUDController]
@@ -583,7 +561,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\CommentAdmin:
         arguments:
@@ -654,7 +631,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\UserTypeAdmin:
         arguments:
@@ -669,7 +645,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\HighlightedContentAdmin:
         arguments:
@@ -688,7 +663,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [list, CapcoAdminBundle:HighlightedContent:list.html.twig]]
             - [
                   setSubClasses,
                   [
@@ -747,7 +721,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:CRUD:edit.html.twig]]
 
     Capco\AdminBundle\Admin\AnswerAdmin:
         arguments: [~, Capco\AppBundle\Entity\Answer, Capco\AdminBundle\Controller\CRUDController]
@@ -835,7 +808,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:ProjectType:edit.html.twig]]
 
     Capco\AdminBundle\Admin\GroupAdmin:
         arguments: [~, Capco\AppBundle\Entity\Group, Capco\AdminBundle\Controller\CRUDController]
@@ -849,8 +821,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-            - [setTemplate, [edit, CapcoAdminBundle:Group:edit.html.twig]]
-            - [setTemplate, [list, CapcoAdminBundle:Group:list.html.twig]]
 
     sonata.admin.action.retrieve_autocomplete_items:
         class: Capco\AdminBundle\Action\RetrieveAutocompleteItemsAction

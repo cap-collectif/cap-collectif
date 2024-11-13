@@ -29,7 +29,7 @@ class ArgumentAdmin extends AbstractAdmin
         TokenStorageInterface $tokenStorage
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        //$this->setTemplate('edit', 'CapcoAdminBundle:Argument:edit.html.twig');
+        //$this->setTemplate('edit', '@CapcoAdmin/Argument/edit.html.twig');
         $this->tokenStorage = $tokenStorage;
     }
 
@@ -96,27 +96,27 @@ class ArgumentAdmin extends AbstractAdmin
         $list
             ->addIdentifier('body', null, [
                 'label' => 'global.contenu',
-                'template' => 'CapcoAdminBundle:common:body_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/body_list_field.html.twig',
                 'route' => [
                     'name' => 'edit',
                 ],
             ])
             ->add('type', null, [
                 'label' => 'admin.fields.argument.type',
-                'template' => 'CapcoAdminBundle:Argument:type_list_field.html.twig',
+                'template' => '@CapcoAdmin/Argument/type_list_field.html.twig',
                 'typesLabels' => Argument::$argumentTypesLabels,
             ])
             ->add('opinion', ModelType::class, [
                 'label' => 'global.proposal',
-                'template' => 'CapcoAdminBundle:common:opinion_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/opinion_list_field.html.twig',
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/author_list_field.html.twig',
             ])
             ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/project_list_field.html.twig',
             ])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])
             ->add('published', null, [
@@ -125,7 +125,7 @@ class ArgumentAdmin extends AbstractAdmin
             ])
             ->add('trashedStatus', null, [
                 'label' => 'global.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
+                'template' => '@CapcoAdmin/Trashable/trashable_status.html.twig',
             ])
             ->add('updatedAt', 'datetime', ['label' => 'global.maj'])
             ->add('_action', 'actions', [

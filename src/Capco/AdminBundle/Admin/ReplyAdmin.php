@@ -91,16 +91,16 @@ class ReplyAdmin extends AbstractAdmin
             ->addIdentifier('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/author_list_field.html.twig',
             ])
             ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/project_list_field.html.twig',
             ])
             ->add('state', null, [
                 'mapped' => false,
                 'label' => 'global.state',
-                'template' => 'CapcoAdminBundle:Reply:state_list_field.html.twig',
+                'template' => '@CapcoAdmin/Reply/state_list_field.html.twig',
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
@@ -113,17 +113,17 @@ class ReplyAdmin extends AbstractAdmin
             ->add('id', null, ['label' => 'admin.fields.reply.id'])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:Reply:author_show_field.html.twig',
+                'template' => '@CapcoAdmin/Reply/author_show_field.html.twig',
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('status', null, [
                 'label' => 'global.state',
-                'template' => 'CapcoAdminBundle:Reply:state_show_field.html.twig',
+                'template' => '@CapcoAdmin/Reply/state_show_field.html.twig',
             ])
             ->add('responses', null, [
                 'label' => 'admin.fields.reply.responses',
-                'template' => 'CapcoAdminBundle:Reply:responses_show_field.html.twig',
+                'template' => '@CapcoAdmin/Reply/responses_show_field.html.twig',
             ])
         ;
     }

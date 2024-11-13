@@ -52,11 +52,11 @@ class ProjectTypeAdmin extends AbstractAdmin
         $list
             ->addIdentifier('title', null, [
                 'label' => 'global.type',
-                'template' => 'CapcoAdminBundle:ProjectType:list_title.html.twig',
+                'template' => '@CapcoAdmin/ProjectType/list_title.html.twig',
             ])
             ->add('color', null, [
                 'label' => 'global.color',
-                'template' => 'CapcoAdminBundle:ProjectType:list_color.html.twig',
+                'template' => '@CapcoAdmin/ProjectType/list_color.html.twig',
                 'header_style' => 'width: 13%',
             ])
         ;
@@ -79,5 +79,10 @@ class ProjectTypeAdmin extends AbstractAdmin
         $collection->remove('create');
         $collection->remove('show');
         $collection->remove('export');
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/ProjectType/edit.html.twig');
     }
 }

@@ -56,7 +56,7 @@ class OpinionController extends Controller
      *    "repository_method"="findOneBySlugs",
      *    "map_method_signature"=true
      * })
-     * @Template("CapcoAppBundle:Consultation:SectionPage.html.twig")
+     * @Template("@CapcoApp/Consultation/SectionPage.html.twig")
      */
     public function sectionPageAction(
         Request $request,
@@ -141,7 +141,7 @@ class OpinionController extends Controller
      *  "map_method_signature" = true
      * })
      *
-     * @Template("CapcoAppBundle:Opinion:show_version.html.twig")
+     * @Template("@CapcoApp/Opinion/show_version.html.twig")
      */
     public function showOpinionVersionAction(
         Project $project,
@@ -187,7 +187,7 @@ class OpinionController extends Controller
      * })
      * @Entity("opinion", class="CapcoAppBundle:Opinion", options={"mapping" = {"opinionSlug": "slug", "stepSlug": "stepSlug", "projectSlug": "projectSlug"}, "repository_method"= "getOneBySlugAndProjectSlugAndStepSlug", "map_method_signature" = true})
      *
-     * @Template("CapcoAppBundle:Opinion:show.html.twig")
+     * @Template("@CapcoApp/Opinion/show.html.twig")
      */
     public function showOpinionAction(
         Project $project,

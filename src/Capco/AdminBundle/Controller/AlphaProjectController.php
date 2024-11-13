@@ -35,7 +35,7 @@ class AlphaProjectController extends CRUDController
         $this->throwIfNoAccess();
 
         return $this->renderWithExtraParams(
-            'CapcoAdminBundle:AlphaProject:createProposal.html.twig',
+            '@CapcoAdmin/AlphaProject/createProposal.html.twig',
             [
                 'object' => $this->admin->getSubject(),
                 'form' => $this->admin->getForm()->createView(),
@@ -49,7 +49,7 @@ class AlphaProjectController extends CRUDController
     {
         $this->throwIfNoAccess();
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',
@@ -60,7 +60,7 @@ class AlphaProjectController extends CRUDController
     {
         $this->throwIfNoAccess();
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',
@@ -71,7 +71,7 @@ class AlphaProjectController extends CRUDController
     {
         $this->throwIfNoAccess();
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',
@@ -82,7 +82,7 @@ class AlphaProjectController extends CRUDController
     {
         $this->throwIfNoAccess();
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',
@@ -93,7 +93,7 @@ class AlphaProjectController extends CRUDController
     {
         $this->throwIfNoAccess();
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',
@@ -104,7 +104,7 @@ class AlphaProjectController extends CRUDController
     {
         $this->throwIfNoAccess();
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',
@@ -125,7 +125,7 @@ class AlphaProjectController extends CRUDController
             throw $this->createNotFoundException();
         }
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',
@@ -138,7 +138,7 @@ class AlphaProjectController extends CRUDController
             throw $this->createAccessDeniedException();
         }
 
-        return $this->renderWithExtraParams('CapcoAdminBundle:AlphaProject:create.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/AlphaProject/create.html.twig', [
             'object' => $this->admin->getSubject(),
             'form' => $this->admin->getForm()->createView(),
             'action' => 'edit',

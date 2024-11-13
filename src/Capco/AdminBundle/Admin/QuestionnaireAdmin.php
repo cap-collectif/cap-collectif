@@ -82,8 +82,7 @@ class QuestionnaireAdmin extends CapcoAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('list', 'CapcoAdminBundle:Questionnaire:list.html.twig');
-        parent::configure();
+        $this->setTemplate('edit', '@CapcoAdmin/Questionnaire/edit.html.twig');
     }
 
     // Fields to be shown on create/edit forms

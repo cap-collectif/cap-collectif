@@ -102,7 +102,7 @@ class ProposalFormAdmin extends CapcoAdmin
             ->addIdentifier('title', null, ['label' => 'global.title'])
             ->add('project', ModelType::class, [
                 'label' => 'project',
-                'template' => 'CapcoAdminBundle:ProposalForm:project_show_field.html.twig',
+                'template' => '@CapcoAdmin/ProposalForm/project_show_field.html.twig',
             ])
             ->add('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedAt', null, ['label' => 'global.maj'])
@@ -110,7 +110,7 @@ class ProposalFormAdmin extends CapcoAdmin
                 'label' => 'link_actions',
                 'actions' => [
                     'duplicate' => [
-                        'template' => 'CapcoAdminBundle:ProposalForm:list__action_duplicate.html.twig',
+                        'template' => '@CapcoAdmin/ProposalForm/list__action_duplicate.html.twig',
                     ],
                     'delete' => [],
                 ],
@@ -122,6 +122,14 @@ class ProposalFormAdmin extends CapcoAdmin
     {
         $collection->add('duplicate');
         $collection->clearExcept(['batch', 'list', 'edit', 'delete', 'duplicate']);
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplates([
+            'edit' => '@CapcoAdmin/ProposalForm/edit.html.twig',
+            'list' => '@CapcoAdmin/ProposalForm/list.html.twig',
+        ]);
     }
 
     private function filterByCollectStepQuery(): QueryBuilder

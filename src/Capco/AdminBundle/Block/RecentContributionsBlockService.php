@@ -64,7 +64,7 @@ class RecentContributionsBlockService extends AbstractBlockService
         $resolver->setDefaults([
             'number' => 10,
             'title' => 'Recents contributions',
-            'template' => 'CapcoAdminBundle:Block:recent_contributions.html.twig',
+            'template' => '@CapcoAdmin/Block/recent_contributions.html.twig',
         ]);
     }
 

@@ -33,7 +33,7 @@
             <div class="list-group_collapse collapse {% if category == "mutation" %}in{% endif %}" id="mutations">
                 {% for field in mutation.fields|usort %}
                     <a href="{{ path('app_developer_category_type', { 'category': 'mutation', 'type': field.name })}}" class="list-group-item {% if selection and selection.name == field.name %}active{% endif %}">
-                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': mutation} %}
+                        {% include '@CapcoApp/Developer/badge.html.twig' with {'type': mutation} %}
                         {{ field.name }}
                     </a>
                 {% endfor %}
@@ -49,7 +49,7 @@
             <div class="list-group_collapse collapse {% if category == "object" %}in{% endif %}" id="objects">
                 {% for type in objects|usort %}
                     <a href="{{ path('app_developer_category_type', { 'category': 'object', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
-                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {% include '@CapcoApp/Developer/badge.html.twig' with {'type': type} %}
                         {{ type.name }}
                     </a>
                 {% endfor %}
@@ -66,7 +66,7 @@
             <div class="list-group_collapse collapse {% if category == "interface" %}in{% endif %}" id="interfaces">
                 {% for type in interfaces|usort %}
                     <a href="{{ path('app_developer_category_type', { 'category': 'interface', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
-                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {% include '@CapcoApp/Developer/badge.html.twig' with {'type': type} %}
                         {{ type.name }}
                     </a>
                 {% endfor %}
@@ -85,7 +85,7 @@
             <div class="list-group_collapse collapse {% if category == "enum" %}in{% endif %}" id="enums">
                 {% for type in enums|usort %}
                     <a href="{{ path('app_developer_category_type', { 'category': 'enum', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
-                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {% include '@CapcoApp/Developer/badge.html.twig' with {'type': type} %}
                         {{ type.name }}
                     </a>
                 {% endfor %}
@@ -102,7 +102,7 @@
             <div class="list-group_collapse collapse {% if category == "union" %}in{% endif %}" id="unions">
                 {% for type in unions|usort %}
                     <a href="{{ path('app_developer_category_type', { 'category': 'union', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
-                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {% include '@CapcoApp/Developer/badge.html.twig' with {'type': type} %}
                         {{ type.name }}
                     </a>
                 {% endfor %}
@@ -121,7 +121,7 @@
             <div class="list-group_collapse collapse {% if category == "input_object" %}in{% endif %}" id="input_objects">
                 {% for type in input_objects|usort %}
                     <a href="{{ path('app_developer_category_type', { 'category': 'input_object', 'type': type.name })}}" class="list-group-item">
-                        {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                        {% include '@CapcoApp/Developer/badge.html.twig' with {'type': type} %}
                         {{ type.name }}
                     </a>
                 {% endfor %}
@@ -138,7 +138,7 @@
         <div class="list-group_collapse collapse {% if category == "scalar" %}in{% endif %}" id="scalars">
             {% for type in scalars|usort %}
                 <a href="{{ path('app_developer_category_type', { 'category': 'scalar', 'type': type.name })}}" class="list-group-item {% if selection and selection.name == type.name %}active{% endif %}">
-                    {% include 'CapcoAppBundle:Developer:badge.html.twig' with {'type': type} %}
+                    {% include '@CapcoApp/Developer/badge.html.twig' with {'type': type} %}
                     {{ type.name }}
                 </a>
             {% endfor %}

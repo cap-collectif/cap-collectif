@@ -16,7 +16,7 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions", name="capco_admin_contributions_index")
-     * @Template("CapcoAdminBundle:RecentContributions:index.html.twig")
+     * @Template("@CapcoAdmin/RecentContributions/index.html.twig")
      */
     public function indexAction()
     {
@@ -26,7 +26,7 @@ class RecentContributionsController extends Controller
         return [
             'contributions' => $contributions,
             'recentContributions' => true,
-            'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
+            'base_template' => '@CapcoAdmin/standard_layout.html.twig',
             'admin_pool' => $this->get('sonata.admin.pool'),
         ];
     }
@@ -34,7 +34,7 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}", name="capco_admin_contributions_show")
-     * @Template("CapcoAdminBundle:RecentContributions:show.html.twig")
+     * @Template("@CapcoAdmin/RecentContributions/show.html.twig")
      *
      * @param mixed $type
      * @param mixed $id
@@ -52,7 +52,7 @@ class RecentContributionsController extends Controller
         return [
             'contribution' => $contribution,
             'recentContributions' => true,
-            'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
+            'base_template' => '@CapcoAdmin/standard_layout.html.twig',
             'admin_pool' => $this->get('sonata.admin.pool'),
         ];
     }
@@ -117,12 +117,12 @@ class RecentContributionsController extends Controller
         }
 
         return $this->render(
-            'CapcoAdminBundle:RecentContributions:confirm.html.twig',
+            '@CapcoAdmin/RecentContributions/confirm.html.twig',
             [
                 'type' => $type,
                 'id' => $id,
                 'del_action' => 'unpublish',
-                'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
+                'base_template' => '@CapcoAdmin/standard_layout.html.twig',
                 'admin_pool' => $this->get('sonata.admin.pool'),
             ],
             null
@@ -162,12 +162,12 @@ class RecentContributionsController extends Controller
         }
 
         return $this->render(
-            'CapcoAdminBundle:RecentContributions:confirm.html.twig',
+            '@CapcoAdmin/RecentContributions/confirm.html.twig',
             [
                 'type' => $type,
                 'id' => $id,
                 'del_action' => 'trash',
-                'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
+                'base_template' => '@CapcoAdmin/standard_layout.html.twig',
                 'admin_pool' => $this->get('sonata.admin.pool'),
             ],
             null

@@ -88,7 +88,7 @@ class CommentAdmin extends AbstractAdmin
     protected function configureListFields(ListMapper $list): void
     {
         $availableActions['delete'] = [
-            'template' => 'CapcoAdminBundle:Comment:list__action_delete.html.twig',
+            'template' => '@CapcoAdmin/Comment/list__action_delete.html.twig',
         ];
 
         $isModerationEnabled = $this->manager->isActive(Manager::moderation_comment);
@@ -96,19 +96,19 @@ class CommentAdmin extends AbstractAdmin
         $list
             ->addIdentifier('body', null, [
                 'label' => 'global.contenu',
-                'template' => 'CapcoAdminBundle:Comment:body_list_field.html.twig',
+                'template' => '@CapcoAdmin/Comment/body_list_field.html.twig',
                 'route' => [
                     'name' => 'edit',
                 ],
             ])
             ->add('relatedObject', null, [
                 'label' => 'admin.fields.comment.object',
-                'template' => 'CapcoAdminBundle:Comment:object_list_field.html.twig',
+                'template' => '@CapcoAdmin/Comment/object_list_field.html.twig',
                 'mapped' => false,
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:Comment:author_list_field.html.twig',
+                'template' => '@CapcoAdmin/Comment/author_list_field.html.twig',
                 'mapped' => false,
             ])
             ->add('votesCount', null, ['label' => 'global.vote.count.label'])

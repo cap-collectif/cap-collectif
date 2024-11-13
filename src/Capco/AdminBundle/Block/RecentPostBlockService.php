@@ -83,7 +83,7 @@ class RecentPostBlockService extends AbstractBlockService implements EditableBlo
             'number' => 5,
             'toggle' => false,
             'title' => 'Recent Posts',
-            'template' => 'CapcoAdminBundle:Block:recent_posts.html.twig',
+            'template' => '@CapcoAdmin/Block/recent_posts.html.twig',
         ]);
     }
 

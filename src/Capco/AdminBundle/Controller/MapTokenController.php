@@ -10,7 +10,7 @@ class MapTokenController extends AbstractController
 {
     /**
      * @Route("admin/map/list", name="capco_admin_map_list_list")
-     * @Template("CapcoAdminBundle:Map:list.html.twig")
+     * @Template("@CapcoAdmin/Map/list.html.twig")
      */
     public function listAction()
     {

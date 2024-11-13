@@ -22,7 +22,7 @@ class BlogController extends Controller
      * @Route("/blog/{page}", name="app_blog", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Route("/blog/filter/{theme}/{page}", name="app_blog_search_theme", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "_feature_flags" = "blog"} )
      * @Route("/blog/filter/{theme}/{project}/{page}", name="app_blog_search_project", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "project" = "all", "_feature_flags" = "blog"} )
-     * @Template("CapcoAppBundle:Blog:index.html.twig")
+     * @Template("@CapcoApp/Blog/index.html.twig")
      *
      * @param mixed      $page
      * @param null|mixed $theme
@@ -97,7 +97,7 @@ class BlogController extends Controller
 
     /**
      * @Route("/blog/{slug}", name="app_blog_show", defaults={"_feature_flags" = "blog"} )
-     * @Template("CapcoAppBundle:Blog:show.html.twig")
+     * @Template("@CapcoApp/Blog/show.html.twig")
      */
     public function showAction(Request $request, string $slug)
     {

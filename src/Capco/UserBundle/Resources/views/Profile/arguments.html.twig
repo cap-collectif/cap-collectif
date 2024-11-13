@@ -1,6 +1,6 @@
 <ul class="media-list">
     {% for argument in arguments %}
-        {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {
+        {% include '@CapcoApp/Argument/blockArgument.html.twig' with {
             'argument': argument,
             'argumentsLabels': argumentsLabels,
             'profile': true,

@@ -1,4 +1,4 @@
-{% extends 'SonataDoctrineORMAdminBundle:Form:form_admin_fields.html.twig' %}
+{% extends '@SonataDoctrineORMAdmin/Form/form_admin_fields.html.twig' %}
 
 {% block form_widget_simple %}
     {% set type = type|default('text') %}
@@ -14,7 +14,7 @@
 {%- endblock checkbox_row %}
 
 {% block sonata_security_roles_widget %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div class="editable">
             {{ block('choice_widget') }}
         </div>
@@ -28,11 +28,11 @@
                 </ul>
             </div>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock sonata_security_roles_widget %}
 
 {% block choice_widget_expanded %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% set attr = attr|merge({'class': attr.class|default('') ~ ' list-unstyled'}) %}
         <ul {{ block('widget_container_attributes') }}>
             {% for child in form %}
@@ -41,18 +41,18 @@
                 </li>
             {% endfor %}
         </ul>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock choice_widget_expanded %}
 
  {% block checkbox_widget %}
-     {% spaceless %}
+     {% apply spaceless %}
          {% set attr = attr|merge({'class': attr.class|default('') ~ ' checkbox  login__checkbox'}) %}
          <div {{ block('widget_container_attributes') }}>
              <label for="{{ id }}">
                  <input type="checkbox" {{ block('widget_attributes') }}{% if value is defined %} value="{{ value }}"{% endif %}{% if checked %} checked="checked"{% endif %} /> {{ label|trans({}, translation_domain | default('CapcoAppBundle')) }}
              </label>
          </div>
-     {% endspaceless %}
+     {% endapply %}
  {% endblock %}
 
 {% block sonata_type_model_list_widget %}
@@ -150,9 +150,9 @@
         </div>
     </div>
 
-    {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_many_association_script.html.twig' %}
+    {% include '@SonataDoctrineORMAdmin/CRUD/edit_orm_many_association_script.html.twig' %}
 {% endblock %}
 
 {% block sonata_admin_orm_one_to_many_widget %}
-    {% include 'CapcoAdminBundle:CRUD:edit_orm_one_to_many.html.twig' %}
+    {% include '@CapcoAdmin/CRUD/edit_orm_one_to_many.html.twig' %}
 {% endblock %}

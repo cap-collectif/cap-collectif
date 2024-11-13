@@ -31,7 +31,7 @@ class RecentReportingController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/reporting", name="admin_capco_app_reporting_index")
-     * @Template("CapcoAdminBundle:RecentReporting:index.html.twig")
+     * @Template("@CapcoAdmin/RecentReporting/index.html.twig")
      */
     public function indexAction()
     {
@@ -44,7 +44,7 @@ class RecentReportingController extends Controller
             'reports' => $reports,
             'statusLabels' => Reporting::$statusesLabels,
             'recentReporting' => true,
-            'base_template' => 'CapcoAdminBundle::standard_layout.html.twig',
+            'base_template' => '@CapcoAdmin/standard_layout.html.twig',
             'admin_pool' => $this->pool,
             'admin' => $this->admin,
         ];

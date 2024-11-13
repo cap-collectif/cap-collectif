@@ -7,7 +7,7 @@
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
     {% set title = ('project.trash' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       title,
         'type':        'project',
         'image':       image,
@@ -62,27 +62,27 @@
                         <ul class="media-list  opinion__list">
                             {% if opinions|length > 0 %}
                                 {% for opinion in opinions %}
-                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType} %}
+                                    {% include '@CapcoApp/Opinion/blockOpinion.html.twig' with {'opinion': opinion, 'opinionType': opinion.opinionType} %}
                                 {% endfor %}
                             {% endif %}
                             {% if versions|length > 0 %}
                                 {% for version in versions %}
-                                    {% include 'CapcoAppBundle:Opinion:blockOpinion.html.twig' with {'opinion': version, 'isVersion': true} %}
+                                    {% include '@CapcoApp/Opinion/blockOpinion.html.twig' with {'opinion': version, 'isVersion': true} %}
                                 {% endfor %}
                             {% endif %}
                             {% if arguments|length > 0 %}
                                 {% for argument in arguments %}
-                                    {% include 'CapcoAppBundle:Argument:blockArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels} only %}
+                                    {% include '@CapcoApp/Argument/blockArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels} only %}
                                 {% endfor %}
                             {% endif %}
                             {% if debateArguments|length > 0 %}
                                 {% for argument in debateArguments %}
-                                    {% include 'CapcoAppBundle:Argument:blockDebateArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels } only %}
+                                    {% include '@CapcoApp/Argument/blockDebateArgument.html.twig' with {'argument': argument, 'argumentsLabels': argumentsLabels } only %}
                                 {% endfor %}
                             {% endif %}
                             {% if sources|length > 0 %}
                                 {% for source in sources %}
-                                    {% include 'CapcoAppBundle:Source:blockSource.html.twig' with {'source': source, 'opinion': source.linkedOpinion, 'opinionType': source.linkedOpinion.opinionType, 'project': project } only %}
+                                    {% include '@CapcoApp/Source/blockSource.html.twig' with {'source': source, 'opinion': source.linkedOpinion, 'opinionType': source.linkedOpinion.opinionType, 'project': project } only %}
                                 {% endfor %}
                             {% endif %}
                         </ul>

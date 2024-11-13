@@ -37,7 +37,7 @@ class UserAdmin extends CapcoAdmin
 
     protected function configure(): void
     {
-        $this->setTemplate('list', 'CapcoAdminBundle:User:list.html.twig');
+        $this->setTemplate('list', '@CapcoAdmin/User/list.html.twig');
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -46,17 +46,17 @@ class UserAdmin extends CapcoAdmin
         $list
             ->addIdentifier('username', null, [
                 'label' => 'global.fullname',
-                'template' => 'CapcoAdminBundle:User:username_list_field.html.twig',
+                'template' => '@CapcoAdmin/User/username_list_field.html.twig',
             ])
             ->add('email')
             ->add('roles', null, [
                 'label' => 'global.role',
-                'template' => 'CapcoAdminBundle:User:roles_list_field.html.twig',
+                'template' => '@CapcoAdmin/User/roles_list_field.html.twig',
             ])
             ->add('enabled')
             ->add('isEmailConfirmed', null, [
                 'label' => 'confirmed-by-email',
-                'template' => 'CapcoAdminBundle:User:email_confirmed_list_field.html.twig',
+                'template' => '@CapcoAdmin/User/email_confirmed_list_field.html.twig',
             ])
             ->add('locked', null, ['editable' => true])
             ->add('createdAt', null, ['label' => 'global.creation'])

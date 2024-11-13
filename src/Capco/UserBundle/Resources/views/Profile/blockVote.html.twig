@@ -1,6 +1,6 @@
 <li class="opinion  opinion--vote {% if classes is defined %}{{ classes }}{% endif %}" id="vote-{{ vote.id }}">
     <div class="opinion__body">
-        {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': vote.user, 'link_classes': 'pull-left'} only %}
+        {% include '@CapcoUser/Avatar/avatar.html.twig' with { 'user': vote.user, 'link_classes': 'pull-left'} only %}
         <div class="opinion__data">
             <p>
                 {% if is_feature_enabled('profiles') %}

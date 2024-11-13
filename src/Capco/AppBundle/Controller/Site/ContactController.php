@@ -11,7 +11,7 @@ class ContactController extends Controller
 {
     /**
      * @Route("/contact", name="app_contact")
-     * @Template("CapcoAppBundle:Contact:list.html.twig")
+     * @Template("@CapcoApp/Contact/list.html.twig")
      */
     public function contactAction(Request $request)
     {

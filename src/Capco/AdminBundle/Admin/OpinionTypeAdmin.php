@@ -94,7 +94,7 @@ class OpinionTypeAdmin extends AbstractAdmin
 
     protected function configure(): void
     {
-        // $this->setTemplate('edit', 'CapcoAdminBundle:OpinionType:edit.html.twig');
+        // $this->setTemplate('edit', '@CapcoAdmin/OpinionType/edit.html.twig');
         parent::configure();
     }
 

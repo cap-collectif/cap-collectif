@@ -152,32 +152,32 @@ class ProposalAdmin extends AbstractAdmin
             ->add('fullReference', null, ['label' => 'global.reference'])
             ->add('titleInfo', null, [
                 'label' => 'global.title',
-                'template' => 'CapcoAdminBundle:Proposal:title_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/title_list_field.html.twig',
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/author_list_field.html.twig',
             ])
             ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/project_list_field.html.twig',
             ])
             ->add('category', ModelType::class, ['label' => 'global.category'])
             ->add('district', ModelType::class, ['label' => 'proposal.district'])
             ->add('lastStatus', null, [
                 'label' => 'global.status',
-                'template' => 'CapcoAdminBundle:Proposal:last_status_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/last_status_list_field.html.twig',
             ])
             ->add('publicationStatus', null, [
                 'mapped' => false,
                 'label' => 'global.state',
-                'template' => 'CapcoAdminBundle:Proposal:state_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/state_list_field.html.twig',
             ])
             ->add('evaluers', null, ['label' => 'admin.fields.proposal.evaluers'])
             ->addIdentifier('createdAt', null, ['label' => 'global.creation'])
             ->add('updatedInfo', 'datetime', [
                 'label' => 'global.maj',
-                'template' => 'CapcoAdminBundle:common:updated_info_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/updated_info_list_field.html.twig',
             ])
         ;
     }
@@ -240,5 +240,13 @@ class ProposalAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['batch', 'list', 'edit']);
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplates([
+            'edit' => '@CapcoAdmin/Proposal/edit.html.twig',
+            'list' => '@CapcoAdmin/Proposal/list.html.twig',
+        ]);
     }
 }

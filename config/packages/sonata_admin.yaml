@@ -8,9 +8,9 @@ sonata_admin:
     options:
         pager_links: 5 # pager max links to display
     templates:
-        layout: CapcoAdminBundle::standard_layout.html.twig
-        list_block: CapcoAdminBundle:Block:block_admin_list.html.twig
-        add_block: CapcoAdminBundle:Core:add_block.html.twig
+        layout: "@CapcoAdmin/standard_layout.html.twig"
+        list_block: "@CapcoAdmin/Block/block_admin_list.html.twig"
+        add_block: "@CapcoAdmin/Core/add_block.html.twig"
     show_mosaic_button: false
     dashboard:
         blocks:
@@ -104,7 +104,7 @@ sonata_block:
         Capco\AdminBundle\Block\RecentPostBlockService: ~
         Capco\AdminBundle\Block\RecentContributionsBlockService: ~
         Capco\AdminBundle\Block\HelpBlockService: ~
-
+    http_cache: false
 services:
     Capco\AdminBundle\Action\DashboardAction:
         arguments:

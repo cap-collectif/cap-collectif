@@ -1,7 +1,7 @@
 {% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
             {% set value = proposalPublicationResolver.__invoke(object) %}
             {% if value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::DELETED') %}
                 <span class="label label-danger">{{ 'global.deleted'|trans }}</span>
@@ -18,5 +18,5 @@
             {% elseif value == constant('Capco\\AppBundle\\Enum\\ProposalPublicationStatus::ARCHIVED') %}
                 <span class="label label-default">{{ 'global-archived'|trans }}</span>
             {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

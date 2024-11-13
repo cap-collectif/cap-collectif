@@ -43,7 +43,7 @@
     {% endfor %}
 
     <span class="mr-30 mt-15" style="text-align: right">
-        {% spaceless %}
+        {% apply spaceless %}
             {% include '@CapcoApp/redux_store.html.twig' %}
             {{ react_render_component('LanguageButtonApp', {
                 'props': {
@@ -53,6 +53,6 @@
                     'pullRight': true
                 }
             }) }}
-        {% endspaceless %}
+        {% endapply %}
     </span>
 {% endif %}

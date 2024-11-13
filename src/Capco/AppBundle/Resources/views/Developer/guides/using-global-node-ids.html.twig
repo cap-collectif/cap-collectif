@@ -1,7 +1,7 @@
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title': 'Developper',
         'url':   url('app_developer')
     } only %}
@@ -10,7 +10,7 @@
 {% block body %}
 <div class="container  developers__container">
 
-{% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'guides'} only %}
+{% include '@CapcoApp/Developer/header.html.twig' with {'active': 'guides'} only %}
 
 <h3>Using Global Node IDs</h3>
 

@@ -33,7 +33,7 @@ class DeveloperController extends Controller
 
     /**
      * @Route("/developer/explorer", name="app_developer_explorer", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
-     * @Template("CapcoAppBundle:Developer:explorer.html.twig")
+     * @Template("@CapcoApp/Developer/explorer.html.twig")
      */
     public function explorerAction(Request $request)
     {
@@ -45,12 +45,12 @@ class DeveloperController extends Controller
      */
     public function guideAction(string $guide)
     {
-        return $this->render('CapcoAppBundle:Developer:guides/' . $guide . '.html.twig');
+        return $this->render('@CapcoApp/Developer/guides/' . $guide . '.html.twig');
     }
 
     /**
      * @Route("/developer/guides", name="app_developer_guides", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
-     * @Template("CapcoAppBundle:Developer:guides.html.twig")
+     * @Template("@CapcoApp/Developer/guides.html.twig")
      */
     public function guidesAction(Request $request)
     {
@@ -61,7 +61,7 @@ class DeveloperController extends Controller
      * @Route("/developer", name="app_developer", defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Route("/developer/{category}", name="app_developer_category", requirements={"category" = "query|previews|breaking_changes|mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
      * @Route("/developer/{category}/{type}", name="app_developer_category_type", requirements={"category" = "mutation|object|interface|enum|union|input_object|scalar"}, defaults={"_feature_flags" = "developer_documentation"}, options={"i18n" = false})
-     * @Template("CapcoAppBundle:Developer:index.html.twig")
+     * @Template("@CapcoApp/Developer/index.html.twig")
      *
      * @param null|mixed $category
      * @param null|mixed $type

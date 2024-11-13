@@ -139,15 +139,15 @@ class OpinionAdmin extends CapcoAdmin
             ->add('id', null, ['label' => 'admin.fields.opinion.id'])
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
-                'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/title_list_field.html.twig',
             ])
             ->add('author', ModelType::class, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/author_list_field.html.twig',
             ])
             ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/project_list_field.html.twig',
             ])
             ->add('OpinionType', null, ['label' => 'global.category'])
             ->add('consultation', ModelType::class, [
@@ -156,7 +156,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('dummy', IntegerType::class, [
                 'label' => 'global.vote',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:Opinion:vote_count_list_field.html.twig',
+                'template' => '@CapcoAdmin/Opinion/vote_count_list_field.html.twig',
             ])
             ->add('position', null, ['label' => 'global.position'])
             ->add('published', null, [
@@ -166,7 +166,7 @@ class OpinionAdmin extends CapcoAdmin
             ->add('pinned', null, ['editable' => true, 'label' => 'global.pinned.label'])
             ->add('trashedStatus', null, [
                 'label' => 'global.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
+                'template' => '@CapcoAdmin/Trashable/trashable_status.html.twig',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [

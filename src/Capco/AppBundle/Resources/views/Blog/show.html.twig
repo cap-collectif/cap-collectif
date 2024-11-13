@@ -6,7 +6,7 @@
 
 {% block metaTags %}
     {% set postMedia %}{{ media_public_url(post.media, 'default_blockHeader') }}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       post.title,
         'description': post.metadescription|striptags ?: post.abstract|striptags ?: post.body|striptags|truncate(250, true),
         'url':         url('app_blog_show', {'slug': post.translate.slug}),
@@ -31,7 +31,7 @@
     <section class="section--custom">
         <div class="container container--thinner">
             <h1 class="h1">{{ post.title | jolitypo() }}</h1>
-            {% include 'CapcoAppBundle:Blog:_authors.html.twig' with {'authors': post.authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
+            {% include '@CapcoApp/Blog/_authors.html.twig' with {'authors': post.authors, 'themes': post.themes, 'publishedAt': post.publishedAt} %}
             {% if viewerDidAuthor %}
                 <div class="edit-proposal-news">
                     {{ react_render_component('ProposalNewsHeaderButtonsApp', {

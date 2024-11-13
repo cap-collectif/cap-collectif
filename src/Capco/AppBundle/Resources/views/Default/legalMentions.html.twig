@@ -1,10 +1,10 @@
 {% set page_class = "legal" %}
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% block canonical_link %}{{ url('app_legal') }}{% endblock %}
 
 {% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title': ('legal-mentions'|trans({}, 'CapcoAppBundle')),
         'url':   url('app_legal')
     } only %}

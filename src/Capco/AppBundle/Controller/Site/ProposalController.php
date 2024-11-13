@@ -30,7 +30,7 @@ class ProposalController extends Controller
      *    "map_method_signature"=true
      * })
      * @Entity("proposal", class="CapcoAppBundle:Proposal", options={"mapping" = {"proposalSlug": "slug"}, "repository_method"= "getOneBySlug", "map_method_signature" = true})
-     * @Template("CapcoAppBundle:Proposal:show.html.twig")
+     * @Template("@CapcoApp/Proposal/show.html.twig")
      */
     public function showProposalAction(
         Request $request,

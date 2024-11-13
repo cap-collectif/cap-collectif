@@ -1,4 +1,4 @@
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% block canonical_link %}{{ url('app_page_show', {'slug': 'charter'|trans({},'CapcoAppBundle')|lower }) }}{% endblock %}
 

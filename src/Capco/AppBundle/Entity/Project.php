@@ -237,8 +237,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
      * @Assert\Range(
      *     min = 0,
      *     max = 100,
-     *     minMessage = "The opacity value must be at least {{ limit }}.",
-     *     maxMessage = "The opacity value cannot be greater than {{ limit }}."
+     *     notInRangeMessage = "The opacity value must be between {{ min }} and {{ max }}.",
      * )
      */
     private $coverFilterOpacityPercent = self::DEFAULT_COVER_FILTER_OPACITY;

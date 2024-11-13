@@ -4,7 +4,7 @@
 
 {% block metaTags %}
     {% set eventMedia %}{% if event.media %}{{ media_public_url(event.media, 'default_idea') }}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       event.title,
         'description': event.metaDescription|striptags ?: event.body|striptags|truncate(250, true),
         'url':         url('app_event_show', {'slug': event.slug}),

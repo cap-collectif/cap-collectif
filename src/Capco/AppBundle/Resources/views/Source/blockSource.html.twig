@@ -1,7 +1,7 @@
 {% set nbVotes = sourceVotesResolver.__invoke(source).totalCount %}
 
 <li class="opinion opinion--source media box {% if source.author.isVip %}bg-vip{% endif %}" id="source{{ source.id }}">
-    {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': source.Author, 'link_classes': 'pull-left media-middle', format: 'avatar_source'} only %}
+    {% include '@CapcoUser/Avatar/avatar.html.twig' with { 'user': source.Author, 'link_classes': 'pull-left media-middle', format: 'avatar_source'} only %}
     <div class="media-body">
         <h4 class="media-heading h4" id="source{{ source.id }}"><span class="label label-info">{{ source.Category.title }}</span>
             {% if source.media %}

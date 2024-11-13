@@ -40,7 +40,7 @@ parameters:
     elasticsearch_index: '%env(SYMFONY_ELASTICSEARCH_INDEX)%'
     elasticsearch_username: '%env(SYMFONY_ELASTICSEARCH_USERNAME)%'
     elasticsearch_password: '%env(SYMFONY_ELASTICSEARCH_PASSWORD)%'
-    elasticsearch_port: '%env(SYMFONY_ELASTICSEARCH_PORT)%'
+    elasticsearch_port: '%env(int:SYMFONY_ELASTICSEARCH_PORT)%'
     logpush_elasticsearch_host: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST)%'
     logpush_elasticsearch_index: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_INDEX)%'
     logpush_elasticsearch_username: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_USERNAME)%'
@@ -48,7 +48,7 @@ parameters:
     logpush_elasticsearch_port: '%env(SYMFONY_LOGPUSH_ELASTICSEARCH_PORT)%'
     app_version: '%env(SYMFONY_APP_VERSION)%'
     locale: '%env(SYMFONY_LOCALE)%'
-    use_assetic_controller: '%env(SYMFONY_USE_ASSETIC_CONTROLLER)%'
+    use_assetic_controller: '%env(bool:SYMFONY_USE_ASSETIC_CONTROLLER)%'
     language_analyzer: '%env(SYMFONY_LANGUAGE_ANALYZER)%'
     remember_secret: '%env(SYMFONY_INSTANCE_REMEMBER_SECRET)%'
     secret: '%env(SYMFONY_INSTANCE_REMEMBER_SECRET)%'
@@ -58,7 +58,7 @@ parameters:
     assets_host: '%env(SYMFONY_ASSETS_HOST)%'
     recaptcha_private_key: '%env(SYMFONY_RECAPTCHA_PRIVATE_KEY)%'
     sms_provider: '%env(SYMFONY_SMS_PROVIDER)%'
-    sms_orange_request_id_expiration_time: '%env(SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME)%'
+    sms_orange_request_id_expiration_time: '%env(int:SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME)%'
     twilio_sid: '%env(SYMFONY_TWILIO_SID)%'
     twilio_token: '%env(SYMFONY_TWILIO_TOKEN)%'
     twilio_default_subaccount_token: '%env(SYMFONY_TWILIO_DEFAULT_SUBACCOUNT_TOKEN)%'
@@ -108,7 +108,7 @@ parameters:
     openid_test_password: '%env(SYMFONY_OPENID_TEST_PASSWORD)%'
     turnstile_public_key: '%env(SYMFONY_TURNSTILE_PUBLIC_KEY)%'
     turnstile_private_key: '%env(SYMFONY_TURNSTILE_PRIVATE_KEY)%'
-    magiclinks_duration_in_minutes: '%env(SYMFONY_MAGICLINKS_DURATION_IN_MINUTES)%'
+    magiclinks_duration_in_minutes: '%env(int:SYMFONY_MAGICLINKS_DURATION_IN_MINUTES)%'
 
     #
     # Default env values :
@@ -209,10 +209,10 @@ parameters:
     env(SYMFONY_SMS_PROVIDER): twilio
     env(SYMFONY_ORANGE_API_CLIENT_ID): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_ORANGE_API_CLIENT_SECRET): 'INSERT_A_REAL_SECRET'
-    env(SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME): 900
+    env(SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME): '900'
 
 sensio_framework_extra:
-    router: { annotations: true } # Deprecated; use routing annotations of Symfony core instead
+    router: { annotations: false }
     request: { converters: true, auto_convert: true }
     view: { annotations: true }
     cache: { annotations: true }

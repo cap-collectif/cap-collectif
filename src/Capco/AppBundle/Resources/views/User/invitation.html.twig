@@ -1,4 +1,4 @@
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% block mainContent %}
     {% set footerLinks = getFooterLinks() %}
@@ -35,7 +35,7 @@
             transform: translate(-50%, 20px);
         }
     </style>
-    {% include 'CapcoAppBundle:Homepage:flashbag.html.twig' %}
+    {% include '@CapcoApp/Homepage/flashbag.html.twig' %}
     <div class="user-invitation-page-app-container">
     {{ react_render_component('UserInvitationPageApp', {'rendering': 'client_side', props: {
         token: token,

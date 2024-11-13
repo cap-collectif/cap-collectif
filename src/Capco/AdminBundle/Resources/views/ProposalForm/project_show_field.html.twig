@@ -1,9 +1,9 @@
 {% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if object is not null and object.getProject() is not null %}
             <a href="{{ path('admin_capco_app_project_edit', {id: object.getProject().getId()}) }}">{{ object.getProject().getTitle() }}</a>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

@@ -9,6 +9,6 @@ class FontController extends \Sonata\AdminBundle\Controller\CRUDController
 {
     public function listAction(Request $request): Response
     {
-        return $this->renderWithExtraParams('CapcoAdminBundle:Font:list.html.twig');
+        return $this->renderWithExtraParams('@CapcoAdmin/Font/list.html.twig');
     }
 }

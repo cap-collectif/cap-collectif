@@ -4,7 +4,7 @@
 
 {% block metaTags %}
     {% set themeMedia %}{% if theme.media %}{{ media_public_url(theme.media, 'default_idea') }}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       theme.title,
         'description': theme.translate.metaDescription|striptags ?: theme.translate.body|striptags|truncate(250, true),
         'url':         url('app_theme_show', {'slug': theme.translate.slug}),
@@ -64,7 +64,7 @@
         </div>
     </section>
 
-    {% include 'CapcoAppBundle:Theme:appendices.html.twig' %}
+    {% include '@CapcoApp/Theme/appendices.html.twig' %}
 
 {% endblock %}
 {% block javascripts %}

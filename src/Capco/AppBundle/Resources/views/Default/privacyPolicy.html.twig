@@ -1,10 +1,10 @@
 {% set page_class = "privacy" %}
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% block canonical_link %}{{ url('app_privacy') }}{% endblock %}
 
 {% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title': ('privacy-policy'|trans({}, 'CapcoAppBundle')),
         'url':   url('app_privacy')
     } only %}

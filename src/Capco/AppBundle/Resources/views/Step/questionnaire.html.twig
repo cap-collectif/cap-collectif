@@ -9,7 +9,7 @@
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
     {% set title = currentStep.title ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       title,
         'type':        'project',
         'description': currentStep.metaDescription ?: currentStep.body|striptags|truncate(250, true),
@@ -33,5 +33,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+    {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
 {% endblock %}

@@ -9,7 +9,7 @@ class ContactController extends CRUDController
 {
     public function listAction(Request $request): Response
     {
-        return $this->renderWithExtraParams('CapcoAdminBundle:Contact:list.html.twig', [
+        return $this->renderWithExtraParams('@CapcoAdmin/Contact/list.html.twig', [
             'action' => 'list',
         ]);
     }

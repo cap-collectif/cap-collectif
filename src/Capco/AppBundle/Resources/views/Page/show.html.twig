@@ -1,4 +1,4 @@
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% set link = capco_site_color_value('color.link.default') %}
 
@@ -7,7 +7,7 @@
 {% block metaTags %}
     {% set picto = capco_site_image_media('homepage.picto') %}
     {% set image %}{% if page.cover %}{{ media_public_url(page.cover, 'default_blockHeader') }}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       pageTranslation.title,
         'image':       image,
         'type':        'article',

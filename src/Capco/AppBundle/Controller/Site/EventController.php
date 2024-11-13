@@ -55,7 +55,7 @@ class EventController extends Controller
 
     /**
      * @Route("/events", name="app_event", defaults={"_feature_flags" = "calendar"} )
-     * @Template("CapcoAppBundle:Event:index.html.twig")
+     * @Template("@CapcoApp/Event/index.html.twig")
      */
     public function indexAction(Request $request)
     {
@@ -108,7 +108,7 @@ class EventController extends Controller
 
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
-     * @Template("CapcoAppBundle:Event:show.html.twig")
+     * @Template("@CapcoApp/Event/show.html.twig")
      *
      * @param mixed $slug
      */

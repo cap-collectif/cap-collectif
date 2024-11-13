@@ -7,7 +7,7 @@
     <div id="field_container_{{ id }}" class="field-container">
         <span id="field_widget_{{ id }}" >
             {% if tree is defined and tree %}
-                {% include 'CapcoAdminBundle:CRUD:tree_field.html.twig' %}
+                {% include '@CapcoAdmin/CRUD/tree_field.html.twig' %}
             {% elseif sonata_admin.edit == 'inline' %}
                 {% if sonata_admin.inline == 'table' %}
                     {% if form.children|length > 0 %}
@@ -156,7 +156,7 @@
             {% endif %}
 
             {# include association code #}
-            {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_one_association_script.html.twig' %}
+            {% include '@SonataDoctrineORMAdmin/CRUD/edit_orm_one_association_script.html.twig' %}
         {% elseif tree is defined and tree %}
             <span id="field_actions_{{ id }}" >
                 {% if sonata_admin.field_description.associationadmin.hasroute('create') and sonata_admin.field_description.associationadmin.isGranted('CREATE') and btn_add %}
@@ -185,9 +185,9 @@
                 {% endif %}
             </span>
 
-            {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_modal.html.twig' %}
+            {% include '@SonataDoctrineORMAdmin/CRUD/edit_modal.html.twig' %}
 
-            {% include 'SonataDoctrineORMAdminBundle:CRUD:edit_orm_many_association_script.html.twig' %}
+            {% include '@SonataDoctrineORMAdmin/CRUD/edit_orm_many_association_script.html.twig' %}
         {% endif %}
     </div>
 {% endif %}

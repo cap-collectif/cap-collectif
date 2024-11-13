@@ -7,7 +7,7 @@
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
     {% set title = ('capco.section.metrics.participants' | trans({}, 'CapcoAppBundle')) ~ ' ' ~ 'of.project' | trans({}, 'CapcoAppBundle') ~ ' ' ~ project.title %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       title,
         'type':        'project',
         'image':       image,
@@ -44,7 +44,7 @@
             {% set offset = pagination*page - pagination %}
             {% set limit = contributors|length <= pagination*page ? contributors|length : pagination %}
             {% for contributor in contributors|slice(offset, limit) %}
-                {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {
+                {% include '@CapcoApp/Default/user_thumbnail.html.twig' with {
                     'user': contributor.user,
                     'contributions': contributor.contributions,
                     'votes': contributor.votes,
@@ -56,6 +56,6 @@
     </div>
 
     {% set route, params = 'app_project_show_contributors', {'projectSlug': project.slug} %}
-    {% include 'CapcoAppBundle:Block:pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
+    {% include '@CapcoApp/Block/pagination.html.twig' with {'current': page, 'nb': nbPage, 'route': route, 'params': params} only  %}
 
 {% endblock %}

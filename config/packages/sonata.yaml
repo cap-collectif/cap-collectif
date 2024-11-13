@@ -1,6 +1,6 @@
 #sonata_doctrine_orm_admin:
 #    templates:
-#        form: [CapcoAdminBundle:Form:form_admin_fields.html.twig]
+#        form: [@CapcoAdmin/Form/form_admin_fields.html.twig]
 
 sonata_intl:
     timezone:

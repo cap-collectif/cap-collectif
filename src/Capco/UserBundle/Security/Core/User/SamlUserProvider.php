@@ -11,12 +11,10 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 class SamlUserProvider implements UserProviderInterface
 {
     private UserManager $userManager;
-    private string $samlIdp;
     private GroupMutation $groupMutation;
 
-    public function __construct(UserManager $manager, string $samlIdp, GroupMutation $groupMutation)
+    public function __construct(UserManager $manager, GroupMutation $groupMutation)
     {
-        $this->samlIdp = $samlIdp;
         $this->userManager = $manager;
         $this->groupMutation = $groupMutation;
     }
@@ -30,7 +28,6 @@ class SamlUserProvider implements UserProviderInterface
 
             if (null !== $user) {
                 $user->setSamlId($id);
-                $this->userManager->updateUser($user);
             } else {
                 $user = $this->userManager->createUser();
                 $user->setSamlId($id);
@@ -45,8 +42,8 @@ class SamlUserProvider implements UserProviderInterface
                 $user->setEmail($email);
                 $user->setPlainPassword(substr(str_shuffle(md5(microtime())), 0, 15));
                 $user->setEnabled(true);
-                $this->userManager->updateUser($user);
             }
+            $this->userManager->updateUser($user);
         }
 
         $this->groupMutation->createAndAddUserInGroup($user, 'SAML');
@@ -65,6 +62,6 @@ class SamlUserProvider implements UserProviderInterface
 
     public function supportsClass($class): bool
     {
-        return 'Capco\UserBundle\Entity\User' === $class;
+        return User::class === $class;
     }
 }

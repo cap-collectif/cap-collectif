@@ -9,7 +9,7 @@ doctrine:
         charset: UTF8
         server_version: '%database_version%'
         types:
-            json: Sonata\Doctrine\Types\JsonType
+            json: Doctrine\DBAL\Types\JsonType
             enum_sso_environment: Capco\AppBundle\DBAL\Enum\EnumSSOEnvironmentType
             enum_event_review_refused_reason: Capco\AppBundle\DBAL\Enum\EventReviewRefusedReasonType
             enum_event_review_status: Capco\AppBundle\DBAL\Enum\EventReviewStatusType

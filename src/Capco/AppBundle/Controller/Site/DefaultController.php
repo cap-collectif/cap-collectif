@@ -73,7 +73,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/contact", name="app_contact")
-     * @Template("CapcoAppBundle:Contact:list.html.twig")
+     * @Template("@CapcoApp/Contact/list.html.twig")
      */
     public function contactAction(Request $request)
     {
@@ -82,7 +82,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/cookies-page", name="app_cookies")
-     * @Template("CapcoAppBundle:Default:cookies.html.twig")
+     * @Template("@CapcoApp/Default/cookies.html.twig")
      */
     public function cookiesAction(
         Request $request,
@@ -103,7 +103,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/privacy", name="app_privacy")
-     * @Template("CapcoAppBundle:Default:privacyPolicy.html.twig")
+     * @Template("@CapcoApp/Default/privacyPolicy.html.twig")
      */
     public function privacyPolicyAction(
         Request $request,
@@ -126,7 +126,7 @@ class DefaultController extends AbstractController
 
     /**
      * @Route("/legal", name="app_legal")
-     * @Template("CapcoAppBundle:Default:legalMentions.html.twig")
+     * @Template("@CapcoApp/Default/legalMentions.html.twig")
      */
     public function legalMentionsAction(
         Request $request,

@@ -1,6 +1,6 @@
-{% extends 'SonataAdminBundle:CRUD:delete.html.twig' %}
+{% extends '@SonataAdmin/CRUD/delete.html.twig' %}
 
 {% block actions %}
-    <li>{% include 'SonataAdminBundle:Button:list_button.html.twig' %}</li>
-    <li>{% include 'SonataAdminBundle:Button:edit_button.html.twig' %}</li>
+    <li>{% include '@SonataAdmin/Button/list_button.html.twig' %}</li>
+    <li>{% include '@SonataAdmin/Button/edit_button.html.twig' %}</li>
 {% endblock %}

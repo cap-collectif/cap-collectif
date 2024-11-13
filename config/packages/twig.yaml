@@ -1,10 +1,11 @@
 twig:
     debug: '%kernel.debug%'
     strict_variables: '%kernel.debug%'
+    exception_controller: null
     form_themes:
-        - 'CapcoAppBundle:Form:bootstrap.html.twig'
-        - 'CapcoAppBundle:Form:media_widgets.html.twig'
-        - 'CapcoAppBundle:Form:ckeditor_widget.html.twig'
+        - '@CapcoApp/Form/bootstrap.html.twig'
+        - '@CapcoApp/Form/media_widgets.html.twig'
+        - '@CapcoApp/Form/ckeditor_widget.html.twig'
     globals:
         instanceName: '%instance_name%'
         sentryDsn: '%sentry_dsn%'

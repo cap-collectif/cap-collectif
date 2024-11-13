@@ -107,15 +107,15 @@ class SectionAdmin extends AbstractAdmin
         $list
             ->add('move_actions', 'actions', [
                 'label' => 'admin.action.highlighted_content.move_actions.label',
-                'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
+                'template' => '@SonataAdmin/CRUD/list__action.html.twig',
                 'type' => 'action',
                 'code' => 'Action',
                 'actions' => [
                     'up' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_up.html.twig',
+                        'template' => '@CapcoAdmin/Section/list__action_up.html.twig',
                     ],
                     'down' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_down.html.twig',
+                        'template' => '@CapcoAdmin/Section/list__action_down.html.twig',
                     ],
                 ],
             ])
@@ -140,7 +140,7 @@ class SectionAdmin extends AbstractAdmin
                 'actions' => [
                     'edit' => [],
                     'delete' => [
-                        'template' => 'CapcoAdminBundle:Section:list__action_delete.html.twig',
+                        'template' => '@CapcoAdmin/Section/list__action_delete.html.twig',
                     ],
                 ],
             ])
@@ -271,6 +271,11 @@ class SectionAdmin extends AbstractAdmin
     {
         $collection->add('down', $this->getRouterIdParameter() . '/down');
         $collection->add('up', $this->getRouterIdParameter() . '/up');
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 
     private function createQueryForCollectSteps(): ProxyQuery

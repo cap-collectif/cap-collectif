@@ -90,4 +90,9 @@ class SiteImageAdmin extends AbstractAdmin
     {
         $collection->clearExcept(['edit']);
     }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
+    }
 }

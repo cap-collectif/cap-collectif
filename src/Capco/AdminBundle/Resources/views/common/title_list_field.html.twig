@@ -1,7 +1,7 @@
 {% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
         {{ value | trans({}, 'CapcoAppBundle') }}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

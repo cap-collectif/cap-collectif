@@ -1,5 +1,5 @@
 {% block sonata_security_roles_widget %}
-{% spaceless %}
+{% apply spaceless %}
     <div class="editable">
         <h4>{{ 'field.label_roles_editable'|trans({}, "CapcoAppBundle") }}</h4>
         {{ block('choice_widget') }}
@@ -14,5 +14,5 @@
         </ul>
     </div>
     {% endif %}
-{% endspaceless %}
+{% endapply %}
 {% endblock sonata_security_roles_widget %}

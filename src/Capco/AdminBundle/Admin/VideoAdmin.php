@@ -166,7 +166,7 @@ class VideoAdmin extends AbstractAdmin
                 },
             ])
             ->add('media', null, [
-                'template' => 'CapcoAdminBundle:Event:media_show_field.html.twig',
+                'template' => '@CapcoAdmin/Event/media_show_field.html.twig',
                 'label' => 'global.image',
             ])
             ->add('isEnabled', null, [
@@ -185,5 +185,10 @@ class VideoAdmin extends AbstractAdmin
     protected function configureRoutes(RouteCollectionInterface $collection): void
     {
         $collection->clearExcept(['create', 'delete', 'list', 'edit']);
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 }

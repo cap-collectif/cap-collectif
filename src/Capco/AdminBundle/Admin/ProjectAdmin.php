@@ -170,8 +170,8 @@ final class ProjectAdmin extends CapcoAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('list', 'CapcoAdminBundle:Project:list.html.twig');
-        //$this->setTemplate('edit', 'CapcoAdminBundle:Project:edit.html.twig');
+        //$this->setTemplate('list', '@CapcoAdmin/Project/list.html.twig');
+        //$this->setTemplate('edit', '@CapcoAdmin/Project/edit.html.twig');
         parent::configure();
     }
 
@@ -202,7 +202,7 @@ final class ProjectAdmin extends CapcoAdmin
         //$this->setTemplate(
         $list->addIdentifier('title', null, [
             'label' => 'global.title',
-            'template' => 'CapcoAdminBundle:Project:title_list_field.html.twig',
+            'template' => '@CapcoAdmin/Project/title_list_field.html.twig',
         ]);
         if ($this->manager->isActive('themes')) {
             $list->add('themes', null, ['label' => 'global.themes']);
@@ -210,26 +210,26 @@ final class ProjectAdmin extends CapcoAdmin
 
         $actions = [
             'display' => [
-                'template' => 'CapcoAdminBundle:Project:list__action_display.html.twig',
+                'template' => '@CapcoAdmin/Project/list__action_display.html.twig',
             ],
             'download' => [
-                'template' => 'CapcoAdminBundle:CRUD:list__action_download.html.twig',
+                'template' => '@CapcoAdmin/CRUD/list__action_download.html.twig',
             ],
             'delete' => [
-                'template' => 'CapcoAdminBundle:CRUD:list__action_delete.html.twig',
+                'template' => '@CapcoAdmin/CRUD/list__action_delete.html.twig',
             ],
         ];
 
         $currentUser = $this->tokenStorage->getToken()->getUser();
         if ($currentUser->hasRole('ROLE_SUPER_ADMIN')) {
             $actions['duplicate'] = [
-                'template' => 'CapcoAdminBundle:Project:list__action_duplicate.html.twig',
+                'template' => '@CapcoAdmin/Project/list__action_duplicate.html.twig',
             ];
         }
 
         $list
             ->add('visibility', ChoiceType::class, [
-                'template' => 'CapcoAdminBundle:Project:visibility_list_field.html.twig',
+                'template' => '@CapcoAdmin/Project/visibility_list_field.html.twig',
                 'choices' => ProjectVisibilityMode::REVERSE_KEY_VISIBILITY,
                 'label' => 'project-access',
                 'catalogue' => 'CapcoAppBundle',
@@ -406,7 +406,7 @@ final class ProjectAdmin extends CapcoAdmin
             ->add('visibility', null, ['label' => 'who-can-see-this-project'])
             ->add('publishedAt', null, ['label' => 'global.publication'])
             ->add('cover', null, [
-                'template' => 'CapcoAdminBundle:Project:cover_show_field.html.twig',
+                'template' => '@CapcoAdmin/Project/cover_show_field.html.twig',
                 'label' => 'global.image',
             ])
             ->add('video', null, ['label' => 'admin.fields.project.video'])

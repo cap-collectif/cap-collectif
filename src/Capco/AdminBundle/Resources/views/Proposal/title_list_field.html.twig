@@ -1,11 +1,11 @@
 {% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if value %}
             <a href="{{ path('admin_capco_app_proposal_edit', {id: value.id}) }}">
                 {{ value.title|trans({}, 'CapcoAppBundle') }}
             </a>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

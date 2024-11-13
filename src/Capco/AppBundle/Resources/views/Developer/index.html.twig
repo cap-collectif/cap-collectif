@@ -1,7 +1,7 @@
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% block metaTags %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title': 'Developper',
         'url':   url('app_developer')
     } only %}
@@ -20,11 +20,11 @@
 
 <div class="container developers__container">
 
-{% include 'CapcoAppBundle:Developer:header.html.twig' with {'active': 'reference'} only %}
+{% include '@CapcoApp/Developer/header.html.twig' with {'active': 'reference'} only %}
 
 <div class="row mt-40">
     <div class="col-md-4">
-        {% include 'CapcoAppBundle:Developer:sidebar.html.twig' %}
+        {% include '@CapcoApp/Developer/sidebar.html.twig' %}
     </div>
     <div class="col-md-8">
 
@@ -133,7 +133,7 @@
             Connections
         </h3>
         {% endif %}
-        {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field, 'parent': query} %}
+        {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': field, 'parent': query} %}
     {% endfor %}
     {% for field in query.fields|usort if 'Connection' not in field.type.toString %}
         {% if loop.first %}
@@ -141,7 +141,7 @@
             Fields
         </h3>
         {% endif %}
-        {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field, 'parent': query} %}
+        {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': field, 'parent': query} %}
     {% endfor %}
     {% endif %}
 
@@ -154,19 +154,19 @@
         {% endif %}
         </h2>
         {% if selection.type.getNullableType(selection.type).preview is defined and selection.type.getNullableType(selection.type).preview %}
-            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+            {% include '@CapcoApp/Developer/preview.html.twig' %}
         {% endif %}
         {# TODO we need to fix GraphQLBundle to handle descriptions on mutations #}
         {# <p>{{selection.description|graphql_description|raw}}</p> #}
         <h3>
            Input fields
         </h3>
-        {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': selection.args[0]} %}
+        {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': selection.args[0]} %}
         <h3>
             Payload fields
         </h3>
         {% for payloadField in selection.type.fields|usort if payloadField.name != "clientMutationId" %}
-         {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': payloadField} %}
+         {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': payloadField} %}
         {% endfor %}
         {% else %}
             <h2>Mutations</h2>
@@ -183,7 +183,7 @@
         {% if selection %}
         <h2>{{selection.name}}</h2>
         {% if selection.preview is defined and selection.preview and not selection.previewHasAPublicType %}
-            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+            {% include '@CapcoApp/Developer/preview.html.twig' %}
         {% endif %}
         <p>{{selection.description|graphql_description|raw}}</p>
 
@@ -206,7 +206,7 @@
             {% if loop.first %}
                 <h3>Fields</h3>
             {% endif %}
-            {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field, 'parent': selection } %}
+            {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': field, 'parent': selection } %}
         {% endfor %}
         {% else %}
         <h2>Objects</h2>
@@ -226,7 +226,7 @@ For more information, see "Introduction to GraphQL."
         {% if selection %}
         <h2>{{selection.name}}</h2>
         {% if selection.preview is defined and selection.preview %}
-            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+            {% include '@CapcoApp/Developer/preview.html.twig' %}
         {% endif %}
         <p>{{selection.description|graphql_description|raw}}</p>
         <h3>Implemented by</h3>
@@ -243,7 +243,7 @@ For more information, see "Introduction to GraphQL."
             {% if loop.first %}
                 <h3>Fields</h3>
             {% endif %}
-            {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
+            {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': field} %}
         {% endfor %}
         {% else %}
             <h2>Interfaces</h2>
@@ -286,13 +286,13 @@ For more information, see "Introduction to GraphQL."
         {% if selection %}
         <h2>{{selection.name}}</h2>
         {% if selection.getNullableType(selection).preview is defined and selection.getNullableType(selection).preview %}
-            {% include 'CapcoAppBundle:Developer:preview.html.twig' %}
+            {% include '@CapcoApp/Developer/preview.html.twig' %}
         {% endif %}
         {# TODO we need to fix GraphQLBundle to handle descriptions on mutations #}
         {# <p>{{selection.description|graphql_description|raw}}</p> #}
         <h3>Input Fields</h3>
         {% for field in selection.fields|usort if field.name != "clientMutationId" %}
-            {% include 'CapcoAppBundle:Developer:show_field.html.twig' with {'field': field} %}
+            {% include '@CapcoApp/Developer/show_field.html.twig' with {'field': field} %}
         {% endfor %}
         {% else %}
         <h2>Input objects</h2>

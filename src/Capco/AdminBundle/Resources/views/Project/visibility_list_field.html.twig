@@ -8,15 +8,15 @@
 
 {% if is_editable and x_editable_type %}
     {% block field_span_attributes %}
-        {% spaceless %}
+        {% apply spaceless %}
             {{ parent() }}
             data-source="{{ field_description|sonata_xeditable_choices|json_encode }}"
-        {% endspaceless %}
+        {% endapply %}
     {% endblock %}
 {% endif %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if field_description.options.choices is defined %}
             {% set class = 'label label-success' %}
             {% if field_description.options.choices[value] == 'private' %}
@@ -29,5 +29,5 @@
             {% set value = field_description.options.choices[value]|trans({}, field_description.options.catalogue) %}
         {% endif %}
         <span class="{{ class }}">{{ value }}</span>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

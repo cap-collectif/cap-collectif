@@ -20,9 +20,9 @@
 
     {% set sitename = capco_site_parameter_value('global.site.fullname') %}
 
-{% spaceless %}
+{% apply spaceless %}
     <title>{% block title %}{% if sitename is not empty %}{{ sitename }}{% else %}Cap-Collectif{% endif %}{% endblock %}</title>
-{% endspaceless %}
+{% endapply %}
 
     {% block stylesheets %}
       <style>

@@ -81,4 +81,9 @@ class AppendixTypeAdmin extends CapcoAdmin
     {
         $collection->clearExcept(['create', 'delete', 'list', 'edit']);
     }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
+    }
 }

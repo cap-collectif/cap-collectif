@@ -31,7 +31,7 @@ class PostController extends AbstractController
         $post = new Post();
 
         return $this->render(
-            'CapcoAdminBundle:Post:create.html.twig',
+            '@CapcoAdmin/Post/create.html.twig',
             [
                 'action' => 'create',
                 'object' => $post,
@@ -52,7 +52,7 @@ class PostController extends AbstractController
         $this->denyAccessUnlessGranted(PostVoter::EDIT, $post);
 
         return $this->render(
-            'CapcoAdminBundle:Post:edit.html.twig',
+            '@CapcoAdmin/Post/edit.html.twig',
             [
                 'action' => 'edit',
                 'object' => $post,

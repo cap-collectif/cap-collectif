@@ -1,4 +1,4 @@
-{% extends 'SonataAdminBundle:CRUD:list.html.twig' %}
+{% extends '@SonataAdmin/CRUD/list.html.twig' %}
 
 {% block sonata_page_content_header %}
     <nav class="navbar navbar-default" role="navigation">
@@ -26,7 +26,7 @@
                         {% block table_header %}
                             <thead>
                             <tr class="sonata-ba-list-field-header">
-                                {% spaceless %}
+                                {% apply spaceless %}
                                     <th class="sonata-ba-list-field-header-text">
                                         {{ 'global.contribution' | trans({}, 'CapcoAppBundle') }}
                                     </th>
@@ -48,7 +48,7 @@
                                     <th class="sonata-ba-list-field-header-actions">
                                         {{ 'admin.fields.project.proposals_table.actions' | trans({}, 'CapcoAppBundle') }}
                                     </th>
-                                {% endspaceless %}
+                                {% endapply %}
                             </tr>
                             </thead>
                         {% endblock %}

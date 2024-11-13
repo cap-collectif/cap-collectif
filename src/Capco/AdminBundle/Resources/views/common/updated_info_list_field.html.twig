@@ -1,7 +1,7 @@
 {% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
         <div style="width: 150px;">
             {% if value %}
                 {% if value.date is defined %}
@@ -16,5 +16,5 @@
                 {% endif %}
             {% endif %}
         </div>
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

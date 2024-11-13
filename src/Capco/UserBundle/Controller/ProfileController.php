@@ -109,7 +109,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/edit-profile", name="capco_profile_edit")
-     * @Template("CapcoUserBundle:Profile:edit_profile.html.twig")
+     * @Template("@CapcoUser/Profile/edit_profile.html.twig")
      * @Security("has_role('ROLE_USER')")
      */
     public function editProfileAction()
@@ -283,7 +283,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/projects", name="capco_user_profile_show_projects", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserProjects.html.twig")
+     * @Template("@CapcoUser/Profile/showUserProjects.html.twig")
      */
     public function showProjectsAction(User $user)
     {
@@ -297,7 +297,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/opinions", name="capco_user_profile_show_opinions", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserOpinions.html.twig")
+     * @Template("@CapcoUser/Profile/showUserOpinions.html.twig")
      *
      * @return array
      */
@@ -313,7 +313,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/versions", name="capco_user_profile_show_opinions_versions", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserOpinionVersions.html.twig")
+     * @Template("@CapcoUser/Profile/showUserOpinionVersions.html.twig")
      */
     public function showOpinionVersionsAction(User $user)
     {
@@ -324,7 +324,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/proposals", name="capco_user_profile_show_proposals", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserProposals.html.twig")
+     * @Template("@CapcoUser/Profile/showUserProposals.html.twig")
      */
     public function showProposalsAction(User $user)
     {
@@ -338,7 +338,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/replies", name="capco_user_profile_show_replies", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserReplies.html.twig")
+     * @Template("@CapcoUser/Profile/showUserReplies.html.twig")
      */
     public function showRepliesAction(User $user)
     {
@@ -354,7 +354,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/arguments", name="capco_user_profile_show_arguments", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserArguments.html.twig")
+     * @Template("@CapcoUser/Profile/showUserArguments.html.twig")
      */
     public function showArgumentsAction(User $user)
     {
@@ -372,7 +372,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/sources", name="capco_user_profile_show_sources", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserSources.html.twig")
+     * @Template("@CapcoUser/Profile/showUserSources.html.twig")
      */
     public function showSourcesAction(User $user)
     {
@@ -389,7 +389,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/comments", name="capco_user_profile_show_comments", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserComments.html.twig")
+     * @Template("@CapcoUser/Profile/showUserComments.html.twig")
      */
     public function showCommentsAction(User $user)
     {
@@ -406,7 +406,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/votes", name="capco_user_profile_show_votes", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserVotes.html.twig")
+     * @Template("@CapcoUser/Profile/showUserVotes.html.twig")
      */
     public function showVotesAction(User $user)
     {
@@ -420,7 +420,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/{slug}/events", name="capco_user_profile_show_events", defaults={"_feature_flags" = "profiles"})
-     * @Template("CapcoUserBundle:Profile:showUserEvents.html.twig")
+     * @Template("@CapcoUser/Profile/showUserEvents.html.twig")
      */
     public function showEventsAction(User $user)
     {

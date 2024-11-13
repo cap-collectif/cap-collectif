@@ -25,8 +25,7 @@ class HighlightedContentAdmin extends AbstractAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('edit', 'CapcoAdminBundle:HighlightedContent:edit.html.twig');
-        parent::configure();
+        $this->setTemplate('list', '@CapcoAdmin/HighlightedContent/list.html.twig');
     }
 
     protected function configureListFields(ListMapper $list): void
@@ -34,22 +33,22 @@ class HighlightedContentAdmin extends AbstractAdmin
         $list
             ->add('move_actions', 'actions', [
                 'label' => 'admin.action.highlighted_content.move_actions.label',
-                'template' => 'SonataAdminBundle:CRUD:list__action.html.twig',
+                'template' => '@SonataAdmin/CRUD/list__action.html.twig',
                 'type' => 'action',
                 'code' => 'Action',
                 'actions' => [
                     'up' => [
-                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_up.html.twig',
+                        'template' => '@CapcoAdmin/HighlightedContent/list__action_up.html.twig',
                     ],
                     'down' => [
-                        'template' => 'CapcoAdminBundle:HighlightedContent:list__action_down.html.twig',
+                        'template' => '@CapcoAdmin/HighlightedContent/list__action_down.html.twig',
                     ],
                 ],
             ])
             ->add('currentObjectType', null, [
                 'label' => 'global.contenu',
                 'mapped' => false,
-                'template' => 'CapcoAdminBundle:HighlightedContent:list__object.html.twig',
+                'template' => '@CapcoAdmin/HighlightedContent/list__object.html.twig',
             ])
             ->add('_action', 'actions', [
                 'label' => 'link_actions',

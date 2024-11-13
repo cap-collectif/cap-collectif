@@ -24,3 +24,7 @@ monolog:
                 VERBOSITY_VERY_VERBOSE: NOTICE
                 VERBOSITY_DEBUG: DEBUG
             channels: ['doctrine']
+        deprecation:
+            type: stream
+            path: '%kernel.logs_dir%/%kernel.environment%.deprecations.log'
+            channels: ['php']

@@ -125,7 +125,7 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add('status', null, [
                 'label' => 'global.status',
-                'template' => 'CapcoAdminBundle:Theme:status_list_field.html.twig',
+                'template' => '@CapcoAdmin/Theme/status_list_field.html.twig',
                 'statusesLabels' => Theme::$statusesLabels,
             ])
             ->add('position', null, [
@@ -133,11 +133,11 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add('events', null, [
                 'label' => 'global.events',
-                'template' => 'CapcoAdminBundle:Theme:events_count_list_field.html.twig',
+                'template' => '@CapcoAdmin/Theme/events_count_list_field.html.twig',
             ])
             ->add('posts', null, [
                 'label' => 'global.articles',
-                'template' => 'CapcoAdminBundle:Theme:posts_count_list_field.html.twig',
+                'template' => '@CapcoAdmin/Theme/posts_count_list_field.html.twig',
             ])
             ->add('isEnabled', null, [
                 'editable' => true,
@@ -247,7 +247,7 @@ class ThemeAdmin extends AbstractAdmin
             ])
             ->add('status', null, [
                 'label' => 'global.status',
-                'template' => 'CapcoAdminBundle:Theme:status_show_field.html.twig',
+                'template' => '@CapcoAdmin/Theme/status_show_field.html.twig',
                 'statusesLabels' => array_flip(Theme::$statusesLabels),
             ])
             ->add('position', null, [
@@ -266,7 +266,7 @@ class ThemeAdmin extends AbstractAdmin
                 'label' => 'global.articles',
             ])
             ->add('media', null, [
-                'template' => 'CapcoAdminBundle:Theme:media_show_field.html.twig',
+                'template' => '@CapcoAdmin/Theme/media_show_field.html.twig',
                 'label' => 'global.image',
             ])
             ->add('createdAt', null, [
@@ -276,5 +276,10 @@ class ThemeAdmin extends AbstractAdmin
                 'label' => 'global.maj',
             ])
         ;
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 }

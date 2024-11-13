@@ -2,7 +2,7 @@
 {% set nbVotes = opinionVotesResolver.__invoke(opinion).totalCount %}
 
 <div class="opinion__body  box">
-    {% include 'CapcoUserBundle:Avatar:avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
+    {% include '@CapcoUser/Avatar/avatar.html.twig' with { 'user': opinion.Author, 'link_classes': 'pull-left'} only %}
     <div class="opinion__data">
         <p class="opinion__user excerpt small">
             {% if is_feature_enabled('profiles') %}

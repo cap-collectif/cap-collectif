@@ -11,8 +11,9 @@ class EventAdmin extends AbstractAdmin
 
     protected function configure(): void
     {
-        //$this->setTemplate('create', 'CapcoAdminBundle:Event:create.html.twig');
-        //$this->setTemplate('edit', 'CapcoAdminBundle:Event:edit.html.twig');
-        parent::configure();
+        $this->setTemplates([
+            'list' => '@CapcoAdmin/Event/list.html.twig',
+            'create' => '@CapcoAdmin/Event/create.html.twig',
+        ]);
     }
 }

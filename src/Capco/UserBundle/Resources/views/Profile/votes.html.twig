@@ -1,5 +1,5 @@
 <ul class="media-list">
     {% for vote in votes %}
-        {% include 'CapcoUserBundle:Profile:blockVote.html.twig' with {'vote': vote, 'profile': true, 'classes': 'block  block--bordered  box'} only %}
+        {% include '@CapcoUser/Profile/blockVote.html.twig' with {'vote': vote, 'profile': true, 'classes': 'block  block--bordered  box'} only %}
     {% endfor %}
 </ul>

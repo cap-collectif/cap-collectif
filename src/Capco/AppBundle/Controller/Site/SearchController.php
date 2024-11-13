@@ -15,7 +15,7 @@ class SearchController extends Controller
 {
     /**
      * @Route("/search", name="app_search", defaults={"_feature_flags" = "search"}, options={"i18n" = false})
-     * @Template("CapcoAppBundle:Default:search.html.twig")
+     * @Template("@CapcoApp/Default/search.html.twig")
      */
     public function searchAction(Request $request)
     {

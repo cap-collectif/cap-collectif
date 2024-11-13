@@ -1,11 +1,11 @@
 <div class="row">
     {% if limit is defined %}
         {% for registration in event.registrations|slice(0, limit) %}
-            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': registration.user, 'username': registration.username, 'private': registration.private, 'col': 4} only %}
+            {% include '@CapcoApp/Default/user_thumbnail.html.twig' with {'user': registration.user, 'username': registration.username, 'private': registration.private, 'col': 4} only %}
         {% endfor %}
     {% else %}
         {% for registration in event.registrations %}
-            {% include 'CapcoAppBundle:Default:user_thumbnail.html.twig' with {'user': registration.user, 'username': registration.username, 'private': registration.private, 'col': 6} only %}
+            {% include '@CapcoApp/Default/user_thumbnail.html.twig' with {'user': registration.user, 'username': registration.username, 'private': registration.private, 'col': 6} only %}
         {% endfor %}
     {% endif %}
 </div>

@@ -1,9 +1,9 @@
 {% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if value %}
             <span class="label label-{{ value.color }}">{{ value.name }}</span>
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

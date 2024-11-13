@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Event;
 
 use Qandidate\Toggle\Toggle;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class ToggleFeatureEvent extends Event
 {
@@ -16,7 +16,7 @@ class ToggleFeatureEvent extends Event
         $this->toggle = $toggle;
     }
 
-    public function getToggle()
+    public function getToggle(): Toggle
     {
         return $this->toggle;
     }

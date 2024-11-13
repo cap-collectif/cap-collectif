@@ -98,4 +98,9 @@ class NewsletterSubscriptionAdmin extends AbstractAdmin
     {
         $collection->clearExcept(['list', 'create', 'edit', 'delete', 'export']);
     }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
+    }
 }

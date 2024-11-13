@@ -3,59 +3,58 @@
 namespace Capco\AppBundle\PublicApi;
 
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Authentication\Token\PreAuthenticatedToken;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationException;
+use Symfony\Component\Security\Core\Exception\AuthenticationException;
+use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Security\Core\User\UserProviderInterface;
-use Symfony\Component\Security\Http\Authentication\SimplePreAuthenticatorInterface;
+use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
-class PublicApiKeyAuthenticator implements SimplePreAuthenticatorInterface
+class PublicApiKeyAuthenticator extends AbstractGuardAuthenticator
 {
-    public function createToken(Request $request, $providerKey)
+    public function supports(Request $request): bool
     {
-        $authorization = $request->headers->get('authorization');
-        if (!$authorization) {
+        return '/graphql' === $request->getPathInfo() && $request->headers->has('Authorization');
+    }
+
+    public function getCredentials(Request $request)
+    {
+        $authorizationHeader = $request->headers->get('Authorization');
+
+        return str_replace('Bearer ', '', $authorizationHeader);
+    }
+
+    public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface
+    {
+        if (null === $credentials) {
             return null;
         }
 
-        $apiKey = null;
-        $prefix = 'Bearer ';
-
-        if (substr($authorization, 0, \strlen($prefix)) == $prefix) {
-            $apiKey = substr($authorization, \strlen($prefix));
-        }
-
-        if (!$apiKey) {
-            return null;
-        }
-
-        return new PreAuthenticatedToken('anon.', $apiKey, $providerKey);
+        return $userProvider->loadUserByUsername($credentials);
     }
 
-    public function supportsToken(TokenInterface $token, $providerKey)
+    public function checkCredentials($credentials, UserInterface $user): bool
     {
-        return $token instanceof PreAuthenticatedToken && $token->getProviderKey() === $providerKey;
+        return true;
     }
 
-    public function authenticateToken(
-        TokenInterface $token,
-        UserProviderInterface $userProvider,
-        $providerKey
-    ) {
-        if (!$userProvider instanceof PublicApiKeyUserProvider) {
-            throw new \InvalidArgumentException(sprintf('The user provider must be an instance of PublicApiKeyUserProvider (%s was given).', \get_class($userProvider)));
-        }
+    public function onAuthenticationFailure(Request $request, AuthenticationException $exception): Response
+    {
+        return new Response('Invalid API Key', Response::HTTP_UNAUTHORIZED);
+    }
 
-        $apiKey = $token->getCredentials();
-        if (!$apiKey) {
-            throw new CustomUserMessageAuthenticationException(sprintf('API Key "%s" does not exist.', $apiKey));
-        }
+    public function onAuthenticationSuccess(Request $request, TokenInterface $token, $providerKey): ?Response
+    {
+        return null;
+    }
 
-        $user = $userProvider->loadUserByUsername($apiKey);
-        if (!$user) {
-            throw new CustomUserMessageAuthenticationException(sprintf('API Key "%s" does not exist.', $apiKey));
-        }
+    public function start(Request $request, ?AuthenticationException $authException = null): Response
+    {
+        return new Response('Authentication Required', Response::HTTP_UNAUTHORIZED);
+    }
 
-        return new PreAuthenticatedToken($user, $apiKey, $providerKey, $user->getRoles());
+    public function supportsRememberMe(): bool
+    {
+        return false;
     }
 }

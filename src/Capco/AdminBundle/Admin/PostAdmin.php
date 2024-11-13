@@ -78,10 +78,10 @@ class PostAdmin extends AbstractAdmin
     public function getTemplate($name)
     {
         if ('create' === $name) {
-            return 'CapcoAdminBundle:Post:create.html.twig';
+            return '@CapcoAdmin/Post/create.html.twig';
         }
         if ('edit' === $name) {
-            return 'CapcoAdminBundle:Post:edit.html.twig';
+            return '@CapcoAdmin/Post/edit.html.twig';
         }
 
         return parent::getTemplate($name);
@@ -316,7 +316,7 @@ class PostAdmin extends AbstractAdmin
                 'config_name' => 'admin_editor',
             ])
             ->add('media', MediaType::class, [
-                'template' => 'CapcoAdminBundle:Post:media_show_field.html.twig',
+                'template' => '@CapcoAdmin/Post/media_show_field.html.twig',
                 'provider' => 'sonata.media.provider.image',
                 'label' => 'admin.fields.blog_post.media',
             ])
@@ -327,5 +327,10 @@ class PostAdmin extends AbstractAdmin
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('createdAt', null, ['label' => 'global.creation'])
         ;
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 }

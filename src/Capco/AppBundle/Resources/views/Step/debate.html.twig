@@ -13,7 +13,7 @@
     {% set image %}
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title': currentStep.title ~ ' ' ~ project.title,
         'type': 'project',
         'description': currentStep.metaDescription ?: currentStep.title,
@@ -50,5 +50,5 @@
 
 {% block javascripts %}
     {{ parent() }}
-    {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+    {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
 {% endblock %}

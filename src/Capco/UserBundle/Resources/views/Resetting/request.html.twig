@@ -1,4 +1,4 @@
-{% extends "CapcoUserBundle::layout.html.twig" %}
+{% extends "@CapcoUser/layout.html.twig" %}
 
 {% block canonical_link %}{{ url('fos_user_resetting_request') }}{% endblock %}
 
@@ -15,5 +15,5 @@
 {% endblock %}
 
 {% block fos_user_content %}
-	{% include "CapcoUserBundle:Resetting:request_content.html.twig" %}
+	{% include "@CapcoUser/Resetting/request_content.html.twig" %}
 {% endblock fos_user_content %}

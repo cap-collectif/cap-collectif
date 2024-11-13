@@ -9,7 +9,7 @@
     {% set projectCover %}
         {% if project.cover %}{{ media_public_url(project.cover, 'default_blockHeader') }}{% endif %}
     {% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       title,
         'description': version.body|striptags|truncate(250, true),
         'url':         url('app_project_show_opinion_version', {'projectSlug': project.slug, 'stepSlug': currentStep.slug, 'opinionTypeSlug': opinionType.slug, 'opinionSlug': opinion.slug, 'versionSlug': version.slug}),

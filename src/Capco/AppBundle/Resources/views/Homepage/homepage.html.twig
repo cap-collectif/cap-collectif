@@ -1,5 +1,5 @@
 {% set page_class = "home-page" %}
-{% extends "CapcoAppBundle::base.html.twig" %}
+{% extends "@CapcoApp/base.html.twig" %}
 
 {% set jumbotron_title = capco_site_parameter_value('homepage.jumbotron.title') %}
 {% set jumbotron_body = capco_site_parameter_value('homepage.jumbotron.body') %}
@@ -10,7 +10,7 @@
 {% block metaTags %}
     {% set picto = capco_site_image_media('homepage.picto') %}
     {% set image %}{% if picto %}{{ media_public_url(picto, 'default_blockHeader') }}{% endif %}{% endset %}
-    {% include 'CapcoAppBundle:Default:meta.html.twig' with {
+    {% include '@CapcoApp/Default/meta.html.twig' with {
         'title':       jumbotron_title ?: siteName,
         'description': meta_description,
         'url':         url('app_homepage'),
@@ -84,7 +84,7 @@
         {% elseif section.type == 'news' %}
             {{ get_last_posts(section.nbObjects, 0, section) }}
         {% elseif section.type == 'events' %}
-            {% include 'CapcoAppBundle:Homepage:lastEvents.html.twig' with {'section': section} %}
+            {% include '@CapcoApp/Homepage/lastEvents.html.twig' with {'section': section} %}
         {% elseif section.type == 'newsletter' %}
             {% include '@CapcoApp/Homepage/newsletter.html.twig' with {'section': section} only %}
         {% elseif section.type == 'social-networks' %}
@@ -110,7 +110,7 @@
 {% block javascripts %}
     {{ parent() }}
        {% if is_feature_enabled('display_map') %}
-         {% include 'CapcoAdminBundle::googlemapsapi.html.twig' %}
+         {% include '@CapcoAdmin/googlemapsapi.html.twig' %}
       {% endif %}
     {# bootstrap3 is needed by Carousel #}
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js" integrity="sha384-aJ21OjlMXNL5UyIl/XNwTMqvzeRMZH2w8c5cRVpzpU8Y5bApTppSuUkhZXN0VxHd" crossorigin="anonymous"></script>

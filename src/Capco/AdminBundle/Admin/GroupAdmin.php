@@ -30,7 +30,7 @@ class GroupAdmin extends AbstractAdmin
         $list
             ->add('titleInfo', null, [
                 'label' => 'global.title',
-                'template' => 'CapcoAdminBundle:Group:title_list_field.html.twig',
+                'template' => '@CapcoAdmin/Group/title_list_field.html.twig',
             ])
             ->add('countUserGroups', null, [
                 'label' => 'search.form.types.users',
@@ -75,5 +75,13 @@ class GroupAdmin extends AbstractAdmin
             ->add('title', null, ['label' => 'global.title'])
             ->end()
         ;
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplates([
+            'list' => '@CapcoAdmin/Group/list.html.twig',
+            'edit' => '@CapcoAdmin/Group/edit.html.twig',
+        ]);
     }
 }

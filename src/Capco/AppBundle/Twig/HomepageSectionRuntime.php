@@ -70,7 +70,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         ]);
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:highlighted.html.twig',
+            '@CapcoApp/Homepage/highlighted.html.twig',
             compact('props', 'section')
         );
     }
@@ -85,7 +85,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         $videos = $this->videoRepository->getLast($max, $offset);
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:videos.html.twig',
+            '@CapcoApp/Homepage/videos.html.twig',
             compact('videos', 'section')
         );
     }
@@ -100,7 +100,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         $count = $this->projectRepository->countPublished($user);
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:lastProjects.html.twig',
+            '@CapcoApp/Homepage/lastProjects.html.twig',
             compact('max', 'count', 'section')
         );
     }
@@ -112,7 +112,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         $projectsCount = $section->getSectionProjects()->count();
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:listCustomProjects.html.twig',
+            '@CapcoApp/Homepage/listCustomProjects.html.twig',
             compact('count', 'section', 'projectsCount')
         );
     }
@@ -127,7 +127,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         $topics = $this->themeRepository->getLast($max, $offset);
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:lastThemes.html.twig',
+            '@CapcoApp/Homepage/lastThemes.html.twig',
             compact('topics', 'section')
         );
     }
@@ -142,7 +142,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         $posts = $this->postRepository->getLast($max, $offset);
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:lastPosts.html.twig',
+            '@CapcoApp/Homepage/lastPosts.html.twig',
             compact('posts', 'section')
         );
     }
@@ -152,7 +152,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         $socialNetworks = $this->networkRepository->getEnabled();
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:socialNetworks.html.twig',
+            '@CapcoApp/Homepage/socialNetworks.html.twig',
             compact('socialNetworks', 'section')
         );
     }
@@ -173,7 +173,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         }, $results);
 
         return $this->twig->render(
-            'CapcoAppBundle:Homepage:lastProposals.html.twig',
+            '@CapcoApp/Homepage/lastProposals.html.twig',
             compact('proposals', 'section')
         );
     }
@@ -184,7 +184,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
             'groups' => ['Section'],
         ]);
 
-        return $this->twig->render('CapcoAppBundle:Homepage:metrics.html.twig', compact('props'));
+        return $this->twig->render('@CapcoApp/Homepage/metrics.html.twig', compact('props'));
     }
 
     public function getProjectsMap(?Section $section): string
@@ -192,6 +192,6 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
         $user = ($token = $this->tokenStorage->getToken()) ? $token->getUser() : null;
         $count = $this->projectRepository->countPublished($user);
 
-        return $this->twig->render('CapcoAppBundle:Homepage:projectsMap.html.twig', compact('count'));
+        return $this->twig->render('@CapcoApp/Homepage/projectsMap.html.twig', compact('count'));
     }
 }

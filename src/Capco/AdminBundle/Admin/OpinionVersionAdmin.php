@@ -105,27 +105,27 @@ class OpinionVersionAdmin extends AbstractAdmin
         $list
             ->addIdentifier('title', null, [
                 'label' => 'global.title',
-                'template' => 'CapcoAdminBundle:common:title_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/title_list_field.html.twig',
                 'route' => [
                     'name' => 'edit',
                 ],
             ])
             ->add('body', null, [
                 'label' => 'global.contenu',
-                'template' => 'CapcoAdminBundle:common:body_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/body_list_field.html.twig',
             ])
             ->add('comment', null, ['label' => 'global.explanation'])
             ->add('author', null, [
                 'label' => 'global.author',
-                'template' => 'CapcoAdminBundle:common:author_list_field.html.twig',
+                'template' => '@CapcoAdmin/common/author_list_field.html.twig',
             ])
             ->add('project', ModelType::class, [
                 'label' => 'global.participative.project.label',
-                'template' => 'CapcoAdminBundle:Proposal:project_list_field.html.twig',
+                'template' => '@CapcoAdmin/Proposal/project_list_field.html.twig',
             ])
             ->add('parent', null, [
                 'label' => 'admin.fields.opinion_version.parent',
-                'template' => 'CapcoAdminBundle:OpinionVersion:parent_list_field.html.twig',
+                'template' => '@CapcoAdmin/OpinionVersion/parent_list_field.html.twig',
             ])
             ->add('published', null, [
                 'label' => 'global.published',
@@ -133,7 +133,7 @@ class OpinionVersionAdmin extends AbstractAdmin
             ])
             ->add('trashedStatus', null, [
                 'label' => 'global.is_trashed',
-                'template' => 'CapcoAdminBundle:Trashable:trashable_status.html.twig',
+                'template' => '@CapcoAdmin/Trashable/trashable_status.html.twig',
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
             ->add('_action', 'actions', [
@@ -204,5 +204,10 @@ class OpinionVersionAdmin extends AbstractAdmin
 
     protected function configureShowFields(ShowMapper $show): void
     {
+    }
+
+    protected function configure(): void
+    {
+        $this->setTemplate('edit', '@CapcoAdmin/CRUD/edit.html.twig');
     }
 }

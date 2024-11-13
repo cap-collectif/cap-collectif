@@ -15,7 +15,7 @@ class EmailingParametersController extends AbstractController
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/mailingParameters", name="admin_capco_mailing_parameters")
      * @Route("/admin/mailingParameters/list", name="admin_capco_mailing_parameters_deprecated")
-     * @Template("CapcoAdminBundle:Emailing:emailingParameters.html.twig")
+     * @Template("@CapcoAdmin/Emailing/emailingParameters.html.twig")
      */
     public function listAction()
     {

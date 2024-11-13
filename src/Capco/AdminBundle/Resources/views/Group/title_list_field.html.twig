@@ -1,7 +1,7 @@
 {% extends admin.templateRegistry.getTemplate('base_list_field') %}
 
 {% block field %}
-    {% spaceless %}
+    {% apply spaceless %}
         {% if value %}
             <a href="{{ path('admin_capco_app_group_edit', {id: value.id}) }}">
                 {{ value.title }}
@@ -11,5 +11,5 @@
                 <span class="text-grey">{{ value.description }}</span>
             {% endif %}
         {% endif %}
-    {% endspaceless %}
+    {% endapply %}
 {% endblock %}

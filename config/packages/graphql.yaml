@@ -1,6 +1,6 @@
 overblog_graphiql:
     endpoint_resolver: Capco\AppBundle\GraphQL\EndpointResolver
-    template: 'CapcoAppBundle:GraphiQL:index.html.twig'
+    template: '@CapcoApp/GraphiQL/index.html.twig'
 overblog_dataloader:
     defaults:
         promise_adapter: 'overblog_dataloader.webonyx_graphql_sync_promise_adapter'
