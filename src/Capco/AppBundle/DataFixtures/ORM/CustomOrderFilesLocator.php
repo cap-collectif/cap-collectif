@@ -35,6 +35,9 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
         if ('benchmark' === $environment) {
             return $this->installBenchmarkFixtures();
         }
+        if ('qa' === $environment) {
+            return $this->installQaFixtures();
+        }
 
         return $this->installDevFixtures();
     }
@@ -330,6 +333,16 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Dev/Mediator.yaml',
             $this->fixturesDir . 'Dev/MediatorParticipantStep.yaml',
             $this->fixturesDir . 'Dev/SectionCarrouselElement.yaml',
+        ];
+    }
+
+    /**
+     * @return array<int, string>
+     */
+    private function installQaFixtures(): array
+    {
+        return [
+            $this->fixturesDir . 'Qa/Font.yaml',
         ];
     }
 }

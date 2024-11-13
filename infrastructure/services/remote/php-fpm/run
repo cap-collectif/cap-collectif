@@ -134,7 +134,14 @@ else
     chmod -R 777 var/ && chown -R capco:capco var/
     gosu capco php bin/console doctrine:migrations:version --add --all --env=prod --no-interaction --quiet
     chmod -R 777 var/ && chown -R capco:capco var/
-    gosu capco php bin/console capco:load-prod-data --force --env=prod --no-interaction --quiet
+    if [[ -n "${QA_FIXTURES}" && "${QA_FIXTURES}" == "true" ]]; then
+        echo "[$(date -u)][PHP-FPM] FIXTURES_QA is set to 'true', loading ‘dev’ fixtures, then appending ‘qa’ fixtures."
+        gosu capco php bin/console hautelook:fixtures:load -e dev --no-interaction
+        gosu capco php bin/console hautelook:fixtures:load -e qa --no-interaction --append
+    else
+        echo "[$(date -u)][PHP-FPM] Loading ‘prod’ fixtures."
+        gosu capco php bin/console capco:load-prod-data --force --env=prod --no-interaction --quiet
+    fi
 fi
 echo "[$(date -u)][PHP-FPM] Database is ready!"
 

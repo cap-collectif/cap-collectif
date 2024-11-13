@@ -1,0 +1,8 @@
+Capco\AppBundle\Entity\Font:
+    customQAFont:
+        id: 'customQAFont'
+        name: 'QA Font'
+        familyName: 'OpenSans, Arial, sans-serif'
+        isCustom: false
+        useAsHeading: true
+        useAsBody: true
