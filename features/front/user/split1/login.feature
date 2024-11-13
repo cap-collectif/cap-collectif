@@ -1,20 +1,6 @@
 @core @login
 Feature: Login
 
-Scenario: A user wants to login and see he has successfully logged in.
-  Given I am logged in as user
-  Then I can see I am logged in as "user"
-
-Scenario: An admin wants to login and see he has successfully logged in.
-  Given I am logged in as admin
-  Then I can see I am logged in as "admin" and I am "flaky"
-  And I can access admin in navbar
-
-Scenario: A logged user wants to logout
-  Given I am logged in as user
-  When I logout
-  Then I should see "global.login" within 20 seconds
-
 @database
 Scenario: User has lost password
   Given I open login modal

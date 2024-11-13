@@ -95,7 +95,7 @@ const Address = ({
   }
 
   return (
-    <PlacesAutocomplete value={value} onChange={onChange} onSelect={handleSelect} debounce={debounce}>
+    <PlacesAutocomplete value={value??''} onChange={onChange} onSelect={handleSelect} debounce={debounce}>
       {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
         <div className="address-container">
           <SearchContainer hasLocationUser={!!getPosition} hasReset={hasReset}>

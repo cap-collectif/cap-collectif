@@ -26,6 +26,7 @@ import Image from '~ui/Primitives/Image'
 import GeoJSONView from './GeoJSONView'
 import { CapUIIcon, Flex, Link, Icon, CapUIIconSize } from '@cap-collectif/ui'
 import type { ProjectsMapViewQuery } from '~relay/ProjectsMapViewQuery.graphql'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 const QUERY = graphql`
   query ProjectsMapViewQuery {
@@ -117,6 +118,7 @@ export const ProjectsMapView = ({
     L.Map.addInitHook('addHandler', 'gestureHandling', GestureHandling)
   }, [])
   const [zoom, setZoom] = React.useState(query?.homePageProjectsMapSectionConfiguration.zoomMap)
+  if (!useFeatureFlag('display_map')) return null
   if (!query) return null
   const { homePageProjectsMapSectionConfiguration } = query
   const districts = query?.globalDistricts?.edges?.map(d => d.node)

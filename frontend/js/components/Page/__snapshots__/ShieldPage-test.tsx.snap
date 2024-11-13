@@ -6,6 +6,7 @@ Array [
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <form
+    id="login-form"
     onSubmit={[Function]}
   >
     <div>

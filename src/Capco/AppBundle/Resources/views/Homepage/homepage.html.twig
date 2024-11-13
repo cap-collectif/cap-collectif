@@ -96,7 +96,9 @@
         {% elseif section.type == 'metrics' %}
             {{ get_metrics_section(section) }}
         {% elseif section.type == 'projectsMap' %}
-            {% include '@CapcoApp/Homepage/projectsMap.html.twig' with {'section': section} only %}
+            {% if is_feature_enabled('display_map') %}
+                {% include '@CapcoApp/Homepage/projectsMap.html.twig' with {'section': section} only %}
+            {% endif %}
         {% elseif section.type == 'carrousel' %}
             {% include '@CapcoApp/Homepage/carrousel.html.twig' with {'section': section} only %}
         {% endif %}

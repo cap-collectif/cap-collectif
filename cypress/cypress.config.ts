@@ -7,7 +7,10 @@ export default defineConfig({
   viewportWidth: 1280,
   viewportHeight: 1000,
   chromeWebSecurity: false,
-  retries: 2,
+  retries: {
+    runMode: 2,
+    openMode: 0
+  },
   e2e: {
     // We've imported your old cypress plugins here.
     // You may want to clean this up later by importing these.

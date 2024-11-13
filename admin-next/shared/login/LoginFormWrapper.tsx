@@ -77,6 +77,7 @@ export const LoginFormWrapper: React.FC<{ children: React.ReactNode }> = ({ chil
 
   return (
     <form
+      id="login-form"
       onSubmit={e => {
         clearErrors()
         handleSubmit(onSubmit)(e)

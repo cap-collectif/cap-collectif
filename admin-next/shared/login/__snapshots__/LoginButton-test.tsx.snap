@@ -6,6 +6,7 @@ exports[`<LoginButton /> renders a button 1`] = `
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <form
+    id="login-form"
     onSubmit={[Function]}
   />,
   <button

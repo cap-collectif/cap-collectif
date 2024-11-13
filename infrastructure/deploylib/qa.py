@@ -164,13 +164,10 @@ def behat(fast_failure='true', profile='false', suite='false', tags='false', tim
 
 
 def view(firefox='false'):
-    if Config.docker_for_mac:
-        run('echo "secret" | open vnc://localhost:5900')
+    if firefox != 'false':
+        run('open vnc://:secret@localhost:5901')
     else:
-        if firefox != 'false':
-            run('echo "secret" | nohup vncviewer localhost:5901 &')
-        else:
-            run('echo "secret" | nohup vncviewer localhost:5900 &')
+        run('open vnc://:secret@localhost:5900')
 
 
 def clear_fixtures():
