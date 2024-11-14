@@ -65,11 +65,12 @@ const PostListPage: React.FC<PostListPageProps> = ({ queryReference }) => {
               variantColor="primary"
               variantSize="small"
               leftIcon={CapUIIcon.Add}
-              onClick={() => window.open('/admin/capco/app/post/create', '_self')}
+              onClick={() => window.open('/admin-next/post', '_self')}
               mr={8}
             >
               {intl.formatMessage({ id: 'admin-create-post' })}
             </Button>
+
             <Search
               id="search-post"
               onChange={onTermChange}

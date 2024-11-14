@@ -9,6 +9,7 @@ import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 interface ThemeListFieldProps extends Omit<BaseField, 'onChange' | 'control'>, Omit<FieldSelect, 'onChange' | 'type'> {
   id?: string
   menuPortalTarget?: boolean
+  disabled?: boolean
 }
 
 type ThemeListFieldValue = {
@@ -25,7 +26,7 @@ const getThemeList = graphql`
   }
 ` as GraphQLTaggedNode
 
-export const ThemeListField: React.FC<ThemeListFieldProps> = ({ name, ...props }) => {
+export const ThemeListField: React.FC<ThemeListFieldProps> = ({ name, disabled, ...props }) => {
   const { control } = useFormContext()
 
   const loadOptions = async (term: string): Promise<ThemeListFieldValue[]> => {
@@ -43,7 +44,18 @@ export const ThemeListField: React.FC<ThemeListFieldProps> = ({ name, ...props }
     return []
   }
 
-  return <FieldInput {...props} control={control} type="select" name={name} defaultOptions loadOptions={loadOptions} />
+  return (
+    <FieldInput
+      {...props}
+      control={control}
+      type="select"
+      name={name}
+      defaultOptions
+      loadOptions={loadOptions}
+      // @ts-expect-error: todo: fix error - update expected props?
+      disabled={disabled}
+    />
+  )
 }
 
 export default ThemeListField

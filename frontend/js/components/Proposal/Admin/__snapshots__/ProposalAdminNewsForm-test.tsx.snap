@@ -110,7 +110,7 @@ exports[`<ProposalAdminNewsForm /> render correctly 1`] = `
         bsClass="btn"
         bsStyle="primary"
         disabled={false}
-        href="http://localhost/admin/capco/app/post/create?proposalId=proposal 1"
+        href="http://localhost/admin-next/post?proposalId=proposal 1"
       >
         <FormattedMessage
           id="global.add"
@@ -170,7 +170,7 @@ exports[`<ProposalAdminNewsForm /> render correctly when there are no news 1`] =
         bsClass="btn"
         bsStyle="primary"
         disabled={false}
-        href="http://localhost/admin/capco/app/post/create?proposalId=proposal 1"
+        href="http://localhost/admin-next/post?proposalId=proposal 1"
       >
         <FormattedMessage
           id="global.add"

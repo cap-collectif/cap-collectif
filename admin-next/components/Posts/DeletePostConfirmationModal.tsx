@@ -1,48 +1,44 @@
 import * as React from 'react'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
-import { graphql, useFragment } from 'react-relay'
-import Button from '~ds/Button/Button'
-import Modal from '~ds/Modal/Modal'
-import Heading from '~ui/Primitives/Heading'
-import Text from '~ui/Primitives/Text'
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
-import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
-import DeletePostMutation from '~/mutations/DeletePostMutation'
-import type { ModalPostDeleteConfirmation_post$key } from '~relay/ModalPostDeleteConfirmation_post.graphql'
-type Props = {
-  readonly post: ModalPostDeleteConfirmation_post$key | null | undefined
-}
-const FRAGMENT = graphql`
-  fragment ModalPostDeleteConfirmation_post on Post {
-    id
-    title
-  }
-`
+import { Button, ButtonGroup, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
+import DeletePostMutation from '@mutations/DeletePostMutation'
 
-const deletePost = (postId: string, hide: () => void, intl: IntlShape) => {
+type Props = {
+  readonly title: string
+  readonly postId: string
+}
+
+const deletePost = async (postId: string, hide: () => void, intl: IntlShape) => {
   const input = {
     id: postId,
   }
   hide()
-  return DeletePostMutation.commit({
+  return await DeletePostMutation.commit({
     input,
     connections: [],
   })
-    .then(() => window.open(`/posts`, '_self'))
+    .then(() => {
+      toast({
+        variant: 'success',
+        content: intl.formatMessage({ id: 'post-successfully-deleted' }),
+      })
+      window.location.href = '/admin-next/posts'
+    })
     .catch(() => mutationErrorToast(intl))
 }
 
-const ModalPostDeleteConfirmation = ({ post: postFragment }: Props): JSX.Element => {
-  const post = useFragment(FRAGMENT, postFragment)
+const DeletePostConfirmationModal = ({ title, postId }: Props): JSX.Element => {
   const intl = useIntl()
 
-  if (!post) {
+  if (!postId) {
     return null
   }
 
   return (
     <Modal
+      size={CapUIModalSize.Md}
       ariaLabel={intl.formatMessage({
         id: 'delete-confirmation',
       })}
@@ -64,16 +60,7 @@ const ModalPostDeleteConfirmation = ({ post: postFragment }: Props): JSX.Element
             </Heading>
           </Modal.Header>
           <Modal.Body>
-            <Text>
-              {intl.formatMessage(
-                {
-                  id: 'are-you-sure-to-delete-something',
-                },
-                {
-                  element: post.title,
-                },
-              )}
-            </Text>
+            <Text>{intl.formatMessage({ id: 'are-you-sure-to-delete-something' }, { element: title })}</Text>
           </Modal.Body>
           <Modal.Footer spacing={2}>
             <ButtonGroup>
@@ -86,7 +73,8 @@ const ModalPostDeleteConfirmation = ({ post: postFragment }: Props): JSX.Element
                 variantSize="medium"
                 variant="primary"
                 variantColor="danger"
-                onClick={() => deletePost(post.id, hide, intl)}
+                data-cy="deletion-confirmation"
+                onClick={() => deletePost(postId, hide, intl)}
               >
                 {intl.formatMessage({
                   id: 'global.delete',
@@ -100,4 +88,4 @@ const ModalPostDeleteConfirmation = ({ post: postFragment }: Props): JSX.Element
   )
 }
 
-export default ModalPostDeleteConfirmation
+export default DeletePostConfirmationModal

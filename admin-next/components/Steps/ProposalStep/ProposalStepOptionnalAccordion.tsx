@@ -280,7 +280,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
                       />
                       <FieldInput
                         id="zoomMap"
-                        // @ts-expect-error MAJ DS Props
+                        // @ts-expect-error MAJ DS Props https://github.com/cap-collectif/form/issues/5
                         menuPortalTarget={undefined}
                         name={`${proposalFormKey}.zoomMap`}
                         type="select"

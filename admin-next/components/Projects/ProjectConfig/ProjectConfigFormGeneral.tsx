@@ -94,7 +94,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
                   id: 'admin.fields.menu_item.parent_empty',
                 })}
                 clearable
-                // @ts-ignore cap-collectif/form/issues/53
+                // @ts-expect-error : https://github.com/cap-collectif/form/issues/5
                 menuPortalTarget={undefined}
               />
             </FormControl>

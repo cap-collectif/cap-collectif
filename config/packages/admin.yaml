@@ -516,25 +516,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\PostAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\Post,
-                Capco\AdminBundle\Controller\PostController,
-                '@security.token_storage',
-            ]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: admin.group.content,
-                  label: admin.label.post,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     Capco\AdminBundle\Admin\EventAdmin:
         class: Capco\AdminBundle\Admin\EventAdmin
         arguments: [~, Capco\AppBundle\Entity\Event, Capco\AdminBundle\Controller\EventController]

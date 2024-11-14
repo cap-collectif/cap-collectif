@@ -4009,9 +4009,6 @@ enum CreatePostErrorCode {
 input CreatePostInput {
   translations: [CreatePostTranslationInput!]
 
-  """Is the body using Jodit Wysiwyg."""
-  bodyUsingJoditWysiwyg: Boolean
-
   """post authors"""
   authors: [ID!]!
 
@@ -19006,9 +19003,6 @@ enum UpdatePostErrorCode {
 
 input UpdatePostInput {
   translations: [CreatePostTranslationInput!]
-
-  """Is the body using Jodit Wysiwyg."""
-  bodyUsingJoditWysiwyg: Boolean
 
   """post authors"""
   authors: [ID!]!

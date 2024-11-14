@@ -46,7 +46,7 @@
         "cy:open": "yarn --cwd cypress cy:open",
         "cy:run": "yarn --cwd cypress cy:run",
         "cy:run:ci": "yarn --cwd cypress cy:run:ci",
-        "php:quality": "bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v && php -dmemory_limit=-1 bin/phpstan analyse && bin/phpspec run --format=progress --no-interaction"
+        "php:quality": "bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php -v && php -d memory_limit=-1 bin/phpstan analyse && bin/phpspec run --format=progress --no-interaction"
     },
     "workspaces": [
         "packages/*",

@@ -20,7 +20,7 @@ const PostListNoResult: React.FC = () => {
           variantColor="primary"
           variantSize="big"
           leftIcon={CapUIIcon.Add}
-          onClick={() => window.open('/admin/capco/app/post/create', '_self')}
+          onClick={() => window.open('/admin-next/post', '_self')}
         >
           {intl.formatMessage({ id: 'admin-create-post' })}
         </Button>

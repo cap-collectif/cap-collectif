@@ -68,7 +68,7 @@ export class ProposalAdminNewsForm extends Component<Props, State> {
             <FormattedMessage id="proposal.no_posts" />
           )}
           <ButtonToolbar className="box-content__toolbar">
-            <Button bsStyle="primary" href={`${baseUrl}/admin/capco/app/post/create?proposalId=${proposal.id}`}>
+            <Button bsStyle="primary" href={`${baseUrl}/admin-next/post?proposalId=${proposal.id}`}>
               <FormattedMessage id="global.add" />
             </Button>
           </ButtonToolbar>

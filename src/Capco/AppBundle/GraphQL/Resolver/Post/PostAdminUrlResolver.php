@@ -5,30 +5,33 @@ namespace Capco\AppBundle\GraphQL\Resolver\Post;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Security\PostVoter;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
-use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
-use Symfony\Component\Routing\RouterInterface;
+use Overblog\GraphQLBundle\Relay\Node\GlobalId;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class PostAdminUrlResolver implements QueryInterface
 {
-    private RouterInterface $router;
     private AuthorizationCheckerInterface $authorizationChecker;
+    private RequestStack $requestStack;
 
     public function __construct(
-        RouterInterface $router,
-        AuthorizationCheckerInterface $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker,
+        RequestStack $requestStack
     ) {
-        $this->router = $router;
         $this->authorizationChecker = $authorizationChecker;
+        $this->requestStack = $requestStack;
     }
 
     public function __invoke(Post $post): string
     {
-        return $this->router->generate(
-            'capco_admin_edit_post',
-            ['postId' => $post->getId()],
-            UrlGeneratorInterface::ABSOLUTE_URL
-        );
+        $postGlobalId = GlobalId::toGlobalId('Post', $post->getId());
+        $baseUrl = '';
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request) {
+            $baseUrl = $request->getSchemeAndHttpHost();
+        }
+
+        return "{$baseUrl}/admin-next/post?id={$postGlobalId}";
     }
 
     public function isGranted(Post $post): bool
