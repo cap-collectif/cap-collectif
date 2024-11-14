@@ -601,7 +601,11 @@ services:
 
     Capco\AdminBundle\Admin\SectionAdmin:
         arguments:
-            [~, Capco\AppBundle\Entity\Section\Section, Capco\AdminBundle\Controller\SectionController]
+            [
+                ~,
+                Capco\AppBundle\Entity\Section\Section,
+                Capco\AdminBundle\Controller\SectionController,
+            ]
         tags:
             - {
                   name: sonata.admin,
@@ -837,10 +841,6 @@ services:
               }
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
-
-    Capco\AdminBundle\Block\RecentPostBlockService:
-        tags:
-            - { name: sonata.block }
 
     Capco\AdminBundle\Resolver\FeaturesCategoryResolver: ~
 
