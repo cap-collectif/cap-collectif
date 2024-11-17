@@ -61,6 +61,18 @@ const UpdateNewProjectMutation = /* GraphQL */ `
   }
 `;
 
+const UpdateNewProjectVisibilityMutation = /* GraphQL */ `
+  mutation UpdateNewProjectMutation($input: UpdateNewProjectInput!) {
+    updateNewProject(input: $input) {
+      project {
+        title
+        url
+        id
+      }
+    }
+  }
+`;
+
 const UpdateNewProjectMutationSteps = /* GraphQL */ `
     mutation UpdateNewProjectMutation($input: UpdateNewProjectInput!) {
         updateNewProject(input: $input) {
@@ -118,6 +130,39 @@ const input = {
   "customCode": "custom code"
 }
 
+const inputVisibility = {
+  "input": {
+    "title": "Projet pour le group2",
+    "description": "",
+    "archived": false,
+    "authors": [],
+    "projectType": null,
+    "visibility": "ADMIN",
+    "publishedAt": "2014-12-08 00:00:00",
+    "themes": [],
+    "isProposalStepSplitViewEnabled": false,
+    "video": null,
+    "cover": null,
+    "opinionCanBeFollowed": false,
+    "externalLink": "http://projet.noob.fr",
+    "externalContributionsCount": 0,
+    "externalParticipantsCount": 0,
+    "externalVotesCount": 0,
+    "metaDescription": null,
+    "address": null,
+    "districts": [],
+    "locale": null,
+    "steps": [
+      "questionnairestep5"
+    ],
+    "customCode": null,
+    "isExternal": true,
+    "projectId": "UHJvamVjdDpwcm9qZWN0R3JvdXAy"
+  }
+}
+
+
+
 describe('Internal|UpdateNewProject mutation', () => {
   it('admin should be able to update a project.', async () => {
     const response = await graphql(
@@ -160,6 +205,15 @@ describe('Internal|UpdateNewProject mutation', () => {
           ]
         }
       },
+      'internal_admin',
+    );
+    expect(response).toMatchSnapshot();
+  });
+
+  it('change access visibility when project has custom visibility', async () => {
+    const response = await graphql(
+      UpdateNewProjectVisibilityMutation,
+      inputVisibility,
       'internal_admin',
     );
     expect(response).toMatchSnapshot();

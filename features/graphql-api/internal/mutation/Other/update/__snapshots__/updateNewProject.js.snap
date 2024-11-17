@@ -109,6 +109,18 @@ Object {
 }
 `;
 
+exports[`Internal|UpdateNewProject mutation change access visibility when project has custom visibility 1`] = `
+Object {
+  "updateNewProject": Object {
+    "project": Object {
+      "id": "UHJvamVjdDpwcm9qZWN0R3JvdXAy",
+      "title": "Projet pour le group2",
+      "url": "https://capco.test/project/projet-pour-le-group2/presentation/presentation-step",
+    },
+  },
+}
+`;
+
 exports[`Internal|UpdateNewProject mutation removing description should remove the presentation step containing the description 1`] = `
 Object {
   "updateNewProject": Object {

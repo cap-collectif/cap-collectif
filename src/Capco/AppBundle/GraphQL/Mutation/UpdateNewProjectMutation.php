@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -224,6 +225,12 @@ class UpdateNewProjectMutation implements MutationInterface
 
     private function setRestrictedViewerGroups(array &$arguments): void
     {
+        if (ProjectVisibilityMode::VISIBILITY_CUSTOM !== $arguments['visibility']) {
+            $arguments['restrictedViewerGroups'] = [];
+
+            return;
+        }
+
         if (empty($arguments['restrictedViewerGroups'])) {
             return;
         }
