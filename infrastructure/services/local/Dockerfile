@@ -57,15 +57,16 @@ apc.enable=1
 " >> /etc/php/${PHP_VERSION}/mods-available/apcu.ini
 EOF
 
-RUN pecl install xdebug-3.2.2
+RUN pecl install xdebug-3.1.0
 
 RUN <<EOF
 echo "
-zend_extension=$(find / -name xdebug.so)
+zend_extension=xdebug
 xdebug.mode=debug
 xdebug.discover_client_host=true
 xdebug.client_host=host.docker.internal
 xdebug.start_with_request=trigger
+xdebug.cli_color=1
 xdebug.force_display_errors=1
 xdebug.force_error_reporting=1
 " >> /etc/php/${PHP_VERSION}/mods-available/xdebug.ini
