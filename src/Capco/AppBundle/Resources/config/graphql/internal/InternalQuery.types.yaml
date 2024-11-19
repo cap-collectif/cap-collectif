@@ -12,15 +12,15 @@ InternalQuery:
                 args:
                     slug:
                         type: 'String!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFromSlugResolver", [args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFromSlugResolver", args, getUser())'
             pages:
                 description: 'Lookup pages.'
                 type: '[InternalPage!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", args)'
             posts:
                 description: 'Lookup blog posts.'
                 type: '[InternalPost!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPostsResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPostsResolver", args)'
             viewer:
                 type: 'InternalUser!'
             themes:
@@ -31,15 +31,15 @@ InternalQuery:
                         type: 'String'
                         defaultValue: null
                         description: 'Filter by title.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryThemesResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryThemesResolver", args)'
             mapTokens:
                 type: '[MapToken!]!'
                 description: 'Get the available map tokens'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokensResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokensResolver")'
             mapToken:
                 type: 'MapToken'
                 description: 'Search a particular map token by its provider'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokenResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryMapTokenResolver", args)'
                 args:
                     provider:
                         type: 'MapTokenProvider!'
@@ -51,11 +51,11 @@ InternalQuery:
             siteFavicon:
                 type: 'SiteImage!'
                 description: 'Get the current favicon'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteFaviconQueryResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteFaviconQueryResolver")'
             siteImage:
                 type: 'SiteImage'
                 description: 'Get a site image'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteImageQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SiteImageQueryResolver", args)'
                 args:
                     keyname:
                         type: 'String!'
@@ -63,16 +63,16 @@ InternalQuery:
             registrationForm:
                 type: 'InternalRegistrationForm'
                 description: 'Get the current registration form'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationFormQueryResolver")'
             registrationScript:
                 type: 'String'
                 description: 'Get the current post registration script'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationScriptQueryResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\RegistrationScriptQueryResolver")'
             # Return a password complexity score from 0 to 4 where O is very weak and 4 is very strong
             passwordComplexityScore:
                 type: 'Int'
                 description: 'Validate the registration credentials'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\PasswordComplexityScoreResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\PasswordComplexityScoreResolver", args)'
                 args:
                     username:
                         type: 'String'
@@ -86,7 +86,7 @@ InternalQuery:
             contactForms:
                 type: '[InternalContactForm!]'
                 description: 'Get the contact forms'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContactFormQueryResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContactFormQueryResolver")'
             projects:
                 type: 'InternalProjectConnection!'
                 args:
@@ -178,10 +178,10 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: true
                         description: 'If true get enabled only, if false get disabled, if null get all events'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args, info, serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", args, info, serv("request_stack"))'
             projectAuthors:
                 type: '[Author!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", [args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAuthorsResolver", args, getUser())'
             projectTypes:
                 type: '[InternalProjectType!]!'
                 args:
@@ -189,7 +189,7 @@ InternalQuery:
                         type: 'Boolean'
                         description: 'If true, filter the projectTypes only used by the projects'
                         defaultValue: false
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", [args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectTypesResolver", args, getUser())'
             users:
                 type: 'InternalUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -241,18 +241,18 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: false
                         description: 'If true, retrieve only users that created an event.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserSearchQueryResolver", args)'
             consultationSteps:
                 type: '[InternalConsultationStep!]!'
                 args:
                     id:
                         description: 'If omitted, returns all consultations steps. If provided, returns the consultation step of the particular id.'
                         type: 'ID'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationStepsQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationStepsQueryResolver", args)'
             consultations:
                 type: 'InternalConsultationConnection!'
                 description: 'Get all consultations.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     id:
@@ -273,8 +273,8 @@ InternalQuery:
                         description: 'The term to filter groups'
                         type: 'String'
                 argsBuilder: 'Relay::ForwardConnection'
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver", [args])'
+                access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", getUser())'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupListResolver", args)'
             proposalForms:
                 description: 'Lookup forms.'
                 type: '[InternalProposalForm]!'
@@ -282,7 +282,7 @@ InternalQuery:
                     query:
                         type: 'String'
                         description: 'Filter proposal form by title'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProposalFormResolver", args)'
             categoryImages:
                 description: 'Lookup category images.'
                 type: '[CategoryImage!]!'
@@ -290,7 +290,7 @@ InternalQuery:
                     isDefault:
                         type: 'Boolean'
                         description: 'If true, get default category image, if false get custom category image, if null get all'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryCategoryImagesResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryCategoryImagesResolver", args)'
             availableDistrictsForLocalisation:
                 type: '[InternalProposalDistrict!]!'
                 description: 'Lookup availables districts on a proposalForm for a given address.'
@@ -301,7 +301,7 @@ InternalQuery:
                         type: 'Float!'
                     longitude:
                         type: 'Float!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", [args["proposalFormId"], args["latitude"], args["longitude"]])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\District\\DistrictsForLocalisationResolver", args["proposalFormId"], args["latitude"], args["longitude"])'
             contributions:
                 type: '[InternalOpinion!]!'
                 description: 'TO BE REMOVED'
@@ -309,21 +309,21 @@ InternalQuery:
                     consultation:
                         description: 'Returns all contributions of the provided consultation.'
                         type: 'ID!'
-                resolve: "@=resolver('contributions', [args])"
+                resolve: "@=query('contributions', args)"
             question:
                 type: 'InternalQuestion!'
                 description: 'TO BE REMOVED'
                 args:
                     id:
                         type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionQueryResolver", args)'
             availableQuestionnaires:
                 type: '[InternalQuestionnaire!]!'
                 args:
                     term:
                         description: 'the term to filter questions'
                         type: 'String'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\AvailableQuestionnaireResolver", args)'
             globalDistricts:
                 description: 'List all the district project in the platform.'
                 type: 'InternalGlobalDistrictConnection!'
@@ -333,16 +333,16 @@ InternalQuery:
                         type: 'String'
                         defaultValue: null
                         description: 'Filter by name.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryGlobalDistrictResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryGlobalDistrictResolver", args)'
             allContributors:
                 description: 'List all the contributors in the platform, totalCount includes anon replies and votes.'
                 type: 'InternalUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributorsResolver", args)'
             allContributions:
                 description: 'Return the number of contributions in the platform.'
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributionsResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryContributionsResolver", args)'
             votes:
                 description: 'List all the votes in the platform.'
                 type: 'InternalVoteConnection!'
@@ -352,12 +352,12 @@ InternalQuery:
                         type: 'Boolean'
                         defaultValue: true
                         description: 'Get only accounted votes.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryVotesResolver", args)'
             shieldAdminForm:
                 type: 'InternalShieldAdminForm!'
                 description: 'Get the current shield admin form.'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ShieldAdminFormQueryResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ShieldAdminFormQueryResolver")'
             ssoConfigurations:
                 type: 'InternalSSOConfigurationConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -365,11 +365,11 @@ InternalQuery:
                 args:
                     ssoType:
                         type: 'SSOType'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\SSOConfigurationQueryResolver", args)'
             sections:
                 type: '[Section!]!'
                 description: 'List all sections.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryOpinionTypeResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryOpinionTypeResolver", args)'
                 args:
                     user:
                         type: 'ID'
@@ -379,36 +379,36 @@ InternalQuery:
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'List all medias'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\MediaQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\MediaQueryResolver", args)'
                 args:
                     term:
                         type: 'String'
                         description: 'Search by term.'
             availableLocales:
                 description: 'List all locales on the platform.'
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
+                access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", getUser())'
                 args:
                     includeDisabled:
                         type: 'Boolean'
                 type: '[Locale!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\AvailableLocalesQueryResolver", [args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\AvailableLocalesQueryResolver", args, getUser())'
             locales:
                 description: 'List all locales published.'
                 type: '[Locale!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\LocalesQueryResolver", [getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\LocalesQueryResolver", getUser())'
             defaultLocale:
                 description: 'Get the default locale.'
                 type: 'Locale!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\DefaultLocaleQueryResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\DefaultLocaleQueryResolver")'
             fonts:
                 description: 'List all available fonts on the platform.'
                 access: "@=hasRole('ROLE_ADMIN')"
                 type: '[InternalFont!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", args)'
             notificationsFromEmail:
                 type: Email
                 description: 'Retrieve the configured notifications from email.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNotificationsFromEmailResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryNotificationsFromEmailResolver")'
             siteParameter:
                 description: 'get a site parameter from its keyname'
                 args:
@@ -416,7 +416,7 @@ InternalQuery:
                         type: 'String!'
                         description: 'keyname of the site parameter to get'
                 type: 'SiteParameter'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteParameter\\SiteParameterQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SiteParameter\\SiteParameterQueryResolver", args)'
             availableConsultations:
                 type: '[InternalConsultation]!'
                 description: 'get consultations without step'
@@ -424,17 +424,17 @@ InternalQuery:
                     term:
                         type: 'String'
                         description: 'Retrieve consultation where title match term param.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\AvailableConsultationsQueryResolver", [args["term"]])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\AvailableConsultationsQueryResolver", args["term"])'
             viewerAssignedProjectsToAnalyse:
                 description: 'Fetch projects with assignment'
                 access: "@=hasRole('ROLE_USER')"
                 type: '[InternalProject!]'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerAssignedProjectsToAnalyseQueryResolver", [args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerAssignedProjectsToAnalyseQueryResolver", args, getUser())'
             viewerCanSeeEvaluationsPage:
                 type: Boolean!
                 access: "@=hasRole('ROLE_USER')"
                 description: 'Whether or not this user can access our evaluations page.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", [getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", getUser(), args)'
             geocode:
                 type: 'PreviewGoogleMapsAddress'
                 args:
@@ -445,16 +445,16 @@ InternalQuery:
                         type: 'Float!'
                         description: 'the longitude of geocode'
                 description: 'An address from Google Maps.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryGeocodeResolver", [args["latitude"], args["longitude"]])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryGeocodeResolver", args["latitude"], args["longitude"])'
             featureFlags:
                 description: 'List all feature flags.'
                 type: '[InternalFeatureFlag!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryFeatureFlagsResolver", [])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryFeatureFlagsResolver")'
             userInvitations:
                 description: 'List all invited users.'
                 type: 'UserInviteConnection!'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserInvitationsResolver", [args, info])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserInvitationsResolver", args, info)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     first:
@@ -472,11 +472,11 @@ InternalQuery:
                 args:
                     emails:
                         type: '[String!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserInvitationsAvailabilitySearchQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\UserInvitationsAvailabilitySearchQueryResolver", args)'
             siteColors:
                 description: 'List all site colors.'
                 type: '[InternalSiteColor!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QuerySiteColorsResolver", [])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QuerySiteColorsResolver")'
             appVersion:
                 description: 'Retrieve the current version of the app.'
                 type: 'String'
@@ -485,7 +485,7 @@ InternalQuery:
                 type: MailingListConnection!
                 description: 'Get all mailing lists'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\MailingListResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\MailingListResolver", args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     term:
@@ -495,7 +495,7 @@ InternalQuery:
                 type: EmailingCampaignConnection!
                 description: 'Get all emailing campaigns'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\EmailingCampaignResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\EmailingCampaignResolver", args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     status:
@@ -515,16 +515,16 @@ InternalQuery:
             proposalCategoryOptions:
                 type: 'ProposalCategoryOptions!'
                 description: 'Get the options for creating a category within a proposal form'
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ProposalCategoryOptionsResolver")'
+                access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", getUser())'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ProposalCategoryOptionsResolver")'
             homePageProjectsSectionConfiguration:
                 type: 'HomePageProjectsSectionConfiguration!'
                 description: 'Get HomePageProjectsSectionConfiguration'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsSectionConfigurationResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsSectionConfigurationResolver", args)'
             homePageProjectsMapSectionConfiguration:
                 type: 'HomePageProjectsMapSectionConfiguration!'
                 description: 'Get HomePageProjectsMapSectionConfiguration'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsMapSectionConfigurationResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\HomePageProjectsMapSectionConfigurationResolver", args)'
             carrouselConfiguration:
                 type: 'CarrouselConfiguration!'
                 description: 'Get CarrouselConfiguration'
@@ -533,7 +533,7 @@ InternalQuery:
                 type: 'InternalPlatformAnalytics!'
                 description: 'Return the platform analytics'
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryAnalyticsResolver", [args, info])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryAnalyticsResolver", args, info)'
                 args:
                     filter:
                         type: 'InternalQueryAnalyticsFilter!'
@@ -543,36 +543,36 @@ InternalQuery:
                     email:
                         type: 'Email!'
                         description: 'Email to check.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\IsEmailAlreadyTakenResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\IsEmailAlreadyTakenResolver", args)'
             externalServiceConfiguration:
                 type: 'ExternalServiceConfiguration!'
                 args:
                     type:
                         type: 'ExternalServiceConfigurationType!'
                         description: 'The type of configuration asked'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ExternalServiceConfigurationResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ExternalServiceConfigurationResolver", args)'
                 access: "@=hasRole('ROLE_ADMIN')"
             senderEmailDomains:
                 type: '[SenderEmailDomain!]!'
                 description: 'Get all domains registered'
                 access: "@=hasRole('ROLE_ADMIN') and hasFeatureFlag('emailing')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailDomainResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailDomainResolver", args)'
             senderEmails:
                 type: '[SenderEmail!]!'
                 description: 'Get all sending addresses registered'
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", [getUser()])'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", [getUser()])'
+                access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", getUser())'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\SenderEmailResolver", getUser())'
             siteSettings:
                 type: 'InternalSiteSettings'
                 description: 'Get site settings.'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SiteSettings\\SiteSettingsResolver")'
             smsOrders:
                 type: 'SmsOrderConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get list of sms orders.'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsOrdersResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsOrdersResolver", args)'
                 args:
                     filter:
                         type: 'SmsOrdersFilters'
@@ -583,17 +583,17 @@ InternalQuery:
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get list of sms credits.'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsCreditsResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsCreditsResolver", args)'
             smsAnalytics:
                 type: 'InternalSmsAnalytics!'
                 description: 'Get sms analytics'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsAnalyticsResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Sms\\SmsAnalyticsResolver", args)'
             organizations:
                 type: 'OrganizationConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationsResolver", [getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationsResolver", getUser(), args)'
                 args:
                     search:
                         type: 'String'
@@ -607,16 +607,16 @@ InternalQuery:
                 type: 'ParticipantConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantsResolver", args)'
             menuItems:
                 type: '[InternalMenuItem!]!'
                 description: 'The navbar menu items.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemsResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemsResolver", args)'
             arguments:
                 type: 'ArgumentConnection!'
                 description: 'List of arguments'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentListResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentListResolver", args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
@@ -634,7 +634,7 @@ InternalQuery:
                 type: 'CommentConnection!'
                 description: 'List of comments'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentListResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentListResolver", args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
@@ -651,12 +651,12 @@ InternalQuery:
             userTypes:
                 type: '[UserType!]!'
                 description: 'List of user types.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserTypesResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserTypesResolver")'
             sources:
                 type: 'SourceConnection!'
                 description: 'List of sources'
                 access: "@=hasRole('ROLE_ADMIN')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceListResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceListResolver", args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
@@ -677,7 +677,7 @@ InternalQuery:
             footer:
                 type: 'Footer!'
                 description: 'Footer configuration'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\FooterResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\FooterResolver", args)'
             nodeSlug:
                 type: 'NodeSlug'
                 args:
@@ -688,5 +688,5 @@ InternalQuery:
                         type: 'String!'
                         description: 'The slug to search for.'
                 description: 'Get a node by its slug.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\NodeSlugResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\NodeSlugResolver", args)'
 

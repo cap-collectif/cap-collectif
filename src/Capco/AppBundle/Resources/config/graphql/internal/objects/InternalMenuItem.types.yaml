@@ -22,11 +22,11 @@ InternalMenuItem:
             link:
                 type: 'String'
                 description: 'The menu item link applied to the current locale'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemLinkResolver", [value, serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemLinkResolver", value, serv("request_stack"))'
             children:
                 type: '[InternalMenuItem]!'
                 description: 'The sub menus if the current item contains sub menus'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemChildrenResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MenuItemChildrenResolver", value)'
             translations:
                 type: '[InternalMenuItemTranslation!]!'
                 description: 'The available translations for the menu item.'

@@ -12,7 +12,7 @@ PhoneRequirement:
             viewerValue:
                 type: 'String'
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", value, getUser())'
                 description: 'The phone of the viewer.'
             participantValue:
                 type: 'String'
@@ -20,5 +20,5 @@ PhoneRequirement:
                     token:
                         type: 'String!'
                         description: 'The token associated to the Participant.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", value, args)'
                 description: 'The phone of the participant.'

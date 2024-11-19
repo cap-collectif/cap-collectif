@@ -28,4 +28,4 @@ InternalSimpleQuestion:
                         defaultValue: 20
                         description: 'Defines the number of aggregation for the tag cloud.'
                 description: "Return array containing object with number of occurrences by response's keywords."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTagCloudResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTagCloudResolver", value, args)'

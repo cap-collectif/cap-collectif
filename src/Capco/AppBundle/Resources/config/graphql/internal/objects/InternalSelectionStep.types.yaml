@@ -26,12 +26,12 @@ InternalSelectionStep:
                 type: 'Boolean!'
                 description: 'Whether or not authors can add news on proposals selected in this step'
             proposals:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\SelectionStepProposalResolver", value, args, getUser(), serv("request_stack"))'
             contributors:
                 type: 'InternalContributorConnection!'
                 description: 'A list of contributor associated with the consultation.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", value, args)'
             mainView:
                 type: 'MainView!'
                 description: 'The main view : GRID, LIST or MAP'

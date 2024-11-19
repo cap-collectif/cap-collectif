@@ -26,17 +26,17 @@ InternalMediator:
                     orderBy:
                         type: 'InternalParticipantOrder'
                         defaultValue: { field: CREATED_AT, direction: DESC }
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorParticipantsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorParticipantsResolver", value, args)'
             votes:
                 type: 'InternalVoteConnection'
                 description: 'The votes added by the mediator.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorVotesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorVotesResolver", value, args)'
             totalParticipantsAccounted:
                 type: Int
                 description: 'The total of participants who have all their votes accounted.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorTotalParticipantsAccountedResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorTotalParticipantsAccountedResolver", value)'
             totalParticipantsOptIn:
                 type: Int
                 description: 'The total of participants who have filled in their email.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorTotalParticipantsOptInResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Mediator\\MediatorTotalParticipantsOptInResolver", value)'

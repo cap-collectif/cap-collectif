@@ -16,7 +16,7 @@ PublicUser:
                 builderConfig:
                     typeName: User
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", value)'
             username:
                 type: 'String'
                 description: "The user's public name."

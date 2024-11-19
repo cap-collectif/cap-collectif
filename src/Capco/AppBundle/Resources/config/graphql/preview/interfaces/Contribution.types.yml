@@ -5,7 +5,7 @@ Contribution:
   config:
     name: Contribution
     description: 'A contribution with an author'
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+    resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", value)'
     fields:
       related:
         type: 'Contribution'

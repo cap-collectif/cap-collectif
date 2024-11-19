@@ -55,7 +55,7 @@ class SiteParameterResolver
         }
 
         if (!isset($this->parameters[$key])) {
-            return html_entity_decode($defaultValue);
+            return html_entity_decode($defaultValue ?? '');
         }
         $parameter = $this->parameters[$key];
 

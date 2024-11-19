@@ -25,16 +25,16 @@ InternalConsultation:
             url:
                 type: 'URI!'
                 description: 'Get the url of the consultation'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationUrlResolver", value)'
             sections:
                 type: '[Section]'
                 description: 'List of sections.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationSectionResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationSectionResolver", value, args)'
             viewerOpinionsUnpublished:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'OpinionConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationViewerOpinionsUnpublishedResolver", value, args, getUser())'
                 description: "The viewer's unpublished opinions."
             contribuable:
                 type: 'Boolean!'
@@ -64,9 +64,9 @@ InternalConsultation:
                         type: 'Boolean'
                         description: 'The connection will return the trashed results too.'
                         defaultValue: false
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", value, args, getUser(), serv("request_stack"))'
             votes:
                 type: 'InternalVoteConnection!'
             adminUrl:
                 type: 'URI!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationAdminUrlResolver", value)'

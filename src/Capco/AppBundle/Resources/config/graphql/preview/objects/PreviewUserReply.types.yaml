@@ -18,7 +18,7 @@ PreviewUserReply:
                     typeName: Reply
             responses:
                 type: '[PreviewResponse]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser(), context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context)'
                 description: 'The responses of the reply.'
             author:
                 type: 'PreviewUser!'

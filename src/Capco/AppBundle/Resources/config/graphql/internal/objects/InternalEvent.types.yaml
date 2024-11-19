@@ -22,11 +22,11 @@ InternalEvent:
             adminUrl:
                 type: 'URI!'
                 description: 'The event admin edit url'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAdminUrlResolver", value)'
             participants:
                 type: 'EventParticipantConnection!'
                 description: 'A list of Users that are participating to the event.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventParticipantsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
             themes:
                 type: '[InternalTheme!]!'
@@ -48,7 +48,7 @@ InternalEvent:
             url:
                 type: 'URI!'
                 description: 'The url of the event'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", value)'
             guestListEnabled:
                 type: 'Boolean!'
             customCode:
@@ -68,7 +68,7 @@ InternalEvent:
                 deprecationReason: 'reason:"will be deleted"'
             googleMapsAddress:
                 type: 'PreviewGoogleMapsAddress'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", value)'
             review:
                 type: 'InternalEventReview'
                 description: 'User submitted events must be reviewed by an admin'
@@ -100,22 +100,22 @@ InternalEvent:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
                 description: 'Show if user is already participating at event'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\IsViewerParticipatingAtEventResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\IsViewerParticipatingAtEventResolver", value, getUser())'
             steps:
                 type: '[InternalStep!]!'
                 description: 'The steps corresponding to this event.'
             isRegistrationPossible:
                 type: 'Boolean!'
                 description: 'Whether or not registration is enabled on this event.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsRegistrationPossibleResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsRegistrationPossibleResolver", value)'
             isCompleteAndRegistrationPossibleResolver:
                 type: 'Boolean!'
                 description: 'Whether or not registration is enabled on this event and event is complete.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsCompleteAndRegistrationPossibleResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventIsCompleteAndRegistrationPossibleResolver", value)'
             viewerIsRoomAnimator:
                 type: 'Boolean!'
                 description: 'Wheter or not the viewer can join the room before it starts.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventViewerCanJoinBeforeStartResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventViewerCanJoinBeforeStartResolver", value, getUser())'
             owner:
                 type: 'InternalEventOwner'
                 description: 'The owner of the event.'
@@ -127,7 +127,7 @@ InternalEvent:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver").isGranted(value)'
                 type: 'URI'
                 description: 'The url to export participants'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventExportParticipantsUrlResolver", value)'
             availableRegistration:
                 type: 'Int'
                 description: 'The remaining number of possible registrations'
@@ -146,5 +146,5 @@ InternalEvent:
             districts:
                 type: 'InternalGlobalDistrictConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventDistrictsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventDistrictsResolver", value, args)'
                 description: 'Events districts.'

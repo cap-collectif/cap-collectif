@@ -8,8 +8,8 @@ DevQuery:
 #        fields:
 #            exampleFake:
 #                type: '[InternalUser!]!'
-#                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Dev\\ExampleFakeResolver")'
+#                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Dev\\ExampleFakeResolver")'
 #            exampleFakePaginated:
 #                type: 'InternalUserConnection!'
 #                argsBuilder: 'Relay::ForwardConnection'
-#                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Dev\\ExampleFakePaginatedResolver", [args])'
+#                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Dev\\ExampleFakePaginatedResolver", args)'

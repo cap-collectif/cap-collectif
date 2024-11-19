@@ -3,4 +3,4 @@ UserOrNotRegistered:
     config:
         types: [InternalUser, NotRegistered]
         description: User and NotRegistered
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\EventParticipantTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\EventParticipantTypeResolver", value)'

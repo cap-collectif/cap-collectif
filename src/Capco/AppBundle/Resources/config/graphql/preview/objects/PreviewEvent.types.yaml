@@ -33,7 +33,7 @@ PreviewEvent:
                 type: 'Boolean!'
                 description: 'Whether or not this event is published.'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventUrlResolver", value)'
             lat:
                 type: 'Float'
                 description: 'Identifies the latitude of the event.'
@@ -52,7 +52,7 @@ PreviewEvent:
                 deprecationReason: 'reason: "This field use our legacy address format Field "fullAddress" will be removed, Use "googleMapsAddress.formatted" instead.'
             googleMapsAddress:
                 type: 'PreviewGoogleMapsAddress'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventAddressResolver", value)'
                 description: 'Identifies the address of the event in google Maps format.'
             translations:
                 type: '[PreviewEventTranslation!]!'

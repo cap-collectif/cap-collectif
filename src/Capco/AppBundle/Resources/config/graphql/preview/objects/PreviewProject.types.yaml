@@ -9,7 +9,7 @@ PreviewProject:
                 description: 'A list of votes associated with the project.'
                 type: 'PreviewVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotesResolver", value, args)'
             contributors:
                 type: 'PreviewUserConnection!'
                 description: 'A list of contributors associated with the project.'
@@ -19,17 +19,17 @@ PreviewProject:
                         type: 'UserOrder'
                         description: 'Ordering options for contributors returning from the connection.'
                         defaultValue: { field: CREATED_AT, direction: DESC }
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributorResolver", value, args)'
             contributionsCount:
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionCountResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionCountResolver", value)'
                 description: 'Count of contributions associated with the project.'
                 deprecationReason: 'reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection, Field "contributionsCount" will be removed, Use "contributions.totalCount" instead when it will be published.'
             contributions:
                 type: 'ContributionConnection!'
                 description: 'Contributions associated with the project.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectContributionResolver", value, args)'
             cover:
                 type: 'PreviewMedia'
                 resolve: '@=value.getCover()'
@@ -43,7 +43,7 @@ PreviewProject:
             # TODO: Maybe use a connection instead.
             steps:
                 type: '[PreviewStep!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStepsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStepsResolver", value, args)'
                 description: 'The different steps associated with the project.'
             authors:
                 type: '[PreviewUser!]!'
@@ -52,7 +52,7 @@ PreviewProject:
             districts:
                 type: 'PreviewGlobalDistrictConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDistrictsResolver", value, args)'
                 description: 'Linking table with districts'
             themes:
                 type: '[PreviewTheme!]'

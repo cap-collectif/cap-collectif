@@ -20,6 +20,6 @@ PreviewConsultation:
                         type: 'Boolean'
                         description: 'The connection will return the trashed results too.'
                         defaultValue: false
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributionsResolver", value, args, getUser(), serv("request_stack"))'
             votes:
                 type: 'PreviewVoteConnection!'

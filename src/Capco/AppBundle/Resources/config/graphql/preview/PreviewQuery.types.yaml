@@ -20,7 +20,7 @@ PreviewQuery:
                     theme:
                         type: 'ID'
                         description: 'ID of a Theme to filter by. If non-null, filter projects by themes'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProjectsResolver", [args, getUser(), serv("request_stack"), info])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryProjectsResolver", args, getUser(), serv("request_stack"), info)'
             events:
                 type: 'PreviewEventConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -33,12 +33,12 @@ PreviewQuery:
                     project:
                         type: 'ID'
                         description: 'ID of a Project to filter by. If non-null, only events belonging to the project will be returned.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", [args, info, serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryEventsResolver", args, info, serv("request_stack"))'
             users:
                 type: 'PreviewUserConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Lookup users.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUsersResolver", [args, info])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUsersResolver", args, info)'
             globalDistricts:
                 description: 'List all the district project in the platform.'
                 type: 'PreviewGlobalDistrictConnection!'
@@ -48,4 +48,4 @@ PreviewQuery:
                         type: 'String'
                         defaultValue: null
                         description: 'Filter by name.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryGlobalDistrictResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\District\\QueryGlobalDistrictResolver", args)'

@@ -3,7 +3,7 @@ PreviewPrivatableVote:
     config:
         name: PrivatableVote
         description: 'A vote that can be anonymous.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", value)'
         fields:
             private:
                 type: 'Boolean'

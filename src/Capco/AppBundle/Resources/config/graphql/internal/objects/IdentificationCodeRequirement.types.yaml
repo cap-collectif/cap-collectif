@@ -13,7 +13,7 @@ IdentificationCodeRequirement:
             viewerValue:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context, [])'
                 type: 'String'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", value, getUser())'
                 description: "The viewer's identification code"
             participantValue:
                 type: 'String'
@@ -21,5 +21,5 @@ IdentificationCodeRequirement:
                     token:
                         type: 'String!'
                         description: 'The token associated to the Participant.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", value, args)'
                 description: 'The identification code of the participant.'

@@ -8,7 +8,7 @@ PreviewQuestionnaire:
             questions:
                 type: '[PreviewQuestion!]!'
                 description: 'The list of questions of the questionnaire.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", value)'
             replies:
                 type: 'PreviewUserReplyConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -22,6 +22,6 @@ PreviewQuestionnaire:
                         type: Boolean
                         defaultValue: false
                 description: 'A list of replies to the questionnaire.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireRepliesResolver", value, args, getUser())'
             participants:
                 type: 'PreviewUserConnection!'

@@ -2,12 +2,12 @@ InternalAuthorable:
     type: interface
     config:
         description: 'An authorable'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\AuthorableTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\AuthorableTypeResolver", value)'
         fields:
             author:
                 type: 'Author!'
                 resolve: '@=value.getAuthor()'
             viewerDidAuthor:
                 type: 'Boolean'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerDidAuthorResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerDidAuthorResolver", value, getUser())'
                 description: 'Did the viewer author this entity.'

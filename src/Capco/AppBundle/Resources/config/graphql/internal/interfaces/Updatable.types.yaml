@@ -2,7 +2,7 @@ Updatable:
     type: interface
     config:
         description: 'Entities that can be updated.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Deletable\\UpdatableTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Deletable\\UpdatableTypeResolver", value)'
         fields:
             viewerCanUpdate:
                 description: 'Check if the current viewer can update this object'

@@ -41,4 +41,4 @@ InternalOauth2SSOConfiguration:
             redirectUri:
                 type: 'URI!'
                 description: 'Redirect URI callback.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\OpenIDRedirectUriResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\OpenIDRedirectUriResolver", value)'

@@ -16,7 +16,7 @@ InternalProposalAnalysis:
             responses:
                 type: '[InternalResponse!]!'
             comments:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalAnalysisCommentsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalAnalysisCommentsResolver", value, args)'
                 type: 'CommentConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all comments of the analysis.'
@@ -25,5 +25,5 @@ InternalProposalAnalysis:
                 type: '[InternalUser!]!'
                 description: 'Users assigned to this proposal analysis'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalAnalysisUrlResolver", [value, serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalAnalysisUrlResolver", value, serv("request_stack"))'
                 type: 'URI!'

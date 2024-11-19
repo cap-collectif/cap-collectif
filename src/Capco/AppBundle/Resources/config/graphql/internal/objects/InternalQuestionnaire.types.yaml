@@ -31,12 +31,12 @@ InternalQuestionnaire:
                     filter:
                         type: 'QuestionsFilterType'
                         description: 'Filter questions by a given filter.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionsListResolver", value, args)'
             viewerReplies:
                 type: 'InternalReplyConnection'
                 argsBuilder: 'Relay::ForwardConnection'
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", [value, getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireViewerRepliesResolver", value, getUser(), args)'
             acknowledgeReplies:
                 type: 'Boolean!'
             type:
@@ -72,19 +72,19 @@ InternalQuestionnaire:
                         description: 'Filter by status'
                         type: '[ReplyStatus]'
                         defaultValue: !php/const Capco\AppBundle\Enum\ReplyStatus::DEFAULT_STATUSES
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminRepliesResolver", value, args, getUser())'
             privateResult:
                 type: 'Boolean!'
                 description: 'Results of survey are private'
             exportResultsUrl:
                 type: 'URI!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireExportResultsUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireExportResultsUrlResolver", value)'
             adminUrl:
                 type: 'URI!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireAdminUrlResolver", value)'
             isIndexationDone:
                 type: 'Boolean!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
             createdAt:
                 type: 'DateTime'
                 resolve: '@=value.getCreatedAt()'

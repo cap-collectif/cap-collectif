@@ -3,7 +3,7 @@ InternalProposalFormOwner:
     config:
         name: ProposalFormOwner
         description: 'Represent an owner of a `ProposalForm`.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalFormOwnerTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProposalFormOwnerTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -14,7 +14,7 @@ InternalProposalFormOwner:
             proposalForms:
                 type: 'InternalProposalFormConnection!'
                 description: 'Get all `ProposalForms` that the user owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFormOwner\\ProposalFormOwnerProposalFormsResolver", [args, value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFormOwner\\ProposalFormOwnerProposalFormsResolver", args, value)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     availableOnly:

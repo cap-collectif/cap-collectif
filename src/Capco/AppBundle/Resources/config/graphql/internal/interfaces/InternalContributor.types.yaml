@@ -4,7 +4,7 @@ InternalContributor:
     - Node
   config:
     name: Contributor
-    resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ContributorTypeResolver", [value])'
+    resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ContributorTypeResolver", value)'
     fields:
       id:
         description: 'The ID of an object'

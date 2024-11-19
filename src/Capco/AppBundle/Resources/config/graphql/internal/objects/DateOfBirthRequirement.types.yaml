@@ -14,7 +14,7 @@ DateOfBirthRequirement:
             viewerDateOfBirth:
                 type: 'DateTime'
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementViewerValueResolver", value, getUser())'
                 description: 'The date of birth of the viewer.'
             participantDateOfBirth:
                 type: 'DateTime'
@@ -22,5 +22,5 @@ DateOfBirthRequirement:
                     token:
                         type: 'String!'
                         description: 'The token associated to the Participant.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\RequirementParticipantValueResolver", value, args)'
                 description: 'The date of birth of the participant.'

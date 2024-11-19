@@ -73,32 +73,32 @@ InternalOrganization:
                 resolve: '@=value.getTitle(args["locale"], true)'
             url:
                 type: 'URI!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\OrganizationUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\OrganizationUrlResolver", value)'
             members:
                 type: 'InternalOrganizationMemberConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMembersResolver", [value, getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMembersResolver", value, getUser(), args)'
             socialNetworks:
                 type: 'InternalOrganizationSocialNetworks'
                 resolve: '@=value.getOrganizationSocialNetworks()'
             pendingOrganizationInvitations:
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationAdminAccessResolver", [value, getUser()])'
+                access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationAdminAccessResolver", value, getUser())'
                 type: 'PendingOrganizationInvitationConnection'
                 description: 'Get all pending invitations.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\PendingOrganizationInvitationsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\PendingOrganizationInvitationsResolver", value, args)'
             deletedAt:
                 type: 'DateTime'
                 description: 'The date when the organization was deleted.'
             projects:
                 type: 'InternalProjectConnection!'
                 description: 'Get all projects that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\OwnerProjectsResolver", value, args, getUser())'
                 argsBuilder: 'Relay::ForwardConnection'
             events:
                 type: 'InternalEventConnection!'
                 description: 'Get all events that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\OwnerEventsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\OwnerEventsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     hideDeletedEvents:
@@ -113,27 +113,27 @@ InternalOrganization:
             proposalForms:
                 type: 'InternalProposalFormConnection!'
                 description: 'Get all proposalForm that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\OwnerProposalFormResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\OwnerProposalFormResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
             questionnaires:
                 type: 'InternalQuestionnaireConnection!'
                 description: 'Get all questionnaires that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\OwnerQuestionnaireResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\OwnerQuestionnaireResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
             mailingLists:
                 type: 'MailingListConnection!'
                 description: 'Get all mailingLists that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMailingListsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMailingListsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
             emailingCampaigns:
                 type: 'EmailingCampaignConnection!'
                 description: 'Get all emailing campaigns that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationEmailingCampaignsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationEmailingCampaignsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
             posts:
                 type: 'InternalPostConnection!'
                 description: 'Get all posts that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationPostsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationPostsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     hideUnpublishedPosts:
@@ -142,5 +142,5 @@ InternalOrganization:
             consultations:
                 type: 'InternalConsultationConnection!'
                 description: 'Get all consultations that the organization owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\OrganizationConsultationsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\OrganizationConsultationsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'

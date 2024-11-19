@@ -4,7 +4,7 @@ InternalQuestion:
         - PreviewQuestion
     config:
         name: Question
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeResolver", value)'
         fields:
             # Overrides from Preview
             responses:
@@ -34,15 +34,15 @@ InternalQuestion:
                         defaultValue: { field: CREATED_AT, direction: DESC }
                         description: 'Ordering options for responses.'
             number:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionNumberResolver", value)'
                 type: 'Int!'
             type:
                 type: 'QuestionTypeValue!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeValueResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTypeValueResolver", value)'
             #need it for conditional jumps
             position:
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionPositionResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionPositionResolver", value)'
                 description: 'The position of the question'
             private:
                 type: 'Boolean!'
@@ -62,7 +62,7 @@ InternalQuestion:
             participants:
                 type: 'EventParticipantConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionParticipantsResolver", value, args)'
                 description: 'Return users who answered the question'
                 args:
                     withNotConfirmedUser:
@@ -72,7 +72,7 @@ InternalQuestion:
             jumps:
                 description: 'The associated logic jumps to this question.'
                 type: '[LogicJump!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionJumpsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionJumpsResolver", value, args)'
                 args:
                     orderBy:
                         type: 'JumpsOrder'
@@ -81,7 +81,7 @@ InternalQuestion:
             destinationJumps:
                 description: 'The jumps of which this question is the destination'
                 type: '[LogicJump!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\DestinationJumpsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\DestinationJumpsResolver", value, args)'
             alwaysJumpDestinationQuestion:
                 description: 'The destination of the always jump (the else case) of this question.'
                 type: 'InternalQuestion'
@@ -95,5 +95,5 @@ InternalQuestion:
                     limit:
                         type: 'Int'
                         description: 'If given, will limit the number of categories returned.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionIACategoriesResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionIACategoriesResolver", value, args, getUser())'
                 description: 'Most used categories of responses, detected by CivicIA.'

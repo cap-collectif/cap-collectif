@@ -5,7 +5,7 @@ InternalAbstractDebateVote:
     config:
         name: AbstractDebateVote
         description: 'An abstract debate vote.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AbstractDebateVoteTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AbstractDebateVoteTypeResolver", value)'
         fields:
             createdAt:
                 type: 'DateTime!'

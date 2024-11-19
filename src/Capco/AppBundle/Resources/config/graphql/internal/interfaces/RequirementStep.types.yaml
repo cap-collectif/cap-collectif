@@ -1,14 +1,14 @@
 RequirementStep:
     type: interface
     config:
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", value)'
         fields:
             requirements:
                 type: 'RequirementConnection!'
                 description: 'The requirements to vote on this step.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", value, args, getUser())'
             allRequirements:
                 type: 'RequirementConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\AllRequirementsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\AllRequirementsResolver", value, args)'

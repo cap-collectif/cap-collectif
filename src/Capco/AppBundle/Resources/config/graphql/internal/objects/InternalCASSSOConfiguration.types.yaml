@@ -26,4 +26,4 @@ InternalCASSSOConfiguration:
                 type: 'String!'
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'Content of the certificate file.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\CasCertificateContentResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\CasCertificateContentResolver", value)'

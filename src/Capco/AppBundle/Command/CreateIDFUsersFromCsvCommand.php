@@ -75,7 +75,7 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
     {
         /** @var UserType $userType */
         foreach ($repository->findAll() as $userType) {
-            $this->userTypes[trim($userType->getName())] = $userType;
+            $this->userTypes[trim($userType->getName() ?? '')] = $userType;
         }
     }
 }

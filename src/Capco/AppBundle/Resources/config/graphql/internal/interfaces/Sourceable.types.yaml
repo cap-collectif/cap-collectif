@@ -2,7 +2,7 @@ Sourceable:
     type: interface
     config:
         description: 'A sourceable'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -14,7 +14,7 @@ Sourceable:
             sources:
                 description: 'The sources related to the sourceable.'
                 type: 'SourceConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableSourcesResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
@@ -24,9 +24,9 @@ Sourceable:
                 access: "@=hasRole('ROLE_USER')"
                 description: 'The viewer unpublished sources related to the sourceable (only visible by viewer).'
                 type: 'SourceConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableViewerSourcesUnpublishedResolver", value, args, getUser())'
                 argsBuilder: 'Relay::ForwardConnection'
             availableSourceCategories:
                 description: 'The available sources categories of to the sourceable.'
                 type: '[SourceCategory]'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver", [])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Sourceable\\SourceableAvailableCategoriesResolver")'

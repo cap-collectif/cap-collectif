@@ -5,7 +5,7 @@ InternalProposalVote:
     config:
         name: ProposalVote
         description: 'Represents a proposal vote.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\ProposalVoteTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\ProposalVoteTypeResolver", value)'
         fields:
             proposal:
                 type: 'InternalProposal!'

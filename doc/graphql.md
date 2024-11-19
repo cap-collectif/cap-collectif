@@ -312,11 +312,11 @@ Puis, dans [l'objet](../src/Capco/AppBundle/Resources/config/GraphQL/internal/Or
         type: object
         fields:
             pendingOrganizationInvitations:
-                access: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationAdminAccessResolver", [value, getUser()])'
+                access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationAdminAccessResolver", value, getUser())'
                 type: 'PendingOrganizationInvitationConnection' #ici le type connection
                 description: 'Get all pending invitations.'
                 argsBuilder: 'Relay::ForwardConnection' #l'args builder pour la pagination et autres filtres
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\PendingOrganizationInvitationsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\PendingOrganizationInvitationsResolver", value, args)'
 ```
 
 Ou dans le Payload

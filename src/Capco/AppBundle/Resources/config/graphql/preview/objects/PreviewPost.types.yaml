@@ -24,7 +24,7 @@ PreviewPost:
             publicationStatus:
                 type: 'PostPublicationStatus!'
                 description: 'The publication status for this post.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostPublicationStatusResolver", value)'
             commentable:
                 type: 'Boolean!'
                 description: 'Wether or not the post is commentable.'
@@ -37,10 +37,10 @@ PreviewPost:
             adminUrl:
                 type: 'URI!'
                 description: 'The admin url for this post.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver", value)'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostAdminUrlResolver").isGranted(value)'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostUrlResolver", value)'
             media:
                 description: "The post's related media."
                 type: 'PreviewMedia'

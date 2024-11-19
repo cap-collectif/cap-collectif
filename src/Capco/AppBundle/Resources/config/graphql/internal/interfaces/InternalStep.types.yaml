@@ -7,7 +7,7 @@ InternalStep:
     config:
         name: Step
         description: 'A step inside a project.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", value)'
         fields:
             # TODO remove
             kind:
@@ -54,21 +54,21 @@ InternalStep:
                     isFuture:
                         type: 'Boolean'
                         description: 'If non-null, filters events by comparing the start date with present.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepEventsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepEventsResolver", value, args)'
             project:
                 type: 'InternalProject'
             exportStepUrl:
                 type: 'URI'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportStepUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportStepUrlResolver", value)'
             exportContributorsUrl:
                 type: 'URI'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportContributorsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepExportContributorsResolver", value)'
             adminUrl:
                 type: 'URI!'
                 args:
                     operationType:
                         type: 'StepAdminUrlOperationType'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepAdminUrlResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepAdminUrlResolver", value, args)'
             mediators:
                 access: "hasFeatureFlag('mediator')"
                 type: 'MediatorConnection'
@@ -78,4 +78,4 @@ InternalStep:
                     username:
                         type: 'String'
                         description: 'Filter mediators by user username.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepMediatorsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepMediatorsResolver", value, args, getUser())'

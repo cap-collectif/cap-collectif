@@ -16,7 +16,7 @@ InternalProject:
             # Override PublicProject or PreviewProject fields
             hasAnalysis:
                 type: Boolean!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectHasAnalysisResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectHasAnalysisResolver", value)'
             contributors:
                 type: 'InternalContributorConnection!'
                 args:
@@ -47,7 +47,7 @@ InternalProject:
                 type: 'InternalEmailableConnection!'
                 description: 'A list of contributors associated with the project.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectEmailableContributorsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectEmailableContributorsResolver", value, args)'
             votes:
                 type: 'InternalVoteConnection!'
                 args:
@@ -59,12 +59,12 @@ InternalProject:
                 description: 'Count of paper votes on the project.'
                 type: 'Int!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProjectPaperVoteTotalCountResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProjectPaperVoteTotalCountResolver", value, args)'
             paperVotesTotalPointsCount:
                 description: 'Count of paper votes points on the project.'
                 type: 'Int!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProjectPaperVoteTotalPointsCountResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProjectPaperVoteTotalPointsCountResolver", value, args)'
             steps:
                 args:
                     orderBy:
@@ -73,19 +73,19 @@ InternalProject:
                     excludePresentationStep:
                         type: 'Boolean'
                         defaultValue: false
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStepsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStepsResolver", value, args)'
                 type: '[InternalStep!]!'
             cover:
                 type: 'InternalMedia'
             authors:
                 type: '[Author!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\InternalProjectAuthorsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\InternalProjectAuthorsResolver", value)'
             type:
                 type: 'InternalProjectType'
             # Internal fields
             proposals:
                 type: 'InternalProposalConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectProposalsResolver", value, args, getUser())'
                 args:
                     step:
                         type: 'ID'
@@ -130,30 +130,30 @@ InternalProject:
                 type: '[InternalTheme!]'
             votableSteps:
                 type: '[ProposalStep!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectVotableStepsResolver", value)'
             visibility:
                 type: 'ProjectVisibility!'
                 description: 'The visibility of the project.'
             adminAlphaUrl:
                 type: 'URI!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminAlphaUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminAlphaUrlResolver", value)'
             adminUrl:
                 type: 'URI!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAdminUrlResolver", value)'
             opinionCanBeFollowed:
                 type: 'Boolean!'
                 description: 'State of activation of Opinion subscription.'
             restrictedViewers:
                 type: 'GroupConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAllowedGroupsResolver", value, args)'
                 description: 'Viewers that can access the project, null otherwise.'
             districts:
                 type: 'InternalGlobalDistrictConnection'
             comments:
                 description: 'The comments related to the project.'
                 type: 'CommentConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCommentsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCommentsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     onlyTrashed:
@@ -203,7 +203,7 @@ InternalProject:
                 description: 'the locale for the project, if any'
             viewerAssignedProposals:
                 type: 'InternalProposalConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectViewerAssignedProposalsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectViewerAssignedProposalsResolver", value, args, getUser())'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all assigned proposals of the viewer.'
                 access: "@=hasRole('ROLE_USER')"
@@ -248,7 +248,7 @@ InternalProject:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectExportableSteps").isGranted(value.getId())'
                 type: '[InternalProjectAbstractStep]!'
                 description: 'list of exportable steps in the project'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectExportableSteps", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectExportableSteps", value)'
             currentStep:
                 type: 'InternalStep'
                 description: 'The current step of the step timeline.'
@@ -262,27 +262,27 @@ InternalProject:
                 description: 'The owner of the project.'
             exportContributorsUrl:
                 type: 'URI'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectExportContributorsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectExportContributorsResolver", value)'
             posts:
                 type: 'InternalPostConnection!'
                 description: 'The posts relative to the project.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectPostsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectPostsResolver", value)'
             consultationStepOpen:
                 type: 'InternalConsultationStep'
                 description: 'The open consultation step of the project, if any.'
             address:
                 description: 'The address of the project.'
                 type: 'PreviewGoogleMapsAddress'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAddressResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectAddressResolver", value)'
             canEdit:
                 description: 'Wether or not the logged in user has the authorization to edit'
                 type: 'Boolean'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCanEditResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectCanEditResolver", value, getUser())'
             description:
                 type: 'String'
                 description: 'The project description.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDescriptionResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectDescriptionResolver", value, getUser())'
             customCode:
                 type: 'String'
                 description: 'Custom code that will be applied to every steps.'

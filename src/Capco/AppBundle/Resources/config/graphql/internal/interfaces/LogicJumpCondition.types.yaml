@@ -2,7 +2,7 @@ LogicJumpCondition:
     type: interface
     config:
         description: 'A particular condition in a logic jump.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\LogicJumpCondition\\LogicJumpConditionTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\LogicJumpCondition\\LogicJumpConditionTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'

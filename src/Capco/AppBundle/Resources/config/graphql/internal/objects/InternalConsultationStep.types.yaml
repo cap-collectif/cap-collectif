@@ -21,13 +21,13 @@ InternalConsultationStep:
             contributors:
                 description: 'A list of contributor associated with the consultation step.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", value, args)'
                 type: 'InternalUserConnection!'
             votesCount:
                 type: 'Int'
                 description: 'The number of votes in this consultation.'
                 deprecationReason: 'Field "votesCount" will be removed Use "votes.totalCount" instead.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepVotesResolver", [value, args]).totalCount'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepVotesResolver", value, args).totalCount'
             votes:
                 type: 'InternalVoteConnection!'
             userHasVote:
@@ -37,7 +37,7 @@ InternalConsultationStep:
                     login:
                         type: 'String!'
                         description: "The user's login (for example, an email)."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", value, args)'
             kind:
                 type: 'String!'
                 description: 'The type of step. Returns "consultation".'
@@ -52,7 +52,7 @@ InternalConsultationStep:
             consultations:
                 type: 'InternalConsultationConnection!'
                 description: 'Get the associated consultations of this consultation step'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     first:
@@ -62,7 +62,7 @@ InternalConsultationStep:
             consultation:
                 type: 'InternalConsultation'
                 description: "Search a consultation in this step by it's slug"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationBySlugResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepConsultationBySlugResolver", value, args)'
                 args:
                     slug:
                         type: 'String!'
@@ -79,7 +79,7 @@ InternalConsultationStep:
                         type: 'Boolean'
                         description: 'The connection will return the trashed results too.'
                         defaultValue: false
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepContributionsConnectionResolver", value, args, getUser(), serv("request_stack"))'
             opinionTypes:
                 type: '[OpinionType]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\ConsultationStepOpinionTypesResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\ConsultationStepOpinionTypesResolver", value)'

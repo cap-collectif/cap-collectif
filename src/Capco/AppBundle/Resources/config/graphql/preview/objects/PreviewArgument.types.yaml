@@ -23,7 +23,7 @@ PreviewArgument:
                 builderConfig:
                     typeName: Argument
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Argument\\ArgumentUrlResolver", value)'
             type:
                 type: 'ArgumentValue!'
                 description: 'The type.'

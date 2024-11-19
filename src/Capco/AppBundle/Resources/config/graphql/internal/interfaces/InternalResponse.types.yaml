@@ -3,7 +3,7 @@ InternalResponse:
     config:
         name: Response
         description: 'A response to a question.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\ResponseResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -19,4 +19,4 @@ InternalResponse:
                 type: 'Boolean!'
                 access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 description: 'True if the viewer has starred the response.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\HasViewerStarredResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Response\\HasViewerStarredResolver", value, getUser())'

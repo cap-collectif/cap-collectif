@@ -3,7 +3,7 @@ InternalPostOwner:
     config:
         name: PostOwner
         description: 'Represent an owner of a post.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\PostOwnerTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\PostOwnerTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -14,7 +14,7 @@ InternalPostOwner:
             posts:
                 type: 'InternalPostConnection!'
                 description: 'Get all posts that the user owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserPostsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserPostsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     affiliations:

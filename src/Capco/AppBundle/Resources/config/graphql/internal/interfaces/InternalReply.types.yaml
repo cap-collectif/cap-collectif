@@ -9,7 +9,7 @@ InternalReply:
     config:
         name: Reply
         description: 'Represents an answer to a questionnaire.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyTypeResolver", value)'
         fields:
             id:
                 description: 'The ID of an object'
@@ -18,17 +18,17 @@ InternalReply:
                     typeName: Reply
             responses:
                 type: '[InternalResponse]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", [value, getUser(), context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyResponsesResolver", value, getUser(), context)'
                 description: 'The responses of the reply.'
             questionnaire:
                 type: 'InternalQuestionnaire!'
                 description: 'Identifies the form where the contribution was submitted.'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyUrlResolver", value)'
                 description: 'The url of the reply.'
             adminUrl:
                 type: 'URI'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyAdminUrlResolver", value)'
                 description: 'The admin url of the reply.'
             status:
                 type: 'ReplyStatus'

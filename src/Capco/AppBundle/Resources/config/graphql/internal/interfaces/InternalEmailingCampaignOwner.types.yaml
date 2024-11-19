@@ -3,7 +3,7 @@ InternalEmailingCampaignOwner:
     config:
         name: EmailingCampaignOwner
         description: 'Represent an owner of an emailing campaign.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\EmailingCampaignOwnerTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\EmailingCampaignOwnerTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -14,7 +14,7 @@ InternalEmailingCampaignOwner:
             emailingCampaigns:
                 type: 'EmailingCampaignConnection!'
                 description: 'Get all emailing campaigns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailingCampaignsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserEmailingCampaignsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     status:

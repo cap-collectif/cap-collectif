@@ -10,7 +10,7 @@ InternalAbstractDebateArgument:
     config:
         name: AbstractDebateArgument
         description: 'An abstract debate argument.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AbstractDebateArgumentTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AbstractDebateArgumentTypeResolver", value)'
         fields:
             id:
                 description: 'The ID of an object.'
@@ -29,7 +29,7 @@ InternalAbstractDebateArgument:
             url:
                 type: 'URI!'
                 description: 'The url of the debate'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateUrlResolver", [value.getDebate()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateUrlResolver", value.getDebate())'
             ipAddress:
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'IP of the author'
@@ -50,12 +50,12 @@ InternalAbstractDebateArgument:
                 access: "@=hasRole('ROLE_USER')"
                 description: 'True if the viewer has upvoted the argument.'
                 type: Boolean!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasVoteResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasVoteResolver", value, getUser())'
             viewerHasReport:
                 access: "@=hasRole('ROLE_USER')"
                 description: 'True if the viewer has reported the argument.'
                 type: Boolean!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasReportResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentViewerHasReportResolver", value, getUser())'
             votes:
                 description: 'The upvotes on the argument.'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -65,4 +65,4 @@ InternalAbstractDebateArgument:
                         description: 'Order by.'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
                 type: DebateArgumentVoteConnection!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentVotesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\DebateArgumentVotesResolver", value, args)'

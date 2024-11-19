@@ -21,27 +21,27 @@ InternalProposalForm:
                 type: 'Boolean!'
             summaryHelpText:
                 type: 'String'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormSummaryHelpTextResolver", value)'
             illustrationHelpText:
                 type: 'String'
             title:
                 type: 'String!'
             proposals:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormProposalsResolver", value, args, getUser(), serv("request_stack"))'
             viewerProposalsUnpublished:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerProposalsUnpublishedResolver", value, args, getUser())'
             categories:
                 type: '[InternalProposalCategory!]!'
                 args:
                     order:
                         type: 'CategoryOrderField'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", [value, args["order"]])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormCategoriesResolver", value, args["order"])'
                 description: 'Available categories for proposals of this form.'
             usingThemes:
                 type: 'Boolean!'
             contribuable:
                 type: 'Boolean!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerCanContributeResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormViewerCanContributeResolver", value, getUser())'
                 description: 'Viewer can contribute to the form'
             themeMandatory:
                 type: 'Boolean!'
@@ -60,7 +60,7 @@ InternalProposalForm:
                 args:
                     order:
                         type: 'DistrictOrderField'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", [value, args["order"]])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormDistrictsResolver", value, args["order"])'
             districtMandatory:
                 type: 'Boolean!'
             districtHelpText:
@@ -85,17 +85,17 @@ InternalProposalForm:
                     filter:
                         type: 'QuestionsFilterType'
                         description: 'Filter questions by a given filter.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormQuestionsResolver", value, args)'
             mapCenter:
                 type: 'PreviewGoogleMapsAddress'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFormMapCenterResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalFormMapCenterResolver", value)'
             zoomMap:
                 type: 'Int'
             adminUrl:
                 type: URI!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormAdminUrlResolver", value)'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormUrlResolver", value)'
             notificationsConfiguration:
                 type: 'NotificationsConfiguration!'
             evaluationForm:
@@ -129,7 +129,7 @@ InternalProposalForm:
                 description: 'When a user is creating a proposal, suggest similar to avoid duplicate.'
             isIndexationDone:
                 type: 'Boolean!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
             canContact:
                 type: 'Boolean!'
                 description: 'can the viewer send a contact message to the proposals author'
@@ -183,5 +183,5 @@ InternalProposalForm:
                 description: 'The social networks used as string.'
             nbrOfMessagesSent:
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormMessagesSentResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ProposalForm\\ProposalFormMessagesSentResolver", value)'
                 description: 'The number of email messages sent on this form proposals.'

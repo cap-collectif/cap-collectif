@@ -10,5 +10,5 @@ InternalQuestionChoiceRanking:
             responses:
                 type: 'InternalResponseConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResponseResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResponseResolver", value, args)'
                 description: 'Identifies the responses of the choice.'

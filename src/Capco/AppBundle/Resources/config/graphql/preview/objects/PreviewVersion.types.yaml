@@ -23,7 +23,7 @@ PreviewVersion:
                 builderConfig:
                     typeName: Version
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\OpinionVersion\\OpinionVersionUrlResolver", value)'
             viewerHasReport:
                 type: 'Boolean!'
                 resolve: '@=value.userDidReport(getUser())'

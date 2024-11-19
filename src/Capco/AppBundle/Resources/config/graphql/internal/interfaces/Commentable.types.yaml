@@ -4,12 +4,12 @@ Commentable:
         - Node
     config:
         description: 'A commentable'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableTypeResolver", value)'
         fields:
             comments:
                 description: 'The comments related to the commentable.'
                 type: 'CommentConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableCommentsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\CommentableCommentsResolver", value, args, getUser())'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:
@@ -18,7 +18,7 @@ Commentable:
             viewerNotApprovedByModeratorComments:
                 description: 'The comments not yet approved by moderators.'
                 type: 'CommentConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\ViewerNotApprovedByModeratorCommentsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Commentable\\ViewerNotApprovedByModeratorCommentsResolver", value, args, getUser())'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     orderBy:

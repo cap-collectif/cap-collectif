@@ -34,7 +34,7 @@ PreviewSource:
                 description: 'Whether or not the user has voted for this source.'
                 type: 'Boolean!'
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", value, getUser())'
             title:
                 type: 'String!'
                 description: 'The title of the source.'
@@ -43,4 +43,4 @@ PreviewSource:
                 description: 'The content of the source.'
             url:
                 description: "The source's url"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", value)'

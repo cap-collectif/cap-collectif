@@ -3,7 +3,7 @@ InternalEventOwner:
     config:
         name: EventOwner
         description: 'Represent an owner of a Event.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\EventOwnerTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\EventOwnerTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -14,7 +14,7 @@ InternalEventOwner:
             events:
                 type: 'InternalEventConnection!'
                 description: 'Get all events that the user owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventOwnerEventsResolver", [args, value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Event\\EventOwnerEventsResolver", args, value)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     affiliations:

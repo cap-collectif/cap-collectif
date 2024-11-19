@@ -19,7 +19,7 @@ InternalQuestionnaireStep:
                 type: 'InternalUserConnection!'
                 description: 'A list of contributor associated with the step.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepContributorResolver", value, args)'
             questionnaire:
                 type: 'InternalQuestionnaire'
                 description: 'A questionnaire associated with the step.'
@@ -27,7 +27,7 @@ InternalQuestionnaireStep:
                 type: 'RequirementConnection!'
                 description: 'Requirements for answering the questionnaire'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Requirement\\StepRequirementsResolver", value, args, getUser())'
             isAnonymousParticipationAllowed:
                 description: 'Does the questionnaire allow anonymous users to participate ?'
                 type: 'Boolean!'

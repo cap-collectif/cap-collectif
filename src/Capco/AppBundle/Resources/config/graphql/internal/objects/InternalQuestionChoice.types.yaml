@@ -24,5 +24,5 @@ InternalQuestionChoice:
                 type: 'InternalResponseConnection!'
             ranking:
                 type: '[InternalQuestionChoiceRanking]'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceRankingResolver", value)'
                 description: 'Return the ranking of the given question choice'

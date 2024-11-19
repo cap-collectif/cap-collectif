@@ -172,7 +172,7 @@ abstract class Search
         $terms = null,
         $type = null
     ): Query\BoolQuery {
-        if (empty(trim($terms))) {
+        if (empty(trim($terms ?? ''))) {
             $multiMatchQuery = new Query\MatchAll();
         } else {
             $fields = $this->formatFieldsBoosts($fields);

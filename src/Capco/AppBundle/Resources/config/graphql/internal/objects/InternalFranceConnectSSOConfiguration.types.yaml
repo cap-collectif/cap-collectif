@@ -46,11 +46,11 @@ InternalFranceConnectSSOConfiguration:
             redirectUri:
                 type: 'URI!'
                 description: 'Redirect URI callback.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\FranceConnectRedirectUriResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\FranceConnectRedirectUriResolver", value)'
             allowedData:
                 type: '[FranceConnectAllowedData!]!'
                 description: 'Unattended DataChoice as array.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\FranceConnectAllowedDataResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\SSO\\FranceConnectAllowedDataResolver")'
                 access: "@=hasRole('ROLE_ADMIN')"
             isCompletelyConfigured:
                 type: 'Boolean!'

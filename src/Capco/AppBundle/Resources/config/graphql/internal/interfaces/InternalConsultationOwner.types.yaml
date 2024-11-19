@@ -3,7 +3,7 @@ InternalConsultationOwner:
     config:
         name: ConsultationOwner
         description: 'Represent an owner of a consultation.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ConsultationOwnerTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ConsultationOwnerTypeResolver", value)'
         fields:
             consultations:
                 type: 'InternalConsultationConnection!'

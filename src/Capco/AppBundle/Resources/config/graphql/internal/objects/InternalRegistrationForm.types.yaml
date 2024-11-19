@@ -39,9 +39,9 @@ InternalRegistrationForm:
             questions:
                 description: 'The available questions'
                 type: '[InternalQuestion!]!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\RegistrationForm\\RegistrationFormQuestionsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\RegistrationForm\\RegistrationFormQuestionsResolver", value)'
             isIndexationDone:
                 type: 'Boolean!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\IsIndexationDoneResolver")'
             translations:
                 type: '[InternalRegistrationFormTranslation!]!'

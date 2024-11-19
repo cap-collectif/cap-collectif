@@ -32,7 +32,7 @@ InternalUser:
             adminUrl:
                 type: 'URI!'
                 description: "The user's admin edit url"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAdminUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserAdminUrlResolver", value)'
             media:
                 type: 'InternalMedia'
                 description: "The user's public avatar file."
@@ -68,7 +68,7 @@ InternalUser:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             phoneConfirmationSentAt:
                 type: 'DateTime'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserPhoneConfirmationSentAtResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserPhoneConfirmationSentAtResolver", value)'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             gender:
                 type: 'GenderValue'
@@ -86,29 +86,29 @@ InternalUser:
                 type: '[UserRole!]!'
                 access: "@=hasRole('ROLE_USER')"
                 description: 'Unattended roles as array.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesResolver", value, getUser())'
             rolesText:
                 type: 'String'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesTextResolver", [value, getUser(),context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRolesTextResolver", value, getUser(),context)'
                 description: 'Array of roles converted and translated to string.'
             isArchiveDeleted:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 type: 'Boolean!'
                 description: 'Is the personal archive of the user has been deleted'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveDeletedResolver", [getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveDeletedResolver", getUser())'
             isArchiveReady:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 type: 'Boolean!'
                 description: 'Is the personal archive of the user is ready?'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveReadyResolver", [getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveReadyResolver", getUser())'
             firstArchive:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 type: 'Boolean!'
                 description: 'Is the personal archive of the user is being asked for the first time?'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveFirstResolver", [getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArchiveFirstResolver", getUser())'
             postalAddress:
                 type: 'PreviewGoogleMapsAddress'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\PostalAddressResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\PostalAddressResolver", value)'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             address:
                 type: 'String'
@@ -138,46 +138,46 @@ InternalUser:
                 type: 'SourceConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all sources of the user'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", [getUser(), value, args, context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSourcesResolver", getUser(), value, args, context)'
             opinionVotesCount:
                 type: 'Int!'
                 description: 'Get the count of votes made by the user'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVoteCountResolver", [getUser(), value, args, context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVoteCountResolver", getUser(), value, args, context)'
             argumentVotesCount:
                 type: 'Int!'
             proposals:
                 type: 'InternalProposalConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all proposals of the user.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", [getUser(), value, args, context, info])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserProposalsResolver", getUser(), value, args, context, info)'
             proposalVotesCount:
                 type: 'Int!'
             commentVotes:
                 type: 'CommentVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all comment votes of the user.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentVotesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentVotesResolver", value, args)'
             contributionsToDeleteCount:
                 type: 'Int!'
                 description: 'Provisional number of contributions who will be totally deleted if the user chose to delete his account.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsToDeleteCount", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsToDeleteCount", value)'
             replies:
                 type: 'InternalReplyConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'A list of replies associated to the user.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", [getUser(), value, args, context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserRepliesResolver", getUser(), value, args, context)'
             comments:
                 type: 'CommentConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all comments of the user.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", [getUser(), value, args, context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserCommentsResolver", getUser(), value, args, context)'
             consentExternalCommunication:
                 type: 'Boolean!'
                 description: 'Whether or not this user consent external communication.'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
             followingProposals:
                 type: 'InternalProposalConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalsFollowedByUserResolver", value, args)'
                 description: 'Array of proposals followed by current user.'
                 argsBuilder:
                     builder: 'Relay::ForwardConnection'
@@ -189,7 +189,7 @@ InternalUser:
                         description: 'Ordering options for followers returning from the connection'
             followingOpinions:
                 type: 'OpinionConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionsFollowedByUserResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionsFollowedByUserResolver", value, args)'
                 description: 'Array of opinions followed by current user.'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
@@ -198,12 +198,12 @@ InternalUser:
                         description: 'Ordering options for followers returning from the connection'
             opinions:
                 type: 'OpinionConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", [value, getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionsResolver", value, getUser(), args)'
                 description: 'Array of opinions by current user.'
                 argsBuilder: 'Relay::ForwardConnection'
             contributionsCount:
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionsCountResolver", value, getUser())'
                 description: 'Total of contributions count'
             profilePageIndexed:
                 type: 'Boolean!'
@@ -216,7 +216,7 @@ InternalUser:
             proposalVotes:
                 type: 'InternalProposalVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", [value, args, context, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerProposalVotesResolver", value, args, context, getUser())'
                 args:
                     orderBy:
                         type: 'InternalProposalVoteOrder'
@@ -230,7 +230,7 @@ InternalUser:
             medias:
                 type: '[InternalMedia]!'
                 description: 'Get all medias the user has published.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMediasResolver", value, args)'
             votes:
                 type: 'InternalVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -243,17 +243,17 @@ InternalUser:
                         type: 'Boolean'
                         defaultValue: true
                         description: 'Get only accounted votes.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", [getUser(), value, args, context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserVotesResolver", getUser(), value, args, context)'
             groups:
                 type: 'GroupConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all groups where the user is.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserGroupsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserGroupsResolver", value, args)'
             reports:
                 type: 'ReportConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all reports the user has done.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserReportsResolver", value, args)'
             contributions:
                 type: 'ContributionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -273,17 +273,17 @@ InternalUser:
                         type: 'ID'
                         description: 'The id of the contribuable entity (Project, Consultation, Step)'
                 description: "Return the user's contributions of the type requested."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserContributionResolver", value, args, getUser(), serv("request_stack"))'
             isSubscribedToProposalNews:
                 type: 'Boolean!'
                 description: 'Is user subscribed to the proposal news posted by the author ?'
             isSubscribedToNewsLetter:
                 type: 'Boolean!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserIsSubscribedToNewsLetterResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserIsSubscribedToNewsLetterResolver", value)'
                 description: 'Is user subscribed to the newsletter ?'
             subscribedToNewsLetterAt:
                 type: 'DateTime'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSubscribedToNewsLetterAtResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSubscribedToNewsLetterAtResolver", value)'
                 description: 'When the user subscribed to the newsletter.'
             newEmailToConfirm:
                 type: 'String'
@@ -296,7 +296,7 @@ InternalUser:
                 description: 'When the user email confirmation was sent.'
             arguments:
                 type: 'ArgumentConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArgumentsResolver", [getUser(), value, args, context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserArgumentsResolver", getUser(), value, args, context)'
                 description: 'The arguments created by user.'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
@@ -314,7 +314,7 @@ InternalUser:
                         defaultValue: false
             debateArguments:
                 type: 'DebateArgumentConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserDebateArgumentsResolver", [getUser(), value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserDebateArgumentsResolver", getUser(), value, args)'
                 description: 'The debate arguments created by user.'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
@@ -324,14 +324,14 @@ InternalUser:
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
             debateVotes:
                 type: 'DebateVoteConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AuthorVotesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Debate\\AuthorVotesResolver", value, args)'
                 description: 'The debate votes of the user.'
                 argsBuilder: 'Relay::ForwardConnection'
             responses:
                 type: 'InternalResponseConnection!'
             url:
                 description: 'The user profile URL.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserUrlResolver", value)'
             isAdmin:
                 type: 'Boolean!'
             isSuperAdmin:
@@ -351,7 +351,7 @@ InternalUser:
                 argsBuilder: 'Relay::ForwardConnection'
                 type: 'UserConnectionAttemptConnection'
                 description: 'Get any connection attempt'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", [value, args, getUser(), context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserConnectionResolver", value, args, getUser(), context)'
                 args:
                     email:
                         type: 'String'
@@ -361,26 +361,26 @@ InternalUser:
                         description: 'If true, returns only successful connection attempts /!\ only works with email, not userId'
             opinionVersions:
                 type: 'VersionConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVersionResolver", [getUser(), value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOpinionVersionResolver", getUser(), value, args)'
                 description: 'The opinion version created by user.'
                 argsBuilder: 'Relay::ForwardConnection'
             awaitingOrRefusedEvents:
                 type: 'InternalEventConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerAwaitingOrRefusedEventResolver", [getUser(), value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ViewerAwaitingOrRefusedEventResolver", getUser(), value, args)'
                 description: 'The event in awaiting or refused status of user.'
                 argsBuilder: 'Relay::ForwardConnection'
             supervisedProposals:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
                 argsBuilder: 'Relay::ForwardConnection'
                 type: 'InternalProposalConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", [getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserSupervisedProposalsResolver", getUser(), args)'
                 description: 'Get proposals assigned to the supervisor.'
             locale:
                 type: 'String'
                 description: 'Locale chosen by the user'
             adminAwaitingEvents:
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\AdminAwaitingEventResolver",  [getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\AdminAwaitingEventResolver",  getUser())'
                 description: 'The event in awaiting status.'
             birthPlace:
                 type: 'String'
@@ -405,12 +405,12 @@ InternalUser:
                 type: '[InternalOrganization]'
                 description: "The organizations of which user is a member"
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOrganizationsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserOrganizationsResolver", value)'
             consultations:
                 type: 'InternalConsultationConnection!'
                 description: 'Get all consultations.'
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\UserIsGrantedResolver").isGranted(getUser(),value,context)'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", [args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ConsultationsQueryResolver", args)'
             participant:
                 type: 'InternalParticipant'
                 description: "The user (who has already participated / is participating) in a questionnaire or other type of interaction"
@@ -419,8 +419,8 @@ InternalUser:
                 access: "@=hasRole('ROLE_MEDIATOR') and hasFeatureFlag('mediator')"
                 type: 'InternalProjectConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProjectsMediatorResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\ProjectsMediatorResolver", value, args)'
             isEvaluerOnNewTool:
                 description: "A user that can access Evaluations page is a user that is assigned to at least one proposal, as analyst, supervisor or decision marker"
                 type: 'Boolean!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerCanSeeEvaluationsPageResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryViewerCanSeeEvaluationsPageResolver", value)'

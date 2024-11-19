@@ -2,7 +2,7 @@ Reportable:
     type: interface
     config:
         description: 'A reportable'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", value)'
         fields:
             viewerHasReport:
                 access: "@=hasRole('ROLE_USER')"
@@ -12,7 +12,7 @@ Reportable:
                 type: 'ReportingConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'The reportings related to the reportable.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableReportingResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableReportingResolver", value, args)'
                 args:
                     orderBy:
                         type: 'ReportingOrder'
@@ -21,4 +21,4 @@ Reportable:
                 access: "@=hasRole('ROLE_USER')"
                 type: 'Boolean!'
                 description: 'Check if a user can report'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableViewerCanReportResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reportable\\ReportableViewerCanReportResolver", value, getUser())'

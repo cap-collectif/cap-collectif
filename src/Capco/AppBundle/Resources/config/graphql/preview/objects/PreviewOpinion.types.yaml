@@ -20,7 +20,7 @@ PreviewOpinion:
                 builderConfig:
                     typeName: Opinion
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Opinion\\OpinionUrlResolver", value)'
             pinned:
                 type: 'Boolean!'
                 description: 'true if the contribution is pinned.'

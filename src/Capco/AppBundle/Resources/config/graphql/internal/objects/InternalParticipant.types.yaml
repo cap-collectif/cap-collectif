@@ -22,7 +22,7 @@ InternalParticipant:
             replies:
                 type: 'InternalReplyConnection'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantRepliesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantRepliesResolver", value, args)'
             votes:
                 type: 'InternalVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -33,7 +33,7 @@ InternalParticipant:
                     mediatorId:
                         type: 'ID'
                         description: 'Filter votes created by a mediator'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantVotesResolver", [value, getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantVotesResolver", value, getUser(), args)'
             user:
                 type: 'InternalUser'
                 description: 'If already registered, the user to add as participant.'
@@ -44,5 +44,5 @@ InternalParticipant:
                     stepId:
                         type: 'ID!'
                         description: 'The step containing requirements.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantIsMeetingRequirementsResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Participant\\ParticipantIsMeetingRequirementsResolver", value, args, getUser())'
 

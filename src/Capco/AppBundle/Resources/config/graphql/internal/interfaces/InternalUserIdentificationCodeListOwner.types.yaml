@@ -8,5 +8,5 @@ InternalUserIdentificationCodeListOwner:
                 type: 'InternalUserIdentificationCodeListConnection!'
                 access: "@=hasRole('ROLE_ADMIN')"
                 description: 'Get all userIdentificationCodeLists'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserIdentificationCodeListResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserIdentificationCodeListResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'

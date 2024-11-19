@@ -4,7 +4,7 @@ Argumentable:
         - Node
     config:
         description: 'An argumentable'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Contribution\\ConsultationTypeResolver", value)'
         fields:
             contribuable:
                 type: 'Boolean!'
@@ -13,7 +13,7 @@ Argumentable:
                 description: 'The arguments related to the argumentable.'
                 type: 'ArgumentConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableArgumentsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableArgumentsResolver", value, args)'
                 args:
                     orderBy:
                         type: 'ArgumentOrder'
@@ -29,7 +29,7 @@ Argumentable:
                 access: "@=hasRole('ROLE_USER')"
                 description: 'The unpublished arguments of to the viewer.'
                 type: 'ArgumentConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableViewerArgumentsUnpublishedResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Argumentable\\ArgumentableViewerArgumentsUnpublishedResolver", value, args, getUser())'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     type:

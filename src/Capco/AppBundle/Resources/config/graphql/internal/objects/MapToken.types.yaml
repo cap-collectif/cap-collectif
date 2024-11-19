@@ -31,7 +31,7 @@ MapToken:
             styles:
                 type: '[MapTokenStyle]'
                 description: 'The available styles associated to this map token'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\MapToken\\MapTokenStylesResolver", [args, value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\MapToken\\MapTokenStylesResolver", args, value)'
                 args:
                     visibility:
                         type: 'MapTokenStyleVisibility'

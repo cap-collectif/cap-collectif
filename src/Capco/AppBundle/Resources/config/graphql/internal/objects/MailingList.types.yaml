@@ -20,7 +20,7 @@ MailingList:
             users:
                 type: 'InternalUserConnection!'
                 description: 'users in the mailing list'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\MailingListUsersConnection", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\MailingListUsersConnection", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     consentInternalCommunicationOnly:

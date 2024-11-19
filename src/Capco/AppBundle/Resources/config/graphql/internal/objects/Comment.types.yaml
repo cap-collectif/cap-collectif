@@ -30,7 +30,7 @@ Comment:
                 description: 'The kind of contribution.'
             body:
                 type: 'String!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentBodyResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentBodyResolver", value)'
             createdAt:
                 type: 'DateTime!'
             updatedAt:
@@ -45,7 +45,7 @@ Comment:
                 type: 'Boolean!'
                 resolve: '@=value.canContribute(getUser())'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentShowUrlResolver", value)'
             answers:
                 type: '[Comment!]!'
             authorName:
@@ -56,7 +56,7 @@ Comment:
                 type: 'IP'
             publicationStatus:
                 type: 'CommentPublicationStatus!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentPublicationStatusResolver", value)'
             votes:
                 type: 'CommentVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -64,7 +64,7 @@ Comment:
                     orderBy:
                         type: 'VoteOrder'
                         defaultValue: { field: PUBLISHED_AT, direction: DESC }
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentVotesResolver", value, args)'
             viewerHasVote:
                 type: 'Boolean!'
                 resolve: '@=value.userHasVote(getUser())'
@@ -73,7 +73,7 @@ Comment:
                 resolve: '@=value.userGetVote(getUser())'
             editUrl:
                 type: 'URI'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentEditUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Comment\\CommentEditUrlResolver", value)'
             viewerHasReport:
                 resolve: '@=value.userDidReport(getUser())'
             commentable:

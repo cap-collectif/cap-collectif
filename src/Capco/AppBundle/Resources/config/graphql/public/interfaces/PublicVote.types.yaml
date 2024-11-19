@@ -5,7 +5,7 @@ PublicVote:
     config:
         name: Vote
         description: 'A vote.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Vote\\VoteTypeResolver", value)'
         fields:
             createdAt:
                 type: 'DateTime!'

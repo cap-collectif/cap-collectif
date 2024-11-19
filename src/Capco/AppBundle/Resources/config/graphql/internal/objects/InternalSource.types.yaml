@@ -23,18 +23,18 @@ InternalSource:
             votes:
                 type: SourceVoteConnection
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceVotesResolver", value, args, getUser())'
             contribuable:
                 type: 'Boolean!'
                 resolve: '@=value.canContribute(getUser())'
             viewerHasVote:
                 type: 'Boolean!'
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerHasVoteResolver", value, getUser())'
             viewerVote:
                 type: 'SourceVote'
                 access: "@=hasRole('ROLE_USER')"
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerVoteResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceViewerVoteResolver", value, getUser())'
             category:
                 type: SourceCategory
             link:
@@ -50,4 +50,4 @@ InternalSource:
                 type: 'String!'
                 resolve: 'source'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Source\\SourceUrlResolver", value)'

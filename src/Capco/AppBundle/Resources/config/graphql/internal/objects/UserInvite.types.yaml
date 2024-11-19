@@ -23,11 +23,11 @@ UserInvite:
             status:
                 type: 'UserInviteStatus!'
                 description: 'The invitation status'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserInvite\\UserInviteStatusResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\UserInvite\\UserInviteStatusResolver", value)'
             groups:
                 type: 'GroupConnection!'
                 description: 'The groups associated to the invite'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\UserInvite\\UserInviteGroupsResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\UserInvite\\UserInviteGroupsResolver", value)'
             relaunchCount:
                 type: 'Int!'
                 description: 'Number of relaunch for this invitation.'

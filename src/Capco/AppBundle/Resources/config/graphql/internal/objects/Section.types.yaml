@@ -31,7 +31,7 @@ Section:
                 description: 'The description of the section.'
             contributionsCount:
                 type: 'Int!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionsCountResolver", value, getUser())'
             contributionConnection:
                 type: 'ContributionConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
@@ -46,14 +46,14 @@ Section:
                     step:
                         type: 'ID'
                         description: 'The connection will return the results where consultation.step = step'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", [value, args, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionContributionRelayResolver", value, args, getUser())'
             appendixTypes:
                 type: '[SectionAppendixType]'
                 description: 'Array of appendix types (possibly empty).'
             sections:
                 type: '[Section]'
                 description: 'Array of subsections (possibly empty).'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionSectionResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionSectionResolver", value, args)'
             voteWidgetType:
                 type: 'Int!'
             commentSystem:
@@ -73,13 +73,13 @@ Section:
             votesThresholdHelpText:
                 type: 'String'
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionUrlResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionUrlResolver", value)'
             defaultOrderBy:
                 type: 'SectionOrderBy'
                 resolve: '@=value.getDefaultFilter()'
             opinions:
                 type: 'OpinionConnection!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Section\\SectionOpinionsResolver", value, args, getUser(), serv("request_stack"))'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     author:

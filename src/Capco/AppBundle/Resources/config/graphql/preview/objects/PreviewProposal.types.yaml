@@ -23,13 +23,13 @@ PreviewProposal:
                 builderConfig:
                     typeName: Proposal
             url:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", [value, serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalUrlResolver", value, serv("request_stack"))'
             title:
                 type: 'String!'
                 description: 'Identifies the proposal title.'
             author:
                 type: 'PreviewUser!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAuthorResolver", value)'
                 description: 'Identifies the author of the contribution.'
             body:
                 type: 'HTML'
@@ -37,11 +37,11 @@ PreviewProposal:
             responses:
                 type: '[PreviewResponse]!'
                 description: 'Identifies the responses of the proposal.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", [value, getUser(), context])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalResponsesResolver", value, getUser(), context)'
             reference:
                 type: 'String!'
                 description: 'Identifies the unique reference of the proposal.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalReferenceResolver", value)'
             analyses:
                 access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerCanSeeProposalAnalysisResolver").isGranted(getUser(), value, context)'
                 type: '[PreviewProposalAnalysis!]'
@@ -58,7 +58,7 @@ PreviewProposal:
                 description: 'List of votes of the proposal.'
                 type: 'PreviewProposalVoteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", [value, args, context, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalVotesResolver", value, args, context, getUser())'
                 args:
                     orderBy:
                         type: 'PreviewProposalVoteOrder'
@@ -70,7 +70,7 @@ PreviewProposal:
             address:
                 description: 'The address of the proposal.'
                 type: 'PreviewGoogleMapsAddress'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAddressResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalAddressResolver", value)'
             theme:
                 description: 'The theme of the proposal.'
                 type: 'PreviewTheme'

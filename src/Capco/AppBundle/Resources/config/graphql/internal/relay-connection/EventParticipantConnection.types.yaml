@@ -9,7 +9,7 @@ EventParticipantConnection:
         edgeFields:
             registeredAt:
                 type: DateTime!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\EventParticipantConnectionEdgeRegisteredAtResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\EventParticipantConnectionEdgeRegisteredAtResolver", value)'
             registeredAnonymously:
                 type: Boolean!
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\EventParticipantConnectionEdgeRegisteredAnonymouslyResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\EventParticipant\\EventParticipantConnectionEdgeRegisteredAnonymouslyResolver", value)'

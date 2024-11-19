@@ -3,7 +3,7 @@ InternalMailingListOwner:
     config:
         name: MailingListOwner
         description: 'Represent an owner of a mailing list.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\MailingListOwnerTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\MailingListOwnerTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -14,7 +14,7 @@ InternalMailingListOwner:
             mailingLists:
                 type: 'MailingListConnection!'
                 description: 'Get all mailingLists that the user owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMailingListsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\UserMailingListsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     affiliations:

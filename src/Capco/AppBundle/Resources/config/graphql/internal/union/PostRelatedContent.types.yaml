@@ -3,4 +3,4 @@ PostRelatedContent:
     config:
         description: 'A related content for a post'
         types: [InternalTheme, InternalProposal, InternalProject]
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Post\\PostRelatedContentTypeResolver", value)'

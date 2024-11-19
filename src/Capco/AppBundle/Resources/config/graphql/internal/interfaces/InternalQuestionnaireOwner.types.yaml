@@ -3,7 +3,7 @@ InternalQuestionnaireOwner:
     config:
         name: QuestionnaireOwner
         description: 'Represent an owner of a questionnaire.'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\User\\QuestionnaireOwnerTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\User\\QuestionnaireOwnerTypeResolver", value)'
         fields:
             id:
                 type: 'ID!'
@@ -14,7 +14,7 @@ InternalQuestionnaireOwner:
             questionnaires:
                 type: 'InternalQuestionnaireConnection!'
                 description: 'Get all questionnaires that the user owns.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireOwnerQuestionnairesResolver", [args, value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Questionnaire\\QuestionnaireOwnerQuestionnairesResolver", args, value)'
                 argsBuilder: 'Relay::ForwardConnection'
                 args:
                     affiliations:

@@ -20,7 +20,7 @@ PublicConsultation:
                 type: 'PublicUserConnection!'
                 description: 'A list of contributor associated with the consultation.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributorsResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationContributorsResolver", value, args)'
             userHasVote:
                 type: 'Boolean!'
                 description: 'Whether the user has vote for a contribution in the related step of this consultation.'
@@ -28,14 +28,14 @@ PublicConsultation:
                     login:
                         type: 'String!'
                         description: "The user's login (for example, an email)."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", [value.getStep(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ConsultationStep\\ConsultationStepUserHasVoteResolver", value.getStep(), args)'
             votesCount:
                 type: 'Int'
                 description: 'The number of votes in the related step of this consultation.'
                 deprecationReason: 'reason: "In preparation for an upcoming change to the way we expose counters, this field will only be available inside a connection.", description: "Field `votesCount` will be removed, use "votes.totalCount".'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationVotesResolver", [value, args]).totalCount'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationVotesResolver", value, args).totalCount'
             votes:
                 type: 'PublicVoteConnection!'
                 description: 'The votes in the related step of this consultation.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationVotesResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\ConsultationVotesResolver", value, args)'

@@ -53,7 +53,7 @@ EmailingCampaign:
             preview:
                 type: 'HTML'
                 description: 'preview of the email'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\EmailingCampaignPreviewResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Emailing\\EmailingCampaignPreviewResolver", value)'
             owner:
                 type: 'InternalEmailingCampaignOwner'
                 description: 'The owner of the emailing campaign.'

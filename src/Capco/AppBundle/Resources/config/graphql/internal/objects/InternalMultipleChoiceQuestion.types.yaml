@@ -14,17 +14,17 @@ InternalMultipleChoiceQuestion:
             # TODO we can probably design this better
             isOtherAllowed:
                 type: 'Boolean!'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceIsOtherAllowedResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\QuestionChoiceIsOtherAllowedResolver", value)'
             # TODO we can probably design this better
             otherResponses:
                 type: 'InternalResponseConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\QuestionChoice\\OtherQuestionChoiceResponseResolver", value, args)'
                 description: 'Responses of the `other` question choice.'
             choices:
                 type: 'InternalQuestionChoiceConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", [value, args, getUser(), serv("request_stack")])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionChoicesResolver", value, args, getUser(), serv("request_stack"))'
                 args:
                     first:
                         type: 'Int'
@@ -39,7 +39,7 @@ InternalMultipleChoiceQuestion:
                         description: 'If the question has `randomQuestionChoices: true` will return choices in a random order.'
             validationRule:
                 type: 'MultipleChoiceQuestionValidationRule'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionValidationRuleResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionValidationRuleResolver", value)'
             randomQuestionChoices:
                 type: 'Boolean!'
                 resolve: '@=value.isRandomQuestionChoices()'
@@ -57,4 +57,4 @@ InternalMultipleChoiceQuestion:
                         defaultValue: 20
                         description: 'Defines the number of aggregation for the tag cloud.'
                 description: "Return array containing object with number of occurrences by response's keywords."
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTagCloudResolver", [value, args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Question\\QuestionTagCloudResolver", value, args)'

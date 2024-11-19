@@ -6,7 +6,7 @@ ProposalStep:
         - InternalWithProposals
     config:
         description: 'A proposal step'
-        resolveType: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", [value])'
+        resolveType: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepTypeResolver", value)'
         fields:
             project:
                 type: 'InternalProject'
@@ -27,7 +27,7 @@ ProposalStep:
             voteThreshold:
                 type: 'Int'
             statuses:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStatusesResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Step\\StepStatusesResolver", value)'
                 type: '[ProposalStepStatus!]!'
             defaultSort:
                 type: 'String' # should be an enum
@@ -40,7 +40,7 @@ ProposalStep:
                 type: 'InternalProposalVoteConnection!'
                 description: 'A list of viewer votes associated with the step.'
                 argsBuilder: 'Relay::ForwardConnection'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", [value, getUser(), args])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\ViewerStepVotesResolver", value, getUser(), args)'
                 args:
                     orderBy:
                         type: 'InternalProposalVoteOrder'

@@ -19,10 +19,10 @@ InternalUserReply:
                 type: 'InternalUser!'
                 description: 'The author of the Reply.'
             viewerCanUpdate:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanUpdateResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanUpdateResolver", value, getUser())'
                 description: 'Whether or not the current viewer can update the reply.'
             viewerCanDelete:
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", [value, getUser()])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyViewerCanDeleteResolver", value, getUser())'
                 description: 'Whether or not the current viewer can delete the reply.'
             private:
                 type: 'Boolean!'
@@ -30,4 +30,4 @@ InternalUserReply:
             publicationStatus:
                 type: 'ReplyPublicationStatus!'
                 description: 'The reply status.'
-                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", [value])'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Reply\\ReplyPublicationStatusResolver", value)'
