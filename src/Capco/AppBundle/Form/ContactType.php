@@ -60,8 +60,6 @@ class ContactType extends AbstractType
             ->add('customCode', TextType::class, [
                 'label' => 'contact.form.body',
                 'required' => false,
-                'purify_html' => false,
-                'purify_html_profile' => 'admin',
                 'constraints' => [new NotBlank(['message' => 'contact.no_body'])],
             ])
             ->add('metadatas', TextType::class, [

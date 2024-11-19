@@ -33,10 +33,7 @@ class OtherStepType extends AbstractType
             ->add('isEnabled', CheckboxType::class)
             ->add('timeless', CheckboxType::class)
             ->add('metaDescription', TextType::class)
-            ->add('customCode', TextType::class, [
-                'purify_html' => true,
-                'purify_html_profile' => 'admin',
-            ])
+            ->add('customCode', TextType::class)
         ;
     }
 
