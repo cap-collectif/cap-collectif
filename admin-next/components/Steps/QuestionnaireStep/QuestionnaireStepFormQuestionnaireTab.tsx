@@ -183,9 +183,9 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
             {questions.map((question, index) => {
               const firstSectionIndex = questionsValues.findIndex(q => q.type === 'section' || q.level)
               const hasSectionOrSubsectionBefore = firstSectionIndex !== -1 && firstSectionIndex < index
-              const type = questionsValues[index].type
+              const type = questionsValues[index]?.type
               const isSection = type === 'section'
-              const isSubSection = questionsValues[index].level
+              const isSubSection = questionsValues[index]?.level
               return (
                 // @ts-expect-error MAJ DS Props
                 <DragnDrop.Item draggableId={question.id} index={index} key={question.id}>
@@ -215,7 +215,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                           : null}
                       </Text>
                       <Text color="blue.900" fontSize={2} fontWeight={600} lineHeight={1.5}>
-                        {questionsValues[index].title}
+                        {questionsValues[index]?.title}
                       </Text>
                     </Flex>
                     <ButtonGroup>
@@ -244,7 +244,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                           setValue('temporaryQuestion', questionsValues[index])
                           setQuestionIndex(index)
                           if (type === 'section') {
-                            setIsSubSection(!!questionsValues[index].level)
+                            setIsSubSection(!!questionsValues[index]?.level)
                             onOpen('section-modal')()
                           } else onOpen('question-modal')()
                         }}
@@ -255,7 +255,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                         onClick={() => {
                           remove(index)
                           const jumpIndex = questionsWithJumpsValues.findIndex(
-                            (q: QuestionIds) => q.id === questionsValues[index].id,
+                            (q: QuestionIds) => q.id === questionsValues[index]?.id,
                           )
                           if (jumpIndex !== -1)
                             dispatchEvent('removeJump', {

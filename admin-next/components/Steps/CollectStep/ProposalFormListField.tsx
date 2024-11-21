@@ -10,6 +10,7 @@ import { ProposalFormListField_proposalForm$key } from '../../../__generated__/P
 import { ProposalFormListField_query$key } from '../../../__generated__/ProposalFormListField_query.graphql'
 import { formatJumpsToTmp, formatQuestions } from '../QuestionnaireStep/utils'
 import { GraphQLTaggedNode, fetchQuery } from 'relay-runtime'
+import { Category } from '../ProposalStep.type'
 
 type ProposalFormListFieldValue = {
   label: string
@@ -329,10 +330,12 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
   const query = useFragment(QUERY_FRAGMENT, queryRef)
   const viewer = query.viewer
   const { control, setValue } = useFormContext()
+  const [hasFetchedProposalForms, setHasFetchedProposalForms] = React.useState<boolean>(false)
 
   const [proposalForms, setProposalForms] =
     // @ts-ignore
     React.useState<ProposalFormListFieldQuery$data['proposalForms']>(null)
+
   const loadOptions = async (search: string): Promise<any[]> => {
     const proposalFormsData = await fetchQuery<ProposalFormListFieldQuery>(environment, PROPOSAL_FORMS_QUERY, {
       query: search,
@@ -340,23 +343,41 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
     }).toPromise()
 
     const owner = proposalFormsData.viewer.organizations?.[0] ?? proposalFormsData.viewer
-    const proposalForms = owner.proposalForms.edges
-      .map(edge => edge?.node)
-      .filter(form => form?.id !== currentProposalForm.id)
+    const proposalFormsEdges = owner.proposalForms.edges
+
+    const proposalForms = proposalFormsEdges.map(edge => edge?.node).filter(form => form?.id !== currentProposalForm.id)
 
     if (!proposalForms) {
       return []
     }
 
-    setProposalForms(proposalForms)
+    if (!hasFetchedProposalForms) {
+      setProposalForms(proposalForms)
+      setHasFetchedProposalForms(true)
+    }
+
     return formatProposalListData(proposalForms)
   }
 
+  const getCategories = (categories: Category[] | null | undefined) => {
+    return !categories || categories.length === 0
+      ? null
+      : categories.map(category => ({
+          ...category,
+          id: undefined,
+        }))
+  }
+  const getQuestions = proposalForm => {
+    return {
+      questions: proposalForm.questions ? formatQuestions({ questions: proposalForm.questions }, true) : [],
+      questionsWithJumps: proposalForm.questionsWithJumps ? formatJumpsToTmp(proposalForm.questionsWithJumps) : [],
+    }
+  }
+
   const onProposalFormSelect = (selected: ProposalFormListFieldValue) => {
-    // @ts-ignore
     const proposalForm = proposalForms.find(form => form.id === selected.value)
+
     if (proposalForm) {
-      // @ts-ignore
       setValue('form_model', {
         id: proposalForm.id ?? null,
         title: proposalForm.title ?? null,
@@ -371,16 +392,11 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         themeHelpText: proposalForm.themeHelpText ?? null,
         themeMandatory: proposalForm.themeMandatory ?? false,
         usingCategories: proposalForm.usingCategories ?? false,
-        categories:
-          proposalForm.categories.map(category => ({
-            ...category,
-            id: undefined
-          })) ?? null,
+        categories: getCategories(proposalForm.categories),
         categoryMandatory: proposalForm.categoryMandatory ?? false,
         usingAddress: proposalForm.usingAddress ?? false,
         addressHelpText: proposalForm.addressHelpText ?? null,
         usingDistrict: proposalForm.usingDistrict ?? false,
-        // @ts-ignore
         districts: proposalForm.usingDistrict
           ? proposalForm.districts.map(district => ({
               // id: district.id,
@@ -403,10 +419,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         descriptionHelpText: proposalForm.descriptionHelpText ?? null,
         canContact: proposalForm.canContact,
         proposalInAZoneRequired: proposalForm.proposalInAZoneRequired || false,
-        questionnaire: {
-          questions: proposalForm.questions ? formatQuestions({ questions: proposalForm.questions }, true) : [],
-          questionsWithJumps: proposalForm.questionsWithJumps ? formatJumpsToTmp(proposalForm.questionsWithJumps) : [],
-        },
+        questionnaire: getQuestions(proposalForm),
         allowAknowledge: proposalForm.allowAknowledge ?? false,
         usingFacebook: proposalForm.usingFacebook ?? false,
         usingWebPage: proposalForm.usingWebPage ?? false,
@@ -417,6 +430,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
       })
     }
   }
+
   return (
     <FormControl name="selectedModel" control={control}>
       <FormLabel

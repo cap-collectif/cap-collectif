@@ -1486,6 +1486,13 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
                                                 "name": "url",
                                                 "storageKey": null,
                                               },
+                                              Object {
+                                                "alias": "type",
+                                                "args": null,
+                                                "kind": "ScalarField",
+                                                "name": "contentType",
+                                                "storageKey": null,
+                                              },
                                             ],
                                             "storageKey": null,
                                           },
@@ -2012,7 +2019,7 @@ exports[`<ProposalFormAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "4a97b3f6657bd4ab8024759f7ae25bdb",
+            "cacheID": "9cc6703dd76d53238a3ab13fedf13ab4",
             "id": null,
             "metadata": Object {},
             "name": "ProposalFormAdminPageQuery",
@@ -2304,6 +2311,7 @@ fragment ProposalFormAdminConfigurationForm_proposalForm on ProposalForm {
             image {
               id
               url
+              type: contentType
             }
           }
         }

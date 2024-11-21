@@ -77,11 +77,11 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
         />
       ) : null}
 
-      {questionsWithJumps.length
+      {questionsWithJumps?.length
         ? questionsWithJumps.map((jump, index) => {
             const isRedirection =
-              !!questionsWithJumpsValues[index].alwaysJumpDestinationQuestion &&
-              !questionsWithJumpsValues[index].jumps.length
+              !!questionsWithJumpsValues[index]?.alwaysJumpDestinationQuestion &&
+              !questionsWithJumpsValues[index]?.jumps?.length
             return (
               <ListCard.Item
                 key={jump.id}
@@ -103,16 +103,12 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
                     })}
                   </Text>
                   <Text color="blue.900" fontSize={2} fontWeight={600}>
-                    {`${questionsWithJumpsValues[index].title} ${isRedirection ? '->' : '-'} ${
+                    {`${questionsWithJumpsValues[index]?.title} ${isRedirection ? '->' : '-'} ${
                       isRedirection
-                        ? questionsWithJumpsValues[index].alwaysJumpDestinationQuestion.title
+                        ? questionsWithJumpsValues[index]?.alwaysJumpDestinationQuestion?.title
                         : intl.formatMessage(
-                            {
-                              id: 'jumps-number',
-                            },
-                            {
-                              num: questionsWithJumpsValues[index].jumps.length,
-                            },
+                            { id: 'jumps-number' },
+                            { num: questionsWithJumpsValues[index]?.jumps?.length },
                           )
                     }`}
                   </Text>

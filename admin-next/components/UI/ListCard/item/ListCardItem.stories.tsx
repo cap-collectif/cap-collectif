@@ -48,7 +48,7 @@ export const WithButtonGroup: Story<ListCardProps> = () => (
 
     <ButtonGroup>
       <ButtonQuickAction variantColor="blue" icon={CapUIIcon.Pencil} label="Éditer" />
-      <ButtonQuickAction variantColor="red" icon={CapUIIcon.Trash} label="Éditer" />
+      <ButtonQuickAction variantColor="red" icon={CapUIIcon.Trash} label="Supprimer" />
     </ButtonGroup>
   </ListCard.Item>
 )

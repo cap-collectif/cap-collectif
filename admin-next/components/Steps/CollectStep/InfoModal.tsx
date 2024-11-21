@@ -31,7 +31,7 @@ export interface InfoModalProps {
 
 const InfoModal: React.FC<InfoModalProps> = ({ title, name, initialValues, setValue, className }) => {
   const intl = useIntl()
-  const { handleSubmit, control } = useForm<{
+  const { handleSubmit, control, reset } = useForm<{
     HelpText: string | null
     Mandatory?: boolean
   }>({
@@ -40,6 +40,10 @@ const InfoModal: React.FC<InfoModalProps> = ({ title, name, initialValues, setVa
   })
 
   const { proposalFormKey } = useCollectStep()
+
+  React.useEffect(() => {
+    reset(initialValues)
+  }, [initialValues, reset])
 
   const onSubmit = (values: { HelpText: string | null; Mandatory?: boolean; proposalInAZoneRequired?: boolean }) => {
     // @ts-ignore
@@ -60,7 +64,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ title, name, initialValues, setVa
         <ButtonQuickAction
           variantColor="blue"
           icon={CapUIIcon.Pencil}
-          label="Éditer"
+          label={intl.formatMessage({ id: 'action_edit' })}
           className={cn('disclosure', className)}
         />
       }

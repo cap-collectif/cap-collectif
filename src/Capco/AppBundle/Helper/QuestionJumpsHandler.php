@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
+use Capco\AppBundle\Entity\Questions\MultipleChoiceQuestion;
 use Capco\AppBundle\Form\ProposalFormUpdateType;
 use Capco\AppBundle\Form\QuestionnaireConfigurationUpdateType;
 use Capco\AppBundle\GraphQL\Traits\QuestionPersisterTrait;
@@ -85,6 +86,18 @@ class QuestionJumpsHandler
         $form = $this->formFactory->create($formType, $entity);
 
         $this->handleQuestions($form, $entity, $arguments, $type);
+
+        // we need to reset temporaryId, so we can reuse the same questions in proposal form and questionnaire steps model
+        foreach ($entity->getQuestions() as $qaq) {
+            $question = $qaq->getQuestion();
+            $question->setTemporaryId(null);
+            if ($question instanceof MultipleChoiceQuestion) {
+                foreach ($question->getChoices() as $choice) {
+                    $choice->setTemporaryId(null);
+                }
+            }
+        }
+
         $this->em->flush();
     }
 

@@ -140,6 +140,7 @@ const QuestionAdminFragment = {
               image {
                 id
                 url
+                type: contentType
               }
             }
           }

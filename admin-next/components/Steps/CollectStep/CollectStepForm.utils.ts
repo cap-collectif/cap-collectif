@@ -1,4 +1,4 @@
-import { CollectStepFormQuery$data } from '@relay/CollectStepFormQuery.graphql'
+import { CollectStepFormQuery$data, MainView } from '@relay/CollectStepFormQuery.graphql'
 import { FormTabs, FormTabsEnum } from './CollectStepContext'
 import { FormValues, StepVisibilityTypeEnum } from '@components/Steps/CollectStep/CollectStepForm'
 import { UpdateProposalFormMutation$variables } from '@relay/UpdateProposalFormMutation.graphql'
@@ -8,7 +8,8 @@ import { getFormattedCategories } from '@components/Steps/CollectStep/ProposalFo
 import { StepDurationTypeEnum } from '../Shared/StepDurationInput'
 import { formatQuestions, formatQuestionsInput } from '../QuestionnaireStep/utils'
 import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
-import { getVoteParameterInput, voteTypeForTabs } from '../ProposalStep.utils'
+import { getVoteParameterInput, voteTypeForTabs } from '../utils'
+import { ProposalSort, StepStatusInput } from '@relay/UpdateCollectStepMutation.graphql'
 
 export const getInitialValues = (
   step: CollectStepFormQuery$data['step'],
@@ -93,9 +94,9 @@ export const getInitialValues = (
       canContact: step?.form?.canContact,
       proposalInAZoneRequired: step?.form?.proposalInAZoneRequired || false,
       questionnaire: {
-        questions: step?.form?.questions ? formatQuestions({ questions: step.form.questions }) : [],
+        questions: step?.form?.questions ? formatQuestions({ questions: step?.form.questions }) : [],
         // @ts-ignore
-        questionsWithJumps: step.form?.questionsWithJumps ?? [],
+        questionsWithJumps: step?.form?.questionsWithJumps ?? [],
       },
     },
     voteType: step?.voteType,
@@ -109,9 +110,9 @@ export const getInitialValues = (
     secretBallot: step?.isSecretBallot,
     publishedVoteDate: step?.publishedVoteDate,
     votesHelpText: step?.votesHelpText,
-    isProposalSmsVoteEnabled: step.isProposalSmsVoteEnabled,
-    proposalArchivedTime: step.proposalArchivedTime,
-    proposalArchivedUnitTime: step.proposalArchivedUnitTime,
+    isProposalSmsVoteEnabled: step?.isProposalSmsVoteEnabled,
+    proposalArchivedTime: step?.proposalArchivedTime,
+    proposalArchivedUnitTime: step?.proposalArchivedUnitTime,
     // @ts-ignore relay lookup
     requirements: getDefaultRequirements(step),
     statuses: getStatusesInitialValues(step?.statuses, bgColor),
@@ -209,10 +210,10 @@ export const getCollectStepInput = (
     metaDescription: formValues.metaDescription,
     customCode: formValues.customCode,
     requirementsReason: formValues.requirementsReason,
-    mainView: formValues.mainView.labels[0],
-    statuses: statusesList,
+    mainView: formValues.mainView.labels[0] as MainView,
+    statuses: statusesList as StepStatusInput[],
     defaultStatus: formValues.defaultStatus,
-    defaultSort: formValues.defaultSort,
+    defaultSort: formValues.defaultSort as ProposalSort,
     proposalForm: proposalFormId,
     isProposalSmsVoteEnabled: formValues.isProposalSmsVoteEnabled,
     allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),

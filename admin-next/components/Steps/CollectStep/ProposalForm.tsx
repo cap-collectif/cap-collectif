@@ -28,6 +28,9 @@ const ProposalForm: React.FC<Props> = ({ defaultLocale, query: queryRef }) => {
   const { proposalFormKey } = useCollectStep()
   const values = watch(proposalFormKey)
 
+  const hasQuestions =
+    (values?.questionnaire?.questions?.length > 0 || values?.questionnaire?.questionsWithJumps?.length > 0) ?? false
+
   if (proposalFormKey === 'form_model' && !values) {
     return null
   }
@@ -77,13 +80,16 @@ const ProposalForm: React.FC<Props> = ({ defaultLocale, query: queryRef }) => {
           </Menu.List>
         </Menu>
       )}
-      <Box mt={4}>
-        <QuestionnaireStepFormQuestionnaire
-          proposalFormKey={proposalFormKey}
-          openQuestionModal={openQuestionModal}
-          setOpenQuestionModal={setOpenQuestionModal}
-        />
-      </Box>
+      {(hasQuestions || openQuestionModal) && (
+        <Box mt={4}>
+          <QuestionnaireStepFormQuestionnaire
+            proposalFormKey={proposalFormKey}
+            openQuestionModal={openQuestionModal}
+            setOpenQuestionModal={setOpenQuestionModal}
+            key={values.id}
+          />
+        </Box>
+      )}
     </>
   )
 }

@@ -643,6 +643,13 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
                                             "name": "url",
                                             "storageKey": null,
                                           },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "contentType",
+                                            "storageKey": null,
+                                          },
                                         ],
                                         "storageKey": null,
                                       },
@@ -734,7 +741,7 @@ exports[`<RegistrationAdminPage /> renders correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "7978c982098d8f66304331ec0b909438",
+            "cacheID": "1dc205509d9861577e2118af14b07b3f",
             "id": null,
             "metadata": Object {},
             "name": "RegistrationAdminPageQuery",
@@ -850,6 +857,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
             image {
               id
               url
+              type: contentType
             }
           }
         }
@@ -1643,6 +1651,13 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                                                   "name": "url",
                                                   "storageKey": null,
                                                 },
+                                                Object {
+                                                  "alias": "type",
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "contentType",
+                                                  "storageKey": null,
+                                                },
                                               ],
                                               "storageKey": null,
                                             },
@@ -1734,7 +1749,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
                   ],
                 },
                 "params": Object {
-                  "cacheID": "7978c982098d8f66304331ec0b909438",
+                  "cacheID": "1dc205509d9861577e2118af14b07b3f",
                   "id": null,
                   "metadata": Object {},
                   "name": "RegistrationAdminPageQuery",
@@ -1850,6 +1865,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
             image {
               id
               url
+              type: contentType
             }
           }
         }
@@ -2607,6 +2623,13 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
                                             "name": "url",
                                             "storageKey": null,
                                           },
+                                          Object {
+                                            "alias": "type",
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "contentType",
+                                            "storageKey": null,
+                                          },
                                         ],
                                         "storageKey": null,
                                       },
@@ -2698,7 +2721,7 @@ exports[`<RegistrationAdminPage /> renders correctly when not super admin 1`] = 
             ],
           },
           "params": Object {
-            "cacheID": "7978c982098d8f66304331ec0b909438",
+            "cacheID": "1dc205509d9861577e2118af14b07b3f",
             "id": null,
             "metadata": Object {},
             "name": "RegistrationAdminPageQuery",
@@ -2814,6 +2837,7 @@ fragment RegistrationFormQuestions_registrationForm on RegistrationForm {
             image {
               id
               url
+              type: contentType
             }
           }
         }

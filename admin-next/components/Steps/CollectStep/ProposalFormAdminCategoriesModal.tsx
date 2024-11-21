@@ -42,6 +42,7 @@ const ProposalFormCategoryPinPreview = dynamic(() => import('./ProposalFormCateg
 export interface ProposalFormAdminCategoriesModalProps {
   query: ProposalFormAdminCategoriesModal_query$key
   isUpdating: boolean
+  isContainer?: boolean
   initialValue?: {
     id: string
     name: string
@@ -99,6 +100,7 @@ const CATEGORIES_MODAL_FRAGMENT = graphql`
 
 const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModalProps> = ({
   isUpdating,
+  isContainer = false,
   initialValue,
   index,
   colors,
@@ -174,17 +176,17 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
   return (
     <Modal
       disclosure={
-        isUpdating ? (
-          <ButtonQuickAction
-            variantColor="blue"
-            icon={CapUIIcon.Pencil}
-            label="Éditer"
-            className={`NeededInfo_categories_item_edit_${index}`}
-          />
-        ) : (
+        isContainer ? (
           <Button width="60px" variant="tertiary" className={`NeededInfo_categories_item_add`}>
             {intl.formatMessage({ id: 'admin.global.add' })}
           </Button>
+        ) : (
+          <ButtonQuickAction
+            variantColor="blue"
+            icon={CapUIIcon.Pencil}
+            label={intl.formatMessage({ id: 'action_edit' })}
+            className={`NeededInfo_categories_item_edit_${index}`}
+          />
         )
       }
       size={CapUIModalSize.Lg}

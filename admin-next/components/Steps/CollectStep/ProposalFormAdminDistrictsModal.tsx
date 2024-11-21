@@ -28,6 +28,7 @@ import { isValid } from '@utils/GeoJsonValidator'
 
 export interface ProposalFormAdminDistrictsModalProps {
   isUpdating: boolean
+  isContainer?: boolean
   initialValue?: {
     geojson: string | null
     displayedOnMap: boolean
@@ -80,6 +81,7 @@ const resetForm = (resetField: UseFormResetField<ProposalFormAdminDistrictsModal
 }
 const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalProps> = ({
   isUpdating,
+  isContainer = false,
   index,
   initialValue,
   defaultLocale,
@@ -166,17 +168,17 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
   return (
     <Modal
       disclosure={
-        isUpdating ? (
-          <ButtonQuickAction
-            variantColor="blue"
-            icon={CapUIIcon.Pencil}
-            label="Éditer"
-            className={`NeededInfo_districts_item_edit_${index}`}
-          />
-        ) : (
+        isContainer ? (
           <Button width="60px" variant="tertiary" id="add-district-button">
             {intl.formatMessage({ id: 'admin.global.add' })}
           </Button>
+        ) : (
+          <ButtonQuickAction
+            variantColor="blue"
+            icon={CapUIIcon.Pencil}
+            label={intl.formatMessage({ id: 'action_edit' })}
+            className={`NeededInfo_districts_item_edit_${index}`}
+          />
         )
       }
       size={CapUIModalSize.Lg}
@@ -208,7 +210,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                 })}
               >
                 <Box as="span" color="gray.500">
-                  facultatif
+                  {intl.formatMessage({ id: 'global.optional' })}
                 </Box>
                 <Tooltip label="Une aide en plus">
                   <Icon name={CapUIIcon.Info} size={CapUIIconSize.Sm} color="blue.500" />

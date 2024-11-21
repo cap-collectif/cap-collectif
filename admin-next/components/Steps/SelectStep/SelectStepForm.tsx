@@ -30,7 +30,7 @@ import { useSelectionStep } from './SelectionStepContext'
 import ProposalStepStatuses, { getStatusesInputList } from '@components/Steps/ProposalStep/ProposalStepStatuses'
 import PublicationInput, { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import StepDurationInput from '../Shared/StepDurationInput'
-import { getVoteParameterInput } from '../ProposalStep.utils'
+import { getVoteParameterInput } from '../utils'
 
 export interface SelectStepFormProps {
   stepId: string
@@ -308,8 +308,10 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
         if (response.updateSelectionStep.proposalStepSplitViewWasDisabled) {
           toast({
             variant: 'warning',
-            content: intl.formatMessage({ id: 'admin.update.successful' })
-              + '<br/>' + intl.formatMessage({ id: 'admin.proposalStepSplitViewWasDisabled' }),
+            content:
+              intl.formatMessage({ id: 'admin.update.successful' }) +
+              '<br/>' +
+              intl.formatMessage({ id: 'admin.proposalStepSplitViewWasDisabled' }),
           })
         } else {
           toast({

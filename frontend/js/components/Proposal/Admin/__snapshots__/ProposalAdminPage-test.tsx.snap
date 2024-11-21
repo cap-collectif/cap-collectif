@@ -1326,6 +1326,13 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                                     "name": "url",
                                                     "storageKey": null,
                                                   },
+                                                  Object {
+                                                    "alias": "type",
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "contentType",
+                                                    "storageKey": null,
+                                                  },
                                                 ],
                                                 "storageKey": null,
                                               },
@@ -2402,7 +2409,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "3a3cd8c60a7a74137728e8fdf9290dc5",
+            "cacheID": "55637daddeea3a1d8e2c40f7657f7b83",
             "id": null,
             "metadata": Object {},
             "name": "ProposalAdminPageQuery",
@@ -2606,6 +2613,7 @@ fragment ProposalAdminContentForm_proposal_2uwUKI on Proposal {
               image {
                 id
                 url
+                type: contentType
               }
             }
           }

@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { ListCard } from '@ui/ListCard'
-import { ButtonGroup, ButtonQuickAction, CapUIIcon, Flex } from '@cap-collectif/ui'
+import { ButtonGroup, ButtonQuickAction, CapUIIcon, CapUIRadius, Flex, ListCard } from '@cap-collectif/ui'
 import InfoModal from '@components/Steps/CollectStep/InfoModal'
 import { deleteRequiredInfo } from '@components/Steps/CollectStep/ProposalFormForm.utils'
 import ProposalFormAdminCategories from '@components/Steps/CollectStep/ProposalFormAdminCategories'
@@ -42,7 +41,13 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
 
   return (
     <Flex direction="column">
-      <ListCard.Item backgroundColor="white" mb={4} border="none" className="NeededInfo_title">
+      <ListCard.Item
+        borderRadius={CapUIRadius.Card}
+        backgroundColor="white"
+        mb={4}
+        border="none"
+        className="NeededInfo_title"
+      >
         <Flex direction="column">
           <ListCard.Item.Label>{intl.formatMessage({ id: 'proposal_form.title' })}</ListCard.Item.Label>
         </Flex>
@@ -71,7 +76,13 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
       </ListCard.Item>
 
       {values.usingSummary && (
-        <ListCard.Item backgroundColor="white" mb={4} border="none" className="NeededInfo_summary">
+        <ListCard.Item
+          borderRadius={CapUIRadius.Card}
+          backgroundColor="white"
+          mb={4}
+          border="none"
+          className="NeededInfo_summary"
+        >
           <Flex direction="column">
             <ListCard.Item.Label>{intl.formatMessage({ id: 'proposal_form.summary' })}</ListCard.Item.Label>
           </Flex>
@@ -98,7 +109,13 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
         </ListCard.Item>
       )}
       {values.usingDescription && (
-        <ListCard.Item backgroundColor="white" mb={4} border="none" className="NeededInfo_description">
+        <ListCard.Item
+          borderRadius={CapUIRadius.Card}
+          backgroundColor="white"
+          mb={4}
+          border="none"
+          className="NeededInfo_description"
+        >
           <Flex direction="column">
             <ListCard.Item.Label>{intl.formatMessage({ id: 'proposal_form.description' })}</ListCard.Item.Label>
           </Flex>
@@ -129,7 +146,13 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
         </ListCard.Item>
       )}
       {values.usingThemes && (
-        <ListCard.Item backgroundColor="white" mb={4} border="none" className="NeededInfo_themes">
+        <ListCard.Item
+          borderRadius={CapUIRadius.Card}
+          backgroundColor="white"
+          mb={4}
+          border="none"
+          className="NeededInfo_themes"
+        >
           <Flex direction="column">
             <ListCard.Item.Label>{intl.formatMessage({ id: 'proposal_form.theme' })}</ListCard.Item.Label>
           </Flex>
@@ -159,6 +182,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
       )}
       {values.usingCategories && (
         <ListCard.Item
+          borderRadius={CapUIRadius.Card}
           backgroundColor="white"
           mb={4}
           border="none"
@@ -192,12 +216,23 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
                 />
               </ButtonGroup>
             </Flex>
-            <ProposalFormAdminCategories query={query} control={control} key={proposalFormKey} />
+            <ProposalFormAdminCategories
+              query={query}
+              control={control}
+              key={proposalFormKey}
+              categories={values.categories}
+            />
           </Flex>
         </ListCard.Item>
       )}
       {values.usingAddress && (
-        <ListCard.Item backgroundColor="white" mb={4} border="none" className="NeededInfo_address">
+        <ListCard.Item
+          borderRadius={CapUIRadius.Card}
+          backgroundColor="white"
+          mb={4}
+          border="none"
+          className="NeededInfo_address"
+        >
           <Flex direction="column">
             <ListCard.Item.Label>{intl.formatMessage({ id: 'proposal_form.address' })}</ListCard.Item.Label>
           </Flex>
@@ -235,7 +270,14 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
         </ListCard.Item>
       )}
       {values.usingDistrict && (
-        <ListCard.Item backgroundColor="white" mb={4} border="none" align="flex-start" className="NeededInfo_district">
+        <ListCard.Item
+          borderRadius={CapUIRadius.Card}
+          backgroundColor="white"
+          mb={4}
+          border="none"
+          align="flex-start"
+          className="NeededInfo_district"
+        >
           <Flex direction="column" width="100%">
             <Flex direction="row" justify="space-between" width="100%" mb={5}>
               <ListCard.Item.Label>{intl.formatMessage({ id: 'proposal_form.districts' })}</ListCard.Item.Label>
@@ -264,12 +306,18 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
                 />
               </ButtonGroup>
             </Flex>
-            <ProposalFormAdminDistricts control={control} defaultLocale={defaultLocale} />
+            <ProposalFormAdminDistricts control={control} defaultLocale={defaultLocale} districts={values.districts} />
           </Flex>
         </ListCard.Item>
       )}
       {values.usingIllustration && (
-        <ListCard.Item backgroundColor="white" mb={4} border="none" className="NeededInfo_illustration">
+        <ListCard.Item
+          borderRadius={CapUIRadius.Card}
+          backgroundColor="white"
+          mb={4}
+          border="none"
+          className="NeededInfo_illustration"
+        >
           <Flex direction="column">
             <ListCard.Item.Label>
               {intl.formatMessage({

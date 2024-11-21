@@ -4,7 +4,7 @@ import { SelectStepFormQuery$data } from '@relay/SelectStepFormQuery.graphql'
 import { getDefaultRequirements } from '../../Requirements/Requirements'
 import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import { ProposalStepVoteType } from '@relay/CollectStepFormQuery.graphql'
-import { voteTypeForTabs } from '../ProposalStep.utils'
+import { voteTypeForTabs } from '../utils'
 
 export type TabsVoteType = Omit<ProposalStepVoteType, 'BUDGET'> | 'ADVANCED'
 
