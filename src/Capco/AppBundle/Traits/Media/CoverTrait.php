@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Traits\Media;
 
-use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 
 trait CoverTrait
 {
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     protected ?Media $cover;

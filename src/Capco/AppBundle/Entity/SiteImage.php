@@ -3,7 +3,6 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -28,7 +27,7 @@ class SiteImage
     private $isSocialNetworkThumbnail = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="Media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $media;

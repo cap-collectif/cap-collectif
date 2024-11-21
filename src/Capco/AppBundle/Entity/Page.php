@@ -9,7 +9,6 @@ use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -26,7 +25,7 @@ class Page implements SonataTranslatableInterface, Translatable
     use UuidTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="cover_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $cover;
@@ -47,7 +46,7 @@ class Page implements SonataTranslatableInterface, Translatable
     private $MenuItems;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $media;

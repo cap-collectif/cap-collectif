@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\MediaBundle\Provider\MediaProvider;
-use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\AppBundle\Provider\MediaProvider;
+use Capco\AppBundle\Repository\MediaRepository;
 use InvalidArgumentException;
 use Liip\ImagineBundle\Binary\BinaryInterface;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;

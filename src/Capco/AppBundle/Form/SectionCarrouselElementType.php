@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Section\Section;
 use Capco\AppBundle\Entity\Section\SectionCarrouselElement;
 use Capco\AppBundle\Form\Type\RelayNodeType;
-use Capco\MediaBundle\Entity\Media;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;

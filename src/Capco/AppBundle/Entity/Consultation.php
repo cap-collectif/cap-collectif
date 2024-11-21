@@ -12,7 +12,6 @@ use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -48,7 +47,7 @@ class Consultation implements IndexableInterface, Ownerable, CreatableInterface
     private string $slug;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="illustration_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $illustration = null;

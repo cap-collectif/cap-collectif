@@ -2,8 +2,8 @@
 
 namespace Capco\AdminBundle\Admin;
 
+use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\SiteImageRepository;
-use Capco\MediaBundle\Provider\MediaProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Sonata\AdminBundle\Form\FormMapper;
 use Sonata\AdminBundle\Form\Type\ModelListType;

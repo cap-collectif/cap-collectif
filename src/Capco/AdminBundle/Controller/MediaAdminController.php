@@ -5,9 +5,10 @@ namespace Capco\AdminBundle\Controller;
 use Capco\AppBundle\Controller\Api\MediasController;
 use Capco\AppBundle\Exception\UploadedFileException;
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\MediaBundle\Provider\AllowedExtensions;
+use Capco\AppBundle\Provider\AllowedExtensions;
 use Capco\UserBundle\Entity\User;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
+use Sonata\AdminBundle\Admin\Pool;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -15,7 +16,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\Constraints\File;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 
-class MediaAdminController extends AbstractController
+class MediaAdminController extends CRUDController
 {
     public const INPUT_NAME = 'binaryContent';
 
@@ -24,22 +25,20 @@ class MediaAdminController extends AbstractController
 
     public function __construct(
         MediaManager $mediaManager,
-        ValidatorInterface $validator
+        ValidatorInterface $validator,
+        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        Pool $pool,
     ) {
+        parent::__construct($breadcrumbsBuilder, $pool);
         $this->mediaManager = $mediaManager;
         $this->validator = $validator;
-    }
-
-    public function listAction(): Response
-    {
-        return $this->render('@CapcoMedia/MediaAdmin/list.html.twig');
     }
 
     /**
      * @todo used to override the sonata creation route in sonata admin pages
      * @todo use /api/files instead when possible
      */
-    public function createAction(?Request $request = null)
+    public function createAction(?Request $request = null): Response
     {
         /** * @var User $viewer  */
         $viewer = $this->getUser();

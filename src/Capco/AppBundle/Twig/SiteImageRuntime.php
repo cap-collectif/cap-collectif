@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\Twig;
 
+use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\SiteImage\Resolver;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Provider\MediaProvider;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Twig\Extension\RuntimeExtensionInterface;
 

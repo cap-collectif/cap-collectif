@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Interfaces;
 
-use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Entity\Media;
 
 interface Author
 {

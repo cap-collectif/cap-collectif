@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 namespace Capco\AppBundle\DataFixtures\Processor;
 
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Provider\MediaProvider;
+use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Provider\MediaProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Fidry\AliceDataFixtures\ProcessorInterface;
 use Liip\ImagineBundle\Service\FilterService;
@@ -45,11 +45,11 @@ class MediaProcessor implements ProcessorInterface
 
             $object->setContext('default');
 
-            $object->setBinaryContent(
-                $this->projectDir . '/fixtures/files/' . $object->getBinaryContent()
+            $object->setBinaryContentPath(
+                $this->projectDir . '/fixtures/files/' . $object->getBinaryContentPath()
             );
 
-            $binaryContent = new File($object->getBinaryContent());
+            $binaryContent = new File($object->getBinaryContentPath());
             $object->setContentType($binaryContent->getMimeType());
             $object->setSize($binaryContent->getSize());
             $object->setBinaryContent($binaryContent);

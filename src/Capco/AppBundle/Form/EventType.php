@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\Persister\EventDistrictsPersister;
 use Capco\AppBundle\Form\Subscriber\EventDistrictsFieldSubscriber;
 use Capco\AppBundle\Form\Type\RelayNodeType;
-use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

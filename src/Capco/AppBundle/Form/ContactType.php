@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Form;
 
-use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Entity\Media;
 use Capco\UserBundle\Form\Type\CaptchaType;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;

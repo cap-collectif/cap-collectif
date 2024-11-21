@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
 use Capco\AppBundle\Generator\CSV\IdentificationCodeListCSVGenerator;
+use Capco\AppBundle\Provider\MediaProvider;
 use Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository;
 use Capco\AppBundle\Twig\MediaExtension;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Provider\MediaProvider;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Psr\Log\LoggerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;

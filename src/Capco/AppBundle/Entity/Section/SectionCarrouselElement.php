@@ -2,9 +2,9 @@
 
 namespace Capco\AppBundle\Entity\Section;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Repository\SectionCarrouselElementRepository;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -60,7 +60,7 @@ class SectionCarrouselElement
     private bool $isDisplayed = false;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="image_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $image = null;

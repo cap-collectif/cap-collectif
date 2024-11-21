@@ -3,12 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\ProposalCategoryRepository;
 use Capco\AppBundle\Repository\ProposalDistrictRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
@@ -17,8 +19,6 @@ use Capco\AppBundle\Repository\StatusRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Security\ProposalFormVoter;
 use Capco\AppBundle\Utils\Map;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;

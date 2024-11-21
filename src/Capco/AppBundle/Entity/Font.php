@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -64,7 +63,7 @@ class Font
     private $fullname;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"remove"})
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"remove"})
      * @ORM\JoinColumn(nullable=true)
      */
     private $file;

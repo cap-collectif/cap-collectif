@@ -3,9 +3,9 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\SiteImage\SiteFaviconProcessor;
-use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;

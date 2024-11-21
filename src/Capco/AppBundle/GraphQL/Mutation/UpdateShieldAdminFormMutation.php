@@ -3,15 +3,15 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Twig\ParametersRuntime;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -155,6 +155,7 @@ class UpdateShieldAdminFormMutation implements MutationInterface
             throw new UserError('Media not found!');
         }
         $mediaId = $input->offsetGet('mediaId');
+        /** * @var Media $media | null  */
         $media = $mediaId ? $this->mediaRepository->find($mediaId) : null;
         $siteImage->setMedia($media);
         $siteImage->setIsEnabled(null !== $media);

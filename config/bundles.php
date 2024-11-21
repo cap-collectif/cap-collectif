@@ -50,7 +50,6 @@ return [
     Capco\AppBundle\CapcoAppBundle::class => ['all' => true],
     Capco\AdminBundle\CapcoAdminBundle::class => ['all' => true],
     Capco\UserBundle\CapcoUserBundle::class => ['all' => true],
-    Capco\MediaBundle\CapcoMediaBundle::class => ['all' => true],
     Capco\ClassificationBundle\CapcoClassificationBundle::class => ['all' => true],
     FOS\HttpCacheBundle\FOSHttpCacheBundle::class => ['all' => true],
     // feature activation / deactivation

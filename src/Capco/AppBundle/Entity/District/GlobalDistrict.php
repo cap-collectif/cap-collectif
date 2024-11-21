@@ -3,11 +3,11 @@
 namespace Capco\AppBundle\Entity\District;
 
 use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\Media\CoverTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -37,7 +37,7 @@ class GlobalDistrict extends AbstractDistrict implements SluggableInterface
     private $eventDistrictPositioners;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $media;

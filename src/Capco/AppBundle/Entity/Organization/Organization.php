@@ -6,13 +6,13 @@ use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Model\Translatable;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -32,13 +32,13 @@ class Organization implements Translatable, Author, ProjectOwner, IndexableInter
     use UuidTrait;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="logo_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $logo;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="banner_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private ?Media $banner;

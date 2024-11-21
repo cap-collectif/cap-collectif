@@ -1,6 +1,6 @@
 <?php
 
-namespace Capco\MediaBundle\Provider;
+namespace Capco\AppBundle\Provider;
 
 interface AllowedExtensions
 {

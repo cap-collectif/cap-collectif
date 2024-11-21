@@ -4,7 +4,7 @@ namespace Capco\AdminBundle\Admin;
 
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Theme;
-use Capco\MediaBundle\Provider\MediaProvider;
+use Capco\AppBundle\Provider\MediaProvider;
 use FOS\CKEditorBundle\Form\Type\CKEditorType;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;

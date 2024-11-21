@@ -907,7 +907,7 @@ services:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-invite-users-label }
 
     Capco\AdminBundle\Admin\MediaAdmin:
-        arguments: [~, Capco\MediaBundle\Entity\Media, Capco\AdminBundle\Controller\CRUDController]
+        arguments: [~, Capco\AppBundle\Entity\Media, Capco\AdminBundle\Controller\MediaAdminController]
         tags:
             - {
                   name: sonata.admin,

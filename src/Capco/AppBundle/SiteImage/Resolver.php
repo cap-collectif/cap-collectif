@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\SiteImage;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Repository\SiteImageRepository;
-use Capco\MediaBundle\Entity\Media;
 
 class Resolver
 {

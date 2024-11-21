@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Provider\MediaProvider;
+use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Provider\MediaProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 

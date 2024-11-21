@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Admin;
 
-use Capco\MediaBundle\Provider\MediaProvider;
+use Capco\AppBundle\Provider\MediaProvider;
 use Sonata\AdminBundle\Datagrid\DatagridMapper;
 use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\FormMapper;

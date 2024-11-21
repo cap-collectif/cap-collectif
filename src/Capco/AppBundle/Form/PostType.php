@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\PostAuthor;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\Type\RelayNodeType;
-use Capco\MediaBundle\Entity\Media;
 use Sonata\AdminBundle\Form\Type\CollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;

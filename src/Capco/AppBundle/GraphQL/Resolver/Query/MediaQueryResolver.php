@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\AppBundle\Repository\MediaRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;

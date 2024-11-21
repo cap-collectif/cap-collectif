@@ -3,6 +3,7 @@
 namespace Application\Migrations;
 
 use Capco\AppBundle\Entity\CommentVote;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalCollectVote;
@@ -16,7 +17,6 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Enum\VoteType;
-use Capco\MediaBundle\Entity\Media;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;

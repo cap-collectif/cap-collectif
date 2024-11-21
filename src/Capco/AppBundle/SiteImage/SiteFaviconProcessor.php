@@ -2,12 +2,12 @@
 
 namespace Capco\AppBundle\SiteImage;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\AppBundle\Twig\SiteFaviconRuntime;
 use Capco\AppBundle\Utils\Text;
-use Capco\MediaBundle\Entity\Media;
 use ColorThief\ColorThief;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;

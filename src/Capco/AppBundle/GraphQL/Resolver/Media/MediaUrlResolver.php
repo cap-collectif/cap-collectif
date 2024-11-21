@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Media;
 
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Provider\MediaProvider;
+use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Provider\MediaProvider;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 use Symfony\Component\Routing\RouterInterface;

@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Manager;
 
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Provider\MediaProvider;
+use Capco\AppBundle\Entity\Media;
+use Capco\AppBundle\Provider\MediaProvider;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\File\File;
 use Symfony\Component\HttpFoundation\File\UploadedFile;

@@ -2,15 +2,15 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Mutation\AddProposalsFromCsvMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
+use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use DG\BypassFinals;

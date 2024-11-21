@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Post;
-use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

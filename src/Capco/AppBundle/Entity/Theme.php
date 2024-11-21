@@ -102,7 +102,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     /**
      * @var
      *
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", cascade={"persist"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
     private $media;

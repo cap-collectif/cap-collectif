@@ -3,16 +3,16 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
 use Capco\AppBundle\GraphQL\Mutation\UpdateShieldAdminFormMutation;
 use Capco\AppBundle\GraphQL\Mutation\UpdateSiteParameterMutation;
+use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\Common\Cache\Cache;
 use Doctrine\ORM\Configuration;

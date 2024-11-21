@@ -2,10 +2,10 @@
 
 namespace Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Manager\MediaManager;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Repository\MediaRepository;
+use Capco\AppBundle\Repository\MediaRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;

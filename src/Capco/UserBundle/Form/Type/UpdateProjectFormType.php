@@ -3,13 +3,13 @@
 namespace Capco\UserBundle\Form\Type;
 
 use Capco\AppBundle\Entity\Locale;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectAuthor;
 use Capco\AppBundle\Entity\ProjectType;
 use Capco\AppBundle\Entity\Theme;
 use Capco\AppBundle\Form\Type\PurifiedTextType;
 use Capco\AppBundle\Validator\Constraints\CheckExternalLink;
-use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\DateTimeType;

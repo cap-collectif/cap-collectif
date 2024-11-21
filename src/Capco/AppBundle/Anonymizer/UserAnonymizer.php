@@ -2,13 +2,13 @@
 
 namespace Capco\AppBundle\Anonymizer;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\GraphQL\DataLoader\Proposal\ProposalAuthorDataLoader;
 use Capco\AppBundle\Repository\MailingListRepository;
+use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Repository\UserGroupRepository;
-use Capco\MediaBundle\Entity\Media;
-use Capco\MediaBundle\Repository\MediaRepository;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;

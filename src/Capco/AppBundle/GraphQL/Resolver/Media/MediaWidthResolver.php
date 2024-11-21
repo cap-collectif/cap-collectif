@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Media;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Helper\MediaSizeRetriever;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 

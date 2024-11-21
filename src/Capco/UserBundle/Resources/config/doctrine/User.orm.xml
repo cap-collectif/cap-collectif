@@ -103,7 +103,7 @@
         <field name="newEmailConfirmationToken" column="new_email_confirmation_token" type="string" length="255" nullable="true" />
         <field name="resetPasswordToken" column="reset_password_token" type="string" length="255" nullable="true" />
 
-        <many-to-one field="media" target-entity="Capco\MediaBundle\Entity\Media">
+        <many-to-one field="media" target-entity="Capco\AppBundle\Entity\Media">
             <join-column name="media_id" referenced-column-name="id" nullable="true" on-delete="SET NULL" />
         </many-to-one>
 

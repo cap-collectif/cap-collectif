@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Twig;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\SiteImage\Resolver;
-use Capco\MediaBundle\Entity\Media;
 use Twig\Extension\RuntimeExtensionInterface;
 
 class DefaultAvatarRuntime implements RuntimeExtensionInterface

@@ -2,7 +2,7 @@
 
 namespace Capco\ClassificationBundle\Entity;
 
-use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Entity\Media;
 use Cocur\Slugify\Slugify;
 
 class Collection

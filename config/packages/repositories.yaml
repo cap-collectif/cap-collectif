@@ -399,10 +399,10 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:MapToken']
-    Capco\MediaBundle\Repository\MediaRepository:
+    Capco\AppBundle\Repository\MediaRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: ['CapcoMediaBundle:Media']
+        arguments: ['CapcoAppBundle:Media']
 
     Capco\AppBundle\Repository\AbstractSSOConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]

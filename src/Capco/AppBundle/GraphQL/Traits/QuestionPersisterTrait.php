@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Traits;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\QuestionChoice;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
@@ -10,7 +11,6 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\Repository\MultipleChoiceQuestionRepository;
 use Capco\AppBundle\Validator\Constraints\CheckColor;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;

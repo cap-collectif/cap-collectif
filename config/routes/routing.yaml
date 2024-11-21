@@ -84,7 +84,7 @@ capco_app:
     prefix: /
 
 admin_capco_media_media_create:
-    path: /admin/capco/media/media/create
+    path: /admin/capco/app/media/create
     controller: Capco\AdminBundle\Controller\MediaAdminController::createAction
     options: { i18n: false }
 

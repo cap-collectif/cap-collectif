@@ -3,10 +3,10 @@
 namespace Capco\AppBundle\Form;
 
 use Capco\AppBundle\Entity\CategoryImage;
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\ProposalCategory;
 use Capco\AppBundle\Validator\Constraints\ValidProposalCategoryColor;
 use Capco\AppBundle\Validator\Constraints\ValidProposalCategoryIcon;
-use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;

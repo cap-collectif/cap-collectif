@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Responses;
 
-use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Entity\Media;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -13,7 +13,7 @@ class MediaResponse extends AbstractResponse
 {
     /**
      * @ORM\ManyToMany(
-     *  targetEntity="Capco\MediaBundle\Entity\Media",
+     *  targetEntity="Capco\AppBundle\Entity\Media",
      *  orphanRemoval=false
      * )
      * @ORM\JoinTable(

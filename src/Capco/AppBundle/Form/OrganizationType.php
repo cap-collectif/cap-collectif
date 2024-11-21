@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Form;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Organization\Organization;
-use Capco\MediaBundle\Entity\Media;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;

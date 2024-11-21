@@ -1,8 +1,8 @@
 <?php
 
-namespace Capco\MediaBundle\Provider;
+namespace Capco\AppBundle\Provider;
 
-use Capco\MediaBundle\Entity\Media;
+use Capco\AppBundle\Entity\Media;
 use Gaufrette\Filesystem;
 use Liip\ImagineBundle\Imagine\Cache\CacheManager;
 use Symfony\Component\HttpFoundation\File\File;
@@ -18,7 +18,7 @@ class MediaProvider
         $this->cacheManager = $cacheManager;
     }
 
-    public function generatePublicUrl($media, $format): string
+    public function generatePublicUrl(Media $media, string $format): string
     {
         $path = $this->prefixSlash($this->getImagePath($media));
 
@@ -29,7 +29,7 @@ class MediaProvider
         return $path;
     }
 
-    public function getFormatName($media, $format): string
+    public function getFormatName(Media $media, string $format): string
     {
         if ('admin' === $format || 'reference' === $format || 'default' === $format) {
             return $format;
@@ -58,17 +58,7 @@ class MediaProvider
         return $this->generateId($media) . '.' . $media->getBinaryContent()->guessExtension();
     }
 
-    /**
-     * Stubs for Sonata, to remove when not needed anymore.
-     *
-     * @param mixed $name
-     * @param mixed $format
-     */
-    public function addFormat($name, $format)
-    {
-    }
-
-    protected function setFileContents(Media $media, ?string $contents = null)
+    protected function setFileContents(Media $media, ?string $contents = null): void
     {
         $file = $this->getOrGenerateReferenceFile($media);
 

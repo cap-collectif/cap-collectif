@@ -409,7 +409,7 @@ services:
         public: true
         autowire: true
 
-    Capco\MediaBundle\Provider\MediaProvider:
+    Capco\AppBundle\Provider\MediaProvider:
         public: true
         autowire: true
 

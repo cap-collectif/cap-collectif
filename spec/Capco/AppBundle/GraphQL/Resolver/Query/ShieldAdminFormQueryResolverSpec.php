@@ -2,6 +2,7 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Resolver\Query;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
@@ -9,7 +10,6 @@ use Capco\AppBundle\GraphQL\Resolver\Query\ShieldAdminFormQueryResolver;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\MediaBundle\Entity\Media;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;

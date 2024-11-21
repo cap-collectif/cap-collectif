@@ -106,7 +106,7 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     private $category;
 
     /**
-     * @ORM\OneToOne(targetEntity="Capco\MediaBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist", "remove"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true)
      * @Assert\NotBlank(groups={"file"})
      * @Assert\Valid()

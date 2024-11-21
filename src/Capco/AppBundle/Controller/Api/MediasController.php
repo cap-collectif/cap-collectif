@@ -3,8 +3,8 @@
 namespace Capco\AppBundle\Controller\Api;
 
 use Capco\AppBundle\Manager\MediaManager;
+use Capco\AppBundle\Provider\AllowedExtensions;
 use Capco\AppBundle\Twig\MediaExtension;
-use Capco\MediaBundle\Provider\AllowedExtensions;
 use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
