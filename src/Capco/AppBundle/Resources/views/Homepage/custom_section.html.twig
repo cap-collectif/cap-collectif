@@ -1,4 +1,17 @@
+{% set link = capco_site_color_value('color.link.default') %}
+{% set linkHover = capco_site_color_value('color.link.hover') %}
+
 <section class="section--custom home-page-section old-editor">
+ <style>
+        .old-editor a,
+        .old-editor .btn.btn-link {
+            color: {{ link | raw }};
+        }
+        .old-editor a:hover,
+        .old-editor .btn.btn-link:hover {
+            color: {{ linkHover | raw }};
+        }
+    </style> 
     <div class="container">
         {% if null != section.title %}
             <h2 class="h2">{{ section.title }}</h2>

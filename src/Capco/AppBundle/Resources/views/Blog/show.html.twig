@@ -1,6 +1,7 @@
 {% extends '@CapcoApp/Blog/index.html.twig' %}
 
 {% set link = capco_site_color_value('color.link.default') %}
+{% set linkHover = capco_site_color_value('color.link.hover') %}
 
 {% block canonical_link %}{{ url('app_blog_show', {'slug': post.translate.slug}) }}{% endblock %}
 
@@ -23,9 +24,13 @@
 
 {% block body %}
     <style>
-        .ql-editor a:not(footer .ql-editor a),
-        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link) {
+        .ql-editor a:not(footer .ql-editor a, .btn-primary, .btn-secondary),
+        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link):not(.btn.btn-primary) {
             color: {{ link | raw }};
+        }
+        .ql-editor a:not(footer .ql-editor a, .btn-primary, .btn-secondary):hover,
+        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link):not(.btn.btn-primary):hover {
+            color: {{ linkHover | raw }};
         }
     </style> 
     <section class="section--custom">
