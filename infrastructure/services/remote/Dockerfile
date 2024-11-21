@@ -294,10 +294,11 @@ ENV SYMFONY_DEBUG false
 
 # Maybe chown before copy will be faster
 RUN mkdir -m 755 -p translations var public/bundles src/Capco/AppBundle/GraphQL/__generated__ \
+    && chown -R capco:capco bin translations src public templates config app fixtures admin-next \
     && mkdir -p var/cache/prod \
     && mkdir -p var/cache/prod/translations \
     && chmod -R 777 var \
-    && chown -R capco:capco ./
+    && chown -R capco:capco var
 
 # Admin-next
 ENV ADMIN_NEXT_PORT 3000
@@ -390,16 +391,7 @@ ENV SUPERVISORD_SWARROT_ES_INDEXATION_NUMPROCS=$SUPERVISORD_SWARROT_ES_INDEXATIO
 ENV SLACK_WEBHOOK_QUEUES_MONITOR=$SLACK_WEBHOOK_QUEUES_MONITOR
 
 # Build autoloader and initialize Symfony
-RUN rm -rf src/Capco/AppBundle/GraphQL/__generated__/* \
-    && rm -rf var/cache/* \
-    && gosu capco php -d memory_limit=2048M bin/console cache:clear \
-    && gosu capco php -d memory_limit=2048M bin/console --env=dev cache:clear \
-    && gosu capco php -d memory_limit=2048M bin/console --env=test cache:clear \
-    && gosu capco php -d memory_limit=2048M bin/console cache:pool:clear cache.global_clearer cache.app cache.system cache.validator cache.serializer cache.annotations \
-    && gosu capco php -d memory_limit=2048M bin/console --env=dev cache:pool:clear cache.app cache.system cache.validator cache.serializer cache.annotations \
-    && gosu capco php -d memory_limit=2048M bin/console --env=test cache:pool:clear cache.app cache.system cache.validator cache.serializer cache.annotations \
-    && rm -rf var/cache/* \
-    && gosu capco php -d memory_limit=2048M bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
+RUN gosu capco php bin/console graphql:compile --env=${SYMFONY_ENVIRONMENT} \
     && gosu capco composer dump-autoload --no-dev --optimize --apcu \
     && gosu capco php -d memory_limit=-1 bin/console cache:warmup --env=${SYMFONY_ENVIRONMENT} --no-interaction \
     && gosu capco php bin/console assets:install public --symlink --env=${SYMFONY_ENVIRONMENT} --no-interaction
