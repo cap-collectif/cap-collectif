@@ -20,9 +20,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class DecisionSubscriber implements EventSubscriberInterface
 {
-    private SelectionRepository $selectionRepository;
-    private EntityManagerInterface $entityManager;
-    private Indexer $indexer;
+    private readonly SelectionRepository $selectionRepository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly Indexer $indexer;
 
     public function __construct(
         SelectionRepository $selectionRepository,

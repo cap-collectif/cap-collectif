@@ -51,7 +51,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     use ResolverTrait;
 
     protected AuthorizationCheckerInterface $authorizationChecker;
-    private ProposalLikersDataLoader $proposalLikersDataLoader;
+    private readonly ProposalLikersDataLoader $proposalLikersDataLoader;
 
     public function __construct(
         LoggerInterface $logger,

@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class SenderEmailDomainResolver implements QueryInterface
 {
-    private SenderEmailDomainsManager $manager;
+    private readonly SenderEmailDomainsManager $manager;
 
     public function __construct(SenderEmailDomainsManager $manager)
     {

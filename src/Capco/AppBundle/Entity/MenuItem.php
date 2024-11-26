@@ -22,8 +22,8 @@ class MenuItem implements Translatable, SonataTranslatableInterface
     use SonataTranslatableTrait;
     use TranslatableTrait;
 
-    public const TYPE_HEADER = 1;
-    public const TYPE_FOOTER = 2;
+    final public const TYPE_HEADER = 1;
+    final public const TYPE_FOOTER = 2;
 
     public static $menuLabels = [
         self::TYPE_HEADER => 'menu.type.header',

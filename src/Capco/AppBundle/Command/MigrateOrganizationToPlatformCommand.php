@@ -16,14 +16,14 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateOrganizationToPlatformCommand extends Command
 {
-    private EntityManagerInterface $em;
-    private ProjectRepository $projectRepository;
-    private QuestionnaireRepository $questionnaireRepository;
-    private ProposalFormRepository $proposalFormRepository;
-    private PostRepository $postRepository;
-    private EmailingCampaignRepository $emailingCampaignRepository;
-    private MailingListRepository $mailingListRepository;
-    private UserRepository $userRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly ProjectRepository $projectRepository;
+    private readonly QuestionnaireRepository $questionnaireRepository;
+    private readonly ProposalFormRepository $proposalFormRepository;
+    private readonly PostRepository $postRepository;
+    private readonly EmailingCampaignRepository $emailingCampaignRepository;
+    private readonly MailingListRepository $mailingListRepository;
+    private readonly UserRepository $userRepository;
 
     public function __construct(
         EntityManagerInterface $em,

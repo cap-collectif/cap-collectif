@@ -45,25 +45,25 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ProfileController extends Controller
 {
-    private EventDispatcherInterface $eventDispatcher;
-    private UserRepository $userRepository;
-    private ReplyRepository $replyRepository;
-    private SourceRepository $sourceRepository;
-    private ArgumentRepository $argumentRepository;
-    private EventRepository $eventRepository;
-    private ProjectRepository $projectRepository;
-    private CommentRepository $commentRepository;
-    private OpinionVersionRepository $opinionVersionRepository;
-    private UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository;
-    private UserArchiveRepository $userArchiveRepository;
-    private string $fireWall;
-    private string $projectDir;
-    private TranslatorInterface $translator;
-    private EntityManagerInterface $em;
-    private DeleteAccountMutation $deleteAccountMutation;
-    private FranceConnectLogoutHandler $franceConnectLogoutHandler;
-    private RouterInterface $router;
-    private OrganizationRepository $organizationRepository;
+    private readonly EventDispatcherInterface $eventDispatcher;
+    private readonly UserRepository $userRepository;
+    private readonly ReplyRepository $replyRepository;
+    private readonly SourceRepository $sourceRepository;
+    private readonly ArgumentRepository $argumentRepository;
+    private readonly EventRepository $eventRepository;
+    private readonly ProjectRepository $projectRepository;
+    private readonly CommentRepository $commentRepository;
+    private readonly OpinionVersionRepository $opinionVersionRepository;
+    private readonly UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository;
+    private readonly UserArchiveRepository $userArchiveRepository;
+    private readonly string $fireWall;
+    private readonly string $projectDir;
+    private readonly TranslatorInterface $translator;
+    private readonly EntityManagerInterface $em;
+    private readonly DeleteAccountMutation $deleteAccountMutation;
+    private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler;
+    private readonly RouterInterface $router;
+    private readonly OrganizationRepository $organizationRepository;
 
     public function __construct(
         EventDispatcherInterface $eventDispatcher,

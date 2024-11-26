@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class SendConfirmationEmailDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutation implements MutationInterface
 {
-    public const ALREADY_PUBLISHED_ARGUMENT = 'ALREADY_PUBLISHED_ARGUMENT';
+    final public const ALREADY_PUBLISHED_ARGUMENT = 'ALREADY_PUBLISHED_ARGUMENT';
 
     public function __invoke(Argument $input): array
     {

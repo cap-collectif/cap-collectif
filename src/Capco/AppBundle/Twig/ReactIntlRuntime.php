@@ -8,8 +8,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ReactIntlRuntime implements RuntimeExtensionInterface
 {
-    private SiteParameterResolver $resolver;
-    private RequestStack $requestStack;
+    private readonly SiteParameterResolver $resolver;
+    private readonly RequestStack $requestStack;
 
     public function __construct(SiteParameterResolver $resolver, RequestStack $requestStack)
     {
@@ -30,6 +30,6 @@ class ReactIntlRuntime implements RuntimeExtensionInterface
         // so we picked the first part
         $timeZone = $this->resolver->getValue('global.timezone');
 
-        return explode(' ', $timeZone)[0];
+        return explode(' ', (string) $timeZone)[0];
     }
 }

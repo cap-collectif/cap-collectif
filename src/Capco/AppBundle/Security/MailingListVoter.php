@@ -9,9 +9,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class MailingListVoter extends AbstractOwnerableVoter
 {
-    public const CREATE = 'create';
-    public const VIEW = 'view';
-    public const DELETE = 'delete';
+    final public const CREATE = 'create';
+    final public const VIEW = 'view';
+    final public const DELETE = 'delete';
 
     protected function supports($attribute, $subject): bool
     {

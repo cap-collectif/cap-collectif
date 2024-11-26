@@ -19,13 +19,13 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private UrlGeneratorInterface $router;
-    private ObjectNormalizer $normalizer;
-    private Manager $toggleManager;
-    private TokenStorageInterface $tokenStorage;
-    private AbstractVoteRepository $voteRepository;
-    private VoteSearch $voteSearch;
-    private ArgumentRepository $argumentRepository;
+    private readonly UrlGeneratorInterface $router;
+    private readonly ObjectNormalizer $normalizer;
+    private readonly Manager $toggleManager;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly AbstractVoteRepository $voteRepository;
+    private readonly VoteSearch $voteSearch;
+    private readonly ArgumentRepository $argumentRepository;
 
     public function __construct(
         UrlGeneratorInterface $router,

@@ -8,7 +8,7 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserStepReminderProcessor implements ProcessorInterface
 {
-    private UserNotifier $notifier;
+    private readonly UserNotifier $notifier;
 
     public function __construct(UserNotifier $notifier)
     {

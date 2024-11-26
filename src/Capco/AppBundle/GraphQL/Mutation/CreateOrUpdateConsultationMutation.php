@@ -26,13 +26,13 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateOrUpdateConsultationMutation implements MutationInterface
 {
     use MutationTrait;
-    private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private OpinionTypeRepository $opinionTypeRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private SettableOwnerResolver $settableOwnerResolver;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly OpinionTypeRepository $opinionTypeRepository;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         FormFactoryInterface $formFactory,

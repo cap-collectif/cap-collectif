@@ -19,8 +19,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class UserController extends CRUDController
 {
-    private CronTimeInterval $cronTimeInterval;
-    private SessionInterface $session;
+    private readonly CronTimeInterval $cronTimeInterval;
+    private readonly SessionInterface $session;
 
     public function __construct(
         BreadcrumbsBuilderInterface $breadcrumbsBuilder,

@@ -10,11 +10,11 @@ use Capco\AppBundle\Exception\ViewConfigurationException;
 
 class ViewConfiguration implements EnumType
 {
-    public const GRID = 'GRID';
-    public const LIST = 'LIST';
-    public const MAP = 'MAP';
+    final public const GRID = 'GRID';
+    final public const LIST = 'LIST';
+    final public const MAP = 'MAP';
 
-    public const ALL = [self::GRID, self::LIST, self::MAP];
+    final public const ALL = [self::GRID, self::LIST, self::MAP];
 
     public static function checkProposalForm(ProposalForm $proposalForm): void
     {

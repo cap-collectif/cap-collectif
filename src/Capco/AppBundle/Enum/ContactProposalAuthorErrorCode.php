@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Enum;
 
 class ContactProposalAuthorErrorCode implements EnumType
 {
-    public const NON_EXISTING_PROPOSAL = 'NON_EXISTING_PROPOSAL';
-    public const NO_CONTACT_PROPOSAL = 'NO_CONTACT_PROPOSAL';
-    public const INVALID_EMAIL_AUTHOR = 'INVALID_EMAIL_AUTHOR';
-    public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
-    public const SENDING_FAILED = 'SENDING_FAILED';
+    final public const NON_EXISTING_PROPOSAL = 'NON_EXISTING_PROPOSAL';
+    final public const NO_CONTACT_PROPOSAL = 'NO_CONTACT_PROPOSAL';
+    final public const INVALID_EMAIL_AUTHOR = 'INVALID_EMAIL_AUTHOR';
+    final public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
+    final public const SENDING_FAILED = 'SENDING_FAILED';
 
     public static function isValid($value): bool
     {

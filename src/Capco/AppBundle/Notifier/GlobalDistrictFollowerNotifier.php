@@ -17,9 +17,9 @@ use Symfony\Component\Routing\RouterInterface;
 class GlobalDistrictFollowerNotifier extends BaseNotifier
 {
     protected UserUrlResolver $userUrlResolver;
-    private UrlResolver $urlResolver;
-    private MediaUrlResolver $mediaUrlResolver;
-    private SiteImageRuntime $siteImageRuntime;
+    private readonly UrlResolver $urlResolver;
+    private readonly MediaUrlResolver $mediaUrlResolver;
+    private readonly SiteImageRuntime $siteImageRuntime;
 
     public function __construct(
         MailerService $mailer,

@@ -18,12 +18,12 @@ class KickFromOrganizationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
-    public const USER_NOT_MEMBER = 'USER_NOT_MEMBER';
+    final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
+    final public const USER_NOT_MEMBER = 'USER_NOT_MEMBER';
 
-    private GlobalIdResolver $resolver;
-    private EntityManagerInterface $manager;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly GlobalIdResolver $resolver;
+    private readonly EntityManagerInterface $manager;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         GlobalIdResolver $resolver,

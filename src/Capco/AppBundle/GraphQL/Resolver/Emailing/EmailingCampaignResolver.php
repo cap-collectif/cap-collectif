@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class EmailingCampaignResolver implements QueryInterface
 {
-    private EmailingCampaignRepository $repository;
+    private readonly EmailingCampaignRepository $repository;
 
     public function __construct(EmailingCampaignRepository $repository)
     {

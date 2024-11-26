@@ -18,13 +18,13 @@ class OpinionType
     use DescriptionTrait;
     use UuidTrait;
 
-    public const VOTE_WIDGET_DISABLED = 0;
-    public const VOTE_WIDGET_OK = 1;
-    public const VOTE_WIDGET_BOTH = 2;
+    final public const VOTE_WIDGET_DISABLED = 0;
+    final public const VOTE_WIDGET_OK = 1;
+    final public const VOTE_WIDGET_BOTH = 2;
 
-    public const COMMENT_SYSTEM_DISABLED = 0;
-    public const COMMENT_SYSTEM_OK = 1;
-    public const COMMENT_SYSTEM_BOTH = 2;
+    final public const COMMENT_SYSTEM_DISABLED = 0;
+    final public const COMMENT_SYSTEM_OK = 1;
+    final public const COMMENT_SYSTEM_BOTH = 2;
 
     public static $colorsType = [
         'opinion_type.colors.white' => 'white',

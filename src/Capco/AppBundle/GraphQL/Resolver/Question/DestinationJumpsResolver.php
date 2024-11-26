@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class DestinationJumpsResolver implements QueryInterface
 {
-    private LogicJumpRepository $logicJumpRepository;
+    private readonly LogicJumpRepository $logicJumpRepository;
 
     public function __construct(LogicJumpRepository $logicJumpRepository)
     {

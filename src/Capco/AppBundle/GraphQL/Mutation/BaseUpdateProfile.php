@@ -14,9 +14,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 
 abstract class BaseUpdateProfile implements MutationInterface
 {
-    public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
-    public const USER_ID = 'userId';
-    public const USER = 'user';
+    final public const ROLE_SUPER_ADMIN = 'ROLE_SUPER_ADMIN';
+    final public const USER_ID = 'userId';
+    final public const USER = 'user';
     protected UserRepository $userRepository;
     protected EntityManagerInterface $em;
     protected FormFactoryInterface $formFactory;

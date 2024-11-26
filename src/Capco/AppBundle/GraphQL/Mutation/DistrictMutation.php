@@ -14,9 +14,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class DistrictMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $entityManager;
-    private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $entityManager,

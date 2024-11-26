@@ -20,11 +20,11 @@ use Overblog\GraphQLBundle\Definition\Argument;
 
 class ProposalVoteAccountHandler
 {
-    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver;
-    private EntityManagerInterface $em;
-    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         ProposalCollectVoteRepository $proposalCollectVoteRepository,

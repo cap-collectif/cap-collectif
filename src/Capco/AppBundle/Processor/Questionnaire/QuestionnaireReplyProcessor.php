@@ -11,9 +11,9 @@ use Swarrot\Processor\ProcessorInterface;
 
 class QuestionnaireReplyProcessor implements ProcessorInterface
 {
-    private ReplyRepository $replyRepository;
-    private QuestionnaireReplyNotifier $notifier;
-    private ReplyAnonymousRepository $replyAnonymousRepository;
+    private readonly ReplyRepository $replyRepository;
+    private readonly QuestionnaireReplyNotifier $notifier;
+    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
 
     public function __construct(
         ReplyRepository $replyRepository,

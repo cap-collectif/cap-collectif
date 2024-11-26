@@ -13,9 +13,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
 {
-    private Manager $toggleManager;
-    private QuestionnaireRepository $questionnaireRepository;
-    private QuestionnaireParticipantExporter $exporter;
+    private readonly Manager $toggleManager;
+    private readonly QuestionnaireRepository $questionnaireRepository;
+    private readonly QuestionnaireParticipantExporter $exporter;
 
     public function __construct(
         ExportUtils $exportUtils,

@@ -8,7 +8,7 @@ use Elastica\ResultSet;
 
 class AnalyticsMostUsedProposalCategories
 {
-    private ProposalCategoryRepository $repository;
+    private readonly ProposalCategoryRepository $repository;
     private iterable $values = [];
     private int $totalCount = 0;
 

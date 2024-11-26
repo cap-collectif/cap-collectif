@@ -83,7 +83,7 @@ final class Version20210610142134 extends AbstractMigration implements Container
             ['keyname' => 'admin.mail.notifications.send_address']
         );
 
-        return explode('@', $senderEmail)[1];
+        return explode('@', (string) $senderEmail)[1];
     }
 
     private function getCurrentMailer(): string

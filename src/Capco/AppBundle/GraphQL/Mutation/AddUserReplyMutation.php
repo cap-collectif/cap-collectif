@@ -29,18 +29,18 @@ class AddUserReplyMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
+    final public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $globalIdResolver;
-    private ResponsesFormatter $responsesFormatter;
-    private LoggerInterface $logger;
-    private ReplyRepository $replyRepo;
-    private Publisher $publisher;
-    private RequestGuesser $requestGuesser;
-    private StepRequirementsResolver $stepRequirementsResolver;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ResponsesFormatter $responsesFormatter;
+    private readonly LoggerInterface $logger;
+    private readonly ReplyRepository $replyRepo;
+    private readonly Publisher $publisher;
+    private readonly RequestGuesser $requestGuesser;
+    private readonly StepRequirementsResolver $stepRequirementsResolver;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

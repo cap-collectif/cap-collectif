@@ -15,7 +15,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MediatorNotifier extends BaseNotifier
 {
-    private StepUrlResolver $stepUrlResolver;
+    private readonly StepUrlResolver $stepUrlResolver;
 
     public function __construct(
         MailerService $mailer,

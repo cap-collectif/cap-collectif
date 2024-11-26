@@ -20,7 +20,7 @@ class UpdateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
         try {
             $debateArgument = $this->getArgument($input, $viewer);
             $this->checkUpdateRightsOnArgument($debateArgument);
-            $debateArgument->setBody(strip_tags($input->offsetGet('body')));
+            $debateArgument->setBody(strip_tags((string) $input->offsetGet('body')));
 
             $this->em->flush();
             $this->indexer->index(DebateArgument::class, $debateArgument->getId());

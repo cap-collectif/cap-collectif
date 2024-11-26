@@ -16,9 +16,9 @@ class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInt
 {
     use SerializerAwareTrait;
     private $router;
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
     private $votesCountDataLoader;
-    private UserSearch $userSearch;
+    private readonly UserSearch $userSearch;
 
     public function __construct(
         UrlGeneratorInterface $router,

@@ -10,7 +10,7 @@ use Sentry\State\HubInterface;
 class SentryHandler extends MonologSentryHandler
 {
     protected HubInterface $hub;
-    private ?Manager $toggleManager;
+    private readonly ?Manager $toggleManager;
 
     /**
      * {@inheritdoc}

@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Command\Utils;
 
 class BooleanCell
 {
-    public const YES = 'Yes';
-    public const NO = 'No';
+    final public const YES = 'Yes';
+    final public const NO = 'No';
 
     public static function toString(bool $value): string
     {

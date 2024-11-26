@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class SendInBlueProcessor implements ProcessorInterface
 {
-    private SendInBlueManager $sendInBlueManager;
-    private Manager $toggle;
+    private readonly SendInBlueManager $sendInBlueManager;
+    private readonly Manager $toggle;
 
     public function __construct(SendInBlueManager $sendInBlueManager, Manager $toggle)
     {

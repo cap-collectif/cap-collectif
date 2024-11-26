@@ -59,7 +59,7 @@ class CreateDebateArgumentMutation extends AbstractDebateArgumentMutation implem
         DebateArgumentInterface $debateArgument,
         Arg $input
     ): DebateArgumentInterface {
-        $debateArgument->setBody(strip_tags($input->offsetGet('body')));
+        $debateArgument->setBody(strip_tags((string) $input->offsetGet('body')));
         $debateArgument->setType($input->offsetGet('type'));
 
         return $debateArgument;

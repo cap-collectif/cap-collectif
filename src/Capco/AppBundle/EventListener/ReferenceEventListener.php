@@ -9,7 +9,7 @@ use Doctrine\ORM\Event\PreFlushEventArgs;
 
 class ReferenceEventListener
 {
-    public const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
+    final public const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ReferenceTrait';
 
     private $lastProposals = [];
     private $lastProposalFormsReferences = [];

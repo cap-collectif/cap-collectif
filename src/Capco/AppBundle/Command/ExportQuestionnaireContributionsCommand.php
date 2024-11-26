@@ -23,17 +23,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ExportQuestionnaireContributionsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-    public const CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS = 'capco:export:questionnaire:contributions';
+    final public const CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS = 'capco:export:questionnaire:contributions';
     private const SERIALIZER_FORMAT = 'csv';
     protected array $customFields;
     protected TranslatorInterface $translator;
     protected string $projectRootDir;
-    private string $exportDirectory;
-    private Manager $toggleManager;
-    private ProjectDownloadResolver $projectDownloadResolver;
-    private QuestionnaireRepository $questionnaireRepository;
-    private Serializer $serializer;
-    private LoggerInterface $logger;
+    private readonly string $exportDirectory;
+    private readonly Manager $toggleManager;
+    private readonly ProjectDownloadResolver $projectDownloadResolver;
+    private readonly QuestionnaireRepository $questionnaireRepository;
+    private readonly Serializer $serializer;
+    private readonly LoggerInterface $logger;
     private string $delimiter;
 
     public function __construct(

@@ -17,15 +17,15 @@ class Requirement
     use PositionableTrait;
     use UuidTrait;
 
-    public const CHECKBOX = 'CHECKBOX';
-    public const FIRSTNAME = 'FIRSTNAME';
-    public const LASTNAME = 'LASTNAME';
-    public const PHONE = 'PHONE';
-    public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
-    public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
-    public const IDENTIFICATION_CODE = 'IDENTIFICATION_CODE';
-    public const PHONE_VERIFIED = 'PHONE_VERIFIED';
-    public const FRANCE_CONNECT = 'FRANCE_CONNECT';
+    final public const CHECKBOX = 'CHECKBOX';
+    final public const FIRSTNAME = 'FIRSTNAME';
+    final public const LASTNAME = 'LASTNAME';
+    final public const PHONE = 'PHONE';
+    final public const DATE_OF_BIRTH = 'DATE_OF_BIRTH';
+    final public const POSTAL_ADDRESS = 'POSTAL_ADDRESS';
+    final public const IDENTIFICATION_CODE = 'IDENTIFICATION_CODE';
+    final public const PHONE_VERIFIED = 'PHONE_VERIFIED';
+    final public const FRANCE_CONNECT = 'FRANCE_CONNECT';
 
     public static array $types = [
         self::CHECKBOX,

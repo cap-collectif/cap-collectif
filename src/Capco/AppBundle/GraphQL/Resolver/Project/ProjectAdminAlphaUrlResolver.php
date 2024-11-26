@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouterInterface;
 class ProjectAdminAlphaUrlResolver implements QueryInterface
 {
     protected RouterInterface $router;
-    private Manager $manager;
+    private readonly Manager $manager;
 
     public function __construct(RouterInterface $router, Manager $manager)
     {

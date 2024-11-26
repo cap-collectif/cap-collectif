@@ -7,9 +7,9 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 class ProposalDeleteMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'contribution.deleted.by.author';
-    public const TEMPLATE = '@CapcoMail/Proposal/notifyAnalystOnUpdate.html.twig';
-    public const FOOTER = '';
+    final public const SUBJECT = 'contribution.deleted.by.author';
+    final public const TEMPLATE = '@CapcoMail/Proposal/notifyAnalystOnUpdate.html.twig';
+    final public const FOOTER = '';
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {

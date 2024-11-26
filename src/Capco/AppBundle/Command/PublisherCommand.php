@@ -12,8 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PublisherCommand extends Command
 {
-    private OfficialResponseRepository $officialResponseRepository;
-    private EntityManagerInterface $entityManager;
+    private readonly OfficialResponseRepository $officialResponseRepository;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         OfficialResponseRepository $officialResponseRepository,

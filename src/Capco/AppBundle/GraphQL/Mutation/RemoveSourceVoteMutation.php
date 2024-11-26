@@ -19,12 +19,12 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class RemoveSourceVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private SourceVoteRepository $sourceVoteRepo;
-    private SourceRepository $sourceRepo;
-    private RedisStorageHelper $redisStorageHelper;
-    private StepRequirementsResolver $stepRequirementsResolver;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly SourceVoteRepository $sourceVoteRepo;
+    private readonly SourceRepository $sourceRepo;
+    private readonly RedisStorageHelper $redisStorageHelper;
+    private readonly StepRequirementsResolver $stepRequirementsResolver;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

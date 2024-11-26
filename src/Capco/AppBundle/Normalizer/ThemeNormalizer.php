@@ -15,7 +15,7 @@ class ThemeNormalizer implements NormalizerInterface, SerializerAwareInterface, 
 {
     use SerializerAwareTrait;
     private $router;
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
     private $mediaExtension;
 
     public function __construct(

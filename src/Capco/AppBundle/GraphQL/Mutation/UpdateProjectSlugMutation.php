@@ -17,12 +17,12 @@ class UpdateProjectSlugMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
+    final public const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private SluggerInterface $slugger;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly SluggerInterface $slugger;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

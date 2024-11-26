@@ -12,15 +12,15 @@ use Twilio\Rest\Client;
 class TwilioClient
 {
     // see https://www.twilio.com/docs/api/errors
-    public const ERRORS = [
+    final public const ERRORS = [
         'INVALID_PARAMETER' => 60200,
         'NOT_FOUND' => 20404,
         'LANDLINE_NUMBER_NOT_SUPPORTED' => 60205,
     ];
 
-    private Client $client;
-    private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
-    private HttpClientInterface $httpClient;
+    private readonly Client $client;
+    private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
+    private readonly HttpClientInterface $httpClient;
 
     public function __construct(
         ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,

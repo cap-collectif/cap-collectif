@@ -13,9 +13,9 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class ToggleSubscriber implements EventSubscriberInterface
 {
-    private EntityManagerInterface $em;
-    private AbstractSSOConfigurationRepository $SSOConfigurationRepository;
-    private SectionRepository $sectionRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly AbstractSSOConfigurationRepository $SSOConfigurationRepository;
+    private readonly SectionRepository $sectionRepository;
 
     public function __construct(EntityManagerInterface $em, AbstractSSOConfigurationRepository $SSOConfigurationRepository, SectionRepository $sectionRepository)
     {

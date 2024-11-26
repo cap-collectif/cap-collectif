@@ -17,7 +17,7 @@ class DuplicateProposalFormMutation extends AbstractProposalFormMutation
 {
     use MutationTrait;
 
-    private TranslatorInterface $translator;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(
         EntityManagerInterface $entityManager,

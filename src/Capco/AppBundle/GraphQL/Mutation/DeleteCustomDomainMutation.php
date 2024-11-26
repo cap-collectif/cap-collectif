@@ -14,11 +14,11 @@ class DeleteCustomDomainMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
+    final public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
 
-    private EntityManagerInterface $em;
-    private SiteSettingsRepository $siteSettingsRepository;
-    private DeployerClient $deployerClient;
+    private readonly EntityManagerInterface $em;
+    private readonly SiteSettingsRepository $siteSettingsRepository;
+    private readonly DeployerClient $deployerClient;
 
     public function __construct(
         EntityManagerInterface $em,

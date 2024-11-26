@@ -19,7 +19,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class EventSearch extends Search
 {
-    public const SEARCH_FIELDS = [
+    final public const SEARCH_FIELDS = [
         'title',
         'title.std',
         'reference',
@@ -34,8 +34,8 @@ class EventSearch extends Search
         'fullAddress.std',
     ];
 
-    private EventRepository $eventRepository;
-    private EntityManagerInterface $em;
+    private readonly EventRepository $eventRepository;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         Index $index,

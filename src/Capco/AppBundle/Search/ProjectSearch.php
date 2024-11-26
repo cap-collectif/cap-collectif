@@ -14,7 +14,7 @@ use Elastica\Result;
 
 class ProjectSearch extends Search
 {
-    public const SEARCH_FIELDS = [
+    final public const SEARCH_FIELDS = [
         'title',
         'title.std',
         'reference',

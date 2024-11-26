@@ -20,7 +20,7 @@ class UserType implements Translatable, SonataTranslatableInterface
     use TranslatableTrait;
     use UuidTrait;
 
-    public const FILTER_ALL = 'all';
+    final public const FILTER_ALL = 'all';
 
     /**
      * @var \DateTime

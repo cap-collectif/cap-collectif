@@ -12,8 +12,8 @@ use Psr\Log\LoggerInterface;
 class ViewerFollowProposalResolver implements QueryInterface
 {
     use ResolverTrait;
-    private LoggerInterface $logger;
-    private ProposalViewerIsFollowingDataLoader $proposalviewerFollowDataLoader;
+    private readonly LoggerInterface $logger;
+    private readonly ProposalViewerIsFollowingDataLoader $proposalviewerFollowDataLoader;
 
     public function __construct(
         LoggerInterface $logger,

@@ -10,8 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ResetFeatureFlagsCommand extends Command
 {
-    private string $env;
-    private Manager $manager;
+    private readonly string $env;
+    private readonly Manager $manager;
 
     public function __construct(string $name, Manager $manager, string $env)
     {

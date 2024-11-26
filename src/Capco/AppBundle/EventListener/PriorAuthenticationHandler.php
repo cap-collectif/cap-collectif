@@ -12,12 +12,12 @@ use Symfony\Component\HttpKernel\Event\RequestEvent;
 
 class PriorAuthenticationHandler
 {
-    public const MAX_FAILED_LOGIN_ATTEMPT = 5;
+    final public const MAX_FAILED_LOGIN_ATTEMPT = 5;
 
-    private UserConnectionRepository $userConnectionRepository;
-    private Manager $toggleManager;
-    private LoggerInterface $logger;
-    private CaptchaChecker $captchaChecker;
+    private readonly UserConnectionRepository $userConnectionRepository;
+    private readonly Manager $toggleManager;
+    private readonly LoggerInterface $logger;
+    private readonly CaptchaChecker $captchaChecker;
 
     public function __construct(
         UserConnectionRepository $userConnectionRepository,

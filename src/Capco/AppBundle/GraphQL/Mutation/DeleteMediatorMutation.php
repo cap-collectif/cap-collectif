@@ -19,11 +19,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteMediatorMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private Manager $manager;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly Manager $manager;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

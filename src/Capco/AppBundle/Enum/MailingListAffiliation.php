@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Enum;
 
 class MailingListAffiliation
 {
-    public const OWNER = 'OWNER';
+    final public const OWNER = 'OWNER';
 
     public static function isValid($value): bool
     {

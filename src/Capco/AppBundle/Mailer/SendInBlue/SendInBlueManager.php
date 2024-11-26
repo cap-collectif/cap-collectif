@@ -15,13 +15,13 @@ use Symfony\Component\HttpKernel\KernelInterface;
  */
 class SendInBlueManager
 {
-    public const SKIPPED_ENV = 'test';
+    final public const SKIPPED_ENV = 'test';
     protected static ?UpdateContact $updater = null;
     protected static ?CreateContact $contactMaker = null;
-    private int $listId;
-    private KernelInterface $kernel;
-    private ContactsApi $apiInstance;
-    private LoggerInterface $logger;
+    private readonly int $listId;
+    private readonly KernelInterface $kernel;
+    private readonly ContactsApi $apiInstance;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         KernelInterface $kernel,

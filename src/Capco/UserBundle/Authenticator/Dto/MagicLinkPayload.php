@@ -9,25 +9,22 @@ use Symfony\Component\Validator\Constraints as Assert;
 class MagicLinkPayload
 {
     /** @Assert\Email() */
-    private string $email;
+    private readonly string $email;
 
     private ?string $username = null;
 
     /** @Assert\Url() */
-    private string $redirect;
-
-    private \DateTimeInterface $createdAt;
+    private readonly string $redirect;
 
     public function __construct(
         string $email,
         ?string $username,
         string $redirect,
-        ?\DateTimeInterface $createdAt = null
+        private readonly \DateTimeInterface $createdAt = new \DateTimeImmutable()
     ) {
         $this->email = $email;
         $this->username = $username;
         $this->redirect = $redirect;
-        $this->createdAt = $createdAt ?? new \DateTimeImmutable();
     }
 
     public static function createFromPayload(

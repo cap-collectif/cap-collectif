@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class OtherQuestionChoiceResponseResolver implements QueryInterface
 {
-    private ResponseSearch $responseSearch;
+    private readonly ResponseSearch $responseSearch;
 
     public function __construct(ResponseSearch $responseSearch)
     {

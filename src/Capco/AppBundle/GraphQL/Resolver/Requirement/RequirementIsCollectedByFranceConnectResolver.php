@@ -10,14 +10,14 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class RequirementIsCollectedByFranceConnectResolver implements QueryInterface
 {
-    public const MAP = [
+    final public const MAP = [
         FranceConnectAllowedData::GIVEN_NAME => Requirement::FIRSTNAME,
         FranceConnectAllowedData::FAMILY_NAME => Requirement::LASTNAME,
         FranceConnectAllowedData::BIRTHDATE => Requirement::DATE_OF_BIRTH,
     ];
 
-    private Manager $manager;
-    private FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver;
+    private readonly Manager $manager;
+    private readonly FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver;
 
     public function __construct(Manager $manager, FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver)
     {

@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class UpdateProfileAccountLocaleMutation implements MutationInterface
 {
     use MutationTrait;
-    private SetUserDefaultLocaleMutation $defaultLocaleMutation;
+    private readonly SetUserDefaultLocaleMutation $defaultLocaleMutation;
 
     public function __construct(SetUserDefaultLocaleMutation $defaultLocaleMutation)
     {

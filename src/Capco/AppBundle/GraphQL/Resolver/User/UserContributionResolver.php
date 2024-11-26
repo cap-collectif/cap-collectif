@@ -17,7 +17,7 @@ class UserContributionResolver implements ContainerAwareInterface, QueryInterfac
 {
     use ContainerAwareTrait;
 
-    private ContributionSearch $contributionSearch;
+    private readonly ContributionSearch $contributionSearch;
 
     public function __construct(ContributionSearch $contributionSearch)
     {

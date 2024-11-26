@@ -16,11 +16,11 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OrganizationController extends AbstractController
 {
-    private PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
-    private TranslatorInterface $translator;
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private LoginManagerInterface $loginManager;
+    private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
+    private readonly TranslatorInterface $translator;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly LoginManagerInterface $loginManager;
 
     public function __construct(
         PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,

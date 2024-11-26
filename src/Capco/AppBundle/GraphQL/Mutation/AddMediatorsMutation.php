@@ -24,13 +24,13 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class AddMediatorsMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private MediatorRepository $mediatorRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ConnectionBuilder $connectionBuilder;
-    private Manager $manager;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly MediatorRepository $mediatorRepository;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ConnectionBuilder $connectionBuilder;
+    private readonly Manager $manager;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

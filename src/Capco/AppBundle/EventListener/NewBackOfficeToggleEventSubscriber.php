@@ -10,7 +10,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 class NewBackOfficeToggleEventSubscriber implements EventSubscriberInterface
 {
-    private EntityManagerInterface $em;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         EntityManagerInterface $em

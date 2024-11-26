@@ -22,7 +22,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
 {
-    private EventDistrictsPersister $eventDistrictsPersister;
+    private readonly EventDistrictsPersister $eventDistrictsPersister;
 
     public function __construct(EventDistrictsPersister $eventDistrictsPersister)
     {

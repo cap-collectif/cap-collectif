@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class CommentModerationRejectedProcessor implements ProcessorInterface
 {
-    private CommentNotifier $notifier;
-    private CommentRepository $commentRepository;
+    private readonly CommentNotifier $notifier;
+    private readonly CommentRepository $commentRepository;
 
     public function __construct(CommentNotifier $notifier, CommentRepository $commentRepository)
     {

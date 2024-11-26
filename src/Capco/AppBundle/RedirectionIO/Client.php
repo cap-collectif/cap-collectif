@@ -10,7 +10,7 @@ use RedirectionIO\Client\Sdk\Exception\TimeoutException;
 
 class Client
 {
-    public const VERSION = '0.3.0';
+    final public const VERSION = '0.3.0';
 
     private $projectKeyDataloader;
     private $connections;
@@ -120,7 +120,7 @@ class Client
             $this->currentConnection = null;
         }
 
-        return $command->parseResponse(trim($received));
+        return $command->parseResponse(trim((string) $received));
     }
 
     private function getConnection()
@@ -263,7 +263,7 @@ class Client
         return $returnValue;
     }
 
-    private static function handleInternalError($type, $message, $file, $line)
+    private static function handleInternalError($type, $message, $file, $line): never
     {
         throw new \ErrorException($message, 0, $type, $file, $line);
     }

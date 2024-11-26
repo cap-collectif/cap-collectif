@@ -12,9 +12,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  */
 class OpinionVersionVote extends AbstractVote
 {
-    public const VOTE_OK = 1;
-    public const VOTE_NOK = -1;
-    public const VOTE_MITIGE = 0;
+    final public const VOTE_OK = 1;
+    final public const VOTE_NOK = -1;
+    final public const VOTE_MITIGE = 0;
 
     public static $voteTypes = [
         'ok' => self::VOTE_OK,

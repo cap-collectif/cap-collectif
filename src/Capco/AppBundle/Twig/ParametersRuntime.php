@@ -14,7 +14,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ParametersRuntime implements RuntimeExtensionInterface
 {
-    public const CACHE_KEY = 'site-parameters';
+    final public const CACHE_KEY = 'site-parameters';
     protected RedisCache $cache;
     protected RouterInterface $router;
     protected Manager $manager;

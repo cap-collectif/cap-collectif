@@ -20,10 +20,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
-    private TranslatorInterface $translator;
-    private SiteParameterResolver $siteParams;
-    private SenderEmailResolver $senderEmailResolver;
-    private SettableOwnerResolver $settableOwnerResolver;
+    private readonly TranslatorInterface $translator;
+    private readonly SiteParameterResolver $siteParams;
+    private readonly SenderEmailResolver $senderEmailResolver;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         EntityManagerInterface $entityManager,

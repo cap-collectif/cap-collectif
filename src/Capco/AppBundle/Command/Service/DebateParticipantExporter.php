@@ -18,16 +18,16 @@ use Symfony\Component\Serializer\Serializer;
 
 class DebateParticipantExporter extends ParticipantExporter
 {
-    public const BATCH_SIZE = 1000;
-    private DebateArgumentRepository $debateArgumentRepository;
-    private DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
-    private UserRepository $userRepository;
-    private ParticipantNormalizer $participantNormalizer;
-    private Serializer $serializer;
-    private DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer;
-    private DebateVoteRepository $debateVoteRepository;
-    private LoggerInterface $logger;
-    private FilePathResolver $filePathResolver;
+    final public const BATCH_SIZE = 1000;
+    private readonly DebateArgumentRepository $debateArgumentRepository;
+    private readonly DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
+    private readonly UserRepository $userRepository;
+    private readonly ParticipantNormalizer $participantNormalizer;
+    private readonly Serializer $serializer;
+    private readonly DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer;
+    private readonly DebateVoteRepository $debateVoteRepository;
+    private readonly LoggerInterface $logger;
+    private readonly FilePathResolver $filePathResolver;
 
     public function __construct(
         DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository,

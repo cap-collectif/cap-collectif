@@ -42,7 +42,7 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
     ];
 
     private $router;
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
     private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;

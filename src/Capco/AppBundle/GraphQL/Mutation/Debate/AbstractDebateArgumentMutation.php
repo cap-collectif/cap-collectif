@@ -26,13 +26,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AbstractDebateArgumentMutation
 {
     use MutationTrait;
-    public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
-    public const CLOSED_DEBATE = 'CLOSED_DEBATE';
-    public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
-    public const CANNOT_DELETE_DEBATE_ARGUMENT = 'CANNOT_DELETE_DEBATE_ARGUMENT';
-    public const NOT_ARGUMENT_AUTHOR = 'NOT_ARGUMENT_AUTHOR';
-    public const ALREADY_HAS_ARGUMENT = 'ALREADY_HAS_ARGUMENT';
-    public const INVALID_HASH = 'INVALID_HASH';
+    final public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
+    final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
+    final public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
+    final public const CANNOT_DELETE_DEBATE_ARGUMENT = 'CANNOT_DELETE_DEBATE_ARGUMENT';
+    final public const NOT_ARGUMENT_AUTHOR = 'NOT_ARGUMENT_AUTHOR';
+    final public const ALREADY_HAS_ARGUMENT = 'ALREADY_HAS_ARGUMENT';
+    final public const INVALID_HASH = 'INVALID_HASH';
 
     protected EntityManagerInterface $em;
     protected GlobalIdResolver $globalIdResolver;

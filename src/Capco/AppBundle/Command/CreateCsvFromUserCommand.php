@@ -26,7 +26,7 @@ use Symfony\Component\Process\Process;
 
 class CreateCsvFromUserCommand extends BaseExportCommand
 {
-    public const PROPOSAL_EXPORT_PATHS = [
+    final public const PROPOSAL_EXPORT_PATHS = [
         'url',
         'title',
         'bodyText',
@@ -39,8 +39,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         'responses_formattedValue',
     ];
 
-    public const CONNECTIONS_EXPORT_PATHS = ['user_id', 'ipAddress', 'datetime', 'email'];
-    public const COMMENTS_EXPORT_PATHS = [
+    final public const CONNECTIONS_EXPORT_PATHS = ['user_id', 'ipAddress', 'datetime', 'email'];
+    final public const COMMENTS_EXPORT_PATHS = [
         'comment_type' => 'kind',
         'comment_id' => 'id',
         'comment_related_id' => 'related.id',
@@ -436,14 +436,14 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             $rows = $this->getCleanArrayForRowInsert($votes, $header, true);
         } else {
             foreach ($header as $value) {
-                $value = str_replace('_', '.', $value);
+                $value = str_replace('_', '.', (string) $value);
                 $value = Arr::path($data, "data.node.{$value}") ?? '';
                 $rows[] = $value;
             }
         }
 
         if ('proposals' !== $type) {
-            $rows = array_map([$this->exportUtils, 'parseCellValue'], $rows);
+            $rows = array_map($this->exportUtils->parseCellValue(...), $rows);
         }
 
         if (!empty($rows) && \is_array($rows[0])) {
@@ -496,7 +496,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
                     if (
-                        false !== strpos($columnName, 'responses_')
+                        false !== strpos((string) $columnName, 'responses_')
                         && false === $responsesInserted
                     ) {
                         $responsesDatas = $this->handleMultipleResponsesForQuestions(

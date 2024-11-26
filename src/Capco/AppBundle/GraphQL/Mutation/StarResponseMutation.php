@@ -18,8 +18,8 @@ class StarResponseMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const RESPONSE_NOT_FOUND = 'RESPONSE_NOT_FOUND';
-    public const ALREADY_STARRED = 'ALREADY_STARRED';
+    final public const RESPONSE_NOT_FOUND = 'RESPONSE_NOT_FOUND';
+    final public const ALREADY_STARRED = 'ALREADY_STARRED';
 
     protected EntityManagerInterface $entityManager;
     protected GlobalIdResolver $globalIdResolver;

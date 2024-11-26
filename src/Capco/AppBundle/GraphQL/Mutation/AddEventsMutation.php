@@ -31,13 +31,13 @@ class AddEventsMutation extends AbstractEventMutation
 {
     use MutationTrait;
 
-    private UserRepository $userRepo;
-    private ThemeRepository $themeRepo;
-    private LocaleRepository $localeRepository;
-    private ProjectRepository $projectRepository;
-    private Map $map;
-    private SettableOwnerResolver $settableOwnerResolver;
-    private GlobalDistrictRepository $globalDistrictRepository;
+    private readonly UserRepository $userRepo;
+    private readonly ThemeRepository $themeRepo;
+    private readonly LocaleRepository $localeRepository;
+    private readonly ProjectRepository $projectRepository;
+    private readonly Map $map;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
+    private readonly GlobalDistrictRepository $globalDistrictRepository;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -257,7 +257,7 @@ class AddEventsMutation extends AbstractEventMutation
 
     private function checkIsAValidDate($dateString)
     {
-        return (bool) strtotime($dateString);
+        return (bool) strtotime((string) $dateString);
     }
 
     /**
@@ -307,7 +307,7 @@ class AddEventsMutation extends AbstractEventMutation
             if (!$addressJson) {
                 return;
             }
-            $addressJsonArray = json_decode($addressJson, true);
+            $addressJsonArray = json_decode((string) $addressJson, true);
             if (!$addressJsonArray) {
                 return;
             }

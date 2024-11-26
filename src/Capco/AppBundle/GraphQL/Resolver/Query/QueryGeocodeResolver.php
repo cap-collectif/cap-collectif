@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryGeocodeResolver implements QueryInterface
 {
-    private Map $map;
+    private readonly Map $map;
 
     public function __construct(Map $map)
     {

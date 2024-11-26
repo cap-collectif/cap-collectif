@@ -13,7 +13,7 @@ class QuestionChoiceNormalizer implements NormalizerInterface, SerializerAwareIn
 {
     use SerializerAwareTrait;
 
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
 
     public function __construct(ObjectNormalizer $normalizer)
     {

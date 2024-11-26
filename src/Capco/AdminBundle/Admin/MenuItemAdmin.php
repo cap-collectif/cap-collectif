@@ -25,8 +25,8 @@ class MenuItemAdmin extends AbstractAdmin
         '_sort_by' => 'position',
     ];
 
-    private MenuItemResolver $resolver;
-    private MenuItemRepository $repository;
+    private readonly MenuItemResolver $resolver;
+    private readonly MenuItemRepository $repository;
 
     public function __construct(
         string $code,

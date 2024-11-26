@@ -51,7 +51,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         $this->eventCommentRepository = $eventCommentRepository;
         $this->postCommentRepository = $postCommentRepository;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

@@ -14,7 +14,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalVotesDataLoader extends BatchDataLoader
 {
-    private VoteSearch $voteSearch;
+    private readonly VoteSearch $voteSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -30,7 +30,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
     ) {
         $this->voteSearch = $voteSearch;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

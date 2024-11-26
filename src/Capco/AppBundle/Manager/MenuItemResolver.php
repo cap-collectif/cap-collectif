@@ -14,7 +14,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MenuItemResolver
 {
-    public const MENU_CACHE_KEY = 'getEnabledMenuItemsWithChildren';
+    final public const MENU_CACHE_KEY = 'getEnabledMenuItemsWithChildren';
     protected $repository;
     protected $manager;
     protected $router;
@@ -50,7 +50,7 @@ class MenuItemResolver
                 '-' .
                 $menu .
                 '-' .
-                preg_replace('/[^A-Za-z0-9\-]/', '', $currentUrl) .
+                preg_replace('/[^A-Za-z0-9\-]/', '', (string) $currentUrl) .
                 ($request ? $request->getLocale() : '')
         );
 
@@ -168,6 +168,6 @@ class MenuItemResolver
         }
         $fixedLink = '/' . $link;
 
-        return $link === $current || substr($current, -\strlen($fixedLink)) === $fixedLink;
+        return $link === $current || substr((string) $current, -\strlen($fixedLink)) === $fixedLink;
     }
 }

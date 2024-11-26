@@ -38,18 +38,18 @@ class ChangeProposalDecisionMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private ProposalRepository $proposalRepository;
-    private EntityManagerInterface $entityManager;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private LoggerInterface $logger;
-    private ProposalDecisionRepository $proposalDecisionRepository;
-    private UserRepository $userRepository;
-    private TranslatorInterface $translator;
-    private StatusRepository $statusRepository;
-    private EventDispatcherInterface $eventDispatcher;
-    private Indexer $indexer;
-    private Publisher $publisher;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly LoggerInterface $logger;
+    private readonly ProposalDecisionRepository $proposalDecisionRepository;
+    private readonly UserRepository $userRepository;
+    private readonly TranslatorInterface $translator;
+    private readonly StatusRepository $statusRepository;
+    private readonly EventDispatcherInterface $eventDispatcher;
+    private readonly Indexer $indexer;
+    private readonly Publisher $publisher;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         ProposalRepository $proposalRepository,
@@ -205,7 +205,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
         User $viewer
     ): ?OfficialResponse {
         $officialResponse = null;
-        if (strip_tags($args->offsetGet('body')) || !empty($args->offsetGet('authors'))) {
+        if (strip_tags((string) $args->offsetGet('body')) || !empty($args->offsetGet('authors'))) {
             $officialResponse = $proposalDecision->getOfficialResponse();
             if (null === $officialResponse) {
                 $officialResponse = new OfficialResponse();

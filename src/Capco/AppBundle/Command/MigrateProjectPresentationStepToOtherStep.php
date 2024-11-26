@@ -13,8 +13,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateProjectPresentationStepToOtherStep extends Command
 {
-    private EntityManagerInterface $em;
-    private ProjectRepository $projectRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly ProjectRepository $projectRepository;
 
     public function __construct(
         EntityManagerInterface $em,

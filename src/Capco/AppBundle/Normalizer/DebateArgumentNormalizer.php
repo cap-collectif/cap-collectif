@@ -15,8 +15,8 @@ class DebateArgumentNormalizer implements NormalizerInterface, SerializerAwareIn
 
     private const GROUP = 'ElasticsearchDebateArgument';
 
-    private ObjectNormalizer $normalizer;
-    private VoteSearch $voteSearch;
+    private readonly ObjectNormalizer $normalizer;
+    private readonly VoteSearch $voteSearch;
 
     public function __construct(ObjectNormalizer $normalizer, VoteSearch $voteSearch)
     {

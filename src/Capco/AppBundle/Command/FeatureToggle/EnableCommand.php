@@ -14,8 +14,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 class EnableCommand extends Command
 {
     private const SPECIFIC_FEATURE_LIST_FOLDER = '/src/Capco/AppBundle/Command/FeatureToggle/FeatureList/';
-    private Manager $toggleManager;
-    private KernelInterface $kernel;
+    private readonly Manager $toggleManager;
+    private readonly KernelInterface $kernel;
     private int $activated = 0;
     private int $deactivated = 0;
 

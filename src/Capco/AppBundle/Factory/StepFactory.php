@@ -25,8 +25,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StepFactory
 {
-    private TranslatorInterface $translator;
-    private string $locale;
+    private readonly TranslatorInterface $translator;
+    private readonly string $locale;
 
     public function __construct(TranslatorInterface $translator, string $locale)
     {

@@ -34,7 +34,7 @@ class IsSocialNetworkUrlValidator extends ConstraintValidator
             $pattern = $this->patterns[$constraint->social_network];
         }
 
-        if ($pattern && 1 === preg_match($pattern, strtolower($value))) {
+        if ($pattern && 1 === preg_match($pattern, strtolower((string) $value))) {
             return;
         }
 

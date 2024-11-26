@@ -16,7 +16,7 @@ class PasswordComplexityValidator extends ConstraintValidator
         $hasLowercase = false;
 
         $i = 0;
-        while ($i < \strlen($password)) {
+        while ($i < \strlen((string) $password)) {
             $character = \ord($password[$i]);
             // Check if character is a digit
             if ($character > 47 && $character < 58) {
@@ -38,14 +38,14 @@ class PasswordComplexityValidator extends ConstraintValidator
             !$hasDigit
             || !$hasLowercase
             || !$hasUppercase
-            || \strlen($password) < self::MIN_PASSWORD_LENGTH
+            || \strlen((string) $password) < self::MIN_PASSWORD_LENGTH
         ) {
             $this->context
                 ->buildViolation(
                     $this->getErrorMessage(
                         $hasDigit,
                         $hasUppercase && $hasLowercase,
-                        \strlen($password) >= self::MIN_PASSWORD_LENGTH
+                        \strlen((string) $password) >= self::MIN_PASSWORD_LENGTH
                     )
                 )
                 ->addViolation()

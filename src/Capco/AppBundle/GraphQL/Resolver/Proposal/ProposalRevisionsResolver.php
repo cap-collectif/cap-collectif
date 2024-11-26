@@ -13,8 +13,8 @@ use Psr\Log\LoggerInterface;
 
 class ProposalRevisionsResolver implements QueryInterface
 {
-    private ProposalRevisionRepository $proposalRevisionRepository;
-    private LoggerInterface $logger;
+    private readonly ProposalRevisionRepository $proposalRevisionRepository;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         ProposalRevisionRepository $proposalRevisionRepository,

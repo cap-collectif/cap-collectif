@@ -9,8 +9,8 @@ use Capco\UserBundle\Repository\UserTypeRepository;
 
 class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
 {
-    public const HEADER_OPENID = 'openid_id';
-    public const HEADER_USER_TYPE = 'user_type';
+    final public const HEADER_OPENID = 'openid_id';
+    final public const HEADER_USER_TYPE = 'user_type';
     protected array $createdOpenIds = [];
     protected array $userTypes = [];
 
@@ -36,7 +36,7 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
         }
 
         if (isset($row[self::HEADER_USER_TYPE])) {
-            $userType = trim($row[self::HEADER_USER_TYPE]);
+            $userType = trim((string) $row[self::HEADER_USER_TYPE]);
             if ($userType && !\in_array($userType, $this->userTypes)) {
                 $errors[] = "userType {$userType} not found.";
             }
@@ -47,10 +47,10 @@ class CreateIDFUsersFromCsvCommand extends CreateUsersFromCsvCommand
 
     protected function importRow(array $row): void
     {
-        $user = $this->generateUser(trim($row[self::HEADER_USERNAME]), $row[self::HEADER_EMAIL]);
+        $user = $this->generateUser(trim((string) $row[self::HEADER_USERNAME]), $row[self::HEADER_EMAIL]);
         $user->setOpenId($row[self::HEADER_OPENID]);
         if (isset($row[self::HEADER_USER_TYPE]) && !empty($row[self::HEADER_USER_TYPE])) {
-            $user->setUserType($this->userTypes[trim($row[self::HEADER_USER_TYPE])]);
+            $user->setUserType($this->userTypes[trim((string) $row[self::HEADER_USER_TYPE])]);
         }
         $this->createdOpenIds[] = $user->getOpenId();
 

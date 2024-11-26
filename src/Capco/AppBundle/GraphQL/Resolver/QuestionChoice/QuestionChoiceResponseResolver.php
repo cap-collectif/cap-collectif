@@ -12,8 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class QuestionChoiceResponseResolver implements QueryInterface
 {
-    private ResponseSearch $responseSearch;
-    private LoggerInterface $logger;
+    private readonly ResponseSearch $responseSearch;
+    private readonly LoggerInterface $logger;
 
     public function __construct(ResponseSearch $responseSearch, LoggerInterface $logger)
     {

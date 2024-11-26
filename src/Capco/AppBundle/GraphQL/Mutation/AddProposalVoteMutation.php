@@ -34,21 +34,21 @@ class AddProposalVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
-    private EntityManagerInterface $em;
-    private ProposalVotesDataLoader $proposalVotesDataLoader;
-    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
-    private GlobalIdResolver $globalIdResolver;
-    private StepRequirementsResolver $resolver;
-    private LoggerInterface $logger;
-    private ValidatorInterface $validator;
-    private RequestGuesser $requestGuesser;
-    private ContributionValidator $contributionValidator;
+    final public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
+    private readonly EntityManagerInterface $em;
+    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
+    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
+    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
+    private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly StepRequirementsResolver $resolver;
+    private readonly LoggerInterface $logger;
+    private readonly ValidatorInterface $validator;
+    private readonly RequestGuesser $requestGuesser;
+    private readonly ContributionValidator $contributionValidator;
 
     public function __construct(
         EntityManagerInterface $em,

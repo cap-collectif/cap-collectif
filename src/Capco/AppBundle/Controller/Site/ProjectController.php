@@ -42,21 +42,21 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ProjectController extends Controller
 {
     protected RouterInterface $router;
-    private TranslatorInterface $translator;
-    private string $exportDir;
-    private SiteParameterResolver $siteParameterResolver;
-    private ProjectUrlResolver $projectUrlResolver;
-    private QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver;
-    private ProjectRepository $projectRepository;
-    private OpinionRepository $opinionRepository;
-    private OpinionVersionRepository $opinionVersionRepository;
-    private ArgumentRepository $argumentRepository;
-    private SourceRepository $sourceRepository;
-    private PostRepository $postRepository;
-    private ContributionResolver $contributionResolver;
-    private ProjectHelper $projectHelper;
-    private DebateArgumentRepository $debateArgumentRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly TranslatorInterface $translator;
+    private readonly string $exportDir;
+    private readonly SiteParameterResolver $siteParameterResolver;
+    private readonly ProjectUrlResolver $projectUrlResolver;
+    private readonly QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver;
+    private readonly ProjectRepository $projectRepository;
+    private readonly OpinionRepository $opinionRepository;
+    private readonly OpinionVersionRepository $opinionVersionRepository;
+    private readonly ArgumentRepository $argumentRepository;
+    private readonly SourceRepository $sourceRepository;
+    private readonly PostRepository $postRepository;
+    private readonly ContributionResolver $contributionResolver;
+    private readonly ProjectHelper $projectHelper;
+    private readonly DebateArgumentRepository $debateArgumentRepository;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         TranslatorInterface $translator,

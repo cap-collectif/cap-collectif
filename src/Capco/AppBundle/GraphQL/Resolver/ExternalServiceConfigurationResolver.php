@@ -12,7 +12,7 @@ class ExternalServiceConfigurationResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private ExternalServiceConfigurationRepository $repository;
+    private readonly ExternalServiceConfigurationRepository $repository;
 
     public function __construct(ExternalServiceConfigurationRepository $repository)
     {

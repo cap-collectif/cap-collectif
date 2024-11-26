@@ -26,7 +26,7 @@ class HasAddressIfMandatoryValidator extends ConstraintValidator
         }
 
         // TODO Security: here we should do something validate the structure, recheck with google map api...
-        $decodedAddress = json_decode($address, true);
+        $decodedAddress = json_decode((string) $address, true);
         if (!$decodedAddress) {
             $this->context->buildViolation($constraint->noValidJsonAddressMessage)->addViolation();
 

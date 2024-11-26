@@ -14,7 +14,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ThemeRuntime implements RuntimeExtensionInterface
 {
-    public const LIST_THEMES_CACHE_KEY = 'listThemes';
+    final public const LIST_THEMES_CACHE_KEY = 'listThemes';
 
     protected $themeRepo;
     protected $projectRepo;
@@ -70,7 +70,7 @@ class ThemeRuntime implements RuntimeExtensionInterface
     private function getStepId($step): string
     {
         return \in_array($step->getType(), ['collect', 'selection'])
-            ? GlobalId::toGlobalId(ucfirst($step->getType()) . 'Step', $step->getId())
+            ? GlobalId::toGlobalId(ucfirst((string) $step->getType()) . 'Step', $step->getId())
             : $step->getId();
     }
 }

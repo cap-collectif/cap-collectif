@@ -10,8 +10,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class EmailingCampaignProcessor implements ProcessorInterface
 {
-    private EmailingCampaignSender $sender;
-    private EmailingCampaignRepository $repository;
+    private readonly EmailingCampaignSender $sender;
+    private readonly EmailingCampaignRepository $repository;
 
     public function __construct(
         EmailingCampaignSender $sender,

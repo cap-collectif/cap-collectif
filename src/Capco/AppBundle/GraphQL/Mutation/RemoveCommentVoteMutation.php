@@ -18,11 +18,11 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class RemoveCommentVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private CommentVoteRepository $commentVoteRepo;
-    private CommentRepository $commentRepo;
-    private RedisStorageHelper $redisStorageHelper;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly CommentVoteRepository $commentVoteRepo;
+    private readonly CommentRepository $commentRepo;
+    private readonly RedisStorageHelper $redisStorageHelper;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

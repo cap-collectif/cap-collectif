@@ -18,10 +18,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateProposalAnalysisCommentMutation implements MutationInterface
 {
     use MutationTrait;
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private Publisher $publisher;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly Publisher $publisher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

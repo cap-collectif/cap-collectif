@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class CivicIAAnalyzableResolver implements QueryInterface
 {
-    private TypeResolver $typeResolver;
+    private readonly TypeResolver $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {

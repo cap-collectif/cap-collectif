@@ -31,8 +31,8 @@ class AddEventMutation extends AbstractEventMutation
 {
     use MutationTrait;
 
-    private SettableOwnerResolver $settableOwnerResolver;
-    private LocaleRepository $localeRepository;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
+    private readonly LocaleRepository $localeRepository;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -10,7 +10,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class BaseExportCommand extends Command
 {
-    public const DEFAULT_CSV_DELIMITER = ';';
+    final public const DEFAULT_CSV_DELIMITER = ';';
     protected bool $snapshot;
     protected ExportUtils $exportUtils;
 

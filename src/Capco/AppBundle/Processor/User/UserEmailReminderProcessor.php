@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserEmailReminderProcessor implements ProcessorInterface
 {
-    private UserRepository $repository;
-    private UserNotifier $notifier;
+    private readonly UserRepository $repository;
+    private readonly UserNotifier $notifier;
 
     public function __construct(UserRepository $repository, UserNotifier $notifier)
     {

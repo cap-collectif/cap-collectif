@@ -12,9 +12,9 @@ class DeleteCarrouselElementMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const GLOBAL_ID_NOT_EXIST = 'GLOBAL_ID_NOT_EXIST';
-    private EntityManagerInterface $entityManager;
-    private GlobalIdResolver $globalIdResolver;
+    final public const GLOBAL_ID_NOT_EXIST = 'GLOBAL_ID_NOT_EXIST';
+    private readonly EntityManagerInterface $entityManager;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $entityManager,

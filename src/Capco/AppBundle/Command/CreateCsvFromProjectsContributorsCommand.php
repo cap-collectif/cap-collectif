@@ -136,7 +136,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                 function ($edge) use ($progress) {
                     $contributor = $edge['node'];
                     $row = array_map(
-                        [$this->exportUtils, 'parseCellValue'],
+                        $this->exportUtils->parseCellValue(...),
                         [
                             $contributor['id'],
                             $contributor['email'],

@@ -45,10 +45,10 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterface, DomainObjectInterface, AdminTreeInterface
 {
-    public const CONTEXT_MENU = 'menu';
-    public const CONTEXT_DASHBOARD = 'dashboard';
+    final public const CONTEXT_MENU = 'menu';
+    final public const CONTEXT_DASHBOARD = 'dashboard';
 
-    public const CLASS_REGEX =
+    final public const CLASS_REGEX =
         '@
         (?:([A-Za-z0-9]*)\\\)?        # vendor name / app name
         (Bundle\\\)?                  # optional bundle directory

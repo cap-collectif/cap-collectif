@@ -27,8 +27,8 @@ class ThemeAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'position',
     ];
-    private Indexer $indexer;
-    private MediaProvider $mediaProvider;
+    private readonly Indexer $indexer;
+    private readonly MediaProvider $mediaProvider;
 
     public function __construct(
         string $code,

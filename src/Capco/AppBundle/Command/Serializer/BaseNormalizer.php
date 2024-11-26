@@ -7,8 +7,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseNormalizer
 {
-    public const IS_EXPORT_NORMALIZER = 'is_export_normalizer';
-    public const IS_FULL_EXPORT = 'is_full_export';
+    final public const IS_EXPORT_NORMALIZER = 'is_export_normalizer';
+    final public const IS_FULL_EXPORT = 'is_full_export';
     protected const EXPORT_PARTICIPANT_USER_ID = 'export_participant_user_id';
     protected const EXPORT_PARTICIPANT_USERNAME = 'export_participant_username';
     protected const EXPORT_PARTICIPANT_USER_EMAIL = 'export_participant_user_email';

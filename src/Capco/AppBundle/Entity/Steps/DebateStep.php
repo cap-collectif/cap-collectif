@@ -18,7 +18,7 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
 {
     use TimelessStepTrait;
 
-    public const TYPE = 'debate';
+    final public const TYPE = 'debate';
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", mappedBy="step", cascade={"persist"})

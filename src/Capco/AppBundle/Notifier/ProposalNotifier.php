@@ -40,11 +40,11 @@ class ProposalNotifier extends BaseNotifier
     protected ProposalAdminUrlResolver $proposalAdminUrlResolver;
     protected ProposalUrlResolver $proposalUrlResolver;
     protected UrlResolver $urlResolver;
-    private TranslatorInterface $translator;
-    private UserUrlResolver $userUrlResolver;
-    private RequestStack $requestStack;
-    private string $defaultLocale;
-    private UserRepository $userRepository;
+    private readonly TranslatorInterface $translator;
+    private readonly UserUrlResolver $userUrlResolver;
+    private readonly RequestStack $requestStack;
+    private readonly string $defaultLocale;
+    private readonly UserRepository $userRepository;
 
     public function __construct(
         MailerService $mailer,

@@ -91,8 +91,8 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
         $newLng = $this->getLngFromJson($jsonAddress);
 
         if ($event['lng'] && $newLng && $event['lat'] && $newLat) {
-            similar_text($event['lng'], $newLng, $percLng);
-            similar_text($event['lng'], $newLng, $percLat);
+            similar_text((string) $event['lng'], $newLng, $percLng);
+            similar_text((string) $event['lng'], $newLng, $percLat);
             $similarity = ['percLat' => round($percLat, 2), 'percLng' => round($percLng, 2)];
             $similarity['newAddressIsSimilar'] = true;
 
@@ -128,7 +128,7 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
     private function getLatFromJson($jsonAddress): ?string
     {
         if ($jsonAddress) {
-            return json_decode($jsonAddress, true)[0]['geometry']['location']['lat'];
+            return json_decode((string) $jsonAddress, true)[0]['geometry']['location']['lat'];
         }
 
         return null;
@@ -137,7 +137,7 @@ class MigrateEventAddressesToJsonAddressesCommand extends Command
     private function getLngFromJson($jsonAddress): ?string
     {
         if ($jsonAddress) {
-            return json_decode($jsonAddress, true)[0]['geometry']['location']['lng'];
+            return json_decode((string) $jsonAddress, true)[0]['geometry']['location']['lng'];
         }
 
         return null;

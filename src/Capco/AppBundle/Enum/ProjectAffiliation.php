@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Enum;
 
 class ProjectAffiliation implements EnumType
 {
-    public const OWNER = 'OWNER';
-    public const AUTHOR = 'AUTHOR';
+    final public const OWNER = 'OWNER';
+    final public const AUTHOR = 'AUTHOR';
 
     public static function isValid($value): bool
     {

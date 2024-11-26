@@ -18,10 +18,10 @@ use Symfony\Component\Yaml\Yaml;
  */
 class IndexBuilder
 {
-    public const PREFIX_INDEX = 'capco_';
+    final public const PREFIX_INDEX = 'capco_';
     protected Client $client;
     protected string $indexName;
-    private Cluster $cluster;
+    private readonly Cluster $cluster;
 
     public function __construct(Client $client, Cluster $cluster, string $indexName)
     {

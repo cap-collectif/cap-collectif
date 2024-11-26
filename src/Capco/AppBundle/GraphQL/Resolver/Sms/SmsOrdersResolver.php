@@ -13,7 +13,7 @@ class SmsOrdersResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private SmsOrderRepository $repository;
+    private readonly SmsOrderRepository $repository;
 
     public function __construct(SmsOrderRepository $repository)
     {

@@ -22,7 +22,7 @@ class OpinionVersionAdmin extends AbstractAdmin
 {
     protected ?string $classnameLabel = 'opinion_version';
     protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
-    private TokenStorageInterface $tokenStorage;
+    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,

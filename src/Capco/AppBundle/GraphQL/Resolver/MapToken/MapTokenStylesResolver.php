@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MapTokenStylesResolver implements QueryInterface
 {
-    private MapboxClient $mapboxClient;
+    private readonly MapboxClient $mapboxClient;
     private ?string $defaultMapboxPublicToken = null;
     private ?string $defaultMapboxSecretKey = null;
 

@@ -10,8 +10,8 @@ use Psr\Container\ContainerInterface;
 class DebateLaunch extends AbstractExternalMessage
 {
     public const SUBJECT = 'email-debate-launch-subject';
-    public const TEMPLATE = '@CapcoMail/Debate/debateLaunch.html.twig';
-    public const FOOTER = '';
+    final public const TEMPLATE = '@CapcoMail/Debate/debateLaunch.html.twig';
+    final public const FOOTER = '';
 
     public static function getMySubjectVars(DebateVoteToken $voteToken, array $params): array
     {

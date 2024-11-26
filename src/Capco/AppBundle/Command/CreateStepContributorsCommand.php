@@ -22,12 +22,12 @@ class CreateStepContributorsCommand extends BaseExportCommand
     use SnapshotCommandTrait;
     protected static $defaultName = 'capco:export:step-contributors';
 
-    private Manager $toggleManager;
-    private ConnectionTraversor $connectionTraversor;
-    private Executor $executor;
-    private LoggerInterface $logger;
-    private string $projectRootDir;
-    private AbstractStepRepository $stepRepository;
+    private readonly Manager $toggleManager;
+    private readonly ConnectionTraversor $connectionTraversor;
+    private readonly Executor $executor;
+    private readonly LoggerInterface $logger;
+    private readonly string $projectRootDir;
+    private readonly AbstractStepRepository $stepRepository;
 
     public function __construct(
         GraphQlAclListener $listener,

@@ -56,7 +56,7 @@ class MakeProcessor extends AbstractMaker
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->className = $input->getArgument('name');
-        $this->className = str_replace('Processor', '', $this->className);
+        $this->className = str_replace('Processor', '', (string) $this->className);
         $this->className .= 'Processor';
 
         $this->entity = $this->askEntity(

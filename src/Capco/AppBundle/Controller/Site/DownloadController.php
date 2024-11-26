@@ -23,9 +23,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DownloadController extends Controller
 {
-    private LoggerInterface $logger;
-    private UserIdentificationCodeListRepository $userIdentificationCodeListRepository;
-    private MediaProvider $mediaProvider;
+    private readonly LoggerInterface $logger;
+    private readonly UserIdentificationCodeListRepository $userIdentificationCodeListRepository;
+    private readonly MediaProvider $mediaProvider;
 
     public function __construct(
         LoggerInterface $logger,

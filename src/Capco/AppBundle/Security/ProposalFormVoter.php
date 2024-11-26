@@ -8,12 +8,12 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ProposalFormVoter extends AbstractOwnerableVoter
 {
-    public const CREATE = 'create';
-    public const VIEW = 'view';
-    public const EDIT = 'edit';
-    public const DELETE = 'delete';
-    public const DUPLICATE = 'duplicate';
-    public const IMPORT_PROPOSALS = 'import_proposals';
+    final public const CREATE = 'create';
+    final public const VIEW = 'view';
+    final public const EDIT = 'edit';
+    final public const DELETE = 'delete';
+    final public const DUPLICATE = 'duplicate';
+    final public const IMPORT_PROPOSALS = 'import_proposals';
 
     protected function supports($attribute, $subject)
     {

@@ -21,15 +21,15 @@ class DeleteProposalNewsMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const POST_NOT_FOUND = 'POST_NOT_FOUND';
-    public const ACCESS_DENIED = 'ACCESS_DENIED';
+    final public const POST_NOT_FOUND = 'POST_NOT_FOUND';
+    final public const ACCESS_DENIED = 'ACCESS_DENIED';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private LoggerInterface $logger;
-    private Publisher $publisher;
-    private ProposalUrlResolver $proposalUrlResolver;
-    private RequestStack $requestStack;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly LoggerInterface $logger;
+    private readonly Publisher $publisher;
+    private readonly ProposalUrlResolver $proposalUrlResolver;
+    private readonly RequestStack $requestStack;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -12,11 +12,11 @@ use Symfony\Component\Security\Http\Authentication\AuthenticationFailureHandlerI
 
 class AuthenticationHandler implements AuthenticationFailureHandlerInterface
 {
-    public const BAD_CREDENTIALS = 'Bad credentials.';
+    final public const BAD_CREDENTIALS = 'Bad credentials.';
 
-    private UserConnectionRepository $userConnectionRepository;
-    private LoggerInterface $logger;
-    private RequestGuesser $requestGuesser;
+    private readonly UserConnectionRepository $userConnectionRepository;
+    private readonly LoggerInterface $logger;
+    private readonly RequestGuesser $requestGuesser;
 
     public function __construct(
         UserConnectionRepository $userConnectionRepository,

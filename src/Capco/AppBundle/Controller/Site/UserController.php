@@ -23,14 +23,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserController extends AbstractController
 {
-    private UserInviteRepository $userInviteRepository;
-    private UserRepository $userRepository;
-    private AbstractSSOConfigurationRepository $ssoConfigurationRepository;
-    private EntityManagerInterface $em;
-    private Manager $toggleManager;
-    private RouterInterface $router;
-    private LoggerInterface $logger;
-    private TranslatorInterface $translator;
+    private readonly UserInviteRepository $userInviteRepository;
+    private readonly UserRepository $userRepository;
+    private readonly AbstractSSOConfigurationRepository $ssoConfigurationRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly Manager $toggleManager;
+    private readonly RouterInterface $router;
+    private readonly LoggerInterface $logger;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(
         UserInviteRepository $userInviteRepository,

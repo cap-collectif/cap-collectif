@@ -53,7 +53,7 @@ class ExportContext implements KernelAwareContext
         $csvLines = $this->getFileLines($path);
         $csvHeader = array_shift($csvLines);
         $behatLines = $behatInput->getStrings();
-        $behatHeader = explode($delimiter, array_shift($behatLines));
+        $behatHeader = explode($delimiter, (string) array_shift($behatLines));
 
         $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
 
@@ -168,7 +168,7 @@ class ExportContext implements KernelAwareContext
         $csvLines = $this->getFileLines($path);
         $csvHeader = array_shift($csvLines);
         $behatLines = $behatInput->getStrings();
-        $behatHeader = explode($delimiter, array_shift($behatLines));
+        $behatHeader = explode($delimiter, (string) array_shift($behatLines));
         $behatLines = array_map(function (string $behatLine) use ($delimiter) {
             return explode($delimiter, $behatLine);
         }, $behatLines);
@@ -268,13 +268,13 @@ class ExportContext implements KernelAwareContext
     {
         foreach ($expected as $i => $expectedLine) {
             foreach ($expectedLine as $columnName => $cellValue) {
-                $suffix = strtolower(substr($columnName, -2));
+                $suffix = strtolower(substr((string) $columnName, -2));
                 // We skip date values because they can be dynamic
                 if ('at' === $suffix) {
                     continue;
                 }
                 // We skip Sonata's cached medias URLs because they can be dynamic
-                if (false !== strpos($cellValue, 'media/default')) {
+                if (false !== strpos((string) $cellValue, 'media/default')) {
                     continue;
                 }
                 if (!isset($actual[$i])) {

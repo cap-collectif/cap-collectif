@@ -18,13 +18,10 @@ class FeaturesCategoryExtension extends AbstractExtension
     public function getFunctions()
     {
         return [
-            new TwigFunction('is_category_enabled', [$this, 'isCategoryEnabled']),
-            new TwigFunction('is_admin_enabled', [$this, 'isAdminEnabled']),
-            new TwigFunction('get_enabled_pages_categories', [$this, 'getEnabledPagesCategories']),
-            new TwigFunction('get_enabled_settings_categories', [
-                $this,
-                'getEnabledSettingsCategories',
-            ]),
+            new TwigFunction('is_category_enabled', $this->isCategoryEnabled(...)),
+            new TwigFunction('is_admin_enabled', $this->isAdminEnabled(...)),
+            new TwigFunction('get_enabled_pages_categories', $this->getEnabledPagesCategories(...)),
+            new TwigFunction('get_enabled_settings_categories', $this->getEnabledSettingsCategories(...)),
         ];
     }
 

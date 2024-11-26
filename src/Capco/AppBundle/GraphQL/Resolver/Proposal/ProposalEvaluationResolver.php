@@ -21,7 +21,7 @@ class ProposalEvaluationResolver implements QueryInterface
 
     private $isViewerAnEvaluerResolver;
     private $analysisRelatedVoter;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ProposalViewerIsAnEvaluerResolver $isViewerAnEvaluerResolver,

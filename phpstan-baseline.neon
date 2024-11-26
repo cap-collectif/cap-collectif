@@ -916,11 +916,6 @@ parameters:
 			path: src/Capco/AdminBundle/Controller/MapTokenController.php
 
 		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\MediaAdminController\\:\\:createAction\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/MediaAdminController.php
-
-		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\MenuItemController\\:\\:batchActionDeleteIsRelevant\\(\\) has parameter \\$allEntitiesSelected with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/MenuItemController.php
@@ -10799,6 +10794,11 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\CivicIA\\\\CivicIAMassUpdater\\:\\:updateOne\\(\\) has parameter \\$categoryDetails with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/CivicIA/CivicIAMassUpdater.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Client\\\\CloudflareElasticClient has an uninitialized readonly property \\$esLoggerCollector\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Client/CloudflareElasticClient.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Client\\\\CloudflareElasticClient\\:\\:getExternalAnalyticsResultSet\\(\\) has parameter \\$requestedFields with no value type specified in iterable type array\\.$#"
@@ -27056,6 +27056,11 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/ConnectionTraversor.php
 
 		-
+			message: "#^Access to an uninitialized readonly property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\BatchDataLoader\\:\\:\\$collector\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/DataLoader/BatchDataLoader.php
+
+		-
 			message: "#^If condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/BatchDataLoader.php
@@ -27239,6 +27244,11 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\EntityRepositoryLinker\\:\\:\\$repository with generic class Doctrine\\\\ORM\\\\EntityRepository does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/EntityRepositoryLinker.php
+
+		-
+			message: "#^Access to an uninitialized readonly property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\Project\\\\ProjectProposalsDataLoader\\:\\:\\$proposalSearch\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/DataLoader/Project/ProjectProposalsDataLoader.php
 
 		-
 			message: "#^Instanceof between Capco\\\\UserBundle\\\\Entity\\\\User and Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
@@ -28806,6 +28816,11 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeProposalAssessmentMutation.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ChangeProposalDecisionMutation has an uninitialized readonly property \\$proposalDecisionRepository\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeProposalDecisionMutation.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ChangeProposalDecisionMutation\\:\\:__invoke\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeProposalDecisionMutation.php
@@ -30286,6 +30301,11 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/Mailing/UpdateEmailingCampaignMutation.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Mediator\\\\AddMediatorVotesMutation has an uninitialized readonly property \\$updateParticipantRequirementMutation\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/Mediator/AddMediatorVotesMutation.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Mediator\\\\AddMediatorVotesMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/Mediator/AddMediatorVotesMutation.php
@@ -30314,6 +30334,11 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Mediator\\\\MediatorVotesMutation\\:\\:handleCheckboxes\\(\\) has parameter \\$checkboxes with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/Mediator/MediatorVotesMutation.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Mediator\\\\UpdateMediatorVotesMutation has an uninitialized readonly property \\$updateParticipantRequirementMutation\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/Mediator/UpdateMediatorVotesMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Mediator\\\\UpdateMediatorVotesMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -30634,6 +30659,11 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalForm\\\\DuplicateProposalFormMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalForm/DuplicateProposalFormMutation.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalForm\\\\UpdateProposalFormMutation has an uninitialized readonly property \\$proposalDistrictRepository\\. Assign it in the constructor\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalForm/UpdateProposalFormMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalForm\\\\UpdateProposalFormMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -41731,11 +41761,6 @@ parameters:
 			path: src/Capco/AppBundle/RedirectionIO/Client.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:handleInternalError\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/Client.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\RedirectionIO\\\\Client\\:\\:handleInternalError\\(\\) has parameter \\$file with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/RedirectionIO/Client.php
@@ -46352,11 +46377,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Resolver\\\\ProjectDownloadResolver\\:\\:translateHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
-
-		-
-			message: "#^Parameter \\#1 \\$string of function strip_tags expects string, array\\<int, string\\>\\|string given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Resolver/ProjectDownloadResolver.php
 

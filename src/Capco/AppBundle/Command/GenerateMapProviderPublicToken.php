@@ -15,9 +15,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class GenerateMapProviderPublicToken extends Command
 {
-    public const MAPBOX_USERNAME = 'capcollectif';
+    final public const MAPBOX_USERNAME = 'capcollectif';
 
-    public const MAPBOX_PUBLIC_TOKEN_SCOPES = [
+    final public const MAPBOX_PUBLIC_TOKEN_SCOPES = [
         'styles:tiles',
         'styles:read',
         'fonts:read',
@@ -27,15 +27,15 @@ class GenerateMapProviderPublicToken extends Command
     protected static $defaultName = 'capco:generate:map-token';
 
     private SymfonyStyle $io;
-    private MapboxClient $mapboxClient;
-    private MapTokenRepository $mapTokenRepository;
-    private EntityManagerInterface $em;
+    private readonly MapboxClient $mapboxClient;
+    private readonly MapTokenRepository $mapTokenRepository;
+    private readonly EntityManagerInterface $em;
     /**
      * To enable map views, you need a mapbox access token
      * https://www.mapbox.com/
      * "tokens:read", "tokens:write" scopes.
      */
-    private string $mapboxSecretKey;
+    private readonly string $mapboxSecretKey;
     private string $instanceName;
 
     public function __construct(

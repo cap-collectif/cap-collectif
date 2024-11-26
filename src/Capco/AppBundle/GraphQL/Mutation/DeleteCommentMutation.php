@@ -17,12 +17,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteCommentMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private RedisStorageHelper $redisStorage;
-    private LoggerInterface $logger;
-    private CommentableCommentsDataLoader $commentableCommentsDataLoader;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly RedisStorageHelper $redisStorage;
+    private readonly LoggerInterface $logger;
+    private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

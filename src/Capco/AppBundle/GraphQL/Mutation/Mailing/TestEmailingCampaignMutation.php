@@ -22,10 +22,10 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
 
-    private MailerService $mailerService;
-    private SiteParameterResolver $siteParams;
-    private RouterInterface $router;
-    private Environment $twig;
+    private readonly MailerService $mailerService;
+    private readonly SiteParameterResolver $siteParams;
+    private readonly RouterInterface $router;
+    private readonly Environment $twig;
 
     public function __construct(
         GlobalIdResolver $resolver,

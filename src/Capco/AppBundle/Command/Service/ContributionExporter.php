@@ -14,7 +14,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class ContributionExporter
 {
-    public const CSV_DELIMITER = ';';
+    final public const CSV_DELIMITER = ';';
     protected EntityManagerInterface $entityManager;
     protected SymfonyStyle $style;
     protected SerializerInterface $serializer;
@@ -22,9 +22,9 @@ class ContributionExporter
      * @var array<string, null|bool|string>
      */
     protected array $context;
-    private Filesystem $fileSystem;
+    private readonly Filesystem $fileSystem;
     private ?string $delimiter = self::CSV_DELIMITER;
-    private AbstractFilePathResolver $filePathResolverContributions;
+    private readonly AbstractFilePathResolver $filePathResolverContributions;
 
     public function __construct(
         EntityManagerInterface $entityManager,

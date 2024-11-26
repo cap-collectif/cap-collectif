@@ -37,12 +37,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StepController extends Controller
 {
-    private TranslatorInterface $translator;
-    private SerializerInterface $serializer;
-    private OpinionSearch $opinionSearch;
-    private VersionSearch $versionSearch;
-    private LocaleRepository $localeRepo;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly TranslatorInterface $translator;
+    private readonly SerializerInterface $serializer;
+    private readonly OpinionSearch $opinionSearch;
+    private readonly VersionSearch $versionSearch;
+    private readonly LocaleRepository $localeRepo;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         TranslatorInterface $translator,

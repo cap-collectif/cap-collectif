@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MenuItemChildrenResolver implements QueryInterface
 {
-    private MenuItemRepository $menuItemRepository;
+    private readonly MenuItemRepository $menuItemRepository;
 
     public function __construct(MenuItemRepository $menuItemRepository)
     {

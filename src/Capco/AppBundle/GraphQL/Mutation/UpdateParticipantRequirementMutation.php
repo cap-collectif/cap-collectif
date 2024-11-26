@@ -16,11 +16,11 @@ use Psr\Log\LoggerInterface;
 class UpdateParticipantRequirementMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ParticipantRequirementRepository $participantRequirementRepository;
-    private LoggerInterface $logger;
-    private ParticipantRepository $participantRepository;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly ParticipantRequirementRepository $participantRequirementRepository;
+    private readonly LoggerInterface $logger;
+    private readonly ParticipantRepository $participantRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

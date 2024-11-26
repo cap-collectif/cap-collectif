@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\Security;
 
 class StepVoter extends AbstractOwnerableVoter
 {
-    public const VIEW = 'view';
-    private Security $security;
+    final public const VIEW = 'view';
+    private readonly Security $security;
 
     public function __construct(Security $security)
     {

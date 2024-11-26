@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class IsEmailAlreadyTakenResolver implements QueryInterface
 {
-    private UserRepository $repository;
+    private readonly UserRepository $repository;
 
     public function __construct(UserRepository $repository)
     {

@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryUserTypesResolver implements QueryInterface
 {
-    private UserTypeRepository $userTypeRepository;
+    private readonly UserTypeRepository $userTypeRepository;
 
     public function __construct(UserTypeRepository $userTypeRepository)
     {

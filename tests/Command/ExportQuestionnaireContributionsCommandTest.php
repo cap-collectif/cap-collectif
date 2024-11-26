@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 {
     use CommandTestTrait;
-    public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
-    public const EXPECTED_FILE_NAMES = [
+    final public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
+    final public const EXPECTED_FILE_NAMES = [
         'consultation-pour-conquerir-le-monde',
         'consultation-pour-la-capcobeer',
         'consultation-pour-la-flnj',
@@ -28,10 +28,10 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
         'questionnaire-pour-budget-participatif',
         'qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_questionnaire-step-pour-admins',
     ];
-    public const FULL_SUFFIX = '.csv';
-    public const SIMPLIFIED_SUFFIX = '_simplified.csv';
-    public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
-    public const CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS = 'capco:export:questionnaire:contributions';
+    final public const FULL_SUFFIX = '.csv';
+    final public const SIMPLIFIED_SUFFIX = '_simplified.csv';
+    final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
+    final public const CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS = 'capco:export:questionnaire:contributions';
 
     protected function setUp(): void
     {

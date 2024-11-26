@@ -19,11 +19,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateQuestionnaireMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private SettableOwnerResolver $settableOwnerResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

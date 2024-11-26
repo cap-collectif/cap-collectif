@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Enum;
 
 class CarrouselElementType implements EnumType
 {
-    public const ARTICLE = 'article';
-    public const EVENT = 'event';
-    public const PROJECT = 'project';
-    public const THEME = 'theme';
-    public const CUSTOM = 'custom';
+    final public const ARTICLE = 'article';
+    final public const EVENT = 'event';
+    final public const PROJECT = 'project';
+    final public const THEME = 'theme';
+    final public const CUSTOM = 'custom';
 
     /**
      * @param string $value

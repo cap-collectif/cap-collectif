@@ -1646,7 +1646,7 @@ class UserRepository extends EntityRepository
 
         foreach ($roles as $role) {
             if ('ROLE_USER' != $role) {
-                $qb->andWhere('u.roles NOT LIKE :' . strtolower($role))->setParameter(strtolower($role), '%' . $role . '%');
+                $qb->andWhere('u.roles NOT LIKE :' . strtolower((string) $role))->setParameter(strtolower((string) $role), '%' . $role . '%');
             }
         }
 

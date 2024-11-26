@@ -14,10 +14,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ComputeDiffCommand extends Command
 {
-    private EntityManagerInterface $em;
-    private OpinionVersionRepository $opinionVersionRepository;
-    private OpinionModalRepository $modalRepository;
-    private DiffGenerator $diffGenerator;
+    private readonly EntityManagerInterface $em;
+    private readonly OpinionVersionRepository $opinionVersionRepository;
+    private readonly OpinionModalRepository $modalRepository;
+    private readonly DiffGenerator $diffGenerator;
 
     public function __construct(
         ?string $name,

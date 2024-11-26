@@ -25,7 +25,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class ProposalSearch extends Search
 {
     // The int value represent the applied boost in the search queries.
-    public const SEARCH_FIELDS = [
+    final public const SEARCH_FIELDS = [
         'proposalTitle' => 9,
         'proposalTitle.std' => 9,
         'author.username.std' => 4,
@@ -42,15 +42,15 @@ class ProposalSearch extends Search
         'address' => 6,
     ];
 
-    public const NESTED_SEARCH_FIELDS = [
+    final public const NESTED_SEARCH_FIELDS = [
         'responses.textValue.std' => 3,
         'responses.textValue' => 3,
         'responses.objectValue.labels' => 2,
         'responses.objectValue.other' => 2,
     ];
 
-    private ProposalRepository $proposalRepo;
-    private TokenStorageInterface $tokenStorage;
+    private readonly ProposalRepository $proposalRepo;
+    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(
         Index $index,

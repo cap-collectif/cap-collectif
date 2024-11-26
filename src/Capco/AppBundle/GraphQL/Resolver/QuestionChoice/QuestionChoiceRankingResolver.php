@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionChoiceRankingResolver implements QueryInterface
 {
-    private AbstractResponseRepository $responseRepository;
+    private readonly AbstractResponseRepository $responseRepository;
 
     public function __construct(AbstractResponseRepository $responseRepository)
     {

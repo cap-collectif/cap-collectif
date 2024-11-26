@@ -18,7 +18,7 @@ class ProposalResponsesResolver implements QueryInterface
     private $proposalViewerIsAnEvaluerResolver;
     private $analystRepository;
     private $analysisRelatedVoter;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         AbstractQuestionRepository $repository,

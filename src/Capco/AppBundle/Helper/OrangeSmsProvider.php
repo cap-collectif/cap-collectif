@@ -8,21 +8,21 @@ use Psr\Log\LoggerInterface;
 
 class OrangeSmsProvider implements SmsProviderInterface
 {
-    public const INVALID_NUMBER = 'INVALID_NUMBER'; // For 400 errors
-    public const UNAUTHORIZED = 'UNAUTHORIZED'; // For 401 errors
-    public const RATE_LIMIT_EXCEEDED = 'RATE_LIMIT_EXCEEDED'; // For 429 errors
-    public const SERVER_ERROR = 'SERVER_ERROR'; // For 500 errors
-    public const UNKNOWN_ERROR = 'UNKNOWN_ERROR'; // Catch-all for any other errors
-    public const NOT_VALID_CODE = 'NOT_VALID_CODE';
-    public const CODE_NOT_VALID = 'CODE_NOT_VALID';
-    public const CODE_EXPIRED = 'CODE_EXPIRED';
+    final public const INVALID_NUMBER = 'INVALID_NUMBER'; // For 400 errors
+    final public const UNAUTHORIZED = 'UNAUTHORIZED'; // For 401 errors
+    final public const RATE_LIMIT_EXCEEDED = 'RATE_LIMIT_EXCEEDED'; // For 429 errors
+    final public const SERVER_ERROR = 'SERVER_ERROR'; // For 500 errors
+    final public const UNKNOWN_ERROR = 'UNKNOWN_ERROR'; // Catch-all for any other errors
+    final public const NOT_VALID_CODE = 'NOT_VALID_CODE';
+    final public const CODE_NOT_VALID = 'CODE_NOT_VALID';
+    final public const CODE_EXPIRED = 'CODE_EXPIRED';
 
-    public const NOT_FOUND = 'NOT_FOUND';
-    public const REDIS_KEY_SMS_VERIFICATION = 'sms:verification:';
-    private OrangeClient $orangeClient;
-    private LoggerInterface $logger;
-    private ClientInterface $redis;
-    private int $redisExpirationTime;
+    final public const NOT_FOUND = 'NOT_FOUND';
+    final public const REDIS_KEY_SMS_VERIFICATION = 'sms:verification:';
+    private readonly OrangeClient $orangeClient;
+    private readonly LoggerInterface $logger;
+    private readonly ClientInterface $redis;
+    private readonly int $redisExpirationTime;
 
     public function __construct(OrangeClient $orangeClient, LoggerInterface $logger, ClientInterface $redis, int $redisExpirationTime)
     {

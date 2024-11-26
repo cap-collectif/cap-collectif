@@ -14,7 +14,7 @@ use Psr\Log\LoggerInterface;
 
 class ProposalResolver
 {
-    public const FOLLOWER_HEADER = [
+    final public const FOLLOWER_HEADER = [
         'id',
         'email',
         'username',
@@ -24,7 +24,7 @@ class ProposalResolver
         'userType_name',
         'url',
     ];
-    public const FOLLOWER_FILE_EXPORT_NAME = 'followers_%proposal%_%date%';
+    final public const FOLLOWER_FILE_EXPORT_NAME = 'followers_%proposal%_%date%';
 
     protected $em;
     protected $rootDir;

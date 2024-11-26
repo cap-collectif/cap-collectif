@@ -17,9 +17,9 @@ class UserInviteEmailMessage
 {
     use UuidTrait;
 
-    public const SEND_FAILURE = 'send_failure';
-    public const WAITING_SENDING = 'waiting_sending';
-    public const SENT = 'sent';
+    final public const SEND_FAILURE = 'send_failure';
+    final public const WAITING_SENDING = 'waiting_sending';
+    final public const SENT = 'sent';
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\UserInvite", inversedBy="emailMessages", cascade={"persist"})

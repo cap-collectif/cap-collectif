@@ -50,7 +50,7 @@ class AddQuestionFieldSubscriber implements EventSubscriberInterface
         $form = $event->getForm();
         $question = null;
 
-        $data['question']['title'] = trim($data['question']['title']);
+        $data['question']['title'] = trim((string) $data['question']['title']);
 
         if (AbstractQuestion::QUESTION_TYPE_MEDIAS === $data['question']['type']) {
             $question = new MediaQuestion();

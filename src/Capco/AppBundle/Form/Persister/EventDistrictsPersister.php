@@ -12,9 +12,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class EventDistrictsPersister
 {
-    private EventDistrictPositionerRepository $districtPositionerRepository;
-    private GlobalDistrictRepository $globalDistrictRepository;
-    private EntityManagerInterface $em;
+    private readonly EventDistrictPositionerRepository $districtPositionerRepository;
+    private readonly GlobalDistrictRepository $globalDistrictRepository;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         EventDistrictPositionerRepository $districtPositionerRepository,

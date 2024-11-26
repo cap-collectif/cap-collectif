@@ -22,15 +22,15 @@ class AddDebateVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
-    public const CLOSED_DEBATE = 'CLOSED_DEBATE';
+    final public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
+    final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
 
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private DebateVoteRepository $repository;
-    private Indexer $indexer;
-    private RequestGuesser $requestGuesser;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly DebateVoteRepository $repository;
+    private readonly Indexer $indexer;
+    private readonly RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,

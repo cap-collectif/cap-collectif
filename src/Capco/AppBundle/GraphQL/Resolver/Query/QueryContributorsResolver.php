@@ -12,8 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class QueryContributorsResolver implements QueryInterface
 {
     public $useElasticsearch = true;
-    private UserSearch $userSearch;
-    private OccitanieClient $occitanieClient;
+    private readonly UserSearch $userSearch;
+    private readonly OccitanieClient $occitanieClient;
 
     public function __construct(UserSearch $userSearch, OccitanieClient $occitanieClient)
     {

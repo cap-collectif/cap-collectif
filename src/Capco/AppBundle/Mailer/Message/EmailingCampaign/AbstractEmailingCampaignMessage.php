@@ -7,7 +7,7 @@ use Capco\AppBundle\Mailer\Message\AbstractMessage;
 
 class AbstractEmailingCampaignMessage extends AbstractMessage
 {
-    public const TEMPLATE = '@CapcoMail/campaign.html.twig';
+    final public const TEMPLATE = '@CapcoMail/campaign.html.twig';
 
     public function __construct(
         string $recipientEmail,

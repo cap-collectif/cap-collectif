@@ -20,7 +20,7 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
 
-    private Publisher $publisher;
+    private readonly Publisher $publisher;
 
     public function __construct(
         GlobalIdResolver $resolver,

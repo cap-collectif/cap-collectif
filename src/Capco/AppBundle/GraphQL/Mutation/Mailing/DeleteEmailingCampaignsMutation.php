@@ -17,7 +17,7 @@ class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
 
-    private GlobalIdResolver $globalIdResolver;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         GlobalIdResolver $resolver,

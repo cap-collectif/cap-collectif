@@ -18,8 +18,8 @@ class EventExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('capco_event_registration_possible', [$this, 'isRegistrationPossible']),
-            new TwigFilter('capco_event_user_registered', [$this, 'isRegistered']),
+            new TwigFilter('capco_event_registration_possible', $this->isRegistrationPossible(...)),
+            new TwigFilter('capco_event_user_registered', $this->isRegistered(...)),
         ];
     }
 

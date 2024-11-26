@@ -6,7 +6,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CronTimeInterval
 {
-    private TranslatorInterface $translator;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {

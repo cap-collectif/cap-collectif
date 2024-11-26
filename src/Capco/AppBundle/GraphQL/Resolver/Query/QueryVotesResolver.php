@@ -25,8 +25,8 @@ class QueryVotesResolver implements QueryInterface
     protected StepVotesCountResolver $stepVotesCountResolver;
     protected StepPointsVotesCountResolver $stepPointsVotesCountResolver;
     protected PromiseAdapterInterface $adapter;
-    private VoteSearch $voteSearch;
-    private ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository;
+    private readonly VoteSearch $voteSearch;
+    private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository;
 
     public function __construct(
         AbstractVoteRepository $votesRepository,

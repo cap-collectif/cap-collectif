@@ -17,8 +17,8 @@ use Elastica\ResultSet;
 
 class ReplySearch extends Search
 {
-    private ReplyRepository $replyRepository;
-    private ReplyAnonymousRepository $replyAnonymousRepository;
+    private readonly ReplyRepository $replyRepository;
+    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
 
     public function __construct(
         Index $index,

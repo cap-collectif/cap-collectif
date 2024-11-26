@@ -10,8 +10,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 class SiteFaviconRuntime implements RuntimeExtensionInterface
 {
     protected ContainerInterface $container;
-    private SiteImageRepository $repository;
-    private MediaProvider $provider;
+    private readonly SiteImageRepository $repository;
+    private readonly MediaProvider $provider;
 
     public function __construct(
         ContainerInterface $container,

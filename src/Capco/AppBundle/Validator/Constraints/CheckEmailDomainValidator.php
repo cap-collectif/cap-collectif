@@ -36,7 +36,7 @@ class CheckEmailDomainValidator extends ConstraintValidator
             return $element->getValue();
         });
 
-        list($local, $domain) = explode('@', $email);
+        list($local, $domain) = explode('@', (string) $email);
         if ($availableDomains->contains($domain)) {
             return;
         }

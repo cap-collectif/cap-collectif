@@ -16,8 +16,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class LoadBenchmarkDataCommand extends Command
 {
     protected static $defaultName = 'capco:load-benchmark-data';
-    private Manager $manger;
-    private EntityManagerInterface $entityManger;
+    private readonly Manager $manger;
+    private readonly EntityManagerInterface $entityManger;
 
     public function __construct(Manager $manager, EntityManagerInterface $entityManager)
     {

@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class CreateCASSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {
@@ -37,7 +37,7 @@ class CreateCASSSOConfigurationMutation implements MutationInterface
     {
         $path = getenv('SYMFONY_CAS_CERTIFICATE_DIRECTORY');
         is_dir($path) || mkdir($path);
-        $fileURI = $path . '/' . str_replace('', '_', $input->offsetGet('name')) . '.crt';
+        $fileURI = $path . '/' . str_replace('', '_', (string) $input->offsetGet('name')) . '.crt';
         file_put_contents($fileURI, $input->offsetGet('casCertificate'));
 
         return $fileURI;

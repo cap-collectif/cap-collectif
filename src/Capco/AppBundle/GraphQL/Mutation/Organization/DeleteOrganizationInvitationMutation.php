@@ -17,12 +17,12 @@ class DeleteOrganizationInvitationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const INVITATION_NOT_FOUND = 'INVITATION_NOT_FOUND';
+    final public const INVITATION_NOT_FOUND = 'INVITATION_NOT_FOUND';
 
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private UserInviteRepository $userInviteRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly UserInviteRepository $userInviteRepository;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

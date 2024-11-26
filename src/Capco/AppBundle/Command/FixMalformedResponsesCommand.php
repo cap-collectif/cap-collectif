@@ -10,8 +10,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FixMalformedResponsesCommand extends Command
 {
-    private EntityManagerInterface $manager;
-    private AbstractResponseRepository $abstractResponseRepository;
+    private readonly EntityManagerInterface $manager;
+    private readonly AbstractResponseRepository $abstractResponseRepository;
 
     public function __construct(
         ?string $name,
@@ -39,9 +39,9 @@ class FixMalformedResponsesCommand extends Command
         $count = 0;
         foreach ($responses as $response) {
             $value = $response['value'];
-            if (!\is_array($value) && false !== strpos($value, '\\\\')) {
+            if (!\is_array($value) && false !== strpos((string) $value, '\\\\')) {
                 ++$count;
-                $value = str_replace('\\\\', '\\', $value);
+                $value = str_replace('\\\\', '\\', (string) $value);
                 if (json_decode($value)) {
                     $value = json_encode(json_decode($value));
                 }

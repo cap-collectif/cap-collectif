@@ -13,7 +13,7 @@ class ProposalAnalystNormalizer implements NormalizerInterface, SerializerAwareI
 {
     use SerializerAwareTrait;
 
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
 
     public function __construct(ObjectNormalizer $normalizer)
     {

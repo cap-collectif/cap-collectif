@@ -6,9 +6,9 @@ use Capco\AppBundle\Enum\ForOrAgainstType;
 
 class DebateAnonymousParticipationHashData
 {
-    private string $type;
+    private readonly string $type;
 
-    private string $token;
+    private readonly string $token;
 
     private function __construct(string $type, string $token)
     {

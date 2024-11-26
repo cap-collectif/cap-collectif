@@ -16,7 +16,7 @@ class QuestionMajorityResponsesByChoicesResolver implements QueryInterface
     use ResolverTrait;
 
     protected ValueResponseRepository $valueResponseRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ValueResponseRepository $valueResponseRepository,

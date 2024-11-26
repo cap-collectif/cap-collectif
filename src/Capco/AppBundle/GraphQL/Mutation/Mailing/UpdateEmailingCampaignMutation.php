@@ -21,10 +21,10 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     use MutationTrait;
 
     //when we set the sendAt date, it must be in more than 5mn to be sure the cron can pass.
-    public const SEND_AT_SECURITY = 5 * 60;
+    final public const SEND_AT_SECURITY = 5 * 60;
 
-    private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         GlobalIdResolver $resolver,

@@ -28,6 +28,6 @@ class SSORuntime implements RuntimeExtensionInterface
             $ssoList->set(json_encode($newSsoList))->expiresAfter($this->cache::ONE_MINUTE);
         }
 
-        return json_decode($ssoList->get(), true);
+        return json_decode((string) $ssoList->get(), true);
     }
 }

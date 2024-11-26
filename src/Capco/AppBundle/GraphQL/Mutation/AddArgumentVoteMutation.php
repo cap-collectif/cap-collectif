@@ -23,12 +23,12 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class AddArgumentVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ArgumentRepository $argumentRepo;
-    private ArgumentVoteRepository $argumentVoteRepo;
-    private RedisStorageHelper $redisStorageHelper;
-    private StepRequirementsResolver $stepRequirementsResolver;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly ArgumentRepository $argumentRepo;
+    private readonly ArgumentVoteRepository $argumentVoteRepo;
+    private readonly RedisStorageHelper $redisStorageHelper;
+    private readonly StepRequirementsResolver $stepRequirementsResolver;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

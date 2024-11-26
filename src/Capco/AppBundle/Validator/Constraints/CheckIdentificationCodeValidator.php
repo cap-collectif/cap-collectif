@@ -8,7 +8,7 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class CheckIdentificationCodeValidator extends ConstraintValidator
 {
-    private UserIdentificationCodeRepository $codeRepository;
+    private readonly UserIdentificationCodeRepository $codeRepository;
 
     public function __construct(UserIdentificationCodeRepository $codeRepository)
     {

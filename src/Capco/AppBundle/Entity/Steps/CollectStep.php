@@ -34,7 +34,7 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
     use VoteThresholdTrait;
     use VoteTypeTrait;
 
-    public const TYPE = 'collect';
+    final public const TYPE = 'collect';
 
     public static $sort = [
         'old',

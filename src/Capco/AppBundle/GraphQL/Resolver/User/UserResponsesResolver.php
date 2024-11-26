@@ -11,7 +11,7 @@ class UserResponsesResolver implements QueryInterface
 {
     use ResponsesResolverTrait;
 
-    private ConnectionBuilder $builder;
+    private readonly ConnectionBuilder $builder;
 
     public function __construct(ConnectionBuilder $builder)
     {

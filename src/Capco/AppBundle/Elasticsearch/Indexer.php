@@ -29,7 +29,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
  */
 class Indexer
 {
-    public const BULK_SIZE = 100;
+    final public const BULK_SIZE = 100;
 
     /**
      * This attribute is used in a PhpSpec test.

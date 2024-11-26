@@ -62,7 +62,7 @@ final class Version20181203164324 extends AbstractMigration implements Container
 
         foreach ($districts as $district) {
             if (isset($district['geojson_style'])) {
-                $jsonStyle = json_decode($district['geojson_style']);
+                $jsonStyle = json_decode((string) $district['geojson_style']);
 
                 $uuidBorderStyle = $this->generator->generate($this->em, null);
                 $uuidBackgroundStyle = $this->generator->generate($this->em, null);

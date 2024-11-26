@@ -24,15 +24,15 @@ class UpdateRegistrationFormQuestionsMutation implements MutationInterface
     use MutationTrait;
     use QuestionPersisterTrait;
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private RegistrationFormRepository $registrationFormRepository;
-    private LoggerInterface $logger;
-    private QuestionnaireAbstractQuestionRepository $questionRepo;
-    private AbstractQuestionRepository $abstractQuestionRepo;
-    private MultipleChoiceQuestionRepository $choiceQuestionRepository;
-    private Indexer $indexer;
-    private ValidatorInterface $colorValidator;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly RegistrationFormRepository $registrationFormRepository;
+    private readonly LoggerInterface $logger;
+    private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
+    private readonly AbstractQuestionRepository $abstractQuestionRepo;
+    private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private readonly Indexer $indexer;
+    private readonly ValidatorInterface $colorValidator;
 
     public function __construct(
         EntityManagerInterface $em,

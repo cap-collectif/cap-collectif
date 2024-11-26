@@ -11,9 +11,9 @@ use Swarrot\Processor\ProcessorInterface;
 
 class EventReviewProcessor implements ProcessorInterface
 {
-    private EventRepository $eventRepository;
-    private EventNotifier $notifier;
-    private LoggerInterface $logger;
+    private readonly EventRepository $eventRepository;
+    private readonly EventNotifier $notifier;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EventRepository $eventRepository,

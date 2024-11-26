@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class MediatorVotesResolver implements QueryInterface
 {
-    private ConnectionBuilder $connectionBuilder;
+    private readonly ConnectionBuilder $connectionBuilder;
 
     public function __construct(
         ConnectionBuilder $connectionBuilder

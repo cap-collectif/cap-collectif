@@ -40,7 +40,7 @@ class CommentNotifier extends BaseNotifier
     protected UserShowUrlBySlugResolver $userShowUrlBySlugResolver;
     protected TranslatorInterface $translator;
     protected CommentShowUrlResolver $commentShowUrlResolver;
-    private Manager $manager;
+    private readonly Manager $manager;
 
     public function __construct(
         MailerService $mailer,

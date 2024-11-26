@@ -13,7 +13,7 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class SessionListener implements EventSubscriberInterface
 {
     private const NO_AUTO_CACHE_CONTROL_HEADER = 'X-No-Auto-Cache-Control';
-    private SessionInterface $session;
+    private readonly SessionInterface $session;
 
     public function __construct(SessionInterface $session)
     {

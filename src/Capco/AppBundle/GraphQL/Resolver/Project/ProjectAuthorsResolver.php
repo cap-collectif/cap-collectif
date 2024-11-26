@@ -12,10 +12,10 @@ use Psr\Log\LoggerInterface;
 
 class ProjectAuthorsResolver implements QueryInterface
 {
-    private UserRepository $userRepository;
-    private LoggerInterface $logger;
-    private ProjectRepository $projectRepository;
-    private OrganizationRepository $organizationRepository;
+    private readonly UserRepository $userRepository;
+    private readonly LoggerInterface $logger;
+    private readonly ProjectRepository $projectRepository;
+    private readonly OrganizationRepository $organizationRepository;
 
     public function __construct(
         UserRepository $userRepository,

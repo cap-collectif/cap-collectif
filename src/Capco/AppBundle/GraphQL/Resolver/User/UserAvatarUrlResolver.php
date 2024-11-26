@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserAvatarUrlResolver implements QueryInterface
 {
-    private MediaUrlResolver $urlResolver;
+    private readonly MediaUrlResolver $urlResolver;
 
     public function __construct(MediaUrlResolver $urlResolver)
     {

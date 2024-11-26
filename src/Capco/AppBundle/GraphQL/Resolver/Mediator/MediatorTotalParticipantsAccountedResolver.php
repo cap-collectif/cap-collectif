@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MediatorTotalParticipantsAccountedResolver implements QueryInterface
 {
-    private ParticipantRepository $participantRepository;
+    private readonly ParticipantRepository $participantRepository;
 
     public function __construct(
         ParticipantRepository $participantRepository

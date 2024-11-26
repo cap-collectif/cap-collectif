@@ -13,7 +13,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class DebateViewerUnpublishedVotesResolver implements QueryInterface
 {
     use ResolverTrait;
-    private DebateVoteRepository $repository;
+    private readonly DebateVoteRepository $repository;
 
     public function __construct(DebateVoteRepository $repository)
     {

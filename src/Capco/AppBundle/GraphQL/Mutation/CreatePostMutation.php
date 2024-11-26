@@ -26,16 +26,16 @@ class CreatePostMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const INVALID_FORM = 'INVALID_FORM';
-    public const INVALID_OWNER = 'INVALID_OWNER';
+    final public const INVALID_FORM = 'INVALID_FORM';
+    final public const INVALID_OWNER = 'INVALID_OWNER';
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private SettableOwnerResolver $settableOwnerResolver;
-    private PostAuthorFactory $postAuthorFactory;
-    private Indexer $indexer;
-    private LoggerInterface $logger;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
+    private readonly PostAuthorFactory $postAuthorFactory;
+    private readonly Indexer $indexer;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

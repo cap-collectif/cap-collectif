@@ -17,10 +17,10 @@ class UpdateProposalSocialNetworksMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS = 'PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS';
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private LoggerInterface $logger;
+    final public const PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS = 'PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS';
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

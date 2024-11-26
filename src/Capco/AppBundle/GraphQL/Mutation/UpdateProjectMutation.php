@@ -21,12 +21,12 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class UpdateProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $entityManager;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private ProjectRepository $projectRepository;
-    private ProjectAuthorTransformer $transformer;
-    private GlobalDistrictsPersister $districtsPersister;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly ProjectRepository $projectRepository;
+    private readonly ProjectAuthorTransformer $transformer;
+    private readonly GlobalDistrictsPersister $districtsPersister;
 
     public function __construct(
         EntityManagerInterface $entityManager,

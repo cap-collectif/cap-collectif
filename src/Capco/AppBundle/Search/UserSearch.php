@@ -25,15 +25,15 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UserSearch extends Search
 {
-    public const SEARCH_FIELDS = ['username', 'username.std', 'email'];
+    final public const SEARCH_FIELDS = ['username', 'username.std', 'email'];
 
-    private UserRepository $userRepo;
-    private EventSearch $eventSearch;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ReplyAnonymousRepository $replyAnonymousRepository;
-    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-    private ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository;
+    private readonly UserRepository $userRepo;
+    private readonly EventSearch $eventSearch;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
+    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private readonly ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository;
 
     public function __construct(
         Index $index,
@@ -268,7 +268,7 @@ class UserSearch extends Search
             ) {
                 $sort = [
                     'participationsCountByStep.count' => [
-                        'order' => strtolower($orderBy['direction']),
+                        'order' => strtolower((string) $orderBy['direction']),
                         'nested' => [
                             'path' => 'participationsCountByStep',
                             'filter' => [
@@ -342,7 +342,7 @@ class UserSearch extends Search
         ) {
             $sort = [
                 'participationsCountByProject.count' => [
-                    'order' => strtolower($orderBy['direction']),
+                    'order' => strtolower((string) $orderBy['direction']),
                     'nested' => [
                         'path' => 'participationsCountByProject',
                         'filter' => [

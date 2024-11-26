@@ -27,11 +27,11 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     use TranslatableTrait;
     use UuidTrait;
 
-    public const STATUS_CLOSED = 0;
-    public const STATUS_OPENED = 1;
-    public const STATUS_FUTURE = 2;
+    final public const STATUS_CLOSED = 0;
+    final public const STATUS_OPENED = 1;
+    final public const STATUS_FUTURE = 2;
 
-    public const FILTER_ALL = 'all';
+    final public const FILTER_ALL = 'all';
 
     public static $statuses = [
         'closed' => self::STATUS_CLOSED,

@@ -19,8 +19,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
 {
-    public const LOG_PREFIX_FOUND_QUESTIONS_TO_VALIDATE = 'Validator found questions to validate: ';
-    public const LOGIC_JUMP_OPERATOR_NOT_SUPPORTED = 'Logic jump operator not implemented.';
+    final public const LOG_PREFIX_FOUND_QUESTIONS_TO_VALIDATE = 'Validator found questions to validate: ';
+    final public const LOGIC_JUMP_OPERATOR_NOT_SUPPORTED = 'Logic jump operator not implemented.';
     protected $formRepo;
 
     public function __construct(RegistrationFormRepository $formRepo, LoggerInterface $logger)

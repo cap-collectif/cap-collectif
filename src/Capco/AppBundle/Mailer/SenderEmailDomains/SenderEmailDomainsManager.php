@@ -9,11 +9,11 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class SenderEmailDomainsManager
 {
-    private string $environment;
-    private SenderEmailDomainRepository $repository;
-    private EntityManagerInterface $em;
-    private MailjetClient $mailjetClient;
-    private MandrillClient $mandrillClient;
+    private readonly string $environment;
+    private readonly SenderEmailDomainRepository $repository;
+    private readonly EntityManagerInterface $em;
+    private readonly MailjetClient $mailjetClient;
+    private readonly MandrillClient $mandrillClient;
 
     public function __construct(
         string $environment,

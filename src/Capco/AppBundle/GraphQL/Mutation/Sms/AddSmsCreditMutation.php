@@ -26,20 +26,20 @@ class AddSmsCreditMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ORDER_ALREADY_PROCESSED = 'ORDER_ALREADY_PROCESSED';
-    public const SMS_ORDER_NOT_FOUND = 'SMS_ORDER_NOT_FOUND';
-    public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
+    final public const ORDER_ALREADY_PROCESSED = 'ORDER_ALREADY_PROCESSED';
+    final public const SMS_ORDER_NOT_FOUND = 'SMS_ORDER_NOT_FOUND';
+    final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
     private const VERIFY_SERVICE_NAME_MAX_LENGTH = 30;
 
-    private EntityManagerInterface $em;
-    private SmsCreditRepository $smsCreditRepository;
-    private GlobalIdResolver $globalIdResolver;
-    private FormFactoryInterface $formFactory;
-    private TwilioClient $twilioClient;
-    private SiteParameterResolver $siteParameterResolver;
-    private LoggerInterface $logger;
-    private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly SmsCreditRepository $smsCreditRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly TwilioClient $twilioClient;
+    private readonly SiteParameterResolver $siteParameterResolver;
+    private readonly LoggerInterface $logger;
+    private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -154,7 +154,7 @@ class AddSmsCreditMutation implements MutationInterface
     private function createTwilioVerifyServiceName(): ?string
     {
         $organizationName = $this->siteParameterResolver->getValue('global.site.organization_name');
-        $organizationName = substr($organizationName, 0, self::VERIFY_SERVICE_NAME_MAX_LENGTH);
+        $organizationName = substr((string) $organizationName, 0, self::VERIFY_SERVICE_NAME_MAX_LENGTH);
 
         $response = $this->twilioClient->createVerifyService($organizationName);
         $statusCode = $response['statusCode'];

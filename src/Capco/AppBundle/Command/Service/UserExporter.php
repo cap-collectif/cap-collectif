@@ -19,18 +19,18 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class UserExporter
 {
-    public const CSV_DELIMITER = ';';
-    public const BATCH_SIZE = 10000;
-    private EntityManagerInterface $entityManager;
+    final public const CSV_DELIMITER = ';';
+    final public const BATCH_SIZE = 10000;
+    private readonly EntityManagerInterface $entityManager;
     private SymfonyStyle $style;
     private SerializerInterface $serializer;
-    private Filesystem $fileSystem;
+    private readonly Filesystem $fileSystem;
     private ?string $delimiter = self::CSV_DELIMITER;
-    private UsersFilePathResolver $usersFilePathResolver;
-    private UserNormalizer $userNormalizer;
-    private UserRepository $userRepository;
-    private LoggerInterface $logger;
-    private LocaleRepository $localeRepository;
+    private readonly UsersFilePathResolver $usersFilePathResolver;
+    private readonly UserNormalizer $userNormalizer;
+    private readonly UserRepository $userRepository;
+    private readonly LoggerInterface $logger;
+    private readonly LocaleRepository $localeRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,

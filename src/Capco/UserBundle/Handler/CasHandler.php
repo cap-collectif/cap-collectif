@@ -17,10 +17,10 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class CasHandler
 {
-    private SessionInterface $session;
-    private LoggerInterface $logger;
-    private ?CASSSOConfiguration $configuration;
-    private string $environment;
+    private readonly SessionInterface $session;
+    private readonly LoggerInterface $logger;
+    private readonly ?CASSSOConfiguration $configuration;
+    private readonly string $environment;
 
     public function __construct(
         SessionInterface $session,

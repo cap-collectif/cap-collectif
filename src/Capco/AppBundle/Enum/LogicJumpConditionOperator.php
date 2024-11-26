@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Enum;
 
 class LogicJumpConditionOperator
 {
-    public const IS = 'IS';
-    public const IS_NOT = 'IS_NOT';
+    final public const IS = 'IS';
+    final public const IS_NOT = 'IS_NOT';
 
     protected static $operatorName = [
         self::IS => 'logic-jump.is',

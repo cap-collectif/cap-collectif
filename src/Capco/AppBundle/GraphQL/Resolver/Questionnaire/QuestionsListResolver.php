@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionsListResolver implements QueryInterface
 {
-    private AbstractQuestionRepository $repository;
+    private readonly AbstractQuestionRepository $repository;
 
     public function __construct(AbstractQuestionRepository $repository)
     {

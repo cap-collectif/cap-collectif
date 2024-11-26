@@ -29,19 +29,19 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     use MutationTrait;
     use QuestionPersisterTrait;
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     /** used in QuestionPersisterTrait */
-    private QuestionnaireAbstractQuestionRepository $questionRepo;
-    private AbstractQuestionRepository $abstractQuestionRepo;
-    private Indexer $indexer;
-    private MultipleChoiceQuestionRepository $choiceQuestionRepository;
-    private ValidatorInterface $colorValidator;
-    private QuestionJumpsHandler $questionJumpsHandler;
+    private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
+    private readonly AbstractQuestionRepository $abstractQuestionRepo;
+    private readonly Indexer $indexer;
+    private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private readonly ValidatorInterface $colorValidator;
+    private readonly QuestionJumpsHandler $questionJumpsHandler;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -12,8 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class ProposalFollowerConnection implements QueryInterface
 {
-    private UserRepository $userRepository;
-    private LoggerInterface $logger;
+    private readonly UserRepository $userRepository;
+    private readonly LoggerInterface $logger;
 
     public function __construct(UserRepository $userRepository, LoggerInterface $logger)
     {

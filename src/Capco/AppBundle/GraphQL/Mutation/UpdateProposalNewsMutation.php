@@ -25,16 +25,16 @@ class UpdateProposalNewsMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const POST_NOT_FOUND = 'POST_NOT_FOUND';
-    public const ACCESS_DENIED = 'ACCESS_DENIED';
-    public const INVALID_DATA = 'INVALID_DATA';
-    public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
+    final public const POST_NOT_FOUND = 'POST_NOT_FOUND';
+    final public const ACCESS_DENIED = 'ACCESS_DENIED';
+    final public const INVALID_DATA = 'INVALID_DATA';
+    final public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,

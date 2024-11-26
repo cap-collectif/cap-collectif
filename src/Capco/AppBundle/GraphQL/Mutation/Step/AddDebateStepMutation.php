@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class AddDebateStepMutation implements MutationInterface
 {
     use MutationTrait;
-    private AddStepService $addStepService;
+    private readonly AddStepService $addStepService;
 
     public function __construct(AddStepService $addStepService)
     {

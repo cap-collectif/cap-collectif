@@ -270,7 +270,7 @@ class GraphQLContext implements Context
     public function theJsonResponseShouldHaveError(string $errorMessage)
     {
         $found = 0;
-        foreach (json_decode($this->response)->errors as $responseError) {
+        foreach (json_decode((string) $this->response)->errors as $responseError) {
             if ($responseError->message === $errorMessage) {
                 ++$found;
             }

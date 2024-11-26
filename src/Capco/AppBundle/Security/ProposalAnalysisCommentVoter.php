@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class ProposalAnalysisCommentVoter extends Voter
 {
-    public const CREATE = 'create';
+    final public const CREATE = 'create';
 
     protected function supports($attribute, $subject): bool
     {

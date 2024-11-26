@@ -15,8 +15,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class CreateUserIdentificationCodeListMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private UserIdentificationCodeRepository $codeRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly UserIdentificationCodeRepository $codeRepository;
 
     public function __construct(
         EntityManagerInterface $em,

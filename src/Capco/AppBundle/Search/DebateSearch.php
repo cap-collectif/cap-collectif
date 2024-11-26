@@ -18,8 +18,8 @@ use Elastica\ResultSet;
 
 class DebateSearch extends Search
 {
-    private DebateArgumentRepository $debateArgumentRepository;
-    private DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
+    private readonly DebateArgumentRepository $debateArgumentRepository;
+    private readonly DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
 
     public function __construct(
         Index $index,

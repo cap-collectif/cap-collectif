@@ -19,15 +19,15 @@ class UpdateCustomDomainMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const CUSTOM_DOMAIN_SYNTAX_NOT_VALID = 'CUSTOM_DOMAIN_SYNTAX_NOT_VALID';
-    public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
-    public const CNAME_NOT_VALID = 'CNAME_NOT_VALID';
+    final public const CUSTOM_DOMAIN_SYNTAX_NOT_VALID = 'CUSTOM_DOMAIN_SYNTAX_NOT_VALID';
+    final public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
+    final public const CNAME_NOT_VALID = 'CNAME_NOT_VALID';
 
-    private EntityManagerInterface $em;
-    private SiteSettingsRepository $siteSettingsRepository;
-    private LoggerInterface $logger;
-    private DeployerClient $deployerClient;
-    private ValidatorInterface $validator;
+    private readonly EntityManagerInterface $em;
+    private readonly SiteSettingsRepository $siteSettingsRepository;
+    private readonly LoggerInterface $logger;
+    private readonly DeployerClient $deployerClient;
+    private readonly ValidatorInterface $validator;
 
     public function __construct(
         EntityManagerInterface $em,

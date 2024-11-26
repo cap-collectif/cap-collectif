@@ -22,7 +22,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class VoteTypeResolver implements QueryInterface
 {
-    private TypeResolver $typeResolver;
+    private readonly TypeResolver $typeResolver;
 
     public function __construct(TypeResolver $typeResolver)
     {

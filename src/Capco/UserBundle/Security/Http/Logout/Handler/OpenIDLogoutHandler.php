@@ -15,12 +15,12 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class OpenIDLogoutHandler implements LogoutHandlerInterface
 {
-    private ResourceOwnerInterface $resourceOwner;
-    private RouterInterface $router;
-    private OpenIDReferrerResolver $refererResolver;
-    private AbstractSSOConfigurationRepository $repository;
-    private TokenStorageInterface $tokenStorage;
-    private EntityManagerInterface $em;
+    private readonly ResourceOwnerInterface $resourceOwner;
+    private readonly RouterInterface $router;
+    private readonly OpenIDReferrerResolver $refererResolver;
+    private readonly AbstractSSOConfigurationRepository $repository;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         ResourceOwnerInterface $resourceOwner,

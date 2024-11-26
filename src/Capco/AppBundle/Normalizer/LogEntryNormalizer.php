@@ -15,7 +15,7 @@ class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterfac
 {
     use SerializerAwareTrait;
     private $router;
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
     private $logManager;
 
     public function __construct(

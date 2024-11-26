@@ -16,7 +16,7 @@ class TranslationExtension extends AbstractExtension
 {
     public function getFunctions()
     {
-        return [new TwigFunction('is_translatable', [$this, 'isTranslatable'])];
+        return [new TwigFunction('is_translatable', $this->isTranslatable(...))];
     }
 
     public function isTranslatable($object): bool

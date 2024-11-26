@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class FranceConnectAllowedDataResolver implements QueryInterface
 {
-    private FranceConnectSSOConfigurationRepository $configurationRepository;
+    private readonly FranceConnectSSOConfigurationRepository $configurationRepository;
 
     public function __construct(FranceConnectSSOConfigurationRepository $configurationRepository)
     {

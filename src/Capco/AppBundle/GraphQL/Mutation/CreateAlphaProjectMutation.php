@@ -14,8 +14,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateAlphaProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ProjectPersister $persister;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ProjectPersister $persister;
 
     public function __construct(ProjectPersister $persister, AuthorizationCheckerInterface $checker)
     {

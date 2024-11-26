@@ -15,11 +15,11 @@ class VerifyUserPhoneNumberMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
+    final public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
 
-    private EntityManagerInterface $em;
-    private SmsProviderInterface $smsProvider;
-    private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly SmsProviderInterface $smsProvider;
+    private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
 
     public function __construct(
         EntityManagerInterface $em,

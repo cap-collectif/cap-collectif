@@ -11,8 +11,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserInviteNewInvitationProcessor implements ProcessorInterface
 {
-    private UserInviteEmailMessageNotifier $notifier;
-    private UserInviteEmailMessageRepository $emailMessageRepository;
+    private readonly UserInviteEmailMessageNotifier $notifier;
+    private readonly UserInviteEmailMessageRepository $emailMessageRepository;
 
     public function __construct(
         UserInviteEmailMessageRepository $emailMessageRepository,

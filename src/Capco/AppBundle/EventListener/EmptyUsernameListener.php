@@ -42,7 +42,7 @@ class EmptyUsernameListener
         if (\in_array($route, $routes, true)) {
             return;
         }
-        if (false !== strpos($route, '_imagine')) {
+        if (false !== strpos((string) $route, '_imagine')) {
             return;
         }
         $response = new Response(

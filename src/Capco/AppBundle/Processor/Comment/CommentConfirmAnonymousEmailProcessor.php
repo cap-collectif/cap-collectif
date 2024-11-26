@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class CommentConfirmAnonymousEmailProcessor implements ProcessorInterface
 {
-    private CommentRepository $commentRepository;
-    private CommentNotifier $notifier;
+    private readonly CommentRepository $commentRepository;
+    private readonly CommentNotifier $notifier;
 
     public function __construct(CommentRepository $commentRepository, CommentNotifier $notifier)
     {

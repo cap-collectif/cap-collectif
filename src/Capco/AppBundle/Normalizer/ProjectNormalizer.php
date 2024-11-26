@@ -20,13 +20,13 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private UrlGeneratorInterface $router;
-    private ObjectNormalizer $normalizer;
-    private ProjectHelper $helper;
-    private MediaExtension $mediaExtension;
-    private StepResolver $stepResolver;
-    private ContributionResolver $contributionResolver;
-    private EventRepository $eventRepository;
+    private readonly UrlGeneratorInterface $router;
+    private readonly ObjectNormalizer $normalizer;
+    private readonly ProjectHelper $helper;
+    private readonly MediaExtension $mediaExtension;
+    private readonly StepResolver $stepResolver;
+    private readonly ContributionResolver $contributionResolver;
+    private readonly EventRepository $eventRepository;
 
     public function __construct(
         UrlGeneratorInterface $router,

@@ -13,8 +13,8 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class CreateAccountsFromEmailsCommand extends Command
 {
-    private UserManagerInterface $userManager;
-    private UserPasswordEncoderInterface $passwordEncoder;
+    private readonly UserManagerInterface $userManager;
+    private readonly UserPasswordEncoderInterface $passwordEncoder;
 
     public function __construct(
         ?string $name,

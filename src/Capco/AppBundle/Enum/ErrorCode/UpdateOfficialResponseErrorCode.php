@@ -6,15 +6,15 @@ use Capco\AppBundle\Enum\EnumType;
 
 class UpdateOfficialResponseErrorCode implements EnumType
 {
-    public const ID_NOT_FOUND = 'ID_NOT_FOUND';
-    public const NO_AUTHOR = 'NO_AUTHOR';
-    public const AUTHOR_NOT_FOUND = 'AUTHOR_NOT_FOUND';
-    public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
-    public const PROPOSAL_HAS_RESPONSE = 'PROPOSAL_HAS_RESPONSE';
-    public const INVALID_DATE = 'INVALID_DATE';
-    public const NOT_ADMIN = 'NOT_ADMIN';
+    final public const ID_NOT_FOUND = 'ID_NOT_FOUND';
+    final public const NO_AUTHOR = 'NO_AUTHOR';
+    final public const AUTHOR_NOT_FOUND = 'AUTHOR_NOT_FOUND';
+    final public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
+    final public const PROPOSAL_HAS_RESPONSE = 'PROPOSAL_HAS_RESPONSE';
+    final public const INVALID_DATE = 'INVALID_DATE';
+    final public const NOT_ADMIN = 'NOT_ADMIN';
 
-    public const ALL = [
+    final public const ALL = [
         self::ID_NOT_FOUND,
         self::AUTHOR_NOT_FOUND,
         self::NO_AUTHOR,

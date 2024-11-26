@@ -15,10 +15,10 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class SiteFaviconProcessor
 {
-    public const DEFAULT_COLOR = '#ffffff';
-    public const DEFAULT_NAME = 'Cap Collectif';
-    public const WEB_MANIFEST_FILENAME = 'manifest.json';
-    public const BROWSERCONFIG_FILENAME = 'browserconfig.xml';
+    final public const DEFAULT_COLOR = '#ffffff';
+    final public const DEFAULT_NAME = 'Cap Collectif';
+    final public const WEB_MANIFEST_FILENAME = 'manifest.json';
+    final public const BROWSERCONFIG_FILENAME = 'browserconfig.xml';
 
     private $webManifest = [
         'name' => self::DEFAULT_NAME,
@@ -90,7 +90,7 @@ class SiteFaviconProcessor
     private $siteResolver;
     private $urlResolver;
 
-    private LoggerInterface $logger;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         SiteFaviconRuntime $siteFaviconExtension,

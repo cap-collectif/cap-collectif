@@ -30,11 +30,11 @@ class SectionAdmin extends AbstractAdmin
         '_sort_by' => 'position',
     ];
 
-    private Manager $manager;
-    private SectionRepository $repository;
-    private QueryVotesResolver $queryVotesResolver;
-    private QueryEventsResolver $queryEventsResolver;
-    private CollectStepRepository $collectStepRepository;
+    private readonly Manager $manager;
+    private readonly SectionRepository $repository;
+    private readonly QueryVotesResolver $queryVotesResolver;
+    private readonly QueryEventsResolver $queryEventsResolver;
+    private readonly CollectStepRepository $collectStepRepository;
 
     public function __construct(
         string $code,

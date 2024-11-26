@@ -18,7 +18,7 @@ class CasAuthenticator extends AbstractGuardAuthenticator
 {
     protected LoggerInterface $logger;
     protected CasHandler $casHandler;
-    private CasUserProvider $casUserProvider;
+    private readonly CasUserProvider $casUserProvider;
 
     public function __construct(
         LoggerInterface $logger,

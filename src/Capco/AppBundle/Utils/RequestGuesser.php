@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class RequestGuesser
 {
-    private RequestStack $requestStack;
+    private readonly RequestStack $requestStack;
 
     public function __construct(RequestStack $requestStack)
     {

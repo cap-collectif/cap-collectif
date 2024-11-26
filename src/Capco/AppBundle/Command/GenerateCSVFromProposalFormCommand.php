@@ -21,9 +21,9 @@ class GenerateCSVFromProposalFormCommand extends BaseExportCommand
 
     protected static $defaultName = 'capco:import-proposals:generate-header-csv';
     protected string $projectRootDir;
-    private ProposalFormRepository $proposalFormRepository;
-    private ThemeRepository $themeRepository;
-    private string $locale;
+    private readonly ProposalFormRepository $proposalFormRepository;
+    private readonly ThemeRepository $themeRepository;
+    private readonly string $locale;
 
     public function __construct(
         ExportUtils $exportUtils,

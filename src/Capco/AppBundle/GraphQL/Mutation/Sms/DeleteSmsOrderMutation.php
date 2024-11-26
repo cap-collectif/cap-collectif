@@ -13,10 +13,10 @@ class DeleteSmsOrderMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const SMS_ORDER_NOT_FOUND = 'SMS_ORDER_NOT_FOUND';
+    final public const SMS_ORDER_NOT_FOUND = 'SMS_ORDER_NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(EntityManagerInterface $em, GlobalIdResolver $globalIdResolver)
     {

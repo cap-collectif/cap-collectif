@@ -251,8 +251,8 @@ class Version20180424144708 extends AbstractMigration implements ContainerAwareI
         $users = [];
         $cheaterCount = 0;
         foreach ($votesWithoutUser as $anonymous) {
-            $email = trim(strtolower($anonymous['email']));
-            $username = trim($anonymous['username']);
+            $email = trim(strtolower((string) $anonymous['email']));
+            $username = trim((string) $anonymous['username']);
             $emailAlreadyUsed = $em->getRepository(User::class)->findOneBy(['email' => $email]);
             if (!$emailAlreadyUsed && !$anonymous['voter_id'] && $email && !isset($users[$email])) {
                 $users[$email]['object'] = (new User())

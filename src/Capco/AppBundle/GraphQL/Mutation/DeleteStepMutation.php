@@ -21,9 +21,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteStepMutation implements MutationInterface
 {
     use MutationTrait;
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

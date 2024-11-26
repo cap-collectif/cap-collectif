@@ -14,8 +14,8 @@ use Psr\Log\LoggerInterface;
 
 class UserPostsResolver implements QueryInterface
 {
-    private LoggerInterface $logger;
-    private PostSearch $postSearch;
+    private readonly LoggerInterface $logger;
+    private readonly PostSearch $postSearch;
 
     public function __construct(LoggerInterface $logger, PostSearch $postSearch)
     {

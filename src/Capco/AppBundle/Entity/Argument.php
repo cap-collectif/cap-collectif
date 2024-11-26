@@ -35,9 +35,9 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
     use UuidTrait;
     use VotableOkTrait;
 
-    public const TYPE_AGAINST = 0;
-    public const TYPE_FOR = 1;
-    public const TYPE_SIMPLE = 2;
+    final public const TYPE_AGAINST = 0;
+    final public const TYPE_FOR = 1;
+    final public const TYPE_SIMPLE = 2;
 
     public static $argumentTypes = [
         self::TYPE_FOR => 'yes',

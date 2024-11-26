@@ -10,9 +10,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class SettableOwnerResolver
 {
-    public const OWNER_NOT_FOUND = 'OWNER_NOT_FOUND';
+    final public const OWNER_NOT_FOUND = 'OWNER_NOT_FOUND';
 
-    private GlobalIdResolver $resolver;
+    private readonly GlobalIdResolver $resolver;
 
     public function __construct(GlobalIdResolver $resolver)
     {

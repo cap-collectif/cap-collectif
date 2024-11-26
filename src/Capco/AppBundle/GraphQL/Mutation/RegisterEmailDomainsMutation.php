@@ -15,9 +15,9 @@ use Symfony\Component\HttpKernel\Exception\AccessDeniedHttpException;
 class RegisterEmailDomainsMutation implements MutationInterface
 {
     use MutationTrait;
-    private FormFactoryInterface $formFactory;
-    private RegistrationFormRepository $registrationFormRepository;
-    private EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly RegistrationFormRepository $registrationFormRepository;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         FormFactoryInterface $formFactory,

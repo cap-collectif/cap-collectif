@@ -31,7 +31,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
         LogicJumpRepository $repository
     ) {
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

@@ -42,7 +42,7 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         $this->globalIdResolver = $globalIdResolver;
 
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

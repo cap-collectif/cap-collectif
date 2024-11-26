@@ -13,11 +13,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ProcessingProposalCommand extends Command
 {
-    public const MESSAGE_YES = 'yes';
+    final public const MESSAGE_YES = 'yes';
     protected static $defaultName = 'capco:process_proposals';
-    private AnalysisConfigurationManager $analysisConfigurationManager;
-    private AnalysisConfigurationRepository $analysisConfigurationRepository;
-    private Manager $toggle;
+    private readonly AnalysisConfigurationManager $analysisConfigurationManager;
+    private readonly AnalysisConfigurationRepository $analysisConfigurationRepository;
+    private readonly Manager $toggle;
 
     public function __construct(
         AnalysisConfigurationManager $analysisConfigurationManager,

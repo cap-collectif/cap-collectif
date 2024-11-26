@@ -17,11 +17,11 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class FollowProposalMutation implements MutationInterface
 {
-    private EntityManagerInterface $em;
-    private FollowerRepository $followerRepository;
-    private ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader;
-    private ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly FollowerRepository $followerRepository;
+    private readonly ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader;
+    private readonly ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

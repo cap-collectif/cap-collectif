@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Enum;
 
 class DeleteAccountByEmailErrorCode implements EnumType
 {
-    public const NON_EXISTING_EMAIL = 'NON_EXISTING_EMAIL';
-    public const DELETION_DENIED = 'DELETION_DENIED';
+    final public const NON_EXISTING_EMAIL = 'NON_EXISTING_EMAIL';
+    final public const DELETION_DENIED = 'DELETION_DENIED';
 
     public static function isValid($value): bool
     {

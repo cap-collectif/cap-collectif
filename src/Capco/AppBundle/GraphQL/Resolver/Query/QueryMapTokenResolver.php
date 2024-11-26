@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryMapTokenResolver implements QueryInterface
 {
-    private MapTokenRepository $repository;
+    private readonly MapTokenRepository $repository;
     private ?string $defaultMapboxPublicToken = null;
     private ?string $defaultMapboxSecretKey = null;
 

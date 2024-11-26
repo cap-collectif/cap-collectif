@@ -20,9 +20,9 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
      */
     protected array $handlers;
 
-    private TokenStorageInterface $tokenStorage;
-    private RouterInterface $router;
-    private KernelInterface $kernel;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly RouterInterface $router;
+    private readonly KernelInterface $kernel;
 
     public function __construct(
         array $handlers,

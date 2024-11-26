@@ -9,11 +9,11 @@ use Psr\Log\LoggerInterface;
 /** https://github.com/overblog/GraphQLBundle/blob/master/docs/error-handling/index.md#custom-error-handling--formatting */
 final class ErrorHandler
 {
-    private GraphQLErrorHandler $errorHandler;
+    private readonly GraphQLErrorHandler $errorHandler;
 
-    private bool $throwException;
+    private readonly bool $throwException;
 
-    private LoggerInterface $logger;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         LoggerInterface $logger,

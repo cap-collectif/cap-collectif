@@ -16,11 +16,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SendSmsCreditConsumptionAlertCommand extends Command
 {
-    private EntityManagerInterface $em;
-    private SmsCreditRepository $smsCreditRepository;
-    private SmsRemainingCreditEmailAlertRepository $smsRemainingCreditEmailAlertRepository;
-    private SmsAnalyticsHelper $smsAnalyticsHelper;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly SmsCreditRepository $smsCreditRepository;
+    private readonly SmsRemainingCreditEmailAlertRepository $smsRemainingCreditEmailAlertRepository;
+    private readonly SmsAnalyticsHelper $smsAnalyticsHelper;
+    private readonly Publisher $publisher;
 
     public function __construct(
         string $name,

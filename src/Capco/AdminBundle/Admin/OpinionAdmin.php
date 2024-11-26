@@ -27,8 +27,8 @@ class OpinionAdmin extends CapcoAdmin
     protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     protected array $formOptions = ['cascade_validation' => true];
-    private TokenStorageInterface $tokenStorage;
-    private OpinionTypeRepository $opinionTypeRepository;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly OpinionTypeRepository $opinionTypeRepository;
 
     public function __construct(
         string $code,

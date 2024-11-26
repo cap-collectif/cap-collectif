@@ -10,18 +10,18 @@ use Symfony\Component\Process\Process;
 
 class MailjetClient
 {
-    public const BASE_URL = 'https://api.mailjet.com/v3/REST/';
+    final public const BASE_URL = 'https://api.mailjet.com/v3/REST/';
 
     // https://documentation.mailjet.com/hc/fr/articles/360048398994-Statut-des-emails-explication-de-toutes-les-m%C3%A9triques-
-    public const STATUS_SENT = 'sent';
-    public const STATUS_OPENED = 'opened';
-    public const STATUS_CLICKED = 'clicked';
-    public const STATUS_QUEUED = 'queued';
+    final public const STATUS_SENT = 'sent';
+    final public const STATUS_OPENED = 'opened';
+    final public const STATUS_CLICKED = 'clicked';
+    final public const STATUS_QUEUED = 'queued';
 
     public Client $client;
 
-    private string $publicKey;
-    private string $privateKey;
+    private readonly string $publicKey;
+    private readonly string $privateKey;
 
     public function __construct(string $publicKey, string $privateKey)
     {

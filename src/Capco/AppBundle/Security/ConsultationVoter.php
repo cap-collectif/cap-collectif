@@ -8,9 +8,9 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ConsultationVoter extends AbstractOwnerableVoter
 {
-    public const DELETE = 'DELETE';
-    public const CREATE = 'CREATE';
-    public const EDIT = 'EDIT';
+    final public const DELETE = 'DELETE';
+    final public const CREATE = 'CREATE';
+    final public const EDIT = 'EDIT';
 
     protected function supports($attribute, $subject): bool
     {

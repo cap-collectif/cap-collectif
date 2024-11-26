@@ -38,9 +38,9 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
     use ContributorTrait;
     use UserSSOTrait;
 
-    public const GENDER_OTHER = 'o';
-    public const GENDER_FEMALE = 'f';
-    public const GENDER_MALE = 'm';
+    final public const GENDER_OTHER = 'o';
+    final public const GENDER_FEMALE = 'f';
+    final public const GENDER_MALE = 'm';
     protected const SORT_ORDER_CREATED_AT = 0;
     protected const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 

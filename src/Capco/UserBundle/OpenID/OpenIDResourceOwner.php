@@ -25,8 +25,8 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     ];
 
     private ?string $instanceName = null;
-    private FeatureChecker $featureChecker;
-    private LoggerInterface $logger;
+    private readonly FeatureChecker $featureChecker;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         HttpMethodsClientInterface $hwiHttpClient,

@@ -7,7 +7,7 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 
 class UserNotificationsListener
 {
-    private TokenGeneratorInterface $tokenGenerator;
+    private readonly TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(TokenGeneratorInterface $tokenGenerator)
     {

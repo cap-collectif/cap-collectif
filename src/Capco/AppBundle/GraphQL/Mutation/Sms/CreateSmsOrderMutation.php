@@ -14,9 +14,9 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 class CreateSmsOrderMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private SmsOrderRepository $smsOrderRepository;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly SmsOrderRepository $smsOrderRepository;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,

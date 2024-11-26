@@ -18,14 +18,14 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
 {
     use MutationTrait;
 
-    public const TOO_MANY_PROJECTS = 'TOO_MANY_PROJECTS';
-    public const INVALID_FORM = 'INVALID_FORM';
+    final public const TOO_MANY_PROJECTS = 'TOO_MANY_PROJECTS';
+    final public const INVALID_FORM = 'INVALID_FORM';
 
-    private EntityManagerInterface $em;
-    private SectionRepository $sectionRepository;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private Manager $manager;
+    private readonly EntityManagerInterface $em;
+    private readonly SectionRepository $sectionRepository;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly Manager $manager;
 
     public function __construct(
         EntityManagerInterface $em,

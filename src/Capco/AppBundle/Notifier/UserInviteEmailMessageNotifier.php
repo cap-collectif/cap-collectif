@@ -26,11 +26,11 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserInviteEmailMessageNotifier extends BaseNotifier
 {
-    private Publisher $publisher;
-    private EntityManagerInterface $entityManager;
-    private LoggerInterface $logger;
-    private MailjetClient $mailjetClient;
-    private MandrillClient $mandrillClient;
+    private readonly Publisher $publisher;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly LoggerInterface $logger;
+    private readonly MailjetClient $mailjetClient;
+    private readonly MandrillClient $mandrillClient;
 
     public function __construct(
         MailerService $mailer,

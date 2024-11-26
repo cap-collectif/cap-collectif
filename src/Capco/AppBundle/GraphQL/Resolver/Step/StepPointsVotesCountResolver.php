@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class StepPointsVotesCountResolver implements QueryInterface
 {
-    private StepPointsVotesCountDataLoader $pointsVotesCountDataLoader;
+    private readonly StepPointsVotesCountDataLoader $pointsVotesCountDataLoader;
 
     public function __construct(StepPointsVotesCountDataLoader $pointsVotesCountDataLoader)
     {

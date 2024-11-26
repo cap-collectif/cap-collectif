@@ -18,8 +18,8 @@ class AnonymousUserProposalSmsVote
 {
     use TimestampableTrait;
     use UuidTrait;
-    public const APPROVED = 'APPROVED';
-    public const PENDING = 'PENDING';
+    final public const APPROVED = 'APPROVED';
+    final public const PENDING = 'PENDING';
 
     /**
      * @ORM\Column(name="phone", nullable=false, type="string")

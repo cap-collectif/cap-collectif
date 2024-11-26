@@ -23,11 +23,11 @@ class SimplePreAuthenticator extends AbstractGuardAuthenticator
     protected Manager $toggleManager;
     protected ?SamlAuthenticator $samlAuthenticator;
     protected ?CasAuthenticator $casAuthenticator;
-    private ?CASSSOConfiguration $casConfiguration;
-    private ?AuthenticatorInterface $currentAuthenticator;
-    private ?UserProviderInterface $currentProvider;
-    private ?SamlUserProvider $samlUserProvider;
-    private ?CasUserProvider $casUserProvider;
+    private readonly ?CASSSOConfiguration $casConfiguration;
+    private readonly ?AuthenticatorInterface $currentAuthenticator;
+    private readonly ?UserProviderInterface $currentProvider;
+    private readonly ?SamlUserProvider $samlUserProvider;
+    private readonly ?CasUserProvider $casUserProvider;
 
     public function __construct(
         Manager $toggleManager,

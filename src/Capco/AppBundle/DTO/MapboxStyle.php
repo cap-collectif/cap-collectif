@@ -32,7 +32,7 @@ class MapboxStyle implements MapTokenStyleInterface
             ->setVersion((int) $response['version'])
             ->setName($response['name'])
             ->setOwner($response['owner'])
-            ->setVisibility(strtoupper($response['visibility']))
+            ->setVisibility(strtoupper((string) $response['visibility']))
             ->setId($response['id'])
         ;
 

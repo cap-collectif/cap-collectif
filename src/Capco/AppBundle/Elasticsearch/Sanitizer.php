@@ -19,7 +19,7 @@ class Sanitizer
 
         $reservedCharacters = self::reservedCharacters($exclude);
 
-        return str_replace(array_keys($reservedCharacters), $reservedCharacters, $query);
+        return str_replace(array_keys($reservedCharacters), $reservedCharacters, (string) $query);
     }
 
     /**

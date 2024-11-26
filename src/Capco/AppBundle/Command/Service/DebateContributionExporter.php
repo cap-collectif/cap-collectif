@@ -21,7 +21,7 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class DebateContributionExporter extends ContributionExporter
 {
-    public const BATCH_SIZE = 1000;
+    final public const BATCH_SIZE = 1000;
     private const HEADERS_TABLE_SUMMARY = [
         'Debate',
         'Debate Argument(s)',
@@ -29,10 +29,10 @@ class DebateContributionExporter extends ContributionExporter
     ];
     private const STYLE_TABLE_SUMMARY = 'box-double';
     protected EntityManagerInterface $entityManager;
-    private DebateRepository $debateRepository;
-    private ContributionsFilePathResolver $contributionsFilePathResolver;
-    private LoggerInterface $logger;
-    private DebateArgumentInterfaceNormalizer $debateArgumentInterfaceNormalizer;
+    private readonly DebateRepository $debateRepository;
+    private readonly ContributionsFilePathResolver $contributionsFilePathResolver;
+    private readonly LoggerInterface $logger;
+    private readonly DebateArgumentInterfaceNormalizer $debateArgumentInterfaceNormalizer;
 
     public function __construct(
         EntityManagerInterface $entityManager,

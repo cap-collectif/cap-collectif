@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalOfficialResponseResolver implements QueryInterface
 {
-    private OfficialResponseRepository $repository;
+    private readonly OfficialResponseRepository $repository;
 
     public function __construct(OfficialResponseRepository $repository)
     {

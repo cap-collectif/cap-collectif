@@ -22,9 +22,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DebateNotifier extends BaseNotifier
 {
-    private DebateUrlResolver $debateUrlResolver;
-    private MediaUrlResolver $mediaUrlResolver;
-    private DebateVoteRepository $debateVoteRepository;
+    private readonly DebateUrlResolver $debateUrlResolver;
+    private readonly MediaUrlResolver $mediaUrlResolver;
+    private readonly DebateVoteRepository $debateVoteRepository;
 
     public function __construct(
         MailerService $mailer,

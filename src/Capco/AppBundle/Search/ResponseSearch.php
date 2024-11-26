@@ -23,7 +23,7 @@ use Elastica\ResultSet;
 
 class ResponseSearch extends Search
 {
-    private AbstractResponseRepository $responseRepository;
+    private readonly AbstractResponseRepository $responseRepository;
 
     public function __construct(Index $index, AbstractResponseRepository $responseRepository)
     {

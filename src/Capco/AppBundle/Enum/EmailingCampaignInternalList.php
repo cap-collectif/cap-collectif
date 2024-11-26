@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Enum;
 
 class EmailingCampaignInternalList
 {
-    public const REGISTERED = 'REGISTERED';
-    public const NOT_CONFIRMED = 'NOT_CONFIRMED';
-    public const CONFIRMED = 'CONFIRMED';
+    final public const REGISTERED = 'REGISTERED';
+    final public const NOT_CONFIRMED = 'NOT_CONFIRMED';
+    final public const CONFIRMED = 'CONFIRMED';
 
-    public const ALL = [self::REGISTERED, self::NOT_CONFIRMED, self::CONFIRMED];
+    final public const ALL = [self::REGISTERED, self::NOT_CONFIRMED, self::CONFIRMED];
 
     public static function isValid(string $value): bool
     {

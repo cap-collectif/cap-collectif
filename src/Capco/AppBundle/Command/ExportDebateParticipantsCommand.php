@@ -13,9 +13,9 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportDebateParticipantsCommand extends BaseExportCommand
 {
-    private Manager $toggleManager;
-    private DebateRepository $debateRepository;
-    private DebateParticipantExporter $exporter;
+    private readonly Manager $toggleManager;
+    private readonly DebateRepository $debateRepository;
+    private readonly DebateParticipantExporter $exporter;
 
     public function __construct(
         ExportUtils $exportUtils,

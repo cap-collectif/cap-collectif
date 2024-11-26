@@ -15,8 +15,8 @@ class ParticipantExporter
     protected EntityManagerInterface $entityManager;
     protected bool $hasParticipants = false;
     protected SymfonyStyle $style;
-    private SerializerInterface $serializer;
-    private Filesystem $fileSystem;
+    private readonly SerializerInterface $serializer;
+    private readonly Filesystem $fileSystem;
     private ?string $delimiter = self::CSV_DELIMITER;
 
     public function __construct(

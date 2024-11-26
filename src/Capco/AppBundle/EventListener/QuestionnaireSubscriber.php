@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class QuestionnaireSubscriber implements EventSubscriber
 {
-    private TokenStorageInterface $tokenStorage;
+    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(TokenStorageInterface $tokenStorage)
     {

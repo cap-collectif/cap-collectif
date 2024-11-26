@@ -20,8 +20,8 @@ class CheckUserInviteStatusCommand extends Command
 {
     protected static $defaultName = 'capco:check:user-invite-status';
 
-    private Publisher $publisher;
-    private UserInviteRepository $inviteRepository;
+    private readonly Publisher $publisher;
+    private readonly UserInviteRepository $inviteRepository;
 
     public function __construct(
         Publisher $publisher,

@@ -15,7 +15,7 @@ class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInter
 {
     use SerializerAwareTrait;
     private $router;
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
     private $resolver;
 
     public function __construct(

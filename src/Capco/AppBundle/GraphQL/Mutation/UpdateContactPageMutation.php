@@ -33,13 +33,13 @@ class UpdateContactPageMutation implements MutationInterface
         'customcode' => self::CONTACT_PAGE_CODE_KEYNAME,
     ];
 
-    private SiteParameterRepository $siteParameterRepository;
-    private SiteImageRepository $imageRepository;
-    private EntityManagerInterface $em;
-    private RedisCache $cache;
-    private MediaRepository $mediaRepository;
-    private SiteParameterResolver $resolver;
-    private string $locale;
+    private readonly SiteParameterRepository $siteParameterRepository;
+    private readonly SiteImageRepository $imageRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly RedisCache $cache;
+    private readonly MediaRepository $mediaRepository;
+    private readonly SiteParameterResolver $resolver;
+    private readonly string $locale;
 
     public function __construct(
         SiteParameterRepository $siteParameterRepository,

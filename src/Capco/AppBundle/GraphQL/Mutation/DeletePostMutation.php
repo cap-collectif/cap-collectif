@@ -14,9 +14,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeletePostMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

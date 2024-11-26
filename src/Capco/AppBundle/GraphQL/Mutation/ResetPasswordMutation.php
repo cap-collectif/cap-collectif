@@ -18,15 +18,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ResetPasswordMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private UserPasswordEncoderInterface $userPasswordEncoder;
-    private FormFactoryInterface $formFactory;
-    private UserManager $userManager;
-    private TranslatorInterface $translator;
-    private SessionInterface $session;
-    private LoginManagerInterface $loginManager;
-    private string $firewallName;
-    private LoggerInterface $logger;
+    private readonly EntityManagerInterface $em;
+    private readonly UserPasswordEncoderInterface $userPasswordEncoder;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly UserManager $userManager;
+    private readonly TranslatorInterface $translator;
+    private readonly SessionInterface $session;
+    private readonly LoginManagerInterface $loginManager;
+    private readonly string $firewallName;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         SessionInterface $session,

@@ -12,7 +12,7 @@ class ViewerMeetsTheRequirementResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private RequirementViewerValueResolver $resolver;
+    private readonly RequirementViewerValueResolver $resolver;
 
     public function __construct(RequirementViewerValueResolver $resolver)
     {

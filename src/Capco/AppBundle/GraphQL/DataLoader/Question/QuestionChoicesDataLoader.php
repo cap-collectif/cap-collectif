@@ -28,7 +28,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
         QuestionChoiceSearch $questionChoiceSearch
     ) {
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

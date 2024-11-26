@@ -30,7 +30,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ContributionSearch extends Search
 {
-    public const CONTRIBUTION_TYPE_CLASS_MAPPING = [
+    final public const CONTRIBUTION_TYPE_CLASS_MAPPING = [
         ContributionType::COMMENT => Comment::class,
         ContributionType::OPINION => Opinion::class,
         ContributionType::OPINIONVERSION => OpinionVersion::class,
@@ -134,7 +134,7 @@ class ContributionSearch extends Search
 
                     break;
 
-                case false !== strpos($contribuableType, 'Step'):
+                case false !== strpos((string) $contribuableType, 'Step'):
                     $boolQuery
                         ->addFilter(
                             new Query\Term(['step.id' => ['value' => $contribuableDecodedId]])

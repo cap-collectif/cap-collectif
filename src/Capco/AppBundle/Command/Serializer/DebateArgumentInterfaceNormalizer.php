@@ -11,8 +11,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DebateArgumentInterfaceNormalizer extends BaseNormalizer implements NormalizerInterface
 {
-    private DebateUrlResolver $debateUrlResolver;
-    private GeoIPReader $geoIPReader;
+    private readonly DebateUrlResolver $debateUrlResolver;
+    private readonly GeoIPReader $geoIPReader;
 
     public function __construct(
         TranslatorInterface $translator,

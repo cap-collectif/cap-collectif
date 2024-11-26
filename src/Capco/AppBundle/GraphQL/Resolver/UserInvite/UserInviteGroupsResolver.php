@@ -12,8 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class UserInviteGroupsResolver implements QueryInterface
 {
-    private LoggerInterface $logger;
-    private GroupRepository $groupRepository;
+    private readonly LoggerInterface $logger;
+    private readonly GroupRepository $groupRepository;
 
     public function __construct(GroupRepository $groupRepository, LoggerInterface $logger)
     {

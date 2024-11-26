@@ -8,7 +8,7 @@ use ZxcvbnPhp\Zxcvbn;
 
 class PasswordComplexityScoreResolver implements QueryInterface
 {
-    private Zxcvbn $zxcvbn;
+    private readonly Zxcvbn $zxcvbn;
 
     public function __construct(Zxcvbn $zxcvbn)
     {

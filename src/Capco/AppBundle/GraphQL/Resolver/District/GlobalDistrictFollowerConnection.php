@@ -13,9 +13,9 @@ use Psr\Log\LoggerInterface;
 
 class GlobalDistrictFollowerConnection implements QueryInterface
 {
-    private UserRepository $userRepository;
-    private LoggerInterface $logger;
-    private FollowerRepository $followerRepository;
+    private readonly UserRepository $userRepository;
+    private readonly LoggerInterface $logger;
+    private readonly FollowerRepository $followerRepository;
 
     public function __construct(
         UserRepository $userRepository,

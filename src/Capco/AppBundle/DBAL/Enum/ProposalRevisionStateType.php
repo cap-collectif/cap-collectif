@@ -4,9 +4,9 @@ namespace Capco\AppBundle\DBAL\Enum;
 
 class ProposalRevisionStateType extends AbstractEnumType
 {
-    public const REVISED = 'revised';
-    public const PENDING = 'pending';
-    public const EXPIRED = 'expired';
+    final public const REVISED = 'revised';
+    final public const PENDING = 'pending';
+    final public const EXPIRED = 'expired';
 
     public static $revisionState = [self::REVISED, self::PENDING];
 

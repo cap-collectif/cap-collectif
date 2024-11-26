@@ -43,14 +43,14 @@ use Swarrot\Broker\Message;
 class ElasticsearchDoctrineListener implements EventSubscriber
 {
     private const BULK_SIZE = 200;
-    private LoggerInterface $logger;
-    private ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener;
-    private AbstractResponseRepository $responseRepository;
-    private ProposalRepository $proposalRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private EntityChangeSetResolver $changeSetResolver;
-    private OpinionRepository $opinionRepository;
+    private readonly LoggerInterface $logger;
+    private readonly ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener;
+    private readonly AbstractResponseRepository $responseRepository;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private readonly EntityChangeSetResolver $changeSetResolver;
+    private readonly OpinionRepository $opinionRepository;
 
     public function __construct(
         ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener,

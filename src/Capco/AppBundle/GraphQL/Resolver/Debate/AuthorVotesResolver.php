@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class AuthorVotesResolver implements QueryInterface
 {
-    private DebateVoteRepository $repository;
+    private readonly DebateVoteRepository $repository;
 
     public function __construct(DebateVoteRepository $repository)
     {

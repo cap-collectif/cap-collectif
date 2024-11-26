@@ -14,7 +14,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalPaperVotesResolver implements QueryInterface
 {
-    private GlobalIdResolver $globalIdResolver;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(GlobalIdResolver $globalIdResolver)
     {

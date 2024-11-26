@@ -20,7 +20,7 @@ class SocialNetworkAdmin extends AbstractAdmin
         '_sort_by' => 'title',
     ];
 
-    private MediaProvider $mediaProvider;
+    private readonly MediaProvider $mediaProvider;
 
     public function __construct($code, $class, $baseControllerName, MediaProvider $mediaProvider)
     {

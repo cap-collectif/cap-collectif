@@ -10,14 +10,14 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
 {
-    public const ANALYSE = 'ANALYSE';
-    public const EVALUATE = 'EVALUATE';
-    public const VIEW = 'VIEW';
-    public const REVISE = 'REVISE';
-    public const DECIDE = 'DECIDE';
-    public const ASSIGN_SUPERVISOR = 'ASSIGN_SUPERVISOR';
-    public const ASSIGN_ANALYST = 'ASSIGN_ANALYST';
-    public const ASSIGN_DECISION_MAKER = 'ASSIGN_DECISION_MAKER';
+    final public const ANALYSE = 'ANALYSE';
+    final public const EVALUATE = 'EVALUATE';
+    final public const VIEW = 'VIEW';
+    final public const REVISE = 'REVISE';
+    final public const DECIDE = 'DECIDE';
+    final public const ASSIGN_SUPERVISOR = 'ASSIGN_SUPERVISOR';
+    final public const ASSIGN_ANALYST = 'ASSIGN_ANALYST';
+    final public const ASSIGN_DECISION_MAKER = 'ASSIGN_DECISION_MAKER';
 
     /**
      * {@inheritdoc}

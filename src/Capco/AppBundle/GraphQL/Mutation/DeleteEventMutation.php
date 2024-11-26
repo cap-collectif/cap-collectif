@@ -25,12 +25,12 @@ class DeleteEventMutation extends BaseDeleteMutation
 {
     use MutationTrait;
 
-    private GlobalIdResolver $globalIdResolver;
-    private Indexer $indexer;
-    private Publisher $publisher;
-    private EventRegistrationRepository $registration;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private HighlightedContentRepository $highlightedContentRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly Indexer $indexer;
+    private readonly Publisher $publisher;
+    private readonly EventRegistrationRepository $registration;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly HighlightedContentRepository $highlightedContentRepository;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ProjectsInDistrictResolver implements QueryInterface
 {
-    private ProjectRepository $projectRepository;
+    private readonly ProjectRepository $projectRepository;
 
     public function __construct(ProjectRepository $projectRepository)
     {

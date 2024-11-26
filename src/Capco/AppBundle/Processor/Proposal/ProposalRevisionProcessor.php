@@ -13,10 +13,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalRevisionProcessor implements ProcessorInterface
 {
-    private ProposalRepository $proposalRepository;
-    private ProposalRevisionRepository $proposalRevisionRepository;
-    private ProposalRevisionNotifier $notifier;
-    private LoggerInterface $logger;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly ProposalRevisionRepository $proposalRevisionRepository;
+    private readonly ProposalRevisionNotifier $notifier;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         ProposalRepository $proposalRepository,

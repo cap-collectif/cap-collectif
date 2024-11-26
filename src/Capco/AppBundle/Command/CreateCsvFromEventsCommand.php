@@ -23,7 +23,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
 
-    public const EVENTS_HEADERS = [
+    final public const EVENTS_HEADERS = [
         '_id',
         'id',
         'title',

@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 class UpdateCivicIAMutation implements MutationInterface
 {
     use MutationTrait;
-    private CivicIAMassUpdater $updater;
+    private readonly CivicIAMassUpdater $updater;
 
     public function __construct(CivicIAMassUpdater $updater)
     {

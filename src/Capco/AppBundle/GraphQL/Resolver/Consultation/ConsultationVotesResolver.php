@@ -13,8 +13,8 @@ use Psr\Log\LoggerInterface;
 
 class ConsultationVotesResolver implements QueryInterface
 {
-    private VoteSearch $voteSearch;
-    private LoggerInterface $logger;
+    private readonly VoteSearch $voteSearch;
+    private readonly LoggerInterface $logger;
 
     public function __construct(VoteSearch $voteSearch, LoggerInterface $logger)
     {

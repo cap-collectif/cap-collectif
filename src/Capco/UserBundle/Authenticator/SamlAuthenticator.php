@@ -21,7 +21,7 @@ class SamlAuthenticator extends AbstractGuardAuthenticator
     protected Simple $samlAuth;
     protected string $samlIdp;
     protected LoggerInterface $logger;
-    private SamlUserProvider $samlUserProvider;
+    private readonly SamlUserProvider $samlUserProvider;
 
     public function __construct(
         ?Simple $samlAuth,

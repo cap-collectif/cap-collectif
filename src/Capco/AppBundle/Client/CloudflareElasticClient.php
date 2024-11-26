@@ -22,12 +22,12 @@ use Psr\Log\LoggerInterface;
 
 class CloudflareElasticClient
 {
-    private Client $esClient;
-    private LoggerInterface $logger;
-    private LoggerInterface $esLoggerCollector;
-    private string $hostname;
+    private readonly Client $esClient;
+    private readonly LoggerInterface $logger;
+    private readonly LoggerInterface $esLoggerCollector;
+    private readonly string $hostname;
     private string $index;
-    private GlobalConfigurationTimeZoneDetector $timezoneDetector;
+    private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector;
 
     public function __construct(
         LoggerInterface $logger,

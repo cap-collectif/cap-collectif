@@ -14,13 +14,13 @@ class ResendEmailConfirmationMutation implements MutationInterface
 {
     use ResolverTrait;
 
-    public const EMAIL_ALREADY_CONFIRMED = 'EMAIL_ALREADY_CONFIRMED';
-    public const EMAIL_RECENTLY_SENT = 'EMAIL_RECENTLY_SENT';
+    final public const EMAIL_ALREADY_CONFIRMED = 'EMAIL_ALREADY_CONFIRMED';
+    final public const EMAIL_RECENTLY_SENT = 'EMAIL_RECENTLY_SENT';
 
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private FOSNotifier $notifier;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly FOSNotifier $notifier;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,

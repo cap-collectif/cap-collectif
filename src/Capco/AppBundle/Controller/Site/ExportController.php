@@ -58,22 +58,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ExportController extends Controller
 {
-    private FlashBagInterface $flashBag;
-    private TranslatorInterface $translator;
-    private string $exportDir;
-    private GraphQlAclListener $aclListener;
-    private ConnectionTraversor $connectionTraversor;
-    private Executor $executor;
-    private LoggerInterface $logger;
-    private AbstractStepRepository $abstractStepRepository;
-    private GlobalIdResolver $globalIdResolver;
-    private KernelInterface $kernel;
-    private string $locale;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ContributionsFilePathResolver $contributionsFilePathResolver;
-    private SessionInterface $session;
-    private CronTimeInterval $cronTimeInterval;
-    private string $projectDir;
+    private readonly FlashBagInterface $flashBag;
+    private readonly TranslatorInterface $translator;
+    private readonly string $exportDir;
+    private readonly GraphQlAclListener $aclListener;
+    private readonly ConnectionTraversor $connectionTraversor;
+    private readonly Executor $executor;
+    private readonly LoggerInterface $logger;
+    private readonly AbstractStepRepository $abstractStepRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly KernelInterface $kernel;
+    private readonly string $locale;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ContributionsFilePathResolver $contributionsFilePathResolver;
+    private readonly SessionInterface $session;
+    private readonly CronTimeInterval $cronTimeInterval;
+    private readonly string $projectDir;
 
     public function __construct(
         GraphQlAclListener $aclListener,

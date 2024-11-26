@@ -12,9 +12,9 @@ class ViewerCanAskAProposalRevisionResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private GlobalIdResolver $globalIdResolver;
-    private Manager $manager;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly Manager $manager;
 
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,

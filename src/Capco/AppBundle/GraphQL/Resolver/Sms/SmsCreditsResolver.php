@@ -13,7 +13,7 @@ class SmsCreditsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private SmsCreditRepository $repository;
+    private readonly SmsCreditRepository $repository;
 
     public function __construct(SmsCreditRepository $repository)
     {

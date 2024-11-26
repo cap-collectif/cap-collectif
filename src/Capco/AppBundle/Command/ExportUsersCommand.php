@@ -16,14 +16,14 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ExportUsersCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-    public const EXPORT_FOLDER = 'users/';
+    final public const EXPORT_FOLDER = 'users/';
 
     private const CAPCO_EXPORT_USERS = 'capco:export:users';
-    private Manager $toggleManager;
-    private string $projectRootDir;
-    private Stopwatch $stopwatch;
-    private UserExporter $userExporter;
-    private UsersFilePathResolver $usersFilePathResolver;
+    private readonly Manager $toggleManager;
+    private readonly string $projectRootDir;
+    private readonly Stopwatch $stopwatch;
+    private readonly UserExporter $userExporter;
+    private readonly UsersFilePathResolver $usersFilePathResolver;
 
     public function __construct(
         ExportUtils $exportUtils,

@@ -23,14 +23,14 @@ class SendSmsProposalVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const RETRY_LIMIT_REACHED = 'RETRY_LIMIT_REACHED';
+    final public const RETRY_LIMIT_REACHED = 'RETRY_LIMIT_REACHED';
     private const RETRY_PER_MINUTE = 2;
 
-    private SmsProviderInterface $smsProvider;
-    private ValidatorInterface $validator;
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
+    private readonly SmsProviderInterface $smsProvider;
+    private readonly ValidatorInterface $validator;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
 
     public function __construct(
         SmsProviderFetcher $smsProviderFactory,

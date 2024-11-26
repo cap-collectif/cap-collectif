@@ -336,7 +336,7 @@ class DefaultController extends AbstractController
         }
 
         // Important security check to allow only redirect to an URL of this website.
-        if (!str_contains($destination, $homePageUrl)) {
+        if (!str_contains((string) $destination, $homePageUrl)) {
             return $homePageUrl;
         }
 

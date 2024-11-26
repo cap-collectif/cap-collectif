@@ -17,8 +17,8 @@ class UpdateProposalFormNotificationsConfiguration extends AbstractProposalFormM
 {
     use MutationTrait;
 
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $entityManager,

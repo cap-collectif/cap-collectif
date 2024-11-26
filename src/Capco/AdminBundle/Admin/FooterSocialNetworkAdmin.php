@@ -20,7 +20,7 @@ class FooterSocialNetworkAdmin extends AbstractAdmin
         '_sort_by' => 'title',
     ];
 
-    private EntityManagerInterface $entityManager;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,

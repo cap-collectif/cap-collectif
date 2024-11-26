@@ -24,16 +24,16 @@ use Psr\Log\LoggerInterface;
 class UpdateProposalVotesMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private AbstractStepRepository $stepRepo;
-    private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private Indexer $indexer;
-    private ConnectionBuilder $connectionBuilder;
+    private readonly EntityManagerInterface $em;
+    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly AbstractStepRepository $stepRepo;
+    private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private readonly Indexer $indexer;
+    private readonly ConnectionBuilder $connectionBuilder;
 
     public function __construct(
         EntityManagerInterface $em,

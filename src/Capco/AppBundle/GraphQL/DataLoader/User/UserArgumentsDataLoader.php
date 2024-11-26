@@ -14,7 +14,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class UserArgumentsDataLoader extends BatchDataLoader
 {
-    private ArgumentSearch $argumentSearch;
+    private readonly ArgumentSearch $argumentSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -30,7 +30,7 @@ class UserArgumentsDataLoader extends BatchDataLoader
     ) {
         $this->argumentSearch = $argumentSearch;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

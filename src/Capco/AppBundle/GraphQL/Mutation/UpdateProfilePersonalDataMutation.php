@@ -17,7 +17,7 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 {
     use MutationTrait;
 
-    public const CANT_UPDATE = 'CANT_UPDATE';
+    final public const CANT_UPDATE = 'CANT_UPDATE';
 
     public function __construct(
         EntityManagerInterface $em,

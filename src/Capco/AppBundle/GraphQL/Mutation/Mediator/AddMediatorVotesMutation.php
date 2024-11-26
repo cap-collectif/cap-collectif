@@ -28,13 +28,13 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 class AddMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $entityManager;
-    private GlobalIdResolver $globalIdResolver;
-    private TokenGeneratorInterface $tokenGenerator;
-    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private Publisher $publisher;
-    private FormFactoryInterface $formFactory;
-    private UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private readonly Publisher $publisher;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
 
     public function __construct(
         EntityManagerInterface $entityManager,

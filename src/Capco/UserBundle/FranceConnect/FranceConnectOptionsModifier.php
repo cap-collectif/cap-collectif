@@ -12,9 +12,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class FranceConnectOptionsModifier implements OptionsModifierInterface
 {
-    public const REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY = 'FranceConnect_tokens';
-    public const SESSION_FRANCE_CONNECT_STATE_KEY = 'FranceConnect_state';
-    public const FRANCE_CONNECT_CONNECTION_MAX_TIME = 5;
+    final public const REDIS_FRANCE_CONNECT_TOKENS_CACHE_KEY = 'FranceConnect_tokens';
+    final public const SESSION_FRANCE_CONNECT_STATE_KEY = 'FranceConnect_state';
+    final public const FRANCE_CONNECT_CONNECTION_MAX_TIME = 5;
     protected const REDIS_CACHE_KEY = 'FranceConnectSSOConfiguration';
 
     protected FranceConnectSSOConfigurationRepository $repository;

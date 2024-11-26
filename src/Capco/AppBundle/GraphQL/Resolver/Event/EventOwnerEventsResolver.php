@@ -17,8 +17,8 @@ class EventOwnerEventsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private EventSearch $eventSearch;
-    private LoggerInterface $logger;
+    private readonly EventSearch $eventSearch;
+    private readonly LoggerInterface $logger;
 
     public function __construct(EventSearch $eventSearch, LoggerInterface $logger)
     {

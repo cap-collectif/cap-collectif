@@ -43,9 +43,9 @@ class RabbitMQContext implements KernelAwareContext
         }
 
         foreach ($expectedMessages as $expectedMessage) {
-            $decoded = json_decode($expectedMessage, true);
+            $decoded = json_decode((string) $expectedMessage, true);
             foreach ($queuedMessages as $queuedMessage) {
-                $d = json_decode($queuedMessage, true);
+                $d = json_decode((string) $queuedMessage, true);
                 foreach ($decoded as $key => $value) {
                     if (!isset($d[$key])) {
                         throw new LogicException(sprintf('Message mismatch. Unknown property : "%s" %s%s', $key, \PHP_EOL, json_encode($queuedMessages)));

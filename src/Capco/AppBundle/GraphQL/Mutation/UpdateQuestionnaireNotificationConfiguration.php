@@ -18,11 +18,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateQuestionnaireNotificationConfiguration implements MutationInterface
 {
     use MutationTrait;
-    private GlobalIdResolver $globalIdResolver;
-    private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $em;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $em;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

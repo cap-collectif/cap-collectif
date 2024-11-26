@@ -13,9 +13,9 @@ class FeatureChecker
     private const FEATURE_PREFIX = 'login_';
     private array $errors = [];
 
-    private Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository;
-    private FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository;
-    private Manager $manager;
+    private readonly Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository;
+    private readonly FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository;
+    private readonly Manager $manager;
 
     public function __construct(
         Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository,

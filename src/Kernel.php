@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouteCollectionBuilder;
 class Kernel extends BaseKernel
 {
     use MicroKernelTrait;
-    public const CONFIG_EXTS = '.{xml,yaml}';
+    final public const CONFIG_EXTS = '.{xml,yaml}';
 
     public function registerBundles()
     {

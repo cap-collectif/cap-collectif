@@ -10,9 +10,9 @@ use Swarrot\Processor\ProcessorInterface;
 
 class MediatorProcessor implements ProcessorInterface
 {
-    private MediatorNotifier $notifier;
-    private MediatorRepository $mediatorRepository;
-    private ParticipantRepository $participantRepository;
+    private readonly MediatorNotifier $notifier;
+    private readonly MediatorRepository $mediatorRepository;
+    private readonly ParticipantRepository $participantRepository;
 
     public function __construct(
         MediatorNotifier $notifier,

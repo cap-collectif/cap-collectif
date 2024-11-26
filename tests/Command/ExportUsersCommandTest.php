@@ -12,13 +12,13 @@ class ExportUsersCommandTest extends KernelTestCase
 {
     use CommandTestTrait;
 
-    public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports/users';
-    public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export/users';
-    public const EXPECTED_FILE_NAMES = [
+    final public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports/users';
+    final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export/users';
+    final public const EXPECTED_FILE_NAMES = [
         'users',
     ];
-    public const FULL_SUFFIX = '.csv';
-    public const COMMAND = 'capco:export:users';
+    final public const FULL_SUFFIX = '.csv';
+    final public const COMMAND = 'capco:export:users';
 
     protected function setUp(): void
     {

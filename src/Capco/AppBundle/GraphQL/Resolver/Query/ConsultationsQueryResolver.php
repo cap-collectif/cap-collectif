@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ConsultationsQueryResolver implements QueryInterface
 {
-    private ConsultationRepository $consultationRepository;
+    private readonly ConsultationRepository $consultationRepository;
 
     public function __construct(ConsultationRepository $consultationRepository)
     {

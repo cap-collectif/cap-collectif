@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Enum;
 
 class RemainingSmsCreditStatus
 {
-    public const IDLE = 'IDLE';
-    public const LOW = 'LOW';
-    public const VERY_LOW = 'VERY_LOW';
-    public const TOTAL = 'TOTAL';
+    final public const IDLE = 'IDLE';
+    final public const LOW = 'LOW';
+    final public const VERY_LOW = 'VERY_LOW';
+    final public const TOTAL = 'TOTAL';
 }

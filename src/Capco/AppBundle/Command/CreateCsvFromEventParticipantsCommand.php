@@ -22,14 +22,14 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
 
-    public const PUBLIC_USER_HEADERS_EVENTS = [
+    final public const PUBLIC_USER_HEADERS_EVENTS = [
         'user_email',
         'user_firstname',
         'user_lastname',
         'user_privateRegistration',
     ];
 
-    public const USER_FRAGMENT = '
+    final public const USER_FRAGMENT = '
         id
         email
         username

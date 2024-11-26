@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 
 class CarrouselElementConfigurationResolver implements QueryInterface
 {
-    private LoggerInterface $logger;
+    private readonly LoggerInterface $logger;
 
     public function __construct(LoggerInterface $logger)
     {

@@ -17,10 +17,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateAlphaProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private ProjectPersister $persister;
-    private ProjectRepository $projectRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private EntityManagerInterface $entityManager;
+    private readonly ProjectPersister $persister;
+    private readonly ProjectRepository $projectRepository;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         EntityManagerInterface $entityManager,

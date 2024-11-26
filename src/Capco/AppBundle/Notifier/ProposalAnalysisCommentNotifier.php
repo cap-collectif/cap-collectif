@@ -13,8 +13,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalAnalysisCommentNotifier extends BaseNotifier
 {
-    private ProposalUrlResolver $proposalUrlResolver;
-    private RequestStack $requestStack;
+    private readonly ProposalUrlResolver $proposalUrlResolver;
+    private readonly RequestStack $requestStack;
 
     public function __construct(
         MailerService $mailer,

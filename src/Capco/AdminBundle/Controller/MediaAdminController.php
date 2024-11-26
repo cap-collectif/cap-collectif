@@ -18,10 +18,10 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MediaAdminController extends CRUDController
 {
-    public const INPUT_NAME = 'binaryContent';
+    final public const INPUT_NAME = 'binaryContent';
 
-    private MediaManager $mediaManager;
-    private ValidatorInterface $validator;
+    private readonly MediaManager $mediaManager;
+    private readonly ValidatorInterface $validator;
 
     public function __construct(
         MediaManager $mediaManager,

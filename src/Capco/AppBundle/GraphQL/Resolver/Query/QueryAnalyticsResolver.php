@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryAnalyticsResolver implements QueryInterface
 {
-    private QueryAnalyticsDataLoader $loader;
+    private readonly QueryAnalyticsDataLoader $loader;
 
     public function __construct(QueryAnalyticsDataLoader $loader)
     {

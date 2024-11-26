@@ -18,8 +18,8 @@ class UserPhoneVerificationSms
     use TimestampableTrait;
     use UuidTrait;
 
-    public const APPROVED = 'APPROVED';
-    public const PENDING = 'PENDING';
+    final public const APPROVED = 'APPROVED';
+    final public const PENDING = 'PENDING';
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="userPhoneVerificationSms")

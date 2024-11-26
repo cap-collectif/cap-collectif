@@ -22,7 +22,7 @@ final class TranslationLocale implements EnumType
     public static function getAvailablePrefixes(): array
     {
         return array_map(function ($locale) {
-            return explode('-', $locale)[0];
+            return explode('-', (string) $locale)[0];
         }, self::getAvailableTypes());
     }
 

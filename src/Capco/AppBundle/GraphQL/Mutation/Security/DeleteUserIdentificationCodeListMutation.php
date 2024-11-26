@@ -15,10 +15,10 @@ class DeleteUserIdentificationCodeListMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const NOT_FOUND = 'NOT_FOUND';
+    final public const NOT_FOUND = 'NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private UserIdentificationCodeListRepository $repository;
+    private readonly EntityManagerInterface $em;
+    private readonly UserIdentificationCodeListRepository $repository;
 
     public function __construct(
         EntityManagerInterface $em,

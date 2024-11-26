@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ParticipantsResolver implements QueryInterface
 {
-    private ParticipantRepository $participantRepository;
+    private readonly ParticipantRepository $participantRepository;
 
     public function __construct(ParticipantRepository $participantRepository)
     {

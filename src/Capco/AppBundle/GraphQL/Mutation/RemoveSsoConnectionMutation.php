@@ -25,14 +25,14 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RemoveSsoConnectionMutation implements MutationInterface
 {
     use MutationTrait;
-    private UserManagerInterface $userManager;
-    private UserPasswordEncoderInterface $passwordEncoder;
-    private Publisher $publisher;
-    private LoggerInterface $logger;
-    private FormFactoryInterface $formFactory;
-    private TokenStorageInterface $tokenStorage;
-    private FranceConnectLogoutHandler $franceConnectLogoutHandler;
-    private RouterInterface $router;
+    private readonly UserManagerInterface $userManager;
+    private readonly UserPasswordEncoderInterface $passwordEncoder;
+    private readonly Publisher $publisher;
+    private readonly LoggerInterface $logger;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler;
+    private readonly RouterInterface $router;
 
     public function __construct(
         UserManagerInterface $userManager,

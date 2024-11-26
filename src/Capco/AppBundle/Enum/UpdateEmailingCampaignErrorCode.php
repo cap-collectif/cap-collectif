@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Enum;
 
 class UpdateEmailingCampaignErrorCode extends CreateEmailingCampaignErrorCode
 {
-    public const ID_NOT_FOUND = 'ID_NOT_FOUND';
-    public const NOT_EDITABLE = 'NOT_EDITABLE';
-    public const TOO_LATE = 'TOO_LATE';
+    final public const ID_NOT_FOUND = 'ID_NOT_FOUND';
+    final public const NOT_EDITABLE = 'NOT_EDITABLE';
+    final public const TOO_LATE = 'TOO_LATE';
 
-    public const ALL = parent::ALL + [self::ID_NOT_FOUND, self::NOT_EDITABLE, self::TOO_LATE];
+    final public const ALL = parent::ALL + [self::ID_NOT_FOUND, self::NOT_EDITABLE, self::TOO_LATE];
 
     public static function isValid($value): bool
     {

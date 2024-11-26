@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class FilePathResolver
 {
-    private string $exportDirectory;
+    private readonly string $exportDirectory;
 
     public function __construct(string $exportDirectory)
     {

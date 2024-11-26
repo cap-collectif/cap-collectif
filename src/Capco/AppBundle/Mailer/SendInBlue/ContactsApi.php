@@ -9,7 +9,7 @@ use SendinBlue\Client\Configuration;
 
 class ContactsApi
 {
-    private Configuration $credentials;
+    private readonly Configuration $credentials;
     private static ?SendInBlueApi $apiInstance = null;
     private static ?TransactionalEmailsApi $transactionalEmailsApi = null;
 

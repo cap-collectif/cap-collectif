@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class EventReviewVoter extends Voter
 {
-    public const EDIT = 'edit';
+    final public const EDIT = 'edit';
 
     protected function supports($attribute, $subject): bool
     {

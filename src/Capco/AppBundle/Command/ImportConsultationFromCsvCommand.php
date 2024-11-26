@@ -152,7 +152,7 @@ class ImportConsultationFromCsvCommand extends Command
             $row = $row->toArray();
             /** @var null|OpinionType $opinionType */
             $opinionType = null;
-            foreach (explode('|', $row[1]) as $index => $ot) {
+            foreach (explode('|', (string) $row[1]) as $index => $ot) {
                 if (0 === $index) {
                     $opinionType = $this->getContainer()
                         ->get(OpinionTypeRepository::class)

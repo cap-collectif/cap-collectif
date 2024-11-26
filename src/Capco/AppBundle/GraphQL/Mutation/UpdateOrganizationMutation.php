@@ -22,13 +22,13 @@ class UpdateOrganizationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
+    final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private SluggerInterface $slugger;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly SluggerInterface $slugger;
 
     public function __construct(
         EntityManagerInterface $em,

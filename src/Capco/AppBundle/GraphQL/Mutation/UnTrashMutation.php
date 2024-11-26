@@ -15,11 +15,11 @@ class UnTrashMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const TRASHABLE_NOT_FOUND = 'TRASHABLE_NOT_FOUND';
-    public const NOT_TRASHED = 'NOT_TRASHED';
+    final public const TRASHABLE_NOT_FOUND = 'TRASHABLE_NOT_FOUND';
+    final public const NOT_TRASHED = 'NOT_TRASHED';
 
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(GlobalIdResolver $globalIdResolver, EntityManagerInterface $em)
     {

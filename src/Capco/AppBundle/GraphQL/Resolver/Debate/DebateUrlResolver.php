@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class DebateUrlResolver implements QueryInterface
 {
-    private UrlResolver $urlResolver;
+    private readonly UrlResolver $urlResolver;
 
     public function __construct(UrlResolver $urlResolver)
     {

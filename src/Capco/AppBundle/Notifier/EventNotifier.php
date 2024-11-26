@@ -22,9 +22,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class EventNotifier extends BaseNotifier
 {
-    private EventUrlResolver $eventUrlResolver;
-    private EventRepository $eventRepository;
-    private EntityManagerInterface $entityManager;
+    private readonly EventUrlResolver $eventUrlResolver;
+    private readonly EventRepository $eventRepository;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         MailerService $mailer,

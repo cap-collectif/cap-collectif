@@ -11,7 +11,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class FormattedValueResponseTypeResolver implements QueryInterface
 {
-    private TranslatorInterface $translator;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {

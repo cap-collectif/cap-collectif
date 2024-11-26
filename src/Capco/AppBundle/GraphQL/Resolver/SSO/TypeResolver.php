@@ -14,7 +14,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class TypeResolver implements QueryInterface
 {
-    private BaseTypeResolver $typeResolver;
+    private readonly BaseTypeResolver $typeResolver;
 
     public function __construct(BaseTypeResolver $typeResolver)
     {

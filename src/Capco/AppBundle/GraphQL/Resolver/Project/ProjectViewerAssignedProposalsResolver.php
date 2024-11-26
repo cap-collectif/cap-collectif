@@ -15,7 +15,7 @@ class ProjectViewerAssignedProposalsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private ProposalSearch $proposalSearch;
+    private readonly ProposalSearch $proposalSearch;
 
     public function __construct(ProposalSearch $proposalSearch)
     {

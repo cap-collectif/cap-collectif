@@ -14,8 +14,8 @@ class UserContributionsCountResolver implements QueryInterface
     protected UserSourcesResolver $userSourcesResolver;
     protected UserOpinionsResolver $userOpinionsResolver;
     protected UserRepliesResolver $userRepliesResolver;
-    private UserVotesResolver $userVotesResolver;
-    private ArgumentRepository $argumentRepository;
+    private readonly UserVotesResolver $userVotesResolver;
+    private readonly ArgumentRepository $argumentRepository;
 
     public function __construct(
         UserEventCommentsCountResolver $userEventCommentsCountResolver,

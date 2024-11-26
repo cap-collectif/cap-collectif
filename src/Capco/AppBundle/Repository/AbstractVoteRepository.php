@@ -112,7 +112,7 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
-            ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
+            ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst((string) $objectType)), 'v')
             ->andWhere('v.published = true')
             ->addOrderBy('v.createdAt', 'ASC')
         ;
@@ -184,7 +184,7 @@ class AbstractVoteRepository extends EntityRepository
     {
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
-            ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst($objectType)), 'v')
+            ->from(sprintf('Capco\\AppBundle\\Entity\\%sVote', ucfirst((string) $objectType)), 'v')
             ->andWhere('v.published = true')
         ;
         if (\in_array($objectType, ['opinion', 'opinionVersion'], true)) {

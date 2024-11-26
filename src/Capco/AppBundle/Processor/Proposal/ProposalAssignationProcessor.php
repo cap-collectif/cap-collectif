@@ -11,10 +11,10 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalAssignationProcessor implements ProcessorInterface
 {
-    private ProposalRepository $proposalRepository;
-    private UserRepository $userRepository;
-    private AnalysisNotifier $notifier;
-    private LoggerInterface $logger;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly UserRepository $userRepository;
+    private readonly AnalysisNotifier $notifier;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         ProposalRepository $proposalRepository,

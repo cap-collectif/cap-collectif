@@ -11,8 +11,8 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 class MigrationFactoryDecorator implements MigrationFactory
 {
-    private MigrationFactory $migrationFactory;
-    private ContainerInterface $container;
+    private readonly MigrationFactory $migrationFactory;
+    private readonly ContainerInterface $container;
 
     public function __construct(MigrationFactory $migrationFactory, ContainerInterface $container)
     {

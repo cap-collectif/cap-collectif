@@ -24,22 +24,22 @@ class SubscribeNewsletterMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const FEATURE_NOT_ENABLED = 'FEATURE_NOT_ENABLED';
-    public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
-    public const EMAIL_ALREADY_SUBSCRIBED = 'EMAIL_ALREADY_SUBSCRIBED';
-    public const RATE_LIMITER_ACTION = 'RegisterMutation';
-    public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
+    final public const FEATURE_NOT_ENABLED = 'FEATURE_NOT_ENABLED';
+    final public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
+    final public const EMAIL_ALREADY_SUBSCRIBED = 'EMAIL_ALREADY_SUBSCRIBED';
+    final public const RATE_LIMITER_ACTION = 'RegisterMutation';
+    final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    private Manager $toggleManager;
-    private LoggerInterface $logger;
-    private CaptchaChecker $captchaChecker;
-    private RequestGuesser $requestGuesser;
-    private FormFactoryInterface $formFactory;
+    private readonly Manager $toggleManager;
+    private readonly LoggerInterface $logger;
+    private readonly CaptchaChecker $captchaChecker;
+    private readonly RequestGuesser $requestGuesser;
+    private readonly FormFactoryInterface $formFactory;
     private EntityManagerInterface $entityManager;
-    private NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    private UserRepository $userRepository;
-    private RateLimiter $rateLimiter;
-    private SendInBluePublisher $sendInBluePublisher;
+    private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
+    private readonly UserRepository $userRepository;
+    private readonly RateLimiter $rateLimiter;
+    private readonly SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         Manager $toggleManager,

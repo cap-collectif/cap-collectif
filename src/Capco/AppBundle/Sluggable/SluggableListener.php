@@ -355,7 +355,7 @@ class SluggableListener extends Base
                 // Step 3: stylize the slug
                 switch ($options['style']) {
                     case 'camel':
-                        $quotedSeparator = preg_quote($options['separator']);
+                        $quotedSeparator = preg_quote((string) $options['separator']);
                         $slug = preg_replace_callback(
                             '/^[a-z]|' . $quotedSeparator . '[a-z]/smi',
                             function ($m) {
@@ -463,7 +463,7 @@ class SluggableListener extends Base
                 }
                 $slug = $meta->getReflectionProperty($config['slug'])->getValue($obj);
                 $quotedPreferredSlug = preg_quote($preferredSlug);
-                if (preg_match("@^{$quotedPreferredSlug}.*@smi", $slug)) {
+                if (preg_match("@^{$quotedPreferredSlug}.*@smi", (string) $slug)) {
                     $similarPersisted[] = [$config['slug'] => $slug];
                 }
             }
@@ -476,13 +476,13 @@ class SluggableListener extends Base
         // leave only right slugs
         if (!$recursing) {
             // filter similar slugs
-            $quotedSeparator = preg_quote($config['separator']);
+            $quotedSeparator = preg_quote((string) $config['separator']);
             $quotedPreferredSlug = preg_quote($preferredSlug);
             foreach ($result as $key => $similar) {
                 if (
                     !preg_match(
                         "@{$quotedPreferredSlug}($|{$quotedSeparator}[\\d]+$)@smi",
-                        $similar[$config['slug']]
+                        (string) $similar[$config['slug']]
                     )
                 ) {
                     unset($result[$key]);
@@ -493,7 +493,7 @@ class SluggableListener extends Base
             // We don't want to match similar slugs.
             // This can cause perf issues, so we use a random slug instead.
             if ($object instanceof Proposal) {
-                return $preferredSlug . uniqid($config['separator']);
+                return $preferredSlug . uniqid((string) $config['separator']);
             }
 
             $generatedSlug = $preferredSlug;
@@ -512,16 +512,16 @@ class SluggableListener extends Base
                 $generatedSlug = substr(
                     $generatedSlug,
                     0,
-                    $mapping['length'] - (\strlen($i) + \strlen($config['separator']))
+                    $mapping['length'] - (\strlen($i) + \strlen((string) $config['separator']))
                 );
                 $this->exponent = \strlen($i) - 1;
                 if (
-                    substr($generatedSlug, -\strlen($config['separator'])) == $config['separator']
+                    substr($generatedSlug, -\strlen((string) $config['separator'])) == $config['separator']
                 ) {
                     $generatedSlug = substr(
                         $generatedSlug,
                         0,
-                        \strlen($generatedSlug) - \strlen($config['separator'])
+                        \strlen($generatedSlug) - \strlen((string) $config['separator'])
                     );
                 }
                 $generatedSlug = $this->makeUniqueSlug($ea, $object, $generatedSlug, true, $config);

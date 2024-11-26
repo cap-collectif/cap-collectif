@@ -25,7 +25,7 @@ class ProposalProgressStepDataLoader extends BatchDataLoader
         bool $enableCache
     ) {
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

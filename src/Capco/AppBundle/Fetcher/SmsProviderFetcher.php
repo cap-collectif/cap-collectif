@@ -8,11 +8,11 @@ use Capco\AppBundle\Helper\TwilioSmsProvider;
 
 class SmsProviderFetcher
 {
-    public const PROVIDER_TWILIO = 'twilio';
-    public const PROVIDER_ORANGE = 'orange';
-    private TwilioSmsProvider $twilioSmsProvider;
-    private OrangeSmsProvider $orangeSmsProvider;
-    private string $smsProvider;
+    final public const PROVIDER_TWILIO = 'twilio';
+    final public const PROVIDER_ORANGE = 'orange';
+    private readonly TwilioSmsProvider $twilioSmsProvider;
+    private readonly OrangeSmsProvider $orangeSmsProvider;
+    private readonly string $smsProvider;
 
     public function __construct(
         TwilioSmsProvider $twilioSmsProvider,

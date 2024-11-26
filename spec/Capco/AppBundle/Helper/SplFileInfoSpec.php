@@ -7,8 +7,8 @@ use PhpSpec\ObjectBehavior;
 
 class SplFileInfoSpec extends ObjectBehavior
 {
-    public const CERTIFICATE_FILE_FAKE = 'tmpCertFake.crt';
-    public const CERTIFICATE_CONTENT_FAKE = '-----BEGIN CERTIFICATE-----
+    final public const CERTIFICATE_FILE_FAKE = 'tmpCertFake.crt';
+    final public const CERTIFICATE_CONTENT_FAKE = '-----BEGIN CERTIFICATE-----
                                       MIIF6zCCA9OgAwIBAgIUe15TY4qN55eAHOcsBQXSz6Nld9cwDQYJKoZIhvcNAQEL
                                       m9spquST2E0RRiKp4DmGoX7oiSpV/VlI5yC6D9b1JQ==
                                       -----END CERTIFICATE-----

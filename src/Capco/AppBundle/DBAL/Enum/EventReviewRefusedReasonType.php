@@ -4,13 +4,13 @@ namespace Capco\AppBundle\DBAL\Enum;
 
 class EventReviewRefusedReasonType extends AbstractEnumType
 {
-    public const SEX = 'sex';
-    public const OFFENDING = 'offending';
-    public const SPAM = 'spam';
-    public const SYNTAX_ERROR = 'syntax_error';
-    public const WRONG_CONTENT = 'wrong_content';
-    public const OFF_TOPIC = 'off_topic';
-    public const NONE = '';
+    final public const SEX = 'sex';
+    final public const OFFENDING = 'offending';
+    final public const SPAM = 'spam';
+    final public const SYNTAX_ERROR = 'syntax_error';
+    final public const WRONG_CONTENT = 'wrong_content';
+    final public const OFF_TOPIC = 'off_topic';
+    final public const NONE = '';
 
     public static $refusedReasons = [
         self::SEX,

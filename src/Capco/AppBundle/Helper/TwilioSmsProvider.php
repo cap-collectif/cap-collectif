@@ -7,12 +7,12 @@ use Capco\AppBundle\Helper\Interfaces\SmsProviderInterface;
 
 class TwilioSmsProvider implements SmsProviderInterface
 {
-    public const INVALID_NUMBER = 'INVALID_NUMBER';
-    public const CODE_EXPIRED = 'CODE_EXPIRED';
-    public const CODE_NOT_VALID = 'CODE_NOT_VALID';
-    public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
+    final public const INVALID_NUMBER = 'INVALID_NUMBER';
+    final public const CODE_EXPIRED = 'CODE_EXPIRED';
+    final public const CODE_NOT_VALID = 'CODE_NOT_VALID';
+    final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
-    private TwilioClient $twilioClient;
+    private readonly TwilioClient $twilioClient;
 
     public function __construct(TwilioClient $twilioClient)
     {

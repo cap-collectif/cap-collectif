@@ -7,9 +7,9 @@ use Doctrine\ORM\QueryBuilder;
 
 class UserConnectionRepository extends EntityRepository
 {
-    public const ORDER_BY_COL = 'c.datetime';
+    final public const ORDER_BY_COL = 'c.datetime';
 
-    public const ORDER_BY_DIR = 'ASC';
+    final public const ORDER_BY_DIR = 'ASC';
 
     public function findByUserId(string $userId): array
     {

@@ -22,7 +22,7 @@ class ConsultationAdmin extends AbstractAdmin
         '_sort_by' => 'title',
     ];
 
-    private OpinionTypeRepository $opinionTypeRepository;
+    private readonly OpinionTypeRepository $opinionTypeRepository;
 
     public function __construct(
         $code,

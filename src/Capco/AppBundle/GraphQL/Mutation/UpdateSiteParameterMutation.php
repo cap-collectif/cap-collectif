@@ -19,16 +19,16 @@ class UpdateSiteParameterMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const INVALID_VALUE = 'INVALID_VALUE';
+    final public const INVALID_VALUE = 'INVALID_VALUE';
 
-    public const KEYNAME_RECEIVE_ADDRESS = 'admin.mail.notifications.receive_address';
-    public const KEYNAME_SEND_NAME = 'admin.mail.notifications.send_name';
+    final public const KEYNAME_RECEIVE_ADDRESS = 'admin.mail.notifications.receive_address';
+    final public const KEYNAME_SEND_NAME = 'admin.mail.notifications.send_name';
     protected RequestStack $requestStack;
 
-    private SiteParameterRepository $repository;
-    private EntityManagerInterface $entityManager;
-    private SiteParameterRuntime $siteParamRuntime;
-    private RedisCache $cache;
+    private readonly SiteParameterRepository $repository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly SiteParameterRuntime $siteParamRuntime;
+    private readonly RedisCache $cache;
 
     public function __construct(
         SiteParameterRepository $repository,

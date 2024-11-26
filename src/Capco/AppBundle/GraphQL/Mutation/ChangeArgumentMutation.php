@@ -24,12 +24,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ChangeArgumentMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ArgumentRepository $argumentRepo;
-    private FormFactoryInterface $formFactory;
-    private RedisStorageHelper $redisStorage;
-    private Publisher $publisher;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly ArgumentRepository $argumentRepo;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly RedisStorageHelper $redisStorage;
+    private readonly Publisher $publisher;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

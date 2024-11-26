@@ -28,23 +28,23 @@ class CreateOpinionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const OPINION_TYPE_NOT_ENABLED = 'OPINION_TYPE_NOT_ENABLED';
-    public const OPINION_TYPE_NOT_FOUND = 'OPINION_TYPE_NOT_FOUND';
-    public const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
-    public const UNKNOWN_STEP = 'UNKNOWN_STEP';
-    public const STEP_NOT_CONTRIBUABLE = 'STEP_NOT_CONTRIBUABLE';
-    public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
-    public const CONTRIBUTED_TOO_MANY_TIMES = 'CONTRIBUTED_TOO_MANY_TIMES';
-    public const INVALID_FORM = 'INVALID_FORM';
-    private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $em;
-    private ProjectRepository $projectRepository;
-    private OpinionTypeRepository $opinionTypeRepository;
-    private ConsultationStepRepository $consultationStepRepository;
-    private StepRequirementsResolver $stepRequirementsResolver;
-    private OpinionRepository $opinionRepository;
-    private Publisher $publisher;
-    private GlobalIdResolver $globalIdResolver;
+    final public const OPINION_TYPE_NOT_ENABLED = 'OPINION_TYPE_NOT_ENABLED';
+    final public const OPINION_TYPE_NOT_FOUND = 'OPINION_TYPE_NOT_FOUND';
+    final public const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
+    final public const UNKNOWN_STEP = 'UNKNOWN_STEP';
+    final public const STEP_NOT_CONTRIBUABLE = 'STEP_NOT_CONTRIBUABLE';
+    final public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
+    final public const CONTRIBUTED_TOO_MANY_TIMES = 'CONTRIBUTED_TOO_MANY_TIMES';
+    final public const INVALID_FORM = 'INVALID_FORM';
+    private readonly FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $em;
+    private readonly ProjectRepository $projectRepository;
+    private readonly OpinionTypeRepository $opinionTypeRepository;
+    private readonly ConsultationStepRepository $consultationStepRepository;
+    private readonly StepRequirementsResolver $stepRequirementsResolver;
+    private readonly OpinionRepository $opinionRepository;
+    private readonly Publisher $publisher;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         FormFactoryInterface $formFactory,

@@ -20,9 +20,9 @@ class TranslateBasicParameters extends Command
         'admin.mail.notifications.receive_address',
     ];
 
-    private EntityManagerInterface $entityManager;
-    private LocaleRepository $localeRepository;
-    private SiteParameterRepository $siteParameterRepository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly LocaleRepository $localeRepository;
+    private readonly SiteParameterRepository $siteParameterRepository;
 
     public function __construct(string $name, EntityManagerInterface $entityManager)
     {

@@ -9,9 +9,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class DebateOpinionVoter extends Voter
 {
-    public const CREATE = 'create';
-    public const EDIT = 'edit';
-    public const DELETE = 'delete';
+    final public const CREATE = 'create';
+    final public const EDIT = 'edit';
+    final public const DELETE = 'delete';
 
     protected function supports($attribute, $subject): bool
     {

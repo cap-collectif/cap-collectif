@@ -15,10 +15,10 @@ class LeaveOrganizationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $entityManager;
-    private OrganizationMemberRepository $repository;
+    final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly OrganizationMemberRepository $repository;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

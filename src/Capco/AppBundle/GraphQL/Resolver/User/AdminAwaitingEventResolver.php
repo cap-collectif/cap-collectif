@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AdminAwaitingEventResolver implements QueryInterface
 {
-    private EventRepository $eventRepository;
+    private readonly EventRepository $eventRepository;
 
     public function __construct(EventRepository $eventRepository)
     {

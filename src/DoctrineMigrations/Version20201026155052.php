@@ -98,7 +98,7 @@ final class Version20201026155052 extends AbstractMigration
         $informations = array_map(
             static fn (array $category) => [
                 'proposal_category_id' => $category['proposal_category_id'],
-                'filename' => json_decode($category['provider_metadata'], true)['filename'],
+                'filename' => json_decode((string) $category['provider_metadata'], true)['filename'],
             ],
             $categoriesWithDefaultImage
         );

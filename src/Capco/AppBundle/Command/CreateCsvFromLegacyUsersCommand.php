@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-    public const FILENAME = 'legacyUsers.csv';
+    final public const FILENAME = 'legacyUsers.csv';
 
     private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
     private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
@@ -82,7 +82,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
     ];
 
     private ?array $customQuestions;
-    private Manager $toggleManager;
+    private readonly Manager $toggleManager;
 
     public function __construct(
         GraphQlAclListener $listener,

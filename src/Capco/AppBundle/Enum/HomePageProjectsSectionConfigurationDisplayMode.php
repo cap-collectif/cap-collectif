@@ -4,6 +4,6 @@ namespace Capco\AppBundle\Enum;
 
 class HomePageProjectsSectionConfigurationDisplayMode
 {
-    public const MOST_RECENT = 'MOST_RECENT';
-    public const CUSTOM = 'CUSTOM';
+    final public const MOST_RECENT = 'MOST_RECENT';
+    final public const CUSTOM = 'CUSTOM';
 }

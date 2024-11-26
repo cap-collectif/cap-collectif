@@ -10,7 +10,7 @@ use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class CheckDebateAnonymousParticipationHashValidator extends ConstraintValidator
 {
-    private DebateAnonymousParticipationHashEncoder $encoder;
+    private readonly DebateAnonymousParticipationHashEncoder $encoder;
 
     public function __construct(DebateAnonymousParticipationHashEncoder $encoder)
     {

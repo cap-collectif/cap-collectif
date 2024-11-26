@@ -13,15 +13,15 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalAnalyseProcessor implements ProcessorInterface
 {
-    public const TYPE_ANALYSIS = 'analysis';
-    public const TYPE_ASSESSMENT = 'assessment';
-    public const TYPE_DECISION = 'decision';
-    public const VALID_TYPES = [self::TYPE_ANALYSIS, self::TYPE_ASSESSMENT, self::TYPE_DECISION];
+    final public const TYPE_ANALYSIS = 'analysis';
+    final public const TYPE_ASSESSMENT = 'assessment';
+    final public const TYPE_DECISION = 'decision';
+    final public const VALID_TYPES = [self::TYPE_ANALYSIS, self::TYPE_ASSESSMENT, self::TYPE_DECISION];
 
-    private ProposalRepository $proposalRepository;
-    private ProposalAnalysisRepository $analysisRepository;
-    private ProposalNotifier $notifier;
-    private LoggerInterface $logger;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly ProposalAnalysisRepository $analysisRepository;
+    private readonly ProposalNotifier $notifier;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         ProposalRepository $proposalRepository,

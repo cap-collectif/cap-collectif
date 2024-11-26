@@ -12,12 +12,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 abstract class AbstractImportCsvCommand extends Command
 {
-    public const ERROR_NO_FILE = 'ERROR_NO_FILE';
-    public const ERROR_EMPTY_FILE = 'ERROR_EMPTY_FILE';
+    final public const ERROR_NO_FILE = 'ERROR_NO_FILE';
+    final public const ERROR_EMPTY_FILE = 'ERROR_EMPTY_FILE';
 
-    public const INPUT_FILE_PATH = 'filePath';
-    public const INPUT_DELIMITER = 'delimiter';
-    public const INPUT_DRY_RUN = 'dryRun';
+    final public const INPUT_FILE_PATH = 'filePath';
+    final public const INPUT_DELIMITER = 'delimiter';
+    final public const INPUT_DRY_RUN = 'dryRun';
 
     protected ConvertCsvToArray $csvReader;
     protected string $filePath = '';

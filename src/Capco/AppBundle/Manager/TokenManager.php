@@ -14,10 +14,10 @@ use Psr\Log\LoggerInterface;
 
 class TokenManager
 {
-    private EntityManagerInterface $em;
-    private ActionTokenRepository $repository;
-    private LoggerInterface $logger;
-    private RequestGuesser $requestGuesser;
+    private readonly EntityManagerInterface $em;
+    private readonly ActionTokenRepository $repository;
+    private readonly LoggerInterface $logger;
+    private readonly RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,

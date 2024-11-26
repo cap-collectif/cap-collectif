@@ -10,7 +10,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class UserTypeRuntime implements RuntimeExtensionInterface
 {
-    public const CACHE_KEY = 'userTypes';
+    final public const CACHE_KEY = 'userTypes';
     protected UserTypeRepository $repo;
     protected RedisCache $cache;
     protected RequestStack $requestStack;

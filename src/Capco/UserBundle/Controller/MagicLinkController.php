@@ -17,10 +17,10 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class MagicLinkController extends AbstractController
 {
-    private MagicLinkAuthenticator $magicLinkAuthenticator;
-    private LoggerInterface $logger;
-    private TokenStorageInterface $tokenStorage;
-    private EventDispatcherInterface $eventDispatcher;
+    private readonly MagicLinkAuthenticator $magicLinkAuthenticator;
+    private readonly LoggerInterface $logger;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly EventDispatcherInterface $eventDispatcher;
 
     public function __construct(
         MagicLinkAuthenticator $magicLinkAuthenticator,

@@ -47,32 +47,32 @@ class ImportProposalsFromCsv
     use TranslationTrait;
     public bool $permissiveSocialNetworksUrl = false;
 
-    private ?string $projectDir;
+    private readonly ?string $projectDir;
     private ?string $filePath;
     private ?string $delimiter;
     private ?ProposalForm $proposalForm;
     private array $customFields = [];
-    private EntityManagerInterface $om;
-    private MediaManager $mediaManager;
-    private ProposalDistrictRepository $districtRepository;
-    private ProposalCategoryRepository $proposalCategoryRepository;
-    private ProposalRepository $proposalRepository;
-    private StatusRepository $statusRepository;
-    private UserRepository $userRepository;
-    private Map $map;
+    private readonly EntityManagerInterface $om;
+    private readonly MediaManager $mediaManager;
+    private readonly ProposalDistrictRepository $districtRepository;
+    private readonly ProposalCategoryRepository $proposalCategoryRepository;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly StatusRepository $statusRepository;
+    private readonly UserRepository $userRepository;
+    private readonly Map $map;
     private array $headers;
-    private LoggerInterface $logger;
-    private ThemeRepository $themeRepository;
-    private Indexer $indexer;
+    private readonly LoggerInterface $logger;
+    private readonly ThemeRepository $themeRepository;
+    private readonly Indexer $indexer;
     private array $createdProposals = [];
     private int $importableProposals = 0;
     private array $badData = [];
     private array $mandatoryMissing = [];
     private ?Proposal $lastEntity = null;
-    private TokenGeneratorInterface $tokenGenerator;
-    private ValidatorInterface $validator;
-    private TranslatorInterface $translator;
-    private SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly ValidatorInterface $validator;
+    private readonly TranslatorInterface $translator;
+    private readonly SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer;
 
     public function __construct(
         MediaManager $mediaManager,
@@ -250,14 +250,14 @@ class ImportProposalsFromCsv
                     if (
                         $question instanceof MultipleChoiceQuestion
                         && (($question->isRequired() || !empty($row[$questionTitle]))
-                            && !$question->isChoiceValid(trim($row[$questionTitle]))
+                            && !$question->isChoiceValid(trim((string) $row[$questionTitle]))
                             && !$question->isOtherAllowed())
                     ) {
                         $this->badData = $this->incrementBadData($this->badData, $key);
                         $this->logger->error(
                             sprintf(
                                 'bad data for question %s in line %d with value %s',
-                                trim($questionTitle),
+                                trim((string) $questionTitle),
                                 $key,
                                 $row[$questionTitle]
                             )
@@ -274,7 +274,7 @@ class ImportProposalsFromCsv
                         $this->logger->error(
                             sprintf(
                                 'bad data for question %s in line %d with value %s',
-                                trim($questionTitle),
+                                trim((string) $questionTitle),
                                 $key,
                                 $row[$questionTitle]
                             )
@@ -288,7 +288,7 @@ class ImportProposalsFromCsv
                 case AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION:
                     if (!empty($row[$questionTitle])) {
                         $majorityJudgementKeys = MajorityVoteTypeEnum::getI18nKeys();
-                        $csvValue = ucfirst(strtolower($row[$questionTitle]));
+                        $csvValue = ucfirst(strtolower((string) $row[$questionTitle]));
                         $translationExist = $this->doesTranslationExist($csvValue);
                         $translationsFlipped = array_flip($this->getAllTranslationKey());
                         if (
@@ -299,7 +299,7 @@ class ImportProposalsFromCsv
                             $this->logger->error(
                                 sprintf(
                                     'bad data for question %s in line %d with value %s',
-                                    trim($questionTitle),
+                                    trim((string) $questionTitle),
                                     $key,
                                     $row[$questionTitle]
                                 )
@@ -403,8 +403,8 @@ class ImportProposalsFromCsv
                 $duplicateLinesToBeSkipped[] = $key;
             } elseif (
                 $this->proposalRepository->getProposalByEmailAndTitleOnProposalForm(
-                    trim($row['title']),
-                    trim($row['author']),
+                    trim((string) $row['title']),
+                    trim((string) $row['author']),
                     $this->proposalForm
                 ) > 0
             ) {
@@ -505,7 +505,7 @@ class ImportProposalsFromCsv
 
         if ($this->proposalForm->getUsingAddress() && !empty($row['address'])) {
             if (Text::isJSON($row['address'])) {
-                $address = json_decode($row['address'], true);
+                $address = json_decode((string) $row['address'], true);
                 if (!isset($address[0]['address_components'])) {
                     $isCurrentLineFail = true;
                     $this->badData = $this->incrementBadData($this->badData, $key);
@@ -524,7 +524,7 @@ class ImportProposalsFromCsv
         if ($this->proposalForm->isUsingDistrict() && !empty($row['district'])) {
             if (
                 !($district = $this->districtRepository->findDistrictByName(
-                    trim($row['district']),
+                    trim((string) $row['district']),
                     $this->proposalForm
                 ))
             ) {
@@ -536,7 +536,7 @@ class ImportProposalsFromCsv
         if (isset($row['status']) && !empty($row['status'])) {
             if (
                 !($status = $this->statusRepository->findOneBy([
-                    'name' => trim($row['status']),
+                    'name' => trim((string) $row['status']),
                     'step' => $this->proposalForm->getStep(),
                 ]))
             ) {
@@ -546,7 +546,7 @@ class ImportProposalsFromCsv
             }
         }
         if ($this->proposalForm->isUsingThemes() && !empty($row['theme'])) {
-            $theme = str_replace('’', "'", trim($row['theme']));
+            $theme = str_replace('’', "'", trim((string) $row['theme']));
             if (!($theme = $this->themeRepository->findOneWithTitle($theme))) {
                 $this->badData = $this->incrementBadData($this->badData, $key);
                 $isCurrentLineFail = true;
@@ -556,7 +556,7 @@ class ImportProposalsFromCsv
         if ($this->proposalForm->isUsingCategories() && !empty($row['category'])) {
             if (
                 !($category = $this->proposalCategoryRepository->findOneBy([
-                    'name' => trim($row['category']),
+                    'name' => trim((string) $row['category']),
                     'form' => $this->proposalForm,
                 ]))
             ) {
@@ -566,12 +566,12 @@ class ImportProposalsFromCsv
                     sprintf(
                         'bad data category in line %d, for category %s',
                         $key,
-                        trim($row['category'])
+                        trim((string) $row['category'])
                     )
                 );
             }
         }
-        if (!($author = $this->userRepository->findOneByEmail(trim($row['author'])))) {
+        if (!($author = $this->userRepository->findOneByEmail(trim((string) $row['author'])))) {
             $this->badData = $this->incrementBadData($this->badData, $key);
             $isCurrentLineFail = true;
             $this->logger->error('bad data author in line ' . $key);
@@ -719,7 +719,7 @@ class ImportProposalsFromCsv
             foreach ($this->customFields as $questionTitle) {
                 $question = $this->proposalForm->getQuestionByTitle($questionTitle);
                 $response = new ValueResponse();
-                $value = trim($row[$questionTitle]) ?? '';
+                $value = trim((string) $row[$questionTitle]) ?? '';
                 if (
                     $question instanceof MultipleChoiceQuestion
                     && \in_array($question->getType(), [
@@ -729,25 +729,25 @@ class ImportProposalsFromCsv
                 ) {
                     $value = sprintf(
                         '{"labels":["%s"], "other": null}',
-                        trim($row[$questionTitle]) ?? ''
+                        trim((string) $row[$questionTitle]) ?? ''
                     );
                     if (!$question->isChoiceValid($value)) {
                         if ($question->isOtherAllowed()) {
                             $value = sprintf(
                                 '{"labels":[], "other": "%s"}',
-                                trim($row[$questionTitle]) ?? ''
+                                trim((string) $row[$questionTitle]) ?? ''
                             );
                         }
                     }
                 } elseif ($question instanceof SimpleQuestion) {
                     if ('number' === $question->getInputType()) {
-                        $value = (float) trim($row[$questionTitle]);
+                        $value = (float) trim((string) $row[$questionTitle]);
                     } elseif (
                         AbstractQuestion::QUESTION_TYPE_MAJORITY_DECISION ===
                             $question->getType()
                         && !empty($row[$questionTitle])
                     ) {
-                        $csvValue = ucfirst(strtolower($row[$questionTitle]));
+                        $csvValue = ucfirst(strtolower((string) $row[$questionTitle]));
                         $translationsFlipped = array_flip($this->getAllTranslationKey());
                         $csvKeyFromValue = $translationsFlipped[$csvValue];
                         $value = MajorityVoteTypeEnum::getCodeFromTranslationKey($csvKeyFromValue);

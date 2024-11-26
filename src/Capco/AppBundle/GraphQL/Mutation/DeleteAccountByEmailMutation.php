@@ -35,7 +35,7 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
 {
     use MutationTrait;
 
-    private UserRepository $userRepository;
+    private readonly UserRepository $userRepository;
 
     public function __construct(
         EntityManagerInterface $em,

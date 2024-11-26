@@ -170,7 +170,7 @@ class Post implements CommentableInterface, IndexableInterface, Ownerable, Trans
     {
         $body = $this->translate($locale, $fallbackToDefault)->getBody();
 
-        return html_entity_decode($body, \ENT_QUOTES, 'UTF-8');
+        return html_entity_decode((string) $body, \ENT_QUOTES, 'UTF-8');
     }
 
     public function setBody(?string $body = null): self

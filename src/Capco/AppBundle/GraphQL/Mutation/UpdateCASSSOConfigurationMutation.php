@@ -15,10 +15,10 @@ class UpdateCASSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const CONFIGURATION_NOT_FOUND = 'CONFIGURATION_NOT_FOUND';
+    final public const CONFIGURATION_NOT_FOUND = 'CONFIGURATION_NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $resolver;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $resolver;
 
     public function __construct(EntityManagerInterface $em, GlobalIdResolver $resolver)
     {

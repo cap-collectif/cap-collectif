@@ -26,12 +26,12 @@ class InviteUsersMutation implements MutationInterface
     use MutationTrait;
     private const BATCH_SIZE = 800;
 
-    private TokenGeneratorInterface $tokenGenerator;
-    private EntityManagerInterface $em;
-    private UserInviteRepository $userInviteRepository;
-    private UserRepository $userRepository;
-    private GroupRepository $groupRepository;
-    private Manager $manager;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly EntityManagerInterface $em;
+    private readonly UserInviteRepository $userInviteRepository;
+    private readonly UserRepository $userRepository;
+    private readonly GroupRepository $groupRepository;
+    private readonly Manager $manager;
 
     public function __construct(
         TokenGeneratorInterface $tokenGenerator,
@@ -62,11 +62,11 @@ class InviteUsersMutation implements MutationInterface
         ];
 
         $hostname = getenv('SYMFONY_ROUTER__REQUEST_CONTEXT__HOST');
-        if ($redirectionUrl && !preg_match('/' . $hostname . '/i', $redirectionUrl)) {
+        if ($redirectionUrl && !preg_match('/' . $hostname . '/i', (string) $redirectionUrl)) {
             throw new UserError('The hostname provided does not match a platform name from Cap Collectif');
         }
 
-        if (null !== $message && mb_strlen($message) > 500) {
+        if (null !== $message && mb_strlen((string) $message) > 500) {
             throw new UserError('The message length cannot exceed 500 characters.');
         }
 

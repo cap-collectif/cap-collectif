@@ -19,11 +19,11 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class UnfollowProposalMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FollowerRepository $followerRepository;
-    private ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader;
-    private ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly FollowerRepository $followerRepository;
+    private readonly ProposalViewerIsFollowingDataLoader $viewerFollowDataLoader;
+    private readonly ProposalViewerFollowingConfigurationDataLoader $viewerFollowingConfigDataLoader;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

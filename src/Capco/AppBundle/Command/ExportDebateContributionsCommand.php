@@ -17,16 +17,16 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ExportDebateContributionsCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-    public const STEP_FOLDER = 'debate/';
+    final public const STEP_FOLDER = 'debate/';
 
     private const CAPCO_EXPORT_DEBATE_CONTRIBUTIONS = 'capco:export:debate:contributions';
-    private Manager $toggleManager;
-    private DebateRepository $debateRepository;
-    private DebateContributionExporter $debateContributionExporter;
-    private ContributionsFilePathResolver $contributionsFilePathResolver;
-    private string $projectRootDir;
-    private EntityManagerInterface $entityManager;
-    private Stopwatch $stopwatch;
+    private readonly Manager $toggleManager;
+    private readonly DebateRepository $debateRepository;
+    private readonly DebateContributionExporter $debateContributionExporter;
+    private readonly ContributionsFilePathResolver $contributionsFilePathResolver;
+    private readonly string $projectRootDir;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly Stopwatch $stopwatch;
 
     public function __construct(
         ExportUtils $exportUtils,

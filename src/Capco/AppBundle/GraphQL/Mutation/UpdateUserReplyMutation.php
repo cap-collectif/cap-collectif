@@ -23,11 +23,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateUserReplyMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private ResponsesFormatter $responsesFormatter;
-    private ReplyRepository $replyRepo;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly ResponsesFormatter $responsesFormatter;
+    private readonly ReplyRepository $replyRepo;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -4,8 +4,8 @@ namespace Capco\AppBundle\DTO\Analytics;
 
 class AggregatedResult
 {
-    private string $key;
-    private int $totalCount;
+    private readonly string $key;
+    private readonly int $totalCount;
 
     private function __construct(string $key, int $totalCount)
     {

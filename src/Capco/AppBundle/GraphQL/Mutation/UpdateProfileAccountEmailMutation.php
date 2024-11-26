@@ -25,15 +25,15 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
 {
     use MutationTrait;
 
-    public const RATE_LIMITER_ACTION = 'UpdateProfileAccountEmail';
+    final public const RATE_LIMITER_ACTION = 'UpdateProfileAccountEmail';
 
-    private UserManager $userManager;
-    private Publisher $publisher;
-    private EncoderFactoryInterface $encoderFactory;
-    private EmailDomainRepository $emailDomainRepository;
-    private Manager $toggleManager;
-    private TokenGeneratorInterface $tokenGenerator;
-    private RateLimiter $rateLimiter;
+    private readonly UserManager $userManager;
+    private readonly Publisher $publisher;
+    private readonly EncoderFactoryInterface $encoderFactory;
+    private readonly EmailDomainRepository $emailDomainRepository;
+    private readonly Manager $toggleManager;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly RateLimiter $rateLimiter;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -88,7 +88,7 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
         if (
             $this->toggleManager->isActive('restrict_registration_via_email_domain')
             && !$this->emailDomainRepository->findOneBy([
-                'value' => explode('@', $newEmailToConfirm)[1],
+                'value' => explode('@', (string) $newEmailToConfirm)[1],
             ])
         ) {
             return ['error' => UpdateUserEmailErrorCode::UNAUTHORIZED_EMAIL_DOMAIN];

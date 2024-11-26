@@ -11,7 +11,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class CreateAnalyticsTestIndexCommand extends Command
 {
-    private IndexBuilder $indexManager;
+    private readonly IndexBuilder $indexManager;
 
     public function __construct(string $name, IndexBuilder $indexManager)
     {

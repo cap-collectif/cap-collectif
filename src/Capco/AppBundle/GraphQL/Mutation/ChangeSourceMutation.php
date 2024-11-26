@@ -20,10 +20,10 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ChangeSourceMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private SourceRepository $sourceRepo;
-    private FormFactoryInterface $formFactory;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly SourceRepository $sourceRepo;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

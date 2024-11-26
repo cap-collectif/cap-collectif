@@ -10,8 +10,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectExportableSteps implements QueryInterface
 {
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ProjectRepository $projectRepository;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ProjectRepository $projectRepository;
 
     public function __construct(
         AuthorizationCheckerInterface $authorizationChecker,

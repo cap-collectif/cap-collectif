@@ -17,7 +17,7 @@ use Elastica\Query\Term;
 
 class VersionSearch extends Search
 {
-    public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
+    final public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
 
     private $opinionVersionRepo;
 

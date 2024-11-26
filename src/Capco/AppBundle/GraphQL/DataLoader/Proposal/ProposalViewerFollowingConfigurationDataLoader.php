@@ -30,7 +30,7 @@ class ProposalViewerFollowingConfigurationDataLoader extends BatchDataLoader
     ) {
         $this->followerRepository = $followerRepository;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

@@ -19,7 +19,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GraphQLController extends BaseController
 {
-    public const PREVIEW_HEADER = 'application/vnd.cap-collectif.preview+json';
+    final public const PREVIEW_HEADER = 'application/vnd.cap-collectif.preview+json';
     private const SCHEMA_PUBLIC = 'public';
     private const SCHEMA_PREVIEW = 'preview';
     private const SCHEMA_INTERNAL = 'internal';
@@ -28,14 +28,14 @@ class GraphQLController extends BaseController
     private const ENV_TEST = 'test';
     private const ENV_PROD = 'prod';
 
-    private ParserInterface $batchParser;
-    private Executor $requestExecutor;
-    private Parser $requestParser;
-    private LoggerInterface $logger;
-    private Manager $manager;
+    private readonly ParserInterface $batchParser;
+    private readonly Executor $requestExecutor;
+    private readonly Parser $requestParser;
+    private readonly LoggerInterface $logger;
+    private readonly Manager $manager;
 
-    private string $env;
-    private bool $useApolloBatchingMethod;
+    private readonly string $env;
+    private readonly bool $useApolloBatchingMethod;
 
     public function __construct(
         BatchParser $batchParser,
@@ -115,7 +115,7 @@ class GraphQLController extends BaseController
         $syntaxError = false;
         if (isset($payload['errors']) && \count($payload['errors']) > 0) {
             foreach ($payload['errors'] as $error) {
-                if (false !== strpos($error['message'], 'Syntax Error')) {
+                if (false !== strpos((string) $error['message'], 'Syntax Error')) {
                     $syntaxError = true;
 
                     break;

@@ -55,7 +55,7 @@ abstract class BaseDeleteUserMutation extends BaseDeleteMutation
     protected MailingListRepository $mailingListRepository;
     protected LoggerInterface $logger;
     protected UserAnonymizer $userAnonymizer;
-    private SendInBluePublisher $sendInBluePublisher;
+    private readonly SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         EntityManagerInterface $em,

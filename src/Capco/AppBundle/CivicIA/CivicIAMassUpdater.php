@@ -13,12 +13,12 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class CivicIAMassUpdater
 {
-    public const NOT_FOUND = 'NOT_FOUND';
-    public const INVALID_JSON = 'INVALID_JSON';
+    final public const NOT_FOUND = 'NOT_FOUND';
+    final public const INVALID_JSON = 'INVALID_JSON';
 
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $entityManager;
-    private Indexer $indexer;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly Indexer $indexer;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

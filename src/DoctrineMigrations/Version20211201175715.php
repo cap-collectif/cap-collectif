@@ -21,7 +21,7 @@ final class Version20211201175715 extends AbstractMigration implements Container
 {
     public array $invitations = [];
     private EntityManagerInterface $em;
-    private UuidGenerator $generator;
+    private readonly UuidGenerator $generator;
 
     public function __construct(Connection $connection, LoggerInterface $logger)
     {

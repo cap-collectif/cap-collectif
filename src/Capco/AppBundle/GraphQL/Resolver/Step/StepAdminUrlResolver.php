@@ -27,7 +27,7 @@ class StepAdminUrlResolver implements QueryInterface
         DebateStep::class => 'debate-step',
         RankingStep::class => 'ranking-step',
     ];
-    private RouterInterface $router;
+    private readonly RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {

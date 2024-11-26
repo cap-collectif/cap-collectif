@@ -17,12 +17,12 @@ class DeleteDebateOpinionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
+    final public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
 
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

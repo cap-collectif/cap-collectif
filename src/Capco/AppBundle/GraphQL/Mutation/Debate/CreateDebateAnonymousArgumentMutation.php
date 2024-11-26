@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
 {
-    private SendInBluePublisher $sendInBluePublisher;
+    private readonly SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         EntityManagerInterface $em,

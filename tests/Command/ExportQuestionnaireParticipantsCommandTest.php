@@ -12,9 +12,9 @@ class ExportQuestionnaireParticipantsCommandTest extends KernelTestCase
 {
     use CommandTestTrait;
 
-    public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
-    public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
-    public const EXPECTED_FILE_NAMES = [
+    final public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
+    final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
+    final public const EXPECTED_FILE_NAMES = [
         'participants_projet-avec-questionnaire_questionnaire-des-jo-2024',
         'participants_projet-avec-questionnaire_questionnaire',
         'participants_projet-avec-questionnaire_etape-de-questionnaire-fermee',
@@ -24,9 +24,9 @@ class ExportQuestionnaireParticipantsCommandTest extends KernelTestCase
         'participants_projet-pour-le-group2_questionnaire-step-pour-group2',
         'participants_projet-avec-administrateur-de-projet_questionnaire-step-anonymous-project-owner',
     ];
-    public const FULL_SUFFIX = '.csv';
-    public const SIMPLIFIED_SUFFIX = '_simplified.csv';
-    public const COMMAND = 'capco:export:questionnaire:participants';
+    final public const FULL_SUFFIX = '.csv';
+    final public const SIMPLIFIED_SUFFIX = '_simplified.csv';
+    final public const COMMAND = 'capco:export:questionnaire:participants';
 
     protected function setUp(): void
     {

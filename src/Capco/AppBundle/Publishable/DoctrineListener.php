@@ -12,7 +12,7 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class DoctrineListener implements EventSubscriber
 {
-    private Manager $manager;
+    private readonly Manager $manager;
 
     public function __construct(Manager $manager)
     {

@@ -14,7 +14,7 @@ class OtherStep extends AbstractStep
 {
     use TimelessStepTrait;
 
-    public const TYPE = 'other';
+    final public const TYPE = 'other';
 
     public function getType()
     {

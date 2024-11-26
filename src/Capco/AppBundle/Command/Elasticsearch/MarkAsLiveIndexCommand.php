@@ -18,8 +18,8 @@ class MarkAsLiveIndexCommand extends Command
     protected static $defaultName = 'capco:es:set-live-index';
     protected IndexBuilder $indexManager;
     protected Indexer $indexer;
-    private Client $client;
-    private Cluster $cluster;
+    private readonly Client $client;
+    private readonly Cluster $cluster;
 
     public function __construct(IndexBuilder $indexManager, Indexer $indexer, Client $client, Cluster $cluster)
     {

@@ -11,8 +11,8 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class ExportDebateParticipantsCommandTest extends KernelTestCase
 {
     use CommandTestTrait;
-    public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
-    public const EXPECTED_FILE_NAMES = [
+    final public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
+    final public const EXPECTED_FILE_NAMES = [
         'participants_debat-du-mois_pour-ou-contre-le-reconfinement',
         'participants_debat-sur-le-cannabis_pour-ou-contre-la-legalisation-du-cannabis',
         'participants_debat-wysiwyg_le-lait-avant-les-cereales',
@@ -20,10 +20,10 @@ class ExportDebateParticipantsCommandTest extends KernelTestCase
         'participants_debats-sur-la-vie_pourquoi-la-vie',
         'participants_projet-avec-administrateur-de-projet_debat-admin-projet',
     ];
-    public const FULL_SUFFIX = '.csv';
-    public const SIMPLIFIED_SUFFIX = '_simplified.csv';
-    public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
-    public const COMMAND = 'capco:export:debate:participants';
+    final public const FULL_SUFFIX = '.csv';
+    final public const SIMPLIFIED_SUFFIX = '_simplified.csv';
+    final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
+    final public const COMMAND = 'capco:export:debate:participants';
 
     protected function setUp(): void
     {

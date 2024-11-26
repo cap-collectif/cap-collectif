@@ -14,8 +14,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class AddVoteAndSelectionStepMutation implements MutationInterface
 {
     use MutationTrait;
-    private AddStepService $addStepService;
-    private EntityManagerInterface $em;
+    private readonly AddStepService $addStepService;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(AddStepService $addStepService, EntityManagerInterface $em)
     {

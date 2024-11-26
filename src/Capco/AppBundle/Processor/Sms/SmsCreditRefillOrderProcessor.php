@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class SmsCreditRefillOrderProcessor implements ProcessorInterface
 {
-    private SmsOrderRepository $smsOrderRepository;
-    private SmsNotifier $notifier;
+    private readonly SmsOrderRepository $smsOrderRepository;
+    private readonly SmsNotifier $notifier;
 
     public function __construct(SmsOrderRepository $smsOrderRepository, SmsNotifier $notifier)
     {

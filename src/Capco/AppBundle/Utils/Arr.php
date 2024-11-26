@@ -32,7 +32,7 @@ final class Arr
                 $delimiter = '.';
             }
             // Remove starting delimiters and spaces
-            $path = ltrim($path, "{$delimiter} ");
+            $path = ltrim((string) $path, "{$delimiter} ");
             // Remove ending delimiters, spaces, and wildcards
             $path = rtrim($path, "{$delimiter} *");
             // Split the keys by delimiter
@@ -40,7 +40,7 @@ final class Arr
         }
         do {
             $key = array_shift($keys);
-            if (ctype_digit($key)) {
+            if (ctype_digit((string) $key)) {
                 // Make the key an integer
                 $key = (int) $key;
             }

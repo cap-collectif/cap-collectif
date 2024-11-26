@@ -19,10 +19,10 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class DeleteParticipantMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private ParticipantRepository $participantRepository;
-    private MediatorParticipantStepRepository $mediatorParticipantStepRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ParticipantRepository $participantRepository;
+    private readonly MediatorParticipantStepRepository $mediatorParticipantStepRepository;
 
     public function __construct(
         EntityManagerInterface $em,

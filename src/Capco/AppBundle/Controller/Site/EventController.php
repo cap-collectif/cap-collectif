@@ -24,14 +24,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EventController extends Controller
 {
-    private EventHelper $eventHelper;
-    private EventRepository $eventRepository;
-    private EntityManagerInterface $entityManager;
-    private FormFactoryInterface $formFactory;
-    private SiteParameterResolver $parameterResolver;
-    private TranslatorInterface $tranlator;
-    private SessionInterface $session;
-    private string $projectDir;
+    private readonly EventHelper $eventHelper;
+    private readonly EventRepository $eventRepository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly SiteParameterResolver $parameterResolver;
+    private readonly TranslatorInterface $tranlator;
+    private readonly SessionInterface $session;
+    private readonly string $projectDir;
 
     public function __construct(
         EventHelper $eventHelper,

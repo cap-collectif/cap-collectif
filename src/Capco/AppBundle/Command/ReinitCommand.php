@@ -106,31 +106,31 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ReinitCommand extends Command
 {
-    public const ENTITIES_WITH_LISTENERS = [
+    final public const ENTITIES_WITH_LISTENERS = [
         UserInvite::class,
         DebateArticle::class,
         UserInviteEmailMessage::class,
     ];
-    public const LISTENERS_TO_DISABLE = [
+    final public const LISTENERS_TO_DISABLE = [
         UserInviteEmailMessageListener::class,
         DebateArticleListener::class,
     ];
     private $env;
-    private ManagerRegistry $doctrine;
-    private EntityManagerInterface $em;
-    private EventManager $eventManager;
-    private ProgressBarProcessor $progressBarProcessor;
-    private ElasticsearchDoctrineListener $elasticsearchListener;
-    private DoctrineListener $publishableListener;
-    private QuestionnaireSubscriber $questionnaireSubscriber;
-    private StepContributionsDataLoader $stepContributionDataloader;
-    private ProposalFormProposalsDataLoader $proposalFormProposalsDataloader;
-    private CollectStepContributorCountDataLoader $collectStepContributorsDataloader;
-    private StepVotesCountDataLoader $stepVotesCountDataloader;
-    private StepPointsVotesCountDataLoader $stepPointsVotesCountDataLoader;
-    private ProjectProposalsDataLoader $projectProposalsDataloader;
-    private ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader;
-    private Stopwatch $stopwatch;
+    private readonly ManagerRegistry $doctrine;
+    private readonly EntityManagerInterface $em;
+    private readonly EventManager $eventManager;
+    private readonly ProgressBarProcessor $progressBarProcessor;
+    private readonly ElasticsearchDoctrineListener $elasticsearchListener;
+    private readonly DoctrineListener $publishableListener;
+    private readonly QuestionnaireSubscriber $questionnaireSubscriber;
+    private readonly StepContributionsDataLoader $stepContributionDataloader;
+    private readonly ProposalFormProposalsDataLoader $proposalFormProposalsDataloader;
+    private readonly CollectStepContributorCountDataLoader $collectStepContributorsDataloader;
+    private readonly StepVotesCountDataLoader $stepVotesCountDataloader;
+    private readonly StepPointsVotesCountDataLoader $stepPointsVotesCountDataLoader;
+    private readonly ProjectProposalsDataLoader $projectProposalsDataloader;
+    private readonly ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader;
+    private readonly Stopwatch $stopwatch;
 
     public function __construct(
         string $name,

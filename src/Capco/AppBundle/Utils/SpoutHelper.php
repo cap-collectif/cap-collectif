@@ -16,7 +16,7 @@ class SpoutHelper
 {
     private array $rawHeadersArray = []; //Local array to hold the Raw Headers for performance
     private array $formattedHeadersArray = []; //Local array to hold the Formatted Headers for performance
-    private int $headerRowNumber; //Row number where the header col is located in the file
+    private readonly int $headerRowNumber; //Row number where the header col is located in the file
 
     /**
      * Initialize on a per sheet basis
@@ -68,10 +68,10 @@ class SpoutHelper
                     $this->formattedHeadersArray[$key] = $value->format('Y-m-d'); //Since the dates in headers are avilable as DateTime Objects
                 } elseif ($formatted) {
                     $this->formattedHeadersArray[$key] = strtolower(
-                        str_replace(' ', '_', trim($value))
+                        str_replace(' ', '_', trim((string) $value))
                     );
                 } else {
-                    $this->formattedHeadersArray[$key] = trim($value);
+                    $this->formattedHeadersArray[$key] = trim((string) $value);
                 }
                 // Add more rules here as needed
             }

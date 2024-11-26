@@ -25,23 +25,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectDownloadResolver
 {
-    public const PROJECT_ADMIN_EXCLUDED_HEADER_KEYS = ['export_contribution_author_email', 'export_contribution_author_phone'];
-    public const EXPORT_CONTRIBUTION_ID_KEY = 'export_contribution_id';
-    public const EXPORT_CONTRIBUTION_PUBLISHED_KEY = 'export_contribution_published';
-    public const EXPORT_CONTRIBUTION_PUBLISHED_AT_KEY = 'export_contribution_published_at';
-    public const EXPORT_CONTRIBUTION_AUTHOR_KEY = 'export_contribution_author';
-    public const EXPORT_CONTRIBUTION_AUTHOR_ID_KEY = 'export_contribution_author_id';
-    public const EXPORT_CONTRIBUTION_AUTHOR_EMAIL_KEY = 'export_contribution_author_email';
-    public const EXPORT_CONTRIBUTION_AUTHOR_PHONE_KEY = 'export_contribution_author_phone';
-    public const EXPORT_CONTRIBUTION_CREATED_AT_KEY = 'export_contribution_created_at';
-    public const EXPORT_CONTRIBUTION_UPDATED_AT_KEY = 'export_contribution_updated_at';
-    public const EXPORT_CONTRIBUTION_ANONYMOUS_KEY = 'export_contribution_anonymous';
-    public const EXPORT_CONTRIBUTION_DRAFT_KEY = 'export_contribution_draft';
-    public const EXPORT_CONTRIBUTION_UNDRAFT_AT_KEY = 'export_contribution_undraft_at';
-    public const EXPORT_CONTRIBUTION_ACCOUNT_KEY = 'export_contribution_account';
-    public const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_KEY = 'export_contribution_no_account_email';
-    public const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED_KEY = 'export_contribution_no_account_email_confirmed';
-    public const EXPORT_CONTRIBUTION_INTERNAL_COMM_KEY = 'export_contribution_internal_comm';
+    final public const PROJECT_ADMIN_EXCLUDED_HEADER_KEYS = ['export_contribution_author_email', 'export_contribution_author_phone'];
+    final public const EXPORT_CONTRIBUTION_ID_KEY = 'export_contribution_id';
+    final public const EXPORT_CONTRIBUTION_PUBLISHED_KEY = 'export_contribution_published';
+    final public const EXPORT_CONTRIBUTION_PUBLISHED_AT_KEY = 'export_contribution_published_at';
+    final public const EXPORT_CONTRIBUTION_AUTHOR_KEY = 'export_contribution_author';
+    final public const EXPORT_CONTRIBUTION_AUTHOR_ID_KEY = 'export_contribution_author_id';
+    final public const EXPORT_CONTRIBUTION_AUTHOR_EMAIL_KEY = 'export_contribution_author_email';
+    final public const EXPORT_CONTRIBUTION_AUTHOR_PHONE_KEY = 'export_contribution_author_phone';
+    final public const EXPORT_CONTRIBUTION_CREATED_AT_KEY = 'export_contribution_created_at';
+    final public const EXPORT_CONTRIBUTION_UPDATED_AT_KEY = 'export_contribution_updated_at';
+    final public const EXPORT_CONTRIBUTION_ANONYMOUS_KEY = 'export_contribution_anonymous';
+    final public const EXPORT_CONTRIBUTION_DRAFT_KEY = 'export_contribution_draft';
+    final public const EXPORT_CONTRIBUTION_UNDRAFT_AT_KEY = 'export_contribution_undraft_at';
+    final public const EXPORT_CONTRIBUTION_ACCOUNT_KEY = 'export_contribution_account';
+    final public const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_KEY = 'export_contribution_no_account_email';
+    final public const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED_KEY = 'export_contribution_no_account_email_confirmed';
+    final public const EXPORT_CONTRIBUTION_INTERNAL_COMM_KEY = 'export_contribution_internal_comm';
     private const FULL_EXPORT_HEADER_KEYS = [
         self::EXPORT_CONTRIBUTION_PUBLISHED_KEY,
         self::EXPORT_CONTRIBUTION_AUTHOR_KEY,
@@ -66,7 +66,7 @@ class ProjectDownloadResolver
     protected array $headers;
     protected array $data;
     protected array $customFields;
-    private QuestionnaireExportResultsUrlResolver $exportUrlResolver;
+    private readonly QuestionnaireExportResultsUrlResolver $exportUrlResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -195,7 +195,7 @@ class ProjectDownloadResolver
     {
         $oneBreak = ['<br>', '<br/>', '&nbsp;'];
         $twoBreaks = ['</p>'];
-        $text = str_ireplace($oneBreak, "\r", $text);
+        $text = str_ireplace($oneBreak, "\r", (string) $text);
         $text = str_ireplace($twoBreaks, "\r\n", $text);
         $text = strip_tags($text);
 

@@ -17,10 +17,10 @@ use Symfony\Component\Routing\RouterInterface;
 
 class FOSNotifier extends BaseNotifier implements MailerInterface
 {
-    private UserUrlResolver $userUrlResolver;
-    private UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver;
-    private UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver;
-    private LoggerInterface $logger;
+    private readonly UserUrlResolver $userUrlResolver;
+    private readonly UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver;
+    private readonly UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         RouterInterface $router,

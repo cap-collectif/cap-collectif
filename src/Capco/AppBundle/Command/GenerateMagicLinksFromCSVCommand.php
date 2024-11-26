@@ -30,14 +30,14 @@ class GenerateMagicLinksFromCSVCommand extends Command
     private const ERROR = 1;
     private const FILE_FOLDER = '/public/magiclinks/';
 
-    private UserEmailProvider $userProvider;
-    private EntityManagerInterface $em;
-    private KernelInterface $kernel;
-    private UserRepository $userRepository;
+    private readonly UserEmailProvider $userProvider;
+    private readonly EntityManagerInterface $em;
+    private readonly KernelInterface $kernel;
+    private readonly UserRepository $userRepository;
     private SymfonyStyle $style;
-    private UserPasswordEncoderInterface $passwordEncoder;
-    private ConfigFileSystem $filesystem;
-    private RouterInterface $router;
+    private readonly UserPasswordEncoderInterface $passwordEncoder;
+    private readonly ConfigFileSystem $filesystem;
+    private readonly RouterInterface $router;
     private string $absoluteFilePath;
 
     private array $users = [];

@@ -18,10 +18,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateProposalFormMutation implements MutationInterface
 {
     use MutationTrait;
-    private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $em;
-    private SettableOwnerResolver $settableOwnerResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $em;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         FormFactoryInterface $formFactory,

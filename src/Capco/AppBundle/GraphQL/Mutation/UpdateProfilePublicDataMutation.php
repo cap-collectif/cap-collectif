@@ -17,7 +17,7 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 {
     use MutationTrait;
 
-    private Manager $toggleManager;
+    private readonly Manager $toggleManager;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -66,8 +66,8 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 
     private function limitBiographyLength(): void
     {
-        if (isset($this->arguments['biography']) && \strlen($this->arguments['biography']) > 256) {
-            $this->arguments['biography'] = substr($this->arguments['biography'], 0, 253) . '...';
+        if (isset($this->arguments['biography']) && \strlen((string) $this->arguments['biography']) > 256) {
+            $this->arguments['biography'] = substr((string) $this->arguments['biography'], 0, 253) . '...';
         }
     }
 }

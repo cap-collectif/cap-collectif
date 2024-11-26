@@ -22,17 +22,17 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
-    public const CLOSED_DEBATE = 'CLOSED_DEBATE';
-    public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
+    final public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
+    final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
+    final public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
 
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private ValidatorInterface $validator;
-    private TokenGeneratorInterface $tokenGenerator;
-    private Indexer $indexer;
-    private RequestGuesser $requestGuesser;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ValidatorInterface $validator;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly Indexer $indexer;
+    private readonly RequestGuesser $requestGuesser;
 
     public function __construct(
         EntityManagerInterface $em,

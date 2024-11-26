@@ -15,7 +15,7 @@ class NamespaceResolver
         $array = preg_grep('/^namespace /', $lines);
         $namespaceLine = array_shift($array);
         $match = [];
-        preg_match('/^namespace (.*);$/', $namespaceLine, $match);
+        preg_match('/^namespace (.*);$/', (string) $namespaceLine, $match);
 
         return array_pop($match);
     }

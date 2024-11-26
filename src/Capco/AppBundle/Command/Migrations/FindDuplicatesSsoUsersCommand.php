@@ -20,12 +20,12 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class FindDuplicatesSsoUsersCommand extends Command
 {
-    private DeleteAccountMutation $deleteAccountMutation;
-    private UserRepository $userRepository;
-    private UserContributionsCountResolver $countResolver;
-    private EntityManagerInterface $em;
-    private UserGroupRepository $ugRepository;
-    private LoggerInterface $logger;
+    private readonly DeleteAccountMutation $deleteAccountMutation;
+    private readonly UserRepository $userRepository;
+    private readonly UserContributionsCountResolver $countResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly UserGroupRepository $ugRepository;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         string $name,

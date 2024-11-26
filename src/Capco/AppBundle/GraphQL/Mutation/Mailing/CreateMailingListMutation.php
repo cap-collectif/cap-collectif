@@ -22,11 +22,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateMailingListMutation implements MutationInterface
 {
     use MutationTrait;
-    private UserRepository $userRepository;
-    private ProjectRepository $projectRepository;
-    private EntityManagerInterface $entityManager;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private SettableOwnerResolver $settableOwnerResolver;
+    private readonly UserRepository $userRepository;
+    private readonly ProjectRepository $projectRepository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         UserRepository $userRepository,

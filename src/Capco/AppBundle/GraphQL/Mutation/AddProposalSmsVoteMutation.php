@@ -32,24 +32,24 @@ class AddProposalSmsVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PROPOSAL_ALREADY_VOTED = 'PROPOSAL_ALREADY_VOTED';
-    public const VOTE_LIMIT_REACHED = 'VOTE_LIMIT_REACHED';
-    public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
-    public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
+    final public const PROPOSAL_ALREADY_VOTED = 'PROPOSAL_ALREADY_VOTED';
+    final public const VOTE_LIMIT_REACHED = 'VOTE_LIMIT_REACHED';
+    final public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
+    final public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
 
-    private EntityManagerInterface $em;
-    private ProposalVotesDataLoader $proposalVotesDataLoader;
-    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-    private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private GlobalIdResolver $globalIdResolver;
-    private LoggerInterface $logger;
-    private ValidatorInterface $validator;
-    private RequestGuesser $requestGuesser;
-    private PhoneTokenRepository $phoneTokenRepository;
-    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private ContributionValidator $contributionValidator;
+    private readonly EntityManagerInterface $em;
+    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
+    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
+    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly LoggerInterface $logger;
+    private readonly ValidatorInterface $validator;
+    private readonly RequestGuesser $requestGuesser;
+    private readonly PhoneTokenRepository $phoneTokenRepository;
+    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private readonly ContributionValidator $contributionValidator;
 
     public function __construct(
         EntityManagerInterface $em,

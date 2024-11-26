@@ -13,9 +13,6 @@ class DeleteDebateArgumentMutation extends AbstractDebateArgumentMutation implem
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
-    public const CANNOT_DELETE_DEBATE_ARGUMENT = 'CANNOT_DELETE_DEBATE_ARGUMENT';
-
     public function __invoke(Arg $input, User $viewer): array
     {
         $this->formatInput($input);

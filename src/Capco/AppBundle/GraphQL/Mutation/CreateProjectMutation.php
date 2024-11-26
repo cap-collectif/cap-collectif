@@ -29,13 +29,13 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private ProjectAuthorTransformer $transformer;
-    private FormFactoryInterface $formFactory;
-    private SettableOwnerResolver $settableOwnerResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly ProjectAuthorTransformer $transformer;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

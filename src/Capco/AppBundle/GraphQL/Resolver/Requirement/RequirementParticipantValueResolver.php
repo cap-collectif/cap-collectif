@@ -11,8 +11,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class RequirementParticipantValueResolver implements QueryInterface
 {
-    private RequirementViewerValueResolver $requirementViewerValueResolver;
-    private ParticipantRepository $participantRepository;
+    private readonly RequirementViewerValueResolver $requirementViewerValueResolver;
+    private readonly ParticipantRepository $participantRepository;
 
     public function __construct(RequirementViewerValueResolver $requirementViewerValueResolver, ParticipantRepository $participantRepository)
     {

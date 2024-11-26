@@ -17,8 +17,8 @@ use Psr\Log\LoggerInterface;
 
 class ReportableReportingResolver implements QueryInterface
 {
-    private ReportingRepository $repository;
-    private LoggerInterface $logger;
+    private readonly ReportingRepository $repository;
+    private readonly LoggerInterface $logger;
 
     public function __construct(ReportingRepository $repository, LoggerInterface $logger)
     {

@@ -30,7 +30,7 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
     ) {
         $this->stepContributorResolver = $stepContributorResolver;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

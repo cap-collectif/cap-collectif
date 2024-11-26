@@ -12,7 +12,7 @@ class CheckGeoJsonValidator extends ConstraintValidator
         if (null === $geoJson) {
             return;
         }
-        $decoded = json_decode($geoJson);
+        $decoded = json_decode((string) $geoJson);
         if ($decoded && self::isValidGeoJson($decoded)) {
             return;
         }

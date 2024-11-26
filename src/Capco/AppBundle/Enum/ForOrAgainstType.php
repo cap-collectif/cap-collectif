@@ -6,10 +6,10 @@ use GraphQL\Error\UserError;
 
 class ForOrAgainstType
 {
-    public const AGAINST = 'AGAINST';
-    public const FOR = 'FOR';
+    final public const AGAINST = 'AGAINST';
+    final public const FOR = 'FOR';
 
-    public const ALL = [self::AGAINST, self::FOR];
+    final public const ALL = [self::AGAINST, self::FOR];
 
     public static function isValid(string $value): bool
     {

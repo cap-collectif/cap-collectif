@@ -25,10 +25,10 @@ class OrganizationNormalizer implements NormalizerInterface, SerializerAwareInte
         'ElasticsearchNestedAuthor',
     ];
 
-    private UrlGeneratorInterface $router;
-    private ObjectNormalizer $normalizer;
-    private Manager $manager;
-    private ContributionSearch $contributionSearch;
+    private readonly UrlGeneratorInterface $router;
+    private readonly ObjectNormalizer $normalizer;
+    private readonly Manager $manager;
+    private readonly ContributionSearch $contributionSearch;
 
     public function __construct(
         UrlGeneratorInterface $router,

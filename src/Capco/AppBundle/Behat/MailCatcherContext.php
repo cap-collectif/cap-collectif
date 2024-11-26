@@ -9,8 +9,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class MailCatcherContext extends Base implements KernelAwareContext
 {
-    public const SNAPSHOTS_PATH = '/var/www/__snapshots__/emails/';
-    public const SNAPSHOTS_DIFF_PATH = '/var/www/__snapshots-diff__/';
+    final public const SNAPSHOTS_PATH = '/var/www/__snapshots__/emails/';
+    final public const SNAPSHOTS_DIFF_PATH = '/var/www/__snapshots-diff__/';
 
     /**
      * {@inheritdoc}
@@ -41,7 +41,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
 
         if ($writeSnapshot) {
             $newSnapshot = fopen(self::SNAPSHOTS_PATH . $file, 'w');
-            fwrite($newSnapshot, $content);
+            fwrite($newSnapshot, (string) $content);
             chmod(self::SNAPSHOTS_PATH . $file, 0777);
             fclose($newSnapshot);
             echo "\"Snapshot writen at '{$file}'. You can now relaunch the testsuite.\"";
@@ -51,7 +51,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
 
         $text = file_get_contents(self::SNAPSHOTS_PATH . $file);
 
-        if (false === strpos($content, $text)) {
+        if (false === strpos((string) $content, $text)) {
             // HtmlDiffService
             $diff = $this->kernel
                 ->getContainer()

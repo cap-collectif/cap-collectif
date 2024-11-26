@@ -450,7 +450,7 @@ class CRUDController extends AbstractSonataCrudController
             throw $this->createAccessDeniedException();
         }
 
-        if (mb_strlen($searchText, 'UTF-8') < $minimumInputLength) {
+        if (mb_strlen((string) $searchText, 'UTF-8') < $minimumInputLength) {
             return new JsonResponse(
                 ['status' => 'KO', 'message' => 'Too short search string.'],
                 403

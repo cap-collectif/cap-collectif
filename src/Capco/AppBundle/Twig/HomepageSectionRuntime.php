@@ -18,16 +18,16 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class HomepageSectionRuntime implements RuntimeExtensionInterface
 {
-    private HighlightedContentRepository $highlightedContentRepository;
-    private SerializerInterface $serializer;
-    private Environment $twig;
-    private VideoRepository $videoRepository;
-    private ProjectRepository $projectRepository;
-    private TokenStorageInterface $tokenStorage;
-    private ThemeRepository $themeRepository;
-    private PostRepository $postRepository;
-    private SocialNetworkRepository $networkRepository;
-    private ProposalRepository $proposalRepository;
+    private readonly HighlightedContentRepository $highlightedContentRepository;
+    private readonly SerializerInterface $serializer;
+    private readonly Environment $twig;
+    private readonly VideoRepository $videoRepository;
+    private readonly ProjectRepository $projectRepository;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly ThemeRepository $themeRepository;
+    private readonly PostRepository $postRepository;
+    private readonly SocialNetworkRepository $networkRepository;
+    private readonly ProposalRepository $proposalRepository;
 
     public function __construct(
         HighlightedContentRepository $highlightedContentRepository,

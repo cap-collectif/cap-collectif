@@ -38,10 +38,10 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     use VoteThresholdTrait;
     use VoteTypeTrait;
 
-    public const TYPE = 'selection';
-    public const VOTE_TYPE_DISABLED = 0;
-    public const VOTE_TYPE_SIMPLE = 1;
-    public const VOTE_TYPE_BUDGET = 2;
+    final public const TYPE = 'selection';
+    final public const VOTE_TYPE_DISABLED = 0;
+    final public const VOTE_TYPE_SIMPLE = 1;
+    final public const VOTE_TYPE_BUDGET = 2;
 
     public static $voteTypeLabels = [
         'step.selection.vote_type.disabled' => self::VOTE_TYPE_DISABLED,

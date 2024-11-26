@@ -17,10 +17,10 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteUserReplyMutation implements MutationInterface
 {
-    private EntityManagerInterface $em;
-    private ReplyRepository $replyRepo;
-    private Publisher $publisher;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly ReplyRepository $replyRepo;
+    private readonly Publisher $publisher;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

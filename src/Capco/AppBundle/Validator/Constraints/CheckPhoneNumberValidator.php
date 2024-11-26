@@ -13,11 +13,11 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class CheckPhoneNumberValidator extends ConstraintValidator
 {
-    private UserRepository $userRepository;
-    private Security $security;
-    private GlobalIdResolver $globalIdResolver;
-    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly UserRepository $userRepository;
+    private readonly Security $security;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
 
     public function __construct(
         UserRepository $userRepository,

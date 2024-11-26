@@ -20,12 +20,12 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AnalysisConfigurationManager
 {
-    private EntityManagerInterface $entityManager;
-    private ProposalRepository $proposalRepository;
-    private ProposalDecisionRepository $proposalDecisionRepository;
-    private EventDispatcherInterface $eventDispatcher;
-    private Publisher $publisher;
-    private JpecGhost $jpecGhost;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly ProposalDecisionRepository $proposalDecisionRepository;
+    private readonly EventDispatcherInterface $eventDispatcher;
+    private readonly Publisher $publisher;
+    private readonly JpecGhost $jpecGhost;
 
     public function __construct(
         EntityManagerInterface $entityManager,

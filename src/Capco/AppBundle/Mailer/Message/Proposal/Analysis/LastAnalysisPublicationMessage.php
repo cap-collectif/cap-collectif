@@ -7,9 +7,9 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 class LastAnalysisPublicationMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'notification.contribution.analysis.last.title';
-    public const TEMPLATE = '@CapcoMail/Proposal/lastAnalysisPublication.html.twig';
-    public const FOOTER = '';
+    final public const SUBJECT = 'notification.contribution.analysis.last.title';
+    final public const TEMPLATE = '@CapcoMail/Proposal/lastAnalysisPublication.html.twig';
+    final public const FOOTER = '';
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {

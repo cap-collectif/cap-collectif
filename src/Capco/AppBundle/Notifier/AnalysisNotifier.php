@@ -17,7 +17,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AnalysisNotifier extends BaseNotifier
 {
-    private TranslatorInterface $translator;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(
         MailerService $mailer,

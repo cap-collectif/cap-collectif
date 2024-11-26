@@ -10,7 +10,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class ProjectCanEditResolver implements QueryInterface
 {
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(AuthorizationCheckerInterface $authorizationChecker)
     {

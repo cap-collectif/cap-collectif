@@ -28,17 +28,17 @@ class ResettingController extends AbstractController
 {
     private const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
 
-    private TokenGenerator $tokenGenerator;
-    private MailerService $mailerService;
-    private UserManager $userManager;
-    private FormFactoryInterface $formFactory;
-    private SessionInterface $session;
-    private RouterInterface $router;
-    private UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver;
-    private UserPasswordEncoderInterface $userPasswordEncoder;
-    private TranslatorInterface $translator;
-    private \Twig\Environment $twig;
-    private LoginManagerInterface $loginManager;
+    private readonly TokenGenerator $tokenGenerator;
+    private readonly MailerService $mailerService;
+    private readonly UserManager $userManager;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly SessionInterface $session;
+    private readonly RouterInterface $router;
+    private readonly UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver;
+    private readonly UserPasswordEncoderInterface $userPasswordEncoder;
+    private readonly TranslatorInterface $translator;
+    private readonly \Twig\Environment $twig;
+    private readonly LoginManagerInterface $loginManager;
 
     public function __construct(
         TokenGenerator $tokenGenerator,

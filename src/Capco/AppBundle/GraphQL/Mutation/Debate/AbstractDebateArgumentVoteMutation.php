@@ -19,15 +19,15 @@ abstract class AbstractDebateArgumentVoteMutation
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
-    public const CLOSED_DEBATE = 'CLOSED_DEBATE';
+    final public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
+    final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
 
     protected DebateArgumentVoteRepository $repository;
     protected DebateAnonymousArgumentVoteRepository $anonymousRepository;
     protected EntityManagerInterface $em;
     protected AuthorizationCheckerInterface $authorizationChecker;
     protected Indexer $indexer;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

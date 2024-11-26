@@ -18,7 +18,7 @@ class CasAuthenticationExceptionListener
 {
     protected LoggerInterface $logger;
 
-    private Environment $templating;
+    private readonly Environment $templating;
 
     public function __construct(
         LoggerInterface $logger,

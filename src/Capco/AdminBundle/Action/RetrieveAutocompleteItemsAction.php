@@ -116,7 +116,7 @@ final class RetrieveAutocompleteItemsAction
         if (User::class === $entity) {
             $items = [];
 
-            $properties = explode(',', $property);
+            $properties = explode(',', (string) $property);
             $users = $this->userSearch->searchUsers($searchText, $properties);
             if ($users['count'] > 0) {
                 foreach ($users['users'] as $user) {
@@ -146,7 +146,7 @@ final class RetrieveAutocompleteItemsAction
         // check user permission
         $targetAdmin->checkAccess($targetAdminAccessAction);
 
-        if (mb_strlen($searchText, 'UTF-8') < $minimumInputLength) {
+        if (mb_strlen((string) $searchText, 'UTF-8') < $minimumInputLength) {
             return new JsonResponse(
                 ['status' => 'KO', 'message' => 'Too short search string.'],
                 403

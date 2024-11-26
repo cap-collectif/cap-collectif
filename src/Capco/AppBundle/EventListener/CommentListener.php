@@ -14,10 +14,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class CommentListener
 {
-    private Publisher $publisher;
-    private EntityManagerInterface $em;
-    private TokenStorageInterface $tokenStorage;
-    private Manager $manager;
+    private readonly Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly Manager $manager;
 
     public function __construct(
         Publisher $publisher,

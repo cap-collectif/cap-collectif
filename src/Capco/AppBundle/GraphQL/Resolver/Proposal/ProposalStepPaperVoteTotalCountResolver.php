@@ -12,8 +12,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalStepPaperVoteTotalCountResolver implements QueryInterface
 {
-    private ProposalStepPaperVoteCounterRepository $repository;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly ProposalStepPaperVoteCounterRepository $repository;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         ProposalStepPaperVoteCounterRepository $repository,

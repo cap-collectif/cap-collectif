@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Enum;
 
 class OrganizationAffiliation
 {
-    public const ADMIN = 'admin';
-    public const USER = 'user';
+    final public const ADMIN = 'admin';
+    final public const USER = 'user';
 
     public static function getAvailableTypes(): array
     {

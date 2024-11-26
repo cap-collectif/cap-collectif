@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryNotificationsFromEmailResolver implements QueryInterface
 {
-    private SiteParameterRepository $repository;
+    private readonly SiteParameterRepository $repository;
 
     public function __construct(SiteParameterRepository $repository)
     {

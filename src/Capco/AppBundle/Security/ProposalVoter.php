@@ -8,15 +8,15 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class ProposalVoter extends AbstractOwnerableVoter
 {
-    public const CHANGE_STATUS = 'changeStatus';
-    public const CHANGE_CONTENT = 'changeContent';
-    public const EDIT = 'edit';
-    public const SELECT_PROPOSAL = 'selectProposal';
-    public const UNSELECT_PROPOSAL = 'unselectProposal';
-    public const CREATE_PROPOSAL_FUSION = 'createProposalFusion';
-    public const UPDATE_PROPOSAL_FUSION = 'updateProposalFusion';
-    public const CHANGE_PROPOSAL_NOTATION = 'changeProposalNotation';
-    public const CHANGE_PROPOSAL_PROGRESS_STEPS = 'changeProposalProgressSteps';
+    final public const CHANGE_STATUS = 'changeStatus';
+    final public const CHANGE_CONTENT = 'changeContent';
+    final public const EDIT = 'edit';
+    final public const SELECT_PROPOSAL = 'selectProposal';
+    final public const UNSELECT_PROPOSAL = 'unselectProposal';
+    final public const CREATE_PROPOSAL_FUSION = 'createProposalFusion';
+    final public const UPDATE_PROPOSAL_FUSION = 'updateProposalFusion';
+    final public const CHANGE_PROPOSAL_NOTATION = 'changeProposalNotation';
+    final public const CHANGE_PROPOSAL_PROGRESS_STEPS = 'changeProposalProgressSteps';
 
     protected function supports($attribute, $subject)
     {

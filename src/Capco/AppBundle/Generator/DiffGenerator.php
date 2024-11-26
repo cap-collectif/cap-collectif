@@ -28,8 +28,8 @@ class DiffGenerator
         }
 
         if ($entity instanceof OpinionModal) {
-            $oldText = html_entity_decode($entity->getBefore());
-            $newText = html_entity_decode($entity->getAfter());
+            $oldText = html_entity_decode((string) $entity->getBefore());
+            $newText = html_entity_decode((string) $entity->getAfter());
             $diff = $this->diffService->diff($oldText, $newText);
             $entity->setDiff($diff);
 

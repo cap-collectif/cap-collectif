@@ -25,7 +25,7 @@ class ProposalCollectVote extends AbstractProposalVote
     use PositionableTrait;
     use PrivatableTrait;
 
-    public const ANONYMOUS = 'ANONYMOUS';
+    final public const ANONYMOUS = 'ANONYMOUS';
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="collectVotes", cascade={"persist"})

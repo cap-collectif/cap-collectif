@@ -35,15 +35,15 @@ class UpdateNewProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private ProjectAuthorTransformer $transformer;
-    private FormFactoryInterface $formFactory;
-    private Publisher $publisher;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ProjectAbstractStepRepository $projectAbstractStepRepository;
-    private TranslatorInterface $translator;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly ProjectAuthorTransformer $transformer;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly Publisher $publisher;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ProjectAbstractStepRepository $projectAbstractStepRepository;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -19,12 +19,12 @@ use Symfony\Component\Process\Process;
 class MediaProcessor implements ProcessorInterface
 {
     // TODO: Please investigate why this is slow since SF4.
-    public const ENABLE_PROCESSOR = true;
+    final public const ENABLE_PROCESSOR = true;
     private array $referenceMap = [];
-    private EntityManagerInterface $em;
-    private FilterService $filterService;
-    private MediaProvider $mediaProvider;
-    private string $projectDir;
+    private readonly EntityManagerInterface $em;
+    private readonly FilterService $filterService;
+    private readonly MediaProvider $mediaProvider;
+    private readonly string $projectDir;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -103,7 +103,7 @@ class MediaProcessor implements ProcessorInterface
     protected function generateFormats(Media $media): void
     {
         foreach (['default_logo', 'default_avatar', 'default_project'] as $format) {
-            if ('svg' === pathinfo($media->getProviderReference())['extension']) {
+            if ('svg' === pathinfo((string) $media->getProviderReference())['extension']) {
                 continue;
             }
             $this->filterService->getUrlOfFilteredImage(

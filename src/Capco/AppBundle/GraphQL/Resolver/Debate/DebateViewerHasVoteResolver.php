@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 class DebateViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
-    private DebateVoteRepository $repository;
+    private readonly DebateVoteRepository $repository;
 
     public function __construct(DebateVoteRepository $repository)
     {

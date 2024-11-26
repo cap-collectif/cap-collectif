@@ -20,14 +20,14 @@ class VerifySmsVotePhoneNumberMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
+    final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
-    private EntityManagerInterface $em;
-    private SmsProviderInterface $smsProvider;
-    private AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
-    private GlobalIdResolver $globalIdResolver;
-    private TokenGenerator $tokenGenerator;
-    private PhoneTokenRepository $phoneTokenRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly SmsProviderInterface $smsProvider;
+    private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly TokenGenerator $tokenGenerator;
+    private readonly PhoneTokenRepository $phoneTokenRepository;
 
     public function __construct(
         EntityManagerInterface $em,

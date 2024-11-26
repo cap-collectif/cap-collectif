@@ -28,8 +28,8 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
     use MutationTrait;
     use ResolverTrait;
 
-    public const MEDIA_NOT_FOUND = 'MEDIA_NOT_FOUND';
-    private MediaRepository $mediaRepository;
+    final public const MEDIA_NOT_FOUND = 'MEDIA_NOT_FOUND';
+    private readonly MediaRepository $mediaRepository;
 
     public function __construct(
         LoggerInterface $logger,

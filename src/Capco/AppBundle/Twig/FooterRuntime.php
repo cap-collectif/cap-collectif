@@ -14,8 +14,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class FooterRuntime implements RuntimeExtensionInterface
 {
-    public const CACHE_KEY_LEGALS = 'getLegalsPages';
-    public const CACHE_KEY_SOCIAL_NETWORKS = 'getFooterSocialNetworks';
+    final public const CACHE_KEY_LEGALS = 'getLegalsPages';
+    final public const CACHE_KEY_SOCIAL_NETWORKS = 'getFooterSocialNetworks';
 
     protected $menuItemRepository;
     protected $footerSocialNetworkRepository;

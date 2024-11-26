@@ -49,10 +49,10 @@ class StepAdmin extends CapcoAdmin
         CollectStep::class => 'global.collect.step.label',
     ];
 
-    private Manager $manager;
-    private ProposalFormRepository $proposalFormRepository;
-    private QuestionnaireRepository $questionnaireRepository;
-    private StatusRepository $statusRepository;
+    private readonly Manager $manager;
+    private readonly ProposalFormRepository $proposalFormRepository;
+    private readonly QuestionnaireRepository $questionnaireRepository;
+    private readonly StatusRepository $statusRepository;
 
     public function __construct(
         string $code,

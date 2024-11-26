@@ -15,9 +15,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInterface
 {
-    public const STRATEGY_PREFIX = 'prefix';
-    public const STRATEGY_PREFIX_EXCEPT_DEFAULT = 'prefix_except_default';
-    public const STRATEGY_CUSTOM = 'custom';
+    final public const STRATEGY_PREFIX = 'prefix';
+    final public const STRATEGY_PREFIX_EXCEPT_DEFAULT = 'prefix_except_default';
+    final public const STRATEGY_CUSTOM = 'custom';
 
     private $strategy;
     private $translator;

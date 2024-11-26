@@ -18,10 +18,10 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 class DeleteAnonymousReplyMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ReplyAnonymousRepository $replyAnonymousRepository;
-    private Indexer $indexer;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
+    private readonly Indexer $indexer;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -39,7 +39,7 @@ class DeleteAnonymousReplyMutation implements MutationInterface
     {
         $this->formatInput($args);
         $hashedToken = $args->offsetGet('hashedToken');
-        $decodedToken = base64_decode($hashedToken);
+        $decodedToken = base64_decode((string) $hashedToken);
         $reply = $this->replyAnonymousRepository->findOneBy(['token' => $decodedToken]);
 
         if (!$reply) {

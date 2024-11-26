@@ -10,7 +10,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SSOController extends AbstractController
 {
-    private OpenIDBackchannel $openIDBackchannel;
+    private readonly OpenIDBackchannel $openIDBackchannel;
 
     public function __construct(OpenIDBackchannel $openIDBackchannel)
     {

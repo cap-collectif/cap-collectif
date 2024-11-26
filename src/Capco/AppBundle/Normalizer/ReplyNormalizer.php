@@ -12,7 +12,7 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class ReplyNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
 
     public function __construct(ObjectNormalizer $normalizer)
     {

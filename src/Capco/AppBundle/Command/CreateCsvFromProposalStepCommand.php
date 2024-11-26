@@ -41,8 +41,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 class CreateCsvFromProposalStepCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-    public const PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY = 'paperVotesTotalCountFromRepository';
-    public const PAPER_VOTES_POINTS_TOTAL_COUNT_FROM_REPOSITORY = 'paperVotesPointsTotalCountFromRepository';
+    final public const PAPER_VOTES_TOTAL_COUNT_FROM_REPOSITORY = 'paperVotesTotalCountFromRepository';
+    final public const PAPER_VOTES_POINTS_TOTAL_COUNT_FROM_REPOSITORY = 'paperVotesPointsTotalCountFromRepository';
 
     protected const PROPOSALS_PER_PAGE = 10;
     protected const VOTES_PER_PAGE = 150;
@@ -339,13 +339,13 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     protected LoggerInterface $logger;
 
     protected static $defaultName = 'capco:export:proposalStep';
-    private SelectionStepRepository $selectionStepRepository;
-    private string $projectRootDir;
-    private CollectStepRepository $collectStepRepository;
-    private ConnectionTraversor $connectionTraversor;
-    private ProposalRepository $proposalRepository;
+    private readonly SelectionStepRepository $selectionStepRepository;
+    private readonly string $projectRootDir;
+    private readonly CollectStepRepository $collectStepRepository;
+    private readonly ConnectionTraversor $connectionTraversor;
+    private readonly ProposalRepository $proposalRepository;
 
-    private EntityManagerInterface $entityManager;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         Executor $executor,
@@ -864,7 +864,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
 
                 continue;
             }
-            $arr = explode('.', substr($path, \strlen("{$submodulePath}.")));
+            $arr = explode('.', substr((string) $path, \strlen("{$submodulePath}.")));
             $val = $entity;
             foreach ($arr as $a) {
                 if (isset($val[$a])) {
@@ -907,7 +907,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                 continue;
             }
             if ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
+                $path = substr((string) $path, \strlen('new.'));
                 $this->handleProposalNewsValues($news, $columnName, $path, $row);
             } else {
                 $row[] = '';
@@ -949,13 +949,13 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         $row = ['proposalNewsComment'];
         foreach ($this->headersMap as $columnName => $path) {
             if ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
+                $path = substr((string) $path, \strlen('news_comment.'));
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
                 $this->handleProposalValues($proposal, $columnName, $path, $row);
             } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
+                $path = substr((string) $path, \strlen('new.'));
                 $this->handleProposalNewsValues($news, $columnName, $path, $row);
             } else {
                 $row[] = '';
@@ -1009,17 +1009,17 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         $row = ['proposalNewsCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'news_comment_vote.')) {
-                $path = substr($path, \strlen('news_comment_vote.'));
+                $path = substr((string) $path, \strlen('news_comment_vote.'));
                 $value = Arr::path($vote, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
+                $path = substr((string) $path, \strlen('news_comment.'));
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
                 $this->handleProposalValues($proposal, $columnName, $path, $row);
             } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
+                $path = substr((string) $path, \strlen('new.'));
                 $this->handleProposalNewsValues($news, $columnName, $path, $row);
             } else {
                 $row[] = '';
@@ -1039,19 +1039,19 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
 
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'news_comment_reporting.')) {
-                $path = substr($path, \strlen('news_comment_reporting.'));
+                $path = substr((string) $path, \strlen('news_comment_reporting.'));
                 $value = Arr::path($report, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif ($this->isSubdataBlocColumn($path, 'news_comment_vote.')) {
-                $path = substr($path, \strlen('news_comment_vote.'));
+                $path = substr((string) $path, \strlen('news_comment_vote.'));
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
+                $path = substr((string) $path, \strlen('news_comment.'));
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif ($this->isSubdataBlocColumn($path, 'new.')) {
-                $path = substr($path, \strlen('new.'));
+                $path = substr((string) $path, \strlen('new.'));
                 $this->handleProposalNewsValues($news, $columnName, $path, $row);
             } elseif (isset($this->proposalHeaderMap[$path])) {
                 $this->handleProposalValues($proposal, $columnName, $path, $row);
@@ -1119,11 +1119,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
 
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'reporting.')) {
-                $path = substr($path, \strlen('news_comment_reporting.'));
+                $path = substr((string) $path, \strlen('news_comment_reporting.'));
                 $value = Arr::path($report, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif ($this->isSubdataBlocColumn($path, 'news_comment.')) {
-                $path = substr($path, \strlen('news_comment.'));
+                $path = substr((string) $path, \strlen('news_comment.'));
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
@@ -1144,11 +1144,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         $row = ['proposalCommentVote'];
         foreach ($this->headersMap as $path => $columnName) {
             if ($this->isSubdataBlocColumn($path, 'comment_vote.')) {
-                $path = substr($path, \strlen('comment_vote.'));
+                $path = substr((string) $path, \strlen('comment_vote.'));
                 $value = Arr::path($vote, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif ($this->isSubdataBlocColumn($path, 'comment.')) {
-                $path = substr($path, \strlen('comment.'));
+                $path = substr((string) $path, \strlen('comment.'));
                 $value = Arr::path($comment, $path);
                 $row[] = $this->exportUtils->parseCellValue($value);
             } elseif (isset($this->proposalHeaderMap[$path])) {
@@ -1182,7 +1182,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         string $columnPath,
         array &$row
     ): void {
-        if (false !== strpos($columnName, 'authors')) {
+        if (false !== strpos((string) $columnName, 'authors')) {
             $paths = explode('.', $columnPath);
             array_shift($paths);
             $path = implode('.', $paths);

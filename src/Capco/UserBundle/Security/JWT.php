@@ -71,7 +71,7 @@ class JWT
         ];
     }
 
-    private static function throwError(string $jwt): void
+    private static function throwError(string $jwt): never
     {
         throw new \RuntimeException('invalid JWT : ' . $jwt);
     }

@@ -18,7 +18,7 @@ class ProjectAbstractStepAdmin extends CapcoAdmin
         '_sort_by' => 'position',
     ];
 
-    private EntityManagerInterface $entityManager;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,

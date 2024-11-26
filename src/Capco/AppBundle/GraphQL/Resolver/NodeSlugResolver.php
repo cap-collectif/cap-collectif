@@ -11,8 +11,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class NodeSlugResolver implements QueryInterface
 {
-    private OrganizationRepository $organizationRepository;
-    private GlobalDistrictRepository $globalDistrictRepository;
+    private readonly OrganizationRepository $organizationRepository;
+    private readonly GlobalDistrictRepository $globalDistrictRepository;
 
     public function __construct(
         OrganizationRepository $organizationRepository,

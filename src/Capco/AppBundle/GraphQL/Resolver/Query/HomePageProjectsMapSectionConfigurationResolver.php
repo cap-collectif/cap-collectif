@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class HomePageProjectsMapSectionConfigurationResolver implements QueryInterface
 {
-    private SectionRepository $sectionRepository;
+    private readonly SectionRepository $sectionRepository;
 
     public function __construct(SectionRepository $sectionRepository)
     {

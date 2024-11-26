@@ -19,7 +19,7 @@ use Symfony\Component\PropertyAccess\PropertyAccessorInterface;
  */
 class ElasticaToDoctrineTransformer
 {
-    public const ENTITY_ALIAS = 'o';
+    final public const ENTITY_ALIAS = 'o';
 
     protected $registry;
 

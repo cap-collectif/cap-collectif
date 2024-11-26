@@ -17,12 +17,12 @@ use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
  */
 class CapebUserFilter
 {
-    public const COLLABORATOR_LABEL = 'C';
-    public const ELECTED_LABEL = 'E';
+    final public const COLLABORATOR_LABEL = 'C';
+    final public const ELECTED_LABEL = 'E';
 
-    private Client $client;
-    private LoggerInterface $logger;
-    private UserTypeRepository $userTypeRepository;
+    private readonly Client $client;
+    private readonly LoggerInterface $logger;
+    private readonly UserTypeRepository $userTypeRepository;
     private ?string $url = null;
 
     public function __construct(LoggerInterface $logger, UserTypeRepository $userTypeRepository, ?string $url)

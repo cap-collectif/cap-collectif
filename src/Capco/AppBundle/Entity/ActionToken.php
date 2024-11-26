@@ -21,8 +21,8 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  */
 class ActionToken extends AbstractUserToken
 {
-    public const UNSUBSCRIBE = 'unsubscribe';
-    public const AVAILABLE_ACTIONS = [self::UNSUBSCRIBE];
+    final public const UNSUBSCRIBE = 'unsubscribe';
+    final public const AVAILABLE_ACTIONS = [self::UNSUBSCRIBE];
 
     /**
      * @ORM\Column(name="action", type="string", nullable=false)

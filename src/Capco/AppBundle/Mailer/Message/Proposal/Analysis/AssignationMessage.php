@@ -6,9 +6,9 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 class AssignationMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'notification.title.type.assigned';
-    public const TEMPLATE = '@CapcoMail/Proposal/notifyAnalyst.html.twig';
-    public const FOOTER = '';
+    final public const SUBJECT = 'notification.title.type.assigned';
+    final public const TEMPLATE = '@CapcoMail/Proposal/notifyAnalyst.html.twig';
+    final public const FOOTER = '';
 
     public static function getMySubjectVars(array $proposals, array $params): array
     {

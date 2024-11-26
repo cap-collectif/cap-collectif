@@ -18,9 +18,9 @@ use Symfony\Component\String\Slugger\SluggerInterface;
 class AddOrganizationMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private SluggerInterface $slugger;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly SluggerInterface $slugger;
 
     public function __construct(
         EntityManagerInterface $em,

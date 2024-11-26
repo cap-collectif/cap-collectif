@@ -14,11 +14,11 @@ class UpdateTwilioVerifyServiceMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
+    final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
-    private TwilioClient $twilioClient;
-    private EntityManagerInterface $em;
-    private ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
+    private readonly TwilioClient $twilioClient;
+    private readonly EntityManagerInterface $em;
+    private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
 
     public function __construct(
         TwilioClient $twilioClient,

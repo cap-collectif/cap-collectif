@@ -28,15 +28,15 @@ class AddProposalNewsMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PROPOSAL_DOESNT_ALLOW_NEWS = 'PROPOSAL_DOESNT_ALLOW_NEWS';
+    final public const PROPOSAL_DOESNT_ALLOW_NEWS = 'PROPOSAL_DOESNT_ALLOW_NEWS';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private LocaleRepository $localeRepository;
-    private Publisher $publisher;
-    private PostUrlResolver $urlResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly LocaleRepository $localeRepository;
+    private readonly Publisher $publisher;
+    private readonly PostUrlResolver $urlResolver;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -141,7 +141,7 @@ class AddProposalNewsMutation implements MutationInterface
                 if (isset($values['translations'][$availableLocale]['body'])) {
                     $translation->setBody(
                         htmlentities(
-                            $values['translations'][$availableLocale]['body'],
+                            (string) $values['translations'][$availableLocale]['body'],
                             \ENT_QUOTES,
                             'UTF-8'
                         )

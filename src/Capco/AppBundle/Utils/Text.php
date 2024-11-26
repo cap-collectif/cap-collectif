@@ -12,7 +12,7 @@ final class Text
 
     public static function escapeHtml($str): string
     {
-        return htmlspecialchars($str, \ENT_QUOTES | \ENT_SUBSTITUTE);
+        return htmlspecialchars((string) $str, \ENT_QUOTES | \ENT_SUBSTITUTE);
     }
 
     public static function sanitizeFileName($dangerousFilename)
@@ -20,7 +20,7 @@ final class Text
         $dangerousCharacters = [' ', '"', "'", '&', '/', '\\', '?', '#'];
 
         // every forbidden character is replace by an underscore
-        return str_replace($dangerousCharacters, '_', $dangerousFilename);
+        return str_replace($dangerousCharacters, '_', (string) $dangerousFilename);
     }
 
     public static function random(int $length = 10)
@@ -39,7 +39,7 @@ final class Text
 
     public static function htmlToString($str): string
     {
-        $str = html_entity_decode(strip_tags($str), \ENT_QUOTES);
+        $str = html_entity_decode(strip_tags((string) $str), \ENT_QUOTES);
 
         return iconv('UTF-8', 'UTF-8//IGNORE', $str);
     }

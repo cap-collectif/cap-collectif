@@ -15,7 +15,7 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 class ReplyAdmin extends AbstractAdmin
 {
     protected ?string $classnameLabel = 'reply';
-    private TokenStorageInterface $tokenStorage;
+    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,

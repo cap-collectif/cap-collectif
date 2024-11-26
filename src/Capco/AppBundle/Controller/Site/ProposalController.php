@@ -67,7 +67,7 @@ class ProposalController extends Controller
             && false !==
                 strpos(
                     $referer,
-                    $this->get('router')->generate(
+                    (string) $this->get('router')->generate(
                         'app_homepage',
                         [],
                         RouterInterface::ABSOLUTE_URL
@@ -92,7 +92,7 @@ class ProposalController extends Controller
 
         if ($votableStep && \in_array($votableStep->getType(), ['collect', 'selection'])) {
             $currentVotableStepId = GlobalId::toGlobalId(
-                ucfirst($votableStep->getType()) . 'Step',
+                ucfirst((string) $votableStep->getType()) . 'Step',
                 $votableStep->getId()
             );
         }

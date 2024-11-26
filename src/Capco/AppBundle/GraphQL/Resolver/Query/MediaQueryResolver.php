@@ -11,8 +11,8 @@ use Psr\Log\LoggerInterface;
 
 class MediaQueryResolver implements QueryInterface
 {
-    private MediaRepository $mediaRepository;
-    private LoggerInterface $logger;
+    private readonly MediaRepository $mediaRepository;
+    private readonly LoggerInterface $logger;
 
     public function __construct(MediaRepository $mediaRepository, LoggerInterface $logger)
     {

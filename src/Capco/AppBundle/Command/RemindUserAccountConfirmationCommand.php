@@ -15,11 +15,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class RemindUserAccountConfirmationCommand extends Command
 {
-    private LoggerInterface $logger;
-    private EntityManagerInterface $entityManager;
-    private UserRepository $userRepository;
-    private Manager $toggleManager;
-    private Publisher $publisher;
+    private readonly LoggerInterface $logger;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly UserRepository $userRepository;
+    private readonly Manager $toggleManager;
+    private readonly Publisher $publisher;
 
     public function __construct(
         LoggerInterface $logger,

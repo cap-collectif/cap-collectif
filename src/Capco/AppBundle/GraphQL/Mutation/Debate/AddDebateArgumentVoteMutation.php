@@ -15,7 +15,7 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements MutationInterface
 {
-    public const ALREADY_VOTED = 'ALREADY_VOTED';
+    final public const ALREADY_VOTED = 'ALREADY_VOTED';
 
     public function __invoke(Arg $input, User $viewer): array
     {

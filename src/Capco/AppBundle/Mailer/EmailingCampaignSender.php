@@ -26,15 +26,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class EmailingCampaignSender
 {
-    private MailerService $mailerService;
-    private UserRepository $userRepository;
-    private SiteParameterResolver $siteParams;
-    private RouterInterface $router;
-    private TokenManager $tokenManager;
-    private ProjectEmailableContributorsResolver $projectEmailableContributorsResolver;
-    private EntityManagerInterface $em;
-    private EmailingCampaignUserRepository $emailingCampaignUserRepository;
-    private LoggerInterface $logger;
+    private readonly MailerService $mailerService;
+    private readonly UserRepository $userRepository;
+    private readonly SiteParameterResolver $siteParams;
+    private readonly RouterInterface $router;
+    private readonly TokenManager $tokenManager;
+    private readonly ProjectEmailableContributorsResolver $projectEmailableContributorsResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly EmailingCampaignUserRepository $emailingCampaignUserRepository;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         MailerService $mailerService,

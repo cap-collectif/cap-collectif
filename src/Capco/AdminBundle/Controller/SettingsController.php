@@ -26,17 +26,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class SettingsController extends Controller
 {
     protected const EXCLUDED_SETTINGS_KEYNAME = ['events.map.country'];
-    private AbstractSSOConfigurationRepository $SSOConfigurationRepository;
-    private MenuItemRepository $menuItemRepository;
-    private FeaturesCategoryResolver $featuresCategoryResolver;
-    private BreadcrumbsBuilderInterface $breadcrumbsBuilder;
-    private Pool $pool;
-    private SiteParameterRepository $siteParameterRepository;
-    private SiteParameterAdmin $siteParameterAdmin;
-    private SiteImageRepository $siteImageRepository;
-    private SiteColorRepository $siteColorRepository;
-    private Manager $manager;
-    private TranslatorInterface $translator;
+    private readonly AbstractSSOConfigurationRepository $SSOConfigurationRepository;
+    private readonly MenuItemRepository $menuItemRepository;
+    private readonly FeaturesCategoryResolver $featuresCategoryResolver;
+    private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder;
+    private readonly Pool $pool;
+    private readonly SiteParameterRepository $siteParameterRepository;
+    private readonly SiteParameterAdmin $siteParameterAdmin;
+    private readonly SiteImageRepository $siteImageRepository;
+    private readonly SiteColorRepository $siteColorRepository;
+    private readonly Manager $manager;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(
         AbstractSSOConfigurationRepository $SSOConfigurationRepository,

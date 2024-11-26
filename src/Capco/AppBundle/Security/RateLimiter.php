@@ -8,12 +8,12 @@ use Psr\Log\LoggerInterface;
 
 class RateLimiter
 {
-    public const USER_CACHE_KEY = 'rateLimiterCacheKey';
-    public const LIMIT_REACHED = 'RATE_LIMIT_REACHED';
+    final public const USER_CACHE_KEY = 'rateLimiterCacheKey';
+    final public const LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
     private int $limit = 10;
-    private RedisCache $cache;
-    private LoggerInterface $logger;
+    private readonly RedisCache $cache;
+    private readonly LoggerInterface $logger;
 
     public function __construct(RedisCache $cache, LoggerInterface $logger)
     {

@@ -29,18 +29,18 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
 {
     use SnapshotCommandTrait;
 
-    private ConnectionTraversor $connectionTraversor;
-    private Executor $executor;
-    private string $projectRootDir;
-    private LoggerInterface $logger;
-    private Manager $toggleManager;
-    private ProjectRepository $projectRepository;
-    private SelectionStepRepository $selectionStepRepository;
-    private ProposalUrlResolver $proposalUrlResolver;
-    private RequestStack $requestStack;
-    private ProposalRepository $proposalRepository;
-    private TranslatorInterface $translator;
-    private Map $map;
+    private readonly ConnectionTraversor $connectionTraversor;
+    private readonly Executor $executor;
+    private readonly string $projectRootDir;
+    private readonly LoggerInterface $logger;
+    private readonly Manager $toggleManager;
+    private readonly ProjectRepository $projectRepository;
+    private readonly SelectionStepRepository $selectionStepRepository;
+    private readonly ProposalUrlResolver $proposalUrlResolver;
+    private readonly RequestStack $requestStack;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly TranslatorInterface $translator;
+    private readonly Map $map;
 
     public function __construct(
         GraphQlAclListener $listener,

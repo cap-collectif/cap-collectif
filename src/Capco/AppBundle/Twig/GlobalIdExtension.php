@@ -20,8 +20,8 @@ class GlobalIdExtension extends AbstractExtension
     public function getFilters(): array
     {
         return [
-            new TwigFilter('toGlobalId', [$this, 'toGlobalId']),
-            new TwigFilter('toStepGlobalId', [$this, 'toStepGlobalId']),
+            new TwigFilter('toGlobalId', $this->toGlobalId(...)),
+            new TwigFilter('toStepGlobalId', $this->toStepGlobalId(...)),
         ];
     }
 

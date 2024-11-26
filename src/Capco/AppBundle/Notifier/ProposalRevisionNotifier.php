@@ -19,11 +19,11 @@ use Symfony\Component\Routing\RouterInterface;
 class ProposalRevisionNotifier extends BaseNotifier
 {
     protected ProposalUrlResolver $proposalUrlResolver;
-    private RequestStack $requestStack;
-    private string $defaultLocale;
-    private UserRepository $userRepository;
-    private ProposalRevisionRepository $proposalRevisionRepository;
-    private SiteColorRepository $siteColorRepository;
+    private readonly RequestStack $requestStack;
+    private readonly string $defaultLocale;
+    private readonly UserRepository $userRepository;
+    private readonly ProposalRevisionRepository $proposalRevisionRepository;
+    private readonly SiteColorRepository $siteColorRepository;
 
     public function __construct(
         MailerService $mailer,

@@ -11,7 +11,7 @@ class ReactRenderRuntime implements RuntimeExtensionInterface
 {
     private $extension;
     private $toggleManager;
-    private TokenStorageInterface $tokenStorage;
+    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(
         BaseExtension $extension,

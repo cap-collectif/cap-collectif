@@ -17,12 +17,12 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 {
     private const BATCH_SIZE = 1000;
     protected EntityManagerInterface $entityManager;
-    private UserRepository $userRepository;
-    private ReplyAnonymousRepository $replyAnonymousRepository;
-    private ParticipantNormalizer $participantNormalizer;
-    private ReplyAnonymousNormalizer $replyAnonymousNormalizer;
-    private Serializer $serializer;
-    private FilePathResolver $filePathResolver;
+    private readonly UserRepository $userRepository;
+    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
+    private readonly ParticipantNormalizer $participantNormalizer;
+    private readonly ReplyAnonymousNormalizer $replyAnonymousNormalizer;
+    private readonly Serializer $serializer;
+    private readonly FilePathResolver $filePathResolver;
 
     public function __construct(
         UserRepository $userRepository,

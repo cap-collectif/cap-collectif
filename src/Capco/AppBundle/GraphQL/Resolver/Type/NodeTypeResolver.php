@@ -66,13 +66,13 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class NodeTypeResolver implements QueryInterface
 {
-    private TypeResolver $typeResolver;
-    private RequirementTypeResolver $requirementTypeResolver;
-    private QuestionTypeResolver $questionTypeResolver;
-    private ResponseResolver $responseTypeResolver;
-    private ReplyTypeResolver $replyTypeResolver;
-    private DistrictTypeResolver $districtTypeResolver;
-    private ContributorTypeResolver $contributorTypeResolver;
+    private readonly TypeResolver $typeResolver;
+    private readonly RequirementTypeResolver $requirementTypeResolver;
+    private readonly QuestionTypeResolver $questionTypeResolver;
+    private readonly ResponseResolver $responseTypeResolver;
+    private readonly ReplyTypeResolver $replyTypeResolver;
+    private readonly DistrictTypeResolver $districtTypeResolver;
+    private readonly ContributorTypeResolver $contributorTypeResolver;
 
     public function __construct(
         TypeResolver $typeResolver,

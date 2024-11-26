@@ -178,7 +178,7 @@ class RequestResponseListener
     private function isExcludedPrefix($url): bool
     {
         foreach ($this->excludedPrefixes as $excludedPrefix) {
-            if (0 === strpos($url, $excludedPrefix)) {
+            if (0 === strpos((string) $url, (string) $excludedPrefix)) {
                 return true;
             }
         }

@@ -11,9 +11,9 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class DebateArgumentVotesResolver implements QueryInterface
 {
-    public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
+    final public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
 
-    private VoteSearch $voteSearch;
+    private readonly VoteSearch $voteSearch;
 
     public function __construct(VoteSearch $voteSearch)
     {

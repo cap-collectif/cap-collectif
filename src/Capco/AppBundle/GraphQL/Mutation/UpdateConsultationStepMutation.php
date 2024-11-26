@@ -20,11 +20,11 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateConsultationStepMutation implements MutationInterface
 {
     use MutationTrait;
-    private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

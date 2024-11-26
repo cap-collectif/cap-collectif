@@ -6,10 +6,10 @@ use Capco\AppBundle\Security\RateLimiter;
 
 class UpdateUserEmailErrorCode implements EnumType
 {
-    public const SPECIFY_PASSWORD = 'SPECIFY_PASSWORD';
-    public const ALREADY_USED_EMAIL = 'ALREADY_USED_EMAIL';
-    public const UNAUTHORIZED_EMAIL_DOMAIN = 'UNAUTHORIZED_EMAIL_DOMAIN';
-    public const RATE_LIMIT_REACHED = RateLimiter::LIMIT_REACHED;
+    final public const SPECIFY_PASSWORD = 'SPECIFY_PASSWORD';
+    final public const ALREADY_USED_EMAIL = 'ALREADY_USED_EMAIL';
+    final public const UNAUTHORIZED_EMAIL_DOMAIN = 'UNAUTHORIZED_EMAIL_DOMAIN';
+    final public const RATE_LIMIT_REACHED = RateLimiter::LIMIT_REACHED;
 
     public static function isValid($value): bool
     {

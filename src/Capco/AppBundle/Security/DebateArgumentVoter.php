@@ -11,9 +11,9 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class DebateArgumentVoter extends Voter
 {
-    public const UPDATE = 'update';
-    public const DELETE = 'delete';
-    public const PARTICIPATE = 'participate';
+    final public const UPDATE = 'update';
+    final public const DELETE = 'delete';
+    final public const PARTICIPATE = 'participate';
 
     protected function supports($attribute, $subject)
     {

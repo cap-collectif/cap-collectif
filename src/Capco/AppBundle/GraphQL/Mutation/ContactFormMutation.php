@@ -24,12 +24,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ContactFormMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private FormFactoryInterface $formFactory;
-    private ContactNotifier $contactNotifier;
-    private GlobalIdResolver $globalIdResolver;
-    private LocaleRepository $localeRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly ContactNotifier $contactNotifier;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly LocaleRepository $localeRepository;
 
     public function __construct(
         LoggerInterface $logger,

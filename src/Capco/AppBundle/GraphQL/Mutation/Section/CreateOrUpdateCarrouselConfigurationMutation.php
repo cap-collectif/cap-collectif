@@ -20,14 +20,14 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const TOO_MANY_CARROUSEL_ITEMS = 'TOO_MANY_CARROUSEL_ITEMS';
-    public const INVALID_FORM = 'INVALID_FORM';
-    public const MAX_CARROUSEL_ITEMS = 8;
+    final public const TOO_MANY_CARROUSEL_ITEMS = 'TOO_MANY_CARROUSEL_ITEMS';
+    final public const INVALID_FORM = 'INVALID_FORM';
+    final public const MAX_CARROUSEL_ITEMS = 8;
 
-    private EntityManagerInterface $em;
-    private SectionRepository $sectionRepository;
-    private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly SectionRepository $sectionRepository;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

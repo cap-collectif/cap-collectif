@@ -10,9 +10,9 @@ use Twig\Environment as TwigEnvironment;
 
 final class GraphiQLController
 {
-    private TwigEnvironment $twig;
-    private GraphiQLViewConfig $viewConfig;
-    private GraphiQLControllerEndpoint $graphQLEndpoint;
+    private readonly TwigEnvironment $twig;
+    private readonly GraphiQLViewConfig $viewConfig;
+    private readonly GraphiQLControllerEndpoint $graphQLEndpoint;
 
     public function __construct(
         TwigEnvironment $twig,

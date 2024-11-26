@@ -19,9 +19,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateOfficialResponseMutation implements MutationInterface
 {
     use MutationTrait;
-    private GlobalIdResolver $resolver;
-    private EntityManagerInterface $em;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly GlobalIdResolver $resolver;
+    private readonly EntityManagerInterface $em;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $em, AuthorizationCheckerInterface $authorizationChecker)
     {

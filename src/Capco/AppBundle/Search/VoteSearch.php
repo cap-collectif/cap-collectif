@@ -35,10 +35,10 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class VoteSearch extends Search
 {
-    private AbstractVoteRepository $abstractVoteRepository;
-    private DebateAnonymousVoteRepository $debateAnonymousVoteRepository;
-    private ProjectRepository $projectRepository;
-    private AbstractStepRepository $abstractStepRepository;
+    private readonly AbstractVoteRepository $abstractVoteRepository;
+    private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository;
+    private readonly ProjectRepository $projectRepository;
+    private readonly AbstractStepRepository $abstractStepRepository;
 
     public function __construct(
         Index $index,
@@ -517,7 +517,7 @@ class VoteSearch extends Search
                     )
                     ->addFilter(new Query\Exists('project'))
                 ;
-            } elseif (strpos($type, 'Step')) {
+            } elseif (strpos((string) $type, 'Step')) {
                 $step = $this->abstractStepRepository->find($id);
                 $project = $step->getProject();
                 $projectOwner = $project->getOwner();

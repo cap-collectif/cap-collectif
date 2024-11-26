@@ -8,7 +8,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class NoTranslator implements TranslatorInterface, TranslatorBagInterface, LocaleAwareInterface
 {
-    private TranslatorInterface $translator;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {

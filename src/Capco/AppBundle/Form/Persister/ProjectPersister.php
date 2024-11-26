@@ -25,14 +25,14 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectPersister
 {
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private ProjectAuthorTransformer $transformer;
-    private FormFactoryInterface $formFactory;
-    private ProjectStepPersister $stepPersister;
-    private ProjectRepository $repository;
-    private SettableOwnerResolver $settableOwnerResolver;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly ProjectAuthorTransformer $transformer;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly ProjectStepPersister $stepPersister;
+    private readonly ProjectRepository $repository;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,

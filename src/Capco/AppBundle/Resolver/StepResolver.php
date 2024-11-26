@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class StepResolver
 {
-    private UrlResolver $urlResolver;
+    private readonly UrlResolver $urlResolver;
 
     public function __construct(UrlResolver $urlResolver)
     {

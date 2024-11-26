@@ -40,9 +40,9 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
     use UuidTrait;
     use VotableOkTrait;
 
-    public const TYPE_FOR = 1;
-    public const LINK = 0;
-    public const FILE = 1;
+    final public const TYPE_FOR = 1;
+    final public const LINK = 0;
+    final public const FILE = 1;
 
     public static $TypesLabels = [
         self::LINK => 'global.link',

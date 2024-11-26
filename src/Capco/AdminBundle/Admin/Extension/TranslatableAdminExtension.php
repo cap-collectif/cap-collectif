@@ -18,7 +18,7 @@ class TranslatableAdminExtension extends AbstractAdminExtension
     /**
      * Locale of the content currently edited.
      */
-    public const TRANSLATABLE_LOCALE_PARAMETER = 'tl';
+    final public const TRANSLATABLE_LOCALE_PARAMETER = 'tl';
 
     protected Manager $toggleManager;
     protected LocaleRepository $localeRepository;

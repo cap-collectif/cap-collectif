@@ -50,12 +50,12 @@ class ProjectStepPersister
         DebateStep::TYPE,
     ];
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private AbstractStepRepository $repository;
-    private ProjectAbstractStepRepository $pasRepository;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly AbstractStepRepository $repository;
+    private readonly ProjectAbstractStepRepository $pasRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         LoggerInterface $logger,

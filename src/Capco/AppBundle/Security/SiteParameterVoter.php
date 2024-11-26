@@ -14,7 +14,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
  */
 class SiteParameterVoter extends Voter
 {
-    public const VIEW = 'view';
+    final public const VIEW = 'view';
 
     /**
      * @param string $attribute An attribute

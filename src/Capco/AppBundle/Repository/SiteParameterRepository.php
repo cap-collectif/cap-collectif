@@ -11,7 +11,7 @@ use Doctrine\ORM\Query\Expr\Join;
  */
 class SiteParameterRepository extends EntityRepository
 {
-    public const REGISTRATION_PAGE_CODE_KEYNAME = 'registration.customcode';
+    final public const REGISTRATION_PAGE_CODE_KEYNAME = 'registration.customcode';
 
     public static function getValuesIfEnabledCacheKey(string $locale): string
     {

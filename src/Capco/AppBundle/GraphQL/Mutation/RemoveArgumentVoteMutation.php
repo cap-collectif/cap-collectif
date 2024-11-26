@@ -20,12 +20,12 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class RemoveArgumentVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ArgumentVoteRepository $argumentVoteRepo;
-    private ArgumentRepository $argumentRepo;
-    private RedisStorageHelper $redisStorageHelper;
-    private StepRequirementsResolver $stepRequirementsResolver;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly ArgumentVoteRepository $argumentVoteRepo;
+    private readonly ArgumentRepository $argumentRepo;
+    private readonly RedisStorageHelper $redisStorageHelper;
+    private readonly StepRequirementsResolver $stepRequirementsResolver;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

@@ -48,7 +48,7 @@ use Translation\Bundle\Translator\TranslatorInterface;
  */
 class DeleteAccountMutationSpec extends ObjectBehavior
 {
-    public const USER_ID = 'USER-ID';
+    final public const USER_ID = 'USER-ID';
 
     public function let(
         EntityManagerInterface $em,

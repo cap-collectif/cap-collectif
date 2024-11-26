@@ -56,7 +56,7 @@ class MakeNotifier extends AbstractMaker
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->className = $input->getArgument('name');
-        $this->className = str_replace('Notifier', '', $this->className);
+        $this->className = str_replace('Notifier', '', (string) $this->className);
         $this->className .= 'Notifier';
 
         $path = $this->makeFile();

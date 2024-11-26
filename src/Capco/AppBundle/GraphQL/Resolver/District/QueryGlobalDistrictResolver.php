@@ -12,7 +12,7 @@ use Psr\Log\LoggerInterface;
 class QueryGlobalDistrictResolver implements QueryInterface
 {
     protected GlobalDistrictRepository $globalDistrictRepository;
-    private LoggerInterface $logger;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         GlobalDistrictRepository $globalDistrictRepository,

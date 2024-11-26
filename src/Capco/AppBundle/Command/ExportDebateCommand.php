@@ -24,7 +24,7 @@ class ExportDebateCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
 
-    public const HEADER_ARGUMENT = [
+    final public const HEADER_ARGUMENT = [
         'argument_createdAt' => 'createdAt',
         'argument_publishedAt' => 'publishedAt',
         'argument_updatedAt' => 'updatedAt',
@@ -48,7 +48,7 @@ class ExportDebateCommand extends BaseExportCommand
         'debate_url' => 'url',
     ];
 
-    public const HEADER_VOTE = [
+    final public const HEADER_VOTE = [
         'vote_publishedAt' => 'publishedAt',
         'vote_type' => 'type',
 
@@ -69,8 +69,8 @@ class ExportDebateCommand extends BaseExportCommand
     protected static $defaultName = 'capco:export:debate';
     protected Executor $executor;
     protected string $projectRootDir;
-    private DebateRepository $debateRepository;
-    private RouterInterface $router;
+    private readonly DebateRepository $debateRepository;
+    private readonly RouterInterface $router;
 
     public function __construct(
         Executor $executor,

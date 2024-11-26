@@ -31,9 +31,9 @@ class AnalyticsSearch
         'source',
     ];
 
-    private Index $index;
-    private LoggerInterface $logger;
-    private GlobalConfigurationTimeZoneDetector $timezoneDetector;
+    private readonly Index $index;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector;
 
     public function __construct(Index $index, LoggerInterface $logger, GlobalConfigurationTimeZoneDetector $timezoneDetector)
     {

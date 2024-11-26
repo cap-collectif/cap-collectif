@@ -18,8 +18,8 @@ class QuestionnaireAdmin extends CapcoAdmin
     protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     protected array $formOptions = ['cascade_validation' => true];
-    private TokenStorageInterface $tokenStorage;
-    private QuestionnaireAbstractQuestionRepository $questionnaireAbstractQuestionRepository;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly QuestionnaireAbstractQuestionRepository $questionnaireAbstractQuestionRepository;
 
     public function __construct(
         string $code,

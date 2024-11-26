@@ -20,14 +20,14 @@ class UpdateOpinionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const NOT_AUTHORIZED = 'NOT_AUTHORIZED';
-    public const INVALID_FORM = 'INVALID_FORM';
-    public const OPINION_NOT_CONTRIBUABLE = 'OPINION_NOT_CONTRIBUABLE';
-    private FormFactoryInterface $formFactory;
-    private RegistrationFormRepository $registrationFormRepository;
-    private EntityManagerInterface $em;
-    private OpinionRepository $opinionRepository;
-    private Publisher $publisher;
+    final public const NOT_AUTHORIZED = 'NOT_AUTHORIZED';
+    final public const INVALID_FORM = 'INVALID_FORM';
+    final public const OPINION_NOT_CONTRIBUABLE = 'OPINION_NOT_CONTRIBUABLE';
+    private readonly FormFactoryInterface $formFactory;
+    private readonly RegistrationFormRepository $registrationFormRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly OpinionRepository $opinionRepository;
+    private readonly Publisher $publisher;
 
     public function __construct(
         FormFactoryInterface $formFactory,

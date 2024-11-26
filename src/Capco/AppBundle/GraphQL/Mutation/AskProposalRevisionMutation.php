@@ -28,14 +28,14 @@ class AskProposalRevisionMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private ConnectionBuilder $builder;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private Publisher $publisher;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private Indexer $indexer;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly ConnectionBuilder $builder;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly Publisher $publisher;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly Indexer $indexer;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

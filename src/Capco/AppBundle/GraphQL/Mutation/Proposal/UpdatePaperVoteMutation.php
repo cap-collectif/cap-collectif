@@ -22,14 +22,14 @@ class UpdatePaperVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
-    public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
+    final public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
+    final public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $resolver;
-    private ProposalStepPaperVoteCounterRepository $repository;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $resolver;
+    private readonly ProposalStepPaperVoteCounterRepository $repository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

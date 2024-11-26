@@ -10,9 +10,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionTagCloudResolver implements QueryInterface
 {
-    public const CACHE_KEY = 'questionTagCloudData';
-    private ResponseSearch $responseSearch;
-    private RedisCache $cache;
+    final public const CACHE_KEY = 'questionTagCloudData';
+    private readonly ResponseSearch $responseSearch;
+    private readonly RedisCache $cache;
 
     public function __construct(ResponseSearch $responseSearch, RedisCache $cache)
     {

@@ -31,20 +31,20 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class OauthUserProvider implements OAuthAwareUserProviderInterface
 {
     protected OpenIDExtraMapper $extraMapper;
-    private Indexer $indexer;
-    private UserRepository $userRepository;
-    private GroupMutation $groupMutation;
-    private FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository;
-    private LoggerInterface $logger;
-    private UserInvitationHandler $userInvitationHandler;
-    private TokenStorageInterface $tokenStorage;
+    private readonly Indexer $indexer;
+    private readonly UserRepository $userRepository;
+    private readonly GroupMutation $groupMutation;
+    private readonly FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository;
+    private readonly LoggerInterface $logger;
+    private readonly UserInvitationHandler $userInvitationHandler;
+    private readonly TokenStorageInterface $tokenStorage;
     private bool $isNewUser = false;
-    private RequestStack $requestStack;
-    private RedisCache $redisCache;
-    private FlashBagInterface $flashBag;
-    private TranslatorInterface $translator;
-    private SessionInterface $session;
-    private UserManagerInterface $userManager;
+    private readonly RequestStack $requestStack;
+    private readonly RedisCache $redisCache;
+    private readonly FlashBagInterface $flashBag;
+    private readonly TranslatorInterface $translator;
+    private readonly SessionInterface $session;
+    private readonly UserManagerInterface $userManager;
     /**
      * @var array<string, string>
      */
@@ -148,7 +148,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         array $allowedData
     ): User {
         $userInfoData = $userResponse->getData();
-        $firstName = ucfirst(strtolower($userInfoData['given_name']));
+        $firstName = ucfirst(strtolower((string) $userInfoData['given_name']));
         if ($allowedData['given_name']) {
             $user->setFirstName($firstName);
         }
@@ -242,7 +242,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         $csrf = (new State($request->query->get('state')))->getCsrfToken();
         $rawToken = $response->getOAuthToken()->getRawToken();
         $franceConnectJwtToken = $rawToken['id_token'];
-        $tokenParts = explode('.', $franceConnectJwtToken);
+        $tokenParts = explode('.', (string) $franceConnectJwtToken);
         $tokenPayload = json_decode(base64_decode($tokenParts[1]), true) ?? null;
         $nonce = $tokenPayload['nonce'] ?? null;
         $this->session->remove(FranceConnectOptionsModifier::SESSION_FRANCE_CONNECT_STATE_KEY);

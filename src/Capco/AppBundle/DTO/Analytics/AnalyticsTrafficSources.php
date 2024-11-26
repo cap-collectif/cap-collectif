@@ -10,8 +10,8 @@ class AnalyticsTrafficSources
     /**
      * @var AnalyticsTrafficSource[]|iterable
      */
-    private iterable $sources;
-    private int $totalCount;
+    private readonly iterable $sources;
+    private readonly int $totalCount;
 
     private function __construct(int $totalCount, iterable $sources)
     {

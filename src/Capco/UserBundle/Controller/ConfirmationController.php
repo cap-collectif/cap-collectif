@@ -23,19 +23,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationController extends Controller
 {
-    private UserManager $userManager;
-    private LoginManagerInterface $loginManager;
-    private RouterInterface $router;
-    private StepUrlResolver $stepUrlResolver;
-    private ContributionManager $contributionManager;
-    private SessionInterface $session;
-    private UserRepository $userRepo;
-    private AbstractStepRepository $stepRepo;
-    private TranslatorInterface $translator;
-    private CommentRepository $commentRepository;
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private SendInBluePublisher $sendInBluePublisher;
+    private readonly UserManager $userManager;
+    private readonly LoginManagerInterface $loginManager;
+    private readonly RouterInterface $router;
+    private readonly StepUrlResolver $stepUrlResolver;
+    private readonly ContributionManager $contributionManager;
+    private readonly SessionInterface $session;
+    private readonly UserRepository $userRepo;
+    private readonly AbstractStepRepository $stepRepo;
+    private readonly TranslatorInterface $translator;
+    private readonly CommentRepository $commentRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         UserManager $userManager,

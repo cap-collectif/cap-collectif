@@ -13,8 +13,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 class DebateArgumentViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
-    private DebateArgumentVoteRepository $debateArgumentVoteRepository;
-    private DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository;
+    private readonly DebateArgumentVoteRepository $debateArgumentVoteRepository;
+    private readonly DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository;
 
     public function __construct(
         DebateArgumentVoteRepository $debateArgumentVoteRepository,

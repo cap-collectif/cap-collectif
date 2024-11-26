@@ -12,7 +12,7 @@ class UnstarResponseMutation extends StarResponseMutation
 {
     use MutationTrait;
 
-    public const NOT_STARRED = 'NOT_STARRED';
+    final public const NOT_STARRED = 'NOT_STARRED';
 
     public function __invoke(Argument $argument, User $viewer): array
     {

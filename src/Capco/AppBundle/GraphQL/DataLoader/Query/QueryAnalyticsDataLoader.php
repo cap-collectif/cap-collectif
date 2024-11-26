@@ -32,11 +32,11 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class QueryAnalyticsDataLoader extends BatchDataLoader
 {
-    private AnalyticsSearch $analyticsSearch;
-    private CloudflareElasticClient $cloudflareElasticClient;
-    private AnalyticsTopContributors $analyticsTopContributors;
-    private AnalyticsMostUsedProposalCategories $analyticsMostUsedProposalCategories;
-    private ProjectRepository $projectRepository;
+    private readonly AnalyticsSearch $analyticsSearch;
+    private readonly CloudflareElasticClient $cloudflareElasticClient;
+    private readonly AnalyticsTopContributors $analyticsTopContributors;
+    private readonly AnalyticsMostUsedProposalCategories $analyticsMostUsedProposalCategories;
+    private readonly ProjectRepository $projectRepository;
 
     public function __construct(
         AnalyticsSearch $analyticsSearch,
@@ -60,7 +60,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         $this->analyticsMostUsedProposalCategories = $analyticsMostUsedProposalCategories;
         $this->projectRepository = $projectRepository;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

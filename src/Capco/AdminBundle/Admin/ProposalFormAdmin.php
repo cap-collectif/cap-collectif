@@ -19,7 +19,7 @@ class ProposalFormAdmin extends CapcoAdmin
     protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
     protected array $formOptions = ['cascade_validation' => true];
-    private TokenStorageInterface $tokenStorage;
+    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,

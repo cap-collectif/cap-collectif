@@ -15,8 +15,8 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
 {
-    private ProposalVotableStepsResolver $resolver;
-    private AbstractStepRepository $stepRepo;
+    private readonly ProposalVotableStepsResolver $resolver;
+    private readonly AbstractStepRepository $stepRepo;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -34,7 +34,7 @@ class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
         $this->resolver = $resolver;
         $this->stepRepo = $stepRepo;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

@@ -29,7 +29,7 @@ class FeatureToggleListener
         $request = $event->getRequest();
         // Disabled feature flag on requested url
         $flagsAttributes = $request->attributes->get('_feature_flags');
-        $flags = $flagsAttributes ? explode(',', $flagsAttributes) : [];
+        $flags = $flagsAttributes ? explode(',', (string) $flagsAttributes) : [];
         foreach ($flags as $flag) {
             if ($flag && !$this->manager->isActive($flag)) {
                 $message = sprintf(

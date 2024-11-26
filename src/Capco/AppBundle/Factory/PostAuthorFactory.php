@@ -11,8 +11,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class PostAuthorFactory
 {
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(GlobalIdResolver $globalIdResolver, EntityManagerInterface $em)
     {

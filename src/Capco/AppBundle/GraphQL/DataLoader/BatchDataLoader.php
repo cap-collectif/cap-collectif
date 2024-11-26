@@ -22,8 +22,8 @@ abstract class BatchDataLoader extends DataLoader
     protected int $cacheTtl;
     protected bool $debug;
     protected bool $enableCache;
-    private GraphQLCollector $collector;
-    private Stopwatch $stopwatch;
+    private readonly GraphQLCollector $collector;
+    private readonly Stopwatch $stopwatch;
 
     public function __construct(
         callable $batchFunction,

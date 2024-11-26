@@ -12,8 +12,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class StepContributionsResolver implements QueryInterface
 {
-    private StepContributionsDataLoader $dataLoader;
-    private PromiseAdapterInterface $promiseAdapter;
+    private readonly StepContributionsDataLoader $dataLoader;
+    private readonly PromiseAdapterInterface $promiseAdapter;
 
     public function __construct(
         StepContributionsDataLoader $dataLoader,

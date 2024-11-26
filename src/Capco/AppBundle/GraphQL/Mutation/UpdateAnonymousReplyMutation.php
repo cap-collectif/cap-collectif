@@ -20,11 +20,11 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateAnonymousReplyMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private ResponsesFormatter $responsesFormatter;
-    private ReplyAnonymousRepository $replyAnonymousRepository;
-    private Publisher $publisher;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly ResponsesFormatter $responsesFormatter;
+    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
+    private readonly Publisher $publisher;
 
     public function __construct(
         EntityManagerInterface $em,
@@ -70,7 +70,7 @@ class UpdateAnonymousReplyMutation implements MutationInterface
     private function getReply(Argument $argument): ReplyAnonymous
     {
         $hashedToken = $argument->offsetGet('hashedToken');
-        $decodedToken = base64_decode($hashedToken);
+        $decodedToken = base64_decode((string) $hashedToken);
         $reply = $this->replyAnonymousRepository->findOneBy(['token' => $decodedToken]);
 
         if (!$reply) {

@@ -22,20 +22,20 @@ use Symfony\Component\Console\Output\OutputInterface;
  */
 class DebateInvitationCommand extends Command
 {
-    public const NAME = 'capco:debate:invite';
-    public const ARG_DEBATE = 'debate';
-    public const OPT_REMINDER = 'reminder';
-    public const OPT_TEST_TOKEN = 'test-token';
-    public const OPT_TEST_EMAIL = 'test-email';
-    public const OPT_BATCH = 'batch';
-    public const OPT_BATCH_DEFAULT = 10;
-    public const OPT_LIMIT = 'limit';
+    final public const NAME = 'capco:debate:invite';
+    final public const ARG_DEBATE = 'debate';
+    final public const OPT_REMINDER = 'reminder';
+    final public const OPT_TEST_TOKEN = 'test-token';
+    final public const OPT_TEST_EMAIL = 'test-email';
+    final public const OPT_BATCH = 'batch';
+    final public const OPT_BATCH_DEFAULT = 10;
+    final public const OPT_LIMIT = 'limit';
 
-    private EntityManagerInterface $em;
-    private UserRepository $userRepository;
-    private DebateRepository $debateRepository;
-    private DebateVoteTokenRepository $voteTokenRepository;
-    private DebateNotifier $debateNotifier;
+    private readonly EntityManagerInterface $em;
+    private readonly UserRepository $userRepository;
+    private readonly DebateRepository $debateRepository;
+    private readonly DebateVoteTokenRepository $voteTokenRepository;
+    private readonly DebateNotifier $debateNotifier;
 
     public function __construct(
         ?string $name,

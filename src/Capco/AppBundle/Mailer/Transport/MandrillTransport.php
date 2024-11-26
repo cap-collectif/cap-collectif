@@ -348,7 +348,7 @@ class MandrillTransport implements Swift_Transport
                     case 'X-MC-Tags':
                         $tags = $header->getValue();
                         if (!\is_array($tags)) {
-                            $tags = explode(',', $tags);
+                            $tags = explode(',', (string) $tags);
                         }
                         $mandrillMessage['tags'] = $tags;
 
@@ -366,7 +366,7 @@ class MandrillTransport implements Swift_Transport
                         break;
 
                     case 'X-MC-GoogleAnalytics':
-                        $analyticsDomains = explode(',', $header->getValue());
+                        $analyticsDomains = explode(',', (string) $header->getValue());
                         if (\is_array($analyticsDomains)) {
                             $mandrillMessage['google_analytics_domains'] = $analyticsDomains;
                         }
@@ -384,7 +384,7 @@ class MandrillTransport implements Swift_Transport
                         break;
 
                     default:
-                        if (0 === strncmp($header->getFieldName(), 'X-', 2)) {
+                        if (0 === strncmp((string) $header->getFieldName(), 'X-', 2)) {
                             $headers[$header->getFieldName()] = $header->getValue();
                             $mandrillMessage['headers'] = $headers;
                         }

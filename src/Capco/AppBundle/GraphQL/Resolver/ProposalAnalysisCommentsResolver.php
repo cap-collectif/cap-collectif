@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ProposalAnalysisCommentsResolver implements QueryInterface
 {
-    private ProposalAnalysisCommentRepository $proposalAnalysisCommentRepository;
+    private readonly ProposalAnalysisCommentRepository $proposalAnalysisCommentRepository;
 
     public function __construct(ProposalAnalysisCommentRepository $proposalAnalysisCommentRepository)
     {

@@ -16,7 +16,7 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ThemeController extends Controller
 {
-    private TranslatorInterface $translator;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(TranslatorInterface $translator)
     {

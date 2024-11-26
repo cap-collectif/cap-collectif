@@ -21,7 +21,7 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
     use SonataTranslatableTrait;
     use TranslatableTrait;
     use UuidTrait;
-    public const NOT_TRANSLATABLE = [
+    final public const NOT_TRANSLATABLE = [
         'homepage.jumbotron.margin',
         'projects.pagination',
         'themes.pagination',
@@ -51,16 +51,16 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         'redirectionio.project.id',
     ];
 
-    public const TYPE_SIMPLE_TEXT = 0;
-    public const TYPE_RICH_TEXT = 1;
-    public const TYPE_INTEGER = 2;
-    public const TYPE_JS = 3;
-    public const TYPE_EMAIL = 4;
-    public const TYPE_INTERN_URL = 5;
-    public const TYPE_URL = 6;
-    public const TYPE_TEL_NB = 7;
-    public const TYPE_BOOLEAN = 8;
-    public const TYPE_SELECT = 9;
+    final public const TYPE_SIMPLE_TEXT = 0;
+    final public const TYPE_RICH_TEXT = 1;
+    final public const TYPE_INTEGER = 2;
+    final public const TYPE_JS = 3;
+    final public const TYPE_EMAIL = 4;
+    final public const TYPE_INTERN_URL = 5;
+    final public const TYPE_URL = 6;
+    final public const TYPE_TEL_NB = 7;
+    final public const TYPE_BOOLEAN = 8;
+    final public const TYPE_SELECT = 9;
 
     public static $types = [
         'simple_text' => self::TYPE_SIMPLE_TEXT,

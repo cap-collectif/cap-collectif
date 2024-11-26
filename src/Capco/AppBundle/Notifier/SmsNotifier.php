@@ -23,8 +23,8 @@ class SmsNotifier extends BaseNotifier
     private const BUSINESS_TEAM_EMAIL = 'developpement@cap-collectif.com';
     protected ArgumentUrlResolver $argumentUrlResolver;
     protected TranslatorInterface $translator;
-    private RequestContext $context;
-    private UserRepository $userRepository;
+    private readonly RequestContext $context;
+    private readonly UserRepository $userRepository;
 
     public function __construct(
         MailerService $mailer,

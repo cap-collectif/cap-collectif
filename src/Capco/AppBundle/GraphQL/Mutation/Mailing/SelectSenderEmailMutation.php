@@ -15,10 +15,10 @@ class SelectSenderEmailMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const UNKNOWN_SENDER_EMAIL = 'UNKNOWN_SENDER_EMAIL';
+    final public const UNKNOWN_SENDER_EMAIL = 'UNKNOWN_SENDER_EMAIL';
 
-    private EntityManagerInterface $em;
-    private SenderEmailRepository $repository;
+    private readonly EntityManagerInterface $em;
+    private readonly SenderEmailRepository $repository;
 
     public function __construct(EntityManagerInterface $em, SenderEmailRepository $repository)
     {

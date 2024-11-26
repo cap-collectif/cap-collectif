@@ -26,10 +26,10 @@ class QueryProjectsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private LoggerInterface $logger;
-    private ProjectSearch $projectSearch;
-    private QueryAnalyzer $queryAnalyzer;
-    private LocaleRepository $localeRepository;
+    private readonly LoggerInterface $logger;
+    private readonly ProjectSearch $projectSearch;
+    private readonly QueryAnalyzer $queryAnalyzer;
+    private readonly LocaleRepository $localeRepository;
 
     public function __construct(
         ProjectSearch $projectSearch,

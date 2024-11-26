@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\Debate\DebateVoteToken;
 
 class DebateReminder extends DebateLaunch
 {
-    public const SUBJECT = 'email-debate-reminder-subject';
+    final public const SUBJECT = 'email-debate-reminder-subject';
 
     public static function getMyTemplateVars(DebateVoteToken $voteToken, array $params): array
     {

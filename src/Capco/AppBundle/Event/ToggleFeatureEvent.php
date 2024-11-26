@@ -7,9 +7,9 @@ use Symfony\Contracts\EventDispatcher\Event;
 
 class ToggleFeatureEvent extends Event
 {
-    public const NAME = 'toggle.feature';
+    final public const NAME = 'toggle.feature';
 
-    private Toggle $toggle;
+    private readonly Toggle $toggle;
 
     public function __construct(Toggle $toggle)
     {

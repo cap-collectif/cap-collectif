@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ArgumentListResolver implements QueryInterface
 {
-    private ArgumentRepository $repository;
+    private readonly ArgumentRepository $repository;
 
     public function __construct(ArgumentRepository $repository)
     {

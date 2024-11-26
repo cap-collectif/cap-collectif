@@ -8,11 +8,11 @@ use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
 
 class QuestionnaireVoter extends AbstractOwnerableVoter
 {
-    public const CREATE = 'create';
-    public const VIEW = 'view';
-    public const EDIT = 'edit';
-    public const DELETE = 'delete';
-    public const EXPORT = 'export';
+    final public const CREATE = 'create';
+    final public const VIEW = 'view';
+    final public const EDIT = 'edit';
+    final public const DELETE = 'delete';
+    final public const EXPORT = 'export';
 
     protected function supports($attribute, $subject): bool
     {

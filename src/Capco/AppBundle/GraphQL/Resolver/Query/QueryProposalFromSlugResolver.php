@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryProposalFromSlugResolver implements QueryInterface
 {
-    private ProposalRepository $repository;
+    private readonly ProposalRepository $repository;
 
     public function __construct(ProposalRepository $repository)
     {

@@ -10,7 +10,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class SiteParameterRuntime implements RuntimeExtensionInterface
 {
-    public const CACHE_KEY = 'getSiteParameterValue';
+    final public const CACHE_KEY = 'getSiteParameterValue';
     protected SiteParameterResolver $resolver;
     protected RedisCache $cache;
     protected RequestStack $requestStack;

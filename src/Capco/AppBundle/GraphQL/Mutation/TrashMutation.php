@@ -18,11 +18,11 @@ class TrashMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const TRASHABLE_NOT_FOUND = 'TRASHABLE_NOT_FOUND';
+    final public const TRASHABLE_NOT_FOUND = 'TRASHABLE_NOT_FOUND';
 
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private Indexer $indexer;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly Indexer $indexer;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,
@@ -71,7 +71,7 @@ class TrashMutation implements MutationInterface
     private static function trash(Trashable $trashable, Arg $input): Trashable
     {
         $trashable->setTrashedStatus($input->offsetGet('trashedStatus'));
-        $trashable->setTrashedReason(strip_tags($input->offsetGet('trashedReason')));
+        $trashable->setTrashedReason(strip_tags((string) $input->offsetGet('trashedReason')));
 
         return $trashable;
     }

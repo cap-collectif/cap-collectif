@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class ArgumentVotesResolver implements QueryInterface
 {
-    private VoteSearch $voteSearch;
+    private readonly VoteSearch $voteSearch;
 
     public function __construct(VoteSearch $voteSearch)
     {

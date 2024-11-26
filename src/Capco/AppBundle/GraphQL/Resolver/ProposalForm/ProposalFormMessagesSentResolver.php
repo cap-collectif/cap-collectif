@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalFormMessagesSentResolver implements QueryInterface
 {
-    private ProposalFormRepository $repository;
+    private readonly ProposalFormRepository $repository;
 
     public function __construct(ProposalFormRepository $repository)
     {

@@ -11,7 +11,7 @@ use Twig\Environment;
 
 class ShieldListener
 {
-    public const AVAILABLE_ROUTES = [
+    final public const AVAILABLE_ROUTES = [
         // Basics
         '_wdt',
 
@@ -98,7 +98,7 @@ class ShieldListener
             return;
         }
 
-        if (false !== strpos($route, '_imagine')) {
+        if (false !== strpos((string) $route, '_imagine')) {
             return;
         }
 

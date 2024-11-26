@@ -16,9 +16,9 @@ class ChangeMapProviderTokenMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ERROR_PROVIDE_BOTH_TOKENS = 'error-map-api-provide-tokens';
-    public const ERROR_INVALID_PUBLIC_TOKEN = 'error-map-api-public-token-invalid';
-    public const ERROR_INVALID_SECRET_TOKEN = 'error-map-api-secret-token-invalid';
+    final public const ERROR_PROVIDE_BOTH_TOKENS = 'error-map-api-provide-tokens';
+    final public const ERROR_INVALID_PUBLIC_TOKEN = 'error-map-api-public-token-invalid';
+    final public const ERROR_INVALID_SECRET_TOKEN = 'error-map-api-secret-token-invalid';
 
     private $em;
     private $logger;

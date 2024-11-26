@@ -19,10 +19,10 @@ class ProposalAdmin extends AbstractAdmin
 {
     protected ?string $classnameLabel = 'proposal';
     protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
-    private TokenStorageInterface $tokenStorage;
-    private Indexer $indexer;
-    private ElasticsearchDoctrineListener $elasticsearchDoctrineListener;
-    private EntityManagerInterface $entityManager;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly Indexer $indexer;
+    private readonly ElasticsearchDoctrineListener $elasticsearchDoctrineListener;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,

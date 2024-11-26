@@ -10,8 +10,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class UserInviteEmailMessageListener
 {
-    private Publisher $publisher;
-    private LoggerInterface $logger;
+    private readonly Publisher $publisher;
+    private readonly LoggerInterface $logger;
 
     public function __construct(Publisher $publisher, LoggerInterface $logger)
     {

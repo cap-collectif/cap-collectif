@@ -18,7 +18,7 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProjectProposalsDataLoader extends BatchDataLoader
 {
-    private ProposalSearch $proposalSearch;
+    private readonly ProposalSearch $proposalSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -33,7 +33,7 @@ class ProjectProposalsDataLoader extends BatchDataLoader
         bool $enableCache
     ) {
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

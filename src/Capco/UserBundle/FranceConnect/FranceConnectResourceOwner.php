@@ -27,10 +27,10 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         'nickname' => 'preferred_username',
         'birthplace' => 'birthplace',
     ];
-    private RedisCache $redisCache;
-    private SessionInterface $session;
-    private OptionsModifierInterface $optionsModifier;
-    private FeatureChecker $featureChecker;
+    private readonly RedisCache $redisCache;
+    private readonly SessionInterface $session;
+    private readonly OptionsModifierInterface $optionsModifier;
+    private readonly FeatureChecker $featureChecker;
 
     public function __construct(
         HttpMethodsClientInterface $hwiHttpClient,

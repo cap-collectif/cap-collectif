@@ -19,7 +19,7 @@ class SiteParameterAdmin extends AbstractAdmin
     protected ?string $classnameLabel = 'site_parameter';
     protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'isEnabled'];
 
-    private UpdateSiteParameterMutation $updateSiteParameterMutation;
+    private readonly UpdateSiteParameterMutation $updateSiteParameterMutation;
 
     public function __construct(
         string $code,

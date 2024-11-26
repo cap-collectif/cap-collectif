@@ -16,7 +16,7 @@ use Elastica\Query\Term;
 
 class PostSearch extends Search
 {
-    private PostRepository $postRepository;
+    private readonly PostRepository $postRepository;
 
     public function __construct(Index $index, PostRepository $replyRepository)
     {

@@ -18,9 +18,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CloneStepService
 {
-    public const COPY_TITLE_PREFIX = 'copy-of';
-    private EntityManagerInterface $entityManager;
-    private TranslatorInterface $translator;
+    final public const COPY_TITLE_PREFIX = 'copy-of';
+    private readonly EntityManagerInterface $entityManager;
+    private readonly TranslatorInterface $translator;
 
     /**
      * @var array<string, Status>

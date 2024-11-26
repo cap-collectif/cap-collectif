@@ -21,9 +21,9 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class DeveloperController extends Controller
 {
-    public const CACHE_KEY = 'DeveloperController';
-    private AdapterInterface $cache;
-    private TypeResolver $typeResolver;
+    final public const CACHE_KEY = 'DeveloperController';
+    private readonly AdapterInterface $cache;
+    private readonly TypeResolver $typeResolver;
 
     public function __construct(AdapterInterface $cacheApp, TypeResolver $typeResolver)
     {
@@ -142,10 +142,10 @@ class DeveloperController extends Controller
 
                 // We set info about preview
                 $solution->{'preview'} = false;
-                if ('Preview' === substr($aliases[0], 0, 7) || $existsInPreviewDirectory) {
+                if ('Preview' === substr((string) $aliases[0], 0, 7) || $existsInPreviewDirectory) {
                     $solution->{'preview'} = true;
                     $solution->{'previewHasAPublicType'} = \in_array(
-                        str_replace('Preview', 'Public', $aliases[0]),
+                        str_replace('Preview', 'Public', (string) $aliases[0]),
                         $blackList
                     );
                 }
@@ -159,7 +159,7 @@ class DeveloperController extends Controller
                 if (
                     !\in_array($aliases[0], $publicWhiteList)
                     && false === $solution->{'preview'}
-                    && 'Public' !== substr($aliases[0], 0, 6)
+                    && 'Public' !== substr((string) $aliases[0], 0, 6)
                     && (!$existsInPreviewDirectory && !$existsInPublicDirectory)
                 ) {
                     continue;

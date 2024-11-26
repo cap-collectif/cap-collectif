@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProjectPaperVoteTotalPointsCountResolver implements QueryInterface
 {
-    private ProposalStepPaperVoteCounterRepository $repository;
+    private readonly ProposalStepPaperVoteCounterRepository $repository;
 
     public function __construct(ProposalStepPaperVoteCounterRepository $repository)
     {

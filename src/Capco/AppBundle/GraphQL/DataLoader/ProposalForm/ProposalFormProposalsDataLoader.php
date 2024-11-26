@@ -23,10 +23,10 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
-    public const CACHE_TIME_FUSION_COUNT = 480;
+    final public const CACHE_TIME_FUSION_COUNT = 480;
 
-    private ProposalRepository $proposalRepo;
-    private ProposalSearch $proposalSearch;
+    private readonly ProposalRepository $proposalRepo;
+    private readonly ProposalSearch $proposalSearch;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -44,7 +44,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         $this->proposalRepo = $proposalRepo;
         $this->proposalSearch = $proposalSearch;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

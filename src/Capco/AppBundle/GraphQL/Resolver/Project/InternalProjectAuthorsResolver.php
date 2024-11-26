@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 class InternalProjectAuthorsResolver implements QueryInterface
 {
     protected OrganizationRepository $organizationRepository;
-    private UserRepository $userRepository;
+    private readonly UserRepository $userRepository;
 
     public function __construct(
         UserRepository $userRepository,

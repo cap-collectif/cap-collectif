@@ -13,10 +13,10 @@ class CreateSenderEmailDomainMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ALREADY_EXIST = 'ALREADY_EXIST';
+    final public const ALREADY_EXIST = 'ALREADY_EXIST';
 
-    private EntityManagerInterface $em;
-    private SenderEmailDomainsManager $manager;
+    private readonly EntityManagerInterface $em;
+    private readonly SenderEmailDomainsManager $manager;
 
     public function __construct(EntityManagerInterface $em, SenderEmailDomainsManager $manager)
     {

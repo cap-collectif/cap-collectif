@@ -23,14 +23,14 @@ use Symfony\Component\Form\FormFactoryInterface;
 class GroupMutation implements MutationInterface
 {
     use MutationTrait;
-    private LoggerInterface $logger;
-    private UserRepository $userRepository;
-    private GroupRepository $groupRepository;
-    private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $entityManager;
-    private UserGroupRepository $userGroupRepository;
-    private GlobalIdResolver $globalIdResolver;
-    private EmailingCampaignRepository $emailingCampaignRepository;
+    private readonly LoggerInterface $logger;
+    private readonly UserRepository $userRepository;
+    private readonly GroupRepository $groupRepository;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly UserGroupRepository $userGroupRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EmailingCampaignRepository $emailingCampaignRepository;
 
     public function __construct(
         LoggerInterface $logger,

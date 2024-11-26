@@ -9,8 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryNodeResolver implements QueryInterface
 {
-    private GlobalIdResolver $globalIdResolver;
-    private QueryAnalyzer $queryAnalyzer;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly QueryAnalyzer $queryAnalyzer;
 
     public function __construct(GlobalIdResolver $globalIdResolver, QueryAnalyzer $queryAnalyzer)
     {

@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalAnalysisCommentCreateProcessor implements ProcessorInterface
 {
-    private CommentRepository $commentRepository;
-    private ProposalAnalysisCommentNotifier $notifier;
+    private readonly CommentRepository $commentRepository;
+    private readonly ProposalAnalysisCommentNotifier $notifier;
 
     public function __construct(
         CommentRepository $commentRepository,

@@ -13,9 +13,9 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class UserInvitationsAvailabilitySearchQueryResolver implements QueryInterface
 {
-    private UserRepository $userRepository;
-    private UserInviteRepository $userInviteRepository;
-    private ConnectionBuilder $builder;
+    private readonly UserRepository $userRepository;
+    private readonly UserInviteRepository $userInviteRepository;
+    private readonly ConnectionBuilder $builder;
 
     public function __construct(
         ConnectionBuilder $builder,

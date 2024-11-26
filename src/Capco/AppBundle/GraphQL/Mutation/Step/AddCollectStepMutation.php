@@ -16,9 +16,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class AddCollectStepMutation implements MutationInterface
 {
     use MutationTrait;
-    private AddStepService $addStepService;
-    private TranslatorInterface $translator;
-    private EntityManagerInterface $em;
+    private readonly AddStepService $addStepService;
+    private readonly TranslatorInterface $translator;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(AddStepService $addStepService, TranslatorInterface $translator, EntityManagerInterface $em)
     {

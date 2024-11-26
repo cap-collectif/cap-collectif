@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalCurrentVotableStepResolver implements QueryInterface
 {
-    private ProposalCurrentVotableStepDataLoader $dataLoader;
+    private readonly ProposalCurrentVotableStepDataLoader $dataLoader;
 
     public function __construct(ProposalCurrentVotableStepDataLoader $dataLoader)
     {

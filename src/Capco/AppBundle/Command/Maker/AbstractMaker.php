@@ -17,7 +17,7 @@ use Symfony\Component\HttpFoundation\File\Exception\FileException;
 
 abstract class AbstractMaker extends Command
 {
-    public const TEMPLATE_PATH = __DIR__ . '/templates';
+    final public const TEMPLATE_PATH = __DIR__ . '/templates';
     protected $parser;
     protected $entity;
     protected $finder;
@@ -145,7 +145,7 @@ abstract class AbstractMaker extends Command
         if ($entity) {
             $found = null;
             foreach ($this->fqcns as $fqcn) {
-                if (false !== strpos($fqcn, $entity)) {
+                if (false !== strpos((string) $fqcn, $entity)) {
                     $found[] = $fqcn;
                 }
             }
@@ -185,7 +185,7 @@ abstract class AbstractMaker extends Command
             $question->setAutocompleterValues($autocompleteValues);
         }
         $question->setNormalizer(function ($value) {
-            return $value ? trim($value) : null;
+            return $value ? trim((string) $value) : null;
         });
 
         $response = $this->helper->ask($input, $output, $question);
@@ -209,7 +209,7 @@ abstract class AbstractMaker extends Command
             $question->setAutocompleterValues($autocompleteValues);
         }
         $question->setNormalizer(function ($value) {
-            return $value ? trim($value) : null;
+            return $value ? trim((string) $value) : null;
         });
 
         return $this->helper->ask($input, $output, $question);
@@ -224,13 +224,13 @@ abstract class AbstractMaker extends Command
         $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
         $question = new Question($questionLabel . \PHP_EOL);
         $question->setNormalizer(function ($value) {
-            return trim($value);
+            return trim((string) $value);
         });
         $response = $this->helper->ask($input, $output, $question);
         if (!$nullable && ('' === $response || null === $response)) {
             throw new NullableException();
         }
-        $responses = explode(',', $response);
+        $responses = explode(',', (string) $response);
         if (1 === \count($responses) && '' === $responses[0]) {
             return null;
         }

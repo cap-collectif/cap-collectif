@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionIACategoriesResolver implements QueryInterface
 {
-    private ValueResponseRepository $repository;
+    private readonly ValueResponseRepository $repository;
 
     public function __construct(ValueResponseRepository $repository)
     {

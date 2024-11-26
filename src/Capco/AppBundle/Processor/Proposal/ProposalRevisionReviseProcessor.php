@@ -13,11 +13,11 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class ProposalRevisionReviseProcessor implements ProcessorInterface
 {
-    private ProposalRepository $proposalRepository;
-    private ProposalRevisionRepository $proposalRevisionRepository;
-    private ProposalRevisionNotifier $notifier;
-    private LoggerInterface $logger;
-    private KernelInterface $kernel;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly ProposalRevisionRepository $proposalRevisionRepository;
+    private readonly ProposalRevisionNotifier $notifier;
+    private readonly LoggerInterface $logger;
+    private readonly KernelInterface $kernel;
 
     public function __construct(
         ProposalRepository $proposalRepository,

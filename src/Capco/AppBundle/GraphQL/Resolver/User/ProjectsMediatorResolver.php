@@ -11,8 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class ProjectsMediatorResolver implements QueryInterface
 {
-    private ProjectRepository $projectRepository;
-    private ConnectionBuilder $connectionBuilder;
+    private readonly ProjectRepository $projectRepository;
+    private readonly ConnectionBuilder $connectionBuilder;
 
     public function __construct(
         ProjectRepository $projectRepository,

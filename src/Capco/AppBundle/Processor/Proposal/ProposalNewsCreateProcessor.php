@@ -11,9 +11,9 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalNewsCreateProcessor implements ProcessorInterface
 {
-    private LoggerInterface $logger;
-    private ProposalNewsNotifier $notifier;
-    private PostRepository $posRepository;
+    private readonly LoggerInterface $logger;
+    private readonly ProposalNewsNotifier $notifier;
+    private readonly PostRepository $posRepository;
 
     public function __construct(
         LoggerInterface $logger,

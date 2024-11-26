@@ -16,10 +16,10 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
-    private RequestGuesser $requestGuesser;
-    private EntityManagerInterface $em;
-    private OpenIDBackchannel $openIDBackchannel;
-    private LoggerInterface $logger;
+    private readonly RequestGuesser $requestGuesser;
+    private readonly EntityManagerInterface $em;
+    private readonly OpenIDBackchannel $openIDBackchannel;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

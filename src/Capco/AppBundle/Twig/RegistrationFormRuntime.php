@@ -9,7 +9,7 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class RegistrationFormRuntime implements RuntimeExtensionInterface
 {
-    public const CACHE_KEY = 'RegistrationFormExtension';
+    final public const CACHE_KEY = 'RegistrationFormExtension';
 
     protected $formRepo;
     protected $serializer;
@@ -45,7 +45,7 @@ class RegistrationFormRuntime implements RuntimeExtensionInterface
                 'bottomText' => $form ? $form->getBottomText() : '',
                 'topTextDisplayed' => $form ? $form->isTopTextDisplayed() : '',
                 'topText' => $form ? $form->getTopText() : '',
-                'domains' => json_decode($serializedDomains, true),
+                'domains' => json_decode((string) $serializedDomains, true),
             ];
 
             $cachedItem->set($data)->expiresAfter(RedisCache::ONE_MINUTE);

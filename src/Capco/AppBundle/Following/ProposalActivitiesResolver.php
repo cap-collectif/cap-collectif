@@ -20,8 +20,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalActivitiesResolver extends ActivitiesResolver
 {
-    public const NOT_FOLLOWED = 0;
-    public const ACTIVITIES = ['comments', 'votes', 'lastStep', 'posts', 'officialResponses'];
+    final public const NOT_FOLLOWED = 0;
+    final public const ACTIVITIES = ['comments', 'votes', 'lastStep', 'posts', 'officialResponses'];
 
     protected FollowerRepository $followerRepository;
     protected ProposalRepository $proposalRepository;
@@ -29,9 +29,9 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     protected ProjectRepository $projectRepository;
     protected LoggerInterface $logger;
     protected RouterInterface $router;
-    private PostRepository $postRepository;
-    private OfficialResponseRepository $officialResponseRepository;
-    private ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader;
+    private readonly PostRepository $postRepository;
+    private readonly OfficialResponseRepository $officialResponseRepository;
+    private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader;
 
     public function __construct(
         FollowerRepository $followerRepository,

@@ -9,8 +9,8 @@ use Symfony\Component\Validator\Constraint;
  */
 class CheckIdentificationCode extends Constraint
 {
-    public const BAD_CODE = 'BAD_CODE';
-    public const CODE_ALREADY_USED = 'CODE_ALREADY_USED';
+    final public const BAD_CODE = 'BAD_CODE';
+    final public const CODE_ALREADY_USED = 'CODE_ALREADY_USED';
 
     public $message = self::BAD_CODE;
     public $messageUsed = self::CODE_ALREADY_USED;

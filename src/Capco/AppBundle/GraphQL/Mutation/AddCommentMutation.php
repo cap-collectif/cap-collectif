@@ -35,18 +35,18 @@ class AddCommentMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ERROR_NOT_FOUND_COMMENTABLE = 'Commentable not found.';
-    public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
-    public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private EventDispatcherInterface $eventDispatcher;
-    private CommentableCommentsDataLoader $commentableCommentsDataLoader;
-    private RequestGuesser $requestGuesser;
-    private Manager $manager;
-    private TokenGeneratorInterface $tokenGenerator;
+    final public const ERROR_NOT_FOUND_COMMENTABLE = 'Commentable not found.';
+    final public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
+    final public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly EventDispatcherInterface $eventDispatcher;
+    private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader;
+    private readonly RequestGuesser $requestGuesser;
+    private readonly Manager $manager;
+    private readonly TokenGeneratorInterface $tokenGenerator;
 
     public function __construct(
         EntityManagerInterface $em,

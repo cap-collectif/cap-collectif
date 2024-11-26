@@ -15,11 +15,11 @@ class UpdateHomePageProjectsMapSectionConfigurationMutation implements MutationI
 {
     use MutationTrait;
 
-    public const INVALID_FORM = 'INVALID_FORM';
+    final public const INVALID_FORM = 'INVALID_FORM';
 
-    private EntityManagerInterface $em;
-    private SectionRepository $sectionRepository;
-    private FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $em;
+    private readonly SectionRepository $sectionRepository;
+    private readonly FormFactoryInterface $formFactory;
 
     public function __construct(
         EntityManagerInterface $em,

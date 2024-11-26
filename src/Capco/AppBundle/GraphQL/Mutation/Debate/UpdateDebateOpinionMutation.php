@@ -20,14 +20,14 @@ class UpdateDebateOpinionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
-    public const INVALID_FORM = 'INVALID_FORM';
+    final public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
+    final public const INVALID_FORM = 'INVALID_FORM';
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

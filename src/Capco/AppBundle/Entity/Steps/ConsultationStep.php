@@ -17,7 +17,7 @@ class ConsultationStep extends AbstractStep implements ParticipativeStepInterfac
 {
     use TimelessStepTrait;
 
-    public const TYPE = 'consultation';
+    final public const TYPE = 'consultation';
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Consultation", mappedBy="step", cascade={"persist"})

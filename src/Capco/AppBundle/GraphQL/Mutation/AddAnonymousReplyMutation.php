@@ -24,16 +24,16 @@ class AddAnonymousReplyMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const INVALID_FORM = 'INVALID_FORM';
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private ResponsesFormatter $responsesFormatter;
-    private RequestGuesser $requestGuesser;
-    private TokenGeneratorInterface $tokenGenerator;
-    private GlobalIdResolver $globalIdResolver;
-    private Publisher $publisher;
-    private Indexer $indexer;
-    private LoggerInterface $logger;
+    final public const INVALID_FORM = 'INVALID_FORM';
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly ResponsesFormatter $responsesFormatter;
+    private readonly RequestGuesser $requestGuesser;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly Publisher $publisher;
+    private readonly Indexer $indexer;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

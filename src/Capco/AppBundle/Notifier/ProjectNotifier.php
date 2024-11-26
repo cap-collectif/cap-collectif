@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class ProjectNotifier extends BaseNotifier
 {
-    private ProjectResolver $projectResolver;
+    private readonly ProjectResolver $projectResolver;
 
     public function __construct(
         MailerService $mailer,

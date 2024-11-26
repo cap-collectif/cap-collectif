@@ -18,13 +18,13 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class MediasController extends AbstractController
 {
-    public const NO_MEDIA_FOUND = 'NO_MEDIA_FOUND';
-    public const FILE_NOT_ALLOWED = 'FILE_NOT_ALLOWED';
+    final public const NO_MEDIA_FOUND = 'NO_MEDIA_FOUND';
+    final public const FILE_NOT_ALLOWED = 'FILE_NOT_ALLOWED';
 
-    private ValidatorInterface $validator;
-    private MediaManager $mediaManager;
-    private MediaExtension $mediaExtension;
-    private LoggerInterface $logger;
+    private readonly ValidatorInterface $validator;
+    private readonly MediaManager $mediaManager;
+    private readonly MediaExtension $mediaExtension;
+    private readonly LoggerInterface $logger;
     private ?ConstraintViolationListInterface $fileUploadViolations;
 
     public function __construct(

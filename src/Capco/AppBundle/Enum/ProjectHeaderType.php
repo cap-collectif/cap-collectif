@@ -4,8 +4,8 @@ namespace Capco\AppBundle\Enum;
 
 class ProjectHeaderType implements EnumType
 {
-    public const THUMBNAIL = 'thumbnail';
-    public const FULL_WIDTH = 'full_width';
+    final public const THUMBNAIL = 'thumbnail';
+    final public const FULL_WIDTH = 'full_width';
 
     public static function isValid($value): bool
     {

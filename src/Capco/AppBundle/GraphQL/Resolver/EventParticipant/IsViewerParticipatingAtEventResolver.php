@@ -12,7 +12,7 @@ class IsViewerParticipatingAtEventResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private EventRegistrationRepository $eventRegistrationRepository;
+    private readonly EventRegistrationRepository $eventRegistrationRepository;
 
     public function __construct(EventRegistrationRepository $eventRegistrationRepository)
     {

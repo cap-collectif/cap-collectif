@@ -22,12 +22,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateQuestionnaireParametersMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private QuestionnaireRepository $questionnaireRepository;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly QuestionnaireRepository $questionnaireRepository;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

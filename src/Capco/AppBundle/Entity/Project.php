@@ -63,17 +63,17 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     use TimeRangeableTrait;
     use UuidTrait;
 
-    public const FILTER_ALL = 'all';
+    final public const FILTER_ALL = 'all';
 
-    public const SORT_ORDER_PUBLISHED_AT = 0;
-    public const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
+    final public const SORT_ORDER_PUBLISHED_AT = 0;
+    final public const SORT_ORDER_CONTRIBUTIONS_COUNT = 1;
 
-    public const STATE_FUTURE_WITHOUT_FINISHED_STEPS = 0;
-    public const STATE_OPENED = 1;
-    public const STATE_FUTURE_WITH_FINISHED_STEPS = 1;
-    public const STATE_CLOSED = 2;
+    final public const STATE_FUTURE_WITHOUT_FINISHED_STEPS = 0;
+    final public const STATE_OPENED = 1;
+    final public const STATE_FUTURE_WITH_FINISHED_STEPS = 1;
+    final public const STATE_CLOSED = 2;
 
-    public const DEFAULT_COVER_FILTER_OPACITY = 50;
+    final public const DEFAULT_COVER_FILTER_OPACITY = 50;
 
     public static array $sortOrder = [
         'date' => self::SORT_ORDER_PUBLISHED_AT,

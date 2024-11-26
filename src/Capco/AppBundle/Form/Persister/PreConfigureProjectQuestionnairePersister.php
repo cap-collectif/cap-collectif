@@ -17,11 +17,11 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class PreConfigureProjectQuestionnairePersister
 {
-    private CreateQuestionnaireMutation $createQuestionnaireMutation;
-    private UpdateQuestionnaireConfigurationMutation $updateQuestionnaireConfigurationMutation;
-    private EntityManagerInterface $em;
-    private AbstractQuestionRepository $abstractQuestionRepository;
-    private QuestionChoiceRepository $questionChoiceRepository;
+    private readonly CreateQuestionnaireMutation $createQuestionnaireMutation;
+    private readonly UpdateQuestionnaireConfigurationMutation $updateQuestionnaireConfigurationMutation;
+    private readonly EntityManagerInterface $em;
+    private readonly AbstractQuestionRepository $abstractQuestionRepository;
+    private readonly QuestionChoiceRepository $questionChoiceRepository;
 
     public function __construct(
         EntityManagerInterface $em,

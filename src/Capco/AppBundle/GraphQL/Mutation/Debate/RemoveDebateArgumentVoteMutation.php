@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class RemoveDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation implements MutationInterface
 {
-    public const NOT_VOTED = 'NOT_VOTED';
+    final public const NOT_VOTED = 'NOT_VOTED';
 
     public function __invoke(Arg $input, User $viewer): array
     {

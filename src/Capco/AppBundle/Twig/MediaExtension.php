@@ -9,9 +9,9 @@ use Twig\TwigFunction;
 
 class MediaExtension extends AbstractExtension
 {
-    private MediaProvider $mediaProvider;
-    private string $routerRequestContextHost;
-    private ?string $assetsHost;
+    private readonly MediaProvider $mediaProvider;
+    private readonly string $routerRequestContextHost;
+    private readonly ?string $assetsHost;
 
     public function __construct(
         MediaProvider $mediaProvider,
@@ -25,7 +25,7 @@ class MediaExtension extends AbstractExtension
 
     public function getFunctions(): array
     {
-        return [new TwigFunction('media_public_url', [$this, 'getMediaUrl'])];
+        return [new TwigFunction('media_public_url', $this->getMediaUrl(...))];
     }
 
     public function getMediaUrl(?Media $media, string $format): string

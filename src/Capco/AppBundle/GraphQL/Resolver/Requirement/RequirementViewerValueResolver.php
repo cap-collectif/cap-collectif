@@ -15,8 +15,8 @@ class RequirementViewerValueResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private UserRequirementRepository $userRequirementsRepo;
-    private ParticipantRequirementRepository $participantRequirementRepo;
+    private readonly UserRequirementRepository $userRequirementsRepo;
+    private readonly ParticipantRequirementRepository $participantRequirementRepo;
 
     public function __construct(UserRequirementRepository $userRequirementsRepo, ParticipantRequirementRepository $participantRequirementRepo)
     {

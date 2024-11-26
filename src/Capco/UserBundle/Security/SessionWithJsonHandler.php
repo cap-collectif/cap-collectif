@@ -15,15 +15,15 @@ use Symfony\Component\Security\Core\Security;
  */
 class SessionWithJsonHandler extends RedisSessionHandler
 {
-    public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
-    private Security $security;
+    final public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
+    private readonly Security $security;
     private int $lockTimeout = 5;
     private string $lockKeyPrefix = 'session_lock_';
-    private \Redis $redis;
+    private readonly \Redis $redis;
     private int $retryDelay = 10000;
     private int $maxRetries = 100;
-    private LoggerInterface $logger;
-    private RequestStack $requestStack;
+    private readonly LoggerInterface $logger;
+    private readonly RequestStack $requestStack;
 
     public function __construct(
         \Redis $redis,

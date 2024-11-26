@@ -9,15 +9,15 @@ use Psr\Http\Message\ResponseInterface;
 
 class MandrillClient
 {
-    public const BASE_URL = 'https://mandrillapp.com/api/1.0/';
+    final public const BASE_URL = 'https://mandrillapp.com/api/1.0/';
 
     // https://mailchimp.com/developer/transactional/api/messages/get-message-info/
-    public const STATUS_SENT = 'sent';
-    public const STATUS_QUEUED = 'queued';
+    final public const STATUS_SENT = 'sent';
+    final public const STATUS_QUEUED = 'queued';
 
     public Client $client;
 
-    private string $key;
+    private readonly string $key;
 
     public function __construct(string $key)
     {

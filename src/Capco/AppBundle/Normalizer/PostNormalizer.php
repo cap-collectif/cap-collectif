@@ -15,9 +15,9 @@ class PostNormalizer implements NormalizerInterface, SerializerAwareInterface, C
 {
     use SerializerAwareTrait;
 
-    private UrlGeneratorInterface $router;
-    private ObjectNormalizer $normalizer;
-    private MediaExtension $mediaExtension;
+    private readonly UrlGeneratorInterface $router;
+    private readonly ObjectNormalizer $normalizer;
+    private readonly MediaExtension $mediaExtension;
 
     public function __construct(
         UrlGeneratorInterface $router,

@@ -4,7 +4,7 @@
 <?php $notifierName = $command_entity_name . 'Notifier'; ?>
 <?php $varRepositoryName = lcfirst($repositoryName); ?>
 <?php $varNotifierName = lcfirst($notifierName); ?>
-<?php $varEntityName = lcfirst($command_entity_name); ?>
+<?php $varEntityName = lcfirst((string) $command_entity_name); ?>
 
 namespace Capco\AppBundle\Processor<?php if (
     isset($command_entity_name)

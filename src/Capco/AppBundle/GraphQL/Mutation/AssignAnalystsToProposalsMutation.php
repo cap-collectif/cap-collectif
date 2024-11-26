@@ -27,12 +27,12 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
     use ResolverTrait;
 
     private const NB_MAX_ANALYSTS_ASSIGNED = 10;
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private ConnectionBuilder $builder;
-    private ProposalAnalysisRepository $proposalAnalysisRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private Publisher $publisher;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly ConnectionBuilder $builder;
+    private readonly ProposalAnalysisRepository $proposalAnalysisRepository;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly Publisher $publisher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

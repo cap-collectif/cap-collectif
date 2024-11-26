@@ -31,14 +31,14 @@ class ChangeProposalAnalysisMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private ProposalRepository $proposalRepository;
-    private FormFactoryInterface $formFactory;
-    private LoggerInterface $logger;
-    private ResponsesFormatter $responsesFormatter;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ProposalAnalysisRepository $analysisRepository;
-    private EntityManagerInterface $entityManager;
-    private Publisher $publisher;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly LoggerInterface $logger;
+    private readonly ResponsesFormatter $responsesFormatter;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ProposalAnalysisRepository $analysisRepository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly Publisher $publisher;
 
     public function __construct(
         ProposalRepository $proposalRepository,

@@ -12,9 +12,9 @@ use Twig\Environment;
 
 class MultilangueRouteListener
 {
-    private Environment $templating;
-    private Manager $manager;
-    private LocaleRepository $localeRepository;
+    private readonly Environment $templating;
+    private readonly Manager $manager;
+    private readonly LocaleRepository $localeRepository;
 
     public function __construct(
         Manager $manager,
@@ -62,7 +62,7 @@ class MultilangueRouteListener
             return null;
         }
         foreach (TranslationLocale::getAvailableTypes() as $code) {
-            if (explode('-', $code)[0] === $urlPrefix) {
+            if (explode('-', (string) $code)[0] === $urlPrefix) {
                 return $code;
             }
         }

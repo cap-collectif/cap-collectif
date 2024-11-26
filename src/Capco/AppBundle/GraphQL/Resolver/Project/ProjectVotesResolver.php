@@ -19,8 +19,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 class ProjectVotesResolver implements QueryInterface
 {
     protected PromiseAdapterInterface $adapter;
-    private StepVotesCountResolver $stepVotesCountResolver;
-    private VoteSearch $voteSearch;
+    private readonly StepVotesCountResolver $stepVotesCountResolver;
+    private readonly VoteSearch $voteSearch;
 
     public function __construct(
         StepVotesCountResolver $stepVotesCountResolver,

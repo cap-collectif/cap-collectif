@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class UserDebateArgumentsResolver implements QueryInterface
 {
-    private DebateSearch $debateSearch;
+    private readonly DebateSearch $debateSearch;
 
     public function __construct(DebateSearch $debateSearch)
     {

@@ -12,9 +12,9 @@ use Swarrot\Processor\ProcessorInterface;
 
 class GlobalDistrictNotificationProcessor implements ProcessorInterface
 {
-    private GlobalDistrictRepository $globalDistrictRepository;
-    private ProjectRepository $projectRepository;
-    private GlobalDistrictFollowerNotifier $notifier;
+    private readonly GlobalDistrictRepository $globalDistrictRepository;
+    private readonly ProjectRepository $projectRepository;
+    private readonly GlobalDistrictFollowerNotifier $notifier;
 
     public function __construct(
         GlobalDistrictRepository $globalDistrictRepository,

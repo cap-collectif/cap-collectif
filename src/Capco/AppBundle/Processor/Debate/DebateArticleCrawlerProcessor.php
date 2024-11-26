@@ -10,9 +10,9 @@ use Swarrot\Processor\ProcessorInterface;
 
 class DebateArticleCrawlerProcessor implements ProcessorInterface
 {
-    private DebateArticleRepository $repository;
-    private PantherServiceCaller $pantherServiceCaller;
-    private EntityManagerInterface $em;
+    private readonly DebateArticleRepository $repository;
+    private readonly PantherServiceCaller $pantherServiceCaller;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         EntityManagerInterface $em,

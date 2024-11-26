@@ -15,11 +15,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class SendEmailingCampaignCommand extends Command
 {
-    private EmailingCampaignSender $sender;
-    private EmailingCampaignRepository $repository;
-    private EntityManagerInterface $entityManager;
-    private OmarDjinn $omarDjinn;
-    private EmailingCampaignRepository $emailingCampaignRepository;
+    private readonly EmailingCampaignSender $sender;
+    private readonly EmailingCampaignRepository $repository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly OmarDjinn $omarDjinn;
+    private readonly EmailingCampaignRepository $emailingCampaignRepository;
 
     public function __construct(
         EmailingCampaignSender $sender,

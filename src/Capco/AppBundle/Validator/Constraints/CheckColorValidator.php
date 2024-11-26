@@ -15,7 +15,7 @@ class CheckColorValidator extends ConstraintValidator
 
         // Real regex is the following '/^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/'
         // but we let color string between 3 and 6 for possible conflict purpose
-        if (!preg_match('/^#[A-Fa-f0-9]{3,6}$/', $color)) {
+        if (!preg_match('/^#[A-Fa-f0-9]{3,6}$/', (string) $color)) {
             $this->context->buildViolation($constraint->message)->addViolation();
         }
     }

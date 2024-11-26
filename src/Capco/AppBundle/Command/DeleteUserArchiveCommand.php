@@ -13,10 +13,10 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class DeleteUserArchiveCommand extends Command
 {
-    private EntityManagerInterface $em;
-    private UserArchiveRepository $userArchiveRepository;
-    private Filesystem $filesystem;
-    private string $projectDir;
+    private readonly EntityManagerInterface $em;
+    private readonly UserArchiveRepository $userArchiveRepository;
+    private readonly Filesystem $filesystem;
+    private readonly string $projectDir;
 
     public function __construct(
         ?string $name,

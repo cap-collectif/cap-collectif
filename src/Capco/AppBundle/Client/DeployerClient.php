@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Client;
 
 class DeployerClient
 {
-    private ?string $deployerBaseUrl;
-    private string $instanceName;
-    private string $token;
+    private readonly ?string $deployerBaseUrl;
+    private readonly string $instanceName;
+    private readonly string $token;
 
     public function __construct(?string $deployerBaseUrl, string $instanceName, string $token)
     {

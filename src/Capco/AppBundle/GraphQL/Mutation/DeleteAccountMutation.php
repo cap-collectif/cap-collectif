@@ -36,11 +36,11 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
 {
     use MutationTrait;
 
-    public const CANNOT_DELETE_SUPER_ADMIN = 'CANNOT_DELETE_SUPER_ADMIN';
-    public const CANNOT_FIND_USER = 'Can not find this userId !';
+    final public const CANNOT_DELETE_SUPER_ADMIN = 'CANNOT_DELETE_SUPER_ADMIN';
+    final public const CANNOT_FIND_USER = 'Can not find this userId !';
 
-    private UserRepository $userRepository;
-    private SessionInterface $session;
+    private readonly UserRepository $userRepository;
+    private readonly SessionInterface $session;
 
     public function __construct(
         EntityManagerInterface $em,

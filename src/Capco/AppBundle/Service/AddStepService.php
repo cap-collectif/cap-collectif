@@ -16,10 +16,10 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddStepService
 {
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private StepFactory $stepFactory;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly StepFactory $stepFactory;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

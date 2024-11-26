@@ -23,16 +23,16 @@ class RemoveDebateVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
-    public const CLOSED_DEBATE = 'CLOSED_DEBATE';
-    public const NO_VOTE_FOUND = 'NO_VOTE_FOUND';
+    final public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
+    final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
+    final public const NO_VOTE_FOUND = 'NO_VOTE_FOUND';
 
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private GlobalIdResolver $globalIdResolver;
-    private DebateVoteRepository $voteRepository;
-    private DebateArgumentRepository $argumentRepository;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly DebateVoteRepository $voteRepository;
+    private readonly DebateArgumentRepository $argumentRepository;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

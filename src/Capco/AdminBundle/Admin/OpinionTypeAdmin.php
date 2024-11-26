@@ -24,9 +24,9 @@ class OpinionTypeAdmin extends AbstractAdmin
         '_sort_by' => 'title',
     ];
 
-    private TokenStorageInterface $tokenStorage;
-    private ConsultationRepository $consultationRepository;
-    private OpinionTypeRepository $repository;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly ConsultationRepository $consultationRepository;
+    private readonly OpinionTypeRepository $repository;
 
     public function __construct(
         string $code,

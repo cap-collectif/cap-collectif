@@ -13,8 +13,8 @@ use Psr\Log\LoggerInterface;
 
 class QuestionnaireOwnerQuestionnairesResolver implements QueryInterface
 {
-    private LoggerInterface $logger;
-    private QuestionnaireRepository $questionnaireRepository;
+    private readonly LoggerInterface $logger;
+    private readonly QuestionnaireRepository $questionnaireRepository;
 
     public function __construct(
         QuestionnaireRepository $questionnaireRepository,

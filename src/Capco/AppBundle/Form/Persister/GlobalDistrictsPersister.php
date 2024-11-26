@@ -12,9 +12,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class GlobalDistrictsPersister
 {
-    private ProjectDistrictPositionerRepository $districtPositionerRepository;
-    private GlobalDistrictRepository $globalDistrictRepository;
-    private EntityManagerInterface $em;
+    private readonly ProjectDistrictPositionerRepository $districtPositionerRepository;
+    private readonly GlobalDistrictRepository $globalDistrictRepository;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         ProjectDistrictPositionerRepository $districtPositionerRepository,

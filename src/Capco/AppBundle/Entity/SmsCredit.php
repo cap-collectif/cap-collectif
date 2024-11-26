@@ -20,7 +20,7 @@ class SmsCredit
     use TimestampableTrait;
     use UuidTrait;
 
-    public const RELAY_NODE_TYPE = 'SmsCredit';
+    final public const RELAY_NODE_TYPE = 'SmsCredit';
 
     /**
      * @ORM\Column(name="amount", type="integer")

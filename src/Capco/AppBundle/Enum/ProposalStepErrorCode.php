@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Enum;
 
 class ProposalStepErrorCode implements EnumType
 {
-    public const NO_VALID_STATUS = 'NO_VALID_STATUS';
-    public const NO_VALID_PROPOSAL = 'NO_VALID_PROPOSAL';
-    public const NO_VALID_STEP = 'NO_VALID_STEP';
+    final public const NO_VALID_STATUS = 'NO_VALID_STATUS';
+    final public const NO_VALID_PROPOSAL = 'NO_VALID_PROPOSAL';
+    final public const NO_VALID_STEP = 'NO_VALID_STEP';
 
     public static function isValid($value): bool
     {

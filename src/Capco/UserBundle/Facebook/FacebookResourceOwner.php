@@ -28,8 +28,8 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
         'email' => 'email',
         'profilepicture' => 'picture.data.url',
     ];
-    private FeatureChecker $featureChecker;
-    private LoggerInterface $logger;
+    private readonly FeatureChecker $featureChecker;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         HttpMethodsClientInterface $hwiHttpClient,
@@ -77,7 +77,7 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
     public function getUserInformation(array $accessToken, array $extraParameters = []): UserResponseInterface
     {
         if ($this->options['appsecret_proof']) {
-            $extraParameters['appsecret_proof'] = hash_hmac('sha256', $accessToken['access_token'], $this->options['client_secret']);
+            $extraParameters['appsecret_proof'] = hash_hmac('sha256', (string) $accessToken['access_token'], (string) $this->options['client_secret']);
         }
 
         $this->logger->debug('Get user information from Facebook.', ['extra_parameters' => $extraParameters]);

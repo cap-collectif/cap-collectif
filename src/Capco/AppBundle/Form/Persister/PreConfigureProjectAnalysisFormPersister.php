@@ -12,9 +12,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class PreConfigureProjectAnalysisFormPersister
 {
-    private ConfigureAnalysisMutation $configureAnalysisMutation;
-    private AbstractStepRepository $abstractStepRepository;
-    private StatusRepository $statusRepository;
+    private readonly ConfigureAnalysisMutation $configureAnalysisMutation;
+    private readonly AbstractStepRepository $abstractStepRepository;
+    private readonly StatusRepository $statusRepository;
 
     public function __construct(
         ConfigureAnalysisMutation $configureAnalysisMutation,

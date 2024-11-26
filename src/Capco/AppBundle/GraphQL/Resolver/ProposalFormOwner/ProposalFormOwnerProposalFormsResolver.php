@@ -13,7 +13,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ProposalFormOwnerProposalFormsResolver implements QueryInterface
 {
-    private ProposalFormRepository $repository;
+    private readonly ProposalFormRepository $repository;
 
     public function __construct(ProposalFormRepository $repository)
     {

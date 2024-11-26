@@ -12,8 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OwnerEventsResolver implements QueryInterface
 {
-    private EventRepository $repository;
-    private EntityManagerInterface $em;
+    private readonly EventRepository $repository;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(EventRepository $repository, EntityManagerInterface $em)
     {

@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class GroupPendingInvitationsResolver implements QueryInterface
 {
-    private UserInviteRepository $userInviteRepository;
+    private readonly UserInviteRepository $userInviteRepository;
 
     public function __construct(UserInviteRepository $userInviteRepository)
     {

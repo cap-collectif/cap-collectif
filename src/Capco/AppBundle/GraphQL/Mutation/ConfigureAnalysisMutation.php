@@ -37,8 +37,8 @@ class ConfigureAnalysisMutation implements MutationInterface
     private $statusRepository;
     private $selectionStepRepository;
     private $entityManager;
-    private LoggerInterface $logger;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly LoggerInterface $logger;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ProposalFormRepository $proposalFormRepository,

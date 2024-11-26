@@ -8,7 +8,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AlreadyUsedUserIdentificationCodesCountResolver implements QueryInterface
 {
-    private UserIdentificationCodeRepository $repository;
+    private readonly UserIdentificationCodeRepository $repository;
 
     public function __construct(UserIdentificationCodeRepository $repository)
     {

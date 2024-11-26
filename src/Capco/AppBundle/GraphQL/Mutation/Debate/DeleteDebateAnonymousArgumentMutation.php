@@ -11,8 +11,6 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class DeleteDebateAnonymousArgumentMutation extends AbstractDebateArgumentMutation implements MutationInterface
 {
-    public const CANNOT_DELETE_DEBATE_ARGUMENT = 'CANNOT_DELETE_DEBATE_ARGUMENT';
-
     public function __invoke(Arg $input): array
     {
         try {

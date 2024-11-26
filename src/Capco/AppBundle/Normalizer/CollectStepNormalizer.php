@@ -17,7 +17,7 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
 {
     use SerializerAwareTrait;
 
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
     private $collectStepProposalCountResolver;
     private $collectStepContributorCountResolver;
     private $adapter;

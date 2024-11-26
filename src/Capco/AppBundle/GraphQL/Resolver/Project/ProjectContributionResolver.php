@@ -15,7 +15,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class ProjectContributionResolver implements QueryInterface
 {
     protected ContributionSearch $contributionSearch;
-    private RedisCache $cache;
+    private readonly RedisCache $cache;
 
     public function __construct(ContributionSearch $contributionSearch, RedisCache $cache)
     {

@@ -21,11 +21,11 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ContactProposalAuthorMutation implements MutationInterface
 {
     use MutationTrait;
-    private ProposalRepository $proposalRepository;
-    private MailerService $mailerService;
-    private CaptchaChecker $captchaChecker;
-    private EmailValidator $emailValidator;
-    private RequestGuesser $requestGuesser;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly MailerService $mailerService;
+    private readonly CaptchaChecker $captchaChecker;
+    private readonly EmailValidator $emailValidator;
+    private readonly RequestGuesser $requestGuesser;
 
     public function __construct(
         ProposalRepository $proposalRepository,

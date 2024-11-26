@@ -19,7 +19,7 @@ class SourceAdmin extends AbstractAdmin
     protected ?string $classnameLabel = 'source';
     protected array $datagridValues = ['_sort_order' => 'ASC', '_sort_by' => 'title'];
 
-    private TokenStorageInterface $tokenStorage;
+    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,

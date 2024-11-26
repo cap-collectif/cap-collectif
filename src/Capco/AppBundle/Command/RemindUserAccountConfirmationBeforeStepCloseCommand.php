@@ -23,11 +23,11 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
 {
-    private AbstractStepRepository $stepRepository;
-    private UserRepository $userRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private RouterInterface $router;
-    private Publisher $publisher;
+    private readonly AbstractStepRepository $stepRepository;
+    private readonly UserRepository $userRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly RouterInterface $router;
+    private readonly Publisher $publisher;
 
     public function __construct(
         AbstractStepRepository $stepRepository,

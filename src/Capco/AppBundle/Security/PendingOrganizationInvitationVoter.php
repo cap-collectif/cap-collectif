@@ -9,7 +9,7 @@ use Symfony\Component\Security\Core\Authorization\Voter\Voter;
 
 class PendingOrganizationInvitationVoter extends Voter
 {
-    public const DELETE = 'delete';
+    final public const DELETE = 'delete';
 
     public function canDelete(PendingOrganizationInvitation $invitation, User $viewer): bool
     {

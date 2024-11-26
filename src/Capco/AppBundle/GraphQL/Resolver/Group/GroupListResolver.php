@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class GroupListResolver implements QueryInterface
 {
-    private GroupRepository $groupRepository;
+    private readonly GroupRepository $groupRepository;
 
     public function __construct(GroupRepository $groupRepository)
     {

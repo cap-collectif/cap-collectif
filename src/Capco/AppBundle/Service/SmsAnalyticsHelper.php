@@ -9,9 +9,9 @@ use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 
 class SmsAnalyticsHelper
 {
-    private SmsCreditRepository $smsCreditRepository;
-    private UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
-    private AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
+    private readonly SmsCreditRepository $smsCreditRepository;
+    private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
+    private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
 
     public function __construct(
         SmsCreditRepository $smsCreditRepository,

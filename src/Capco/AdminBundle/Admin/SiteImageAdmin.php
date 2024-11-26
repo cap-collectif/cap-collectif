@@ -17,8 +17,8 @@ class SiteImageAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'isEnabled',
     ];
-    private MediaProvider $mediaProvider;
-    private EntityManagerInterface $entityManager;
+    private readonly MediaProvider $mediaProvider;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,

@@ -19,12 +19,12 @@ class ReportMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const REPORTABLE_NOT_FOUND = 'REPORTABLE_NOT_FOUND';
-    public const ALREADY_REPORTED = 'ALREADY_REPORTED';
+    final public const REPORTABLE_NOT_FOUND = 'REPORTABLE_NOT_FOUND';
+    final public const ALREADY_REPORTED = 'ALREADY_REPORTED';
 
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private Publisher $publisher;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly Publisher $publisher;
 
     public function __construct(
         GlobalIdResolver $globalIdResolver,

@@ -16,11 +16,11 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class CropMediaMutation implements MutationInterface
 {
     use MutationTrait;
-    private MediaRepository $mediaRepository;
-    private MediaProvider $mediaProvider;
-    private CacheManager $cacheManager;
-    private FilterManager $filterManager;
-    private DataManager $dataManager;
+    private readonly MediaRepository $mediaRepository;
+    private readonly MediaProvider $mediaProvider;
+    private readonly CacheManager $cacheManager;
+    private readonly FilterManager $filterManager;
+    private readonly DataManager $dataManager;
 
     public function __construct(
         MediaRepository $mediaRepository,

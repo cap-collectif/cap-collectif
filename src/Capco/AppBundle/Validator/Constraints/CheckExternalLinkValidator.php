@@ -18,7 +18,7 @@ class CheckExternalLinkValidator extends ConstraintValidator
     public function validate($value, Constraint $constraint)
     {
         $host = $this->router->getContext()->getHost();
-        if (!isset($value) || strpos($value, $host)) {
+        if (!isset($value) || strpos((string) $value, $host)) {
             $this->context
                 ->buildViolation('available-external-link-required')
                 ->atPath('externalLink')

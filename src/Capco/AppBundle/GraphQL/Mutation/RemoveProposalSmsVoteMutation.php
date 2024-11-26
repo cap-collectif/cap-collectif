@@ -23,18 +23,18 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
+    final public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
 
-    private EntityManagerInterface $em;
-    private ProposalVotesDataLoader $proposalVotesDataLoader;
-    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-    private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private GlobalIdResolver $globalIdResolver;
-    private Indexer $indexer;
-    private PhoneTokenRepository $phoneTokenRepository;
-    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private readonly EntityManagerInterface $em;
+    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
+    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
+    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly Indexer $indexer;
+    private readonly PhoneTokenRepository $phoneTokenRepository;
+    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
 
     public function __construct(
         EntityManagerInterface $em,

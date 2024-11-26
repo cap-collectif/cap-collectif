@@ -9,8 +9,8 @@ use Overblog\GraphQLBundle\Definition\Argument;
 
 class PreConfigureProjectProposalFormPersister
 {
-    private CreateProposalFormMutation $createProposalFormMutation;
-    private UpdateProposalFormMutation $updateProposalFormMutation;
+    private readonly CreateProposalFormMutation $createProposalFormMutation;
+    private readonly UpdateProposalFormMutation $updateProposalFormMutation;
 
     public function __construct(
         CreateProposalFormMutation $createProposalFormMutation,

@@ -10,7 +10,7 @@ class UserInviteAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'capco_admin_user_invite';
     protected $baseRoutePattern = 'capco/user/invite';
-    private AuthorizationCheckerInterface $checker;
+    private readonly AuthorizationCheckerInterface $checker;
 
     public function __construct(
         $code,

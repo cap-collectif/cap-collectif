@@ -34,12 +34,12 @@ class AddProposalsFromCsvMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const TOO_MUCH_LINES = 'TOO_MUCH_LINES';
-    public const MAX_LINES = 501;
-    public const EMPTY_FILE = 'EMPTY_FILE';
-    public const BAD_DATA_MODEL = 'BAD_DATA_MODEL';
-    public const PROPOSAL_FORM_NOT_FOUND = 'PROPOSAL_FORM_NOT_FOUND';
-    public const VIEWER_NOT_ALLOWED = 'VIEWER_NOT_ALLOWED';
+    final public const TOO_MUCH_LINES = 'TOO_MUCH_LINES';
+    final public const MAX_LINES = 501;
+    final public const EMPTY_FILE = 'EMPTY_FILE';
+    final public const BAD_DATA_MODEL = 'BAD_DATA_MODEL';
+    final public const PROPOSAL_FORM_NOT_FOUND = 'PROPOSAL_FORM_NOT_FOUND';
+    final public const VIEWER_NOT_ALLOWED = 'VIEWER_NOT_ALLOWED';
     protected EntityManagerInterface $om;
     protected MediaManager $mediaManager;
     protected ProposalDistrictRepository $districtRepository;
@@ -55,11 +55,11 @@ class AddProposalsFromCsvMutation implements MutationInterface
     protected Indexer $indexer;
     protected ImportProposalsFromCsv $importProposalsFromCsv;
     protected ProposalFormRepository $proposalFormRepository;
-    private ConnectionBuilder $connectionBuilder;
-    private MediaRepository $mediaRepository;
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ConnectionBuilder $connectionBuilder;
+    private readonly MediaRepository $mediaRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         ProposalFormRepository $proposalFormRepository,

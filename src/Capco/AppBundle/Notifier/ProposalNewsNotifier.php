@@ -16,9 +16,9 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalNewsNotifier extends BaseNotifier
 {
-    private PostRepository $postRepository;
-    private PostUrlResolver $urlResolver;
-    private UserRepository $userRepository;
+    private readonly PostRepository $postRepository;
+    private readonly PostUrlResolver $urlResolver;
+    private readonly UserRepository $userRepository;
 
     public function __construct(
         MailerService $mailer,

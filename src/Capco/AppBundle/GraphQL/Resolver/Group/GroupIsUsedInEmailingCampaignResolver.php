@@ -9,7 +9,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class GroupIsUsedInEmailingCampaignResolver implements QueryInterface
 {
-    private EmailingCampaignRepository $repository;
+    private readonly EmailingCampaignRepository $repository;
 
     public function __construct(EmailingCampaignRepository $repository)
     {

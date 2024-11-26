@@ -16,10 +16,10 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UserNotificationsConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $entityManager;
-    private LoggerInterface $logger;
-    private FormFactoryInterface $formFactory;
-    private SendInBluePublisher $sendInBluePublisher;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly LoggerInterface $logger;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         EntityManagerInterface $entityManager,

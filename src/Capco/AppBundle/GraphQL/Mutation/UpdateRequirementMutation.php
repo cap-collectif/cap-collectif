@@ -17,10 +17,10 @@ use Psr\Log\LoggerInterface;
 class UpdateRequirementMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private RequirementRepository $requirementRepository;
-    private UserRequirementRepository $userRequirementRepository;
-    private LoggerInterface $logger;
+    private readonly EntityManagerInterface $em;
+    private readonly RequirementRepository $requirementRepository;
+    private readonly UserRequirementRepository $userRequirementRepository;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

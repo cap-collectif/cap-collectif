@@ -26,13 +26,13 @@ use Symfony\Component\Form\FormFactoryInterface;
 class AddSourceMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private OpinionRepository $opinionRepo;
-    private OpinionVersionRepository $versionRepo;
-    private RedisStorageHelper $redisStorage;
-    private LoggerInterface $logger;
-    private StepRequirementsResolver $stepRequirementsResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly OpinionRepository $opinionRepo;
+    private readonly OpinionVersionRepository $versionRepo;
+    private readonly RedisStorageHelper $redisStorage;
+    private readonly LoggerInterface $logger;
+    private readonly StepRequirementsResolver $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,

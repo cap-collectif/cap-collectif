@@ -15,8 +15,8 @@ class MapToken
 {
     use TimestampableTrait;
     use UuidTrait;
-    public const DEFAULT_STYLE_OWNER = 'mapbox';
-    public const DEFAULT_STYLE_ID = 'streets-v10';
+    final public const DEFAULT_STYLE_OWNER = 'mapbox';
+    final public const DEFAULT_STYLE_ID = 'streets-v10';
 
     /**
      * @ORM\Column(name="public_token", type="string", nullable=true)

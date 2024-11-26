@@ -15,15 +15,15 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class MagicLinkAuthenticator
 {
-    public const JWT_ENCRYPTION_ALGORITHM = 'RS256';
-    public const TOKEN_CONFIG_FOLDER = '/jwt';
-    public const DEFAULT_TOKEN_LIFETIME_IN_MINUTES = 5;
+    final public const JWT_ENCRYPTION_ALGORITHM = 'RS256';
+    final public const TOKEN_CONFIG_FOLDER = '/jwt';
+    final public const DEFAULT_TOKEN_LIFETIME_IN_MINUTES = 5;
 
-    private UserEmailProvider $userProvider;
-    private ConfigFileSystem $filesystem;
+    private readonly UserEmailProvider $userProvider;
+    private readonly ConfigFileSystem $filesystem;
 
     private ?string $redirectUrl = null;
-    private int $tokenLifetimeInMinutes;
+    private readonly int $tokenLifetimeInMinutes;
 
     public function __construct(
         UserEmailProvider $userProvider,

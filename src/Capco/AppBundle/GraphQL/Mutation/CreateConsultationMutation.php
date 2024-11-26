@@ -15,9 +15,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateConsultationMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private SettableOwnerResolver $settableOwnerResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         EntityManagerInterface $em,

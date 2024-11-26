@@ -24,7 +24,7 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
 
-    public const PROPOSAL_DEFAULT_HEADER = [
+    final public const PROPOSAL_DEFAULT_HEADER = [
         'contribution_type' => 'id',
         'proposal_id' => 'id',
         'proposal_reference' => 'reference',
@@ -52,7 +52,7 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         'proposal_description' => 'bodyText',
     ];
 
-    public const ANALYST_DEFAULT_HEADER = [
+    final public const ANALYST_DEFAULT_HEADER = [
         'proposal_analyst_id' => 'analyst.id',
         'proposal_analyst_username' => 'analyst.username',
         'proposal_analyst_email' => 'analyst.email',
@@ -60,7 +60,7 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         'proposal_analyst_estimated_cost' => 'estimatedCost',
     ];
 
-    public const DECISION_DEFAULT_HEADER = [
+    final public const DECISION_DEFAULT_HEADER = [
         'proposal_supervisor_id' => 'assessment.supervisor.id',
         'proposal_supervisor_username' => 'assessment.supervisor.username',
         'proposal_supervisor_email' => 'assessment.supervisor.email',
@@ -155,8 +155,8 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
     protected GraphQlAclListener $listener;
     protected string $projectRootDir;
     protected UserRepository $userRepository;
-    private ProjectRepository $projectRepository;
-    private ConnectionTraversor $connectionTraversor;
+    private readonly ProjectRepository $projectRepository;
+    private readonly ConnectionTraversor $connectionTraversor;
 
     public function __construct(
         EntityManagerInterface $em,

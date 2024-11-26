@@ -23,15 +23,15 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
-    public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
-    public const STEP_NOT_VOTABLE = 'STEP_NOT_VOTABLE';
+    final public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
+    final public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
+    final public const STEP_NOT_VOTABLE = 'STEP_NOT_VOTABLE';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $resolver;
-    private ProposalStepPaperVoteCounterRepository $repository;
-    private Indexer $indexer;
-    private AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $resolver;
+    private readonly ProposalStepPaperVoteCounterRepository $repository;
+    private readonly Indexer $indexer;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         EntityManagerInterface $em,

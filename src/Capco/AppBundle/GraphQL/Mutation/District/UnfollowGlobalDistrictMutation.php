@@ -18,11 +18,11 @@ class UnfollowGlobalDistrictMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public const DISTRICT_NOT_FOUND = 'DISTRICT_NOT_FOUND';
-    public const FOLLOWER_NOT_FOUND = 'FOLLOWER_NOT_FOUND';
-    private EntityManagerInterface $entityManager;
-    private GlobalDistrictRepository $globalDistrictRepository;
-    private FollowerRepository $followerRepository;
+    final public const DISTRICT_NOT_FOUND = 'DISTRICT_NOT_FOUND';
+    final public const FOLLOWER_NOT_FOUND = 'FOLLOWER_NOT_FOUND';
+    private readonly EntityManagerInterface $entityManager;
+    private readonly GlobalDistrictRepository $globalDistrictRepository;
+    private readonly FollowerRepository $followerRepository;
 
     public function __construct(
         GlobalDistrictRepository $globalDistrictRepository,

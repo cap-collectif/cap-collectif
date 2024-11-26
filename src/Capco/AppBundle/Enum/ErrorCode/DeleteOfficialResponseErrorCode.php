@@ -6,9 +6,9 @@ use Capco\AppBundle\Enum\EnumType;
 
 class DeleteOfficialResponseErrorCode implements EnumType
 {
-    public const ID_NOT_FOUND = 'ID_NOT_FOUND';
+    final public const ID_NOT_FOUND = 'ID_NOT_FOUND';
 
-    public const ALL = [self::ID_NOT_FOUND];
+    final public const ALL = [self::ID_NOT_FOUND];
 
     public static function isValid($value): bool
     {

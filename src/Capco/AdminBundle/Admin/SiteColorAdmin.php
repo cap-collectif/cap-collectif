@@ -15,7 +15,7 @@ class SiteColorAdmin extends AbstractAdmin
         '_sort_by' => 'isEnabled',
     ];
 
-    private EntityManagerInterface $entityManager;
+    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,

@@ -24,8 +24,8 @@ class CommentAdmin extends AbstractAdmin
     protected ?string $classnameLabel = 'comment';
     protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
 
-    private TokenStorageInterface $tokenStorage;
-    private Manager $manager;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly Manager $manager;
 
     public function __construct(
         string $code,
@@ -122,7 +122,7 @@ class CommentAdmin extends AbstractAdmin
             $list->add('moderationStatus', null, [
                 'label' => 'moderation',
                 'accessor' => function ($subject) {
-                    $status = strtolower($subject->getModerationStatus());
+                    $status = strtolower((string) $subject->getModerationStatus());
 
                     return $this->getTranslator()->trans($status);
                 },

@@ -7,8 +7,8 @@ use Capco\AppBundle\Mailer\Message\AbstractExternalMessage;
 
 class MediatorPubParticipateMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'notification.pub.participation.subject';
-    public const TEMPLATE = '@CapcoMail/Mediator/participationEmail.html.twig';
+    final public const SUBJECT = 'notification.pub.participation.subject';
+    final public const TEMPLATE = '@CapcoMail/Mediator/participationEmail.html.twig';
 
     public static function getMyTemplateVars(Mediator $mediator, array $params): array
     {

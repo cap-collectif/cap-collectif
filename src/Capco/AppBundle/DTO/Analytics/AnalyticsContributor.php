@@ -6,7 +6,7 @@ use Capco\UserBundle\Entity\User;
 
 class AnalyticsContributor
 {
-    private User $user;
+    private readonly User $user;
     /**
      * @var AnalyticsContributorContribution[]|iterable
      */

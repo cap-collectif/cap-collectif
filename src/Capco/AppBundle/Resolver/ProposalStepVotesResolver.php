@@ -51,7 +51,7 @@ class ProposalStepVotesResolver extends AbstractExtension
 
     public function getFilters()
     {
-        return [new TwigFilter('current_votable_step', [$this, 'getFirstVotableStepForProposal'])];
+        return [new TwigFilter('current_votable_step', $this->getFirstVotableStepForProposal(...))];
     }
 
     public function voteIsPossible($vote): bool

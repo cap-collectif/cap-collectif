@@ -41,20 +41,20 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
     use MutationTrait;
     use QuestionPersisterTrait;
 
-    private FormFactoryInterface $formFactory;
-    private ProposalFormRepository $proposalFormRepo;
-    private LoggerInterface $logger;
-    private QuestionnaireAbstractQuestionRepository $questionRepo;
-    private AbstractQuestionRepository $abstractQuestionRepo;
-    private MediaRepository $mediaRepository;
-    private QueryCategoryImagesResolver $categoryImagesResolver;
-    private CategoryImageRepository $categoryImageRepository;
-    private MultipleChoiceQuestionRepository $choiceQuestionRepository;
-    private ProposalDistrictRepository $proposalDistrictRepository;
-    private Indexer $indexer;
-    private ValidatorInterface $colorValidator;
-    private Manager $toggleManager;
-    private QuestionJumpsHandler $questionJumpsHandler;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly ProposalFormRepository $proposalFormRepo;
+    private readonly LoggerInterface $logger;
+    private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
+    private readonly AbstractQuestionRepository $abstractQuestionRepo;
+    private readonly MediaRepository $mediaRepository;
+    private readonly QueryCategoryImagesResolver $categoryImagesResolver;
+    private readonly CategoryImageRepository $categoryImageRepository;
+    private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private readonly ProposalDistrictRepository $proposalDistrictRepository;
+    private readonly Indexer $indexer;
+    private readonly ValidatorInterface $colorValidator;
+    private readonly Manager $toggleManager;
+    private readonly QuestionJumpsHandler $questionJumpsHandler;
 
     public function __construct(
         EntityManagerInterface $em,

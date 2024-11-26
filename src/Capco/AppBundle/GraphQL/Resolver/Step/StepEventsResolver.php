@@ -12,8 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class StepEventsResolver implements QueryInterface
 {
-    private ConnectionBuilder $builder;
-    private EventRepository $repository;
+    private readonly ConnectionBuilder $builder;
+    private readonly EventRepository $repository;
 
     public function __construct(ConnectionBuilder $builder, EventRepository $repository)
     {

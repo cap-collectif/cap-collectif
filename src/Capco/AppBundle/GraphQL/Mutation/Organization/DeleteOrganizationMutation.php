@@ -21,17 +21,17 @@ class DeleteOrganizationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
-    public const ORGANIZATION_ALREADY_ANONYMIZED = 'ORGANIZATION_ALREADY_ANONYMIZED';
+    final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
+    final public const ORGANIZATION_ALREADY_ANONYMIZED = 'ORGANIZATION_ALREADY_ANONYMIZED';
 
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private ProjectRepository $projectRepository;
-    private TranslatorInterface $translator;
-    private SluggerInterface $slugger;
-    private OrganizationRepository $organizationRepository;
-    private PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
-    private UserInviteRepository $userInviteRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ProjectRepository $projectRepository;
+    private readonly TranslatorInterface $translator;
+    private readonly SluggerInterface $slugger;
+    private readonly OrganizationRepository $organizationRepository;
+    private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
+    private readonly UserInviteRepository $userInviteRepository;
 
     public function __construct(
         EntityManagerInterface $em,

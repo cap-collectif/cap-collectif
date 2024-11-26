@@ -9,8 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserInviteEmailMessageStatusCheckProcessor implements ProcessorInterface
 {
-    private UserInviteEmailMessageRepository $repository;
-    private UserInviteEmailMessageNotifier $notifier;
+    private readonly UserInviteEmailMessageRepository $repository;
+    private readonly UserInviteEmailMessageNotifier $notifier;
 
     public function __construct(
         UserInviteEmailMessageRepository $repository,

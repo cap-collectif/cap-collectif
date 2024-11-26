@@ -13,7 +13,7 @@ class DebateAnonymousVoteNormalizer implements NormalizerInterface, SerializerAw
 {
     use SerializerAwareTrait;
 
-    private ObjectNormalizer $normalizer;
+    private readonly ObjectNormalizer $normalizer;
 
     public function __construct(ObjectNormalizer $normalizer)
     {

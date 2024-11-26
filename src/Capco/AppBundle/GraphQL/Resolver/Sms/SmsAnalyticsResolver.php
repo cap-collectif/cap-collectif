@@ -11,7 +11,7 @@ class SmsAnalyticsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private SmsAnalyticsHelper $smsAnalyticsHelper;
+    private readonly SmsAnalyticsHelper $smsAnalyticsHelper;
 
     public function __construct(SmsAnalyticsHelper $smsAnalyticsHelper)
     {

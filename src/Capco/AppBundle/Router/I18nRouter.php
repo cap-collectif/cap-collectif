@@ -126,11 +126,11 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         if (
             'capco_app_cms' === $params['_route']
             && isset($params['url'])
-            && false === strpos($params['url'], "/{$defaultLocalePrefix}/")
+            && false === strpos((string) $params['url'], "/{$defaultLocalePrefix}/")
         ) {
             $isHomePage = false;
             //Test beforehand if it is a locale since with cms routes, it doesn't easily find the homecontroller
-            if (2 === \strlen($params['url'])) {
+            if (2 === \strlen((string) $params['url'])) {
                 try {
                     $paramsUrl = $params['url'];
                     $routeMatch = $this->match("/{$paramsUrl}/");
@@ -171,9 +171,9 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         $request = $this->getRequest();
 
         if (isset($params['_locales'])) {
-            if (false !== ($pos = strpos($params['_route'], I18nLoader::ROUTING_PREFIX))) {
+            if (false !== ($pos = strpos((string) $params['_route'], I18nLoader::ROUTING_PREFIX))) {
                 $params['_route'] = substr(
-                    $params['_route'],
+                    (string) $params['_route'],
                     $pos + \strlen(I18nLoader::ROUTING_PREFIX)
                 );
             }
@@ -222,10 +222,10 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
             $params['_locale'] = $currentLocale;
         } elseif (
             isset($params['_locale'])
-            && 0 < ($pos = strpos($params['_route'], I18nLoader::ROUTING_PREFIX))
+            && 0 < ($pos = strpos((string) $params['_route'], I18nLoader::ROUTING_PREFIX))
         ) {
             $params['_route'] = substr(
-                $params['_route'],
+                (string) $params['_route'],
                 $pos + \strlen(I18nLoader::ROUTING_PREFIX)
             );
         }

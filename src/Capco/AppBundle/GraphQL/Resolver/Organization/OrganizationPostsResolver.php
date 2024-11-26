@@ -13,7 +13,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OrganizationPostsResolver implements QueryInterface
 {
-    private PostRepository $repository;
+    private readonly PostRepository $repository;
 
     public function __construct(PostRepository $repository)
     {

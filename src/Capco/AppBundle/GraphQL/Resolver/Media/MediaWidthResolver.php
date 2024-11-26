@@ -9,8 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MediaWidthResolver implements QueryInterface
 {
-    private EntityManagerInterface $em;
-    private MediaSizeRetriever $mediaSizeRetriever;
+    private readonly EntityManagerInterface $em;
+    private readonly MediaSizeRetriever $mediaSizeRetriever;
 
     public function __construct(EntityManagerInterface $em, MediaSizeRetriever $mediaSizeRetriever)
     {

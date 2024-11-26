@@ -12,7 +12,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserArchiveNotifier extends BaseNotifier
 {
-    private UserLoginAndShowDataUrlResolver $userLoginAndShowDataUrlResolver;
+    private readonly UserLoginAndShowDataUrlResolver $userLoginAndShowDataUrlResolver;
 
     public function __construct(
         MailerService $mailer,

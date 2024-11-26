@@ -4,11 +4,11 @@ namespace Capco\AppBundle\Enum;
 
 class ContributionOrigin implements EnumType
 {
-    public const INTERNAL = 'INTERNAL';
-    public const WIDGET = 'WIDGET';
-    public const MAIL = 'MAIL';
-    public const ALL_EXTERNAL = [self::WIDGET, self::MAIL];
-    public const ALL = self::ALL_EXTERNAL + [self::INTERNAL];
+    final public const INTERNAL = 'INTERNAL';
+    final public const WIDGET = 'WIDGET';
+    final public const MAIL = 'MAIL';
+    final public const ALL_EXTERNAL = [self::WIDGET, self::MAIL];
+    final public const ALL = self::ALL_EXTERNAL + [self::INTERNAL];
 
     public static function isValid($value): bool
     {

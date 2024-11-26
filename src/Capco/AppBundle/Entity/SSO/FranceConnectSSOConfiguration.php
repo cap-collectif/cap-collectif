@@ -13,12 +13,12 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class FranceConnectSSOConfiguration extends AbstractSSOConfiguration
 {
-    public const ENDPOINTS = [
+    final public const ENDPOINTS = [
         EnumSSOEnvironmentType::TESTING => 'https://fcp.integ01.dev-franceconnect.fr',
         EnumSSOEnvironmentType::PRODUCTION => 'https://app.franceconnect.gouv.fr',
     ];
 
-    public const ROUTES = [
+    final public const ROUTES = [
         'authorizationUrl' => '/api/v1/authorize',
         'accessTokenUrl' => '/api/v1/token',
         'userInfoUrl' => '/api/v1/userinfo',

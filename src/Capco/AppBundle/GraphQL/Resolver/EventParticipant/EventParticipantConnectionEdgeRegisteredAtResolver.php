@@ -10,7 +10,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 
 class EventParticipantConnectionEdgeRegisteredAtResolver implements QueryInterface
 {
-    private EventRegistrationRepository $eventRegistrationRepository;
+    private readonly EventRegistrationRepository $eventRegistrationRepository;
 
     public function __construct(EventRegistrationRepository $eventRegistrationRepository)
     {

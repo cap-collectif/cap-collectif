@@ -14,19 +14,19 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OrangeClient
 {
-    public const CLIENT_CREDENTIALS = 'client_credentials';
-    public const SMS_OTP = 'sms_otp';
-    public const GET_ACCESS_TOKEN_URL = 'https://li.liveidentity.com/ag-authorize/public/token';
-    public const SEND_SMS_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/send';
-    public const VALIDATE_SMS_CODE_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/validate';
-    private HttpClientInterface $client;
-    private LoggerInterface $logger;
-    private TranslatorInterface $translator;
-    private SiteParameterResolver $siteParams;
+    final public const CLIENT_CREDENTIALS = 'client_credentials';
+    final public const SMS_OTP = 'sms_otp';
+    final public const GET_ACCESS_TOKEN_URL = 'https://li.liveidentity.com/ag-authorize/public/token';
+    final public const SEND_SMS_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/send';
+    final public const VALIDATE_SMS_CODE_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/validate';
+    private readonly HttpClientInterface $client;
+    private readonly LoggerInterface $logger;
+    private readonly TranslatorInterface $translator;
+    private readonly SiteParameterResolver $siteParams;
 
-    private string $clientId;
+    private readonly string $clientId;
 
-    private string $clientSecret;
+    private readonly string $clientSecret;
 
     public function __construct(
         HttpClientInterface $httpClient,

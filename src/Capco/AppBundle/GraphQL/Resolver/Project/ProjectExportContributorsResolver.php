@@ -9,7 +9,7 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProjectExportContributorsResolver implements QueryInterface
 {
-    private RouterInterface $router;
+    private readonly RouterInterface $router;
 
     public function __construct(RouterInterface $router)
     {

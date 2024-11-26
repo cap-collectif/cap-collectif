@@ -26,18 +26,18 @@ use Overblog\GraphQLBundle\Error\UserError;
 class RemoveProposalVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ProposalRepository $proposalRepo;
-    private AbstractStepRepository $stepRepo;
-    private ProposalVotesDataLoader $proposalVotesDataLoader;
-    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
-    private GlobalIdResolver $globalIdResolver;
-    private Indexer $indexer;
+    private readonly EntityManagerInterface $em;
+    private readonly ProposalRepository $proposalRepo;
+    private readonly AbstractStepRepository $stepRepo;
+    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
+    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
+    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
+    private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

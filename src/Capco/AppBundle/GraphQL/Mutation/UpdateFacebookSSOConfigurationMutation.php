@@ -12,8 +12,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class UpdateFacebookSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private FacebookSSOConfigurationRepository $repository;
+    private readonly EntityManagerInterface $em;
+    private readonly FacebookSSOConfigurationRepository $repository;
 
     public function __construct(
         EntityManagerInterface $em,

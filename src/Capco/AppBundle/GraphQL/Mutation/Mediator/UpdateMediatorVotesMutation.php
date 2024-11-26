@@ -25,12 +25,12 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $entityManager;
-    private GlobalIdResolver $globalIdResolver;
-    private ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private FormFactoryInterface $formFactory;
-    private UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
 
     public function __construct(
         EntityManagerInterface $entityManager,

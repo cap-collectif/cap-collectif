@@ -29,32 +29,32 @@ class RegisterMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const EMAIL_ALREADY_USED = 'EMAIL_ALREADY_USED';
-    public const EMAIL_DOMAIN_NOT_AUTHORIZED = 'EMAIL_DOMAIN_NOT_AUTHORIZED';
-    public const CAPTCHA_INVALID = 'CAPTCHA_INVALID';
-    public const REGISTER_FEATURE_NOT_ENABLED = 'REGISTER_FEATURE_NOT_ENABLED';
-    public const USERNAME_BLANK = 'USERNAME_BLANK';
-    public const EMAIL_BLANK = 'EMAIL_BLANK';
-    public const PASSWORD_BLANK = 'PASSWORD_BLANK';
-    public const EMAIL_THROWABLE = 'EMAIL_THROWABLE';
-    public const NO_EXTRA_FIELDS = 'NO_EXTRA_FIELDS';
-    public const RATE_LIMITER_ACTION = 'RegisterMutation';
-    public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
+    final public const EMAIL_ALREADY_USED = 'EMAIL_ALREADY_USED';
+    final public const EMAIL_DOMAIN_NOT_AUTHORIZED = 'EMAIL_DOMAIN_NOT_AUTHORIZED';
+    final public const CAPTCHA_INVALID = 'CAPTCHA_INVALID';
+    final public const REGISTER_FEATURE_NOT_ENABLED = 'REGISTER_FEATURE_NOT_ENABLED';
+    final public const USERNAME_BLANK = 'USERNAME_BLANK';
+    final public const EMAIL_BLANK = 'EMAIL_BLANK';
+    final public const PASSWORD_BLANK = 'PASSWORD_BLANK';
+    final public const EMAIL_THROWABLE = 'EMAIL_THROWABLE';
+    final public const NO_EXTRA_FIELDS = 'NO_EXTRA_FIELDS';
+    final public const RATE_LIMITER_ACTION = 'RegisterMutation';
+    final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    private UserInviteRepository $userInviteRepository;
-    private LoggerInterface $logger;
-    private TranslatorInterface $translator;
-    private UserManagerInterface $userManager;
-    private Manager $toggleManager;
-    private TokenGeneratorInterface $tokenGenerator;
-    private FOSNotifier $notifier;
-    private FormFactoryInterface $formFactory;
-    private ResponsesFormatter $responsesFormatter;
-    private UserInvitationHandler $userInvitationHandler;
-    private PendingOrganizationInvitationRepository $organizationInvitationRepository;
-    private EntityManagerInterface $em;
-    private RateLimiter $rateLimiter;
-    private RequestGuesser $requestGuesser;
+    private readonly UserInviteRepository $userInviteRepository;
+    private readonly LoggerInterface $logger;
+    private readonly TranslatorInterface $translator;
+    private readonly UserManagerInterface $userManager;
+    private readonly Manager $toggleManager;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly FOSNotifier $notifier;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly ResponsesFormatter $responsesFormatter;
+    private readonly UserInvitationHandler $userInvitationHandler;
+    private readonly PendingOrganizationInvitationRepository $organizationInvitationRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly RateLimiter $rateLimiter;
+    private readonly RequestGuesser $requestGuesser;
 
     public function __construct(
         Manager $toggleManager,

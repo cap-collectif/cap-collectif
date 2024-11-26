@@ -20,14 +20,14 @@ class UpdatePostMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const INVALID_FORM = 'INVALID_FORM';
+    final public const INVALID_FORM = 'INVALID_FORM';
 
-    private EntityManagerInterface $em;
-    private FormFactoryInterface $formFactory;
-    private GlobalIdResolver $globalIdResolver;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private PostAuthorFactory $postAuthorFactory;
-    private LoggerInterface $logger;
+    private readonly EntityManagerInterface $em;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly PostAuthorFactory $postAuthorFactory;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

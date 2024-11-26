@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVotesResolver implements QueryInterface
 {
-    private VoteSearch $voteSearch;
+    private readonly VoteSearch $voteSearch;
 
     public function __construct(VoteSearch $voteSearch)
     {

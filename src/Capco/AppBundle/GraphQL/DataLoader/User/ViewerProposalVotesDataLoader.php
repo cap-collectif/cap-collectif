@@ -31,14 +31,14 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
 {
     public bool $enableBatch = true;
     public bool $useElasticsearch = true;
-    private AbstractStepRepository $abstractStepRepository;
-    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private GlobalIdResolver $globalIdResolver;
-    private ProposalStepVotesResolver $helper;
-    private AbstractVoteRepository $abstractVoteRepository;
-    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private readonly AbstractStepRepository $abstractStepRepository;
+    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly ProposalStepVotesResolver $helper;
+    private readonly AbstractVoteRepository $abstractVoteRepository;
+    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -69,7 +69,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
 
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

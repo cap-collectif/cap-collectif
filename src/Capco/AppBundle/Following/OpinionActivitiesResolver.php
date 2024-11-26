@@ -18,8 +18,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OpinionActivitiesResolver extends ActivitiesResolver
 {
-    public const NOT_FOLLOWED = 0;
-    public const ACTIVITIES = [
+    final public const NOT_FOLLOWED = 0;
+    final public const ACTIVITIES = [
         'isUpdated',
         'isTrashed',
         'argumentFor',

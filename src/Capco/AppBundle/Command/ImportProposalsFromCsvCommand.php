@@ -199,26 +199,26 @@ class ImportProposalsFromCsvCommand extends Command
 
                         return 1;
                     }
-                    if (!isset($this->newUsersMap[trim($row[$this->headers['author']])])) {
+                    if (!isset($this->newUsersMap[trim((string) $row[$this->headers['author']])])) {
                         $output->writeln(
                             '<info>Creating a new user with a fake email and username: ' .
                                 $row[$this->headers['author']] .
                                 '</info>'
                         );
                         $this->newUsersMap[
-                            trim($row[$this->headers['author']])
-                        ] = $this->createUserFromUsername(trim($row[$this->headers['author']]));
+                            trim((string) $row[$this->headers['author']])
+                        ] = $this->createUserFromUsername(trim((string) $row[$this->headers['author']]));
                     }
-                    $author = $this->newUsersMap[trim($row[$this->headers['author']])];
+                    $author = $this->newUsersMap[trim((string) $row[$this->headers['author']])];
                 }
 
                 $district = $this->districtRepository->findDistrictByName(
-                    trim($row[$this->headers['district_name']]),
+                    trim((string) $row[$this->headers['district_name']]),
                     $this->proposalForm
                 );
 
                 $status = $this->statusRepository->findOneBy([
-                    'name' => trim($row[$this->headers['collect_status']]),
+                    'name' => trim((string) $row[$this->headers['collect_status']]),
                     'step' => $this->proposalForm->getStep(),
                 ]);
 
@@ -242,7 +242,7 @@ class ImportProposalsFromCsvCommand extends Command
 
                 if ('' !== $row[$this->headers['category']]) {
                     $proposalCategory = $this->proposalCategoryRepository->findOneBy([
-                        'name' => trim($row[$this->headers['category']]),
+                        'name' => trim((string) $row[$this->headers['category']]),
                         'form' => $this->proposalForm,
                     ]);
                     $proposal->setCategory($proposalCategory);
@@ -252,7 +252,7 @@ class ImportProposalsFromCsvCommand extends Command
                     $proposal->setSummary(Text::escapeHtml($row[$this->headers['summary']]));
                 }
 
-                $proposal->setBody(nl2br($row[$this->headers['body']]));
+                $proposal->setBody(nl2br((string) $row[$this->headers['body']]));
 
                 if ($input->hasOption('illustrations')) {
                     try {

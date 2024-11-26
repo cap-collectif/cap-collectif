@@ -26,19 +26,19 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
-    public const CLOSED_DEBATE = 'CLOSED_DEBATE';
-    public const INVALID_HASH = 'INVALID_HASH';
-    public const NOT_VOTED = 'NOT_VOTED';
+    final public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
+    final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
+    final public const INVALID_HASH = 'INVALID_HASH';
+    final public const NOT_VOTED = 'NOT_VOTED';
 
-    private EntityManagerInterface $em;
-    private LoggerInterface $logger;
-    private ValidatorInterface $validator;
-    private Indexer $indexer;
-    private DebateAnonymousParticipationHashEncoder $encoder;
-    private DebateAnonymousVoteRepository $repository;
-    private DebateAnonymousArgumentRepository $argumentRepository;
-    private GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly LoggerInterface $logger;
+    private readonly ValidatorInterface $validator;
+    private readonly Indexer $indexer;
+    private readonly DebateAnonymousParticipationHashEncoder $encoder;
+    private readonly DebateAnonymousVoteRepository $repository;
+    private readonly DebateAnonymousArgumentRepository $argumentRepository;
+    private readonly GlobalIdResolver $globalIdResolver;
 
     public function __construct(
         EntityManagerInterface $em,

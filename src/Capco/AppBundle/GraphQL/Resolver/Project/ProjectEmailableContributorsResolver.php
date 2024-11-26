@@ -116,7 +116,7 @@ class ProjectEmailableContributorsResolver implements QueryInterface
         self::SQL_ANONYMOUS_DEBATE_ARGUMENT .
         ')';
 
-    private EntityManagerInterface $em;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {

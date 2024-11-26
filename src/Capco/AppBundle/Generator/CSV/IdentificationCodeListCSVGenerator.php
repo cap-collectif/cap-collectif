@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Response;
 
 class IdentificationCodeListCSVGenerator extends AbstractCSVResponseGenerator
 {
-    public const HEADERS = [
+    final public const HEADERS = [
         'title',
         'firstname',
         'lastname',

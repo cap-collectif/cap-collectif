@@ -11,7 +11,7 @@ use Psr\Log\LoggerInterface;
 class OpenIDExtraMapper
 {
     private $extraMapper;
-    private LoggerInterface $logger;
+    private readonly LoggerInterface $logger;
 
     public function __construct(string $instanceName, LoggerInterface $logger)
     {

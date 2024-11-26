@@ -15,14 +15,14 @@ class CheckIdentificationCodeMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const VIEWER_ALREADY_HAS_A_CODE = 'VIEWER_ALREADY_HAS_A_CODE';
-    public const CODE_MINIMAL_LENGTH = 8;
-    public const RATE_LIMITER_ACTION = 'CheckIdentificationCode';
-    public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
+    final public const VIEWER_ALREADY_HAS_A_CODE = 'VIEWER_ALREADY_HAS_A_CODE';
+    final public const CODE_MINIMAL_LENGTH = 8;
+    final public const RATE_LIMITER_ACTION = 'CheckIdentificationCode';
+    final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
     protected LoggerInterface $logger;
-    private ValidatorInterface $validator;
-    private RateLimiter $rateLimiter;
+    private readonly ValidatorInterface $validator;
+    private readonly RateLimiter $rateLimiter;
 
     public function __construct(
         LoggerInterface $logger,
@@ -45,7 +45,7 @@ class CheckIdentificationCodeMutation implements MutationInterface
                 'errorCode' => self::VIEWER_ALREADY_HAS_A_CODE,
             ];
         }
-        if (\strlen($arguments['identificationCode']) < self::CODE_MINIMAL_LENGTH) {
+        if (\strlen((string) $arguments['identificationCode']) < self::CODE_MINIMAL_LENGTH) {
             return [
                 'user' => $user,
                 'errorCode' => CheckIdentificationCode::BAD_CODE,
@@ -61,7 +61,7 @@ class CheckIdentificationCodeMutation implements MutationInterface
 
         // My form validation mus be wrong because, $form->getErrors() returns an empty array when I should have an error. So I do it this way
         $violationList = $this->validator->validate(
-            strtoupper($arguments['identificationCode']),
+            strtoupper((string) $arguments['identificationCode']),
             new CheckIdentificationCode()
         );
         if ($violationList->count()) {

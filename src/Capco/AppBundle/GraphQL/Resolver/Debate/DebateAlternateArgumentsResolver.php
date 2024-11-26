@@ -14,10 +14,10 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class DebateAlternateArgumentsResolver implements QueryInterface
 {
-    public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
-    public const ORDER_VOTE_COUNT = 'VOTE_COUNT';
+    final public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
+    final public const ORDER_VOTE_COUNT = 'VOTE_COUNT';
 
-    private DebateSearch $debateSearch;
+    private readonly DebateSearch $debateSearch;
 
     public function __construct(DebateSearch $debateSearch)
     {

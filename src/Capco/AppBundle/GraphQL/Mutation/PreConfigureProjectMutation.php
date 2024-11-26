@@ -26,19 +26,19 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class PreConfigureProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister;
-    private PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister;
-    private PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister;
+    private readonly PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister;
+    private readonly PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister;
+    private readonly PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister;
 
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $em;
-    private PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister;
-    private DeleteQuestionnaireMutation $deleteQuestionnaireMutation;
-    private DeleteProposalFormMutation $deleteProposalFormMutation;
-    private DeleteProjectMutation $deleteProjectMutation;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private ProjectTypeRepository $projectTypeRepository;
-    private Indexer $indexer;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister;
+    private readonly DeleteQuestionnaireMutation $deleteQuestionnaireMutation;
+    private readonly DeleteProposalFormMutation $deleteProposalFormMutation;
+    private readonly DeleteProjectMutation $deleteProjectMutation;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly ProjectTypeRepository $projectTypeRepository;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $em,

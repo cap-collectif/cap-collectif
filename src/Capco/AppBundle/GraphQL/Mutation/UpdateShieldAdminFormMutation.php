@@ -21,17 +21,17 @@ class UpdateShieldAdminFormMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const SHIELD_MODE_TOGGLE_KEY = 'shield_mode';
-    public const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
-    public const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
+    final public const SHIELD_MODE_TOGGLE_KEY = 'shield_mode';
+    final public const SHIELD_INTRODUCTION_PARAMETER_KEY = 'shield.introduction';
+    final public const SHIELD_IMAGE_PARAMETER_KEY = 'image.shield';
 
-    private SiteImageRepository $siteImageRepository;
-    private MediaRepository $mediaRepository;
-    private EntityManagerInterface $em;
-    private Manager $toggleManager;
-    private SiteParameterRepository $siteParameterRepository;
-    private RedisCache $cache;
-    private UpdateSiteParameterMutation $updateSiteParameterMutation;
+    private readonly SiteImageRepository $siteImageRepository;
+    private readonly MediaRepository $mediaRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly Manager $toggleManager;
+    private readonly SiteParameterRepository $siteParameterRepository;
+    private readonly RedisCache $cache;
+    private readonly UpdateSiteParameterMutation $updateSiteParameterMutation;
 
     public function __construct(
         RedisCache $cache,

@@ -19,7 +19,7 @@ final class OrganizationMemberNotifier extends BaseNotifier
     protected Publisher $publisher;
     protected EntityManagerInterface $entityManager;
     protected LoggerInterface $logger;
-    private UrlResolver $urlResolver;
+    private readonly UrlResolver $urlResolver;
 
     public function __construct(
         MailerService $mailer,

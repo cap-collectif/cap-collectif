@@ -11,7 +11,7 @@ class SiteSettingsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private SiteSettingsRepository $repository;
+    private readonly SiteSettingsRepository $repository;
 
     public function __construct(SiteSettingsRepository $repository)
     {

@@ -57,7 +57,7 @@ class EnvHelper
     private static function startsWith(string $haystack, $needles): bool
     {
         foreach ((array) $needles as $needle) {
-            if ('' !== $needle && substr($haystack, 0, \strlen($needle)) === (string) $needle) {
+            if ('' !== $needle && substr($haystack, 0, \strlen((string) $needle)) === (string) $needle) {
                 return true;
             }
         }
@@ -73,7 +73,7 @@ class EnvHelper
     private static function endsWith(string $haystack, $needles): bool
     {
         foreach ((array) $needles as $needle) {
-            if (substr($haystack, -\strlen($needle)) === (string) $needle) {
+            if (substr($haystack, -\strlen((string) $needle)) === (string) $needle) {
                 return true;
             }
         }

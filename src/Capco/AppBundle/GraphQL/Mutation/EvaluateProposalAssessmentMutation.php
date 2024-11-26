@@ -26,11 +26,11 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private ProposalRepository $proposalRepository;
-    private AuthorizationCheckerInterface $authorizationChecker;
-    private EntityManagerInterface $entityManager;
-    private LoggerInterface $logger;
-    private Publisher $publisher;
+    private readonly ProposalRepository $proposalRepository;
+    private readonly AuthorizationCheckerInterface $authorizationChecker;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly LoggerInterface $logger;
+    private readonly Publisher $publisher;
 
     public function __construct(
         ProposalRepository $proposalRepository,

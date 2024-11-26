@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Helper;
 
 class GraphqlQueryAndCsvHeaderHelper
 {
-    public const CONTRIBUTOR_FRAGMENT = '
+    final public const CONTRIBUTOR_FRAGMENT = '
         id
         email
         lastname
@@ -19,7 +19,7 @@ class GraphqlQueryAndCsvHeaderHelper
         createdAt
     ';
 
-    public const USER_FRAGMENT = '
+    final public const USER_FRAGMENT = '
     username
     userType {
       name
@@ -41,7 +41,7 @@ class GraphqlQueryAndCsvHeaderHelper
     isFranceConnectAccount
 ';
 
-    public const USER_HEADERS = [
+    final public const USER_HEADERS = [
         'user_id',
         'user_email',
         'user_userName',
@@ -70,7 +70,7 @@ class GraphqlQueryAndCsvHeaderHelper
         'userIdentificationCode',
     ];
 
-    public const USER_HEADERS_EVENTS = [
+    final public const USER_HEADERS_EVENTS = [
         'user_id',
         'user_email',
         'user_userName',
@@ -97,13 +97,13 @@ class GraphqlQueryAndCsvHeaderHelper
         'user_profileUrl',
     ];
 
-    public const USER_TYPE_INFOS_FRAGMENT = <<<'EOF'
+    final public const USER_TYPE_INFOS_FRAGMENT = <<<'EOF'
         fragment userTypeInfos on UserType {
           id
           name
         }
         EOF;
-    public const AUTHOR_INFOS_FRAGMENT = <<<'EOF'
+    final public const AUTHOR_INFOS_FRAGMENT = <<<'EOF'
         fragment authorInfos on User {
           id
           username
@@ -116,7 +116,7 @@ class GraphqlQueryAndCsvHeaderHelper
         }
         EOF;
 
-    public const AUTHOR_INFOS_ANONYMOUS_FRAGMENT = <<<'EOF'
+    final public const AUTHOR_INFOS_ANONYMOUS_FRAGMENT = <<<'EOF'
         fragment authorInfos on User {
           id
           username

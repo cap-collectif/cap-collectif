@@ -11,8 +11,8 @@ use Psr\Container\ContainerInterface;
 
 class ProposalRevisionRevisedMessage extends AbstractExternalMessage
 {
-    public const SUBJECT = 'proposal_revision_updated.notification.subject';
-    public const TEMPLATE = '@CapcoMail/notifyProposalRevisionRevised.html.twig';
+    final public const SUBJECT = 'proposal_revision_updated.notification.subject';
+    final public const TEMPLATE = '@CapcoMail/notifyProposalRevisionRevised.html.twig';
 
     public static function getMySubjectVars(Proposal $proposal, array $params): array
     {

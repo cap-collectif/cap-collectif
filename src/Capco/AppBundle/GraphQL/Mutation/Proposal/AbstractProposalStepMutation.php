@@ -32,10 +32,10 @@ abstract class AbstractProposalStepMutation
     protected ?Project $project = null;
     protected ?AbstractStep $step = null;
     protected GlobalIdResolver $globalIdResolver;
-    private SelectionRepository $selectionRepository;
-    private ConnectionBuilder $connectionBuilder;
-    private Publisher $publisher;
-    private Indexer $indexer;
+    private readonly SelectionRepository $selectionRepository;
+    private readonly ConnectionBuilder $connectionBuilder;
+    private readonly Publisher $publisher;
+    private readonly Indexer $indexer;
 
     public function __construct(
         EntityManagerInterface $entityManager,

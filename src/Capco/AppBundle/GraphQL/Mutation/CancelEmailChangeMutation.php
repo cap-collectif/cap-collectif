@@ -10,7 +10,7 @@ class CancelEmailChangeMutation implements MutationInterface
 {
     use ResolverTrait;
 
-    private EntityManagerInterface $em;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(EntityManagerInterface $em)
     {

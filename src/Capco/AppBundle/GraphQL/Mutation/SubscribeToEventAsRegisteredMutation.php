@@ -18,10 +18,10 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class SubscribeToEventAsRegisteredMutation implements MutationInterface
 {
     use MutationTrait;
-    private GlobalIdResolver $globalIdResolver;
-    private EntityManagerInterface $entityManager;
-    private EventRegistrationRepository $eventRegistrationRepository;
-    private RequestGuesser $requestGuesser;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly EventRegistrationRepository $eventRegistrationRepository;
+    private readonly RequestGuesser $requestGuesser;
 
     public function __construct(
         EventRegistrationRepository $eventRegistrationRepository,

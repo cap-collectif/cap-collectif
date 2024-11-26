@@ -20,11 +20,11 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class StepVotesCountDataLoader extends BatchDataLoader
 {
-    private ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private VoteSearch $voteSearch;
-    private ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
+    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
+    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
+    private readonly VoteSearch $voteSearch;
+    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
+    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -48,7 +48,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
         $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
         $this->voteSearch = $voteSearch;
         parent::__construct(
-            [$this, 'all'],
+            $this->all(...),
             $promiseFactory,
             $logger,
             $cache,

@@ -21,9 +21,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ViewerNotApprovedByModeratorCommentsResolver implements QueryInterface
 {
-    private ProposalCommentRepository $proposalCommentRepository;
-    private EventCommentRepository $eventCommentRepository;
-    private PostCommentRepository $postCommentRepository;
+    private readonly ProposalCommentRepository $proposalCommentRepository;
+    private readonly EventCommentRepository $eventCommentRepository;
+    private readonly PostCommentRepository $postCommentRepository;
 
     public function __construct(
         ProposalCommentRepository $proposalCommentRepository,

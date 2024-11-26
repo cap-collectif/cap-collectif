@@ -6,10 +6,10 @@ use Symfony\Component\HttpFoundation\Response;
 
 abstract class AbstractCSVResponseGenerator
 {
-    public const FRENCH_SEPARATOR = ';';
-    public const COMMA_SEPARATOR = ',';
-    public const SPACE_SEPARATOR = ' ';
-    public const SEPARATORS = [
+    final public const FRENCH_SEPARATOR = ';';
+    final public const COMMA_SEPARATOR = ',';
+    final public const SPACE_SEPARATOR = ' ';
+    final public const SEPARATORS = [
         self::FRENCH_SEPARATOR,
         self::COMMA_SEPARATOR,
         self::SPACE_SEPARATOR,

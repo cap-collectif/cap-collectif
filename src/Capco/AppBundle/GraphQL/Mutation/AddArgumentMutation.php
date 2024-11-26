@@ -31,15 +31,15 @@ use Symfony\Component\Form\FormFactoryInterface;
 class AddArgumentMutation implements MutationInterface
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private OpinionRepository $opinionRepo;
-    private OpinionVersionRepository $versionRepo;
-    private FormFactoryInterface $formFactory;
-    private RedisStorageHelper $redisStorage;
-    private Publisher $publisher;
-    private ArgumentRepository $argumentRepo;
-    private LoggerInterface $logger;
-    private StepRequirementsResolver $stepRequirementsResolver;
+    private readonly EntityManagerInterface $em;
+    private readonly OpinionRepository $opinionRepo;
+    private readonly OpinionVersionRepository $versionRepo;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly RedisStorageHelper $redisStorage;
+    private readonly Publisher $publisher;
+    private readonly ArgumentRepository $argumentRepo;
+    private readonly LoggerInterface $logger;
+    private readonly StepRequirementsResolver $stepRequirementsResolver;
 
     public function __construct(
         EntityManagerInterface $em,

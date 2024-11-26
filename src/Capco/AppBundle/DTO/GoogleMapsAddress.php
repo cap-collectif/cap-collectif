@@ -42,7 +42,7 @@ class GoogleMapsAddress
 
                 return new self(
                     $response,
-                    explode('|', $address['geometry']['location_type']),
+                    explode('|', (string) $address['geometry']['location_type']),
                     (float) $address['geometry']['location']['lat'],
                     (float) $address['geometry']['location']['lng'],
                     $address['formatted_address'] ?? null

@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Mailer\Message;
 
 abstract class AbstractModeratorMessage extends AbstractAdminMessage
 {
-    public const FOOTER = 'notification.email.moderator_footer';
+    final public const FOOTER = 'notification.email.moderator_footer';
 
     protected $moderationLinks = [];
 

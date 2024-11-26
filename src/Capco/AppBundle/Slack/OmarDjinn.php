@@ -6,7 +6,7 @@ use Capco\AppBundle\Entity\EmailingCampaign;
 
 class OmarDjinn extends AbstractSlackMessager
 {
-    private ?string $hook;
+    private readonly ?string $hook;
 
     public function __construct(?string $hook)
     {

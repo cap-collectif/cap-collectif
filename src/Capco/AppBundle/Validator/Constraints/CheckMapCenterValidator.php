@@ -12,7 +12,7 @@ class CheckMapCenterValidator extends ConstraintValidator
         if (null === $string) {
             return;
         }
-        $decoded = json_decode($string, true);
+        $decoded = json_decode((string) $string, true);
         if (
             $decoded
             && isset($decoded[0])

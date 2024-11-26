@@ -29,13 +29,13 @@ use Symfony\Component\Routing\RouterInterface;
 class QuestionnaireReplyNotifier extends BaseNotifier
 {
     use FormatDateTrait;
-    public const QUESTIONNAIRE_REPLY_CREATE_STATE = 'create';
-    public const QUESTIONNAIRE_REPLY_UPDATE_STATE = 'update';
-    public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
+    final public const QUESTIONNAIRE_REPLY_CREATE_STATE = 'create';
+    final public const QUESTIONNAIRE_REPLY_UPDATE_STATE = 'update';
+    final public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
 
-    private LoggerInterface $logger;
-    private string $defaultLocale;
-    private QuestionnaireRepository $questionnaireRepository;
+    private readonly LoggerInterface $logger;
+    private readonly string $defaultLocale;
+    private readonly QuestionnaireRepository $questionnaireRepository;
 
     public function __construct(
         MailerService $mailer,

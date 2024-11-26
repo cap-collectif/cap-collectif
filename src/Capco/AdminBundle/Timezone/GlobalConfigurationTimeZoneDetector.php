@@ -16,6 +16,6 @@ class GlobalConfigurationTimeZoneDetector implements TimezoneDetectorInterface
 
     public function getTimezone(): string
     {
-        return explode(' ', $this->resolver->getValue('global.timezone'))[0];
+        return explode(' ', (string) $this->resolver->getValue('global.timezone'))[0];
     }
 }

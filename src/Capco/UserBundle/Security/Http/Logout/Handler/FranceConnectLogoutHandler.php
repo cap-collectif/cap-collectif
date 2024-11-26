@@ -12,10 +12,10 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class FranceConnectLogoutHandler implements LogoutHandlerInterface
 {
-    private Manager $toggleManager;
-    private ResourceOwnerInterface $resourceOwner;
-    private TokenStorageInterface $tokenStorage;
-    private RouterInterface $router;
+    private readonly Manager $toggleManager;
+    private readonly ResourceOwnerInterface $resourceOwner;
+    private readonly TokenStorageInterface $tokenStorage;
+    private readonly RouterInterface $router;
 
     public function __construct(
         Manager $toggleManager,

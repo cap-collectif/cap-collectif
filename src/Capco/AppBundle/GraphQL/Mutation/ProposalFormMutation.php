@@ -13,9 +13,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ProposalFormMutation
 {
     use MutationTrait;
-    private EntityManagerInterface $em;
-    private ProposalFormRepository $proposalFormRepository;
-    private QuestionnaireRepository $questionnaireRepository;
+    private readonly EntityManagerInterface $em;
+    private readonly ProposalFormRepository $proposalFormRepository;
+    private readonly QuestionnaireRepository $questionnaireRepository;
 
     public function __construct(
         EntityManagerInterface $em,

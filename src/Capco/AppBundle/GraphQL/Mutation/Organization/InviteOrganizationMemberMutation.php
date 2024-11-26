@@ -27,20 +27,20 @@ class InviteOrganizationMemberMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
-    public const USER_ALREADY_MEMBER = 'USER_ALREADY_MEMBER';
-    public const USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION = 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION';
-    public const USER_ALREADY_INVITED = 'USER_ALREADY_INVITED';
-    public const USER_NOT_ONLY_ROLE_USER = 'USER_NOT_ONLY_ROLE_USER';
-    private EntityManagerInterface $em;
-    private GlobalIdResolver $globalIdResolver;
-    private UserRepository $userRepository;
-    private PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
-    private TokenGeneratorInterface $tokenGenerator;
-    private TranslatorInterface $translator;
-    private SiteParameterResolver $siteParameter;
-    private Publisher $publisher;
-    private LoggerInterface $logger;
+    final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
+    final public const USER_ALREADY_MEMBER = 'USER_ALREADY_MEMBER';
+    final public const USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION = 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION';
+    final public const USER_ALREADY_INVITED = 'USER_ALREADY_INVITED';
+    final public const USER_NOT_ONLY_ROLE_USER = 'USER_NOT_ONLY_ROLE_USER';
+    private readonly EntityManagerInterface $em;
+    private readonly GlobalIdResolver $globalIdResolver;
+    private readonly UserRepository $userRepository;
+    private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
+    private readonly TokenGeneratorInterface $tokenGenerator;
+    private readonly TranslatorInterface $translator;
+    private readonly SiteParameterResolver $siteParameter;
+    private readonly Publisher $publisher;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         EntityManagerInterface $em,

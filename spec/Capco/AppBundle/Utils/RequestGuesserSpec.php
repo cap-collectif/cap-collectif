@@ -12,8 +12,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 class RequestGuesserSpec extends ObjectBehavior
 {
-    public const IP_TO_GUESS = '1.2.3.4';
-    public const UA_TO_GUESS = 'Google Chrome';
+    final public const IP_TO_GUESS = '1.2.3.4';
+    final public const UA_TO_GUESS = 'Google Chrome';
 
     public function let(RequestStack $requestStack)
     {

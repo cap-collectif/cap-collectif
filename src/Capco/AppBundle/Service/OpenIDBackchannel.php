@@ -14,13 +14,13 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class OpenIDBackchannel
 {
-    private UserRepository $userRepository;
-    private SessionWithJsonHandler $redisSessionHandler;
-    private string $backChannelSecret;
-    private string $env;
-    private EntityManagerInterface $entityManager;
-    private SerializerInterface $serializer;
-    private LoggerInterface $logger;
+    private readonly UserRepository $userRepository;
+    private readonly SessionWithJsonHandler $redisSessionHandler;
+    private readonly string $backChannelSecret;
+    private readonly string $env;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly SerializerInterface $serializer;
+    private readonly LoggerInterface $logger;
 
     public function __construct(
         UserRepository $userRepository,

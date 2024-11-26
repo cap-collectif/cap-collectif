@@ -10,7 +10,7 @@ use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 
 class OpenIDOptionsModifier implements OptionsModifierInterface
 {
-    public const REDIS_CACHE_KEY = 'SSOConfiguration';
+    final public const REDIS_CACHE_KEY = 'SSOConfiguration';
 
     protected Oauth2SSOConfigurationRepository $oauthSsoConfigurationRepository;
     protected RedisCache $redisCache;

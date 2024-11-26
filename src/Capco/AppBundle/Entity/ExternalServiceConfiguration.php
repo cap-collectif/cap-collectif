@@ -11,23 +11,23 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ExternalServiceConfiguration
 {
-    public const MAILER_MANDRILL = 'mandrill';
-    public const MAILER_MAILJET = 'mailjet';
-    public const TYPE_MAILER = 'mailer';
+    final public const MAILER_MANDRILL = 'mandrill';
+    final public const MAILER_MAILJET = 'mailjet';
+    final public const TYPE_MAILER = 'mailer';
 
-    public const TWILIO_VERIFY_SERVICE_SID = 'twilio_verify_service_sid';
-    public const TWILIO_VERIFY_SERVICE_NAME = 'twilio_verify_service_name';
-    public const TWILIO_SUBACCOUNT_SID = 'twilio_subaccount_sid';
-    public const TWILIO_SUBACCOUNT_AUTH_TOKEN = 'twilio_subaccount_auth_token';
+    final public const TWILIO_VERIFY_SERVICE_SID = 'twilio_verify_service_sid';
+    final public const TWILIO_VERIFY_SERVICE_NAME = 'twilio_verify_service_name';
+    final public const TWILIO_SUBACCOUNT_SID = 'twilio_subaccount_sid';
+    final public const TWILIO_SUBACCOUNT_AUTH_TOKEN = 'twilio_subaccount_auth_token';
 
-    public const TYPES = [
+    final public const TYPES = [
         self::TYPE_MAILER,
         self::TWILIO_VERIFY_SERVICE_SID,
         self::TWILIO_VERIFY_SERVICE_NAME,
         self::TWILIO_SUBACCOUNT_SID,
         self::TWILIO_SUBACCOUNT_AUTH_TOKEN,
     ];
-    public const AVAILABLE_VALUES = [
+    final public const AVAILABLE_VALUES = [
         self::TYPE_MAILER => [self::MAILER_MANDRILL, self::MAILER_MAILJET],
     ];
 

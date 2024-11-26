@@ -15,12 +15,12 @@ class DeleteSenderEmailDomainMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const NOT_FOUND = 'NOT_FOUND';
-    public const DOMAIN_USED = 'DOMAIN_USED';
+    final public const NOT_FOUND = 'NOT_FOUND';
+    final public const DOMAIN_USED = 'DOMAIN_USED';
 
-    private EntityManagerInterface $entityManager;
-    private SenderEmailDomainRepository $senderEmailDomainRepository;
-    private SenderEmailRepository $senderEmailRepository;
+    private readonly EntityManagerInterface $entityManager;
+    private readonly SenderEmailDomainRepository $senderEmailDomainRepository;
+    private readonly SenderEmailRepository $senderEmailRepository;
 
     public function __construct(
         EntityManagerInterface $entityManager,

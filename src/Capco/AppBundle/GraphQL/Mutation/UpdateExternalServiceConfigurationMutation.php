@@ -14,10 +14,10 @@ class UpdateExternalServiceConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public const INVALID_VALUE = 'INVALID_VALUE';
+    final public const INVALID_VALUE = 'INVALID_VALUE';
 
-    private ExternalServiceConfigurationRepository $repository;
-    private EntityManagerInterface $em;
+    private readonly ExternalServiceConfigurationRepository $repository;
+    private readonly EntityManagerInterface $em;
 
     public function __construct(
         ExternalServiceConfigurationRepository $repository,

@@ -4,14 +4,14 @@ namespace Capco\AppBundle\Enum;
 
 class ProposalStatementErrorCode implements EnumType
 {
-    public const NON_EXISTING_PROPOSAL = 'NON_EXISTING_PROPOSAL';
-    public const NOT_ASSIGNED_PROPOSAL = 'NOT_ASSIGNED_PROPOSAL';
-    public const DECISION_ALREADY_GIVEN = 'DECISION_ALREADY_GIVEN';
-    public const NON_EXISTING_ASSESSMENT = 'NON_EXISTING_ASSESSMENT';
-    public const NON_EXISTING_ANALYSIS = 'NON_EXISTING_ANALYSIS';
-    public const INTERNAL_ERROR = 'INTERNAL_ERROR';
-    public const REFUSED_REASON_EMPTY = 'REFUSED_REASON_EMPTY';
-    public const INVALID_FORM = 'INVALID_FORM';
+    final public const NON_EXISTING_PROPOSAL = 'NON_EXISTING_PROPOSAL';
+    final public const NOT_ASSIGNED_PROPOSAL = 'NOT_ASSIGNED_PROPOSAL';
+    final public const DECISION_ALREADY_GIVEN = 'DECISION_ALREADY_GIVEN';
+    final public const NON_EXISTING_ASSESSMENT = 'NON_EXISTING_ASSESSMENT';
+    final public const NON_EXISTING_ANALYSIS = 'NON_EXISTING_ANALYSIS';
+    final public const INTERNAL_ERROR = 'INTERNAL_ERROR';
+    final public const REFUSED_REASON_EMPTY = 'REFUSED_REASON_EMPTY';
+    final public const INVALID_FORM = 'INVALID_FORM';
 
     public static function isValid($value): bool
     {

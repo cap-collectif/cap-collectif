@@ -18,17 +18,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserAnonymizer
 {
-    public const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
+    final public const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
 
-    private EntityManagerInterface $em;
-    private UserGroupRepository $groupRepository;
-    private NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    private LoggerInterface $logger;
-    private ProposalAuthorDataLoader $proposalAuthorDataLoader;
-    private UserManager $userManager;
-    private MediaRepository $mediaRepository;
-    private MailingListRepository $mailingListRepository;
-    private TranslatorInterface $translator;
+    private readonly EntityManagerInterface $em;
+    private readonly UserGroupRepository $groupRepository;
+    private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
+    private readonly LoggerInterface $logger;
+    private readonly ProposalAuthorDataLoader $proposalAuthorDataLoader;
+    private readonly UserManager $userManager;
+    private readonly MediaRepository $mediaRepository;
+    private readonly MailingListRepository $mailingListRepository;
+    private readonly TranslatorInterface $translator;
 
     public function __construct(
         EntityManagerInterface $em,

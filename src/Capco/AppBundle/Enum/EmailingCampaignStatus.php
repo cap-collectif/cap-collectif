@@ -4,15 +4,15 @@ namespace Capco\AppBundle\Enum;
 
 class EmailingCampaignStatus
 {
-    public const DRAFT = 'DRAFT';
-    public const SENDING = 'SENDING';
-    public const SENT = 'SENT';
-    public const PLANNED = 'PLANNED';
-    public const ARCHIVED = 'ARCHIVED';
+    final public const DRAFT = 'DRAFT';
+    final public const SENDING = 'SENDING';
+    final public const SENT = 'SENT';
+    final public const PLANNED = 'PLANNED';
+    final public const ARCHIVED = 'ARCHIVED';
 
-    public const EDITABLE = [self::DRAFT, self::PLANNED];
+    final public const EDITABLE = [self::DRAFT, self::PLANNED];
 
-    public const ALL = [self::DRAFT, self::SENDING, self::SENT, self::PLANNED, self::ARCHIVED];
+    final public const ALL = [self::DRAFT, self::SENDING, self::SENT, self::PLANNED, self::ARCHIVED];
 
     public static function isValid(string $value): bool
     {

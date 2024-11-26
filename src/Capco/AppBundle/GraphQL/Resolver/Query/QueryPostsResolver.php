@@ -7,7 +7,7 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryPostsResolver implements QueryInterface
 {
-    private PostRepository $repository;
+    private readonly PostRepository $repository;
 
     public function __construct(PostRepository $repository)
     {

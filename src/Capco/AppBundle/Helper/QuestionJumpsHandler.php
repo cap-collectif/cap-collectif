@@ -27,16 +27,16 @@ class QuestionJumpsHandler
 {
     use QuestionPersisterTrait;
 
-    private QuestionChoiceRepository $questionChoiceRepository;
-    private AbstractQuestionRepository $questionRepository;
-    private FormFactoryInterface $formFactory;
-    private EntityManagerInterface $em;
-    private AbstractQuestionRepository $abstractQuestionRepo;
-    private QuestionnaireAbstractQuestionRepository $questionRepo;
-    private LoggerInterface $logger;
-    private ValidatorInterface $colorValidator;
-    private MultipleChoiceQuestionRepository $choiceQuestionRepository;
-    private Indexer $indexer;
+    private readonly QuestionChoiceRepository $questionChoiceRepository;
+    private readonly AbstractQuestionRepository $questionRepository;
+    private readonly FormFactoryInterface $formFactory;
+    private readonly EntityManagerInterface $em;
+    private readonly AbstractQuestionRepository $abstractQuestionRepo;
+    private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
+    private readonly LoggerInterface $logger;
+    private readonly ValidatorInterface $colorValidator;
+    private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
+    private readonly Indexer $indexer;
 
     public function __construct(
         QuestionChoiceRepository $questionChoiceRepository,

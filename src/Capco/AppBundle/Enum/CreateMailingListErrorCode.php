@@ -4,9 +4,9 @@ namespace Capco\AppBundle\Enum;
 
 class CreateMailingListErrorCode implements EnumType
 {
-    public const ID_NOT_FOUND_USER = 'ID_NOT_FOUND_USER';
-    public const ID_NOT_FOUND_PROJECT = 'ID_NOT_FOUND_PROJECT';
-    public const EMPTY_USERS = 'EMPTY_USERS';
+    final public const ID_NOT_FOUND_USER = 'ID_NOT_FOUND_USER';
+    final public const ID_NOT_FOUND_PROJECT = 'ID_NOT_FOUND_PROJECT';
+    final public const EMPTY_USERS = 'EMPTY_USERS';
 
     public static function isValid($value): bool
     {

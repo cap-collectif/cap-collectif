@@ -16,7 +16,7 @@ use Elastica\ResultSet;
 
 class ArgumentSearch extends Search
 {
-    private ArgumentRepository $argumentRepository;
+    private readonly ArgumentRepository $argumentRepository;
 
     public function __construct(Index $index, ArgumentRepository $argumentRepository)
     {
