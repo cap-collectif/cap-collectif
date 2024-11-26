@@ -1,143 +1,143 @@
 Capco\AppBundle\Entity\Media:
     #SiteImages
     Logo:
-        binaryContent: logo.png
+        binaryContentPath: logo.png
         name: Logo
         category: '@MediaCategory1'
     Header:
-        binaryContent: header_prod.jpg
+        binaryContentPath: header_prod.jpg
         name: Header
         category: '@MediaCategory1'
     picto:
-        binaryContent: picto.png
+        binaryContentPath: picto.png
         name: Picto
         category: '@MediaCategory1'
     # Social Network
     MediaFlickr:
-        binaryContent: social/flickr.png
+        binaryContentPath: social/flickr.png
         name: Flickr
         category: '@MediaCategory1'
     MediaFacebook:
-        binaryContent: social/facebook.png
+        binaryContentPath: social/facebook.png
         name: Facebook
         category: '@MediaCategory1'
     MediaGooglePlus:
-        binaryContent: social/google_plus.png
+        binaryContentPath: social/google_plus.png
         name: Google
         category: '@MediaCategory1'
     MediaLinkedIn:
-        binaryContent: social/linkedIn.png
+        binaryContentPath: social/linkedIn.png
         name: LinkedIn
         category: '@MediaCategory1'
     MediaRSS:
-        binaryContent: social/rss.png
+        binaryContentPath: social/rss.png
         name: RSS
         category: '@MediaCategory1'
     MediaX:
-        binaryContent: social/x.png
+        binaryContentPath: social/x.png
         name: X
         category: '@MediaCategory1'
     MediaYoutube:
-        binaryContent: social/youtube.png
+        binaryContentPath: social/youtube.png
         name: Youtube
         category: '@MediaCategory1'
     MediaCapcoSite:
-        binaryContent: social/capco.png
+        binaryContentPath: social/capco.png
         name: Capco
         category: '@MediaCategory1'
     MediaInstagram:
-        binaryContent: social/instagram.png
+        binaryContentPath: social/instagram.png
         name: Instagram
         category: '@MediaCategory1'
     MediaVotesBar:
-        binaryContent: votes_bar_image.png
+        binaryContentPath: votes_bar_image.png
         name: Image de la barre de votes
         category: '@MediaCategory1'
     # projects
     MediaProject1:
-        binaryContent: project-1.jpg
+        binaryContentPath: project-1.jpg
         name: Titre du média
         category: '@MediaCategory1'
     MediaProject2:
-        binaryContent: project-2.jpg
+        binaryContentPath: project-2.jpg
         name: Titre du média
         category: '@MediaCategory1'
     MediaProject3:
-        binaryContent: project-3.jpg
+        binaryContentPath: project-3.jpg
         name: Titre du média
         category: '@MediaCategory1'
     MediaAgriculture:
-        binaryContent: categoryImage/media-agriculture.svg
+        binaryContentPath: categoryImage/media-agriculture.svg
         name: Media Agriculture
         category: '@MediaCategory1'
         providerReference: providerReference30.svg
     MediaAttractivite:
-        binaryContent: categoryImage/media-attractivite.svg
+        binaryContentPath: categoryImage/media-attractivite.svg
         name: Media Attractivité
         category: '@MediaCategory1'
         providerReference: providerReference31.svg
     MediaPMR:
-        binaryContent: categoryImage/media-pmr.svg
+        binaryContentPath: categoryImage/media-pmr.svg
         name: Media PMR
         category: '@MediaCategory1'
         providerReference: providerReference32.svg
     MediaCulture:
-        binaryContent: categoryImage/media-culture.svg
+        binaryContentPath: categoryImage/media-culture.svg
         name: Media Culture
         category: '@MediaCategory1'
         providerReference: providerReference33.svg
     MediaEnvironnement:
-        binaryContent: categoryImage/media-environnement.svg
+        binaryContentPath: categoryImage/media-environnement.svg
         name: Media Environnement
         category: '@MediaCategory1'
         providerReference: providerReference34.svg
     MediaJeunesse:
-        binaryContent: categoryImage/media-jeunesse.svg
+        binaryContentPath: categoryImage/media-jeunesse.svg
         name: Media Jeunesse
         category: '@MediaCategory1'
         providerReference: providerReference35.svg
     MediaMobilite:
-        binaryContent: categoryImage/media-mobilite.svg
+        binaryContentPath: categoryImage/media-mobilite.svg
         name: Media Mobilité
         category: '@MediaCategory1'
         providerReference: providerReference36.svg
     MediaProprete:
-        binaryContent: categoryImage/media-proprete.svg
+        binaryContentPath: categoryImage/media-proprete.svg
         name: Media Propreté
         category: '@MediaCategory1'
         providerReference: providerReference37.svg
     MediaQualiteDeVie:
-        binaryContent: categoryImage/media-qualite-de-vie.svg
+        binaryContentPath: categoryImage/media-qualite-de-vie.svg
         name: Media Qualité De Vie
         category: '@MediaCategory1'
         providerReference: providerReference38.svg
     MediaSolidarite:
-        binaryContent: categoryImage/media-solidarite.svg
+        binaryContentPath: categoryImage/media-solidarite.svg
         name: MediaSolidarite
         category: '@MediaCategory1'
         providerReference: providerReference39.svg
     MediaSecurite:
-        binaryContent: categoryImage/media-securite.svg
+        binaryContentPath: categoryImage/media-securite.svg
         name: Media Securité
         category: '@MediaCategory1'
         providerReference: providerReference40.svg
     MediaScolarite:
-        binaryContent: categoryImage/media-scolarite.svg
+        binaryContentPath: categoryImage/media-scolarite.svg
         name: Media Scolarité
         category: '@MediaCategory1'
         providerReference: providerReference41.svg
     MediaSport:
-        binaryContent: categoryImage/media-sport.svg
+        binaryContentPath: categoryImage/media-sport.svg
         name: Media Sport
         category: '@MediaCategory1'
         providerReference: providerReference42.svg
     MediaSante:
-        binaryContent: categoryImage/media-sante.svg
+        binaryContentPath: categoryImage/media-sante.svg
         name: Media Santé
         category: '@MediaCategory1'
         providerReference: providerReference43.svg
     MediaUrbanisme:
-        binaryContent: categoryImage/media-urbanisme.svg
+        binaryContentPath: categoryImage/media-urbanisme.svg
         name: Media Urbanisme
         category: '@MediaCategory1'
         providerReference: providerReference44.svg
