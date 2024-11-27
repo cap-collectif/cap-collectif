@@ -114,6 +114,7 @@
             "prettier --parser yaml --write"
         ],
         "*.php": [
+            "./bin/rector process --config=rector.php",
             "./bin/php-cs-fixer fix --config=.php-cs-fixer.dist.php --verbose",
             "./pre-commit-phpstan.sh",
             "git add"
