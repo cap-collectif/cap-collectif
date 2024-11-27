@@ -85,7 +85,7 @@ Scenario: GraphQL admin plans a draft campaign
       "sendEmailingCampaign": {
         "error": null,
         "emailingCampaign": {
-          "sendAt": "2021-01-01 00:00:00",
+          "sendAt": @date@,
           "status": "PLANNED",
           "preview": @string@
         }
@@ -183,10 +183,10 @@ Scenario: GraphQL project owner tries to send other one campaign
   {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"sendEmailingCampaign":null}}
   """
 
-  @database
-  Scenario: Organization admin send a draft campaign
-    Given I am logged in to graphql as VMD
-    And I send a GraphQL POST request:
+@database
+Scenario: Organization admin send a draft campaign
+  Given I am logged in to graphql as VMD
+  And I send a GraphQL POST request:
   """
   {
     "query": "mutation ($input: SendEmailingCampaignInput!) {
@@ -204,7 +204,7 @@ Scenario: GraphQL project owner tries to send other one campaign
     }
   }
   """
-    Then the JSON response should match:
+  Then the JSON response should match:
   """
   {
     "data": {

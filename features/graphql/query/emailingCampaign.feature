@@ -52,7 +52,7 @@ Scenario: GraphQL client wants to get all campaigns
               "object": "Merci",
               "content": "<p>C'est gentil d'avoir participé.</p>",
               "unlayerConf": null,
-              "sendAt": "2021-01-01 00:00:00",
+              "sendAt": @date@,
               "status": "PLANNED",
               "mailingInternal": "CONFIRMED",
               "mailingList": null,
@@ -96,7 +96,7 @@ Scenario: GraphQL client wants to get planned campaigns
           {
             "node": {
               "name": "Campagne pour remercier les inscrits confirmés",
-              "sendAt": "2021-01-01 00:00:00",
+              "sendAt": @date@,
               "status": "PLANNED"
             }
           },
@@ -146,7 +146,7 @@ Scenario: GraphQL client wants to sort campaigns by sendDate
               {
                  "node":{
                     "name":"Campagne pour remercier les inscrits confirm\u00e9s",
-                    "sendAt":"2021-01-01 00:00:00"
+                    "sendAt": @date@
                  }
               },
               {

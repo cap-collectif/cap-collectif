@@ -31,7 +31,7 @@ Scenario: GraphQL admin cancel a planned campaign
       "cancelEmailingCampaign": {
         "error": null,
         "emailingCampaign": {
-          "sendAt": "2021-01-01 00:00:00",
+          "sendAt": @date@,
           "status": "DRAFT",
           "preview": @string@
         }
@@ -96,7 +96,6 @@ Scenario: GraphQL project owner wants to cancel another one campaign
   """
   {"errors":[{"message":"Access denied to this field.","@*@": "@*@"}],"data":{"cancelEmailingCampaign":null}}
   """
-
 
 @database
 Scenario: Organization admin cancel a planned campaign

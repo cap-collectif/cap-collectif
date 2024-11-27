@@ -19,7 +19,7 @@ Capco\AppBundle\Entity\EmailingCampaign:
         content: <stripslashes('\<p>\')>C'est gentil d'avoir participé.<stripslashes('\</p>\')>
         mailingList: null
         mailingInternal: 'CONFIRMED'
-        sendAt: <identity((new \DateTime('2021-01-01')))>
+        sendAt: <identity((new \DateTime('now'))->modify("+ 2 years"))>
         status: 'PLANNED'
     CampaignToCovidParticipants:
         id: CampaignToCovidParticipants
