@@ -18,6 +18,8 @@ return static function (RectorConfig $rectorConfig): void {
             'src/Capco/AppBundle/Enum/CreateEmailingCampaignErrorCode.php',
             'src/Capco/AppBundle/Mailer/Message/Debate/DebateLaunch.php',
             'src/Capco/AppBundle/Mailer/Message/Event/EventReviewApprovedMessage.php',
+            'src/Capco/AppBundle/Mailer/Message/AbstractAdminMessage.php',
+            'src/Capco/AppBundle/Following/ActivitiesResolver.php',
         ],
         FirstClassCallableRector::class => [
             'src/Capco/AppBundle/Sluggable/SluggableListener.php',
