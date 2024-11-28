@@ -14,7 +14,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       </p>
     </p>
     <div
-      className="sc-18a669e1-2 gKvhyH"
+      className="sc-18a669e1-2 fJVLTN"
       justifyContent="start"
     >
       <a
@@ -38,7 +38,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       </a>
     </div>
     <div
-      className="sc-18a669e1-1 flvQkF"
+      className="sc-18a669e1-1 bZGfTZ"
       justifyContent="start"
     >
       <a
@@ -57,7 +57,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-18a669e1-0 brWuRV"
+      className="sc-18a669e1-0 boISKr"
       type="openId"
     >
       <span
@@ -84,7 +84,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-18a669e1-0 cPzHJo"
+      className="sc-18a669e1-0 eYPxEi"
       type="cas"
     >
       <span
@@ -111,7 +111,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-18a669e1-0 uUroR"
+      className="sc-18a669e1-0 ebTWqz"
       type="saml"
     >
       <span
@@ -153,7 +153,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 csQxfk"
+      className="sc-18a669e1-0 eKCCQm"
       type="cas"
     >
       <span
@@ -191,7 +191,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 bddJyX"
+      className="sc-18a669e1-0 lljGXx"
       type="facebook"
     >
       <span
@@ -234,7 +234,7 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
       </p>
     </p>
     <div
-      className="sc-18a669e1-2 gKvhyH"
+      className="sc-18a669e1-2 fJVLTN"
       justifyContent="start"
     >
       <a
@@ -258,7 +258,7 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
       </a>
     </div>
     <div
-      className="sc-18a669e1-1 flvQkF"
+      className="sc-18a669e1-1 bZGfTZ"
       justifyContent="start"
     >
       <a
@@ -288,7 +288,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 idGaBR"
+      className="sc-18a669e1-0 VWkcL"
       type="openId"
     >
       <span
@@ -326,7 +326,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 dDsFsn"
+      className="sc-18a669e1-0 fQwRIx"
       type="saml"
     >
       <span
@@ -362,7 +362,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 bzrort"
+      className="sc-18a669e1-0 clDWvP"
       type="openId"
     >
       <span

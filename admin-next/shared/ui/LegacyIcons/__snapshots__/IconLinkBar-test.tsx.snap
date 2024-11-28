@@ -6,7 +6,7 @@ exports[`<IconLinkBar /> renders correctly 1`] = `
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-1bcb0ecb-0 fxSua"
+    className="sc-1bcb0ecb-0 bcWIho"
     color="black"
   >
     IconToRender
