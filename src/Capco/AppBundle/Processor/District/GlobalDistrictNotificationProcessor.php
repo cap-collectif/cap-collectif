@@ -28,7 +28,7 @@ class GlobalDistrictNotificationProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $project = $this->projectRepository->find($json['projectId']);
         if (!$project instanceof Project) {
             throw new \RuntimeException('Unable to find project with id : ' . $json['projectId']);

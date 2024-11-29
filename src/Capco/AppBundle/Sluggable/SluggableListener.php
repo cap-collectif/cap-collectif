@@ -389,8 +389,8 @@ class SluggableListener extends Base
                         break;
                 }
                 // cut slug if exceeded in length
-                if (isset($mapping['length']) && \strlen($slug) > $mapping['length']) {
-                    $slug = substr($slug, 0, $mapping['length']);
+                if (isset($mapping['length']) && \strlen((string) $slug) > $mapping['length']) {
+                    $slug = substr((string) $slug, 0, $mapping['length']);
                 }
                 if (isset($mapping['nullable']) && $mapping['nullable'] && '' === $slug) {
                     $slug = null;

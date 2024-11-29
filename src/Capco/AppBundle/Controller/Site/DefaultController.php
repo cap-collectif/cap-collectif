@@ -120,7 +120,7 @@ class DefaultController extends AbstractController
         }
 
         return [
-            'privacy' => html_entity_decode($policy),
+            'privacy' => html_entity_decode((string) $policy),
         ];
     }
 
@@ -143,7 +143,7 @@ class DefaultController extends AbstractController
         }
 
         return [
-            'legal' => html_entity_decode($legal),
+            'legal' => html_entity_decode((string) $legal),
         ];
     }
 

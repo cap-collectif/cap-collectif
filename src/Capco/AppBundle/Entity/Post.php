@@ -194,8 +194,8 @@ class Post implements CommentableInterface, IndexableInterface, Ownerable, Trans
         }
 
         $abstract =
-            \strlen($this->getBodyText($locale, $fallbackToDefault)) > 300
-                ? substr($this->getBodyText($locale, $fallbackToDefault), 0, 300) . ' [&hellip;]'
+            \strlen((string) $this->getBodyText($locale, $fallbackToDefault)) > 300
+                ? substr((string) $this->getBodyText($locale, $fallbackToDefault), 0, 300) . ' [&hellip;]'
                 : $this->getBodyText($locale, $fallbackToDefault);
 
         return Text::htmlToString($abstract);

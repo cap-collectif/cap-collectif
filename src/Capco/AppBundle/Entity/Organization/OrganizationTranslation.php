@@ -57,7 +57,7 @@ class OrganizationTranslation implements Translation
 
     public function getBodyExcerpt(int $nb = 100): string
     {
-        $excerpt = substr($this->body, 0, $nb);
+        $excerpt = substr((string) $this->body, 0, $nb);
         $excerpt .= '…';
 
         return $excerpt;

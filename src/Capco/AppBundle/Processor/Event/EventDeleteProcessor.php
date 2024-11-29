@@ -20,7 +20,7 @@ class EventDeleteProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $event = json_decode($message->getBody(), true);
+        $event = json_decode((string) $message->getBody(), true);
         $messages = $this->notifier->onDelete($event);
         $this->logger->info(__METHOD__ . ' : ' . var_export($messages, true));
         echo 'There are ' .

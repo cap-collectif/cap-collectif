@@ -9,7 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class PositionableController extends CRUDController
 {
-    private string $resolverName;
+    private readonly string $resolverName;
 
     public function __construct(
         string $resolverName,

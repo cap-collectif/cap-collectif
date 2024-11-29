@@ -53,6 +53,6 @@ class PostTranslation implements Translation
 
     public function getBody(): ?string
     {
-        return html_entity_decode($this->body, \ENT_QUOTES, 'UTF-8');
+        return html_entity_decode((string) $this->body, \ENT_QUOTES, 'UTF-8');
     }
 }

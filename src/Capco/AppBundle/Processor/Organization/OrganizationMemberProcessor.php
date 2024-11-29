@@ -23,7 +23,7 @@ class OrganizationMemberProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $invitation = $this->repository->find($json['id']);
 
         if (!$invitation instanceof PendingOrganizationInvitation) {

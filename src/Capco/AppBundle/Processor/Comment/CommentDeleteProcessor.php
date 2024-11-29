@@ -17,7 +17,7 @@ class CommentDeleteProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $comment = json_decode($message->getBody(), true);
+        $comment = json_decode((string) $message->getBody(), true);
         $this->notifier->onDelete($comment);
 
         return true;

@@ -46,9 +46,9 @@ class CheckCustomDomainValidator extends ConstraintValidator
         $cname = $this->getProcessOutput("dig -t cname {$customDomain} +short");
         $ipAddress = $this->getProcessOutput("dig -t a {$customDomain} +short");
 
-        $isCnameValid = str_contains($cname, 'proxy-fallback.cap-collectif.com.');
+        $isCnameValid = str_contains((string) $cname, 'proxy-fallback.cap-collectif.com.');
         $isIpAddressValid =
-            str_contains($ipAddress, '104.17.4.91') || str_contains($ipAddress, '104.17.3.91');
+            str_contains((string) $ipAddress, '104.17.4.91') || str_contains((string) $ipAddress, '104.17.3.91');
 
         return $isCnameValid || $isIpAddressValid;
     }

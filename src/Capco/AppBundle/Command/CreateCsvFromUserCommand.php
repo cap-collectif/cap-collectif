@@ -180,7 +180,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
 
     public function getNodeContent($content, ?string $columnName, string $closestPath = ''): array
     {
-        $keys = explode('_', $columnName, 2);
+        $keys = explode('_', (string) $columnName, 2);
         if (\count($keys) < 2) {
             $contentKey = null;
             if (isset($content[$keys[0]])) {

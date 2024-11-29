@@ -36,7 +36,7 @@ class GenerateMapProviderPublicToken extends Command
      * "tokens:read", "tokens:write" scopes.
      */
     private readonly string $mapboxSecretKey;
-    private string $instanceName;
+    private readonly string $instanceName;
 
     public function __construct(
         string $mapboxSecretKey,

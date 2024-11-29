@@ -22,7 +22,7 @@ class OpinionTrashProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $opinion = $this->opinionRepository->find($json['opinionId']);
         if (!$opinion) {
             throw new \RuntimeException('Unable to find opinion with id : ' . $json['opinionId']);

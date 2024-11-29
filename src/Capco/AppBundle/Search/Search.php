@@ -42,7 +42,7 @@ abstract class Search
     {
         if ($viewer instanceof User) {
             // sprintf with %u is here in order to avoid negative int.
-            return sprintf('%u', crc32($viewer->getId()));
+            return sprintf('%u', crc32((string) $viewer->getId()));
         }
 
         if ($requestStack && $requestStack->getCurrentRequest()) {

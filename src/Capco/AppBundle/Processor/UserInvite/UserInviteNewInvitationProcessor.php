@@ -24,7 +24,7 @@ class UserInviteNewInvitationProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $id = $json['id'];
         $userInviteEmailMessage = $this->emailMessageRepository->find($id);
         if (!$userInviteEmailMessage instanceof UserInviteEmailMessage) {

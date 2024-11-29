@@ -26,7 +26,7 @@ class DebateArticleCrawlerProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $article = $this->repository->find($json['id']);
         if (!$article) {
             throw new \RuntimeException('Unable to find article with id : ' . $json['id']);

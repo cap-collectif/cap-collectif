@@ -333,7 +333,7 @@ class GraphQLContext implements Context
 
         try {
             $response = $this->client->request($method, $endpoint, [
-                'json' => json_decode($string, true),
+                'json' => json_decode((string) $string, true),
                 'headers' => $headers,
             ]);
 

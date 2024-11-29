@@ -20,7 +20,7 @@ class ArgumentCreateProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $id = $json['argumentId'];
         $argument = $this->repository->find($id);
         if (!$argument) {

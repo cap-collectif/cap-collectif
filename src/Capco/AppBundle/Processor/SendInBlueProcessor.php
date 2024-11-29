@@ -23,7 +23,7 @@ class SendInBlueProcessor implements ProcessorInterface
         if (!$this->toggle->isActive(Manager::api_sendinblue)) {
             return false;
         }
-        $data = json_decode($message->getBody(), true);
+        $data = json_decode((string) $message->getBody(), true);
         $method = $data['method'];
         if (\is_array($data['args'])) {
             // in PHP8, we can use assoc array, but in 7 we need array_values

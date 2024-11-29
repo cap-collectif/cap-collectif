@@ -121,7 +121,7 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
 
 		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:getPerPageOptions\\(\\) should return list\\<int\\> but returns non\\-empty\\-array\\<0\\|1\\|2\\|3\\|4\\|5, int\\>\\.$#"
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:getParentAssociationMapping\\(\\) never returns null so it can be removed from the return type\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
 
@@ -1136,7 +1136,7 @@ parameters:
 			path: src/Capco/AdminBundle/Controller/SettingsController.php
 
 		-
-			message: "#^Parameter \\#2 \\$callback of function array_filter expects callable\\(object\\)\\: mixed, Closure\\(Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\)\\: bool given\\.$#"
+			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(object\\)\\: bool\\)\\|null, Closure\\(Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/SettingsController.php
 
@@ -4442,31 +4442,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\CommandContext\\:\\:runCommandWithParameters\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$stream of class Symfony\\\\Component\\\\Console\\\\Output\\\\StreamOutput constructor expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$stream of function fclose expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$stream of function feof expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$stream of function fread expects resource, resource\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/CommandContext.php
-
-		-
-			message: "#^Parameter \\#1 \\$stream of function fseek expects resource, resource\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/CommandContext.php
 
@@ -11126,6 +11101,11 @@ parameters:
 			path: src/Capco/AppBundle/Command/CreateCsvFromLegacyUsersCommand.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromLegacyUsersCommand\\:\\:\\$customQuestions \\(array\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/CreateCsvFromLegacyUsersCommand.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromLegacyUsersCommand\\:\\:\\$customQuestions type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateCsvFromLegacyUsersCommand.php
@@ -11681,6 +11661,11 @@ parameters:
 			path: src/Capco/AppBundle/Command/DecodeGlobalIdCommand.php
 
 		-
+			message: "#^Return value of function var_export\\(\\) is always null and the result is printed instead of being returned\\. Pass in true as parameter \\#2 \\$return to return the output instead\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/DecodeGlobalIdCommand.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\DeleteUserArchiveCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/DeleteUserArchiveCommand.php
@@ -12027,6 +12012,11 @@ parameters:
 
 		-
 			message: "#^PHPDoc tag @return with type Exception\\|Symfony\\\\Component\\\\Filesystem\\\\Exception\\\\IOExceptionInterface is incompatible with native type void\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
+
+		-
+			message: "#^Parameter \\#1 \\$array \\(array\\{array\\}\\) of array_values is already a list, call has no effect\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ExportQuestionnaireContributionsCommand.php
 
@@ -13171,6 +13161,11 @@ parameters:
 			path: src/Capco/AppBundle/Command/Serializer/UserNormalizer.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\Service\\\\ContributionExporter\\:\\:\\$delimiter \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Service/ContributionExporter.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:exportParticipants\\(\\) has parameter \\$users with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
@@ -13189,6 +13184,16 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:writeFiles\\(\\) has parameter \\$users with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:\\$delimiter \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\Service\\\\UserExporter\\:\\:\\$delimiter \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Service/UserExporter.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\TranslateBasicParameters\\:\\:configure\\(\\) has no return type specified\\.$#"
@@ -14581,6 +14586,11 @@ parameters:
 			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchDoctrineListener.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Elasticsearch\\\\ElasticsearchHelper\\:\\:debugQuery\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchHelper.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Elasticsearch\\\\ElasticsearchHelper\\:\\:debugQuery\\(\\) should return string\\|null but returns string\\|false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchHelper.php
@@ -14766,7 +14776,7 @@ parameters:
 			path: src/Capco/AppBundle/Elasticsearch/IndexBuilder.php
 
 		-
-			message: "#^Parameter \\#2 \\$callback of function usort expects callable\\(array\\{date\\: bool\\|DateTime, name\\: string\\}, array\\{date\\: bool\\|DateTime, name\\: string\\}\\)\\: int, Closure\\(mixed, mixed\\)\\: bool given\\.$#"
+			message: "#^Parameter \\#2 \\$callback of function usort expects callable\\(array\\{date\\: DateTime\\|false, name\\: string\\}, array\\{date\\: DateTime\\|false, name\\: string\\}\\)\\: int, Closure\\(mixed, mixed\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Elasticsearch/IndexBuilder.php
 
@@ -16486,7 +16496,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/EmailingCampaign.php
 
 		-
-			message: "#^Argument of an invalid type Capco\\\\AppBundle\\\\Entity\\\\Event supplied for foreach, only iterables are supported\\.$#"
+			message: "#^Argument of an invalid type \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Event\\) supplied for foreach, only iterables are supported\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Event.php
 
@@ -25226,6 +25236,11 @@ parameters:
 			path: src/Capco/AppBundle/Font/FontProcessor.php
 
 		-
+			message: "#^Offset 'eot'\\|'otf'\\|'ttf'\\|'woff'\\|'woff2' on array\\{ttf\\: 'truetype', eot\\: 'eot', woff\\: 'woff', woff2\\: 'woff2', otf\\: 'truetype'\\} on left side of \\?\\? always exists and is not nullable\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Font/FontProcessor.php
+
+		-
 			message: "#^Parameter \\#1 \\$path of function pathinfo expects string, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Font/FontProcessor.php
@@ -25841,7 +25856,7 @@ parameters:
 			path: src/Capco/AppBundle/Form/Persister/EventDistrictsPersister.php
 
 		-
-			message: "#^Parameter \\#2 \\$callback of function array_filter expects callable\\(object\\)\\: mixed, Closure\\(Capco\\\\AppBundle\\\\Entity\\\\District\\\\EventDistrictPositioner\\)\\: bool given\\.$#"
+			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(object\\)\\: bool\\)\\|null, Closure\\(Capco\\\\AppBundle\\\\Entity\\\\District\\\\EventDistrictPositioner\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/Persister/EventDistrictsPersister.php
 
@@ -25861,7 +25876,7 @@ parameters:
 			path: src/Capco/AppBundle/Form/Persister/GlobalDistrictsPersister.php
 
 		-
-			message: "#^Parameter \\#2 \\$callback of function array_filter expects callable\\(object\\)\\: mixed, Closure\\(Capco\\\\AppBundle\\\\Entity\\\\District\\\\ProjectDistrictPositioner\\)\\: bool given\\.$#"
+			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(object\\)\\: bool\\)\\|null, Closure\\(Capco\\\\AppBundle\\\\Entity\\\\District\\\\ProjectDistrictPositioner\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/Persister/GlobalDistrictsPersister.php
 
@@ -26182,6 +26197,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ProjectAuthorTransformer\\:\\:transformUsers\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Form/ProjectAuthorTransformer.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Form\\\\ProjectAuthorTransformer\\:\\:\\$project \\(Capco\\\\AppBundle\\\\Entity\\\\Project\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/ProjectAuthorTransformer.php
 
@@ -27056,11 +27076,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/ConnectionTraversor.php
 
 		-
-			message: "#^Access to an uninitialized readonly property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\BatchDataLoader\\:\\:\\$collector\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/DataLoader/BatchDataLoader.php
-
-		-
 			message: "#^If condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/BatchDataLoader.php
@@ -27244,11 +27259,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\EntityRepositoryLinker\\:\\:\\$repository with generic class Doctrine\\\\ORM\\\\EntityRepository does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/EntityRepositoryLinker.php
-
-		-
-			message: "#^Access to an uninitialized readonly property Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\Project\\\\ProjectProposalsDataLoader\\:\\:\\$proposalSearch\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/DataLoader/Project/ProjectProposalsDataLoader.php
 
 		-
 			message: "#^Instanceof between Capco\\\\UserBundle\\\\Entity\\\\User and Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
@@ -28036,6 +28046,16 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
 
 		-
+			message: "#^Parameter \\#1 \\$startAt of method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AddEventsMutation\\:\\:validateDates\\(\\) expects string, array\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
+
+		-
+			message: "#^Parameter \\#2 \\$endAt of method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AddEventsMutation\\:\\:validateDates\\(\\) expects string\\|null, array\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
+
+		-
 			message: "#^Result of && is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
@@ -28654,6 +28674,11 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ChangeArgumentMutation\\:\\:\\$redisStorage is never read, only written\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeArgumentMutation.php
+
+		-
+			message: "#^Cannot unset offset 'projects' on array\\{districts\\?\\: array\\<int\\>\\}\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeEventMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ChangeEventMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -32811,11 +32836,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Contribution/ConsultationTypeResolver.php
 
 		-
-			message: "#^Instanceof between Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousVote and Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousVote will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Debate/AbstractDebateVoteTypeResolver.php
-
-		-
 			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Debate/AbstractDebateVoteTypeResolver.php
@@ -33454,6 +33474,11 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Media\\\\MediaUrlResolver\\:\\:__invoke\\(\\) has parameter \\$context with generic class ArrayObject but does not specify its types\\: TKey, TValue$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Media/MediaUrlResolver.php
+
+		-
+			message: "#^Parameter \\#2 \\$callback of function array_filter expects \\(callable\\(Capco\\\\AppBundle\\\\Entity\\\\MenuItem\\)\\: bool\\)\\|null, Closure\\(mixed\\)\\: \\(string\\|null\\) given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/MenuItemsResolver.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Opinion\\\\OpinionFollowersConnection\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\ConnectionInterface\\|null but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\|null\\.$#"
@@ -34741,11 +34766,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Query/QueryCategoryImagesResolver.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\QueryContributionsResolver\\:\\:__invoke\\(\\) should return int but returns float\\|int\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Query/QueryContributionsResolver.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\QueryContributionsResolver\\:\\:\\$projectContributionResolver has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Query/QueryContributionsResolver.php
@@ -35587,11 +35607,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Reportable\\\\ReportableReportingResolver\\:\\:getTypeOfContribution\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Reportable/ReportableReportingResolver.php
-
-		-
-			message: "#^Parameter \\#1 \\$array of function extract is passed by reference, so it expects variables only\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Reportable/ReportableReportingResolver.php
 
@@ -37501,6 +37516,16 @@ parameters:
 			path: src/Capco/AppBundle/Helper/QuestionJumpsHandler.php
 
 		-
+			message: "#^Parameter \\#1 \\$questions of method Capco\\\\AppBundle\\\\Helper\\\\QuestionJumpsHandler\\:\\:hasJumps\\(\\) expects array, string given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Helper/QuestionJumpsHandler.php
+
+		-
+			message: "#^Parameter \\#1 \\$questions of method Capco\\\\AppBundle\\\\Helper\\\\QuestionJumpsHandler\\:\\:parseTemporaryId\\(\\) expects array, string given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Helper/QuestionJumpsHandler.php
+
+		-
 			message: "#^Parameter \\#2 \\$callback of function usort expects callable\\(mixed, mixed\\)\\: int, Closure\\(mixed, mixed\\)\\: bool given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Helper/QuestionJumpsHandler.php
@@ -37711,6 +37736,16 @@ parameters:
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$delimiter \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$filePath \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$headers type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
@@ -37722,6 +37757,16 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$mandatoryMissing type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$projectDir \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
+
+		-
+			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$proposalForm \\(Capco\\\\AppBundle\\\\Entity\\\\ProposalForm\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 
@@ -40986,6 +41031,11 @@ parameters:
 			path: src/Capco/AppBundle/Normalizer/UserNormalizer.php
 
 		-
+			message: "#^Parameter \\#2 \\$data of method Capco\\\\AppBundle\\\\Normalizer\\\\UserNormalizer\\:\\:addAggregateCounter\\(\\) expects array, array\\|ArrayObject\\<\\(int\\|string\\), mixed\\>\\|bool\\|float\\|int\\|string\\|null given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Normalizer/UserNormalizer.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Normalizer\\\\UserNormalizer\\:\\:\\$_allProjects has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Normalizer/UserNormalizer.php
@@ -41956,6 +42006,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/AbstractLogicJumpConditionRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractLogicJumpConditionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractLogicJumpConditionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractLogicJumpConditionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractLogicJumpConditionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractLogicJumpConditionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractLogicJumpConditionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractLogicJumpConditionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractLogicJumpConditionRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractNotificationRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/AbstractNotificationRepository.php
@@ -42027,6 +42097,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractSSOConfigurationRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AbstractSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/AbstractSSOConfigurationRepository.php
 
@@ -42181,6 +42271,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ActionTokenRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ActionTokenRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ActionTokenRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ActionTokenRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ActionTokenRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ActionTokenRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ActionTokenRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ActionTokenRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ActionTokenRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnalysisConfigurationProcessRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/AnalysisConfigurationProcessRepository.php
@@ -42191,12 +42301,52 @@ parameters:
 			path: src/Capco/AppBundle/Repository/AnalysisConfigurationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnalysisConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnalysisConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnalysisConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnalysisConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnalysisConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnalysisConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnalysisConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnalysisConfigurationRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\AnalysisConfigurationRepository\\:\\:findNotProcessedAnalysisConfiguration\\(\\) return type has no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/AnalysisConfigurationRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnonymousUserProposalSmsVoteRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnonymousUserProposalSmsVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnonymousUserProposalSmsVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnonymousUserProposalSmsVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnonymousUserProposalSmsVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnonymousUserProposalSmsVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnonymousUserProposalSmsVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/AnonymousUserProposalSmsVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AnonymousUserProposalSmsVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/AnonymousUserProposalSmsVoteRepository.php
 
@@ -42331,6 +42481,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/CASSSOConfigurationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\CASSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/CASSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\CASSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/CASSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\CASSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/CASSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\CASSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/CASSSOConfigurationRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\CategoryImageRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/CategoryImageRepository.php
@@ -42456,6 +42626,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ConsultationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ConsultationRepository\\:\\:countByOwner\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ConsultationRepository.php
@@ -42499,6 +42689,26 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ConsultationRepository\\:\\:searchByTerm\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ConsultationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ConsultationStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ConsultationStepRepository.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ConsultationStepRepository\\:\\:findByOrganization\\(\\) has no return type specified\\.$#"
@@ -42546,6 +42756,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ContactFormTranslationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ContactFormTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ContactFormTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ContactFormTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ContactFormTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ContactFormTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ContactFormTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ContactFormTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ContactFormTranslationRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentRepository.php
@@ -42576,6 +42806,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentVoteRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentVoteRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousArgumentVoteRepository\\:\\:getByDebateArgument\\(\\) has parameter \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousArgumentVoteRepository.php
@@ -42587,6 +42837,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousVoteRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateAnonymousVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Debate/DebateAnonymousVoteRepository.php
 
@@ -42606,6 +42876,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Debate/DebateArgumentVoteRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArgumentVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArgumentVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArgumentVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArgumentVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArgumentVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArgumentVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArgumentVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArgumentVoteRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArgumentVoteRepository\\:\\:getByDebateArgument\\(\\) has parameter \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Debate/DebateArgumentVoteRepository.php
@@ -42621,6 +42911,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Debate/DebateArticleRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArticleRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArticleRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArticleRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArticleRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArticleRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArticleRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArticleRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateArticleRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateArticleRepository\\:\\:getByDebate\\(\\) return type with generic class Doctrine\\\\ORM\\\\Tools\\\\Pagination\\\\Paginator does not specify its types\\: T$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Debate/DebateArticleRepository.php
@@ -42631,7 +42941,47 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Debate/DebateVoteTokenRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateVoteTokenRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateVoteTokenRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateVoteTokenRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateVoteTokenRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateVoteTokenRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateVoteTokenRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Debate\\\\DebateVoteTokenRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Debate/DebateVoteTokenRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateArgumentRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateArgumentRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateArgumentRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateArgumentRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateArgumentRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/DebateArgumentRepository.php
 
@@ -42691,12 +43041,52 @@ parameters:
 			path: src/Capco/AppBundle/Repository/DebateOpinionRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateOpinionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateOpinionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateOpinionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateOpinionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateOpinionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateOpinionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateOpinionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateOpinionRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\DebateOpinionRepository\\:\\:getByDebate\\(\\) return type with generic class Doctrine\\\\ORM\\\\Tools\\\\Pagination\\\\Paginator does not specify its types\\: T$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/DebateOpinionRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/DebateRepository.php
 
@@ -42716,7 +43106,47 @@ parameters:
 			path: src/Capco/AppBundle/Repository/DebateRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateStepRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateVoteRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateVoteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DebateVoteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DebateVoteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/DebateVoteRepository.php
 
@@ -42771,12 +43201,52 @@ parameters:
 			path: src/Capco/AppBundle/Repository/DistrictTranslationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DistrictTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DistrictTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DistrictTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DistrictTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DistrictTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DistrictTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\DistrictTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/DistrictTranslationRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\EmailDomainRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/EmailDomainRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\EmailingCampaignRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/EmailingCampaignRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\EmailingCampaignRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/EmailingCampaignRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\EmailingCampaignRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/EmailingCampaignRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\EmailingCampaignRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/EmailingCampaignRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\EmailingCampaignRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/EmailingCampaignRepository.php
 
@@ -43011,12 +43481,52 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ExternalServiceConfigurationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ExternalServiceConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ExternalServiceConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ExternalServiceConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ExternalServiceConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ExternalServiceConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ExternalServiceConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ExternalServiceConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ExternalServiceConfigurationRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ExternalServiceConfigurationRepository\\:\\:findTwilioConfig\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ExternalServiceConfigurationRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FacebookSSOConfigurationRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FacebookSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FacebookSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FacebookSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FacebookSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FacebookSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FacebookSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FacebookSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FacebookSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/FacebookSSOConfigurationRepository.php
 
@@ -43091,6 +43601,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/FontRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FontRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FontRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FontRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FontRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FontRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FontRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FontRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FontRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\FontRepository\\:\\:findOneByUploadedFont\\(\\) has parameter \\$font with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/FontRepository.php
@@ -43112,6 +43642,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FranceConnectSSOConfigurationRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FranceConnectSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FranceConnectSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FranceConnectSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FranceConnectSSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FranceConnectSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FranceConnectSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/FranceConnectSSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\FranceConnectSSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/FranceConnectSSOConfigurationRepository.php
 
@@ -43211,12 +43761,52 @@ parameters:
 			path: src/Capco/AppBundle/Repository/LogicJumpRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogicJumpRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogicJumpRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogicJumpRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogicJumpRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogicJumpRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogicJumpRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogicJumpRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/LogicJumpRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\LogicJumpRepository\\:\\:findDestinationJumps\\(\\) return type has no value type specified in iterable type iterable\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/LogicJumpRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MailingListRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MailingListRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MailingListRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MailingListRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MailingListRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MailingListRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MailingListRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MailingListRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MailingListRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/MailingListRepository.php
 
@@ -43256,6 +43846,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/MediaQuestionRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediaRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediaRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediaRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediaRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediaRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediaRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediaRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediaRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediaResponseRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/MediaResponseRepository.php
@@ -43282,6 +43892,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediatorRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediatorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediatorRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediatorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediatorRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediatorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediatorRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MediatorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MediatorRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/MediatorRepository.php
 
@@ -43336,6 +43966,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/MultipleChoiceQuestionLogicJumpConditionRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MultipleChoiceQuestionLogicJumpConditionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MultipleChoiceQuestionLogicJumpConditionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MultipleChoiceQuestionLogicJumpConditionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MultipleChoiceQuestionLogicJumpConditionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MultipleChoiceQuestionLogicJumpConditionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MultipleChoiceQuestionLogicJumpConditionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MultipleChoiceQuestionLogicJumpConditionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/MultipleChoiceQuestionLogicJumpConditionRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\MultipleChoiceQuestionRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/MultipleChoiceQuestionRepository.php
@@ -43356,12 +44006,72 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Oauth2SSOConfigurationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Oauth2SSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Oauth2SSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Oauth2SSOConfigurationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Oauth2SSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Oauth2SSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Oauth2SSOConfigurationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Oauth2SSOConfigurationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Oauth2SSOConfigurationRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseAuthorRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/OfficialResponseAuthorRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseAuthorRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseAuthorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseAuthorRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseAuthorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseAuthorRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseAuthorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseAuthorRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseAuthorRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OfficialResponseRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OfficialResponseRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/OfficialResponseRepository.php
 
@@ -43507,6 +44217,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OpinionTypeRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OpinionTypeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OpinionTypeRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OpinionTypeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OpinionTypeRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OpinionTypeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OpinionTypeRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/OpinionTypeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\OpinionTypeRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/OpinionTypeRepository.php
 
@@ -43746,6 +44476,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Organization/OrganizationMemberRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationMemberRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationMemberRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationMemberRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationMemberRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationMemberRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationMemberRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationMemberRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationMemberRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationMemberRepository\\:\\:countByOrganization\\(\\) should return int but returns bool\\|float\\|int\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Organization/OrganizationMemberRepository.php
@@ -43757,6 +44507,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Organization/OrganizationRepository.php
 
@@ -43796,7 +44566,47 @@ parameters:
 			path: src/Capco/AppBundle/Repository/Organization/OrganizationTranslationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\OrganizationTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/OrganizationTranslationRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\PendingOrganizationInvitationRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/PendingOrganizationInvitationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\PendingOrganizationInvitationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/PendingOrganizationInvitationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\PendingOrganizationInvitationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/PendingOrganizationInvitationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\PendingOrganizationInvitationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Organization/PendingOrganizationInvitationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Organization\\\\PendingOrganizationInvitationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Organization/PendingOrganizationInvitationRepository.php
 
@@ -43832,6 +44642,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ParticipantRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ParticipantRepository.php
 
@@ -44039,6 +44869,26 @@ parameters:
 			message: "#^Parameter \\#1 \\$alias of method Doctrine\\\\ORM\\\\EntityRepository\\<object\\>\\:\\:createQueryBuilder\\(\\) expects literal\\-string, string given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/PostRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProjectAbstractStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProjectAbstractStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProjectAbstractStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProjectAbstractStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProjectAbstractStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProjectAbstractStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProjectAbstractStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProjectAbstractStepRepository.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProjectAbstractStepRepository\\:\\:createOrderedByCritera\\(\\) has parameter \\$orderings with no value type specified in iterable type array\\.$#"
@@ -44921,6 +45771,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ProposalRevisionRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalRevisionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalRevisionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalRevisionRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalRevisionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalRevisionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalRevisionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalRevisionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalRevisionRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalRevisionRepository\\:\\:findByStateAndExpireBefore\\(\\) return type with generic class Doctrine\\\\ORM\\\\Tools\\\\Pagination\\\\Paginator does not specify its types\\: T$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalRevisionRepository.php
@@ -45146,12 +46016,37 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ProposalStepPaperVoteCounterRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalStepPaperVoteCounterRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalStepPaperVoteCounterRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalStepPaperVoteCounterRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalStepPaperVoteCounterRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalStepPaperVoteCounterRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalStepPaperVoteCounterRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalStepPaperVoteCounterRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalStepPaperVoteCounterRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\ProposalStepPaperVoteCounterRepository\\:\\:countAll\\(\\) should return int but returns bool\\|float\\|int\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalStepPaperVoteCounterRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalSupervisorRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ProposalSupervisorRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProposalSupervisorRepository has PHPDoc tag @method for method findBySupervisor\\(\\) parameter \\#2 \\$array with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ProposalSupervisorRepository.php
 
@@ -45306,6 +46201,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/QuestionnaireRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\QuestionnaireStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/QuestionnaireStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\QuestionnaireStepRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/QuestionnaireStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\QuestionnaireStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/QuestionnaireStepRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\QuestionnaireStepRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/QuestionnaireStepRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\RankingStepRepository\\:\\:getOneBySlugAndProjectSlug\\(\\) should return Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\RankingStep\\|null but returns Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\|null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/RankingStepRepository.php
@@ -45317,6 +46232,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyAnonymousRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ReplyAnonymousRepository.php
 
@@ -45352,6 +46287,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ReplyRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ReplyRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/ReplyRepository.php
 
@@ -45511,6 +46466,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/RequirementRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionCarrouselElementRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionCarrouselElementRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionCarrouselElementRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionCarrouselElementRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionCarrouselElementRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionCarrouselElementRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionCarrouselElementRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionCarrouselElementRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SectionRepository.php
@@ -45521,12 +46496,72 @@ parameters:
 			path: src/Capco/AppBundle/Repository/SectionTranslationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SectionTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SectionTranslationRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeListRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeListRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeListRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeListRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeListRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeListRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeListRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeListRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeListRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeListRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\Security\\\\UserIdentificationCodeRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/Security/UserIdentificationCodeRepository.php
 
@@ -45581,7 +46616,37 @@ parameters:
 			path: src/Capco/AppBundle/Repository/SenderEmailRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SenderEmailRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SenderEmailRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SenderEmailRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SenderEmailRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SenderEmailRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SenderEmailRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SenderEmailRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SenderEmailRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SimpleQuestionRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SimpleQuestionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SimpleQuestionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SimpleQuestionRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SimpleQuestionRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SimpleQuestionRepository.php
 
@@ -45606,6 +46671,16 @@ parameters:
 			path: src/Capco/AppBundle/Repository/SiteImageRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteImageRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteImageRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteImageRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteImageRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\SiteImageRepository\\:\\:getValuesIfEnabled\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SiteImageRepository.php
@@ -45621,6 +46696,16 @@ parameters:
 			path: src/Capco/AppBundle/Repository/SiteParameterRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteParameterRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteParameterRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteParameterRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteParameterRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\SiteParameterRepository\\:\\:getValuesIfEnabled\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SiteParameterRepository.php
@@ -45631,7 +46716,47 @@ parameters:
 			path: src/Capco/AppBundle/Repository/SiteSettingsRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteSettingsRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteSettingsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteSettingsRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteSettingsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteSettingsRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteSettingsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SiteSettingsRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SiteSettingsRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsCreditRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsCreditRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsCreditRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsCreditRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsCreditRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsCreditRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsCreditRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsCreditRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsCreditRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SmsCreditRepository.php
 
@@ -45642,6 +46767,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsOrderRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsOrderRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsOrderRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsOrderRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsOrderRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsOrderRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsOrderRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsOrderRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsOrderRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SmsOrderRepository.php
 
@@ -45657,6 +46802,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsRemainingCreditEmailAlertRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsRemainingCreditEmailAlertRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsRemainingCreditEmailAlertRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsRemainingCreditEmailAlertRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsRemainingCreditEmailAlertRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsRemainingCreditEmailAlertRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsRemainingCreditEmailAlertRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/SmsRemainingCreditEmailAlertRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\SmsRemainingCreditEmailAlertRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/SmsRemainingCreditEmailAlertRepository.php
 
@@ -45851,6 +47016,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ThemeTranslationRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ThemeTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ThemeTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ThemeTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ThemeTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ThemeTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ThemeTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ThemeTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/ThemeTranslationRepository.php
+
+		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserArchiveRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/UserArchiveRepository.php
@@ -45906,6 +47091,26 @@ parameters:
 			path: src/Capco/AppBundle/Repository/UserInviteRepository.php
 
 		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserInviteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserInviteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserInviteRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserInviteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserInviteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserInviteRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserInviteRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserInviteRepository.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\UserInviteRepository\\:\\:findAllEmails\\(\\) should return array\\{string\\} but returns array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/UserInviteRepository.php
@@ -45947,6 +47152,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserPhoneVerificationSmsRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserPhoneVerificationSmsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserPhoneVerificationSmsRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserPhoneVerificationSmsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserPhoneVerificationSmsRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserPhoneVerificationSmsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserPhoneVerificationSmsRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Repository/UserPhoneVerificationSmsRepository.php
+
+		-
+			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\UserPhoneVerificationSmsRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/UserPhoneVerificationSmsRepository.php
 
@@ -47351,11 +48576,6 @@ parameters:
 			path: src/Capco/AppBundle/Search/PostSearch.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Search\\\\ProjectSearch\\:\\:getAllContributions\\(\\) should return int but returns float\\|int\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Search/ProjectSearch.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Search\\\\ProjectSearch\\:\\:getProjectSort\\(\\) has parameter \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Search/ProjectSearch.php
@@ -48021,21 +49241,6 @@ parameters:
 			path: src/Capco/AppBundle/Security/SettingsVoter.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Sentry\\\\SentryHandler\\:\\:write\\(\\) has parameter \\$record with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Sentry/SentryHandler.php
-
-		-
-			message: "#^Parameter \\#1 \\$record \\(array\\) of method Capco\\\\AppBundle\\\\Sentry\\\\SentryHandler\\:\\:write\\(\\) should be compatible with parameter \\$record \\(Monolog\\\\LogRecord\\) of method BGalati\\\\MonologSentryHandler\\\\SentryHandler\\:\\:write\\(\\)$#"
-			count: 1
-			path: src/Capco/AppBundle/Sentry/SentryHandler.php
-
-		-
-			message: "#^Parameter \\#1 \\$record of method BGalati\\\\MonologSentryHandler\\\\SentryHandler\\:\\:write\\(\\) expects Monolog\\\\LogRecord, array given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Sentry/SentryHandler.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Service\\\\AddStepService\\:\\:addStep\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Service/AddStepService.php
@@ -48081,7 +49286,17 @@ parameters:
 			path: src/Capco/AppBundle/Service/SmsAnalyticsHelper.php
 
 		-
+			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Service/SocialNetworksUrlSanitizer.php
+
+		-
 			message: "#^Parameter \\#1 \\$separator of function explode expects non\\-empty\\-string, string given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Service/SocialNetworksUrlSanitizer.php
+
+		-
+			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Service/SocialNetworksUrlSanitizer.php
 
@@ -48193,21 +49408,6 @@ parameters:
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Slack\\\\AbstractSlackMessager\\:\\:send\\(\\) has no return type specified\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
-
-		-
-			message: "#^Parameter \\#1 \\$handle of function curl_close expects CurlHandle, CurlHandle\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
-
-		-
-			message: "#^Parameter \\#1 \\$handle of function curl_exec expects CurlHandle, CurlHandle\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
-
-		-
-			message: "#^Parameter \\#1 \\$handle of function curl_setopt expects CurlHandle, CurlHandle\\|false given\\.$#"
-			count: 4
 			path: src/Capco/AppBundle/Slack/AbstractSlackMessager.php
 
 		-
@@ -49016,7 +50216,7 @@ parameters:
 			path: src/Capco/AppBundle/Twig/ParametersRuntime.php
 
 		-
-			message: "#^Strict comparison using \\!\\=\\= between '' and mixed will always evaluate to true\\.$#"
+			message: "#^Strict comparison using \\!\\=\\= between '' and mixed~\\(0\\|0\\.0\\|''\\|'0'\\|array\\{\\}\\|false\\|null\\) will always evaluate to true\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Twig/ParametersRuntime.php
 
@@ -51581,6 +52781,26 @@ parameters:
 			path: src/Capco/UserBundle/Repository/UserRepository.php
 
 		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserRepository.php
+
+		-
 			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserRepository\\:\\:countAllowedViewersForProject\\(\\) should return int but returns bool\\|float\\|int\\|string\\|null\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Repository/UserRepository.php
@@ -52016,6 +53236,26 @@ parameters:
 			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
 
 		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
+
+		-
 			message: "#^Method Capco\\\\UserBundle\\\\Repository\\\\UserTypeRepository\\:\\:findAllToArray\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Repository/UserTypeRepository.php
@@ -52032,6 +53272,26 @@ parameters:
 
 		-
 			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeTranslationRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeTranslationRepository has PHPDoc tag @method for method findBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#1 \\$criteria with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Repository/UserTypeTranslationRepository.php
+
+		-
+			message: "#^Class Capco\\\\UserBundle\\\\Repository\\\\UserTypeTranslationRepository has PHPDoc tag @method for method findOneBy\\(\\) parameter \\#2 \\$orderBy with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Repository/UserTypeTranslationRepository.php
 
@@ -52207,6 +53467,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Security\\\\SessionWithJsonHandler\\:\\:__construct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
+
+		-
+			message: "#^Offset 0 on non\\-empty\\-list\\<string\\> on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
 
@@ -53391,6 +54656,16 @@ parameters:
 			path: src/DoctrineMigrations/Version20200818134317.php
 
 		-
+			message: "#^Method Application\\\\Migrations\\\\Version20200820094734\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20200820094734.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20200820094734\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20200820094734.php
+
+		-
 			message: "#^Method Application\\\\Migrations\\\\Version20200821105044\\:\\:generateJSONFromCoordinates\\(\\) should return string but returns string\\|false\\.$#"
 			count: 1
 			path: src/DoctrineMigrations/Version20200821105044.php
@@ -53566,6 +54841,16 @@ parameters:
 			path: src/DoctrineMigrations/Version20210927143921.php
 
 		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211029114734\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211029114734.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211029114734\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211029114734.php
+
+		-
 			message: "#^Method Application\\\\Migrations\\\\Version20211116165925\\:\\:setContainer\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/DoctrineMigrations/Version20211116165925.php
@@ -53591,6 +54876,76 @@ parameters:
 			path: src/DoctrineMigrations/Version20211201175715.php
 
 		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228111043\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228111043.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228115215\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228115215.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228115216\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228115216.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228120954\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228120954.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228140436\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228140436.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228141907\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228141907.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228144641\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228144641.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228150301\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228150301.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228150301\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228150301.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228152915\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228152915.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228152915\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228152915.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228160504\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228160504.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228160504\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228160504.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20211228180708\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20211228180708.php
+
+		-
 			message: "#^Method Application\\\\Migrations\\\\Version20220125142127\\:\\:setContainer\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/DoctrineMigrations/Version20220125142127.php
@@ -53609,6 +54964,16 @@ parameters:
 			message: "#^Property Application\\\\Migrations\\\\Version20220125142127\\:\\:\\$manager is never read, only written\\.$#"
 			count: 1
 			path: src/DoctrineMigrations/Version20220125142127.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20220207103542\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20220207103542.php
+
+		-
+			message: "#^Method Application\\\\Migrations\\\\Version20220207103542\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
+			count: 1
+			path: src/DoctrineMigrations/Version20220207103542.php
 
 		-
 			message: "#^Method Application\\\\Migrations\\\\Version20220905103557\\:\\:setContainer\\(\\) has no return type specified\\.$#"

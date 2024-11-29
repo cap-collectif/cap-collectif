@@ -37,7 +37,7 @@ class ProposalAnalyseProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $jsonDecoded = json_decode($message->getBody(), true);
+        $jsonDecoded = json_decode((string) $message->getBody(), true);
 
         if (!$this->isValid($jsonDecoded)) {
             return false;

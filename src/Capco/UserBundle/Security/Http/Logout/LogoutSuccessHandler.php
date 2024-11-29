@@ -42,7 +42,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
         $theToken = $request->getSession()->get('theToken');
 
         $url = $request->headers->get('referer') ?? $this->router->generate('app_homepage');
-        if ('dev' === $this->kernel->getEnvironment() && str_contains($request->headers->get('referer'), 'https://capco.dev/admin-next/')) {
+        if ('dev' === $this->kernel->getEnvironment() && str_contains((string) $request->headers->get('referer'), 'https://capco.dev/admin-next/')) {
             $url = $this->router->generate('app_homepage');
         }
         self::setOauthTokenFromSession($currentToken, $theToken);

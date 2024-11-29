@@ -20,7 +20,7 @@ class UserAccountConfirmationParticipationProcessor implements ProcessorInterfac
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $id = $json['userId'];
         $user = $this->userRepository->find($id);
         if (!$user) {

@@ -30,7 +30,7 @@ class ProposalAssignationProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $decoded = json_decode($message->getBody(), true);
+        $decoded = json_decode((string) $message->getBody(), true);
         $assigned = $this->userRepository->find($decoded['assigned']);
         $role = $decoded['role'];
         $proposals = $this->proposalRepository->findByProposalIds($decoded['proposals']);

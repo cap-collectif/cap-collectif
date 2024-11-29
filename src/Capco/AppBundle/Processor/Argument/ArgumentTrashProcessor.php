@@ -22,7 +22,7 @@ class ArgumentTrashProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         $argument = $this->argumentRepository->find($json['argumentId']);
         if (!$argument) {
             throw new \RuntimeException('Unable to find argument with id : ' . $json['argumentId']);

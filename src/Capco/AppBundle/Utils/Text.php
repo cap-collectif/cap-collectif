@@ -53,7 +53,7 @@ final class Text
     {
         // non-alpha and non-numeric characters become spaces
         $str = preg_replace('/[^a-z0-9' . implode('', $noStrip) . ']+/i', ' ', $str);
-        $str = trim($str);
+        $str = trim((string) $str);
         // uppercase the first character of each word
         $str = ucwords($str);
         $str = str_replace(' ', '', $str);
@@ -65,7 +65,7 @@ final class Text
     {
         $separatorPattern = '/((?<=[^$])[A-Z0-9])/u';
 
-        return strtolower(preg_replace($separatorPattern, '_$1', $str));
+        return strtolower((string) preg_replace($separatorPattern, '_$1', $str));
     }
 
     public static function rgbToHex(string $r, string $g, string $b): string

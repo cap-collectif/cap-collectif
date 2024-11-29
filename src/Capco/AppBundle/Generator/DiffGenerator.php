@@ -19,8 +19,8 @@ class DiffGenerator
     public function generate(HasDiffInterface $entity)
     {
         if ($entity instanceof OpinionVersion) {
-            $oldText = html_entity_decode($entity->getParent()->getBody());
-            $newText = html_entity_decode($entity->getBody());
+            $oldText = html_entity_decode((string) $entity->getParent()->getBody());
+            $newText = html_entity_decode((string) $entity->getBody());
             $diff = $this->diffService->diff($oldText, $newText);
             $entity->setDiff($diff);
 

@@ -57,7 +57,7 @@ class SiteParameterAdmin extends AbstractAdmin
     protected function getHelpText(?string $text = null): ?string
     {
         $txt = '';
-        $texts = explode(' ', $text);
+        $texts = explode(' ', (string) $text);
         if (\count($texts) > 1) {
             foreach ($texts as $splittedText) {
                 $txt .= ' ' . $this->getTranslator()->trans($splittedText, [], 'CapcoAppBundle');

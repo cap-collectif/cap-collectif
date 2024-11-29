@@ -22,7 +22,7 @@ class UserInviteEmailMessageStatusCheckProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $json = json_decode($message->getBody(), true);
+        $json = json_decode((string) $message->getBody(), true);
         list($emailMessageId, $providerClass) = [$json['id'], $json['provider']];
 
         if (!($emailMessage = $this->repository->find($emailMessageId))) {

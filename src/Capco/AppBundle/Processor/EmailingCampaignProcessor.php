@@ -23,7 +23,7 @@ class EmailingCampaignProcessor implements ProcessorInterface
 
     public function process(Message $message, array $options): bool
     {
-        $data = json_decode($message->getBody());
+        $data = json_decode((string) $message->getBody());
 
         $campaign = $this->getCampaign($data);
 

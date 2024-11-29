@@ -76,7 +76,7 @@ class FontProcessor
         $font->parse();
         $name = $font->getFontName();
         $fullname = $font->getFontSubfamilyID();
-        $style = false !== stripos($font->getFontSubfamily(), 'italic') ? 'italic' : 'normal';
+        $style = false !== stripos((string) $font->getFontSubfamily(), 'italic') ? 'italic' : 'normal';
 
         try {
             $process = new Process(['fc-scan', '--format', '%{family} | %{fullname}', $file]);

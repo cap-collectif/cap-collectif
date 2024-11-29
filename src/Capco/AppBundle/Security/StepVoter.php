@@ -62,7 +62,7 @@ class StepVoter extends AbstractOwnerableVoter
      * @param string $attribute
      * @param mixed  $subject
      */
-    protected function supports($attribute, $subject): bool // @phpstan-ignore
+    protected function supports($attribute, $subject): bool
     {
         if (
             !\in_array($attribute, [
