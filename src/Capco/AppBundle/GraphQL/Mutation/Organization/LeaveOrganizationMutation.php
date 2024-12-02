@@ -16,18 +16,9 @@ class LeaveOrganizationMutation implements MutationInterface
     use MutationTrait;
 
     final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly OrganizationMemberRepository $repository;
 
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $entityManager,
-        OrganizationMemberRepository $repository
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->entityManager = $entityManager;
-        $this->repository = $repository;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly OrganizationMemberRepository $repository)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

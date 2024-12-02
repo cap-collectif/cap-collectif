@@ -16,11 +16,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ThemeController extends Controller
 {
-    private readonly TranslatorInterface $translator;
-
-    public function __construct(TranslatorInterface $translator)
+    public function __construct(private readonly TranslatorInterface $translator)
     {
-        $this->translator = $translator;
     }
 
     /**
@@ -28,10 +25,9 @@ class ThemeController extends Controller
      * @Route("/themes/search/{term}/{page}", name="app_theme_search", requirements={"page" = "\d+"}, defaults={"page" = 1, "_feature_flags" = "themes"} )
      * @Template("@CapcoApp/Theme/index.html.twig")
      *
-     * @param mixed      $page
      * @param null|mixed $term
      */
-    public function indexAction(Request $request, $page, $term = null)
+    public function indexAction(Request $request, mixed $page, $term = null)
     {
         $currentUrl = $this->generateUrl('app_theme');
 

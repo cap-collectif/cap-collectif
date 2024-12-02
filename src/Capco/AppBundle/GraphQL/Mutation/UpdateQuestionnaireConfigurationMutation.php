@@ -30,10 +30,7 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     use QuestionPersisterTrait;
 
     private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
     private readonly LoggerInterface $logger;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly GlobalIdResolver $globalIdResolver;
 
     /** used in QuestionPersisterTrait */
     private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
@@ -41,32 +38,27 @@ class UpdateQuestionnaireConfigurationMutation implements MutationInterface
     private readonly Indexer $indexer;
     private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
     private readonly ValidatorInterface $colorValidator;
-    private readonly QuestionJumpsHandler $questionJumpsHandler;
 
     public function __construct(
         EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver,
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         LoggerInterface $logger,
         Indexer $indexer,
         ValidatorInterface $colorValidator,
-        AuthorizationCheckerInterface $authorizationChecker,
-        QuestionJumpsHandler $questionJumpsHandler
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly QuestionJumpsHandler $questionJumpsHandler
     ) {
         $this->em = $em;
-        $this->formFactory = $formFactory;
         $this->questionRepo = $questionRepo;
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->logger = $logger;
         $this->indexer = $indexer;
         $this->colorValidator = $colorValidator;
         $this->choiceQuestionRepository = $choiceQuestionRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->questionJumpsHandler = $questionJumpsHandler;
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -15,18 +15,9 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class SetUserDefaultLocaleMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly LocaleRepository $localeRepository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly UserRepository $userRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        UserRepository $userRepository,
-        LocaleRepository $localRepository
-    ) {
-        $this->localeRepository = $localRepository;
-        $this->entityManager = $entityManager;
-        $this->userRepository = $userRepository;
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly UserRepository $userRepository, private readonly LocaleRepository $localeRepository)
+    {
     }
 
     public function __invoke(Argument $args, User $viewer): array

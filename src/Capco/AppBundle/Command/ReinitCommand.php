@@ -116,56 +116,27 @@ class ReinitCommand extends Command
         DebateArticleListener::class,
     ];
     private $env;
-    private readonly ManagerRegistry $doctrine;
-    private readonly EntityManagerInterface $em;
     private readonly EventManager $eventManager;
-    private readonly ProgressBarProcessor $progressBarProcessor;
-    private readonly ElasticsearchDoctrineListener $elasticsearchListener;
-    private readonly DoctrineListener $publishableListener;
-    private readonly QuestionnaireSubscriber $questionnaireSubscriber;
-    private readonly StepContributionsDataLoader $stepContributionDataloader;
-    private readonly ProposalFormProposalsDataLoader $proposalFormProposalsDataloader;
-    private readonly CollectStepContributorCountDataLoader $collectStepContributorsDataloader;
-    private readonly StepVotesCountDataLoader $stepVotesCountDataloader;
-    private readonly StepPointsVotesCountDataLoader $stepPointsVotesCountDataLoader;
-    private readonly ProjectProposalsDataLoader $projectProposalsDataloader;
-    private readonly ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader;
-    private readonly Stopwatch $stopwatch;
 
     public function __construct(
         string $name,
-        ManagerRegistry $managerRegistry,
-        EntityManagerInterface $em,
-        ProgressBarProcessor $progressBarProcessor,
-        DoctrineListener $publishableListener,
-        ElasticsearchDoctrineListener $elasticsearchListener,
-        QuestionnaireSubscriber $questionnaireSubscriber,
-        StepContributionsDataLoader $stepContributionDataloader,
-        ProposalFormProposalsDataLoader $proposalFormProposalsDataloader,
-        CollectStepContributorCountDataLoader $collectStepContributorsDataloader,
-        StepVotesCountDataLoader $stepVotesCountDataloader,
-        StepPointsVotesCountDataLoader $stepPointVotesCountDataloader,
-        ProjectProposalsDataLoader $projectProposalsDataloader,
-        ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader,
-        Stopwatch $stopwatch
+        private readonly ManagerRegistry $doctrine,
+        private readonly EntityManagerInterface $em,
+        private readonly ProgressBarProcessor $progressBarProcessor,
+        private readonly DoctrineListener $publishableListener,
+        private readonly ElasticsearchDoctrineListener $elasticsearchListener,
+        private readonly QuestionnaireSubscriber $questionnaireSubscriber,
+        private readonly StepContributionsDataLoader $stepContributionDataloader,
+        private readonly ProposalFormProposalsDataLoader $proposalFormProposalsDataloader,
+        private readonly CollectStepContributorCountDataLoader $collectStepContributorsDataloader,
+        private readonly StepVotesCountDataLoader $stepVotesCountDataloader,
+        private readonly StepPointsVotesCountDataLoader $stepPointsVotesCountDataLoader,
+        private readonly ProjectProposalsDataLoader $projectProposalsDataloader,
+        private readonly ProposalCurrentVotableStepDataLoader $projectCurrentVotableStepDataloader,
+        private readonly Stopwatch $stopwatch
     ) {
         parent::__construct($name);
-
-        $this->doctrine = $managerRegistry;
-        $this->em = $em;
-        $this->eventManager = $em->getEventManager();
-        $this->progressBarProcessor = $progressBarProcessor;
-        $this->publishableListener = $publishableListener;
-        $this->elasticsearchListener = $elasticsearchListener;
-        $this->stepContributionDataloader = $stepContributionDataloader;
-        $this->proposalFormProposalsDataloader = $proposalFormProposalsDataloader;
-        $this->collectStepContributorsDataloader = $collectStepContributorsDataloader;
-        $this->stepVotesCountDataloader = $stepVotesCountDataloader;
-        $this->stepPointsVotesCountDataLoader = $stepPointVotesCountDataloader;
-        $this->projectProposalsDataloader = $projectProposalsDataloader;
-        $this->projectCurrentVotableStepDataloader = $projectCurrentVotableStepDataloader;
-        $this->stopwatch = $stopwatch;
-        $this->questionnaireSubscriber = $questionnaireSubscriber;
+        $this->eventManager = $this->em->getEventManager();
     }
 
     protected function configure()
@@ -211,7 +182,7 @@ class ReinitCommand extends Command
 
         try {
             $this->dropDatabase($output);
-        } catch (ConnectionException $e) {
+        } catch (ConnectionException) {
             $output->writeln(
                 '<error>Database could not be deleted - maybe it didn\'t exist?</error>'
             );
@@ -229,7 +200,7 @@ class ReinitCommand extends Command
 
         foreach ($listeners as $listener) {
             $this->eventManager->removeEventListener($listener->getSubscribedEvents(), $listener);
-            $output->writeln('Disabled <info>' . \get_class($listener) . '</info>.');
+            $output->writeln('Disabled <info>' . $listener::class . '</info>.');
         }
 
         foreach (self::ENTITIES_WITH_LISTENERS as $entity) {
@@ -261,7 +232,7 @@ class ReinitCommand extends Command
         ];
         foreach ($dataloaders as $dl) {
             $dl->disableCache();
-            $output->writeln('Disabled <info>' . \get_class($dl) . '</info>.');
+            $output->writeln('Disabled <info>' . $dl::class . '</info>.');
         }
 
         $this->createDatabase($output);

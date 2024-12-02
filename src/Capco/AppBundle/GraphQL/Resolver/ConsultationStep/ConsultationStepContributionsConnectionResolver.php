@@ -17,24 +17,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ConsultationStepContributionsConnectionResolver implements QueryInterface
 {
-    private $opinionSearch;
-    private $opinionRepository;
-    private $sourceRepository;
-    private $argumentRepository;
-    private $opinionVersionRepository;
-
-    public function __construct(
-        OpinionSearch $opinionSearch,
-        OpinionRepository $opinionRepository,
-        SourceRepository $sourceRepository,
-        ArgumentRepository $argumentRepository,
-        OpinionVersionRepository $opinionVersionRepository
-    ) {
-        $this->opinionSearch = $opinionSearch;
-        $this->opinionRepository = $opinionRepository;
-        $this->sourceRepository = $sourceRepository;
-        $this->argumentRepository = $argumentRepository;
-        $this->opinionVersionRepository = $opinionVersionRepository;
+    public function __construct(private readonly OpinionSearch $opinionSearch, private readonly OpinionRepository $opinionRepository, private readonly SourceRepository $sourceRepository, private readonly ArgumentRepository $argumentRepository, private readonly OpinionVersionRepository $opinionVersionRepository)
+    {
     }
 
     public function __invoke(

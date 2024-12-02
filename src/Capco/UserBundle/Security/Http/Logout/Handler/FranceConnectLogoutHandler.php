@@ -12,21 +12,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class FranceConnectLogoutHandler implements LogoutHandlerInterface
 {
-    private readonly Manager $toggleManager;
-    private readonly ResourceOwnerInterface $resourceOwner;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly RouterInterface $router;
-
-    public function __construct(
-        Manager $toggleManager,
-        ResourceOwnerInterface $resourceOwner,
-        TokenStorageInterface $tokenStorage,
-        RouterInterface $router
-    ) {
-        $this->toggleManager = $toggleManager;
-        $this->resourceOwner = $resourceOwner;
-        $this->tokenStorage = $tokenStorage;
-        $this->router = $router;
+    public function __construct(private readonly Manager $toggleManager, private readonly ResourceOwnerInterface $resourceOwner, private readonly TokenStorageInterface $tokenStorage, private readonly RouterInterface $router)
+    {
     }
 
     public function handle(

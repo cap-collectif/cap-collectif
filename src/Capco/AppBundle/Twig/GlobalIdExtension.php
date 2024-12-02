@@ -34,7 +34,7 @@ class GlobalIdExtension extends AbstractExtension
     {
         $type = null;
 
-        switch (\get_class($step)) {
+        switch ($step::class) {
             case CollectStep::class:
                 $type = 'CollectStep';
 

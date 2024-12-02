@@ -36,36 +36,9 @@ class CreateOpinionMutation implements MutationInterface
     final public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
     final public const CONTRIBUTED_TOO_MANY_TIMES = 'CONTRIBUTED_TOO_MANY_TIMES';
     final public const INVALID_FORM = 'INVALID_FORM';
-    private readonly FormFactoryInterface $formFactory;
-    private readonly EntityManagerInterface $em;
-    private readonly ProjectRepository $projectRepository;
-    private readonly OpinionTypeRepository $opinionTypeRepository;
-    private readonly ConsultationStepRepository $consultationStepRepository;
-    private readonly StepRequirementsResolver $stepRequirementsResolver;
-    private readonly OpinionRepository $opinionRepository;
-    private readonly Publisher $publisher;
-    private readonly GlobalIdResolver $globalIdResolver;
 
-    public function __construct(
-        FormFactoryInterface $formFactory,
-        EntityManagerInterface $em,
-        ProjectRepository $projectRepository,
-        OpinionTypeRepository $opinionTypeRepository,
-        ConsultationStepRepository $consultationStepRepository,
-        StepRequirementsResolver $stepRequirementsResolver,
-        OpinionRepository $opinionRepository,
-        Publisher $publisher,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->formFactory = $formFactory;
-        $this->em = $em;
-        $this->projectRepository = $projectRepository;
-        $this->opinionTypeRepository = $opinionTypeRepository;
-        $this->consultationStepRepository = $consultationStepRepository;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
-        $this->opinionRepository = $opinionRepository;
-        $this->publisher = $publisher;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly ProjectRepository $projectRepository, private readonly OpinionTypeRepository $opinionTypeRepository, private readonly ConsultationStepRepository $consultationStepRepository, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly OpinionRepository $opinionRepository, private readonly Publisher $publisher, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

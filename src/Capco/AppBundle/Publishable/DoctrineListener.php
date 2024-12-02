@@ -12,11 +12,8 @@ use Doctrine\Persistence\Event\LifecycleEventArgs;
 
 class DoctrineListener implements EventSubscriber
 {
-    private readonly Manager $manager;
-
-    public function __construct(Manager $manager)
+    public function __construct(private readonly Manager $manager)
     {
-        $this->manager = $manager;
     }
 
     public function getSubscribedEvents(): array

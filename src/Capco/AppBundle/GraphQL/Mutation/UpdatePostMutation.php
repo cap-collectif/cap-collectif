@@ -22,27 +22,8 @@ class UpdatePostMutation implements MutationInterface
 
     final public const INVALID_FORM = 'INVALID_FORM';
 
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly PostAuthorFactory $postAuthorFactory;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker,
-        PostAuthorFactory $postAuthorFactory,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->postAuthorFactory = $postAuthorFactory;
-        $this->logger = $logger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly PostAuthorFactory $postAuthorFactory, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

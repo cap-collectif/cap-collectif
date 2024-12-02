@@ -205,13 +205,12 @@ class HasResponsesToRequiredQuestionsValidatorSpec extends ObjectBehavior
      *
      * It avoid duplicating code for all our tests.
      *
-     * @param mixed      $firstValue
      * @param null|mixed $secondValue
      */
     private function prepareFormWithLogicJumps(
         Reply $reply,
         int $firstQuestionType,
-        $firstValue,
+        mixed $firstValue,
         bool $isQuestion3Required = true,
         $secondValue = null
     ) {

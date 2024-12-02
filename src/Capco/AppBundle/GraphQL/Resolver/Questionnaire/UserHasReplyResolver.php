@@ -11,18 +11,8 @@ use Psr\Log\LoggerInterface;
 
 class UserHasReplyResolver implements QueryInterface
 {
-    private $replyRepository;
-    private $userRepository;
-    private $logger;
-
-    public function __construct(
-        ReplyRepository $replyRepository,
-        UserRepository $userRepository,
-        LoggerInterface $logger
-    ) {
-        $this->replyRepository = $replyRepository;
-        $this->userRepository = $userRepository;
-        $this->logger = $logger;
+    public function __construct(private readonly ReplyRepository $replyRepository, private readonly UserRepository $userRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Questionnaire $questionnaire, Argument $args): bool

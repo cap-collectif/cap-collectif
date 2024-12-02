@@ -7,11 +7,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryMapTokensResolver implements QueryInterface
 {
-    private $repository;
-
-    public function __construct(MapTokenRepository $repository)
+    public function __construct(private readonly MapTokenRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(): array

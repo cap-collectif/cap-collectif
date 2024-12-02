@@ -209,22 +209,16 @@ class Manager
         self::multi_consultations,
     ];
 
-    protected ToggleManager $toggleManager;
-
     protected Context $context;
 
     protected array $knownValues = [];
 
-    private readonly EventDispatcherInterface $dispatcher;
-
     public function __construct(
-        ToggleManager $toggleManager,
+        protected ToggleManager $toggleManager,
         ContextFactory $contextFactory,
-        EventDispatcherInterface $dispatcher
+        private readonly EventDispatcherInterface $dispatcher
     ) {
-        $this->toggleManager = $toggleManager;
         $this->context = $contextFactory->createContext();
-        $this->dispatcher = $dispatcher;
     }
 
     public function exists(string $name): bool

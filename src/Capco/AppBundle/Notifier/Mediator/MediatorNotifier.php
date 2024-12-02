@@ -15,17 +15,14 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MediatorNotifier extends BaseNotifier
 {
-    private readonly StepUrlResolver $stepUrlResolver;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        StepUrlResolver $stepUrlResolver
+        private readonly StepUrlResolver $stepUrlResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->stepUrlResolver = $stepUrlResolver;
     }
 
     public function onMediatorAddNewParticipant(Mediator $mediator, Participant $participant)

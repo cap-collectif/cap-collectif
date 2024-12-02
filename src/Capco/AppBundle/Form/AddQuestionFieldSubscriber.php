@@ -16,13 +16,8 @@ use Symfony\Component\Form\FormInterface;
 
 class AddQuestionFieldSubscriber implements EventSubscriberInterface
 {
-    protected FormFactoryInterface $factory;
-    protected ArrayHydrator $arrayHydrator;
-
-    public function __construct(FormFactoryInterface $factory, ArrayHydrator $arrayHydrator)
+    public function __construct(protected FormFactoryInterface $factory, protected ArrayHydrator $arrayHydrator)
     {
-        $this->factory = $factory;
-        $this->arrayHydrator = $arrayHydrator;
     }
 
     public static function getSubscribedEvents(): array

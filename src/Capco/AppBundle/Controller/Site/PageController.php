@@ -16,15 +16,8 @@ use Symfony\Component\Translation\TranslatorInterface;
  */
 class PageController extends Controller
 {
-    private readonly SiteParameterRepository $siteParameterRepository;
-    private readonly TranslatorInterface $translator;
-
-    public function __construct(
-        SiteParameterRepository $siteParameterRepository,
-        TranslatorInterface $translator
-    ) {
-        $this->siteParameterRepository = $siteParameterRepository;
-        $this->translator = $translator;
+    public function __construct(private readonly SiteParameterRepository $siteParameterRepository, private readonly TranslatorInterface $translator)
+    {
     }
 
     /**

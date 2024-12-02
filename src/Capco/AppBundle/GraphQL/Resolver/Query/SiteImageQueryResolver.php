@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class SiteImageQueryResolver implements QueryInterface
 {
-    private $repository;
-
-    public function __construct(SiteImageRepository $repository)
+    public function __construct(private readonly SiteImageRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Argument $args): ?SiteImage

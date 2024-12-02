@@ -34,12 +34,10 @@ class CommentVoter extends Voter
 
         $comment = $subject;
 
-        switch ($attribute) {
-            case self::DELETE:
-                return $this->canDelete($comment, $viewer);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::DELETE => $this->canDelete($comment, $viewer),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canDelete(Comment $comment, User $viewer): bool

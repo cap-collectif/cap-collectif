@@ -129,19 +129,10 @@ class GlobalIdResolver
         'SectionCarrouselElement',
         'Media',
     ];
-    private readonly ContainerInterface $container;
-    private readonly LoggerInterface $logger;
-    private readonly EntityManagerInterface $entityManager;
 
     // since we are calling all repositories it is easier to directly inject the container instead of injecting all repositories one by one.
-    public function __construct(
-        ContainerInterface $container,
-        LoggerInterface $logger,
-        EntityManagerInterface $entityManager
-    ) {
-        $this->container = $container;
-        $this->logger = $logger;
-        $this->entityManager = $entityManager;
+    public function __construct(private readonly ContainerInterface $container, private readonly LoggerInterface $logger, private readonly EntityManagerInterface $entityManager)
+    {
     }
 
     public function resolve(string $uuidOrGlobalId, $userOrAnon = null, ?\ArrayObject $context = null)

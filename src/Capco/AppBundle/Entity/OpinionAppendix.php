@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="opinion_appendices")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
  */
-class OpinionAppendix
+class OpinionAppendix implements \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use TextableTrait;
@@ -49,7 +49,7 @@ class OpinionAppendix
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return (string) $this->getId() ?? 'New OpinionAppendix';
     }

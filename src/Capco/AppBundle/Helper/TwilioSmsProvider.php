@@ -12,11 +12,8 @@ class TwilioSmsProvider implements SmsProviderInterface
     final public const CODE_NOT_VALID = 'CODE_NOT_VALID';
     final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
-    private readonly TwilioClient $twilioClient;
-
-    public function __construct(TwilioClient $twilioClient)
+    public function __construct(private readonly TwilioClient $twilioClient)
     {
-        $this->twilioClient = $twilioClient;
     }
 
     public function sendVerificationSms(string $phone): ?string

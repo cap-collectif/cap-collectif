@@ -24,27 +24,8 @@ class DeleteProposalNewsMutation implements MutationInterface
     final public const POST_NOT_FOUND = 'POST_NOT_FOUND';
     final public const ACCESS_DENIED = 'ACCESS_DENIED';
 
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly LoggerInterface $logger;
-    private readonly Publisher $publisher;
-    private readonly ProposalUrlResolver $proposalUrlResolver;
-    private readonly RequestStack $requestStack;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger,
-        Publisher $publisher,
-        ProposalUrlResolver $proposalUrlResolver,
-        RequestStack $requestStack
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->logger = $logger;
-        $this->publisher = $publisher;
-        $this->proposalUrlResolver = $proposalUrlResolver;
-        $this->requestStack = $requestStack;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly ProposalUrlResolver $proposalUrlResolver, private readonly RequestStack $requestStack)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

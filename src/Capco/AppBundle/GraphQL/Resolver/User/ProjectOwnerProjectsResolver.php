@@ -13,11 +13,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ProjectOwnerProjectsResolver implements QueryInterface
 {
-    private readonly ProjectSearch $projectSearch;
-
-    public function __construct(ProjectSearch $projectSearch)
+    public function __construct(private readonly ProjectSearch $projectSearch)
     {
-        $this->projectSearch = $projectSearch;
     }
 
     public function __invoke(User $user, ?Argument $args = null): ConnectionInterface

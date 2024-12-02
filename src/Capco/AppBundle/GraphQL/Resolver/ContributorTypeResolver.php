@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ContributorTypeResolver implements QueryInterface
 {
-    private readonly TypeResolver $typeResolver;
-
-    public function __construct(TypeResolver $typeResolver)
+    public function __construct(private readonly TypeResolver $typeResolver)
     {
-        $this->typeResolver = $typeResolver;
     }
 
     public function __invoke(ContributorInterface $node): Type

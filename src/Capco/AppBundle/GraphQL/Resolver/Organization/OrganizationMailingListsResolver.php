@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OrganizationMailingListsResolver implements QueryInterface
 {
-    private readonly MailingListRepository $repository;
-
-    public function __construct(MailingListRepository $repository)
+    public function __construct(private readonly MailingListRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(

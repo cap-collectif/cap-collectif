@@ -291,12 +291,7 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
     ];
 
     protected static $defaultName = 'capco:export:consultation';
-
-    protected Manager $toggleManager;
-    protected ConsultationStepRepository $consultationStepRepository;
     protected string $projectRootDir;
-    protected Executor $executor;
-    protected ConnectionTraversor $connectionTraversor;
     protected GraphQlAclListener $listener;
 
     protected $currentStep;
@@ -307,20 +302,16 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
     protected $writer;
 
     public function __construct(
-        Manager $toggleManager,
-        ConsultationStepRepository $consultationStepRepository,
+        protected Manager $toggleManager,
+        protected ConsultationStepRepository $consultationStepRepository,
         ExportUtils $exportUtils,
-        Executor $executor,
+        protected Executor $executor,
         GraphQlAclListener $listener,
-        ConnectionTraversor $connectionTraversor,
+        protected ConnectionTraversor $connectionTraversor,
         string $projectRootDir
     ) {
         $listener->disableAcl();
-        $this->executor = $executor;
-        $this->toggleManager = $toggleManager;
-        $this->consultationStepRepository = $consultationStepRepository;
         $this->projectRootDir = $projectRootDir;
-        $this->connectionTraversor = $connectionTraversor;
         parent::__construct($exportUtils);
     }
 

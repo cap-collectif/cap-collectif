@@ -20,29 +20,19 @@ use Symfony\Component\Security\Guard\AuthenticatorInterface;
 
 class SimplePreAuthenticator extends AbstractGuardAuthenticator
 {
-    protected Manager $toggleManager;
-    protected ?SamlAuthenticator $samlAuthenticator;
-    protected ?CasAuthenticator $casAuthenticator;
     private readonly ?CASSSOConfiguration $casConfiguration;
     private readonly ?AuthenticatorInterface $currentAuthenticator;
     private readonly ?UserProviderInterface $currentProvider;
-    private readonly ?SamlUserProvider $samlUserProvider;
-    private readonly ?CasUserProvider $casUserProvider;
 
     public function __construct(
-        Manager $toggleManager,
+        protected Manager $toggleManager,
         CASSSOConfigurationRepository $CASSSOConfigurationRepository,
-        ?SamlAuthenticator $samlAuthenticator = null,
-        ?CasAuthenticator $casAuthenticator = null,
-        ?SamlUserProvider $samlUserProvider = null,
-        ?CasUserProvider $casUserProvider = null
+        protected ?SamlAuthenticator $samlAuthenticator = null,
+        protected ?CasAuthenticator $casAuthenticator = null,
+        private ?SamlUserProvider $samlUserProvider = null,
+        private ?CasUserProvider $casUserProvider = null
     ) {
-        $this->toggleManager = $toggleManager;
         $this->casConfiguration = $CASSSOConfigurationRepository->findOneBy([]);
-        $this->samlAuthenticator = $samlAuthenticator;
-        $this->casAuthenticator = $casAuthenticator;
-        $this->samlUserProvider = $samlUserProvider;
-        $this->casUserProvider = $casUserProvider;
 
         $authenticatorAndProvider = $this->getCurrentAuthenticatorAndProvider();
 

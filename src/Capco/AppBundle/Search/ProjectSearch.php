@@ -29,12 +29,9 @@ class ProjectSearch extends Search
     private const POPULAR = 'POPULAR';
     private const PUBLISHED_AT = 'PUBLISHED_AT';
 
-    private $projectRepo;
-
-    public function __construct(Index $index, ProjectRepository $projectRepo)
+    public function __construct(Index $index, private readonly ProjectRepository $projectRepo)
     {
         parent::__construct($index);
-        $this->projectRepo = $projectRepo;
         $this->type = 'project';
     }
 

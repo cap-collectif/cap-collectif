@@ -24,10 +24,8 @@ class Sanitizer
 
     /**
      * Checks if argument is a string.
-     *
-     * @param mixed $variable
      */
-    protected static function ensureString($variable): void
+    protected static function ensureString(mixed $variable): void
     {
         if (\is_string($variable)) {
             return;

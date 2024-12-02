@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="opinion_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeRepository")
  */
-class OpinionType
+class OpinionType implements \Stringable
 {
     use DescriptionTrait;
     use UuidTrait;
@@ -187,7 +187,7 @@ class OpinionType
         $this->children = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New opinion type';
     }
@@ -564,10 +564,7 @@ class OpinionType
         return $this->children;
     }
 
-    /**
-     * @param mixed $child
-     */
-    public function addChild($child)
+    public function addChild(mixed $child)
     {
         if (!$this->children->contains($child)) {
             $this->children->add($child);
@@ -575,10 +572,7 @@ class OpinionType
         $child->setParent($this);
     }
 
-    /**
-     * @param mixed $child
-     */
-    public function removeChild($child)
+    public function removeChild(mixed $child)
     {
         if ($this->children->contains($child)) {
             $this->children->removeElement($child);

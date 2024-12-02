@@ -22,24 +22,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateMailingListMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly UserRepository $userRepository;
-    private readonly ProjectRepository $projectRepository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
 
-    public function __construct(
-        UserRepository $userRepository,
-        ProjectRepository $projectRepository,
-        EntityManagerInterface $entityManager,
-        AuthorizationCheckerInterface $authorizationChecker,
-        SettableOwnerResolver $settableOwnerResolver
-    ) {
-        $this->userRepository = $userRepository;
-        $this->projectRepository = $projectRepository;
-        $this->entityManager = $entityManager;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->settableOwnerResolver = $settableOwnerResolver;
+    public function __construct(private readonly UserRepository $userRepository, private readonly ProjectRepository $projectRepository, private readonly EntityManagerInterface $entityManager, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly SettableOwnerResolver $settableOwnerResolver)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -54,7 +39,7 @@ class CreateMailingListMutation implements MutationInterface
             $this->entityManager->flush();
         } catch (UserError $userError) {
             $error = $userError->getMessage();
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             $error = 'internal server error';
         }
 

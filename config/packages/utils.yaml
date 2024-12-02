@@ -13,7 +13,7 @@ services:
     Capco\AppBundle\Utils\Map:
         public: true
         arguments:
-            $apiSeverKey: '%google_maps_key_server%'
+            $apiServerKey: '%google_maps_key_server%'
 
     pmill\Doctrine\Hydrator\ArrayHydrator:
         arguments: ['@doctrine.orm.default_entity_manager']

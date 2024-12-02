@@ -18,21 +18,8 @@ class ProposalAnalyseProcessor implements ProcessorInterface
     final public const TYPE_DECISION = 'decision';
     final public const VALID_TYPES = [self::TYPE_ANALYSIS, self::TYPE_ASSESSMENT, self::TYPE_DECISION];
 
-    private readonly ProposalRepository $proposalRepository;
-    private readonly ProposalAnalysisRepository $analysisRepository;
-    private readonly ProposalNotifier $notifier;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        ProposalAnalysisRepository $analysisRepository,
-        ProposalNotifier $notifier,
-        LoggerInterface $logger
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->analysisRepository = $analysisRepository;
-        $this->notifier = $notifier;
-        $this->logger = $logger;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly ProposalAnalysisRepository $analysisRepository, private readonly ProposalNotifier $notifier, private readonly LoggerInterface $logger)
+    {
     }
 
     public function process(Message $message, array $options): bool
@@ -58,18 +45,12 @@ class ProposalAnalyseProcessor implements ProcessorInterface
 
     private function notify(Proposal $proposal, \DateTime $date, array $jsonDecoded): bool
     {
-        switch ($jsonDecoded['type']) {
-            case self::TYPE_ANALYSIS:
-                return $this->notifyAnalysis($proposal, $date, $jsonDecoded);
-
-            case self::TYPE_ASSESSMENT:
-                return $this->notifyAssessment($proposal, $date);
-
-            case self::TYPE_DECISION:
-                return $this->notifyDecision($proposal, $date);
-        }
-
-        return true;
+        return match ($jsonDecoded['type']) {
+            self::TYPE_ANALYSIS => $this->notifyAnalysis($proposal, $date, $jsonDecoded),
+            self::TYPE_ASSESSMENT => $this->notifyAssessment($proposal, $date),
+            self::TYPE_DECISION => $this->notifyDecision($proposal, $date),
+            default => true,
+        };
     }
 
     private function notifyAnalysis(Proposal $proposal, \DateTime $date, array $jsonDecoded): bool
@@ -167,7 +148,7 @@ class ProposalAnalyseProcessor implements ProcessorInterface
 
         try {
             $date = new \DateTime($jsonDecoded['date']);
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             $this->logger->error(__CLASS__ . ' - invalid date : ' . $jsonDecoded['date']);
         }
 

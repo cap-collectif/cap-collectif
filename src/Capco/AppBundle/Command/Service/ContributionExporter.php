@@ -15,27 +15,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ContributionExporter
 {
     final public const CSV_DELIMITER = ';';
-    protected EntityManagerInterface $entityManager;
     protected SymfonyStyle $style;
-    protected SerializerInterface $serializer;
     /**
      * @var array<string, null|bool|string>
      */
     protected array $context;
-    private readonly Filesystem $fileSystem;
     private ?string $delimiter = self::CSV_DELIMITER;
-    private readonly AbstractFilePathResolver $filePathResolverContributions;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        SerializerInterface $serializer,
-        Filesystem $fileSystem,
-        AbstractFilePathResolver $filePathResolverContributions
-    ) {
-        $this->entityManager = $entityManager;
-        $this->serializer = $serializer;
-        $this->fileSystem = $fileSystem;
-        $this->filePathResolverContributions = $filePathResolverContributions;
+    public function __construct(protected EntityManagerInterface $entityManager, protected SerializerInterface $serializer, private readonly Filesystem $fileSystem, private readonly AbstractFilePathResolver $filePathResolverContributions)
+    {
     }
 
     public function initializeStyle(SymfonyStyle $style): void

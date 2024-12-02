@@ -12,11 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserVotesResolver implements QueryInterface
 {
-    private readonly VoteSearch $voteSearch;
-
-    public function __construct(VoteSearch $voteSearch)
+    public function __construct(private readonly VoteSearch $voteSearch)
     {
-        $this->voteSearch = $voteSearch;
     }
 
     public function __invoke(
@@ -73,10 +70,8 @@ class UserVotesResolver implements QueryInterface
     /**
      * A small function just for twig.
      * Do not use it.
-     *
-     * @param mixed $viewer
      */
-    public function getAccountedVotes($viewer, User $user)
+    public function getAccountedVotes(mixed $viewer, User $user)
     {
         return $this->__invoke(
             $viewer,

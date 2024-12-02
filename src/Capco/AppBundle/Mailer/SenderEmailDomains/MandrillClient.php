@@ -17,11 +17,8 @@ class MandrillClient
 
     public Client $client;
 
-    private readonly string $key;
-
-    public function __construct(string $key)
+    public function __construct(private readonly string $key)
     {
-        $this->key = $key;
         $this->client = new Client();
     }
 

@@ -36,15 +36,11 @@ class OrganizationVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::EDIT:
-                return self::canEdit($subject, $viewer);
-
-            case self::KICK:
-                return self::canKick($subject, $viewer);
-        }
-
-        return false;
+        return match ($attribute) {
+            self::EDIT => self::canEdit($subject, $viewer),
+            self::KICK => self::canKick($subject, $viewer),
+            default => false,
+        };
     }
 
     private static function canEdit(Organization $organization, User $viewer): bool

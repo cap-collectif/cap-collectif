@@ -22,27 +22,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateQuestionnaireParametersMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly QuestionnaireRepository $questionnaireRepository;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        QuestionnaireRepository $questionnaireRepository,
-        LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->questionnaireRepository = $questionnaireRepository;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly QuestionnaireRepository $questionnaireRepository, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $input): array

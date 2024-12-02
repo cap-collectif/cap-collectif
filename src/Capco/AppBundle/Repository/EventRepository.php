@@ -120,11 +120,8 @@ class EventRepository extends EntityRepository
 
     /**
      * @deprecated: Remove me when address migration is over.
-     *
-     * @param mixed $offset
-     * @param mixed $limit
      */
-    public function getEventsWithAddress($offset = 0, $limit = 1): array
+    public function getEventsWithAddress(mixed $offset = 0, mixed $limit = 1): array
     {
         $qb = $this->createQueryBuilder('e')
             ->addSelect('e.id', 'e.address', 'e.zipCode', 'e.country', 'e.city', 'e.lat', 'e.lng')

@@ -13,15 +13,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 class SetDefaultLocaleMutation implements MutationInterface
 {
     use MutationTrait;
-    private $entityManager;
-    private $localeRepository;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        LocaleRepository $localeRepository
-    ) {
-        $this->entityManager = $entityManager;
-        $this->localeRepository = $localeRepository;
+    public function __construct(private EntityManagerInterface $entityManager, private LocaleRepository $localeRepository)
+    {
     }
 
     public function __invoke(Argument $args): array

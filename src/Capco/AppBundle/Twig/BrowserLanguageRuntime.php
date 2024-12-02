@@ -12,18 +12,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class BrowserLanguageRuntime implements RuntimeExtensionInterface
 {
-    protected Manager $toggleManager;
-    protected PublishedLocalesDataloader $localeDataloader;
-    protected DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader;
-
-    public function __construct(
-        Manager $manager,
-        PublishedLocalesDataloader $localesDataloader,
-        DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader
-    ) {
-        $this->toggleManager = $manager;
-        $this->localeDataloader = $localesDataloader;
-        $this->defaultLocaleCodeDataloader = $defaultLocaleCodeDataloader;
+    public function __construct(protected Manager $toggleManager, protected PublishedLocalesDataloader $localeDataloader, protected DefaultLocaleCodeDataloader $defaultLocaleCodeDataloader)
+    {
     }
 
     public function getBrowserLanguage(Request $request, $viewer = null): string

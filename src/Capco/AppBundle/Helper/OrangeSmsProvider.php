@@ -19,17 +19,9 @@ class OrangeSmsProvider implements SmsProviderInterface
 
     final public const NOT_FOUND = 'NOT_FOUND';
     final public const REDIS_KEY_SMS_VERIFICATION = 'sms:verification:';
-    private readonly OrangeClient $orangeClient;
-    private readonly LoggerInterface $logger;
-    private readonly ClientInterface $redis;
-    private readonly int $redisExpirationTime;
 
-    public function __construct(OrangeClient $orangeClient, LoggerInterface $logger, ClientInterface $redis, int $redisExpirationTime)
+    public function __construct(private readonly OrangeClient $orangeClient, private readonly LoggerInterface $logger, private readonly ClientInterface $redis, private readonly int $redisExpirationTime)
     {
-        $this->orangeClient = $orangeClient;
-        $this->logger = $logger;
-        $this->redis = $redis;
-        $this->redisExpirationTime = $redisExpirationTime;
     }
 
     public function sendVerificationSms(string $phone): ?string

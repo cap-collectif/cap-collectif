@@ -23,11 +23,8 @@ class ImportConsultationFromCsvCommand extends Command
     private $filePath;
     private $delimiter;
 
-    private $container;
-
-    public function __construct(?string $name, ContainerInterface $container)
+    public function __construct(?string $name, private readonly ContainerInterface $container)
     {
-        $this->container = $container;
         parent::__construct($name);
     }
 

@@ -12,13 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class CommentReportingsResolver implements QueryInterface
 {
-    private $repository;
-    private $logger;
-
-    public function __construct(ReportingRepository $repository, LoggerInterface $logger)
+    public function __construct(private readonly ReportingRepository $repository, private readonly LoggerInterface $logger)
     {
-        $this->repository = $repository;
-        $this->logger = $logger;
     }
 
     public function __invoke(Comment $comment, Argument $arguments): Connection

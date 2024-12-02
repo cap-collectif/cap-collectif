@@ -32,12 +32,10 @@ class SettingsVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::VIEW:
-                return $this->canView($subject, $viewer);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::VIEW => $this->canView($subject, $viewer),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canView($subject, User $viewer): bool

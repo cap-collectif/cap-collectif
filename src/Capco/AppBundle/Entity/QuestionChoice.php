@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="question_choice")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionChoiceRepository")
  */
-class QuestionChoice implements IndexableInterface
+class QuestionChoice implements IndexableInterface, \Stringable
 {
     use DescriptionUsingJoditWysiwygTrait;
     use PositionableTrait;
@@ -60,9 +60,9 @@ class QuestionChoice implements IndexableInterface
         }
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->title ?? 'New QuestionChoice';
+        return (string) ($this->title ?? 'New QuestionChoice');
     }
 
     public function getColor(): ?string

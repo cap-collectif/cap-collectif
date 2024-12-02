@@ -29,30 +29,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly ProjectAuthorTransformer $transformer;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        FormFactoryInterface $formFactory,
-        SettableOwnerResolver $settableOwnerResolver,
-        ProjectAuthorTransformer $transformer,
-        AuthorizationCheckerInterface $authorizationChecker,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->transformer = $transformer;
-        $this->formFactory = $formFactory;
-        $this->settableOwnerResolver = $settableOwnerResolver;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly ProjectAuthorTransformer $transformer, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

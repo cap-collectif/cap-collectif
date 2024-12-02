@@ -28,32 +28,21 @@ use Symfony\Component\Security\Csrf\TokenGenerator\TokenGeneratorInterface;
 class AddMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $entityManager;
     private readonly GlobalIdResolver $globalIdResolver;
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private readonly Publisher $publisher;
-    private readonly FormFactoryInterface $formFactory;
     private readonly UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface $entityManager,
         GlobalIdResolver $globalIdResolver,
-        TokenGeneratorInterface $tokenGenerator,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler,
-        Publisher $publisher,
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler,
+        private readonly Publisher $publisher,
         Manager $manager,
-        FormFactoryInterface $formFactory,
+        private readonly FormFactoryInterface $formFactory,
         UpdateParticipantRequirementMutation $updateParticipantRequirementMutation
     ) {
         parent::__construct($globalIdResolver, $manager, $updateParticipantRequirementMutation);
-
-        $this->entityManager = $entityManager;
         $this->globalIdResolver = $globalIdResolver;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
-        $this->publisher = $publisher;
-        $this->formFactory = $formFactory;
     }
 
     public function __invoke(Argument $argument, User $viewer): array

@@ -101,11 +101,11 @@ class MapboxClient
 
     public function isValidToken(string $token, ?bool $isSecret = false): bool
     {
-        if ($isSecret && 0 !== strpos($token, 'sk')) {
+        if ($isSecret && !str_starts_with($token, 'sk')) {
             return false;
         }
 
-        if (!$isSecret && 0 !== strpos($token, 'pk')) {
+        if (!$isSecret && !str_starts_with($token, 'pk')) {
             return false;
         }
         $code = $this->setEndpoint('tokens')

@@ -78,7 +78,7 @@ class CommentResolver
             if ($relatedObject && $relatedObject instanceof SoftDeleteable) {
                 return !$relatedObject->isDeleted() ? $relatedObject : null;
             }
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFoundException) {
             $relatedObject = null;
         }
 

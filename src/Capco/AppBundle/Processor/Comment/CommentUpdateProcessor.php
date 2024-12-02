@@ -9,13 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class CommentUpdateProcessor implements ProcessorInterface
 {
-    private $commentRepository;
-    private $notifier;
-
-    public function __construct(CommentRepository $commentRepository, CommentNotifier $notifier)
+    public function __construct(private readonly CommentRepository $commentRepository, private readonly CommentNotifier $notifier)
     {
-        $this->commentRepository = $commentRepository;
-        $this->notifier = $notifier;
     }
 
     public function process(Message $message, array $options): bool

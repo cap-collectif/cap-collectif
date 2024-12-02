@@ -257,7 +257,7 @@ class OpinionController extends AbstractSonataCrudController
                     $this->handleModelManagerException($e);
 
                     $isFormValid = false;
-                } catch (LockException $e) {
+                } catch (LockException) {
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->admin->getTranslator()->trans(

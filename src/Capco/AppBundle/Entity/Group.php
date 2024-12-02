@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="user_group")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\GroupRepository")
  */
-class Group
+class Group implements \Stringable
 {
     use BlameableTrait;
     use DescriptionTrait;
@@ -69,9 +69,9 @@ class Group
         $this->userInvites = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->title;
+        return (string) $this->title;
     }
 
     public function isEvaluating()

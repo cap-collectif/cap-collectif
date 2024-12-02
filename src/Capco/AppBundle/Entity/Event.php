@@ -44,7 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\CheckRegister()
  * @CapcoAssert\HasAuthor()
  */
-class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, Translatable, Ownerable, CreatableInterface
+class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, Translatable, Ownerable, CreatableInterface, \Stringable
 {
     use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;
@@ -223,7 +223,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
         $this->steps = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New event';
     }

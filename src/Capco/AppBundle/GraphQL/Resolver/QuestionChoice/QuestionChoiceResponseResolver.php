@@ -12,13 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class QuestionChoiceResponseResolver implements QueryInterface
 {
-    private readonly ResponseSearch $responseSearch;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(ResponseSearch $responseSearch, LoggerInterface $logger)
+    public function __construct(private readonly ResponseSearch $responseSearch, private readonly LoggerInterface $logger)
     {
-        $this->responseSearch = $responseSearch;
-        $this->logger = $logger;
     }
 
     public function __invoke(QuestionChoice $questionChoice, Arg $args): ConnectionInterface

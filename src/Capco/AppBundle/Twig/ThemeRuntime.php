@@ -20,29 +20,21 @@ class ThemeRuntime implements RuntimeExtensionInterface
     protected $projectRepo;
     protected $twig;
     protected $stepHelper;
-    private $serializer;
-    private $router;
-    private $urlResolver;
-    private $cache;
 
     public function __construct(
         ThemeRepository $themeRepo,
         ProjectRepository $projectRepo,
         \Twig_Extensions_Extension_Intl $twig,
-        SerializerInterface $serializer,
-        RouterInterface $router,
+        private readonly SerializerInterface $serializer,
+        private readonly RouterInterface $router,
         StepHelper $stepHelper,
-        UrlResolver $urlResolver,
-        RedisCache $cache
+        private readonly UrlResolver $urlResolver,
+        private readonly RedisCache $cache
     ) {
         $this->themeRepo = $themeRepo;
         $this->projectRepo = $projectRepo;
         $this->twig = $twig;
-        $this->serializer = $serializer;
-        $this->router = $router;
         $this->stepHelper = $stepHelper;
-        $this->urlResolver = $urlResolver;
-        $this->cache = $cache;
     }
 
     public function listThemes(): array

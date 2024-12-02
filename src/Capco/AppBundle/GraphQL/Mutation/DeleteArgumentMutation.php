@@ -16,18 +16,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class DeleteArgumentMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $argumentRepo;
-    private $redisStorage;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ArgumentRepository $argumentRepo,
-        RedisStorageHelper $redisStorage
-    ) {
-        $this->em = $em;
-        $this->argumentRepo = $argumentRepo;
-        $this->redisStorage = $redisStorage;
+    public function __construct(private EntityManagerInterface $em, private ArgumentRepository $argumentRepo, private RedisStorageHelper $redisStorage)
+    {
     }
 
     public function __invoke(Arg $input, User $user): array

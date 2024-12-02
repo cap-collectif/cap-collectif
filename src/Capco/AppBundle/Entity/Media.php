@@ -15,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * @ORM\Table(name="media__media")
  * @ORM\HasLifecycleCallbacks
  */
-class Media
+class Media implements \Stringable
 {
     use UuidTrait;
 

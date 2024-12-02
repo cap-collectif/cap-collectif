@@ -10,20 +10,17 @@ use Symfony\Component\HttpKernel\Exception\HttpException;
  */
 class CasAuthenticationException extends HttpException
 {
-    protected string $errorCas;
-
     /**
      * @param null $message
      */
     public function __construct(
-        string $errorCas,
+        protected string $errorCas,
         $message = null,
         ?Exception $previous = null,
         array $headers = [],
         int $code = 0
     ) {
         parent::__construct(403, $message, $previous, $headers, $code);
-        $this->errorCas = $errorCas;
     }
 
     public function getErrorCas(): string

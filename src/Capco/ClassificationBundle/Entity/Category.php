@@ -7,7 +7,7 @@ use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
-class Category
+class Category implements \Stringable
 {
     protected int $id;
     protected ?string $name;
@@ -27,7 +27,7 @@ class Category
         $this->children = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }

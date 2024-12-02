@@ -97,23 +97,11 @@ class FollowerRepository extends EntityRepository
         $sortField = array_keys($orderBy)[0];
         $direction = $orderBy[$sortField];
 
-        switch ($sortField) {
-            case 'NAME':
-            case 'USERNAME':
-                $qb->addOrderBy('u.username', $direction);
-
-                break;
-
-            case 'RANDOM':
-                $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand');
-
-                break;
-
-            default:
-                $qb->addOrderBy('u.username', $direction);
-
-                break;
-        }
+        match ($sortField) {
+            'NAME', 'USERNAME' => $qb->addOrderBy('u.username', $direction),
+            'RANDOM' => $qb->addSelect('RAND() as HIDDEN rand')->addOrderBy('rand'),
+            default => $qb->addOrderBy('u.username', $direction),
+        };
         $query = $qb
             ->getQuery()
             ->setFirstResult($offset)

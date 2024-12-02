@@ -9,13 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class OpinionCreateProcessor implements ProcessorInterface
 {
-    private $repository;
-    private $notifier;
-
-    public function __construct(OpinionRepository $repository, OpinionNotifier $notifier)
+    public function __construct(private readonly OpinionRepository $repository, private readonly OpinionNotifier $notifier)
     {
-        $this->repository = $repository;
-        $this->notifier = $notifier;
     }
 
     public function process(Message $message, array $options): bool

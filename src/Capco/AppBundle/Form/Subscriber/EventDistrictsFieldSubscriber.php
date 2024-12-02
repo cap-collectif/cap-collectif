@@ -15,11 +15,8 @@ use Symfony\Component\Form\FormEvents;
  */
 class EventDistrictsFieldSubscriber implements EventSubscriberInterface
 {
-    private readonly EventDistrictsPersister $persister;
-
-    public function __construct(EventDistrictsPersister $persister)
+    public function __construct(private readonly EventDistrictsPersister $persister)
     {
-        $this->persister = $persister;
     }
 
     /**

@@ -12,13 +12,8 @@ use Symfony\Component\Routing\RouterInterface;
  */
 class QuestionnaireExportResultsUrlResolver implements QueryInterface
 {
-    private $router;
-    private $projectDir;
-
-    public function __construct(string $projectDir, RouterInterface $router)
+    public function __construct(private readonly string $projectDir, private readonly RouterInterface $router)
     {
-        $this->projectDir = $projectDir;
-        $this->router = $router;
     }
 
     public function __invoke(Questionnaire $questionnaire): string

@@ -17,24 +17,8 @@ class CollectStepNormalizer implements NormalizerInterface, SerializerAwareInter
 {
     use SerializerAwareTrait;
 
-    private readonly ObjectNormalizer $normalizer;
-    private $collectStepProposalCountResolver;
-    private $collectStepContributorCountResolver;
-    private $adapter;
-    private $logger;
-
-    public function __construct(
-        ObjectNormalizer $normalizer,
-        CollectStepProposalCountResolver $collectStepProposalCountResolver,
-        CollectStepContributorCountResolver $collectStepContributorCountResolver,
-        PromiseAdapterInterface $adapter,
-        LoggerInterface $logger
-    ) {
-        $this->normalizer = $normalizer;
-        $this->collectStepProposalCountResolver = $collectStepProposalCountResolver;
-        $this->collectStepContributorCountResolver = $collectStepContributorCountResolver;
-        $this->adapter = $adapter;
-        $this->logger = $logger;
+    public function __construct(private readonly ObjectNormalizer $normalizer, private CollectStepProposalCountResolver $collectStepProposalCountResolver, private CollectStepContributorCountResolver $collectStepContributorCountResolver, private PromiseAdapterInterface $adapter, private LoggerInterface $logger)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

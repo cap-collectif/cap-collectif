@@ -8,11 +8,8 @@ use Symfony\Component\HttpKernel\Event\ControllerEvent;
 
 class FilterConfigurator
 {
-    private readonly EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     public function onKernelController(ControllerEvent $event)

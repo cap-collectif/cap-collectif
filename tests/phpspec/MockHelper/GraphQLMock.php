@@ -13,7 +13,7 @@ trait GraphQLMock
      * @param bool  $multiCall Flag to indicate multiple calls
      */
     public function getMockedGraphQLArgumentFormatted(
-        $argument,
+        mixed $argument,
         array $rawInput = [],
         array $values = [],
         bool $multiCall = false

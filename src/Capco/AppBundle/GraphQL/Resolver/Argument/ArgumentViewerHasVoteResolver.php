@@ -10,11 +10,8 @@ class ArgumentViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private $resolver;
-
-    public function __construct(ArgumentViewerVoteResolver $resolver)
+    public function __construct(private ArgumentViewerVoteResolver $resolver)
     {
-        $this->resolver = $resolver;
     }
 
     public function __invoke(Argument $argument, $viewer): bool

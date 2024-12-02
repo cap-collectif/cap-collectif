@@ -11,18 +11,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OpinionUrlResolver implements QueryInterface
 {
-    private $consultationStepRepository;
-    private $router;
-    private $logger;
-
-    public function __construct(
-        ConsultationStepRepository $consultationStepRepository,
-        RouterInterface $router,
-        LoggerInterface $logger
-    ) {
-        $this->consultationStepRepository = $consultationStepRepository;
-        $this->router = $router;
-        $this->logger = $logger;
+    public function __construct(private readonly ConsultationStepRepository $consultationStepRepository, private readonly RouterInterface $router, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Opinion $contribution): string

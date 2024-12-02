@@ -28,7 +28,7 @@ final class Version20211118155743 extends AbstractMigration
             'select id, email, email_canonical from fos_user where facebook_id IS NOT NULL'
         );
         foreach ($fbUsers as $user) {
-            if (false === strpos((string) $user['email'], 'twitter_')) {
+            if (!str_contains((string) $user['email'], 'twitter_')) {
                 continue;
             }
             $email = str_replace('twitter', 'facebook', (string) $user['email']);

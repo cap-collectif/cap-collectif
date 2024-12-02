@@ -14,11 +14,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class ProposalVoteTypeResolver implements QueryInterface
 {
-    private readonly TypeResolver $typeResolver;
-
-    public function __construct(TypeResolver $typeResolver)
+    public function __construct(private readonly TypeResolver $typeResolver)
     {
-        $this->typeResolver = $typeResolver;
     }
 
     public function __invoke(AbstractProposalVote $vote): Type

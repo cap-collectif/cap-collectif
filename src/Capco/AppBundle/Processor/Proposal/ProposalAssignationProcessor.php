@@ -11,21 +11,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalAssignationProcessor implements ProcessorInterface
 {
-    private readonly ProposalRepository $proposalRepository;
-    private readonly UserRepository $userRepository;
-    private readonly AnalysisNotifier $notifier;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        UserRepository $userRepository,
-        AnalysisNotifier $notifier,
-        LoggerInterface $logger
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->userRepository = $userRepository;
-        $this->notifier = $notifier;
-        $this->logger = $logger;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly UserRepository $userRepository, private readonly AnalysisNotifier $notifier, private readonly LoggerInterface $logger)
+    {
     }
 
     public function process(Message $message, array $options): bool

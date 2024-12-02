@@ -15,33 +15,9 @@ use Twig\Extension\RuntimeExtensionInterface;
 class ParametersRuntime implements RuntimeExtensionInterface
 {
     final public const CACHE_KEY = 'site-parameters';
-    protected RedisCache $cache;
-    protected RouterInterface $router;
-    protected Manager $manager;
-    protected TranslatorInterface $translator;
-    protected SiteColorResolver $siteColorResolver;
-    protected SiteParameterResolver $siteParameterResolver;
-    protected RequestStack $requestStack;
-    protected LocaleRepository $localeRepository;
 
-    public function __construct(
-        Manager $manager,
-        RedisCache $cache,
-        RouterInterface $router,
-        SiteParameterResolver $siteParameterResolver,
-        TranslatorInterface $translator,
-        SiteColorResolver $siteColorResolver,
-        RequestStack $requestStack,
-        LocaleRepository $localeRepository
-    ) {
-        $this->cache = $cache;
-        $this->router = $router;
-        $this->manager = $manager;
-        $this->translator = $translator;
-        $this->siteColorResolver = $siteColorResolver;
-        $this->siteParameterResolver = $siteParameterResolver;
-        $this->requestStack = $requestStack;
-        $this->localeRepository = $localeRepository;
+    public function __construct(protected Manager $manager, protected RedisCache $cache, protected RouterInterface $router, protected SiteParameterResolver $siteParameterResolver, protected TranslatorInterface $translator, protected SiteColorResolver $siteColorResolver, protected RequestStack $requestStack, protected LocaleRepository $localeRepository)
+    {
     }
 
     public function getIsFeatureEnabled($flag): bool

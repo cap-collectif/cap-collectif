@@ -14,18 +14,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class EventNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $router;
-    private readonly ObjectNormalizer $normalizer;
-    private $mediaExtension;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        MediaExtension $mediaExtension
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->mediaExtension = $mediaExtension;
+    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private MediaExtension $mediaExtension)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

@@ -13,13 +13,11 @@ use Elastica\Query\Term;
 class QuestionChoiceSearch extends Search
 {
     private const FUZZINNESS_LEVEL = 2;
-    private $choiceRepository;
 
-    public function __construct(Index $index, QuestionChoiceRepository $choiceRepository)
+    public function __construct(Index $index, private readonly QuestionChoiceRepository $choiceRepository)
     {
         parent::__construct($index);
         $this->type = 'questionChoice';
-        $this->choiceRepository = $choiceRepository;
     }
 
     public function searchQuestionChoices(array $questionDatas): array

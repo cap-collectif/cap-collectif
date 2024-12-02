@@ -18,21 +18,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateProposalFormMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly EntityManagerInterface $em;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(
-        FormFactoryInterface $formFactory,
-        EntityManagerInterface $em,
-        SettableOwnerResolver $settableOwnerResolver,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->formFactory = $formFactory;
-        $this->em = $em;
-        $this->settableOwnerResolver = $settableOwnerResolver;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

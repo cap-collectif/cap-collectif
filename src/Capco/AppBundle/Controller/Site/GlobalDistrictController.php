@@ -12,11 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class GlobalDistrictController extends Controller
 {
-    private readonly GlobalDistrictRepository $repository;
-
-    public function __construct(GlobalDistrictRepository $repository)
+    public function __construct(private readonly GlobalDistrictRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     /**

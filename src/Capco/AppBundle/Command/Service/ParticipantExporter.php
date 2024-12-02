@@ -12,21 +12,12 @@ use Symfony\Component\Serializer\SerializerInterface;
 class ParticipantExporter
 {
     public const CSV_DELIMITER = ';';
-    protected EntityManagerInterface $entityManager;
     protected bool $hasParticipants = false;
     protected SymfonyStyle $style;
-    private readonly SerializerInterface $serializer;
-    private readonly Filesystem $fileSystem;
     private ?string $delimiter = self::CSV_DELIMITER;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        SerializerInterface $serializer,
-        Filesystem $fileSystem
-    ) {
-        $this->entityManager = $entityManager;
-        $this->serializer = $serializer;
-        $this->fileSystem = $fileSystem;
+    public function __construct(protected EntityManagerInterface $entityManager, private readonly SerializerInterface $serializer, private readonly Filesystem $fileSystem)
+    {
     }
 
     public function initializeStyle(SymfonyStyle $style)

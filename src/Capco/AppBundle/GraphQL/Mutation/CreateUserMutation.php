@@ -17,18 +17,9 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class CreateUserMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $formFactory;
-    private $logger;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
+    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input): array

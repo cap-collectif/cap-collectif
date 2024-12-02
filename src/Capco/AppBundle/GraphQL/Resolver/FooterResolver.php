@@ -8,15 +8,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class FooterResolver implements QueryInterface
 {
-    private readonly RouterInterface $router;
-    private readonly FooterSocialNetworksResolver $footerSocialNetworksResolver;
-
-    public function __construct(
-        RouterInterface $router,
-        FooterSocialNetworksResolver $footerSocialNetworksResolver
-    ) {
-        $this->router = $router;
-        $this->footerSocialNetworksResolver = $footerSocialNetworksResolver;
+    public function __construct(private readonly RouterInterface $router, private readonly FooterSocialNetworksResolver $footerSocialNetworksResolver)
+    {
     }
 
     /**

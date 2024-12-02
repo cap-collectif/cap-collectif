@@ -25,34 +25,12 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractProposalStepMutation
 {
-    protected EntityManagerInterface $entityManager;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-
     //restrictions
     protected ?Project $project = null;
     protected ?AbstractStep $step = null;
-    protected GlobalIdResolver $globalIdResolver;
-    private readonly SelectionRepository $selectionRepository;
-    private readonly ConnectionBuilder $connectionBuilder;
-    private readonly Publisher $publisher;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        GlobalIdResolver $globalIdResolver,
-        SelectionRepository $selectionRepository,
-        ConnectionBuilder $connectionBuilder,
-        Publisher $publisher,
-        Indexer $indexer,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->entityManager = $entityManager;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->selectionRepository = $selectionRepository;
-        $this->connectionBuilder = $connectionBuilder;
-        $this->publisher = $publisher;
-        $this->indexer = $indexer;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(protected EntityManagerInterface $entityManager, protected GlobalIdResolver $globalIdResolver, private readonly SelectionRepository $selectionRepository, private readonly ConnectionBuilder $connectionBuilder, private readonly Publisher $publisher, private readonly Indexer $indexer, protected AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function isGranted(array $stepsIds, ?User $viewer, string $accessType): bool

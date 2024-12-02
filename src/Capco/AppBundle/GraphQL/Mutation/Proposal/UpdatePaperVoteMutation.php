@@ -25,24 +25,8 @@ class UpdatePaperVoteMutation implements MutationInterface
     final public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
     final public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
 
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $resolver;
-    private readonly ProposalStepPaperVoteCounterRepository $repository;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $resolver,
-        ProposalStepPaperVoteCounterRepository $repository,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->em = $em;
-        $this->resolver = $resolver;
-        $this->repository = $repository;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $resolver, private readonly ProposalStepPaperVoteCounterRepository $repository, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

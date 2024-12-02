@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="site_color")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteColorRepository")
  */
-class SiteColor
+class SiteColor implements \Stringable
 {
     use IdTrait;
 
@@ -72,7 +72,7 @@ class SiteColor
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getKeyname() : 'New color';
     }

@@ -12,13 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class StepEventsResolver implements QueryInterface
 {
-    private readonly ConnectionBuilder $builder;
-    private readonly EventRepository $repository;
-
-    public function __construct(ConnectionBuilder $builder, EventRepository $repository)
+    public function __construct(private readonly ConnectionBuilder $builder, private readonly EventRepository $repository)
     {
-        $this->repository = $repository;
-        $this->builder = $builder;
     }
 
     public function __invoke(AbstractStep $step, Arg $input): Connection

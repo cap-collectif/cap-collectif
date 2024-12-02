@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class SourceListResolver implements QueryInterface
 {
-    private readonly SourceRepository $repository;
-
-    public function __construct(SourceRepository $repository)
+    public function __construct(private readonly SourceRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     /**

@@ -16,19 +16,17 @@ abstract class AbstractUserToken
     protected string $token;
 
     /**
-     * @ORM\ManyToOne(targetEntity=User::class)
-     * @ORM\JoinColumn(nullable=false)
-     */
-    protected User $user;
-
-    /**
      * @ORM\Column(type="datetime", name="consumption_date", nullable=true)
      */
     protected ?\DateTime $consumptionDate = null;
 
-    public function __construct(User $user, ?string $token = null)
-    {
-        $this->user = $user;
+    public function __construct(/**
+     * @ORM\ManyToOne(targetEntity=User::class)
+     * @ORM\JoinColumn(nullable=false)
+     */
+    protected User $user,
+        ?string $token = null
+    ) {
         $this->token = $token ?? self::generateToken();
     }
 

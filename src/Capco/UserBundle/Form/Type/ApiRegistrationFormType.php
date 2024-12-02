@@ -24,11 +24,8 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class ApiRegistrationFormType extends AbstractType
 {
-    private readonly Manager $toggleManager;
-
-    public function __construct(Manager $toggleManager)
+    public function __construct(private readonly Manager $toggleManager)
     {
-        $this->toggleManager = $toggleManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

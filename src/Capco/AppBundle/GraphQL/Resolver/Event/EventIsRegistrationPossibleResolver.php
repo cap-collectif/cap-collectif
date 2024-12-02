@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class EventIsRegistrationPossibleResolver implements QueryInterface
 {
-    protected EventHelper $helper;
-
-    public function __construct(EventHelper $helper)
+    public function __construct(protected EventHelper $helper)
     {
-        $this->helper = $helper;
     }
 
     public function __invoke(Event $event): bool

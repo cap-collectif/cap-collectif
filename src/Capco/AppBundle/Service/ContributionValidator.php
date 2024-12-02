@@ -12,15 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ContributionValidator
 {
-    private readonly EntityManagerInterface $em;
-    private readonly AbstractVoteRepository $abstractVoteRepository;
-
-    public function __construct(
-        AbstractVoteRepository $abstractVoteRepository,
-        EntityManagerInterface $em
-    ) {
-        $this->em = $em;
-        $this->abstractVoteRepository = $abstractVoteRepository;
+    public function __construct(private readonly AbstractVoteRepository $abstractVoteRepository, private readonly EntityManagerInterface $em)
+    {
     }
 
     /**

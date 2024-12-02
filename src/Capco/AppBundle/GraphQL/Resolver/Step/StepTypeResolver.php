@@ -18,11 +18,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class StepTypeResolver implements QueryInterface
 {
-    private readonly TypeResolver $typeResolver;
-
-    public function __construct(TypeResolver $typeResolver)
+    public function __construct(private readonly TypeResolver $typeResolver)
     {
-        $this->typeResolver = $typeResolver;
     }
 
     public function __invoke(AbstractStep $step): Type

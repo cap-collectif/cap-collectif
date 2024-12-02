@@ -1266,20 +1266,16 @@ trait ProposalStepsTrait
 
     /**
      * @Then I should see my subscription as :username in the proposal followers list
-     *
-     * @param mixed $username
      */
-    public function iShouldSeeMySubscriptionInTheProposalFollowersList($username)
+    public function iShouldSeeMySubscriptionInTheProposalFollowersList(mixed $username)
     {
         $this->assertFirstProposalFollowerContains($username);
     }
 
     /**
      * @Then I should not see my subscription as :username in the proposal followers list
-     *
-     * @param mixed $username
      */
-    public function iShouldNotSeeMySubscriptionInTheProposalFollowersList($username)
+    public function iShouldNotSeeMySubscriptionInTheProposalFollowersList(mixed $username)
     {
         $this->assertFirstProposalFollowerNotContains($username);
     }

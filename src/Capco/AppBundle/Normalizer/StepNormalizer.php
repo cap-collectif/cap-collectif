@@ -14,11 +14,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class StepNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private readonly ObjectNormalizer $normalizer;
 
-    public function __construct(ObjectNormalizer $normalizer)
+    public function __construct(private readonly ObjectNormalizer $normalizer)
     {
-        $this->normalizer = $normalizer;
     }
 
     public function hasCacheableSupportsMethod(): bool

@@ -84,7 +84,7 @@ class UpdateProfilePersonalDataMutation extends BaseUpdateProfile
 
         try {
             $this->em->flush();
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             throw new UserError();
         }
 

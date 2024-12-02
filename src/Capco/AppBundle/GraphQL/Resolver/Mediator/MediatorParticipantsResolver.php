@@ -12,15 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class MediatorParticipantsResolver implements QueryInterface
 {
-    private readonly ConnectionBuilder $connectionBuilder;
-    private readonly ParticipantRepository $participantRepository;
-
-    public function __construct(
-        ConnectionBuilder $connectionBuilder,
-        ParticipantRepository $participantRepository
-    ) {
-        $this->connectionBuilder = $connectionBuilder;
-        $this->participantRepository = $participantRepository;
+    public function __construct(private readonly ConnectionBuilder $connectionBuilder, private readonly ParticipantRepository $participantRepository)
+    {
     }
 
     public function __invoke(Mediator $mediator, Argument $args): ConnectionInterface

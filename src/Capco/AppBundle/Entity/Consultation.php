@@ -25,7 +25,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
-class Consultation implements IndexableInterface, Ownerable, CreatableInterface
+class Consultation implements IndexableInterface, Ownerable, CreatableInterface, \Stringable
 {
     use CreatableTrait;
     use CustomCodeTrait;
@@ -141,7 +141,7 @@ class Consultation implements IndexableInterface, Ownerable, CreatableInterface
         }
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->id) {
             return $this->getTitle();

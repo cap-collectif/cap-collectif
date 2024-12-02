@@ -26,35 +26,23 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
     final public const CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS = 'capco:export:questionnaire:contributions';
     private const SERIALIZER_FORMAT = 'csv';
     protected array $customFields;
-    protected TranslatorInterface $translator;
     protected string $projectRootDir;
-    private readonly string $exportDirectory;
-    private readonly Manager $toggleManager;
-    private readonly ProjectDownloadResolver $projectDownloadResolver;
-    private readonly QuestionnaireRepository $questionnaireRepository;
     private readonly Serializer $serializer;
-    private readonly LoggerInterface $logger;
     private string $delimiter;
 
     public function __construct(
         ExportUtils $exportUtils,
-        ProjectDownloadResolver $projectDownloadResolver,
-        QuestionnaireRepository $questionnaireRepository,
-        Manager $manager,
-        TranslatorInterface $translator,
+        private readonly ProjectDownloadResolver $projectDownloadResolver,
+        private readonly QuestionnaireRepository $questionnaireRepository,
+        private readonly Manager $toggleManager,
+        protected TranslatorInterface $translator,
         string $projectRootDir,
-        string $exportDirectory,
-        LoggerInterface $logger
+        private readonly string $exportDirectory,
+        private readonly LoggerInterface $logger
     ) {
-        $this->toggleManager = $manager;
-        $this->projectDownloadResolver = $projectDownloadResolver;
-        $this->questionnaireRepository = $questionnaireRepository;
         $this->customFields = [];
-        $this->translator = $translator;
         $this->projectRootDir = $projectRootDir;
-        $this->exportDirectory = $exportDirectory;
         $this->serializer = $this->initializeSerializer();
-        $this->logger = $logger;
 
         parent::__construct($exportUtils);
     }

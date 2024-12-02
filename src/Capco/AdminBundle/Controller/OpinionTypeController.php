@@ -12,12 +12,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class OpinionTypeController extends Controller
 {
-    private readonly OpinionTypeRepository $opinionTypeRepository;
-
-    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, OpinionTypeRepository $opinionTypeRepository)
+    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, private readonly OpinionTypeRepository $opinionTypeRepository)
     {
         parent::__construct($breadcrumbsBuilder, $pool);
-        $this->opinionTypeRepository = $opinionTypeRepository;
     }
 
     public function createAction(Request $request): Response

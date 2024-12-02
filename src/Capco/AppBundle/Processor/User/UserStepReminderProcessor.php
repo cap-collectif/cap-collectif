@@ -8,11 +8,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserStepReminderProcessor implements ProcessorInterface
 {
-    private readonly UserNotifier $notifier;
-
-    public function __construct(UserNotifier $notifier)
+    public function __construct(private readonly UserNotifier $notifier)
     {
-        $this->notifier = $notifier;
     }
 
     public function process(Message $message, array $options): bool

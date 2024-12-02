@@ -17,7 +17,6 @@ class UserArchiveRequestProcessor implements ProcessorInterface
 {
     protected $userArchiveRepository;
     protected $userArchiveNotifier;
-    protected $rootDir;
     protected $em;
     protected $kernel;
 
@@ -26,11 +25,10 @@ class UserArchiveRequestProcessor implements ProcessorInterface
         EntityManagerInterface $em,
         UserArchiveNotifier $userArchiveNotifier,
         KernelInterface $kernel,
-        $rootDir
+        protected $rootDir
     ) {
         $this->userArchiveRepository = $userArchiveRepository;
         $this->userArchiveNotifier = $userArchiveNotifier;
-        $this->rootDir = $rootDir;
         $this->em = $em;
         $this->kernel = $kernel;
     }

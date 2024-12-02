@@ -31,15 +31,8 @@ class AnalyticsSearch
         'source',
     ];
 
-    private readonly Index $index;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector;
-
-    public function __construct(Index $index, LoggerInterface $logger, GlobalConfigurationTimeZoneDetector $timezoneDetector)
+    public function __construct(private readonly Index $index, private readonly LoggerInterface $logger, private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector)
     {
-        $this->index = $index;
-        $this->logger = $logger;
-        $this->timezoneDetector = $timezoneDetector;
     }
 
     public function getInternalAnalyticsResultSet(
@@ -80,7 +73,7 @@ class AnalyticsSearch
 
         try {
             $searchResult = $multiSearchQuery->search();
-        } catch (HttpException $exception) {
+        } catch (HttpException) {
             $searchResult = null;
             $this->logger->error('Internal analytics multi search query timed out.', [
                 'requested_fields' => $requestedFields,

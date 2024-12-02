@@ -21,30 +21,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class AbstractEventMutation implements MutationInterface
 {
-    protected EntityManagerInterface $em;
-    protected GlobalIdResolver $globalIdResolver;
-    protected FormFactoryInterface $formFactory;
-    protected Indexer $indexer;
-    protected Publisher $publisher;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-    protected TranslatorInterface $translator;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        FormFactoryInterface $formFactory,
-        Indexer $indexer,
-        Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker,
-        TranslatorInterface $translator
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->indexer = $indexer;
-        $this->publisher = $publisher;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->translator = $translator;
+    public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected FormFactoryInterface $formFactory, protected Indexer $indexer, protected Publisher $publisher, protected AuthorizationCheckerInterface $authorizationChecker, protected TranslatorInterface $translator)
+    {
     }
 
     /**

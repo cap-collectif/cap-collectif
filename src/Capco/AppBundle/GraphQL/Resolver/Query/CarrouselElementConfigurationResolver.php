@@ -12,11 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class CarrouselElementConfigurationResolver implements QueryInterface
 {
-    private readonly LoggerInterface $logger;
-
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private readonly LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
     /**

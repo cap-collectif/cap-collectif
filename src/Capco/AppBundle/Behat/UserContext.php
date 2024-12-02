@@ -75,10 +75,8 @@ class UserContext extends DefaultContext
 
     /**
      * @Then user :userId registered less than :time minutes ago
-     *
-     * @param mixed $time
      */
-    public function userRegisteredLessThanXMinutesgo(string $userId, $time)
+    public function userRegisteredLessThanXMinutesgo(string $userId, mixed $time)
     {
         $this->getEntityManager()->clear();
         $user = $this->getRepository('CapcoUserBundle:User')->find($userId);

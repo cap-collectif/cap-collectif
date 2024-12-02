@@ -24,30 +24,8 @@ use Twig\Environment;
 
 final class DashboardAction
 {
-    private $dashboardBlocks = [];
-    private $breadcrumbsBuilder;
-    private $templateRegistry;
-    private $pool;
-    private $twig;
-    private readonly TokenStorageInterface $tokenStorage;
-    private $router;
-
-    public function __construct(
-        array $dashboardBlocks,
-        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
-        TemplateRegistryInterface $templateRegistry,
-        Pool $pool,
-        Environment $twig,
-        TokenStorageInterface $tokenStorage,
-        RouterInterface $router
-    ) {
-        $this->dashboardBlocks = $dashboardBlocks;
-        $this->breadcrumbsBuilder = $breadcrumbsBuilder;
-        $this->templateRegistry = $templateRegistry;
-        $this->pool = $pool;
-        $this->twig = $twig;
-        $this->tokenStorage = $tokenStorage;
-        $this->router = $router;
+    public function __construct(private readonly array $dashboardBlocks, private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder, private readonly TemplateRegistryInterface $templateRegistry, private readonly Pool $pool, private readonly Environment $twig, private readonly TokenStorageInterface $tokenStorage, private readonly RouterInterface $router)
+    {
     }
 
     public function __invoke(Request $request): Response

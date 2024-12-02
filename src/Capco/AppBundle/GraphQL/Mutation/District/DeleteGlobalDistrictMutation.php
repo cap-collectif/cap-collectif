@@ -13,18 +13,9 @@ use Psr\Log\LoggerInterface;
 class DeleteGlobalDistrictMutation implements MutationInterface
 {
     use MutationTrait;
-    protected LoggerInterface $logger;
-    protected EntityManagerInterface $em;
-    protected GlobalIdResolver $globalIdResolver;
 
-    public function __construct(
-        LoggerInterface $logger,
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->logger = $logger;
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(protected LoggerInterface $logger, protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(Argument $input, $viewer): array

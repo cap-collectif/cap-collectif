@@ -29,17 +29,13 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class CommentableCommentsDataLoader extends BatchDataLoader
 {
-    private $proposalCommentRepository;
-    private $eventCommentRepository;
-    private $postCommentRepository;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        ProposalCommentRepository $proposalCommentRepository,
-        EventCommentRepository $eventCommentRepository,
-        PostCommentRepository $postCommentRepository,
+        private readonly ProposalCommentRepository $proposalCommentRepository,
+        private readonly EventCommentRepository $eventCommentRepository,
+        private readonly PostCommentRepository $postCommentRepository,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -47,9 +43,6 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->proposalCommentRepository = $proposalCommentRepository;
-        $this->eventCommentRepository = $eventCommentRepository;
-        $this->postCommentRepository = $postCommentRepository;
         parent::__construct(
             $this->all(...),
             $promiseFactory,
@@ -304,22 +297,12 @@ class CommentableCommentsDataLoader extends BatchDataLoader
 
     private function getCommentableRepository(CommentableInterface $commentable): ?EntityRepository
     {
-        switch (true) {
-            case $commentable instanceof Proposal:
-            case $commentable instanceof ProposalComment:
-                return $this->proposalCommentRepository;
-
-            case $commentable instanceof Event:
-            case $commentable instanceof EventComment:
-                return $this->eventCommentRepository;
-
-            case $commentable instanceof Post:
-            case $commentable instanceof PostComment:
-                return $this->postCommentRepository;
-
-            default:
-                return null;
-        }
+        return match (true) {
+            $commentable instanceof Proposal, $commentable instanceof ProposalComment => $this->proposalCommentRepository,
+            $commentable instanceof Event, $commentable instanceof EventComment => $this->eventCommentRepository,
+            $commentable instanceof Post, $commentable instanceof PostComment => $this->postCommentRepository,
+            default => null,
+        };
     }
 
     private function getRealClass($object): string
@@ -330,6 +313,6 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             return $reflect->getParentClass()->name;
         }
 
-        return \get_class($object);
+        return $object::class;
     }
 }

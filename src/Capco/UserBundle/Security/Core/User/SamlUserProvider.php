@@ -10,13 +10,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class SamlUserProvider implements UserProviderInterface
 {
-    private readonly UserManager $userManager;
-    private readonly GroupMutation $groupMutation;
-
-    public function __construct(UserManager $manager, GroupMutation $groupMutation)
+    public function __construct(private readonly UserManager $userManager, private readonly GroupMutation $groupMutation)
     {
-        $this->userManager = $manager;
-        $this->groupMutation = $groupMutation;
     }
 
     public function loadUserByUsername($id)

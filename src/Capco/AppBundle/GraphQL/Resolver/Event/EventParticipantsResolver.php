@@ -12,15 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class EventParticipantsResolver implements QueryInterface
 {
-    private $eventRegistrationRepository;
-    private $logger;
-
-    public function __construct(
-        EventRegistrationRepository $eventRegistrationRepository,
-        LoggerInterface $logger
-    ) {
-        $this->eventRegistrationRepository = $eventRegistrationRepository;
-        $this->logger = $logger;
+    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Event $event, Arg $args): Connection

@@ -20,57 +20,27 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class FindDuplicatesSsoUsersCommand extends Command
 {
-    private readonly DeleteAccountMutation $deleteAccountMutation;
-    private readonly UserRepository $userRepository;
-    private readonly UserContributionsCountResolver $countResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly UserGroupRepository $ugRepository;
-    private readonly LoggerInterface $logger;
-
     public function __construct(
         string $name,
-        UserRepository $userRepository,
-        UserContributionsCountResolver $countResolver,
-        DeleteAccountMutation $deleteAccountMutation,
-        EntityManagerInterface $em,
-        UserGroupRepository $ugRepository,
-        LoggerInterface $logger
+        private readonly UserRepository $userRepository,
+        private readonly UserContributionsCountResolver $countResolver,
+        private readonly DeleteAccountMutation $deleteAccountMutation,
+        private readonly EntityManagerInterface $em,
+        private readonly UserGroupRepository $ugRepository,
+        private readonly LoggerInterface $logger
     ) {
         parent::__construct($name);
-        $this->deleteAccountMutation = $deleteAccountMutation;
-        $this->userRepository = $userRepository;
-        $this->countResolver = $countResolver;
-        $this->em = $em;
-        $this->ugRepository = $ugRepository;
-        $this->logger = $logger;
     }
 
     public function findSameUsers(string $sso, string $ssoId): array
     {
-        switch ($sso) {
-            case 'france_connect':
-                $users = $this->userRepository->findSameFranceConnectId($ssoId);
-
-                break;
-
-            case 'facebook':
-                $users = $this->userRepository->findSameFacebookId($ssoId);
-
-                break;
-
-            case 'twitter':
-                $users = $this->userRepository->findSameTwitterId($ssoId);
-
-                break;
-
-            case 'openId':
-                $users = $this->userRepository->findSameOpenId($ssoId);
-
-                break;
-
-            default:
-                $users = $this->userRepository->findSameFranceConnectId($ssoId);
-        }
+        $users = match ($sso) {
+            'france_connect' => $this->userRepository->findSameFranceConnectId($ssoId),
+            'facebook' => $this->userRepository->findSameFacebookId($ssoId),
+            'twitter' => $this->userRepository->findSameTwitterId($ssoId),
+            'openId' => $this->userRepository->findSameOpenId($ssoId),
+            default => $this->userRepository->findSameFranceConnectId($ssoId),
+        };
 
         return $users;
     }
@@ -337,16 +307,11 @@ class FindDuplicatesSsoUsersCommand extends Command
 
     private function getSsoFieldName(string $sso): string
     {
-        switch ($sso) {
-            case 'franceConnect':
-                return 'franceConnectId';
-
-            case 'openId':
-                return 'openId';
-
-            default:
-                return $sso . '_id';
-        }
+        return match ($sso) {
+            'franceConnect' => 'franceConnectId',
+            'openId' => 'openId',
+            default => $sso . '_id',
+        };
     }
 
     private function countUserContributions(array $users, SymfonyStyle $io): array

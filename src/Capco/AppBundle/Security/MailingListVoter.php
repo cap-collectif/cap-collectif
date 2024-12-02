@@ -27,18 +27,12 @@ class MailingListVoter extends AbstractOwnerableVoter
             return false;
         }
 
-        switch ($attribute) {
-            case self::CREATE:
-                return self::canCreate($viewer);
-
-            case self::VIEW:
-                return self::canView($subject, $viewer);
-
-            case self::DELETE:
-                return self::canDelete($subject, $viewer);
-        }
-
-        throw new \LogicException(__CLASS__ . ' : unknown attribute ' . $attribute);
+        return match ($attribute) {
+            self::CREATE => self::canCreate($viewer),
+            self::VIEW => self::canView($subject, $viewer),
+            self::DELETE => self::canDelete($subject, $viewer),
+            default => throw new \LogicException(__CLASS__ . ' : unknown attribute ' . $attribute),
+        };
     }
 
     protected static function canDelete(Ownerable $mailingList, User $viewer): bool

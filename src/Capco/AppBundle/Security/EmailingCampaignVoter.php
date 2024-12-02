@@ -37,31 +37,16 @@ class EmailingCampaignVoter extends AbstractOwnerableVoter
             return false;
         }
 
-        switch ($attribute) {
-            case self::CREATE:
-                return self::canCreate($viewer);
-
-            case self::VIEW:
-                return self::canView($subject, $viewer);
-
-            case self::EDIT:
-                return self::canEdit($subject, $viewer);
-
-            case self::DELETE:
-                return self::canDelete($subject, $viewer);
-
-            case self::SEND:
-                return self::canSend($subject, $viewer);
-
-            case self::TEST:
-                return self::canTest($subject, $viewer);
-
-            case self::CANCEL:
-                return self::canCancel($subject, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::CREATE => self::canCreate($viewer),
+            self::VIEW => self::canView($subject, $viewer),
+            self::EDIT => self::canEdit($subject, $viewer),
+            self::DELETE => self::canDelete($subject, $viewer),
+            self::SEND => self::canSend($subject, $viewer),
+            self::TEST => self::canTest($subject, $viewer),
+            self::CANCEL => self::canCancel($subject, $viewer),
+            default => false,
+        };
     }
 
     private static function canSend($subject, $viewer): bool

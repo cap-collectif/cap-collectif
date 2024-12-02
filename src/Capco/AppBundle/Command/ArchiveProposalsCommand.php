@@ -16,28 +16,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class ArchiveProposalsCommand extends Command
 {
-    private readonly ProposalRepository $proposalRepository;
-    private readonly CollectStepRepository $collectStepRepository;
-    private readonly SelectionStepRepository $selectionStepRepository;
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver;
-    private readonly Indexer $indexer;
-
     public function __construct(
-        EntityManagerInterface $em,
-        ProposalRepository $proposalRepository,
-        CollectStepRepository $collectStepRepository,
-        SelectionStepRepository $selectionStepRepository,
-        ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver,
-        Indexer $indexer
+        private readonly EntityManagerInterface $em,
+        private readonly ProposalRepository $proposalRepository,
+        private readonly CollectStepRepository $collectStepRepository,
+        private readonly SelectionStepRepository $selectionStepRepository,
+        private readonly ProposalArchiveLimitDateResolver $proposalArchiveLimitDateResolver,
+        private readonly Indexer $indexer
     ) {
         parent::__construct();
-        $this->proposalRepository = $proposalRepository;
-        $this->collectStepRepository = $collectStepRepository;
-        $this->selectionStepRepository = $selectionStepRepository;
-        $this->em = $em;
-        $this->proposalArchiveLimitDateResolver = $proposalArchiveLimitDateResolver;
-        $this->indexer = $indexer;
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int

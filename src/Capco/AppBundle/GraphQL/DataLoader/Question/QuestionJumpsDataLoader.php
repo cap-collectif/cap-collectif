@@ -16,8 +16,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class QuestionJumpsDataLoader extends BatchDataLoader
 {
-    private $repository;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
@@ -28,7 +26,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
         bool $enableCache,
-        LogicJumpRepository $repository
+        private readonly LogicJumpRepository $repository
     ) {
         parent::__construct(
             $this->all(...),
@@ -42,7 +40,6 @@ class QuestionJumpsDataLoader extends BatchDataLoader
             $stopwatch,
             $enableCache
         );
-        $this->repository = $repository;
     }
 
     public function all(array $keys)

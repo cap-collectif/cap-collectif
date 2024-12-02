@@ -27,24 +27,8 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
     final public const STEP_NOT_FOUND = 'STEP_NOT_FOUND';
     final public const STEP_NOT_VOTABLE = 'STEP_NOT_VOTABLE';
 
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $resolver;
-    private readonly ProposalStepPaperVoteCounterRepository $repository;
-    private readonly Indexer $indexer;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $resolver,
-        ProposalStepPaperVoteCounterRepository $repository,
-        Indexer $indexer,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->em = $em;
-        $this->resolver = $resolver;
-        $this->repository = $repository;
-        $this->indexer = $indexer;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $resolver, private readonly ProposalStepPaperVoteCounterRepository $repository, private readonly Indexer $indexer, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -58,7 +42,7 @@ class UpdateProposalStepPaperVoteCounterMutation implements MutationInterface
             $paperVote->setTotalCount($input->offsetGet('totalCount'));
             $paperVote->setTotalPointsCount($input->offsetGet('totalPointsCount'));
             $this->em->flush();
-            $this->indexer->index(\get_class($proposal), $proposal->getId());
+            $this->indexer->index($proposal::class, $proposal->getId());
             $this->indexer->finishBulk();
         } catch (UserError $error) {
             return ['error' => $error->getMessage()];

@@ -43,33 +43,9 @@ use Swarrot\Broker\Message;
 class ElasticsearchDoctrineListener implements EventSubscriber
 {
     private const BULK_SIZE = 200;
-    private readonly LoggerInterface $logger;
-    private readonly ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener;
-    private readonly AbstractResponseRepository $responseRepository;
-    private readonly ProposalRepository $proposalRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly EntityChangeSetResolver $changeSetResolver;
-    private readonly OpinionRepository $opinionRepository;
 
-    public function __construct(
-        ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener,
-        LoggerInterface $logger,
-        AbstractResponseRepository $responseRepository,
-        ProposalRepository $proposalRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        OpinionRepository $opinionRepository,
-        EntityChangeSetResolver $changeSetResolver
-    ) {
-        $this->logger = $logger;
-        $this->elasticsearchRabbitMQListener = $elasticsearchRabbitMQListener;
-        $this->responseRepository = $responseRepository;
-        $this->proposalRepository = $proposalRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->changeSetResolver = $changeSetResolver;
-        $this->opinionRepository = $opinionRepository;
+    public function __construct(private readonly ElasticsearchRabbitMQListener $elasticsearchRabbitMQListener, private readonly LoggerInterface $logger, private readonly AbstractResponseRepository $responseRepository, private readonly ProposalRepository $proposalRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly OpinionRepository $opinionRepository, private readonly EntityChangeSetResolver $changeSetResolver)
+    {
     }
 
     public function getSubscribedEvents(): array
@@ -108,7 +84,7 @@ class ElasticsearchDoctrineListener implements EventSubscriber
         );
 
         // We cannot dynamically call static methods with phpspec, so we hardcode the priority to 1.
-        if (false !== strpos(\get_class($entity), 'Double')) {
+        if (str_contains($entity::class, 'Double')) {
             $priority = 1;
         } else {
             $priority = $entity::getElasticsearchPriority();

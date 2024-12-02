@@ -22,13 +22,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class DeveloperController extends Controller
 {
     final public const CACHE_KEY = 'DeveloperController';
-    private readonly AdapterInterface $cache;
-    private readonly TypeResolver $typeResolver;
 
-    public function __construct(AdapterInterface $cacheApp, TypeResolver $typeResolver)
+    public function __construct(private readonly AdapterInterface $cache, private readonly TypeResolver $typeResolver)
     {
-        $this->cache = $cacheApp;
-        $this->typeResolver = $typeResolver;
     }
 
     /**
@@ -142,7 +138,7 @@ class DeveloperController extends Controller
 
                 // We set info about preview
                 $solution->{'preview'} = false;
-                if ('Preview' === substr((string) $aliases[0], 0, 7) || $existsInPreviewDirectory) {
+                if (str_starts_with((string) $aliases[0], 'Preview') || $existsInPreviewDirectory) {
                     $solution->{'preview'} = true;
                     $solution->{'previewHasAPublicType'} = \in_array(
                         str_replace('Preview', 'Public', (string) $aliases[0]),
@@ -159,7 +155,7 @@ class DeveloperController extends Controller
                 if (
                     !\in_array($aliases[0], $publicWhiteList)
                     && false === $solution->{'preview'}
-                    && 'Public' !== substr((string) $aliases[0], 0, 6)
+                    && !str_starts_with((string) $aliases[0], 'Public')
                     && (!$existsInPreviewDirectory && !$existsInPublicDirectory)
                 ) {
                     continue;
@@ -219,15 +215,15 @@ class DeveloperController extends Controller
                         continue;
                     }
                     // We exclude Payload
-                    if (false !== strpos($solution->name, 'Payload')) {
+                    if (str_contains($solution->name, 'Payload')) {
                         continue;
                     }
                     // We exclude Edge
-                    if (false !== strpos($solution->name, 'Edge')) {
+                    if (str_contains($solution->name, 'Edge')) {
                         continue;
                     }
                     // We exclude Connection
-                    if (false !== strpos($solution->name, 'Connection')) {
+                    if (str_contains($solution->name, 'Connection')) {
                         continue;
                     }
                     $objects[] = $solution;

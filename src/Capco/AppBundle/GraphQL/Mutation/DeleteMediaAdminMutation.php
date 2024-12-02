@@ -15,24 +15,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class DeleteMediaAdminMutation implements MutationInterface
 {
     use MutationTrait;
-    protected LoggerInterface $logger;
-    protected EntityManagerInterface $em;
-    protected FormFactoryInterface $formFactory;
-    protected MediaRepository $mediaRepository;
-    protected MediaManager $mediaManager;
 
-    public function __construct(
-        LoggerInterface $logger,
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        MediaRepository $mediaRepository,
-        MediaManager $mediaManager
-    ) {
-        $this->logger = $logger;
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->mediaRepository = $mediaRepository;
-        $this->mediaManager = $mediaManager;
+    public function __construct(protected LoggerInterface $logger, protected EntityManagerInterface $em, protected FormFactoryInterface $formFactory, protected MediaRepository $mediaRepository, protected MediaManager $mediaManager)
+    {
     }
 
     public function __invoke(Argument $input): array

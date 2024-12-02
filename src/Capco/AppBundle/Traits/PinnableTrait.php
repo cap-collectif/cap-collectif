@@ -20,11 +20,9 @@ trait PinnableTrait
     }
 
     /**
-     * @param mixed $pinned
-     *
      * @return $this
      */
-    public function setPinned($pinned)
+    public function setPinned(mixed $pinned)
     {
         $this->pinned = $pinned;
 

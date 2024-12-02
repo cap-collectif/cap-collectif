@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AlreadyUsedUserIdentificationCodesCountResolver implements QueryInterface
 {
-    private readonly UserIdentificationCodeRepository $repository;
-
-    public function __construct(UserIdentificationCodeRepository $repository)
+    public function __construct(private readonly UserIdentificationCodeRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(UserIdentificationCodeList $list): int

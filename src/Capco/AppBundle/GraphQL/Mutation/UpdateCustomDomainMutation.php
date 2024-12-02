@@ -23,24 +23,8 @@ class UpdateCustomDomainMutation implements MutationInterface
     final public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
     final public const CNAME_NOT_VALID = 'CNAME_NOT_VALID';
 
-    private readonly EntityManagerInterface $em;
-    private readonly SiteSettingsRepository $siteSettingsRepository;
-    private readonly LoggerInterface $logger;
-    private readonly DeployerClient $deployerClient;
-    private readonly ValidatorInterface $validator;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        SiteSettingsRepository $siteSettingsRepository,
-        LoggerInterface $logger,
-        DeployerClient $deployerClient,
-        ValidatorInterface $validator
-    ) {
-        $this->em = $em;
-        $this->siteSettingsRepository = $siteSettingsRepository;
-        $this->logger = $logger;
-        $this->deployerClient = $deployerClient;
-        $this->validator = $validator;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SiteSettingsRepository $siteSettingsRepository, private readonly LoggerInterface $logger, private readonly DeployerClient $deployerClient, private readonly ValidatorInterface $validator)
+    {
     }
 
     public function __invoke(Argument $input, User $user): array

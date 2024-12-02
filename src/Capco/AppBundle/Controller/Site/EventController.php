@@ -24,33 +24,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class EventController extends Controller
 {
-    private readonly EventHelper $eventHelper;
-    private readonly EventRepository $eventRepository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly SiteParameterResolver $parameterResolver;
-    private readonly TranslatorInterface $tranlator;
-    private readonly SessionInterface $session;
-    private readonly string $projectDir;
-
-    public function __construct(
-        EventHelper $eventHelper,
-        EventRepository $eventRepository,
-        EntityManagerInterface $entityManager,
-        FormFactoryInterface $formFactory,
-        SiteParameterResolver $parameterResolver,
-        TranslatorInterface $tranlator,
-        SessionInterface $session,
-        string $projectDir
-    ) {
-        $this->entityManager = $entityManager;
-        $this->eventHelper = $eventHelper;
-        $this->eventRepository = $eventRepository;
-        $this->formFactory = $formFactory;
-        $this->parameterResolver = $parameterResolver;
-        $this->tranlator = $tranlator;
-        $this->session = $session;
-        $this->projectDir = $projectDir;
+    public function __construct(private readonly EventHelper $eventHelper, private readonly EventRepository $eventRepository, private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly SiteParameterResolver $parameterResolver, private readonly TranslatorInterface $tranlator, private readonly SessionInterface $session, private readonly string $projectDir)
+    {
     }
 
     /**
@@ -109,10 +84,8 @@ class EventController extends Controller
     /**
      * @Route("/events/{slug}", name="app_event_show", defaults={"_feature_flags" = "calendar"})
      * @Template("@CapcoApp/Event/show.html.twig")
-     *
-     * @param mixed $slug
      */
-    public function showAction(Request $request, $slug)
+    public function showAction(Request $request, mixed $slug)
     {
         $filters = $this->entityManager->getFilters();
         if ($filters->isEnabled('softdeleted')) {

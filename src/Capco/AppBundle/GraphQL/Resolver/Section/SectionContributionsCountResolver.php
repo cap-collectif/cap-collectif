@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class SectionContributionsCountResolver implements QueryInterface
 {
-    private $opinionRepository;
-
-    public function __construct(OpinionRepository $opinionRepository)
+    public function __construct(private readonly OpinionRepository $opinionRepository)
     {
-        $this->opinionRepository = $opinionRepository;
     }
 
     public function __invoke(OpinionType $type, ?User $viewer): int

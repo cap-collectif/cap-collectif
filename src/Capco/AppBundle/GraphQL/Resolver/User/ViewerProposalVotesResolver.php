@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ViewerProposalVotesResolver implements QueryInterface
 {
-    private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
-
-    public function __construct(ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader)
+    public function __construct(private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader)
     {
-        $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
     }
 
     public function __invoke(User $user, Argument $args): Promise

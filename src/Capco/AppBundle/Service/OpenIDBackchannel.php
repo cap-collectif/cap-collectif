@@ -14,30 +14,8 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class OpenIDBackchannel
 {
-    private readonly UserRepository $userRepository;
-    private readonly SessionWithJsonHandler $redisSessionHandler;
-    private readonly string $backChannelSecret;
-    private readonly string $env;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly SerializerInterface $serializer;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        UserRepository $userRepository,
-        SessionWithJsonHandler $redisSessionHandler,
-        EntityManagerInterface $entityManager,
-        SerializerInterface $serializer,
-        string $env,
-        string $backChannelSecret,
-        LoggerInterface $logger
-    ) {
-        $this->userRepository = $userRepository;
-        $this->redisSessionHandler = $redisSessionHandler;
-        $this->backChannelSecret = $backChannelSecret;
-        $this->env = $env;
-        $this->entityManager = $entityManager;
-        $this->serializer = $serializer;
-        $this->logger = $logger;
+    public function __construct(private readonly UserRepository $userRepository, private readonly SessionWithJsonHandler $redisSessionHandler, private readonly EntityManagerInterface $entityManager, private readonly SerializerInterface $serializer, private readonly string $env, private readonly string $backChannelSecret, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Request $request, string $token): JsonResponse

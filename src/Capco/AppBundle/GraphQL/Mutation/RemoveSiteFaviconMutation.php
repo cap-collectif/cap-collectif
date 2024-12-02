@@ -9,18 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 class RemoveSiteFaviconMutation implements MutationInterface
 {
-    private $siteImageRepository;
-    private $siteFaviconProcessor;
-    private $em;
-
-    public function __construct(
-        SiteImageRepository $siteImageRepository,
-        SiteFaviconProcessor $siteFaviconProcessor,
-        EntityManagerInterface $em
-    ) {
-        $this->siteImageRepository = $siteImageRepository;
-        $this->em = $em;
-        $this->siteFaviconProcessor = $siteFaviconProcessor;
+    public function __construct(private readonly SiteImageRepository $siteImageRepository, private readonly SiteFaviconProcessor $siteFaviconProcessor, private readonly EntityManagerInterface $em)
+    {
     }
 
     public function __invoke(): array

@@ -29,15 +29,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
     private const SUCCESS = 0;
     private const ERROR = 1;
     private const FILE_FOLDER = '/public/magiclinks/';
-
-    private readonly UserEmailProvider $userProvider;
-    private readonly EntityManagerInterface $em;
-    private readonly KernelInterface $kernel;
-    private readonly UserRepository $userRepository;
     private SymfonyStyle $style;
-    private readonly UserPasswordEncoderInterface $passwordEncoder;
-    private readonly ConfigFileSystem $filesystem;
-    private readonly RouterInterface $router;
     private string $absoluteFilePath;
 
     private array $users = [];
@@ -47,22 +39,15 @@ class GenerateMagicLinksFromCSVCommand extends Command
     private array $unHandledUsers = [];
 
     public function __construct(
-        UserEmailProvider $userProvider,
-        EntityManagerInterface $em,
-        KernelInterface $kernel,
-        UserRepository $userRepository,
-        UserPasswordEncoderInterface $passwordEncoder,
-        ConfigFileSystem $filesystem,
-        RouterInterface $router
+        private readonly UserEmailProvider $userProvider,
+        private readonly EntityManagerInterface $em,
+        private readonly KernelInterface $kernel,
+        private readonly UserRepository $userRepository,
+        private readonly UserPasswordEncoderInterface $passwordEncoder,
+        private readonly ConfigFileSystem $filesystem,
+        private readonly RouterInterface $router
     ) {
         parent::__construct();
-        $this->userProvider = $userProvider;
-        $this->em = $em;
-        $this->kernel = $kernel;
-        $this->userRepository = $userRepository;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->filesystem = $filesystem;
-        $this->router = $router;
     }
 
     public function execute(InputInterface $input, OutputInterface $output)
@@ -302,7 +287,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
                 ;
                 $newData[$user['email']] = $user;
                 ++$count;
-            } catch (\Throwable $th) {
+            } catch (\Throwable) {
                 $this->unHandledUsers[] = $user;
             }
             unset($newData[$key]);
@@ -350,7 +335,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
                 } else {
                     $this->unHandledUsers[] = $row;
                 }
-            } catch (\Throwable $th) {
+            } catch (\Throwable) {
                 $this->unHandledUsers[] = $row;
             }
         }

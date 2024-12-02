@@ -10,13 +10,8 @@ use Symfony\Component\HttpFoundation\File\UploadedFile;
 
 class MediaManager
 {
-    protected EntityManagerInterface $entityManager;
-    protected MediaProvider $mediaProvider;
-
-    public function __construct(EntityManagerInterface $entityManager, MediaProvider $mediaProvider)
+    public function __construct(protected EntityManagerInterface $entityManager, protected MediaProvider $mediaProvider)
     {
-        $this->entityManager = $entityManager;
-        $this->mediaProvider = $mediaProvider;
     }
 
     public function createFileFromUploadedFile(

@@ -49,14 +49,14 @@ class ElasticsearchRabbitMQListenerSpec extends ObjectBehavior
 
         $messageEvent = new Message(
             json_encode([
-                'class' => \get_class($event->getWrappedObject()),
+                'class' => $event->getWrappedObject()::class,
                 'id' => 'event1',
             ])
         );
 
         $messageProposal = new Message(
             json_encode([
-                'class' => \get_class($proposal->getWrappedObject()),
+                'class' => $proposal->getWrappedObject()::class,
                 'id' => 'proposal1',
             ])
         );

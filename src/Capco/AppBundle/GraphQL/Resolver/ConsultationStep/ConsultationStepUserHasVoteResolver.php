@@ -14,27 +14,8 @@ use Psr\Log\LoggerInterface;
 
 class ConsultationStepUserHasVoteResolver implements QueryInterface
 {
-    private $userRepo;
-    private $opinionVoteRepo;
-    private $argumentVoteRepo;
-    private $sourceVoteRepo;
-    private $versionVoteRepo;
-    private $logger;
-
-    public function __construct(
-        UserRepository $userRepo,
-        OpinionVoteRepository $opinionVoteRepo,
-        ArgumentVoteRepository $argumentVoteRepo,
-        SourceVoteRepository $sourceVoteRepo,
-        OpinionVersionVoteRepository $versionVoteRepo,
-        LoggerInterface $logger
-    ) {
-        $this->userRepo = $userRepo;
-        $this->opinionVoteRepo = $opinionVoteRepo;
-        $this->argumentVoteRepo = $argumentVoteRepo;
-        $this->sourceVoteRepo = $sourceVoteRepo;
-        $this->versionVoteRepo = $versionVoteRepo;
-        $this->logger = $logger;
+    public function __construct(private readonly UserRepository $userRepo, private readonly OpinionVoteRepository $opinionVoteRepo, private readonly ArgumentVoteRepository $argumentVoteRepo, private readonly SourceVoteRepository $sourceVoteRepo, private readonly OpinionVersionVoteRepository $versionVoteRepo, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(ConsultationStep $step, Argument $args): bool

@@ -21,18 +21,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ViewerNotApprovedByModeratorCommentsResolver implements QueryInterface
 {
-    private readonly ProposalCommentRepository $proposalCommentRepository;
-    private readonly EventCommentRepository $eventCommentRepository;
-    private readonly PostCommentRepository $postCommentRepository;
-
-    public function __construct(
-        ProposalCommentRepository $proposalCommentRepository,
-        EventCommentRepository $eventCommentRepository,
-        PostCommentRepository $postCommentRepository
-    ) {
-        $this->proposalCommentRepository = $proposalCommentRepository;
-        $this->eventCommentRepository = $eventCommentRepository;
-        $this->postCommentRepository = $postCommentRepository;
+    public function __construct(private readonly ProposalCommentRepository $proposalCommentRepository, private readonly EventCommentRepository $eventCommentRepository, private readonly PostCommentRepository $postCommentRepository)
+    {
     }
 
     public function __invoke(
@@ -69,21 +59,11 @@ class ViewerNotApprovedByModeratorCommentsResolver implements QueryInterface
 
     private function getCommentableRepository(CommentableInterface $commentable): ?EntityRepository
     {
-        switch (true) {
-            case $commentable instanceof Proposal:
-            case $commentable instanceof ProposalComment:
-                return $this->proposalCommentRepository;
-
-            case $commentable instanceof Event:
-            case $commentable instanceof EventComment:
-                return $this->eventCommentRepository;
-
-            case $commentable instanceof Post:
-            case $commentable instanceof PostComment:
-                return $this->postCommentRepository;
-
-            default:
-                return null;
-        }
+        return match (true) {
+            $commentable instanceof Proposal, $commentable instanceof ProposalComment => $this->proposalCommentRepository,
+            $commentable instanceof Event, $commentable instanceof EventComment => $this->eventCommentRepository,
+            $commentable instanceof Post, $commentable instanceof PostComment => $this->postCommentRepository,
+            default => null,
+        };
     }
 }

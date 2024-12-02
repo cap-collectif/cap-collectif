@@ -23,27 +23,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class AddSourceVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly SourceRepository $sourceRepo;
-    private readonly SourceVoteRepository $sourceVoteRepo;
-    private readonly RedisStorageHelper $redisStorageHelper;
-    private readonly StepRequirementsResolver $stepRequirementsResolver;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        SourceRepository $sourceRepo,
-        SourceVoteRepository $sourceVoteRepo,
-        RedisStorageHelper $redisStorageHelper,
-        StepRequirementsResolver $stepRequirementsResolver,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->sourceRepo = $sourceRepo;
-        $this->sourceVoteRepo = $sourceVoteRepo;
-        $this->redisStorageHelper = $redisStorageHelper;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SourceRepository $sourceRepo, private readonly SourceVoteRepository $sourceVoteRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

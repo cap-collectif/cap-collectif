@@ -38,10 +38,7 @@ class ProjectAccessDeniedException extends \RuntimeException
         return $this->subject;
     }
 
-    /**
-     * @param mixed $subject
-     */
-    public function setSubject($subject)
+    public function setSubject(mixed $subject)
     {
         $this->subject = $subject;
     }

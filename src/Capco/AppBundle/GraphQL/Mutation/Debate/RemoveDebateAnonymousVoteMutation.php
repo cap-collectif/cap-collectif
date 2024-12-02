@@ -31,33 +31,8 @@ class RemoveDebateAnonymousVoteMutation implements MutationInterface
     final public const INVALID_HASH = 'INVALID_HASH';
     final public const NOT_VOTED = 'NOT_VOTED';
 
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly ValidatorInterface $validator;
-    private readonly Indexer $indexer;
-    private readonly DebateAnonymousParticipationHashEncoder $encoder;
-    private readonly DebateAnonymousVoteRepository $repository;
-    private readonly DebateAnonymousArgumentRepository $argumentRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        DebateAnonymousVoteRepository $repository,
-        DebateAnonymousArgumentRepository $argumentRepository,
-        ValidatorInterface $validator,
-        DebateAnonymousParticipationHashEncoder $encoder,
-        GlobalIdResolver $globalIdResolver,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->validator = $validator;
-        $this->indexer = $indexer;
-        $this->encoder = $encoder;
-        $this->repository = $repository;
-        $this->argumentRepository = $argumentRepository;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly DebateAnonymousVoteRepository $repository, private readonly DebateAnonymousArgumentRepository $argumentRepository, private readonly ValidatorInterface $validator, private readonly DebateAnonymousParticipationHashEncoder $encoder, private readonly GlobalIdResolver $globalIdResolver, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Arg $input): array

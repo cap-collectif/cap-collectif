@@ -22,27 +22,8 @@ abstract class AbstractDebateArgumentVoteMutation
     final public const UNKNOWN_DEBATE_ARGUMENT = 'UNKNOWN_DEBATE_ARGUMENT';
     final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
 
-    protected DebateArgumentVoteRepository $repository;
-    protected DebateAnonymousArgumentVoteRepository $anonymousRepository;
-    protected EntityManagerInterface $em;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-    protected Indexer $indexer;
-    private readonly GlobalIdResolver $globalIdResolver;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker,
-        DebateArgumentVoteRepository $repository,
-        DebateAnonymousArgumentVoteRepository $anonymousRepository,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->repository = $repository;
-        $this->anonymousRepository = $anonymousRepository;
-        $this->indexer = $indexer;
+    public function __construct(protected EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, protected AuthorizationCheckerInterface $authorizationChecker, protected DebateArgumentVoteRepository $repository, protected DebateAnonymousArgumentVoteRepository $anonymousRepository, protected Indexer $indexer)
+    {
     }
 
     protected function getDebateArgument(Arg $input, User $viewer): DebateArgumentInterface

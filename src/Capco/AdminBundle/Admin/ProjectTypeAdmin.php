@@ -17,16 +17,13 @@ class ProjectTypeAdmin extends AbstractAdmin
         '_sort_by' => 'slug',
     ];
 
-    private readonly EntityManagerInterface $entityManager;
-
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        EntityManagerInterface $entityManager
+        private readonly EntityManagerInterface $entityManager
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->entityManager = $entityManager;
     }
 
     public function getBatchActions(): array

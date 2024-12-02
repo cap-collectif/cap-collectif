@@ -49,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface
+class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface, \Stringable
 {
     use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;

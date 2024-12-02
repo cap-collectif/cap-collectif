@@ -7,11 +7,8 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class FilePathResolver
 {
-    private readonly string $exportDirectory;
-
-    public function __construct(string $exportDirectory)
+    public function __construct(private readonly string $exportDirectory)
     {
-        $this->exportDirectory = $exportDirectory;
     }
 
     public function getSimplifiedExportPath(AbstractStep $step): string

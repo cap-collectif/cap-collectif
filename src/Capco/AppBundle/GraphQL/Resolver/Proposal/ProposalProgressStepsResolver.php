@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalProgressStepsResolver implements QueryInterface
 {
-    private $proposalProgressStepDataLoader;
-
-    public function __construct(ProposalProgressStepDataLoader $proposalProgressStepDataLoader)
+    public function __construct(private readonly ProposalProgressStepDataLoader $proposalProgressStepDataLoader)
     {
-        $this->proposalProgressStepDataLoader = $proposalProgressStepDataLoader;
     }
 
     public function __invoke(Proposal $proposal): Promise

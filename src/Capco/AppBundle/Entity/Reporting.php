@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReportingRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Reporting implements CreatableInterface
+class Reporting implements CreatableInterface, \Stringable
 {
     use IdTrait;
     use ReportingStatus;
@@ -96,7 +96,7 @@ class Reporting implements CreatableInterface
      */
     private bool $isArchived = false;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? 'Signalement de ' . $this->getRelatedObject() : 'Signalement';
     }
@@ -168,10 +168,7 @@ class Reporting implements CreatableInterface
         return $this->Source;
     }
 
-    /**
-     * @param mixed $Source
-     */
-    public function setSource($Source)
+    public function setSource(mixed $Source)
     {
         $this->Source = $Source;
         $this->Source->addReport($this);
@@ -188,11 +185,9 @@ class Reporting implements CreatableInterface
     }
 
     /**
-     * @param mixed $Argument
-     *
      * @return $this
      */
-    public function setArgument($Argument)
+    public function setArgument(mixed $Argument)
     {
         $this->Argument = $Argument;
         $this->Argument->addReport($this);
@@ -233,10 +228,7 @@ class Reporting implements CreatableInterface
         return $this->proposal;
     }
 
-    /**
-     * @param mixed $proposal
-     */
-    public function setProposal($proposal)
+    public function setProposal(mixed $proposal)
     {
         $this->proposal = $proposal;
         $proposal->addReport($this);

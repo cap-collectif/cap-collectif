@@ -16,26 +16,17 @@ use Symfony\Component\Routing\RouterInterface;
 
 class GlobalDistrictFollowerNotifier extends BaseNotifier
 {
-    protected UserUrlResolver $userUrlResolver;
-    private readonly UrlResolver $urlResolver;
-    private readonly MediaUrlResolver $mediaUrlResolver;
-    private readonly SiteImageRuntime $siteImageRuntime;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
-        UserUrlResolver $userUrlResolver,
+        protected UserUrlResolver $userUrlResolver,
         LocaleResolver $localeResolver,
-        UrlResolver $urlResolver,
-        MediaUrlResolver $mediaUrlResolver,
-        SiteImageRuntime $siteImageRuntime
+        private readonly UrlResolver $urlResolver,
+        private readonly MediaUrlResolver $mediaUrlResolver,
+        private readonly SiteImageRuntime $siteImageRuntime
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->userUrlResolver = $userUrlResolver;
-        $this->urlResolver = $urlResolver;
-        $this->mediaUrlResolver = $mediaUrlResolver;
-        $this->siteImageRuntime = $siteImageRuntime;
     }
 
     public function onNewProjectInDistrict(GlobalDistrict $district, Project $project)

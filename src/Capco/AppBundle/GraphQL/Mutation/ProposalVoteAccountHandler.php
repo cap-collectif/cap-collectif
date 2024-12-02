@@ -20,24 +20,8 @@ use Overblog\GraphQLBundle\Definition\Argument;
 
 class ProposalVoteAccountHandler
 {
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-
-    public function __construct(
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
-        EntityManagerInterface $em
-    ) {
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->participantIsMeetingRequirementsResolver = $participantIsMeetingRequirementsResolver;
-        $this->em = $em;
-        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
+    public function __construct(private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ParticipantIsMeetingRequirementsResolver $participantIsMeetingRequirementsResolver, private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository, private readonly EntityManagerInterface $em)
+    {
     }
 
     //Use this method after validation but before effective creation or deletion
@@ -131,7 +115,7 @@ class ProposalVoteAccountHandler
         if ($step instanceof CollectStep) {
             return $this->proposalCollectVoteRepository->getByAuthorAndStep($user, $step);
         }
-        $class = \get_class($step);
+        $class = $step::class;
 
         throw new \RuntimeException("AbstractStep type {$class} not handled in getVotesFromSpecificClass");
     }

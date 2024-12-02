@@ -12,11 +12,9 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 class ListCommand extends Command
 {
     public $force;
-    private $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(private readonly ContainerInterface $container)
     {
-        $this->container = $container;
         parent::__construct();
     }
 

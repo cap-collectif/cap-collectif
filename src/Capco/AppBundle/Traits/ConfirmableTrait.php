@@ -20,11 +20,9 @@ trait ConfirmableTrait
     }
 
     /**
-     * @param mixed $confirmed
-     *
      * @return $this
      */
-    public function setConfirmed($confirmed)
+    public function setConfirmed(mixed $confirmed)
     {
         $this->confirmed = $confirmed;
 

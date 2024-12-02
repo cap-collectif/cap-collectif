@@ -17,21 +17,9 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class SubscribeToEventAsNonRegisteredMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly EventRegistrationRepository $eventRegistrationRepository;
-    private readonly RequestGuesser $requestGuesser;
 
-    public function __construct(
-        EventRegistrationRepository $eventRegistrationRepository,
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $entityManager,
-        RequestGuesser $requestGuesser
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->entityManager = $entityManager;
-        $this->eventRegistrationRepository = $eventRegistrationRepository;
-        $this->requestGuesser = $requestGuesser;
+    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly RequestGuesser $requestGuesser)
+    {
     }
 
     public function __invoke(Arg $input, $viewer): array

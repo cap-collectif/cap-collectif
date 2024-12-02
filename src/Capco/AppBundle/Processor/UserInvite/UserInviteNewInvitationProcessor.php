@@ -11,15 +11,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class UserInviteNewInvitationProcessor implements ProcessorInterface
 {
-    private readonly UserInviteEmailMessageNotifier $notifier;
-    private readonly UserInviteEmailMessageRepository $emailMessageRepository;
-
-    public function __construct(
-        UserInviteEmailMessageRepository $emailMessageRepository,
-        UserInviteEmailMessageNotifier $notifier
-    ) {
-        $this->notifier = $notifier;
-        $this->emailMessageRepository = $emailMessageRepository;
+    public function __construct(private readonly UserInviteEmailMessageRepository $emailMessageRepository, private readonly UserInviteEmailMessageNotifier $notifier)
+    {
     }
 
     public function process(Message $message, array $options): bool

@@ -16,24 +16,17 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalNewsNotifier extends BaseNotifier
 {
-    private readonly PostRepository $postRepository;
-    private readonly PostUrlResolver $urlResolver;
-    private readonly UserRepository $userRepository;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
-        PostRepository $postRepository,
+        private readonly PostRepository $postRepository,
         LocaleResolver $localeResolver,
-        PostUrlResolver $urlResolver,
-        UserRepository $userRepository
+        private readonly PostUrlResolver $urlResolver,
+        private readonly UserRepository $userRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->siteParams = $siteParams;
-        $this->postRepository = $postRepository;
-        $this->urlResolver = $urlResolver;
-        $this->userRepository = $userRepository;
     }
 
     public function onCreate(Post $proposalNews): bool

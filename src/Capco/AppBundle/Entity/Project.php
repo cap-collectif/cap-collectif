@@ -49,7 +49,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
-class Project implements IndexableInterface, TimeRangeable, Ownerable, CreatableInterface
+class Project implements IndexableInterface, TimeRangeable, Ownerable, CreatableInterface, \Stringable
 {
     use AddressableTrait;
     use CoverTrait;
@@ -309,7 +309,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         }
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New project';
     }

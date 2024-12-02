@@ -19,15 +19,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateOfficialResponseMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly GlobalIdResolver $resolver;
-    private readonly EntityManagerInterface $em;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $em, AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(private readonly GlobalIdResolver $resolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->resolver = $resolver;
-        $this->em = $em;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -95,7 +89,7 @@ class UpdateOfficialResponseMutation implements MutationInterface
             if (!($publishedAt instanceof \DateTime)) {
                 try {
                     $publishedAt = new \DateTime($publishedAt);
-                } catch (\Exception $exception) {
+                } catch (\Exception) {
                     throw new UserError(UpdateOfficialResponseErrorCode::INVALID_DATE);
                 }
             }

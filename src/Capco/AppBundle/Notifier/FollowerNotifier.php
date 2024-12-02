@@ -14,21 +14,17 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class FollowerNotifier extends BaseNotifier
 {
-    protected UrlResolver $urlResolver;
-    protected LoggerInterface $logger;
     protected \DateTime $sendAt;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        UrlResolver $urlResolver,
-        LoggerInterface $logger,
+        protected UrlResolver $urlResolver,
+        protected LoggerInterface $logger,
         RouterInterface $router,
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->urlResolver = $urlResolver;
-        $this->logger = $logger;
         $this->siteParams = $siteParams;
     }
 

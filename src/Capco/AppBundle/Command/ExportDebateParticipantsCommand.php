@@ -13,20 +13,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportDebateParticipantsCommand extends BaseExportCommand
 {
-    private readonly Manager $toggleManager;
-    private readonly DebateRepository $debateRepository;
-    private readonly DebateParticipantExporter $exporter;
-
     public function __construct(
         ExportUtils $exportUtils,
-        Manager $manager,
-        DebateRepository $debateRepository,
-        DebateParticipantExporter $exporter
+        private readonly Manager $toggleManager,
+        private readonly DebateRepository $debateRepository,
+        private readonly DebateParticipantExporter $exporter
     ) {
         parent::__construct($exportUtils);
-        $this->toggleManager = $manager;
-        $this->debateRepository = $debateRepository;
-        $this->exporter = $exporter;
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int

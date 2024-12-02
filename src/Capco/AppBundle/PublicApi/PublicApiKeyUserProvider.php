@@ -10,11 +10,8 @@ use Symfony\Component\Security\Core\User\UserProviderInterface;
 
 class PublicApiKeyUserProvider implements UserProviderInterface
 {
-    private $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    public function __construct(private readonly UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     public function loadUserByUsername($apiKey)

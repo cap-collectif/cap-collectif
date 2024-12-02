@@ -22,16 +22,13 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  */
 class DebateVoteToken extends AbstractUserToken
 {
-    /**
+    public function __construct(User $user, /**
      * @ORM\ManyToOne(targetEntity=Debate::class)
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private Debate $debate;
-
-    public function __construct(User $user, Debate $debate, ?string $token)
+    private Debate $debate, ?string $token)
     {
         parent::__construct($user, $token);
-        $this->debate = $debate;
     }
 
     public function getDebate(): Debate

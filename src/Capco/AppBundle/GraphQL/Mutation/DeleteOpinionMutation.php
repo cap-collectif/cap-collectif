@@ -15,18 +15,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class DeleteOpinionMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $opinionRepo;
-    private $redisStorage;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        OpinionRepository $opinionRepo,
-        RedisStorageHelper $redisStorage
-    ) {
-        $this->em = $em;
-        $this->opinionRepo = $opinionRepo;
-        $this->redisStorage = $redisStorage;
+    public function __construct(private EntityManagerInterface $em, private OpinionRepository $opinionRepo, private RedisStorageHelper $redisStorage)
+    {
     }
 
     public function __invoke(Arg $input, User $user): array

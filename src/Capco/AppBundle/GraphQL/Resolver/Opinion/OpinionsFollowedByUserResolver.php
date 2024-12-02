@@ -12,13 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class OpinionsFollowedByUserResolver implements QueryInterface
 {
-    private $opinionRepository;
-    private $logger;
-
-    public function __construct(OpinionRepository $opinionRepository, LoggerInterface $logger)
+    public function __construct(private readonly OpinionRepository $opinionRepository, private readonly LoggerInterface $logger)
     {
-        $this->opinionRepository = $opinionRepository;
-        $this->logger = $logger;
     }
 
     public function __invoke(User $user, Arg $args): Connection

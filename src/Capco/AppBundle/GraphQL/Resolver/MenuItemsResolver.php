@@ -10,13 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MenuItemsResolver implements QueryInterface
 {
-    private readonly MenuItemRepository $menuItemRepository;
-    private readonly Manager $manager;
-
-    public function __construct(MenuItemRepository $menuItemRepository, Manager $manager)
+    public function __construct(private readonly MenuItemRepository $menuItemRepository, private readonly Manager $manager)
     {
-        $this->menuItemRepository = $menuItemRepository;
-        $this->manager = $manager;
     }
 
     /**

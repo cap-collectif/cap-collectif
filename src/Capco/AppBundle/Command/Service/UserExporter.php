@@ -21,35 +21,19 @@ class UserExporter
 {
     final public const CSV_DELIMITER = ';';
     final public const BATCH_SIZE = 10000;
-    private readonly EntityManagerInterface $entityManager;
     private SymfonyStyle $style;
-    private SerializerInterface $serializer;
-    private readonly Filesystem $fileSystem;
     private ?string $delimiter = self::CSV_DELIMITER;
-    private readonly UsersFilePathResolver $usersFilePathResolver;
-    private readonly UserNormalizer $userNormalizer;
-    private readonly UserRepository $userRepository;
-    private readonly LoggerInterface $logger;
-    private readonly LocaleRepository $localeRepository;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        SerializerInterface $serializer,
-        Filesystem $fileSystem,
-        UsersFilePathResolver $usersFilePathResolver,
-        UserNormalizer $userNormalizer,
-        UserRepository $userRepository,
-        LocaleRepository $localeRepository,
-        LoggerInterface $logger
+        private readonly EntityManagerInterface $entityManager,
+        private SerializerInterface $serializer,
+        private readonly Filesystem $fileSystem,
+        private readonly UsersFilePathResolver $usersFilePathResolver,
+        private readonly UserNormalizer $userNormalizer,
+        private readonly UserRepository $userRepository,
+        private readonly LocaleRepository $localeRepository,
+        private readonly LoggerInterface $logger
     ) {
-        $this->entityManager = $entityManager;
-        $this->serializer = $serializer;
-        $this->fileSystem = $fileSystem;
-        $this->usersFilePathResolver = $usersFilePathResolver;
-        $this->userNormalizer = $userNormalizer;
-        $this->userRepository = $userRepository;
-        $this->localeRepository = $localeRepository;
-        $this->logger = $logger;
         $this->serializer = $this->initializeSerializer();
     }
 

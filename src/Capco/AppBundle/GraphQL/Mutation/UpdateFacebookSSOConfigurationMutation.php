@@ -12,15 +12,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class UpdateFacebookSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly FacebookSSOConfigurationRepository $repository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FacebookSSOConfigurationRepository $repository
-    ) {
-        $this->em = $em;
-        $this->repository = $repository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FacebookSSOConfigurationRepository $repository)
+    {
     }
 
     public function __invoke(Argument $input): array

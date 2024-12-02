@@ -25,33 +25,8 @@ class ProjectContributorResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly UserSearch $userSearch;
-    private readonly LoggerInterface $logger;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AbstractStepRepository $stepRepository;
-    private readonly ConnectionBuilder $connectionBuilder;
-    private readonly ParticipantRepository $participantRepository;
-
-    public function __construct(
-        UserSearch $userSearch,
-        LoggerInterface $logger,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        GlobalIdResolver $globalIdResolver,
-        AbstractStepRepository $stepRepository,
-        ConnectionBuilder $connectionBuilder,
-        ParticipantRepository $participantRepository
-    ) {
-        $this->userSearch = $userSearch;
-        $this->logger = $logger;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->stepRepository = $stepRepository;
-        $this->connectionBuilder = $connectionBuilder;
-        $this->participantRepository = $participantRepository;
+    public function __construct(private readonly UserSearch $userSearch, private readonly LoggerInterface $logger, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly AbstractStepRepository $stepRepository, private readonly ConnectionBuilder $connectionBuilder, private readonly ParticipantRepository $participantRepository)
+    {
     }
 
     public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface

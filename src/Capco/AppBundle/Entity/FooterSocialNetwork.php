@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="footer_social_network")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FooterSocialNetworkRepository")
  */
-class FooterSocialNetwork
+class FooterSocialNetwork implements \Stringable
 {
     use IdTrait;
     use PositionableTrait;
@@ -87,7 +87,7 @@ class FooterSocialNetwork
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New footer social network';
     }

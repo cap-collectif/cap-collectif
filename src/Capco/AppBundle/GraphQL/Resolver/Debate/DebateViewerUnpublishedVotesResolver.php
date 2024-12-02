@@ -13,11 +13,9 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 class DebateViewerUnpublishedVotesResolver implements QueryInterface
 {
     use ResolverTrait;
-    private readonly DebateVoteRepository $repository;
 
-    public function __construct(DebateVoteRepository $repository)
+    public function __construct(private readonly DebateVoteRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Debate $debate, Argument $args, $viewer): ConnectionInterface

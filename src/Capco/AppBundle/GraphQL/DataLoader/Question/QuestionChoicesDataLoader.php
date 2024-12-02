@@ -13,8 +13,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class QuestionChoicesDataLoader extends BatchDataLoader
 {
-    private $questionChoiceSearch;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
@@ -25,7 +23,7 @@ class QuestionChoicesDataLoader extends BatchDataLoader
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
         bool $enableCache,
-        QuestionChoiceSearch $questionChoiceSearch
+        private readonly QuestionChoiceSearch $questionChoiceSearch
     ) {
         parent::__construct(
             $this->all(...),
@@ -39,7 +37,6 @@ class QuestionChoicesDataLoader extends BatchDataLoader
             $stopwatch,
             $enableCache
         );
-        $this->questionChoiceSearch = $questionChoiceSearch;
     }
 
     public function all(array $keys)

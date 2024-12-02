@@ -8,11 +8,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TranslationType extends AbstractType
 {
-    private $subscriber;
-
-    public function __construct(TranslationTypeSubscriber $subscriber)
+    public function __construct(private readonly TranslationTypeSubscriber $subscriber)
     {
-        $this->subscriber = $subscriber;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options): void

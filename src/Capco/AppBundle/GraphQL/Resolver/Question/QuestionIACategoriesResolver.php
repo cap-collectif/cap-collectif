@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionIACategoriesResolver implements QueryInterface
 {
-    private readonly ValueResponseRepository $repository;
-
-    public function __construct(ValueResponseRepository $repository)
+    public function __construct(private readonly ValueResponseRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(AbstractQuestion $question, Argument $argument, User $viewer): array

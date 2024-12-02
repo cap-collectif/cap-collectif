@@ -16,15 +16,8 @@ class UpdateLocaleStatusMutation implements MutationInterface
 {
     use MutationTrait;
 
-    private $entityManager;
-    private $localeRepository;
-
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        LocaleRepository $localeRepository
-    ) {
-        $this->entityManager = $entityManager;
-        $this->localeRepository = $localeRepository;
+    public function __construct(private EntityManagerInterface $entityManager, private LocaleRepository $localeRepository)
+    {
     }
 
     public function __invoke(Argument $args): array
@@ -79,7 +72,7 @@ class UpdateLocaleStatusMutation implements MutationInterface
             if (false === $enabled) {
                 $locale->disable();
             }
-        } catch (LocaleConfigurationException $localeConfigurationException) {
+        } catch (LocaleConfigurationException) {
             throw new UserError('Locale configuration error');
         }
 

@@ -32,36 +32,9 @@ class InviteOrganizationMemberMutation implements MutationInterface
     final public const USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION = 'USER_ALREADY_MEMBER_OF_ANOTHER_ORGANIZATION';
     final public const USER_ALREADY_INVITED = 'USER_ALREADY_INVITED';
     final public const USER_NOT_ONLY_ROLE_USER = 'USER_NOT_ONLY_ROLE_USER';
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly UserRepository $userRepository;
-    private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly TranslatorInterface $translator;
-    private readonly SiteParameterResolver $siteParameter;
-    private readonly Publisher $publisher;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        UserRepository $userRepository,
-        PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
-        TokenGeneratorInterface $tokenGenerator,
-        TranslatorInterface $translator,
-        SiteParameterResolver $siteParameter,
-        Publisher $publisher,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->userRepository = $userRepository;
-        $this->pendingOrganizationInvitationRepository = $pendingOrganizationInvitationRepository;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->translator = $translator;
-        $this->siteParameter = $siteParameter;
-        $this->publisher = $publisher;
-        $this->logger = $logger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly UserRepository $userRepository, private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository, private readonly TokenGeneratorInterface $tokenGenerator, private readonly TranslatorInterface $translator, private readonly SiteParameterResolver $siteParameter, private readonly Publisher $publisher, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -109,7 +82,7 @@ class InviteOrganizationMemberMutation implements MutationInterface
                     ])
                 )
             );
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
         }
 

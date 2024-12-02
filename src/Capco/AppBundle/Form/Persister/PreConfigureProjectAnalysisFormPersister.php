@@ -12,18 +12,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class PreConfigureProjectAnalysisFormPersister
 {
-    private readonly ConfigureAnalysisMutation $configureAnalysisMutation;
-    private readonly AbstractStepRepository $abstractStepRepository;
-    private readonly StatusRepository $statusRepository;
-
-    public function __construct(
-        ConfigureAnalysisMutation $configureAnalysisMutation,
-        AbstractStepRepository $abstractStepRepository,
-        StatusRepository $statusRepository
-    ) {
-        $this->configureAnalysisMutation = $configureAnalysisMutation;
-        $this->abstractStepRepository = $abstractStepRepository;
-        $this->statusRepository = $statusRepository;
+    public function __construct(private readonly ConfigureAnalysisMutation $configureAnalysisMutation, private readonly AbstractStepRepository $abstractStepRepository, private readonly StatusRepository $statusRepository)
+    {
     }
 
     public function configureAnalysisForm(array $input, User $viewer, Project $project, array $proposalFormTitleToIdMap, array $questionnaireTitleToIdMap)

@@ -16,32 +16,26 @@ class LocaleResolver
     protected $localesQueryResolver;
     protected $container;
     protected $logger;
-    protected $symfonyConfigurationLocale;
-    protected $locales;
-    private $localeRepository;
 
     public function __construct(
-        LocaleRepository $localeRepository,
+        private readonly LocaleRepository $localeRepository,
         LocalesQueryResolver $resolver,
         ContainerInterface $container,
         LoggerInterface $logger,
-        $locale,
-        $locales
+        protected $locale,
+        protected $locales
     ) {
         $this->localesQueryResolver = $resolver;
         $this->container = $container;
-        $this->localeRepository = $localeRepository;
         $this->logger = $logger;
-        $this->symfonyConfigurationLocale = $locale;
-        $this->locales = $locales;
     }
 
     public function getDefaultLocaleCode(): string
     {
         try {
             $defaultLocale = $this->localeRepository->getDefaultCode();
-        } catch (LocaleConfigurationException $e) {
-            $defaultLocale = $this->symfonyConfigurationLocale;
+        } catch (LocaleConfigurationException) {
+            $defaultLocale = $this->locale;
             $this->logger->warning(
                 'Default locale is not configured with multilangue yet activated: using symfony s default locale'
             );
@@ -56,7 +50,7 @@ class LocaleResolver
 
         try {
             $chosenLocale = $this->localeRepository->getDefaultCode();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
         }
         if (null === $request) {
             return $chosenLocale;

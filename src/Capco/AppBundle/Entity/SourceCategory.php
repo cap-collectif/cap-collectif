@@ -15,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="source_category")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceCategoryRepository")
  */
-class SourceCategory implements SonataTranslatableInterface, Translatable
+class SourceCategory implements SonataTranslatableInterface, Translatable, \Stringable
 {
     use SonataTranslatableTrait;
     use TranslatableTrait;
@@ -49,7 +49,7 @@ class SourceCategory implements SonataTranslatableInterface, Translatable
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New category';
     }

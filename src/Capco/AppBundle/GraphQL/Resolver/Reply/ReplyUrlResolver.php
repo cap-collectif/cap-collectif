@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ReplyUrlResolver implements QueryInterface
 {
-    private $urlResolver;
-
-    public function __construct(UrlResolver $urlResolver)
+    public function __construct(private readonly UrlResolver $urlResolver)
     {
-        $this->urlResolver = $urlResolver;
     }
 
     public function __invoke(AbstractReply $reply): string

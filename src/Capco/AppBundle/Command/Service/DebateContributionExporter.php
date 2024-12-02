@@ -28,29 +28,19 @@ class DebateContributionExporter extends ContributionExporter
         'Debate Anonymous Argument(s)',
     ];
     private const STYLE_TABLE_SUMMARY = 'box-double';
-    protected EntityManagerInterface $entityManager;
-    private readonly DebateRepository $debateRepository;
-    private readonly ContributionsFilePathResolver $contributionsFilePathResolver;
-    private readonly LoggerInterface $logger;
-    private readonly DebateArgumentInterfaceNormalizer $debateArgumentInterfaceNormalizer;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        DebateRepository $debateRepository,
-        DebateArgumentInterfaceNormalizer $debateArgumentInterfaceNormalizer,
-        ContributionsFilePathResolver $contributionsFilePathResolver,
-        LoggerInterface $logger,
+        protected EntityManagerInterface $entityManager,
+        private readonly DebateRepository $debateRepository,
+        private readonly DebateArgumentInterfaceNormalizer $debateArgumentInterfaceNormalizer,
+        private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
+        private readonly LoggerInterface $logger,
         Filesystem $fileSystem
     ) {
-        $this->entityManager = $entityManager;
-        $this->debateRepository = $debateRepository;
-        $this->contributionsFilePathResolver = $contributionsFilePathResolver;
-        $this->logger = $logger;
-        $this->debateArgumentInterfaceNormalizer = $debateArgumentInterfaceNormalizer;
         $this->serializer = $this->initializeSerializer();
         $this->context['export_debate_contributions'] = true;
 
-        parent::__construct($entityManager, $this->serializer, $fileSystem, $contributionsFilePathResolver);
+        parent::__construct($this->entityManager, $this->serializer, $fileSystem, $this->contributionsFilePathResolver);
     }
 
     public function exportDebateContributions(

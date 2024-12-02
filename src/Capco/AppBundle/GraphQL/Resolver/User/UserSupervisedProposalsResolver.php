@@ -16,16 +16,8 @@ class UserSupervisedProposalsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private $proposalSupervisorRepository;
-
-    private $logger;
-
-    public function __construct(
-        ProposalSupervisorRepository $proposalSupervisorRepository,
-        LoggerInterface $logger
-    ) {
-        $this->proposalSupervisorRepository = $proposalSupervisorRepository;
-        $this->logger = $logger;
+    public function __construct(private ProposalSupervisorRepository $proposalSupervisorRepository, private LoggerInterface $logger)
+    {
     }
 
     public function __invoke($viewer, Argument $args): ConnectionInterface

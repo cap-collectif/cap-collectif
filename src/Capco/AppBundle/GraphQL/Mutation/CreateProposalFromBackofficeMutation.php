@@ -27,8 +27,6 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
 {
     use MutationTrait;
 
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
     public function __construct(
         LoggerInterface $logger,
         GlobalIdResolver $globalidResolver,
@@ -42,7 +40,7 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
         ResponsesFormatter $responsesFormatter,
         ProposalRepository $proposalRepository,
         Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker
+        private readonly AuthorizationCheckerInterface $authorizationChecker
     ) {
         parent::__construct(
             $logger,
@@ -58,7 +56,6 @@ class CreateProposalFromBackofficeMutation extends CreateProposalMutation
             $proposalRepository,
             $publisher
         );
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Argument $input, $user): array

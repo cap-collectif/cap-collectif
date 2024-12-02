@@ -49,25 +49,16 @@ class StepAdmin extends CapcoAdmin
         CollectStep::class => 'global.collect.step.label',
     ];
 
-    private readonly Manager $manager;
-    private readonly ProposalFormRepository $proposalFormRepository;
-    private readonly QuestionnaireRepository $questionnaireRepository;
-    private readonly StatusRepository $statusRepository;
-
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        Manager $manager,
-        ProposalFormRepository $proposalFormRepository,
-        QuestionnaireRepository $questionnaireRepository,
-        StatusRepository $statusRepository
+        private readonly Manager $manager,
+        private readonly ProposalFormRepository $proposalFormRepository,
+        private readonly QuestionnaireRepository $questionnaireRepository,
+        private readonly StatusRepository $statusRepository
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->manager = $manager;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->questionnaireRepository = $questionnaireRepository;
-        $this->statusRepository = $statusRepository;
     }
 
     public function getNewInstance(): object

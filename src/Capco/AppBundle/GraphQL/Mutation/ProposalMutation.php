@@ -50,9 +50,6 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     use MutationTrait;
     use ResolverTrait;
 
-    protected AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ProposalLikersDataLoader $proposalLikersDataLoader;
-
     public function __construct(
         LoggerInterface $logger,
         GlobalIdResolver $globalidResolver,
@@ -66,8 +63,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         ResponsesFormatter $responsesFormatter,
         ProposalRepository $proposalRepository,
         Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ProposalLikersDataLoader $proposalLikersDataLoader
+        protected AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ProposalLikersDataLoader $proposalLikersDataLoader
     ) {
         parent::__construct(
             $logger,
@@ -83,8 +80,6 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
             $proposalRepository,
             $publisher
         );
-        $this->authorizationChecker = $authorizationChecker;
-        $this->proposalLikersDataLoader = $proposalLikersDataLoader;
     }
 
     public function isGranted(string $id, ?User $viewer, string $accessType): bool

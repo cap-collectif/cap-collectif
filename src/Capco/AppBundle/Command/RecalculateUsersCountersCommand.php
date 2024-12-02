@@ -15,17 +15,12 @@ class RecalculateUsersCountersCommand extends Command
     use LockableTrait;
 
     public $force;
-    public EntityManagerInterface $em;
-    public ClientInterface $redis;
     public $ids;
 
     protected static $defaultName = 'capco:compute:users-counters';
 
-    public function __construct(EntityManagerInterface $em, ClientInterface $redis)
+    public function __construct(public EntityManagerInterface $em, public ClientInterface $redis)
     {
-        $this->em = $em;
-        $this->redis = $redis;
-
         parent::__construct();
     }
 

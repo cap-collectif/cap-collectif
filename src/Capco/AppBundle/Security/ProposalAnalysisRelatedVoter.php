@@ -52,32 +52,16 @@ class ProposalAnalysisRelatedVoter extends AbstractOwnerableVoter
             return false;
         }
 
-        switch ($attribute) {
-            case self::VIEW:
-            case self::REVISE:
-                return $this->canSee($subject, $viewer);
-
-            case self::ANALYSE:
-                return $this->canAnalyse($subject, $viewer);
-
-            case self::EVALUATE:
-                return $this->canEvaluate($subject, $viewer);
-
-            case self::DECIDE:
-                return $this->canDecide($subject, $viewer);
-
-            case self::ASSIGN_SUPERVISOR:
-                return $this->canAssignSupervisor($subject, $viewer);
-
-            case self::ASSIGN_DECISION_MAKER:
-                return $this->canAssignDecisionMaker($subject, $viewer);
-
-            case self::ASSIGN_ANALYST:
-                return $this->canAssignAnalyst($subject, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::VIEW, self::REVISE => $this->canSee($subject, $viewer),
+            self::ANALYSE => $this->canAnalyse($subject, $viewer),
+            self::EVALUATE => $this->canEvaluate($subject, $viewer),
+            self::DECIDE => $this->canDecide($subject, $viewer),
+            self::ASSIGN_SUPERVISOR => $this->canAssignSupervisor($subject, $viewer),
+            self::ASSIGN_DECISION_MAKER => $this->canAssignDecisionMaker($subject, $viewer),
+            self::ASSIGN_ANALYST => $this->canAssignAnalyst($subject, $viewer),
+            default => false,
+        };
     }
 
     private function canSee(Proposal $subject, User $viewer): bool

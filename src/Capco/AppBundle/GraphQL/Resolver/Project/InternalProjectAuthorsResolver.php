@@ -9,15 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class InternalProjectAuthorsResolver implements QueryInterface
 {
-    protected OrganizationRepository $organizationRepository;
-    private readonly UserRepository $userRepository;
-
-    public function __construct(
-        UserRepository $userRepository,
-        OrganizationRepository $organizationRepository
-    ) {
-        $this->userRepository = $userRepository;
-        $this->organizationRepository = $organizationRepository;
+    public function __construct(private readonly UserRepository $userRepository, protected OrganizationRepository $organizationRepository)
+    {
     }
 
     public function __invoke(Project $project): array

@@ -11,15 +11,8 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
 {
     use IsAServiceTrait;
 
-    private readonly FixtureLocatorInterface $decoratedFixtureLocator;
-    private readonly string $fixturesDir;
-
-    public function __construct(
-        FixtureLocatorInterface $decoratedFixtureLocator,
-        string $fixturesDir
-    ) {
-        $this->decoratedFixtureLocator = $decoratedFixtureLocator;
-        $this->fixturesDir = $fixturesDir;
+    public function __construct(private readonly FixtureLocatorInterface $decoratedFixtureLocator, private readonly string $fixturesDir)
+    {
     }
 
     /**

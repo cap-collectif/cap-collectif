@@ -9,15 +9,8 @@ use Psr\Log\LoggerInterface;
 
 class QueryGlobalDistrictsResolver implements QueryInterface
 {
-    private $globalDistrictRepository;
-    private $logger;
-
-    public function __construct(
-        GlobalDistrictRepository $globalDistrictRepository,
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
-        $this->globalDistrictRepository = $globalDistrictRepository;
+    public function __construct(private readonly GlobalDistrictRepository $globalDistrictRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $args): array

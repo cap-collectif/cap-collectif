@@ -14,18 +14,8 @@ abstract class AbstractProposalFormMutation implements MutationInterface
 {
     public const NOT_FOUND = 'NOT_FOUND';
 
-    protected EntityManagerInterface $em;
-    protected GlobalIdResolver $globalIdResolver;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->em = $entityManager;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function isGranted(string $id, ?User $viewer, string $accessType): bool

@@ -13,24 +13,8 @@ use Symfony\Component\HttpKernel\KernelInterface;
 
 class ProposalRevisionReviseProcessor implements ProcessorInterface
 {
-    private readonly ProposalRepository $proposalRepository;
-    private readonly ProposalRevisionRepository $proposalRevisionRepository;
-    private readonly ProposalRevisionNotifier $notifier;
-    private readonly LoggerInterface $logger;
-    private readonly KernelInterface $kernel;
-
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        ProposalRevisionRepository $proposalRevisionRepository,
-        ProposalRevisionNotifier $notifier,
-        KernelInterface $kernel,
-        LoggerInterface $logger
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->proposalRevisionRepository = $proposalRevisionRepository;
-        $this->notifier = $notifier;
-        $this->kernel = $kernel;
-        $this->logger = $logger;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly ProposalRevisionRepository $proposalRevisionRepository, private readonly ProposalRevisionNotifier $notifier, private readonly KernelInterface $kernel, private readonly LoggerInterface $logger)
+    {
     }
 
     public function process(Message $message, array $options): bool

@@ -10,18 +10,8 @@ use Psr\Log\LoggerInterface;
 
 class ProjectTypesResolver implements QueryInterface
 {
-    private $projectTypeRepository;
-    private $projectRepository;
-    private $logger;
-
-    public function __construct(
-        ProjectTypeRepository $projectTypeRepository,
-        ProjectRepository $projectRepository,
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
-        $this->projectTypeRepository = $projectTypeRepository;
-        $this->projectRepository = $projectRepository;
+    public function __construct(private readonly ProjectTypeRepository $projectTypeRepository, private readonly ProjectRepository $projectRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $args, $viewer = null): array

@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class SenderEmailResolver implements QueryInterface
 {
-    private readonly SenderEmailRepository $repository;
-
-    public function __construct(SenderEmailRepository $repository)
+    public function __construct(private readonly SenderEmailRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(User $viewer): array

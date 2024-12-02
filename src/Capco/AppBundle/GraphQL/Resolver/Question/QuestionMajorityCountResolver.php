@@ -14,15 +14,8 @@ class QuestionMajorityCountResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    protected ValueResponseRepository $valueResponseRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        ValueResponseRepository $valueResponseRepository,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->authorizationChecker = $authorizationChecker;
-        $this->valueResponseRepository = $valueResponseRepository;
+    public function __construct(protected ValueResponseRepository $valueResponseRepository, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(SimpleQuestion $question, $viewer, ?ArrayObject $context = null): int

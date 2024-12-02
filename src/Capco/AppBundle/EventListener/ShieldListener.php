@@ -61,18 +61,9 @@ class ShieldListener
         //health check
         'health_check',
     ];
-    protected Manager $manager;
-    protected TokenStorageInterface $tokenStorage;
-    protected Environment $templating;
 
-    public function __construct(
-        Manager $manager,
-        TokenStorageInterface $tokenStorage,
-        Environment $templating
-    ) {
-        $this->manager = $manager;
-        $this->tokenStorage = $tokenStorage;
-        $this->templating = $templating;
+    public function __construct(protected Manager $manager, protected TokenStorageInterface $tokenStorage, protected Environment $templating)
+    {
     }
 
     public function onKernelRequest(RequestEvent $event)
@@ -98,7 +89,7 @@ class ShieldListener
             return;
         }
 
-        if (false !== strpos((string) $route, '_imagine')) {
+        if (str_contains((string) $route, '_imagine')) {
             return;
         }
 

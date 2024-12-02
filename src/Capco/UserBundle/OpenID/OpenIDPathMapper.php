@@ -18,80 +18,24 @@ use Capco\UserBundle\OpenID\Mapping\ParisMapping;
 
 class OpenIDPathMapper
 {
-    private MappingInterface $instanceMapper;
+    private readonly MappingInterface $instanceMapper;
 
     public function __construct(string $instance)
     {
-        switch ($instance) {
-            case 'parlons-energies':
-            case 'pe':
-                $this->instanceMapper = new EdfMapping();
-
-                break;
-
-            case 'occitanie':
-            case 'occitanie-dedicated':
-                $this->instanceMapper = new OccitanieMapping();
-
-                break;
-
-            case 'nantes':
-                $this->instanceMapper = new NantesMapping();
-
-                break;
-
-            case 'decathlon-preprod':
-            case 'nl-decathlon':
-            case 'decathlon':
-                $this->instanceMapper = new DecathlonMapping();
-
-                break;
-
-            case 'grand-lyon':
-            case 'grand-lyon-preprod':
-                $this->instanceMapper = new GrandLyonMapping();
-
-                break;
-
-            case 'carpentras':
-                $this->instanceMapper = new CarpentrasMapping();
-
-                break;
-
-            case 'paris-dedicated':
-                $this->instanceMapper = new ParisMapping();
-
-                break;
-
-            case 'aix-marseille-univ':
-                $this->instanceMapper = new AixMarseilleUnivMapping();
-
-                break;
-
-            case 'debatpenly':
-            case 'debateauidf':
-            case 'debatdsf':
-            case 'participer-debat-lithium':
-            case 'participer-debat-gravelines':
-            case 'participer-debat-fessenheim':
-                $this->instanceMapper = new CndpMapping();
-
-                break;
-
-            case 'dijon':
-                $this->instanceMapper = new DijonMapping();
-
-                break;
-
-            case 'nimes':
-                $this->instanceMapper = new NimesMapping();
-
-                break;
-
-            case 'dev':
-            default:
-                $this->instanceMapper = new DevOpenIDMapping();
-        }
+        $this->instanceMapper = match ($instance) {
+            'parlons-energies', 'pe' => new EdfMapping(),
+            'occitanie', 'occitanie-dedicated' => new OccitanieMapping(),
+            'nantes' => new NantesMapping(),
+            'decathlon-preprod', 'nl-decathlon', 'decathlon' => new DecathlonMapping(),
+            'grand-lyon', 'grand-lyon-preprod' => new GrandLyonMapping(),
+            'carpentras' => new CarpentrasMapping(),
+            'paris-dedicated' => new ParisMapping(),
+            'aix-marseille-univ' => new AixMarseilleUnivMapping(),
+            'debatpenly', 'debateauidf', 'debatdsf', 'participer-debat-lithium', 'participer-debat-gravelines', 'participer-debat-fessenheim' => new CndpMapping(),
+            'dijon' => new DijonMapping(),
+            'nimes' => new NimesMapping(),
+            default => new DevOpenIDMapping(),
+        };
     }
 
     public function getOpenIDMapping(): array

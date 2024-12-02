@@ -21,28 +21,17 @@ class VerifySmsVotePhoneNumberMutation implements MutationInterface
     use MutationTrait;
 
     final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
-
-    private readonly EntityManagerInterface $em;
     private readonly SmsProviderInterface $smsProvider;
-    private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly TokenGenerator $tokenGenerator;
-    private readonly PhoneTokenRepository $phoneTokenRepository;
 
     public function __construct(
-        EntityManagerInterface $em,
+        private readonly EntityManagerInterface $em,
         SmsProviderFetcher $smsProviderFactory,
-        GlobalIdResolver $globalIdResolver,
-        AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository,
-        TokenGenerator $tokenGenerator,
-        PhoneTokenRepository $phoneTokenRepository
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository,
+        private readonly TokenGenerator $tokenGenerator,
+        private readonly PhoneTokenRepository $phoneTokenRepository
     ) {
-        $this->em = $em;
         $this->smsProvider = $smsProviderFactory->fetch();
-        $this->anonymousUserProposalSmsVoteRepository = $anonymousUserProposalSmsVoteRepository;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->phoneTokenRepository = $phoneTokenRepository;
     }
 
     public function __invoke(Argument $input): array

@@ -7,11 +7,9 @@ use Capco\AppBundle\Repository\LocaleRepository;
 class PublishedLocalesDataloader
 {
     private array $publishedLocales = [];
-    private readonly LocaleRepository $localeRepository;
 
-    public function __construct(LocaleRepository $localeRepository)
+    public function __construct(private readonly LocaleRepository $localeRepository)
     {
-        $this->localeRepository = $localeRepository;
     }
 
     public function __invoke($viewer = null): array

@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StatusRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Status
+class Status implements \Stringable
 {
     use ColorableTrait;
     use PositionableTrait;
@@ -94,9 +94,9 @@ class Status
         }
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getId() ? $this->getName() : 'New status';
+        return (string) ($this->getId() ? $this->getName() : 'New status');
     }
 
     public function getName()

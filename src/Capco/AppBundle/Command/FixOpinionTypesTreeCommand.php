@@ -10,16 +10,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class FixOpinionTypesTreeCommand extends Command
 {
-    private $em;
-    private $repository;
-
     public function __construct(
-        EntityManagerInterface $em,
-        OpinionTypeRepository $repository
+        private readonly EntityManagerInterface $em,
+        private readonly OpinionTypeRepository $repository
     ) {
-        $this->em = $em;
-        $this->repository = $repository;
-
         parent::__construct();
     }
 

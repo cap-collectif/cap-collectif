@@ -15,18 +15,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 class UnsubscribeToEventAsRegisteredMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EventRegistrationRepository $eventRegistrationRepository;
-    private readonly EntityManagerInterface $entityManager;
 
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $entityManager,
-        EventRegistrationRepository $eventRegistrationRepository
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->eventRegistrationRepository = $eventRegistrationRepository;
-        $this->entityManager = $entityManager;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly EventRegistrationRepository $eventRegistrationRepository)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

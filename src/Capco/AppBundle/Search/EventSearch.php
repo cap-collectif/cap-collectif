@@ -34,18 +34,13 @@ class EventSearch extends Search
         'fullAddress.std',
     ];
 
-    private readonly EventRepository $eventRepository;
-    private readonly EntityManagerInterface $em;
-
     public function __construct(
         Index $index,
-        EventRepository $eventRepository,
-        EntityManagerInterface $em
+        private readonly EventRepository $eventRepository,
+        private readonly EntityManagerInterface $em
     ) {
         parent::__construct($index);
-        $this->eventRepository = $eventRepository;
         $this->type = 'event';
-        $this->em = $em;
     }
 
     public function searchEvents(
@@ -175,24 +170,19 @@ class EventSearch extends Search
 
     private function getEventSort(array $orderBy): array
     {
-        switch ($orderBy['field']) {
-            case EventOrderField::END_AT:
-                return [
-                    'endAt' => ['order' => $orderBy['direction']],
-                    'startAt' => ['order' => $orderBy['direction']],
-                    'createdAt' => ['order' => $orderBy['direction']],
-                ];
-
-            case EventOrderField::START_AT:
-                return [
-                    'startAt' => ['order' => $orderBy['direction']],
-                    'endAt' => ['order' => $orderBy['direction']],
-                    'createdAt' => ['order' => $orderBy['direction']],
-                ];
-
-            default:
-                throw new \RuntimeException("Unknown order: ${$orderBy['field']}");
-        }
+        return match ($orderBy['field']) {
+            EventOrderField::END_AT => [
+                'endAt' => ['order' => $orderBy['direction']],
+                'startAt' => ['order' => $orderBy['direction']],
+                'createdAt' => ['order' => $orderBy['direction']],
+            ],
+            EventOrderField::START_AT => [
+                'startAt' => ['order' => $orderBy['direction']],
+                'endAt' => ['order' => $orderBy['direction']],
+                'createdAt' => ['order' => $orderBy['direction']],
+            ],
+            default => throw new \RuntimeException("Unknown order: ${$orderBy['field']}"),
+        };
     }
 
     private function getFilters(array $providedFilters): array

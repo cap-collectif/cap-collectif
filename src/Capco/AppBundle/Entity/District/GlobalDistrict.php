@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\GlobalDistrictRepository")
  */
-class GlobalDistrict extends AbstractDistrict implements SluggableInterface
+class GlobalDistrict extends AbstractDistrict implements SluggableInterface, \Stringable
 {
     use CoverTrait;
     use FollowableTrait;

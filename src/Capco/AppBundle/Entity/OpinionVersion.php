@@ -33,7 +33,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAuthor()
  */
-class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
+class OpinionVersion implements OpinionContributionInterface, HasDiffInterface, \Stringable
 {
     use AnswerableTrait;
     use AuthorableTrait;
@@ -111,7 +111,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         $this->followers = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New opinion version';
     }
@@ -210,10 +210,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this->arguments;
     }
 
-    /**
-     * @param mixed $arguments
-     */
-    public function setArguments($arguments)
+    public function setArguments(mixed $arguments)
     {
         $this->arguments = $arguments;
     }
@@ -276,10 +273,7 @@ class OpinionVersion implements OpinionContributionInterface, HasDiffInterface
         return $this->ranking;
     }
 
-    /**
-     * @param mixed $ranking
-     */
-    public function setRanking($ranking)
+    public function setRanking(mixed $ranking)
     {
         $this->ranking = $ranking;
     }

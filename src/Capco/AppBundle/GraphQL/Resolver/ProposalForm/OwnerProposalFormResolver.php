@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OwnerProposalFormResolver implements QueryInterface
 {
-    private readonly ProposalFormRepository $repository;
-
-    public function __construct(ProposalFormRepository $repository)
+    public function __construct(private readonly ProposalFormRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Owner $owner, Argument $args): ConnectionInterface

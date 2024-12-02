@@ -47,7 +47,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
  * @CapcoAssert\HasAuthor()
  */
-class DebateArgument implements DebateArgumentInterface, Publishable, ExportableDebateContributionInterface
+class DebateArgument implements DebateArgumentInterface, Publishable, ExportableDebateContributionInterface, \Stringable
 {
     use AuthorableTrait;
     use AuthorInformationTrait;
@@ -96,7 +96,7 @@ class DebateArgument implements DebateArgumentInterface, Publishable, Exportable
     public function __toString(): string
     {
         if ($this->id) {
-            return $this->getBodyText();
+            return (string) $this->getBodyText();
         }
 
         return 'New debate argument';

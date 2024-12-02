@@ -30,57 +30,29 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OauthUserProvider implements OAuthAwareUserProviderInterface
 {
-    protected OpenIDExtraMapper $extraMapper;
-    private readonly Indexer $indexer;
-    private readonly UserRepository $userRepository;
-    private readonly GroupMutation $groupMutation;
-    private readonly FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository;
-    private readonly LoggerInterface $logger;
-    private readonly UserInvitationHandler $userInvitationHandler;
-    private readonly TokenStorageInterface $tokenStorage;
     private bool $isNewUser = false;
-    private readonly RequestStack $requestStack;
-    private readonly RedisCache $redisCache;
-    private readonly FlashBagInterface $flashBag;
-    private readonly TranslatorInterface $translator;
-    private readonly SessionInterface $session;
-    private readonly UserManagerInterface $userManager;
     /**
      * @var array<string, string>
      */
     private array $properties = ['identifier' => 'id'];
 
     public function __construct(
-        UserManagerInterface $userManager,
-        UserRepository $userRepository,
-        OpenIDExtraMapper $extraMapper,
-        Indexer $indexer,
+        private readonly UserManagerInterface $userManager,
+        private readonly UserRepository $userRepository,
+        protected OpenIDExtraMapper $extraMapper,
+        private readonly Indexer $indexer,
         array $properties,
-        GroupMutation $groupMutation,
-        FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
-        LoggerInterface $logger,
-        UserInvitationHandler $userInvitationHandler,
-        TokenStorageInterface $tokenStorage,
-        RequestStack $requestStack,
-        RedisCache $redisCache,
-        FlashBagInterface $flashBag,
-        TranslatorInterface $translator,
-        SessionInterface $session
+        private readonly GroupMutation $groupMutation,
+        private readonly FranceConnectSSOConfigurationRepository $franceConnectSSOConfigurationRepository,
+        private readonly LoggerInterface $logger,
+        private readonly UserInvitationHandler $userInvitationHandler,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly RequestStack $requestStack,
+        private readonly RedisCache $redisCache,
+        private readonly FlashBagInterface $flashBag,
+        private readonly TranslatorInterface $translator,
+        private readonly SessionInterface $session
     ) {
-        $this->userRepository = $userRepository;
-        $this->extraMapper = $extraMapper;
-        $this->indexer = $indexer;
-        $this->groupMutation = $groupMutation;
-        $this->franceConnectSSOConfigurationRepository = $franceConnectSSOConfigurationRepository;
-        $this->logger = $logger;
-        $this->userInvitationHandler = $userInvitationHandler;
-        $this->tokenStorage = $tokenStorage;
-        $this->requestStack = $requestStack;
-        $this->redisCache = $redisCache;
-        $this->flashBag = $flashBag;
-        $this->translator = $translator;
-        $this->session = $session;
-        $this->userManager = $userManager;
         $this->properties = array_merge($this->properties, $properties);
     }
 
@@ -89,7 +61,7 @@ class OauthUserProvider implements OAuthAwareUserProviderInterface
         if ($response->getResourceOwner() instanceof FranceConnectResourceOwner) {
             try {
                 $this->verifyFranceConnectResponse($response);
-            } catch (FranceConnectAuthenticationException $e) {
+            } catch (FranceConnectAuthenticationException) {
                 return;
             }
         }

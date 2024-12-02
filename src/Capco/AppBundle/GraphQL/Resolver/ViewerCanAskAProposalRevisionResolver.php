@@ -12,19 +12,8 @@ class ViewerCanAskAProposalRevisionResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly Manager $manager;
-
-    public function __construct(
-        AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver,
-        Manager $manager
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-
-        $this->authorizationChecker = $authorizationChecker;
-        $this->manager = $manager;
+    public function __construct(private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly GlobalIdResolver $globalIdResolver, private readonly Manager $manager)
+    {
     }
 
     public function isGranted($viewer, $proposalId): bool

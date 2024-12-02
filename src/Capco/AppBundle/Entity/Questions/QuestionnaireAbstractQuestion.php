@@ -33,7 +33,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   }
  * )
  */
-class QuestionnaireAbstractQuestion
+class QuestionnaireAbstractQuestion implements \Stringable
 {
     use IdTrait;
     use PositionableTrait;
@@ -65,10 +65,10 @@ class QuestionnaireAbstractQuestion
      */
     protected $question;
 
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->question) {
-            return $this->question->__toString();
+            return (string) $this->question->__toString();
         }
 
         return 'undefined question';

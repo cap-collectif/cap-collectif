@@ -19,21 +19,8 @@ class UpdateProjectSlugMutation implements MutationInterface
 
     final public const PROJECT_NOT_FOUND = 'PROJECT_NOT_FOUND';
 
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly SluggerInterface $slugger;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        SluggerInterface $slugger,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->slugger = $slugger;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly SluggerInterface $slugger, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

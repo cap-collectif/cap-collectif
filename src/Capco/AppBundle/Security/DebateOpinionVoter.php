@@ -37,19 +37,12 @@ class DebateOpinionVoter extends Voter
         /** @var DebateOpinion $debateOpinion */
         $debateOpinion = $subject;
 
-        switch ($attribute) {
-            case self::CREATE:
-                return $this->canCreate($viewer);
-
-            case self::EDIT:
-                return $this->canEdit($debateOpinion, $viewer);
-
-            case self::DELETE:
-                return $this->canDelete($debateOpinion, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::CREATE => $this->canCreate($viewer),
+            self::EDIT => $this->canEdit($debateOpinion, $viewer),
+            self::DELETE => $this->canDelete($debateOpinion, $viewer),
+            default => false,
+        };
     }
 
     private function canCreate(User $viewer): bool

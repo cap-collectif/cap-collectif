@@ -17,21 +17,9 @@ use Psr\Log\LoggerInterface;
 class UpdateRequirementMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly RequirementRepository $requirementRepository;
-    private readonly UserRequirementRepository $userRequirementRepository;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        RequirementRepository $requirementRepository,
-        UserRequirementRepository $userRequirementRepository,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->requirementRepository = $requirementRepository;
-        $this->userRequirementRepository = $userRequirementRepository;
-        $this->logger = $logger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly RequirementRepository $requirementRepository, private readonly UserRequirementRepository $userRequirementRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input, User $user): array

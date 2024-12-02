@@ -4,27 +4,8 @@ namespace Capco\AppBundle\Resolver\Project;
 
 class ProjectSearchParameters
 {
-    private $elements = 0;
-    private $page = 1;
-    private $term;
-    private $type;
-    private $orderBy;
-    private $theme;
-
-    public function __construct(
-        int $elements = 0,
-        int $page = 1,
-        ?string $term = null,
-        ?string $type = null,
-        string $orderBy = 'date',
-        ?string $theme = null
-    ) {
-        $this->elements = $elements;
-        $this->page = $page;
-        $this->term = $term;
-        $this->type = $type;
-        $this->orderBy = $orderBy;
-        $this->theme = $theme;
+    public function __construct(private int $elements = 0, private int $page = 1, private ?string $term = null, private ?string $type = null, private string $orderBy = 'date', private ?string $theme = null)
+    {
     }
 
     public function setTerm(?string $term = null): self

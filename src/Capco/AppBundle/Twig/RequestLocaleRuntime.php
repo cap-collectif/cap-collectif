@@ -8,11 +8,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class RequestLocaleRuntime implements RuntimeExtensionInterface
 {
-    private $localeResolver;
-
-    public function __construct(LocaleResolver $localeResolver)
+    public function __construct(private readonly LocaleResolver $localeResolver)
     {
-        $this->localeResolver = $localeResolver;
     }
 
     public function getRequestLocale(?Request $request = null): ?string

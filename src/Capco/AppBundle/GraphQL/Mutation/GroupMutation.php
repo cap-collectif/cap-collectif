@@ -23,33 +23,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class GroupMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly LoggerInterface $logger;
-    private readonly UserRepository $userRepository;
-    private readonly GroupRepository $groupRepository;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly UserGroupRepository $userGroupRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EmailingCampaignRepository $emailingCampaignRepository;
 
-    public function __construct(
-        LoggerInterface $logger,
-        EntityManagerInterface $entityManager,
-        FormFactoryInterface $formFactory,
-        UserRepository $userRepository,
-        UserGroupRepository $userGroupRepository,
-        GroupRepository $groupRepository,
-        GlobalIdResolver $globalIdResolver,
-        EmailingCampaignRepository $emailingCampaignRepository
-    ) {
-        $this->logger = $logger;
-        $this->formFactory = $formFactory;
-        $this->entityManager = $entityManager;
-        $this->userRepository = $userRepository;
-        $this->groupRepository = $groupRepository;
-        $this->userGroupRepository = $userGroupRepository;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->emailingCampaignRepository = $emailingCampaignRepository;
+    public function __construct(private readonly LoggerInterface $logger, private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly UserRepository $userRepository, private readonly UserGroupRepository $userGroupRepository, private readonly GroupRepository $groupRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly EmailingCampaignRepository $emailingCampaignRepository)
+    {
     }
 
     public function create(Argument $input): array

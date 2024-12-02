@@ -26,46 +26,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class PreConfigureProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister;
-    private readonly PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister;
-    private readonly PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister;
 
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister;
-    private readonly DeleteQuestionnaireMutation $deleteQuestionnaireMutation;
-    private readonly DeleteProposalFormMutation $deleteProposalFormMutation;
-    private readonly DeleteProjectMutation $deleteProjectMutation;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ProjectTypeRepository $projectTypeRepository;
-    private readonly Indexer $indexer;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister,
-        PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister,
-        PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister,
-        PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister,
-        DeleteQuestionnaireMutation $deleteQuestionnaireMutation,
-        DeleteProposalFormMutation $deleteProposalFormMutation,
-        DeleteProjectMutation $deleteProjectMutation,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ProjectTypeRepository $projectTypeRepository,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->preConfigureProjectQuestionnairePersister = $preConfigureProjectQuestionnairePersister;
-        $this->preConfigureProjectProposalFormPersister = $preConfigureProjectProposalFormPersister;
-        $this->preConfigureProjectProjectPersister = $preConfigureProjectProjectPersister;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->preConfigureProjectAnalysisFormPersister = $preConfigureProjectAnalysisFormPersister;
-        $this->deleteQuestionnaireMutation = $deleteQuestionnaireMutation;
-        $this->deleteProposalFormMutation = $deleteProposalFormMutation;
-        $this->deleteProjectMutation = $deleteProjectMutation;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->projectTypeRepository = $projectTypeRepository;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly PreConfigureProjectQuestionnairePersister $preConfigureProjectQuestionnairePersister, private readonly PreConfigureProjectProposalFormPersister $preConfigureProjectProposalFormPersister, private readonly PreConfigureProjectProjectPersister $preConfigureProjectProjectPersister, private readonly PreConfigureProjectAnalysisFormPersister $preConfigureProjectAnalysisFormPersister, private readonly DeleteQuestionnaireMutation $deleteQuestionnaireMutation, private readonly DeleteProposalFormMutation $deleteProposalFormMutation, private readonly DeleteProjectMutation $deleteProjectMutation, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProjectTypeRepository $projectTypeRepository, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

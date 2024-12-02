@@ -19,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity()
  * @CapcoAssert\HasAuthor()
  */
-class Answer implements Authorable
+class Answer implements Authorable, \Stringable
 {
     use AuthorableTrait;
     use IdTrait;

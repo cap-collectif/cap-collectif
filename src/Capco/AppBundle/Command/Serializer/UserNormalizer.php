@@ -10,14 +10,10 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserNormalizer extends BaseNormalizer implements NormalizerInterface
 {
-    private readonly UserRolesTextResolver $userRolesTextResolver;
-
     public function __construct(
-        UserRolesTextResolver $userRolesTextResolver,
+        private readonly UserRolesTextResolver $userRolesTextResolver,
         TranslatorInterface $translator
     ) {
-        $this->userRolesTextResolver = $userRolesTextResolver;
-
         parent::__construct($translator);
     }
 

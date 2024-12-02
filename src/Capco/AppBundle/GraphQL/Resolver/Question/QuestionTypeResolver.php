@@ -14,11 +14,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class QuestionTypeResolver implements QueryInterface
 {
-    private readonly TypeResolver $typeResolver;
-
-    public function __construct(TypeResolver $typeResolver)
+    public function __construct(private readonly TypeResolver $typeResolver)
     {
-        $this->typeResolver = $typeResolver;
     }
 
     public function __invoke(AbstractQuestion $question): Type

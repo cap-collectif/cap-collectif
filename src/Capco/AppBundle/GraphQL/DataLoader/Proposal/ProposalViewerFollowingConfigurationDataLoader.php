@@ -14,13 +14,11 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalViewerFollowingConfigurationDataLoader extends BatchDataLoader
 {
-    private $followerRepository;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        FollowerRepository $followerRepository,
+        private readonly FollowerRepository $followerRepository,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -28,7 +26,6 @@ class ProposalViewerFollowingConfigurationDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->followerRepository = $followerRepository;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

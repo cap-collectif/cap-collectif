@@ -20,30 +20,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private readonly UrlGeneratorInterface $router;
-    private readonly ObjectNormalizer $normalizer;
-    private readonly ProjectHelper $helper;
-    private readonly MediaExtension $mediaExtension;
-    private readonly StepResolver $stepResolver;
-    private readonly ContributionResolver $contributionResolver;
-    private readonly EventRepository $eventRepository;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        ProjectHelper $helper,
-        MediaExtension $mediaExtension,
-        StepResolver $stepResolver,
-        ContributionResolver $contributionResolver,
-        EventRepository $eventRepository
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->helper = $helper;
-        $this->mediaExtension = $mediaExtension;
-        $this->stepResolver = $stepResolver;
-        $this->contributionResolver = $contributionResolver;
-        $this->eventRepository = $eventRepository;
+    public function __construct(private readonly UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private readonly ProjectHelper $helper, private readonly MediaExtension $mediaExtension, private readonly StepResolver $stepResolver, private readonly ContributionResolver $contributionResolver, private readonly EventRepository $eventRepository)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

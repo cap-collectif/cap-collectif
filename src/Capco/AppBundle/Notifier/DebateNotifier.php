@@ -22,23 +22,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 class DebateNotifier extends BaseNotifier
 {
-    private readonly DebateUrlResolver $debateUrlResolver;
-    private readonly MediaUrlResolver $mediaUrlResolver;
-    private readonly DebateVoteRepository $debateVoteRepository;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        DebateUrlResolver $debateUrlResolver,
-        MediaUrlResolver $mediaUrlResolver,
-        DebateVoteRepository $debateVoteRepository
+        private readonly DebateUrlResolver $debateUrlResolver,
+        private readonly MediaUrlResolver $mediaUrlResolver,
+        private readonly DebateVoteRepository $debateVoteRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->debateUrlResolver = $debateUrlResolver;
-        $this->mediaUrlResolver = $mediaUrlResolver;
-        $this->debateVoteRepository = $debateVoteRepository;
     }
 
     public function sendDebateInvitation(DebateVoteToken $voteToken, bool $isReminder = false): void

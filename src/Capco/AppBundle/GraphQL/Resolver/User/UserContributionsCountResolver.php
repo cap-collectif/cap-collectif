@@ -8,33 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserContributionsCountResolver implements QueryInterface
 {
-    protected UserEventCommentsCountResolver $userEventCommentsCountResolver;
-    protected UserOpinionVersionResolver $userOpinionVersionResolver;
-    protected UserProposalsResolver $userProposalsResolver;
-    protected UserSourcesResolver $userSourcesResolver;
-    protected UserOpinionsResolver $userOpinionsResolver;
-    protected UserRepliesResolver $userRepliesResolver;
-    private readonly UserVotesResolver $userVotesResolver;
-    private readonly ArgumentRepository $argumentRepository;
-
-    public function __construct(
-        UserEventCommentsCountResolver $userEventCommentsCountResolver,
-        UserOpinionVersionResolver $userOpinionVersionResolver,
-        UserProposalsResolver $userProposalsResolver,
-        ArgumentRepository $argumentRepository,
-        UserOpinionsResolver $userOpinionsResolver,
-        UserRepliesResolver $userRepliesResolver,
-        UserSourcesResolver $userSourcesResolver,
-        UserVotesResolver $userVotesResolver
-    ) {
-        $this->userEventCommentsCountResolver = $userEventCommentsCountResolver;
-        $this->userOpinionVersionResolver = $userOpinionVersionResolver;
-        $this->userProposalsResolver = $userProposalsResolver;
-        $this->userOpinionsResolver = $userOpinionsResolver;
-        $this->userRepliesResolver = $userRepliesResolver;
-        $this->userSourcesResolver = $userSourcesResolver;
-        $this->userVotesResolver = $userVotesResolver;
-        $this->argumentRepository = $argumentRepository;
+    public function __construct(protected UserEventCommentsCountResolver $userEventCommentsCountResolver, protected UserOpinionVersionResolver $userOpinionVersionResolver, protected UserProposalsResolver $userProposalsResolver, private readonly ArgumentRepository $argumentRepository, protected UserOpinionsResolver $userOpinionsResolver, protected UserRepliesResolver $userRepliesResolver, protected UserSourcesResolver $userSourcesResolver, private readonly UserVotesResolver $userVotesResolver)
+    {
     }
 
     public function __invoke(User $user, ?User $viewer = null): int

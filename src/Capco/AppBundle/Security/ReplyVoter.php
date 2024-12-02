@@ -35,12 +35,10 @@ class ReplyVoter extends AbstractOwnerableVoter
         /** @var AbstractReply $reply */
         $reply = $subject;
 
-        switch ($attribute) {
-            case self::DELETE_REPLY:
-                return $this->canDeleteReply($reply, $viewer);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::DELETE_REPLY => $this->canDeleteReply($reply, $viewer),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canDeleteReply(AbstractReply $reply, ?User $viewer): bool

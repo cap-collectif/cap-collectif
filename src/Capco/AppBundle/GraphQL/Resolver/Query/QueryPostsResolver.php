@@ -7,11 +7,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryPostsResolver implements QueryInterface
 {
-    private readonly PostRepository $repository;
-
-    public function __construct(PostRepository $repository)
+    public function __construct(private readonly PostRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(): array

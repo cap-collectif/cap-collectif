@@ -39,13 +39,10 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
     final public const CANNOT_DELETE_SUPER_ADMIN = 'CANNOT_DELETE_SUPER_ADMIN';
     final public const CANNOT_FIND_USER = 'Can not find this userId !';
 
-    private readonly UserRepository $userRepository;
-    private readonly SessionInterface $session;
-
     public function __construct(
         EntityManagerInterface $em,
         TranslatorInterface $translator,
-        UserRepository $userRepository,
+        private readonly UserRepository $userRepository,
         UserGroupRepository $groupRepository,
         UserManager $userManager,
         RedisStorageHelper $redisStorageHelper,
@@ -64,7 +61,7 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
         MailingListRepository $mailingListRepository,
         LoggerInterface $logger,
         UserAnonymizer $userAnonymizer,
-        SessionInterface $session,
+        private readonly SessionInterface $session,
         SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct(
@@ -90,8 +87,6 @@ class DeleteAccountMutation extends BaseDeleteUserMutation
             $userAnonymizer,
             $sendInBluePublisher
         );
-        $this->userRepository = $userRepository;
-        $this->session = $session;
     }
 
     public function __invoke(Arg $input, User $viewer): array

@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
-class Theme implements IndexableInterface, Translatable, SonataTranslatableInterface
+class Theme implements IndexableInterface, Translatable, SonataTranslatableInterface, \Stringable
 {
     use CustomCodeTrait;
     use SonataTranslatableTrait;
@@ -116,9 +116,9 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getId() ? $this->translate()->getTitle() : 'New theme';
+        return (string) ($this->getId() ? $this->translate()->getTitle() : 'New theme');
     }
 
     public function getTitle(?string $locale = null, ?bool $fallbackToDefault = false): ?string
@@ -207,10 +207,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this->position;
     }
 
-    /**
-     * @param mixed $position
-     */
-    public function setPosition($position)
+    public function setPosition(mixed $position)
     {
         $this->position = $position;
     }
@@ -239,10 +236,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this->author;
     }
 
-    /**
-     * @param mixed $author
-     */
-    public function setAuthor($author)
+    public function setAuthor(mixed $author)
     {
         $this->author = $author;
     }
@@ -403,10 +397,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
         return $this->media;
     }
 
-    /**
-     * @param mixed $media
-     */
-    public function setMedia($media)
+    public function setMedia(mixed $media)
     {
         $this->media = $media;
     }

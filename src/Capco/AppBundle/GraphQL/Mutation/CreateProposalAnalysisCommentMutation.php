@@ -18,21 +18,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateProposalAnalysisCommentMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly Publisher $publisher;
 
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        AuthorizationCheckerInterface $authorizationChecker,
-        Publisher $publisher
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->publisher = $publisher;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

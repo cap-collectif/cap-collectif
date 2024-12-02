@@ -14,8 +14,6 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class UserArgumentsDataLoader extends BatchDataLoader
 {
-    private readonly ArgumentSearch $argumentSearch;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
@@ -25,10 +23,9 @@ class UserArgumentsDataLoader extends BatchDataLoader
         bool $debug,
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
-        ArgumentSearch $argumentSearch,
+        private readonly ArgumentSearch $argumentSearch,
         bool $enableCache
     ) {
-        $this->argumentSearch = $argumentSearch;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

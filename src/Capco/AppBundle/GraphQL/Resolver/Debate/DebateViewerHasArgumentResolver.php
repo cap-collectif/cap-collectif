@@ -11,11 +11,8 @@ class DebateViewerHasArgumentResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly DebateArgumentRepository $repository;
-
-    public function __construct(DebateArgumentRepository $repository)
+    public function __construct(private readonly DebateArgumentRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Debate $debate, $viewer): bool

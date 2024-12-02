@@ -19,21 +19,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteMailingListMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly MailingListRepository $repository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        MailingListRepository $mailingListRepository,
-        EntityManagerInterface $entityManager,
-        AuthorizationCheckerInterface $authorizationChecker,
-        LoggerInterface $logger
-    ) {
-        $this->repository = $mailingListRepository;
-        $this->entityManager = $entityManager;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->logger = $logger;
+    public function __construct(private readonly MailingListRepository $repository, private readonly EntityManagerInterface $entityManager, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

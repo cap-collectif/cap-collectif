@@ -84,15 +84,8 @@ class FeaturesCategoryResolver
         'settings.appearance' => ['conditions' => [], 'features' => []],
     ];
 
-    protected Manager $manager;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        Manager $manager,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->manager = $manager;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(protected Manager $manager, protected AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function isCategoryEnabled(string $category): bool

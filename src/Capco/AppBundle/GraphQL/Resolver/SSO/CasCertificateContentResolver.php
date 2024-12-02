@@ -8,14 +8,12 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class CasCertificateContentResolver implements QueryInterface
 {
-    /**
-     * @var SplFileInfo the SplFileInfo service
-     */
-    protected SplFileInfo $splFileInfo;
-
-    public function __construct(SplFileInfo $splFileInfo)
-    {
-        $this->splFileInfo = $splFileInfo;
+    public function __construct(
+        /**
+         * @var SplFileInfo the SplFileInfo service
+         */
+        protected SplFileInfo $splFileInfo
+    ) {
     }
 
     public function __invoke(CASSSOConfiguration $configuration): string

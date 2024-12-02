@@ -22,25 +22,16 @@ class TestEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
 
-    private readonly MailerService $mailerService;
-    private readonly SiteParameterResolver $siteParams;
-    private readonly RouterInterface $router;
-    private readonly Environment $twig;
-
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
         AuthorizationCheckerInterface $authorizationChecker,
-        MailerService $mailerService,
-        SiteParameterResolver $siteParams,
-        RouterInterface $router,
-        Environment $twig
+        private readonly MailerService $mailerService,
+        private readonly SiteParameterResolver $siteParams,
+        private readonly RouterInterface $router,
+        private readonly Environment $twig
     ) {
         parent::__construct($resolver, $entityManager, $authorizationChecker);
-        $this->mailerService = $mailerService;
-        $this->siteParams = $siteParams;
-        $this->router = $router;
-        $this->twig = $twig;
     }
 
     public function __invoke(Argument $input, User $viewer): array

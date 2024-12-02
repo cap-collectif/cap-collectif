@@ -14,15 +14,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ParticipantIsMeetingRequirementsResolver implements QueryInterface
 {
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver;
-
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
+    {
     }
 
     public function __invoke(Participant $participant, Argument $args, User $viewer): bool

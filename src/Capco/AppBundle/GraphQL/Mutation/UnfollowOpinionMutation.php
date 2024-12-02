@@ -23,21 +23,8 @@ class UnfollowOpinionMutation implements MutationInterface
     use MutationTrait;
     use ProjectOpinionSubscriptionGuard;
 
-    private $em;
-    private $opinionRepository;
-    private $followerRepository;
-    private $versionRepository;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        OpinionRepository $opinionRepository,
-        OpinionVersionRepository $versionRepository,
-        FollowerRepository $followerRepository
-    ) {
-        $this->em = $em;
-        $this->opinionRepository = $opinionRepository;
-        $this->followerRepository = $followerRepository;
-        $this->versionRepository = $versionRepository;
+    public function __construct(private EntityManagerInterface $em, private OpinionRepository $opinionRepository, private OpinionVersionRepository $versionRepository, private FollowerRepository $followerRepository)
+    {
     }
 
     public function __invoke(Argument $args, User $user): array

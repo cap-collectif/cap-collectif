@@ -19,22 +19,14 @@ use Symfony\Component\HttpKernel\Event\PostResponseEvent;
 
 class RequestResponseListener
 {
-    private $client;
-    private $allowMatchOnResponse;
-    private $circuitBreakers;
-    private $toggleManager;
     private $excludedPrefixes;
 
     public function __construct(
-        Manager $toggleManager,
-        Client $client,
-        bool $allowMatchOnResponse = false,
-        iterable $circuitBreakers = []
+        private readonly Manager $toggleManager,
+        private readonly Client $client,
+        private readonly bool $allowMatchOnResponse = false,
+        private readonly iterable $circuitBreakers = []
     ) {
-        $this->client = $client;
-        $this->allowMatchOnResponse = $allowMatchOnResponse;
-        $this->circuitBreakers = $circuitBreakers;
-        $this->toggleManager = $toggleManager;
         $this->excludedPrefixes = [];
     }
 
@@ -125,7 +117,7 @@ class RequestResponseListener
 
         try {
             $this->client->request(new LogCommand($request, $response));
-        } catch (ExceptionInterface $exception) {
+        } catch (ExceptionInterface) {
             // do nothing
         }
     }
@@ -178,7 +170,7 @@ class RequestResponseListener
     private function isExcludedPrefix($url): bool
     {
         foreach ($this->excludedPrefixes as $excludedPrefix) {
-            if (0 === strpos((string) $url, (string) $excludedPrefix)) {
+            if (str_starts_with((string) $url, (string) $excludedPrefix)) {
                 return true;
             }
         }

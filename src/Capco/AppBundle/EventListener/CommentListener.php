@@ -14,21 +14,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class CommentListener
 {
-    private readonly Publisher $publisher;
-    private readonly EntityManagerInterface $em;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly Manager $manager;
-
-    public function __construct(
-        Publisher $publisher,
-        EntityManagerInterface $em,
-        TokenStorageInterface $tokenStorage,
-        Manager $manager
-    ) {
-        $this->publisher = $publisher;
-        $this->em = $em;
-        $this->tokenStorage = $tokenStorage;
-        $this->manager = $manager;
+    public function __construct(private readonly Publisher $publisher, private readonly EntityManagerInterface $em, private readonly TokenStorageInterface $tokenStorage, private readonly Manager $manager)
+    {
     }
 
     public function postUpdate(LifecycleEventArgs $args): void

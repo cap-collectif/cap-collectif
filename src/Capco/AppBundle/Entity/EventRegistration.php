@@ -29,13 +29,6 @@ class EventRegistration
     use PrivatableTrait;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="registrations", cascade={"persist"})
-     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     * @Assert\NotNull()
-     */
-    private $event;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
@@ -55,9 +48,13 @@ class EventRegistration
      */
     private $updatedAt;
 
-    public function __construct(?Event $event = null)
-    {
-        $this->event = $event;
+    public function __construct(/**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Event", inversedBy="registrations", cascade={"persist"})
+     * @ORM\JoinColumn(name="event_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+     * @Assert\NotNull()
+     */
+    private ?Event $event = null
+    ) {
         $this->updatedAt = new \DateTime();
         $this->confirmed = false;
     }

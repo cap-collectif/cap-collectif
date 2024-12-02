@@ -18,13 +18,8 @@ class UnTrashMutation implements MutationInterface
     final public const TRASHABLE_NOT_FOUND = 'TRASHABLE_NOT_FOUND';
     final public const NOT_TRASHED = 'NOT_TRASHED';
 
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-
-    public function __construct(GlobalIdResolver $globalIdResolver, EntityManagerInterface $em)
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em)
     {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
     }
 
     public function __invoke(Arg $input, User $viewer): array

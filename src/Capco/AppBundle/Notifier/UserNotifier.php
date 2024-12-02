@@ -20,23 +20,16 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserNotifier extends BaseNotifier
 {
-    private readonly LoggerInterface $logger;
-    private readonly UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver;
-    private readonly UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver;
-
     public function __construct(
         RouterInterface $router,
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
-        UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver,
-        LoggerInterface $logger,
+        private readonly UserRegistrationConfirmationUrlResolver $userRegistrationConfirmationUrlResolver,
+        private readonly UserConfirmNewEmailUrlResolver $userConfirmNewEmailUrlResolver,
+        private readonly LoggerInterface $logger,
         LocaleResolver $localeResolver
     ) {
-        $this->logger = $logger;
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->userRegistrationConfirmationUrlResolver = $userRegistrationConfirmationUrlResolver;
-        $this->userConfirmNewEmailUrlResolver = $userConfirmNewEmailUrlResolver;
     }
 
     public function adminConfirmation(User $user): void

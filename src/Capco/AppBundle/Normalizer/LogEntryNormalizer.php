@@ -14,18 +14,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class LogEntryNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $router;
-    private readonly ObjectNormalizer $normalizer;
-    private $logManager;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        LogManager $logManager
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->logManager = $logManager;
+    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private LogManager $logManager)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

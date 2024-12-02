@@ -19,15 +19,9 @@ use Symfony\Component\Yaml\Yaml;
 class IndexBuilder
 {
     final public const PREFIX_INDEX = 'capco_';
-    protected Client $client;
-    protected string $indexName;
-    private readonly Cluster $cluster;
 
-    public function __construct(Client $client, Cluster $cluster, string $indexName)
+    public function __construct(protected Client $client, private readonly Cluster $cluster, protected string $indexName)
     {
-        $this->client = $client;
-        $this->indexName = $indexName;
-        $this->cluster = $cluster;
     }
 
     /**
@@ -133,7 +127,7 @@ class IndexBuilder
         $indexNames = $this->client->getCluster()->getIndexNames();
         $indexes = [];
         foreach ($indexNames as $indexName) {
-            if (0 !== strpos($indexName, self::PREFIX_INDEX)) {
+            if (!str_starts_with($indexName, self::PREFIX_INDEX)) {
                 unset($indexNames[$indexName]);
 
                 continue;

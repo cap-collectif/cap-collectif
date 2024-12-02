@@ -33,12 +33,9 @@ class ReplyAnonymousNormalizerTest extends TestCase
     /**
      * @dataProvider normalizationDataProvider
      *
-     * @param mixed $context
-     * @param mixed $expectedResult
-     *
      * @throws ExceptionInterface
      */
-    public function testNormalize($context, $expectedResult)
+    public function testNormalize(mixed $context, mixed $expectedResult)
     {
         $replyAnonymous = new ReplyAnonymous();
         $replyAnonymous->setId(1);

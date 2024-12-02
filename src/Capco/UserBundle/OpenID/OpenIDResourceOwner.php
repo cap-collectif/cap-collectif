@@ -25,8 +25,6 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     ];
 
     private ?string $instanceName = null;
-    private readonly FeatureChecker $featureChecker;
-    private readonly LoggerInterface $logger;
 
     public function __construct(
         HttpMethodsClientInterface $hwiHttpClient,
@@ -35,15 +33,13 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         string $name,
         RequestDataStorageInterface $hwiStorage,
         OptionsModifierInterface $optionsModifier,
-        FeatureChecker $featureChecker,
-        LoggerInterface $logger
+        private readonly FeatureChecker $featureChecker,
+        private readonly LoggerInterface $logger
     ) {
         $this->httpClient = $hwiHttpClient;
         $this->httpUtils = $httpUtils;
         $this->name = $name;
         $this->storage = $hwiStorage;
-        $this->featureChecker = $featureChecker;
-        $this->logger = $logger;
 
         $options = $optionsModifier->modifyOptions($options, $this);
         if (!empty($options['paths'])) {
@@ -70,43 +66,29 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     // TODO: please save this configuration in BO instead.
     public function isRefreshingUserInformationsAtEveryLogin(): bool
     {
-        switch ($this->getInstanceName()) {
-            case 'occitanie':
-            case 'occitanie-dedicated':
-                return true;
-
-            default:
-                return false;
-        }
+        return match ($this->getInstanceName()) {
+            'occitanie', 'occitanie-dedicated' => true,
+            default => false,
+        };
     }
 
     // TODO: please save this configuration in BO instead.
     public function isUsingAuthorizationHeaderToGetAccessToken(): bool
     {
-        switch ($this->getInstanceName()) {
-            case 'pe':
-            case 'parlons-energies':
-                return true;
-
-            default:
-                return false;
-        }
+        return match ($this->getInstanceName()) {
+            'pe', 'parlons-energies' => true,
+            default => false,
+        };
     }
 
     // TODO: please save this configuration in BO instead.
     public function getScope(): string
     {
-        switch ($this->getInstanceName()) {
-            case 'carpentras':
-                return 'openid email family_name given_name';
-
-            case 'pe':
-            case 'parlons-energies':
-                return 'openid email givenName';
-
-            default:
-                return 'openid email profile';
-        }
+        return match ($this->getInstanceName()) {
+            'carpentras' => 'openid email family_name given_name',
+            'pe', 'parlons-energies' => 'openid email givenName',
+            default => 'openid email profile',
+        };
     }
 
     public function getUserInformation(
@@ -174,50 +156,28 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         parent::configureOptions($resolver);
         $scope = $this->getScope();
 
-        switch ($this->getInstanceName()) {
-            // activate state when it is mandatory
-            case 'carpentras':
-            case 'debatpenly':
-            case 'debateauidf':
-            case 'debatdsf':
-            case 'participer-debat-lithium':
-            case 'participer-debat-gravelines':
-            case 'participer-debat-fessenheim':
-                $resolver
-                    ->setDefaults([
-                        'state' => null,
-                        'csrf' => true,
-                        'scope' => $scope,
-                    ])
-                    ->setRequired('logout_url')
-                ;
-
-                break;
-
-            case 'pe':
-            case 'parlons-energies':
-                $resolver
-                    ->setDefaults([
-                        'scope' => $scope,
-                        'state' => null,
-                        'csrf' => true,
-                        'nonce' => $this->generateNonce(),
-                    ])
-                    ->setRequired('logout_url')
-                ;
-
-                break;
-
-            default:
-                $resolver
-                    ->setDefaults([
-                        'scope' => $scope,
-                    ])
-                    ->setRequired('logout_url')
-                ;
-
-                break;
-        }
+        match ($this->getInstanceName()) {
+            'carpentras', 'debatpenly', 'debateauidf', 'debatdsf', 'participer-debat-lithium', 'participer-debat-gravelines', 'participer-debat-fessenheim' => $resolver
+                ->setDefaults([
+                    'state' => null,
+                    'csrf' => true,
+                    'scope' => $scope,
+                ])
+                ->setRequired('logout_url'),
+            'pe', 'parlons-energies' => $resolver
+                ->setDefaults([
+                    'scope' => $scope,
+                    'state' => null,
+                    'csrf' => true,
+                    'nonce' => $this->generateNonce(),
+                ])
+                ->setRequired('logout_url'),
+            default => $resolver
+                ->setDefaults([
+                    'scope' => $scope,
+                ])
+                ->setRequired('logout_url'),
+        };
     }
 
     protected function doGetTokenRequest($url, array $parameters = []): ResponseInterface

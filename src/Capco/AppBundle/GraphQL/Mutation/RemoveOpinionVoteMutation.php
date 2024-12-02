@@ -20,30 +20,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class RemoveOpinionVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $opinionVoteRepo;
-    private $versionVoteRepo;
-    private $opinionRepo;
-    private $versionRepo;
-    private $redisStorageHelper;
-    private $stepRequirementsResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        OpinionVoteRepository $opinionVoteRepo,
-        OpinionRepository $opinionRepo,
-        OpinionVersionVoteRepository $versionVoteRepo,
-        OpinionVersionRepository $versionRepo,
-        RedisStorageHelper $redisStorageHelper,
-        StepRequirementsResolver $stepRequirementsResolver
-    ) {
-        $this->em = $em;
-        $this->opinionVoteRepo = $opinionVoteRepo;
-        $this->opinionRepo = $opinionRepo;
-        $this->versionRepo = $versionRepo;
-        $this->versionVoteRepo = $versionVoteRepo;
-        $this->redisStorageHelper = $redisStorageHelper;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
+    public function __construct(private EntityManagerInterface $em, private OpinionVoteRepository $opinionVoteRepo, private OpinionRepository $opinionRepo, private OpinionVersionVoteRepository $versionVoteRepo, private OpinionVersionRepository $versionRepo, private RedisStorageHelper $redisStorageHelper, private StepRequirementsResolver $stepRequirementsResolver)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

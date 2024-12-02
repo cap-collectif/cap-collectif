@@ -19,30 +19,22 @@ class ProposalAdmin extends AbstractAdmin
 {
     protected ?string $classnameLabel = 'proposal';
     protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'createdAt'];
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly Indexer $indexer;
-    private readonly ElasticsearchDoctrineListener $elasticsearchDoctrineListener;
-    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage,
-        Indexer $indexer,
-        ElasticsearchDoctrineListener $elasticsearchDoctrineListener,
-        EntityManagerInterface $entityManager
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly Indexer $indexer,
+        private readonly ElasticsearchDoctrineListener $elasticsearchDoctrineListener,
+        private readonly EntityManagerInterface $entityManager
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->tokenStorage = $tokenStorage;
-        $this->indexer = $indexer;
-        $this->elasticsearchDoctrineListener = $elasticsearchDoctrineListener;
-        $this->entityManager = $entityManager;
     }
 
     public function preRemove($object): void
     {
-        $this->indexer->remove(\get_class($object), $object->getId());
+        $this->indexer->remove($object::class, $object->getId());
         $this->indexer->finishBulk();
         parent::preRemove($object);
     }

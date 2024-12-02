@@ -18,36 +18,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class ResetPasswordMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly UserPasswordEncoderInterface $userPasswordEncoder;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly UserManager $userManager;
-    private readonly TranslatorInterface $translator;
-    private readonly SessionInterface $session;
-    private readonly LoginManagerInterface $loginManager;
-    private readonly string $firewallName;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        SessionInterface $session,
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        UserManager $userManager,
-        LoginManagerInterface $loginManager,
-        UserPasswordEncoderInterface $userPasswordEncoder,
-        TranslatorInterface $translator,
-        LoggerInterface $logger,
-        string $firewallName
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->translator = $translator;
-        $this->userPasswordEncoder = $userPasswordEncoder;
-        $this->userManager = $userManager;
-        $this->session = $session;
-        $this->loginManager = $loginManager;
-        $this->firewallName = $firewallName;
-        $this->logger = $logger;
+    public function __construct(private readonly SessionInterface $session, private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly UserManager $userManager, private readonly LoginManagerInterface $loginManager, private readonly UserPasswordEncoderInterface $userPasswordEncoder, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger, private readonly string $firewallName)
+    {
     }
 
     public function __invoke(Argument $args): array

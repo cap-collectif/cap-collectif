@@ -12,13 +12,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DebateArticleListener
 {
-    private readonly Publisher $publisher;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(Publisher $publisher, LoggerInterface $logger)
+    public function __construct(private readonly Publisher $publisher, private readonly LoggerInterface $logger)
     {
-        $this->publisher = $publisher;
-        $this->logger = $logger;
     }
 
     public function postPersist(DebateArticle $entity, LifecycleEventArgs $args): void
@@ -33,7 +28,7 @@ class DebateArticleListener
                     ])
                 )
             );
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
         }
     }
@@ -52,7 +47,7 @@ class DebateArticleListener
                     )
                 );
             }
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
         }
     }

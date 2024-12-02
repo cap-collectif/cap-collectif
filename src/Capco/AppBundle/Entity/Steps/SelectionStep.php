@@ -136,11 +136,9 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
     }
 
     /**
-     * @param mixed $defaultSort
-     *
      * @return $this
      */
-    public function setDefaultSort($defaultSort)
+    public function setDefaultSort(mixed $defaultSort)
     {
         $this->defaultSort = $defaultSort;
 

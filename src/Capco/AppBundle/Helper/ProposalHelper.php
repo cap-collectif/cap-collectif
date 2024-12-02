@@ -7,11 +7,8 @@ use Capco\UserBundle\Entity\User;
 
 class ProposalHelper
 {
-    protected GlobalIdResolver $globalIdResolver;
-
-    public function __construct(GlobalIdResolver $globalIdResolver)
+    public function __construct(protected GlobalIdResolver $globalIdResolver)
     {
-        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function isAuthor(string $proposalId, User $user): bool

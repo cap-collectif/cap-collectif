@@ -39,21 +39,12 @@ class ElasticaToDoctrineTransformer
      */
     protected $propertyAccessor;
 
-    /**
-     * @var Indexer
-     */
-    private $indexer;
-
-    private $logger;
-
     public function __construct(
         ManagerRegistry $registry,
-        Indexer $indexer,
-        LoggerInterface $logger
+        private readonly Indexer $indexer,
+        private readonly LoggerInterface $logger
     ) {
         $this->registry = $registry;
-        $this->indexer = $indexer;
-        $this->logger = $logger;
     }
 
     /**
@@ -156,13 +147,11 @@ class ElasticaToDoctrineTransformer
 
     /**
      * Fetch objects for theses identifier values.
-     *
-     * @param mixed $objectClass
      */
     protected function findByIdentifiers(
         array $identifierValues,
         bool $hydrate,
-        $objectClass
+        mixed $objectClass
     ): array {
         if (empty($identifierValues)) {
             return [];
@@ -185,10 +174,8 @@ class ElasticaToDoctrineTransformer
 
     /**
      * Retrieves a query builder to be used for querying by identifiers.
-     *
-     * @param mixed $objectClass
      */
-    protected function getEntityQueryBuilder($objectClass): QueryBuilder
+    protected function getEntityQueryBuilder(mixed $objectClass): QueryBuilder
     {
         $repository = $this->registry
             ->getManagerForClass($objectClass)

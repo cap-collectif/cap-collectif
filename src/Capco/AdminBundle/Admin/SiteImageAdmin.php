@@ -17,19 +17,15 @@ class SiteImageAdmin extends AbstractAdmin
         '_sort_order' => 'ASC',
         '_sort_by' => 'isEnabled',
     ];
-    private readonly MediaProvider $mediaProvider;
-    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        MediaProvider $mediaProvider,
-        EntityManagerInterface $entityManager
+        private readonly MediaProvider $mediaProvider,
+        private readonly EntityManagerInterface $entityManager
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->mediaProvider = $mediaProvider;
-        $this->entityManager = $entityManager;
     }
 
     public function toString($object): string

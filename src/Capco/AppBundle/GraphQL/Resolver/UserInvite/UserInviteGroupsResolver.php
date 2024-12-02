@@ -12,13 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class UserInviteGroupsResolver implements QueryInterface
 {
-    private readonly LoggerInterface $logger;
-    private readonly GroupRepository $groupRepository;
-
-    public function __construct(GroupRepository $groupRepository, LoggerInterface $logger)
+    public function __construct(private readonly GroupRepository $groupRepository, private readonly LoggerInterface $logger)
     {
-        $this->groupRepository = $groupRepository;
-        $this->logger = $logger;
     }
 
     public function __invoke(UserInvite $userInvite): ConnectionInterface

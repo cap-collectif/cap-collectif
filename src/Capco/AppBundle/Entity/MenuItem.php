@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="menu_item")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuItemRepository")
  */
-class MenuItem implements Translatable, SonataTranslatableInterface
+class MenuItem implements Translatable, SonataTranslatableInterface, \Stringable
 {
     use IdTrait;
     use SonataTranslatableTrait;
@@ -105,7 +105,7 @@ class MenuItem implements Translatable, SonataTranslatableInterface
         $this->associatedFeatures = null;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getTitle() ?: 'New menu item';
     }
@@ -337,10 +337,7 @@ class MenuItem implements Translatable, SonataTranslatableInterface
         return $this->associatedFeatures;
     }
 
-    /**
-     * @param mixed $associatedFeatures
-     */
-    public function setAssociatedFeatures($associatedFeatures)
+    public function setAssociatedFeatures(mixed $associatedFeatures)
     {
         $this->associatedFeatures = $associatedFeatures;
     }

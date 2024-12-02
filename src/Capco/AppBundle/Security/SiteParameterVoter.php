@@ -39,12 +39,10 @@ class SiteParameterVoter extends Voter
 
         $siteParameter = $subject;
 
-        switch ($attribute) {
-            case self::VIEW:
-                return $this->canView($siteParameter, $viewer);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::VIEW => $this->canView($siteParameter, $viewer),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canView(SiteParameter $siteParameter, ?User $viewer): bool

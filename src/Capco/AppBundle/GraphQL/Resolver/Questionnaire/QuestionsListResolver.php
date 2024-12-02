@@ -10,23 +10,17 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionsListResolver implements QueryInterface
 {
-    private readonly AbstractQuestionRepository $repository;
-
-    public function __construct(AbstractQuestionRepository $repository)
+    public function __construct(private readonly AbstractQuestionRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Questionnaire $questionnaire, Argument $args): iterable
     {
         $filter = $args->offsetGet('filter');
 
-        switch ($filter) {
-            case QuestionsFilterType::JUMPS_ONLY:
-                return $this->repository->findWithJumpsOrWithAlwaysJumpDestinationByQuestionnaire($questionnaire);
-
-            default:
-                return $this->repository->findByQuestionnaire($questionnaire);
-        }
+        return match ($filter) {
+            QuestionsFilterType::JUMPS_ONLY => $this->repository->findWithJumpsOrWithAlwaysJumpDestinationByQuestionnaire($questionnaire),
+            default => $this->repository->findByQuestionnaire($questionnaire),
+        };
     }
 }

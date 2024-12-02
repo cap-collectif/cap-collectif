@@ -15,21 +15,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class HomepageController extends Controller
 {
-    private readonly QueryEventsResolver $eventsResolver;
-    private readonly SectionResolver $sectionResolver;
-    private readonly Manager $manager;
-    private readonly TranslatorInterface $translator;
-
-    public function __construct(
-        QueryEventsResolver $eventsResolver,
-        SectionResolver $sectionResolver,
-        Manager $manager,
-        TranslatorInterface $translator
-    ) {
-        $this->eventsResolver = $eventsResolver;
-        $this->sectionResolver = $sectionResolver;
-        $this->manager = $manager;
-        $this->translator = $translator;
+    public function __construct(private readonly QueryEventsResolver $eventsResolver, private readonly SectionResolver $sectionResolver, private readonly Manager $manager, private readonly TranslatorInterface $translator)
+    {
     }
 
     /**

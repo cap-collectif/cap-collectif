@@ -26,30 +26,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateOrUpdateConsultationMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly OpinionTypeRepository $opinionTypeRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
 
-    public function __construct(
-        FormFactoryInterface $formFactory,
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        OpinionTypeRepository $opinionTypeRepository,
-        AuthorizationCheckerInterface $authorizationChecker,
-        SettableOwnerResolver $settableOwnerResolver
-    ) {
-        $this->formFactory = $formFactory;
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->opinionTypeRepository = $opinionTypeRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->settableOwnerResolver = $settableOwnerResolver;
+    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly OpinionTypeRepository $opinionTypeRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly SettableOwnerResolver $settableOwnerResolver)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

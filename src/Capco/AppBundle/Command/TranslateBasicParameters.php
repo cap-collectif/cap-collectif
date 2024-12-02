@@ -19,17 +19,14 @@ class TranslateBasicParameters extends Command
         'global.site.organization_name',
         'admin.mail.notifications.receive_address',
     ];
-
-    private readonly EntityManagerInterface $entityManager;
     private readonly LocaleRepository $localeRepository;
     private readonly SiteParameterRepository $siteParameterRepository;
 
-    public function __construct(string $name, EntityManagerInterface $entityManager)
+    public function __construct(string $name, private readonly EntityManagerInterface $entityManager)
     {
         parent::__construct($name);
-        $this->entityManager = $entityManager;
-        $this->localeRepository = $entityManager->getRepository(Locale::class);
-        $this->siteParameterRepository = $entityManager->getRepository(SiteParameter::class);
+        $this->localeRepository = $this->entityManager->getRepository(Locale::class);
+        $this->siteParameterRepository = $this->entityManager->getRepository(SiteParameter::class);
     }
 
     protected function configure()

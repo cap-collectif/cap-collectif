@@ -20,27 +20,8 @@ use Symfony\Component\EventDispatcher\EventDispatcherInterface;
 
 class AnalysisConfigurationManager
 {
-    private readonly EntityManagerInterface $entityManager;
-    private readonly ProposalRepository $proposalRepository;
-    private readonly ProposalDecisionRepository $proposalDecisionRepository;
-    private readonly EventDispatcherInterface $eventDispatcher;
-    private readonly Publisher $publisher;
-    private readonly JpecGhost $jpecGhost;
-
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        ProposalRepository $proposalRepository,
-        ProposalDecisionRepository $proposalDecisionRepository,
-        EventDispatcherInterface $eventDispatcher,
-        Publisher $publisher,
-        JpecGhost $jpecGhost
-    ) {
-        $this->entityManager = $entityManager;
-        $this->proposalRepository = $proposalRepository;
-        $this->proposalDecisionRepository = $proposalDecisionRepository;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->publisher = $publisher;
-        $this->jpecGhost = $jpecGhost;
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly ProposalRepository $proposalRepository, private readonly ProposalDecisionRepository $proposalDecisionRepository, private readonly EventDispatcherInterface $eventDispatcher, private readonly Publisher $publisher, private readonly JpecGhost $jpecGhost)
+    {
     }
 
     public function processAnalysisConfiguration(

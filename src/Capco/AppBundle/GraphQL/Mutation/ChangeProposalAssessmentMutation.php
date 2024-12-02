@@ -26,24 +26,8 @@ class ChangeProposalAssessmentMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private readonly ProposalRepository $proposalRepository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly LoggerInterface $logger;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        EntityManagerInterface $entityManager,
-        AuthorizationCheckerInterface $authorizationChecker,
-        LoggerInterface $logger,
-        Publisher $publisher
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->entityManager = $entityManager;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->logger = $logger;
-        $this->publisher = $publisher;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly EntityManagerInterface $entityManager, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly LoggerInterface $logger, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $args, $viewer): array

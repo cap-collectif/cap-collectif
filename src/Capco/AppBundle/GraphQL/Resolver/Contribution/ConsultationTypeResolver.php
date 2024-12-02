@@ -28,18 +28,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class ConsultationTypeResolver implements QueryInterface
 {
-    private $typeResolver;
-    private readonly ReplyTypeResolver $replyTypeResolver;
-    private readonly VoteTypeResolver $voteTypeResolver;
-
-    public function __construct(
-        TypeResolver $typeResolver,
-        ReplyTypeResolver $replyTypeResolver,
-        VoteTypeResolver $voteTypeResolver
-    ) {
-        $this->typeResolver = $typeResolver;
-        $this->replyTypeResolver = $replyTypeResolver;
-        $this->voteTypeResolver = $voteTypeResolver;
+    public function __construct(private readonly TypeResolver $typeResolver, private readonly ReplyTypeResolver $replyTypeResolver, private readonly VoteTypeResolver $voteTypeResolver)
+    {
     }
 
     public function __invoke($data)

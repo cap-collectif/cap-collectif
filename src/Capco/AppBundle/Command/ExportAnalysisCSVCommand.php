@@ -150,33 +150,23 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         EOF;
 
     protected static $defaultName = 'capco:export:analysis';
-    protected EntityManagerInterface $em;
-    protected Executor $executor;
     protected GraphQlAclListener $listener;
     protected string $projectRootDir;
-    protected UserRepository $userRepository;
-    private readonly ProjectRepository $projectRepository;
-    private readonly ConnectionTraversor $connectionTraversor;
 
     public function __construct(
-        EntityManagerInterface $em,
-        Executor $executor,
+        protected EntityManagerInterface $em,
+        protected Executor $executor,
         GraphQlAclListener $listener,
-        UserRepository $userRepository,
-        ProjectRepository $projectRepository,
+        protected UserRepository $userRepository,
+        private readonly ProjectRepository $projectRepository,
         ExportUtils $exportUtils,
-        ConnectionTraversor $connectionTraversor,
+        private readonly ConnectionTraversor $connectionTraversor,
         string $projectRootDir
     ) {
         parent::__construct($exportUtils);
         $listener->disableAcl();
         $this->configureSnapshot();
-        $this->em = $em;
-        $this->userRepository = $userRepository;
-        $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
-        $this->projectRepository = $projectRepository;
-        $this->connectionTraversor = $connectionTraversor;
     }
 
     public function generateProjectProposalsCSV(

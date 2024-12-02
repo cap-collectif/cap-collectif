@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalFormMessagesSentResolver implements QueryInterface
 {
-    private readonly ProposalFormRepository $repository;
-
-    public function __construct(ProposalFormRepository $repository)
+    public function __construct(private readonly ProposalFormRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(ProposalForm $form): int

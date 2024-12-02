@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProjectPaperVoteTotalPointsCountResolver implements QueryInterface
 {
-    private readonly ProposalStepPaperVoteCounterRepository $repository;
-
-    public function __construct(ProposalStepPaperVoteCounterRepository $repository)
+    public function __construct(private readonly ProposalStepPaperVoteCounterRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Project $project)

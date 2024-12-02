@@ -13,15 +13,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 class DebateArgumentViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
-    private readonly DebateArgumentVoteRepository $debateArgumentVoteRepository;
-    private readonly DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository;
 
-    public function __construct(
-        DebateArgumentVoteRepository $debateArgumentVoteRepository,
-        DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository
-    ) {
-        $this->debateArgumentVoteRepository = $debateArgumentVoteRepository;
-        $this->debateAnonymousArgumentVoteRepository = $debateAnonymousArgumentVoteRepository;
+    public function __construct(private readonly DebateArgumentVoteRepository $debateArgumentVoteRepository, private readonly DebateAnonymousArgumentVoteRepository $debateAnonymousArgumentVoteRepository)
+    {
     }
 
     public function __invoke(DebateArgumentInterface $debateArgument, $viewer): bool

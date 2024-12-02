@@ -16,13 +16,8 @@ class RequirementIsCollectedByFranceConnectResolver implements QueryInterface
         FranceConnectAllowedData::BIRTHDATE => Requirement::DATE_OF_BIRTH,
     ];
 
-    private readonly Manager $manager;
-    private readonly FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver;
-
-    public function __construct(Manager $manager, FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver)
+    public function __construct(private readonly Manager $manager, private readonly FranceConnectAllowedDataResolver $franceConnectAllowedDataResolver)
     {
-        $this->manager = $manager;
-        $this->franceConnectAllowedDataResolver = $franceConnectAllowedDataResolver;
     }
 
     public function __invoke(Requirement $requirement): bool

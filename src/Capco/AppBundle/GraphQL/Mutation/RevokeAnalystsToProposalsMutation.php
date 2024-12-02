@@ -29,33 +29,8 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly ConnectionBuilder $builder;
-    private readonly ProposalAnalystRepository $proposalAnalystRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ProposalAnalysisRepository $proposalAnalysisRepository;
-    private readonly LoggerInterface $logger;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        ConnectionBuilder $builder,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ProposalAnalystRepository $proposalAnalystRepository,
-        ProposalAnalysisRepository $proposalAnalysisRepository,
-        LoggerInterface $logger,
-        Publisher $publisher
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->builder = $builder;
-        $this->proposalAnalystRepository = $proposalAnalystRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->proposalAnalysisRepository = $proposalAnalysisRepository;
-        $this->logger = $logger;
-        $this->publisher = $publisher;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilder $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalAnalystRepository $proposalAnalystRepository, private readonly ProposalAnalysisRepository $proposalAnalysisRepository, private readonly LoggerInterface $logger, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Arg $input, $viewer): array

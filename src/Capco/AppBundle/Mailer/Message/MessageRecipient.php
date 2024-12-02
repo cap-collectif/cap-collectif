@@ -4,21 +4,8 @@ namespace Capco\AppBundle\Mailer\Message;
 
 class MessageRecipient
 {
-    private $emailAddress;
-    private $locale;
-    private $fullName;
-    private $vars;
-
-    public function __construct(
-        string $emailAddress,
-        ?string $locale = null,
-        ?string $fullName = null,
-        array $vars = []
-    ) {
-        $this->emailAddress = $emailAddress;
-        $this->locale = $locale;
-        $this->fullName = $fullName;
-        $this->vars = $vars;
+    public function __construct(private readonly string $emailAddress, private ?string $locale = null, private ?string $fullName = null, private array $vars = [])
+    {
     }
 
     public function getEmailAddress(): string

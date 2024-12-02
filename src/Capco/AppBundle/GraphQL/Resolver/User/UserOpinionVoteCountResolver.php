@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserOpinionVoteCountResolver implements QueryInterface
 {
-    private $opinionVoteRepository;
-
-    public function __construct(OpinionVoteRepository $opinionVoteRepository)
+    public function __construct(private readonly OpinionVoteRepository $opinionVoteRepository)
     {
-        $this->opinionVoteRepository = $opinionVoteRepository;
     }
 
     public function __invoke($viewer, User $user): int

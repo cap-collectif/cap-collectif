@@ -19,19 +19,14 @@ class UpdateProfilePasswordMutation extends BaseUpdateProfile
 {
     use MutationTrait;
 
-    private readonly UserManager $userManager;
-    private readonly Publisher $publisher;
-
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
-        UserManager $userManager,
-        Publisher $publisher
+        private readonly UserManager $userManager,
+        private readonly Publisher $publisher
     ) {
-        $this->userManager = $userManager;
-        $this->publisher = $publisher;
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
 

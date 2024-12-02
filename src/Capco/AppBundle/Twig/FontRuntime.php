@@ -8,14 +8,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class FontRuntime implements RuntimeExtensionInterface
 {
-    /**
-     * @var FontRepository
-     */
-    private $repository;
-
-    public function __construct(FontRepository $repository)
+    public function __construct(private readonly FontRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function getCurrentFont(): array

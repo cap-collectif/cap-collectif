@@ -24,13 +24,12 @@ class BlogController extends Controller
      * @Route("/blog/filter/{theme}/{project}/{page}", name="app_blog_search_project", requirements={"page" = "\d+"}, defaults={"page" = 1, "theme" = "all", "project" = "all", "_feature_flags" = "blog"} )
      * @Template("@CapcoApp/Blog/index.html.twig")
      *
-     * @param mixed      $page
      * @param null|mixed $theme
      * @param null|mixed $project
      *
      * @return array|\Symfony\Component\HttpFoundation\RedirectResponse
      */
-    public function indexAction(Request $request, $page, $theme = null, $project = null)
+    public function indexAction(Request $request, mixed $page, $theme = null, $project = null)
     {
         $currentUrl = $this->generateUrl('app_blog');
 

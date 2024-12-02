@@ -9,18 +9,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class SiteFaviconRuntime implements RuntimeExtensionInterface
 {
-    protected ContainerInterface $container;
-    private readonly SiteImageRepository $repository;
-    private readonly MediaProvider $provider;
-
-    public function __construct(
-        ContainerInterface $container,
-        SiteImageRepository $repository,
-        MediaProvider $provider
-    ) {
-        $this->container = $container;
-        $this->repository = $repository;
-        $this->provider = $provider;
+    public function __construct(protected ContainerInterface $container, private readonly SiteImageRepository $repository, private readonly MediaProvider $provider)
+    {
     }
 
     public function getSiteFavicons(): ?array

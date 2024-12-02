@@ -12,16 +12,14 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class TranslationCollectionType extends AbstractType
 {
-    private $subscriber;
     private $availableLocales;
     private $publishedLocales;
     private $defaultLocale;
 
     public function __construct(
-        TranslationCollectionTypeSubscriber $subscriber,
+        private readonly TranslationCollectionTypeSubscriber $subscriber,
         LocaleRepository $localeRepository
     ) {
-        $this->subscriber = $subscriber;
         foreach ($localeRepository->findEnabledLocales() as $locale) {
             $this->availableLocales[] = $locale->getCode();
             if ($locale->isPublished()) {

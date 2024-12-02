@@ -20,18 +20,8 @@ class CheckIdentificationCodeMutation implements MutationInterface
     final public const RATE_LIMITER_ACTION = 'CheckIdentificationCode';
     final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    protected LoggerInterface $logger;
-    private readonly ValidatorInterface $validator;
-    private readonly RateLimiter $rateLimiter;
-
-    public function __construct(
-        LoggerInterface $logger,
-        ValidatorInterface $validator,
-        RateLimiter $rateLimiter
-    ) {
-        $this->validator = $validator;
-        $this->rateLimiter = $rateLimiter;
-        $this->logger = $logger;
+    public function __construct(protected LoggerInterface $logger, private readonly ValidatorInterface $validator, private readonly RateLimiter $rateLimiter)
+    {
     }
 
     public function __invoke(Argument $input, User $user): array

@@ -13,11 +13,8 @@ class SmsCreditsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly SmsCreditRepository $repository;
-
-    public function __construct(SmsCreditRepository $repository)
+    public function __construct(private readonly SmsCreditRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Argument $args): ConnectionInterface

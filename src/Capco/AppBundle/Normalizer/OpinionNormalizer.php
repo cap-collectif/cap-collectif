@@ -19,30 +19,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class OpinionNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private readonly UrlGeneratorInterface $router;
-    private readonly ObjectNormalizer $normalizer;
-    private readonly Manager $toggleManager;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly AbstractVoteRepository $voteRepository;
-    private readonly VoteSearch $voteSearch;
-    private readonly ArgumentRepository $argumentRepository;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        TokenStorageInterface $tokenStorage,
-        AbstractVoteRepository $voteRepository,
-        Manager $toggleManager,
-        VoteSearch $voteSearch,
-        ArgumentRepository $argumentRepository
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->tokenStorage = $tokenStorage;
-        $this->voteRepository = $voteRepository;
-        $this->toggleManager = $toggleManager;
-        $this->voteSearch = $voteSearch;
-        $this->argumentRepository = $argumentRepository;
+    public function __construct(private readonly UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private readonly TokenStorageInterface $tokenStorage, private readonly AbstractVoteRepository $voteRepository, private readonly Manager $toggleManager, private readonly VoteSearch $voteSearch, private readonly ArgumentRepository $argumentRepository)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

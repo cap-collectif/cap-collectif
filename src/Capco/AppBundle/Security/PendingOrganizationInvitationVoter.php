@@ -39,12 +39,9 @@ class PendingOrganizationInvitationVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::DELETE:
-                return $this->canDelete($subject, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::DELETE => $this->canDelete($subject, $viewer),
+            default => false,
+        };
     }
 }

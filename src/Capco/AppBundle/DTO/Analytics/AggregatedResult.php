@@ -4,13 +4,8 @@ namespace Capco\AppBundle\DTO\Analytics;
 
 class AggregatedResult
 {
-    private readonly string $key;
-    private readonly int $totalCount;
-
-    private function __construct(string $key, int $totalCount)
+    private function __construct(private readonly string $key, private readonly int $totalCount)
     {
-        $this->key = $key;
-        $this->totalCount = $totalCount;
     }
 
     public static function fromEs(array $response, ?string $customAggregation = null): self

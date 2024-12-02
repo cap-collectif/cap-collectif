@@ -32,23 +32,18 @@ class QuestionnaireReplyNotifier extends BaseNotifier
     final public const QUESTIONNAIRE_REPLY_CREATE_STATE = 'create';
     final public const QUESTIONNAIRE_REPLY_UPDATE_STATE = 'update';
     final public const QUESTIONNAIRE_REPLY_DELETE_STATE = 'delete';
-
-    private readonly LoggerInterface $logger;
     private readonly string $defaultLocale;
-    private readonly QuestionnaireRepository $questionnaireRepository;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
-        LoggerInterface $logger,
+        private readonly LoggerInterface $logger,
         LocaleResolver $localeResolver,
-        QuestionnaireRepository $questionnaireRepository
+        private readonly QuestionnaireRepository $questionnaireRepository
     ) {
-        $this->logger = $logger;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->questionnaireRepository = $questionnaireRepository;
     }
 
     public function onCreate(AbstractReply $reply): void

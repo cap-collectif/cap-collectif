@@ -13,13 +13,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ChangeFontMutation implements MutationInterface
 {
     use MutationTrait;
-    private $repository;
-    private $manager;
 
-    public function __construct(FontManager $manager, FontRepository $repository)
+    public function __construct(private FontManager $manager, private FontRepository $repository)
     {
-        $this->repository = $repository;
-        $this->manager = $manager;
     }
 
     public function __invoke(Argument $args): iterable

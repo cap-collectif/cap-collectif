@@ -17,21 +17,8 @@ use Symfony\Component\Security\Http\SecurityEvents;
 
 class MagicLinkController extends AbstractController
 {
-    private readonly MagicLinkAuthenticator $magicLinkAuthenticator;
-    private readonly LoggerInterface $logger;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly EventDispatcherInterface $eventDispatcher;
-
-    public function __construct(
-        MagicLinkAuthenticator $magicLinkAuthenticator,
-        LoggerInterface $logger,
-        TokenStorageInterface $tokenStorage,
-        EventDispatcherInterface $eventDispatcher
-    ) {
-        $this->magicLinkAuthenticator = $magicLinkAuthenticator;
-        $this->logger = $logger;
-        $this->tokenStorage = $tokenStorage;
-        $this->eventDispatcher = $eventDispatcher;
+    public function __construct(private readonly MagicLinkAuthenticator $magicLinkAuthenticator, private readonly LoggerInterface $logger, private readonly TokenStorageInterface $tokenStorage, private readonly EventDispatcherInterface $eventDispatcher)
+    {
     }
 
     /**

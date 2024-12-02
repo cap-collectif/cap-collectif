@@ -152,58 +152,27 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
             return true;
         }
 
-        switch ($condition->getOperator()) {
-            case LogicJumpConditionOperator::IS:
-                switch ($question->getType()) {
-                    case AbstractQuestion::QUESTION_TYPE_SELECT:
-                        return $value->getTitle() === $response->getValue();
-
-                    case AbstractQuestion::QUESTION_TYPE_RADIO:
-                    case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
-                    case AbstractQuestion::QUESTION_TYPE_BUTTON:
-                    case AbstractQuestion::QUESTION_TYPE_RANKING:
-                        return \in_array(
-                            $value->getTitle(),
-                            $response->getValue()['labels'] ?? [],
-                            true
-                        );
-
-                    default:
-                        throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' ' . $question->getType() . ' is not supported for operator ' . $condition->getOperator());
-
-                        break;
-                }
-
-                break;
-
-            case LogicJumpConditionOperator::IS_NOT:
-                switch ($question->getType()) {
-                    case AbstractQuestion::QUESTION_TYPE_SELECT:
-                        return $value->getTitle() != $response->getValue();
-
-                    case AbstractQuestion::QUESTION_TYPE_RADIO:
-                    case AbstractQuestion::QUESTION_TYPE_CHECKBOX:
-                    case AbstractQuestion::QUESTION_TYPE_BUTTON:
-                    case AbstractQuestion::QUESTION_TYPE_RANKING:
-                        return !\in_array(
-                            $value->getTitle(),
-                            $response->getValue()['labels'],
-                            true
-                        );
-
-                    default:
-                        throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' ' . $question->getType() . ' is not supported for operator ' . $condition->getOperator());
-
-                        break;
-                }
-
-                break;
-
-            default:
-                throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' Unknown operator: ' . $condition->getOperator());
-
-                break;
-        }
+        return match ($condition->getOperator()) {
+            LogicJumpConditionOperator::IS => match ($question->getType()) {
+                AbstractQuestion::QUESTION_TYPE_SELECT => $value->getTitle() === $response->getValue(),
+                AbstractQuestion::QUESTION_TYPE_RADIO, AbstractQuestion::QUESTION_TYPE_CHECKBOX, AbstractQuestion::QUESTION_TYPE_BUTTON, AbstractQuestion::QUESTION_TYPE_RANKING => \in_array(
+                    $value->getTitle(),
+                    $response->getValue()['labels'] ?? [],
+                    true
+                ),
+                default => throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' ' . $question->getType() . ' is not supported for operator ' . $condition->getOperator()),
+            },
+            LogicJumpConditionOperator::IS_NOT => match ($question->getType()) {
+                AbstractQuestion::QUESTION_TYPE_SELECT => $value->getTitle() != $response->getValue(),
+                AbstractQuestion::QUESTION_TYPE_RADIO, AbstractQuestion::QUESTION_TYPE_CHECKBOX, AbstractQuestion::QUESTION_TYPE_BUTTON, AbstractQuestion::QUESTION_TYPE_RANKING => !\in_array(
+                    $value->getTitle(),
+                    $response->getValue()['labels'],
+                    true
+                ),
+                default => throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' ' . $question->getType() . ' is not supported for operator ' . $condition->getOperator()),
+            },
+            default => throw new \RuntimeException(self::LOGIC_JUMP_OPERATOR_NOT_SUPPORTED . ' Unknown operator: ' . $condition->getOperator()),
+        };
     }
 
     private function isJumpFulfilledForQuestion(LogicJump $jump, iterable $responses): bool

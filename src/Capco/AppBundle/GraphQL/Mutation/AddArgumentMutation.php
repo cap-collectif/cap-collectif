@@ -31,36 +31,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class AddArgumentMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly OpinionRepository $opinionRepo;
-    private readonly OpinionVersionRepository $versionRepo;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly RedisStorageHelper $redisStorage;
-    private readonly Publisher $publisher;
-    private readonly ArgumentRepository $argumentRepo;
-    private readonly LoggerInterface $logger;
-    private readonly StepRequirementsResolver $stepRequirementsResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        OpinionRepository $opinionRepo,
-        OpinionVersionRepository $versionRepo,
-        RedisStorageHelper $redisStorage,
-        Publisher $publisher,
-        ArgumentRepository $argumentRepo,
-        LoggerInterface $logger,
-        StepRequirementsResolver $stepRequirementsResolver
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->publisher = $publisher;
-        $this->formFactory = $formFactory;
-        $this->opinionRepo = $opinionRepo;
-        $this->versionRepo = $versionRepo;
-        $this->redisStorage = $redisStorage;
-        $this->argumentRepo = $argumentRepo;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly OpinionRepository $opinionRepo, private readonly OpinionVersionRepository $versionRepo, private readonly RedisStorageHelper $redisStorage, private readonly Publisher $publisher, private readonly ArgumentRepository $argumentRepo, private readonly LoggerInterface $logger, private readonly StepRequirementsResolver $stepRequirementsResolver)
+    {
     }
 
     public function __invoke(Arg $input, User $author): array

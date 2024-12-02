@@ -18,31 +18,21 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalRevisionNotifier extends BaseNotifier
 {
-    protected ProposalUrlResolver $proposalUrlResolver;
-    private readonly RequestStack $requestStack;
     private readonly string $defaultLocale;
-    private readonly UserRepository $userRepository;
-    private readonly ProposalRevisionRepository $proposalRevisionRepository;
-    private readonly SiteColorRepository $siteColorRepository;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        ProposalUrlResolver $proposalUrlResolver,
+        protected ProposalUrlResolver $proposalUrlResolver,
         RouterInterface $router,
-        RequestStack $requestStack,
+        private readonly RequestStack $requestStack,
         LocaleResolver $localeResolver,
-        UserRepository $userRepository,
-        ProposalRevisionRepository $proposalRevisionRepository,
-        SiteColorRepository $siteColorRepository
+        private readonly UserRepository $userRepository,
+        private readonly ProposalRevisionRepository $proposalRevisionRepository,
+        private readonly SiteColorRepository $siteColorRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->proposalUrlResolver = $proposalUrlResolver;
-        $this->requestStack = $requestStack;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
-        $this->userRepository = $userRepository;
-        $this->proposalRevisionRepository = $proposalRevisionRepository;
-        $this->siteColorRepository = $siteColorRepository;
     }
 
     public function onCreate(ProposalRevision $revision, Proposal $proposal)

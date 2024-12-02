@@ -197,10 +197,8 @@ trait ProjectStepsTrait
 
     /**
      * @When I change the type of proposal follow with type :type
-     *
-     * @param mixed $type
      */
-    public function iChangeTypeOfProposalFollow($type)
+    public function iChangeTypeOfProposalFollow(mixed $type)
     {
         $this->navigationContext->getPage('collect page')->changeTypeOfProposalFollow($type);
         $this->iWait(1);
@@ -217,10 +215,8 @@ trait ProjectStepsTrait
 
     /**
      * @Then I should see :all districts stats
-     *
-     * @param mixed $all
      */
-    public function iShouldSeeAllDistrictsStats($all)
+    public function iShouldSeeAllDistrictsStats(mixed $all)
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')
@@ -249,10 +245,8 @@ trait ProjectStepsTrait
 
     /**
      * @Then the votes stats should be filtered by category and I should see :number items
-     *
-     * @param mixed $number
      */
-    public function theVotesStatsShouldBeFilteredByCategory($number)
+    public function theVotesStatsShouldBeFilteredByCategory(mixed $number)
     {
         $selector = $this->navigationContext
             ->getPage('project stats page')

@@ -17,24 +17,10 @@ class ProposalAnalyst implements Timestampable
     use TimestampableTrait;
 
     /**
-     * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalAnalysts")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="proposal_id", onDelete="CASCADE")
-     */
-    private Proposal $proposal;
-
-    /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assigned_by", nullable=true)
      */
     private ?User $assignedBy = null;
-
-    /**
-     * @ORM\Id()
-     * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
-     * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="analyst_id")
-     */
-    private User $analyst;
 
     /**
      * @Gedmo\Timestampable(on="update")
@@ -42,10 +28,20 @@ class ProposalAnalyst implements Timestampable
      */
     private $updatedAt;
 
-    public function __construct(Proposal $proposal, User $analyst)
-    {
-        $this->analyst = $analyst;
-        $this->proposal = $proposal;
+    public function __construct(
+        /**
+         * @ORM\Id()
+         * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="proposalAnalysts")
+         * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="proposal_id", onDelete="CASCADE")
+         */
+        private Proposal $proposal,
+        /**
+         * @ORM\Id()
+         * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
+         * @ORM\JoinColumn(nullable=false, referencedColumnName="id", name="analyst_id")
+         */
+        private User $analyst
+    ) {
     }
 
     public function getProposal(): Proposal

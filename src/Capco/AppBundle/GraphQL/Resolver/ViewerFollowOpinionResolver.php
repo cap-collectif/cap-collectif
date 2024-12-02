@@ -11,11 +11,8 @@ class ViewerFollowOpinionResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private $userRepository;
-
-    public function __construct(UserRepository $userRepository)
+    public function __construct(private UserRepository $userRepository)
     {
-        $this->userRepository = $userRepository;
     }
 
     public function __invoke(Opinion $opinion, $viewer): bool

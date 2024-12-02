@@ -9,13 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class EventDeleteProcessor implements ProcessorInterface
 {
-    private readonly EventNotifier $notifier;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(EventNotifier $notifier, LoggerInterface $logger)
+    public function __construct(private readonly EventNotifier $notifier, private readonly LoggerInterface $logger)
     {
-        $this->notifier = $notifier;
-        $this->logger = $logger;
     }
 
     public function process(Message $message, array $options): bool

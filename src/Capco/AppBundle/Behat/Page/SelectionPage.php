@@ -101,7 +101,7 @@ class SelectionPage extends Page
                 ->mouseOver()
             ;
             $button->click();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $button
                 ->getParent()
                 ->getParent()

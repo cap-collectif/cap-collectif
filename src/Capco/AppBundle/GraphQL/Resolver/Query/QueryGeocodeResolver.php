@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryGeocodeResolver implements QueryInterface
 {
-    private readonly Map $map;
-
-    public function __construct(Map $map)
+    public function __construct(private readonly Map $map)
     {
-        $this->map = $map;
     }
 
     public function __invoke(float $latitude, float $longitude): ?GoogleMapsAddress
@@ -22,7 +19,7 @@ class QueryGeocodeResolver implements QueryInterface
             if ($json) {
                 return GoogleMapsAddress::fromApi($json);
             }
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             return null;
         }
 

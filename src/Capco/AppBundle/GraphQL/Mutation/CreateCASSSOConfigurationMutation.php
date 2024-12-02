@@ -11,11 +11,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class CreateCASSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
 
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     public function __invoke(Argument $input): array

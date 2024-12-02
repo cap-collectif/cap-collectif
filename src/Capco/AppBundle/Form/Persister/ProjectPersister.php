@@ -25,33 +25,8 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectPersister
 {
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly ProjectAuthorTransformer $transformer;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly ProjectStepPersister $stepPersister;
-    private readonly ProjectRepository $repository;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        FormFactoryInterface $formFactory,
-        ProjectAuthorTransformer $transformer,
-        ProjectStepPersister $stepPersister,
-        ProjectRepository $repository,
-        SettableOwnerResolver $settableOwnerResolver,
-        Publisher $publisher
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
-        $this->stepPersister = $stepPersister;
-        $this->transformer = $transformer;
-        $this->repository = $repository;
-        $this->settableOwnerResolver = $settableOwnerResolver;
-        $this->publisher = $publisher;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly ProjectAuthorTransformer $transformer, private readonly ProjectStepPersister $stepPersister, private readonly ProjectRepository $repository, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly Publisher $publisher)
+    {
     }
 
     public function persist(Argument $input, User $viewer, ?bool $editMode = false): Project

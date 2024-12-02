@@ -57,35 +57,16 @@ class PasswordComplexityValidator extends ConstraintValidator
     {
         $sum = ($length ? 0 : 1) + ($hasUpperLower ? 0 : 2) + ($hasDigit ? 0 : 4);
 
-        switch ($sum) {
-            case 0:
-                return null;
-
-            case 1:
-                return 'registration.constraints.password.min';
-
-                break;
-
-            case 2:
-                return 'at-least-one-uppercase-one-lowercase';
-
-            case 3:
-                return 'at-least-8-characters-one-uppercase-one-lowercase';
-
-            case 4:
-                return 'at-least-one-digit';
-
-            case 5:
-                return 'at-least-8-characters-one-digit';
-
-            case 6:
-                return 'at-least-one-digit-one-uppercase-one-lowercase';
-
-            case 7:
-                return 'at-least-8-characters-one-digit-one-uppercase-one-lowercase';
-
-            default:
-                return null;
-        }
+        return match ($sum) {
+            0 => null,
+            1 => 'registration.constraints.password.min',
+            2 => 'at-least-one-uppercase-one-lowercase',
+            3 => 'at-least-8-characters-one-uppercase-one-lowercase',
+            4 => 'at-least-one-digit',
+            5 => 'at-least-8-characters-one-digit',
+            6 => 'at-least-one-digit-one-uppercase-one-lowercase',
+            7 => 'at-least-8-characters-one-digit-one-uppercase-one-lowercase',
+            default => null,
+        };
     }
 }

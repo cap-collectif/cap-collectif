@@ -9,13 +9,8 @@ use Twig\Environment;
 
 class EmptyUsernameListener
 {
-    protected TokenStorageInterface $tokenStorage;
-    protected Environment $templating;
-
-    public function __construct(TokenStorageInterface $tokenStorage, Environment $templating)
+    public function __construct(protected TokenStorageInterface $tokenStorage, protected Environment $templating)
     {
-        $this->tokenStorage = $tokenStorage;
-        $this->templating = $templating;
     }
 
     public function onKernelRequest(RequestEvent $event)
@@ -42,7 +37,7 @@ class EmptyUsernameListener
         if (\in_array($route, $routes, true)) {
             return;
         }
-        if (false !== strpos((string) $route, '_imagine')) {
+        if (str_contains((string) $route, '_imagine')) {
             return;
         }
         $response = new Response(

@@ -8,11 +8,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class EmailDoesNotBelongToUserValidator extends ConstraintValidator
 {
-    private $userManager;
-
-    public function __construct(UserManagerInterface $userManager)
+    public function __construct(private readonly UserManagerInterface $userManager)
     {
-        $this->userManager = $userManager;
     }
 
     public function validate($value, Constraint $constraint)

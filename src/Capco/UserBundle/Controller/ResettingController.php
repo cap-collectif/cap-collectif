@@ -28,42 +28,8 @@ class ResettingController extends AbstractController
 {
     private const SESSION_EMAIL = 'fos_user_send_resetting_email/email';
 
-    private readonly TokenGenerator $tokenGenerator;
-    private readonly MailerService $mailerService;
-    private readonly UserManager $userManager;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly SessionInterface $session;
-    private readonly RouterInterface $router;
-    private readonly UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver;
-    private readonly UserPasswordEncoderInterface $userPasswordEncoder;
-    private readonly TranslatorInterface $translator;
-    private readonly \Twig\Environment $twig;
-    private readonly LoginManagerInterface $loginManager;
-
-    public function __construct(
-        TokenGenerator $tokenGenerator,
-        MailerService $mailerService,
-        UserManager $userManager,
-        FormFactoryInterface $formFactory,
-        SessionInterface $session,
-        RouterInterface $router,
-        UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver,
-        UserPasswordEncoderInterface $userPasswordEncoder,
-        TranslatorInterface $translator,
-        \Twig\Environment $twig,
-        LoginManagerInterface $loginManager
-    ) {
-        $this->userPasswordEncoder = $userPasswordEncoder;
-        $this->loginManager = $loginManager;
-        $this->translator = $translator;
-        $this->twig = $twig;
-        $this->formFactory = $formFactory;
-        $this->userManager = $userManager;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->mailerService = $mailerService;
-        $this->session = $session;
-        $this->router = $router;
-        $this->userResettingPasswordUrlResolver = $userResettingPasswordUrlResolver;
+    public function __construct(private readonly TokenGenerator $tokenGenerator, private readonly MailerService $mailerService, private readonly UserManager $userManager, private readonly FormFactoryInterface $formFactory, private readonly SessionInterface $session, private readonly RouterInterface $router, private readonly UserResettingPasswordUrlResolver $userResettingPasswordUrlResolver, private readonly UserPasswordEncoderInterface $userPasswordEncoder, private readonly TranslatorInterface $translator, private readonly \Twig\Environment $twig, private readonly LoginManagerInterface $loginManager)
+    {
     }
 
     public function requestAction(): Response
@@ -195,7 +161,7 @@ class ResettingController extends AbstractController
                 $user,
                 $response
             );
-        } catch (AccountStatusException $ex) {
+        } catch (AccountStatusException) {
             // We simply do not authenticate users which do not pass the user
             // checker (not enabled, locked, etc.).
         }

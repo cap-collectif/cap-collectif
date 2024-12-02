@@ -14,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_type")
  * @ORM\HasLifecycleCallbacks()
  */
-class UserType implements Translatable, SonataTranslatableInterface
+class UserType implements Translatable, SonataTranslatableInterface, \Stringable
 {
     use SonataTranslatableTrait;
     use TranslatableTrait;

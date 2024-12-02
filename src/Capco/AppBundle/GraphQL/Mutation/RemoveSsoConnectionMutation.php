@@ -25,33 +25,9 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 class RemoveSsoConnectionMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly UserManagerInterface $userManager;
-    private readonly UserPasswordEncoderInterface $passwordEncoder;
-    private readonly Publisher $publisher;
-    private readonly LoggerInterface $logger;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler;
-    private readonly RouterInterface $router;
 
-    public function __construct(
-        UserManagerInterface $userManager,
-        UserPasswordEncoderInterface $passwordEncoder,
-        Publisher $publisher,
-        LoggerInterface $logger,
-        FormFactoryInterface $formFactory,
-        TokenStorageInterface $tokenStorage,
-        FranceConnectLogoutHandler $franceConnectLogoutHandler,
-        RouterInterface $router
-    ) {
-        $this->userManager = $userManager;
-        $this->passwordEncoder = $passwordEncoder;
-        $this->publisher = $publisher;
-        $this->logger = $logger;
-        $this->formFactory = $formFactory;
-        $this->tokenStorage = $tokenStorage;
-        $this->franceConnectLogoutHandler = $franceConnectLogoutHandler;
-        $this->router = $router;
+    public function __construct(private readonly UserManagerInterface $userManager, private readonly UserPasswordEncoderInterface $passwordEncoder, private readonly Publisher $publisher, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly TokenStorageInterface $tokenStorage, private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler, private readonly RouterInterface $router)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer, RequestStack $requests): array

@@ -13,30 +13,15 @@ class QueryViewerCanSeeEvaluationsPageResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private $analystRepo;
-    private $supervisorRepo;
-    private $decisionMakerRepo;
-    private $toggleManager;
-
-    public function __construct(
-        Manager $toggleManager,
-        ProposalAnalystRepository $analystRepo,
-        ProposalSupervisorRepository $supervisorRepo,
-        ProposalDecisionMakerRepository $decisionMakerRepo
-    ) {
-        $this->toggleManager = $toggleManager;
-        $this->analystRepo = $analystRepo;
-        $this->supervisorRepo = $supervisorRepo;
-        $this->decisionMakerRepo = $decisionMakerRepo;
+    public function __construct(private Manager $toggleManager, private ProposalAnalystRepository $analystRepo, private ProposalSupervisorRepository $supervisorRepo, private ProposalDecisionMakerRepository $decisionMakerRepo)
+    {
     }
 
     /**
      * A user that can access "Evaluations page" is a user that is assigned to at least
      * one proposal, as analyst, supervisor or decision marker.
-     *
-     * @param mixed $viewer
      */
-    public function __invoke($viewer): bool
+    public function __invoke(mixed $viewer): bool
     {
         $this->preventNullableViewer($viewer);
 

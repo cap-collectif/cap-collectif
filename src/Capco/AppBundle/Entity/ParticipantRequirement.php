@@ -11,30 +11,24 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class ParticipantRequirement
 {
-    /**
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Participant")
-     * @ORM\JoinColumn(name="participant_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     */
-    protected Participant $participant;
-
-    /**
-     * @ORM\Id
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Requirement")
-     * @ORM\JoinColumn(name="requirement_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
-     */
-    protected Requirement $requirement;
-
-    /**
-     * @ORM\Column(name="value", type="boolean", nullable=false)
-     */
-    protected string $value;
-
-    public function __construct(Participant $participant, Requirement $requirement, bool $value = true)
-    {
-        $this->participant = $participant;
-        $this->requirement = $requirement;
-        $this->value = $value;
+    public function __construct(
+        /**
+         * @ORM\Id
+         * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Participant")
+         * @ORM\JoinColumn(name="participant_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+         */
+        protected Participant $participant,
+        /**
+         * @ORM\Id
+         * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Requirement")
+         * @ORM\JoinColumn(name="requirement_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
+         */
+        protected Requirement $requirement,
+        /**
+         * @ORM\Column(name="value", type="boolean", nullable=false)
+         */
+        protected bool $value = true
+    ) {
     }
 
     public function getValue(): bool

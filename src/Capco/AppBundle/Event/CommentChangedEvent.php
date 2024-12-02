@@ -8,12 +8,10 @@ use Symfony\Component\EventDispatcher\Event;
 class CommentChangedEvent extends Event
 {
     protected $comment;
-    protected $action;
 
-    public function __construct(Comment $comment, $action)
+    public function __construct(Comment $comment, protected $action)
     {
         $this->comment = $comment;
-        $this->action = $action;
     }
 
     public function getComment()

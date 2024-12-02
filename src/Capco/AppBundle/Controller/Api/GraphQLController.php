@@ -31,27 +31,20 @@ class GraphQLController extends BaseController
     private readonly ParserInterface $batchParser;
     private readonly Executor $requestExecutor;
     private readonly Parser $requestParser;
-    private readonly LoggerInterface $logger;
-    private readonly Manager $manager;
-
-    private readonly string $env;
     private readonly bool $useApolloBatchingMethod;
 
     public function __construct(
         BatchParser $batchParser,
         Executor $requestExecutor,
         Parser $requestParser,
-        LoggerInterface $logger,
-        Manager $manager,
-        string $env
+        private readonly LoggerInterface $logger,
+        private readonly Manager $manager,
+        private readonly string $env
     ) {
         parent::__construct($batchParser, $requestExecutor, $requestParser, false, $graphqlBatchingMethod = 'apollo');
         $this->batchParser = $batchParser;
         $this->requestExecutor = $requestExecutor;
         $this->requestParser = $requestParser;
-        $this->logger = $logger;
-        $this->manager = $manager;
-        $this->env = $env;
         $this->useApolloBatchingMethod = 'apollo' === $graphqlBatchingMethod;
     }
 
@@ -115,7 +108,7 @@ class GraphQLController extends BaseController
         $syntaxError = false;
         if (isset($payload['errors']) && \count($payload['errors']) > 0) {
             foreach ($payload['errors'] as $error) {
-                if (false !== strpos((string) $error['message'], 'Syntax Error')) {
+                if (str_contains((string) $error['message'], 'Syntax Error')) {
                     $syntaxError = true;
 
                     break;

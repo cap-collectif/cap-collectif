@@ -2,7 +2,9 @@
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
+use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php81\Rector\Array_\FirstClassCallableRector;
+use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
 use Rector\Set\ValueObject\SetList;
 
 return RectorConfig::configure()
@@ -16,11 +18,24 @@ return RectorConfig::configure()
         'spec',
     ])
     ->withSkip([
+        ClassPropertyAssignToConstructorPromotionRector::class => [
+            'src/Capco/AppBundle/Entity/ProposalSupervisor.php',
+            'src/Capco/AppBundle/Entity/ProposalDecisionMaker.php',
+        ],
+        ReadOnlyPropertyRector::class => [
+            'src/Capco/AppBundle/Twig/MediaExtension.php',
+            'src/Capco/AppBundle/GraphQL/Resolver/Media/MediaUrlResolver.php',
+            'src/Capco/AppBundle/Mailer/Message/MessageRecipient.php',
+            'src/Capco/UserBundle/Facebook/FacebookResourceOwner.php',
+            'src/Capco/UserBundle/Security/Http/Logout/Handler/SAMLLogoutHandler.php',
+            'src/Capco/UserBundle/Authenticator/SimplePreAuthenticator.php',
+        ],
         FirstClassCallableRector::class => [
             'src/Capco/AppBundle/Sluggable/SluggableListener.php',
         ],
     ])
     ->withSets([
         SetList::PHP_81,
+        SetList::PHP_80,
     ])
 ;

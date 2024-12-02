@@ -15,27 +15,8 @@ class FooterSocialNetworksResolver
     final public const CACHE_KEY_LEGALS = 'getLegalsPages';
     final public const CACHE_KEY_SOCIAL_NETWORKS = 'getFooterSocialNetworks';
 
-    protected MenuItemRepository $menuItemRepository;
-    protected FooterSocialNetworkRepository $footerSocialNetworkRepository;
-    protected SiteParameterRepository $siteParameterRepository;
-    protected RedisCache $cache;
-    protected MenuItemResolver $menuItemResolver;
-    protected RequestStack $requestStack;
-
-    public function __construct(
-        MenuItemRepository $menuItemRepository,
-        FooterSocialNetworkRepository $footerSocialNetworkRepository,
-        SiteParameterRepository $siteParameterRepository,
-        RedisCache $cache,
-        MenuItemResolver $menuItemResolver,
-        RequestStack $requestStack
-    ) {
-        $this->menuItemRepository = $menuItemRepository;
-        $this->footerSocialNetworkRepository = $footerSocialNetworkRepository;
-        $this->siteParameterRepository = $siteParameterRepository;
-        $this->cache = $cache;
-        $this->menuItemResolver = $menuItemResolver;
-        $this->requestStack = $requestStack;
+    public function __construct(protected MenuItemRepository $menuItemRepository, protected FooterSocialNetworkRepository $footerSocialNetworkRepository, protected SiteParameterRepository $siteParameterRepository, protected RedisCache $cache, protected MenuItemResolver $menuItemResolver, protected RequestStack $requestStack)
+    {
     }
 
     /**

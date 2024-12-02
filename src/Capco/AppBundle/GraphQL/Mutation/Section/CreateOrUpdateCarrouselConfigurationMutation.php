@@ -24,21 +24,8 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
     final public const INVALID_FORM = 'INVALID_FORM';
     final public const MAX_CARROUSEL_ITEMS = 8;
 
-    private readonly EntityManagerInterface $em;
-    private readonly SectionRepository $sectionRepository;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly GlobalIdResolver $globalIdResolver;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        SectionRepository $sectionRepository,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->em = $em;
-        $this->sectionRepository = $sectionRepository;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SectionRepository $sectionRepository, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     /**

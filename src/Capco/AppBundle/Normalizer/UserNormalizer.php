@@ -40,28 +40,15 @@ class UserNormalizer implements NormalizerInterface, SerializerAwareInterface, C
         'ElasticsearchResponseNestedReply',
         'ElasticsearchNestedAuthor',
     ];
-
-    private $router;
-    private readonly ObjectNormalizer $normalizer;
-    private $manager;
     private $contributionProjectResolver;
     private $contributionStepResolver;
-    private $contributionSearch;
 
     // local "state" for data used on every User
     private $_capcoProfileEdit;
     private $_allProjects;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        Manager $manager,
-        ContributionSearch $contributionSearch
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->manager = $manager;
-        $this->contributionSearch = $contributionSearch;
+    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private Manager $manager, private ContributionSearch $contributionSearch)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

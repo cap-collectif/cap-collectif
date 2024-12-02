@@ -17,27 +17,17 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 {
     private const BATCH_SIZE = 1000;
     protected EntityManagerInterface $entityManager;
-    private readonly UserRepository $userRepository;
-    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
-    private readonly ParticipantNormalizer $participantNormalizer;
-    private readonly ReplyAnonymousNormalizer $replyAnonymousNormalizer;
     private readonly Serializer $serializer;
-    private readonly FilePathResolver $filePathResolver;
 
     public function __construct(
-        UserRepository $userRepository,
-        ParticipantNormalizer $participantNormalizer,
-        ReplyAnonymousNormalizer $replyAnonymousNormalizer,
+        private readonly UserRepository $userRepository,
+        private readonly ParticipantNormalizer $participantNormalizer,
+        private readonly ReplyAnonymousNormalizer $replyAnonymousNormalizer,
         EntityManagerInterface $entityManager,
-        ReplyAnonymousRepository $replyAnonymousRepository,
+        private readonly ReplyAnonymousRepository $replyAnonymousRepository,
         Filesystem $fileSystem,
-        FilePathResolver $filePathResolver
+        private readonly FilePathResolver $filePathResolver
     ) {
-        $this->userRepository = $userRepository;
-        $this->participantNormalizer = $participantNormalizer;
-        $this->replyAnonymousNormalizer = $replyAnonymousNormalizer;
-        $this->replyAnonymousRepository = $replyAnonymousRepository;
-        $this->filePathResolver = $filePathResolver;
         $this->serializer = $this->initializeSerializer();
 
         parent::__construct($entityManager, $this->serializer, $fileSystem);

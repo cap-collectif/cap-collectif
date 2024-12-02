@@ -17,18 +17,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class CommentNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $router;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly ObjectNormalizer $normalizer;
 
-    public function __construct(
-        RouterInterface $router,
-        TokenStorageInterface $tokenStorage,
-        ObjectNormalizer $normalizer
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(private RouterInterface $router, private readonly TokenStorageInterface $tokenStorage, private readonly ObjectNormalizer $normalizer)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

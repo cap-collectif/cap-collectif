@@ -12,17 +12,14 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class ProjectNotifier extends BaseNotifier
 {
-    private readonly ProjectResolver $projectResolver;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        ProjectResolver $projectResolver,
+        private readonly ProjectResolver $projectResolver,
         RouterInterface $router,
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->projectResolver = $projectResolver;
     }
 
     public function onCreate(Project $project)

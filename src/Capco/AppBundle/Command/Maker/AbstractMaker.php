@@ -26,11 +26,9 @@ abstract class AbstractMaker extends Command
     protected $helper;
     protected $sourcePath;
     protected $className;
-    private $container;
 
-    public function __construct(ContainerInterface $container)
+    public function __construct(private readonly ContainerInterface $container)
     {
-        $this->container = $container;
         parent::__construct();
     }
 
@@ -145,7 +143,7 @@ abstract class AbstractMaker extends Command
         if ($entity) {
             $found = null;
             foreach ($this->fqcns as $fqcn) {
-                if (false !== strpos((string) $fqcn, $entity)) {
+                if (str_contains((string) $fqcn, $entity)) {
                     $found[] = $fqcn;
                 }
             }

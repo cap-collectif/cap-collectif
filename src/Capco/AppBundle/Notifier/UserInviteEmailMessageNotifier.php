@@ -26,29 +26,18 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserInviteEmailMessageNotifier extends BaseNotifier
 {
-    private readonly Publisher $publisher;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly LoggerInterface $logger;
-    private readonly MailjetClient $mailjetClient;
-    private readonly MandrillClient $mandrillClient;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        Publisher $publisher,
-        EntityManagerInterface $entityManager,
-        LoggerInterface $logger,
-        MailjetClient $mailjetClient,
-        MandrillClient $mandrillClient
+        private readonly Publisher $publisher,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly LoggerInterface $logger,
+        private readonly MailjetClient $mailjetClient,
+        private readonly MandrillClient $mandrillClient
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->publisher = $publisher;
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
-        $this->mailjetClient = $mailjetClient;
-        $this->mandrillClient = $mandrillClient;
     }
 
     public function onStatusCheckInvitation(

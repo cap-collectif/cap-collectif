@@ -21,24 +21,18 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class SmsNotifier extends BaseNotifier
 {
     private const BUSINESS_TEAM_EMAIL = 'developpement@cap-collectif.com';
-    protected ArgumentUrlResolver $argumentUrlResolver;
     protected TranslatorInterface $translator;
-    private readonly RequestContext $context;
-    private readonly UserRepository $userRepository;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        ArgumentUrlResolver $argumentUrlResolver,
+        protected ArgumentUrlResolver $argumentUrlResolver,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        RequestContext $context,
-        UserRepository $userRepository
+        private readonly RequestContext $context,
+        private readonly UserRepository $userRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->argumentUrlResolver = $argumentUrlResolver;
-        $this->context = $context;
-        $this->userRepository = $userRepository;
     }
 
     public function onCreateSmsOrder(SmsOrder $smsOrder): void

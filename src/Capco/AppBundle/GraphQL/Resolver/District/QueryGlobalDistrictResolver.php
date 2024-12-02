@@ -11,15 +11,8 @@ use Psr\Log\LoggerInterface;
 
 class QueryGlobalDistrictResolver implements QueryInterface
 {
-    protected GlobalDistrictRepository $globalDistrictRepository;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        GlobalDistrictRepository $globalDistrictRepository,
-        LoggerInterface $logger
-    ) {
-        $this->globalDistrictRepository = $globalDistrictRepository;
-        $this->logger = $logger;
+    public function __construct(protected GlobalDistrictRepository $globalDistrictRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $args): ConnectionInterface

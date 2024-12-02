@@ -7,11 +7,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryFeatureFlagsResolver implements QueryInterface
 {
-    private readonly Manager $toggleManager;
-
-    public function __construct(Manager $toggleManager)
+    public function __construct(private readonly Manager $toggleManager)
     {
-        $this->toggleManager = $toggleManager;
     }
 
     public function __invoke(): array

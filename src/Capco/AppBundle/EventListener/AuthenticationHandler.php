@@ -14,18 +14,8 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
 {
     final public const BAD_CREDENTIALS = 'Bad credentials.';
 
-    private readonly UserConnectionRepository $userConnectionRepository;
-    private readonly LoggerInterface $logger;
-    private readonly RequestGuesser $requestGuesser;
-
-    public function __construct(
-        UserConnectionRepository $userConnectionRepository,
-        LoggerInterface $logger,
-        RequestGuesser $requestGuesser
-    ) {
-        $this->userConnectionRepository = $userConnectionRepository;
-        $this->logger = $logger;
-        $this->requestGuesser = $requestGuesser;
+    public function __construct(private readonly UserConnectionRepository $userConnectionRepository, private readonly LoggerInterface $logger, private readonly RequestGuesser $requestGuesser)
+    {
     }
 
     public function onAuthenticationFailure(Request $request, AuthenticationException $exception)

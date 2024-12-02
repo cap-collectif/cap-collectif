@@ -21,16 +21,10 @@ class CapebUserFilter
     final public const ELECTED_LABEL = 'E';
 
     private readonly Client $client;
-    private readonly LoggerInterface $logger;
-    private readonly UserTypeRepository $userTypeRepository;
-    private ?string $url = null;
 
-    public function __construct(LoggerInterface $logger, UserTypeRepository $userTypeRepository, ?string $url)
+    public function __construct(private readonly LoggerInterface $logger, private readonly UserTypeRepository $userTypeRepository, private readonly ?string $url)
     {
         $this->client = new Client();
-        $this->logger = $logger;
-        $this->userTypeRepository = $userTypeRepository;
-        $this->url = $url;
     }
 
     public function getUserType(string $username): ?UserType

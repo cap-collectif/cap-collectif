@@ -35,18 +35,12 @@ class DebateArgumentVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::DELETE:
-                return $this->canDelete($subject, $viewer);
-
-            case self::UPDATE:
-                return $this->canUpdate($subject, $viewer);
-
-            case self::PARTICIPATE:
-                return self::canParticipate($subject, $viewer);
-        }
-
-        return false;
+        return match ($attribute) {
+            self::DELETE => $this->canDelete($subject, $viewer),
+            self::UPDATE => $this->canUpdate($subject, $viewer),
+            self::PARTICIPATE => self::canParticipate($subject, $viewer),
+            default => false,
+        };
     }
 
     private function canUpdate(DebateArgument $debateArgument, User $viewer): bool

@@ -24,12 +24,10 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
 
     protected $hostMap = [];
     private $redirectToHost = true;
-    private $jmsLocaleResolver;
-    private $localeResolver;
 
     public function __construct(
-        LocaleResolver $localeResolver,
-        LocaleResolverInterface $jmsLocaleResolver,
+        private readonly LocaleResolver $localeResolver,
+        private readonly LocaleResolverInterface $jmsLocaleResolver,
         LoggerInterface $logger,
         Manager $manager,
         LocaleRepository $localeRepository,
@@ -42,8 +40,6 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         $this->localeRepository = $localeRepository;
         $this->container = $container;
         $this->logger = $logger;
-        $this->localeResolver = $localeResolver;
-        $this->jmsLocaleResolver = $jmsLocaleResolver;
         parent::__construct($container, $resource, $options, $context);
     }
 
@@ -126,7 +122,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
         if (
             'capco_app_cms' === $params['_route']
             && isset($params['url'])
-            && false === strpos((string) $params['url'], "/{$defaultLocalePrefix}/")
+            && !str_contains((string) $params['url'], "/{$defaultLocalePrefix}/")
         ) {
             $isHomePage = false;
             //Test beforehand if it is a locale since with cms routes, it doesn't easily find the homecontroller
@@ -139,7 +135,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
                         ? "/{$defaultLocalePrefix}/" . $params['url']
                         : "/{$defaultLocalePrefix}/";
                     $isHomePage = true;
-                } catch (\Exception $e) {
+                } catch (\Exception) {
                 }
             }
             if (!$isHomePage) {
@@ -149,7 +145,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
                     $url = isset($params['url'])
                         ? "/{$defaultLocalePrefix}/" . $params['url']
                         : "/{$defaultLocalePrefix}/";
-                } catch (\Exception $e) {
+                } catch (\Exception) {
                     //No route exists with the default local prefix
                 }
             }

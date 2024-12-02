@@ -15,18 +15,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateUsernameMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input, User $user): array

@@ -37,27 +37,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StepController extends Controller
 {
-    private readonly TranslatorInterface $translator;
-    private readonly SerializerInterface $serializer;
-    private readonly OpinionSearch $opinionSearch;
-    private readonly VersionSearch $versionSearch;
-    private readonly LocaleRepository $localeRepo;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        TranslatorInterface $translator,
-        SerializerInterface $serializer,
-        OpinionSearch $opinionSearch,
-        VersionSearch $versionSearch,
-        LocaleRepository $localeRepo,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->translator = $translator;
-        $this->serializer = $serializer;
-        $this->opinionSearch = $opinionSearch;
-        $this->versionSearch = $versionSearch;
-        $this->localeRepo = $localeRepo;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly TranslatorInterface $translator, private readonly SerializerInterface $serializer, private readonly OpinionSearch $opinionSearch, private readonly VersionSearch $versionSearch, private readonly LocaleRepository $localeRepo, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     /**
@@ -236,10 +217,8 @@ class StepController extends Controller
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
-     *
-     * @param mixed $page
      */
-    public function showOpinionsRankingAction(Project $project, RankingStep $step, $page = 1)
+    public function showOpinionsRankingAction(Project $project, RankingStep $step, mixed $page = 1)
     {
         $viewer = $this->getUser();
         if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
@@ -277,10 +256,8 @@ class StepController extends Controller
      *    "repository_method"="getOneBySlugAndProjectSlug",
      *    "map_method_signature"=true
      * })
-     *
-     * @param mixed $page
      */
-    public function showVersionsRankingAction(Project $project, RankingStep $step, $page = 1)
+    public function showVersionsRankingAction(Project $project, RankingStep $step, mixed $page = 1)
     {
         $viewer = $this->getUser();
         if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {

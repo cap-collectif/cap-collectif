@@ -24,27 +24,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ChangeArgumentMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly ArgumentRepository $argumentRepo;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly RedisStorageHelper $redisStorage;
-    private readonly Publisher $publisher;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        ArgumentRepository $argumentRepo,
-        RedisStorageHelper $redisStorage,
-        Publisher $publisher,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->argumentRepo = $argumentRepo;
-        $this->redisStorage = $redisStorage;
-        $this->publisher = $publisher;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ArgumentRepository $argumentRepo, private readonly RedisStorageHelper $redisStorage, private readonly Publisher $publisher, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Arg $input, User $user): array

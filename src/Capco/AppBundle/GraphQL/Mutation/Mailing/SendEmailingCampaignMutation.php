@@ -20,16 +20,13 @@ class SendEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
 
-    private readonly Publisher $publisher;
-
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
         AuthorizationCheckerInterface $authorizationChecker,
-        Publisher $publisher
+        private readonly Publisher $publisher
     ) {
         parent::__construct($resolver, $entityManager, $authorizationChecker);
-        $this->publisher = $publisher;
     }
 
     public function __invoke(Argument $input, User $viewer): array

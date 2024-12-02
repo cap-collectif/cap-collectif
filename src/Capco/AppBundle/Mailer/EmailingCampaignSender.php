@@ -26,36 +26,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class EmailingCampaignSender
 {
-    private readonly MailerService $mailerService;
-    private readonly UserRepository $userRepository;
-    private readonly SiteParameterResolver $siteParams;
-    private readonly RouterInterface $router;
-    private readonly TokenManager $tokenManager;
-    private readonly ProjectEmailableContributorsResolver $projectEmailableContributorsResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly EmailingCampaignUserRepository $emailingCampaignUserRepository;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        MailerService $mailerService,
-        UserRepository $userRepository,
-        SiteParameterResolver $siteParams,
-        RouterInterface $router,
-        TokenManager $tokenManager,
-        ProjectEmailableContributorsResolver $projectEmailableContributorsResolver,
-        EntityManagerInterface $em,
-        EmailingCampaignUserRepository $emailingCampaignUserRepository,
-        LoggerInterface $logger
-    ) {
-        $this->mailerService = $mailerService;
-        $this->userRepository = $userRepository;
-        $this->siteParams = $siteParams;
-        $this->router = $router;
-        $this->tokenManager = $tokenManager;
-        $this->projectEmailableContributorsResolver = $projectEmailableContributorsResolver;
-        $this->em = $em;
-        $this->emailingCampaignUserRepository = $emailingCampaignUserRepository;
-        $this->logger = $logger;
+    public function __construct(private readonly MailerService $mailerService, private readonly UserRepository $userRepository, private readonly SiteParameterResolver $siteParams, private readonly RouterInterface $router, private readonly TokenManager $tokenManager, private readonly ProjectEmailableContributorsResolver $projectEmailableContributorsResolver, private readonly EntityManagerInterface $em, private readonly EmailingCampaignUserRepository $emailingCampaignUserRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function send(EmailingCampaign $emailingCampaign): int

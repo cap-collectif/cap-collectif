@@ -11,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalDistrictRepository")
  */
-class ProposalDistrict extends AbstractDistrict
+class ProposalDistrict extends AbstractDistrict implements \Stringable
 {
     use TranslatableTrait;
 
@@ -35,7 +35,7 @@ class ProposalDistrict extends AbstractDistrict
         $this->proposals = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getName() : 'New district';
     }

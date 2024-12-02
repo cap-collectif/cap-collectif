@@ -11,15 +11,8 @@ use Psr\Log\LoggerInterface;
 
 class ViewerFollowingConfigurationProposalResolver implements QueryInterface
 {
-    private $proposalViewerFollowingConfigurationDataLoader;
-    private $logger;
-
-    public function __construct(
-        ProposalViewerFollowingConfigurationDataLoader $proposalViewerFollowingConfigurationDataLoader,
-        LoggerInterface $logger
-    ) {
-        $this->proposalViewerFollowingConfigurationDataLoader = $proposalViewerFollowingConfigurationDataLoader;
-        $this->logger = $logger;
+    public function __construct(private readonly ProposalViewerFollowingConfigurationDataLoader $proposalViewerFollowingConfigurationDataLoader, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Proposal $proposal, User $viewer): Promise

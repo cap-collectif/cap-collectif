@@ -19,21 +19,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class DeleteParticipantMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ParticipantRepository $participantRepository;
-    private readonly MediatorParticipantStepRepository $mediatorParticipantStepRepository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        ParticipantRepository $participantRepository,
-        MediatorParticipantStepRepository $mediatorParticipantStepRepository
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->participantRepository = $participantRepository;
-        $this->mediatorParticipantStepRepository = $mediatorParticipantStepRepository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly ParticipantRepository $participantRepository, private readonly MediatorParticipantStepRepository $mediatorParticipantStepRepository)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

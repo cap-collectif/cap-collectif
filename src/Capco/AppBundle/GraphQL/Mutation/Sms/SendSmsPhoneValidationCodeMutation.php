@@ -19,19 +19,14 @@ class SendSmsPhoneValidationCodeMutation implements MutationInterface
     final public const RETRY_LIMIT_REACHED = 'RETRY_LIMIT_REACHED';
     final public const PHONE_ALREADY_CONFIRMED = 'PHONE_ALREADY_CONFIRMED';
     private const RETRY_PER_MINUTE = 2;
-
-    private readonly EntityManagerInterface $em;
     private readonly SmsProviderInterface $smsProvider;
-    private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
 
     public function __construct(
-        EntityManagerInterface $em,
+        private readonly EntityManagerInterface $em,
         SmsProviderFetcher $smsProviderFactory,
-        UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
+        private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository
     ) {
-        $this->em = $em;
         $this->smsProvider = $smsProviderFactory->fetch();
-        $this->userPhoneVerificationSmsRepository = $userPhoneVerificationSmsRepository;
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -33,38 +33,21 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CommentNotifier extends BaseNotifier
 {
-    protected CommentResolver $commentResolver;
-    protected UserUrlResolver $userUrlResolver;
-    protected UserShowNotificationsPreferencesUrlResolver $userShowNotificationsPreferencesUrlResolver;
-    protected UserDisableNotificationsUrlResolver $userDisableNotificationsUrlResolver;
-    protected UserShowUrlBySlugResolver $userShowUrlBySlugResolver;
-    protected TranslatorInterface $translator;
-    protected CommentShowUrlResolver $commentShowUrlResolver;
-    private readonly Manager $manager;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        CommentResolver $commentResolver,
-        UserUrlResolver $userUrlResolver,
-        UserShowNotificationsPreferencesUrlResolver $userShowNotificationsPreferencesUrlResolver,
-        UserDisableNotificationsUrlResolver $userDisableNotificationsUrlResolver,
-        UserShowUrlBySlugResolver $userShowUrlBySlugResolver,
-        TranslatorInterface $translator,
-        CommentShowUrlResolver $commentShowUrlResolver,
+        protected CommentResolver $commentResolver,
+        protected UserUrlResolver $userUrlResolver,
+        protected UserShowNotificationsPreferencesUrlResolver $userShowNotificationsPreferencesUrlResolver,
+        protected UserDisableNotificationsUrlResolver $userDisableNotificationsUrlResolver,
+        protected UserShowUrlBySlugResolver $userShowUrlBySlugResolver,
+        protected TranslatorInterface $translator,
+        protected CommentShowUrlResolver $commentShowUrlResolver,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        Manager $manager
+        private readonly Manager $manager
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->commentResolver = $commentResolver;
-        $this->userUrlResolver = $userUrlResolver;
-        $this->userShowNotificationsPreferencesUrlResolver = $userShowNotificationsPreferencesUrlResolver;
-        $this->userDisableNotificationsUrlResolver = $userDisableNotificationsUrlResolver;
-        $this->userShowUrlBySlugResolver = $userShowUrlBySlugResolver;
-        $this->commentShowUrlResolver = $commentShowUrlResolver;
-        $this->translator = $translator;
-        $this->manager = $manager;
     }
 
     public function onCreate(Comment $comment)

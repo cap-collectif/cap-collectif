@@ -17,21 +17,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateAlphaProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly ProjectPersister $persister;
-    private readonly ProjectRepository $projectRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly EntityManagerInterface $entityManager;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        ProjectPersister $persister,
-        ProjectRepository $projectRepository,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->entityManager = $entityManager;
-        $this->persister = $persister;
-        $this->projectRepository = $projectRepository;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly ProjectPersister $persister, private readonly ProjectRepository $projectRepository, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

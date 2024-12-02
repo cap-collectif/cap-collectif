@@ -10,23 +10,17 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalFormQuestionsResolver implements QueryInterface
 {
-    private readonly AbstractQuestionRepository $repository;
-
-    public function __construct(AbstractQuestionRepository $repository)
+    public function __construct(private readonly AbstractQuestionRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(ProposalForm $form, Argument $args): iterable
     {
         $filter = $args->offsetGet('filter');
 
-        switch ($filter) {
-            case QuestionsFilterType::JUMPS_ONLY:
-                return $this->repository->findWithJumpsOrWithAlwaysJumpDestinationByForm($form);
-
-            default:
-                return $this->repository->findByProposalForm($form);
-        }
+        return match ($filter) {
+            QuestionsFilterType::JUMPS_ONLY => $this->repository->findWithJumpsOrWithAlwaysJumpDestinationByForm($form),
+            default => $this->repository->findByProposalForm($form),
+        };
     }
 }

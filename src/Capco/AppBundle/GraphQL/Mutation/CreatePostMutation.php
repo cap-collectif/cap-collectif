@@ -29,30 +29,8 @@ class CreatePostMutation implements MutationInterface
     final public const INVALID_FORM = 'INVALID_FORM';
     final public const INVALID_OWNER = 'INVALID_OWNER';
 
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
-    private readonly PostAuthorFactory $postAuthorFactory;
-    private readonly Indexer $indexer;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        AuthorizationCheckerInterface $authorizationChecker,
-        SettableOwnerResolver $settableOwnerResolver,
-        PostAuthorFactory $postAuthorFactory,
-        Indexer $indexer,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->settableOwnerResolver = $settableOwnerResolver;
-        $this->postAuthorFactory = $postAuthorFactory;
-        $this->indexer = $indexer;
-        $this->logger = $logger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly PostAuthorFactory $postAuthorFactory, private readonly Indexer $indexer, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -64,7 +42,7 @@ class CreatePostMutation implements MutationInterface
         try {
             $owner = $this->getOwner($data['owner'] ?? null, $viewer);
             $post->setOwner($owner);
-        } catch (UserError $error) {
+        } catch (UserError) {
             throw new UserError(self::INVALID_OWNER);
         }
 

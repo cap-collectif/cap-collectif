@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AvailableLocalesQueryResolver implements QueryInterface
 {
-    protected LocaleRepository $localeRepository;
-
-    public function __construct(LocaleRepository $localeRepository)
+    public function __construct(protected LocaleRepository $localeRepository)
     {
-        $this->localeRepository = $localeRepository;
     }
 
     public function __invoke(Argument $args, $viewer): array

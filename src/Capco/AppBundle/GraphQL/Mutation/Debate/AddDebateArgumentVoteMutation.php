@@ -30,11 +30,11 @@ class AddDebateArgumentVoteMutation extends AbstractDebateArgumentVoteMutation i
             try {
                 $this->em->flush();
                 $this->indexer->index(
-                    \get_class($debateArgumentVote),
+                    $debateArgumentVote::class,
                     $debateArgumentVote->getId()
                 );
                 $this->indexer->finishBulk();
-            } catch (UniqueConstraintViolationException $e) {
+            } catch (UniqueConstraintViolationException) {
                 return [
                     'errorCode' => self::ALREADY_VOTED,
                     'debateArgument' => null,

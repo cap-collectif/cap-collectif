@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class GroupIsUsedInEmailingCampaignResolver implements QueryInterface
 {
-    private readonly EmailingCampaignRepository $repository;
-
-    public function __construct(EmailingCampaignRepository $repository)
+    public function __construct(private readonly EmailingCampaignRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Group $group, Argument $args): bool

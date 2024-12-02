@@ -5,7 +5,7 @@ namespace Capco\ClassificationBundle\Entity;
 use Capco\AppBundle\Entity\Media;
 use Cocur\Slugify\Slugify;
 
-class Collection
+class Collection implements \Stringable
 {
     protected int $id;
     protected ?string $name;
@@ -17,7 +17,7 @@ class Collection
     protected ?Media $media;
     protected ?Context $context;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }

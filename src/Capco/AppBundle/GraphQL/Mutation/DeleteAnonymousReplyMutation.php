@@ -18,21 +18,9 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 class DeleteAnonymousReplyMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
-    private readonly Indexer $indexer;
-    private readonly Publisher $publisher;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ReplyAnonymousRepository $replyAnonymousRepository,
-        Indexer $indexer,
-        Publisher $publisher
-    ) {
-        $this->em = $em;
-        $this->replyAnonymousRepository = $replyAnonymousRepository;
-        $this->indexer = $indexer;
-        $this->publisher = $publisher;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ReplyAnonymousRepository $replyAnonymousRepository, private readonly Indexer $indexer, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $args): array

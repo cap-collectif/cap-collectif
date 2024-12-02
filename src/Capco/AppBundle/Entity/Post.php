@@ -28,7 +28,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface, IndexableInterface, Ownerable, Translatable, CreatableInterface
+class Post implements CommentableInterface, IndexableInterface, Ownerable, Translatable, CreatableInterface, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use CommentableTrait;
@@ -106,9 +106,9 @@ class Post implements CommentableInterface, IndexableInterface, Ownerable, Trans
         $this->publishedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getId() ? $this->translate()->getTitle() : 'New post';
+        return (string) ($this->getId() ? $this->translate()->getTitle() : 'New post');
     }
 
     public static function getTranslationEntityClass(): string

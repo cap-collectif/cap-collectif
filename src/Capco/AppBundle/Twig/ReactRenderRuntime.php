@@ -9,18 +9,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class ReactRenderRuntime implements RuntimeExtensionInterface
 {
-    private $extension;
-    private $toggleManager;
-    private readonly TokenStorageInterface $tokenStorage;
-
-    public function __construct(
-        BaseExtension $extension,
-        Manager $toggleManager,
-        TokenStorageInterface $tokenStorage
-    ) {
-        $this->extension = $extension;
-        $this->toggleManager = $toggleManager;
-        $this->tokenStorage = $tokenStorage;
+    public function __construct(private readonly BaseExtension $extension, private readonly Manager $toggleManager, private readonly TokenStorageInterface $tokenStorage)
+    {
     }
 
     public function reactRenderIntlComponent($componentName, array $options = []): string

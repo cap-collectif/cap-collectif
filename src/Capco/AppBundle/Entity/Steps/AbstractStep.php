@@ -47,7 +47,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "debate" = "DebateStep",
  * })
  */
-abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
+abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use CustomCodeTrait;
@@ -212,7 +212,7 @@ abstract class AbstractStep implements DisplayableInBOInterface, TimeRangeable
                 return $this->getProject()->getTitle() . ' - ' . $this->getTitle();
             }
 
-            return $this->getTitle();
+            return (string) $this->getTitle();
         }
 
         return 'New step';

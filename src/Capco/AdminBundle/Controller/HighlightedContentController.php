@@ -8,12 +8,9 @@ use Sonata\AdminBundle\Admin\Pool;
 
 class HighlightedContentController extends PositionableController
 {
-    private readonly HighlightedContentResolver $resolver;
-
-    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, HighlightedContentResolver $resolver)
+    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, private readonly HighlightedContentResolver $resolver)
     {
         parent::__construct(HighlightedContentResolver::class, $breadcrumbsBuilder, $pool);
-        $this->resolver = $resolver;
     }
 
     protected function move($object, $relativePosition, $resolver = null)

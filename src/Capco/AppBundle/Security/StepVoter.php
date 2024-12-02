@@ -11,11 +11,9 @@ use Symfony\Component\Security\Core\Security;
 class StepVoter extends AbstractOwnerableVoter
 {
     final public const VIEW = 'view';
-    private readonly Security $security;
 
-    public function __construct(Security $security)
+    public function __construct(private readonly Security $security)
     {
-        $this->security = $security;
     }
 
     public static function view(AbstractStep $step, ?User $viewer = null): bool
@@ -89,12 +87,9 @@ class StepVoter extends AbstractOwnerableVoter
         /** @var AbstractStep $step */
         $step = $subject;
 
-        switch ($attribute) {
-            case self::VIEW:
-                return $this->view($step, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::VIEW => $this->view($step, $viewer),
+            default => false,
+        };
     }
 }

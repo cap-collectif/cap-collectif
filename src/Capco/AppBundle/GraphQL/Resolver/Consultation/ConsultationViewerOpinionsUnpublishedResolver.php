@@ -14,13 +14,8 @@ class ConsultationViewerOpinionsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private $opinionRepo;
-    private $builder;
-
-    public function __construct(OpinionRepository $opinionRepo, ConnectionBuilder $builder)
+    public function __construct(private OpinionRepository $opinionRepo, private ConnectionBuilder $builder)
     {
-        $this->opinionRepo = $opinionRepo;
-        $this->builder = $builder;
     }
 
     public function __invoke(

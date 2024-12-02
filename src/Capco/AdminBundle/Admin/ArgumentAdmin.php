@@ -20,17 +20,14 @@ class ArgumentAdmin extends AbstractAdmin
 {
     protected ?string $classnameLabel = 'argument';
     protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
-    private readonly TokenStorageInterface $tokenStorage;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage
+        private readonly TokenStorageInterface $tokenStorage
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        //$this->setTemplate('edit', '@CapcoAdmin/Argument/edit.html.twig');
-        $this->tokenStorage = $tokenStorage;
     }
 
     /**

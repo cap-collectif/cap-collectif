@@ -35,12 +35,10 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
 {
     use MutationTrait;
 
-    private readonly UserRepository $userRepository;
-
     public function __construct(
         EntityManagerInterface $em,
         TranslatorInterface $translator,
-        UserRepository $userRepository,
+        private readonly UserRepository $userRepository,
         UserGroupRepository $groupRepository,
         UserManager $userManager,
         RedisStorageHelper $redisStorageHelper,
@@ -84,7 +82,6 @@ class DeleteAccountByEmailMutation extends BaseDeleteUserMutation
             $userAnonymiser,
             $sendInBluePublisher
         );
-        $this->userRepository = $userRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array

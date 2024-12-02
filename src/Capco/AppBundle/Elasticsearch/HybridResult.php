@@ -7,12 +7,10 @@ use Elastica\Result;
 class HybridResult
 {
     protected $result;
-    protected $transformed;
 
-    public function __construct(Result $result, $transformed = null)
+    public function __construct(Result $result, protected $transformed = null)
     {
         $this->result = $result;
-        $this->transformed = $transformed;
     }
 
     public function getTransformed()

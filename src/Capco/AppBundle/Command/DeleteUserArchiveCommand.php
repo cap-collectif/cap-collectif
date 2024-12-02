@@ -13,22 +13,13 @@ use Symfony\Component\Filesystem\Filesystem;
 
 class DeleteUserArchiveCommand extends Command
 {
-    private readonly EntityManagerInterface $em;
-    private readonly UserArchiveRepository $userArchiveRepository;
-    private readonly Filesystem $filesystem;
-    private readonly string $projectDir;
-
     public function __construct(
         ?string $name,
-        EntityManagerInterface $em,
-        UserArchiveRepository $userArchiveRepository,
-        Filesystem $filesystem,
-        string $projectRootDir
+        private readonly EntityManagerInterface $em,
+        private readonly UserArchiveRepository $userArchiveRepository,
+        private readonly Filesystem $filesystem,
+        private readonly string $projectRootDir
     ) {
-        $this->em = $em;
-        $this->userArchiveRepository = $userArchiveRepository;
-        $this->filesystem = $filesystem;
-        $this->projectDir = $projectRootDir;
         parent::__construct($name);
     }
 
@@ -68,7 +59,7 @@ class DeleteUserArchiveCommand extends Command
 
     protected function removeArchiveFile(UserArchive $archive)
     {
-        $zipFile = $this->projectDir . '/public/export/' . $archive->getPath();
+        $zipFile = $this->projectRootDir . '/public/export/' . $archive->getPath();
         if ($this->filesystem->exists($zipFile)) {
             $this->filesystem->remove($zipFile);
         }

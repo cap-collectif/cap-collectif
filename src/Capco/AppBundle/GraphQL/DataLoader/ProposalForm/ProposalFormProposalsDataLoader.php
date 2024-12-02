@@ -25,15 +25,12 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
 {
     final public const CACHE_TIME_FUSION_COUNT = 480;
 
-    private readonly ProposalRepository $proposalRepo;
-    private readonly ProposalSearch $proposalSearch;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        ProposalRepository $proposalRepo,
-        ProposalSearch $proposalSearch,
+        private readonly ProposalRepository $proposalRepo,
+        private readonly ProposalSearch $proposalSearch,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -41,8 +38,6 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->proposalRepo = $proposalRepo;
-        $this->proposalSearch = $proposalSearch;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

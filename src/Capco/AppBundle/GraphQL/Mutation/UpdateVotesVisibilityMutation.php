@@ -16,18 +16,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class UpdateVotesVisibilityMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository
-    ) {
-        $this->em = $em;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository)
+    {
     }
 
     /**

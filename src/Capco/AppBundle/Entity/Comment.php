@@ -50,7 +50,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @CapcoAssert\CommentHasAuthor
  */
-abstract class Comment implements Publishable, Trashable, Contribution, VotableInterface, CommentableInterface, ReportableInterface
+abstract class Comment implements Publishable, Trashable, Contribution, VotableInterface, CommentableInterface, ReportableInterface, \Stringable
 {
     use AuthorableTrait;
     use ModerableTrait;
@@ -136,7 +136,7 @@ abstract class Comment implements Publishable, Trashable, Contribution, VotableI
         $this->moderationToken = rtrim(strtr(base64_encode(random_bytes(32)), '+/', '-_'), '=');
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getBodyTextExcerpt(50) : 'New comment';
     }

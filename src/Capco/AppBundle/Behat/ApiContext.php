@@ -99,22 +99,16 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When I am logged in to api as :email with pwd :pwd
-     *
-     * @param mixed $email
-     * @param mixed $pwd
      */
-    public function iAmLoggedInToApi($email, $pwd)
+    public function iAmLoggedInToApi(mixed $email, mixed $pwd)
     {
         $this->createAuthenticatedClient($email, $pwd);
     }
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid opinion json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
      */
-    public function iSendOpinionRequest($method, $url)
+    public function iSendOpinionRequest(mixed $method, mixed $url)
     {
         $json = <<<'EOF'
                    {
@@ -127,11 +121,8 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a valid report json$/
-     *
-     * @param mixed $method
-     * @param mixed $url
      */
-    public function iSendReportRequest($method, $url)
+    public function iSendReportRequest(mixed $method, mixed $url)
     {
         $json = <<<'EOF'
                     {
@@ -145,11 +136,8 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)"$/
-     *
-     * @param mixed $method
-     * @param mixed $url
      */
-    public function iSendARequest($method, $url)
+    public function iSendARequest(mixed $method, mixed $url)
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
@@ -161,11 +149,8 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to xml "([^"]+)"$/
-     *
-     * @param mixed $method
-     * @param mixed $url
      */
-    public function iSendAXmlRequest($method, $url)
+    public function iSendAXmlRequest(mixed $method, mixed $url)
     {
         $this->response = $this->client->request($method, $url, [
             'headers' => [
@@ -177,11 +162,8 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with values:$/
-     *
-     * @param mixed $method
-     * @param mixed $url
      */
-    public function iSendARequestWithValues($method, $url, TableNode $table)
+    public function iSendARequestWithValues(mixed $method, mixed $url, TableNode $table)
     {
         $this->response = $this->client->request($method, $url, [
             'json' => $table->getHash(),
@@ -192,11 +174,8 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with json:$/
-     *
-     * @param mixed $method
-     * @param mixed $url
      */
-    public function iSendARequestWithJsonFromPyString($method, $url, PyStringNode $string)
+    public function iSendARequestWithJsonFromPyString(mixed $method, mixed $url, PyStringNode $string)
     {
         $this->response = $this->client->request($method, $url, [
             'json' => json_decode($string->getRaw(), true),
@@ -209,11 +188,8 @@ class ApiContext extends ApplicationContext
 
     /**
      * @When /^(?:I )?send a ([A-Z]+) request to "([^"]+)" with a document and an illustration$/
-     *
-     * @param mixed $method
-     * @param mixed $url
      */
-    public function iSendARequestWithDocumentAndIllustration($method, $url)
+    public function iSendARequestWithDocumentAndIllustration(mixed $method, mixed $url)
     {
         $json = <<<'EOF'
                     {

@@ -36,7 +36,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
  * @CapcoAssert\HasAuthor()
  */
-class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
+class Opinion implements OpinionContributionInterface, DisplayableInBOInterface, \Stringable
 {
     use AnswerableTrait;
     use AuthorableTrait;
@@ -148,10 +148,10 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface
         $this->modals = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->id) {
-            return $this->getTitle();
+            return (string) $this->getTitle();
         }
 
         return 'New opinion';

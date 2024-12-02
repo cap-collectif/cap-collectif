@@ -18,11 +18,8 @@ class OpinionVersionsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly VersionSearch $versionSearch;
-
-    public function __construct(VersionSearch $versionSearch)
+    public function __construct(private readonly VersionSearch $versionSearch)
     {
-        $this->versionSearch = $versionSearch;
     }
 
     public function __invoke(

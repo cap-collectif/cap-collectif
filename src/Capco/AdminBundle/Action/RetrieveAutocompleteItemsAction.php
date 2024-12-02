@@ -25,18 +25,8 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 final class RetrieveAutocompleteItemsAction
 {
-    /**
-     * @var Pool
-     */
-    private $pool;
-
-    /** @var UserSearch */
-    private $userSearch;
-
-    public function __construct(Pool $pool, UserSearch $userSearch)
+    public function __construct(private readonly Pool $pool, private readonly UserSearch $userSearch)
     {
-        $this->pool = $pool;
-        $this->userSearch = $userSearch;
     }
 
     /**
@@ -167,7 +157,7 @@ final class RetrieveAutocompleteItemsAction
                 // multiple properties
                 foreach ($property as $prop) {
                     if (!$datagrid->hasFilter($prop)) {
-                        throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, \get_class($targetAdmin)));
+                        throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, $targetAdmin::class));
                     }
 
                     $filter = $datagrid->getFilter($prop);
@@ -177,7 +167,7 @@ final class RetrieveAutocompleteItemsAction
                 }
             } else {
                 if (!$datagrid->hasFilter($property)) {
-                    throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, \get_class($targetAdmin)));
+                    throw new \RuntimeException(sprintf('To retrieve autocomplete items,' . ' you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, $targetAdmin::class));
                 }
 
                 $datagrid->setValue(

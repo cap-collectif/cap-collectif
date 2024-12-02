@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VideoRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Translatable
+class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Translatable, \Stringable
 {
     use IdTrait;
     use SonataTranslatableTrait;
@@ -82,9 +82,9 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getId() ? $this->getTitle() : 'New video';
+        return (string) ($this->getId() ? $this->getTitle() : 'New video');
     }
 
     public static function getTranslationEntityClass(): string
@@ -169,10 +169,7 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
         return $this->media;
     }
 
-    /**
-     * @param mixed $media
-     */
-    public function setMedia($media)
+    public function setMedia(mixed $media)
     {
         $this->media = $media;
     }
@@ -225,10 +222,7 @@ class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Tr
         return $this->link;
     }
 
-    /**
-     * @param mixed $link
-     */
-    public function setLink($link)
+    public function setLink(mixed $link)
     {
         $this->link = $link;
     }

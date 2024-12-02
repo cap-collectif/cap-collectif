@@ -38,22 +38,13 @@ class PostVoter extends AbstractOwnerableVoter
         /** @var Post $post */
         $post = $subject;
 
-        switch ($attribute) {
-            case self::VIEW:
-                return self::canView($post, $viewer);
-
-            case self::CREATE:
-                return self::canCreate($viewer);
-
-            case self::EDIT:
-                return self::canEdit($post, $viewer);
-
-            case self::DELETE:
-                return self::canDelete($post, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::VIEW => self::canView($post, $viewer),
+            self::CREATE => self::canCreate($viewer),
+            self::EDIT => self::canEdit($post, $viewer),
+            self::DELETE => self::canDelete($post, $viewer),
+            default => false,
+        };
     }
 
     protected static function canEdit(Ownerable $ownerable, User $viewer): bool

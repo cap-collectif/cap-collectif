@@ -33,45 +33,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class CreateProposalMutation implements MutationInterface
 {
     use MutationTrait;
-    protected LoggerInterface $logger;
-    protected GlobalIdResolver $globalIdResolver;
-    protected EntityManagerInterface $em;
-    protected FormFactoryInterface $formFactory;
-    protected ProposalFormRepository $proposalFormRepository;
-    protected RedisStorageHelper $redisStorageHelper;
-    protected ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader;
-    protected Indexer $indexer;
-    protected Manager $toggleManager;
-    protected ResponsesFormatter $responsesFormatter;
-    protected ProposalRepository $proposalRepository;
-    protected Publisher $publisher;
 
-    public function __construct(
-        LoggerInterface $logger,
-        GlobalIdResolver $globalidResolver,
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        ProposalFormRepository $proposalFormRepository,
-        RedisStorageHelper $redisStorageHelper,
-        ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader,
-        Indexer $indexer,
-        Manager $toggleManager,
-        ResponsesFormatter $responsesFormatter,
-        ProposalRepository $proposalRepository,
-        Publisher $publisher
-    ) {
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalidResolver;
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->redisStorageHelper = $redisStorageHelper;
-        $this->proposalFormProposalsDataLoader = $proposalFormProposalsDataLoader;
-        $this->indexer = $indexer;
-        $this->toggleManager = $toggleManager;
-        $this->responsesFormatter = $responsesFormatter;
-        $this->proposalRepository = $proposalRepository;
-        $this->publisher = $publisher;
+    public function __construct(protected LoggerInterface $logger, protected GlobalIdResolver $globalIdResolver, protected EntityManagerInterface $em, protected FormFactoryInterface $formFactory, protected ProposalFormRepository $proposalFormRepository, protected RedisStorageHelper $redisStorageHelper, protected ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader, protected Indexer $indexer, protected Manager $toggleManager, protected ResponsesFormatter $responsesFormatter, protected ProposalRepository $proposalRepository, protected Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $input, $user): array

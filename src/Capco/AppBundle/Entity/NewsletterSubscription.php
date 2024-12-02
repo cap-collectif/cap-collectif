@@ -18,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="newsletter.already_subscribed"
  * )
  */
-class NewsletterSubscription
+class NewsletterSubscription implements \Stringable
 {
     use IdTrait;
 

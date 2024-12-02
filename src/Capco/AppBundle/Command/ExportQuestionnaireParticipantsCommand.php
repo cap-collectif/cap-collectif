@@ -13,20 +13,13 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
 {
-    private readonly Manager $toggleManager;
-    private readonly QuestionnaireRepository $questionnaireRepository;
-    private readonly QuestionnaireParticipantExporter $exporter;
-
     public function __construct(
         ExportUtils $exportUtils,
-        Manager $manager,
-        QuestionnaireRepository $questionnaireRepository,
-        QuestionnaireParticipantExporter $exporter
+        private readonly Manager $toggleManager,
+        private readonly QuestionnaireRepository $questionnaireRepository,
+        private readonly QuestionnaireParticipantExporter $exporter
     ) {
         parent::__construct($exportUtils);
-        $this->toggleManager = $manager;
-        $this->questionnaireRepository = $questionnaireRepository;
-        $this->exporter = $exporter;
     }
 
     /**

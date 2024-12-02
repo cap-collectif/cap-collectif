@@ -42,12 +42,9 @@ class ContributionSearch extends Search
         ContributionType::PROPOSAL => Proposal::class,
     ];
 
-    private $entityManager;
-
-    public function __construct(Index $index, EntityManagerInterface $entityManager)
+    public function __construct(Index $index, private readonly EntityManagerInterface $entityManager)
     {
         parent::__construct($index);
-        $this->entityManager = $entityManager;
     }
 
     public function getSubmissionsByAuthor(Author $user, string $resultType): ResultSet
@@ -134,7 +131,7 @@ class ContributionSearch extends Search
 
                     break;
 
-                case false !== strpos((string) $contribuableType, 'Step'):
+                case str_contains((string) $contribuableType, 'Step'):
                     $boolQuery
                         ->addFilter(
                             new Query\Term(['step.id' => ['value' => $contribuableDecodedId]])

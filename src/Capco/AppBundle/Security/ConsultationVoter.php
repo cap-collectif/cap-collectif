@@ -39,18 +39,11 @@ class ConsultationVoter extends AbstractOwnerableVoter
             return false;
         }
 
-        switch ($attribute) {
-            case self::DELETE:
-                return self::canDelete($subject, $viewer);
-
-            case self::CREATE:
-                return self::canCreate($viewer);
-
-            case self::EDIT:
-                return self::canEdit($subject, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::DELETE => self::canDelete($subject, $viewer),
+            self::CREATE => self::canCreate($viewer),
+            self::EDIT => self::canEdit($subject, $viewer),
+            default => false,
+        };
     }
 }

@@ -55,25 +55,12 @@ class ProposalVoter extends AbstractOwnerableVoter
             return false;
         }
 
-        switch ($attribute) {
-            case self::CHANGE_STATUS:
-            case self::EDIT:
-            case self::SELECT_PROPOSAL:
-            case self::UNSELECT_PROPOSAL:
-            case self::CHANGE_PROPOSAL_NOTATION:
-            case self::CHANGE_PROPOSAL_PROGRESS_STEPS:
-                return self::isAdminOrOwnerOrMember($subject->getProject(), $viewer);
-
-            case self::CHANGE_CONTENT:
-                return self::canChangeContent($subject, $viewer);
-
-            case self::CREATE_PROPOSAL_FUSION:
-            case self::UPDATE_PROPOSAL_FUSION:
-                return self::canFusion($subject, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::CHANGE_STATUS, self::EDIT, self::SELECT_PROPOSAL, self::UNSELECT_PROPOSAL, self::CHANGE_PROPOSAL_NOTATION, self::CHANGE_PROPOSAL_PROGRESS_STEPS => self::isAdminOrOwnerOrMember($subject->getProject(), $viewer),
+            self::CHANGE_CONTENT => self::canChangeContent($subject, $viewer),
+            self::CREATE_PROPOSAL_FUSION, self::UPDATE_PROPOSAL_FUSION => self::canFusion($subject, $viewer),
+            default => false,
+        };
     }
 
     private static function canChangeContent(Proposal $proposal, User $viewer): bool

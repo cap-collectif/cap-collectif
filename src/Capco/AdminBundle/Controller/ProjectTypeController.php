@@ -94,7 +94,7 @@ class ProjectTypeController extends CRUDController
                     $this->handleModelManagerException($e);
 
                     $isFormValid = false;
-                } catch (LockException $e) {
+                } catch (LockException) {
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->trans(

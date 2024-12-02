@@ -6,13 +6,8 @@ use Capco\AppBundle\Entity\ProposalCategory;
 
 class AnalyticsUsedProposalCategory
 {
-    private readonly ProposalCategory $category;
-    private readonly int $totalCount;
-
-    public function __construct(ProposalCategory $category, int $totalCount)
+    public function __construct(private readonly ProposalCategory $category, private readonly int $totalCount)
     {
-        $this->category = $category;
-        $this->totalCount = $totalCount;
     }
 
     public function getTotalCount(): int

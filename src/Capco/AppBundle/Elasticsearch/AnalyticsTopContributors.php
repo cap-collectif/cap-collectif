@@ -8,12 +8,10 @@ use Elastica\ResultSet;
 
 class AnalyticsTopContributors
 {
-    private readonly UserRepository $repository;
     private iterable $contributors = [];
 
-    public function __construct(UserRepository $repository)
+    public function __construct(private readonly UserRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function getContributors(): iterable

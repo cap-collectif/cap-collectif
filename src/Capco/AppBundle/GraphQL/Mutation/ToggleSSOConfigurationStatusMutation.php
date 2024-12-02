@@ -13,15 +13,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ToggleSSOConfigurationStatusMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $repository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        AbstractSSOConfigurationRepository $repository
-    ) {
-        $this->em = $em;
-        $this->repository = $repository;
+    public function __construct(private EntityManagerInterface $em, private AbstractSSOConfigurationRepository $repository)
+    {
     }
 
     public function __invoke(Argument $input): array

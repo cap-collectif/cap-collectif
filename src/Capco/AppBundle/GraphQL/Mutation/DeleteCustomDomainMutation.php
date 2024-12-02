@@ -16,18 +16,8 @@ class DeleteCustomDomainMutation implements MutationInterface
 
     final public const ERROR_DEPLOYER_API = 'ERROR_DEPLOYER_API';
 
-    private readonly EntityManagerInterface $em;
-    private readonly SiteSettingsRepository $siteSettingsRepository;
-    private readonly DeployerClient $deployerClient;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        SiteSettingsRepository $siteSettingsRepository,
-        DeployerClient $deployerClient
-    ) {
-        $this->em = $em;
-        $this->siteSettingsRepository = $siteSettingsRepository;
-        $this->deployerClient = $deployerClient;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SiteSettingsRepository $siteSettingsRepository, private readonly DeployerClient $deployerClient)
+    {
     }
 
     public function __invoke(Argument $input): array
@@ -38,7 +28,7 @@ class DeleteCustomDomainMutation implements MutationInterface
 
         try {
             $statusCode = $this->deployerClient->updateCurrentDomain($capcoDomain);
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             return ['siteSettings' => $siteSettings, 'errorCode' => self::ERROR_DEPLOYER_API];
         }
 

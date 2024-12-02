@@ -18,13 +18,11 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalStatusDataLoader extends BatchDataLoader
 {
-    private readonly GlobalIdResolver $globalIdResolver;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisCache $cache,
         LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
+        private readonly GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -32,7 +30,6 @@ class ProposalStatusDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->globalIdResolver = $globalIdResolver;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

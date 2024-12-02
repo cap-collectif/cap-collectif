@@ -20,7 +20,7 @@ class ReferenceEventListener
         $uow = $args->getEntityManager()->getUnitOfWork();
 
         foreach ($uow->getScheduledEntityInsertions() as $entityInsertion) {
-            $classMetaData = $om->getClassMetadata(\get_class($entityInsertion));
+            $classMetaData = $om->getClassMetadata($entityInsertion::class);
 
             // if entity has Reference Trait & has not already a reference (specific case in fixtures)
             if (
@@ -57,7 +57,7 @@ class ReferenceEventListener
         }
 
         $lastEntity = $om
-            ->getRepository(\get_class($entity))
+            ->getRepository($entity::class)
             ->findOneBy([], ['reference' => 'DESC'])
         ;
 

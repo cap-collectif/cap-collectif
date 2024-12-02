@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    )
  * })
  */
-class EventTranslation implements Translation
+class EventTranslation implements Translation, \Stringable
 {
     use MetaDescriptionTrait;
     use SluggableTitleTrait;
@@ -43,7 +43,7 @@ class EventTranslation implements Translation
      */
     private $link;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New event';
     }

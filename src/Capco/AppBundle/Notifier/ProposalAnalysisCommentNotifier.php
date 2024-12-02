@@ -13,20 +13,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProposalAnalysisCommentNotifier extends BaseNotifier
 {
-    private readonly ProposalUrlResolver $proposalUrlResolver;
-    private readonly RequestStack $requestStack;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        ProposalUrlResolver $proposalUrlResolver,
-        RequestStack $requestStack
+        private readonly ProposalUrlResolver $proposalUrlResolver,
+        private readonly RequestStack $requestStack
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->proposalUrlResolver = $proposalUrlResolver;
-        $this->requestStack = $requestStack;
     }
 
     public function onCreate(ProposalAnalysisComment $comment, array $emailsRecipients): void

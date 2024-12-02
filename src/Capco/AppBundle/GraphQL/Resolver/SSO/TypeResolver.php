@@ -14,11 +14,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class TypeResolver implements QueryInterface
 {
-    private readonly BaseTypeResolver $typeResolver;
-
-    public function __construct(BaseTypeResolver $typeResolver)
+    public function __construct(private readonly BaseTypeResolver $typeResolver)
     {
-        $this->typeResolver = $typeResolver;
     }
 
     public function __invoke(AbstractSSOConfiguration $data): Type

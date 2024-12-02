@@ -14,13 +14,8 @@ use Psr\Log\LoggerInterface;
 
 class UserPostsResolver implements QueryInterface
 {
-    private readonly LoggerInterface $logger;
-    private readonly PostSearch $postSearch;
-
-    public function __construct(LoggerInterface $logger, PostSearch $postSearch)
+    public function __construct(private readonly LoggerInterface $logger, private readonly PostSearch $postSearch)
     {
-        $this->logger = $logger;
-        $this->postSearch = $postSearch;
     }
 
     public function __invoke(Author $author, ?Argument $args = null): ConnectionInterface

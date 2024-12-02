@@ -22,16 +22,13 @@ class ConsultationAdmin extends AbstractAdmin
         '_sort_by' => 'title',
     ];
 
-    private readonly OpinionTypeRepository $opinionTypeRepository;
-
     public function __construct(
         $code,
         $class,
         $baseControllerName,
-        OpinionTypeRepository $opinionTypeRepository
+        private readonly OpinionTypeRepository $opinionTypeRepository
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->opinionTypeRepository = $opinionTypeRepository;
     }
 
     protected function configure(): void

@@ -10,15 +10,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class CheckEmailDomainValidator extends ConstraintValidator
 {
-    private $toggleManager;
-    private $registrationFormRepo;
-
-    public function __construct(
-        Manager $toggleManager,
-        RegistrationFormRepository $registrationFormRepo
-    ) {
-        $this->toggleManager = $toggleManager;
-        $this->registrationFormRepo = $registrationFormRepo;
+    public function __construct(private readonly Manager $toggleManager, private readonly RegistrationFormRepository $registrationFormRepo)
+    {
     }
 
     public function validate($email, Constraint $constraint)

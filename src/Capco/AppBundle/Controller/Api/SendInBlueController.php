@@ -15,24 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SendInBlueController extends AbstractController
 {
-    private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    private readonly UserRepository $userRepository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly string $sendInBlueSecret;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
-        UserRepository $userRepository,
-        EntityManagerInterface $entityManager,
-        string $sendInBlueSecret,
-        LoggerInterface $logger
-    ) {
-        $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
-        $this->userRepository = $userRepository;
-        $this->entityManager = $entityManager;
-        $this->sendInBlueSecret = $sendInBlueSecret;
-        $this->logger = $logger;
+    public function __construct(private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly UserRepository $userRepository, private readonly EntityManagerInterface $entityManager, private readonly string $sendInBlueSecret, private readonly LoggerInterface $logger)
+    {
     }
 
     /**
@@ -82,7 +66,7 @@ class SendInBlueController extends AbstractController
 
             try {
                 $this->entityManager->flush();
-            } catch (\RuntimeException $runtimeException) {
+            } catch (\RuntimeException) {
                 $this->logger->error('fail on save');
 
                 return $this->json(['KO' => true], 500);

@@ -6,24 +6,16 @@ use GuzzleHttp\Client;
 
 class OccitanieClient
 {
-    protected string $username;
-    protected string $password;
-    protected string $clientId;
-    protected string $clientSecret;
     protected string $base_url;
     protected string $token_url;
     protected string $counter_url;
 
     public function __construct(
-        string $username,
-        string $password,
-        string $clientId,
-        string $clientSecret
+        protected string $username,
+        protected string $password,
+        protected string $clientId,
+        protected string $clientSecret
     ) {
-        $this->username = $username;
-        $this->password = $password;
-        $this->clientId = $clientId;
-        $this->clientSecret = $clientSecret;
         $this->base_url =
             'https://mon-compte-particulier.laregion.fr/auth/realms/mon-compte-particulier';
         $this->token_url = $this->base_url . '/protocol/openid-connect/token';

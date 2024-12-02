@@ -12,15 +12,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class StepContributionsResolver implements QueryInterface
 {
-    private readonly StepContributionsDataLoader $dataLoader;
-    private readonly PromiseAdapterInterface $promiseAdapter;
-
-    public function __construct(
-        StepContributionsDataLoader $dataLoader,
-        PromiseAdapterInterface $promiseAdapter
-    ) {
-        $this->dataLoader = $dataLoader;
-        $this->promiseAdapter = $promiseAdapter;
+    public function __construct(private readonly StepContributionsDataLoader $dataLoader, private readonly PromiseAdapterInterface $promiseAdapter)
+    {
     }
 
     public function __invoke(AbstractStep $step, Argument $args): Promise

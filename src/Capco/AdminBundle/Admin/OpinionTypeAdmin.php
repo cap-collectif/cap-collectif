@@ -24,22 +24,15 @@ class OpinionTypeAdmin extends AbstractAdmin
         '_sort_by' => 'title',
     ];
 
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly ConsultationRepository $consultationRepository;
-    private readonly OpinionTypeRepository $repository;
-
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage,
-        ConsultationRepository $consultationRepository,
-        OpinionTypeRepository $repository
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly ConsultationRepository $consultationRepository,
+        private readonly OpinionTypeRepository $repository
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->tokenStorage = $tokenStorage;
-        $this->consultationRepository = $consultationRepository;
-        $this->repository = $repository;
         if (!$this->hasSubject()) {
             $this->setSubject(new OpinionType());
         }

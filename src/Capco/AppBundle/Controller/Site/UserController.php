@@ -23,33 +23,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UserController extends AbstractController
 {
-    private readonly UserInviteRepository $userInviteRepository;
-    private readonly UserRepository $userRepository;
-    private readonly AbstractSSOConfigurationRepository $ssoConfigurationRepository;
-    private readonly EntityManagerInterface $em;
-    private readonly Manager $toggleManager;
-    private readonly RouterInterface $router;
-    private readonly LoggerInterface $logger;
-    private readonly TranslatorInterface $translator;
-
-    public function __construct(
-        UserInviteRepository $userInviteRepository,
-        UserRepository $userRepository,
-        AbstractSSOConfigurationRepository $ssoConfigurationRepository,
-        EntityManagerInterface $em,
-        Manager $toggleManager,
-        RouterInterface $router,
-        LoggerInterface $logger,
-        TranslatorInterface $translator
-    ) {
-        $this->userInviteRepository = $userInviteRepository;
-        $this->userRepository = $userRepository;
-        $this->ssoConfigurationRepository = $ssoConfigurationRepository;
-        $this->em = $em;
-        $this->toggleManager = $toggleManager;
-        $this->router = $router;
-        $this->logger = $logger;
-        $this->translator = $translator;
+    public function __construct(private readonly UserInviteRepository $userInviteRepository, private readonly UserRepository $userRepository, private readonly AbstractSSOConfigurationRepository $ssoConfigurationRepository, private readonly EntityManagerInterface $em, private readonly Manager $toggleManager, private readonly RouterInterface $router, private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator)
+    {
     }
 
     /**

@@ -17,17 +17,14 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class AnalysisNotifier extends BaseNotifier
 {
-    private readonly TranslatorInterface $translator;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        TranslatorInterface $translator
+        private readonly TranslatorInterface $translator
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->translator = $translator;
     }
 
     public function onAssignation(User $analyst, array $proposals, string $roleKey): void

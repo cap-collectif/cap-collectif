@@ -25,36 +25,9 @@ class AddAnonymousReplyMutation implements MutationInterface
     use MutationTrait;
 
     final public const INVALID_FORM = 'INVALID_FORM';
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly ResponsesFormatter $responsesFormatter;
-    private readonly RequestGuesser $requestGuesser;
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly Publisher $publisher;
-    private readonly Indexer $indexer;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        ResponsesFormatter $responsesFormatter,
-        LoggerInterface $logger,
-        RequestGuesser $requestGuesser,
-        TokenGeneratorInterface $tokenGenerator,
-        GlobalIdResolver $globalIdResolver,
-        Publisher $publisher,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->responsesFormatter = $responsesFormatter;
-        $this->logger = $logger;
-        $this->requestGuesser = $requestGuesser;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->publisher = $publisher;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly LoggerInterface $logger, private readonly RequestGuesser $requestGuesser, private readonly TokenGeneratorInterface $tokenGenerator, private readonly GlobalIdResolver $globalIdResolver, private readonly Publisher $publisher, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input): array

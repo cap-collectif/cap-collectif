@@ -38,31 +38,21 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
     ';
 
     protected $writer;
-    protected ConnectionTraversor $connectionTraversor;
     protected GraphQlAclListener $listener;
-    protected Executor $executor;
     protected string $projectRootDir;
-    protected LoggerInterface $logger;
-    protected EventRepository $eventRepository;
-    protected Manager $manager;
 
     public function __construct(
         GraphQlAclListener $listener,
-        ConnectionTraversor $connectionTraversor,
-        Executor $executor,
+        protected ConnectionTraversor $connectionTraversor,
+        protected Executor $executor,
         string $projectRootDir,
-        LoggerInterface $logger,
-        EventRepository $eventRepository,
+        protected LoggerInterface $logger,
+        protected EventRepository $eventRepository,
         ExportUtils $exportUtils,
-        Manager $manager
+        protected Manager $manager
     ) {
         $listener->disableAcl();
-        $this->connectionTraversor = $connectionTraversor;
-        $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
-        $this->logger = $logger;
-        $this->eventRepository = $eventRepository;
-        $this->manager = $manager;
 
         parent::__construct($exportUtils);
     }

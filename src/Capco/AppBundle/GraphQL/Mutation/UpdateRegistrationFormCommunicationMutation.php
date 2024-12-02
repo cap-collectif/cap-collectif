@@ -12,15 +12,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 class UpdateRegistrationFormCommunicationMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly RegistrationFormRepository $registrationFormRepository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        RegistrationFormRepository $registrationFormRepository
-    ) {
-        $this->em = $em;
-        $this->registrationFormRepository = $registrationFormRepository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly RegistrationFormRepository $registrationFormRepository)
+    {
     }
 
     public function __invoke(Argument $input): array

@@ -24,33 +24,8 @@ class DeleteOrganizationMutation implements MutationInterface
     final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
     final public const ORGANIZATION_ALREADY_ANONYMIZED = 'ORGANIZATION_ALREADY_ANONYMIZED';
 
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ProjectRepository $projectRepository;
-    private readonly TranslatorInterface $translator;
-    private readonly SluggerInterface $slugger;
-    private readonly OrganizationRepository $organizationRepository;
-    private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
-    private readonly UserInviteRepository $userInviteRepository;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        ProjectRepository $projectRepository,
-        TranslatorInterface $translator,
-        SluggerInterface $slugger,
-        OrganizationRepository $organizationRepository,
-        PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
-        UserInviteRepository $userInviteRepository
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->projectRepository = $projectRepository;
-        $this->translator = $translator;
-        $this->slugger = $slugger;
-        $this->organizationRepository = $organizationRepository;
-        $this->pendingOrganizationInvitationRepository = $pendingOrganizationInvitationRepository;
-        $this->userInviteRepository = $userInviteRepository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly ProjectRepository $projectRepository, private readonly TranslatorInterface $translator, private readonly SluggerInterface $slugger, private readonly OrganizationRepository $organizationRepository, private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository, private readonly UserInviteRepository $userInviteRepository)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

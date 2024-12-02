@@ -28,8 +28,6 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
         'email' => 'email',
         'profilepicture' => 'picture.data.url',
     ];
-    private readonly FeatureChecker $featureChecker;
-    private readonly LoggerInterface $logger;
 
     public function __construct(
         HttpMethodsClientInterface $hwiHttpClient,
@@ -38,15 +36,13 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
         string $name,
         RequestDataStorageInterface $hwiStorage,
         OptionsModifierInterface $optionsModifier,
-        FeatureChecker $featureChecker,
-        ?LoggerInterface $logger = null
+        private readonly FeatureChecker $featureChecker,
+        private ?LoggerInterface $logger = null
     ) {
         $this->httpClient = $hwiHttpClient;
         $this->httpUtils = $httpUtils;
         $this->name = $name;
         $this->storage = $hwiStorage;
-        $this->featureChecker = $featureChecker;
-        $this->logger = $logger;
 
         $options = $optionsModifier->modifyOptions($options, $this);
         if (!empty($options['paths'])) {

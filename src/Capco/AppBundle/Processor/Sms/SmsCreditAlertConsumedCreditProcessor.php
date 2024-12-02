@@ -8,11 +8,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class SmsCreditAlertConsumedCreditProcessor implements ProcessorInterface
 {
-    private readonly SmsNotifier $notifier;
-
-    public function __construct(SmsNotifier $notifier)
+    public function __construct(private readonly SmsNotifier $notifier)
     {
-        $this->notifier = $notifier;
     }
 
     public function process(Message $message, array $options): bool

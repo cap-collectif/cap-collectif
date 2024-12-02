@@ -11,20 +11,14 @@ use Twig\Extension\RuntimeExtensionInterface;
 class UserTypeRuntime implements RuntimeExtensionInterface
 {
     final public const CACHE_KEY = 'userTypes';
-    protected UserTypeRepository $repo;
-    protected RedisCache $cache;
-    protected RequestStack $requestStack;
     protected string $defaultLocale;
 
     public function __construct(
-        UserTypeRepository $repo,
-        RedisCache $cache,
-        RequestStack $requestStack,
+        protected UserTypeRepository $repo,
+        protected RedisCache $cache,
+        protected RequestStack $requestStack,
         LocaleResolver $localeResolver
     ) {
-        $this->repo = $repo;
-        $this->cache = $cache;
-        $this->requestStack = $requestStack;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 

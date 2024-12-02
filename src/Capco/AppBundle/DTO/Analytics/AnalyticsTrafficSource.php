@@ -4,13 +4,8 @@ namespace Capco\AppBundle\DTO\Analytics;
 
 class AnalyticsTrafficSource
 {
-    private readonly string $type;
-    private readonly int $totalCount;
-
-    private function __construct(int $totalCount, string $type)
+    private function __construct(private readonly int $totalCount, private readonly string $type)
     {
-        $this->totalCount = $totalCount;
-        $this->type = $type;
     }
 
     public static function create(int $totalCount, string $type): self

@@ -18,21 +18,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class UpdateFollowOpinionMutation implements MutationInterface
 {
-    private $em;
-    private $opinionRepository;
-    private $followerRepository;
-    private $versionRepository;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        OpinionRepository $opinionRepository,
-        OpinionVersionRepository $versionRepository,
-        FollowerRepository $followerRepository
-    ) {
-        $this->em = $em;
-        $this->opinionRepository = $opinionRepository;
-        $this->followerRepository = $followerRepository;
-        $this->versionRepository = $versionRepository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly OpinionRepository $opinionRepository, private readonly OpinionVersionRepository $versionRepository, private readonly FollowerRepository $followerRepository)
+    {
     }
 
     public function __invoke(string $opinionId, string $notifiedOf, User $user): array

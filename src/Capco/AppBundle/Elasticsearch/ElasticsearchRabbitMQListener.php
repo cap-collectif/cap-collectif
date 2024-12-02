@@ -13,13 +13,9 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
 {
     private $messageStack = [];
     private $bodyIndexed = [];
-    private $publisher;
-    private $logger;
 
-    public function __construct(Publisher $publisher, LoggerInterface $logger)
+    public function __construct(private readonly Publisher $publisher, private readonly LoggerInterface $logger)
     {
-        $this->publisher = $publisher;
-        $this->logger = $logger;
     }
 
     public static function getSubscribedEvents(): array

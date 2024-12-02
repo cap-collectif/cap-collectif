@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class QuestionnaireParticipantsResolver implements QueryInterface
 {
-    private readonly ReplySearch $replySearch;
-
-    public function __construct(ReplySearch $replySearch)
+    public function __construct(private readonly ReplySearch $replySearch)
     {
-        $this->replySearch = $replySearch;
     }
 
     public function __invoke(Questionnaire $questionnaire, Arg $args): ConnectionInterface

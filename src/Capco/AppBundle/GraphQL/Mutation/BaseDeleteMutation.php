@@ -9,13 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 
 abstract class BaseDeleteMutation implements MutationInterface
 {
-    protected EntityManagerInterface $em;
-    protected MediaProvider $mediaProvider;
-
-    public function __construct(EntityManagerInterface $em, MediaProvider $mediaProvider)
+    public function __construct(protected EntityManagerInterface $em, protected MediaProvider $mediaProvider)
     {
-        $this->em = $em;
-        $this->mediaProvider = $mediaProvider;
     }
 
     public function removeMedia(Media $media): void

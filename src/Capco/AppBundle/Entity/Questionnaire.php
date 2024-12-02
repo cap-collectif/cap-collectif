@@ -29,7 +29,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="questionnaire")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface
+class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface, \Stringable
 {
     use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;
@@ -132,7 +132,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
         $this->initializeNotificationConfiguration();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New Questionnaire';
     }

@@ -9,20 +9,8 @@ use Psr\Log\LoggerInterface;
 /** https://github.com/overblog/GraphQLBundle/blob/master/docs/error-handling/index.md#custom-error-handling--formatting */
 final class ErrorHandler
 {
-    private readonly GraphQLErrorHandler $errorHandler;
-
-    private readonly bool $throwException;
-
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        LoggerInterface $logger,
-        GraphQLErrorHandler $errorHandler,
-        bool $throwException = false
-    ) {
-        $this->errorHandler = $errorHandler;
-        $this->logger = $logger;
-        $this->throwException = $throwException;
+    public function __construct(private readonly LoggerInterface $logger, private readonly GraphQLErrorHandler $errorHandler, private readonly bool $throwException = false)
+    {
     }
 
     public function onPostExecutor(ExecutorResultEvent $executorResultEvent)

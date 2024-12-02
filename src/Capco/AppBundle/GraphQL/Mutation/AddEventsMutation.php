@@ -31,14 +31,6 @@ class AddEventsMutation extends AbstractEventMutation
 {
     use MutationTrait;
 
-    private readonly UserRepository $userRepo;
-    private readonly ThemeRepository $themeRepo;
-    private readonly LocaleRepository $localeRepository;
-    private readonly ProjectRepository $projectRepository;
-    private readonly Map $map;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
-    private readonly GlobalDistrictRepository $globalDistrictRepository;
-
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -47,13 +39,13 @@ class AddEventsMutation extends AbstractEventMutation
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
         TranslatorInterface $translator,
-        LocaleRepository $localeRepository,
-        UserRepository $userRepo,
-        ThemeRepository $themeRepo,
-        ProjectRepository $projectRepository,
-        SettableOwnerResolver $settableOwnerResolver,
-        Map $map,
-        GlobalDistrictRepository $globalDistrictRepository
+        private readonly LocaleRepository $localeRepository,
+        private readonly UserRepository $userRepo,
+        private readonly ThemeRepository $themeRepo,
+        private readonly ProjectRepository $projectRepository,
+        private readonly SettableOwnerResolver $settableOwnerResolver,
+        private readonly Map $map,
+        private readonly GlobalDistrictRepository $globalDistrictRepository
     ) {
         parent::__construct(
             $em,
@@ -64,13 +56,6 @@ class AddEventsMutation extends AbstractEventMutation
             $authorizationChecker,
             $translator
         );
-        $this->userRepo = $userRepo;
-        $this->themeRepo = $themeRepo;
-        $this->settableOwnerResolver = $settableOwnerResolver;
-        $this->localeRepository = $localeRepository;
-        $this->projectRepository = $projectRepository;
-        $this->map = $map;
-        $this->globalDistrictRepository = $globalDistrictRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array

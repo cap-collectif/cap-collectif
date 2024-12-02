@@ -36,12 +36,10 @@ class EventReviewVoter extends Voter
         /** @var EventReview $review */
         $review = $subject;
 
-        switch ($attribute) {
-            case self::EDIT:
-                return $this->canEdit($review, $viewer);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::EDIT => $this->canEdit($review, $viewer),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canEdit(EventReview $review, User $viewer): bool

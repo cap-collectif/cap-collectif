@@ -12,11 +12,8 @@ use Symfony\Component\Security\Core\User\UserInterface;
 
 class UserCommentsResolver implements QueryInterface
 {
-    private $commentSearch;
-
-    public function __construct(CommentSearch $commentSearch)
+    public function __construct(private readonly CommentSearch $commentSearch)
     {
-        $this->commentSearch = $commentSearch;
     }
 
     public function __invoke(

@@ -94,7 +94,7 @@ class DefaultController extends AbstractController
                 'cookies-list',
                 $request->getLocale()
             );
-        } catch (NoResultException $exception) {
+        } catch (NoResultException) {
             throw $this->createNotFoundException($translator->trans('page.error.not_found'));
         }
 
@@ -115,7 +115,7 @@ class DefaultController extends AbstractController
                 'privacy-policy',
                 $request->getLocale()
             );
-        } catch (NoResultException $exception) {
+        } catch (NoResultException) {
             throw $this->createNotFoundException($translator->trans('page.error.not_found'));
         }
 
@@ -138,7 +138,7 @@ class DefaultController extends AbstractController
                 'legal-mentions',
                 $request->getLocale()
             );
-        } catch (NoResultException $exception) {
+        } catch (NoResultException) {
             throw $this->createNotFoundException($translator->trans('page.error.not_found'));
         }
 

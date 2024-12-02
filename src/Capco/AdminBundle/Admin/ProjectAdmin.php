@@ -37,37 +37,21 @@ final class ProjectAdmin extends CapcoAdmin
     protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'publishedAt'];
 
     protected array $formOptions = ['cascade_validation' => true];
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly GlobalDistrictRepository $globalDistrictRepository;
-    private readonly Manager $manager;
-    private readonly MediaProvider $mediaProvider;
-    private readonly ElasticsearchDoctrineListener $elasticsearchDoctrineListener;
-    private readonly ProposalCommentRepository $proposalCommentRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
 
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage,
-        GlobalDistrictRepository $globalDistrictRepository,
-        Manager $manager,
-        MediaProvider $mediaProvider,
-        ElasticsearchDoctrineListener $elasticsearchDoctrineListener,
-        ProposalCommentRepository $proposalCommentRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly GlobalDistrictRepository $globalDistrictRepository,
+        private readonly Manager $manager,
+        private readonly MediaProvider $mediaProvider,
+        private readonly ElasticsearchDoctrineListener $elasticsearchDoctrineListener,
+        private readonly ProposalCommentRepository $proposalCommentRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->tokenStorage = $tokenStorage;
-        $this->globalDistrictRepository = $globalDistrictRepository;
-        $this->manager = $manager;
-        $this->mediaProvider = $mediaProvider;
-        $this->elasticsearchDoctrineListener = $elasticsearchDoctrineListener;
-        $this->proposalCommentRepository = $proposalCommentRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
     }
 
     public function validate(ErrorElement $errorElement, $object)

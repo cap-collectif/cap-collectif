@@ -20,21 +20,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ChangeSourceMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly SourceRepository $sourceRepo;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        SourceRepository $sourceRepo,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->sourceRepo = $sourceRepo;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly SourceRepository $sourceRepo, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

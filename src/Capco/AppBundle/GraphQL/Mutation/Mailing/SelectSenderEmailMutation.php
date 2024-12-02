@@ -17,13 +17,8 @@ class SelectSenderEmailMutation implements MutationInterface
 
     final public const UNKNOWN_SENDER_EMAIL = 'UNKNOWN_SENDER_EMAIL';
 
-    private readonly EntityManagerInterface $em;
-    private readonly SenderEmailRepository $repository;
-
-    public function __construct(EntityManagerInterface $em, SenderEmailRepository $repository)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SenderEmailRepository $repository)
     {
-        $this->em = $em;
-        $this->repository = $repository;
     }
 
     public function __invoke(Argument $input)

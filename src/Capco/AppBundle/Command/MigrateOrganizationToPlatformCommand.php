@@ -16,35 +16,17 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateOrganizationToPlatformCommand extends Command
 {
-    private readonly EntityManagerInterface $em;
-    private readonly ProjectRepository $projectRepository;
-    private readonly QuestionnaireRepository $questionnaireRepository;
-    private readonly ProposalFormRepository $proposalFormRepository;
-    private readonly PostRepository $postRepository;
-    private readonly EmailingCampaignRepository $emailingCampaignRepository;
-    private readonly MailingListRepository $mailingListRepository;
-    private readonly UserRepository $userRepository;
-
     public function __construct(
-        EntityManagerInterface $em,
-        ProjectRepository $projectRepository,
-        QuestionnaireRepository $questionnaireRepository,
-        ProposalFormRepository $proposalFormRepository,
-        PostRepository $postRepository,
-        EmailingCampaignRepository $emailingCampaignRepository,
-        MailingListRepository $mailingListRepository,
-        UserRepository $userRepository
+        private readonly EntityManagerInterface $em,
+        private readonly ProjectRepository $projectRepository,
+        private readonly QuestionnaireRepository $questionnaireRepository,
+        private readonly ProposalFormRepository $proposalFormRepository,
+        private readonly PostRepository $postRepository,
+        private readonly EmailingCampaignRepository $emailingCampaignRepository,
+        private readonly MailingListRepository $mailingListRepository,
+        private readonly UserRepository $userRepository
     ) {
         parent::__construct();
-
-        $this->em = $em;
-        $this->projectRepository = $projectRepository;
-        $this->questionnaireRepository = $questionnaireRepository;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->postRepository = $postRepository;
-        $this->emailingCampaignRepository = $emailingCampaignRepository;
-        $this->mailingListRepository = $mailingListRepository;
-        $this->userRepository = $userRepository;
     }
 
     public function deleteProjects(string $orgaId): void

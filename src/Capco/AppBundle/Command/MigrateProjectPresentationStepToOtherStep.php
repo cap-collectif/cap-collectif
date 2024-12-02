@@ -13,17 +13,11 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateProjectPresentationStepToOtherStep extends Command
 {
-    private readonly EntityManagerInterface $em;
-    private readonly ProjectRepository $projectRepository;
-
     public function __construct(
-        EntityManagerInterface $em,
-        ProjectRepository $projectRepository
+        private readonly EntityManagerInterface $em,
+        private readonly ProjectRepository $projectRepository
     ) {
         parent::__construct();
-
-        $this->em = $em;
-        $this->projectRepository = $projectRepository;
     }
 
     public function migratePresentationStepToCustomStep(Project $project, OutputInterface $output)

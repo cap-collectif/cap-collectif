@@ -15,13 +15,8 @@ use Psr\Log\LoggerInterface;
 
 class DebateVotesResolver implements QueryInterface
 {
-    private readonly VoteSearch $voteSearch;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(VoteSearch $voteSearch, LoggerInterface $logger)
+    public function __construct(private readonly VoteSearch $voteSearch, private readonly LoggerInterface $logger)
     {
-        $this->voteSearch = $voteSearch;
-        $this->logger = $logger;
     }
 
     public function __invoke(

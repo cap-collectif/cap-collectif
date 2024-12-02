@@ -22,12 +22,6 @@ class UserInviteEmailMessage
     final public const SENT = 'sent';
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\UserInvite", inversedBy="emailMessages", cascade={"persist"})
-     * @ORM\JoinColumn(name="invitation_id", referencedColumnName="id", onDelete="CASCADE")
-     */
-    private UserInvite $invitation;
-
-    /**
      * @ORM\Column(name="mailer_id" ,type="string", nullable=true)
      */
     private ?string $mailerId;
@@ -53,9 +47,13 @@ class UserInviteEmailMessage
      */
     private string $messageType = CapcoAppBundleMessagesTypes::USER_INVITE_INVITATION;
 
-    public function __construct(UserInvite $invitation)
-    {
-        $this->invitation = $invitation;
+    public function __construct(
+        /**
+         * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\UserInvite", inversedBy="emailMessages", cascade={"persist"})
+         * @ORM\JoinColumn(name="invitation_id", referencedColumnName="id", onDelete="CASCADE")
+         */
+        private UserInvite $invitation
+    ) {
     }
 
     public function setCreatedAt(\DateTimeInterface $createdAt): self

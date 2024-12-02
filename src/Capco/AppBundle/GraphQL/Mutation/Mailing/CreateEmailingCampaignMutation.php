@@ -20,25 +20,17 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CreateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
-    private readonly TranslatorInterface $translator;
-    private readonly SiteParameterResolver $siteParams;
-    private readonly SenderEmailResolver $senderEmailResolver;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
 
     public function __construct(
         EntityManagerInterface $entityManager,
         AuthorizationCheckerInterface $authorizationChecker,
-        TranslatorInterface $translator,
-        SiteParameterResolver $siteParams,
-        SenderEmailResolver $senderEmailResolver,
+        private readonly TranslatorInterface $translator,
+        private readonly SiteParameterResolver $siteParams,
+        private readonly SenderEmailResolver $senderEmailResolver,
         GlobalIdResolver $globalIdResolver,
-        SettableOwnerResolver $settableOwnerResolver
+        private readonly SettableOwnerResolver $settableOwnerResolver
     ) {
         parent::__construct($globalIdResolver, $entityManager, $authorizationChecker);
-        $this->translator = $translator;
-        $this->siteParams = $siteParams;
-        $this->senderEmailResolver = $senderEmailResolver;
-        $this->settableOwnerResolver = $settableOwnerResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array

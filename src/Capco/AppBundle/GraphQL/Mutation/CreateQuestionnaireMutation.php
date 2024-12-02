@@ -19,24 +19,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class CreateQuestionnaireMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
-    private readonly SettableOwnerResolver $settableOwnerResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger,
-        SettableOwnerResolver $settableOwnerResolver,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
-        $this->settableOwnerResolver = $settableOwnerResolver;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly SettableOwnerResolver $settableOwnerResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

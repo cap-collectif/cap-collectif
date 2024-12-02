@@ -19,21 +19,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteRepliesMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly GlobalIdResolver $globalIdResolver, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $args): array

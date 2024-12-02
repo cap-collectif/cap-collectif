@@ -10,11 +10,8 @@ class SourceViewerHasVoteResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private $resolver;
-
-    public function __construct(SourceViewerVoteResolver $resolver)
+    public function __construct(private SourceViewerVoteResolver $resolver)
     {
-        $this->resolver = $resolver;
     }
 
     public function __invoke(Source $source, $viewer): bool

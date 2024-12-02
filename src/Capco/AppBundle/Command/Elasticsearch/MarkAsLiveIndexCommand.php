@@ -16,17 +16,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MarkAsLiveIndexCommand extends Command
 {
     protected static $defaultName = 'capco:es:set-live-index';
-    protected IndexBuilder $indexManager;
-    protected Indexer $indexer;
-    private readonly Client $client;
-    private readonly Cluster $cluster;
 
-    public function __construct(IndexBuilder $indexManager, Indexer $indexer, Client $client, Cluster $cluster)
+    public function __construct(protected IndexBuilder $indexManager, protected Indexer $indexer, private readonly Client $client, private readonly Cluster $cluster)
     {
-        $this->indexManager = $indexManager;
-        $this->indexer = $indexer;
-        $this->client = $client;
-        $this->cluster = $cluster;
         parent::__construct();
     }
 

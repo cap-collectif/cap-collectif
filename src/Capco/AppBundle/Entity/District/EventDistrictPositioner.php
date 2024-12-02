@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     ),
  *  })
  */
-class EventDistrictPositioner
+class EventDistrictPositioner implements \Stringable
 {
     use PositionableTrait;
     use TimestampableTrait;
@@ -37,7 +37,7 @@ class EventDistrictPositioner
 
     public function __toString(): string
     {
-        return $this->getDistrict()->getName();
+        return (string) $this->getDistrict()->getName();
     }
 
     public function getDistrict(): GlobalDistrict

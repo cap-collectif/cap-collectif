@@ -4,15 +4,8 @@ namespace Capco\AppBundle\Client;
 
 class DeployerClient
 {
-    private readonly ?string $deployerBaseUrl;
-    private readonly string $instanceName;
-    private readonly string $token;
-
-    public function __construct(?string $deployerBaseUrl, string $instanceName, string $token)
+    public function __construct(private readonly ?string $deployerBaseUrl, private readonly string $instanceName, private readonly string $token)
     {
-        $this->deployerBaseUrl = $deployerBaseUrl;
-        $this->instanceName = $instanceName;
-        $this->token = $token;
     }
 
     public function updateCurrentDomain(string $customDomain): int

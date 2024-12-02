@@ -15,21 +15,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class SelectionStepNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $router;
-    private readonly ObjectNormalizer $normalizer;
-    private $votesCountDataLoader;
-    private readonly UserSearch $userSearch;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        StepVotesCountDataLoader $votesCountDataLoader,
-        UserSearch $userSearch
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->votesCountDataLoader = $votesCountDataLoader;
-        $this->userSearch = $userSearch;
+    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private StepVotesCountDataLoader $votesCountDataLoader, private readonly UserSearch $userSearch)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

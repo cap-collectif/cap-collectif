@@ -15,13 +15,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 class DeleteOfficialResponseMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly GlobalIdResolver $resolver;
-    private readonly EntityManagerInterface $em;
 
-    public function __construct(GlobalIdResolver $resolver, EntityManagerInterface $em)
+    public function __construct(private readonly GlobalIdResolver $resolver, private readonly EntityManagerInterface $em)
     {
-        $this->resolver = $resolver;
-        $this->em = $em;
     }
 
     public function __invoke(Argument $input, User $user): array

@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class SourceableSourcesResolver implements QueryInterface
 {
-    private $sourceRepository;
-
-    public function __construct(SourceRepository $sourceRepository)
+    public function __construct(private readonly SourceRepository $sourceRepository)
     {
-        $this->sourceRepository = $sourceRepository;
     }
 
     public function __invoke(Sourceable $sourceable, Argument $args): Connection

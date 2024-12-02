@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class DistrictsForLocalisationResolver implements QueryInterface
 {
-    private $proposalFormRepository;
-
-    public function __construct(ProposalFormRepository $proposalFormRepository)
+    public function __construct(private readonly ProposalFormRepository $proposalFormRepository)
     {
-        $this->proposalFormRepository = $proposalFormRepository;
     }
 
     public function __invoke(string $proposalFormId, float $latitude, float $longitude): array

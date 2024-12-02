@@ -15,25 +15,15 @@ use Symfony\Component\Security\Http\Logout\LogoutSuccessHandlerInterface;
 
 class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
 {
-    /**
-     * @var LogoutHandlerInterface[]
-     */
-    protected array $handlers;
-
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly RouterInterface $router;
-    private readonly KernelInterface $kernel;
-
     public function __construct(
-        array $handlers,
-        TokenStorageInterface $tokenStorage,
-        RouterInterface $router,
-        KernelInterface $kernel
+        /**
+         * @var LogoutHandlerInterface[]
+         */
+        protected array $handlers,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly RouterInterface $router,
+        private readonly KernelInterface $kernel
     ) {
-        $this->handlers = $handlers;
-        $this->tokenStorage = $tokenStorage;
-        $this->router = $router;
-        $this->kernel = $kernel;
     }
 
     public function onLogoutSuccess(Request $request): RedirectResponse

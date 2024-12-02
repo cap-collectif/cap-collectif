@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class ArgumentableArgumentsResolver implements QueryInterface
 {
-    private readonly ArgumentSearch $argumentSearch;
-
-    public function __construct(ArgumentSearch $argumentSearch)
+    public function __construct(private readonly ArgumentSearch $argumentSearch)
     {
-        $this->argumentSearch = $argumentSearch;
     }
 
     public function __invoke(Argumentable $argumentable, Argument $args): ConnectionInterface

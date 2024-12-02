@@ -23,30 +23,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ReviewEventMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $globalIdResolver;
-    private $formFactory;
-    private $logger;
-    private $indexer;
-    private $publisher;
-    private $authorizationChecker;
 
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger,
-        Indexer $indexer,
-        Publisher $publisher,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
-        $this->indexer = $indexer;
-        $this->publisher = $publisher;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private GlobalIdResolver $globalIdResolver, private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private LoggerInterface $logger, private Indexer $indexer, private Publisher $publisher, private AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Arg $input, User $reviewer): array

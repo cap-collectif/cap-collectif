@@ -14,21 +14,8 @@ class PriorAuthenticationHandler
 {
     final public const MAX_FAILED_LOGIN_ATTEMPT = 5;
 
-    private readonly UserConnectionRepository $userConnectionRepository;
-    private readonly Manager $toggleManager;
-    private readonly LoggerInterface $logger;
-    private readonly CaptchaChecker $captchaChecker;
-
-    public function __construct(
-        UserConnectionRepository $userConnectionRepository,
-        Manager $toggleManager,
-        LoggerInterface $logger,
-        CaptchaChecker $captchaChecker
-    ) {
-        $this->userConnectionRepository = $userConnectionRepository;
-        $this->toggleManager = $toggleManager;
-        $this->logger = $logger;
-        $this->captchaChecker = $captchaChecker;
+    public function __construct(private readonly UserConnectionRepository $userConnectionRepository, private readonly Manager $toggleManager, private readonly LoggerInterface $logger, private readonly CaptchaChecker $captchaChecker)
+    {
     }
 
     public function onKernelRequest(RequestEvent $event): void

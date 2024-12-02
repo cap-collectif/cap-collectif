@@ -11,12 +11,9 @@ use Psr\Log\LoggerInterface;
 class OpenIDExtraMapper
 {
     private $extraMapper;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(string $instanceName, LoggerInterface $logger)
+    public function __construct(string $instanceName, private readonly LoggerInterface $logger)
     {
-        $this->logger = $logger;
-
         switch ($instanceName) {
             case 'occitanie':
             case 'occitanie-dedicated':

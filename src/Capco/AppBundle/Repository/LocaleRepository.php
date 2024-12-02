@@ -97,9 +97,9 @@ class LocaleRepository extends EntityRepository
 
         try {
             return $qb->getQuery()->getSingleResult()['code'];
-        } catch (NoResultException $e) {
+        } catch (NoResultException) {
             throw new LocaleConfigurationException(LocaleConfigurationException::MESSAGE_DEFAULT_NONE);
-        } catch (NonUniqueResultException $e) {
+        } catch (NonUniqueResultException) {
             throw new LocaleConfigurationException(LocaleConfigurationException::MESSAGE_DEFAULT_SEVERAL);
         }
     }
@@ -144,7 +144,7 @@ class LocaleRepository extends EntityRepository
 
         try {
             return $qb->getQuery()->getOneOrNullResult();
-        } catch (NonUniqueResultException $e) {
+        } catch (NonUniqueResultException) {
             //todo handle request for en-AUS while we have en-US and en-GB
         }
 

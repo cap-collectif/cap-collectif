@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionQueryResolver implements QueryInterface
 {
-    private $abstractQuestionRepository;
-
-    public function __construct(AbstractQuestionRepository $abstractQuestionRepository)
+    public function __construct(private readonly AbstractQuestionRepository $abstractQuestionRepository)
     {
-        $this->abstractQuestionRepository = $abstractQuestionRepository;
     }
 
     public function __invoke(Argument $args): AbstractQuestion

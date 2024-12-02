@@ -51,7 +51,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
 
         $text = file_get_contents(self::SNAPSHOTS_PATH . $file);
 
-        if (false === strpos((string) $content, $text)) {
+        if (!str_contains((string) $content, $text)) {
             // HtmlDiffService
             $diff = $this->kernel
                 ->getContainer()

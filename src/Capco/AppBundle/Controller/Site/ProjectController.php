@@ -41,58 +41,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends Controller
 {
-    protected RouterInterface $router;
-    private readonly TranslatorInterface $translator;
-    private readonly string $exportDir;
-    private readonly SiteParameterResolver $siteParameterResolver;
-    private readonly ProjectUrlResolver $projectUrlResolver;
-    private readonly QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver;
-    private readonly ProjectRepository $projectRepository;
-    private readonly OpinionRepository $opinionRepository;
-    private readonly OpinionVersionRepository $opinionVersionRepository;
-    private readonly ArgumentRepository $argumentRepository;
-    private readonly SourceRepository $sourceRepository;
-    private readonly PostRepository $postRepository;
-    private readonly ContributionResolver $contributionResolver;
-    private readonly ProjectHelper $projectHelper;
-    private readonly DebateArgumentRepository $debateArgumentRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        TranslatorInterface $translator,
-        RouterInterface $router,
-        ProjectUrlResolver $projectUrlResolver,
-        SiteParameterResolver $siteParameterResolver,
-        ProjectRepository $projectRepository,
-        OpinionRepository $opinionRepository,
-        OpinionVersionRepository $opinionVersionRepository,
-        ArgumentRepository $argumentRepository,
-        SourceRepository $sourceRepository,
-        ContributionResolver $contributionResolver,
-        ProjectHelper $projectHelper,
-        PostRepository $postRepository,
-        QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver,
-        string $exportDir,
-        DebateArgumentRepository $debateArgumentRepository,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->translator = $translator;
-        $this->router = $router;
-        $this->exportDir = $exportDir;
-        $this->projectUrlResolver = $projectUrlResolver;
-        $this->siteParameterResolver = $siteParameterResolver;
-        $this->projectRepository = $projectRepository;
-
-        $this->postRepository = $postRepository;
-        $this->contributionResolver = $contributionResolver;
-        $this->projectHelper = $projectHelper;
-        $this->opinionRepository = $opinionRepository;
-        $this->opinionVersionRepository = $opinionVersionRepository;
-        $this->argumentRepository = $argumentRepository;
-        $this->sourceRepository = $sourceRepository;
-        $this->questionnaireExportResultsUrlResolver = $questionnaireExportResultsUrlResolver;
-        $this->debateArgumentRepository = $debateArgumentRepository;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly TranslatorInterface $translator, protected RouterInterface $router, private readonly ProjectUrlResolver $projectUrlResolver, private readonly SiteParameterResolver $siteParameterResolver, private readonly ProjectRepository $projectRepository, private readonly OpinionRepository $opinionRepository, private readonly OpinionVersionRepository $opinionVersionRepository, private readonly ArgumentRepository $argumentRepository, private readonly SourceRepository $sourceRepository, private readonly ContributionResolver $contributionResolver, private readonly ProjectHelper $projectHelper, private readonly PostRepository $postRepository, private readonly QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver, private readonly string $exportDir, private readonly DebateArgumentRepository $debateArgumentRepository, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     /**
@@ -182,7 +132,7 @@ class ProjectController extends Controller
             $response->headers->set('Content-Type', 'application/vnd.ms-excel' . '; charset=utf-8');
 
             return $response;
-        } catch (FileNotFoundException $exception) {
+        } catch (FileNotFoundException) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
@@ -227,7 +177,7 @@ class ProjectController extends Controller
             $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
 
             return $response;
-        } catch (FileNotFoundException $exception) {
+        } catch (FileNotFoundException) {
             return new JsonResponse(
                 ['errorTranslationKey' => 'project.download.not_yet_generated'],
                 404
@@ -256,10 +206,8 @@ class ProjectController extends Controller
      * @Route("/consultations/{projectSlug}/posts/{page}", name="app_consultation_show_posts", requirements={"page" = "\d+"}, defaults={"_feature_flags" = "blog", "page" = 1} )
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("@CapcoApp/Project/show_posts.html.twig")
-     *
-     * @param mixed $page
      */
-    public function showPostsAction(Project $project, $page)
+    public function showPostsAction(Project $project, mixed $page)
     {
         $pagination = $this->siteParameterResolver->getValue('blog.pagination.size');
 
@@ -293,10 +241,8 @@ class ProjectController extends Controller
      *    requirements={"page" = "\d+"}, defaults={"page" = 1}, options={"i18n" = true})
      * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("@CapcoApp/Project/show_contributors.html.twig")
-     *
-     * @param mixed $page
      */
-    public function showContributorsAction(Project $project, $page)
+    public function showContributorsAction(Project $project, mixed $page)
     {
         $pagination = $this->siteParameterResolver->getValue('contributors.pagination');
 
@@ -410,7 +356,7 @@ class ProjectController extends Controller
             $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
 
             return $response;
-        } catch (FileNotFoundException $exception) {
+        } catch (FileNotFoundException) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 
@@ -450,7 +396,7 @@ class ProjectController extends Controller
             $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
 
             return $response;
-        } catch (FileNotFoundException $exception) {
+        } catch (FileNotFoundException) {
             // We create a session for flashBag
             $flashBag = $this->get('session')->getFlashBag();
 

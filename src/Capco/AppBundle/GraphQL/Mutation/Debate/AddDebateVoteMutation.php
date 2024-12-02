@@ -25,27 +25,8 @@ class AddDebateVoteMutation implements MutationInterface
     final public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
     final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
 
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly DebateVoteRepository $repository;
-    private readonly Indexer $indexer;
-    private readonly RequestGuesser $requestGuesser;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        DebateVoteRepository $repository,
-        Indexer $indexer,
-        RequestGuesser $requestGuesser
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->repository = $repository;
-        $this->indexer = $indexer;
-        $this->requestGuesser = $requestGuesser;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly DebateVoteRepository $repository, private readonly Indexer $indexer, private readonly RequestGuesser $requestGuesser)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

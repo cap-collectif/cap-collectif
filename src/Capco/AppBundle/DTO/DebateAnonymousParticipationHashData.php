@@ -8,13 +8,10 @@ class DebateAnonymousParticipationHashData
 {
     private readonly string $type;
 
-    private readonly string $token;
-
-    private function __construct(string $type, string $token)
+    private function __construct(string $type, private readonly string $token)
     {
         ForOrAgainstType::checkIsValid($type);
         $this->type = $type;
-        $this->token = $token;
     }
 
     public static function fromHash(string $hash): self

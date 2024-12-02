@@ -145,10 +145,8 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
 
     /**
      * Get Repository.
-     *
-     * @param mixed $repo
      */
-    protected function getRepository($repo)
+    protected function getRepository(mixed $repo)
     {
         return $this->getEntityManager()->getRepository($repo);
     }

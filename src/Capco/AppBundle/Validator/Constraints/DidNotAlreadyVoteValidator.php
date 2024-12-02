@@ -10,11 +10,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class DidNotAlreadyVoteValidator extends ConstraintValidator
 {
-    private $entityManager;
-
-    public function __construct(EntityManagerInterface $entityManager)
+    public function __construct(private readonly EntityManagerInterface $entityManager)
     {
-        $this->entityManager = $entityManager;
     }
 
     public function validate($object, Constraint $constraint)

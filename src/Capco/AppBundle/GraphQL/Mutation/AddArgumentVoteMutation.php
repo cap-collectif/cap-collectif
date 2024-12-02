@@ -23,27 +23,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class AddArgumentVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly ArgumentRepository $argumentRepo;
-    private readonly ArgumentVoteRepository $argumentVoteRepo;
-    private readonly RedisStorageHelper $redisStorageHelper;
-    private readonly StepRequirementsResolver $stepRequirementsResolver;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ArgumentRepository $argumentRepo,
-        ArgumentVoteRepository $argumentVoteRepo,
-        RedisStorageHelper $redisStorageHelper,
-        StepRequirementsResolver $stepRequirementsResolver,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->argumentRepo = $argumentRepo;
-        $this->argumentVoteRepo = $argumentVoteRepo;
-        $this->redisStorageHelper = $redisStorageHelper;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ArgumentRepository $argumentRepo, private readonly ArgumentVoteRepository $argumentVoteRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -19,21 +19,8 @@ class DeleteDebateOpinionMutation implements MutationInterface
 
     final public const UNKNOWN_DEBATE_OPINION = 'UNKNOWN_DEBATE_OPINION';
 
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Arg $input): array

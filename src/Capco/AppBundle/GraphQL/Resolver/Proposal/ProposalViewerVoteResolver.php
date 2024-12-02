@@ -13,15 +13,9 @@ use Psr\Log\LoggerInterface;
 class ProposalViewerVoteResolver implements QueryInterface
 {
     use ResolverTrait;
-    private $logger;
-    private $proposalViewerVoteDataLoader;
 
-    public function __construct(
-        ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
-        $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
+    public function __construct(private ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Proposal $proposal, Arg $args, $viewer): Promise

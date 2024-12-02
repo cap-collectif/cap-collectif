@@ -95,29 +95,19 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         EOF;
 
     protected static $defaultName = 'capco:export:user';
-    protected UserRepository $userRepository;
-    protected UserArchiveRepository $userArchiveRepository;
-    protected EntityManagerInterface $em;
-    protected Executor $executor;
     protected GraphQlAclListener $listener;
-    protected string $projectRootDir;
 
     public function __construct(
-        UserRepository $userRepository,
-        UserArchiveRepository $userArchiveRepository,
-        EntityManagerInterface $em,
-        Executor $executor,
+        protected UserRepository $userRepository,
+        protected UserArchiveRepository $userArchiveRepository,
+        protected EntityManagerInterface $em,
+        protected Executor $executor,
         GraphQlAclListener $listener,
         ExportUtils $exportUtils,
-        string $projectRootDir
+        protected string $projectRootDir
     ) {
         $listener->disableAcl();
-        $this->userRepository = $userRepository;
-        $this->userArchiveRepository = $userArchiveRepository;
-        $this->em = $em;
-        $this->executor = $executor;
         $this->listener = $listener;
-        $this->projectRootDir = $projectRootDir;
 
         parent::__construct($exportUtils);
     }
@@ -496,7 +486,7 @@ class CreateCsvFromUserCommand extends BaseExportCommand
             foreach ($header as $columnKey => $columnName) {
                 if ($isNode) {
                     if (
-                        false !== strpos((string) $columnName, 'responses_')
+                        str_contains((string) $columnName, 'responses_')
                         && false === $responsesInserted
                     ) {
                         $responsesDatas = $this->handleMultipleResponsesForQuestions(
@@ -594,53 +584,41 @@ class CreateCsvFromUserCommand extends BaseExportCommand
     {
         $infoResolver = new InfoResolver();
 
-        switch ($type) {
-            case 'proposals':
-                $header = self::PROPOSAL_EXPORT_PATHS;
+        $header = match ($type) {
+            'proposals' => self::PROPOSAL_EXPORT_PATHS,
+            'connections' => self::CONNECTIONS_EXPORT_PATHS,
+            'comments' => array_keys(self::COMMENTS_EXPORT_PATHS),
+            default => array_map(
+                function (string $header) use ($type) {
+                    $header = str_replace('data_node_', '', $header);
 
-                break;
+                    if ('medias' === $type) {
+                        $header = str_replace('medias_', '', $header);
+                    } elseif ('groups' === $type) {
+                        $header = str_replace('groups_edges_node_', '', $header);
+                    } elseif ('reports' === $type) {
+                        $header = str_replace('reports_edges_node_', '', $header);
+                    } elseif ('events' === $type) {
+                        $header = str_replace('events_edges_node_', '', $header);
+                    } elseif ('votes' === $type) {
+                        $header = str_replace('votes_edges_node_', '', $header);
+                    } else {
+                        $header = str_replace('contributions_edges_node_', '', $header);
+                    }
 
-            case 'connections':
-                $header = self::CONNECTIONS_EXPORT_PATHS;
-
-                break;
-
-            case 'comments':
-                $header = array_keys(self::COMMENTS_EXPORT_PATHS);
-
-                break;
-
-            default:
-                $header = array_map(
-                    function (string $header) use ($type) {
-                        $header = str_replace('data_node_', '', $header);
-
-                        if ('medias' === $type) {
-                            $header = str_replace('medias_', '', $header);
-                        } elseif ('groups' === $type) {
-                            $header = str_replace('groups_edges_node_', '', $header);
-                        } elseif ('reports' === $type) {
-                            $header = str_replace('reports_edges_node_', '', $header);
-                        } elseif ('events' === $type) {
-                            $header = str_replace('events_edges_node_', '', $header);
-                        } elseif ('votes' === $type) {
-                            $header = str_replace('votes_edges_node_', '', $header);
-                        } else {
-                            $header = str_replace('contributions_edges_node_', '', $header);
-                        }
-
-                        return $header;
-                    },
-                    array_filter($infoResolver->guessHeadersFromFields($data), function (
+                    return $header;
+                },
+                array_filter(
+                    $infoResolver->guessHeadersFromFields($data),
+                    function (
                         string $header
                     ) {
                         return 'data_node_contributions_edges_node_responses___typename' !==
-                            $header;
-                    })
-                );
-
-                break;
-        }
+                        $header;
+                    }
+                )
+            ),
+        };
 
         return $header;
     }

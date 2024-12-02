@@ -6,30 +6,24 @@ trait NotificationsStepTrait
 {
     /**
      * @When /^I go to an email notifications preferences link with token "([^"]+)"$/
-     *
-     * @param mixed $token
      */
-    public function iGoToAnEmailNotificationsPreferencesLinkWithToken($token)
+    public function iGoToAnEmailNotificationsPreferencesLinkWithToken(mixed $token)
     {
         $this->visitPath("/profile/notifications/{$token}");
     }
 
     /**
      * @When /^I go to an email disable notifications link with token "([^"]+)"$/
-     *
-     * @param mixed $token
      */
-    public function iGoToEmailDisableNotificationPreferencesLink($token)
+    public function iGoToEmailDisableNotificationPreferencesLink(mixed $token)
     {
         $this->visitPath("/profile/notifications/disable/{$token}");
     }
 
     /**
      * @Then /^user with unsubscribe token "([^"]+)" should have his notifications disabled$/
-     *
-     * @param mixed $token
      */
-    public function userWithUnsubscribeTokenShouldHaveDisabledNotifications($token)
+    public function userWithUnsubscribeTokenShouldHaveDisabledNotifications(mixed $token)
     {
         $userNotifications = $this->getRepository(
             'CapcoAppBundle:UserNotificationsConfiguration'

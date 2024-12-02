@@ -25,13 +25,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class StepFactory
 {
-    private readonly TranslatorInterface $translator;
-    private readonly string $locale;
-
-    public function __construct(TranslatorInterface $translator, string $locale)
+    public function __construct(private readonly TranslatorInterface $translator, private readonly string $locale)
     {
-        $this->translator = $translator;
-        $this->locale = $locale;
     }
 
     public function createCollectStep(): CollectStep

@@ -30,39 +30,8 @@ class SubscribeNewsletterMutation implements MutationInterface
     final public const RATE_LIMITER_ACTION = 'RegisterMutation';
     final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    private readonly Manager $toggleManager;
-    private readonly LoggerInterface $logger;
-    private readonly CaptchaChecker $captchaChecker;
-    private readonly RequestGuesser $requestGuesser;
-    private readonly FormFactoryInterface $formFactory;
-    private EntityManagerInterface $entityManager;
-    private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    private readonly UserRepository $userRepository;
-    private readonly RateLimiter $rateLimiter;
-    private readonly SendInBluePublisher $sendInBluePublisher;
-
-    public function __construct(
-        Manager $toggleManager,
-        LoggerInterface $logger,
-        CaptchaChecker $captchaChecker,
-        RequestGuesser $requestGuesser,
-        FormFactoryInterface $formFactory,
-        EntityManagerInterface $entityManager,
-        NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
-        UserRepository $userRepository,
-        RateLimiter $rateLimiter,
-        SendInBluePublisher $sendInBluePublisher
-    ) {
-        $this->toggleManager = $toggleManager;
-        $this->logger = $logger;
-        $this->captchaChecker = $captchaChecker;
-        $this->requestGuesser = $requestGuesser;
-        $this->formFactory = $formFactory;
-        $this->entityManager = $entityManager;
-        $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
-        $this->userRepository = $userRepository;
-        $this->rateLimiter = $rateLimiter;
-        $this->sendInBluePublisher = $sendInBluePublisher;
+    public function __construct(private readonly Manager $toggleManager, private readonly LoggerInterface $logger, private readonly CaptchaChecker $captchaChecker, private readonly RequestGuesser $requestGuesser, private readonly FormFactoryInterface $formFactory, private EntityManagerInterface $entityManager, private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly UserRepository $userRepository, private readonly RateLimiter $rateLimiter, private readonly SendInBluePublisher $sendInBluePublisher)
+    {
     }
 
     public function __invoke(Argument $args): array

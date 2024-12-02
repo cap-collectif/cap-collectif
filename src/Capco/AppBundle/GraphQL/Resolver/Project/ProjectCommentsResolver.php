@@ -12,15 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class ProjectCommentsResolver implements QueryInterface
 {
-    private $logger;
-    private $proposalCommentRepository;
-
-    public function __construct(
-        ProposalCommentRepository $proposalCommentRepository,
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
-        $this->proposalCommentRepository = $proposalCommentRepository;
+    public function __construct(private readonly ProposalCommentRepository $proposalCommentRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Project $project, Argument $args): Connection

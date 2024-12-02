@@ -9,11 +9,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ThemeUrlResolver implements QueryInterface
 {
-    private $router;
-
-    public function __construct(RouterInterface $router)
+    public function __construct(private readonly RouterInterface $router)
     {
-        $this->router = $router;
     }
 
     public function __invoke(Theme $theme): string

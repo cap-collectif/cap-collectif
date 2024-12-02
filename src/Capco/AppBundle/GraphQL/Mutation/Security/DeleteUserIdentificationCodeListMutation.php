@@ -17,15 +17,8 @@ class DeleteUserIdentificationCodeListMutation implements MutationInterface
 
     final public const NOT_FOUND = 'NOT_FOUND';
 
-    private readonly EntityManagerInterface $em;
-    private readonly UserIdentificationCodeListRepository $repository;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        UserIdentificationCodeListRepository $repository
-    ) {
-        $this->em = $em;
-        $this->repository = $repository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly UserIdentificationCodeListRepository $repository)
+    {
     }
 
     public function __invoke(Argument $input): array

@@ -22,24 +22,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class AddVersionMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $opinionRepo;
-    private $formFactory;
-    private $redisStorage;
-    private $logger;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        OpinionRepository $opinionRepo,
-        RedisStorageHelper $redisStorage,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->opinionRepo = $opinionRepo;
-        $this->redisStorage = $redisStorage;
-        $this->logger = $logger;
+    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private OpinionRepository $opinionRepo, private RedisStorageHelper $redisStorage, private LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

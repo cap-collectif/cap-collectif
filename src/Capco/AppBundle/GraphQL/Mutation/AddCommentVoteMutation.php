@@ -22,24 +22,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class AddCommentVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly CommentRepository $commentRepo;
-    private readonly CommentVoteRepository $commentVoteRepo;
-    private readonly RedisStorageHelper $redisStorageHelper;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        CommentRepository $commentRepo,
-        CommentVoteRepository $commentVoteRepo,
-        RedisStorageHelper $redisStorageHelper,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->commentRepo = $commentRepo;
-        $this->commentVoteRepo = $commentVoteRepo;
-        $this->redisStorageHelper = $redisStorageHelper;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly CommentRepository $commentRepo, private readonly CommentVoteRepository $commentVoteRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -25,39 +25,8 @@ class RemoveProposalSmsVoteMutation implements MutationInterface
 
     final public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
 
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
-    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly Indexer $indexer;
-    private readonly PhoneTokenRepository $phoneTokenRepository;
-    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        ProposalVotesDataLoader $proposalVotesDataLoader,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
-        ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
-        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
-        Indexer $indexer,
-        GlobalIdResolver $globalIdResolver,
-        PhoneTokenRepository $phoneTokenRepository,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler
-    ) {
-        $this->em = $em;
-        $this->proposalVotesDataLoader = $proposalVotesDataLoader;
-        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
-        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
-        $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
-        $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
-        $this->indexer = $indexer;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->phoneTokenRepository = $phoneTokenRepository;
-        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository, private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly Indexer $indexer, private readonly GlobalIdResolver $globalIdResolver, private readonly PhoneTokenRepository $phoneTokenRepository, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler)
+    {
     }
 
     public function __invoke(Argument $input): array

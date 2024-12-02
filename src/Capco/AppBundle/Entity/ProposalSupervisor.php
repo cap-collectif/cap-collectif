@@ -21,26 +21,26 @@ class ProposalSupervisor implements Timestampable
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="supervisedProposals")
      * @ORM\JoinColumn(nullable=false, referencedColumnName="id")
      */
-    private $supervisor;
+    private User $supervisor;
 
     /**
      * @ORM\Id()
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="supervisor")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private $proposal;
+    private Proposal $proposal;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="assigned_by",  referencedColumnName="id", nullable=true)
      */
-    private $assignedBy;
+    private User $assignedBy;
 
     /**
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", name="updated_at")
      */
-    private $updatedAt;
+    private ?\DateTimeInterface $updatedAt;
 
     public function __construct(Proposal $proposal, User $supervisor)
     {

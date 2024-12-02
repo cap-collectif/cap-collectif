@@ -4,7 +4,7 @@ namespace Capco\ClassificationBundle\Entity;
 
 use Cocur\Slugify\Slugify;
 
-class Tag
+class Tag implements \Stringable
 {
     protected int $id;
     protected ?string $name;
@@ -14,7 +14,7 @@ class Tag
     protected bool $enabled;
     protected ?Context $context;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }

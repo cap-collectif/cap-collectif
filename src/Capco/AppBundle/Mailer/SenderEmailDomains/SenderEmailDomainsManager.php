@@ -9,24 +9,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class SenderEmailDomainsManager
 {
-    private readonly string $environment;
-    private readonly SenderEmailDomainRepository $repository;
-    private readonly EntityManagerInterface $em;
-    private readonly MailjetClient $mailjetClient;
-    private readonly MandrillClient $mandrillClient;
-
-    public function __construct(
-        string $environment,
-        SenderEmailDomainRepository $repository,
-        EntityManagerInterface $em,
-        MailjetClient $mailjetClient,
-        MandrillClient $mandrillClient
-    ) {
-        $this->environment = $environment;
-        $this->repository = $repository;
-        $this->em = $em;
-        $this->mailjetClient = $mailjetClient;
-        $this->mandrillClient = $mandrillClient;
+    public function __construct(private readonly string $environment, private readonly SenderEmailDomainRepository $repository, private readonly EntityManagerInterface $em, private readonly MailjetClient $mailjetClient, private readonly MandrillClient $mandrillClient)
+    {
     }
 
     public function getSenderEmailDomains(): array

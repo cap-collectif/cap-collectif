@@ -19,28 +19,15 @@ class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInter
     final public const STRATEGY_PREFIX_EXCEPT_DEFAULT = 'prefix_except_default';
     final public const STRATEGY_CUSTOM = 'custom';
 
-    private $strategy;
-    private $translator;
-    private $translationDomain;
-    private $locales;
-    private $cacheDir;
-    private $defaultLocale;
-
     public function __construct(
-        $strategy,
-        TranslatorInterface $translator,
-        array $locales,
-        $cacheDir,
-        $translationDomain = 'routes',
+        private $strategy,
+        private readonly TranslatorInterface $translator,
+        private readonly array $locales,
+        private $cacheDir,
+        private $translationDomain = 'routes',
         //Not really a locale but the locale prefix, not used with our strategy (prefix all)
-        $defaultLocale = 'fr'
+        private $defaultLocale = 'fr'
     ) {
-        $this->strategy = $strategy;
-        $this->translator = $translator;
-        $this->translationDomain = $translationDomain;
-        $this->locales = $locales;
-        $this->cacheDir = $cacheDir;
-        $this->defaultLocale = $defaultLocale;
     }
 
     //Method to authorize having a locale different from prefix in url

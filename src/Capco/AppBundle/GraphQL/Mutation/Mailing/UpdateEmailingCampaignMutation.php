@@ -23,20 +23,15 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
     //when we set the sendAt date, it must be in more than 5mn to be sure the cron can pass.
     final public const SEND_AT_SECURITY = 5 * 60;
 
-    private readonly FormFactoryInterface $formFactory;
-    private readonly GlobalIdResolver $globalIdResolver;
-
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
         AuthorizationCheckerInterface $authorizationChecker,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver
     ) {
         parent::__construct($resolver, $entityManager, $authorizationChecker);
         $this->entityManager = $entityManager;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array

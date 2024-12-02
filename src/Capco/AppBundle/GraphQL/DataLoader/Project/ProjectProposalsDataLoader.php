@@ -18,11 +18,9 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProjectProposalsDataLoader extends BatchDataLoader
 {
-    private readonly ProposalSearch $proposalSearch;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        ProposalSearch $proposalSearch,
+        private readonly ProposalSearch $proposalSearch,
         RedisTagCache $cache,
         LoggerInterface $logger,
         string $cachePrefix,
@@ -44,7 +42,6 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             $stopwatch,
             $enableCache
         );
-        $this->proposalSearch = $proposalSearch;
     }
 
     public function invalidate(Project $project): void

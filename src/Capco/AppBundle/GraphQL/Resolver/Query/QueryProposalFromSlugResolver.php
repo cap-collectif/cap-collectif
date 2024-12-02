@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryProposalFromSlugResolver implements QueryInterface
 {
-    private readonly ProposalRepository $repository;
-
-    public function __construct(ProposalRepository $repository)
+    public function __construct(private readonly ProposalRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Argument $args, $viewer): ?Proposal

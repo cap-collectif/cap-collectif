@@ -7,11 +7,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class FranceConnectAllowedDataResolver implements QueryInterface
 {
-    private readonly FranceConnectSSOConfigurationRepository $configurationRepository;
-
-    public function __construct(FranceConnectSSOConfigurationRepository $configurationRepository)
+    public function __construct(private readonly FranceConnectSSOConfigurationRepository $configurationRepository)
     {
-        $this->configurationRepository = $configurationRepository;
     }
 
     public function __invoke(): array

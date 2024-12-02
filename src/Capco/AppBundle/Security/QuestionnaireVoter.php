@@ -46,25 +46,14 @@ class QuestionnaireVoter extends AbstractOwnerableVoter
         /** @var Questionnaire $questionnaire */
         $questionnaire = $subject;
 
-        switch ($attribute) {
-            case self::CREATE:
-                return self::canCreate($viewer);
-
-            case self::VIEW:
-                return self::canView($questionnaire, $viewer);
-
-            case self::EDIT:
-                return self::canEdit($questionnaire, $viewer);
-
-            case self::DELETE:
-                return self::canDelete($questionnaire, $viewer);
-
-            case self::EXPORT:
-                return self::canExport($questionnaire, $viewer);
-
-            default:
-                return false;
-        }
+        return match ($attribute) {
+            self::CREATE => self::canCreate($viewer),
+            self::VIEW => self::canView($questionnaire, $viewer),
+            self::EDIT => self::canEdit($questionnaire, $viewer),
+            self::DELETE => self::canDelete($questionnaire, $viewer),
+            self::EXPORT => self::canExport($questionnaire, $viewer),
+            default => false,
+        };
     }
 
     private static function canExport(Questionnaire $questionnaire, User $viewer): bool

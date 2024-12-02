@@ -19,35 +19,14 @@ class RecentContributionsResolver
 
     public function getEntityByTypeAndId($type, $id)
     {
-        switch ($type) {
-            case 'argument':
-                $result = $this->em->getRepository('CapcoAppBundle:Argument')->find($id);
-
-                break;
-
-            case 'opinion':
-                $result = $this->em->getRepository('CapcoAppBundle:Opinion')->find($id);
-
-                break;
-
-            case 'version':
-                $result = $this->em->getRepository('CapcoAppBundle:OpinionVersion')->find($id);
-
-                break;
-
-            case 'source':
-                $result = $this->em->getRepository('CapcoAppBundle:Source')->find($id);
-
-                break;
-
-            case 'comment':
-                $result = $this->em->getRepository('CapcoAppBundle:Comment')->find($id);
-
-                break;
-
-            default:
-                throw new NotFoundHttpException('Contribution not found for type ' . $type . ' and id ' . $id);
-        }
+        $result = match ($type) {
+            'argument' => $this->em->getRepository('CapcoAppBundle:Argument')->find($id),
+            'opinion' => $this->em->getRepository('CapcoAppBundle:Opinion')->find($id),
+            'version' => $this->em->getRepository('CapcoAppBundle:OpinionVersion')->find($id),
+            'source' => $this->em->getRepository('CapcoAppBundle:Source')->find($id),
+            'comment' => $this->em->getRepository('CapcoAppBundle:Comment')->find($id),
+            default => throw new NotFoundHttpException('Contribution not found for type ' . $type . ' and id ' . $id),
+        };
 
         return $result;
     }

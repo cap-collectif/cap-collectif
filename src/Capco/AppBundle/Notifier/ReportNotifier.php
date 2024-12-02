@@ -13,20 +13,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 final class ReportNotifier extends BaseNotifier
 {
-    protected TranslatorInterface $translator;
-    protected UrlResolver $urlResolver;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        TranslatorInterface $translator,
-        UrlResolver $urlResolver,
+        protected TranslatorInterface $translator,
+        protected UrlResolver $urlResolver,
         RouterInterface $router,
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->translator = $translator;
-        $this->urlResolver = $urlResolver;
     }
 
     public function onCreate(Reporting $report)

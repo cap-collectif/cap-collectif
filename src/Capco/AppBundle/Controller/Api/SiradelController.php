@@ -17,21 +17,8 @@ class SiradelController extends AbstractController
 {
     use ResolverTrait;
 
-    private readonly UserUrlResolver $urlResolver;
-    private readonly UserIsGrantedResolver $isGrantedResolver;
-    private readonly RouterInterface $router;
-    private readonly UserRepository $userRepository;
-
-    public function __construct(
-        UserUrlResolver $urlResolver,
-        UserIsGrantedResolver $isGrantedResolver,
-        RouterInterface $router,
-        UserRepository $userRepository
-    ) {
-        $this->urlResolver = $urlResolver;
-        $this->isGrantedResolver = $isGrantedResolver;
-        $this->router = $router;
-        $this->userRepository = $userRepository;
+    public function __construct(private readonly UserUrlResolver $urlResolver, private readonly UserIsGrantedResolver $isGrantedResolver, private readonly RouterInterface $router, private readonly UserRepository $userRepository)
+    {
     }
 
     /**
@@ -44,7 +31,7 @@ class SiradelController extends AbstractController
 
         try {
             $this->preventNullableViewer($user);
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             return $this->json(['error' => 'not connected user'], 403);
         }
 

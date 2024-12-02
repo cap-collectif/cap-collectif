@@ -103,7 +103,7 @@ class ProposalCollectSmsVote extends AbstractProposalVote
             if ($this->proposal && !$this->proposal->isDeleted()) {
                 return $this->proposal;
             }
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFoundException) {
         }
 
         return null;

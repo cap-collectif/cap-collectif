@@ -13,18 +13,9 @@ use Psr\Log\LoggerInterface;
 class DeleteFontMutation implements MutationInterface
 {
     use MutationTrait;
-    private $repository;
-    private $logger;
-    private $manager;
 
-    public function __construct(
-        FontManager $manager,
-        FontRepository $repository,
-        LoggerInterface $logger
-    ) {
-        $this->repository = $repository;
-        $this->logger = $logger;
-        $this->manager = $manager;
+    public function __construct(private FontManager $manager, private FontRepository $repository, private LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Arg $input): array
@@ -48,7 +39,7 @@ class DeleteFontMutation implements MutationInterface
 
         try {
             $this->manager->deleteFont($font);
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return [
                 'userErrors' => [
                     [

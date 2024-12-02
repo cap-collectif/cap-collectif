@@ -8,11 +8,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class StepsRuntime implements RuntimeExtensionInterface
 {
-    protected StepResolver $resolver;
-
-    public function __construct(StepResolver $resolver)
+    public function __construct(protected StepResolver $resolver)
     {
-        $this->resolver = $resolver;
     }
 
     public function getFirstStepLink(Project $project, bool $absolute = false): string

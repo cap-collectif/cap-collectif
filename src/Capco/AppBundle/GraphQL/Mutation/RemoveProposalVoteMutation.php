@@ -26,45 +26,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 class RemoveProposalVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalRepository $proposalRepo;
-    private readonly AbstractStepRepository $stepRepo;
-    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ProposalRepository $proposalRepo,
-        AbstractStepRepository $stepRepo,
-        ProposalVotesDataLoader $proposalVotesDataLoader,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
-        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
-        ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler,
-        Indexer $indexer,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->em = $em;
-        $this->stepRepo = $stepRepo;
-        $this->proposalRepo = $proposalRepo;
-        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
-        $this->proposalVotesDataLoader = $proposalVotesDataLoader;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
-        $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
-        $this->indexer = $indexer;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalRepository $proposalRepo, private readonly AbstractStepRepository $stepRepo, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly Indexer $indexer, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(Argument $input, User $user): array

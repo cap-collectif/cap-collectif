@@ -17,21 +17,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteUserReplyMutation implements MutationInterface
 {
-    private readonly EntityManagerInterface $em;
-    private readonly ReplyRepository $replyRepo;
-    private readonly Publisher $publisher;
-    private readonly Indexer $indexer;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        ReplyRepository $replyRepo,
-        Publisher $publisher,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->replyRepo = $replyRepo;
-        $this->publisher = $publisher;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ReplyRepository $replyRepo, private readonly Publisher $publisher, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(string $id, User $viewer): array

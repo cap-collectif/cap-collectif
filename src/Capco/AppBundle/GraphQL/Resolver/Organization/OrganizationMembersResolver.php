@@ -12,15 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OrganizationMembersResolver implements QueryInterface
 {
-    private readonly OrganizationMemberRepository $memberRepository;
-    private readonly OrganizationAdminAccessResolver $organizationAdminAccessResolver;
-
-    public function __construct(
-        OrganizationAdminAccessResolver $organizationAdminAccessResolver,
-        OrganizationMemberRepository $memberRepository
-    ) {
-        $this->memberRepository = $memberRepository;
-        $this->organizationAdminAccessResolver = $organizationAdminAccessResolver;
+    public function __construct(private readonly OrganizationAdminAccessResolver $organizationAdminAccessResolver, private readonly OrganizationMemberRepository $memberRepository)
+    {
     }
 
     public function __invoke(

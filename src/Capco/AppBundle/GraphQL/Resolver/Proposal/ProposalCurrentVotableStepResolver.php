@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalCurrentVotableStepResolver implements QueryInterface
 {
-    private readonly ProposalCurrentVotableStepDataLoader $dataLoader;
-
-    public function __construct(ProposalCurrentVotableStepDataLoader $dataLoader)
+    public function __construct(private readonly ProposalCurrentVotableStepDataLoader $dataLoader)
     {
-        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(Proposal $proposal): Promise

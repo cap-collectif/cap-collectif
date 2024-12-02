@@ -45,30 +45,16 @@ class ProjectVoter extends AbstractOwnerableVoter
             return false;
         }
 
-        switch ($attribute) {
-            case self::VIEW:
-                return self::canView($subject, $viewer);
-
-            case self::EDIT:
-                return self::canEdit($subject, $viewer);
-
-            case self::CREATE:
-                return self::canCreate($viewer);
-
-            case self::DELETE:
-                return self::canDelete($subject, $viewer);
-
-            case self::EXPORT:
-                return self::canDownloadExport($subject, $viewer);
-
-            case self::CREATE_PROPOSAL_FROM_BO:
-                return self::canCreateProposalFromBo($subject, $viewer);
-
-            case self::DUPLICATE:
-                return self::canDuplicate($subject, $viewer);
-        }
-
-        return false;
+        return match ($attribute) {
+            self::VIEW => self::canView($subject, $viewer),
+            self::EDIT => self::canEdit($subject, $viewer),
+            self::CREATE => self::canCreate($viewer),
+            self::DELETE => self::canDelete($subject, $viewer),
+            self::EXPORT => self::canDownloadExport($subject, $viewer),
+            self::CREATE_PROPOSAL_FROM_BO => self::canCreateProposalFromBo($subject, $viewer),
+            self::DUPLICATE => self::canDuplicate($subject, $viewer),
+            default => false,
+        };
     }
 
     private static function canDownloadExport(Project $project, User $viewer): bool

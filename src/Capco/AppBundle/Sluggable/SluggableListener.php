@@ -175,7 +175,7 @@ class SluggableListener extends Base
         $ea = $this->getEventAdapter($args);
         $om = $ea->getObjectManager();
         $object = $ea->getObject();
-        $meta = $om->getClassMetadata(\get_class($object));
+        $meta = $om->getClassMetadata($object::class);
         if ($config = $this->getConfiguration($om, $meta->name)) {
             foreach ($config['slugs'] as $slugField => $options) {
                 if ($meta->isIdentifier($slugField)) {
@@ -200,7 +200,7 @@ class SluggableListener extends Base
         // of prePersist in case if record will be changed before flushing this will
         // ensure correct result. No additional overhead is encountered
         foreach ($ea->getScheduledObjectInsertions($uow) as $object) {
-            $meta = $om->getClassMetadata(\get_class($object));
+            $meta = $om->getClassMetadata($object::class);
             if ($this->getConfiguration($om, $meta->name)) {
                 // generate first to exclude this object from similar persisted slugs result
                 $this->generateSlug($ea, $object);
@@ -210,7 +210,7 @@ class SluggableListener extends Base
         // we use onFlush and not preUpdate event to let other
         // event listeners be nested together
         foreach ($ea->getScheduledObjectUpdates($uow) as $object) {
-            $meta = $om->getClassMetadata(\get_class($object));
+            $meta = $om->getClassMetadata($object::class);
             if ($this->getConfiguration($om, $meta->name) && !$uow->isScheduledForInsert($object)) {
                 $this->generateSlug($ea, $object);
                 $this->persisted[$ea->getRootObjectClass($meta)][] = $object;
@@ -230,7 +230,7 @@ class SluggableListener extends Base
      */
     protected function getEventAdapter(EventArgs $args)
     {
-        $class = \get_class($args);
+        $class = $args::class;
         if (preg_match('@Doctrine\\\([^\\\]+)@', $class, $m) && \in_array($m[1], ['ODM', 'ORM'])) {
             if (!isset($this->adapters[$m[1]])) {
                 $this->adapters[$m[1]] = new CapcoORMSluggableAdapter();
@@ -267,7 +267,7 @@ class SluggableListener extends Base
     private function generateSlug(SluggableAdapter $ea, $object)
     {
         $om = $ea->getObjectManager();
-        $meta = $om->getClassMetadata(\get_class($object));
+        $meta = $om->getClassMetadata($object::class);
         $uow = $om->getUnitOfWork();
         $changeSet = $ea->getObjectChangeSet($uow, $object);
         $isInsert = $uow->isScheduledForInsert($object);
@@ -444,7 +444,7 @@ class SluggableListener extends Base
         $config = []
     ) {
         $om = $ea->getObjectManager();
-        $meta = $om->getClassMetadata(\get_class($object));
+        $meta = $om->getClassMetadata($object::class);
         $similarPersisted = [];
         // extract unique base
         $base = false;

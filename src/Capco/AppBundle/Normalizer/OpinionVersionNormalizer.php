@@ -15,18 +15,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class OpinionVersionNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private readonly ObjectNormalizer $normalizer;
-    private readonly VoteSearch $voteSearch;
-    private readonly ArgumentRepository $argumentRepository;
 
-    public function __construct(
-        ObjectNormalizer $normalizer,
-        VoteSearch $voteSearch,
-        ArgumentRepository $argumentRepository
-    ) {
-        $this->normalizer = $normalizer;
-        $this->voteSearch = $voteSearch;
-        $this->argumentRepository = $argumentRepository;
+    public function __construct(private readonly ObjectNormalizer $normalizer, private readonly VoteSearch $voteSearch, private readonly ArgumentRepository $argumentRepository)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

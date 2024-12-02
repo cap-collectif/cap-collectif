@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AvailableQuestionnaireResolver implements QueryInterface
 {
-    private $questionnaireRepository;
-
-    public function __construct(QuestionnaireRepository $questionnaireRepository)
+    public function __construct(private readonly QuestionnaireRepository $questionnaireRepository)
     {
-        $this->questionnaireRepository = $questionnaireRepository;
     }
 
     public function __invoke(Argument $args): array

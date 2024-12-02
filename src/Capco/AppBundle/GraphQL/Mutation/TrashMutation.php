@@ -20,18 +20,8 @@ class TrashMutation implements MutationInterface
 
     final public const TRASHABLE_NOT_FOUND = 'TRASHABLE_NOT_FOUND';
 
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly Indexer $indexer;
-
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        Indexer $indexer
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->indexer = $indexer;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

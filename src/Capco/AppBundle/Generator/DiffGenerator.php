@@ -9,11 +9,8 @@ use Caxy\HtmlDiffBundle\Service\HtmlDiffService;
 
 class DiffGenerator
 {
-    protected HtmlDiffService $diffService;
-
-    public function __construct(HtmlDiffService $diffService)
+    public function __construct(protected HtmlDiffService $diffService)
     {
-        $this->diffService = $diffService;
     }
 
     public function generate(HasDiffInterface $entity)

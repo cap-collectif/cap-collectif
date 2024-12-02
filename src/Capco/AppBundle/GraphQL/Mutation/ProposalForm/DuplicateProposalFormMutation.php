@@ -17,16 +17,13 @@ class DuplicateProposalFormMutation extends AbstractProposalFormMutation
 {
     use MutationTrait;
 
-    private readonly TranslatorInterface $translator;
-
     public function __construct(
         EntityManagerInterface $entityManager,
         GlobalIdResolver $globalIdResolver,
-        TranslatorInterface $translator,
+        private readonly TranslatorInterface $translator,
         AuthorizationCheckerInterface $authorizationChecker
     ) {
         parent::__construct($entityManager, $globalIdResolver, $authorizationChecker);
-        $this->translator = $translator;
     }
 
     public function __invoke(Argument $input, User $viewer): array

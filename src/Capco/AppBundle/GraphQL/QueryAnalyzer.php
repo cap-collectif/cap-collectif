@@ -9,18 +9,8 @@ use GraphQL\Type\Definition\ResolveInfo;
 
 class QueryAnalyzer
 {
-    private $indexer;
-    private $typeResolver;
-    private $toggleManager;
-
-    public function __construct(
-        Indexer $indexer,
-        TypeResolver $typeResolver,
-        Manager $toggleManager
-    ) {
-        $this->indexer = $indexer;
-        $this->typeResolver = $typeResolver;
-        $this->toggleManager = $toggleManager;
+    public function __construct(private readonly Indexer $indexer, private readonly TypeResolver $typeResolver, private readonly Manager $toggleManager)
+    {
     }
 
     /**

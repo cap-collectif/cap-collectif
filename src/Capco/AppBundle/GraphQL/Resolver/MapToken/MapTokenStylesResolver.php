@@ -11,18 +11,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MapTokenStylesResolver implements QueryInterface
 {
-    private readonly MapboxClient $mapboxClient;
-    private ?string $defaultMapboxPublicToken = null;
-    private ?string $defaultMapboxSecretKey = null;
-
-    public function __construct(
-        MapboxClient $mapboxClient,
-        string $defaultMapboxPublicToken,
-        string $defaultMapboxSecretKey
-    ) {
-        $this->mapboxClient = $mapboxClient;
-        $this->defaultMapboxPublicToken = $defaultMapboxPublicToken;
-        $this->defaultMapboxSecretKey = $defaultMapboxSecretKey;
+    public function __construct(private readonly MapboxClient $mapboxClient, private readonly ?string $defaultMapboxPublicToken, private readonly ?string $defaultMapboxSecretKey)
+    {
     }
 
     public function __invoke(Argument $args, MapToken $mapToken)

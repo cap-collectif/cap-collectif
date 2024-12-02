@@ -18,11 +18,8 @@ use Symfony\Component\Validator\Constraints\Valid;
 
 class ProposalFormUpdateType extends AbstractType
 {
-    protected Manager $toggleManager;
-
-    public function __construct(Manager $toggleManager)
+    public function __construct(protected Manager $toggleManager)
     {
-        $this->toggleManager = $toggleManager;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

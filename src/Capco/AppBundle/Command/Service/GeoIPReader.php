@@ -6,11 +6,8 @@ use Capco\AppBundle\Client\CloudflareElasticClient;
 
 class GeoIPReader
 {
-    private readonly CloudflareElasticClient $cloudflareElasticClient;
-
-    public function __construct(CloudflareElasticClient $cloudflareElasticClient)
+    public function __construct(private readonly CloudflareElasticClient $cloudflareElasticClient)
     {
-        $this->cloudflareElasticClient = $cloudflareElasticClient;
     }
 
     /**

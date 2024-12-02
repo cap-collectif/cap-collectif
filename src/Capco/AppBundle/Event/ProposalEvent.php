@@ -8,12 +8,10 @@ use Symfony\Component\EventDispatcher\Event;
 class ProposalEvent extends Event
 {
     protected $proposal;
-    protected $action;
 
-    public function __construct(Proposal $proposal, $action)
+    public function __construct(Proposal $proposal, protected $action)
     {
         $this->proposal = $proposal;
-        $this->action = $action;
     }
 
     public function getProposal()

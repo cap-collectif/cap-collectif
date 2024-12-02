@@ -20,21 +20,15 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class StepVotesCountDataLoader extends BatchDataLoader
 {
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly VoteSearch $voteSearch;
-    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
-        VoteSearch $voteSearch,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
+        private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
+        private readonly VoteSearch $voteSearch,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -42,11 +36,6 @@ class StepVotesCountDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
-        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
-        $this->voteSearch = $voteSearch;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

@@ -16,21 +16,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class DeleteSourceMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $sourceRepo;
-    private $redisStorage;
-    private $stepRequirementsResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        SourceRepository $sourceRepo,
-        RedisStorageHelper $redisStorage,
-        StepRequirementsResolver $stepRequirementsResolver
-    ) {
-        $this->em = $em;
-        $this->sourceRepo = $sourceRepo;
-        $this->redisStorage = $redisStorage;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
+    public function __construct(private EntityManagerInterface $em, private SourceRepository $sourceRepo, private RedisStorageHelper $redisStorage, private StepRequirementsResolver $stepRequirementsResolver)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

@@ -34,12 +34,9 @@ class AnonymousArgumentNormalizerTest extends TestCase
     /**
      * @dataProvider normalizationDataProvider
      *
-     * @param mixed $context
-     * @param mixed $expectedResult
-     *
      * @throws ExceptionInterface
      */
-    public function testNormalize($context, $expectedResult)
+    public function testNormalize(mixed $context, mixed $expectedResult)
     {
         $debate = new Debate();
         $anonymousArgument = new DebateAnonymousArgument($debate);

@@ -31,9 +31,6 @@ class AddEventMutation extends AbstractEventMutation
 {
     use MutationTrait;
 
-    private readonly SettableOwnerResolver $settableOwnerResolver;
-    private readonly LocaleRepository $localeRepository;
-
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -42,8 +39,8 @@ class AddEventMutation extends AbstractEventMutation
         Publisher $publisher,
         AuthorizationCheckerInterface $authorizationChecker,
         TranslatorInterface $translator,
-        SettableOwnerResolver $settableOwnerResolver,
-        LocaleRepository $localeRepository
+        private readonly SettableOwnerResolver $settableOwnerResolver,
+        private readonly LocaleRepository $localeRepository
     ) {
         parent::__construct(
             $em,
@@ -54,8 +51,6 @@ class AddEventMutation extends AbstractEventMutation
             $authorizationChecker,
             $translator
         );
-        $this->settableOwnerResolver = $settableOwnerResolver;
-        $this->localeRepository = $localeRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array

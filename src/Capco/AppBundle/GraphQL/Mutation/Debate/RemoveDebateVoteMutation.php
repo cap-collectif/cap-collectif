@@ -27,27 +27,8 @@ class RemoveDebateVoteMutation implements MutationInterface
     final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     final public const NO_VOTE_FOUND = 'NO_VOTE_FOUND';
 
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly DebateVoteRepository $voteRepository;
-    private readonly DebateArgumentRepository $argumentRepository;
-    private readonly Indexer $indexer;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        DebateVoteRepository $voteRepository,
-        DebateArgumentRepository $argumentRepository,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->voteRepository = $voteRepository;
-        $this->argumentRepository = $argumentRepository;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly DebateVoteRepository $voteRepository, private readonly DebateArgumentRepository $argumentRepository, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

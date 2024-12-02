@@ -8,15 +8,12 @@ use Psr\Http\Message\ResponseInterface;
 class MailjetTransport implements \Swift_Transport
 {
     protected const API_URL = 'https://api.mailjet.com/v3.1/send';
-
-    protected \Swift_Events_EventDispatcher $dispatcher;
     private ?string $publicKey = null;
     private ?string $privateKey = null;
     private ?string $lastSentMessageId;
 
-    public function __construct(\Swift_Events_EventDispatcher $dispatcher)
+    public function __construct(protected \Swift_Events_EventDispatcher $dispatcher)
     {
-        $this->dispatcher = $dispatcher;
     }
 
     /**

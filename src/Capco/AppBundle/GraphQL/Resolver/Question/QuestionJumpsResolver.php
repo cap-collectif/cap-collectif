@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QuestionJumpsResolver implements QueryInterface
 {
-    private $dataLoader;
-
-    public function __construct(QuestionJumpsDataLoader $dataLoader)
+    public function __construct(private readonly QuestionJumpsDataLoader $dataLoader)
     {
-        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(AbstractQuestion $question, Arg $args): Promise

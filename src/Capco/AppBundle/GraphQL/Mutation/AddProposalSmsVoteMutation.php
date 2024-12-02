@@ -37,48 +37,8 @@ class AddProposalSmsVoteMutation implements MutationInterface
     final public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
     final public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
 
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
-    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly LoggerInterface $logger;
-    private readonly ValidatorInterface $validator;
-    private readonly RequestGuesser $requestGuesser;
-    private readonly PhoneTokenRepository $phoneTokenRepository;
-    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private readonly ContributionValidator $contributionValidator;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        ValidatorInterface $validator,
-        LoggerInterface $logger,
-        ProposalVotesDataLoader $proposalVotesDataLoader,
-        ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
-        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
-        GlobalIdResolver $globalIdResolver,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
-        RequestGuesser $requestGuesser,
-        PhoneTokenRepository $phoneTokenRepository,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler,
-        ContributionValidator $contributionValidator
-    ) {
-        $this->em = $em;
-        $this->validator = $validator;
-        $this->logger = $logger;
-        $this->proposalVotesDataLoader = $proposalVotesDataLoader;
-        $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
-        $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
-        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
-        $this->requestGuesser = $requestGuesser;
-        $this->phoneTokenRepository = $phoneTokenRepository;
-        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
-        $this->contributionValidator = $contributionValidator;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ValidatorInterface $validator, private readonly LoggerInterface $logger, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository, private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository, private readonly RequestGuesser $requestGuesser, private readonly PhoneTokenRepository $phoneTokenRepository, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly ContributionValidator $contributionValidator)
+    {
     }
 
     public function __invoke(Argument $input): array
@@ -143,7 +103,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
         if ($step instanceof SelectionStep && $phone) {
             try {
                 $this->contributionValidator->validatePhoneReusability($phone, $vote, $step, $token);
-            } catch (ContributorAlreadyUsedPhoneException $e) {
+            } catch (ContributorAlreadyUsedPhoneException) {
                 return ['errorCode' => self::PHONE_ALREADY_USED];
             }
         }
@@ -192,7 +152,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
             $this->proposalVotesDataLoader->invalidate($proposal);
             $this->proposalViewerVoteDataLoader->invalidate($proposal);
             $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
-        } catch (UniqueConstraintViolationException $e) {
+        } catch (UniqueConstraintViolationException) {
             return ['errorCode' => self::PROPOSAL_ALREADY_VOTED];
         }
 

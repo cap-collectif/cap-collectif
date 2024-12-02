@@ -15,20 +15,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class OpinionNotifier extends BaseNotifier
 {
-    protected OpinionUrlResolver $consultationResolver;
-    protected UserUrlResolver $userUrlResolver;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        OpinionUrlResolver $consultationResolver,
+        protected OpinionUrlResolver $consultationResolver,
         RouterInterface $router,
-        UserUrlResolver $userUrlResolver,
+        protected UserUrlResolver $userUrlResolver,
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->consultationResolver = $consultationResolver;
-        $this->userUrlResolver = $userUrlResolver;
     }
 
     public function onCreation(Opinion $opinion)

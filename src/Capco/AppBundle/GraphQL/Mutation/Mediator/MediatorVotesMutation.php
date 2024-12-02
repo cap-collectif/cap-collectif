@@ -13,15 +13,8 @@ use Overblog\GraphQLBundle\Definition\Argument;
 
 class MediatorVotesMutation
 {
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly Manager $manager;
-    private readonly UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
-
-    public function __construct(GlobalIdResolver $globalIdResolver, Manager $manager, UpdateParticipantRequirementMutation $updateParticipantRequirementMutation)
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly Manager $manager, private readonly UpdateParticipantRequirementMutation $updateParticipantRequirementMutation)
     {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->manager = $manager;
-        $this->updateParticipantRequirementMutation = $updateParticipantRequirementMutation;
     }
 
     /**

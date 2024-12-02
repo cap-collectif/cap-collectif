@@ -20,6 +20,7 @@ return $config
     ->setUsingCache(true)
     ->setRules(
         [
+        '@PHP80Migration' => true,
         '@PHP74Migration' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,

@@ -14,13 +14,8 @@ use Psr\Log\LoggerInterface;
 
 class QuestionnaireAdminRepliesResolver implements QueryInterface
 {
-    private readonly ReplySearch $replySearch;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(ReplySearch $replySearch, LoggerInterface $logger)
+    public function __construct(private readonly ReplySearch $replySearch, private readonly LoggerInterface $logger)
     {
-        $this->replySearch = $replySearch;
-        $this->logger = $logger;
     }
 
     public function __invoke(

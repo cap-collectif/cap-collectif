@@ -24,25 +24,17 @@ class ImportIDFProposalsFromCsvCommand extends Command
 {
     protected static $defaultName = 'capco:import:idf-proposals-from-csv';
     protected ?ProposalForm $proposalForm;
-    protected ProposalFormRepository $proposalFormRepository;
-    protected ImportProposalsFromCsv $importProposalsFromCsv;
-    protected LoggerInterface $logger;
-    protected UserRepository $userRepository;
 
     protected array $headers;
 
     public function __construct(
-        ProposalFormRepository $proposalFormRepository,
-        ImportProposalsFromCsv $importProposalsFromCsv,
-        UserRepository $userRepository,
-        LoggerInterface $logger,
+        protected ProposalFormRepository $proposalFormRepository,
+        protected ImportProposalsFromCsv $importProposalsFromCsv,
+        protected UserRepository $userRepository,
+        protected LoggerInterface $logger,
         ?string $name = null
     ) {
         parent::__construct($name);
-        $this->importProposalsFromCsv = $importProposalsFromCsv;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->userRepository = $userRepository;
-        $this->logger = $logger;
     }
 
     protected function configure(): void

@@ -12,13 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class ProposalNewsResolver implements QueryInterface
 {
-    private $logger;
-    private $repository;
-
-    public function __construct(PostRepository $repository, LoggerInterface $logger)
+    public function __construct(private readonly PostRepository $repository, private readonly LoggerInterface $logger)
     {
-        $this->logger = $logger;
-        $this->repository = $repository;
     }
 
     public function __invoke(Proposal $proposal, Argument $args): Connection

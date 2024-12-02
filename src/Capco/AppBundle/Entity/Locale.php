@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="locale")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\LocaleRepository")
  */
-class Locale
+class Locale implements \Stringable
 {
     use UuidTrait;
 
@@ -44,9 +44,9 @@ class Locale
         $this->setCode($code)->setTraductionKey($traductionKey);
     }
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->code;
+        return (string) $this->code;
     }
 
     public function __clone()

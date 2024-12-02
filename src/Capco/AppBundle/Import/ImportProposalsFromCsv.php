@@ -46,68 +46,37 @@ class ImportProposalsFromCsv
 {
     use TranslationTrait;
     public bool $permissiveSocialNetworksUrl = false;
-
-    private readonly ?string $projectDir;
     private ?string $filePath;
     private ?string $delimiter;
     private ?ProposalForm $proposalForm;
     private array $customFields = [];
-    private readonly EntityManagerInterface $om;
-    private readonly MediaManager $mediaManager;
-    private readonly ProposalDistrictRepository $districtRepository;
-    private readonly ProposalCategoryRepository $proposalCategoryRepository;
-    private readonly ProposalRepository $proposalRepository;
-    private readonly StatusRepository $statusRepository;
-    private readonly UserRepository $userRepository;
-    private readonly Map $map;
     private array $headers;
-    private readonly LoggerInterface $logger;
-    private readonly ThemeRepository $themeRepository;
-    private readonly Indexer $indexer;
     private array $createdProposals = [];
     private int $importableProposals = 0;
     private array $badData = [];
     private array $mandatoryMissing = [];
     private ?Proposal $lastEntity = null;
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly ValidatorInterface $validator;
     private readonly TranslatorInterface $translator;
-    private readonly SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer;
 
     public function __construct(
-        MediaManager $mediaManager,
-        ProposalDistrictRepository $districtRepository,
-        ProposalCategoryRepository $proposalCategoryRepository,
-        ProposalRepository $proposalRepository,
-        StatusRepository $statusRepository,
-        UserRepository $userRepository,
-        Map $map,
-        EntityManagerInterface $om,
-        ThemeRepository $themeRepository,
-        Indexer $indexer,
-        LoggerInterface $logger,
-        TokenGeneratorInterface $tokenGenerator,
-        ValidatorInterface $validator,
+        private readonly MediaManager $mediaManager,
+        private readonly ProposalDistrictRepository $districtRepository,
+        private readonly ProposalCategoryRepository $proposalCategoryRepository,
+        private readonly ProposalRepository $proposalRepository,
+        private readonly StatusRepository $statusRepository,
+        private readonly UserRepository $userRepository,
+        private readonly Map $map,
+        private readonly EntityManagerInterface $om,
+        private readonly ThemeRepository $themeRepository,
+        private readonly Indexer $indexer,
+        private readonly LoggerInterface $logger,
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly ValidatorInterface $validator,
         TranslatorInterface $translator,
-        string $projectDir,
-        SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer
+        private readonly ?string $projectDir,
+        private readonly SocialNetworksUrlSanitizer $socialNetworksUrlSanitizer
     ) {
-        $this->mediaManager = $mediaManager;
-        $this->districtRepository = $districtRepository;
-        $this->proposalCategoryRepository = $proposalCategoryRepository;
-        $this->proposalRepository = $proposalRepository;
-        $this->statusRepository = $statusRepository;
-        $this->userRepository = $userRepository;
-        $this->map = $map;
-        $this->om = $om;
-        $this->themeRepository = $themeRepository;
-        $this->indexer = $indexer;
-        $this->logger = $logger;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->projectDir = $projectDir;
-        $this->validator = $validator;
         $this->translator = $translator;
-        $this->socialNetworksUrlSanitizer = $socialNetworksUrlSanitizer;
     }
 
     public function setProposalForm(ProposalForm $proposalForm): void

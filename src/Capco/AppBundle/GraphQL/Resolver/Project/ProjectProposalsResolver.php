@@ -13,15 +13,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ProjectProposalsResolver implements QueryInterface
 {
-    protected ProjectProposalsDataLoader $dataLoader;
-    protected PromiseAdapterInterface $promiseAdapter;
-
-    public function __construct(
-        ProjectProposalsDataLoader $dataLoader,
-        PromiseAdapterInterface $promiseAdapter
-    ) {
-        $this->dataLoader = $dataLoader;
-        $this->promiseAdapter = $promiseAdapter;
+    public function __construct(protected ProjectProposalsDataLoader $dataLoader, protected PromiseAdapterInterface $promiseAdapter)
+    {
     }
 
     public function __invoke(Project $project, ?Arg $args = null, $viewer = null): Promise

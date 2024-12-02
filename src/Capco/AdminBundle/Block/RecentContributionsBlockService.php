@@ -14,12 +14,9 @@ use Twig\Environment;
 
 class RecentContributionsBlockService extends AbstractBlockService
 {
-    protected RecentContributionsResolver $resolver;
-
-    public function __construct(Environment $templating, RecentContributionsResolver $resolver)
+    public function __construct(Environment $templating, protected RecentContributionsResolver $resolver)
     {
         parent::__construct($templating);
-        $this->resolver = $resolver;
     }
 
     public function buildEditForm(FormMapper $formMapper, BlockInterface $block)

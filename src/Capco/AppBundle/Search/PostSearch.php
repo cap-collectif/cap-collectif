@@ -16,13 +16,10 @@ use Elastica\Query\Term;
 
 class PostSearch extends Search
 {
-    private readonly PostRepository $postRepository;
-
-    public function __construct(Index $index, PostRepository $replyRepository)
+    public function __construct(Index $index, private readonly PostRepository $postRepository)
     {
         parent::__construct($index);
         $this->type = 'post';
-        $this->postRepository = $replyRepository;
     }
 
     public function getUserPostsPaginated(
@@ -67,20 +64,11 @@ class PostSearch extends Search
 
     private function getUserSort($field, $direction): array
     {
-        switch ($field) {
-            case PostOrderField::UPDATED_AT:
-                $sortField = PostOrderField::SORT_FIELD[PostOrderField::UPDATED_AT];
-
-                break;
-
-            case PostOrderField::CREATED_AT:
-                $sortField = PostOrderField::SORT_FIELD[PostOrderField::CREATED_AT];
-
-                break;
-
-            default:
-                throw new \RuntimeException("Unknown order: ${$field}");
-        }
+        $sortField = match ($field) {
+            PostOrderField::UPDATED_AT => PostOrderField::SORT_FIELD[PostOrderField::UPDATED_AT],
+            PostOrderField::CREATED_AT => PostOrderField::SORT_FIELD[PostOrderField::CREATED_AT],
+            default => throw new \RuntimeException("Unknown order: ${$field}"),
+        };
 
         return [$sortField => ['order' => $direction], 'id' => new \stdClass()];
     }

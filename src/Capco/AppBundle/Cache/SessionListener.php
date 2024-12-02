@@ -13,11 +13,9 @@ use Symfony\Component\HttpKernel\KernelEvents;
 class SessionListener implements EventSubscriberInterface
 {
     private const NO_AUTO_CACHE_CONTROL_HEADER = 'X-No-Auto-Cache-Control';
-    private readonly SessionInterface $session;
 
-    public function __construct(SessionInterface $session)
+    public function __construct(private readonly SessionInterface $session)
     {
-        $this->session = $session;
     }
 
     public function onKernelResponse(ResponseEvent $event): void

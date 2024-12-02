@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="social_network")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SocialNetworkRepository")
  */
-class SocialNetwork
+class SocialNetwork implements \Stringable
 {
     use IdTrait;
 
@@ -76,7 +76,7 @@ class SocialNetwork
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New social network';
     }
@@ -205,10 +205,7 @@ class SocialNetwork
         return $this->media;
     }
 
-    /**
-     * @param mixed $media
-     */
-    public function setMedia($media)
+    public function setMedia(mixed $media)
     {
         $this->media = $media;
     }

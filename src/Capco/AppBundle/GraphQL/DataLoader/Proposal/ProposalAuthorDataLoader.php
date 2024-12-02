@@ -14,11 +14,9 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalAuthorDataLoader extends BatchDataLoader
 {
-    private $userRepository;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
-        UserRepository $userRepository,
+        private readonly UserRepository $userRepository,
         RedisTagCache $cache,
         LoggerInterface $logger,
         string $cachePrefix,
@@ -40,8 +38,6 @@ class ProposalAuthorDataLoader extends BatchDataLoader
             $stopwatch,
             $enableCache
         );
-
-        $this->userRepository = $userRepository;
     }
 
     public function invalidate(Proposal $proposal): void

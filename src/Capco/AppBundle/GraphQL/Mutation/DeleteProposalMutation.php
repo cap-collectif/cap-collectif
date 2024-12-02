@@ -16,27 +16,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class DeleteProposalMutation implements MutationInterface
 {
-    private readonly EntityManagerInterface $em;
-    private readonly RedisStorageHelper $redisHelper;
-    private readonly Publisher $publisher;
-    private readonly Indexer $indexer;
-    private readonly ProposalFormProposalsDataLoader $dataloader;
-    private readonly GlobalIdResolver $globalIdResolver;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        RedisStorageHelper $redisHelper,
-        Publisher $publisher,
-        Indexer $indexer,
-        ProposalFormProposalsDataLoader $dataloader,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->em = $em;
-        $this->redisHelper = $redisHelper;
-        $this->publisher = $publisher;
-        $this->indexer = $indexer;
-        $this->dataloader = $dataloader;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly RedisStorageHelper $redisHelper, private readonly Publisher $publisher, private readonly Indexer $indexer, private readonly ProposalFormProposalsDataLoader $dataloader, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(string $proposalId, User $user): array
@@ -55,7 +36,7 @@ class DeleteProposalMutation implements MutationInterface
         $this->publish($proposal);
 
         // Synchronous indexation
-        $this->indexer->remove(\get_class($proposal), $proposal->getId());
+        $this->indexer->remove($proposal::class, $proposal->getId());
         $this->indexer->finishBulk();
 
         $proposalForm = $proposal->getProposalForm();

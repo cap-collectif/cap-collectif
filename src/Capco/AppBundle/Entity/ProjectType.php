@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="project_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectTypeRepository")
  */
-class ProjectType
+class ProjectType implements \Stringable
 {
     use IdTrait;
 
@@ -36,9 +36,9 @@ class ProjectType
      */
     private $projects;
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getId() ? $this->getTitle() : 'New project type';
+        return (string) ($this->getId() ? $this->getTitle() : 'New project type');
     }
 
     public function getTitle()

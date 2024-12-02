@@ -16,23 +16,14 @@ class UnsubscribeUserFromCsvCommand extends Command
 {
     protected static $defaultName = 'capco:user:unsubscribe';
 
-    private readonly UserRepository $userRepository;
-    private readonly EntityManagerInterface $em;
-    private readonly ConvertCsvToArray $convertCsvToArray;
-    private readonly SendInBluePublisher $sendInBluePublisher;
-
     public function __construct(
         ?string $name,
-        UserRepository $userRepository,
-        EntityManagerInterface $em,
-        ConvertCsvToArray $convertCsvToArray,
-        SendInBluePublisher $sendInBluePublisher
+        private readonly UserRepository $userRepository,
+        private readonly EntityManagerInterface $em,
+        private readonly ConvertCsvToArray $convertCsvToArray,
+        private readonly SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct($name);
-        $this->userRepository = $userRepository;
-        $this->em = $em;
-        $this->convertCsvToArray = $convertCsvToArray;
-        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     protected function configure()

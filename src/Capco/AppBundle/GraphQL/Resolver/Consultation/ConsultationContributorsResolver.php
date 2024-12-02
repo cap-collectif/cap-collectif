@@ -12,13 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class ConsultationContributorsResolver implements QueryInterface
 {
-    private $userSearch;
-    private $logger;
-
-    public function __construct(UserSearch $userSearch, LoggerInterface $logger)
+    public function __construct(private readonly UserSearch $userSearch, private readonly LoggerInterface $logger)
     {
-        $this->userSearch = $userSearch;
-        $this->logger = $logger;
     }
 
     public function __invoke(Consultation $consultation, Arg $args): ConnectionInterface

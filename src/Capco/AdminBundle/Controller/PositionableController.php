@@ -9,15 +9,12 @@ use Symfony\Component\HttpFoundation\Request;
 
 abstract class PositionableController extends CRUDController
 {
-    private readonly string $resolverName;
-
     public function __construct(
-        string $resolverName,
+        private readonly string $resolverName,
         BreadcrumbsBuilderInterface $breadcrumbsBuilder,
         Pool $pool
     ) {
         parent::__construct($breadcrumbsBuilder, $pool);
-        $this->resolverName = $resolverName;
     }
 
     public function upAction(Request $request)

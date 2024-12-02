@@ -31,31 +31,16 @@ class CreateUserAccountsFromCSVCommand extends Command
     protected const HEADERS_WITH_FORGOT_PASSWORD_LINK = ['email', 'confirmation_link'];
     protected const HEADERS_WITH_PASSWORD = ['first_name', 'last_name', 'email', 'password'];
 
-    protected UserManagerInterface $userManager;
-    protected TokenGeneratorInterface $tokenGenerator;
-    protected UserRepository $userRepository;
-    protected RouterInterface $router;
-    protected ConvertCsvToArray $csvReader;
-    protected RegistrationFormRepository $registrationFormRepository;
-    protected UserNotifier $userNotifier;
-
     public function __construct(
-        UserManagerInterface $userManager,
-        TokenGeneratorInterface $tokenGenerator,
-        UserRepository $userRepository,
-        RouterInterface $router,
-        ConvertCsvToArray $csvReader,
-        RegistrationFormRepository $registrationFormRepository,
-        UserNotifier $userNotifier
+        protected UserManagerInterface $userManager,
+        protected TokenGeneratorInterface $tokenGenerator,
+        protected UserRepository $userRepository,
+        protected RouterInterface $router,
+        protected ConvertCsvToArray $csvReader,
+        protected RegistrationFormRepository $registrationFormRepository,
+        protected UserNotifier $userNotifier
     ) {
         parent::__construct();
-        $this->userManager = $userManager;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->userRepository = $userRepository;
-        $this->router = $router;
-        $this->csvReader = $csvReader;
-        $this->registrationFormRepository = $registrationFormRepository;
-        $this->userNotifier = $userNotifier;
     }
 
     protected function configure()

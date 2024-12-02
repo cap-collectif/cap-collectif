@@ -14,13 +14,11 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class CollectStepContributorCountDataLoader extends BatchDataLoader
 {
-    private $stepContributorResolver;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        StepContributorResolver $stepContributorResolver,
+        private readonly StepContributorResolver $stepContributorResolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -28,7 +26,6 @@ class CollectStepContributorCountDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->stepContributorResolver = $stepContributorResolver;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

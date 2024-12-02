@@ -25,8 +25,6 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
 
     private const VALUE_RESPONSE_TYPENAME = 'ValueResponse';
     private const MEDIA_RESPONSE_TYPENAME = 'MediaResponse';
-    protected ConnectionTraversor $connectionTraversor;
-    protected Executor $executor;
     protected string $projectRootDir;
 
     /**
@@ -82,21 +80,17 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
     ];
 
     private ?array $customQuestions;
-    private readonly Manager $toggleManager;
 
     public function __construct(
         GraphQlAclListener $listener,
         ExportUtils $exportUtils,
-        Manager $toggleManager,
-        ConnectionTraversor $connectionTraversor,
-        Executor $executor,
+        private readonly Manager $toggleManager,
+        protected ConnectionTraversor $connectionTraversor,
+        protected Executor $executor,
         string $projectRootDir
     ) {
         $listener->disableAcl();
-        $this->connectionTraversor = $connectionTraversor;
-        $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
-        $this->toggleManager = $toggleManager;
         parent::__construct($exportUtils);
     }
 
@@ -345,20 +339,15 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
 
     private function addCustomResponse(array $response): ?string
     {
-        switch ($response['__typename']) {
-            case self::VALUE_RESPONSE_TYPENAME:
-                return $response['formattedValue'];
-
-            case self::MEDIA_RESPONSE_TYPENAME:
-                return implode(
-                    ', ',
-                    array_map(function (array $media) {
-                        return $media['url'];
-                    }, $response['medias'])
-                );
-
-            default:
-                throw new \LogicException('Unknown response typename');
-        }
+        return match ($response['__typename']) {
+            self::VALUE_RESPONSE_TYPENAME => $response['formattedValue'],
+            self::MEDIA_RESPONSE_TYPENAME => implode(
+                ', ',
+                array_map(function (array $media) {
+                    return $media['url'];
+                }, $response['medias'])
+            ),
+            default => throw new \LogicException('Unknown response typename'),
+        };
     }
 }

@@ -11,15 +11,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class PostAdminUrlResolver implements QueryInterface
 {
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly RequestStack $requestStack;
-
-    public function __construct(
-        AuthorizationCheckerInterface $authorizationChecker,
-        RequestStack $requestStack
-    ) {
-        $this->authorizationChecker = $authorizationChecker;
-        $this->requestStack = $requestStack;
+    public function __construct(private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly RequestStack $requestStack)
+    {
     }
 
     public function __invoke(Post $post): string

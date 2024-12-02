@@ -21,27 +21,9 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 class UpdateProjectMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
-    private readonly ProjectRepository $projectRepository;
-    private readonly ProjectAuthorTransformer $transformer;
-    private readonly GlobalDistrictsPersister $districtsPersister;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger,
-        ProjectAuthorTransformer $transformer,
-        ProjectRepository $projectRepository,
-        GlobalDistrictsPersister $districtsPersister
-    ) {
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
-        $this->formFactory = $formFactory;
-        $this->transformer = $transformer;
-        $this->projectRepository = $projectRepository;
-        $this->districtsPersister = $districtsPersister;
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly ProjectAuthorTransformer $transformer, private readonly ProjectRepository $projectRepository, private readonly GlobalDistrictsPersister $districtsPersister)
+    {
     }
 
     public function __invoke(Argument $input): array

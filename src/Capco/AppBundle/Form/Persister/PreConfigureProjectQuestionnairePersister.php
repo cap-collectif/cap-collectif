@@ -17,24 +17,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class PreConfigureProjectQuestionnairePersister
 {
-    private readonly CreateQuestionnaireMutation $createQuestionnaireMutation;
-    private readonly UpdateQuestionnaireConfigurationMutation $updateQuestionnaireConfigurationMutation;
-    private readonly EntityManagerInterface $em;
-    private readonly AbstractQuestionRepository $abstractQuestionRepository;
-    private readonly QuestionChoiceRepository $questionChoiceRepository;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        QuestionChoiceRepository $questionChoiceRepository,
-        AbstractQuestionRepository $abstractQuestionRepository,
-        CreateQuestionnaireMutation $createQuestionnaireMutation,
-        UpdateQuestionnaireConfigurationMutation $updateQuestionnaireConfigurationMutation
-    ) {
-        $this->em = $em;
-        $this->questionChoiceRepository = $questionChoiceRepository;
-        $this->abstractQuestionRepository = $abstractQuestionRepository;
-        $this->createQuestionnaireMutation = $createQuestionnaireMutation;
-        $this->updateQuestionnaireConfigurationMutation = $updateQuestionnaireConfigurationMutation;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly QuestionChoiceRepository $questionChoiceRepository, private readonly AbstractQuestionRepository $abstractQuestionRepository, private readonly CreateQuestionnaireMutation $createQuestionnaireMutation, private readonly UpdateQuestionnaireConfigurationMutation $updateQuestionnaireConfigurationMutation)
+    {
     }
 
     public function addQuestionnaire(

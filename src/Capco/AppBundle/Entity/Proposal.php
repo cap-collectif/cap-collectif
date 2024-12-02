@@ -65,7 +65,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasAddressIfMandatory()
  * @CapcoAssert\HasAuthor()
  */
-class Proposal implements Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface
+class Proposal implements Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, \Stringable
 {
     use AddressableTrait;
     use AuthorableTrait;

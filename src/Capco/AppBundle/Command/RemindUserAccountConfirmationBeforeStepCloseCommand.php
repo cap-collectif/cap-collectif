@@ -23,26 +23,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
 {
-    private readonly AbstractStepRepository $stepRepository;
-    private readonly UserRepository $userRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly RouterInterface $router;
-    private readonly Publisher $publisher;
-
     public function __construct(
-        AbstractStepRepository $stepRepository,
-        UserRepository $userRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        RouterInterface $router,
-        Publisher $mailerService,
+        private readonly AbstractStepRepository $stepRepository,
+        private readonly UserRepository $userRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly RouterInterface $router,
+        private readonly Publisher $publisher,
         ?string $name = null
     ) {
         parent::__construct($name);
-        $this->stepRepository = $stepRepository;
-        $this->userRepository = $userRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->router = $router;
-        $this->publisher = $mailerService;
     }
 
     protected function configure()
@@ -219,7 +208,7 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
     {
         try {
             return new \DateTimeImmutable($input->getOption('date'));
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             throw new \RuntimeException('invalid date : ' . $input->getOption('date'));
         }
     }

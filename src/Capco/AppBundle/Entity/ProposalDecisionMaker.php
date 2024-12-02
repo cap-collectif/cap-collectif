@@ -34,7 +34,7 @@ class ProposalDecisionMaker implements Timestampable
      * @Gedmo\Timestampable(on="update")
      * @ORM\Column(type="datetime", name="updated_at")
      */
-    private $updatedAt;
+    private ?\DateTimeInterface $updatedAt;
 
     public function __construct(Proposal $proposal, User $decisionMaker)
     {

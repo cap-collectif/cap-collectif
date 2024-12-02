@@ -16,13 +16,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class LoadBenchmarkDataCommand extends Command
 {
     protected static $defaultName = 'capco:load-benchmark-data';
-    private readonly Manager $manger;
-    private readonly EntityManagerInterface $entityManger;
 
-    public function __construct(Manager $manager, EntityManagerInterface $entityManager)
+    public function __construct(private readonly Manager $manger, private readonly EntityManagerInterface $entityManger)
     {
-        $this->manger = $manager;
-        $this->entityManger = $entityManager;
         parent::__construct();
     }
 
@@ -78,12 +74,12 @@ class LoadBenchmarkDataCommand extends Command
 
         foreach ($eventManager->getListeners() as $event => $listeners) {
             foreach ($listeners as $key => $listener) {
-                if (\is_string($listener) || \in_array(\get_class($listener), $whitelist, true)) {
+                if (\is_string($listener) || \in_array($listener::class, $whitelist, true)) {
                     continue;
                 }
                 if (method_exists($listener, 'getSubscribedEvents')) {
                     $eventManager->removeEventListener($listener->getSubscribedEvents(), $listener);
-                    $output->writeln('Disabled <info>' . \get_class($listener) . '</info>');
+                    $output->writeln('Disabled <info>' . $listener::class . '</info>');
                 }
             }
         }

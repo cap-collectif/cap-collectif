@@ -12,19 +12,10 @@ use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 
 class ProjectAuthorTransformer
 {
-    private readonly EntityManagerInterface $em;
     private ?Project $project;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ProjectAuthorRepository $projectAuthorRepository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        ProjectAuthorRepository $projectAuthorRepository
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->projectAuthorRepository = $projectAuthorRepository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly ProjectAuthorRepository $projectAuthorRepository)
+    {
     }
 
     public function setProject(Project $project): self

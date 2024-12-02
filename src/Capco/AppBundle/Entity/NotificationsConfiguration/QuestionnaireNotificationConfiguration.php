@@ -38,11 +38,9 @@ class QuestionnaireNotificationConfiguration extends AbstractNotificationConfigu
     }
 
     /**
-     * @param mixed $questionnaire
-     *
      * @return QuestionnaireNotificationConfiguration
      */
-    public function setQuestionnaire($questionnaire)
+    public function setQuestionnaire(mixed $questionnaire)
     {
         $this->questionnaire = $questionnaire;
 

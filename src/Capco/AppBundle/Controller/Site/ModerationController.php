@@ -20,18 +20,8 @@ use Symfony\Component\Translation\TranslatorInterface;
 
 class ModerationController extends Controller
 {
-    private readonly LoggerInterface $logger;
-    private readonly TranslatorInterface $translator;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        LoggerInterface $logger,
-        TranslatorInterface $translator,
-        Publisher $publisher
-    ) {
-        $this->logger = $logger;
-        $this->translator = $translator;
-        $this->publisher = $publisher;
+    public function __construct(private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator, private readonly Publisher $publisher)
+    {
     }
 
     /**

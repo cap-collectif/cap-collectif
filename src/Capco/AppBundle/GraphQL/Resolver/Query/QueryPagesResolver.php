@@ -7,11 +7,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryPagesResolver implements QueryInterface
 {
-    private $repository;
-
-    public function __construct(PageRepository $repository)
+    public function __construct(private readonly PageRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(): array

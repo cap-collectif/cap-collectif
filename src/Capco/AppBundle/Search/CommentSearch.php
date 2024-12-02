@@ -15,14 +15,11 @@ use Elastica\ResultSet;
 
 class CommentSearch extends Search
 {
-    private $commentRepository;
-
-    public function __construct(Index $index, CommentRepository $commentRepository)
+    public function __construct(Index $index, private readonly CommentRepository $commentRepository)
     {
         parent::__construct($index);
         $this->type = 'comment';
         $this->index = $index;
-        $this->commentRepository = $commentRepository;
     }
 
     public function getCommentsByAuthorViewerCanSee(

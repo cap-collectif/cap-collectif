@@ -35,11 +35,8 @@ class RecentContributionsController extends Controller
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}", name="capco_admin_contributions_show")
      * @Template("@CapcoAdmin/RecentContributions/show.html.twig")
-     *
-     * @param mixed $type
-     * @param mixed $id
      */
-    public function showAction($type, $id)
+    public function showAction(mixed $type, mixed $id)
     {
         $resolver = $this->get(RecentContributionsResolver::class);
 
@@ -60,11 +57,8 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/validate", name="capco_admin_contributions_validate")
-     *
-     * @param mixed $type
-     * @param mixed $id
      */
-    public function validateAction($type, $id)
+    public function validateAction(mixed $type, mixed $id)
     {
         $resolver = $this->get(RecentContributionsResolver::class);
         $em = $this->get('doctrine')->getManager();
@@ -87,11 +81,8 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/unpublish", name="capco_admin_contributions_unpublish")
-     *
-     * @param mixed $type
-     * @param mixed $id
      */
-    public function unpublishAction(Request $request, $type, $id)
+    public function unpublishAction(Request $request, mixed $type, mixed $id)
     {
         $resolver = $this->get(RecentContributionsResolver::class);
         $em = $this->get('doctrine')->getManager();
@@ -132,11 +123,8 @@ class RecentContributionsController extends Controller
     /**
      * @Security("has_role('ROLE_ADMIN')")
      * @Route("/admin/contributions/{type}/{id}/trash", name="capco_admin_contributions_trash")
-     *
-     * @param mixed $type
-     * @param mixed $id
      */
-    public function trashAction(Request $request, $type, $id)
+    public function trashAction(Request $request, mixed $type, mixed $id)
     {
         $resolver = $this->get(RecentContributionsResolver::class);
         $em = $this->get('doctrine')->getManager();

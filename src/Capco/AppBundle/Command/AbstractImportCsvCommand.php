@@ -18,16 +18,13 @@ abstract class AbstractImportCsvCommand extends Command
     final public const INPUT_FILE_PATH = 'filePath';
     final public const INPUT_DELIMITER = 'delimiter';
     final public const INPUT_DRY_RUN = 'dryRun';
-
-    protected ConvertCsvToArray $csvReader;
     protected string $filePath = '';
     protected string $delimiter = ';';
     protected bool $dryRun = false;
 
-    public function __construct(string $name, ConvertCsvToArray $csvReader)
+    public function __construct(string $name, protected ConvertCsvToArray $csvReader)
     {
         parent::__construct($name);
-        $this->csvReader = $csvReader;
     }
 
     abstract protected function getRowErrors(array &$row): array;

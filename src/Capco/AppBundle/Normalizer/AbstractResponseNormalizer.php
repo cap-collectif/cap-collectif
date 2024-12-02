@@ -15,11 +15,8 @@ class AbstractResponseNormalizer implements NormalizerInterface, SerializerAware
 {
     use SerializerAwareTrait;
 
-    private readonly ObjectNormalizer $normalizer;
-
-    public function __construct(ObjectNormalizer $normalizer)
+    public function __construct(private readonly ObjectNormalizer $normalizer)
     {
-        $this->normalizer = $normalizer;
     }
 
     public function hasCacheableSupportsMethod(): bool

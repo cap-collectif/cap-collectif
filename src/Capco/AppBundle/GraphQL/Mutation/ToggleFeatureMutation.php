@@ -15,13 +15,9 @@ use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 class ToggleFeatureMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly Manager $toggleManager;
-    private readonly FormFactoryInterface $formFactory;
 
-    public function __construct(Manager $toggleManager, FormFactoryInterface $formFactory)
+    public function __construct(private readonly Manager $toggleManager, private readonly FormFactoryInterface $formFactory)
     {
-        $this->toggleManager = $toggleManager;
-        $this->formFactory = $formFactory;
     }
 
     public function __invoke(Argument $args, User $viewer)

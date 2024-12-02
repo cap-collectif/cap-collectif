@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, Publishable, ReportableInterface
+class Argument implements Contribution, VotableInterface, Publishable, ReportableInterface, \Stringable
 {
     use ModerableTrait;
     use PublishableTrait;
@@ -102,7 +102,7 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getBodyExcerpt(50) : 'New argument';
     }
@@ -161,15 +161,11 @@ class Argument implements Contribution, VotableInterface, Publishable, Reportabl
 
     public function getTypeAsString(): string
     {
-        switch ($this->type) {
-            case 0:
-                return 'argument.show.type.against';
-
-            case 1:
-                return 'argument.show.type.for';
-        }
-
-        return '';
+        return match ($this->type) {
+            0 => 'argument.show.type.against',
+            1 => 'argument.show.type.for',
+            default => '',
+        };
     }
 
     public function setType($type)

@@ -12,11 +12,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class QuestionChoicesResolver implements QueryInterface
 {
-    private $dataLoader;
-
-    public function __construct(QuestionChoicesDataLoader $dataLoader)
+    public function __construct(private readonly QuestionChoicesDataLoader $dataLoader)
     {
-        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(

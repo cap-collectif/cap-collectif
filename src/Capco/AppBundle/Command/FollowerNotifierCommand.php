@@ -15,26 +15,15 @@ use Symfony\Component\Console\Output\OutputInterface;
 class FollowerNotifierCommand extends Command
 {
     protected static $defaultName = 'capco:follower-notifier';
-    private readonly FollowerNotifier $followerNotifier;
-    private readonly ProposalActivitiesResolver $proposalActivitiesResolver;
-    private readonly OpinionActivitiesResolver $opinionActivitiesResolver;
-    private readonly LoggerInterface $logger;
-    private readonly ActivitiesService $activitiesService;
 
     public function __construct(
-        FollowerNotifier $followerNotifier,
-        ProposalActivitiesResolver $proposalActivitiesResolver,
-        OpinionActivitiesResolver $opinionActivitiesResolver,
-        LoggerInterface $logger,
-        ActivitiesService $activitiesService,
+        private readonly FollowerNotifier $followerNotifier,
+        private readonly ProposalActivitiesResolver $proposalActivitiesResolver,
+        private readonly OpinionActivitiesResolver $opinionActivitiesResolver,
+        private readonly LoggerInterface $logger,
+        private readonly ActivitiesService $activitiesService,
         ?string $name
     ) {
-        $this->followerNotifier = $followerNotifier;
-        $this->proposalActivitiesResolver = $proposalActivitiesResolver;
-        $this->opinionActivitiesResolver = $opinionActivitiesResolver;
-        $this->logger = $logger;
-        $this->activitiesService = $activitiesService;
-
         parent::__construct($name);
     }
 

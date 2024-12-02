@@ -30,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAuthor()
  */
-class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface
+class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface, \Stringable
 {
     use AuthorableTrait;
     use ModerableTrait;
@@ -131,10 +131,10 @@ class Source implements Contribution, Trashable, VotableInterface, Publishable, 
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->id) {
-            return $this->getTitle();
+            return (string) $this->getTitle();
         }
 
         return 'New source';

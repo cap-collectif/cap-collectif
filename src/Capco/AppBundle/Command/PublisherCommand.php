@@ -12,16 +12,10 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class PublisherCommand extends Command
 {
-    private readonly OfficialResponseRepository $officialResponseRepository;
-    private readonly EntityManagerInterface $entityManager;
-
     public function __construct(
-        OfficialResponseRepository $officialResponseRepository,
-        EntityManagerInterface $entityManager
+        private readonly OfficialResponseRepository $officialResponseRepository,
+        private readonly EntityManagerInterface $entityManager
     ) {
-        $this->officialResponseRepository = $officialResponseRepository;
-        $this->entityManager = $entityManager;
-
         parent::__construct();
     }
 

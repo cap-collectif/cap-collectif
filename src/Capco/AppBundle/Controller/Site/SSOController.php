@@ -15,24 +15,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SSOController extends Controller
 {
-    protected Manager $toggleManager;
-    protected AbstractSSOConfigurationRepository $ssoRepository;
-    protected Oauth2SSOConfigurationRepository $authRepository;
-    protected FranceConnectSSOConfigurationRepository $fcRepository;
-    protected OpenIDReferrerResolver $referrerResolver;
-
-    public function __construct(
-        Manager $toggleManager,
-        AbstractSSOConfigurationRepository $ssoRepository,
-        OpenIDReferrerResolver $referrerResolver,
-        FranceConnectSSOConfigurationRepository $fcRepository,
-        Oauth2SSOConfigurationRepository $authRepository
-    ) {
-        $this->toggleManager = $toggleManager;
-        $this->referrerResolver = $referrerResolver;
-        $this->ssoRepository = $ssoRepository;
-        $this->authRepository = $authRepository;
-        $this->fcRepository = $fcRepository;
+    public function __construct(protected Manager $toggleManager, protected AbstractSSOConfigurationRepository $ssoRepository, protected OpenIDReferrerResolver $referrerResolver, protected FranceConnectSSOConfigurationRepository $fcRepository, protected Oauth2SSOConfigurationRepository $authRepository)
+    {
     }
 
     /**

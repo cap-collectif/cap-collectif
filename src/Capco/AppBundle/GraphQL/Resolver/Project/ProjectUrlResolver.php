@@ -13,20 +13,14 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProjectUrlResolver implements QueryInterface
 {
-    protected RouterInterface $router;
-    protected RequestStack $requestStack;
     protected string $defaultLocale;
-    protected StepUrlResolver $stepUrlResolver;
 
     public function __construct(
-        RouterInterface $router,
-        RequestStack $requestStack,
+        protected RouterInterface $router,
+        protected RequestStack $requestStack,
         LocaleResolver $localeResolver,
-        StepUrlResolver $stepUrlResolver
+        protected StepUrlResolver $stepUrlResolver
     ) {
-        $this->router = $router;
-        $this->requestStack = $requestStack;
-        $this->stepUrlResolver = $stepUrlResolver;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 

@@ -16,13 +16,9 @@ use Psr\Log\LoggerInterface;
 class ViewerAwaitingOrRefusedEventResolver implements QueryInterface
 {
     use ResolverTrait;
-    private $logger;
-    private $eventRepository;
 
-    public function __construct(EventRepository $eventRepository, LoggerInterface $logger)
+    public function __construct(private EventRepository $eventRepository, private LoggerInterface $logger)
     {
-        $this->eventRepository = $eventRepository;
-        $this->logger = $logger;
     }
 
     public function __invoke($viewer, $user, ?Argument $args = null): Connection

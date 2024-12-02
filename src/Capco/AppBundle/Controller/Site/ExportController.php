@@ -58,57 +58,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ExportController extends Controller
 {
-    private readonly FlashBagInterface $flashBag;
-    private readonly TranslatorInterface $translator;
-    private readonly string $exportDir;
-    private readonly GraphQlAclListener $aclListener;
-    private readonly ConnectionTraversor $connectionTraversor;
-    private readonly Executor $executor;
-    private readonly LoggerInterface $logger;
-    private readonly AbstractStepRepository $abstractStepRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly KernelInterface $kernel;
-    private readonly string $locale;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ContributionsFilePathResolver $contributionsFilePathResolver;
-    private readonly SessionInterface $session;
-    private readonly CronTimeInterval $cronTimeInterval;
-    private readonly string $projectDir;
-
-    public function __construct(
-        GraphQlAclListener $aclListener,
-        ConnectionTraversor $connectionTraversor,
-        Executor $executor,
-        LoggerInterface $logger,
-        TranslatorInterface $translator,
-        FlashBagInterface $flashBag,
-        AbstractStepRepository $abstractStepRepository,
-        GlobalIdResolver $globalIdResolver,
-        KernelInterface $kernel,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ContributionsFilePathResolver $contributionsFilePathResolver,
-        SessionInterface $session,
-        CronTimeInterval $cronTimeInterval,
-        string $exportDir,
-        string $locale,
-        string $projectDir
-    ) {
-        $this->flashBag = $flashBag;
-        $this->translator = $translator;
-        $this->exportDir = $exportDir;
-        $this->aclListener = $aclListener;
-        $this->connectionTraversor = $connectionTraversor;
-        $this->executor = $executor;
-        $this->abstractStepRepository = $abstractStepRepository;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->kernel = $kernel;
-        $this->locale = $locale;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->contributionsFilePathResolver = $contributionsFilePathResolver;
-        $this->session = $session;
-        $this->cronTimeInterval = $cronTimeInterval;
-        $this->projectDir = $projectDir;
+    public function __construct(private readonly GraphQlAclListener $aclListener, private readonly ConnectionTraversor $connectionTraversor, private readonly Executor $executor, private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator, private readonly FlashBagInterface $flashBag, private readonly AbstractStepRepository $abstractStepRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly KernelInterface $kernel, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ContributionsFilePathResolver $contributionsFilePathResolver, private readonly SessionInterface $session, private readonly CronTimeInterval $cronTimeInterval, private readonly string $exportDir, private readonly string $locale, private readonly string $projectDir)
+    {
     }
 
     /**
@@ -301,10 +252,8 @@ class ExportController extends Controller
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
      * @Security("has_role('ROLE_USER')")
-     *
-     * @param mixed $stepId
      */
-    public function downloadStepContributorsAction(Request $request, $stepId): Response
+    public function downloadStepContributorsAction(Request $request, mixed $stepId): Response
     {
         $id = GlobalId::fromGlobalId($stepId);
         if ($id && isset($id['id'])) {

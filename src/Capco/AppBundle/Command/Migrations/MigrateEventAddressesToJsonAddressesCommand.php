@@ -13,15 +13,9 @@ use Symfony\Component\Console\Output\OutputInterface;
 class MigrateEventAddressesToJsonAddressesCommand extends Command
 {
     protected static $defaultName = 'capco:migrate:eventAddress-to-jsonAddress';
-    private $connection;
-    private $map;
-    private $eventRepository;
 
-    public function __construct(Connection $connection, Map $map, EventRepository $eventRepository)
+    public function __construct(private readonly Connection $connection, private readonly Map $map, private readonly EventRepository $eventRepository)
     {
-        $this->connection = $connection;
-        $this->map = $map;
-        $this->eventRepository = $eventRepository;
         parent::__construct();
     }
 

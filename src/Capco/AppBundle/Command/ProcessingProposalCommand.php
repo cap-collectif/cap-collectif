@@ -15,18 +15,12 @@ class ProcessingProposalCommand extends Command
 {
     final public const MESSAGE_YES = 'yes';
     protected static $defaultName = 'capco:process_proposals';
-    private readonly AnalysisConfigurationManager $analysisConfigurationManager;
-    private readonly AnalysisConfigurationRepository $analysisConfigurationRepository;
-    private readonly Manager $toggle;
 
     public function __construct(
-        AnalysisConfigurationManager $analysisConfigurationManager,
-        Manager $manager,
-        AnalysisConfigurationRepository $analysisConfigurationRepository
+        private readonly AnalysisConfigurationManager $analysisConfigurationManager,
+        private readonly Manager $toggle,
+        private readonly AnalysisConfigurationRepository $analysisConfigurationRepository
     ) {
-        $this->analysisConfigurationManager = $analysisConfigurationManager;
-        $this->analysisConfigurationRepository = $analysisConfigurationRepository;
-        $this->toggle = $manager;
         parent::__construct();
     }
 

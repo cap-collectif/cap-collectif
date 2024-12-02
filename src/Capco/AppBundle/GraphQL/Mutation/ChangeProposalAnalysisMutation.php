@@ -31,33 +31,8 @@ class ChangeProposalAnalysisMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private readonly ProposalRepository $proposalRepository;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
-    private readonly ResponsesFormatter $responsesFormatter;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ProposalAnalysisRepository $analysisRepository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger,
-        ResponsesFormatter $responsesFormatter,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ProposalAnalysisRepository $analysisRepository,
-        EntityManagerInterface $entityManager,
-        Publisher $publisher
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
-        $this->responsesFormatter = $responsesFormatter;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->analysisRepository = $analysisRepository;
-        $this->entityManager = $entityManager;
-        $this->publisher = $publisher;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly ResponsesFormatter $responsesFormatter, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalAnalysisRepository $analysisRepository, private readonly EntityManagerInterface $entityManager, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $args, $viewer): array

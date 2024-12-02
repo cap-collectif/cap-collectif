@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  *
  * @ORM\Entity()
  */
-class HighlightedPost extends HighlightedContent
+class HighlightedPost extends HighlightedContent implements \Stringable
 {
     /**
      * @ORM\OneToOne(targetEntity="Post")
@@ -17,9 +17,9 @@ class HighlightedPost extends HighlightedContent
      */
     private $post;
 
-    public function __toString()
+    public function __toString(): string
     {
-        return $this->getPost() ? $this->getPost()->getTitle() : 'New Highlighted Post';
+        return (string) ($this->getPost() ? $this->getPost()->getTitle() : 'New Highlighted Post');
     }
 
     /**

@@ -16,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAbstractStepRepository")
  * @ORM\Table(name="project_abstractstep")
  */
-class ProjectAbstractStep
+class ProjectAbstractStep implements \Stringable
 {
     use PositionableTrait;
     use UuidTrait;
@@ -47,10 +47,10 @@ class ProjectAbstractStep
         }
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->step) {
-            return $this->step->__toString();
+            return (string) $this->step->__toString();
         }
 
         return 'undefined step';

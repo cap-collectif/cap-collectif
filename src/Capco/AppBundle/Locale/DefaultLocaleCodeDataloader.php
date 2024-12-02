@@ -7,11 +7,9 @@ use Capco\AppBundle\Resolver\LocaleResolver;
 class DefaultLocaleCodeDataloader
 {
     private $defaultLocale;
-    private $localeResolver;
 
-    public function __construct(LocaleResolver $localeResolver)
+    public function __construct(private readonly LocaleResolver $localeResolver)
     {
-        $this->localeResolver = $localeResolver;
     }
 
     public function __invoke(): string

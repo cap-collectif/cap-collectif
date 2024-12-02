@@ -45,66 +45,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  */
 class ProfileController extends Controller
 {
-    private readonly EventDispatcherInterface $eventDispatcher;
-    private readonly UserRepository $userRepository;
-    private readonly ReplyRepository $replyRepository;
-    private readonly SourceRepository $sourceRepository;
-    private readonly ArgumentRepository $argumentRepository;
-    private readonly EventRepository $eventRepository;
-    private readonly ProjectRepository $projectRepository;
-    private readonly CommentRepository $commentRepository;
-    private readonly OpinionVersionRepository $opinionVersionRepository;
-    private readonly UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository;
-    private readonly UserArchiveRepository $userArchiveRepository;
-    private readonly string $fireWall;
-    private readonly string $projectDir;
-    private readonly TranslatorInterface $translator;
-    private readonly EntityManagerInterface $em;
-    private readonly DeleteAccountMutation $deleteAccountMutation;
-    private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler;
-    private readonly RouterInterface $router;
-    private readonly OrganizationRepository $organizationRepository;
-
-    public function __construct(
-        EventDispatcherInterface $eventDispatcher,
-        UserRepository $userRepository,
-        ArgumentRepository $argumentRepository,
-        SourceRepository $sourceRepository,
-        ReplyRepository $replyRepository,
-        EventRepository $eventRepository,
-        ProjectRepository $projectRepository,
-        CommentRepository $commentRepository,
-        OpinionVersionRepository $opinionVersionRepository,
-        UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository,
-        UserArchiveRepository $userArchiveRepository,
-        TranslatorInterface $translator,
-        EntityManagerInterface $em,
-        DeleteAccountMutation $deleteAccountMutation,
-        FranceConnectLogoutHandler $franceConnectLogoutHandler,
-        RouterInterface $router,
-        OrganizationRepository $organizationRepository,
-        string $fireWall,
-        string $projectDir
-    ) {
-        $this->eventDispatcher = $eventDispatcher;
-        $this->userRepository = $userRepository;
-        $this->argumentRepository = $argumentRepository;
-        $this->sourceRepository = $sourceRepository;
-        $this->replyRepository = $replyRepository;
-        $this->commentRepository = $commentRepository;
-        $this->projectRepository = $projectRepository;
-        $this->eventRepository = $eventRepository;
-        $this->opinionVersionRepository = $opinionVersionRepository;
-        $this->userNotificationsConfigurationRepository = $userNotificationsConfigurationRepository;
-        $this->userArchiveRepository = $userArchiveRepository;
-        $this->fireWall = $fireWall;
-        $this->projectDir = $projectDir;
-        $this->translator = $translator;
-        $this->em = $em;
-        $this->deleteAccountMutation = $deleteAccountMutation;
-        $this->franceConnectLogoutHandler = $franceConnectLogoutHandler;
-        $this->router = $router;
-        $this->organizationRepository = $organizationRepository;
+    public function __construct(private readonly EventDispatcherInterface $eventDispatcher, private readonly UserRepository $userRepository, private readonly ArgumentRepository $argumentRepository, private readonly SourceRepository $sourceRepository, private readonly ReplyRepository $replyRepository, private readonly EventRepository $eventRepository, private readonly ProjectRepository $projectRepository, private readonly CommentRepository $commentRepository, private readonly OpinionVersionRepository $opinionVersionRepository, private readonly UserNotificationsConfigurationRepository $userNotificationsConfigurationRepository, private readonly UserArchiveRepository $userArchiveRepository, private readonly TranslatorInterface $translator, private readonly EntityManagerInterface $em, private readonly DeleteAccountMutation $deleteAccountMutation, private readonly FranceConnectLogoutHandler $franceConnectLogoutHandler, private readonly RouterInterface $router, private readonly OrganizationRepository $organizationRepository, private readonly string $fireWall, private readonly string $projectDir)
+    {
     }
 
     /**

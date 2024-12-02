@@ -18,16 +18,14 @@ use Swift_Transport;
  */
 class MandrillTransport implements Swift_Transport
 {
-    protected Swift_Events_EventDispatcher $dispatcher;
     protected ?string $apiKey;
     protected ?bool $async;
     protected ?array $resultApi;
     protected ?string $subAccount;
     private ?string $lastSentMessageId;
 
-    public function __construct(Swift_Events_EventDispatcher $dispatcher)
+    public function __construct(protected Swift_Events_EventDispatcher $dispatcher)
     {
-        $this->dispatcher = $dispatcher;
         $this->apiKey = null;
         $this->async = null;
         $this->subAccount = null;
@@ -384,7 +382,7 @@ class MandrillTransport implements Swift_Transport
                         break;
 
                     default:
-                        if (0 === strncmp((string) $header->getFieldName(), 'X-', 2)) {
+                        if (str_starts_with((string) $header->getFieldName(), 'X-')) {
                             $headers[$header->getFieldName()] = $header->getValue();
                             $mandrillMessage['headers'] = $headers;
                         }

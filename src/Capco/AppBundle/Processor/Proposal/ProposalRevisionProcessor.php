@@ -13,21 +13,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalRevisionProcessor implements ProcessorInterface
 {
-    private readonly ProposalRepository $proposalRepository;
-    private readonly ProposalRevisionRepository $proposalRevisionRepository;
-    private readonly ProposalRevisionNotifier $notifier;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        ProposalRevisionRepository $proposalRevisionRepository,
-        ProposalRevisionNotifier $notifier,
-        LoggerInterface $logger
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->proposalRevisionRepository = $proposalRevisionRepository;
-        $this->notifier = $notifier;
-        $this->logger = $logger;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly ProposalRevisionRepository $proposalRevisionRepository, private readonly ProposalRevisionNotifier $notifier, private readonly LoggerInterface $logger)
+    {
     }
 
     public function process(Message $message, array $options): bool

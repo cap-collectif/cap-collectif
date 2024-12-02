@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionTypeAppendixType
+class OpinionTypeAppendixType implements \Stringable
 {
     use PositionableTrait;
     use UuidTrait;
@@ -31,7 +31,7 @@ class OpinionTypeAppendixType
      */
     private $appendixType;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ?? 'New OpinionTypeAppendixType';
     }

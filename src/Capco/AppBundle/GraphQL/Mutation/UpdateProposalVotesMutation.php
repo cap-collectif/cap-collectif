@@ -24,39 +24,9 @@ use Psr\Log\LoggerInterface;
 class UpdateProposalVotesMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly AbstractStepRepository $stepRepo;
-    private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private readonly Indexer $indexer;
-    private readonly ConnectionBuilder $connectionBuilder;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        AbstractStepRepository $stepRepo,
-        ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler,
-        Indexer $indexer,
-        ConnectionBuilder $connectionBuilder
-    ) {
-        $this->em = $em;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->stepRepo = $stepRepo;
-        $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
-        $this->indexer = $indexer;
-        $this->connectionBuilder = $connectionBuilder;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly AbstractStepRepository $stepRepo, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly Indexer $indexer, private readonly ConnectionBuilder $connectionBuilder)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

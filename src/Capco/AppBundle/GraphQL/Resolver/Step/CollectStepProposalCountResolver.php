@@ -12,18 +12,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 // This is a helper not a pure GraphQL resolver
 class CollectStepProposalCountResolver implements QueryInterface
 {
-    private $dataLoader;
-    private $adapter;
-    private $proposalRepo;
-
-    public function __construct(
-        PromiseAdapterInterface $adapter,
-        ProposalFormProposalsDataLoader $dataLoader,
-        ProposalRepository $proposalRepo
-    ) {
-        $this->dataLoader = $dataLoader;
-        $this->adapter = $adapter;
-        $this->proposalRepo = $proposalRepo;
+    public function __construct(private readonly PromiseAdapterInterface $adapter, private readonly ProposalFormProposalsDataLoader $dataLoader, private readonly ProposalRepository $proposalRepo)
+    {
     }
 
     public function __invoke(CollectStep $step): int

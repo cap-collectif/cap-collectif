@@ -49,18 +49,13 @@ class ProposalSearch extends Search
         'responses.objectValue.other' => 2,
     ];
 
-    private readonly ProposalRepository $proposalRepo;
-    private readonly TokenStorageInterface $tokenStorage;
-
     public function __construct(
         Index $index,
-        ProposalRepository $proposalRepo,
-        TokenStorageInterface $tokenStorage
+        private readonly ProposalRepository $proposalRepo,
+        private readonly TokenStorageInterface $tokenStorage
     ) {
         parent::__construct($index);
-        $this->proposalRepo = $proposalRepo;
         $this->type = 'proposal';
-        $this->tokenStorage = $tokenStorage;
     }
 
     public function searchProposalsByProject(

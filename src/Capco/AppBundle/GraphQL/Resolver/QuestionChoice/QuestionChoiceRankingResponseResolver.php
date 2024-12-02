@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class QuestionChoiceRankingResponseResolver implements QueryInterface
 {
-    private $responseRepository;
-
-    public function __construct(AbstractResponseRepository $responseRepository)
+    public function __construct(private readonly AbstractResponseRepository $responseRepository)
     {
-        $this->responseRepository = $responseRepository;
     }
 
     public function __invoke(array $questionChoiceRanking, Arg $args): Connection

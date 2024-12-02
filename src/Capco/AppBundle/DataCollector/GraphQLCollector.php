@@ -33,10 +33,10 @@ class GraphQLCollector extends DataCollector
      * @param mixed $value The normalized or denormalized value that was get from cache or from resolver
      */
     public function addCacheHit(
-        $key,
+        mixed $key,
         string $subtype,
         float $duration,
-        $value,
+        mixed $value,
         string $cacheKey
     ): void {
         $this->addCacheEntry(true, $key, $subtype, $duration, $value, $cacheKey);
@@ -46,7 +46,7 @@ class GraphQLCollector extends DataCollector
      * @param mixed $key   The serialized value from the data loader
      * @param mixed $value The normalized or denormalized value that was get from cache or from resolver
      */
-    public function addCacheMiss($key, string $subtype, float $duration, $value): void
+    public function addCacheMiss(mixed $key, string $subtype, float $duration, mixed $value): void
     {
         $this->addCacheEntry(false, $key, $subtype, $duration, $value);
     }

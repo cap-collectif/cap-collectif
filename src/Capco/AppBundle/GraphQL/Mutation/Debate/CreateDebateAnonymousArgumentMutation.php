@@ -20,8 +20,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 
 class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
 {
-    private readonly SendInBluePublisher $sendInBluePublisher;
-
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
@@ -33,9 +31,8 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
         TokenGeneratorInterface $tokenGenerator,
         DebateNotifier $debateNotifier,
         RequestGuesser $requestGuesser,
-        SendInBluePublisher $sendInBluePublisher
+        private readonly SendInBluePublisher $sendInBluePublisher
     ) {
-        $this->sendInBluePublisher = $sendInBluePublisher;
         parent::__construct(
             $em,
             $globalIdResolver,

@@ -8,11 +8,9 @@ use FOS\UserBundle\Util\TokenGeneratorInterface;
 class ModerationTokenListener
 {
     final public const REFERENCE_TRAIT = 'Capco\AppBundle\Traits\ModerableTrait';
-    private readonly TokenGeneratorInterface $tokenGenerator;
 
-    public function __construct(TokenGeneratorInterface $tokenGenerator)
+    public function __construct(private readonly TokenGeneratorInterface $tokenGenerator)
     {
-        $this->tokenGenerator = $tokenGenerator;
     }
 
     public function preFlush(PreFlushEventArgs $args)
@@ -21,7 +19,7 @@ class ModerationTokenListener
         $uow = $args->getEntityManager()->getUnitOfWork();
 
         foreach ($uow->getScheduledEntityInsertions() as $entityInsertion) {
-            $classMetaData = $om->getClassMetadata(\get_class($entityInsertion));
+            $classMetaData = $om->getClassMetadata($entityInsertion::class);
 
             // if entity has Moderabble Trait & has not already a moderation_token (specific case in fixtures)
             if (

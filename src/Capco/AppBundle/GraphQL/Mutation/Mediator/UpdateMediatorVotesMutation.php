@@ -25,29 +25,20 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateMediatorVotesMutation extends MediatorVotesMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $entityManager;
     private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly FormFactoryInterface $formFactory;
     private readonly UpdateParticipantRequirementMutation $updateParticipantRequirementMutation;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
+        private readonly EntityManagerInterface $entityManager,
         GlobalIdResolver $globalIdResolver,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
         Manager $manager,
-        FormFactoryInterface $formFactory,
+        private readonly FormFactoryInterface $formFactory,
         UpdateParticipantRequirementMutation $updateParticipantRequirementMutation
     ) {
         parent::__construct($globalIdResolver, $manager, $updateParticipantRequirementMutation);
-
-        $this->entityManager = $entityManager;
         $this->globalIdResolver = $globalIdResolver;
-        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->formFactory = $formFactory;
     }
 
     public function __invoke(Argument $argument, User $viewer): array

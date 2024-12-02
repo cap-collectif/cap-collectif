@@ -14,13 +14,8 @@ class ArgumentNormalizer implements NormalizerInterface, SerializerAwareInterfac
 {
     use SerializerAwareTrait;
 
-    private readonly ObjectNormalizer $normalizer;
-    private readonly VoteSearch $voteSearch;
-
-    public function __construct(ObjectNormalizer $normalizer, VoteSearch $voteSearch)
+    public function __construct(private readonly ObjectNormalizer $normalizer, private readonly VoteSearch $voteSearch)
     {
-        $this->normalizer = $normalizer;
-        $this->voteSearch = $voteSearch;
     }
 
     public function hasCacheableSupportsMethod(): bool

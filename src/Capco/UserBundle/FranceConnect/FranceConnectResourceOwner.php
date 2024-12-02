@@ -27,10 +27,6 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         'nickname' => 'preferred_username',
         'birthplace' => 'birthplace',
     ];
-    private readonly RedisCache $redisCache;
-    private readonly SessionInterface $session;
-    private readonly OptionsModifierInterface $optionsModifier;
-    private readonly FeatureChecker $featureChecker;
 
     public function __construct(
         HttpMethodsClientInterface $hwiHttpClient,
@@ -38,21 +34,17 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         array $options,
         string $name,
         RequestDataStorageInterface $hwiStorage,
-        RedisCache $redisCache,
-        SessionInterface $session,
-        OptionsModifierInterface $optionsModifier,
-        FeatureChecker $featureChecker
+        private readonly RedisCache $redisCache,
+        private readonly SessionInterface $session,
+        private readonly OptionsModifierInterface $optionsModifier,
+        private readonly FeatureChecker $featureChecker
     ) {
         $this->httpClient = $hwiHttpClient;
         $this->httpUtils = $httpUtils;
         $this->name = $name;
         $this->storage = $hwiStorage;
-        $this->redisCache = $redisCache;
-        $this->session = $session;
-        $this->featureChecker = $featureChecker;
-        $this->optionsModifier = $optionsModifier;
 
-        $options = $optionsModifier->modifyOptions($options, $this);
+        $options = $this->optionsModifier->modifyOptions($options, $this);
 
         if (!empty($options['paths'])) {
             $this->addPaths($options['paths']);
@@ -150,7 +142,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
 
         try {
             return null !== $this->storage->fetch($this, urldecode($csrfToken), 'csrf_state');
-        } catch (\InvalidArgumentException $e) {
+        } catch (\InvalidArgumentException) {
             throw new AuthenticationException('Given CSRF token is not valid.');
         }
     }

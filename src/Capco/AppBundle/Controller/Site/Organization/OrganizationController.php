@@ -16,24 +16,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class OrganizationController extends AbstractController
 {
-    private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository;
-    private readonly TranslatorInterface $translator;
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly LoginManagerInterface $loginManager;
-
-    public function __construct(
-        PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository,
-        TranslatorInterface $translator,
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        LoginManagerInterface $loginManager
-    ) {
-        $this->pendingOrganizationInvitationRepository = $pendingOrganizationInvitationRepository;
-        $this->translator = $translator;
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->loginManager = $loginManager;
+    public function __construct(private readonly PendingOrganizationInvitationRepository $pendingOrganizationInvitationRepository, private readonly TranslatorInterface $translator, private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly LoginManagerInterface $loginManager)
+    {
     }
 
     /**

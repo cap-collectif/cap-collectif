@@ -10,13 +10,8 @@ use Swarrot\SwarrotBundle\Broker\Publisher;
 
 class UserInviteEmailMessageListener
 {
-    private readonly Publisher $publisher;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(Publisher $publisher, LoggerInterface $logger)
+    public function __construct(private readonly Publisher $publisher, private readonly LoggerInterface $logger)
     {
-        $this->publisher = $publisher;
-        $this->logger = $logger;
     }
 
     public function postPersist(UserInviteEmailMessage $entity, LifecycleEventArgs $args): void
@@ -30,7 +25,7 @@ class UserInviteEmailMessageListener
                     ])
                 )
             );
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
         }
     }

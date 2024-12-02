@@ -11,13 +11,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class ProjectAdminAlphaUrlResolver implements QueryInterface
 {
-    protected RouterInterface $router;
-    private readonly Manager $manager;
-
-    public function __construct(RouterInterface $router, Manager $manager)
+    public function __construct(protected RouterInterface $router, private readonly Manager $manager)
     {
-        $this->router = $router;
-        $this->manager = $manager;
     }
 
     public function __invoke(Project $project): string

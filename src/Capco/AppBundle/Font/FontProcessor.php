@@ -19,11 +19,9 @@ class FontProcessor
         'woff2' => 'woff2',
         'otf' => 'truetype',
     ];
-    private $logger;
 
-    public function __construct(LoggerInterface $logger)
+    public function __construct(private readonly LoggerInterface $logger)
     {
-        $this->logger = $logger;
     }
 
     public function processArchive(UploadedFile $archive): array
@@ -86,7 +84,7 @@ class FontProcessor
                 $familyParts = explode(',', $family);
                 $name = \count($familyParts) > 0 ? $familyParts[0] : $font->getFontName();
             }
-        } catch (ProcessFailedException $exception) {
+        } catch (ProcessFailedException) {
             $this->logger->warning(
                 sprintf(
                     "Unable to read font name from file '%s' using fc-scan",

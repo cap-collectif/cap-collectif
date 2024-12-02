@@ -32,16 +32,10 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class QueryAnalyticsDataLoader extends BatchDataLoader
 {
-    private readonly AnalyticsSearch $analyticsSearch;
-    private readonly CloudflareElasticClient $cloudflareElasticClient;
-    private readonly AnalyticsTopContributors $analyticsTopContributors;
-    private readonly AnalyticsMostUsedProposalCategories $analyticsMostUsedProposalCategories;
-    private readonly ProjectRepository $projectRepository;
-
     public function __construct(
-        AnalyticsSearch $analyticsSearch,
-        ProjectRepository $projectRepository,
-        CloudflareElasticClient $cloudflareElasticClient,
+        private readonly AnalyticsSearch $analyticsSearch,
+        private readonly ProjectRepository $projectRepository,
+        private readonly CloudflareElasticClient $cloudflareElasticClient,
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
@@ -51,14 +45,9 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
         bool $enableCache,
-        AnalyticsTopContributors $analyticsTopContributors,
-        AnalyticsMostUsedProposalCategories $analyticsMostUsedProposalCategories
+        private readonly AnalyticsTopContributors $analyticsTopContributors,
+        private readonly AnalyticsMostUsedProposalCategories $analyticsMostUsedProposalCategories
     ) {
-        $this->analyticsSearch = $analyticsSearch;
-        $this->cloudflareElasticClient = $cloudflareElasticClient;
-        $this->analyticsTopContributors = $analyticsTopContributors;
-        $this->analyticsMostUsedProposalCategories = $analyticsMostUsedProposalCategories;
-        $this->projectRepository = $projectRepository;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

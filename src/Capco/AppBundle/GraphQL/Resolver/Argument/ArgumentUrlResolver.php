@@ -11,15 +11,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ArgumentUrlResolver implements QueryInterface
 {
-    private $opinionUrlResolver;
-    private $opinionVersionUrlResolver;
-
-    public function __construct(
-        OpinionUrlResolver $opinionUrlResolver,
-        OpinionVersionUrlResolver $opinionVersionUrlResolver
-    ) {
-        $this->opinionUrlResolver = $opinionUrlResolver;
-        $this->opinionVersionUrlResolver = $opinionVersionUrlResolver;
+    public function __construct(private readonly OpinionUrlResolver $opinionUrlResolver, private readonly OpinionVersionUrlResolver $opinionVersionUrlResolver)
+    {
     }
 
     public function __invoke(Argument $argument): string

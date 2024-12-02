@@ -19,15 +19,8 @@ use Symfony\Component\Security\Core\Security;
 
 class SentryListener implements EventSubscriberInterface
 {
-    private readonly HubInterface $hub;
-    private readonly Security $security;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(HubInterface $hub, Security $security, LoggerInterface $logger)
+    public function __construct(private readonly HubInterface $hub, private readonly Security $security, private readonly LoggerInterface $logger)
     {
-        $this->hub = $hub;
-        $this->security = $security;
-        $this->logger = $logger;
     }
 
     public function onKernelRequest(RequestEvent $event): void

@@ -12,21 +12,8 @@ use Psr\Log\LoggerInterface;
 
 class ProjectAuthorsResolver implements QueryInterface
 {
-    private readonly UserRepository $userRepository;
-    private readonly LoggerInterface $logger;
-    private readonly ProjectRepository $projectRepository;
-    private readonly OrganizationRepository $organizationRepository;
-
-    public function __construct(
-        UserRepository $userRepository,
-        ProjectRepository $projectRepository,
-        OrganizationRepository $organizationRepository,
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
-        $this->projectRepository = $projectRepository;
-        $this->organizationRepository = $organizationRepository;
-        $this->userRepository = $userRepository;
+    public function __construct(private readonly UserRepository $userRepository, private readonly ProjectRepository $projectRepository, private readonly OrganizationRepository $organizationRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $args, ?User $user): array

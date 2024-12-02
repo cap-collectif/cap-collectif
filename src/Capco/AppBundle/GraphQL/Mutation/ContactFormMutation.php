@@ -24,27 +24,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ContactFormMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly ContactNotifier $contactNotifier;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly LocaleRepository $localeRepository;
 
-    public function __construct(
-        LoggerInterface $logger,
-        EntityManagerInterface $em,
-        ContactNotifier $contactNotifier,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver,
-        LocaleRepository $localeRepository
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->formFactory = $formFactory;
-        $this->contactNotifier = $contactNotifier;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->localeRepository = $localeRepository;
+    public function __construct(private readonly LoggerInterface $logger, private readonly EntityManagerInterface $em, private readonly ContactNotifier $contactNotifier, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly LocaleRepository $localeRepository)
+    {
     }
 
     public function send(Argument $input, ?User $viewer): array

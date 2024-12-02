@@ -26,30 +26,8 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
     final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     final public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
 
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ValidatorInterface $validator;
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly Indexer $indexer;
-    private readonly RequestGuesser $requestGuesser;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        GlobalIdResolver $globalIdResolver,
-        ValidatorInterface $validator,
-        TokenGeneratorInterface $tokenGenerator,
-        Indexer $indexer,
-        RequestGuesser $requestGuesser
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->validator = $validator;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->indexer = $indexer;
-        $this->requestGuesser = $requestGuesser;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ValidatorInterface $validator, private readonly TokenGeneratorInterface $tokenGenerator, private readonly Indexer $indexer, private readonly RequestGuesser $requestGuesser)
+    {
     }
 
     public function __invoke(Arg $input): array

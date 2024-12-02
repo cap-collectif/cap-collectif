@@ -50,35 +50,11 @@ class AddProposalsFromCsvMutation implements MutationInterface
     protected UserManagerInterface $fosUserManager;
     protected Map $map;
     protected array $headers;
-    protected LoggerInterface $logger;
     protected ThemeRepository $themeRepository;
     protected Indexer $indexer;
-    protected ImportProposalsFromCsv $importProposalsFromCsv;
-    protected ProposalFormRepository $proposalFormRepository;
-    private readonly ConnectionBuilder $connectionBuilder;
-    private readonly MediaRepository $mediaRepository;
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(
-        ProposalFormRepository $proposalFormRepository,
-        LoggerInterface $logger,
-        ImportProposalsFromCsv $importProposalsFromCsv,
-        ConnectionBuilder $connectionBuilder,
-        MediaRepository $mediaRepository,
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->mediaRepository = $mediaRepository;
-        $this->logger = $logger;
-        $this->importProposalsFromCsv = $importProposalsFromCsv;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->connectionBuilder = $connectionBuilder;
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(protected ProposalFormRepository $proposalFormRepository, protected LoggerInterface $logger, protected ImportProposalsFromCsv $importProposalsFromCsv, private readonly ConnectionBuilder $connectionBuilder, private readonly MediaRepository $mediaRepository, private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array
@@ -130,42 +106,36 @@ class AddProposalsFromCsvMutation implements MutationInterface
                 'project' => $proposalForm->getProject(),
             ];
         } catch (\RuntimeException $exception) {
-            switch ($exception->getMessage()) {
-                case self::EMPTY_FILE:
-                    return [
-                        'importableProposals' => 0,
-                        'importedProposals' => $this->getConnection([], $input),
-                        'importedProposalsArray' => [],
-                        'badLines' => [],
-                        'duplicates' => [],
-                        'mandatoryMissing' => [],
-                        'errorCode' => self::EMPTY_FILE,
-                    ];
-
-                case self::BAD_DATA_MODEL:
-                    return [
-                        'importableProposals' => 0,
-                        'importedProposals' => $this->getConnection([], $input),
-                        'importedProposalsArray' => [],
-                        'badLines' => [],
-                        'duplicates' => [],
-                        'mandatoryMissing' => [],
-                        'errorCode' => self::BAD_DATA_MODEL,
-                    ];
-
-                case self::TOO_MUCH_LINES:
-                    return [
-                        'importableProposals' => 0,
-                        'importedProposals' => $this->getConnection([], $input),
-                        'importedProposalsArray' => [],
-                        'badLines' => [],
-                        'duplicates' => [],
-                        'mandatoryMissing' => [],
-                        'errorCode' => self::TOO_MUCH_LINES,
-                    ];
-            }
-
-            throw $exception;
+            return match ($exception->getMessage()) {
+                self::EMPTY_FILE => [
+                    'importableProposals' => 0,
+                    'importedProposals' => $this->getConnection([], $input),
+                    'importedProposalsArray' => [],
+                    'badLines' => [],
+                    'duplicates' => [],
+                    'mandatoryMissing' => [],
+                    'errorCode' => self::EMPTY_FILE,
+                ],
+                self::BAD_DATA_MODEL => [
+                    'importableProposals' => 0,
+                    'importedProposals' => $this->getConnection([], $input),
+                    'importedProposalsArray' => [],
+                    'badLines' => [],
+                    'duplicates' => [],
+                    'mandatoryMissing' => [],
+                    'errorCode' => self::BAD_DATA_MODEL,
+                ],
+                self::TOO_MUCH_LINES => [
+                    'importableProposals' => 0,
+                    'importedProposals' => $this->getConnection([], $input),
+                    'importedProposalsArray' => [],
+                    'badLines' => [],
+                    'duplicates' => [],
+                    'mandatoryMissing' => [],
+                    'errorCode' => self::TOO_MUCH_LINES,
+                ],
+                default => throw $exception,
+            };
         }
     }
 

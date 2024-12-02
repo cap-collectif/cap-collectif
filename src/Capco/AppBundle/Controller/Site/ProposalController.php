@@ -64,16 +64,15 @@ class ProposalController extends Controller
         $referer = $request->headers->get('referer');
         if (
             $request->headers->has('referer')
-            && false !==
-                strpos(
-                    (string) $referer,
-                    (string) $this->get('router')->generate(
-                        'app_homepage',
-                        [],
-                        RouterInterface::ABSOLUTE_URL
-                    )
+            && str_contains(
+                (string) $referer,
+                (string) $this->get('router')->generate(
+                    'app_homepage',
+                    [],
+                    RouterInterface::ABSOLUTE_URL
                 )
-            && (false !== strpos((string) $referer, '/selection/') || false !== strpos((string) $referer, '/collect/'))
+            )
+            && (str_contains((string) $referer, '/selection/') || str_contains((string) $referer, '/collect/'))
         ) {
             $refererUri = $referer;
         } else {

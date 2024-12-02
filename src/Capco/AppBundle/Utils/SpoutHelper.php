@@ -15,17 +15,15 @@ use Box\Spout\Reader\SheetInterface;
 class SpoutHelper
 {
     private array $rawHeadersArray = []; //Local array to hold the Raw Headers for performance
-    private array $formattedHeadersArray = []; //Local array to hold the Formatted Headers for performance
-    private readonly int $headerRowNumber; //Row number where the header col is located in the file
+    private array $formattedHeadersArray = []; //Row number where the header col is located in the file
 
     /**
      * Initialize on a per sheet basis
      *  Allow users to mention which row number contains the headers.
      */
-    public function __construct(SheetInterface $sheet, int $headerRowNumber = 1)
+    public function __construct(SheetInterface $sheet, private readonly int $headerRowNumber = 1)
     {
         $this->flushHeaders();
-        $this->headerRowNumber = $headerRowNumber;
 
         $this->getFormattedHeaders($sheet); //Since this also calls the getRawHeaders, we will have both the arrays set at once
     }

@@ -4,24 +4,8 @@ namespace Capco\AppBundle\DTO;
 
 class GoogleMapsAddress
 {
-    protected string $json;
-    protected ?string $formatted;
-    protected array $types;
-    protected float $lat;
-    protected float $lng;
-
-    public function __construct(
-        string $json,
-        array $types,
-        float $lat,
-        float $lng,
-        ?string $formatted
-    ) {
-        $this->json = $json;
-        $this->types = $types;
-        $this->lat = $lat;
-        $this->lng = $lng;
-        $this->formatted = $formatted;
+    public function __construct(protected string $json, protected array $types, protected float $lat, protected float $lng, protected ?string $formatted)
+    {
     }
 
     public static function fromApi(string $response): ?self
@@ -50,7 +34,7 @@ class GoogleMapsAddress
             }
 
             return null;
-        } catch (\InvalidArgumentException $exception) {
+        } catch (\InvalidArgumentException) {
             return null;
         }
     }

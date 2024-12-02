@@ -16,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="page")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PageRepository")
  */
-class Page implements SonataTranslatableInterface, Translatable
+class Page implements SonataTranslatableInterface, Translatable, \Stringable
 {
     use CustomCodeTrait;
     use SonataTranslatableTrait;
@@ -60,7 +60,7 @@ class Page implements SonataTranslatableInterface, Translatable
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New page';
     }

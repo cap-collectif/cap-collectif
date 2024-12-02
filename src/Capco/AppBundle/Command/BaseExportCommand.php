@@ -12,12 +12,10 @@ abstract class BaseExportCommand extends Command
 {
     final public const DEFAULT_CSV_DELIMITER = ';';
     protected bool $snapshot;
-    protected ExportUtils $exportUtils;
 
-    public function __construct(ExportUtils $exportUtils)
+    public function __construct(protected ExportUtils $exportUtils)
     {
         parent::__construct();
-        $this->exportUtils = $exportUtils;
     }
 
     public static function getShortenedFilename(

@@ -16,18 +16,8 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class StepRequirementsResolver implements QueryInterface
 {
-    private readonly RequirementRepository $repository;
-    private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver;
-    private readonly ConnectionBuilder $builder;
-
-    public function __construct(
-        RequirementRepository $repository,
-        ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver,
-        ConnectionBuilder $builder
-    ) {
-        $this->repository = $repository;
-        $this->builder = $builder;
-        $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;
+    public function __construct(private readonly RequirementRepository $repository, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver, private readonly ConnectionBuilder $builder)
+    {
     }
 
     public function __invoke(

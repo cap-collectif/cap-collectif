@@ -14,18 +14,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateProposalFusionMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $formFactory;
-    private $globalIdResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(Argument $input, $user): array

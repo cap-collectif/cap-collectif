@@ -18,21 +18,8 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class AllRequirementsResolver implements QueryInterface
 {
-    private readonly ConnectionBuilder $builder;
-    private readonly Manager $manager;
-    private readonly AbstractSSOConfigurationRepository $abstractSSOConfigurationRepository;
-    private readonly TokenGenerator $tokenGenerator;
-
-    public function __construct(
-        ConnectionBuilder $builder,
-        Manager $manager,
-        AbstractSSOConfigurationRepository $abstractSSOConfigurationRepository,
-        TokenGenerator $tokenGenerator
-    ) {
-        $this->builder = $builder;
-        $this->manager = $manager;
-        $this->abstractSSOConfigurationRepository = $abstractSSOConfigurationRepository;
-        $this->tokenGenerator = $tokenGenerator;
+    public function __construct(private readonly ConnectionBuilder $builder, private readonly Manager $manager, private readonly AbstractSSOConfigurationRepository $abstractSSOConfigurationRepository, private readonly TokenGenerator $tokenGenerator)
+    {
     }
 
     public function __invoke(

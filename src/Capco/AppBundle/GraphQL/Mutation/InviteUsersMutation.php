@@ -26,27 +26,8 @@ class InviteUsersMutation implements MutationInterface
     use MutationTrait;
     private const BATCH_SIZE = 800;
 
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly EntityManagerInterface $em;
-    private readonly UserInviteRepository $userInviteRepository;
-    private readonly UserRepository $userRepository;
-    private readonly GroupRepository $groupRepository;
-    private readonly Manager $manager;
-
-    public function __construct(
-        TokenGeneratorInterface $tokenGenerator,
-        EntityManagerInterface $em,
-        UserInviteRepository $userInviteRepository,
-        UserRepository $userRepository,
-        GroupRepository $groupRepository,
-        Manager $manager
-    ) {
-        $this->tokenGenerator = $tokenGenerator;
-        $this->em = $em;
-        $this->userInviteRepository = $userInviteRepository;
-        $this->userRepository = $userRepository;
-        $this->groupRepository = $groupRepository;
-        $this->manager = $manager;
+    public function __construct(private readonly TokenGeneratorInterface $tokenGenerator, private readonly EntityManagerInterface $em, private readonly UserInviteRepository $userInviteRepository, private readonly UserRepository $userRepository, private readonly GroupRepository $groupRepository, private readonly Manager $manager)
+    {
     }
 
     public function __invoke(Argument $args): array

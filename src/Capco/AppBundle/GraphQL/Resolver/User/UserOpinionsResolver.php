@@ -13,13 +13,8 @@ use Psr\Log\LoggerInterface;
 
 class UserOpinionsResolver implements QueryInterface
 {
-    private $logger;
-    private $opinionRepository;
-
-    public function __construct(OpinionRepository $opinionRepository, LoggerInterface $logger)
+    public function __construct(private readonly OpinionRepository $opinionRepository, private readonly LoggerInterface $logger)
     {
-        $this->opinionRepository = $opinionRepository;
-        $this->logger = $logger;
     }
 
     public function __invoke(User $user, ?User $viewer, ?Argument $args = null): Connection

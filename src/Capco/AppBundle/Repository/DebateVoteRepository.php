@@ -40,7 +40,7 @@ class DebateVoteRepository extends EntityRepository
             ;
 
             return $qb->getQuery()->getOneOrNullResult();
-        } catch (NonUniqueResultException $e) {
+        } catch (NonUniqueResultException) {
             $this->logger->critical(
                 'A user has multiple votes on a debate. This should not happen.',
                 ['debate' => $debate, 'user' => $user]

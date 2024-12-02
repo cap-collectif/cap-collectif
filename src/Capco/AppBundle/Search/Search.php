@@ -29,13 +29,10 @@ abstract class Search
         Query\MultiMatch::TYPE_PHRASE,
         Query\MultiMatch::TYPE_PHRASE_PREFIX,
     ];
-
-    protected Index $index;
     protected $type;
 
-    public function __construct(Index $index)
+    public function __construct(protected Index $index)
     {
-        $this->index = $index;
     }
 
     public static function generateSeed(?RequestStack $requestStack = null, $viewer = null)

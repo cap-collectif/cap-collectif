@@ -104,11 +104,8 @@ class AbstractVoteRepository extends EntityRepository
 
     /**
      * Gets the history of votes for a certain related item.
-     *
-     * @param mixed $objectType
-     * @param mixed $object
      */
-    public function getHistoryFor($objectType, $object)
+    public function getHistoryFor(mixed $objectType, mixed $object)
     {
         $qb = $this->getEntityManager()
             ->createQueryBuilder()
@@ -145,11 +142,10 @@ class AbstractVoteRepository extends EntityRepository
      * Get votes by user.
      *
      * @param user
-     * @param mixed $user
      *
      * @return mixed
      */
-    public function getPublicVotesByUser($user)
+    public function getPublicVotesByUser(mixed $user)
     {
         $qb = $this->getQueryBuilder()
             ->addSelect('u', 'm')
@@ -173,7 +169,7 @@ class AbstractVoteRepository extends EntityRepository
                         $publicVotes[] = $vote;
                     }
                 }
-            } catch (EntityNotFoundException $e) {
+            } catch (EntityNotFoundException) {
             }
         }
 

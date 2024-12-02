@@ -23,13 +23,10 @@ use Elastica\ResultSet;
 
 class ResponseSearch extends Search
 {
-    private readonly AbstractResponseRepository $responseRepository;
-
-    public function __construct(Index $index, AbstractResponseRepository $responseRepository)
+    public function __construct(Index $index, private readonly AbstractResponseRepository $responseRepository)
     {
         parent::__construct($index);
         $this->type = 'response';
-        $this->responseRepository = $responseRepository;
     }
 
     public function countParticipantsByQuestion(
@@ -236,27 +233,14 @@ class ResponseSearch extends Search
     ): AbstractTermsAggregation {
         $responsesCount = $question->getResponses()->count();
         // We set a different minimumOccurrences value that depends on the responses count of the question.
-        switch ($responsesCount) {
-            case $responsesCount <= 10:
-                $agg->setMinimumDocumentCount(2);
+        $minimumDocumentCount = match (true) {
+            $responsesCount <= 10 => 2,
+            $responsesCount <= 20 => 3,
+            $responsesCount <= 25 => 4,
+            default => 5,
+        };
 
-                break;
-
-            case $responsesCount <= 20:
-                $agg->setMinimumDocumentCount(3);
-
-                break;
-
-            case $responsesCount <= 25:
-                $agg->setMinimumDocumentCount(4);
-
-                break;
-
-            default:
-                $agg->setMinimumDocumentCount(5);
-
-                break;
-        }
+        $agg->setMinimumDocumentCount($minimumDocumentCount);
 
         return $agg;
     }

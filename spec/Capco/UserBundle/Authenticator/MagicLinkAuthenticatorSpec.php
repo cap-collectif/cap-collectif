@@ -190,16 +190,11 @@ class MagicLinkAuthenticatorSpec extends ObjectBehavior
 
     private function getCreationDateString(string $createdAtEnum): string
     {
-        switch ($createdAtEnum) {
-            case self::CREATED_AT_IN_DATE:
-                return (new DateTimeImmutable('now -3 minutes'))->format('Y-m-d H:i:s');
-
-            case self::CREATED_AT_OUT_OF_DATE:
-                return (new DateTimeImmutable('1980-01-01'))->format('Y-m-d H:i:s');
-
-            default:
-                return (new DateTimeImmutable('now'))->format('Y-m-d H:i:s');
-        }
+        return match ($createdAtEnum) {
+            self::CREATED_AT_IN_DATE => (new DateTimeImmutable('now -3 minutes'))->format('Y-m-d H:i:s'),
+            self::CREATED_AT_OUT_OF_DATE => (new DateTimeImmutable('1980-01-01'))->format('Y-m-d H:i:s'),
+            default => (new DateTimeImmutable('now'))->format('Y-m-d H:i:s'),
+        };
     }
 
     private function generateTemporaryKeyPair(): void

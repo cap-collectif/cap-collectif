@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class CommentListResolver implements QueryInterface
 {
-    private readonly CommentRepository $repository;
-
-    public function __construct(CommentRepository $repository)
+    public function __construct(private readonly CommentRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     /**

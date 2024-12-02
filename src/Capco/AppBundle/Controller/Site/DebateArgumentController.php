@@ -18,11 +18,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DebateArgumentController extends AbstractController
 {
-    private readonly DebateUrlResolver $debateUrlResolver;
-
-    public function __construct(DebateUrlResolver $debateUrlResolver)
+    public function __construct(private readonly DebateUrlResolver $debateUrlResolver)
     {
-        $this->debateUrlResolver = $debateUrlResolver;
     }
 
     /**

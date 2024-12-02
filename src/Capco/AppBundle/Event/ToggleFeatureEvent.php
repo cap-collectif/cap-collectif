@@ -9,11 +9,8 @@ class ToggleFeatureEvent extends Event
 {
     final public const NAME = 'toggle.feature';
 
-    private readonly Toggle $toggle;
-
-    public function __construct(Toggle $toggle)
+    public function __construct(private readonly Toggle $toggle)
     {
-        $this->toggle = $toggle;
     }
 
     public function getToggle(): Toggle

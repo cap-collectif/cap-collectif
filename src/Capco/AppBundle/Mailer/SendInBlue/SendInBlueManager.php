@@ -19,20 +19,14 @@ class SendInBlueManager
     protected static ?UpdateContact $updater = null;
     protected static ?CreateContact $contactMaker = null;
     private readonly int $listId;
-    private readonly KernelInterface $kernel;
-    private readonly ContactsApi $apiInstance;
-    private readonly LoggerInterface $logger;
 
     public function __construct(
-        KernelInterface $kernel,
-        ContactsApi $apiInstance,
-        LoggerInterface $logger,
+        private readonly KernelInterface $kernel,
+        private readonly ContactsApi $apiInstance,
+        private readonly LoggerInterface $logger,
         string $sendinblueNlListId
     ) {
-        $this->kernel = $kernel;
         $this->listId = (int) $sendinblueNlListId;
-        $this->apiInstance = $apiInstance;
-        $this->logger = $logger;
     }
 
     /**

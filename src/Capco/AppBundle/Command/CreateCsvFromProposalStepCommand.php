@@ -323,10 +323,6 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         'proposal_reportings_author_userType_id' => 'reporting.author.userType.id',
         'proposal_reportings_author_userType_name' => 'reporting.author.userType.name',
     ];
-
-    protected ProjectRepository $projectRepository;
-    protected Manager $toggleManager;
-    protected Executor $executor;
     protected $writer;
     protected $infoResolver;
     protected $currentData;
@@ -336,44 +332,27 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
 
     protected $proposalHeaderMap = [];
 
-    protected LoggerInterface $logger;
-
     protected static $defaultName = 'capco:export:proposalStep';
-    private readonly SelectionStepRepository $selectionStepRepository;
     private readonly string $projectRootDir;
-    private readonly CollectStepRepository $collectStepRepository;
-    private readonly ConnectionTraversor $connectionTraversor;
-    private readonly ProposalRepository $proposalRepository;
-
-    private readonly EntityManagerInterface $entityManager;
 
     public function __construct(
-        Executor $executor,
+        protected Executor $executor,
         ExportUtils $exportUtils,
-        ProjectRepository $projectRepository,
+        protected ProjectRepository $projectRepository,
         GraphQlAclListener $listener,
-        SelectionStepRepository $selectionStepRepository,
-        CollectStepRepository $collectStepRepository,
-        Manager $toggleManager,
-        LoggerInterface $logger,
-        ConnectionTraversor $connectionTraversor,
+        private readonly SelectionStepRepository $selectionStepRepository,
+        private readonly CollectStepRepository $collectStepRepository,
+        protected Manager $toggleManager,
+        protected LoggerInterface $logger,
+        private readonly ConnectionTraversor $connectionTraversor,
         string $projectRootDir,
-        ProposalRepository $proposalRepository,
-        EntityManagerInterface $entityManager
+        private readonly ProposalRepository $proposalRepository,
+        private readonly EntityManagerInterface $entityManager
     ) {
         $listener->disableAcl();
-        $this->executor = $executor;
-        $this->toggleManager = $toggleManager;
-        $this->projectRepository = $projectRepository;
         $this->infoResolver = new InfoResolver();
-        $this->logger = $logger;
-        $this->selectionStepRepository = $selectionStepRepository;
         $this->projectRootDir = $projectRootDir;
-        $this->collectStepRepository = $collectStepRepository;
-        $this->connectionTraversor = $connectionTraversor;
-        $this->proposalRepository = $proposalRepository;
         parent::__construct($exportUtils);
-        $this->entityManager = $entityManager;
     }
 
     /**
@@ -1182,7 +1161,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         string $columnPath,
         array &$row
     ): void {
-        if (false !== strpos((string) $columnName, 'authors')) {
+        if (str_contains((string) $columnName, 'authors')) {
             $paths = explode('.', $columnPath);
             array_shift($paths);
             $path = implode('.', $paths);

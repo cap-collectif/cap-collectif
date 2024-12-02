@@ -16,21 +16,8 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class AddStepService
 {
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly StepFactory $stepFactory;
-
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        AuthorizationCheckerInterface $authorizationChecker,
-        StepFactory $stepFactory
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->stepFactory = $stepFactory;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly StepFactory $stepFactory)
+    {
     }
 
     public function addStep(Argument $input, User $viewer, string $stepType): array
@@ -79,36 +66,17 @@ class AddStepService
 
     private function createStepObject(string $stepType): AbstractStep
     {
-        switch ($stepType) {
-            case 'COLLECT':
-                return $this->stepFactory->createCollectStep();
-
-            case 'VOTE_AND_SELECTION':
-                return $this->stepFactory->createVoteAndSelectionStep();
-
-            case 'DEBATE':
-                return $this->stepFactory->createDebateStep();
-
-            case 'QUESTIONNAIRE':
-                return $this->stepFactory->createQuestionnaireStep();
-
-            case 'CONSULTATION':
-                return $this->stepFactory->createConsultationStep();
-
-            case 'ANALYSIS':
-                return $this->stepFactory->createAnalysisStep();
-
-            case 'RESULT':
-                return $this->stepFactory->createResultStep();
-
-            case 'SELECTION':
-                return $this->stepFactory->createSelectionStep();
-
-            case 'OTHER':
-                return $this->stepFactory->createOtherStep();
-
-            default:
-                throw new UserError('Please select a valid step type');
-        }
+        return match ($stepType) {
+            'COLLECT' => $this->stepFactory->createCollectStep(),
+            'VOTE_AND_SELECTION' => $this->stepFactory->createVoteAndSelectionStep(),
+            'DEBATE' => $this->stepFactory->createDebateStep(),
+            'QUESTIONNAIRE' => $this->stepFactory->createQuestionnaireStep(),
+            'CONSULTATION' => $this->stepFactory->createConsultationStep(),
+            'ANALYSIS' => $this->stepFactory->createAnalysisStep(),
+            'RESULT' => $this->stepFactory->createResultStep(),
+            'SELECTION' => $this->stepFactory->createSelectionStep(),
+            'OTHER' => $this->stepFactory->createOtherStep(),
+            default => throw new UserError('Please select a valid step type'),
+        };
     }
 }

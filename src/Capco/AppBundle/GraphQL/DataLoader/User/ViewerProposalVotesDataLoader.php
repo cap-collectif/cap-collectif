@@ -31,43 +31,26 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
 {
     public bool $enableBatch = true;
     public bool $useElasticsearch = true;
-    private readonly AbstractStepRepository $abstractStepRepository;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ProposalStepVotesResolver $helper;
-    private readonly AbstractVoteRepository $abstractVoteRepository;
-    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        AbstractStepRepository $repository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
-        ProposalStepVotesResolver $helper,
-        GlobalIdResolver $globalIdResolver,
+        private readonly AbstractStepRepository $abstractStepRepository,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
+        private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
+        private readonly ProposalStepVotesResolver $helper,
+        private readonly GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
         GraphQLCollector $collector,
         Stopwatch $stopwatch,
         bool $enableCache,
-        AbstractVoteRepository $abstractVoteRepository
+        private readonly AbstractVoteRepository $abstractVoteRepository
     ) {
-        $this->abstractStepRepository = $repository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->abstractVoteRepository = $abstractVoteRepository;
-        $this->helper = $helper;
-        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
-        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
-
         parent::__construct(
             $this->all(...),
             $promiseFactory,
@@ -150,7 +133,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 $step
             );
         } else {
-            throw new \RuntimeException('Expected a proposal step got :' . \get_class($step));
+            throw new \RuntimeException('Expected a proposal step got :' . $step::class);
         }
         $connection = $paginator->auto($args, $totalCount);
 
@@ -199,7 +182,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 $token
             );
         } else {
-            throw new \RuntimeException('Expected a proposal step got :' . \get_class($step));
+            throw new \RuntimeException('Expected a proposal step got :' . $step::class);
         }
 
         return $paginator->auto($args, $totalCount);

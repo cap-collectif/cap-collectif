@@ -13,18 +13,8 @@ use Psr\Log\LoggerInterface;
 
 class ProjectAllowedGroupsResolver implements QueryInterface
 {
-    private $logger;
-    private $userRepository;
-    private $groupRepository;
-
-    public function __construct(
-        UserRepository $userRepository,
-        GroupRepository $groupRepository,
-        LoggerInterface $logger
-    ) {
-        $this->logger = $logger;
-        $this->userRepository = $userRepository;
-        $this->groupRepository = $groupRepository;
+    public function __construct(private readonly UserRepository $userRepository, private readonly GroupRepository $groupRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Project $project, Argument $args): Connection

@@ -19,20 +19,10 @@ class MagicLinkAuthenticator
     final public const TOKEN_CONFIG_FOLDER = '/jwt';
     final public const DEFAULT_TOKEN_LIFETIME_IN_MINUTES = 5;
 
-    private readonly UserEmailProvider $userProvider;
-    private readonly ConfigFileSystem $filesystem;
-
     private ?string $redirectUrl = null;
-    private readonly int $tokenLifetimeInMinutes;
 
-    public function __construct(
-        UserEmailProvider $userProvider,
-        ConfigFileSystem $filesystem,
-        int $tokenLifetimeInMinutes = self::DEFAULT_TOKEN_LIFETIME_IN_MINUTES
-    ) {
-        $this->userProvider = $userProvider;
-        $this->filesystem = $filesystem;
-        $this->tokenLifetimeInMinutes = $tokenLifetimeInMinutes;
+    public function __construct(private readonly UserEmailProvider $userProvider, private readonly ConfigFileSystem $filesystem, private readonly int $tokenLifetimeInMinutes = self::DEFAULT_TOKEN_LIFETIME_IN_MINUTES)
+    {
     }
 
     /**

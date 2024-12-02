@@ -21,25 +21,12 @@ class WriterFactory
     {
         $writer = null;
 
-        switch ($writerType) {
-            case Type::CSV:
-                $writer = WriterEntityFactory::createCSVWriter();
-
-                break;
-
-            case Type::XLSX:
-                $writer = WriterEntityFactory::createXLSXWriter();
-
-                break;
-
-            case Type::ODS:
-                $writer = WriterEntityFactory::createODSWriter();
-
-                break;
-
-            default:
-                throw new UnsupportedTypeException('No writers supporting the given type: ' . $writerType);
-        }
+        $writer = match ($writerType) {
+            Type::CSV => WriterEntityFactory::createCSVWriter(),
+            Type::XLSX => WriterEntityFactory::createXLSXWriter(),
+            Type::ODS => WriterEntityFactory::createODSWriter(),
+            default => throw new UnsupportedTypeException('No writers supporting the given type: ' . $writerType),
+        };
 
         $writer->setFieldDelimiter($delimiter);
 

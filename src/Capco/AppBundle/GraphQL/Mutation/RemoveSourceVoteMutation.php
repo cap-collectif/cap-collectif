@@ -19,27 +19,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class RemoveSourceVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly SourceVoteRepository $sourceVoteRepo;
-    private readonly SourceRepository $sourceRepo;
-    private readonly RedisStorageHelper $redisStorageHelper;
-    private readonly StepRequirementsResolver $stepRequirementsResolver;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        SourceVoteRepository $sourceVoteRepo,
-        SourceRepository $sourceRepo,
-        RedisStorageHelper $redisStorageHelper,
-        StepRequirementsResolver $stepRequirementsResolver,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->sourceVoteRepo = $sourceVoteRepo;
-        $this->sourceRepo = $sourceRepo;
-        $this->redisStorageHelper = $redisStorageHelper;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SourceVoteRepository $sourceVoteRepo, private readonly SourceRepository $sourceRepo, private readonly RedisStorageHelper $redisStorageHelper, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

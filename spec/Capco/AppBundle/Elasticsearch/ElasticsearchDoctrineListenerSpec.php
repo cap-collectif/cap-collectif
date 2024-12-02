@@ -81,7 +81,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $message = new Message(
             json_encode([
-                'class' => \get_class($event->getWrappedObject()),
+                'class' => $event->getWrappedObject()::class,
                 'id' => 'event1',
             ])
         );
@@ -111,7 +111,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $replyMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($reply->getWrappedObject()),
+                    'class' => $reply->getWrappedObject()::class,
                     'id' => 'reply1',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -121,7 +121,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $userMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($author->getWrappedObject()),
+                    'class' => $author->getWrappedObject()::class,
                     'id' => 'user1',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -131,7 +131,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $responseMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($response->getWrappedObject()),
+                    'class' => $response->getWrappedObject()::class,
                     'id' => '10',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -187,7 +187,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $projectMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($project->getWrappedObject()),
+                    'class' => $project->getWrappedObject()::class,
                     'id' => 'project1',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -196,7 +196,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $proposalMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($proposal->getWrappedObject()),
+                    'class' => $proposal->getWrappedObject()::class,
                     'id' => 'proposal1',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -205,7 +205,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $opinionMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($opinion->getWrappedObject()),
+                    'class' => $opinion->getWrappedObject()::class,
                     'id' => 'opinion1',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -248,7 +248,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $projectMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($project->getWrappedObject()),
+                    'class' => $project->getWrappedObject()::class,
                     'id' => 'project1',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -257,7 +257,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
         $proposalMessage = new Message(
             json_encode(
                 [
-                    'class' => \get_class($proposal->getWrappedObject()),
+                    'class' => $proposal->getWrappedObject()::class,
                     'id' => 'proposal1',
                 ],
                 \JSON_THROW_ON_ERROR
@@ -291,12 +291,12 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $proposalMessage = new Message(
             json_encode([
-                'class' => \get_class($proposal->getWrappedObject()),
+                'class' => $proposal->getWrappedObject()::class,
                 'id' => 'proposal1',
             ])
         );
         $authorMessage = new Message(
-            json_encode(['class' => \get_class($author->getWrappedObject()), 'id' => 'user1'])
+            json_encode(['class' => $author->getWrappedObject()::class, 'id' => 'user1'])
         );
 
         $listener->addToMessageStack($proposalMessage, 1)->shouldBeCalledOnce();
@@ -323,19 +323,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $proposalCollectVoteMessage = new Message(
             (string) json_encode([
-                'class' => \get_class($vote->getWrappedObject()),
+                'class' => $vote->getWrappedObject()::class,
                 'id' => 'proposalCollectVote1',
             ])
         );
         $proposalMessage = new Message(
             (string) json_encode([
-                'class' => \get_class($proposal->getWrappedObject()),
+                'class' => $proposal->getWrappedObject()::class,
                 'id' => 'proposal1',
             ])
         );
         $voteAuthorMessage = new Message(
             (string) json_encode([
-                'class' => \get_class($voteAuthor->getWrappedObject()),
+                'class' => $voteAuthor->getWrappedObject()::class,
                 'id' => 'user1',
             ])
         );
@@ -353,19 +353,19 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
     ): void {
         $commentMessage = new Message(
             (string) json_encode([
-                'class' => \get_class($comment->getWrappedObject()),
+                'class' => $comment->getWrappedObject()::class,
                 'id' => 'comment1',
             ])
         );
         $commentProposalMessage = new Message(
             (string) json_encode([
-                'class' => \get_class($commentProposal->getWrappedObject()),
+                'class' => $commentProposal->getWrappedObject()::class,
                 'id' => 'proposal1',
             ])
         );
         $commentAuthorMessage = new Message(
             (string) json_encode([
-                'class' => \get_class($commentAuthor->getWrappedObject()),
+                'class' => $commentAuthor->getWrappedObject()::class,
                 'id' => 'user1',
             ])
         );
@@ -398,7 +398,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $message = new Message(
             (string) json_encode([
-                'class' => \get_class($projectDistrict->getWrappedObject()),
+                'class' => $projectDistrict->getWrappedObject()::class,
                 'id' => 'projectDistrict1',
             ])
         );
@@ -417,7 +417,7 @@ class ElasticsearchDoctrineListenerSpec extends ObjectBehavior
 
         $message = new Message(
             (string) json_encode([
-                'class' => \get_class($proposalDistrict->getWrappedObject()),
+                'class' => $proposalDistrict->getWrappedObject()::class,
                 'id' => 'proposalDistrict1',
             ])
         );

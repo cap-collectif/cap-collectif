@@ -19,25 +19,17 @@ class ExportUsersCommand extends BaseExportCommand
     final public const EXPORT_FOLDER = 'users/';
 
     private const CAPCO_EXPORT_USERS = 'capco:export:users';
-    private readonly Manager $toggleManager;
     private readonly string $projectRootDir;
-    private readonly Stopwatch $stopwatch;
-    private readonly UserExporter $userExporter;
-    private readonly UsersFilePathResolver $usersFilePathResolver;
 
     public function __construct(
         ExportUtils $exportUtils,
-        Manager $manager,
-        Stopwatch $stopwatch,
-        UserExporter $userExporter,
-        UsersFilePathResolver $usersFilePathResolver,
+        private readonly Manager $toggleManager,
+        private readonly Stopwatch $stopwatch,
+        private readonly UserExporter $userExporter,
+        private readonly UsersFilePathResolver $usersFilePathResolver,
         string $projectRootDir
     ) {
-        $this->toggleManager = $manager;
         $this->projectRootDir = $projectRootDir;
-        $this->userExporter = $userExporter;
-        $this->stopwatch = $stopwatch;
-        $this->usersFilePathResolver = $usersFilePathResolver;
         parent::__construct($exportUtils);
     }
 

@@ -9,18 +9,8 @@ use Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository;
 
 class SmsAnalyticsHelper
 {
-    private readonly SmsCreditRepository $smsCreditRepository;
-    private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository;
-    private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
-
-    public function __construct(
-        SmsCreditRepository $smsCreditRepository,
-        UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository,
-        AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
-    ) {
-        $this->smsCreditRepository = $smsCreditRepository;
-        $this->userPhoneVerificationSmsRepository = $userPhoneVerificationSmsRepository;
-        $this->anonymousUserProposalSmsVoteRepository = $anonymousUserProposalSmsVoteRepository;
+    public function __construct(private readonly SmsCreditRepository $smsCreditRepository, private readonly UserPhoneVerificationSmsRepository $userPhoneVerificationSmsRepository, private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository)
+    {
     }
 
     public function getTotalCredits(): int

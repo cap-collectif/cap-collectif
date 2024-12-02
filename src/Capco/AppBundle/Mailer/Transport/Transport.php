@@ -10,24 +10,8 @@ use Swift_Mime_SimpleMessage;
 
 class Transport implements \Swift_Transport
 {
-    private readonly MandrillTransport $mandrillTransport;
-    private readonly MailjetTransport $mailjetTransport;
-    private readonly \Swift_Events_EventDispatcher $dispatcher;
-    private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        MandrillTransport $mandrillTransport,
-        MailjetTransport $mailjetTransport,
-        \Swift_Events_EventDispatcher $dispatcher,
-        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
-        LoggerInterface $logger
-    ) {
-        $this->mandrillTransport = $mandrillTransport;
-        $this->mailjetTransport = $mailjetTransport;
-        $this->dispatcher = $dispatcher;
-        $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
-        $this->logger = $logger;
+    public function __construct(private readonly MandrillTransport $mandrillTransport, private readonly MailjetTransport $mailjetTransport, private readonly \Swift_Events_EventDispatcher $dispatcher, private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository, private readonly LoggerInterface $logger)
+    {
     }
 
     /**

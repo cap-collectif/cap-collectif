@@ -25,18 +25,8 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
 {
     use MutationTrait;
 
-    protected GlobalIdResolver $resolver;
-    protected EntityManagerInterface $entityManager;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(
-        GlobalIdResolver $resolver,
-        EntityManagerInterface $entityManager,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->resolver = $resolver;
-        $this->entityManager = $entityManager;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(protected GlobalIdResolver $resolver, protected EntityManagerInterface $entityManager, protected AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     protected function findCampaignFromGlobalId(string $globalId, User $viewer): ?EmailingCampaign

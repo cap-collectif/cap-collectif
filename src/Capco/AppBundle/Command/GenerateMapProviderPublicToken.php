@@ -27,31 +27,21 @@ class GenerateMapProviderPublicToken extends Command
     protected static $defaultName = 'capco:generate:map-token';
 
     private SymfonyStyle $io;
-    private readonly MapboxClient $mapboxClient;
-    private readonly MapTokenRepository $mapTokenRepository;
-    private readonly EntityManagerInterface $em;
-    /**
-     * To enable map views, you need a mapbox access token
-     * https://www.mapbox.com/
-     * "tokens:read", "tokens:write" scopes.
-     */
-    private readonly string $mapboxSecretKey;
-    private readonly string $instanceName;
 
     public function __construct(
-        string $mapboxSecretKey,
-        string $instanceName,
-        EntityManagerInterface $em,
-        MapTokenRepository $mapTokenRepository,
-        MapboxClient $mapboxClient,
+        /**
+         * To enable map views, you need a mapbox access token
+         * https://www.mapbox.com/
+         * "tokens:read", "tokens:write" scopes.
+         */
+        private readonly string $mapboxSecretKey,
+        private readonly string $instanceName,
+        private readonly EntityManagerInterface $em,
+        private readonly MapTokenRepository $mapTokenRepository,
+        private readonly MapboxClient $mapboxClient,
         ?string $name = null
     ) {
         parent::__construct($name);
-        $this->mapboxClient = $mapboxClient;
-        $this->mapTokenRepository = $mapTokenRepository;
-        $this->em = $em;
-        $this->mapboxSecretKey = $mapboxSecretKey;
-        $this->instanceName = $instanceName;
     }
 
     protected function configure(): void

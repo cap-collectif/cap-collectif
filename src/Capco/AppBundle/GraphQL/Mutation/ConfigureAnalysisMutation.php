@@ -31,33 +31,9 @@ class ConfigureAnalysisMutation implements MutationInterface
     use ResolverTrait;
 
     private $analysisConfigurationRepository;
-    private $proposalFormRepository;
-    private $questionnaireRepository;
-    private $abstractStepRepository;
-    private $statusRepository;
-    private $selectionStepRepository;
-    private $entityManager;
-    private readonly LoggerInterface $logger;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
-    public function __construct(
-        ProposalFormRepository $proposalFormRepository,
-        QuestionnaireRepository $questionnaireRepository,
-        AbstractStepRepository $abstractStepRepository,
-        StatusRepository $statusRepository,
-        SelectionStepRepository $selectionStepRepository,
-        EntityManagerInterface $entityManager,
-        LoggerInterface $logger,
-        AuthorizationCheckerInterface $authorizationChecker
-    ) {
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->questionnaireRepository = $questionnaireRepository;
-        $this->abstractStepRepository = $abstractStepRepository;
-        $this->statusRepository = $statusRepository;
-        $this->selectionStepRepository = $selectionStepRepository;
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
-        $this->authorizationChecker = $authorizationChecker;
+    public function __construct(private ProposalFormRepository $proposalFormRepository, private QuestionnaireRepository $questionnaireRepository, private AbstractStepRepository $abstractStepRepository, private StatusRepository $statusRepository, private SelectionStepRepository $selectionStepRepository, private EntityManagerInterface $entityManager, private readonly LoggerInterface $logger, private readonly AuthorizationCheckerInterface $authorizationChecker)
+    {
     }
 
     public function __invoke(Argument $args, $viewer): array

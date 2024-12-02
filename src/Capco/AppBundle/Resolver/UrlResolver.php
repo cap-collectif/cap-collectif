@@ -24,23 +24,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 class UrlResolver
 {
-    protected RouterInterface $router;
-    protected RequestStack $requestStack;
-    protected Manager $manager;
     protected string $defaultLocale;
-    protected StepUrlResolver $stepUrlResolver;
 
     public function __construct(
-        RouterInterface $router,
-        Manager $manager,
-        RequestStack $requestStack,
+        protected RouterInterface $router,
+        protected Manager $manager,
+        protected RequestStack $requestStack,
         LocaleResolver $localeResolver,
-        StepUrlResolver $stepUrlResolver
+        protected StepUrlResolver $stepUrlResolver
     ) {
-        $this->router = $router;
-        $this->manager = $manager;
-        $this->requestStack = $requestStack;
-        $this->stepUrlResolver = $stepUrlResolver;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
     }
 

@@ -26,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "section"         = "SectionQuestion",
  * })
  */
-abstract class AbstractQuestion implements DisplayableInBOInterface
+abstract class AbstractQuestion implements DisplayableInBOInterface, \Stringable
 {
     use DescriptionUsingJoditWysiwygTrait;
     use IdTrait;
@@ -145,10 +145,10 @@ abstract class AbstractQuestion implements DisplayableInBOInterface
         $this->responses = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         if ($this->getId()) {
-            return $this->getTitle();
+            return (string) $this->getTitle();
         }
 
         return 'New Question';

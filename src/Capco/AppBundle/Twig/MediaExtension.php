@@ -9,18 +9,8 @@ use Twig\TwigFunction;
 
 class MediaExtension extends AbstractExtension
 {
-    private readonly MediaProvider $mediaProvider;
-    private readonly string $routerRequestContextHost;
-    private readonly ?string $assetsHost;
-
-    public function __construct(
-        MediaProvider $mediaProvider,
-        string $routerRequestContextHost,
-        ?string $assetsHost = null
-    ) {
-        $this->mediaProvider = $mediaProvider;
-        $this->assetsHost = $assetsHost;
-        $this->routerRequestContextHost = $routerRequestContextHost;
+    public function __construct(private readonly MediaProvider $mediaProvider, private readonly string $routerRequestContextHost, private ?string $assetsHost = null)
+    {
     }
 
     public function getFunctions(): array

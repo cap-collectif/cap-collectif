@@ -12,18 +12,15 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class UserArchiveNotifier extends BaseNotifier
 {
-    private readonly UserLoginAndShowDataUrlResolver $userLoginAndShowDataUrlResolver;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        UserLoginAndShowDataUrlResolver $userLoginAndShowDataUrlResolver,
+        private readonly UserLoginAndShowDataUrlResolver $userLoginAndShowDataUrlResolver,
         RouterInterface $router,
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
         $this->router = $router;
-        $this->userLoginAndShowDataUrlResolver = $userLoginAndShowDataUrlResolver;
     }
 
     public function onUserArchiveGenerated(UserArchive $archive): void

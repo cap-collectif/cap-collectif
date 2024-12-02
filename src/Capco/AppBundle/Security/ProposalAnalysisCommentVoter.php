@@ -36,12 +36,10 @@ class ProposalAnalysisCommentVoter extends Voter
             return false;
         }
 
-        switch ($attribute) {
-            case self::CREATE:
-                return $this->canCreate($subject, $viewer);
-        }
-
-        throw new \LogicException('This code should not be reached!');
+        return match ($attribute) {
+            self::CREATE => $this->canCreate($subject, $viewer),
+            default => throw new \LogicException('This code should not be reached!'),
+        };
     }
 
     private function canCreate(ProposalAnalysisComment $proposalAnalysisComment, User $viewer): bool

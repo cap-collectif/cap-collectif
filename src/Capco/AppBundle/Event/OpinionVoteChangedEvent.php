@@ -6,11 +6,8 @@ use Capco\AppBundle\Entity\OpinionVote;
 
 class OpinionVoteChangedEvent extends AbstractVoteChangedEvent
 {
-    private $previous;
-
-    public function __construct(OpinionVote $vote, $action, $previous = null)
+    public function __construct(OpinionVote $vote, $action, private $previous = null)
     {
-        $this->previous = $previous;
         parent::__construct($vote, $action);
     }
 

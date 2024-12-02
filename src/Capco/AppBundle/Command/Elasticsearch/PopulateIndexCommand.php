@@ -14,13 +14,11 @@ class PopulateIndexCommand extends Command
 {
     protected $toggleManager;
     protected $indexer;
-    private readonly Stopwatch $stopwatch;
 
-    public function __construct(Manager $toggleManager, Indexer $indexer, Stopwatch $stopwatch)
+    public function __construct(Manager $toggleManager, Indexer $indexer, private readonly Stopwatch $stopwatch)
     {
         $this->toggleManager = $toggleManager;
         $this->indexer = $indexer;
-        $this->stopwatch = $stopwatch;
         parent::__construct();
     }
 

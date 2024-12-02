@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class ConsultationStepConsultationsResolver implements QueryInterface
 {
-    private $repository;
-
-    public function __construct(ConsultationRepository $repository)
+    public function __construct(private readonly ConsultationRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(ConsultationStep $step, Argument $args): Connection

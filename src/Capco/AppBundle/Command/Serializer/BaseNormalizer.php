@@ -68,12 +68,8 @@ abstract class BaseNormalizer
         ForOrAgainstType::AGAINST => self::EXPORT_CONTRIBUTION_ARGUMENT_TYPE_AGAINST,
     ];
 
-    protected TranslatorInterface $translator;
-
-    public function __construct(
-        TranslatorInterface $translator
-    ) {
-        $this->translator = $translator;
+    public function __construct(protected TranslatorInterface $translator)
+    {
     }
 
     protected function getReadableBoolean(bool $value): string

@@ -9,16 +9,13 @@ use Psr\Log\LoggerInterface;
 
 class Client extends BaseClient
 {
-    private $debug;
-
     public function __construct(
         array $config = [],
         ?callable $callback = null,
         ?LoggerInterface $logger = null,
-        bool $debug = false
+        private readonly bool $debug = false
     ) {
         parent::__construct($config, $callback, $logger);
-        $this->debug = $debug;
     }
 
     public function request(
@@ -29,7 +26,7 @@ class Client extends BaseClient
         $contentType = Request::DEFAULT_CONTENT_TYPE
     ): Response {
         // ES < 7 compatibility, always count real total
-        if (false !== strpos($path, '_search') && \is_array($query)) {
+        if (str_contains($path, '_search') && \is_array($query)) {
             $query['track_total_hits'] = true;
         }
 

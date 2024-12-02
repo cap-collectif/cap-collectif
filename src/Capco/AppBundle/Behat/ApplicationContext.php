@@ -149,7 +149,7 @@ class ApplicationContext extends UserContext
 
         try {
             $this->snapshot->deleteSnapshot(REPOSITORY_NAME, SNAPSHOT_NAME);
-        } catch (\Elastica\Exception\ResponseException $e) {
+        } catch (\Elastica\Exception\ResponseException) {
             echo 'No ElasticSearch snapshot detected.' . \PHP_EOL;
         }
         echo 'Writing ElasticSearch snapshot.' . \PHP_EOL;
@@ -325,10 +325,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Given I visited :pageName with:
-     *
-     * @param mixed $pageName
      */
-    public function iVisitedPageWith($pageName, TableNode $parameters)
+    public function iVisitedPageWith(mixed $pageName, TableNode $parameters)
     {
         $this->navigationContext->iVisitedPageWith($pageName, $parameters);
         $this->setCookieConsent();
@@ -348,7 +346,7 @@ class ApplicationContext extends UserContext
         try {
             $driver->evaluateScript('window.sessionStorage.clear();');
             $driver->evaluateScript('window.localStorage.clear();');
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             echo 'Failed to clear localStorage !' . \PHP_EOL;
         }
 
@@ -715,18 +713,15 @@ class ApplicationContext extends UserContext
     {
         try {
             $this->waitAndThrowOnFailure($timeout, '$("' . $selector . '").length == ' . $nb);
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             $this->assertSession()->elementsCount('css', $selector, $nb);
         }
     }
 
     /**
      * @Then :first should be before :second for selector :cssQuery
-     *
-     * @param mixed $first
-     * @param mixed $second
      */
-    public function element1ShouldBeBeforeElement2ForSelector($first, $second, string $cssQuery)
+    public function element1ShouldBeBeforeElement2ForSelector(mixed $first, mixed $second, string $cssQuery)
     {
         $items = array_map(
             function ($element) {
@@ -777,11 +772,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I trigger element :element with action :action
-     *
-     * @param mixed $element
-     * @param mixed $action
      */
-    public function iTriggerElementWithAction($element, $action)
+    public function iTriggerElementWithAction(mixed $element, mixed $action)
     {
         $this->getSession()
             ->getDriver()
@@ -900,10 +892,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When The field :field should be disabled
-     *
-     * @param mixed $field
      */
-    public function theFieldShouldBeDisabled($field)
+    public function theFieldShouldBeDisabled(mixed $field)
     {
         $page = $this->getCurrentPage();
         $field = $this->fixStepArgument($field);
@@ -915,10 +905,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When The field :field should be enabled
-     *
-     * @param mixed $field
      */
-    public function theFieldShouldBeEnabled($field)
+    public function theFieldShouldBeEnabled(mixed $field)
     {
         $page = $this->getCurrentPage();
         $field = $this->fixStepArgument($field);
@@ -935,7 +923,7 @@ class ApplicationContext extends UserContext
     {
         try {
             $this->getSession()->wait((int) ($seconds * 1000));
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             sleep($seconds);
         }
     }
@@ -1286,11 +1274,8 @@ class ApplicationContext extends UserContext
      * Checks that an element has an attribute.
      *
      * @Then /^The element "([^"]*)" should have attribute :attribute $/
-     *
-     * @param mixed $selector
-     * @param mixed $attribute
      */
-    public function theElementHasAttribute($selector, $attribute)
+    public function theElementHasAttribute(mixed $selector, mixed $attribute)
     {
         $this->iWaitElementToAppearOnPage($selector);
 
@@ -1342,10 +1327,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Given I disable toggle :value
-     *
-     * @param mixed $value
      */
-    public function iDisableElement($value)
+    public function iDisableElement(mixed $value)
     {
         $input = ".checked[for='{$value}']";
 
@@ -1361,10 +1344,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Given I enable toggle :value
-     *
-     * @param mixed $value
      */
-    public function iEnableElement($value)
+    public function iEnableElement(mixed $value)
     {
         $input = ".unchecked[for='{$value}']";
 
@@ -1380,10 +1361,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then The element :element should be disabled
-     *
-     * @param mixed $element
      */
-    public function theElementShouldBeDisabled($element)
+    public function theElementShouldBeDisabled(mixed $element)
     {
         $input = $this->getSession()
             ->getPage()
@@ -1395,12 +1374,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then the number :number element in :list should contain :value
-     *
-     * @param mixed $number
-     * @param mixed $list
-     * @param mixed $value
      */
-    public function assertListElementContains($number, $list, $value)
+    public function assertListElementContains(mixed $number, mixed $list, mixed $value)
     {
         $elements = $this->getSession()
             ->getPage()
@@ -1494,11 +1469,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @Then The element :element should contain :number sub-elements
-     *
-     * @param mixed $element
-     * @param mixed $number
      */
-    public function checkCountChildren($element, $number): void
+    public function checkCountChildren(mixed $element, mixed $number): void
     {
         $container = $this->getSession()
             ->getPage()
@@ -1522,7 +1494,7 @@ class ApplicationContext extends UserContext
 
         try {
             $this->assertElementContainsText($list, $text);
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             $this->iSearchTextInList($text, $list);
         }
     }
@@ -1541,10 +1513,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I fill the theme filter with value :value
-     *
-     * @param mixed $value
      */
-    public function iFillThemeFilterWithValue($value)
+    public function iFillThemeFilterWithValue(mixed $value)
     {
         $this->waitAndThrowOnFailure(3000, "$('#SelectTheme-filter-theme').length > 0");
 
@@ -1561,10 +1531,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I fill the project filter with value :value
-     *
-     * @param mixed $value
      */
-    public function iFillProjectFilterWithValue($value)
+    public function iFillProjectFilterWithValue(mixed $value)
     {
         $this->waitAndThrowOnFailure(3000, "$('#SelectProject-filter-project').length > 0");
 
@@ -1604,10 +1572,8 @@ class ApplicationContext extends UserContext
 
     /**
      * @When I fill the date field in :selector
-     *
-     * @param mixed $selector
      */
-    public function iFillDateFieldIn($selector)
+    public function iFillDateFieldIn(mixed $selector)
     {
         $calendar = $this->getSession()
             ->getPage()

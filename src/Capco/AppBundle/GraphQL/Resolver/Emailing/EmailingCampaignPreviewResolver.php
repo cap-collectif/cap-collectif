@@ -12,26 +12,14 @@ use Twig\Environment;
 
 class EmailingCampaignPreviewResolver implements QueryInterface
 {
-    private readonly SiteParameterResolver $siteParams;
-    private readonly RouterInterface $router;
-    private readonly Environment $twig;
-
-    public function __construct(
-        SiteParameterResolver $siteParams,
-        RouterInterface $router,
-        Environment $twig
-    ) {
-        $this->siteParams = $siteParams;
-        $this->router = $router;
-        $this->twig = $twig;
+    public function __construct(private readonly SiteParameterResolver $siteParams, private readonly RouterInterface $router, private readonly Environment $twig)
+    {
     }
 
     /**
      * @todo set user_locale to localize the campaign
-     *
-     * @param mixed $campaign
      */
-    public function __invoke($campaign): string
+    public function __invoke(mixed $campaign): string
     {
         return $this->twig->render(EmailingCampaignMessage::TEMPLATE, [
             'baseUrl' => $this->router->generate(

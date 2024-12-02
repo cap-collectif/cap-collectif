@@ -7,11 +7,8 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 
 class StepResolver
 {
-    private readonly UrlResolver $urlResolver;
-
-    public function __construct(UrlResolver $urlResolver)
+    public function __construct(private readonly UrlResolver $urlResolver)
     {
-        $this->urlResolver = $urlResolver;
     }
 
     public function getLink(?AbstractStep $step = null, bool $absolute = false): string

@@ -11,17 +11,12 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class DebateArgumentInterfaceNormalizer extends BaseNormalizer implements NormalizerInterface
 {
-    private readonly DebateUrlResolver $debateUrlResolver;
-    private readonly GeoIPReader $geoIPReader;
-
     public function __construct(
         TranslatorInterface $translator,
-        DebateUrlResolver $debateUrlResolver,
-        GeoIPReader $geoIPReader
+        private readonly DebateUrlResolver $debateUrlResolver,
+        private readonly GeoIPReader $geoIPReader
     ) {
         parent::__construct($translator);
-        $this->debateUrlResolver = $debateUrlResolver;
-        $this->geoIPReader = $geoIPReader;
     }
 
     /**

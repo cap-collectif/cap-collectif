@@ -35,51 +35,9 @@ class AddProposalVoteMutation implements MutationInterface
     use MutationTrait;
 
     final public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
-    private readonly EntityManagerInterface $em;
-    private readonly ProposalVotesDataLoader $proposalVotesDataLoader;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler;
-    private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader;
-    private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader;
-    private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly StepRequirementsResolver $resolver;
-    private readonly LoggerInterface $logger;
-    private readonly ValidatorInterface $validator;
-    private readonly RequestGuesser $requestGuesser;
-    private readonly ContributionValidator $contributionValidator;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ValidatorInterface $validator,
-        LoggerInterface $logger,
-        ProposalVoteAccountHandler $proposalVoteAccountHandler,
-        StepRequirementsResolver $resolver,
-        ProposalVotesDataLoader $proposalVotesDataLoader,
-        ProposalCollectVoteRepository $proposalCollectVote,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader,
-        ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader,
-        ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader,
-        GlobalIdResolver $globalIdResolver,
-        RequestGuesser $requestGuesser,
-        ContributionValidator $contributionValidator
-    ) {
-        $this->em = $em;
-        $this->validator = $validator;
-        $this->logger = $logger;
-        $this->resolver = $resolver;
-        $this->proposalVoteAccountHandler = $proposalVoteAccountHandler;
-        $this->proposalVotesDataLoader = $proposalVotesDataLoader;
-        $this->proposalCollectVoteRepository = $proposalCollectVote;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalViewerVoteDataLoader = $proposalViewerVoteDataLoader;
-        $this->proposalViewerHasVoteDataLoader = $proposalViewerHasVoteDataLoader;
-        $this->viewerProposalVotesDataLoader = $viewerProposalVotesDataLoader;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->requestGuesser = $requestGuesser;
-        $this->contributionValidator = $contributionValidator;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ValidatorInterface $validator, private readonly LoggerInterface $logger, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly StepRequirementsResolver $resolver, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly GlobalIdResolver $globalIdResolver, private readonly RequestGuesser $requestGuesser, private readonly ContributionValidator $contributionValidator)
+    {
     }
 
     public function __invoke(Argument $input, User $user): array
@@ -139,7 +97,7 @@ class AddProposalVoteMutation implements MutationInterface
         if ($step instanceof SelectionStep && $user->getPhone()) {
             try {
                 $this->contributionValidator->validatePhoneReusability($user->getPhone(), $vote, $step, null, $user);
-            } catch (ContributorAlreadyUsedPhoneException $e) {
+            } catch (ContributorAlreadyUsedPhoneException) {
                 return ['errorCode' => self::PHONE_ALREADY_USED];
             }
         }
@@ -176,7 +134,7 @@ class AddProposalVoteMutation implements MutationInterface
             $this->proposalViewerVoteDataLoader->invalidate($proposal);
             $this->proposalViewerHasVoteDataLoader->invalidate($proposal);
             $this->viewerProposalVotesDataLoader->invalidate($user);
-        } catch (UniqueConstraintViolationException $e) {
+        } catch (UniqueConstraintViolationException) {
             throw new UserError('proposal.vote.already_voted');
         }
 

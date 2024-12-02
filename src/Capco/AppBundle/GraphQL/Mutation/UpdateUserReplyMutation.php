@@ -23,24 +23,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateUserReplyMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly ResponsesFormatter $responsesFormatter;
-    private readonly ReplyRepository $replyRepo;
-    private readonly Publisher $publisher;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        ReplyRepository $replyRepo,
-        ResponsesFormatter $responsesFormatter,
-        Publisher $publisher
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->replyRepo = $replyRepo;
-        $this->responsesFormatter = $responsesFormatter;
-        $this->publisher = $publisher;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ReplyRepository $replyRepo, private readonly ResponsesFormatter $responsesFormatter, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

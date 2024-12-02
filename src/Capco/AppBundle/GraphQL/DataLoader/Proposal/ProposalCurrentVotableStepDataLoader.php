@@ -15,15 +15,12 @@ use Symfony\Component\Stopwatch\Stopwatch;
 
 class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
 {
-    private readonly ProposalVotableStepsResolver $resolver;
-    private readonly AbstractStepRepository $stepRepo;
-
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        ProposalVotableStepsResolver $resolver,
-        AbstractStepRepository $stepRepo,
+        private readonly ProposalVotableStepsResolver $resolver,
+        private readonly AbstractStepRepository $stepRepo,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -31,8 +28,6 @@ class ProposalCurrentVotableStepDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->resolver = $resolver;
-        $this->stepRepo = $stepRepo;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

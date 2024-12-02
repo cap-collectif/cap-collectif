@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class AdminAwaitingEventResolver implements QueryInterface
 {
-    private readonly EventRepository $eventRepository;
-
-    public function __construct(EventRepository $eventRepository)
+    public function __construct(private readonly EventRepository $eventRepository)
     {
-        $this->eventRepository = $eventRepository;
     }
 
     public function __invoke(User $viewer): int

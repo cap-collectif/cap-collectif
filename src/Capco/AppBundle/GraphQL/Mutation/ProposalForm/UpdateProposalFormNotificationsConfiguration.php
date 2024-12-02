@@ -17,19 +17,14 @@ class UpdateProposalFormNotificationsConfiguration extends AbstractProposalFormM
 {
     use MutationTrait;
 
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
-
     public function __construct(
         EntityManagerInterface $entityManager,
         GlobalIdResolver $globalIdResolver,
         AuthorizationCheckerInterface $authorizationChecker,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger
+        private readonly FormFactoryInterface $formFactory,
+        private readonly LoggerInterface $logger
     ) {
         parent::__construct($entityManager, $globalIdResolver, $authorizationChecker);
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
     }
 
     public function __invoke(Argument $input, User $viewer)

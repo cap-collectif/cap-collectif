@@ -31,26 +31,15 @@ class DebateInvitationCommand extends Command
     final public const OPT_BATCH_DEFAULT = 10;
     final public const OPT_LIMIT = 'limit';
 
-    private readonly EntityManagerInterface $em;
-    private readonly UserRepository $userRepository;
-    private readonly DebateRepository $debateRepository;
-    private readonly DebateVoteTokenRepository $voteTokenRepository;
-    private readonly DebateNotifier $debateNotifier;
-
     public function __construct(
         ?string $name,
-        EntityManagerInterface $em,
-        UserRepository $userRepository,
-        DebateRepository $debateRepository,
-        DebateVoteTokenRepository $voteTokenRepository,
-        DebateNotifier $debateNotifier
+        private readonly EntityManagerInterface $em,
+        private readonly UserRepository $userRepository,
+        private readonly DebateRepository $debateRepository,
+        private readonly DebateVoteTokenRepository $voteTokenRepository,
+        private readonly DebateNotifier $debateNotifier
     ) {
         parent::__construct($name);
-        $this->em = $em;
-        $this->userRepository = $userRepository;
-        $this->debateRepository = $debateRepository;
-        $this->voteTokenRepository = $voteTokenRepository;
-        $this->debateNotifier = $debateNotifier;
     }
 
     protected function configure()

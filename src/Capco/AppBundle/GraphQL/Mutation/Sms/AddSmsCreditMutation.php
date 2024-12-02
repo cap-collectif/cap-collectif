@@ -31,36 +31,8 @@ class AddSmsCreditMutation implements MutationInterface
     final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
     private const VERIFY_SERVICE_NAME_MAX_LENGTH = 30;
 
-    private readonly EntityManagerInterface $em;
-    private readonly SmsCreditRepository $smsCreditRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly TwilioClient $twilioClient;
-    private readonly SiteParameterResolver $siteParameterResolver;
-    private readonly LoggerInterface $logger;
-    private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        SmsCreditRepository $smsCreditRepository,
-        GlobalIdResolver $globalIdResolver,
-        FormFactoryInterface $formFactory,
-        TwilioClient $twilioClient,
-        SiteParameterResolver $siteParameterResolver,
-        LoggerInterface $logger,
-        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
-        Publisher $publisher
-    ) {
-        $this->em = $em;
-        $this->smsCreditRepository = $smsCreditRepository;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->formFactory = $formFactory;
-        $this->twilioClient = $twilioClient;
-        $this->siteParameterResolver = $siteParameterResolver;
-        $this->logger = $logger;
-        $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
-        $this->publisher = $publisher;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SmsCreditRepository $smsCreditRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly FormFactoryInterface $formFactory, private readonly TwilioClient $twilioClient, private readonly SiteParameterResolver $siteParameterResolver, private readonly LoggerInterface $logger, private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

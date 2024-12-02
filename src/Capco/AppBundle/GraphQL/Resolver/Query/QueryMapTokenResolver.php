@@ -9,15 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryMapTokenResolver implements QueryInterface
 {
-    private readonly MapTokenRepository $repository;
-    private ?string $defaultMapboxPublicToken = null;
-    private ?string $defaultMapboxSecretKey = null;
-
-    public function __construct(MapTokenRepository $repository, string $defaultMapboxPublicToken, string $defaultMapboxSecretKey)
+    public function __construct(private readonly MapTokenRepository $repository, private readonly ?string $defaultMapboxPublicToken, private readonly ?string $defaultMapboxSecretKey)
     {
-        $this->repository = $repository;
-        $this->defaultMapboxPublicToken = $defaultMapboxPublicToken;
-        $this->defaultMapboxSecretKey = $defaultMapboxSecretKey;
     }
 
     public function __invoke(?Argument $args = null): ?MapToken

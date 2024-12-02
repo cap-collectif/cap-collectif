@@ -55,7 +55,7 @@ class DebateArgumentRepository extends EntityRepository
 
         try {
             return $qb->getQuery()->getOneOrNullResult();
-        } catch (NonUniqueResultException $e) {
+        } catch (NonUniqueResultException) {
             $this->logger->critical(
                 'A user has multiple arguments on a debate. This should not happen.',
                 ['debate' => $debate, 'user' => $user]
@@ -77,7 +77,7 @@ class DebateArgumentRepository extends EntityRepository
 
         try {
             return $qb->getQuery()->getOneOrNullResult();
-        } catch (NonUniqueResultException $e) {
+        } catch (NonUniqueResultException) {
             $this->logger->critical(
                 'A user has multiple arguments on a debate. This should not happen.',
                 ['debate' => $debate, 'user' => $user]
@@ -140,12 +140,10 @@ class DebateArgumentRepository extends EntityRepository
     }
 
     /**
-     * @param mixed $oldestUpdateDate
-     *
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    public function hasNewArguments(Debate $debate, $oldestUpdateDate): int
+    public function hasNewArguments(Debate $debate, mixed $oldestUpdateDate): int
     {
         return $this->createQueryBuilder('argument')
             ->select('COUNT(argument.id)')

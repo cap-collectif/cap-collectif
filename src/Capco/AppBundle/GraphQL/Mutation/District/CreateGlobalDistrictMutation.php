@@ -18,18 +18,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class CreateGlobalDistrictMutation implements MutationInterface
 {
     use MutationTrait;
-    protected LoggerInterface $logger;
-    protected EntityManagerInterface $em;
-    protected FormFactoryInterface $formFactory;
 
-    public function __construct(
-        LoggerInterface $logger,
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->logger = $logger;
-        $this->em = $em;
-        $this->formFactory = $formFactory;
+    public function __construct(protected LoggerInterface $logger, protected EntityManagerInterface $em, protected FormFactoryInterface $formFactory)
+    {
     }
 
     public function __invoke(Argument $input): array

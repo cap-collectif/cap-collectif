@@ -8,13 +8,8 @@ use SimpleSAML\Session;
 
 class SAMLLogoutHandler implements LogoutHandlerInterface
 {
-    private readonly Manager $toggleManager;
-    private readonly ?Simple $samlClient;
-
-    public function __construct(Manager $toggleManager, ?Simple $samlClient = null)
+    public function __construct(private readonly Manager $toggleManager, private ?Simple $samlClient = null)
     {
-        $this->toggleManager = $toggleManager;
-        $this->samlClient = $samlClient;
     }
 
     public function handle(

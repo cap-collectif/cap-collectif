@@ -19,17 +19,14 @@ use Symfony\Component\Stopwatch\Stopwatch;
 class ProposalViewerHasVoteDataLoader extends BatchDataLoader
 {
     public $batch = true;
-    private $proposalCollectVoteRepository;
-    private $proposalSelectionVoteRepository;
-    private $globalIdResolver;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
         RedisTagCache $cache,
         LoggerInterface $logger,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        GlobalIdResolver $globalIdResolver,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
+        private readonly GlobalIdResolver $globalIdResolver,
         string $cachePrefix,
         int $cacheTtl,
         bool $debug,
@@ -37,10 +34,6 @@ class ProposalViewerHasVoteDataLoader extends BatchDataLoader
         Stopwatch $stopwatch,
         bool $enableCache
     ) {
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->globalIdResolver = $globalIdResolver;
-
         parent::__construct(
             $this->all(...),
             $promiseFactory,

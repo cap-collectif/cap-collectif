@@ -23,16 +23,13 @@ use Psr\Log\LoggerInterface;
 class CloudflareElasticClient
 {
     private readonly Client $esClient;
-    private readonly LoggerInterface $logger;
     private readonly LoggerInterface $esLoggerCollector;
-    private readonly string $hostname;
     private string $index;
-    private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector;
 
     public function __construct(
-        LoggerInterface $logger,
+        private readonly LoggerInterface $logger,
         LoggerInterface $esLoggerCollector,
-        string $hostname,
+        private readonly string $hostname,
         string $environment,
         string $elasticsearchHost,
         string $logpushElasticsearchHost,
@@ -40,11 +37,8 @@ class CloudflareElasticClient
         string $logpushElasticsearchUsername,
         string $logpushElasticsearchPassword,
         string $logpushElasticsearchPort,
-        GlobalConfigurationTimeZoneDetector $timezoneDetector
+        private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector
     ) {
-        $this->hostname = $hostname;
-        $this->logger = $logger;
-        $this->timezoneDetector = $timezoneDetector;
         $this->esClient = $this->createEsClient(
             $environment,
             $elasticsearchHost,
@@ -88,10 +82,10 @@ class CloudflareElasticClient
 
         try {
             $searchResult = $multisearchQuery->search();
-        } catch (ClientException $clientException) {
+        } catch (ClientException) {
             $this->esClient->addConnection(new Connection($this->esClient->getConfig()));
             $searchResult = $multisearchQuery->search();
-        } catch (HttpException $exception) {
+        } catch (HttpException) {
             $searchResult = null;
             $this->logger->error('Traffic source multi search query timed out.', [
                 'project_slug' => $projectSlug,
@@ -149,7 +143,7 @@ class CloudflareElasticClient
 
         try {
             $searchResult = $multisearchQuery->search();
-        } catch (HttpException $exception) {
+        } catch (HttpException) {
             $searchResult = null;
             $this->logger->error('External analytic multi search query timed out.', [
                 'project_slug' => $projectSlug,

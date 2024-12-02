@@ -11,11 +11,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class AddOtherStepMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly AddStepService $addStepService;
 
-    public function __construct(AddStepService $addStepService)
+    public function __construct(private readonly AddStepService $addStepService)
     {
-        $this->addStepService = $addStepService;
     }
 
     public function __invoke(Argument $input, User $viewer): array

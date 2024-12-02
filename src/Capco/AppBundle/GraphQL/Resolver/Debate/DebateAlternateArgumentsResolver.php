@@ -17,11 +17,8 @@ class DebateAlternateArgumentsResolver implements QueryInterface
     final public const ORDER_PUBLISHED_AT = 'PUBLISHED_AT';
     final public const ORDER_VOTE_COUNT = 'VOTE_COUNT';
 
-    private readonly DebateSearch $debateSearch;
-
-    public function __construct(DebateSearch $debateSearch)
+    public function __construct(private readonly DebateSearch $debateSearch)
     {
-        $this->debateSearch = $debateSearch;
     }
 
     public function __invoke(Debate $debate, Argument $args, ?User $viewer): ConnectionInterface

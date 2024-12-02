@@ -12,18 +12,8 @@ use Twig\Environment;
 
 class MultilangueRouteListener
 {
-    private readonly Environment $templating;
-    private readonly Manager $manager;
-    private readonly LocaleRepository $localeRepository;
-
-    public function __construct(
-        Manager $manager,
-        LocaleRepository $localeRepository,
-        Environment $templating
-    ) {
-        $this->manager = $manager;
-        $this->localeRepository = $localeRepository;
-        $this->templating = $templating;
+    public function __construct(private readonly Manager $manager, private readonly LocaleRepository $localeRepository, private readonly Environment $templating)
+    {
     }
 
     public function onKernelRequest(RequestEvent $event)

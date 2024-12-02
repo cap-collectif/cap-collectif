@@ -16,23 +16,16 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ArgumentNotifier extends BaseNotifier
 {
-    protected ArgumentUrlResolver $argumentUrlResolver;
-    protected TranslatorInterface $translator;
-    protected UserUrlResolver $userUrlResolver;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        ArgumentUrlResolver $argumentUrlResolver,
+        protected ArgumentUrlResolver $argumentUrlResolver,
         RouterInterface $router,
-        TranslatorInterface $translator,
-        UserUrlResolver $userUrlResolver,
+        protected TranslatorInterface $translator,
+        protected UserUrlResolver $userUrlResolver,
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->argumentUrlResolver = $argumentUrlResolver;
-        $this->translator = $translator;
-        $this->userUrlResolver = $userUrlResolver;
     }
 
     public function onCreation(Argument $argument)

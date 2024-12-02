@@ -9,13 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class SmsCreditInitialCreditProcessor implements ProcessorInterface
 {
-    private readonly SmsCreditRepository $smsCreditRepository;
-    private readonly SmsNotifier $notifier;
-
-    public function __construct(SmsCreditRepository $smsCreditRepository, SmsNotifier $notifier)
+    public function __construct(private readonly SmsCreditRepository $smsCreditRepository, private readonly SmsNotifier $notifier)
     {
-        $this->smsCreditRepository = $smsCreditRepository;
-        $this->notifier = $notifier;
     }
 
     public function process(Message $message, array $options): bool

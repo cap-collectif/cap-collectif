@@ -17,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="official_response")
  * @ORM\Entity(repositoryClass=OfficialResponseRepository::class)
  */
-class OfficialResponse
+class OfficialResponse implements \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use NullableTextableTrait;
@@ -67,7 +67,7 @@ class OfficialResponse
         $this->authors = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ?? 'New Official response';
     }

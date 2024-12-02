@@ -16,24 +16,9 @@ use Psr\Log\LoggerInterface;
 class UpdateParticipantRequirementMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly ParticipantRequirementRepository $participantRequirementRepository;
-    private readonly LoggerInterface $logger;
-    private readonly ParticipantRepository $participantRepository;
-    private readonly GlobalIdResolver $globalIdResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ParticipantRequirementRepository $participantRequirementRepository,
-        LoggerInterface $logger,
-        ParticipantRepository $participantRepository,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->em = $em;
-        $this->participantRequirementRepository = $participantRequirementRepository;
-        $this->logger = $logger;
-        $this->participantRepository = $participantRepository;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ParticipantRequirementRepository $participantRequirementRepository, private readonly LoggerInterface $logger, private readonly ParticipantRepository $participantRepository, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(Argument $input): array

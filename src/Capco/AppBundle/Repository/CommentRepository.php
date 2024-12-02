@@ -153,11 +153,9 @@ class CommentRepository extends EntityRepository
     /**
      * Get comments by user.
      *
-     * @param mixed $user
-     *
      * @return mixed
      */
-    public function getByUser($user, ?int $limit = null, ?int $offset = null)
+    public function getByUser(mixed $user, ?int $limit = null, ?int $offset = null)
     {
         $qb = $this->getPublishedQueryBuilder()
             ->addSelect('a', 'm')

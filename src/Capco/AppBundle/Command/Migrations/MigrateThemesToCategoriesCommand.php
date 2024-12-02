@@ -15,21 +15,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateThemesToCategoriesCommand extends Command
 {
-    private $entityManager;
-    private $themeRepository;
-    private $proposalRepository;
-    private $collectStepRepository;
-
     public function __construct(
-        EntityManagerInterface $entityManager,
-        ThemeRepository $themeRepository,
-        ProposalRepository $proposalRepository,
-        CollectStepRepository $collectStepRepository
+        private readonly EntityManagerInterface $entityManager,
+        private readonly ThemeRepository $themeRepository,
+        private readonly ProposalRepository $proposalRepository,
+        private readonly CollectStepRepository $collectStepRepository
     ) {
-        $this->entityManager = $entityManager;
-        $this->themeRepository = $themeRepository;
-        $this->proposalRepository = $proposalRepository;
-        $this->collectStepRepository = $collectStepRepository;
         parent::__construct();
     }
 

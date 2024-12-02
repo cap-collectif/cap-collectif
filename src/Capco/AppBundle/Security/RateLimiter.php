@@ -12,13 +12,9 @@ class RateLimiter
     final public const LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
     private int $limit = 10;
-    private readonly RedisCache $cache;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(RedisCache $cache, LoggerInterface $logger)
+    public function __construct(private readonly RedisCache $cache, private readonly LoggerInterface $logger)
     {
-        $this->cache = $cache;
-        $this->logger = $logger;
     }
 
     public function setLimit(int $limit): self

@@ -66,30 +66,8 @@ use Overblog\GraphQLBundle\Error\UserError;
 
 class NodeTypeResolver implements QueryInterface
 {
-    private readonly TypeResolver $typeResolver;
-    private readonly RequirementTypeResolver $requirementTypeResolver;
-    private readonly QuestionTypeResolver $questionTypeResolver;
-    private readonly ResponseResolver $responseTypeResolver;
-    private readonly ReplyTypeResolver $replyTypeResolver;
-    private readonly DistrictTypeResolver $districtTypeResolver;
-    private readonly ContributorTypeResolver $contributorTypeResolver;
-
-    public function __construct(
-        TypeResolver $typeResolver,
-        RequirementTypeResolver $requirementTypeResolver,
-        QuestionTypeResolver $questionTypeResolver,
-        ResponseResolver $responseTypeResolver,
-        ReplyTypeResolver $replyTypeResolver,
-        DistrictTypeResolver $districtTypeResolver,
-        ContributorTypeResolver $contributorTypeResolver
-    ) {
-        $this->typeResolver = $typeResolver;
-        $this->requirementTypeResolver = $requirementTypeResolver;
-        $this->questionTypeResolver = $questionTypeResolver;
-        $this->responseTypeResolver = $responseTypeResolver;
-        $this->replyTypeResolver = $replyTypeResolver;
-        $this->districtTypeResolver = $districtTypeResolver;
-        $this->contributorTypeResolver = $contributorTypeResolver;
+    public function __construct(private readonly TypeResolver $typeResolver, private readonly RequirementTypeResolver $requirementTypeResolver, private readonly QuestionTypeResolver $questionTypeResolver, private readonly ResponseResolver $responseTypeResolver, private readonly ReplyTypeResolver $replyTypeResolver, private readonly DistrictTypeResolver $districtTypeResolver, private readonly ContributorTypeResolver $contributorTypeResolver)
+    {
     }
 
     public function __invoke($node): Type

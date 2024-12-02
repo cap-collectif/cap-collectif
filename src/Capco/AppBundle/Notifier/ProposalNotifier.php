@@ -37,37 +37,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProposalNotifier extends BaseNotifier
 {
-    protected ProposalAdminUrlResolver $proposalAdminUrlResolver;
-    protected ProposalUrlResolver $proposalUrlResolver;
-    protected UrlResolver $urlResolver;
-    private readonly TranslatorInterface $translator;
-    private readonly UserUrlResolver $userUrlResolver;
-    private readonly RequestStack $requestStack;
     private readonly string $defaultLocale;
-    private readonly UserRepository $userRepository;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        ProposalAdminUrlResolver $proposalAdminUrlResolver,
-        ProposalUrlResolver $proposalUrlResolver,
-        UrlResolver $urlResolver,
+        protected ProposalAdminUrlResolver $proposalAdminUrlResolver,
+        protected ProposalUrlResolver $proposalUrlResolver,
+        protected UrlResolver $urlResolver,
         RouterInterface $router,
-        TranslatorInterface $translator,
-        UserUrlResolver $userUrlResolver,
-        RequestStack $requestStack,
+        private readonly TranslatorInterface $translator,
+        private readonly UserUrlResolver $userUrlResolver,
+        private readonly RequestStack $requestStack,
         LocaleResolver $localeResolver,
-        UserRepository $userRepository
+        private readonly UserRepository $userRepository
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->proposalAdminUrlResolver = $proposalAdminUrlResolver;
-        $this->proposalUrlResolver = $proposalUrlResolver;
-        $this->urlResolver = $urlResolver;
-        $this->translator = $translator;
-        $this->userUrlResolver = $userUrlResolver;
-        $this->requestStack = $requestStack;
         $this->defaultLocale = $localeResolver->getDefaultLocaleCodeForRequest();
-        $this->userRepository = $userRepository;
     }
 
     public function onCreate(Proposal $proposal)

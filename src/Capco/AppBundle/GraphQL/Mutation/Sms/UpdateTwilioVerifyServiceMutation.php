@@ -16,18 +16,8 @@ class UpdateTwilioVerifyServiceMutation implements MutationInterface
 
     final public const TWILIO_API_ERROR = 'TWILIO_API_ERROR';
 
-    private readonly TwilioClient $twilioClient;
-    private readonly EntityManagerInterface $em;
-    private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
-
-    public function __construct(
-        TwilioClient $twilioClient,
-        EntityManagerInterface $em,
-        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository
-    ) {
-        $this->twilioClient = $twilioClient;
-        $this->em = $em;
-        $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
+    public function __construct(private readonly TwilioClient $twilioClient, private readonly EntityManagerInterface $em, private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository)
+    {
     }
 
     public function __invoke(Argument $input): array

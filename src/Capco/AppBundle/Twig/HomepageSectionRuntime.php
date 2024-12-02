@@ -18,39 +18,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class HomepageSectionRuntime implements RuntimeExtensionInterface
 {
-    private readonly HighlightedContentRepository $highlightedContentRepository;
-    private readonly SerializerInterface $serializer;
-    private readonly Environment $twig;
-    private readonly VideoRepository $videoRepository;
-    private readonly ProjectRepository $projectRepository;
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly ThemeRepository $themeRepository;
-    private readonly PostRepository $postRepository;
-    private readonly SocialNetworkRepository $networkRepository;
-    private readonly ProposalRepository $proposalRepository;
-
-    public function __construct(
-        HighlightedContentRepository $highlightedContentRepository,
-        VideoRepository $videoRepository,
-        ProjectRepository $projectRepository,
-        ThemeRepository $themeRepository,
-        PostRepository $postRepository,
-        SocialNetworkRepository $networkRepository,
-        ProposalRepository $proposalRepository,
-        SerializerInterface $serializer,
-        Environment $twig,
-        TokenStorageInterface $tokenStorage
-    ) {
-        $this->highlightedContentRepository = $highlightedContentRepository;
-        $this->serializer = $serializer;
-        $this->twig = $twig;
-        $this->videoRepository = $videoRepository;
-        $this->projectRepository = $projectRepository;
-        $this->tokenStorage = $tokenStorage;
-        $this->themeRepository = $themeRepository;
-        $this->postRepository = $postRepository;
-        $this->networkRepository = $networkRepository;
-        $this->proposalRepository = $proposalRepository;
+    public function __construct(private readonly HighlightedContentRepository $highlightedContentRepository, private readonly VideoRepository $videoRepository, private readonly ProjectRepository $projectRepository, private readonly ThemeRepository $themeRepository, private readonly PostRepository $postRepository, private readonly SocialNetworkRepository $networkRepository, private readonly ProposalRepository $proposalRepository, private readonly SerializerInterface $serializer, private readonly Environment $twig, private readonly TokenStorageInterface $tokenStorage)
+    {
     }
 
     public function getHighlightedContent(?Section $section = null): string

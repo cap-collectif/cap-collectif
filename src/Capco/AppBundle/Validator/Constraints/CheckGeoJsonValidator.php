@@ -59,27 +59,15 @@ class CheckGeoJsonValidator extends ConstraintValidator
             return false;
         }
 
-        switch ($geometry->type) {
-            case 'Point':
-                return self::isValidPoint($geometry);
-
-            case 'LineString':
-                return self::isValidLineString($geometry);
-
-            case 'Polygon':
-                return self::isValidPolygon($geometry);
-
-            case 'MultiPoint':
-                return self::isValidMultiPoint($geometry);
-
-            case 'MultiLineString':
-                return self::isValidMultiLineString($geometry);
-
-            case 'MultiPolygon':
-                return self::isValidMultiPolygon($geometry);
-        }
-
-        return false;
+        return match ($geometry->type) {
+            'Point' => self::isValidPoint($geometry),
+            'LineString' => self::isValidLineString($geometry),
+            'Polygon' => self::isValidPolygon($geometry),
+            'MultiPoint' => self::isValidMultiPoint($geometry),
+            'MultiLineString' => self::isValidMultiLineString($geometry),
+            'MultiPolygon' => self::isValidMultiPolygon($geometry),
+            default => false,
+        };
     }
 
     private static function isValidPoint($point): bool

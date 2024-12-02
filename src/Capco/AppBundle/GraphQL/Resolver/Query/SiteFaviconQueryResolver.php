@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class SiteFaviconQueryResolver implements QueryInterface
 {
-    private $repository;
-
-    public function __construct(SiteImageRepository $repository)
+    public function __construct(private readonly SiteImageRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(): ?SiteImage

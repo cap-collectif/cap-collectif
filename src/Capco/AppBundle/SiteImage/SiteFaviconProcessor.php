@@ -83,31 +83,8 @@ class SiteFaviconProcessor
         ],
     ];
 
-    private $serializer;
-    private $siteFaviconExtension;
-    private $webDir;
-    private $filesystem;
-    private $siteResolver;
-    private $urlResolver;
-
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        SiteFaviconRuntime $siteFaviconExtension,
-        SerializerInterface $serializer,
-        LoggerInterface $logger,
-        MediaUrlResolver $urlResolver,
-        SiteParameterResolver $siteResolver,
-        Filesystem $filesystem,
-        string $webDir = ''
-    ) {
-        $this->serializer = $serializer;
-        $this->siteFaviconExtension = $siteFaviconExtension;
-        $this->webDir = $webDir;
-        $this->filesystem = $filesystem;
-        $this->siteResolver = $siteResolver;
-        $this->urlResolver = $urlResolver;
-        $this->logger = $logger;
+    public function __construct(private readonly SiteFaviconRuntime $siteFaviconExtension, private readonly SerializerInterface $serializer, private readonly LoggerInterface $logger, private readonly MediaUrlResolver $urlResolver, private readonly SiteParameterResolver $siteResolver, private readonly Filesystem $filesystem, private readonly string $webDir = '')
+    {
     }
 
     public function process(SiteImage $siteFavicon): void
@@ -123,7 +100,7 @@ class SiteFaviconProcessor
                 } else {
                     $color = self::DEFAULT_COLOR;
                 }
-            } catch (\Exception $exception) {
+            } catch (\Exception) {
                 $color = self::DEFAULT_COLOR;
             }
 
@@ -204,7 +181,7 @@ class SiteFaviconProcessor
                     'xml_root_node_name' => 'browserconfig',
                 ])
             );
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             $this->logger->error(
                 'Could not write browserconfig file into web root. Please check your permissions'
             );
@@ -218,7 +195,7 @@ class SiteFaviconProcessor
                 $this->webDir . self::WEB_MANIFEST_FILENAME,
                 $this->serializer->serialize($this->webManifest, 'json')
             );
-        } catch (\Exception $exception) {
+        } catch (\Exception) {
             $this->logger->error(
                 'Could not write manifest file into web root. Please check your permissions'
             );

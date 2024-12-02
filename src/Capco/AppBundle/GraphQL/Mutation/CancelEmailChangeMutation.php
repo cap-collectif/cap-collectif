@@ -10,11 +10,8 @@ class CancelEmailChangeMutation implements MutationInterface
 {
     use ResolverTrait;
 
-    private readonly EntityManagerInterface $em;
-
-    public function __construct(EntityManagerInterface $em)
+    public function __construct(private readonly EntityManagerInterface $em)
     {
-        $this->em = $em;
     }
 
     public function __invoke($user): array

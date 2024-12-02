@@ -20,36 +20,8 @@ class UserAnonymizer
 {
     final public const CANNOT_DELETE_USER_PROFILE_IMAGE = 'Cannot delete user profile image !';
 
-    private readonly EntityManagerInterface $em;
-    private readonly UserGroupRepository $groupRepository;
-    private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    private readonly LoggerInterface $logger;
-    private readonly ProposalAuthorDataLoader $proposalAuthorDataLoader;
-    private readonly UserManager $userManager;
-    private readonly MediaRepository $mediaRepository;
-    private readonly MailingListRepository $mailingListRepository;
-    private readonly TranslatorInterface $translator;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        UserGroupRepository $groupRepository,
-        NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
-        LoggerInterface $logger,
-        ProposalAuthorDataLoader $proposalAuthorDataLoader,
-        UserManager $userManager,
-        MediaRepository $mediaRepository,
-        MailingListRepository $mailingListRepository,
-        TranslatorInterface $translator
-    ) {
-        $this->em = $em;
-        $this->groupRepository = $groupRepository;
-        $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
-        $this->logger = $logger;
-        $this->proposalAuthorDataLoader = $proposalAuthorDataLoader;
-        $this->userManager = $userManager;
-        $this->mediaRepository = $mediaRepository;
-        $this->mailingListRepository = $mailingListRepository;
-        $this->translator = $translator;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly UserGroupRepository $groupRepository, private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly LoggerInterface $logger, private readonly ProposalAuthorDataLoader $proposalAuthorDataLoader, private readonly UserManager $userManager, private readonly MediaRepository $mediaRepository, private readonly MailingListRepository $mailingListRepository, private readonly TranslatorInterface $translator)
+    {
     }
 
     public function anonymize(User $user): void

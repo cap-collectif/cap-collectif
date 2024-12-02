@@ -127,11 +127,8 @@ trait AdminEventTrait
 
     /**
      * @When I fill date field :id with value :value
-     *
-     * @param mixed $id
-     * @param mixed $value
      */
-    public function iFillDateFieldWithValue($id, $value)
+    public function iFillDateFieldWithValue(mixed $id, mixed $value)
     {
         $this->waitAndThrowOnFailure(3000, "$('{$id}').length > 0");
         $this->ifillElementWithValue($id, $value);
@@ -166,10 +163,8 @@ trait AdminEventTrait
 
     /**
      * @When I select :option as refused reason
-     *
-     * @param mixed $option
      */
-    public function iSelectOptionAsRefusedReason($option)
+    public function iSelectOptionAsRefusedReason(mixed $option)
     {
         /** @var DocumentElement $page */
         $page = $this->getCurrentPage();

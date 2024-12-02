@@ -18,24 +18,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateQuestionnaireNotificationConfiguration implements MutationInterface
 {
     use MutationTrait;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly EntityManagerInterface $em;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        FormFactoryInterface $formFactory,
-        EntityManagerInterface $em,
-        AuthorizationCheckerInterface $authorizationChecker,
-        LoggerInterface $logger
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->formFactory = $formFactory;
-        $this->em = $em;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->logger = $logger;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $arguments, User $viewer): array

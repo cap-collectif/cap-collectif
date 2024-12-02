@@ -7,18 +7,8 @@ use Capco\AppBundle\GraphQL\Resolver\Project\ProjectAdminAlphaUrlResolver;
 
 class JpecGhost extends AbstractSlackMessager
 {
-    private readonly ProjectAdminAlphaUrlResolver $projectAdminAlphaUrlResolver;
-    private readonly ?string $hook;
-    private readonly string $env;
-
-    public function __construct(
-        ProjectAdminAlphaUrlResolver $projectAdminAlphaUrlResolver,
-        ?string $hook,
-        string $env
-    ) {
-        $this->projectAdminAlphaUrlResolver = $projectAdminAlphaUrlResolver;
-        $this->hook = $hook;
-        $this->env = $env;
+    public function __construct(private readonly ProjectAdminAlphaUrlResolver $projectAdminAlphaUrlResolver, private readonly ?string $hook, private readonly string $env)
+    {
     }
 
     public function generateAndSendMessage(AnalysisConfigurationProcess $process)

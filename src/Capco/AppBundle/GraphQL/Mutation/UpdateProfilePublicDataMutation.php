@@ -17,16 +17,13 @@ class UpdateProfilePublicDataMutation extends BaseUpdateProfile
 {
     use MutationTrait;
 
-    private readonly Manager $toggleManager;
-
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
-        Manager $toggleManager
+        private readonly Manager $toggleManager
     ) {
-        $this->toggleManager = $toggleManager;
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
 

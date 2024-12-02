@@ -24,19 +24,14 @@ class CommentAdmin extends AbstractAdmin
     protected ?string $classnameLabel = 'comment';
     protected array $datagridValues = ['_sort_order' => 'DESC', '_sort_by' => 'updatedAt'];
 
-    private readonly TokenStorageInterface $tokenStorage;
-    private readonly Manager $manager;
-
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        TokenStorageInterface $tokenStorage,
-        Manager $manager
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly Manager $manager
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->tokenStorage = $tokenStorage;
-        $this->manager = $manager;
     }
 
     public function getNewInstance(): object

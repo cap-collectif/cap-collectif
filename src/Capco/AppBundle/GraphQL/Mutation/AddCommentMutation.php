@@ -38,36 +38,9 @@ class AddCommentMutation implements MutationInterface
     final public const ERROR_NOT_FOUND_COMMENTABLE = 'Commentable not found.';
     final public const ERROR_NOT_COMMENTABLE = 'Can\'t add a comment to a not commentable.';
     final public const ERROR_NEW_COMMENTS_NOT_ACCEPTED = 'Comment\'s are not longer accepted';
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
-    private readonly EventDispatcherInterface $eventDispatcher;
-    private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader;
-    private readonly RequestGuesser $requestGuesser;
-    private readonly Manager $manager;
-    private readonly TokenGeneratorInterface $tokenGenerator;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger,
-        EventDispatcherInterface $dispatcher,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader,
-        RequestGuesser $requestGuesser,
-        Manager $manager,
-        TokenGeneratorInterface $tokenGenerator
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->logger = $logger;
-        $this->eventDispatcher = $dispatcher;
-        $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
-        $this->requestGuesser = $requestGuesser;
-        $this->manager = $manager;
-        $this->tokenGenerator = $tokenGenerator;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly LoggerInterface $logger, private readonly EventDispatcherInterface $eventDispatcher, private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader, private readonly RequestGuesser $requestGuesser, private readonly Manager $manager, private readonly TokenGeneratorInterface $tokenGenerator)
+    {
     }
 
     public function __invoke(Arg $input, /*User|string*/ $viewer): array

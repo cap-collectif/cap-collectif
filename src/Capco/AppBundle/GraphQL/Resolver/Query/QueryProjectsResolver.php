@@ -26,21 +26,8 @@ class QueryProjectsResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly LoggerInterface $logger;
-    private readonly ProjectSearch $projectSearch;
-    private readonly QueryAnalyzer $queryAnalyzer;
-    private readonly LocaleRepository $localeRepository;
-
-    public function __construct(
-        ProjectSearch $projectSearch,
-        LoggerInterface $logger,
-        QueryAnalyzer $queryAnalyzer,
-        LocaleRepository $localeRepository
-    ) {
-        $this->logger = $logger;
-        $this->projectSearch = $projectSearch;
-        $this->queryAnalyzer = $queryAnalyzer;
-        $this->localeRepository = $localeRepository;
+    public function __construct(private readonly ProjectSearch $projectSearch, private readonly LoggerInterface $logger, private readonly QueryAnalyzer $queryAnalyzer, private readonly LocaleRepository $localeRepository)
+    {
     }
 
     public function __invoke(

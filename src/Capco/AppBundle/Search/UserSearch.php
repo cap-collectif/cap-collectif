@@ -27,33 +27,18 @@ class UserSearch extends Search
 {
     final public const SEARCH_FIELDS = ['username', 'username.std', 'email'];
 
-    private readonly UserRepository $userRepo;
-    private readonly EventSearch $eventSearch;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
-    private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository;
-    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
-    private readonly ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository;
-
     public function __construct(
         Index $index,
-        UserRepository $userRepo,
-        EventSearch $eventSearch,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ReplyAnonymousRepository $replyAnonymousRepository,
-        ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
-        ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository
+        private readonly UserRepository $userRepo,
+        private readonly EventSearch $eventSearch,
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly ReplyAnonymousRepository $replyAnonymousRepository,
+        private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
+        private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
+        private readonly ProposalStepPaperVoteCounterRepository $paperVoteCounterRepository
     ) {
         parent::__construct($index);
-        $this->userRepo = $userRepo;
-        $this->eventSearch = $eventSearch;
         $this->type = 'user';
-        $this->authorizationChecker = $authorizationChecker;
-        $this->replyAnonymousRepository = $replyAnonymousRepository;
-        $this->proposalCollectSmsVoteRepository = $proposalCollectSmsVoteRepository;
-        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
-        $this->paperVoteCounterRepository = $paperVoteCounterRepository;
     }
 
     public function getRegisteredUsers(
@@ -525,17 +510,10 @@ class UserSearch extends Search
 
     private function getUserSort(array $orderBy): array
     {
-        switch ($orderBy['field']) {
-            case SortField::CREATED_AT:
-                $sortField = SortField::SORT_FIELD[SortField::CREATED_AT];
-
-                break;
-
-            default:
-                throw new \RuntimeException("Unknown order: {$orderBy}");
-
-                break;
-        }
+        $sortField = match ($orderBy['field']) {
+            SortField::CREATED_AT => SortField::SORT_FIELD[SortField::CREATED_AT],
+            default => throw new \RuntimeException("Unknown order: {$orderBy}"),
+        };
 
         return [$sortField => ['order' => $orderBy['direction']], 'id' => new \stdClass()];
     }

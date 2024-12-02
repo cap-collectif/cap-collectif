@@ -62,7 +62,7 @@ class ProposalCollectVote extends AbstractProposalVote
             if (!$this->proposal->isDeleted()) {
                 return $this->proposal;
             }
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFoundException) {
         }
 
         return null;

@@ -15,14 +15,11 @@ class ReplyResponsesResolver implements QueryInterface
 {
     use ResponsesResolverTrait;
 
-    private $logger;
-
     public function __construct(
-        LoggerInterface $logger,
+        private LoggerInterface $logger,
         AbstractQuestionRepository $abstractQuestionRepository,
         AbstractResponseRepository $abstractResponseRepository
     ) {
-        $this->logger = $logger;
         $this->abstractQuestionRepository = $abstractQuestionRepository;
         $this->abstractResponseRepository = $abstractResponseRepository;
     }

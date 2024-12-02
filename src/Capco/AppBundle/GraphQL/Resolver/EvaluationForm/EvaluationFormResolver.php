@@ -13,11 +13,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
  */
 class EvaluationFormResolver implements QueryInterface
 {
-    private $proposalRepository;
-
-    public function __construct(ProposalRepository $proposalRepository)
+    public function __construct(private readonly ProposalRepository $proposalRepository)
     {
-        $this->proposalRepository = $proposalRepository;
     }
 
     public function __invoke(Questionnaire $evaluationForm, $user): Collection

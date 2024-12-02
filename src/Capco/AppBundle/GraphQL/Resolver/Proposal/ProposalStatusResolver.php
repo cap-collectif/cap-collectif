@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalStatusResolver implements QueryInterface
 {
-    private $dataLoader;
-
-    public function __construct(ProposalStatusDataLoader $dataLoader)
+    public function __construct(private readonly ProposalStatusDataLoader $dataLoader)
     {
-        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(

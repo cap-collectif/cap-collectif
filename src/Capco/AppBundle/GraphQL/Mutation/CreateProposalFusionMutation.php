@@ -20,30 +20,9 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CreateProposalFusionMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $formFactory;
-    private $proposalRepo;
-    private $translator;
-    private $globalIdResolver;
-    private $logger;
-    private $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        ProposalRepository $proposalRepo,
-        TranslatorInterface $translator,
-        GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->proposalRepo = $proposalRepo;
-        $this->translator = $translator;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->logger = $logger;
-        $this->indexer = $indexer;
+    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private ProposalRepository $proposalRepo, private TranslatorInterface $translator, private GlobalIdResolver $globalIdResolver, private LoggerInterface $logger, private Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $author): array

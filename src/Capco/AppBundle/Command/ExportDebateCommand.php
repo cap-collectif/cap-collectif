@@ -67,26 +67,20 @@ class ExportDebateCommand extends BaseExportCommand
     private const EXPORT_DIR = '/public/export/';
 
     protected static $defaultName = 'capco:export:debate';
-    protected Executor $executor;
     protected string $projectRootDir;
-    private readonly DebateRepository $debateRepository;
-    private readonly RouterInterface $router;
 
     public function __construct(
-        Executor $executor,
+        protected Executor $executor,
         GraphQlAclListener $listener,
-        DebateRepository $debateRepository,
+        private readonly DebateRepository $debateRepository,
         ExportUtils $exportUtils,
-        RouterInterface $router,
+        private readonly RouterInterface $router,
         string $projectRootDir
     ) {
         parent::__construct($exportUtils);
         $listener->disableAcl();
         $this->configureSnapshot();
-        $this->executor = $executor;
         $this->projectRootDir = $projectRootDir;
-        $this->debateRepository = $debateRepository;
-        $this->router = $router;
     }
 
     public static function getFilename(

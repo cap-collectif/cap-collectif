@@ -10,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="media__gallery_media")
  * @ORM\HasLifecycleCallbacks
  */
-class GalleryHasMedia
+class GalleryHasMedia implements \Stringable
 {
     use IdTrait;
 

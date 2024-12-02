@@ -14,18 +14,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class OpinionTypeNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private $router;
-    private readonly ObjectNormalizer $normalizer;
-    private $resolver;
 
-    public function __construct(
-        UrlGeneratorInterface $router,
-        ObjectNormalizer $normalizer,
-        OpinionTypesResolver $resolver
-    ) {
-        $this->router = $router;
-        $this->normalizer = $normalizer;
-        $this->resolver = $resolver;
+    public function __construct(private UrlGeneratorInterface $router, private readonly ObjectNormalizer $normalizer, private OpinionTypesResolver $resolver)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

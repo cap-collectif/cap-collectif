@@ -168,6 +168,6 @@ class MenuItemResolver
         }
         $fixedLink = '/' . $link;
 
-        return $link === $current || substr((string) $current, -\strlen($fixedLink)) === $fixedLink;
+        return $link === $current || str_ends_with((string) $current, $fixedLink);
     }
 }

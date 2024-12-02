@@ -24,30 +24,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class AddMediatorsMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly MediatorRepository $mediatorRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ConnectionBuilder $connectionBuilder;
-    private readonly Manager $manager;
-    private readonly Indexer $indexer;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        MediatorRepository $mediatorRepository,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ConnectionBuilder $connectionBuilder,
-        Manager $manager,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->mediatorRepository = $mediatorRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->connectionBuilder = $connectionBuilder;
-        $this->manager = $manager;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly MediatorRepository $mediatorRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ConnectionBuilder $connectionBuilder, private readonly Manager $manager, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array
@@ -118,7 +97,7 @@ class AddMediatorsMutation implements MutationInterface
         }
 
         if (false === $step instanceof CollectStep && false === $step instanceof SelectionStep) {
-            $stepType = \get_class($step);
+            $stepType = $step::class;
 
             throw new \Exception("Step should be either CollectStep or SelectionStep {$stepType} given");
         }

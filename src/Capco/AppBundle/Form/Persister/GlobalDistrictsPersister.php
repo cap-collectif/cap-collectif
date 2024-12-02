@@ -12,18 +12,8 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class GlobalDistrictsPersister
 {
-    private readonly ProjectDistrictPositionerRepository $districtPositionerRepository;
-    private readonly GlobalDistrictRepository $globalDistrictRepository;
-    private readonly EntityManagerInterface $em;
-
-    public function __construct(
-        ProjectDistrictPositionerRepository $districtPositionerRepository,
-        GlobalDistrictRepository $globalDistrictRepository,
-        EntityManagerInterface $em
-    ) {
-        $this->districtPositionerRepository = $districtPositionerRepository;
-        $this->globalDistrictRepository = $globalDistrictRepository;
-        $this->em = $em;
+    public function __construct(private readonly ProjectDistrictPositionerRepository $districtPositionerRepository, private readonly GlobalDistrictRepository $globalDistrictRepository, private readonly EntityManagerInterface $em)
+    {
     }
 
     public function persist(array $districtsIds, Project $project)

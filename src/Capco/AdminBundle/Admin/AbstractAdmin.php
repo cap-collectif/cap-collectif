@@ -866,7 +866,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
 
         try {
             $admin = $pool->getAdminByFieldDescription($fieldDescription);
-        } catch (AdminClassNotFoundException $exception) {
+        } catch (AdminClassNotFoundException) {
             // Using a fieldDescription with no admin class for the target model is a valid case.
             // Since there is no easy way to check for this case, we catch the exception instead.
             return;
@@ -1099,7 +1099,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
     final public function setSubject(?object $subject): void
     {
         if (null !== $subject && !is_a($subject, $this->getClass(), true)) {
-            throw new \LogicException(sprintf('Admin "%s" does not allow this subject: %s, use the one register with this admin class %s', static::class, \get_class($subject), $this->getClass()));
+            throw new \LogicException(sprintf('Admin "%s" does not allow this subject: %s, use the one register with this admin class %s', static::class, $subject::class, $this->getClass()));
         }
 
         $this->subject = $subject;

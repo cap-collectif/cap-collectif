@@ -20,12 +20,9 @@ class OpinionSearch extends Search
 {
     final public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
 
-    private $opinionRepo;
-
-    public function __construct(Index $index, OpinionRepository $opinionRepo)
+    public function __construct(Index $index, private readonly OpinionRepository $opinionRepo)
     {
         parent::__construct($index);
-        $this->opinionRepo = $opinionRepo;
         $this->type = 'opinion';
     }
 

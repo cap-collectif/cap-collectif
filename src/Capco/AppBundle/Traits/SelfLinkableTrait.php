@@ -88,10 +88,7 @@ trait SelfLinkableTrait
         return $this->connectionsCount;
     }
 
-    /**
-     * @param mixed $connectionsCount
-     */
-    public function setConnectionsCount($connectionsCount)
+    public function setConnectionsCount(mixed $connectionsCount)
     {
         $this->connectionsCount = $connectionsCount;
 

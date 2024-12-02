@@ -16,11 +16,8 @@ class EventVoter extends AbstractOwnerableVoter
     final public const DELETE = 'delete';
     final public const EXPORT = 'export';
 
-    private readonly Manager $manager;
-
-    public function __construct(Manager $manager)
+    public function __construct(private readonly Manager $manager)
     {
-        $this->manager = $manager;
     }
 
     protected function supports($attribute, $subject)
@@ -56,27 +53,15 @@ class EventVoter extends AbstractOwnerableVoter
         /** @var Event $event */
         $event = $subject;
 
-        switch ($attribute) {
-            case self::CREATE:
-                return $viewer && $this->canCreateEvent($viewer);
-
-            case self::VIEW_FRONT:
-                return self::canViewFront($event, $viewer);
-
-            case self::VIEW_ADMIN:
-                return $viewer && self::canViewAdmin($event, $viewer);
-
-            case self::EDIT:
-                return $viewer && self::canEdit($event, $viewer);
-
-            case self::DELETE:
-                return $viewer && self::canDelete($event, $viewer);
-
-            case self::EXPORT:
-                return $viewer && self::canExport($event, $viewer);
-        }
-
-        throw new \LogicException(self::class . " - Unknown attribute {$attribute}");
+        return match ($attribute) {
+            self::CREATE => $viewer && $this->canCreateEvent($viewer),
+            self::VIEW_FRONT => self::canViewFront($event, $viewer),
+            self::VIEW_ADMIN => $viewer && self::canViewAdmin($event, $viewer),
+            self::EDIT => $viewer && self::canEdit($event, $viewer),
+            self::DELETE => $viewer && self::canDelete($event, $viewer),
+            self::EXPORT => $viewer && self::canExport($event, $viewer),
+            default => throw new \LogicException(self::class . " - Unknown attribute {$attribute}"),
+        };
     }
 
     private function canCreateEvent(User $viewer): bool

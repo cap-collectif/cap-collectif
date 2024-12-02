@@ -17,21 +17,15 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
  */
 class CasHandler
 {
-    private readonly SessionInterface $session;
-    private readonly LoggerInterface $logger;
     private readonly ?CASSSOConfiguration $configuration;
-    private readonly string $environment;
 
     public function __construct(
-        SessionInterface $session,
-        LoggerInterface $logger,
+        private readonly SessionInterface $session,
+        private readonly LoggerInterface $logger,
         CASSSOConfigurationRepository $repository,
-        string $environment
+        private readonly string $environment
     ) {
-        $this->session = $session;
-        $this->logger = $logger;
         $this->configuration = $repository->findOneBy([]);
-        $this->environment = $environment;
     }
 
     /**

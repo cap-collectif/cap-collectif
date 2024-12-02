@@ -27,23 +27,15 @@ class SendSmsProposalVoteMutation implements MutationInterface
     private const RETRY_PER_MINUTE = 2;
 
     private readonly SmsProviderInterface $smsProvider;
-    private readonly ValidatorInterface $validator;
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository;
 
     public function __construct(
         SmsProviderFetcher $smsProviderFactory,
-        ValidatorInterface $validator,
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
+        private readonly ValidatorInterface $validator,
+        private readonly EntityManagerInterface $em,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AnonymousUserProposalSmsVoteRepository $anonymousUserProposalSmsVoteRepository
     ) {
         $this->smsProvider = $smsProviderFactory->fetch();
-        $this->validator = $validator;
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->anonymousUserProposalSmsVoteRepository = $anonymousUserProposalSmsVoteRepository;
     }
 
     public function __invoke(Argument $input): array

@@ -40,54 +40,39 @@ class UpdateProposalFormMutation extends AbstractProposalFormMutation
 {
     use MutationTrait;
     use QuestionPersisterTrait;
-
-    private readonly FormFactoryInterface $formFactory;
-    private readonly ProposalFormRepository $proposalFormRepo;
     private readonly LoggerInterface $logger;
     private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
     private readonly AbstractQuestionRepository $abstractQuestionRepo;
-    private readonly MediaRepository $mediaRepository;
-    private readonly QueryCategoryImagesResolver $categoryImagesResolver;
-    private readonly CategoryImageRepository $categoryImageRepository;
     private readonly MultipleChoiceQuestionRepository $choiceQuestionRepository;
     private readonly ProposalDistrictRepository $proposalDistrictRepository;
     private readonly Indexer $indexer;
     private readonly ValidatorInterface $colorValidator;
-    private readonly Manager $toggleManager;
-    private readonly QuestionJumpsHandler $questionJumpsHandler;
 
     public function __construct(
         EntityManagerInterface $em,
         GlobalIdResolver $globalIdResolver,
-        FormFactoryInterface $formFactory,
-        ProposalFormRepository $proposalFormRepo,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly ProposalFormRepository $proposalFormRepo,
         LoggerInterface $logger,
         QuestionnaireAbstractQuestionRepository $questionRepo,
         AbstractQuestionRepository $abstractQuestionRepo,
-        MediaRepository $mediaRepository,
-        QueryCategoryImagesResolver $categoryImagesResolver,
-        CategoryImageRepository $categoryImageRepository,
+        private readonly MediaRepository $mediaRepository,
+        private readonly QueryCategoryImagesResolver $categoryImagesResolver,
+        private readonly CategoryImageRepository $categoryImageRepository,
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         Indexer $indexer,
         ValidatorInterface $colorValidator,
-        Manager $toggleManager,
+        private readonly Manager $toggleManager,
         AuthorizationCheckerInterface $authorizationChecker,
-        QuestionJumpsHandler $questionJumpsHandler
+        private readonly QuestionJumpsHandler $questionJumpsHandler
     ) {
         parent::__construct($em, $globalIdResolver, $authorizationChecker);
-        $this->formFactory = $formFactory;
-        $this->proposalFormRepo = $proposalFormRepo;
         $this->logger = $logger;
         $this->questionRepo = $questionRepo;
         $this->abstractQuestionRepo = $abstractQuestionRepo;
-        $this->mediaRepository = $mediaRepository;
-        $this->categoryImagesResolver = $categoryImagesResolver;
-        $this->categoryImageRepository = $categoryImageRepository;
         $this->choiceQuestionRepository = $choiceQuestionRepository;
         $this->indexer = $indexer;
         $this->colorValidator = $colorValidator;
-        $this->toggleManager = $toggleManager;
-        $this->questionJumpsHandler = $questionJumpsHandler;
     }
 
     public function __invoke(Argument $input, User $viewer): array

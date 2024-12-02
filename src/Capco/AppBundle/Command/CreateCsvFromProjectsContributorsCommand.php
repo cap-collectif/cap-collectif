@@ -53,31 +53,21 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
      * @var WriterInterface
      */
     protected $writer;
-    protected ConnectionTraversor $connectionTraversor;
     protected GraphQlAclListener $listener;
-    protected Executor $executor;
     protected string $projectRootDir;
-    protected LoggerInterface $logger;
-    protected Manager $toggleManager;
-    protected ProjectRepository $projectRepository;
 
     public function __construct(
         GraphQlAclListener $listener,
-        ConnectionTraversor $connectionTraversor,
+        protected ConnectionTraversor $connectionTraversor,
         ExportUtils $exportUtils,
-        Executor $executor,
-        Manager $toggleManager,
+        protected Executor $executor,
+        protected Manager $toggleManager,
         string $projectRootDir,
-        ProjectRepository $repository,
-        LoggerInterface $logger
+        protected ProjectRepository $projectRepository,
+        protected LoggerInterface $logger
     ) {
         $listener->disableAcl();
-        $this->connectionTraversor = $connectionTraversor;
-        $this->executor = $executor;
-        $this->logger = $logger;
-        $this->toggleManager = $toggleManager;
         $this->projectRootDir = $projectRootDir;
-        $this->projectRepository = $repository;
         parent::__construct($exportUtils);
     }
 

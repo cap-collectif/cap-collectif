@@ -54,30 +54,20 @@ class Indexer
     private $em;
 
     /**
-     * @var SerializerInterface
-     */
-    private $serializer;
-
-    /**
      * @var array
      */
     private $classes;
-    private $logger;
-    private $stopwatch;
 
     public function __construct(
         ManagerRegistry $registry,
-        SerializerInterface $serializer,
+        private readonly SerializerInterface $serializer,
         Index $index,
-        LoggerInterface $logger,
-        Stopwatch $stopwatch
+        private readonly LoggerInterface $logger,
+        private readonly Stopwatch $stopwatch
     ) {
         $this->index = $index;
         $this->client = $index->getClient();
         $this->em = $registry->getManager();
-        $this->serializer = $serializer;
-        $this->logger = $logger;
-        $this->stopwatch = $stopwatch;
     }
 
     public function getIndex(): Index
@@ -135,10 +125,8 @@ class Indexer
     /**
      * Reindex a specific entity.
      * You HAVE to call self::finishBulk after!
-     *
-     * @param mixed $identifier
      */
-    public function index(string $entityFQN, $identifier): void
+    public function index(string $entityFQN, mixed $identifier): void
     {
         $this->disableBuiltinSoftdelete();
 
@@ -155,10 +143,8 @@ class Indexer
     /**
      * Remove / Delete from the index.
      * You HAVE to call self::finishBulk after!
-     *
-     * @param mixed $identifier
      */
-    public function remove(string $entityFQN, $identifier): void
+    public function remove(string $entityFQN, mixed $identifier): void
     {
         $this->addToBulk(
             new Document(

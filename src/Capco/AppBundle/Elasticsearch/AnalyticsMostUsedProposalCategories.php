@@ -8,13 +8,11 @@ use Elastica\ResultSet;
 
 class AnalyticsMostUsedProposalCategories
 {
-    private readonly ProposalCategoryRepository $repository;
     private iterable $values = [];
     private int $totalCount = 0;
 
-    public function __construct(ProposalCategoryRepository $repository)
+    public function __construct(private readonly ProposalCategoryRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function getTotalCount(): int

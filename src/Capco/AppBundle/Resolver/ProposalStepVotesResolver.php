@@ -28,8 +28,6 @@ class ProposalStepVotesResolver extends AbstractExtension
     protected $proposalCollectVoteRepository;
     protected $collectStepRepository;
     protected $proposalRepository;
-    private $currentVotableStepResolver;
-    private $promiseAdapter;
 
     public function __construct(
         ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
@@ -37,16 +35,14 @@ class ProposalStepVotesResolver extends AbstractExtension
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         CollectStepRepository $collectStepRepository,
         ProposalRepository $proposalRepository,
-        ProposalCurrentVotableStepResolver $currentVotableStepResolver,
-        PromiseAdapterInterface $promiseAdapter
+        private readonly ProposalCurrentVotableStepResolver $currentVotableStepResolver,
+        private readonly PromiseAdapterInterface $promiseAdapter
     ) {
         $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
         $this->selectionStepRepository = $selectionStepRepository;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->collectStepRepository = $collectStepRepository;
         $this->proposalRepository = $proposalRepository;
-        $this->currentVotableStepResolver = $currentVotableStepResolver;
-        $this->promiseAdapter = $promiseAdapter;
     }
 
     public function getFilters()

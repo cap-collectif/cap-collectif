@@ -15,11 +15,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
  */
 final class RequestGuesser
 {
-    private readonly RequestStack $requestStack;
-
-    public function __construct(RequestStack $requestStack)
+    public function __construct(private readonly RequestStack $requestStack)
     {
-        $this->requestStack = $requestStack;
     }
 
     public function getClientIp(): ?string

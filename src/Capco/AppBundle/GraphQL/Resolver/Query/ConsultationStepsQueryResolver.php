@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class ConsultationStepsQueryResolver implements QueryInterface
 {
-    private $consultationStepRepository;
-
-    public function __construct(ConsultationStepRepository $consultationStepRepository)
+    public function __construct(private readonly ConsultationStepRepository $consultationStepRepository)
     {
-        $this->consultationStepRepository = $consultationStepRepository;
     }
 
     public function __invoke(Arg $args)

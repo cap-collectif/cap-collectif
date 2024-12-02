@@ -21,24 +21,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ContactProposalAuthorMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly ProposalRepository $proposalRepository;
-    private readonly MailerService $mailerService;
-    private readonly CaptchaChecker $captchaChecker;
-    private readonly EmailValidator $emailValidator;
-    private readonly RequestGuesser $requestGuesser;
 
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        MailerService $mailerService,
-        CaptchaChecker $captchaChecker,
-        EmailValidator $emailValidator,
-        RequestGuesser $requestGuesser
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->mailerService = $mailerService;
-        $this->captchaChecker = $captchaChecker;
-        $this->emailValidator = $emailValidator;
-        $this->requestGuesser = $requestGuesser;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly MailerService $mailerService, private readonly CaptchaChecker $captchaChecker, private readonly EmailValidator $emailValidator, private readonly RequestGuesser $requestGuesser)
+    {
     }
 
     public function __invoke(Argument $argument): array
@@ -59,7 +44,7 @@ class ContactProposalAuthorMutation implements MutationInterface
                     $argument->offsetGet('replyEmail'),
                     $argument->offsetGet('message')
                 );
-            } catch (\Throwable $th) {
+            } catch (\Throwable) {
                 $errorLog = ContactProposalAuthorErrorCode::SENDING_FAILED;
             }
         }

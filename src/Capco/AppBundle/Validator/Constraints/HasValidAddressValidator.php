@@ -10,13 +10,8 @@ use Symfony\Component\Validator\ConstraintValidator;
 
 class HasValidAddressValidator extends ConstraintValidator
 {
-    private readonly GoogleMaps $geocoder;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(GoogleMaps $geocoder, LoggerInterface $logger)
+    public function __construct(private readonly GoogleMaps $geocoder, private readonly LoggerInterface $logger)
     {
-        $this->geocoder = $geocoder;
-        $this->logger = $logger;
     }
 
     public function validate($object, Constraint $constraint): bool

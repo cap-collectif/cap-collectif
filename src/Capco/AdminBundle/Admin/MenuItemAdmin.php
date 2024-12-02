@@ -25,19 +25,14 @@ class MenuItemAdmin extends AbstractAdmin
         '_sort_by' => 'position',
     ];
 
-    private readonly MenuItemResolver $resolver;
-    private readonly MenuItemRepository $repository;
-
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        MenuItemResolver $resolver,
-        MenuItemRepository $repository
+        private readonly MenuItemResolver $resolver,
+        private readonly MenuItemRepository $repository
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->resolver = $resolver;
-        $this->repository = $repository;
     }
 
     public function createQuery(): ProxyQueryInterface

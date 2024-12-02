@@ -20,31 +20,19 @@ class ExportDebateContributionsCommand extends BaseExportCommand
     final public const STEP_FOLDER = 'debate/';
 
     private const CAPCO_EXPORT_DEBATE_CONTRIBUTIONS = 'capco:export:debate:contributions';
-    private readonly Manager $toggleManager;
-    private readonly DebateRepository $debateRepository;
-    private readonly DebateContributionExporter $debateContributionExporter;
-    private readonly ContributionsFilePathResolver $contributionsFilePathResolver;
     private readonly string $projectRootDir;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly Stopwatch $stopwatch;
 
     public function __construct(
         ExportUtils $exportUtils,
-        Manager $manager,
-        DebateRepository $debateRepository,
-        DebateContributionExporter $debateContributionExporter,
-        ContributionsFilePathResolver $contributionsFilePathResolver,
-        EntityManagerInterface $entityManager,
-        Stopwatch $stopwatch,
+        private readonly Manager $toggleManager,
+        private readonly DebateRepository $debateRepository,
+        private readonly DebateContributionExporter $debateContributionExporter,
+        private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly Stopwatch $stopwatch,
         string $projectRootDir
     ) {
-        $this->toggleManager = $manager;
-        $this->debateRepository = $debateRepository;
-        $this->debateContributionExporter = $debateContributionExporter;
-        $this->contributionsFilePathResolver = $contributionsFilePathResolver;
         $this->projectRootDir = $projectRootDir;
-        $this->entityManager = $entityManager;
-        $this->stopwatch = $stopwatch;
         parent::__construct($exportUtils);
     }
 

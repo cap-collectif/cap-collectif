@@ -18,17 +18,12 @@ use Elastica\ResultSet;
 
 class DebateSearch extends Search
 {
-    private readonly DebateArgumentRepository $debateArgumentRepository;
-    private readonly DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
-
     public function __construct(
         Index $index,
-        DebateArgumentRepository $debateArgumentRepository,
-        DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository
+        private readonly DebateArgumentRepository $debateArgumentRepository,
+        private readonly DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository
     ) {
         parent::__construct($index);
-        $this->debateArgumentRepository = $debateArgumentRepository;
-        $this->debateAnonymousArgumentRepository = $debateAnonymousArgumentRepository;
     }
 
     public function searchDebateArguments(
@@ -77,21 +72,11 @@ class DebateSearch extends Search
     private function sortQuery(Query $query, ?array $orderBy): Query
     {
         if ($orderBy) {
-            switch ($orderBy['field']) {
-                case 'votesCount':
-                    $field = 'votesCount';
-
-                    break;
-
-                case 'CREATED_AT':
-                    $field = 'createdAt';
-
-                    break;
-
-                case 'PUBLISHED_AT':
-                default:
-                    $field = 'publishedAt';
-            }
+            $field = match ($orderBy['field']) {
+                'votesCount' => 'votesCount',
+                'CREATED_AT' => 'createdAt',
+                default => 'publishedAt',
+            };
             $this->setSortWithId($query, [
                 $field => ['order' => $orderBy['direction']],
             ]);

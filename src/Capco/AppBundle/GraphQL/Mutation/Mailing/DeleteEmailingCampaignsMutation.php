@@ -17,16 +17,13 @@ class DeleteEmailingCampaignsMutation extends AbstractEmailingCampaignMutation
 {
     use MutationTrait;
 
-    private readonly GlobalIdResolver $globalIdResolver;
-
     public function __construct(
         GlobalIdResolver $resolver,
         EntityManagerInterface $entityManager,
         AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
+        private readonly GlobalIdResolver $globalIdResolver
     ) {
         parent::__construct($resolver, $entityManager, $authorizationChecker);
-        $this->globalIdResolver = $globalIdResolver;
     }
 
     public function __invoke(Argument $input, User $viewer): array

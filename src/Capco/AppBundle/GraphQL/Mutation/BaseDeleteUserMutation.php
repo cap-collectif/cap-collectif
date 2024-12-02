@@ -36,70 +36,32 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseDeleteUserMutation extends BaseDeleteMutation
 {
-    protected TranslatorInterface $translator;
     protected array $originalEventListeners = [];
-    protected RedisStorageHelper $redisStorageHelper;
-    protected UserGroupRepository $groupRepository;
-    protected UserManager $userManager;
-    protected ProposalAuthorDataLoader $proposalAuthorDataLoader;
-    protected CommentRepository $commentRepository;
-    protected ProposalEvaluationRepository $proposalEvaluationRepository;
-    protected AbstractResponseRepository $abstractResponseRepository;
-    protected NewsletterSubscriptionRepository $newsletterSubscriptionRepository;
-    protected MediaRepository $mediaRepository;
-    protected MediaResponseRepository $mediaResponseRepository;
-    protected ValueResponseRepository $valueResponseRepository;
-    protected ReportingRepository $reportingRepository;
-    protected EventRepository $eventRepository;
-    protected HighlightedContentRepository $highlightedContentRepository;
-    protected MailingListRepository $mailingListRepository;
-    protected LoggerInterface $logger;
-    protected UserAnonymizer $userAnonymizer;
-    private readonly SendInBluePublisher $sendInBluePublisher;
 
     public function __construct(
         EntityManagerInterface $em,
         MediaProvider $mediaProvider,
-        TranslatorInterface $translator,
-        RedisStorageHelper $redisStorageHelper,
-        UserGroupRepository $groupRepository,
-        UserManager $userManager,
-        ProposalAuthorDataLoader $proposalAuthorDataLoader,
-        CommentRepository $commentRepository,
-        ProposalEvaluationRepository $proposalEvaluationRepository,
-        AbstractResponseRepository $abstractResponseRepository,
-        NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
-        MediaRepository $mediaRepository,
-        MediaResponseRepository $mediaResponseRepository,
-        ValueResponseRepository $valueResponseRepository,
-        ReportingRepository $reportingRepository,
-        EventRepository $eventRepository,
-        HighlightedContentRepository $highlightedContentRepository,
-        MailingListRepository $mailingListRepository,
-        LoggerInterface $logger,
-        UserAnonymizer $userAnonymizer,
-        SendInBluePublisher $sendInBluePublisher
+        protected TranslatorInterface $translator,
+        protected RedisStorageHelper $redisStorageHelper,
+        protected UserGroupRepository $groupRepository,
+        protected UserManager $userManager,
+        protected ProposalAuthorDataLoader $proposalAuthorDataLoader,
+        protected CommentRepository $commentRepository,
+        protected ProposalEvaluationRepository $proposalEvaluationRepository,
+        protected AbstractResponseRepository $abstractResponseRepository,
+        protected NewsletterSubscriptionRepository $newsletterSubscriptionRepository,
+        protected MediaRepository $mediaRepository,
+        protected MediaResponseRepository $mediaResponseRepository,
+        protected ValueResponseRepository $valueResponseRepository,
+        protected ReportingRepository $reportingRepository,
+        protected EventRepository $eventRepository,
+        protected HighlightedContentRepository $highlightedContentRepository,
+        protected MailingListRepository $mailingListRepository,
+        protected LoggerInterface $logger,
+        protected UserAnonymizer $userAnonymizer,
+        private readonly SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct($em, $mediaProvider);
-        $this->translator = $translator;
-        $this->redisStorageHelper = $redisStorageHelper;
-        $this->groupRepository = $groupRepository;
-        $this->userManager = $userManager;
-        $this->proposalAuthorDataLoader = $proposalAuthorDataLoader;
-        $this->commentRepository = $commentRepository;
-        $this->proposalEvaluationRepository = $proposalEvaluationRepository;
-        $this->abstractResponseRepository = $abstractResponseRepository;
-        $this->newsletterSubscriptionRepository = $newsletterSubscriptionRepository;
-        $this->mediaRepository = $mediaRepository;
-        $this->mediaResponseRepository = $mediaResponseRepository;
-        $this->valueResponseRepository = $valueResponseRepository;
-        $this->reportingRepository = $reportingRepository;
-        $this->eventRepository = $eventRepository;
-        $this->highlightedContentRepository = $highlightedContentRepository;
-        $this->mailingListRepository = $mailingListRepository;
-        $this->logger = $logger;
-        $this->userAnonymizer = $userAnonymizer;
-        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     public function softDeleteContents(User $user): void

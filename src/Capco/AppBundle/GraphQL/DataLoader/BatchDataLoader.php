@@ -15,36 +15,20 @@ use Symfony\Component\Stopwatch\Stopwatch;
 abstract class BatchDataLoader extends DataLoader
 {
     private const DATALOADER_PROFILING_EVENT_NAME = 'dataloader_profiling';
-    protected AdapterInterface $cache;
     protected string $cacheKey;
-    protected LoggerInterface $logger;
-    protected string $cachePrefix;
-    protected int $cacheTtl;
-    protected bool $debug;
-    protected bool $enableCache;
-    private readonly GraphQLCollector $collector;
-    private readonly Stopwatch $stopwatch;
 
     public function __construct(
         callable $batchFunction,
         PromiseAdapterInterface $promiseFactory,
-        LoggerInterface $logger,
-        AdapterInterface $cache,
-        string $cachePrefix,
-        int $cacheTtl,
-        bool $debug,
-        GraphQLCollector $collector,
-        Stopwatch $stopwatch,
-        bool $enableCache
+        protected LoggerInterface $logger,
+        protected AdapterInterface $cache,
+        protected string $cachePrefix,
+        protected int $cacheTtl,
+        protected bool $debug,
+        private readonly GraphQLCollector $collector,
+        private readonly Stopwatch $stopwatch,
+        protected bool $enableCache
     ) {
-        $this->cachePrefix = $cachePrefix;
-        $this->cache = $cache;
-        $this->logger = $logger;
-        $this->cacheTtl = $cacheTtl;
-        $this->debug = $debug;
-        $this->enableCache = $enableCache;
-        $this->collector = $collector;
-        $this->stopwatch = $stopwatch;
         $options = new Option([
             'cacheKeyFn' => function ($key) {
                 $serializedKey = $this->serializeKey($key);
@@ -196,14 +180,14 @@ abstract class BatchDataLoader extends DataLoader
      *
      * @return array|string
      */
-    abstract protected function serializeKey($key);
+    abstract protected function serializeKey(mixed $key);
 
     /**
      * The getCacheTag function is used to set tags on cache item.
      *
      * @param mixed $key An array of parameters (e.g ["proposal" => $proposal, "step" => $step, "includeUnpublished" => false]) or a keyName
      */
-    protected function getCacheTag($key): array
+    protected function getCacheTag(mixed $key): array
     {
         return [];
     }

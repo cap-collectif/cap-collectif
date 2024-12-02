@@ -118,7 +118,7 @@ class CRUDController extends AbstractSonataCrudController
                     $this->handleModelManagerException($e);
 
                     $isFormValid = false;
-                } catch (LockException $e) {
+                } catch (LockException) {
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->trans(
@@ -471,7 +471,7 @@ class CRUDController extends AbstractSonataCrudController
                 // multiple properties
                 foreach ($property as $prop) {
                     if (!$datagrid->hasFilter($prop)) {
-                        throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, \get_class($targetAdmin)));
+                        throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $prop, $targetAdmin::class));
                     }
 
                     $filter = $datagrid->getFilter($prop);
@@ -481,7 +481,7 @@ class CRUDController extends AbstractSonataCrudController
                 }
             } else {
                 if (!$datagrid->hasFilter($property)) {
-                    throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, \get_class($targetAdmin)));
+                    throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $property, $targetAdmin::class));
                 }
 
                 $datagrid->setValue($property, null, $searchText);
@@ -490,7 +490,7 @@ class CRUDController extends AbstractSonataCrudController
 
         foreach ($conditions as $field => $value) {
             if (!$datagrid->hasFilter($field)) {
-                throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $field, \get_class($targetAdmin)));
+                throw new \RuntimeException(sprintf('To retrieve autocomplete items, you should add filter "%s" to "%s" in configureDatagridFilters() method.', $field, $targetAdmin::class));
             }
             $datagrid->setValue($field, null, $value);
         }
@@ -529,12 +529,10 @@ class CRUDController extends AbstractSonataCrudController
 
     /**
      * Method from Sonata Admin HelperController.
-     *
-     * @param mixed $field
      */
     protected function retrieveFormFieldDescription(
         AdminInterface $admin,
-        $field
+        mixed $field
     ): FieldDescriptionInterface {
         $admin->getFormFieldDescriptions();
 

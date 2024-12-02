@@ -19,26 +19,16 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class MigrateProjectAdminToOrganization extends Command
 {
-    private readonly UserRepository $userRepository;
-    private readonly AddOrganizationMutation $addOrganizationMutation;
-    private readonly EntityManagerInterface $em;
     private readonly Connection $connection;
-    private readonly LoggerInterface $logger;
 
     public function __construct(
-        EntityManagerInterface $em,
-        AddOrganizationMutation $addOrganizationMutation,
-        UserRepository $userRepository,
-        LoggerInterface $logger
+        private readonly EntityManagerInterface $em,
+        private readonly AddOrganizationMutation $addOrganizationMutation,
+        private readonly UserRepository $userRepository,
+        private readonly LoggerInterface $logger
     ) {
         parent::__construct();
-
-        $this->userRepository = $userRepository;
-        $this->addOrganizationMutation = $addOrganizationMutation;
-        $this->em = $em;
         $this->connection = $this->em->getConnection();
-
-        $this->logger = $logger;
     }
 
     protected function configure()

@@ -21,21 +21,9 @@ class MediaProcessor implements ProcessorInterface
     // TODO: Please investigate why this is slow since SF4.
     final public const ENABLE_PROCESSOR = true;
     private array $referenceMap = [];
-    private readonly EntityManagerInterface $em;
-    private readonly FilterService $filterService;
-    private readonly MediaProvider $mediaProvider;
-    private readonly string $projectDir;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FilterService $filterService,
-        MediaProvider $mediaProvider,
-        string $projectDir
-    ) {
-        $this->em = $em;
-        $this->filterService = $filterService;
-        $this->mediaProvider = $mediaProvider;
-        $this->projectDir = $projectDir;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FilterService $filterService, private readonly MediaProvider $mediaProvider, private readonly string $projectDir)
+    {
     }
 
     public function preProcess(string $id, $object): void

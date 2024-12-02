@@ -12,18 +12,11 @@ use Symfony\Component\Console\Style\SymfonyStyle;
 
 class MigrateMappingCommand extends Command
 {
-    private readonly IndexBuilder $indexBuilder;
-    private readonly Indexer $indexer;
-    private readonly LoggerInterface $logger;
-
     public function __construct(
-        IndexBuilder $indexBuilder,
-        Indexer $indexer,
-        LoggerInterface $logger
+        private readonly IndexBuilder $indexBuilder,
+        private readonly Indexer $indexer,
+        private readonly LoggerInterface $logger
     ) {
-        $this->indexBuilder = $indexBuilder;
-        $this->indexer = $indexer;
-        $this->logger = $logger;
         parent::__construct();
     }
 

@@ -20,18 +20,13 @@ class MediaAdminController extends CRUDController
 {
     final public const INPUT_NAME = 'binaryContent';
 
-    private readonly MediaManager $mediaManager;
-    private readonly ValidatorInterface $validator;
-
     public function __construct(
-        MediaManager $mediaManager,
-        ValidatorInterface $validator,
+        private readonly MediaManager $mediaManager,
+        private readonly ValidatorInterface $validator,
         BreadcrumbsBuilderInterface $breadcrumbsBuilder,
         Pool $pool,
     ) {
         parent::__construct($breadcrumbsBuilder, $pool);
-        $this->mediaManager = $mediaManager;
-        $this->validator = $validator;
     }
 
     /**

@@ -28,49 +28,26 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportCommand
 {
     use SnapshotCommandTrait;
-
-    private readonly ConnectionTraversor $connectionTraversor;
-    private readonly Executor $executor;
     private readonly string $projectRootDir;
-    private readonly LoggerInterface $logger;
-    private readonly Manager $toggleManager;
-    private readonly ProjectRepository $projectRepository;
-    private readonly SelectionStepRepository $selectionStepRepository;
-    private readonly ProposalUrlResolver $proposalUrlResolver;
-    private readonly RequestStack $requestStack;
-    private readonly ProposalRepository $proposalRepository;
-    private readonly TranslatorInterface $translator;
-    private readonly Map $map;
 
     public function __construct(
         GraphQlAclListener $listener,
-        ConnectionTraversor $connectionTraversor,
+        private readonly ConnectionTraversor $connectionTraversor,
         ExportUtils $exportUtils,
-        Executor $executor,
-        Manager $toggleManager,
+        private readonly Executor $executor,
+        private readonly Manager $toggleManager,
         string $projectRootDir,
-        SelectionStepRepository $selectionStepRepository,
-        ProjectRepository $projectRepository,
-        ProposalRepository $proposalRepository,
-        LoggerInterface $logger,
-        ProposalUrlResolver $proposalUrlResolver,
-        RequestStack $requestStack,
-        TranslatorInterface $translator,
-        Map $map
+        private readonly SelectionStepRepository $selectionStepRepository,
+        private readonly ProjectRepository $projectRepository,
+        private readonly ProposalRepository $proposalRepository,
+        private readonly LoggerInterface $logger,
+        private readonly ProposalUrlResolver $proposalUrlResolver,
+        private readonly RequestStack $requestStack,
+        private readonly TranslatorInterface $translator,
+        private readonly Map $map
     ) {
         $listener->disableAcl();
-        $this->connectionTraversor = $connectionTraversor;
-        $this->executor = $executor;
-        $this->logger = $logger;
-        $this->toggleManager = $toggleManager;
         $this->projectRootDir = $projectRootDir;
-        $this->projectRepository = $projectRepository;
-        $this->selectionStepRepository = $selectionStepRepository;
-        $this->proposalUrlResolver = $proposalUrlResolver;
-        $this->requestStack = $requestStack;
-        $this->proposalRepository = $proposalRepository;
-        $this->translator = $translator;
-        $this->map = $map;
         parent::__construct($exportUtils);
     }
 

@@ -30,24 +30,8 @@ class UpdateProposalNewsMutation implements MutationInterface
     final public const INVALID_DATA = 'INVALID_DATA';
     final public const PROPOSAL_NOT_FOUND = 'PROPOSAL_NOT_FOUND';
 
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger,
-        Publisher $publisher
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->logger = $logger;
-        $this->publisher = $publisher;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly LoggerInterface $logger, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

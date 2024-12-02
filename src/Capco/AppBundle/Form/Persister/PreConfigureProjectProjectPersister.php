@@ -15,27 +15,8 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class PreConfigureProjectProjectPersister
 {
-    private readonly UpdateAlphaProjectMutation $updateAlphaProjectMutation;
-    private readonly AbstractStepRepository $abstractStepRepository;
-    private readonly StatusRepository $statusRepository;
-    private readonly ProposalFormRepository $proposalFormRepository;
-    private readonly EntityManagerInterface $em;
-    private readonly QuestionnaireRepository $questionnaireRepository;
-
-    public function __construct(
-        UpdateAlphaProjectMutation $updateAlphaProjectMutation,
-        AbstractStepRepository $abstractStepRepository,
-        StatusRepository $statusRepository,
-        ProposalFormRepository $proposalFormRepository,
-        QuestionnaireRepository $questionnaireRepository,
-        EntityManagerInterface $em
-    ) {
-        $this->updateAlphaProjectMutation = $updateAlphaProjectMutation;
-        $this->abstractStepRepository = $abstractStepRepository;
-        $this->statusRepository = $statusRepository;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->em = $em;
-        $this->questionnaireRepository = $questionnaireRepository;
+    public function __construct(private readonly UpdateAlphaProjectMutation $updateAlphaProjectMutation, private readonly AbstractStepRepository $abstractStepRepository, private readonly StatusRepository $statusRepository, private readonly ProposalFormRepository $proposalFormRepository, private readonly QuestionnaireRepository $questionnaireRepository, private readonly EntityManagerInterface $em)
+    {
     }
 
     public function updateProject(array $projectInput, User $viewer, Project $project, array $proposalFormTitleToIdMap, array $questionnaireTitleToIdMap): Project

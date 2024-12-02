@@ -24,24 +24,8 @@ class UpdateOrganizationMutation implements MutationInterface
 
     final public const ORGANIZATION_NOT_FOUND = 'ORGANIZATION_NOT_FOUND';
 
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly SluggerInterface $slugger;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker,
-        SluggerInterface $slugger
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->slugger = $slugger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly SluggerInterface $slugger)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

@@ -13,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="appendix_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AppendixRepository")
  */
-class AppendixType
+class AppendixType implements \Stringable
 {
     use SluggableTitleTrait;
     use TimestampableTrait;
@@ -42,7 +42,7 @@ class AppendixType
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getTitle() : 'New AppendixType';
     }
@@ -55,10 +55,7 @@ class AppendixType
         return $this->helpText;
     }
 
-    /**
-     * @param mixed $helpText
-     */
-    public function setHelpText($helpText)
+    public function setHelpText(mixed $helpText)
     {
         $this->helpText = $helpText;
     }

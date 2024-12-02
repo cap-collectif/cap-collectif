@@ -17,27 +17,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class DeleteCommentMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly RedisStorageHelper $redisStorage;
-    private readonly LoggerInterface $logger;
-    private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly GlobalIdResolver $globalIdResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        RedisStorageHelper $redisStorage,
-        LoggerInterface $logger,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader,
-        AuthorizationCheckerInterface $authorizationChecker,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->em = $em;
-        $this->redisStorage = $redisStorage;
-        $this->logger = $logger;
-        $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly RedisStorageHelper $redisStorage, private readonly LoggerInterface $logger, private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

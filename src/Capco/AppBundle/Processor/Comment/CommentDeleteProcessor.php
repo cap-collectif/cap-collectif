@@ -8,11 +8,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class CommentDeleteProcessor implements ProcessorInterface
 {
-    private $notifier;
-
-    public function __construct(CommentNotifier $notifier)
+    public function __construct(private readonly CommentNotifier $notifier)
     {
-        $this->notifier = $notifier;
     }
 
     public function process(Message $message, array $options): bool

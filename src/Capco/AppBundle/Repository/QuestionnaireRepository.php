@@ -202,12 +202,10 @@ class QuestionnaireRepository extends EntityRepository
     }
 
     /**
-     * @param mixed $questionnaireId
-     *
      * @throws NonUniqueResultException
      * @throws NoResultException
      */
-    public function hasRecentRepliesOrUpdatedUsers($questionnaireId, \DateTime $date): bool
+    public function hasRecentRepliesOrUpdatedUsers(mixed $questionnaireId, \DateTime $date): bool
     {
         $rsm = new ResultSetMapping();
         $rsm->addScalarResult('hasRecentRepliesOrUpdatedUsers', 'hasRecentRepliesOrUpdatedUsers', 'boolean');

@@ -11,11 +11,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ProposalFormProposalsResolver implements QueryInterface
 {
-    private $dataLoader;
-
-    public function __construct(ProposalFormProposalsDataLoader $dataLoader)
+    public function __construct(private readonly ProposalFormProposalsDataLoader $dataLoader)
     {
-        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(ProposalForm $form, Arg $args, $viewer, RequestStack $request): Promise

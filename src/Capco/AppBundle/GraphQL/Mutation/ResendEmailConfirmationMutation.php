@@ -17,21 +17,8 @@ class ResendEmailConfirmationMutation implements MutationInterface
     final public const EMAIL_ALREADY_CONFIRMED = 'EMAIL_ALREADY_CONFIRMED';
     final public const EMAIL_RECENTLY_SENT = 'EMAIL_RECENTLY_SENT';
 
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly FOSNotifier $notifier;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        FOSNotifier $notifier,
-        Publisher $publisher
-    ) {
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->notifier = $notifier;
-        $this->publisher = $publisher;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FOSNotifier $notifier, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke($user): array

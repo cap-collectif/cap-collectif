@@ -35,25 +35,16 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class VoteSearch extends Search
 {
-    private readonly AbstractVoteRepository $abstractVoteRepository;
-    private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository;
-    private readonly ProjectRepository $projectRepository;
-    private readonly AbstractStepRepository $abstractStepRepository;
-
     public function __construct(
         Index $index,
-        AbstractVoteRepository $abstractVoteRepository,
-        DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
-        ProjectRepository $projectRepository,
-        AbstractStepRepository $abstractStepRepository
+        private readonly AbstractVoteRepository $abstractVoteRepository,
+        private readonly DebateAnonymousVoteRepository $debateAnonymousVoteRepository,
+        private readonly ProjectRepository $projectRepository,
+        private readonly AbstractStepRepository $abstractStepRepository
     ) {
         parent::__construct($index);
         $this->type = 'vote';
         $this->index = $index;
-        $this->abstractVoteRepository = $abstractVoteRepository;
-        $this->debateAnonymousVoteRepository = $debateAnonymousVoteRepository;
-        $this->projectRepository = $projectRepository;
-        $this->abstractStepRepository = $abstractStepRepository;
     }
 
     public function getVotesByAuthorViewerCanSee(
@@ -154,14 +145,10 @@ class VoteSearch extends Search
 
     public function getSortField(string $field): string
     {
-        switch ($field) {
-            case 'CREATED_AT':
-                return 'createdAt';
-
-            case 'PUBLISHED_AT':
-            default:
-                return 'publishedAt';
-        }
+        return match ($field) {
+            'CREATED_AT' => 'createdAt',
+            default => 'publishedAt',
+        };
     }
 
     public function searchProposalVotes(array $keys): array

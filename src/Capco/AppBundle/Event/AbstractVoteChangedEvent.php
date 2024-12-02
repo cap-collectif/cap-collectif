@@ -8,12 +8,10 @@ use Symfony\Component\EventDispatcher\Event;
 class AbstractVoteChangedEvent extends Event
 {
     protected $vote;
-    protected $action;
 
-    public function __construct(AbstractVote $vote, $action)
+    public function __construct(AbstractVote $vote, protected $action)
     {
         $this->vote = $vote;
-        $this->action = $action;
     }
 
     public function getVote()

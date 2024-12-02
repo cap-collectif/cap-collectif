@@ -21,12 +21,6 @@ class ProposalDecision implements Timestampable
     use UuidTrait;
 
     /**
-     * @ORM\OneToOne(targetEntity=OfficialResponse::class, inversedBy="proposalDecision", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=true, name="official_response_id")
-     */
-    private ?OfficialResponse $officialResponse;
-
-    /**
      * @ORM\Column(type="integer", nullable=true, name="estimated_cost")
      */
     private ?int $estimatedCost = null;
@@ -38,12 +32,6 @@ class ProposalDecision implements Timestampable
      * @ORM\JoinColumn(nullable=true, name="updated_by", referencedColumnName="id")
      */
     private ?User $updatedBy = null;
-
-    /**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="decision")
-     * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
-     */
-    private Proposal $proposal;
 
     /**
      * @ORM\Column(type="string", nullable=false)
@@ -68,10 +56,18 @@ class ProposalDecision implements Timestampable
      */
     private \DateTimeInterface $updatedAt;
 
-    public function __construct(Proposal $proposal, ?OfficialResponse $officialResponse = null)
-    {
-        $this->proposal = $proposal;
-        $this->officialResponse = $officialResponse;
+    public function __construct(
+        /**
+         * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="decision")
+         * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
+         */
+        private Proposal $proposal,
+        /**
+         * @ORM\OneToOne(targetEntity=OfficialResponse::class, inversedBy="proposalDecision", cascade={"persist", "remove"})
+         * @ORM\JoinColumn(nullable=true, name="official_response_id")
+         */
+        private ?OfficialResponse $officialResponse = null
+    ) {
     }
 
     public function getId(): ?string

@@ -11,11 +11,8 @@ class UserResponsesResolver implements QueryInterface
 {
     use ResponsesResolverTrait;
 
-    private readonly ConnectionBuilder $builder;
-
-    public function __construct(ConnectionBuilder $builder)
+    public function __construct(private readonly ConnectionBuilder $builder)
     {
-        $this->builder = $builder;
     }
 
     public function __invoke(User $user, $viewer, \ArrayObject $context)

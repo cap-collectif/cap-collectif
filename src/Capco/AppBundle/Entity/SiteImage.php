@@ -12,7 +12,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="site_image")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteImageRepository")
  */
-class SiteImage
+class SiteImage implements \Stringable
 {
     use IdTrait;
 
@@ -64,7 +64,7 @@ class SiteImage
         $this->updatedAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getKeyname() : 'New image';
     }

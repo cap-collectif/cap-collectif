@@ -26,24 +26,8 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private readonly ProposalRepository $proposalRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly LoggerInterface $logger;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        AuthorizationCheckerInterface $authorizationChecker,
-        EntityManagerInterface $entityManager,
-        LoggerInterface $logger,
-        Publisher $publisher
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->entityManager = $entityManager;
-        $this->logger = $logger;
-        $this->publisher = $publisher;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly EntityManagerInterface $entityManager, private readonly LoggerInterface $logger, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $args, $viewer): array

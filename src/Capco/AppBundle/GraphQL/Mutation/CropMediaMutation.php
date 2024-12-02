@@ -16,24 +16,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class CropMediaMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly MediaRepository $mediaRepository;
-    private readonly MediaProvider $mediaProvider;
-    private readonly CacheManager $cacheManager;
-    private readonly FilterManager $filterManager;
-    private readonly DataManager $dataManager;
 
-    public function __construct(
-        MediaRepository $mediaRepository,
-        MediaProvider $mediaProvider,
-        CacheManager $cacheManager,
-        FilterManager $filterManager,
-        DataManager $dataManager
-    ) {
-        $this->mediaRepository = $mediaRepository;
-        $this->mediaProvider = $mediaProvider;
-        $this->cacheManager = $cacheManager;
-        $this->filterManager = $filterManager;
-        $this->dataManager = $dataManager;
+    public function __construct(private readonly MediaRepository $mediaRepository, private readonly MediaProvider $mediaProvider, private readonly CacheManager $cacheManager, private readonly FilterManager $filterManager, private readonly DataManager $dataManager)
+    {
     }
 
     public function __invoke(Argument $args): array

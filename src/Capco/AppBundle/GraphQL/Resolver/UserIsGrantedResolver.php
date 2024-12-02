@@ -8,13 +8,8 @@ use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInt
 
 class UserIsGrantedResolver
 {
-    protected TokenStorageInterface $tokenStorage;
-    protected LoggerInterface $logger;
-
-    public function __construct(TokenStorageInterface $tokenStorage, LoggerInterface $logger)
+    public function __construct(protected TokenStorageInterface $tokenStorage, protected LoggerInterface $logger)
     {
-        $this->logger = $logger;
-        $this->tokenStorage = $tokenStorage;
     }
 
     /**
@@ -23,11 +18,10 @@ class UserIsGrantedResolver
      *  Prevent other user to see other data
      *  For example : when it's called on user field, only owner and admin can access to the field
      *
-     * @param mixed      $user
      * @param null|mixed $viewer
      */
     public function isGranted(
-        $user,
+        mixed $user,
         $viewer = null,
         ?\ArrayObject $context = null,
         array $roleRequest = ['ROLE_ADMIN', 'ROLE_SUPER_ADMIN']

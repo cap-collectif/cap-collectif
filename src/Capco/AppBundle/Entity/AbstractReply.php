@@ -19,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class AbstractReply implements Contribution, VoteContribution
+abstract class AbstractReply implements Contribution, VoteContribution, \Stringable
 {
     use AuthorInformationTrait;
     use PublishableTrait;
@@ -46,7 +46,7 @@ abstract class AbstractReply implements Contribution, VoteContribution
 
     public function __toString(): string
     {
-        return $this->id;
+        return (string) $this->id;
     }
 
     public function getKind(): string

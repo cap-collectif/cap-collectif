@@ -9,11 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class CommentableCommentsResolver implements QueryInterface
 {
-    private $commentableCommentsDataLoader;
-
-    public function __construct(CommentableCommentsDataLoader $commentableCommentsDataLoader)
+    public function __construct(private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader)
     {
-        $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
     }
 
     public function __invoke(CommentableInterface $commentable, Argument $args, $viewer)

@@ -35,36 +35,8 @@ class UpdateNewProjectMutation implements MutationInterface
 {
     use MutationTrait;
 
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly ProjectAuthorTransformer $transformer;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly Publisher $publisher;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly ProjectAbstractStepRepository $projectAbstractStepRepository;
-    private readonly TranslatorInterface $translator;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        FormFactoryInterface $formFactory,
-        ProjectAuthorTransformer $transformer,
-        Publisher $publisher,
-        GlobalIdResolver $globalIdResolver,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ProjectAbstractStepRepository $projectAbstractStepRepository,
-        TranslatorInterface $translator
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
-        $this->transformer = $transformer;
-        $this->publisher = $publisher;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->projectAbstractStepRepository = $projectAbstractStepRepository;
-        $this->translator = $translator;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly ProjectAuthorTransformer $transformer, private readonly Publisher $publisher, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProjectAbstractStepRepository $projectAbstractStepRepository, private readonly TranslatorInterface $translator)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

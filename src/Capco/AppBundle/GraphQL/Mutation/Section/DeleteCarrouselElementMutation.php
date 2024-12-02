@@ -13,15 +13,9 @@ class DeleteCarrouselElementMutation implements MutationInterface
     use MutationTrait;
 
     final public const GLOBAL_ID_NOT_EXIST = 'GLOBAL_ID_NOT_EXIST';
-    private readonly EntityManagerInterface $entityManager;
-    private readonly GlobalIdResolver $globalIdResolver;
 
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->entityManager = $entityManager;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly EntityManagerInterface $entityManager, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     /**

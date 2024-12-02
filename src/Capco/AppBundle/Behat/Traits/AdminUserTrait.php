@@ -6,10 +6,8 @@ trait AdminUserTrait
 {
     /**
      * @When I go to the admin user :tab tab
-     *
-     * @param mixed $tab
      */
-    public function iGoToTheAdminUserTab($tab)
+    public function iGoToTheAdminUserTab(mixed $tab)
     {
         $page = $this->getCurrentPage();
         $this->waitAndThrowOnFailure(

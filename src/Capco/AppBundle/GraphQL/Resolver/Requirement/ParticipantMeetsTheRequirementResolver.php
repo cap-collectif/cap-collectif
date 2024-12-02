@@ -14,15 +14,8 @@ class ParticipantMeetsTheRequirementResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly RequirementViewerValueResolver $resolver;
-    private readonly ParticipantRepository $participantRepository;
-    private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver;
-
-    public function __construct(RequirementViewerValueResolver $resolver, ParticipantRepository $participantRepository, ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
+    public function __construct(private readonly RequirementViewerValueResolver $resolver, private readonly ParticipantRepository $participantRepository, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
     {
-        $this->resolver = $resolver;
-        $this->participantRepository = $participantRepository;
-        $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;
     }
 
     public function __invoke(Requirement $requirement, Argument $args): bool

@@ -12,12 +12,9 @@ class MigrationOnRealDatabasesCommand extends Command
 {
     protected static $defaultName = 'database:check-migrations';
 
-    private $projectDir;
-
-    public function __construct(string $projectRootDir)
+    public function __construct(private readonly string $projectRootDir)
     {
         parent::__construct();
-        $this->projectDir = $projectRootDir;
     }
 
     public function checkDatabase(
@@ -50,11 +47,11 @@ class MigrationOnRealDatabasesCommand extends Command
 
         //reset database schema
         $this->launchCommand(
-            $this->projectDir,
+            $this->projectRootDir,
             array_merge($noLimit, ['bin/console', 'doctrine:d:drop', '--force'])
         );
         $this->launchCommand(
-            $this->projectDir,
+            $this->projectRootDir,
             array_merge($noLimit, ['bin/console', 'doctrine:d:create'])
         );
 
@@ -68,12 +65,12 @@ class MigrationOnRealDatabasesCommand extends Command
 
         //migrate
         $this->launchCommand(
-            $this->projectDir,
+            $this->projectRootDir,
             array_merge($noLimit, ['bin/console', 'doctrine:migrations:migrate'])
         );
         //validate
         $this->launchCommand(
-            $this->projectDir,
+            $this->projectRootDir,
             array_merge($noLimit, ['bin/console', 'doctrine:schema:validate'])
         );
         $output->writeln('<info>Database ' . $database . ' has successfully migrated</info>');
@@ -97,7 +94,7 @@ class MigrationOnRealDatabasesCommand extends Command
 
         try {
             $process->run();
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             if (!$process->isSuccessful()) {
                 //cleaning to be sure no private date remain in case of error
                 throw new Process($process);
@@ -116,7 +113,7 @@ class MigrationOnRealDatabasesCommand extends Command
         $key = $input->getOption('key');
         $databases = ['p.sql', 'pc.sql', 'r.sql'];
 
-        $wdir = $this->projectDir . '/databases/';
+        $wdir = $this->projectRootDir . '/databases/';
 
         $noLimit = ['php', '-d', 'memory_limit=-1'];
 
@@ -124,7 +121,7 @@ class MigrationOnRealDatabasesCommand extends Command
             foreach ($databases as $database) {
                 $this->checkDatabase($key, $database, $output, $wdir, $noLimit);
             }
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->launchCommand($wdir, ['rm', '-f', '*.gz']);
             $this->launchCommand($wdir, ['rm', '-f', '*.sql']);
 

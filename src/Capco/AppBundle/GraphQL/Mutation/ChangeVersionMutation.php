@@ -19,21 +19,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class ChangeVersionMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $versionRepo;
-    private $formFactory;
-    private $redisStorage;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        OpinionVersionRepository $versionRepo,
-        RedisStorageHelper $redisStorage
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->versionRepo = $versionRepo;
-        $this->redisStorage = $redisStorage;
+    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private OpinionVersionRepository $versionRepo, private RedisStorageHelper $redisStorage)
+    {
     }
 
     public function __invoke(Arg $input, User $user): array

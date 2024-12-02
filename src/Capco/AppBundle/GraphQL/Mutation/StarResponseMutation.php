@@ -21,18 +21,8 @@ class StarResponseMutation implements MutationInterface
     final public const RESPONSE_NOT_FOUND = 'RESPONSE_NOT_FOUND';
     final public const ALREADY_STARRED = 'ALREADY_STARRED';
 
-    protected EntityManagerInterface $entityManager;
-    protected GlobalIdResolver $globalIdResolver;
-    protected Publisher $publisher;
-
-    public function __construct(
-        EntityManagerInterface $entityManager,
-        GlobalIdResolver $globalIdResolver,
-        Publisher $publisher
-    ) {
-        $this->entityManager = $entityManager;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->publisher = $publisher;
+    public function __construct(protected EntityManagerInterface $entityManager, protected GlobalIdResolver $globalIdResolver, protected Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $argument, User $viewer): array

@@ -17,18 +17,8 @@ class UpdateHomePageProjectsMapSectionConfigurationMutation implements MutationI
 
     final public const INVALID_FORM = 'INVALID_FORM';
 
-    private readonly EntityManagerInterface $em;
-    private readonly SectionRepository $sectionRepository;
-    private readonly FormFactoryInterface $formFactory;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        SectionRepository $sectionRepository,
-        FormFactoryInterface $formFactory
-    ) {
-        $this->em = $em;
-        $this->sectionRepository = $sectionRepository;
-        $this->formFactory = $formFactory;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SectionRepository $sectionRepository, private readonly FormFactoryInterface $formFactory)
+    {
     }
 
     public function __invoke(Argument $args): array

@@ -14,13 +14,8 @@ class ArgumentableViewerArgumentsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private $argumentRepository;
-    private $builder;
-
-    public function __construct(ArgumentRepository $argumentRepository, ConnectionBuilder $builder)
+    public function __construct(private ArgumentRepository $argumentRepository, private ConnectionBuilder $builder)
     {
-        $this->argumentRepository = $argumentRepository;
-        $this->builder = $builder;
     }
 
     public function __invoke(

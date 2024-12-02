@@ -57,34 +57,21 @@ class ProjectDownloadResolver
         self::EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED_KEY,
         self::EXPORT_CONTRIBUTION_INTERNAL_COMM_KEY,
     ];
-
-    protected EntityManagerInterface $em;
-    protected TranslatorInterface $translator;
-    protected UrlArrayResolver $urlArrayResolver;
-    protected MediaUrlResolver $urlResolver;
-    protected Spreadsheet $spreadsheet;
     protected array $headers;
     protected array $data;
     protected array $customFields;
-    private readonly QuestionnaireExportResultsUrlResolver $exportUrlResolver;
 
     public function __construct(
-        EntityManagerInterface $em,
-        TranslatorInterface $translator,
-        UrlArrayResolver $urlArrayResolver,
-        MediaUrlResolver $urlResolver,
-        Spreadsheet $spreadsheet,
-        QuestionnaireExportResultsUrlResolver $exportUrlResolver
+        protected EntityManagerInterface $em,
+        protected TranslatorInterface $translator,
+        protected UrlArrayResolver $urlArrayResolver,
+        protected MediaUrlResolver $urlResolver,
+        protected Spreadsheet $spreadsheet,
+        private readonly QuestionnaireExportResultsUrlResolver $exportUrlResolver
     ) {
-        $this->em = $em;
-        $this->translator = $translator;
-        $this->urlArrayResolver = $urlArrayResolver;
-        $this->urlResolver = $urlResolver;
-        $this->spreadsheet = $spreadsheet;
         $this->headers = [];
         $this->customFields = [];
         $this->data = [];
-        $this->exportUrlResolver = $exportUrlResolver;
     }
 
     public function getQuestionnaireHeaders(

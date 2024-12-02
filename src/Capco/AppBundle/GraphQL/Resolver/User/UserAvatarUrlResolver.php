@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserAvatarUrlResolver implements QueryInterface
 {
-    private readonly MediaUrlResolver $urlResolver;
-
-    public function __construct(MediaUrlResolver $urlResolver)
+    public function __construct(private readonly MediaUrlResolver $urlResolver)
     {
-        $this->urlResolver = $urlResolver;
     }
 
     public function __invoke(Author $author): ?string

@@ -31,39 +31,8 @@ class AddUserReplyMutation implements MutationInterface
 
     final public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
 
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly ResponsesFormatter $responsesFormatter;
-    private readonly LoggerInterface $logger;
-    private readonly ReplyRepository $replyRepo;
-    private readonly Publisher $publisher;
-    private readonly RequestGuesser $requestGuesser;
-    private readonly StepRequirementsResolver $stepRequirementsResolver;
-    private readonly Indexer $indexer;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        ReplyRepository $replyRepo,
-        GlobalIdResolver $globalIdResolver,
-        ResponsesFormatter $responsesFormatter,
-        LoggerInterface $logger,
-        Publisher $publisher,
-        RequestGuesser $requestGuesser,
-        StepRequirementsResolver $stepRequirementsResolver,
-        Indexer $indexer
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->replyRepo = $replyRepo;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->responsesFormatter = $responsesFormatter;
-        $this->logger = $logger;
-        $this->publisher = $publisher;
-        $this->requestGuesser = $requestGuesser;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
-        $this->indexer = $indexer;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ReplyRepository $replyRepo, private readonly GlobalIdResolver $globalIdResolver, private readonly ResponsesFormatter $responsesFormatter, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly RequestGuesser $requestGuesser, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
+    {
     }
 
     public function __invoke(Argument $input, User $user): array

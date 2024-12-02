@@ -12,17 +12,14 @@ use Symfony\Component\Routing\RouterInterface;
 
 final class ContributionNotifier extends BaseNotifier
 {
-    protected UrlResolver $urlResolver;
-
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
-        UrlResolver $urlResolver,
+        protected UrlResolver $urlResolver,
         RouterInterface $router,
         LocaleResolver $localeResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->urlResolver = $urlResolver;
     }
 
     public function onModeration(Contribution $contribution)

@@ -9,13 +9,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class EventUrlResolver implements QueryInterface
 {
-    private $urlResolver;
-    private $router;
-
-    public function __construct(UrlResolver $urlResolver, RouterInterface $router)
+    public function __construct(private readonly UrlResolver $urlResolver, private readonly RouterInterface $router)
     {
-        $this->urlResolver = $urlResolver;
-        $this->router = $router;
     }
 
     public function __invoke(Event $event, bool $isAdminUrl = false): string

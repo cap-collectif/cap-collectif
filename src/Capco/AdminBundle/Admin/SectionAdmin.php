@@ -30,28 +30,17 @@ class SectionAdmin extends AbstractAdmin
         '_sort_by' => 'position',
     ];
 
-    private readonly Manager $manager;
-    private readonly SectionRepository $repository;
-    private readonly QueryVotesResolver $queryVotesResolver;
-    private readonly QueryEventsResolver $queryEventsResolver;
-    private readonly CollectStepRepository $collectStepRepository;
-
     public function __construct(
         string $code,
         string $class,
         string $baseControllerName,
-        Manager $manager,
-        SectionRepository $repository,
-        QueryVotesResolver $queryVotesResolver,
-        QueryEventsResolver $queryEventsResolver,
-        CollectStepRepository $collectStepRepository
+        private readonly Manager $manager,
+        private readonly SectionRepository $repository,
+        private readonly QueryVotesResolver $queryVotesResolver,
+        private readonly QueryEventsResolver $queryEventsResolver,
+        private readonly CollectStepRepository $collectStepRepository
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->manager = $manager;
-        $this->repository = $repository;
-        $this->queryVotesResolver = $queryVotesResolver;
-        $this->queryEventsResolver = $queryEventsResolver;
-        $this->collectStepRepository = $collectStepRepository;
     }
 
     public function createQuery(): ProxyQueryInterface

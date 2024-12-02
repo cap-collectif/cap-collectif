@@ -20,30 +20,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class QueryVotesResolver implements QueryInterface
 {
-    protected AbstractVoteRepository $votesRepository;
-    protected QueryProjectsResolver $projectsResolver;
-    protected StepVotesCountResolver $stepVotesCountResolver;
-    protected StepPointsVotesCountResolver $stepPointsVotesCountResolver;
-    protected PromiseAdapterInterface $adapter;
-    private readonly VoteSearch $voteSearch;
-    private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository;
-
-    public function __construct(
-        AbstractVoteRepository $votesRepository,
-        QueryProjectsResolver $projectsResolver,
-        StepVotesCountResolver $stepVotesCountResolver,
-        StepPointsVotesCountResolver $stepPointsVotesCountResolver,
-        VoteSearch $voteSearch,
-        PromiseAdapterInterface $adapter,
-        ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository
-    ) {
-        $this->votesRepository = $votesRepository;
-        $this->projectsResolver = $projectsResolver;
-        $this->stepVotesCountResolver = $stepVotesCountResolver;
-        $this->stepPointsVotesCountResolver = $stepPointsVotesCountResolver;
-        $this->adapter = $adapter;
-        $this->voteSearch = $voteSearch;
-        $this->proposalStepPaperVoteCounterRepository = $proposalStepPaperVoteCounterRepository;
+    public function __construct(protected AbstractVoteRepository $votesRepository, protected QueryProjectsResolver $projectsResolver, protected StepVotesCountResolver $stepVotesCountResolver, protected StepPointsVotesCountResolver $stepPointsVotesCountResolver, private readonly VoteSearch $voteSearch, protected PromiseAdapterInterface $adapter, private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository)
+    {
     }
 
     public function __invoke(Argument $args): Connection

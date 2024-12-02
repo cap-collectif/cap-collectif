@@ -13,18 +13,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 class UpdateRegistrationPageMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $siteParameterRepository;
-    private $cache;
 
-    public function __construct(
-        SiteParameterRepository $siteParameterRepository,
-        EntityManagerInterface $em,
-        RedisCache $cache
-    ) {
-        $this->siteParameterRepository = $siteParameterRepository;
-        $this->em = $em;
-        $this->cache = $cache;
+    public function __construct(private SiteParameterRepository $siteParameterRepository, private EntityManagerInterface $em, private RedisCache $cache)
+    {
     }
 
     public function __invoke(Argument $args)

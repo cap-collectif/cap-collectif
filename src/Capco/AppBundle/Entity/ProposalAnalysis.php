@@ -21,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal_analysis")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="evaluationForm")
  */
-class ProposalAnalysis implements Timestampable
+class ProposalAnalysis implements Timestampable, \Stringable
 {
     use HasResponsesTrait;
     use TimestampableTrait;
@@ -69,7 +69,7 @@ class ProposalAnalysis implements Timestampable
         $this->comments = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getProposal()->getTitle() : '';
     }

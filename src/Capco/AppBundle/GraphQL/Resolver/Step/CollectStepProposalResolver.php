@@ -14,11 +14,8 @@ class CollectStepProposalResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    private readonly ProposalFormProposalsDataLoader $dataLoader;
-
-    public function __construct(ProposalFormProposalsDataLoader $dataLoader)
+    public function __construct(private readonly ProposalFormProposalsDataLoader $dataLoader)
     {
-        $this->dataLoader = $dataLoader;
     }
 
     public function __invoke(

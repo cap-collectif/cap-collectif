@@ -66,7 +66,7 @@ abstract class HighlightedContent
      *
      * @return self
      */
-    public function setPosition($position)
+    public function setPosition(mixed $position)
     {
         $this->position = $position;
 

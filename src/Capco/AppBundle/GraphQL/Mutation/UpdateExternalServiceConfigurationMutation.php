@@ -16,15 +16,8 @@ class UpdateExternalServiceConfigurationMutation implements MutationInterface
 
     final public const INVALID_VALUE = 'INVALID_VALUE';
 
-    private readonly ExternalServiceConfigurationRepository $repository;
-    private readonly EntityManagerInterface $em;
-
-    public function __construct(
-        ExternalServiceConfigurationRepository $repository,
-        EntityManagerInterface $em
-    ) {
-        $this->repository = $repository;
-        $this->em = $em;
+    public function __construct(private readonly ExternalServiceConfigurationRepository $repository, private readonly EntityManagerInterface $em)
+    {
     }
 
     public function __invoke(Argument $input): array

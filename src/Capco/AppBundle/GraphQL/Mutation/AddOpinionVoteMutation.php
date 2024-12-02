@@ -26,30 +26,9 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class AddOpinionVoteMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $validator;
-    private $opinionRepo;
-    private $opinionVoteRepo;
-    private $versionRepo;
-    private $versionVoteRepo;
-    private $stepRequirementsResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        ValidatorInterface $validator,
-        OpinionRepository $opinionRepo,
-        OpinionVoteRepository $opinionVoteRepo,
-        OpinionVersionRepository $versionRepo,
-        OpinionVersionVoteRepository $versionVoteRepo,
-        StepRequirementsResolver $stepRequirementsResolver
-    ) {
-        $this->em = $em;
-        $this->validator = $validator;
-        $this->opinionRepo = $opinionRepo;
-        $this->opinionVoteRepo = $opinionVoteRepo;
-        $this->versionRepo = $versionRepo;
-        $this->versionVoteRepo = $versionVoteRepo;
-        $this->stepRequirementsResolver = $stepRequirementsResolver;
+    public function __construct(private EntityManagerInterface $em, private ValidatorInterface $validator, private OpinionRepository $opinionRepo, private OpinionVoteRepository $opinionVoteRepo, private OpinionVersionRepository $versionRepo, private OpinionVersionVoteRepository $versionVoteRepo, private StepRequirementsResolver $stepRequirementsResolver)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

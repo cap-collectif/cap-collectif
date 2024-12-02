@@ -19,17 +19,13 @@ class QueryUsersResolver implements QueryInterface
     use ResolverTrait;
 
     protected $userRepo;
-    private $queryAnalyzer;
-    private $userSearch;
 
     public function __construct(
         UserRepository $userRepo,
-        QueryAnalyzer $queryAnalyzer,
-        UserSearch $userSearch
+        private QueryAnalyzer $queryAnalyzer,
+        private UserSearch $userSearch
     ) {
         $this->userRepo = $userRepo;
-        $this->queryAnalyzer = $queryAnalyzer;
-        $this->userSearch = $userSearch;
     }
 
     public function __invoke(Argument $args, ResolveInfo $resolveInfo): ConnectionInterface

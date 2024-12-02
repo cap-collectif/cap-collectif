@@ -37,44 +37,10 @@ class ChangeProposalDecisionMutation implements MutationInterface
 {
     use MutationTrait;
     use ResolverTrait;
-
-    private readonly ProposalRepository $proposalRepository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly LoggerInterface $logger;
     private readonly ProposalDecisionRepository $proposalDecisionRepository;
-    private readonly UserRepository $userRepository;
-    private readonly TranslatorInterface $translator;
-    private readonly StatusRepository $statusRepository;
-    private readonly EventDispatcherInterface $eventDispatcher;
-    private readonly Indexer $indexer;
-    private readonly Publisher $publisher;
-    private readonly GlobalIdResolver $globalIdResolver;
 
-    public function __construct(
-        ProposalRepository $proposalRepository,
-        UserRepository $userRepository,
-        EntityManagerInterface $entityManager,
-        StatusRepository $statusRepository,
-        AuthorizationCheckerInterface $authorizationChecker,
-        LoggerInterface $logger,
-        Indexer $indexer,
-        TranslatorInterface $translator,
-        EventDispatcherInterface $eventDispatcher,
-        Publisher $publisher,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->proposalRepository = $proposalRepository;
-        $this->entityManager = $entityManager;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->logger = $logger;
-        $this->indexer = $indexer;
-        $this->userRepository = $userRepository;
-        $this->translator = $translator;
-        $this->statusRepository = $statusRepository;
-        $this->eventDispatcher = $eventDispatcher;
-        $this->publisher = $publisher;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly UserRepository $userRepository, private readonly EntityManagerInterface $entityManager, private readonly StatusRepository $statusRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly LoggerInterface $logger, private readonly Indexer $indexer, private readonly TranslatorInterface $translator, private readonly EventDispatcherInterface $eventDispatcher, private readonly Publisher $publisher, private readonly GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(Argument $args, $viewer, RequestStack $request): array

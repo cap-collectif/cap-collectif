@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class ProposalLikersResolver implements QueryInterface
 {
-    private $proposalLikersDataLoader;
-
-    public function __construct(ProposalLikersDataLoader $proposalLikersDataLoader)
+    public function __construct(private readonly ProposalLikersDataLoader $proposalLikersDataLoader)
     {
-        $this->proposalLikersDataLoader = $proposalLikersDataLoader;
     }
 
     public function __invoke(Proposal $proposal)

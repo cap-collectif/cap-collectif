@@ -10,11 +10,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class PurifiedTextType extends AbstractType
 {
-    private $stripTagsTransformer;
-
-    public function __construct(StripTagsTransformer $stripTagsTransformer)
+    public function __construct(private readonly StripTagsTransformer $stripTagsTransformer)
     {
-        $this->stripTagsTransformer = $stripTagsTransformer;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

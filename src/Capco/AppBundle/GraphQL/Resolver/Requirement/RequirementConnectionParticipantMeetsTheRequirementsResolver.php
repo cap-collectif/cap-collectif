@@ -15,13 +15,8 @@ class RequirementConnectionParticipantMeetsTheRequirementsResolver implements Qu
 {
     use ResolverTrait;
 
-    private readonly ParticipantRepository $participantRepository;
-    private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver;
-
-    public function __construct(ParticipantRepository $participantRepository, ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
+    public function __construct(private readonly ParticipantRepository $participantRepository, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver)
     {
-        $this->participantRepository = $participantRepository;
-        $this->viewerMeetsTheRequirementResolver = $viewerMeetsTheRequirementResolver;
     }
 
     public function __invoke(ConnectionInterface $connection, Argument $args): bool

@@ -20,24 +20,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateAnonymousReplyMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly ResponsesFormatter $responsesFormatter;
-    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
-    private readonly Publisher $publisher;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        ResponsesFormatter $responsesFormatter,
-        ReplyAnonymousRepository $replyAnonymousRepository,
-        Publisher $publisher
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->responsesFormatter = $responsesFormatter;
-        $this->replyAnonymousRepository = $replyAnonymousRepository;
-        $this->publisher = $publisher;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly ReplyAnonymousRepository $replyAnonymousRepository, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Argument $input): array

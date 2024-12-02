@@ -19,17 +19,15 @@ final class OrganizationMemberNotifier extends BaseNotifier
     protected Publisher $publisher;
     protected EntityManagerInterface $entityManager;
     protected LoggerInterface $logger;
-    private readonly UrlResolver $urlResolver;
 
     public function __construct(
         MailerService $mailer,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         LocaleResolver $localeResolver,
-        UrlResolver $urlResolver
+        private readonly UrlResolver $urlResolver
     ) {
         parent::__construct($mailer, $siteParams, $router, $localeResolver);
-        $this->urlResolver = $urlResolver;
     }
 
     public function onNewInvitation(PendingOrganizationInvitation $invitation): bool

@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserIdentificationCodeListResolver implements QueryInterface
 {
-    private readonly UserIdentificationCodeListRepository $repo;
-
-    public function __construct(UserIdentificationCodeListRepository $repo)
+    public function __construct(private readonly UserIdentificationCodeListRepository $repo)
     {
-        $this->repo = $repo;
     }
 
     public function __invoke(User $user, Argument $args): ConnectionInterface

@@ -41,51 +41,8 @@ class RegisterMutation implements MutationInterface
     final public const RATE_LIMITER_ACTION = 'RegisterMutation';
     final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    private readonly UserInviteRepository $userInviteRepository;
-    private readonly LoggerInterface $logger;
-    private readonly TranslatorInterface $translator;
-    private readonly UserManagerInterface $userManager;
-    private readonly Manager $toggleManager;
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly FOSNotifier $notifier;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly ResponsesFormatter $responsesFormatter;
-    private readonly UserInvitationHandler $userInvitationHandler;
-    private readonly PendingOrganizationInvitationRepository $organizationInvitationRepository;
-    private readonly EntityManagerInterface $em;
-    private readonly RateLimiter $rateLimiter;
-    private readonly RequestGuesser $requestGuesser;
-
-    public function __construct(
-        Manager $toggleManager,
-        UserInviteRepository $userInviteRepository,
-        LoggerInterface $logger,
-        TranslatorInterface $translator,
-        UserManagerInterface $userManager,
-        TokenGeneratorInterface $tokenGenerator,
-        FOSNotifier $notifier,
-        FormFactoryInterface $formFactory,
-        ResponsesFormatter $responsesFormatter,
-        UserInvitationHandler $userInvitationHandler,
-        PendingOrganizationInvitationRepository $organizationInvitationRepository,
-        EntityManagerInterface $em,
-        RateLimiter $rateLimiter,
-        RequestGuesser $requestGuesser
-    ) {
-        $this->toggleManager = $toggleManager;
-        $this->userInviteRepository = $userInviteRepository;
-        $this->logger = $logger;
-        $this->translator = $translator;
-        $this->userManager = $userManager;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->notifier = $notifier;
-        $this->formFactory = $formFactory;
-        $this->responsesFormatter = $responsesFormatter;
-        $this->userInvitationHandler = $userInvitationHandler;
-        $this->organizationInvitationRepository = $organizationInvitationRepository;
-        $this->em = $em;
-        $this->rateLimiter = $rateLimiter;
-        $this->requestGuesser = $requestGuesser;
+    public function __construct(private readonly Manager $toggleManager, private readonly UserInviteRepository $userInviteRepository, private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator, private readonly UserManagerInterface $userManager, private readonly TokenGeneratorInterface $tokenGenerator, private readonly FOSNotifier $notifier, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly UserInvitationHandler $userInvitationHandler, private readonly PendingOrganizationInvitationRepository $organizationInvitationRepository, private readonly EntityManagerInterface $em, private readonly RateLimiter $rateLimiter, private readonly RequestGuesser $requestGuesser)
+    {
     }
 
     public function __invoke(Argument $args): array

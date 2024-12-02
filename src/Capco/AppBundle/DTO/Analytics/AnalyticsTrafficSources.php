@@ -7,16 +7,13 @@ use Elastica\Multi\ResultSet;
 
 class AnalyticsTrafficSources
 {
-    /**
-     * @var AnalyticsTrafficSource[]|iterable
-     */
-    private readonly iterable $sources;
-    private readonly int $totalCount;
-
-    private function __construct(int $totalCount, iterable $sources)
-    {
-        $this->totalCount = $totalCount;
-        $this->sources = $sources;
+    private function __construct(
+        private readonly int $totalCount,
+        /**
+         * @var AnalyticsTrafficSource[]|iterable
+         */
+        private readonly iterable $sources
+    ) {
     }
 
     public static function fromEs(ResultSet $multiSet): self

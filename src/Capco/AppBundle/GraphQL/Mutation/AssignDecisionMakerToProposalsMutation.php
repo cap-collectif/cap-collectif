@@ -25,27 +25,8 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly ConnectionBuilder $builder;
-    private readonly ProposalDecisionMakerRepository $proposalDecisionMakerRepository;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly Publisher $publisher;
-
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        ConnectionBuilder $builder,
-        AuthorizationCheckerInterface $authorizationChecker,
-        ProposalDecisionMakerRepository $proposalDecisionMakerRepository,
-        Publisher $publisher
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->builder = $builder;
-        $this->proposalDecisionMakerRepository = $proposalDecisionMakerRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->publisher = $publisher;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilder $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalDecisionMakerRepository $proposalDecisionMakerRepository, private readonly Publisher $publisher)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

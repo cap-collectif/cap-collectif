@@ -19,12 +19,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class ConsultationController extends CRUDController
 {
-    private readonly ConsultationStepRepository $consultationStepRepository;
-
-    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, ConsultationStepRepository $consultationStepRepository)
+    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool, private readonly ConsultationStepRepository $consultationStepRepository)
     {
         parent::__construct($breadcrumbsBuilder, $pool);
-        $this->consultationStepRepository = $consultationStepRepository;
     }
 
     public function editAction(Request $request): Response
@@ -147,7 +144,7 @@ class ConsultationController extends CRUDController
                     $this->handleModelManagerException($e);
 
                     $isFormValid = false;
-                } catch (LockException $e) {
+                } catch (LockException) {
                     $this->addFlash(
                         'sonata_flash_error',
                         $this->trans(

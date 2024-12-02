@@ -23,36 +23,8 @@ class ProposalActivitiesResolver extends ActivitiesResolver
     final public const NOT_FOLLOWED = 0;
     final public const ACTIVITIES = ['comments', 'votes', 'lastStep', 'posts', 'officialResponses'];
 
-    protected FollowerRepository $followerRepository;
-    protected ProposalRepository $proposalRepository;
-    protected ProposalFormRepository $proposalFormRepository;
-    protected ProjectRepository $projectRepository;
-    protected LoggerInterface $logger;
-    protected RouterInterface $router;
-    private readonly PostRepository $postRepository;
-    private readonly OfficialResponseRepository $officialResponseRepository;
-    private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader;
-
-    public function __construct(
-        FollowerRepository $followerRepository,
-        ProposalRepository $proposalRepository,
-        PostRepository $postRepository,
-        ProposalFormRepository $proposalFormRepository,
-        ProjectRepository $projectRepository,
-        OfficialResponseRepository $officialResponseRepository,
-        LoggerInterface $logger,
-        RouterInterface $router,
-        ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader
-    ) {
-        $this->followerRepository = $followerRepository;
-        $this->proposalRepository = $proposalRepository;
-        $this->postRepository = $postRepository;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->projectRepository = $projectRepository;
-        $this->officialResponseRepository = $officialResponseRepository;
-        $this->logger = $logger;
-        $this->router = $router;
-        $this->proposalCurrentVotableStepDataLoader = $proposalCurrentVotableStepDataLoader;
+    public function __construct(protected FollowerRepository $followerRepository, protected ProposalRepository $proposalRepository, private readonly PostRepository $postRepository, protected ProposalFormRepository $proposalFormRepository, protected ProjectRepository $projectRepository, private readonly OfficialResponseRepository $officialResponseRepository, protected LoggerInterface $logger, protected RouterInterface $router, private readonly ProposalCurrentVotableStepDataLoader $proposalCurrentVotableStepDataLoader)
+    {
     }
 
     public function getFollowedByUserId(): array

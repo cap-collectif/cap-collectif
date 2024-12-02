@@ -52,40 +52,21 @@ class ImportProposalsFromCsvCommand extends Command
     protected ?array $questionsMap;
     protected array $newUsersMap;
     protected array $customFields = [];
-
-    protected EntityManagerInterface $om;
-    protected MediaManager $mediaManager;
-    protected ProposalDistrictRepository $districtRepository;
-    protected ProposalCategoryRepository $proposalCategoryRepository;
-    protected ProposalFormRepository $proposalFormRepository;
-    protected StatusRepository $statusRepository;
-    protected UserRepository $userRepository;
-    protected UserManagerInterface $fosUserManager;
-    protected Map $map;
     protected array $headers;
 
     public function __construct(
-        MediaManager $mediaManager,
-        ProposalDistrictRepository $districtRepository,
-        ProposalCategoryRepository $proposalCategoryRepository,
-        ProposalFormRepository $proposalFormRepository,
-        StatusRepository $statusRepository,
-        UserRepository $userRepository,
-        UserManagerInterface $fosUserManager,
-        Map $map,
-        EntityManagerInterface $om,
+        protected MediaManager $mediaManager,
+        protected ProposalDistrictRepository $districtRepository,
+        protected ProposalCategoryRepository $proposalCategoryRepository,
+        protected ProposalFormRepository $proposalFormRepository,
+        protected StatusRepository $statusRepository,
+        protected UserRepository $userRepository,
+        protected UserManagerInterface $fosUserManager,
+        protected Map $map,
+        protected EntityManagerInterface $om,
         ?string $name = null
     ) {
         parent::__construct($name);
-        $this->mediaManager = $mediaManager;
-        $this->districtRepository = $districtRepository;
-        $this->proposalCategoryRepository = $proposalCategoryRepository;
-        $this->proposalFormRepository = $proposalFormRepository;
-        $this->statusRepository = $statusRepository;
-        $this->userRepository = $userRepository;
-        $this->fosUserManager = $fosUserManager;
-        $this->map = $map;
-        $this->om = $om;
     }
 
     protected function configure(): void
@@ -271,7 +252,7 @@ class ImportProposalsFromCsvCommand extends Command
                             $thumbnail = $this->mediaManager->createImageFromPath($filePath);
                             $proposal->setMedia($thumbnail);
                         }
-                    } catch (\Exception $exception) {
+                    } catch (\Exception) {
                         $output->writeln('<info>' . $this->filePath . '</info> not found.');
                     }
                 }

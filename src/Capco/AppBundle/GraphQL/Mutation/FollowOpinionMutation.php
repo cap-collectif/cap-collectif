@@ -18,21 +18,11 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Edge;
 class FollowOpinionMutation implements MutationInterface
 {
     use ProjectOpinionSubscriptionGuard;
-
-    private $em;
     private $opinionRepository;
-    private $followerRepository;
     private $opinionVersionRepository;
-    private $globalIdResolver;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FollowerRepository $followerRepository,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->em = $em;
-        $this->followerRepository = $followerRepository;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(private EntityManagerInterface $em, private FollowerRepository $followerRepository, private GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(string $opinionId, string $notifiedOf, User $user): array

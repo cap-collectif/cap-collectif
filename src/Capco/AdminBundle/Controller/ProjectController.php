@@ -50,7 +50,7 @@ class ProjectController extends \Sonata\AdminBundle\Controller\CRUDController
         $entityManager->remove($object);
         $entityManager->flush();
 
-        $indexer->remove(\get_class($object), $object->getId());
+        $indexer->remove($object::class, $object->getId());
         $indexer->finishBulk();
 
         $homePageUrl = $router->generate('app_homepage', [], RouterInterface::ABSOLUTE_URL);

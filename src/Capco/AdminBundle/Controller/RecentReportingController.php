@@ -14,18 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class RecentReportingController extends Controller
 {
-    private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder;
-    private readonly Pool $pool;
-    private readonly ReportingAdmin $admin;
-
-    public function __construct(
-        BreadcrumbsBuilderInterface $breadcrumbsBuilder,
-        Pool $pool,
-        ReportingAdmin $admin
-    ) {
-        $this->breadcrumbsBuilder = $breadcrumbsBuilder;
-        $this->pool = $pool;
-        $this->admin = $admin;
+    public function __construct(private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder, private readonly Pool $pool, private readonly ReportingAdmin $admin)
+    {
     }
 
     /**

@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class GroupListResolver implements QueryInterface
 {
-    private readonly GroupRepository $groupRepository;
-
-    public function __construct(GroupRepository $groupRepository)
+    public function __construct(private readonly GroupRepository $groupRepository)
     {
-        $this->groupRepository = $groupRepository;
     }
 
     public function __invoke(Argument $args): Connection

@@ -17,13 +17,8 @@ use Psr\Log\LoggerInterface;
 
 class ReportableReportingResolver implements QueryInterface
 {
-    private readonly ReportingRepository $repository;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(ReportingRepository $repository, LoggerInterface $logger)
+    public function __construct(private readonly ReportingRepository $repository, private readonly LoggerInterface $logger)
     {
-        $this->repository = $repository;
-        $this->logger = $logger;
     }
 
     public function __invoke(Contribution $contribution, Argument $arguments): Connection
@@ -102,7 +97,7 @@ class ReportableReportingResolver implements QueryInterface
             return ['getBy' => 'getByDebateArgument', 'countFor' => 'countForDebateArgument'];
         }
 
-        $contributionClass = explode('\\', \get_class($contribution));
+        $contributionClass = explode('\\', $contribution::class);
         $contributionType = end($contributionClass);
 
         return [

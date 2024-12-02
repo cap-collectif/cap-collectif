@@ -34,39 +34,8 @@ class AbstractDebateArgumentMutation
     final public const ALREADY_HAS_ARGUMENT = 'ALREADY_HAS_ARGUMENT';
     final public const INVALID_HASH = 'INVALID_HASH';
 
-    protected EntityManagerInterface $em;
-    protected GlobalIdResolver $globalIdResolver;
-    protected DebateArgumentRepository $repository;
-    protected DebateAnonymousArgumentRepository $anonymousRepository;
-    protected AuthorizationCheckerInterface $authorizationChecker;
-    protected Indexer $indexer;
-    protected ValidatorInterface $validator;
-    protected TokenGeneratorInterface $tokenGenerator;
-    protected DebateNotifier $debateNotifier;
-    protected RequestGuesser $requestGuesser;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        DebateArgumentRepository $repository,
-        DebateAnonymousArgumentRepository $anonymousRepository,
-        AuthorizationCheckerInterface $authorizationChecker,
-        Indexer $indexer,
-        ValidatorInterface $validator,
-        TokenGeneratorInterface $tokenGenerator,
-        DebateNotifier $debateNotifier,
-        RequestGuesser $requestGuesser
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->repository = $repository;
-        $this->anonymousRepository = $anonymousRepository;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->indexer = $indexer;
-        $this->validator = $validator;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->debateNotifier = $debateNotifier;
-        $this->requestGuesser = $requestGuesser;
+    public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected DebateArgumentRepository $repository, protected DebateAnonymousArgumentRepository $anonymousRepository, protected AuthorizationCheckerInterface $authorizationChecker, protected Indexer $indexer, protected ValidatorInterface $validator, protected TokenGeneratorInterface $tokenGenerator, protected DebateNotifier $debateNotifier, protected RequestGuesser $requestGuesser)
+    {
     }
 
     protected function getDebateFromInput(Arg $input, ?User $viewer): Debate

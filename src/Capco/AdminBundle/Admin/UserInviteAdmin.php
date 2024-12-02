@@ -10,16 +10,14 @@ class UserInviteAdmin extends AbstractAdmin
 {
     protected $baseRouteName = 'capco_admin_user_invite';
     protected $baseRoutePattern = 'capco/user/invite';
-    private readonly AuthorizationCheckerInterface $checker;
 
     public function __construct(
         $code,
         $class,
         $baseControllerName,
-        AuthorizationCheckerInterface $checker
+        private readonly AuthorizationCheckerInterface $checker
     ) {
         parent::__construct($code, $class, $baseControllerName);
-        $this->checker = $checker;
     }
 
     public function showIn($context): bool

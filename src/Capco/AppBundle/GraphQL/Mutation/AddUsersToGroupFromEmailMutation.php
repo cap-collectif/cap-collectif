@@ -16,27 +16,8 @@ use Psr\Log\LoggerInterface;
 
 class AddUsersToGroupFromEmailMutation implements MutationInterface
 {
-    protected GroupRepository $groupRepository;
-    protected LoggerInterface $logger;
-    protected EntityManagerInterface $em;
-    protected UserRepository $userRepository;
-    protected UserGroupRepository $userGroupRepository;
-    protected GlobalIdResolver $globalIdResolver;
-
-    public function __construct(
-        GroupRepository $groupRepository,
-        LoggerInterface $logger,
-        EntityManagerInterface $em,
-        UserRepository $userRepository,
-        UserGroupRepository $userGroupRepository,
-        GlobalIdResolver $globalIdResolver
-    ) {
-        $this->groupRepository = $groupRepository;
-        $this->logger = $logger;
-        $this->em = $em;
-        $this->userRepository = $userRepository;
-        $this->userGroupRepository = $userGroupRepository;
-        $this->globalIdResolver = $globalIdResolver;
+    public function __construct(protected GroupRepository $groupRepository, protected LoggerInterface $logger, protected EntityManagerInterface $em, protected UserRepository $userRepository, protected UserGroupRepository $userGroupRepository, protected GlobalIdResolver $globalIdResolver)
+    {
     }
 
     public function __invoke(array $emails, bool $dryRun, string $groupId, User $viewer): array
@@ -89,7 +70,7 @@ class AddUsersToGroupFromEmailMutation implements MutationInterface
                 'notFoundEmails' => $notFoundEmails,
                 'alreadyImportedUsers' => $alreadyImportedUsers,
             ];
-        } catch (\Exception $e) {
+        } catch (\Exception) {
             $this->logger->error(
                 static::class .
                     ' addUsersToGroupFromEmail: ' .

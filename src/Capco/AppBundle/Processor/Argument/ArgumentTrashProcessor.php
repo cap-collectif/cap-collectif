@@ -9,15 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ArgumentTrashProcessor implements ProcessorInterface
 {
-    private $argumentRepository;
-    private $argumentNotifier;
-
-    public function __construct(
-        ArgumentRepository $argumentRepository,
-        ArgumentNotifier $argumentNotifier
-    ) {
-        $this->argumentRepository = $argumentRepository;
-        $this->argumentNotifier = $argumentNotifier;
+    public function __construct(private readonly ArgumentRepository $argumentRepository, private readonly ArgumentNotifier $argumentNotifier)
+    {
     }
 
     public function process(Message $message, array $options): bool

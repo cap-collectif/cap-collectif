@@ -10,11 +10,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class CollectStepViewerProposalsUnpublishedResolver implements QueryInterface
 {
-    private $resolver;
-
-    public function __construct(ProposalFormViewerProposalsUnpublishedResolver $resolver)
+    public function __construct(private readonly ProposalFormViewerProposalsUnpublishedResolver $resolver)
     {
-        $this->resolver = $resolver;
     }
 
     public function __invoke(CollectStep $collectStep, Argument $args, User $user)

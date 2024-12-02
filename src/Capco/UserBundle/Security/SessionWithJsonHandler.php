@@ -16,21 +16,18 @@ use Symfony\Component\Security\Core\Security;
 class SessionWithJsonHandler extends RedisSessionHandler
 {
     final public const SEPARATOR = '___JSON_SESSION_SEPARATOR__';
-    private readonly Security $security;
     private int $lockTimeout = 5;
     private string $lockKeyPrefix = 'session_lock_';
     private readonly \Redis $redis;
     private int $retryDelay = 10000;
     private int $maxRetries = 100;
-    private readonly LoggerInterface $logger;
-    private readonly RequestStack $requestStack;
 
     public function __construct(
         \Redis $redis,
-        Security $security,
-        RequestStack $requestStack,
+        private readonly Security $security,
+        private readonly RequestStack $requestStack,
         string $prefix,
-        LoggerInterface $logger,
+        private readonly LoggerInterface $logger,
         array $options = []
     ) {
         $options['ttl'] = 1209600; // This is two weeks
@@ -44,10 +41,7 @@ class SessionWithJsonHandler extends RedisSessionHandler
         // TODO https://github.com/cap-collectif/platform/issues/12189
 
         parent::__construct($redis, $options);
-        $this->security = $security;
         $this->redis = $redis;
-        $this->logger = $logger;
-        $this->requestStack = $requestStack;
     }
 
     public function write($sessionId, $data): bool

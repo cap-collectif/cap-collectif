@@ -17,27 +17,8 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class LocaleController extends AbstractController
 {
-    private readonly LocaleRepository $localeRepository;
-    private readonly PageRepository $pageRepository;
-    private readonly RouterInterface $router;
-    private readonly SetUserDefaultLocaleMutation $userDefaultLocaleMutation;
-    private readonly TranslatorInterface $translator;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        LocaleRepository $localeRepository,
-        PageRepository $pageRepository,
-        RouterInterface $router,
-        SetUserDefaultLocaleMutation $userDefaultLocaleMutation,
-        TranslatorInterface $translator,
-        LoggerInterface $logger
-    ) {
-        $this->localeRepository = $localeRepository;
-        $this->pageRepository = $pageRepository;
-        $this->router = $router;
-        $this->userDefaultLocaleMutation = $userDefaultLocaleMutation;
-        $this->translator = $translator;
-        $this->logger = $logger;
+    public function __construct(private readonly LocaleRepository $localeRepository, private readonly PageRepository $pageRepository, private readonly RouterInterface $router, private readonly SetUserDefaultLocaleMutation $userDefaultLocaleMutation, private readonly TranslatorInterface $translator, private readonly LoggerInterface $logger)
+    {
     }
 
     /**

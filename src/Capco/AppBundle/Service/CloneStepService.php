@@ -19,8 +19,6 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 class CloneStepService
 {
     final public const COPY_TITLE_PREFIX = 'copy-of';
-    private readonly EntityManagerInterface $entityManager;
-    private readonly TranslatorInterface $translator;
 
     /**
      * @var array<string, Status>
@@ -33,11 +31,9 @@ class CloneStepService
     private array $stepCloneCache;
 
     public function __construct(
-        EntityManagerInterface $entityManager,
-        TranslatorInterface $translator
+        private readonly EntityManagerInterface $entityManager,
+        private readonly TranslatorInterface $translator
     ) {
-        $this->entityManager = $entityManager;
-        $this->translator = $translator;
         $this->statusCloneCache = [];
         $this->stepCloneCache = [];
     }

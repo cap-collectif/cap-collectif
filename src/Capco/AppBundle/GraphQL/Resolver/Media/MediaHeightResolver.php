@@ -9,13 +9,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class MediaHeightResolver implements QueryInterface
 {
-    private readonly EntityManagerInterface $em;
-    private readonly MediaSizeRetriever $mediaSizeRetriever;
-
-    public function __construct(EntityManagerInterface $em, MediaSizeRetriever $mediaSizeRetriever)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly MediaSizeRetriever $mediaSizeRetriever)
     {
-        $this->em = $em;
-        $this->mediaSizeRetriever = $mediaSizeRetriever;
     }
 
     public function __invoke(Media $media): ?int

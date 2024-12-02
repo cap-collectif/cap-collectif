@@ -17,18 +17,13 @@ use Elastica\ResultSet;
 
 class ReplySearch extends Search
 {
-    private readonly ReplyRepository $replyRepository;
-    private readonly ReplyAnonymousRepository $replyAnonymousRepository;
-
     public function __construct(
         Index $index,
-        ReplyRepository $replyRepository,
-        ReplyAnonymousRepository $replyAnonymousRepository
+        private readonly ReplyRepository $replyRepository,
+        private readonly ReplyAnonymousRepository $replyAnonymousRepository
     ) {
         parent::__construct($index);
         $this->type = 'reply';
-        $this->replyRepository = $replyRepository;
-        $this->replyAnonymousRepository = $replyAnonymousRepository;
     }
 
     public function getRepliesByStep(

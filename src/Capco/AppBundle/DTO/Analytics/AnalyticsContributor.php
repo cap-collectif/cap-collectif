@@ -6,15 +6,13 @@ use Capco\UserBundle\Entity\User;
 
 class AnalyticsContributor
 {
-    private readonly User $user;
     /**
      * @var AnalyticsContributorContribution[]|iterable
      */
     private iterable $contributions = [];
 
-    public function __construct(User $user)
+    public function __construct(private readonly User $user)
     {
-        $this->user = $user;
     }
 
     public function fromEs(array $contributions): self

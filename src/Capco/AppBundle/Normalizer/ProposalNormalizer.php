@@ -20,30 +20,9 @@ use Symfony\Component\Serializer\SerializerAwareTrait;
 class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterface, CacheableSupportsMethodInterface
 {
     use SerializerAwareTrait;
-    private readonly ObjectNormalizer $normalizer;
-    private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository;
-    private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository;
-    private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository;
-    private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader;
-    private readonly ProposalResponsesResolver $proposalResponsesResolver;
-    private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository;
 
-    public function __construct(
-        ObjectNormalizer $normalizer,
-        ProposalSelectionVoteRepository $proposalSelectionVoteRepository,
-        ProposalCollectVoteRepository $proposalCollectVoteRepository,
-        ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository,
-        CommentableCommentsDataLoader $commentableCommentsDataLoader,
-        ProposalResponsesResolver $proposalResponsesResolver,
-        ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository
-    ) {
-        $this->normalizer = $normalizer;
-        $this->proposalSelectionVoteRepository = $proposalSelectionVoteRepository;
-        $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
-        $this->proposalStepPaperVoteCounterRepository = $proposalStepPaperVoteCounterRepository;
-        $this->commentableCommentsDataLoader = $commentableCommentsDataLoader;
-        $this->proposalResponsesResolver = $proposalResponsesResolver;
-        $this->proposalSelectionSmsVoteRepository = $proposalSelectionSmsVoteRepository;
+    public function __construct(private readonly ObjectNormalizer $normalizer, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalStepPaperVoteCounterRepository $proposalStepPaperVoteCounterRepository, private readonly CommentableCommentsDataLoader $commentableCommentsDataLoader, private readonly ProposalResponsesResolver $proposalResponsesResolver, private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository)
+    {
     }
 
     public function hasCacheableSupportsMethod(): bool

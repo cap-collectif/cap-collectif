@@ -11,11 +11,8 @@ class ViewerCanSeeProposalAssessmentResolver
 {
     use ResolverTrait;
 
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-
-    public function __construct(AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(private readonly AuthorizationCheckerInterface $authorizationChecker)
     {
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function isGranted($viewer, Proposal $proposal, ?\ArrayObject $context = null): bool

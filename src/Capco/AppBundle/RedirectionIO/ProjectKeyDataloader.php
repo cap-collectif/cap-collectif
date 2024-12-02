@@ -7,14 +7,10 @@ use Capco\AppBundle\Toggle\Manager;
 
 class ProjectKeyDataloader
 {
-    private $siteParamRepository;
     private $projectKey;
-    private $toggle;
 
-    public function __construct(SiteParameterRepository $siteParameterRepository, Manager $toggle)
+    public function __construct(private readonly SiteParameterRepository $siteParamRepository, private readonly Manager $toggle)
     {
-        $this->siteParamRepository = $siteParameterRepository;
-        $this->toggle = $toggle;
     }
 
     public function loadKey(): ?string

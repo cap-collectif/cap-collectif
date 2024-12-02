@@ -10,18 +10,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class DebateArticleCrawlerProcessor implements ProcessorInterface
 {
-    private readonly DebateArticleRepository $repository;
-    private readonly PantherServiceCaller $pantherServiceCaller;
-    private readonly EntityManagerInterface $em;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        DebateArticleRepository $repository,
-        PantherServiceCaller $pantherServiceCaller
-    ) {
-        $this->repository = $repository;
-        $this->em = $em;
-        $this->pantherServiceCaller = $pantherServiceCaller;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly DebateArticleRepository $repository, private readonly PantherServiceCaller $pantherServiceCaller)
+    {
     }
 
     public function process(Message $message, array $options): bool

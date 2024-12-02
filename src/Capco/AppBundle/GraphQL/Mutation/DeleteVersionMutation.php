@@ -15,18 +15,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class DeleteVersionMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $versionRepo;
-    private $redisStorage;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        OpinionVersionRepository $versionRepo,
-        RedisStorageHelper $redisStorage
-    ) {
-        $this->em = $em;
-        $this->versionRepo = $versionRepo;
-        $this->redisStorage = $redisStorage;
+    public function __construct(private EntityManagerInterface $em, private OpinionVersionRepository $versionRepo, private RedisStorageHelper $redisStorage)
+    {
     }
 
     public function __invoke(Arg $input, User $user): array

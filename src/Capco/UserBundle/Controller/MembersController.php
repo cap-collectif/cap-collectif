@@ -14,13 +14,8 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class MembersController extends Controller
 {
-    private $userTypeRepository;
-    private $userSearch;
-
-    public function __construct(UserTypeRepository $userTypeRepository, UserSearch $userSearch)
+    public function __construct(private readonly UserTypeRepository $userTypeRepository, private readonly UserSearch $userSearch)
     {
-        $this->userTypeRepository = $userTypeRepository;
-        $this->userSearch = $userSearch;
     }
 
     /**
@@ -29,11 +24,10 @@ class MembersController extends Controller
      * @Route("/members/{userType}/{sort}/{page}", name="app_members_type_sorted", requirements={"page" = "\d+"}, defaults={"page" = 1, "userType" = null, "_feature_flags" = "members_list"} )
      * @Template("@CapcoUser/Members/index.html.twig")
      *
-     * @param mixed      $page
      * @param null|mixed $userType
      * @param null|mixed $sort
      */
-    public function indexAction(Request $request, $page, $userType = null, $sort = null)
+    public function indexAction(Request $request, mixed $page, $userType = null, $sort = null)
     {
         $currentUrl = $this->generateUrl('app_members');
 

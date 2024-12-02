@@ -19,12 +19,9 @@ class VersionSearch extends Search
 {
     final public const SEARCH_FIELDS = ['title', 'title.std', 'body', 'body.std'];
 
-    private $opinionVersionRepo;
-
-    public function __construct(Index $index, OpinionVersionRepository $opinionVersionRepo)
+    public function __construct(Index $index, private readonly OpinionVersionRepository $opinionVersionRepo)
     {
         parent::__construct($index);
-        $this->opinionVersionRepo = $opinionVersionRepo;
         $this->type = 'opinionVersion';
     }
 

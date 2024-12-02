@@ -20,24 +20,9 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class UpdateOtherStepMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly EntityManagerInterface $em;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        GlobalIdResolver $globalIdResolver,
-        EntityManagerInterface $em,
-        AuthorizationCheckerInterface $authorizationChecker,
-        FormFactoryInterface $formFactory,
-        LoggerInterface $logger
-    ) {
-        $this->globalIdResolver = $globalIdResolver;
-        $this->em = $em;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->formFactory = $formFactory;
-        $this->logger = $logger;
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Argument $input, User $viewer): array

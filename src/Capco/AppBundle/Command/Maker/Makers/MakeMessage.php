@@ -39,7 +39,7 @@ class MakeMessage extends AbstractMaker
             'command_content_template' => $this->content,
             'command_template_vars' => $this->templateVars,
             'command_subject_vars' => $this->subjectVars,
-            'command_is_twig_template' => false !== strpos((string) $this->content, '.twig'),
+            'command_is_twig_template' => str_contains((string) $this->content, '.twig'),
         ];
     }
 

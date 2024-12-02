@@ -12,18 +12,15 @@ class CreateUsersFromCsvCommand extends AbstractImportCsvCommand
     public const HEADER_USERNAME = 'username';
     public const HEADER_EMAIL = 'email';
     public const HEADER_PASSWORD = 'password';
-
-    protected UserManager $userManager;
     protected array $createdEmails = [];
     protected array $createdUsernames = [];
 
     public function __construct(
         ?string $name,
-        UserManager $userManager,
+        protected UserManager $userManager,
         ConvertCsvToArray $csvReader
     ) {
         parent::__construct($name, $csvReader);
-        $this->userManager = $userManager;
     }
 
     protected function configure()

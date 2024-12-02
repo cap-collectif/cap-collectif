@@ -20,10 +20,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Given I run :string
-     *
-     * @param mixed $string
      */
-    public function iRun($string)
+    public function iRun(mixed $string)
     {
         $this->run($string);
     }
@@ -31,10 +29,8 @@ class CommandContext implements KernelAwareContext
     /**
      * @Given I consume :queue
      * @Given I consume :maxMessage messages in :queue
-     *
-     * @param mixed $maxMessage
      */
-    public function iConsume(string $queue, $maxMessage = 1)
+    public function iConsume(string $queue, mixed $maxMessage = 1)
     {
         $this->run(
             'swarrot:consume:' .
@@ -48,10 +44,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Given I run a command :command with parameters:
-     *
-     * @param mixed $command
      */
-    public function runCommandWithParameters($command, TableNode $parameters)
+    public function runCommandWithParameters(mixed $command, TableNode $parameters)
     {
         $options = [];
         foreach ($parameters->getRowsHash() as $key => $value) {
@@ -63,10 +57,8 @@ class CommandContext implements KernelAwareContext
 
     /**
      * @Then the command exit code should be :code
-     *
-     * @param mixed $code
      */
-    public function exitCodeShouldBe($code)
+    public function exitCodeShouldBe(mixed $code)
     {
         Assert::assertEquals((int) $code, $this->statusCode);
     }

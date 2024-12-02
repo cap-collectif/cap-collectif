@@ -8,11 +8,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class QueryThemesResolver implements QueryInterface
 {
-    private readonly ThemeRepository $repository;
-
-    public function __construct(ThemeRepository $repository)
+    public function __construct(private readonly ThemeRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Argument $args): array

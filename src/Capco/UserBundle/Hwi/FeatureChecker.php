@@ -13,18 +13,8 @@ class FeatureChecker
     private const FEATURE_PREFIX = 'login_';
     private array $errors = [];
 
-    private readonly Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository;
-    private readonly FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository;
-    private readonly Manager $manager;
-
-    public function __construct(
-        Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository,
-        FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository,
-        Manager $manager
-    ) {
-        $this->oauth2SSOConfigurationRepository = $oauth2SSOConfigurationRepository;
-        $this->facebookSSOConfigurationRepository = $facebookSSOConfigurationRepository;
-        $this->manager = $manager;
+    public function __construct(private readonly Oauth2SSOConfigurationRepository $oauth2SSOConfigurationRepository, private readonly FacebookSSOConfigurationRepository $facebookSSOConfigurationRepository, private readonly Manager $manager)
+    {
     }
 
     public function isServiceEnabled(string $service): bool

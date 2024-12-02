@@ -18,15 +18,8 @@ class CreateSenderEmailMutation implements MutationInterface
     final public const ALREADY_EXIST = 'ALREADY_EXIST';
     final public const INVALID_DOMAIN = 'INVALID_DOMAIN';
 
-    private readonly EntityManagerInterface $em;
-    private readonly SenderEmailDomainRepository $domainRepository;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        SenderEmailDomainRepository $domainRepository
-    ) {
-        $this->em = $em;
-        $this->domainRepository = $domainRepository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SenderEmailDomainRepository $domainRepository)
+    {
     }
 
     public function __invoke(Argument $input): array
@@ -39,7 +32,7 @@ class CreateSenderEmailMutation implements MutationInterface
 
             $this->em->persist($senderEmail);
             $this->em->flush();
-        } catch (UniqueConstraintViolationException $exception) {
+        } catch (UniqueConstraintViolationException) {
             return ['errorCode' => self::ALREADY_EXIST];
         } catch (UserError $error) {
             return ['errorCode' => $error->getMessage()];

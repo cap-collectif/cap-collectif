@@ -12,13 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class MailingListUsersConnection implements QueryInterface
 {
-    private readonly MailingListRepository $repository;
-    private readonly UserRepository $userRepository;
-
-    public function __construct(MailingListRepository $repository, UserRepository $userRepository)
+    public function __construct(private readonly MailingListRepository $repository, private readonly UserRepository $userRepository)
     {
-        $this->repository = $repository;
-        $this->userRepository = $userRepository;
     }
 
     public function __invoke($mailingList, Argument $argument): Connection

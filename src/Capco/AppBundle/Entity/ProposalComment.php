@@ -41,7 +41,7 @@ class ProposalComment extends Comment
                     ->getProposalForm()
                     ->isCommentable()
                 ;
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFoundException) {
             return false;
         }
     }
@@ -53,7 +53,7 @@ class ProposalComment extends Comment
                 && $this->isPublished()
                 && !$this->isTrashed()
                 && !$this->getProposal()->isDeleted();
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFoundException) {
             return false;
         }
     }
@@ -67,7 +67,7 @@ class ProposalComment extends Comment
                 && !$this->getRelatedObject()->isDeleted()
                 && $project
                 && $project->isIndexable();
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFoundException) {
             return false;
         }
     }
@@ -81,7 +81,7 @@ class ProposalComment extends Comment
     {
         try {
             return $this->getProposal();
-        } catch (EntityNotFoundException $e) {
+        } catch (EntityNotFoundException) {
             return null;
         }
     }

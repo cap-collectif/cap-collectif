@@ -25,13 +25,8 @@ use Sonata\AdminBundle\Admin\Pool;
  */
 class AbstractSonataCrudController extends \Sonata\AdminBundle\Controller\CRUDController
 {
-    protected BreadcrumbsBuilderInterface $breadcrumbsBuilder;
-    protected Pool $pool;
-
-    public function __construct(BreadcrumbsBuilderInterface $breadcrumbsBuilder, Pool $pool)
+    public function __construct(protected BreadcrumbsBuilderInterface $breadcrumbsBuilder, protected Pool $pool)
     {
-        $this->breadcrumbsBuilder = $breadcrumbsBuilder;
-        $this->pool = $pool;
     }
 
     protected function addRenderExtraParams(array $parameters = []): array

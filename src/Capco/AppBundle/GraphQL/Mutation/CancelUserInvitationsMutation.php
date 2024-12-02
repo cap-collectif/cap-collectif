@@ -13,13 +13,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class CancelUserInvitationsMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly UserInviteRepository $repository;
 
-    public function __construct(EntityManagerInterface $em, UserInviteRepository $repository)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly UserInviteRepository $repository)
     {
-        $this->em = $em;
-        $this->repository = $repository;
     }
 
     public function __invoke(Argument $args): array

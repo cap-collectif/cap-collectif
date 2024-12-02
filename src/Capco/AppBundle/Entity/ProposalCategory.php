@@ -13,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal_category")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCategoryRepository")
  */
-class ProposalCategory
+class ProposalCategory implements \Stringable
 {
     use TimestampableTrait;
     use UuidTrait;
@@ -70,7 +70,7 @@ class ProposalCategory
         $this->createdAt = new \DateTime();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getName() : 'New category';
     }

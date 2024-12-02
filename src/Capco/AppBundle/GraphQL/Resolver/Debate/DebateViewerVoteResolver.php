@@ -11,11 +11,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 class DebateViewerVoteResolver implements QueryInterface
 {
     use ResolverTrait;
-    private readonly DebateVoteRepository $repository;
 
-    public function __construct(DebateVoteRepository $repository)
+    public function __construct(private readonly DebateVoteRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(Debate $debate, $viewer): ?DebateVote

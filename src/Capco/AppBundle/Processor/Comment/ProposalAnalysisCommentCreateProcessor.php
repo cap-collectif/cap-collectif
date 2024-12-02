@@ -9,15 +9,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ProposalAnalysisCommentCreateProcessor implements ProcessorInterface
 {
-    private readonly CommentRepository $commentRepository;
-    private readonly ProposalAnalysisCommentNotifier $notifier;
-
-    public function __construct(
-        CommentRepository $commentRepository,
-        ProposalAnalysisCommentNotifier $notifier
-    ) {
-        $this->commentRepository = $commentRepository;
-        $this->notifier = $notifier;
+    public function __construct(private readonly CommentRepository $commentRepository, private readonly ProposalAnalysisCommentNotifier $notifier)
+    {
     }
 
     public function process(Message $message, array $options): bool

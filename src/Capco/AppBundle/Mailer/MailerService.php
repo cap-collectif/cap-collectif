@@ -16,24 +16,18 @@ use Twig\Environment;
 
 class MailerService extends MailerFactory
 {
-    protected \Swift_Mailer $mailer;
-    protected Environment $templating;
-    protected TokenManager $tokenManager;
     protected array $failedRecipients;
 
     public function __construct(
-        \Swift_Mailer $mailer,
-        Environment $templating,
+        protected \Swift_Mailer $mailer,
+        protected Environment $templating,
         TranslatorInterface $translator,
         SiteParameterResolver $siteParams,
         RouterInterface $router,
         SenderEmailResolver $senderEmailResolver,
-        TokenManager $tokenManager
+        protected TokenManager $tokenManager
     ) {
         parent::__construct($translator, $siteParams, $router, $senderEmailResolver);
-        $this->mailer = $mailer;
-        $this->templating = $templating;
-        $this->tokenManager = $tokenManager;
         $this->failedRecipients = [];
     }
 

@@ -27,34 +27,19 @@ class UpdateProfileAccountEmailMutation extends BaseUpdateProfile
 
     final public const RATE_LIMITER_ACTION = 'UpdateProfileAccountEmail';
 
-    private readonly UserManager $userManager;
-    private readonly Publisher $publisher;
-    private readonly EncoderFactoryInterface $encoderFactory;
-    private readonly EmailDomainRepository $emailDomainRepository;
-    private readonly Manager $toggleManager;
-    private readonly TokenGeneratorInterface $tokenGenerator;
-    private readonly RateLimiter $rateLimiter;
-
     public function __construct(
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         LoggerInterface $logger,
         UserRepository $userRepository,
-        UserManager $userManager,
-        Publisher $publisher,
-        EncoderFactoryInterface $encoderFactory,
-        EmailDomainRepository $emailDomainRepository,
-        Manager $toggleManager,
-        TokenGeneratorInterface $tokenGenerator,
-        RateLimiter $rateLimiter
+        private readonly UserManager $userManager,
+        private readonly Publisher $publisher,
+        private readonly EncoderFactoryInterface $encoderFactory,
+        private readonly EmailDomainRepository $emailDomainRepository,
+        private readonly Manager $toggleManager,
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly RateLimiter $rateLimiter
     ) {
-        $this->userManager = $userManager;
-        $this->publisher = $publisher;
-        $this->encoderFactory = $encoderFactory;
-        $this->emailDomainRepository = $emailDomainRepository;
-        $this->toggleManager = $toggleManager;
-        $this->tokenGenerator = $tokenGenerator;
-        $this->rateLimiter = $rateLimiter;
         parent::__construct($em, $formFactory, $logger, $userRepository);
     }
 

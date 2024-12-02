@@ -19,37 +19,20 @@ use Symfony\Component\Serializer\Serializer;
 class DebateParticipantExporter extends ParticipantExporter
 {
     final public const BATCH_SIZE = 1000;
-    private readonly DebateArgumentRepository $debateArgumentRepository;
-    private readonly DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository;
-    private readonly UserRepository $userRepository;
-    private readonly ParticipantNormalizer $participantNormalizer;
     private readonly Serializer $serializer;
-    private readonly DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer;
-    private readonly DebateVoteRepository $debateVoteRepository;
-    private readonly LoggerInterface $logger;
-    private readonly FilePathResolver $filePathResolver;
 
     public function __construct(
-        DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository,
-        DebateArgumentRepository $debateArgumentRepository,
-        DebateVoteRepository $debateVoteRepository,
-        UserRepository $userRepository,
+        private readonly DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository,
+        private readonly DebateArgumentRepository $debateArgumentRepository,
+        private readonly DebateVoteRepository $debateVoteRepository,
+        private readonly UserRepository $userRepository,
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
-        ParticipantNormalizer $participantNormalizer,
-        DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer,
-        LoggerInterface $logger,
-        FilePathResolver $filePathResolver
+        private readonly ParticipantNormalizer $participantNormalizer,
+        private readonly DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer,
+        private readonly LoggerInterface $logger,
+        private readonly FilePathResolver $filePathResolver
     ) {
-        $this->debateAnonymousArgumentRepository = $debateAnonymousArgumentRepository;
-        $this->debateArgumentRepository = $debateArgumentRepository;
-        $this->debateVoteRepository = $debateVoteRepository;
-        $this->userRepository = $userRepository;
-        $this->participantNormalizer = $participantNormalizer;
-        $this->debateAnonymousArgumentNormalizer = $debateAnonymousArgumentNormalizer;
-        $this->logger = $logger;
-        $this->filePathResolver = $filePathResolver;
-
         $this->serializer = $this->initializeSerializer();
 
         parent::__construct($entityManager, $this->serializer, $fileSystem);

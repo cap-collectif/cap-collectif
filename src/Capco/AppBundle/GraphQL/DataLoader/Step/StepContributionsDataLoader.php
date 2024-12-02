@@ -34,7 +34,6 @@ class StepContributionsDataLoader extends BatchDataLoader
     protected $proposalCountResolver;
     protected $proposalCollectVoteRepository;
     protected $replyRepository;
-    private readonly QuestionnaireRepliesResolver $questionnaireRepliesResolver;
 
     public function __construct(
         PromiseAdapterInterface $promiseFactory,
@@ -47,7 +46,7 @@ class StepContributionsDataLoader extends BatchDataLoader
         ArgumentRepository $argumentRepository,
         OpinionVersionRepository $opinionVersionRepository,
         CollectStepProposalCountResolver $proposalCountResolver,
-        QuestionnaireRepliesResolver $questionnaireRepliesResolver,
+        private readonly QuestionnaireRepliesResolver $questionnaireRepliesResolver,
         ReplyRepository $replyRepository,
         ProposalCollectVoteRepository $proposalCollectVoteRepository,
         bool $debug,
@@ -62,7 +61,6 @@ class StepContributionsDataLoader extends BatchDataLoader
         $this->proposalCountResolver = $proposalCountResolver;
         $this->proposalCollectVoteRepository = $proposalCollectVoteRepository;
         $this->replyRepository = $replyRepository;
-        $this->questionnaireRepliesResolver = $questionnaireRepliesResolver;
         parent::__construct(
             $this->all(...),
             $promiseFactory,

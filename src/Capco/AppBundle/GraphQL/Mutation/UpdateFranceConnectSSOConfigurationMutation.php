@@ -16,18 +16,9 @@ use Symfony\Component\Form\FormFactoryInterface;
 class UpdateFranceConnectSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
-    private readonly EntityManagerInterface $em;
-    private readonly FormFactoryInterface $formFactory;
-    private readonly AbstractSSOConfigurationRepository $repository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        FormFactoryInterface $formFactory,
-        AbstractSSOConfigurationRepository $repository
-    ) {
-        $this->em = $em;
-        $this->formFactory = $formFactory;
-        $this->repository = $repository;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly AbstractSSOConfigurationRepository $repository)
+    {
     }
 
     public function __invoke(Argument $input): array

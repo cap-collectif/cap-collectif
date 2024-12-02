@@ -12,13 +12,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class UserGroupsResolver implements QueryInterface
 {
-    protected UserGroupRepository $userGroupRepo;
-    protected GroupRepository $groupRepo;
-
-    public function __construct(UserGroupRepository $userGroupRepo, GroupRepository $groupRepo)
+    public function __construct(protected UserGroupRepository $userGroupRepo, protected GroupRepository $groupRepo)
     {
-        $this->userGroupRepo = $userGroupRepo;
-        $this->groupRepo = $groupRepo;
     }
 
     public function __invoke(User $user, Argument $args): Connection

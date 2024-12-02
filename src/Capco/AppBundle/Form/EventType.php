@@ -22,11 +22,8 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class EventType extends AbstractType
 {
-    private readonly EventDistrictsPersister $eventDistrictsPersister;
-
-    public function __construct(EventDistrictsPersister $eventDistrictsPersister)
+    public function __construct(private readonly EventDistrictsPersister $eventDistrictsPersister)
     {
-        $this->eventDistrictsPersister = $eventDistrictsPersister;
     }
 
     public function buildForm(FormBuilderInterface $builder, array $options)

@@ -338,10 +338,8 @@ class SourceRepository extends EntityRepository
 
     /**
      * Get sources by user.
-     *
-     * @param mixed $user
      */
-    public function getByUser($user)
+    public function getByUser(mixed $user)
     {
         $qb = $this->getPublishedQueryBuilder()
             ->addSelect('ca', 'o', 'oc', 'cs', 'cas', 'c', 'aut', 'm', 'media')

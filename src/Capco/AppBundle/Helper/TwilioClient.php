@@ -19,18 +19,14 @@ class TwilioClient
     ];
 
     private readonly Client $client;
-    private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository;
-    private readonly HttpClientInterface $httpClient;
 
     public function __construct(
-        ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
+        private readonly ExternalServiceConfigurationRepository $externalServiceConfigurationRepository,
         string $twilioSid,
         string $twilioToken,
-        HttpClientInterface $httpClient
+        private readonly HttpClientInterface $httpClient
     ) {
         $this->client = new Client($twilioSid, $twilioToken);
-        $this->externalServiceConfigurationRepository = $externalServiceConfigurationRepository;
-        $this->httpClient = $httpClient;
     }
 
     public function sendVerificationCode(string $phone): array

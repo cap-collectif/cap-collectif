@@ -20,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SectionRepository")
  */
-class Section implements Translatable, SonataTranslatableInterface
+class Section implements Translatable, SonataTranslatableInterface, \Stringable
 {
     use SonataTranslatableTrait;
     use TranslatableTrait;
@@ -205,7 +205,7 @@ class Section implements Translatable, SonataTranslatableInterface
         $this->sectionCarrouselElements = new ArrayCollection();
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         $title = $this->getTitle() ?: '';
 

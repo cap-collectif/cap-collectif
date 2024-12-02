@@ -10,13 +10,8 @@ use Swarrot\Processor\ProcessorInterface;
 
 class ReportProcessor implements ProcessorInterface
 {
-    private readonly ReportNotifier $notifier;
-    private readonly ReportingRepository $repository;
-
-    public function __construct(ReportNotifier $notifier, ReportingRepository $repository)
+    public function __construct(private readonly ReportNotifier $notifier, private readonly ReportingRepository $repository)
     {
-        $this->notifier = $notifier;
-        $this->repository = $repository;
     }
 
     public function process(Message $message, array $options): bool

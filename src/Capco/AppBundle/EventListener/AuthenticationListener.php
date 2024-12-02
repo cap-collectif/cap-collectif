@@ -16,21 +16,8 @@ use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
-    private readonly RequestGuesser $requestGuesser;
-    private readonly EntityManagerInterface $em;
-    private readonly OpenIDBackchannel $openIDBackchannel;
-    private readonly LoggerInterface $logger;
-
-    public function __construct(
-        EntityManagerInterface $em,
-        RequestGuesser $requestGuesser,
-        OpenIDBackchannel $openIDBackchannel,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->requestGuesser = $requestGuesser;
-        $this->openIDBackchannel = $openIDBackchannel;
-        $this->logger = $logger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly RequestGuesser $requestGuesser, private readonly OpenIDBackchannel $openIDBackchannel, private readonly LoggerInterface $logger)
+    {
     }
 
     public function onAuthenticationFailure(AuthenticationFailureEvent $event): void

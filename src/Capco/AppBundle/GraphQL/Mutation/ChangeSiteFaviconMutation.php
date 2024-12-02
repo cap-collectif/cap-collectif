@@ -14,21 +14,9 @@ use Overblog\GraphQLBundle\Error\UserError;
 class ChangeSiteFaviconMutation implements MutationInterface
 {
     use MutationTrait;
-    private $siteImageRepository;
-    private $mediaRepository;
-    private $em;
-    private $siteFaviconProcessor;
 
-    public function __construct(
-        SiteImageRepository $siteImageRepository,
-        SiteFaviconProcessor $siteFaviconProcessor,
-        EntityManagerInterface $em,
-        MediaRepository $mediaRepository
-    ) {
-        $this->siteImageRepository = $siteImageRepository;
-        $this->mediaRepository = $mediaRepository;
-        $this->em = $em;
-        $this->siteFaviconProcessor = $siteFaviconProcessor;
+    public function __construct(private SiteImageRepository $siteImageRepository, private SiteFaviconProcessor $siteFaviconProcessor, private EntityManagerInterface $em, private MediaRepository $mediaRepository)
+    {
     }
 
     public function __invoke(Argument $input): array

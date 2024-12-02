@@ -23,49 +23,22 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ConfirmationController extends Controller
 {
-    private readonly UserManager $userManager;
-    private readonly LoginManagerInterface $loginManager;
-    private readonly RouterInterface $router;
-    private readonly StepUrlResolver $stepUrlResolver;
-    private readonly ContributionManager $contributionManager;
-    private readonly SessionInterface $session;
-    private readonly UserRepository $userRepo;
-    private readonly AbstractStepRepository $stepRepo;
-    private readonly TranslatorInterface $translator;
-    private readonly CommentRepository $commentRepository;
-    private readonly EntityManagerInterface $em;
-    private readonly LoggerInterface $logger;
-    private readonly SendInBluePublisher $sendInBluePublisher;
-
     public function __construct(
-        UserManager $userManager,
-        LoginManagerInterface $loginManager,
-        RouterInterface $router,
-        StepUrlResolver $stepUrlResolver,
-        SessionInterface $session,
-        ContributionManager $contributionManager,
-        TranslatorInterface $translator,
-        UserRepository $userRepo,
-        AbstractStepRepository $stepRepo,
-        CommentRepository $commentRepository,
-        EntityManagerInterface $em,
-        LoggerInterface $logger,
-        SendInBluePublisher $sendInBluePublisher
+        private readonly UserManager $userManager,
+        private readonly LoginManagerInterface $loginManager,
+        private readonly RouterInterface $router,
+        private readonly StepUrlResolver $stepUrlResolver,
+        private readonly SessionInterface $session,
+        private readonly ContributionManager $contributionManager,
+        private readonly TranslatorInterface $translator,
+        private readonly UserRepository $userRepo,
+        private readonly AbstractStepRepository $stepRepo,
+        private readonly CommentRepository $commentRepository,
+        private readonly EntityManagerInterface $em,
+        private readonly LoggerInterface $logger,
+        private readonly SendInBluePublisher $sendInBluePublisher
     ) {
-        $this->userManager = $userManager;
-        $this->loginManager = $loginManager;
-        $this->router = $router;
-        $this->stepUrlResolver = $stepUrlResolver;
-        $this->contributionManager = $contributionManager;
-        $this->session = $session;
-        $this->userRepo = $userRepo;
-        $this->stepRepo = $stepRepo;
-        $this->translator = $translator;
         $this->login = true;
-        $this->commentRepository = $commentRepository;
-        $this->em = $em;
-        $this->logger = $logger;
-        $this->sendInBluePublisher = $sendInBluePublisher;
     }
 
     /**

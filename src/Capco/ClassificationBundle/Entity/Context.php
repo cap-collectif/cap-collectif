@@ -2,7 +2,7 @@
 
 namespace Capco\ClassificationBundle\Entity;
 
-class Context
+class Context implements \Stringable
 {
     protected string $id;
     protected ?string $name;
@@ -10,7 +10,7 @@ class Context
     protected ?\DateTimeInterface $updatedAt = null;
     protected bool $enabled;
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getName() ?: 'n/a';
     }

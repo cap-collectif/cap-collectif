@@ -27,7 +27,7 @@ class JWT
     {
         try {
             return (new self($token))->getPayload();
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             return null;
         }
     }

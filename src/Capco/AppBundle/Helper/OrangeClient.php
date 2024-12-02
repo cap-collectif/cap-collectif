@@ -19,29 +19,9 @@ class OrangeClient
     final public const GET_ACCESS_TOKEN_URL = 'https://li.liveidentity.com/ag-authorize/public/token';
     final public const SEND_SMS_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/send';
     final public const VALIDATE_SMS_CODE_URL = 'https://li.liveidentity.com/attributes-api/public/api/v1/otp/validate';
-    private readonly HttpClientInterface $client;
-    private readonly LoggerInterface $logger;
-    private readonly TranslatorInterface $translator;
-    private readonly SiteParameterResolver $siteParams;
 
-    private readonly string $clientId;
-
-    private readonly string $clientSecret;
-
-    public function __construct(
-        HttpClientInterface $httpClient,
-        LoggerInterface $logger,
-        string $clientId,
-        string $clientSecret,
-        TranslatorInterface $translator,
-        SiteParameterResolver $siteParams
-    ) {
-        $this->client = $httpClient;
-        $this->logger = $logger;
-        $this->clientId = $clientId;
-        $this->clientSecret = $clientSecret;
-        $this->translator = $translator;
-        $this->siteParams = $siteParams;
+    public function __construct(private readonly HttpClientInterface $client, private readonly LoggerInterface $logger, private readonly string $clientId, private readonly string $clientSecret, private readonly TranslatorInterface $translator, private readonly SiteParameterResolver $siteParams)
+    {
     }
 
     /**
@@ -181,24 +161,13 @@ class OrangeClient
 
     private function getErrorType(\Throwable $e): string
     {
-        switch (true) {
-            case $e instanceof ClientExceptionInterface:
-                return 'Client';
-
-            case $e instanceof DecodingExceptionInterface:
-                return 'Decoding';
-
-            case $e instanceof RedirectionExceptionInterface:
-                return 'Redirection';
-
-            case $e instanceof ServerExceptionInterface:
-                return 'Server';
-
-            case $e instanceof TransportExceptionInterface:
-                return 'Transport';
-
-            default:
-                return 'Unexpected';
-        }
+        return match (true) {
+            $e instanceof ClientExceptionInterface => 'Client',
+            $e instanceof DecodingExceptionInterface => 'Decoding',
+            $e instanceof RedirectionExceptionInterface => 'Redirection',
+            $e instanceof ServerExceptionInterface => 'Server',
+            $e instanceof TransportExceptionInterface => 'Transport',
+            default => 'Unexpected',
+        };
     }
 }

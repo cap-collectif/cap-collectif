@@ -11,13 +11,8 @@ use Psr\Log\LoggerInterface;
 
 class ContributionManager
 {
-    private $indexer;
-    private $logger;
-
-    public function __construct(Indexer $indexer, LoggerInterface $logger)
+    public function __construct(private readonly Indexer $indexer, private readonly LoggerInterface $logger)
     {
-        $this->indexer = $indexer;
-        $this->logger = $logger;
     }
 
     public function publishContributions(User $user): bool
@@ -43,7 +38,7 @@ class ContributionManager
 
         try {
             $this->indexer->finishBulk();
-        } catch (\RuntimeException $exception) {
+        } catch (\RuntimeException) {
             // In some rare cases indexation could failed
             // the user will not see his published contributions
             // Until next indexation

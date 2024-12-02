@@ -18,18 +18,8 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 
 class ProjectVotesResolver implements QueryInterface
 {
-    protected PromiseAdapterInterface $adapter;
-    private readonly StepVotesCountResolver $stepVotesCountResolver;
-    private readonly VoteSearch $voteSearch;
-
-    public function __construct(
-        StepVotesCountResolver $stepVotesCountResolver,
-        VoteSearch $voteSearch,
-        PromiseAdapterInterface $adapter
-    ) {
-        $this->adapter = $adapter;
-        $this->stepVotesCountResolver = $stepVotesCountResolver;
-        $this->voteSearch = $voteSearch;
+    public function __construct(private readonly StepVotesCountResolver $stepVotesCountResolver, private readonly VoteSearch $voteSearch, protected PromiseAdapterInterface $adapter)
+    {
     }
 
     public function __invoke(Project $project, ?Arg $args = null): ConnectionInterface

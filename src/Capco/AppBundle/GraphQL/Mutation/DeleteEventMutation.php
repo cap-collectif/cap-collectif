@@ -25,30 +25,17 @@ class DeleteEventMutation extends BaseDeleteMutation
 {
     use MutationTrait;
 
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly Indexer $indexer;
-    private readonly Publisher $publisher;
-    private readonly EventRegistrationRepository $registration;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
-    private readonly HighlightedContentRepository $highlightedContentRepository;
-
     public function __construct(
         EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        Indexer $indexer,
-        Publisher $publisher,
-        EventRegistrationRepository $registration,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly Indexer $indexer,
+        private readonly Publisher $publisher,
+        private readonly EventRegistrationRepository $registration,
         MediaProvider $mediaProvider,
-        AuthorizationCheckerInterface $authorizationChecker,
-        HighlightedContentRepository $highlightedContentRepository
+        private readonly AuthorizationCheckerInterface $authorizationChecker,
+        private readonly HighlightedContentRepository $highlightedContentRepository
     ) {
         parent::__construct($em, $mediaProvider);
-        $this->globalIdResolver = $globalIdResolver;
-        $this->indexer = $indexer;
-        $this->publisher = $publisher;
-        $this->registration = $registration;
-        $this->authorizationChecker = $authorizationChecker;
-        $this->highlightedContentRepository = $highlightedContentRepository;
     }
 
     public function __invoke(Arg $input, User $viewer): array

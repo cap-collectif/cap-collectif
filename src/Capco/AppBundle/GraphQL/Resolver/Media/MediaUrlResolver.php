@@ -10,21 +10,8 @@ use Symfony\Component\Routing\RouterInterface;
 
 class MediaUrlResolver implements QueryInterface
 {
-    private readonly MediaProvider $mediaProvider;
-    private readonly RouterInterface $router;
-    private readonly ?string $assetsHost;
-    private readonly string $routerRequestContextHost;
-
-    public function __construct(
-        MediaProvider $mediaProvider,
-        RouterInterface $router,
-        string $routerRequestContextHost,
-        ?string $assetsHost = null
-    ) {
-        $this->mediaProvider = $mediaProvider;
-        $this->router = $router;
-        $this->assetsHost = $assetsHost;
-        $this->routerRequestContextHost = $routerRequestContextHost;
+    public function __construct(private readonly MediaProvider $mediaProvider, private readonly RouterInterface $router, private readonly string $routerRequestContextHost, private ?string $assetsHost = null)
+    {
     }
 
     public function __invoke(Media $media, ?Arg $args = null, ?\ArrayObject $context = null): string

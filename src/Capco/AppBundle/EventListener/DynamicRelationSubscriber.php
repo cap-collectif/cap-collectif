@@ -12,11 +12,8 @@ use Doctrine\ORM\Mapping\ClassMetadataInfo;
  */
 class DynamicRelationSubscriber implements EventSubscriber
 {
-    private $traits;
-
-    public function __construct(array $traits)
+    public function __construct(private readonly array $traits)
     {
-        $this->traits = $traits;
     }
 
     /**

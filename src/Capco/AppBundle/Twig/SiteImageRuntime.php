@@ -11,21 +11,8 @@ use Twig\Extension\RuntimeExtensionInterface;
 
 class SiteImageRuntime implements RuntimeExtensionInterface
 {
-    protected Resolver $resolver;
-    private readonly SiteImageRepository $repository;
-    private readonly ContainerInterface $container;
-    private readonly MediaProvider $mediaProvider;
-
-    public function __construct(
-        Resolver $resolver,
-        SiteImageRepository $repository,
-        ContainerInterface $container,
-        MediaProvider $mediaProvider
-    ) {
-        $this->resolver = $resolver;
-        $this->repository = $repository;
-        $this->container = $container;
-        $this->mediaProvider = $mediaProvider;
+    public function __construct(protected Resolver $resolver, private readonly SiteImageRepository $repository, private readonly ContainerInterface $container, private readonly MediaProvider $mediaProvider)
+    {
     }
 
     public function getAppLogoUrl(): ?string

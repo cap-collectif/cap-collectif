@@ -26,10 +26,6 @@ use Symfony\Component\Validator\Validator\ValidatorInterface;
 class QuestionJumpsHandler
 {
     use QuestionPersisterTrait;
-
-    private readonly QuestionChoiceRepository $questionChoiceRepository;
-    private readonly AbstractQuestionRepository $questionRepository;
-    private readonly FormFactoryInterface $formFactory;
     private readonly EntityManagerInterface $em;
     private readonly AbstractQuestionRepository $abstractQuestionRepo;
     private readonly QuestionnaireAbstractQuestionRepository $questionRepo;
@@ -39,9 +35,9 @@ class QuestionJumpsHandler
     private readonly Indexer $indexer;
 
     public function __construct(
-        QuestionChoiceRepository $questionChoiceRepository,
-        AbstractQuestionRepository $questionRepository,
-        FormFactoryInterface $formFactory,
+        private readonly QuestionChoiceRepository $questionChoiceRepository,
+        private readonly AbstractQuestionRepository $questionRepository,
+        private readonly FormFactoryInterface $formFactory,
         EntityManagerInterface $em,
         AbstractQuestionRepository $abstractQuestionRepo,
         QuestionnaireAbstractQuestionRepository $questionRepo,
@@ -50,9 +46,6 @@ class QuestionJumpsHandler
         MultipleChoiceQuestionRepository $choiceQuestionRepository,
         Indexer $indexer
     ) {
-        $this->questionChoiceRepository = $questionChoiceRepository;
-        $this->questionRepository = $questionRepository;
-        $this->formFactory = $formFactory;
         $this->em = $em;
         $this->abstractQuestionRepo = $abstractQuestionRepo;
         $this->questionRepo = $questionRepo;

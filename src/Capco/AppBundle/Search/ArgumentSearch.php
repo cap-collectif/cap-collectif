@@ -16,13 +16,10 @@ use Elastica\ResultSet;
 
 class ArgumentSearch extends Search
 {
-    private readonly ArgumentRepository $argumentRepository;
-
-    public function __construct(Index $index, ArgumentRepository $argumentRepository)
+    public function __construct(Index $index, private readonly ArgumentRepository $argumentRepository)
     {
         parent::__construct($index);
         $this->type = 'argument';
-        $this->argumentRepository = $argumentRepository;
     }
 
     public function getArgumentsByUserIds(?User $viewer, array $keys): array
@@ -142,13 +139,10 @@ class ArgumentSearch extends Search
             return 'createdAt';
         }
 
-        switch ($field) {
-            case 'PUBLISHED_AT':
-                return 'publishedAt';
-
-            default:
-                return 'createdAt';
-        }
+        return match ($field) {
+            'PUBLISHED_AT' => 'publishedAt',
+            default => 'createdAt',
+        };
     }
 
     private static function applyLimit(Query $query, int $limit): Query

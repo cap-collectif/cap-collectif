@@ -18,18 +18,9 @@ class UpdateProposalSocialNetworksMutation implements MutationInterface
     use MutationTrait;
 
     final public const PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS = 'PROPOSAL_DOESNT_ALLOW_SOCIAL_NETWORKS';
-    private readonly EntityManagerInterface $em;
-    private readonly GlobalIdResolver $globalIdResolver;
-    private readonly LoggerInterface $logger;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        GlobalIdResolver $globalIdResolver,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->globalIdResolver = $globalIdResolver;
-        $this->logger = $logger;
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Arg $input, User $viewer): array

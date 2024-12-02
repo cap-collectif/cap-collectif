@@ -14,22 +14,17 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 class ProposalResponsesResolver implements QueryInterface
 {
     use ResponsesResolverTrait;
-
-    private $proposalViewerIsAnEvaluerResolver;
     private $analystRepository;
     private $analysisRelatedVoter;
-    private readonly AuthorizationCheckerInterface $authorizationChecker;
 
     public function __construct(
         AbstractQuestionRepository $repository,
         AbstractResponseRepository $abstractResponseRepository,
-        ProposalViewerIsAnEvaluerResolver $proposalViewerIsAnEvaluerResolver,
-        AuthorizationCheckerInterface $authorizationChecker
+        private ProposalViewerIsAnEvaluerResolver $proposalViewerIsAnEvaluerResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
     ) {
         $this->abstractQuestionRepository = $repository;
         $this->abstractResponseRepository = $abstractResponseRepository;
-        $this->proposalViewerIsAnEvaluerResolver = $proposalViewerIsAnEvaluerResolver;
-        $this->authorizationChecker = $authorizationChecker;
     }
 
     public function __invoke(Proposal $proposal, $viewer, \ArrayObject $context): array

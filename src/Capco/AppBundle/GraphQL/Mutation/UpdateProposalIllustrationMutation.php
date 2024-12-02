@@ -29,7 +29,6 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
     use ResolverTrait;
 
     final public const MEDIA_NOT_FOUND = 'MEDIA_NOT_FOUND';
-    private readonly MediaRepository $mediaRepository;
 
     public function __construct(
         LoggerInterface $logger,
@@ -44,7 +43,7 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
         ResponsesFormatter $responsesFormatter,
         ProposalRepository $proposalRepository,
         Publisher $publisher,
-        MediaRepository $mediaRepository
+        private readonly MediaRepository $mediaRepository
     ) {
         parent::__construct(
             $logger,
@@ -60,7 +59,6 @@ class UpdateProposalIllustrationMutation extends CreateProposalMutation
             $proposalRepository,
             $publisher
         );
-        $this->mediaRepository = $mediaRepository;
     }
 
     public function __invoke(Arg $input, $user): array

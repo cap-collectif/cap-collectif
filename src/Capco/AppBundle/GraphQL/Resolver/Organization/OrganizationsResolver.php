@@ -11,11 +11,8 @@ use Overblog\GraphQLBundle\Relay\Connection\Paginator;
 
 class OrganizationsResolver implements QueryInterface
 {
-    private readonly OrganizationRepository $repository;
-
-    public function __construct(OrganizationRepository $repository)
+    public function __construct(private readonly OrganizationRepository $repository)
     {
-        $this->repository = $repository;
     }
 
     public function __invoke(User $viewer, Argument $input): ConnectionInterface

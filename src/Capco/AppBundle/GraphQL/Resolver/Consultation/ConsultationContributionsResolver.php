@@ -13,11 +13,8 @@ use Symfony\Component\HttpFoundation\RequestStack;
 
 class ConsultationContributionsResolver implements QueryInterface
 {
-    private $contributionSearch;
-
-    public function __construct(ContributionSearch $contributionSearch)
+    public function __construct(private readonly ContributionSearch $contributionSearch)
     {
-        $this->contributionSearch = $contributionSearch;
     }
 
     public function __invoke(

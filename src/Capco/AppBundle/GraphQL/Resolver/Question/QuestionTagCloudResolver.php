@@ -11,13 +11,9 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 class QuestionTagCloudResolver implements QueryInterface
 {
     final public const CACHE_KEY = 'questionTagCloudData';
-    private readonly ResponseSearch $responseSearch;
-    private readonly RedisCache $cache;
 
-    public function __construct(ResponseSearch $responseSearch, RedisCache $cache)
+    public function __construct(private readonly ResponseSearch $responseSearch, private readonly RedisCache $cache)
     {
-        $this->responseSearch = $responseSearch;
-        $this->cache = $cache;
     }
 
     public function __invoke(AbstractQuestion $question, Argument $args): array

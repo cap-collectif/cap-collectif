@@ -13,18 +13,9 @@ use Psr\Log\LoggerInterface;
 class DeleteSSOConfigurationMutation implements MutationInterface
 {
     use MutationTrait;
-    private $em;
-    private $logger;
-    private $repository;
 
-    public function __construct(
-        EntityManagerInterface $em,
-        AbstractSSOConfigurationRepository $repository,
-        LoggerInterface $logger
-    ) {
-        $this->em = $em;
-        $this->repository = $repository;
-        $this->logger = $logger;
+    public function __construct(private EntityManagerInterface $em, private AbstractSSOConfigurationRepository $repository, private LoggerInterface $logger)
+    {
     }
 
     public function __invoke(Arg $input): array

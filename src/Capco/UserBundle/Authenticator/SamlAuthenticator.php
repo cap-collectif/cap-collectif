@@ -18,21 +18,8 @@ use Symfony\Component\Security\Guard\AbstractGuardAuthenticator;
 
 class SamlAuthenticator extends AbstractGuardAuthenticator
 {
-    protected Simple $samlAuth;
-    protected string $samlIdp;
-    protected LoggerInterface $logger;
-    private readonly SamlUserProvider $samlUserProvider;
-
-    public function __construct(
-        ?Simple $samlAuth,
-        string $samlIdp,
-        LoggerInterface $logger,
-        SamlUserProvider $samlUserProvider
-    ) {
-        $this->samlAuth = $samlAuth;
-        $this->samlIdp = $samlIdp;
-        $this->logger = $logger;
-        $this->samlUserProvider = $samlUserProvider;
+    public function __construct(protected Simple $samlAuth, protected string $samlIdp, protected LoggerInterface $logger, private readonly SamlUserProvider $samlUserProvider)
+    {
     }
 
     public function supports(Request $request): bool
@@ -109,24 +96,12 @@ class SamlAuthenticator extends AbstractGuardAuthenticator
 
     private function getAuthenticationAttribute(): string
     {
-        switch ($this->samlIdp) {
-            case 'dev':
-            case 'grandest':
-                return 'email';
-
-            case 'univ-lyon1':
-                return 'urn:oid:0.9.2342.19200300.100.1.3';
-
-            case 'cd59':
-            case 'april':
-            case 'clermont':
-                return 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress';
-
-            case 'sorbonne':
-                return 'mail';
-
-            default:
-                throw new \RuntimeException('Could not find authentication attribute for idp: ' . $this->samlIdp);
-        }
+        return match ($this->samlIdp) {
+            'dev', 'grandest' => 'email',
+            'univ-lyon1' => 'urn:oid:0.9.2342.19200300.100.1.3',
+            'cd59', 'april', 'clermont' => 'http://schemas.xmlsoap.org/ws/2005/05/identity/claims/emailaddress',
+            'sorbonne' => 'mail',
+            default => throw new \RuntimeException('Could not find authentication attribute for idp: ' . $this->samlIdp),
+        };
     }
 }

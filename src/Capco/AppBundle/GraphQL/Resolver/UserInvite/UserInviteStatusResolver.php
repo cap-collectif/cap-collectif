@@ -11,15 +11,8 @@ use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class UserInviteStatusResolver implements QueryInterface
 {
-    private readonly UserRepository $userRepository;
-    private readonly UserInviteEmailMessageRepository $emailMessageRepository;
-
-    public function __construct(
-        UserRepository $userRepository,
-        UserInviteEmailMessageRepository $emailMessageRepository
-    ) {
-        $this->userRepository = $userRepository;
-        $this->emailMessageRepository = $emailMessageRepository;
+    public function __construct(private readonly UserRepository $userRepository, private readonly UserInviteEmailMessageRepository $emailMessageRepository)
+    {
     }
 
     public function __invoke(UserInvite $userInvite): string

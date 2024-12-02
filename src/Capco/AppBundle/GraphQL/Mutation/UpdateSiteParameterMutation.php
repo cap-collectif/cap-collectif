@@ -23,25 +23,9 @@ class UpdateSiteParameterMutation implements MutationInterface
 
     final public const KEYNAME_RECEIVE_ADDRESS = 'admin.mail.notifications.receive_address';
     final public const KEYNAME_SEND_NAME = 'admin.mail.notifications.send_name';
-    protected RequestStack $requestStack;
 
-    private readonly SiteParameterRepository $repository;
-    private readonly EntityManagerInterface $entityManager;
-    private readonly SiteParameterRuntime $siteParamRuntime;
-    private readonly RedisCache $cache;
-
-    public function __construct(
-        SiteParameterRepository $repository,
-        SiteParameterRuntime $siteParamRuntime,
-        EntityManagerInterface $entityManager,
-        RedisCache $cache,
-        RequestStack $requestStack
-    ) {
-        $this->repository = $repository;
-        $this->entityManager = $entityManager;
-        $this->siteParamRuntime = $siteParamRuntime;
-        $this->requestStack = $requestStack;
-        $this->cache = $cache;
+    public function __construct(private readonly SiteParameterRepository $repository, private readonly SiteParameterRuntime $siteParamRuntime, private readonly EntityManagerInterface $entityManager, private readonly RedisCache $cache, protected RequestStack $requestStack)
+    {
     }
 
     public function __invoke(Argument $input): array

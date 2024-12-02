@@ -11,24 +11,18 @@ use RedirectionIO\Client\Sdk\Exception\TimeoutException;
 class Client
 {
     final public const VERSION = '0.3.0';
-
-    private $projectKeyDataloader;
     private $connections;
-    private $timeout = 20000;
-    private $debug;
-    private $logger;
     private $currentConnection;
     private $currentConnectionName;
-    private $toggle;
 
     public function __construct(
-        ProjectKeyDataloader $projectKeyDataloader,
-        LoggerInterface $logger,
-        Manager $toggle,
-        $timeout,
+        private readonly ProjectKeyDataloader $projectKeyDataloader,
+        private readonly LoggerInterface $logger,
+        private readonly Manager $toggle,
+        private $timeout,
         string $agentTcp,
         string $agentUnix,
-        $debug = false
+        private $debug = false
     ) {
         $connections = [
             'agent_tcp' => $agentTcp,
@@ -41,12 +35,6 @@ class Client
                 'retries' => 2,
             ];
         }
-
-        $this->projectKeyDataloader = $projectKeyDataloader;
-        $this->timeout = $timeout;
-        $this->debug = $debug;
-        $this->logger = $logger;
-        $this->toggle = $toggle;
     }
 
     public function request(CommandInterface $command)

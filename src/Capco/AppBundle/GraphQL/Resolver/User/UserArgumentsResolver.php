@@ -15,18 +15,9 @@ use Overblog\PromiseAdapter\PromiseAdapterInterface;
 class UserArgumentsResolver implements QueryInterface
 {
     use ResolverTrait;
-    private $userArgumentsDataLoader;
-    private $argumentRepository;
-    private $promiseAdapter;
 
-    public function __construct(
-        UserArgumentsDataLoader $argumentsDataLoader,
-        ArgumentRepository $argumentRepository,
-        PromiseAdapterInterface $promiseAdapter
-    ) {
-        $this->userArgumentsDataLoader = $argumentsDataLoader;
-        $this->argumentRepository = $argumentRepository;
-        $this->promiseAdapter = $promiseAdapter;
+    public function __construct(private UserArgumentsDataLoader $userArgumentsDataLoader, private ArgumentRepository $argumentRepository, private PromiseAdapterInterface $promiseAdapter)
+    {
     }
 
     public function __invoke(

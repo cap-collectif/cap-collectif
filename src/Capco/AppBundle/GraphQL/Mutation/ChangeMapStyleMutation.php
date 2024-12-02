@@ -12,13 +12,9 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 class ChangeMapStyleMutation implements MutationInterface
 {
     use MutationTrait;
-    private $repository;
-    private $em;
 
-    public function __construct(MapTokenRepository $repository, EntityManagerInterface $em)
+    public function __construct(private MapTokenRepository $repository, private EntityManagerInterface $em)
     {
-        $this->repository = $repository;
-        $this->em = $em;
     }
 
     public function __invoke(Argument $input): array

@@ -12,18 +12,14 @@ use Capco\UserBundle\Handler\CasHandler;
  */
 class CASLogoutHandler implements LogoutHandlerInterface
 {
-    private readonly Manager $toggleManager;
     private readonly ?CASSSOConfiguration $configuration;
-    private readonly CasHandler $casHandler;
 
     public function __construct(
-        Manager $toggleManager,
+        private readonly Manager $toggleManager,
         CASSSOConfigurationRepository $repository,
-        CasHandler $casHandler
+        private readonly CasHandler $casHandler
     ) {
-        $this->toggleManager = $toggleManager;
         $this->configuration = $repository->findOneBy([]);
-        $this->casHandler = $casHandler;
     }
 
     /**

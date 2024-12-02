@@ -16,7 +16,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
  * @CapcoAdminAssert\LessThanIfMetaDescription(max="160", message="argument.metadescription.max_length")
  */
-class SiteParameter implements SonataTranslatableInterface, Translatable
+class SiteParameter implements SonataTranslatableInterface, Translatable, \Stringable
 {
     use SonataTranslatableTrait;
     use TranslatableTrait;
@@ -137,7 +137,7 @@ class SiteParameter implements SonataTranslatableInterface, Translatable
         $this->type = self::TYPE_SIMPLE_TEXT;
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->getId() ? $this->getKeyname() : 'New parameter';
     }
