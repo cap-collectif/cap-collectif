@@ -60,7 +60,7 @@ class QuestionJumpsHandler
      */
     public function saveJumps(array $arguments, QuestionsInterface $entity): void
     {
-        list('formType' => $formType, 'type' => $type) = $this->getEntityConfig($entity, $arguments);
+        ['formType' => $formType, 'type' => $type] = $this->getEntityConfig($entity, $arguments);
 
         $questions = $arguments['questions'] ?? null;
 

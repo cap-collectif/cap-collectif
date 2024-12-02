@@ -22,7 +22,7 @@ class AddQuestionnaireStepMutation implements MutationInterface
     {
         $this->formatInput($input);
         /** * @var QuestionnaireStep $step  */
-        list('step' => $step) = $this->addStepService->addStep($input, $viewer, 'QUESTIONNAIRE');
+        ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'QUESTIONNAIRE');
         $questionnaire = $step->getQuestionnaire();
 
         $organization = $viewer->getOrganization();

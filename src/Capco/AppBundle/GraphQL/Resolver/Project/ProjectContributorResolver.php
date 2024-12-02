@@ -77,7 +77,7 @@ class ProjectContributorResolver implements QueryInterface
                     );
                     $userContributors = $response->getEntities();
 
-                    list($participantsContributors, $participantsCount, $participantsCursors) = $this->getParticipants($project, $providedFilters['step']);
+                    [$participantsContributors, $participantsCount, $participantsCursors] = $this->getParticipants($project, $providedFilters['step']);
 
                     $cursors = array_merge($response->getCursors(), $participantsCursors);
                     $response->setCursors($cursors);

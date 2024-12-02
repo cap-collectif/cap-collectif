@@ -92,7 +92,7 @@ class CreateCsvFromProjectMediatorsProposalsVotesCommand extends BaseExportComma
             sprintf('%s/public/export/%s', $this->projectRootDir, $fileName)
         );
 
-        list('keys' => $headerKeys, 'translations' => $headerTranslations) = $this->getHeaders();
+        ['keys' => $headerKeys, 'translations' => $headerTranslations] = $this->getHeaders();
         $writer->addRow(WriterEntityFactory::createRowFromArray($headerTranslations));
         $progressBar = new ProgressBar($output, \count($projectMediatorsProposalsVotes));
 

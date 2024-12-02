@@ -27,7 +27,7 @@ class ChangeMapProviderTokenMutation implements MutationInterface
     public function __invoke(Argument $input): array
     {
         $this->formatInput($input);
-        list($provider, $publicToken, $secretToken) = [
+        [$provider, $publicToken, $secretToken] = [
             $input->offsetGet('provider'),
             $input->offsetGet('publicToken'),
             $input->offsetGet('secretToken'),

@@ -25,7 +25,7 @@ class ParticipantVotesResolver implements QueryInterface
         $mediatorId = $args->offsetGet('mediatorId') ?? null;
         $mediator = $mediatorId ? $this->getMediator($mediatorId, $viewer) : null;
 
-        list('project' => $project, 'step' => $step) = $this->getContribuable($args, $viewer);
+        ['project' => $project, 'step' => $step] = $this->getContribuable($args, $viewer);
 
         $paginator = new Paginator(
             fn (int $offset, int $limit) => $this->voteRepository->findPaginatedByParticipant(

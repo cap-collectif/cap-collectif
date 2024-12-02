@@ -47,7 +47,7 @@ class ExportQuestionnaireParticipantsCommandTest extends KernelTestCase
 
     public function testIfFileIsGeneratedIfUserWasUpdated(): void
     {
-        list($commandTester, $options) = $this->executeFirstCommand(self::COMMAND);
+        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
 
         $this->updateUser('user6');
 
@@ -62,7 +62,7 @@ class ExportQuestionnaireParticipantsCommandTest extends KernelTestCase
 
     public function testIfFileIsGeneratedIfReplyWasUpdated(): void
     {
-        list($commandTester, $options) = $this->executeFirstCommand(self::COMMAND);
+        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
 
         $this->updateReply();
 
@@ -77,7 +77,7 @@ class ExportQuestionnaireParticipantsCommandTest extends KernelTestCase
 
     public function testIfFileIsGeneratedIfAnonymousReplyWasUpdated(): void
     {
-        list($commandTester, $options) = $this->executeFirstCommand(self::COMMAND);
+        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
 
         $this->updateAnonymousReply();
 

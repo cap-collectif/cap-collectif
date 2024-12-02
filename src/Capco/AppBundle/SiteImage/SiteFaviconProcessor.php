@@ -95,7 +95,7 @@ class SiteFaviconProcessor
             try {
                 $image = $this->getSourceImageFromMedia($siteFavicon->getMedia());
                 if ($image) {
-                    list($r, $g, $b) = ColorThief::getColor($image);
+                    [$r, $g, $b] = ColorThief::getColor($image);
                     $color = Text::rgbToHex($r, $g, $b);
                 } else {
                     $color = self::DEFAULT_COLOR;

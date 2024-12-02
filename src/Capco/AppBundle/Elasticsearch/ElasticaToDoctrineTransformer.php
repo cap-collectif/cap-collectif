@@ -58,7 +58,7 @@ class ElasticaToDoctrineTransformer
         $objects = $ids = $toFetchByType = [];
         /** @var Result $elasticaObject */
         foreach ($elasticaObjects as $elasticaObject) {
-            list($type, $id) = explode(':', $elasticaObject->getId());
+            [$type, $id] = explode(':', $elasticaObject->getId());
 
             if (!$type || !$id) {
                 throw new \RuntimeException("Id format for current document is not type:id, can't hydrate to Doctrine!");

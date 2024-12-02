@@ -80,7 +80,7 @@ class FontProcessor
             $process = new Process(['fc-scan', '--format', '%{family} | %{fullname}', $file]);
             $process->mustRun();
             if (!empty($process->getOutput())) {
-                list($family, $fullname) = explode(' | ', $process->getOutput());
+                [$family, $fullname] = explode(' | ', $process->getOutput());
                 $familyParts = explode(',', $family);
                 $name = \count($familyParts) > 0 ? $familyParts[0] : $font->getFontName();
             }

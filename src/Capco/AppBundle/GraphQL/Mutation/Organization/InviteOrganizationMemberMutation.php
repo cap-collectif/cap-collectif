@@ -40,7 +40,7 @@ class InviteOrganizationMemberMutation implements MutationInterface
     public function __invoke(Argument $input, User $viewer): array
     {
         $this->formatInput($input);
-        list($organizationId, $email, $role) = $this->getData($input);
+        [$organizationId, $email, $role] = $this->getData($input);
         $organization = $this->globalIdResolver->resolve($organizationId, $viewer);
         if (!$organization instanceof Organization) {
             return ['errorCode' => self::ORGANIZATION_NOT_FOUND];

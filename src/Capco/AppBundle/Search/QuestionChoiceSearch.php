@@ -29,7 +29,7 @@ class QuestionChoiceSearch extends Search
             $searchQuery = $this->index->createSearch();
             $boolQuery = new BoolQuery();
 
-            list($term, $cursor, $limit, $random, $isRandomQuestionChoices, $seed) = [
+            [$term, $cursor, $limit, $random, $isRandomQuestionChoices, $seed] = [
                 $questionData['args']->offsetGet('term'),
                 $questionData['args']->offsetGet('after'),
                 $questionData['args']->offsetGet('first'),

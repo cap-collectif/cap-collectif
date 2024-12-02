@@ -35,10 +35,7 @@ class UserDecisionMakerProposalsResolver implements QueryInterface
 
             try {
                 $proposalDecisionMakers = $this->proposalDecisionMakerRepository->findByDecisionMaker(
-                    $viewer,
-                    ['createdAt' => 'DESC'],
-                    $limit,
-                    $offset
+                    $viewer
                 );
                 if (!empty($proposalDecisionMakers)) {
                     /** @var ProposalDecisionMaker $proposalDecisionMaker */

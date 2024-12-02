@@ -23,7 +23,7 @@ class AddVoteAndSelectionStepMutation implements MutationInterface
     {
         $this->formatInput($input);
         /** * @var SelectionStep $step  */
-        list('step' => $step) = $this->addStepService->addStep($input, $viewer, 'VOTE_AND_SELECTION');
+        ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'VOTE_AND_SELECTION');
 
         $requirements = [
             (new Requirement())->setType(Requirement::FIRSTNAME),

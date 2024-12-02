@@ -35,7 +35,7 @@ class EvaluateProposalAssessmentMutation implements MutationInterface
         $this->formatInput($args);
         $this->preventNullableViewer($viewer);
 
-        list($proposalId, $decision, $body, $cost, $officialResponse) = [
+        [$proposalId, $decision, $body, $cost, $officialResponse] = [
             $args->offsetGet('proposalId'),
             $args->offsetGet('decision'),
             $args->offsetGet('body'),

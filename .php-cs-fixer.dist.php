@@ -26,7 +26,6 @@ return $config
         '@Symfony:risky' => true,
         '@PSR2' => true,
         '@PhpCsFixer' => true,
-        'list_syntax' => ['syntax' => 'long'],
         'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
         'no_extra_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
         'no_unreachable_default_argument_value' => false,

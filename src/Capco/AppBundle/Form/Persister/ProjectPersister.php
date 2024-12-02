@@ -59,7 +59,7 @@ class ProjectPersister
 
         $form = $this->formFactory->create(AlphaProjectFormType::class, $project);
 
-        list($dataAuthors, $steps) = [$arguments['authors'], $arguments['steps']];
+        [$dataAuthors, $steps] = [$arguments['authors'], $arguments['steps']];
         unset($arguments['authors'], $arguments['steps']);
         $form->submit($arguments);
 

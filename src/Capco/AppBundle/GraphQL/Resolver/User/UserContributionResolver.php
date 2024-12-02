@@ -31,7 +31,7 @@ class UserContributionResolver implements ContainerAwareInterface, QueryInterfac
             $args = new Argument(['first' => 0]);
         }
 
-        list($type, $contribuableId, $includeTrashed, $field, $direction) = [
+        [$type, $contribuableId, $includeTrashed, $field, $direction] = [
             $args->offsetGet('type'),
             $args->offsetGet('contribuableId'),
             $args->offsetGet('includeTrashed'),

@@ -25,8 +25,8 @@ final class AddressProvider extends BaseProvider
         array $longitudeConfig = [self::IDF_MIN_LONGITUDE, self::IDF_MAX_LONGITUDE],
         int $nbDecimals = self::DEFAULT_DECIMALS
     ) {
-        list($latitudeMin, $latitudeMax) = $latitudeConfig;
-        list($longitudeMin, $longitudeMax) = $longitudeConfig;
+        [$latitudeMin, $latitudeMax] = $latitudeConfig;
+        [$longitudeMin, $longitudeMax] = $longitudeConfig;
 
         $latitude = $this->faker->randomFloat($nbDecimals, $latitudeMin, $latitudeMax);
         $longitude = $this->faker->randomFloat($nbDecimals, $longitudeMin, $longitudeMax);

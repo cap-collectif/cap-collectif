@@ -40,7 +40,7 @@ class ChangeProposalAnalysisMutation implements MutationInterface
         $this->formatInput($args);
         $this->preventNullableViewer($viewer);
 
-        list($proposalId, $responses) = [
+        [$proposalId, $responses] = [
             $args->offsetGet('proposalId'),
             $args->offsetGet('responses'),
         ];

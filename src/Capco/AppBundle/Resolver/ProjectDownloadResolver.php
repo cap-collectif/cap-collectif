@@ -301,7 +301,7 @@ class ProjectDownloadResolver
         );
         $nbCols = \count($headers);
         // Add headers
-        list($startColumn, $startRow) = Coordinate::coordinateFromString('A1');
+        [$startColumn, $startRow] = Coordinate::coordinateFromString('A1');
         $currentColumn = $startColumn;
         foreach ($headers as $header) {
             if (\is_array($header)) {
@@ -316,7 +316,7 @@ class ProjectDownloadResolver
             $sheet->setCellValueExplicit([$currentColumn, $startRow], $header, DataType::TYPE_STRING);
             ++$currentColumn;
         }
-        list($startColumn, $startRow) = Coordinate::coordinateFromString('A2');
+        [$startColumn, $startRow] = Coordinate::coordinateFromString('A2');
         $currentRow = $startRow;
         // Loop through data
         foreach ($data as $row) {

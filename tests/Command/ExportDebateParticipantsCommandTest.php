@@ -44,7 +44,7 @@ class ExportDebateParticipantsCommandTest extends KernelTestCase
 
     public function testIfFileIsGeneratedIfUserWasUpdated(): void
     {
-        list($commandTester, $options) = $this->executeFirstCommand(self::COMMAND);
+        [$commandTester, $options] = $this->executeFirstCommand(self::COMMAND);
 
         $this->updateUser('user42');
 

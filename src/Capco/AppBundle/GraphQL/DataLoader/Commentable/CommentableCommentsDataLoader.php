@@ -201,7 +201,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             if (0 === $offset && 0 === $limit) {
                 return [];
             }
-            list($field, $direction) = [
+            [$field, $direction] = [
                 $args->offsetGet('orderBy')['field'],
                 $args->offsetGet('orderBy')['direction'],
             ];

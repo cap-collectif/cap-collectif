@@ -100,7 +100,7 @@ class ContributionSearch extends Search
         $inConsultation = true;
         $contributionTypes = null;
         $boolQuery = new Query\BoolQuery();
-        list($contribuableDecodedId, $contribuableType) = [
+        [$contribuableDecodedId, $contribuableType] = [
             GlobalId::fromGlobalId($contribuableId)['id'],
             GlobalId::fromGlobalId($contribuableId)['type'],
         ];

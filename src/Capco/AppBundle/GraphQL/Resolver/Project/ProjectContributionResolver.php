@@ -86,7 +86,7 @@ class ProjectContributionResolver implements QueryInterface
         $cachedTotalContributionCount = $this->cache->getItem($cacheKey);
 
         if ($cachedTotalContributionCount->isHit()) {
-            return $cachedTotalContributionCount->get('value');
+            return $cachedTotalContributionCount->get();
         }
 
         $counters = [];

@@ -433,7 +433,7 @@ class VoteSearch extends Search
             if (!$key['includeNotAccounted']) {
                 $boolQuery->addFilter(new Term(['isAccounted' => true]));
             }
-            list($cursor, $field, $direction, $limit) = [
+            [$cursor, $field, $direction, $limit] = [
                 $key['args']->offsetGet('after'),
                 $key['args']->offsetGet('orderBy')['field'],
                 $key['args']->offsetGet('orderBy')['direction'],
@@ -488,7 +488,7 @@ class VoteSearch extends Search
 
         if ($contribuableId) {
             $globalId = GlobalId::fromGlobalId($contribuableId);
-            list($type, $id) = [$globalId['type'], $globalId['id']];
+            [$type, $id] = [$globalId['type'], $globalId['id']];
             if ($type === ucfirst(Project::getElasticsearchTypeName())) {
                 $project = $this->projectRepository->find($id);
                 $projectOwner = $project->getOwner();

@@ -66,7 +66,7 @@ class ProjectViewerAssignedProposalsResolver implements QueryInterface
             if ($args->offsetExists('term')) {
                 $filters['term'] = $args->offsetGet('term');
             }
-            list($direction, $field) = [
+            [$direction, $field] = [
                 $args->offsetGet('orderBy')['direction'],
                 $args->offsetGet('orderBy')['field'],
             ];

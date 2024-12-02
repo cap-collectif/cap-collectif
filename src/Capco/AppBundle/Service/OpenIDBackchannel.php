@@ -36,7 +36,7 @@ class OpenIDBackchannel
 
         $accessToken = explode('logout_token=', $content)[1];
 
-        list($user, $openIdSID) = $this->findUser($accessToken);
+        [$user, $openIdSID] = $this->findUser($accessToken);
         if (!$user instanceof User) {
             $this->logger->error(__METHOD__ . 'USER_NOT_FOUND');
 

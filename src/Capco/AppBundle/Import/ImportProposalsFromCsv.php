@@ -431,7 +431,7 @@ class ImportProposalsFromCsv
                         $column = Detector::removeEmoji($column);
                     }
                 }
-                list(
+                [
                     'isCurrentLineFail' => $isCurrentLineFail,
                     'author' => $author,
                     'category' => $category,
@@ -439,7 +439,8 @@ class ImportProposalsFromCsv
                     'district' => $district,
                     'media' => $media,
                     'status' => $status,
-                    'address' => $address) = $this->verifyData($row, $dryRun, $isCli, $isCurrentLineFail, $key);
+                    'address' => $address
+                ] = $this->verifyData($row, $dryRun, $isCli, $isCurrentLineFail, $key);
             } catch (\Exception $exception) {
                 $this->logger->error($exception->getMessage());
 

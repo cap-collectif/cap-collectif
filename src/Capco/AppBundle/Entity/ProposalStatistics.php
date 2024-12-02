@@ -33,7 +33,7 @@ class ProposalStatistics extends AbstractStatistics implements IndexableInterfac
         $this->proposal = $proposal;
 
         if ($proposal->getStatistics() !== $this) {
-            $proposal->getStatistics($this);
+            $proposal->getStatistics();
         }
 
         return $this;

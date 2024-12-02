@@ -41,7 +41,7 @@ class PreConfigureProjectMutation implements MutationInterface
 
         $questionnaireTitleToIdMap = [];
         $proposalFormTitleToIdMap = [];
-        list($ownerId, $owner) = $this->getOwner($viewer);
+        [$ownerId, $owner] = $this->getOwner($viewer);
         $project = $this->createProject($projectInput['title'], $owner);
 
         if ($projectInput['projectType'] ?? null) {

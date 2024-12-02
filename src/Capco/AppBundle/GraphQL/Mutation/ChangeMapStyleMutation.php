@@ -20,7 +20,7 @@ class ChangeMapStyleMutation implements MutationInterface
     public function __invoke(Argument $input): array
     {
         $this->formatInput($input);
-        list($mapTokenId, $styleOwner, $styleId) = [
+        [$mapTokenId, $styleOwner, $styleId] = [
             $input->offsetGet('mapTokenId'),
             $input->offsetGet('styleOwner'),
             $input->offsetGet('styleId'),

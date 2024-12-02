@@ -48,7 +48,7 @@ class QuestionJumpsDataLoader extends BatchDataLoader
 
         $jumps = $this->repository->findBy(['origin' => $ids]);
         $orderBy = $keys[0]['args']->offsetGet('orderBy');
-        list($field, $direction) = [$orderBy['field'], $orderBy['direction']];
+        [$field, $direction] = [$orderBy['field'], $orderBy['direction']];
 
         $results = array_map(static function (int $id) use ($field, $direction, $jumps) {
             $filtered = array_filter($jumps, static fn (LogicJump $jump) => $jump->getOrigin()->getId() === $id);

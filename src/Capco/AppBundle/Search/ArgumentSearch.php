@@ -33,22 +33,23 @@ class ArgumentSearch extends Search
                 new Query\Term(['author.id' => ['value' => $key['user']->getId()]])
             );
 
-            list(
+            [
                 $cursor,
                 $field,
                 $direction,
                 $limit,
                 $includeUnpublished,
                 $includeTrashed,
-                $aclDisabled) = [
-                    $key['args']->offsetGet('after'),
-                    $key['args']->offsetGet('orderBy')['field'] ?? 'createdAt',
-                    $key['args']->offsetGet('orderBy')['direction'] ?? 'DESC',
-                    $key['args']->offsetGet('first'),
-                    $key['args']->offsetGet('includeUnpublished') ?? false,
-                    $key['args']->offsetGet('includeTrashed') ?? false,
-                    $key['args']->offsetGet('aclDisabled') ?? false,
-                ];
+                $aclDisabled
+            ] = [
+                $key['args']->offsetGet('after'),
+                $key['args']->offsetGet('orderBy')['field'] ?? 'createdAt',
+                $key['args']->offsetGet('orderBy')['direction'] ?? 'DESC',
+                $key['args']->offsetGet('first'),
+                $key['args']->offsetGet('includeUnpublished') ?? false,
+                $key['args']->offsetGet('includeTrashed') ?? false,
+                $key['args']->offsetGet('aclDisabled') ?? false,
+            ];
 
             if (!$aclDisabled) {
                 $this->getFiltersForProjectViewerCanSee('project', $viewer);

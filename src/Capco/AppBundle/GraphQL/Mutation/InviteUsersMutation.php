@@ -33,7 +33,7 @@ class InviteUsersMutation implements MutationInterface
     public function __invoke(Argument $args): array
     {
         $this->formatInput($args);
-        list($emails, $role, $maxResults, $groupIds, $message, $redirectionUrl) = [
+        [$emails, $role, $maxResults, $groupIds, $message, $redirectionUrl] = [
             array_filter($args->offsetGet('emails')),
             $args->offsetGet('role'),
             $args->offsetGet('maxResults'),

@@ -21,7 +21,7 @@ class PreConfigureProjectProposalFormPersister
         $proposalFormTitleToIdMap = [];
 
         foreach ($proposalFormsInput as $proposalFormInput) {
-            list('proposalForm' => $proposalForm) = $this->createProposalFormMutation->__invoke(
+            ['proposalForm' => $proposalForm] = $this->createProposalFormMutation->__invoke(
                 new Argument(['input' => ['title' => $proposalFormInput['title'], 'owner' => $ownerId]]),
                 $viewer
             );

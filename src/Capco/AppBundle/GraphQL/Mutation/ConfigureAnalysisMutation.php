@@ -41,7 +41,7 @@ class ConfigureAnalysisMutation implements MutationInterface
         $this->formatInput($args);
         $this->preventNullableViewer($viewer);
 
-        list(
+        [
             $proposalFormId,
             $evaluationFormId,
             $analysisStepId,
@@ -52,19 +52,20 @@ class ConfigureAnalysisMutation implements MutationInterface
             $selectionStepStatusId,
             $costEstimationEnabled,
             $body,
-            $bodyUsingJoditWysiwyg) = [
-                $args->offsetGet('proposalFormId'),
-                $args->offsetGet('evaluationFormId'),
-                $args->offsetGet('analysisStepId'),
-                $args->offsetGet('effectiveDate'),
-                $args->offsetGet('favourableStatus'),
-                $args->offsetGet('unfavourableStatuses'),
-                $args->offsetGet('moveToSelectionStepId'),
-                $args->offsetGet('selectionStepStatusId'),
-                $args->offsetGet('costEstimationEnabled'),
-                $args->offsetGet('body'),
-                $args->offsetGet('bodyUsingJoditWysiwyg'),
-            ];
+            $bodyUsingJoditWysiwyg
+        ] = [
+            $args->offsetGet('proposalFormId'),
+            $args->offsetGet('evaluationFormId'),
+            $args->offsetGet('analysisStepId'),
+            $args->offsetGet('effectiveDate'),
+            $args->offsetGet('favourableStatus'),
+            $args->offsetGet('unfavourableStatuses'),
+            $args->offsetGet('moveToSelectionStepId'),
+            $args->offsetGet('selectionStepStatusId'),
+            $args->offsetGet('costEstimationEnabled'),
+            $args->offsetGet('body'),
+            $args->offsetGet('bodyUsingJoditWysiwyg'),
+        ];
 
         $evaluationForm = null;
         $favourableStatus = null;

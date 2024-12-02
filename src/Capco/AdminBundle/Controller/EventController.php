@@ -24,8 +24,7 @@ class EventController extends Controller
                 'action' => 'create',
                 'object' => $this->admin->getNewInstance(),
             ],
-            null,
-            $request
+            null
         );
     }
 

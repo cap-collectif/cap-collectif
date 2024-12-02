@@ -16,7 +16,7 @@ class UserInviteEmailMessageStatusCheckProcessor implements ProcessorInterface
     public function process(Message $message, array $options): bool
     {
         $json = json_decode((string) $message->getBody(), true);
-        list($emailMessageId, $providerClass) = [$json['id'], $json['provider']];
+        [$emailMessageId, $providerClass] = [$json['id'], $json['provider']];
 
         if (!($emailMessage = $this->repository->find($emailMessageId))) {
             throw new \RuntimeException('Unable to find UserInviteEmailMessage with id : ' . $emailMessageId);

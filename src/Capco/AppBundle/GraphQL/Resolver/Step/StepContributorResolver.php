@@ -30,7 +30,7 @@ class StepContributorResolver implements QueryInterface
                 $userContributors = $response->getEntities();
 
                 $project = $step->getProject();
-                list('participants' => $participants, 'participantsCount' => $participantsCount, 'participantsCursors' => $participantsCursors) = $this->getParticipants($step, $project);
+                ['participants' => $participants, 'participantsCount' => $participantsCount, 'participantsCursors' => $participantsCursors] = $this->getParticipants($step, $project);
 
                 $cursors = array_merge($response->getCursors(), $participantsCursors);
                 $response->setCursors($cursors);

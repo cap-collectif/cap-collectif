@@ -19,7 +19,7 @@ class MediaWidthResolver implements QueryInterface
             return $media->getWidth();
         }
 
-        list('width' => $width) = $this->mediaSizeRetriever->getSize($media);
+        ['width' => $width] = $this->mediaSizeRetriever->getSize($media);
 
         if (!$width) {
             return null;

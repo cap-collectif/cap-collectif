@@ -117,8 +117,7 @@ class OpinionController extends AbstractSonataCrudController
                                 'objectId' => $this->admin->getNormalizedIdentifier($object),
                             ],
                             200,
-                            [],
-                            $request
+                            []
                         );
                     }
 
@@ -178,8 +177,7 @@ class OpinionController extends AbstractSonataCrudController
                 'object' => $object,
                 'consultations' => $this->getConsultations(),
             ],
-            null,
-            $request
+            null
         );
     }
 
@@ -235,8 +233,7 @@ class OpinionController extends AbstractSonataCrudController
                                 'objectName' => $this->escapeHtml($this->admin->toString($object)),
                             ],
                             200,
-                            [],
-                            $request
+                            []
                         );
                     }
 
@@ -343,7 +340,7 @@ class OpinionController extends AbstractSonataCrudController
             try {
                 $this->admin->delete($object);
                 if ($this->isXmlHttpRequest($request)) {
-                    return $this->renderJson(['result' => 'ok'], 200, [], $request);
+                    return $this->renderJson(['result' => 'ok'], 200, []);
                 }
 
                 $this->addFlash(
@@ -358,7 +355,7 @@ class OpinionController extends AbstractSonataCrudController
                 $this->handleModelManagerException($e);
 
                 if ($this->isXmlHttpRequest($request)) {
-                    return $this->renderJson(['result' => 'error'], 200, [], $request);
+                    return $this->renderJson(['result' => 'error'], 200, []);
                 }
 
                 $this->addFlash(

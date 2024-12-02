@@ -220,7 +220,7 @@ class ApplicationContext extends UserContext
         if ($scenario->hasTags('multiple-windows')) {
             $session = $this->getSession();
             $windowsNames = $session->getWindowNames();
-            $session->stop(array_pop($windowsNames));
+            $session->stop();
         }
     }
 

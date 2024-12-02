@@ -31,7 +31,7 @@ class SectionOpinionsResolver implements QueryInterface
             $viewer,
             $request
         ) {
-            list($field, $direction, $includeTrashed, $author) = [
+            [$field, $direction, $includeTrashed, $author] = [
                 $args->offsetGet('orderBy')['field'],
                 $args->offsetGet('orderBy')['direction'],
                 $args->offsetGet('includeTrashed'),

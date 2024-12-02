@@ -33,7 +33,7 @@ class PreConfigureProjectQuestionnairePersister
         $questionnaireTitleToIdMap = [];
 
         foreach ($questionnairesInput as $questionnaireInput) {
-            list('questionnaire' => $questionnaire) = $this->createQuestionnaireMutation->__invoke(
+            ['questionnaire' => $questionnaire] = $this->createQuestionnaireMutation->__invoke(
                 new Argument([
                     'input' => [
                         'title' => $questionnaireInput['title'],
@@ -46,20 +46,19 @@ class PreConfigureProjectQuestionnairePersister
             $questionsWithJumps = $this->getQuestionsWithJumps($questionnaireInput);
 
             /** * @var Questionnaire $updatedQuestionnaire */
-            list(
-                'questionnaire' => $updatedQuestionnaire) = $this->updateQuestionnaireConfigurationMutation->__invoke(
-                    new Argument([
-                        'input' => [
-                            'questionnaireId' => GlobalId::toGlobalId(
-                                'Questionnaire',
-                                $questionnaire->getId()
-                            ),
-                            'questions' => $questionnaireInput['questions'],
-                            'description' => $questionnaireInput['description'],
-                        ],
-                    ]),
-                    $viewer
-                );
+            ['questionnaire' => $updatedQuestionnaire] = $this->updateQuestionnaireConfigurationMutation->__invoke(
+                new Argument([
+                    'input' => [
+                        'questionnaireId' => GlobalId::toGlobalId(
+                            'Questionnaire',
+                            $questionnaire->getId()
+                        ),
+                        'questions' => $questionnaireInput['questions'],
+                        'description' => $questionnaireInput['description'],
+                    ],
+                ]),
+                $viewer
+            );
 
             $this->addJumpsToQuestionnaire($updatedQuestionnaire, $questionsWithJumps);
 

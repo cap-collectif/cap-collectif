@@ -14,7 +14,7 @@ class AbstractQuestionRepository extends EntityRepository
         ProposalForm $form,
         ?array $sort = ['field' => 'position', 'direction' => 'ASC']
     ): iterable {
-        list($field, $direction) = [$sort['field'], $sort['direction']];
+        [$field, $direction] = [$sort['field'], $sort['direction']];
         $qb = $this->createQueryBuilder('aq');
 
         return $qb
@@ -31,7 +31,7 @@ class AbstractQuestionRepository extends EntityRepository
         Questionnaire $questionnaire,
         ?array $sort = ['field' => 'position', 'direction' => 'ASC']
     ): iterable {
-        list($field, $direction) = [$sort['field'], $sort['direction']];
+        [$field, $direction] = [$sort['field'], $sort['direction']];
         $qb = $this->createQueryBuilder('aq');
 
         return $qb

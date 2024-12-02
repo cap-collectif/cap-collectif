@@ -70,7 +70,7 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
     public function all(array $keys): Promise
     {
         $filters = $keys[0];
-        list($start, $end, $projectId, $requestedFields, $topContributorsCount) = [
+        [$start, $end, $projectId, $requestedFields, $topContributorsCount] = [
             new \DateTime($filters['startAt']),
             (new \DateTime($filters['endAt'])),
             GlobalId::fromGlobalId($filters['projectId'])['id'],

@@ -17,7 +17,7 @@ trait CommandTestTrait
     {
         $this->emptyOutputDirectory();
 
-        list($commandTester, $options) = $this->setUpCommandTester($name);
+        [$commandTester, $options] = $this->setUpCommandTester($name);
 
         $commandTester->execute($options);
 

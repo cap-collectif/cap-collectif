@@ -21,7 +21,7 @@ class ChangeFontMutation implements MutationInterface
     public function __invoke(Argument $args): iterable
     {
         $this->formatInput($args);
-        list($headingFontId, $bodyFontId) = [
+        [$headingFontId, $bodyFontId] = [
             GlobalId::fromGlobalId($args->offsetGet('heading'))['id'],
             GlobalId::fromGlobalId($args->offsetGet('body'))['id'],
         ];
@@ -34,7 +34,7 @@ class ChangeFontMutation implements MutationInterface
             throw new UserError(sprintf('Unknown body font id "%d"', $bodyFontId));
         }
 
-        list($headingFont, $bodyFont) = [
+        [$headingFont, $bodyFont] = [
             $this->repository->find($headingFontId),
             $this->repository->find($bodyFontId),
         ];

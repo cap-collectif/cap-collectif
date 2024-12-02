@@ -108,7 +108,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         );
 
         foreach ([$selectionCount, $selectionSmsCount, $collectCount] as $votesCount) {
-            list($stepCounter, $totalNumericVoteCount, $totalVoteCount) = $this->votesCount(
+            [$stepCounter, $totalNumericVoteCount, $totalVoteCount] = $this->votesCount(
                 $votesCount['votesBySteps'],
                 $stepCounter,
                 $totalNumericVoteCount,
@@ -117,7 +117,7 @@ class ProposalNormalizer implements NormalizerInterface, SerializerAwareInterfac
         }
 
         foreach ([$selectionCount, $collectCount] as $pointsCount) {
-            list($stepCounter, $totalNumericPointsCount, $totalPointsCount) = $this->pointsCount(
+            [$stepCounter, $totalNumericPointsCount, $totalPointsCount] = $this->pointsCount(
                 $pointsCount['pointsBySteps'],
                 $stepCounter,
                 $totalNumericPointsCount,

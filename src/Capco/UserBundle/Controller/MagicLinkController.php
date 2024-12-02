@@ -28,7 +28,7 @@ class MagicLinkController extends AbstractController
     {
         try {
             $securityToken = $this->magicLinkAuthenticator->authenticateToken($token);
-            $redirectUrl = $this->magicLinkAuthenticator->getRedirectUrl($securityToken);
+            $redirectUrl = $this->magicLinkAuthenticator->getRedirectUrl();
         } catch (\Throwable $th) {
             $this->logger->error($th->getMessage());
 

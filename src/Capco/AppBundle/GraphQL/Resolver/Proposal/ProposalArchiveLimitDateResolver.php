@@ -18,7 +18,7 @@ class ProposalArchiveLimitDateResolver implements QueryInterface
             return null;
         }
 
-        list('step' => $step, 'startDate' => $startDate) = $config;
+        ['step' => $step, 'startDate' => $startDate] = $config;
 
         if (false === $step instanceof CollectStep && false === $step instanceof SelectionStep) {
             throw new \Exception('Step should be either CollectStep or SelectionStep');

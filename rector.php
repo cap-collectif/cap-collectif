@@ -2,6 +2,7 @@
 
 use Rector\Caching\ValueObject\Storage\FileCacheStorage;
 use Rector\Config\RectorConfig;
+use Rector\Php71\Rector\FuncCall\RemoveExtraParametersRector;
 use Rector\Php80\Rector\Class_\ClassPropertyAssignToConstructorPromotionRector;
 use Rector\Php81\Rector\Array_\FirstClassCallableRector;
 use Rector\Php81\Rector\Property\ReadOnlyPropertyRector;
@@ -34,10 +35,14 @@ return RectorConfig::configure()
         FirstClassCallableRector::class => [
             'src/Capco/AppBundle/Sluggable/SluggableListener.php',
         ],
+        RemoveExtraParametersRector::class => [
+            'spec/Capco/AppBundle/GraphQL/Resolver/GlobalIdResolverSpec.php',
+        ],
     ])
     ->withSets([
         SetList::PHP_81,
         SetList::PHP_80,
         SetList::PHP_74,
+        SetList::PHP_71,
     ])
 ;

@@ -60,7 +60,7 @@ class ProjectStepPersister
         $dbSteps = new ArrayCollection($project->getRealSteps());
         $userSteps = new ArrayCollection($steps);
         foreach ($userSteps as $i => $step) {
-            list($type, $entity) = $this->getFormEntity($step);
+            [$type, $entity] = $this->getFormEntity($step);
             $form = $this->formFactory->create($type, $entity);
             if ('questionnaire' === $step['type']) {
                 $this->removeStepInPreviousQuestionnaire($step, $dbSteps);

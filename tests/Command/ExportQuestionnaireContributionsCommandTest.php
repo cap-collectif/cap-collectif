@@ -52,7 +52,7 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
     public function testIfNoUpdateNoFileGenerated(): void
     {
-        list($commandTester, $options) = $this->setUpCommandTester(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
+        [$commandTester, $options] = $this->setUpCommandTester(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
 
         $commandTester->execute($options);
 
@@ -64,7 +64,7 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
     public function testIfUpdateUserFileGenerated(): void
     {
-        list($commandTester, $options) = $this->executeFirstCommand(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
+        [$commandTester, $options] = $this->executeFirstCommand(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
 
         $this->updateUser('user6');
 
@@ -79,7 +79,7 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
     public function testIfReplyUpdateFileGenerated(): void
     {
-        list($commandTester, $options) = $this->executeFirstCommand(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
+        [$commandTester, $options] = $this->executeFirstCommand(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
 
         $this->updateReply();
 
@@ -94,7 +94,7 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
     public function testIfReplyAnonymousUpdateFileGenerated(): void
     {
-        list($commandTester, $options) = $this->executeFirstCommand(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
+        [$commandTester, $options] = $this->executeFirstCommand(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
 
         $this->updateAnonymousReply();
 

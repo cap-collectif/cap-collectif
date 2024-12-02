@@ -17,7 +17,7 @@ final class Version20190809085810 extends AbstractMigration
     public function postUp(Schema $schema): void
     {
         foreach ($this->consultationsByStep as $consultationByStep) {
-            list(
+            [
                 $opinion_count,
                 $trashed_opinion_count,
                 $opinion_versions_count,
@@ -27,18 +27,19 @@ final class Version20190809085810 extends AbstractMigration
                 $sources_count,
                 $trashed_sources_count,
                 $votes_count,
-                $contributors_count) = [
-                    $consultationByStep['opinion_count'],
-                    $consultationByStep['trashed_opinion_count'],
-                    $consultationByStep['opinion_versions_count'],
-                    $consultationByStep['trashed_opinion_versions_count'],
-                    $consultationByStep['argument_count'],
-                    $consultationByStep['trashed_argument_count'],
-                    $consultationByStep['sources_count'],
-                    $consultationByStep['trashed_sources_count'],
-                    $consultationByStep['votes_count'],
-                    $consultationByStep['contributors_count'],
-                ];
+                $contributors_count
+            ] = [
+                $consultationByStep['opinion_count'],
+                $consultationByStep['trashed_opinion_count'],
+                $consultationByStep['opinion_versions_count'],
+                $consultationByStep['trashed_opinion_versions_count'],
+                $consultationByStep['argument_count'],
+                $consultationByStep['trashed_argument_count'],
+                $consultationByStep['sources_count'],
+                $consultationByStep['trashed_sources_count'],
+                $consultationByStep['votes_count'],
+                $consultationByStep['contributors_count'],
+            ];
             $this->connection->update(
                 'consultation',
                 compact(

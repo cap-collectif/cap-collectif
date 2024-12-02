@@ -33,7 +33,7 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
          */
         $section = $this->sectionRepository->findOneBy(['type' => 'projects']);
 
-        list($nbObjects, $projects) = [$args->offsetGet('nbObjects'), $args->offsetGet('projects')];
+        [$nbObjects, $projects] = [$args->offsetGet('nbObjects'), $args->offsetGet('projects')];
 
         $arguments = $args->getArrayCopy();
 

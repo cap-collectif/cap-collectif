@@ -52,7 +52,7 @@ class MediatorVotesMutation
     protected function handleCheckboxes(Participant $participant, array $checkboxes)
     {
         foreach ($checkboxes as $checkbox) {
-            list('requirementId' => $requirementId, 'value' => $value) = $checkbox;
+            ['requirementId' => $requirementId, 'value' => $value] = $checkbox;
             $token = $participant->getToken();
             $input = new Argument(['input' => [
                 'requirementId' => $requirementId, 'value' => $value, 'participantToken' => $token,

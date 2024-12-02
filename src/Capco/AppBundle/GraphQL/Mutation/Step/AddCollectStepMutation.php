@@ -49,7 +49,7 @@ class AddCollectStepMutation implements MutationInterface
         ;
 
         /** * @var CollectStep $step */
-        list('step' => $step) = $this->addStepService->addStep($input, $viewer, 'COLLECT');
+        ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'COLLECT');
         $step->setProposalForm($proposalForm);
 
         $this->em->persist($proposalForm);

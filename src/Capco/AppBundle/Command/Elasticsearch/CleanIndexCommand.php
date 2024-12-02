@@ -87,7 +87,7 @@ class CleanIndexCommand extends Command
             return 0;
         }
 
-        list($indicesNamesDeleted, $indicesNamesKept) = $indices;
+        [$indicesNamesDeleted, $indicesNamesKept] = $indices;
 
         $this->formatOutput($indicesNamesKept, $io);
         $this->formatOutput($indicesNamesDeleted, $io, self::ACTIONS['delete']);

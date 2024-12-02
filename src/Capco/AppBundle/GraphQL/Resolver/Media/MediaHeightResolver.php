@@ -19,7 +19,7 @@ class MediaHeightResolver implements QueryInterface
             return $media->getHeight();
         }
 
-        list('height' => $height) = $this->mediaSizeRetriever->getSize($media);
+        ['height' => $height] = $this->mediaSizeRetriever->getSize($media);
 
         if (!$height) {
             return null;
