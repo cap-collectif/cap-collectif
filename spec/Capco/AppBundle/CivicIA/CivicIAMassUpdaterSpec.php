@@ -30,7 +30,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
     public function it_should_update_one(ValueResponse $valueResponse): void
     {
         $category = 'cars';
-        $readability = rand(1, 100);
+        $readability = random_int(1, 100);
         $sentiment = 'NEUTRAL';
 
         $valueResponse->setIaSentiment($sentiment)->shouldBeCalledOnce();
@@ -55,7 +55,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
             [
                 'categories' => 'car',
                 'sentiment' => 'NEUTRAL',
-                'lisibilite' => rand(1, 100),
+                'lisibilite' => random_int(1, 100),
             ],
         ]);
         $this->shouldThrow(new UserError('INVALID_JSON'))->during('__invoke', [
@@ -71,7 +71,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
                 'value_id' => 'nope',
                 'categories' => 'car',
                 'sentiment' => 'NEUTRAL',
-                'lisibilite' => rand(1, 100),
+                'lisibilite' => random_int(1, 100),
             ],
         ]);
         $this->shouldThrow(new UserError('NOT_FOUND'))->during('__invoke', [$json, $viewer]);
@@ -104,7 +104,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
                 'value_id' => 'response1',
                 'categories' => 'car',
                 'sentiment' => 'NEUTRAL',
-                'lisibilite' => rand(1, 100),
+                'lisibilite' => random_int(1, 100),
                 'categories_details' => [
                     ['score' => 0.834992, 'label' => 'news'],
                     ['score' => 0.92, 'label' => 'car'],
@@ -114,7 +114,7 @@ class CivicIAMassUpdaterSpec extends ObjectBehavior
                 'value_id' => 'response2',
                 'categories' => 'holiday',
                 'sentiment' => 'POSITIVE',
-                'lisibilite' => rand(1, 100),
+                'lisibilite' => random_int(1, 100),
                 'sentiment_score' => [
                     'Positive' => 0.9745733738,
                     'Negative' => 0.0064354725,

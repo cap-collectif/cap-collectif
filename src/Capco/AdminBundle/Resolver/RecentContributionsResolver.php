@@ -106,13 +106,7 @@ class RecentContributionsResolver
 
         $contributions = array_merge($opinions, $arguments, $versions, $sources, $comments);
 
-        usort($contributions, function ($a, $b) {
-            if ($a['updatedAt'] === $b['updatedAt']) {
-                return 0;
-            }
-
-            return $a['updatedAt'] < $b['updatedAt'] ? +1 : -1;
-        });
+        usort($contributions, fn ($a, $b) => $b['updatedAt'] <=> $a['updatedAt']);
 
         if ($limit) {
             return array_splice($contributions, 0, $limit);

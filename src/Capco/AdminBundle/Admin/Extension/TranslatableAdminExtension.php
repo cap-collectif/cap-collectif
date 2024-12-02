@@ -87,7 +87,7 @@ class TranslatableAdminExtension extends AbstractAdminExtension
         return $this->localeRepository->getDefaultCode();
     }
 
-    private static function getLocaleFromRequest(AdminInterface $admin): ?string
+    private function getLocaleFromRequest(AdminInterface $admin): ?string
     {
         return $admin->hasRequest()
             ? $admin->getRequest()->get(self::TRANSLATABLE_LOCALE_PARAMETER)

@@ -58,7 +58,7 @@ class DebateArgumentInterfaceNormalizer extends BaseNormalizer implements Normal
             self::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_USERNAME => $username,
             self::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_USER_TYPE_NAME => null !== $author ? $author->getId() : null,
             self::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ZIP_CODE => null !== $author ? $author->getZipCode() : null,
-            self::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ACCOUNT => null !== $hasAccount ? $hasAccount : null,
+            self::EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ACCOUNT => $hasAccount ?? null,
             self::EXPORT_CONTRIBUTION_ARGUMENT_CONTENT => $object->getBodyText(),
             self::EXPORT_CONTRIBUTION_ARGUMENT_TYPE => $this->getArgumentTypeTranslated($object->getType()),
             self::EXPORT_CONTRIBUTION_ARGUMENT_VOTE_NUMBER => $object->getVotes()->count(),

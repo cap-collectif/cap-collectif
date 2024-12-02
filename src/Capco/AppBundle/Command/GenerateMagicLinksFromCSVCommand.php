@@ -251,12 +251,12 @@ class GenerateMagicLinksFromCSVCommand extends Command
      */
     private function getRandomLetter(): string
     {
-        return \chr(rand(65, 90));
+        return \chr(random_int(65, 90));
     }
 
     private function getRandomNumber(): int
     {
-        return rand(0, 9);
+        return random_int(0, 9);
     }
 
     private function createNewMagicLinks(): array

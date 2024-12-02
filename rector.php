@@ -44,5 +44,6 @@ return RectorConfig::configure()
         SetList::PHP_80,
         SetList::PHP_74,
         SetList::PHP_71,
+        SetList::PHP_70,
     ])
 ;

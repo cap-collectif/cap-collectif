@@ -556,7 +556,7 @@ class CRUDController extends AbstractSonataCrudController
     /**
      * @throws \Exception
      */
-    protected function handleModelManagerException(\Exception $exception): void
+    protected function handleModelManagerException(\Throwable $exception): void
     {
         if ($this->get('kernel')->isDebug()) {
             throw $exception;

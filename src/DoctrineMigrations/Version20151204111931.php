@@ -16,7 +16,7 @@ class Version20151204111931 extends AbstractMigration
             '',
         ]);
         foreach ($users as $user) {
-            $newSlug = substr(md5(uniqid(rand(), true)), 0, 10);
+            $newSlug = substr(md5(uniqid(random_int(0, mt_getrandmax()), true)), 0, 10);
             $this->connection->update('fos_user', ['slug' => $newSlug], ['id' => $user['id']]);
         }
     }

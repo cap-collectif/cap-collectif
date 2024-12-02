@@ -32,11 +32,8 @@ class ElasticsearchRabbitMQListener implements EventSubscriberInterface
         usort($array, static function (array $a, array $b) {
             $aPriority = $a['priority'];
             $bPriority = $b['priority'];
-            if ($aPriority === $bPriority) {
-                return 0;
-            }
 
-            return $aPriority < $bPriority ? -1 : 1;
+            return $aPriority <=> $bPriority;
         });
 
         return $array;

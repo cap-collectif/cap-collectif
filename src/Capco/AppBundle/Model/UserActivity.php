@@ -124,11 +124,7 @@ class UserActivity implements FollowerNotifiedOfInterface
 
     public function getUserProject(string $projectId): ?array
     {
-        if (isset($this->userProjects[$projectId])) {
-            return $this->userProjects[$projectId];
-        }
-
-        return null;
+        return $this->userProjects[$projectId] ?? null;
     }
 
     public function setUserProjects(array $userProjects): self

@@ -43,7 +43,7 @@ final class Version20221202104928 extends AbstractMigration
         foreach ($data as $datum) {
             $slug = $slugify->slugify($datum['name']);
             while (\in_array($slug, $slugs)) {
-                $slug .= '-' . rand(1, 9);
+                $slug .= '-' . random_int(1, 9);
             }
             $slugs[$datum['id']] = $slug;
         }

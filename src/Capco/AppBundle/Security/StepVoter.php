@@ -88,7 +88,7 @@ class StepVoter extends AbstractOwnerableVoter
         $step = $subject;
 
         return match ($attribute) {
-            self::VIEW => $this->view($step, $viewer),
+            self::VIEW => static::view($step, $viewer),
             default => false,
         };
     }

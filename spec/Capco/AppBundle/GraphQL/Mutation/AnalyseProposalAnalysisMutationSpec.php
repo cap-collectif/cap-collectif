@@ -65,7 +65,7 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
         FormFactory $formFactory,
         Form $form
     ): void {
-        $this->fixtures(
+        self::fixtures(
             $viewer,
             $authorizationChecker,
             $analysisRepository,
@@ -103,7 +103,7 @@ class AnalyseProposalAnalysisMutationSpec extends ObjectBehavior
         FormFactory $formFactory,
         Form $form
     ): void {
-        $this->fixtures(
+        self::fixtures(
             $viewer,
             $authorizationChecker,
             $analysisRepository,

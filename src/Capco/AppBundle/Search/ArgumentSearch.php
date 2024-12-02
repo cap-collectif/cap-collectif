@@ -73,7 +73,7 @@ class ArgumentSearch extends Search
             $query->setTrackTotalHits(true);
 
             $order = [
-                $this->getSortField($field) => ['order' => $direction],
+                self::getSortField($field) => ['order' => $direction],
             ];
             $this->setSortWithId($query, $order);
 

@@ -164,15 +164,9 @@ class DeveloperController extends Controller
                 // We hydrate current selection
                 if (($type && $solution->name === $type) || 'query' === $category) {
                     if ($solution->{'preview'}) {
-                        $publicSelection = isset(
-                            $this->typeResolver->getSolutions()[
-                                str_replace('Preview', 'Public', $solutionID)
-                            ]
-                        )
-                            ? $this->typeResolver->getSolutions()[
-                                str_replace('Preview', 'Public', $solutionID)
-                            ]
-                            : null;
+                        $publicSelection = $this->typeResolver->getSolutions()[
+                            str_replace('Preview', 'Public', $solutionID)
+                        ] ?? null;
                         $solution->{'publicSelection'} = $publicSelection;
                     }
                     $selection = $solution;

@@ -95,10 +95,10 @@ class RemindUserAccountConfirmationBeforeStepCloseCommand extends Command
 
     private function getSteps(OutputInterface $output, InputInterface $input): array
     {
-        $date = $this->getDate($input);
+        $date = self::getDate($input);
         $steps = $this->stepRepository->getStepEndingBetween(
-            $this->getBeforeDate($date),
-            $this->getAfterDate($date)
+            self::getBeforeDate($date),
+            self::getAfterDate($date)
         );
         foreach ($steps as $step) {
             $output->writeln(
