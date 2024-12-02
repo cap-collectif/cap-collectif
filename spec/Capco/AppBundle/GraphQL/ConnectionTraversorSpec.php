@@ -274,11 +274,12 @@ class ConnectionTraversorSpec extends ObjectBehavior
             'node' => ['id' => 'opinion11', 'title' => 'la 11', 'kind' => 'opinion'],
         ]);
 
-        $this->traverse($initialData, 'contributionConnection', $onEdgeTraversed, function (
-            $pageInfos
-        ) {
-            return $this->getContributionsGraphqlQuery($pageInfos['endCursor']);
-        });
+        $this->traverse(
+            $initialData,
+            'contributionConnection',
+            $onEdgeTraversed,
+            fn ($pageInfos) => $this->getContributionsGraphqlQuery($pageInfos['endCursor'])
+        );
     }
 
     private function getContributionsGraphqlQuery(

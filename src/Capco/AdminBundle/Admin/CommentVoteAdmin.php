@@ -22,9 +22,7 @@ class CommentVoteAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'admin.fields.comment_vote.voter',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
         ;

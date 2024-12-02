@@ -558,13 +558,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                         $this->addProposalRow($proposal, $step, $output);
                         $progress->advance();
                     },
-                    function ($pageInfo) use ($ownerNotAdmin) {
-                        return $this->getContributionsGraphQLQueryByProposalStep(
-                            $this->currentStep,
-                            $ownerNotAdmin,
-                            $pageInfo['endCursor']
-                        );
-                    }
+                    fn ($pageInfo) => $this->getContributionsGraphQLQueryByProposalStep(
+                        $this->currentStep,
+                        $ownerNotAdmin,
+                        $pageInfo['endCursor']
+                    )
                 );
 
                 $progress->clear();
@@ -607,9 +605,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     return Text::cleanNewline($question['formattedValue']);
                 }
                 if (isset($question['medias'])) {
-                    $urls = array_map(function ($media) {
-                        return $media['url'];
-                    }, $question['medias']);
+                    $urls = array_map(fn ($media) => $media['url'], $question['medias']);
 
                     return implode(', ', $urls);
                 }
@@ -686,12 +682,10 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     $this->addProposalReportRow($report, $proposal);
                     $progress->advance();
                 },
-                function ($pageInfo) use ($proposal) {
-                    return $this->getProposalReportingsGraphQLQuery(
-                        $proposal['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getProposalReportingsGraphQLQuery(
+                    $proposal['id'],
+                    $pageInfo['endCursor']
+                )
             );
             $progress->clear();
         }
@@ -715,13 +709,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     $this->addProposalVotesRow($vote, $proposal);
                     $progress->advance();
                 },
-                function ($pageInfo) use ($proposal) {
-                    return $this->getProposalVotesGraphQLQuery(
-                        $proposal['id'],
-                        $this->currentStep->getId(),
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getProposalVotesGraphQLQuery(
+                    $proposal['id'],
+                    $this->currentStep->getId(),
+                    $pageInfo['endCursor']
+                )
             );
             $progress->clear();
         }
@@ -752,12 +744,10 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     }
                     $progress->advance();
                 },
-                function ($pageInfo) use ($proposal) {
-                    return $this->getProposalCommentsGraphQLQuery(
-                        $proposal['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getProposalCommentsGraphQLQuery(
+                    $proposal['id'],
+                    $pageInfo['endCursor']
+                )
             );
             $progress->clear();
         }
@@ -783,12 +773,10 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     }
                     $progress->advance();
                 },
-                function ($pageInfo) use ($proposal) {
-                    return $this->getProposalNewsGraphQLQuery(
-                        $proposal['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getProposalNewsGraphQLQuery(
+                    $proposal['id'],
+                    $pageInfo['endCursor']
+                )
             );
 
             $progress->clear();
@@ -908,13 +896,11 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     $edge['cursor']
                 );
             },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $pageInfo['endCursor']
-                );
-            }
+            fn ($pageInfo) => $this->getProposalNewsGraphQLQuery(
+                $proposal['id'],
+                $proposalNewsCursor,
+                $pageInfo['endCursor']
+            )
         );
     }
 
@@ -950,14 +936,12 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                 $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentVoteRow($vote, $comment, $proposal, $news);
             },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $proposalNewsCommentCursor,
-                    $pageInfo['endCursor']
-                );
-            }
+            fn ($pageInfo) => $this->getProposalNewsGraphQLQuery(
+                $proposal['id'],
+                $proposalNewsCursor,
+                $proposalNewsCommentCursor,
+                $pageInfo['endCursor']
+            )
         );
 
         $this->connectionTraversor->traverse(
@@ -967,15 +951,13 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                 $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                 $this->addProposalNewsCommentReportingRow($report, $comment, $proposal, $news);
             },
-            function ($pageInfo) use ($proposal, $proposalNewsCursor, $proposalNewsCommentCursor) {
-                return $this->getProposalNewsGraphQLQuery(
-                    $proposal['id'],
-                    $proposalNewsCursor,
-                    $proposalNewsCommentCursor,
-                    null,
-                    $pageInfo['endCursor']
-                );
-            }
+            fn ($pageInfo) => $this->getProposalNewsGraphQLQuery(
+                $proposal['id'],
+                $proposalNewsCursor,
+                $proposalNewsCommentCursor,
+                null,
+                $pageInfo['endCursor']
+            )
         );
     }
 
@@ -1063,12 +1045,10 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     $report = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                     $this->addProposalCommentReportRow($report, $proposal, $comment);
                 },
-                function ($pageInfo) use ($comment) {
-                    return $this->getProposalCommentReportingsGraphQLQuery(
-                        $comment['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getProposalCommentReportingsGraphQLQuery(
+                    $comment['id'],
+                    $pageInfo['endCursor']
+                )
             );
         }
         if ($comment['votes']['totalCount'] > 0) {
@@ -1079,12 +1059,10 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
                     $vote = $edge['node'] && \is_array($edge['node']) ? $edge['node'] : [];
                     $this->addProposalCommentVotesRow($vote, $proposal, $comment);
                 },
-                function ($pageInfo) use ($comment) {
-                    return $this->getProposalCommentVotesGraphQLQuery(
-                        $comment['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getProposalCommentVotesGraphQLQuery(
+                    $comment['id'],
+                    $pageInfo['endCursor']
+                )
             );
         }
     }
@@ -1144,12 +1122,8 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
     {
         $related = Arr::path($news, $path);
         $object = array_map(
-            function ($node) {
-                return $node['title'];
-            },
-            array_filter($related, function ($item) use ($name) {
-                return $name === $item['__typename'];
-            })
+            fn ($node) => $node['title'],
+            array_filter($related, fn ($item) => $name === $item['__typename'])
         );
 
         return implode('', $object);
@@ -1238,9 +1212,7 @@ class CreateCsvFromProposalStepCommand extends BaseExportCommand
         ) {
             $evaluationFormAsArray = $evaluationForm
                 ->getRealQuestions()
-                ->filter(function (AbstractQuestion $question) {
-                    return AbstractQuestion::QUESTION_TYPE_SECTION !== $question->getType();
-                })
+                ->filter(fn (AbstractQuestion $question) => AbstractQuestion::QUESTION_TYPE_SECTION !== $question->getType())
                 ->toArray()
             ;
             /** @var AbstractQuestion $question */

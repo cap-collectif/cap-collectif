@@ -20,57 +20,57 @@ class UserIdentificationCode
      * @ORM\ManyToOne(targetEntity="UserIdentificationCodeList", inversedBy="codes")
      * @ORM\JoinColumn(name="list_id", referencedColumnName="id", nullable=false, onDelete="CASCADE")
      */
-    private ?UserIdentificationCodeList $list;
+    private ?UserIdentificationCodeList $list = null;
 
     /**
      * @ORM\Column(name="title", type="string", nullable=true)
      */
-    private ?string $title;
+    private ?string $title = null;
 
     /**
      * @ORM\Column(name="firstname", type="string", nullable=true)
      */
-    private ?string $firstname;
+    private ?string $firstname = null;
 
     /**
      * @ORM\Column(name="lastname", type="string", nullable=true)
      */
-    private ?string $lastname;
+    private ?string $lastname = null;
 
     /**
      * @ORM\Column(name="address1", type="string", nullable=true)
      */
-    private ?string $address1;
+    private ?string $address1 = null;
 
     /**
      * @ORM\Column(name="address2", type="string", nullable=true)
      */
-    private ?string $address2;
+    private ?string $address2 = null;
 
     /**
      * @ORM\Column(name="address3", type="string", nullable=true)
      */
-    private ?string $address3;
+    private ?string $address3 = null;
 
     /**
      * @ORM\Column(name="zip_code", type="string", nullable=true)
      */
-    private ?string $zipCode;
+    private ?string $zipCode = null;
 
     /**
      * @ORM\Column(name="city", type="string", nullable=true)
      */
-    private ?string $city;
+    private ?string $city = null;
 
     /**
      * @ORM\Column(name="country", type="string", nullable=true)
      */
-    private ?string $country;
+    private ?string $country = null;
 
     /**
      * @ORM\Column(name="email", type="string", nullable=true)
      */
-    private ?string $email;
+    private ?string $email = null;
 
     public function getIdentificationCode(): string
     {

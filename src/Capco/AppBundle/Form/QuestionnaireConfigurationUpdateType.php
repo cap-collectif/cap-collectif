@@ -33,13 +33,9 @@ class QuestionnaireConfigurationUpdateType extends AbstractType
                 'allow_delete' => true,
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'by_reference' => false,
-                'delete_empty' => function (
-                    ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
-                ) {
-                    return null === $questionnaireAbstractQuestion
-                        || null === $questionnaireAbstractQuestion->getQuestion()
-                        || empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
-                },
+                'delete_empty' => fn (?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null) => null === $questionnaireAbstractQuestion
+                    || null === $questionnaireAbstractQuestion->getQuestion()
+                    || empty($questionnaireAbstractQuestion->getQuestion()->getTitle()),
             ])
         ;
     }

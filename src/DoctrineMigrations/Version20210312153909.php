@@ -16,7 +16,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
  */
 final class Version20210312153909 extends AbstractMigration implements ContainerAwareInterface
 {
-    private ?ContainerInterface $container;
+    private ?ContainerInterface $container = null;
 
     public function setContainer(?ContainerInterface $container = null)
     {

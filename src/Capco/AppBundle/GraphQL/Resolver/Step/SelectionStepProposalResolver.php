@@ -85,9 +85,10 @@ class SelectionStepProposalResolver implements QueryInterface
         }
 
         try {
-            $orders = array_map(function ($order) {
-                return ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']);
-            }, $ordersBy);
+            $orders = array_map(
+                fn ($order) => ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']),
+                $ordersBy
+            );
 
             $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
                 $filters,

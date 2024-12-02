@@ -43,43 +43,26 @@ class OpinionVotesResolver implements QueryInterface
 
         if ($args->offsetExists('value')) {
             $value = $args->offsetGet('value');
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $repo,
-                $contribution,
-                $value,
-                $field,
-                $direction
-            ) {
-                return $repo
-                    ->getByContributionAndValue(
-                        $contribution,
-                        $value,
-                        $limit,
-                        $offset,
-                        $field,
-                        $direction
-                    )
-                    ->getIterator()
-                    ->getArrayCopy()
-                ;
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $repo
+                ->getByContributionAndValue(
+                    $contribution,
+                    $value,
+                    $limit,
+                    $offset,
+                    $field,
+                    $direction
+                )
+                ->getIterator()
+                ->getArrayCopy());
             $totalCount = $repo->countByContributionAndValue($contribution, $value);
 
             return $paginator->auto($args, $totalCount);
         }
 
-        $paginator = new Paginator(function (int $offset, int $limit) use (
-            $repo,
-            $contribution,
-            $field,
-            $direction
-        ) {
-            return $repo
-                ->getByContribution($contribution, $limit, $offset, $field, $direction)
-                ->getIterator()
-                ->getArrayCopy()
-            ;
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $repo
+            ->getByContribution($contribution, $limit, $offset, $field, $direction)
+            ->getIterator()
+            ->getArrayCopy());
         $totalCount = $repo->countByContribution($contribution);
 
         return $paginator->auto($args, $totalCount);

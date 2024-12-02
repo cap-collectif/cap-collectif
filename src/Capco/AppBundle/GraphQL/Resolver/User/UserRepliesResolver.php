@@ -33,14 +33,12 @@ class UserRepliesResolver implements QueryInterface
         $this->protectArguments($args);
         $viewer = $viewer instanceof User ? $viewer : null;
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
-            return $this->repliesRepository->getByAuthorViewerCanSee(
-                $viewer,
-                $user,
-                $limit,
-                $offset
-            );
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $this->repliesRepository->getByAuthorViewerCanSee(
+            $viewer,
+            $user,
+            $limit,
+            $offset
+        ));
 
         $totalCount = $this->repliesRepository->countRepliesByAuthorViewerCanSee($viewer, $user);
 

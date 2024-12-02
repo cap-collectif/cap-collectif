@@ -44,15 +44,13 @@ class FooterRuntime implements RuntimeExtensionInterface
     {
         $pages = $this->menuItemRepository->getPublishedFooterPages();
 
-        return array_map(function ($page) {
-            return [
-                'name' => $page->getTitle(),
-                'url' => $this->menuItemResolver->getMenuUrl(
-                    $page,
-                    $this->requestStack->getCurrentRequest()
-                ),
-            ];
-        }, $pages);
+        return array_map(fn ($page) => [
+            'name' => $page->getTitle(),
+            'url' => $this->menuItemResolver->getMenuUrl(
+                $page,
+                $this->requestStack->getCurrentRequest()
+            ),
+        ], $pages);
     }
 
     public function isNextLinkEnabled(array $links, int $index): bool

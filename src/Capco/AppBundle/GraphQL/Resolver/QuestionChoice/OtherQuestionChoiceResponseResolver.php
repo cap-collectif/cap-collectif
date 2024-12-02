@@ -17,11 +17,9 @@ class OtherQuestionChoiceResponseResolver implements QueryInterface
 
     public function __invoke(MultipleChoiceQuestion $question, Arg $args): ConnectionInterface
     {
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $question
-        ) {
-            return $this->responseSearch->getOtherReponsesByQuestion($question, $limit, $cursor);
-        });
+        $paginator = new ElasticsearchPaginator(
+            fn (?string $cursor, int $limit) => $this->responseSearch->getOtherReponsesByQuestion($question, $limit, $cursor)
+        );
 
         return $paginator->auto($args);
     }

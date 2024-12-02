@@ -724,9 +724,7 @@ class ApplicationContext extends UserContext
     public function element1ShouldBeBeforeElement2ForSelector(mixed $first, mixed $second, string $cssQuery)
     {
         $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
+            fn ($element) => $element->getText(),
             $this->getSession()
                 ->getPage()
                 ->findAll('css', $cssQuery)

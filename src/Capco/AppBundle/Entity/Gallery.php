@@ -188,9 +188,9 @@ class Gallery
 
         $iterator = $galleryHasMedias->getIterator();
 
-        $iterator->uasort(static function (GalleryHasMedia $a, GalleryHasMedia $b): int {
-            return $a->getPosition() <=> $b->getPosition();
-        });
+        $iterator->uasort(
+            static fn (GalleryHasMedia $a, GalleryHasMedia $b): int => $a->getPosition() <=> $b->getPosition()
+        );
 
         $this->setGalleryHasMedias($iterator);
     }

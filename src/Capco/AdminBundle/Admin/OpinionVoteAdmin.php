@@ -25,9 +25,7 @@ class OpinionVoteAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'global.author',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('value', null, ['label' => 'global.value'])
@@ -77,9 +75,7 @@ class OpinionVoteAdmin extends AbstractAdmin
             ->add('user', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
             ])
             ->add('value', ChoiceType::class, [
                 'label' => 'global.value',

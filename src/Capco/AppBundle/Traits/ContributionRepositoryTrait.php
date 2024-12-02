@@ -71,9 +71,10 @@ trait ContributionRepositoryTrait
     public function getVotesByProject(Project $project): array
     {
         $steps = $project->getSteps();
-        $stepIds = array_map(static function ($projectAbstractStep) {
-            return $projectAbstractStep->getStep()->getId();
-        }, $steps->toArray());
+        $stepIds = array_map(
+            static fn ($projectAbstractStep) => $projectAbstractStep->getStep()->getId(),
+            $steps->toArray()
+        );
 
         $qb = $this->createQueryBuilder('v');
         $qb->leftJoin('v.proposal', 'p')

@@ -55,12 +55,12 @@ class UserInvite implements Expirable, Invitation
     /**
      * @ORM\Column(type="string", length=500 ,nullable=true, name="message")
      */
-    private ?string $message;
+    private ?string $message = null;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, name="redirection_url")
      */
-    private ?string $redirectionUrl;
+    private ?string $redirectionUrl = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\UserInviteEmailMessage", mappedBy="invitation", cascade={"persist"})

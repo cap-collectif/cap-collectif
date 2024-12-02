@@ -610,12 +610,8 @@ class CreateCsvFromUserCommand extends BaseExportCommand
                 },
                 array_filter(
                     $infoResolver->guessHeadersFromFields($data),
-                    function (
-                        string $header
-                    ) {
-                        return 'data_node_contributions_edges_node_responses___typename' !==
-                        $header;
-                    }
+                    fn (string $header) => 'data_node_contributions_edges_node_responses___typename' !==
+                    $header
                 )
             ),
         };

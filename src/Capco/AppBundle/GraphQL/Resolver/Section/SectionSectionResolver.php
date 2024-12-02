@@ -15,9 +15,10 @@ class SectionSectionResolver implements QueryInterface
         $typeChildren = iterator_to_array($iterator);
 
         // define ordering closure, using preferred comparison method/field
-        usort($typeChildren, function ($first, $second) {
-            return (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1;
-        });
+        usort(
+            $typeChildren,
+            fn ($first, $second) => (int) $first->getPosition() > (int) $second->getPosition() ? 1 : -1
+        );
 
         return $typeChildren;
     }

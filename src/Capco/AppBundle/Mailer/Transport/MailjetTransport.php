@@ -10,7 +10,7 @@ class MailjetTransport implements \Swift_Transport
     protected const API_URL = 'https://api.mailjet.com/v3.1/send';
     private ?string $publicKey = null;
     private ?string $privateKey = null;
-    private ?string $lastSentMessageId;
+    private ?string $lastSentMessageId = null;
 
     public function __construct(protected \Swift_Events_EventDispatcher $dispatcher)
     {

@@ -57,13 +57,13 @@ class Follower implements IndexableInterface
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\OpinionVersion", inversedBy="followers")
      * @ORM\JoinColumn(name="opinion_version_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected ?OpinionVersion $opinionVersion;
+    protected ?OpinionVersion $opinionVersion = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\District\GlobalDistrict", inversedBy="followers")
      * @ORM\JoinColumn(name="project_district_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    protected ?GlobalDistrict $globalDistrict;
+    protected ?GlobalDistrict $globalDistrict = null;
 
     /**
      * @ORM\Column(name="notified_of", columnDefinition="ENUM('MINIMAL', 'ESSENTIAL', 'ALL')", nullable=true)

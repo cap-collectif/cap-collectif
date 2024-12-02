@@ -169,9 +169,7 @@ class ExportContext implements KernelAwareContext
         $csvHeader = array_shift($csvLines);
         $behatLines = $behatInput->getStrings();
         $behatHeader = explode($delimiter, (string) array_shift($behatLines));
-        $behatLines = array_map(function (string $behatLine) use ($delimiter) {
-            return explode($delimiter, $behatLine);
-        }, $behatLines);
+        $behatLines = array_map(fn (string $behatLine) => explode($delimiter, $behatLine), $behatLines);
 
         $output = $this->getCleanOutput($behatHeader, $behatLines, $csvHeader, $csvLines);
 

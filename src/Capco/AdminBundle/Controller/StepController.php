@@ -48,9 +48,10 @@ class StepController extends CRUDController
         $query->setSource(['id', 'title']);
         $results = $this->get(Indexer::class)->search($query);
 
-        $items = array_map(function ($result) {
-            return ['id' => $result->getData()['id'], 'label' => $result->getData()['title']];
-        }, $results->getResults());
+        $items = array_map(
+            fn ($result) => ['id' => $result->getData()['id'], 'label' => $result->getData()['title']],
+            $results->getResults()
+        );
 
         return new JsonResponse([
             'status' => 'OK',

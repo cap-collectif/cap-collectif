@@ -30,8 +30,6 @@ class EvaluationFormResolver implements QueryInterface
         }
         $viewerCanSeePrivateQuestion = $isEvaluer || ($user instanceof User && $user->isAdmin());
 
-        return $questions->filter(function ($question) use ($viewerCanSeePrivateQuestion) {
-            return !$question->isPrivate() || $viewerCanSeePrivateQuestion;
-        });
+        return $questions->filter(fn ($question) => !$question->isPrivate() || $viewerCanSeePrivateQuestion);
     }
 }

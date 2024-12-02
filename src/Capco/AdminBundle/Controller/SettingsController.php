@@ -184,9 +184,10 @@ class SettingsController extends Controller
             ['position' => 'ASC']
         );
 
-        $parameters = array_filter($parameters, static function (SiteParameter $parameter) {
-            return !\in_array($parameter->getKeyname(), self::EXCLUDED_SETTINGS_KEYNAME, true);
-        });
+        $parameters = array_filter(
+            $parameters,
+            static fn (SiteParameter $parameter) => !\in_array($parameter->getKeyname(), self::EXCLUDED_SETTINGS_KEYNAME, true)
+        );
 
         return $parameters;
     }

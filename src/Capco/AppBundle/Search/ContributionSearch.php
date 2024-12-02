@@ -371,9 +371,10 @@ class ContributionSearch extends Search
 
         $ids = $contributions['ids'];
         $results = $contributions['results'];
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
+        usort(
+            $results,
+            static fn ($a, $b) => array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false)
+        );
 
         return new ElasticsearchPaginatedResult($results, $cursors, $count);
     }

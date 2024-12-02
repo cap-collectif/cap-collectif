@@ -7,12 +7,12 @@ use Cocur\Slugify\Slugify;
 class Tag implements \Stringable
 {
     protected int $id;
-    protected ?string $name;
-    protected ?string $slug;
-    protected ?\DateTimeInterface $createdAt;
-    protected ?\DateTimeInterface $updatedAt;
+    protected ?string $name = null;
+    protected ?string $slug = null;
+    protected ?\DateTimeInterface $createdAt = null;
+    protected ?\DateTimeInterface $updatedAt = null;
     protected bool $enabled;
-    protected ?Context $context;
+    protected ?Context $context = null;
 
     public function __toString(): string
     {

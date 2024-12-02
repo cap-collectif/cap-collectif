@@ -55,8 +55,6 @@ class MenuItemsResolver implements QueryInterface
      */
     private function filterNullableTitle(array $items): array
     {
-        return array_filter($items, function ($item) {
-            return $item->getTitle();
-        });
+        return array_filter($items, fn ($item) => $item->getTitle());
     }
 }

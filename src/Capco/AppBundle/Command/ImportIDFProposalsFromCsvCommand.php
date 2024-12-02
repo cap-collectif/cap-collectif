@@ -23,7 +23,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class ImportIDFProposalsFromCsvCommand extends Command
 {
     protected static $defaultName = 'capco:import:idf-proposals-from-csv';
-    protected ?ProposalForm $proposalForm;
+    protected ?ProposalForm $proposalForm = null;
 
     protected array $headers;
 

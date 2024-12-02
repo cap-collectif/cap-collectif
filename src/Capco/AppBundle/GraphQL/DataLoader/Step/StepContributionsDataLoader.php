@@ -129,9 +129,7 @@ class StepContributionsDataLoader extends BatchDataLoader
             ;
         }
 
-        $paginator = new Paginator(function (int $offset, int $limit) {
-            return [];
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => []);
 
         return $paginator->auto($args, $totalCount);
     }

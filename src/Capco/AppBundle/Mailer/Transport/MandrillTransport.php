@@ -20,9 +20,9 @@ class MandrillTransport implements Swift_Transport
 {
     protected ?string $apiKey;
     protected ?bool $async;
-    protected ?array $resultApi;
+    protected ?array $resultApi = null;
     protected ?string $subAccount;
-    private ?string $lastSentMessageId;
+    private ?string $lastSentMessageId = null;
 
     public function __construct(protected Swift_Events_EventDispatcher $dispatcher)
     {

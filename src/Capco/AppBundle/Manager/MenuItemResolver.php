@@ -154,9 +154,7 @@ class MenuItemResolver
     {
         return array_filter(
             $routeMatch,
-            function ($value) {
-                return '_' !== $value[0];
-            },
+            fn ($value) => '_' !== $value[0],
             \ARRAY_FILTER_USE_KEY
         );
     }

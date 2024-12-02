@@ -161,9 +161,10 @@ class EventSearch extends Search
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
 
-        $authorIds = array_map(static function (Result $result) {
-            return $result->getData()['author']['id'];
-        }, $resultSet->getResults());
+        $authorIds = array_map(
+            static fn (Result $result) => $result->getData()['author']['id'],
+            $resultSet->getResults()
+        );
 
         return array_unique($authorIds);
     }

@@ -146,9 +146,7 @@ class OfficialResponse implements \Stringable
 
     public function getAuthorsObject(): Collection
     {
-        return $this->authors->map(function (OfficialResponseAuthor $author) {
-            return $author->getAuthor();
-        });
+        return $this->authors->map(fn (OfficialResponseAuthor $author) => $author->getAuthor());
     }
 
     public function setIsPublished(bool $isPublished): self

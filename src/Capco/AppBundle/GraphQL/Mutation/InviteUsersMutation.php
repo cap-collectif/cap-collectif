@@ -59,9 +59,7 @@ class InviteUsersMutation implements MutationInterface
         $existingInviteEmails = $this->userInviteRepository->findAllEmails();
         $existingUserEmails = $this->userRepository->findByEmails($emails);
 
-        $groupIds = array_map(static function (string $groupId) {
-            return GlobalId::fromGlobalId($groupId)['id'];
-        }, $groupIds);
+        $groupIds = array_map(static fn (string $groupId) => GlobalId::fromGlobalId($groupId)['id'], $groupIds);
         $groupEntities = $this->groupRepository->findBy(['id' => $groupIds]);
         $toUpdateEmails = [];
         $newInvitations = [];

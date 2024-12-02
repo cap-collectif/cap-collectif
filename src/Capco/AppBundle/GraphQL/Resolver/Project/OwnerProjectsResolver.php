@@ -24,15 +24,13 @@ class OwnerProjectsResolver implements QueryInterface
     ): ConnectionInterface {
         $orderBy = $this->getOrderBy($args);
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $viewer, $orderBy) {
-            return $this->repository->getByOwnerPaginated(
-                $owner,
-                $offset,
-                $limit,
-                $viewer,
-                $orderBy
-            );
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $this->repository->getByOwnerPaginated(
+            $owner,
+            $offset,
+            $limit,
+            $viewer,
+            $orderBy
+        ));
 
         return $paginator->auto($args, $this->repository->countByOwner($owner, $viewer));
     }

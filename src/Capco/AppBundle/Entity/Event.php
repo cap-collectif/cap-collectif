@@ -244,9 +244,7 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
     {
         $themes = $this->themes->toArray();
 
-        usort($themes, function ($a, $b) {
-            return $a->getPosition() <=> $b->getPosition();
-        });
+        usort($themes, fn ($a, $b) => $a->getPosition() <=> $b->getPosition());
 
         return $themes;
     }
@@ -850,8 +848,6 @@ class Event implements CommentableInterface, IndexableInterface, DisplayableInBO
             return [];
         }
 
-        return $this->eventDistrictPositioners->map(function ($eventDistrictPositioner) {
-            return $eventDistrictPositioner->getDistrict();
-        })->toArray();
+        return $this->eventDistrictPositioners->map(fn ($eventDistrictPositioner) => $eventDistrictPositioner->getDistrict())->toArray();
     }
 }

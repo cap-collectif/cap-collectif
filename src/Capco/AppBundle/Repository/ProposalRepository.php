@@ -108,9 +108,7 @@ class ProposalRepository extends EntityRepository
         $results = $qb->getQuery()->getResult();
 
         if ($onlyVisible) {
-            $results = array_filter($results, function ($proposal) {
-                return $proposal->isVisible();
-            });
+            $results = array_filter($results, fn ($proposal) => $proposal->isVisible());
         }
 
         $proposalsWithStep = [];
@@ -333,9 +331,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('form.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isCollectStep() || $step->isSelectionStep();
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step->isCollectStep() || $step->isSelectionStep())
             )
             ->andWhere('proposal.author = :author')
             ->setParameter('author', $author)

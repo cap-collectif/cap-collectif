@@ -35,9 +35,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->andWhere('pv.selectionStep IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isCollectStep() || $step->isSelectionStep();
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step->isCollectStep() || $step->isSelectionStep())
             )
             ->setParameter('author', $author)
             ->getQuery()
@@ -149,9 +147,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
                     ->setParameter('id', $id)
                 ;
                 $results = $qb->getQuery()->getScalarResult();
-                $userVotes[$id] = array_map(function ($id) {
-                    return $id;
-                }, array_column($results, 'id'));
+                $userVotes[$id] = array_map(fn ($id) => $id, array_column($results, 'id'));
             }
         }
 
@@ -528,9 +524,7 @@ class ProposalSelectionVoteRepository extends EntityRepository
 
     private function getCountsByProposalGroupedBySteps(Proposal $proposal, $asTitle = false): array
     {
-        $items = array_map(function ($value) use ($asTitle) {
-            return $asTitle ? $value->getTitle() : $value->getId();
-        }, $proposal->getSelectionSteps());
+        $items = array_map(fn ($value) => $asTitle ? $value->getTitle() : $value->getId(), $proposal->getSelectionSteps());
 
         $qb = $this->createQueryBuilder('pv');
 

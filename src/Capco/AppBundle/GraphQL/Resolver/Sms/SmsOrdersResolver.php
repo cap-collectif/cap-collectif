@@ -20,13 +20,11 @@ class SmsOrdersResolver implements QueryInterface
     public function __invoke(Argument $args): ConnectionInterface
     {
         $filter = $args->offsetGet('filter') ?? null;
-        $paginator = new Paginator(function (int $offset, int $limit) use ($filter) {
-            return $this->repository->findPaginated(
-                $offset,
-                $limit,
-                $filter
-            );
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $this->repository->findPaginated(
+            $offset,
+            $limit,
+            $filter
+        ));
 
         return $paginator->auto($args, $this->repository->countAll($filter));
     }

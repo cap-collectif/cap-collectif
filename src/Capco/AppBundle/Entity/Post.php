@@ -319,9 +319,7 @@ class Post implements CommentableInterface, IndexableInterface, Ownerable, Trans
 
     public function getAuthorsObject(): Collection
     {
-        return $this->authors->map(function (PostAuthor $author) {
-            return $author->getAuthor();
-        });
+        return $this->authors->map(fn (PostAuthor $author) => $author->getAuthor());
     }
 
     /**

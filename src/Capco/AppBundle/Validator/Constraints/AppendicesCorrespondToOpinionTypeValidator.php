@@ -16,9 +16,7 @@ class AppendicesCorrespondToOpinionTypeValidator extends ConstraintValidator
 
         $opinionType = $opinion->getOpinionType();
         $opinionTypeappendixTypes = $opinionType->getAppendixTypes();
-        $opinionTypeappendixTypesIds = $opinionTypeappendixTypes->map(function ($otat) {
-            return $otat->getAppendixType()->getId();
-        });
+        $opinionTypeappendixTypesIds = $opinionTypeappendixTypes->map(fn ($otat) => $otat->getAppendixType()->getId());
 
         if ($appendices->count() > 0) {
             foreach ($appendices as $appendix) {

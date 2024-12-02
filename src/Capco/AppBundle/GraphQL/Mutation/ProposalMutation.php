@@ -92,9 +92,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function isGrantedFusion(array $ids, ?User $viewer, string $accessType): bool
     {
-        $proposals = array_map(function ($id) use ($viewer) {
-            return $this->getProposal($id, $viewer);
-        }, $ids);
+        $proposals = array_map(fn ($id) => $this->getProposal($id, $viewer), $ids);
 
         return $this->authorizationChecker->isGranted($accessType, $proposals);
     }

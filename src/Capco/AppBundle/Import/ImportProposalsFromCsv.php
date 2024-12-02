@@ -46,9 +46,9 @@ class ImportProposalsFromCsv
 {
     use TranslationTrait;
     public bool $permissiveSocialNetworksUrl = false;
-    private ?string $filePath;
-    private ?string $delimiter;
-    private ?ProposalForm $proposalForm;
+    private ?string $filePath = null;
+    private ?string $delimiter = null;
+    private ?ProposalForm $proposalForm = null;
     private array $customFields = [];
     private array $headers;
     private array $createdProposals = [];

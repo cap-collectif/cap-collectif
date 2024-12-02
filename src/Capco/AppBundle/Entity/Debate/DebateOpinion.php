@@ -52,7 +52,7 @@ class DebateOpinion implements Authorable
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", inversedBy="opinions")
      * @ORM\JoinColumn(name="debate_id", referencedColumnName="id", onDelete="CASCADE", nullable=false)
      */
-    private ?Debate $debate;
+    private ?Debate $debate = null;
 
     public function __clone()
     {

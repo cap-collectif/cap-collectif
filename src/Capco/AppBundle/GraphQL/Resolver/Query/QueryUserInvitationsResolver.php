@@ -38,9 +38,7 @@ class QueryUserInvitationsResolver implements QueryInterface
 
         if (0 === $args->offsetGet('first')) {
             $totalCount = $this->repository->getInvitationsCount($status)[0][1] ?? 0;
-            $paginator = new Paginator(function (int $offset, int $limit) {
-                return [];
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => []);
 
             $connection = $paginator->auto($args, $totalCount);
             $connection->setTotalCount($totalCount);

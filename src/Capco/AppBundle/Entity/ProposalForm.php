@@ -85,7 +85,7 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Steps\CollectStep", inversedBy="proposalForm", cascade={"persist"})
@@ -130,42 +130,42 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
     /**
      * @ORM\Column(name="title_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $titleHelpText;
+    private ?string $titleHelpText = null;
 
     /**
      * @ORM\Column(name="summary_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $summaryHelpText;
+    private ?string $summaryHelpText = null;
 
     /**
      * @ORM\Column(name="description_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $descriptionHelpText;
+    private ?string $descriptionHelpText = null;
 
     /**
      * @ORM\Column(name="theme_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $themeHelpText;
+    private ?string $themeHelpText = null;
 
     /**
      * @ORM\Column(name="district_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $districtHelpText;
+    private ?string $districtHelpText = null;
 
     /**
      * @ORM\Column(name="category_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $categoryHelpText;
+    private ?string $categoryHelpText = null;
 
     /**
      * @ORM\Column(name="address_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $addressHelpText;
+    private ?string $addressHelpText = null;
 
     /**
      * @ORM\Column(name="illustration_help_text", type="string", length=255, nullable=true)
      */
-    private ?string $illustrationHelpText;
+    private ?string $illustrationHelpText = null;
 
     /**
      * @ORM\Column(name="using_themes", type="boolean", nullable=false)
@@ -221,13 +221,13 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
     /**
      * @ORM\Column(name="map_center", type="text", nullable=true)
      */
-    private ?string $mapCenter;
+    private ?string $mapCenter = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", inversedBy="proposalForm", cascade={"persist"})
      * @ORM\JoinColumn(name="evaluation_form_id", nullable=true)
      */
-    private ?Questionnaire $evaluationForm;
+    private ?Questionnaire $evaluationForm = null;
 
     /**
      * @ORM\Column(name="object_type", nullable=false, type="string", options={"default": "proposal"})
@@ -398,11 +398,9 @@ class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Owner
     public function getRealQuestions(): Collection
     {
         return $this->getQuestions()
-            ? $this->getQuestions()->map(function (
-                QuestionnaireAbstractQuestion $questionnaireAbstractQuestion
-            ) {
-                return $questionnaireAbstractQuestion->getQuestion();
-            })
+            ? $this->getQuestions()->map(
+                fn (QuestionnaireAbstractQuestion $questionnaireAbstractQuestion) => $questionnaireAbstractQuestion->getQuestion()
+            )
             : new ArrayCollection();
     }
 

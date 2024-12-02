@@ -30,9 +30,7 @@ class UpdateProposalFusionMutation implements MutationInterface
             throw new UserError("Unknown proposal to merge with id: {$proposalId}");
         }
 
-        $beforeChildProposalIds = $proposal->getChildConnections()->map(function ($entity) {
-            return $entity->getId();
-        });
+        $beforeChildProposalIds = $proposal->getChildConnections()->map(fn ($entity) => $entity->getId());
 
         $proposalForm = $proposal->getProposalForm();
         $proposalUuids = [];
@@ -58,14 +56,8 @@ class UpdateProposalFusionMutation implements MutationInterface
 
         $this->em->flush();
 
-        $afterChildProposalIds = $proposal->getChildConnections()->map(function ($entity) {
-            return $entity->getId();
-        });
-        $removedMergedFromIds = $beforeChildProposalIds->filter(function ($id) use (
-            $afterChildProposalIds
-        ) {
-            return !$afterChildProposalIds->contains($id);
-        });
+        $afterChildProposalIds = $proposal->getChildConnections()->map(fn ($entity) => $entity->getId());
+        $removedMergedFromIds = $beforeChildProposalIds->filter(fn ($id) => !$afterChildProposalIds->contains($id));
         $removedMergedFrom = [];
         foreach ($removedMergedFromIds as $id) {
             $removedMergedFrom[] = $this->globalIdResolver->resolve($id, $user);

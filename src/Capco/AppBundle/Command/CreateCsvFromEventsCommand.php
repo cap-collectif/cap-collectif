@@ -157,9 +157,7 @@ class CreateCsvFromEventsCommand extends BaseExportCommand
                 );
                 $progress->advance();
             },
-            function ($pageInfo) {
-                return $this->getEventsGraphQLQuery($pageInfo['endCursor']);
-            }
+            fn ($pageInfo) => $this->getEventsGraphQLQuery($pageInfo['endCursor'])
         );
         $writer->close();
 

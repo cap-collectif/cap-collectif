@@ -115,9 +115,10 @@ class ProjectContributorResolver implements QueryInterface
     {
         $participantsContributors = $this->getParticipantsContributors($project, $stepId) ?? [];
         $participantsCount = \count($participantsContributors);
-        $participantsCursors = array_map(function ($participantContributor) {
-            return [1, $participantContributor->getId()];
-        }, $participantsContributors);
+        $participantsCursors = array_map(
+            fn ($participantContributor) => [1, $participantContributor->getId()],
+            $participantsContributors
+        );
 
         return [$participantsContributors, $participantsCount, $participantsCursors];
     }

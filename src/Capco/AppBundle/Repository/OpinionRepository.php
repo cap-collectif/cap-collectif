@@ -175,9 +175,7 @@ class OpinionRepository extends EntityRepository
             ->innerJoin('o.consultation', 'oc', 'WITH', 'oc.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step->isConsultationStep())
             )
             ->setParameter('author', $user)
         ;

@@ -35,17 +35,12 @@ class MapTokenStylesResolver implements QueryInterface
 
         $apiStyles = $this->mapboxClient->getStylesForToken($mapToken->getSecretToken());
 
-        $styles = array_map(function (array $apiStyle) use ($mapToken) {
-            return MapboxStyle::fromMapboxApi($apiStyle)
-                ->setPublicToken($mapToken->getPublicToken())
-                ->setMapToken($mapToken)
-            ;
-        }, $apiStyles);
+        $styles = array_map(fn (array $apiStyle) => MapboxStyle::fromMapboxApi($apiStyle)
+            ->setPublicToken($mapToken->getPublicToken())
+            ->setMapToken($mapToken), $apiStyles);
 
         if ($visibility) {
-            $styles = array_filter($styles, function (MapboxStyle $style) use ($visibility) {
-                return $style->getVisibility() === $visibility;
-            });
+            $styles = array_filter($styles, fn (MapboxStyle $style) => $style->getVisibility() === $visibility);
         }
 
         return $styles;

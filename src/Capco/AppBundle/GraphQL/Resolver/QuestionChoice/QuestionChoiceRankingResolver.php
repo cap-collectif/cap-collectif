@@ -44,9 +44,7 @@ class QuestionChoiceRankingResolver implements QueryInterface
             }
         }
 
-        usort($rankingArray, function ($a, $b) {
-            return $a['position'] <=> $b['position'];
-        });
+        usort($rankingArray, fn ($a, $b) => $a['position'] <=> $b['position']);
 
         return $rankingArray;
     }

@@ -108,9 +108,7 @@ class ProposalCollectVoteRepository extends EntityRepository
             ->andWhere('pv.collectStep IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isCollectStep() || $step->isSelectionStep();
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step->isCollectStep() || $step->isSelectionStep())
             )
             ->setParameter('author', $author)
             ->getQuery()
@@ -202,9 +200,7 @@ class ProposalCollectVoteRepository extends EntityRepository
                     ->setParameter('id', $id)
                 ;
                 $results = $qb->getQuery()->getScalarResult();
-                $userVotes[$id] = array_map(function ($id) {
-                    return $id;
-                }, array_column($results, 'id'));
+                $userVotes[$id] = array_map(fn ($id) => $id, array_column($results, 'id'));
             }
         }
 

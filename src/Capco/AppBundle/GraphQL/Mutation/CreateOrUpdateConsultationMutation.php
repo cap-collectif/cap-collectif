@@ -97,9 +97,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
         $sectionsInputIds = $this->getAllSectionsIds($sections, []);
 
         $currentSections = $this->opinionTypeRepository->findBy(['consultation' => $consultation]);
-        $currentSectionsIds = array_map(function ($section) {
-            return $section->getId();
-        }, $currentSections);
+        $currentSectionsIds = array_map(fn ($section) => $section->getId(), $currentSections);
 
         $idsToRemove = array_diff($currentSectionsIds, $sectionsInputIds);
 

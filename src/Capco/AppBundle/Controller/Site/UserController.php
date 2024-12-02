@@ -132,9 +132,7 @@ class UserController extends AbstractController
                 return null;
             }, $ssoList)
         );
-        $ssoList = array_filter($ssoList, function ($sso) {
-            return null !== $sso;
-        });
+        $ssoList = array_filter($ssoList, fn ($sso) => null !== $sso);
         if ($this->isSAMLEnabled()) {
             $ssoList[] = ['type' => 'saml', 'name' => 'Saml'];
         }

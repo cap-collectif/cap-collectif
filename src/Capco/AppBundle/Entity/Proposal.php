@@ -277,7 +277,7 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
      */
-    private ?ProposalEvaluation $proposalEvaluation;
+    private ?ProposalEvaluation $proposalEvaluation = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Follower", mappedBy="proposal", cascade={"persist"}, orphanRemoval=true)
@@ -292,7 +292,7 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSupervisor", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private ?ProposalSupervisor $supervisor;
+    private ?ProposalSupervisor $supervisor = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecision", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -302,7 +302,7 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalDecisionMaker", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private ?ProposalDecisionMaker $decisionMaker;
+    private ?ProposalDecisionMaker $decisionMaker = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalyst", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
@@ -327,7 +327,7 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalSocialNetworks", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private ?ProposalSocialNetworks $proposalSocialNetworks;
+    private ?ProposalSocialNetworks $proposalSocialNetworks = null;
 
     /**
      * @ORM\OneToMany(targetEntity=ProposalStepPaperVoteCounter::class, mappedBy="proposal", orphanRemoval=true)
@@ -1031,12 +1031,11 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     public function getSelectionStepsIds(): array
     {
         return array_filter(
-            array_map(function ($value) {
-                return $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null;
-            }, $this->getSelections()->getValues()),
-            function ($value) {
-                return null !== $value;
-            }
+            array_map(
+                fn ($value) => $value->getSelectionStep() ? $value->getSelectionStep()->getId() : null,
+                $this->getSelections()->getValues()
+            ),
+            fn ($value) => null !== $value
         );
     }
 
@@ -1207,10 +1206,8 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
                 ->getStep()
                 ->getProject()
                 ->getSteps()
-                ->exists(function ($key, $step) {
-                    return $step->getStep()->isSelectionStep()
-                        && $step->getStep()->isAllowingProgressSteps();
-                })
+                ->exists(fn ($key, $step) => $step->getStep()->isSelectionStep()
+                    && $step->getStep()->isAllowingProgressSteps())
             ;
     }
 
@@ -1421,9 +1418,7 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
         /** @var Selection[] $projectSteps */
         $selections = $this->getSelections()->toArray();
 
-        usort($selections, function ($step, $nextStep) {
-            return $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition();
-        });
+        usort($selections, fn ($step, $nextStep) => $nextStep->getStep()->getPosition() <=> $step->getStep()->getPosition());
 
         $findStatus = null;
         $loop = 0;

@@ -182,9 +182,7 @@ abstract class AbstractMaker extends Command
         if ($autocompleteValues) {
             $question->setAutocompleterValues($autocompleteValues);
         }
-        $question->setNormalizer(function ($value) {
-            return $value ? trim((string) $value) : null;
-        });
+        $question->setNormalizer(fn ($value) => $value ? trim((string) $value) : null);
 
         $response = $this->helper->ask($input, $output, $question);
         if (!$nullable && null === $response) {
@@ -206,9 +204,7 @@ abstract class AbstractMaker extends Command
         if ($autocompleteValues) {
             $question->setAutocompleterValues($autocompleteValues);
         }
-        $question->setNormalizer(function ($value) {
-            return $value ? trim((string) $value) : null;
-        });
+        $question->setNormalizer(fn ($value) => $value ? trim((string) $value) : null);
 
         return $this->helper->ask($input, $output, $question);
     }
@@ -221,9 +217,7 @@ abstract class AbstractMaker extends Command
     ): ?array {
         $questionLabel .= $nullable ? ' <info>[nullable]</info>' : '';
         $question = new Question($questionLabel . \PHP_EOL);
-        $question->setNormalizer(function ($value) {
-            return trim((string) $value);
-        });
+        $question->setNormalizer(fn ($value) => trim((string) $value));
         $response = $this->helper->ask($input, $output, $question);
         if (!$nullable && ('' === $response || null === $response)) {
             throw new NullableException();
@@ -233,9 +227,7 @@ abstract class AbstractMaker extends Command
             return null;
         }
 
-        return array_map(function ($value) {
-            return trim(Text::camelCase($value));
-        }, $responses);
+        return array_map(fn ($value) => trim(Text::camelCase($value)), $responses);
     }
 
     private function getContainer()

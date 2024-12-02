@@ -44,9 +44,7 @@ class OrderedCollectionType extends CollectionType
             } else {
                 foreach ($userCollection as $item) {
                     $match = $collectionInDb
-                        ->filter(static function ($i) use ($item) {
-                            return $item->getId() && $i->getId() === $item->getId();
-                        })
+                        ->filter(static fn ($i) => $item->getId() && $i->getId() === $item->getId())
                         ->first()
                     ;
                     if ($match) {
@@ -82,9 +80,7 @@ class OrderedCollectionType extends CollectionType
                     $this->propertyAccessor->setValue(
                         $parent,
                         $field,
-                        $items->filter(static function ($i) use ($itemToDelete) {
-                            return $i->getId() !== $itemToDelete->getId();
-                        })
+                        $items->filter(static fn ($i) => $i->getId() !== $itemToDelete->getId())
                     );
                 }
             }

@@ -19,12 +19,10 @@ class SmsCreditsResolver implements QueryInterface
 
     public function __invoke(Argument $args): ConnectionInterface
     {
-        $paginator = new Paginator(function (int $offset, int $limit) {
-            return $this->repository->findPaginated(
-                $offset,
-                $limit,
-            );
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $this->repository->findPaginated(
+            $offset,
+            $limit,
+        ));
 
         return $paginator->auto($args, $this->repository->countAll());
     }

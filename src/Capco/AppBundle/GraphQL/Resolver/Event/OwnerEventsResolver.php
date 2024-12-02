@@ -43,9 +43,9 @@ class OwnerEventsResolver implements QueryInterface
             $options['isFuture'] = $isFuture;
         }
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $options) {
-            return $this->repository->getByOwnerPaginated($owner, $offset, $limit, $options);
-        });
+        $paginator = new Paginator(
+            fn (int $offset, int $limit) => $this->repository->getByOwnerPaginated($owner, $offset, $limit, $options)
+        );
 
         $count = $this->repository->countByOwner($owner, $options);
 

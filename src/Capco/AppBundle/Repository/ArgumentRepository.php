@@ -393,9 +393,7 @@ class ArgumentRepository extends EntityRepository
             ->andWhere('oc.step IN (:steps) OR ovoc.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step->isConsultationStep())
             )
             ->setParameter('author', $author)
             ->getQuery()

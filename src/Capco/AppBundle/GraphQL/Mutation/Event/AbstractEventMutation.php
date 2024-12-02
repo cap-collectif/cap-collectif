@@ -34,9 +34,10 @@ abstract class AbstractEventMutation implements MutationInterface
             return;
         }
 
-        $arguments['districts'] = array_map(function ($districtGlobalId) {
-            return GlobalId::fromGlobalId($districtGlobalId)['id'];
-        }, $arguments['districts']);
+        $arguments['districts'] = array_map(
+            fn ($districtGlobalId) => GlobalId::fromGlobalId($districtGlobalId)['id'],
+            $arguments['districts']
+        );
     }
 
     protected function getEvent(string $globalId, User $viewer): Event

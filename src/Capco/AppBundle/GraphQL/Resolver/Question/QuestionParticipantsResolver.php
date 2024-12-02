@@ -22,9 +22,7 @@ class QuestionParticipantsResolver implements QueryInterface
             $args->offsetGet('withNotConfirmedUser')
         );
 
-        $paginator = new Paginator(function () {
-            return [];
-        });
+        $paginator = new Paginator(fn () => []);
 
         return $paginator->auto($args, $totalCount);
     }

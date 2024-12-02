@@ -10,10 +10,11 @@ class RegistrationFormQuestionsResolver implements QueryInterface
     public function __invoke(RegistrationForm $form): array
     {
         $questions = $form->getRealQuestions()->toArray();
-        usort($questions, function ($a, $b) {
-            return $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
-                $b->getQuestionnaireAbstractQuestion()->getPosition();
-        });
+        usort(
+            $questions,
+            fn ($a, $b) => $a->getQuestionnaireAbstractQuestion()->getPosition() <=>
+            $b->getQuestionnaireAbstractQuestion()->getPosition()
+        );
 
         return $questions;
     }

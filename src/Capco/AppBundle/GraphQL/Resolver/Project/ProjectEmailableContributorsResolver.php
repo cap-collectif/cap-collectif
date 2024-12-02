@@ -122,9 +122,7 @@ class ProjectEmailableContributorsResolver implements QueryInterface
 
     public function __invoke(Project $project, Argument $argument): ConnectionInterface
     {
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($project) {
-            return $this->getContributors($project, $limit, $offset);
-        });
+        $paginator = new Paginator(fn (?int $offset, ?int $limit) => $this->getContributors($project, $limit, $offset));
         $connection = $paginator->auto($argument, $this->getTotalCount($project));
         $connection->{'refusingCount'} = $this->getRefusingCount($project);
 

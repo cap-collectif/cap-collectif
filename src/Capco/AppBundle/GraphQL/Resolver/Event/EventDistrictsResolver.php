@@ -20,9 +20,9 @@ class EventDistrictsResolver implements QueryInterface
         Argument $args
     ): ConnectionInterface {
         $totalCount = $this->globalDistrictRepository->countByEvent($event);
-        $paginator = new Paginator(function (int $offset, int $limit) use ($event) {
-            return $this->globalDistrictRepository->findByEvent($event, $offset, $limit);
-        });
+        $paginator = new Paginator(
+            fn (int $offset, int $limit) => $this->globalDistrictRepository->findByEvent($event, $offset, $limit)
+        );
 
         return $paginator->auto($args, $totalCount);
     }

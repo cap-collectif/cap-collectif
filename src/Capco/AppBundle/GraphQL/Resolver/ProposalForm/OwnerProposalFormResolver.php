@@ -25,9 +25,9 @@ class OwnerProposalFormResolver implements QueryInterface
             'availableOnly' => $availableOnly,
         ];
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $options) {
-            return $this->repository->getByOwner($owner, $offset, $limit, $options);
-        });
+        $paginator = new Paginator(
+            fn (int $offset, int $limit) => $this->repository->getByOwner($owner, $offset, $limit, $options)
+        );
 
         return $paginator->auto($args, $this->repository->countByOwner($owner));
     }

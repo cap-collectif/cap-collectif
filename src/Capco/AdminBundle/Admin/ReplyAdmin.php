@@ -67,9 +67,7 @@ class ReplyAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'global.author',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])

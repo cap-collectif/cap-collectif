@@ -101,9 +101,7 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll(
-                Argument::that(function (array $results): bool {
-                    return array_keys($results[0]) == ['registrations', 'votes'];
-                })
+                Argument::that(fn (array $results): bool => array_keys($results[0]) == ['registrations', 'votes'])
             )
             ->shouldBeCalled()
             ->willReturn($promise)
@@ -151,9 +149,7 @@ class QueryAnalyticsDataLoaderSpec extends ObjectBehavior
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll(
-                Argument::that(function (array $results): bool {
-                    return array_keys($results[0]) == ['visitors'];
-                })
+                Argument::that(fn (array $results): bool => array_keys($results[0]) == ['visitors'])
             )
             ->shouldBeCalled()
             ->willReturn($promise)

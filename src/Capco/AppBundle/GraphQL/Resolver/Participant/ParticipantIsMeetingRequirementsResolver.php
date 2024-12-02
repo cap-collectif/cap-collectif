@@ -60,9 +60,9 @@ class ParticipantIsMeetingRequirementsResolver implements QueryInterface
             // TODO add EMAIL to $mediatorOptionnalRequirements when 15954-parcours-participation is merged
             $mediatorOptionnalRequirements = [Requirement::PHONE, Requirement::PHONE_VERIFIED];
 
-            return $requirements->filter(function ($requirement) use ($mediatorOptionnalRequirements) {
-                return !\in_array($requirement->getType(), $mediatorOptionnalRequirements);
-            });
+            return $requirements->filter(
+                fn ($requirement) => !\in_array($requirement->getType(), $mediatorOptionnalRequirements)
+            );
         }
 
         return $requirements;

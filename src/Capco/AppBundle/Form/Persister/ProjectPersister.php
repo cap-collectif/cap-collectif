@@ -112,9 +112,10 @@ class ProjectPersister
 
     private function getRestrictedViewerGroups($arguments)
     {
-        $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
-            return GlobalId::fromGlobalId($groupGlobalId)['id'];
-        }, $arguments['restrictedViewerGroups']);
+        $arguments['restrictedViewerGroups'] = array_map(
+            fn ($groupGlobalId) => GlobalId::fromGlobalId($groupGlobalId)['id'],
+            $arguments['restrictedViewerGroups']
+        );
 
         return $arguments;
     }

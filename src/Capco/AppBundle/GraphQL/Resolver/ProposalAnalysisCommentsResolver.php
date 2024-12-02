@@ -24,11 +24,7 @@ class ProposalAnalysisCommentsResolver implements QueryInterface
         }
 
         $comments = $this->proposalAnalysisCommentRepository->findBy(['proposalAnalysis' => $proposalAnalysis], ['createdAt' => 'DESC']);
-        $paginator = new Paginator(function () use (
-            $comments
-        ) {
-            return $comments;
-        });
+        $paginator = new Paginator(fn () => $comments);
 
         $totalCount = $this->proposalAnalysisCommentRepository->countByProposalAnalysis($proposalAnalysis);
 

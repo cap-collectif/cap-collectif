@@ -60,9 +60,7 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
                 __METHOD__ .
                     'called for keys : ' .
                     var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
+                        array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
             );
@@ -96,9 +94,7 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
             }
 
             return $this->getPromiseAdapter()->createAll(
-                array_map(function ($key) {
-                    return null;
-                }, $keys)
+                array_map(fn ($key) => null, $keys)
             );
         }
 
@@ -111,22 +107,16 @@ class ProposalViewerVoteDataLoader extends BatchDataLoader
             $this->logger->error('Please provide a Collect or Selection step');
 
             return $this->getPromiseAdapter()->createAll(
-                array_map(function ($key) {
-                    return null;
-                }, $keys)
+                array_map(fn ($key) => null, $keys)
             );
         }
 
-        $batchProposalIds = array_map(function ($key) {
-            return $key['proposal']->getId();
-        }, $keys);
+        $batchProposalIds = array_map(fn ($key) => $key['proposal']->getId(), $keys);
 
         $votes = $repo->getByProposalIdsAndStepAndUser($batchProposalIds, $step, $user);
         $results = array_map(function ($key) use ($votes) {
             $found = array_values(
-                array_filter($votes, function ($vote) use ($key) {
-                    return $vote->getProposal()->getId() === $key['proposal']->getId();
-                })
+                array_filter($votes, fn ($vote) => $vote->getProposal()->getId() === $key['proposal']->getId())
             );
 
             return $found[0] ?? null;

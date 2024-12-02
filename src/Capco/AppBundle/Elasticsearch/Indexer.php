@@ -88,10 +88,8 @@ class Indexer
         $classes = $this->getClassesToIndex();
 
         $classesOrdered = array_values($classes);
-        usort($classesOrdered, function ($a, $b) {
-            return \call_user_func($a . '::getElasticsearchPriority') >
-                \call_user_func($b . '::getElasticsearchPriority');
-        });
+        usort($classesOrdered, fn ($a, $b) => \call_user_func($a . '::getElasticsearchPriority') >
+            \call_user_func($b . '::getElasticsearchPriority'));
 
         foreach ($classesOrdered as $class) {
             $this->indexType($class, 0, $output);
@@ -308,9 +306,7 @@ class Indexer
             $anonReplyQuery = $this->em->getRepository(ReplyAnonymous::class)->findAll();
 
             $replies = array_merge($userReplies, $anonReplyQuery);
-            $iterableResult = array_map(function ($result) {
-                return [$result];
-            }, $replies);
+            $iterableResult = array_map(fn ($result) => [$result], $replies);
         } else {
             $iterableResult = $query->iterate();
         }

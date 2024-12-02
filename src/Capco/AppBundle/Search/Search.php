@@ -60,9 +60,10 @@ abstract class Search
         $results = $repository->hydrateFromIds($ids);
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
+        usort(
+            $results,
+            static fn ($a, $b) => array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false)
+        );
 
         return $results;
     }
@@ -104,9 +105,7 @@ abstract class Search
         }
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($results, static function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
+        usort($results, static fn ($a, $b) => array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false));
 
         $this->addGeoIpData($results, $informations);
 
@@ -205,9 +204,7 @@ abstract class Search
         EntityRepository $repository,
         ResultSet $resultSet
     ): array {
-        $ids = array_map(static function (Result $result) {
-            return $result->getDocument()->get('id');
-        }, $resultSet->getResults());
+        $ids = array_map(static fn (Result $result) => $result->getDocument()->get('id'), $resultSet->getResults());
 
         return $this->getHydratedResults($repository, $ids);
     }
@@ -284,9 +281,7 @@ abstract class Search
 
     protected function getCursors(ResultSet $resultSet): array
     {
-        return array_map(static function (Result $result) {
-            return $result->getParam('sort');
-        }, $resultSet->getResults());
+        return array_map(static fn (Result $result) => $result->getParam('sort'), $resultSet->getResults());
     }
 
     protected function applyCursor(Query $query, ?string $cursor): void

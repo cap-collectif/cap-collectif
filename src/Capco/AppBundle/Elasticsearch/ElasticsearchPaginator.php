@@ -33,11 +33,9 @@ class ElasticsearchPaginator
         /** @var ElasticsearchPaginatedResult $results */
         $results = \call_user_func($this->fetcher, $cursor, $limit ? $limit + 1 : $limit);
 
-        $connection = $this->handleEntities($results->getEntities(), function ($entities) use (
-            $args,
-            $results
-        ) {
-            return $this->elasticsearchConnectionBuilder->connectionFromArraySlice(
+        $connection = $this->handleEntities(
+            $results->getEntities(),
+            fn ($entities) => $this->elasticsearchConnectionBuilder->connectionFromArraySlice(
                 $entities,
                 $args,
                 [
@@ -45,8 +43,8 @@ class ElasticsearchPaginator
                     'arrayLength' => \count($results->getEntities()),
                     'cursors' => $results->getCursors(),
                 ]
-            );
-        });
+            )
+        );
         $connection->setTotalCount($results->getTotalCount());
 
         return $connection;
@@ -60,20 +58,15 @@ class ElasticsearchPaginator
         /** @var ElasticsearchPaginatedResult $results */
         $results = \call_user_func($this->fetcher, $cursor, $limit ? $limit + 1 : $limit);
 
-        $connection = $this->handleEntities($results->getEntities(), function ($entities) use (
+        $connection = $this->handleEntities($results->getEntities(), fn ($entities) => $this->elasticsearchConnectionBuilder->connectionFromArraySlice(
+            $entities,
             $args,
-            $results
-        ) {
-            return $this->elasticsearchConnectionBuilder->connectionFromArraySlice(
-                $entities,
-                $args,
-                [
-                    'sliceStart' => 0,
-                    'arrayLength' => \count($results->getEntities()),
-                    'cursors' => $results->getCursors(),
-                ]
-            );
-        });
+            [
+                'sliceStart' => 0,
+                'arrayLength' => \count($results->getEntities()),
+                'cursors' => $results->getCursors(),
+            ]
+        ));
         $connection->setTotalCount($results->getTotalCount());
 
         return $connection;

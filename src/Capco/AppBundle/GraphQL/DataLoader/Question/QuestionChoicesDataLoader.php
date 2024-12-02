@@ -41,26 +41,19 @@ class QuestionChoicesDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
-        $questionsDatas = array_map(static function (array $key) {
-            return [
-                'id' => $key['question']->getId(),
-                'isRandomQuestionChoices' => $key['question']->isRandomQuestionChoices(),
-                'args' => $key['args'],
-                'seed' => $key['seed'],
-            ];
-        }, $keys);
+        $questionsDatas = array_map(static fn (array $key) => [
+            'id' => $key['question']->getId(),
+            'isRandomQuestionChoices' => $key['question']->isRandomQuestionChoices(),
+            'args' => $key['args'],
+            'seed' => $key['seed'],
+        ], $keys);
 
         $paginatedResults = $this->questionChoiceSearch->searchQuestionChoices($questionsDatas);
 
         $results = [];
         if (!empty($paginatedResults)) {
             foreach ($keys as $i => $key) {
-                $paginator = new ElasticsearchPaginator(static function (
-                    ?string $cursor,
-                    int $limit
-                ) use ($paginatedResults, $i) {
-                    return $paginatedResults[$i];
-                });
+                $paginator = new ElasticsearchPaginator(static fn (?string $cursor, int $limit) => $paginatedResults[$i]);
                 $results[] = $paginator->auto($key['args']);
             }
         }

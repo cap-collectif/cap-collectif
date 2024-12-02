@@ -11,9 +11,7 @@ class ProposalFormDistrictsResolver implements QueryInterface
     {
         $districts = $form->getDistricts()->toArray();
         if ('ALPHABETICAL' === $order) {
-            usort($districts, function ($a, $b) {
-                return $a->getName() <=> $b->getName();
-            });
+            usort($districts, fn ($a, $b) => $a->getName() <=> $b->getName());
         }
 
         return $districts;

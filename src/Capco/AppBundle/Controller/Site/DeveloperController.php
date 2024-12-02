@@ -204,11 +204,7 @@ class DeveloperController extends Controller
                         // We hydrate current selection for mutations.
                         if ('mutation' === $category && $type) {
                             $selection = array_values(
-                                array_filter($mutation->getFields(), function (
-                                    FieldDefinition $field
-                                ) use ($type) {
-                                    return $field->name == $type;
-                                })
+                                array_filter($mutation->getFields(), fn (FieldDefinition $field) => $field->name == $type)
                             )[0];
                         }
 

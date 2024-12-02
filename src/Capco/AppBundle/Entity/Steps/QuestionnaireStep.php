@@ -35,7 +35,7 @@ class QuestionnaireStep extends AbstractStep implements ParticipativeStepInterfa
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Questionnaire", mappedBy="step", cascade={"persist"})
      */
-    private ?Questionnaire $questionnaire;
+    private ?Questionnaire $questionnaire = null;
 
     /**
      * @ORM\Column(name="is_anonymous_participation_allowed", type="boolean", nullable=false, options={"default" = false})

@@ -24,7 +24,7 @@ class UserInviteEmailMessage
     /**
      * @ORM\Column(name="mailer_id" ,type="string", nullable=true)
      */
-    private ?string $mailerId;
+    private ?string $mailerId = null;
 
     /**
      * @ORM\Column(name="mailer_type", type="enum_mailer_type")

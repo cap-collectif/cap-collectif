@@ -10,17 +10,17 @@ use Doctrine\Common\Collections\Collection;
 class Category implements \Stringable
 {
     protected int $id;
-    protected ?string $name;
-    protected ?string $slug;
+    protected ?string $name = null;
+    protected ?string $slug = null;
     protected bool $enabled;
-    protected ?string $description;
-    protected ?\DateTimeInterface $createdAt;
-    protected ?\DateTimeInterface $updatedAt;
-    protected ?int $position;
+    protected ?string $description = null;
+    protected ?\DateTimeInterface $createdAt = null;
+    protected ?\DateTimeInterface $updatedAt = null;
+    protected ?int $position = null;
     protected Collection $children;
-    protected ?Category $parent;
-    protected ?Media $media;
-    protected ?Context $context;
+    protected ?Category $parent = null;
+    protected ?Media $media = null;
+    protected ?Context $context = null;
 
     public function __construct()
     {

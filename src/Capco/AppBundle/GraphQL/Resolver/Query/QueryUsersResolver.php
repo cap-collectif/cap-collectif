@@ -43,25 +43,16 @@ class QueryUsersResolver implements QueryInterface
             ? $args->offsetGet('orderBy')
             : ['field' => SortField::CREATED_AT, 'direction' => OrderDirection::DESC];
 
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+        $paginator = new ElasticsearchPaginator(fn (?string $cursor, int $limit) => $this->userSearch->getAllUsers(
+            $limit,
             $orderBy,
+            $cursor,
             $includeSuperAdmin,
             $includeDisabled,
             $emailConfirmed,
             $consentInternalCommunication,
             $onlyProjectAdmins
-        ) {
-            return $this->userSearch->getAllUsers(
-                $limit,
-                $orderBy,
-                $cursor,
-                $includeSuperAdmin,
-                $includeDisabled,
-                $emailConfirmed,
-                $consentInternalCommunication,
-                $onlyProjectAdmins
-            );
-        });
+        ));
 
         return $paginator->auto($args);
     }

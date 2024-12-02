@@ -39,35 +39,29 @@ class UserProposalsResolver implements QueryInterface
         $needEdges = $resolveInfo ? isset($resolveInfo->getFieldSelection()['edges']) : false;
 
         if ($aclDisabled) {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($user, $needEdges) {
-                return $needEdges
-                    ? $this->proposalRepository->getByUser($user, $limit, $offset)
-                    : [];
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $needEdges
+                ? $this->proposalRepository->getByUser($user, $limit, $offset)
+                : []);
             $totalCount = $this->proposalRepository->countByUser($user);
         } elseif ($validViewer && $user) {
             /** @var User $viewer */
-            $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
-                return $this->proposalRepository->getProposalsByAuthorViewerCanSee(
-                    $viewer,
-                    $user,
-                    $limit,
-                    $offset
-                );
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalRepository->getProposalsByAuthorViewerCanSee(
+                $viewer,
+                $user,
+                $limit,
+                $offset
+            ));
             $totalCount = $this->proposalRepository->countProposalsByAuthorViewerCanSee(
                 $viewer,
                 $user
             );
         } else {
             /** @var User $viewer */
-            $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->proposalRepository->getPublicProposalsByAuthor(
-                    $user,
-                    $limit,
-                    $offset
-                );
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalRepository->getPublicProposalsByAuthor(
+                $user,
+                $limit,
+                $offset
+            ));
             $totalCount = $this->proposalRepository->countPublicProposalsByAuthor($user);
         }
 

@@ -19,10 +19,8 @@ class DistrictsForLocalisationResolver implements QueryInterface
 
         return $form->isProposalInAZoneRequired()
             ? $districts
-                ->filter(function ($district) use ($longitude, $latitude) {
-                    return $district->getGeojson()
-                        && GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson());
-                }, [])
+                ->filter(fn ($district) => $district->getGeojson()
+                    && GeometryHelper::isIncluded($longitude, $latitude, $district->getGeojson()), [])
                 ->toArray()
             : $districts->toArray();
     }

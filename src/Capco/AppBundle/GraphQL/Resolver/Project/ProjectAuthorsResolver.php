@@ -22,9 +22,10 @@ class ProjectAuthorsResolver implements QueryInterface
         $orderBy = $args->offsetGet('orderBy');
 
         try {
-            $authorsIds = array_map(function ($item) {
-                return $item['oid'] ?? $item['uid'];
-            }, $this->projectRepository->getProjectAuthorsId($user, $orderBy));
+            $authorsIds = array_map(
+                fn ($item) => $item['oid'] ?? $item['uid'],
+                $this->projectRepository->getProjectAuthorsId($user, $orderBy)
+            );
 
             return $this->getHydratedResults($authorsIds);
         } catch (\RuntimeException $exception) {
@@ -43,12 +44,8 @@ class ProjectAuthorsResolver implements QueryInterface
         $organizations = $this->organizationRepository->hydrateFromIds($ids);
         // We have to restore the correct order of ids, because Doctrine has lost it, see:
         // https://stackoverflow.com/questions/28563738/symfony-2-doctrine-find-by-ordered-array-of-id/28578750
-        usort($users, function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
-        usort($organizations, function ($a, $b) use ($ids) {
-            return array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false);
-        });
+        usort($users, fn ($a, $b) => array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false));
+        usort($organizations, fn ($a, $b) => array_search($a->getId(), $ids, false) > array_search($b->getId(), $ids, false));
 
         return array_merge($users, $organizations);
     }

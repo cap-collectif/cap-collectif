@@ -45,9 +45,7 @@ class LocaleRepository extends EntityRepository
 
     public function findEnabledLocalesCodes(): array
     {
-        return array_map(function (Locale $locale) {
-            return $locale->getCode();
-        }, $this->findEnabledLocales());
+        return array_map(fn (Locale $locale) => $locale->getCode(), $this->findEnabledLocales());
     }
 
     public function findEnabledLocales(): array

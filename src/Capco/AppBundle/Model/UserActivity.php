@@ -8,11 +8,11 @@ use Doctrine\DBAL\Exception\InvalidArgumentException;
 class UserActivity implements FollowerNotifiedOfInterface
 {
     protected string $username;
-    protected ?string $lastname;
-    protected ?string $firstname;
+    protected ?string $lastname = null;
+    protected ?string $firstname = null;
     protected string $email;
     protected string $id;
-    protected ?string $locale;
+    protected ?string $locale = null;
     protected array $userProposals = [];
     protected ?array $userProjects = [];
     protected string $notifiedOf;

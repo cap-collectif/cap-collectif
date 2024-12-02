@@ -298,9 +298,7 @@ final class ProjectAdmin extends CapcoAdmin
                     $this->getSubject()->getId()
                 ),
                 'multiple' => true,
-                'choice_label' => function (GlobalDistrict $district) {
-                    return $district->getName();
-                },
+                'choice_label' => fn (GlobalDistrict $district) => $district->getName(),
             ]);
         }
         $form

@@ -46,10 +46,10 @@ class ImportProposalsFromCsvCommand extends Command
 
     protected static $defaultName = 'capco:import:proposals-from-csv';
 
-    protected ?string $filePath;
-    protected ?string $delimiter;
-    protected ?ProposalForm $proposalForm;
-    protected ?array $questionsMap;
+    protected ?string $filePath = null;
+    protected ?string $delimiter = null;
+    protected ?ProposalForm $proposalForm = null;
+    protected ?array $questionsMap = null;
     protected array $newUsersMap;
     protected array $customFields = [];
     protected array $headers;

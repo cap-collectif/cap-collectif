@@ -28,9 +28,7 @@ class UserInviteGroupsResolver implements QueryInterface
             try {
                 $arguments = $userInvite
                     ->getGroups()
-                    ->map(function ($group) {
-                        return $group;
-                    })
+                    ->map(fn ($group) => $group)
                     ->toArray()
                 ;
             } catch (\RuntimeException $exception) {

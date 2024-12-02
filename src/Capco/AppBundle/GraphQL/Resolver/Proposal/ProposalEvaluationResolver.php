@@ -54,10 +54,8 @@ class ProposalEvaluationResolver implements QueryInterface
             || ($viewer instanceof User && $viewer->isAdmin())
             || ($context->offsetExists('disable_acl') && true === $context->offsetGet('disable_acl'));
 
-        return $this->getResponsesForEvaluation($evaluation)->filter(function ($response) use (
-            $viewerCanSeePrivateResponses
-        ) {
-            return !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses;
-        });
+        return $this->getResponsesForEvaluation($evaluation)->filter(
+            fn ($response) => !$response->getQuestion()->isPrivate() || $viewerCanSeePrivateResponses
+        );
     }
 }

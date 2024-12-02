@@ -44,13 +44,10 @@ class ProjectSearchType extends AbstractType
                 'required' => false,
                 'class' => 'CapcoAppBundle:Theme',
                 'choice_value' => 'slug',
-                'query_builder' => function (ThemeRepository $tr) {
-                    return $tr
-                        ->createQueryBuilder('t')
-                        ->where('t.isEnabled = :enabled')
-                        ->setParameter('enabled', true)
-                    ;
-                },
+                'query_builder' => fn (ThemeRepository $tr) => $tr
+                    ->createQueryBuilder('t')
+                    ->where('t.isEnabled = :enabled')
+                    ->setParameter('enabled', true),
                 'placeholder' => 'global.select_themes',
             ]);
         }

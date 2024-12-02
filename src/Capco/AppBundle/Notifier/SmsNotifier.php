@@ -118,9 +118,7 @@ class SmsNotifier extends BaseNotifier
         $platformLink = "{$this->context->getScheme()}://{$this->context->getHost()}";
         $adminUrl = "{$platformLink}/admin-next/secure-participation";
 
-        $emails = array_map(function ($user) {
-            return $user->getEmail();
-        }, $users);
+        $emails = array_map(fn ($user) => $user->getEmail(), $users);
         $emails[] = self::BUSINESS_TEAM_EMAIL;
         foreach ($emails as $email) {
             $this->mailer->createAndSendMessage(

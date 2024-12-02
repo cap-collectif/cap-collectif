@@ -37,26 +37,22 @@ class UserSourcesResolver implements QueryInterface
         $validViewer = $viewer instanceof UserInterface;
 
         if ($aclDisabled) {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->sourceRepository->findAllByAuthor($user, $offset, $limit);
-            });
+            $paginator = new Paginator(
+                fn (int $offset, int $limit) => $this->sourceRepository->findAllByAuthor($user, $offset, $limit)
+            );
 
             $totalCount = $this->sourceRepository->countAllByAuthor($user);
         } elseif ($validViewer && $user) {
             /** @var User $viewer */
-            $paginator = new Paginator(function (int $offset, int $limit) use ($viewer, $user) {
-                return $this->sourceRepository->getSourcesByAuthorViewerCanSee(
-                    $viewer,
-                    $user,
-                    $limit,
-                    $offset
-                );
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->sourceRepository->getSourcesByAuthorViewerCanSee(
+                $viewer,
+                $user,
+                $limit,
+                $offset
+            ));
             $totalCount = $this->sourceRepository->countSourcesByAuthorViewerCanSee($viewer, $user);
         } else {
-            $paginator = new Paginator(function (int $offset, int $limit) use ($user) {
-                return $this->sourceRepository->getPublicSourcesByAuthor($user, $offset, $limit);
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->sourceRepository->getPublicSourcesByAuthor($user, $offset, $limit));
 
             $totalCount = $this->sourceRepository->countPublicSourcesByAuthor($user);
         }

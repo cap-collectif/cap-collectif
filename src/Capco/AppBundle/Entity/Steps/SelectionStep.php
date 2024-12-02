@@ -184,9 +184,7 @@ class SelectionStep extends AbstractStep implements ParticipativeStepInterface, 
         if ($this->getProject()) {
             /** @var ProjectAbstractStep $step */
             $step = (new ArrayCollection($this->getProject()->getExportableSteps()))
-                ->filter(function (ProjectAbstractStep $step) {
-                    return $step->getStep()->isCollectStep();
-                })
+                ->filter(fn (ProjectAbstractStep $step) => $step->getStep()->isCollectStep())
                 ->first()
             ;
 

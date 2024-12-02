@@ -77,51 +77,42 @@ class CheckGeoJsonValidator extends ConstraintValidator
 
     private static function isValidLineString($lineString): bool
     {
-        return self::isValidArrayOfSomething($lineString->coordinates, function ($coordinates) {
-            return self::isValidCoordinates($coordinates);
-        });
+        return self::isValidArrayOfSomething(
+            $lineString->coordinates,
+            fn ($coordinates) => self::isValidCoordinates($coordinates)
+        );
     }
 
     private static function isValidPolygon($polygon): bool
     {
-        return self::isValidArrayOfSomething($polygon->coordinates, function ($arrayOfCoordinates) {
-            return self::isValidArrayOfSomething($arrayOfCoordinates, function ($coordinates) {
-                return self::isValidCoordinates($coordinates);
-            });
-        });
+        return self::isValidArrayOfSomething(
+            $polygon->coordinates,
+            fn ($arrayOfCoordinates) => self::isValidArrayOfSomething($arrayOfCoordinates, fn ($coordinates) => self::isValidCoordinates($coordinates))
+        );
     }
 
     private static function isValidMultiPoint($multiPoint): bool
     {
-        return self::isValidArrayOfSomething($multiPoint->coordinates, function ($coordinates) {
-            return self::isValidCoordinates($coordinates);
-        });
+        return self::isValidArrayOfSomething(
+            $multiPoint->coordinates,
+            fn ($coordinates) => self::isValidCoordinates($coordinates)
+        );
     }
 
     private static function isValidMultiLineString($multiLineString): bool
     {
-        return self::isValidArrayOfSomething($multiLineString->coordinates, function (
-            $arrayOfCoordinates
-        ) {
-            return self::isValidArrayOfSomething($arrayOfCoordinates, function ($coordinates) {
-                return self::isValidCoordinates($coordinates);
-            });
-        });
+        return self::isValidArrayOfSomething(
+            $multiLineString->coordinates,
+            fn ($arrayOfCoordinates) => self::isValidArrayOfSomething($arrayOfCoordinates, fn ($coordinates) => self::isValidCoordinates($coordinates))
+        );
     }
 
     private static function isValidMultiPolygon($multiPolygon): bool
     {
-        return self::isValidArrayOfSomething($multiPolygon->coordinates, function (
-            $arrayOfArrayOfCoordinates
-        ) {
-            return self::isValidArrayOfSomething($arrayOfArrayOfCoordinates, function (
-                $arrayOfCoordinates
-            ) {
-                return self::isValidArrayOfSomething($arrayOfCoordinates, function ($coordinates) {
-                    return self::isValidCoordinates($coordinates);
-                });
-            });
-        });
+        return self::isValidArrayOfSomething(
+            $multiPolygon->coordinates,
+            fn ($arrayOfArrayOfCoordinates) => self::isValidArrayOfSomething($arrayOfArrayOfCoordinates, fn ($arrayOfCoordinates) => self::isValidArrayOfSomething($arrayOfCoordinates, fn ($coordinates) => self::isValidCoordinates($coordinates)))
+        );
     }
 
     private static function isValidArrayOfSomething($arrayOfSomething, callable $validator): bool

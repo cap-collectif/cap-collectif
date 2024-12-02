@@ -104,23 +104,18 @@ class ProjectProposalsDataLoader extends BatchDataLoader
             }
         }
 
-        $orders = array_map(function ($order) {
-            return ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']);
-        }, $ordersBy);
+        $orders = array_map(
+            fn ($order) => ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']),
+            $ordersBy
+        );
 
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
+        $paginator = new ElasticsearchPaginator(fn (?string $cursor, int $limit) => $this->proposalSearch->searchProposalsByProject(
             $project,
-            $orders,
-            $providedFilters
-        ) {
-            return $this->proposalSearch->searchProposalsByProject(
-                $project,
-                $orders[0],
-                $providedFilters,
-                $limit,
-                $cursor
-            );
-        });
+            $orders[0],
+            $providedFilters,
+            $limit,
+            $cursor
+        ));
 
         return $paginator->auto($args);
     }

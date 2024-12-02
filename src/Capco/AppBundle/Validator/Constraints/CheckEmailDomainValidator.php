@@ -25,9 +25,7 @@ class CheckEmailDomainValidator extends ConstraintValidator
         }
 
         $form = $this->registrationFormRepo->findCurrent();
-        $availableDomains = $form->getDomains()->map(function (EmailDomain $element) {
-            return $element->getValue();
-        });
+        $availableDomains = $form->getDomains()->map(fn (EmailDomain $element) => $element->getValue());
 
         list($local, $domain) = explode('@', (string) $email);
         if ($availableDomains->contains($domain)) {

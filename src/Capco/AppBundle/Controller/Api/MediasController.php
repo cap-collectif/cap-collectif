@@ -20,7 +20,7 @@ class MediasController extends AbstractController
 {
     final public const NO_MEDIA_FOUND = 'NO_MEDIA_FOUND';
     final public const FILE_NOT_ALLOWED = 'FILE_NOT_ALLOWED';
-    private ?ConstraintViolationListInterface $fileUploadViolations;
+    private ?ConstraintViolationListInterface $fileUploadViolations = null;
 
     public function __construct(private readonly ValidatorInterface $validator, private readonly MediaManager $mediaManager, private readonly MediaExtension $mediaExtension, private readonly LoggerInterface $logger)
     {

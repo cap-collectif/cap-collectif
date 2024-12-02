@@ -26,9 +26,7 @@ class RequirementConnectionParticipantMeetsTheRequirementsResolver implements Qu
         $participant = $this->getParticipant($token);
 
         /** * @var EdgeInterface $edge  */
-        $requirements = array_map(function ($edge) {
-            return $edge->getNode();
-        }, $connection->getEdges());
+        $requirements = array_map(fn ($edge) => $edge->getNode(), $connection->getEdges());
 
         foreach ($requirements as $requirement) {
             if (!$this->viewerMeetsTheRequirementResolver->__invoke($requirement, $participant)) {

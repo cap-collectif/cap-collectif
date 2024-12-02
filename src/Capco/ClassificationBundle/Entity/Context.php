@@ -5,7 +5,7 @@ namespace Capco\ClassificationBundle\Entity;
 class Context implements \Stringable
 {
     protected string $id;
-    protected ?string $name;
+    protected ?string $name = null;
     protected ?\DateTimeInterface $createdAt = null;
     protected ?\DateTimeInterface $updatedAt = null;
     protected bool $enabled;

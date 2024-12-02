@@ -12,9 +12,7 @@ class UserOrganizationsResolver implements QueryInterface
     {
         return $user
             ->getMemberOfOrganizations()
-            ->map(function (OrganizationMember $organizationMember) {
-                return $organizationMember->getOrganization();
-            })
+            ->map(fn (OrganizationMember $organizationMember) => $organizationMember->getOrganization())
             ->toArray()
         ;
     }

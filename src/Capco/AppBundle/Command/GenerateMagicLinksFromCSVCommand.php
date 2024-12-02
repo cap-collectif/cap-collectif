@@ -269,14 +269,12 @@ class GenerateMagicLinksFromCSVCommand extends Command
         $privateKey = $this->filesystem->get('jwt/private.pem')->getContent();
 
         $count = 0;
-        $newData = array_map(function ($user) {
-            return [
-                'email' => $user->getEmail(),
-                'username' => $user->getUsername(),
-                'magic_link' => '',
-                'magic_link_creation' => (new \DateTime())->format('Y-m-d'),
-            ];
-        }, $this->users);
+        $newData = array_map(fn ($user) => [
+            'email' => $user->getEmail(),
+            'username' => $user->getUsername(),
+            'magic_link' => '',
+            'magic_link_creation' => (new \DateTime())->format('Y-m-d'),
+        ], $this->users);
 
         foreach ($newData as $key => $user) {
             try {

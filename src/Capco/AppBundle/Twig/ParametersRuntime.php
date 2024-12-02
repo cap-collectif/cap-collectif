@@ -39,9 +39,10 @@ class ParametersRuntime implements RuntimeExtensionInterface
     {
         $flags = $this->manager->all();
 
-        return array_map(function ($key) use ($flags) {
-            return ['type' => $key, 'enabled' => $flags[$key]];
-        }, array_keys($flags));
+        return array_map(
+            fn ($key) => ['type' => $key, 'enabled' => $flags[$key]],
+            array_keys($flags)
+        );
     }
 
     public static function getCacheKey(string $locale): string

@@ -79,7 +79,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         'deletedAccountAt' => 'deletedAccountAt',
     ];
 
-    private ?array $customQuestions;
+    private ?array $customQuestions = null;
 
     public function __construct(
         GraphQlAclListener $listener,
@@ -143,9 +143,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
                 $user = $edge['node'];
                 $this->addUserRow($user);
             },
-            function ($pageInfo) {
-                return $this->getUsersGraphQLQuery($pageInfo['endCursor']);
-            }
+            fn ($pageInfo) => $this->getUsersGraphQLQuery($pageInfo['endCursor'])
         );
 
         $this->executeSnapshot($input, $output, self::FILENAME);
@@ -185,9 +183,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
         }
         $customQuestionLength = \count($this->customQuestions);
         if ($customQuestionLength > 0) {
-            $responses = array_map(function ($edge) {
-                return $edge['node'];
-            }, Arr::path($user, 'responses.edges'));
+            $responses = array_map(fn ($edge) => $edge['node'], Arr::path($user, 'responses.edges'));
             $i = 0;
             while ($i < \count($responses)) {
                 $value = $this->addCustomResponse($responses[$i]);
@@ -327,9 +323,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
             ->toArray()
         ;
 
-        return array_map(function (array $edge) {
-            return $edge['title'];
-        }, $questionsTitles['data']['registrationForm']['questions']);
+        return array_map(fn (array $edge) => $edge['title'], $questionsTitles['data']['registrationForm']['questions']);
     }
 
     private function generateSheetHeader(): array
@@ -343,9 +337,7 @@ class CreateCsvFromLegacyUsersCommand extends BaseExportCommand
             self::VALUE_RESPONSE_TYPENAME => $response['formattedValue'],
             self::MEDIA_RESPONSE_TYPENAME => implode(
                 ', ',
-                array_map(function (array $media) {
-                    return $media['url'];
-                }, $response['medias'])
+                array_map(fn (array $media) => $media['url'], $response['medias'])
             ),
             default => throw new \LogicException('Unknown response typename'),
         };

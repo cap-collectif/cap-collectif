@@ -19,13 +19,13 @@ class PendingOrganizationInvitationsResolver implements QueryInterface
         Organization $organization,
         ?Argument $args = null
     ): ConnectionInterface {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($organization) {
-            return $this->pendingOrganizationInvitationRepository->findPaginatedByOrganization(
+        $paginator = new Paginator(
+            fn (int $offset, int $limit) => $this->pendingOrganizationInvitationRepository->findPaginatedByOrganization(
                 $organization,
                 $limit,
                 $offset
-            );
-        });
+            )
+        );
 
         $totalCount = $this->pendingOrganizationInvitationRepository->countByOrganization(
             $organization

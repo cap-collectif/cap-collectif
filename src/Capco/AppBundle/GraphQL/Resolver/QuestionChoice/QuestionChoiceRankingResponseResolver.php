@@ -18,9 +18,7 @@ class QuestionChoiceRankingResponseResolver implements QueryInterface
     {
         $totalCount = \count($questionChoiceRanking['responses']);
 
-        $paginator = new Paginator(function () use ($questionChoiceRanking) {
-            return $questionChoiceRanking['responses'];
-        });
+        $paginator = new Paginator(fn () => $questionChoiceRanking['responses']);
 
         return $paginator->auto($args, $totalCount);
     }

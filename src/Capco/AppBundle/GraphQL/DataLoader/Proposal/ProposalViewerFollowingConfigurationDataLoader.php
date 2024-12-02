@@ -48,16 +48,12 @@ class ProposalViewerFollowingConfigurationDataLoader extends BatchDataLoader
     public function all(array $keys)
     {
         $user = $keys[0]['viewer'];
-        $batchProposalIds = array_map(function ($key) {
-            return $key['proposal']->getId();
-        }, $keys);
+        $batchProposalIds = array_map(fn ($key) => $key['proposal']->getId(), $keys);
 
         $followers = $this->followerRepository->getByProposalIdsAndUser($batchProposalIds, $user);
         $results = array_map(function ($key) use ($followers) {
             $found = array_values(
-                array_filter($followers, function ($follower) use ($key) {
-                    return $follower->getProposal()->getId() === $key['proposal']->getId();
-                })
+                array_filter($followers, fn ($follower) => $follower->getProposal()->getId() === $key['proposal']->getId())
             );
 
             return isset($found[0]) ? $found[0]->getNotifiedOf() : null;

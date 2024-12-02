@@ -6,7 +6,7 @@ class JWT
 {
     private array $header;
     private array $payload;
-    private ?string $signature;
+    private ?string $signature = null;
 
     public function __construct(string $jwt)
     {

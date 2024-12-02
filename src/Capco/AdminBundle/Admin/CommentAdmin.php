@@ -64,9 +64,7 @@ class CommentAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'global.author',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
@@ -153,9 +151,7 @@ class CommentAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function (User $entity) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                'to_string_callback' => fn (User $entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
             ])
             ->add('authorName', null, ['label' => 'admin.fields.comment.author_name'])
             ->add('authorEmail', null, ['label' => 'admin.fields.comment.author_email'])

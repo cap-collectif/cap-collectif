@@ -30,9 +30,7 @@ class ProjectVotesResolver implements QueryInterface
 
         $totalCount = $this->countProjectVotes($project, $args->offsetGet('anonymous'));
 
-        $paginator = new Paginator(function (int $offset, int $limit) {
-            return [];
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => []);
 
         return $paginator->auto($args, $totalCount);
     }

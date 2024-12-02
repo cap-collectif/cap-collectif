@@ -13,11 +13,9 @@ class QueryFeatureFlagsResolver implements QueryInterface
 
     public function __invoke(): array
     {
-        return array_map(function (string $key) {
-            return [
-                'type' => $key,
-                'enabled' => $this->toggleManager->isActive($key),
-            ];
-        }, Manager::$toggles);
+        return array_map(fn (string $key) => [
+            'type' => $key,
+            'enabled' => $this->toggleManager->isActive($key),
+        ], Manager::$toggles);
     }
 }

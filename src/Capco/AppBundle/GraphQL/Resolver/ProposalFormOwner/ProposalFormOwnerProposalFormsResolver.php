@@ -32,25 +32,16 @@ class ProposalFormOwnerProposalFormsResolver implements QueryInterface
             return $connection;
         }
 
-        $paginator = new Paginator(function (int $offset, ?int $limit) use (
+        $paginator = new Paginator(fn (int $offset, ?int $limit) => $this->repository->getAll(
+            $offset,
+            $limit,
             $affiliations,
+            $viewer,
             $query,
             $orderByField,
             $orderByDirection,
-            $viewer,
             $availableOnly
-        ) {
-            return $this->repository->getAll(
-                $offset,
-                $limit,
-                $affiliations,
-                $viewer,
-                $query,
-                $orderByField,
-                $orderByDirection,
-                $availableOnly
-            );
-        });
+        ));
 
         $totalCount = $this->repository->countAll($affiliations, $viewer, $query, $availableOnly);
 

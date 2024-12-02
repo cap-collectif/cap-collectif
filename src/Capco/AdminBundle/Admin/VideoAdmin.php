@@ -57,9 +57,7 @@ class VideoAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'global.author',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('isEnabled', null, [
@@ -83,9 +81,7 @@ class VideoAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
             ])
             ->add('isEnabled', null, [
                 'label' => 'global.published',
@@ -119,9 +115,7 @@ class VideoAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
             ])
             ->add('link', null, [
                 'label' => 'admin.fields.video.link',
@@ -158,9 +152,7 @@ class VideoAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
             ])
             ->add('media', null, [
                 'template' => '@CapcoAdmin/Event/media_show_field.html.twig',

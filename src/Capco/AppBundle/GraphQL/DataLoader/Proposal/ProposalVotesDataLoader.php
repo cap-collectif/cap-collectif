@@ -52,9 +52,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
                 __METHOD__ .
                     'called for keys : ' .
                     var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
+                        array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
             );
@@ -90,12 +88,7 @@ class ProposalVotesDataLoader extends BatchDataLoader
         if (!empty($paginatedResults)) {
             $index = 0;
             foreach ($keys as $i => $key) {
-                $paginator = new ElasticsearchPaginator(static function (
-                    ?string $cursor,
-                    int $limit
-                ) use ($paginatedResults, $index) {
-                    return $paginatedResults[$index];
-                });
+                $paginator = new ElasticsearchPaginator(static fn (?string $cursor, int $limit) => $paginatedResults[$index]);
                 $connections[$i] = $paginator->auto($key['args']);
                 if (isset($paginatedResults[$index], $paginatedResults[$index]->totalPointsCount)) {
                     $connections[$i]->{'totalPointsCount'} =

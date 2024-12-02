@@ -34,9 +34,10 @@ class UrlRuntime implements RuntimeExtensionInterface
 
     public function getUsort(array $data, string $property = 'name'): array
     {
-        usort($data, static function ($data1, $data2) use ($property) {
-            return $data1->{$property} <=> $data2->{$property};
-        });
+        usort(
+            $data,
+            static fn ($data1, $data2) => $data1->{$property} <=> $data2->{$property}
+        );
 
         return $data;
     }

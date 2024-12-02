@@ -57,9 +57,7 @@ class ProposalStatusDataLoader extends BatchDataLoader
                 __METHOD__ .
                     'called for keys : ' .
                     var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
+                        array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
             );

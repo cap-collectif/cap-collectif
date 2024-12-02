@@ -40,9 +40,7 @@ class AbstractResponseNormalizer implements NormalizerInterface, SerializerAware
         } else {
             /** @var PersistentCollection $medias */
             $medias = $object->getMedias();
-            $data['medias'] = array_map(static function ($media) {
-                return $media->getId();
-            }, $medias->toArray());
+            $data['medias'] = array_map(static fn ($media) => $media->getId(), $medias->toArray());
         }
 
         return $data;

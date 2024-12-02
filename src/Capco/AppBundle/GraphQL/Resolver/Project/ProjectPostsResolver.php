@@ -21,13 +21,11 @@ class ProjectPostsResolver implements QueryInterface
             $args = new Argument(['first' => 2]);
         }
 
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($project) {
-            return $this->repository->getLastPublishedByProject(
-                $project->getSlug(),
-                $limit,
-                $offset
-            );
-        });
+        $paginator = new Paginator(fn (?int $offset, ?int $limit) => $this->repository->getLastPublishedByProject(
+            $project->getSlug(),
+            $limit,
+            $offset
+        ));
 
         return $paginator->auto($args, $this->repository->countPublishedByProject($project));
     }

@@ -18,9 +18,10 @@ class GlobalDistrictsPersister
 
     public function persist(array $districtsIds, Project $project)
     {
-        $districtsIds = array_map(function ($districtGlobalId) {
-            return GlobalIdResolver::getDecodedId($districtGlobalId, true);
-        }, $districtsIds);
+        $districtsIds = array_map(
+            fn ($districtGlobalId) => GlobalIdResolver::getDecodedId($districtGlobalId, true),
+            $districtsIds
+        );
         $districtEntities = $this->globalDistrictRepository->findByIds($districtsIds);
 
         $oldPositioners = $this->districtPositionerRepository->findBy([

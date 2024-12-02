@@ -18,9 +18,7 @@ class UserGroupsResolver implements QueryInterface
 
     public function __invoke(User $user, Argument $args): Connection
     {
-        $paginator = new Paginator(function () use ($user) {
-            return $this->groupRepo->getGroupsByUser($user);
-        });
+        $paginator = new Paginator(fn () => $this->groupRepo->getGroupsByUser($user));
 
         $totalCount = $this->userGroupRepo->countAllByUser($user);
 

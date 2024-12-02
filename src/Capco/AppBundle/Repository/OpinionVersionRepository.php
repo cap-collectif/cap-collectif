@@ -232,9 +232,7 @@ class OpinionVersionRepository extends EntityRepository
             ->andWhere('version.author = :author')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), static function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_filter($project->getRealSteps(), static fn ($step) => $step->isConsultationStep())
             )
             ->setParameter('author', $author)
         ;

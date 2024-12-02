@@ -13,9 +13,7 @@ final class Version20190416161214 extends AbstractMigration
     {
         foreach (['project', 'theme', 'page'] as $table) {
             $data = $this->connection->fetchAllAssociative('SELECT * FROM ' . $table);
-            $slugs = array_map(function ($d) {
-                return $d['slug'];
-            }, $data);
+            $slugs = array_map(fn ($d) => $d['slug'], $data);
             $duplicates = array_diff_assoc($slugs, array_unique($slugs));
             foreach ($duplicates as $key => $duplicate) {
                 echo 'Updating slug : ' . $duplicate;

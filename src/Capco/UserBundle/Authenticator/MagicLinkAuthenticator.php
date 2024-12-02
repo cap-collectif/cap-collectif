@@ -34,9 +34,7 @@ class MagicLinkAuthenticator
         $user = $this->authenticateUser($payload);
         $this->redirectUrl = $this->sanitizeUrl($payload->getRedirect());
 
-        $rolesAsString = array_map(function ($role) {
-            return \is_string($role) ? $role : $role->getRole();
-        }, $user->getRoles());
+        $rolesAsString = array_map(fn ($role) => \is_string($role) ? $role : $role->getRole(), $user->getRoles());
 
         return new UsernamePasswordToken($user, $user->getPassword(), 'main', $rolesAsString);
     }

@@ -20,13 +20,10 @@ class ProjectAllowedGroupsResolver implements QueryInterface
     public function __invoke(Project $project, Argument $args): Connection
     {
         try {
-            $paginator = new Paginator(function (?int $offset, ?int $limit) use ($project) {
-                return $this->groupRepository
-                    ->getAllowedUserGroupForProject($project, $offset, $limit)
-                    ->getIterator()
-                    ->getArrayCopy()
-                ;
-            });
+            $paginator = new Paginator(fn (?int $offset, ?int $limit) => $this->groupRepository
+                ->getAllowedUserGroupForProject($project, $offset, $limit)
+                ->getIterator()
+                ->getArrayCopy());
 
             $totalUsersInGroups = $this->userRepository->countAllowedViewersForProject($project);
             $totalCount = $this->groupRepository->countGroupsAllowedForProject($project);

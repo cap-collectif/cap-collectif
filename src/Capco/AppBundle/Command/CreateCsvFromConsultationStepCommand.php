@@ -425,12 +425,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
                 $contribution = $edge['node'];
                 $this->addContributionOpinionRow($contribution);
             },
-            function ($pageInfo) {
-                return $this->getContributionsGraphQLQueryByConsultationStep(
-                    $this->currentStep,
-                    $pageInfo['endCursor']
-                );
-            }
+            fn ($pageInfo) => $this->getContributionsGraphQLQueryByConsultationStep(
+                $this->currentStep,
+                $pageInfo['endCursor']
+            )
         );
 
         $this->writer->close();
@@ -655,12 +653,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
             function ($edge) use ($contribution) {
                 $this->addContributionVotesRow($edge['node'], $contribution);
             },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionVotesGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
+            fn ($pageInfos) => $this->getOpinionVotesGraphQLQuery(
+                $contribution['id'],
+                $pageInfos['endCursor']
+            )
         );
 
         foreach ($contribution['appendices'] as $appendix) {
@@ -683,12 +679,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
             function ($edge) {
                 $this->addContributionSourcesRow($edge['node']);
             },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionSourcesGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
+            fn ($pageInfos) => $this->getOpinionSourcesGraphQLQuery(
+                $contribution['id'],
+                $pageInfos['endCursor']
+            )
         );
 
         // we add Opinion's reportings rows.
@@ -698,12 +692,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
             function ($edge) {
                 $this->addContributionReportingsRow($edge['node']);
             },
-            function ($pageInfos) use ($contribution) {
-                return $this->getOpinionReportingsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfos['endCursor']
-                );
-            }
+            fn ($pageInfos) => $this->getOpinionReportingsGraphQLQuery(
+                $contribution['id'],
+                $pageInfos['endCursor']
+            )
         );
 
         // we add Opinion's arguments rows.
@@ -713,12 +705,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
             function ($edge) {
                 $this->addContributionArgumentRow($edge['node']);
             },
-            function ($pageInfo) use ($contribution) {
-                return $this->getContributionsArgumentsGraphQLQuery(
-                    $contribution['id'],
-                    $pageInfo['endCursor']
-                );
-            }
+            fn ($pageInfo) => $this->getContributionsArgumentsGraphQLQuery(
+                $contribution['id'],
+                $pageInfo['endCursor']
+            )
         );
 
         // We add Opinion's versions rows.
@@ -728,9 +718,7 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
             function ($edge) {
                 $this->addContributionVersionRow($edge['node']);
             },
-            function ($pageInfo) use ($contribution) {
-                return $this->getVersionsGraphQLQuery($contribution['id'], $pageInfo['endCursor']);
-            }
+            fn ($pageInfo) => $this->getVersionsGraphQLQuery($contribution['id'], $pageInfo['endCursor'])
         );
     }
 
@@ -972,12 +960,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
                 function ($edge) use ($version) {
                     $this->addContributionVersionVotesRow($edge['node'], $version);
                 },
-                function ($pageInfo) use ($version) {
-                    return $this->getOpinionVotesGraphQLQuery(
-                        $version['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getOpinionVotesGraphQLQuery(
+                    $version['id'],
+                    $pageInfo['endCursor']
+                )
             );
         }
 
@@ -989,12 +975,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
                 function ($edge) {
                     $this->addContributionSourcesRow($edge['node']);
                 },
-                function ($pageInfos) use ($version) {
-                    return $this->getOpinionSourcesGraphQLQuery(
-                        $version['id'],
-                        $pageInfos['endCursor']
-                    );
-                }
+                fn ($pageInfos) => $this->getOpinionSourcesGraphQLQuery(
+                    $version['id'],
+                    $pageInfos['endCursor']
+                )
             );
         }
 
@@ -1006,12 +990,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
                 function ($edge) {
                     $this->addContributionReportingsRow($edge['node']);
                 },
-                function ($pageInfos) use ($version) {
-                    return $this->getOpinionReportingsGraphQLQuery(
-                        $version['id'],
-                        $pageInfos['endCursor']
-                    );
-                }
+                fn ($pageInfos) => $this->getOpinionReportingsGraphQLQuery(
+                    $version['id'],
+                    $pageInfos['endCursor']
+                )
             );
         }
 
@@ -1023,12 +1005,10 @@ class CreateCsvFromConsultationStepCommand extends BaseExportCommand
                 function ($edge) {
                     $this->addContributionArgumentRow($edge['node']);
                 },
-                function ($pageInfo) use ($version) {
-                    return $this->getContributionsArgumentsGraphQLQuery(
-                        $version['id'],
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getContributionsArgumentsGraphQLQuery(
+                    $version['id'],
+                    $pageInfo['endCursor']
+                )
             );
         }
     }

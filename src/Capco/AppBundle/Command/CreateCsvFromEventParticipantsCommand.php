@@ -164,12 +164,10 @@ class CreateCsvFromEventParticipantsCommand extends BaseExportCommand
                 }
                 $progress->advance();
             },
-            function ($pageInfo) use ($event) {
-                return $this->getEventParticipantsGraphQLQuery(
-                    $event['id'],
-                    $pageInfo['endCursor']
-                );
-            }
+            fn ($pageInfo) => $this->getEventParticipantsGraphQLQuery(
+                $event['id'],
+                $pageInfo['endCursor']
+            )
         );
 
         $writer->close();

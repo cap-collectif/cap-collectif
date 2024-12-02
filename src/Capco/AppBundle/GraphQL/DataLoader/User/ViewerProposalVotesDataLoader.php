@@ -77,9 +77,7 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
                 __METHOD__ .
                     'called for keys : ' .
                     var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
+                        array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
             );
@@ -102,32 +100,16 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $direction = $args->offsetGet('orderBy')['direction'];
 
         if ($step instanceof CollectStep) {
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $user,
-                $step,
-                $field,
-                $direction
-            ) {
-                return $this->proposalCollectVoteRepository
-                    ->getByAuthorAndStep($user, $step, $limit, $offset, $field, $direction)
-                    ->getIterator()
-                    ->getArrayCopy()
-                ;
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalCollectVoteRepository
+                ->getByAuthorAndStep($user, $step, $limit, $offset, $field, $direction)
+                ->getIterator()
+                ->getArrayCopy());
             $totalCount = $this->proposalCollectVoteRepository->countByAuthorAndStep($user, $step);
         } elseif ($step instanceof SelectionStep) {
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $user,
-                $step,
-                $field,
-                $direction
-            ) {
-                return $this->proposalSelectionVoteRepository
-                    ->getByAuthorAndStep($user, $step, $limit, $offset, $field, $direction)
-                    ->getIterator()
-                    ->getArrayCopy()
-                ;
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalSelectionVoteRepository
+                ->getByAuthorAndStep($user, $step, $limit, $offset, $field, $direction)
+                ->getIterator()
+                ->getArrayCopy());
             $totalCount = $this->proposalSelectionVoteRepository->countByAuthorAndStep(
                 $user,
                 $step
@@ -151,32 +133,16 @@ class ViewerProposalVotesDataLoader extends BatchDataLoader
         $token = $args->offsetGet('token');
 
         if ($step instanceof CollectStep) {
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $step,
-                $field,
-                $direction,
-                $token
-            ) {
-                return $this->proposalCollectSmsVoteRepository
-                    ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
-                    ->getIterator()
-                    ->getArrayCopy()
-                ;
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalCollectSmsVoteRepository
+                ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
+                ->getIterator()
+                ->getArrayCopy());
             $totalCount = $this->proposalCollectSmsVoteRepository->countByTokenAndStep($step, $token);
         } elseif ($step instanceof SelectionStep) {
-            $paginator = new Paginator(function (int $offset, int $limit) use (
-                $step,
-                $field,
-                $direction,
-                $token
-            ) {
-                return $this->proposalSelectionSmsVoteRepository
-                    ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
-                    ->getIterator()
-                    ->getArrayCopy()
-                ;
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->proposalSelectionSmsVoteRepository
+                ->getByTokenAndStep($step, $token, $limit, $offset, $field, $direction)
+                ->getIterator()
+                ->getArrayCopy());
             $totalCount = $this->proposalSelectionSmsVoteRepository->countByTokenAndStep(
                 $step,
                 $token

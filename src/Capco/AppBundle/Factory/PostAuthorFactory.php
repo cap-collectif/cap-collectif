@@ -31,9 +31,7 @@ class PostAuthorFactory
         }
         $this->em->flush();
 
-        return array_map(function (PostAuthor $postAuthor) {
-            return $postAuthor->getId();
-        }, $postsAuthors);
+        return array_map(fn (PostAuthor $postAuthor) => $postAuthor->getId(), $postsAuthors);
     }
 
     private function getPostAuthor(Author $author, Post $post): ?PostAuthor

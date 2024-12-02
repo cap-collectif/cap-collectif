@@ -137,9 +137,7 @@ class HomepageSectionRuntime implements RuntimeExtensionInterface
             $results = $this->proposalRepository->getLast($max, $offset);
         }
 
-        $proposals = array_map(static function (Proposal $proposal) {
-            return $proposal->getId();
-        }, $results);
+        $proposals = array_map(static fn (Proposal $proposal) => $proposal->getId(), $results);
 
         return $this->twig->render(
             '@CapcoApp/Homepage/lastProposals.html.twig',

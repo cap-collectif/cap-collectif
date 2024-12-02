@@ -42,13 +42,9 @@ class FormattedValueResponseTypeResolver implements QueryInterface
         $value = $response->getValue();
         $filtered = array_filter(
             array_merge($value['labels'] ?? [], [$value['other'] ?? []]),
-            function ($label) {
-                return $label;
-            }
+            fn ($label) => $label
         );
-        $labels = array_map(function ($label) {
-            return Text::htmlToString($label);
-        }, $filtered);
+        $labels = array_map(fn ($label) => Text::htmlToString($label), $filtered);
 
         return implode(', ', $labels);
     }

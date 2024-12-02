@@ -61,9 +61,10 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
             if (
                 \in_array(
                     $question->getId(),
-                    array_map(function ($q) {
-                        return $q->getId();
-                    }, array_merge($questionsAvailableBeforeAnyLogicJump, $fulfilledQuestions)) ??
+                    array_map(
+                        fn ($q) => $q->getId(),
+                        array_merge($questionsAvailableBeforeAnyLogicJump, $fulfilledQuestions)
+                    ) ??
                         []
                 )
             ) {
@@ -95,9 +96,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
         $this->logger->debug(
             self::LOG_PREFIX_FOUND_QUESTIONS_TO_VALIDATE .
                 json_encode(
-                    array_map(function ($q) {
-                        return $q->getId();
-                    }, $questionsToValidate)
+                    array_map(fn ($q) => $q->getId(), $questionsToValidate)
                 )
         );
 
@@ -132,9 +131,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
     ): iterable {
         $indexOfFirstLogicJumpQuestion = array_search(
             $firstLogicJumpQuestion->getId(),
-            array_map(function ($q) {
-                return $q->getId();
-            }, $questions)
+            array_map(fn ($q) => $q->getId(), $questions)
         );
 
         return \array_slice($questions, 0, $indexOfFirstLogicJumpQuestion + 1);
@@ -270,9 +267,7 @@ class HasResponsesToRequiredQuestionsValidator extends ConstraintValidator
             $questionsQaq = $form->getQuestionsArray();
         }
 
-        usort($questionsQaq, function ($a, $b) {
-            return $a->getPosition() <=> $b->getPosition();
-        });
+        usort($questionsQaq, fn ($a, $b) => $a->getPosition() <=> $b->getPosition());
 
         // Turn qaq into questions
         $questions = [];

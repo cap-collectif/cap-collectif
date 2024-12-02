@@ -181,12 +181,10 @@ class ExportController extends Controller
                         );
                     }
                 },
-                function ($pageInfo) use ($event) {
-                    return $this->getEventContributorsGraphQLQuery(
-                        $event->getId(),
-                        $pageInfo['endCursor']
-                    );
-                }
+                fn ($pageInfo) => $this->getEventContributorsGraphQLQuery(
+                    $event->getId(),
+                    $pageInfo['endCursor']
+                )
             );
             $writer->close();
         });

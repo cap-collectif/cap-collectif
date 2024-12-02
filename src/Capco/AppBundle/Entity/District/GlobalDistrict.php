@@ -40,7 +40,7 @@ class GlobalDistrict extends AbstractDistrict implements SluggableInterface, \St
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", cascade={"persist"})
      * @ORM\JoinColumn(name="media_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private ?Media $media;
+    private ?Media $media = null;
 
     public function __construct()
     {

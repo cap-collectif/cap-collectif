@@ -1427,9 +1427,7 @@ trait ProposalStepsTrait
         $selector = '.opinion__list .card__title span span';
 
         $items = array_map(
-            function ($element) {
-                return $element->getText();
-            },
+            fn ($element) => $element->getText(),
             $this->getSession()
                 ->getPage()
                 ->findAll('css', $selector)

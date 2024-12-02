@@ -41,7 +41,7 @@ class Answer implements Authorable, \Stringable
     /**
      * @ORM\Column(name="title", type="string", nullable=true)
      */
-    protected ?string $title;
+    protected ?string $title = null;
 
     public function __construct()
     {

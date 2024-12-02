@@ -46,18 +46,13 @@ class UserConnectionResolver implements QueryInterface
 
         if (null !== $email) {
             $successfulOnly = true === $args->offsetGet('success');
-            $paginator = new Paginator(function (int $offset, int $limit) use (
+            $paginator = new Paginator(fn (int $offset, int $limit) => $this->userConnectionRepository->findAttemptByEmail(
                 $email,
-                $successfulOnly
-            ) {
-                return $this->userConnectionRepository->findAttemptByEmail(
-                    $email,
-                    $offset,
-                    $limit,
-                    $successfulOnly,
-                    false
-                );
-            });
+                $offset,
+                $limit,
+                $successfulOnly,
+                false
+            ));
 
             $totalCount = $this->userConnectionRepository->countAttemptByEmail(
                 $email,
@@ -65,9 +60,7 @@ class UserConnectionResolver implements QueryInterface
                 false
             );
         } else {
-            $paginator = new Paginator(function () use ($userId) {
-                return $this->userConnectionRepository->findByUserId($userId);
-            });
+            $paginator = new Paginator(fn () => $this->userConnectionRepository->findByUserId($userId));
 
             $totalCount = $this->userConnectionRepository->countByUserId($userId);
         }

@@ -25,9 +25,7 @@ class AnonymousArgumentNormalizerTest extends TestCase
         $this->normalizer = new DebateAnonymousArgumentNormalizer($translator);
 
         $translator->method('trans')
-            ->willReturnCallback(function ($key) {
-                return $key;
-            })
+            ->willReturnCallback(fn ($key) => $key)
         ;
     }
 

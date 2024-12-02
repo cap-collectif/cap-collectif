@@ -9,12 +9,10 @@ class HasFeatureFlag extends ExpressionFunction
 {
     public function __construct()
     {
-        parent::__construct('hasFeatureFlag', function (string $name) {
-            return sprintf(
-                '$services->get(\'container\')->get(\'%s\')->isActive(%s)',
-                Manager::class,
-                $name
-            );
-        });
+        parent::__construct('hasFeatureFlag', fn (string $name) => sprintf(
+            '$services->get(\'container\')->get(\'%s\')->isActive(%s)',
+            Manager::class,
+            $name
+        ));
     }
 }

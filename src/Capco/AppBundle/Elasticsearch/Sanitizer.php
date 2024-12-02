@@ -67,9 +67,10 @@ class Sanitizer
         return array_merge(
             array_combine(
                 self::escapeWithSlashes(),
-                array_map(function ($reservedString) {
-                    return implode('', preg_filter('/^/', '\\', str_split($reservedString)));
-                }, self::escapeWithSlashes())
+                array_map(
+                    fn ($reservedString) => implode('', preg_filter('/^/', '\\', str_split((string) $reservedString))),
+                    self::escapeWithSlashes()
+                )
             ),
             array_combine(
                 self::replaceWithSpace(),
@@ -140,9 +141,7 @@ class Sanitizer
     ): array {
         return array_filter(
             $reservedCharacters,
-            function ($reservedCharacter) use ($excludeCharacters) {
-                return !\in_array($reservedCharacter, $excludeCharacters, true);
-            },
+            fn ($reservedCharacter) => !\in_array($reservedCharacter, $excludeCharacters, true),
             \ARRAY_FILTER_USE_KEY
         );
     }

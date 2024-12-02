@@ -252,9 +252,7 @@ class FindDuplicatesSsoUsersCommand extends Command
             $this->execute($input, $output);
         }
 
-        $userIds = array_map(static function ($user) {
-            return $user['userId'];
-        }, $usersWithContributions);
+        $userIds = array_map(static fn ($user) => $user['userId'], $usersWithContributions);
 
         try {
             foreach ($usersWithContributions as $key => $user) {

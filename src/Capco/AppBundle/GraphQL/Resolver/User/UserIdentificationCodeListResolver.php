@@ -17,9 +17,7 @@ class UserIdentificationCodeListResolver implements QueryInterface
 
     public function __invoke(User $user, Argument $args): ConnectionInterface
     {
-        $paginator = new Paginator(function () {
-            return $this->repo->findAll();
-        });
+        $paginator = new Paginator(fn () => $this->repo->findAll());
 
         return $paginator->auto($args, $this->repo->count([]));
     }

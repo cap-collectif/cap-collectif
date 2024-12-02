@@ -36,9 +36,7 @@ class ConsultationsQueryResolver implements QueryInterface
                 throw new \Exception("No consultation found for the id ${$globalId}");
             }
 
-            $paginator = new Paginator(function () use ($consultation) {
-                return [$consultation];
-            });
+            $paginator = new Paginator(fn () => [$consultation]);
 
             return $paginator->auto($args, $totalCount);
         }

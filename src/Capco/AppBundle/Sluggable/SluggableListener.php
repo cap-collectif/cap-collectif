@@ -358,9 +358,7 @@ class SluggableListener extends Base
                         $quotedSeparator = preg_quote((string) $options['separator']);
                         $slug = preg_replace_callback(
                             '/^[a-z]|' . $quotedSeparator . '[a-z]/smi',
-                            function ($m) {
-                                return strtoupper($m[0]);
-                            },
+                            fn ($m) => strtoupper((string) $m[0]),
                             $slug
                         );
 

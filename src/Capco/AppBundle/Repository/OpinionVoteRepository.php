@@ -23,9 +23,7 @@ class OpinionVoteRepository extends EntityRepository
             ->andWhere('v.user = :author')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step->isConsultationStep())
             )
             ->setParameter('author', $author)
         ;

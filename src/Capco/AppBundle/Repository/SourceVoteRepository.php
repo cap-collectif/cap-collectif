@@ -26,9 +26,7 @@ class SourceVoteRepository extends EntityRepository
             ->andWhere('oc.step IN (:steps) OR ovoc.step IN (:steps)')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step->isConsultationStep();
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step->isConsultationStep())
             )
             ->andWhere('v.user = :author')
             ->setParameter('author', $author)

@@ -156,9 +156,7 @@ class CreateCsvFromProjectsContributorsCommand extends BaseExportCommand
                     $this->writer->addRow(WriterEntityFactory::createRowFromArray($row));
                     $progress->advance();
                 },
-                function ($pageInfo) use ($id) {
-                    return $this->getContributorsProjectGraphQLQuery($id, $pageInfo['endCursor']);
-                }
+                fn ($pageInfo) => $this->getContributorsProjectGraphQLQuery($id, $pageInfo['endCursor'])
             );
             $this->executeSnapshot($input, $output, $fileName);
 

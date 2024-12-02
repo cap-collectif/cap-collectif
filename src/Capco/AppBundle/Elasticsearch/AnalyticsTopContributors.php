@@ -35,11 +35,9 @@ class AnalyticsTopContributors
         $users = $this->repository->hydrateFromIdsOrdered($ids);
 
         $this->contributors = array_map(
-            static function (array $contribution, int $i) use ($users) {
-                return (new AnalyticsContributor($users[$i]))->fromEs(
-                    $contribution['contributions']
-                );
-            },
+            static fn (array $contribution, int $i) => (new AnalyticsContributor($users[$i]))->fromEs(
+                $contribution['contributions']
+            ),
             $contributions,
             array_keys($contributions)
         );

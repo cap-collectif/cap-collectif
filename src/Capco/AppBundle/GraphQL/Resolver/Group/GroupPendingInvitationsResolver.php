@@ -17,9 +17,9 @@ class GroupPendingInvitationsResolver implements QueryInterface
 
     public function __invoke(Group $group, Argument $args): ConnectionInterface
     {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($group) {
-            return $this->userInviteRepository->getPendingInvitations($limit, $offset, $group);
-        });
+        $paginator = new Paginator(
+            fn (int $offset, int $limit) => $this->userInviteRepository->getPendingInvitations($limit, $offset, $group)
+        );
 
         $totalCount = $group->getUserInvites()->count();
 

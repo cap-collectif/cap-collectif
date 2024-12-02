@@ -64,9 +64,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
                 __METHOD__ .
                     'called for keys : ' .
                     var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
+                        array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
             );
@@ -233,9 +231,7 @@ class ProposalFormProposalsDataLoader extends BatchDataLoader
             }
         }
 
-        $orders = array_map(function ($order) {
-            return ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']);
-        }, $ordersBy);
+        $orders = array_map(fn ($order) => ProposalSearch::findOrderFromFieldAndDirection($order['field'], $order['direction']), $ordersBy);
 
         $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
             $form,

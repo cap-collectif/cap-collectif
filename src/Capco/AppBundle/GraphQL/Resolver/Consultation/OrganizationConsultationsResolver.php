@@ -23,9 +23,9 @@ class OrganizationConsultationsResolver implements QueryInterface
             'query' => $query,
         ];
 
-        $paginator = new Paginator(function (int $offset, int $limit) use ($owner, $options) {
-            return $this->consultationRepository->getByOwner($owner, $offset, $limit, $options);
-        });
+        $paginator = new Paginator(
+            fn (int $offset, int $limit) => $this->consultationRepository->getByOwner($owner, $offset, $limit, $options)
+        );
 
         return $paginator->auto($args, $this->consultationRepository->countByOwner($owner, $options));
     }

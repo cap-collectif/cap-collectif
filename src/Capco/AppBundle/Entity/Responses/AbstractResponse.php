@@ -53,43 +53,43 @@ abstract class AbstractResponse implements IndexableInterface
     /**
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    protected ?\DateTime $updatedAt;
+    protected ?\DateTime $updatedAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private ?Proposal $proposal;
+    private ?Proposal $proposal = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\UserBundle\Entity\User", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private ?User $user;
+    private ?User $user = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Reply", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="reply_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private ?Reply $reply;
+    private ?Reply $reply = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ReplyAnonymous", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="reply_anonymous_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private ?ReplyAnonymous $replyAnonymous;
+    private ?ReplyAnonymous $replyAnonymous = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalEvaluation", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="evaluation_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private ?ProposalEvaluation $proposalEvaluation;
+    private ?ProposalEvaluation $proposalEvaluation = null;
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", inversedBy="responses", cascade={"persist"})
      * @ORM\JoinColumn(name="analysis_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
      */
-    private ?ProposalAnalysis $analysis;
+    private ?ProposalAnalysis $analysis = null;
 
     /**
      * @Assert\NotNull()

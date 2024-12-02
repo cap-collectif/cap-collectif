@@ -26,27 +26,17 @@ class QuestionnaireOwnerQuestionnairesResolver implements QueryInterface
         $availableOnly = $args->offsetGet('availableOnly') ?? null;
         $types = $args->offsetGet('types') ?? null;
 
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+        $paginator = new Paginator(fn (?int $offset, ?int $limit) => $this->questionnaireRepository->getAll(
+            $offset,
+            $limit,
             $affiliations,
+            $viewer,
             $query,
             $orderByField,
             $orderByDirection,
-            $viewer,
             $availableOnly,
             $types
-        ) {
-            return $this->questionnaireRepository->getAll(
-                $offset,
-                $limit,
-                $affiliations,
-                $viewer,
-                $query,
-                $orderByField,
-                $orderByDirection,
-                $availableOnly,
-                $types
-            );
-        });
+        ));
 
         $totalCount = $this->questionnaireRepository->getAllCount(
             null,

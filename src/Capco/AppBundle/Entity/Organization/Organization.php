@@ -35,18 +35,18 @@ class Organization implements Translatable, Author, ProjectOwner, IndexableInter
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="logo_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private ?Media $logo;
+    private ?Media $logo = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Media", fetch="LAZY", cascade={"persist"})
      * @ORM\JoinColumn(name="banner_id", referencedColumnName="id", nullable=true, onDelete="SET NULL")
      */
-    private ?Media $banner;
+    private ?Media $banner = null;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Organization\OrganizationSocialNetworks", mappedBy="organization", cascade={"persist", "remove"}, orphanRemoval=true)
      */
-    private ?OrganizationSocialNetworks $organizationSocialNetworks;
+    private ?OrganizationSocialNetworks $organizationSocialNetworks = null;
 
     /**
      * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Organization\OrganizationMember", mappedBy="organization", cascade={"persist"}, orphanRemoval=true)

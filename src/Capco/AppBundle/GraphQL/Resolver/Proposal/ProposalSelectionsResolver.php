@@ -11,9 +11,7 @@ class ProposalSelectionsResolver implements QueryInterface
     {
         $selections = $proposal->getSelections()->toArray();
 
-        usort($selections, function ($selection1, $selection2) {
-            return $selection1->getStep()->getProjectAbstractStep()->getPosition() > $selection2->getStep()->getProjectAbstractStep()->getPosition();
-        });
+        usort($selections, fn ($selection1, $selection2) => $selection1->getStep()->getProjectAbstractStep()->getPosition() > $selection2->getStep()->getProjectAbstractStep()->getPosition());
 
         return $selections;
     }

@@ -24,9 +24,10 @@ class AnalyticsVisitors implements Aggregatable
             $set->getAggregation('visitors_per_interval')['buckets']
         );
 
-        $total = array_reduce($documents, function (?int $totalCountSum, AggregatedResult $item) {
-            return $totalCountSum + $item->getTotalCount();
-        });
+        $total = array_reduce(
+            $documents,
+            fn (?int $totalCountSum, AggregatedResult $item) => $totalCountSum + $item->getTotalCount()
+        );
 
         return new self($total ?? 0, $documents);
     }

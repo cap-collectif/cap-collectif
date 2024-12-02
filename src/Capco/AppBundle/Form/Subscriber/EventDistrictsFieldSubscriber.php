@@ -43,9 +43,7 @@ class EventDistrictsFieldSubscriber implements EventSubscriberInterface
         }
 
         $districtIds = $districts
-            ->map(static function (GlobalDistrict $district) {
-                return $district->getId();
-            })
+            ->map(static fn (GlobalDistrict $district) => $district->getId())
             ->toArray()
         ;
         $this->persister->persist($districtIds, $event);

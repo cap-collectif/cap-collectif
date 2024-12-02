@@ -52,9 +52,7 @@ class UserArgumentsDataLoader extends BatchDataLoader
                 __METHOD__ .
                     'called for keys : ' .
                     var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
+                        array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
             );
@@ -64,12 +62,9 @@ class UserArgumentsDataLoader extends BatchDataLoader
         $connections = [];
         if (!empty($argumentPaginatedResults)) {
             foreach ($keys as $i => $key) {
-                $paginator = new ElasticsearchPaginator(static function (
-                    ?string $cursor,
-                    int $limit
-                ) use ($argumentPaginatedResults, $i) {
-                    return $argumentPaginatedResults[$i];
-                });
+                $paginator = new ElasticsearchPaginator(
+                    static fn (?string $cursor, int $limit) => $argumentPaginatedResults[$i]
+                );
                 $connections[] = $paginator->auto($key['args']);
             }
         }

@@ -74,9 +74,7 @@ class ArgumentAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'global.author',
                     'property' => 'username,email',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('updatedAt', null, ['label' => 'global.maj'])
@@ -152,9 +150,7 @@ class ArgumentAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function ($entity) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
             ])
             ->add('body', null, ['label' => 'global.contenu', 'attr' => ['rows' => 10]])
             ->add('trashedStatus', TrashedStatusType::class, [

@@ -436,9 +436,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     public function countPublicProject()
     {
         return $this->projects
-            ->filter(function (Project $project) {
-                return $project->isPublic();
-            })
+            ->filter(fn (Project $project) => $project->isPublic())
             ->count()
         ;
     }
@@ -446,9 +444,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     public function countEnabledPosts(): int
     {
         return $this->posts
-            ->filter(function (Post $post) {
-                return $post->canDisplay() && $post->getIsPublished();
-            })
+            ->filter(fn (Post $post) => $post->canDisplay() && $post->getIsPublished())
             ->count()
         ;
     }
@@ -456,9 +452,7 @@ class Theme implements IndexableInterface, Translatable, SonataTranslatableInter
     public function countEnabledEvents(): int
     {
         return $this->events
-            ->filter(function (Event $event) {
-                return $event->isEnabled();
-            })
+            ->filter(fn (Event $event) => $event->isEnabled())
             ->count()
         ;
     }

@@ -21,13 +21,10 @@ class ProjectsInDistrictResolver implements QueryInterface
         $viewer
     ): ConnectionInterface {
         $totalCount = $this->projectRepository->countByDistrict($district, $viewer);
-        $paginator = new Paginator(function (int $offset, int $limit) use ($district, $viewer) {
-            return $this->projectRepository
-                ->findByDistrict($district, $viewer, $offset, $limit)
-                ->getIterator()
-                ->getArrayCopy()
-            ;
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $this->projectRepository
+            ->findByDistrict($district, $viewer, $offset, $limit)
+            ->getIterator()
+            ->getArrayCopy());
 
         return $paginator->auto($args, $totalCount);
     }

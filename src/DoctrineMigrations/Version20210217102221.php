@@ -13,7 +13,7 @@ use Symfony\Component\DependencyInjection\ContainerInterface;
 
 final class Version20210217102221 extends AbstractMigration implements ContainerAwareInterface
 {
-    private ?ContainerInterface $container;
+    private ?ContainerInterface $container = null;
     private EntityManagerInterface $em;
     private UuidGenerator $generator;
 

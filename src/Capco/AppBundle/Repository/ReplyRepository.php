@@ -214,9 +214,7 @@ class ReplyRepository extends EntityRepository
         ;
 
         $result = $nativeQuery->execute();
-        $ids = array_map(function ($data) {
-            return $data['id'];
-        }, $result);
+        $ids = array_map(fn ($data) => $data['id'], $result);
 
         return $this->hydrateFromIds($result);
     }
@@ -280,9 +278,7 @@ class ReplyRepository extends EntityRepository
             ->andWhere('reply.draft = false')
             ->setParameter(
                 'steps',
-                array_filter($project->getRealSteps(), function ($step) {
-                    return $step instanceof QuestionnaireStep;
-                })
+                array_filter($project->getRealSteps(), fn ($step) => $step instanceof QuestionnaireStep)
             )
             ->setParameter('author', $author)
         ;

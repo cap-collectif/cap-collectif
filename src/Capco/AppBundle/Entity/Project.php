@@ -475,9 +475,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     public function getThemes(): iterable
     {
         $themesArray = $this->themes->toArray();
-        usort($themesArray, function ($a, $b) {
-            return $a->getPosition() <=> $b->getPosition();
-        });
+        usort($themesArray, fn ($a, $b) => $a->getPosition() <=> $b->getPosition());
 
         return new ArrayCollection($themesArray);
     }
@@ -1284,9 +1282,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
 
     public function getProjectDistrictPositionersIds(): iterable
     {
-        return array_map(function (ProjectDistrictPositioner $district) {
-            return $district->getDistrict()->getId();
-        }, $this->getProjectDistrictPositioners()->toArray());
+        return array_map(fn (ProjectDistrictPositioner $district) => $district->getDistrict()->getId(), $this->getProjectDistrictPositioners()->toArray());
     }
 
     public function setProjectDistrictPositioners(iterable $projectDistrictPositioners): self

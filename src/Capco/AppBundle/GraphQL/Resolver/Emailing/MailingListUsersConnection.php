@@ -19,22 +19,16 @@ class MailingListUsersConnection implements QueryInterface
     public function __invoke($mailingList, Argument $argument): Connection
     {
         $mailingList = $this->getMailingListEntity($mailingList);
-        $paginator = new Paginator(function (int $offset, int $limit) use (
-            $mailingList,
-            $argument
-        ) {
-            return $this->userRepository
-                ->getUsersInMailingList(
-                    $mailingList,
-                    true,
-                    $argument->offsetGet('consentInternalCommunicationOnly'),
-                    $offset,
-                    $limit
-                )
-                ->getIterator()
-                ->getArrayCopy()
-            ;
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $this->userRepository
+            ->getUsersInMailingList(
+                $mailingList,
+                true,
+                $argument->offsetGet('consentInternalCommunicationOnly'),
+                $offset,
+                $limit
+            )
+            ->getIterator()
+            ->getArrayCopy());
 
         return $paginator->auto(
             $argument,

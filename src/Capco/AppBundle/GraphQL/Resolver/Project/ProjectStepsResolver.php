@@ -33,9 +33,7 @@ class ProjectStepsResolver implements QueryInterface
         }
 
         $steps = $projectAbstractSteps
-            ->map(static function (ProjectAbstractStep $pas) {
-                return $pas->getStep();
-            })
+            ->map(static fn (ProjectAbstractStep $pas) => $pas->getStep())
             ->toArray()
         ;
 

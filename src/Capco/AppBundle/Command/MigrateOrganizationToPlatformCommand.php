@@ -310,18 +310,14 @@ class MigrateOrganizationToPlatformCommand extends Command
         $query = $statement->executeQuery();
         $rows = $query->fetchAllAssociative();
 
-        $ids = array_map(function ($row) {
-            return $row['id'];
-        }, $rows);
+        $ids = array_map(fn ($row) => $row['id'], $rows);
 
         $ids = sprintf("'%s'", implode("','", $ids));
 
         $sql = "DELETE FROM media__media WHERE id NOT IN ({$ids})";
         $this->executeStatement($sql);
 
-        $filesToKeep = array_map(function ($row) {
-            return $row['provider_reference'];
-        }, $rows);
+        $filesToKeep = array_map(fn ($row) => $row['provider_reference'], $rows);
 
         $allFiles = scandir('public/media/default/0001/01');
         unset($allFiles[0], $allFiles[1]);
@@ -346,9 +342,7 @@ class MigrateOrganizationToPlatformCommand extends Command
         $query = $statement->executeQuery();
         $rows = $query->fetchAllAssociative();
 
-        $ids = array_map(function ($row) {
-            return $row['id'];
-        }, $rows);
+        $ids = array_map(fn ($row) => $row['id'], $rows);
 
         $ids = sprintf("'%s'", implode("','", $ids));
 
@@ -451,9 +445,7 @@ class MigrateOrganizationToPlatformCommand extends Command
         ]);
         $row = $query->fetchAllAssociative();
 
-        return array_map(function ($row) {
-            return $row['id'];
-        }, $row);
+        return array_map(fn ($row) => $row['id'], $row);
     }
 
     private function deleteUsers()

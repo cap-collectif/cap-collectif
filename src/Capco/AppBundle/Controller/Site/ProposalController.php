@@ -52,12 +52,10 @@ class ProposalController extends Controller
 
         $stepUrls = $project
             ->getSteps()
-            ->map(function (ProjectAbstractStep $step) use ($urlResolver) {
-                return $urlResolver->getStepUrl(
-                    $step->getStep(),
-                    UrlGeneratorInterface::ABSOLUTE_URL
-                );
-            })
+            ->map(fn (ProjectAbstractStep $step) => $urlResolver->getStepUrl(
+                $step->getStep(),
+                UrlGeneratorInterface::ABSOLUTE_URL
+            ))
             ->toArray()
         ;
 

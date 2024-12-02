@@ -12,9 +12,7 @@ class ProposalFormCategoriesResolver implements QueryInterface
     {
         $categories = $form->getCategories()->toArray();
         if (CategoryOrderField::ALPHABETICAL === $order) {
-            usort($categories, function ($a, $b) {
-                return $a->getName() <=> $b->getName();
-            });
+            usort($categories, fn ($a, $b) => $a->getName() <=> $b->getName());
         }
 
         return $categories;

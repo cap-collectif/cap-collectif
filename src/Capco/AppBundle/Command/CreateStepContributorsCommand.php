@@ -138,12 +138,10 @@ class CreateStepContributorsCommand extends BaseExportCommand
                 }
                 $writer->addRow(WriterEntityFactory::createRowFromArray($row));
             },
-            function ($pageInfo) use ($step) {
-                return $this->getStepContributorsGraphQLQuery(
-                    $step->getId(),
-                    $pageInfo['endCursor']
-                );
-            }
+            fn ($pageInfo) => $this->getStepContributorsGraphQLQuery(
+                $step->getId(),
+                $pageInfo['endCursor']
+            )
         );
         $writer->close();
         $this->logger->info(

@@ -8,14 +8,14 @@ use Cocur\Slugify\Slugify;
 class Collection implements \Stringable
 {
     protected int $id;
-    protected ?string $name;
-    protected ?string $slug;
+    protected ?string $name = null;
+    protected ?string $slug = null;
     protected bool $enabled;
-    protected ?string $description;
-    protected ?\DateTimeInterface $createdAt;
-    protected ?\DateTimeInterface $updatedAt;
-    protected ?Media $media;
-    protected ?Context $context;
+    protected ?string $description = null;
+    protected ?\DateTimeInterface $createdAt = null;
+    protected ?\DateTimeInterface $updatedAt = null;
+    protected ?Media $media = null;
+    protected ?Context $context = null;
 
     public function __toString(): string
     {

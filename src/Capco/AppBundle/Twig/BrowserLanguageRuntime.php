@@ -19,9 +19,10 @@ class BrowserLanguageRuntime implements RuntimeExtensionInterface
     public function getBrowserLanguage(Request $request, $viewer = null): string
     {
         if ($this->toggleManager->isActive(Manager::multilangue)) {
-            $availableLocales = array_map(function (Locale $locale) {
-                return $locale->getCode();
-            }, $this->localeDataloader->__invoke($viewer));
+            $availableLocales = array_map(
+                fn (Locale $locale) => $locale->getCode(),
+                $this->localeDataloader->__invoke($viewer)
+            );
 
             if ($request->cookies && $request->cookies->has('locale')) {
                 $chosenLocale = $request->cookies->get('locale');

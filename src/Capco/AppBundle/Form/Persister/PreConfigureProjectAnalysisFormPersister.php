@@ -37,9 +37,10 @@ class PreConfigureProjectAnalysisFormPersister
         }
 
         $unfavourableStatus = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $analysisStep, $input['unfavourableStatuses']);
-        $input['unfavourableStatuses'] = array_map(function ($unfavourableStatus) {
-            return $unfavourableStatus->getId();
-        }, $unfavourableStatus);
+        $input['unfavourableStatuses'] = array_map(
+            fn ($unfavourableStatus) => $unfavourableStatus->getId(),
+            $unfavourableStatus
+        );
 
         $favourableStatuses = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $analysisStep, [$input['favourableStatus']]);
         if ($favourableStatuses) {

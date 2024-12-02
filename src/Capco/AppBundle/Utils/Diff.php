@@ -12,26 +12,17 @@ class Diff
      */
     public static function fromCollectionsWithId(Collection $a, Collection $b): Collection
     {
-        $withId = static function ($entity) {
-            return \is_array($entity) ? isset($entity['id']) : (bool) $entity->getId();
-        };
-        $getId = static function ($entity) {
-            return \is_array($entity) ? $entity['id'] : $entity->getId();
-        };
+        $withId = static fn ($entity) => \is_array($entity) ? isset($entity['id']) : (bool) $entity->getId();
+        $getId = static fn ($entity) => \is_array($entity) ? $entity['id'] : $entity->getId();
         $idsFromA = $a->filter($withId)->map($getId);
         $idsFromB = $b->filter($withId)->map($getId);
         $deletedIds = array_diff($idsFromA->toArray(), $idsFromB->toArray());
 
         return new ArrayCollection(
             array_values(
-                array_map(static function ($id) use ($a) {
-                    return $a
-                        ->filter(static function ($entity) use ($id) {
-                            return (\is_array($entity) ? $entity['id'] : $entity->getId()) === $id;
-                        })
-                        ->first()
-                    ;
-                }, $deletedIds)
+                array_map(static fn ($id) => $a
+                    ->filter(static fn ($entity) => (\is_array($entity) ? $entity['id'] : $entity->getId()) === $id)
+                    ->first(), $deletedIds)
             )
         );
     }

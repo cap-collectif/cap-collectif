@@ -28,9 +28,7 @@ class HomePageProjectsSectionConfigurationProjectsResolver implements QueryInter
             try {
                 $arguments = $section
                     ->getSectionProjects()
-                    ->map(function ($sectionProject) {
-                        return $sectionProject->getProject();
-                    })
+                    ->map(fn ($sectionProject) => $sectionProject->getProject())
                     ->toArray()
                 ;
             } catch (\RuntimeException $exception) {

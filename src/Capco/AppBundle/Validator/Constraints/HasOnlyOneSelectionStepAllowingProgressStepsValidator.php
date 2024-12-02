@@ -20,19 +20,13 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
             $steps =
                 0 === $value->count()
                     ? $value
-                    : $value->filter(function ($pas) {
-                        return null !== $pas;
-                    });
+                    : $value->filter(fn ($pas) => null !== $pas);
             $steps =
                 0 === $steps->count()
                     ? $steps
-                    : $steps->map(function (ProjectAbstractStep $pas) {
-                        return $pas->getStep();
-                    });
+                    : $steps->map(fn (ProjectAbstractStep $pas) => $pas->getStep());
         } else {
-            $steps = (new ArrayCollection($value))->filter(function ($pas) {
-                return null !== $pas;
-            });
+            $steps = (new ArrayCollection($value))->filter(fn ($pas) => null !== $pas);
         }
 
         if ($this->hasMoreThanOneSelectionStepAllowingProgressSteps($steps)) {
@@ -52,9 +46,7 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidator extends ConstraintVa
     {
         return $steps->count() > 0
             && $steps
-                ->filter(function (?AbstractStep $step) {
-                    return $step && $step->isSelectionStep() && $step->isAllowingProgressSteps();
-                })
+                ->filter(fn (?AbstractStep $step) => $step && $step->isSelectionStep() && $step->isAllowingProgressSteps())
                 ->count() > 1;
     }
 }

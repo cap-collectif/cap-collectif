@@ -440,12 +440,10 @@ class Opinion implements OpinionContributionInterface, DisplayableInBOInterface,
         $iterator = $this->appendices->getIterator();
         $appendicesArray = iterator_to_array($iterator);
 
-        usort($appendicesArray, function ($a, $b) {
-            return $this->getPositionForAppendixType($a->getAppendixType()) <
-                $this->getPositionForAppendixType($b->getAppendixType())
-                ? -1
-                : 1;
-        });
+        usort($appendicesArray, fn ($a, $b) => $this->getPositionForAppendixType($a->getAppendixType()) <
+            $this->getPositionForAppendixType($b->getAppendixType())
+            ? -1
+            : 1);
 
         return $appendicesArray;
     }

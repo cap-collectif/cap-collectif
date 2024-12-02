@@ -183,11 +183,7 @@ class StepAdmin extends CapcoAdmin
                         // And we set in the backend the correct position for the consultation, based on the user order
                         $consultation = $step
                             ->getConsultations()
-                            ->filter(static function (Consultation $c) use (
-                                $normalizedConsultation
-                            ) {
-                                return $c->getId() === $normalizedConsultation->getId();
-                            })
+                            ->filter(static fn (Consultation $c) => $c->getId() === $normalizedConsultation->getId())
                             ->first()
                         ;
                         /** @var Consultation $consultation */
@@ -207,9 +203,7 @@ class StepAdmin extends CapcoAdmin
                 ->add('consultations', ModelAutocompleteType::class, [
                     'multiple' => true,
                     'property' => 'title',
-                    'to_string_callback' => static function (Consultation $entity) {
-                        return $entity->getTitle();
-                    },
+                    'to_string_callback' => static fn (Consultation $entity) => $entity->getTitle(),
                     'callback' => static function (AdminInterface $admin, $property, $value) {
                         $datagrid = $admin->getDatagrid();
                         $queryBuilder = $datagrid->getQuery();

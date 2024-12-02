@@ -61,12 +61,10 @@ class AuthenticationListenerSpec extends ObjectBehavior
         ;
 
         $em->persist(
-            Argument::that(function ($userConnection) {
-                return false === $userConnection->isSuccess()
-                    && 'lbrunet@cap-collectif.com' === $userConnection->getEmail()
-                    && '192.168.64.2' === $userConnection->getIpAddress()
-                    && 'TEST' === $userConnection->getNavigator();
-            })
+            Argument::that(fn ($userConnection) => false === $userConnection->isSuccess()
+                && 'lbrunet@cap-collectif.com' === $userConnection->getEmail()
+                && '192.168.64.2' === $userConnection->getIpAddress()
+                && 'TEST' === $userConnection->getNavigator())
         )->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
@@ -136,13 +134,11 @@ class AuthenticationListenerSpec extends ObjectBehavior
         ;
 
         $em->persist(
-            Argument::that(function ($userConnection): bool {
-                return true === $userConnection instanceof UserConnection
-                    && $userConnection->isSuccess()
-                    && 'lbrunet@cap-collectif.com' === $userConnection->getEmail()
-                    && '192.168.64.2' === $userConnection->getIpAddress()
-                    && 'TEST' === $userConnection->getNavigator();
-            })
+            Argument::that(fn ($userConnection): bool => true === $userConnection instanceof UserConnection
+                && $userConnection->isSuccess()
+                && 'lbrunet@cap-collectif.com' === $userConnection->getEmail()
+                && '192.168.64.2' === $userConnection->getIpAddress()
+                && 'TEST' === $userConnection->getNavigator())
         )->shouldBeCalled();
 
         $session->getId()->willReturn('sessionId');

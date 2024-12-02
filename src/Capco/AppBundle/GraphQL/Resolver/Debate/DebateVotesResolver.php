@@ -26,19 +26,15 @@ class DebateVotesResolver implements QueryInterface
     ): ConnectionInterface {
         $filters = $this->getFilters($args, $viewer);
         $orderBy = $args->offsetGet('orderBy');
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $debate,
-            $filters,
-            $orderBy
-        ) {
-            return $this->voteSearch->searchDebateVote(
+        $paginator = new ElasticsearchPaginator(
+            fn (?string $cursor, int $limit) => $this->voteSearch->searchDebateVote(
                 $debate,
                 $filters,
                 $limit,
                 $orderBy,
                 $cursor
-            );
-        });
+            )
+        );
 
         return $paginator->auto($args);
     }

@@ -24,9 +24,7 @@ class QuestionnaireParticipantsResolver implements QueryInterface
             );
         }
 
-        $paginator = new Paginator(function () {
-            return [];
-        });
+        $paginator = new Paginator(fn () => []);
 
         return $paginator->auto($args, $totalCount);
     }

@@ -76,14 +76,10 @@ class StepSlugSubscriber implements EventSubscriberInterface
         $allSteps = $project->getRealSteps();
 
         if ($step->getId()) {
-            $allSteps = array_filter($allSteps, function ($existingStep) use ($step) {
-                return $existingStep->getId() !== $step->getId();
-            });
+            $allSteps = array_filter($allSteps, fn ($existingStep) => $existingStep->getId() !== $step->getId());
         }
 
-        $existingStepSlugs = array_map(function ($step) {
-            return $step->getSlug();
-        }, $allSteps);
+        $existingStepSlugs = array_map(fn ($step) => $step->getSlug(), $allSteps);
 
         $counter = 1;
 

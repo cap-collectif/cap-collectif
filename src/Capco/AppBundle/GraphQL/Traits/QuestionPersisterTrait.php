@@ -121,9 +121,7 @@ trait QuestionPersisterTrait
                 array_splice($arguments['questions'], $position, 0, [$deletedQuestion]);
             }
 
-            $questions = array_map(static function (array $question) {
-                return $question['question'];
-            }, $arguments['questions']);
+            $questions = array_map(static fn (array $question) => $question['question'], $arguments['questions']);
 
             $realArgumentQuestion = array_reduce($questions, static function (
                 ?array $acc,
@@ -138,9 +136,7 @@ trait QuestionPersisterTrait
 
             // Handle Question's logic jumps deletions
             if (isset($realArgumentQuestion['jumps'])) {
-                $argumentsJumpsIds = array_map(static function (array $jump) {
-                    return $jump['id'] ?? null;
-                }, $realArgumentQuestion['jumps']);
+                $argumentsJumpsIds = array_map(static fn (array $jump) => $jump['id'] ?? null, $realArgumentQuestion['jumps']);
                 foreach ($realQuestion->getJumps() as $jumpPosition => $jump) {
                     // Handle jump deletion when a user delete a logic jump, and the conditions are handled automatically by
                     // doctrine by using the cascade remove and orphanRemoval=true
@@ -160,9 +156,7 @@ trait QuestionPersisterTrait
                         );
                     } elseif (isset($realArgumentQuestion['jumps'][$jumpPosition]['conditions'])) {
                         // Otherwise, we want to remove a condition in a logic jump
-                        $argumentsJumpConditionsIds = array_map(static function (array $condition) {
-                            return $condition['id'] ?? null;
-                        }, $realArgumentQuestion['jumps'][$jumpPosition]['conditions']);
+                        $argumentsJumpConditionsIds = array_map(static fn (array $condition) => $condition['id'] ?? null, $realArgumentQuestion['jumps'][$jumpPosition]['conditions']);
                         foreach ($jump->getConditions() as $conditionPosition => $condition) {
                             if (
                                 false ===

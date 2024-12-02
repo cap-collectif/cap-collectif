@@ -100,9 +100,7 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_add' => true,
                 'allow_delete' => true,
                 'by_reference' => false,
-                'delete_empty' => function (?ProposalCategory $category = null) {
-                    return null === $category || 'NULL' === $category->getName();
-                },
+                'delete_empty' => fn (?ProposalCategory $category = null) => null === $category || 'NULL' === $category->getName(),
             ])
 
             ->add('questions', CollectionType::class, [
@@ -110,13 +108,9 @@ class ProposalFormUpdateType extends AbstractType
                 'allow_delete' => true,
                 'entry_type' => QuestionnaireAbstractQuestionType::class,
                 'by_reference' => false,
-                'delete_empty' => function (
-                    ?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null
-                ) {
-                    return null === $questionnaireAbstractQuestion
-                        || null === $questionnaireAbstractQuestion->getQuestion()
-                        || empty($questionnaireAbstractQuestion->getQuestion()->getTitle());
-                },
+                'delete_empty' => fn (?QuestionnaireAbstractQuestion $questionnaireAbstractQuestion = null) => null === $questionnaireAbstractQuestion
+                    || null === $questionnaireAbstractQuestion->getQuestion()
+                    || empty($questionnaireAbstractQuestion->getQuestion()->getTitle()),
             ])
 
             ->add('allowAknowledge', CheckboxType::class)

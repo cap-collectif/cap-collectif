@@ -24,9 +24,7 @@ class ReplyAnonymousNormalizerTest extends TestCase
         $this->normalizer = new ReplyAnonymousNormalizer($translator);
 
         $translator->method('trans')
-            ->willReturnCallback(function ($key) {
-                return $key;
-            })
+            ->willReturnCallback(fn ($key) => $key)
         ;
     }
 

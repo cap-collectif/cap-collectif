@@ -67,9 +67,7 @@ class ProposalStepVotesResolver extends AbstractExtension
 
     public function getCreditsLeftByStepIdForProjectAndUser(Project $project, User $user)
     {
-        $steps = $project->getSteps()->map(function ($step) {
-            return $step->getStep();
-        });
+        $steps = $project->getSteps()->map(fn ($step) => $step->getStep());
         $creditsLeftByStepId = [];
         foreach ($steps as $step) {
             if (

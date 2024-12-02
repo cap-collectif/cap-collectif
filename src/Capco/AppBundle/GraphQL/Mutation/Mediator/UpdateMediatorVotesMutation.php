@@ -145,9 +145,10 @@ class UpdateMediatorVotesMutation extends MediatorVotesMutation implements Mutat
         ?AbstractStep $step,
         Participant $participant
     ) {
-        $currentProposalsId = array_map(function ($vote) {
-            return GlobalId::toGlobalId('Proposal', $vote->getProposal()->getId());
-        }, $currentVotes);
+        $currentProposalsId = array_map(
+            fn ($vote) => GlobalId::toGlobalId('Proposal', $vote->getProposal()->getId()),
+            $currentVotes
+        );
 
         foreach ($updatedProposalsId as $updatedProposalId) {
             $isNewVote = !\in_array($updatedProposalId, $currentProposalsId);

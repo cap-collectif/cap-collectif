@@ -18,6 +18,7 @@ return RectorConfig::configure()
         'spec',
     ])
     ->withSkip([
+        'src/Capco/AppBundle/GraphQL/__generated__',
         ClassPropertyAssignToConstructorPromotionRector::class => [
             'src/Capco/AppBundle/Entity/ProposalSupervisor.php',
             'src/Capco/AppBundle/Entity/ProposalDecisionMaker.php',
@@ -37,5 +38,6 @@ return RectorConfig::configure()
     ->withSets([
         SetList::PHP_81,
         SetList::PHP_80,
+        SetList::PHP_74,
     ])
 ;

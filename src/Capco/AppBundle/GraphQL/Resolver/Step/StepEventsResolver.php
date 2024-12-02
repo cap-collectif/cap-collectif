@@ -27,18 +27,12 @@ class StepEventsResolver implements QueryInterface
 
         $events = $this->repository->getByStep($step, $options);
 
-        $events = array_filter($events, function (Event $event) {
-            return $event->isEnabledOrApproved();
-        });
+        $events = array_filter($events, fn (Event $event) => $event->isEnabledOrApproved());
 
         if ($isFuture) {
-            usort($events, function ($a, $b) {
-                return $a->getStartAt() <=> $b->getStartAt();
-            });
+            usort($events, fn ($a, $b) => $a->getStartAt() <=> $b->getStartAt());
         } else {
-            usort($events, function ($a, $b) {
-                return $b->getStartAt() <=> $a->getStartAt();
-            });
+            usort($events, fn ($a, $b) => $b->getStartAt() <=> $a->getStartAt());
         }
 
         $connection = $this->builder->connectionFromArray($events, $input);

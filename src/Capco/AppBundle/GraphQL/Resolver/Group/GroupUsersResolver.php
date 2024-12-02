@@ -22,19 +22,13 @@ class GroupUsersResolver implements QueryInterface
         }
         $consentInternalCommunication = $args['consentInternalCommunication'];
         $emailConfirmed = $args['emailConfirmed'];
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use (
+        $paginator = new Paginator(fn (?int $offset, ?int $limit) => $this->userRepository->getUsersInGroup(
             $group,
+            $offset,
+            $limit,
             $consentInternalCommunication,
             $emailConfirmed
-        ) {
-            return $this->userRepository->getUsersInGroup(
-                $group,
-                $offset,
-                $limit,
-                $consentInternalCommunication,
-                $emailConfirmed
-            );
-        });
+        ));
 
         $totalCount = $this->userRepository->countUsersInGroup(
             $group,

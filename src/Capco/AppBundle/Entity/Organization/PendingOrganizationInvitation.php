@@ -32,12 +32,12 @@ class PendingOrganizationInvitation implements Expirable, Invitation
      * @ORM\OneToOne(targetEntity="Capco\UserBundle\Entity\User")
      * @ORM\JoinColumn(name="user_id", nullable=true, referencedColumnName="id")
      */
-    protected ?User $user;
+    protected ?User $user = null;
 
     /**
      * @ORM\Column(type="string", nullable=true, name="email")
      */
-    protected ?string $email;
+    protected ?string $email = null;
 
     /**
      * @ORM\Column(type="string", nullable=false, name="token")

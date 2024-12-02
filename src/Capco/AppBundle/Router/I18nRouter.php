@@ -192,9 +192,7 @@ class I18nRouter extends \JMS\I18nRoutingBundle\Router\I18nRouter
                 if ($this->hostMap) {
                     // generate host maps
                     $hostMap = $this->hostMap;
-                    $availableHosts = array_map(function ($locale) use ($hostMap) {
-                        return $hostMap[$locale];
-                    }, $params['_locales']);
+                    $availableHosts = array_map(fn ($locale) => $hostMap[$locale], $params['_locales']);
 
                     $differentHost = true;
                     foreach ($availableHosts as $host) {

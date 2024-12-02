@@ -21,13 +21,12 @@ class UserInvitationsAvailabilitySearchQueryResolver implements QueryInterface
     {
         $emails = $args->offsetGet('emails');
         $existingUsers = $this->userRepository->findBy(['email' => $emails]);
-        $nonAvailableUsersEmails = array_map(static function (User $user) {
-            return $user->getEmail();
-        }, $existingUsers);
+        $nonAvailableUsersEmails = array_map(static fn (User $user) => $user->getEmail(), $existingUsers);
         $existingInvitations = $this->userInviteRepository->findBy(['email' => $emails]);
-        $nonAvailableInvitationEmails = array_map(static function (UserInvite $userInvite) {
-            return $userInvite->getEmail();
-        }, $existingInvitations);
+        $nonAvailableInvitationEmails = array_map(
+            static fn (UserInvite $userInvite) => $userInvite->getEmail(),
+            $existingInvitations
+        );
 
         $payload = [];
 

@@ -21,9 +21,7 @@ abstract class AbstractFakePaginatedResolver extends AbstractFakeResolver
      */
     protected function getPaginated(string $class, Argument $args): ConnectionInterface
     {
-        $paginator = new Paginator(function (int $offset, int $limit) use ($class) {
-            return $this->getFromClass($class, $limit);
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => $this->getFromClass($class, $limit));
 
         return $paginator->auto($args, 42);
     }

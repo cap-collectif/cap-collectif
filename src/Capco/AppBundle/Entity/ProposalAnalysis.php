@@ -152,9 +152,7 @@ class ProposalAnalysis implements Timestampable, \Stringable
 
         $users = new ArrayCollection([$supervisor, $decisionMaker, $this->updatedBy]);
 
-        return $users->filter(function ($user) {
-            return null !== $user;
-        });
+        return $users->filter(fn ($user) => null !== $user);
     }
 
     public function addComment(Comment $comment): self

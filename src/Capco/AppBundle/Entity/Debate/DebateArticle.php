@@ -22,7 +22,7 @@ class DebateArticle
      * @Gedmo\Timestampable(on="change", field={"url"})
      * @ORM\Column(name="updated_at", type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $updatedAt;
+    private ?\DateTimeInterface $updatedAt = null;
 
     /**
      * @ORM\Column(type="string", length=255)
@@ -57,13 +57,13 @@ class DebateArticle
     /**
      * @ORM\Column(name="crawled_at", type="datetime", nullable=true)
      */
-    private ?\DateTimeInterface $crawledAt;
+    private ?\DateTimeInterface $crawledAt = null;
 
     /**
      * @ORM\ManyToOne(targetEntity=Debate::class, inversedBy="articles")
      * @ORM\JoinColumn(nullable=false, onDelete="CASCADE")
      */
-    private ?Debate $debate;
+    private ?Debate $debate = null;
 
     public function __clone()
     {

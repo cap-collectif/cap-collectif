@@ -91,13 +91,11 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll(
-                Argument::that(function ($connections): bool {
-                    return 2 === \count($connections)
-                        && 1 === $connections[0]->totalCount
-                        && 3 === $connections[0]->totalPointsCount
-                        && 2 === $connections[1]->totalCount
-                        && 7 === $connections[1]->totalPointsCount;
-                })
+                Argument::that(fn ($connections): bool => 2 === \count($connections)
+                    && 1 === $connections[0]->totalCount
+                    && 3 === $connections[0]->totalPointsCount
+                    && 2 === $connections[1]->totalCount
+                    && 7 === $connections[1]->totalPointsCount)
             )
             ->shouldBeCalled()
             ->willReturn($promise)
@@ -150,13 +148,11 @@ class ProposalVotesDataLoaderSpec extends ObjectBehavior
         $promise = new Promise(null, new SyncPromiseAdapter());
         $promiseFactory
             ->createAll(
-                Argument::that(function ($connections): bool {
-                    return 2 === \count($connections)
-                        && 1 === $connections[0]->totalCount
-                        && 3 === $connections[0]->totalPointsCount
-                        && 2 === $connections[1]->totalCount
-                        && 7 === $connections[1]->totalPointsCount;
-                })
+                Argument::that(fn ($connections): bool => 2 === \count($connections)
+                    && 1 === $connections[0]->totalCount
+                    && 3 === $connections[0]->totalPointsCount
+                    && 2 === $connections[1]->totalCount
+                    && 7 === $connections[1]->totalPointsCount)
             )
             ->shouldBeCalled()
             ->willReturn($promise)

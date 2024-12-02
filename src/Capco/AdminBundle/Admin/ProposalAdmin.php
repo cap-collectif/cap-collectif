@@ -190,9 +190,7 @@ class ProposalAdmin extends AbstractAdmin
                 'field_options' => [
                     'property' => 'email,username',
                     'label' => 'admin.fields.proposal.updateAuthor',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('district', null, ['label' => 'proposal.district'])
@@ -200,18 +198,14 @@ class ProposalAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'global.author',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('likers', ModelAutocompleteFilter::class, [
                 'field_options' => [
                     'label' => 'admin.fields.proposal.likers',
                     'property' => 'email,username',
-                    'to_string_callback' => function ($entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('updatedAt', null, ['label' => 'admin.fields.proposal.updated_at'])

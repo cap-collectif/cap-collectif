@@ -25,19 +25,15 @@ class DebateArgumentsResolver implements QueryInterface
         $filters = self::getFilters($args, $viewer);
         $orderBy = self::getOrderBy($args);
 
-        $paginator = new ElasticsearchPaginator(function (?string $cursor, int $limit) use (
-            $debate,
-            $filters,
-            $orderBy
-        ) {
-            return $this->debateSearch->searchDebateArguments(
+        $paginator = new ElasticsearchPaginator(
+            fn (?string $cursor, int $limit) => $this->debateSearch->searchDebateArguments(
                 $debate,
                 $limit,
                 $orderBy,
                 $filters,
                 $cursor
-            );
-        });
+            )
+        );
 
         return $paginator->auto($args);
     }

@@ -83,9 +83,7 @@ class OpinionVersionAdmin extends AbstractAdmin
                 'field_options' => [
                     'label' => 'global.author',
                     'property' => 'email,username',
-                    'to_string_callback' => function (User $entity) {
-                        return $entity->getEmail() . ' - ' . $entity->getUsername();
-                    },
+                    'to_string_callback' => fn (User $entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
                 ],
             ])
             ->add('parent', null, ['label' => 'admin.fields.opinion_version.parent'])
@@ -158,9 +156,7 @@ class OpinionVersionAdmin extends AbstractAdmin
             ->add('author', ModelAutocompleteType::class, [
                 'label' => 'global.author',
                 'property' => 'username,email',
-                'to_string_callback' => function (User $entity) {
-                    return $entity->getEmail() . ' - ' . $entity->getUsername();
-                },
+                'to_string_callback' => fn (User $entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
             ])
             ->add('parent', ModelType::class, ['label' => 'admin.fields.opinion_version.parent'])
             ->add('body', CKEditorType::class, [

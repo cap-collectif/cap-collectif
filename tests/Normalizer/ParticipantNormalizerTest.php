@@ -31,9 +31,7 @@ class ParticipantNormalizerTest extends TestCase
         $this->participantNormalizer = new ParticipantNormalizer($userRolesTextResolver, $userUrlResolver, $translator);
 
         $translator->method('trans')
-            ->willReturnCallback(function ($key) {
-                return $key;
-            })
+            ->willReturnCallback(fn ($key) => $key)
         ;
     }
 

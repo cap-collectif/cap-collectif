@@ -70,9 +70,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
                 __METHOD__ .
                     'called for keys : ' .
                     var_export(
-                        array_map(function ($key) {
-                            return $this->serializeKey($key);
-                        }, $keys),
+                        array_map(fn ($key) => $this->serializeKey($key), $keys),
                         true
                     )
             );
@@ -99,9 +97,7 @@ class CommentableCommentsDataLoader extends BatchDataLoader
         foreach ($entityIdMaps as $entityLinker) {
             $type = $entityLinker->getType();
             $entityKeys = $entityLinker->getEntities();
-            $batchCommentableIds = array_map(function ($key) {
-                return $key['commentable']->getId();
-            }, $entityKeys);
+            $batchCommentableIds = array_map(fn ($key) => $key['commentable']->getId(), $entityKeys);
 
             $totalCounts[$type] = $entityLinker
                 ->getRepository()
@@ -134,16 +130,12 @@ class CommentableCommentsDataLoader extends BatchDataLoader
             //of the same type.
             //We have to do it for the entities...
             $entitiesForKey = array_values(
-                array_filter($commentables[$type], function ($commentable) use ($key, $type) {
-                    return $this->getIdAccordingToType($type, $commentable) ===
-                        $key['commentable']->getId();
-                })
+                array_filter($commentables[$type], fn ($commentable) => $this->getIdAccordingToType($type, $commentable) ===
+                    $key['commentable']->getId())
             );
             DataLoaderUtils::getAfterOffset($entitiesForKey, $key);
             DataLoaderUtils::getBeforeOffset($entitiesForKey, $key);
-            $paginator = new Paginator(function (int $offset, int $limit) use ($entitiesForKey) {
-                return $entitiesForKey ?: [];
-            });
+            $paginator = new Paginator(fn (int $offset, int $limit) => $entitiesForKey ?: []);
             //... for the totalCount...
             $totalCountKey = array_search(
                 $key['commentable']->getId(),

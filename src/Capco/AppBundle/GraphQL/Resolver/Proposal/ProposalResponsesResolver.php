@@ -50,9 +50,7 @@ class ProposalResponsesResolver implements QueryInterface
         $iterator = $responses->getIterator();
         $responsesArray = iterator_to_array($iterator);
 
-        usort($responsesArray, function ($a, $b) {
-            return $a->getQuestion()->getPosition() - $b->getQuestion()->getPosition();
-        });
+        usort($responsesArray, fn ($a, $b) => $a->getQuestion()->getPosition() - $b->getQuestion()->getPosition());
 
         return $responsesArray;
     }

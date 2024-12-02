@@ -193,10 +193,8 @@ class ElasticaToDoctrineTransformer
     {
         $propertyAccessor = $this->propertyAccessor;
 
-        return function ($a, $b) use ($idPos, $identifierPath, $propertyAccessor) {
-            return $idPos[(string) $propertyAccessor->getValue($a, $identifierPath)] >
-                $idPos[(string) $propertyAccessor->getValue($b, $identifierPath)];
-        };
+        return fn ($a, $b) => $idPos[(string) $propertyAccessor->getValue($a, $identifierPath)] >
+            $idPos[(string) $propertyAccessor->getValue($b, $identifierPath)];
     }
 
     private function getIdentifierField()

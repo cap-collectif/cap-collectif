@@ -76,9 +76,7 @@ class ProposalRevisionNotifier extends BaseNotifier
             $proposal,
             $revisedAt
         );
-        $ids = array_map(function ($user) {
-            return $user['assignedUser'];
-        }, $usersToSendNotification);
+        $ids = array_map(fn ($user) => $user['assignedUser'], $usersToSendNotification);
         $usersToSendNotification = $this->userRepository->findById($ids);
 
         foreach ($usersToSendNotification as $user) {

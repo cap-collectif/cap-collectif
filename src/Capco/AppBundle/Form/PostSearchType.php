@@ -27,13 +27,10 @@ class PostSearchType extends AbstractType
                 'choice_label' => 'translate.title',
                 'label' => 'global.theme',
                 'translation_domain' => 'CapcoAppBundle',
-                'query_builder' => function (ThemeRepository $tr) {
-                    return $tr
-                        ->createQueryBuilder('t')
-                        ->where('t.isEnabled = :enabled')
-                        ->setParameter('enabled', true)
-                    ;
-                },
+                'query_builder' => fn (ThemeRepository $tr) => $tr
+                    ->createQueryBuilder('t')
+                    ->where('t.isEnabled = :enabled')
+                    ->setParameter('enabled', true),
                 'placeholder' => 'global.select_themes',
                 'attr' => ['onchange' => 'this.form.submit()'],
             ]);
@@ -45,15 +42,12 @@ class PostSearchType extends AbstractType
             'choice_label' => 'title',
             'label' => 'global.participative.project.label',
             'translation_domain' => 'CapcoAppBundle',
-            'query_builder' => function (ProjectRepository $cr) {
-                return $cr
-                    ->createQueryBuilder('c')
-                    ->join('c.posts', 'p')
-                    ->where('c.visibility = :visibility')
-                    ->andWhere('p.displayedOnBlog = true')
-                    ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC)
-                    ;
-            },
+            'query_builder' => fn (ProjectRepository $cr) => $cr
+                ->createQueryBuilder('c')
+                ->join('c.posts', 'p')
+                ->where('c.visibility = :visibility')
+                ->andWhere('p.displayedOnBlog = true')
+                ->setParameter('visibility', ProjectVisibilityMode::VISIBILITY_PUBLIC),
             'placeholder' => 'global.all.projects',
             'attr' => ['onchange' => 'this.form.submit()'],
         ]);

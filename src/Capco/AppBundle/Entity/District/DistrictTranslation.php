@@ -31,7 +31,7 @@ class DistrictTranslation implements Translation
      * @Gedmo\Slug(fields={"name"}, updatable=false, unique=true)
      * @ORM\Column(length=255)
      */
-    protected ?string $slug;
+    protected ?string $slug = null;
 
     /**
      * @ORM\Column(name="name", type="string", length=255)

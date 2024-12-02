@@ -26,15 +26,13 @@ class FooterSocialNetworksResolver
     {
         $pages = $this->menuItemRepository->getPublishedFooterPages();
 
-        return array_map(function ($page) {
-            return [
-                'name' => $page->getTitle(),
-                'url' => $this->menuItemResolver->getMenuUrl(
-                    $page,
-                    $this->requestStack->getCurrentRequest()
-                ),
-            ];
-        }, $pages);
+        return array_map(fn ($page) => [
+            'name' => $page->getTitle(),
+            'url' => $this->menuItemResolver->getMenuUrl(
+                $page,
+                $this->requestStack->getCurrentRequest()
+            ),
+        ], $pages);
     }
 
     public static function generateFooterLegalCacheKey(string $locale): string

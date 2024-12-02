@@ -24,9 +24,9 @@ class UserCommentVotesResolver implements QueryInterface
             $args = new Argument(['first' => 100]);
         }
 
-        $paginator = new Paginator(function (?int $offset, ?int $limit) use ($user) {
-            return $this->commentVoteRepository->findAllByVoter($user, $limit, $offset);
-        });
+        $paginator = new Paginator(
+            fn (?int $offset, ?int $limit) => $this->commentVoteRepository->findAllByVoter($user, $limit, $offset)
+        );
 
         $totalCount = $this->commentVoteRepository->countAllByVoter($user);
 

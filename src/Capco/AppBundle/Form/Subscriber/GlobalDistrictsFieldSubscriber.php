@@ -36,9 +36,7 @@ class GlobalDistrictsFieldSubscriber implements EventSubscriberInterface
         $districtIds = $form
             ->get('districts')
             ->getNormData()
-            ->map(static function (GlobalDistrict $district) {
-                return $district->getId();
-            })
+            ->map(static fn (GlobalDistrict $district) => $district->getId())
             ->toArray()
         ;
         $this->persister->persist($districtIds, $project);

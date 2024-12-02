@@ -106,7 +106,7 @@ class Section implements Translatable, SonataTranslatableInterface, \Stringable
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Steps\AbstractStep")
      * @ORM\JoinColumn(name="step_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
      */
-    protected ?AbstractStep $step;
+    protected ?AbstractStep $step = null;
 
     /**
      * @ORM\Column(name="type", type="string", length=255)
@@ -169,7 +169,7 @@ class Section implements Translatable, SonataTranslatableInterface, \Stringable
     /**
      * @ORM\Column(name="associated_features", type="simple_array", nullable=true)
      */
-    private ?array $associatedFeatures;
+    private ?array $associatedFeatures = null;
 
     /**
      * @ORM\OneToMany(targetEntity=SectionProject::class, mappedBy="section", cascade={"persist"}, orphanRemoval=true)
@@ -186,12 +186,12 @@ class Section implements Translatable, SonataTranslatableInterface, \Stringable
     /**
      * @ORM\Column(name="center_latitude", type="float", nullable=true)
      */
-    private ?float $centerLatitude;
+    private ?float $centerLatitude = null;
 
     /**
      * @ORM\Column(name="center_longitude", type="float", nullable=true)
      */
-    private ?float $centerLongitude;
+    private ?float $centerLongitude = null;
 
     /**
      * @ORM\Column(name="is_legend_enabled_on_image", type="boolean")

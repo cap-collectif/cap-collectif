@@ -36,9 +36,7 @@ class QueryVotesResolver implements QueryInterface
         $paperVotesCount = $this->proposalStepPaperVoteCounterRepository->countAll();
         $totalCount += $paperVotesCount;
 
-        $paginator = new Paginator(function (int $offset, int $limit) {
-            return [];
-        });
+        $paginator = new Paginator(fn (int $offset, int $limit) => []);
 
         $connection = $paginator->auto($args, $totalCount);
         $connection->setTotalCount($totalCount);

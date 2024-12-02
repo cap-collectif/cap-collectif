@@ -47,13 +47,9 @@ class ProposalAuthorDataLoader extends BatchDataLoader
 
     public function all(array $keys)
     {
-        $ids = array_map(function ($key) {
-            return $key['proposal']->getId();
-        }, $keys);
+        $ids = array_map(fn ($key) => $key['proposal']->getId(), $keys);
 
-        $authors = array_map(function ($key) {
-            return $this->resolve($key['proposal']);
-        }, $keys);
+        $authors = array_map(fn ($key) => $this->resolve($key['proposal']), $keys);
 
         // TO fix tests, disable batching
         // TODO restore this

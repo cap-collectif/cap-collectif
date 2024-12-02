@@ -135,9 +135,10 @@ class UpdateNewProjectMutation implements MutationInterface
 
         $previousDistricts = $project->getProjectDistrictPositionersIds();
 
-        $arguments['districts'] = array_map(function ($districtGlobalId) {
-            return GlobalId::fromGlobalId($districtGlobalId)['id'];
-        }, $arguments['districts']);
+        $arguments['districts'] = array_map(
+            fn ($districtGlobalId) => GlobalId::fromGlobalId($districtGlobalId)['id'],
+            $arguments['districts']
+        );
 
         $newDistricts = array_diff($arguments['districts'], $previousDistricts);
         if ($newDistricts) {
@@ -147,9 +148,10 @@ class UpdateNewProjectMutation implements MutationInterface
 
     public function handleSteps(&$arguments, Project $project, User $viewer, bool $hasDescription): void
     {
-        $stepIds = array_map(function ($stepId) {
-            return GlobalId::fromGlobalId($stepId)['id'] ?? $stepId;
-        }, $arguments['steps']);
+        $stepIds = array_map(
+            fn ($stepId) => GlobalId::fromGlobalId($stepId)['id'] ?? $stepId,
+            $arguments['steps']
+        );
 
         $steps = $project->getRealSteps();
         // the deletion of the presentation step is handled in handleDescription method, so we can filter it here
@@ -207,9 +209,7 @@ class UpdateNewProjectMutation implements MutationInterface
             return;
         }
 
-        $arguments['restrictedViewerGroups'] = array_map(function ($groupGlobalId) {
-            return GlobalId::fromGlobalId($groupGlobalId)['id'];
-        }, $arguments['restrictedViewerGroups']);
+        $arguments['restrictedViewerGroups'] = array_map(fn ($groupGlobalId) => GlobalId::fromGlobalId($groupGlobalId)['id'], $arguments['restrictedViewerGroups']);
     }
 
     private function notifyOnNewProjectInDistrict(array $globalDistrictsId, Project $project): void

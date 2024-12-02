@@ -23,19 +23,17 @@ class UserRolesTextResolver implements QueryInterface
 
     public function resolve(User $user): string
     {
-        $convertedRoles = array_map(function ($role) {
-            return str_replace(
-                [
-                    UserRole::ROLE_USER,
-                    UserRole::ROLE_ADMIN,
-                    UserRole::ROLE_PROJECT_ADMIN,
-                    UserRole::ROLE_SUPER_ADMIN,
-                    UserRole::ROLE_MEDIATOR,
-                ],
-                ['Utilisateur', 'Administrateur', 'Créateur de projet', 'Super Admin', 'Mediateur'],
-                $role
-            );
-        }, $user->getRoles());
+        $convertedRoles = array_map(fn ($role) => str_replace(
+            [
+                UserRole::ROLE_USER,
+                UserRole::ROLE_ADMIN,
+                UserRole::ROLE_PROJECT_ADMIN,
+                UserRole::ROLE_SUPER_ADMIN,
+                UserRole::ROLE_MEDIATOR,
+            ],
+            ['Utilisateur', 'Administrateur', 'Créateur de projet', 'Super Admin', 'Mediateur'],
+            $role
+        ), $user->getRoles());
 
         return implode('|', $convertedRoles);
     }

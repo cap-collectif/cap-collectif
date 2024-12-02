@@ -20,13 +20,10 @@ class ProposalFusionType extends AbstractType
                 'multiple' => true,
                 'class' => Proposal::class,
                 // We make sure that all childs are from the same proposalForm
-                'query_builder' => function (EntityRepository $er) use ($options) {
-                    return $er
-                        ->createQueryBuilder('p')
-                        ->where('p.proposalForm = :form')
-                        ->setParameter('form', $options['proposalForm'])
-                    ;
-                },
+                'query_builder' => fn (EntityRepository $er) => $er
+                    ->createQueryBuilder('p')
+                    ->where('p.proposalForm = :form')
+                    ->setParameter('form', $options['proposalForm']),
             ])
         ;
     }

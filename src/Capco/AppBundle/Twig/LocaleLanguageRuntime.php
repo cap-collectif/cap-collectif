@@ -22,16 +22,14 @@ class LocaleLanguageRuntime implements RuntimeExtensionInterface
 
         $publishedLocales = $this->localesDataloader->__invoke($viewer);
 
-        return array_map(function (Locale $locale) {
-            return [
-                'translationKey' => $this->translator->trans(
-                    $locale->getTraductionKey(),
-                    [],
-                    'CapcoAppBundle',
-                    $locale->getCode()
-                ),
-                'code' => $locale->getCode(),
-            ];
-        }, $publishedLocales);
+        return array_map(fn (Locale $locale) => [
+            'translationKey' => $this->translator->trans(
+                $locale->getTraductionKey(),
+                [],
+                'CapcoAppBundle',
+                $locale->getCode()
+            ),
+            'code' => $locale->getCode(),
+        ], $publishedLocales);
     }
 }

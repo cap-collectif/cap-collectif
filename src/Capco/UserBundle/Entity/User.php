@@ -623,16 +623,16 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
 
     public function getSupervisedProposals(): iterable
     {
-        return $this->supervisedProposals->map(static function (ProposalSupervisor $supervisor) {
-            return $supervisor->getProposal();
-        });
+        return $this->supervisedProposals->map(
+            static fn (ProposalSupervisor $supervisor) => $supervisor->getProposal()
+        );
     }
 
     public function getAllowedProposalAsDecisionMaker(): iterable
     {
-        return $this->proposals->map(static function (Proposal $proposal) {
-            return $proposal->getProposalDecisionMaker();
-        });
+        return $this->proposals->map(
+            static fn (Proposal $proposal) => $proposal->getProposalDecisionMaker()
+        );
     }
 
     public function addSupervisedProposal(ProposalSupervisor $proposalSupervisor): self
