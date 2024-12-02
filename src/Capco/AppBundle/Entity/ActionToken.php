@@ -51,7 +51,7 @@ class ActionToken extends AbstractUserToken
     private static function checkAction(string $action): void
     {
         if (!\in_array($action, self::AVAILABLE_ACTIONS)) {
-            throw new \Exception(__CLASS__ . " : {$action} is not a valid action");
+            throw new \Exception(self::class . " : {$action} is not a valid action");
         }
     }
 }

@@ -45,7 +45,7 @@ class DeletePostMutationSpec extends ObjectBehavior
 
         $globalIdResolver->resolve($id, $viewer)->willReturn($post);
 
-        $em->remove(Argument::type('Capco\\AppBundle\\Entity\\Post'))->shouldBeCalled();
+        $em->remove(Argument::type(Post::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
 
         $this->__invoke($arguments, $viewer)->shouldReturn([

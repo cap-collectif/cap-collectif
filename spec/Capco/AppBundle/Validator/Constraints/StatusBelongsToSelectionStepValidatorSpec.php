@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Selection;
 use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Validator\Constraints\StatusBelongsToSelectionStep;
+use Capco\AppBundle\Validator\Constraints\StatusBelongsToSelectionStepValidator;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
@@ -14,7 +15,7 @@ class StatusBelongsToSelectionStepValidatorSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\StatusBelongsToSelectionStepValidator');
+        $this->shouldHaveType(StatusBelongsToSelectionStepValidator::class);
     }
 
     public function it_should_add_violation_if_status_does_not_belong_to_selection_step(

@@ -231,7 +231,7 @@ class Client
 
     private function box($method, $defaultReturnValue = null, array $args = [])
     {
-        set_error_handler(__CLASS__ . '::handleInternalError');
+        set_error_handler(self::class . '::handleInternalError');
 
         try {
             $returnValue = \call_user_func_array([$this, $method], $args);

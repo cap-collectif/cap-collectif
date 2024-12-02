@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\OpinionVote;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Source;
+use Capco\AppBundle\Manager\ContributionManager;
 use Capco\UserBundle\Entity\User;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument as Arg;
@@ -26,7 +27,7 @@ class ContributionManagerSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Manager\ContributionManager');
+        $this->shouldHaveType(ContributionManager::class);
     }
 
     public function it_can_publish_contributions_of_a_user(

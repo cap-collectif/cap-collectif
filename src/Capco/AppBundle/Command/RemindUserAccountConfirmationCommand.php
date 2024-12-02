@@ -37,7 +37,7 @@ class RemindUserAccountConfirmationCommand extends Command
     {
         if (!$this->toggleManager->isActive('remind_user_account_confirmation')) {
             $this->logger->warning(
-                __CLASS__ . ': remind_user_account_confirmation feature toggle is not active.'
+                self::class . ': remind_user_account_confirmation feature toggle is not active.'
             );
 
             return 0;
@@ -55,7 +55,7 @@ class RemindUserAccountConfirmationCommand extends Command
                 );
             } else {
                 $this->logger->warning(
-                    __CLASS__ . ": User with id: {$user->getId}() doesn't have a valid email"
+                    self::class . ": User with id: {$user->getId}() doesn't have a valid email"
                 );
             }
 

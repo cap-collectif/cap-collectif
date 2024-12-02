@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\Validator\Constraints;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressSteps;
+use Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
@@ -14,7 +15,7 @@ class HasOnlyOneSelectionStepAllowingProgressStepsValidatorSpec extends ObjectBe
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\HasOnlyOneSelectionStepAllowingProgressStepsValidator');
+        $this->shouldHaveType(HasOnlyOneSelectionStepAllowingProgressStepsValidator::class);
     }
 
     public function it_should_add_violation_if_there_is_more_than_one_selection_allowing_progress_steps_in_a_given_project(

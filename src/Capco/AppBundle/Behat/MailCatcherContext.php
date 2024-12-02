@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Behat;
 use Alex\MailCatcher\Behat\MailCatcherContext as Base;
 use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Capco\AppBundle\Helper\EnvHelper;
+use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpKernel\KernelInterface;
 
 class MailCatcherContext extends Base implements KernelAwareContext
@@ -87,7 +88,7 @@ class MailCatcherContext extends Base implements KernelAwareContext
      */
     private function getCrawler(Message $message)
     {
-        if (!class_exists('Symfony\Component\DomCrawler\Crawler')) {
+        if (!class_exists(Crawler::class)) {
             throw new \RuntimeException('Can\'t crawl HTML: Symfony DomCrawler component is missing from autoloading.');
         }
 

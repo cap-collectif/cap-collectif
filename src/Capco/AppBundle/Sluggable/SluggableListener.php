@@ -8,6 +8,7 @@ use Doctrine\Persistence\ObjectManager;
 use Gedmo\Sluggable\Handler\SlugHandlerWithUniqueCallbackInterface;
 use Gedmo\Sluggable\Mapping\Event\SluggableAdapter;
 use Gedmo\Sluggable\SluggableListener as Base;
+use Gedmo\Sluggable\Util\Urlizer;
 use Gedmo\Tool\Wrapper\AbstractWrapper;
 
 /**
@@ -51,7 +52,7 @@ class SluggableListener extends Base
      *
      * @var callable
      */
-    private $urlizer = ['Gedmo\Sluggable\Util\Urlizer', 'urlize'];
+    private $urlizer = [Urlizer::class, 'urlize'];
 
     /**
      * List of inserted slugs for each object class.

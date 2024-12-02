@@ -20,7 +20,7 @@ class UserHasReplyResolver implements QueryInterface
         $user = $this->userRepository->findOneByEmail($args->offsetGet('login'));
 
         if (!$user) {
-            $this->logger->warning(__CLASS__ . ' : Could not find user.');
+            $this->logger->warning(self::class . ' : Could not find user.');
 
             return false;
         }

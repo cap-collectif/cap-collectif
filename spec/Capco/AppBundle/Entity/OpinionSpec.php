@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\Trashable;
+use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Model\Publishable;
 use PhpSpec\ObjectBehavior;
 
@@ -10,7 +11,7 @@ class OpinionSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Entity\Opinion');
+        $this->shouldHaveType(Opinion::class);
     }
 
     public function it_is_a_publishable()

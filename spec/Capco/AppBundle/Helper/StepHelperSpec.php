@@ -3,13 +3,14 @@
 namespace spec\Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Helper\StepHelper;
 use PhpSpec\ObjectBehavior;
 
 class StepHelperSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Helper\StepHelper');
+        $this->shouldHaveType(StepHelper::class);
     }
 
     public function it_returns_open_status(AbstractStep $step)

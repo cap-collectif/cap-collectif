@@ -3,6 +3,7 @@
 namespace Capco\UserBundle\Repository;
 
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Entity\Group;
 use Capco\AppBundle\Entity\MailingList;
 use Capco\AppBundle\Entity\Opinion;
@@ -1688,7 +1689,7 @@ class UserRepository extends EntityRepository
 
         $userIdsFromVotes = $this->createQueryBuilder('dv')
             ->select('DISTINCT voter.id')
-            ->from('Capco\AppBundle\Entity\Debate\DebateVote', 'vote')
+            ->from(DebateVote::class, 'vote')
             ->join('vote.debate', 'debate')
             ->join('vote.user', 'voter')
             ->where('debate = :debate')

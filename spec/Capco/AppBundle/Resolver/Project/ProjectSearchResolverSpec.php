@@ -5,6 +5,7 @@ namespace spec\Capco\AppBundle\Resolver\Project;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Resolver\Project\ProjectSearchParameters;
+use Capco\AppBundle\Resolver\Project\ProjectSearchResolver;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -18,7 +19,7 @@ class ProjectSearchResolverSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Resolver\Project\ProjectSearchResolver');
+        $this->shouldHaveType(ProjectSearchResolver::class);
     }
 
     public function it_should_get_an_array_of_all_projects_with_default_filters(

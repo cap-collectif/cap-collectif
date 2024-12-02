@@ -13,6 +13,7 @@ use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Repository\SelectionStepRepository;
 use Capco\AppBundle\Repository\ThemeRepository;
+use Capco\AppBundle\Resolver\ProjectStatsResolver;
 use Capco\UserBundle\Repository\UserTypeRepository;
 use GraphQL\Executor\Promise\Promise;
 use Overblog\PromiseAdapter\PromiseAdapterInterface;
@@ -51,7 +52,7 @@ class ProjectStatsResolverSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Resolver\ProjectStatsResolver');
+        $this->shouldHaveType(ProjectStatsResolver::class);
     }
 
     public function it_can_get_themes_with_proposals_count_for_step(

@@ -2,13 +2,14 @@
 
 namespace spec\Capco\AppBundle\Model;
 
+use Capco\AppBundle\Model\UserActivity;
 use PhpSpec\ObjectBehavior;
 
 class UserActivitySpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Model\UserActivity');
+        $this->shouldHaveType(UserActivity::class);
     }
 
     public function it_should_return_empty_array()

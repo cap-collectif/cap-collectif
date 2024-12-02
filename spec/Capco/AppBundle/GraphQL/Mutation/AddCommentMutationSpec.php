@@ -3,6 +3,9 @@
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Proposal;
+use Capco\AppBundle\Entity\ProposalComment;
+use Capco\AppBundle\Event\CommentChangedEvent;
+use Capco\AppBundle\Form\CommentType;
 use Capco\AppBundle\GraphQL\DataLoader\Commentable\CommentableCommentsDataLoader;
 use Capco\AppBundle\GraphQL\Mutation\AddCommentMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
@@ -136,12 +139,12 @@ class AddCommentMutationSpec extends ObjectBehavior
         $form->submit($formData, false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $formFactory
-            ->create('Capco\\AppBundle\\Form\\CommentType', Argument::any())
+            ->create(CommentType::class, Argument::any())
             ->willReturn($form)
         ;
         $arguments->getArrayCopy()->willReturn($formData);
         $commentable
-            ->addComment(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))
+            ->addComment(Argument::type(ProposalComment::class))
             ->willReturn($commentable)
         ;
         $viewer->isVip()->willReturn(false);
@@ -153,13 +156,13 @@ class AddCommentMutationSpec extends ObjectBehavior
         $viewer->isAdmin()->willReturn(true);
         $viewer->isProjectAdmin()->willReturn(false);
 
-        $em->persist(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))->shouldBeCalled();
+        $em->persist(Argument::type(ProposalComment::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         $commentableCommentsDataLoader->invalidate('123456')->shouldBeCalled();
         $dispatcher
             ->dispatch(
                 'capco.comment_changed',
-                Argument::type('Capco\\AppBundle\\Event\\CommentChangedEvent')
+                Argument::type(CommentChangedEvent::class)
             )
             ->shouldBeCalled()
         ;
@@ -191,12 +194,12 @@ class AddCommentMutationSpec extends ObjectBehavior
         $form->submit($formData, false)->willReturn(null);
         $form->isValid()->willReturn(true);
         $formFactory
-            ->create('Capco\\AppBundle\\Form\\CommentType', Argument::any())
+            ->create(CommentType::class, Argument::any())
             ->willReturn($form)
         ;
         $arguments->getArrayCopy()->willReturn($formData);
         $commentable
-            ->addComment(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))
+            ->addComment(Argument::type(ProposalComment::class))
             ->willReturn($commentable)
         ;
 
@@ -209,13 +212,13 @@ class AddCommentMutationSpec extends ObjectBehavior
         $manager->isActive(Manager::moderation_comment)->willReturn(true);
         $tokenGenerator->generateToken()->shouldBeCalledOnce();
 
-        $em->persist(Argument::type('Capco\\AppBundle\\Entity\\ProposalComment'))->shouldBeCalled();
+        $em->persist(Argument::type(ProposalComment::class))->shouldBeCalled();
         $em->flush()->shouldBeCalled();
         $commentableCommentsDataLoader->invalidate('123456')->shouldBeCalled();
         $dispatcher
             ->dispatch(
                 'capco.comment_changed',
-                Argument::type('Capco\\AppBundle\\Event\\CommentChangedEvent')
+                Argument::type(CommentChangedEvent::class)
             )
             ->shouldBeCalled()
         ;

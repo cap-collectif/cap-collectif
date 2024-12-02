@@ -3,6 +3,8 @@
 namespace spec\Capco\AppBundle\Helper;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventRegistration;
+use Capco\AppBundle\Helper\EventHelper;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
@@ -11,7 +13,7 @@ class EventHelperSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Helper\EventHelper');
+        $this->shouldHaveType(EventHelper::class);
     }
 
     public function it_knows_when_event_registration_are_possible(Event $event)
@@ -71,7 +73,7 @@ class EventHelperSpec extends ObjectBehavior
     {
         $event->getRegistrations()->willReturn(new ArrayCollection());
         $this->findUserRegistrationOrCreate($event, $user)->shouldReturnAnInstanceOf(
-            'Capco\AppBundle\Entity\EventRegistration'
+            EventRegistration::class
         );
     }
 }

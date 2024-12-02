@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Validator\Constraints\IsCollectOrSelectionStep;
+use Capco\AppBundle\Validator\Constraints\IsCollectOrSelectionStepValidator;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 
@@ -13,7 +14,7 @@ class IsCollectOrSelectionStepValidatorSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Validator\Constraints\IsCollectOrSelectionStepValidator');
+        $this->shouldHaveType(IsCollectOrSelectionStepValidator::class);
     }
 
     public function it_should_add_violation_if_step_is_consultation_step(

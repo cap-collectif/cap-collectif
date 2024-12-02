@@ -23,7 +23,7 @@ class ConsultationStepUserHasVoteResolver implements QueryInterface
         $user = $this->userRepo->findOneByEmail($args->offsetGet('login'));
 
         if (!$user) {
-            $this->logger->warning(__CLASS__ . ' : Could not find user.');
+            $this->logger->warning(self::class . ' : Could not find user.');
 
             return false;
         }

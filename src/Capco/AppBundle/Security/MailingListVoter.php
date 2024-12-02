@@ -31,7 +31,7 @@ class MailingListVoter extends AbstractOwnerableVoter
             self::CREATE => self::canCreate($viewer),
             self::VIEW => self::canView($subject, $viewer),
             self::DELETE => self::canDelete($subject, $viewer),
-            default => throw new \LogicException(__CLASS__ . ' : unknown attribute ' . $attribute),
+            default => throw new \LogicException(self::class . ' : unknown attribute ' . $attribute),
         };
     }
 

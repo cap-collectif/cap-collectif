@@ -83,7 +83,7 @@ class InviteOrganizationMemberMutation implements MutationInterface
                 )
             );
         } catch (\RuntimeException) {
-            $this->logger->error(__CLASS__ . ': could not publish to rabbitmq.');
+            $this->logger->error(self::class . ': could not publish to rabbitmq.');
         }
 
         return ['invitation' => $invitation];

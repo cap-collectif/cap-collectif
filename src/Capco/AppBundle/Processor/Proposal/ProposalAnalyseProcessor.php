@@ -88,27 +88,27 @@ class ProposalAnalyseProcessor implements ProcessorInterface
     private function isValid(array $jsonDecoded): bool
     {
         if (!isset($jsonDecoded['type'])) {
-            $this->logger->error(__CLASS__ . ' no type defined in message');
+            $this->logger->error(self::class . ' no type defined in message');
 
             return false;
         }
         if (!\in_array($jsonDecoded['type'], self::VALID_TYPES)) {
-            $this->logger->error(__CLASS__ . ' unknown type of message : ' . $jsonDecoded['type']);
+            $this->logger->error(self::class . ' unknown type of message : ' . $jsonDecoded['type']);
 
             return false;
         }
         if (!isset($jsonDecoded['proposalId'])) {
-            $this->logger->error(__CLASS__ . ' - no proposalId defined in message');
+            $this->logger->error(self::class . ' - no proposalId defined in message');
 
             return false;
         }
         if (!isset($jsonDecoded['date'])) {
-            $this->logger->error(__CLASS__ . ' - no date defined in message');
+            $this->logger->error(self::class . ' - no date defined in message');
 
             return false;
         }
         if (!isset($jsonDecoded['analysisId']) && self::TYPE_ANALYSIS === $jsonDecoded['type']) {
-            $this->logger->error(__CLASS__ . ' - no analysisId defined in message');
+            $this->logger->error(self::class . ' - no analysisId defined in message');
 
             return false;
         }
@@ -122,7 +122,7 @@ class ProposalAnalyseProcessor implements ProcessorInterface
         $proposal = $this->proposalRepository->find($jsonDecoded['proposalId']);
         if (null === $proposal) {
             $this->logger->error(
-                __CLASS__ . ' - Unable to find proposal with id: ' . $jsonDecoded['proposalId']
+                self::class . ' - Unable to find proposal with id: ' . $jsonDecoded['proposalId']
             );
         }
 
@@ -135,7 +135,7 @@ class ProposalAnalyseProcessor implements ProcessorInterface
         $analysis = $this->analysisRepository->find($jsonDecoded['analysisId']);
         if (null === $analysis) {
             $this->logger->error(
-                __CLASS__ . ' - Unable to find analysis with id: ' . $jsonDecoded['analysisId']
+                self::class . ' - Unable to find analysis with id: ' . $jsonDecoded['analysisId']
             );
         }
 
@@ -149,7 +149,7 @@ class ProposalAnalyseProcessor implements ProcessorInterface
         try {
             $date = new \DateTime($jsonDecoded['date']);
         } catch (\Exception) {
-            $this->logger->error(__CLASS__ . ' - invalid date : ' . $jsonDecoded['date']);
+            $this->logger->error(self::class . ' - invalid date : ' . $jsonDecoded['date']);
         }
 
         return $date;

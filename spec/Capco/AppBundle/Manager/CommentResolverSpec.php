@@ -3,6 +3,8 @@
 namespace spec\Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\EventComment;
+use Capco\AppBundle\Manager\CommentResolver;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\UrlResolver;
 use Doctrine\ORM\EntityManager;
@@ -18,12 +20,12 @@ class CommentResolverSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Manager\CommentResolver');
+        $this->shouldHaveType(CommentResolver::class);
     }
 
     public function it_can_create_comment_from_object_type()
     {
-        $this->createCommentForType('Event')->shouldReturnAnInstanceOf('Capco\AppBundle\Entity\EventComment');
+        $this->createCommentForType('Event')->shouldReturnAnInstanceOf(EventComment::class);
     }
 
     public function it_should_get_object_depending_on_type(EntityManager $em, Router $router, UrlResolver $urlResolver, EventRepository $eventRepo, Event $event)

@@ -3,6 +3,7 @@
 namespace spec\Capco\UserBundle\Entity;
 
 use Capco\AppBundle\Entity\Opinion;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use PhpSpec\ObjectBehavior;
 
@@ -10,7 +11,7 @@ class UserSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\UserBundle\Entity\User');
+        $this->shouldHaveType(User::class);
     }
 
     public function it_can_return_contributions(Opinion $opinion)

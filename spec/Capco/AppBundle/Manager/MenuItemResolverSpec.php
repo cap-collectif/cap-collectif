@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Manager;
 
 use Capco\AppBundle\Cache\RedisCache;
+use Capco\AppBundle\Manager\MenuItemResolver;
 use Capco\AppBundle\Repository\MenuItemRepository;
 use Capco\AppBundle\Toggle\Manager;
 use PhpSpec\ObjectBehavior;
@@ -25,6 +26,6 @@ class MenuItemResolverSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Manager\MenuItemResolver');
+        $this->shouldHaveType(MenuItemResolver::class);
     }
 }

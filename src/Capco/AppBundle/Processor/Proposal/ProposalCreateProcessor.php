@@ -21,7 +21,7 @@ class ProposalCreateProcessor implements ProcessorInterface
 
         if (!$proposal) {
             $this->logger->error(
-                __CLASS__ . 'Unable to find proposal with id: ' . $json['proposalId']
+                self::class . 'Unable to find proposal with id: ' . $json['proposalId']
             );
 
             return false;

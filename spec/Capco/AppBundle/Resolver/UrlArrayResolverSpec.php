@@ -4,6 +4,7 @@ namespace spec\Capco\AppBundle\Resolver;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Resolver\UrlArrayResolver;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Routing\Router;
 
@@ -16,7 +17,7 @@ class UrlArrayResolverSpec extends ObjectBehavior
 
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Resolver\UrlArrayResolver');
+        $this->shouldHaveType(UrlArrayResolver::class);
     }
 
     public function it_should_generate_a_string_route_for_a_proposal(AbstractStep $step, Project $project, Router $router)

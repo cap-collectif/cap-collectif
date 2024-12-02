@@ -24,7 +24,7 @@ class ProposalAssignationProcessor implements ProcessorInterface
 
         if (!$assigned) {
             $this->logger->error(
-                sprintf('%s Unable to find user with id: %s', __CLASS__, $decoded['assigned'])
+                sprintf('%s Unable to find user with id: %s', self::class, $decoded['assigned'])
             );
 
             return false;
@@ -34,7 +34,7 @@ class ProposalAssignationProcessor implements ProcessorInterface
             $this->logger->error(
                 sprintf(
                     '%s Unable to find any proposal with ids: %s',
-                    __CLASS__,
+                    self::class,
                     implode(', ', $decoded['proposals'])
                 )
             );

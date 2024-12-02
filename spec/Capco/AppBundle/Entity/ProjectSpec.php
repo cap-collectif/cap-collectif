@@ -3,6 +3,7 @@
 namespace spec\Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Locale;
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
@@ -14,7 +15,7 @@ class ProjectSpec extends ObjectBehavior
 {
     public function it_is_initializable()
     {
-        $this->shouldHaveType('Capco\AppBundle\Entity\Project');
+        $this->shouldHaveType(Project::class);
     }
 
     public function it_should_throw_error_when_setting_empty_authors()

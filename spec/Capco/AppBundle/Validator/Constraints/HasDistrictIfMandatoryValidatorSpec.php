@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatory;
+use Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\Validator\Context\ExecutionContextInterface;
 use Symfony\Component\Validator\Violation\ConstraintViolationBuilderInterface;
@@ -16,9 +17,7 @@ class HasDistrictIfMandatoryValidatorSpec extends ObjectBehavior
     public function it_is_initializable(Manager $manager)
     {
         $this->beConstructedWith($manager);
-        $this->shouldHaveType(
-            'Capco\AppBundle\Validator\Constraints\HasDistrictIfMandatoryValidator'
-        );
+        $this->shouldHaveType(HasDistrictIfMandatoryValidator::class);
     }
 
     public function it_should_validate_if_proposal_hasdistrict(

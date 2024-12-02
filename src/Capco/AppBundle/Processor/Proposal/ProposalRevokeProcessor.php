@@ -23,7 +23,7 @@ class ProposalRevokeProcessor implements ProcessorInterface
 
         if (!$assigned) {
             $this->logger->error(
-                __CLASS__ . 'Unable to find user with id: ' . $decoded['assigned']
+                self::class . 'Unable to find user with id: ' . $decoded['assigned']
             );
 
             return false;
@@ -31,7 +31,7 @@ class ProposalRevokeProcessor implements ProcessorInterface
 
         if (empty($proposals)) {
             $this->logger->error(
-                __CLASS__ .
+                self::class .
                     'Unable to find any proposal with ids: ' .
                     implode(', ', $decoded['proposals'])
             );

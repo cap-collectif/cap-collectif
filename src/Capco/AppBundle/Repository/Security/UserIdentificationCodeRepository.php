@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository\Security;
 
 use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\Entity\Security\UserIdentificationCodeList;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query\Expr\Join;
 
@@ -44,7 +45,7 @@ class UserIdentificationCodeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('uic')
             ->select('count(uic)')
             ->join(
-                'Capco\UserBundle\Entity\User',
+                User::class,
                 'fu',
                 Join::WITH,
                 'uic.identificationCode = fu.userIdentificationCode'
