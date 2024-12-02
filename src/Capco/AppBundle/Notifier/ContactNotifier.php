@@ -21,7 +21,7 @@ final class ContactNotifier extends BaseNotifier
             'message' => $message,
         ];
         $params = [
-            'senderName' => $senderName ? $senderName : 'Anonyme',
+            'senderName' => $senderName ?: 'Anonyme',
             'senderEmail' => $senderEmail,
         ];
         $recipient = new User();

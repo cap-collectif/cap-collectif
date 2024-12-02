@@ -141,9 +141,7 @@ class UpdateContactPageMutation implements MutationInterface
         $parameter->setValue($newTranslation);
         $this->em->persist($parameter);
 
-        return $parameter->getTranslations()->first()
-            ? $parameter->getTranslations()->first()
-            : null;
+        return $parameter->getTranslations()->first() ?: null;
     }
 
     private function createAndPersistNewTranslation(
