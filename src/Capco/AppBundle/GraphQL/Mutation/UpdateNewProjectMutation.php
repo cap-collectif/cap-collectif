@@ -248,6 +248,10 @@ class UpdateNewProjectMutation implements MutationInterface
             return false;
         }
 
+        if (!$description) {
+            return false;
+        }
+
         $presentationStep ??= new PresentationStep();
 
         $title = $label = $this->translator->trans('presentation_step', [], 'CapcoAppBundle');
