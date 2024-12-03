@@ -416,6 +416,81 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/PageAdmin.php
 
 		-
+			message: "#^Call to an undefined method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getContainer\\(\\)\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Call to an undefined static method Sonata\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\<object\\>\\:\\:getTemplate\\(\\)\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Class Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin extends generic class Sonata\\\\AdminBundle\\\\Admin\\\\AbstractAdmin but does not specify its types\\: T$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Class Sonata\\\\MediaBundle\\\\Form\\\\Type\\\\MediaType not found\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getFeatures\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getObjectMetadata\\(\\) should return Sonata\\\\AdminBundle\\\\Object\\\\MetadataInterface but returns Sonata\\\\BlockBundle\\\\Meta\\\\Metadata\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getTemplate\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:getTemplate\\(\\) has parameter \\$name with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:onPostPersist\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:onPostPersist\\(\\) has parameter \\$object with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^PHPDoc tag @var above a method has no effect\\.$#"
+			count: 2
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^PHPDoc tag @var does not specify variable name\\.$#"
+			count: 2
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$datagridValues has no type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$tokenStorage has no type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
+			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$tokenStorage is never read, only written\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
 			message: "#^If condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ProjectAbstractStepAdmin.php
@@ -841,11 +916,6 @@ parameters:
 			path: src/Capco/AdminBundle/Controller/EventController.php
 
 		-
-			message: "#^Method Sonata\\\\AdminBundle\\\\Controller\\\\CRUDController\\<object\\>\\:\\:renderWithExtraParams\\(\\) invoked with 4 parameters, 1\\-3 required\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/EventController.php
-
-		-
 			message: "#^Class Capco\\\\AdminBundle\\\\Controller\\\\FontController extends generic class Sonata\\\\AdminBundle\\\\Controller\\\\CRUDController but does not specify its types\\: T$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/FontController.php
@@ -902,16 +972,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\OpinionController\\:\\:updateAppendicesForOpinion\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/OpinionController.php
-
-		-
-			message: "#^Method Sonata\\\\AdminBundle\\\\Controller\\\\CRUDController\\<object\\>\\:\\:renderJson\\(\\) invoked with 4 parameters, 1\\-3 required\\.$#"
-			count: 4
-			path: src/Capco/AdminBundle/Controller/OpinionController.php
-
-		-
-			message: "#^Method Sonata\\\\AdminBundle\\\\Controller\\\\CRUDController\\<object\\>\\:\\:renderWithExtraParams\\(\\) invoked with 4 parameters, 1\\-3 required\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/OpinionController.php
 
@@ -4808,11 +4868,6 @@ parameters:
 		-
 			message: "#^Access to an undefined property Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:\\$kernel\\.$#"
 			count: 2
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Instantiated class Capco\\\\AppBundle\\\\Behat\\\\Crawler not found\\.$#"
-			count: 1
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
@@ -11066,11 +11121,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/CreateCsvFromLegacyUsersCommand.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromLegacyUsersCommand\\:\\:\\$customQuestions \\(array\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateCsvFromLegacyUsersCommand.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\CreateCsvFromLegacyUsersCommand\\:\\:\\$customQuestions type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateCsvFromLegacyUsersCommand.php
@@ -16162,11 +16212,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\District\\\\GlobalDistrict\\:\\:\\$followers has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/GlobalDistrict.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\District\\\\GlobalDistrict\\:\\:\\$media is never written, only read\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/GlobalDistrict.php
 
@@ -25882,11 +25927,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ProjectAuthorTransformer\\:\\:transformUsers\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Form/ProjectAuthorTransformer.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Form\\\\ProjectAuthorTransformer\\:\\:\\$project \\(Capco\\\\AppBundle\\\\Entity\\\\Project\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/ProjectAuthorTransformer.php
 
@@ -35861,16 +35901,6 @@ parameters:
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 
 		-
-			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$delimiter \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$filePath \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$headers type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
@@ -35882,11 +35912,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$mandatoryMissing type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Property Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:\\$proposalForm \\(Capco\\\\AppBundle\\\\Entity\\\\ProposalForm\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 

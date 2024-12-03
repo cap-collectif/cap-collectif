@@ -1,0 +1,39 @@
+{% extends '@CapcoAdmin/CRUD/edit.html.twig' %}
+{% block title %}
+    {{ title }}
+{% endblock %}
+{% block navbar_title %}
+    {{ title }}
+{% endblock %}
+{%- block actions -%}
+{% endblock %}
+{%- block tab_menu -%}
+{% endblock %}
+{% block sonata_breadcrumb %}
+{% endblock %}
+{% block side_bar_nav %}
+{% endblock side_bar_nav %}
+{% block sonata_admin_content_actions_wrappers %}
+{% endblock sonata_admin_content_actions_wrappers %}
+
+{% block tab_menu_navbar_header %}
+    <div class="navbar-header">
+        <a class="navbar-brand" href="#"
+           style='font-size: 18px;
+               line-height: 24px;
+               color: #003670;'
+        >
+            {{ 'admin.edit.post'|trans({'postTitle':object.title}, 'CapcoAppBundle') }}
+        </a>
+    </div>
+{% endblock %}
+
+{% block form %}
+    {% include '@CapcoApp/redux_store.html.twig' %}
+    {{ react_render_component('AdminPostCreateFormApp', {
+        'props': {
+            'postId': postId,
+            'isAdmin': app.user.isAdmin or app.user.isSuperAdmin
+        }
+    }) }}
+{% endblock %}
