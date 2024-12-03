@@ -115,7 +115,7 @@ Object {
     "project": Object {
       "id": "UHJvamVjdDpwcm9qZWN0R3JvdXAy",
       "title": "Projet pour le group2",
-      "url": "https://capco.test/project/projet-pour-le-group2/presentation/presentation-step",
+      "url": "https://capco.test/project/projet-pour-le-group2/questionnaire/questionnaire-step-pour-group2",
     },
   },
 }
