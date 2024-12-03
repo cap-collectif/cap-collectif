@@ -25,6 +25,7 @@ const mutation = graphql`
         collectParticipantsEmail
         metaDescription
         customCode
+        footer
         questionnaire {
           id
           title

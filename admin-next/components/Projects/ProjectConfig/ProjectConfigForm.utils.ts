@@ -27,7 +27,7 @@ export type FormValues = {
   projectType: string | null
   themes: Option[] | []
   metaDescription: string | null
-  isProposalStepSplitViewEnabled: boolean,
+  isProposalStepSplitViewEnabled: boolean
   video: string | null
   districts: Option[] | []
   address?: string | null

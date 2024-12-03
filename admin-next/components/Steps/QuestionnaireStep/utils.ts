@@ -249,6 +249,7 @@ export const getDefaultValues = (stepId, step, keepRequirements?: boolean): Form
     },
     isAnonymousParticipationAllowed: step?.isAnonymousParticipationAllowed ?? false,
     metaDescription: step?.metaDescription ?? '',
+    footer: step?.footer ?? '',
     customCode: step?.customCode ?? '',
     questionnaire: {
       questionnaireId: step?.questionnaire?.id ?? '',

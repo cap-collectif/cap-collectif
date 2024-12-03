@@ -5,7 +5,7 @@ Object {
   "addQuestionnaireStep": Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
-      "body": "Répondez à l'enquête",
+      "body": null,
       "collectParticipantsEmail": true,
       "enabled": true,
       "isAnonymousParticipationAllowed": true,
@@ -14,7 +14,7 @@ Object {
         "creator": Object {
           "username": "Théo QP",
         },
-        "description": "Répondez à l'enquête",
+        "description": null,
         "owner": Object {
           "username": "Théo QP",
         },
@@ -38,7 +38,7 @@ Object {
   "addQuestionnaireStep": Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
-      "body": "Répondez à l'enquête",
+      "body": null,
       "collectParticipantsEmail": true,
       "enabled": true,
       "isAnonymousParticipationAllowed": true,
@@ -47,7 +47,7 @@ Object {
         "creator": Object {
           "username": "admin",
         },
-        "description": "Répondez à l'enquête",
+        "description": null,
         "owner": Object {
           "username": "admin",
         },
@@ -71,7 +71,7 @@ Object {
   "addQuestionnaireStep": Object {
     "step": Object {
       "__typename": "QuestionnaireStep",
-      "body": "Répondez à l'enquête",
+      "body": null,
       "collectParticipantsEmail": true,
       "enabled": true,
       "isAnonymousParticipationAllowed": true,
@@ -80,7 +80,7 @@ Object {
         "creator": Object {
           "username": "Christophe Cassou",
         },
-        "description": "Répondez à l'enquête",
+        "description": null,
         "owner": Object {
           "username": "GIEC",
         },

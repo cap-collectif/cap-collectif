@@ -9,6 +9,7 @@ const AddCollectStep = /* GraphQL*/ `
         title
         ...on CollectStep {
           form {
+            allowAknowledge
             title
             creator {
               username

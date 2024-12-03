@@ -49,7 +49,9 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
     <Tabs
       selectedId={_voteTypeForTabs}
       onChange={selected => {
-        setValue('_voteTypeForTabs', selected)
+        if (selected !== _voteTypeForTabs) {
+          setValue('_voteTypeForTabs', selected)
+        }
       }}
     >
       <Tabs.ButtonList ariaLabel={intl.formatMessage({ id: 'vote-capitalize' })}>

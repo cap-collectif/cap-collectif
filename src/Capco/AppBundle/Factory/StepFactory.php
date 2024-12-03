@@ -116,14 +116,12 @@ class StepFactory
 
         $questionnaire = (new Questionnaire())
             ->setTitle($this->trans('questionnaire.default.title'))
-            ->setDescription($this->trans('questionnaire.default.description'))
             ->addQuestion($qaq)
         ;
 
         return (new QuestionnaireStep())
             ->setLabel($this->trans('step.types.questionnaire'))
             ->setTitle($this->trans('step.questionnaire.default.title'))
-            ->setBody($this->trans('step.questionnaire.default.description'))
             ->setIsAnonymousParticipationAllowed(true)
             ->setIsEnabled(true)
             ->setCollectParticipantsEmail(true)
@@ -144,7 +142,6 @@ class StepFactory
             ->setStatuses(new ArrayCollection([
                 $this->createStatus('put-to-the-vote', StatusColor::INFO, 1),
             ]))
-            ->setAllowAuthorsToAddNews(true)
             ->setDefaultSort('random')
             ->setVoteType(1)
             ->setVotesLimit(3)
@@ -193,8 +190,6 @@ class StepFactory
                 $this->createStatus('project-under-study', StatusColor::WARNING, 3),
                 $this->createStatus('award-winning-project', StatusColor::INFO, 4),
             ]))
-            ->setAllowAuthorsToAddNews(true)
-            ->setAllowingProgressSteps(true)
             ->setDefaultSort('random')
             ->setVoteType(0)
             ->setSubType(SelectionStepSubTypes::RESULT)

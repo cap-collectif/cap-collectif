@@ -48,6 +48,7 @@ export type FormValues = {
   }
   isAnonymousParticipationAllowed: boolean
   metaDescription: string | null
+  footer: string | null
   customCode: string | null
   stepDurationType?: {
     labels: Array<string>

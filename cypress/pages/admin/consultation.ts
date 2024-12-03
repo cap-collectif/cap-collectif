@@ -167,8 +167,4 @@ export default new (class AdminConsultationPage {
       `[aria-labelledby="${type}-${consultationIndex}"] [data-cy="consultations.${consultationIndex}.sections.${sectionIndex}-delete-button"]`,
     )
   }
-
-  openConsultationsAccordion() {
-    cy.get('#accordion-button-consultations').click({ force: true })
-  }
 })()

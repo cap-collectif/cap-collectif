@@ -6,6 +6,7 @@ import {
   ProposalArchivedUnitTime,
   ProposalStepStatusColor,
   ProposalStepVoteType,
+  SelectionStepSubTypes,
   SelectStepFormQuery,
 } from '@relay/SelectStepFormQuery.graphql'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
@@ -225,6 +226,20 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
     return step.__typename === 'SelectionStep' && step.allowingProgressSteps === true && step.id !== stepId
   })
 
+  const defaultOpenAccordion = (stepSubType: SelectionStepSubTypes) => {
+    switch (stepSubType) {
+      case 'VOTE':
+        return [intl.formatMessage({ id: 'vote-capitalize' })]
+
+      case 'ANALYSIS':
+      case 'RESULT':
+        return [intl.formatMessage({ id: 'status.plural' })]
+
+      default:
+        return []
+    }
+  }
+
   const getBreadCrumbItems = () => {
     const breadCrumbItems = [
       {
@@ -245,6 +260,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
     }
     return breadCrumbItems
   }
+
 
   React.useEffect(() => {
     setBreadCrumbItems(getBreadCrumbItems())
@@ -346,6 +362,55 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
   const { handleSubmit, formState, control } = formMethods
   const { isSubmitting, isValid } = formState
 
+  const sortOptions = [
+    {
+      label: intl.formatMessage({ id: 'global.random' }),
+      value: 'RANDOM',
+    },
+    {
+      label: intl.formatMessage({
+        id: 'global.filter_f_comments',
+      }),
+      value: 'COMMENTS',
+    },
+    {
+      label: intl.formatMessage({
+        id: 'global.filter_f_last',
+      }),
+      value: 'LAST',
+    },
+    {
+      label: intl.formatMessage({
+        id: 'global.filter_f_old',
+      }),
+      value: 'OLD',
+    },
+    {
+      label: intl.formatMessage({
+        id: 'step.sort.votes',
+      }),
+      value: 'VOTES',
+    },
+    {
+      label: intl.formatMessage({
+        id: 'global.filter_f_least-votes',
+      }),
+      value: 'LEAST_VOTE',
+    },
+    {
+      label: intl.formatMessage({
+        id: 'global.filter_f_cheap',
+      }),
+      value: 'CHEAP',
+    },
+    {
+      label: intl.formatMessage({
+        id: 'global.filter_f_expensive',
+      }),
+      value: 'EXPENSIVE',
+    },
+  ]
+
   return (
     <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
       <Text fontWeight={600} color="blue.800" fontSize={4}>
@@ -383,7 +448,11 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
           />
           <StepDurationInput />
           <Box>
-            <Accordion color={CapUIAccordionColor.Transparent} allowMultiple>
+            <Accordion
+              color={CapUIAccordionColor.Transparent}
+              defaultAccordion={defaultOpenAccordion(step.subType as SelectionStepSubTypes)}
+              allowMultiple
+            >
               {step.subType === 'VOTE' && (
                 <Accordion.Item id={intl.formatMessage({ id: 'vote-capitalize' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'vote-capitalize' })}</Accordion.Button>
@@ -392,23 +461,25 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                   </Accordion.Panel>
                 </Accordion.Item>
               )}
-              <Accordion.Item
-                id={intl.formatMessage({ id: 'required-infos-to-participate' })}
-                onMouseEnter={() => {
-                  setHelpMessage('step.create.requirements.helpText')
-                }}
-                onMouseLeave={() => setHelpMessage(null)}
-              >
-                <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
-                <Accordion.Panel>
-                  <React.Suspense fallback={<RequirementsTabsSkeleton />}>
-                    <ProposalStepRequirementsTabs
-                      proposalStep={step as ProposalStepRequirementsTabs_proposalStep$key}
-                      formMethods={formMethods}
-                    />
-                  </React.Suspense>
-                </Accordion.Panel>
-              </Accordion.Item>
+              {step.subType === 'VOTE' && (
+                <Accordion.Item
+                  id={intl.formatMessage({ id: 'required-infos-to-participate' })}
+                  onMouseEnter={() => {
+                    setHelpMessage('step.create.requirements.helpText')
+                  }}
+                  onMouseLeave={() => setHelpMessage(null)}
+                >
+                  <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
+                  <Accordion.Panel>
+                    <React.Suspense fallback={<RequirementsTabsSkeleton />}>
+                      <ProposalStepRequirementsTabs
+                        proposalStep={step as ProposalStepRequirementsTabs_proposalStep$key}
+                        formMethods={formMethods}
+                      />
+                    </React.Suspense>
+                  </Accordion.Panel>
+                </Accordion.Item>
+              )}
               <Accordion.Item id={intl.formatMessage({ id: 'status.plural' })}>
                 <Accordion.Button>{intl.formatMessage({ id: 'status.plural' })}</Accordion.Button>
                 <Accordion.Panel>
@@ -432,6 +503,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                       {intl.formatMessage({ id: 'admin.allow.proposal.news' })}
                     </FieldInput>
                   </FormControl>
+
                   {!hasSelectionStepsWithAllowingProgressSteps && (
                     <FormControl name="allowingProgressSteps" control={control} mb={6}>
                       <FormLabel
@@ -452,6 +524,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                       </FieldInput>
                     </FormControl>
                   )}
+
                   <FormControl name="defaultSort" control={control}>
                     <FormLabel
                       htmlFor="defaultSort"
@@ -463,54 +536,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
                       name="defaultSort"
                       control={control}
                       type="select"
-                      options={[
-                        {
-                          label: intl.formatMessage({ id: 'global.random' }),
-                          value: 'RANDOM',
-                        },
-                        {
-                          label: intl.formatMessage({
-                            id: 'global.filter_f_comments',
-                          }),
-                          value: 'COMMENTS',
-                        },
-                        {
-                          label: intl.formatMessage({
-                            id: 'global.filter_f_last',
-                          }),
-                          value: 'LAST',
-                        },
-                        {
-                          label: intl.formatMessage({
-                            id: 'global.filter_f_old',
-                          }),
-                          value: 'OLD',
-                        },
-                        {
-                          label: intl.formatMessage({
-                            id: 'step.sort.votes',
-                          }),
-                          value: 'VOTES',
-                        },
-                        {
-                          label: intl.formatMessage({
-                            id: 'global.filter_f_least-votes',
-                          }),
-                          value: 'LEAST_VOTE',
-                        },
-                        {
-                          label: intl.formatMessage({
-                            id: 'global.filter_f_cheap',
-                          }),
-                          value: 'CHEAP',
-                        },
-                        {
-                          label: intl.formatMessage({
-                            id: 'global.filter_f_expensive',
-                          }),
-                          value: 'EXPENSIVE',
-                        },
-                      ]}
+                      options={sortOptions}
                       defaultOptions
                     />
                   </FormControl>

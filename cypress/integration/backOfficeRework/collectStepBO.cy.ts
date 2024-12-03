@@ -14,7 +14,6 @@ describe('Collect Step back office', () => {
     AdminCollectStepPage.visitCollectPage('EDIT')
     AdminCollectStepPage.fillLabel('Updated text')
     AdminCollectStepPage.fillDescription('Updated description')
-    AdminCollectStepPage.openProposalFormAccordion()
     AdminCollectStepPage.fillProposalFormDescription('ProposalForm description')
 
     AdminCollectStepPage.addProposalFormNeededInfos('proposal_form.summary')

@@ -120,7 +120,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
               name="cover"
               control={control}
               format=".jpg,.jpeg,.png"
-              maxSize={1000000}
+              maxSize={8000000}
               minResolution={{
                 width: 800,
                 height: 500,

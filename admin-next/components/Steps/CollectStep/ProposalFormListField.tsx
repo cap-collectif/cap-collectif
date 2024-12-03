@@ -420,7 +420,7 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         canContact: proposalForm.canContact,
         proposalInAZoneRequired: proposalForm.proposalInAZoneRequired || false,
         questionnaire: getQuestions(proposalForm),
-        allowAknowledge: proposalForm.allowAknowledge ?? false,
+        allowAknowledge: proposalForm.allowAknowledge ?? true,
         usingFacebook: proposalForm.usingFacebook ?? false,
         usingWebPage: proposalForm.usingWebPage ?? false,
         usingTwitter: proposalForm.usingTwitter ?? false,

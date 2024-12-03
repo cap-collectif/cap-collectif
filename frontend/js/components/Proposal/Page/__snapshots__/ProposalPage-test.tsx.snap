@@ -1859,6 +1859,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                               "name": "url",
                                               "storageKey": null,
                                             },
+                                            Object {
+                                              "alias": "type",
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "contentType",
+                                              "storageKey": null,
+                                            },
                                           ],
                                           "storageKey": null,
                                         },
@@ -3000,6 +3007,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                               "args": null,
                                               "kind": "ScalarField",
                                               "name": "url",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": "type",
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "contentType",
                                               "storageKey": null,
                                             },
                                           ],
@@ -4419,6 +4433,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                           "name": "url",
                                                           "storageKey": null,
                                                         },
+                                                        Object {
+                                                          "alias": "type",
+                                                          "args": null,
+                                                          "kind": "ScalarField",
+                                                          "name": "contentType",
+                                                          "storageKey": null,
+                                                        },
                                                       ],
                                                       "storageKey": null,
                                                     },
@@ -5333,6 +5354,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                                                       "args": null,
                                                       "kind": "ScalarField",
                                                       "name": "url",
+                                                      "storageKey": null,
+                                                    },
+                                                    Object {
+                                                      "alias": "type",
+                                                      "args": null,
+                                                      "kind": "ScalarField",
+                                                      "name": "contentType",
                                                       "storageKey": null,
                                                     },
                                                   ],
@@ -8814,7 +8842,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "bd84e27d64943f40c6a6eddcbff04e62",
+          "cacheID": "75b4ab5b21170d8d679165414d9485e9",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9222,6 +9250,7 @@ fragment NewProposalResponse_response on Response {
             image {
               id
               url
+              type: contentType
             }
           }
         }
@@ -9439,6 +9468,7 @@ fragment ProposalAnalysisFormPanel_proposal_2uwUKI on Proposal {
                   image {
                     id
                     url
+                    type: contentType
                   }
                 }
               }
@@ -9956,6 +9986,7 @@ fragment ProposalForm_proposalForm on ProposalForm {
             image {
               id
               url
+              type: contentType
             }
           }
         }
@@ -10192,6 +10223,7 @@ fragment ProposalPageCustomSections_proposal on Proposal {
               image {
                 id
                 url
+                type: contentType
               }
             }
           }
@@ -10780,6 +10812,7 @@ fragment ProposalResponse_response on Response {
             image {
               id
               url
+              type: contentType
             }
           }
         }

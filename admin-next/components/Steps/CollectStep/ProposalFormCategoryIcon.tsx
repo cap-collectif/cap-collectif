@@ -89,6 +89,7 @@ const ProposalFormCategoryIcon: React.FC<ProposalFormCategoryIconProps> = ({
   }
 
   return (
+    // todo: refactor me from styled.div to a Flex - see example in ProposalFormCategoryColor
     <Flex flexWrap="wrap">
       {categoryIcons.map(icon => {
         return !icon.used || icon.value === selectedIcon ? (

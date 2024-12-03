@@ -55,6 +55,7 @@ export interface ProposalFormAdminCategoriesModalProps {
         id: string
       } | null
     } | null
+    newCategoryImage?: string | null
   }
   index?: number
   append?: (obj: any) => void
@@ -123,18 +124,23 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
     used: usedIcons.some(ic => ic === i),
   }))
 
+  const defaultValues = {
+    categoryName: initialValue?.name ?? null,
+    categoryColor: initialValue?.color ?? mergedColors.find(elem => !elem.used).value,
+    categoryIcon: initialValue?.icon ?? null,
+    categoryImage: initialValue?.categoryImage ?? null,
+    categoryImageEnabled: !!initialValue?.categoryImage || !!initialValue?.newCategoryImage,
+    newCategoryImage: null,
+  }
+
   const { reset, handleSubmit, formState, control, watch, setValue } =
     useForm<ProposalFormAdminCategoriesModalFormValues>({
-      defaultValues: {
-        categoryName: initialValue?.name ?? null,
-        categoryColor: initialValue?.color ?? mergedColors.find(elem => !elem.used).value,
-        categoryIcon: initialValue?.icon ?? null,
-        categoryImage: initialValue?.categoryImage ?? null,
-        categoryImageEnabled: !!initialValue?.categoryImage,
-        newCategoryImage: null,
-      },
+      defaultValues,
       mode: 'onChange',
     })
+
+  const selectedCategoryImage = watch('categoryImage')
+  const selectedCategoryColor = watch('categoryColor')
 
   const onSubmit = (values: ProposalFormAdminCategoriesModalFormValues) => {
     if (isUpdating) {
@@ -149,7 +155,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
           color: values.categoryColor,
           icon: values.categoryIcon,
           categoryImage: values.categoryImage,
-          newCategoryImage: values.newCategoryImage,
+          newCategoryImage: values.newCategoryImage?.id,
         }
         update(index, updatedCategory)
       }
@@ -166,7 +172,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
           color: values.categoryColor,
           icon: values.categoryIcon,
           categoryImage: values.categoryImage,
-          newCategoryImage: values.newCategoryImage,
+          newCategoryImage: values.newCategoryImage?.id,
         }
         append(updatedCategory)
       }
@@ -186,6 +192,16 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
             icon={CapUIIcon.Pencil}
             label={intl.formatMessage({ id: 'action_edit' })}
             className={`NeededInfo_categories_item_edit_${index}`}
+            onClick={() => {
+              reset({
+                categoryName: initialValue?.name,
+                categoryColor: initialValue?.color,
+                categoryIcon: initialValue?.icon ?? null,
+                categoryImage: initialValue?.categoryImage ?? null,
+                categoryImageEnabled: !!initialValue?.categoryImage || !!initialValue?.newCategoryImage,
+                newCategoryImage: null,
+              })
+            }}
           />
         )
       }
@@ -221,10 +237,10 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
               <>
                 <FormLabel mb={2} label={intl.formatMessage({ id: 'global.color' })} />
                 <ProposalFormCategoryColor
+                  isNewCategory={!isUpdating}
                   categoryColors={mergedColors}
-                  // @ts-ignore
-                  selectedColor={watch('categoryColor')}
-                  onColorClick={color => {
+                  selectedColor={selectedCategoryColor}
+                  updateCurrentColor={color => {
                     setValue('categoryColor', color)
                   }}
                 />
@@ -244,9 +260,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                 <ProposalFormCategoryIcon
                   categoryIcons={mergedIcons}
                   onIconClick={icon => setValue('categoryIcon', icon)}
-                  // @ts-ignore
                   selectedColor={watch('categoryColor')}
-                  // @ts-ignore
                   selectedIcon={watch('categoryIcon')}
                 />
 
@@ -305,34 +319,47 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                             p={4}
                             gap={1}
                           >
-                            {customCategoryImages.map(customImage => (
-                              <Flex
-                                key={customImage.id}
-                                width="33%"
-                                alignItems="center"
-                                justifyContent="center"
-                                style={{ cursor: 'pointer' }}
-                                onClick={() => {
-                                  setValue('categoryImage', customImage)
-                                }}
-                              >
-                                <Box
-                                  width="178px"
-                                  height="56px"
-                                  as="img"
-                                  style={{ objectFit: 'cover' }}
-                                  id={customImage.id}
-                                  src={customImage?.image?.url}
-                                  mb={3}
-                                  borderRadius={CapUIBorder.Card}
-                                />
-                              </Flex>
-                            ))}
+                            {customCategoryImages.map(customImage => {
+                              const isSelectedImage = selectedCategoryImage?.id === customImage.id
+                              return (
+                                <Flex
+                                  key={customImage.id}
+                                  width="33%"
+                                  alignItems="center"
+                                  justifyContent="center"
+                                  style={{ cursor: 'pointer' }}
+                                  onClick={() => {
+                                    setValue('categoryImage', customImage)
+                                  }}
+                                >
+                                  <Box
+                                    width="178px"
+                                    height="56px"
+                                    as="img"
+                                    style={{ objectFit: 'cover' }}
+                                    id={customImage.id}
+                                    src={customImage?.image?.url}
+                                    mb={3}
+                                    borderRadius={CapUIBorder.Card}
+                                    border={isSelectedImage ? '2px solid' : ''}
+                                    borderColor={isSelectedImage ? 'primary.600' : ''}
+                                  />
+                                </Flex>
+                              )
+                            })}
                           </Flex>
                         </>
                       )}
 
-                      <FormControl name="newCategoryImage" control={control} width="100%">
+                      <FormControl
+                        name="newCategoryImage"
+                        control={control}
+                        width="100%"
+                        sx={{
+                          '.cap-uploader': { width: '100%', minWidth: 'unset' },
+                          '.cap-uploader > div ': { width: '100%' },
+                        }}
+                      >
                         <FormLabel
                           label={intl.formatMessage({
                             id: 'illustration',
@@ -373,7 +400,15 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" variantColor="primary" variantSize="big" onClick={hide}>
+            <Button
+              variant="secondary"
+              variantColor="primary"
+              variantSize="big"
+              onClick={() => {
+                hide()
+                reset()
+              }}
+            >
               {intl.formatMessage({ id: 'global.cancel' })}
             </Button>
             <Button

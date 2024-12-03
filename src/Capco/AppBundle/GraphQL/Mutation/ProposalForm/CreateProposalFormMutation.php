@@ -43,6 +43,7 @@ class CreateProposalFormMutation implements MutationInterface
             $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
         );
         $proposalForm->setCreator($viewer);
+        $proposalForm->setAllowAknowledge(true);
 
         $this->em->persist($proposalForm);
         $this->em->flush();

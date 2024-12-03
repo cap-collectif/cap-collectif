@@ -9,7 +9,6 @@ describe('Consultation back office', () => {
 
   it('should update the step when editing a existing consultation', () => {
     AdminConsultationPage.visitConsultationPage()
-    AdminConsultationPage.openConsultationsAccordion()
     AdminConsultationPage.fillLabel('label')
     AdminConsultationPage.fillDescription('description')
     AdminConsultationPage.addSection()
@@ -33,7 +32,6 @@ describe('Consultation back office', () => {
   // it('should update the step with 2 consultations', () => {
   //   cy.task('enable:feature', 'multi_consultations')
   //   AdminConsultationPage.visitConsultationPage()
-  //   AdminConsultationPage.openConsultationsAccordion()
   //   AdminConsultationPage.getAppendConsultationButton().click()
   //   AdminConsultationPage.getConsultationList().should('have.length', 2)
   //   AdminConsultationPage.getSaveButton().should('be.disabled')
@@ -46,20 +44,17 @@ describe('Consultation back office', () => {
 
   it('should create the step with an existing consultation model', () => {
     AdminConsultationPage.visitConsultationPage('CREATE')
-    AdminConsultationPage.openConsultationsAccordion()
     AdminConsultationPage.fillModel(0, "Stratégie technologique de l'Etat et services publics - Simple")
     AdminConsultationPage.getSectionsList(0, 'MODEL').children().should('have.length', 2)
     AdminConsultationPage.getAppendSectionButton(0).click()
     AdminConsultationPage.save()
     AdminConsultationPage.visitConsultationPage()
-    AdminConsultationPage.openConsultationsAccordion()
     cy.wait('@ConsultationStepFormQuery')
     AdminConsultationPage.getSectionsList(0, 'EDIT').children().should('have.length', 3)
   })
 
   it('should remove subsections if parent section is removed', () => {
     AdminConsultationPage.visitConsultationPage('CREATE')
-    AdminConsultationPage.openConsultationsAccordion()
     AdminConsultationPage.fillModel(0, 'Projet de loi Renseignement - Projet de loi')
 
     cy.get('[aria-labelledby=MODEL-0] .section-item').should('have.length', 20)
@@ -68,7 +63,6 @@ describe('Consultation back office', () => {
 
     AdminConsultationPage.save()
     AdminConsultationPage.visitConsultationPage()
-    AdminConsultationPage.openConsultationsAccordion()
     cy.wait('@ConsultationStepFormQuery')
     cy.get('.section-item').should('have.length', 18)
   })

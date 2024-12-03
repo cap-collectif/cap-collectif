@@ -120,6 +120,7 @@ const getParticipatoryBudgetAnalysisInput = ({
         isGridViewEnabled: true,
         isMapViewEnabled: true,
         objectType: 'PROPOSAL',
+        allowAknowledge: true,
         usingFacebook: false,
         usingWebPage: false,
         usingTwitter: false,

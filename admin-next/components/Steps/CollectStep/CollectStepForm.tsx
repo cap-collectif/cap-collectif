@@ -508,8 +508,10 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           if (response.updateCollectStep.proposalStepSplitViewWasDisabled) {
             toast({
               variant: 'warning',
-              content: intl.formatMessage({ id: 'admin.update.successful' })
-                + '<br/>' + intl.formatMessage({ id: 'admin.proposalStepSplitViewWasDisabled' }),
+              content:
+                intl.formatMessage({ id: 'admin.update.successful' }) +
+                '<br/>' +
+                intl.formatMessage({ id: 'admin.proposalStepSplitViewWasDisabled' }),
             })
           } else {
             toast({
@@ -566,8 +568,17 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
           <StepDurationInput />
           <Box>
             <Box mb={4}>
-              <Accordion color={CapUIAccordionColor.Transparent}>
-                <Accordion.Item id={intl.formatMessage({ id: 'proposal-form' })}>
+              <Accordion
+                color={CapUIAccordionColor.Transparent}
+                defaultAccordion={[intl.formatMessage({ id: 'proposal-form' })]}
+              >
+                <Accordion.Item
+                  id={intl.formatMessage({ id: 'proposal-form' })}
+                  onMouseEnter={() => {
+                    setHelpMessage('step.create.proposalForm.helpText')
+                  }}
+                  onMouseLeave={() => setHelpMessage(null)}
+                >
                   <Accordion.Button>{intl.formatMessage({ id: 'proposal-form' })}</Accordion.Button>
                   <Accordion.Panel>
                     <ProposalFormForm
@@ -587,13 +598,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
                 </Accordion.Item>
               </Accordion>
               <Accordion color={CapUIAccordionColor.Transparent}>
-                <Accordion.Item
-                  id={intl.formatMessage({ id: 'required-infos-to-participate' })}
-                  onMouseEnter={() => {
-                    setHelpMessage('step.create.proposalForm.helpText')
-                  }}
-                  onMouseLeave={() => setHelpMessage(null)}
-                >
+                <Accordion.Item id={intl.formatMessage({ id: 'required-infos-to-participate' })}>
                   <Accordion.Button>{intl.formatMessage({ id: 'required-infos-to-participate' })}</Accordion.Button>
                   <Accordion.Panel>
                     <React.Suspense fallback={<RequirementsTabsSkeleton />}>

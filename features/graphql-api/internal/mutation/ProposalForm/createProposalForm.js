@@ -6,6 +6,7 @@ const mutation = /* GraphQL */ `
     createProposalForm(input: $input) {
       proposalForm {
         title
+        allowAknowledge
         owner {
           username
         }

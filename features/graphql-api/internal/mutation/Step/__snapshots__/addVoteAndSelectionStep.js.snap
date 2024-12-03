@@ -5,7 +5,7 @@ Object {
   "addVoteAndSelectionStep": Object {
     "step": Object {
       "__typename": "SelectionStep",
-      "allowAuthorsToAddNews": true,
+      "allowAuthorsToAddNews": false,
       "body": "Votez pour vos projets préférés",
       "defaultSort": "random",
       "label": "Vote",
@@ -28,7 +28,7 @@ Object {
   "addVoteAndSelectionStep": Object {
     "step": Object {
       "__typename": "SelectionStep",
-      "allowAuthorsToAddNews": true,
+      "allowAuthorsToAddNews": false,
       "body": "Votez pour vos projets préférés",
       "defaultSort": "random",
       "label": "Vote",
@@ -51,7 +51,7 @@ Object {
   "addVoteAndSelectionStep": Object {
     "step": Object {
       "__typename": "SelectionStep",
-      "allowAuthorsToAddNews": true,
+      "allowAuthorsToAddNews": false,
       "body": "Votez pour vos projets préférés",
       "defaultSort": "random",
       "label": "Vote",

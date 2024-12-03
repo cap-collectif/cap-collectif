@@ -40,6 +40,7 @@ const QuestionnaireStepFormOptionalParameters: React.FC<Props> = ({ defaultLocal
               submit: isEditing ? intl.formatMessage({ id: 'global.edit' }) : intl.formatMessage({ id: 'global.add' }),
             }}
           />
+
           <FormControl name="customCode" control={control}>
             <FormLabel
               htmlFor="customCode"

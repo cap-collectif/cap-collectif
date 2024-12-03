@@ -232,6 +232,7 @@ const QuestionFragment = {
               image {
                 id
                 url
+                type: contentType
               }
             }
           }

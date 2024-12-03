@@ -46,6 +46,7 @@ class AddCollectStepMutation implements MutationInterface
             ->setUsingIllustration(false)
             ->setCreator($viewer)
             ->setOwner($owner)
+            ->setAllowAknowledge(true)
         ;
 
         /** * @var CollectStep $step */

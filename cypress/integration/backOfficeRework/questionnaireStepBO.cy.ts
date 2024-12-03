@@ -12,7 +12,6 @@ describe('Questionnaire Step back office', () => {
     AdminQuestionnaireStepPage.visitQuestionnaireStepPage()
     AdminQuestionnaireStepPage.fillLabel('Updated text')
     AdminQuestionnaireStepPage.fillDescription('Updated description')
-    AdminQuestionnaireStepPage.openQuestionnaireAccordion()
     AdminQuestionnaireStepPage.addAShortAnswerQuestion('short title', 'short desc')
     AdminQuestionnaireStepPage.addAButtonsQuestion('short title', 'short desc')
     AdminQuestionnaireStepPage.openOptionnalSettingsAccordion()
@@ -22,7 +21,6 @@ describe('Questionnaire Step back office', () => {
   })
   it('should be possible to add a conditional jump and a redirection on a big questionnaire', () => {
     AdminQuestionnaireStepPage.visitQuestionnaireStepPageWithJumps()
-    AdminQuestionnaireStepPage.openQuestionnaireAccordion()
     AdminQuestionnaireStepPage.addAJump()
     AdminQuestionnaireStepPage.addARedirection()
     AdminQuestionnaireStepPage.save()

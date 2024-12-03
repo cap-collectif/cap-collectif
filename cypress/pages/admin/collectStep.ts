@@ -57,12 +57,9 @@ export default new (class AdminCollectStepPage {
   }
 
   fillDescription(text: string) {
-    return cy.get('.jodit-wysiwyg').clear().type(text)
+    return cy.get('.jodit-wysiwyg').first().clear().type(text)
   }
 
-  openProposalFormAccordion() {
-    return cy.get('#accordion-button-proposal-form').click({ force: true })
-  }
   fillProposalFormDescription(text: string) {
     return cy
       .get('#form_tab #form\\.description-JoditTextArea-fr_fr > div > div > div.jodit-workplace > div.jodit-wysiwyg')

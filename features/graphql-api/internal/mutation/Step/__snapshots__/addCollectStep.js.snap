@@ -6,6 +6,7 @@ Object {
     "step": Object {
       "__typename": "CollectStep",
       "form": Object {
+        "allowAknowledge": true,
         "creator": Object {
           "username": "Théo QP",
         },
@@ -26,6 +27,7 @@ Object {
     "step": Object {
       "__typename": "CollectStep",
       "form": Object {
+        "allowAknowledge": true,
         "creator": Object {
           "username": "admin",
         },
@@ -46,6 +48,7 @@ Object {
     "step": Object {
       "__typename": "CollectStep",
       "form": Object {
+        "allowAknowledge": true,
         "creator": Object {
           "username": "Christophe Cassou",
         },

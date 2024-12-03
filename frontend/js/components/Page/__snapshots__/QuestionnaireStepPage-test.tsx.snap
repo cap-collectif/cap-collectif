@@ -1780,6 +1780,13 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                               "name": "url",
                                               "storageKey": null,
                                             },
+                                            Object {
+                                              "alias": "type",
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "contentType",
+                                              "storageKey": null,
+                                            },
                                           ],
                                           "storageKey": null,
                                         },
@@ -2164,7 +2171,7 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "983222a18b29d0be4799cf9ed4267451",
+          "cacheID": "9a5ed52950c74aad8abb9b27604c5b0f",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -2418,6 +2425,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
             image {
               id
               url
+              type: contentType
             }
           }
         }
@@ -4394,6 +4402,13 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                               "name": "url",
                                               "storageKey": null,
                                             },
+                                            Object {
+                                              "alias": "type",
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "contentType",
+                                              "storageKey": null,
+                                            },
                                           ],
                                           "storageKey": null,
                                         },
@@ -4778,7 +4793,7 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
           ],
         },
         "params": Object {
-          "cacheID": "983222a18b29d0be4799cf9ed4267451",
+          "cacheID": "9a5ed52950c74aad8abb9b27604c5b0f",
           "id": null,
           "metadata": Object {},
           "name": "QuestionnaireStepPageQuery",
@@ -5032,6 +5047,7 @@ fragment ReplyForm_questionnaire_39ngnn on Questionnaire {
             image {
               id
               url
+              type: contentType
             }
           }
         }

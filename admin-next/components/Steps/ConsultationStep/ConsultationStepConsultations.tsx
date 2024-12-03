@@ -50,7 +50,7 @@ const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef }) => 
 
   return (
     <>
-      <Accordion color={CapUIAccordionColor.Transparent}>
+      <Accordion color={CapUIAccordionColor.Transparent} defaultAccordion={['consultations']}>
         <Accordion.Item id="consultations">
           <Accordion.Button>{intl.formatMessage({ id: 'consultations' })}</Accordion.Button>
           <Accordion.Panel>

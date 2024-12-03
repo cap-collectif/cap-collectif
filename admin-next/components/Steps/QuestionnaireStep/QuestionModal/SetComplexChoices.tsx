@@ -90,7 +90,7 @@ const SetComplexChoices: React.FC<{ defaultLocale?: string }> = ({ defaultLocale
                   control={control}
                   type="uploader"
                   format=".jpg,.jpeg,.png,.svg"
-                  maxSize={204800}
+                  maxSize={8000000}
                   size={UPLOADER_SIZE.SM}
                   showThumbnail
                   uploadURI={UPLOAD_PATH}

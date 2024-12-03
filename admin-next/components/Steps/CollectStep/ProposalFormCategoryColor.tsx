@@ -1,89 +1,60 @@
 import * as React from 'react'
-import styled, { css } from 'styled-components'
 import { formatHsl, formatRgb, hexToRgb, rgbToHsl } from '@shared/utils/colors'
-import { CapUIIcon, CapUIIconSize, Icon, Tooltip } from '@cap-collectif/ui'
+import { CapUIIcon, CapUIIconSize, Flex, Icon, Tooltip } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
+import { pxToRem } from '@shared/utils/pxToRem'
 
-export interface ProposalFormCategoryColorProps {
-  onColorClick: (color: string) => void
+export type ProposalFormCategoryColorProps = {
+  isNewCategory: boolean
+  categoryColors: ReadonlyArray<CategoryColor>
   selectedColor?: string
-  categoryColors: ReadonlyArray<{
-    value: string
-    used: boolean
-  }>
+  updateCurrentColor: (color: string) => void
 }
-const Container = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-`
 
-const Color = styled.div`
-  border-radius: 4px;
-  height: 29px;
-  width: 29px;
-  background: ${({ color }) => color};
-  border: ${({ color }) => `0 solid ${color}`};
-  margin-right: 8px;
-  outline: none;
-  margin-bottom: 8px;
-  padding: 4px 8px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  ${
-    // @ts-ignore
-    ({ isDisabled, color, disabledColor }) =>
-      isDisabled
-        ? css`
-            background-color: ${color};
-            background: repeating-linear-gradient(
-              135deg,
-              ${color},
-              ${color} 4px,
-              ${disabledColor} 0,
-              ${disabledColor} 6px
-            );
-          `
-        : css`
-            :hover {
-              cursor: pointer;
-              padding: 6px 10px;
-              height: 33px;
-              width: 33px;
-              margin: -2px 6px 6px -2px;
-            }
-          `
-  }
-`
+type CategoryColor = {
+  value: string
+  used: boolean
+}
+
+type ColorProps = {
+  color: CategoryColor
+  selectedColor: string
+  isSelectedColor: boolean
+  updateCurrentColor: (color: string) => void
+}
+
 const ProposalFormCategoryColor: React.FC<ProposalFormCategoryColorProps> = ({
+  isNewCategory,
   categoryColors,
   selectedColor,
-  onColorClick,
+  updateCurrentColor,
 }) => {
   const intl = useIntl()
-  const renderColor = (color: { value: string; used: boolean }) => {
-    const rgb = hexToRgb(color.value)
-    const colorRgbFormatted = formatRgb(rgb)
-    const { h, s, l } = rgbToHsl(colorRgbFormatted)
-    return (
-      <Color
-        onClick={() => {
-          if (!color.used) onColorClick(color.value)
-        }}
-        color={color.value}
-        // @ts-ignore
-        isDisabled={color.used && color.value !== selectedColor}
-        disabledColor={formatHsl({ h, s, l: l + 10 })}
-      >
-        {selectedColor === color.value && <Icon name={CapUIIcon.Check} size={CapUIIconSize.Sm} color="white" />}
-      </Color>
-    )
-  }
+
+  const firstRendered = React.useRef<true | null>(null)
+
+  React.useEffect(() => {
+    if (!firstRendered.current) {
+      if (isNewCategory) {
+        updateCurrentColor(firstAvailableColor.value)
+      }
+    }
+    firstRendered.current = true
+  }, [selectedColor, isNewCategory])
+
+  const firstAvailableColor = categoryColors.find(color => !color.used)
+
   return (
-    <Container>
+    <Flex wrap="wrap">
       {categoryColors.map(color => {
-        return !color.used || color.value === selectedColor ? (
-          renderColor(color)
+        return !color.used ? (
+          <Color
+            key={color.value}
+            color={color}
+            selectedColor={selectedColor}
+            isSelectedColor={color.value === selectedColor}
+            updateCurrentColor={updateCurrentColor}
+          />
         ) : (
           <Tooltip
             label={intl.formatMessage({ id: 'already.in.use.feminine' })}
@@ -91,11 +62,60 @@ const ProposalFormCategoryColor: React.FC<ProposalFormCategoryColorProps> = ({
             className="text-left"
             style={{ wordBreak: 'break-word' }}
           >
-            {renderColor(color)}
+            <Flex>
+              <Color
+                color={color}
+                selectedColor={selectedColor}
+                isSelectedColor={color.value === selectedColor}
+                updateCurrentColor={updateCurrentColor}
+              />
+            </Flex>
           </Tooltip>
         )
       })}
-    </Container>
+    </Flex>
+  )
+}
+// }
+
+const Color: React.FC<ColorProps> = ({ color, isSelectedColor, updateCurrentColor }) => {
+  const rgb = hexToRgb(color.value)
+  const colorRgbFormatted = formatRgb(rgb)
+  const { h, s, l } = rgbToHsl(colorRgbFormatted)
+
+  return (
+    <Flex
+      justifyContent={'center'}
+      alignItems={'center'}
+      borderRadius={pxToRem(4)}
+      height={pxToRem(29)}
+      width={pxToRem(29)}
+      backgroundColor={color.value}
+      border={`0 solid ${color.value}`}
+      mr={2}
+      mb={2}
+      p={[1, 2]}
+      sx={{
+        backgroundImage: !color.used
+          ? color.value
+          : `repeating-linear-gradient(
+                135deg,
+                ${color.value},
+                ${color.value} 4px,
+                ${formatHsl({ h, s, l: l + 10 })} 0,
+                ${formatHsl({ h, s, l: l + 10 })} 6px
+              )`,
+        outline: 'none',
+        '&:hover': !color.used ? { cursor: 'pointer' } : {},
+      }}
+      onClick={() => {
+        if (!color.used) {
+          updateCurrentColor(color.value)
+        }
+      }}
+    >
+      {isSelectedColor && <Icon name={CapUIIcon.Check} size={CapUIIconSize.Sm} color="white" />}
+    </Flex>
   )
 }
 

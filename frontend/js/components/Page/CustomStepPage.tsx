@@ -68,7 +68,8 @@ export const CustomStepPage = ({ stepId }: Props) => {
   if (!data) return null
   const { customStep } = data
   if (!customStep) return null
-  const { title, body, timeRange } = customStep
+  const { body, timeRange } = customStep
+
   return (
     <section className="section--alt" id={`customStep-${customStep.id || ''}`}>
       <div className="container">
@@ -76,7 +77,6 @@ export const CustomStepPage = ({ stepId }: Props) => {
           <StepEvents step={customStep} />
         )}
 
-        <h2 className="h2">{title}</h2>
         {timeRange?.startAt && (
           <div className="mb-30 project__step-dates">
             <i className="cap cap-calendar-2-1 mr-10" />

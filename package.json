@@ -180,7 +180,7 @@
         "@babel/preset-react": "^7.0.0",
         "@babel/preset-stage-0": "^7.0.0",
         "@cap-collectif/form": "^0.7.0",
-        "@cap-collectif/ui": "^1.10.18",
+        "@cap-collectif/ui": "^1.10.19",
         "@cfaester/enzyme-adapter-react-18": "0.7.1",
         "@emotion/babel-preset-css-prop": "^11.11.0",
         "@emotion/cache": "^10.0.29",

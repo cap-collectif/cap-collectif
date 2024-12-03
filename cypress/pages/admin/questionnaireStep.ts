@@ -30,10 +30,6 @@ export default new (class AdminQuestionnaireStepPage {
     return cy.get('.jodit-wysiwyg').clear().type(text)
   }
 
-  openQuestionnaireAccordion() {
-    return cy.get('button#accordion-button-global\\.questionnaire').click({ force: true })
-  }
-
   openAddQuestionModal() {
     cy.get('#add-question-btn').click()
     cy.get('#open-question-modal').click()

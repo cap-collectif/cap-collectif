@@ -356,7 +356,10 @@ const QuestionnaireStepFormQuestionnaireTab: React.FC<{
   }
 
   return (
-    <Accordion color={CapUIAccordionColor.Transparent}>
+    <Accordion
+      color={CapUIAccordionColor.Transparent}
+      defaultAccordion={[intl.formatMessage({ id: 'global.questionnaire' })]}
+    >
       <Accordion.Item
         id={intl.formatMessage({ id: 'global.questionnaire' })}
         onMouseEnter={() => {

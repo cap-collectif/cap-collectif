@@ -4,6 +4,7 @@ exports[`Internal | createProposalForm create proposalForm 1`] = `
 Object {
   "createProposalForm": Object {
     "proposalForm": Object {
+      "allowAknowledge": true,
       "owner": Object {
         "username": "Théo QP",
       },

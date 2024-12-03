@@ -22,7 +22,7 @@ export const getDefaultValues = (
     label: step?.label ?? '',
     body: step?.body ?? '',
     title: step?.title ?? '',
-    allowingProgressSteps: step.allowingProgressSteps,
+    allowingProgressSteps: step?.allowingProgressSteps,
     startAt: step?.timeRange?.startAt ?? null,
     endAt: step?.timeRange?.endAt ?? null,
     stepDurationType: {

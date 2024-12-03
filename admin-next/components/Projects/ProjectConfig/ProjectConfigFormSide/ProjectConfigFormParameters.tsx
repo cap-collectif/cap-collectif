@@ -95,6 +95,7 @@ const ProjectConfigFormParameters: React.FC<ProjectConfigFormParametersProps> = 
             }}
           />
         </FormControl>
+
         <FormControl name="metaDescription" control={control}>
           <FormLabel htmlFor="metaDescription" label={intl.formatMessage({ id: 'global.meta.description' })}>
             <Tooltip
@@ -112,15 +113,28 @@ const ProjectConfigFormParameters: React.FC<ProjectConfigFormParametersProps> = 
             placeholder={intl.formatMessage({
               id: 'admin.fields.menu_item.parent_empty',
             })}
+            maxLength={160}
           />
         </FormControl>
+
         <FormControl name="customCode" control={control}>
           <FormLabel htmlFor="customCode" label={intl.formatMessage({ id: 'admin.customcode' })} />
           <FieldInput name="customCode" type="textarea" control={control} placeholder="<style></style>" />
         </FormControl>
         <FormControl name="opinionCanBeFollowed" control={control}>
           <FieldInput id="opinionCanBeFollowed" name="opinionCanBeFollowed" type="checkbox" control={control}>
-            {intl.formatMessage({ id: 'activate-proposals-subscription' })}
+            <FormLabel
+              htmlFor="opinionCanBeFollowed"
+              label={intl.formatMessage({ id: 'activate-proposals-subscription' })}
+            >
+              <Tooltip
+                label={intl.formatMessage({
+                  id: 'activity-tracking-help-text',
+                })}
+              >
+                <Icon name={CapUIIcon.Info} color="blue.500" />
+              </Tooltip>
+            </FormLabel>
           </FieldInput>
         </FormControl>
       </Accordion.Panel>

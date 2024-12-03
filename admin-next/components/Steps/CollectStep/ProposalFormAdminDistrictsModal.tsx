@@ -15,10 +15,10 @@ import {
   FormLabel,
   Heading,
   Icon,
+  Link,
   Modal,
   Switch,
   Text,
-  Tooltip,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { formatCodeToLocale } from '@utils/locale-helper'
@@ -212,9 +212,9 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                 <Box as="span" color="gray.500">
                   {intl.formatMessage({ id: 'global.optional' })}
                 </Box>
-                <Tooltip label="Une aide en plus">
+                <Link target="_blank" href={intl.formatMessage({ id: 'geojson-zones-helplink' })}>
                   <Icon name={CapUIIcon.Info} size={CapUIIconSize.Sm} color="blue.500" />
-                </Tooltip>
+                </Link>
               </FormLabel>
               <FieldInput id="geojson" name="geojson" control={control} type="textarea" />
             </FormControl>
