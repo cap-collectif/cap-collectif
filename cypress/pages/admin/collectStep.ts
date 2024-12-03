@@ -79,7 +79,7 @@ export default new (class AdminCollectStepPage {
   addCategory() {
     cy.get('.NeededInfo_categories_item_add').click()
     cy.get('#categoryName').type('new category')
-    // need to fix feature toggle toggling in env test https://github.com/cap-collectif/platform/issues/16732
+    // https://github.com/cap-collectif/platform/issues/16732 is fixed, now go fix this test !
     // cy.get('[color="#3f51b5"]').click()
     // cy.get('#GRAPH').click()
     cy.get('#add-category-button').click()
@@ -115,7 +115,7 @@ export default new (class AdminCollectStepPage {
     }
     if (config.limit) {
       cy.get('#votesMin-votesLimit_switch').click({ force: true })
-      // need to fix feature toggle toggling in env test https://github.com/cap-collectif/platform/issues/16732
+      // https://github.com/cap-collectif/platform/issues/16732 is fixed, now go fix this test !
       // cy.get('#votesMin').type(config.limit.min)
       cy.get('#votesLimit').type(config.limit.max)
       cy.contains('activate-vote-ranking').click()

@@ -6,7 +6,7 @@ translation:
         enabled: false
 
 qandidate_toggle:
-    redis_namespace: feature_toggle_test
+    redis_namespace: testfeature_toggle
 
 # We disable translation except for routes
 parameters:
