@@ -15,13 +15,18 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class SSOController extends Controller
 {
-    public function __construct(protected Manager $toggleManager, protected AbstractSSOConfigurationRepository $ssoRepository, protected OpenIDReferrerResolver $referrerResolver, protected FranceConnectSSOConfigurationRepository $fcRepository, protected Oauth2SSOConfigurationRepository $authRepository)
-    {
+    public function __construct(
+        protected Manager $toggleManager,
+        protected AbstractSSOConfigurationRepository $ssoRepository,
+        protected OpenIDReferrerResolver $referrerResolver,
+        protected FranceConnectSSOConfigurationRepository $fcRepository,
+        protected Oauth2SSOConfigurationRepository $authRepository
+    ) {
     }
 
     /**
      * @Route("/sso/switch-user", name="app_sso_switch_user", options={"i18n" = false})
-     * @Template("@CapcoApp/Default:sso_switch_user.html.twig")
+     * @Template("@CapcoApp/Default/sso_switch_user.html.twig")
      */
     public function switchUserAction()
     {

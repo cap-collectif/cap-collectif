@@ -14,8 +14,15 @@ use Symfony\Component\Serializer\SerializerInterface;
 
 class OpenIDBackchannel
 {
-    public function __construct(private readonly UserRepository $userRepository, private readonly SessionWithJsonHandler $redisSessionHandler, private readonly EntityManagerInterface $entityManager, private readonly SerializerInterface $serializer, private readonly string $env, private readonly string $backChannelSecret, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly UserRepository $userRepository,
+        private readonly SessionWithJsonHandler $redisSessionHandler,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly SerializerInterface $serializer,
+        private readonly string $env,
+        private readonly string $backChannelSecret,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
     public function __invoke(Request $request, string $token): JsonResponse
@@ -97,9 +104,9 @@ class OpenIDBackchannel
                 201
             );
         }
-        $redisKey = $this->redisSessionHandler->getRedisKey($sessionId);
-        $client = $this->redisSessionHandler->getClient();
-        $success = $client->del($redisKey);
+        $redis = $this->redisSessionHandler->getRedis();
+        $redisKey = $redis->get($sessionId);
+        $success = $redis->del($redisKey);
         if ($success) {
             $user->removeOpenIdSession($openIdSID);
             if ($flush) {

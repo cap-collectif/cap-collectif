@@ -28,6 +28,7 @@ class OpenIDReferrerResolver
                 break;
 
             case 'preprod':
+            case 'dev':
                 $this->refererResolver = new KeycloakReferrerResolver();
 
                 break;

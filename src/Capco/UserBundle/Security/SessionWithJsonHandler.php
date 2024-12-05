@@ -120,6 +120,11 @@ class SessionWithJsonHandler extends RedisSessionHandler
         return $decodedArray[0] ?? '';
     }
 
+    public function getRedis(): \Redis
+    {
+        return $this->redis;
+    }
+
     private function getUser(): ?User
     {
         $user = $this->security->getUser();
