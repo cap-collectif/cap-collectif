@@ -1,27 +1,122 @@
 import { PostFormPage } from 'cypress/pages/index'
 
+export const englishBody = 'I love cats!'
+
 const postId = 'UG9zdDpwb3N0V2l0aE9yZ2FNZW1iZXIy'
 const postTitle = 'Mon chat'
 const postContent = 'Ouragan-Lion'
+const linkedProposal = 'Proposition non archivé'
+
 describe('CRUD', () => {
-  beforeEach(() => {
-    cy.directLoginAs('admin')
-  })
   before(() => {
     cy.task('db:restore')
     cy.task('enable:feature', 'multilangue')
   })
 
   it('Views post list', () => {
+    cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'postsQuery' })
     PostFormPage.visitPostsList()
     cy.wait('@postsQuery')
     cy.contains('Post FR 12')
-    cy.getByDataCy('post-item').should('exist')
+    cy.getByDataCy('post-item').should('exist').and('have.length.greaterThan', 15)
   })
 
-  // todo: add more cases --> create and update when logged as admin / project creator / organization member
-  it('Create post', () => {
+  // #region FROM POSTS LIST
+  it('Views create post page coming from posts list - as ADMIN ', () => {
+    cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'postsQuery' })
+    cy.directLoginAs('admin')
+    PostFormPage.visitPostsList()
+    cy.wait('@postsQuery', { timeout: 10000 })
+    PostFormPage.clickNewArticleButton()
+    cy.wait('@UserListFieldQuery', { timeout: 10000 })
+    PostFormPage.updateArticle('Titre', 'Contenu')
+    cy.get('#authors input').should('not.have.attr', 'disabled')
+    PostFormPage.checkInputProperties('proposals', 'not.exist')
+    cy.get('#projects input').should('exist')
+    PostFormPage.checkInputProperties('themes', 'exist', false, '')
+    PostFormPage.getInput('displayedOnBlog').should('be.checked')
+  })
+
+  it('Views create post page coming from posts list - as ORGA MEMBER ', () => {
+    cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    cy.directLoginAs('valerie')
+    PostFormPage.visitPostsList()
+    PostFormPage.clickNewArticleButton()
+    cy.wait('@UserListFieldQuery', { timeout: 10000 })
+    PostFormPage.updateArticle('Titre', 'Contenu')
+    cy.get('#authors input').should('have.attr', 'disabled')
+    PostFormPage.checkInputProperties('proposals', 'not.exist')
+    cy.get('#projects input').should('exist').and('not.have.attr', 'disabled') // mandatory
+    PostFormPage.checkInputProperties('themes', 'not.exist')
+    PostFormPage.checkInputProperties('proposals', 'not.exist')
+    PostFormPage.getInput('displayedOnBlog').should('not.exist')
+  })
+
+  it('Views create post page coming from posts list - as PROJECT ADMIN ', () => {
+    cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    cy.directLoginAs('project_owner')
+    PostFormPage.visitPostsList()
+    PostFormPage.clickNewArticleButton()
+    cy.wait('@UserListFieldQuery', { timeout: 10000 })
+    PostFormPage.updateArticle('Titre', 'Contenu')
+    cy.get('#authors input').should('have.attr', 'disabled')
+    PostFormPage.checkInputProperties('proposals', 'not.exist')
+    cy.get('#projects input').should('exist').and('not.have.attr', 'disabled')
+    PostFormPage.checkInputProperties('themes', 'not.exist')
+    PostFormPage.getInput('displayedOnBlog').should('not.exist')
+  })
+  // #endregion FROM POSTS LIST
+
+  // #region FROM PROPOSAL PAGE
+  it('Views create post page coming from Proposal page - as ADMIN ', () => {
+    cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    cy.directLoginAs('admin')
+    PostFormPage.visitCreatePostFromProposal()
+    cy.wait('@UserListFieldQuery', { timeout: 10000 })
+    PostFormPage.checkInputProperties('proposals', 'exist', true, linkedProposal)
+    cy.get('#projects input').should('exist').and('have.attr', 'disabled')
+    PostFormPage.checkInputProperties('themes', 'exist', false, '')
+    PostFormPage.checkCreateButtonState('disabled')
+    PostFormPage.updateArticle('Titre', 'Contenu')
+    PostFormPage.getInput('displayedOnBlog').should('be.checked')
+    PostFormPage.checkCreateButtonState('enabled')
+  })
+
+  it('Views create post page coming from Proposal page - as ORGA MEMBER ', () => {
+    cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    cy.directLoginAs('valerie')
+    PostFormPage.visitCreatePostFromProposal()
+    cy.wait('@UserListFieldQuery', { timeout: 10000 })
+    PostFormPage.checkInputProperties('proposals', 'exist', true, linkedProposal)
+    PostFormPage.checkInputProperties('projects', 'not.exist')
+    PostFormPage.checkInputProperties('themes', 'not.exist')
+    PostFormPage.checkCreateButtonState('disabled')
+    PostFormPage.updateArticle('Titre', 'Contenu')
+    PostFormPage.getInput('displayedOnBlog').should('not.exist')
+    PostFormPage.checkCreateButtonState('enabled')
+  })
+
+  it('Views create post page coming from Proposal page - as PROJECT ADMIN ', () => {
+    cy.directLoginAs('project_owner')
+    cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    PostFormPage.visitCreatePostFromProposal()
+    cy.wait('@UserListFieldQuery', { timeout: 10000 })
+    PostFormPage.checkInputProperties('proposals', 'exist', true, linkedProposal)
+    PostFormPage.checkInputProperties('projects', 'not.exist')
+    PostFormPage.checkInputProperties('themes', 'not.exist')
+    //
+    PostFormPage.checkCreateButtonState('disabled')
+    PostFormPage.updateArticle('Titre', 'Contenu')
+    PostFormPage.getInput('displayedOnBlog').should('not.exist')
+    PostFormPage.checkCreateButtonState('enabled')
+  })
+  // #endregion FROM PROPOSAL PAGE
+
+  // #region CRUD
+  it('Creates post', () => {
+    cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'postsQuery' })
     cy.interceptGraphQLOperation({ operationName: 'CreatePostMutation' })
     cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
@@ -47,7 +142,8 @@ describe('CRUD', () => {
     PostFormPage.checkBodyValue(postContent)
   })
 
-  it('Read post', () => {
+  it('Reads post', () => {
+    cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
     cy.interceptGraphQLOperation({ operationName: 'postsQuery' })
     PostFormPage.visitPostsList()
@@ -58,7 +154,8 @@ describe('CRUD', () => {
     PostFormPage.articleShouldExist('Deuxieme article')
   })
 
-  it('Update post', () => {
+  it('Updates post', () => {
+    cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
     cy.interceptGraphQLOperation({ operationName: 'UpdatePostMutation' })
     cy.interceptGraphQLOperation({ operationName: 'ProjectListFieldQuery' })
@@ -71,8 +168,7 @@ describe('CRUD', () => {
     PostFormPage.clickSelectAuthors()
     PostFormPage.selectAuthor('admin')
     PostFormPage.clickUpdateButton()
-    // TODO: uncomment line below when issue fixed -> https://github.com/cap-collectif/platform/issues/16732
-    // PostFormPage.addEnglishTranslation()
+    PostFormPage.addEnglishTranslation()
     // eslint-disable-next-line jest/valid-expect-in-promise
     cy.wait('@UpdatePostMutation').then(interception => {
       // eslint-disable-next-line jest/valid-expect
@@ -80,7 +176,9 @@ describe('CRUD', () => {
     })
     PostFormPage.updateSuccessToastAppears()
   })
-  it('Delete post', () => {
+
+  it('Deletes post', () => {
+    cy.directLoginAs('admin')
     cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
     cy.interceptGraphQLOperation({ operationName: 'DeletePostMutation' })
     cy.interceptGraphQLOperation({ operationName: 'postsQuery' })
@@ -95,4 +193,5 @@ describe('CRUD', () => {
     })
     cy.wait('@postsQuery', { timeout: 15000 })
   })
+  // #endregion test CRUD
 })

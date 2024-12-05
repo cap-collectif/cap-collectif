@@ -1,3 +1,5 @@
+import { englishBody } from '../../../cypress/integration/post/post.cy'
+
 export default new (class PostFormPage {
   get cy() {
     return cy
@@ -19,8 +21,14 @@ export default new (class PostFormPage {
     return this.cy.get('#currentLocale')
   }
 
+  getInput(id: string) {
+    return this.cy.get(`#${id}`)
+  }
   visitPostsList() {
     this.cy.visit(`/admin-next/posts`)
+  }
+  visitCreatePostFromProposal() {
+    this.cy.visit('/admin-next/post?proposalId=UHJvcG9zYWw6cHJvcG9zYWxBcmNoaXZpbmdTdGVwTm90QXJjaGl2ZWQ=')
   }
   visitPostWithId(postId: string) {
     this.cy.visit(`/admin-next/post?id=${postId}`)
@@ -75,7 +83,7 @@ export default new (class PostFormPage {
   addEnglishTranslation() {
     this.switchToEnglish()
     this.enTitle.type('A title in English')
-    this.enBody.type('Hello world! I love cats')
+    this.enBody.type(englishBody)
   }
   openDeleteModal() {
     this.cy.contains('admin.global.delete').click()
@@ -98,5 +106,19 @@ export default new (class PostFormPage {
   }
   updateSuccessToastAppears() {
     this.cy.contains('post-successfully-updated')
+  }
+
+  checkInputProperties(inputId: string, shouldExist: 'exist' | 'not.exist', disabled?: boolean, value?: string | null) {
+    this.getInput(inputId).should(shouldExist)
+    if (shouldExist === 'exist') {
+      if (disabled === true) {
+        this.getInput(inputId).should('have.attr', 'disabled')
+      } else {
+        console.log(this.getInput(inputId))
+        this.getInput(inputId).should('not.have.attr', 'disabled')
+      }
+      console.log(this.getInput(inputId))
+      this.getInput(inputId).should('have.value', value)
+    }
   }
 })()
