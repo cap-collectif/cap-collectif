@@ -82,7 +82,7 @@ export default createFragmentContainer(UserAnalystList, {
       analysts {
         id
         username
-        ...UserAvatar_user
+        ...UserAvatarLegacy_user
       }
       decision {
         isApproved

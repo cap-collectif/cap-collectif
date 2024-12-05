@@ -37,6 +37,7 @@ const DecidorAvatarList = styled.div`
     z-index: 1;
     font-size: 8px;
     background: ${colors.yellow};
+    top: 0px;
   }
 
   .UserAvatarListWrapper + span {

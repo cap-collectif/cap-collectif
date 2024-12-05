@@ -225,6 +225,8 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       ...values,
       collectParticipantsEmail: values?.collectParticipantsEmail ?? false,
       timeless,
+      endAt: timeless ? null : values.endAt,
+      startAt: timeless ? null : values.startAt,
       isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
       questionnaire: CURRENTquestionnaire.questionnaireId,
       ...getRequirementsInput(values),

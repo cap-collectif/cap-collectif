@@ -9,6 +9,10 @@ export const Container = styled.div`
     color: #000;
     margin: 0 0 30px 0;
   }
+
+  span[class*='UserAvatarLegacy__UserAvatarContainer'] {
+    display: block;
+  }
 `
 export const Header = styled.div`
   display: flex;

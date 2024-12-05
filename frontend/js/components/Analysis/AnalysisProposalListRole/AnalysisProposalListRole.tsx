@@ -120,12 +120,12 @@ export default createFragmentContainer(AnalysisProposalListRole, {
       supervisor {
         id
         username
-        ...UserAvatar_user
+        ...UserAvatarLegacy_user
       }
       decisionMaker {
         id
         username
-        ...UserAvatar_user
+        ...UserAvatarLegacy_user
       }
     }
   `,

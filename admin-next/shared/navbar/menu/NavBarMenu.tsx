@@ -227,7 +227,7 @@ export const NavBarMenuContent = ({
         align="end"
       >
         {showAdminLink ? (
-          <MenuItem theme={theme} href={user.isAdmin ? '/admin/' : '/admin-next/projects'}>
+          <MenuItem theme={theme} href="/admin-next/projects">
             <Icon name={CapUIIcon.Cog} size={CapUIIconSize.Md} color={theme.textColor} mr={1} />
             {intl.formatMessage({
               id: 'global.administration',

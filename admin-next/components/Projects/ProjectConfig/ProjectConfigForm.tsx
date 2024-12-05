@@ -149,7 +149,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
       authors: values.authors.map(a => a.value),
       districts: values.districts.map(d => d.value),
       restrictedViewerGroups:
-        values.visibility.labels[0] === 'CUSTOM' ? values.restrictedViewerGroups.map(r => r.value) : undefined,
+        values.visibility.labels[0] === 'CUSTOM' ? values.restrictedViewerGroups.map(r => r.value) : [],
       visibility: values.visibility.labels[0] as ProjectVisibility,
       publishedAt: moment(values.publishedAt).format('YYYY-MM-DD HH:mm:ss'),
       externalLink: isExternal ? values.externalLink : undefined,

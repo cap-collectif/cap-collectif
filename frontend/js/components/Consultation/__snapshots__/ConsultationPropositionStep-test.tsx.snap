@@ -4,7 +4,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
 <Fragment>
   <ConsultationPropositionStep__ConsultationPlanInner
     id="consultation-plan"
-    offset={60}
+    offset={10}
   >
     <Relay(Connect(injectIntl(ConsultationPlan)))
       consultation={
@@ -178,7 +178,7 @@ exports[`<ConsultationPropositionStep /> renders correctly with plan and when th
 <Fragment>
   <ConsultationPropositionStep__ConsultationPlanInner
     id="consultation-plan"
-    offset={60}
+    offset={10}
   >
     <Relay(Connect(injectIntl(ConsultationPlan)))
       consultation={
@@ -636,7 +636,7 @@ exports[`<ConsultationPropositionStep /> should not render the plan when the ste
 <Fragment>
   <ConsultationPropositionStep__ConsultationPlanInner
     id="consultation-plan"
-    offset={60}
+    offset={10}
   >
     <Relay(Connect(injectIntl(ConsultationPlan)))
       consultation={

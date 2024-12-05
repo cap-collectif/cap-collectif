@@ -144,10 +144,10 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     const input = {
       ...values,
       stepId,
-      startAt: values?.startAt,
-      endAt: values?.endAt,
       isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
       timeless,
+      endAt: timeless ? null : values?.endAt,
+      startAt: timeless ? null : values?.startAt,
     }
 
     try {

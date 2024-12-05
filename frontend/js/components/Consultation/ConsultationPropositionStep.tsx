@@ -23,7 +23,7 @@ type Props = RelayProps & {
   readonly showConsultationPlan: boolean
 }
 
-const STICKY_OFFSET_TOP = 60
+const STICKY_OFFSET_TOP = 10
 const META_STEP_QUERY_SELECTOR = '.meta__step__navigation'
 
 const ConsultationPlanInner = styled.div`

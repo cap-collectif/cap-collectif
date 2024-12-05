@@ -329,6 +329,8 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
         ...values,
         isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
         timeless,
+        endAt: timeless ? null : values.endAt,
+        startAt: timeless ? null : values.startAt,
         consultations: consultationsIds,
         ...getRequirementsInput(values),
       }
