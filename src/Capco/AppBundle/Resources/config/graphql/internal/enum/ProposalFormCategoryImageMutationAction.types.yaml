@@ -1,0 +1,12 @@
+ProposalFormCategoryImageMutationAction:
+    type: enum
+    config:
+        name: ProposalFormCategoryImageMutationAction
+        description: 'Available actions for an `handleProposalFormCategoryImage` mutation.'
+        values:
+            ADD:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\HandleProposalFormCategoryImageMutation::ADD
+                description: 'Add new category image.'
+            DELETE:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\HandleProposalFormCategoryImageMutation::DELETE
+                description: 'Delete existing category image.'

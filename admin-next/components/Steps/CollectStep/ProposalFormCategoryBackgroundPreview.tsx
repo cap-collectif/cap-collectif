@@ -9,13 +9,7 @@ export interface ProposalFormCategoryBackgroundPreviewProps {
   color: string | null
   icon: string | null
   name: string | null
-  customCategoryImage: {
-    id: string
-    image: {
-      url: string
-      id: string
-    } | null
-  } | null
+  imageUrl: string | null | undefined
 }
 
 const CircledIcon = styled.div`
@@ -33,7 +27,7 @@ const ProposalFormCategoryBackgroundPreview: React.FC<ProposalFormCategoryBackgr
   name,
   icon,
   color,
-  customCategoryImage,
+  imageUrl,
 }) => {
   const intl = useIntl()
   return (
@@ -52,10 +46,10 @@ const ProposalFormCategoryBackgroundPreview: React.FC<ProposalFormCategoryBackgr
       }}
       overflow="hidden"
     >
-      {customCategoryImage ? (
+      {imageUrl ? (
         <Box
           as="img"
-          src={customCategoryImage.image?.url}
+          src={imageUrl}
           alt="Category background"
           width="100%"
           sx={{ objectFit: 'cover' }}

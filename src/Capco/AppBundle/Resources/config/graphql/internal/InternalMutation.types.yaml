@@ -1858,3 +1858,11 @@ InternalMutation:
                     inputType: UpdateVotesVisibilityInput
                     payloadType: UpdateVotesVisibilityPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateVotesVisibilityMutation", args, getUser())'
+            handleProposalFormCategoryImage:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: HandleProposalFormCategoryImageInput
+                    payloadType: HandleProposalFormCategoryImagePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HandleProposalFormCategoryImageMutation", args, getUser())'
+

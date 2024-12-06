@@ -1,0 +1,8 @@
+HandleProposalFormCategoryImagePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            categoryImage:
+                type: 'CategoryImage'
+            deletedCategoryImageId:
+                type: 'ID'

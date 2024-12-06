@@ -38,6 +38,7 @@ export const getFormattedCategories = (categories: FormValues['form']['categorie
       color: !!category.color ? category.color.replace('#', 'COLOR_').toUpperCase() : 'COLOR_EF5350',
       icon: !!category.icon ? category.icon.toUpperCase().replace(/-/g, '_') : null,
       categoryImage: !!category.categoryImage ? category.categoryImage.id : null,
+      newCategoryImagePreview: undefined
     })) ?? []
   )
 }
@@ -142,7 +143,6 @@ const ProposalFormAdminCategories: React.FC<ProposalFormAdminCategoriesProps> = 
       <ProposalFormAdminCategoriesModal
         query={query}
         isUpdating={false}
-        isContainer
         index={_categories.length}
         initialValue={null}
         append={append}

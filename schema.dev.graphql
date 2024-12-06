@@ -7650,6 +7650,21 @@ type GroupEdge {
 """A string containing HTML code."""
 scalar HTML
 
+input HandleProposalFormCategoryImageInput {
+  """Id of the image media."""
+  mediaId: ID!
+
+  """ADD or DELETE"""
+  action: ProposalFormCategoryImageMutationAction!
+  clientMutationId: String
+}
+
+type HandleProposalFormCategoryImagePayload {
+  categoryImage: CategoryImage
+  deletedCategoryImageId: ID
+  clientMutationId: String
+}
+
 """Section projects map page in admin"""
 type HomePageProjectsMapSectionConfiguration {
   """The ID of an object."""
@@ -9119,6 +9134,7 @@ type Mutation {
   updateMediatorVotes(input: UpdateMediatorVotesInput!): UpdateMediatorVotesPayload
   deleteParticipant(input: DeleteParticipantInput!): DeleteParticipantPayload
   updateVotesVisibility(input: UpdateVotesVisibilityInput!): UpdateVotesVisibilityPayload
+  handleProposalFormCategoryImage(input: HandleProposalFormCategoryImageInput!): HandleProposalFormCategoryImagePayload
 }
 
 """A connection to a list of items."""
@@ -12598,6 +12614,15 @@ type ProposalForm implements Node & UniformResourceLocatable {
 enum ProposalFormAffiliation {
   """`ProposalForms` that are owned by the authenticated user."""
   OWNER
+}
+
+"""Available actions for an `handleProposalFormCategoryImage` mutation."""
+enum ProposalFormCategoryImageMutationAction {
+  """Add new category image."""
+  ADD
+
+  """Delete existing category image."""
+  DELETE
 }
 
 """A connection to a list of items."""

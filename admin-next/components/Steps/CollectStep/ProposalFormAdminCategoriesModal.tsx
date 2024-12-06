@@ -21,19 +21,21 @@ import {
 } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
+import { useFeatureFlag } from '@shared/hooks/useFeatureFlag'
 import ProposalFormCategoryColor from '@components/Steps/CollectStep/ProposalFormCategoryColor'
 import ProposalFormCategoryIcon from '@components/Steps/CollectStep/ProposalFormCategoryIcon'
 import ProposalFormCategoryBackgroundPreview from '@components/Steps/CollectStep/ProposalFormCategoryBackgroundPreview'
 import dynamic from 'next/dynamic'
 import { graphql, useFragment } from 'react-relay'
 import { ProposalFormAdminCategoriesModal_query$key } from '@relay/ProposalFormAdminCategoriesModal_query.graphql'
+import HandleProposalFormCategoryImageMutation from '@mutations/HandleProposalFormCategoryImageMutation'
 
 import {
   AvailableProposalCategoryColor,
   AvailableProposalCategoryIcon,
 } from '@relay/UpdateProposalFormMutation.graphql'
 import { UPLOAD_PATH } from '@utils/config'
+import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 
 const ProposalFormCategoryPinPreview = dynamic(() => import('./ProposalFormCategoryPinPreview'), {
   ssr: false,
@@ -42,7 +44,6 @@ const ProposalFormCategoryPinPreview = dynamic(() => import('./ProposalFormCateg
 export interface ProposalFormAdminCategoriesModalProps {
   query: ProposalFormAdminCategoriesModal_query$key
   isUpdating: boolean
-  isContainer?: boolean
   initialValue?: {
     id: string
     name: string
@@ -56,6 +57,13 @@ export interface ProposalFormAdminCategoriesModalProps {
       } | null
     } | null
     newCategoryImage?: string | null
+    newCategoryImagePreview?: {
+      "id": string,
+      "name": string,
+      "size": string,
+      "url": string,
+      "type": string
+    }
   }
   index?: number
   append?: (obj: any) => void
@@ -66,6 +74,7 @@ export interface ProposalFormAdminCategoriesModalProps {
   usedIcons: string[]
 }
 interface ProposalFormAdminCategoriesModalFormValues {
+  id: string | null
   categoryName: string | null
   categoryColor: string | null
   categoryIcon: string | null
@@ -74,45 +83,55 @@ interface ProposalFormAdminCategoriesModalFormValues {
     image: {
       url: string
       id: string
+      name: string
     } | null
   } | null
-  newCategoryImage?: {
-    id: string
-    image: {
-      url: string
-      id: string
-    } | null
-  } | null
+  newCategoryImage?: string | null
+  newCategoryImagePreview?: {
+    "id": string,
+    "name": string,
+    "size": string,
+    "url": string,
+    "type": string
+  }
   categoryImageEnabled: boolean
 }
 
+type File = {
+  id: string
+  name: string
+  size: string
+  type: string
+  url: string
+}
+
 const CATEGORIES_MODAL_FRAGMENT = graphql`
-  fragment ProposalFormAdminCategoriesModal_query on Query {
-    customCategoryImages: categoryImages(isDefault: false) {
-      id
-      image {
-        url
-        id
-        name
-      }
+    fragment ProposalFormAdminCategoriesModal_query on Query {
+        customCategoryImages: categoryImages(isDefault: false) {
+            id
+            image {
+                url
+                id
+                name
+                type: contentType
+            }
+        }
     }
-  }
 `
 
 const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModalProps> = ({
-  isUpdating,
-  isContainer = false,
-  initialValue,
-  index,
-  colors,
-  icons,
-  usedColors,
-  usedIcons,
-  query: queryRef,
-  append,
-  update,
+   isUpdating,
+   initialValue,
+   index,
+   colors,
+   icons,
+   usedColors,
+   usedIcons,
+   query: queryRef,
+   append,
+   update,
 }) => {
-  const features = useFeatureFlags(['display_pictures_in_depository_proposals_list'])
+  const display_pictures_in_depository_proposals_list = useFeatureFlag('display_pictures_in_depository_proposals_list')
   const { customCategoryImages } = useFragment(CATEGORIES_MODAL_FRAGMENT, queryRef)
   const intl = useIntl()
   const mergedColors = colors.map(c => ({
@@ -125,12 +144,14 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
   }))
 
   const defaultValues = {
+    id: initialValue?.id ?? null,
     categoryName: initialValue?.name ?? null,
     categoryColor: initialValue?.color ?? mergedColors.find(elem => !elem.used).value,
     categoryIcon: initialValue?.icon ?? null,
     categoryImage: initialValue?.categoryImage ?? null,
-    categoryImageEnabled: !!initialValue?.categoryImage || !!initialValue?.newCategoryImage,
-    newCategoryImage: null,
+    categoryImageEnabled: !!initialValue?.categoryImage || !!initialValue?.newCategoryImagePreview,
+    newCategoryImage: initialValue?.newCategoryImage ?? null,
+    newCategoryImagePreview: initialValue?.newCategoryImagePreview ?? null,
   }
 
   const { reset, handleSubmit, formState, control, watch, setValue } =
@@ -139,54 +160,81 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
       mode: 'onChange',
     })
 
-  const selectedCategoryImage = watch('categoryImage')
-  const selectedCategoryColor = watch('categoryColor')
+  const categoryIcon = watch('categoryIcon')
+  const categoryName = watch('categoryName')
+  const categoryColor = watch('categoryColor')
+  const categoryImage = watch('categoryImage')
+  const categoryImageEnabled = watch('categoryImageEnabled')
+  const newCategoryImage = watch('newCategoryImage')
 
   const onSubmit = (values: ProposalFormAdminCategoriesModalFormValues) => {
-    if (isUpdating) {
-      if (!features.display_pictures_in_depository_proposals_list) {
-        const updatedCategory = {
-          name: values.categoryName,
+    const getCategoryInput = () => {
+      if (!display_pictures_in_depository_proposals_list) {
+        return {
+          name: values.categoryName
         }
-        update(index, updatedCategory)
-      } else {
-        const updatedCategory = {
-          name: values.categoryName,
-          color: values.categoryColor,
-          icon: values.categoryIcon,
-          categoryImage: values.categoryImage,
-          newCategoryImage: values.newCategoryImage?.id,
-        }
-        update(index, updatedCategory)
+      }
+
+      return {
+        id: values.id,
+        name: values.categoryName,
+        color: values.categoryColor,
+        icon: values.categoryIcon,
+        categoryImage: values.categoryImage?.id ? values.categoryImage : null,
+        newCategoryImage: values.categoryImage?.id ? null : values.newCategoryImagePreview?.id,
+        newCategoryImagePreview: values?.newCategoryImagePreview,
       }
     }
-    if (!isUpdating) {
-      if (!features.display_pictures_in_depository_proposals_list) {
-        const updatedCategory = {
-          name: values.categoryName,
-        }
-        append(updatedCategory)
-      } else {
-        const updatedCategory = {
-          name: values.categoryName,
-          color: values.categoryColor,
-          icon: values.categoryIcon,
-          categoryImage: values.categoryImage,
-          newCategoryImage: values.newCategoryImage?.id,
-        }
-        append(updatedCategory)
+
+    const category = getCategoryInput()
+
+    if (isUpdating) {
+      update(index, category)
+      return;
+    }
+
+    append(category)
+  }
+
+  const onUpload = async (file: File) => {
+    {
+      if (!file) return
+      try {
+        const response = await HandleProposalFormCategoryImageMutation.commit({
+          input: {
+            mediaId: file.id,
+            action: 'ADD',
+          },
+        })
+
+        const categoryImage = response.handleProposalFormCategoryImage.categoryImage
+
+        setValue('categoryImage', categoryImage)
+      } catch (error) {
+        return mutationErrorToast(intl)
       }
+    }
+  }
+
+  const onFileRemove = async (file: File) => {
+    if (!file) return
+    try {
+      await HandleProposalFormCategoryImageMutation.commit({
+        input: {
+          mediaId: file.id,
+          action: 'DELETE',
+        },
+      })
+      setValue('categoryImage', null)
+    } catch (error) {
+      return mutationErrorToast(intl)
     }
   }
 
   return (
     <Modal
       disclosure={
-        isContainer ? (
-          <Button width="60px" variant="tertiary" className={`NeededInfo_categories_item_add`}>
-            {intl.formatMessage({ id: 'admin.global.add' })}
-          </Button>
-        ) : (
+        isUpdating ? (
           <ButtonQuickAction
             variantColor="blue"
             icon={CapUIIcon.Pencil}
@@ -203,6 +251,10 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
               })
             }}
           />
+        ) : (
+          <Button width="60px" variant="tertiary" className={`NeededInfo_categories_item_add`} onClick={() => reset()}>
+            {intl.formatMessage({ id: 'admin.global.add' })}
+          </Button>
         )
       }
       size={CapUIModalSize.Lg}
@@ -233,13 +285,13 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
               />
             </FormControl>
 
-            {features.display_pictures_in_depository_proposals_list && (
+            {display_pictures_in_depository_proposals_list && (
               <>
                 <FormLabel mb={2} label={intl.formatMessage({ id: 'global.color' })} />
                 <ProposalFormCategoryColor
                   isNewCategory={!isUpdating}
                   categoryColors={mergedColors}
-                  selectedColor={selectedCategoryColor}
+                  selectedColor={categoryColor}
                   updateCurrentColor={color => {
                     setValue('categoryColor', color)
                   }}
@@ -260,8 +312,8 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                 <ProposalFormCategoryIcon
                   categoryIcons={mergedIcons}
                   onIconClick={icon => setValue('categoryIcon', icon)}
-                  selectedColor={watch('categoryColor')}
-                  selectedIcon={watch('categoryIcon')}
+                  selectedColor={categoryColor}
+                  selectedIcon={categoryIcon}
                 />
 
                 <FormLabel label={intl.formatMessage({ id: 'global.previsualisation' })}>
@@ -271,17 +323,15 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                 </FormLabel>
                 <Flex direction="row" justifyContent="space-between" gap={2} my={3} height="120px" minHeight="120px">
                   <ProposalFormCategoryBackgroundPreview
-                    icon={watch('categoryIcon')}
-                    name={watch('categoryName')}
-                    color={watch('categoryColor')}
-                    customCategoryImage={watch('categoryImage')}
+                    icon={categoryIcon}
+                    name={categoryName}
+                    color={categoryColor}
+                    imageUrl={categoryImage?.image?.url}
                   />
-                  {watch('categoryColor') && watch('categoryIcon') ? (
+                  {categoryColor && categoryIcon ? (
                     <ProposalFormCategoryPinPreview
-                      // @ts-ignore
-                      color={watch('categoryColor')}
-                      // @ts-ignore
-                      icon={watch('categoryIcon')}
+                      color={categoryColor}
+                      icon={categoryIcon}
                     />
                   ) : null}
                 </Flex>
@@ -291,7 +341,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                       name="categoryImageEnabled"
                       control={control}
                       onClick={() => {
-                        if (watch('categoryImageEnabled')) {
+                        if (categoryImageEnabled) {
                           setValue('categoryImage', null)
                         }
                       }}
@@ -302,7 +352,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                       </FieldInput>
                     </FormControl>
                   </Box>
-                  {watch('categoryImageEnabled') && (
+                  {categoryImageEnabled && (
                     <Box px={3} py={1}>
                       {!!customCategoryImages.length && (
                         <>
@@ -320,7 +370,8 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                             gap={1}
                           >
                             {customCategoryImages.map(customImage => {
-                              const isSelectedImage = selectedCategoryImage?.id === customImage.id
+                              const isSelectedImage =
+                                categoryImage?.id === customImage.id || newCategoryImage === customImage?.image?.id
                               return (
                                 <Flex
                                   key={customImage.id}
@@ -330,6 +381,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                                   style={{ cursor: 'pointer' }}
                                   onClick={() => {
                                     setValue('categoryImage', customImage)
+                                    setValue('newCategoryImage', null)
                                   }}
                                 >
                                   <Box
@@ -380,7 +432,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                         <FieldInput
                           width="100%"
                           type="uploader"
-                          name="newCategoryImage"
+                          name="newCategoryImagePreview"
                           control={control}
                           format=".jpg,.jpeg,.png"
                           maxSize={8000000}
@@ -391,6 +443,9 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                           size={UPLOADER_SIZE.LG}
                           uploadURI={UPLOAD_PATH}
                           showThumbnail
+                          // @ts-ignore
+                          onChange={onUpload}
+                          onRemove={onFileRemove}
                         />
                       </FormControl>
                     </Box>
@@ -421,7 +476,6 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                 handleSubmit(onSubmit)(e)
                 if (formState.isValid) {
                   hide()
-                  reset()
                 }
               }}
             >

@@ -1,0 +1,10 @@
+HandleProposalFormCategoryImageInput:
+    type: relay-mutation-input
+    config:
+        fields:
+            mediaId:
+                type: 'ID!'
+                description: 'Id of the image media.'
+            action:
+                type: 'ProposalFormCategoryImageMutationAction!'
+                description: 'ADD or DELETE'
