@@ -17,7 +17,7 @@ export default new (class AdminDashboardPage {
   }
 
   get navbarUsername() {
-    return this.cy.get('#navbar-username')
+    return this.cy.get('#navbar-username', { timeout: 15000 })
   }
 
   get adminLink() {

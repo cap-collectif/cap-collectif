@@ -12,7 +12,7 @@ exports[`<RegistrationButton /> renders a button 1`] = `
   />,
   <button
     aria-label="open.inscription_modal"
-    className="sc-bcXGCL sc-laZSpB gPtpcX gdlnBM cap-button"
+    className="sc-bcXGCL sc-laZSpB dViuda gdlnBM cap-button"
     id="registration-button"
     onClick={[Function]}
     type="button"

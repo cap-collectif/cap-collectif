@@ -52,7 +52,6 @@ exports[`<UserAvatarListContainer /> renders correctly 1`] = `
               "moderation_comment": false,
               "multi_consultations": false,
               "multilangue": false,
-              "new_navbar": false,
               "new_project_card": false,
               "newsletter": false,
               "noindex_on_profiles": false,

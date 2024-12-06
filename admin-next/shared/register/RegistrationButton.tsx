@@ -8,7 +8,6 @@ import { useAnalytics } from 'use-analytics'
 import { useEventListener } from '@shared/hooks/useEventListener'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import RegistrationModal from '@shared/register/RegistrationModal'
-import { getTheme } from '@shared/navbar/NavBar.utils'
 import { ButtonProps, Button } from '@cap-collectif/ui'
 import RegistrationFormWrapper from './RegistrationFormWrapper'
 
@@ -38,14 +37,12 @@ export const RegistrationButton: React.FC<ButtonProps & { query: RegistrationBut
 }) => {
   const query = useFragment(FRAGMENT, queryKey)
   const intl = useIntl()
-  const newNavbar = useFeatureFlag('new_navbar')
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
   const registration = useFeatureFlag('registration')
   const { track } = useAnalytics()
 
   useEventListener(openRegistrationModal, () => onOpen())
-  const theme = getTheme(query.siteColors)
 
   if (!registration || query.isAuthenticated) return null
 
@@ -65,15 +62,6 @@ export const RegistrationButton: React.FC<ButtonProps & { query: RegistrationBut
         }}
         variant="secondary"
         variantColor="primary"
-        sx={
-          !newNavbar
-            ? {
-                color: `${theme.primaryLabel} !important`,
-                background: `${theme.primaryColor} !important`,
-                border: 'none',
-              }
-            : null
-        }
         aria-label={intl.formatMessage({
           id: 'open.inscription_modal',
         })}

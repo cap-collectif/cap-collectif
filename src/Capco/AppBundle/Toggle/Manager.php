@@ -89,7 +89,6 @@ class Manager
     final public const mediator = 'mediator';
     final public const online_help = 'online_help';
     final public const full_proposal_card = 'full_proposal_card';
-    final public const new_navbar = 'new_navbar';
     final public const multi_consultations = 'multi_consultations';
 
     final public const ADMIN_ALLOWED_FEATURES = [
@@ -123,7 +122,6 @@ class Manager
         self::mediator,
         self::online_help,
         self::full_proposal_card,
-        self::new_navbar,
         self::multi_consultations,
     ];
 
@@ -205,7 +203,6 @@ class Manager
         self::mediator,
         self::online_help,
         self::full_proposal_card,
-        self::new_navbar,
         self::multi_consultations,
     ];
 

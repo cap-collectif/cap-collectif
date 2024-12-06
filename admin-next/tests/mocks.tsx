@@ -99,7 +99,6 @@ export const features: FeatureFlags = {
   online_help: false,
   multi_consultations: false,
   full_proposal_card: false,
-  new_navbar: false,
 }
 
 const environment = {

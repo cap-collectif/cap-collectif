@@ -12,7 +12,6 @@ import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { mediaQueryMobile, mediaQueryTablet } from '~/utils/sizes'
 import withColors from '~/components/Utils/withColors'
 import type { FeatureToggles, State } from '~/types'
-import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export const BlockContainer = styled.div`
   display: flex;
@@ -59,11 +58,10 @@ export const NavBar = styled(Navbar)<{
   borderColor: string
   buttonBgColor: string
   buttonTextColor: string
-  newNavbar: boolean
 }>`
   border-color: ${({ borderColor }) => borderColor};
-  top: ${({ newNavbar }) => (newNavbar ? '0px' : '50px')};
-  z-index: ${({ newNavbar }) => (newNavbar ? '1041' : '1029')};
+  top: 0px;
+  z-index: 1041;
   text-transform: capitalize;
   max-height: 500px;
   transition: max-height 0.25s ease-in;
@@ -185,18 +183,17 @@ export const ProposalVoteBasketWidget = ({
   isAuthenticated,
 }: Props) => {
   const [collapsed, setCollapsed] = useState<boolean>(true)
-  const newNavbar = useFeatureFlag('new_navbar')
   const creditsSpent = viewer && viewer.proposalVotes ? viewer.proposalVotes.creditsSpent : 0
   const isBudget = step.voteType === 'BUDGET'
   const isInterpellation = isInterpellationContextFromStep(step)
   const votesPageUrl = `/projects/${step.project?.slug || ''}/votes`
   useEffect(() => {
     const html = document.querySelector('html')
-    if (html) html.classList.add(newNavbar ? 'has-new-vote-widget' : 'has-vote-widget')
+    if (html) html.classList.add('has-new-vote-widget')
     return () => {
-      if (html) html.classList.remove(newNavbar ? 'has-new-vote-widget' : 'has-vote-widget')
+      if (html) html.classList.remove('has-new-vote-widget')
     }
-  }, [newNavbar])
+  }, [])
   return (
     <NavBar
       fixedTop
@@ -207,7 +204,6 @@ export const ProposalVoteBasketWidget = ({
       borderColor={voteBarBorderColor}
       buttonBgColor={voteBarButtonBgColor}
       buttonTextColor={voteBarButtonTextColor}
-      newNavbar={newNavbar}
     >
       {isBudget && (
         <Icon

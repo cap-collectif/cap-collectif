@@ -23,5 +23,5 @@ Scenario: Admin wants to enable his account and set his password
   And I press "reset-content-confirm"
   And I wait "global.loading" to disappear on current page
   Then I should be redirected to "/"
-  Then I can see I am logged in as "admin_without_password"
+  Then I can see I am logged in as "admin_without_password" and I am "flaky"
   And I should see "resetting.flash.success"

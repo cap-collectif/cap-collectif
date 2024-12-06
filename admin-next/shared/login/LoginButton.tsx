@@ -10,7 +10,6 @@ import { LoginButton_query$key } from '@relay/LoginButton_query.graphql'
 import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
 import LoginFormWrapper from '@shared/login/LoginFormWrapper'
 import { useEventListener } from '@shared/hooks/useEventListener'
-import { getTheme } from '@shared/navbar/NavBar.utils'
 
 export const openLoginModal = 'openLoginModal'
 
@@ -46,7 +45,6 @@ export const LoginButton: React.FC<ButtonProps & { query: LoginButton_query$key 
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const byPassLoginModal = useFeatureFlag('sso_by_pass_auth')
   const oauth2SwitchUser = useFeatureFlag('oauth2_switch_user')
-  const newNavbar = useFeatureFlag('new_navbar')
   const loginWithOpenID = query.oauth2sso.edges.some(({ node }) => node.enabled)
   const baseUrl = getBaseUrl()
   let redirectUrl: string = baseUrl
@@ -59,8 +57,6 @@ export const LoginButton: React.FC<ButtonProps & { query: LoginButton_query$key 
   }
 
   useEventListener(openLoginModal, () => onOpen())
-
-  const theme = getTheme(query.siteColors)
 
   return (
     <>
@@ -83,14 +79,6 @@ export const LoginButton: React.FC<ButtonProps & { query: LoginButton_query$key 
             onOpen()
           }
         }}
-        sx={
-          !newNavbar
-            ? {
-                color: `${isOpen ? theme.textColor : theme.menuBackground} !important`,
-                background: !isOpen ? `${theme.textColor} !important` : '',
-              }
-            : null
-        }
         {...props}
       >
         {intl.formatMessage({ id: 'global.login' })}

@@ -1181,7 +1181,6 @@ class ApplicationContext extends UserContext
         $this->iClickElement("#language-choice-{$locale}");
         $this->iClickElement('#language-header-continue-button');
         $this->iWaitElementToDisappearOnPage('#changeLanguageProposalContainer');
-        $this->iWaitElementToAppearOnPage('#main-navbar-toggle');
     }
 
     /**

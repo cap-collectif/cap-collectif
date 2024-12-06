@@ -493,63 +493,6 @@
 
     {% endif %}
 
-
-    #main-navbar,
-    #main-navbar .dropdown-menu,
-    #main-navbar .navbar-collapse {
-        background-color: {{ menuBg | raw }};
-        color: {{ menuText | raw }};
-    }
-
-    #main-navbar .navbar-nav > li > a,
-    #main-navbar .dropdown-menu > li > a,
-    #main-navbar .dropdown-menu > .nav-dropdown-section > li,
-    #main-navbar .dropdown-menu > .nav-dropdown-section > li > a,
-    #main-navbar a.navbar__search {
-        color: {{ menuText | raw }};
-    }
-
-    #main-navbar .navbar-toggle {
-        border-color: {{ menuText | raw }};
-    }
-
-    #main-navbar .navbar-toggle .icon-bar {
-        background-color: {{ menuText | raw }};
-    }
-
-    #main-navbar .navbar-toggle:hover .icon-bar,
-    #main-navbar .navbar-toggle:focus .icon-bar {
-        background-color: {{ menuTextHover | raw }};
-    }
-
-    #main-navbar .navbar-nav > .active > a,
-    #main-navbar .navbar-nav > .active > a:hover,
-    #main-navbar .navbar-nav > .active > a:focus,
-    #main-navbar .navbar-nav > .open > a,
-    #main-navbar .navbar-nav > .open > a:hover,
-    #main-navbar .navbar-nav > .open > a:focus,
-    #main-navbar .dropdown-menu>.active > a,
-    #main-navbar .dropdown-menu>.active > a:focus,
-    #main-navbar .dropdown-menu>.active > a:hover,
-    #main-navbar a.navbar__search.active {
-        color: {{ menuTextActive | raw }};
-        background-color: {{ menuBgHover | raw }};
-    }
-
-    #main-navbar .navbar-nav > li > a:hover,
-    #main-navbar .navbar-nav > li > a:focus,
-    #main-navbar .dropdown-menu > li > a:hover,
-    #main-navbar .dropdown-menu > li > a:focus,
-    #main-navbar .dropdown-menu > .nav-dropdown-section > li > a:hover,
-    #main-navbar .dropdown-menu > .nav-dropdown-section > li > a:focus,
-    #main-navbar .navbar-toggle:hover,
-    #main-navbar .navbar-toggle:focus,
-    #main-navbar a.navbar__search:hover,
-    #main-navbar a.navbar__search:focus {
-        color: {{ menuTextHover | raw }};
-        background-color: {{ menuBgHover | raw }};
-    }
-
     .btn--connection {
         background-color: {{ menuText | raw }} !important;
         color: {{ menuBg | raw }} !important;

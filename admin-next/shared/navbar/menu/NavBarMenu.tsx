@@ -77,6 +77,7 @@ const MenuItem = ({
   onClick,
   target,
   rel,
+  id,
 }: {
   theme: NavBarTheme
   children?: React.ReactNode
@@ -84,8 +85,10 @@ const MenuItem = ({
   onClick?: () => void
   target?: string
   rel?: string
+  id?: string
 }) => (
   <Flex
+    id={id}
     as={ReactMenuItem}
     href={href}
     onClick={onClick}
@@ -198,6 +201,7 @@ export const NavBarMenuContent = ({
       }}
     >
       <Menu
+        menuClassName="user-profile"
         menuButton={({ open }) => (
           <Flex
             p={4}
@@ -214,6 +218,7 @@ export const NavBarMenuContent = ({
             }}
           >
             <Flex
+              id="navbar-username"
               alignItems="center"
               color="inherit"
               _hover={{ color: theme.textHoverColor, bg: theme.subMenuBackground }}
@@ -272,7 +277,7 @@ export const NavBarMenuContent = ({
             id: 'global.params',
           })}
         </MenuItem>
-        <MenuItem theme={theme} onClick={logout}>
+        <MenuItem theme={theme} onClick={logout} id="logout-button">
           <Icon name={CapUIIcon.Logout} size={CapUIIconSize.Md} color={theme.textColor} mr={1} />
           {intl.formatMessage({
             id: 'global.logout',

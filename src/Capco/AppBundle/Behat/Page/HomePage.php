@@ -29,7 +29,7 @@ class HomePage extends Page
         if (
             !$this->getSession()->wait(
                 10000,
-                "($('#main-navbar').length + $('#shield-mode').length) > 0"
+                "($('#main_navbar').length + $('#shield-mode').length) > 0"
             )
         ) {
             throw new \RuntimeException('HomePage did not fully load, check selector in "verifyPage".');

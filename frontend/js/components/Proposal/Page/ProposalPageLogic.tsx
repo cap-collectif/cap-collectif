@@ -48,12 +48,11 @@ const PanelContainer = styled.div.attrs(({ bottom, scrollY }: any) => ({
   scrollY: number
   bottom: number
   hasVoteBar: boolean
-  newNavbar: boolean
 }>`
   display: ${({ isAnalysing }) => !isAnalysing && 'none'};
   box-shadow: 0 2px 15px 0 rgba(0, 0, 0, 0.12);
   height: 100%;
-  z-index: ${({ newNavbar }) => (newNavbar ? '1041' : '4')};
+  z-index: 1041;
   top: ${({ scrollY, bottom, hasVoteBar }) =>
     bottom < 0 ? 'unset' : scrollY < 25 ? (hasVoteBar ? '125px' : '75px') : hasVoteBar ? '100px' : '50px'};
   position: ${({ scrollY }) => (scrollY >= 25 || !scrollY ? 'fixed' : 'absolute')};
@@ -167,7 +166,6 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
   const bottom = bodyHeight - scrollY - height - footerSize
   const twilio = useFeatureFlag('twilio')
   const proposalSmsVote = useFeatureFlag('proposal_sms_vote')
-  const newNavbar = useFeatureFlag('new_navbar')
   const smsVoteEnabled = step?.isProposalSmsVoteEnabled && twilio && proposalSmsVote && !isAuthenticated
   const showVotesWidget =
     (isAuthenticated || smsVoteEnabled) && currentVotableStep && currentVotableStep.state === 'OPENED'
@@ -260,13 +258,7 @@ export const ProposalPageLogic = ({ queryRef, isAuthenticated, platformLocale }:
         </PageContainer>
       </Tab.Container>
       {hasAnalysis && !isMobile && proposal && tabKey === 'content' && (
-        <PanelContainer
-          isAnalysing={isAnalysing}
-          scrollY={scrollY}
-          bottom={bottom}
-          hasVoteBar={showVotesWidget}
-          newNavbar={newNavbar}
-        >
+        <PanelContainer isAnalysing={isAnalysing} scrollY={scrollY} bottom={bottom} hasVoteBar={showVotesWidget}>
           <ProposalAnalysisPanel
             viewer={viewer}
             proposal={proposal}

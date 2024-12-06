@@ -235,9 +235,6 @@ Object {
       "type": "full_proposal_card",
     },
     Object {
-      "type": "new_navbar",
-    },
-    Object {
       "type": "multi_consultations",
     },
   ],
