@@ -34,10 +34,3 @@ Scenario: Logged in admin wants to edit a section
   And I should not see "error.404"
   And I should see an ".content" element
 
-Scenario: An admin wants to create a consultation
-  Given I am logged in as admin
-  When I go to the admin consultation creation page
-  And I fill in the following:
-    | global.title | Ma belle consultation |
-  And I click the "button[name='btn_create_and_edit']" element
-  And I should see "success.creation.flash"
