@@ -1,5 +1,35 @@
 {% extends '@CapcoApp/layout.html.twig' %}
 
+{% set link = capco_site_color_value('color.link.default') %}
+{% set linkHover = capco_site_color_value('color.link.hover') %}
+
+{% block stylesheets %}
+    {{ parent() }}
+        <style>
+        .main p { margin-bottom: unset; }
+
+        /* old editor links colours overrides */
+        .old-editor a:not(footer .old-editor a, .btn-primary, .btn-secondary, .btn--outline),
+        .old-editor .btn.btn-link:not(footer .old-editor .btn.btn-link):not(.btn.btn-primary) {
+            color: {{ link | raw }};
+        }
+        .old-editor a:not(footer .old-editor a, .btn-primary, .btn-secondary, .btn--outline):hover,
+        .old-editor .btn.btn-link:not(footer .old-editor .btn.btn-link):not(.btn.btn-primary):hover {
+            color: {{ linkHover | raw }};
+        }
+
+        /* ql editor links colours overrides */
+        .ql-editor a:not(footer .ql-editor a, .btn-primary, .btn-secondary, .btn--outline),
+        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link):not(.btn.btn-primary) {
+            color: {{ link | raw }};
+        }
+        .ql-editor a:not(footer .ql-editor a, .btn-primary, .btn-secondary, .btn--outline):hover,
+        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link):not(.btn.btn-primary):hover {
+            color: {{ linkHover | raw }};
+        }
+    </style>
+{% endblock %}
+
 {% block mainContent %}
     {# Header  #}
     {% include '@CapcoApp/Default/header.html.twig' %}
@@ -8,11 +38,9 @@
 
     {# Main jumbotron for a primary marketing message or call to action #}
     {% block jumbotron %}{% endblock %}
-    <style>
-        .main p { margin-bottom: unset; }
-    </style>
+   
     <main id="main" class="main" tabindex="-1" role="main">
-        {% block body %}{% endblock %}
+        {% block body %} {% endblock %}
     </main>
     {{ react_render_component('ToastsContainerApp', {
         'rendering': 'client_side'

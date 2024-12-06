@@ -1,7 +1,6 @@
 {% extends "@CapcoApp/base.html.twig" %}
 
 {% set link = capco_site_color_value('color.link.default') %}
-{% set linkHover = capco_site_color_value('color.link.hover') %}
 
 {% block canonical_link %}{{ url('app_page_show', {'slug': pageTranslation.slug}) }}{% endblock %}
 
@@ -35,10 +34,6 @@
         .old-editor a,
         .old-editor .btn.btn-link {
             color: {{ link | raw }};
-        }
-        .old-editor a:hover,
-        .old-editor .btn.btn-link:hover {
-            color: {{ linkHover | raw }};
         }
     </style> 
     <div class="container  container--thinner old-editor">

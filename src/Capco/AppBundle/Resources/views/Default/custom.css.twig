@@ -393,6 +393,19 @@
         background-color: {{ sectionBg | raw }};
     }
 
+    /* #region links colours */
+    .main .section--alt .container a:not(.carousel a):not(.btn-primary, .btn-secondary, .btn--outline, .btn-default),
+    .main .section--custom .container a:not(.carousel a):not(.btn-primary, .btn-secondary, .btn--outline, .btn-default):not(#links .container a),
+    .charter a {
+        color: {{ link | raw }};
+    }
+    .main .section--alt .container a:not(.carousel a):not(.btn-primary, .btn-secondary, .btn--outline, .btn-default):hover,
+    .main .section--custom .container a:not(.carousel a):not(.btn-primary, .btn-secondary, .btn--outline, .btn-default):not(#links .container a):hover,
+    .charter a:hover {
+        color: {{ linkHover | raw }};
+    }
+    /* #endregion links colours */
+
     .avatar, .default-avatar-group, .default-avatar, .default-image {
         background-color: {{ btnPrimary | raw }};
     }

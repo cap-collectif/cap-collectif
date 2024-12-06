@@ -13,6 +13,8 @@
 {% set shouldDisplayProjectHeader = isConsultationRoute or (currentStep is defined and currentStep.slug is defined and isConsultation and currentStep.consultations.count <= 1) %}
 {% set stepsParticipation = ["app_project_show_consultation"] %}
 {% set showTrash = is_feature_enabled('project_trash') and app.request.get('_route') in stepsParticipation %}
+{% set link = capco_site_color_value('color.link.default') %}
+{% set linkHover = capco_site_color_value('color.link.hover') %}
 
 {% block canonical_link %}{% endblock %}
 
@@ -26,9 +28,33 @@
 {% block stylesheets %}
     {{ parent() }}
     <link href="{{ asset('js/fancybox/jquery.fancybox.css') }}" rel="stylesheet">
+        <style>
+        .main p { margin-bottom: unset; }
+
+        /* old editor links colours overrides */
+        .old-editor a:not(footer .old-editor a, .btn-primary, .btn-secondary, .btn--outline),
+        .old-editor .btn.btn-link:not(footer .old-editor .btn.btn-link):not(.btn.btn-primary) {
+            color: {{ link | raw }};
+        }
+        .old-editor a:not(footer .old-editor a, .btn-primary, .btn-secondary, .btn--outline):hover,
+        .old-editor .btn.btn-link:not(footer .old-editor .btn.btn-link):not(.btn.btn-primary):hover {
+            color: {{ linkHover | raw }};
+        }
+
+        /* ql editor links colours overrides */
+        .ql-editor a:not(footer .ql-editor a, .btn-primary, .btn-secondary, .btn--outline),
+        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link):not(.btn.btn-primary) {
+            color: {{ link | raw }};
+        }
+        .ql-editor a:not(footer .ql-editor a, .btn-primary, .btn-secondary, .btn--outline):hover,
+        .ql-editor .btn.btn-link:not(footer .ql-editor .btn.btn-link):not(.btn.btn-primary):hover {
+            color: {{ linkHover | raw }};
+        }
+    </style>
 {% endblock %}
 
-{% block jumbotron %}{% endblock %}
+{% block jumbotron %} {% endblock %}
+
 {% block body %}
       {% if shouldDisplayProjectHeader %}
         <section>

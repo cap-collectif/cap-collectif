@@ -1,7 +1,5 @@
 {% extends '@CapcoApp/Project/base.html.twig' %}
 
-{% set link = capco_site_color_value('color.link.default') %}
-
 {% block canonical_link %}{{ url('app_project_show_presentation', {'projectSlug': project.slug, 'stepSlug': currentStep.slug}) }}{% endblock %}
 
 {% block metaTags %}
@@ -33,16 +31,6 @@
         'currentStepType': currentStep.getType(),
         'platformLocale': capco_default_locale_code(),
     } }) }}
-{% endblock %}
-
-{% block stylesheets %}
-    {{ parent() }}
-    <style>
-        .ql-editor a:not(.btn-primary, .btn-secondary),
-        .ql-editor .btn.btn-link {
-             color: {{ link | raw }};
-        }
-    </style>
 {% endblock %}
 
 {% block javascripts %}
