@@ -28,19 +28,18 @@ describe('Consultation back office', () => {
     AdminConsultationPage.save()
   })
 
-  // uncomment when we fix toggle in test env
-  // it('should update the step with 2 consultations', () => {
-  //   cy.task('enable:feature', 'multi_consultations')
-  //   AdminConsultationPage.visitConsultationPage()
-  //   AdminConsultationPage.getAppendConsultationButton().click()
-  //   AdminConsultationPage.getConsultationList().should('have.length', 2)
-  //   AdminConsultationPage.getSaveButton().should('be.disabled')
-  //   AdminConsultationPage.fillConsultation(1, {
-  //     title: 'consultation numéro 2',
-  //     description: 'description de la consultation numéro 2',
-  //   })
-  //   AdminConsultationPage.save()
-  // })
+  it('should update the step with 2 consultations', () => {
+    cy.task('enable:feature', 'multi_consultations')
+    AdminConsultationPage.visitConsultationPage()
+    AdminConsultationPage.getAppendConsultationButton().click()
+    AdminConsultationPage.getConsultationList().should('have.length', 2)
+    AdminConsultationPage.getSaveButton().should('be.disabled')
+    AdminConsultationPage.fillConsultation(1, {
+      title: 'consultation numéro 2',
+      description: 'description de la consultation numéro 2',
+    })
+    AdminConsultationPage.save()
+  })
 
   it('should create the step with an existing consultation model', () => {
     AdminConsultationPage.visitConsultationPage('CREATE')

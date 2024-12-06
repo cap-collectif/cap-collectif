@@ -76,7 +76,6 @@ const ProposalFormCategoryColor: React.FC<ProposalFormCategoryColorProps> = ({
     </Flex>
   )
 }
-// }
 
 const Color: React.FC<ColorProps> = ({ color, isSelectedColor, updateCurrentColor }) => {
   const rgb = hexToRgb(color.value)
@@ -85,6 +84,7 @@ const Color: React.FC<ColorProps> = ({ color, isSelectedColor, updateCurrentColo
 
   return (
     <Flex
+      data-color={color.value}
       justifyContent={'center'}
       alignItems={'center'}
       borderRadius={pxToRem(4)}

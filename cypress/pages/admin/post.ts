@@ -1,5 +1,3 @@
-import { englishBody } from '../../../cypress/integration/post/post.cy'
-
 export default new (class PostFormPage {
   get cy() {
     return cy
@@ -83,7 +81,7 @@ export default new (class PostFormPage {
   addEnglishTranslation() {
     this.switchToEnglish()
     this.enTitle.type('A title in English')
-    this.enBody.type(englishBody)
+    this.enBody.type('I love cats!')
   }
   openDeleteModal() {
     this.cy.contains('admin.global.delete').click()
