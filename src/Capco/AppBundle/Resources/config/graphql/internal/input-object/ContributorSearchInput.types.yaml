@@ -1,0 +1,11 @@
+ContributorSearchInput:
+    type: input-object
+    config:
+        description: 'Search contributors config'
+        fields:
+            fields:
+                type: '[ContributorsSearchField]!'
+                description: 'Fields to search by.'
+            term:
+                type: 'String'
+                description: 'Filter by term based on fields.'

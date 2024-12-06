@@ -179,4 +179,31 @@ class ParticipantRepository extends EntityRepository
 
         return $qb;
     }
+
+    /*
+     * @param array<string, array<int, string>|string> $search
+     * @return array<Participant>
+     */
+    /*
+    public function getContributors(array $search): array
+    {
+        $term = $search['term'];
+        $fields = $search['fields'];
+
+        $availableFields = ['id', 'email'];
+
+        $fields = array_filter($search['fields'], function($field) use ($availableFields) {
+            return in_array($field, $availableFields);
+        });
+
+        $qb = $this->createQueryBuilder('p');
+
+        foreach ($fields as $field) {
+            $qb->orWhere('p.' . $field . ' LIKE :term')
+                ->setParameter('term', '%' . $term . '%');
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+    */
 }

@@ -1,0 +1,12 @@
+ContributorOrder:
+    type: input-object
+    config:
+        description: 'Way in which users with role can be ordered.'
+        fields:
+            field:
+                type: 'ContributorOrderField!'
+                description: 'The field in which to order nodes by.'
+            direction:
+                type: 'OrderDirection!'
+                defaultValue: 'DESC'
+                description: 'The direction in which to order nodes.'

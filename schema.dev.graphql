@@ -3529,6 +3529,57 @@ type ContributorEdge {
   cursor: String!
 }
 
+"""Way in which users with role can be ordered."""
+input ContributorOrder {
+  """The field in which to order nodes by."""
+  field: ContributorOrderField!
+
+  """The direction in which to order nodes."""
+  direction: OrderDirection! = DESC
+}
+
+"""Property by which contributors can be ordered"""
+enum ContributorOrderField {
+  """Allows ordering a list of users by there last login."""
+  LAST_LOGIN
+}
+
+"""Search contributors config"""
+input ContributorSearchInput {
+  """Fields to search by."""
+  fields: [ContributorsSearchField]!
+
+  """Filter by term based on fields."""
+  term: String
+}
+
+"""Roles by which contributors can be classify"""
+enum ContributorsRole {
+  """Allows classify a list of contributors by role super admin."""
+  ROLE_SUPER_ADMIN
+
+  """Allows classify a list of contributors by role admin."""
+  ROLE_ADMIN
+
+  """Allows classify a list of contributors by role organization."""
+  ORGANIZATION
+
+  """Allows classify a list of contributors by role user."""
+  ROLE_USER
+}
+
+"""Fields by which contributors can be searched."""
+enum ContributorsSearchField {
+  """Allows classify a list of contributors by role super admin."""
+  id
+
+  """Allows classify a list of contributors by role super admin."""
+  email
+
+  """Allows classify a list of contributors by role super admin."""
+  username
+}
+
 """Associates a value with a count."""
 type Counter {
   """The value to be count."""
@@ -14122,6 +14173,26 @@ type Query {
     """The slug to search for."""
     slug: String!
   ): NodeSlug
+
+  """List of users and participants"""
+  contributors(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by term based on given fields."""
+    search: ContributorSearchInput
+
+    """Filter by roles."""
+    roles: [ContributorsRole]!
+
+    """The ordering direction for the user last login date"""
+    orderBy: ContributorOrder
+  ): ContributorConnection!
 }
 
 input QueryAnalyticsFilter {

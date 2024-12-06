@@ -17,6 +17,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ContributorsRole;
 use Capco\AppBundle\Enum\EmailingCampaignInternalList;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
@@ -26,6 +27,7 @@ use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\Expr;
+use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use ReflectionClass;
@@ -1783,6 +1785,179 @@ class UserRepository extends EntityRepository
         ;
 
         return $qbd->getSingleScalarResult() > 0;
+    }
+
+    /**
+     * @param array<string, array<int, string>|string> $search
+     */
+    public function getStringOfFieldAndTerm(array $search): string
+    {
+        $fields = $search['fields'];
+
+        $sql = '';
+
+        foreach ($fields as $field) {
+            if ($field === $fields[0]) {
+                $sql .= ' AND (u.' . $field . ' LIKE :term';
+            } else {
+                $sql .= ' OR u.' . $field . ' LIKE :term';
+            }
+        }
+
+        return $sql . ')';
+    }
+
+    /**
+     * @param array<string, string>                         $roles
+     * @param null|array<string, array<int, string>|string> $search
+     *
+     * @return array<User>
+     */
+    public function getContributorsWithRole(array $roles, string $direction, ?string $field = null, ?array $search = null): array
+    {
+        $em = $this->getEntityManager();
+        $rsm = new ResultSetMappingBuilder($em);
+
+        $rsm->addRootEntityFromClassMetadata(User::class, 'u');
+        $term = $search['term'] ?? null;
+
+        $sql = '';
+
+        if (\in_array(ContributorsRole::ROLE_SUPER_ADMIN, $roles)) {
+            $sql .= "SELECT u.*
+                FROM fos_user u
+                WHERE roles LIKE '%ROLE_SUPER_ADMIN%'";
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        if (\in_array(ContributorsRole::ROLE_ADMIN, $roles)) {
+            if ('' !== $sql) {
+                $sql .= ' UNION ';
+            }
+            $sql .= "SELECT u.*
+                FROM fos_user u
+                WHERE roles like '%ROLE_ADMIN%' AND roles NOT LIKE '%ROLE_SUPER_ADMIN%'";
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        if (\in_array(ContributorsRole::ROLE_USER, $roles)) {
+            if ('' !== $sql) {
+                $sql .= ' UNION ';
+            }
+            $sql .= "SELECT u.*
+                FROM fos_user u
+                LEFT JOIN organization_member om ON u.id = om.user_id
+                WHERE roles LIKE '%ROLE_USER%' AND roles NOT LIKE '%ROLE_ADMIN%' AND roles NOT LIKE '%ROLE_SUPER_ADMIN%' AND om.id is null";
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        if (\in_array(ContributorsRole::ORGANIZATION, $roles)) {
+            if ('' !== $sql) {
+                $sql .= ' UNION ';
+            }
+            $sql .= 'SELECT u.*
+                FROM fos_user u
+                JOIN organization_member om ON u.id = om.user_id';
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        if ($field) {
+            $sql .= ' ORDER BY ' . $field . ' ' . $direction;
+        }
+
+        $query = $em->createNativeQuery($sql, $rsm);
+        if ($term) {
+            $query->setParameter('term', '%' . $term . '%');
+        }
+
+        if ($field) {
+            $query->setParameter('field', $field);
+        }
+        $query->setParameter('direction', $direction);
+
+        return $query->getResult();
+    }
+
+    /**
+     * @param array<string>                                 $roles
+     * @param null|array<string, array<int, string>|string> $search
+     */
+    public function countContributorsWithRole(array $roles, ?array $search): int
+    {
+        $term = $search['term'] ?? null;
+
+        $sql = '';
+
+        if (\in_array(ContributorsRole::ROLE_SUPER_ADMIN, $roles)) {
+            $sql .= "SELECT COUNT(*)
+                FROM fos_user u
+                WHERE roles LIKE '%ROLE_SUPER_ADMIN%'";
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        if (\in_array(ContributorsRole::ROLE_ADMIN, $roles)) {
+            if ('' !== $sql) {
+                $sql .= ' UNION ';
+            }
+            $sql .= "SELECT COUNT(*)
+                FROM fos_user u
+                WHERE roles like '%ROLE_ADMIN%' AND roles NOT LIKE '%ROLE_SUPER_ADMIN%'";
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        if (\in_array(ContributorsRole::ROLE_USER, $roles)) {
+            if ('' !== $sql) {
+                $sql .= ' UNION ';
+            }
+            $sql .= "SELECT COUNT(*)
+                FROM fos_user u
+                LEFT JOIN organization_member om ON u.id = om.user_id
+                WHERE roles LIKE '%ROLE_USER%' AND roles NOT LIKE '%ROLE_ADMIN%' AND roles NOT LIKE '%ROLE_SUPER_ADMIN%' AND om.id is null";
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        if (\in_array(ContributorsRole::ORGANIZATION, $roles)) {
+            if ('' !== $sql) {
+                $sql .= ' UNION ';
+            }
+            $sql .= 'SELECT COUNT(*)
+                FROM fos_user u
+                JOIN organization_member om ON u.id = om.user_id';
+            if ($term) {
+                $sql .= $this->getStringOfFieldAndTerm($search);
+            }
+        }
+
+        $param = [];
+        if ($term) {
+            $param = ['term' => '%' . $term . '%'];
+        }
+
+        $conn = $this->getEntityManager()->getConnection();
+        $stmt = $conn->executeQuery($sql, $param);
+
+        $results = $stmt->fetchFirstColumn();
+
+        $total = 0;
+        foreach ($results as $result) {
+            $total += $result;
+        }
+
+        return $total;
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder

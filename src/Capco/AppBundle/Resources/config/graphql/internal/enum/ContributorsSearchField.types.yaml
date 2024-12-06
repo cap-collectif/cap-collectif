@@ -1,0 +1,14 @@
+ContributorsSearchField:
+    type: enum
+    config:
+        description: 'Fields by which contributors can be searched.'
+        values:
+            id:
+                value: !php/const Capco\AppBundle\Enum\ContributorSearchField::id
+                description: 'Allows classify a list of contributors by role super admin.'
+            email:
+                value: !php/const Capco\AppBundle\Enum\ContributorSearchField::email
+                description: 'Allows classify a list of contributors by role super admin.'
+            username:
+                value: !php/const Capco\AppBundle\Enum\ContributorSearchField::username
+                description: 'Allows classify a list of contributors by role super admin.'

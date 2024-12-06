@@ -1,0 +1,17 @@
+ContributorsRole:
+    type: enum
+    config:
+        description: 'Roles by which contributors can be classify'
+        values:
+            ROLE_SUPER_ADMIN:
+                value: !php/const Capco\AppBundle\Enum\ContributorsRole::ROLE_SUPER_ADMIN
+                description: 'Allows classify a list of contributors by role super admin.'
+            ROLE_ADMIN:
+                value: !php/const Capco\AppBundle\Enum\ContributorsRole::ROLE_ADMIN
+                description: 'Allows classify a list of contributors by role admin.'
+            ORGANIZATION:
+                value: !php/const Capco\AppBundle\Enum\ContributorsRole::ORGANIZATION
+                description: 'Allows classify a list of contributors by role organization.'
+            ROLE_USER:
+                value: !php/const Capco\AppBundle\Enum\ContributorsRole::ROLE_USER
+                description: 'Allows classify a list of contributors by role user.'

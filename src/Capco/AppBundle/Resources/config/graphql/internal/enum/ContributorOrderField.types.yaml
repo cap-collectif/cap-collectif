@@ -1,0 +1,8 @@
+ContributorOrderField:
+    type: enum
+    config:
+        description: 'Property by which contributors can be ordered'
+        values:
+            LAST_LOGIN:
+                value: !php/const Capco\AppBundle\Enum\ContributorOrderField::LAST_LOGIN
+                description: 'Allows ordering a list of users by there last login.'

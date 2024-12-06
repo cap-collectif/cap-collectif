@@ -689,4 +689,18 @@ InternalQuery:
                         description: 'The slug to search for.'
                 description: 'Get a node by its slug.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\NodeSlugResolver", args)'
-
+            contributors:
+                type: 'InternalContributorConnection!'
+                description: 'List of users and participants'
+                args:
+                    search:
+                        type: 'ContributorSearchInput'
+                        description: 'Filter by term based on given fields.'
+                    roles:
+                        type: '[ContributorsRole]!'
+                        description: 'Filter by roles.'
+                    orderBy:
+                        type: 'ContributorOrder'
+                        description: 'The ordering direction for the user last login date'
+                resolve: '@=resolver("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\ContributorsResolver", [args])'
+                argsBuilder: 'Relay::ForwardConnection'
