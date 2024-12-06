@@ -40,19 +40,21 @@ class OpinionSearch extends Search
 
         if ($viewer && !$viewer->isSuperAdmin()) {
             $subBoolQuery = new BoolQuery();
+            $visibilityFilters = $this->getFiltersForProjectViewerCanSee('project', $viewer);
 
             if ($viewer->getOrganization()) {
-                $subBoolQuery->addShould((new BoolQuery())->addShould(
+                $organizationFilter = (new BoolQuery())->addShould(
                     new Term([
                         'consultation.owner.organizationId' => [
                             'value' => GlobalId::toGlobalId('Organization', $viewer->getOrganization()->getId()),
                         ],
                     ])
-                ));
-            } else {
-                foreach ($this->getFiltersForProjectViewerCanSee('project', $viewer) as $filter) {
-                    $subBoolQuery->addShould($filter);
-                }
+                );
+                $visibilityFilters[] = $organizationFilter;
+            }
+
+            foreach ($visibilityFilters as $filter) {
+                $subBoolQuery->addShould($filter);
             }
 
             $conditions[] = $subBoolQuery;
