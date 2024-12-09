@@ -1,0 +1,3 @@
+﻿export_vote_published_at,export_vote_type,export_vote_author_id,export_vote_source,export_vote_author_zip_code,export_vote_author_username,export_vote_author_is_email_confirmed,export_vote_author_email,export_vote_author_user_type_name,export_vote_debate_url,export_vote_geoip_country_code,export_vote_geoip_region_name,export_vote_geoip_city_name
+"2015-01-01 09:04:00",export_vote_type_for,userJpec,APPLICATION,,Jpec,Oui,jpec@cap-collectif.com,,https://capco.dev/project/projet-avec-administrateur-de-projet/debate/debat-admin-projet,,,
+"2015-01-01 09:04:00",export_vote_type_against,userMaxime,APPLICATION,,mauriau,Oui,maxime.auriau@cap-collectif.com,Citoyen,https://capco.dev/project/projet-avec-administrateur-de-projet/debate/debat-admin-projet,,,

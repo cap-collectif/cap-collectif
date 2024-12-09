@@ -136,6 +136,21 @@ class DebateVoteRepository extends EntityRepository
         ;
     }
 
+    /**
+     * @return array<DebateVote>
+     */
+    public function getDebateVotes(Debate $debate, int $offset, int $limit): array
+    {
+        return $this->createQueryBuilder('v')
+            ->where('v.debate = :debate')
+            ->setParameter('debate', $debate)
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+            ;
+    }
+
     private function getUnpublishedByDebateAndUserQB(Debate $debate, User $user): QueryBuilder
     {
         return $this->createQueryBuilder('v')

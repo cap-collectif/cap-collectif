@@ -1,0 +1,12 @@
+﻿export_vote_published_at,export_vote_type,export_vote_author_id
+"2015-01-01 09:01:00",export_vote_type_against,userSpyl
+"2015-01-01 09:02:00",export_vote_type_for,userIan
+"2015-01-01 09:03:00",export_vote_type_against,userMickael
+"2015-01-01 09:04:00",export_vote_type_for,userJpec
+"2015-01-01 09:05:00",export_vote_type_against,userTheo
+"2015-01-01 09:06:00",export_vote_type_against,userOmar
+"2015-01-01 09:07:00",export_vote_type_against,userJean
+"2015-01-01 09:08:00",export_vote_type_against,userVincent
+"2015-01-01 09:09:00",export_vote_type_against,userAgui
+"2015-01-01 09:10:00",export_vote_type_against,userMaxime
+,export_vote_type_against,userNotConfirmedWithContributions

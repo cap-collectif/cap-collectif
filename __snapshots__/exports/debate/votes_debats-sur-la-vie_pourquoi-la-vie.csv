@@ -1,0 +1,6 @@
+﻿export_vote_published_at,export_vote_type,export_vote_author_id,export_vote_source,export_vote_author_zip_code,export_vote_author_username,export_vote_author_is_email_confirmed,export_vote_author_email,export_vote_author_user_type_name,export_vote_debate_url,export_vote_geoip_country_code,export_vote_geoip_region_name,export_vote_geoip_city_name
+"2020-01-08 00:00:00",export_vote_type_against,user7,APPLICATION,,user7,Oui,user7@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie,,,
+"2020-01-09 00:00:00",export_vote_type_against,user8,APPLICATION,,user8,Oui,user8@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie,,,
+"2020-01-10 00:00:00",export_vote_type_against,user9,APPLICATION,,user9,Oui,user9@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie,,,
+"2020-01-11 00:00:00",export_vote_type_against,user10,APPLICATION,,user10,Oui,user10@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie,,,
+"2020-01-12 00:00:00",export_vote_type_against,user11,APPLICATION,,user11,Oui,user11@cap-collectif.com,Citoyen,https://capco.dev/project/debats-sur-la-vie/debate/pourquoi-la-vie,,,

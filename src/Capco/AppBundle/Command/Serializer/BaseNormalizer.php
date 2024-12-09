@@ -71,6 +71,25 @@ abstract class BaseNormalizer
         ForOrAgainstType::FOR => self::EXPORT_CONTRIBUTION_ARGUMENT_TYPE_FOR,
         ForOrAgainstType::AGAINST => self::EXPORT_CONTRIBUTION_ARGUMENT_TYPE_AGAINST,
     ];
+    protected const EXPORT_VOTE_PUBLISHED_AT = 'export_vote_published_at';
+    protected const EXPORT_VOTE_TYPE = 'export_vote_type';
+    protected const EXPORT_VOTE_AUTHOR_ID = 'export_vote_author_id';
+    protected const EXPORT_VOTE_SOURCE = 'export_vote_source';
+    protected const EXPORT_VOTE_AUTHOR_ZIP_CODE = 'export_vote_author_zip_code';
+    protected const EXPORT_VOTE_AUTHOR_USERNAME = 'export_vote_author_username';
+    protected const EXPORT_VOTE_AUTHOR_IS_EMAIL_CONFIRMED = 'export_vote_author_is_email_confirmed';
+    protected const EXPORT_VOTE_AUTHOR_EMAIL = 'export_vote_author_email';
+    protected const EXPORT_VOTE_AUTHOR_USER_TYPE_NAME = 'export_vote_author_user_type_name';
+    protected const EXPORT_VOTE_DEBATE_URL = 'export_vote_debate_url';
+    protected const EXPORT_VOTE_GEOIP_COUNTRY_CODE = 'export_vote_geoip_country_code';
+    protected const EXPORT_VOTE_GEOIP_REGION_NAME = 'export_vote_geoip_region_name';
+    protected const EXPORT_VOTE_GEOIP_CITY_NAME = 'export_vote_geoip_city_name';
+    protected const EXPORT_VOTE_TYPE_FOR = 'export_vote_type_for';
+    protected const EXPORT_VOTE_TYPE_AGAINST = 'export_vote_type_against';
+    protected const EXPORT_VOTE_TYPES = [
+        ForOrAgainstType::FOR => self::EXPORT_VOTE_TYPE_FOR,
+        ForOrAgainstType::AGAINST => self::EXPORT_VOTE_TYPE_AGAINST,
+    ];
 
     public function __construct(protected TranslatorInterface $translator)
     {

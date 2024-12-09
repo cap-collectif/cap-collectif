@@ -46,6 +46,10 @@ trait SnapshotCommandTrait
             $generatedDirectory = "/tmp/{$id}";
         }
 
+        if (!file_exists($generatedDirectory)) {
+            return;
+        }
+
         Process::fromShellCommandline('rm -rf ' . $gitDirectory)->mustRun();
         if (!$customPath) {
             chmod($generatedDirectory, 0755);

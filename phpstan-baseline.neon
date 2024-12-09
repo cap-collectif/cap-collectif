@@ -12956,6 +12956,16 @@ parameters:
 			path: src/Capco/AppBundle/Command/Serializer/UserNormalizer.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\VoteNormalizer\\:\\:normalize\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/VoteNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\VoteNormalizer\\:\\:supportsNormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/VoteNormalizer.php
+
+		-
 			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\Service\\\\ContributionExporter\\:\\:\\$delimiter \\(string\\|null\\) is never assigned null so it can be removed from the property type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Service/ContributionExporter.php

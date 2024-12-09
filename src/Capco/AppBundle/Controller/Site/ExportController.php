@@ -17,6 +17,7 @@ use Capco\AppBundle\Command\ExportDebateContributionsCommand;
 use Capco\AppBundle\Command\Service\CronTimeInterval;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
+use Capco\AppBundle\Command\Service\FilePathResolver\VotesFilePathResolver;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -28,6 +29,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\DebateRepository;
+use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\Utils\Text;
@@ -71,6 +73,7 @@ class ExportController extends Controller
         private readonly KernelInterface $kernel,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
+        private readonly VotesFilePathResolver $votesFilePathResolver,
         private readonly SessionInterface $session,
         private readonly CronTimeInterval $cronTimeInterval,
         private readonly string $exportDir,
@@ -502,6 +505,56 @@ class ExportController extends Controller
             $this->session
                 ->getFlashBag()
                 ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(58))
+            ;
+
+            return $this->redirect($request->headers->get('referer'));
+        }
+        $date = (new \DateTime())->format('Y-m-d');
+
+        $response = $this->file($filePath, $date . '_' . $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/debate/{debateId}/download-votes/{type}", name="app_debate_votes_download", options={"i18n" = false})
+     * @Security("has_role('ROLE_PROJECT_ADMIN')")
+     */
+    public function downloadDebateVoteAction(
+        Request $request,
+        string $debateId,
+        DebateStepRepository $debateStepRepository
+    ): Response {
+        $debateStepId = GlobalId::fromGlobalId($debateId);
+        if ($debateStepId && isset($debateStepId['id'])) {
+            $debateStepId = $debateStepId['id'];
+        }
+
+        $debateStep = $debateStepRepository->find($debateStepId);
+
+        if (!$debateStep) {
+            $this->logger->error('An error occured while downloading the csv file', [
+                'debateStepId' => $debateStepId,
+            ]);
+
+            throw new BadRequestHttpException('You must provide a valid debate Step id.');
+        }
+
+        $isSimplified = 'true' === $request->query->get('simplified');
+
+        $fileName = $this->votesFilePathResolver->getFileName($debateStep, $isSimplified);
+        $filePath = sprintf(
+            '%s%s/%s',
+            $this->exportDir,
+            ExportDebateContributionsCommand::STEP_FOLDER,
+            $fileName
+        );
+
+        if (!file_exists($filePath)) {
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(53))
             ;
 
             return $this->redirect($request->headers->get('referer'));
