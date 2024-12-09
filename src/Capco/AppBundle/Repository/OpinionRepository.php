@@ -55,6 +55,26 @@ class OpinionRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return array<int, Opinion>
+     */
+    public function getOpinionsByConsultationStepWithUserConfirmed(ConsultationStep $consultationStep, int $offset, int $limit): array
+    {
+        $cstepId = $consultationStep->getId();
+        $query = $this->createQueryBuilder('o');
+        $query->leftJoin('o.author', 'a')
+            ->leftJoin('o.consultation', 'cs')
+            ->andWhere('a.confirmationToken IS NULL')
+            ->andWhere('cs.step = :consultationStep')
+            ->setParameter(':consultationStep', $cstepId)
+            ->orderBy('o.createdAt', 'DESC')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return $query->getQuery()->getResult();
+    }
+
     public function getRecentOrdered(): array
     {
         $qb = $this->createQueryBuilder('o')

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -10,7 +11,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionVote extends AbstractVote
+class OpinionVote extends AbstractVote implements ExportableContributionInterface
 {
     final public const VOTE_OK = 1;
     final public const VOTE_NOK = -1;

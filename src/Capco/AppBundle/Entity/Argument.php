@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Model\Contribution;
@@ -26,7 +27,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, Publishable, ReportableInterface, \Stringable
+class Argument implements Contribution, VotableInterface, Publishable, ReportableInterface, ExportableContributionInterface, \Stringable
 {
     use ModerableTrait;
     use PublishableTrait;

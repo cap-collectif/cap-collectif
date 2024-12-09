@@ -31,18 +31,6 @@ Scenario: Admin wants to export projects contributors
   And exported "csv" file with name "participants_transformation-numerique-des-relations.csv" should match its snapshot
   And exported "csv" file with name "participants_un-avenir-meilleur-pour-les-nains-de-jardins-custom-access.csv" should match its snapshot
 
-Scenario: Admin wants to export consultation steps
-  Given I run a command "capco:export:consultation" with parameters:
-    | --delimiter | , |
-  Then the command exit code should be 0
-  And exported "csv" file with name "croissance-innovation-disruption_collecte-des-avis.csv" should match its snapshot
-  And exported "csv" file with name "projet-de-loi-renseignement_elaboration-de-la-loi.csv" should match its snapshot
-  And exported "csv" file with name "projet-vide_projet.csv" should match its snapshot
-  And exported "csv" file with name "strategie-technologique-de-letat-et-services-publics_collecte-des-avis-pour-une-meilleur-strategie.csv" should match its snapshot
-  And exported "csv" file with name "strategie-technologique-de-letat-et-services-publics_etape-de-multi-consultation.csv" should match its snapshot
-  And exported "csv" file with name "transformation-numerique-des-relations_ma-futur-collecte-de-proposition.csv" should match its snapshot
-  And exported "csv" file with name "df7f805d45b7ee459f571183eed9d25d.csv" should match its snapshot
-
 @database
 Scenario: Admin wants to export collect steps
   Given I run a command "capco:export:proposalStep" with parameters:

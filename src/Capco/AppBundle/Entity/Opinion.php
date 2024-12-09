@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -36,7 +37,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
  * @CapcoAssert\HasAuthor()
  */
-class Opinion implements OpinionContributionInterface, DisplayableInBOInterface, \Stringable
+class Opinion implements OpinionContributionInterface, DisplayableInBOInterface, ExportableContributionInterface, \Stringable
 {
     use AnswerableTrait;
     use AuthorableTrait;

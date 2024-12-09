@@ -22,6 +22,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -32,6 +33,7 @@ use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
+use Capco\AppBundle\Security\ProjectVoter;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -47,6 +49,7 @@ use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
@@ -614,6 +617,46 @@ class ExportController extends Controller
         }
 
         $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
+
+        $response = $this->file($filePath, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/projects/{projectSlug}/step/{stepSlug}/download-consultation", name="app_project_download_consultation", options={"i18n" = false})
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     *
+     * @return BinaryFileResponse|RedirectResponse
+     */
+    public function downloadConsultationContributionAction(Request $request, Project $project, ConsultationStep $step)
+    {
+        $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
+
+        $isSimplified = 'true' === $request->query->get('simplified');
+
+        $fileName = $this->contributionsFilePathResolver->getFileName($step, $isSimplified);
+        $filePath = sprintf(
+            '%s%s/%s',
+            $this->exportDir,
+            $step->getType(),
+            $fileName
+        );
+
+        if (!file_exists($filePath)) {
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime())
+            ;
+
+            return $this->redirect($request->headers->get('referer'));
+        }
 
         $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');

@@ -119,6 +119,20 @@ class AbstractStepRepository extends EntityRepository
     }
 
     /**
+     * @return mixed
+     */
+    public function getConsultationsFromAbstractStep()
+    {
+        $qb = $this->createQueryBuilder('s')
+            ->andWhere('s.label = :consultation OR s.label = :multiConsultation')
+            ->setParameter('consultation', 'Consultation')
+            ->setParameter('multiConsultation', 'Multi consultation')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
      * @return AbstractStep[]
      */
     public function getAllStepsByCollectStep(): array

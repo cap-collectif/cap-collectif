@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\OpinionContributionInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\HasDiffInterface;
@@ -33,7 +34,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAuthor()
  */
-class OpinionVersion implements OpinionContributionInterface, HasDiffInterface, \Stringable
+class OpinionVersion implements OpinionContributionInterface, HasDiffInterface, ExportableContributionInterface, \Stringable
 {
     use AnswerableTrait;
     use AuthorableTrait;

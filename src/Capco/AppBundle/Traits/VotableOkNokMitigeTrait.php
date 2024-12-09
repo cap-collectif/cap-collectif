@@ -7,21 +7,21 @@ use Doctrine\Common\Collections\Collection;
 
 trait VotableOkNokMitigeTrait
 {
-    protected $votes; // Dynamic relation
+    protected Collection $votes;
 
-    public function getVotes()
+    public function getVotes(): Collection
     {
         return $this->votes;
     }
 
-    public function setVotes(Collection $votes)
+    public function setVotes(Collection $votes): self
     {
         $this->votes = $votes;
 
         return $this;
     }
 
-    public function addVote(AbstractVote $vote)
+    public function addVote(AbstractVote $vote): self
     {
         if (!$this->votes->contains($vote)) {
             $this->votes->add($vote);

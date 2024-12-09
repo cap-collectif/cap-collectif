@@ -32,20 +32,20 @@ class ContributionExporter
     }
 
     /**
-     * @param array<ExportableContributionInterface> $contributions
+     * @param array<ExportableContributionInterface> $opinionContributions
      */
-    protected function exportContributions(array $contributions, AbstractStep $step, bool $withHeaders): void
+    protected function exportContributions(array $opinionContributions, AbstractStep $step, bool $withHeaders, bool $append = false): void
     {
-        $this->writeFiles($contributions, $step, $withHeaders);
+        $this->writeFiles($opinionContributions, $step, $withHeaders, $append);
     }
 
     /**
      * @param array<ExportableContributionInterface> $contributions
      */
-    protected function writeFiles(array $contributions, AbstractStep $step, bool $withHeaders): void
+    protected function writeFiles(array $contributions, AbstractStep $step, bool $withHeaders, bool $append = false): void
     {
-        $this->write($step, $contributions, $withHeaders, false);
-        $this->write($step, $contributions, $withHeaders, true);
+        $this->write($step, $contributions, $withHeaders, false, $append);
+        $this->write($step, $contributions, $withHeaders, true, $append);
     }
 
     protected function setDelimiter(?string $delimiter): void
@@ -58,7 +58,7 @@ class ContributionExporter
     /**
      * @param array<ExportableContributionInterface> $contributions
      */
-    private function write(AbstractStep $step, array $contributions, bool $withHeader, bool $isFullExport): void
+    private function write(AbstractStep $step, array $contributions, bool $withHeader, bool $isFullExport, bool $append): void
     {
         $path = $isFullExport
             ? $this->filePathResolverContributions->getFullExportPath($step)
@@ -72,18 +72,22 @@ class ContributionExporter
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
         ];
 
+        if ([] === $contributions) {
+            return;
+        }
+
         $content = $this->serializer->serialize(
             $contributions,
             CsvEncoder::FORMAT,
             $this->context
         );
 
-        if ($withHeader) {
+        if ($withHeader && !$append) {
             $this->fileSystem->dumpFile($path, $content);
         } else {
             $this->fileSystem->appendToFile($path, $content);
         }
 
-        unset($contributions, $content);
+        unset($content);
     }
 }

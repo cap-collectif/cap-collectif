@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Interfaces\VotableInterface;
 use Capco\AppBundle\Model\Contribution;
@@ -30,7 +31,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAuthor()
  */
-class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface, \Stringable
+class Source implements Contribution, Trashable, VotableInterface, Publishable, ReportableInterface, ExportableContributionInterface, \Stringable
 {
     use AuthorableTrait;
     use ModerableTrait;

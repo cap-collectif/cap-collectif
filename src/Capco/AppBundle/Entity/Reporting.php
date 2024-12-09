@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\Debate\DebateArgument;
 use Capco\AppBundle\Enum\ReportingStatus;
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReportingRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Reporting implements CreatableInterface, \Stringable
+class Reporting implements CreatableInterface, ExportableContributionInterface, \Stringable
 {
     use IdTrait;
     use ReportingStatus;

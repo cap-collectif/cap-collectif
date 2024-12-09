@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -13,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="opinion_appendices")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
  */
-class OpinionAppendix implements \Stringable
+class OpinionAppendix implements ExportableContributionInterface, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use TextableTrait;

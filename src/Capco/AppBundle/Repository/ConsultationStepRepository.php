@@ -4,6 +4,9 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\ResultSetMapping;
 
 /**
  * @method null|ConsultationStep find($id, $lockMode = null, $lockVersion = null)
@@ -105,6 +108,57 @@ class ConsultationStepRepository extends AbstractStepRepository
         }
 
         return $qb->getQuery()->execute();
+    }
+
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function hasRecentContributionsOrUpdatedUsers(string $consultationStepId, \DateTimeInterface $mostRecentFileModificationDate): bool
+    {
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('hasRecentContributionsOrUpdatedUsers', 'hasRecentContributionsOrUpdatedUsers', 'boolean');
+
+        $sql = '
+            SELECT
+                CASE
+                    WHEN COUNT(op.id) > 0 OR COUNT(arg.id) > 0 OR COUNT(v.id) > 0 OR COUNT(r.id) > 0 OR COUNT(s.id) > 0 OR COUNT(u.id) > 0 THEN TRUE
+                    ELSE FALSE
+                END AS hasRecentContributionsOrUpdatedUsers
+            FROM
+                opinion op
+            LEFT JOIN
+                argument arg ON op.id = arg.opinion_id
+            LEFT JOIN
+                votes v ON op.id = v.opinion_id
+            LEFT JOIN
+                reporting r ON op.id = r.opinion_id
+            LEFT JOIN
+                source s ON op.id = s.opinion_id
+            LEFT JOIN
+                fos_user u ON op.author_id = u.id
+            LEFT JOIN
+                consultation c ON op.consultation_id = c.id
+            WHERE
+                c.step_id = :consultationStepId
+                AND (
+                    op.updated_at > :mostRecentFileModificationDate OR
+                    arg.updated_at > :mostRecentFileModificationDate OR
+                    v.updated_at > :mostRecentFileModificationDate OR
+                    s.updated_at > :mostRecentFileModificationDate OR
+                    u.updated_at > :mostRecentFileModificationDate
+                )
+    ';
+
+        $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
+        $query->setParameter('consultationStepId', $consultationStepId);
+        $query->setParameter('mostRecentFileModificationDate', $mostRecentFileModificationDate->format('Y-m-d H:i:s'));
+
+        if ($query->getSingleScalarResult() > 0) {
+            return true;
+        }
+
+        return false;
     }
 
     /**
