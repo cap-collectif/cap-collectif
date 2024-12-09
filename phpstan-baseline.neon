@@ -481,11 +481,6 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/PostAdmin.php
 
 		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$tokenStorage has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/PostAdmin.php
-
-		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$tokenStorage is never read, only written\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/PostAdmin.php
@@ -611,29 +606,14 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/SectionAdmin.php
 
 		-
-			message: "#^Call to function is_object\\(\\) with object will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/SiteColorAdmin.php
-
-		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SiteColorAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/SiteColorAdmin.php
 
 		-
-			message: "#^Call to function is_object\\(\\) with object will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/SiteImageAdmin.php
-
-		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SiteImageAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/SiteImageAdmin.php
-
-		-
-			message: "#^Call to function is_object\\(\\) with object will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/SiteParameterAdmin.php
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\SiteParameterAdmin\\:\\:getTimezonesList\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -679,11 +659,6 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\StatusAdmin\\:\\:\\$formOptions type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/StatusAdmin.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/StepAdmin.php
 
 		-
 			message: "#^Instanceof between Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep and Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep will always evaluate to true\\.$#"
@@ -866,11 +841,6 @@ parameters:
 			path: src/Capco/AdminBundle/Controller/CRUDController.php
 
 		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/CRUDController.php
-
-		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\CommentController\\:\\:isViewerAdminAuthor\\(\\) has parameter \\$object with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/CommentController.php
@@ -882,11 +852,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\ConsultationController\\:\\:throwIfNoAccess\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/ConsultationController.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/ConsultationController.php
 
@@ -981,11 +946,6 @@ parameters:
 			path: src/Capco/AdminBundle/Controller/OpinionController.php
 
 		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/OpinionController.php
-
-		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\PageController\\:\\:checkBody\\(\\) has parameter \\$form with generic interface Symfony\\\\Component\\\\Form\\\\FormInterface but does not specify its types\\: TData$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/PageController.php
@@ -1031,11 +991,6 @@ parameters:
 			path: src/Capco/AdminBundle/Controller/ProjectController.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/ProjectController.php
-
-		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\ProposalController\\:\\:throwIfNoAccess\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/ProposalController.php
@@ -1047,11 +1002,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\ProposalFormController\\:\\:throwIfNoAccess\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/ProposalFormController.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/ProposalFormController.php
 
@@ -1132,11 +1082,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Controller\\\\SectionController\\:\\:move\\(\\) has parameter \\$resolver with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Controller/SectionController.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Controller/SectionController.php
 
@@ -4417,16 +4362,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:\\$votesDetailsPageParams has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between null and Behat\\\\Mink\\\\Session will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Capco\\\\AppBundle\\\\Entity\\\\Event will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -11536,11 +11471,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/CreateCsvFromUserCommand.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Box\\\\Spout\\\\Writer\\\\CSV\\\\Writer\\|Box\\\\Spout\\\\Writer\\\\ODS\\\\Writer\\|Box\\\\Spout\\\\Writer\\\\XLSX\\\\Writer will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateCsvFromUserCommand.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\CreateIDFUsersFromCsvCommand\\:\\:getRowErrors\\(\\) has parameter \\$row with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateIDFUsersFromCsvCommand.php
@@ -11577,21 +11507,11 @@ parameters:
 
 		-
 			message: "#^Negated boolean expression is always false\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Command/CreateResponsesFromCsvCommand.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateStepContributorsCommand.php
 
 		-
 			message: "#^If condition is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/CreateUserAccountsFromCSVCommand.php
-
-		-
-			message: "#^Instanceof between Box\\\\Spout\\\\Writer\\\\CSV\\\\Writer and Box\\\\Spout\\\\Writer\\\\WriterInterface will always evaluate to true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/CreateUserAccountsFromCSVCommand.php
 
@@ -11876,11 +11796,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/ExportAnalysisCSVCommand.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Box\\\\Spout\\\\Writer\\\\CSV\\\\Writer\\|Box\\\\Spout\\\\Writer\\\\ODS\\\\Writer\\|Box\\\\Spout\\\\Writer\\\\XLSX\\\\Writer will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ExportAnalysisCSVCommand.php
-
-		-
 			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ExportDebateCommand.php
@@ -11962,11 +11877,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ExportDebateCommand\\:\\:\\$router is never read, only written\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ExportDebateCommand.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Box\\\\Spout\\\\Writer\\\\CSV\\\\Writer\\|Box\\\\Spout\\\\Writer\\\\ODS\\\\Writer\\|Box\\\\Spout\\\\Writer\\\\XLSX\\\\Writer will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ExportDebateCommand.php
 
@@ -12166,11 +12076,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between 'X' and 'X' will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/GenerateMagicLinksFromCSVCommand.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\ImportConsultationFromCsvCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ImportConsultationFromCsvCommand.php
@@ -12192,11 +12097,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ImportConsultationFromCsvCommand\\:\\:\\$filePath has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportConsultationFromCsvCommand.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between 0 and int\\<1, max\\> will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ImportConsultationFromCsvCommand.php
 
@@ -12231,16 +12131,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
-
-		-
-			message: "#^Offset string on array\\{\\} in isset\\(\\) does not exist\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ImportProposalsFromCsvCommand\\:\\:\\$customFields type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
@@ -12264,16 +12154,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Command\\\\ImportProposalsFromCsvCommand\\:\\:\\$questionsMap type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/ImportProposalsFromCsvCommand.php
-
-		-
-			message: "#^Call to function is_string\\(\\) with object will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/LoadBenchmarkDataCommand.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\LoadBenchmarkDataCommand\\:\\:configure\\(\\) has no return type specified\\.$#"
@@ -13066,16 +12946,6 @@ parameters:
 			path: src/Capco/AppBundle/Command/SendSmsCreditConsumptionAlertCommand.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\BaseNormalizer\\:\\:translateHeaders\\(\\) has parameter \\$array with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Serializer/BaseNormalizer.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\BaseNormalizer\\:\\:translateHeaders\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Serializer/BaseNormalizer.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\ReplyAnonymousNormalizer\\:\\:supportsNormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Serializer/ReplyAnonymousNormalizer.php
@@ -13091,22 +12961,7 @@ parameters:
 			path: src/Capco/AppBundle/Command/Service/ContributionExporter.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:exportParticipants\\(\\) has parameter \\$users with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:initializeStyle\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:write\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Service\\\\ParticipantExporter\\:\\:writeFiles\\(\\) has parameter \\$users with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Service/ParticipantExporter.php
 
@@ -13176,11 +13031,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Api/FontsController.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Api/FontsController.php
-
-		-
 			message: "#^Constant Capco\\\\AppBundle\\\\Controller\\\\Api\\\\GraphQLController\\:\\:SCHEMA_INTERNAL is unused\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Api/GraphQLController.php
@@ -13236,11 +13086,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Api/MediasController.php
 
 		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Controller/Api/SiradelController.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Api\\\\SiradelController\\:\\:isACLDisabled\\(\\) has parameter \\$context with generic class ArrayObject but does not specify its types\\: TKey, TValue$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Api/SiradelController.php
@@ -13276,11 +13121,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Site/BlogController.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/BlogController.php
-
-		-
 			message: "#^Variable \\$projectObject might not be defined\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/BlogController.php
@@ -13304,16 +13144,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\ContactController\\:\\:contactAction\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/ContactController.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/DebateArgumentController.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/DefaultController.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\DefaultController\\:\\:contactAction\\(\\) has no return type specified\\.$#"
@@ -13399,11 +13229,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\EvaluationController\\:\\:indexAction\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/EvaluationController.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/EventController.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\EventController\\:\\:downloadAction\\(\\) has no return type specified\\.$#"
@@ -13606,11 +13431,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Site/SitemapsController.php
 
 		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Controller/Site/StepController.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\StepController\\:\\:showCollectStepAction\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/StepController.php
@@ -13697,11 +13517,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Controller\\\\Site\\\\TokenController\\:\\:\\$userUrlResolver is never read, only written\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/TokenController.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/TokenController.php
 
@@ -14366,11 +14181,6 @@ parameters:
 			path: src/Capco/AppBundle/Elasticsearch/ElasticaToDoctrineTransformer.php
 
 		-
-			message: "#^If condition is always true\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchConnectionBuilder.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Elasticsearch\\\\ElasticsearchConnectionBuilder\\:\\:connectionFromArray\\(\\) has parameter \\$args with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchConnectionBuilder.php
@@ -14427,11 +14237,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Elasticsearch\\\\ElasticsearchConnectionBuilder\\:\\:getOptionsWithDefaults\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchConnectionBuilder.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Elasticsearch/ElasticsearchConnectionBuilder.php
 
@@ -14624,11 +14429,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Elasticsearch\\\\IndexableInterface\\:\\:getElasticsearchSerializationGroups\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Elasticsearch/IndexableInterface.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Elasticsearch/Indexer.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Elasticsearch\\\\Indexer\\:\\:addApiAnalyticsDocumentToBulk\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -15071,11 +14871,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AppendixType.php
 
 		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/AppendixType.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Argument\\:\\:addVote\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Argument.php
@@ -15262,11 +15057,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Argument\\:\\:\\$votes with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Argument.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Argument.php
 
@@ -15552,11 +15342,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:\\$votes with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Comment.php
-
-		-
-			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Comment.php
 
@@ -16337,7 +16122,7 @@ parameters:
 
 		-
 			message: "#^If condition is always true\\.$#"
-			count: 5
+			count: 4
 			path: src/Capco/AppBundle/Entity/Event.php
 
 		-
@@ -16747,7 +16532,7 @@ parameters:
 
 		-
 			message: "#^If condition is always true\\.$#"
-			count: 3
+			count: 1
 			path: src/Capco/AppBundle/Entity/Follower.php
 
 		-
@@ -16783,11 +16568,6 @@ parameters:
 		-
 			message: "#^Result of && is always false\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Follower.php
-
-		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/Entity/Follower.php
 
 		-
@@ -18106,11 +17886,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
 
 		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
-
-		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\OpinionModal\\) and 'updatedAt' will always evaluate to true\\.$#"
 			count: 5
 			path: src/Capco/AppBundle/Entity/OpinionModal.php
@@ -19406,21 +19181,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProgressStep.php
 
 		-
-			message: "#^Call to function is_object\\(\\) with Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Entity/Project.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Project.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Project.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Project\\:\\:addStep\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Project.php
@@ -19631,18 +19391,8 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Project.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 4
-			path: src/Capco/AppBundle/Entity/Project.php
-
-		-
 			message: "#^PHPDoc tag @var has invalid value \\(\\)\\: Unexpected token \"\\\\n     \\* \", expected type at offset 15 on line 2$#"
 			count: 3
-			path: src/Capco/AppBundle/Entity/Project.php
-
-		-
-			message: "#^Parameter \\#1 \\$array \\(array\\<int\\<0, max\\>, Capco\\\\AppBundle\\\\Entity\\\\ProposalCategory\\>\\) to function array_filter does not contain falsy values, the array will always stay the same\\.$#"
-			count: 1
 			path: src/Capco/AppBundle/Entity/Project.php
 
 		-
@@ -19782,11 +19532,6 @@ parameters:
 
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Project\\:\\:\\$visibility has no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Project.php
-
-		-
-			message: "#^Right side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Project.php
 
@@ -20222,7 +19967,7 @@ parameters:
 
 		-
 			message: "#^Negated boolean expression is always false\\.$#"
-			count: 3
+			count: 2
 			path: src/Capco/AppBundle/Entity/Proposal.php
 
 		-
@@ -21291,11 +21036,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Questionnaire.php
 
 		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Questionnaire.php
-
-		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Questions\\\\AbstractQuestion\\) and 'updatedAt' will always evaluate to true\\.$#"
 			count: 5
 			path: src/Capco/AppBundle/Entity/Questions/AbstractQuestion.php
@@ -21657,11 +21397,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Reply\\:\\:setResponses\\(\\) has parameter \\$responses with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection but does not specify its types\\: TKey, T$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Reply.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Reply.php
 
@@ -22856,23 +22591,8 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Status.php
 
 		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Status.php
-
-		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\) and 'updatedAt' will always evaluate to true\\.$#"
 			count: 4
-			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
 
 		-
@@ -23018,21 +22738,6 @@ parameters:
 		-
 			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\:\\:\\$updatedAt \\(DateTime\\) on left side of \\?\\? is not nullable\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-
-		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
 
 		-
@@ -23237,7 +22942,7 @@ parameters:
 
 		-
 			message: "#^Left side of && is always true\\.$#"
-			count: 3
+			count: 2
 			path: src/Capco/AppBundle/Entity/Steps/SelectionStep.php
 
 		-
@@ -24496,11 +24201,6 @@ parameters:
 			path: src/Capco/AppBundle/Event/ProposalEvent.php
 
 		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/EventListener/CasAuthenticationExceptionListener.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\EventListener\\\\CommentListener\\:\\:handleConfirmedToken\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/EventListener/CommentListener.php
@@ -24964,11 +24664,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Font\\\\FontManager\\:\\:deactivateFonts\\(\\) is unused\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Font/FontManager.php
-
-		-
-			message: "#^Comparison operation \"\\>\" between int\\<1, max\\> and 0 is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Font/FontProcessor.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Font\\\\FontProcessor\\:\\:processArchive\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -26761,11 +26456,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/ConnectionBuilder.php
 
 		-
-			message: "#^Comparison operation \"\\>\" between int\\<1, max\\> and 0 is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/ConnectionTraversor.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\ConnectionTraversor\\:\\:traverse\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/ConnectionTraversor.php
@@ -27281,11 +26971,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/DataLoader/Query/QueryAnalyticsDataLoader.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/DataLoader/Query/QueryAnalyticsDataLoader.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\DataLoader\\\\Question\\\\QuestionChoicesDataLoader\\:\\:all\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/DataLoader/Question/QuestionChoicesDataLoader.php
@@ -27676,16 +27361,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
 
 		-
-			message: "#^Result of && is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Translation will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
-
-		-
 			message: "#^Variable \\$user in PHPDoc tag @var does not match assigned variable \\$author\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/AddEventsMutation.php
@@ -27732,11 +27407,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AddProposalsFromCsvMutation\\:\\:getConnection\\(\\) has parameter \\$proposals with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/AddProposalsFromCsvMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/AddProposalsFromCsvMutation.php
 
@@ -27821,11 +27491,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/AnalyseProposalAnalysisMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/AnalyseProposalAnalysisMutation.php
-
-		-
 			message: "#^Parameter \\#1 \\$body of class Swarrot\\\\Broker\\\\Message constructor expects string\\|null, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/AnalyseProposalAnalysisMutation.php
@@ -27867,11 +27532,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\AskProposalRevisionMutation\\:\\:preventNullableViewer\\(\\) has parameter \\$viewer with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/AskProposalRevisionMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/AskProposalRevisionMutation.php
 
@@ -28316,11 +27976,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeProposalAnalysisMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeProposalAnalysisMutation.php
-
-		-
 			message: "#^Parameter \\#1 \\$body of class Swarrot\\\\Broker\\\\Message constructor expects string\\|null, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeProposalAnalysisMutation.php
@@ -28441,17 +28096,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeSourceMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeSourceMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ChangeVersionMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeVersionMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ChangeVersionMutation.php
 
@@ -28466,12 +28111,12 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/CheckIdentificationCodeMutation.php
 
 		-
-			message: "#^Instanceof between null and Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep will always evaluate to false\\.$#"
+			message: "#^Instanceof between array\\|float\\|int\\|string\\|false\\|null and Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\CollectStep will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ConfigureAnalysisMutation.php
 
 		-
-			message: "#^Instanceof between null and Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep will always evaluate to false\\.$#"
+			message: "#^Instanceof between array\\|float\\|int\\|string\\|false\\|null and Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\SelectionStep will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ConfigureAnalysisMutation.php
 
@@ -28531,11 +28176,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ConfigureAnalysisMutation.php
 
 		-
-			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ConfigureAnalysisMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ContactFormMutation\\:\\:add\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ContactFormMutation.php
@@ -28553,11 +28193,6 @@ parameters:
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ContactFormMutation\\:\\:update\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ContactFormMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 3
 			path: src/Capco/AppBundle/GraphQL/Mutation/ContactFormMutation.php
 
 		-
@@ -28711,11 +28346,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalFromBackofficeMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalFromBackofficeMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalFusionMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalFusionMutation.php
@@ -28757,11 +28387,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalMutation\\:\\:getProposalForm\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
 
@@ -28996,11 +28621,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteArgumentMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteArgumentMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteCommentMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteCommentMutation.php
@@ -29032,11 +28652,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteMediaAdminMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteMediaAdminMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteMediaAdminMutation.php
 
@@ -29137,11 +28752,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\DeleteUserReplyMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteUserReplyMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/DeleteUserReplyMutation.php
 
@@ -29281,17 +28891,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/EvaluateProposalAssessmentMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/EvaluateProposalAssessmentMutation.php
-
-		-
 			message: "#^Parameter \\#1 \\$body of class Swarrot\\\\Broker\\\\Message constructor expects string\\|null, string\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/EvaluateProposalAssessmentMutation.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between null and iterable will always evaluate to true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/EvaluateProposalAssessmentMutation.php
 
@@ -29336,27 +28936,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/Event/AbstractEventMutation.php
 
 		-
-			message: "#^Left side of && is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\FollowOpinionMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
-
-		-
-			message: "#^Negated boolean expression is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
 
@@ -29381,27 +28961,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
 
 		-
-			message: "#^Result of && is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and Capco\\\\AppBundle\\\\Entity\\\\Opinion will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowOpinionMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\FollowProposalMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/FollowProposalMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/FollowProposalMutation.php
 
@@ -29414,11 +28974,6 @@ parameters:
 			message: "#^Parameter \\#2 \\.\\.\\.\\$values of function sprintf expects bool\\|float\\|int\\|string\\|null, array\\|float\\|int\\|string\\|false\\|null given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/GraphQL/Mutation/Font/ChangeFontMutation.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:addUsersInGroup\\(\\) has parameter \\$users with no value type specified in iterable type array\\.$#"
@@ -29458,11 +29013,6 @@ parameters:
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:update\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
 
 		-
@@ -29716,22 +29266,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/Mediator/UpdateMediatorVotesMutation.php
 
 		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/Newsletter/SubscribeNewsletterMutation.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/Newsletter/SubscribeNewsletterMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\Newsletter\\\\SubscribeNewsletterMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/Newsletter/SubscribeNewsletterMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/Newsletter/SubscribeNewsletterMutation.php
 
@@ -30276,52 +29811,12 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 4
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Offset 'facebookUrl' on array in empty\\(\\) always exists and is not falsy\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Offset 'instagramUrl' on array in empty\\(\\) always exists and is not falsy\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Offset 'linkedInUrl' on array in empty\\(\\) always exists and is not falsy\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Offset 'twitterUrl' on array in empty\\(\\) always exists and is not falsy\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Offset 'webPageUrl' on array in empty\\(\\) always exists and is not falsy\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Offset 'youtubeUrl' on array in empty\\(\\) always exists and is not falsy\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
 			message: "#^Parameter \\#1 \\$body of class Swarrot\\\\Broker\\\\Message constructor expects string\\|null, string\\|false given\\.$#"
 			count: 4
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
 
 		-
 			message: "#^Parameter \\#2 \\$author of method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ProposalMutation\\:\\:shouldBeDraft\\(\\) expects Capco\\\\UserBundle\\\\Entity\\\\User, Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\Author\\|null given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ProposalMutation.php
 
@@ -30522,11 +30017,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\ReviewEventMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/ReviewEventMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/ReviewEventMutation.php
 
@@ -30751,17 +30241,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/SubscribeToEventAsNonRegisteredMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/SubscribeToEventAsNonRegisteredMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\SubscribeToEventAsRegisteredMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/SubscribeToEventAsRegisteredMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/SubscribeToEventAsRegisteredMutation.php
 
@@ -30796,11 +30276,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/UnfollowOpinionMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/GraphQL/Mutation/UnfollowOpinionMutation.php
-
-		-
 			message: "#^Parameter \\#1 \\$opinion of method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UnfollowOpinionMutation\\:\\:unfollow\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\Interfaces\\\\OpinionContributionInterface, object given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UnfollowOpinionMutation.php
@@ -30814,11 +30289,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UnstarResponseMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UnstarResponseMutation.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UnsubscribeToEventAsRegisteredMutation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UnsubscribeToEventAsRegisteredMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -30916,21 +30386,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateFollowOpinionMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateFollowOpinionMutation.php
-
-		-
-			message: "#^Result of && is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateFollowOpinionMutation.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateFollowOpinionMutation.php
-
-		-
 			message: "#^Instanceof between Capco\\\\UserBundle\\\\Entity\\\\User and Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateFollowProposalMutation.php
@@ -30938,11 +30393,6 @@ parameters:
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateFollowProposalMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateFollowProposalMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateFollowProposalMutation.php
 
 		-
@@ -31176,11 +30626,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateProposalNewsMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateProposalNewsMutation.php
-
-		-
 			message: "#^Parameter \\#1 \\$body of class Swarrot\\\\Broker\\\\Message constructor expects string\\|null, string\\|false given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateProposalNewsMutation.php
@@ -31306,11 +30751,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateQuestionnaireParametersMutation.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateQuestionnaireParametersMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateQuestionnaireStepMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateQuestionnaireStepMutation.php
@@ -31427,11 +30867,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\UpdateUserAccountMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateUserAccountMutation.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/UpdateUserAccountMutation.php
 
@@ -31641,11 +31076,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Consultation/ConsultationContributionsResolver.php
 
 		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Consultation/ConsultationSectionResolver.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Consultation\\\\ConsultationSectionResolver\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Consultation/ConsultationSectionResolver.php
@@ -31729,11 +31159,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Contribution\\\\ConsultationTypeResolver\\:\\:__invoke\\(\\) has parameter \\$data with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Contribution/ConsultationTypeResolver.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Debate/AbstractDebateVoteTypeResolver.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Debate\\\\AuthorVotesResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\ConnectionInterface but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\.$#"
@@ -32726,11 +32151,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectTypesResolver.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectUrlResolver.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Project\\\\ProjectViewerAssignedProposalsResolver\\:\\:__invoke\\(\\) has parameter \\$viewer with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Project/ProjectViewerAssignedProposalsResolver.php
@@ -32831,11 +32251,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalAuthorResolver.php
 
 		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalEvaluationResolver.php
-
-		-
 			message: "#^Left side of && is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalEvaluationResolver.php
@@ -32931,11 +32346,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalNewsResolver.php
 
 		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalPaperVotesResolver.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalPaperVotesResolver\\:\\:__invoke\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalPaperVotesResolver.php
@@ -32949,11 +32359,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Proposal\\\\ProposalReportingsResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalReportingsResolver.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/GraphQL/Resolver/Proposal/ProposalResponsesResolver.php
 
 		-
 			message: "#^Left side of && is always true\\.$#"
@@ -33284,11 +32689,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\ProposalFormOwner\\\\ProposalFormOwnerProposalFormsResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\ConnectionInterface but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/ProposalFormOwner/ProposalFormOwnerProposalFormsResolver.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/Publishable/PublishableNotPublishedReasonResolver.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\Query\\\\ConsultationStepsQueryResolver\\:\\:__invoke\\(\\) has no return type specified\\.$#"
@@ -33781,11 +33181,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/QuestionChoice/QuestionChoiceRankingResolver.php
 
 		-
-			message: "#^Ternary operator condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/QuestionChoice/QuestionChoiceRankingResolver.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\QuestionChoice\\\\QuestionChoiceRankingResponseResolver\\:\\:__invoke\\(\\) has parameter \\$questionChoiceRanking with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/QuestionChoice/QuestionChoiceRankingResponseResolver.php
@@ -33869,11 +33264,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\RegistrationForm\\\\RegistrationFormQuestionsResolver\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/RegistrationForm/RegistrationFormQuestionsResolver.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/GraphQL/Resolver/Reply/ReplyResponsesResolver.php
 
 		-
 			message: "#^Left side of && is always true\\.$#"
@@ -34809,11 +34199,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\User\\\\UserReportsResolver\\:\\:\\$reportingRepo has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/User/UserReportsResolver.php
-
-		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 3
-			path: src/Capco/AppBundle/GraphQL/Resolver/User/UserResponsesResolver.php
 
 		-
 			message: "#^Left side of && is always true\\.$#"
@@ -38306,11 +37691,6 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/SenderEmailResolver.php
 
 		-
-			message: "#^Expression on left side of \\?\\? is not nullable\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Mailer/Transport/MailjetTransport.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Transport\\\\MailjetTransport\\:\\:createMailjetMessage\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Transport/MailjetTransport.php
@@ -38356,7 +37736,7 @@ parameters:
 			path: src/Capco/AppBundle/Mailer/Transport/MailjetTransport.php
 
 		-
-			message: "#^Call to function is_array\\(\\) with non\\-empty\\-list\\<string\\> will always evaluate to true\\.$#"
+			message: "#^Call to function is_array\\(\\) with list\\<string\\> will always evaluate to true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Transport/MandrillTransport.php
 
@@ -38414,11 +37794,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Mailer\\\\Transport\\\\MandrillTransport\\:\\:\\$resultApi type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Transport/MandrillTransport.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Mailer/Transport/Transport.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Transport\\\\Transport\\:\\:getTransport\\(\\) has no return type specified\\.$#"
@@ -39191,11 +38566,6 @@ parameters:
 			path: src/Capco/AppBundle/Notifier/EventNotifier.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/EventNotifier.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\FOSNotifier\\:\\:sendConfirmationEmailMessage\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/FOSNotifier.php
@@ -39381,21 +38751,6 @@ parameters:
 			path: src/Capco/AppBundle/Notifier/UserInviteEmailMessageNotifier.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Processor/Event/EventCreateProcessor.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Processor/Event/EventReviewProcessor.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Processor/Event/EventUpdateProcessor.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Processor\\\\Proposal\\\\ProposalAnalyseProcessor\\:\\:getAnalysis\\(\\) has parameter \\$jsonDecoded with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Processor/Proposal/ProposalAnalyseProcessor.php
@@ -39436,19 +38791,9 @@ parameters:
 			path: src/Capco/AppBundle/Processor/Proposal/ProposalAnalyseProcessor.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Processor/Proposal/ProposalNewsCreateProcessor.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\Processor\\\\Proposal\\\\ProposalNewsDeleteProcessor\\:\\:\\$posRepository is never read, only written\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Processor/Proposal/ProposalNewsDeleteProcessor.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Processor/Proposal/ProposalNewsUpdateProcessor.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Processor\\\\Proposal\\\\ProposalRevisionProcessor\\:\\:getProposalFromMessage\\(\\) has parameter \\$json with no value type specified in iterable type array\\.$#"
@@ -39506,11 +38851,6 @@ parameters:
 			path: src/Capco/AppBundle/Processor/Proposal/ProposalUpdateProcessor.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Processor/Proposal/ProposalUpdateStatusProcessor.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Processor\\\\ReportProcessor\\:\\:getReport\\(\\) has parameter \\$json with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Processor/ReportProcessor.php
@@ -39522,11 +38862,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Processor\\\\UserArchive\\\\UserArchiveRequestProcessor\\:\\:__construct\\(\\) has parameter \\$rootDir with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Processor/UserArchive/UserArchiveRequestProcessor.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Processor/UserArchive/UserArchiveRequestProcessor.php
 
@@ -39567,11 +38902,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Publishable\\\\DoctrineListener\\:\\:setPublishedStatus\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Publishable/DoctrineListener.php
-
-		-
-			message: "#^Negated boolean expression is always false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Publishable/DoctrineListener.php
 
@@ -39791,11 +39121,6 @@ parameters:
 			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
-
-		-
 			message: "#^Property Capco\\\\AppBundle\\\\RedirectionIO\\\\RequestResponseListener\\:\\:\\$excludedPrefixes has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
@@ -39803,16 +39128,6 @@ parameters:
 		-
 			message: "#^Strict comparison using \\=\\=\\= between false and string will always evaluate to false\\.$#"
 			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and RedirectionIO\\\\Client\\\\Sdk\\\\HttpMessage\\\\Response will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/RedirectionIO/RequestResponseListener.php
 
 		-
@@ -39989,16 +39304,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Repository\\\\AbstractStepRepository\\:\\:getStepEndingBetween\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/AbstractStepRepository.php
-
-		-
-			message: "#^Call to function method_exists\\(\\) with Capco\\\\AppBundle\\\\Entity\\\\AbstractVote and 'getProposal' will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/AbstractVoteRepository.php
-
-		-
-			message: "#^Call to function method_exists\\(\\) with Capco\\\\AppBundle\\\\Entity\\\\AbstractVote and 'isPrivate' will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/AbstractVoteRepository.php
 
 		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\AbstractVoteRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
@@ -41566,11 +40871,6 @@ parameters:
 			path: src/Capco/AppBundle/Repository/LocaleRepository.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/LocaleRepository.php
-
-		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\LogicJumpRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
 			path: src/Capco/AppBundle/Repository/LogicJumpRepository.php
@@ -42726,23 +42026,8 @@ parameters:
 			path: src/Capco/AppBundle/Repository/ProjectDistrictPositionerRepository.php
 
 		-
-			message: "#^Call to function is_object\\(\\) with Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
-			count: 4
-			path: src/Capco/AppBundle/Repository/ProjectRepository.php
-
-		-
 			message: "#^Class Capco\\\\AppBundle\\\\Repository\\\\ProjectRepository extends generic class Doctrine\\\\ORM\\\\EntityRepository but does not specify its types\\: TEntityClass$#"
 			count: 1
-			path: src/Capco/AppBundle/Repository/ProjectRepository.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Repository/ProjectRepository.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 2
 			path: src/Capco/AppBundle/Repository/ProjectRepository.php
 
 		-
@@ -46856,11 +46141,6 @@ parameters:
 			path: src/Capco/AppBundle/Security/ProposalAnalysisCommentVoter.php
 
 		-
-			message: "#^Instanceof between Capco\\\\UserBundle\\\\Entity\\\\User and Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Security/ProposalAnalysisRelatedVoter.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Security\\\\ProposalAnalysisRelatedVoter\\:\\:supports\\(\\) has parameter \\$attribute with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Security/ProposalAnalysisRelatedVoter.php
@@ -46951,17 +46231,7 @@ parameters:
 			path: src/Capco/AppBundle/Service/SmsAnalyticsHelper.php
 
 		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Service/SocialNetworksUrlSanitizer.php
-
-		-
 			message: "#^Parameter \\#1 \\$separator of function explode expects non\\-empty\\-string, string given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Service/SocialNetworksUrlSanitizer.php
-
-		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Service/SocialNetworksUrlSanitizer.php
 
@@ -47076,11 +46346,6 @@ parameters:
 			path: src/Capco/AppBundle/Sluggable/CapcoORMSluggableAdapter.php
 
 		-
-			message: "#^Call to function is_callable\\(\\) with callable\\(\\)\\: mixed will always evaluate to true\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Sluggable/SluggableListener.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Sluggable\\\\SluggableListener\\:\\:addManagedFilter\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Sluggable/SluggableListener.php
@@ -47151,11 +46416,6 @@ parameters:
 			path: src/Capco/AppBundle/Sluggable/SluggableListener.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between '' and non\\-falsy\\-string will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Sluggable/Transliterator.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Toggle\\\\Manager\\:\\:all\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Toggle/Manager.php
@@ -47189,16 +46449,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Toggle\\\\Manager\\:\\:\\$toggles has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Toggle/Manager.php
-
-		-
-			message: "#^Call to function is_object\\(\\) with Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Traits/ProjectVisibilityStub.php
-
-		-
-			message: "#^If condition is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Traits/ProjectVisibilityStub.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Traits\\\\ProjectVisibilityStub\\:\\:getAuthors\\(\\) return type with generic interface Doctrine\\\\Common\\\\Collections\\\\Collection does not specify its types\\: TKey, T$#"
@@ -47289,11 +46539,6 @@ parameters:
 			message: "#^Parameter \\#2 \\$callable of class Twig\\\\TwigFunction constructor expects \\(callable\\(\\)\\: mixed\\)\\|null, array\\{'Capco\\\\\\\\AppBundle\\\\\\\\Twig\\\\\\\\BrowserLanguageRuntime', 'getBrowserLanguage'\\} given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/BrowserLanguageExtension.php
-
-		-
-			message: "#^Left side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Twig/BrowserLanguageRuntime.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Twig\\\\BrowserLanguageRuntime\\:\\:getBrowserLanguage\\(\\) has parameter \\$viewer with no type specified\\.$#"
@@ -47577,11 +46822,6 @@ parameters:
 
 		-
 			message: "#^Right side of && is always true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Twig/FooterRuntime.php
-
-		-
-			message: "#^Ternary operator condition is always true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Twig/FooterRuntime.php
 
@@ -48231,22 +47471,12 @@ parameters:
 			path: src/Capco/AppBundle/Utils/Arr.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between null and null will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/Arr.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\Canonicalizer\\:\\:canonicalize\\(\\) should return string but returns null\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/Canonicalizer.php
 
 		-
 			message: "#^Parameter \\#2 \\$encodings of function mb_detect_encoding expects array\\|string\\|null, array\\<int, string\\>\\|bool given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/Canonicalizer.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/Canonicalizer.php
 
@@ -48301,17 +47531,7 @@ parameters:
 			path: src/Capco/AppBundle/Utils/Map.php
 
 		-
-			message: "#^Unreachable statement \\- code above always terminates\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/Map.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\RequestGuesser\\:\\:getJsonContent\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/RequestGuesser.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between null and string will always evaluate to true\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/RequestGuesser.php
 
@@ -48871,11 +48091,6 @@ parameters:
 			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
-
-		-
 			message: "#^PHPDoc tag @var for variable \\$value contains unknown class Capco\\\\AppBundle\\\\Validator\\\\Constraints\\\\QuestionChoice\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Validator/Constraints/HasResponsesToRequiredQuestionsValidator.php
@@ -49181,11 +48396,6 @@ parameters:
 			path: src/Capco/UserBundle/Controller/ConfirmationController.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Controller/ConfirmationController.php
-
-		-
 			message: "#^Parameter \\#1 \\$step of method Capco\\\\UserBundle\\\\Controller\\\\ConfirmationController\\:\\:addConfirmationMessageToFlashbag\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\|null, object\\|null given\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Controller/ConfirmationController.php
@@ -49296,19 +48506,9 @@ parameters:
 			path: src/Capco/UserBundle/Controller/ProfileController.php
 
 		-
-			message: "#^Negated boolean expression is always false\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Controller/ProfileController.php
-
-		-
 			message: "#^Parameter \\#2 \\$userNotificationsConfiguration of method Capco\\\\UserBundle\\\\Controller\\\\ProfileController\\:\\:loginWithToken\\(\\) expects Capco\\\\AppBundle\\\\Entity\\\\UserNotificationsConfiguration, object given\\.$#"
 			count: 3
 			path: src/Capco/UserBundle/Controller/ProfileController.php
-
-		-
-			message: "#^Strict comparison using \\!\\=\\= between null and Capco\\\\UserBundle\\\\Entity\\\\User will always evaluate to true\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Controller/ResettingController.php
 
 		-
 			message: "#^Unsafe access to private constant Capco\\\\UserBundle\\\\Controller\\\\ResettingController\\:\\:SESSION_EMAIL through static\\:\\:\\.$#"
@@ -50126,11 +49326,6 @@ parameters:
 			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
 
 		-
-			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
-
-		-
 			message: "#^Method Capco\\\\UserBundle\\\\Handler\\\\CasHandler\\:\\:getServerUrlParts\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Handler/CasHandler.php
@@ -50911,16 +50106,6 @@ parameters:
 			path: src/Capco/UserBundle/Security/Http/Logout/Handler/OpenIDLogoutHandler.php
 
 		-
-			message: "#^Result of && is always false\\.$#"
-			count: 2
-			path: src/Capco/UserBundle/Security/Http/Logout/LogoutSuccessHandler.php
-
-		-
-			message: "#^Strict comparison using \\=\\=\\= between null and string will always evaluate to false\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Security/Http/Logout/LogoutSuccessHandler.php
-
-		-
 			message: "#^Method Capco\\\\UserBundle\\\\Security\\\\JWT\\:\\:decode\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Security/JWT.php
@@ -50972,11 +50157,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Security\\\\SessionWithJsonHandler\\:\\:__construct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
-
-		-
-			message: "#^Offset 0 on non\\-empty\\-list\\<string\\> on left side of \\?\\? always exists and is not nullable\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
 
@@ -52586,27 +51766,7 @@ parameters:
 			path: tests/Normalizer/NormalizerKeysTest.php
 
 		-
-			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\QuestionnaireParticipantNormalizerKeysTest\\:\\:testFullExportQuestionnaireParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/Normalizer/Questionnaire/QuestionnaireParticipantNormalizerKeysTest.php
-
-		-
-			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\QuestionnaireParticipantNormalizerKeysTest\\:\\:testSimplifiedExportQuestionnaireParticipantNormalizersHaveSameKeys\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/Normalizer/Questionnaire/QuestionnaireParticipantNormalizerKeysTest.php
-
-		-
 			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\ReplyAnonymousNormalizerTest\\:\\:normalizationDataProvider\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: tests/Normalizer/Questionnaire/ReplyAnonymousNormalizerTest.php
-
-		-
-			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\ReplyAnonymousNormalizerTest\\:\\:testNormalize\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: tests/Normalizer/Questionnaire/ReplyAnonymousNormalizerTest.php
-
-		-
-			message: "#^Method Capco\\\\Tests\\\\Normalizer\\\\Questionnaire\\\\ReplyAnonymousNormalizerTest\\:\\:testSupportsNormalization\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: tests/Normalizer/Questionnaire/ReplyAnonymousNormalizerTest.php
 

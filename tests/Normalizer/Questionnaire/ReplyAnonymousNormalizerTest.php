@@ -42,7 +42,6 @@ class ReplyAnonymousNormalizerTest extends TestCase
 
         $result = $this->normalizer->normalize($replyAnonymous, null, $context);
 
-        $this->assertIsArray($result);
         $this->assertEquals($expectedResult, $result);
     }
 

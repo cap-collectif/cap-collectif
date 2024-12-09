@@ -17,7 +17,7 @@ class Transliterator
 
         // If we could not find anything return a random id
         // To avoid empty slugs
-        if (!$result || '' === $result) {
+        if (!$result) {
             return uniqid();
         }
 

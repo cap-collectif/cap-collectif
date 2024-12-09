@@ -159,7 +159,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
         $delimiter = $input->getOption('delimiter');
         $isVerbose = $input->getOption('verbose');
 
-        $steps = $this->stepRepository->findAllExceptDebateAndQuestionnaire();
+        $steps = $this->stepRepository->findAllExceptDebateQuestionnaire();
         foreach ($steps as $step) {
             $type = $step->getType();
             if ($isVerbose) {
@@ -254,7 +254,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             }
                           }
                         }
-                        ... on SelectionStep {
+                       ... on SelectionStep {
                           contributors(first: 50 {$userCursor}) {
                             edges {
                               cursor

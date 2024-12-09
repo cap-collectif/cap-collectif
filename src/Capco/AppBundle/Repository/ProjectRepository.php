@@ -165,11 +165,10 @@ class ProjectRepository extends EntityRepository
             ->orWhere('p.visibility IN (:visibility)')
             ->setParameter('visibility', $visibility)
         ;
-        // https://github.com/cap-collectif/platform/pull/5877#discussion_r213009730
-        /** @var User $viewer */
-        $viewerGroups = $viewer && \is_object($viewer) ? $viewer->getUserGroupIds() : [];
 
-        if ($viewer && \is_object($viewer) && !$viewer->isSuperAdmin()) {
+        $viewerGroups = $viewer instanceof User ? $viewer->getUserGroupIds() : [];
+
+        if ($viewer instanceof User && !$viewer->isSuperAdmin()) {
             if ($viewerGroups) {
                 $qb->orWhere(
                     $qb

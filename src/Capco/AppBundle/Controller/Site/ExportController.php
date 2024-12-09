@@ -59,8 +59,24 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ExportController extends Controller
 {
-    public function __construct(private readonly GraphQlAclListener $aclListener, private readonly ConnectionTraversor $connectionTraversor, private readonly Executor $executor, private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator, private readonly FlashBagInterface $flashBag, private readonly AbstractStepRepository $abstractStepRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly KernelInterface $kernel, private readonly ContributionsFilePathResolver $contributionsFilePathResolver, private readonly ParticipantsFilePathResolver $participantsFilePathResolver, private readonly SessionInterface $session, private readonly CronTimeInterval $cronTimeInterval, private readonly string $exportDir, private readonly string $locale, private readonly string $projectDir)
-    {
+    public function __construct(
+        private readonly GraphQlAclListener $aclListener,
+        private readonly ConnectionTraversor $connectionTraversor,
+        private readonly Executor $executor,
+        private readonly LoggerInterface $logger,
+        private readonly TranslatorInterface $translator,
+        private readonly FlashBagInterface $flashBag,
+        private readonly AbstractStepRepository $abstractStepRepository,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly KernelInterface $kernel,
+        private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
+        private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
+        private readonly SessionInterface $session,
+        private readonly CronTimeInterval $cronTimeInterval,
+        private readonly string $exportDir,
+        private readonly string $locale,
+        private readonly string $projectDir
+    ) {
     }
 
     /**
@@ -493,6 +509,60 @@ class ExportController extends Controller
         $date = (new \DateTime())->format('Y-m-d');
 
         $response = $this->file($filePath, $date . '_' . $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+        return $response;
+    }
+
+    /**
+     * @Route("/export-step-contributors/{stepId}/download-selection", name="app_export_step_contributors_download_selection", options={"i18n" = false})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function downloadSelectionParticipantAction(Request $request, string $stepId): Response
+    {
+        $id = GlobalId::fromGlobalId($stepId);
+        if ($id && isset($id['id'])) {
+            $stepId = $id['id'];
+        }
+
+        /** @var null|AbstractStep $step */
+        $step = $this->abstractStepRepository->find($stepId);
+        if (!$step) {
+            $this->logger->error('An error occured while downloading the csv file', [
+                'stepId' => $stepId,
+            ]);
+
+            throw new BadRequestHttpException('You must provide a valid step id.');
+        }
+
+        $organization = $this->getUser()->getOrganization();
+        $projectOwner = $step->getProject()->getOwner();
+        if ($organization && ($projectOwner !== $organization)) {
+            throw new AccessException();
+        }
+
+        $isSimplified = 'true' === $request->query->get('simplified');
+
+        $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+        $filePath = sprintf(
+            '%s%s/%s',
+            $this->exportDir,
+            'selection',
+            $fileName
+        );
+
+        if (!file_exists($filePath)) {
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(9))
+            ;
+
+            return $this->redirect($request->headers->get('referer') ?? '/admin-next/projects');
+        }
+
+        $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
+
+        $response = $this->file($filePath, $fileName);
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;

@@ -21,8 +21,11 @@ class ParticipantExporter
     protected ?string $delimiter = self::CSV_DELIMITER;
     private ?AbstractStep $step = null;
 
-    public function __construct(protected EntityManagerInterface $entityManager, protected SerializerInterface $serializer, private readonly Filesystem $fileSystem)
-    {
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        protected SerializerInterface $serializer,
+        private readonly Filesystem $fileSystem
+    ) {
     }
 
     public function initializeStyle(SymfonyStyle $style): void
@@ -76,7 +79,7 @@ class ParticipantExporter
         }
     }
 
-    protected function write(string $path, array $data, bool $withHeader, bool $isFullExport, bool $append): void
+    private function write(string $path, array $data, bool $withHeader, bool $isFullExport, bool $append): void
     {
         $context = [
             CsvEncoder::DELIMITER_KEY => $this->delimiter,

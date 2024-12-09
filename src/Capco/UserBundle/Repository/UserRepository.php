@@ -1768,6 +1768,22 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult() > 0;
     }
 
+    public function hasNewParticipantsForASelectionStep(SelectionStep $selectionStep, \DateTime $mostRecentFileModificationDate): bool
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->select('COUNT(DISTINCT user.id)')
+        ;
+
+        $qb = $this->getConfirmedParticipantsFromCollectOrSelectionStep($qb, false)
+            ->setParameter('step', $selectionStep)
+            ->andWhere('user.confirmationToken IS NULL')
+            ->andWhere('(user.updatedAt > :date OR selectionVotes.createdAt > :date)')
+            ->setParameter('date', $mostRecentFileModificationDate)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult() > 0;
+    }
+
     /**
      * @throws NonUniqueResultException
      * @throws NoResultException
@@ -2034,16 +2050,83 @@ class UserRepository extends EntityRepository
         return $total;
     }
 
+    public function hasNewVotersOrUpdatedUsersForSelection(SelectionStep $selectionStep, \DateTime $mostRecentFileModificationDate): bool
+    {
+        $voteQueryBuilder = $this->createQueryBuilder('uv');
+        $userVoteQuery = $voteQueryBuilder->select('count(userVote.id)')
+            ->from('CapcoAppBundle:ProposalSelectionVote', 'userVote')
+            ->where('userVote.selectionStep = :selectionStep')
+            ->andWhere('userVote.isAccounted = 1')
+            ->andWhere('userVote.createdAt > :lastCheck')
+            ->setParameter('selectionStep', $selectionStep)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+            ->getQuery()
+        ;
+
+        if ($userVoteQuery->getSingleScalarResult() > 0) {
+            return true;
+        }
+
+        $userQueryBuilder = $this->createQueryBuilder('user');
+        $userQuery = $userQueryBuilder->select('count(distinct user.id)')
+            ->join('CapcoAppBundle:ProposalSelectionVote', 'userVote', 'WITH', 'userVote.user = user.id')
+            ->where('userVote.selectionStep = :selectionStep')
+            ->andWhere('user.confirmationToken IS NULL')
+            ->andWhere('user.updatedAt > :lastCheck')
+            ->setParameter('selectionStep', $selectionStep)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+            ->getQuery()
+        ;
+
+        if ($userQuery->getSingleScalarResult() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return array<User>
+     */
+    public function findVotersForSelection(SelectionStep $selectionStep, int $offset, int $limit): array
+    {
+        $subQueryBuilder = $this->createQueryBuilder('uv');
+        $subQuery = $subQueryBuilder->select('IDENTITY(userVote.user)')
+            ->from('CapcoAppBundle:ProposalSelectionVote', 'userVote')
+            ->where('userVote.selectionStep = :selectionStep')
+            ->andWhere('userVote.isAccounted = 1')
+            ->getDQL()
+        ;
+
+        $queryBuilder = $this->createQueryBuilder('u');
+        $query = $queryBuilder->select('user')
+            ->from('CapcoUserBundle:User', 'user')
+            ->where(
+                $queryBuilder->expr()->in('user.id', $subQuery)
+            )
+            ->andWhere('user.confirmationToken IS NULL')
+            ->setParameter('selectionStep', $selectionStep)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
     }
 
-    private function getConfirmedParticipantsFromCollectOrSelectionStep(QueryBuilder $qb): QueryBuilder
+    private function getConfirmedParticipantsFromCollectOrSelectionStep(QueryBuilder $qb, bool $isCollectStep = true): QueryBuilder
     {
+        $votesProperty = $isCollectStep ? 'collectVotes' : 'selectionVotes';
+        $accessToStepProperty = $isCollectStep ? 'proposalForm' : 'selections';
+
         return $qb
             ->innerJoin('user.proposals', 'proposal', 'WITH', 'proposal.published = 1')
-            ->leftJoin('proposal.collectVotes', 'collectVotes', 'WITH', 'collectVotes.isAccounted = true')
+            ->leftJoin(sprintf('proposal.%s', $votesProperty), $votesProperty, 'WITH', sprintf('%s.isAccounted = true', $votesProperty))
             ->leftJoin('proposal.comments', 'proposalComment')
             ->leftJoin('proposalComment.author', 'proposalCommentAuthor', 'WITH', 'proposalCommentAuthor.confirmationToken IS NULL')
             ->leftJoin('proposalComment.votes', 'proposalCommentVote')
@@ -2059,7 +2142,7 @@ class UserRepository extends EntityRepository
             ->leftJoin('postCommentVote.user', 'postCommentVoteUser', 'WITH', 'postCommentVoteUser.confirmationToken IS NULL')
             ->leftJoin('postComment.Reports', 'postCommentReport')
             ->leftJoin('postCommentReport.Reporter', 'postCommentReportUser', 'WITH', 'postCommentReportUser.confirmationToken IS NULL')
-            ->leftJoin('proposal.proposalForm', 'proposalForm')
-        ;
+            ->leftJoin(sprintf('proposal.%s', $accessToStepProperty), $accessToStepProperty, !$isCollectStep ? 'WITH' : null, !$isCollectStep ? sprintf('%s.selectionStep = :step', $accessToStepProperty) : null)
+            ;
     }
 }

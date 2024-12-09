@@ -381,9 +381,6 @@ class CreateCsvFromUserCommand extends BaseExportCommand
         string $zipPath
     ): void {
         $writer = WriterFactory::create(Type::CSV, $delimiter);
-        if (null === $writer) {
-            throw new \RuntimeException('Error while opening writer.');
-        }
 
         try {
             $writer->openToFile($this->getPath());

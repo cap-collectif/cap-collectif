@@ -101,10 +101,24 @@ class ParticipantNormalizer extends BaseNormalizer implements NormalizerInterfac
     private function getProposalCountPerStep(User $participant, AbstractStep $step): int
     {
         $filterClosure = function (Proposal $proposal) use ($step) {
-            $proposalStep = $step instanceof CollectStep ? $proposal->getStep() : array_filter(
+            if ($step instanceof CollectStep) {
+                $proposalStep = $proposal->getStep();
+
+                return null !== $proposalStep
+                    && $proposalStep->getId() === $step->getId()
+                    && $proposal->isPublished();
+            }
+
+            $selectionSteps = array_filter(
                 $proposal->getSelectionSteps(),
                 static fn (SelectionStep $selectionStep) => $selectionStep->getId() === $step->getId()
             );
+
+            if (empty($selectionSteps)) {
+                return false;
+            }
+
+            $proposalStep = reset($selectionSteps);
 
             return $proposalStep->getId() === $step->getId() && $proposal->isPublished();
         };

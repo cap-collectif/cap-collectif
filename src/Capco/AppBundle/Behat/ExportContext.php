@@ -14,6 +14,7 @@ use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpKernel\KernelInterface;
@@ -93,7 +94,7 @@ class ExportContext implements KernelAwareContext
         foreach ($steps as $step) {
             if (
                 $step->isParticipative()
-                && !($step instanceof DebateStep || $step instanceof QuestionnaireStep)
+                && !($step instanceof DebateStep || $step instanceof QuestionnaireStep || $step instanceof SelectionStep)
             ) {
                 $fileName = CreateStepContributorsCommand::getFilename($step);
                 echo 'Checking ' . $fileName . ' snapshot…' . \PHP_EOL;

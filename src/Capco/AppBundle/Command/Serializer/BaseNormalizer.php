@@ -9,6 +9,7 @@ abstract class BaseNormalizer
 {
     final public const IS_EXPORT_NORMALIZER = 'is_export_normalizer';
     final public const IS_FULL_EXPORT = 'is_full_export';
+    public const WITH_VOTES = 'with_votes';
     protected const EXPORT_PARTICIPANT_USER_ID = 'export_participant_user_id';
     protected const EXPORT_PARTICIPANT_USERNAME = 'export_participant_username';
     protected const EXPORT_PARTICIPANT_USER_EMAIL = 'export_participant_user_email';
@@ -85,6 +86,11 @@ abstract class BaseNormalizer
         return (null !== $dateTime) ? $dateTime->format('Y-m-d H:i:s') : null;
     }
 
+    /**
+     * @param array<mixed> $array
+     *
+     * @return array<mixed>
+     */
     protected function translateHeaders(array $array): array
     {
         $keys = array_keys($array);

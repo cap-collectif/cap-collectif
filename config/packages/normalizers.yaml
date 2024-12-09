@@ -1,8 +1,8 @@
 services:
-  _defaults:
-    autowire: true
-    # public: false
+    _defaults:
+        autowire: true
+        # public: false
 
-  Capco\AppBundle\Normalizer\:
-    resource: '%kernel.project_dir%/src/Capco/AppBundle/Normalizer/'
-    tags: ['serializer.normalizer']
+    Capco\AppBundle\Normalizer\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Normalizer/'
+        tags: ['serializer.normalizer']

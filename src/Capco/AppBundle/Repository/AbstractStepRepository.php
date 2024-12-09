@@ -106,7 +106,7 @@ class AbstractStepRepository extends EntityRepository
     /**
      * @return array<AbstractStep>
      */
-    public function findAllExceptDebateAndQuestionnaire(): array
+    public function findAllExceptDebateQuestionnaire(): array
     {
         return $this->createQueryBuilder('s')
             ->where('s NOT INSTANCE OF :debateStep')

@@ -194,9 +194,6 @@ class ExportAnalysisCSVCommand extends BaseExportCommand
         $fullPath = $this->getPath($projectSlug, $isOnlyDecision, $projectAdmin);
 
         $writer = WriterFactory::create(Type::CSV, $delimiter);
-        if (null === $writer) {
-            throw new \RuntimeException('Error while opening writer.');
-        }
 
         try {
             $writer->openToFile($fullPath);

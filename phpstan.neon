@@ -21,3 +21,4 @@ parameters:
     reportUnmatchedIgnoredErrors: false
     excludePaths:
         - %currentWorkingDirectory%/src/Capco/AppBundle/GraphQL/__generated__/*
+    treatPhpDocTypesAsCertain: false

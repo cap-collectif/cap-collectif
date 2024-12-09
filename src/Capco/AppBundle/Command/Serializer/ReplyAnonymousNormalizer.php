@@ -18,7 +18,14 @@ class ReplyAnonymousNormalizer extends BaseNormalizer implements NormalizerInter
         return isset($context[self::IS_EXPORT_NORMALIZER]) && $data instanceof ReplyAnonymous;
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    /**
+     * @param ReplyAnonymous       $object
+     * @param null|string          $format
+     * @param array<array<string>> $context
+     *
+     * @return array<string>
+     */
+    public function normalize($object, $format = null, array $context = []): array
     {
         $isFullExport = false;
 

@@ -67,7 +67,6 @@ class ParticipantNormalizerTest extends TestCase
 
         $result = $this->participantNormalizer->normalize($user, null, $context);
 
-        $this->assertIsArray($result);
         $this->assertEquals($result, $expectedResult);
     }
 

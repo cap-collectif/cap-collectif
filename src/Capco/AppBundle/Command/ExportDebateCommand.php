@@ -236,9 +236,6 @@ class ExportDebateCommand extends BaseExportCommand
         $path = $this->getPath($debateId, $type, $projectAdmin);
 
         $writer = WriterFactory::create(Type::CSV, $delimiter);
-        if (null === $writer) {
-            throw new \RuntimeException('Error while opening writer.');
-        }
 
         try {
             $writer->openToFile($path);

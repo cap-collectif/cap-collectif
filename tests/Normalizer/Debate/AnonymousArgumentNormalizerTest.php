@@ -44,7 +44,6 @@ class AnonymousArgumentNormalizerTest extends TestCase
 
         $result = $this->normalizer->normalize($anonymousArgument, null, $context);
 
-        $this->assertIsArray($result);
         $this->assertEquals($expectedResult, $result);
     }
 

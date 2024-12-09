@@ -22,7 +22,14 @@ class UserNormalizer extends BaseNormalizer implements NormalizerInterface
         return isset($context[self::IS_EXPORT_NORMALIZER]) && $data instanceof User && !isset($context['groups']);
     }
 
-    public function normalize($object, $format = null, array $context = [])
+    /**
+     * @param User                 $object
+     * @param null|string          $format
+     * @param array<array<string>> $context
+     *
+     * @return array<string>
+     */
+    public function normalize($object, $format = null, array $context = []): array
     {
         /** @var User $object */
         $groups = implode(
