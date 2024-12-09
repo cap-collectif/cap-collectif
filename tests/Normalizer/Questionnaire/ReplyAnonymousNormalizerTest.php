@@ -33,7 +33,7 @@ class ReplyAnonymousNormalizerTest extends TestCase
      *
      * @throws ExceptionInterface
      */
-    public function testNormalize(mixed $context, mixed $expectedResult)
+    public function testNormalize(mixed $context, mixed $expectedResult): void
     {
         $replyAnonymous = new ReplyAnonymous();
         $replyAnonymous->setId(1);
@@ -46,13 +46,16 @@ class ReplyAnonymousNormalizerTest extends TestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function testSupportsNormalization()
+    public function testSupportsNormalization(): void
     {
         $this->assertTrue($this->normalizer->supportsNormalization(new ReplyAnonymous(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
         $this->assertFalse($this->normalizer->supportsNormalization(new ReplyAnonymous(), 'csv'));
         $this->assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
     }
 
+    /**
+     * @return array<string, array<int, array<string, null|bool|string>>>
+     */
     public function normalizationDataProvider(): array
     {
         $simplifiedExportResult = [

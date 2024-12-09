@@ -13,7 +13,7 @@ class EventReviewApprovedMessage extends AbstractExternalMessage
     use EventMockDataTrait;
     public const SUBJECT = 'event-approved-new';
     public const TEMPLATE = '@CapcoMail/Event/notifyUserReviewedEvent.html.twig';
-    public const FOOTER = '';
+    final public const FOOTER = '';
 
     public static function getMyTemplateVars(Event $event, array $params): array
     {

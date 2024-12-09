@@ -1,0 +1,4 @@
+﻿export_participant_user_id,export_participant_username,export_participant_user_email,export_participant_consent_internal_communication,export_participant_phone,export_participant_type,export_participant_firstname,export_participant_lastname,export_participant_date_of_birth,export_participant_postal_address,export_participant_zip_code,export_participant_city,export_participant_profile_url,export_participant_identification_code,user_votes_total_count_per_step,user_proposal_count_per_step,user_voted_proposal_ids
+userSpyl,spyl,aurelien@cap-collectif.com,Oui,,Citoyen,Aurélien,David,,,,,https://capco.dev/profile/spyl,,0,1,
+userJpec,Jpec,jpec@cap-collectif.com,Non,,,"Jean Paul",Bella,,,,,https://capco.dev/profile/jpec,,0,2,
+user160,user160,user160@cap-collectif.com,Oui,,Citoyen,firstname160,lastname160,,,,,https://capco.dev/profile/user160,,0,5,

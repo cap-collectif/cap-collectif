@@ -33,7 +33,7 @@ class QuestionnaireParticipantNormalizerKeysTest extends KernelTestCase
         $this->replyAnonymousNormalizer = $container->get(ReplyAnonymousNormalizer::class);
     }
 
-    public function testSimplifiedExportQuestionnaireParticipantNormalizersHaveSameKeys()
+    public function testSimplifiedExportQuestionnaireParticipantNormalizersHaveSameKeys(): void
     {
         $userNormalizedData = $this->userNormalizer->normalize($this->user);
         $replyAnonymousNormalizedData = $this->replyAnonymousNormalizer->normalize($this->anonymousReply);
@@ -46,7 +46,7 @@ class QuestionnaireParticipantNormalizerKeysTest extends KernelTestCase
         );
     }
 
-    public function testFullExportQuestionnaireParticipantNormalizersHaveSameKeys()
+    public function testFullExportQuestionnaireParticipantNormalizersHaveSameKeys(): void
     {
         $userNormalizedData = $this->userNormalizer->normalize($this->user, null, [BaseNormalizer::IS_FULL_EXPORT => true]);
         $replyAnonymousNormalizedData = $this->replyAnonymousNormalizer->normalize($this->anonymousReply, null, [BaseNormalizer::IS_FULL_EXPORT => true]);

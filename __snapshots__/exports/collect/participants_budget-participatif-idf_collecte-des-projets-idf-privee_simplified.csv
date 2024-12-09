@@ -1,0 +1,4 @@
+﻿export_participant_user_id,export_participant_username,export_participant_user_email,export_participant_consent_internal_communication,export_participant_phone,export_participant_type,export_participant_firstname,export_participant_lastname,export_participant_date_of_birth,export_participant_postal_address,export_participant_zip_code,export_participant_city,export_participant_profile_url,export_participant_identification_code
+userIan,"Ian apprenti DevOps",ian@cap-collectif.com,Non,,,Ian,DUCROT--THOLLON-POMMEROL,,,,,https://capco.dev/profile/ianapprentidevops,
+userKiroule,ptondereau,pierre@cap-collectif.com,Non,,Citoyen,Pierre,Tondereau,,,,,https://capco.dev/profile/ptondereau,
+userJean,Juan,jean@cap-collectif.com,Non,,Citoyen,Jean,Treibert,,,,,https://capco.dev/profile/juan1,

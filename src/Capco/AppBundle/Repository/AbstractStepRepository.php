@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Doctrine\Common\Collections\Criteria;
@@ -115,6 +116,17 @@ class AbstractStepRepository extends EntityRepository
             ->getQuery()
             ->getResult()
         ;
+    }
+
+    /**
+     * @return AbstractStep[]
+     */
+    public function getAllStepsByCollectStep(): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->andWhere($qb->expr()->isInstanceOf('cs', CollectStep::class));
+
+        return $qb->getQuery()->execute();
     }
 
     protected function getIsEnabledQueryBuilder()

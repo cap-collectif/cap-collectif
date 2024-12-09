@@ -92,6 +92,53 @@ class ProposalRepository extends EntityRepository
         ;
     }
 
+    /**
+     * @param class-string<CollectStep|SelectionStep> $collectStepOrSelectionStep
+     *
+     * @return Proposal[]
+     */
+    public function getProposalsByCollectStepOrSelectionStep(
+        string $stepId,
+        string $collectStepOrSelectionStep,
+        ?int $limit = null,
+        ?int $offset = null
+    ): array {
+        $qb = $this->createQueryBuilder('p')
+            ->select(null === $limit && null === $offset ? 'p.id' : 'p')
+        ;
+
+        switch ($collectStepOrSelectionStep) {
+            case CollectStep::class:
+                $qb->innerJoin('p.proposalForm', 'pf')
+                    ->innerJoin('pf.step', 's')
+                    ->andWhere('s.id = :stepId')
+                    ->setParameter('stepId', $stepId)
+                ;
+
+                break;
+
+            case SelectionStep::class:
+                $qb->innerJoin('p.selections', 'selections')
+                    ->innerJoin('selections.selectionStep', 'ss')
+                    ->andWhere('ss.id = :stepId')
+                    ->setParameter('stepId', $stepId)
+                ;
+
+                break;
+
+            default:
+                throw new \InvalidArgumentException('Invalid step type');
+        }
+
+        if (null !== $limit && null !== $offset) {
+            $qb->setFirstResult($offset)
+                ->setMaxResults($limit)
+            ;
+        }
+
+        return (null === $limit && null === $offset) ? array_column($qb->getQuery()->getScalarResult(), 'id') : $qb->getQuery()->getResult();
+    }
+
     public function getProposalsGroupedByCollectSteps(User $user, bool $onlyVisible = false): array
     {
         $qb = $this->getIsEnabledQueryBuilder()

@@ -20,7 +20,7 @@ class NormalizerKeysTest extends KernelTestCase
         self::bootKernel();
     }
 
-    public function testExportParticipantNormalizersHaveSameKeys()
+    public function testExportParticipantNormalizersHaveSameKeys(): void
     {
         $participant = new User();
         $anonymousReply = new ReplyAnonymous();
@@ -39,7 +39,7 @@ class NormalizerKeysTest extends KernelTestCase
         $this->assertSame($firstKeys, $secondKeys, 'The keys of the two normalized arrays are not the same.');
     }
 
-    public function testFullExportParticipantNormalizersHaveSameKeys()
+    public function testFullExportParticipantNormalizersHaveSameKeys(): void
     {
         $participant = new User();
         $anonymousReply = new ReplyAnonymous();

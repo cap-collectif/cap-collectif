@@ -12,7 +12,7 @@ use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 abstract class AbstractProposalFormMutation implements MutationInterface
 {
-    public const NOT_FOUND = 'NOT_FOUND';
+    final public const NOT_FOUND = 'NOT_FOUND';
 
     public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected AuthorizationCheckerInterface $authorizationChecker)
     {

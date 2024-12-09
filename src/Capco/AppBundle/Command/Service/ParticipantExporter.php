@@ -3,6 +3,10 @@
 namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
+use Capco\AppBundle\Entity\ReplyAnonymous;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Component\Filesystem\Filesystem;
@@ -14,38 +18,55 @@ class ParticipantExporter
     public const CSV_DELIMITER = ';';
     protected bool $hasParticipants = false;
     protected SymfonyStyle $style;
-    private ?string $delimiter = self::CSV_DELIMITER;
+    protected ?string $delimiter = self::CSV_DELIMITER;
+    private ?AbstractStep $step = null;
 
-    public function __construct(protected EntityManagerInterface $entityManager, private readonly SerializerInterface $serializer, private readonly Filesystem $fileSystem)
+    public function __construct(protected EntityManagerInterface $entityManager, protected SerializerInterface $serializer, private readonly Filesystem $fileSystem)
     {
     }
 
-    public function initializeStyle(SymfonyStyle $style)
+    public function initializeStyle(SymfonyStyle $style): void
     {
         $this->style = $style;
     }
 
-    protected function getOldestUpdateDate(string $simplifiedPath, string $fullPath): \DateTime
+    public function setStep(AbstractStep $step): void
     {
-        $simplifiedFileDate = filemtime($simplifiedPath);
-        $fullFileDate = filemtime($fullPath);
+        $this->step = $step;
+    }
+
+    /**
+     * @param array<string, string> $paths
+     */
+    protected function getOldestUpdateDate(array $paths): \DateTime
+    {
+        $simplifiedFileDate = filemtime($paths['simplified']);
+        $fullFileDate = filemtime($paths['full']);
 
         return (new \DateTime())->setTimestamp(min($simplifiedFileDate, $fullFileDate));
     }
 
-    protected function exportParticipants(array $users, string $simplifiedPath, string $fullPath, bool $withHeaders): void
+    /**
+     * @param array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $users
+     * @param array<string, string>                                                    $paths
+     */
+    protected function exportParticipants(array $users, array $paths, bool $withHeaders, bool $append = false): void
     {
         if (!$users) {
             return;
         }
         $this->hasParticipants = true;
-        $this->writeFiles($users, $simplifiedPath, $fullPath, $withHeaders);
+        $this->writeFiles($users, $paths, $withHeaders, $append);
     }
 
-    protected function writeFiles($users, string $simplifiedPath, string $fullPath, bool $withHeaders): void
+    /**
+     * @param array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $users
+     * @param array<string, string>                                                    $paths
+     */
+    protected function writeFiles(array $users, array $paths, bool $withHeaders, bool $append = false): void
     {
-        $this->write($simplifiedPath, $users, $withHeaders, false);
-        $this->write($fullPath, $users, $withHeaders, true);
+        $this->write($paths['simplified'], $users, $withHeaders, false, $append);
+        $this->write($paths['full'], $users, $withHeaders, true, $append);
     }
 
     protected function setDelimiter(?string $delimiter): void
@@ -55,9 +76,9 @@ class ParticipantExporter
         }
     }
 
-    private function write(string $path, array $data, bool $withHeader, bool $isFullExport): void
+    protected function write(string $path, array $data, bool $withHeader, bool $isFullExport, bool $append): void
     {
-        $options = [
+        $context = [
             CsvEncoder::DELIMITER_KEY => $this->delimiter,
             CsvEncoder::OUTPUT_UTF8_BOM_KEY => $withHeader,
             CsvEncoder::NO_HEADERS_KEY => !$withHeader,
@@ -65,13 +86,17 @@ class ParticipantExporter
             BaseNormalizer::IS_EXPORT_NORMALIZER => true,
         ];
 
+        if (null !== $this->step) {
+            $context['step'] = $this->step;
+        }
+
         $content = $this->serializer->serialize(
             $data,
             CsvEncoder::FORMAT,
-            $options
+            $context
         );
 
-        if ($withHeader) {
+        if ($withHeader && !$append) {
             $this->fileSystem->dumpFile($path, $content);
 
             $this->style->writeln("\n<info>Exported the CSV files : {$path}</info>");
@@ -79,6 +104,6 @@ class ParticipantExporter
             $this->fileSystem->appendToFile($path, $content);
         }
 
-        unset($data, $content);
+        unset($content);
     }
 }

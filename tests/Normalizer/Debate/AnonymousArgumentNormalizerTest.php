@@ -34,7 +34,7 @@ class AnonymousArgumentNormalizerTest extends TestCase
      *
      * @throws ExceptionInterface
      */
-    public function testNormalize(mixed $context, mixed $expectedResult)
+    public function testNormalize(mixed $context, mixed $expectedResult): void
     {
         $debate = new Debate();
         $anonymousArgument = new DebateAnonymousArgument($debate);
@@ -48,7 +48,7 @@ class AnonymousArgumentNormalizerTest extends TestCase
         $this->assertEquals($expectedResult, $result);
     }
 
-    public function testSupportsNormalization()
+    public function testSupportsNormalization(): void
     {
         $debate = new Debate();
         $this->assertTrue($this->normalizer->supportsNormalization(new DebateAnonymousArgument($debate), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
@@ -56,6 +56,9 @@ class AnonymousArgumentNormalizerTest extends TestCase
         $this->assertFalse($this->normalizer->supportsNormalization(new \stdClass(), 'csv', [BaseNormalizer::IS_EXPORT_NORMALIZER => true]));
     }
 
+    /**
+     * @return array<string, array<int, array<string, null|bool|string>>>
+     */
     public function normalizationDataProvider(): array
     {
         $simplifiedExportResult = [

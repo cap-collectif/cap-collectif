@@ -1677,6 +1677,26 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return array<User>
+     */
+    public function getCollectParticipants(CollectStep $step, int $offset, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->select('DISTINCT user')
+        ;
+
+        $qb = $this->getConfirmedParticipantsFromCollectOrSelectionStep($qb)
+            ->andWhere('proposalForm.step = :step')
+            ->setParameter('step', $step)
+            ->andWhere('user.confirmationToken IS NULL')
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getDebateParticipantsCombined(Debate $debate, int $offset, int $limit): array
     {
         $userIdsFromArguments = $this->createQueryBuilder('u')
@@ -1731,6 +1751,23 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    public function hasNewParticipantsForACollectStep(CollectStep $collectStep, \DateTime $mostRecentFileModificationDate): bool
+    {
+        $qb = $this->createQueryBuilder('user')
+            ->select('COUNT(DISTINCT user.id)')
+        ;
+
+        $qb = $this->getConfirmedParticipantsFromCollectOrSelectionStep($qb)
+            ->andWhere('proposalForm.step = :step')
+            ->setParameter('step', $collectStep)
+            ->andWhere('user.confirmationToken IS NULL')
+            ->andWhere('(user.updatedAt > :date OR collectVotes.createdAt > :date)')
+            ->setParameter('date', $mostRecentFileModificationDate)
+        ;
+
+        return $qb->getQuery()->getSingleScalarResult() > 0;
+    }
+
     /**
      * @throws NonUniqueResultException
      * @throws NoResultException
@@ -1747,6 +1784,43 @@ class UserRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return array<User>
+     */
+    public function findParticipantForCollectStep(CollectStep $collectStep, int $offset, int $limit): array
+    {
+        $voteMin = $collectStep->getVotesMin();
+        $subQueryBuilder = $this->createQueryBuilder('uv');
+        $subQuery = $subQueryBuilder->select('IDENTITY(userVote.user)')
+            ->from('CapcoAppBundle:ProposalCollectVote', 'userVote')
+            ->where('userVote.collectStep = :collectStep')
+            ->andWhere('userVote.isAccounted = 1')
+            ->groupBy('userVote.user')
+        ;
+
+        if (null !== $voteMin) {
+            $subQuery->having($subQueryBuilder->expr()->gte('COUNT(userVote.id)', $voteMin));
+        }
+
+        $subQueryDQL = $subQuery->getDQL();
+
+        $queryBuilder = $this->createQueryBuilder('u');
+
+        $query = $queryBuilder->select('user')
+            ->from('CapcoUserBundle:User', 'user')
+            ->where(
+                $queryBuilder->expr()->in('user.id', $subQueryDQL)
+            )
+            ->andWhere('user.confirmationToken IS NULL')
+            ->setParameter('collectStep', $collectStep)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+            ->getQuery()
+        ;
+
+        return $query->getResult();
     }
 
     /**
@@ -1963,5 +2037,29 @@ class UserRepository extends EntityRepository
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
+    }
+
+    private function getConfirmedParticipantsFromCollectOrSelectionStep(QueryBuilder $qb): QueryBuilder
+    {
+        return $qb
+            ->innerJoin('user.proposals', 'proposal', 'WITH', 'proposal.published = 1')
+            ->leftJoin('proposal.collectVotes', 'collectVotes', 'WITH', 'collectVotes.isAccounted = true')
+            ->leftJoin('proposal.comments', 'proposalComment')
+            ->leftJoin('proposalComment.author', 'proposalCommentAuthor', 'WITH', 'proposalCommentAuthor.confirmationToken IS NULL')
+            ->leftJoin('proposalComment.votes', 'proposalCommentVote')
+            ->leftJoin('proposalCommentVote.user', 'proposalCommentVoteUser', 'WITH', 'proposalCommentVoteUser.confirmationToken IS NULL')
+            ->leftJoin('proposal.reports', 'proposalReport')
+            ->leftJoin('proposalReport.Reporter', 'proposalReportUser', 'WITH', 'proposalReportUser.confirmationToken IS NULL')
+            ->leftJoin('CapcoAppBundle:Post', 'post', 'WITH', 'proposal MEMBER OF post.proposals')
+            ->leftJoin('post.authors', 'postAuthorRelation')
+            ->leftJoin('postAuthorRelation.author', 'postAuthor', 'WITH', 'postAuthor.confirmationToken IS NULL')
+            ->leftJoin('post.comments', 'postComment')
+            ->leftJoin('postComment.author', 'postCommentAuthor', 'WITH', 'postCommentAuthor.confirmationToken IS NULL')
+            ->leftJoin('postComment.votes', 'postCommentVote')
+            ->leftJoin('postCommentVote.user', 'postCommentVoteUser', 'WITH', 'postCommentVoteUser.confirmationToken IS NULL')
+            ->leftJoin('postComment.Reports', 'postCommentReport')
+            ->leftJoin('postCommentReport.Reporter', 'postCommentReportUser', 'WITH', 'postCommentReportUser.confirmationToken IS NULL')
+            ->leftJoin('proposal.proposalForm', 'proposalForm')
+        ;
     }
 }

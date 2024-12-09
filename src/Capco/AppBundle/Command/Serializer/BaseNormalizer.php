@@ -40,6 +40,9 @@ abstract class BaseNormalizer
     protected const EXPORT_PARTICIPANT_USER_GROUPS = 'export_participant_user_groups';
     protected const EXPORT_PARTICIPANT_DELETED_ACCOUNT_AT = 'export_participant_deleted_account_at';
     protected const EXPORT_PARTICIPANT_FACEBOOK_ID = 'export_participant_facebook_id';
+    protected const EXPORT_PARTICIPANT_VOTES_TOTAL_COUNT_PER_STEP = 'user_votes_total_count_per_step';
+    protected const EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP = 'user_proposal_count_per_step';
+    protected const EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS = 'user_voted_proposal_ids';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_PUBLISHED_AT = 'export_contribution_argument_published_at';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ID = 'export_contribution_argument_author_id';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_USERNAME = 'export_contribution_argument_author_username';

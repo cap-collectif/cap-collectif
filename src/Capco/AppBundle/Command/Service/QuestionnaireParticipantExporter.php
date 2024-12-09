@@ -17,7 +17,6 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 {
     private const BATCH_SIZE = 1000;
     protected EntityManagerInterface $entityManager;
-    private readonly Serializer $serializer;
 
     public function __construct(
         private readonly UserRepository $userRepository,
@@ -47,36 +46,40 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
         $simplifiedPath = $this->filePathResolver->getSimplifiedExportPath($questionnaire->getStep());
         $fullPath = $this->filePathResolver->getFullExportPath($questionnaire->getStep());
 
-        if ($this->shouldExportParticipant($simplifiedPath, $fullPath, $questionnaire)
+        $paths['simplified'] = $this->filePathResolver->getSimplifiedExportPath($questionnaire->getStep());
+        $paths['full'] = $this->filePathResolver->getFullExportPath($questionnaire->getStep());
+
+        if ($this->shouldExportParticipant($paths, $questionnaire)
             || $this->shouldExportReplyAnonymous(
-                $simplifiedPath,
-                $fullPath,
+                $paths,
                 $questionnaire
             )) {
-            $this->exportParticipantsInBatches($questionnaire, $simplifiedPath, $fullPath);
-            $this->exportReplyAnonymousInBatches($questionnaire, $simplifiedPath, $fullPath);
+            $this->exportParticipantsInBatches($questionnaire, $paths);
+            $this->exportReplyAnonymousInBatches($questionnaire, $paths);
         }
     }
 
     /**
      * @param array<ReplyAnonymous> $anonymousReplies
+     * @param array<string, string> $paths
      */
     private function exportAnonymousReplies(
         array $anonymousReplies,
-        string $simplifiedPath,
-        string $fullPath,
+        array $paths,
         bool $withHeaders
     ): void {
         if (!$anonymousReplies) {
             return;
         }
-        $this->writeFiles($anonymousReplies, $simplifiedPath, $fullPath, $withHeaders);
+        $this->writeFiles($anonymousReplies, $paths, $withHeaders);
     }
 
+    /**
+     * @param array<string, string> $paths
+     */
     private function exportParticipantsInBatches(
         Questionnaire $questionnaire,
-        string $simplifiedPath,
-        string $fullPath
+        array $paths
     ): void {
         $participantOffset = 0;
 
@@ -89,8 +92,7 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 
             $this->exportParticipants(
                 $participants,
-                $simplifiedPath,
-                $fullPath,
+                $paths,
                 0 === $participantOffset
             );
 
@@ -99,10 +101,12 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
         } while (self::BATCH_SIZE === \count($participants));
     }
 
+    /**
+     * @param array<string, string> $paths
+     */
     private function exportReplyAnonymousInBatches(
         Questionnaire $questionnaire,
-        string $simplifiedPath,
-        string $fullPath
+        array $paths
     ): void {
         $anonymousRepliesOffset = 0;
 
@@ -115,8 +119,7 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 
             $this->exportAnonymousReplies(
                 $anonymousReplies,
-                $simplifiedPath,
-                $fullPath,
+                $paths,
                 0 === $anonymousRepliesOffset && !$this->hasParticipants
             );
 
@@ -125,24 +128,30 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
         } while (self::BATCH_SIZE === \count($anonymousReplies));
     }
 
-    private function shouldExportParticipant(string $simplifiedPath, string $fullPath, Questionnaire $questionnaire): bool
+    /**
+     * @param array<string, string> $paths
+     */
+    private function shouldExportParticipant(array $paths, Questionnaire $questionnaire): bool
     {
-        if (!file_exists($simplifiedPath) || !file_exists($fullPath)) {
+        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($simplifiedPath, $fullPath);
+        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         return $this->userRepository->hasNewParticipantsForAQuestionnaire($questionnaire, $oldestUpdateDate);
     }
 
-    private function shouldExportReplyAnonymous(string $simplifiedPath, string $fullPath, Questionnaire $questionnaire): bool
+    /**
+     * @param array<string, string> $paths
+     */
+    private function shouldExportReplyAnonymous(array $paths, Questionnaire $questionnaire): bool
     {
-        if (!file_exists($simplifiedPath) || !file_exists($fullPath)) {
+        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($simplifiedPath, $fullPath);
+        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         return $this->replyAnonymousRepository->hasNewAnonymousReplies($questionnaire, $oldestUpdateDate);
     }

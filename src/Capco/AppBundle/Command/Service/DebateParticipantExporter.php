@@ -19,7 +19,6 @@ use Symfony\Component\Serializer\Serializer;
 class DebateParticipantExporter extends ParticipantExporter
 {
     final public const BATCH_SIZE = 1000;
-    private readonly Serializer $serializer;
 
     public function __construct(
         private readonly DebateAnonymousArgumentRepository $debateAnonymousArgumentRepository,
@@ -42,12 +41,12 @@ class DebateParticipantExporter extends ParticipantExporter
     {
         $this->setDelimiter($delimiter);
 
-        $simplifiedPath = $this->filePathResolver->getSimplifiedExportPath($debate->getStep());
-        $fullPath = $this->filePathResolver->getFullExportPath($debate->getStep());
+        $paths['simplified'] = $this->filePathResolver->getSimplifiedExportPath($debate->getStep());
+        $paths['full'] = $this->filePathResolver->getFullExportPath($debate->getStep());
 
-        if ($this->shouldExport($simplifiedPath, $fullPath, $debate)) {
-            $this->exportParticipantsInBatches($debate, $simplifiedPath, $fullPath);
-            $this->exportAnonymousArgumentsInBatches($debate, $simplifiedPath, $fullPath);
+        if ($this->shouldExport($paths, $debate)) {
+            $this->exportParticipantsInBatches($debate, $paths);
+            $this->exportAnonymousArgumentsInBatches($debate, $paths);
         }
     }
 
@@ -59,10 +58,12 @@ class DebateParticipantExporter extends ParticipantExporter
         );
     }
 
+    /**
+     * @param array<string, string> $paths
+     */
     private function exportParticipantsInBatches(
         Debate $debate,
-        string $simplifiedPath,
-        string $fullPath
+        array $paths
     ): void {
         $participantOffset = 0;
 
@@ -75,8 +76,7 @@ class DebateParticipantExporter extends ParticipantExporter
 
             $this->exportParticipants(
                 $participants,
-                $simplifiedPath,
-                $fullPath,
+                $paths,
                 0 === $participantOffset
             );
 
@@ -85,13 +85,16 @@ class DebateParticipantExporter extends ParticipantExporter
         } while (self::BATCH_SIZE === \count($participants));
     }
 
-    private function shouldExport(string $simplifiedPath, string $fullPath, Debate $debate): bool
+    /**
+     * @param array<string, string> $paths
+     */
+    private function shouldExport(array $paths, Debate $debate): bool
     {
-        if (!file_exists($simplifiedPath) || !file_exists($fullPath)) {
+        if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
         }
 
-        $oldestUpdateDate = $this->getOldestUpdateDate($simplifiedPath, $fullPath);
+        $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         try {
             return $this->debateArgumentRepository->hasNewArguments($debate, $oldestUpdateDate)
@@ -104,7 +107,10 @@ class DebateParticipantExporter extends ParticipantExporter
         }
     }
 
-    private function exportAnonymousArgumentsInBatches(Debate $debate, string $simplifiedPath, string $fullPath): void
+    /**
+     * @param array<string, string> $paths
+     */
+    private function exportAnonymousArgumentsInBatches(Debate $debate, array $paths): void
     {
         $anonymousArgumentsOffset = 0;
 
@@ -117,8 +123,7 @@ class DebateParticipantExporter extends ParticipantExporter
 
             $this->exportAnonymousArguments(
                 $anonymousArguments,
-                $simplifiedPath,
-                $fullPath,
+                $paths,
                 0 === $anonymousArgumentsOffset && !$this->hasParticipants
             );
 
@@ -129,17 +134,17 @@ class DebateParticipantExporter extends ParticipantExporter
 
     /**
      * @param array<DebateAnonymousArgument> $anonymousArguments
+     * @param array<string, string>          $paths
      */
     private function exportAnonymousArguments(
         array $anonymousArguments,
-        string $simplifiedPath,
-        string $fullPath,
+        array $paths,
         bool $withHeaders
     ): void {
         if (!$anonymousArguments) {
             return;
         }
 
-        $this->writeFiles($anonymousArguments, $simplifiedPath, $fullPath, $withHeaders);
+        $this->writeFiles($anonymousArguments, $paths, $withHeaders);
     }
 }
