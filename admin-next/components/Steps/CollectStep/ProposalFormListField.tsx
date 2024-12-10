@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
-import { environment } from '@utils/relay-environement'
+import { graphql, GraphQLTaggedNode, useFragment, useLazyLoadQuery } from 'react-relay'
 import { ProposalFormListFieldQuery, ProposalFormListFieldQuery$data } from '@relay/ProposalFormListFieldQuery.graphql'
 import { FormLabel } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
@@ -9,13 +8,9 @@ import { useIntl } from 'react-intl'
 import { ProposalFormListField_proposalForm$key } from '../../../__generated__/ProposalFormListField_proposalForm.graphql'
 import { ProposalFormListField_query$key } from '../../../__generated__/ProposalFormListField_query.graphql'
 import { formatJumpsToTmp, formatQuestions } from '../QuestionnaireStep/utils'
-import { GraphQLTaggedNode, fetchQuery } from 'relay-runtime'
-import { Category } from '../ProposalStep.type'
 
-type ProposalFormListFieldValue = {
-  label: string
-  value: string
-}
+type Categories = ProposalFormListFieldQuery$data['viewer']['proposalForms']['edges'][number]['node']['categories'];
+
 export interface ProposalFormListFieldProps {
   proposalForm: ProposalFormListField_proposalForm$key
   query: ProposalFormListField_query$key
@@ -23,7 +18,7 @@ export interface ProposalFormListFieldProps {
 const PROPOSAL_FORMS_QUERY = graphql`
   query ProposalFormListFieldQuery($query: String, $affiliations: [ProposalFormAffiliation!]) {
     viewer {
-      proposalForms(query: $query, affiliations: $affiliations) {
+      proposalForms(query: $query, affiliations: $affiliations, first: 1000) {
         edges {
           node {
             id
@@ -329,37 +324,19 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
   const currentProposalForm = useFragment(PROPOSAL_FORM_FRAGMENT, proposalFormRef)
   const query = useFragment(QUERY_FRAGMENT, queryRef)
   const viewer = query.viewer
-  const { control, setValue } = useFormContext()
-  const [hasFetchedProposalForms, setHasFetchedProposalForms] = React.useState<boolean>(false)
+  const { control, setValue, reset } = useFormContext()
 
-  const [proposalForms, setProposalForms] =
-    // @ts-ignore
-    React.useState<ProposalFormListFieldQuery$data['proposalForms']>(null)
+  const proposalFormsData = useLazyLoadQuery<ProposalFormListFieldQuery>(PROPOSAL_FORMS_QUERY, {
+    query: '',
+    affiliations: viewer.isOnlyProjectAdmin ? ['OWNER'] : null
+  })
 
-  const loadOptions = async (search: string): Promise<any[]> => {
-    const proposalFormsData = await fetchQuery<ProposalFormListFieldQuery>(environment, PROPOSAL_FORMS_QUERY, {
-      query: search,
-      affiliations: viewer.isOnlyProjectAdmin ? ['OWNER'] : null,
-    }).toPromise()
+  const owner = proposalFormsData.viewer.organizations?.[0] ?? proposalFormsData.viewer
+  const proposalForms = owner?.proposalForms?.edges?.map(edge => edge?.node).filter(form => form?.id !== currentProposalForm.id)
 
-    const owner = proposalFormsData.viewer.organizations?.[0] ?? proposalFormsData.viewer
-    const proposalFormsEdges = owner.proposalForms.edges
+  const options = formatProposalListData(proposalForms);
 
-    const proposalForms = proposalFormsEdges.map(edge => edge?.node).filter(form => form?.id !== currentProposalForm.id)
-
-    if (!proposalForms) {
-      return []
-    }
-
-    if (!hasFetchedProposalForms) {
-      setProposalForms(proposalForms)
-      setHasFetchedProposalForms(true)
-    }
-
-    return formatProposalListData(proposalForms)
-  }
-
-  const getCategories = (categories: Category[] | null | undefined) => {
+  const getCategories = (categories: Categories | null | undefined) => {
     return !categories || categories.length === 0
       ? null
       : categories.map(category => ({
@@ -374,8 +351,8 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
     }
   }
 
-  const onProposalFormSelect = (selected: ProposalFormListFieldValue) => {
-    const proposalForm = proposalForms.find(form => form.id === selected.value)
+  const onProposalFormSelect = (selected: string) => {
+    const proposalForm = proposalForms.find(form => form.id === selected)
 
     if (proposalForm) {
       setValue('form_model', {
@@ -440,12 +417,17 @@ const ProposalFormListField: React.FC<ProposalFormListFieldProps> = ({
         })}
       />
       <FieldInput
+        clearable
         name="selectedModel"
         control={control}
         type="select"
-        loadOptions={loadOptions}
+        options={options}
         defaultOptions
         onChange={selected => {
+          if (!selected) {
+            reset()
+            return;
+          }
           onProposalFormSelect(selected)
         }}
         // @ts-expect-error MAJ DS Props
