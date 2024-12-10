@@ -3,7 +3,8 @@
 namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
-use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
+use Capco\AppBundle\Command\Serializer\ReplyAnonymousParticipantNormalizer;
+use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
@@ -21,11 +22,11 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
     public function __construct(
         private readonly UserRepository $userRepository,
         private readonly ParticipantNormalizer $participantNormalizer,
-        private readonly ReplyAnonymousNormalizer $replyAnonymousNormalizer,
+        private readonly ReplyAnonymousParticipantNormalizer $replyAnonymousNormalizer,
         EntityManagerInterface $entityManager,
         private readonly ReplyAnonymousRepository $replyAnonymousRepository,
         Filesystem $fileSystem,
-        private readonly FilePathResolver $filePathResolver
+        private readonly ParticipantsFilePathResolver $filePathResolver
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -90,6 +91,10 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
                 self::BATCH_SIZE
             );
 
+            if ([] === $participants) {
+                return;
+            }
+
             $this->exportParticipants(
                 $participants,
                 $paths,
@@ -111,11 +116,15 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
         $anonymousRepliesOffset = 0;
 
         do {
-            $anonymousReplies = $this->replyAnonymousRepository->getQuestionnaireAnonymousRepliesWithDistinctEmails(
+            $anonymousReplies = $this->replyAnonymousRepository->getQuestionnaireAnonymousReplies(
                 $questionnaire,
                 $anonymousRepliesOffset,
                 self::BATCH_SIZE
             );
+
+            if ([] === $anonymousReplies) {
+                return;
+            }
 
             $this->exportAnonymousReplies(
                 $anonymousReplies,

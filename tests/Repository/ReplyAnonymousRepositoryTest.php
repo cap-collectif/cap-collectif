@@ -35,9 +35,9 @@ class ReplyAnonymousRepositoryTest extends KernelTestCase
     {
         $questionnaire = $this->entityManager->getRepository(Questionnaire::class)->find('questionnaireAnonymous');
 
-        $results = $this->replyAnonymousRepository->getQuestionnaireAnonymousRepliesWithDistinctEmails($questionnaire, 0, 10);
+        $results = $this->replyAnonymousRepository->getQuestionnaireAnonymousReplies($questionnaire, 0, 10);
 
-        $this->assertCount(1, $results);
+        $this->assertCount(2, $results);
         $this->assertContainsOnly(ReplyAnonymous::class, $results);
         $this->assertSame('abc@cap-collectif.com', $results[0]->getParticipantEmail());
     }

@@ -39,14 +39,16 @@ class ReplyAnonymousRepository extends EntityRepository
             ->getSingleScalarResult() ?? 0;
     }
 
-    public function getQuestionnaireAnonymousRepliesWithDistinctEmails(Questionnaire $questionnaire, int $offset, int $limit): array
+    /**
+     * @return array<ReplyAnonymous>
+     */
+    public function getQuestionnaireAnonymousReplies(Questionnaire $questionnaire, int $offset, int $limit): array
     {
         $qb = $this->createQueryBuilder('replyAnonymous')
             ->andWhere('replyAnonymous.participantEmail IS NOT NULL')
             ->andWhere('replyAnonymous.questionnaire = :questionnaire')
             ->andWhere('replyAnonymous.published = 1')
             ->setParameter('questionnaire', $questionnaire)
-            ->groupBy('replyAnonymous.participantEmail')
             ->setFirstResult($offset)
             ->setMaxResults($limit)
         ;

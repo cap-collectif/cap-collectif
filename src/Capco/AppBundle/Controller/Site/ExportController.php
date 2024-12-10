@@ -23,6 +23,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -293,6 +294,35 @@ class ExportController extends Controller
         $projectOwner = $step->getProject()->getOwner();
         if ($organization && ($projectOwner !== $organization)) {
             throw new AccessException();
+        }
+
+        // TODO remove this if after all export participants has been merged
+        if ($step instanceof QuestionnaireStep) {
+            $isSimplified = 'true' === $request->query->get('simplified');
+
+            $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+            $filePath = sprintf(
+                '%s%s/%s',
+                $this->exportDir,
+                $step->getType(),
+                $fileName
+            );
+
+            if (!file_exists($filePath)) {
+                $this->session
+                    ->getFlashBag()
+                    ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(5))
+                ;
+
+                $redirectUrl = $request->headers->get('referer') ?? $this->generateUrl('app_homepage');
+
+                return $this->redirect($redirectUrl);
+            }
+
+            $response = $this->file($filePath, $fileName);
+            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+            return $response;
         }
 
         $fileName = CreateStepContributorsCommand::getFilename($step);
