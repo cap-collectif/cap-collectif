@@ -2,12 +2,9 @@
 import { graphql } from 'react-relay'
 import { ConnectionHandler } from 'relay-runtime'
 import commitMutation from './commitMutation'
-import environnement from '~/createRelayEnvironment'
-import type {
-  InviteUserMutationResponse as Response,
-  InviteUserMutationVariables,
-} from '~relay/InviteUserMutation.graphql'
-import { CONNECTION_NODES_PER_PAGE } from '~/components/Admin/UserInvite/UserInviteList.relay'
+import { environment } from '@utils/relay-environement'
+import type { InviteUserMutation$data, InviteUserMutation$variables } from '@relay/InviteUserMutation.graphql'
+import { CONNECTION_NODES_PER_PAGE } from '@components/UserInvitation/utils'
 
 export const INVITE_USERS_MAX_RESULTS = 100
 const mutation = graphql`
@@ -17,6 +14,7 @@ const mutation = graphql`
         cursor
         node {
           id
+          email
         }
       }
       updatedInvitations {
@@ -39,8 +37,8 @@ const mutation = graphql`
   }
 `
 
-const commit = (variables: InviteUserMutationVariables): Promise<Response> =>
-  commitMutation(environnement, {
+const commit = (variables: InviteUserMutation$variables): Promise<InviteUserMutation$data> =>
+  commitMutation(environment, {
     mutation,
     variables,
     updater: store => {
@@ -51,7 +49,6 @@ const commit = (variables: InviteUserMutationVariables): Promise<Response> =>
       newInvitations.forEach((invitation, i) => {
         const invitationNode = invitation.getLinkedRecord('node')
         invitationNode
-          .setValue(variables.input.emails[i], 'email')
           .setValue(variables.input.role === 'ROLE_ADMIN', 'isAdmin')
           .setValue(variables.input.role === 'ROLE_PROJECT_ADMIN', 'isProjectAdmin')
           .setValue('PENDING', 'status')
@@ -79,6 +76,4 @@ const commit = (variables: InviteUserMutationVariables): Promise<Response> =>
     },
   })
 
-export default {
-  commit,
-}
+export default { commit }

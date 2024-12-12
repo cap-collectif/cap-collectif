@@ -1,10 +1,11 @@
-import { graphql } from 'react-relay'
-// eslint-disable-next-line import/no-unresolved
-import type { GraphQLTaggedNode } from 'relay-runtime/query/GraphQLTag'
-import type { UserInviteList_query } from '~relay/UserInviteList_query.graphql'
+/* eslint-disable relay/unused-fields */
+import { graphql, GraphQLTaggedNode } from 'react-relay'
+import type { UserInviteList_query$key } from '@relay/UserInviteList_query.graphql'
+
 export type RelayProps = {
-  readonly query: UserInviteList_query
+  readonly query: UserInviteList_query$key
 }
+
 export type Arguments = {
   readonly first: number
   readonly cursor?: string
@@ -13,6 +14,7 @@ export type Arguments = {
     type: 'UserInviteStatus'
   }
 }
+
 export const FRAGMENT: GraphQLTaggedNode = graphql`
   fragment UserInviteList_query on Query
   @argumentDefinitions(
@@ -49,4 +51,3 @@ export const FRAGMENT: GraphQLTaggedNode = graphql`
     }
   }
 `
-export const CONNECTION_NODES_PER_PAGE: number = 50

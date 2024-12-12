@@ -149,7 +149,7 @@
             },
             {
                 "title": "admin-menu-invite-users-label",
-                "href": "/admin/capco/user/invite/list",
+                "href": "/admin-next/invite",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

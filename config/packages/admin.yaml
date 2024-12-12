@@ -914,16 +914,6 @@ services:
         tags:
             - { name: sonata.admin, manager_type: orm, label: admin-menu-campaign-list }
 
-    Capco\AdminBundle\Admin\UserInviteAdmin:
-        arguments:
-            [
-                ~,
-                Capco\AppBundle\Entity\UserInvite,
-                Capco\AdminBundle\Controller\UserInviteController,
-            ]
-        tags:
-            - { name: sonata.admin, manager_type: orm, label: admin-menu-invite-users-label }
-
     Capco\AdminBundle\Admin\MediaAdmin:
         arguments: [~, Capco\AppBundle\Entity\Media, Capco\AdminBundle\Controller\MediaAdminController]
         tags:

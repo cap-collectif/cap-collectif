@@ -15,22 +15,6 @@ trait AdminTrait
     use AdminUserTrait;
 
     /**
-     * @When I go to the admin proposals list page
-     */
-    public function iGoToTheAdminProposalsListPage()
-    {
-        $this->visitPageWithParams('admin proposal list page');
-    }
-
-    /**
-     * @When I go to the admin authentification page
-     */
-    public function iGoToTheAdminAuthentificationPage()
-    {
-        $this->visitPageWithParams('admin proposal list page');
-    }
-
-    /**
      * @When I fill the :element react element with child number :number
      */
     public function iFillTheReactElementWithOneOption(string $element, int $number)
@@ -56,17 +40,6 @@ trait AdminTrait
     }
 
     /**
-     * @When I should be redirected to a merge proposal
-     */
-    public function iShouldBeRedirectedToAMergeProposal()
-    {
-        $url = $this->getSession()->getCurrentUrl();
-        if (1 !== preg_match('/^https:\/\/capco.test\/admin\/capco\/app\/proposal\/[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}\/edit$/i', (string) $url)) {
-            throw new \RuntimeException('The current url is not a merge proposal url');
-        }
-    }
-
-    /**
      * @When I go to the admin proposal page with proposalid :proposalId
      */
     public function iGoToTheAdminProposalPageWithId(string $proposalId)
@@ -84,55 +57,12 @@ trait AdminTrait
     }
 
     /**
-     * @When I go to the admin proposal form list page
-     */
-    public function iGoToTheAdminProposalFormListPage()
-    {
-        $this->visit('/admin/next/forms?formType=PROPOSAL_FORM');
-    }
-
-    /**
-     * @When I go to the admin user page with userId :userId
-     */
-    public function iGoToTheAdminUserPageWithId(string $userId)
-    {
-        $this->visitPageWithParams('admin user page', ['userId' => $userId]);
-        $this->waitAndThrowOnFailure(5000, "$('#UserAdminPageTabs').length > 0");
-    }
-
-    /**
-     * @When I go to the admin user invite page
-     */
-    public function iGoToTheAdminUserInvitePage()
-    {
-        $this->visitPageWithParams('admin user invite page');
-    }
-
-    /**
-     * @When I go to the admin user list page
-     */
-    public function iGoToTheAdminUserListPage()
-    {
-        $this->visitPageWithParams('admin user list page');
-        $this->waitAndThrowOnFailure(3000, "$('div#add-a-user').length > 0");
-    }
-
-    /**
      * @When I go to the admin user project :project page
      */
     public function iGoToTheAdminProjectPage(string $project)
     {
         $this->visitPageWithParams('admin project page', ['project' => $project]);
         $this->waitAndThrowOnFailure(3000, "$('#project-metadata-admin-form').length > 0");
-    }
-
-    /**
-     * @When I go to the admin group list page
-     */
-    public function iGoToTheAdminGroupListPage()
-    {
-        $this->visitPageWithParams('admin group list page');
-        $this->waitAndThrowOnFailure(3000, "$('button#add-group').length > 0");
     }
 
     /**
@@ -145,14 +75,6 @@ trait AdminTrait
             ->find('css', $selector)
             ->click()
         ;
-    }
-
-    /**
-     * @When I duplicate a proposal form :proposalFormId
-     */
-    public function iDuplicateProposalForm(string $proposalFormId)
-    {
-        $this->visitPath("/admin/capco/app/proposalform/duplicate?id={$proposalFormId}");
     }
 
     /**

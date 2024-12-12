@@ -1,12 +1,12 @@
-// @ts-nocheck
 import { graphql } from 'react-relay'
-import { ConnectionHandler } from 'relay-runtime'
+import { ConnectionHandler, ReaderFragment } from 'relay-runtime'
+import { environment } from '@utils/relay-environement'
 import commitMutation from './commitMutation'
-import environnement from '~/createRelayEnvironment'
-import type {
-  CancelUserInvitationsMutationResponse as Response,
-  CancelUserInvitationsMutationVariables,
-} from '~relay/CancelUserInvitationsMutation.graphql'
+import {
+  CancelUserInvitationsMutation,
+  CancelUserInvitationsMutation$data,
+} from '@relay/CancelUserInvitationsMutation.graphql'
+import { CancelUserInvitationsMutation$variables } from '@relay/CancelUserInvitationsMutation.graphql'
 
 const mutation = graphql`
   mutation CancelUserInvitationsMutation($input: CancelUserInvitationsInput!) {
@@ -14,10 +14,10 @@ const mutation = graphql`
       cancelledInvitationsIds
     }
   }
-`
+` as ReaderFragment
 
-const commit = (variables: CancelUserInvitationsMutationVariables): Promise<Response> =>
-  commitMutation(environnement, {
+const commit = (variables: CancelUserInvitationsMutation$variables): Promise<CancelUserInvitationsMutation$data> =>
+  commitMutation<CancelUserInvitationsMutation>(environment, {
     mutation,
     variables,
     updater: store => {
@@ -31,6 +31,4 @@ const commit = (variables: CancelUserInvitationsMutationVariables): Promise<Resp
     },
   })
 
-export default {
-  commit,
-}
+export default { commit }

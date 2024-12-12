@@ -46,8 +46,24 @@ Object {
       },
       Object {
         "node": Object {
+          "email": "expired@wasreminded.com",
+          "id": "VXNlckludml0ZTphbm90aGVyRXhwaXJlZEludml0YXRpb24=",
+          "isAdmin": false,
+          "isProjectAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
           "email": "sad@expired.com",
           "id": "VXNlckludml0ZTpleHBpcmVkSW52aXRhdGlvbg==",
+          "isAdmin": false,
+          "isProjectAdmin": false,
+        },
+      },
+      Object {
+        "node": Object {
+          "email": "im@expired.too",
+          "id": "VXNlckludml0ZTpleHBpcmVkSW52aXRhdGlvblJlbGF1bmNoZWQ=",
           "isAdmin": false,
           "isProjectAdmin": false,
         },

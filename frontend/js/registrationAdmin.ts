@@ -23,7 +23,6 @@ import appStore from '~/stores/AppStore'
 import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonApp'
 import EventFormPageApp from './startup/EventFormPageApp'
 import LanguageButtonApp from '~/startup/LanguageButtonApp'
-import UserInviteAdminPageApp from '~/startup/UserInviteAdminPageApp'
 import EmailingListPageApp from '~/startup/EmailingListPageApp'
 import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp'
 import EmailingMailParameterPageApp from '~/startup/EmailingMailParameterPageApp'
@@ -61,7 +60,6 @@ ReactOnRails.register({
   ProjectExternalProjectAdminAppDeprecated,
   FontAdminPageApp,
   LanguageButtonApp,
-  UserInviteAdminPageApp,
   HomePageProjectsSectionConfigurationApp,
   HomePageProjectsMapSectionConfigurationApp,
   EmailingListPageApp,

@@ -63,3 +63,27 @@ Capco\AppBundle\Entity\UserInviteEmailMessage:
         mailerId: 'message9'
         mailerType: 'mandrill'
         messageType: 'user_invite.invitation_by_organization'
+    anotherExpiredInvitationMessage1:
+        __construct: ['@anotherExpiredInvitation']
+        id: 'anotherExpiredInvitationMessage1'
+        createdAt: <(new \DateTime('2022-09-29 00:00:51'))>
+        internalStatus: 'sent'
+        mailerId: 'message10'
+        mailerType: 'mandrill'
+        messageType: 'user_invite.invitation_by_organization'
+    anotherExpiredInvitationMessage2:
+        __construct: ['@anotherExpiredInvitation']
+        id: 'anotherExpiredInvitationMessage2'
+        createdAt: <(new \DateTime('2022-09-29 00:00:51'))>
+        internalStatus: 'sent'
+        mailerId: 'message11'
+        mailerType: 'mandrill'
+        messageType: 'user_invite.invitation_by_organization'
+    expiredInvitationRelaunchedMessage:
+        __construct: ['@expiredInvitationRelaunched']
+        id: 'expiredInvitationRelaunchedMessage'
+        createdAt: <(new \DateTime('2022-09-29 00:00:51'))>
+        internalStatus: 'sent'
+        mailerId: 'message12'
+        mailerType: 'mandrill'
+        messageType: 'user_invite.invitation_by_organization'
