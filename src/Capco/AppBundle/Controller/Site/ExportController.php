@@ -23,7 +23,6 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -272,15 +271,17 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
+     * @Route("/export-step-contributors/{stepId}/download-consultation", name="app_export_step_contributors_download_consultation", options={"i18n" = false})
      * @Security("has_role('ROLE_USER')")
      */
-    public function downloadStepContributorsAction(Request $request, mixed $stepId): Response
+    public function downloadConsultationParticipantAction(Request $request, string $stepId): Response
     {
         $id = GlobalId::fromGlobalId($stepId);
         if ($id && isset($id['id'])) {
             $stepId = $id['id'];
         }
+
+        /** @var null|AbstractStep $step */
         $step = $this->abstractStepRepository->find($stepId);
         if (!$step) {
             $this->logger->error('An error occured while downloading the csv file', [
@@ -296,33 +297,58 @@ class ExportController extends Controller
             throw new AccessException();
         }
 
-        // TODO remove this if after all export participants has been merged
-        if ($step instanceof QuestionnaireStep) {
-            $isSimplified = 'true' === $request->query->get('simplified');
+        $isSimplified = 'true' === $request->query->get('simplified');
 
-            $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
-            $filePath = sprintf(
-                '%s%s/%s',
-                $this->exportDir,
-                $step->getType(),
-                $fileName
-            );
+        $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+        $filePath = sprintf(
+            '%s%s/%s',
+            $this->exportDir,
+            $step->getType(),
+            $fileName
+        );
 
-            if (!file_exists($filePath)) {
-                $this->session
-                    ->getFlashBag()
-                    ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(5))
-                ;
+        if (!file_exists($filePath)) {
+            $this->session
+                ->getFlashBag()
+                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(5))
+            ;
 
-                $redirectUrl = $request->headers->get('referer') ?? $this->generateUrl('app_homepage');
+            $redirectUrl = $request->headers->get('referer') ?? $this->generateUrl('app_homepage');
 
-                return $this->redirect($redirectUrl);
-            }
+            return $this->redirect($redirectUrl);
+        }
 
-            $response = $this->file($filePath, $fileName);
-            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+        $response = $this->file($filePath, $fileName);
+        $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
-            return $response;
+        return $response;
+    }
+
+    /**
+     * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
+     * @Security("has_role('ROLE_USER')")
+     */
+    public function downloadStepContributorsAction(Request $request, mixed $stepId): Response
+    {
+        $id = GlobalId::fromGlobalId($stepId);
+        if ($id && isset($id['id'])) {
+            $stepId = $id['id'];
+        }
+
+        /** @var null|AbstractStep $step */
+        $step = $this->abstractStepRepository->find($stepId);
+        if (!$step) {
+            $this->logger->error('An error occured while downloading the csv file', [
+                'stepId' => $stepId,
+            ]);
+
+            throw new BadRequestHttpException('You must provide a valid step id.');
+        }
+
+        $organization = $this->getUser()->getOrganization();
+        $projectOwner = $step->getProject()->getOwner();
+        if ($organization && ($projectOwner !== $organization)) {
+            throw new AccessException();
         }
 
         $fileName = CreateStepContributorsCommand::getFilename($step);

@@ -666,12 +666,11 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepSourceContributorsWithCount(ConsultationStep $step): array
+    public function findConsultationStepSourceContributorsWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
         $em = $this->getEntityManager();
-        $query = $em
-            ->createQuery(
-                'SELECT u.id, count(distinct s) AS sources_count
+        $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
+        $dql = sprintf('SELECT u.id, count(distinct s) AS sources_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Source s WITH s.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
@@ -686,21 +685,21 @@ class UserRepository extends EntityRepository
             OR
             (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
-          GROUP BY u.id
-        '
-            )
+          %s
+          GROUP BY u.id', $hasUsersConfirmed);
+        $query = $em
+            ->createQuery($dql)
             ->setParameter('step', $step)
         ;
 
         return $query->getResult();
     }
 
-    public function findConsultationStepArgumentContributorsWithCount(ConsultationStep $step): array
+    public function findConsultationStepArgumentContributorsWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
         $em = $this->getEntityManager();
-        $query = $em
-            ->createQuery(
-                'SELECT u.id, count(distinct a) AS arguments_count
+        $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
+        $dql = sprintf('SELECT u.id, count(distinct a) AS arguments_count
           FROM CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:Argument a WITH a.author = u
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH a.opinionVersion = ov
@@ -715,16 +714,17 @@ class UserRepository extends EntityRepository
             OR
             (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
-          GROUP BY u.id
-        '
-            )
+          %s
+          GROUP BY u.id', $hasUsersConfirmed);
+        $query = $em
+            ->createQuery($dql)
             ->setParameter('step', $step)
         ;
 
         return $query->getResult();
     }
 
-    public function findConsultationStepOpinionContributorsWithCount(ConsultationStep $step): array
+    public function findConsultationStepOpinionContributorsWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions) AS opinions_count')
@@ -738,6 +738,10 @@ class UserRepository extends EntityRepository
             ->groupBy('u.id')
             ->setParameter('step', $step)
         ;
+
+        if ($hasOnlyUsersConfirmed) {
+            $qb->andWhere('u.confirmationToken IS NULL');
+        }
 
         return $qb->getQuery()->getResult();
     }
@@ -775,7 +779,7 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepVersionContributorsWithCount(ConsultationStep $step): array
+    public function findConsultationStepVersionContributorsWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions) AS versions_count')
@@ -791,10 +795,14 @@ class UserRepository extends EntityRepository
             ->setParameter('step', $step)
         ;
 
+        if ($hasOnlyUsersConfirmed) {
+            $qb->andWhere('u.confirmationToken IS NULL');
+        }
+
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepOpinionVotersWithCount(ConsultationStep $step): array
+    public function findConsultationStepOpinionVotersWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct opinions_votes) AS opinions_votes_count')
@@ -821,10 +829,14 @@ class UserRepository extends EntityRepository
             ->setParameter('step', $step)
         ;
 
+        if ($hasOnlyUsersConfirmed) {
+            $qb->andWhere('u.confirmationToken IS NULL');
+        }
+
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepVersionVotersWithCount(ConsultationStep $step): array
+    public function findConsultationStepVersionVotersWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
         $qb = $this->createQueryBuilder('u')
             ->select('u.id', 'count(distinct versions_votes) AS versions_votes_count')
@@ -860,15 +872,18 @@ class UserRepository extends EntityRepository
             ->setParameter('step', $step)
         ;
 
+        if ($hasOnlyUsersConfirmed) {
+            $qb->andWhere('u.confirmationToken IS NULL');
+        }
+
         return $qb->getQuery()->getResult();
     }
 
-    public function findConsultationStepArgumentVotersWithCount(ConsultationStep $step): array
+    public function findConsultationStepArgumentVotersWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
+        $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
         $em = $this->getEntityManager();
-        $query = $em
-            ->createQuery(
-                'SELECT u.id, count(distinct av) AS arguments_votes_count
+        $dql = sprintf('SELECT u.id, count(distinct av) AS arguments_votes_count
           from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:ArgumentVote av WITH av.user = u
           LEFT JOIN CapcoAppBundle:Argument a WITH av.argument = a
@@ -884,22 +899,22 @@ class UserRepository extends EntityRepository
             OR
             (a.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
-          GROUP BY av.user
-        '
-            )
+          %s
+          GROUP BY av.user', $hasUsersConfirmed);
+        $query = $em
+            ->createQuery($dql)
             ->setParameter('step', $step)
         ;
 
         return $query->getResult();
     }
 
-    public function findConsultationStepSourceVotersWithCount(ConsultationStep $step): array
+    public function findConsultationStepSourceVotersWithCount(ConsultationStep $step, bool $hasOnlyUsersConfirmed = false): array
     {
         $em = $this->getEntityManager();
-        $query = $em
-            ->createQuery(
-                'SELECT u.id, count(distinct sv) AS sources_votes_count
-          FROM CapcoUserBundle:User u
+        $hasUsersConfirmed = $hasOnlyUsersConfirmed ? 'AND u.confirmationToken IS NULL' : '';
+        $dql = sprintf('SELECT u.id, count(distinct sv) AS sources_votes_count
+          from CapcoUserBundle:User u
           LEFT JOIN CapcoAppBundle:SourceVote sv WITH sv.user = u
           LEFT JOIN CapcoAppBundle:Source s WITH sv.source = s
           LEFT JOIN CapcoAppBundle:OpinionVersion ov WITH s.opinionVersion = ov
@@ -914,9 +929,10 @@ class UserRepository extends EntityRepository
             OR
             (s.opinionVersion IS NOT NULL AND ov.published = 1 AND ovo.published = 1)
           )
-          GROUP BY sv.user
-        '
-            )
+          %s
+          GROUP BY sv.user', $hasUsersConfirmed);
+        $query = $em
+            ->createQuery($dql)
             ->setParameter('step', $step)
         ;
 
@@ -2112,6 +2128,54 @@ class UserRepository extends EntityRepository
         ;
 
         return $query->getResult();
+    }
+
+    /**
+     * @param array<int, string> $participantsIds
+     */
+    public function hasNewParticipantsForAConsultation(array $participantsIds, \DateTimeInterface $mostRecentFileModificationDate): bool
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('count(u.id)')
+            ->where('u.id IN (:participantsIds)')
+            ->andWhere('u.updatedAt > :lastCheck')
+            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+            ->setParameter('participantsIds', $participantsIds)
+        ;
+
+        if ($qb->getQuery()->getSingleScalarResult() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    /**
+     * @return User[]
+     */
+    public function getParticipantsIdsConfirmedForAConsultation(ConsultationStep $consultationStep): array
+    {
+        $participantsOpinion = $this->findConsultationStepOpinionContributorsWithCount($consultationStep, true);
+        $participantsOpinionVoters = $this->findConsultationStepOpinionVotersWithCount($consultationStep, true);
+        $participantsArgument = $this->findConsultationStepArgumentVotersWithCount($consultationStep, true);
+        $participantsArgumentVoters = $this->findConsultationStepArgumentVotersWithCount($consultationStep, true);
+        $participantsSource = $this->findConsultationStepSourceContributorsWithCount($consultationStep, true);
+        $participantsSourceVoters = $this->findConsultationStepSourceVotersWithCount($consultationStep, true);
+        $participantsVersion = $this->findConsultationStepVersionContributorsWithCount($consultationStep, true);
+        $participantsVersionVoters = $this->findConsultationStepVersionVotersWithCount($consultationStep, true);
+
+        $participants = array_merge(
+            $participantsOpinion,
+            $participantsOpinionVoters,
+            $participantsArgument,
+            $participantsArgumentVoters,
+            $participantsSource,
+            $participantsSourceVoters,
+            $participantsVersion,
+            $participantsVersionVoters
+        );
+
+        return array_unique(array_column($participants, 'id'));
     }
 
     protected function getIsEnabledQueryBuilder(): QueryBuilder
