@@ -17,7 +17,7 @@ export const getDefaultValues = (
   const stepEnabledType = step?.enabled ? [EnabledEnum.PUBLISHED] : [EnabledEnum.DRAFT]
 
   return {
-    requirementsReason: '',
+    requirementsReason: step?.requirements?.reason ?? '',
     id: stepId,
     label: step?.label ?? '',
     body: step?.body ?? '',

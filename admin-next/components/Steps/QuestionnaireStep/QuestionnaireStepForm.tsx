@@ -68,6 +68,9 @@ const QUESTIONNAIRE_STEP_QUERY = graphql`
     step: node(id: $stepId) {
       id
       ... on QuestionnaireStep {
+        requirements {
+          reason
+        }
         ...Requirements_requirementStep @relay(mask: false)
         title
         label

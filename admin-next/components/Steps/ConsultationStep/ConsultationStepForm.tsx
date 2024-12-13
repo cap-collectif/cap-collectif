@@ -110,6 +110,9 @@ const CONSULTATION_STEP_QUERY = graphql`
       id
       __typename
       ... on ConsultationStep {
+        requirements {
+          reason
+        }
         project {
           id
           title
@@ -262,7 +265,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       customCode: step?.customCode ?? '',
       // @ts-ignore relay stuff
       requirements: getDefaultRequirements(step),
-      requirementsReason: '',
+      requirementsReason: step?.requirements?.reason ?? '',
       consultations:
         consultations?.length > 0
           ? consultations

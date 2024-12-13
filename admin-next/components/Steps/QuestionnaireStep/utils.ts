@@ -259,7 +259,7 @@ export const getDefaultValues = (stepId, step, keepRequirements?: boolean): Form
       questionsWithJumps: step.questionnaire ? step.questionnaire.questionsWithJumps : [],
     },
     requirements: keepRequirements ? step.requirements : getDefaultRequirements(step),
-    requirementsReason: keepRequirements ? step.requirementsReason : '',
+    requirementsReason: keepRequirements ? step.requirementsReason : step.requirements?.reason ?? '',
     collectParticipantsEmail: step.collectParticipantsEmail ?? false,
   }
 }

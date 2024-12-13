@@ -169,6 +169,7 @@ const SELECTION_QUERY = graphql`
         proposalArchivedUnitTime
         ...Requirements_requirementStep @relay(mask: false)
         requirements {
+          reason
           totalCount
           edges {
             node {
@@ -260,7 +261,6 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
     }
     return breadCrumbItems
   }
-
 
   React.useEffect(() => {
     setBreadCrumbItems(getBreadCrumbItems())

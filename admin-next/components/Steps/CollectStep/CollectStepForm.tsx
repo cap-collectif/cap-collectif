@@ -357,6 +357,7 @@ const COLLECT_FRAGMENT = graphql`
         proposalArchivedUnitTime
         ...Requirements_requirementStep @relay(mask: false)
         requirements {
+          reason
           totalCount
           edges {
             node {
