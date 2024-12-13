@@ -23,6 +23,7 @@ return RectorConfig::configure()
         ClassPropertyAssignToConstructorPromotionRector::class => [
             'src/Capco/AppBundle/Entity/ProposalSupervisor.php',
             'src/Capco/AppBundle/Entity/ProposalDecisionMaker.php',
+            'src/Capco/AppBundle/Entity/Steps/DebateStep.php',
         ],
         ReadOnlyPropertyRector::class => [
             'src/Capco/AppBundle/Twig/MediaExtension.php',

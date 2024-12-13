@@ -21,6 +21,11 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     final public const TYPE = 'debate';
 
     /**
+     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", mappedBy="step", cascade={"persist"})
+     */
+    private Debate $debate;
+
+    /**
      * @ORM\Column(name="is_anonymous_participation_allowed", type="boolean", nullable=false, options={"default" = false})
      */
     private bool $isAnonymousParticipationAllowed = false;
@@ -44,13 +49,11 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
     /**
      * When we create a debate step, we also create a debate.
      */
-    public function __construct(/**
-     * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Debate\Debate", mappedBy="step", cascade={"persist"})
-     */
-    private Debate $debate
-    ) {
+    public function __construct(Debate $debate)
+    {
         parent::__construct();
-        $this->debate->setStep($this);
+        $this->debate = $debate;
+        $debate->setStep($this);
     }
 
     public function __clone()
@@ -77,7 +80,7 @@ class DebateStep extends AbstractStep implements ParticipativeStepInterface
 
     public function getDebate(): ?Debate
     {
-        return $this->debate;
+        return $this->debate ?? null;
     }
 
     public function getType(): string

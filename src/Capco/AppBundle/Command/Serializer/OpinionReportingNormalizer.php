@@ -52,7 +52,7 @@ class OpinionReportingNormalizer extends BaseNormalizer implements NormalizerInt
             ];
         }
 
-        $opinionArray = $this->opinionNormalizer->normalize($object->getRelated()->getParent(), null, ['is_full_export' => $isFullExport, 'skip' => true]);
+        $opinionArray = $this->opinionNormalizer->normalize($object->getRelated(), null, ['is_full_export' => $isFullExport, 'skip' => true]);
         $reportingArray[self::EXPORT_CONTRIBUTION_TYPE] = $this->getTranslatedRelatedContribution($object);
 
         return $this->translateHeaders(array_merge((array) $opinionArray, $reportingArray));
