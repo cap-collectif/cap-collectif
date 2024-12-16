@@ -1,96 +1,198 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<FooterAbout /> renders correcty 1`] = `
-<FooterAbout__About
+<Flex
   backgroundColor="#FFF"
-  textColor="#000"
+  color="#000"
+  direction="column"
+  gap={8}
+  m={0}
+  p={
+    Array [
+      "1.500rem",
+      "3.000rem",
+      "2.000rem 4.000rem",
+    ]
+  }
+  width="100%"
 >
-  <Box
+  <Flex
+    direction="column"
+    gap={4}
     margin="auto"
-    maxWidth="960px"
+    maxWidth="96.000rem"
   >
-    <Box
+    <Heading
+      as="h2"
+      color="#000"
+      fontSize="1.200rem"
+      lineHeight="unset"
+      margin="0 auto"
       px={4}
+      textAlign="center"
     >
-      <FooterAbout__FooterTitle
-        titleColor="#000"
-      >
-        À propos
-      </FooterAbout__FooterTitle>
-      <FooterAbout__FooterBody
+      À propos
+    </Heading>
+    <Flex
+      justifyContent="center"
+      maxWidth="100vw"
+      sx={
+        Object {
+          "a": Object {
+            "color": "inherit",
+            "cursor": "pointer",
+            "fontWeight": "bold",
+          },
+        }
+      }
+    >
+      <WYSIWYGRender
         value="Ce site est fait par CapCo. C'est fou hein ?"
       />
-    </Box>
-    <Box
-      px={4}
-    >
-      <FooterAbout__SocialNetworks />
-    </Box>
-  </Box>
-</FooterAbout__About>
+    </Flex>
+  </Flex>
+  <Flex
+    alignSelf="center"
+    as="ul"
+    flexWrap="wrap"
+    gap={6}
+    id="footer-social-networks"
+    justifyContent="center"
+    maxWidth="100%"
+    ml="auto"
+    mr="auto"
+    px={4}
+  />
+</Flex>
 `;
 
 exports[`<FooterAbout /> renders correcty and displays social networks 1`] = `
-<FooterAbout__About
+<Flex
   backgroundColor="#FFF"
-  textColor="#000"
+  color="#000"
+  direction="column"
+  gap={8}
+  m={0}
+  p={
+    Array [
+      "1.500rem",
+      "3.000rem",
+      "2.000rem 4.000rem",
+    ]
+  }
+  width="100%"
 >
-  <Box
+  <Flex
+    direction="column"
+    gap={4}
     margin="auto"
-    maxWidth="960px"
+    maxWidth="96.000rem"
   >
-    <Box
+    <Heading
+      as="h2"
+      color="#000"
+      fontSize="1.200rem"
+      lineHeight="unset"
+      margin="0 auto"
       px={4}
+      textAlign="center"
     >
-      <FooterAbout__FooterTitle
-        titleColor="#000"
-      >
-        À propos
-      </FooterAbout__FooterTitle>
-      <FooterAbout__FooterBody
+      À propos
+    </Heading>
+    <Flex
+      justifyContent="center"
+      maxWidth="100vw"
+      sx={
+        Object {
+          "a": Object {
+            "color": "inherit",
+            "cursor": "pointer",
+            "fontWeight": "bold",
+          },
+        }
+      }
+    >
+      <WYSIWYGRender
         value="Ce site est fait par CapCo. C'est fou hein ?"
       />
-    </Box>
-    <Box
-      px={4}
+    </Flex>
+  </Flex>
+  <Flex
+    alignSelf="center"
+    as="ul"
+    flexWrap="wrap"
+    gap={6}
+    id="footer-social-networks"
+    justifyContent="center"
+    maxWidth="100%"
+    ml="auto"
+    mr="auto"
+    px={4}
+  >
+    <Flex
+      as="li"
+      key="Facebook"
+      sx={
+        Object {
+          "listStyle": "none",
+        }
+      }
+      width="fit-content"
     >
-      <FooterAbout__SocialNetworks>
-        <li
-          key="Facebook"
-        >
-          <Flex>
-            <Icon
-              name="FACEBOOK"
-            />
-            <a
-              className="external-link"
-              href="fb.com"
-            >
-              <span>
-                 Facebook
-              </span>
-            </a>
-          </Flex>
-        </li>
-        <li
-          key="X"
-        >
-          <Flex>
-            <Icon
-              name="X"
-            />
-            <a
-              className="external-link"
-              href="x.com"
-            >
-              <span>
-                 X
-              </span>
-            </a>
-          </Flex>
-        </li>
-      </FooterAbout__SocialNetworks>
-    </Box>
-  </Box>
-</FooterAbout__About>
+      <Link
+        className="external-link"
+        color="inherit"
+        display="flex"
+        gap={1}
+        href="fb.com"
+        sx={
+          Object {
+            "&:hover, &:active, &:focus": Object {
+              "color": "inherit",
+            },
+          }
+        }
+      >
+        <Icon
+          name="FACEBOOK"
+        />
+        <Text>
+          Facebook
+        </Text>
+      </Link>
+    </Flex>
+    <Flex
+      as="li"
+      key="X"
+      sx={
+        Object {
+          "listStyle": "none",
+        }
+      }
+      width="fit-content"
+    >
+      <Link
+        className="external-link"
+        color="inherit"
+        display="flex"
+        gap={1}
+        href="x.com"
+        sx={
+          Object {
+            "&:hover, &:active, &:focus": Object {
+              "color": "inherit",
+            },
+          }
+        }
+      >
+        <Icon
+          name="X"
+        />
+        <Text>
+          X
+        </Text>
+      </Link>
+    </Flex>
+  </Flex>
+</Flex>
 `;

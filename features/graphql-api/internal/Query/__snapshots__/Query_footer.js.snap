@@ -26,6 +26,21 @@ Object {
         "style": "x",
         "title": "X",
       },
+      Object {
+        "link": "https://www.linkedin.com/company/cap-collectif/posts/",
+        "style": "linkedin",
+        "title": "Linkedin",
+      },
+      Object {
+        "link": "#",
+        "style": "link-1",
+        "title": "Site externe",
+      },
+      Object {
+        "link": "https://www.youtube.com/watch?v=sHsgK7WUOvU",
+        "style": "youtube",
+        "title": "Youtube",
+      },
     ],
   },
 }

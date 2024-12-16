@@ -21,17 +21,10 @@ class FooterSocialNetwork implements \Stringable
     public static $socialIcons = [
         'Site externe' => 'link-1',
         'Facebook' => 'facebook',
-        'Twitter' => 'twitter',
-        'Google+' => 'gplus',
-        'RSS' => 'rss',
-        'Pinterest' => 'pinterest',
-        'Github' => 'github',
+        'X' => 'x',
         'Linkedin' => 'linkedin',
-        'Picasa' => 'picasa',
         'Vimeo' => 'vimeo',
         'Instagram' => 'instagram',
-        'Flickr' => 'flickr',
-        'Tumblr' => 'tumblr',
         'youtube' => 'youtube',
     ];
 

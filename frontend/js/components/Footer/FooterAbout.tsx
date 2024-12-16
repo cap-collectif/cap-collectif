@@ -1,8 +1,8 @@
 import React from 'react'
-import styled from 'styled-components'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { SocialNetwork } from './Footer'
-import { Box, Icon, CapUIIcon, Flex } from '@cap-collectif/ui'
+import { Icon, CapUIIcon, Flex, Link, Text, CapUIFontWeight, Heading } from '@cap-collectif/ui'
+import { pxToRem } from '~/utils/styles/mixins'
 
 type Props = {
   textTitle: string
@@ -12,85 +12,85 @@ type Props = {
   textColor: string
   backgroundColor: string
 }
-const About = styled.div<{
-  backgroundColor: string
-  textColor: string
-}>`
-  padding: 30px 60px;
-  margin: 0;
-  width: 100%;
-  background-color: ${props => props.backgroundColor};
-  color: ${props => props.textColor};
 
-  @media (max-width: 991px) {
-    padding: 30px;
+const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColor, backgroundColor }: Props) => {
+  const getIconName = (item: string): string => {
+    return item === 'link-1' ? 'HYPERLINK' : item ? item.toUpperCase() : null
   }
 
-  @media (max-width: 767px) {
-    padding: 15px;
-  }
-`
-const FooterTitle = styled.h2<{
-  titleColor: string
-}>`
-  color: ${props => props.titleColor};
-  margin-top: 0;
-  font-size: 18px;
-  margin-bottom: 10px;
-`
-const FooterBody = styled(WYSIWYGRender)`
-  text-align: center;
+  return (
+    <Flex
+      backgroundColor={backgroundColor}
+      direction={'column'}
+      color={textColor}
+      p={[pxToRem(15), pxToRem(30), `${pxToRem(20)} ${pxToRem(40)}`]}
+      m={0}
+      width={'100%'}
+      gap={8}
+    >
+      <Flex direction={'column'} gap={4} maxWidth={pxToRem(960)} margin="auto">
+        <Heading
+          as="h2"
+          color={titleColor}
+          fontSize={pxToRem(12)}
+          margin={'0 auto'}
+          px={4}
+          lineHeight={'unset'}
+          textAlign={'center'}
+        >
+          {textTitle}
+        </Heading>
+        <Flex
+          justifyContent={'center'}
+          maxWidth={'100vw'}
+          sx={{
+            a: {
+              fontWeight: CapUIFontWeight.Bold,
+              cursor: 'pointer',
+              color: 'inherit',
+            },
+          }}
+        >
+          <WYSIWYGRender value={textBody} />
+        </Flex>
+      </Flex>
 
-  a {
-    font-weight: bold;
-    cursor: pointer;
-    color: inherit;
-  }
-`
-const SocialNetworks = styled.ul`
-  text-align: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  li {
-    display: inline-block;
-    padding-left: 15px;
-    margin-top: 15px;
-
-    &:first-child {
-      padding-left: 0;
-    }
-
-    & a {
-      color: inherit;
-    }
-  }
-`
-
-const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColor, backgroundColor }: Props) => (
-  <About backgroundColor={backgroundColor} textColor={textColor}>
-    <Box maxWidth="960px" margin="auto">
-      <Box px={4}>
-        <FooterTitle titleColor={titleColor}>{textTitle}</FooterTitle>
-        <FooterBody value={textBody} />
-      </Box>
-      <Box px={4}>
-        <SocialNetworks>
-          {socialNetworks &&
-            socialNetworks.map(socialNetwork => (
-              <li key={socialNetwork.title}>
-                <Flex>
-                  <Icon name={CapUIIcon[socialNetwork.style.charAt(0).toUpperCase() + socialNetwork.style.slice(1)]}/>
-                  <a href={socialNetwork.link} className="external-link">
-                    <span>{` ${socialNetwork.title}`}</span>
-                  </a>
-                </Flex>
-              </li>
-            ))}
-        </SocialNetworks>
-      </Box>
-    </Box>
-  </About>
-)
+      {socialNetworks && (
+        <Flex
+          as="ul"
+          gap={6}
+          justifyContent={'center'}
+          alignSelf={'center'}
+          ml={'auto'}
+          mr={'auto'}
+          px={4}
+          flexWrap={'wrap'}
+          maxWidth={'100%'}
+          id="footer-social-networks"
+        >
+          {socialNetworks.map(socialNetwork => (
+            <Flex as="li" key={socialNetwork.title} width={'fit-content'} sx={{ listStyle: 'none' }}>
+              <Link
+                href={socialNetwork.link}
+                className="external-link"
+                display={'flex'}
+                gap={1}
+                color="inherit"
+                sx={{
+                  '&:hover, &:active, &:focus': {
+                    color: 'inherit',
+                  },
+                }}
+              >
+                <Icon name={getIconName(socialNetwork.style) as CapUIIcon} />
+                <Text>{socialNetwork.title}</Text>
+              </Link>
+            </Flex>
+          ))}
+        </Flex>
+      )}
+    </Flex>
+  )
+}
 
 export default FooterAbout

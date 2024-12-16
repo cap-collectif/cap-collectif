@@ -1,28 +1,42 @@
 Capco\AppBundle\Entity\FooterSocialNetwork:
-  FooterSocialNetwork1:
-    title: Facebook
-    link: http://facebook.com
-    position: 1
-    isEnabled: false
-    style: facebook
+    FooterSocialNetwork1:
+        title: Facebook
+        link: https://www.facebook.com/
+        position: 1
+        isEnabled: false
+        style: facebook
 
-  FooterSocialNetwork2:
-    title: X
-    link: https://x.com/CapCollectif
-    position: 2
-    isEnabled: true
-    style: x
+    FooterSocialNetwork2:
+        title: X
+        link: https://x.com/CapCollectif
+        position: 2
+        isEnabled: true
+        style: x
 
-  FooterSocialNetwork3:
-    title: Linkedin
-    link: http://linkedin.com
-    position: 3
-    isEnabled: false
-    style: linkedin
+    FooterSocialNetwork3:
+        title: Linkedin
+        link: https://www.linkedin.com/company/cap-collectif/posts/
+        position: 3
+        isEnabled: true
+        style: linkedin
 
-  FooterSocialNetwork5:
-    title: RSS feed
-    link: '#'
-    position: 5
-    isEnabled: false
-    style: rss
+    FooterSocialNetwork4:
+        title: Vimeo
+        link: '#'
+        position: 4
+        isEnabled: false
+        style: vimeo
+
+    FooterSocialNetwork5:
+        title: Site externe
+        link: '#'
+        position: 5
+        isEnabled: true
+        style: link-1
+
+    FooterSocialNetwork6:
+        title: Youtube
+        link: 'https://www.youtube.com/watch?v=sHsgK7WUOvU'
+        position: 6
+        isEnabled: true
+        style: youtube

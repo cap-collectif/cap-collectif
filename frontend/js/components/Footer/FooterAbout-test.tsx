@@ -40,6 +40,6 @@ describe('<FooterAbout />', () => {
     }
     const wrapper = shallow(<FooterAbout {...props} />)
     expect(wrapper).toMatchSnapshot()
-    expect(wrapper.find('FooterAbout__SocialNetworks')).toHaveLength(1)
+    expect(wrapper.find('#footer-social-networks')).toHaveLength(1)
   })
 })
