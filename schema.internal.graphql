@@ -9181,6 +9181,7 @@ type Mutation {
   deleteParticipant(input: DeleteParticipantInput!): DeleteParticipantPayload
   updateVotesVisibility(input: UpdateVotesVisibilityInput!): UpdateVotesVisibilityPayload
   handleProposalFormCategoryImage(input: HandleProposalFormCategoryImageInput!): HandleProposalFormCategoryImagePayload
+  updateUser(input: UpdateUserInput!): UpdateUserPayload
 }
 
 """A connection to a list of items."""
@@ -20106,6 +20107,104 @@ enum UpdateUserEmailErrorCode {
 
   """Rate limit reached."""
   RATE_LIMIT_REACHED
+}
+
+input UpdateUserInput {
+  """
+  (ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.
+  """
+  userId: ID!
+
+  """Your firstname"""
+  firstname: String
+
+  """Your lastname"""
+  lastname: String
+
+  """Your gender"""
+  gender: GenderValue
+
+  """Your phone number"""
+  phone: String
+
+  """Your address, geocoded by google"""
+  postalAddress: String
+
+  """Your address"""
+  address: String
+
+  """Your complementary address"""
+  address2: String
+
+  """Your city"""
+  city: String
+
+  """Your zipcode"""
+  zipCode: String
+
+  """Your date of birth"""
+  dateOfBirth: String
+
+  """Is your phone confirmed ?"""
+  phoneConfirmed: Boolean
+
+  """Your email"""
+  email: String
+
+  """Your birth place"""
+  birthPlace: String
+
+  """Your identification code to verify your account"""
+  userIdentificationCode: String
+  stepId: ID
+
+  """Your username"""
+  username: String!
+
+  """Your user type"""
+  userType: ID
+
+  """Your biography"""
+  biography: String
+
+  """Your neighborhood"""
+  neighborhood: String
+
+  """Your website"""
+  websiteUrl: URI
+
+  """Your linkedIn"""
+  linkedInUrl: URI
+
+  """Your facebook"""
+  facebookUrl: URI
+
+  """Your twitter"""
+  twitterUrl: URI
+
+  """Your instagram"""
+  instagramUrl: URI
+
+  """Whether or not this user profile page is indexed."""
+  profilePageIndexed: Boolean
+
+  """Current media id"""
+  media: ID
+
+  """Unattended roles as array."""
+  roles: [UserRole]!
+  locked: Boolean
+  vip: Boolean
+  enabled: Boolean
+  subscribedToProposalNews: Boolean
+  clientMutationId: String
+}
+
+type UpdateUserPayload {
+  """The user who just have been updated"""
+  user: User
+  validationErrors: String
+  clientMutationId: String
 }
 
 input UpdateUserReplyInput {

@@ -2,7 +2,9 @@
 
 namespace spec\Capco\AppBundle\GraphQL\Mutation;
 
+use Capco\AppBundle\Entity\Security\UserIdentificationCode;
 use Capco\AppBundle\GraphQL\Mutation\CheckIdentificationCodeMutation;
+use Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
@@ -25,9 +27,10 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
     public function let(
         LoggerInterface $logger,
         ValidatorInterface $validator,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository
     ) {
-        $this->beConstructedWith($logger, $validator, $rateLimiter);
+        $this->beConstructedWith($logger, $validator, $rateLimiter, $userIdentificationCodeRepository);
     }
 
     public function it_is_initializable()
@@ -42,20 +45,23 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ConstraintViolationList $error,
         ConstraintViolation $violation,
         RateLimiter $rateLimiter,
-        ConstraintViolationList $violationList
+        ConstraintViolationList $violationList,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCode $userIdentificationCode
     ) {
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
-        $this->initMutation($arguments, $viewer, $validator, $violationList);
+        $this->initMutation(
+            $arguments,
+            $viewer,
+            $validator,
+            $violationList,
+            $userIdentificationCodeRepository,
+            $userIdentificationCode,
+            'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS_QUI_FAIT_AU_MOINS_32_CHARS'
+        );
         $this->firstCallOfCache($rateLimiter, $viewer);
         $error->count()->willReturn(0);
-        $validator
-            ->validate(
-                'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS_QUI_FAIT_AU_MOINS_32_CHARS',
-                Argument::type(CheckIdentificationCode::class)
-            )
-            ->willReturn($error)
-        ;
 
         $this->__invoke($arguments, $viewer)->shouldBe([
             'user' => $viewer,
@@ -69,11 +75,13 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCode $userIdentificationCode
     ) {
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
-        $this->initMutation($arguments, $viewer, $validator, $violationList);
+        $this->initMutation($arguments, $viewer, $validator, $violationList, $userIdentificationCodeRepository, $userIdentificationCode);
         $viewer
             ->getUserIdentificationCodeValue()
             ->willReturn('UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS')
@@ -91,11 +99,13 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCode $userIdentificationCode
     ) {
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
-        $this->initMutation($arguments, $viewer, $validator, $violationList);
+        $this->initMutation($arguments, $viewer, $validator, $violationList, $userIdentificationCodeRepository, $userIdentificationCode);
         $this->firstCallOfCache($rateLimiter, $viewer);
 
         $violationList->count()->willReturn(1);
@@ -114,11 +124,13 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCode $userIdentificationCode
     ) {
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
-        $this->initMutation($arguments, $viewer, $validator, $violationList);
+        $this->initMutation($arguments, $viewer, $validator, $violationList, $userIdentificationCodeRepository, $userIdentificationCode);
         $validator
             ->validate(
                 'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS',
@@ -143,11 +155,13 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         User $viewer,
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCode $userIdentificationCode
     ) {
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
-        $this->initMutation($arguments, $viewer, $validator, $violationList);
+        $this->initMutation($arguments, $viewer, $validator, $violationList, $userIdentificationCodeRepository, $userIdentificationCode);
 
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
@@ -167,11 +181,13 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         ValidatorInterface $validator,
         ConstraintViolationList $violationList,
         ConstraintViolation $violation,
-        RateLimiter $rateLimiter
+        RateLimiter $rateLimiter,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCode $userIdentificationCode
     ) {
         $this->getMockedGraphQLArgumentFormatted($arguments);
 
-        $this->initMutation($arguments, $viewer, $validator, $violationList);
+        $this->initMutation($arguments, $viewer, $validator, $violationList, $userIdentificationCodeRepository, $userIdentificationCode);
 
         $rateLimiter
             ->canDoAction(Argument::type('string'), Argument::type('string'))
@@ -189,15 +205,23 @@ class CheckIdentificationCodeMutationSpec extends ObjectBehavior
         Arg $arguments,
         User $viewer,
         ValidatorInterface $validator,
-        ConstraintViolationList $violationList
-    ) {
-        $argumentsValues = ['identificationCode' => 'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS'];
+        ConstraintViolationList $violationList,
+        UserIdentificationCodeRepository $userIdentificationCodeRepository,
+        UserIdentificationCode $userIdentificationCode,
+        string $code = 'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS'
+    ): void {
+        $argumentsValues = ['identificationCode' => $code];
         $arguments->getArrayCopy()->willReturn($argumentsValues);
         $viewer->getId()->willReturn('viewerId');
         $viewer->getUserIdentificationCodeValue()->willReturn(null);
+        $userIdentificationCodeRepository
+            ->find($code)
+            ->willReturn($userIdentificationCode)
+        ;
+
         $validator
             ->validate(
-                'UNSUPERCODE_QUI_FAIT_AU_MOINS_32_CHARS',
+                $userIdentificationCode,
                 Argument::type(CheckIdentificationCode::class)
             )
             ->willReturn($violationList)

@@ -1,0 +1,96 @@
+UpdateUserInput:
+    type: relay-mutation-input
+    config:
+        description: 'Update user data'
+        fields:
+            userId:
+                type: 'ID!'
+                description: '(ROLE_SUPER_ADMIN only) the user to update, if not provided the viewer is updated.'
+            firstname:
+                type: 'String'
+                description: 'Your firstname'
+            lastname:
+                type: 'String'
+                description: 'Your lastname'
+            gender:
+                type: 'GenderValue'
+                description: 'Your gender'
+            phone:
+                type: 'String'
+                description: 'Your phone number'
+            postalAddress:
+                type: 'String'
+                description: 'Your address, geocoded by google'
+            address:
+                type: 'String'
+                description: 'Your address'
+            address2:
+                type: 'String'
+                description: 'Your complementary address'
+            city:
+                type: 'String'
+                description: 'Your city'
+            zipCode:
+                type: 'String'
+                description: 'Your zipcode'
+            dateOfBirth:
+                type: 'String'
+                description: 'Your date of birth'
+            phoneConfirmed:
+                type: 'Boolean'
+                description: 'Is your phone confirmed ?'
+            email:
+                type: 'String'
+                description: 'Your email'
+            birthPlace:
+                type: 'String'
+                description: 'Your birth place'
+            userIdentificationCode:
+                type: 'String'
+                description: 'Your identification code to verify your account'
+            stepId:
+                type: 'ID'
+            username:
+                type: 'String!'
+                description: 'Your username'
+            userType:
+                type: 'ID'
+                description: 'Your user type'
+            biography:
+                type: 'String'
+                description: 'Your biography'
+            neighborhood:
+                type: 'String'
+                description: 'Your neighborhood'
+            websiteUrl:
+                type: 'URI'
+                description: 'Your website'
+            linkedInUrl:
+                type: 'URI'
+                description: 'Your linkedIn'
+            facebookUrl:
+                type: 'URI'
+                description: 'Your facebook'
+            twitterUrl:
+                type: 'URI'
+                description: 'Your twitter'
+            instagramUrl:
+                type: 'URI'
+                description: 'Your instagram'
+            profilePageIndexed:
+                type: 'Boolean'
+                description: 'Whether or not this user profile page is indexed.'
+            media:
+                type: 'ID'
+                description: 'Current media id'
+            roles:
+                type: '[UserRole]!'
+                description: 'Unattended roles as array.'
+            locked:
+                type: 'Boolean'
+            vip:
+                type: 'Boolean'
+            enabled:
+                type: 'Boolean'
+            subscribedToProposalNews:
+                type: 'Boolean'

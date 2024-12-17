@@ -1865,4 +1865,10 @@ InternalMutation:
                     inputType: HandleProposalFormCategoryImageInput
                     payloadType: HandleProposalFormCategoryImagePayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\HandleProposalFormCategoryImageMutation", args, getUser())'
-
+            updateUser:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateUserInput
+                    payloadType: UpdateUserPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserMutation", args, getUser())'

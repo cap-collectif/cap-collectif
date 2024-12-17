@@ -12,16 +12,22 @@ class CheckIdentificationCodeValidator extends ConstraintValidator
     {
     }
 
-    public function validate($id, Constraint $constraint)
+    public function validate($userIdentificationCode, Constraint $constraint)
     {
-        $code = $this->codeRepository->findCodeUsedOrNot($id);
+        if (!$userIdentificationCode) {
+            return;
+        }
+
+        $code = $this->codeRepository->findCodeUsedOrNot($userIdentificationCode->getIdentificationCode());
 
         if (!$code) {
             $this->context->buildViolation($constraint->message)->addViolation();
-        } else {
-            if (!empty($code['isUsed'])) {
-                $this->context->buildViolation($constraint->messageUsed)->addViolation();
-            }
+
+            return;
+        }
+
+        if (!empty($code['isUsed'])) {
+            $this->context->buildViolation($constraint->messageUsed)->addViolation();
         }
     }
 }

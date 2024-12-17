@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use Capco\UserBundle\Entity\User;
@@ -20,7 +21,7 @@ class CheckIdentificationCodeMutation implements MutationInterface
     final public const RATE_LIMITER_ACTION = 'CheckIdentificationCode';
     final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    public function __construct(protected LoggerInterface $logger, private readonly ValidatorInterface $validator, private readonly RateLimiter $rateLimiter)
+    public function __construct(protected LoggerInterface $logger, private readonly ValidatorInterface $validator, private readonly RateLimiter $rateLimiter, private readonly UserIdentificationCodeRepository $userIdentificationCodeRepository)
     {
     }
 
@@ -49,9 +50,18 @@ class CheckIdentificationCodeMutation implements MutationInterface
             ];
         }
 
+        $userIdentificationCode = $this->userIdentificationCodeRepository->find($arguments['identificationCode']);
+
+        if (!$userIdentificationCode) {
+            return [
+                'user' => $user,
+                'errorCode' => CheckIdentificationCode::BAD_CODE,
+            ];
+        }
+
         // My form validation mus be wrong because, $form->getErrors() returns an empty array when I should have an error. So I do it this way
         $violationList = $this->validator->validate(
-            strtoupper((string) $arguments['identificationCode']),
+            $userIdentificationCode,
             new CheckIdentificationCode()
         );
         if ($violationList->count()) {

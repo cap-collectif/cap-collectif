@@ -1,0 +1,9 @@
+UpdateUserPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            user:
+                type: 'InternalUser'
+                description: 'The user who just have been updated'
+            validationErrors:
+                type: 'String'

@@ -1,6 +1,6 @@
 module.exports = {
   roots: ['features/graphql-api'],
-  testPathIgnorePatterns: ['<rootDir>/features/graphql-api/_setup.js'],
+  testPathIgnorePatterns: ['<rootDir>/features/graphql-api/_setup.js', '<rootDir>/features/graphql-api/resetDatabaseBeforeEach.js'],
   testEnvironment: 'node',
   testMatch: ['**/*.js'],
   transform: {
