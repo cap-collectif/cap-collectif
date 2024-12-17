@@ -12,6 +12,7 @@ import { CONNECTION_NODES_PER_PAGE } from '@components/UserInvitation/utils'
 import { Invitation, Status } from './UserInvite.type'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import EmptyMessage from '@ui/Table/EmptyMessage'
+import { useLayoutContext } from '@components/Layout/Layout.context'
 
 type Props = {
   readonly query: UserInviteList_query$key
@@ -26,6 +27,7 @@ export const UserInviteList = ({ query: queryFragment, status, setStatus, term, 
   const { data, hasNext, loadNext, refetch } = usePaginationFragment(FRAGMENT, queryFragment)
   const invitations = data?.userInvitations?.edges?.map(edge => edge?.node).filter(Boolean) ?? []
   const firstRendered = React.useRef(null)
+  const { contentRef } = useLayoutContext()
 
   const [isSearching, setIsSearching] = React.useState<boolean>(false)
 
@@ -152,6 +154,7 @@ export const UserInviteList = ({ query: queryFragment, status, setStatus, term, 
         onScrollToBottom={() => {
           loadNext(CONNECTION_NODES_PER_PAGE)
         }}
+        scrollParentRef={contentRef}
         hasMore={hasNext}
       >
         {invitations.map(userInvite => (
