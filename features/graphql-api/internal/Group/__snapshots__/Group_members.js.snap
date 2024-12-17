@@ -1,0 +1,166 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.Group.members should fetch all members of a group  1`] = `
+Object {
+  "node": Object {
+    "members": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "lbrunet@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "lbrunet",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "sfavot@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "sfavot",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "user@test.com",
+            "type": "MEMBER",
+            "username": "user",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "aurelien@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "spyl",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "msantostefano@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "welcomattic",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "user-invited-in-group@gmail.com",
+            "type": "INVITATION",
+            "username": "",
+          },
+        },
+      ],
+      "totalCount": 6,
+    },
+  },
+}
+`;
+
+exports[`Internal.Group.members should fetch first 2 members  1`] = `
+Object {
+  "node": Object {
+    "members": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "lbrunet@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "lbrunet",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "sfavot@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "sfavot",
+          },
+        },
+      ],
+      "totalCount": 6,
+    },
+  },
+}
+`;
+
+exports[`Internal.Group.members should fetch members after lbrunet  1`] = `
+Object {
+  "node": Object {
+    "members": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "sfavot@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "sfavot",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "user@test.com",
+            "type": "MEMBER",
+            "username": "user",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "aurelien@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "spyl",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "msantostefano@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "welcomattic",
+          },
+        },
+        Object {
+          "node": Object {
+            "email": "user-invited-in-group@gmail.com",
+            "type": "INVITATION",
+            "username": "",
+          },
+        },
+      ],
+      "totalCount": 6,
+    },
+  },
+}
+`;
+
+exports[`Internal.Group.members should fetch members with email msantostefano@cap-collectif.com  1`] = `
+Object {
+  "node": Object {
+    "members": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "msantostefano@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "welcomattic",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
+exports[`Internal.Group.members should fetch members with username spyl  1`] = `
+Object {
+  "node": Object {
+    "members": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "email": "aurelien@cap-collectif.com",
+            "type": "MEMBER",
+            "username": "spyl",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;

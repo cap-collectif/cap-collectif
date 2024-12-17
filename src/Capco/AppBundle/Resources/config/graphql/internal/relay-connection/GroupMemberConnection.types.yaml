@@ -1,0 +1,7 @@
+GroupMemberConnection:
+    type: relay-connection
+    config:
+        nodeType: InternalGroupMember
+        connectionFields:
+            totalCount:
+                type: Int!

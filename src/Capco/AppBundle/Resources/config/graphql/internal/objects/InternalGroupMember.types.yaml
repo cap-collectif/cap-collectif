@@ -1,0 +1,15 @@
+InternalGroupMember:
+    type: object
+    config:
+        name: GroupMember
+        description: 'A user invitation'
+        fields:
+            username:
+                type: 'String!'
+                description: 'The user username if already registered otherwise empty string.'
+            email:
+                type: 'String!'
+                description: 'The user or pending user email.'
+            type:
+                type: 'String!'
+                description: 'Member or invitation.'

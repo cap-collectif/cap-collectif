@@ -32,11 +32,20 @@ Group:
                         description: 'Filter the list by consent to internal communication'
                 description: 'Get all users of the group.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupUsersResolver", value, args)'
+            members:
+                type: 'GroupMemberConnection!'
+                argsBuilder: 'Relay::ForwardConnection'
+                args:
+                    term:
+                        type: String
+                        description: 'Filter by email or username'
+                description: 'Get all users and pending invitations'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Group\\GroupMembersResolver", value, args)'
             createdAt:
                 type: 'DateTime!'
             updatedAt:
                 type: 'DateTime'
-            pendingInvitations:
+            pendingInvitations: # remove when new group page is merged
                 type: 'UserInviteConnection!'
                 argsBuilder: 'Relay::ForwardConnection'
                 description: 'Get all userInvite who are still pending'

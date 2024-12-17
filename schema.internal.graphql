@@ -7608,6 +7608,20 @@ type Group implements Node {
     """Filter the list by consent to internal communication"""
     consentInternalCommunication: Boolean = null
   ): UserConnection!
+
+  """Get all users and pending invitations"""
+  members(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+
+    """Filter by email or username"""
+    term: String
+  ): GroupMemberConnection!
   createdAt: DateTime!
   updatedAt: DateTime
 
@@ -7642,6 +7656,38 @@ type GroupConnection {
 type GroupEdge {
   """The item at the end of the edge."""
   node: Group!
+
+  """A cursor for use in pagination."""
+  cursor: String!
+}
+
+"""A user invitation"""
+type GroupMember {
+  """The user username if already registered otherwise empty string."""
+  username: String!
+
+  """The user or pending user email."""
+  email: String!
+
+  """Member or invitation."""
+  type: String!
+}
+
+"""A connection to a list of items."""
+type GroupMemberConnection {
+  totalCount: Int!
+
+  """Information to aid in pagination."""
+  pageInfo: PageInfo!
+
+  """Information to aid in pagination."""
+  edges: [GroupMemberEdge]
+}
+
+"""An edge in a connection."""
+type GroupMemberEdge {
+  """The item at the end of the edge."""
+  node: GroupMember
 
   """A cursor for use in pagination."""
   cursor: String!
