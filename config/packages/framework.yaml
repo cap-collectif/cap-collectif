@@ -5,17 +5,8 @@ framework:
         enable_annotations: false
         mapping:
             paths: []
-    cache:
-        app: cache.adapter.redis
-        default_redis_provider: 'redis://%redis_dsn%'
-    router:
-        resource: '%kernel.project_dir%/config/routes/dev/routing_dev.yaml'
-        strict_requirements: true
     form: null
     csrf_protection: null
-    validation:
-        enabled: true
-        enable_annotations: true
     assets:
         version: '%assets_version%'
     default_locale: '%locale%'

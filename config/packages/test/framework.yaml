@@ -1,7 +1,5 @@
 framework:
-    router:
-        resource: '%kernel.project_dir%/config/routes/routing.yaml'
-    test: ~
+    test: true
     profiler:
         collect: false
     translator:

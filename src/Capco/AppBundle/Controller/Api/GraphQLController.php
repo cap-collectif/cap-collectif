@@ -61,7 +61,7 @@ class GraphQLController extends BaseController
             }
         }
         if (self::SCHEMA_DEV === $schemaName && self::ENV_PROD === $this->env) {
-            $this->logger->warn('trying to access dev schema in prod environment.');
+            $this->logger->warning('trying to access dev schema in prod environment.');
 
             throw new BadRequestHttpException('trying to access dev schema in prod environment.');
         }
@@ -70,7 +70,7 @@ class GraphQLController extends BaseController
             return $this->createResponse($request, $schemaName, false);
         } catch (BadRequestHttpException $e) {
             if (self::SCHEMA_PUBLIC === $schemaName || self::SCHEMA_PREVIEW === $schemaName) {
-                $this->logger->warn('Wrong public query');
+                $this->logger->warning('Wrong public query');
 
                 return new Response('Wrong public query', Response::HTTP_BAD_REQUEST);
             }

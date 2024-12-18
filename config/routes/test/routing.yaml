@@ -12,5 +12,5 @@ _translation_profiler:
     resource: '@TranslationBundle/Resources/config/routing_symfony_profiler.yml'
     options: {i18n: false}
 
-_main:
-    resource: ../routing.yaml
+main:
+    resource: ./../routes.yaml

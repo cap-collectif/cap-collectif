@@ -210,10 +210,3 @@ parameters:
     env(SYMFONY_ORANGE_API_CLIENT_ID): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_ORANGE_API_CLIENT_SECRET): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_ORANGE_REQUEST_ID_EXPIRATION_TIME): '900'
-
-sensio_framework_extra:
-    router: { annotations: false }
-    request: { converters: true, auto_convert: true }
-    view: { annotations: true }
-    cache: { annotations: true }
-    security: { annotations: true }

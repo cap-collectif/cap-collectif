@@ -41,10 +41,6 @@ fos_http_cache:
                     - 172.17.0.1 # It can be docker IP.
                 base_url: 127.0.0.1
 
-# Disable @Cache annotation, please use fos_http_cache
-sensio_framework_extra:
-    cache: { annotations: false }
-
 services:
     Capco\AppBundle\Cache\RedisCache:
         autowire: true

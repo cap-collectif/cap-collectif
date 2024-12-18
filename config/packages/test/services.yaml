@@ -5,9 +5,6 @@ translation:
     symfony_profiler:
         enabled: false
 
-qandidate_toggle:
-    redis_namespace: testfeature_toggle
-
 # We disable translation except for routes
 parameters:
     # Allow Google ReCaptcha to work in test mode

@@ -1,0 +1,2 @@
+qandidate_toggle:
+    redis_namespace: testfeature_toggle

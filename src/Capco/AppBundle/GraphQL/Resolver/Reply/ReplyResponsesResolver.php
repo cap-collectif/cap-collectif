@@ -41,7 +41,7 @@ class ReplyResponsesResolver implements QueryInterface
                 && $reply->getQuestionnaire()->isPrivateResult()
                 && (!$viewer || (!$viewer->isAdmin() && $viewer->getId() !== $author->getId()))
             ) {
-                $this->logger->warn('Tried to access private responses on a reply.');
+                $this->logger->warning('Tried to access private responses on a reply.');
 
                 return [];
             }

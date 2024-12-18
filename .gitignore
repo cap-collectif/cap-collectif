@@ -12,7 +12,6 @@ __snapshots-diff__/*
 # Symfony directories
 /public/js/**
 !public/js/.gitkeep
-/public/bundles/
 /public/images/*
 /public/assets/*
 /public/css/*
@@ -33,7 +32,6 @@ coverage/*
 
 /var
 /build/
-/vendor/
 !/bin/console
 !/bin/symfony_requirements
 /bin/
@@ -102,18 +100,11 @@ data/*
 syslog
 dump.sql
 
-# cs-fixer
-php-cs-fixer
-.php-cs-fixer.cache
-
 # divers
 nohup.out
 
 # env files
-/.env.local
 /.env.local.backup
-/.env.local.php
-/.env.*.local
 
 # phpunit
 /.phpunit.cache
@@ -124,3 +115,36 @@ nohup.out
 patch
 
 tsconfig.tsbuildinfo
+
+###> squizlabs/php_codesniffer ###
+/.phpcs-cache
+/phpcs.xml
+###< squizlabs/php_codesniffer ###
+
+###> friendsofphp/php-cs-fixer ###
+/.php-cs-fixer.php
+/.php-cs-fixer.cache
+###< friendsofphp/php-cs-fixer ###
+
+###> liip/imagine-bundle ###
+/public/media/cache/
+###< liip/imagine-bundle ###
+
+###> phpstan/phpstan ###
+phpstan.neon
+###< phpstan/phpstan ###
+
+###> phpunit/phpunit ###
+/phpunit.xml
+.phpunit.result.cache
+###< phpunit/phpunit ###
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###

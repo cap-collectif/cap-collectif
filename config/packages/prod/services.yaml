@@ -4,13 +4,6 @@ imports:
 framework:
     profiler:
         collect: false
-    validation:
-        cache: validator.mapping.cache.doctrine.apc
-    cache:
-        # cache for doctrine https://symfony.com/doc/4.4/cache.html
-        app: cache.adapter.apcu
-        system: cache.adapter.system
-        directory: '%kernel.cache_dir%/pools' # Only used with cache.adapter.filesystem
     http_client:
         scoped_clients: ~
 swiftmailer:

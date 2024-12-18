@@ -51,6 +51,7 @@ describe('Proposal Page', () => {
       cy.get('#proposal-page-tabs-pane-followers').contains('Théo QP')
     })
     it('should allow the author of a proposal to update it', () => {
+      cy.interceptGraphQLOperation({ operationName: 'ProposalPageQuery' })
       cy.task('enable:feature', 'districts')
       cy.directLoginAs('user')
       cy.interceptGraphQLOperation({ operationName: 'ProposalPageQuery' })

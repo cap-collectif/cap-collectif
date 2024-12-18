@@ -1,0 +1,13 @@
+sensio_framework_extra:
+    router:
+        annotations: false
+    cache:
+        # Disable @Cache annotation, please use fos_http_cache
+        annotations: false
+    request:
+        converters: true
+        auto_convert: true
+    view:
+        annotations: true
+    security:
+        annotations: true

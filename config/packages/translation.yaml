@@ -7,11 +7,3 @@ translation_adapter_loco:
       # So we can keep it here.
       api_key: '926rGROkivvAoIO3ZJ0HiOh4529fIca3'
       domains: ['CapcoAppBundle', 'validators']
-
-translation:
-  locales: '%locales%'
-  configs:
-    app:
-      dirs: ['%kernel.project_dir%/src']
-      output_dir: '%kernel.project_dir%/translations'
-      remote_storage: ['php_translation.adapter.loco']

@@ -1,0 +1,13 @@
+stof_doctrine_extensions:
+    default_locale: '%locale%'
+    # Extends default listeners
+    class:
+        sluggable: Capco\AppBundle\Sluggable\SluggableListener
+    orm:
+        default:
+            timestampable: true
+            translatable: false
+            sluggable: true
+            softdeleteable: true
+            loggable: true
+            tree: true

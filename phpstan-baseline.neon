@@ -14556,7 +14556,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AbstractReply.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractReply\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AbstractReply.php
 
@@ -14616,7 +14616,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AbstractVote.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractVote\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AbstractVote\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AbstractVote.php
 
@@ -14651,7 +14651,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfiguration\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfiguration\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AnalysisConfiguration.php
 
@@ -14716,7 +14716,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AnalysisConfigurationProcess.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfigurationProcess\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AnalysisConfigurationProcess\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AnalysisConfigurationProcess.php
 
@@ -14741,7 +14741,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AnonymousUserProposalSmsVote.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AnonymousUserProposalSmsVote\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AnonymousUserProposalSmsVote\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AnonymousUserProposalSmsVote.php
 
@@ -14766,7 +14766,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Answer.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Answer\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Answer\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Answer.php
 
@@ -14816,7 +14816,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/AppendixType.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AppendixType\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\AppendixType\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/AppendixType.php
 
@@ -15116,7 +15116,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/CategoryImage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\CategoryImage\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\CategoryImage\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/CategoryImage.php
 
@@ -15186,7 +15186,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Comment.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Comment\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Comment.php
 
@@ -15581,7 +15581,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousArgument\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousArgument.php
 
@@ -15696,7 +15696,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousVote.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousVote\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateAnonymousVote\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateAnonymousVote.php
 
@@ -15726,7 +15726,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArgument\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateArgument.php
 
@@ -15836,7 +15836,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateArticle.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArticle\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateArticle\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateArticle.php
 
@@ -15856,7 +15856,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Debate/DebateOpinion.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateOpinion\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Debate\\\\DebateOpinion\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Debate/DebateOpinion.php
 
@@ -15896,7 +15896,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/District/AbstractDistrict.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\AbstractDistrict\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\AbstractDistrict\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/AbstractDistrict.php
 
@@ -15946,7 +15946,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/District/EventDistrictPositioner.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\EventDistrictPositioner\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\EventDistrictPositioner\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/EventDistrictPositioner.php
 
@@ -16026,7 +16026,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/District/ProjectDistrictPositioner.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\ProjectDistrictPositioner\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\ProjectDistrictPositioner\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/ProjectDistrictPositioner.php
 
@@ -16186,7 +16186,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Event.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Event\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Event\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Event.php
 
@@ -16446,7 +16446,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/EventReview.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventReview\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventReview\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/EventReview.php
 
@@ -16601,7 +16601,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Font.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Font\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Font\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Font.php
 
@@ -16721,7 +16721,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Group.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Group\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Group\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Group.php
 
@@ -17231,7 +17231,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/MapToken.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MapToken\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MapToken\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MapToken.php
 
@@ -17486,7 +17486,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OfficialResponse\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OfficialResponse\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OfficialResponse.php
 
@@ -17586,7 +17586,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Opinion.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Opinion\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Opinion\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Opinion.php
 
@@ -17851,7 +17851,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionAppendix\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionAppendix\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionAppendix.php
 
@@ -17921,7 +17921,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionModal.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionModal\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionModal\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionModal.php
 
@@ -18311,7 +18311,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/OpinionVersion.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionVersion\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\OpinionVersion\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/OpinionVersion.php
 
@@ -18651,7 +18651,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Organization/Organization.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\Organization\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\Organization\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/Organization.php
 
@@ -18691,7 +18691,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationMember.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationMember\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationMember\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationMember.php
 
@@ -18751,7 +18751,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Organization/PendingOrganizationInvitation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\PendingOrganizationInvitation\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\PendingOrganizationInvitation\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/PendingOrganizationInvitation.php
 
@@ -18786,7 +18786,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Page.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Page.php
 
@@ -18911,7 +18911,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Participant.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Participant\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Participant\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Participant.php
 
@@ -18996,7 +18996,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Post.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Post\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Post.php
 
@@ -19556,7 +19556,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProjectAuthor.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProjectAuthor\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProjectAuthor\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProjectAuthor.php
 
@@ -19751,7 +19751,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Proposal.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Proposal\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Proposal\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Proposal.php
 
@@ -20176,7 +20176,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalAnalysis.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalysis\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalysis\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalAnalysis.php
 
@@ -20256,7 +20256,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalAnalyst.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalyst\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalAnalyst\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalAnalyst.php
 
@@ -20276,7 +20276,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalAssessment.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalAssessment\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalAssessment\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalAssessment.php
 
@@ -20311,7 +20311,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalCategory.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalCategory\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalCategory\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalCategory.php
 
@@ -20446,7 +20446,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalDecision.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalDecision\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalDecision\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalDecision.php
 
@@ -20476,7 +20476,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalDecisionMaker.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalDecisionMaker\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalDecisionMaker\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalDecisionMaker.php
 
@@ -20491,7 +20491,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalEvaluation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalEvaluation\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalEvaluation\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalEvaluation.php
 
@@ -20621,7 +20621,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalForm.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalForm\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalForm\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalForm.php
 
@@ -20736,7 +20736,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalRevision.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalRevision\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalRevision\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalRevision.php
 
@@ -20841,7 +20841,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ProposalSupervisor.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalSupervisor\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ProposalSupervisor\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ProposalSupervisor.php
 
@@ -20861,7 +20861,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/PublicApiToken.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PublicApiToken\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PublicApiToken\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PublicApiToken.php
 
@@ -20961,7 +20961,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Questionnaire.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Questionnaire\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Questionnaire\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Questionnaire.php
 
@@ -21071,7 +21071,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Questions/AbstractQuestion.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Questions\\\\AbstractQuestion\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Questions\\\\AbstractQuestion\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Questions/AbstractQuestion.php
 
@@ -21561,7 +21561,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Responses/AbstractResponse.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Responses\\\\AbstractResponse\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Responses\\\\AbstractResponse\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Responses/AbstractResponse.php
 
@@ -22136,7 +22136,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SmsCredit.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SmsCredit\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SmsCredit\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SmsCredit.php
 
@@ -22156,7 +22156,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SmsOrder.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SmsOrder\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SmsOrder\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SmsOrder.php
 
@@ -22176,7 +22176,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SmsRemainingCreditEmailAlert.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SmsRemainingCreditEmailAlert\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SmsRemainingCreditEmailAlert\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SmsRemainingCreditEmailAlert.php
 
@@ -22526,7 +22526,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Status.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Status\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Status\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Status.php
 
@@ -22626,7 +22626,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Steps\\\\AbstractStep\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Steps/AbstractStep.php
 
@@ -23151,7 +23151,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Theme.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Theme.php
 
@@ -23456,7 +23456,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/UserInvite.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserInvite\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserInvite\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/UserInvite.php
 
@@ -23511,7 +23511,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/UserPhoneVerificationSms.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserPhoneVerificationSms\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\UserPhoneVerificationSms\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/UserPhoneVerificationSms.php
 
@@ -24311,7 +24311,7 @@ parameters:
 			path: src/Capco/AppBundle/EventListener/LocaleSubscriber.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\EventListener\\\\LocaleSubscriber\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\EventListener\\\\LocaleSubscriber\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/EventListener/LocaleSubscriber.php
 
@@ -38716,7 +38716,7 @@ parameters:
 			path: src/Capco/AppBundle/Notifier/QuestionnaireReplyNotifier.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\QuestionnaireReplyNotifier\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\QuestionnaireReplyNotifier\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/QuestionnaireReplyNotifier.php
 
@@ -48546,7 +48546,7 @@ parameters:
 			path: src/Capco/UserBundle/Entity/AbstractUser.php
 
 		-
-			message: "#^Method Capco\\\\Capco\\\\UserBundle\\\\Entity\\\\AbstractUser\\:\\:getLongDate\\(\\) should return string but returns string\\|false\\.$#"
+			message: "#^Method Capco\\\\Capco\\\\UserBundle\\\\Entity\\\\AbstractUser\\:\\:getLongDate\\(\\) should return string but returns bool\\|string\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Entity/AbstractUser.php
 
@@ -51727,16 +51727,6 @@ parameters:
 
 		-
 			message: "#^Generator expects value type Symfony\\\\Component\\\\HttpKernel\\\\Bundle\\\\BundleInterface, object given\\.$#"
-			count: 1
-			path: src/Kernel.php
-
-		-
-			message: "#^Method App\\\\Kernel\\:\\:configureContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Kernel.php
-
-		-
-			message: "#^Method App\\\\Kernel\\:\\:configureRoutes\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Kernel.php
 

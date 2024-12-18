@@ -1,12 +1,10 @@
-_wdt:
+web_profiler_wdt:
     resource: '@WebProfilerBundle/Resources/config/routing/wdt.xml'
     prefix: /_wdt
-    options: { i18n: false }
 
-_profiler:
+web_profiler_profiler:
     resource: '@WebProfilerBundle/Resources/config/routing/profiler.xml'
     prefix: /_profiler
-    options: { i18n: false }
 
 _errors:
     resource: '@TwigBundle/Resources/config/routing/errors.xml'
@@ -22,5 +20,5 @@ _translation_profiler:
     resource: '@TranslationBundle/Resources/config/routing_symfony_profiler.yaml'
     options: { i18n: false }
 
-_main:
-    resource: ../routing.yaml
+main:
+    resource: ../../routes.yaml

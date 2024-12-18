@@ -249,7 +249,7 @@ services:
     Capco\AppBundle\Router\I18nRouter:
         autowire: true
         arguments:
-            $resource: '%kernel.project_dir%/config/routes/routing.yaml'
+            $resource: '%kernel.project_dir%/config/routes.yaml'
             $logger: '@logger'
             $jmsLocaleResolver: '@jms_i18n_routing.locale_resolver.default'
         calls:

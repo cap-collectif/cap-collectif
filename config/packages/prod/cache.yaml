@@ -1,0 +1,12 @@
+framework:
+    cache:
+        app: cache.adapter.apcu
+        system: cache.adapter.system
+        directory: '%kernel.cache_dir%/pools'
+        pools:
+            doctrine.result_cache_pool:
+                adapter: cache.adapter.redis
+                default_lifetime: 25200 # 1week
+            doctrine.system_cache_pool:
+                adapter: cache.adapter.redis
+                default_lifetime: 25200 # 1week

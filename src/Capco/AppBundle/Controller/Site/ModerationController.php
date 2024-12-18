@@ -44,7 +44,7 @@ class ModerationController extends Controller
             !\in_array($reason, $visibleReasons, true)
             && !\in_array($reason, $hiddenReasons, true)
         ) {
-            $this->logger->warn('Unknown trash reason: ' . $reason);
+            $this->logger->warning('Unknown trash reason: ' . $reason);
 
             throw new NotFoundHttpException('This trash reason is not available.');
         }

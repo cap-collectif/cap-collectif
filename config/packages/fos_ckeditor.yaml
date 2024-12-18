@@ -33,27 +33,27 @@ fos_ck_editor:
     toolbars:
         configs:
             admin_toolbar:
-                [
-                    '@clipboard',
-                    '@styles',
-                    '@basicstyles',
-                    '@colors',
-                    '@paragraph',
-                    '@links',
-                    '@insert',
-                    '@document',
-                    '@tools',
-                ]
+              [
+                  '@clipboard',
+                  '@styles',
+                  '@basicstyles',
+                  '@colors',
+                  '@paragraph',
+                  '@links',
+                  '@insert',
+                  '@document',
+                  '@tools',
+              ]
             user_toolbar:
-                [
-                    '@clipboard',
-                    '@user_styles',
-                    '@basicstyles',
-                    '@user_paragraph',
-                    '@user_links',
-                    '@user_insert',
-                    '@tools',
-                ]
+              [
+                  '@clipboard',
+                  '@user_styles',
+                  '@basicstyles',
+                  '@user_paragraph',
+                  '@user_links',
+                  '@user_insert',
+                  '@tools',
+              ]
         items:
             clipboard: ['Undo', 'Redo']
             styles: ['Format', 'FontSize']
@@ -61,22 +61,22 @@ fos_ck_editor:
             basicstyles: ['Bold', 'Italic', 'Underline', 'Strike']
             colors: ['TextColor', 'BGColor']
             paragraph:
-                [
-                    'NumberedList',
-                    'BulletedList',
-                    '-',
-                    'Outdent',
-                    'Indent',
-                    '-',
-                    'Blockquote',
-                    '-',
-                    'JustifyLeft',
-                    'JustifyCenter',
-                    'JustifyRight',
-                    'JustifyBlock',
-                ]
+              [
+                  'NumberedList',
+                  'BulletedList',
+                  '-',
+                  'Outdent',
+                  'Indent',
+                  '-',
+                  'Blockquote',
+                  '-',
+                  'JustifyLeft',
+                  'JustifyCenter',
+                  'JustifyRight',
+                  'JustifyBlock',
+              ]
             user_paragraph:
-                ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
+              ['NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote']
             links: ['Link', 'Unlink', 'Anchor']
             user_links: ['Link', 'Unlink']
             insert: ['Image', 'oembed', 'Iframe', 'Table', 'btgrid', 'HorizontalRule']
