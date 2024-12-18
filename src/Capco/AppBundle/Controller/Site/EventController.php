@@ -7,7 +7,6 @@ use Capco\AppBundle\Helper\EventHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
-use Capco\AppBundle\Utils\RequestGuesser;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -132,36 +131,6 @@ class EventController extends Controller
                 ? 'privacy-policy-accepted-2'
                 : 'privacy-policy-accepted',
         ]);
-
-        if ('POST' === $request->getMethod()) {
-            $registration->setIpAddress(RequestGuesser::getClientIpFromRequest($request));
-            $registration->setUser($user);
-            $form->handleRequest($request);
-            $registration->setConfirmed(!$registration->isConfirmed());
-
-            if ($form->isValid()) {
-                $this->entityManager->persist($registration);
-                $this->entityManager->flush();
-
-                // We create a session for flashBag
-
-                if ($registration->isConfirmed()) {
-                    $flashBag->add(
-                        'success',
-                        $this->tranlator->trans('event_registration.create.register_success')
-                    );
-                } else {
-                    $flashBag->add(
-                        'info',
-                        $this->tranlator->trans('event_registration.create.unregister_success')
-                    );
-                }
-
-                return $this->redirect(
-                    $this->generateUrl('app_event_show', ['slug' => $event->getSlug()])
-                );
-            }
-        }
 
         return [
             'viewerIsAuthor' => $event->getAuthor() === $this->getUser(),
