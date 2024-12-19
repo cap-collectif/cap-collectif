@@ -14,7 +14,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       </p>
     </p>
     <div
-      className="sc-18a669e1-2 fJVLTN"
+      className="sc-81b2b9f2-1 cpHNbh"
       justifyContent="start"
     >
       <a
@@ -38,10 +38,10 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
       </a>
     </div>
     <div
-      className="sc-18a669e1-1 bZGfTZ"
-      justifyContent="start"
+      className="sc-bcXGCL hthoxn"
     >
       <a
+        className="sc-bcXGCL ddVvfA cap-link"
         href="https://franceconnect.gouv.fr/"
         rel="noreferrer"
         target="_blank"
@@ -57,7 +57,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-18a669e1-0 boISKr"
+      className="sc-81b2b9f2-0 eEPGOb"
       type="openId"
     >
       <span
@@ -84,7 +84,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-18a669e1-0 eYPxEi"
+      className="sc-81b2b9f2-0 gdStWa"
       type="cas"
     >
       <span
@@ -111,7 +111,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
   </div>,
   <div>
     <div
-      className="sc-18a669e1-0 ebTWqz"
+      className="sc-81b2b9f2-0 jLeVqj"
       type="saml"
     >
       <span
@@ -135,7 +135,7 @@ exports[`<LoginSocialButtons /> renders all buttons 1`] = `
     </div>
   </div>,
   <hr
-    className="sc-bcXGCL jqxtWM"
+    className="sc-bcXGCL hjoTwp"
   />,
 ]
 `;
@@ -153,7 +153,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 eKCCQm"
+      className="sc-81b2b9f2-0 ggTlLa"
       type="cas"
     >
       <span
@@ -179,7 +179,7 @@ exports[`<LoginSocialButtons /> renders only CAS button 1`] = `
     </div>
   </div>,
   <hr
-    className="sc-bcXGCL jqxtWM"
+    className="sc-bcXGCL hjoTwp"
   />,
 ]
 `;
@@ -191,7 +191,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 lljGXx"
+      className="sc-81b2b9f2-0 lfCfRF"
       type="facebook"
     >
       <span
@@ -215,7 +215,7 @@ exports[`<LoginSocialButtons /> renders only Facebook button 1`] = `
     </div>
   </div>,
   <hr
-    className="sc-bcXGCL jqxtWM"
+    className="sc-bcXGCL hjoTwp"
   />,
 ]
 `;
@@ -234,7 +234,7 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
       </p>
     </p>
     <div
-      className="sc-18a669e1-2 fJVLTN"
+      className="sc-81b2b9f2-1 cpHNbh"
       justifyContent="start"
     >
       <a
@@ -258,10 +258,10 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
       </a>
     </div>
     <div
-      className="sc-18a669e1-1 bZGfTZ"
-      justifyContent="start"
+      className="sc-bcXGCL hthoxn"
     >
       <a
+        className="sc-bcXGCL ddVvfA cap-link"
         href="https://franceconnect.gouv.fr/"
         rel="noreferrer"
         target="_blank"
@@ -276,7 +276,7 @@ exports[`<LoginSocialButtons /> renders only FranceConnect button 1`] = `
     </div>
   </div>,
   <hr
-    className="sc-bcXGCL jqxtWM"
+    className="sc-bcXGCL hjoTwp"
   />,
 ]
 `;
@@ -288,7 +288,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 VWkcL"
+      className="sc-81b2b9f2-0 jHOEmD"
       type="openId"
     >
       <span
@@ -314,7 +314,7 @@ exports[`<LoginSocialButtons /> renders only OpenID button 1`] = `
     </div>
   </div>,
   <hr
-    className="sc-bcXGCL jqxtWM"
+    className="sc-bcXGCL hjoTwp"
   />,
 ]
 `;
@@ -326,7 +326,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 fQwRIx"
+      className="sc-81b2b9f2-0 gPPZMN"
       type="saml"
     >
       <span
@@ -350,7 +350,7 @@ exports[`<LoginSocialButtons /> renders only SAML button 1`] = `
     </div>
   </div>,
   <hr
-    className="sc-bcXGCL jqxtWM"
+    className="sc-bcXGCL hjoTwp"
   />,
 ]
 `;
@@ -362,7 +362,7 @@ exports[`<LoginSocialButtons /> renders without OR separator 1`] = `
   />,
   <div>
     <div
-      className="sc-18a669e1-0 clDWvP"
+      className="sc-81b2b9f2-0 hYZdrj"
       type="openId"
     >
       <span

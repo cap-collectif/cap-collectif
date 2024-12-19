@@ -8,7 +8,7 @@ services:
       - seleniumhub:selenium
       - mailcatcher:mailcatchersmtp
       - cerebro:cerebro
-      - admin-next
+      - nextjs
     environment:
       DOCKER_GID: 100
       BLACKFIRE_SERVER_ID: ${BLACKFIRE_SERVER_ID}
@@ -29,10 +29,10 @@ services:
       - /etc/localtime:/etc/localtime:ro
       - php_sf_cache:/var/www/var/cache
 
-  admin-next:
-    container_name: capco_admin_next_1
-    image: "node:18"
-    user: "node"
+  nextjs:
+    container_name: capco_nextjs_1
+    image: 'node:18'
+    user: 'node'
     working_dir: /var/www/admin-next
     links:
       - redis:redis

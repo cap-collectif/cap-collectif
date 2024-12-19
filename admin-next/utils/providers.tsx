@@ -8,6 +8,7 @@ import getEnvironment from './relay-environement'
 import { AppProvider } from '../components/AppProvider/AppProvider'
 import { LazyMotion, domAnimation } from 'framer-motion'
 import NoSSR from './NoSSR'
+import { GlobalTheme } from '@shared/navbar/NavBar.utils'
 
 type ProvidersProps = {
   featureFlags: FeatureFlags
@@ -15,9 +16,17 @@ type ProvidersProps = {
   viewerSession: ViewerSession
   appVersion: string
   children?: React.ReactNode
+  siteColors?: GlobalTheme
 }
 
-const Providers: React.FC<ProvidersProps> = ({ children, intl, featureFlags, viewerSession, appVersion }) => {
+const Providers: React.FC<ProvidersProps> = ({
+  children,
+  intl,
+  featureFlags,
+  viewerSession,
+  appVersion,
+  siteColors,
+}) => {
   return (
     // @ts-expect-error types inconsistencies between react-relay and relay-runtime
     <RelayEnvironmentProvider environment={getEnvironment(featureFlags)}>
@@ -26,7 +35,7 @@ const Providers: React.FC<ProvidersProps> = ({ children, intl, featureFlags, vie
         <NoSSR>
           {/** @ts-expect-error MAJ DS to make CapUIProvider have valid children props */}
           <CapUIProvider>
-            <AppProvider viewerSession={viewerSession} appVersion={appVersion}>
+            <AppProvider viewerSession={viewerSession} appVersion={appVersion} siteColors={siteColors}>
               <LazyMotion features={domAnimation}>{children}</LazyMotion>
             </AppProvider>
           </CapUIProvider>

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { TabsItemContainer, TabsLink } from '../Ui/TabsBar/styles'
 import useIsMobile from '~/utils/hooks/useIsMobile'
-import NavbarRightQuery from './NavbarRightQuery'
+import NavbarRightQuery from '@shared/navbar/NavbarRightQuery'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export const NavbarRight = () => {

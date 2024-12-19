@@ -7286,6 +7286,7 @@ type Footer {
   legals: FooterLegals
   cookiesPath: String
   legalPath: String
+  privacyPath: String
 }
 
 """An object containing footer legals data."""

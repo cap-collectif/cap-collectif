@@ -4,22 +4,29 @@ import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { Button, CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { useEventListener } from '@shared/hooks/useEventListener'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { ChartModalQuery } from '@relay/ChartModalQuery.graphql'
+import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
+import { ChartModalQuery as Query } from '@relay/ChartModalQuery.graphql'
+import { ChartModal_query$key } from '@relay/ChartModal_query.graphql'
 
 export const openChartModal = 'openChartModal'
 
-export const QUERY = graphql`
-  query ChartModalQuery {
+export const FRAGMENT = graphql`
+  fragment ChartModal_query on Query {
     siteParameter(keyname: "charter.body") {
       value
     }
   }
 `
 
-export const ChartModal: React.FC = () => {
+export const QUERY = graphql`
+  query ChartModalQuery {
+    ...ChartModal_query
+  }
+`
+
+export const ChartModal: React.FC<{ query: ChartModal_query$key }> = ({ query: queryKey }) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
-  const query = useLazyLoadQuery<ChartModalQuery>(QUERY, {})
+  const query = useFragment(FRAGMENT, queryKey)
 
   useEventListener(openChartModal, () => onOpen())
 
@@ -42,6 +49,12 @@ export const ChartModal: React.FC = () => {
       </Modal.Footer>
     </Modal>
   )
+}
+
+export const ChartModalQuery: React.FC = () => {
+  const query = useLazyLoadQuery<Query>(QUERY, {})
+
+  return <ChartModal query={query} />
 }
 
 export default ChartModal

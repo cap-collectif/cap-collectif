@@ -4,9 +4,9 @@ import { Button, Flex, Text, Box } from '@cap-collectif/ui'
 import { graphql, usePaginationFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { OrganizationList_query$key } from '@relay/OrganizationList_query.graphql'
-import { ORGANIZATION_PAGINATION_COUNT } from '../../pages/organizations'
 import CreateOrganizationButton from '../Organizations/CreateOrganizationButton'
 import EmptyMessage from '@ui/Table/EmptyMessage'
+import { ORGANIZATION_PAGINATION_COUNT } from 'pages/admin-next/organizations'
 
 export interface OrganizationListProps {
   query: OrganizationList_query$key

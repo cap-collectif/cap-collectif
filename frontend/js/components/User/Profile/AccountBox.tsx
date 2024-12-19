@@ -7,7 +7,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import AccountForm from './AccountForm'
 import type { GlobalState, Dispatch } from '~/types'
 import type { AccountBox_viewer } from '~relay/AccountBox_viewer.graphql'
-import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
+import type { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 import { accountForm } from '~/redux/modules/user'
 type Props = {
   viewer: AccountBox_viewer

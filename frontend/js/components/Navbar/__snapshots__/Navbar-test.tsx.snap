@@ -9,7 +9,7 @@ exports[`<Navbar /> should render correctly 1`] = `
       fallback={null}
     >
       <ChartModal />
-      <PrivacyModal />
+      <PrivacyModalQuery />
     </Suspense>
     <NavBarQuery>
       <ForwardRef
@@ -32,7 +32,7 @@ exports[`<Navbar /> should render correctly when authenticated 1`] = `
       fallback={null}
     >
       <ChartModal />
-      <PrivacyModal />
+      <PrivacyModalQuery />
     </Suspense>
     <NavBarQuery>
       <ForwardRef
@@ -61,7 +61,7 @@ exports[`<Navbar /> should render correctly with header 1`] = `
       fallback={null}
     >
       <ChartModal />
-      <PrivacyModal />
+      <PrivacyModalQuery />
     </Suspense>
     <NavBarQuery>
       <ForwardRef

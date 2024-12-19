@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import colors from '../../utils/colors'
 import FooterAbout from './FooterAbout'
 import FooterLinks from './FooterLinks'
-import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
+import type { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export type SocialNetwork = {

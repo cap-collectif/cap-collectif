@@ -176,7 +176,7 @@ exports[`<LoginModal /> render correctly 1`] = `
               />
             </div>
             <a
-              className="sc-bcXGCL ckHvhy cap-link"
+              className="sc-bcXGCL bYDxrx cap-link"
               href="/resetting/request"
             >
               global.forgot_password

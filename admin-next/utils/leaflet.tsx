@@ -5,10 +5,11 @@ import { TileLayer } from 'react-leaflet'
 export type District = {
   id: string
   geojson: string
-  border: string
-  background: string
-  displayedOnMap: boolean
+  border?: string
+  background?: string
+  displayedOnMap?: boolean
   titleOnMap?: string
+  slug?: string
 }
 
 export type FormattedDistrict = {
@@ -68,19 +69,24 @@ const parseGeoJson = (district: District) => {
   }
 }
 
-export const formatGeoJsons = (districts: Array<District>) => {
-  let geoJsons: any[] = []
+export const formatGeoJsons = (districts: ReadonlyArray<District>, getAllGeojsons: boolean = false) => {
+  let geoJsons: any = []
+
   if (districts) {
     geoJsons = districts
-      .filter(d => d.geojson && d.displayedOnMap)
+      .filter(d => d.geojson && (d.displayedOnMap || getAllGeojsons))
       .map(d => ({
         district: parseGeoJson(d),
         style: {
           border: d.border,
           background: d.background,
         },
+        titleOnMap: d.titleOnMap || undefined,
+        id: d.id || undefined,
+        slug: d.slug || undefined,
       }))
   }
+
   return geoJsons
 }
 

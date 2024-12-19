@@ -4,7 +4,7 @@ import EditProfileTabs from './EditProfileTabs'
 import Loader from '../../Ui/FeedbacksIndicators/Loader'
 import environment, { graphqlError } from '../../../createRelayEnvironment'
 import type { EditProfileBoxQueryResponse } from '~relay/EditProfileBoxQuery.graphql'
-import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
+import type { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 const query = graphql`
   query EditProfileBoxQuery {
     viewer {

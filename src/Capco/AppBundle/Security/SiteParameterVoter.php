@@ -47,7 +47,29 @@ class SiteParameterVoter extends Voter
 
     private function canView(SiteParameter $siteParameter, ?User $viewer): bool
     {
-        $whiteList = ['login.text.top', 'login.text.bottom', 'charter.body', 'privacy-policy', 'global.site.organization_name', 'global.site.communication_from'];
+        $whiteList = [
+            'login.text.top',
+            'login.text.bottom',
+            'charter.body',
+            'privacy-policy',
+            'global.site.organization_name',
+            'global.site.communication_from',
+            'global.site.fullname',
+            'projects.metadescription',
+            'global.site.embed_js',
+            'snalytical-tracking-scripts-on-all-pages',
+            'ad-scripts-on-all-pages',
+            'projects.jumbotron.title',
+            'projects.jumbotron.body',
+            'projects.content.body',
+            'projects.metadescription',
+            'projects.customcode',
+            'shield.introduction',
+            'cookies-list',
+            'footer.text.title',
+            'footer.text.body',
+            'homepage.metadescription',
+        ];
         $key = $siteParameter->getKeyname();
 
         if (\in_array($key, $whiteList)) {

@@ -4,7 +4,6 @@ import { useIntl } from 'react-intl'
 import { RegistrationButtonQuery } from '@relay/RegistrationButtonQuery.graphql'
 import { RegistrationButton_query$key } from '@relay/RegistrationButton_query.graphql'
 import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
-import { useAnalytics } from 'use-analytics'
 import { useEventListener } from '@shared/hooks/useEventListener'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import RegistrationModal from '@shared/register/RegistrationModal'
@@ -40,7 +39,6 @@ export const RegistrationButton: React.FC<ButtonProps & { query: RegistrationBut
   const { isOpen, onOpen, onClose } = useDisclosure(false)
 
   const registration = useFeatureFlag('registration')
-  const { track } = useAnalytics()
 
   useEventListener(openRegistrationModal, () => onOpen())
 
@@ -55,9 +53,6 @@ export const RegistrationButton: React.FC<ButtonProps & { query: RegistrationBut
         id="registration-button"
         my={2}
         onClick={() => {
-          track('registration_click', {
-            source: 'button',
-          })
           onOpen()
         }}
         variant="secondary"

@@ -72,7 +72,7 @@ export const PrivacyPolicyComponent = ({
         id="privacy-policy"
         onClick={() => dispatchEvent(new Event(openPrivacyModal))}
         name="privacy"
-        fontSize="14px"
+        fontSize={3}
       >
         {intl.formatMessage({ id: 'capco.module.privacy_policy' })}
       </Box>

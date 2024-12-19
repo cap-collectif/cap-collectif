@@ -2,13 +2,12 @@ import React from 'react'
 
 import styled from 'styled-components'
 import type { FooterLink, Legals } from './Footer'
-import SiteLanguageChangeButton from '../Ui/Button/SiteLanguageChangeButton'
 import CapcoPowered from './CapcoPowered'
 import FooterLinksRender from './FooterLinksRender'
-import type { LocaleMap } from '../Ui/Button/SiteLanguageChangeButton'
 import Fetcher from '~/services/Fetcher'
 import CookieMonster from '@shared/utils/CookieMonster'
 import { Flex } from '@cap-collectif/ui'
+import SiteLanguageChangeButton, { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 
 type Props = {
   currentRouteParams: {}

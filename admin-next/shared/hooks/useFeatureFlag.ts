@@ -2,21 +2,6 @@ import { useLazyLoadQuery, graphql } from 'react-relay'
 import invariant from '../utils/invariant'
 import { useFeatureFlagQuery, FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 
-type FeatureFlags = Omit<
-  {
-    [key in FeatureFlagType]: boolean
-  },
-  '%future added value'
->
-
-const query = graphql`
-  query useFeatureFlagQuery {
-    featureFlags {
-      type
-      enabled
-    }
-  }
-`
 export const defaultFeatureFlags: FeatureFlags = {
   report_browers_errors_to_sentry: false,
   login_saml: false,
@@ -98,6 +83,22 @@ export const defaultFeatureFlags: FeatureFlags = {
   full_proposal_card: false,
   multi_consultations: false,
 }
+
+type FeatureFlags = Omit<
+  {
+    [key in FeatureFlagType]: boolean
+  },
+  '%future added value'
+>
+
+const query = graphql`
+  query useFeatureFlagQuery {
+    featureFlags {
+      type
+      enabled
+    }
+  }
+`
 
 type FeatureFlagsEnabled<T> = {
   [key in T as FeatureFlagType]?: boolean

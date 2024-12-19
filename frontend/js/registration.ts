@@ -79,8 +79,6 @@ import ProjectStepPageApp from './startup/ProjectStepPageApp'
 import ProjectsMapViewApp from './startup/ProjectsMapViewApp'
 import AccessDeniedAuthApp from './startup/AccessDeniedAuthApp'
 import AccessDeniedApp from './startup/AccessDeniedApp'
-import OrganizationPageApp from './startup/OrganizationPageApp'
-import DistrictPageApp from './startup/DistrictPageApp'
 import IDFGeoSearchBarApp from './startup/IDFGeoSearchBarApp'
 import NewsLetterPageApp from './startup/NewsLetterPageApp'
 import CarrouselApp from './startup/CarrouselApp'
@@ -154,8 +152,6 @@ ReactOnRails.register({
   ProjectsMapViewApp,
   AccessDeniedAuthApp,
   AccessDeniedApp,
-  OrganizationPageApp,
-  DistrictPageApp,
   NewsLetterPageApp,
   CarrouselApp,
 

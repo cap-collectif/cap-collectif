@@ -1,9 +1,8 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import type { LocaleMap } from '../Button/SiteLanguageChangeButton'
-import SiteLanguageChangeButton from '../Button/SiteLanguageChangeButton'
 import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader'
 import { Button } from '@cap-collectif/ui'
+import SiteLanguageChangeButton, { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 type Props = {
   readonly localeChoiceTranslations: Array<LocaleChoiceTranslation>
   onChange: (arg0: LocaleMap) => void

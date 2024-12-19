@@ -164,12 +164,24 @@ export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean; logoWidth?
 }) => {
   const intl = useIntl()
   const width = logoWidth > 180 ? 180 : logoWidth
+  const {
+    colors: { primary },
+  } = useTheme()
+  const focusColor = primary?.[700] || '#000'
 
   return (
     <Box
       maxWidth={isBigLogo ? 'unset' : pxToRem(width)}
       height={isBigLogo ? pxToRem(88) : pxToRem(33)}
       my={isBigLogo ? 4 : 0}
+      sx={{
+        '>a:focus-visible': { boxShadow: 'none' },
+        '>a:focus-visible > img': {
+          boxShadow: `0 0 0 4px ${focusColor}`,
+          outline: '2px #fff solid',
+          outlineOffset: 0,
+        },
+      }}
     >
       <Box as="a" href="/">
         <Box

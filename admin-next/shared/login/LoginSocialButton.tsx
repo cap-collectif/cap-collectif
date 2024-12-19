@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
-import { Text } from '@cap-collectif/ui'
+import { Box, Link, Text } from '@cap-collectif/ui'
 import SocialIcon from '@shared/ui/LegacyIcons/SocialIcon'
 import getBaseUrl from '@shared/utils/getBaseUrl'
 
@@ -149,6 +149,11 @@ const LinkButton = styled.div<LinkButtonProps>`
     display: flex;
     align-items: center;
 
+    &:focus,
+    &:hover {
+      color: ${props => getLabelColorForType(props.type, props.labelColor)};
+    }
+
     span {
       margin-left: 16px;
     }
@@ -162,21 +167,7 @@ const LinkButton = styled.div<LinkButtonProps>`
     }
   }
 `
-export const FranceConnectLink = styled.div<{
-  justifyContent: string
-}>`
-  margin-top: 8px;
-  color: #000091;
-  a:hover {
-    color: #000091;
-  }
-  font-size: 13px;
-  text-align: ${props => props.justifyContent};
-  hr {
-    margin-top: 8px;
-    margin-bottom: 8px;
-  }
-`
+
 export const FranceConnectButton = styled.div<{
   justifyContent: string
 }>`
@@ -205,6 +196,9 @@ const GrandLyonConnectButton = styled.div`
     width: 100%;
   }
 `
+
+const FC_COLOR = '#000091'
+
 export const LoginSocialButton = ({
   type,
   switchUserMode,
@@ -258,10 +252,16 @@ export const LoginSocialButton = ({
               )}
             </a>
           </FranceConnectButton>
-          <FranceConnectLink justifyContent={justifyContent}>
-            <a href="https://franceconnect.gouv.fr/" target="_blank" rel="noreferrer">
+          <Box mt={2} fontSize={2}>
+            <Link
+              color={FC_COLOR}
+              _hover={{ color: FC_COLOR }}
+              href="https://franceconnect.gouv.fr/"
+              target="_blank"
+              rel="noreferrer"
+            >
               <FormattedMessage id="what-is-fc" />
-            </a>
+            </Link>
             {!noHR ? (
               <Text textAlign="center" as="div" fontWeight="bold" color="neutral-gray.700" my={5}>
                 {intl.formatMessage({
@@ -269,7 +269,7 @@ export const LoginSocialButton = ({
                 })}
               </Text>
             ) : null}
-          </FranceConnectLink>
+          </Box>
         </>
       ) : (
         <LinkButton type={type} labelColor={colorText} buttonColor={primaryColor}>

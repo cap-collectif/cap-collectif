@@ -19,7 +19,7 @@ import Profile from './Profile'
 import ChangeUsername from './ChangeUsername'
 import Media from '../../Ui/Medias/Media/Media'
 import { loginWithOpenID } from '~/redux/modules/default'
-import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
+import type { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 import config from '~/config'
 type Props = {
   readonly features: FeatureToggles

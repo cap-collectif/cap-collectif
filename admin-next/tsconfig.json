@@ -45,18 +45,25 @@
         "./shared/*"
       ]
     },
-    "incremental": true
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ]
   },
   "include": [
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
     "**/*.graphql",
-    "**/*.json"
+    "**/*.json",
+    ".next/types/**/*.ts"
   ],
   "exclude": [
     "../frontend/js/**/*",
     "**/*.test.ts*",
     "node_modules",
+    ".next"
   ]
 }

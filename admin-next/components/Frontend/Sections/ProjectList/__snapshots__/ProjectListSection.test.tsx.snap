@@ -1,0 +1,439 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ProjectListSection /> should render correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <section
+    className="sc-bcXGCL cklhXU project-list-section"
+  >
+    <div
+      className="sc-bcXGCL dWgdoT"
+    >
+      <div
+        className="sc-bcXGCL bvdqCM project-list-section-filters"
+      >
+        <div
+          className="sc-bcXGCL eSlAOy"
+        >
+          <div
+            className="sc-bcXGCL dRLzSk"
+          >
+            <div
+              className="cap-select css-b62m3t-container"
+              onKeyDown={[Function]}
+            >
+              <span
+                className="css-1f43avz-a11yText-A11yText"
+                id="react-select-2-live-region"
+              />
+              <span
+                aria-atomic="false"
+                aria-live="polite"
+                aria-relevant="additions text"
+                className="css-1f43avz-a11yText-A11yText"
+              />
+              <div
+                className="cap-select__control css-17ru8n9-control"
+                onMouseDown={[Function]}
+                onTouchEnd={[Function]}
+              >
+                <div
+                  className="cap-select__value-container cap-select__value-container--has-value css-n2ktue-ValueContainer"
+                >
+                  <div
+                    className="cap-select__single-value css-93q9sa-singleValue"
+                  >
+                    opinion.sort.last
+                  </div>
+                  <div
+                    className="cap-select__input-container css-nplzcd-Input"
+                    data-value=""
+                  >
+                    <input
+                      aria-autocomplete="list"
+                      aria-controls="react-select-2-listbox"
+                      aria-expanded={false}
+                      aria-haspopup={true}
+                      aria-owns="react-select-2-listbox"
+                      autoCapitalize="none"
+                      autoComplete="off"
+                      autoCorrect="off"
+                      className="cap-select__input"
+                      disabled={false}
+                      id="react-select-2-input"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      role="combobox"
+                      spellCheck="false"
+                      style={
+                        {
+                          "background": 0,
+                          "border": 0,
+                          "color": "inherit",
+                          "font": "inherit",
+                          "gridArea": "1 / 2",
+                          "label": "input",
+                          "margin": 0,
+                          "minWidth": "2px",
+                          "opacity": 1,
+                          "outline": 0,
+                          "padding": 0,
+                          "width": "100%",
+                        }
+                      }
+                      tabIndex={0}
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                </div>
+                <svg
+                  className="sc-bcXGCL sc-eJDTud jThTHJ knzWyK cap-icon"
+                  fill="none"
+                  style={
+                    {
+                      "cursor": "pointer",
+                    }
+                  }
+                  viewBox="0 0 12 7"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 7c.164 0 .326-.032.475-.095.15-.063.283-.155.392-.27l4.916-5.216a.827.827 0 00.214-.62.845.845 0 00-.311-.584.968.968 0 00-.66-.214.954.954 0 00-.632.277l-4.3 4.562a.133.133 0 01-.188 0L1.606.278A.954.954 0 00.974.001a.967.967 0 00-.66.214A.845.845 0 00.003.8a.827.827 0 00.214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </div>
+            </div>
+          </div>
+          <button
+            aria-controls="id-g"
+            aria-expanded={false}
+            aria-haspopup="dialog"
+            className="sc-bcXGCL jwfTRn cap-popover__disclosure"
+            id="project-button-filter"
+            onClick={[Function]}
+            onClickCapture={[Function]}
+            onKeyDown={[Function]}
+            onKeyPressCapture={[Function]}
+            onKeyUp={[Function]}
+            onMouseDown={[Function]}
+            onMouseDownCapture={[Function]}
+            type="button"
+          >
+            <div
+              style={
+                {
+                  "marginLeft": 0,
+                  "marginTop": 0,
+                }
+              }
+            >
+              label_filters
+            </div>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
+              fill="none"
+              viewBox="0 0 12 7"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M6 7c.164 0 .326-.032.475-.095.15-.063.283-.155.392-.27l4.916-5.216a.827.827 0 00.214-.62.845.845 0 00-.311-.584.968.968 0 00-.66-.214.954.954 0 00-.632.277l-4.3 4.562a.133.133 0 01-.188 0L1.606.278A.954.954 0 00.974.001a.967.967 0 00-.66.214A.845.845 0 00.003.8a.827.827 0 00.214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097z"
+                fill="currentColor"
+              />
+            </svg>
+          </button>
+          <div
+            className="sc-GhiAJ cJIEss"
+            data-dialog={true}
+            hidden={true}
+            id="id-g"
+            onAnimationEnd={[Function]}
+            onBlur={[Function]}
+            onKeyDown={[Function]}
+            onTransitionEnd={[Function]}
+            role="dialog"
+            style={
+              {
+                "display": "none",
+                "left": "100%",
+                "position": "fixed",
+                "top": "100%",
+                "zIndex": 1000,
+              }
+            }
+            tabIndex={0}
+          />
+        </div>
+        <div
+          className="sc-bcXGCL kuwEGN"
+        >
+          <div
+            className="cap-search css-b62m3t-container"
+            onKeyDown={[Function]}
+          >
+            <span
+              className="css-1f43avz-a11yText-A11yText"
+              id="react-select-3-live-region"
+            />
+            <span
+              aria-atomic="false"
+              aria-live="polite"
+              aria-relevant="additions text"
+              className="css-1f43avz-a11yText-A11yText"
+            />
+            <div
+              className="cap-search__control css-djxupi-control"
+              onMouseDown={[Function]}
+              onTouchEnd={[Function]}
+            >
+              <svg
+                className="sc-bcXGCL sc-eJDTud bvvUsr hEjMCZ cap-icon"
+                fill="none"
+                viewBox="0 0 11 11"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path
+                  d="M4.333 7.667a3.333 3.333 0 100-6.667 3.333 3.333 0 000 6.667zM6.69 6.69l3.893 3.893"
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth={0.8}
+                />
+              </svg>
+              <div
+                className="cap-search__value-container css-wcwe9b-ValueContainer"
+              >
+                <div
+                  className="cap-search__placeholder css-1crio4g-placeholder"
+                  id="react-select-3-placeholder"
+                >
+                  global.menu.search
+                </div>
+                <div
+                  className="cap-search__input-container css-nplzcd-Input"
+                  data-value=""
+                >
+                  <input
+                    aria-autocomplete="list"
+                    aria-controls="react-select-3-listbox"
+                    aria-describedby="react-select-3-placeholder"
+                    aria-expanded={false}
+                    aria-haspopup={true}
+                    aria-owns="react-select-3-listbox"
+                    autoCapitalize="none"
+                    autoComplete="off"
+                    autoCorrect="off"
+                    className="cap-search__input"
+                    disabled={false}
+                    id="react-select-3-input"
+                    onBlur={[Function]}
+                    onChange={[Function]}
+                    onFocus={[Function]}
+                    role="combobox"
+                    spellCheck="false"
+                    style={
+                      {
+                        "background": 0,
+                        "border": 0,
+                        "color": "inherit",
+                        "font": "inherit",
+                        "gridArea": "1 / 2",
+                        "label": "input",
+                        "margin": 0,
+                        "minWidth": "2px",
+                        "opacity": 1,
+                        "outline": 0,
+                        "padding": 0,
+                        "width": "100%",
+                      }
+                    }
+                    tabIndex={0}
+                    type="text"
+                    value=""
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bcXGCL fEyafm project-list-section-projects"
+      >
+        <div
+          className="sc-bcXGCL iNMwnq"
+        >
+          <div
+            className="sc-bcXGCL gdJCyL"
+          >
+            <a
+              className="sc-bcXGCL sc-6287370a-1 gXbnnu ajINc project-card"
+              href="site.com/BPH"
+            >
+              <div
+                className="sc-bcXGCL cgbMqJ cap-card"
+              >
+                <img
+                  alt=""
+                  className="sc-bcXGCL gZzpjw sc-6287370a-2 eLAgCe"
+                  loading="lazy"
+                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
+                  srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-"url"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-"url"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
+         "
+                />
+                <div
+                  className="sc-bcXGCL bHUozq sc-c3cb98f2-0 kWYbsx"
+                >
+                  <div
+                    className="sc-bcXGCL bBcjNr sc-fXqqsB gHWJqw cap-tag"
+                    style={{}}
+                    title="step.status.future"
+                  >
+                    <span
+                      className="sc-bcXGCL gmgVsa cap-text"
+                    >
+                      step.status.future
+                    </span>
+                  </div>
+                  <div
+                    className="sc-bcXGCL fnmjmD sc-fXqqsB gHWJqw cap-tag sc-c3cb98f2-2 iJSamO"
+                    style={{}}
+                    title=""
+                  >
+                    <svg
+                      className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
+                      fill="none"
+                      viewBox="0 0 10 12"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
+                        fill="currentColor"
+                      />
+                    </svg>
+                  </div>
+                </div>
+                <div
+                  className="sc-bcXGCL dxmZfn"
+                >
+                  <h4
+                    className="sc-bcXGCL cgpuMW cap-heading"
+                    title="BPH"
+                  >
+                    BPH
+                  </h4>
+                  <div
+                    className="sc-bcXGCL ffElEZ"
+                  >
+                    <div
+                      className="sc-bcXGCL iSWnwP"
+                    >
+                      <div
+                        className="sc-bcXGCL bLXbAu"
+                      >
+                        <svg
+                          className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                          fill="none"
+                          viewBox="0 0 11 12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M4.333 11.334H2a1 1 0 01-1-1M9 5V1.667a.333.333 0 00-.333-.334H2.333C1.597 1.333 1 1.93 1 2.667v7.667a1 1 0 011-1h2.333"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={0.8}
+                          />
+                          <path
+                            clipRule="evenodd"
+                            d="M7.978 6.191l.684 1.476h1.333a.327.327 0 01.23.57L9.07 9.376l.641 1.474a.35.35 0 01-.497.436l-1.552-.871-1.55.871a.35.35 0 01-.498-.436l.641-1.473L5.1 8.238a.326.326 0 01.228-.571h1.334l.686-1.477a.356.356 0 01.63.001z"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={0.8}
+                          />
+                        </svg>
+                        <span
+                          className="sc-c3cb98f2-3 fZhRUf"
+                        >
+                          &lt;mock-value-for-field-"title"&gt;
+                        </span>
+                      </div>
+                       
+                      <div
+                        className="sc-bcXGCL bLXbAu"
+                      >
+                        <svg
+                          className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                          fill="none"
+                          viewBox="0 0 9 12"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={0.8}
+                          />
+                          <path
+                            d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={0.8}
+                          />
+                        </svg>
+                        <span
+                          className="sc-c3cb98f2-3 ffjWFk"
+                        >
+                          &lt;mock-value-for-field-"name"&gt;
+                        </span>
+                      </div>
+                      <div
+                        className="sc-bcXGCL bLXbAu"
+                      >
+                        <svg
+                          className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                          fill="none"
+                          viewBox="0 0 12 10"
+                          xmlns="http://www.w3.org/2000/svg"
+                        >
+                          <path
+                            clipRule="evenodd"
+                            d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={0.8}
+                          />
+                        </svg>
+                        <span
+                          className="sc-c3cb98f2-3 ffjWFk"
+                        >
+                          &lt;mock-value-for-field-"title"&gt;
+                        </span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>,
+]
+`;

@@ -4,7 +4,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import type { PrivacyModalTestQuery } from '@relay/PrivacyModalTestQuery.graphql'
-import { PrivacyModal } from './PrivacyModal'
+import { PrivacyModalQuery } from './PrivacyModal'
 
 jest.mock('@liinkiing/react-hooks', () => ({
   useDisclosure: () => ({ isOpen: true, onOpen: () => {}, onClose: () => {} }),
@@ -38,7 +38,7 @@ describe('<PrivacyModal />', () => {
     const TestRenderer = props => {
       const data = useLazyLoadQuery<PrivacyModalTestQuery>(query, {})
       if (!data) return null
-      return <PrivacyModal query={data} {...props} />
+      return <PrivacyModalQuery query={data} {...props} />
     }
 
     TestComponent = props => (

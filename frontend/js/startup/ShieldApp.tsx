@@ -7,7 +7,7 @@ const Shield = lazy(
   () =>
     import(
       /* webpackChunkName: "Shield" */
-      '~/components/Page/ShieldPage'
+      '@shared/shield/ShieldPage'
     ),
 )
 export default (props: { chartBody: string | null | undefined }) => {

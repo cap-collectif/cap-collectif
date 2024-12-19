@@ -70,7 +70,7 @@ export const LoginSocialButtons: FC<{ query: LoginSocialButtons_query$key }> = (
             }
           })}
       {hasLoginSaml && <LoginSocialButton type="saml" justifyContent="start" />}
-      {!hasSsoByPassAuth && <Box as="hr" my={5} />}
+      {!hasSsoByPassAuth && <Box as="hr" my={5} borderColor="neutral-gray.200" color="neutral-gray.200" />}
     </>
   )
 }

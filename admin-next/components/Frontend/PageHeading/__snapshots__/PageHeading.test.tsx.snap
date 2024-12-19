@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageHeading /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cklhXU"
+  >
+    <div>
+      <div
+        className="sc-bcXGCL iFPupd"
+      >
+        <div
+          className="sc-bcXGCL dWgdoT"
+        >
+          <h1
+            className="sc-bcXGCL xnsAV cap-heading"
+          >
+            Liste des projets
+          </h1>
+          <div
+            className="sc-bcXGCL dKOzIE cap-text"
+          >
+            Une belle liste
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bcXGCL dBhpYb"
+      >
+        <div
+          className="sc-bcXGCL dWgdoT"
+        >
+          <div
+            className="sc-bcXGCL bhHcuP cap-text"
+          >
+            <div
+              className=" ql-editor wysiwyg-render"
+              dangerouslySetInnerHTML={
+                {
+                  "__html": "Lorem ipsum dolor....",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;

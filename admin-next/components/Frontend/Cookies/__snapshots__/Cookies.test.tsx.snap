@@ -1,0 +1,189 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<CookieBanner /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kDQdFj cookie-banner"
+    id="cookie-banner"
+  >
+    <div
+      className="sc-bcXGCL cYihwT cookie-text-wrapper"
+    >
+      <p
+        className="sc-bcXGCL cPAipC cap-text"
+        style={
+          {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+      >
+        cookies-text
+      </p>
+      <button
+        className="sc-bcXGCL jQoihB"
+        id="cookies-parameters"
+        onClick={[Function]}
+        type="button"
+      >
+        setup-cookies
+      </button>
+    </div>
+    <div
+      className="sc-bcXGCL OdDzF cookie-button"
+    >
+      <button
+        className="sc-bcXGCL PUQzN"
+        id="cookie-decline-button"
+        onClick={[Function]}
+        type="button"
+      >
+        decline-optional-cookies
+      </button>
+      <button
+        className="sc-bcXGCL jXSoef btn-cookie-consent"
+        id="cookie-consent"
+        onClick={[Function]}
+        type="button"
+      >
+        accept-everything
+      </button>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<CookieContent /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div>
+    <div>
+      <div
+        className=" ql-editor wysiwyg-render"
+        dangerouslySetInnerHTML={
+          {
+            "__html": "cookies-page-texte-tmp-part1 {"platformLink":"http://localhost","cookieType":3}",
+          }
+        }
+      />
+    </div>
+    <div
+      className=" ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "cookies-page-texte-part1-2 {"platformLink":"http://localhost"}",
+        }
+      }
+    />
+    <div
+      className=" ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "cookies-page-texte-tmp-part1-3 {"platformLink":"http://localhost","nbCookies":3}",
+        }
+      }
+    />
+    <div
+      className=" ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "blablablabla cookies",
+        }
+      }
+    />
+    <div
+      className=" ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "cookies-page-texte-part2 {"platformLink":"http://localhost"}",
+        }
+      }
+    />
+  </div>,
+]
+`;
+
+exports[`<CookieManager /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cklhXU"
+  >
+    <div
+      className="sc-bcXGCL kDQdFj cookie-banner"
+      id="cookie-banner"
+    >
+      <div
+        className="sc-bcXGCL cYihwT cookie-text-wrapper"
+      >
+        <p
+          className="sc-bcXGCL cPAipC cap-text"
+          style={
+            {
+              "marginLeft": 0,
+              "marginTop": 0,
+            }
+          }
+        >
+          cookies-text
+        </p>
+        <button
+          className="sc-bcXGCL jQoihB"
+          id="cookies-parameters"
+          onClick={[Function]}
+          type="button"
+        >
+          setup-cookies
+        </button>
+      </div>
+      <div
+        className="sc-bcXGCL OdDzF cookie-button"
+      >
+        <button
+          className="sc-bcXGCL PUQzN"
+          id="cookie-decline-button"
+          onClick={[Function]}
+          type="button"
+        >
+          decline-optional-cookies
+        </button>
+        <button
+          className="sc-bcXGCL jXSoef btn-cookie-consent"
+          id="cookie-consent"
+          onClick={[Function]}
+          type="button"
+        >
+          accept-everything
+        </button>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<CookieModal /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="cookie-policy"
+  >
+    <button
+      className="sc-bcXGCL cklhXU"
+      id="cookies-modal-button"
+      onClick={[Function]}
+      type="button"
+    >
+      cookies
+    </button>
+  </div>,
+]
+`;

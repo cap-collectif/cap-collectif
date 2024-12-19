@@ -17,6 +17,7 @@ const customJestConfig = {
     '^mutations/(.*)$': '<rootDir>/mutations/$1',
     '^styles/(.*)$': '<rootDir>/styles/$1',
     '~(.*)$': '<rootDir>/../frontend/js/$1',
+    '^src/(.*)$': '<rootDir>/src/$1',
   },
   testRegex: ['\\.test.ts$', '\\.test.tsx$', '\\-test.ts$', '\\-test.tsx$'],
   clearMocks: true,

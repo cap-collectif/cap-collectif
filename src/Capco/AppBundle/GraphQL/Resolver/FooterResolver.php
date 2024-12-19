@@ -20,9 +20,9 @@ class FooterResolver implements QueryInterface
         $socialNetworks = $this->footerSocialNetworksResolver->getFooterSocialNetworks();
         $links = $this->footerSocialNetworksResolver->getFooterLinks();
         $legals = $this->footerSocialNetworksResolver->getLegalsPages();
-        $cookiesPath = $this->router->generate('app_cookies', [], RouterInterface::ABSOLUTE_URL);
-        $privacyPath = $this->router->generate('app_privacy', [], RouterInterface::ABSOLUTE_URL);
-        $legalPath = $this->router->generate('app_legal', [], RouterInterface::ABSOLUTE_URL);
+        $cookiesPath = $this->router->generate('app_cookies', [], RouterInterface::ABSOLUTE_PATH);
+        $privacyPath = $this->router->generate('app_privacy', [], RouterInterface::ABSOLUTE_PATH);
+        $legalPath = $this->router->generate('app_legal', [], RouterInterface::ABSOLUTE_PATH);
 
         return [
             'socialNetworks' => $socialNetworks,

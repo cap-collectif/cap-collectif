@@ -13,3 +13,5 @@ Footer:
                 type: 'String'
             legalPath:
                 type: 'String'
+            privacyPath:
+                type: 'String'

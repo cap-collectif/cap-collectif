@@ -402,7 +402,6 @@ InternalQuery:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\DefaultLocaleQueryResolver")'
             fonts:
                 description: 'List all available fonts on the platform.'
-                access: "@=hasRole('ROLE_ADMIN')"
                 type: '[InternalFont!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", args)'
             notificationsFromEmail:

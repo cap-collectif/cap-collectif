@@ -4,7 +4,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { createMockEnvironment, MockPayloadGenerator } from 'relay-test-utils'
 import { addsSupportForPortals, RelaySuspensFragmentTest } from 'tests/testUtils'
 import type { ChartModalTestQuery } from '@relay/ChartModalTestQuery.graphql'
-import { ChartModal } from './ChartModal'
+import { ChartModalQuery } from './ChartModal'
 
 jest.mock('@liinkiing/react-hooks', () => ({
   useDisclosure: () => ({ isOpen: true, onOpen: () => {}, onClose: () => {} }),
@@ -38,7 +38,7 @@ describe('<ChartModal />', () => {
     const TestRenderer = props => {
       const data = useLazyLoadQuery<ChartModalTestQuery>(query, {})
       if (!data) return null
-      return <ChartModal query={data} {...props} />
+      return <ChartModalQuery query={data} {...props} />
     }
 
     TestComponent = props => (

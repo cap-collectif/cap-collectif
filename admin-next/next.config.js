@@ -6,7 +6,7 @@
 const nextConfig = {
   // TODO enable this
   reactStrictMode: false,
-  basePath: process.env.SYMFONY_ENV === 'prod' ? '/admin-next' : '',
+  basePath: '',
   env: {
     PRODUCTION: String(process.env.SYMFONY_ENV === 'prod'),
   },

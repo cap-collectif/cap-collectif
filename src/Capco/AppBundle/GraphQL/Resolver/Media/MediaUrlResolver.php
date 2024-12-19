@@ -39,6 +39,18 @@ class MediaUrlResolver implements QueryInterface
             return $path;
         }
 
+        if ('relative' === $format) {
+            $path =
+                '/' .
+                'media' .
+                $this->mediaProvider->generatePublicUrl($media, 'reference');
+            if ($this->assetsHost && !$isExportContext) {
+                $path = str_replace($this->routerRequestContextHost, $this->assetsHost, $path);
+            }
+
+            return $path;
+        }
+
         return $this->assetsHost
             ? str_replace(
                 $this->routerRequestContextHost,

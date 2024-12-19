@@ -7,6 +7,7 @@ import useWindowWidth from '@shared/hooks/useWindowWidth'
 
 import { useIntl } from 'react-intl'
 import { NavBarTheme } from './NavBar.utils'
+import { pxToRem } from '@shared/utils/pxToRem'
 
 type LinkOrMenu = LinkProps & { children?: readonly LinkProps[] }
 const navBarZIndex = 1040
@@ -50,7 +51,7 @@ const NavBarContent = ({
 
   return (
     <Flex
-      px={[0, 0, isExtended ? 2 : 8]}
+      px={[0, 0, isExtended ? 4 : 8]}
       ref={containerRef}
       flex={1}
       flexWrap="wrap"
@@ -62,6 +63,7 @@ const NavBarContent = ({
         if (index >= Number(overflowIndex)) return null
         return link.children.length ? (
           <NavBar.Menu
+            key={index}
             ref={handleItemWidth}
             links={link.children}
             title={link.title}
@@ -74,6 +76,7 @@ const NavBarContent = ({
           />
         ) : (
           <NavBar.Link
+            key={index}
             ref={handleItemWidth}
             title={link.title}
             href={link.href}
@@ -112,7 +115,7 @@ const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth, show
     >
       <Flex direction="column" bg={theme.menuBackground} overflow="visible" id="main_navbar" width="100%">
         <NavBar.SkipLinks />
-        <Flex direction="column" zIndex={navBarZIndex} maxWidth="91.43rem" width="100%" margin="auto">
+        <Flex direction="column" zIndex={navBarZIndex} maxWidth={pxToRem(1280)} width="100%" margin="auto">
           <Flex px={6} justifyContent="space-between" alignItems="center" minHeight="4rem">
             <Flex alignItems="center">
               <NavBar.Logo src={logoSrc} isBigLogo={isBigLogo} logoWidth={logoWidth} />

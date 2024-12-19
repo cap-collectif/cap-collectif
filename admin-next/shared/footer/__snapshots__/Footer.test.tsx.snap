@@ -1,0 +1,171 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Footer /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <footer
+    className="sc-bcXGCL ezblbd"
+    role="contentinfo"
+  >
+    <div
+      className="sc-bcXGCL hXSsey"
+    >
+      <div
+        className="sc-bcXGCL ijBrLk"
+      >
+        <div
+          className="sc-bcXGCL hQzTcl"
+        >
+          <h3
+            className="sc-bcXGCL fyYbAO cap-heading"
+          >
+            À Propos
+          </h3>
+          <div
+            className=" ql-editor wysiwyg-render"
+            dangerouslySetInnerHTML={
+              {
+                "__html": "La démocratie et tout et tout",
+              }
+            }
+          />
+        </div>
+        <div
+          className="sc-bcXGCL fBWIar"
+        >
+          <ul
+            className="sc-bcXGCL cegVEi"
+          >
+            <li>
+              <div
+                className="sc-bcXGCL gdJCyL"
+              >
+                <div
+                  className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
+                />
+                <a
+                  href="x.com/cap-collectif"
+                >
+                  <span>
+                     X
+                  </span>
+                </a>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div
+      className="sc-bcXGCL hhRZcC"
+      id="footer-links"
+    >
+      <div
+        className="sc-bcXGCL gOZrsD"
+      >
+        <ul
+          className="sc-bcXGCL bZQCbZ"
+        >
+          <li>
+            <a
+              href="/cookies"
+            >
+              cookies
+            </a>
+          </li>
+          <li>
+            <span
+              className="sc-bcXGCL vSpCT"
+            >
+              |
+            </span>
+            <div
+              className="sc-bcXGCL dFTygi"
+            >
+              <button
+                className="sc-bcXGCL cklhXU"
+                id="cookies-management"
+                onClick={[Function]}
+                type="button"
+              >
+                cookies-management
+              </button>
+            </div>
+          </li>
+          <li>
+            <span
+              className="sc-bcXGCL vSpCT"
+            >
+              |
+            </span>
+            <a
+              href="/privacy"
+            >
+              privacy-policy
+            </a>
+          </li>
+          <li>
+            <span
+              className="sc-bcXGCL vSpCT"
+            >
+              |
+            </span>
+            <a
+              href="/legals"
+            >
+              legal-mentions
+            </a>
+          </li>
+          <li>
+            <span
+              className="sc-bcXGCL vSpCT"
+            >
+              |
+            </span>
+            <a
+              href="/faq"
+            >
+              FAQ
+            </a>
+            <span
+              className="sc-bcXGCL vSpCT"
+            >
+              |
+            </span>
+          </li>
+          <li>
+            <a
+              href="/contact"
+            >
+              Contact
+            </a>
+          </li>
+        </ul>
+      </div>
+      <hr
+        className="sc-bcXGCL kXIjVN"
+      />
+      <div
+        className="sc-bcXGCL jNQjOz"
+      >
+        powered_by
+        <img
+          alt="cap collectif logo"
+          className="sc-bcXGCL bPbIbC"
+          src="/favicon-64x64.png"
+        />
+        <a
+          className="sc-bcXGCL fJMXFv"
+          href="https://cap-collectif.com"
+        >
+          <span>
+            Cap Collectif
+          </span>
+        </a>
+      </div>
+    </div>
+  </footer>,
+]
+`;

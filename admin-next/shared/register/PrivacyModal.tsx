@@ -1,25 +1,33 @@
 import React, { FC } from 'react'
 import { useDisclosure } from '@liinkiing/react-hooks'
 import { useIntl } from 'react-intl'
-import { graphql, useLazyLoadQuery } from 'react-relay'
-import { PrivacyModalQuery } from '@relay/PrivacyModalQuery.graphql'
+import { graphql, useFragment, useLazyLoadQuery } from 'react-relay'
+import { PrivacyModalQuery as Query } from '@relay/PrivacyModalQuery.graphql'
+import { PrivacyModal_query$key } from '@relay/PrivacyModal_query.graphql'
+
 import { Button, CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { useEventListener } from '@shared/hooks/useEventListener'
 
 export const openPrivacyModal = 'openPrivacyModal'
 
-export const QUERY = graphql`
-  query PrivacyModalQuery {
-    siteParameter(keyname: "privacy-policy") {
+export const FRAGMENT = graphql`
+  fragment PrivacyModal_query on Query {
+    privacy: siteParameter(keyname: "privacy-policy") {
       value
     }
   }
 `
 
-export const PrivacyModal: FC = () => {
+export const QUERY = graphql`
+  query PrivacyModalQuery {
+    ...PrivacyModal_query
+  }
+`
+
+export const PrivacyModal: FC<{ query: PrivacyModal_query$key }> = ({ query: queryKey }) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
-  const query = useLazyLoadQuery<PrivacyModalQuery>(QUERY, {})
+  const query = useFragment(FRAGMENT, queryKey)
   const intl = useIntl()
 
   useEventListener(openPrivacyModal, () => onOpen())
@@ -39,7 +47,7 @@ export const PrivacyModal: FC = () => {
         <Heading>{intl.formatMessage({ id: 'privacy-policy' })}</Heading>
       </Modal.Header>
       <Modal.Body>
-        <WYSIWYGRender value={query.siteParameter.value} />
+        <WYSIWYGRender value={query.privacy.value} />
       </Modal.Body>
       <Modal.Footer className="privacy-policy">
         <Button variantSize="big" variant="secondary" onClick={onClose}>
@@ -50,4 +58,10 @@ export const PrivacyModal: FC = () => {
   )
 }
 
-export default PrivacyModal
+export const PrivacyModalQuery: React.FC = () => {
+  const query = useLazyLoadQuery<Query>(QUERY, {})
+
+  return <PrivacyModal query={query} />
+}
+
+export default PrivacyModalQuery

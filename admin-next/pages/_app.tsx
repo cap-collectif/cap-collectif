@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import type { AppProps } from 'next/app'
 import moment from 'moment'
-import Providers from '../utils/providers'
+import Providers from '@utils/providers'
 import GlobalCSS from '../styles/GlobalCSS'
 import Fonts from '../styles/Fonts'
 import { getOnlyLanguage } from '@utils/locale-helper'

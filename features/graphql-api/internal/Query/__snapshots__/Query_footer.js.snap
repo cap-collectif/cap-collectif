@@ -3,8 +3,8 @@
 exports[`Internal|Query footer Get Footer data 1`] = `
 Object {
   "footer": Object {
-    "cookiesPath": "https://capco.test/cookies-page",
-    "legalPath": "https://capco.test/legal",
+    "cookiesPath": "/cookies-page",
+    "legalPath": "/legal",
     "legals": Object {
       "cookies": true,
       "legal": true,

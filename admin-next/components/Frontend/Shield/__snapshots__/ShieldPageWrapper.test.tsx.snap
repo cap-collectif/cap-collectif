@@ -1,0 +1,113 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<ShieldPageWrapper /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cjQnaf"
+    id="shield-mode"
+  >
+    <div
+      className="sc-bcXGCL eDiNZZ"
+    >
+      <img
+        alt="logo"
+        loading="lazy"
+        src="shield.jpg"
+      />
+      <div
+        className="sc-bcXGCL fcrMCK"
+      >
+        <div
+          className=" ql-editor wysiwyg-render"
+          dangerouslySetInnerHTML={
+            {
+              "__html": "Réservé aux inscrits",
+            }
+          }
+        />
+      </div>
+      <div
+        className="sc-bcXGCL jhkeIQ"
+      >
+        <svg
+          className="sc-bcXGCL sc-eJDTud erCMMd hEjMCZ cap-icon sc-oZHua kslOoH"
+          fill="none"
+          viewBox="0 0 12 12"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            d="M11 6a5 5 0 11-5-5"
+            stroke="currentColor"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={0.8}
+          />
+        </svg>
+      </div>
+      <div
+        className="sc-bcXGCL bcWkfs"
+        id="shield-links"
+      >
+        <span
+          className="sc-bcXGCL eSQmKM"
+        >
+          <button
+            className="sc-bcXGCL cNTyyn"
+            id="privacy-policy"
+            name="privacy"
+            onClick={[Function]}
+            type="button"
+          >
+            capco.module.privacy_policy
+          </button>
+        </span>
+        <span>
+          •
+        </span>
+        <div
+          className="cookie-policy"
+        >
+          <button
+            className="sc-bcXGCL cklhXU"
+            id="cookies-modal-button"
+            onClick={[Function]}
+            type="button"
+          >
+            cookies
+          </button>
+        </div>
+        <span>
+          •
+        </span>
+        <div
+          className="sc-bcXGCL cklhXU"
+        >
+          <button
+            className="sc-bcXGCL cklhXU"
+            id="cookies-management"
+            onClick={[Function]}
+            type="button"
+          >
+            cookies-management
+          </button>
+        </div>
+      </div>
+      <div
+        className="sc-bcXGCL SIuho capco-powered"
+      >
+        <div
+          className=" ql-editor wysiwyg-render"
+          dangerouslySetInnerHTML={
+            {
+              "__html": "email.propulsed.by.capco {"logoUrl":"/capco-logo-mail.png"}",
+            }
+          }
+        />
+      </div>
+    </div>
+  </div>,
+]
+`;

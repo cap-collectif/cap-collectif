@@ -1,7 +1,6 @@
 import React, { useState, useRef } from 'react'
 import { connect } from 'react-redux'
 import LanguageHeader from '~/components/Navbar/LanguageHeader'
-import type { LocaleMap } from '~ui/Button/SiteLanguageChangeButton'
 import type { GlobalState } from '~/types'
 import { useEventListener } from '@shared/hooks/useEventListener'
 import type { LocaleChoiceTranslation } from '~/components/Navbar/LanguageHeader'

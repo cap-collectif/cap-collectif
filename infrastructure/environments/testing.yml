@@ -59,7 +59,7 @@ services:
       XDEBUG_MODE: ${XDEBUG_MODE}
 
     extra_hosts:
-      - 'admin-next:127.0.0.1'
+      - 'nextjs:127.0.0.1'
     volumes:
       - ../../:/var/www
       - /etc/localtime:/etc/localtime:ro

@@ -1,9 +1,11 @@
 import * as React from 'react'
 import { ViewerSession } from '../../types'
+import { GlobalTheme } from '@shared/navbar/NavBar.utils'
 
 type AppContext = {
   viewerSession: ViewerSession
   appVersion: string
+  siteColors: GlobalTheme
 }
 
 export const AppContext = React.createContext<AppContext>({
@@ -20,6 +22,7 @@ export const AppContext = React.createContext<AppContext>({
     organization: null,
   },
   appVersion: '',
+  siteColors: null,
 })
 
 export const useAppContext = (): AppContext => {

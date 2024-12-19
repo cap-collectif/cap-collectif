@@ -8,6 +8,7 @@ import GlobalCSS from 'styles/GlobalCSS'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 import { ReactPortal } from 'react'
 import { FormProvider, useForm } from 'react-hook-form'
+import { TranslationLocale } from '@relay/layoutQuery.graphql'
 
 export const mockRandomValues = () => {
   global.Math.random = () => 0.5
@@ -53,6 +54,7 @@ export const MockProviders = ({ children, viewerSession, features }: Props) => {
       intl={intlMock}
       viewerSession={viewerSession}
       appVersion="test"
+      siteColors={mockedGlobalTheme}
     >
       <GlobalCSS />
       {children}
@@ -76,6 +78,121 @@ export const FormWrapper = props => {
   const formMethods = useForm()
 
   return <FormProvider {...formMethods}>{props.children}</FormProvider>
+}
+
+export const mockedGlobalTheme = {
+  textColor: 'color.main_menu.text',
+  menuBackground: 'color.main_menu.bg',
+  subMenuBackground: 'color.sub.menu.background',
+  menuActiveBackground: 'color.main_menu.bg_active',
+  textActiveColor: 'color.main_menu.text_active',
+  textHoverColor: 'color.main_menu.text_hover',
+  primaryColor: 'color.btn.primary.bg',
+  primaryHoverColor: 'color.btn.ghost.hover',
+  primaryLabel: 'color.btn.primary.text',
+  pageTitleColor: 'color.header.title',
+  pageSubTitleColor: 'color.header.text',
+  pageBackgroundHeaderColor: 'color.header.bg',
+  sectionBackground: 'color.section.bg',
+  sectionTextColor: 'color.body.text',
+  bodyColor: 'color.body.text',
+  h1Color: 'color.h1',
+  h2Color: 'color.h2',
+  h3Color: 'color.h3',
+  h4Color: 'color.h4',
+  h5Color: 'color.h5',
+  footerTextColor: 'color.footer.text',
+  footerTitleColor: 'color.footer.title',
+  footerBackgroundColor: 'color.footer.bg',
+  footerLinksColor: 'color.footer2.text',
+  footerBottomBackgroundColor: 'color.footer2.bg',
+  linkColor: 'color.link',
+  linkHoverColor: 'color.link.hover',
+}
+
+export const mockedSSRData = {
+  shieldImage: { media: { url: 'shield.jpg' } },
+  favicon: { media: { url: 'favicon.ico' } },
+  ads: { value: '<script>ads</script>' },
+  analytics: { value: '<script>analytics</script>' },
+  cookiesList: { value: 'blablablabla cookies' },
+  customCode: { value: '<style>.flex { display: flex; }</style>' },
+  shieldIntroduction: { value: 'Réservé aux inscrits' },
+  locales: [
+    {
+      code: 'FR_FR' as TranslationLocale,
+      isDefault: true,
+      isEnabled: true,
+      isPublished: true,
+      traductionKey: 'locale.fr',
+    },
+    {
+      code: 'EN_GB' as TranslationLocale,
+      isDefault: false,
+      isEnabled: true,
+      isPublished: true,
+      traductionKey: 'locale.en',
+    },
+  ],
+  fonts: [
+    {
+      name: 'OpenSans',
+      useAsBody: true,
+      useAsHeading: false,
+      isCustom: false,
+      file: { url: null },
+    },
+    {
+      name: 'IDF-font',
+      useAsBody: false,
+      useAsHeading: true,
+      isCustom: true,
+      file: { url: '/idf-font.zip' },
+    },
+  ],
+  siteColors: [
+    {
+      keyname: 'background',
+      value: 'white',
+    },
+    {
+      keyname: 'title',
+      value: '#333',
+    },
+  ],
+  footer: {
+    socialNetworks: [
+      {
+        title: 'X',
+        link: 'x.com/cap-collectif',
+        style: 'style',
+      },
+    ],
+    links: [
+      {
+        name: 'FAQ',
+        url: '/faq',
+      },
+      {
+        name: 'Contact',
+        url: '/contact',
+      },
+    ],
+    legals: {
+      cookies: true,
+      privacy: true,
+      legal: true,
+    },
+    cookiesPath: '/cookies',
+    legalPath: '/legals',
+    privacyPath: '/privacy',
+  },
+  footerTitle: {
+    value: 'À Propos',
+  },
+  footerBody: {
+    value: 'La démocratie et tout et tout',
+  },
 }
 
 export default MockProviders

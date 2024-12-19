@@ -227,7 +227,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         className="sc-bcXGCL liyRZE"
       >
         <span
-          className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
+          className="sc-bcXGCL sc-477b2ec7-0 cklhXU dtfbZR"
         >
           registration.charte
         </span>
@@ -604,7 +604,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         className="sc-bcXGCL liyRZE"
       >
         <span
-          className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
+          className="sc-bcXGCL sc-477b2ec7-0 cklhXU dtfbZR"
         >
           registration.charte
         </span>
@@ -884,7 +884,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         className="sc-bcXGCL liyRZE"
       >
         <span
-          className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
+          className="sc-bcXGCL sc-477b2ec7-0 cklhXU dtfbZR"
         >
           registration.charte
         </span>

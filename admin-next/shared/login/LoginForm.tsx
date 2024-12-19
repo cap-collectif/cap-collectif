@@ -64,9 +64,7 @@ export const LoginForm: React.FC = () => {
           variantSize={CapInputSize.Md}
         />
       </FormControl>
-      <Link href="/resetting/request" color="primary.500">
-        {intl.formatMessage({ id: 'global.forgot_password' })}
-      </Link>
+      <Link href="/resetting/request">{intl.formatMessage({ id: 'global.forgot_password' })}</Link>
       {displayCaptcha && restrictConnection ? <Captcha name="captcha" /> : null}
     </>
   )

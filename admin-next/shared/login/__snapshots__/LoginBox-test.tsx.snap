@@ -99,7 +99,7 @@ exports[`<LoginBox /> renders 1`] = `
       />
     </div>
     <a
-      className="sc-bcXGCL ckHvhy cap-link"
+      className="sc-bcXGCL bYDxrx cap-link"
       href="/resetting/request"
     >
       global.forgot_password
@@ -140,7 +140,7 @@ exports[`<LoginBox /> renders without LoginForm 1`] = `
     </div>
     <div>
       <div
-        className="sc-18a669e1-0 gGRMFK"
+        className="sc-81b2b9f2-0 hzrSci"
         type="saml"
       >
         <span

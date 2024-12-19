@@ -320,7 +320,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 className="sc-bcXGCL liyRZE"
               >
                 <span
-                  className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
+                  className="sc-bcXGCL sc-477b2ec7-0 cklhXU dtfbZR"
                 >
                   registration.charte
                 </span>
@@ -328,13 +328,17 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             </label>
           </div>
           <div
-            className="text-center small excerpt mt-15 ql-editor wysiwyg-render"
-            dangerouslySetInnerHTML={
-              {
-                "__html": "Jsuis o bottom",
+            className="sc-bcXGCL kOyILu"
+          >
+            <div
+              className=" ql-editor wysiwyg-render"
+              dangerouslySetInnerHTML={
+                {
+                  "__html": "Jsuis o bottom",
+                }
               }
-            }
-          />
+            />
+          </div>
         </main>
         <footer
           className="sc-bcXGCL bzOqHT cap-modal__footer"
@@ -355,7 +359,6 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           <button
             className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
             id="confirm-login"
-            onClick={[Function]}
             type="submit"
           >
             global.register
@@ -669,7 +672,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 className="sc-bcXGCL liyRZE"
               >
                 <span
-                  className="sc-bcXGCL sc-33b84e46-0 cklhXU gCmXzh"
+                  className="sc-bcXGCL sc-477b2ec7-0 cklhXU dtfbZR"
                 >
                   registration.charte
                 </span>
@@ -696,7 +699,6 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           <button
             className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
             id="confirm-login"
-            onClick={[Function]}
             type="submit"
           >
             global.register

@@ -17,7 +17,7 @@ import { __isDev__, __isTest__ } from '../config'
 import { getLocaleFromReq } from '../utils/locale-helper'
 import { IntlType, Locale, PageProps } from '../types'
 
-const messages = {
+export const messages = {
   'fr-FR': frMessages,
   'en-GB': enMessages,
   'es-ES': esMessages,
@@ -29,7 +29,7 @@ const messages = {
   'ur-IN': urMessages,
 }
 
-const redirectOnError = (res: ServerResponse, devErrorMessage: string) => {
+export const redirectOnError = (res: ServerResponse, devErrorMessage: string) => {
   if (__isDev__) {
     throw new Error(devErrorMessage)
   }
