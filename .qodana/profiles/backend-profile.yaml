@@ -1,9 +1,0 @@
-name: "Backend Profile"
-
-baseProfile: empty
-
-inspections:
-    - inspection: MultipleReturnStatementsInspection
-      options:
-          COMPLAIN_THRESHOLD: 6
-          SCREAM_THRESHOLD: 6
