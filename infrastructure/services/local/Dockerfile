@@ -43,12 +43,25 @@ RUN wget -O- https://packages.sury.org/php/apt.gpg | apt-key add - && \
         php${PHP_VERSION}-sqlite3 \
         php${PHP_VERSION}-mysql \
         php${PHP_VERSION}-opcache \
-        php${PHP_VERSION}-redis \
         php${PHP_VERSION}-xsl \
         php${PHP_VERSION}-zip \
         php${PHP_VERSION}-amqp \
         php${PHP_VERSION}-simplexml \
         php-pear
+
+# TODO This block needs to be removed after migrating to Symfony 6.4 and redis extension needs to be installed like the others above.
+# ( Bug in symfony Cache component with redis version > 6.0.3: https://github.com/symfony/symfony/pull/57885 )
+RUN pecl install redis-6.0.2
+
+RUN <<EOF
+echo "
+extension='redis.so'
+" >> /etc/php/${PHP_VERSION}/mods-available/redis.ini
+EOF
+
+RUN ln -s /etc/php/${PHP_VERSION}/mods-available/redis.ini /etc/php/${PHP_VERSION}/cli/conf.d/25-redis.ini \
+    && ln -s /etc/php/${PHP_VERSION}/mods-available/redis.ini /etc/php/${PHP_VERSION}/fpm/conf.d/25-redis.ini
+### end of block
 
 RUN <<EOF
 echo "
