@@ -41,8 +41,10 @@ describe('CRUD', () => {
 
   it('Views create post page coming from posts list - as ORGA MEMBER ', () => {
     cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'postsQuery' })
     cy.directLoginAs('valerie')
     PostFormPage.visitPostsList()
+    cy.wait('@postsQuery')
     PostFormPage.clickNewArticleButton()
     cy.wait('@UserListFieldQuery', { timeout: 10000 })
     PostFormPage.updateArticle('Titre', 'Contenu')
@@ -56,8 +58,10 @@ describe('CRUD', () => {
 
   it('Views create post page coming from posts list - as PROJECT ADMIN ', () => {
     cy.interceptGraphQLOperation({ operationName: 'UserListFieldQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'postsQuery' })
     cy.directLoginAs('project_owner')
     PostFormPage.visitPostsList()
+    cy.wait('@postsQuery')
     PostFormPage.clickNewArticleButton()
     cy.wait('@UserListFieldQuery', { timeout: 10000 })
     PostFormPage.updateArticle('Titre', 'Contenu')

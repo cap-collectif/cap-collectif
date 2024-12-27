@@ -12,6 +12,7 @@ describe('Organization Proposalform', () => {
       cy.interceptGraphQLOperation({ operationName: 'UpdateProposalFormMutation' })
       // list proposalform
       FormListPage.visit('PROPOSAL_FORM')
+      cy.wait('@ProposalFormListQuery')
       cy.contains('Formulaire organisation crée par un admin')
       cy.contains('Formulaire organisation crée par un membre')
       cy.getByDataCy('proposalform-item').should('have.length', 3)
@@ -30,6 +31,7 @@ describe('Organization Proposalform', () => {
       cy.contains('global.saved')
       // back to proposalform list
       FormListPage.visit('PROPOSAL_FORM')
+      cy.wait('@ProposalFormListQuery')
       cy.contains('my new proposalform')
       cy.getByDataCy('proposalform-item').should('have.length', 4)
     })

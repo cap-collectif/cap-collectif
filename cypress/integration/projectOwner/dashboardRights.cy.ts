@@ -6,7 +6,9 @@ describe('Project Owner', () => {
       cy.directLoginAs('project_owner')
     })
     it('should allow a project admin to go to the back-office projects list page', () => {
+      cy.interceptGraphQLOperation({ operationName: 'projectsQuery' })
       AdminProjectsListPage.visit()
+      cy.wait('@projectsQuery')
       AdminProjectsListPage.checkProjectExistence('Projet avec administrateur de projet')
     })
     it('should redirect a project admin when going to the admin dashboard page', () => {
