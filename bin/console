@@ -43,8 +43,10 @@ if (null !== $instance = $input->getParameterOption(['--instance', '-i'], null, 
     }
 }
 
-if (null !== $env = $input->getParameterOption(['--env', '-e'], null, true)) {
-    putenv('APP_ENV='.$_SERVER['SYMFONY_ENV'] = $_ENV['SYMFONY_ENV'] = $env);
+if ('hautelook:fixtures:load' !== $input->getFirstArgument()){
+    if (null !== $env = $input->getParameterOption(['--env', '-e'], null, true)) {
+        putenv('APP_ENV='.$_SERVER['SYMFONY_ENV'] = $_ENV['SYMFONY_ENV'] = $env);
+    }
 }
 
 if ($input->hasParameterOption('--no-debug', true)) {
