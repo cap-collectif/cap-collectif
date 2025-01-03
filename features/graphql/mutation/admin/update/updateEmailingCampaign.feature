@@ -32,7 +32,7 @@ Scenario: GraphQL admin updates a campaign
         "senderName": "new sender name",
         "object": "new object",
         "content": "new content",
-        "sendAt": "2025-01-01 00:00:00",
+        "sendAt": "2060-01-01 00:00:00",
         "mailingInternal": "NOT_CONFIRMED",
         "unlayerConf": "{\"what\": \"configuration\"}"
       }
@@ -52,7 +52,7 @@ Scenario: GraphQL admin updates a campaign
           "object": "new object",
           "content": "new content",
           "unlayerConf": "{\"what\": \"configuration\"}",
-          "sendAt": "2025-01-01 00:00:00",
+          "sendAt": "2060-01-01 00:00:00",
           "status": "DRAFT",
           "mailingInternal": "NOT_CONFIRMED",
           "preview": @string@
