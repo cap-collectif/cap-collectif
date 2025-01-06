@@ -11,7 +11,7 @@ use Symfony\Component\Yaml\Yaml;
 
 class CheckMappingCommand extends Command
 {
-    public function __construct(private readonly Indexer $indexer, private readonly string $kernelRootDir)
+    public function __construct(private readonly Indexer $indexer, private readonly string $kernelProjectDir)
     {
         parent::__construct();
     }
@@ -34,7 +34,7 @@ class CheckMappingCommand extends Command
         $io->success('It does ! Index name: ' . $this->indexer->getIndex()->getName());
         $io->section('Compare ES mapping with locale one :');
         $mapping = Yaml::parse(
-            file_get_contents($this->kernelRootDir . '/Capco/AppBundle/Elasticsearch/mapping.yaml')
+            file_get_contents($this->kernelProjectDir . '/Capco/AppBundle/Elasticsearch/mapping.yaml')
         );
         $mappingProperties = $mapping['mappings']['properties'];
         $indexMapping = $this->indexer->getIndex()->getMapping()['properties'];

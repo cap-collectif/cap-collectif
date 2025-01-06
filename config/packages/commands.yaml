@@ -18,7 +18,7 @@ services:
 
     Capco\AppBundle\Command\Elasticsearch\CheckMappingCommand:
         arguments:
-            $kernelRootDir: '%kernel.project_dir%'
+            $kernelProjectDir: '%kernel.project_dir%/src'
 
     Capco\AppBundle\Command\Elasticsearch\CreateAnalyticsTestIndexCommand:
         arguments:
