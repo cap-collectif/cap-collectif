@@ -117,8 +117,8 @@ class CommentController extends Controller
             if ($form->isValid()) {
                 $this->em->remove($comment);
                 $this->eventDispatcher->dispatch(
-                    CapcoAppBundleEvents::COMMENT_CHANGED,
-                    new CommentChangedEvent($comment, 'remove')
+                    new CommentChangedEvent($comment, 'remove'),
+                    CapcoAppBundleEvents::COMMENT_CHANGED
                 );
                 $this->em->flush();
 

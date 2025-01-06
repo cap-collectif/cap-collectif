@@ -37,7 +37,7 @@ class MagicLinkController extends AbstractController
 
         $this->tokenStorage->setToken($securityToken);
         $event = new InteractiveLoginEvent($request, $securityToken);
-        $this->eventDispatcher->dispatch(SecurityEvents::INTERACTIVE_LOGIN, $event);
+        $this->eventDispatcher->dispatch($event, SecurityEvents::INTERACTIVE_LOGIN);
 
         return $redirectUrl ? $this->redirect($redirectUrl) : $this->redirectToRoute('app_homepage');
     }
