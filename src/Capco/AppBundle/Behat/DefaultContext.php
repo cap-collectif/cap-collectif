@@ -2,12 +2,10 @@
 
 namespace Capco\AppBundle\Behat;
 
-use Behat\Behat\Context\Context;
 use Behat\Behat\Hook\Scope\AfterStepScope;
 use Behat\Behat\Hook\Scope\BeforeScenarioScope;
 use Behat\Mink\Driver\Selenium2Driver;
 use Behat\MinkExtension\Context\MinkContext;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Behat\Testwork\Tester\Result\TestResult;
 use Capco\AppBundle\Utils\Text;
 use Doctrine\Common\Persistence\ObjectManager;
@@ -16,20 +14,12 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 
-abstract class DefaultContext extends MinkContext implements Context, KernelAwareContext
+abstract class DefaultContext extends MinkContext
 {
     protected $navigationContext;
 
-    protected $symfonySession;
-
-    /**
-     * @var KernelInterface
-     */
-    protected $kernel;
-
-    public function __construct(?Session $session = null)
+    public function __construct(private readonly KernelInterface $kernel, protected ?Session $symfonySession = null)
     {
-        $this->symfonySession = $session;
     }
 
     /** @BeforeScenario */
@@ -96,14 +86,6 @@ abstract class DefaultContext extends MinkContext implements Context, KernelAwar
         file_put_contents($path . $htmlFilename, $html);
 
         echo 'New HTML generated ! Checkout `open "coverage/' . $htmlFilename . '"`' . \PHP_EOL;
-    }
-
-    /**
-     * {@inheritdoc}
-     */
-    public function setKernel(KernelInterface $kernel)
-    {
-        $this->kernel = $kernel;
     }
 
     /**

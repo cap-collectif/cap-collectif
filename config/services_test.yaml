@@ -1,0 +1,7 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    Capco\AppBundle\Behat\:
+        resource: '%kernel.project_dir%/src/Capco/AppBundle/Behat/*'

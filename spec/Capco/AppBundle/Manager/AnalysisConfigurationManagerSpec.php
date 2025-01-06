@@ -152,13 +152,16 @@ class AnalysisConfigurationManagerSpec extends ObjectBehavior
         ;
         $eventDispatcher
             ->dispatch(
-                CapcoAppBundleEvents::DECISION_APPROVED,
-                Argument::type(DecisionEvent::class)
+                Argument::type(DecisionEvent::class),
+                CapcoAppBundleEvents::DECISION_APPROVED
             )
             ->shouldBeCalled()
         ;
         $eventDispatcher
-            ->dispatch(CapcoAppBundleEvents::DECISION_REFUSED, Argument::type(DecisionEvent::class))
+            ->dispatch(
+                Argument::type(DecisionEvent::class),
+                CapcoAppBundleEvents::DECISION_REFUSED
+            )
             ->shouldBeCalled()
         ;
         $publisher

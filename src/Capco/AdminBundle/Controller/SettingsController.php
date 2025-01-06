@@ -34,7 +34,7 @@ class SettingsController extends Controller
     /**
      * @Route("/admin/settings/pages.registration/list", name="capco_admin_settings_registration")
      * @Template("@CapcoAdmin/Settings/registration.html.twig")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function registrationAction(Request $request): array
     {
@@ -49,7 +49,7 @@ class SettingsController extends Controller
     /**
      * @Route("/admin/settings/pages.shield/list", name="capco_admin_settings_shield")
      * @Template("@CapcoAdmin/Settings/shield.html.twig")
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      *
      * @deprecated Replace by our NextJs router so this is not used anymore
      */

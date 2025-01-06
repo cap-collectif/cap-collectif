@@ -712,6 +712,11 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
         return $contributions;
     }
 
+    public function getUserIdentifier(): string
+    {
+        return $this->email ?? '';
+    }
+
     public function getUsername(): ?string
     {
         return $this->username;

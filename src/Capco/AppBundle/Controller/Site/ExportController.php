@@ -221,7 +221,7 @@ class ExportController extends Controller
     /**
      * @Route("/export-my-event-participants/{eventId}", name="app_export_my_event_participants", options={"i18n" = false})
      * @Entity("event", options={"mapping": {"eventId": "id"}})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function downloadMyEventParticipantsAction(Request $request, Event $event): Response
     {
@@ -252,7 +252,7 @@ class ExportController extends Controller
     /**
      * @Route("/export-project-contributors/{projectId}", name="app_export_project_contributors", options={"i18n" = false})
      * @Entity("project", options={"mapping": {"projectId": "id"}})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadProjectContributorsAction(Request $request, Project $project)
     {
@@ -272,7 +272,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}/download-consultation", name="app_export_step_contributors_download_consultation", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function downloadConsultationParticipantAction(Request $request, string $stepId): Response
     {
@@ -326,7 +326,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}", name="app_export_step_contributors", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function downloadStepContributorsAction(Request $request, mixed $stepId): Response
     {
@@ -372,7 +372,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-step-contributors/{stepId}/download-collect", name="app_export_step_contributors_download_collect", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function downloadCollectParticipantAction(Request $request, string $stepId): Response
     {
@@ -484,7 +484,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/export-project-mediators-proposals-votes/{projectId}", name="app_export_project_mediators_proposals_votes", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadProjectMediatorsProposalsVotesAction(string $projectId): BinaryFileResponse
     {
@@ -507,7 +507,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/debate/{debateId}/download/{type}", name="app_debate_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_PROJECT_ADMIN')")
+     * @Security("is_granted('ROLE_PROJECT_ADMIN')")
      */
     public function downloadArgumentsAction(
         Request $request,
@@ -540,7 +540,7 @@ class ExportController extends Controller
 
     /**
      * @Route("/debate/{debateId}/download-contributions/{type}", name="app_debate_contributions_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_PROJECT_ADMIN')")
+     * @Security("is_granted('ROLE_PROJECT_ADMIN')")
      */
     public function downloadDebateContributionAction(
         Request $request,

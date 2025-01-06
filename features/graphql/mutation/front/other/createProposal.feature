@@ -271,7 +271,7 @@ Scenario: Logged in API client wants to add a proposal without a required value 
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":3}","@*@": "@*@"}],"data":{"createProposal":null}}
+  {"errors":[{"message":"proposal.missing_required_responses {\u0022missing\u0022:\u00223\u0022}","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security
@@ -321,7 +321,7 @@ Scenario: Logged in API client wants to add a proposal without a required media 
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":11}","@*@": "@*@"}],"data":{"createProposal":null}}
+  {"errors":[{"message":"proposal.missing_required_responses {\u0022missing\u0022:\u002211\u0022}","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security
@@ -371,7 +371,7 @@ Scenario: Logged in API client wants to add a proposal with empty required value
   """
   Then the JSON response should match:
   """
-  {"errors":[{"message":"proposal.missing_required_responses {\"missing\":3}","@*@": "@*@"}],"data":{"createProposal":null}}
+  {"errors":[{"message":"proposal.missing_required_responses {\u0022missing\u0022:\u00223\u0022}","@*@": "@*@"}],"data":{"createProposal":null}}
   """
 
 @security

@@ -260,7 +260,7 @@ class ChangeProposalDecisionMutation implements MutationInterface
             $proposal->getDecision(),
             $proposal->getProposalForm()->getAnalysisConfiguration()
         );
-        $this->eventDispatcher->dispatch($decision, $event);
+        $this->eventDispatcher->dispatch($event, $decision);
 
         return $event;
     }

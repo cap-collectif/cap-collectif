@@ -52,7 +52,7 @@ class ProfileController extends Controller
     /**
      * @Route("/edit-profile", name="capco_profile_edit")
      * @Template("@CapcoUser/Profile/edit_profile.html.twig")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function editProfileAction()
     {
@@ -79,7 +79,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/download_archive", name="capco_profile_download_archive", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function downloadArchiveAction(Request $request)
     {
@@ -139,7 +139,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/notifications/disable/{token}", name="capco_profile_notifications_disable", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function disableNotificationsAction(Request $request, string $token)
     {
@@ -376,7 +376,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/delete-account/csrf-token", name="get_csrf_token", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function getCsrfToken(CsrfTokenManagerInterface $csrfTokenManager): JsonResponse
     {
@@ -387,7 +387,7 @@ class ProfileController extends Controller
 
     /**
      * @Route("/deleteAccount/{type}", name="capco_profile_delete_account", options={"i18n" = false})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function deleteAccount(string $type, Request $request, CsrfTokenManagerInterface $csrfTokenManager): RedirectResponse
     {
@@ -421,7 +421,7 @@ class ProfileController extends Controller
         $userToken = new UsernamePasswordToken($user, null, $this->fireWall, $user->getRoles());
         $this->get('security.token_storage')->setToken($userToken);
         $logInEvent = new InteractiveLoginEvent($request, $userToken);
-        $this->eventDispatcher->dispatch('security.interactive_login', $logInEvent);
+        $this->eventDispatcher->dispatch($logInEvent, 'security.interactive_login');
     }
 
     private function getProjectsCount(User $user, ?User $loggedUser): int

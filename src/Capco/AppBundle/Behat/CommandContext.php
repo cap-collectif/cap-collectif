@@ -2,21 +2,23 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Behat\Symfony2Extension\Context\KernelDictionary;
 use PHPUnit\Framework\Assert;
 use Symfony\Bundle\FrameworkBundle\Console\Application;
 use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Input\StringInput;
 use Symfony\Component\Console\Output\StreamOutput;
+use Symfony\Component\HttpKernel\KernelInterface;
 
-class CommandContext implements KernelAwareContext
+class CommandContext implements Context
 {
-    use KernelDictionary;
-
     private $output;
     private $statusCode;
+
+    public function __construct(private readonly KernelInterface $kernel)
+    {
+    }
 
     /**
      * @Given I run :string

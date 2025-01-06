@@ -1,5 +1,4 @@
 hautelook_alice:
   fixtures_path: 'fixtures/Dev'
   root_dirs:
-    - '%kernel.root_dir%'
     - '%kernel.project_dir%'

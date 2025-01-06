@@ -31,7 +31,7 @@ class CommentController extends Controller
      * @Route("/comments/{commentId}/edit", name="app_comment_edit")
      * @Template("@CapcoApp/Comment/update.html.twig")
      * @Entity("comment", class="CapcoAppBundle:Comment", options={"mapping" = {"commentId": "id"}, "repository_method"= "find", "map_method_signature" = true})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      *
      * @throws ProjectAccessDeniedException
      *
@@ -68,8 +68,8 @@ class CommentController extends Controller
                 $this->em->persist($comment);
                 $this->em->flush();
                 $this->eventDispatcher->dispatch(
-                    CapcoAppBundleEvents::COMMENT_CHANGED,
-                    new CommentChangedEvent($comment, 'update')
+                    new CommentChangedEvent($comment, 'update'),
+                    CapcoAppBundleEvents::COMMENT_CHANGED
                 );
 
                 $flashBag->add('success', $this->translator->trans('comment.update.success'));
@@ -86,7 +86,7 @@ class CommentController extends Controller
      * @Route("/comments/{commentId}/delete", name="app_comment_delete")
      * @Entity("comment", options={"mapping": {"commentId" : "id"}})
      * @Template("@CapcoApp/Comment/delete.html.twig")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      *
      * @throws ProjectAccessDeniedException
      *

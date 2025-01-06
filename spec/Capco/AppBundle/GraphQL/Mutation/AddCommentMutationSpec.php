@@ -161,8 +161,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         $commentableCommentsDataLoader->invalidate('123456')->shouldBeCalled();
         $dispatcher
             ->dispatch(
-                'capco.comment_changed',
-                Argument::type(CommentChangedEvent::class)
+                Argument::type(CommentChangedEvent::class),
+                'capco.comment_changed'
             )
             ->shouldBeCalled()
         ;
@@ -217,8 +217,8 @@ class AddCommentMutationSpec extends ObjectBehavior
         $commentableCommentsDataLoader->invalidate('123456')->shouldBeCalled();
         $dispatcher
             ->dispatch(
-                'capco.comment_changed',
-                Argument::type(CommentChangedEvent::class)
+                Argument::type(CommentChangedEvent::class),
+                'capco.comment_changed'
             )
             ->shouldBeCalled()
         ;

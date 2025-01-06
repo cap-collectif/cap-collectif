@@ -15,7 +15,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProposalController extends CRUDController
 {
     /**
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/admin/capco/app/proposal/{proposalId}/download/followers/{_format}",
      *     requirements={
      *         "_format": "csv|xlsx",

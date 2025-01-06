@@ -50,7 +50,6 @@ class UpdateProjectFormType extends AbstractType
             ->add('publishedAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('themes', EntityType::class, [
                 'class' => Theme::class,

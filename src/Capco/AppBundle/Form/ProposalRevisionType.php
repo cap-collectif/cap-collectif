@@ -29,7 +29,6 @@ class ProposalRevisionType extends AbstractType
             ->add('expiresAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
         ;
     }

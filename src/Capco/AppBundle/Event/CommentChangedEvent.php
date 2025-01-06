@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\Event;
 
 use Capco\AppBundle\Entity\Comment;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class CommentChangedEvent extends Event
 {

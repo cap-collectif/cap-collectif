@@ -15,7 +15,7 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
-use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
+use Symfony\Component\Form\Extension\Core\Type\DateType;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -73,9 +73,8 @@ class UserDataFormType extends AbstractType
             ->add('email', EmailType::class)
             ->add('phoneConfirmed')
             ->add('birthPlace')
-            ->add('dateOfBirth', DateTimeType::class, [
+            ->add('dateOfBirth', DateType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd',
             ])
             ->add('gender', ChoiceType::class, ['choices' => array_keys(User::getGenderList())])
             ->add('userIdentificationCode', EntityType::class, [

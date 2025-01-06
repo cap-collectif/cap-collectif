@@ -73,7 +73,7 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
         if (
             null === $emailingCampaign
             || !$this->authorizationChecker->isGranted(
-                [EmailingCampaignVoter::EDIT],
+                EmailingCampaignVoter::EDIT,
                 $emailingCampaign
             )
         ) {

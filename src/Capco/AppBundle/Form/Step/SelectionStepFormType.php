@@ -38,7 +38,6 @@ class SelectionStepFormType extends AbstractStepFormType
             ->add('secretBallot')
             ->add('publishedVoteDate', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('defaultStatus')
             ->add('defaultSort')

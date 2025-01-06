@@ -13,9 +13,9 @@ use RedirectionIO\Client\Sdk\HttpMessage\Response;
 use Symfony\Component\HttpFoundation\RedirectResponse as SymfonyRedirectResponse;
 use Symfony\Component\HttpFoundation\Request as SymfonyRequest;
 use Symfony\Component\HttpFoundation\Response as SymfonyResponse;
-use Symfony\Component\HttpKernel\Event\FilterResponseEvent;
-use Symfony\Component\HttpKernel\Event\GetResponseEvent;
-use Symfony\Component\HttpKernel\Event\PostResponseEvent;
+use Symfony\Component\HttpKernel\Event\RequestEvent;
+use Symfony\Component\HttpKernel\Event\ResponseEvent;
+use Symfony\Component\HttpKernel\Event\TerminateEvent;
 
 class RequestResponseListener
 {
@@ -30,7 +30,7 @@ class RequestResponseListener
         $this->excludedPrefixes = [];
     }
 
-    public function onKernelRequest(GetResponseEvent $event)
+    public function onKernelRequest(RequestEvent $event)
     {
         if (!$this->toggleManager->isActive('http_redirects')) {
             return;
@@ -68,7 +68,7 @@ class RequestResponseListener
             );
     }
 
-    public function onKernelResponse(FilterResponseEvent $event)
+    public function onKernelResponse(ResponseEvent $event)
     {
         /** @var Response $rioResponse */
         $rioResponse = $event->getRequest()->attributes->get('redirectionio_response');
@@ -96,7 +96,7 @@ class RequestResponseListener
             );
     }
 
-    public function onKernelTerminate(PostResponseEvent $event)
+    public function onKernelTerminate(TerminateEvent $event)
     {
         foreach ($this->circuitBreakers as $circuitBreaker) {
             if ($circuitBreaker->shouldNotProcessRequest($event->getRequest())) {

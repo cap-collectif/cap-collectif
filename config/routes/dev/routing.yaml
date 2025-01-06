@@ -7,7 +7,7 @@ web_profiler_profiler:
     prefix: /_profiler
 
 _errors:
-    resource: '@TwigBundle/Resources/config/routing/errors.xml'
+    resource: '@FrameworkBundle/Resources/config/routing/errors.xml'
     prefix: /_error
     options: { i18n: false }
 

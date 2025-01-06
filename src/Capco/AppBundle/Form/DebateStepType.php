@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\DateType;
+use Symfony\Component\Form\Extension\Core\Type\DateTimeType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
@@ -21,13 +21,11 @@ class DebateStepType extends AbstractType
         $builder
             ->add('title', TextType::class)
             ->add('label', TextType::class)
-            ->add('startAt', DateType::class, [
+            ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
-            ->add('endAt', DateType::class, [
+            ->add('endAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('body', TextType::class)
             ->add('metaDescription', TextType::class, [

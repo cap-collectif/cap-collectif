@@ -70,7 +70,7 @@ services:
 
     Capco\AppBundle\Resolver\ProposalResolver:
         arguments:
-            $rootDir: '%kernel.root_dir%'
+            $rootDir: '%kernel.project_dir%'
         public: true
 
     Capco\AppBundle\Following\ActivitiesResolver:

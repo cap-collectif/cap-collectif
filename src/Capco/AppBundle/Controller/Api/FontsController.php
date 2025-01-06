@@ -9,7 +9,7 @@ use Capco\AppBundle\Manager\MediaManager;
 use Capco\AppBundle\Repository\FontRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -48,7 +48,7 @@ class FontsController extends AbstractController
 
     /**
      * @Route("/upload/fonts", name="upload_fonts", options={"i18n" = false})
-     * @IsGranted({"ROLE_ADMIN"})
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function postFontAction(Request $request): JsonResponse
     {

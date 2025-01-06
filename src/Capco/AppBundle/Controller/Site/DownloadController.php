@@ -73,7 +73,7 @@ class DownloadController extends Controller
 
     /**
      * @Route("/identificationCodesList/download/cap-collectif-codes-{listId}.csv", name="app_identification_codes_list_download", options={"i18n" = false})
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      */
     public function downloadIdentificationCodesListAction(string $listId): Response
     {

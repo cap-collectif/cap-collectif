@@ -119,14 +119,14 @@ class AddCommentMutation implements MutationInterface
         $edge = new Edge(ConnectionBuilder::offsetToCursor(0), $comment);
 
         $this->eventDispatcher->dispatch(
-            CapcoAppBundleEvents::COMMENT_CHANGED,
-            new CommentChangedEvent($comment, 'add')
+            new CommentChangedEvent($comment, 'add'),
+            CapcoAppBundleEvents::COMMENT_CHANGED
         );
 
         if (!$viewer && $isModerationEnabled) {
             $this->eventDispatcher->dispatch(
-                CapcoAppBundleEvents::COMMENT_CHANGED,
-                new CommentChangedEvent($comment, 'confirm_anonymous_email')
+                new CommentChangedEvent($comment, 'confirm_anonymous_email'),
+                CapcoAppBundleEvents::COMMENT_CHANGED
             );
         }
 

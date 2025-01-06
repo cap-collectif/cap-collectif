@@ -2,27 +2,21 @@
 
 namespace Capco\AppBundle\Behat;
 
+use App\Kernel;
+use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Coduo\PHPMatcher\PHPMatcher;
 use LogicException;
 use PHPUnit\Framework\Assert;
 use Swarrot\Broker\Message;
 use Swarrot\Broker\MessageProvider\MessageProviderInterface;
 use Swarrot\Broker\MessagePublisher\MessagePublisherInterface;
-use Symfony\Component\HttpKernel\KernelInterface;
 
-class RabbitMQContext implements KernelAwareContext
+class RabbitMQContext implements Context
 {
-    /**
-     * @var KernelInterface
-     */
-    private $kernel;
-
-    public function setKernel(KernelInterface $kernel)
+    public function __construct(private readonly Kernel $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     /**

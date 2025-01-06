@@ -15,6 +15,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\DependencyInjection\ContainerInterface;
 use Symfony\Component\HttpFoundation\RedirectResponse;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Session\Flash\FlashBagInterface;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
@@ -53,7 +54,8 @@ class OrganizationControllerSpec extends ObjectBehavior
         TokenStorageInterface $tokenStorage,
         ContainerInterface $container,
         FlashBagInterface $flashBag,
-        Session $session
+        Session $session,
+        RequestStack $requestStack
     ) {
         $fakeToken = 'fakeToken';
         $expectedUsername = 'toto';
@@ -129,12 +131,17 @@ class OrganizationControllerSpec extends ObjectBehavior
         ;
 
         $container
-            ->has('session')
+            ->has('request_stack')
             ->willReturn(true)
         ;
 
         $container
-            ->get('session')
+            ->get('request_stack')
+            ->willReturn($requestStack)
+        ;
+
+        $requestStack
+            ->getSession()
             ->willReturn($session)
         ;
 

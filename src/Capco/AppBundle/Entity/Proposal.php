@@ -310,7 +310,7 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
     private Collection $proposalAnalysts;
 
     /**
-     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal", cascade={"remove"}, orphanRemoval=true)
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\ProposalAnalysis", mappedBy="proposal", cascade={"persist", "remove"}, orphanRemoval=true)
      */
     private iterable $analyses;
 

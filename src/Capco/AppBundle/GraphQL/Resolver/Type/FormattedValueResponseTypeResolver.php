@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\Enum\MajorityVoteTypeEnum;
 use Capco\AppBundle\Utils\Text;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FormattedValueResponseTypeResolver implements QueryInterface
 {

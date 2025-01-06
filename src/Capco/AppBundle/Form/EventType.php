@@ -43,11 +43,9 @@ class EventType extends AbstractType
             ->add('bodyUsingJoditWysiwyg')
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('endAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('enabled', CheckboxType::class)
             ->add('guestListEnabled', CheckboxType::class)

@@ -13,7 +13,7 @@ class GroupController extends Controller
         $this->admin->checkAccess('export');
         $trans = $this->get('translator');
 
-        $path = $this->container->getParameter('kernel.root_dir') . '/../public/export/';
+        $path = $this->container->getParameter('kernel.project_dir') . '/../public/export/';
         $filename = 'users.csv';
 
         if (!file_exists($path . $filename)) {

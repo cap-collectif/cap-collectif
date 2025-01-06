@@ -51,7 +51,6 @@ class PostType extends AbstractType
             ->add('publishedAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('commentable', CheckboxType::class, [
                 'required' => true,

@@ -69,10 +69,10 @@ class AnalysisConfigurationManager
         ProposalDecision $decision
     ): void {
         $this->eventDispatcher->dispatch(
+            new DecisionEvent($decision->getProposal(), $decision, $config),
             $decision->isApproved()
                 ? CapcoAppBundleEvents::DECISION_APPROVED
-                : CapcoAppBundleEvents::DECISION_REFUSED,
-            new DecisionEvent($decision->getProposal(), $decision, $config)
+                : CapcoAppBundleEvents::DECISION_REFUSED
         );
     }
 

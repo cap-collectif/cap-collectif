@@ -30,11 +30,9 @@ abstract class AbstractStepFormType extends AbstractType
             ->add('label')
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('endAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('metaDescription')
             ->add('customCode')

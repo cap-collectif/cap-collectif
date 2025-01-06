@@ -119,7 +119,7 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
      *
      * @ORM\Column(name="published_at", type="datetime", nullable=false)
      * @Assert\NotNull()
-     * @Assert\DateTime()
+     * @Assert\Type("\DateTimeInterface")
      */
     private $publishedAt;
 

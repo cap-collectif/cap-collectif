@@ -366,16 +366,6 @@ Scenario: User who decides to hard delete his account should have his content de
                  },
                  {
                     "node":{
-                       "id":"UHJvcG9zYWw6cHJvcG9zYWwy",
-                       "createdAt":"2017-02-01 00:03:00",
-                       "published":true,
-                       "author":{
-                          "id":"VXNlcjp1c2VyNQ=="
-                       }
-                    }
-                 },
-                 {
-                    "node":{
                        "id":"UHJvcG9zYWw6cHJvcG9zYWwz",
                        "createdAt":"2017-02-01 00:04:00",
                        "published":true,

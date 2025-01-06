@@ -46,7 +46,7 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
         if (
             null === $emailingCampaign
             || !$this->authorizationChecker->isGranted(
-                [EmailingCampaignVoter::EDIT],
+                EmailingCampaignVoter::EDIT,
                 $emailingCampaign
             )
         ) {
@@ -67,7 +67,7 @@ abstract class AbstractEmailingCampaignMutation implements MutationInterface
         if (
             null === $emailingCampaign
             || !$this->authorizationChecker->isGranted(
-                [EmailingCampaignVoter::SEND],
+                EmailingCampaignVoter::SEND,
                 $emailingCampaign
             )
         ) {

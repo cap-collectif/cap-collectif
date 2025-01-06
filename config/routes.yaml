@@ -6,7 +6,7 @@ capco_locale:
 
 # BO
 capco_admin:
-    resource: '../../src/Capco/AdminBundle/Controller/'
+    resource: '../src/Capco/AdminBundle/Controller/'
     type: annotation
     prefix: /
     options: { i18n: false }

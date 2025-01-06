@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Event;
 use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecision;
-use Symfony\Component\EventDispatcher\Event;
+use Symfony\Contracts\EventDispatcher\Event;
 
 class DecisionEvent extends Event
 {

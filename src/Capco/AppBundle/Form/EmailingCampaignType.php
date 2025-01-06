@@ -74,7 +74,6 @@ class EmailingCampaignType extends AbstractType
             ->add('sendAt', DateTimeType::class, [
                 'required' => false,
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
         ;
     }

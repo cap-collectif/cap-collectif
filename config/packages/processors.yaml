@@ -9,4 +9,4 @@ services:
     Capco\AppBundle\Processor\UserArchive\UserArchiveRequestProcessor:
         autowire: true
         arguments:
-            $rootDir: '%kernel.root_dir%'
+            $rootDir: '%kernel.project_dir%'

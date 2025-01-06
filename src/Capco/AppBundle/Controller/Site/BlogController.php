@@ -58,7 +58,7 @@ class BlogController extends Controller
             }
         } else {
             $themeObject = $theme
-                ? $this->get(ThemeTranslationRepository::class)->findOneBySlug($theme)
+                ? $this->get(ThemeTranslationRepository::class)->findOneBySlug($theme)?->getTranslatable()
                 : null;
             $projectObject = $this->get(ProjectRepository::class)->findOneBySlug($project);
             $form->setData([

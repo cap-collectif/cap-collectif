@@ -26,13 +26,13 @@ e2e:
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
       purge_before_scenario: true
-    Behat\Symfony2Extension:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: './vendor/autoload.php'
       kernel:
         path: 'src/Kernel.php'
         class: App\Kernel
-        env: test
+        environment: test
         debug: false
-        bootstrap: './vendor/autoload.php'
     SensioLabs\Behat\PageObjectExtension:
       namespaces:
         page: [Capco\AppBundle\Behat\Page]
@@ -149,13 +149,13 @@ e2e:
 commands:
   extensions:
     # Tonic\Behat\ParallelScenarioExtension: ~
-    Behat\Symfony2Extension:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: './vendor/autoload.php'
       kernel:
         path: 'src/Kernel.php'
         class: App\Kernel
-        env: test
+        environment: test
         debug: false
-        bootstrap: './vendor/autoload.php'
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
       purge_before_scenario: true
@@ -199,13 +199,13 @@ commands:
 api:
   extensions:
     # Tonic\Behat\ParallelScenarioExtension: ~
-    Behat\Symfony2Extension:
+    FriendsOfBehat\SymfonyExtension:
+      bootstrap: './vendor/autoload.php'
       kernel:
         path: 'src/Kernel.php'
         class: App\Kernel
-        env: test
+        environment: test
         debug: false
-        bootstrap: './vendor/autoload.php'
     Alex\MailCatcher\Behat\MailCatcherExtension\Extension:
       url: http://mailcatchersmtp
       purge_before_scenario: true

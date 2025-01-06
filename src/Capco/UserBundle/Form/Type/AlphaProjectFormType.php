@@ -81,7 +81,6 @@ class AlphaProjectFormType extends AbstractType
             ->add('publishedAt', DateTimeType::class, [
                 'required' => true,
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('visibility')
             ->add('opinionCanBeFollowed')

@@ -19,7 +19,7 @@ class RecentReportingController extends Controller
     }
 
     /**
-     * @Security("has_role('ROLE_ADMIN')")
+     * @Security("is_granted('ROLE_ADMIN')")
      * @Route("/admin/reporting", name="admin_capco_app_reporting_index")
      * @Template("@CapcoAdmin/RecentReporting/index.html.twig")
      */

@@ -19,7 +19,7 @@ class ElasticsearchCollector extends DataCollector
     public function collect(
         Request $request,
         Response $response,
-        ?\Exception $exception = null
+        \Exception|\Throwable|null $exception = null
     ): void {
         $this->data['queries_count'] = $this->logger->getQueriesCount();
         $this->data['queries'] = $this->logger->getQueries();

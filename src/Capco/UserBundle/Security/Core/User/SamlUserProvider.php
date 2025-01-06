@@ -31,7 +31,7 @@ class SamlUserProvider implements UserProviderInterface
 
                 // If the id is not a valid email, we create a fake one...
                 if (false === filter_var($email, \FILTER_SANITIZE_EMAIL)) {
-                    $email = preg_replace('/\s+/', '', $id) . '@fake-email-cap-collectif.com';
+                    $email = preg_replace('/\s+/', '', (string) $id) . '@fake-email-cap-collectif.com';
                 }
 
                 $user->setEmail($email);

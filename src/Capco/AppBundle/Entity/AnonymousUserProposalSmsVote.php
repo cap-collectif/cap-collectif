@@ -28,7 +28,7 @@ class AnonymousUserProposalSmsVote
 
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Proposal")
-     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id")
+     * @ORM\JoinColumn(name="proposal_id", referencedColumnName="id", onDelete="CASCADE")
      */
     private Proposal $proposal;
 

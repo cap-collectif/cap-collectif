@@ -66,7 +66,7 @@ class ProjectController extends Controller
     }
 
     /**
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      * @Route("/projects/{projectSlug}/votes", name="app_project_show_user_votes")
      * @Entity("project", options={"mapping": {"projectSlug": "slug"}})
      * @Template("@CapcoApp/Project/show_user_votes.html.twig")

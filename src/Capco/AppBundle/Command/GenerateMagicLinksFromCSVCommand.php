@@ -26,8 +26,6 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class GenerateMagicLinksFromCSVCommand extends Command
 {
-    private const SUCCESS = 0;
-    private const ERROR = 1;
     private const FILE_FOLDER = '/public/magiclinks/';
     private SymfonyStyle $style;
     private string $absoluteFilePath;
@@ -76,7 +74,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
             if (!$confirm) {
                 $this->style->warning('Command aborted');
 
-                return self::ERROR;
+                return Command::FAILURE;
             }
 
             try {
@@ -84,7 +82,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
             } catch (\Throwable $th) {
                 $this->style->error($th->getMessage());
 
-                return self::ERROR;
+                return Command::FAILURE;
             }
         } else {
             $this->style->warning('No new users to create, skipping.');
@@ -98,7 +96,7 @@ class GenerateMagicLinksFromCSVCommand extends Command
         if (!$confirm) {
             $this->style->warning('Command aborted');
 
-            return self::ERROR;
+            return Command::FAILURE;
         }
 
         try {
@@ -108,10 +106,10 @@ class GenerateMagicLinksFromCSVCommand extends Command
             $this->style->error($th->getMessage());
             $this->style->error($th->getTraceAsString());
 
-            return self::ERROR;
+            return Command::FAILURE;
         }
 
-        return self::SUCCESS;
+        return Command::SUCCESS;
     }
 
     protected function configure()

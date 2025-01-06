@@ -5,7 +5,7 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\Type;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
 use Capco\AppBundle\GraphQL\Resolver\Type\FormattedValueResponseTypeResolver;
 use PhpSpec\ObjectBehavior;
-use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class FormattedValueResponseTypeResolverSpec extends ObjectBehavior
 {

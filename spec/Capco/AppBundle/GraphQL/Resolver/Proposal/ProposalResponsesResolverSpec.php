@@ -95,7 +95,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
             ->willReturn($responses->toArray())
         ;
         $authorizationChecker
-            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->isGranted(ProposalAnalysisRelatedVoter::VIEW, $proposal)
             ->willReturn(true)
         ;
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
@@ -132,7 +132,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
             ->willReturn($responses->toArray())
         ;
         $authorizationChecker
-            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->isGranted(ProposalAnalysisRelatedVoter::VIEW, $proposal)
             ->willReturn(true)
         ;
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
@@ -168,7 +168,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
             ->willReturn($responses->toArray())
         ;
         $authorizationChecker
-            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->isGranted(ProposalAnalysisRelatedVoter::VIEW, $proposal)
             ->willReturn(false)
         ;
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
@@ -205,7 +205,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
             ->willReturn($responses->toArray())
         ;
         $authorizationChecker
-            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->isGranted(ProposalAnalysisRelatedVoter::VIEW, $proposal)
             ->willReturn(false)
         ;
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
@@ -299,7 +299,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
             ->willReturn($responses->toArray())
         ;
         $authorizationChecker
-            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->isGranted(ProposalAnalysisRelatedVoter::VIEW, $proposal)
             ->willReturn(false)
         ;
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());
@@ -334,7 +334,7 @@ class ProposalResponsesResolverSpec extends ObjectBehavior
             ->willReturn($responses->toArray())
         ;
         $authorizationChecker
-            ->isGranted([ProposalAnalysisRelatedVoter::VIEW], $proposal)
+            ->isGranted(ProposalAnalysisRelatedVoter::VIEW, $proposal)
             ->willReturn(false)
         ;
         $abstractQuestionRepository->findByProposalForm($form)->willReturn($questions->toArray());

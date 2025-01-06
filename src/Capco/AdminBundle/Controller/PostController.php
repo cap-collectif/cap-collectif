@@ -21,7 +21,7 @@ class PostController extends AbstractController
 
     /**
      * @Route("/admin/capco/app/post/create", name="capco_admin_create_post")
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function createAction(Request $request): Response
     {
@@ -43,7 +43,7 @@ class PostController extends AbstractController
     /**
      * @Route("/admin/capco/app/post/{postId}/edit", name="capco_admin_edit_post")
      * @Entity("post", class="CapcoAppBundle:Post", options={"mapping" = {"postId": "id"}, "repository_method"= "find", "map_method_signature" = true})
-     * @Security("has_role('ROLE_USER')")
+     * @Security("is_granted('ROLE_USER')")
      */
     public function editAction(?Post $post): Response
     {

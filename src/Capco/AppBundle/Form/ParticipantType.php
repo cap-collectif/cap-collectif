@@ -18,7 +18,6 @@ class ParticipantType extends AbstractType
             ->add('email')
             ->add('dateOfBirth', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('postalAddress')
             ->add('phone')

@@ -43,7 +43,7 @@ class ProposalEvaluationResolver implements QueryInterface
         $isAnalyst = false;
         if ($viewer instanceof User) {
             $isAnalyst = $this->authorizationChecker->isGranted(
-                [ProposalAnalysisRelatedVoter::VIEW],
+                ProposalAnalysisRelatedVoter::VIEW,
                 $evaluation->getProposal()
             );
         }

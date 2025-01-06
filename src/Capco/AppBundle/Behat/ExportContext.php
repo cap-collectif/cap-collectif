@@ -2,9 +2,8 @@
 
 namespace Capco\AppBundle\Behat;
 
+use Behat\Behat\Context\Context;
 use Behat\Gherkin\Node\PyStringNode;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
-use Behat\Symfony2Extension\Context\KernelDictionary;
 use Box\Spout\Common\Entity\Row;
 use Box\Spout\Common\Type;
 use Box\Spout\Reader\Common\Creator\ReaderFactory;
@@ -19,11 +18,9 @@ use Capco\AppBundle\Repository\AbstractStepRepository;
 use PHPUnit\Framework\Assert;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class ExportContext implements KernelAwareContext
+class ExportContext implements Context
 {
-    use KernelDictionary;
-
-    private const SNAPSHOTS_DIRNAME = '/../__snapshots__/exports';
+    private const SNAPSHOTS_DIRNAME = '/__snapshots__/exports';
 
     private $config = [
         'readerType' => Type::CSV,
@@ -31,9 +28,8 @@ class ExportContext implements KernelAwareContext
         'enclosure' => '"',
     ];
 
-    public function setKernel(KernelInterface $kernel): void
+    public function __construct(private readonly KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     /**
@@ -128,7 +124,7 @@ class ExportContext implements KernelAwareContext
         $this->setConfigParameter('readerType', $fileType);
 
         $realPath = "/tmp/{$name}";
-        $snapshotPath = $this->getKernel()->getRootDir() . '/../__snapshots__/imports' . "/{$name}";
+        $snapshotPath = $this->kernel->getProjectDir() . '/__snapshots__/imports' . "/{$name}";
 
         $this->compareFileWithSnapshot($realPath, $snapshotPath);
     }
@@ -179,12 +175,12 @@ class ExportContext implements KernelAwareContext
 
     private function getExportDir(): string
     {
-        return $this->getKernel()->getRootDir() . '/../public/export';
+        return $this->kernel->getProjectDir() . '/public/export';
     }
 
     private function getSnapshotsDir(): string
     {
-        return $this->getKernel()->getRootDir() . self::SNAPSHOTS_DIRNAME;
+        return $this->kernel->getProjectDir() . self::SNAPSHOTS_DIRNAME;
     }
 
     private function getConfig(): array

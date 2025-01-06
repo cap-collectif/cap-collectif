@@ -24,11 +24,9 @@ class OtherStepType extends AbstractType
             ])
             ->add('startAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('endAt', DateTimeType::class, [
                 'widget' => 'single_text',
-                'format' => 'Y-MM-dd HH:mm:ss',
             ])
             ->add('isEnabled', CheckboxType::class)
             ->add('timeless', CheckboxType::class)

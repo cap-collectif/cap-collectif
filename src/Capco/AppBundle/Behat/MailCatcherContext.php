@@ -3,22 +3,17 @@
 namespace Capco\AppBundle\Behat;
 
 use Alex\MailCatcher\Behat\MailCatcherContext as Base;
-use Behat\Symfony2Extension\Context\KernelAwareContext;
 use Capco\AppBundle\Helper\EnvHelper;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpKernel\KernelInterface;
 
-class MailCatcherContext extends Base implements KernelAwareContext
+class MailCatcherContext extends Base
 {
     final public const SNAPSHOTS_PATH = '/var/www/__snapshots__/emails/';
     final public const SNAPSHOTS_DIFF_PATH = '/var/www/__snapshots-diff__/';
 
-    /**
-     * {@inheritdoc}
-     */
-    public function setKernel(KernelInterface $kernel)
+    public function __construct(private readonly KernelInterface $kernel)
     {
-        $this->kernel = $kernel;
     }
 
     /**
