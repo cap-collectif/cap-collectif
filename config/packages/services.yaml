@@ -105,9 +105,7 @@ services:
         arguments:
             $properties: { facebook: facebook_id }
 
-    Capco\UserBundle\Security\Core\User\SamlUserProvider:
-        arguments:
-            $samlIdp: '%saml_sp%'
+    Capco\UserBundle\Security\Core\User\SamlUserProvider: ~
 
     Capco\UserBundle\Listener\UserNotificationsListener:
         autowire: true
