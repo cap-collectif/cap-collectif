@@ -11,7 +11,9 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Entity;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Routing\Exception\InvalidParameterException;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ThemeController extends Controller
@@ -37,15 +39,18 @@ class ThemeController extends Controller
         ]);
 
         if ('POST' === $request->getMethod()) {
-            $form->handleRequest($request);
+            try {
+                $form->handleRequest($request);
+                if ($form->isValid()) {
+                    // redirect to the results page (avoids reload alerts)
+                    $data = $form->getData();
 
-            if ($form->isValid()) {
-                // redirect to the results page (avoids reload alerts)
-                $data = $form->getData();
-
-                return $this->redirect(
-                    $this->generateUrl('app_theme_search', ['term' => $data['term']])
-                );
+                    return $this->redirect(
+                        $this->generateUrl('app_theme_search', ['term' => $data['term']])
+                    );
+                }
+            } catch (InvalidParameterException) {
+                throw new BadRequestHttpException('Bad Request');
             }
         } else {
             $form->setData(['term' => $term]);
