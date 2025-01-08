@@ -106,7 +106,7 @@ class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Owne
      * @var bool
      * @ORM\Column(name="acknowledge_replies", type="boolean", nullable=false)
      */
-    private $acknowledgeReplies = false;
+    private $acknowledgeReplies = true;
 
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\ProposalForm", mappedBy="evaluationForm", cascade={"persist"})
