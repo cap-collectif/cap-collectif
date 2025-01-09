@@ -22,26 +22,16 @@ class CasAuthenticator extends AbstractGuardAuthenticator
 
     public function supports(Request $request): bool
     {
-        return '/login-cas' === $request->getPathInfo();
+        return '/login-cas' === $request->getPathInfo()
+            && null !== $request->getSession()->get('cas_login');
     }
 
     public function getCredentials(Request $request): ?string
     {
-        if (!$request->hasSession()) {
-            throw new AuthenticationException('Session required for CAS authentication.');
-        }
+        $casId = $request->getSession()->get('cas_login');
+        $this->logger->info('CAS ID found in session: ' . $casId);
 
-        $session = $request->getSession();
-        if ($session->has('cas_login')) {
-            $casId = $session->get('cas_login');
-            $this->logger->info('CAS ID found in session: ' . $casId);
-
-            return $casId;
-        }
-
-        $this->logger->debug('No CAS authentication used.');
-
-        return null;
+        return $casId;
     }
 
     public function getUser($credentials, UserProviderInterface $userProvider): ?UserInterface

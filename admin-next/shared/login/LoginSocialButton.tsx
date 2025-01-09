@@ -69,7 +69,7 @@ export const getButtonLinkForType = (
       return `/login/openid?_destination=${redirectUri}`
 
     case 'cas':
-      return `/login-cas?_destination=${destination}`
+      return `/login-cas?_destination=${destination}login-cas`
 
     case 'saml':
       return `/login-saml?_destination=${destination}`
