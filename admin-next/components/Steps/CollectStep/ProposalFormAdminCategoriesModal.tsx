@@ -176,7 +176,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
       }
 
       return {
-        id: values.id,
+        id: initialValue?.id ?? null,
         name: values.categoryName,
         color: values.categoryColor,
         icon: values.categoryIcon,
