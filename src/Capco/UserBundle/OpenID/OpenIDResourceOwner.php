@@ -157,7 +157,9 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
         $scope = $this->getScope();
 
         match ($this->getInstanceName()) {
-            'carpentras', 'debatpenly', 'debateauidf', 'debatdsf', 'participer-debat-lithium', 'participer-debat-gravelines', 'participer-debat-fessenheim' => $resolver
+            'carpentras', 'debatpenly', 'debateauidf', 'debatdsf',
+            'participer-debat-lithium', 'participer-debat-gravelines',
+            'participer-debat-fessenheim', 'participer-debat-bugey' => $resolver
                 ->setDefaults([
                     'state' => null,
                     'csrf' => true,
