@@ -62,3 +62,24 @@ Object {
   },
 }
 `;
+
+exports[`mutations.addCollectStepMutation proposal form owner should be organization when admin create the step in a project owned by an organization. 1`] = `
+Object {
+  "addCollectStep": Object {
+    "step": Object {
+      "__typename": "CollectStep",
+      "form": Object {
+        "allowAknowledge": true,
+        "creator": Object {
+          "username": "lbrunet",
+        },
+        "owner": Object {
+          "username": "GIEC",
+        },
+        "title": "Budget Participatif d'organisation - proposal-form",
+      },
+      "title": "Dépôt",
+    },
+  },
+}
+`;

@@ -49,4 +49,12 @@ describe('mutations.addCollectStepMutation', () => {
     );
     expect(response).toMatchSnapshot();
   });
+  it('proposal form owner should be organization when admin create the step in a project owned by an organization.', async () => {
+    const response = await graphql(
+      AddCollectStep,
+      {input: {projectId: toGlobalId('Project', 'projectOrgaVisibilityAdminAndMe') }},
+      'internal_super_admin',
+    );
+    expect(response).toMatchSnapshot();
+  });
 });

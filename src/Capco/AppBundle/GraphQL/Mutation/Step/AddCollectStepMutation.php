@@ -27,8 +27,7 @@ class AddCollectStepMutation implements MutationInterface
         $projectId = $input->offsetGet('projectId');
         $project = $this->addStepService->getProject($projectId, $viewer);
 
-        $organization = $viewer->getOrganization();
-        $owner = $organization ?? $viewer;
+        $owner = $project->getOwner() ?? $viewer;
 
         $proposalForm = (new ProposalForm())
             ->setTitle("{$project->getTitle()} - {$this->translator->trans('proposal-form')}")

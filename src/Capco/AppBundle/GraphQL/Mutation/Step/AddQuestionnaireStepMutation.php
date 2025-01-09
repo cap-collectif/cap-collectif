@@ -25,8 +25,7 @@ class AddQuestionnaireStepMutation implements MutationInterface
         ['step' => $step] = $this->addStepService->addStep($input, $viewer, 'QUESTIONNAIRE');
         $questionnaire = $step->getQuestionnaire();
 
-        $organization = $viewer->getOrganization();
-        $owner = $organization ?? $viewer;
+        $owner = $step->getProject()->getOwner() ?? $viewer;
         $questionnaire->setCreator($viewer);
         $questionnaire->setOwner($owner);
 

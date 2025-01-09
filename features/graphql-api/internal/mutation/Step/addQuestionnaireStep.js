@@ -59,4 +59,12 @@ describe('mutations.addQuestionnaireStepMutation', () => {
     );
     expect(response).toMatchSnapshot();
   });
+  it('questionnaire owner should be organization when admin create the step in a project owned by an organization.', async () => {
+    const response = await graphql(
+      AddQuestionnaireStep,
+      {input: {projectId: toGlobalId('Project', 'projectOrgaVisibilityAdminAndMe') }},
+      'internal_super_admin',
+    );
+    expect(response).toMatchSnapshot();
+  });
 });

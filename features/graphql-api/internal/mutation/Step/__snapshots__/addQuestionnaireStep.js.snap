@@ -98,3 +98,36 @@ Object {
   },
 }
 `;
+
+exports[`mutations.addQuestionnaireStepMutation questionnaire owner should be organization when admin create the step in a project owned by an organization. 1`] = `
+Object {
+  "addQuestionnaireStep": Object {
+    "step": Object {
+      "__typename": "QuestionnaireStep",
+      "body": null,
+      "collectParticipantsEmail": true,
+      "enabled": true,
+      "isAnonymousParticipationAllowed": true,
+      "label": "Questionnaire",
+      "questionnaire": Object {
+        "creator": Object {
+          "username": "lbrunet",
+        },
+        "description": null,
+        "owner": Object {
+          "username": "GIEC",
+        },
+        "questions": Array [
+          Object {
+            "position": 1,
+            "title": "Avez-vous une remarque à apporter ?",
+            "type": "textarea",
+          },
+        ],
+        "title": "Questionnaire",
+      },
+      "title": "Questionnaire",
+    },
+  },
+}
+`;
