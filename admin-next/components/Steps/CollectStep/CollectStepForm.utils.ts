@@ -6,7 +6,7 @@ import { getStatusesInitialValues, getStatusesInputList } from '@components/Step
 import { getDefaultRequirements, getRequirementsInput } from '@components/Requirements/Requirements'
 import { getFormattedCategories } from '@components/Steps/CollectStep/ProposalFormAdminCategories'
 import { StepDurationTypeEnum } from '../Shared/StepDurationInput'
-import { formatQuestions, formatQuestionsInput } from '../QuestionnaireStep/utils'
+import { formatQuestions, formatQuestionsInput, mergeQuestionsAndJumpsBeforeSubmit } from '../QuestionnaireStep/utils'
 import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 import { getVoteParameterInput, voteTypeForTabs } from '../utils'
 import { ProposalSort, StepStatusInput } from '@relay/UpdateCollectStepMutation.graphql'
@@ -138,11 +138,7 @@ export const getProposalFormUpdateVariablesInput = (
   formValues: FormValues['form'],
   selectedTab: FormTabs,
 ): Omit<UpdateProposalFormMutation$variables['input'], 'clientMutationId' | 'proposalFormId'> => {
-  const questions = formValues?.questionnaire?.questions ?? []
-  const mergedArr = questions.map(q => {
-    const j = formValues.questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
-    return { ...q, jumps: [], alwaysJumpDestinationQuestion: null, ...j }
-  })
+  const mergedArr = mergeQuestionsAndJumpsBeforeSubmit(formValues.questionnaire)
 
   delete formValues.questionnaire
 

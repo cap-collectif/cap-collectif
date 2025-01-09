@@ -7,6 +7,14 @@ import { IntlShape } from 'react-intl'
 import { getDefaultRequirements } from '../../Requirements/Requirements'
 import { EnabledEnum } from '@components/Steps/Shared/PublicationInput'
 
+export type Questionnaire = {
+  questionnaireId: string
+  title: string
+  description: string
+  questions: Array<QuestionInput>
+  questionsWithJumps: Array<any>
+}
+
 export const questionTypeToLabel = (type: QuestionTypeValue) => {
   switch (type) {
     case 'button':
@@ -262,4 +270,12 @@ export const getDefaultValues = (stepId, step, keepRequirements?: boolean): Form
     requirementsReason: keepRequirements ? step.requirementsReason : step.requirements?.reason ?? '',
     collectParticipantsEmail: step.collectParticipantsEmail ?? false,
   }
+}
+
+export const mergeQuestionsAndJumpsBeforeSubmit = (questionnaire: Partial<Questionnaire>) => {
+  const questions = questionnaire?.questions ?? []
+  return questions.map(q => {
+    const j = questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
+    return { ...q, jumps: [], alwaysJumpDestinationQuestion: null, ...j, title: q.title }
+  })
 }

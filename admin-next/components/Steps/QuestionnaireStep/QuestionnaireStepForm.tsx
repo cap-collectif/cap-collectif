@@ -15,7 +15,7 @@ import QuestionnaireStepRequirementsTabs from '@components/Requirements/Question
 import { getRequirementsInput, RequirementsFormValues } from '@components/Requirements/Requirements'
 import QuestionnaireStepOptionalParameters from './QuestionnaireStepFormOptionalParameters'
 import QuestionnaireStepFormQuestionnaireTab from './QuestionnaireStepFormQuestionnaireTab'
-import { formatQuestionsInput, getDefaultValues } from './utils'
+import { formatQuestionsInput, getDefaultValues, mergeQuestionsAndJumpsBeforeSubmit, Questionnaire } from './utils'
 import UpdateQuestionnaireMutation from '@mutations/UpdateQuestionnaireMutation'
 import { QuestionInput } from '@relay/UpdateQuestionnaireMutation.graphql'
 import { onBack } from '@components/Steps/utils'
@@ -26,14 +26,6 @@ import StepDurationInput from '../Shared/StepDurationInput'
 type Props = {
   stepId: string
   setHelpMessage: React.Dispatch<React.SetStateAction<string | null>>
-}
-
-type Questionnaire = {
-  questionnaireId: string
-  title: string
-  description: string
-  questions: Array<QuestionInput>
-  questionsWithJumps: Array<any>
 }
 
 export type FormValues = {
@@ -243,10 +235,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       }) ??
       null
 
-    const mergedArr = questionnaire.questions.map(q => {
-      const j = questionnaire.questionsWithJumps.find(jump => q.id && jump.id && q.id === jump.id)
-      return { ...q, jumps: [], alwaysJumpDestinationQuestion: null, ...j }
-    })
+    const mergedArr = mergeQuestionsAndJumpsBeforeSubmit(questionnaire)
 
     delete questionnaire.questionsWithJumps
 
