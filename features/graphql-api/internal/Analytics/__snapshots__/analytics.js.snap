@@ -54,198 +54,6 @@ Object {
       "totalCount": 4,
       "values": Array [
         Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -733,198 +541,6 @@ Object {
     },
     "comments": Object {
       "values": Array [
-        Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
         Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
@@ -1414,198 +1030,6 @@ Object {
     "contributions": Object {
       "values": Array [
         Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -2094,198 +1518,6 @@ Object {
     "contributors": Object {
       "values": Array [
         Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -2773,198 +2005,6 @@ Object {
     },
     "followers": Object {
       "values": Array [
-        Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
         Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
@@ -3528,198 +2568,6 @@ Object {
     "registrations": Object {
       "values": Array [
         Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -4250,198 +3098,6 @@ Object {
     "visitors": Object {
       "values": Array [
         Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -4929,198 +3585,6 @@ Object {
     },
     "votes": Object {
       "values": Array [
-        Object {
-          "key": "2010-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2010-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2011-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2012-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-01-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-02-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-03-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-04-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-05-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-06-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-07-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-08-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-09-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-10-01T00:00:00.000+02:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-11-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
-        Object {
-          "key": "2013-12-01T00:00:00.000+01:00",
-          "totalCount": 0,
-        },
         Object {
           "key": "2014-01-01T00:00:00.000+01:00",
           "totalCount": 0,
@@ -5618,6 +4082,50 @@ Object {
       "totalCount": 0,
       "values": Array [
         Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -6061,6 +4569,50 @@ Object {
     },
     "comments": Object {
       "values": Array [
+        Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
         Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,
@@ -6506,6 +5058,50 @@ Object {
     "contributions": Object {
       "values": Array [
         Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -6950,6 +5546,50 @@ Object {
     "contributors": Object {
       "values": Array [
         Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -7393,6 +6033,50 @@ Object {
     },
     "followers": Object {
       "values": Array [
+        Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
         Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,
@@ -7861,6 +6545,50 @@ Object {
     },
     "registrations": Object {
       "values": Array [
+        Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
         Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,
@@ -8348,6 +7076,50 @@ Object {
     "visitors": Object {
       "values": Array [
         Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,
         },
@@ -8791,6 +7563,50 @@ Object {
     },
     "votes": Object {
       "values": Array [
+        Object {
+          "key": "2014-01-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-02-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-03-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-04-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-05-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-06-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-07-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-08-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-09-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-10-01T00:00:00.000+02:00",
+          "totalCount": 0,
+        },
+        Object {
+          "key": "2014-11-01T00:00:00.000+01:00",
+          "totalCount": 0,
+        },
         Object {
           "key": "2014-12-01T00:00:00.000+01:00",
           "totalCount": 0,

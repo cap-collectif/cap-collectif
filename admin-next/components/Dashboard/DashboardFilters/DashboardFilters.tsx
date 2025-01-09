@@ -60,7 +60,7 @@ const getDateRangeProject = (projects: DashboardFilters_viewer$data['projects'],
 
   if (projectSelected.timeRange) {
     return {
-      startAt: projectSelected.timeRange?.startAt || DEFAULT_FILTERS.dateRange.startAt,
+      startAt: projectSelected.createdAt || DEFAULT_FILTERS.dateRange.startAt,
       endAt: projectSelected.timeRange?.endAt || DEFAULT_FILTERS.dateRange.endAt,
     }
   }
@@ -83,6 +83,16 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
   const { setFilters, filters } = useDashboard()
 
   const { projects } = viewer
+  const minStartedAt = new Date('2014-01-01')
+  const today = new Date();
+  if (new Date(filters.dateRange.startAt) < minStartedAt) {
+      filters.dateRange.startAt = minStartedAt.toISOString();
+  }
+
+  if (new Date(filters.dateRange.endAt) > today) {
+      filters.dateRange.endAt = today.toISOString();
+  }
+
   const [dateRange, setDateRange] = useState({
     startDate: moment(filters.dateRange.startAt),
     endDate: moment(filters.dateRange.endAt),

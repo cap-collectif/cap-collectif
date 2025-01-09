@@ -86,15 +86,11 @@ class QueryAnalyticsDataLoader extends BatchDataLoader
                 throw new UserError('This project id does not exist.');
             }
             $projectSlug = $project->getSlug();
+        }
 
-            // Some performance optimization:
-            // We avoid getting a too wide time range by setting
-            // the start date to the project's creation date
-            // if the given start date is smaller.
-            $projectPublicationDate = $project->getCreatedAt();
-            if ($start < $projectPublicationDate) {
-                $start = $projectPublicationDate;
-            }
+        $minDate = new \DateTime('2014-01-01');
+        if ($start < $minDate) {
+            $start = $minDate;
         }
 
         // Prefill the results array with empty

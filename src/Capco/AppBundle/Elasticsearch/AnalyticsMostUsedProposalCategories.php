@@ -43,10 +43,9 @@ class AnalyticsMostUsedProposalCategories
         $categoriesFromDb = $this->repository->hydrateFromIdsOrdered($ids);
 
         $this->values = array_map(
-            static fn (array $category, int $i) => new AnalyticsUsedProposalCategory(
-                $categoriesFromDb[$i],
-                $category['doc_count']
-            ),
+            static fn (array $category, int $i) => isset($categoriesFromDb[$i])
+                ? new AnalyticsUsedProposalCategory($categoriesFromDb[$i], $category['doc_count'])
+                : null,
             $categories,
             array_keys($categories)
         );
