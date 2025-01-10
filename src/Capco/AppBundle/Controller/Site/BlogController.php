@@ -13,6 +13,7 @@ use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpKernel\Exception\BadRequestHttpException;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -40,6 +41,11 @@ class BlogController extends Controller
 
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
+
+            if (!$form->isSubmitted()) {
+                // POST verb but form not submitted is not suitable case. Might be a hack attempt.
+                throw new BadRequestHttpException('Bad Request');
+            }
 
             if ($form->isValid()) {
                 // redirect to the results page (avoids reload alerts)

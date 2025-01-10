@@ -41,6 +41,12 @@ class ThemeController extends Controller
         if ('POST' === $request->getMethod()) {
             try {
                 $form->handleRequest($request);
+
+                if (!$form->isSubmitted()) {
+                    // POST verb but form not submitted is not suitable case. Might be a hack attempt.
+                    throw new BadRequestHttpException('Bad Request');
+                }
+
                 if ($form->isValid()) {
                     // redirect to the results page (avoids reload alerts)
                     $data = $form->getData();
