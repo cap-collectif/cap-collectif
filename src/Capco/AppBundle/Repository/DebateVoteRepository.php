@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Debate\Debate;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Enum\VoteOrderField;
@@ -10,6 +11,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
 use Doctrine\ORM\NoResultException;
+use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Psr\Log\LoggerInterface;
@@ -137,18 +139,51 @@ class DebateVoteRepository extends EntityRepository
     }
 
     /**
-     * @return array<DebateVote>
+     * @return array<DebateAnonymousVote|DebateVote>
      */
     public function getDebateVotes(Debate $debate, int $offset, int $limit): array
     {
-        return $this->createQueryBuilder('v')
-            ->where('v.debate = :debate')
-            ->setParameter('debate', $debate)
-            ->setFirstResult($offset)
-            ->setMaxResults($limit)
-            ->getQuery()
-            ->getResult()
-            ;
+        $rsm = new ResultSetMapping();
+        $rsm->addScalarResult('id', 'id');
+        $rsm->addScalarResult('vote_type', 'vote_type');
+
+        $sql = <<<'SQL'
+                    (SELECT id, 'debate_anonymous_vote' AS vote_type FROM debate_anonymous_vote WHERE debate_id = :debateId)
+                        UNION ALL
+                    (SELECT id, 'votes' AS vote_type FROM votes WHERE debate_id = :debateId)
+                    LIMIT :limit
+                    OFFSET :offset;
+            SQL;
+
+        $query = $this->getEntityManager()
+            ->createNativeQuery($sql, $rsm)
+        ;
+
+        $results = $query
+            ->setParameter('debateId', $debate->getId())
+            ->setParameter('limit', $limit)
+            ->setParameter('offset', $offset)
+            ->getScalarResult()
+        ;
+
+        $debateAnonymousVoteIds = [];
+        $debateVoteIds = [];
+        foreach ($results as $result) {
+            if ('debate_anonymous_vote' === $result['vote_type']) {
+                $debateAnonymousVoteIds[] = $result['id'];
+            } else {
+                $debateVoteIds[] = $result['id'];
+            }
+        }
+
+        $debateAnonymousVotes = $this->getEntityManager()
+            ->getRepository(DebateAnonymousVote::class)
+            ->findBy(['id' => $debateAnonymousVoteIds])
+        ;
+
+        $debateVotes = $this->findBy(['id' => $debateVoteIds]);
+
+        return array_merge($debateAnonymousVotes, $debateVotes);
     }
 
     private function getUnpublishedByDebateAndUserQB(Debate $debate, User $user): QueryBuilder

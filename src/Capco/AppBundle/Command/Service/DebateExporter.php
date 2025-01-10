@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
@@ -38,8 +39,8 @@ class DebateExporter
     }
 
     /**
-     * @param array<DebateVote>     $data
-     * @param array<string, string> $paths
+     * @param array<DebateAnonymousVote|DebateVote> $data
+     * @param array<string, string>                 $paths
      */
     protected function exportDebates(array $data, array $paths, bool $withHeaders): void
     {
@@ -51,8 +52,8 @@ class DebateExporter
     }
 
     /**
-     * @param array<DebateVote>     $data
-     * @param array<string, string> $paths
+     * @param array<DebateAnonymousVote|DebateVote> $data
+     * @param array<string, string>                 $paths
      */
     protected function writeFiles(array $data, array $paths, bool $withHeaders): void
     {
@@ -68,7 +69,7 @@ class DebateExporter
     }
 
     /**
-     * @param array<DebateVote> $data
+     * @param array<DebateAnonymousVote|DebateVote> $data
      */
     private function write(string $path, array $data, bool $withHeader, bool $isFullExport): void
     {

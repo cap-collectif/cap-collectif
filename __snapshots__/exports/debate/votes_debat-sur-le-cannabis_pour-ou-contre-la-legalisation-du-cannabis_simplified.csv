@@ -1,4 +1,9 @@
 ﻿export_vote_published_at,export_vote_type,export_vote_author_id
+"2015-01-01 00:00:00",export_vote_type_against,
+"2015-01-01 00:00:00",export_vote_type_against,
+"2015-01-01 00:00:00",export_vote_type_for,
+"2015-01-01 00:00:00",export_vote_type_for,
+"2015-01-01 00:00:00",export_vote_type_for,
 "2015-01-01 09:01:00",export_vote_type_against,userSpyl
 "2015-01-01 09:02:00",export_vote_type_for,userIan
 "2015-01-01 09:03:00",export_vote_type_against,userMickael

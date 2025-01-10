@@ -1698,14 +1698,20 @@ class UserRepository extends EntityRepository
      */
     public function getCollectParticipants(CollectStep $step, int $offset, int $limit): array
     {
-        $qb = $this->createQueryBuilder('user')
+        $qb = $this->createQueryBuilder('user');
+        $qb
             ->select('DISTINCT user')
-        ;
-
-        $qb = $this->getConfirmedParticipantsFromCollectOrSelectionStep($qb)
-            ->andWhere('proposalForm.step = :step')
-            ->setParameter('step', $step)
+            ->leftJoin('CapcoAppBundle:ProposalCollectVote', 'vote', 'WITH', 'vote.user = user.id')
+            ->leftJoin('user.proposals', 'proposal')
+            ->leftJoin('proposal.proposalForm', 'proposalForm')
+            ->where(
+                $qb->expr()->orX(
+                    'vote.collectStep = :collectStep',
+                    'proposalForm.step = :collectStep'
+                )
+            )
             ->andWhere('user.confirmationToken IS NULL')
+            ->setParameter('collectStep', $step)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
         ;

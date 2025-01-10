@@ -163,23 +163,23 @@ class OpinionNormalizer extends BaseNormalizer implements NormalizerInterface
         }
 
         $step = $object->getStep();
-        $isVotable = null !== $step ? $step->isVotable() : null;
+        $isVotable = $step?->isVotable();
         $author = $object->getAuthor();
         $opinionType = $object->getOpinionType();
         $votes = $object->getVotes();
         $arguments = $object->getArguments();
         $sources = $object->getSources();
         $versions = $object->getVersions();
-        $userType = null !== $author ? $author->getUserType() : null;
-        $opinionTypeConsultation = null !== $opinionType ? $opinionType->getConsultation() : null;
+        $userType = $author?->getUserType();
+        $opinionTypeConsultation = $opinionType?->getConsultation();
 
         $opinionArray = [
             self::EXPORT_CONTRIBUTION_TYPE => $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME),
             self::EXPORT_CONTRIBUTION_ID => $object->getId(),
-            self::EXPORT_CONTRIBUTION_AUTHOR_ID => null !== $author ? $author->getId() : null,
-            self::EXPORT_CONTRIBUTION_AUTHOR_TYPE_NAME => null !== $userType ? $userType->getName() : null,
-            self::EXPORT_CONTRIBUTION_CONSULTATION_TITLE => null !== $opinionTypeConsultation ? $opinionTypeConsultation->getTitle() : null,
-            self::EXPORT_CONTRIBUTION_SECTION_TITLE => null !== $opinionType ? $opinionType->getTitle() : null,
+            self::EXPORT_CONTRIBUTION_AUTHOR_ID => $author?->getId(),
+            self::EXPORT_CONTRIBUTION_AUTHOR_TYPE_NAME => $userType?->getName(),
+            self::EXPORT_CONTRIBUTION_CONSULTATION_TITLE => $opinionTypeConsultation?->getTitle(),
+            self::EXPORT_CONTRIBUTION_SECTION_TITLE => $opinionType?->getTitle(),
             self::EXPORT_CONTRIBUTION_TITLE => $object->getTitle(),
             self::EXPORT_CONTRIBUTION_BODY_TEXT => $object->getBodyText(),
             self::EXPORT_CONTRIBUTION_URL => $this->opinionUrlResolver->__invoke($object),
@@ -215,10 +215,10 @@ class OpinionNormalizer extends BaseNormalizer implements NormalizerInterface
             $opinionArray = [
                 self::EXPORT_CONTRIBUTION_TYPE => $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_NAME),
                 self::EXPORT_CONTRIBUTION_ID => $object->getId(),
-                self::EXPORT_CONTRIBUTION_AUTHOR_ID => null !== $author ? $author->getId() : null,
-                self::EXPORT_CONTRIBUTION_AUTHOR_TYPE_NAME => null !== $userType ? $userType->getName() : null,
-                self::EXPORT_CONTRIBUTION_CONSULTATION_TITLE => null !== $opinionTypeConsultation ? $opinionTypeConsultation->getTitle() : null,
-                self::EXPORT_CONTRIBUTION_SECTION_TITLE => null !== $opinionType ? $opinionType->getTitle() : null,
+                self::EXPORT_CONTRIBUTION_AUTHOR_ID => $author?->getId(),
+                self::EXPORT_CONTRIBUTION_AUTHOR_TYPE_NAME => $userType?->getName(),
+                self::EXPORT_CONTRIBUTION_CONSULTATION_TITLE => $opinionTypeConsultation?->getTitle(),
+                self::EXPORT_CONTRIBUTION_SECTION_TITLE => $opinionType?->getTitle(),
                 self::EXPORT_CONTRIBUTION_TITLE => $object->getTitle(),
                 self::EXPORT_CONTRIBUTION_BODY_TEXT => $object->getBodyText(),
                 self::EXPORT_CONTRIBUTIONS_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),

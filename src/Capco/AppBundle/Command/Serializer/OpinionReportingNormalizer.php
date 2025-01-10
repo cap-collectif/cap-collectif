@@ -42,10 +42,10 @@ class OpinionReportingNormalizer extends BaseNormalizer implements NormalizerInt
 
         if ($isFullExport) {
             $reportingArray = [
-                self::EXPORT_CONTRIBUTION_REPORTINGS_RELATED_ID => null !== $related ? $related->getId() : null,
-                self::EXPORT_CONTRIBUTION_REPORTINGS_RELATED_KIND => null !== $related ? $related->getKind() : null,
+                self::EXPORT_CONTRIBUTION_REPORTINGS_RELATED_ID => $related?->getId(),
+                self::EXPORT_CONTRIBUTION_REPORTINGS_RELATED_KIND => $related?->getKind(),
                 self::EXPORT_CONTRIBUTION_REPORTINGS_ID => $object->getId(),
-                self::EXPORT_CONTRIBUTION_REPORTINGS_AUTHOR_ID => null !== $reporter ? $reporter->getId() : null,
+                self::EXPORT_CONTRIBUTION_REPORTINGS_AUTHOR_ID => $reporter?->getId(),
                 self::EXPORT_CONTRIBUTION_REPORTINGS_TYPE => $this->getReportingType($object),
                 self::EXPORT_CONTRIBUTION_REPORTINGS_BODY => $object->getBody(),
                 self::EXPORT_CONTRIBUTION_REPORTINGS_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
@@ -75,7 +75,7 @@ class OpinionReportingNormalizer extends BaseNormalizer implements NormalizerInt
     {
         $related = $report->getRelated();
 
-        return match ($related) {
+        return match (true) {
             $related instanceof Opinion => $this->translator->trans('export_contribution_type_opinion_report'),
             $related instanceof Argument => $this->translator->trans('export_contribution_type_opinion_argument_report'),
             $related instanceof OpinionVersion => $this->translator->trans('export_contribution_type_opinion_version_report'),

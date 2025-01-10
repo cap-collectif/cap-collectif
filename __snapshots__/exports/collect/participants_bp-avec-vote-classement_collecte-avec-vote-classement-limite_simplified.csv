@@ -1,4 +1,7 @@
 ﻿export_participant_user_id,export_participant_username,export_participant_user_email,export_participant_consent_internal_communication,export_participant_phone,export_participant_type,export_participant_firstname,export_participant_lastname,export_participant_date_of_birth,export_participant_postal_address,export_participant_zip_code,export_participant_city,export_participant_profile_url,export_participant_identification_code,user_votes_total_count_per_step,user_proposal_count_per_step,user_voted_proposal_ids
 user1,lbrunet,lbrunet@cap-collectif.com,Oui,+3300000000,Citoyen,Laurent,Brunet,,,,,https://capco.dev/profile/lbrunet,,0,3,
+user2,sfavot,sfavot@cap-collectif.com,Non,+3300000000,Citoyen,Suzanne,Favot,,,,Antony,https://capco.dev/profile/sfavot,,2,0,"2,3"
+user5,user,user@test.com,Oui,+33635492871,Citoyen,Utilisateur,authentifier,"1996-03-01 00:00:00",,75012,Paris,https://capco.dev/profile/user,DK2AZ554,3,0,"1,2,3"
 userJean,Juan,jean@cap-collectif.com,Non,,Citoyen,Jean,Treibert,,,,,https://capco.dev/profile/juan1,,0,2,
 userJeanDuplicates,Juan,jean.duplicates@cap-collectif.com,Non,,Citoyen,Jean,Treibert,,,,,https://capco.dev/profile/juan,,0,1,
+userMaxime,mauriau,maxime.auriau@cap-collectif.com,Oui,,Citoyen,Maxime,AURIAU,,,,,https://capco.dev/profile/mauriau,,2,0,"2,3"

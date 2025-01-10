@@ -23,6 +23,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
@@ -351,6 +352,34 @@ class ExportController extends Controller
             throw new AccessException();
         }
 
+        // TODO remove this if after all export participants has been merged
+        if ($step instanceof QuestionnaireStep) {
+            $isSimplified = 'true' === $request->query->get('simplified');
+
+            $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+            $filePath = sprintf(
+                '%s%s/%s',
+                $this->exportDir,
+                $step->getType(),
+                $fileName
+            );
+            if (!file_exists($filePath)) {
+                $this->session
+                    ->getFlashBag()
+                    ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(5))
+                ;
+
+                $redirectUrl = $request->headers->get('referer') ?? $this->generateUrl('app_homepage');
+
+                return $this->redirect($redirectUrl);
+            }
+
+            $response = $this->file($filePath, $fileName);
+            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+            return $response;
+        }
+
         $fileName = CreateStepContributorsCommand::getFilename($step);
         $absolutePath = $this->exportDir . $fileName;
 
@@ -577,17 +606,17 @@ class ExportController extends Controller
     }
 
     /**
-     * @Route("/debate/{debateId}/download-votes/{type}", name="app_debate_votes_download", options={"i18n" = false})
+     * @Route("/debate/{debateStepId}/download-votes/{type}", name="app_debate_votes_download", options={"i18n" = false})
      * @Security("has_role('ROLE_PROJECT_ADMIN')")
      */
     public function downloadDebateVoteAction(
         Request $request,
-        string $debateId,
+        string $debateStepId,
         DebateStepRepository $debateStepRepository
     ): Response {
-        $debateStepId = GlobalId::fromGlobalId($debateId);
-        if ($debateStepId && isset($debateStepId['id'])) {
-            $debateStepId = $debateStepId['id'];
+        $id = GlobalId::fromGlobalId($debateStepId);
+        if ($id && isset($id['id'])) {
+            $debateStepId = $id['id'];
         }
 
         $debateStep = $debateStepRepository->find($debateStepId);

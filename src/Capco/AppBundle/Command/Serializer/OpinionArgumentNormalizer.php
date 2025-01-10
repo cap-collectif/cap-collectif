@@ -57,7 +57,7 @@ class OpinionArgumentNormalizer extends BaseNormalizer implements NormalizerInte
                 self::EXPORT_CONTRIBUTION_ARGUMENTS_CREATED_AT => $this->getNullableDatetime($object->getCreatedAt()),
                 self::EXPORT_CONTRIBUTION_ARGUMENTS_UPDATED_AT => $this->getNullableDatetime($object->getUpdatedAt()),
                 self::EXPORT_CONTRIBUTION_ARGUMENTS_PUBLISHED => $this->getReadableBoolean($object->isPublished()),
-                self::EXPORT_CONTRIBUTION_ARGUMENTS_TRASHED => null !== $object->getTrashedAt() ? true : null,
+                self::EXPORT_CONTRIBUTION_ARGUMENTS_TRASHED => $this->getReadableBoolean($object->isTrashed()),
                 self::EXPORT_CONTRIBUTION_ARGUMENTS_TRASHED_STATUS => $object->getTrashedStatus(),
                 self::EXPORT_CONTRIBUTION_ARGUMENTS_TRASHED_AT => $this->getNullableDatetime($object->getTrashedAt()),
                 self::EXPORT_CONTRIBUTION_ARGUMENTS_TRASHED_REASON => $object->getTrashedReason(),

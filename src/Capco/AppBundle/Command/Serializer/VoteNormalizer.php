@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Command\Service\GeoIPReader;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\GraphQL\Resolver\Debate\DebateUrlResolver;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -18,7 +19,7 @@ class VoteNormalizer extends BaseNormalizer implements NormalizerInterface
     public function supportsNormalization($data, $format = null, array $context = []): bool
     {
         return isset($context[self::IS_EXPORT_NORMALIZER])
-            && $data instanceof DebateVote
+            && $data instanceof DebateVote || $data instanceof DebateAnonymousVote
             && !isset($context['groups']);
     }
 
@@ -28,7 +29,11 @@ class VoteNormalizer extends BaseNormalizer implements NormalizerInterface
         if ($context && isset($context['is_full_export'])) {
             $isFullExport = $context['is_full_export'];
         }
-        $author = $object->getUser();
+        $author = null;
+        /** @var DebateAnonymousVote|DebateVote $object */
+        if ($object instanceof DebateVote) {
+            $author = $object->getUser();
+        }
         $userType = null !== $author ? $author->getUserType() : null;
         $debate = $object->getDebate();
 
@@ -40,7 +45,7 @@ class VoteNormalizer extends BaseNormalizer implements NormalizerInterface
         $voteArray = [
             self::EXPORT_VOTE_PUBLISHED_AT => $this->getNullableDatetime($object->getPublishedAt()),
             self::EXPORT_VOTE_TYPE => $this->getVoteTypeTranslated($object->getType()),
-            self::EXPORT_VOTE_AUTHOR_ID => null !== $author ? $author->getId() : null,
+            self::EXPORT_VOTE_AUTHOR_ID => $author?->getId(),
         ];
 
         if ($isFullExport) {
