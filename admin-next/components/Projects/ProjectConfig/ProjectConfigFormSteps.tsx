@@ -14,6 +14,8 @@ import {
 import { useIntl } from 'react-intl'
 import DeleteModal from './DeleteModal'
 import { useDisclosure } from '@liinkiing/react-hooks'
+import { useAppContext } from '@components/AppProvider/App.context'
+import { FormValues } from '@components/Projects/ProjectConfig/ProjectConfigForm.utils'
 
 const getWordingStep = (type: string) =>
   type === 'DebateStep' ? 'global.debate' : `${type.slice(0, -4).toLowerCase()}_step`
@@ -22,16 +24,17 @@ const getStepUri = (type: string) => `${type.slice(0, -4).toLowerCase()}-step`
 
 const ProjectConfigFormSteps: React.FC = () => {
   const intl = useIntl()
-  const { control, watch } = useFormContext()
+  const { control, watch } = useFormContext<FormValues>()
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const [indexToDelete, setIndexToDelete] = React.useState(0)
   const stepsValues = watch('steps')
+  const { viewerSession } = useAppContext()
 
   const {
     fields: steps,
     move,
     remove,
-  } = useFieldArray({
+  } = useFieldArray<FormValues, 'steps'>({
     control,
     name: `steps`,
   })
@@ -44,6 +47,10 @@ const ProjectConfigFormSteps: React.FC = () => {
   }
 
   const hasSelectionStep = stepsValues.some(s => s.__typename === 'SelectionStep')
+
+  const collectStepsCount = stepsValues.filter(s => s.__typename === 'CollectStep').length
+
+  const enableCollectStepDeletion = viewerSession.isSuperAdmin && collectStepsCount > 1 && hasSelectionStep
 
   return (
     <>
@@ -66,7 +73,7 @@ const ProjectConfigFormSteps: React.FC = () => {
             <DragnDrop onDragEnd={onDragEnd}>
               <DragnDrop.List droppableId="steps">
                 {steps.map((step, index) => {
-                  const disabledDelete = stepsValues[index].__typename === 'CollectStep' && hasSelectionStep
+                  const disabledDelete = !enableCollectStepDeletion && step.__typename === 'CollectStep'
                   return (
                     // @ts-ignore https://github.com/cap-collectif/ui/issues/367
                     <DragnDrop.Item draggableId={step.id} index={index} key={step.id}>
