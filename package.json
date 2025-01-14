@@ -339,7 +339,6 @@
         "react-relay": "^15.0.0",
         "react-router-dom": "5.1.2",
         "react-select": "^4.3.0",
-        "react-simple-code-editor": "^0.10.0",
         "react-slick": "^0.28.1",
         "react-test-renderer": "18.2.0",
         "react-treebeard": "https://github.com/cap-collectif/react-treebeard/tarball/e4161ce74943dad35d3616196396eb6a624796eb",

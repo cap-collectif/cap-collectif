@@ -3,11 +3,6 @@
 {% use '@CapcoAdmin/Project/base_edit_form.html.twig' with form as parentForm %}
 {% block sonata_pre_fieldsets %}
     {% include '@CapcoApp/redux_store.html.twig' %}
-    {{ react_render_component('ProjectAdminAppDeprecated', {	
-        'props': {	
-            'projectId': object.id|toGlobalId('Project')	
-        }	
-    }) }}	
     {{ react_render_component('ProjectExternalProjectAdminAppDeprecated', {	
         'props': {	
             'projectId': object.id|toGlobalId('Project'),	

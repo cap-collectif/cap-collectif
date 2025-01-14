@@ -1,6 +1,5 @@
 import ReactOnRails from 'react-on-rails'
 import AdminRightNavbarApp from '~/startup/AdminRightNavbarApp'
-import ProjectCreateButtonApp from '~/startup/ProjectCreateButtonApp'
 import SiteFaviconAdminPageApp from '~/startup/SiteFaviconAdminPageApp'
 import ProposalFormAdminPageApp from '~/startup/ProposalFormAdminPageApp'
 import QuestionnaireAdminPageApp from '~/startup/QuestionnaireAdminPageApp'
@@ -14,7 +13,6 @@ import UserAdminPageApp from '~/startup/UserAdminPageApp'
 import MapAdminPageApp from '~/startup/MapAdminPageApp'
 import LocaleAdminPageApp from '~/startup/LocaleAdminPageApp'
 import ProjectAdminApp from '~/startup/ProjectAdminApp'
-import ProjectAdminAppDeprecated from '~/startup/ProjectAdminAppDeprecated'
 import GlobalDistrictAdminApp from '~/startup/GlobalDistrictAdminApp'
 import EventAdminEditPageApp from '~/startup/EventAdminEditPageApp'
 import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalProjectAdminAppDeprecated'
@@ -39,7 +37,6 @@ ReactOnRails.register({
   ToastsContainerApp,
   SiteFaviconAdminPageApp,
   AdminRightNavbarApp,
-  ProjectCreateButtonApp,
   ProposalFormAdminPageApp,
   QuestionnaireAdminPageApp,
   GroupAdminPageApp,
@@ -54,7 +51,6 @@ ReactOnRails.register({
   MapAdminPageApp,
   LocaleAdminPageApp,
   ProjectAdminApp,
-  ProjectAdminAppDeprecated,
   GlobalDistrictAdminApp,
   EventAdminEditPageApp,
   ProjectExternalProjectAdminAppDeprecated,

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { CopyToClipboard } from 'react-copy-to-clipboard'
-import useToggle from '~/components/AdminEditor/hooks/useToggle'
+import useToggle from '@shared/hooks/useToggle'
 type Props = {
   /**
    * The value that needs to be copied to the clipboard

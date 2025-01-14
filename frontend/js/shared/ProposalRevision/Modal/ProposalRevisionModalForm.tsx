@@ -18,7 +18,7 @@ import {
   ProposalRevisionItemMetadata,
   ProposalRevisionList,
 } from '~/shared/ProposalRevision/Modal/ProposalRevisionModalForm.style'
-import useToggle from '~/components/AdminEditor/hooks/useToggle'
+import useToggle from '@shared/hooks/useToggle'
 import type { GlobalState } from '~/types'
 import { styleGuideColors } from '~/utils/colors'
 import AskProposalRevisionMutation from '~/mutations/AskProposalRevisionMutation'
