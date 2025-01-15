@@ -6,7 +6,6 @@ use Capco\AppBundle\Command\Service\ConsultationContributionExporter;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
-use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Repository\ConsultationStepRepository;
 use Capco\AppBundle\Repository\OpinionRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -27,21 +26,21 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
     use SnapshotCommandTrait;
     public const CAPCO_EXPORT_CONSULTATION_CONTRIBUTIONS = 'capco:export:consultation:contributions';
     private const OPINION_BATCH_SIZE = 50;
+    private const CONSULTATION_STEP_BATCH_SIZE = 25;
     protected string $projectRootDir;
     protected Executor $executor;
 
     public function __construct(
-        private Manager $toggleManager,
-        private AbstractStepRepository $abstractStepRepository,
+        private readonly Manager $toggleManager,
         ExportUtils $exportUtils,
         string $projectRootDir,
-        private Stopwatch $stopwatch,
-        private ConsultationContributionExporter $consultationContributionsExporter,
-        private OpinionRepository $opinionRepository,
-        private ConsultationStepRepository $consultationStepRepository,
-        private ContributionsFilePathResolver $contributionsFilePathResolver,
-        private EntityManagerInterface $entityManager,
-        private string $exportDirectory
+        private readonly Stopwatch $stopwatch,
+        private readonly ConsultationContributionExporter $consultationContributionsExporter,
+        private readonly OpinionRepository $opinionRepository,
+        private readonly ConsultationStepRepository $consultationStepRepository,
+        private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly string $exportDirectory
     ) {
         $this->projectRootDir = $projectRootDir;
 
@@ -80,7 +79,6 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
         }
 
         $filesystem = $this->cleanTmpExportsFiles();
-        $consultationSteps = $this->abstractStepRepository->getConsultationsFromAbstractStep();
 
         $style->writeln(sprintf('Found %d consultation step', $stepCount));
         $style->note('Starting the export.');
@@ -92,23 +90,32 @@ class ExportConsultationContributionsCommand extends BaseExportCommand
             ->setHeaders(['Step', 'Opinion(s) contributions exported'])
         ;
 
-        /**
-         * @var ConsultationStep $consultationStep
-         */
-        foreach ($consultationSteps as $consultationStep) {
-            $this->consultationContributionsExporter->initializeStyle($style);
-            $filePaths = $this->getFilePaths($consultationStep);
-            $opinionsExported = $this->exportConsultationStepOpinionsByBatch(
-                $input,
-                $consultationStep,
-                $filePaths
-            );
+        $offset = 0;
+        do {
+            $consultationSteps = $this->consultationStepRepository->findBy([], null, self::CONSULTATION_STEP_BATCH_SIZE, $offset);
 
-            $totalOpinions += $opinionsExported;
-            $tableSummary->addRows([[$consultationStep->getTitle(), $opinionsExported], new TableSeparator()]);
+            if (empty($consultationSteps)) {
+                break;
+            }
 
-            $this->finalizeExportFiles($filesystem, $consultationStep, $filePaths, $style, $input, $output);
-        }
+            foreach ($consultationSteps as $consultationStep) {
+                $this->consultationContributionsExporter->initializeStyle($style);
+                $filePaths = $this->getFilePaths($consultationStep);
+                $opinionsExported = $this->exportConsultationStepOpinionsByBatch(
+                    $input,
+                    $consultationStep,
+                    $filePaths
+                );
+
+                $totalOpinions += $opinionsExported;
+                $tableSummary->addRows([[$consultationStep->getTitle(), $opinionsExported], new TableSeparator()]);
+
+                $this->finalizeExportFiles($filesystem, $consultationStep, $filePaths, $style, $input, $output);
+            }
+
+            $this->entityManager->clear();
+            $offset += self::CONSULTATION_STEP_BATCH_SIZE;
+        } while (self::CONSULTATION_STEP_BATCH_SIZE === \count($consultationSteps));
 
         $tableSummary->setFooterTitle('Total Opinions: ' . $totalOpinions);
         $tableSummary->render();
