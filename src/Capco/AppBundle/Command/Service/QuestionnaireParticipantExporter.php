@@ -44,9 +44,6 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
 
         $this->setDelimiter($delimiter);
 
-        $simplifiedPath = $this->filePathResolver->getSimplifiedExportPath($questionnaire->getStep());
-        $fullPath = $this->filePathResolver->getFullExportPath($questionnaire->getStep());
-
         $paths['simplified'] = $this->filePathResolver->getSimplifiedExportPath($questionnaire->getStep());
         $paths['full'] = $this->filePathResolver->getFullExportPath($questionnaire->getStep());
 

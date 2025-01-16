@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
+use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\UserBundle\Entity\User;
@@ -50,26 +51,26 @@ class ParticipantExporter
     }
 
     /**
-     * @param array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $users
+     * @param array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $participants
      * @param array<string, string>                                                    $paths
      */
-    protected function exportParticipants(array $users, array $paths, bool $withHeaders, bool $append = false): void
+    protected function exportParticipants(array $participants, array $paths, bool $withHeaders, bool $append = false): void
     {
-        if (!$users) {
+        if (!$participants) {
             return;
         }
         $this->hasParticipants = true;
-        $this->writeFiles($users, $paths, $withHeaders, $append);
+        $this->writeFiles($participants, $paths, $withHeaders);
     }
 
     /**
-     * @param array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $users
-     * @param array<string, string>                                                    $paths
+     * @param array<DebateAnonymousArgument>|array<ExportableContributionInterface>|array<ReplyAnonymous>|array<User> $participants
+     * @param array<string, string>                                                                                   $paths
      */
-    protected function writeFiles(array $users, array $paths, bool $withHeaders, bool $append = false): void
+    protected function writeFiles(array $participants, array $paths, bool $withHeaders, bool $append = false): void
     {
-        $this->write($paths['simplified'], $users, $withHeaders, false, $append);
-        $this->write($paths['full'], $users, $withHeaders, true, $append);
+        $this->write($paths['simplified'], $participants, $withHeaders, false, $append);
+        $this->write($paths['full'], $participants, $withHeaders, true, $append);
     }
 
     protected function setDelimiter(?string $delimiter): void

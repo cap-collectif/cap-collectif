@@ -3,21 +3,28 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\Service\DebateParticipantExporter;
+use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
-use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Repository\DebateRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
 
 class ExportDebateParticipantsCommand extends BaseExportCommand
 {
+    use SnapshotCommandTrait;
+    public const STEP_FOLDER = 'debate/';
+
     public function __construct(
         ExportUtils $exportUtils,
         private readonly Manager $toggleManager,
         private readonly DebateRepository $debateRepository,
-        private readonly DebateParticipantExporter $exporter
+        private readonly DebateParticipantExporter $exporter,
+        private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
+        private readonly string $projectRootDir
     ) {
         parent::__construct($exportUtils);
     }
@@ -47,10 +54,17 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
         $debates = $this->debateRepository->findAll();
         $style->progressStart($count);
 
-        /** @var Questionnaire $debate */
         foreach ($debates as $debate) {
+            /** @var ?DebateStep $debateStep */
+            $debateStep = $debate->getStep();
+            if (null === $debateStep?->getDebate()) {
+                continue;
+            }
+
             $this->exporter->initializeStyle($style);
-            $this->exporter->exportDebateParticipants($debate, $input->getOption('delimiter'));
+            $this->exporter->exportDebateParticipants($debateStep, $input->getOption('delimiter'));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($debateStep));
+            $this->executeSnapshot($input, $output, self::STEP_FOLDER . $this->participantsFilePathResolver->getFileName($debateStep, true));
             $style->progressAdvance();
         }
 
@@ -62,6 +76,7 @@ class ExportDebateParticipantsCommand extends BaseExportCommand
     public function configure(): void
     {
         parent::configure();
+        $this->configureSnapshot();
         $this
             ->setName('capco:export:debate:participants')
             ->setDescription('Export debate participants')

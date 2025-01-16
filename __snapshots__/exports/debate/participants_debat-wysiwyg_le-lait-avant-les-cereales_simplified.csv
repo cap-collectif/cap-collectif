@@ -1,0 +1,3 @@
+﻿export_participant_user_id,export_participant_username,export_participant_user_email,export_participant_consent_internal_communication,export_participant_phone,export_participant_type,export_participant_firstname,export_participant_lastname,export_participant_date_of_birth,export_participant_postal_address,export_participant_zip_code,export_participant_city,export_participant_profile_url,export_participant_identification_code
+user42,user42,user42@cap-collectif.com,Oui,,Citoyen,firstname42,lastname42,,,,,https://capco.dev/profile/user42,
+user43,user43,user43@cap-collectif.com,Oui,,Citoyen,firstname43,lastname43,,,,,https://capco.dev/profile/user43,

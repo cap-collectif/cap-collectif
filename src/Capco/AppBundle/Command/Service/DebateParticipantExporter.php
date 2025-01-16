@@ -4,8 +4,10 @@ namespace Capco\AppBundle\Command\Service;
 
 use Capco\AppBundle\Command\Serializer\DebateAnonymousArgumentNormalizer;
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
+use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousArgument;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Repository\DebateVoteRepository;
@@ -30,19 +32,22 @@ class DebateParticipantExporter extends ParticipantExporter
         private readonly ParticipantNormalizer $participantNormalizer,
         private readonly DebateAnonymousArgumentNormalizer $debateAnonymousArgumentNormalizer,
         private readonly LoggerInterface $logger,
-        private readonly FilePathResolver $filePathResolver
+        private readonly ParticipantsFilePathResolver $participantsFilePathResolver
     ) {
         $this->serializer = $this->initializeSerializer();
 
         parent::__construct($entityManager, $this->serializer, $fileSystem);
     }
 
-    public function exportDebateParticipants(Debate $debate, ?string $delimiter = null): void
+    public function exportDebateParticipants(DebateStep $debateStep, ?string $delimiter = null): void
     {
         $this->setDelimiter($delimiter);
 
-        $paths['simplified'] = $this->filePathResolver->getSimplifiedExportPath($debate->getStep());
-        $paths['full'] = $this->filePathResolver->getFullExportPath($debate->getStep());
+        $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($debateStep);
+        $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($debateStep);
+
+        /** @var Debate $debate */
+        $debate = $debateStep->getDebate();
 
         if ($this->shouldExport($paths, $debate)) {
             $this->exportParticipantsInBatches($debate, $paths);
@@ -73,6 +78,10 @@ class DebateParticipantExporter extends ParticipantExporter
                 $participantOffset,
                 self::BATCH_SIZE
             );
+
+            if (empty($participants)) {
+                break;
+            }
 
             $this->exportParticipants(
                 $participants,
@@ -120,6 +129,10 @@ class DebateParticipantExporter extends ParticipantExporter
                 $anonymousArgumentsOffset,
                 self::BATCH_SIZE
             );
+
+            if (empty($anonymousArguments)) {
+                break;
+            }
 
             $this->exportAnonymousArguments(
                 $anonymousArguments,

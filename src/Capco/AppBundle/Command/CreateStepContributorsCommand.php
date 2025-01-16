@@ -254,7 +254,45 @@ class CreateStepContributorsCommand extends BaseExportCommand
                             }
                           }
                         }
-                       ... on SelectionStep {
+                        ... on SelectionStep {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                        ... on QuestionnaireStep {
+                          contributors(first: 50 {$userCursor}) {
+                            edges {
+                              cursor
+                              node {
+                                {$CONTRIBUTOR_FRAGMENT}
+                                ...on User {
+                                    {$USER_FRAGMENT}
+                                }
+                              }
+                            }
+                            totalCount
+                            pageInfo {
+                              startCursor
+                              endCursor
+                              hasNextPage
+                            }
+                          }
+                        }
+                        ... on DebateStep {
                           contributors(first: 50 {$userCursor}) {
                             edges {
                               cursor

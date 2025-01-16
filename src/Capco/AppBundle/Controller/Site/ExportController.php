@@ -23,6 +23,7 @@ use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
+use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
@@ -373,6 +374,40 @@ class ExportController extends Controller
 
                 return $this->redirect($redirectUrl);
             }
+
+            $response = $this->file($filePath, $fileName);
+            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+            return $response;
+        }
+
+        // TODO remove this if after all export participants has been merged
+        if ($step instanceof DebateStep) {
+            $organization = $this->getUser()?->getOrganization();
+            $projectOwner = $step->getProject()?->getOwner();
+            if ($organization && ($projectOwner !== $organization)) {
+                throw new AccessException();
+            }
+
+            $isSimplified = 'true' === $request->query->get('simplified');
+
+            $fileName = $this->participantsFilePathResolver->getFileName($step, $isSimplified);
+            $filePath = sprintf(
+                '%s%s/%s',
+                $this->exportDir,
+                'debate',
+                $fileName
+            );
+
+            if (!file_exists($filePath)) {
+                $this->session
+                    ->getFlashBag()
+                    ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(38))
+                ;
+
+                return $this->redirect($request->headers->get('referer') ?? '/admin-next/projects');
+            }
+            $fileName = (new \DateTime())->format('Y-m-d') . '_' . $fileName;
 
             $response = $this->file($filePath, $fileName);
             $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
