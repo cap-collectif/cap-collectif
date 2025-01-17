@@ -35,16 +35,27 @@ describe('User invitation as admin', () => {
     UserInvitePage.getConfirmationToast()
   })
 
-  it('gets the correct results after uploading a .csv file', () => {
+  it('gets the correct results after uploading a correct .csv file', () => {
     cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
-    cy.interceptGraphQLOperation({ operationName: 'UserInviteModalStepsChooseUsersQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ImportMembersUploader_UsersAvailabilityQuery' })
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
     cy.wait('@inviteQuery', { timeout: 5000 })
     UserInvitePage.openInvitationModal()
-    UserInvitePage.addCsvFile()
-    cy.wait('@UserInviteModalStepsChooseUsersQuery', { timeout: 5000 })
-    UserInvitePage.checkResultBanners()
+    UserInvitePage.addCsvFile('correct')
+    cy.wait('@ImportMembersUploader_UsersAvailabilityQuery', { timeout: 5000 })
+    UserInvitePage.checkResultBanners('correct')
+  })
+
+  it("gets the correct results after uploading a .csv file that's not properly formatted", () => {
+    cy.interceptGraphQLOperation({ operationName: 'inviteQuery' })
+    cy.interceptGraphQLOperation({ operationName: 'ImportMembersUploader_UsersAvailabilityQuery' })
+    cy.directLoginAs('admin')
+    UserInvitePage.visitInviteUser()
+    cy.wait('@inviteQuery', { timeout: 5000 })
+    UserInvitePage.openInvitationModal()
+    UserInvitePage.addCsvFile('wrong-format')
+    UserInvitePage.checkResultBanners('wrong-format')
   })
 
   it('sends another invitation to users whose invitation expired', () => {
@@ -54,7 +65,6 @@ describe('User invitation as admin', () => {
     UserInvitePage.visitInviteUser()
     cy.wait('@inviteQuery', { timeout: 5000 })
     UserInvitePage.getRelaunchButton().should('not.exist')
-
     UserInvitePage.getExpiredRows().should('have.length', 3)
 
     // users not previously relaunched

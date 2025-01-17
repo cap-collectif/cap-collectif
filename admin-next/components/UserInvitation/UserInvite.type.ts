@@ -1,4 +1,5 @@
 import { UserInviteStatus } from '@relay/InviteUserMutation.graphql'
+import { EmailInput } from '@shared/utils/csvUpload'
 
 type Option = {
   label: string
@@ -19,11 +20,6 @@ export type CsvEmails = {
   duplicateLines: EmailInput[]
   importedUsers: EmailInput[]
   invalidLines: EmailInput[]
-}
-
-export type EmailInput = {
-  email: string
-  line: string
 }
 
 export type UserInvite = {

@@ -73,30 +73,47 @@ export default new (class UserInvitePage {
   openInvitationModal() {
     this.getInviteButton().click()
   }
-  addCsvFile() {
-    return this.cy.get('input[type="file"]').selectFile('fixtures/emails.csv', { force: true })
+  addCsvFile(format: 'correct' | 'wrong-format') {
+    if (format === 'correct') {
+      return this.cy.get('input[type="file"]').selectFile('fixtures/emails.csv', { force: true })
+    }
+    if (format === 'wrong-format') {
+      return this.cy.get('input[type="file"]').selectFile('fixtures/file-wrong-format.csv', { force: true })
+    }
   }
-  checkResultBanners() {
-    return this.cy
-      .get('.import-results')
-      .first()
-      .parent()
-      .should('contain', 'import.users-already-registered')
-      .and('contain', 'invitations.already-used-emails')
-      .and('contain', 'valid-users-for-import')
-      .and('contain', 'csv-import.duplicate-lines')
-      .and('contain', 'invitation.csv-bad-lines-error.title')
-      .and('not.contain', 'file-not-imported')
-      .and('not.contain', 'invalid-data-model-banner')
+  checkResultBanners(fileChosen: 'correct' | 'wrong-format') {
+    if (fileChosen === 'correct') {
+      return this.cy
+        .get('.import-results')
+        .first()
+        .parent()
+        .should('contain', 'import.users-already-registered')
+        .and('contain', 'invitations.already-used-emails')
+        .and('contain', 'valid-users-for-import')
+        .and('contain', 'csv-import.duplicate-lines')
+        .and('contain', 'invitation.csv-bad-lines-error.title')
+        .and('not.contain', 'file-not-imported')
+        .and('not.contain', 'invalid-data-model-banner')
+    }
+    if (fileChosen === 'wrong-format') {
+      return this.cy
+        .get('.import-results')
+        .first()
+        .parent()
+        .should('not.contain', 'import.users-already-registered')
+        .and('not.contain', 'invitations.already-used-emails')
+        .and('not.contain', 'valid-users-for-import')
+        .and('not.contain', 'csv-import.duplicate-lines')
+        .and('not.contain', 'invitation.csv-bad-lines-error.title')
+        .and('contain', 'file-not-imported')
+        .and('not.contain', 'invalid-data-model-banner')
+    }
   }
   confirmDelete() {
     return this.cy.get('button').contains('global.delete').click()
   }
   confirmRelaunch() {
     return this.cy.get('button').contains('global.confirm').click()
-  }
-  getCancelledInvitations() {
-    return this.cy.get
   }
   getInvitationRows() {
     return this.cy.get('tr')

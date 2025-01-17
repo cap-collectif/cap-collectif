@@ -1,53 +1,28 @@
-/* eslint-disable relay/unused-fields */
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { isEmail } from '../../../../frontend/js/services/Validator'
+import { isEmail } from '@shared/utils/validator'
 import {
   Button,
   CapUIIcon,
   Flex,
-  Text,
   FormGuideline,
   FormLabel,
   Heading,
   MultiStepModal,
   useMultiStepModal,
-  Link,
-  Uploader,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
-import { graphql } from 'react-relay'
-import CsvImportResultBanners from './CsvImportResultBanners'
-import {
-  emailAvailabilitiesDefault,
-  getInputFromFile,
-  getInvitationsAvailability,
-  maxEmails,
-  splitEmailsFromString,
-} from '@components/UserInvitation/utils'
+import { MAX_EMAILS } from '@components/UserInvitation/utils'
 import { CsvEmails } from '@components/UserInvitation/UserInvite.type'
+import { splitEmailsFromString } from '@shared/utils/csvUpload'
+import ImportMembersUploader from './ImportMembersUploader'
 
 type Props = {
   id: string
   label: string
   validationLabel: string
 }
-
-const USER_FETCH_QUERY = graphql`
-  query UserInviteModalStepsChooseUsersQuery($emails: [String!]!) {
-    userInvitationsAvailabilitySearch(emails: $emails) {
-      totalCount
-      edges {
-        node {
-          email
-          availableForUser
-          availableForInvitation
-        }
-      }
-    }
-  }
-`
 
 export const UserInviteModalStepsChooseUsers = ({ id, label }: Props): JSX.Element => {
   const intl = useIntl()
@@ -59,61 +34,12 @@ export const UserInviteModalStepsChooseUsers = ({ id, label }: Props): JSX.Eleme
     control,
     setError,
     clearErrors,
-    setValue,
     watch,
     formState: { errors },
   } = useFormContext()
 
-  const csvModelUri = 'data:text/csv;charset=utf-8,Email%20Address%20%5BRequired%5D'
-  const csvModelFileName = 'users-to-group.csv'
-
-  const [emailAvailabilities, setEmailAvailabilities] = React.useState(emailAvailabilitiesDefault)
-
   const inputEmails: string = watch('inputEmails')
   const csvEmails: CsvEmails = watch('csvEmails')
-  const file = watch('file')
-
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
-  const [csvIsWrongFormat, setCsvIsWrongFormat] = React.useState<boolean>(false)
-
-  const filterUnavailableEmails = (emails: CsvEmails) => {
-    const { emailsAlreadyLinkedToAnAccount, emailsAlreadyReceivedInvitation } =
-      emailAvailabilities ?? emailAvailabilitiesDefault
-    const unavailableEmails = [...emailsAlreadyLinkedToAnAccount, ...emailsAlreadyReceivedInvitation]
-    const filteredEmails = emails.importedUsers?.filter(item => !unavailableEmails.includes(item.email))
-    return {
-      ...emails,
-      importedUsers: filteredEmails,
-    }
-  }
-
-  const handleCsvUpload = async (file: string | any[]) => {
-    if (file?.length > 0) {
-      setValue('file', file[0])
-      const reader = new FileReader()
-      reader.onload = async e => {
-        const content = e.target.result
-        const text = new TextDecoder().decode(content as ArrayBuffer)
-        const result = getInputFromFile(text, setCsvIsWrongFormat)
-        const validEmails = result.importedUsers.map(item => item.email)
-        setIsLoading(true)
-
-        const availability = await getInvitationsAvailability(inputEmails, validEmails, USER_FETCH_QUERY)
-        setEmailAvailabilities(availability)
-        setValue('csvEmails', filterUnavailableEmails(result))
-        setIsLoading(false)
-      }
-      reader.onabort = () => setValue('file', null)
-      reader.onerror = () => setValue('file', null)
-      reader.readAsArrayBuffer(file[0])
-    }
-  }
-
-  const handleCsvRemove = () => {
-    setValue('file', null)
-    setValue('csvEmails', { duplicateLines: [], importedUsers: [], invalidLines: [] })
-    setEmailAvailabilities(emailAvailabilitiesDefault)
-  }
 
   const validateInputEmailsFormat = () => {
     if (inputEmails === '') {
@@ -131,7 +57,7 @@ export const UserInviteModalStepsChooseUsers = ({ id, label }: Props): JSX.Eleme
       })
       return
     }
-    if (emails.length > maxEmails) {
+    if (emails.length > MAX_EMAILS) {
       setError('inputEmails', {
         type: 'manual',
         message: intl.formatMessage({ id: 'input-emails-max-reached' }),
@@ -193,63 +119,7 @@ export const UserInviteModalStepsChooseUsers = ({ id, label }: Props): JSX.Eleme
             />
           </FormControl>
 
-          <Flex
-            direction={'column'}
-            width={'100%'}
-            sx={{
-              '.cap-uploader': { width: '100%', minWidth: 'unset' },
-              '.cap-uploader > div ': { width: '100%' },
-            }}
-          >
-            <FormLabel
-              htmlFor="file"
-              label={intl.formatMessage({
-                id: 'import-csv-file',
-              })}
-            />
-            <FormGuideline>
-              <Text>
-                {intl.formatMessage(
-                  { id: 'organization.invitation.download-csv-model' },
-                  {
-                    // eslint-disable-next-line react/display-name
-                    a: (...chunks) => (
-                      <Link href={csvModelUri} download={csvModelFileName} color="primary.600">
-                        {chunks}
-                      </Link>
-                    ),
-                  },
-                )}
-              </Text>
-            </FormGuideline>
-            <Uploader
-              type="uploader"
-              name="file"
-              id="file"
-              format=".csv"
-              maxFiles={1}
-              value={file}
-              onDrop={async file => {
-                await handleCsvUpload(file)
-              }}
-              onRemove={handleCsvRemove}
-              wording={{
-                uploaderPrompt: intl.formatMessage({ id: 'uploader-prompt' }, { count: 1, fileType: 'csv' }),
-                uploaderLoadingPrompt: intl.formatMessage({ id: 'page-media-add--loading' }),
-                fileDeleteLabel: intl.formatMessage({ id: 'admin.global.delete' }),
-              }}
-              showThumbnail
-            />
-          </Flex>
-
-          {file && (
-            <CsvImportResultBanners
-              csvEmails={csvEmails}
-              emailAvailabilities={emailAvailabilities}
-              csvIsWrongFormat={csvIsWrongFormat}
-              isLoading={isLoading}
-            />
-          )}
+          <ImportMembersUploader />
         </Flex>
       </MultiStepModal.Body>
 

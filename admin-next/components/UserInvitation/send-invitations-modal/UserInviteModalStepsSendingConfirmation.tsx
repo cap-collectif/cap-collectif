@@ -16,7 +16,7 @@ import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 import InviteUserMutation, { INVITE_USERS_MAX_RESULTS } from '@mutations/InviteUserMutation'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
-import { splitEmailsFromString } from '../utils'
+import { splitEmailsFromString } from '@shared/utils/csvUpload'
 import { CsvEmails, UserInviteFormProps } from '../UserInvite.type'
 import { InviteUsersRole } from '@relay/InviteUserMutation.graphql'
 
