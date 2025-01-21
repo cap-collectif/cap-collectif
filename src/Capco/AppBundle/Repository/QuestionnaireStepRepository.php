@@ -11,4 +11,18 @@ use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
  * @method QuestionnaireStep[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null) */
 class QuestionnaireStepRepository extends AbstractStepRepository
 {
+    /**
+     * @return QuestionnaireStep[]
+     */
+    public function findAllNotEmpty(): array
+    {
+        $qb = $this->createQueryBuilder('qs')
+            ->select('qs', 'q', 'questions')
+            ->join('qs.questionnaire', 'q')
+            ->innerJoin('q.questions', 'questions')
+            ->innerJoin('q.replies', 'replies')
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
 }

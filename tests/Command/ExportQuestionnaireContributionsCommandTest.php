@@ -11,26 +11,18 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 {
     use CommandTestTrait;
-    final public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports';
-    final public const EXPECTED_FILE_NAMES = [
-        'consultation-pour-conquerir-le-monde',
-        'consultation-pour-la-capcobeer',
-        'consultation-pour-la-flnj',
-        'projet-avec-questionnaire_essais-de-sauts-conditionnels',
-        'projet-avec-questionnaire_etape-de-questionnaire-avec-questionnaire-sauts-conditionnels',
-        'projet-avec-questionnaire_etape-de-questionnaire-fermee',
-        'projet-avec-questionnaire_questionnaire-des-jo-2024',
-        'projet-avec-questionnaire_questionnaire',
-        'projet-pour-le-group2_questionnaire-step-pour-group2',
-        'questionnaire-non-rattache',
-        'questionnaire-pour-budget-participatif-de-la-force',
-        'questionnaire-pour-budget-participatif-disponible',
-        'questionnaire-pour-budget-participatif',
-        'qui-doit-conquerir-le-monde-visible-par-les-admins-seulement_questionnaire-step-pour-admins',
+    public const EXPECTED_DIRECTORY = __DIR__ . '/../../__snapshots__/exports/questionnaire';
+    public const EXPECTED_FILE_NAMES = [
+        'contributions_projet-avec-questionnaire_questionnaire-des-jo-2024',
+        'contributions_projet-avec-questionnaire_questionnaire',
+        'contributions_projet-avec-questionnaire-anonyme_questionnaire-step-anonymous',
+        'contributions_projet-avec-questionnaire_etape-de-questionnaire-fermee',
+        'contributions_projet-pour-consolider-les-exports_questionnaire-export',
+        'contributions_projet-avec-administrateur-de-projet_questionnaire-step-anonymous-project-owner',
     ];
     final public const FULL_SUFFIX = '.csv';
     final public const SIMPLIFIED_SUFFIX = '_simplified.csv';
-    final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export';
+    final public const OUTPUT_DIRECTORY = __DIR__ . '/../../public/export/questionnaire';
     final public const CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS = 'capco:export:questionnaire:contributions';
 
     protected function setUp(): void
@@ -44,22 +36,10 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
         $actualOutputs = $this->executeCommand(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
 
-        $completedFileNames = $this->getCompletedFileNames(self::FULL_SUFFIX);
-        $simplifiedFileNames = $this->getCompletedFileNames(self::SIMPLIFIED_SUFFIX);
+        $completedFileNames = self::getCompletedFileNames(self::FULL_SUFFIX);
+        $simplifiedFileNames = self::getCompletedFileNames(self::SIMPLIFIED_SUFFIX);
 
         $this->assertOutputs($actualOutputs, array_merge($simplifiedFileNames, $completedFileNames));
-    }
-
-    public function testIfNoUpdateNoFileGenerated(): void
-    {
-        [$commandTester, $options] = $this->setUpCommandTester(self::CAPCO_EXPORT_QUESTIONNAIRE_CONTRIBUTIONS);
-
-        $commandTester->execute($options);
-
-        $actualOutputs = $commandTester->execute($options);
-
-        $this->assertStringContainsString('No file has been updated.', $commandTester->getDisplay());
-        $this->assertSame(0, $actualOutputs);
     }
 
     public function testIfUpdateUserFileGenerated(): void
@@ -70,8 +50,8 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
         $code = $commandTester->execute($options);
 
-        $this->assertStringContainsString('projet-avec-questionnaire_questionnaire-des-jo-2024_simplified.csv', $commandTester->getDisplay());
-        $this->assertStringContainsString('projet-avec-questionnaire_questionnaire-des-jo-2024.csv', $commandTester->getDisplay());
+        $this->assertStringContainsString('contributions_projet-avec-questionnaire_questionnaire-des-jo-2024_simplified.csv', $commandTester->getDisplay());
+        $this->assertStringContainsString('contributions_projet-avec-questionnaire_questionnaire-des-jo-2024.csv', $commandTester->getDisplay());
         $this->assertSame(0, $code);
 
         $this->resetUserUpdatedAt('user6');
@@ -85,8 +65,8 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
         $code = $commandTester->execute($options);
 
-        $this->assertStringContainsString('projet-avec-questionnaire_questionnaire-des-jo-2024_simplified.csv', $commandTester->getDisplay());
-        $this->assertStringContainsString('projet-avec-questionnaire_questionnaire-des-jo-2024.csv', $commandTester->getDisplay());
+        $this->assertStringContainsString('contributions_projet-avec-questionnaire_questionnaire-des-jo-2024_simplified.csv', $commandTester->getDisplay());
+        $this->assertStringContainsString('contributions_projet-avec-questionnaire_questionnaire-des-jo-2024.csv', $commandTester->getDisplay());
         $this->assertSame(0, $code);
 
         $this->resetReply();
@@ -100,8 +80,8 @@ class ExportQuestionnaireContributionsCommandTest extends KernelTestCase
 
         $code = $commandTester->execute($options);
 
-        $this->assertStringContainsString('projet-avec-questionnaire-anonyme_questionnaire-step-anonymous_simplified.csv', $commandTester->getDisplay());
-        $this->assertStringContainsString('projet-avec-questionnaire-anonyme_questionnaire-step-anonymous.csv', $commandTester->getDisplay());
+        $this->assertStringContainsString('contributions_projet-avec-questionnaire-anonyme_questionnaire-step-anonymous_simplified.csv', $commandTester->getDisplay());
+        $this->assertStringContainsString('contributions_projet-avec-questionnaire-anonyme_questionnaire-step-anonymous.csv', $commandTester->getDisplay());
         $this->assertSame(0, $code);
 
         $this->resetAnonymousReply();

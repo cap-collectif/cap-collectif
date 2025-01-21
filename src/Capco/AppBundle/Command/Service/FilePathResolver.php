@@ -20,4 +20,26 @@ class FilePathResolver
     {
         return $this->exportDirectory . CreateStepContributorsCommand::getFilename($step);
     }
+
+    public function getFileName(string $dataType, AbstractStep $step, bool $simplified = false): string
+    {
+        $fileName = sprintf(
+            '%s_%s_%s',
+            $dataType,
+            $step->getProject()
+                ? $step->getProject()->getSlug()
+                : $step->getId(),
+            $step->getSlug()
+        );
+
+        if (\strlen($fileName) >= 230) {
+            $fileName = md5($fileName);
+        }
+
+        if ($simplified) {
+            $fileName .= '_simplified';
+        }
+
+        return $fileName . '.csv';
+    }
 }

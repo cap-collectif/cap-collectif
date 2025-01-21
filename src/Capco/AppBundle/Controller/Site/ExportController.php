@@ -20,6 +20,7 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolve
 use Capco\AppBundle\Command\Service\FilePathResolver\VotesFilePathResolver;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Project;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
@@ -36,6 +37,7 @@ use Capco\AppBundle\Repository\DebateStepRepository;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\AppBundle\Security\ProjectVoter;
+use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\AppBundle\Utils\Text;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -50,6 +52,7 @@ use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\Console\Output\NullOutput;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\HttpFoundation\BinaryFileResponse;
+use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -782,6 +785,71 @@ class ExportController extends Controller
         $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
 
         return $response;
+    }
+
+    /**
+     * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download", options={"i18n" = false})
+     * @Entity("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
+     */
+    public function downloadQuestionnaireAction(Request $request, Questionnaire $questionnaire): Response
+    {
+        $this->denyAccessUnlessGranted(QuestionnaireVoter::EDIT, $questionnaire);
+
+        $questionnaireStep = $questionnaire->getStep();
+        if (!$questionnaireStep instanceof QuestionnaireStep) {
+            throw new BadRequestHttpException('You must provide a valid questionnaire id.');
+        }
+
+        $filePath = 'true' === $request->query->get('simplified')
+            ? $this->contributionsFilePathResolver->getSimplifiedExportPath($questionnaireStep)
+            : $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
+
+        try {
+            $response = $this->file($filePath);
+            $response->headers->set('Content-Type', 'application/vnd.ms-excel' . '; charset=utf-8');
+
+            return $response;
+        } catch (FileNotFoundException) {
+            // We create a session for flashBag
+            $flashBag = $this->get('session')->getFlashBag();
+
+            $flashBag->add(
+                'danger',
+                $this->translator->trans('project.download.not_yet_generated')
+            );
+
+            return $this->redirect($request->headers->get('referer'));
+        }
+    }
+
+    /**
+     * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download", options={"i18n" = false})
+     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
+     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
+     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
+     *    "repository_method"="getOneBySlugAndProjectSlug",
+     *    "map_method_signature"=true
+     * })
+     */
+    public function downloadAction(Request $request, Project $project, AbstractStep $step): BinaryFileResponse|JsonResponse
+    {
+        $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
+
+        $filePath = 'true' === $request->query->get('simplified')
+            ? $this->contributionsFilePathResolver->getSimplifiedExportPath($step)
+            : $this->contributionsFilePathResolver->getFullExportPath($step);
+
+        try {
+            $response = $this->file($filePath);
+            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+            return $response;
+        } catch (FileNotFoundException) {
+            return new JsonResponse(
+                ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                404
+            );
+        }
     }
 
     private function getEventContributorsGraphQLQuery(

@@ -38,7 +38,8 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
      */
     public function exportQuestionnaireParticipants(Questionnaire $questionnaire, ?string $delimiter): void
     {
-        if (!$questionnaire->getStep()) {
+        $questionnaireStep = $questionnaire->getStep();
+        if (!$questionnaireStep) {
             return;
         }
 

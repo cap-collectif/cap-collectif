@@ -3,7 +3,7 @@
 namespace Capco\Tests\Normalizer\Questionnaire;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
-use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
+use Capco\AppBundle\Command\Serializer\ReplyAnonymousParticipantNormalizer;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Serializer\Exception\ExceptionInterface;
@@ -13,15 +13,15 @@ use Symfony\Contracts\Translation\TranslatorInterface;
  * @internal
  * @coversNothing
  */
-class ReplyAnonymousNormalizerTest extends TestCase
+class ReplyAnonymousParticipantNormalizerTest extends TestCase
 {
-    private ReplyAnonymousNormalizer $normalizer;
+    private ReplyAnonymousParticipantNormalizer $normalizer;
 
     protected function setUp(): void
     {
         parent::setUp();
         $translator = $this->createMock(TranslatorInterface::class);
-        $this->normalizer = new ReplyAnonymousNormalizer($translator);
+        $this->normalizer = new ReplyAnonymousParticipantNormalizer($translator);
 
         $translator->method('trans')
             ->willReturnCallback(fn ($key) => $key)

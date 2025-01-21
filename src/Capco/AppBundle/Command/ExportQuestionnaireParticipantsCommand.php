@@ -18,18 +18,16 @@ class ExportQuestionnaireParticipantsCommand extends BaseExportCommand
     use SnapshotCommandTrait;
 
     private const STEP_FOLDER = 'questionnaire/';
-    private string $projectRootDir;
 
     public function __construct(
         ExportUtils $exportUtils,
-        private Manager $toggleManager,
-        private QuestionnaireRepository $questionnaireRepository,
-        private QuestionnaireParticipantExporter $exporter,
-        private ParticipantsFilePathResolver $participantsFilePathResolver,
-        string $projectRootDir
+        private readonly Manager $toggleManager,
+        private readonly QuestionnaireRepository $questionnaireRepository,
+        private readonly QuestionnaireParticipantExporter $exporter,
+        private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
+        private readonly string $projectRootDir
     ) {
         parent::__construct($exportUtils);
-        $this->projectRootDir = $projectRootDir;
     }
 
     /**

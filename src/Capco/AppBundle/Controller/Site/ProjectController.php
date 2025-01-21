@@ -2,15 +2,11 @@
 
 namespace Capco\AppBundle\Controller\Site;
 
-use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 use Capco\AppBundle\Command\ExportAnalysisCSVCommand;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Project;
-use Capco\AppBundle\Entity\Questionnaire;
-use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Form\ProjectSearchType;
 use Capco\AppBundle\GraphQL\Resolver\Project\ProjectUrlResolver;
-use Capco\AppBundle\GraphQL\Resolver\Questionnaire\QuestionnaireExportResultsUrlResolver;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\ArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
@@ -21,7 +17,6 @@ use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\AppBundle\Repository\SourceRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
 use Capco\AppBundle\Security\ProjectVoter;
-use Capco\AppBundle\Security\QuestionnaireVoter;
 use Capco\AppBundle\SiteParameter\SiteParameterResolver;
 use Capco\UserBundle\Security\Exception\ProjectAccessDeniedException;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -30,7 +25,6 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Template;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController as Controller;
 use Symfony\Component\HttpFoundation\File\Exception\FileNotFoundException;
-use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -41,8 +35,23 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class ProjectController extends Controller
 {
-    public function __construct(private readonly TranslatorInterface $translator, protected RouterInterface $router, private readonly ProjectUrlResolver $projectUrlResolver, private readonly SiteParameterResolver $siteParameterResolver, private readonly ProjectRepository $projectRepository, private readonly OpinionRepository $opinionRepository, private readonly OpinionVersionRepository $opinionVersionRepository, private readonly ArgumentRepository $argumentRepository, private readonly SourceRepository $sourceRepository, private readonly ContributionResolver $contributionResolver, private readonly ProjectHelper $projectHelper, private readonly PostRepository $postRepository, private readonly QuestionnaireExportResultsUrlResolver $questionnaireExportResultsUrlResolver, private readonly string $exportDir, private readonly DebateArgumentRepository $debateArgumentRepository, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        private readonly TranslatorInterface $translator,
+        protected RouterInterface $router,
+        private readonly ProjectUrlResolver $projectUrlResolver,
+        private readonly SiteParameterResolver $siteParameterResolver,
+        private readonly ProjectRepository $projectRepository,
+        private readonly OpinionRepository $opinionRepository,
+        private readonly OpinionVersionRepository $opinionVersionRepository,
+        private readonly ArgumentRepository $argumentRepository,
+        private readonly SourceRepository $sourceRepository,
+        private readonly ContributionResolver $contributionResolver,
+        private readonly ProjectHelper $projectHelper,
+        private readonly PostRepository $postRepository,
+        private readonly string $exportDir,
+        private readonly DebateArgumentRepository $debateArgumentRepository,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     /**
@@ -107,82 +116,6 @@ class ProjectController extends Controller
             'sources' => $sources,
             'argumentsLabels' => Argument::$argumentTypesLabels,
         ];
-    }
-
-    /**
-     * @Route("/questionnaires/{questionnaireId}/download", name="app_questionnaire_download", options={"i18n" = false})
-     * @Entity("questionnaire", class="CapcoAppBundle:Questionnaire", options={"mapping": {"questionnaireId": "id"}})
-     */
-    public function downloadQuestionnaireAction(Request $request, Questionnaire $questionnaire)
-    {
-        $this->denyAccessUnlessGranted(QuestionnaireVoter::EDIT, $questionnaire);
-
-        $isProjectAdmin = $this->getUser()->isOnlyProjectAdmin();
-        $filePath = $this->questionnaireExportResultsUrlResolver->getFilePath(
-            $questionnaire,
-            $isProjectAdmin
-        );
-        $fileName = $this->questionnaireExportResultsUrlResolver->getFileName(
-            $questionnaire,
-            $isProjectAdmin
-        );
-
-        try {
-            $response = $this->file($filePath, $fileName);
-            $response->headers->set('Content-Type', 'application/vnd.ms-excel' . '; charset=utf-8');
-
-            return $response;
-        } catch (FileNotFoundException) {
-            // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
-
-            $flashBag->add(
-                'danger',
-                $this->translator->trans('project.download.not_yet_generated')
-            );
-
-            return $this->redirect($request->headers->get('referer'));
-        }
-    }
-
-    /**
-     * @Route("/projects/{projectSlug}/step/{stepSlug}/download", name="app_project_download", options={"i18n" = false})
-     * @Entity("project", class="CapcoAppBundle:Project", options={"mapping": {"projectSlug": "slug"}})
-     * @Entity("step", class="CapcoAppBundle:Steps\AbstractStep", options={
-     *    "mapping": {"stepSlug": "slug", "projectSlug": "projectSlug"},
-     *    "repository_method"="getOneBySlugAndProjectSlug",
-     *    "map_method_signature"=true
-     * })
-     */
-    public function downloadAction(Request $request, Project $project, AbstractStep $step)
-    {
-        $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
-        $user = $this->getUser();
-        $isProjectAdmin = $user->isOnlyProjectAdmin();
-
-        $filenameCsv = CreateCsvFromProposalStepCommand::getFilename(
-            $step,
-            '.csv',
-            $isProjectAdmin
-        );
-
-        $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
-
-        $isCSV = file_exists($this->exportDir . $filenameCsv);
-        $filename = $isCSV ? $filenameCsv : $filenameXlsx;
-        $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
-
-        try {
-            $response = $this->file($this->exportDir . $filename, $filename);
-            $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
-
-            return $response;
-        } catch (FileNotFoundException) {
-            return new JsonResponse(
-                ['errorTranslationKey' => 'project.download.not_yet_generated'],
-                404
-            );
-        }
     }
 
     /**

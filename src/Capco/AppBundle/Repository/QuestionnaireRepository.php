@@ -5,7 +5,9 @@ namespace Capco\AppBundle\Repository;
 use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Enum\QuestionnaireAffiliation;
+use Capco\AppBundle\Enum\QuestionnaireType;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NonUniqueResultException;
@@ -233,7 +235,26 @@ class QuestionnaireRepository extends EntityRepository
         $query->setParameter('questionnaireId', $questionnaireId);
         $query->setParameter('date', $date->format('Y-m-d H:i:s'));
 
-        return $query->getSingleScalarResult();
+        if ($query->getSingleScalarResult() > 0) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getQuestionnaire(string $questionnaireStepId): ?Questionnaire
+    {
+        $qb = $this->createQueryBuilder('q')
+            ->select('q', 'questions')
+            ->innerJoin('q.questions', 'questions')
+            ->where('q.step = :questionnaireStepId')
+            ->andWhere('q.type = :questionnaireType')
+            ->setParameter('questionnaireStepId', $questionnaireStepId)
+            ->setParameter('questionnaireType', QuestionnaireType::QUESTIONNAIRE)
+            ->setMaxResults(1)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
     }
 
     private function getByOwnerQueryBuilder(Owner $owner, array $options): QueryBuilder

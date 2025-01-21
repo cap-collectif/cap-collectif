@@ -33,7 +33,7 @@ class QuestionnaireExportResultsUrlResolver implements QueryInterface
     public function getFilePath(Questionnaire $questionnaire, bool $projectAdmin = false): string
     {
         return $this->projectDir .
-            '/public/export/' .
+            '/public/export/questionnaire' .
             $this->getFileName($questionnaire, $projectAdmin);
     }
 }

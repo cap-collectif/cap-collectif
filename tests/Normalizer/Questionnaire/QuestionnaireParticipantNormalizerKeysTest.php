@@ -4,7 +4,7 @@ namespace Capco\Tests\Normalizer\Questionnaire;
 
 use Capco\AppBundle\Command\Serializer\BaseNormalizer;
 use Capco\AppBundle\Command\Serializer\ParticipantNormalizer;
-use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
+use Capco\AppBundle\Command\Serializer\ReplyAnonymousParticipantNormalizer;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\UserBundle\Entity\User;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -30,7 +30,7 @@ class QuestionnaireParticipantNormalizerKeysTest extends KernelTestCase
         $container = self::$container;
 
         $this->userNormalizer = $container->get(ParticipantNormalizer::class);
-        $this->replyAnonymousNormalizer = $container->get(ReplyAnonymousNormalizer::class);
+        $this->replyAnonymousNormalizer = $container->get(ReplyAnonymousParticipantNormalizer::class);
     }
 
     public function testSimplifiedExportQuestionnaireParticipantNormalizersHaveSameKeys(): void

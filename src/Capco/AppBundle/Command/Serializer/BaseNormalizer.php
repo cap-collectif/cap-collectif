@@ -10,6 +10,9 @@ abstract class BaseNormalizer
     final public const IS_EXPORT_NORMALIZER = 'is_export_normalizer';
     final public const IS_FULL_EXPORT = 'is_full_export';
     protected const EXPORT_PARTICIPANT_USER_ID = 'export_participant_user_id';
+    protected const EXPORT_CONTRIBUTION_TYPE_REPLY = 'export_contribution_type_questionnaire_reply';
+    protected const EXPORT_CONTRIBUTION_TYPE_REPLY_ANONYMOUS = 'export_contribution_type_questionnaire_reply_anonymous';
+    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_ID = 'export_proposal_votes_author_id';
     protected const EXPORT_PARTICIPANT_USERNAME = 'export_participant_username';
     protected const EXPORT_PARTICIPANT_USER_EMAIL = 'export_participant_user_email';
     protected const EXPORT_PARTICIPANT_PHONE = 'export_participant_phone';
@@ -44,7 +47,6 @@ abstract class BaseNormalizer
     protected const EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP = 'user_proposal_count_per_step';
     protected const EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS = 'user_voted_proposal_ids';
     protected const EXPORT_CONTRIBUTION_TYPE = 'export_contribution_type';
-    protected const EXPORT_CONTRIBUTION_ID = 'export_contribution_id';
     protected const EXPORT_CONTRIBUTION_AUTHOR_ID = 'export_contribution_author_id';
     protected const EXPORT_CONTRIBUTION_AUTHOR_TYPE_NAME = 'export_contribution_author_type_name';
     protected const EXPORT_CONTRIBUTION_CONSULTATION_TITLE = 'export_contribution_consultation_title';
@@ -54,7 +56,6 @@ abstract class BaseNormalizer
     protected const EXPORT_CONTRIBUTIONS_CREATED_AT = 'export_contributions_created_at';
     protected const EXPORT_CONTRIBUTIONS_UPDATED_AT = 'export_contributions_updated_at';
     protected const EXPORT_CONTRIBUTION_URL = 'export_contribution_url';
-    protected const EXPORT_CONTRIBUTION_PUBLISHED = 'export_contribution_published';
     protected const EXPORT_CONTRIBUTION_TRASHED = 'export_contribution_trashed';
     protected const EXPORT_CONTRIBUTION_TRASHED_STATUS = 'export_contribution_trashed_status';
     protected const EXPORT_CONTRIBUTION_TRASHED_AT = 'export_contribution_trashed_at';
@@ -121,6 +122,21 @@ abstract class BaseNormalizer
     protected const EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_OK = 'export_contribution_versions_votes_count_ok';
     protected const EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_MITIGE = 'export_contribution_versions_votes_count_mitige';
     protected const EXPORT_CONTRIBUTION_VERSIONS_VOTES_COUNT_NOK = 'export_contribution_versions_votes_count_nok';
+    protected const EXPORT_CONTRIBUTION_ID = 'export_contribution_id';
+    protected const EXPORT_CONTRIBUTION_PUBLISHED = 'export_contribution_published';
+    protected const EXPORT_CONTRIBUTION_PUBLISHED_AT = 'export_contribution_published_at';
+    protected const EXPORT_CONTRIBUTION_AUTHOR = 'export_contribution_author';
+    protected const EXPORT_CONTRIBUTION_AUTHOR_EMAIL = 'export_contribution_author_email';
+    protected const EXPORT_CONTRIBUTION_AUTHOR_PHONE = 'export_contribution_author_phone';
+    protected const EXPORT_CONTRIBUTION_CREATED_AT = 'export_contribution_created_at';
+    protected const EXPORT_CONTRIBUTION_UPDATED_AT = 'export_contribution_updated_at';
+    protected const EXPORT_CONTRIBUTION_ANONYMOUS = 'export_contribution_anonymous';
+    protected const EXPORT_CONTRIBUTION_DRAFT = 'export_contribution_draft';
+    protected const EXPORT_CONTRIBUTION_UNDRAFT_AT = 'export_contribution_undraft_at';
+    protected const EXPORT_CONTRIBUTION_ACCOUNT = 'export_contribution_account';
+    protected const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL = 'export_contribution_no_account_email';
+    protected const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED = 'export_contribution_no_account_email_confirmed';
+    protected const EXPORT_CONTRIBUTION_INTERNAL_COMM = 'export_contribution_internal_comm';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_PUBLISHED_AT = 'export_contribution_argument_published_at';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ID = 'export_contribution_argument_author_id';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_USERNAME = 'export_contribution_argument_author_username';

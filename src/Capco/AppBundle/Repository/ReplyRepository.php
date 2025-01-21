@@ -319,6 +319,23 @@ class ReplyRepository extends EntityRepository
         return $qb->getQuery()->getSingleScalarResult();
     }
 
+    /**
+     * @return array<Reply>
+     */
+    public function getBatchOfPublishedReplies(string $questionnaireId, int $offset, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('reply')
+            ->select('reply')
+            ->where('reply.questionnaire = :questionnaireId')
+            ->andWhere('reply.published = true')
+            ->setParameter('questionnaireId', $questionnaireId)
+            ->setMaxResults($limit)
+            ->setFirstResult($offset)
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     protected function getPublishedQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('reply')->andWhere('reply.published = true');

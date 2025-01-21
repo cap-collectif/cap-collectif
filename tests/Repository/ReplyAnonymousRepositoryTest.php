@@ -31,7 +31,7 @@ class ReplyAnonymousRepositoryTest extends KernelTestCase
         $this->replyAnonymousRepository = new ReplyAnonymousRepository($this->entityManager, new ClassMetadata(ReplyAnonymous::class));
     }
 
-    public function testGetQuestionnaireAnonymousRepliesReturnsDistinctEmails(): void
+    public function testGetQuestionnaireAnonymousReplies(): void
     {
         $questionnaire = $this->entityManager->getRepository(Questionnaire::class)->find('questionnaireAnonymous');
 

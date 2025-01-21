@@ -20,10 +20,14 @@ class ContributionExporter
      * @var array<string, null|bool|string>
      */
     protected array $context;
-    private ?string $delimiter = self::CSV_DELIMITER;
+    protected ?string $delimiter = self::CSV_DELIMITER;
 
-    public function __construct(protected EntityManagerInterface $entityManager, protected SerializerInterface $serializer, private readonly Filesystem $fileSystem, private readonly AbstractFilePathResolver $filePathResolverContributions)
-    {
+    public function __construct(
+        protected EntityManagerInterface $entityManager,
+        protected SerializerInterface $serializer,
+        private readonly Filesystem $fileSystem,
+        private readonly AbstractFilePathResolver $filePathResolverContributions
+    ) {
     }
 
     public function initializeStyle(SymfonyStyle $style): void
