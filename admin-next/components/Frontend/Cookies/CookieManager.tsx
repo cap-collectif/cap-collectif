@@ -102,8 +102,8 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
         expires: 395,
       },
     )
-    if (analytics.value && isAnalyticEnabled) evalCustomCode(analytics.value)
-    if (ads.value && isAdvertisingEnabled) evalCustomCode(ads.value)
+    if (analytics?.value && isAnalyticEnabled) evalCustomCode(analytics.value)
+    if (ads?.value && isAdvertisingEnabled) evalCustomCode(ads.value)
     onSuccess()
   }
 
@@ -114,8 +114,8 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
     cookies?.set(ANALYTICS_COOKIE, choice)
     cookies?.set(ADS_COOKIE, choice)
     if (choice === 'true') {
-      if (analytics.value && !initialIsAnalyticsEnabled) evalCustomCode(analytics.value)
-      if (ads.value && !initialIsAdvertisingEnabled) evalCustomCode(ads.value)
+      if (analytics?.value && !initialIsAnalyticsEnabled) evalCustomCode(analytics.value)
+      if (ads?.value && !initialIsAdvertisingEnabled) evalCustomCode(ads.value)
     }
     onSuccess()
   }
@@ -183,7 +183,7 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
                 })}
               />
             )}
-            {ads.value?.length > 1 && (
+            {ads?.value?.length > 1 && (
               <ToggleCookie
                 id="cookies-advertising"
                 title={intl.formatMessage({

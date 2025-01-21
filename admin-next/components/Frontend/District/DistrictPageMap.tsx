@@ -98,13 +98,13 @@ const DistrictPageMap = ({ geojson }: Props) => {
           // Cannot precisely type a GeoJSON object
           const hull: any = unionizeFeatureEach(geoJSON[0].district)
 
-          if (hull.geometry.type === 'MultiPolygon') {
-            hull.geometry.coordinates.forEach(coordinate => {
+          if (hull.geometry?.type === 'MultiPolygon') {
+            hull.geometry?.coordinates.forEach(coordinate => {
               coordinate[0].forEach(point => latLngs.push(new L.LatLng(point[1], point[0])))
             })
           } else {
-            for (let i = 0; i < (hull.geometry.coordinates[0].length || 0); i++) {
-              latLngs.push(new L.LatLng(hull.geometry.coordinates[0][i][1], hull.geometry.coordinates[0][i][0]))
+            for (let i = 0; i < (hull.geometry?.coordinates[0].length || 0); i++) {
+              latLngs.push(new L.LatLng(hull.geometry?.coordinates[0][i][1], hull.geometry?.coordinates[0][i][0]))
             }
           }
 
