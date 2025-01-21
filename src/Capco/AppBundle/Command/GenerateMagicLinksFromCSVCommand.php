@@ -55,9 +55,14 @@ class GenerateMagicLinksFromCSVCommand extends Command
         $this->style->title('Generate magic links from CSV file');
 
         $filePath = $input->getArgument('filePath');
-        $this->absoluteFilePath = $this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '.csv';
+        $this->absoluteFilePath = $this->kernel->getProjectDir() . '/' . $filePath;
         if (!file_exists($this->absoluteFilePath)) {
-            $this->style->error('File not found');
+            $this->style->error(sprintf('File not found: %s', $this->absoluteFilePath));
+
+            exit;
+        }
+        if (!str_ends_with((string) $filePath, '.csv')) {
+            $this->style->error('Only csv files are allowed');
 
             exit;
         }
@@ -101,7 +106,8 @@ class GenerateMagicLinksFromCSVCommand extends Command
 
         try {
             $newData = $this->createNewMagicLinks();
-            $this->insertDataIntoFile($filePath, $newData);
+            $baseFileName = basename($this->absoluteFilePath, '.csv');
+            $this->insertDataIntoFile($baseFileName, $newData);
         } catch (\Throwable $th) {
             $this->style->error($th->getMessage());
             $this->style->error($th->getTraceAsString());
@@ -143,6 +149,9 @@ class GenerateMagicLinksFromCSVCommand extends Command
 
                 continue;
             }
+            if (empty(trim($row[0] ?? ''))) {
+                continue;
+            }
 
             if (null === $this->userProvider->findUser($row[0])) {
                 ++$count;
@@ -171,9 +180,13 @@ class GenerateMagicLinksFromCSVCommand extends Command
             $password = $this->generateUniquePassword($passwords);
             $user = new User();
 
+            $username = trim(($row[1] ?? '') . ' ' . ($row[2] ?? ''));
+
             $user
                 ->setEmail($row[0])
-                ->setUsername($this->generateUniqueUsername())
+                ->setFirstname($row[1] ?? null)
+                ->setLastname($row[2] ?? null)
+                ->setUsername(empty($username) ? $this->generateUniqueUsername() : $username)
                 ->setPassword($this->passwordEncoder->encodePassword($user, $password))
                 ->setEnabled(true)
                 ->addRole(UserRole::ROLE_USER)
@@ -296,23 +309,29 @@ class GenerateMagicLinksFromCSVCommand extends Command
         return $newData;
     }
 
-    private function insertDataIntoFile(string $filePath, array $newData): void
+    private function insertDataIntoFile(string $baseFileName, array $newData): void
     {
         $this->style->section('Inserting data into file');
         $this->style->progressStart(\count($newData));
 
         $count = 0;
         $input = fopen($this->absoluteFilePath, 'r+');
-        $output = fopen($this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '.tmp', 'w+');
-        $errorLogs = fopen($this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt', 'w+');
+        $output = fopen($this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '.tmp', 'w+');
+        $errorLogs = fopen($this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_errors.csv', 'w+');
 
         $headers = false;
         while (false !== ($row = fgetcsv($input))) {
             try {
                 if (false === $headers) {
                     $headers = true;
-                    fputcsv($output, $row);
-                    fputcsv($errorLogs, $row);
+                    $headersList = [
+                        'email',
+                        'username',
+                        'magic_link_creation',
+                        'magic_link',
+                    ];
+                    fputcsv($output, $headersList);
+                    fputcsv($errorLogs, $headersList);
 
                     continue;
                 }
@@ -354,22 +373,22 @@ class GenerateMagicLinksFromCSVCommand extends Command
         fclose($input);
         fclose($output);
 
-        if (1 === \count(file($this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt'))) {
-            unlink($this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt');
+        if (1 === \count(file($this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_errors.csv'))) {
+            unlink($this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_errors.csv');
         }
 
         rename(
-            $this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '.tmp',
-            $this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_complete.csv'
+            $this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '.tmp',
+            $this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_complete.csv'
         );
 
         $this->style->progressFinish();
         $unHandledUsersCount = \count($this->unHandledUsers);
         if (0 < $unHandledUsersCount) {
             $this->style->warning($unHandledUsersCount . ' users could not be handled. See ' .
-            $this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_errors.txt for more details.');
+                $this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_errors.csv for more details.');
         }
-        $this->style->success('New completed file available at : ' . $this->kernel->getProjectDir() . self::FILE_FOLDER . $filePath . '_complete.csv');
+        $this->style->success('New completed file available at : ' . $this->kernel->getProjectDir() . self::FILE_FOLDER . $baseFileName . '_complete.csv');
         $durationInDays = $this->kernel->getContainer()->getParameter('magiclinks_duration_in_minutes') / 1440;
         $this->style->note([
             'You can now send the file to the client after checking it.',
