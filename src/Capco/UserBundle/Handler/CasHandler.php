@@ -12,6 +12,7 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 /**
  * Used for any case server manipulation.
+ * Sequence diagram: https://unicon.github.io/cas/4.2.x/protocol/CAS-Protocol.html.
  *
  * Class CasHandler
  */
@@ -94,15 +95,17 @@ class CasHandler
 
     private function initializeClient(): void
     {
-        $serverURL = $this->getServerUrlParts();
+        if (!phpCAS::isInitialized()) {
+            $serverURL = $this->getServerUrlParts();
 
-        // Initialize phpCAS
-        phpCAS::client(
-            $this->getVersion(),
-            $serverURL['host'],
-            (int) $serverURL['port'],
-            $serverURL['path']
-        );
+            // Initialize phpCAS
+            phpCAS::client(
+                $this->getVersion(),
+                $serverURL['host'],
+                (int) $serverURL['port'],
+                $serverURL['path']
+            );
+        }
     }
 
     private function getVersion(): string

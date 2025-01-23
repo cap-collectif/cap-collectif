@@ -140,7 +140,7 @@ exports[`<LoginBox /> renders without LoginForm 1`] = `
     </div>
     <div>
       <div
-        className="sc-8b8b4437-0 enTcaI"
+        className="sc-81b2b9f2-0 hzrSci"
         type="saml"
       >
         <span
