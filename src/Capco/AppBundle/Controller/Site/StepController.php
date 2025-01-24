@@ -42,6 +42,36 @@ class StepController extends Controller
     }
 
     /**
+     * @Route("/project/{projectSlug}", name="app_project_show_project")
+     * @Route("/project/{projectSlug}/", name="app_project_show_project_trailing_slash")
+     * @Entity("project", class="Capco\AppBundle\Entity\Project", options={"mapping" = {"projectSlug": "slug"}, "repository_method"= "getOneWithoutVisibility", "map_method_signature" = true})
+     */
+    public function showProjectAction(Project $project): Response
+    {
+        $step = $project->getFirstStep();
+        if (!$this->authorizationChecker->isGranted(StepVoter::VIEW, $step)) {
+            return $this->redirect403();
+        }
+
+        $route = match ($step->getType()) {
+            'collect' => 'app_project_show_collect',
+            'selection' => 'app_project_show_selection',
+            'questionnaire' => 'app_project_show_questionnaire',
+            'debate' => 'app_project_show_debate',
+            'consultation' => 'app_project_show_consultation',
+            'other' => 'app_project_show_step',
+            'presentation' => 'app_project_show_presentation',
+            default => null
+        };
+
+        if (!$route) {
+            throw $this->createNotFoundException('Route not found');
+        }
+
+        return $this->redirectToRoute($route, ['projectSlug' => $project->getSlug(), 'stepSlug' => $step->getSlug()]);
+    }
+
+    /**
      * @Route("/project/{projectSlug}/step/{stepSlug}", name="app_project_show_step")
      * @Route("/consultation/{projectSlug}/step/{stepSlug}", name="app_consultation_show_step")
      * @Template("@CapcoApp/Step/show.html.twig")

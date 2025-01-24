@@ -19,6 +19,8 @@ app_consultation_show_step: '/consultation/{projectSlug}/step/{stepSlug}'
 app_consultation_show_synthesis: '/consultation/{projectSlug}/synthesis/{stepSlug}'
 app_consultation_show_trashed: '/consultations/{projectSlug}/trashed'
 app_consultation_show_versions_ranking: '/consultation/{projectSlug}/ranking/{stepSlug}/versions/{page}'
+app_project_show_project: '/project/{projectSlug}'
+app_project_show_project_trailing_slash: '/project/{projectSlug}/'
 app_contact: /contact
 app_cookies: /cookies-page
 app_email: '/email/{messageType}'
