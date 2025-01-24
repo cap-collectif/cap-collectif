@@ -47,7 +47,7 @@ class ReplyAnonymousNormalizer extends BaseNormalizer implements NormalizerInter
 
         /** @var ReplyAnonymous $object */
         $responseArray = [
-            self::EXPORT_CONTRIBUTION_TYPE => self::EXPORT_CONTRIBUTION_TYPE_REPLY_ANONYMOUS,
+            self::EXPORT_CONTRIBUTION_TYPE => $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_REPLY_ANONYMOUS),
             self::EXPORT_CONTRIBUTION_ID => $object->getId(),
             self::EXPORT_CONTRIBUTION_AUTHOR_ID => null,
             self::EXPORT_CONTRIBUTION_PUBLISHED_AT => $this->getNullableDatetime($object->getPublishedAt()),

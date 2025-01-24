@@ -11,6 +11,7 @@ use Box\Spout\Writer\CSV\Writer as CSVWriter;
 use Capco\AppBundle\Command\CreateCsvFromEventParticipantsCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectMediatorsProposalsVotesCommand;
 use Capco\AppBundle\Command\CreateCsvFromProjectsContributorsCommand;
+use Capco\AppBundle\Command\CreateCsvFromProposalStepCommand;
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Command\ExportDebateCommand;
 use Capco\AppBundle\Command\ExportDebateContributionsCommand;
@@ -831,17 +832,46 @@ class ExportController extends Controller
      *    "map_method_signature"=true
      * })
      */
-    public function downloadAction(Request $request, Project $project, AbstractStep $step): BinaryFileResponse|JsonResponse
+    public function downloadAction(Request $request, Project $project, AbstractStep $step): Response
     {
         $this->denyAccessUnlessGranted(ProjectVoter::EDIT, $project);
+        // TODO remove this if after all export contributions has been merged
+        if ($step instanceof QuestionnaireStep) {
+            $filePath = 'true' === $request->query->get('simplified')
+                ? $this->contributionsFilePathResolver->getSimplifiedExportPath($step)
+                : $this->contributionsFilePathResolver->getFullExportPath($step);
 
-        $filePath = 'true' === $request->query->get('simplified')
-            ? $this->contributionsFilePathResolver->getSimplifiedExportPath($step)
-            : $this->contributionsFilePathResolver->getFullExportPath($step);
+            try {
+                $response = $this->file($filePath);
+                $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+                return $response;
+            } catch (FileNotFoundException) {
+                return new JsonResponse(
+                    ['errorTranslationKey' => 'project.download.not_yet_generated'],
+                    404
+                );
+            }
+        }
+
+        $user = $this->getUser();
+        $isProjectAdmin = $user->isOnlyProjectAdmin();
+
+        $filenameCsv = CreateCsvFromProposalStepCommand::getFilename(
+            $step,
+            '.csv',
+            $isProjectAdmin
+        );
+
+        $filenameXlsx = CreateCsvFromProposalStepCommand::getFilename($step, '.xlsx');
+
+        $isCSV = file_exists($this->exportDir . $filenameCsv);
+        $filename = $isCSV ? $filenameCsv : $filenameXlsx;
+        $contentType = $isCSV ? 'text/csv' : 'application/vnd.ms-excel';
 
         try {
-            $response = $this->file($filePath);
-            $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+            $response = $this->file($this->exportDir . $filename, $filename);
+            $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
 
             return $response;
         } catch (FileNotFoundException) {

@@ -43,7 +43,7 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
         $user = $object->getAuthor();
 
         $responseArray = [
-            self::EXPORT_CONTRIBUTION_TYPE => self::EXPORT_CONTRIBUTION_TYPE_REPLY,
+            self::EXPORT_CONTRIBUTION_TYPE => $this->translator->trans(self::EXPORT_CONTRIBUTION_TYPE_REPLY),
             self::EXPORT_CONTRIBUTION_ID => $object->getId(),
             self::EXPORT_CONTRIBUTION_AUTHOR_ID => $user->getId(),
             self::EXPORT_CONTRIBUTION_PUBLISHED_AT => $this->getNullableDatetime($object->getPublishedAt()),
