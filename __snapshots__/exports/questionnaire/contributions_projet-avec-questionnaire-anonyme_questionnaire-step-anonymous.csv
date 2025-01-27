@@ -2,3 +2,4 @@
 export_contribution_type_questionnaire_reply,replyQuestionnaireAnon,user1,"2016-03-02 00:00:00",Oui,lbrunet,lbrunet@cap-collectif.com,+3300000000,"2016-03-02 00:00:00","2016-03-02 00:00:00",Non,Non,,Oui,,,Oui,
 export_contribution_type_questionnaire_reply_anonymous,replyAnonymous1,,"2016-03-01 00:00:00",Oui,,,,"2016-03-01 00:00:00","2016-03-01 00:00:00",Non,Non,,Non,abc@cap-collectif.com,Non,,bien
 export_contribution_type_questionnaire_reply_anonymous,replyAnonymous1bis,,"2016-03-01 00:00:00",Oui,,,,"2016-03-01 00:00:00","2016-03-01 00:00:00",Non,Non,,Non,abc@cap-collectif.com,Non,,
+export_contribution_type_questionnaire_reply_anonymous,replyAnonymous2,,"2017-03-01 00:00:00",Oui,,,,"2017-03-01 00:00:00","2017-03-01 00:00:00",Non,Non,,Non,,Non,,"bien bien bien"

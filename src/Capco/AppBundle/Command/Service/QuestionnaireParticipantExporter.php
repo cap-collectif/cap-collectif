@@ -117,7 +117,8 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
             $anonymousReplies = $this->replyAnonymousRepository->getQuestionnaireAnonymousReplies(
                 $questionnaire,
                 $anonymousRepliesOffset,
-                self::BATCH_SIZE
+                self::BATCH_SIZE,
+                true
             );
 
             if ([] === $anonymousReplies) {

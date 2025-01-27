@@ -42,10 +42,15 @@ class ReplyAnonymousRepository extends EntityRepository
     /**
      * @return array<ReplyAnonymous>
      */
-    public function getQuestionnaireAnonymousReplies(Questionnaire $questionnaire, int $offset, int $limit): array
+    public function getQuestionnaireAnonymousReplies(Questionnaire $questionnaire, int $offset, int $limit, bool $withEmail = false): array
     {
-        $qb = $this->createQueryBuilder('replyAnonymous')
-            ->andWhere('replyAnonymous.participantEmail IS NOT NULL')
+        $qb = $this->createQueryBuilder('replyAnonymous');
+
+        if ($withEmail) {
+            $qb->andWhere('replyAnonymous.participantEmail IS NOT NULL');
+        }
+
+        $qb
             ->andWhere('replyAnonymous.questionnaire = :questionnaire')
             ->andWhere('replyAnonymous.published = 1')
             ->setParameter('questionnaire', $questionnaire)
