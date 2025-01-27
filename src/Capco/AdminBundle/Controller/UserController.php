@@ -52,7 +52,7 @@ class UserController extends CRUDController
     {
         $this->admin->checkAccess('export');
 
-        $path = $this->container->getParameter('kernel.project_dir') . '/../public/export/users/';
+        $path = $this->container->getParameter('kernel.project_dir') . '/public/export/users/';
         $filename = 'users.csv';
         $absolutePath = $path . $filename;
 
@@ -81,7 +81,7 @@ class UserController extends CRUDController
         }
         $this->admin->checkAccess('export');
         $trans = $this->get('translator');
-        $path = $this->container->getParameter('kernel.project_dir') . '/../public/export/';
+        $path = $this->container->getParameter('kernel.project_dir') . '/public/export/';
         $filename = CreateCsvFromLegacyUsersCommand::FILENAME;
 
         if (!file_exists($path . $filename)) {
