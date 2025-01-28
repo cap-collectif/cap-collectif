@@ -2,28 +2,6 @@
     "name": "cap-collectif/cap-collectif",
     "license": "SEE LICENSE IN LICENSE.md",
     "description": "Cap-Collectif SaaS",
-    "autoload": {
-        "exclude-from-classmap": [
-            "**/Behat/"
-        ],
-        "psr-4": {
-            "Capco\\": "src/",
-            "Capco\\AppBundle\\": "src/Capco/AppBundle",
-            "Capco\\AdminBundle\\": "src/Capco/AdminBundle",
-            "Capco\\UserBundle\\": "src/Capco/UserBundle",
-            "Capco\\AppBundle\\GraphQL\\__GENERATED__\\": "src/Capco/AppBundle/GraphQL/__generated__",
-            "Capco\\Tests\\": "tests/"
-        },
-        "files": [
-            "src/Kernel.php"
-        ]
-    },
-    "autoload-dev": {
-        "psr-4": {
-            "spec\\": "spec/",
-            "Capco\\Tests\\": "tests/"
-        }
-    },
     "repositories": [
         {
             "type": "vcs",
@@ -230,7 +208,6 @@
             "Capco\\": "src/",
             "Capco\\AppBundle\\": "src/Capco/AppBundle",
             "Capco\\AdminBundle\\": "src/Capco/AdminBundle",
-            "Capco\\ClassificationBundle\\": "src/Capco/ClassificationBundle",
             "Capco\\UserBundle\\": "src/Capco/UserBundle",
             "Capco\\AppBundle\\GraphQL\\__GENERATED__\\": "src/Capco/AppBundle/GraphQL/__generated__",
             "Capco\\Tests\\": "tests/"
