@@ -12,6 +12,7 @@ use Capco\AppBundle\Form\ProjectAuthorTransformer;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\GraphQL\Traits\HtmlSanitizationHelperTrait;
 use Capco\AppBundle\Repository\ProjectAbstractStepRepository;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
@@ -33,6 +34,7 @@ use Symfony\Contracts\Translation\TranslatorInterface;
 
 class UpdateNewProjectMutation implements MutationInterface
 {
+    use HtmlSanitizationHelperTrait;
     use MutationTrait;
 
     public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly FormFactoryInterface $formFactory, private readonly ProjectAuthorTransformer $transformer, private readonly Publisher $publisher, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProjectAbstractStepRepository $projectAbstractStepRepository, private readonly TranslatorInterface $translator)
@@ -248,7 +250,7 @@ class UpdateNewProjectMutation implements MutationInterface
             return false;
         }
 
-        if (!$description) {
+        if (!$description || $this->hasOnlyEmptyHtmlTags($description)) {
             return false;
         }
 
