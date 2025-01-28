@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Capco\ClassificationBundle;
+namespace Capco\AppBundle;
 
 use Symfony\Component\HttpKernel\Bundle\Bundle;
 
@@ -26,8 +26,8 @@ class CapcoClassificationBundle extends Bundle
     /**
      * {@inheritdoc}
      */
-    public function getParent()
+    public function getParent(): string
     {
-        return 'SonataClassificationBundle';
+        return 'SonataAppBundle';
     }
 }

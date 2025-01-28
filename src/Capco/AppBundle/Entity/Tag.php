@@ -1,20 +1,58 @@
 <?php
 
-namespace Capco\ClassificationBundle\Entity;
+namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Media;
 use Cocur\Slugify\Slugify;
+use Doctrine\ORM\Mapping as ORM;
 
-class Collection implements \Stringable
+/**
+ * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
+ * @ORM\Table(
+ *     name="classification__tag",
+ *     uniqueConstraints={
+ *         @ORM\UniqueConstraint(name="tag_context", columns={"slug", "context"})
+ *     }
+ * )
+ * @ORM\HasLifecycleCallbacks
+ */
+class Tag implements \Stringable
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
+     * @ORM\Column(type="integer")
+     */
     protected int $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected ?string $name = null;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected ?string $slug = null;
-    protected bool $enabled;
-    protected ?string $description = null;
+
+    /**
+     * @ORM\Column(type="datetime", name="created_at")
+     */
     protected ?\DateTimeInterface $createdAt = null;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at")
+     */
     protected ?\DateTimeInterface $updatedAt = null;
-    protected ?Media $media = null;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected bool $enabled;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Context")
+     * @ORM\JoinColumn(name="context", referencedColumnName="id", nullable=true)
+     */
     protected ?Context $context = null;
 
     public function __toString(): string
@@ -64,30 +102,7 @@ class Collection implements \Stringable
         return $this->slug;
     }
 
-    public function setDescription(string $description): self
-    {
-        $this->description = $description;
-
-        return $this;
-    }
-
-    public function getDescription(): ?string
-    {
-        return $this->description;
-    }
-
-    public function prePersist()
-    {
-        $this->setCreatedAt(new \DateTime());
-        $this->setUpdatedAt(new \DateTime());
-    }
-
-    public function preUpdate()
-    {
-        $this->setUpdatedAt(new \DateTime());
-    }
-
-    public function setCreatedAt(\DateTime $createdAt): self
+    public function setCreatedAt(?\DateTimeInterface $createdAt = null): self
     {
         $this->createdAt = $createdAt;
 
@@ -99,7 +114,16 @@ class Collection implements \Stringable
         return $this->createdAt;
     }
 
-    public function setUpdatedAt(\DateTime $updatedAt): self
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
+    {
+        $this->setCreatedAt(new \DateTimeImmutable());
+        $this->setUpdatedAt(new \DateTimeImmutable());
+    }
+
+    public function setUpdatedAt(?\DateTimeInterface $updatedAt = null): self
     {
         $this->updatedAt = $updatedAt;
 
@@ -111,19 +135,15 @@ class Collection implements \Stringable
         return $this->updatedAt;
     }
 
-    public function setMedia(?Media $media = null): self
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
     {
-        $this->media = $media;
-
-        return $this;
+        $this->setUpdatedAt(new \DateTimeImmutable());
     }
 
-    public function getMedia(): ?Media
-    {
-        return $this->media;
-    }
-
-    public function setContext(Context $context): self
+    public function setContext(?Context $context): self
     {
         $this->context = $context;
 

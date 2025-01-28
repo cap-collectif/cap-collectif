@@ -36,7 +36,7 @@ class Version20150303192637 extends AbstractMigration implements ContainerAwareI
         $em = $this->container->get('doctrine.orm.entity_manager');
 
         $query = $em->createQuery(
-            'SELECT co.id FROM Capco\\ClassificationBundle\\Entity\\Context co WHERE co.id = :id'
+            'SELECT co.id FROM Capco\\AppBundle\\Entity\\Context co WHERE co.id = :id'
         );
         $query->setParameter('id', 'sources');
         $context = $query->getOneOrNullResult();
@@ -53,7 +53,7 @@ class Version20150303192637 extends AbstractMigration implements ContainerAwareI
         }
 
         $query = $em->createQuery(
-            'SELECT ca.id FROM Capco\\ClassificationBundle\\Entity\\Category ca WHERE ca.name = :name'
+            'SELECT ca.id FROM Capco\\AppBundle\\Entity\\Category ca WHERE ca.name = :name'
         );
         $query->setParameter('name', 'sources');
         $category = $query->getOneOrNullResult();

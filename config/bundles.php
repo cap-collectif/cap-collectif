@@ -36,7 +36,6 @@ return [
     Capco\AppBundle\CapcoAppBundle::class => ['all' => true],
     Capco\AdminBundle\CapcoAdminBundle::class => ['all' => true],
     Capco\UserBundle\CapcoUserBundle::class => ['all' => true],
-    Capco\ClassificationBundle\CapcoClassificationBundle::class => ['all' => true],
     FOS\HttpCacheBundle\FOSHttpCacheBundle::class => ['all' => true],
     Qandidate\Bundle\ToggleBundle\QandidateToggleBundle::class => ['all' => true],
     JoliTypo\Bridge\Symfony\JoliTypoBundle::class => ['all' => true],

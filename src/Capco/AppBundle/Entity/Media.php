@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Provider\AllowedExtensions;
 use Capco\AppBundle\Traits\UuidTrait;
-use Capco\ClassificationBundle\Entity\Category;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -126,7 +125,7 @@ class Media implements \Stringable
     private \DateTime $createdAt;
 
     /**
-     * @ORM\ManyToOne(targetEntity="Capco\ClassificationBundle\Entity\Category")
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     private ?Category $category = null;

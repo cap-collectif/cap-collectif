@@ -1,25 +1,82 @@
 <?php
 
-namespace Capco\ClassificationBundle\Entity;
+namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Entity\Media;
 use Cocur\Slugify\Slugify;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
+use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @ORM\Entity
+ * @ORM\Table(name="classification__category")
+ * @ORM\HasLifecycleCallbacks
+ */
 class Category implements \Stringable
 {
+    /**
+     * @ORM\Id
+     * @ORM\GeneratedValue
+     * @ORM\Column(type="integer")
+     */
     protected int $id;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected ?string $name = null;
+
+    /**
+     * @ORM\Column(type="string")
+     */
     protected ?string $slug = null;
-    protected bool $enabled;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    protected bool $enabled = false;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
     protected ?string $description = null;
+
+    /**
+     * @ORM\Column(type="datetime", name="created_at")
+     */
     protected ?\DateTimeInterface $createdAt = null;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at")
+     */
     protected ?\DateTimeInterface $updatedAt = null;
+
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
     protected ?int $position = null;
+
+    /**
+     * @ORM\OneToMany(targetEntity="Capco\AppBundle\Entity\Category", mappedBy="parent", cascade={"persist", "remove"})
+     */
     protected Collection $children;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Category", inversedBy="children", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(name="parent_id", referencedColumnName="id", onDelete="CASCADE", nullable=true)
+     */
     protected ?Category $parent = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Media")
+     * @ORM\JoinColumn(name="media_id", referencedColumnName="id", onDelete="SET NULL", nullable=true)
+     */
     protected ?Media $media = null;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Context")
+     * @ORM\JoinColumn(name="context", referencedColumnName="id", nullable=true)
+     */
     protected ?Context $context = null;
 
     public function __construct()
@@ -86,13 +143,19 @@ class Category implements \Stringable
         return $this->description;
     }
 
-    public function prePersist()
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
@@ -131,16 +194,6 @@ class Category implements \Stringable
     public function getPosition(): ?int
     {
         return $this->position;
-    }
-
-    /**
-     * @deprecated only used by the AdminHelper
-     */
-    public function addChildren(self $child): self
-    {
-        $this->addChild($child, true);
-
-        return $this;
     }
 
     public function addChild(self $child, $nested = false): self

@@ -1,4 +1,4 @@
-Capco\ClassificationBundle\Entity\Category:
+Capco\AppBundle\Entity\Category:
   MediaCategory1:
     name: root
     enabled: true

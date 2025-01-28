@@ -6,7 +6,7 @@
         @author <yourname> <youremail>
     -->
 
-    <class name="Capco\ClassificationBundle\Entity\Collection" exclusion-policy="all" xml-root-name="_collection">
+    <class name="Capco\AppBundle\Entity\Collection" exclusion-policy="all" xml-root-name="_collection">
 
         <property xml-attribute-map="true" name="id" type="integer" expose="true" since-version="1.0" groups="sonata_api_read,sonata_api_write,sonata_search" />
 

@@ -1,4 +1,4 @@
-Capco\ClassificationBundle\Entity\Context:
+Capco\AppBundle\Entity\Context:
   MediaContext1:
     id: default
     name: Default

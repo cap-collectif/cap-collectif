@@ -1,13 +1,41 @@
 <?php
 
-namespace Capco\ClassificationBundle\Entity;
+namespace Capco\AppBundle\Entity;
 
+use Doctrine\ORM\Mapping as ORM;
+
+/**
+ * @ORM\Entity(repositoryClass="Doctrine\ORM\EntityRepository")
+ * @ORM\Table(name="classification__context")
+ * @ORM\HasLifecycleCallbacks
+ */
 class Context implements \Stringable
 {
+    /**
+     * @ORM\Id
+     * @ORM\Column(type="string", name="id")
+     * @ORM\GeneratedValue(strategy="NONE")
+     */
     protected string $id;
-    protected ?string $name = null;
-    protected ?\DateTimeInterface $createdAt = null;
-    protected ?\DateTimeInterface $updatedAt = null;
+
+    /**
+     * @ORM\Column(type="string", name="name")
+     */
+    protected string $name;
+
+    /**
+     * @ORM\Column(type="datetime", name="created_at")
+     */
+    protected \DateTimeInterface $createdAt;
+
+    /**
+     * @ORM\Column(type="datetime", name="updated_at")
+     */
+    protected \DateTimeInterface $updatedAt;
+
+    /**
+     * @ORM\Column(type="boolean", name="enabled")
+     */
     protected bool $enabled;
 
     public function __toString(): string
@@ -20,7 +48,7 @@ class Context implements \Stringable
         $this->id = $id;
     }
 
-    public function getId(): int
+    public function getId(): string
     {
         return $this->id;
     }
@@ -32,7 +60,7 @@ class Context implements \Stringable
         return $this;
     }
 
-    public function getName(): ?string
+    public function getName(): string
     {
         return $this->name;
     }
@@ -56,7 +84,7 @@ class Context implements \Stringable
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeInterface
+    public function getCreatedAt(): \DateTimeInterface
     {
         return $this->createdAt;
     }
@@ -68,18 +96,24 @@ class Context implements \Stringable
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeInterface
+    public function getUpdatedAt(): \DateTimeInterface
     {
         return $this->updatedAt;
     }
 
-    public function prePersist()
+    /**
+     * @ORM\PrePersist
+     */
+    public function prePersist(): void
     {
         $this->setCreatedAt(new \DateTime());
         $this->setUpdatedAt(new \DateTime());
     }
 
-    public function preUpdate()
+    /**
+     * @ORM\PreUpdate
+     */
+    public function preUpdate(): void
     {
         $this->setUpdatedAt(new \DateTime());
     }
