@@ -118,15 +118,22 @@ class ProjectRepository extends EntityRepository
         int $offset,
         int $limit,
         ?User $viewer = null,
-        array $orderBy = ['field' => 'publishedAt', 'direction' => 'DESC']
+        array $orderBy = ['field' => 'publishedAt', 'direction' => 'DESC'],
+        ?int $status = null
     ): array {
-        return $this->getByOwnerQueryBuilder($owner, $viewer)
+        $projects = $this->getByOwnerQueryBuilder($owner, $viewer)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
             ->orderBy("p.{$orderBy['field']}", $orderBy['direction'])
             ->getQuery()
             ->getResult()
         ;
+
+        if (null !== $status) {
+            $projects = array_filter($projects, fn (Project $project) => $project->getCurrentStepState() === $status);
+        }
+
+        return $projects;
     }
 
     public function countByOwner(ProjectOwner $owner, ?User $viewer = null): int

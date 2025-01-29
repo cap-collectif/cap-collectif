@@ -531,7 +531,6 @@ InternalQuery:
             analytics:
                 type: 'InternalPlatformAnalytics!'
                 description: 'Return the platform analytics'
-                access: "@=hasRole('ROLE_PROJECT_ADMIN')"
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryAnalyticsResolver", args, info)'
                 args:
                     filter:
@@ -621,10 +620,10 @@ InternalQuery:
                     orderBy:
                         type: 'ArgumentOrder'
                         defaultValue:
-                          {
-                              field: !php/const Capco\AppBundle\Enum\ArgumentOrderField::CREATED_AT,
-                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
-                          }
+                            {
+                                field: !php/const Capco\AppBundle\Enum\ArgumentOrderField::CREATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                            }
                         description: 'The ordering direction for the argument creation or updated date'
                     term:
                         type: 'String'
@@ -639,10 +638,10 @@ InternalQuery:
                     orderBy:
                         type: 'CommentOrder'
                         defaultValue:
-                          {
-                              field: !php/const Capco\AppBundle\Enum\CommentOrderField::CREATED_AT,
-                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
-                          }
+                            {
+                                field: !php/const Capco\AppBundle\Enum\CommentOrderField::CREATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                            }
                         description: 'The ordering direction for the comment creation or updated date'
                     term:
                         type: 'String'
@@ -661,10 +660,10 @@ InternalQuery:
                     orderBy:
                         type: 'SourceOrder'
                         defaultValue:
-                          {
-                              field: !php/const Capco\AppBundle\Enum\SourceOrderField::CREATED_AT,
-                              direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
-                          }
+                            {
+                                field: !php/const Capco\AppBundle\Enum\SourceOrderField::CREATED_AT,
+                                direction: !php/const Capco\AppBundle\Enum\OrderDirection::DESC,
+                            }
                         description: 'The ordering direction for the source creation or updated date'
                     term:
                         type: 'String'

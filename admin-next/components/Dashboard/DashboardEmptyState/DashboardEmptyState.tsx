@@ -15,7 +15,7 @@ const DashboardEmptyState: FC = () => {
         <Text mb={4}>{intl.formatMessage({ id: 'this-is-where-you-can-check-analysis-data' })}</Text>
         <Text>{intl.formatMessage({ id: 'must-create-project-before-analysis' })}</Text>
       </Box>
-      <Link href="/projects" passHref>
+      <Link href="/admin-next/projects" passHref>
         <Button as="a" variant="primary" variantSize="big">
           {intl.formatMessage({ id: 'create-a-project' })}
         </Button>

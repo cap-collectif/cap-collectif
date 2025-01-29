@@ -322,7 +322,7 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
             />
           ) : null}
 
-          {features.analytics_page && !organizationId ? (
+          {features.analytics_page ? (
             <SidebarLink
               text="admin.label.analytics"
               href="/admin-next/dashboard"

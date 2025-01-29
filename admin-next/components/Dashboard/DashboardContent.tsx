@@ -38,6 +38,21 @@ const FRAGMENT = graphql`
         }
       }
     }
+    isOrganizationMember
+    organizations {
+      userOrganizationProjects: projects {
+        totalCount
+        edges {
+          node {
+            id
+            timeRange {
+              startAt
+              endAt
+            }
+          }
+        }
+      }
+    }
     ...DashboardFilters_viewer @arguments(affiliations: $affiliations, count: $count, cursor: $cursor)
   }
 `
@@ -53,6 +68,7 @@ const DashboardContent: FC<DashboardContentProps> = ({ viewer: viewerFragment })
   const { viewerSession } = useAppContext()
   const viewer = useFragment(FRAGMENT, viewerFragment)
   const projects = viewer?.userProjects
+  const projectsOrganization = viewer?.organizations?.[0]?.userOrganizationProjects
 
   /**
    * QUERIES REFRESHERS
@@ -71,13 +87,18 @@ const DashboardContent: FC<DashboardContentProps> = ({ viewer: viewerFragment })
   })
 
   const hasProjects = projects?.totalCount > 0
+  const hasProjectsOrganization = projectsOrganization?.totalCount > 0
 
   useEffect(() => {
     if (hasProjects && !viewerSession.isAdmin && projectId === 'ALL') {
       const projectIds = projects?.edges?.filter(Boolean).map(edge => edge?.node.id) || []
       if (projectIds[0]) setProjectId(projectIds[0])
     }
-  }, [projectId, setProjectId, viewerSession.isAdmin, projects])
+    if (hasProjectsOrganization && !viewerSession.isAdmin && projectId === 'ALL') {
+      const projectIds = projectsOrganization?.edges?.filter(Boolean).map(edge => edge?.node.id) || []
+      if (projectIds[0]) setProjectId(projectIds[0])
+    }
+  }, [projectId, setProjectId, viewerSession.isAdmin, projects, projectsOrganization])
 
   const contextValue = useMemo(
     () => ({
@@ -100,7 +121,7 @@ const DashboardContent: FC<DashboardContentProps> = ({ viewer: viewerFragment })
     [dateRange, projectId],
   )
 
-  if (!hasProjects) return <DashboardEmptyState />
+  if (!hasProjects && !hasProjectsOrganization) return <DashboardEmptyState />
 
   return (
     <DashboardContext.Provider value={contextValue}>

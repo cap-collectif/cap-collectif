@@ -33,6 +33,23 @@ const FRAGMENT = graphql`
         }
       }
     }
+    organizations {
+        projects(first: $count, after: $cursor) {
+            totalCount
+            edges {
+                node {
+                    id
+                    title
+                    createdAt
+                    timeRange {
+                        isTimeless
+                        startAt
+                        endAt
+                    }
+                }
+            }
+        }
+    }
   }
 `
 
@@ -82,7 +99,6 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
   const { viewerSession } = useAppContext()
   const { setFilters, filters } = useDashboard()
 
-  const { projects } = viewer
   const minStartedAt = new Date('2014-01-01')
   const today = new Date();
   if (new Date(filters.dateRange.startAt) < minStartedAt) {
@@ -92,6 +108,9 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
   if (new Date(filters.dateRange.endAt) > today) {
       filters.dateRange.endAt = today.toISOString();
   }
+
+  const organization = viewer?.organizations?.[0];
+  const projects = organization?.projects ?? viewer.projects;
 
   const [dateRange, setDateRange] = useState({
     startDate: moment(filters.dateRange.startAt),

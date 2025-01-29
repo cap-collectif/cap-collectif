@@ -29,11 +29,6 @@ export const getSideBarItemsFiltered = (
       }
     }
 
-    // this is temporary
-    if (sideBarItem.id === 'analytics' && isOrganizationMember) {
-      return acc
-    }
-
     if ((isItemForAdminOnly || isItemForAll) && hasItemFeatureRequired) {
       // Filtering sub items of a menu here
       sideBarItem.items = sideBarItem.items.filter(subItem => {
