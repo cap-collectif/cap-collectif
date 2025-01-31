@@ -20,7 +20,6 @@ class QuestionnaireStepRepository extends AbstractStepRepository
             ->select('qs', 'q', 'questions')
             ->join('qs.questionnaire', 'q')
             ->innerJoin('q.questions', 'questions')
-            ->innerJoin('q.replies', 'replies')
         ;
 
         return $qb->getQuery()->getResult();

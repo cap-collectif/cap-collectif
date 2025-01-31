@@ -20,7 +20,7 @@ class QuestionnaireContributionExporter extends ContributionExporter
 {
     private const BATCH_SIZE = 1000;
     protected SerializerInterface $serializer;
-    private bool $isExportStarted = false;
+    private bool $withHeaders;
 
     public function __construct(
         protected EntityManagerInterface $entityManager,
@@ -94,9 +94,11 @@ class QuestionnaireContributionExporter extends ContributionExporter
     private function exportQuestionnaireRepliesInBatches(Questionnaire $questionnaire): void
     {
         $replyOffset = 0;
+        if (!isset($this->withHeaders)) {
+            $this->withHeaders = true;
+        }
 
         do {
-            $this->isExportStarted = true;
             $replies = $this->replyRepository->getBatchOfPublishedReplies(
                 $questionnaire->getId(),
                 $replyOffset,
@@ -113,6 +115,7 @@ class QuestionnaireContributionExporter extends ContributionExporter
                 0 === $replyOffset
             );
 
+            $this->withHeaders = false;
             $replyOffset += self::BATCH_SIZE;
             $this->entityManager->clear();
         } while (self::BATCH_SIZE === \count($replies));
@@ -132,6 +135,9 @@ class QuestionnaireContributionExporter extends ContributionExporter
     private function exportQuestionnaireAnonymousRepliesInBatches(Questionnaire $questionnaire): void
     {
         $anonymousRepliesOffset = 0;
+        if (!isset($this->withHeaders)) {
+            $this->withHeaders = true;
+        }
 
         do {
             $anonymousReplies = $this->anonymousReplyRepository->getQuestionnaireAnonymousReplies(
@@ -147,9 +153,10 @@ class QuestionnaireContributionExporter extends ContributionExporter
             $this->exportContributions(
                 $anonymousReplies,
                 $questionnaire->getStep(),
-                0 === $anonymousRepliesOffset && !$this->isExportStarted
+                $this->withHeaders
             );
 
+            $this->withHeaders = false;
             $anonymousRepliesOffset += self::BATCH_SIZE;
             $this->entityManager->clear();
         } while (self::BATCH_SIZE === \count($anonymousReplies));
