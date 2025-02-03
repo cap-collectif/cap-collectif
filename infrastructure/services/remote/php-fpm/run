@@ -24,6 +24,7 @@ chown -R capco:capco var/cache
 chown -R capco:capco var/logs
 chown -R capco:capco var/log
 chown -R capco:capco /var/www/config
+chown -R capco:capco /var/www/public/export
 echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and, log/ logs/!"
 
 echo "[$(date -u)][PHP-FPM] Deleting existing exposed magiclinks files in public folder..."
