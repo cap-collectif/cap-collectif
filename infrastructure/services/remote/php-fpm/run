@@ -26,6 +26,10 @@ chown -R capco:capco var/log
 chown -R capco:capco /var/www/config
 echo "[$(date -u)][PHP-FPM] Permissions gived to public/, cache/ and, log/ logs/!"
 
+echo "[$(date -u)][PHP-FPM] Deleting existing exposed magiclinks files in public folder..."
+rm -rf public/magiclinks
+rm -rf public/media/magiclinks
+
 timeout=1;
 echo "[$(date -u)][PHP-FPM] Waiting for MySQL..."
 while ! (mysqladmin ping --host=${SYMFONY_DATABASE_HOST:-127.0.0.1} --user=${SYMFONY_DATABASE_USER:-root} --password=${SYMFONY_DATABASE_PASSWORD} --port=${SYMFONY_DATABASE_PORT:-3306})

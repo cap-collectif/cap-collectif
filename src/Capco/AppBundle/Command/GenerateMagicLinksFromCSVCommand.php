@@ -26,7 +26,7 @@ use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class GenerateMagicLinksFromCSVCommand extends Command
 {
-    private const FILE_FOLDER = '/public/magiclinks/';
+    private const FILE_FOLDER = '/var/magiclinks/';
     private SymfonyStyle $style;
     private string $absoluteFilePath;
 
