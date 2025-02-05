@@ -26,8 +26,11 @@ class UrlRuntime implements RuntimeExtensionInterface
         $this->router = $router;
     }
 
-    public function formatDescription(string $string): string
+    public function formatDescription(?string $string = null): string
     {
+        if (!$string) {
+            return '';
+        }
         // We replace `pattern` by italic format (<i>pattern</i>)
         return preg_replace('/(`(.*?)`)/', '<i>\\2</i>', $string);
     }
