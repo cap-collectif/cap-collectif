@@ -69,6 +69,18 @@ class CreateUserAccountsFromCSVCommand extends Command
                 'set this option to generate a CSV with users password.'
             )
             ->addOption(
+                'force-enabled',
+                false,
+                InputOption::VALUE_NONE,
+                'set this option to force enable imported users.'
+            )
+            ->addOption(
+                'force-confirmed-email',
+                false,
+                InputOption::VALUE_NONE,
+                'set this option to consider confirmed email for imported users.'
+            )
+            ->addOption(
                 'generate-email',
                 false,
                 InputOption::VALUE_OPTIONAL,
@@ -81,6 +93,7 @@ class CreateUserAccountsFromCSVCommand extends Command
                 'Delimiter used in csv',
                 ';'
             )
+            ->addUsage('--with-password --delimiter="," --force-enabled --force-confirmed-email /path/to/accounts-to-create.csv /path/to/created-accounts.csv')
         ;
     }
 
@@ -90,10 +103,25 @@ class CreateUserAccountsFromCSVCommand extends Command
         $sendEmail = false; // Not used for now
         $inputFilePath = $input->getArgument('input');
         $outputFilePath = $input->getArgument('output');
-        $rows = $this->csvReader->convert($inputFilePath);
+        $delimiter = $input->getOption('delimiter');
         $withPassword = $input->getOption('with-password');
+        $forceEnabled = $input->getOption('force-enabled');
+        $forceConfirmedEmail = $input->getOption('force-confirmed-email');
         $withQuestions = $input->getOption('with-custom-fields');
         $generateEmail = $input->getOption('generate-email');
+
+        if (!is_file($inputFilePath)) {
+            $io->error('File "' . $inputFilePath . '" does not exist.');
+
+            return Command::FAILURE;
+        }
+        if (!str_ends_with((string) $inputFilePath, '.csv')) {
+            $io->error('Only csv files are allowed');
+
+            return Command::FAILURE;
+        }
+
+        $rows = $this->csvReader->convert($inputFilePath, $delimiter);
 
         // We ask for a domain when this option is passed without a value.
         if (true === $generateEmail) {
@@ -105,16 +133,16 @@ class CreateUserAccountsFromCSVCommand extends Command
         }
 
         $createdCount = 0;
-        $headersRow = $withPassword
+        $outputHeadersRow = $withPassword
             ? self::HEADERS_WITH_PASSWORD
             : self::HEADERS_WITH_FORGOT_PASSWORD_LINK;
 
         try {
             /** @var Writer $writer */
-            $writer = WriterFactory::create(Type::CSV, $input->getOption('delimiter'));
+            $writer = WriterFactory::create(Type::CSV, $delimiter);
             $writer->setShouldAddBOM(false);
             $writer->openToFile($outputFilePath);
-            $writer->addRow(WriterEntityFactory::createRowFromArray($headersRow));
+            $writer->addRow(WriterEntityFactory::createRowFromArray($outputHeadersRow));
         } catch (SpoutException $spoutException) {
             throw new \RuntimeException(__METHOD__ . $spoutException->getMessage());
         }
@@ -124,6 +152,7 @@ class CreateUserAccountsFromCSVCommand extends Command
 
         $progressBar = new ProgressBar($output, \count($deduplicatedRows));
         $progressBar->start();
+
         foreach ($deduplicatedRows as $row) {
             $progressBar->advance();
             $email = filter_var(
@@ -134,7 +163,7 @@ class CreateUserAccountsFromCSVCommand extends Command
             try {
                 $previousUser = $this->userRepository->findOneByEmail($email);
                 if ($previousUser) {
-                    $io->caution('Skipping existing user: ' . $email);
+                    $io->warning('Skipping existing user: ' . $email);
 
                     continue;
                 }
@@ -143,9 +172,9 @@ class CreateUserAccountsFromCSVCommand extends Command
                 $user = $this->userManager->createUser();
                 $user->setEmail($email);
 
-                $generatedPassword = bin2hex(random_bytes(4));
+                $generatedPassword = $row['password'] ?? bin2hex(random_bytes(4));
 
-                if (!$generateEmail) {
+                if (!$generateEmail && !$forceConfirmedEmail) {
                     $user->setUsername($row['username']);
                     $user->setConfirmationToken($this->tokenGenerator->generateToken());
                     $user->setResetPasswordToken($this->tokenGenerator->generateToken());
@@ -156,7 +185,7 @@ class CreateUserAccountsFromCSVCommand extends Command
                     $user->setPlainPassword($generatedPassword);
                 }
 
-                $user->setEnabled($generateEmail ? true : false);
+                $user->setEnabled($generateEmail || $forceEnabled);
 
                 // Handle custom questions
                 if ($withQuestions) {
@@ -178,7 +207,7 @@ class CreateUserAccountsFromCSVCommand extends Command
 
                 $this->userManager->updateUser($user);
 
-                if (!$generateEmail) {
+                if (!$generateEmail && !$forceConfirmedEmail) {
                     $confirmationUrl = $this->router->generate(
                         'account_confirm_email',
                         [
@@ -217,7 +246,7 @@ class CreateUserAccountsFromCSVCommand extends Command
         $progressBar->finish();
         $io->success($createdCount . ' users created.');
 
-        return 0;
+        return Command::SUCCESS;
     }
 
     private function deduplicateEmail(array $rows, SymfonyStyle $output): array
@@ -235,7 +264,7 @@ class CreateUserAccountsFromCSVCommand extends Command
             $deduplicatedRows[$niddle] = $row;
         }
         if (\count($rows) > \count($deduplicatedRows)) {
-            $output->caution(
+            $output->warning(
                 'Skipping ' . (\count($rows) - \count($deduplicatedRows)) . ' duplicated email(s).'
             );
         }
