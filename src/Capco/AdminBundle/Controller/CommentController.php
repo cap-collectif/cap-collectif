@@ -74,7 +74,7 @@ class CommentController extends CRUDController
             return $this->redirectTo($request, $object);
         }
 
-        $template = $this->get('sonata.admin.global_template_registry')->getTemplate('delete');
+        $template = $this->admin->getTemplateRegistry()->getTemplate('delete');
 
         return $this->renderWithExtraParams(
             $template,
