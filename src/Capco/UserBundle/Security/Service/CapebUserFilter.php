@@ -5,10 +5,10 @@ namespace Capco\UserBundle\Security\Service;
 use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserTypeRepository;
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ClientException;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpClient\Exception\TransportException;
 use Symfony\Contracts\HttpClient\Exception\ClientExceptionInterface;
-use Symfony\Contracts\HttpClient\Exception\DecodingExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\RedirectionExceptionInterface;
 use Symfony\Contracts\HttpClient\Exception\ServerExceptionInterface;
 
@@ -63,7 +63,7 @@ class CapebUserFilter
             $this->logger->error('Cas user "' . $username . '" has not authorized role : ' . $userRole);
 
             return null;
-        } catch (TransportException|ClientExceptionInterface|DecodingExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface $exception) {
+        } catch (TransportException|ClientExceptionInterface|RedirectionExceptionInterface|ServerExceptionInterface|ClientException $exception) {
             $this->logger->error('Cas user "' . $username . '" api request failed');
             $this->logger->error(__METHOD__ . ' : ' . $exception->getMessage());
 
