@@ -7,7 +7,6 @@ import Head from 'next/head'
 import NavBarPlaceholder from '../NavBar/NavBarPlaceholder'
 import { NavBarProvider } from '../NavBar/NavBar.context'
 import { useAppContext } from '../AppProvider/App.context'
-import { FONT_PATH } from '../../styles/Fonts'
 import { SideBarProvider } from '@ui/SideBar/SideBar.context'
 import sideBarItems from '../SideBar/SideBarItems.json'
 import { useRouter } from 'next/router'
@@ -111,8 +110,6 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hid
               />
             </>
           )}
-          <link rel="preload" href={`${FONT_PATH}/OpenSans-Regular.ttf`} as="font" crossOrigin="" />
-          <link rel="preload" href={`${FONT_PATH}/OpenSans-SemiBold.ttf`} as="font" crossOrigin="" />
         </Head>
 
         <Flex direction="row" height="100%">
