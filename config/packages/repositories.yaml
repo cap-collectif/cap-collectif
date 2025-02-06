@@ -808,3 +808,15 @@ services:
         factory: [ '@doctrine.orm.entity_manager', getRepository ]
         lazy: true
         arguments: [ 'CapcoAppBundle:Section\SectionCarrouselElement' ]
+
+
+    Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:OpinionTypeAppendixType']
+
+
+    Capco\AppBundle\Repository\OpinionAppendixRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:OpinionAppendix']
