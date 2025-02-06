@@ -18,18 +18,26 @@ export const getDistrict = (geoJSON: any[]) => {
 
 const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
   const mapRef = React.useRef(null)
+  const geoJsonLayerRef = React.useRef(null)
+
   const [mapLoaded, setMapLoaded] = React.useState(false)
 
   const geoJSON = formatGeoJsons([district])
-  if (!district.geojson || !geoJSON.length || !geoJSON[0].district) return null
-
   const districtGeoJSON = getDistrict(geoJSON)
+  const isValidGeoJSON = district.geojson && geoJSON.length && geoJSON[0].district && districtGeoJSON
 
-  if (!districtGeoJSON) return null
+  React.useEffect(() => {
+    if (mapRef.current && geoJsonLayerRef.current && isValidGeoJSON) {
+      mapRef?.current?.invalidateSize()
+      mapRef?.current?.fitBounds(districtGeoJSON.getBounds())
+      geoJsonLayerRef?.current?.clearLayers()?.addData(geoJSON[0].district)
+    }
+  }, [isValidGeoJSON, districtGeoJSON, mapLoaded, geoJSON])
 
   return (
     <Box
       width="50%"
+      display={isValidGeoJSON ? 'block' : 'none'}
       sx={{
         '.leaflet-interactive': {
           strokeDasharray: 10,
@@ -49,10 +57,7 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
       <MapContainer
         whenCreated={map => {
           mapRef.current = map
-          map.fitBounds(districtGeoJSON.getBounds())
-          setTimeout(() => {
-            setMapLoaded(true)
-          }, 2000)
+          setTimeout(() => setMapLoaded(true), 150)
         }}
         style={{
           width: '100%',
@@ -70,12 +75,15 @@ const GeographicalAreaMap: React.FC<Props> = ({ district }) => {
         scrollWheelZoom={false}
       >
         <CapcoTileLayer />
-        <GeoJSON
-          // @ts-ignore https://github.com/cap-collectif/platform/issues/15975
-          style={convertToGeoJsonStyle(geoJSON[0].style)}
-          data={geoJSON[0].district}
-        />
-        {district.titleOnMap && mapLoaded ? (
+        {isValidGeoJSON ? (
+          <GeoJSON
+            // @ts-ignore https://github.com/cap-collectif/platform/issues/15975
+            style={convertToGeoJsonStyle(geoJSON[0].style)}
+            data={geoJSON[0].district}
+            ref={geoJsonLayerRef}
+          />
+        ) : null}
+        {district.titleOnMap && mapLoaded && isValidGeoJSON ? (
           <Rectangle bounds={districtGeoJSON.getBounds()} pathOptions={{ color: 'transparent' }}>
             {/** @ts-ignore https://github.com/cap-collectif/platform/issues/15975 */}
             <Tooltip permanent className="titleTooltip">
