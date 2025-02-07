@@ -384,6 +384,11 @@ InternalQuery:
                     term:
                         type: 'String'
                         description: 'Search by term.'
+                    showProfilePictures:
+                        type: 'Boolean!'
+                        description: 'Filter medias linked to a profile.'
+                        defaultValue: true
+
             availableLocales:
                 description: 'List all locales on the platform.'
                 access: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Organization\\OrganizationMemberAccessResolver", getUser())'

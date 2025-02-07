@@ -17,11 +17,14 @@ class MediaQueryResolver implements QueryInterface
 
     public function __invoke(Arg $args): ConnectionInterface
     {
-        $totalCount = $this->mediaRepository->countAllWithoutCategory($args->offsetGet('term'));
-        $paginator = new Paginator(function (int $offset, int $limit) use ($args) {
+        $showProfilePictures = $args->offsetGet('showProfilePictures');
+        $term = $args->offsetGet('term');
+
+        $totalCount = $this->mediaRepository->countAllWithoutCategory($term, $showProfilePictures);
+        $paginator = new Paginator(function (int $offset, int $limit) use ($term, $showProfilePictures) {
             try {
                 return $this->mediaRepository
-                    ->getWithoutCategoryPaginated($offset, $limit, $args->offsetGet('term'))
+                    ->getWithoutCategoryPaginated($offset, $limit, $term, $showProfilePictures)
                     ->getIterator()
                     ->getArrayCopy()
                 ;

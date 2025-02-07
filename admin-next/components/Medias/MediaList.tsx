@@ -38,7 +38,7 @@ export const FRAGMENT = graphql`
   fragment MediaList_query on Query
   @argumentDefinitions(term: { type: "String" }, count: { type: "Int" }, cursor: { type: "String" })
   @refetchable(queryName: "MediaListQuery") {
-    medias(after: $cursor, first: $count, term: $term) @connection(key: "MediaList_medias", filters: ["term"]) {
+    medias(after: $cursor, first: $count, term: $term, showProfilePictures: false) @connection(key: "MediaList_medias", filters: ["term"]) {
       __id
       totalCount
       edges {

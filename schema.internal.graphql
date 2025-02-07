@@ -13984,6 +13984,9 @@ type Query {
 
     """Search by term."""
     term: String
+
+    """Filter medias linked to a profile."""
+    showProfilePictures: Boolean! = true
   ): MediaConnection!
 
   """List all locales on the platform."""

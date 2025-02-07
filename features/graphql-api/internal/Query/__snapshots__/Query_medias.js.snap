@@ -1,0 +1,17 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query medias Fetch all medias 1`] = `
+Object {
+  "medias": Object {
+    "totalCount": 60,
+  },
+}
+`;
+
+exports[`Internal|Query medias Fetch medias hiding profile pictures 1`] = `
+Object {
+  "medias": Object {
+    "totalCount": 39,
+  },
+}
+`;
