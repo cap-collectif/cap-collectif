@@ -1,0 +1,99 @@
+Capco\UserBundle\Entity\User:
+    userMax:
+        id: 'userMax'
+        username: AdminMax
+        firstname: Max
+        lastname: Pou
+        email: maxime.pouessel+2@cap-collectif.com
+        phone: '+3300000000'
+        userType: '@UserType7'
+        plainPassword: Aa123456
+        roles:
+            - 'ROLE_ADMIN'
+        enabled: true
+        createdAt: <identity((new \DateTime('2024-01-01 00:00:00')))>
+        confirmedAccountAt: <identity((new \DateTime('2024-01-01 00:01:00'))->modify("+ 4 days"))>
+        consentInternalCommunication: true
+
+    userCreateurProjet:
+        id: 'userCreateurProjet'
+        username: Admin Projet
+        firstname: Admin
+        lastname: Createur
+        email: maxime.pouessel+1@cap-collectif.com
+        userType: '@UserType7'
+        plainPassword: Aa123456
+        roles:
+            - 'ROLE_USER'
+            - 'ROLE_PROJECT_ADMIN'
+        city: Paris
+        biography: Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eum earum fuga quaerat expedita minima labore vitae voluptate, repellendus perspiciatis consequuntur cum, dignissimos quas temporibus consequatur tempora est repellat. Architecto, quia.
+        phone: '+3300000000'
+        enabled: true
+        createdAt: <identity((new \DateTime('2024-01-04 00:00:00')))>
+
+    userOrgaMax:
+        id: 'userOrgaMax'
+        username: OrgaMax
+        firstname: Max
+        lastname: Orga
+        email: maxime.pouessel+5@cap-collectif.com
+        userType: '@UserType7'
+        plainPassword: Aa123456
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        createdAt: <identity((new \DateTime('2024-01-04 00:00:00')))>
+
+    userCollectivite:
+        id: 'userCollectivite'
+        username: Un utilisateur de la collectivite
+        firstname: Collec
+        lastname: Tivite
+        email: maxime.pouessel+3@cap-collectif.com
+        userType: '@UserType7'
+        plainPassword: Aa123456
+        roles:
+            - 'ROLE_USER'
+        enabled: true
+        postalAddress: '[{"address_components":[{"long_name":"26","short_name":"26","types":["street_number"]},{"long_name":"Rue Claude Tillier","short_name":"Rue Claude Tillier","types":["route"]},{"long_name":"Paris","short_name":"Paris","types":["locality","political"]},{"long_name":"Département de Paris","short_name":"Département de Paris","types":["administrative_area_level_2","political"]},{"long_name":"Île-de-France","short_name":"IDF","types":["administrative_area_level_1","political"]},{"long_name":"France","short_name":"FR","types":["country","political"]},{"long_name":"75012","short_name":"75012","types":["postal_code"]}],"formatted_address":"26 Rue Claude Tillier, 75012 Paris, France","geometry":{"location":{"lat":48.84865730000001,"lng":2.3889227},"location_type":"ROOFTOP","viewport":{"south":48.84730831970851,"west":2.387573719708498,"north":48.85000628029151,"east":2.390271680291502}},"place_id":"ChIJrW-3zAxy5kcRvzuJuCmZqf0","plus_code":{"compound_code":"R9XQ+FH Paris, France","global_code":"8FW4R9XQ+FH"},"types":["street_address"]}]'
+        createdAt: <identity((new \DateTime('2024-01-04 00:00:00')))>
+
+    userEmmanuelle:
+        id: 'userEmmanuelle'
+        username: Emmanuelle
+        firstname: Emmanuelle
+        lastname: Babilaere
+        email: emmanuelle@cap-collectif.com
+        userType: '@UserType7'
+        plainPassword: Aa123456
+        roles:
+            - 'ROLE_ADMIN'
+        enabled: true
+        createdAt: <identity((new \DateTime('2024-01-04 00:00:00')))>
+
+    userLouise:
+        id: 'userLouise'
+        username: Louise
+        firstname: Louise
+        lastname: Massol Dillon
+        email: louise@cap-collectif.com
+        userType: '@UserType7'
+        plainPassword: Aa123456
+        roles:
+            - 'ROLE_ADMIN'
+        enabled: true
+        createdAt: <identity((new \DateTime('2024-01-04 00:00:00')))>
+
+    userSylvain:
+        id: 'userSylvain'
+        username: Sylvain
+        firstname: Sylvain
+        lastname: Boutoille
+        email: sylvain.boutoille@cap-collectif.com
+        userType: '@UserType7'
+        plainPassword: Aa123456
+        roles:
+            - 'ROLE_ADMIN'
+        enabled: true
+        createdAt: <identity((new \DateTime('2024-01-04 00:00:00')))>

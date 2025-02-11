@@ -1,0 +1,5 @@
+Capco\UserBundle\Entity\UserTypeTranslation:
+    UserType7Fr:
+        translatable: '@UserType7'
+        locale: fr-FR
+        name: Citoyen

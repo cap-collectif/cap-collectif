@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Organization\Organization:
+    organizationCypress:
+        id: 'organizationCypress'
+        email: 'test@toto.com'
+        createdAt: <(new \DateTime('2024-11-20 00:00:00'))>

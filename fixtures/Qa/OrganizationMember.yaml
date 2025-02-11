@@ -1,0 +1,5 @@
+Capco\AppBundle\Entity\Organization\OrganizationMember:
+    organizationMember:
+        organization: '@organizationCypress'
+        user: '@userOrgaMax'
+        role: 'admin'

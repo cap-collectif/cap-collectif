@@ -1,0 +1,11 @@
+Capco\AppBundle\Entity\Organization\OrganizationTranslation:
+    organizationCypressFr:
+        locale: fr-FR
+        translatable: '@organizationCypress'
+        title: 'Organisation Cypress'
+        body: 'Description cypress'
+    organizationCypressEn:
+        locale: en-EN
+        translatable: '@organizationCypress'
+        title: 'Organisation Cypress in english'
+        body: 'Description cypress in english'
