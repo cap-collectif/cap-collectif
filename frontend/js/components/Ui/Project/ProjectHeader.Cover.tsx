@@ -325,7 +325,7 @@ export const Authors = ({ children, active, onClick, authors, ...rest }: Authors
         lineHeight="24px"
         onClick={onClick}
         color="neutral-gray.900"
-        paddingLeft={[0, 2]}
+        paddingLeft={0}
         fontSize="14px"
         sx={{
           '&:hover': {

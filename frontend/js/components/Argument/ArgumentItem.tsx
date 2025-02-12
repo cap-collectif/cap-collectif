@@ -8,7 +8,7 @@ import { Label, ListGroupItem } from 'react-bootstrap'
 
 import styled from 'styled-components'
 import Media from '../Ui/Medias/Media/Media'
-import UserAvatarLegacy from '../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import UserLink from '../User/UserLink'
 import ArgumentButtons from './ArgumentButtons'
 import UnpublishedLabel from '../Publishable/UnpublishedLabel'
@@ -77,7 +77,7 @@ export class ArgumentItem extends React.Component<Props> {
         <Media overflow>
           <Media.Left>
             {/** @ts-ignore */}
-            <UserAvatarLegacy user={argument.author} className="excerpt_dark" />
+            <UserAvatar user={argument.author} className="excerpt_dark" />
           </Media.Left>
           <MediaBody className="opinion__body">
             <div

@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import UserAvatarLegacy from '../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import CommentInfos from './CommentInfos'
 import CommentBody from './CommentBody'
 import CommentVoteButton from './CommentVoteButton'
@@ -27,7 +27,7 @@ export class CommentAnswer extends React.Component<Props> {
         isAnswer
       >
         <div className="Commentavatar">
-          <UserAvatarLegacy user={comment.author} />
+          <UserAvatar user={comment.author} />
         </div>
         <Media className="opinion">
           <Media.Body className="opinion__body">

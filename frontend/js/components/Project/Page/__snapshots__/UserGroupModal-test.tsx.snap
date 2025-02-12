@@ -106,33 +106,23 @@ Array [
                   <span
                     className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
                     hasBadge={false}
-                    onBlur={[Function]}
-                    onFocus={[Function]}
-                    onMouseOut={[Function]}
-                    onMouseOver={[Function]}
-                    style={Object {}}
                   >
-                    <img
-                      alt="<mock-value-for-field-\\"username\\">"
-                      className="sc-dEVMhd img-circle object-cover user-avatar mr-10 "
-                      loading="lazy"
-                      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                      srcSet="
-        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
-         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
-         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
-         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
-         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
-         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
-         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
-         "
-                      style={
-                        Object {
-                          "height": "45px",
-                          "width": "45px",
+                    <div
+                      className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
+                      title="<mock-value-for-field-\\"username\\">"
+                    >
+                      <img
+                        alt="<mock-value-for-field-\\"username\\">"
+                        className="sc-bcXGCL fHacA-d"
+                        src="<mock-value-for-field-\\"url\\">"
+                        style={
+                          Object {
+                            "objectFit": "cover",
+                          }
                         }
-                      }
-                    />
+                        title="<mock-value-for-field-\\"username\\">"
+                      />
+                    </div>
                   </span>
                   <a
                     className="align-self-center"
@@ -280,33 +270,23 @@ Array [
                   <span
                     className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
                     hasBadge={false}
-                    onBlur={[Function]}
-                    onFocus={[Function]}
-                    onMouseOut={[Function]}
-                    onMouseOver={[Function]}
-                    style={Object {}}
                   >
-                    <img
-                      alt="<mock-value-for-field-\\"username\\">"
-                      className="sc-dEVMhd img-circle object-cover user-avatar mr-10 "
-                      loading="lazy"
-                      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                      srcSet="
-        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
-         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
-         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
-         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
-         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
-         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
-         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
-         "
-                      style={
-                        Object {
-                          "height": "45px",
-                          "width": "45px",
+                    <div
+                      className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
+                      title="<mock-value-for-field-\\"username\\">"
+                    >
+                      <img
+                        alt="<mock-value-for-field-\\"username\\">"
+                        className="sc-bcXGCL fHacA-d"
+                        src="<mock-value-for-field-\\"url\\">"
+                        style={
+                          Object {
+                            "objectFit": "cover",
+                          }
                         }
-                      }
-                    />
+                        title="<mock-value-for-field-\\"username\\">"
+                      />
+                    </div>
                   </span>
                   <a
                     className="align-self-center"
@@ -454,33 +434,23 @@ Array [
                   <span
                     className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
                     hasBadge={false}
-                    onBlur={[Function]}
-                    onFocus={[Function]}
-                    onMouseOut={[Function]}
-                    onMouseOver={[Function]}
-                    style={Object {}}
                   >
-                    <img
-                      alt="<mock-value-for-field-\\"username\\">"
-                      className="sc-dEVMhd img-circle object-cover user-avatar mr-10 "
-                      loading="lazy"
-                      sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
-                      srcSet="
-        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-\\"url\\">   320w,
-         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-\\"url\\">   640w,
-         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-\\"url\\">   960w,
-         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-\\"url\\"> 1280w,
-         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-\\"url\\"> 2560w,
-         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-\\"url\\"> 2x,
-         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-\\"url\\"> 3x,
-         "
-                      style={
-                        Object {
-                          "height": "45px",
-                          "width": "45px",
+                    <div
+                      className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
+                      title="<mock-value-for-field-\\"username\\">"
+                    >
+                      <img
+                        alt="<mock-value-for-field-\\"username\\">"
+                        className="sc-bcXGCL fHacA-d"
+                        src="<mock-value-for-field-\\"url\\">"
+                        style={
+                          Object {
+                            "objectFit": "cover",
+                          }
                         }
-                      }
-                    />
+                        title="<mock-value-for-field-\\"username\\">"
+                      />
+                    </div>
                   </span>
                   <a
                     className="align-self-center"

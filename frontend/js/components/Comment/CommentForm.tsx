@@ -11,7 +11,7 @@ import { connect } from 'react-redux'
 import renderComponent from '../Form/Field'
 import { openRegistrationModal } from '@shared/register/RegistrationButton'
 import { Button as DSButton } from '@cap-collectif/ui'
-import { UserAvatarLegacy } from '../User/UserAvatarLegacy'
+import { UserAvatarRender } from '~/components/User/UserAvatar'
 import AddCommentMutation from '../../mutations/AddCommentMutation'
 import type { Dispatch, GlobalState } from '../../types'
 import type { CommentForm_commentable } from '~relay/CommentForm_commentable.graphql'
@@ -289,7 +289,7 @@ export class CommentForm extends React.Component<Props, State> {
           padding: '5px',
         }}
       >
-        <UserAvatarLegacy user={user} className="pull-left" />
+        <UserAvatarRender user={user} className="pull-left" />
         {/**  eslint-disable-next-line react/no-string-refs */}
         <div className="opinion__data" ref="commentBlock">
           <form onSubmit={this.onSubmit}>

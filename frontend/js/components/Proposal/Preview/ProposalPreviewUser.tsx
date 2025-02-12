@@ -5,10 +5,10 @@ import { FormattedDate } from 'react-intl'
 
 import styled from 'styled-components'
 import Media from '../../Ui/Medias/Media/Media'
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated'
 import UserLink from '../../User/UserLink'
 import UnpublishedLabel from '../../Publishable/UnpublishedLabel'
 import type { ProposalPreviewUser_proposal } from '~relay/ProposalPreviewUser_proposal.graphql'
+import UserAvatar from '~/components/User/UserAvatar'
 
 type Props = {
   proposal: ProposalPreviewUser_proposal
@@ -29,8 +29,7 @@ export class ProposalPreviewUser extends React.Component<Props> {
     return (
       <Media>
         <Media.Left>
-          {/* @ts-expect-error Will be a fragment soon */}
-          <UserAvatarDeprecated user={proposal.author} />
+          <UserAvatar user={proposal.author} />
         </Media.Left>
         <MediaBody>
           <UserLink className="excerpt" user={proposal.author} />

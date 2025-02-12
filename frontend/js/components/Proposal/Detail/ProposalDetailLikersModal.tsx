@@ -6,9 +6,9 @@ import { FormattedMessage, injectIntl } from 'react-intl'
 import { ListGroupItem, Modal } from 'react-bootstrap'
 import { closeDetailLikersModal } from '../../../redux/modules/proposal'
 import type { ProposalDetailLikersModal_proposal } from '~relay/ProposalDetailLikersModal_proposal.graphql'
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated'
 import ListGroupFlush from '../../Ui/List/ListGroupFlush'
 import type { Dispatch } from '../../../types'
+import UserAvatar from '~/components/User/UserAvatar'
 
 type Props = {
   proposal: ProposalDetailLikersModal_proposal
@@ -50,15 +50,7 @@ export class ProposalDetailLikersModal extends React.Component<Props> {
         <ListGroupFlush>
           {proposal?.likers.map((liker, key) => (
             <ListGroupItem key={key} className={`${liker.vip ? 'bg-vip' : ''} d-flex text-left`}>
-              <UserAvatarDeprecated
-                user={{
-                  username: liker.username,
-                  media: liker.media,
-                  _links: {
-                    profile: liker.url,
-                  },
-                }}
-              />
+              <UserAvatar user={liker} />
               <div className="d-flex flex-column justify-content-around">
                 <a
                   href={liker.url}
@@ -89,6 +81,7 @@ export default createFragmentContainer(container, {
     fragment ProposalDetailLikersModal_proposal on Proposal {
       id
       likers {
+        ...UserAvatar_user
         id
         displayName
         userType {
@@ -97,9 +90,6 @@ export default createFragmentContainer(container, {
         url
         username
         vip
-        media {
-          url
-        }
       }
     }
   `,

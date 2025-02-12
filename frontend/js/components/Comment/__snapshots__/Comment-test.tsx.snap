@@ -5,8 +5,8 @@ exports[`<Comment /> <Comment /> not shown and focus should render correctly 1`]
   as="li"
   useBodyColor={true}
 >
-  <Relay(Connect(UserAvatarLegacy))
-    size={45}
+  <Connect(UserAvatar)
+    size="lg"
     user={
       Object {
         " $fragmentRefs": null,
@@ -166,8 +166,8 @@ exports[`<Comment /> <Comment /> not shown and not focus should render correctly
   as="li"
   useBodyColor={true}
 >
-  <Relay(Connect(UserAvatarLegacy))
-    size={45}
+  <Connect(UserAvatar)
+    size="lg"
     user={
       Object {
         " $fragmentRefs": null,
@@ -327,8 +327,8 @@ exports[`<Comment /> <Comment /> shown and focus should render correctly 1`] = `
   as="li"
   useBodyColor={true}
 >
-  <Relay(Connect(UserAvatarLegacy))
-    size={45}
+  <Connect(UserAvatar)
+    size="lg"
     user={
       Object {
         " $fragmentRefs": null,
@@ -506,8 +506,8 @@ exports[`<Comment /> <Comment /> shown and not focus should render correctly 1`]
   as="li"
   useBodyColor={true}
 >
-  <Relay(Connect(UserAvatarLegacy))
-    size={45}
+  <Connect(UserAvatar)
+    size="lg"
     user={
       Object {
         " $fragmentRefs": null,
@@ -686,8 +686,8 @@ exports[`<Comment /> should render correctly highlighted 1`] = `
   isHighlighted={true}
   useBodyColor={true}
 >
-  <Relay(Connect(UserAvatarLegacy))
-    size={45}
+  <Connect(UserAvatar)
+    size="lg"
     user={
       Object {
         " $fragmentRefs": null,
@@ -862,8 +862,8 @@ exports[`<Comment /> should render correctly not highlighted 1`] = `
   isHighlighted={false}
   useBodyColor={true}
 >
-  <Relay(Connect(UserAvatarLegacy))
-    size={45}
+  <Connect(UserAvatar)
+    size="lg"
     user={
       Object {
         " $fragmentRefs": null,

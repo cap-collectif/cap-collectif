@@ -563,6 +563,45 @@ exports[`<LastProposals /> should render correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
+                            "name": "url",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
+                            "name": "username",
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "concreteType": "Media",
+                            "kind": "LinkedField",
+                            "name": "media",
+                            "plural": false,
+                            "selections": Array [
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "url",
+                                "storageKey": null,
+                              },
+                              Object {
+                                "alias": null,
+                                "args": null,
+                                "kind": "ScalarField",
+                                "name": "id",
+                                "storageKey": null,
+                              },
+                            ],
+                            "storageKey": null,
+                          },
+                          Object {
+                            "alias": null,
+                            "args": null,
+                            "kind": "ScalarField",
                             "name": "displayName",
                             "storageKey": null,
                           },
@@ -595,46 +634,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
                             "alias": null,
                             "args": null,
                             "kind": "ScalarField",
-                            "name": "url",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
-                            "name": "username",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "kind": "ScalarField",
                             "name": "vip",
-                            "storageKey": null,
-                          },
-                          Object {
-                            "alias": null,
-                            "args": null,
-                            "concreteType": "Media",
-                            "kind": "LinkedField",
-                            "name": "media",
-                            "plural": false,
-                            "selections": Array [
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "url",
-                                "storageKey": null,
-                              },
-                              Object {
-                                "alias": null,
-                                "args": null,
-                                "kind": "ScalarField",
-                                "name": "id",
-                                "storageKey": null,
-                              },
-                            ],
                             "storageKey": null,
                           },
                         ],
@@ -684,7 +684,7 @@ exports[`<LastProposals /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "b20647626f9e5fd141acfcdaae2bfcd3",
+            "cacheID": "efa4e37529f6a6a36514b7bda195802e",
             "id": null,
             "metadata": Object {},
             "name": "LastProposalsQuery",
@@ -717,6 +717,7 @@ fragment ProposalDetailLikersLabel_proposal on Proposal {
 fragment ProposalDetailLikersModal_proposal on Proposal {
   id
   likers {
+    ...UserAvatar_user
     id
     displayName
     userType {
@@ -726,10 +727,6 @@ fragment ProposalDetailLikersModal_proposal on Proposal {
     url
     username
     vip
-    media {
-      url
-      id
-    }
   }
 }
 

@@ -6,7 +6,7 @@ import type {
   PlatformAnalyticsContributorContributionType,
 } from '@relay/Contributor_contributor.graphql'
 import { Flex, Text, headingStyles, CapUIFontWeight } from '@cap-collectif/ui'
-import UserAvatar from '../../../UserAvatar/UserAvatar'
+import UserAvatar from '@components/UserAvatar/UserAvatar'
 
 interface ContributorProps {
   contributor: Contributor_contributor$key

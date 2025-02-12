@@ -386,12 +386,12 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         <div
           className="d-flex align-items-center text-ellipsis"
         >
-          <Connect(UserAvatarDeprecated)
+          <Connect(UserAvatar)
             user={
               Object {
-                "_links": Object {},
+                "displayName": "admin",
                 "media": null,
-                "username": "admin",
+                "url": "google.com",
               }
             }
           />
@@ -451,12 +451,12 @@ exports[`<ProposalListTable /> renders table with formatted data 1`] = `
         <div
           className="d-flex align-items-center text-ellipsis"
         >
-          <Connect(UserAvatarDeprecated)
+          <Connect(UserAvatar)
             user={
               Object {
-                "_links": Object {},
+                "displayName": "admin2",
                 "media": null,
-                "username": "admin2",
+                "url": "google.com",
               }
             }
           />

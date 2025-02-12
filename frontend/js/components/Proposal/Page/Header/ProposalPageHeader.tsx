@@ -15,7 +15,7 @@ import type { GlobalState } from '~/types'
 import type { ProposalPageHeader_proposal$data } from '~relay/ProposalPageHeader_proposal.graphql'
 import type { ProposalPageHeader_step$data } from '~relay/ProposalPageHeader_step.graphql'
 import type { ProposalPageHeader_viewer$data } from '~relay/ProposalPageHeader_viewer.graphql'
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import ProposalPageHeaderButtons from './ProposalPageHeaderButtons'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
@@ -225,7 +225,6 @@ export const ProposalPageHeader = ({
   }
 
   const originStepUrl = () => {
-
     if (state?.stepUrl) {
       return state?.stepUrl
     }
@@ -305,7 +304,7 @@ export const ProposalPageHeader = ({
           <h1>{proposal?.title}</h1>
           <Skeleton placeholder={<AvatarPlaceholder />} isLoaded={proposal !== null}>
             <Flex direction="row">
-              <UserAvatarLegacy
+              <UserAvatar
                 user={proposal?.author}
                 aria-describedby="proposal_author"
                 role="img"
@@ -375,7 +374,7 @@ export default createFragmentContainer(container, {
       author {
         username
         isViewer @include(if: $isAuthenticated)
-        ...UserAvatarLegacy_user
+        ...UserAvatar_user
       }
       createdAt
       publishedAt

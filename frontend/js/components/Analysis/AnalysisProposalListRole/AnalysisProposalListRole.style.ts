@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { AvatarWrapper } from '~ui/List/UserAvatarList'
 
-export const AVATAR_SIZE = 25
+export const AVATAR_SIZE = 'sm'
 const AnalysisProposalListRoleContainer = styled.div`
   display: flex;
   flex-direction: row;

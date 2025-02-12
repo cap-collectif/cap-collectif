@@ -7,7 +7,7 @@ import Label from '~/components/Ui/Labels/Label'
 import colors from '~/utils/colors'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { ProposalAnalysisUserRow_user } from '~relay/ProposalAnalysisUserRow_user.graphql'
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import type {
   ProposalDecisionState,
   ProposalAssessmentState,
@@ -157,7 +157,7 @@ export const ProposalAnalysisUserRow = ({ user, status, canEdit, canConsult, dis
       {decidor && <Decidor>&#9733;</Decidor>}
       <Row disabled={canEdit && disabled} decidor={decidor || false}>
         <div>
-          <UserAvatarLegacy size={32} className="pull-left" user={user} />
+          <UserAvatar size="md" className="pull-left" user={user} />
           <div>{user.displayName}</div>
           <Label color={labelData.color} fontSize={8} className="label-container">
             <Icon name={labelData.icon} size={8} color={colors.white} />
@@ -185,7 +185,7 @@ export default createFragmentContainer(ProposalAnalysisUserRow, {
     fragment ProposalAnalysisUserRow_user on User {
       id
       displayName
-      ...UserAvatarLegacy_user
+      ...UserAvatar_user
     }
   `,
 })

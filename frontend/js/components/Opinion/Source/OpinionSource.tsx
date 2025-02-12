@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { Media, ListGroupItem } from 'react-bootstrap'
 
 import styled from 'styled-components'
-import UserAvatarLegacy from '../../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import OpinionInfos from '../OpinionInfos'
 import OpinionSourceTitle from './OpinionSourceTitle'
 import OpinionSourceContent from './OpinionSourceContent'
@@ -49,7 +49,7 @@ export class OpinionSource extends React.Component<Props> {
             </p>
           )}
           <Media.Left>
-            <UserAvatarLegacy user={source.author} />
+            <UserAvatar user={source.author} />
           </Media.Left>
           <MediaBody className="opinion__body">
             <OpinionInfos rankingThreshold={null} opinion={source} />
@@ -77,6 +77,7 @@ export default createFragmentContainer(OpinionSource, {
       ...OpinionSourceButtons_source @arguments(isAuthenticated: $isAuthenticated)
       ...TrashedMessage_contribution
       author {
+        ...UserAvatar_user
         id
         displayName
         vip
@@ -95,14 +96,14 @@ export default createFragmentContainer(OpinionSource, {
         title
         url
         author {
-          ...UserAvatarLegacy_user
+          ...UserAvatar_user
         }
       }
       ... on Version {
         title
         url
         author {
-          ...UserAvatarLegacy_user
+          ...UserAvatar_user
         }
       }
     }

@@ -3,7 +3,6 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 
 import styled from 'styled-components'
-import UserAvatarDeprecated from '../User/UserAvatarDeprecated'
 import OpinionInfos from './OpinionInfos'
 import OpinionPreviewTitle from './OpinionPreviewTitle'
 import OpinionPreviewCounters from './OpinionPreviewCounters'
@@ -11,6 +10,7 @@ import type { OpinionPreview_opinion } from '~relay/OpinionPreview_opinion.graph
 import TrashedMessage from '../Trashed/TrashedMessage'
 import Media from '../Ui/Medias/Media/Media'
 import config from '~/config'
+import UserAvatar from '../User/UserAvatar'
 type Props = {
   readonly showUpdatedDate: boolean
   readonly opinion: OpinionPreview_opinion
@@ -45,8 +45,7 @@ class OpinionPreview extends React.Component<Props> {
           </p>
         )}
         <Media.Left>
-          {/* @ts-expect-error Will be a fragment soon */}
-          <UserAvatarDeprecated user={opinion.author} />
+          <UserAvatar user={opinion.author} />
         </Media.Left>
 
         <MediaBody className="opinion__body">
@@ -85,6 +84,7 @@ export default createFragmentContainer(OpinionPreview, {
       ...OpinionPreviewCounters_opinion
       ... on Opinion {
         author {
+          ...UserAvatar_user
           displayName
           media {
             url
@@ -93,6 +93,7 @@ export default createFragmentContainer(OpinionPreview, {
       }
       ... on Version {
         author {
+          ...UserAvatar_user
           displayName
           media {
             url

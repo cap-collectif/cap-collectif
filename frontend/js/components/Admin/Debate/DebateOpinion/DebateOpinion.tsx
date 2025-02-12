@@ -11,7 +11,8 @@ import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction'
 import { ICON_NAME } from '~ds/Icon/Icon'
 import type { DebateOpinion_debateOpinion } from '~relay/DebateOpinion_debateOpinion.graphql'
 import '~relay/DebateOpinion_debateOpinion.graphql'
-import NewUserAvatarLegacy from '~/components/User/NewUserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
+
 type Props = {
   readonly debateOpinion: DebateOpinion_debateOpinion
   readonly onEdit: () => void
@@ -71,7 +72,7 @@ export const DebateOpinion = ({ debateOpinion, onEdit, onDelete }: Props) => {
 
       <Flex direction="column" px={6} pt={10} pb={6} maxHeight="100%">
         <Flex direction="row" spacing={2} mb={4} align="center">
-          <NewUserAvatarLegacy user={author} size="md" border="2px solid" borderColor="yellow.500" />
+          <UserAvatar user={author} size="md" border="2px solid" borderColor="yellow.500" />
           <Text fontSize={3} color="gray.500">
             {author.username}
           </Text>
@@ -92,7 +93,7 @@ export default createFragmentContainer(DebateOpinion, {
       body
       author {
         username
-        ...NewUserAvatarLegacy_user
+        ...UserAvatar_user
       }
     }
   `,

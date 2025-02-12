@@ -3,7 +3,7 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 
 import styled from 'styled-components'
-import UserAvatarLegacy from '../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import CommentInfos from './CommentInfos'
 import CommentBody from './CommentBody'
 import CommentVoteButton from './CommentVoteButton'
@@ -68,7 +68,7 @@ export class Comment extends React.Component<Props, State> {
     const onlyShowEditButton = comment.moderationStatus === 'PENDING' && comment?.author?.isViewer
     return (
       <CommentContainer as="li" useBodyColor={useBodyColor} isHighlighted={isHighlighted}>
-        <UserAvatarLegacy user={comment.author} size={45} />
+        <UserAvatar user={comment.author} size="lg" />
         <Media className="opinion">
           <MediaBody className="opinion__body" id={`comment_${comment.id}`}>
             <div

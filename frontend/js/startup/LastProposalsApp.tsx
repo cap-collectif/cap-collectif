@@ -13,7 +13,7 @@ const LastProposals = lazy(
 )
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <LastProposals {...props} />
     </Providers>
   </Suspense>

@@ -24,16 +24,22 @@ exports[`<ProposalPageOfficialAnswer /> should render correctly 1`] = `
         />
       </h3>
     </ProposalPagestyle__CategoryTitle>
-    <ProposalPageOfficialAnswer__DecidorAvatarList>
-      <UserAvatarList
-        max={3}
-      >
-        <ProposalPageOfficialAnswer__DecidorDefaultAvatar
-          className="img-circle avatar"
-          key="0"
-          size={25}
-        />
-      </UserAvatarList>
+    <Flex
+      gap={1}
+      mb={5}
+    >
+      <Connect(UserAvatar)
+        border="2px solid"
+        borderColor="yellow.500"
+        size="sm"
+        user={
+          Object {
+            "id": "author1",
+            "media": null,
+            "username": "moi",
+          }
+        }
+      />
       <span>
         moi
       </span>
@@ -46,7 +52,7 @@ exports[`<ProposalPageOfficialAnswer /> should render correctly 1`] = `
         value={null}
         year="numeric"
       />
-    </ProposalPageOfficialAnswer__DecidorAvatarList>
+    </Flex>
     <Skeleton
       isLoaded={true}
       placeholder={<Placeholder />}

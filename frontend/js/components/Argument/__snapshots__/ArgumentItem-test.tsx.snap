@@ -11,7 +11,7 @@ exports[`<ArgumentItem /> render correcty 1`] = `
     overflow={true}
   >
     <Left>
-      <Relay(Connect(UserAvatarLegacy))
+      <Connect(UserAvatar)
         className="excerpt_dark"
         user={
           Object {
@@ -174,7 +174,7 @@ exports[`<ArgumentItem /> render correcty on profile 1`] = `
     overflow={true}
   >
     <Left>
-      <Relay(Connect(UserAvatarLegacy))
+      <Connect(UserAvatar)
         className="excerpt_dark"
         user={
           Object {

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { FormattedDate } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import moment from 'moment'
-import UserAvatarLegacy from '../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import UserLink from '../User/UserLink'
 import type { AnswerBody_answer } from '~relay/AnswerBody_answer.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
@@ -23,7 +23,7 @@ export class AnswerBody extends React.Component<Props> {
               marginBottom: '10px',
             }}
           >
-            <UserAvatarLegacy className="pull-left" user={author} />
+            <UserAvatar className="pull-left" user={author} />
             <div className="media-body">
               <p
                 className="media-heading media--macro__user"
@@ -52,7 +52,7 @@ export default createFragmentContainer(AnswerBody, {
         createdAt
         author {
           ...UserLink_user
-          ...UserAvatarLegacy_user
+          ...UserAvatar_user
         }
       }
       ... on Post {
@@ -60,7 +60,7 @@ export default createFragmentContainer(AnswerBody, {
         createdAt
         body
         authors {
-          ...UserAvatarLegacy_user
+          ...UserAvatar_user
           id
           ... on User {
             vip

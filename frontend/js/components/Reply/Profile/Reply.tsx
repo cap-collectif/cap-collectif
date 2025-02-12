@@ -4,7 +4,7 @@ import { Media, ListGroupItem } from 'react-bootstrap'
 import moment from 'moment'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { Reply_reply } from '~relay/Reply_reply.graphql'
-import UserAvatarLegacy from '../../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import UserLink from '../../User/UserLink'
 type Props = {
   readonly reply: Reply_reply
@@ -24,7 +24,7 @@ export class Reply extends React.Component<Props> {
       <ListGroupItem className="list-group-item__opinion opinion mb-20 mt-20" id={`reply-${reply.id}`}>
         <Media>
           <Media.Left>
-            <UserAvatarLegacy user={reply.author} />
+            <UserAvatar user={reply.author} />
           </Media.Left>
 
           <Media.Body className="opinion__body">
@@ -69,7 +69,7 @@ export default createFragmentContainer(Reply, {
       }
       ... on UserReply {
         author {
-          ...UserAvatarLegacy_user
+          ...UserAvatar_user
           ...UserLink_user
         }
       }

@@ -13,7 +13,7 @@ const SectionListPage = lazy(
 )
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <SectionListPage {...props} />
     </Providers>
   </Suspense>

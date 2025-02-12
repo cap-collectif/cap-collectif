@@ -11,15 +11,8 @@ exports[`<CommentForm /> should render correctly 1`] = `
     }
   }
 >
-  <UserAvatarLegacy
+  <Connect(Component)
     className="pull-left"
-    displayUrl={true}
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
-    size={45}
-    style={Object {}}
     user={null}
   />
   <div
@@ -164,15 +157,8 @@ exports[`<CommentForm /> should render correctly with user 1`] = `
     }
   }
 >
-  <UserAvatarLegacy
+  <Connect(Component)
     className="pull-left"
-    displayUrl={true}
-    onBlur={[Function]}
-    onFocus={[Function]}
-    onMouseOut={[Function]}
-    onMouseOver={[Function]}
-    size={45}
-    style={Object {}}
     user={
       Object {
         "displayName": "admin",

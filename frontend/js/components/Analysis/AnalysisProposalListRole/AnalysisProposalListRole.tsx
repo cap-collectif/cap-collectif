@@ -2,7 +2,7 @@ import { $Values } from 'utility-types'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import type { AnalysisProposalListRole_proposal } from '~relay/AnalysisProposalListRole_proposal.graphql'
 import AnalysisProposalListRoleContainer, {
@@ -49,7 +49,7 @@ const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
             }}
           >
             <div>
-              <UserAvatarLegacy
+              <UserAvatar
                 user={supervisor}
                 displayUrl={false}
                 size={AVATAR_SIZE}
@@ -80,7 +80,7 @@ const AnalysisProposalListRole = ({ proposal, dispatch }: Props) => {
             }}
           >
             <div>
-              <UserAvatarLegacy
+              <UserAvatar
                 user={decisionMaker}
                 displayUrl={false}
                 size={AVATAR_SIZE}
@@ -120,12 +120,12 @@ export default createFragmentContainer(AnalysisProposalListRole, {
       supervisor {
         id
         username
-        ...UserAvatarLegacy_user
+        ...UserAvatar_user
       }
       decisionMaker {
         id
         username
-        ...UserAvatarLegacy_user
+        ...UserAvatar_user
       }
     }
   `,

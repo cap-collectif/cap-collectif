@@ -366,6 +366,18 @@ h2 + h3 {
   margin-bottom: 0;
 }
 
+.media-legacy {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    .cap-avatar {
+        margin: 0 !important;
+    }
+    @media (max-width: $screen-xs-max) {
+        display:block;
+    }
+}
+
 .no-float-mobile {
   @media (max-width: $screen-xs-max) {
     margin-top: 10px;

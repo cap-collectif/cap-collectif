@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
-import UserAvatarLegacy from './UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import UserLink from './UserLink'
 import type { UserPreview_user } from '~relay/UserPreview_user.graphql'
 import UserNotConfirmedLabel from './UserNotConfirmedLabel'
@@ -20,7 +20,7 @@ export class UserPreview extends React.Component<Props> {
         <Card.Body>
           <Media>
             <Media.Left>
-              <UserAvatarLegacy user={user} />
+              <UserAvatar user={user} />
             </Media.Left>
             <Media.Body>
               {user ? (
@@ -70,7 +70,7 @@ export default createFragmentContainer(UserPreview, {
   user: graphql`
     fragment UserPreview_user on User {
       ...UserNotConfirmedLabel_user
-      ...UserAvatarLegacy_user
+      ...UserAvatar_user
       id
       url
       displayName

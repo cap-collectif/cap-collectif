@@ -200,6 +200,45 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "username",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "concreteType": "Media",
+                      "kind": "LinkedField",
+                      "name": "media",
+                      "plural": false,
+                      "selections": Array [
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "url",
+                          "storageKey": null,
+                        },
+                        Object {
+                          "alias": null,
+                          "args": null,
+                          "kind": "ScalarField",
+                          "name": "id",
+                          "storageKey": null,
+                        },
+                      ],
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
                       "name": "displayName",
                       "storageKey": null,
                     },
@@ -232,46 +271,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                       "alias": null,
                       "args": null,
                       "kind": "ScalarField",
-                      "name": "url",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
-                      "name": "username",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "kind": "ScalarField",
                       "name": "vip",
-                      "storageKey": null,
-                    },
-                    Object {
-                      "alias": null,
-                      "args": null,
-                      "concreteType": "Media",
-                      "kind": "LinkedField",
-                      "name": "media",
-                      "plural": false,
-                      "selections": Array [
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "url",
-                          "storageKey": null,
-                        },
-                        Object {
-                          "alias": null,
-                          "args": null,
-                          "kind": "ScalarField",
-                          "name": "id",
-                          "storageKey": null,
-                        },
-                      ],
                       "storageKey": null,
                     },
                   ],
@@ -2335,20 +2335,9 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                           "storageKey": null,
                         },
                         Object {
-                          "alias": null,
-                          "args": null,
-                          "concreteType": "Media",
-                          "kind": "LinkedField",
-                          "name": "media",
-                          "plural": false,
+                          "abstractKey": null,
+                          "kind": "InlineFragment",
                           "selections": Array [
-                            Object {
-                              "alias": null,
-                              "args": null,
-                              "kind": "ScalarField",
-                              "name": "id",
-                              "storageKey": null,
-                            },
                             Object {
                               "alias": null,
                               "args": null,
@@ -2356,8 +2345,33 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                               "name": "url",
                               "storageKey": null,
                             },
+                            Object {
+                              "alias": null,
+                              "args": null,
+                              "concreteType": "Media",
+                              "kind": "LinkedField",
+                              "name": "media",
+                              "plural": false,
+                              "selections": Array [
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "url",
+                                  "storageKey": null,
+                                },
+                                Object {
+                                  "alias": null,
+                                  "args": null,
+                                  "kind": "ScalarField",
+                                  "name": "id",
+                                  "storageKey": null,
+                                },
+                              ],
+                              "storageKey": null,
+                            },
                           ],
-                          "storageKey": null,
+                          "type": "User",
                         },
                       ],
                       "storageKey": null,
@@ -8842,7 +8856,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "75b4ab5b21170d8d679165414d9485e9",
+          "cacheID": "9bc988cd46caf175ee4f0fe1d50926bc",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -9538,7 +9552,7 @@ fragment ProposalAnalysisPanel_viewer on User {
 fragment ProposalAnalysisUserRow_user on User {
   id
   displayName
-  ...UserAvatarLegacy_user
+  ...UserAvatar_user
 }
 
 fragment ProposalAssessmentFormPanel_proposal_2uwUKI on Proposal {
@@ -9715,6 +9729,7 @@ fragment ProposalDetailLikersLabel_proposal on Proposal {
 fragment ProposalDetailLikersModal_proposal on Proposal {
   id
   likers {
+    ...UserAvatar_user
     id
     displayName
     userType {
@@ -9724,10 +9739,6 @@ fragment ProposalDetailLikersModal_proposal on Proposal {
     url
     username
     vip
-    media {
-      url
-      id
-    }
   }
 }
 
@@ -10397,7 +10408,7 @@ fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
   author {
     username
     isViewer @include(if: $isAuthenticated)
-    ...UserAvatarLegacy_user
+    ...UserAvatar_user
     id
   }
   createdAt
@@ -10612,12 +10623,9 @@ fragment ProposalPageOfficialAnswer_proposal on Proposal {
     body
     authors {
       __typename
+      ...UserAvatar_user
       id
       username
-      media {
-        id
-        url
-      }
     }
     publishedAt
     isPublished
@@ -11405,15 +11413,6 @@ fragment UnpublishedTooltip_publishable on Publishable {
   notPublishedReason
 }
 
-fragment UserAvatarLegacy_user on User {
-  url
-  username
-  media {
-    url
-    id
-  }
-}
-
 fragment UserAvatar_user on User {
   url
   username
@@ -11438,7 +11437,7 @@ fragment UserNotConfirmedLabel_user on User {
 
 fragment UserPreview_user on User {
   ...UserNotConfirmedLabel_user
-  ...UserAvatarLegacy_user
+  ...UserAvatar_user
   id
   url
   displayName

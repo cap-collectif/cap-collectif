@@ -2,7 +2,7 @@ import * as React from 'react'
 import { ListGroupItem } from 'react-bootstrap'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { graphql, usePaginationFragment } from 'react-relay'
-import UserAvatarLegacy from '../../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import Modal from '~ds/Modal/Modal'
 import ListGroupFlush from '../../Ui/List/ListGroupFlush'
 import type { UserInGroupModalLegacy_group$key } from '~relay/UserInGroupModalLegacy_group.graphql'
@@ -26,7 +26,7 @@ const FRAGMENT = graphql`
       edges {
         node {
           id
-          ...UserAvatarLegacy_user
+          ...UserAvatar_user
           url
           username
         }
@@ -65,7 +65,7 @@ const UserInGroupModalLegacy = ({ show, group, handleClose }: Props): JSX.Elemen
               .filter(Boolean)
               .map(user => (
                 <ListGroupItem className="d-flex text-left" key={user.id} id={user.id}>
-                  <UserAvatarLegacy user={user} />
+                  <UserAvatar user={user} />
                   <a
                     href={user.url}
                     className="align-self-center"

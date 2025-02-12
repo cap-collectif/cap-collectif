@@ -5,7 +5,7 @@ import CommentBody from './CommentBody'
 import CommentDate from './CommentDate'
 import CommentVoteButton from './CommentVoteButton'
 import type { ProfileComment_comment } from '~relay/ProfileComment_comment.graphql'
-import UserAvatarLegacy from '../User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 type RelayProps = {
   readonly comment: ProfileComment_comment
 }
@@ -17,7 +17,7 @@ export class ProfileComment extends React.Component<Props> {
       <li className="opinion bg-white block block--bordered box">
         <div className="opinion__body">
           <div className="opinion__content">
-            <UserAvatarLegacy user={comment.author} />
+            <UserAvatar user={comment.author} />
             <div className="comment__detail">
               <div id={`comment_${comment.id}`}>
                 <div className="opinion__data">

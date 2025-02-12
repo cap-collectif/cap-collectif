@@ -7,7 +7,7 @@ import {
   getBadge,
   getHeadStatus as getStatus,
 } from '../UserAnalystList/UserAnalyst.utils'
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style'
 import { AvatarHidden } from '~ui/List/UserAvatarList'
 import type { UserAnalystListHidden_proposal } from '~relay/UserAnalystListHidden_proposal.graphql'
@@ -17,7 +17,7 @@ import UserAnalystListHiddenContainer, {
   UsernameWrapper,
 } from './UserAnalystListHidden.style'
 
-const HIDDEN_AVATAR_SIZE = 15
+const HIDDEN_AVATAR_SIZE = 'xs'
 type Props = {
   proposal: UserAnalystListHidden_proposal
   max: number
@@ -53,7 +53,7 @@ const UserAnalystListHidden = ({ proposal, max }: Props) => {
 
             {restAnalysts.map(analyst => (
               <UserAvatarWrapper key={`analyst-${analyst.id}`}>
-                <UserAvatarLegacy
+                <UserAvatar
                   user={analyst}
                   displayUrl={false}
                   size={HIDDEN_AVATAR_SIZE}

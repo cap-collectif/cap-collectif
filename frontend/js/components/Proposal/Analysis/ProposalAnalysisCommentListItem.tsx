@@ -80,7 +80,7 @@ const ProposalAnalysisCommentListItem = ({ comment: commentRef, viewer: viewerRe
 
   return (
     <Flex width="100%">
-      <UserAvatar user={author} size={40} displayUrl={false} />
+      <UserAvatar user={author} displayUrl={false} />
       <Flex
         direction="column"
         backgroundColor="white"

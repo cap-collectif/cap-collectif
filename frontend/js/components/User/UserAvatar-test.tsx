@@ -1,47 +1,47 @@
 /* eslint-env jest */
 import * as React from 'react'
-import { shallow } from 'enzyme'
-import { UserAvatar } from './UserAvatar'
+import ReactTestRenderer from 'react-test-renderer'
+import { UserAvatarRender } from './UserAvatar'
 import { features } from '~/redux/modules/default'
-import { $refType } from '~/mocks'
+import MockProviders from '~/testUtils'
 
 describe('<UserAvatar />', () => {
+  const getTree = props =>
+    ReactTestRenderer.create(
+      <MockProviders>
+        <UserAvatarRender {...props} />
+      </MockProviders>,
+    )
+
   it('renders correctly', () => {
     const props = {
-      features,
       user: {
-        ' $refType': $refType,
         username: 'toto',
         media: {
           url: 'http://media12/profileAvatar.jpg',
         },
         url: '',
       },
-      size: 16,
+      size: 'xs',
       className: 'mr-10',
     }
-    const wrapper = shallow(<UserAvatar {...props} />)
-    expect(wrapper).toMatchSnapshot()
+    expect(getTree(props)).toMatchSnapshot()
   })
   it('renders correctly user without avatar', () => {
     const props = {
-      features,
       user: {
-        ' $refType': $refType,
         username: 'toto',
         media: null,
         url: '',
       },
-      size: 16,
+      size: 'xs',
     }
-    const wrapper = shallow(<UserAvatar {...props} />)
-    expect(wrapper).toMatchSnapshot()
+    expect(getTree(props)).toMatchSnapshot()
   })
   it('renders correctly with custom default avatar', () => {
     const props = {
       features,
       user: {
-        ' $refType': $refType,
         username: 'toto',
         media: null,
         url: '',
@@ -49,25 +49,20 @@ describe('<UserAvatar />', () => {
       defaultAvatar: 'http://avatar/customAvatar.jpg',
       size: 16,
     }
-    const wrapper = shallow(<UserAvatar {...props} />)
-    expect(wrapper).toMatchSnapshot()
+    expect(getTree(props)).toMatchSnapshot()
   })
   it('renders correctly with default avatar needed', () => {
     const props = {
-      features,
       user: {
-        ' $refType': $refType,
         username: 'toto',
         media: {
           url: 'http://media12/profileAvatar.jpg',
         },
         url: '',
       },
-      size: 16,
+      size: 'xs',
       className: 'mr-10',
-      needDefaultAvatar: true,
     }
-    const wrapper = shallow(<UserAvatar {...props} />)
-    expect(wrapper).toMatchSnapshot()
+    expect(getTree(props)).toMatchSnapshot()
   })
 })

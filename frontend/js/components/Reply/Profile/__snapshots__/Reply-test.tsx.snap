@@ -14,7 +14,7 @@ exports[`<Reply /> should render correctly with step 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <Relay(Connect(UserAvatarLegacy))
+      <Connect(UserAvatar)
         user={
           Object {
             " $fragmentRefs": null,
@@ -88,7 +88,7 @@ exports[`<Reply /> should render correctly without step 1`] = `
     <MediaLeft
       bsClass="media-left"
     >
-      <Relay(Connect(UserAvatarLegacy))
+      <Connect(UserAvatar)
         user={
           Object {
             " $fragmentRefs": null,

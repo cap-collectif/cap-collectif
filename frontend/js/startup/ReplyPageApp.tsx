@@ -13,7 +13,7 @@ const ReplyPage = lazy(
 )
 export default (props: Props) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <ReplyPage {...props} />
     </Providers>
   </Suspense>

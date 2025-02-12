@@ -4,14 +4,15 @@ import { connect } from 'react-redux'
 import styled from 'styled-components'
 import { graphql, createFragmentContainer } from 'react-relay'
 import UserAvatarList from '../Ui/List/UserAvatarList'
-import UserAvatarLegacy from './UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import type { State, FeatureToggles } from '../../types'
 import type { UserAvatarList_users } from '~relay/UserAvatarList_users.graphql'
 import Tooltip from '~ds/Tooltip/Tooltip'
+import { AvatarProps } from '@cap-collectif/ui'
 type Props = {
   readonly users: UserAvatarList_users
   readonly max: number
-  readonly avatarSize?: number
+  readonly avatarSize?: AvatarProps['size']
   readonly onClick?: () => void
   readonly features: FeatureToggles
 }
@@ -29,7 +30,7 @@ export const UserAvatarListContainer = (props: Props) => {
         {users &&
           users.map((user, index) =>
             shouldRedirectProfile ? (
-              <UserAvatarLegacy
+              <UserAvatar
                 key={index}
                 {...(avatarSize
                   ? {
@@ -37,7 +38,6 @@ export const UserAvatarListContainer = (props: Props) => {
                     }
                   : {})}
                 user={user}
-                features={features}
               />
             ) : (
               <Tooltip
@@ -50,14 +50,13 @@ export const UserAvatarListContainer = (props: Props) => {
                 }}
               >
                 <div>
-                  <UserAvatarLegacy
+                  <UserAvatar
                     {...(avatarSize
                       ? {
                           size: avatarSize,
                         }
                       : {})}
                     user={user}
-                    features={features}
                     displayUrl={false}
                   />
                 </div>
@@ -81,7 +80,7 @@ export default createFragmentContainer(connect(mapStateToProps)(UserAvatarListCo
     fragment UserAvatarList_users on User @relay(plural: true) {
       id
       username
-      ...UserAvatarLegacy_user
+      ...UserAvatar_user
     }
   `,
 })

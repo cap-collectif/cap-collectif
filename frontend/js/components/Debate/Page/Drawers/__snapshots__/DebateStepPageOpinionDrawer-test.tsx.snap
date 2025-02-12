@@ -39,22 +39,27 @@ Array [
         <div
           className="sc-bcXGCL YwtnU"
         >
-          <div
-            className="sc-bcXGCL dSgCQy sc-ckEbfr gOeGmr cap-avatar"
-            title="Agui le penseur"
+          <span
+            className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+            hasBadge={false}
           >
-            <img
-              alt="Agui le penseur"
-              className="sc-bcXGCL fHacA-d"
-              src="<media-url>"
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
+            <div
+              className="sc-bcXGCL jLhUPI sc-ckEbfr gOeGmr cap-avatar"
               title="Agui le penseur"
-            />
-          </div>
+            >
+              <img
+                alt="Agui le penseur"
+                className="sc-bcXGCL fHacA-d"
+                src="<media-url>"
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                title="Agui le penseur"
+              />
+            </div>
+          </span>
           <p
             className="sc-bcXGCL wDUou cap-text"
           >
@@ -147,22 +152,27 @@ Array [
         <div
           className="sc-bcXGCL YwtnU"
         >
-          <div
-            className="sc-bcXGCL dSgCQy sc-ckEbfr gOeGmr cap-avatar"
-            title="Agui le penseur"
+          <span
+            className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+            hasBadge={false}
           >
-            <img
-              alt="Agui le penseur"
-              className="sc-bcXGCL fHacA-d"
-              src="<media-url>"
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
+            <div
+              className="sc-bcXGCL jLhUPI sc-ckEbfr gOeGmr cap-avatar"
               title="Agui le penseur"
-            />
-          </div>
+            >
+              <img
+                alt="Agui le penseur"
+                className="sc-bcXGCL fHacA-d"
+                src="<media-url>"
+                style={
+                  Object {
+                    "objectFit": "cover",
+                  }
+                }
+                title="Agui le penseur"
+              />
+            </div>
+          </span>
           <p
             className="sc-bcXGCL wDUou cap-text"
           >

@@ -7,9 +7,9 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
     disabled={false}
   >
     <div>
-      <Relay(Connect(UserAvatarLegacy))
+      <Connect(UserAvatar)
         className="pull-left"
-        size={32}
+        size="md"
         user={
           Object {
             " $fragmentRefs": null,

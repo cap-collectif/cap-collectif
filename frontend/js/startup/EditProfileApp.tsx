@@ -12,7 +12,7 @@ const EditProfileBox = lazy(
 )
 export default (props: Record<string, any>) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <EditProfileBox {...props} />
     </Providers>
   </Suspense>

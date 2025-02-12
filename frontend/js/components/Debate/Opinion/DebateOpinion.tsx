@@ -8,8 +8,8 @@ import type { DebateOpinion_opinion$key } from '~relay/DebateOpinion_opinion.gra
 import { LineHeight } from '~ui/Primitives/constants'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import DebateStepPageOpinionDrawer from '~/components/Debate/Page/Drawers/DebateStepPageOpinionDrawer'
-import NewUserAvatar from '~/components/User/NewUserAvatar'
 import colors from '~/styles/modules/colors'
+import UserAvatar from '~/components/User/UserAvatar'
 // TODO remove this and import from relay
 export type DebateOpinionStatus = 'FOR' | 'AGAINST'
 type Props = {
@@ -27,7 +27,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
         title
         body
         author {
-          ...NewUserAvatar_user
+          ...UserAvatar_user
           username
           biography
         }
@@ -84,8 +84,8 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
         />
       )}
       <Flex direction="column" m={6} mt={10}>
-        <Flex direction="row" spacing={6} mb={5} alignItems="center">
-          <NewUserAvatar
+        <Flex direction="row" spacing={6} mb={5}>
+          <UserAvatar
             alignSelf="flex-start"
             size="xl"
             borderColor="yellow.500"

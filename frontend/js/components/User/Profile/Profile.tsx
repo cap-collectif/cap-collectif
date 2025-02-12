@@ -10,7 +10,6 @@ import '~relay/Profile_viewer.graphql'
 import type { Dispatch, State } from '~/types'
 import component from '../../Form/Field'
 import AlertForm from '../../Alert/AlertForm'
-import UserAvatarDeprecated from '../UserAvatarDeprecated'
 import UpdateProfilePublicDataMutation from '~/mutations/UpdateProfilePublicDataMutation'
 import { occitanieUrl, isSsoFcOrOccitanie, getSsoTradKey } from '~/components/User/Profile/PersonalData'
 import { REGEX_USERNAME } from '~/constants/FormConstants'
@@ -21,6 +20,7 @@ import Flex from '~/components/Ui/Primitives/Layout/Flex'
 import Text from '~/components/Ui/Primitives/Text'
 import Avatar from '~/components/Ui/Medias/Avatar'
 import LeaveOrganizationModal from './LeaveOrganizationModal'
+import UserAvatar from '../UserAvatar'
 
 type RelayProps = {
   viewer: Profile_viewer
@@ -171,7 +171,7 @@ export const Profile = ({
             <label className="col-sm-3 control-label" htmlFor="profile_avatar">
               <FormattedMessage id="sonata.media.provider.image" />
             </label>
-            <UserAvatarDeprecated className="col-sm-1" user={viewer} />
+            <UserAvatar className="col-sm-1" user={viewer} />
             <div className="clearfix" />
             <div className="col-sm-3" />
             <Field
@@ -507,6 +507,7 @@ const container = connect(mapStateToProps)(injectIntl(form))
 export default createFragmentContainer(container, {
   viewer: graphql`
     fragment Profile_viewer on User {
+      ...UserAvatar_user
       id
       media {
         id

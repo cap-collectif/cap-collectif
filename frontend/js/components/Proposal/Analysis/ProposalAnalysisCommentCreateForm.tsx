@@ -73,7 +73,7 @@ const ProposalAnalysisCommentCreateForm = ({ proposalAnalysis: proposalAnalysisR
   return (
     <Box mb={4}>
       <Flex>
-        <UserAvatar user={viewer} size={40} displayUrl={false} />
+        <UserAvatar user={viewer} displayUrl={false} />
         <Flex id="create-analysis-comment-form" as="form" direction="column" width="100%" action="">
           <TextArea
             name=""

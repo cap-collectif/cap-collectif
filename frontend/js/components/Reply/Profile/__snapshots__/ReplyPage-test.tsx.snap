@@ -296,7 +296,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "741107d17438d47fd2541a0587d8fc3e",
+            "cacheID": "ab2da647f94ec551212dda8565ca54a3",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -339,14 +339,14 @@ fragment Reply_reply on Reply {
   }
   ... on UserReply {
     author {
-      ...UserAvatarLegacy_user
+      ...UserAvatar_user
       ...UserLink_user
       id
     }
   }
 }
 
-fragment UserAvatarLegacy_user on User {
+fragment UserAvatar_user on User {
   url
   username
   media {
@@ -670,7 +670,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "741107d17438d47fd2541a0587d8fc3e",
+            "cacheID": "ab2da647f94ec551212dda8565ca54a3",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -713,14 +713,14 @@ fragment Reply_reply on Reply {
   }
   ... on UserReply {
     author {
-      ...UserAvatarLegacy_user
+      ...UserAvatar_user
       ...UserLink_user
       id
     }
   }
 }
 
-fragment UserAvatarLegacy_user on User {
+fragment UserAvatar_user on User {
   url
   username
   media {
@@ -1044,7 +1044,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
             ],
           },
           "params": Object {
-            "cacheID": "741107d17438d47fd2541a0587d8fc3e",
+            "cacheID": "ab2da647f94ec551212dda8565ca54a3",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -1087,14 +1087,14 @@ fragment Reply_reply on Reply {
   }
   ... on UserReply {
     author {
-      ...UserAvatarLegacy_user
+      ...UserAvatar_user
       ...UserLink_user
       id
     }
   }
 }
 
-fragment UserAvatarLegacy_user on User {
+fragment UserAvatar_user on User {
   url
   username
   media {

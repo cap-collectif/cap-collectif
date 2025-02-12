@@ -22,7 +22,7 @@ type Props = {
 }
 export default ({ authorId, isAuthenticated }: Props) => (
   <Suspense fallback={<Loader />}>
-    <Providers>
+    <Providers designSystem>
       <QueryRenderer
         variables={
           {

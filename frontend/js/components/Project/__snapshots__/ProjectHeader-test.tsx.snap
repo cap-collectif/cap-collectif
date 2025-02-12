@@ -31,26 +31,31 @@ Array [
             <div
               className="sc-bcXGCL fypjYO"
             >
-              <div
-                className="sc-bcXGCL gOgsAW sc-ckEbfr gIIayp cap-avatar"
-                title="Vince"
+              <span
+                className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+                hasBadge={false}
               >
-                <img
-                  alt="Vince"
-                  className="sc-bcXGCL fHacA-d"
-                  src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
-                  style={
-                    Object {
-                      "objectFit": "cover",
-                    }
-                  }
+                <div
+                  className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
                   title="Vince"
-                />
-              </div>
+                >
+                  <img
+                    alt="Vince"
+                    className="sc-bcXGCL fHacA-d"
+                    src="<mock-value-for-field-\\"url\\">"
+                    style={
+                      Object {
+                        "objectFit": "cover",
+                      }
+                    }
+                    title="Vince"
+                  />
+                </div>
+              </span>
             </div>
           </div>
           <p
-            className="sc-bcXGCL dFDTZw cap-text platform__body"
+            className="sc-bcXGCL clapXk cap-text platform__body"
             id="authors-credit"
             onClick={[Function]}
           >

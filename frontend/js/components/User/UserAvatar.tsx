@@ -1,13 +1,12 @@
-import React from 'react'
+import React, { FC } from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
-import { graphql, createFragmentContainer } from 'react-relay'
-import { CapUIIcon, CapUIIconSize, Icon } from '@cap-collectif/ui'
-import DefaultAvatar from './DefaultAvatar'
-import type { State, FeatureToggles } from '~/types'
-import type { UserAvatar_user } from '~relay/UserAvatar_user.graphql'
+import { graphql, useFragment } from 'react-relay'
+import { CapUIIcon, CapUIIconSize, Icon, Avatar, AvatarProps } from '@cap-collectif/ui'
+import type { State } from '~/types'
+import type { UserAvatar_user$data, UserAvatar_user$key } from '~relay/UserAvatar_user.graphql'
 import { Circle } from '~ui/Medias/AvatarBadge/AvatarBadge.style'
-import Image from '~ui/Primitives/Image'
+import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
 export type Badge = {
   color: string
@@ -16,10 +15,9 @@ export type Badge = {
   iconSize: number
   iconColor: string
 }
-type Props = {
-  user: UserAvatar_user | null | undefined
-  features?: FeatureToggles
-  size?: number
+type Props = Omit<AvatarProps, 'name'> & {
+  user: UserAvatar_user$key | null | undefined
+  size?: AvatarProps['size']
   className?: string
   defaultAvatar?: string | null | undefined
   displayUrl?: boolean
@@ -28,8 +26,10 @@ type Props = {
   onFocus?: () => void
   onMouseOver?: () => void
   onMouseOut?: () => void
+  onClick?: () => void
   badge?: Badge
   needDefaultAvatar?: boolean
+  role?: string
 }
 
 const commonStyleAvatar = hasBadge => css`
@@ -49,6 +49,7 @@ const commonStyleAvatar = hasBadge => css`
 const UserAvatarLink = styled.a<{
   hasBadge: boolean
 }>`
+  text-decoration: none !important;
   vertical-align: text-bottom;
   display: inline-block;
   ${props => commonStyleAvatar(props.hasBadge)}
@@ -58,68 +59,63 @@ const UserAvatarContainer = styled.span<{
 }>`
   ${props => commonStyleAvatar(props.hasBadge)}
 `
-export class UserAvatar extends React.Component<Props> {
-  static defaultProps = {
-    user: null,
-    size: 45,
-    style: {},
-    className: '',
-    displayUrl: true,
-    onBlur: () => {},
-    onFocus: () => {},
-    onMouseOver: () => {},
-    onMouseOut: () => {},
-  }
 
-  renderAvatar() {
-    const { user, defaultAvatar, size, className, needDefaultAvatar } = this.props
-    const mediaSize = size && `${size}px`
-
-    if (user && user.media && !needDefaultAvatar) {
-      return (
-        <Image
-          src={user.media.url}
-          alt={user.username}
-          className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
-          style={{
-            width: mediaSize,
-            height: mediaSize,
-          }}
-        />
-      )
+const FRAGMENT = graphql`
+  fragment UserAvatar_user on User {
+    url
+    username
+    media {
+      url
     }
-
-    if (user && defaultAvatar) {
-      return (
-        <Image
-          src={defaultAvatar}
-          alt={user.username}
-          className={`img-circle object-cover user-avatar mr-10 ${className || ''}`}
-          style={{
-            width: mediaSize,
-            height: mediaSize,
-          }}
-        />
-      )
-    }
-
-    return <DefaultAvatar className={`img-circle avatar user-avatar mr-10 ${className || ''}`} size={size} />
   }
+`
 
-  renderBadge(badge: Badge) {
-    return (
-      <Circle color={badge.color} size={badge.size}>
-        <Icon
-          name={badge.icon as CapUIIcon}
-          size={badge.iconSize as unknown as CapUIIconSize}
-          color={badge.iconColor}
-        />
-      </Circle>
+const mapStateToProps = (state: State) => ({
+  defaultAvatar: state.default.images && state.default.images.avatar,
+})
+
+export const UserAvatarRender = connect(mapStateToProps)(
+  ({
+    user,
+    defaultAvatar,
+    size = 'lg',
+    className,
+    needDefaultAvatar,
+    role,
+    displayUrl = true,
+    onBlur,
+    onFocus,
+    onMouseOver,
+    onMouseOut,
+    badge,
+    style,
+    ...props
+  }: Omit<Props, 'user'> & { user: UserAvatar_user$data | null }) => {
+    const profiles = useFeatureFlag('profiles')
+
+    const renderAvatar = () => (
+      <Avatar
+        name={user?.username || ''}
+        alt={user?.username}
+        src={user?.media?.url || defaultAvatar}
+        mr={2}
+        size={size}
+        {...props}
+      />
     )
-  }
 
-  render() {
-    const { className, onBlur, onFocus, onMouseOut, onMouseOver, style, user, features, displayUrl, badge } = this.props
+    const renderBadge = (badge: Badge) => {
+      return (
+        <Circle color={badge.color} size={badge.size}>
+          <Icon
+            name={badge.icon as CapUIIcon}
+            size={badge.iconSize as unknown as CapUIIconSize}
+            color={badge.iconColor}
+          />
+        </Circle>
+      )
+    }
+
     const funcProps = {
       onBlur,
       onFocus,
@@ -127,7 +123,7 @@ export class UserAvatar extends React.Component<Props> {
       onMouseOut,
     }
 
-    if (user && user.url && features && features.profiles) {
+    if (user && user.url && profiles) {
       return (
         <UserAvatarLink
           {...funcProps}
@@ -135,35 +131,26 @@ export class UserAvatar extends React.Component<Props> {
           style={style}
           hasBadge={!!badge}
           href={displayUrl ? user.url : null}
+          aria-describedby={props['aria-describedby']}
         >
-          {this.renderAvatar()}
-          {badge && this.renderBadge(badge)}
+          {renderAvatar()}
+          {badge && renderBadge(badge)}
         </UserAvatarLink>
       )
     }
 
     return (
       <UserAvatarContainer {...funcProps} className={className} style={style} hasBadge={!!badge}>
-        {this.renderAvatar()}
-        {badge && this.renderBadge(badge)}
+        {renderAvatar()}
+        {badge && renderBadge(badge)}
       </UserAvatarContainer>
     )
-  }
+  },
+)
+
+export const UserAvatar: FC<Props> = ({ user: userKey, ...props }) => {
+  const user = useFragment(FRAGMENT, userKey)
+  return <UserAvatarRender user={user} {...props} />
 }
 
-const mapStateToProps = (state: State) => ({
-  defaultAvatar: state.default.images && state.default.images.avatar,
-  features: state.default.features,
-})
-
-export default createFragmentContainer(connect(mapStateToProps)(UserAvatar), {
-  user: graphql`
-    fragment UserAvatar_user on User {
-      url
-      username
-      media {
-        url
-      }
-    }
-  `,
-})
+export default connect(mapStateToProps)(UserAvatar)

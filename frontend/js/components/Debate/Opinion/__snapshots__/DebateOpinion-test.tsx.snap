@@ -28,30 +28,35 @@ Array [
       className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL BcDlt"
+        className="sc-bcXGCL cTCiLp"
       >
-        <div
-          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
+        <span
+          className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+          hasBadge={false}
           style={
             Object {
               "marginLeft": 0,
               "marginTop": 0,
             }
           }
-          title="Agui le penseur"
         >
-          <img
-            alt="Agui le penseur"
-            className="sc-bcXGCL fHacA-d"
-            src="<mock-value-for-field-\\"url\\">"
-            style={
-              Object {
-                "objectFit": "cover",
-              }
-            }
+          <div
+            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
             title="Agui le penseur"
-          />
-        </div>
+          >
+            <img
+              alt="Agui le penseur"
+              className="sc-bcXGCL fHacA-d"
+              src="<mock-value-for-field-\\"url\\">"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              title="Agui le penseur"
+            />
+          </div>
+        </span>
         <div
           className="sc-bcXGCL cBwqzf"
         >
@@ -130,30 +135,35 @@ Array [
       className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL BcDlt"
+        className="sc-bcXGCL cTCiLp"
       >
-        <div
-          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
+        <span
+          className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+          hasBadge={false}
           style={
             Object {
               "marginLeft": 0,
               "marginTop": 0,
             }
           }
-          title="Agui le penseur"
         >
-          <img
-            alt="Agui le penseur"
-            className="sc-bcXGCL fHacA-d"
-            src="<mock-value-for-field-\\"url\\">"
-            style={
-              Object {
-                "objectFit": "cover",
-              }
-            }
+          <div
+            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
             title="Agui le penseur"
-          />
-        </div>
+          >
+            <img
+              alt="Agui le penseur"
+              className="sc-bcXGCL fHacA-d"
+              src="<mock-value-for-field-\\"url\\">"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              title="Agui le penseur"
+            />
+          </div>
+        </span>
         <div
           className="sc-bcXGCL cBwqzf"
         >
@@ -229,30 +239,35 @@ Array [
       className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL BcDlt"
+        className="sc-bcXGCL cTCiLp"
       >
-        <div
-          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
+        <span
+          className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+          hasBadge={false}
           style={
             Object {
               "marginLeft": 0,
               "marginTop": 0,
             }
           }
-          title="Agui le penseur"
         >
-          <img
-            alt="Agui le penseur"
-            className="sc-bcXGCL fHacA-d"
-            src="<mock-value-for-field-\\"url\\">"
-            style={
-              Object {
-                "objectFit": "cover",
-              }
-            }
+          <div
+            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
             title="Agui le penseur"
-          />
-        </div>
+          >
+            <img
+              alt="Agui le penseur"
+              className="sc-bcXGCL fHacA-d"
+              src="<mock-value-for-field-\\"url\\">"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              title="Agui le penseur"
+            />
+          </div>
+        </span>
         <div
           className="sc-bcXGCL cBwqzf"
         >
@@ -331,30 +346,35 @@ Array [
       className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL BcDlt"
+        className="sc-bcXGCL cTCiLp"
       >
-        <div
-          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
+        <span
+          className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+          hasBadge={false}
           style={
             Object {
               "marginLeft": 0,
               "marginTop": 0,
             }
           }
-          title="Agui le penseur"
         >
-          <img
-            alt="Agui le penseur"
-            className="sc-bcXGCL fHacA-d"
-            src="<mock-value-for-field-\\"url\\">"
-            style={
-              Object {
-                "objectFit": "cover",
-              }
-            }
+          <div
+            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
             title="Agui le penseur"
-          />
-        </div>
+          >
+            <img
+              alt="Agui le penseur"
+              className="sc-bcXGCL fHacA-d"
+              src="<mock-value-for-field-\\"url\\">"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              title="Agui le penseur"
+            />
+          </div>
+        </span>
         <div
           className="sc-bcXGCL cBwqzf"
         >
@@ -437,30 +457,35 @@ Array [
       className="sc-bcXGCL ldyaSm"
     >
       <div
-        className="sc-bcXGCL BcDlt"
+        className="sc-bcXGCL cTCiLp"
       >
-        <div
-          className="sc-bcXGCL eXMnVj sc-ckEbfr gOeGmr cap-avatar"
+        <span
+          className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+          hasBadge={false}
           style={
             Object {
               "marginLeft": 0,
               "marginTop": 0,
             }
           }
-          title="Agui le penseur"
         >
-          <img
-            alt="Agui le penseur"
-            className="sc-bcXGCL fHacA-d"
-            src="<mock-value-for-field-\\"url\\">"
-            style={
-              Object {
-                "objectFit": "cover",
-              }
-            }
+          <div
+            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
             title="Agui le penseur"
-          />
-        </div>
+          >
+            <img
+              alt="Agui le penseur"
+              className="sc-bcXGCL fHacA-d"
+              src="<mock-value-for-field-\\"url\\">"
+              style={
+                Object {
+                  "objectFit": "cover",
+                }
+              }
+              title="Agui le penseur"
+            />
+          </div>
+        </span>
         <div
           className="sc-bcXGCL cBwqzf"
         >

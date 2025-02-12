@@ -4,7 +4,7 @@ import moment from 'moment'
 import { FormattedMessage, useIntl } from 'react-intl'
 import type { ProjectAdminParticipant_participant } from '~relay/ProjectAdminParticipant_participant.graphql'
 import { Container, UsernameContainer, NameContainer, ParticipantInfo } from './ProjectAdminParticipant.style'
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import InlineList from '~ui/List/InlineList'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors, { styleGuideColors } from '~/utils/colors'
@@ -176,7 +176,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
         </InlineList>
       </ParticipantInfo>
 
-      <UserAvatarLegacy user={participant} size={42} />
+      <UserAvatar user={participant} size="lg" />
     </Container>
   )
 }
@@ -208,7 +208,7 @@ const ProjectAdminParticipantRelay = createFragmentContainer(ProjectAdminPartici
         contributions(contribuableId: $contribuableId, includeTrashed: true) {
           totalCount
         }
-        ...UserAvatarLegacy_user
+        ...UserAvatar_user
       }
     }
   `,

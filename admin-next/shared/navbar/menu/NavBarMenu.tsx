@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import ColorHash from 'color-hash'
 import { Avatar, Box, BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
@@ -9,7 +8,6 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import type { NavBarMenuQuery as NavBarMenuQueryType, NavBarMenuQuery$data } from '@relay/NavBarMenuQuery.graphql'
 import { NavBarTheme, getTheme } from '../NavBar.utils'
 import { pxToRem } from '@shared/utils/pxToRem'
-import { colorContrast } from '@shared/utils/colorContrast'
 
 type Props = {
   currentLanguage: string
@@ -53,22 +51,19 @@ const ActionItem = ({
     </Flex>
   )
 
-const hash = new ColorHash()
-const MenuAvatar = ({ user, ...rest }: { user: NavBarMenuQuery$data['viewer'] } & Pick<BoxProps, 'mr'>) => {
-  const backgroundColor = hash.hex(user.username)
-  const computedColor = colorContrast(backgroundColor)
-  return (
-    <Avatar
-      name={user.username}
-      src={user.media?.url}
-      alt={user.username}
-      color={computedColor}
-      backgroundColor={backgroundColor}
-      size="md"
-      {...rest}
-    />
-  )
-}
+const MenuAvatar = ({
+  user,
+  defaultImage,
+  ...rest
+}: { user: NavBarMenuQuery$data['viewer']; defaultImage: string | null } & Pick<BoxProps, 'mr'>) => (
+  <Avatar
+    size="md"
+    name={user.username}
+    src={user.media?.url ? user.media?.url : defaultImage}
+    alt={user.username}
+    {...rest}
+  />
+)
 
 const MenuItem = ({
   theme,
@@ -124,10 +119,12 @@ export const NavBarMenuContent = ({
   loginWithOpenId,
   currentLanguage,
   theme,
+  defaultImage,
 }: Props & {
   theme: NavBarTheme
   user: NavBarMenuQuery$data['viewer']
   loginWithOpenId: boolean
+  defaultImage?: string | null
 }) => {
   const multilangue = useFeatureFlag('multilangue')
   const profiles = useFeatureFlag('profiles')
@@ -153,7 +150,7 @@ export const NavBarMenuContent = ({
           <ActionItem
             as="a"
             href={`${prefix}/profile/${user.slug}`}
-            avatar={<MenuAvatar user={user} />}
+            avatar={<MenuAvatar user={user} defaultImage={defaultImage} />}
             color={theme.textColor}
           >
             {intl.formatMessage({
@@ -167,7 +164,7 @@ export const NavBarMenuContent = ({
             href={`/sso/profile?referrer=${window.location.href}`}
             target="_blank"
             rel="noopener"
-            avatar={<MenuAvatar user={user} />}
+            avatar={<MenuAvatar user={user} defaultImage={defaultImage} />}
             color={theme.textColor}
           >
             {intl.formatMessage({
@@ -223,7 +220,7 @@ export const NavBarMenuContent = ({
               color="inherit"
               _hover={{ color: theme.textHoverColor, bg: theme.subMenuBackground }}
             >
-              <MenuAvatar user={user} mr={1} />
+              <MenuAvatar user={user} mr={1} defaultImage={defaultImage} />
               {user.username}
             </Flex>
             <Icon name={open ? CapUIIcon.ArrowUpO : CapUIIcon.ArrowDownO} size={CapUIIconSize.Md} />
@@ -328,6 +325,12 @@ export const QUERY = graphql`
         }
       }
     }
+    siteImage(keyname: "image.default_avatar") {
+      id
+      media {
+        url
+      }
+    }
   }
 `
 
@@ -336,7 +339,7 @@ const NavBarMenu: React.FC<Props> = props => {
 
   if (!query) return null
 
-  const { siteColors, viewer, ssoConfigurations } = query
+  const { siteColors, viewer, ssoConfigurations, siteImage } = query
 
   return (
     <NavBarMenuContent
@@ -344,6 +347,7 @@ const NavBarMenu: React.FC<Props> = props => {
       theme={getTheme(siteColors)}
       user={viewer}
       loginWithOpenId={ssoConfigurations.edges.some(({ node }) => node.enabled)}
+      defaultImage={siteImage?.media?.url}
     />
   )
 }

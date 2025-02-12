@@ -5,7 +5,7 @@ import { Flex, Text, Tag, Heading, Icon, CapUIIcon, CapUIIconSize } from '@cap-c
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { DebateStepPageOpinionDrawer_opinion$key } from '~relay/DebateStepPageOpinionDrawer_opinion.graphql'
-import NewUserAvatar from '~/components/User/NewUserAvatar'
+import UserAvatar from '~/components/User/UserAvatar'
 type Props = {
   readonly isOpen: boolean
   readonly onClose?: () => void
@@ -19,7 +19,7 @@ const DebateStepPageOpinionDrawer = ({ opinion: opinionFragment, ...drawerProps 
         title
         body
         author {
-          ...NewUserAvatar_user
+          ...UserAvatar_user
           username
           biography
         }
@@ -47,7 +47,7 @@ const DebateStepPageOpinionDrawer = ({ opinion: opinionFragment, ...drawerProps 
           name={CapUIIcon.LongArrowLeft}
         />
         <Flex direction="column" mt={6} align="center">
-          <NewUserAvatar user={opinion.author} size="xl" border="3px solid" borderColor="yellow.500" />
+          <UserAvatar user={opinion.author} size="xl" border="3px solid" borderColor="yellow.500" />
           <Text mt={2} fontSize={4} fontWeight="600">
             {opinion.author.username}
           </Text>

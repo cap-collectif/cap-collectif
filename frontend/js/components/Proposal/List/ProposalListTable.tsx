@@ -11,9 +11,9 @@ import ProposalListTableMobile from './ProposalListTableMobile'
 import ImplementationStepTitle from '../ImplementationStepTitle'
 import ProgressList from '../../Ui/List/ProgressList'
 import ProgressListItem from '../../Ui/List/ProgressListItem'
-import UserAvatarDeprecated from '../../User/UserAvatarDeprecated'
 import InlineList from '../../Ui/List/InlineList'
 import { translateContent } from '@shared/utils/contentTranslator'
+import UserAvatar from '~/components/User/UserAvatar'
 
 type Props = {
   proposals: ProposalListTable_proposals$data
@@ -258,13 +258,7 @@ export class ProposalListTable extends React.Component<Props, State> {
         return (
           <td key={key}>
             <div className="d-flex align-items-center text-ellipsis">
-              <UserAvatarDeprecated
-                user={{
-                  username: value.displayName,
-                  media: value.media,
-                  _links: {},
-                }}
-              />
+              <UserAvatar user={value} />
               {value.url ? (
                 <a href={value.url}>
                   <span>{value.displayName}</span>
@@ -390,11 +384,9 @@ export default createFragmentContainer(ProposalListTable, {
             color
           }
           author {
+            ...UserAvatar_user
             displayName
             url
-            media {
-              url
-            }
           }
           reference
           district {

@@ -7,7 +7,7 @@ import { useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
 import type { UserSearchDropdownChoice_user } from '~relay/UserSearchDropdownChoice_user.graphql'
 import DropdownSelectChoice from '~ui/DropdownSelect/choice'
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import { TYPE_ROLE } from '~/constants/AnalyseConstants'
 import type { GlobalState } from '~/types'
@@ -44,8 +44,7 @@ const UserSearchDropdownChoice = ({
   return (
     <UserSearchDropdownChoiceContainer isIndeterminate={isIndeterminate} value={user.id} disabled={disabled}>
       <div>
-        {/** @ts-ignore */}
-        <UserAvatarLegacy user={user} displayUrl={false} size={18} />
+        <UserAvatar user={user} displayUrl={false} size="xs" />
         <span>{user.username}</span>
       </div>
 

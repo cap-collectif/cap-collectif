@@ -54,16 +54,20 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when on
       key="0"
       listItem={false}
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
-            "_links": Object {
-              "profile": "www.google.com",
-            },
+            "displayName": "user 1",
+            "id": "1",
             "media": Object {
               "url": "http://monimage.com/image1.jpg",
             },
+            "url": "www.google.com",
+            "userType": Object {
+              "name": "Développeuse web - capco",
+            },
             "username": "user1",
+            "vip": true,
           }
         }
       />
@@ -141,16 +145,20 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
       key="0"
       listItem={false}
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
-            "_links": Object {
-              "profile": "www.google.com",
-            },
+            "displayName": "user 1",
+            "id": "1",
             "media": Object {
               "url": "http://monimage.com/image1.jpg",
             },
+            "url": "www.google.com",
+            "userType": Object {
+              "name": "Développeuse web - capco",
+            },
             "username": "user1",
+            "vip": true,
           }
         }
       />
@@ -176,16 +184,20 @@ exports[`<ProposalDetailLikersModal /> should render a formatted message when se
       key="1"
       listItem={false}
     >
-      <Connect(UserAvatarDeprecated)
+      <Connect(UserAvatar)
         user={
           Object {
-            "_links": Object {
-              "profile": "www.google.com",
-            },
+            "displayName": "user 2",
+            "id": "2",
             "media": Object {
               "url": "http://monimage.com/image1.jpg",
             },
+            "url": "www.google.com",
+            "userType": Object {
+              "name": "Développeur web - capco",
+            },
             "username": "user2",
+            "vip": false,
           }
         }
       />

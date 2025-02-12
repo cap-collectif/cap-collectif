@@ -5,10 +5,10 @@ import { graphql, createFragmentContainer } from 'react-relay'
 import Truncate from 'react-truncate'
 import classNames from 'classnames'
 import type { VoteItem_vote } from '~relay/VoteItem_vote.graphql'
-import UserAvatarDeprecated from '../User/UserAvatarDeprecated'
 import UserLink from '../User/UserLink'
 import { isInterpellationContextFromStep } from '~/utils/interpellationLabelHelper'
 import { translateContent } from '@shared/utils/contentTranslator'
+import UserAvatar from '../User/UserAvatar'
 
 type Props = {
   vote: VoteItem_vote
@@ -63,8 +63,7 @@ export class VoteItem extends React.Component<Props> {
     const relatedBody = vote.related ? translateContent(vote.related.body) : ''
     return (
       <ListVoteItem id={`vote-${vote.id}`}>
-        {/* @ts-expect-error will be a fragment soon */}
-        <UserAvatarDeprecated user={vote.author} className="pull-left" />
+        <UserAvatar user={vote.author} className="pull-left" />
         <div className="opinion__data">
           <p className="h5 opinion__user">
             {/** @ts-ignore */}
@@ -123,9 +122,7 @@ export default createFragmentContainer(VoteItem, {
         url
         vip
         ...UserLink_user
-        media {
-          url
-        }
+        ...UserAvatar_user
       }
       related {
         id

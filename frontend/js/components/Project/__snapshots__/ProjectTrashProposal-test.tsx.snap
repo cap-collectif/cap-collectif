@@ -638,6 +638,45 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "username",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Media",
+                                        "kind": "LinkedField",
+                                        "name": "media",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "url",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
                                         "name": "displayName",
                                         "storageKey": null,
                                       },
@@ -670,46 +709,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                         "alias": null,
                                         "args": null,
                                         "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "username",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
                                         "name": "vip",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "concreteType": "Media",
-                                        "kind": "LinkedField",
-                                        "name": "media",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                        ],
                                         "storageKey": null,
                                       },
                                     ],
@@ -912,7 +912,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "a2680a5faecd8f7b1fd6cfc17d16abec",
+            "cacheID": "d8b84137757d59a0b2a79172f4b2aef2",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashProposalQuery",
@@ -945,6 +945,7 @@ fragment ProposalDetailLikersLabel_proposal on Proposal {
 fragment ProposalDetailLikersModal_proposal on Proposal {
   id
   likers {
+    ...UserAvatar_user
     id
     displayName
     userType {
@@ -954,10 +955,6 @@ fragment ProposalDetailLikersModal_proposal on Proposal {
     url
     username
     vip
-    media {
-      url
-      id
-    }
   }
 }
 

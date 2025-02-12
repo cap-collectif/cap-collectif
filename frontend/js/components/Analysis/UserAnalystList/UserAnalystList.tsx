@@ -3,7 +3,7 @@ import { useIntl } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
 import UserAvatarList from '~ui/List/UserAvatarList'
 import { AVATAR_SIZE } from '~/components/Analysis/AnalysisProposalListRole/AnalysisProposalListRole.style'
-import UserAvatarLegacy from '~/components/User/UserAvatarLegacy'
+import UserAvatar from '~/components/User/UserAvatar'
 import type { UserAnalystList_proposal } from '~relay/UserAnalystList_proposal.graphql'
 import UserAnalystListContainer, {
   SPACE_BETWEEN_AVATAR,
@@ -47,7 +47,7 @@ const UserAnalystList = ({ proposal, dispatch }: Props) => {
             }}
           >
             <div>
-              <UserAvatarLegacy
+              <UserAvatar
                 user={analyst}
                 displayUrl={false}
                 size={AVATAR_SIZE}
@@ -82,7 +82,7 @@ export default createFragmentContainer(UserAnalystList, {
       analysts {
         id
         username
-        ...UserAvatarLegacy_user
+        ...UserAvatar_user
       }
       decision {
         isApproved
