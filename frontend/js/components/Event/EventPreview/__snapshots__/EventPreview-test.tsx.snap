@@ -81,7 +81,7 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -204,7 +204,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -342,7 +342,7 @@ exports[`<EventPreview /> should render correctly when guest enabled 1`] = `
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -488,7 +488,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag com
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -635,7 +635,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag reg
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -782,7 +782,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag res
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -900,7 +900,7 @@ exports[`<EventPreview /> should render correctly when no date 1`] = `
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -1020,7 +1020,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,
@@ -1129,7 +1129,7 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
       </EventPreviewstyle__TitleContainer>
       <EventPreviewstyle__TagsList>
         <Relay(TagUser)
-          size={20}
+          size="xs"
           user={
             Object {
               " $fragmentRefs": null,

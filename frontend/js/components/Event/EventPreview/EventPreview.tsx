@@ -177,7 +177,7 @@ export const EventPreview = ({
           </TitleContainer>
 
           <TagsList>
-            {author && !isAuthorHidden && <TagUser user={author} size={20} />}
+            {author && !isAuthorHidden && <TagUser user={author} size="xs"/>}
             {googleMapsAddress && <TagCity address={googleMapsAddress} size="16px" />}
             {themes && themes.length > 0 && <TagThemes themes={themes} size="16px" />}
             {/* For now we only display the first step */}

@@ -49,7 +49,7 @@ exports[`<EventMapPreview /> should render  when illustration not displayed 1`] 
           className="userTagContainer"
         >
           <Relay(TagUser)
-            size={16}
+            size="xs"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -129,7 +129,7 @@ exports[`<EventMapPreview /> should render correctly 1`] = `
           className="userTagContainer"
         >
           <Relay(TagUser)
-            size={16}
+            size="xs"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -209,7 +209,7 @@ exports[`<EventMapPreview /> should render correctly when no date 1`] = `
           className="userTagContainer"
         >
           <Relay(TagUser)
-            size={16}
+            size="xs"
             user={
               Object {
                 " $fragmentRefs": null,
@@ -282,7 +282,7 @@ exports[`<EventMapPreview /> should render correctly when no googleMapsAddress 1
           className="userTagContainer"
         >
           <Relay(TagUser)
-            size={16}
+            size="xs"
             user={
               Object {
                 " $fragmentRefs": null,

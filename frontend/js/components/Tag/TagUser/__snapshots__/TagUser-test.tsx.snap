@@ -4,6 +4,7 @@ exports[`<TagUser /> should render correctly 1`] = `
 <Tag
   CustomImage={
     <Memo(Connect(UserAvatar))
+      mt="2px !important"
       size={15}
       user={
         Object {
@@ -36,6 +37,7 @@ exports[`<TagUser /> should render correctly with other size 1`] = `
 <Tag
   CustomImage={
     <Memo(Connect(UserAvatar))
+      mt="2px !important"
       size={20}
       user={
         Object {
