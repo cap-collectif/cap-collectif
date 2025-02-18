@@ -1,4 +1,4 @@
-import { Metadata, ResolvedMetadata } from 'next'
+import { Metadata } from 'next'
 import District from './District'
 import { graphql } from 'relay-runtime'
 import Fetcher from '@utils/fetch'
@@ -6,6 +6,9 @@ import { pageDistrictMetadataQuery$data } from '@relay/pageDistrictMetadataQuery
 
 const METADATA_QUERY = graphql`
   query pageDistrictMetadataQuery($districtSlug: String!) {
+    title: siteParameter(keyname: "global.site.fullname") {
+      value
+    }
     district: nodeSlug(entity: DISTRICT, slug: $districtSlug) {
       ... on GlobalDistrict {
         name
@@ -20,13 +23,13 @@ const METADATA_QUERY = graphql`
 
 type Params = { params: { slug: string } }
 
-export async function generateMetadata({ params }: Params, parent: ResolvedMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const slug = (await params).slug
-  const { district } = await Fetcher.ssrGraphql<pageDistrictMetadataQuery$data>(METADATA_QUERY, {
+  const { district, title } = await Fetcher.ssrGraphql<pageDistrictMetadataQuery$data>(METADATA_QUERY, {
     districtSlug: slug,
   })
 
-  const baseTitle = (await parent).title ?? 'Cap Collectif'
+  const baseTitle = title?.value ?? 'Cap Collectif'
 
   if (!district)
     return {

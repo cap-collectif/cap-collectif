@@ -43,7 +43,10 @@ export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme>`
       }
     }
 
-    .sr-only {
+    .sr-only,
+    #ads-code,
+    #analytics-code,
+    #custom-code {
       border: 0 !important;
       clip: rect(1px, 1px, 1px, 1px) !important;
       -webkit-clip-path: inset(50%) !important;

@@ -1,11 +1,14 @@
 import { graphql } from 'relay-runtime'
 import Organization from './Organization'
 import Fetcher from '@utils/fetch'
-import { Metadata, ResolvedMetadata } from 'next'
+import { Metadata } from 'next'
 import { pageOrganizationMetadataQuery$data } from '@relay/pageOrganizationMetadataQuery.graphql'
 
 const METADATA_QUERY = graphql`
   query pageOrganizationMetadataQuery($organizationSlug: String!) {
+    title: siteParameter(keyname: "global.site.fullname") {
+      value
+    }
     organization: nodeSlug(entity: ORGANIZATION, slug: $organizationSlug) {
       ... on Organization {
         title
@@ -20,13 +23,16 @@ const METADATA_QUERY = graphql`
 
 type Params = { params: { slug: string } }
 
-export async function generateMetadata({ params }: Params, parent: ResolvedMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const slug = (await params).slug
-  const { organization } = await Fetcher.ssrGraphql<pageOrganizationMetadataQuery$data>(METADATA_QUERY, {
-    organizationSlug: slug,
-  })
+  const { organization, title: siteTitle } = await Fetcher.ssrGraphql<pageOrganizationMetadataQuery$data>(
+    METADATA_QUERY,
+    {
+      organizationSlug: slug,
+    },
+  )
 
-  const baseTitle = (await parent).title ?? 'Cap Collectif'
+  const baseTitle = siteTitle?.value ?? 'Cap Collectif'
 
   if (!organization)
     return {

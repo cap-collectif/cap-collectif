@@ -15,7 +15,7 @@ import { useCookies } from 'next-client-cookies'
 import { GlobalTheme } from '@shared/navbar/NavBar.utils'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
 import { ADS_COOKIE, ANALYTICS_COOKIE } from '@shared/utils/cookies'
-import { evalCustomCode } from './custom-code'
+import { evalCustomCode, formatCustomCode } from './custom-code'
 
 /**
  * Ce compo injecte tout ce qui est configurable à l'échelle globale d'une plateforme dans le BO, à savoir
@@ -32,11 +32,11 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
   const analyticConsentValue = cookies.get(ANALYTICS_COOKIE)
   const adCookieConsentValue = cookies.get(ADS_COOKIE)
 
-  const executeAnalytics = analyticConsentValue && analytics?.value
-  const analyticsScript = `<script>${analytics?.value}</script>`
+  const executeAnalytics = analyticConsentValue === 'true' && analytics?.value
+  const analyticsScript = formatCustomCode(analytics?.value)
 
-  const executeAds = adCookieConsentValue && ads?.value
-  const adsScript = ads?.value
+  const executeAds = adCookieConsentValue === 'true' && ads?.value
+  const adsScript = formatCustomCode(ads?.value)
 
   const bodyFont = fonts.find(f => f.useAsBody)
   const titleFont = fonts.find(f => f.useAsHeading)
