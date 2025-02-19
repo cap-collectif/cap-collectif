@@ -17,10 +17,11 @@ import {
 import DeleteEventMutation from 'mutations/DeleteEventMutation'
 import type { EventModalConfirmationDelete_event$key } from '@relay/EventModalConfirmationDelete_event.graphql'
 import { EventAffiliations } from './EventList'
+import { useAppContext } from '@components/AppProvider/App.context'
 
 type Props = {
-  event: EventModalConfirmationDelete_event$key
-  affiliations: EventAffiliations
+  disclosure?: React.ReactNode
+  onDelete?: () => void
 }
 
 const FRAGMENT = graphql`
@@ -30,35 +31,52 @@ const FRAGMENT = graphql`
   }
 `
 
-const deleteEvent = (eventId: string, hide: () => void, intl: IntlShape, affiliations: EventAffiliations) => {
+const deleteEvent = (
+  eventId: string,
+  hide: () => void,
+  intl: IntlShape,
+  affiliations: EventAffiliations,
+  onDelete?: () => void,
+) => {
   const input = {
     eventId,
   }
   hide()
   return DeleteEventMutation.commit({ input, affiliations })
-    .then(() =>
+    .then(() => {
       toast({
         variant: 'success',
         content: intl.formatMessage({ id: 'event-successfully-deleted' }),
-      }),
-    )
+      })
+      if (onDelete) onDelete()
+    })
     .catch(() => mutationErrorToast(intl))
 }
 
-const EventModalConfirmationDelete: React.FC<Props> = ({ event: eventFragment, affiliations }) => {
-  const event = useFragment(FRAGMENT, eventFragment)
+export const EventModalConfirmationDelete: React.FC<Props & { id: string; title: string }> = ({
+  id,
+  title,
+  disclosure,
+  onDelete,
+}) => {
+  const { viewerSession } = useAppContext()
+
+  const affiliations: EventAffiliations = viewerSession?.isAdmin ? null : ['OWNER']
+
   const intl = useIntl()
   return (
     <Modal
       size={CapUIModalSize.Md}
       ariaLabel={intl.formatMessage({ id: 'delete-confirmation' })}
       disclosure={
-        <ButtonQuickAction
-          icon={CapUIIcon.Trash}
-          size={CapUIIconSize.Md}
-          variantColor="red"
-          label={intl.formatMessage({ id: 'global.delete' })}
-        />
+        disclosure ?? (
+          <ButtonQuickAction
+            icon={CapUIIcon.Trash}
+            size={CapUIIconSize.Md}
+            variantColor="red"
+            label={intl.formatMessage({ id: 'global.delete' })}
+          />
+        )
       }
     >
       {({ hide }) => (
@@ -67,7 +85,7 @@ const EventModalConfirmationDelete: React.FC<Props> = ({ event: eventFragment, a
             <Heading>{intl.formatMessage({ id: 'delete-confirmation' })}</Heading>
           </Modal.Header>
           <Modal.Body>
-            <Text>{intl.formatMessage({ id: 'are-you-sure-to-delete-something' }, { element: event.title })}</Text>
+            <Text>{intl.formatMessage({ id: 'are-you-sure-to-delete-something' }, { element: title })}</Text>
           </Modal.Body>
           <Modal.Footer>
             <ButtonGroup>
@@ -75,10 +93,11 @@ const EventModalConfirmationDelete: React.FC<Props> = ({ event: eventFragment, a
                 {intl.formatMessage({ id: 'cancel' })}
               </Button>
               <Button
+                id="delete-event-confirm"
                 variantSize="medium"
                 variant="primary"
                 variantColor="danger"
-                onClick={() => deleteEvent(event.id, hide, intl, affiliations)}
+                onClick={() => deleteEvent(id, hide, intl, affiliations, onDelete)}
               >
                 {intl.formatMessage({ id: 'global.delete' })}
               </Button>
@@ -90,4 +109,13 @@ const EventModalConfirmationDelete: React.FC<Props> = ({ event: eventFragment, a
   )
 }
 
-export default EventModalConfirmationDelete
+const EventModalConfirmationDeleteQuery: React.FC<Props & { event: EventModalConfirmationDelete_event$key }> = ({
+  event: eventFragment,
+  disclosure,
+}) => {
+  const event = useFragment(FRAGMENT, eventFragment)
+
+  return <EventModalConfirmationDelete {...event} disclosure={disclosure} />
+}
+
+export default EventModalConfirmationDeleteQuery

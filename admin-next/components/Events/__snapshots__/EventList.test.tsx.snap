@@ -241,7 +241,7 @@ exports[`<EventList /> should render correctly 1`] = `
           >
             <a
               className="sc-bcXGCL bYDxrx cap-link"
-              href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+              href="/admin-next/event?id=RXZlbnQ6ZXZlbnQz"
             >
               GrenobleWeb2015
             </a>
@@ -393,7 +393,7 @@ exports[`<EventList /> should render correctly 1`] = `
           >
             <a
               className="sc-bcXGCL bYDxrx cap-link"
-              href="https://capco.dev/admin/capco/app/event/event1/edit?_locale=fr-FR"
+              href="/admin-next/event?id=RXZlbnQ6ZXZlbnQx"
             >
               Event with registrations
             </a>
@@ -516,7 +516,7 @@ exports[`<EventList /> should render correctly 1`] = `
           >
             <a
               className="sc-bcXGCL bYDxrx cap-link"
-              href="https://capco.dev/admin/capco/app/event/event6/edit?_locale=fr-FR"
+              href="/admin-next/event?id=RXZlbnQ6ZXZlbnQ2"
             >
               Event without registrations
             </a>

@@ -7,7 +7,7 @@ PreviewEventTranslationInput:
                 type: 'ID'
                 description: 'the id of the event'
             locale:
-                type: 'String!'
+                type: 'TranslationLocale!'
                 description: 'the locale of the translation'
             title:
                 type: 'String'

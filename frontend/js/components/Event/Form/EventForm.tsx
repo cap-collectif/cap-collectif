@@ -29,6 +29,7 @@ import { isFloat } from '~/utils/string'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import SelectDistrict from '~/components/Event/Form/SelectDistrict'
 import { normalizeNumberInput } from '~/components/Form/utils'
+import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
 
 type SelectedCurrentValues = {
   guestListEnabled: boolean
@@ -670,7 +671,7 @@ export const EventForm = ({
               />
             )}
 
-            {(!query.viewer.isOnlyProjectAdmin && isBackOfficeView && isFeatureUserEventEnabled) && (
+            {!query.viewer.isOnlyProjectAdmin && isBackOfficeView && isFeatureUserEventEnabled && (
               <Field
                 name="adminAuthorizeDataTransfer"
                 id="event_adminAuthorizeDataTransfer"
@@ -872,7 +873,7 @@ const formContainer = reduxForm({
 const mapStateToProps = (state: GlobalState, props: Props) => {
   if (props.event) {
     const translation = props.event?.translations
-      ? getTranslation(props.event?.translations, state.language.currentLanguage)
+      ? getTranslation(props.event?.translations, TranslationLocaleEnum[state.language.currentLanguage ?? 'fr-FR'])
       : undefined
     return {
       currentLanguage: state.language.currentLanguage,

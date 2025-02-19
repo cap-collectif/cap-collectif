@@ -31,6 +31,7 @@ import type { EventFormPage_event } from '~relay/EventFormPage_event.graphql'
 import type { EventFormPage_query } from '~relay/EventFormPage_query.graphql'
 import { getTranslation, handleTranslationChange } from '~/services/Translation'
 import { toast } from '~ds/Toast'
+import { TranslationLocaleEnum } from '~/utils/enums/TranslationLocale'
 
 type Props = ReduxFormFormProps & {
   intl: IntlShape
@@ -67,7 +68,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
   const enabled = values.enabled ? values.enabled : false
   const addressJson = values.addressText && values.addressJson ? values.addressJson : null
   const translation = {
-    locale: props.currentLanguage,
+    locale: TranslationLocaleEnum[props.currentLanguage ?? 'fr-FR'],
     title: values.title,
     body: values.body,
     metaDescription: values.metadescription ? values.metadescription : undefined,
@@ -120,7 +121,7 @@ const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
 
         window.location.href = isFrontendView
           ? response.addEvent.eventEdge.node.url
-          : `/admin/capco/app/event/${response.addEvent.eventEdge.node._id}/edit`
+          : `/admin-next/event?id=${response.addEvent.eventEdge.node.id}`
       }
     })
     .catch(response => {
@@ -146,7 +147,7 @@ const updateEvent = (values: EditFormValue, dispatch: Dispatch, props: Props) =>
   const enabled = values.enabled ? values.enabled : false
   const addressJson = values.addressText && values.addressJson ? values.addressJson : null
   const translation = {
-    locale: props.currentLanguage,
+    locale: TranslationLocaleEnum[props.currentLanguage ?? 'fr-FR'],
     title: values.title,
     body: values.body,
     metaDescription: values.metadescription ? values.metadescription : null,
@@ -399,7 +400,7 @@ export class EventFormPage extends React.Component<Props, State> {
 const mapStateToProps = (state: GlobalState, { event }: Props) => {
   const translation = getTranslation(
     event && event.translations ? event.translations : [],
-    state.language.currentLanguage,
+    TranslationLocaleEnum[state.language.currentLanguage ?? 'fr-FR'],
   )
   return {
     currentLanguage: state.language.currentLanguage,

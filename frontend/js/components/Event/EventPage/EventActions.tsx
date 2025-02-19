@@ -3,7 +3,7 @@ import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
 import { ButtonGroup, Button, Text } from '@cap-collectif/ui'
-import { getTranslation } from '~/services/Translation'
+import { formatLocaleToCode, getTranslation } from '~/services/Translation'
 import type { EventActions_query$key } from '~relay/EventActions_query.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import EventEditButton from '~/components/Event/Edit/EventEditButton'
@@ -36,7 +36,6 @@ const FRAGMENT = graphql`
           id
           status
         }
-        adminUrl
         isEventRegistrationComplete
         availableRegistration
       }
@@ -64,7 +63,7 @@ export const EventActions = ({ queryRef }: Props) => {
     isEventRegistrationComplete,
     availableRegistration,
   } = event
-  const translation = translations ? getTranslation(translations, currentLanguage) : undefined
+  const translation = translations ? getTranslation(translations, formatLocaleToCode(currentLanguage)) : undefined
   const link = translation?.link || undefined
   const displayLeftEventPlacesTag =
     !isEventRegistrationComplete && availableRegistration && availableRegistration > 0 && availableRegistration < 4
@@ -110,7 +109,7 @@ export const EventActions = ({ queryRef }: Props) => {
       {!eventIsNotApproved && (isRegistrationPossible || link) && <>{registerButton}</>}
       {viewer?.isAdmin ? (
         <Button
-          href={event.adminUrl}
+          href={`/admin-next/event?id=${event.id}`}
           variantSize="big"
           variantColor="primary"
           variant="secondary"

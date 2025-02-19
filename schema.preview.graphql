@@ -501,7 +501,7 @@ enum EventOrderField {
 """Represents the translation of a calendar event."""
 type EventTranslation {
   """IETF code of the translation of the event."""
-  locale: String!
+  locale: TranslationLocale!
   title: String!
 
   """Identifies the body of the event."""
@@ -516,7 +516,7 @@ input EventTranslationInput {
   id: ID
 
   """the locale of the translation"""
-  locale: String!
+  locale: TranslationLocale!
 
   """the translated title of the event"""
   title: String

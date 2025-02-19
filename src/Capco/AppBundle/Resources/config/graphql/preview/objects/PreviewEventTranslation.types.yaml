@@ -5,7 +5,7 @@ PreviewEventTranslation:
         description: 'Represents the translation of a calendar event.'
         fields:
             locale:
-                type: 'String!'
+                type: 'TranslationLocale!'
                 description: 'IETF code of the translation of the event.'
             title:
                 type: 'String!'

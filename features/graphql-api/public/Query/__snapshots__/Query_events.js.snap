@@ -9,11 +9,11 @@ Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
           "translations": Array [
             Object {
-              "locale": "en-GB",
+              "locale": "EN_GB",
               "title": "event created By english user with review approved",
             },
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "evenement créer par un utilisateur anglais avec review approved",
             },
           ],
@@ -34,7 +34,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQz",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "GrenobleWeb2015",
             },
           ],
@@ -45,7 +45,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQx",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "Event with registrations",
             },
           ],
@@ -56,7 +56,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQ2",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "Event without registrations",
             },
           ],
@@ -67,7 +67,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQ0",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "SymfonyLive Paris",
             },
           ],
@@ -78,7 +78,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQxMA==",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "Remobiliser ses collaborateurs par l’intelligence collective mode d’emploi",
             },
           ],
@@ -89,7 +89,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQ5",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "Quelle complémentarité entre numérique et présentiel ?",
             },
           ],
@@ -100,7 +100,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQy",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "PHPTourDuFuture",
             },
           ],
@@ -111,7 +111,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQ4",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "Le droit de suite",
             },
           ],
@@ -122,7 +122,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQ3",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "Event 7",
             },
           ],
@@ -133,7 +133,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50RnV0dXJlU2Fuc0RhdGVEZUZpbg==",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "evenementFutureSansDateDeFin",
             },
           ],
@@ -144,7 +144,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWQ=",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "event Create By user with review approved",
             },
           ],
@@ -155,11 +155,11 @@ Object {
           "id": "RXZlbnQ6ZXZlbnRDcmVhdGVCeUFVc2VyUmV2aWV3QXBwcm92ZWRFbg==",
           "translations": Array [
             Object {
-              "locale": "en-GB",
+              "locale": "EN_GB",
               "title": "event created By english user with review approved",
             },
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "evenement créer par un utilisateur anglais avec review approved",
             },
           ],
@@ -170,7 +170,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UHJlc2VudFNhbnNEYXRlRGVGaW4=",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "EvenementPresentSansDateDeFin",
             },
           ],
@@ -181,7 +181,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbmVtZW50UGFzc2VTYW5zRGF0ZURlRmlu",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "evenementPasseSansDateDeFin",
             },
           ],
@@ -192,7 +192,7 @@ Object {
           "id": "RXZlbnQ6ZXZlbnQ1",
           "translations": Array [
             Object {
-              "locale": "fr-FR",
+              "locale": "FR_FR",
               "title": "ParisWeb2014",
             },
           ],

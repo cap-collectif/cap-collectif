@@ -54,7 +54,7 @@ Scenario: Admin wants to change an event
         "guestListEnabled": true,
         "translations": [
           {
-            "locale": "fr-FR",
+            "locale": "FR_FR",
             "title": "Rencontre avec les habitants",
             "body": "Tout le monde est invité"
           }
@@ -151,7 +151,7 @@ Scenario: Admin wants to change an event with external to register
         "themes": ["theme1", "theme2"],
         "translations": [
           {
-            "locale": "fr-FR",
+            "locale": "FR_FR",
             "title": "Rencontre avec les habitants",
             "body": "Tout le monde est invité",
             "link": "http://perdu.com"
@@ -231,7 +231,7 @@ Scenario: User wants to change an event
         "guestListEnabled": true,
         "translations": [
           {
-            "locale": "fr-FR",
+            "locale": "FR_FR",
             "title": "Rencontre avec les habitants",
             "body": "Tout le monde est invité"
           }
@@ -276,7 +276,7 @@ Scenario: User wants to change his refused event
         "guestListEnabled": true,
         "translations": [
           {
-            "locale": "fr-FR",
+            "locale": "FR_FR",
             "title": "Rencontre avec les habitants",
             "body": "Tout le monde est invité",
             "link": "http://perdu.com"
@@ -315,7 +315,7 @@ Scenario: Admin wants to change an event to add steps
         "steps": ["Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx", "U2VsZWN0aW9uU3RlcDpzZWxlY3Rpb25zdGVwOA=="],
         "translations": [
           {
-            "locale": "fr-FR",
+            "locale": "FR_FR",
             "title": "Rencontre avec les habitants",
             "body": "Tout le monde est invité",
             "link": "http://perdu.com"

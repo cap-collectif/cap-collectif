@@ -87,7 +87,7 @@ const EventListPage: React.FC<EventListPageProps> = ({ viewer: viewerFragment, e
                 variantColor="primary"
                 variantSize="small"
                 leftIcon={CapUIIcon.Add}
-                onClick={() => window.open('/admin/capco/app/event/create', '_self')}
+                onClick={() => window.open('/admin-next/event', '_self')}
                 mr={6}
               >
                 {intl.formatMessage({ id: 'admin-create-event' })}

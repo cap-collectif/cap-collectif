@@ -20,7 +20,7 @@ const EventListNoResult: FC = () => {
           variantColor="primary"
           variantSize="big"
           leftIcon={CapUIIcon.Add}
-          onClick={() => window.open('/admin/capco/app/event/create', '_self')}
+          onClick={() => window.open('/admin-next/event', '_self')}
         >
           {intl.formatMessage({ id: 'admin-create-event' })}
         </Button>

@@ -51,8 +51,8 @@ declare namespace Cypress {
     selectReactSelectOption(selector: string, query: string): Chainable<any>
     selectReactSetOption(selector: string, query: string): Chainable<any>
     selectReactSelectFirstOption(selector: string): Chainable<any>
-    selectDSSelectFirstOption(): Chainable<any>
-    openDSSelect(selector: string): Chainable<any>
+    selectDSSelectFirstOption(async?: boolean): Chainable<any>
+    openDSSelect(selector: string, async?: boolean): Chainable<any>
     checkAccessDenied(url: string): Chainable<any>
     login(options: LoginOptions): Chainable<any>
     confirmCaptcha(): Chainable<void>

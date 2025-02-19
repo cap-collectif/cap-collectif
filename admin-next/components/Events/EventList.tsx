@@ -151,7 +151,7 @@ const EventList: React.FC<EventListProps> = ({ viewer: viewerRef, eventOwner, te
             event =>
               event && (
                 <Table.Tr key={event.id} rowId={event.id}>
-                  <EventItem event={event} affiliations={affiliations} viewer={viewer} />
+                  <EventItem event={event} viewer={viewer} />
                 </Table.Tr>
               ),
           )}

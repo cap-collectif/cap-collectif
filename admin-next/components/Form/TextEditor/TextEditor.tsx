@@ -21,7 +21,7 @@ export type TextEditorProps = FlexProps & {
   required?: boolean
   selectedLanguage?: string
   platformLanguage?: string
-
+  disabled?: boolean
   buttonLabels?: {
     cancel?: string
     submit?: string
@@ -42,6 +42,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
   limitChars,
   advancedEditor = true,
   noModalAdvancedEditor = false,
+  disabled,
   ...rest
 }) => {
   const intl = useIntl()
@@ -76,6 +77,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
             value={value}
             platformLanguage={platformLanguage}
             limitChars={limitChars}
+            disabled={disabled}
           />
         </>
       )}
@@ -119,6 +121,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                       value={value}
                       platformLanguage={platformLanguage}
                       limitChars={limitChars}
+                      disabled={disabled}
                     />
                   </Modal.Body>
                   <Modal.Footer spacing={2}>
@@ -168,6 +171,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                   selectedLanguage={isOpen || reloadContent ? '_suspend' : selectedLanguage}
                   platformLanguage={platformLanguage}
                   limitChars={limitChars}
+                  disabled={disabled}
                 />
               )
             }}

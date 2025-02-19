@@ -15,7 +15,7 @@ exports[`<EventItem /> should render correctly 1`] = `
   >
     <a
       className="sc-bcXGCL bYDxrx cap-link"
-      href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+      href="/admin-next/event?id=RXZlbnQ6ZXZlbnQz"
     >
       GrenobleWeb2015
     </a>
@@ -160,7 +160,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
   >
     <a
       className="sc-bcXGCL bYDxrx cap-link"
-      href="https://capco.dev/admin/capco/app/event/event3/edit?_locale=fr-FR"
+      href="/admin-next/event?id=RXZlbnQ6ZXZlbnQz"
     >
       GrenobleWeb2015
     </a>

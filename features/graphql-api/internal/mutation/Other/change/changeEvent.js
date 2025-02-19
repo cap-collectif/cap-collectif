@@ -26,7 +26,7 @@ const input = {
     {
       title: 'title is updated',
       body: 'body is updated',
-      locale: 'fr-FR',
+      locale: 'FR_FR',
     },
   ],
   startAt: '2020-01-01',

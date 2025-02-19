@@ -78,7 +78,7 @@ export const EventListPageHeader = ({ eventPageTitle, features, intl, isAuthenti
                       id="btn-create-event"
                       onClick={() => {
                         if (queryViewer?.viewer?.isAdmin) {
-                          window.location.href = `${window.location.protocol}//${window.location.host}/admin/capco/app/event/create`
+                          window.location.href = `${window.location.protocol}//${window.location.host}/admin-next/event`
                         } else {
                           setShowModal(true)
                         }

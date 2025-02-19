@@ -19,7 +19,6 @@ import ProjectExternalProjectAdminAppDeprecated from '~/startup/ProjectExternalP
 import FontAdminPageApp from '~/startup/FontAdminPageApp'
 import appStore from '~/stores/AppStore'
 import ProposalCreateFusionButtonApp from '~/startup/ProposalCreateFusionButtonApp'
-import EventFormPageApp from './startup/EventFormPageApp'
 import LanguageButtonApp from '~/startup/LanguageButtonApp'
 import EmailingListPageApp from '~/startup/EmailingListPageApp'
 import EmailingCampaignPageApp from '~/startup/EmailingCampaignPageApp'
@@ -46,7 +45,6 @@ ReactOnRails.register({
   RegistrationAdminApp,
   ProposalAdminPageApp,
   UserAdminPageApp,
-  EventFormPageApp,
   ProposalCreateFusionButtonApp,
   MapAdminPageApp,
   LocaleAdminPageApp,

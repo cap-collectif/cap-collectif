@@ -241,6 +241,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
             </button>
             <button
               className="sc-bcXGCL sc-laZSpB hzCEQq erzQLN cap-button"
+              id="delete-event-confirm"
               onClick={[Function]}
               type="button"
             >

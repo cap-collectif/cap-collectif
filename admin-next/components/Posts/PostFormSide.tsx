@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Accordion, CapInputSize, CapUIAccordionSize, FormLabel } from '@cap-collectif/ui'
-import { Locale, ProjectsList } from './Post.type'
+import { Locale } from './Post.type'
 import { Option } from '@components/Projects/ProjectConfig/ProjectConfigForm.utils'
 import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
@@ -12,7 +12,6 @@ import useUrlState from '@hooks/useUrlState'
 import { useAppContext } from '@components/AppProvider/App.context'
 
 type PostFormSideProps = {
-  availableProjects: ProjectsList
   availableLocales: Locale[]
   currentLocale: string
   setCurrentLocale: (value: string) => void
@@ -20,7 +19,6 @@ type PostFormSideProps = {
 }
 
 const PostFormSide: React.FC<PostFormSideProps> = ({
-  availableProjects,
   availableLocales,
   currentLocale,
   setCurrentLocale,
@@ -31,10 +29,6 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
   const multiLangue = useFeatureFlag('multilangue')
   const { viewerSession } = useAppContext()
   const [proposalIdFromUrl] = useUrlState('proposalId', '')
-  const projectsOptions: Option[] = availableProjects.map(project => ({
-    label: project.node.title,
-    value: project.node.id,
-  }))
 
   const { isOrganizationMember, isAdmin, isProjectAdmin, isSuperAdmin } = viewerSession
 
@@ -104,7 +98,6 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
               <ProjectListField
                 name="projects"
                 placeholder={intl.formatMessage({ id: 'select-projects' })}
-                defaultValue={projectsOptions}
                 isMulti
                 id="projects"
                 disabled={disableProjectSelect}

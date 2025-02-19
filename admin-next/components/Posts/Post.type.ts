@@ -1,4 +1,5 @@
 import { Option } from '@components/Projects/ProjectConfig/ProjectConfigForm.utils'
+import { TranslationLocale } from '@relay/PostFormWrapperQuery.graphql'
 
 export type RelatedContent = {
   __typename: string
@@ -40,7 +41,7 @@ export type Organization = {
 }
 
 export type Locale = {
-  code: string
+  code: TranslationLocale
   id: string
   isDefault: boolean
   traductionKey: string

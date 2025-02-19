@@ -16,12 +16,13 @@ Cypress.Commands.add('selectReactSelectFirstOption', (selector: string) => {
   cy.get(`${selector} .react-select__option:first-child`).click({ force: true })
 })
 
-Cypress.Commands.add('selectDSSelectFirstOption', () => {
-  cy.get(`.cap-select__option:first-child`).click({ force: true })
+Cypress.Commands.add('selectDSSelectFirstOption', (async?: boolean) => {
+  cy.get(async ? '.cap-async-select__option:first-child' : '.cap-select__option:first-child').click({ force: true })
 })
 
-Cypress.Commands.add('openDSSelect', (selector: string) => {
-  cy.get(`${selector} .cap-select__input`).click({
+Cypress.Commands.add('openDSSelect', (selector: string, async?: boolean) => {
+  const cn = async ? '.cap-async-select__input' : '.cap-select__input'
+  cy.get(`${selector} ${cn}`).click({
     force: true,
   })
 })

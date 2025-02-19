@@ -1,16 +1,17 @@
-import { Box, Flex, FormLabel, Text } from '@cap-collectif/ui'
+import { FormLabel } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
+import DurationInput from '@components/Form/DurationInput'
 
 export type StepTypeDurationTypeUnion = 'CUSTOM' | 'TIMELESS'
 
 type StepDurationProps = {
-  canChooseDurationType?: boolean,
+  canChooseDurationType?: boolean
   startAt?: {
     required: boolean
-  },
+  }
   endAt?: {
     required: boolean
   }
@@ -21,7 +22,11 @@ export const StepDurationTypeEnum: Record<StepTypeDurationTypeUnion, StepTypeDur
   TIMELESS: 'TIMELESS',
 } as const
 
-const StepDurationInput: React.FC<StepDurationProps> = ({ canChooseDurationType = true, startAt = {required: true}, endAt = {required: false} }) => {
+const StepDurationInput: React.FC<StepDurationProps> = ({
+  canChooseDurationType = true,
+  startAt = { required: true },
+  endAt = { required: false },
+}) => {
   const intl = useIntl()
   const { control, watch } = useFormContext()
 
@@ -53,36 +58,7 @@ const StepDurationInput: React.FC<StepDurationProps> = ({ canChooseDurationType 
           />
         </FormControl>
       )}
-      {(isCustomStepDuration || !canChooseDurationType) && (
-        <Box color="gray.900" mt={6}>
-          <Flex>
-            <FormControl name="startAt" control={control} width="max-content" mr={6} isRequired={startAt.required}>
-              <FormLabel htmlFor="startAt" label={intl.formatMessage({ id: 'start-date' })}>
-                {
-                  !startAt.required && (
-                    <Text fontSize={2} color="gray.500" lineHeight="16px">
-                      {intl.formatMessage({ id: 'global.optional' })}
-                    </Text>
-                  )
-                }
-              </FormLabel>
-              <FieldInput id="startAt" name="startAt" control={control} type="dateHour" />
-            </FormControl>
-            <FormControl name="endAt" control={control} width="max-content" isRequired={endAt.required}>
-              <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
-                {
-                  !endAt.required && (
-                    <Text fontSize={2} color="gray.500" lineHeight="16px">
-                      {intl.formatMessage({ id: 'global.optional' })}
-                    </Text>
-                  )
-                }
-              </FormLabel>
-              <FieldInput id="endAt" name="endAt" control={control} type="dateHour" />
-            </FormControl>
-          </Flex>
-        </Box>
-      )}
+      {(isCustomStepDuration || !canChooseDurationType) && <DurationInput startAt={startAt} endAt={endAt} mt={6} />}
     </>
   )
 }

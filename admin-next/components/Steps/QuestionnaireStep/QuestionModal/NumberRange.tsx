@@ -18,7 +18,7 @@ const NumberRange: React.FC = () => {
           {intl.formatMessage({ id: 'define-range' })}
         </Heading>
         <Switch
-          id="display-on-map"
+          id="number-range"
           checked={isRangeBetween}
           onChange={() => {
             if (isRangeBetween) {

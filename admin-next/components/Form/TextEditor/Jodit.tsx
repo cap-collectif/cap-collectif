@@ -57,6 +57,7 @@ const getConfig = (
   editor: { current: { component: IJodit } },
   textAreaOnly: boolean,
   limitChars?: number,
+  disabled?: boolean,
 ) => {
   const buttons = limitChars
     ? limitedConf
@@ -102,6 +103,7 @@ const getConfig = (
     style: {
       background: 'white',
     },
+    disabled,
     language: platformLanguage?.substr(0, 2)?.toLowerCase() || 'fr',
     placeholder,
     uploader: {
@@ -164,6 +166,7 @@ const Jodit = ({
   selectedLanguage,
   placeholder = '',
   limitChars,
+  disabled,
 }: Props) => {
   const { colors, radii, space } = useTheme()
   const editor = useRef<any>(null)
@@ -192,7 +195,7 @@ const Jodit = ({
     : {}
 
   const config = useMemo(
-    () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, limitChars),
+    () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, limitChars, disabled),
     [platformLanguage],
   )
 

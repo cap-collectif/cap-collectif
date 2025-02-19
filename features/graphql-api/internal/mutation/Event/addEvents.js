@@ -57,7 +57,7 @@ const input = {
       "country": "France",
       "translations": [
         {
-          "locale": "fr-FR",
+          "locale": "FR_FR",
           "title": "Rencontre avec les habitants",
           "body": "<h1>Mon super event</h1><p>Rassurez vous, tout le monde est invité</p>",
           "metaDescription": "metaDescription",

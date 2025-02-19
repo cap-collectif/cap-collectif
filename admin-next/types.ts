@@ -1,3 +1,4 @@
+import { TranslationLocale } from '@relay/NavBarQuery.graphql'
 import { FeatureFlagType } from '@relay/useFeatureFlagQuery.graphql'
 
 export type SymfonyEnv = 'dev' | 'prod' | 'test'
@@ -46,6 +47,14 @@ export type IntlType = {
   messages: {
     [key: string]: string
   }
+}
+
+export type Locales = keyof Omit<Record<TranslationLocale, TranslationLocale>, '%future added value'>
+
+export type Translations<Fields extends string> = {
+  [key in keyof {
+    [Locale in Locales as `${Locale}-${Fields}`]?: string | null
+  }]: string
 }
 
 // https://stackoverflow.com/questions/42999983/typescript-removing-readonly-modifier

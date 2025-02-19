@@ -8,18 +8,17 @@ import { PostFormWrapperQuery, PostFormWrapperQuery$data } from '@relay/PostForm
 import { PostFormWrapper_OrganizationQuery } from '@relay/PostFormWrapper_OrganizationQuery.graphql'
 import { PostFormWrapper_ProposalQuery } from '@relay/PostFormWrapper_ProposalQuery.graphql'
 import moment from 'moment'
-import { PostFormValues, RelatedContent, ProjectsList, Locale } from './Post.type'
+import { PostFormValues, RelatedContent, Locale } from './Post.type'
 import { Option } from '@components/Projects/ProjectConfig/ProjectConfigForm.utils'
 import { useIntl } from 'react-intl'
 import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import CreatePostMutation from '@mutations/CreatePostMutation'
 import UpdatePostMutation from '@mutations/UpdatePostMutation'
 import { useAppContext } from '@components/AppProvider/App.context'
-import { ProjectAffiliation } from '@relay/DashboardContainerQuery.graphql'
 import useUrlState from '@hooks/useUrlState'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { BreadCrumbItemType } from '@components/BreadCrumb/BreadCrumbItem'
-import { getSelectedOptions, getTranslations } from './utils'
+import { getSelectedOptions } from './utils'
 
 type PostFormWrapperProps = {
   postId?: string
@@ -83,7 +82,7 @@ export const QUERY: GraphQLTaggedNode = graphql`
 `
 
 export const ORGANIZATION_QUERY = graphql`
-  query PostFormWrapper_OrganizationQuery($affiliations: [ProjectAffiliation!]) {
+  query PostFormWrapper_OrganizationQuery {
     platformLocales: availableLocales(includeDisabled: false) {
       code
       id
@@ -93,28 +92,11 @@ export const ORGANIZATION_QUERY = graphql`
     viewer {
       id
       username
-      isSuperAdmin
       isAdmin
       isProjectAdmin
-      projects(affiliations: $affiliations) {
-        edges {
-          node {
-            id
-            title
-          }
-        }
-      }
       organizations {
         id
         displayName
-        projects(affiliations: $affiliations) {
-          edges {
-            node {
-              id
-              title
-            }
-          }
-        }
       }
     }
   }
@@ -139,22 +121,15 @@ const PostFormWrapper = ({ postId, postData }: PostFormWrapperProps): JSX.Elemen
   const { viewerSession } = useAppContext()
   const isNewPost = !postId
   const [proposalIdFromUrl] = useUrlState('proposalId', '')
-
   const { proposalObject } = useLazyLoadQuery<PostFormWrapper_ProposalQuery>(PROPOSAL_QUERY, {
     id: proposalIdFromUrl,
   })
 
   const { isOrganizationMember, isAdmin, isProjectAdmin } = viewerSession
-  const affiliations: ProjectAffiliation[] = isAdmin ? null : ['OWNER']
-
   const [isLoading, setIsLoading] = React.useState(false)
-  const { platformLocales, viewer } = useLazyLoadQuery<PostFormWrapper_OrganizationQuery>(ORGANIZATION_QUERY, {
-    affiliations: affiliations,
-  })
+  const { platformLocales, viewer } = useLazyLoadQuery<PostFormWrapper_OrganizationQuery>(ORGANIZATION_QUERY, {})
 
   const organization = viewer.organizations?.[0]
-  const owner = organization ?? viewer
-  const availableProjects = owner?.projects?.edges
   const defaultAuthor = organization
     ? { label: organization.displayName, value: organization.id }
     : { label: viewer.username, value: viewer.id }
@@ -197,7 +172,6 @@ const PostFormWrapper = ({ postId, postData }: PostFormWrapperProps): JSX.Elemen
       }
     }
     return {
-      ...getTranslations(platformLocales, postData.post),
       title: postData?.post?.title ?? '',
       authors: authors,
       abstract: postData?.post?.abstract ?? '',
@@ -377,7 +351,6 @@ const PostFormWrapper = ({ postId, postData }: PostFormWrapperProps): JSX.Elemen
           <Flex direction="column" spacing={6} width="30%">
             <PostFormSide
               selectedProposal={selectedProposal}
-              availableProjects={availableProjects as ProjectsList}
               availableLocales={platformLocales as Locale[]}
               currentLocale={currentLocale}
               setCurrentLocale={setCurrentLocale}

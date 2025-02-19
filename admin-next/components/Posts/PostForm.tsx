@@ -10,6 +10,7 @@ import { PostFormValues } from './Post.type'
 import DeletePostConfirmationModal from './DeletePostConfirmationModal'
 import { useAppContext } from '@components/AppProvider/App.context'
 import useUrlState from '@hooks/useUrlState'
+import { isWYSIWYGContentEmpty } from '@shared/utils/isWYSIWYGContentEmpty'
 
 type PostFormProps = {
   isNewPost?: boolean
@@ -45,12 +46,7 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
   const authors = watch('authors')
   const currentBody = watch(`${currentLocale}-body`)
 
-  const isEmptyBody =
-    currentBody === null ||
-    currentBody === undefined ||
-    currentBody === '<p><br></p>' ||
-    currentBody === '&nbsp;' ||
-    currentBody === ''
+  const isEmptyBody = isWYSIWYGContentEmpty(currentBody)
 
   const disableSaveButton =
     isEmptyBody ||

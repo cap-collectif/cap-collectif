@@ -5,13 +5,11 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\EventReview;
-use Capco\AppBundle\Entity\EventTranslation;
 use Capco\AppBundle\GraphQL\ConnectionBuilder;
 use Capco\AppBundle\GraphQL\Mutation\Event\AbstractEventMutation;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Repository\LocaleRepository;
 use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\EventVoter;
 use Capco\UserBundle\Entity\User;
@@ -40,7 +38,6 @@ class AddEventMutation extends AbstractEventMutation
         AuthorizationCheckerInterface $authorizationChecker,
         TranslatorInterface $translator,
         private readonly SettableOwnerResolver $settableOwnerResolver,
-        private readonly LocaleRepository $localeRepository
     ) {
         parent::__construct(
             $em,
@@ -83,28 +80,6 @@ class AddEventMutation extends AbstractEventMutation
                 'eventEdge' => null,
                 'userErrors' => [['message' => $error->getMessage()]],
             ];
-        }
-
-        foreach ($this->localeRepository->findEnabledLocalesCodes() as $availableLocale) {
-            if (isset($values['translations'][$availableLocale])) {
-                $translation = new EventTranslation();
-                $translation->setTranslatable($event);
-                $translation->setLocale($availableLocale);
-                if (isset($values['translations'][$availableLocale]['title'])) {
-                    $translation->setTitle($values['translations'][$availableLocale]['title']);
-                }
-                if (isset($values['translations'][$availableLocale]['body'])) {
-                    $translation->setBody($values['translations'][$availableLocale]['body']);
-                }
-                if (isset($values['translations'][$availableLocale]['metaDescription'])) {
-                    $translation->setMetaDescription(
-                        $values['translations'][$availableLocale]['metaDescription']
-                    );
-                }
-                if (isset($values['translations'][$availableLocale]['link'])) {
-                    $translation->setLink($values['translations'][$availableLocale]['link']);
-                }
-            }
         }
 
         try {

@@ -5,13 +5,11 @@ import type { EventItem_event$key } from '@relay/EventItem_event.graphql'
 import { EventItem_viewer$key } from '@relay/EventItem_viewer.graphql'
 import { ButtonQuickAction, CapUIIcon, CapUIIconSize, Flex, Link, Table, Text, Tooltip } from '@cap-collectif/ui'
 import downloadCSV from '@utils/download-csv'
-import EventModalConfirmationDelete from './EventModalConfirmationDelete'
-import { EventAffiliations } from './EventList'
+import EventModalConfirmationDeleteQuery from './EventModalConfirmationDelete'
 
 type Props = {
   event: EventItem_event$key
   viewer: EventItem_viewer$key
-  affiliations: EventAffiliations
   isAdminOrganization?: boolean
 }
 
@@ -19,7 +17,6 @@ const FRAGMENT = graphql`
   fragment EventItem_event on Event {
     id
     title
-    adminUrl
     reviewStatus
     deletedAt
     projects {
@@ -64,7 +61,7 @@ const VIEWER_FRAGMENT = graphql`
   }
 `
 
-const EventItem: React.FC<Props> = ({ event: eventFragment, affiliations, viewer: viewerFragment }) => {
+const EventItem: React.FC<Props> = ({ event: eventFragment, viewer: viewerFragment }) => {
   const event = useFragment(FRAGMENT, eventFragment)
   const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
   const { isAdmin, isAdminOrganization } = viewer
@@ -74,6 +71,8 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, affiliations, viewer
   const canDelete = viewerBelongsToAnOrganization
     ? viewer?.isAdminOrganization || viewer.id === event.creator?.id
     : true
+
+  const url = `/admin-next/event?id=${event.id}`
 
   return (
     <>
@@ -88,12 +87,12 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, affiliations, viewer
           )
         ) : event.title && event.title?.split('').length > 128 ? (
           <Tooltip label={event.title}>
-            <Link truncate={128} href={event.adminUrl}>
+            <Link truncate={128} href={url}>
               {event.title}
             </Link>
           </Tooltip>
         ) : (
-          <Link truncate={128} href={event.adminUrl}>
+          <Link truncate={128} href={url}>
             {event.title}
           </Link>
         )}
@@ -176,9 +175,7 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, affiliations, viewer
               }}
             />
           )}
-          {event.deletedAt === null && canDelete && (
-            <EventModalConfirmationDelete event={event} affiliations={affiliations} />
-          )}
+          {event.deletedAt === null && canDelete && <EventModalConfirmationDeleteQuery event={event} />}
         </Flex>
       </Table.Td>
     </>
