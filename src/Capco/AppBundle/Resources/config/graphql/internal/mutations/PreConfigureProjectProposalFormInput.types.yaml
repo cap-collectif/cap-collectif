@@ -4,3 +4,6 @@ PreConfigureProjectProposalFormInput:
         - InternalUpdateProposalForm
     config:
         description: 'ProposalForm input of PreConfigureProjectInput mutation'
+        fields:
+            notifications:
+                type: 'ProposalFormNotificationsInput'

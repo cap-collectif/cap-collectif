@@ -1,0 +1,10 @@
+ProposalFormNotificationsInput:
+    type: input-object
+    config:
+        fields:
+            onCreate:
+                type: 'Boolean!'
+            onUpdate:
+                type: 'Boolean!'
+            onDelete:
+                type: 'Boolean!'

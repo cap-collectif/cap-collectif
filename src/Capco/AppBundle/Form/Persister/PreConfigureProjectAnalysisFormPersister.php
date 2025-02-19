@@ -28,12 +28,13 @@ class PreConfigureProjectAnalysisFormPersister
         $analysisStep = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $input['analysisStepId']);
         $input['analysisStepId'] = GlobalId::toGlobalId('SelectionStep', $analysisStep->getId());
 
-        $selectionStep = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $input['moveToSelectionStepId']);
-        $input['moveToSelectionStepId'] = GlobalId::toGlobalId('SelectionStep', $selectionStep->getId());
-
-        $selectionStepStatuses = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $selectionStep, [$input['selectionStepStatusId']]);
-        if ($selectionStepStatuses) {
-            $input['selectionStepStatusId'] = $selectionStepStatuses[0]->getId();
+        if ($input['moveToSelectionStepId'] ?? null) {
+            $selectionStep = $this->abstractStepRepository->findOneByProjectAndStepLabel($project, $input['moveToSelectionStepId']);
+            $input['moveToSelectionStepId'] = GlobalId::toGlobalId('SelectionStep', $selectionStep->getId());
+            $selectionStepStatuses = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $selectionStep, [$input['selectionStepStatusId']]);
+            if ($selectionStepStatuses) {
+                $input['selectionStepStatusId'] = $selectionStepStatuses[0]->getId();
+            }
         }
 
         $unfavourableStatus = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $analysisStep, $input['unfavourableStatuses']);
@@ -42,9 +43,11 @@ class PreConfigureProjectAnalysisFormPersister
             $unfavourableStatus
         );
 
-        $favourableStatuses = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $analysisStep, [$input['favourableStatus']]);
-        if ($favourableStatuses) {
-            $input['favourableStatus'] = $favourableStatuses[0]->getId();
+        if ($input['favourableStatus'] ?? null) {
+            $favourableStatuses = $this->statusRepository->getByProjectAndStepAndStatusTitle($project, $analysisStep, [$input['favourableStatus']]);
+            if ($favourableStatuses) {
+                $input['favourableStatus'] = $favourableStatuses[0]->getId();
+            }
         }
 
         $this->configureAnalysisMutation->__invoke(new Argument(['input' => $input]), $viewer);

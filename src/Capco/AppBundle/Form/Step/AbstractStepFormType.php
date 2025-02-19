@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form\Step;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Requirement;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Form\RequirementType;
 use Capco\AppBundle\Form\Type\OrderedCollectionType;
 use Capco\AppBundle\Validator\Constraints\CheckboxRequirementHasLabel;
@@ -52,7 +53,7 @@ abstract class AbstractStepFormType extends AbstractType
                 'constraints' => [new CheckboxRequirementHasLabel()],
             ])
         ;
-        if ($builder->getData() instanceof ParticipativeStepInterface) {
+        if ($builder->getData() instanceof ParticipativeStepInterface || $builder->getData() instanceof OtherStep) {
             $builder->add('timeless');
         }
     }

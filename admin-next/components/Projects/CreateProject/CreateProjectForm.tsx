@@ -13,13 +13,16 @@ import { CreateProjectForm_viewer$key } from '@relay/CreateProjectForm_viewer.gr
 import { useNavBarContext } from '../../NavBar/NavBar.context'
 import { getParticipatoryBudgetInput } from './ConfigureParticipatoryBudgetInput'
 import { getParticipatoryBudgetAnalysisInput } from './ConfigureParticipatoryBudgetAnalysisInput'
+import { getPublicInquiryInput } from './ConfigurePublicInquiryInput'
 import PreConfigureProjectMutation from '@mutations/PreConfigureProjectMutation'
 import { CreateProjectMutation$data } from '@relay/CreateProjectMutation.graphql'
-import { PreConfigureProjectMutation$data } from '@relay/PreConfigureProjectMutation.graphql'
+import { PreConfigureProjectMutation$data, ProjectVisibility } from '@relay/PreConfigureProjectMutation.graphql'
 
 type ParticipatoryBudget = 'PARTICIPATORY_BUDGET'
 
 type ParticipatoryBudgetAnalysis = 'PARTICIPATORY_BUDGET_ANALYSIS'
+
+type PublicInquiry = 'PUBLIC_INQUIRY'
 
 type Props = {
   viewer: CreateProjectForm_viewer$key
@@ -33,7 +36,7 @@ type Mutation$data = CreateProjectMutation$data | PreConfigureProjectMutation$da
 type FormValues = {
   title: string
   authors: Array<{ label: string; value: string }>
-  model: ParticipatoryBudget | ParticipatoryBudgetAnalysis | null
+  model: ParticipatoryBudget | ParticipatoryBudgetAnalysis | PublicInquiry | null
 }
 
 const VIEWER_FRAGMENT = graphql`
@@ -43,6 +46,7 @@ const VIEWER_FRAGMENT = graphql`
     username
     isOnlyProjectAdmin
     isAdmin
+    isSuperAdmin
     organizations {
       __typename
       id
@@ -59,7 +63,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
 
   const inputTitleRef = useRef<HTMLInputElement | null>(null)
 
-  const { isOnlyProjectAdmin } = viewer
+  const { isOnlyProjectAdmin, isAdmin, isSuperAdmin } = viewer
   const organization = viewer?.organizations?.[0]
   const owner = organization ?? viewer
 
@@ -71,6 +75,10 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
     {
       value: 'PARTICIPATORY_BUDGET_ANALYSIS',
       label: intl.formatMessage({ id: 'project.types.participatoryBudgetingAnalysis' }),
+    },
+    {
+      value: 'PUBLIC_INQUIRY',
+      label: intl.formatMessage({ id: 'project.types.publicInquiry' }),
     },
     {
       value: 'NONE',
@@ -155,6 +163,20 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
 
           response = await PreConfigureProjectMutation.commit({
             input: participatoryBudgetAnalysisInput,
+          })
+          project = response.preConfigureProject?.project
+          break
+        case 'PUBLIC_INQUIRY':
+          const publicInquiryInput = getPublicInquiryInput({
+            projectTitle: title,
+            authors,
+            intl,
+            isNewBackOfficeEnabled,
+            visibility: isAdmin || isSuperAdmin ? ('ADMIN' as ProjectVisibility) : ('ME' as ProjectVisibility),
+          })
+
+          response = await PreConfigureProjectMutation.commit({
+            input: publicInquiryInput,
           })
           project = response.preConfigureProject?.project
           break

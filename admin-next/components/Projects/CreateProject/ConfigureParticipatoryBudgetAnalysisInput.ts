@@ -2,7 +2,7 @@ import moment from 'moment'
 import type { PreConfigureProjectInput } from '@relay/PreConfigureProjectMutation.graphql'
 import { IntlShape } from 'react-intl'
 
-const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss'
+export const DATE_FORMAT = 'YYYY-MM-DD HH:mm:ss'
 const stepsDates = {
   collectStep: {
     startAt: () => moment().format(DATE_FORMAT),

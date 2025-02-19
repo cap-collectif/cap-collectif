@@ -10969,6 +10969,7 @@ input PreConfigureProjectProposalFormInput {
 
   """Can proposal contain linkedin url"""
   usingLinkedIn: Boolean! = false
+  notifications: ProposalFormNotificationsInput
   clientMutationId: String
 }
 
@@ -12691,6 +12692,12 @@ type ProposalFormEdge {
 
   """A cursor for use in pagination."""
   cursor: String!
+}
+
+input ProposalFormNotificationsInput {
+  onCreate: Boolean!
+  onUpdate: Boolean!
+  onDelete: Boolean!
 }
 
 """Value of a proposal sorting"""
