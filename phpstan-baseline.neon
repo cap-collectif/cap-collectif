@@ -4586,12 +4586,82 @@ parameters:
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:findMail\\(\\) has parameter \\$negation with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:findMail\\(\\) has parameter \\$type with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:findMail\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:getCurrentMessage\\(\\) never returns null so it can be removed from the return type\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:getCurrentMessage\\(\\) should return Capco\\\\AppBundle\\\\Behat\\\\Message\\|null but returns Alex\\\\MailCatcher\\\\Message\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:notSeeMailSubject\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:notSeeMailSubject\\(\\) has parameter \\$value with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubject\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubject\\(\\) has parameter \\$subject with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has parameter \\$from with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has parameter \\$subject with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has parameter \\$to with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailTo\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailTo\\(\\) has parameter \\$to with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:seeInMail\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:seeInMail\\(\\) has parameter \\$text with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
@@ -4611,7 +4681,7 @@ parameters:
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
-			message: "#^Parameter \\$message of method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:getCrawler\\(\\) has invalid type Capco\\\\AppBundle\\\\Behat\\\\Message\\.$#"
+			message: "#^Using nullsafe method call on non\\-nullable type Alex\\\\MailCatcher\\\\Client\\. Use \\-\\> instead\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
@@ -35296,16 +35366,6 @@ parameters:
 			path: src/Capco/AppBundle/Notifier/EventNotifier.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\FOSNotifier\\:\\:sendConfirmationEmailMessage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/FOSNotifier.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\FOSNotifier\\:\\:sendResettingEmailMessage\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Notifier/FOSNotifier.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Notifier\\\\FollowerNotifier\\:\\:onReportActivities\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Notifier/FollowerNotifier.php
@@ -40951,6 +41011,11 @@ parameters:
 			path: src/Capco/AppBundle/Search/AnalyticsSearch.php
 
 		-
+			message: "#^Parameter \\#2 \\$terms of class Elastica\\\\Query\\\\Terms constructor expects list\\<bool\\|float\\|int\\|string\\>, array given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Search/AnalyticsSearch.php
+
+		-
 			message: "#^Parameter \\#2 \\.\\.\\.\\$var_names of function compact expects array\\|string, DateTimeInterface given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Search/AnalyticsSearch.php
@@ -41042,6 +41107,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$seed of method Capco\\\\AppBundle\\\\Search\\\\Search\\:\\:getRandomSortedQuery\\(\\) expects int\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Search/ContributionSearch.php
+
+		-
+			message: "#^Parameter \\#2 \\$terms of class Elastica\\\\Query\\\\Terms constructor expects list\\<bool\\|float\\|int\\|string\\>, array given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Search/ContributionSearch.php
 
@@ -41482,6 +41552,11 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$callback of function usort expects callable\\(mixed, mixed\\)\\: int, Closure\\(mixed, mixed\\)\\: bool given\\.$#"
+			count: 2
+			path: src/Capco/AppBundle/Search/Search.php
+
+		-
+			message: "#^Parameter \\#2 \\$terms of class Elastica\\\\Query\\\\Terms constructor expects list\\<bool\\|float\\|int\\|string\\>, array given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Search/Search.php
 
@@ -43074,11 +43149,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\Arr\\:\\:path\\(\\) has parameter \\$path with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Utils/Arr.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Utils\\\\Canonicalizer\\:\\:canonicalize\\(\\) should return string but returns null\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Utils/Canonicalizer.php
 
 		-
 			message: "#^Parameter \\#2 \\$encodings of function mb_detect_encoding expects array\\|string\\|null, array\\<int, string\\>\\|bool given\\.$#"

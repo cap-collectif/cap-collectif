@@ -98,7 +98,7 @@
         "version": "2.16.2"
     },
     "friendsofsymfony/user-bundle": {
-        "version": "v3.0.0"
+        "version": "v3.4.0"
     },
     "google/recaptcha": {
         "version": "1.2",
@@ -454,7 +454,7 @@
         ]
     },
     "stof/doctrine-extensions-bundle": {
-        "version": "1.6",
+        "version": "1.7",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
