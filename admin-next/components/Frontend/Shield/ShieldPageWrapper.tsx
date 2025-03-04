@@ -8,6 +8,7 @@ import { PrivacyPolicyComponent } from '@shared/register/RegistrationForm'
 import { useIntl } from 'react-intl'
 import CookieModal from '@components/Frontend/Cookies/CookieModal'
 import CookieManager from '@components/Frontend/Cookies/CookieManager'
+import { ChartModalQuery } from '@shared/register/ChartModal'
 
 type Props = {
   SSRData: layoutQuery$data
@@ -38,6 +39,7 @@ export const ShieldPageWrapper: React.FC<Props> = ({ SSRData }) => {
             <React.Suspense fallback={<Spinner m="auto" />}>
               <ShieldPage />
               <PrivacyModalQuery />
+              <ChartModalQuery />
             </React.Suspense>
           </Box>
           <Flex

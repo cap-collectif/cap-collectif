@@ -57,15 +57,17 @@ export const ChartLinkComponent = ({ cguName }: { cguName?: string }) => {
 export const PrivacyPolicyComponent = ({
   privacyPolicyRequired,
   privacyOnly,
+  helpText,
 }: {
   privacyPolicyRequired?: boolean
   privacyOnly?: boolean
+  helpText?: string
 }) => {
   const intl = useIntl()
   if (!privacyPolicyRequired) return null
   return (
     <Box as="span" display="inline-flex" alignItems="center">
-      {!privacyOnly ? <>{intl.formatMessage({ id: 'and-the' })}&nbsp;</> : null}
+      {!privacyOnly ? <>{intl.formatMessage({ id: 'and-the' })}&nbsp;</> : helpText ? <>{helpText}&nbsp;</> : null}
       <Box
         as="button"
         type="button"
@@ -94,6 +96,12 @@ const FRAGMENT = graphql`
     userTypes {
       value: id
       label: name
+    }
+    chart: siteParameter(keyname: "charter.body") {
+      value
+    }
+    privacy: siteParameter(keyname: "privacy-policy") {
+      value
     }
   }
 `
@@ -126,6 +134,9 @@ export const RegistrationForm = ({ query: queryFragment }: Props) => {
   } = useFormContext()
 
   const disableEmail = !!watch('invitationToken')
+
+  const hasChart = !!query.chart?.value
+  const hasPrivacy = !!query?.privacy?.value
 
   return (
     <>
@@ -222,25 +233,33 @@ export const RegistrationForm = ({ query: queryFragment }: Props) => {
         </FormControl>
       ) : null}
       <Responses questions={query.registrationForm} />
-      <FormControl name="charte" control={control} isRequired mb={2}>
-        <FieldInput
-          id="charte"
-          type="checkbox"
-          control={control}
-          name="charte"
-          variantSize={CapInputSize.Md}
-          rules={{ required: intl.formatMessage({ id: 'registration.constraints.charte.check' }) }}
-        >
-          <Box
-            color="neutral-gray.900"
-            as="span"
-            sx={{ button: { textDecoration: 'underline', ml: 0 }, fontWeight: 400 }}
+      {hasChart || hasPrivacy ? (
+        <FormControl name="charte" control={control} isRequired mb={2}>
+          <FieldInput
+            id="charte"
+            type="checkbox"
+            control={control}
+            name="charte"
+            variantSize={CapInputSize.Md}
+            rules={{ required: intl.formatMessage({ id: 'registration.constraints.charte.check' }) }}
           >
-            <ChartLinkComponent />
-            <PrivacyPolicyComponent privacyPolicyRequired={privacyPolicyRequired} />
-          </Box>
-        </FieldInput>
-      </FormControl>
+            <Box
+              color="neutral-gray.900"
+              as="span"
+              sx={{ button: { textDecoration: 'underline', ml: 0 }, fontWeight: 400 }}
+            >
+              {hasChart ? <ChartLinkComponent /> : null}
+              {hasPrivacy ? (
+                <PrivacyPolicyComponent
+                  privacyPolicyRequired={privacyPolicyRequired}
+                  privacyOnly={!hasChart}
+                  helpText={intl.formatMessage({ id: 'global.accept' })}
+                />
+              ) : null}
+            </Box>
+          </FieldInput>
+        </FormControl>
+      ) : null}
       {addConsentInternalCommunicationField ? (
         <FormControl name="consentInternalCommunication" control={control} mb={2} sx={{ label: { fontWeight: 400 } }}>
           <FieldInput

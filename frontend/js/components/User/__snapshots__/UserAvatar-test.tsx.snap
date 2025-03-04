@@ -2,7 +2,7 @@
 
 exports[`<UserAvatar /> renders correctly 1`] = `
 <span
-  className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv mr-10"
+  className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz mr-10"
   hasBadge={false}
 >
   <div
@@ -26,7 +26,7 @@ exports[`<UserAvatar /> renders correctly 1`] = `
 
 exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
 <span
-  className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+  className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
   hasBadge={false}
 >
   <div
@@ -40,7 +40,7 @@ exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
 
 exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
 <span
-  className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv"
+  className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
   hasBadge={false}
 >
   <div
@@ -54,7 +54,7 @@ exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
 
 exports[`<UserAvatar /> renders correctly with default avatar needed 1`] = `
 <span
-  className="UserAvatar__UserAvatarContainer-jxoNlw kVUpxv mr-10"
+  className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz mr-10"
   hasBadge={false}
 >
   <div

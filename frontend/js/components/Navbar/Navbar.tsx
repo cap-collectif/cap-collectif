@@ -10,7 +10,7 @@ import NavBarQuery from '@shared/navbar/NavBarQuery'
 import NavbarRight from '~/components/Navbar/NavbarRight'
 import NavBarMenu from '@shared/navbar/menu/NavBarMenu'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
-import ChartModal from '@shared/register/ChartModal'
+import { ChartModalQuery } from '@shared/register/ChartModal'
 import PrivacyModal from '@shared/register/PrivacyModal'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 
@@ -71,7 +71,7 @@ export const Navbar = ({
       ) : null}
       <React.Suspense fallback={null}>
         <React.Suspense fallback={null}>
-          <ChartModal />
+          <ChartModalQuery />
           <PrivacyModal />
         </React.Suspense>
         <NavBarQuery>

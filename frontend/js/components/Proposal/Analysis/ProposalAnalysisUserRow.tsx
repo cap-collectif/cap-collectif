@@ -74,7 +74,6 @@ const Row = styled.div<{
     img {
       width: 32px;
       height: 32px;
-      margin-right: 5px;
       border-radius: 20px;
       border: 1px solid;
     }
@@ -157,7 +156,7 @@ export const ProposalAnalysisUserRow = ({ user, status, canEdit, canConsult, dis
       {decidor && <Decidor>&#9733;</Decidor>}
       <Row disabled={canEdit && disabled} decidor={decidor || false}>
         <div>
-          <UserAvatar size="md" className="pull-left" user={user} />
+          <UserAvatar size="md" user={user} />
           <div>{user.displayName}</div>
           <Label color={labelData.color} fontSize={8} className="label-container">
             <Icon name={labelData.icon} size={8} color={colors.white} />

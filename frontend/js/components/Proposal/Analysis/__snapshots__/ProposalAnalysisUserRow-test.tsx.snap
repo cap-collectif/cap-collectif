@@ -8,7 +8,6 @@ exports[`<ProposalAnalysisUserRow /> renders correctly 1`] = `
   >
     <div>
       <Connect(UserAvatar)
-        className="pull-left"
         size="md"
         user={
           Object {

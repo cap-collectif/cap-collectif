@@ -2,11 +2,12 @@ import React, { FC } from 'react'
 import styled, { css } from 'styled-components'
 import { connect } from 'react-redux'
 import { graphql, useFragment } from 'react-relay'
-import { CapUIIcon, CapUIIconSize, Icon, Avatar, AvatarProps } from '@cap-collectif/ui'
+import { Avatar, AvatarProps } from '@cap-collectif/ui'
 import type { State } from '~/types'
 import type { UserAvatar_user$data, UserAvatar_user$key } from '~relay/UserAvatar_user.graphql'
 import { Circle } from '~ui/Medias/AvatarBadge/AvatarBadge.style'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import Icon from '@shared/ui/LegacyIcons/Icon'
 
 export type Badge = {
   color: string
@@ -32,9 +33,8 @@ type Props = Omit<AvatarProps, 'name'> & {
   role?: string
 }
 
-const commonStyleAvatar = hasBadge => css`
+const commonStyleAvatar = () => css`
   position: relative;
-  margin-right: ${hasBadge ? '5px' : 'initial'};
 
   .circle {
     display: flex;
@@ -52,12 +52,12 @@ const UserAvatarLink = styled.a<{
   text-decoration: none !important;
   vertical-align: text-bottom;
   display: inline-block;
-  ${props => commonStyleAvatar(props.hasBadge)}
+  ${() => commonStyleAvatar()}
 `
 const UserAvatarContainer = styled.span<{
   hasBadge: boolean
 }>`
-  ${props => commonStyleAvatar(props.hasBadge)}
+  ${() => commonStyleAvatar()}
 `
 
 const FRAGMENT = graphql`
@@ -108,8 +108,8 @@ export const UserAvatarRender = connect(mapStateToProps)(
       return (
         <Circle color={badge.color} size={badge.size}>
           <Icon
-            name={badge.icon as CapUIIcon}
-            size={badge.iconSize as unknown as CapUIIconSize}
+            name={badge.icon}
+            size={badge.iconSize}
             color={badge.iconColor}
           />
         </Circle>
