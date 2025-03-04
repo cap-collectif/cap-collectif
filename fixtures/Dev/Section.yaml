@@ -117,3 +117,10 @@ Capco\AppBundle\Entity\Section\Section:
         enabled: false
         associatedFeatures: []
         isLegendEnabledOnImage: true
+    SectionCarrouselHighlighted:
+        id: 'sectionCarrouselHighlighted'
+        type: 'carrouselHighlighted'
+        position: 16
+        nbObjects: 8
+        enabled: false
+        associatedFeatures: []

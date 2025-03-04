@@ -20,6 +20,14 @@ Object {
         Object {
           "node": Object {
             "authors": Array [],
+            "owner": Object {
+              "username": "lbrunet",
+            },
+          },
+        },
+        Object {
+          "node": Object {
+            "authors": Array [],
             "owner": null,
           },
         },
@@ -481,7 +489,7 @@ Object {
           },
         },
       ],
-      "totalCount": 48,
+      "totalCount": 49,
     },
   },
 }
@@ -874,8 +882,14 @@ Object {
             "title": "BP avec archivage des propositions",
           },
         },
+        Object {
+          "node": Object {
+            "publishedAt": "2023-07-01 12:00:00",
+            "title": "BP avec étape personalisée ouverte",
+          },
+        },
       ],
-      "totalCount": 48,
+      "totalCount": 49,
     },
   },
 }

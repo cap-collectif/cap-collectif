@@ -1,10 +1,11 @@
-import { FC, useState } from 'react'
+import { FC, useCallback, useState } from 'react'
 import {
   Box,
   Button,
   ButtonQuickAction,
   CapUIIcon,
   Flex,
+  FormGuideline,
   FormLabel,
   Icon,
   Text,
@@ -15,9 +16,21 @@ import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UPLOAD_PATH } from '@utils/config'
 import CarrouselSelects from './CarrouselSelects'
-import { getCardLabel, MAX_DESC_LENGTH, MAX_LABEL_LENGTH, MAX_TITLE_LENGTH } from './Carrousel.utils'
+import {
+  getCardLabel,
+  MAX_DESC_LENGTH,
+  MAX_HIGHLIGHTED_DESC_LENGTH,
+  MAX_HIGHLIGHTED_TITLE_LENGTH,
+  MAX_LABEL_LENGTH,
+  MAX_TITLE_LENGTH,
+  SectionType,
+} from './Carrousel.utils'
 
-export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void }> = ({ fieldBaseName, onDelete }) => {
+export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; type: SectionType }> = ({
+  fieldBaseName,
+  onDelete,
+  type: sectionType,
+}) => {
   const intl = useIntl()
   const { watch, control } = useFormContext()
   const { title, description, type, image, isDisplayed, id, defaultIsOpen } = watch(fieldBaseName)
@@ -30,6 +43,15 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void }> 
   const linkKey = `${fieldBaseName}.redirectLink`
   const isDisplayedKey = `${fieldBaseName}.isDisplayed`
 
+  // TODO: Update DS Select to get ref for focus
+  const focusInputRef = useCallback(node => {
+    setTimeout(() => {
+      if (node) {
+        node.querySelector('.cap-async-select__input')?.focus()
+      }
+    }, 10)
+  }, [])
+
   if (isOpen)
     return (
       <Flex
@@ -40,14 +62,16 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void }> 
         justifyContent="space-between"
         alignItems="start"
         spacing={4}
+        ref={focusInputRef}
       >
         <Box width="100%">
-          <CarrouselSelects fieldBaseName={fieldBaseName} />
+          <CarrouselSelects fieldBaseName={fieldBaseName} sectionType={sectionType} />
           <Flex spacing={6} alignItems="start" width="100%">
-            <Flex direction="column" width="100%">
-              <FormControl name={titleKey} control={control} isRequired={isDisplayed}>
+            <Flex direction="column" width={sectionType === 'carrouselHighlighted' ? '70%' : '100%'}>
+              <FormControl name={titleKey} control={control} isRequired={isDisplayed} autoFocus={false}>
                 <FormLabel htmlFor={titleKey} label={intl.formatMessage({ id: 'global.title' })} />
                 <FieldInput
+                  autoFocus={false}
                   id={titleKey}
                   name={titleKey}
                   control={control}
@@ -55,7 +79,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void }> 
                   placeholder={intl.formatMessage({
                     id: 'carrousel.placeholder.title',
                   })}
-                  maxLength={MAX_TITLE_LENGTH}
+                  maxLength={sectionType === 'carrousel' ? MAX_TITLE_LENGTH : MAX_HIGHLIGHTED_TITLE_LENGTH}
                 />
               </FormControl>
               <FormControl name={descKey} control={control}>
@@ -66,11 +90,11 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void }> 
                   id={descKey}
                   name={descKey}
                   control={control}
-                  type="text"
+                  type={sectionType === 'carrousel' ? 'text' : 'textarea'}
                   placeholder={intl.formatMessage({
                     id: 'carrousel.placeholder.description',
                   })}
-                  maxLength={MAX_DESC_LENGTH}
+                  maxLength={sectionType === 'carrousel' ? MAX_DESC_LENGTH : MAX_HIGHLIGHTED_DESC_LENGTH}
                 />
               </FormControl>
               {type === 'CUSTOM' ? (
@@ -126,7 +150,23 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void }> 
               </Flex>
             </Flex>
             <FormControl name={imageKey} control={control} width="auto" key={image?.id}>
-              <FormLabel htmlFor={imageKey} label={intl.formatMessage({ id: 'illustration' })} />
+              <FormLabel
+                htmlFor={imageKey}
+                label={intl.formatMessage({ id: sectionType === 'carrousel' ? 'illustration' : 'image.header' })}
+              >
+                {sectionType === 'carrouselHighlighted' ? (
+                  <Text fontSize={2} color="gray.500">
+                    {intl.formatMessage({ id: 'global.optional' })}
+                  </Text>
+                ) : null}
+              </FormLabel>
+              {sectionType === 'carrouselHighlighted' ? (
+                <FormGuideline>
+                  {intl.formatMessage({ id: 'supported.format.listed' }, { format: 'jpg, png' })}{' '}
+                  {intl.formatMessage({ id: 'specific-max-weight' }, { weight: '1mo' })}
+                  {intl.formatMessage({ id: 'specific-ratio' }, { ratio: '4:3' })}
+                </FormGuideline>
+              ) : null}
               <FieldInput
                 id={imageKey}
                 name={imageKey}

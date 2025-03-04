@@ -1,0 +1,12 @@
+ExtraDataInput:
+    type: input-object
+    config:
+        fields:
+            id:
+                type: 'ID'
+            startAt:
+                type: 'String'
+                description: 'When the carrouselElement start.'
+            endAt:
+                type: 'String'
+                description: 'When the carrouselElement end.'

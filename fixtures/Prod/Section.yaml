@@ -75,6 +75,12 @@ Capco\AppBundle\Entity\Section\Section:
         nbObjects: null
         enabled: false
         associatedFeatures: []
+    SectionCarrouselHighlighted:
+        type: 'carrouselHighlighted'
+        position: 2
+        nbObjects: null
+        enabled: false
+        associatedFeatures: []
 #    SectionCarrousel:
 #        type: carrousel
 #        position: 13

@@ -289,3 +289,7 @@ InternalProject:
             createdAt:
                 type: 'DateTime!'
                 description: 'Identifies the date and time when the object was created.'
+            status:
+                type: 'ProjectStatus!'
+                description: 'The project status.'
+                resolve: '@=value.getCurrentStepState()'

@@ -211,3 +211,15 @@ Capco\AppBundle\Entity\Section\SectionTranslation:
         title: Carrousel
         teaser: null
         body: null
+    SectionCarrouselHighlightedFr:
+        locale: fr-FR
+        translatable: '@SectionCarrouselHighlighted'
+        title: A la une
+        teaser: null
+        body: null
+    SectionCarrouselHighlightedEn:
+        locale: en-GB
+        translatable: '@SectionCarrouselHighlighted'
+        title: Highlighted
+        teaser: null
+        body: null

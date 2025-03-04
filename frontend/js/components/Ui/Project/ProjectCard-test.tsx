@@ -27,6 +27,7 @@ describe('<ProjectCard />', () => {
     isExternal: false,
     externalLink: null,
     url: 'http://capco/project1',
+    status: 'OPENED_PARTICIPATION',
     steps: [
       {
         state: 'CLOSED',

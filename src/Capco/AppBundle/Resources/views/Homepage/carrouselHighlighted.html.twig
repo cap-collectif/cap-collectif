@@ -1,0 +1,4 @@
+{% set locale = app.request.locale %}
+ <section id="whats-new" class="section--custom">
+    {{ react_render_component('CarrouselApp', { 'props': { type: "carrouselHighlighted" }}) }}
+</section>

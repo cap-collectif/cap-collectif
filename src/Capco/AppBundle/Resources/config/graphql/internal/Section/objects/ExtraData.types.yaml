@@ -1,0 +1,20 @@
+ExtraData:
+    type: object
+    inherits:
+        - Node
+    config:
+        interfaces:
+            - Node
+        description: 'Extra data'
+        fields:
+            id:
+                description: 'The ID of an object.'
+                builder: 'Relay::GlobalId'
+                builderConfig:
+                    typeName: ExtraData
+            startAt:
+                type: 'String'
+                description: 'When the carrouselElement start.'
+            endAt:
+                type: 'String'
+                description: 'When the carrouselElement end.'

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Repository\SectionRepository;
+use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
 class CarrouselConfigurationResolver implements QueryInterface
@@ -11,8 +12,8 @@ class CarrouselConfigurationResolver implements QueryInterface
     {
     }
 
-    public function __invoke(): ?object
+    public function __invoke(Argument $argument): ?object
     {
-        return $this->sectionRepository->findOneBy(['type' => 'carrousel']);
+        return $this->sectionRepository->findOneBy(['type' => $argument->offsetGet('type')]);
     }
 }

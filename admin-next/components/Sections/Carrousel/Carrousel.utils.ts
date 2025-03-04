@@ -6,6 +6,7 @@ export type FormValues = {
   enabled: boolean
   isLegendEnabledOnImage: boolean
   preventReSubmit?: boolean
+  title?: string
   carrouselElements: Array<{
     id?: string
     title: string
@@ -16,6 +17,7 @@ export type FormValues = {
     type: CarrouselElementType
     isDisplayed: boolean
     defaultIsOpen?: boolean
+    extraData?: { startAt: string; endAt?: string }
   }>
 }
 
@@ -30,12 +32,17 @@ export type PrefillEntity = {
   readonly value: string
 }
 
-export const isValid = (value: FormValues) => {
+export type SectionType = 'carrousel' | 'carrouselHighlighted'
+
+export const isValid = (value: FormValues, type: SectionType) => {
+  if (type === 'carrouselHighlighted' && (!value.title || value.title?.length > 11)) return false
   if (value.preventReSubmit || !value.position || !Number.isInteger(value.position) || value.position < 1) return false
   if (
     value.carrouselElements.every(element => {
       return (
-        element.title && ((element.buttonLabel && element.redirectLink) || element.type !== 'CUSTOM') && element.image
+        element.title &&
+        ((element.buttonLabel && element.redirectLink) || element.type !== 'CUSTOM') &&
+        (element.image || type === 'carrouselHighlighted')
       )
     })
   )
@@ -91,5 +98,7 @@ export const getInitialValues = (
 }
 
 export const MAX_TITLE_LENGTH = 50
+export const MAX_HIGHLIGHTED_TITLE_LENGTH = 55
 export const MAX_DESC_LENGTH = 165
+export const MAX_HIGHLIGHTED_DESC_LENGTH = 220
 export const MAX_LABEL_LENGTH = 20

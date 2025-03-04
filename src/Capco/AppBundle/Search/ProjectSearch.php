@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Enum\ProjectAffiliation;
+use Capco\AppBundle\Enum\ProjectStatus;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
@@ -90,6 +91,13 @@ class ProjectSearch extends Search
 
                 continue;
             }
+
+            if ('projectStatus' === $key && $value === (string) ProjectStatus::OPENED) {
+                $boolQuery->addFilter(new Query\Terms($key, [$value, (string) ProjectStatus::OPENED_PARTICIPATION]));
+
+                continue;
+            }
+
             if (null !== $value) {
                 $boolQuery->addFilter(new Term([$key => ['value' => $value]]));
             }

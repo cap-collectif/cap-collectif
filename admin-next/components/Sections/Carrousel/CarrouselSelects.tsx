@@ -6,7 +6,15 @@ import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
 import { environment } from '@utils/relay-environement'
 import { graphql } from 'react-relay'
 import { CarrouselSelectsQuery$data, CarrouselSelectsQuery } from '@relay/CarrouselSelectsQuery.graphql'
-import { getSelectLabel, MAX_DESC_LENGTH, MAX_TITLE_LENGTH, PrefillEntity } from './Carrousel.utils'
+import {
+  getSelectLabel,
+  MAX_DESC_LENGTH,
+  MAX_HIGHLIGHTED_DESC_LENGTH,
+  MAX_HIGHLIGHTED_TITLE_LENGTH,
+  MAX_TITLE_LENGTH,
+  PrefillEntity,
+  SectionType,
+} from './Carrousel.utils'
 import stripHTML from '@shared/utils/stripHTML'
 import { CarrouselElementType } from '@relay/SectionIdCarrouselQuery.graphql'
 
@@ -47,6 +55,10 @@ const QUERY = graphql`
             id
             type: contentType
             url(format: "reference")
+          }
+          extraData: timeRange {
+            startAt
+            endAt
           }
         }
       }
@@ -97,7 +109,10 @@ const formatData = (data: CarrouselSelectsQuery$data, type: CarrouselElementType
   return []
 }
 
-export const CarrouselSelects: FC<{ fieldBaseName: string }> = ({ fieldBaseName }) => {
+export const CarrouselSelects: FC<{ fieldBaseName: string; sectionType: SectionType }> = ({
+  fieldBaseName,
+  sectionType,
+}) => {
   const intl = useIntl()
   const { watch, setValue } = useFormContext()
   const { type } = watch(fieldBaseName)
@@ -126,6 +141,7 @@ export const CarrouselSelects: FC<{ fieldBaseName: string }> = ({ fieldBaseName 
     <Box mb={4}>
       <FormLabel label={intl.formatMessage({ id: label })} mb={1} />
       <AsyncSelect
+        autoFocus
         placeholder={intl.formatMessage({ id: 'section.search_title' })}
         loadOptions={loadOptions}
         defaultOptions
@@ -134,10 +150,20 @@ export const CarrouselSelects: FC<{ fieldBaseName: string }> = ({ fieldBaseName 
         isClearable
         onChange={value => {
           if (value) {
-            setValue(`${fieldBaseName}.title`, value.label?.slice(0, MAX_TITLE_LENGTH))
-            setValue(`${fieldBaseName}.description`, stripHTML(value.description)?.slice(0, MAX_DESC_LENGTH))
+            setValue(
+              `${fieldBaseName}.title`,
+              value.label?.slice(0, sectionType === 'carrousel' ? MAX_TITLE_LENGTH : MAX_HIGHLIGHTED_TITLE_LENGTH),
+            )
+            setValue(
+              `${fieldBaseName}.description`,
+              stripHTML(value.description)?.slice(
+                0,
+                sectionType === 'carrousel' ? MAX_DESC_LENGTH : MAX_HIGHLIGHTED_DESC_LENGTH,
+              ),
+            )
             setValue(`${fieldBaseName}.redirectLink`, value.url)
             setValue(`${fieldBaseName}.image`, value.media)
+            setValue(`${fieldBaseName}.extraData`, type === 'EVENT' ? value.extraData : undefined)
           }
         }}
       />

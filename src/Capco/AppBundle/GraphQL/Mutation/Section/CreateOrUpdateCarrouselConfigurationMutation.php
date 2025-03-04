@@ -24,8 +24,12 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
     final public const INVALID_FORM = 'INVALID_FORM';
     final public const MAX_CARROUSEL_ITEMS = 8;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SectionRepository $sectionRepository, private readonly FormFactoryInterface $formFactory, private readonly GlobalIdResolver $globalIdResolver)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly SectionRepository $sectionRepository,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GlobalIdResolver $globalIdResolver
+    ) {
     }
 
     /**
@@ -34,11 +38,11 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
     public function __invoke(Argument $args): array
     {
         $this->formatInput($args);
+        $arguments = $args->getArrayCopy();
         /**
          * @var Section $sectionCarrousel
          */
-        $sectionCarrousel = $this->sectionRepository->findOneBy(['type' => 'carrousel']);
-        $arguments = $args->getArrayCopy();
+        $sectionCarrousel = $this->sectionRepository->findOneBy(['type' => $arguments['type']]);
 
         $sectionCarrouselElementToCreate = $this->createOrUpdateHomePageCarrouselSectionConfiguration($arguments);
         if ($sectionCarrousel->getSectionCarrouselElements()->count() + \count($sectionCarrouselElementToCreate) > self::MAX_CARROUSEL_ITEMS) {
@@ -48,7 +52,7 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
             ];
         }
 
-        unset($arguments['carrouselElements']);
+        unset($arguments['carrouselElements'], $arguments['type']);
 
         $form = $this->formFactory->create(SectionType::class, $sectionCarrousel);
         $form->submit($arguments, false);
@@ -143,6 +147,8 @@ class CreateOrUpdateCarrouselConfigurationMutation implements MutationInterface
         SectionCarrouselElement $sectionCarrouselElementToUpdate
     ): void {
         if (empty($carrouselElementData['image'])) {
+            $sectionCarrouselElementToUpdate->setImage(null);
+
             return;
         }
 

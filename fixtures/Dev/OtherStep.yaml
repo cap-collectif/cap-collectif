@@ -35,3 +35,11 @@ Capco\AppBundle\Entity\Steps\OtherStep:
         endAt: null
         #TODO Fix Fixture Body without segFaulting on M1 configuration
         body: 'Insert Long Text here'
+    ostep4:
+        id: ostep4
+        title: Etape personnalisée ouverte
+        label: Etape personnalisée ouverte
+        isEnabled: true
+        startAt: <(new \DateTime('2024-08-20'))>
+        endAt: <(new \DateTime('9999-11-20'))>
+        body: 'Insert Long Text here'

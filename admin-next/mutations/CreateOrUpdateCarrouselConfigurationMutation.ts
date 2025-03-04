@@ -13,6 +13,7 @@ const mutation = graphql`
     createOrUpdateCarrouselConfiguration(input: $input) {
       errorCode
       carrouselConfiguration {
+        title
         position
         enabled
         isLegendEnabledOnImage
@@ -31,6 +32,10 @@ const mutation = graphql`
                 id
                 url(format: "reference")
                 type: contentType
+              }
+              extraData {
+                startAt
+                endAt
               }
             }
           }

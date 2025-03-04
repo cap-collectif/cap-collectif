@@ -1,9 +1,13 @@
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Flex, FormLabel, Heading, Link } from '@cap-collectif/ui'
+import { FC } from 'react'
 import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
+import { SectionType } from './Carrousel.utils'
 
-export const CarrouselParameters = () => {
+export const SECTION_TITLE_MAX_LENGTH = 11
+
+export const CarrouselParameters: FC<{ type: SectionType }> = ({ type }) => {
   const intl = useIntl()
   const { control } = useFormContext()
   return (
@@ -26,6 +30,20 @@ export const CarrouselParameters = () => {
           {intl.formatMessage({ id: 'global-customization' })}
         </Heading>
         <div>
+          {type === 'carrouselHighlighted' ? (
+            <FormControl name="title" control={control} isRequired>
+              <FormLabel htmlFor="title" label={intl.formatMessage({ id: 'global.title' })} />
+              <FieldInput
+                name="title"
+                control={control}
+                type="text"
+                placeholder={intl.formatMessage({
+                  id: 'admin.label.highlighted',
+                })}
+                maxLength={SECTION_TITLE_MAX_LENGTH}
+              />
+            </FormControl>
+          ) : null}
           <FormControl name="position" control={control} isRequired>
             <FormLabel label={intl.formatMessage({ id: 'section-admin-display-order' })} />
             <FieldInput
@@ -40,26 +58,32 @@ export const CarrouselParameters = () => {
               }}
             />
           </FormControl>
-          <FormControl name="enabled" control={control} sx={{ label: { justifyContent: 'space-between' } }}>
+          <FormControl
+            name="enabled"
+            control={control}
+            sx={{ label: { justifyContent: type === 'carrousel' ? 'space-between' : 'left' } }}
+          >
             <FieldInput id="enabled" type="switch" name="enabled" control={control} direction="row-reverse">
               {intl.formatMessage({ id: 'section.activate' })}
             </FieldInput>
           </FormControl>
-          <FormControl
-            name="isLegendEnabledOnImage"
-            control={control}
-            sx={{ label: { justifyContent: 'space-between', span: { flex: '1' } } }}
-          >
-            <FieldInput
-              id="isLegendEnabledOnImage"
-              type="switch"
+          {type === 'carrousel' ? (
+            <FormControl
               name="isLegendEnabledOnImage"
               control={control}
-              direction="row-reverse"
+              sx={{ label: { justifyContent: 'space-between', span: { flex: '1' } } }}
             >
-              {intl.formatMessage({ id: 'section.display_legend_on_picture' })}
-            </FieldInput>
-          </FormControl>
+              <FieldInput
+                id="isLegendEnabledOnImage"
+                type="switch"
+                name="isLegendEnabledOnImage"
+                control={control}
+                direction="row-reverse"
+              >
+                {intl.formatMessage({ id: 'section.display_legend_on_picture' })}
+              </FieldInput>
+            </FormControl>
+          ) : null}
         </div>
       </Flex>
     </Flex>

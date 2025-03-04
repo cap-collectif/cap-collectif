@@ -36,3 +36,6 @@ SectionCarrouselElement:
             isDisplayed:
                 type: 'Boolean!'
                 description: 'A toggle indicating whether the carrousel element is visible to users.'
+            extraData:
+                type: 'ExtraData'
+                description: 'Additional data associated with the carrousel element.'

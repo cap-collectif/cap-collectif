@@ -4,7 +4,6 @@ import CustomProjectsListApp from './startup/CustomProjectsListApp'
 import NavbarApp from './startup/NavbarAppClient'
 import EmailNotConfirmedApp from './startup/EmailNotConfirmedAppClient'
 import ProjectTrashButtonApp from './startup/ProjectTrashButtonApp'
-import CarouselApp from './startup/CarouselApp'
 import MetricsApp from './startup/MetricsApp'
 import OpinionPageApp from './startup/OpinionPageApp'
 import CommentSectionApp from './startup/CommentSectionApp'
@@ -107,7 +106,6 @@ ReactOnRails.register({
   SectionPageApp,
   AccountProfileApp,
   ProjectTrashButtonApp,
-  CarouselApp,
   MetricsApp,
   AnalysisPageApp,
   OpinionPageApp,

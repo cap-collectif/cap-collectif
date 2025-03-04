@@ -29,7 +29,7 @@ class SectionCarrouselElement
     private Section $section;
 
     /**
-     * @ORM\Column(type="string", length=50)
+     * @ORM\Column(type="string", length=55)
      */
     private string $title;
 
@@ -39,23 +39,23 @@ class SectionCarrouselElement
     private int $position;
 
     /**
-     * @ORM\Column(type="string", length=165, nullable=true)
+     * @ORM\Column(type="string", length=220, nullable=true)
      */
     private ?string $description = null;
 
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(name="button_label", type="string", length=20)
      */
     private string $buttonLabel;
 
     /**
-     * @ORM\Column(type="string")
+     * @ORM\Column(name="redirect_link", type="string")
      * @Assert\Url()
      */
     private string $redirectLink;
 
     /**
-     * @ORM\Column(type="boolean")
+     * @ORM\Column(name="is_displayed", type="boolean")
      */
     private bool $isDisplayed = false;
 
@@ -69,6 +69,13 @@ class SectionCarrouselElement
      * @ORM\Column(type="string")
      */
     private string $type;
+
+    /**
+     * @var null|array<string, mixed>
+     *
+     * @ORM\Column(name="extra_data", type="json", nullable=true)
+     */
+    private ?array $extraData = null;
 
     public function getSection(): Section
     {
@@ -193,5 +200,23 @@ class SectionCarrouselElement
             self::TYPE_THEME,
             self::TYPE_CUSTOM,
         ];
+    }
+
+    /**
+     * @return null|array<string, mixed>
+     */
+    public function getExtraData(): ?array
+    {
+        return $this->extraData;
+    }
+
+    /**
+     * @param null|array<string, mixed> $extraData
+     */
+    public function setExtraData(?array $extraData): self
+    {
+        $this->extraData = $extraData;
+
+        return $this;
     }
 }

@@ -3,6 +3,9 @@ CreateOrUpdateCarrouselConfigurationInput:
     config:
         description: 'Input of createOrUpdateCarrouselConfiguration mutation'
         fields:
+            type:
+                type: 'String!'
+                description: 'Section type.'
             title:
                 type: 'String'
                 description: 'The title of the section.'

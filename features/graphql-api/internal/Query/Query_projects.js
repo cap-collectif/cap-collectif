@@ -13,6 +13,7 @@ const ProjectQuery = /* GraphQL */ `
                     id
                     title
                     archived
+                    status
                     __typename
                 }
                 cursor
@@ -48,10 +49,24 @@ describe('Internal|Query projects', () => {
     }, 'internal_admin')).resolves.toMatchSnapshot();
   });
 
+  it('fetches opened projects', async () => {
+    await expect(graphql(ProjectQuery, {
+      ...variables,
+      status: 1,
+    }, 'internal_admin')).resolves.toMatchSnapshot();
+  });
+
+  it('fetches opened participation projects', async () => {
+    await expect(graphql(ProjectQuery, {
+      ...variables,
+     status: 2,
+    }, 'internal_admin')).resolves.toMatchSnapshot();
+  });
+
   it('fetches closed projects', async () => {
     await expect(graphql(ProjectQuery, {
       ...variables,
-      status: 2,
+      status: 3,
     }, 'internal_admin')).resolves.toMatchSnapshot();
   });
 

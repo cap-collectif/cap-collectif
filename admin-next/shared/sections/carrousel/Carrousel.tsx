@@ -7,6 +7,7 @@ import { useIntl } from 'react-intl'
 import CarrouselItem, { BIG_SCREEN_BAND_HEIGHT, Item, RATIO, SMALL_SCREEN_BAND_HEIGHT } from './CarrouselItem'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { CarrouselQuery } from '@relay/CarrouselQuery.graphql'
+import WhatsNew from './WhatsNew'
 
 const duration = 3500
 
@@ -142,9 +143,10 @@ const CarrouselFullView: FC<{ mode?: Mode; items: Item[] } & BoxProps> = ({ mode
 }
 
 export const QUERY = graphql`
-  query CarrouselQuery {
-    carrouselConfiguration {
+  query CarrouselQuery($type: String = "carrousel") {
+    carrouselConfiguration(type: $type) {
       enabled
+      title
       isLegendEnabledOnImage
       carrouselElements {
         edges {
@@ -160,6 +162,10 @@ export const QUERY = graphql`
               id
               url
             }
+            extraData {
+              startAt
+              endAt
+            }
           }
         }
       }
@@ -167,20 +173,26 @@ export const QUERY = graphql`
   }
 `
 
-const Carrousel: FC = () => {
-  const data = useLazyLoadQuery<CarrouselQuery>(QUERY, {})
+type SectionType = 'carrousel' | 'carrouselHighlighted'
 
+const Carrousel: FC<{ type: SectionType; alt: boolean }> = ({ type = 'carrousel' }) => {
+  const data = useLazyLoadQuery<CarrouselQuery>(QUERY, { type })
   if (!data || !data?.carrouselConfiguration?.enabled) return null
 
   const { carrouselConfiguration } = data
-  const { isLegendEnabledOnImage, carrouselElements } = carrouselConfiguration
-
+  const { isLegendEnabledOnImage, carrouselElements, title } = carrouselConfiguration
   const items = carrouselElements.edges
     .map(({ node }) => node)
     .filter(item => item.isDisplayed)
     .sort((item1, item2) => (item1.position > item2.position ? 1 : -1))
 
-  return <CarrouselFullView mode={isLegendEnabledOnImage ? 'inside' : 'below'} items={items} />
+  const isOdd = !!document?.querySelector('.section--custom:nth-of-type(odd)#whats-new')
+
+  return type === 'carrouselHighlighted' ? (
+    <WhatsNew items={items} title={title} backgroundColor={isOdd ? 'GRAY' : 'WHITE'} />
+  ) : (
+    <CarrouselFullView mode={isLegendEnabledOnImage ? 'inside' : 'below'} items={items} />
+  )
 }
 
 export default Carrousel

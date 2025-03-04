@@ -74,7 +74,7 @@ class ProjectsList extends React.Component<Props> {
   }
 
   render() {
-    const { orderBy, type, theme, term, limit, status, author, onlyPublic, archived } = this.initialRenderVars
+    const { orderBy, type, theme, term, limit, status, author, onlyPublic, archived, district } = this.initialRenderVars
     return (
       <QueryRenderer
         environment={environment as any}
@@ -90,6 +90,7 @@ class ProjectsList extends React.Component<Props> {
             $status: ID
             $onlyPublic: Boolean
             $archived: ProjectArchiveFilter
+            $district: ID
           ) {
             ...ProjectListView_query
               @arguments(
@@ -103,6 +104,7 @@ class ProjectsList extends React.Component<Props> {
                 count: $count
                 onlyPublic: $onlyPublic
                 archived: $archived
+                district: $district
               )
           }
         `}
@@ -118,6 +120,7 @@ class ProjectsList extends React.Component<Props> {
             field: orderBy,
             direction: 'DESC',
           },
+          district,
           archived,
         }}
         render={this.renderProjectList}

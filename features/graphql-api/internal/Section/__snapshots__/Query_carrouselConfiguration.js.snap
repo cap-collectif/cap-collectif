@@ -1,5 +1,245 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
+exports[`Internal|Query carrouselConfiguration Get Carrousel Highlighted Section Configuration as admin 1`] = `
+Object {
+  "carrouselConfiguration": Object {
+    "carrouselElements": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 4",
+            "description": "SectionCarrouselElement10 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQxMA==",
+            "image": Object {
+              "height": 310,
+              "url": "https://capco.test/media/default/0001/01/cafetier.png",
+              "width": 1156,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement10",
+            "type": "THEME",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 5",
+            "description": "SectionCarrouselElement11 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQxMQ==",
+            "image": Object {
+              "height": 339,
+              "url": "https://capco.test/media/default/0001/01/oculus.jpg",
+              "width": 679,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement11",
+            "type": "ARTICLE",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 6",
+            "description": "SectionCarrouselElement12 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQxMg==",
+            "image": Object {
+              "height": 410,
+              "url": "https://capco.test/media/default/0001/01/cafe.png",
+              "width": 1024,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement12",
+            "type": "PROJECT",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 1",
+            "description": "SectionCarrouselElement7 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ3",
+            "image": Object {
+              "height": 400,
+              "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
+              "width": 600,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement7",
+            "type": "ARTICLE",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 2",
+            "description": "SectionCarrouselElement8 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ4",
+            "image": Object {
+              "height": 200,
+              "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+              "width": 355,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement8",
+            "type": "PROJECT",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 3",
+            "description": "SectionCarrouselElement9 description",
+            "extraData": Object {
+              "endAt": "2060-01-16 10:00:00",
+              "startAt": "2024-01-16 10:00:00",
+            },
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ5",
+            "image": Object {
+              "height": 316,
+              "url": "https://capco.test/media/default/0001/01/cereale.png",
+              "width": 896,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement9",
+            "type": "EVENT",
+          },
+        },
+      ],
+    },
+    "enabled": false,
+    "id": "Q2Fycm91c2VsQ29uZmlndXJhdGlvbjpzZWN0aW9uQ2Fycm91c2VsSGlnaGxpZ2h0ZWQ=",
+    "position": 16,
+    "title": "A la une",
+  },
+}
+`;
+
+exports[`Internal|Query carrouselConfiguration Get Carrousel Highlighted Section Configuration as user 1`] = `
+Object {
+  "carrouselConfiguration": Object {
+    "carrouselElements": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 4",
+            "description": "SectionCarrouselElement10 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQxMA==",
+            "image": Object {
+              "height": 310,
+              "url": "https://capco.test/media/default/0001/01/cafetier.png",
+              "width": 1156,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement10",
+            "type": "THEME",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 5",
+            "description": "SectionCarrouselElement11 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQxMQ==",
+            "image": Object {
+              "height": 339,
+              "url": "https://capco.test/media/default/0001/01/oculus.jpg",
+              "width": 679,
+            },
+            "isDisplayed": false,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement11",
+            "type": "ARTICLE",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 6",
+            "description": "SectionCarrouselElement12 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQxMg==",
+            "image": Object {
+              "height": 410,
+              "url": "https://capco.test/media/default/0001/01/cafe.png",
+              "width": 1024,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement12",
+            "type": "PROJECT",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 1",
+            "description": "SectionCarrouselElement7 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ3",
+            "image": Object {
+              "height": 400,
+              "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
+              "width": 600,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement7",
+            "type": "ARTICLE",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 2",
+            "description": "SectionCarrouselElement8 description",
+            "extraData": null,
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ4",
+            "image": Object {
+              "height": 200,
+              "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+              "width": 355,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement8",
+            "type": "PROJECT",
+          },
+        },
+        Object {
+          "node": Object {
+            "buttonLabel": "Label 3",
+            "description": "SectionCarrouselElement9 description",
+            "extraData": Object {
+              "endAt": "2060-01-16 10:00:00",
+              "startAt": "2024-01-16 10:00:00",
+            },
+            "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ5",
+            "image": Object {
+              "height": 316,
+              "url": "https://capco.test/media/default/0001/01/cereale.png",
+              "width": 896,
+            },
+            "isDisplayed": true,
+            "redirectLink": "http://www.example.com",
+            "title": "SectionCarrouselElement9",
+            "type": "EVENT",
+          },
+        },
+      ],
+    },
+    "enabled": false,
+    "id": "Q2Fycm91c2VsQ29uZmlndXJhdGlvbjpzZWN0aW9uQ2Fycm91c2VsSGlnaGxpZ2h0ZWQ=",
+    "position": 16,
+    "title": "A la une",
+  },
+}
+`;
+
 exports[`Internal|Query carrouselConfiguration Get Carrousel Section Configuration as admin 1`] = `
 Object {
   "carrouselConfiguration": Object {
@@ -9,6 +249,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 1",
             "description": "SectionCarrouselElement1 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQx",
             "image": Object {
               "height": 400,
@@ -25,6 +266,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 2",
             "description": "SectionCarrouselElement2 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQy",
             "image": Object {
               "height": 200,
@@ -41,6 +283,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 3",
             "description": "SectionCarrouselElement3 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQz",
             "image": Object {
               "height": 316,
@@ -57,6 +300,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 4",
             "description": "SectionCarrouselElement4 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ0",
             "image": Object {
               "height": 310,
@@ -73,6 +317,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 5",
             "description": "SectionCarrouselElement5 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ1",
             "image": Object {
               "height": 339,
@@ -89,6 +334,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 6",
             "description": "SectionCarrouselElement6 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ2",
             "image": Object {
               "height": 410,
@@ -121,6 +367,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 1",
             "description": "SectionCarrouselElement1 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQx",
             "image": Object {
               "height": 400,
@@ -137,6 +384,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 2",
             "description": "SectionCarrouselElement2 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQy",
             "image": Object {
               "height": 200,
@@ -153,6 +401,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 3",
             "description": "SectionCarrouselElement3 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQz",
             "image": Object {
               "height": 316,
@@ -169,6 +418,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 4",
             "description": "SectionCarrouselElement4 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ0",
             "image": Object {
               "height": 310,
@@ -185,6 +435,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 5",
             "description": "SectionCarrouselElement5 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ1",
             "image": Object {
               "height": 339,
@@ -201,6 +452,7 @@ Object {
           "node": Object {
             "buttonLabel": "Label 6",
             "description": "SectionCarrouselElement6 description",
+            "extraData": null,
             "id": "U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ6U2VjdGlvbkNhcnJvdXNlbEVsZW1lbnQ2",
             "image": Object {
               "height": 410,

@@ -28,22 +28,35 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL bMcBgN sc-fXqqsB gHWJqw cap-tag"
-          title="global.new"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            title="step.status.open.participation"
           >
-            global.new
-          </span>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              fill="none"
+              viewBox="0 0 14 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              step.status.open.participation
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL cgpuMW cap-heading"
           title="Name of my project"
@@ -242,22 +255,35 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL bMcBgN sc-fXqqsB gHWJqw cap-tag"
-          title="global.new"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            title="step.status.open.participation"
           >
-            global.new
-          </span>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              fill="none"
+              viewBox="0 0 14 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              step.status.open.participation
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL cgpuMW cap-heading"
           title="Name of my project"
@@ -456,22 +482,22 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL sOGfP sc-fXqqsB gHWJqw cap-tag"
-          title="global-archived"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL iIhamD sc-fXqqsB gHWJqw cap-tag"
+            title="global-archived"
           >
-            global-archived
-          </span>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              global-archived
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL hMumCw cap-heading"
           title="Name of my project"
@@ -670,22 +696,35 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL bMcBgN sc-fXqqsB gHWJqw cap-tag"
-          title="global.new"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            title="step.status.open.participation"
           >
-            global.new
-          </span>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              fill="none"
+              viewBox="0 0 14 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              step.status.open.participation
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL cgpuMW cap-heading"
           title="Name of my project"
@@ -884,22 +923,35 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL bMcBgN sc-fXqqsB gHWJqw cap-tag"
-          title="global.new"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            title="step.status.open.participation"
           >
-            global.new
-          </span>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              fill="none"
+              viewBox="0 0 14 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              step.status.open.participation
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL cgpuMW cap-heading"
           title="Name of my project"
@@ -1098,22 +1150,35 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL bMcBgN sc-fXqqsB gHWJqw cap-tag"
-          title="global.new"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            title="step.status.open.participation"
           >
-            global.new
-          </span>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              fill="none"
+              viewBox="0 0 14 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              step.status.open.participation
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL cgpuMW cap-heading"
           title="Name of my project"
@@ -1396,22 +1461,35 @@ Array [
         </svg>
       </div>
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL bMcBgN sc-fXqqsB gHWJqw cap-tag"
-          title="global.new"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            title="step.status.open.participation"
           >
-            global.new
-          </span>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              fill="none"
+              viewBox="0 0 14 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              step.status.open.participation
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL cgpuMW cap-heading"
           title="Name of my project"
@@ -1610,22 +1688,35 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL bHUozq ProjectCardutils___StyledFlex-iaMkIa wDqUv"
+        className="sc-bcXGCL dzaJVB"
       >
         <div
-          className="sc-bcXGCL bMcBgN sc-fXqqsB gHWJqw cap-tag"
-          title="global.new"
+          className="sc-bcXGCL jesjSY"
         >
-          <span
-            className="sc-bcXGCL gmgVsa cap-text"
+          <div
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            title="step.status.open.participation"
           >
-            global.new
-          </span>
+            <svg
+              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              fill="none"
+              viewBox="0 0 14 13"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                d="M7 .511c-3.314 0-6 2.22-6 4.957a4.559 4.559 0 001.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 007 10.424c3.314 0 6-2.219 6-4.956C13 2.73 10.314.51 7 .51z"
+                stroke="currentColor"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+            <span
+              className="sc-bcXGCL duJDym cap-text"
+            >
+              step.status.open.participation
+            </span>
+          </div>
         </div>
-      </div>
-      <div
-        className="sc-bcXGCL dxmZfn"
-      >
         <h4
           className="sc-bcXGCL cgpuMW cap-heading"
           title="Name of my project"

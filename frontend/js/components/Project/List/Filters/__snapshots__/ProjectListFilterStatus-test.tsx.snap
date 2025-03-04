@@ -18,8 +18,12 @@ exports[`<ProjectsListFilterStatus /> should render correctly 1`] = `
         "value": 1,
       },
       Object {
-        "label": "step.status.closed",
+        "label": "step.status.open.participation",
         "value": 2,
+      },
+      Object {
+        "label": "step.status.closed",
+        "value": 3,
       },
     ]
   }
@@ -47,8 +51,12 @@ exports[`<ProjectsListFilterStatus /> should render correctly with a selected st
         "value": 1,
       },
       Object {
-        "label": "step.status.closed",
+        "label": "step.status.open.participation",
         "value": 2,
+      },
+      Object {
+        "label": "step.status.closed",
+        "value": 3,
       },
     ]
   }

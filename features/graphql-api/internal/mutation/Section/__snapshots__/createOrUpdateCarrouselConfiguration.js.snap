@@ -1,6 +1,145 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`mutations.createOrUpdateCarrouselConfigurationMutation should create and update a CarrouselConfiguration as admin 1`] = `
+exports[`mutations.createOrUpdateCarrouselConfigurationMutation should create and update a CarrouselConfiguration for carrousel highlighted section type as admin 1`] = `
+Object {
+  "createOrUpdateCarrouselConfiguration": Object {
+    "carrouselConfiguration": Object {
+      "carrouselElements": Object {
+        "edges": Array [
+          Object {
+            "node": Object {
+              "buttonLabel": "Label 4",
+              "description": "SectionCarrouselElement10 description",
+              "extraData": null,
+              "image": Object {
+                "height": 310,
+                "url": "https://capco.test/media/default/0001/01/cafetier.png",
+                "width": 1156,
+              },
+              "isDisplayed": false,
+              "position": 4,
+              "redirectLink": "http://www.example.com",
+              "title": "SectionCarrouselElement10",
+              "type": "THEME",
+            },
+          },
+          Object {
+            "node": Object {
+              "buttonLabel": "Label 5",
+              "description": "SectionCarrouselElement11 description",
+              "extraData": null,
+              "image": Object {
+                "height": 339,
+                "url": "https://capco.test/media/default/0001/01/oculus.jpg",
+                "width": 679,
+              },
+              "isDisplayed": false,
+              "position": 5,
+              "redirectLink": "http://www.example.com",
+              "title": "SectionCarrouselElement11",
+              "type": "ARTICLE",
+            },
+          },
+          Object {
+            "node": Object {
+              "buttonLabel": "Label 6",
+              "description": "SectionCarrouselElement12 description",
+              "extraData": null,
+              "image": Object {
+                "height": 410,
+                "url": "https://capco.test/media/default/0001/01/cafe.png",
+                "width": 1024,
+              },
+              "isDisplayed": true,
+              "position": 6,
+              "redirectLink": "http://www.example.com",
+              "title": "SectionCarrouselElement12",
+              "type": "PROJECT",
+            },
+          },
+          Object {
+            "node": Object {
+              "buttonLabel": "Label 1",
+              "description": "SectionCarrouselElement7 description",
+              "extraData": null,
+              "image": Object {
+                "height": 400,
+                "url": "https://capco.test/media/default/0001/01/cannabis.jpg",
+                "width": 600,
+              },
+              "isDisplayed": true,
+              "position": 1,
+              "redirectLink": "http://www.example.com",
+              "title": "SectionCarrouselElement7",
+              "type": "ARTICLE",
+            },
+          },
+          Object {
+            "node": Object {
+              "buttonLabel": "Label 2",
+              "description": "SectionCarrouselElement8 description",
+              "extraData": null,
+              "image": Object {
+                "height": 200,
+                "url": "https://capco.test/media/default/0001/01/confinement.jpg",
+                "width": 355,
+              },
+              "isDisplayed": true,
+              "position": 2,
+              "redirectLink": "http://www.example.com",
+              "title": "SectionCarrouselElement8",
+              "type": "PROJECT",
+            },
+          },
+          Object {
+            "node": Object {
+              "buttonLabel": "Label 3",
+              "description": "SectionCarrouselElement9 description",
+              "extraData": Object {
+                "endAt": "2060-01-16 10:00:00",
+                "startAt": "2024-01-16 10:00:00",
+              },
+              "image": Object {
+                "height": 316,
+                "url": "https://capco.test/media/default/0001/01/cereale.png",
+                "width": 896,
+              },
+              "isDisplayed": true,
+              "position": 3,
+              "redirectLink": "http://www.example.com",
+              "title": "SectionCarrouselElement9",
+              "type": "EVENT",
+            },
+          },
+          Object {
+            "node": Object {
+              "buttonLabel": "Libellé du bouton",
+              "description": "Description de l'article",
+              "extraData": null,
+              "image": Object {
+                "height": 339,
+                "url": "https://capco.test/media/default/0001/01/oculus.jpg",
+                "width": 679,
+              },
+              "isDisplayed": false,
+              "position": 2,
+              "redirectLink": "https://www.exemple.com",
+              "title": "Titre de l'article",
+              "type": "ARTICLE",
+            },
+          },
+        ],
+      },
+      "enabled": false,
+      "isLegendEnabledOnImage": true,
+      "position": 16,
+    },
+    "errorCode": null,
+  },
+}
+`;
+
+exports[`mutations.createOrUpdateCarrouselConfigurationMutation should create and update a CarrouselConfiguration for carrousel section type as admin 1`] = `
 Object {
   "createOrUpdateCarrouselConfiguration": Object {
     "carrouselConfiguration": Object {
@@ -10,6 +149,10 @@ Object {
             "node": Object {
               "buttonLabel": "Libellé du bouton",
               "description": "Description de l'événement",
+              "extraData": Object {
+                "endAt": "2060-09-01T00:00:00.000Z",
+                "startAt": "2024-09-01T00:00:00.000Z",
+              },
               "image": Object {
                 "height": 112,
                 "url": "https://capco.test/media/default/0001/01/giec.jpg",
@@ -26,6 +169,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 2",
               "description": "SectionCarrouselElement2 description",
+              "extraData": null,
               "image": Object {
                 "height": 200,
                 "url": "https://capco.test/media/default/0001/01/confinement.jpg",
@@ -42,6 +186,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 3",
               "description": "SectionCarrouselElement3 description",
+              "extraData": null,
               "image": Object {
                 "height": 316,
                 "url": "https://capco.test/media/default/0001/01/cereale.png",
@@ -58,6 +203,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 4",
               "description": "SectionCarrouselElement4 description",
+              "extraData": null,
               "image": Object {
                 "height": 310,
                 "url": "https://capco.test/media/default/0001/01/cafetier.png",
@@ -74,6 +220,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 5",
               "description": "SectionCarrouselElement5 description",
+              "extraData": null,
               "image": Object {
                 "height": 339,
                 "url": "https://capco.test/media/default/0001/01/oculus.jpg",
@@ -90,6 +237,7 @@ Object {
             "node": Object {
               "buttonLabel": "Label 6",
               "description": "SectionCarrouselElement6 description",
+              "extraData": null,
               "image": Object {
                 "height": 410,
                 "url": "https://capco.test/media/default/0001/01/cafe.png",
@@ -106,6 +254,7 @@ Object {
             "node": Object {
               "buttonLabel": "Libellé du bouton",
               "description": "Description de l'article",
+              "extraData": null,
               "image": Object {
                 "height": 339,
                 "url": "https://capco.test/media/default/0001/01/oculus.jpg",
@@ -129,7 +278,16 @@ Object {
 }
 `;
 
-exports[`mutations.createOrUpdateCarrouselConfigurationMutation should not create more than 8 section carrousel items 1`] = `
+exports[`mutations.createOrUpdateCarrouselConfigurationMutation should not create more than 8 section carrousel items for carrousel highlighted section type 1`] = `
+Object {
+  "createOrUpdateCarrouselConfiguration": Object {
+    "carrouselConfiguration": null,
+    "errorCode": "TOO_MANY_CARROUSEL_ITEMS",
+  },
+}
+`;
+
+exports[`mutations.createOrUpdateCarrouselConfigurationMutation should not create more than 8 section carrousel items for carrousel section type 1`] = `
 Object {
   "createOrUpdateCarrouselConfiguration": Object {
     "carrouselConfiguration": null,

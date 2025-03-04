@@ -12,8 +12,11 @@ import {
   getInitialValues,
   isValid,
   MAX_DESC_LENGTH,
+  MAX_HIGHLIGHTED_DESC_LENGTH,
+  MAX_HIGHLIGHTED_TITLE_LENGTH,
   MAX_LABEL_LENGTH,
   MAX_TITLE_LENGTH,
+  SectionType,
 } from '@components/Sections/Carrousel/Carrousel.utils'
 import CarrouselParameters from '@components/Sections/Carrousel/CarrouselParameters'
 import { SectionIdCarrouselQuery } from '@relay/SectionIdCarrouselQuery.graphql'
@@ -26,9 +29,10 @@ import { isGlobalId } from '@shared/utils/fromGlobalId'
 const formName = 'carousel_section_configuration_form'
 
 export const QUERY = graphql`
-  query SectionIdCarrouselQuery {
-    carrouselConfiguration {
+  query SectionIdCarrouselQuery($type: String = "carrousel") {
+    carrouselConfiguration(type: $type) {
       position
+      title
       enabled
       isLegendEnabledOnImage
       carrouselElements {
@@ -47,6 +51,10 @@ export const QUERY = graphql`
               url(format: "reference")
               type: contentType
             }
+            extraData {
+              startAt
+              endAt
+            }
           }
         }
       }
@@ -54,28 +62,11 @@ export const QUERY = graphql`
   }
 `
 
-export const HomePageCarrouselSectionConfigurationPage: FC = () => {
-  const { carrouselConfiguration } = useLazyLoadQuery<SectionIdCarrouselQuery>(QUERY, {})
+export const HomePageCarrouselSectionConfigurationPage: FC<{ type?: SectionType }> = ({ type = 'carrousel' }) => {
+  const { carrouselConfiguration } = useLazyLoadQuery<SectionIdCarrouselQuery>(QUERY, { type })
 
   const intl = useIntl()
   const { setSaving: triggerNavBarSaving, setBreadCrumbItems } = useNavBarContext()
-
-  useEffect(() => {
-    setBreadCrumbItems([
-      {
-        title: `${intl.formatMessage({ id: 'admin.group.pages' })} > ${intl.formatMessage({
-          id: 'admin.label.section',
-        })}`,
-        href: '/admin/capco/app/section/list',
-      },
-      {
-        title: intl.formatMessage({ id: 'global.carrousel' }),
-        href: '',
-      },
-    ])
-    return () => setBreadCrumbItems([])
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [])
 
   const [isSubmitting, setIsSubmitting] = useState(false)
 
@@ -88,6 +79,24 @@ export const HomePageCarrouselSectionConfigurationPage: FC = () => {
 
   const carrouselElements = watch('carrouselElements')
   const preventReSubmit = watch('preventReSubmit')
+  const title = watch('title')
+
+  useEffect(() => {
+    setBreadCrumbItems([
+      {
+        title: `${intl.formatMessage({ id: 'admin.group.pages' })} > ${intl.formatMessage({
+          id: 'admin.label.section',
+        })}`,
+        href: '/admin/capco/app/section/list',
+      },
+      {
+        title: intl.formatMessage({ id: type === 'carrousel' ? 'global.carrousel' : title ? title : 'global.title' }),
+        href: '',
+      },
+    ])
+    return () => setBreadCrumbItems([])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [title])
 
   useEffect(() => {
     if (preventReSubmit) setValue('preventReSubmit', false)
@@ -95,19 +104,25 @@ export const HomePageCarrouselSectionConfigurationPage: FC = () => {
 
   const onSubmit = (values: FormValues) => {
     delete values.preventReSubmit
-    if (!isValid(values)) return
+    if (!isValid(values, type)) return
     setIsSubmitting(true)
     CreateOrUpdateCarrouselConfigurationMutation.commit({
       input: {
+        type,
         ...values,
+        title: type === 'carrousel' ? undefined : values.title,
         carrouselElements: values.carrouselElements.map((element, position) => ({
           ...element,
-          title: element.title?.slice(0, MAX_TITLE_LENGTH),
-          description: element.description?.slice(0, MAX_DESC_LENGTH),
+          title: element.title?.slice(0, type === 'carrousel' ? MAX_TITLE_LENGTH : MAX_HIGHLIGHTED_TITLE_LENGTH),
+          description: element.description?.slice(
+            0,
+            type === 'carrousel' ? MAX_DESC_LENGTH : MAX_HIGHLIGHTED_DESC_LENGTH,
+          ),
           buttonLabel: element.buttonLabel?.slice(0, MAX_LABEL_LENGTH),
           position,
           image: element.image?.id,
           defaultIsOpen: undefined,
+          extraData: type === 'carrousel' ? undefined : element.extraData,
         })),
       },
     })
@@ -118,7 +133,7 @@ export const HomePageCarrouselSectionConfigurationPage: FC = () => {
         } else {
           const { carrouselConfiguration } = createOrUpdateCarrouselConfiguration
           const newItem = carrouselConfiguration.carrouselElements.edges.filter(
-            o1 => !carrouselElements.some(o2 => o1.node.id === o2.id),
+            o1 => !values.carrouselElements.some(o2 => o1.node.id === o2.id),
           )
           reset(getInitialValues(carrouselConfiguration, newItem?.length ? newItem[0]?.node?.id : null))
           return setIsSubmitting(false)
@@ -139,7 +154,7 @@ export const HomePageCarrouselSectionConfigurationPage: FC = () => {
   useEffect(() => {
     watch((values: FormValues, { name }) => {
       if (name === 'preventReSubmit') return null
-      if (isValid(values)) onValidFormChange(values)
+      if (isValid(values, type)) onValidFormChange(values)
       return null
     })
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -192,10 +207,14 @@ export const HomePageCarrouselSectionConfigurationPage: FC = () => {
         <Flex direction="row" width="100%" spacing={6}>
           <Flex direction="column" spacing={6} width="70%">
             <Flex p={6} direction="column" spacing={6} backgroundColor="white" borderRadius="accordion">
-              <CarrouselContent onDelete={onDelete} />
+              <CarrouselContent
+                onDelete={onDelete}
+                title={type === 'carrouselHighlighted' ? carrouselConfiguration.title : null}
+                type={type}
+              />
             </Flex>
           </Flex>
-          <CarrouselParameters />
+          <CarrouselParameters type={type} />
         </Flex>
       </FormProvider>
     </Flex>

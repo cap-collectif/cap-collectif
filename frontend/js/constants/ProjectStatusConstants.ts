@@ -4,7 +4,8 @@ export type ProjectType = {
 }
 const FUTURE = 0
 const OPENED = 1
-const CLOSED = 2
+const OPENED_PARTICIPATION = 2
+const CLOSED = 3
 export const PROJECT_STATUSES: ProjectType[] = [
   {
     id: FUTURE,
@@ -13,6 +14,10 @@ export const PROJECT_STATUSES: ProjectType[] = [
   {
     id: OPENED,
     title: 'step.status.open',
+  },
+  {
+    id: OPENED_PARTICIPATION,
+    title: 'step.status.open.participation',
   },
   {
     id: CLOSED,

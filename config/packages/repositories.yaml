@@ -820,3 +820,8 @@ services:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         arguments: ['CapcoAppBundle:OpinionAppendix']
+
+    Capco\AppBundle\Repository\EventTranslationRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        arguments: ['CapcoAppBundle:EventTranslation']

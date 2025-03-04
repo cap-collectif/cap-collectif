@@ -532,7 +532,11 @@ InternalQuery:
             carrouselConfiguration:
                 type: 'CarrouselConfiguration!'
                 description: 'Get CarrouselConfiguration'
-                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\CarrouselConfigurationResolver")'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\CarrouselConfigurationResolver", args)'
+                args:
+                    type:
+                        type: 'String!'
+                        description: 'Section type.'
             analytics:
                 type: 'InternalPlatformAnalytics!'
                 description: 'Return the platform analytics'

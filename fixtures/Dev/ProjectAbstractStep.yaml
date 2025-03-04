@@ -494,3 +494,8 @@ Capco\AppBundle\Entity\Steps\ProjectAbstractStep:
         step: '@collectStepProposalArchiving'
         project: '@projectProposalArchiving'
         position: 1
+    pasOtherStepOpened:
+        id: pasOtherStepOpened
+        step: '@ostep4'
+        project: '@projectWithOnlyOtherStepOpen'
+        position: 1

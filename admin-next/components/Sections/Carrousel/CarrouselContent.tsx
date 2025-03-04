@@ -4,10 +4,16 @@ import CarrouselEmptyList from './CarrouselEmptyList'
 import { Box, DragnDrop } from '@cap-collectif/ui'
 import { CarrouselAddItemButton } from './CarrouselAddItemButton'
 import CarrouselItem from './CarrouselItem'
-import { FormValues } from './Carrousel.utils'
+import { FormValues, SectionType } from './Carrousel.utils'
+import { useIntl } from 'react-intl'
 
-export const CarrouselContent: FC<{ onDelete: (id: string) => void }> = ({ onDelete }) => {
+export const CarrouselContent: FC<{ onDelete: (id: string) => void; title?: string; type: SectionType }> = ({
+  onDelete,
+  title,
+  type,
+}) => {
   const { watch, control } = useFormContext<FormValues>()
+  const intl = useIntl()
 
   const { fields, move, prepend } = useFieldArray<FormValues, 'carrouselElements'>({
     control,
@@ -28,11 +34,18 @@ export const CarrouselContent: FC<{ onDelete: (id: string) => void }> = ({ onDel
     move(result.source.index, result.destination.index)
   }
 
-  if (!controlledFields.length) return <CarrouselEmptyList prepend={prepend} />
+  if (!controlledFields.length)
+    return (
+      <CarrouselEmptyList
+        prepend={prepend}
+        title={title ? `"${title}"` : intl.formatMessage({ id: 'global.carrousel' })}
+        type={type}
+      />
+    )
 
   return (
     <Box>
-      <CarrouselAddItemButton prepend={prepend} cannotAddMoreFields={controlledFields.length >= 8} />
+      <CarrouselAddItemButton prepend={prepend} cannotAddMoreFields={controlledFields.length >= 8} type={type} />
       {controlledFields.length ? (
         // @ts-ignore
         <DragnDrop onDragEnd={onDragEnd} backgroundColor="red">
@@ -40,7 +53,11 @@ export const CarrouselContent: FC<{ onDelete: (id: string) => void }> = ({ onDel
             {controlledFields.map((element, index) => (
               // @ts-expect-error MAJ DS Props
               <DragnDrop.Item draggableId={element.id} index={index} key={element.id}>
-                <CarrouselItem fieldBaseName={`carrouselElements.${index}`} onDelete={() => onDelete(element.id)} />
+                <CarrouselItem
+                  fieldBaseName={`carrouselElements.${index}`}
+                  onDelete={() => onDelete(element.id)}
+                  type={type}
+                />
               </DragnDrop.Item>
             ))}
           </DragnDrop.List>

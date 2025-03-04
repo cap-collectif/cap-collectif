@@ -1702,6 +1702,9 @@ input CarrouselElementInput {
   A toggle indicating whether the carrousel element is visible to users.
   """
   isDisplayed: Boolean
+
+  """Additional data associated with the carrousel element."""
+  extraData: ExtraDataInput
 }
 
 """The type of the carrousel element."""
@@ -4000,6 +4003,9 @@ enum CreateOrUpdateCarrouselConfigurationErrorCode {
 }
 
 input CreateOrUpdateCarrouselConfigurationInput {
+  """Section type."""
+  type: String!
+
   """The title of the section."""
   title: String
 
@@ -6976,6 +6982,28 @@ enum ExternalServiceConfigurationType {
 
   """Twilio subaccount auth token."""
   TWILIO_SUBACCOUNT_AUTH_TOKEN
+}
+
+"""Extra data"""
+type ExtraData implements Node {
+  """The ID of an object."""
+  id: ID!
+
+  """When the carrouselElement start."""
+  startAt: String
+
+  """When the carrouselElement end."""
+  endAt: String
+}
+
+input ExtraDataInput {
+  id: ID
+
+  """When the carrouselElement start."""
+  startAt: String
+
+  """When the carrouselElement end."""
+  endAt: String
 }
 
 """Facebook SSO Configuration."""
@@ -11510,6 +11538,9 @@ type Project implements Node & UniformResourceLocatable & UniformResourceAdminLo
 
   """Identifies the date and time when the object was created."""
   createdAt: DateTime!
+
+  """The project status."""
+  status: ProjectStatus!
 }
 
 """A project abstract step."""
@@ -11651,6 +11682,27 @@ input ProjectOwnerProjectOrder {
 enum ProjectOwnerProjectOrderField {
   """Allows ordering a list of projects by when they were published."""
   PUBLISHED_AT
+}
+
+"""Project statuses"""
+enum ProjectStatus {
+  """The project has not started yet and has no finished step."""
+  FUTURE_WITHOUT_FINISHED_STEPS
+
+  """The project has not started yet but has at least one finished step."""
+  FUTURE_WITH_FINISHED_STEPS
+
+  """The project is currently open fo participation."""
+  OPENED_PARTICIPATION
+
+  """The project is currently open."""
+  OPENED
+
+  """The project has been closed."""
+  CLOSED
+
+  """The project has no status."""
+  UNKNOWN
 }
 
 input ProjectStepInput {
@@ -14107,7 +14159,10 @@ type Query {
   homePageProjectsMapSectionConfiguration: HomePageProjectsMapSectionConfiguration!
 
   """Get CarrouselConfiguration"""
-  carrouselConfiguration: CarrouselConfiguration!
+  carrouselConfiguration(
+    """Section type."""
+    type: String!
+  ): CarrouselConfiguration!
 
   """Return the platform analytics"""
   analytics(filter: QueryAnalyticsFilter!): PlatformAnalytics!
@@ -16146,6 +16201,9 @@ type SectionCarrouselElement implements Node {
   A toggle indicating whether the carrousel element is visible to users.
   """
   isDisplayed: Boolean!
+
+  """Additional data associated with the carrousel element."""
+  extraData: ExtraData
 }
 
 """A connection to a list of items."""

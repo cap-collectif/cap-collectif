@@ -65,3 +65,72 @@ Capco\AppBundle\Entity\Section\SectionCarrouselElement:
         position: 6
         isDisplayed: true
         type: 'project'
+    SectionCarrouselElement7:
+        id: 'SectionCarrouselElement7'
+        section: '@SectionCarrouselHighlighted'
+        title: 'SectionCarrouselElement7'
+        description: 'SectionCarrouselElement7 description'
+        image: '@imageCannabis'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 1'
+        position: 1
+        isDisplayed: true
+        type: 'article'
+    SectionCarrouselElement8:
+        id: 'SectionCarrouselElement8'
+        section: '@SectionCarrouselHighlighted'
+        title: 'SectionCarrouselElement8'
+        description: 'SectionCarrouselElement8 description'
+        image: '@imageConfinement'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 2'
+        position: 2
+        isDisplayed: true
+        type: 'project'
+    SectionCarrouselElement9:
+        id: 'SectionCarrouselElement9'
+        section: '@SectionCarrouselHighlighted'
+        title: 'SectionCarrouselElement9'
+        description: 'SectionCarrouselElement9 description'
+        image: '@imageCereale'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 3'
+        position: 3
+        isDisplayed: true
+        type: 'event'
+        extraData:
+            startAt: "2024-01-16 10:00:00"
+            endAt: "2060-01-16 10:00:00"
+    SectionCarrouselElement10:
+        id: 'SectionCarrouselElement10'
+        section: '@SectionCarrouselHighlighted'
+        title: 'SectionCarrouselElement10'
+        description: 'SectionCarrouselElement10 description'
+        image: '@imageCafetier'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 4'
+        position: 4
+        isDisplayed: false
+        type: 'theme'
+    SectionCarrouselElement11:
+        id: 'SectionCarrouselElement11'
+        section: '@SectionCarrouselHighlighted'
+        title: 'SectionCarrouselElement11'
+        description: 'SectionCarrouselElement11 description'
+        image: '@imageOculus'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 5'
+        position: 5
+        isDisplayed: false
+        type: 'article'
+    SectionCarrouselElement12:
+        id: 'SectionCarrouselElement12'
+        section: '@SectionCarrouselHighlighted'
+        title: 'SectionCarrouselElement12'
+        description: 'SectionCarrouselElement12 description'
+        image: '@imageCafe'
+        redirectLink: 'http://www.example.com'
+        buttonLabel: 'Label 6'
+        position: 6
+        isDisplayed: true
+        type: 'project'

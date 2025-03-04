@@ -1,0 +1,432 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Carrousel /> renders correctly with a carrousel 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <section
+    aria-label="menu.news"
+    aria-roledescription="global.carrousel"
+    className="sc-bcXGCL bcWMaa"
+    id="carrousel"
+    onMouseEnter={[Function]}
+    onMouseLeave={[Function]}
+  >
+    <div
+      className="sc-bcXGCL dbmbpb"
+    >
+      <div
+        aria-live="off"
+        className="sc-bcXGCL djKjBO"
+        id="carrousel-items"
+        onTransitionEnd={[Function]}
+        style={
+          {
+            "transform": "translate(-33.333333333333336%)",
+            "transition": "transform 1s",
+          }
+        }
+      >
+        <div
+          aria-hidden={true}
+          aria-roledescription="carrousel.slide"
+          className="sc-bcXGCL NOsDf"
+          role="group"
+          tabIndex={-1}
+        >
+          <div
+            className="sc-bcXGCL junSWp"
+          >
+            <img
+              alt=""
+              className="sc-bcXGCL cwSKea"
+              loading="eager"
+              sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+              srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto//media/img1.png 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto//media/img1.png 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
+         "
+              style={
+                {
+                  "objectFit": "cover",
+                }
+              }
+            />
+          </div>
+          <div
+            className="sc-bcXGCL bUHywp"
+          >
+            <div
+              className="sc-bcXGCL ijKEnt"
+            >
+              <div
+                className="sc-bcXGCL cklhXU"
+              >
+                <h3
+                  className="sc-bcXGCL hlmZyV cap-heading"
+                >
+                  Item1
+                </h3>
+                <p
+                  className="sc-bcXGCL fPmUyl"
+                >
+                  Lorem ipsum
+                </p>
+              </div>
+              <a
+                className="sc-bcXGCL cNdIvE"
+                href="/event/mon-event"
+                tabIndex={-1}
+              >
+                Voir +
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-hidden={false}
+          aria-label="carrousel.position {"position":1,"total":1}"
+          aria-roledescription="carrousel.slide"
+          className="sc-bcXGCL NOsDf"
+          role="group"
+        >
+          <div
+            className="sc-bcXGCL junSWp"
+          >
+            <img
+              alt=""
+              className="sc-bcXGCL cwSKea"
+              loading="eager"
+              sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+              srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto//media/img1.png 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto//media/img1.png 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
+         "
+              style={
+                {
+                  "objectFit": "cover",
+                }
+              }
+            />
+          </div>
+          <div
+            className="sc-bcXGCL bUHywp"
+          >
+            <div
+              className="sc-bcXGCL ijKEnt"
+            >
+              <div
+                className="sc-bcXGCL cklhXU"
+              >
+                <h3
+                  className="sc-bcXGCL hlmZyV cap-heading"
+                >
+                  Item1
+                </h3>
+                <p
+                  className="sc-bcXGCL fPmUyl"
+                >
+                  Lorem ipsum
+                </p>
+              </div>
+              <a
+                className="sc-bcXGCL cNdIvE"
+                href="/event/mon-event"
+              >
+                Voir +
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          aria-hidden={true}
+          aria-roledescription="carrousel.slide"
+          className="sc-bcXGCL NOsDf"
+          role="group"
+          tabIndex={-1}
+        >
+          <div
+            className="sc-bcXGCL junSWp"
+          >
+            <img
+              alt=""
+              className="sc-bcXGCL cwSKea"
+              loading="eager"
+              sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+              srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto//media/img1.png 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto//media/img1.png 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
+         "
+              style={
+                {
+                  "objectFit": "cover",
+                }
+              }
+            />
+          </div>
+          <div
+            className="sc-bcXGCL bUHywp"
+          >
+            <div
+              className="sc-bcXGCL ijKEnt"
+            >
+              <div
+                className="sc-bcXGCL cklhXU"
+              >
+                <h3
+                  className="sc-bcXGCL hlmZyV cap-heading"
+                >
+                  Item1
+                </h3>
+                <p
+                  className="sc-bcXGCL fPmUyl"
+                >
+                  Lorem ipsum
+                </p>
+              </div>
+              <a
+                className="sc-bcXGCL cNdIvE"
+                href="/event/mon-event"
+                tabIndex={-1}
+              >
+                Voir +
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>,
+]
+`;
+
+exports[`<Carrousel /> renders correctly with a carrouselHighlighted 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    aria-label="menu.news"
+    aria-roledescription="global.carrousel"
+    className="sc-bcXGCL cunsPx"
+  >
+    <div
+      className="sc-bcXGCL jAktSR"
+    >
+      <div
+        className="sc-bcXGCL grRzkA"
+      >
+        <div
+          className="sc-bcXGCL jUUeoj"
+        >
+          <div
+            className="sc-bcXGCL epFNRp"
+          >
+            <h3
+              className="sc-bcXGCL gRzvSY cap-heading"
+            >
+              Title
+            </h3>
+          </div>
+          <div
+            aria-live="off"
+            className="sc-bcXGCL exqLDl"
+            id="whats-new-items"
+          >
+            <div
+              aria-label="carrousel.position {"position":1,"total":1}"
+              aria-roledescription="carrousel.slide"
+              className="sc-bcXGCL maRLK"
+              id="whats-new-item-0"
+              onClick={[Function]}
+              role="group"
+            >
+              <div
+                className="sc-bcXGCL IiflI"
+              >
+                <p
+                  className="sc-bcXGCL jMALnA cap-text"
+                >
+                  type-event
+                </p>
+              </div>
+              <h4
+                className="sc-bcXGCL kEJnfp cap-heading"
+              >
+                Item1
+              </h4>
+              <p
+                className="sc-bcXGCL esbnZh cap-text"
+                title="Lorem ipsum"
+              >
+                Lorem ipsum
+              </p>
+              <a
+                className="sc-bcXGCL jyhknK cap-link"
+                href="/event/mon-event"
+              >
+                learn.more
+                <span
+                  className="sr-only"
+                >
+                  global.on
+                   
+                  type-event
+                   
+                  Item1
+                </span>
+              </a>
+            </div>
+          </div>
+        </div>
+        <div
+          className="sc-bcXGCL bgyCxb"
+        >
+          <img
+            alt=""
+            className="sc-bcXGCL icAVSZ"
+            loading="eager"
+            sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
+            srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto//media/img1.png 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto//media/img1.png 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
+         "
+          />
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;
+
+exports[`<Carrousel /> renders correctly with a carrouselHighlighted on mobile 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    aria-label="menu.news"
+    aria-roledescription="global.carrousel"
+    className="sc-bcXGCL cxxhaP"
+  >
+    <h3
+      className="sc-bcXGCL evgsQr cap-heading"
+    >
+      TitleMobile
+    </h3>
+    <div
+      className="slick-slider slick-initialized"
+    >
+      <div
+        className="slick-list"
+      >
+        <div
+          className="slick-track"
+          onMouseEnter={[Function]}
+          onMouseLeave={[Function]}
+          onMouseOver={[Function]}
+          style={
+            {
+              "WebkitTransform": "translate3d(0px, 0px, 0px)",
+              "WebkitTransition": "",
+              "msTransform": "translateX(0px)",
+              "opacity": 1,
+              "transform": "translate3d(0px, 0px, 0px)",
+              "transition": "",
+            }
+          }
+        >
+          <div
+            aria-hidden={false}
+            className="slick-slide slick-active slick-current"
+            data-index={0}
+            onClick={[Function]}
+            style={
+              {
+                "outline": "none",
+                "width": 0,
+              }
+            }
+            tabIndex="-1"
+          >
+            <div>
+              <a
+                className="sc-bcXGCL evrHzy"
+                href="/event/mon-event"
+                style={
+                  {
+                    "display": "inline-block",
+                    "width": "100%",
+                  }
+                }
+                tabIndex={-1}
+              >
+                <img
+                  alt=""
+                  className="sc-bcXGCL gxeeKc"
+                  loading="eager"
+                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+                  srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto//media/img1.png   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto//media/img1.png   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto//media/img1.png   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto//media/img1.png 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto//media/img1.png 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto//media/img1.png 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto//media/img1.png 3x,
+         "
+                  style={
+                    {
+                      "objectFit": "cover",
+                    }
+                  }
+                />
+                <div
+                  className="sc-bcXGCL ixgTrR"
+                >
+                  <div
+                    className="sc-bcXGCL foQVaX"
+                  >
+                    <div
+                      className="sc-bcXGCL hnCFoG cap-text"
+                    >
+                      type-event
+                    </div>
+                  </div>
+                  <p
+                    className="sc-bcXGCL cVUdlY cap-text"
+                    title="Item1"
+                  >
+                    Item1
+                  </p>
+                </div>
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;

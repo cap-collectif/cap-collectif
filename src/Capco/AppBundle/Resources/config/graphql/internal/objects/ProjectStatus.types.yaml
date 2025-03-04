@@ -9,9 +9,15 @@ ProjectStatus:
             FUTURE_WITH_FINISHED_STEPS:
                 value: !php/const Capco\AppBundle\Enum\ProjectStatus::FUTURE_WITH_FINISHED_STEPS
                 description: 'The project has not started yet but has at least one finished step.'
+            OPENED_PARTICIPATION:
+                value: !php/const Capco\AppBundle\Enum\ProjectStatus::OPENED_PARTICIPATION
+                description: 'The project is currently open fo participation.'
             OPENED:
                 value: !php/const Capco\AppBundle\Enum\ProjectStatus::OPENED
                 description: 'The project is currently open.'
             CLOSED:
                 value: !php/const Capco\AppBundle\Enum\ProjectStatus::CLOSED
                 description: 'The project has been closed.'
+            UNKNOWN:
+                value: !php/const Capco\AppBundle\Enum\ProjectStatus::UNKNOWN
+                description: 'The project has no status.'

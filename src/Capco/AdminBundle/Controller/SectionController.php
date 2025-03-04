@@ -117,6 +117,13 @@ class SectionController extends PositionableController
             );
         }
 
+        if ('carrouselHighlighted' === $existingObject->getType()) {
+            return $this->redirect(
+                '/admin-next/section/carrousel-highlighted/' . GlobalId::toGlobalId('Section', $existingObject->getId()),
+                301
+            );
+        }
+
         $this->checkParentChildAssociation($request, $existingObject);
 
         $this->admin->checkAccess('edit', $existingObject);

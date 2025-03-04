@@ -10,10 +10,10 @@ const Carrousel = lazy(
     ),
 )
 
-export default () => (
+export default props => (
   <Providers designSystem>
     <Suspense fallback={null}>
-      <Carrousel />
+      <Carrousel {...props} />
     </Suspense>
   </Providers>
 )

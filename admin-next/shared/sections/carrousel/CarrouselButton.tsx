@@ -19,6 +19,7 @@ const CarrouselButton: FC<ButtonQuickActionProps & { mode?: Mode }> = ({ mode = 
       p={pxToRem(10)}
       sx={{ svg: { color: ['neutral-gray.700', mode === 'below' ? 'neutral-gray.900' : 'white'] } }}
       boxShadow={['', 'small']}
+      opacity={props.disabled ? '0.5' : '1'}
       {...props}
     />
   )

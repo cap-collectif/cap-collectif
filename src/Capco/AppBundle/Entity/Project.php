@@ -15,6 +15,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
+use Capco\AppBundle\Entity\Steps\OtherStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -71,7 +72,9 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     final public const STATE_FUTURE_WITHOUT_FINISHED_STEPS = 0;
     final public const STATE_OPENED = 1;
     final public const STATE_FUTURE_WITH_FINISHED_STEPS = 1;
-    final public const STATE_CLOSED = 2;
+    final public const STATE_OPENED_PARTICIPATION = 2;
+    final public const STATE_CLOSED = 3;
+    final public const STATE_UNKNOWN = -1;
 
     final public const DEFAULT_COVER_FILTER_OPACITY = 50;
 
@@ -86,10 +89,12 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     ];
 
     public static array $openingStatuses = [
-        'future_witout_finished_steps' => self::STATE_FUTURE_WITHOUT_FINISHED_STEPS,
+        'future_without_finished_steps' => self::STATE_FUTURE_WITHOUT_FINISHED_STEPS,
         'future_with_finished_steps' => self::STATE_FUTURE_WITH_FINISHED_STEPS,
         'opened' => self::STATE_OPENED,
+        'opened_participation' => self::STATE_OPENED_PARTICIPATION,
         'closed' => self::STATE_CLOSED,
+        'unknown' => self::STATE_UNKNOWN,
     ];
 
     /**
@@ -799,10 +804,6 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
         }
 
         foreach ($steps as $step) {
-            // we filter out timeless other steps from open steps since they should behave like presentation steps
-            if ('other' === $step->getType() && $step->isTimeless()) {
-                continue;
-            }
             if ($step->isOpen()) {
                 return $step;
             }
@@ -828,11 +829,28 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
     {
         $currentStep = $this->getCurrentStep();
         if ($currentStep) {
-            if ($currentStep->isClosed()) {
+            if (
+                $currentStep->isClosed()
+                || (OtherStep::TYPE === $currentStep->getType() && $currentStep->isTimeless())
+                || (
+                    $currentStep instanceof SelectionStep
+                    && null !== $currentStep->getStartAt()
+                    && null === $currentStep->getEndAt()
+                    && false === $currentStep->isVotable()
+                )
+            ) {
                 return self::$openingStatuses['closed'];
             }
+
             if ($currentStep->isOpen()) {
-                return self::$openingStatuses['opened'];
+                if (
+                    OtherStep::TYPE === $currentStep->getType()
+                    || ($currentStep instanceof SelectionStep && false === $currentStep->isVotable())
+                ) {
+                    return self::$openingStatuses['opened'];
+                }
+
+                return self::$openingStatuses['opened_participation'];
             }
             if ($currentStep->isFuture()) {
                 foreach ($this->getRealSteps() as $step) {
@@ -842,11 +860,11 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
                     }
                 }
 
-                return self::$openingStatuses['future_witout_finished_steps'];
+                return self::$openingStatuses['future_without_finished_steps'];
             }
         }
 
-        return -1;
+        return self::$openingStatuses['unknown'];
     }
 
     public function isClosed(): bool
