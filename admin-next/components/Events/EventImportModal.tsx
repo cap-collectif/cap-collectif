@@ -28,27 +28,6 @@ export const getHeaders = (intl: IntlShape) => {
   }
 }
 
-const EXAMPLE_ROW = [
-  "Titre de l'event",
-  "Contenu de l'event",
-  'admin@cap-collectif.com',
-  '2010-05-20 00:00:00',
-  '2010-07-24 00:00:00',
-  'oui',
-  '25 rue claude tillier',
-  '75012',
-  'Paris',
-  'France',
-  'titre du theme1/titre du theme2',
-  'titre du projet1/titre du projet2',
-  'titre de la zone1/titre de la zone2',
-  'oui',
-  'oui',
-  '',
-  '',
-  '',
-]
-
 export const onSubmit = (data: AddEventsInput, onClose: () => void, intl: IntlShape) => {
   const input = {
     ...data,
@@ -68,10 +47,6 @@ const EventImportModal: React.FC = () => {
   const intl = useIntl()
   const [data, setData] = React.useState<AddEventsInput>()
   const [loading, setLoading] = React.useState(false)
-
-  const headersTranslations = Object.values(getHeaders(intl))
-
-  const exampleData = encodeURI(`${headersTranslations.join(';')}\n${EXAMPLE_ROW.join(';')}`)
 
   return (
     <Modal
@@ -111,7 +86,7 @@ const EventImportModal: React.FC = () => {
                 <FormattedHTMLMessage
                   id="csv-file-helptext"
                   values={{
-                    link: `data:text/csv;charset=utf-8,${exampleData}`,
+                    link: '/import-event-csv-template',
                   }}
                 />
               </Text>

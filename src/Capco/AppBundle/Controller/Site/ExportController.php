@@ -551,6 +551,85 @@ class ExportController extends Controller
     }
 
     /**
+     * @Route("/import-event-csv-template", name="app_export_event_csv_template", options={"i18n" = false})
+     */
+    public function importEventCSVTemplate(Request $request, TranslatorInterface $translator): Response
+    {
+        $headerKeys = [
+            'global.title',
+            'global.description',
+            'project_download.label.author_email',
+            'event.import.start',
+            'end',
+            'global.registration',
+            'project_download.label.address',
+            'admin.fields.event.zipcode',
+            'admin.fields.event.city',
+            'admin.fields.event.country',
+            'event.import.theme',
+            'global.project.label',
+            'global.zones',
+            'global.publication',
+            'admin.fields.proposal.comments',
+            'event.import.metadescription',
+            'event.import.customcode',
+            'project_download.label.link',
+        ];
+
+        $exampleRow = [
+            "Titre de l'event",
+            "Contenu de l'event",
+            'admin@cap-collectif.com',
+            '2010-05-20 00:00:00',
+            '2010-07-24 00:00:00',
+            'oui',
+            '2 rue neuve Saint-Pierre',
+            '75004',
+            'Paris',
+            'France',
+            'titre du theme1/titre du theme2',
+            'titre du projet1/titre du projet2',
+            'titre de la zone1/titre de la zone2',
+            'oui',
+            'oui',
+            '',
+            '',
+            '',
+        ];
+
+        $headers = array_map(fn ($key) => $translator->trans($key), $headerKeys);
+
+        $data = [
+            $headers,
+            $exampleRow,
+        ];
+
+        $response = new Response();
+
+        // set encoding
+        $csvContent = "\xEF\xBB\xBF";
+
+        $file = fopen('php://temp', 'r+');
+
+        if (false === $file) {
+            throw new \Exception('Could not open file.');
+        }
+
+        foreach ($data as $row) {
+            fputcsv($file, $row, ';');
+        }
+        rewind($file);
+        $csvContent .= stream_get_contents($file);
+        fclose($file);
+
+        $response->headers->set('Content-Type', 'text/csv; charset=UTF-8');
+        $response->headers->set('Content-Disposition', 'attachment; filename="import_events_template.csv"');
+        $response->setContent($csvContent);
+
+        return $response;
+    }
+
+    /**
      * @Route("/export-project-mediators-proposals-votes/{projectId}", name="app_export_project_mediators_proposals_votes", options={"i18n" = false})
      * @Security("is_granted('ROLE_ADMIN')")
      */
