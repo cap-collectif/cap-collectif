@@ -1,5 +1,6 @@
 import { SectionIdCarrouselQuery$data } from '@relay/SectionIdCarrouselQuery.graphql'
 import { CarrouselElementType } from '@relay/SectionIdCarrouselQuery.graphql'
+import { SECTION_TITLE_MAX_LENGTH } from './CarrouselParameters'
 
 export type FormValues = {
   position: number
@@ -35,7 +36,7 @@ export type PrefillEntity = {
 export type SectionType = 'carrousel' | 'carrouselHighlighted'
 
 export const isValid = (value: FormValues, type: SectionType) => {
-  if (type === 'carrouselHighlighted' && (!value.title || value.title?.length > 11)) return false
+  if (type === 'carrouselHighlighted' && (!value.title || value.title?.length > SECTION_TITLE_MAX_LENGTH)) return false
   if (value.preventReSubmit || !value.position || !Number.isInteger(value.position) || value.position < 1) return false
   if (
     value.carrouselElements.every(element => {

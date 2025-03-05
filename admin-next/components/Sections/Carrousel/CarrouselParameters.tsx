@@ -5,7 +5,7 @@ import { useFormContext } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import { SectionType } from './Carrousel.utils'
 
-export const SECTION_TITLE_MAX_LENGTH = 11
+export const SECTION_TITLE_MAX_LENGTH = 20
 
 export const CarrouselParameters: FC<{ type: SectionType }> = ({ type }) => {
   const intl = useIntl()

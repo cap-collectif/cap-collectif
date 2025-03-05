@@ -69,7 +69,9 @@
             {% set alt = true %}
         {% endif %}
 
-        {% if section.type == 'introduction' %}
+        {% if section.type == 'highlight' %}
+            {{ get_highlighted_content(section) }}
+        {% elseif section.type == 'introduction' %}
             {% include '@CapcoApp/Homepage/intro.html.twig' with {'section': section} only %}
         {% elseif section.type == 'videos' %}
             {{ get_last_videos(section.nbObjects, 0, section) }}
