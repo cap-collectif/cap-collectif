@@ -118,7 +118,6 @@ class QuestionnaireParticipantExporter extends ParticipantExporter
                 $questionnaire,
                 $anonymousRepliesOffset,
                 self::BATCH_SIZE,
-                true
             );
 
             if ([] === $anonymousReplies) {
