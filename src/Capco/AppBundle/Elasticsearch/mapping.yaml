@@ -367,7 +367,7 @@ mappings:
         objectValue:
             properties:
                 labels: { type: keyword }
-                other: { type: keyword }
+                other: { type: keyword, ignore_above: 32766 }
         iaSentiment: { type: text }
         iaReadability: { type: byte }
         iaCategory: { type: keyword }
