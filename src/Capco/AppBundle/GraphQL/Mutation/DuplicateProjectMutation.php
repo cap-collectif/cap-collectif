@@ -31,7 +31,7 @@ class DuplicateProjectMutation implements MutationInterface
             throw new UserError('This project does not exist.');
         }
 
-        $clonedProject = $this->cloneStepService->cloneProject($originalProject);
+        $clonedProject = $this->cloneStepService->cloneProject($originalProject, $viewer);
 
         return ['oldProject' => $originalProject, 'newProject' => $clonedProject];
     }

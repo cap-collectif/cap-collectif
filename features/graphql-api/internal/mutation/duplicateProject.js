@@ -11,6 +11,7 @@ const DuplicateProjectMutation = /* GraphQL */ `
         themes {
           title
         }
+        visibility
         steps {
           ... on CollectStep {
             title
@@ -46,6 +47,7 @@ const DuplicateProjectMutation = /* GraphQL */ `
         themes {
           title
         }
+        visibility
         steps {
           ... on CollectStep {
             title
@@ -111,6 +113,43 @@ describe('Internal | duplicateProject', () => {
     });
     expect(newProject.steps[0].form.analysisConfiguration.favourableStatus.name).toBe(
       oldProject.steps[0].form.analysisConfiguration.favourableStatus.name,
+    );
+    expect(newProject.visibility).toBe(
+      'ME'
+    );
+  });
+
+  it('duplicate project with same owner as viewer, duplicate project must have ME visibility', async () => {
+    const duplicateProjectResponse = await graphql(
+      DuplicateProjectMutation,
+      {
+        input: {
+          id: toGlobalId('Project', 'externalProject'),
+        },
+      },
+      'internal_welcomatic',
+    );
+    const newProject = duplicateProjectResponse.duplicateProject.newProject;
+
+    expect(newProject.visibility).toBe(
+      'ME'
+    );
+  });
+
+  it('duplicate project with admin user, ADMIN visibility must be set', async () => {
+    const duplicateProjectResponse = await graphql(
+      DuplicateProjectMutation,
+      {
+        input: {
+          id: toGlobalId('Project', 'projectOrgaVisibilityAdminAndMe'),
+        },
+      },
+      'internal_super_admin',
+    );
+    const newProject = duplicateProjectResponse.duplicateProject.newProject;
+
+    expect(newProject.visibility).toBe(
+      'ADMIN'
     );
   });
 });

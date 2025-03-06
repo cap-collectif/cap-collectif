@@ -13,6 +13,8 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
+use Capco\AppBundle\Enum\ProjectVisibilityMode;
+use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
@@ -38,9 +40,9 @@ class CloneStepService
         $this->stepCloneCache = [];
     }
 
-    public function cloneProject(Project $originalProject): Project
+    public function cloneProject(Project $originalProject, User $viewer): Project
     {
-        $clonedProject = $this->getClonedProject($originalProject);
+        $clonedProject = $this->getClonedProject($originalProject, $viewer);
         $this->cloneProjectAuthors($originalProject, $clonedProject);
         $this->cloneThemes($originalProject, $clonedProject);
 
@@ -218,11 +220,22 @@ class CloneStepService
         }
     }
 
-    private function getClonedProject(Project $originalProject): Project
+    private function getClonedProject(Project $originalProject, User $viewer): Project
     {
         $clonedProject = clone $originalProject;
         $clonedProject->setTitle($this->translator->trans(self::COPY_TITLE_PREFIX) . ' ' . $originalProject->getTitle());
         $clonedProject->setSlug(self::COPY_TITLE_PREFIX . '-' . $originalProject->getSlug());
+
+        $projectVisibility = ProjectVisibilityMode::VISIBILITY_ADMIN;
+
+        if (
+            $clonedProject->getCreator()?->getId() === $viewer->getId()
+            || $clonedProject->getOwner() === $viewer->getOrganization()
+        ) {
+            $projectVisibility = ProjectVisibilityMode::VISIBILITY_ME;
+        }
+
+        $clonedProject->setVisibility($projectVisibility);
 
         return $clonedProject;
     }
