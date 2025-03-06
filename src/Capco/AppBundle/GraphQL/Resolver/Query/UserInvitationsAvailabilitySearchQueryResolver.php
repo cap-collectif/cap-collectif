@@ -41,12 +41,15 @@ class UserInvitationsAvailabilitySearchQueryResolver implements QueryInterface
                 continue;
             }
 
-            if (\in_array($email, $nonAvailableInvitationEmails, true)) {
-                $payload[] = [
-                    'email' => $email,
-                    'availableForUser' => true,
-                    'availableForInvitation' => false,
-                ];
+            foreach ($existingInvitations as $existingInvitation) {
+                $isExpired = $existingInvitation->hasExpired();
+                if ($existingInvitation->getEmail() === $email) {
+                    $payload[] = [
+                        'email' => $email,
+                        'availableForUser' => true,
+                        'availableForInvitation' => $isExpired,
+                    ];
+                }
             }
         }
 

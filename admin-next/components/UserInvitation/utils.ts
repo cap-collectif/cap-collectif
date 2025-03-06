@@ -11,8 +11,8 @@ export const CONNECTION_NODES_PER_PAGE: number = 50
 export const MAX_EMAILS = 5
 
 export const emailAvailabilitiesDefault: EmailAvailabilities = {
-  emailsAlreadyLinkedToAnAccount: [],
-  emailsAlreadyReceivedInvitation: [],
+  alreadyRegistered: [],
+  cannotBeInvited: [],
 }
 
 /**
@@ -88,7 +88,7 @@ export const getInvitationsAvailability = async (
   query: GraphQLTaggedNode,
 ): Promise<EmailAvailabilities> => {
   if (inputEmails === '' && importedUsers?.length === 0) {
-    return
+    return emailAvailabilitiesDefault
   }
 
   let validEmails = []
@@ -111,29 +111,29 @@ export const getInvitationsAvailability = async (
     const invitationsAvailabilitiesData: ImportMembersUploader_UsersAvailabilityQuery$data['userInvitationsAvailabilitySearch'] =
       response.userInvitationsAvailabilitySearch
 
-    const emailsAlreadyLinkedToAnAccount = invitationsAvailabilitiesData.edges
-      .filter(item => !item.node.availableForUser)
-      .map(item => item.node.email)
+    const alreadyRegistered =
+      invitationsAvailabilitiesData.edges.filter(item => !item.node.availableForUser).map(item => item.node.email) || []
 
-    const emailsAlreadyReceivedInvitation = invitationsAvailabilitiesData.edges
-      .filter(item => !item.node.availableForInvitation && item.node.availableForUser)
-      .map(item => item.node.email)
+    const cannotBeInvited =
+      invitationsAvailabilitiesData.edges
+        .filter(item => !item.node.availableForInvitation && item.node.availableForUser)
+        .map(item => item.node.email) || []
 
     return {
-      emailsAlreadyLinkedToAnAccount: emailsAlreadyLinkedToAnAccount ?? [],
-      emailsAlreadyReceivedInvitation: emailsAlreadyReceivedInvitation ?? [],
+      alreadyRegistered: alreadyRegistered,
+      cannotBeInvited: cannotBeInvited,
     }
   }
 }
 
 /**
  * Filters out unavailable emails from the list of imported users.
- * @param {string[]} importedUsers - An array of email addresses representing the imported users.
+ * @param {string[]} importedUsersArray - An array of email addresses representing the imported users.
  * @param {string[]} unavailableEmails - An array of email addresses that are unavailable and need to be removed from the importedUsers array.
  * @returns {string[]} A new array of email addresses from importedUsers with the unavailable emails removed.
  */
-export const filterAvailableEmails = (importedUsers: string[], unavailableEmails: string[]): string[] => {
+export const filterAvailableEmails = (importedUsersArray: string[], unavailableEmails: string[]): string[] => {
   return unavailableEmails.length === 0
-    ? importedUsers
-    : importedUsers.filter(item => !unavailableEmails.includes(item))
+    ? importedUsersArray
+    : importedUsersArray.filter(item => !unavailableEmails.includes(item))
 }

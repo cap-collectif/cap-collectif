@@ -1,3 +1,4 @@
+/* eslint-disable relay/unused-fields */
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Flex, Text, FormGuideline, FormLabel, Link, Uploader } from '@cap-collectif/ui'
@@ -6,6 +7,7 @@ import { graphql } from 'react-relay'
 import CsvImportResult from './CsvImportResult'
 import {
   emailAvailabilitiesDefault,
+  filterAvailableEmails,
   getInputFromFile,
   getInvitationsAvailability,
 } from '@components/UserInvitation/utils'
@@ -43,17 +45,6 @@ export const ImportMembersUploader = (): JSX.Element => {
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
   const [isCorrectFormat, setIsCorrectFormat] = React.useState<boolean>(true)
 
-  const filterUnavailableEmails = (emails: CsvEmails) => {
-    const { emailsAlreadyLinkedToAnAccount, emailsAlreadyReceivedInvitation } =
-      emailAvailabilities ?? emailAvailabilitiesDefault
-    const unavailableEmails = [...emailsAlreadyLinkedToAnAccount, ...emailsAlreadyReceivedInvitation]
-    const filteredEmails = emails.importedUsers?.filter(item => !unavailableEmails.includes(item.email))
-    return {
-      ...emails,
-      importedUsers: filteredEmails,
-    }
-  }
-
   const handleCsvUpload = async (file: string | any[]) => {
     if (file?.length < 1) return
     setValue('file', file[0])
@@ -64,10 +55,12 @@ export const ImportMembersUploader = (): JSX.Element => {
       const result = getInputFromFile(text, setIsCorrectFormat)
       const validEmails = result.importedUsers.map(item => item.email)
       setIsLoading(true)
-
       const availability = await getInvitationsAvailability(inputEmails, validEmails, USER_FETCH_QUERY)
-      setEmailAvailabilities(availability)
-      setValue('csvEmails', filterUnavailableEmails(result))
+      setEmailAvailabilities(availability) // keep up-to-date for the display of result banners
+      const unavailableEmails = [...availability.alreadyRegistered, ...availability.cannotBeInvited]
+      const filteredEmails = filterAvailableEmails(validEmails, unavailableEmails)
+      const filteredImportedUsers = result.importedUsers.filter(user => filteredEmails.includes(user.email))
+      setValue('csvEmails', { ...result, importedUsers: filteredImportedUsers })
       setIsLoading(false)
     }
     reader.onabort = () => setValue('file', null)

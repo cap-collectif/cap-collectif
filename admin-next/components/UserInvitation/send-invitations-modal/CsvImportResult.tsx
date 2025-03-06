@@ -21,12 +21,13 @@ export const CsvImportResult = ({ csvEmails, emailAvailabilities, isCorrectForma
   const { duplicateLines, importedUsers, invalidLines } = csvEmails || {}
 
   // an email that's already used in an account cannot be invited again
-  // it must be ignored in the count for identified emails
-  const emailsAlreadyLinkedToAnAccount = emailAvailabilities?.emailsAlreadyLinkedToAnAccount ?? []
-  // relaunching invitations can only be done via the quick action button in the invitations list component
-  const emailsAlreadyReceivedInvitation = emailAvailabilities?.emailsAlreadyReceivedInvitation ?? []
+  // it must be ignored in the count for identified emails, and not be included in the list of invitable emails
+  const alreadyRegistered = emailAvailabilities?.alreadyRegistered ?? []
+  // relaunching PENDING invitations can only be done via the quick action button in the invitations list component
+  // relaunching EXPIRED invitations can be triggered when the user is invited via the invitation modal
+  const cannotBeInvited = emailAvailabilities?.cannotBeInvited ?? []
 
-  const unavailableEmails = [...emailsAlreadyLinkedToAnAccount, ...emailsAlreadyReceivedInvitation]
+  const unavailableEmails = [...alreadyRegistered, ...cannotBeInvited]
 
   const importedUsersEmails = importedUsers?.map(user => user.email) || []
   const invitableEmails = filterAvailableEmails(importedUsersEmails, unavailableEmails)
@@ -40,24 +41,21 @@ export const CsvImportResult = ({ csvEmails, emailAvailabilities, isCorrectForma
     const banners = []
 
     //  email already linked to an account
-    if (emailsAlreadyLinkedToAnAccount.length > 0) {
+    if (alreadyRegistered.length > 0) {
       banners.push({
         key: 'email-already-registered-banner',
-        title: intl.formatMessage(
-          { id: 'import.users-already-registered' },
-          { count: emailsAlreadyLinkedToAnAccount.length },
-        ),
+        title: intl.formatMessage({ id: 'import.users-already-registered' }, { count: alreadyRegistered.length }),
         variant: 'warning',
       })
     }
 
     // email already received an invitation
-    if (emailsAlreadyReceivedInvitation.length > 0) {
+    if (cannotBeInvited.length > 0) {
       banners.push({
         key: 'email-already-invited-banner',
-        title: intl.formatMessage({ id: 'invitations.already-used-emails' }, { count: importedUsers.length }),
+        title: intl.formatMessage({ id: 'invitations.already-used-emails' }, { count: cannotBeInvited.length }),
         variant: 'warning',
-        children: getListAsString(emailsAlreadyReceivedInvitation),
+        children: getListAsString(cannotBeInvited),
       })
     }
 
@@ -65,7 +63,7 @@ export const CsvImportResult = ({ csvEmails, emailAvailabilities, isCorrectForma
     if (invitableEmails.length > 0) {
       banners.push({
         key: 'valid-users-banner',
-        title: intl.formatMessage({ id: 'valid-users-for-import' }, { count: importedUsers.length }),
+        title: intl.formatMessage({ id: 'valid-users-for-import' }, { count: invitableEmails.length }),
         variant: 'success',
       })
     }

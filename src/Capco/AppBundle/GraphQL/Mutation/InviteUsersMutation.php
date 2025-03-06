@@ -26,8 +26,14 @@ class InviteUsersMutation implements MutationInterface
     use MutationTrait;
     private const BATCH_SIZE = 800;
 
-    public function __construct(private readonly TokenGeneratorInterface $tokenGenerator, private readonly EntityManagerInterface $em, private readonly UserInviteRepository $userInviteRepository, private readonly UserRepository $userRepository, private readonly GroupRepository $groupRepository, private readonly Manager $manager)
-    {
+    public function __construct(
+        private readonly TokenGeneratorInterface $tokenGenerator,
+        private readonly EntityManagerInterface $em,
+        private readonly UserInviteRepository $userInviteRepository,
+        private readonly UserRepository $userRepository,
+        private readonly GroupRepository $groupRepository,
+        private readonly Manager $manager
+    ) {
     }
 
     public function __invoke(Argument $args): array
@@ -97,10 +103,6 @@ class InviteUsersMutation implements MutationInterface
                 $this->em->clear(UserInvite::class);
             }
         }
-        // to delete
-
-        $this->em->flush();
-        $this->em->clear(UserInvite::class);
 
         if (\count($toUpdateEmails) > 0) {
             $userInvites = $this->userInviteRepository->findBy(['email' => $toUpdateEmails]);
@@ -113,10 +115,11 @@ class InviteUsersMutation implements MutationInterface
                     ->setMessage($message)
                     ->setRedirectionUrl($redirectionUrl)
                 ;
+                $userInvite->addEmailMessage(new UserInviteEmailMessage($userInvite));
             }
-            $this->em->flush();
         }
 
+        $this->em->flush();
         $offset = 0;
         $newInvitations = array_map(static function (UserInvite $invite) use (&$offset) {
             return new Edge(ConnectionBuilder::offsetToCursor($offset++), $invite);

@@ -226,7 +226,7 @@ class UserInviteRepository extends EntityRepository
                         $qb
                             ->expr()
                             ->orX(
-                                $qb->expr()->eq('em.internalStatus', ':pending'),
+                                $qb->expr()->eq('em.internalStatus', ':waiting_sending'),
                                 $qb->expr()->eq('em.internalStatus', ':sent')
                             ),
                         $qb
@@ -239,7 +239,7 @@ class UserInviteRepository extends EntityRepository
                             )
                     )
             )
-                ->setParameter(':pending', UserInviteEmailMessage::WAITING_SENDING)
+                ->setParameter(':waiting_sending', UserInviteEmailMessage::WAITING_SENDING)
                 ->setParameter(':sent', UserInviteEmailMessage::SENT)
             ;
         }

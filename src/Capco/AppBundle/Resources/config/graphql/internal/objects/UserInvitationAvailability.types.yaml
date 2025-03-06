@@ -12,4 +12,4 @@ UserInvitationAvailability:
                 description: 'Is the email used in a user account.'
             availableForInvitation:
                 type: 'Boolean!'
-                description: 'Is the email used in an invitation'
+                description: 'Is the email used in an invitation that has not expired.'

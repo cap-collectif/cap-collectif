@@ -21158,7 +21158,7 @@ type UserInvitationAvailability {
   """Is the email used in a user account."""
   availableForUser: Boolean!
 
-  """Is the email used in an invitation"""
+  """Is the email used in an invitation that has not expired."""
   availableForInvitation: Boolean!
 }
 

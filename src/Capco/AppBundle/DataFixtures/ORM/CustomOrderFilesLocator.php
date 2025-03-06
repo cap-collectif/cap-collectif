@@ -340,6 +340,7 @@ final class CustomOrderFilesLocator implements FixtureLocatorInterface
             $this->fixturesDir . 'Qa/OrganizationMember.yaml',
             $this->fixturesDir . 'Qa/OrganizationTranslation.yaml',
             $this->fixturesDir . 'Qa/User.yaml',
+            $this->fixturesDir . 'Qa/UserInvite.yaml',
             $this->fixturesDir . 'Qa/UserType.yaml',
             $this->fixturesDir . 'Qa/UserTypeTranslation.yaml',
         ];

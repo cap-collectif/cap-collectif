@@ -1,0 +1,9 @@
+Capco\AppBundle\Entity\UserInvite:
+    userInviteMax:
+        id: 'userInviteMax'
+        createdAt: <(new \DateTime('2020-07-31 00:00:51'))>
+        email: 'maxime.pouessel+12346@cap-collectif.com'
+        expiresAt: <(new \DateTime('2020-08-03 00:00:51'))>
+        isAdmin: false
+        isProjectAdmin: false
+        token: 'fakeToken'

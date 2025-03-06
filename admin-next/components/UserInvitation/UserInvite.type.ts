@@ -46,8 +46,8 @@ export type UserInvite = {
 }
 
 export type EmailAvailabilities = {
-  emailsAlreadyLinkedToAnAccount: string[]
-  emailsAlreadyReceivedInvitation: string[]
+  alreadyRegistered: string[]
+  cannotBeInvited: string[]
 }
 
 export type Status = 'PENDING' | 'FAILED' | 'ALL' | 'EXPIRED' | 'ACCEPTED'

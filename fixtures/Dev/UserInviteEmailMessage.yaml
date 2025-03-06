@@ -49,7 +49,7 @@ Capco\AppBundle\Entity\UserInviteEmailMessage:
         mailerId: 'message7'
         mailerType: 'mandrill'
     ramEmailMessage:
-        __construct: ['@remInvitation']
+        __construct: ['@ramInvitation']
         id: 'ramEmailMessage'
         createdAt: <(new \DateTime('2020-03-02 00:00:51'))>
         internalStatus: 'waiting_sending'
@@ -87,3 +87,11 @@ Capco\AppBundle\Entity\UserInviteEmailMessage:
         mailerId: 'message12'
         mailerType: 'mandrill'
         messageType: 'user_invite.invitation_by_organization'
+    redirectInvitationMessage:
+        __construct: ['@redirectInvitation']
+        id: 'redirectInvitationMessage'
+        createdAt: <(new \DateTime('2025-03-05 10:00:50'))>
+        internalStatus: 'sent'
+        mailerId: 'message13'
+        mailerType: 'mandrill'
+        messageType: 'user_invite.invitation'
