@@ -16,6 +16,17 @@ const DuplicateProjectMutation = /* GraphQL */ `
           ... on CollectStep {
             title
             form {
+              notificationsConfiguration {
+                onCreate
+                onUpdate
+                onDelete
+                onCommentCreate
+                onCommentUpdate
+                onCommentDelete
+                onProposalNewsCreate
+                onProposalNewsUpdate
+                onProposalNewsDelete
+              }
               analysisConfiguration {
                 analysisStep {
                   title
@@ -52,6 +63,17 @@ const DuplicateProjectMutation = /* GraphQL */ `
           ... on CollectStep {
             title
             form {
+              notificationsConfiguration {
+                onCreate
+                onUpdate
+                onDelete
+                onCommentCreate
+                onCommentUpdate
+                onCommentDelete
+                onProposalNewsCreate
+                onProposalNewsUpdate
+                onProposalNewsDelete
+              }
               analysisConfiguration {
                 analysisStep {
                   title
@@ -114,6 +136,53 @@ describe('Internal | duplicateProject', () => {
     expect(newProject.steps[0].form.analysisConfiguration.favourableStatus.name).toBe(
       oldProject.steps[0].form.analysisConfiguration.favourableStatus.name,
     );
+
+    expect(newProject.steps[0].form.notificationsConfiguration.onCreate).toEqual(
+      oldProject.steps[0].form.notificationsConfiguration.onCreate,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onCreate).toEqual(
+      true,
+    );
+
+    expect(newProject.steps[0].form.notificationsConfiguration.onUpdate).toEqual(
+      true,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onDelete).toEqual(
+      true,
+    );
+
+    expect(newProject.steps[0].form.notificationsConfiguration.onCommentCreate).toEqual(
+      oldProject.steps[0].form.notificationsConfiguration.onCommentCreate,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onCommentCreate).toEqual(
+      true,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onCommentUpdate).toEqual(
+      oldProject.steps[0].form.notificationsConfiguration.onCommentUpdate,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onCommentUpdate).toEqual(
+      true,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onCommentDelete).toEqual(
+      oldProject.steps[0].form.notificationsConfiguration.onCommentDelete,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onCommentDelete).toEqual(
+      true,
+    );
+
+    expect(newProject.steps[0].form.notificationsConfiguration.onProposalNewsCreate).toEqual(
+      oldProject.steps[0].form.notificationsConfiguration.onProposalNewsCreate,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onProposalNewsCreate).toEqual(
+      false,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onProposalNewsUpdate).toEqual(
+      false,
+    );
+    expect(newProject.steps[0].form.notificationsConfiguration.onProposalNewsDelete).toEqual(
+      false,
+    );
+
     expect(newProject.visibility).toBe(
       'ME'
     );

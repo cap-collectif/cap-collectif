@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Service;
 
 use Capco\AppBundle\Entity\AnalysisConfiguration;
 use Capco\AppBundle\Entity\Interfaces\DefaultStatusInterface;
+use Capco\AppBundle\Entity\NotificationsConfiguration\ProposalFormNotificationConfiguration;
 use Capco\AppBundle\Entity\NotificationsConfiguration\QuestionnaireNotificationConfiguration;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -126,6 +127,8 @@ class CloneStepService
     ): void {
         $clonedProposalForm = $clonedAbstractStep->getStep()->getProposalForm();
         $proposalFormTitle = $proposalForm->getTitle();
+
+        $this->cloneCollectStepNotificationConfiguration($proposalForm, $clonedProposalForm);
 
         $clonedProposalForm->setTitle(
             sprintf('%s %s', $this->translator->trans(self::COPY_TITLE_PREFIX), $proposalFormTitle)
@@ -261,6 +264,33 @@ class CloneStepService
         ;
 
         $clonedQuestionnaire->setNotificationsConfiguration($newNotificationsConfiguration);
+    }
+
+    private function cloneCollectStepNotificationConfiguration(
+        ProposalForm $proposalForm,
+        ProposalForm $clonedProposalForm
+    ): void {
+        $notificationsConfiguration = $proposalForm->getNotificationsConfiguration();
+
+        $newNotificationsConfiguration = (new ProposalFormNotificationConfiguration())
+            ->setOnCommentCreate(
+                $notificationsConfiguration->isOnCommentCreate()
+            )
+            ->setOnCommentUpdate(
+                $notificationsConfiguration->isOnCommentUpdate()
+            )
+            ->setOnCommentDelete(
+                $notificationsConfiguration->isOnCommentDelete()
+            )
+            ->setOnProposalNewsCreate($notificationsConfiguration->isOnProposalNewsCreate())
+            ->setOnProposalNewsUpdate($notificationsConfiguration->isOnProposalNewsUpdate())
+            ->setOnProposalNewsDelete($notificationsConfiguration->isOnProposalNewsDelete())
+            ->setOnCreate($notificationsConfiguration->isOnCreate())
+            ->setOnUpdate($notificationsConfiguration->isOnUpdate())
+            ->setOnDelete($notificationsConfiguration->isOnDelete())
+        ;
+
+        $clonedProposalForm->setNotificationsConfiguration($newNotificationsConfiguration);
     }
 
     private function getOrCloneStatus(
