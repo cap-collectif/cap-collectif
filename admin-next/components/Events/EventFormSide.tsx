@@ -63,7 +63,7 @@ const EventFormSide: React.FC<PostFormSideProps> = ({
     id &&
     !initialAuthor?.isAdmin &&
     !isAdminOrganization &&
-    initialStatus &&
+    initialStatus?.labels &&
     allowUsersToProposeEvents &&
     !isOnlyProjectAdmin
   const isModerationDisabled = isSuperAdmin ? false : initialStatus?.labels?.[0] !== ModerationStatus.AWAITING

@@ -16,6 +16,10 @@ import environment from '../createRelayEnvironment'
 if (typeof window !== 'undefined' && window.sentryDsn) {
   Sentry.init({
     dsn: window.sentryDsn,
+    ignoreErrors: [
+        'ResizeObserver loop limit exceeded',
+        'ResizeObserver loop completed with undelivered notifications',
+    ]
   })
 }
 
