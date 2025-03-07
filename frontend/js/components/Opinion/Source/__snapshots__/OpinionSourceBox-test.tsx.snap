@@ -495,6 +495,27 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "avatarUrl",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "displayName",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "vip",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
                                           "concreteType": "Media",
                                           "kind": "LinkedField",
                                           "name": "media",
@@ -515,20 +536,6 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                               "storageKey": null,
                                             },
                                           ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "displayName",
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "vip",
                                           "storageKey": null,
                                         },
                                       ],
@@ -1530,26 +1537,8 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "Media",
-                                  "kind": "LinkedField",
-                                  "name": "media",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                  ],
+                                  "kind": "ScalarField",
+                                  "name": "avatarUrl",
                                   "storageKey": null,
                                 },
                                 Object {
@@ -1608,26 +1597,8 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
                                 Object {
                                   "alias": null,
                                   "args": null,
-                                  "concreteType": "Media",
-                                  "kind": "LinkedField",
-                                  "name": "media",
-                                  "plural": false,
-                                  "selections": Array [
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "url",
-                                      "storageKey": null,
-                                    },
-                                    Object {
-                                      "alias": null,
-                                      "args": null,
-                                      "kind": "ScalarField",
-                                      "name": "id",
-                                      "storageKey": null,
-                                    },
-                                  ],
+                                  "kind": "ScalarField",
+                                  "name": "avatarUrl",
                                   "storageKey": null,
                                 },
                                 Object {
@@ -1652,7 +1623,7 @@ exports[`<OpinionSourceBox /> renders correcty 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "ae08c84ad27f1e8cfd724b2b8d6612e4",
+              "cacheID": "0d82b001a8998bc805cc80258afbae10",
               "id": null,
               "metadata": Object {},
               "name": "OpinionSourceBoxQuery",
@@ -1975,10 +1946,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

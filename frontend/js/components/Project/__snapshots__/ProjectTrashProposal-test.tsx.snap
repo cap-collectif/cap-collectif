@@ -278,6 +278,20 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
                                         "concreteType": "Media",
                                         "kind": "LinkedField",
                                         "name": "media",
@@ -298,13 +312,6 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                             "storageKey": null,
                                           },
                                         ],
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "displayName",
                                         "storageKey": null,
                                       },
                                     ],
@@ -651,26 +658,8 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "Media",
-                                        "kind": "LinkedField",
-                                        "name": "media",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                        ],
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -912,7 +901,7 @@ exports[`<ProjectTrashProposal /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "d8b84137757d59a0b2a79172f4b2aef2",
+            "cacheID": "c4c23c0b50ad3c2d9a8bf085eacbaa7f",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashProposalQuery",
@@ -1121,10 +1110,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

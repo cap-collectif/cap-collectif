@@ -2009,26 +2009,8 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
+                                    "kind": "ScalarField",
+                                    "name": "avatarUrl",
                                     "storageKey": null,
                                   },
                                   Object {
@@ -2058,6 +2040,31 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "totalCount",
+                                        "storageKey": null,
+                                      },
+                                    ],
+                                    "storageKey": null,
+                                  },
+                                  Object {
+                                    "alias": null,
+                                    "args": null,
+                                    "concreteType": "Media",
+                                    "kind": "LinkedField",
+                                    "name": "media",
+                                    "plural": false,
+                                    "selections": Array [
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "url",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "kind": "ScalarField",
+                                        "name": "id",
                                         "storageKey": null,
                                       },
                                     ],
@@ -2409,7 +2416,7 @@ exports[`<ProposalAdminPage /> render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "869b23681c675d55f33e22ee2a88ba0c",
+            "cacheID": "bc04370cd09a1d1e91f06d22f7c1df51",
             "id": null,
             "metadata": Object {},
             "name": "ProposalAdminPageQuery",
@@ -2875,10 +2882,7 @@ fragment ProposalRevision_proposal on Proposal {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserBox_user on User {

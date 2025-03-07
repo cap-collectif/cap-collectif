@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal.projects.authors Check its display logo organization for project 1`] = `
+Object {
+  "project": Object {
+    "authors": Array [
+      Object {
+        "avatarUrl": "https://capco.test/media/default/0001/01/giec.jpg",
+      },
+    ],
+    "id": "UHJvamVjdDpwcm9qZWN0T3JnYVZpc2liaWxpdHlBZG1pbkFuZE1l",
+  },
+}
+`;

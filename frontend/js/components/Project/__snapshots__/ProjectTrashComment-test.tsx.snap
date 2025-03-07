@@ -219,26 +219,8 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "Media",
-                                        "kind": "LinkedField",
-                                        "name": "media",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                        ],
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -267,6 +249,31 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Media",
+                                        "kind": "LinkedField",
+                                        "name": "media",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "url",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
                                         "storageKey": null,
                                       },
                                       Object {
@@ -384,26 +391,8 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "Media",
-                                                    "kind": "LinkedField",
-                                                    "name": "media",
-                                                    "plural": false,
-                                                    "selections": Array [
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "url",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "id",
-                                                        "storageKey": null,
-                                                      },
-                                                    ],
+                                                    "kind": "ScalarField",
+                                                    "name": "avatarUrl",
                                                     "storageKey": null,
                                                   },
                                                   Object {
@@ -988,7 +977,7 @@ exports[`<ProjectTrashComment /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "ec95a622c41e4602f76790bfda0ccb2e",
+            "cacheID": "26fa97460e2cc8980f36068a5a25e25d",
             "id": null,
             "metadata": Object {},
             "name": "ProjectTrashCommentQuery",
@@ -1173,10 +1162,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

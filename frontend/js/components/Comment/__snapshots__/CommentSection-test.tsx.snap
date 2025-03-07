@@ -256,26 +256,8 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "Media",
-                                        "kind": "LinkedField",
-                                        "name": "media",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                        ],
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -297,6 +279,31 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Media",
+                                        "kind": "LinkedField",
+                                        "name": "media",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "url",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
                                         "storageKey": null,
                                       },
                                       Object {
@@ -414,26 +421,8 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "Media",
-                                                    "kind": "LinkedField",
-                                                    "name": "media",
-                                                    "plural": false,
-                                                    "selections": Array [
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "url",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "id",
-                                                        "storageKey": null,
-                                                      },
-                                                    ],
+                                                    "kind": "ScalarField",
+                                                    "name": "avatarUrl",
                                                     "storageKey": null,
                                                   },
                                                   Object {
@@ -1046,26 +1035,8 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                       Object {
                                         "alias": null,
                                         "args": null,
-                                        "concreteType": "Media",
-                                        "kind": "LinkedField",
-                                        "name": "media",
-                                        "plural": false,
-                                        "selections": Array [
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "url",
-                                            "storageKey": null,
-                                          },
-                                          Object {
-                                            "alias": null,
-                                            "args": null,
-                                            "kind": "ScalarField",
-                                            "name": "id",
-                                            "storageKey": null,
-                                          },
-                                        ],
+                                        "kind": "ScalarField",
+                                        "name": "avatarUrl",
                                         "storageKey": null,
                                       },
                                       Object {
@@ -1094,6 +1065,31 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                         "args": null,
                                         "kind": "ScalarField",
                                         "name": "displayName",
+                                        "storageKey": null,
+                                      },
+                                      Object {
+                                        "alias": null,
+                                        "args": null,
+                                        "concreteType": "Media",
+                                        "kind": "LinkedField",
+                                        "name": "media",
+                                        "plural": false,
+                                        "selections": Array [
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "url",
+                                            "storageKey": null,
+                                          },
+                                          Object {
+                                            "alias": null,
+                                            "args": null,
+                                            "kind": "ScalarField",
+                                            "name": "id",
+                                            "storageKey": null,
+                                          },
+                                        ],
                                         "storageKey": null,
                                       },
                                       Object {
@@ -1211,26 +1207,8 @@ exports[`<CommentSection /> should render correctly 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
-                                                    "concreteType": "Media",
-                                                    "kind": "LinkedField",
-                                                    "name": "media",
-                                                    "plural": false,
-                                                    "selections": Array [
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "url",
-                                                        "storageKey": null,
-                                                      },
-                                                      Object {
-                                                        "alias": null,
-                                                        "args": null,
-                                                        "kind": "ScalarField",
-                                                        "name": "id",
-                                                        "storageKey": null,
-                                                      },
-                                                    ],
+                                                    "kind": "ScalarField",
+                                                    "name": "avatarUrl",
                                                     "storageKey": null,
                                                   },
                                                   Object {
@@ -1813,7 +1791,7 @@ exports[`<CommentSection /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "70496339ddd0095784e2179159591166",
+            "cacheID": "41588e58c45bc51d1f7c1fd94a3cbde4",
             "id": null,
             "metadata": Object {},
             "name": "CommentSectionQuery",
@@ -2127,10 +2105,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

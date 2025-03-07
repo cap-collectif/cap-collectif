@@ -47,7 +47,7 @@ Array [
             <img
               alt="Agui le penseur"
               className="sc-bcXGCL fHacA-d"
-              src="<mock-value-for-field-\\"url\\">"
+              src="<mock-value-for-field-\\"avatarUrl\\">"
               style={
                 Object {
                   "objectFit": "cover",
@@ -154,7 +154,7 @@ Array [
             <img
               alt="Agui le penseur"
               className="sc-bcXGCL fHacA-d"
-              src="<mock-value-for-field-\\"url\\">"
+              src="<mock-value-for-field-\\"avatarUrl\\">"
               style={
                 Object {
                   "objectFit": "cover",
@@ -258,7 +258,7 @@ Array [
             <img
               alt="Agui le penseur"
               className="sc-bcXGCL fHacA-d"
-              src="<mock-value-for-field-\\"url\\">"
+              src="<mock-value-for-field-\\"avatarUrl\\">"
               style={
                 Object {
                   "objectFit": "cover",
@@ -365,7 +365,7 @@ Array [
             <img
               alt="Agui le penseur"
               className="sc-bcXGCL fHacA-d"
-              src="<mock-value-for-field-\\"url\\">"
+              src="<mock-value-for-field-\\"avatarUrl\\">"
               style={
                 Object {
                   "objectFit": "cover",
@@ -476,7 +476,7 @@ Array [
             <img
               alt="Agui le penseur"
               className="sc-bcXGCL fHacA-d"
-              src="<mock-value-for-field-\\"url\\">"
+              src="<mock-value-for-field-\\"avatarUrl\\">"
               style={
                 Object {
                   "objectFit": "cover",

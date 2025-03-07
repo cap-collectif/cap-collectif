@@ -338,26 +338,8 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
-                                          "concreteType": "Media",
-                                          "kind": "LinkedField",
-                                          "name": "media",
-                                          "plural": false,
-                                          "selections": Array [
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "url",
-                                              "storageKey": null,
-                                            },
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "id",
-                                              "storageKey": null,
-                                            },
-                                          ],
+                                          "kind": "ScalarField",
+                                          "name": "avatarUrl",
                                           "storageKey": null,
                                         },
                                         Object {
@@ -386,6 +368,31 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                           "args": null,
                                           "kind": "ScalarField",
                                           "name": "displayName",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "concreteType": "Media",
+                                          "kind": "LinkedField",
+                                          "name": "media",
+                                          "plural": false,
+                                          "selections": Array [
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "url",
+                                              "storageKey": null,
+                                            },
+                                            Object {
+                                              "alias": null,
+                                              "args": null,
+                                              "kind": "ScalarField",
+                                              "name": "id",
+                                              "storageKey": null,
+                                            },
+                                          ],
                                           "storageKey": null,
                                         },
                                         Object {
@@ -503,26 +510,8 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                                     Object {
                                                       "alias": null,
                                                       "args": null,
-                                                      "concreteType": "Media",
-                                                      "kind": "LinkedField",
-                                                      "name": "media",
-                                                      "plural": false,
-                                                      "selections": Array [
-                                                        Object {
-                                                          "alias": null,
-                                                          "args": null,
-                                                          "kind": "ScalarField",
-                                                          "name": "url",
-                                                          "storageKey": null,
-                                                        },
-                                                        Object {
-                                                          "alias": null,
-                                                          "args": null,
-                                                          "kind": "ScalarField",
-                                                          "name": "id",
-                                                          "storageKey": null,
-                                                        },
-                                                      ],
+                                                      "kind": "ScalarField",
+                                                      "name": "avatarUrl",
                                                       "storageKey": null,
                                                     },
                                                     Object {
@@ -1223,6 +1212,20 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "avatarUrl",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
+                                          "kind": "ScalarField",
+                                          "name": "displayName",
+                                          "storageKey": null,
+                                        },
+                                        Object {
+                                          "alias": null,
+                                          "args": null,
                                           "concreteType": "Media",
                                           "kind": "LinkedField",
                                           "name": "media",
@@ -1243,13 +1246,6 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                               "storageKey": null,
                                             },
                                           ],
-                                          "storageKey": null,
-                                        },
-                                        Object {
-                                          "alias": null,
-                                          "args": null,
-                                          "kind": "ScalarField",
-                                          "name": "displayName",
                                           "storageKey": null,
                                         },
                                       ],
@@ -1596,26 +1592,8 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
                                         Object {
                                           "alias": null,
                                           "args": null,
-                                          "concreteType": "Media",
-                                          "kind": "LinkedField",
-                                          "name": "media",
-                                          "plural": false,
-                                          "selections": Array [
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "url",
-                                              "storageKey": null,
-                                            },
-                                            Object {
-                                              "alias": null,
-                                              "args": null,
-                                              "kind": "ScalarField",
-                                              "name": "id",
-                                              "storageKey": null,
-                                            },
-                                          ],
+                                          "kind": "ScalarField",
+                                          "name": "avatarUrl",
                                           "storageKey": null,
                                         },
                                         Object {
@@ -1857,7 +1835,7 @@ exports[`<ProjectTrash /> should render correctly 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "20611724e2b599c4daf051089eeb0519",
+              "cacheID": "6555952b2146f5498f6ce3caa4c55d71",
               "id": null,
               "metadata": Object {},
               "name": "ProjectTrashQuery",
@@ -2231,10 +2209,7 @@ fragment UnpublishedTooltip_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

@@ -229,26 +229,8 @@ exports[`<ReplyPage /> should render correctly 1`] = `
                                           Object {
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "Media",
-                                            "kind": "LinkedField",
-                                            "name": "media",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                            ],
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
                                             "storageKey": null,
                                           },
                                           Object {
@@ -296,7 +278,7 @@ exports[`<ReplyPage /> should render correctly 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "ab2da647f94ec551212dda8565ca54a3",
+            "cacheID": "7a98cc806d57feec6b169be5d7ecf75e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -349,10 +331,7 @@ fragment Reply_reply on Reply {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -603,26 +582,8 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
                                           Object {
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "Media",
-                                            "kind": "LinkedField",
-                                            "name": "media",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                            ],
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
                                             "storageKey": null,
                                           },
                                           Object {
@@ -670,7 +631,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "ab2da647f94ec551212dda8565ca54a3",
+            "cacheID": "7a98cc806d57feec6b169be5d7ecf75e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -723,10 +684,7 @@ fragment Reply_reply on Reply {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -977,26 +935,8 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
                                           Object {
                                             "alias": null,
                                             "args": null,
-                                            "concreteType": "Media",
-                                            "kind": "LinkedField",
-                                            "name": "media",
-                                            "plural": false,
-                                            "selections": Array [
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "url",
-                                                "storageKey": null,
-                                              },
-                                              Object {
-                                                "alias": null,
-                                                "args": null,
-                                                "kind": "ScalarField",
-                                                "name": "id",
-                                                "storageKey": null,
-                                              },
-                                            ],
+                                            "kind": "ScalarField",
+                                            "name": "avatarUrl",
                                             "storageKey": null,
                                           },
                                           Object {
@@ -1044,7 +984,7 @@ exports[`<ReplyPage /> should render correctly with profile not enabled and not 
             ],
           },
           "params": Object {
-            "cacheID": "ab2da647f94ec551212dda8565ca54a3",
+            "cacheID": "7a98cc806d57feec6b169be5d7ecf75e",
             "id": null,
             "metadata": Object {},
             "name": "ReplyPageQuery",
@@ -1097,10 +1037,7 @@ fragment Reply_reply on Reply {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

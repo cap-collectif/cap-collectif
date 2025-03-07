@@ -17,9 +17,7 @@ describe('<UserAvatar />', () => {
     const props = {
       user: {
         username: 'toto',
-        media: {
-          url: 'http://media12/profileAvatar.jpg',
-        },
+        avatarUrl: 'http://media12/profileAvatar.jpg',
         url: '',
       },
       size: 'xs',
@@ -31,7 +29,7 @@ describe('<UserAvatar />', () => {
     const props = {
       user: {
         username: 'toto',
-        media: null,
+        avatarUrl: null,
         url: '',
       },
       size: 'xs',
@@ -43,7 +41,7 @@ describe('<UserAvatar />', () => {
       features,
       user: {
         username: 'toto',
-        media: null,
+        avatarUrl: null,
         url: '',
       },
       defaultAvatar: 'http://avatar/customAvatar.jpg',
@@ -55,9 +53,7 @@ describe('<UserAvatar />', () => {
     const props = {
       user: {
         username: 'toto',
-        media: {
-          url: 'http://media12/profileAvatar.jpg',
-        },
+        avatarUrl: 'http://media12/profileAvatar.jpg',
         url: '',
       },
       size: 'xs',

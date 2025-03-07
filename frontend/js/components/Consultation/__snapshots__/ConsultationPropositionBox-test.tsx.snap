@@ -295,26 +295,8 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
+                                    "kind": "ScalarField",
+                                    "name": "avatarUrl",
                                     "storageKey": null,
                                   },
                                 ],
@@ -1834,6 +1816,20 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "avatarUrl",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "displayName",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
                                                     "concreteType": "Media",
                                                     "kind": "LinkedField",
                                                     "name": "media",
@@ -1854,13 +1850,6 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "displayName",
                                                     "storageKey": null,
                                                   },
                                                 ],
@@ -2006,6 +1995,20 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "avatarUrl",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "displayName",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
                                                     "concreteType": "Media",
                                                     "kind": "LinkedField",
                                                     "name": "media",
@@ -2026,13 +2029,6 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "displayName",
                                                     "storageKey": null,
                                                   },
                                                 ],
@@ -2486,7 +2482,7 @@ exports[`<ConsultationPropositionBox /> renders correctly with plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "72184f214845316c7348b31fe918d02b",
+            "cacheID": "1c1bcdca5bc73414d89895b88cdb0c13",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -2955,10 +2951,7 @@ fragment UserAvatarList_users on User {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -3277,26 +3270,8 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                   Object {
                                     "alias": null,
                                     "args": null,
-                                    "concreteType": "Media",
-                                    "kind": "LinkedField",
-                                    "name": "media",
-                                    "plural": false,
-                                    "selections": Array [
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "url",
-                                        "storageKey": null,
-                                      },
-                                      Object {
-                                        "alias": null,
-                                        "args": null,
-                                        "kind": "ScalarField",
-                                        "name": "id",
-                                        "storageKey": null,
-                                      },
-                                    ],
+                                    "kind": "ScalarField",
+                                    "name": "avatarUrl",
                                     "storageKey": null,
                                   },
                                 ],
@@ -4816,6 +4791,20 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "avatarUrl",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "displayName",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
                                                     "concreteType": "Media",
                                                     "kind": "LinkedField",
                                                     "name": "media",
@@ -4836,13 +4825,6 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "displayName",
                                                     "storageKey": null,
                                                   },
                                                 ],
@@ -4988,6 +4970,20 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                   Object {
                                                     "alias": null,
                                                     "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "avatarUrl",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
+                                                    "kind": "ScalarField",
+                                                    "name": "displayName",
+                                                    "storageKey": null,
+                                                  },
+                                                  Object {
+                                                    "alias": null,
+                                                    "args": null,
                                                     "concreteType": "Media",
                                                     "kind": "LinkedField",
                                                     "name": "media",
@@ -5008,13 +5004,6 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
                                                         "storageKey": null,
                                                       },
                                                     ],
-                                                    "storageKey": null,
-                                                  },
-                                                  Object {
-                                                    "alias": null,
-                                                    "args": null,
-                                                    "kind": "ScalarField",
-                                                    "name": "displayName",
                                                     "storageKey": null,
                                                   },
                                                 ],
@@ -5468,7 +5457,7 @@ exports[`<ConsultationPropositionBox /> renders correctly without plan 1`] = `
             ],
           },
           "params": Object {
-            "cacheID": "72184f214845316c7348b31fe918d02b",
+            "cacheID": "1c1bcdca5bc73414d89895b88cdb0c13",
             "id": null,
             "metadata": Object {},
             "name": "ConsultationPropositionBoxQuery",
@@ -5937,10 +5926,7 @@ fragment UserAvatarList_users on User {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

@@ -136,7 +136,7 @@ Array [
                       <img
                         alt="<mock-value-for-field-\\"username\\">"
                         className="sc-bcXGCL fHacA-d"
-                        src="<mock-value-for-field-\\"url\\">"
+                        src="<mock-value-for-field-\\"avatarUrl\\">"
                         style={
                           Object {
                             "objectFit": "cover",

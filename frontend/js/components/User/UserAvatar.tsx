@@ -64,9 +64,7 @@ const FRAGMENT = graphql`
   fragment UserAvatar_user on User {
     url
     username
-    media {
-      url
-    }
+    avatarUrl
   }
 `
 
@@ -97,7 +95,7 @@ export const UserAvatarRender = connect(mapStateToProps)(
       <Avatar
         name={user?.username || ''}
         alt={user?.username}
-        src={user?.media?.url || defaultAvatar}
+        src={user?.avatarUrl || defaultAvatar}
         mr={2}
         size={size}
         {...props}

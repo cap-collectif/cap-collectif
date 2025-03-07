@@ -50,7 +50,7 @@ Array [
               <img
                 alt="Agui le penseur"
                 className="sc-bcXGCL fHacA-d"
-                src="<media-url>"
+                src="<mock-value-for-field-\\"avatarUrl\\">"
                 style={
                   Object {
                     "objectFit": "cover",
@@ -163,7 +163,7 @@ Array [
               <img
                 alt="Agui le penseur"
                 className="sc-bcXGCL fHacA-d"
-                src="<media-url>"
+                src="<mock-value-for-field-\\"avatarUrl\\">"
                 style={
                   Object {
                     "objectFit": "cover",

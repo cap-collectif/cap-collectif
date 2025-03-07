@@ -817,6 +817,20 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -837,13 +851,6 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -989,6 +996,20 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -1009,13 +1030,6 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -1164,7 +1178,7 @@ exports[`<OpinionList /> renders correcty when not contribuable 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -1389,10 +1403,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -2265,6 +2276,20 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -2285,13 +2310,6 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -2437,6 +2455,20 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -2457,13 +2489,6 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -2612,7 +2637,7 @@ exports[`<OpinionList /> renders correcty with pagination disabled 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -2837,10 +2862,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -3713,6 +3735,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -3733,13 +3769,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -3885,6 +3914,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -3905,13 +3948,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -4060,7 +4096,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 1`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -4285,10 +4321,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -5161,6 +5194,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -5181,13 +5228,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -5333,6 +5373,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -5353,13 +5407,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -5508,7 +5555,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 2`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -5733,10 +5780,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -6609,6 +6653,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -6629,13 +6687,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -6781,6 +6832,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -6801,13 +6866,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -6956,7 +7014,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 3`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -7181,10 +7239,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -8057,6 +8112,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -8077,13 +8146,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -8229,6 +8291,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -8249,13 +8325,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -8404,7 +8473,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 4`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -8629,10 +8698,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -9505,6 +9571,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -9525,13 +9605,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -9677,6 +9750,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -9697,13 +9784,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -9852,7 +9932,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 5`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -10077,10 +10157,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -10953,6 +11030,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -10973,13 +11064,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -11125,6 +11209,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -11145,13 +11243,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -11300,7 +11391,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 6`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -11525,10 +11616,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {
@@ -12401,6 +12489,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -12421,13 +12523,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -12573,6 +12668,20 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                 Object {
                                                   "alias": null,
                                                   "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "avatarUrl",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
+                                                  "kind": "ScalarField",
+                                                  "name": "displayName",
+                                                  "storageKey": null,
+                                                },
+                                                Object {
+                                                  "alias": null,
+                                                  "args": null,
                                                   "concreteType": "Media",
                                                   "kind": "LinkedField",
                                                   "name": "media",
@@ -12593,13 +12702,6 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
                                                       "storageKey": null,
                                                     },
                                                   ],
-                                                  "storageKey": null,
-                                                },
-                                                Object {
-                                                  "alias": null,
-                                                  "args": null,
-                                                  "kind": "ScalarField",
-                                                  "name": "displayName",
                                                   "storageKey": null,
                                                 },
                                               ],
@@ -12748,7 +12850,7 @@ exports[`<OpinionList /> renders correcty with pagination enabled 7`] = `
               ],
             },
             "params": Object {
-              "cacheID": "c6db62ba9c0a28814e43be414eaa4860",
+              "cacheID": "3f65a4112a823b6f629213b202b563e1",
               "id": null,
               "metadata": Object {},
               "name": "OpinionListQuery",
@@ -12973,10 +13075,7 @@ fragment UnpublishedLabel_publishable on Publishable {
 fragment UserAvatar_user on User {
   url
   username
-  media {
-    url
-    id
-  }
+  avatarUrl
 }
 
 fragment UserLink_user on User {

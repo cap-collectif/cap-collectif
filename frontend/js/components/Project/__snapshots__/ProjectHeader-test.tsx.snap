@@ -42,7 +42,7 @@ Array [
                   <img
                     alt="Vince"
                     className="sc-bcXGCL fHacA-d"
-                    src="<mock-value-for-field-\\"url\\">"
+                    src="https://127.0.0.1/media/default/0001/01/providerReference46.jpg"
                     style={
                       Object {
                         "objectFit": "cover",
