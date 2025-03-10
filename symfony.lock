@@ -158,7 +158,7 @@
         ]
     },
     "jms/translation-bundle": {
-        "version": "1.9.1"
+        "version": "2.4.0"
     },
     "jolicode/jolitypo": {
         "version": "1.4",

@@ -62,7 +62,7 @@
         "jms/i18n-routing-bundle": "^3.0",
         "jms/serializer": "^3.2",
         "jms/serializer-bundle": "^4.0",
-        "jms/translation-bundle": "^1.0",
+        "jms/translation-bundle": "^2.4",
         "jolicode/jolinotif": "^2.0",
         "jolicode/jolitypo": "^1.0",
         "knplabs/doctrine-behaviors": "^1.6",
