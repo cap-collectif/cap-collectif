@@ -41,7 +41,17 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
 
 		-
-			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:getClass\\(\\) should return class\\-string\\<Capco\\\\AdminBundle\\\\Admin\\\\T\\> but returns class\\-string\\<object\\>\\.$#"
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:getClass\\(\\) should return class\\-string\\<Capco\\\\AdminBundle\\\\Admin\\\\T\\> but returns class\\-string\\<object\\>\\|null\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:getDataSourceIterator\\(\\) should return Sonata\\\\Exporter\\\\Source\\\\SourceIteratorInterface but returns Iterator\\<mixed, array\\>\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
+
+		-
+			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:getDatagrid\\(\\) should return Sonata\\\\AdminBundle\\\\Datagrid\\\\DatagridInterface\\<Sonata\\\\AdminBundle\\\\Datagrid\\\\ProxyQueryInterface\\<object\\>\\> but returns Sonata\\\\AdminBundle\\\\Datagrid\\\\DatagridInterface\\<Sonata\\\\AdminBundle\\\\Datagrid\\\\ProxyQueryInterface\\>\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
 
@@ -166,6 +176,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/AppendixTypeAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ArgumentAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ArgumentAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ArgumentAdmin.php
@@ -182,6 +197,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\CommentAdmin\\:\\:isViewerSuperAdmin\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/CommentAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/CommentAdmin.php
 
@@ -251,9 +271,19 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/Extension/TranslatableAdminExtension.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/FooterSocialNetworkAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\FooterSocialNetworkAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/FooterSocialNetworkAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/GlobalDistrictAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\GroupAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -276,6 +306,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/MenuItemAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/MenuItemAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\MenuItemAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/MenuItemAdmin.php
@@ -289,6 +324,11 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\NewsletterSubscriptionAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/NewsletterSubscriptionAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/OpinionAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\OpinionAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -311,6 +351,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/OpinionTypeAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/OpinionTypeAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\OpinionTypeAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/OpinionTypeAdmin.php
@@ -329,6 +374,11 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\OpinionTypeAppendixTypeAdmin\\:\\:\\$formOptions type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/OpinionTypeAppendixTypeAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/OpinionVersionAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\OpinionVersionAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -401,6 +451,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/PostAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/PostAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\PostAdmin\\:\\:\\$datagridValues has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/PostAdmin.php
@@ -412,6 +467,11 @@ parameters:
 
 		-
 			message: "#^If condition is always true\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ProjectAbstractStepAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ProjectAbstractStepAdmin.php
 
@@ -441,6 +501,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/ProjectAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ProjectAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ProjectAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ProjectAdmin.php
@@ -451,9 +516,19 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/ProjectAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ProjectTypeAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ProjectTypeAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ProjectTypeAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ProposalAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ProposalAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -464,6 +539,11 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ProposalCategoryAdmin\\:\\:\\$formOptions type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ProposalCategoryAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ProposalFormAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ProposalFormAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -481,6 +561,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/QuestionnaireAbstractQuestionAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/QuestionnaireAbstractQuestionAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\QuestionnaireAbstractQuestionAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/QuestionnaireAbstractQuestionAdmin.php
@@ -491,6 +576,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/QuestionnaireAbstractQuestionAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/QuestionnaireAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\QuestionnaireAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/QuestionnaireAdmin.php
@@ -499,6 +589,11 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\QuestionnaireAdmin\\:\\:\\$formOptions type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/QuestionnaireAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ReplyAdmin.php
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\ReportingAdmin\\:\\:getFeatures\\(\\) return type has no value type specified in iterable type array\\.$#"
@@ -526,14 +621,29 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/SectionAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/SectionAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SectionAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/SectionAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/SiteColorAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SiteColorAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/SiteColorAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/SiteImageAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SiteImageAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -542,6 +652,11 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AdminBundle\\\\Admin\\\\SiteParameterAdmin\\:\\:getTimezonesList\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/SiteParameterAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/SiteParameterAdmin.php
 
@@ -564,6 +679,11 @@ parameters:
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SocialNetworkAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/SocialNetworkAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/SourceAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\SourceAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -596,6 +716,11 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/StepAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/StepAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\StepAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/StepAdmin.php
@@ -621,9 +746,19 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/ThemeAdmin.php
 
 		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/ThemeAdmin.php
+
+		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\ThemeAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/ThemeAdmin.php
+
+		-
+			message: "#^Parameter \\#2 \\$class of method Sonata\\\\AdminBundle\\\\DependencyInjection\\\\Admin\\\\AbstractTaggedAdmin\\<object\\>\\:\\:__construct\\(\\) expects class\\-string\\<object\\>\\|null, string given\\.$#"
+			count: 1
+			path: src/Capco/AdminBundle/Admin/UserAdmin.php
 
 		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\UserAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
@@ -4581,11 +4716,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/GraphQLContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:emailContentShouldMatch\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:findMail\\(\\) has parameter \\$negation with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
@@ -4606,66 +4736,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:notSeeMailSubject\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:notSeeMailSubject\\(\\) has parameter \\$value with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubject\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubject\\(\\) has parameter \\$subject with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has parameter \\$from with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has parameter \\$subject with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailSubjectFromTo\\(\\) has parameter \\$to with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailTo\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:openMailTo\\(\\) has parameter \\$to with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:seeInMail\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\MailCatcherContext\\:\\:seeInMail\\(\\) has parameter \\$text with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
 			message: "#^Parameter \\#1 \\$stream of function fclose expects resource, resource\\|false given\\.$#"
 			count: 2
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
@@ -4677,11 +4747,6 @@ parameters:
 
 		-
 			message: "#^Parameter \\#2 \\$needle of function str_contains expects string, string\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
-
-		-
-			message: "#^Using nullsafe method call on non\\-nullable type Alex\\\\MailCatcher\\\\Client\\. Use \\-\\> instead\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/MailCatcherContext.php
 
@@ -23016,22 +23081,12 @@ parameters:
 			path: src/Capco/AppBundle/Filter/KnpTranslationFieldFilter.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Filter\\\\KnpTranslationFieldFilter\\:\\:filter\\(\\) has parameter \\$alias with no type specified\\.$#"
+			message: "#^Method Capco\\\\AppBundle\\\\Filter\\\\KnpTranslationFieldFilter\\:\\:association\\(\\) should return array\\{literal\\-string, literal\\-string\\} but returns array\\{mixed, string\\}\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Filter/KnpTranslationFieldFilter.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Filter\\\\KnpTranslationFieldFilter\\:\\:filter\\(\\) has parameter \\$data with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Filter/KnpTranslationFieldFilter.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Filter\\\\KnpTranslationFieldFilter\\:\\:filter\\(\\) has parameter \\$field with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Filter/KnpTranslationFieldFilter.php
-
-		-
-			message: "#^Parameter \\#1 \\$query of method Sonata\\\\DoctrineORMAdminBundle\\\\Filter\\\\Filter\\:\\:applyWhere\\(\\) expects Sonata\\\\DoctrineORMAdminBundle\\\\Datagrid\\\\ProxyQueryInterface, Sonata\\\\AdminBundle\\\\Datagrid\\\\ProxyQueryInterface given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Filter/KnpTranslationFieldFilter.php
 
