@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "a3a87734cca79c32a6e56eb6edb4f8f4",
+    "content-hash": "1bbcff57150a20283747f3f07af1e6f6",
     "packages": [
         {
             "name": "behat/behat",
@@ -7103,44 +7103,45 @@
         },
         {
             "name": "overblog/graphiql-bundle",
-            "version": "v0.2.1",
+            "version": "v1.0.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/overblog/GraphiQLBundle.git",
-                "reference": "3161762574dcc6b264e1b6046e5fd2769e4e87c4"
+                "reference": "68520e0732380d9acd03977e049d9490ee78a6a3"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/overblog/GraphiQLBundle/zipball/3161762574dcc6b264e1b6046e5fd2769e4e87c4",
-                "reference": "3161762574dcc6b264e1b6046e5fd2769e4e87c4",
+                "url": "https://api.github.com/repos/overblog/GraphiQLBundle/zipball/68520e0732380d9acd03977e049d9490ee78a6a3",
+                "reference": "68520e0732380d9acd03977e049d9490ee78a6a3",
                 "shasum": ""
             },
             "require": {
-                "php": ">=5.6",
-                "symfony/framework-bundle": "^3.4 || ^4.0 || ^5.0",
-                "symfony/twig-bundle": "^3.4 || ^4.0 || ^5.0"
+                "php": "^8.0",
+                "symfony/http-foundation": "^5.4 || ^6.0 || ^7.0",
+                "symfony/routing": "^5.4 || ^6.0 || ^7.00",
+                "symfony/twig-bundle": "^5.4 || ^6.0 || ^7.0"
             },
             "require-dev": {
-                "overblog/graphql-bundle": ">=0.9",
-                "phpunit/phpunit": "^5.7 || ^6.0",
-                "sensio/framework-extra-bundle": "^3.0 || ^4.0 || ^5.0",
-                "symfony/browser-kit": "^3.4 || ^4.0 || ^5.0",
-                "symfony/templating": "^3.4 || ^4.0 || ^5.0",
-                "symfony/yaml": "^3.4 || ^4.0 || ^5.0"
+                "overblog/graphql-bundle": "dev-master",
+                "phpunit/phpunit": "^9.5.10",
+                "symfony/browser-kit": "^5.4 || ^6.0 || ^7.0",
+                "symfony/config": "^5.4 || ^6.0 || ^7.0",
+                "symfony/console": "^5.4 || ^6.0 || ^7.0",
+                "symfony/dependency-injection": "^5.4 || ^6.0 || ^7.0",
+                "symfony/dom-crawler": "^5.4 || ^6.0 || ^7.0",
+                "symfony/expression-language": "^5.4 || ^6.0 || ^7.0",
+                "symfony/finder": "^5.4 || ^6.0 || ^7.0",
+                "symfony/framework-bundle": "^5.4 || ^6.0 || ^7.0",
+                "symfony/templating": "^5.4 || ^6.0 || ^7.0",
+                "symfony/yaml": "^5.4 || ^6.0 || ^7.0",
+                "twig/twig": "^3.3.3",
+                "webonyx/graphql-php": "^15.4"
             },
             "type": "symfony-bundle",
-            "extra": {
-                "branch-alias": {
-                    "dev-master": "0.1-dev"
-                }
-            },
             "autoload": {
                 "psr-4": {
-                    "Overblog\\GraphiQLBundle\\": ""
-                },
-                "exclude-from-classmap": [
-                    "/Tests/"
-                ]
+                    "Overblog\\GraphiQLBundle\\": "src/"
+                }
             },
             "notification-url": "https://packagist.org/downloads/",
             "license": [
@@ -7163,9 +7164,9 @@
             ],
             "support": {
                 "issues": "https://github.com/overblog/GraphiQLBundle/issues",
-                "source": "https://github.com/overblog/GraphiQLBundle/tree/master"
+                "source": "https://github.com/overblog/GraphiQLBundle/tree/v1.0.0"
             },
-            "time": "2020-02-03T16:17:50+00:00"
+            "time": "2024-11-22T10:12:36+00:00"
         },
         {
             "name": "overblog/graphql-bundle",

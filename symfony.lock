@@ -220,7 +220,7 @@
         "version": "v0.5.2"
     },
     "overblog/graphiql-bundle": {
-        "version": "0.2",
+        "version": "1.0",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
