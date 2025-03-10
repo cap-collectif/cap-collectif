@@ -76,14 +76,7 @@ export const ImportMembersUploader = (): JSX.Element => {
 
   return (
     <Flex direction="column" spacing={4}>
-      <Flex
-        direction={'column'}
-        width={'100%'}
-        sx={{
-          '.cap-uploader': { width: '100%', minWidth: 'unset' },
-          '.cap-uploader > div ': { width: '100%' },
-        }}
-      >
+      <Flex direction={'column'} width={'100%'}>
         <FormLabel
           htmlFor="file"
           label={intl.formatMessage({
@@ -122,6 +115,7 @@ export const ImportMembersUploader = (): JSX.Element => {
             fileDeleteLabel: intl.formatMessage({ id: 'admin.global.delete' }),
           }}
           showThumbnail
+          isFullWidth
         />
       </Flex>
 

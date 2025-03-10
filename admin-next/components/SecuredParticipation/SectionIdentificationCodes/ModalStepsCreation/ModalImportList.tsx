@@ -114,6 +114,7 @@ const ModalImportList: FC<ModalImportListProps> = ({
                   id: 'page-media-add--loading',
                 }),
               }}
+              isFullWidth
             />
           </FormControl>
           {data && <IdentificationCodesListCreationModalFormUploadAnalyse data={data} />}

@@ -174,7 +174,7 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
                 width: 120,
                 height: 80,
               }}
-              size={UPLOADER_SIZE.SM}
+              size={UPLOADER_SIZE.MD}
               uploadURI={UPLOAD_PATH}
               showThumbnail
             />

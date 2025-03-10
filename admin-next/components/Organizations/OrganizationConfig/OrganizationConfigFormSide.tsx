@@ -42,6 +42,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
               size={UPLOADER_SIZE.SM}
               uploadURI={UPLOAD_PATH}
               showThumbnail
+              isFullWidth
             />
           </FormControl>
           <FormControl name="banner" control={control} width="100%">
@@ -69,6 +70,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
               size={UPLOADER_SIZE.SM}
               uploadURI={UPLOAD_PATH}
               showThumbnail
+              isFullWidth
             />
           </FormControl>
         </Accordion.Panel>
