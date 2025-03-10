@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "1bbcff57150a20283747f3f07af1e6f6",
+    "content-hash": "bf97ea09f4862ab6fd2feabb74246caa",
     "packages": [
         {
             "name": "behat/behat",
@@ -9440,16 +9440,16 @@
         },
         {
             "name": "qandidate/toggle-bundle",
-            "version": "1.4.2",
+            "version": "1.5.0",
             "source": {
                 "type": "git",
-                "url": "https://github.com/qandidate-labs/qandidate-toggle-bundle.git",
-                "reference": "ad69e527d9c0f1182267d5e93b36b5f62b410234"
+                "url": "https://github.com/cap-collectif/qandidate-toggle-bundle.git",
+                "reference": "de24d506737827145bad19375858defb453837ff"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/qandidate-labs/qandidate-toggle-bundle/zipball/ad69e527d9c0f1182267d5e93b36b5f62b410234",
-                "reference": "ad69e527d9c0f1182267d5e93b36b5f62b410234",
+                "url": "https://api.github.com/repos/cap-collectif/qandidate-toggle-bundle/zipball/de24d506737827145bad19375858defb453837ff",
+                "reference": "de24d506737827145bad19375858defb453837ff",
                 "shasum": ""
             },
             "require": {
@@ -9457,10 +9457,10 @@
                 "doctrine/common": "^2.13||^3.0",
                 "php": ">=7.2",
                 "qandidate/toggle": "^2.0",
-                "symfony/framework-bundle": "^4.4||^5.0",
-                "symfony/http-foundation": "^4.4.7||^5.0.7",
-                "symfony/http-kernel": "^4.4.13||^5.1.5",
-                "symfony/security-bundle": "^4.4||^5.0"
+                "symfony/framework-bundle": "^4.4||^5.0||^6.0",
+                "symfony/http-foundation": "^4.4.7||^5.0.7||^6.0",
+                "symfony/http-kernel": "^4.4.13||^5.1.5||^6.0",
+                "symfony/security-bundle": "^4.4||^5.0||^6.0"
             },
             "require-dev": {
                 "broadway/coding-standard": "^1.2",
@@ -9468,8 +9468,8 @@
                 "matthiasnoback/symfony-dependency-injection-test": "^4.0",
                 "phpstan/phpstan": "^1.0",
                 "phpunit/phpunit": "^9.5",
-                "symfony/browser-kit": "^4.4||^5.0",
-                "symfony/twig-bundle": "^4.4||^5.0",
+                "symfony/browser-kit": "^4.4||^5.0||^6.0",
+                "symfony/twig-bundle": "^4.4||^5.0||^6.0",
                 "twig/twig": "^3.0"
             },
             "suggest": {
@@ -9484,7 +9484,6 @@
                     "/Tests/"
                 ]
             },
-            "notification-url": "https://packagist.org/downloads/",
             "license": [
                 "MIT"
             ],
@@ -9500,10 +9499,9 @@
             ],
             "description": "This Bundle provides the integration with qandidate/toggle. It provides the services and configuration you need to implement feature toggles in your Symfony application.",
             "support": {
-                "issues": "https://github.com/qandidate-labs/qandidate-toggle-bundle/issues",
-                "source": "https://github.com/qandidate-labs/qandidate-toggle-bundle/tree/1.4.2"
+                "source": "https://github.com/cap-collectif/qandidate-toggle-bundle/tree/1.5.0"
             },
-            "time": "2022-07-12T16:52:12+00:00"
+            "time": "2025-03-08T16:42:45+00:00"
         },
         {
             "name": "ralouphie/getallheaders",
