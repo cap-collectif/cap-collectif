@@ -80,6 +80,22 @@ describe('mutations.assignAnalystsToProposals', () => {
     expect(cantAssignMore10AnalystsToProposals).toMatchSnapshot();
   });
 
+  it('should assign 1 user as an Analyst to a proposal that currently has 9 analysts, logged as admin', async () => {
+    const cantAssignMore10AnalystsToProposals = await graphql(
+      AssignAnalystsToProposalsMutation,
+      {
+        input: {
+          proposalIds: [toGlobalId('Proposal', 'proposalIdf1')],
+          analystIds: [
+            toGlobalId('User', 'user170'),
+          ],
+        },
+      },
+      'internal_admin',
+    );
+    expect(cantAssignMore10AnalystsToProposals).toMatchSnapshot();
+  });
+
   // decision maker
   it('should assign a user as Analysts to proposals, logged as decision maker.', async () => {
     const assignAnalystsToProposalsLoggedAsDecionMaker = await graphql(

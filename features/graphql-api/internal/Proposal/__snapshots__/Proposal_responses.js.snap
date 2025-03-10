@@ -452,6 +452,9 @@ Object {
   "proposal": Object {
     "analysts": Array [
       Object {
+        "id": "VXNlcjphZG1pbkNhcGNv",
+      },
+      Object {
         "id": "VXNlcjp1c2VyQWd1aQ==",
       },
       Object {
@@ -459,6 +462,12 @@ Object {
       },
       Object {
         "id": "VXNlcjp1c2VyTWF4aW1l",
+      },
+      Object {
+        "id": "VXNlcjp1c2VyTWlja2FlbA==",
+      },
+      Object {
+        "id": "VXNlcjp1c2VyTXlyaWFt",
       },
       Object {
         "id": "VXNlcjp1c2VyT21hcg==",

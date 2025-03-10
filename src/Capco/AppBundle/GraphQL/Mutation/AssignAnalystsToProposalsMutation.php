@@ -69,7 +69,7 @@ class AssignAnalystsToProposalsMutation implements MutationInterface
 
         /** @var Proposal $proposal */
         foreach ($proposals as $proposal) {
-            if ($nbAnalysts + $proposal->getAnalysts()->count() < self::NB_MAX_ANALYSTS_ASSIGNED) {
+            if ($nbAnalysts + $proposal->getAnalysts()->count() <= self::NB_MAX_ANALYSTS_ASSIGNED) {
                 $proposal->addAnalysts($analysts);
 
                 continue;

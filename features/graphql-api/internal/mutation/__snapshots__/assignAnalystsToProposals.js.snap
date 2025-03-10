@@ -68,6 +68,89 @@ Object {
 }
 `;
 
+exports[`mutations.assignAnalystsToProposals should assign 1 user as an Analyst to a proposal that currently has 9 analysts, logged as admin 1`] = `
+Object {
+  "assignAnalystsToProposals": Object {
+    "errorCode": null,
+    "proposals": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "analyses": Array [
+              Object {
+                "analyst": Object {
+                  "username": "mauriau",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "username": "Agui",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "username": "Vince",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "username": "Jpec",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "username": "Omar <3 Rem",
+                },
+              },
+              Object {
+                "analyst": Object {
+                  "username": "Théo QP",
+                },
+              },
+            ],
+            "analysts": Array [
+              Object {
+                "username": "adminpro",
+              },
+              Object {
+                "username": "Agui",
+              },
+              Object {
+                "username": "Jpec",
+              },
+              Object {
+                "username": "mauriau",
+              },
+              Object {
+                "username": "Dev null",
+              },
+              Object {
+                "username": "myriam",
+              },
+              Object {
+                "username": "Omar <3 Rem",
+              },
+              Object {
+                "username": "Théo QP",
+              },
+              Object {
+                "username": "Vince",
+              },
+              Object {
+                "username": "user170",
+              },
+            ],
+            "id": "UHJvcG9zYWw6cHJvcG9zYWxJZGYx",
+            "title": "Mon grand projet",
+          },
+        },
+      ],
+      "totalCount": 1,
+    },
+  },
+}
+`;
+
 exports[`mutations.assignAnalystsToProposals should assign a user as Analysts to a proposal, logged as analyst. 1`] = `
 Object {
   "assignAnalystsToProposals": Object {

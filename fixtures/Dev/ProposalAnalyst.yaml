@@ -54,6 +54,21 @@ Capco\AppBundle\Entity\ProposalAnalyst:
         assignedBy: '@user4'
         createdAt: <identity((new \DateTime('2020-01-01 00:00:06')))>
         updatedAt: $createdAt
+    proposalAnalystIdf1Admin:
+        __construct: ['@proposalIdf1', '@user666']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf1Myriam:
+        __construct: ['@proposalIdf1', '@userMyriam']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
+        updatedAt: $createdAt
+    proposalAnalystIdf1Mickael:
+        __construct: ['@proposalIdf1', '@userMickael']
+        assignedBy: '@user4'
+        createdAt: <identity((new \DateTime('2020-01-01 00:00:05')))>
+        updatedAt: $createdAt
     proposalAnalystIdf2Theo:
         __construct: ['@proposalIdf2', '@userTheo']
         assignedBy: '@user4'
