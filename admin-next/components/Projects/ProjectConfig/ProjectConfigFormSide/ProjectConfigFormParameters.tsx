@@ -93,6 +93,9 @@ const ProjectConfigFormParameters: React.FC<ProjectConfigFormParametersProps> = 
             getAddress={add => {
               setValue('address', add)
             }}
+            onChange={e => {
+              if (e === '') setValue('address', null)
+            }}
           />
         </FormControl>
 
