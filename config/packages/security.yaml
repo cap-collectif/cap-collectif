@@ -29,7 +29,7 @@ security:
         - { path: ^/admin/capco/app/appendixtype, roles: ROLE_USER }
         - { path: ^/admin/capco/app/post, roles: ROLE_USER }
         - { path: ^/admin/capco/app/questionnaire, roles: ROLE_USER }
-        - { path: ^/admin/dashboard, roles: ROLE_PROJECT_ADMIN }
+        - { path: ^/admin/dashboard, roles: ROLE_USER }
         - { path: ^/admin/core/get-autocomplete-items, roles: ROLE_PROJECT_ADMIN }
         - { path: ^/admin/mailingList/, roles: ROLE_USER }
         - { path: ^/admin/mailingCampaign/, roles: ROLE_USER }

@@ -38,10 +38,10 @@ class SiradelController extends AbstractController
         $profileUrl = $this->urlResolver->__invoke($user);
         $analysisUrl = null;
         $adminUrl = $this->router->generate(
-            'sonata_admin_dashboard',
+            'app_homepage',
             [],
             RouterInterface::ABSOLUTE_URL
-        );
+        ) . 'admin-next/projects';
         if ($this->userRepository->isAssignedUsersOnProposal($user)) {
             $analysisUrl = $this->router->generate(
                 'user_evaluations',

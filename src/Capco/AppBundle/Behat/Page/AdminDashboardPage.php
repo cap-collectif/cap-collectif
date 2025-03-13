@@ -9,5 +9,5 @@ class AdminDashboardPage extends Page
 {
     use PageTrait;
 
-    protected $path = '/admin/dashboard';
+    protected $path = '/admin-next/projects';
 }

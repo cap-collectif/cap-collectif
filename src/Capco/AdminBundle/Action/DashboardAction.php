@@ -9,7 +9,6 @@ declare(strict_types=1);
 
 namespace Capco\AdminBundle\Action;
 
-use Capco\AppBundle\Enum\UserRole;
 use Capco\UserBundle\Entity\User;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
@@ -24,51 +23,36 @@ use Twig\Environment;
 
 final class DashboardAction
 {
-    public function __construct(private readonly array $dashboardBlocks, private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder, private readonly TemplateRegistryInterface $templateRegistry, private readonly Pool $pool, private readonly Environment $twig, private readonly TokenStorageInterface $tokenStorage, private readonly RouterInterface $router)
-    {
+    public function __construct(
+        /** @phpstan-ignore-next-line */
+        private readonly array $dashboardBlocks,
+        /** @phpstan-ignore-next-line */
+        private readonly BreadcrumbsBuilderInterface $breadcrumbsBuilder,
+        /** @phpstan-ignore-next-line */
+        private readonly TemplateRegistryInterface $templateRegistry,
+        /** @phpstan-ignore-next-line */
+        private readonly Pool $pool,
+        /** @phpstan-ignore-next-line */
+        private readonly Environment $twig,
+        private readonly TokenStorageInterface $tokenStorage,
+        private readonly RouterInterface $router
+    ) {
     }
 
     public function __invoke(Request $request): Response
     {
         $token = $this->tokenStorage->getToken();
-        if (
-            $token
-            && $token->getUser() instanceof User
-            && $token->getUser()->hasRole(UserRole::ROLE_PROJECT_ADMIN)
-            && (!$token->getUser()->hasRole(UserRole::ROLE_ADMIN)
-                || !$token->getUser()->hasRole(UserRole::ROLE_SUPER_ADMIN))
-        ) {
+        $user = $token->getUser();
+
+        if ($user instanceof User && $user->hasBackOfficeAccess()) {
             return new RedirectResponse(
                 $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL) .
                     'admin-next/projects'
             );
         }
-        $blocks = [
-            'top' => [],
-            'left' => [],
-            'center' => [],
-            'right' => [],
-            'bottom' => [],
-        ];
 
-        foreach ($this->dashboardBlocks as $block) {
-            $blocks[$block['position']][] = $block;
-        }
-
-        $parameters = [
-            'base_template' => $request->isXmlHttpRequest()
-                ? $this->templateRegistry->getTemplate('ajax')
-                : $this->templateRegistry->getTemplate('layout'),
-            'admin_pool' => $this->pool,
-            'blocks' => $blocks,
-        ];
-
-        if (!$request->isXmlHttpRequest()) {
-            $parameters['breadcrumbs_builder'] = $this->breadcrumbsBuilder;
-        }
-
-        return new Response(
-            $this->twig->render($this->templateRegistry->getTemplate('dashboard'), $parameters)
+        return new RedirectResponse(
+            $this->router->generate('app_homepage', [], UrlGeneratorInterface::ABSOLUTE_URL)
         );
     }
 }
