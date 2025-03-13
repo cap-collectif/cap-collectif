@@ -306,7 +306,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
                 />
               </ButtonGroup>
             </Flex>
-            <ProposalFormAdminDistricts control={control} defaultLocale={defaultLocale} districts={values.districts} />
+            <ProposalFormAdminDistricts control={control} defaultLocale={defaultLocale} />
           </Flex>
         </ListCard.Item>
       )}

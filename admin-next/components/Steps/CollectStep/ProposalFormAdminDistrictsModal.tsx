@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { UseFormResetField } from 'react-hook-form/dist/types/form'
 import { useIntl } from 'react-intl'
 import { useForm } from 'react-hook-form'
 import {
@@ -51,6 +50,7 @@ export interface ProposalFormAdminDistrictsModalProps {
   update?: (index: number, obj: any) => void
   defaultLocale: string
 }
+
 interface ProposalFormAdminDistrictsModalFormValues {
   name: string | null
   geojson: string | null
@@ -69,16 +69,7 @@ interface ProposalFormAdminDistrictsModalFormValues {
     locale: string
   }>
 }
-const resetForm = (resetField: UseFormResetField<ProposalFormAdminDistrictsModalFormValues>) => {
-  resetField('name')
-  resetField('geojson')
-  resetField('displayedOnMap')
-  resetField('background.opacity')
-  resetField('background.color')
-  resetField('border.opacity')
-  resetField('border.size')
-  resetField('border.color')
-}
+
 const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalProps> = ({
   isUpdating,
   isContainer = false,
@@ -90,7 +81,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
 }) => {
   const intl = useIntl()
 
-  const { handleSubmit, formState, resetField, control, watch, setValue } =
+  const { handleSubmit, formState, control, watch, setValue, reset } =
     useForm<ProposalFormAdminDistrictsModalFormValues>({
       defaultValues: {
         name: initialValue?.translations?.find(elem => elem?.locale?.toLowerCase().replace(/-/g, '_') === defaultLocale)
@@ -131,40 +122,41 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
         }),
       ),
     })
+
+  React.useEffect(() => {
+    reset({
+      name: initialValue?.translations?.find(elem => elem?.locale?.toLowerCase().replace(/-/g, '_') === defaultLocale)
+        .name,
+      geojson: initialValue?.geojson,
+      displayedOnMap: initialValue?.displayedOnMap,
+      border: initialValue?.border,
+      background: initialValue?.background,
+    })
+  }, [initialValue, defaultLocale, reset])
+
   const onSubmit = (values: ProposalFormAdminDistrictsModalFormValues) => {
+    const updatedDistrict = {
+      geojson: values.geojson || null,
+      displayedOnMap: values.displayedOnMap || false,
+      border: values.border || null,
+      background: values.background || null,
+      translations: [
+        {
+          name: values.name,
+          locale: formatCodeToLocale(defaultLocale.toUpperCase()),
+        },
+      ],
+    }
+
     if (isUpdating) {
-      const updatedDistrict = {
-        geojson: values.geojson || null,
-        displayedOnMap: values.displayedOnMap || false,
-        border: values.border || null,
-        background: values.background || null,
-        translations: [
-          {
-            name: values.name,
-            locale: formatCodeToLocale(defaultLocale.toUpperCase()),
-          },
-        ],
-      }
       update(index, updatedDistrict)
-      resetForm(resetField)
-    }
-    if (!isUpdating) {
-      const updatedDistrict = {
-        geojson: values.geojson || null,
-        displayedOnMap: values.displayedOnMap || false,
-        border: values.border || null,
-        background: values.background || null,
-        translations: [
-          {
-            name: values.name,
-            locale: formatCodeToLocale(defaultLocale.toUpperCase()),
-          },
-        ],
-      }
+    } else {
       append(updatedDistrict)
-      resetForm(resetField)
     }
+
+    reset(updatedDistrict)
   }
+
   return (
     <Modal
       disclosure={
@@ -357,7 +349,15 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
             )}
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" variantColor="primary" variantSize="big" onClick={hide}>
+            <Button
+              variant="secondary"
+              variantColor="primary"
+              variantSize="big"
+              onClick={() => {
+                hide()
+                reset()
+              }}
+            >
               {intl.formatMessage({ id: 'global.cancel' })}
             </Button>
             <Button
