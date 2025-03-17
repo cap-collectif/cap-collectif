@@ -1,6 +1,6 @@
 import { ProjectsPage } from '~e2e/pages'
 
-describe('Projects', () => {
+context('Projects', () => {
   describe('Projects page', () => {
     beforeEach(() => {
       ProjectsPage.visit('/projects')

@@ -1,6 +1,6 @@
 import { ProposalVotePage } from '~e2e-pages/index'
 
-describe('Proposal Vote Page', () => {
+context('Proposal Vote Page', () => {
   beforeEach(() => {
     cy.task('db:restore')
   })

@@ -1,6 +1,6 @@
 import { ProposalPage } from '~e2e-pages/index'
 
-describe('Proposal Page', () => {
+context('Proposal Page', () => {
   describe('Project Page FO', () => {
     beforeEach(() => {
       cy.task('db:restore')
@@ -59,23 +59,20 @@ describe('Proposal Page', () => {
       ProposalPage.visitProposalPage()
       cy.wait('@ProposalPageQuery')
       cy.get('#proposal-edit-button').click()
-      cy.get('#proposal_title')
-        .clear()
-        .type('Nouveau titre')
-      cy.get('#proposal-form-responses3_field')
-        .selectFile('fixtures/document.pdf', { force: true })
+      cy.get('#proposal_title').clear().type('Nouveau titre')
+      cy.get('#proposal-form-responses3_field').selectFile('fixtures/document.pdf', { force: true })
       cy.get('#proposal-form-responses3 .document-container .label > a')
         .scrollIntoView()
         .should('be.visible')
         .should('contain', 'document.pdf')
-      cy.get('#confirm-proposal-edit').click().then(() => {
-        cy.wait('@ChangeProposalContentMutation')
-        cy.wait('@ProposalPageQuery')
-        cy.wait('@ProposalVotesByStepQuery')
-        cy.get('h1')
-          .should('be.visible')
-          .should('contain', 'Nouveau titre')
-      })
+      cy.get('#confirm-proposal-edit')
+        .click()
+        .then(() => {
+          cy.wait('@ChangeProposalContentMutation')
+          cy.wait('@ProposalPageQuery')
+          cy.wait('@ProposalVotesByStepQuery')
+          cy.get('h1').should('be.visible').should('contain', 'Nouveau titre')
+        })
     })
     it('is possible to contact the author of a proposal', () => {
       cy.interceptGraphQLOperation({ operationName: 'ContactProposalAuthorMutation' })

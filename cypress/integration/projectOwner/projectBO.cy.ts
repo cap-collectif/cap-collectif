@@ -1,6 +1,6 @@
 import { AdminProjectPage } from '~e2e-pages/index'
 
-describe('Project Owner', () => {
+context('Project Owner', () => {
   describe('Project BO', () => {
     beforeEach(() => {
       cy.task('db:restore')

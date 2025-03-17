@@ -1,6 +1,6 @@
 import { QuestionnairePage } from '~e2e/pages'
 
-describe('Questionnaire Anonymous', () => {
+context('Questionnaire Anonymous', () => {
   describe('Opened Questionnaire', () => {
     beforeEach(() => {
       QuestionnairePage.visitOpenedQuestionnaire()

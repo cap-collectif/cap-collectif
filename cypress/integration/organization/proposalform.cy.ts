@@ -1,6 +1,6 @@
 import { ProposalFormPage, FormListPage } from '~e2e-pages/index'
 
-describe('Organization Proposalform', () => {
+context('Organization Proposalform', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.directLoginAs('valerie')

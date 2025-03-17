@@ -1,9 +1,10 @@
 import { QuestionnairePage } from '~e2e/pages'
 
-describe('Questionnaire Logged-in as user', () => {
+context('Questionnaire Logged-in as user', () => {
   beforeEach(() => {
     cy.directLoginAs('user')
   })
+  // todo: reorganize to avoid nested "describe"
   describe('Opened Questionnaire', () => {
     describe('Mutation', () => {
       beforeEach(() => {

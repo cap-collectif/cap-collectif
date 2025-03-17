@@ -1,6 +1,6 @@
 import { ProposalStepPage } from '~e2e-pages/index'
 
-describe('Proposal Step Page', () => {
+context('Proposal Step Page', () => {
   describe('Project Step Page FO', () => {
     beforeEach(() => {
       cy.task('db:restore')
