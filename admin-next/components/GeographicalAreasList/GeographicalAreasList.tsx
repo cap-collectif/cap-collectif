@@ -1,9 +1,19 @@
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { GeographicalAreasListQuery } from '@relay/GeographicalAreasListQuery.graphql'
-import { Box, Heading, Flex, Text, Button, ButtonGroup, ButtonQuickAction, CapUIIcon, Menu } from '@cap-collectif/ui'
+import {
+  Box,
+  Heading,
+  Flex,
+  Text,
+  Button,
+  ButtonGroup,
+  ButtonQuickAction,
+  CapUIIcon,
+  Menu,
+  ListCard,
+} from '@cap-collectif/ui'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { ListCard } from '@ui/ListCard'
 import GeographicalAreaDeleteModal from './GeographicalAreaDeleteModal'
 import { useState } from 'react'
 import GeographicalAreasEmptyPage from './GeographicalAreasEmptyPage'

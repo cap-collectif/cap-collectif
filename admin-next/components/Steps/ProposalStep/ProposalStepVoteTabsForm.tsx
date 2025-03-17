@@ -1,6 +1,7 @@
 import * as React from 'react'
 import {
   Box,
+  CapUIBorder,
   CapUIIcon,
   CapUIIconSize,
   CapUISpotIcon,
@@ -9,14 +10,13 @@ import {
   FormLabel,
   headingStyles,
   Icon,
+  ListCard,
   SpotIcon,
   Switch,
   Tabs,
   Text,
   Tooltip,
 } from '@cap-collectif/ui'
-
-import { ListCard } from '@ui/ListCard'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormProvider, UseFormReturn } from 'react-hook-form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
@@ -76,7 +76,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
             {intl.formatMessage({
               id: 'admin.select.step.advanced.vote.prompt',
             })}
-            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start" borderRadius={CapUIBorder.Card}>
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%" alignItems="center">
                   <ListCard.Item.Label>
@@ -115,7 +115,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                 )}
               </Flex>
             </ListCard.Item>
-            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start" borderRadius={CapUIBorder.Card}>
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
@@ -190,17 +190,16 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                 )}
               </Flex>
             </ListCard.Item>
-            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start" borderRadius={CapUIBorder.Card}>
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>
                     <Text as="span">
                       {intl.formatMessage({
                         id: 'vote-by-person',
-                      })}
-                      {' '}
+                      })}{' '}
                       <Text fontWeight="400" as="i" color="gray.500">
-                          ({intl.formatMessage({ id: 'ranking-optionnal' })})
+                        ({intl.formatMessage({ id: 'ranking-optionnal' })})
                       </Text>
                     </Text>
                   </ListCard.Item.Label>
@@ -255,32 +254,30 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                         <FieldInput id="votesLimit" name="votesLimit" control={control} type="number" min={votesMin} />
                       </FormControl>
                     </Flex>
-                    {
-                      !isProposalSmsVoteEnabled && (
-                        <>
-                          <FormControl name="votesRanking" control={control} mb={0}>
-                            <FieldInput id="votesRanking" name="votesRanking" control={control} type="checkbox">
-                              {intl.formatMessage({
-                                id: 'activate-vote-ranking',
-                              })}
-                            </FieldInput>
-                          </FormControl>
-                          <Box color="gray.700">
-                            <FormattedHTMLMessage id="help-text-vote-ranking" />
-                          </Box>
-                          {votesRanking === true && (
-                            <Text color="gray.700">
-                              {intl.formatMessage({ id: 'help-vote-point' }, { points: votesLimit })}
-                            </Text>
-                          )}
-                        </>
-                      )
-                    }
+                    {!isProposalSmsVoteEnabled && (
+                      <>
+                        <FormControl name="votesRanking" control={control} mb={0}>
+                          <FieldInput id="votesRanking" name="votesRanking" control={control} type="checkbox">
+                            {intl.formatMessage({
+                              id: 'activate-vote-ranking',
+                            })}
+                          </FieldInput>
+                        </FormControl>
+                        <Box color="gray.700">
+                          <FormattedHTMLMessage id="help-text-vote-ranking" />
+                        </Box>
+                        {votesRanking === true && (
+                          <Text color="gray.700">
+                            {intl.formatMessage({ id: 'help-vote-point' }, { points: votesLimit })}
+                          </Text>
+                        )}
+                      </>
+                    )}
                   </Flex>
                 )}
               </Flex>
             </ListCard.Item>
-            <ListCard.Item backgroundColor="white" border="none" align="flex-start">
+            <ListCard.Item backgroundColor="white" border="none" align="flex-start" borderRadius={CapUIBorder.Card}>
               <Flex direction="column" width="100%">
                 <Flex direction="row" justify="space-between" width="100%">
                   <ListCard.Item.Label>

@@ -1,5 +1,4 @@
-import { Skeleton, Flex } from '@cap-collectif/ui'
-import ListCard from '@ui/ListCard/ListCard'
+import { Skeleton, Flex, ListCard } from '@cap-collectif/ui'
 
 const AuthenticationMethodsPlaceholder = () => (
   <Flex direction="column" p={6} bg="white" borderRadius="8px" width="70%">
