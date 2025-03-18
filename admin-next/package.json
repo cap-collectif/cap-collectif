@@ -12,10 +12,7 @@
     "test": "jest -c jest.config.js",
     "ts": "tsc --project tsconfig.json --noEmit",
     "relay": "relay-compiler",
-    "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --artifactDirectory ./__generated__ --watch",
-    "storybook": "start-storybook -s ./public -p 6006",
-    "build-storybook": "build-storybook",
-    "chromatic": "chromatic --project-token=${CHROMATIC_PROJECT_TOKEN} --auto-accept-changes"
+    "relay:watch": "relay-compiler --src ./ --schema ../schema.internal.graphql --artifactDirectory ./__generated__ --watch"
   },
   "dependencies": {
     "@babel/preset-flow": "^7.14.5",

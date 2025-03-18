@@ -17,7 +17,6 @@ fabfile.py
 .scss-lint.yml
 .eslintrc.js
 jest-setup.js
-.storybook
 behat.yml
 app/config/parameters.yml
 
