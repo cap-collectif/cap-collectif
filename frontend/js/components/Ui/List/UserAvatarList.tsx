@@ -38,12 +38,6 @@ export const AvatarWrapper = styled.div.attrs({
   position: relative;
   z-index: ${props => props.max - props.index};
 
-  img,
-  svg {
-    margin-right: 0;
-    border: 2px solid white;
-  }
-
   &:not(:first-child) {
     margin-left: ${props => `${props.spaceBetweenAvatar}px`};
   }
