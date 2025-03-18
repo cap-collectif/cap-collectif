@@ -54,7 +54,7 @@
         "geocoder-php/google-maps-provider": "4.6.*",
         "google/recaptcha": "^1.1",
         "hautelook/alice-bundle": "^2.9",
-        "hwi/oauth-bundle": "^1.4",
+        "hwi/oauth-bundle": "^2.3",
         "imagine/imagine": "^1.0",
         "infinite-networks/form-bundle": "~3.0",
         "itamair/geophp": "^1.6",
