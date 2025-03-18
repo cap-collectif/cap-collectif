@@ -19,7 +19,7 @@ export const ConsultationPreviewCover = ({
   <Card.Cover>
     <a href={url} alt={title}>
       {illustration && illustration.url ? (
-        <Image src={illustration.url} alt={title} className="img-responsive" />
+        <Image src={illustration.url} alt="" className="img-responsive" />
       ) : (
         <div className="bg--project">
           <DefaultProjectImage />

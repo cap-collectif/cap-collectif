@@ -80,7 +80,6 @@ const Content = ({ children }: { readonly children: JSX.Element | JSX.Element[] 
 
 export const Cover = ({
   src,
-  alt,
 }: {
   readonly src?: string | null | undefined
   readonly alt?: string | null | undefined
@@ -97,7 +96,7 @@ export const Cover = ({
       <Image
         useDs
         src={src}
-        alt={alt}
+        alt=""
         width={['100%', '405px']}
         height="100%"
         minHeight="270px"
@@ -285,7 +284,7 @@ export const EventPageHeader = ({ queryRef }: Props) => {
         <EventActions queryRef={query} />
         {!isMobile ? <ProjectHeaderShareButtons url={url || ''} title={title || ''} /> : null}
       </Content>
-      <Cover src={event.media?.url} alt="cover" />
+      <Cover src={event.media?.url} />
     </Header>
   )
 }

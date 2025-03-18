@@ -3,7 +3,7 @@
         <a href="{{ path('app_blog_show', {'slug': post.translate.slug, '_locale': app.request.locale}) }}" class="pull-left">
             <img
                 title={{ post.media.name }}
-                alt={{ post.media.name }}
+                alt=""
                 class="media-object"
                 src={{ media_public_url(post.media, 'default_post') }}
             />

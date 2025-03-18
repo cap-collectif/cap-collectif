@@ -10,7 +10,7 @@ export type ImageProps = BoxProps & {
   readonly sizes?: string
 }
 
-const Image = ({ src, alt, useDs = false, ...props }: ImageProps) => {
+const Image = ({ src, alt = "", useDs = false, ...props }: ImageProps) => {
   if (!src) {
     return null
   }

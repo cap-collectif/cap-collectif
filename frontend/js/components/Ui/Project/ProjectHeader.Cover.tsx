@@ -151,7 +151,7 @@ export const CoverImage = ({ src, alt, isArchived, ...rest }: CoverImageProps) =
   >
     <Image
       src={src}
-      alt={alt}
+      alt=""
       width={['100%', '405px']}
       height="100%"
       minHeight="270px"

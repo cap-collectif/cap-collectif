@@ -123,7 +123,7 @@ exports[`<ConsultationPreviewCover /> should render with an illustration when co
     href="https://capco.dev/project/strategie-technologique-de-letat-et-services-publics/consultation/etape-de-multi-consultation/consultation/premiere-consultation"
   >
     <Image
-      alt="Première consultation"
+      alt=""
       className="img-responsive"
       src="https://capco.dev/media/default/0001/01/13ff68eab987849ccef72a15bc6a1d74905fb0f6.png"
     />
