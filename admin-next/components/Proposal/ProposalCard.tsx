@@ -47,9 +47,6 @@ const FRAGMENT = graphql`
       url
       name
     }
-    votes {
-      totalCount
-    }
   }
 `
 
