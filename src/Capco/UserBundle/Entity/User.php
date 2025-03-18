@@ -1268,6 +1268,6 @@ class User extends AbstractUser implements ProjectOwner, EquatableInterface, Ind
 
     public function hasBackOfficeAccess(): bool
     {
-        return $this->isOrganizationMember() || $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->hasRole(UserRole::ROLE_ADMIN);
+        return $this->isOrganizationMember() || $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->hasRole(UserRole::ROLE_ADMIN) || $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
     }
 }
