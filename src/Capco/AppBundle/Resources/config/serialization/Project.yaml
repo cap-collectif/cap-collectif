@@ -47,6 +47,8 @@ Capco\AppBundle\Entity\Project:
                     ElasticsearchProposalNestedProject,
                     ElasticsearchReplyNestedProject,
                 ]
+        creator:
+            groups: [ElasticsearchProject]
         canContribute:
             groups: [Projects]
         createdAt:

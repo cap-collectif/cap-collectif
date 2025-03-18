@@ -128,6 +128,10 @@ mappings:
         project: *Project
         step: *Step
         author: *Author
+        creator:
+            properties:
+                id: { type: keyword }
+                username: *text_analysis_highlighted
         argument:
             properties:
                 id: { type: keyword }

@@ -769,3 +769,157 @@ Object {
   },
 }
 `;
+
+exports[`Internal|Query projects search by project creator username 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
+            "title": "Budget Participatif Rennes",
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
+            "title": "Projet avec questionnaire",
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
+            "title": "Projet externe",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Query projects search by project organization creator username 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
+            "title": "Budget Participatif Rennes",
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
+            "title": "Projet avec questionnaire",
+          },
+        },
+        Object {
+          "node": Object {
+            "creator": Object {
+              "username": "welcomattic",
+            },
+            "title": "Projet externe",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Query projects search by project organization owner username 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Budget Participatif d'organisation",
+          },
+        },
+        Object {
+          "node": Object {
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "projectOrgaVisibilityMe",
+          },
+        },
+        Object {
+          "node": Object {
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Rapport d'évaluation 6 (AR6)",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Query projects search by project owner username 1`] = `
+Object {
+  "viewer": Object {
+    "projects": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Budget Participatif d'organisation",
+          },
+        },
+        Object {
+          "node": Object {
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "projectOrgaVisibilityMe",
+          },
+        },
+        Object {
+          "node": Object {
+            "owner": Object {
+              "username": "GIEC",
+            },
+            "title": "Rapport d'évaluation 6 (AR6)",
+          },
+        },
+      ],
+    },
+  },
+}
+`;
+
+exports[`Internal|Query projects search by project title 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "title": "BP avec archivage des propositions",
+        },
+      },
+    ],
+  },
+}
+`;

@@ -28,6 +28,7 @@ class ProjectOwnerProjectsResolver implements QueryInterface
 
         $affiliations = $args['affiliations'];
         $query = $args->offsetGet('query');
+        $searchFields = $args->offsetGet('searchFields') ?? [];
 
         $orderByField = $args->offsetGet('orderBy')['field'] ?? ProjectOrderField::PUBLISHED_AT;
         $orderByDirection = $args->offsetGet('orderBy')['direction'] ?? OrderDirection::DESC;
@@ -42,7 +43,8 @@ class ProjectOwnerProjectsResolver implements QueryInterface
             $orderBy,
             $filters,
             $user,
-            &$totalCount
+            &$totalCount,
+            $searchFields
         ) {
             $response = $this->projectSearch->searchProjects(
                 $offset,
@@ -51,7 +53,8 @@ class ProjectOwnerProjectsResolver implements QueryInterface
                 $query,
                 $filters,
                 $affiliations,
-                $user
+                $user,
+                $searchFields
             );
             $totalCount = $response['count'];
 

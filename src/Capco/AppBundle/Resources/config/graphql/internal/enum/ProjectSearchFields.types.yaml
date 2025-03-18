@@ -1,0 +1,12 @@
+ProjectSearchFields:
+    type: enum
+    config:
+        name: ProjectSearchFields
+        description: 'Available search fields to search a project.'
+        values:
+            CREATOR:
+                value: 'CREATOR'
+                description: 'to search on project creator username'
+            OWNER:
+                value: 'OWNER'
+                description: 'to search on project owner username'

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Search;
 
 use Capco\AppBundle\Enum\ProjectAffiliation;
+use Capco\AppBundle\Enum\ProjectSearchFields;
 use Capco\AppBundle\Enum\ProjectStatus;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Repository\ProjectRepository;
@@ -36,6 +37,9 @@ class ProjectSearch extends Search
         $this->type = 'project';
     }
 
+    /**
+     * @param string[] $searchFields
+     */
     public function searchProjects(
         int $offset,
         int $limit,
@@ -43,12 +47,27 @@ class ProjectSearch extends Search
         ?string $term,
         array $providedFilters,
         ?array $affiliations = null,
-        ?User $user = null
+        ?User $user = null,
+        array $searchFields = []
     ): array {
+        $additionalSearchFields = [];
+
+        foreach ($searchFields as $field) {
+            if (ProjectSearchFields::CREATOR == $field) {
+                $additionalSearchFields[] = 'creator.username';
+                $additionalSearchFields[] = 'creator.username.std';
+            }
+
+            if (ProjectSearchFields::OWNER == $field) {
+                $additionalSearchFields[] = 'owner.username';
+                $additionalSearchFields[] = 'owner.username.std';
+            }
+        }
+
         $boolQuery = new Query\BoolQuery();
         $boolQuery = $this->searchTermsInMultipleFields(
             $boolQuery,
-            self::SEARCH_FIELDS,
+            array_merge(self::SEARCH_FIELDS, $additionalSearchFields),
             $term,
             'phrase_prefix'
         );

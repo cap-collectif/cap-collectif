@@ -20,8 +20,14 @@ export const ProjectListQuery = graphql`
     orderBy: { type: "ProjectOwnerProjectOrder" }
   )
   @refetchable(queryName: "ProjectListPaginationQuery") {
-    projects(first: $count, after: $cursor, query: $term, affiliations: $affiliations, orderBy: $orderBy)
-      @connection(key: "ProjectList_projects", filters: ["query", "orderBy", "affiliations"]) {
+    projects(
+      first: $count
+      after: $cursor
+      query: $term
+      affiliations: $affiliations
+      orderBy: $orderBy
+      searchFields: [CREATOR, OWNER]
+    ) @connection(key: "ProjectList_projects", filters: ["query", "orderBy", "affiliations"]) {
       __id
       totalCount
       edges {

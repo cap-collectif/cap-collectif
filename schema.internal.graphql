@@ -9847,6 +9847,9 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
     """the search query"""
     query: String
 
+    """The search fields to search a project"""
+    searchFields: [ProjectSearchFields]
+
     """The ordering direction for posts"""
     orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}
 
@@ -11659,6 +11662,9 @@ interface ProjectOwner {
     """the search query"""
     query: String
 
+    """The search fields to search a project"""
+    searchFields: [ProjectSearchFields]
+
     """The ordering direction for posts"""
     orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}
 
@@ -11682,6 +11688,15 @@ input ProjectOwnerProjectOrder {
 enum ProjectOwnerProjectOrderField {
   """Allows ordering a list of projects by when they were published."""
   PUBLISHED_AT
+}
+
+"""Available search fields to search a project."""
+enum ProjectSearchFields {
+  """to search on project creator username"""
+  CREATOR
+
+  """to search on project owner username"""
+  OWNER
 }
 
 """Project statuses"""
@@ -20355,6 +20370,9 @@ type User implements Node & UniformResourceLocatable & ProjectOwner & PostOwner 
 
     """the search query"""
     query: String
+
+    """The search fields to search a project"""
+    searchFields: [ProjectSearchFields]
 
     """The ordering direction for posts"""
     orderBy: ProjectOwnerProjectOrder = {direction: DESC, field: PUBLISHED_AT}

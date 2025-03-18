@@ -29,6 +29,9 @@ InternalProjectOwner:
                     query:
                         type: 'String'
                         description: the search query
+                    searchFields:
+                        type: '[ProjectSearchFields]'
+                        description: 'The search fields to search a project'
                     orderBy:
                         type: 'InternalProjectOwnerProjectOrder'
                         defaultValue:

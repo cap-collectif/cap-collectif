@@ -54,6 +54,11 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
                     $context
                 );
             }
+
+            if ($object->getOwner()) {
+                $data['owner']['username'] = $object->getOwner()->getUsername();
+            }
+
             if ($object->isLocalized()) {
                 $data['locale'] = [
                     'id' => $object->getLocale()->getId(),
