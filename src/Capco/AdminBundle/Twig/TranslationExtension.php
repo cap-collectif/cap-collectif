@@ -2,7 +2,7 @@
 
 namespace Capco\AdminBundle\Twig;
 
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Twig\Extension\AbstractExtension;
 use Twig\TwigFunction;
 
@@ -22,8 +22,8 @@ class TranslationExtension extends AbstractExtension
     public function isTranslatable($object): bool
     {
         return (\is_object($object)
-            ? $object instanceof Translatable
-            : \in_array(Translatable::class, class_implements($object)))
+            ? $object instanceof TranslatableInterface
+            : \in_array(TranslatableInterface::class, class_implements($object)))
             && (!method_exists($object, 'isTranslatable') || (new $object())->isTranslatable());
     }
 }

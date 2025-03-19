@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\ContactForm;
 
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -12,7 +12,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="contact_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ContactFormRepository")
  */
-class ContactForm implements Translatable
+class ContactForm implements TranslatableInterface
 {
     use BodyUsingJoditWysiwygTrait;
     use TranslatableTrait;

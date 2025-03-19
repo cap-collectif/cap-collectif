@@ -18,10 +18,6 @@
         {
             "type": "vcs",
             "url": "https://github.com/theofidry/AliceBundle"
-        },
-        {
-            "type": "vcs",
-            "url": "https://github.com/cap-collectif/Doctrinebehaviors"
         }
     ],
     "require": {
@@ -65,7 +61,6 @@
         "jms/translation-bundle": "^2.4",
         "jolicode/jolinotif": "^2.0",
         "jolicode/jolitypo": "^1.0",
-        "knplabs/doctrine-behaviors": "^1.6",
         "knplabs/gaufrette": "0.11.1",
         "knplabs/knp-menu-bundle": "^3.0",
         "ksubileau/color-thief-php": "^1.4",

@@ -2,8 +2,8 @@
 
 namespace Capco\AppBundle\Traits;
 
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslatableInterface;
+use Capco\AppBundle\Model\TranslationInterface;
 
 /**
  * Translation trait.
@@ -18,24 +18,16 @@ trait TranslationTrait
      * Will be mapped to translatable entity
      * by TranslatableSubscriber.
      */
-    protected Translatable $translatable;
+    protected TranslatableInterface $translatable;
 
-    public function setTranslatable(Translatable $translatable): self
+    public function setTranslatable(TranslatableInterface $translatable): self
     {
         $this->translatable = $translatable;
 
         return $this;
     }
 
-    public function setAsNewTranslation(Translatable $parent, Translation $translation)
-    {
-        $parent->getNewTranslations()->set((string) $translation->getLocale(), $translation);
-        $translation->setTranslatable($parent);
-
-        return $this;
-    }
-
-    public function getTranslatable(): Translatable
+    public function getTranslatable(): TranslatableInterface
     {
         return $this->translatable;
     }
@@ -69,21 +61,29 @@ trait TranslationTrait
         return true;
     }
 
-    public function doesTranslationExist(string $translation, $domain = 'CapcoAppBundle'): bool
+    public function setAsNewTranslation(TranslatableInterface $parent, TranslationInterface $translation): self
+    {
+        $parent->getNewTranslations()->set((string) $translation->getLocale(), $translation);
+        $translation->setTranslatable($parent);
+
+        return $this;
+    }
+
+    public function doesTranslationExist(string $translation, string $domain = 'CapcoAppBundle'): bool
     {
         $allTranslatableKeysFlipped = array_flip($this->getAllTranslationKey($domain));
 
         return isset($allTranslatableKeysFlipped[$translation]);
     }
 
-    public function doesTranslationKeyExist(string $translation, $domain = 'CapcoAppBundle'): bool
+    public function doesTranslationKeyExist(string $translation, string $domain = 'CapcoAppBundle'): bool
     {
         $allTranslatableKeys = $this->getAllTranslationKey($domain);
 
         return isset($allTranslatableKeys[$translation]);
     }
 
-    public function getAllTranslationKey($domain = 'CapcoAppBundle'): array
+    public function getAllTranslationKey(string $domain = 'CapcoAppBundle'): array
     {
         if (!property_exists($this, 'translator')) {
             return [];

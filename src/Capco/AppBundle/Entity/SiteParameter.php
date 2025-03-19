@@ -3,9 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -16,9 +14,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
  * @CapcoAdminAssert\LessThanIfMetaDescription(max="160", message="argument.metadescription.max_length")
  */
-class SiteParameter implements SonataTranslatableInterface, Translatable, \Stringable
+class SiteParameter implements TranslatableInterface, \Stringable
 {
-    use SonataTranslatableTrait;
     use TranslatableTrait;
     use UuidTrait;
     final public const NOT_TRANSLATABLE = [

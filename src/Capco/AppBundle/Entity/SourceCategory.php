@@ -2,9 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -15,9 +13,8 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="source_category")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SourceCategoryRepository")
  */
-class SourceCategory implements SonataTranslatableInterface, Translatable, \Stringable
+class SourceCategory implements TranslatableInterface, \Stringable
 {
-    use SonataTranslatableTrait;
     use TranslatableTrait;
     use UuidTrait;
 

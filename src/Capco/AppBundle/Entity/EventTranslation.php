@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
@@ -23,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    )
  * })
  */
-class EventTranslation implements Translation, \Stringable
+class EventTranslation implements TranslationInterface, \Stringable
 {
     use MetaDescriptionTrait;
     use SluggableTitleTrait;

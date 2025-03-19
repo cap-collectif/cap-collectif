@@ -15,12 +15,12 @@ use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\Common\Cache\Cache;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Configuration;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\EntityRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
-use SAML2\Utilities\ArrayCollection;
 
 class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
 {
@@ -205,7 +205,7 @@ class UpdateShieldAdminFormMutationSpec extends ObjectBehavior
         $oldFrenchTranslation = new SiteParameterTranslation();
         $oldFrenchTranslation->setLocale('fr-FR');
         $oldFrenchTranslation->setValue($introduction);
-        $currentIntroductionParameter->getTranslations()->willReturn([$oldFrenchTranslation]);
+        $currentIntroductionParameter->getTranslations()->willReturn(new ArrayCollection([$oldFrenchTranslation]));
         $currentIntroductionParameter->getValue()->willReturn($introduction);
         $siteParameterRepository
             ->findOneBy([

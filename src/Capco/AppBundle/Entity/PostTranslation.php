@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -21,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class PostTranslation implements Translation
+class PostTranslation implements TranslationInterface
 {
     use MetaDescriptionTrait;
     use NullableTextableTrait;

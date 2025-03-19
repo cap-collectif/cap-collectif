@@ -411,6 +411,12 @@ services:
         public: true
         autowire: true
 
+    Capco\AppBundle\Provider\LocaleProvider:
+        public: true
+        autowire: true
+
+    Capco\AppBundle\Provider\LocaleProviderInterface: '@Capco\AppBundle\Provider\LocaleProvider'
+
     Capco\AppBundle\Service\AddStepService:
         autowire: true
         public: true

@@ -16,10 +16,3 @@ sonata_intl:
             eu-EU: Europe/Berlin
             oc-OC: Europe/Berlin
             ur-IN: Europe/Berlin
-
-knp_doctrine_behaviors:
-    translatable: true
-    geocodable: false
-    loggable: false
-    sluggable: false
-    soft_deletable: false

@@ -3,10 +3,8 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\CustomCodeTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -19,10 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
-class Theme implements IndexableInterface, Translatable, SonataTranslatableInterface, \Stringable
+class Theme implements IndexableInterface, TranslatableInterface, \Stringable
 {
     use CustomCodeTrait;
-    use SonataTranslatableTrait;
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;

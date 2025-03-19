@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Entity\Interfaces\TimeRangeable;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableWithoutCounterTrait;
@@ -44,7 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\CheckRegister()
  * @CapcoAssert\HasAuthor()
  */
-class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, Translatable, Ownerable, CreatableInterface, \Stringable
+class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, TranslatableInterface, Ownerable, CreatableInterface, \Stringable
 {
     use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;

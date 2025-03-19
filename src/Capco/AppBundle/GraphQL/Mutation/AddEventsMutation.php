@@ -169,13 +169,9 @@ class AddEventsMutation extends AbstractEventMutation
                         $this->localeRepository->findEnabledLocalesCodes()
                         as $availableLocale
                     ) {
-                        if (
-                            isset($eventInput['translations'][$availableLocale])
-                            && null === $event->translate($availableLocale)
-                        ) {
+                        if (isset($eventInput['translations'][$availableLocale])) {
                             $translation = new EventTranslation();
                             $translation->setTranslatable($event);
-                            $event->addTranslation($translation);
                             $translation->setLocale($availableLocale);
                             if (isset($eventInput['translations'][$availableLocale]['title'])) {
                                 $translation->setTitle(
@@ -187,11 +183,7 @@ class AddEventsMutation extends AbstractEventMutation
                                     $eventInput['translations'][$availableLocale]['body']
                                 );
                             }
-                            if (
-                                isset(
-                                    $eventInput['translations'][$availableLocale]['metaDescription']
-                                )
-                            ) {
+                            if (isset($eventInput['translations'][$availableLocale]['metaDescription'])) {
                                 $translation->setMetaDescription(
                                     $eventInput['translations'][$availableLocale]['metaDescription']
                                 );
@@ -201,6 +193,7 @@ class AddEventsMutation extends AbstractEventMutation
                                     $eventInput['translations'][$availableLocale]['link']
                                 );
                             }
+                            $event->addTranslation($translation);
                         }
                     }
                     $this->em->persist($event);

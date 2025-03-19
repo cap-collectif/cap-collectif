@@ -4,10 +4,8 @@ namespace Capco\AppBundle\Entity\Section;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Enum\HomePageProjectsSectionConfigurationDisplayMode;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\Map\ZoomTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -20,9 +18,8 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SectionRepository")
  */
-class Section implements Translatable, SonataTranslatableInterface, \Stringable
+class Section implements TranslatableInterface, \Stringable
 {
-    use SonataTranslatableTrait;
     use TranslatableTrait;
     use UuidTrait;
     use ZoomTrait;

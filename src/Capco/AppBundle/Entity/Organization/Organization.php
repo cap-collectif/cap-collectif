@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\ProjectOwner;
 use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Entity\Media;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Repository\Organization\OrganizationRepository;
 use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
@@ -24,7 +24,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )*
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
-class Organization implements Translatable, Author, ProjectOwner, IndexableInterface, SluggableInterface
+class Organization implements TranslatableInterface, Author, ProjectOwner, IndexableInterface, SluggableInterface
 {
     use SluggableTranslatableTitleTrait;
     use TimestampableTrait;

@@ -9,10 +9,6 @@ parameters:
     nelmio_alice.seed: 1
     jms_i18n_routing.pattern_generation_strategy.class: Capco\AppBundle\Router\DefaultPatternGenerationStrategy
     locales: ['en-GB', 'fr-FR', 'es-ES', 'de-DE', 'nl-NL', 'sv-SE', 'eu-EU', 'oc-OC', 'ur-IN']
-    knp.doctrine_behaviors.translatable_subscriber.translatable_trait: Capco\AppBundle\Traits\TranslatableTrait
-    knp.doctrine_behaviors.translatable_subscriber.translation_trait: Capco\AppBundle\Traits\TranslationTrait
-    knp.doctrine_behaviors.translatable_subscriber.translatable_fetch_method: EAGER
-    knp.doctrine_behaviors.translatable_subscriber.translation_fetch_method: EAGER
     jms_serializer.serialized_name_annotation_strategy.class: Capco\AppBundle\Utils\IdenticalUnlessSpecifiedPropertyNamingStrategy
     disable_mail_delivery: false
     #

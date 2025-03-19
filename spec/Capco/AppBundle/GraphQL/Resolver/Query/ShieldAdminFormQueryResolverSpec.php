@@ -10,6 +10,7 @@ use Capco\AppBundle\GraphQL\Resolver\Query\ShieldAdminFormQueryResolver;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
 use Capco\AppBundle\Toggle\Manager;
+use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ObjectRepository;
 use PhpSpec\ObjectBehavior;
@@ -62,7 +63,7 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
 
         $siteParameter
             ->getTranslations()
-            ->willReturn([$siteParameterTranslation])
+            ->willReturn(new ArrayCollection([$siteParameterTranslation->getWrappedObject()]))
         ;
 
         $siteParameterTranslation
@@ -115,7 +116,7 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
         SiteParameterTranslation $siteParameterTranslation,
         SiteParameterRepository $siteParameterRepository,
         SiteImageRepository $siteImageRepository,
-        ObjectRepository $siteParameterTranslationRepository
+        ObjectRepository $siteParameterTranslationRepository,
     ): void {
         $siteParameterRepository
             ->findOneBy(['keyname' => 'shield.introduction'])
@@ -134,7 +135,7 @@ class ShieldAdminFormQueryResolverSpec extends ObjectBehavior
 
         $siteParameter
             ->getTranslations()
-            ->willReturn([$siteParameterTranslation])
+            ->willReturn(new ArrayCollection([$siteParameterTranslation->getWrappedObject()]))
         ;
 
         $siteParameterTranslation

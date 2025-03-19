@@ -5,7 +5,7 @@ namespace Capco\AppBundle\Entity\District;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Styles\BackgroundStyle;
 use Capco\AppBundle\Entity\Styles\BorderStyle;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -22,7 +22,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *      "global"         = "GlobalDistrict"
  * })
  */
-abstract class AbstractDistrict implements IndexableInterface, Translatable
+abstract class AbstractDistrict implements IndexableInterface, TranslatableInterface
 {
     use TimestampableTrait;
     use TranslatableTrait;

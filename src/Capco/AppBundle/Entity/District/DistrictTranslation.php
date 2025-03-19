@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\District;
 
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -21,7 +21,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *    )
  * })
  */
-class DistrictTranslation implements Translation
+class DistrictTranslation implements TranslationInterface
 {
     use DescriptionTrait;
     use TranslationTrait;

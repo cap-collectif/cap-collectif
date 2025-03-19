@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Section;
 
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -19,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class SectionTranslation implements Translation
+class SectionTranslation implements TranslationInterface
 {
     use TextableTrait;
     use TranslationTrait;

@@ -3,10 +3,8 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -19,10 +17,9 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\VideoRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Video implements DisplayableInBOInterface, SonataTranslatableInterface, Translatable, \Stringable
+class Video implements DisplayableInBOInterface, TranslatableInterface, \Stringable
 {
     use IdTrait;
-    use SonataTranslatableTrait;
     use TranslatableTrait;
 
     /**

@@ -3,7 +3,7 @@
 namespace Capco\AdminBundle\DependencyInjection;
 
 use Capco\AdminBundle\Admin\Extension\TranslatableAdminExtension;
-use Capco\AppBundle\Model\SonataTranslatableInterface;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Reference;
@@ -26,7 +26,7 @@ class AdminExtensionCompilerPass implements CompilerPassInterface
             }
             $modelClassReflection = new \ReflectionClass($modelClass);
 
-            if ($modelClassReflection->implementsInterface(SonataTranslatableInterface::class)) {
+            if ($modelClassReflection->implementsInterface(TranslatableInterface::class)) {
                 $admin->addMethodCall('addExtension', [
                     new Reference(TranslatableAdminExtension::class),
                 ]);

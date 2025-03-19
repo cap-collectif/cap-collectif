@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\IdTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -16,10 +14,9 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="menu_item")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuItemRepository")
  */
-class MenuItem implements Translatable, SonataTranslatableInterface, \Stringable
+class MenuItem implements TranslatableInterface, \Stringable
 {
     use IdTrait;
-    use SonataTranslatableTrait;
     use TranslatableTrait;
 
     final public const TYPE_HEADER = 1;

@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Model\CommentableInterface;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\CommentableTrait;
 use Capco\AppBundle\Traits\CreatableTrait;
@@ -28,7 +28,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface, IndexableInterface, Ownerable, Translatable, CreatableInterface, \Stringable
+class Post implements CommentableInterface, IndexableInterface, Ownerable, TranslatableInterface, CreatableInterface, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use CommentableTrait;

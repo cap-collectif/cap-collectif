@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class SiteParameterTranslation implements Translation
+class SiteParameterTranslation implements TranslationInterface
 {
     use TranslationTrait;
     use UuidTrait;

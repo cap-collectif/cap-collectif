@@ -2,10 +2,8 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\CustomCodeTrait;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -16,10 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="page")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PageRepository")
  */
-class Page implements SonataTranslatableInterface, Translatable, \Stringable
+class Page implements TranslatableInterface, \Stringable
 {
     use CustomCodeTrait;
-    use SonataTranslatableTrait;
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;

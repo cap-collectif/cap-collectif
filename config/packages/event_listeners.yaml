@@ -125,3 +125,10 @@ services:
         autowire: true
         tags:
             - { name: kernel.event_subscriber }
+
+    Capco\AppBundle\EventListener\TranslatableEventSubscriber:
+        arguments:
+            $translationFetchMode: 'EAGER'
+            $translatableFetchMode: 'EAGER'
+        tags:
+            - { name: doctrine.event_subscriber }

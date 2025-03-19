@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\EventListener;
 
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslationInterface;
 use Doctrine\Common\EventSubscriber;
 use Doctrine\ORM\Event\LifecycleEventArgs;
 use Doctrine\ORM\Events;
@@ -20,7 +20,7 @@ class LocalizedEntityUpdateSubscriber implements EventSubscriber
     public function postUpdate(LifecycleEventArgs $args): void
     {
         $entity = $args->getEntity();
-        if ($entity instanceof Translation) {
+        if ($entity instanceof TranslationInterface) {
             $translatable = $entity->getTranslatable();
             if (method_exists($translatable, 'setUpdatedAt')) {
                 $translatable->setUpdatedAt(new \DateTime());

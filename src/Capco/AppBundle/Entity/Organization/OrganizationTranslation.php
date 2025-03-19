@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Organization;
 
-use Capco\AppBundle\Model\Translation;
+use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -20,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class OrganizationTranslation implements Translation
+class OrganizationTranslation implements TranslationInterface
 {
     use SluggableTitleTrait;
     use TranslationTrait;

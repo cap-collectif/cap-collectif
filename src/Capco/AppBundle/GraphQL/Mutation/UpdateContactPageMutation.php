@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\SiteImage;
 use Capco\AppBundle\Entity\SiteParameter;
 use Capco\AppBundle\Entity\SiteParameterTranslation;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
+use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Repository\MediaRepository;
 use Capco\AppBundle\Repository\SiteImageRepository;
 use Capco\AppBundle\Repository\SiteParameterRepository;
@@ -113,7 +114,7 @@ class UpdateContactPageMutation implements MutationInterface
         SiteParameter $parameter,
         string $newTranslation,
         ?string $locale = null
-    ): ?SiteParameterTranslation {
+    ): ?TranslationInterface {
         if (null === $locale) {
             return $this->updateDefaultTranslation($parameter, $newTranslation);
         }
@@ -137,7 +138,7 @@ class UpdateContactPageMutation implements MutationInterface
     private function updateDefaultTranslation(
         SiteParameter $parameter,
         string $newTranslation
-    ): ?SiteParameterTranslation {
+    ): ?TranslationInterface {
         $parameter->setValue($newTranslation);
         $this->em->persist($parameter);
 

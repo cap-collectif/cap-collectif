@@ -2,9 +2,7 @@
 
 namespace Capco\UserBundle\Entity;
 
-use Capco\AppBundle\Model\SonataTranslatableInterface;
-use Capco\AppBundle\Model\Translatable;
-use Capco\AppBundle\Traits\SonataTranslatableTrait;
+use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,9 +12,8 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_type")
  * @ORM\HasLifecycleCallbacks()
  */
-class UserType implements Translatable, SonataTranslatableInterface, \Stringable
+class UserType implements TranslatableInterface, \Stringable
 {
-    use SonataTranslatableTrait;
     use TranslatableTrait;
     use UuidTrait;
 
