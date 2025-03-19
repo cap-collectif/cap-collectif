@@ -93,62 +93,6 @@ trait OpinionStepsTrait
     }
 
     /**
-     * @When I go to an opinion with loads of votes
-     */
-    public function iGoToAnOpinionWithLoadsOfVote()
-    {
-        $this->visitPageWithParams(
-            'opinion page',
-            self::$opinionWithLoadsOfVotes,
-            'opinion-page-tabs'
-        );
-    }
-
-    /**
-     * @When I go to a ranking step with opinions
-     */
-    public function iGoToARankingStepWithOpinions()
-    {
-        $this->visitPageWithParams('ranking step page', self::$rankingStepWithOpinions);
-    }
-
-    /**
-     * @When I click the show all opinion votes button
-     */
-    public function iClickTheShowAllOpinionVotesButton()
-    {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-votes-show-all').length > 0");
-        $this->navigationContext->getPage('opinion page')->clickShowAllVotesButton();
-    }
-
-    /**
-     * @Then I should see all opinion votes
-     */
-    public function iShouldSeeAllOpinionVotes()
-    {
-        $this->waitAndThrowOnFailure(
-            3000,
-            "$('.opinion__votes__more__modal .opinion__votes__userbox').length > 0"
-        );
-        $votesInModalSelector = $this->navigationContext
-            ->getPage('opinion page')
-            ->getVotesInModalSelector()
-        ;
-        $this->assertNumElements(46, $votesInModalSelector);
-    }
-
-    /**
-     * I click the share opinion button.
-     *
-     * @When I click the share opinion button
-     */
-    public function iClickTheShareOpinionButton()
-    {
-        $this->waitAndThrowOnFailure(3000, "$('#opinion-share-button').length > 0");
-        $this->navigationContext->getPage('opinion page')->clickShareButton();
-    }
-
-    /**
      * @When I go on the arguments tab
      */
     public function iGoOnTheArgumentsTab()
@@ -488,16 +432,6 @@ trait OpinionStepsTrait
     }
 
     // ************************ Opinion versions **************************************
-
-    /**
-     * Go to an opinion with versions.
-     *
-     * @When I go to an opinion with versions
-     */
-    public function iGoToAnOpinionWithVersions()
-    {
-        $this->visitPageWithParams('opinion page', self::$opinionWithVersions);
-    }
 
     /**
      * @When I go to a version

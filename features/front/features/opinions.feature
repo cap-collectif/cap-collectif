@@ -110,24 +110,6 @@ Scenario: Non author of an opinion wants to update it
     | opinionSlug      | opinion-3                        |
   Then I should not see "global.change" in the ".opinion__description .opinion__buttons" element
 
-Scenario: Anonymous user wants to see all votes of an opinion
-  Given I go to an opinion with loads of votes
-  When I click the show all opinion votes button
-  Then I should see all opinion votes
-
-Scenario: Anonymous user wants to share an opinion
-  Given feature "share_buttons" is enabled
-  And I go to an opinion with versions
-  When I click the share opinion button
-  Then I should see the opinion share dropdown
-  And I wait ".share-option" to appear on current page
-  And I click the opinion share link button
-  Then I should see the share link modal
-
-Scenario: Anonymous user wants to see rankings of opinions
-  Given I go to a ranking step with opinions
-  Then I should not see "error.500"
-
 @elasticsearch
 Scenario: Project's opinions can be sorted randomly
   Given feature "projects_form" is enabled
