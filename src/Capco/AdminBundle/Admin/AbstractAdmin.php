@@ -492,7 +492,7 @@ abstract class AbstractAdmin extends AbstractTaggedAdmin implements AdminInterfa
 
             $parameters = ParametersManipulator::merge($parameters, $filters);
 
-            if ($this->datagridValues) {
+            if (!empty($this->datagridValues)) {
                 $orderKeys = [DatagridInterface::SORT_ORDER, DatagridInterface::SORT_BY];
                 foreach ($this->datagridValues as $key => $datagridValue) {
                     if (\in_array($key, $orderKeys)) {
