@@ -803,6 +803,17 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
             return null;
         }
 
+        // Check only steps with opened participation
+        foreach ($steps as $step) {
+            if (OtherStep::TYPE === $step->getType() || ($step instanceof SelectionStep && !$step->isVotable())) {
+                continue;
+            }
+
+            if ($step->isOpen()) {
+                return $step;
+            }
+        }
+
         foreach ($steps as $step) {
             if ($step->isOpen()) {
                 return $step;
