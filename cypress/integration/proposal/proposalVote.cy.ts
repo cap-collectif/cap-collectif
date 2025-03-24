@@ -8,13 +8,11 @@ context('Proposal Vote Page', () => {
     it('Logged in as user who does not full fill requirements and want to vote', () => {
       cy.directLoginAs('pierre')
       cy.interceptGraphQLOperation({ operationName: 'AddProposalVoteMutation' })
-      cy.interceptGraphQLOperation({ operationName: 'ProposalStepPageQuery' })
       cy.interceptGraphQLOperation({ operationName: 'ProposalListViewRefetchQuery' })
       cy.interceptGraphQLOperation({ operationName: 'UpdateProfilePersonalDataMutation' })
       cy.interceptGraphQLOperation({ operationName: 'UpdateRequirementMutation' })
 
-      cy.visit('project/bp-avec-vote-classement/collect/collecte-avec-vote-classement-limite')
-      cy.wait('@ProposalStepPageQuery')
+      ProposalVotePage.visitCollectStepWithVoteRankingLimit()
       cy.wait('@ProposalListViewRefetchQuery')
       cy.get('#proposal-vote-btn-UHJvcG9zYWw6cHJvcG9zYWwxMzg\\=').click({ force: true })
       cy.get('#proposal-vote-modal').should('exist')
@@ -34,6 +32,7 @@ context('Proposal Vote Page', () => {
       cy.wait('@AddProposalVoteMutation')
       cy.contains('vote-for-x-proposals {"num":2}')
     })
+
     it('Logged in user wants to vote and unvote for a proposal', () => {
       cy.directLoginAs('user')
 
@@ -57,6 +56,24 @@ context('Proposal Vote Page', () => {
 
       ProposalVotePage.getTotalVotesTab().click({ force: true })
       ProposalVotePage.getVoterCards().should('have.length', 2)
+    })
+
+    it('Logged in user wants to delete a vote', () => {
+      cy.directLoginAs('user')
+
+      cy.interceptGraphQLOperation({ operationName: 'ProposalsUserVotesPageAppQuery' })
+      ProposalVotePage.visitCollectStepWithVoteRankingLimit()
+
+      ProposalVotePage.goToViewerVotesPage()
+
+      ProposalVotePage.getStepWithLimiSection().should('contain', 'Proposition 3')
+      ProposalVotePage.getStepWithLimiSection().find('button').first().click()
+      cy.get('span').contains('are-you-sure-you-want-to-delete-this-vote').should('exist')
+      ProposalVotePage.getConfirmDeleteVoteButton().click()
+      ProposalVotePage.saveVoteModifications()
+      cy.reload()
+      cy.wait('@ProposalsUserVotesPageAppQuery')
+      ProposalVotePage.getStepWithLimiSection().should('exist').and('not.contain', 'Proposition 3')
     })
 
     it('Logged in user wants to vote for a proposal anonymously', () => {
@@ -86,6 +103,7 @@ context('Proposal Vote Page', () => {
       ProposalVotePage.getTotalVotesTab().click({ force: true })
       ProposalVotePage.getVoterCards().should('have.length', 3)
     })
+
     it('Proposal should stay voted after user refresh the page', () => {
       cy.task('disable:feature', 'new_vote_step')
       cy.directLoginAs('user')

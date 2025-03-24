@@ -64,7 +64,7 @@ describe('Consultation back office', () => {
     AdminConsultationPage.fillModel(0, 'Projet de loi Renseignement - Projet de loi')
     cy.get('[aria-labelledby=MODEL-0] .section-item').should('have.length', 20)
     AdminConsultationPage.getSectionDeleteButton(0, 1, 'MODEL').click()
-    cy.get('[aria-labelledby=MODEL-0] .section-item').should('exist').and('have.length', 18)
+    cy.get('[aria-labelledby=MODEL-0] .section-item').should('exist').and('be.visible').and('have.length', 18)
 
     AdminConsultationPage.save()
     AdminConsultationPage.visitConsultationPage()

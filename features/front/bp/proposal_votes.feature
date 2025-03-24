@@ -96,19 +96,3 @@ Scenario: Logged in user wants to set a vote as anonymous
   And I wait 1 seconds
   Then I reload the page
   And I should see "global.anonymous" appear on current page in "body"
-
-@database
-Scenario: Logged in user wants to delete a vote
-  Given I am logged in as user
-  When I got to the votes details page of project with requirements
-  And I wait "#vote-table-step-selection-avec-vote-classement-limite" to appear on current page
-  And the "#vote-table-step-selection-avec-vote-classement-limite" element should contain "Proposition 3"
-  Then I delete a vote of a proposal "UHJvcG9zYWw6cHJvcG9zYWwyNg==-proposal-vote__private"
-  And I wait 1 seconds
-  And I should see "are-you-sure-you-want-to-delete-this-vote"
-  Then I press "btn-delete"
-  And I click on button "#confirm-update-votes"
-  Then I reload the page
-  And I wait 1 seconds
-  And I wait "#vote-table-step-selection-avec-vote-classement-limite" to appear on current page
-  And the "#vote-table-step-selection-avec-vote-classement-limite" element should not contain "Proposition 3"
