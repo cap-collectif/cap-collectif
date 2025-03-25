@@ -8,6 +8,7 @@ use Sonata\AdminBundle\Datagrid\ListMapper;
 use Sonata\AdminBundle\Form\Type\ModelAutocompleteType;
 use Sonata\AdminBundle\Route\RouteCollectionInterface;
 use Sonata\AdminBundle\Show\ShowMapper;
+use Sonata\DoctrineORMAdminBundle\Filter\ModelFilter;
 
 class ReportingAdmin extends AbstractAdmin
 {
@@ -38,14 +39,14 @@ class ReportingAdmin extends AbstractAdmin
             ])
             ->add(
                 'Reporter',
-                ModelAutocompletetype::class,
+                ModelFilter::class,
                 [
+                    'field_type' => ModelAutocompleteType::class,
+                    'field_options' => [
+                        'property' => 'username',
+                    ],
                     'label' => 'global.author',
                 ],
-                [
-                    'property' => 'email,username',
-                    'to_string_callback' => fn ($entity) => $entity->getEmail() . ' - ' . $entity->getUsername(),
-                ]
             )
             ->add('createdAt', null, [
                 'label' => 'global.creation',
