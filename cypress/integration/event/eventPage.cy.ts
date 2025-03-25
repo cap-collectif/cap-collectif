@@ -47,4 +47,11 @@ describe('Event Page - Event author want to export guests list', () => {
         })
       })
   })
+
+  it('should show deleted cancelled event message', () => {
+    cy.interceptGraphQLOperation({ operationName: 'EventPageQuery' })
+    EventPage.visit({ event: 'event-deleted' })
+
+    cy.get('.cap-text').contains('event-cancelled')
+  })
 })

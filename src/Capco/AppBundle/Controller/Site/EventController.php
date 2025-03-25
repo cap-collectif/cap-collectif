@@ -98,7 +98,7 @@ class EventController extends Controller
 
         if ($event->isDeleted()) {
             return new Response(
-                $this->renderView('CapcoAppBundle:Event:show.html.twig', ['event' => $event, 'isDeleted' => true])
+                $this->renderView('@CapcoApp/Event/show.html.twig', ['event' => $event, 'isDeleted' => true])
             );
         }
         $this->denyAccessUnlessGranted(EventVoter::VIEW_FRONT, $event);
