@@ -21,5 +21,5 @@ trait TranslatablePropertiesTrait
 
     protected ?string $currentLocale = null;
 
-    protected string $defaultLocale = 'en';
+    protected string $defaultLocale = 'fr-FR';
 }
