@@ -21,7 +21,7 @@
     "cookie": "^0.4.1",
     "framer-motion": "^11.0.10",
     "nookies": "^2.5.2",
-    "next": "14",
+    "next": "14.2.25",
     "next-client-cookies": "^1.1.1",
     "graphql-tag":"^2.12.6",
     "react": "18.2.0",
