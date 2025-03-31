@@ -18,7 +18,7 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import type { GlobalState } from '~/types'
 import type { UserInvitationSSOPage_logo$key } from '~relay/UserInvitationSSOPage_logo.graphql'
 import CreateAccountEmailLink from '~/components/User/Invitation/CreateAccountEmailLink'
-import { Flex, Heading, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUILineHeight, Flex, Heading, Text } from '@cap-collectif/ui'
 
 type Props = {
   readonly loginFacebook: boolean
@@ -79,7 +79,7 @@ const UserInvitationSSOPage = ({
                 👋
               </span>
             </Heading>
-            <Text color="gray.900" fontSize={5} lineHeight="m">
+            <Text color="gray.900" fontSize={CapUIFontSize.DisplaySmall} lineHeight={CapUILineHeight.L}>
               {intl.formatMessage(
                 {
                   id: 'invite-join-platform',

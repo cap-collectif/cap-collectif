@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   Button,
   ButtonQuickAction,
+  CapUIFontSize,
   CapUIIcon,
   CapUIModalSize,
   FormLabel,
@@ -80,7 +81,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ title, name, initialValues, setVa
           <Modal.Body>
             <FormControl name={`HelpText`} control={control} mb={6}>
               <FormLabel htmlFor={`HelpText`} label={intl.formatMessage({ id: 'proposal_form.help_text' })}>
-                <Text fontSize={2} color="gray.500">
+                <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                   {intl.formatMessage({ id: 'global.optional' })}
                 </Text>
               </FormLabel>

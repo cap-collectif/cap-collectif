@@ -1,6 +1,6 @@
 import React from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { Text, Tooltip } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUILineHeight, Text, Tooltip } from '@cap-collectif/ui'
 
 type Props = {
   show: boolean
@@ -15,7 +15,7 @@ const PinnedLabel = ({ show, type }: Props) => {
       <Tooltip
         placement="bottom"
         label={
-          <Text textAlign="center" lineHeight="sm" fontSize={1} marginBottom={0}>
+          <Text textAlign="center" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} marginBottom={0}>
             {intl.formatMessage({
               id: `global.pinned.tooltip.${type}`,
             })}

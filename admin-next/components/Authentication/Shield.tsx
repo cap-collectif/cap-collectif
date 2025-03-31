@@ -3,6 +3,7 @@ import {
   Accordion,
   Button,
   CapUIAccordionColor,
+  CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
@@ -135,10 +136,10 @@ const Shield: FC = () => {
         <Accordion.Panel spacing={6}>
           <Flex direction="row" justify="space-between" align="flex-start" spacing={2}>
             <Flex direction="column" spacing={1}>
-              <Text color="gray.900" fontSize={3} fontWeight={CapUIFontWeight.Semibold}>
+              <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={CapUIFontWeight.Semibold}>
                 {intl.formatMessage({ id: 'global.shield' })}
               </Text>
-              <Text color="gray.700" fontSize={2}>
+              <Text color="gray.700" fontSize={CapUIFontSize.BodySmall}>
                 {intl.formatMessage({ id: 'module-shield-description' })}
               </Text>
             </Flex>
@@ -165,7 +166,7 @@ const Shield: FC = () => {
               <FormControl name="introduction" control={control}>
                 <FormLabel label={intl.formatMessage({ id: 'global.intro' })}>
                   <Flex direction="row" justify="space-between" flex={1}>
-                    <Text fontSize={2} color="gray.500">
+                    <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                       {intl.formatMessage({ id: 'global.optional' })}
                     </Text>
 
@@ -211,7 +212,7 @@ const Shield: FC = () => {
 
               <FormControl name="logo" control={control}>
                 <FormLabel label={intl.formatMessage({ id: 'platform-logo' })}>
-                  <Text fontSize={2} color="gray.500">
+                  <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
@@ -250,7 +251,7 @@ const Shield: FC = () => {
               <Flex direction="row" justify="space-between" align="flex-start" spacing={2}>
                 <Flex direction="column" spacing={1}>
                   <Flex direction="row" spacing={1}>
-                    <Text color="gray.900" fontSize={3} fontWeight={CapUIFontWeight.Semibold}>
+                    <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={CapUIFontWeight.Semibold}>
                       {intl.formatMessage({ id: 'instant-authentication' })}
                     </Text>
                     <Tag variantColor="gray">
@@ -258,7 +259,7 @@ const Shield: FC = () => {
                     </Tag>
                   </Flex>
 
-                  <Text color="gray.700" fontSize={2}>
+                  <Text color="gray.700" fontSize={CapUIFontSize.BodySmall}>
                     {intl.formatMessage({
                       id: 'module-instant-authentication-description',
                     })}
@@ -274,7 +275,7 @@ const Shield: FC = () => {
               <Flex direction="row" justify="space-between" align="flex-start" spacing={2}>
                 <Flex direction="column" spacing={1}>
                   <Flex direction="row" spacing={1}>
-                    <Text color="gray.900" fontSize={3} fontWeight={CapUIFontWeight.Semibold}>
+                    <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={CapUIFontWeight.Semibold}>
                       {intl.formatMessage({
                         id: 'capco.module.remind_user_account_confirmation',
                       })}
@@ -284,7 +285,7 @@ const Shield: FC = () => {
                     </Tag>
                   </Flex>
 
-                  <Text color="gray.700" fontSize={2}>
+                  <Text color="gray.700" fontSize={CapUIFontSize.BodySmall}>
                     {intl.formatMessage({
                       id: 'description.module.remind_user_account_confirmation',
                     })}

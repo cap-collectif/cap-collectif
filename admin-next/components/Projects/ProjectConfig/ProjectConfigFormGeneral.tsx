@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { FormProvider, useFormContext } from 'react-hook-form'
-import { Flex, FormLabel, Heading, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
+import { CapUIFontSize, Flex, FormLabel, Heading, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
@@ -75,7 +75,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
                   id: 'admin.fields.project.type.title',
                 })}
               >
-                <Text fontSize={2} color="gray.500">
+                <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                   {intl.formatMessage({ id: 'global.optional' })}
                 </Text>
               </FormLabel>
@@ -111,7 +111,7 @@ const ProjectConfigFormGeneral: React.FC<ProjectConfigFormGeneralProps> = ({ que
             }}
           >
             <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>

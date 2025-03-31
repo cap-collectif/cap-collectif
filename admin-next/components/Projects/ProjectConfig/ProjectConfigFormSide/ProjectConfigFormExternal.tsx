@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
-import { Flex, Heading, FormLabel, Text, Switch } from '@cap-collectif/ui'
+import { Flex, Heading, FormLabel, Text, Switch, CapUIFontSize } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
@@ -52,7 +52,7 @@ const ProjectConfigFormExternal: React.FC = () => {
               })}
               htmlFor="externalParticipantsCount"
             >
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>
@@ -65,7 +65,7 @@ const ProjectConfigFormExternal: React.FC = () => {
               })}
               htmlFor="externalContributionsCount"
             >
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>
@@ -78,7 +78,7 @@ const ProjectConfigFormExternal: React.FC = () => {
               })}
               htmlFor="externalVotesCount"
             >
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>

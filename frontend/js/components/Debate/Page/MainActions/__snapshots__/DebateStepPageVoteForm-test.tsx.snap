@@ -22,7 +22,7 @@ Array [
         thanks-for-debate-richer
       </span>
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -44,10 +44,11 @@ Array [
         label="copied-link"
       >
         <button
-          class="sc-bcXGCL sc-laZSpB gHhxfT jEfYyY cap-button"
+          class="sc-bcXGCL sc-laZSpB hwdiSU jFPqgL cap-button"
           type="button"
         >
           <svg
+            aria-hidden="true"
             class="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon"
             fill="none"
             viewBox="0 0 32 32"
@@ -111,13 +112,13 @@ Array [
           class="sc-bcXGCL bghzXx"
         >
           <button
-            class="sc-bcXGCL sc-laZSpB DcvKS jHvBhg cap-button"
+            class="sc-bcXGCL sc-laZSpB fhIZOJ gDuqin cap-button"
             type="button"
           >
             global.cancel
           </button>
           <button
-            class="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            class="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -151,7 +152,7 @@ Array [
         publish.argument.validate.account
       </span>
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -202,13 +203,13 @@ Array [
           class="sc-bcXGCL bghzXx"
         >
           <button
-            class="sc-bcXGCL sc-laZSpB DcvKS jHvBhg cap-button"
+            class="sc-bcXGCL sc-laZSpB fhIZOJ gDuqin cap-button"
             type="button"
           >
             global.cancel
           </button>
           <button
-            class="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            class="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -232,7 +233,7 @@ Array [
       class="sc-bcXGCL ghEBPM"
     >
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -253,7 +254,7 @@ Array [
       </p>
     </div>
     <button
-      class="sc-bcXGCL sc-laZSpB fknmkT ktRJXy cap-button"
+      class="sc-bcXGCL sc-laZSpB jEWjgc ietVcX cap-button"
       type="button"
     >
       publish-argument
@@ -274,7 +275,7 @@ Array [
       class="sc-bcXGCL ghEBPM"
     >
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -310,10 +311,11 @@ Array [
         label="copied-link"
       >
         <button
-          class="sc-bcXGCL sc-laZSpB gHhxfT jEfYyY cap-button"
+          class="sc-bcXGCL sc-laZSpB hwdiSU jFPqgL cap-button"
           type="button"
         >
           <svg
+            aria-hidden="true"
             class="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon"
             fill="none"
             viewBox="0 0 32 32"
@@ -333,7 +335,7 @@ Array [
       </div>
     </div>
     <button
-      class="sc-bcXGCL sc-laZSpB fknmkT ktRJXy cap-button"
+      class="sc-bcXGCL sc-laZSpB jEWjgc ietVcX cap-button"
       type="button"
     >
       publish-argument
@@ -364,7 +366,7 @@ Array [
         thanks-for-your-vote
       </span>
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -415,13 +417,13 @@ Array [
           class="sc-bcXGCL bghzXx"
         >
           <button
-            class="sc-bcXGCL sc-laZSpB DcvKS jHvBhg cap-button"
+            class="sc-bcXGCL sc-laZSpB fhIZOJ gDuqin cap-button"
             type="button"
           >
             global.cancel
           </button>
           <button
-            class="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            class="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
             type="submit"
           >
             argument.publish.mine
@@ -455,7 +457,7 @@ Array [
         thanks-for-your-vote {"instance":"CapCollectif"}
       </span>
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -506,7 +508,7 @@ Array [
           class="sc-bcXGCL bghzXx"
         >
           <button
-            class="sc-bcXGCL sc-laZSpB DcvKS jHvBhg cap-button"
+            class="sc-bcXGCL sc-laZSpB fhIZOJ gDuqin cap-button"
             type="button"
           >
             global.cancel
@@ -535,7 +537,7 @@ Array [
       class="sc-bcXGCL ghEBPM"
     >
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -576,7 +578,7 @@ Array [
       class="sc-bcXGCL ghEBPM"
     >
       <button
-        class="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+        class="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
         type="button"
       >
         delete.vote.against
@@ -597,7 +599,7 @@ Array [
       </p>
     </div>
     <button
-      class="sc-bcXGCL sc-laZSpB fknmkT ktRJXy cap-button"
+      class="sc-bcXGCL sc-laZSpB jEWjgc ietVcX cap-button"
       type="button"
     >
       publish-argument

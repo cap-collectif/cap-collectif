@@ -3,7 +3,7 @@ import { graphql, useFragment } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import UserAvatar from '@components/UserAvatar/UserAvatar'
-import { Flex, Card, Tag, Text, ButtonQuickAction, CapUIIcon } from '@cap-collectif/ui'
+import { Flex, Card, Tag, Text, ButtonQuickAction, CapUIIcon, CapUIFontSize } from '@cap-collectif/ui'
 import { DebateOpinion_debateOpinion$key } from '@relay/DebateOpinion_debateOpinion.graphql'
 
 type Props = {
@@ -85,7 +85,7 @@ const DebateOpinion = ({ debateOpinion: debateOpinionRef, onEdit, onDelete }: Pr
       <Flex direction="column" pt={6} px={6} pb={6} maxHeight="100%">
         <Flex direction="row" spacing={2} mb={4} align="center">
           <UserAvatar user={author} size="md" border="2px solid" borderColor="yellow.500" />
-          <Text fontSize={3} color="gray.500">
+          <Text fontSize={CapUIFontSize.BodyRegular} color="gray.500">
             {author.username}
           </Text>
         </Flex>

@@ -16,6 +16,7 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
       onMouseDown={[Function]}
     >
       <svg
+        aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud jCBnIZ hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 24 24"
@@ -30,7 +31,7 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
         className="sc-bcXGCL gdJCyL"
       >
         <div
-          className="sc-bcXGCL jjFWUC"
+          className="sc-bcXGCL dvaWLg"
         >
           <span>
             french
@@ -38,6 +39,7 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
         </div>
       </div>
       <svg
+        aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud jCBnIZ hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 12 7"

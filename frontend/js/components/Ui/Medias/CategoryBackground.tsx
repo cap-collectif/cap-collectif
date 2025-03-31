@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { Box, Tag, Text } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUILineHeight, Tag, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
-import { LineHeight } from '~ui/Primitives/constants'
 type Props = {
   readonly color: string | null | undefined
   readonly viewBox?: string | null | undefined
@@ -25,7 +24,7 @@ const CategoryBackground = ({
       {isArchived && (
         <Box position="absolute" top={2} right={2}>
           <Tag variantColor="neutral-gray" mr={1}>
-            <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700">
+            <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} fontWeight="700">
               {intl.formatMessage({
                 id: 'global-archived',
               })}

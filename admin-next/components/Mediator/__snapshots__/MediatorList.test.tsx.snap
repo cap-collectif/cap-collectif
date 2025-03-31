@@ -21,7 +21,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               global.mediator
             </p>
@@ -30,7 +30,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               admin.label.step
             </p>
@@ -39,7 +39,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               mediator.participants_count
             </p>
@@ -48,7 +48,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               global.email.short
             </p>
@@ -67,7 +67,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -81,7 +81,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -91,7 +91,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             Etape de vote
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -101,7 +101,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             2/3
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -111,7 +111,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             3
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -130,6 +130,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
               tabIndex={0}
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
@@ -167,7 +168,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
           id="UHJvamDfooke4XJjaGl2ZWQ=-Etape de vote"
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -181,7 +182,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -191,7 +192,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             Etape de vote
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -201,7 +202,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             0/0
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -211,7 +212,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
             0
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -230,6 +231,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
               tabIndex={0}
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
@@ -283,7 +285,7 @@ exports[`<MediatorList /> should render correctly and display mediators 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button"
+        className="sc-bcXGCL sc-laZSpB cDseqh dUpIgt cap-button"
         onClick={[Function]}
         type="button"
       >

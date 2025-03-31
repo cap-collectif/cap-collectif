@@ -11,6 +11,7 @@ import {
   Switch,
   Accordion,
   CapUIAccordionColor,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
@@ -86,7 +87,7 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
 
           <FormControl name="addressText" control={control}>
             <FormLabel label={intl.formatMessage({ id: 'proposal_form.address' })}>
-              <Text fontSize={2} color="gray.500" lineHeight={1}>
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500" lineHeight={1}>
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>
@@ -115,7 +116,7 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
             }}
           >
             <FormLabel htmlFor="media" label={intl.formatMessage({ id: 'cover-image' })}>
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>
@@ -176,7 +177,7 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
                 <Tabs.Panel>
                   <Flex direction="column" bg="white" borderRadius="normal" p={6}>
                     <Flex justify="space-between" alignItems="flex-start">
-                      <Heading as="h5" color="blue.900" fontWeight={600} fontSize={3}>
+                      <Heading as="h5" color="blue.900" fontWeight={600} fontSize={CapUIFontSize.BodyRegular}>
                         {intl.formatMessage({ id: 'measurable-registration' })}
                       </Heading>
                       <Switch

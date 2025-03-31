@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { Button, Flex, FormLabel, Text } from '@cap-collectif/ui'
+import { Button, CapUIFontSize, Flex, FormLabel, Text } from '@cap-collectif/ui'
 import { useIntl, FormattedHTMLMessage } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
 import { FormControl, FieldInput } from '@cap-collectif/form'
@@ -17,7 +17,7 @@ const FormConfiguration: FC = () => {
 
   return (
     <Flex as="form" direction="column" spacing={3} id={formName}>
-      <Text color="gray.700" fontSize={3}>
+      <Text color="gray.700" fontSize={CapUIFontSize.BodyRegular}>
         <FormattedHTMLMessage id="edit-facebook-authentication-method-create-app" />
       </Text>
 

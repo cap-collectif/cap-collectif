@@ -1,7 +1,7 @@
 import React from 'react'
 import ConsultationStepConsultationTab from '@components/Steps/ConsultationStep/ConsultationStepConsultationTab'
 import { useFieldArray, useFormContext } from 'react-hook-form'
-import { Accordion, Box, CapUIAccordionColor, Text } from '@cap-collectif/ui'
+import { Accordion, Box, CapUIAccordionColor, CapUIFontSize, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { ConsultationStepConsultations_query$key } from '@relay/ConsultationStepConsultations_query.graphql'
@@ -85,7 +85,7 @@ const ConsultationStepConsultations: React.FC<Props> = ({ query: queryRef }) => 
                 bg="gray.100"
                 width="100%"
                 color="blue.500"
-                fontSize={3}
+                fontSize={CapUIFontSize.BodyRegular}
                 fontWeight={600}
                 type="button"
                 onClick={appendConsultation}

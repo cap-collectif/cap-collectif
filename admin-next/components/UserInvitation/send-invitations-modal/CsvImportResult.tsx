@@ -130,7 +130,7 @@ export const CsvImportResult = ({ csvEmails, emailAvailabilities, isCorrectForma
             count: invalidLines.length,
             // eslint-disable-next-line react/display-name
             a: (...chunks) => (
-              <Link href={helpLink} color="primary.600">
+              <Link href={helpLink} color="primary.base">
                 {chunks}
               </Link>
             ),

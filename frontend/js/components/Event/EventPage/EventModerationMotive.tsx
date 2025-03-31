@@ -1,7 +1,7 @@
 import React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
-import { Text, InfoMessage } from '@cap-collectif/ui'
+import { Text, InfoMessage, CapUIFontSize } from '@cap-collectif/ui'
 import type { EventModerationMotive_event$key, EventRefusedReason } from '~relay/EventModerationMotive_event.graphql'
 type Props = {
   readonly eventRef: EventModerationMotive_event$key
@@ -48,21 +48,21 @@ export const EventModerationMotive = ({ eventRef }: Props) => {
   if (event.review && event.review.status === 'REFUSED')
     return (
       <>
-        <Text as="span" fontWeight={600} fontSize={5} lineHeight="initial" mb={4}>
+        <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} lineHeight="initial" mb={4}>
           {intl.formatMessage({
             id: 'admin.action.recent_contributions.unpublish.input_label',
           })}
         </Text>
         <InfoMessage variant="danger" mb="56px">
           {event.review?.refusedReason && event.review.refusedReason !== 'NONE' && (
-            <Text as="span" fontSize={[3, 4]} fontWeight={600} color="red.800">
+            <Text as="span" fontSize={[CapUIFontSize.BodyRegular, CapUIFontSize.Headline]} fontWeight={600} color="red.800">
               {intl.formatMessage({
                 id: getRefusedReasonMessage(event.review.refusedReason),
               })}
             </Text>
           )}
           {event.review?.comment && (
-            <Text as="span" fontSize={3} color="red.800">
+            <Text as="span" fontSize={CapUIFontSize.BodyRegular} color="red.800">
               {event.review?.comment}
             </Text>
           )}

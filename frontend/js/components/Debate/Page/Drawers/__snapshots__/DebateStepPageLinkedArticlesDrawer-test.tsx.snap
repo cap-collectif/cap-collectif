@@ -21,6 +21,7 @@ Array [
         className="sc-bcXGCL estkBA"
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud bPmEkv cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
@@ -85,7 +86,7 @@ Array [
                 className="sc-bcXGCL koEmgd"
               >
                 <h2
-                  className="sc-bcXGCL hrKmlm cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
+                  className="sc-bcXGCL buXqOT cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
                   title="« Non au passeport vaccinal » Gaspard Koenig - GenerationLibre"
                 >
                   « Non au passeport vaccinal » Gaspard Koenig - GenerationLibre
@@ -129,7 +130,7 @@ Array [
                 className="sc-bcXGCL koEmgd"
               >
                 <h2
-                  className="sc-bcXGCL hrKmlm cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
+                  className="sc-bcXGCL buXqOT cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
                   title="Macron: ceux qui disent \\"on aura un vaccin en mars ou avril prochain, vous trompent\\""
                 >
                   Macron: ceux qui disent "on aura un vaccin en mars ou avril prochain, vous trompent"
@@ -178,7 +179,7 @@ Array [
                 className="sc-bcXGCL koEmgd"
               >
                 <h2
-                  className="sc-bcXGCL hrKmlm cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
+                  className="sc-bcXGCL buXqOT cap-heading DebateArticleCard__DebateArticleCardTitle-hQQGBj"
                   title="Covid-19 : passeport vaccinal, \\"pass sanitaire\\", \\"certificat vert\\"... L'article à lire pour comprendre le débat qui agite la France et l'Europe"
                 >
                   Covid-19 : passeport vaccinal, "pass sanitaire", "certificat vert"... L'article à lire pour comprendre le débat qui agite la France et l'Europe

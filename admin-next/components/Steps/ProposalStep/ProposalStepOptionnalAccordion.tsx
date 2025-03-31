@@ -1,5 +1,6 @@
 import {
   CapUIBorder,
+  CapUIFontSize,
   CapUISpotIcon,
   CapUISpotIconSize,
   Flex,
@@ -131,7 +132,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
                 as="label"
               >
                 <SpotIcon name={CapUISpotIcon.TABLEAU} size={CapUISpotIconSize.Md} />
-                <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
+                <Text color="neutral-gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={400}>
                   {intl.formatMessage({
                     id: 'collect.step.mainView.list',
                   })}
@@ -165,7 +166,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
                 as="label"
               >
                 <SpotIcon name={CapUISpotIcon.VIGNETTE} size={CapUISpotIconSize.Md} />
-                <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
+                <Text color="neutral-gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={400}>
                   {intl.formatMessage({
                     id: 'collect.step.mainView.grid',
                   })}
@@ -204,7 +205,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
                     as="label"
                   >
                     <SpotIcon name={CapUISpotIcon.CARTE} size={CapUISpotIconSize.Md} />
-                    <Text color="neutral-gray.900" fontSize={3} fontWeight={400}>
+                    <Text color="neutral-gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={400}>
                       {intl.formatMessage({
                         id: 'collect.step.mainView.map',
                       })}
@@ -325,7 +326,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
             id: 'global.meta.description',
           })}
         >
-          <Text fontSize={2} color="gray.500">
+          <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
             {intl.formatMessage({ id: 'global.optional' })}
           </Text>
         </FormLabel>

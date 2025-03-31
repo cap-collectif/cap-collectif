@@ -7,7 +7,7 @@ import { AnalyticsProvider } from 'use-analytics'
 import { Provider as ReduxProvider } from 'react-redux'
 import ReactOnRails from 'react-on-rails'
 import { RelayEnvironmentProvider } from 'react-relay'
-import { CapUIProvider, extendTheme, generateShades } from '@cap-collectif/ui'
+import { CapUIProvider, extendTheme, generatePalette } from '@cap-collectif/ui'
 import IntlProvider from './IntlProvider'
 import { theme } from '~/styles/theme'
 import { analytics } from './analytics'
@@ -64,8 +64,7 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS 
 
   const CapUITheme = extendTheme({
     colors: {
-      primary: generateShades(state.default.parameters['color.btn.primary.bg']),
-      primaryHover: state.default.parameters['color.btn.ghost.hover'],
+      primary: generatePalette(state.default.parameters['color.btn.primary.bg']),
     },
     fonts: { body: 'inherit', heading: '' },
   })

@@ -2,6 +2,7 @@ import { FC, useState } from 'react'
 import { IntlShape, useIntl } from 'react-intl'
 import {
   Button,
+  CapUIFontSize,
   CapUIFontWeight,
   CapUILineHeight,
   CapUIModalSize,
@@ -100,10 +101,15 @@ const ModalCreditRefill: FC<ModalCreditRefillProps> = ({ firstRequest }) => {
           <Modal.Body>
             <Flex direction="column" border="normal" align="center" borderColor="blue.200" bg="blue.100" p={6}>
               <Text color="blue.900" mb={1}>
-                <Text as="span" fontSize={6} fontWeight={CapUIFontWeight.Semibold} lineHeight={CapUILineHeight.L}>
+                <Text
+                  as="span"
+                  fontSize={CapUIFontSize.DisplayMedium}
+                  fontWeight={CapUIFontWeight.Semibold}
+                  lineHeight={CapUILineHeight.XL}
+                >
                   {formatBigNumber(packageSelected.price)}
                 </Text>
-                <Text as="span" fontSize={3}>
+                <Text as="span" fontSize={CapUIFontSize.BodyRegular}>
                   € HT
                 </Text>
               </Text>
@@ -118,7 +124,7 @@ const ModalCreditRefill: FC<ModalCreditRefillProps> = ({ firstRequest }) => {
 
               <Text
                 color="blue.800"
-                fontSize={3}
+                fontSize={CapUIFontSize.BodyRegular}
                 lineHeight={CapUILineHeight.S}
                 maxWidth="70%"
                 textAlign="center"

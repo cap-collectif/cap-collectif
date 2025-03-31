@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Flex, FormLabel, Heading, Switch, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, Flex, FormLabel, Heading, Switch, Text } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 
@@ -14,7 +14,7 @@ const NumberRange: React.FC = () => {
   return (
     <Flex direction="column" bg="white" borderRadius="normal" p={6} mt={6}>
       <Flex justify="space-between" alignItems="flex-start">
-        <Heading as="h5" color="blue.900" fontWeight={600} fontSize={3}>
+        <Heading as="h5" color="blue.900" fontWeight={600} fontSize={CapUIFontSize.BodyRegular}>
           {intl.formatMessage({ id: 'define-range' })}
         </Heading>
         <Switch

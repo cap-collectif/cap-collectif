@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useFormContext } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
-import { CapInputSize, FormGuideline, FormLabel, Text } from '@cap-collectif/ui'
+import { CapInputSize, CapUIFontSize, FormGuideline, FormLabel, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import type { Responses_questions$key } from '@relay/Responses_questions.graphql'
@@ -36,7 +36,7 @@ const ResponseTop: React.FC<{
     <>
       <FormLabel htmlFor={name} label={label} mb={0}>
         {required ? null : (
-          <Text fontSize={2} color="gray.500" fontWeight="normal">
+          <Text fontSize={CapUIFontSize.BodySmall} color="gray.500" fontWeight="normal">
             {intl.formatMessage({ id: 'global.optional' })}
           </Text>
         )}

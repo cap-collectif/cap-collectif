@@ -16,6 +16,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
@@ -40,6 +41,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
@@ -81,6 +83,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
@@ -157,7 +160,7 @@ Array [
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+              class="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
               type="button"
             >
               global.close
@@ -165,7 +168,7 @@ Array [
           </span>
           <button
             aria-label="open.connection_modal"
-            class="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+            class="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
             id="login-button"
             type="button"
           >
@@ -185,6 +188,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
@@ -261,7 +265,7 @@ Array [
             clip="rect(0px, 0px, 0px, 0px)"
           >
             <button
-              class="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+              class="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
               type="button"
             >
               global.close
@@ -269,7 +273,7 @@ Array [
           </span>
           <button
             aria-label="open.connection_modal"
-            class="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+            class="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
             id="login-button"
             type="button"
           >
@@ -298,6 +302,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
@@ -322,6 +327,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
@@ -359,6 +365,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"
@@ -383,6 +390,7 @@ Array [
         class="sc-bcXGCL jNQjOz"
       >
         <svg
+          aria-hidden="true"
           class="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 32 29"

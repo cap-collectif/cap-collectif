@@ -7,7 +7,7 @@ import { useMachine } from '@xstate/react'
 import { useSelector } from 'react-redux'
 import { AnimatePresence } from 'framer-motion'
 import { useScrollYPosition } from 'react-use-scroll-position'
-import { Flex, Heading, Box } from '@cap-collectif/ui'
+import { Flex, Heading, Box, CapUIFontSize } from '@cap-collectif/ui'
 import type { DebateStepPageVoteAndShare_step } from '~relay/DebateStepPageVoteAndShare_step.graphql'
 import VoteView from '~/components/Ui/Vote/VoteView'
 import DebateStepPageVote from './DebateStepPageVote'
@@ -66,7 +66,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
         <AnimatePresence>{value.includes('none') && <DebateStepPageVote step={step} />}</AnimatePresence>
         {stepClosed && (
           <Box textAlign="center" mb={6}>
-            <Heading as="h3" color="neutral-gray.900" fontSize={[16, 24]} fontWeight={400}>
+            <Heading as="h3" color="neutral-gray.900" fontSize={[CapUIFontSize.BodyLarge, CapUIFontSize.DisplaySmall]} fontWeight={400}>
               {intl.formatMessage(
                 {
                   id: 'summary-debate-participation',
@@ -79,7 +79,7 @@ export const DebateStepPageVoteAndShare = ({ isMobile, step }: Props): Node => {
                 },
               )}
             </Heading>
-            <Heading as="h3" color="neutral-gray.900" fontSize={[16, 24]} fontWeight={400}>
+            <Heading as="h3" color="neutral-gray.900" fontSize={[CapUIFontSize.BodyLarge, CapUIFontSize.DisplaySmall]} fontWeight={400}>
               {intl.formatMessage({
                 id: 'thanks-participation-debate-ended',
               })}

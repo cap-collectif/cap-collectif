@@ -146,7 +146,7 @@ const WhatsNew: FC<{ items: Item[]; title: string; backgroundColor: 'WHITE' | 'G
                           </Text>
                         ) : null}
                         <Link
-                          color="primary.600"
+                          color="primary.base"
                           sx={{ cursor: 'pointer', textDecoration: 'underline' }}
                           href={slide.redirectLink}
                           fontWeight={600}

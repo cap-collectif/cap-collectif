@@ -1,7 +1,15 @@
 import * as React from 'react'
 import { Control } from 'react-hook-form'
 import { FormValues } from './OrganizationConfigForm'
-import { Accordion, CapUIAccordionSize, FormGuideline, FormLabel, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
+import {
+  Accordion,
+  CapUIAccordionSize,
+  CapUIFontSize,
+  FormGuideline,
+  FormLabel,
+  Text,
+  UPLOADER_SIZE,
+} from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UPLOAD_PATH } from '@utils/config'
 import { useIntl } from 'react-intl'
@@ -19,7 +27,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
         <Accordion.Panel>
           <FormControl name="logo" control={control} width="100%">
             <FormLabel label={intl.formatMessage({ id: 'image.logo' })}>
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>
@@ -47,7 +55,7 @@ const OrganizationConfigFormSide: React.FC<OrganizationConfigFormSideProps> = ({
           </FormControl>
           <FormControl name="banner" control={control} width="100%">
             <FormLabel label={intl.formatMessage({ id: 'image.banner' })}>
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>

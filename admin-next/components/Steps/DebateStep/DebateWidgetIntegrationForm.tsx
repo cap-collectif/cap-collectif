@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, CapUIIcon, Flex, FormLabel, Icon, Input, Text, toast, Tooltip } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIIcon, Flex, FormLabel, Icon, Input, Text, toast, Tooltip } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
 import { useForm } from 'react-hook-form'
@@ -58,7 +58,7 @@ const DebateWidgetIntegrationForm: React.FC<Props> = ({ debate: debateRef }) => 
 
   return (
     <form>
-      <Text color="gray.700" fontSize={3} mb={6}>
+      <Text color="gray.700" fontSize={CapUIFontSize.BodyRegular} mb={6}>
         {intl.formatMessage({ id: 'help-widget-integration' })}
       </Text>
       <Box>

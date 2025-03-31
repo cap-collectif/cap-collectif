@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Accordion, CapUIAccordionColor, CapUIAccordionSize, Flex, Text } from '@cap-collectif/ui'
+import { Accordion, CapUIAccordionColor, CapUIAccordionSize, Flex, Text, CapUIFontSize } from '@cap-collectif/ui'
 import VoteStepFilterRadioGroup from '~/components/VoteStep/Filters/VoteStepFilterRadioGroup'
 import VoteStepFilterButtons from '~/components/VoteStep/Filters/VoteStepFilterButtons'
 import type { Filters } from './useVoteStepFilters'
@@ -31,7 +31,7 @@ const VoteStepFiltersAccordions = ({ filters, isMobile }: Props) => {
             >
               <ResetCss>
                 <Accordion.Button>
-                  <Text fontWeight={600} fontSize={3} textAlign="left">
+                  <Text fontWeight={600} fontSize={CapUIFontSize.BodyRegular} textAlign="left">
                     {config.label ?? ''}
                   </Text>
                 </Accordion.Button>

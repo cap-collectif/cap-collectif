@@ -50,7 +50,7 @@ Array [
             className="sc-bcXGCL OGrOJ"
           >
             <h4
-              className="sc-bcXGCL fZHqGE cap-heading"
+              className="sc-bcXGCL ibJnUR cap-heading"
               title="Croissance, innovation, disruption"
             >
               Croissance, innovation, disruption
@@ -62,6 +62,7 @@ Array [
                 className="sc-bcXGCL IddQI"
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
                   fill="none"
                   viewBox="0 0 9 12"
@@ -101,6 +102,7 @@ Array [
                 className="sc-bcXGCL IddQI"
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
                   fill="none"
                   viewBox="0 0 11 12"
@@ -141,6 +143,7 @@ Array [
                 className="sc-bcXGCL IddQI"
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
                   fill="none"
                   viewBox="0 0 12 10"
@@ -184,6 +187,7 @@ Array [
                 }
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 32 28"
@@ -225,6 +229,7 @@ Array [
                 className="sc-bcXGCL eFHuff"
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 14 13"
@@ -247,6 +252,7 @@ Array [
                 className="sc-bcXGCL eFHuff"
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 13 14"

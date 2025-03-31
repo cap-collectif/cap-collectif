@@ -1,7 +1,17 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
-import { ButtonQuickAction, CapUIIcon, CapUIIconSize, Flex, Link, Table, Text, Tooltip } from '@cap-collectif/ui'
+import {
+  ButtonQuickAction,
+  CapUIFontSize,
+  CapUIIcon,
+  CapUIIconSize,
+  Flex,
+  Link,
+  Table,
+  Text,
+  Tooltip,
+} from '@cap-collectif/ui'
 import { PostItem_post$key } from '@relay/PostItem_post.graphql'
 import { PostItem_viewer$key } from '@relay/PostItem_viewer.graphql'
 import PostListModalConfirmationDelete from './PostListModalConfirmationDelete'
@@ -72,7 +82,7 @@ const PostItem: React.FC<PostItemProps> = ({ post: postFragment, viewer: viewerF
         {post.title && post.title?.split('').length > 128 ? (
           <Tooltip
             label={
-              <Text fontSize={1} lineHeight="sm">
+              <Text fontSize={CapUIFontSize.Caption} lineHeight="sm">
                 {post.title}
               </Text>
             }

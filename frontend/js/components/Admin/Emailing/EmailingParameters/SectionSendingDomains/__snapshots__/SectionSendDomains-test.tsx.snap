@@ -15,12 +15,12 @@ Array [
         className="sc-dEVMhd Flex___StyledAppBox-SiGEY eSoecz gqpUzc"
       >
         <p
-          className="sc-dEVMhd iLMhyW"
+          className="sc-dEVMhd hTPESu"
         >
           authentication-sender-domains-dkim-spf
         </p>
         <p
-          className="sc-dEVMhd egoKOK"
+          className="sc-dEVMhd iqyhmF"
         >
           authentication-sender-domains-explanation
            
@@ -38,7 +38,7 @@ Array [
         aria-controls="id-1"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-dEVMhd Button__ButtonInner-dXfNcJ djOXew cYRsYv"
+        className="sc-dEVMhd Button__ButtonInner-dXfNcJ gexgbF cYRsYv"
         onClick={[Function]}
         onClickCapture={[Function]}
         onKeyDown={[Function]}
@@ -76,7 +76,7 @@ Array [
         className="sc-dEVMhd jmbRni"
       >
         <thead
-          className="sc-dEVMhd eNKImK"
+          className="sc-dEVMhd ibCWLv"
         >
           <tr
             className="sc-dEVMhd Tr___StyledAppBox-hsTUSR kqvrPx"
@@ -114,7 +114,7 @@ Array [
             id="sender-email-domain-1"
           >
             <td
-              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr bxtAVI dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -124,7 +124,7 @@ Array [
               test.com
             </td>
             <td
-              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr bxtAVI dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -134,7 +134,7 @@ Array [
               Mailjet
             </td>
             <td
-              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr bxtAVI dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -146,7 +146,7 @@ Array [
               />
             </td>
             <td
-              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr bxtAVI dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",
@@ -158,7 +158,7 @@ Array [
               />
             </td>
             <td
-              className="sc-dEVMhd Td___StyledAppBox-cCcTFr gRJwmf dthgpN"
+              className="sc-dEVMhd Td___StyledAppBox-cCcTFr bxtAVI dthgpN"
               style={
                 Object {
                   "whiteSpace": "initial",

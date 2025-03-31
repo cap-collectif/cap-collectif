@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from 'react'
-import { Box, Flex, Heading, Text, Avatar } from '@cap-collectif/ui'
+import { Box, Flex, Heading, Text, Avatar, CapUIFontSize } from '@cap-collectif/ui'
 import type { GraphQLTaggedNode } from 'react-relay'
 import { graphql, useFragment } from 'react-relay'
 import { useParams } from 'react-router-dom'
@@ -150,17 +150,17 @@ export const ProposalMapSelectedView = ({
           stepId={stepId}
           currentVotableStepId={data?.currentVotableStep?.id || stepId}
         >
-          <Heading as="h3" fontSize={4} color="gray.900" mb={2} truncate={50} lineHeight="initial">
+          <Heading as="h3" fontSize={CapUIFontSize.Headline} color="gray.900" mb={2} truncate={50} lineHeight="initial">
             {title}
           </Heading>
-          <Text as="div" fontSize={3} color="gray.700" minHeight="6rem" mb={4} lineHeight="initial">
+          <Text as="div" fontSize={CapUIFontSize.BodyRegular} color="gray.700" minHeight="6rem" mb={4} lineHeight="initial">
             {summaryOrBodyExcerpt}
           </Text>
         </Link>
         <Flex justifyContent="space-between" alignItems="start" direction="column" mt={4}>
           <Flex alignItems="center" spacing={2}>
             <Avatar src={author.media?.url} alt={author.displayName || ''} name={author.displayName || ''} />
-            <Text as="span" fontSize={2} color="gray.500">
+            <Text as="span" fontSize={CapUIFontSize.BodySmall} color="gray.500">
               {author.displayName}
             </Text>
           </Flex>

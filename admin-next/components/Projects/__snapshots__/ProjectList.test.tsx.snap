@@ -21,7 +21,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               admin.fields.proposal.project
             </p>
@@ -30,7 +30,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               admin.projects.list.author
             </p>
@@ -39,7 +39,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               global.owner
             </p>
@@ -48,7 +48,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               admin.settings.header.access
             </p>
@@ -78,6 +78,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 global.publication
               </p>
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 7"
@@ -158,6 +159,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                     global.filter_last
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -202,6 +204,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                     global.filter_old
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -233,7 +236,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           id="UHJvamVjdDpwcm9qZWN0SWRmMw=="
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -255,7 +258,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -270,7 +273,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -285,7 +288,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -293,7 +296,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gHWJqw cap-tag"
+              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
               style={{}}
               title="public-everybody"
             >
@@ -301,7 +304,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -311,7 +314,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             01/05/2021
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -340,6 +343,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="currentColor"
                 viewBox="0 0 12 4"
@@ -554,7 +558,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           id="UHJvamVjdDpwcm9qZWN0Rm9vZA=="
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -576,7 +580,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -591,7 +595,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -606,7 +610,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -614,7 +618,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gHWJqw cap-tag"
+              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
               style={{}}
               title="public-everybody"
             >
@@ -622,7 +626,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -632,7 +636,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             15/09/2020
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -661,6 +665,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="currentColor"
                 viewBox="0 0 12 4"
@@ -875,7 +880,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ="
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -897,7 +902,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -912,7 +917,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -927,7 +932,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -935,7 +940,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gHWJqw cap-tag"
+              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
               style={{}}
               title="public-everybody"
             >
@@ -943,7 +948,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -953,7 +958,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             19/06/2020
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -982,6 +987,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="currentColor"
                 viewBox="0 0 12 4"
@@ -1196,7 +1202,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           id="UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ="
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1218,7 +1224,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1233,7 +1239,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1248,7 +1254,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1256,7 +1262,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gHWJqw cap-tag"
+              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
               style={{}}
               title="public-everybody"
             >
@@ -1264,7 +1270,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1274,7 +1280,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             19/06/2020
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1303,6 +1309,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="currentColor"
                 viewBox="0 0 12 4"
@@ -1533,7 +1540,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button"
+        className="sc-bcXGCL sc-laZSpB cDseqh dUpIgt cap-button"
         onClick={[Function]}
         type="button"
       >

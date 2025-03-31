@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { Button, CapUIIcon, Menu, Heading, Popover, Flex, Icon, Text } from '@cap-collectif/ui'
+import { Button, CapUIIcon, Menu, Heading, Popover, Flex, Icon, Text, CapUIFontSize } from '@cap-collectif/ui'
 import FollowOpinionMutation from '../../../mutations/FollowOpinionMutation'
 import UpdateFollowOpinionMutation from '../../../mutations/UpdateFollowOpinionMutation'
 import UnfollowOpinionMutation from '../../../mutations/UnfollowOpinionMutation'
@@ -145,12 +145,12 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
                 }}
               >
                 <Flex direction="column" ml={2}>
-                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                  <Text fontSize={CapUIFontSize.BodySmall} fontWeight="bold" marginBottom={0}>
                     {intl.formatMessage({
                       id: 'essential',
                     })}
                   </Text>
-                  <Text fontSize={2} marginBottom={0}>
+                  <Text fontSize={CapUIFontSize.BodySmall} marginBottom={0}>
                     {intl.formatMessage({
                       id: 'updates-and-news',
                     })}
@@ -172,12 +172,12 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
                 }}
               >
                 <Flex direction="column" ml={2}>
-                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                  <Text fontSize={CapUIFontSize.BodySmall} fontWeight="bold" marginBottom={0}>
                     {intl.formatMessage({
                       id: 'intermediate',
                     })}
                   </Text>
-                  <Text fontSize={2} marginBottom={0}>
+                  <Text fontSize={CapUIFontSize.BodySmall} marginBottom={0}>
                     {intl.formatMessage({
                       id: 'updates-news-and-new-contributions',
                     })}
@@ -199,12 +199,12 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
                 }}
               >
                 <Flex direction="column" ml={2}>
-                  <Text fontSize={2} fontWeight="bold" marginBottom={0}>
+                  <Text fontSize={CapUIFontSize.BodySmall} fontWeight="bold" marginBottom={0}>
                     {intl.formatMessage({
                       id: 'complete',
                     })}
                   </Text>
-                  <Text fontSize={2} marginBottom={0}>
+                  <Text fontSize={CapUIFontSize.BodySmall} marginBottom={0}>
                     {intl.formatMessage({
                       id: 'updates-news-new-contributions-votes-and-subscriptions',
                     })}{' '}
@@ -229,7 +229,7 @@ const OpinionFollowButton = ({ opinion: opinionRef }: Props) => {
                 }
               }}
             >
-              <Text fontSize={2} marginBottom={0}>
+              <Text fontSize={CapUIFontSize.BodySmall} marginBottom={0}>
                 {intl.formatMessage({
                   id: 'unfollow',
                 })}

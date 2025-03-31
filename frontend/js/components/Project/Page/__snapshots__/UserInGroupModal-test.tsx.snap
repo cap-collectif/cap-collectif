@@ -24,7 +24,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
           id="contained-modal-title-lg"
         >
           &lt;mock-value-for-field-"title"&gt;
@@ -77,7 +77,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -112,7 +112,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
           id="contained-modal-title-lg"
         >
           &lt;mock-value-for-field-"title"&gt;
@@ -165,7 +165,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -200,7 +200,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
           id="contained-modal-title-lg"
         >
           &lt;mock-value-for-field-"title"&gt;
@@ -253,7 +253,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[MockFunction]}
         type="button"
       >

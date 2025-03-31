@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, ButtonQuickAction as ButtonQuickActionDS, CapUIIcon, Flex, Text } from '@cap-collectif/ui'
+import { Box, ButtonQuickAction as ButtonQuickActionDS, CapUIFontSize, CapUIIcon, CapUILineHeight, Flex, Text } from '@cap-collectif/ui'
 import { useFragment, graphql } from 'react-relay'
 import moment from 'moment'
 import { useIntl } from 'react-intl'
@@ -86,7 +86,7 @@ const ProposalAnalysisCommentListItem = ({ comment: commentRef, viewer: viewerRe
         backgroundColor="white"
         padding={2}
         borderRadius="4px"
-        fontSize={3}
+        fontSize={CapUIFontSize.BodyRegular}
         width="100%"
         onMouseEnter={() => setHover(true)}
         onMouseLeave={() => setHover(false)}
@@ -110,7 +110,7 @@ const ProposalAnalysisCommentListItem = ({ comment: commentRef, viewer: viewerRe
             opacity={showDeleteButton ? 1 : 0}
           />
         </Flex>
-        <Text color="gray.900" lineHeight="16px" fontSize={3}>
+        <Text color="gray.900" lineHeight={CapUILineHeight.S} fontSize={CapUIFontSize.BodyRegular}>
           {comment.body}
         </Text>
       </Flex>

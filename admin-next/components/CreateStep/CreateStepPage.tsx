@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import { Flex, Box, Text, SpotIcon, CapUISpotIcon, Button } from '@cap-collectif/ui'
+import { Flex, Box, Text, SpotIcon, CapUISpotIcon, Button, CapUIFontSize } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import HelpMessage from '@ui/HelpMessage/HelpMessage'
 import { graphql, useLazyLoadQuery } from 'react-relay'
@@ -111,7 +111,7 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
   return (
     <Flex>
       <Box bg="white" width="70%" p={6} height="100%" borderRadius="8px">
-        <Text fontWeight={600} color="blue.800" fontSize={4}>
+        <Text fontWeight={600} color="blue.800" fontSize={CapUIFontSize.Headline}>
           {intl.formatMessage({ id: 'select-step-type' })}
         </Text>
         <Flex justifyContent="space-between" mt={6} flexWrap="wrap" mb={4}>
@@ -136,10 +136,10 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
               >
                 <SpotIcon name={step.spotIcon} />
                 <Flex direction="column" ml={2}>
-                  <Text color="blue.800" fontSize={3} fontWeight="600">
+                  <Text color="blue.800" fontSize={CapUIFontSize.BodyRegular} fontWeight="600">
                     {step.heading}
                   </Text>
-                  <Text color="gray.600" fontSize={3} lineHeight="initial">
+                  <Text color="gray.600" fontSize={CapUIFontSize.BodyRegular} lineHeight="initial">
                     {step.description}
                   </Text>
                 </Flex>

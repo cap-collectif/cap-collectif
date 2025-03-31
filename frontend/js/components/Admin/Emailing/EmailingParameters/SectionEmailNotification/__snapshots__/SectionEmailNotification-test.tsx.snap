@@ -12,12 +12,12 @@ Array [
       className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt gqpUzc"
     >
       <p
-        className="sc-dEVMhd iLMhyW"
+        className="sc-dEVMhd hTPESu"
       >
         notification-email
       </p>
       <p
-        className="sc-dEVMhd egoKOK"
+        className="sc-dEVMhd iqyhmF"
       >
         notification-email-explanation
       </p>
@@ -229,7 +229,7 @@ Array [
         aria-controls="id-1"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP egpGUm"
+        className="sc-dEVMhd Button__ButtonInner-dXfNcJ LXlfG egpGUm"
         onClick={[Function]}
         onClickCapture={[Function]}
         onKeyDown={[Function]}

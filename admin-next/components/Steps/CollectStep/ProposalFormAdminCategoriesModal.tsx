@@ -5,6 +5,7 @@ import {
   Button,
   ButtonQuickAction,
   CapUIBorder,
+  CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
@@ -303,7 +304,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                     id: 'admin.fields.footer_social_network.style',
                   })}
                 >
-                  <Text fontSize={2} color="gray.500">
+                  <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                     {intl.formatMessage({
                       id: 'global.optional',
                     })}
@@ -391,7 +392,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                                     mb={3}
                                     borderRadius={CapUIBorder.Card}
                                     border={isSelectedImage ? '2px solid' : ''}
-                                    borderColor={isSelectedImage ? 'primary.600' : ''}
+                                    borderColor={isSelectedImage ? 'primary.base' : ''}
                                   />
                                 </Flex>
                               )
@@ -414,7 +415,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
                             id: 'illustration',
                           })}
                         >
-                          <Text fontSize={2} color="gray.500">
+                          <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                             {intl.formatMessage({
                               id: 'global.optional',
                             })}

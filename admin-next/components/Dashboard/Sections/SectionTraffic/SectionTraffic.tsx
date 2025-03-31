@@ -10,7 +10,7 @@ import {
   SectionTrafficQuery as SectionTrafficQueryType,
 } from '@relay/SectionTrafficQuery.graphql'
 import SectionTrafficEmpty from './SectionTrafficEmpty'
-import { Text } from '@cap-collectif/ui'
+import { CapUIFontSize, Text } from '@cap-collectif/ui'
 
 interface SectionTrafficProps {
   readonly queryOptions: QueryOptions
@@ -51,7 +51,7 @@ const SectionTraffic: FC<SectionTrafficProps> = ({ queryOptions }) => {
 
   return (
     <Section width="50%" spacing={6} border="normal" borderColor="gray.150">
-      <Text fontSize={3} color="blue.800">
+      <Text fontSize={CapUIFontSize.BodyRegular} color="blue.800">
         {intl.formatMessage({ id: 'traffic-source' })}
       </Text>
       <TrafficChart percentages={formatSources(trafficSources.sources, trafficSources.totalCount)} />

@@ -10,6 +10,7 @@ Array [
     onClick={[Function]}
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 9 12"
@@ -31,7 +32,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL dHfuOk cap-text platform__body"
+      className="sc-bcXGCL dXhXcH cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -94,7 +95,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -115,6 +116,7 @@ Array [
     onClick={[Function]}
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 9 12"
@@ -136,7 +138,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL dHfuOk cap-text platform__body"
+      className="sc-bcXGCL dXhXcH cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -199,7 +201,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -220,6 +222,7 @@ Array [
     onClick={[Function]}
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 9 12"
@@ -241,7 +244,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL dHfuOk cap-text platform__body"
+      className="sc-bcXGCL dXhXcH cap-text platform__body"
       title="zone 1 "
     >
       zone 1
@@ -304,7 +307,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >

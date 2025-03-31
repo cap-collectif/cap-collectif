@@ -1,4 +1,4 @@
-import { Box, BoxProps, Flex, FormLabel, Text } from '@cap-collectif/ui'
+import { Box, BoxProps, CapUIFontSize, CapUILineHeight, Flex, FormLabel, Text } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
@@ -29,7 +29,7 @@ const DurationInput: React.FC<DurationProps & BoxProps> = ({
         <FormControl name="startAt" control={control} width="max-content" mr={6} isRequired={startAt.required}>
           <FormLabel htmlFor="startAt" label={intl.formatMessage({ id: 'start-date' })}>
             {!startAt.required && (
-              <Text fontSize={2} color="gray.500" lineHeight="16px">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500" lineHeight={CapUILineHeight.S}>
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             )}
@@ -39,7 +39,7 @@ const DurationInput: React.FC<DurationProps & BoxProps> = ({
         <FormControl name="endAt" control={control} width="max-content" isRequired={endAt.required}>
           <FormLabel htmlFor="endAt" label={intl.formatMessage({ id: 'ending-date' })}>
             {!endAt.required && (
-              <Text fontSize={2} color="gray.500" lineHeight="16px">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500" lineHeight={CapUILineHeight.S}>
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             )}

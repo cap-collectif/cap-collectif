@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, CapUIFontWeight, CapUIShadow, Flex, FlexProps } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIFontWeight, CapUIShadow, Flex, FlexProps } from '@cap-collectif/ui'
 import { useRouter } from 'next/router'
 import { graphql, useFragment } from 'react-relay'
 import { ProjectTabs_project$key } from '@relay/ProjectTabs_project.graphql'
@@ -140,7 +140,7 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
             as="a"
             href={link.to}
             key={link.to}
-            fontSize={1}
+            fontSize={CapUIFontSize.Caption}
             fontWeight={CapUIFontWeight.Bold}
             color={isActive ? 'blue.500' : 'gray.700'}
             borderBottomColor={isActive ? 'blue.500' : 'transparent'}

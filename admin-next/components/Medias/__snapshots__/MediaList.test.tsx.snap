@@ -23,7 +23,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
             className="sc-bcXGCL hPsFMg"
           >
             <div
-              className="sc-bcXGCL MiskG cap-buttonGroup"
+              className="sc-bcXGCL egcRuI cap-buttonGroup"
               onMouseLeave={[Function]}
             >
               <button
@@ -44,6 +44,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 10 6"
@@ -87,6 +88,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -131,6 +133,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -169,7 +172,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               className="sc-bcXGCL kzRATa"
             >
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
                 style={
                   {
                     "marginLeft": 0,
@@ -181,14 +184,14 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 200x200px
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
                 style={{}}
                 title="39ko"
               >
                 39ko
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
                 style={{}}
                 title="png"
               >
@@ -212,7 +215,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
             className="sc-bcXGCL hPsFMg"
           >
             <div
-              className="sc-bcXGCL MiskG cap-buttonGroup"
+              className="sc-bcXGCL egcRuI cap-buttonGroup"
               onMouseLeave={[Function]}
             >
               <button
@@ -233,6 +236,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 10 6"
@@ -276,6 +280,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -320,6 +325,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -358,7 +364,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               className="sc-bcXGCL kzRATa"
             >
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
                 style={
                   {
                     "marginLeft": 0,
@@ -370,14 +376,14 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 100x300px
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
                 style={{}}
                 title="29ko"
               >
                 29ko
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
                 style={{}}
                 title="png"
               >
@@ -474,7 +480,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
             id="UG9zdDpwb3N0MTI="
           >
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -490,7 +496,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               />
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -500,7 +506,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               Media 1
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -516,11 +522,12 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                   src="/media/1.png"
                 />
                 <button
-                  className="sc-bcXGCL cqWaqz"
+                  className="sc-bcXGCL hEIJAe"
                   onClick={[Function]}
                 >
                   <svg
-                    className="sc-bcXGCL sc-eJDTud cMYowL hEjMCZ cap-icon"
+                    aria-hidden="true"
+                    className="sc-bcXGCL sc-eJDTud SenNr hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 10 6"
                     xmlns="http://www.w3.org/2000/svg"
@@ -536,7 +543,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               </div>
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -546,7 +553,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               200 x 200 px
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -556,7 +563,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               39ko
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -566,7 +573,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               Invalid date
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               onMouseLeave={[Function]}
               style={
                 {
@@ -575,7 +582,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               }
             >
               <div
-                className="sc-bcXGCL MiskG cap-buttonGroup"
+                className="sc-bcXGCL egcRuI cap-buttonGroup"
               >
                 <button
                   aria-describedby="id-g"
@@ -595,6 +602,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                   tabIndex={0}
                 >
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 12"
@@ -639,6 +647,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                   tabIndex={0}
                 >
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 12"
@@ -676,7 +685,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
             id="UG9zdDpwb3N0MTL="
           >
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -692,7 +701,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               />
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -702,7 +711,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               Media 2
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -718,11 +727,12 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                   src="/media/2.png"
                 />
                 <button
-                  className="sc-bcXGCL cqWaqz"
+                  className="sc-bcXGCL hEIJAe"
                   onClick={[Function]}
                 >
                   <svg
-                    className="sc-bcXGCL sc-eJDTud cMYowL hEjMCZ cap-icon"
+                    aria-hidden="true"
+                    className="sc-bcXGCL sc-eJDTud SenNr hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 10 6"
                     xmlns="http://www.w3.org/2000/svg"
@@ -738,7 +748,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               </div>
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -748,7 +758,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               100 x 300 px
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -758,7 +768,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               29ko
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               style={
                 {
                   "whiteSpace": "initial",
@@ -768,7 +778,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               Invalid date
             </td>
             <td
-              className="sc-bcXGCL dZCuae cap-table__td"
+              className="sc-bcXGCL phWty cap-table__td"
               onMouseLeave={[Function]}
               style={
                 {
@@ -777,7 +787,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
               }
             >
               <div
-                className="sc-bcXGCL MiskG cap-buttonGroup"
+                className="sc-bcXGCL egcRuI cap-buttonGroup"
               >
                 <button
                   aria-describedby="id-g"
@@ -797,6 +807,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                   tabIndex={0}
                 >
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 12"
@@ -841,6 +852,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                   tabIndex={0}
                 >
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 12"

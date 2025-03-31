@@ -6,7 +6,7 @@ exports[`<UserAvatar /> renders correctly 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL coaCsH sc-ckEbfr cQtcUn cap-avatar"
+    className="sc-bcXGCL hSKkNE sc-ckEbfr bTnJLR cap-avatar"
     title="toto"
   >
     <img
@@ -30,7 +30,7 @@ exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL coaCsH sc-ckEbfr cQtcUn cap-avatar"
+    className="sc-bcXGCL hSKkNE sc-ckEbfr bTnJLR cap-avatar"
     title="toto"
   >
     t
@@ -44,7 +44,7 @@ exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL coaCsH sc-ckEbfr bCwZSC cap-avatar"
+    className="sc-bcXGCL hSKkNE sc-ckEbfr bCwZSC cap-avatar"
     title="toto"
   >
     t
@@ -58,7 +58,7 @@ exports[`<UserAvatar /> renders correctly with default avatar needed 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL coaCsH sc-ckEbfr cQtcUn cap-avatar"
+    className="sc-bcXGCL hSKkNE sc-ckEbfr bTnJLR cap-avatar"
     title="toto"
   >
     <img

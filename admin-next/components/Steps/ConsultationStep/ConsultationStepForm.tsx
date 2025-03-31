@@ -15,6 +15,7 @@ import {
   Box,
   Button,
   CapUIAccordionColor,
+  CapUIFontSize,
   CapUIIconSize,
   Flex,
   FormLabel,
@@ -364,7 +365,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   return (
     <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
-      <Text fontWeight={600} color="blue.800" fontSize={4}>
+      <Text fontWeight={600} color="blue.800" fontSize={CapUIFontSize.Headline}>
         {intl.formatMessage({ id: 'customize-your-consultation-step' })}
       </Text>
       <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>

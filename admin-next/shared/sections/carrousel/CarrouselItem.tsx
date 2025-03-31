@@ -1,6 +1,6 @@
 import { FC } from 'react'
 import { Mode } from './CarrouselButton'
-import { Box, BoxProps, Flex, Heading } from '@cap-collectif/ui'
+import { Box, BoxProps, CapUIFontSize, Flex, Heading } from '@cap-collectif/ui'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { useIntl } from 'react-intl'
 import { pxToRem } from '@shared/utils/pxToRem'
@@ -64,7 +64,13 @@ const CarrouselItem: FC<{ mode?: Mode; slide: Item } & BoxProps> = ({ slide, mod
           flexDirection={['column', 'row']}
         >
           <Box>
-            <Heading as="h3" mb={1} fontSize={[4, 5]} lineHeight="normal" color={inside ? 'white' : 'neutral-gray.900'}>
+            <Heading
+              as="h3"
+              mb={1}
+              fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplaySmall]}
+              lineHeight="normal"
+              color={inside ? 'white' : 'neutral-gray.900'}
+            >
               {slide.title?.slice(0, TITLE_MAX_LENGTH)}
             </Heading>
             <Box as="p" color={inside ? 'white' : null}>
@@ -77,7 +83,7 @@ const CarrouselItem: FC<{ mode?: Mode; slide: Item } & BoxProps> = ({ slide, mod
             as="a"
             justifyContent="center"
             href={slide.redirectLink}
-            backgroundColor="primary.600"
+            backgroundColor="primary.base"
             borderRadius="button"
             px={8}
             py={3}

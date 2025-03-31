@@ -1,4 +1,4 @@
-import { Box, CapUIIcon, Flex, Heading, Text, useTheme } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIIcon, Flex, Heading, Text, useTheme } from '@cap-collectif/ui'
 import React, { FC, useRef } from 'react'
 import Slider from 'react-slick'
 import { pxToRem } from '@shared/utils/pxToRem'
@@ -151,13 +151,13 @@ const WhatsNewMobile: FC<{ items: Item[]; title: string }> = ({ items, title }) 
             <Box p={4}>
               {item.type ? (
                 <Flex alignItems="center" justifyContent="space-between">
-                  <Text as="div" fontSize={4} mb={1}>
+                  <Text as="div" fontSize={CapUIFontSize.Headline} mb={1}>
                     {intl.formatMessage({ id: getCardLabel(item.type) })}
                   </Text>
                   <DateItem dateRange={item.extraData} short />
                 </Flex>
               ) : null}
-              <Text fontSize={4} fontWeight={600} truncate={ITEM_TITLE_MAX_LENGTH}>
+              <Text fontSize={CapUIFontSize.Headline} fontWeight={600} truncate={ITEM_TITLE_MAX_LENGTH}>
                 {item.title}
               </Text>
             </Box>

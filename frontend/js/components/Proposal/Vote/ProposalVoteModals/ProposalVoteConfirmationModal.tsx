@@ -5,6 +5,7 @@ import {
   CapUIFontFamily,
   CapUISpotIcon,
   CapUISpotIconSize,
+  CapUIFontSize,
   Flex,
   SpotIcon,
   Text,
@@ -224,7 +225,7 @@ const ProposalVoteConfirmationModal = ({
                 color="green.500"
                 fontFamily={CapUIFontFamily.Body}
                 lineHeight="normal"
-                fontSize={3}
+                fontSize={CapUIFontSize.BodyRegular}
                 textAlign="center"
               >
                 {intl.formatMessage({

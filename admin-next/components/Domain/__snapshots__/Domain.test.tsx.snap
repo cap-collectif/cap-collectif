@@ -64,7 +64,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH DluEz cvFBmb cap-input"
+          className="sc-bcXGCL sc-UpCiH bzZHnn cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -145,7 +145,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
               className="sc-bcXGCL fDqpkd"
             >
               <div
-                className="sc-bcXGCL hRSTkl sc-fXqqsB gHWJqw cap-tag"
+                className="sc-bcXGCL hRSTkl sc-fXqqsB gKbWOe cap-tag"
                 style={{}}
                 title="custom.domain.com"
               >
@@ -167,6 +167,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
                   }
                 >
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iCzCId dUaqWe cap-icon"
                     fill="none"
                     viewBox="0 0 12 12"
@@ -273,7 +274,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH DluEz cvFBmb cap-input"
+          className="sc-bcXGCL sc-UpCiH bzZHnn cvFBmb cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -351,7 +352,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
             className="sc-bcXGCL ciCehw cap-input-group"
           >
             <input
-              className="sc-bcXGCL sc-UpCiH DluEz cvFBmb cap-input"
+              className="sc-bcXGCL sc-UpCiH bzZHnn cvFBmb cap-input"
               disabled={false}
               id="customDomain"
               name="customDomain"
@@ -363,7 +364,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
               type="text"
             />
             <button
-              className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+              className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
               disabled={true}
               type="submit"
             >

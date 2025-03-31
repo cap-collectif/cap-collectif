@@ -4,7 +4,17 @@ import 'react-intl'
 import moment from 'moment'
 import css from '@styled-system/css'
 import type { ProjectCardshared_project$data, StepState } from '@relay/ProjectCardshared_project.graphql'
-import { Flex, Text, Tag, TagProps, Icon as DSIcon, CapUIIconSize, CapUIIcon, CapUILineHeight } from '@cap-collectif/ui'
+import {
+  Flex,
+  Text,
+  Tag,
+  TagProps,
+  Icon as DSIcon,
+  CapUIIconSize,
+  CapUIIcon,
+  CapUILineHeight,
+  CapUIFontSize,
+} from '@cap-collectif/ui'
 import FormattedNumber from '@shared/utils/FormattedNumber'
 
 type Steps = ReadonlyArray<{
@@ -75,7 +85,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
       })}
     >
       <Tag variantColor={variant} mr={1}>
-        <Text as="span" fontSize={1} lineHeight={CapUILineHeight.Sm} fontWeight="700">
+        <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} fontWeight="700">
           {message}
         </Text>
       </Tag>

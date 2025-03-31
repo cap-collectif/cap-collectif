@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Flex, Box, Text, CapUIIcon, Icon, CapUIIconSize } from '@cap-collectif/ui'
+import { Flex, Box, Text, CapUIIcon, Icon, CapUIIconSize, CapUIFontSize } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import ResetCss from '~/utils/ResetCss'
 import VoteStepFiltersAccordions from '~/components/VoteStep/Filters/VoteStepFiltersAccordions'
@@ -22,10 +22,10 @@ const SaveButton = ({ children, onClick }) => {
       width="70%"
       maxWidth="240px"
       fontWeight={600}
-      bg="primary.500"
+      bg="primary.base"
       color="white"
       border="none"
-      fontSize={3}
+      fontSize={CapUIFontSize.BodyRegular}
       onClick={onClick}
     >
       {children}
@@ -45,7 +45,7 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
   const { filters } = voteStepFilters
   return (
     <Box
-      bg="primary.100"
+      bg="primary.background"
       height="100%"
       minHeight="100vh"
       py={10}
@@ -57,7 +57,7 @@ const VoteStepFiltersMobile = ({ stepId, onClose }: Props) => {
       overflow="scroll"
     >
       <Flex justifyContent="space-between" mb={5}>
-        <Text color="primary.500" fontWeight={700} fontSize={5}>
+        <Text color="primary.base" fontWeight={700} fontSize={CapUIFontSize.DisplaySmall}>
           {intl.formatMessage({
             id: 'filter-the-projects',
           })}

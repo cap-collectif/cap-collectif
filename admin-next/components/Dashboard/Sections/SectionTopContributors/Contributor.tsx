@@ -5,7 +5,7 @@ import type {
   Contributor_contributor$key,
   PlatformAnalyticsContributorContributionType,
 } from '@relay/Contributor_contributor.graphql'
-import { Flex, Text, headingStyles, CapUIFontWeight } from '@cap-collectif/ui'
+import { Flex, Text, headingStyles, CapUIFontWeight, CapUIFontSize } from '@cap-collectif/ui'
 import UserAvatar from '@components/UserAvatar/UserAvatar'
 
 interface ContributorProps {
@@ -61,7 +61,7 @@ const Contributor: FC<ContributorProps> = ({ contributor: contributorFragment })
       </Text>
 
       {contributions.map(contribution => (
-        <Text color="gray.900" key={contribution.type} fontSize={1} capitalize>
+        <Text color="gray.900" key={contribution.type} fontSize={CapUIFontSize.Caption} capitalize>
           {getContributionWording(contribution.type, intl, contribution.totalCount)}
         </Text>
       ))}

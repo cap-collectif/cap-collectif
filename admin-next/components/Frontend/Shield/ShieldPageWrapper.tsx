@@ -1,6 +1,6 @@
 import * as React from 'react'
 import ShieldPage from '@shared/shield/ShieldPage'
-import { Box, Flex, Spinner } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, Flex, Spinner } from '@cap-collectif/ui'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import PrivacyModalQuery from '@shared/register/PrivacyModal'
@@ -24,7 +24,7 @@ export const ShieldPageWrapper: React.FC<Props> = ({ SSRData }) => {
       <Flex justifyContent="center" bg="neutral-gray.100" minHeight="100vh" p={[0, 0, 10]} id="shield-mode">
         <Flex direction="column" gap={6} alignItems="center" maxWidth="80rem" mt={[6, 6, 0]}>
           {shieldImg ? <img loading="lazy" src={shieldImg} alt="logo" /> : null}
-          <Box fontSize="1.15rem" px={[4, 4, 4, 0]} textAlign="center">
+          <Box fontSize={CapUIFontSize.BodyLarge} px={[4, 4, 4, 0]} textAlign="center">
             <WYSIWYGRender value={SSRData?.shieldIntroduction?.value} />
           </Box>
           <Box

@@ -8,7 +8,7 @@ import L from 'leaflet'
 import 'leaflet/dist/leaflet.css'
 import 'leaflet-gesture-handling/dist/leaflet-gesture-handling.css'
 import { GestureHandling } from 'leaflet-gesture-handling'
-import { Flex, Text, Box } from '@cap-collectif/ui'
+import { Flex, Text, Box, CapUIFontSize } from '@cap-collectif/ui'
 import type { EventPageContent_query$key } from '~relay/EventPageContent_query.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
@@ -79,7 +79,7 @@ export const About = ({ children }: { children?: JSX.Element | JSX.Element[] | s
   if (!children) return null
   return (
     <>
-      <Text as="span" fontWeight={600} fontSize={5} lineHeight="initial" mb={4}>
+      <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} lineHeight="initial" mb={4}>
         {intl.formatMessage({
           id: 'about-that-event',
         })}
@@ -106,12 +106,12 @@ const renderDate = (startAt: string, endAt: string | null | undefined, intl: Int
 
   return (
     <>
-      <Text as="span" fontWeight={600} fontSize={5} mb={2}>
+      <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mb={2}>
         {intl.formatMessage({
           id: 'global.admin.published_at',
         })}
       </Text>
-      <Text fontSize={3} as="span">
+      <Text fontSize={CapUIFontSize.BodyRegular} as="span">
         {!endAt
           ? intl.formatMessage(
               {
@@ -185,12 +185,12 @@ export const EventPageContent = ({ queryRef }: Props) => {
               : null}
             {googleMapsAddress && (
               <>
-                <Text as="span" fontWeight={600} fontSize={5} mt={8} mb={2}>
+                <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mt={8} mb={2}>
                   {intl.formatMessage({
                     id: 'admin.fields.event.group_address',
                   })}
                 </Text>
-                <Text fontSize={3} as="span">
+                <Text fontSize={CapUIFontSize.BodyRegular} as="span">
                   {googleMapsAddress.formatted}
                 </Text>
               </>

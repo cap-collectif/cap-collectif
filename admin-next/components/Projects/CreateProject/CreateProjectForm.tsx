@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react'
-import { Box, Button, FormLabel, Text, toast } from '@cap-collectif/ui'
+import { Box, Button, CapUIFontSize, FormLabel, Text, toast } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
@@ -209,10 +209,10 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
   return (
     <Box>
       <Box maxWidth="437px">
-        <Text color="blue.900" fontSize={5} fontWeight={600} mb={4}>
+        <Text color="blue.900" fontSize={CapUIFontSize.DisplaySmall} fontWeight={600} mb={4}>
           {intl.formatMessage({ id: 'customize-your-new-project' })}
         </Text>
-        <Text color="blue.900" fontSize={4} fontWeight={400} width="100%">
+        <Text color="blue.900" fontSize={CapUIFontSize.Headline} fontWeight={400} width="100%">
           {intl.formatMessage({ id: 'create-project-help-text' })}
         </Text>
         <Box mt={5} as="form" onSubmit={handleSubmit(onSubmit)}>

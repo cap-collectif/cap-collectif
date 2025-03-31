@@ -6,7 +6,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -21,7 +21,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -43,7 +43,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     </div>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -61,7 +61,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     </p>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -76,7 +76,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -86,7 +86,7 @@ exports[`<EventItem /> should render correctly 1`] = `
     03/01/2015
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -109,6 +109,7 @@ exports[`<EventItem /> should render correctly 1`] = `
         tabIndex={0}
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
           fill="currentColor"
           viewBox="0 0 24 24"
@@ -151,7 +152,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -166,7 +167,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -188,7 +189,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     </div>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -206,7 +207,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     </p>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -221,7 +222,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -231,7 +232,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
     03/01/2015
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -254,6 +255,7 @@ exports[`<EventItem /> should render correctly with deleted event 1`] = `
         tabIndex={0}
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
           fill="currentColor"
           viewBox="0 0 24 24"

@@ -3,7 +3,7 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useIntl } from 'react-intl'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Accordion, Box, Button, CapUIAccordionColor, Flex, Text, toast } from '@cap-collectif/ui'
+import { Accordion, Box, Button, CapUIAccordionColor, CapUIFontSize, Flex, Text, toast } from '@cap-collectif/ui'
 import ProposalFormForm from '@components/Steps/CollectStep/ProposalFormForm'
 import ProposalStepRequirementsTabs from '@components/Requirements/ProposalStepRequirementsTabs'
 import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalStepVoteTabsForm'
@@ -560,7 +560,7 @@ const CollectStepForm: React.FC<CollectStepFormProps> = ({ stepId, setHelpMessag
   return (
     <FormProvider {...formMethods}>
       <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
-        <Text fontWeight={600} color="blue.800" fontSize={4}>
+        <Text fontWeight={600} color="blue.800" fontSize={CapUIFontSize.Headline}>
           {intl.formatMessage({ id: 'customize-your-collect-step' })}
         </Text>
         <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)} gap={6}>

@@ -1,11 +1,10 @@
 import * as React from 'react'
 
 import styled from 'styled-components'
-import { Box, Tag, Text } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUILineHeight, Tag, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import Image from '~ui/Primitives/Image'
 import { bootstrapGrid } from '~/utils/sizes'
-import { LineHeight } from '~ui/Primitives/constants'
 
 const ProposalImage = styled(Image)`
   border-radius: 4px 4px 0 0;
@@ -45,7 +44,7 @@ const ProposalImageContainer = ({ src, sizes, isArchived = false }: Props) => {
       {isArchived && (
         <Box position="absolute" top={2} right={2}>
           <Tag variantColor="neutral-gray" mr={1}>
-            <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700">
+            <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} fontWeight="700">
               {intl.formatMessage({
                 id: 'global-archived',
               })}

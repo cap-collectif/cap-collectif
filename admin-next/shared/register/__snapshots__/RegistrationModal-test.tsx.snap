@@ -33,7 +33,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL doARmI sc-gsGkXq gTDlYD cap-modal"
+        className="sc-bcXGCL bOJnrx sc-gsGkXq gTDlYD cap-modal"
         style={
           {
             "opacity": 0,
@@ -46,7 +46,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL eotpTW"
+            className="sc-bcXGCL iRyhmE"
           >
             <h4
               className="sc-bcXGCL jraRHV cap-heading"
@@ -68,6 +68,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             type="button"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
@@ -87,7 +88,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           className="sc-bcXGCL laGNWx cap-modal__body"
         >
           <div
-            className="sc-bcXGCL PXCEG"
+            className="sc-bcXGCL gMOsyY"
           >
             <div
               className=" ql-editor wysiwyg-render"
@@ -128,7 +129,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
               name="email"
               onBlur={[Function]}
@@ -172,7 +173,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
                 disabled={false}
                 id="password"
                 name="plainPassword"
@@ -213,7 +214,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -266,7 +267,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"
@@ -313,14 +314,14 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                   type="checkbox"
                 />
                 <div
-                  className="sc-bcXGCL jGpoql cap-checkbox__box"
+                  className="sc-bcXGCL jQxaYd cap-checkbox__box"
                 />
               </div>
               <span
                 className="sc-bcXGCL liyRZE"
               >
                 <span
-                  className="sc-bcXGCL sc-2062de00-0 cklhXU gAxtIT"
+                  className="sc-bcXGCL sc-cc425a65-0 cklhXU hMXkYl"
                 >
                   registration.charte
                 </span>
@@ -344,7 +345,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi zPAHL cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR dUpIgt cap-button"
             onClick={[Function]}
             style={
               {
@@ -357,7 +358,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
             id="confirm-login"
             type="submit"
           >
@@ -397,7 +398,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL doARmI sc-gsGkXq gTDlYD cap-modal"
+        className="sc-bcXGCL bOJnrx sc-gsGkXq gTDlYD cap-modal"
         style={
           {
             "opacity": 0,
@@ -410,7 +411,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL eotpTW"
+            className="sc-bcXGCL iRyhmE"
           >
             <h4
               className="sc-bcXGCL jraRHV cap-heading"
@@ -432,6 +433,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             type="button"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
@@ -480,7 +482,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
               name="email"
               onBlur={[Function]}
@@ -524,7 +526,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
                 disabled={false}
                 id="password"
                 name="plainPassword"
@@ -565,7 +567,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -618,7 +620,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"
@@ -665,14 +667,14 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                   type="checkbox"
                 />
                 <div
-                  className="sc-bcXGCL jGpoql cap-checkbox__box"
+                  className="sc-bcXGCL jQxaYd cap-checkbox__box"
                 />
               </div>
               <span
                 className="sc-bcXGCL liyRZE"
               >
                 <span
-                  className="sc-bcXGCL sc-2062de00-0 cklhXU gAxtIT"
+                  className="sc-bcXGCL sc-cc425a65-0 cklhXU hMXkYl"
                 >
                   registration.charte
                 </span>
@@ -684,7 +686,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi zPAHL cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR dUpIgt cap-button"
             onClick={[Function]}
             style={
               {
@@ -697,7 +699,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
             id="confirm-login"
             type="submit"
           >

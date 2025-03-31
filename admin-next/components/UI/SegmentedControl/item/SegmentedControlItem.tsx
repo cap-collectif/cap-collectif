@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { CapUIFontWeight, Box, BoxProps } from '@cap-collectif/ui'
+import { CapUIFontWeight, Box, BoxProps, CapUIFontSize } from '@cap-collectif/ui'
 import { useSegmentedControl } from '@ui/SegmentedControl/SegmentedControl.context'
 
 export type SegmentedControlValue = string | number
@@ -18,7 +18,7 @@ const SegmentedControlItem: FC<SegmentControlItemProps> = ({ children, value, ..
       type="button"
       color={selected ? 'blue.800' : 'gray.700'}
       bg={selected ? 'white' : 'none'}
-      fontSize={3}
+      fontSize={CapUIFontSize.BodyRegular}
       fontWeight={selected ? CapUIFontWeight.Semibold : CapUIFontWeight.Normal}
       borderRadius="8px"
       minWidth="50px"

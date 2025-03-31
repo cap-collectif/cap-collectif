@@ -1,7 +1,7 @@
 import * as React from 'react'
 
 import styled from 'styled-components'
-import { Card, Icon, CapUIIcon, CapUIIconSize, Text, Box, Heading, Flex } from '@cap-collectif/ui'
+import { Card, Icon, CapUIIcon, CapUIIconSize, Text, Box, Heading, Flex, CapUIFontSize } from '@cap-collectif/ui'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import Image from '~ui/Primitives/Image'
 export const DebateArticleCardTitle = styled(Heading).attrs(props => ({
@@ -55,7 +55,7 @@ const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Pr
       <Flex direction="column" px={4} py={2} bg="white" flex={1}>
         {children}
         {publishedAt && (
-          <Text color="gray.500" fontSize={3} mt="auto" pt={1}>
+          <Text color="gray.500" fontSize={CapUIFontSize.BodyRegular} mt="auto" pt={1}>
             {publishedAt}
           </Text>
         )}

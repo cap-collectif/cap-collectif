@@ -1,7 +1,7 @@
 import type { FC } from 'react'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useIntl } from 'react-intl'
-import { Flex, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, Flex, Text } from '@cap-collectif/ui'
 import Section from '@ui/Section/Section'
 import Contributor from './Contributor'
 import { useDashboard } from '../../Dashboard.context'
@@ -41,7 +41,7 @@ const SectionTopContributors: FC<SectionTopContributorsProps> = ({ queryOptions 
 
   return (
     <Section spacing={6} border="normal" borderColor="gray.150">
-      <Text fontSize={3} color="blue.800">
+      <Text fontSize={CapUIFontSize.BodyRegular} color="blue.800">
         {intl.formatMessage({ id: 'most-active-contributors' })}
       </Text>
       <Flex direction="row">

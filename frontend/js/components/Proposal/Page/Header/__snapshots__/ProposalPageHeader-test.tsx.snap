@@ -247,7 +247,7 @@ exports[`<ProposalPageHeader /> should render a proposal header as ProposalFrom 
           type="button"
         >
           <Icon
-            color="primary.500"
+            color="primary.base"
             name="PIE_CHART"
             size="sm"
           />

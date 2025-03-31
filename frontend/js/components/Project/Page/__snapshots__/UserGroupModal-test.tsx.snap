@@ -23,7 +23,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
         >
           people-with-access-to-project
         </h2>
@@ -62,7 +62,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-laZSpB cbEpJS jHvBhg cap-button btn-md p-0"
+            className="sc-bcXGCL sc-laZSpB cDseqh gDuqin cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -85,7 +85,7 @@ Array [
                 data-testid="Header"
               >
                 <h2
-                  className="sc-bcXGCL jyqEHl cap-heading"
+                  className="sc-bcXGCL czxWiY cap-heading"
                   id="contained-modal-title-lg"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -138,7 +138,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+                className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -153,7 +153,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -187,7 +187,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
         >
           people-with-access-to-project
         </h2>
@@ -226,7 +226,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-laZSpB cbEpJS jHvBhg cap-button btn-md p-0"
+            className="sc-bcXGCL sc-laZSpB cDseqh gDuqin cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -249,7 +249,7 @@ Array [
                 data-testid="Header"
               >
                 <h2
-                  className="sc-bcXGCL jyqEHl cap-heading"
+                  className="sc-bcXGCL czxWiY cap-heading"
                   id="contained-modal-title-lg"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -302,7 +302,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+                className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -317,7 +317,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[MockFunction]}
         type="button"
       >
@@ -351,7 +351,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
         >
           people-with-access-to-project
         </h2>
@@ -390,7 +390,7 @@ Array [
             />
           </svg>
           <button
-            className="sc-bcXGCL sc-laZSpB cbEpJS jHvBhg cap-button btn-md p-0"
+            className="sc-bcXGCL sc-laZSpB cDseqh gDuqin cap-button btn-md p-0"
             onClick={[Function]}
             title="persons-in-the-group"
             type="button"
@@ -413,7 +413,7 @@ Array [
                 data-testid="Header"
               >
                 <h2
-                  className="sc-bcXGCL jyqEHl cap-heading"
+                  className="sc-bcXGCL czxWiY cap-heading"
                   id="contained-modal-title-lg"
                 >
                   &lt;mock-value-for-field-"title"&gt;
@@ -466,7 +466,7 @@ Array [
               data-testid="Footer"
             >
               <button
-                className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+                className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
                 onClick={[Function]}
                 type="button"
               >
@@ -481,7 +481,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[MockFunction]}
         type="button"
       >

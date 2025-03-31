@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Text, Flex } from '@cap-collectif/ui'
+import { Box, Text, Flex, CapUIFontSize } from '@cap-collectif/ui'
 import styled from 'styled-components'
 
 import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
@@ -60,7 +60,7 @@ const ProposalCategorySuggestionCard = ({ category, stepUrl }: Props) => {
         <Box p={2} bg="white" height="62px" css="border-radius: 0 0 4px 4px" borderTop="normal" borderColor="gray.200">
           <Text
             fontWeight={600}
-            fontSize={3}
+            fontSize={CapUIFontSize.BodyRegular}
             overflow="hidden"
             height="100%"
             css="text-overflow: ellipsis; white-space: nowrap;"

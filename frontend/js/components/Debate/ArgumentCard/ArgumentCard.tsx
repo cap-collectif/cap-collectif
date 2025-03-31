@@ -19,6 +19,7 @@ import {
   Icon,
   CapUIIcon,
   ButtonQuickAction,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import type { ArgumentCard_argument, ForOrAgainstValue } from '~relay/ArgumentCard_argument.graphql'
 import type { ArgumentCard_viewer } from '~relay/ArgumentCard_viewer.graphql'
@@ -137,7 +138,7 @@ export const ArgumentCard = ({
                   })}
             </Text>
             <Tag mb={2} variantColor={argument.type === 'FOR' ? 'green' : 'red'} interactive={false} mr={2}>
-              <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
+              <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
                 <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
               </Text>
             </Tag>
@@ -159,7 +160,7 @@ export const ArgumentCard = ({
                   interactive={false}
                   icon={stepClosed ? CapUIIcon.Cross : CapUIIcon.Clock}
                 >
-                  <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
+                  <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
                     <FormattedMessage id={stepClosed ? 'post_is_not_public' : 'publish.wait'} />
                   </Text>
                 </Tag>
@@ -342,7 +343,7 @@ export const ArgumentCard = ({
                 />
               </LoginOverlay>
             </ConditionalWrapper>
-            <Text ml={[1, 0]} as="span" fontSize={[4, 3]} color="neutral-gray.900">
+            <Text ml={[1, 0]} as="span" fontSize={[CapUIFontSize.Headline, CapUIFontSize.BodyRegular]} color="neutral-gray.900">
               {argument.votes.totalCount}
             </Text>
           </Flex>

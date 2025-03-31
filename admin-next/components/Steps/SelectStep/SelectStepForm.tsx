@@ -11,7 +11,17 @@ import {
 } from '@relay/SelectStepFormQuery.graphql'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Box, Accordion, CapUIAccordionColor, FormLabel, Text, Flex, Button, toast } from '@cap-collectif/ui'
+import {
+  Box,
+  Accordion,
+  CapUIAccordionColor,
+  FormLabel,
+  Text,
+  Flex,
+  Button,
+  toast,
+  CapUIFontSize,
+} from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
 import ProposalStepVoteTabsForm from '@components/Steps/ProposalStep/ProposalStepVoteTabsForm'
@@ -413,7 +423,7 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
 
   return (
     <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
-      <Text fontWeight={600} color="blue.800" fontSize={4}>
+      <Text fontWeight={600} color="blue.800" fontSize={CapUIFontSize.Headline}>
         {intl.formatMessage({ id: 'customize-your-select-step' })}
       </Text>
       <FormProvider {...formMethods}>

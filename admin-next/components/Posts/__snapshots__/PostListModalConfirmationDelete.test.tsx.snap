@@ -27,6 +27,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     type="button"
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 12 12"
@@ -104,6 +105,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     type="button"
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 12 12"
@@ -156,7 +158,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
       }
     >
       <div
-        className="sc-bcXGCL bsVBPb sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL BwvOS sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -168,10 +170,10 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
           className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL eotpTW"
+            className="sc-bcXGCL iRyhmE"
           >
             <h2
-              className="sc-bcXGCL jyqEHl cap-heading"
+              className="sc-bcXGCL czxWiY cap-heading"
               id="modal-title"
               style={
                 {
@@ -190,6 +192,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
             type="button"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
@@ -218,7 +221,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
           className="sc-bcXGCL eMjpTW cap-modal__footer"
         >
           <div
-            className="sc-bcXGCL MiskG cap-buttonGroup"
+            className="sc-bcXGCL egcRuI cap-buttonGroup"
             style={
               {
                 "marginLeft": 0,
@@ -227,7 +230,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
             }
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hzCEQq dUOTKb cap-button"
+              className="sc-bcXGCL sc-laZSpB jXBoaN dsOIMI cap-button"
               onClick={[Function]}
               style={
                 {
@@ -240,7 +243,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
               cancel
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB hzCEQq erzQLN cap-button"
+              className="sc-bcXGCL sc-laZSpB jXBoaN dOPPpN cap-button"
               onClick={[Function]}
               type="button"
             >

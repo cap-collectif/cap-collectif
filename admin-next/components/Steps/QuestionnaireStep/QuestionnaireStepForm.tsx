@@ -1,5 +1,15 @@
 import React, { useEffect } from 'react'
-import { Accordion, Box, Button, CapUIAccordionColor, Flex, FormLabel, Text, toast } from '@cap-collectif/ui'
+import {
+  Accordion,
+  Box,
+  Button,
+  CapUIAccordionColor,
+  CapUIFontSize,
+  Flex,
+  FormLabel,
+  Text,
+  toast,
+} from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { FormProvider, useForm } from 'react-hook-form'
 import { FieldInput, FormControl } from '@cap-collectif/form'
@@ -294,7 +304,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   return (
     <Box bg="white" p={6} borderRadius="8px" width="70%" flex="none">
-      <Text fontWeight={600} color="blue.800" fontSize={4}>
+      <Text fontWeight={600} color="blue.800" fontSize={CapUIFontSize.Headline}>
         {intl.formatMessage({ id: 'customize-your-questionnaire-step' })}
       </Text>
       <Box as="form" mt={4} onSubmit={handleSubmit(onSubmit)}>

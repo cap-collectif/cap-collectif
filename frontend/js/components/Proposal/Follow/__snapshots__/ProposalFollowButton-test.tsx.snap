@@ -361,7 +361,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+            className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -370,7 +370,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+          className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -744,7 +744,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+            className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -753,7 +753,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+          className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -1127,7 +1127,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+            className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1136,7 +1136,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+          className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"

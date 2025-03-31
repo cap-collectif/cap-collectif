@@ -34,10 +34,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
             title="step.status.open.participation"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               viewBox="0 0 14 13"
@@ -73,6 +74,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
@@ -116,6 +118,7 @@ Array [
               }
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 28"
@@ -162,6 +165,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
@@ -189,6 +193,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
@@ -261,10 +266,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
             title="step.status.open.participation"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               viewBox="0 0 14 13"
@@ -300,6 +306,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
@@ -343,6 +350,7 @@ Array [
               }
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 28"
@@ -389,6 +397,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
@@ -416,6 +425,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
@@ -488,7 +498,7 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL iIhamD sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL iIhamD sc-fXqqsB gKbWOe cap-tag"
             title="global-archived"
           >
             <span
@@ -514,6 +524,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
@@ -557,6 +568,7 @@ Array [
               }
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 28"
@@ -603,6 +615,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
@@ -630,6 +643,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
@@ -702,10 +716,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
             title="step.status.open.participation"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               viewBox="0 0 14 13"
@@ -741,6 +756,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
@@ -784,6 +800,7 @@ Array [
               }
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 28"
@@ -830,6 +847,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
@@ -857,6 +875,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
@@ -929,10 +948,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
             title="step.status.open.participation"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               viewBox="0 0 14 13"
@@ -968,6 +988,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
@@ -1011,6 +1032,7 @@ Array [
               }
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 28"
@@ -1057,6 +1079,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
@@ -1084,6 +1107,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
@@ -1156,10 +1180,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
             title="step.status.open.participation"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               viewBox="0 0 14 13"
@@ -1195,6 +1220,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
@@ -1228,6 +1254,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 9 12"
@@ -1258,6 +1285,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 10"
@@ -1293,6 +1321,7 @@ Array [
               }
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 28"
@@ -1339,6 +1368,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
@@ -1366,6 +1396,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
@@ -1467,10 +1498,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
             title="step.status.open.participation"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               viewBox="0 0 14 13"
@@ -1506,6 +1538,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"
@@ -1549,6 +1582,7 @@ Array [
               }
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 28"
@@ -1595,6 +1629,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 13"
@@ -1622,6 +1657,7 @@ Array [
               className="sc-bcXGCL eFHuff"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 13 14"
@@ -1694,10 +1730,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
             title="step.status.open.participation"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               viewBox="0 0 14 13"
@@ -1733,6 +1770,7 @@ Array [
               className="sc-bcXGCL bLXbAu"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 12"

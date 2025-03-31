@@ -30,7 +30,7 @@ export const BannersContainer = ({ isCorrectFormat, isLoading, children }: Banne
   if (isLoading) {
     return (
       <Flex justifyContent="center">
-        <Spinner size={CapUIIconSize.Lg} color="primary.600" />
+        <Spinner size={CapUIIconSize.Lg} color="primary.base" />
       </Flex>
     )
   }

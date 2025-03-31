@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { openPrivacyModal } from './PrivacyModal'
 import type { RegistrationForm_query$key } from '@relay/RegistrationForm_query.graphql'
 import { openChartModal } from './ChartModal'
-import { Box, CapInputSize, FormLabel, Text } from '@cap-collectif/ui'
+import { Box, CapInputSize, CapUIFontSize, FormLabel, Text } from '@cap-collectif/ui'
 import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import { useFormContext } from 'react-hook-form'
 import Captcha from '@shared/form/Captcha'
@@ -40,7 +40,7 @@ export const ChartLinkComponent = ({ cguName }: { cguName?: string }) => {
             <Box
               as="button"
               type="button"
-              fontSize="14px"
+              fontSize={CapUIFontSize.BodyRegular}
               mx={1}
               onClick={() => {
                 dispatchEvent(new Event(openChartModal))
@@ -74,7 +74,7 @@ export const PrivacyPolicyComponent = ({
         id="privacy-policy"
         onClick={() => dispatchEvent(new Event(openPrivacyModal))}
         name="privacy"
-        fontSize={3}
+        fontSize={CapUIFontSize.BodyRegular}
       >
         {intl.formatMessage({ id: 'capco.module.privacy_policy' })}
       </Box>
@@ -197,7 +197,7 @@ export const RegistrationForm = ({ query: queryFragment }: Props) => {
       {addUserTypeField ? (
         <FormControl name="userType" control={control} mb={2}>
           <FormLabel htmlFor="userType" label={intl.formatMessage({ id: 'registration.type' })} mb={0}>
-            <Text fontSize={2} color="gray.500" fontWeight="normal">
+            <Text fontSize={CapUIFontSize.BodySmall} color="gray.500" fontWeight="normal">
               {intl.formatMessage({ id: 'global.optional' })}
             </Text>
           </FormLabel>
@@ -219,7 +219,7 @@ export const RegistrationForm = ({ query: queryFragment }: Props) => {
       {addZipcodeField ? (
         <FormControl name="zipcode" control={control} mb={2}>
           <FormLabel htmlFor="zipcode" label={intl.formatMessage({ id: 'user.register.zipcode' })} mb={0}>
-            <Text fontSize={2} color="gray.500" fontWeight="normal">
+            <Text fontSize={CapUIFontSize.BodySmall} color="gray.500" fontWeight="normal">
               {intl.formatMessage({ id: 'global.optional' })}
             </Text>
           </FormLabel>

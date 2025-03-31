@@ -27,7 +27,7 @@ exports[`<PostList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               global.title
             </p>
@@ -36,7 +36,7 @@ exports[`<PostList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               global.authors
             </p>
@@ -50,7 +50,7 @@ exports[`<PostList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               admin.projects.list.author
             </p>
@@ -59,7 +59,7 @@ exports[`<PostList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               global.participative.project
             </p>
@@ -68,7 +68,7 @@ exports[`<PostList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               global.publication
             </p>
@@ -80,7 +80,7 @@ exports[`<PostList /> should render correctly 1`] = `
               aria-controls="id-g"
               aria-expanded={false}
               aria-haspopup="menu"
-              className="sc-bcXGCL sc-laZSpB icTMVT eqocNH cap-button cap-menu__disclosure"
+              className="sc-bcXGCL sc-laZSpB fgLIYE eeBSwt cap-button cap-menu__disclosure"
               onClick={[Function]}
               onClickCapture={[Function]}
               onFocus={[Function]}
@@ -93,7 +93,7 @@ exports[`<PostList /> should render correctly 1`] = `
               type="button"
             >
               <p
-                className="sc-bcXGCL KWUHz cap-text"
+                className="sc-bcXGCL bTjUUg cap-text"
                 style={
                   {
                     "whiteSpace": "nowrap",
@@ -103,7 +103,8 @@ exports[`<PostList /> should render correctly 1`] = `
                 global.update
               </p>
               <svg
-                className="sc-bcXGCL sc-eJDTud gZMWuW hEjMCZ cap-icon"
+                aria-hidden="true"
+                className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-button-icon"
                 fill="none"
                 viewBox="0 0 12 7"
                 xmlns="http://www.w3.org/2000/svg"
@@ -183,6 +184,7 @@ exports[`<PostList /> should render correctly 1`] = `
                     global.filter_last
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -227,6 +229,7 @@ exports[`<PostList /> should render correctly 1`] = `
                     global.filter_old
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -258,7 +261,7 @@ exports[`<PostList /> should render correctly 1`] = `
           id="UG9zdDpwb3N0MTI="
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -273,7 +276,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -288,7 +291,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -298,7 +301,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -308,7 +311,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -331,7 +334,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -341,7 +344,7 @@ exports[`<PostList /> should render correctly 1`] = `
             global.no.published
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -351,7 +354,7 @@ exports[`<PostList /> should render correctly 1`] = `
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+            className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
             style={
               {
                 "whiteSpace": "initial",
@@ -373,6 +376,7 @@ exports[`<PostList /> should render correctly 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -431,6 +435,7 @@ exports[`<PostList /> should render correctly 1`] = `
                 type="button"
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -487,7 +492,7 @@ exports[`<PostList /> should render correctly 1`] = `
           id="UG9zdDpwb3N0MTM="
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -502,7 +507,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -517,7 +522,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -527,7 +532,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -537,7 +542,7 @@ exports[`<PostList /> should render correctly 1`] = `
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -560,7 +565,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -570,7 +575,7 @@ exports[`<PostList /> should render correctly 1`] = `
             global.no.published
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -580,7 +585,7 @@ exports[`<PostList /> should render correctly 1`] = `
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+            className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
             style={
               {
                 "whiteSpace": "initial",
@@ -602,6 +607,7 @@ exports[`<PostList /> should render correctly 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -660,6 +666,7 @@ exports[`<PostList /> should render correctly 1`] = `
                 type="button"
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="none"
                   viewBox="0 0 12 12"
@@ -732,7 +739,7 @@ exports[`<PostList /> should render correctly 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button"
+        className="sc-bcXGCL sc-laZSpB cDseqh dUpIgt cap-button"
         onClick={[Function]}
         type="button"
       >

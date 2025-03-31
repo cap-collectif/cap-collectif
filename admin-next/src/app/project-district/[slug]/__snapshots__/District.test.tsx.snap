@@ -6,16 +6,16 @@ exports[`<District /> renders correctly 1`] = `
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL bODTYu sc-27bb09e1-1 jaSToJ"
+    className="sc-bcXGCL bODTYu sc-b2c48d89-1 eAriAb"
   >
     <div
-      className="sc-bcXGCL sc-27bb09e1-0 boVsdg gEjZgR"
+      className="sc-bcXGCL sc-b2c48d89-0 boVsdg hDIJfD"
     />
     <div
       className="sc-bcXGCL eeSIyd"
     >
       <h2
-        className="sc-bcXGCL iwdnAH cap-heading"
+        className="sc-bcXGCL cHKsxO cap-heading"
       >
         Nice District
       </h2>
@@ -28,7 +28,7 @@ exports[`<District /> renders correctly 1`] = `
       className="sc-bcXGCL jdrIpS"
     >
       <div
-        className="sc-bcXGCL dhYFhw"
+        className="sc-bcXGCL iwixum"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -81,10 +81,10 @@ exports[`<District /> renders correctly 1`] = `
          "
               />
               <div
-                className="sc-bcXGCL bHUozq sc-c3cb98f2-0 kWYbsx"
+                className="sc-bcXGCL bHUozq sc-f7db5058-0 kWsBHq"
               >
                 <div
-                  className="sc-bcXGCL sOGfP sc-fXqqsB gHWJqw cap-tag"
+                  className="sc-bcXGCL sOGfP sc-fXqqsB gKbWOe cap-tag"
                   style={{}}
                   title="global-archived"
                 >
@@ -99,7 +99,7 @@ exports[`<District /> renders correctly 1`] = `
                 className="sc-bcXGCL dxmZfn"
               >
                 <h4
-                  className="sc-bcXGCL hMumCw cap-heading"
+                  className="sc-bcXGCL jsRpSD cap-heading"
                   title="Nice project"
                 >
                   Nice project
@@ -114,6 +114,7 @@ exports[`<District /> renders correctly 1`] = `
                       className="sc-bcXGCL bLXbAu"
                     >
                       <svg
+                        aria-hidden="true"
                         className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                         fill="none"
                         viewBox="0 0 11 12"
@@ -136,7 +137,7 @@ exports[`<District /> renders correctly 1`] = `
                         />
                       </svg>
                       <span
-                        className="sc-c3cb98f2-3 dPeulc"
+                        className="sc-f7db5058-3 kGTCBj"
                       >
                         &lt;mock-value-for-field-"title"&gt;
                       </span>
@@ -146,6 +147,7 @@ exports[`<District /> renders correctly 1`] = `
                       className="sc-bcXGCL bLXbAu"
                     >
                       <svg
+                        aria-hidden="true"
                         className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                         fill="none"
                         viewBox="0 0 12 10"
@@ -161,7 +163,7 @@ exports[`<District /> renders correctly 1`] = `
                         />
                       </svg>
                       <span
-                        className="sc-c3cb98f2-3 dPeulc"
+                        className="sc-f7db5058-3 kGTCBj"
                       >
                         &lt;mock-value-for-field-"title"&gt;
                       </span>
@@ -180,6 +182,7 @@ exports[`<District /> renders correctly 1`] = `
                       }
                     >
                       <svg
+                        aria-hidden="true"
                         className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                         fill="none"
                         viewBox="0 0 32 28"
@@ -226,6 +229,7 @@ exports[`<District /> renders correctly 1`] = `
                       className="sc-bcXGCL eFHuff"
                     >
                       <svg
+                        aria-hidden="true"
                         className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                         fill="none"
                         viewBox="0 0 14 13"
@@ -253,6 +257,7 @@ exports[`<District /> renders correctly 1`] = `
                       className="sc-bcXGCL eFHuff"
                     >
                       <svg
+                        aria-hidden="true"
                         className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                         fill="none"
                         viewBox="0 0 13 14"

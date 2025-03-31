@@ -7,7 +7,7 @@ import { useDashboard } from '../../Dashboard.context'
 import { SectionProposalCategoriesQuery as SectionProposalCategoriesQueryType } from '@relay/SectionProposalCategoriesQuery.graphql'
 import { getVariablesQuery, QueryOptions } from '../Sections.utils'
 import SectionProposalCategoriesEmpty from './SectionProposalCategoriesEmpty'
-import { Text } from '@cap-collectif/ui'
+import { CapUIFontSize, Text } from '@cap-collectif/ui'
 
 interface SectionProposalCategoriesProps {
   readonly queryOptions: QueryOptions
@@ -57,7 +57,7 @@ const SectionProposalCategories: FC<SectionProposalCategoriesProps> = ({ queryOp
 
   return (
     <Section width="50%" spacing={6} border="normal" borderColor="gray.150">
-      <Text fontSize={3} color="blue.800">
+      <Text fontSize={CapUIFontSize.BodyRegular} color="blue.800">
         {intl.formatMessage({ id: 'categories-most-use-proposal' })}
       </Text>
 

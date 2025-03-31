@@ -8,7 +8,7 @@ import { createFragmentContainer, graphql } from 'react-relay'
 import { m as motion } from 'framer-motion'
 import { useAnalytics } from 'use-analytics'
 import { useActor } from '@xstate/react'
-import { Text, Flex, Box, Icon, CapUIIcon, CapUILineHeight } from '@cap-collectif/ui'
+import { Text, Flex, Box, Icon, CapUIIcon, CapUILineHeight, CapUIFontSize } from '@cap-collectif/ui'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import type { OptimisticResponse } from '~/mutations/AddDebateVoteMutation'
 import AddDebateVoteMutation from '~/mutations/AddDebateVoteMutation'
@@ -194,11 +194,11 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
               px={8}
               py={3}
               borderRadius="4px"
-              fontSize={3}
+              fontSize={CapUIFontSize.BodyRegular}
             >
               <Flex align="center" justify="center">
                 <Icon name={CapUIIcon.ThumbUp} mr={1} />
-                <Text lineHeight={CapUILineHeight.Base}>
+                <Text lineHeight={CapUILineHeight.M}>
                   {intl.formatMessage({
                     id: 'global.for',
                   })}
@@ -232,11 +232,11 @@ export const DebateStepPageVote = ({ step, top, ...props }: Props): Node => {
               px={8}
               py={3}
               borderRadius="4px"
-              fontSize={3}
+              fontSize={CapUIFontSize.BodyRegular}
             >
               <Flex align="center" justify="center">
                 <Icon name={CapUIIcon.ThumbDown} mr={1} />
-                <Text lineHeight={CapUILineHeight.Base}>
+                <Text lineHeight={CapUILineHeight.M}>
                   {intl.formatMessage({
                     id: 'global.against',
                   })}

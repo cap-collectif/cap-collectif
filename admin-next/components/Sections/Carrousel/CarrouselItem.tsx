@@ -3,6 +3,7 @@ import {
   Box,
   Button,
   ButtonQuickAction,
+  CapUIFontSize,
   CapUIIcon,
   Flex,
   FormGuideline,
@@ -155,7 +156,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
                 label={intl.formatMessage({ id: sectionType === 'carrousel' ? 'illustration' : 'image.header' })}
               >
                 {sectionType === 'carrouselHighlighted' ? (
-                  <Text fontSize={2} color="gray.500">
+                  <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 ) : null}
@@ -219,7 +220,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
           />
         ) : null}
         <Box>
-          <Box fontSize={1}>{intl.formatMessage({ id: getCardLabel(type) })}</Box>
+          <Box fontSize={CapUIFontSize.Caption}>{intl.formatMessage({ id: getCardLabel(type) })}</Box>
           <Text as="h4" fontWeight="semibold">
             {title}
           </Text>

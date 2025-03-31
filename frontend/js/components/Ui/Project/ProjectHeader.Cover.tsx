@@ -14,6 +14,8 @@ import {
   CapUIModalSize,
   CapUIIconSize,
   CapUIIcon,
+  CapUIFontSize,
+  CapUILineHeight,
 } from '@cap-collectif/ui'
 import { cleanChildren } from '~/utils/cleanChildren'
 import { formatBigNumber } from '~/utils/bigNumberFormatter'
@@ -98,7 +100,7 @@ export const Title = ({ children, ...rest }: TitleProps) => {
       width="100%"
       as="h3"
       mb={0}
-      fontSize={[4, 6]}
+      fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]}
       lineHeight="initial" // {['base', 'l']}
       fontWeight="semibold"
       color="neutral-gray.900"
@@ -395,8 +397,8 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
           <Text
             className="projectHeader__block__content platform__body"
             id={contentId || ''}
-            fontSize={[2, 4]}
-            lineHeight="base"
+            fontSize={[CapUIFontSize.BodySmall, CapUIFontSize.Headline]}
+            lineHeight={CapUILineHeight.M}
             fontWeight="semibold"
             height={[4, 6]}
             color="neutral-gray.900"
@@ -406,8 +408,8 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
           <Text
             className="projectHeader__block__title platform__body"
             color="neutral-gray.900"
-            fontSize={[1, 4]}
-            lineHeight="base"
+            fontSize={[CapUIFontSize.Caption, CapUIFontSize.Headline]}
+            lineHeight={CapUILineHeight.M}
             fontWeight="normal"
             height={[4, 6]}
           >
@@ -433,8 +435,8 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
       <Heading
         className="projectHeader__block__content platform__body"
         id={contentId || ''}
-        fontSize={[2, 4]}
-        lineHeight="base"
+        fontSize={[CapUIFontSize.BodySmall, CapUIFontSize.Headline]}
+        lineHeight={CapUILineHeight.M}
         fontWeight="semibold"
         height={[4, 6]}
         color="neutral-gray.900"
@@ -444,8 +446,8 @@ export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: Bloc
       <Text
         className="projectHeader__block__title platform__body"
         color="neutral-gray.900"
-        fontSize={[1, 4]}
-        lineHeight="base"
+        fontSize={[CapUIFontSize.Caption, CapUIFontSize.Headline]}
+        lineHeight={CapUILineHeight.M}
         fontWeight="normal"
         height={[4, 6]}
       >
@@ -504,7 +506,7 @@ const Location = ({ content, ...rest }: LocationProps) => (
     <Icon color="neutral-gray.500" size={CapUIIconSize.Md} name={CapUIIcon.PinO} marginLeft="-5px" />
     <Text
       className="platform__body"
-      fontSize={[1, 2]}
+      fontSize={[CapUIFontSize.Caption, CapUIFontSize.BodySmall]}
       lineHeight="sm"
       fontWeight="normal"
       color="gray.900"

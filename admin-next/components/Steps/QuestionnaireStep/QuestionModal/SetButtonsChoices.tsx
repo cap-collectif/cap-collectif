@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, Button, CapUIIcon, Flex, FormLabel, Heading, InputGroup, Switch } from '@cap-collectif/ui'
+import { Box, Button, CapUIFontSize, CapUIIcon, Flex, FormLabel, Heading, InputGroup, Switch } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 
@@ -100,7 +100,7 @@ const SetButtonsChoices: React.FC = () => {
       </Box>
       {type === 'button' ? (
         <Flex justify="space-between" alignItems="flex-start" bg="white" p={4} mb={2} borderRadius="normal">
-          <Heading as="h5" color="blue.900" fontWeight={600} fontSize={3}>
+          <Heading as="h5" color="blue.900" fontWeight={600} fontSize={CapUIFontSize.BodyRegular}>
             {intl.formatMessage({ id: 'disable-responses-colors' })}
           </Heading>
           <Switch
@@ -112,7 +112,7 @@ const SetButtonsChoices: React.FC = () => {
       ) : null}
       {type === 'button' ? (
         <Flex justify="space-between" alignItems="flex-start" bg="white" p={4} mb={2} borderRadius="normal">
-          <Heading as="h5" color="blue.900" fontWeight={600} fontSize={3}>
+          <Heading as="h5" color="blue.900" fontWeight={600} fontSize={CapUIFontSize.BodyRegular}>
             {intl.formatMessage({ id: 'enable-grouped-responses' })}
           </Heading>
           <Switch

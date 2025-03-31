@@ -4,10 +4,19 @@ import 'react-intl';
 import moment from 'moment';
 import css from '@styled-system/css';
 import type { ProjectCard_project$data } from '~relay/ProjectCard_project.graphql';
-import { LineHeight } from '~ui/Primitives/constants';
 import FormattedNumber from '~/components/Utils/FormattedNumber';
 import colors from '~/styles/modules/colors';
-import { Flex, Text, Tag, TagProps, CapUIIconSize, CapUIIcon, Icon } from '@cap-collectif/ui';
+import {
+    Flex,
+    Text,
+    Tag,
+    TagProps,
+    CapUIIconSize,
+    CapUIIcon,
+    Icon,
+    CapUIFontSize,
+    CapUILineHeight,
+} from '@cap-collectif/ui';
 import { pxToRem } from '@shared/utils/pxToRem';
 
 export const formatCounter = (
@@ -86,7 +95,11 @@ export const renderTag = (
             position="absolute">
             <Tag variantColor={variant} mr={1} sx={{ maxWidth: 'unset !important' }}>
                 {icon ? <Tag.LeftIcon name={icon || CapUIIcon.Add} /> : null}
-                <Text as="span" fontSize={2} lineHeight={LineHeight.SM} fontWeight="700">
+                <Text
+                    as="span"
+                    fontSize={CapUIFontSize.BodySmall}
+                    lineHeight={CapUILineHeight.S}
+                    fontWeight="700">
                     {message}
                 </Text>
             </Tag>

@@ -12,12 +12,12 @@ Array [
       className="sc-dEVMhd Flex___StyledAppBox-SiGEY iJcwAt gqpUzc"
     >
       <p
-        className="sc-dEVMhd iLMhyW"
+        className="sc-dEVMhd hTPESu"
       >
         emailing-service
       </p>
       <p
-        className="sc-dEVMhd egoKOK"
+        className="sc-dEVMhd iqyhmF"
       >
         emailing-service-explanation
       </p>
@@ -111,14 +111,14 @@ Array [
           />
         </div>
         <div
-          className="sc-dEVMhd Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl dUJxEe bTjcw fsbxdV"
+          className="sc-dEVMhd Tag__TagInner-bjMMQt Tag___StyledTagInner-ccWOxl dUJxEe vtPwp fsbxdV"
           onClick={[Function]}
           onMouseEnter={[Function]}
           onMouseLeave={[Function]}
           title="global.active"
         >
           <p
-            className="sc-dEVMhd jmUiuD Tag___StyledText-hFlneM dQIvA-d"
+            className="sc-dEVMhd hrniyE Tag___StyledText-hFlneM dQIvA-d"
           >
             global.active
           </p>

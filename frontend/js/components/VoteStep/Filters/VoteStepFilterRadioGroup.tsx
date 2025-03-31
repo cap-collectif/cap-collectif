@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, FormControl, Radio, RadioGroup, Text } from '@cap-collectif/ui'
+import { Flex, FormControl, Radio, RadioGroup, Text, CapUIFontSize } from '@cap-collectif/ui'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import type { FilterOptions } from '~/components/VoteStep/Filters/useVoteStepFilters'
 import '~/components/VoteStep/Filters/useVoteStepFilters'
@@ -37,7 +37,7 @@ export const VoteStepFilterRadioGroup = ({ options, filterName }: Props) => {
                   marginLeft: '4px !important',
                 }}
                 color="neutral-gray.900"
-                fontSize={3}
+                fontSize={CapUIFontSize.BodyRegular}
                 fontWeight={400}
               >
                 {choice?.title || choice?.name}

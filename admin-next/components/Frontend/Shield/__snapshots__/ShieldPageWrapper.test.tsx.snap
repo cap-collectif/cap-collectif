@@ -18,7 +18,7 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         src="shield.jpg"
       />
       <div
-        className="sc-bcXGCL fcrMCK"
+        className="sc-bcXGCL ikLmPK"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -33,6 +33,7 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         className="sc-bcXGCL jhkeIQ"
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud erCMMd hEjMCZ cap-icon sc-oZHua kslOoH"
           fill="none"
           viewBox="0 0 12 12"

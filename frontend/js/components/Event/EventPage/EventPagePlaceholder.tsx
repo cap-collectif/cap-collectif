@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Skeleton, Flex, Text } from '@cap-collectif/ui'
+import { Skeleton, Flex, Text, CapUIFontSize } from '@cap-collectif/ui'
 import ProjectHeader from '~ui/Project/ProjectHeader'
 import EventPageContent from './EventPageContent'
 import EventPageHeader from './EventPageHeader'
@@ -38,13 +38,13 @@ const EventPagePlaceholder = ({ hasError, fetchData }: Props): JSX.Element => {
           </EventPageContent.About>
         </Flex>
         <EventPageContent.Aside>
-          <Text as="span" fontWeight={600} fontSize={5} mb={2}>
+          <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mb={2}>
             {intl.formatMessage({
               id: 'global.admin.published_at',
             })}
           </Text>
           <Skeleton.Text width="100%" height="20px" />
-          <Text as="span" fontWeight={600} fontSize={5} mt={8} mb={2}>
+          <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mt={8} mb={2}>
             {intl.formatMessage({
               id: 'admin.fields.event.group_address',
             })}

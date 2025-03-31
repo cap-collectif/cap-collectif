@@ -28,7 +28,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
       }
     >
       <div
-        className="sc-bcXGCL bsVBPb sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL BwvOS sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -40,10 +40,10 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
           className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL eotpTW"
+            className="sc-bcXGCL iRyhmE"
           >
             <h2
-              className="sc-bcXGCL kANCfu cap-heading"
+              className="sc-bcXGCL iBEhTb cap-heading"
               id="modal-title"
               style={
                 {
@@ -62,6 +62,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
             type="button"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
@@ -108,7 +109,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
                 type="checkbox"
               />
               <div
-                className="sc-bcXGCL jGpoql cap-checkbox__box"
+                className="sc-bcXGCL jQxaYd cap-checkbox__box"
               />
             </div>
             <span
@@ -122,7 +123,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
           className="sc-bcXGCL eMjpTW cap-modal__footer"
         >
           <div
-            className="sc-bcXGCL MiskG cap-buttonGroup"
+            className="sc-bcXGCL egcRuI cap-buttonGroup"
             style={
               {
                 "marginLeft": 0,
@@ -131,7 +132,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
             }
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hzCEQq dUOTKb cap-button"
+              className="sc-bcXGCL sc-laZSpB jXBoaN dsOIMI cap-button"
               onClick={[Function]}
               style={
                 {
@@ -144,7 +145,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
               cancel
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB hzCEQq erzQLN cap-button"
+              className="sc-bcXGCL sc-laZSpB jXBoaN dOPPpN cap-button"
               disabled={true}
               onClick={[Function]}
               type="button"

@@ -91,6 +91,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   </div>
                 </div>
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud jThTHJ knzWyK cap-icon"
                   fill="none"
                   style={
@@ -135,6 +136,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               label_filters
             </div>
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 7"
@@ -169,7 +171,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
           />
         </div>
         <div
-          className="sc-bcXGCL kuwEGN"
+          className="sc-bcXGCL cuMCth"
         >
           <div
             className="cap-search css-b62m3t-container"
@@ -191,6 +193,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               onTouchEnd={[Function]}
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud bvvUsr hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 11 11"
@@ -293,10 +296,10 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
          "
                 />
                 <div
-                  className="sc-bcXGCL bHUozq sc-c3cb98f2-0 kWYbsx"
+                  className="sc-bcXGCL bHUozq sc-f7db5058-0 kWsBHq"
                 >
                   <div
-                    className="sc-bcXGCL bBcjNr sc-fXqqsB gHWJqw cap-tag"
+                    className="sc-bcXGCL bBcjNr sc-fXqqsB gKbWOe cap-tag"
                     style={{}}
                     title="step.status.future"
                   >
@@ -307,11 +310,12 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                     </span>
                   </div>
                   <div
-                    className="sc-bcXGCL fnmjmD sc-fXqqsB gHWJqw cap-tag sc-c3cb98f2-2 iJSamO"
+                    className="sc-bcXGCL fnmjmD sc-fXqqsB gKbWOe cap-tag sc-f7db5058-2 ksGEYB"
                     style={{}}
                     title=""
                   >
                     <svg
+                      aria-hidden="true"
                       className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
                       fill="none"
                       viewBox="0 0 10 12"
@@ -328,7 +332,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   className="sc-bcXGCL dxmZfn"
                 >
                   <h4
-                    className="sc-bcXGCL cgpuMW cap-heading"
+                    className="sc-bcXGCL jwRHWd cap-heading"
                     title="BPH"
                   >
                     BPH
@@ -343,6 +347,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                         className="sc-bcXGCL bLXbAu"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 11 12"
@@ -365,7 +370,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-c3cb98f2-3 fZhRUf"
+                          className="sc-f7db5058-3 fOCVHs"
                         >
                           &lt;mock-value-for-field-"title"&gt;
                         </span>
@@ -375,6 +380,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                         className="sc-bcXGCL bLXbAu"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 9 12"
@@ -396,7 +402,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-c3cb98f2-3 ffjWFk"
+                          className="sc-f7db5058-3 iaSLa-D"
                         >
                           &lt;mock-value-for-field-"name"&gt;
                         </span>
@@ -405,6 +411,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                         className="sc-bcXGCL bLXbAu"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 12 10"
@@ -420,7 +427,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-c3cb98f2-3 ffjWFk"
+                          className="sc-f7db5058-3 iaSLa-D"
                         >
                           &lt;mock-value-for-field-"title"&gt;
                         </span>

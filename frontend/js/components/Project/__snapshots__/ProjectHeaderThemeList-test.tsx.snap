@@ -10,6 +10,7 @@ Array [
     onClick={[Function]}
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud fspuzM hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 12 10"
@@ -25,7 +26,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL dHfuOk cap-text platform__body"
+      className="sc-bcXGCL dOYbow cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -94,7 +95,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -115,6 +116,7 @@ Array [
     onClick={[Function]}
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud fspuzM hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 12 10"
@@ -130,7 +132,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL dHfuOk cap-text platform__body"
+      className="sc-bcXGCL dOYbow cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -199,7 +201,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -220,6 +222,7 @@ Array [
     onClick={[Function]}
   >
     <svg
+      aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud fspuzM hEjMCZ cap-icon"
       fill="none"
       viewBox="0 0 12 10"
@@ -235,7 +238,7 @@ Array [
       />
     </svg>
     <p
-      className="sc-bcXGCL dHfuOk cap-text platform__body"
+      className="sc-bcXGCL dOYbow cap-text platform__body"
       title="Immobilier "
     >
       Immobilier
@@ -304,7 +307,7 @@ Array [
       data-testid="Footer"
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >

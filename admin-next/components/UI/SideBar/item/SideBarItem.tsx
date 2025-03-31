@@ -1,5 +1,6 @@
 import * as React from 'react'
 import {
+  CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
@@ -37,7 +38,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({ id, title, icon, href,
       justify={fold ? 'space-between' : 'center'}
       px={3}
       py={2}
-      lineHeight={CapUILineHeight.Base}
+      lineHeight={CapUILineHeight.M}
       _hover={{
         '.sideBar__item--title, .sideBar__item--icon': { color: 'gray.100' },
       }}
@@ -52,9 +53,9 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({ id, title, icon, href,
         />
         {fold && (
           <Text
-            fontSize={3}
+            fontSize={CapUIFontSize.BodyRegular}
             fontWeight={CapUIFontWeight.Semibold}
-            lineHeight={CapUILineHeight.Sm}
+            lineHeight={CapUILineHeight.S}
             color={isSelected ? 'blue.100' : 'gray.500'}
             className="sideBar__item--title"
           >

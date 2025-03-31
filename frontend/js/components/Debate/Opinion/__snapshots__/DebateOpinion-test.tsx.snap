@@ -12,11 +12,11 @@ Array [
     className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dRrWit cap-text"
+        className="sc-bcXGCL eioqte cap-text"
       >
         opinion.for
       </span>
@@ -41,7 +41,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
+            className="sc-bcXGCL lgrbm sc-ckEbfr hrpVbi cap-avatar"
             title="Agui le penseur"
           >
             <img
@@ -119,11 +119,11 @@ Array [
     className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dRrWit cap-text"
+        className="sc-bcXGCL eioqte cap-text"
       >
         opinion.for
       </span>
@@ -148,7 +148,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
+            className="sc-bcXGCL lgrbm sc-ckEbfr hrpVbi cap-avatar"
             title="Agui le penseur"
           >
             <img
@@ -226,11 +226,11 @@ Array [
     className="sc-bcXGCL ktIMbs cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dRrWit cap-text"
+        className="sc-bcXGCL eioqte cap-text"
       >
         opinion.for
       </span>
@@ -252,7 +252,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
+            className="sc-bcXGCL lgrbm sc-ckEbfr hrpVbi cap-avatar"
             title="Agui le penseur"
           >
             <img
@@ -330,11 +330,11 @@ Array [
     className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dRrWit cap-text"
+        className="sc-bcXGCL eioqte cap-text"
       >
         opinion.for
       </span>
@@ -359,7 +359,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
+            className="sc-bcXGCL lgrbm sc-ckEbfr hrpVbi cap-avatar"
             title="Agui le penseur"
           >
             <img
@@ -420,7 +420,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-laZSpB cfdvRJ jHvBhg cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-laZSpB jQDCq gDuqin cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >
@@ -444,11 +444,11 @@ Array [
     className="sc-bcXGCL ktIMbs cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gHWJqw cap-tag"
+      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
       title=""
     >
       <span
-        className="sc-bcXGCL dRrWit cap-text"
+        className="sc-bcXGCL eioqte cap-text"
       >
         opinion.for
       </span>
@@ -470,7 +470,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL lgrbm sc-ckEbfr gOeGmr cap-avatar"
+            className="sc-bcXGCL lgrbm sc-ckEbfr hrpVbi cap-avatar"
             title="Agui le penseur"
           >
             <img
@@ -531,7 +531,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-laZSpB cfdvRJ jHvBhg cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-laZSpB jQDCq gDuqin cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >

@@ -1,5 +1,14 @@
 import React from 'react'
-import { Button, FormLabel, Heading, MultiStepModal, Text, useMultiStepModal, Flex } from '@cap-collectif/ui'
+import {
+  Button,
+  FormLabel,
+  Heading,
+  MultiStepModal,
+  Text,
+  useMultiStepModal,
+  Flex,
+  CapUIFontSize,
+} from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { Controller, useFormContext } from 'react-hook-form'
@@ -46,10 +55,10 @@ const SectionSettingsModal: React.FC<Props> = ({ sectionFormKey, onClose, initia
   return (
     <>
       <MultiStepModal.Header>
-        <Text uppercase color="gray.500" fontWeight={700} fontSize={1}>
+        <Text uppercase color="gray.500" fontWeight={700} fontSize={CapUIFontSize.Caption}>
           {intl.formatMessage({ id: 'project.types.consultation' })}
         </Text>
-        <Heading color="primary.blue.900" fontSize={6} fontWeight={600}>
+        <Heading color="primary.blue.900" fontSize={CapUIFontSize.DisplayMedium} fontWeight={600}>
           {intl.formatMessage({ id: 'add-participation-area' })}
         </Heading>
       </MultiStepModal.Header>
@@ -61,7 +70,7 @@ const SectionSettingsModal: React.FC<Props> = ({ sectionFormKey, onClose, initia
         <FormControl name={`${sectionFormKey}.description`} control={control} isRequired={false}>
           <Flex>
             <FormLabel htmlFor="description" label={intl.formatMessage({ id: 'global.description' })} />
-            <Text color="gray.500" ml={1} fontSize={2}>
+            <Text color="gray.500" ml={1} fontSize={CapUIFontSize.BodySmall}>
               {intl.formatMessage({ id: 'global.optional' })}
             </Text>
           </Flex>

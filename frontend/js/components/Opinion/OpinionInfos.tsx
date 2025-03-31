@@ -2,7 +2,7 @@ import React from 'react'
 import moment from 'moment'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedMessage, FormattedDate } from 'react-intl'
-import { Text, Tooltip } from '@cap-collectif/ui'
+import { CapUIFontSize, Text, Tooltip } from '@cap-collectif/ui'
 import UserLink from '../User/UserLink'
 import PinnedLabel from '../Utils/PinnedLabel'
 import UnpublishedLabel from '../Publishable/UnpublishedLabel'
@@ -74,7 +74,7 @@ class OpinionInfos extends React.Component<Props> {
         <Tooltip // @ts-ignore
           placement="top"
           label={
-            <Text fontSize={1} marginBottom={0}>
+            <Text fontSize={CapUIFontSize.Caption} marginBottom={0}>
               <FormattedMessage id="opinion-updated-at-the" />{' '}
               <FormattedDate
                 value={moment(opinion.updatedAt).toDate()}

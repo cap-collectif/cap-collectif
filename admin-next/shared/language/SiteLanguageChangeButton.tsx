@@ -1,5 +1,4 @@
-import { Box, CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
-import { pxToRem } from '@shared/utils/pxToRem'
+import { Box, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon } from '@cap-collectif/ui'
 import { Menu, MenuItem } from '@szhsin/react-menu'
 import React, { useState } from 'react'
 import { useIntl } from 'react-intl'
@@ -64,7 +63,7 @@ const SiteLanguageChangeButton = ({
           >
             <Icon name={CapUIIcon.Earth} size={CapUIIconSize.Md} color="white" />
             <Flex>
-              <Box as="div" color={textColor} fontSize={pxToRem(16)}>
+              <Box as="div" color={textColor} fontSize={CapUIFontSize.BodyLarge}>
                 <span>{intl.formatMessage({ id: currentLanguage.translationKey })}</span>
               </Box>
             </Flex>

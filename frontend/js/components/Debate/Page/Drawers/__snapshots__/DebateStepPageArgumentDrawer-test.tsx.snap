@@ -21,6 +21,7 @@ Array [
         className="sc-bcXGCL ahQii"
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud bPmEkv cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
@@ -50,7 +51,7 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL kcdSuz sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL kcdSuz sc-fXqqsB gKbWOe cap-tag"
             title=""
           >
             <h5
@@ -77,12 +78,13 @@ Array [
       >
         <button
           aria-label="vote.add"
-          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
+          className="sc-bcXGCL sc-laZSpB dDVxRe bGltjj cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
+            aria-hidden="true"
             className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
             fill="none"
             viewBox="0 0 10 12"
@@ -135,6 +137,7 @@ Array [
         className="sc-bcXGCL ahQii"
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud bPmEkv cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
@@ -164,7 +167,7 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL kcdSuz sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL kcdSuz sc-fXqqsB gKbWOe cap-tag"
             title=""
           >
             <h5
@@ -191,12 +194,13 @@ Array [
       >
         <button
           aria-label="vote.add"
-          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
+          className="sc-bcXGCL sc-laZSpB dDVxRe bGltjj cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
+            aria-hidden="true"
             className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
             fill="none"
             viewBox="0 0 10 12"
@@ -249,6 +253,7 @@ Array [
         className="sc-bcXGCL ahQii"
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud bPmEkv cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
@@ -278,7 +283,7 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL kcdSuz sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL kcdSuz sc-fXqqsB gKbWOe cap-tag"
             title=""
           >
             <h5
@@ -305,12 +310,13 @@ Array [
       >
         <button
           aria-label="vote.add"
-          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
+          className="sc-bcXGCL sc-laZSpB dDVxRe bGltjj cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
+            aria-hidden="true"
             className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
             fill="none"
             viewBox="0 0 10 12"

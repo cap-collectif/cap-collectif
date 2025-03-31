@@ -5,7 +5,7 @@ import { Row, Col } from 'react-bootstrap'
 import { connect } from 'react-redux'
 
 import styled from 'styled-components'
-import { Text, Tooltip } from '@cap-collectif/ui'
+import { CapUIFontSize, Text, Tooltip } from '@cap-collectif/ui'
 import type { NewProposalResponse_response } from '~relay/NewProposalResponse_response.graphql'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
@@ -70,7 +70,7 @@ const PrivateTitle = ({
           // @ts-ignore
           placement="top"
           label={
-            <Text fontSize={1} marginBottom={0}>
+            <Text fontSize={CapUIFontSize.Caption} marginBottom={0}>
               <FormattedMessage id="global.private" />
             </Text>
           }

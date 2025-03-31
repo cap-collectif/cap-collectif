@@ -1,4 +1,4 @@
-import { BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
+import { BoxProps, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
 
 export const ViewButton: React.FC<
   { active: boolean; onClick: () => void; icon: CapUIIcon; children: React.ReactNode } & BoxProps
@@ -14,18 +14,18 @@ export const ViewButton: React.FC<
     position="relative"
     aria-current={active}
     {...rest}
-    borderColor={active ? 'primary.600' : 'gray.300'}
+    borderColor={active ? 'primary.base' : 'gray.300'}
   >
     <Icon
       name={icon}
       size={CapUIIconSize.Md}
-      color={active ? 'primary.600' : 'gray.700'}
+      color={active ? 'primary.base' : 'gray.700'}
       mr={1}
       aria-hidden
       focusable={false}
     />
 
-    <Text as="span" fontSize={3} color={active ? 'primary.600' : 'gray.700'}>
+    <Text as="span" fontSize={CapUIFontSize.BodyRegular} color={active ? 'primary.base' : 'gray.700'}>
       {children}
     </Text>
   </Flex>

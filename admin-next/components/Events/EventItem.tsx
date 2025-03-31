@@ -3,7 +3,17 @@ import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import type { EventItem_event$key } from '@relay/EventItem_event.graphql'
 import { EventItem_viewer$key } from '@relay/EventItem_viewer.graphql'
-import { ButtonQuickAction, CapUIIcon, CapUIIconSize, Flex, Link, Table, Text, Tooltip } from '@cap-collectif/ui'
+import {
+  ButtonQuickAction,
+  CapUIFontSize,
+  CapUIIcon,
+  CapUIIconSize,
+  Flex,
+  Link,
+  Table,
+  Text,
+  Tooltip,
+} from '@cap-collectif/ui'
 import downloadCSV from '@utils/download-csv'
 import EventModalConfirmationDeleteQuery from './EventModalConfirmationDelete'
 
@@ -124,7 +134,7 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, viewer: viewerFragme
       </Table.Td>
       <Table.Td>
         {event.timeRange && (
-          <Text fontSize={3}>
+          <Text fontSize={CapUIFontSize.BodyRegular}>
             {event.timeRange.startAt &&
               intl.formatDate(event.timeRange.startAt, {
                 day: 'numeric',
@@ -149,7 +159,7 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, viewer: viewerFragme
         )}
       </Table.Td>
       {isAdmin || isAdminOrganization ? (
-        <Table.Td>{event.owner && <Text fontSize={3}>{event.owner.username}</Text>}</Table.Td>
+        <Table.Td>{event.owner && <Text fontSize={CapUIFontSize.BodyRegular}>{event.owner.username}</Text>}</Table.Td>
       ) : null}
       <Table.Td>
         {event.createdAt &&

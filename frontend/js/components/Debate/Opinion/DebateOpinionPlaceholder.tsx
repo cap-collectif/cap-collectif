@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Flex, Card, Tag, Text, Skeleton } from '@cap-collectif/ui'
-import { LineHeight } from '~ui/Primitives/constants'
+import { Flex, Card, Tag, Text, Skeleton, CapUIFontSize, CapUILineHeight } from '@cap-collectif/ui'
 export type DebateOpinionStatus = 'FOR' | 'AGAINST'
 type Props = {
   readonly debateOpinionStatus: DebateOpinionStatus
@@ -14,7 +13,7 @@ export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props)
         position: 'absolute',
       }}
     >
-      <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
+      <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} fontWeight="700" uppercase>
         <FormattedMessage id={debateOpinionStatus === 'FOR' ? 'opinion.for' : 'opinion.against'} />
       </Text>
     </Tag>

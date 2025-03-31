@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import styled from 'styled-components'
 import { usePopoverState, Popover, PopoverDisclosure, PopoverArrow } from 'reakit/Popover'
 import { connect } from 'react-redux'
-import { Button, Box, Text, Flex } from '@cap-collectif/ui'
+import { Button, Box, Text, Flex, CapUIFontSize } from '@cap-collectif/ui'
 import type { Dispatch, State } from '~/types'
 import { openLoginModal } from '@shared/login/LoginButton'
 import { loginWithOpenID } from '~/redux/modules/default'
@@ -115,7 +115,7 @@ export const LoginOverlay = ({
             bg="#f7f7f7"
             borderBottom="normal"
             borderColor="#ebebeb"
-            fontSize={3}
+            fontSize={CapUIFontSize.BodyRegular}
             mb="0 !important"
             // @ts-ignore
             textAlign="left !important"
@@ -127,7 +127,7 @@ export const LoginOverlay = ({
 
           <Flex px={3} py="10px" direction="column" spacing="10px">
             <Text
-              fontSize={3}
+              fontSize={CapUIFontSize.BodyRegular}
               pb="0 !important"
               // @ts-ignore
               textAlign="left !important"

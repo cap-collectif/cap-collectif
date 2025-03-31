@@ -90,7 +90,7 @@ export const ImportMembersUploader = (): JSX.Element => {
               {
                 // eslint-disable-next-line react/display-name
                 a: (...chunks) => (
-                  <Link href={csvModelUri} download={csvModelFileName} color="primary.600">
+                  <Link href={csvModelUri} download={csvModelFileName} color="primary.base">
                     {chunks}
                   </Link>
                 ),

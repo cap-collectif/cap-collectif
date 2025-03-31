@@ -24,18 +24,18 @@ exports[`<EventList /> should render correctly 1`] = `
           className="sc-bcXGCL fBvmdL cap-table__tr"
         >
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL hlesqq cap-table__th"
           >
             global.title
              
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL hlesqq cap-table__th"
           >
             global.participative.project
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL hlesqq cap-table__th"
           >
             <button
               aria-controls="id-g"
@@ -59,6 +59,7 @@ exports[`<EventList /> should render correctly 1`] = `
                 start.date.and.end
               </p>
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 7"
@@ -139,6 +140,7 @@ exports[`<EventList /> should render correctly 1`] = `
                     global.filter_last
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -183,6 +185,7 @@ exports[`<EventList /> should render correctly 1`] = `
                     global.filter_old
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -204,18 +207,18 @@ exports[`<EventList /> should render correctly 1`] = `
             className="sc-bcXGCL jpIMR cap-table__th"
           >
             <p
-              className="sc-bcXGCL KWUHz cap-text"
+              className="sc-bcXGCL bTjUUg cap-text"
             >
               admin.projects.list.author
             </p>
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL hlesqq cap-table__th"
           >
             global.owner
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL hlesqq cap-table__th"
           >
             global.updated.date
           </th>
@@ -232,7 +235,7 @@ exports[`<EventList /> should render correctly 1`] = `
           id="RXZlbnQ6ZXZlbnQz"
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -247,7 +250,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -269,7 +272,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -287,7 +290,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -302,7 +305,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -312,7 +315,7 @@ exports[`<EventList /> should render correctly 1`] = `
             -
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -322,7 +325,7 @@ exports[`<EventList /> should render correctly 1`] = `
             03/01/2015
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -345,6 +348,7 @@ exports[`<EventList /> should render correctly 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="currentColor"
                   viewBox="0 0 24 24"
@@ -384,7 +388,7 @@ exports[`<EventList /> should render correctly 1`] = `
           id="RXZlbnQ6ZXZlbnQx"
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -399,7 +403,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -437,7 +441,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -455,7 +459,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -470,7 +474,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -480,7 +484,7 @@ exports[`<EventList /> should render correctly 1`] = `
             -
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -490,7 +494,7 @@ exports[`<EventList /> should render correctly 1`] = `
             01/01/2015
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -507,7 +511,7 @@ exports[`<EventList /> should render correctly 1`] = `
           id="RXZlbnQ6ZXZlbnQ2"
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -522,7 +526,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -538,7 +542,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -556,7 +560,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </p>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -571,7 +575,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -581,7 +585,7 @@ exports[`<EventList /> should render correctly 1`] = `
             -
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -591,7 +595,7 @@ exports[`<EventList /> should render correctly 1`] = `
             06/01/2015
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -614,6 +618,7 @@ exports[`<EventList /> should render correctly 1`] = `
                 tabIndex={0}
               >
                 <svg
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                   fill="currentColor"
                   viewBox="0 0 24 24"
@@ -670,7 +675,7 @@ exports[`<EventList /> should render correctly 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button"
+        className="sc-bcXGCL sc-laZSpB cDseqh dUpIgt cap-button"
         onClick={[Function]}
         type="button"
       >

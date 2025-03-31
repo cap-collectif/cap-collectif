@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, Flex, Heading } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, Flex, Heading } from '@cap-collectif/ui'
 import { useDropzone, DropzoneOptions } from 'react-dropzone'
 
 type Mode = 'fullscreen' | 'click'
@@ -34,7 +34,7 @@ const DropzoneWrapper: React.FC<{ children: React.ReactNode; mode?: Mode } & Dro
           justifyContent="center"
           alignItems="center"
           zIndex={9}
-          bg="primary.100"
+          bg="primary.background"
           position="absolute"
           top={0}
           left={0}
@@ -43,10 +43,10 @@ const DropzoneWrapper: React.FC<{ children: React.ReactNode; mode?: Mode } & Dro
           opacity={0.95}
           sx={{ pointerEvents: 'none' }}
         >
-          <Heading as="h1" color="primary.800">
+          <Heading as="h1" color="primary.darker">
             {intl.formatMessage({ id: 'drop-file' })}
           </Heading>
-          <Heading as="h3" color="primary.800" fontSize={5}>
+          <Heading as="h3" color="primary.darker" fontSize={CapUIFontSize.DisplaySmall}>
             {intl.formatMessage({ id: 'drop-file-helptext' })}
           </Heading>
         </Flex>

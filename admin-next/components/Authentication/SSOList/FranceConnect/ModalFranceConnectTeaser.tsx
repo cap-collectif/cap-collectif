@@ -1,6 +1,7 @@
 import type { FC } from 'react'
 import {
   Button,
+  CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
@@ -46,17 +47,17 @@ const ModalFranceConnectTeaser: FC<ModalFranceConnectTeaserProps> = ({ organizat
         <Heading>{intl.formatMessage({ id: 'secure.and.simplify.the.connection' })}</Heading>
       </Modal.Header>
       <Modal.Body>
-        <Text fontSize={2} color="gray.900" mb={6}>
+        <Text fontSize={CapUIFontSize.BodySmall} color="gray.900" mb={6}>
           {intl.formatMessage({ id: 'france.connect.business.contact' })}
         </Text>
         <Flex bg="blue.100" border="normal" borderColor="blue.200" align="center" py={6} direction="column">
           {logoBlue}
 
           <Text color="blue.900" my={4}>
-            <Text as="span" fontSize={6} fontWeight={CapUIFontWeight.Semibold}>
+            <Text as="span" fontSize={CapUIFontSize.DisplayMedium} fontWeight={CapUIFontWeight.Semibold}>
               1000
             </Text>
-            <Text as="span" fontSize={4}>
+            <Text as="span" fontSize={CapUIFontSize.Headline}>
               € HT
             </Text>
           </Text>
@@ -83,7 +84,7 @@ const ModalFranceConnectTeaser: FC<ModalFranceConnectTeaserProps> = ({ organizat
           </Flex>
         </Flex>
 
-        <Text color="gray.700" mt={4} fontSize={1}>
+        <Text color="gray.700" mt={4} fontSize={CapUIFontSize.Caption}>
           {intl.formatMessage({ id: 'france.connect.municipalities.less.than' }, { n: '10 000' })}
         </Text>
       </Modal.Body>

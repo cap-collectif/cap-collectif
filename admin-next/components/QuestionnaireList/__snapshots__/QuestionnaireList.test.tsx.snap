@@ -67,6 +67,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                 creation
               </p>
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 7"
@@ -147,6 +148,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                     global.filter_last
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -191,6 +193,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                     global.filter_old
                   </p>
                   <svg
+                    aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
                     viewBox="0 0 12 7"
@@ -222,7 +225,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
           id="questionnaire-1"
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -237,7 +240,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -252,7 +255,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -262,7 +265,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -272,7 +275,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -282,7 +285,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -292,7 +295,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+            className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
             style={
               {
                 "whiteSpace": "initial",
@@ -321,6 +324,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
@@ -376,7 +380,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
           id="questionnaire-2"
         >
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -391,7 +395,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -406,7 +410,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             </a>
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -416,7 +420,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -426,7 +430,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             &lt;mock-value-for-field-"username"&gt;
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -436,7 +440,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL dZCuae cap-table__td"
+            className="sc-bcXGCL phWty cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -446,7 +450,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             Invalid Date
           </td>
           <td
-            className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+            className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
             style={
               {
                 "whiteSpace": "initial",
@@ -475,6 +479,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
@@ -546,7 +551,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button"
+        className="sc-bcXGCL sc-laZSpB cDseqh dUpIgt cap-button"
         onClick={[Function]}
         type="button"
       >

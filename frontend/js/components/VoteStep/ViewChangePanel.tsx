@@ -1,4 +1,4 @@
-import { CapUIIcon, CapUIIconSize, Flex, Icon, Text, Box, useTheme } from '@cap-collectif/ui'
+import { CapUIIcon, CapUIIconSize, Flex, Icon, Text, Box, useTheme, CapUIFontSize } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
@@ -48,13 +48,13 @@ const ViewButton = ({
       position="relative"
       {...rest}
       aria-label={text}
-      borderColor={active ? 'primary.500' : 'gray.300'}
+      borderColor={active ? 'primary.base' : 'gray.300'}
       aria-current={active}
     >
       <Icon
         name={icon as CapUIIcon}
         size={hideText ? CapUIIconSize.Lg : CapUIIconSize.Md}
-        color={active ? 'primary.500' : 'gray.700'}
+        color={active ? 'primary.base' : 'gray.700'}
         opacity={rest.disabled ? '.5' : '1'}
         mr={[0, 0, 0, 1]}
         aria-hidden
@@ -64,8 +64,8 @@ const ViewButton = ({
         <Text
           opacity={rest.disabled ? '.5' : '1'}
           as="span"
-          fontSize={3}
-          color={active ? 'primary.500' : 'gray.700'}
+          fontSize={CapUIFontSize.BodyRegular}
+          color={active ? 'primary.base' : 'gray.700'}
           display={view === View.Map ? ['none', 'none', 'inline', 'inline'] : 'inline'}
         >
           {text}

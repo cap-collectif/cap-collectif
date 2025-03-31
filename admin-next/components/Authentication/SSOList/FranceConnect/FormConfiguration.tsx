@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import * as React from 'react'
-import { CapUIFontWeight, Flex, FormLabel, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUIFontWeight, Flex, FormLabel, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
 import { FranceConnectAllowedData } from '@relay/ModalFranceConnectConfiguration_ssoConfiguration.graphql'
@@ -99,7 +99,7 @@ const FormConfiguration: FC = () => {
       </FormControl>
 
       <Flex direction="column" spacing={2}>
-        <Text color="gray.900" fontSize={2} fontWeight={CapUIFontWeight.Semibold}>
+        <Text color="gray.900" fontSize={CapUIFontSize.BodySmall} fontWeight={CapUIFontWeight.Semibold}>
           {intl.formatMessage({ id: 'fc-allowed-fields' })}
         </Text>
 

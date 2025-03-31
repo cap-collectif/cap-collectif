@@ -28,7 +28,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     >
       <div
         autoFocus={true}
-        className="sc-bcXGCL doARmI sc-gsGkXq gTDlYD cap-modal"
+        className="sc-bcXGCL bOJnrx sc-gsGkXq gTDlYD cap-modal"
         style={
           {
             "opacity": 0,
@@ -42,7 +42,7 @@ exports[`<LoginModal /> render correctly 1`] = `
           id="contained-modal-title-lg"
         >
           <div
-            className="sc-bcXGCL eotpTW"
+            className="sc-bcXGCL iRyhmE"
           >
             <h4
               className="sc-bcXGCL jraRHV cap-heading"
@@ -64,6 +64,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             type="button"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
@@ -84,7 +85,7 @@ exports[`<LoginModal /> render correctly 1`] = `
         >
           <div>
             <div
-              className="sc-bcXGCL PXCEG"
+              className="sc-bcXGCL gMOsyY"
             >
               <div
                 className=" ql-editor wysiwyg-render"
@@ -125,7 +126,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                 aria-required={true}
                 autoComplete="email"
                 autoFocus={true}
-                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
                 disabled={false}
                 name="username"
                 onBlur={[Function]}
@@ -165,7 +166,7 @@ exports[`<LoginModal /> render correctly 1`] = `
               <input
                 aria-required={true}
                 autoComplete="off"
-                className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
                 disabled={false}
                 name="password"
                 onBlur={[Function]}
@@ -199,7 +200,7 @@ exports[`<LoginModal /> render correctly 1`] = `
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi zPAHL cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR dUpIgt cap-button"
             style={
               {
                 "marginLeft": 0,
@@ -211,7 +212,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
             id="confirm-login"
             type="submit"
           >

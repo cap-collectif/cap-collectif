@@ -1,5 +1,5 @@
 import React, { ChangeEvent } from 'react'
-import { Flex, Switch, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, Flex, Switch, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { config, RequirementTypeName } from '../Requirements/Requirements'
 import { useFormContext } from 'react-hook-form'
@@ -58,7 +58,7 @@ const RequirementItem: React.FC<Props> = ({
           <Flex justifyContent="space-between">
             {intl.formatMessage({ id: title })}
             {isDataCollectedByFranceConnect && (
-              <Text as="span" mr={4} fontSize={1} color="gray.400">
+              <Text as="span" mr={4} fontSize={CapUIFontSize.Caption} color="gray.400">
                 {intl.formatMessage({ id: 'data-collected-by-france-connect' })}
               </Text>
             )}

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, CapUIFontWeight, Flex, Text, Tooltip } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIFontWeight, Flex, Text, Tooltip } from '@cap-collectif/ui'
 import { useSelector } from 'react-redux'
 import type { GlobalState } from '~/types'
 import LoginOverlay from '~/components/Utils/LoginOverlay'
@@ -33,7 +33,7 @@ const VoteButtonUI = ({
       return (
         <Tooltip
           label={
-            <Box fontSize={1} textAlign="center" p={1}>
+            <Box fontSize={CapUIFontSize.Caption} textAlign="center" p={1}>
               {totalCount - paperVotesTotalCount > 0 &&
                 intl.formatMessage(
                   {

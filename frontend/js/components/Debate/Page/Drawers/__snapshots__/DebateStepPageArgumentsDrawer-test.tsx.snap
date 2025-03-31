@@ -21,6 +21,7 @@ Array [
         className="sc-bcXGCL dhUYSg"
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud bPmEkv cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
@@ -95,11 +96,11 @@ Array [
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL yRLQM sc-fXqqsB gHWJqw cap-tag"
+                        className="sc-bcXGCL yRLQM sc-fXqqsB gKbWOe cap-tag"
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL dRrWit cap-text"
+                          className="sc-bcXGCL eioqte cap-text"
                         >
                           global.against
                         </span>
@@ -109,11 +110,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kRFCoC sc-fXqqsB gHWJqw cap-tag"
+                          className="sc-bcXGCL kRFCoC sc-fXqqsB gKbWOe cap-tag"
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL dRrWit cap-text"
+                            className="sc-bcXGCL eioqte cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -142,12 +143,13 @@ Array [
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
+                          className="sc-bcXGCL sc-laZSpB dDVxRe bGltjj cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
+                            aria-hidden="true"
                             className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
                             fill="none"
                             viewBox="0 0 10 12"
@@ -200,11 +202,11 @@ Array [
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL yRLQM sc-fXqqsB gHWJqw cap-tag"
+                        className="sc-bcXGCL yRLQM sc-fXqqsB gKbWOe cap-tag"
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL dRrWit cap-text"
+                          className="sc-bcXGCL eioqte cap-text"
                         >
                           global.against
                         </span>
@@ -214,11 +216,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kRFCoC sc-fXqqsB gHWJqw cap-tag"
+                          className="sc-bcXGCL kRFCoC sc-fXqqsB gKbWOe cap-tag"
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL dRrWit cap-text"
+                            className="sc-bcXGCL eioqte cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -247,12 +249,13 @@ Array [
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
+                          className="sc-bcXGCL sc-laZSpB dDVxRe bGltjj cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
+                            aria-hidden="true"
                             className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
                             fill="none"
                             viewBox="0 0 10 12"
@@ -305,11 +308,11 @@ Array [
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL yRLQM sc-fXqqsB gHWJqw cap-tag"
+                        className="sc-bcXGCL yRLQM sc-fXqqsB gKbWOe cap-tag"
                         title=""
                       >
                         <span
-                          className="sc-bcXGCL dRrWit cap-text"
+                          className="sc-bcXGCL eioqte cap-text"
                         >
                           global.against
                         </span>
@@ -319,11 +322,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kRFCoC sc-fXqqsB gHWJqw cap-tag"
+                          className="sc-bcXGCL kRFCoC sc-fXqqsB gKbWOe cap-tag"
                           title=""
                         >
                           <span
-                            className="sc-bcXGCL dRrWit cap-text"
+                            className="sc-bcXGCL eioqte cap-text"
                           >
                             post_is_not_public
                           </span>
@@ -352,12 +355,13 @@ Array [
                       >
                         <button
                           aria-label="vote.add"
-                          className="sc-bcXGCL sc-laZSpB eZPACF csqMOQ cap-button"
+                          className="sc-bcXGCL sc-laZSpB dDVxRe bGltjj cap-button"
                           disabled={true}
                           onClick={[Function]}
                           type="button"
                         >
                           <svg
+                            aria-hidden="true"
                             className="sc-bcXGCL sc-eJDTud kAyhOl cpMilg cap-icon"
                             fill="none"
                             viewBox="0 0 10 12"

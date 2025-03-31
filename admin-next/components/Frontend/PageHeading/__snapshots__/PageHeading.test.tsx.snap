@@ -16,12 +16,12 @@ exports[`<PageHeading /> renders correctly 1`] = `
           className="sc-bcXGCL dWgdoT"
         >
           <h1
-            className="sc-bcXGCL xnsAV cap-heading"
+            className="sc-bcXGCL fxmFLb cap-heading"
           >
             Liste des projets
           </h1>
           <div
-            className="sc-bcXGCL dKOzIE cap-text"
+            className="sc-bcXGCL khAxBU cap-text"
           >
             Une belle liste
           </div>
@@ -34,7 +34,7 @@ exports[`<PageHeading /> renders correctly 1`] = `
           className="sc-bcXGCL dWgdoT"
         >
           <div
-            className="sc-bcXGCL bhHcuP cap-text"
+            className="sc-bcXGCL dGojSv cap-text"
           >
             <div
               className=" ql-editor wysiwyg-render"

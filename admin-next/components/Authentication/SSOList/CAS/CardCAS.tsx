@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import CardSSO from '@ui/CardSSO/CardSSO'
-import { ButtonGroup, ButtonQuickAction, CapUIIcon, Switch, Text } from '@cap-collectif/ui'
+import { ButtonGroup, ButtonQuickAction, CapUIFontSize, CapUIIcon, Switch, Text } from '@cap-collectif/ui'
 import logo from './Logo'
 import { graphql, useFragment } from 'react-relay'
 import type { CardCAS_ssoConfiguration$key } from '@relay/CardCAS_ssoConfiguration.graphql'
@@ -63,7 +63,7 @@ const CardCAS: FC<CardCASProps> = ({ ssoConfiguration: ssoConfigurationFragment,
           )}
         </CardSSO.Header>
         <CardSSO.Body spacing={2}>
-          <Text as="label" color="gray.900" fontSize={3} htmlFor={`sso-${ssoConfiguration.id}`}>
+          <Text as="label" color="gray.900" fontSize={CapUIFontSize.BodyRegular} htmlFor={`sso-${ssoConfiguration.id}`}>
             {ssoConfiguration.name}
           </Text>
 

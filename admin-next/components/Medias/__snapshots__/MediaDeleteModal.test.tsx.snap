@@ -28,7 +28,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL bsVBPb sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL BwvOS sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -40,10 +40,10 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
           className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL eotpTW"
+            className="sc-bcXGCL iRyhmE"
           >
             <h2
-              className="sc-bcXGCL jyqEHl cap-heading"
+              className="sc-bcXGCL czxWiY cap-heading"
               id="modal-title"
               style={
                 {
@@ -62,6 +62,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
             type="button"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
@@ -90,7 +91,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi dUOTKb cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR dsOIMI cap-button"
             onClick={[Function]}
             style={
               {
@@ -103,7 +104,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB laxoCi erzQLN cap-button"
+            className="sc-bcXGCL sc-laZSpB dNMLhR dOPPpN cap-button"
             onClick={[Function]}
             type="button"
           >

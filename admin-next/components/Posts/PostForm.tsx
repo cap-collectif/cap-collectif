@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Flex, FormLabel, Text, UPLOADER_SIZE, Button } from '@cap-collectif/ui'
+import { Flex, FormLabel, Text, UPLOADER_SIZE, Button, CapUIFontSize } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 import { UPLOAD_PATH } from '@utils/config'
@@ -132,7 +132,7 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
               label={intl.formatMessage({ id: 'global.summary' })}
               id={`${currentLocale}-abstract`}
             >
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>
@@ -158,7 +158,7 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
             }}
           >
             <FormLabel htmlFor="media" id="media" label={intl.formatMessage({ id: 'cover-image' })}>
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>

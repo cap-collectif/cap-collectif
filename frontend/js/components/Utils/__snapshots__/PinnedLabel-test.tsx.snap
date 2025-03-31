@@ -8,8 +8,8 @@ exports[`<PinnedLabel /> should render a blue label if shown for comment 1`] = `
   id="pinned-label"
   label={
     <Text
-      fontSize={1}
-      lineHeight="sm"
+      fontSize="Caption"
+      lineHeight="S"
       marginBottom={0}
       textAlign="center"
     >
@@ -45,8 +45,8 @@ exports[`<PinnedLabel /> should render a blue label if shown for opinion 1`] = `
   id="pinned-label"
   label={
     <Text
-      fontSize={1}
-      lineHeight="sm"
+      fontSize="Caption"
+      lineHeight="S"
       marginBottom={0}
       textAlign="center"
     >

@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { Flex, Text, Button, Tag, Heading, Icon, CapUIIcon } from '@cap-collectif/ui'
+import { Flex, Text, Button, Tag, Heading, Icon, CapUIIcon, CapUIFontSize } from '@cap-collectif/ui'
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer'
 import LoginOverlay from '~/components/Utils/LoginOverlay'
 import { voteForArgument } from '~/components/Debate/ArgumentCard/ArgumentCard'
@@ -122,7 +122,7 @@ const DebateStepPageArgumentDrawer = ({
             variantColor="hierarchy"
           />
         </LoginOverlay>
-        <Text ml={1} as="span" fontSize={4} color="neutral-gray.900">
+        <Text ml={1} as="span" fontSize={CapUIFontSize.Headline} color="neutral-gray.900">
           {argument.votes.totalCount}
         </Text>
       </Flex>

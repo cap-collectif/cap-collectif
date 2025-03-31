@@ -2,6 +2,7 @@ import * as React from 'react'
 import {
   Box,
   CapUIBorder,
+  CapUIFontSize,
   CapUIIcon,
   CapUIIconSize,
   CapUISpotIcon,
@@ -315,7 +316,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                             id: 'published-vote-date',
                           })}
                         >
-                          <Text fontSize={2} color="gray.500">
+                          <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                             {intl.formatMessage({
                               id: 'global.optional',
                             })}
@@ -340,10 +341,10 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
               />
             </FormProvider>
             <Flex direction="column" bg="blue.100" border="normal" borderColor="blue.200" p={4} borderRadius="normal">
-              <Text color="aqua.900" fontWeight="semibold" fontSize={1} lineHeight="sm">
+              <Text color="aqua.900" fontWeight="semibold" fontSize={CapUIFontSize.Caption} lineHeight="sm">
                 {intl.formatMessage({ id: 'you-want-to-secure-vote-step' })}
               </Text>
-              <Text color="aqua.900" fontSize={1} lineHeight="sm" mb={2}>
+              <Text color="aqua.900" fontSize={CapUIFontSize.Caption} lineHeight="sm" mb={2}>
                 {intl.formatMessage({ id: 'enjoy-following-services' })}
               </Text>
 
@@ -351,10 +352,10 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                 <Flex direction="row" spacing={1} align="center" width="50%">
                   <SpotIcon name={CapUISpotIcon.SMS} size={CapUISpotIconSize.Sm} />
                   <Flex direction="column" spacing={1}>
-                    <Text color="gray.900" fontSize={1} fontWeight="semibold" lineHeight="sm">
+                    <Text color="gray.900" fontSize={CapUIFontSize.Caption} fontWeight="semibold" lineHeight="sm">
                       {intl.formatMessage({ id: 'verification-with-sms' })}
                     </Text>
-                    <Text color="gray.900" fontSize={1} lineHeight="sm">
+                    <Text color="gray.900" fontSize={CapUIFontSize.Caption} lineHeight="sm">
                       {intl.formatMessage({
                         id: 'send-verification-code-sms',
                       })}
@@ -365,10 +366,10 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
                 <Flex direction="row" spacing={1} align="center" width="50%" mb={4}>
                   <SpotIcon name={CapUISpotIcon.EMAIL_SEND} size={CapUISpotIconSize.Sm} />
                   <Flex direction="column" spacing={1}>
-                    <Text color="gray.900" fontSize={1} fontWeight="semibold" lineHeight="sm">
+                    <Text color="gray.900" fontSize={CapUIFontSize.Caption} fontWeight="semibold" lineHeight="sm">
                       {intl.formatMessage({ id: 'identification_code' })}
                     </Text>
-                    <Text color="gray.900" fontSize={1} lineHeight="sm">
+                    <Text color="gray.900" fontSize={CapUIFontSize.Caption} lineHeight="sm">
                       {intl.formatMessage({
                         id: 'send-nominative-identification-code',
                       })}

@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Text, Avatar, Flex } from '@cap-collectif/ui'
+import { Box, Text, Avatar, Flex, CapUIFontSize } from '@cap-collectif/ui'
 import styled from 'styled-components'
 
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
@@ -48,7 +48,7 @@ const ProposalSuggestionCard = ({ proposal }: Props) => {
         height="180px"
       >
         <Box mb={2}>
-          <Text fontWeight={600} fontSize={3} mb={2}>
+          <Text fontWeight={600} fontSize={CapUIFontSize.BodyRegular} mb={2}>
             {proposal.title}
           </Text>
         </Box>
@@ -59,7 +59,7 @@ const ProposalSuggestionCard = ({ proposal }: Props) => {
           <Avatar name={authorInitial} mr={2}>
             {authorInitial}
           </Avatar>
-          <Text fontSize={3}>{proposal.author.username}</Text>
+          <Text fontSize={CapUIFontSize.BodyRegular}>{proposal.author.username}</Text>
         </Flex>
       </Flex>
     </Link>

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUILineHeight, Flex, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
 import { FieldInput } from '@cap-collectif/form'
@@ -19,7 +19,7 @@ const QuestionnaireStepWithoutAccountRequirements: React.FC = () => {
           </Text>
           <FieldInput id="collectParticipantsEmail" type="switch" name="collectParticipantsEmail" control={control} />
         </Flex>
-        <Text mt={1} fontSize={2} lineHeight="16px" color="gray.700">
+        <Text mt={1} fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S} color="gray.700">
           {intl.formatMessage({ id: 'collect-particpants-email-help' })}
         </Text>
       </Flex>

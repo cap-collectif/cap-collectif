@@ -11,6 +11,7 @@ import {
   CapUIIconSize,
   CapUILineHeight,
   CapUIFontWeight,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import DefaultProjectImage from '~/components/Project/Preview/DefaultProjectImage'
@@ -103,8 +104,8 @@ const EventPageProjectList = ({ eventRef }: Props) => {
   return (
     <Box mt={8}>
       <Heading
-        fontSize={4}
-        lineHeight={CapUILineHeight.Base}
+        fontSize={CapUIFontSize.Headline}
+        lineHeight={CapUILineHeight.M}
         fontWeight={CapUIFontWeight.Normal}
         color="neutral-gray.900"
         mb={6}

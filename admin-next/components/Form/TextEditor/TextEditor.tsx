@@ -3,6 +3,7 @@ import { useIntl } from 'react-intl'
 import {
   Button,
   ButtonGroup,
+  CapUIFontSize,
   CapUIModalSize,
   Flex,
   FlexProps,
@@ -65,7 +66,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
         <>
           <FormLabel htmlFor={name} label={label}>
             {required ? null : (
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             )}
@@ -87,7 +88,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
           <Flex justify="space-between" mb={1}>
             <FormLabel htmlFor={name} label={label}>
               {required ? null : (
-                <Text fontSize={2} color="gray.500">
+                <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                   {intl.formatMessage({ id: 'global.optional' })}
                 </Text>
               )}

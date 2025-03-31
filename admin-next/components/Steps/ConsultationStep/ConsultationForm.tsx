@@ -1,5 +1,5 @@
 import React from 'react'
-import { Box, Button, Flex, FormLabel, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
+import { Box, Button, CapUIFontSize, Flex, FormLabel, Text, UPLOADER_SIZE } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { UPLOAD_PATH } from '@utils/config'
 import { useIntl } from 'react-intl'
@@ -73,7 +73,7 @@ const ConsultationForm: React.FC<Props> = ({
                     id: 'project_download.label.media',
                   })}
                 >
-                  <Text fontSize={2} color="gray.500">
+                  <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
@@ -119,7 +119,7 @@ const ConsultationForm: React.FC<Props> = ({
               bg="gray.100"
               width="100%"
               color="red.500"
-              fontSize={3}
+              fontSize={CapUIFontSize.BodyRegular}
               fontWeight={600}
               onClick={() => {
                 removeConsultation(consultationIndex)

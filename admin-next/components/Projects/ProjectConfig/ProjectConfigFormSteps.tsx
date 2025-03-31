@@ -4,7 +4,9 @@ import {
   Button,
   ButtonGroup,
   ButtonQuickAction,
+  CapUIFontSize,
   CapUIIcon,
+  CapUILineHeight,
   DragnDrop,
   Flex,
   Heading,
@@ -90,12 +92,22 @@ const ProjectConfigFormSteps: React.FC = () => {
                         sx={{ borderWidth: '1px' }}
                       >
                         <Flex direction="column">
-                          <Text color="gray.500" fontSize={1} fontWeight={400} lineHeight="16px">
+                          <Text
+                            color="gray.500"
+                            fontSize={CapUIFontSize.Caption}
+                            fontWeight={400}
+                            lineHeight={CapUILineHeight.S}
+                          >
                             {intl.formatMessage({
                               id: getWordingStep(stepsValues[index].__typename),
                             })}
                           </Text>
-                          <Text color="blue.900" fontSize={2} fontWeight={600} lineHeight="16px">
+                          <Text
+                            color="blue.900"
+                            fontSize={CapUIFontSize.BodySmall}
+                            fontWeight={600}
+                            lineHeight={CapUILineHeight.S}
+                          >
                             {stepsValues[index].label}
                           </Text>
                         </Flex>

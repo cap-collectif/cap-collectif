@@ -1,7 +1,7 @@
 import React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { ProgressBar } from 'react-bootstrap'
-import { Flex, Text, Tooltip } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUILineHeight, Flex, Text, Tooltip } from '@cap-collectif/ui'
 
 type Props = {
   style?: Record<string, any>
@@ -107,7 +107,7 @@ class VotesBar extends React.Component<Props> {
       <Tooltip
         placement="top"
         label={
-          <Text textAlign="center" lineHeight="sm" fontSize={1} marginBottom={0}>
+          <Text textAlign="center" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} marginBottom={0}>
             {helpText}
           </Text>
         }

@@ -16,11 +16,12 @@ Array [
     placement="top"
   >
     <div
-      className="sc-bcXGCL cokLsN sc-fXqqsB gHWJqw cap-tag"
+      className="sc-bcXGCL cokLsN sc-fXqqsB gKbWOe cap-tag"
       id="restricted-access"
       title=""
     >
       <svg
+        aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 10 12"
@@ -53,11 +54,12 @@ Array [
     placement="top"
   >
     <div
-      className="sc-bcXGCL cokLsN sc-fXqqsB gHWJqw cap-tag"
+      className="sc-bcXGCL cokLsN sc-fXqqsB gKbWOe cap-tag"
       id="restricted-access"
       title=""
     >
       <svg
+        aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 10 12"

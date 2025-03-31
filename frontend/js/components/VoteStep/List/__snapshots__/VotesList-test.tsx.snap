@@ -41,6 +41,7 @@ Array [
                     className="sc-bcXGCL eJjsxH"
                   >
                     <svg
+                      aria-hidden="true"
                       className="sc-bcXGCL sc-eJDTud jQjKpa knzWyK cap-icon"
                       fill="none"
                       viewBox="0 0 13 14"
@@ -102,6 +103,7 @@ Array [
                         className="sc-bcXGCL eFHuff"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -139,6 +141,7 @@ Array [
                         className="sc-bcXGCL eFHuff"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                           fill="none"
                           viewBox="0 0 24 24"
@@ -192,6 +195,7 @@ Array [
                     className="sc-bcXGCL eFHuff"
                   >
                     <svg
+                      aria-hidden="true"
                       className="sc-bcXGCL sc-eJDTud fztzb cpMilg cap-icon"
                       fill="none"
                       viewBox="0 0 14 13"
@@ -214,6 +218,7 @@ Array [
                     className="sc-bcXGCL eFHuff"
                   >
                     <svg
+                      aria-hidden="true"
                       className="sc-bcXGCL sc-eJDTud bIUvGA cpMilg cap-icon"
                       fill="none"
                       viewBox="0 0 32 29"
@@ -244,7 +249,7 @@ Array [
                   className="sc-bcXGCL drdikR"
                 >
                   <div
-                    className="sc-bcXGCL fnmjmD sc-fXqqsB gHWJqw cap-tag"
+                    className="sc-bcXGCL fnmjmD sc-fXqqsB gKbWOe cap-tag"
                     title="<mock-value-for-field-\\"name\\">"
                   >
                     &lt;mock-value-for-field-"name"&gt;

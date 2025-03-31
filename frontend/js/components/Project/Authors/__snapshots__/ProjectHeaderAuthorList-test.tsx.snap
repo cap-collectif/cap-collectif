@@ -21,7 +21,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
         >
           number-of-authors
         </h2>
@@ -117,7 +117,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -212,7 +212,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
         >
           number-of-authors
         </h2>
@@ -308,7 +308,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -403,7 +403,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
         >
           number-of-authors
         </h2>
@@ -499,7 +499,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -594,7 +594,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL jyqEHl cap-heading"
+          className="sc-bcXGCL czxWiY cap-heading"
         >
           number-of-authors
         </h2>
@@ -690,7 +690,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB hzCEQq ktRJXy cap-button"
+        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >

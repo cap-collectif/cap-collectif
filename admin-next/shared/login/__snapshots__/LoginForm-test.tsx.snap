@@ -35,7 +35,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
       name="username"
       onBlur={[Function]}
@@ -75,7 +75,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
     <input
       aria-required={true}
       autoComplete="off"
-      className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
       name="password"
       onBlur={[Function]}

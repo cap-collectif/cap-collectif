@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, BoxProps, Button, Flex, Grid, Spinner, Text } from '@cap-collectif/ui'
+import { Box, BoxProps, Button, CapUIFontSize, Flex, Grid, Spinner, Text } from '@cap-collectif/ui'
 import useUrlState from '@hooks/useUrlState'
 import { ProjectListSection_query$key } from '@relay/ProjectListSection_query.graphql'
 import { ProjectListSectionList_query$key } from '@relay/ProjectListSectionList_query.graphql'
@@ -110,7 +110,7 @@ export const ProjectListSectionList: FC<{
           ) : null}
         </>
       ) : (
-        <Text textAlign="center" my="8rem" fontSize={4}>
+        <Text textAlign="center" my="8rem" fontSize={CapUIFontSize.Headline}>
           {intl.formatMessage({ id: 'project.none' })}
         </Text>
       )}

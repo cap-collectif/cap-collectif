@@ -5,7 +5,7 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import uuid from '@shared/utils/uuid'
 import getBaseUrl from '../utils/getBaseUrl'
 import { Controller, useFormContext } from 'react-hook-form'
-import { Box } from '@cap-collectif/ui'
+import { Box, CapUIFontSize } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 
 const canUseDOM = !!(typeof window !== 'undefined' && window.document && window.document.createElement)
@@ -91,7 +91,7 @@ export const Captcha = React.forwardRef<any, { name: string; required?: boolean 
           <>
             <CaptchaSwitch onChange={onChange} ref={ref} />
             {fieldState.invalid ? (
-              <Box color="red.500" lineHeight="normal" fontSize={3}>
+              <Box color="red.500" lineHeight="normal" fontSize={CapUIFontSize.BodyRegular}>
                 {intl.formatMessage({ id: 'registration.constraints.captcha.invalid' })}
               </Box>
             ) : null}

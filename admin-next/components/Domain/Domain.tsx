@@ -191,7 +191,7 @@ const Domain: FC = () => {
                   border="1px solid"
                   borderColor="gray.300"
                   borderRadius="normal"
-                  lineHeight={CapUILineHeight.Base}
+                  lineHeight={CapUILineHeight.M}
                   px={3}
                   py={1}
                 >
@@ -214,7 +214,7 @@ const Domain: FC = () => {
                   border="normal"
                   borderColor="gray.300"
                   borderRadius="normal"
-                  lineHeight={CapUILineHeight.Base}
+                  lineHeight={CapUILineHeight.M}
                   px={3}
                   py={1}
                 >

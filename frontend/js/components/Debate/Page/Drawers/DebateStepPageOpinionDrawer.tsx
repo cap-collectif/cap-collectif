@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import { Flex, Text, Tag, Heading, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui'
+import { Flex, Text, Tag, Heading, Icon, CapUIIcon, CapUIIconSize, CapUIFontSize } from '@cap-collectif/ui'
 import DetailDrawer from '~ds/DetailDrawer/DetailDrawer'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { DebateStepPageOpinionDrawer_opinion$key } from '~relay/DebateStepPageOpinionDrawer_opinion.graphql'
@@ -48,7 +48,7 @@ const DebateStepPageOpinionDrawer = ({ opinion: opinionFragment, ...drawerProps 
         />
         <Flex direction="column" mt={6} align="center">
           <UserAvatar user={opinion.author} size="xl" border="3px solid" borderColor="yellow.500" />
-          <Text mt={2} fontSize={4} fontWeight="600">
+          <Text mt={2} fontSize={CapUIFontSize.Headline} fontWeight="600">
             {opinion.author.username}
           </Text>
           <Tag mt={1} variantColor={opinion.type === 'FOR' ? 'green' : 'red'}>
@@ -56,7 +56,7 @@ const DebateStepPageOpinionDrawer = ({ opinion: opinionFragment, ...drawerProps 
               <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
             </Heading>
           </Tag>
-          <Text mt={2} color="neutral-gray.700" fontSize={3}>
+          <Text mt={2} color="neutral-gray.700" fontSize={CapUIFontSize.BodyRegular}>
             {opinion.author.biography}
           </Text>
         </Flex>

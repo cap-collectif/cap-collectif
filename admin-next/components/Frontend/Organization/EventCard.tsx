@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import moment from 'moment'
 import type { EventCard_event$key } from '@relay/EventCard_event.graphql'
-import { Box, BoxProps, CapUIIcon, Card, Flex, Heading, Text } from '@cap-collectif/ui'
+import { Box, BoxProps, CapUIFontSize, CapUIIcon, Card, Flex, Heading, Text } from '@cap-collectif/ui'
 import { formatInfo } from '@shared/projectCard/ProjectCard.utils'
 import { pxToRem } from '@shared/utils/pxToRem'
 
@@ -62,12 +62,12 @@ export const EventCard: React.FC<BoxProps & { event: EventCard_event$key }> = ({
           flexShrink={0}
         >
           <Flex justify="center" bg="red.600" py={1}>
-            <Text fontSize={2} as="div" color="white" fontWeight={700} uppercase>
+            <Text fontSize={CapUIFontSize.BodySmall} as="div" color="white" fontWeight={700} uppercase>
               {moment(event.timeRange?.startAt).format('MMM')}
             </Text>
           </Flex>
           <Flex justify="center" alignItems="center" py={2}>
-            <Text fontSize={5} as="div" color="gray.900" fontWeight={600}>
+            <Text fontSize={CapUIFontSize.DisplaySmall} as="div" color="gray.900" fontWeight={600}>
               {moment(event.timeRange?.startAt).format('DD')}
             </Text>
           </Flex>

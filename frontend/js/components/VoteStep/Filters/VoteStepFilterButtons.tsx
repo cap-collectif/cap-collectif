@@ -1,5 +1,5 @@
 import React from 'react'
-import { Flex, Box } from '@cap-collectif/ui'
+import { Flex, Box, CapUIFontSize } from '@cap-collectif/ui'
 import { useVoteStepContext } from '~/components/VoteStep/Context/VoteStepContext'
 import type { FilterOptions } from '~/components/VoteStep/Filters/useVoteStepFilters'
 import '~/components/VoteStep/Filters/useVoteStepFilters'
@@ -16,9 +16,9 @@ const Button = ({ isChecked, children, value, onClick }) => {
       mb={2}
       px={4}
       py={2}
-      fontSize={2}
-      bg={isChecked ? 'primary.500' : 'primary.200'}
-      color={isChecked ? 'primary.200' : 'primary.500'}
+      fontSize={CapUIFontSize.BodySmall}
+      bg={isChecked ? 'primary.base' : 'primary.lighter'}
+      color={isChecked ? 'primary.lighter' : 'primary.base'}
       borderRadius="100px"
       border="none"
       textAlign="left"

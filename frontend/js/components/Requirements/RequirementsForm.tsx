@@ -13,6 +13,7 @@ import {
   Icon,
   CapUIIcon,
   CapInputSize,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import { COUNTRY_CODES, FieldInput, FormControl } from '@cap-collectif/form'
 import LoginSocialButton from '@shared/login/LoginSocialButton'
@@ -101,7 +102,7 @@ const RequirementsForm = ({ initialValues, isPhoneVerificationOnly, control, for
 
   return (
     <Flex direction="column" spacing={6} as="form">
-      <Heading as="h4" fontSize={3}>
+      <Heading as="h4" fontSize={CapUIFontSize.BodyRegular}>
         {intl.formatMessage({
           id: 'vote.modal.body.form.title',
         })}

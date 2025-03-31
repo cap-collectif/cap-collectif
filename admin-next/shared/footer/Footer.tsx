@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { Box, CapUIIcon, Flex, Heading, Icon, useTheme } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIIcon, Flex, Heading, Icon, useTheme } from '@cap-collectif/ui'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
 import { pxToRem } from '@shared/utils/pxToRem'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
@@ -59,7 +59,7 @@ export const Footer: FC<{
       textAlign="center"
       role="contentinfo"
       borderTop={`1px solid ${colors['neutral-gray'][150]}`}
-      fontSize={pxToRem(16)}
+      fontSize={CapUIFontSize.BodyLarge}
     >
       <Box
         m={0}

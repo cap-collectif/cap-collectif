@@ -1,13 +1,12 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Avatar, Box, BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
+import { Avatar, Box, BoxProps, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import useWindowWidth from '@shared/hooks/useWindowWidth'
 import { Menu, MenuItem as ReactMenuItem } from '@szhsin/react-menu'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import type { NavBarMenuQuery as NavBarMenuQueryType, NavBarMenuQuery$data } from '@relay/NavBarMenuQuery.graphql'
 import { NavBarTheme, getTheme } from '../NavBar.utils'
-import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
   currentLanguage: string
@@ -38,14 +37,14 @@ const ActionItem = ({
   as === 'a' ? (
     <Flex as={as} href={href} alignItems="center" flexDirection="column" target={target} rel={rel}>
       {icon ? <Icon name={icon} size={CapUIIconSize.Md} color={color} /> : avatar}
-      <Text as="span" color={color} fontSize={pxToRem(16)}>
+      <Text as="span" color={color} fontSize={CapUIFontSize.BodyLarge}>
         {children}
       </Text>
     </Flex>
   ) : (
     <Flex as="button" onClick={onClick} alignItems="center" flexDirection="column">
       {icon ? <Icon name={icon} size={CapUIIconSize.Md} color={color} /> : avatar}
-      <Text as="span" color={color} fontSize={pxToRem(16)}>
+      <Text as="span" color={color} fontSize={CapUIFontSize.BodyLarge}>
         {children}
       </Text>
     </Flex>
@@ -107,7 +106,7 @@ const MenuItem = ({
     }}
     px={3}
     py={2}
-    fontSize={pxToRem(16)}
+    fontSize={CapUIFontSize.BodyLarge}
     lineHeight="base"
   >
     {children}
@@ -202,7 +201,7 @@ export const NavBarMenuContent = ({
         menuButton={({ open }) => (
           <Flex
             p={4}
-            fontSize={pxToRem(16)}
+            fontSize={CapUIFontSize.BodyLarge}
             as="button"
             color={theme.textColor}
             alignItems="center"

@@ -38,7 +38,8 @@ export const FRAGMENT = graphql`
   fragment MediaList_query on Query
   @argumentDefinitions(term: { type: "String" }, count: { type: "Int" }, cursor: { type: "String" })
   @refetchable(queryName: "MediaListQuery") {
-    medias(after: $cursor, first: $count, term: $term, showProfilePictures: false) @connection(key: "MediaList_medias", filters: ["term"]) {
+    medias(after: $cursor, first: $count, term: $term, showProfilePictures: false)
+      @connection(key: "MediaList_medias", filters: ["term"]) {
       __id
       totalCount
       edges {
@@ -164,7 +165,7 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                             alignItems="center"
                             justifyContent="center"
                             as="button"
-                            bg="primary.200"
+                            bg="primary.lighter"
                             width={8}
                             height={8}
                             borderRadius="normal"
@@ -174,7 +175,7 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                             opacity={0}
                             _hover={{ opacity: 1 }}
                           >
-                            <Icon name={CapUIIcon.Eye} size={CapUIIconSize.Md} color="primary.500" />
+                            <Icon name={CapUIIcon.Eye} size={CapUIIconSize.Md} color="primary.base" />
                           </Flex>
                         </Box>
                       ) : (

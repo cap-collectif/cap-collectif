@@ -21,6 +21,7 @@ import {
   Icon,
   CapUIIconSize,
   Link,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import { GeographicalAreaFormQuery } from '@relay/GeographicalAreaFormQuery.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
@@ -281,7 +282,7 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
               </FormProvider>
               <FormControl name="cover" control={control}>
                 <FormLabel label={intl.formatMessage({ id: 'cover-image' })}>
-                  <Text fontSize={2} color="gray.500">
+                  <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>

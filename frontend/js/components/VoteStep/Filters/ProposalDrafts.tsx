@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
-import { Box, CapUIRadius, Heading, ListCard } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIRadius, Heading, ListCard } from '@cap-collectif/ui'
 import type { ProposalDraftsQuery as ProposalDraftsQueryType } from '~relay/ProposalDraftsQuery.graphql'
 import { useSelector } from 'react-redux'
 import type { GlobalState } from '~/types'
@@ -68,7 +68,7 @@ const ProposalDrafts = ({ stepId }: Props) => {
     <>
       {isOpen && <ProposalEditModal proposal={selectedProposal} show={isOpen} onClose={onClose} />}
       <Box width="100%" bg="white" p={6} borderRadius={CapUIRadius.Card} mt={4}>
-        <Heading as="h4" fontSize={4} fontWeight={600} mb={4}>
+        <Heading as="h4" fontSize={CapUIFontSize.Headline} fontWeight={600} mb={4}>
           {intl.formatMessage({ id: 'global.draft.your_draft' })}
         </Heading>
         <ListCard>
@@ -90,7 +90,7 @@ const ProposalDrafts = ({ stepId }: Props) => {
                   onOpen()
                 }}
               >
-                <ListCard.Item.Label fontSize={2}>{translateContent(node.title)}</ListCard.Item.Label>
+                <ListCard.Item.Label fontSize={CapUIFontSize.BodySmall}>{translateContent(node.title)}</ListCard.Item.Label>
               </ListCard.Item>
             )
           })}

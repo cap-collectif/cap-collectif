@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
-import { Box, Flex, Icon, CapUIIconSize, Proposal, CapUIIcon, BoxProps } from '@cap-collectif/ui'
+import { Box, Flex, Icon, CapUIIconSize, Proposal, CapUIIcon, BoxProps, CapUIFontSize } from '@cap-collectif/ui'
 import type { ProposalPreviewCardFooter_proposal$key } from '~relay/ProposalPreviewCardFooter_proposal.graphql'
 import type { ProposalPreviewCardFooter_viewer$key } from '~relay/ProposalPreviewCardFooter_viewer.graphql'
 import type { ProposalPreviewCardFooter_step$key } from '~relay/ProposalPreviewCardFooter_step.graphql'
@@ -95,7 +95,7 @@ const TextIcon = ({
 } & BoxProps) => (
   <Flex alignItems="center">
     <Icon name={icon} color={color} size={CapUIIconSize.Lg} />
-    <Box color="neutral-gray.900" fontSize={3} fontWeight={600} {...rest}>
+    <Box color="neutral-gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={600} {...rest}>
       {children}
     </Box>
   </Flex>
@@ -181,11 +181,11 @@ export const ProposalPreviewCardFooter = ({
               {votesRanking ? (
                 <TextIcon icon={CapUIIcon.Trophy} verticalAlign="top" display="flex">
                   <span>{votesTotalPointsCount}</span>
-                  <Box as="span" fontSize={1}>
+                  <Box as="span" fontSize={CapUIFontSize.Caption}>
                     pts
                   </Box>
                   {hasVoted ? (
-                    <Box as="span" color="primary.500" ml={1}>
+                    <Box as="span" color="primary.base" ml={1}>
                       {`+${userPointsNumber}`}
                     </Box>
                   ) : null}

@@ -14,6 +14,7 @@ import {
   CapUIFontWeight,
   CapUIIcon,
   Text,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import type { ProposalPreviewCard_proposal$key } from '~relay/ProposalPreviewCard_proposal.graphql'
 import type { ProposalPreviewCard_viewer$key } from '~relay/ProposalPreviewCard_viewer.graphql'
@@ -202,7 +203,7 @@ export const ProposalPreviewCard = ({
               <>
                 {district ? <Proposal.Content.Header.Author author={district.name} icon={CapUIIcon.PinO} /> : null}
                 {theme ? (
-                  <Text color="neutral-gray.800" fontSize={2}>
+                  <Text color="neutral-gray.800" fontSize={CapUIFontSize.BodySmall}>
                     {theme.title}
                   </Text>
                 ) : null}

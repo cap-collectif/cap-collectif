@@ -315,7 +315,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               }
               icon="ORGANISATION"
               withLabel={isOpen}
-              fontSize={3}
               p={3}
               designSystem={designSystem}
               width="100%"
@@ -328,7 +327,6 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
               href="/admin-next/dashboard"
               icon="PIE_CHART"
               withLabel={isOpen}
-              fontSize={3}
               designSystem={designSystem}
               p={3}
               width="100%"

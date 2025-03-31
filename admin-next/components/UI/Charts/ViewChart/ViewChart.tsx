@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Flex, Box, Text, FlexProps, CapUIFontWeight, Link } from '@cap-collectif/ui'
+import { Flex, Box, Text, FlexProps, CapUIFontWeight, Link, CapUIFontSize } from '@cap-collectif/ui'
 import { formatBigNumber } from '@utils/format-number'
 
 export interface ViewChartProps extends FlexProps {
@@ -18,7 +18,7 @@ const ViewChart = ({ total, count, level, label, url, ...props }: ViewChartProps
       <Link color="gray.900" href={url} target="_blank">
         {label}
       </Link>
-      <Text color="blue.900" fontSize={2} fontWeight={CapUIFontWeight.Semibold}>
+      <Text color="blue.900" fontSize={CapUIFontSize.BodySmall} fontWeight={CapUIFontWeight.Semibold}>
         {formatBigNumber(count)}
       </Text>
     </Flex>

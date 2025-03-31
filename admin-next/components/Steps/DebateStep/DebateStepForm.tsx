@@ -12,6 +12,7 @@ import {
   Switch,
   Input,
   toast,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { FormProvider, useFieldArray, useForm } from 'react-hook-form'
@@ -248,7 +249,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   return (
     <Box bg="white" width="70%" p={6} borderRadius={2} flex="none">
-      <Text fontWeight={600} color="blue.800" fontSize={4}>
+      <Text fontWeight={600} color="blue.800" fontSize={CapUIFontSize.Headline}>
         {intl.formatMessage({ id: 'customize-your-debate-step' })}
       </Text>
       <FormProvider {...formMethods}>
@@ -319,7 +320,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               <Tabs.Panel>
                 {debate && <FaceToFace debate={debate} />}
                 <Box mt={6} fontWeight={600}>
-                  <Text fontSize={2} mb={2}>
+                  <Text fontSize={CapUIFontSize.BodySmall} mb={2}>
                     {intl.formatMessage({ id: 'related.articles' })}
                   </Text>
                   {articles.map((article, index) => {

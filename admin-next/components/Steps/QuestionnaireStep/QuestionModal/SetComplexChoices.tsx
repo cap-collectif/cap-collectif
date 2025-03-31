@@ -4,6 +4,7 @@ import {
   Box,
   Button,
   ButtonQuickAction,
+  CapUIFontSize,
   CapUIIcon,
   Card,
   Flex,
@@ -80,7 +81,7 @@ const SetComplexChoices: React.FC<{ defaultLocale?: string }> = ({ defaultLocale
               </Flex>
               <FormControl name={`${formFieldName}.image`} control={control} width="auto">
                 <FormLabel htmlFor={`${formFieldName}.image`} label={intl.formatMessage({ id: 'illustration' })}>
-                  <Text fontSize={2} color="gray.500">
+                  <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                     {intl.formatMessage({ id: 'global.optional' })}
                   </Text>
                 </FormLabel>
@@ -112,7 +113,7 @@ const SetComplexChoices: React.FC<{ defaultLocale?: string }> = ({ defaultLocale
       </Box>
       {type !== 'ranking' ? (
         <Flex justify="space-between" alignItems="flex-start" bg="white" p={4} mb={2} borderRadius="normal">
-          <Heading as="h5" color="blue.900" fontWeight={600} fontSize={3}>
+          <Heading as="h5" color="blue.900" fontWeight={600} fontSize={CapUIFontSize.BodyRegular}>
             {intl.formatMessage({ id: 'add-other-choice' })}
           </Heading>
           <Switch

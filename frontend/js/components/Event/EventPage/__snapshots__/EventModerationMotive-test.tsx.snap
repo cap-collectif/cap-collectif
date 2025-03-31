@@ -11,7 +11,7 @@ Array [
     admin.action.recent_contributions.unpublish.input_label
   </span>,
   <div
-    className="sc-bcXGCL bIZQEN sc-fcCDYY fRnpgI cap-info-message"
+    className="sc-bcXGCL kucMiM sc-fcCDYY cap-info-message"
   />,
 ]
 `;

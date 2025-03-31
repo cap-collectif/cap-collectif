@@ -6,7 +6,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -21,7 +21,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -31,7 +31,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     -
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -41,7 +41,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     Valérie Masson Delmotte
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -51,7 +51,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -61,7 +61,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+    className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -69,7 +69,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
     }
   >
     <div
-      className="sc-bcXGCL MiskG cap-buttonGroup"
+      className="sc-bcXGCL egcRuI cap-buttonGroup"
     >
       <button
         aria-describedby="id-g"
@@ -89,6 +89,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
         tabIndex={0}
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 10 12"
@@ -133,7 +134,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -148,7 +149,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -158,7 +159,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     -
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -168,7 +169,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -178,7 +179,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -188,7 +189,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     25/10/2022
   </td>,
   <td
-    className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+    className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -196,7 +197,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL MiskG cap-buttonGroup"
+      className="sc-bcXGCL egcRuI cap-buttonGroup"
     >
       <button
         aria-describedby="id-g"
@@ -216,6 +217,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
         tabIndex={0}
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 10 12"
@@ -271,6 +273,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
         type="button"
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
           fill="none"
           viewBox="0 0 12 12"

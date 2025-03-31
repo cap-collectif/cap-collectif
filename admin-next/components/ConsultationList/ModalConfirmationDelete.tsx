@@ -12,6 +12,7 @@ import {
   Text,
   toast,
   InfoMessage,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import type { ModalConfirmationDelete_consultation$key } from '@relay/ModalConfirmationDelete_consultation.graphql'
 import DeleteConsultationMutation from 'mutations/DeleteConsultationMutation'
@@ -85,7 +86,7 @@ const ModalConfirmationDelete: React.FC<Props> = ({ consultation: consultationFr
             {step && (
               <InfoMessage variant="warning" mb={4}>
                 <InfoMessage.Content>
-                  <Text fontSize={2}>
+                  <Text fontSize={CapUIFontSize.BodySmall}>
                     {intl.formatMessage(
                       {
                         id: 'delete-consultation-linked-to-project-message',

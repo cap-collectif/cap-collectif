@@ -3,7 +3,7 @@ import { useFragment, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import css from '@styled-system/css'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { Box, Button, Heading, Text, Tag, Card, Flex } from '@cap-collectif/ui'
+import { Box, Button, Heading, Text, Tag, Card, Flex, CapUIFontSize } from '@cap-collectif/ui'
 import type { DebateOpinion_opinion$key } from '~relay/DebateOpinion_opinion.graphql'
 import { LineHeight } from '~ui/Primitives/constants'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
@@ -67,7 +67,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
           },
         }}
       >
-        <Text as="span" fontSize={1} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
+        <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
           <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
         </Text>
       </Tag>
@@ -95,10 +95,10 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
             user={opinion.author}
           />
           <Flex direction="column">
-            <Text fontSize={3} fontWeight="600">
+            <Text fontSize={CapUIFontSize.BodyRegular} fontWeight="600">
               {opinion.author.username}
             </Text>
-            <Text color="neutral-gray.700" fontSize={3} lineHeight="19px">
+            <Text color="neutral-gray.700" fontSize={CapUIFontSize.BodyRegular} lineHeight="19px">
               {opinion.author.biography}
             </Text>
           </Flex>

@@ -22,6 +22,7 @@ Array [
         onClose={[MockFunction]}
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
@@ -44,7 +45,7 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL jLhUPI sc-ckEbfr gOeGmr cap-avatar"
+              className="sc-bcXGCL jLhUPI sc-ckEbfr hrpVbi cap-avatar"
               title="Agui le penseur"
             >
               <img
@@ -66,7 +67,7 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL hMHhKK sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL hMHhKK sc-fXqqsB gKbWOe cap-tag"
             title=""
           >
             <h5
@@ -135,6 +136,7 @@ Array [
         onClose={[MockFunction]}
       >
         <svg
+          aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
           onClick={[MockFunction]}
@@ -157,7 +159,7 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL jLhUPI sc-ckEbfr gOeGmr cap-avatar"
+              className="sc-bcXGCL jLhUPI sc-ckEbfr hrpVbi cap-avatar"
               title="Agui le penseur"
             >
               <img
@@ -179,7 +181,7 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL hMHhKK sc-fXqqsB gHWJqw cap-tag"
+            className="sc-bcXGCL hMHhKK sc-fXqqsB gKbWOe cap-tag"
             title=""
           >
             <h5

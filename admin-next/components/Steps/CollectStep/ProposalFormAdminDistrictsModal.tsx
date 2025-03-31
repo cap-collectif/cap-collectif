@@ -6,6 +6,7 @@ import {
   Button,
   ButtonQuickAction,
   CapUIBorder,
+  CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
@@ -219,7 +220,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
               <Flex direction="column">
                 <Flex direction="column" mt={3} backgroundColor="white" borderRadius={CapUIBorder.Card}>
                   <Flex direction="row" justifyContent="space-between" alignItems="center" p={4}>
-                    <Text color="blue.900" fontSize={2} fontWeight={CapUIFontWeight.Semibold}>
+                    <Text color="blue.900" fontSize={CapUIFontSize.BodySmall} fontWeight={CapUIFontWeight.Semibold}>
                       {intl.formatMessage({ id: 'border' })}
                     </Text>
                     <Switch
@@ -240,7 +241,12 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                   </Flex>
                   {(!!watch('border.color') || !!watch('border.size') || !!watch('border.opacity')) && (
                     <Flex direction="column" position="relative">
-                      <Text px={3} color="gray.700" fontSize={2} fontWeight={CapUIFontWeight.Semibold}>
+                      <Text
+                        px={3}
+                        color="gray.700"
+                        fontSize={CapUIFontSize.BodySmall}
+                        fontWeight={CapUIFontWeight.Semibold}
+                      >
                         {intl.formatMessage({ id: 'border.guideline' })}
                       </Text>
                       <Flex direction="row" gap={3} px={3} mt={2} pb={4}>
@@ -286,7 +292,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
 
                 <Flex direction="column" mt={3} backgroundColor="white" borderRadius={CapUIBorder.Card}>
                   <Flex direction="row" justifyContent="space-between" alignItems="center" p={4}>
-                    <Text color="blue.900" fontSize={2} fontWeight={CapUIFontWeight.Semibold}>
+                    <Text color="blue.900" fontSize={CapUIFontSize.BodySmall} fontWeight={CapUIFontWeight.Semibold}>
                       {intl.formatMessage({ id: 'background' })}
                     </Text>
 
@@ -306,7 +312,12 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
                   </Flex>
                   {!!watch('background.color') && (
                     <Flex direction="column" position="relative">
-                      <Text px={3} color="gray.700" fontSize={2} fontWeight={CapUIFontWeight.Semibold}>
+                      <Text
+                        px={3}
+                        color="gray.700"
+                        fontSize={CapUIFontSize.BodySmall}
+                        fontWeight={CapUIFontWeight.Semibold}
+                      >
                         {intl.formatMessage({
                           id: 'background.guideline.next',
                         })}

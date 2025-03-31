@@ -1,5 +1,6 @@
 import type { FC } from 'react'
 import {
+  CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
@@ -43,7 +44,7 @@ export const SideBarMenu: FC<SideBarMenuProps> & SubComponents = ({ id, children
           if (!fold) toggleFold()
           else setMenuOpen(isOpen ? null : id)
         }}
-        lineHeight={CapUILineHeight.Base}
+        lineHeight={CapUILineHeight.M}
         _hover={{
           '.cap-text, .cap-icon': { color: 'gray.100' },
           '.sideBar__menu--icon': { color: 'gray.300' },
@@ -58,9 +59,9 @@ export const SideBarMenu: FC<SideBarMenuProps> & SubComponents = ({ id, children
           />
           {fold && (
             <Text
-              fontSize={3}
+              fontSize={CapUIFontSize.BodyRegular}
               fontWeight={CapUIFontWeight.Semibold}
-              lineHeight={CapUILineHeight.Sm}
+              lineHeight={CapUILineHeight.S}
               color={isOpen ? 'blue.100' : 'gray.500'}
             >
               {title}

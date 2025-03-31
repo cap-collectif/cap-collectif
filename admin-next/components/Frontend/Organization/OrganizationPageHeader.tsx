@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import { Flex, Box, CapUIIcon, Heading, Text, Icon, CapUIIconSize } from '@cap-collectif/ui'
+import { Flex, Box, CapUIIcon, Heading, Text, Icon, CapUIIconSize, CapUIFontSize } from '@cap-collectif/ui'
 import Image from '@shared/ui/Image'
 import { OrganizationPageHeader_organization$key } from '@relay/OrganizationPageHeader_organization.graphql'
 import { pxToRem } from '@shared/utils/pxToRem'
@@ -54,10 +54,10 @@ export const OrganizationPageHeader: React.FC<{ organization: OrganizationPageHe
         direction={['column-reverse', 'row']}
       >
         <Flex direction="column" maxWidth={pxToRem(550)} py={[4, 0]}>
-          <Heading as="h1" mb={6} fontSize={pxToRem(32)} lineHeight={pxToRem(44)}>
+          <Heading as="h1" mb={6} fontSize={CapUIFontSize.DisplayMedium} lineHeight={pxToRem(44)}>
             {title}
           </Heading>
-          <Text as="div" fontSize={pxToRem(16)}>
+          <Text as="div" fontSize={CapUIFontSize.BodyLarge}>
             <WYSIWYGRender value={body} />
           </Text>
           {socialNetworks ? (

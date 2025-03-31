@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { useActor } from '@xstate/react'
 import type { RelayFragmentContainer } from 'react-relay'
 import { createFragmentContainer, graphql } from 'react-relay'
-import { Flex, Text, Box } from '@cap-collectif/ui'
+import { Flex, Text, Box, CapUIFontSize } from '@cap-collectif/ui'
 import type { DebateStepPageAbsoluteVoteAndShare_step } from '~relay/DebateStepPageAbsoluteVoteAndShare_step.graphql'
 import DebateStepPageVote from './DebateStepPageVote'
 import DebateStepPageVoteForm from './DebateStepPageVoteForm'
@@ -69,7 +69,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
       >
         {value.includes('none') && (
           <Flex direction={['column', 'row']} spacing={4} justify="center" align="center">
-            <Text textAlign={['center', 'left']} color="gray.900" fontSize={4}>
+            <Text textAlign={['center', 'left']} color="gray.900" fontSize={CapUIFontSize.Headline}>
               {step.title}
             </Text>
             <DebateStepPageVote width="unset" step={step} top={isMobile} />

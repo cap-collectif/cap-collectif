@@ -1,7 +1,7 @@
 import * as React from 'react'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useCookies } from 'next-client-cookies'
-import { Box, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import SiteLanguageChangeButton from '@shared/language/SiteLanguageChangeButton'
 import Fetcher from '@utils/fetch'
@@ -55,7 +55,7 @@ const ChangeLanguageNavBar: React.FC<{ locales: layoutQuery$data['locales'] }> =
               alignItems="center"
               p={6}
             >
-              <Text fontSize="1.15rem" color="white">
+              <Text fontSize={CapUIFontSize.BodyLarge} color="white">
                 {intl.formatMessage({ id: 'would-you-like-to-consult-the-site-in-your-own-language' })}
               </Text>
               <Flex spacing={2} pr={[0, 0, 6, 6]} mt={[4, 4, 0]}>

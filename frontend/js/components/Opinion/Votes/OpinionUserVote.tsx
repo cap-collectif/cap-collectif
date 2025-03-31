@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql, createFragmentContainer } from 'react-relay'
-import { Box, Text, Tooltip } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, Text, Tooltip } from '@cap-collectif/ui'
 import type { OpinionUserVote_vote } from '~relay/OpinionUserVote_vote.graphql'
 import { translateContent } from '@shared/utils/contentTranslator'
 import UserAvatar from '~/components/User/UserAvatar'
@@ -19,7 +19,7 @@ class OpinionUserVote extends React.Component<Props> {
         <Tooltip
           placement="top"
           label={
-            <Text fontSize={1} marginBottom={0}>
+            <Text fontSize={CapUIFontSize.Caption} marginBottom={0}>
               {translateContent(vote.author.displayName)}
             </Text>
           }

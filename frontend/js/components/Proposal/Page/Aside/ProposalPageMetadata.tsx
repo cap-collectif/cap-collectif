@@ -4,7 +4,7 @@ import * as React from 'react'
 import styled from 'styled-components'
 import { graphql, createFragmentContainer } from 'react-relay'
 import { FormattedDate, FormattedNumber, useIntl } from 'react-intl'
-import { Box, Text, Tooltip } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, Text, Tooltip } from '@cap-collectif/ui'
 import moment from 'moment'
 import colors from '~/utils/colors'
 import ProposalDetailLikers from '../../Detail/ProposalDetailLikers'
@@ -130,7 +130,7 @@ export const ProposalPageMetadata = ({
               ) : (
                 <Tooltip
                   label={
-                    <Text fontSize={1}>
+                    <Text fontSize={CapUIFontSize.Caption}>
                       {intl.formatMessage(
                         {
                           id: 'will-be-closed-at',

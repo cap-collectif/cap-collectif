@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
-import { Box, Link, Text } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, Link, Text } from '@cap-collectif/ui'
 import SocialIcon from '@shared/ui/LegacyIcons/SocialIcon'
 import getBaseUrl from '@shared/utils/getBaseUrl'
 
@@ -252,7 +252,7 @@ export const LoginSocialButton = ({
               )}
             </a>
           </FranceConnectButton>
-          <Box mt={2} fontSize={2}>
+          <Box mt={2} fontSize={CapUIFontSize.BodySmall}>
             <Link
               color={FC_COLOR}
               _hover={{ color: FC_COLOR }}

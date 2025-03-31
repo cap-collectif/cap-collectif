@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
-import { Flex, Box, Text, Avatar, Icon, CapUIIconSize, Tag } from '@cap-collectif/ui'
+import { Flex, Box, Text, Avatar, Icon, CapUIIconSize, Tag, CapUIFontSize } from '@cap-collectif/ui'
 import type { EventPageHeader_query$key, EventReviewStatus } from '~relay/EventPageHeader_query.graphql'
 import ProjectHeaderShareButtons from '~/components/Project/ProjectHeaderShareButtons'
 import { Authors } from '~/components/Ui/Project/ProjectHeader.Cover'
@@ -119,7 +119,7 @@ export const Title = ({ children }: { children: JSX.Element | JSX.Element[] | st
     className="eventHeader__title"
     width="100%"
     as="h3"
-    fontSize={[5, 6]}
+    fontSize={[CapUIFontSize.DisplaySmall, CapUIFontSize.DisplayMedium]}
     lineHeight="initial"
     fontWeight="semibold"
     color="neutral-gray.900"

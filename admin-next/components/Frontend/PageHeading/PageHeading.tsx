@@ -1,6 +1,6 @@
 'use client'
 
-import { Box, BoxProps, Heading, Text } from '@cap-collectif/ui'
+import { Box, BoxProps, CapUIFontSize, Heading, Text } from '@cap-collectif/ui'
 import { useAppContext } from '@components/AppProvider/App.context'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { pxToRem } from '@shared/utils/pxToRem'
@@ -26,7 +26,7 @@ export const PageHeading: FC<BoxProps & { title?: string; subtitle?: string; bod
                 </Heading>
               ) : null}
               {subtitle ? (
-                <Text as="div" fontSize="1.15rem" color={siteColors.pageSubTitleColor}>
+                <Text as="div" fontSize={CapUIFontSize.BodyLarge} color={siteColors.pageSubTitleColor}>
                   {subtitle}
                 </Text>
               ) : null}
@@ -36,7 +36,7 @@ export const PageHeading: FC<BoxProps & { title?: string; subtitle?: string; bod
         {body ? (
           <Box textAlign="center" py={[4, 4, 8]} backgroundColor={siteColors.sectionBackground}>
             <Box mx="auto" maxWidth={pxToRem(1280)} px={[4, 6]}>
-              <Text fontSize="1.15rem" color={siteColors.sectionTextColor} as="div">
+              <Text fontSize={CapUIFontSize.BodyLarge} color={siteColors.sectionTextColor} as="div">
                 <WYSIWYGRender value={body} />
               </Text>
             </Box>

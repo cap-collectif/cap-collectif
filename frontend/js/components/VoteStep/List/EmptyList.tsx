@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, Button, Flex, Text, useTheme } from '@cap-collectif/ui'
+import { Box, Button, CapUIFontSize, Flex, Text, useTheme } from '@cap-collectif/ui'
 import { useVoteStepContext } from '../Context/VoteStepContext'
 import { View, emptyStateWithListView, emptyStateWithMapView } from '../utils'
 
@@ -50,14 +50,14 @@ const EmptyList = ({
       zIndex={1}
     >
       <Box width={noData ? '100%' : ''}>
-        <Text as="div" mb={1} fontSize={4} fontWeight="700">
+        <Text as="div" mb={1} fontSize={CapUIFontSize.Headline} fontWeight="700">
           {intl.formatMessage({
             id: noData ? 'proposal.empty' : isVotesView ? 'you-did-not-vote' : 'no-result-on-search',
           })}
         </Text>
         {!noData ? (
           <>
-            <Text as="div" mb={5} fontSize={3}>
+            <Text as="div" mb={5} fontSize={CapUIFontSize.BodyRegular}>
               {intl.formatMessage({
                 id: isVotesView ? 'vote-is-a-way' : 'try-new-keywords',
               })}

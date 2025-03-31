@@ -9,7 +9,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP egpGUm"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ LXlfG egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -51,7 +51,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP egpGUm"
+    className="sc-dEVMhd Button__ButtonInner-dXfNcJ LXlfG egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -101,21 +101,21 @@ Array [
             className="sc-dEVMhd Flex___StyledAppBox-SiGEY bGRJMU"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk eJfkn"
+              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk YmlkP"
             >
               <p
-                className="sc-dEVMhd bmbsAp"
+                className="sc-dEVMhd cplCPg"
               >
                 notification-email
               </p>
               <h2
-                className="sc-dEVMhd ffKkYR"
+                className="sc-dEVMhd iTmdUA"
               >
                 add-sender-email-address
               </h2>
             </div>
             <button
-              className="sc-dEVMhd Button__ButtonInner-dXfNcJ dskxFv iWxcUO"
+              className="sc-dEVMhd Button__ButtonInner-dXfNcJ kDftUS iWxcUO"
               onClick={[Function]}
               type="button"
             >
@@ -296,14 +296,14 @@ Array [
               className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig crLbTm"
             >
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ kkeBUP jzOsGm"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ LXlfG jzOsGm"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ jPEAyX erDeRS"
+                className="sc-dEVMhd Button__ButtonInner-dXfNcJ gnQlZi erDeRS"
                 onClick={[Function]}
                 type="button"
               >

@@ -10,6 +10,7 @@ import {
   Box,
   Accordion,
   CapUIAccordionColor,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
@@ -62,17 +63,17 @@ const SectionAdditionalSettingsModal: React.FC<Props> = ({ sectionFormKey, onSuc
   return (
     <>
       <MultiStepModal.Header>
-        <Text uppercase color="gray.500" fontWeight={700} fontSize={1}>
+        <Text uppercase color="gray.500" fontWeight={700} fontSize={CapUIFontSize.Caption}>
           {intl.formatMessage({ id: 'project.types.consultation' })}
         </Text>
-        <Heading color="primary.blue.900" fontSize={6} fontWeight={600}>
+        <Heading color="primary.blue.900" fontSize={CapUIFontSize.DisplayMedium} fontWeight={600}>
           {intl.formatMessage({ id: 'additional-parameters' })}
         </Heading>
       </MultiStepModal.Header>
       <MultiStepModal.Body>
         <>
           <Box>
-            <Text fontWeight={400} color="gray.900" fontSize={2} mb={1}>
+            <Text fontWeight={400} color="gray.900" fontSize={CapUIFontSize.BodySmall} mb={1}>
               {intl.formatMessage({ id: 'global.options' })}
             </Text>
             <FormControl mb={1} name={`${sectionFormKey}.contribuable`} control={control}>

@@ -3,7 +3,7 @@ import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 import { reset, isSubmitting, submit, SubmissionError } from 'redux-form'
 import { useDispatch, connect } from 'react-redux'
-import { Flex, Text, Button, Modal, toast } from '@cap-collectif/ui'
+import { Flex, Text, Button, Modal, toast, CapUIFontSize } from '@cap-collectif/ui'
 import { graphql, useFragment } from 'react-relay'
 import { EDIT_MODAL_ANCHOR, formName } from '../Form/ProposalForm'
 import type { Dispatch, GlobalState } from '~/types'
@@ -176,12 +176,12 @@ const ProposalErrorModal = ({
     <>
       <Modal.Body>
         <Flex direction="column" alignItems="center" my={[0, '20%']}>
-          <Text textAlign="center" fontSize={33} mb={8}>
+          <Text textAlign="center" fontSize={CapUIFontSize.DisplayMedium} mb={8}>
             <span className="d-b emoji-container" role="img" aria-label="Downcast Face with Sweat">
               😓
             </span>
           </Text>
-          <Text textAlign="center" fontSize={[20, 33]} fontWeight={600} mb={2}>
+          <Text textAlign="center" fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]} fontWeight={600} mb={2}>
             {intl.formatMessage({
               id: 'error.title.damn',
             })}

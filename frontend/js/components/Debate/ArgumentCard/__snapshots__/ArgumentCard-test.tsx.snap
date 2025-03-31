@@ -36,7 +36,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
         >
           <Text
             as="span"
-            fontSize={1}
+            fontSize="Caption"
             fontWeight="700"
             lineHeight="sm"
             uppercase={true}
@@ -97,8 +97,8 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
         color="neutral-gray.900"
         fontSize={
           Array [
-            4,
-            3,
+            "Headline",
+            "BodyRegular",
           ]
         }
         ml={
@@ -179,7 +179,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
         >
           <Text
             as="span"
-            fontSize={1}
+            fontSize="Caption"
             fontWeight="700"
             lineHeight="sm"
             uppercase={true}
@@ -240,8 +240,8 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
         color="neutral-gray.900"
         fontSize={
           Array [
-            4,
-            3,
+            "Headline",
+            "BodyRegular",
           ]
         }
         ml={
@@ -322,7 +322,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
         >
           <Text
             as="span"
-            fontSize={1}
+            fontSize="Caption"
             fontWeight="700"
             lineHeight="sm"
             uppercase={true}
@@ -383,8 +383,8 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
         color="neutral-gray.900"
         fontSize={
           Array [
-            4,
-            3,
+            "Headline",
+            "BodyRegular",
           ]
         }
         ml={
@@ -465,7 +465,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
         >
           <Text
             as="span"
-            fontSize={1}
+            fontSize="Caption"
             fontWeight="700"
             lineHeight="sm"
             uppercase={true}
@@ -526,8 +526,8 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
         color="neutral-gray.900"
         fontSize={
           Array [
-            4,
-            3,
+            "Headline",
+            "BodyRegular",
           ]
         }
         ml={
@@ -608,7 +608,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
         >
           <Text
             as="span"
-            fontSize={1}
+            fontSize="Caption"
             fontWeight="700"
             lineHeight="sm"
             uppercase={true}
@@ -669,8 +669,8 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
         color="neutral-gray.900"
         fontSize={
           Array [
-            4,
-            3,
+            "Headline",
+            "BodyRegular",
           ]
         }
         ml={

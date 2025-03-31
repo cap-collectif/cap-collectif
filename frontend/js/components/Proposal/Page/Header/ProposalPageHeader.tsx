@@ -250,7 +250,7 @@ export const ProposalPageHeader = ({
           <div>
             {hasAnalysingButton && (
               <button type="button" id="side-analysis-open-button" onClick={onAnalysisClick}>
-                <Icon name={CapUIIcon.PieChart} size={CapUIIconSize.Sm} color="primary.500" />
+                <Icon name={CapUIIcon.PieChart} size={CapUIIconSize.Sm} color="primary.base" />
                 {intl.formatMessage({
                   id: 'panel.analysis.subtitle',
                 })}

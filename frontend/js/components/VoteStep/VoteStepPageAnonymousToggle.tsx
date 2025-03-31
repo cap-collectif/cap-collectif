@@ -1,4 +1,4 @@
-import { Flex, Switch, Text } from '@cap-collectif/ui'
+import { Flex, Switch, Text, CapUIFontSize } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { useSelector } from 'react-redux'
@@ -25,7 +25,7 @@ const VoteStepPageAnonymousToggle = ({ stepId }: Props) => {
       mb={6}
       mx={[4, 0]}
     >
-      <Text fontSize={3}>{intl.formatMessage({ id: 'vote_step.anonymous_toggle' })}</Text>
+      <Text fontSize={CapUIFontSize.BodyRegular}>{intl.formatMessage({ id: 'vote_step.anonymous_toggle' })}</Text>
       <Switch
         id="anonymous-toggle"
         checked={isParticipationAnonymous}

@@ -28,7 +28,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL iUjMbK sc-gsGkXq bMdHnV cap-modal"
+        className="sc-bcXGCL cMMHFL sc-gsGkXq bMdHnV cap-modal"
         style={
           {
             "opacity": 0,
@@ -40,10 +40,10 @@ exports[`<MediaModal /> should render correctly 1`] = `
           className="sc-bcXGCL gUHbRp cap-modal__header"
         >
           <div
-            className="sc-bcXGCL eotpTW"
+            className="sc-bcXGCL iRyhmE"
           >
             <h2
-              className="sc-bcXGCL jyqEHl cap-heading"
+              className="sc-bcXGCL czxWiY cap-heading"
               id="modal-title"
               style={
                 {
@@ -62,6 +62,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
             type="button"
           >
             <svg
+              aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               viewBox="0 0 12 12"
@@ -93,7 +94,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
             className="sc-bcXGCL kzRATa"
           >
             <div
-              className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+              className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
               style={
                 {
                   "marginLeft": 0,
@@ -105,14 +106,14 @@ exports[`<MediaModal /> should render correctly 1`] = `
               200x200px
             </div>
             <div
-              className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+              className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
               style={{}}
               title="977ko"
             >
               977ko
             </div>
             <div
-              className="sc-bcXGCL jZwtPn sc-fXqqsB gHWJqw cap-tag"
+              className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
               style={{}}
               title="png"
             >
@@ -123,7 +124,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
             className="sc-bcXGCL kzkRCb"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB laxoCi kFiGyX cap-button"
+              className="sc-bcXGCL sc-laZSpB dNMLhR hplCgZ cap-button"
               onClick={[Function]}
               style={
                 {
@@ -136,14 +137,14 @@ exports[`<MediaModal /> should render correctly 1`] = `
               global.delete
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB laxoCi gdlnBM cap-button"
+              className="sc-bcXGCL sc-laZSpB dNMLhR cXaElS cap-button"
               onClick={[Function]}
               type="button"
             >
               copy-link
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB laxoCi ktRJXy cap-button"
+              className="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
               onClick={[Function]}
               type="button"
             >

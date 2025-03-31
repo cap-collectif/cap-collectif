@@ -3,6 +3,7 @@ import { Section } from '@ui/Section'
 import { useIntl } from 'react-intl'
 import {
   Box,
+  CapUIFontSize,
   CapUIIcon,
   CapUIIconSize,
   CapUILineHeight,
@@ -29,14 +30,14 @@ const SectionSmsPresentation: FC = () => {
         <Box mb={5}>
           <Flex spacing={1} align="center">
             <Icon name={CapUIIcon.CheckO} size={CapUIIconSize.Md} color="blue.500" />
-            <Text color="gray.900" lineHeight={CapUILineHeight.S} fontSize={3}>
+            <Text color="gray.900" lineHeight={CapUILineHeight.S} fontSize={CapUIFontSize.BodyRegular}>
               {intl.formatMessage({ id: 'check-phone-number' })}
             </Text>
           </Flex>
 
           <Flex spacing={1} align="center">
             <Icon name={CapUIIcon.CheckO} size={CapUIIconSize.Md} color="blue.500" />
-            <Text color="gray.900" lineHeight={CapUILineHeight.S} fontSize={3}>
+            <Text color="gray.900" lineHeight={CapUILineHeight.S} fontSize={CapUIFontSize.BodyRegular}>
               {intl.formatMessage({ id: 'send-verification-code-sms' })}
             </Text>
           </Flex>

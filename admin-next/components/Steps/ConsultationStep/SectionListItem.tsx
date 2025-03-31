@@ -1,5 +1,5 @@
 import React from 'react'
-import { ButtonQuickAction, CapUIIcon, Flex, ListCard, Text } from '@cap-collectif/ui'
+import { ButtonQuickAction, CapUIFontSize, CapUIIcon, Flex, ListCard, Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import ConsultationSectionModal from '@components/Steps/ConsultationStep/ConsultationSectionModal'
 import { useFormContext } from 'react-hook-form'
@@ -53,13 +53,13 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
       pl={`${offset}px`}
     >
       <Flex direction="column">
-        <Text color="gray.500" fontSize={1} fontWeight={400} lineHeight="normal">
+        <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight="normal">
           {getLabel()}
         </Text>
         <Text
           data-cy={`${sectionFormKey}-section-title`}
           color="blue.900"
-          fontSize={2}
+          fontSize={CapUIFontSize.BodySmall}
           fontWeight={600}
           lineHeight="normal"
         >

@@ -6,7 +6,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -21,7 +21,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -36,7 +36,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -46,7 +46,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     Valérie Masson Delmotte
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -56,7 +56,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -66,7 +66,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should hide delete butt
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+    className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -82,7 +82,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -97,7 +97,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -112,7 +112,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     </a>
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -122,7 +122,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -132,7 +132,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     &lt;mock-value-for-field-"username"&gt;
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -142,7 +142,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL dZCuae cap-table__td"
+    className="sc-bcXGCL phWty cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -152,7 +152,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
     01/03/2050
   </td>,
   <td
-    className="sc-bcXGCL GIwFy cap-table__td visible-on-hover"
+    className="sc-bcXGCL bdqjQC cap-table__td visible-on-hover"
     style={
       {
         "whiteSpace": "initial",
@@ -181,6 +181,7 @@ exports[`<QuestionnaireItem /> <TestQuestionnaireItem /> should render correctly
       type="button"
     >
       <svg
+        aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
         fill="none"
         viewBox="0 0 12 12"

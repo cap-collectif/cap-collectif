@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Box, Flex, Text } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, Flex, Text } from '@cap-collectif/ui'
 import { useFragment, graphql } from 'react-relay'
 import { useIntl } from 'react-intl'
 import ProposalAnalysisCommentsList from '~/components/Proposal/Analysis/ProposalAnalysisCommentsList'
@@ -37,12 +37,12 @@ const ProposalAnalysisComments = ({ proposalAnalysis: proposalAnalysisRef, viewe
   return (
     <Flex direction="column" backgroundColor="#F4F4F4" p={4}>
       <Box mb={4}>
-        <Text color="neutral-gray.900" fontSize={3} fontWeight={600}>
+        <Text color="neutral-gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={600}>
           {intl.formatMessage({
             id: 'admin.label.comment',
           })}
         </Text>
-        <Text color="neutral-gray.700" fontSize={2}>
+        <Text color="neutral-gray.700" fontSize={CapUIFontSize.BodySmall}>
           {intl.formatMessage({
             id: 'space-for-the-analyst-supervisor-decision-maker',
           })}

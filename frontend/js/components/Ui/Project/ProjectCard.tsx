@@ -9,7 +9,7 @@ import useIsMobile from '~/utils/hooks/useIsMobile';
 import { formatInfo, formatCounter, renderTag } from './ProjectCard.utils';
 import Image from '~ui/Primitives/Image';
 import htmlDecode from '~/components/Utils/htmlDecode';
-import { Box, BoxProps, Flex, Heading, Card, CapUIIcon } from '@cap-collectif/ui';
+import { Box, BoxProps, Flex, Heading, Card, CapUIIcon, CapUILineHeight } from '@cap-collectif/ui';
 
 type Props = BoxProps & {
     project: ProjectCard_project$key
@@ -188,7 +188,7 @@ export const ProjectCard = ({
                         fontWeight="semibold"
                         mb={4}
                         color={project.archived ? 'gray.500' : 'gray.900'}
-                        lineHeight="base">
+                        lineHeight={CapUILineHeight.M}>
                         {htmlDecode(project.title)}
                     </Heading>
                     <Flex direction="column" justifyContent="space-between" height="100%">

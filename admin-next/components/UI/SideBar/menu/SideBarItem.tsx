@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { CapUILineHeight, Icon, CapUIIcon, CapUIIconSize, Flex, FlexProps, Tag } from '@cap-collectif/ui'
+import { CapUILineHeight, Icon, CapUIIcon, CapUIIconSize, Flex, FlexProps, Tag, CapUIFontSize } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 
 interface SideBarItemProps extends FlexProps {
@@ -15,11 +15,11 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({ children, selected, hr
     <Flex
       as="a"
       href={href}
-      fontSize={2}
+      fontSize={CapUIFontSize.BodySmall}
       py={1}
       pl={selected ? 8 : '44px'}
       pr={5}
-      lineHeight={CapUILineHeight.Sm}
+      lineHeight={CapUILineHeight.S}
       color="gray.300"
       _hover={{
         color: 'blue.100',

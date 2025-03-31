@@ -14,6 +14,7 @@ import {
   Box,
   Accordion,
   CapUIAccordionColor,
+  CapUIFontSize,
 } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
@@ -203,7 +204,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                     width="100%"
                   >
                     <Flex direction="column">
-                      <Text color="gray.500" fontSize={1} fontWeight={400} lineHeight={1.5}>
+                      <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400} lineHeight={1.5}>
                         {isSubSection
                           ? intl.formatMessage({
                               id: 'global.question.types.sub-section',
@@ -214,7 +215,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                             })
                           : null}
                       </Text>
-                      <Text color="blue.900" fontSize={2} fontWeight={600} lineHeight={1.5}>
+                      <Text color="blue.900" fontSize={CapUIFontSize.BodySmall} fontWeight={600} lineHeight={1.5}>
                         {questionsValues[index]?.title}
                       </Text>
                     </Flex>

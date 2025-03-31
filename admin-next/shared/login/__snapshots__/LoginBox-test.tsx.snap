@@ -7,7 +7,7 @@ exports[`<LoginBox /> renders 1`] = `
   />,
   <div>
     <div
-      className="sc-bcXGCL PXCEG"
+      className="sc-bcXGCL gMOsyY"
     >
       <div
         className=" ql-editor wysiwyg-render"
@@ -48,7 +48,7 @@ exports[`<LoginBox /> renders 1`] = `
         aria-required={true}
         autoComplete="email"
         autoFocus={true}
-        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+        className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
         disabled={false}
         name="username"
         onBlur={[Function]}
@@ -88,7 +88,7 @@ exports[`<LoginBox /> renders 1`] = `
       <input
         aria-required={true}
         autoComplete="off"
-        className="sc-bcXGCL sc-UpCiH DluEz eVENPD cap-input"
+        className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
         disabled={false}
         name="password"
         onBlur={[Function]}
@@ -127,7 +127,7 @@ exports[`<LoginBox /> renders without LoginForm 1`] = `
   />,
   <div>
     <div
-      className="sc-bcXGCL PXCEG"
+      className="sc-bcXGCL gMOsyY"
     >
       <div
         className=" ql-editor wysiwyg-render"
@@ -140,7 +140,7 @@ exports[`<LoginBox /> renders without LoginForm 1`] = `
     </div>
     <div>
       <div
-        className="sc-81b2b9f2-0 hzrSci"
+        className="sc-1c89d1ba-0 bgVPaZ"
         type="saml"
       >
         <span

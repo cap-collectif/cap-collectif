@@ -3,6 +3,7 @@ import { graphql, useFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import {
   Button,
+  CapUIFontSize,
   CapUIIcon,
   Flex,
   FormLabel,
@@ -82,7 +83,7 @@ export const UserInviteModalStepsChooseRole = ({ query: queryFragment, id, label
                 id: 'admin.label.group',
               })}
             >
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>
@@ -111,7 +112,7 @@ export const UserInviteModalStepsChooseRole = ({ query: queryFragment, id, label
 
           <FormControl name={'customMessage'} control={control} key={'customMessage'}>
             <FormLabel htmlFor={'customMessage'} label={intl.formatMessage({ id: 'invitation-custom-message.label' })}>
-              <Text fontSize={2} color="gray.500">
+              <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
             </FormLabel>

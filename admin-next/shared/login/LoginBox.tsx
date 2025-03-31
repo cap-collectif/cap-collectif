@@ -35,9 +35,9 @@ export const LoginBox = ({ query: queryRef }: Props) => {
           p={4}
           borderRadius="normal"
           border="normal"
-          backgroundColor="primary.200"
-          borderColor="primary.400"
-          color="primary.600"
+          backgroundColor="primary.background"
+          borderColor="primary.light"
+          color="primary.base"
           mb={4}
         >
           <WYSIWYGRender value={query.textTop.value} />

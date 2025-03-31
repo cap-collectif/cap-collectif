@@ -6,7 +6,7 @@ exports[`<Footer /> renders correctly 1`] = `
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <footer
-    className="sc-bcXGCL ezblbd"
+    className="sc-bcXGCL gHCfMr"
     role="contentinfo"
   >
     <div
@@ -43,6 +43,7 @@ exports[`<Footer /> renders correctly 1`] = `
                 className="sc-bcXGCL gdJCyL"
               >
                 <div
+                  aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
                 />
                 <a

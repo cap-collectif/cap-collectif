@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { Box, BoxProps, CapUIIcon, CapUIIconSize, Flex, Icon, useTheme } from '@cap-collectif/ui'
+import { Box, BoxProps, CapUIFontSize, CapUIIcon, CapUIIconSize, Flex, Icon, useTheme } from '@cap-collectif/ui'
 import { Menu, MenuItem } from '@szhsin/react-menu'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { useNavBarContext, LinkProps } from './NavBar.context'
@@ -29,7 +29,7 @@ export const NavBarMenu = React.forwardRef<
         ref={ref}
         px={2}
         py={[5, 5, isExtended ? 4 : 5]}
-        fontSize={pxToRem(16)}
+        fontSize={CapUIFontSize.BodyLarge}
         as="button"
         color={color}
         fontWeight={isCurrentLinkInMenu ? 'semibold' : 'normal'}
@@ -65,7 +65,7 @@ export const NavBarMenu = React.forwardRef<
           _focus={{ color: href ? hoverColor : color, bg: hoverBg, outline: 'none' }}
           px={[6, 2]}
           py={2}
-          fontSize={pxToRem(16)}
+          fontSize={CapUIFontSize.BodyLarge}
           lineHeight="base"
         >
           {title}
@@ -105,7 +105,7 @@ export const NavBarMenu = React.forwardRef<
             <Flex
               px={2}
               py={[5, 5, isExtended ? 4 : 5]}
-              fontSize={pxToRem(16)}
+              fontSize={CapUIFontSize.BodyLarge}
               as="button"
               color={color}
               fontWeight={isCurrentLinkInMenu ? 'semibold' : 'normal'}
@@ -141,7 +141,7 @@ export const NavBarLink = React.forwardRef<
       ref={ref}
       as="a"
       className="navLink"
-      fontSize={pxToRem(16)}
+      fontSize={CapUIFontSize.BodyLarge}
       href={href}
       px={2}
       py={[5, 5, isExtended ? 4 : 5]}
@@ -249,7 +249,7 @@ export const NavBarBreadCrumb: React.FC<{ isMobile?: boolean }> = ({ isMobile })
       bg="white"
     >
       {isMobile ? (
-        <Flex alignItems="center" mr={1} fontSize={2} px={4}>
+        <Flex alignItems="center" mr={1} fontSize={CapUIFontSize.BodySmall} px={4}>
           <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} mr={1} color="neutral-gray.700" />
           <Box as="a" href={mobileItem.href} color="neutral-gray.900" sx={{ textDecoration: 'underline' }}>
             {unescapeHTML(mobileItem.title)}
@@ -260,7 +260,7 @@ export const NavBarBreadCrumb: React.FC<{ isMobile?: boolean }> = ({ isMobile })
           {items.map(({ href, title }, index) => {
             const isCurrentPage = index === items.length - 1
             return (
-              <Flex as="li" alignItems="center" mr={1} fontSize={1} key={index}>
+              <Flex as="li" alignItems="center" mr={1} fontSize={CapUIFontSize.Caption} key={index}>
                 <Box
                   as="a"
                   href={href}
@@ -270,7 +270,7 @@ export const NavBarBreadCrumb: React.FC<{ isMobile?: boolean }> = ({ isMobile })
                   sx={{ textDecoration: isCurrentPage ? 'none' : 'underline' }}
                   _hover={{
                     textDecoration: isCurrentPage ? 'none' : 'underline',
-                    color: 'primary.600',
+                    color: 'primary.base',
                   }}
                 >
                   {unescapeHTML(title)}

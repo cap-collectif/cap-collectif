@@ -19,12 +19,12 @@ exports[`<Organization /> renders correctly 1`] = `
           className="sc-bcXGCL iyrHme"
         >
           <h1
-            className="sc-bcXGCL drziMS cap-heading"
+            className="sc-bcXGCL lczlSW cap-heading"
           >
             Nice Org
           </h1>
           <div
-            className="sc-bcXGCL fYdMUp cap-text"
+            className="sc-bcXGCL eDOssX cap-text"
           >
             <div
               className=" ql-editor wysiwyg-render"
@@ -42,6 +42,7 @@ exports[`<Organization /> renders correctly 1`] = `
               href="<mock-value-for-field-"facebookUrl">"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fFdUdM hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 17 32"
@@ -57,6 +58,7 @@ exports[`<Organization /> renders correctly 1`] = `
               href="<mock-value-for-field-"twitterUrl">"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fFdUdM hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 14 14"
@@ -72,6 +74,7 @@ exports[`<Organization /> renders correctly 1`] = `
               href="<mock-value-for-field-"webPageUrl">"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fFdUdM hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 12 12"
@@ -89,11 +92,11 @@ exports[`<Organization /> renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="sc-bcXGCL sc-2a35ac3b-1 bfFtvn FedGm"
+          className="sc-bcXGCL sc-f82ad81-1 bfFtvn dCzckY"
         >
           <img
             alt="banner"
-            className="sc-bcXGCL fXrpKJ sc-2a35ac3b-2 euMLGF"
+            className="sc-bcXGCL fXrpKJ sc-f82ad81-2 bmPesb"
             loading="eager"
             sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
             srcSet="
@@ -107,11 +110,11 @@ exports[`<Organization /> renders correctly 1`] = `
          "
           />
           <div
-            className="sc-bcXGCL sc-2a35ac3b-0 beCgXo ekovIw"
+            className="sc-bcXGCL sc-f82ad81-0 beCgXo eNaLe"
           >
             <img
               alt="logo"
-              className="sc-bcXGCL eQCwXW sc-2a35ac3b-3 cnAEXV"
+              className="sc-bcXGCL eQCwXW sc-f82ad81-3 dhiRjH"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 320px, (max-width: 960px) 320px, (max-width: 1280px) 320px, (max-width: 2560px) 320px,"
               srcSet="
@@ -169,10 +172,10 @@ exports[`<Organization /> renders correctly 1`] = `
          "
                 />
                 <div
-                  className="sc-bcXGCL bHUozq sc-c3cb98f2-0 kWYbsx"
+                  className="sc-bcXGCL bHUozq sc-f7db5058-0 kWsBHq"
                 >
                   <div
-                    className="sc-bcXGCL sOGfP sc-fXqqsB gHWJqw cap-tag"
+                    className="sc-bcXGCL sOGfP sc-fXqqsB gKbWOe cap-tag"
                     style={{}}
                     title="global-archived"
                   >
@@ -187,7 +190,7 @@ exports[`<Organization /> renders correctly 1`] = `
                   className="sc-bcXGCL dxmZfn"
                 >
                   <h4
-                    className="sc-bcXGCL hMumCw cap-heading"
+                    className="sc-bcXGCL jsRpSD cap-heading"
                     title="My nice project"
                   >
                     My nice project
@@ -202,6 +205,7 @@ exports[`<Organization /> renders correctly 1`] = `
                         className="sc-bcXGCL bLXbAu"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 11 12"
@@ -224,7 +228,7 @@ exports[`<Organization /> renders correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-c3cb98f2-3 dPeulc"
+                          className="sc-f7db5058-3 kGTCBj"
                         >
                           &lt;mock-value-for-field-"title"&gt;
                         </span>
@@ -234,6 +238,7 @@ exports[`<Organization /> renders correctly 1`] = `
                         className="sc-bcXGCL bLXbAu"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 12 10"
@@ -249,7 +254,7 @@ exports[`<Organization /> renders correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-c3cb98f2-3 dPeulc"
+                          className="sc-f7db5058-3 kGTCBj"
                         >
                           &lt;mock-value-for-field-"title"&gt;
                         </span>
@@ -268,6 +273,7 @@ exports[`<Organization /> renders correctly 1`] = `
                         }
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 32 28"
@@ -314,6 +320,7 @@ exports[`<Organization /> renders correctly 1`] = `
                         className="sc-bcXGCL eFHuff"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 14 13"
@@ -341,6 +348,7 @@ exports[`<Organization /> renders correctly 1`] = `
                         className="sc-bcXGCL eFHuff"
                       >
                         <svg
+                          aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
                           fill="none"
                           viewBox="0 0 13 14"
@@ -426,6 +434,7 @@ exports[`<Organization /> renders correctly 1`] = `
                       className="sc-bcXGCL bLXbAu"
                     >
                       <svg
+                        aria-hidden="true"
                         className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                         fill="none"
                         viewBox="0 0 12 10"
@@ -441,7 +450,7 @@ exports[`<Organization /> renders correctly 1`] = `
                         />
                       </svg>
                       <span
-                        className="sc-c3cb98f2-3 ffjWFk"
+                        className="sc-f7db5058-3 iaSLa-D"
                       >
                         &lt;mock-value-for-field-"title"&gt;
                       </span>
@@ -466,7 +475,7 @@ exports[`<Organization /> renders correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="menu"
-                className="sc-bcXGCL sc-laZSpB cbEpJS zPAHL cap-button cap-menu__disclosure"
+                className="sc-bcXGCL sc-laZSpB cDseqh dUpIgt cap-button cap-menu__disclosure"
                 onClick={[Function]}
                 onClickCapture={[Function]}
                 onFocus={[Function]}
@@ -480,7 +489,8 @@ exports[`<Organization /> renders correctly 1`] = `
               >
                 finished
                 <svg
-                  className="sc-bcXGCL sc-eJDTud gZMWuW hEjMCZ cap-icon"
+                  aria-hidden="true"
+                  className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-button-icon"
                   fill="none"
                   viewBox="0 0 12 7"
                   xmlns="http://www.w3.org/2000/svg"
@@ -571,7 +581,7 @@ exports[`<Organization /> renders correctly 1`] = `
               </div>
             </div>
             <a
-              className="sc-bcXGCL sc-9389049a-0 buYfhg ffexTs"
+              className="sc-bcXGCL sc-f979359f-0 buYfhg jdnqj"
               href="<mock-value-for-field-"url">"
             >
               <div
@@ -614,6 +624,7 @@ exports[`<Organization /> renders correctly 1`] = `
                       className="sc-bcXGCL bLXbAu"
                     >
                       <svg
+                        aria-hidden="true"
                         className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                         fill="none"
                         viewBox="0 0 12 10"
@@ -629,7 +640,7 @@ exports[`<Organization /> renders correctly 1`] = `
                         />
                       </svg>
                       <span
-                        className="sc-c3cb98f2-3 ffjWFk"
+                        className="sc-f7db5058-3 iaSLa-D"
                       >
                         &lt;mock-value-for-field-"title"&gt;
                       </span>

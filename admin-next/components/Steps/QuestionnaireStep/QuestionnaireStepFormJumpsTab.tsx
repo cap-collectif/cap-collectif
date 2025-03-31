@@ -1,5 +1,16 @@
 import React, { useState } from 'react'
-import { Button, CapUIIcon, Menu, ListCard, Flex, ButtonGroup, ButtonQuickAction, Text, Box } from '@cap-collectif/ui'
+import {
+  Button,
+  CapUIIcon,
+  Menu,
+  ListCard,
+  Flex,
+  ButtonGroup,
+  ButtonQuickAction,
+  Text,
+  Box,
+  CapUIFontSize,
+} from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { useFieldArray, useFormContext } from 'react-hook-form'
 import { useMultipleDisclosure } from '@liinkiing/react-hooks'
@@ -97,12 +108,12 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
                 width="100%"
               >
                 <Flex direction="column">
-                  <Text color="gray.500" fontSize={1} fontWeight={400}>
+                  <Text color="gray.500" fontSize={CapUIFontSize.Caption} fontWeight={400}>
                     {intl.formatMessage({
                       id: isRedirection ? 'invitations-redirection.title' : 'jumps',
                     })}
                   </Text>
-                  <Text color="blue.900" fontSize={2} fontWeight={600}>
+                  <Text color="blue.900" fontSize={CapUIFontSize.BodySmall} fontWeight={600}>
                     {`${questionsWithJumpsValues[index]?.title} ${isRedirection ? '->' : '-'} ${
                       isRedirection
                         ? questionsWithJumpsValues[index]?.alwaysJumpDestinationQuestion?.title

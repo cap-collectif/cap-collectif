@@ -5,7 +5,7 @@ import RegistrationForm from './RegistrationForm'
 import LoginSocialButtons from '@shared/login/LoginSocialButtons'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import type { RegistrationModal_query$key } from '@relay/RegistrationModal_query.graphql'
-import { Box, Button, CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
+import { Box, Button, CapUIFontSize, CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
 import { useFormContext } from 'react-hook-form'
 
 type Props = {
@@ -67,9 +67,9 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment }: Props
             p={4}
             borderRadius="normal"
             border="normal"
-            backgroundColor="primary.200"
-            borderColor="primary.400"
-            color="primary.600"
+            backgroundColor="primary.background"
+            borderColor="primary.light"
+            color="primary.base"
             mb={4}
           >
             <WYSIWYGRender value={textTop} />
@@ -79,7 +79,7 @@ export const RegistrationModal = ({ onClose, show, query: queryFragment }: Props
         <RegistrationForm query={query} />
 
         {bottomText && (
-          <Box textAlign="center" mt={4} fontSize={2} color="neutral-gray.600">
+          <Box textAlign="center" mt={4} fontSize={CapUIFontSize.BodySmall} color="neutral-gray.600">
             <WYSIWYGRender value={bottomText} />
           </Box>
         )}

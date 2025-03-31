@@ -1,6 +1,6 @@
 import type { FC } from 'react'
 import type { LineChartProps } from '../../LineChart/LineChart'
-import { Box, headingStyles, Flex, Text } from '@cap-collectif/ui'
+import { Box, headingStyles, Flex, Text, CapUIFontSize } from '@cap-collectif/ui'
 import { capitalizeFirstLetter } from '@utils/format-string'
 import { formatBigNumber } from '@utils/format-number'
 
@@ -40,7 +40,7 @@ const Tab: FC<TabProps> = ({ id, label, count, active, data, selectTab, disabled
       borderColor="gray.150"
       opacity={active ? 1 : 0.5}
     >
-      <Text color="blue.900" fontSize={3}>
+      <Text color="blue.900" fontSize={CapUIFontSize.BodyRegular}>
         {capitalizeFirstLetter(label)}
       </Text>
       <Text color="blue.800" {...headingStyles.h3}>

@@ -4,7 +4,17 @@ import { graphql, useLazyLoadQuery } from 'react-relay'
 import { OtherStepFormQuery } from '@relay/OtherStepFormQuery.graphql'
 import { useNavBarContext } from '@components/NavBar/NavBar.context'
 import { FormProvider, useForm } from 'react-hook-form'
-import { Accordion, Box, Button, CapUIAccordionColor, Flex, FormLabel, Text, toast } from '@cap-collectif/ui'
+import {
+  Accordion,
+  Box,
+  Button,
+  CapUIAccordionColor,
+  CapUIFontSize,
+  Flex,
+  FormLabel,
+  Text,
+  toast,
+} from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import TextEditor from '@components/Form/TextEditor/TextEditor'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
@@ -175,7 +185,7 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
   return (
     <Box bg="white" width="70%" p={6} borderRadius="8px" flex="none">
-      <Text fontWeight={600} color="blue.800" fontSize={4} mb={8}>
+      <Text fontWeight={600} color="blue.800" fontSize={CapUIFontSize.Headline} mb={8}>
         {intl.formatMessage({ id: 'customize-your-custom-step' })}
       </Text>
       <FormProvider {...formMethods}>

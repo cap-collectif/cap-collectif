@@ -7,7 +7,7 @@ import formatValues from '../../formatValues'
 import { getVariablesQuery, QueryOptions } from '../Sections.utils'
 import { useDashboard } from '../../Dashboard.context'
 import type { SectionParticipationsQuery as SectionParticipationsQueryType } from '@relay/SectionParticipationsQuery.graphql'
-import { Text } from '@cap-collectif/ui'
+import { CapUIFontSize, Text } from '@cap-collectif/ui'
 
 interface SectionParticipationsProps {
   readonly queryOptions: QueryOptions
@@ -56,7 +56,7 @@ const SectionParticipations: FC<SectionParticipationsProps> = ({ queryOptions })
 
   return (
     <Section width="50%" spacing={6} border="normal" borderColor="gray.150">
-      <Text fontSize={3} color="blue.800">
+      <Text fontSize={CapUIFontSize.BodyRegular} color="blue.800">
         {intl.formatMessage({ id: 'methods-of-participation' })}
       </Text>
 

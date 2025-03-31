@@ -56,6 +56,7 @@ Array [
               className="sc-bcXGCL jNQjOz"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
@@ -227,7 +228,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+                    className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -236,7 +237,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+                  className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -266,6 +267,7 @@ Array [
               className="sc-bcXGCL jNQjOz"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
@@ -437,7 +439,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+                    className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -446,7 +448,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+                  className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -503,7 +505,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+            className="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -541,11 +543,12 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB gHhxfT jEfYyY cap-button"
+              className="sc-bcXGCL sc-laZSpB hwdiSU jFPqgL cap-button"
               onClick={[Function]}
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon"
                 fill="none"
                 viewBox="0 0 32 32"
@@ -610,7 +613,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+            className="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -732,6 +735,7 @@ Array [
               className="sc-bcXGCL jNQjOz"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
@@ -903,7 +907,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+                    className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -912,7 +916,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+                  className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -942,6 +946,7 @@ Array [
               className="sc-bcXGCL jNQjOz"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                 fill="none"
                 viewBox="0 0 32 29"
@@ -1113,7 +1118,7 @@ Array [
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB cbEpJS ktRJXy cap-button"
+                    className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -1122,7 +1127,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB kXelHu ktRJXy cap-button"
+                  className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -1179,7 +1184,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB hNWlWk csqMOQ cap-button"
+            className="sc-bcXGCL sc-laZSpB jhruA-D bGltjj cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1217,11 +1222,12 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB gHhxfT jEfYyY cap-button"
+              className="sc-bcXGCL sc-laZSpB hwdiSU jFPqgL cap-button"
               onClick={[Function]}
               type="button"
             >
               <svg
+                aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon"
                 fill="none"
                 viewBox="0 0 32 32"
@@ -1291,7 +1297,7 @@ Array [
           </p>
         </div>
         <button
-          className="sc-bcXGCL sc-laZSpB fknmkT ktRJXy cap-button"
+          className="sc-bcXGCL sc-laZSpB jEWjgc ietVcX cap-button"
           onClick={[Function]}
           type="button"
         >

@@ -13,6 +13,8 @@ import {
   CapUIIcon,
   headingStyles,
   CapUIIconSize,
+  CapUIFontSize,
+  CapUILineHeight,
 } from '@cap-collectif/ui'
 import { Link, useParams } from 'react-router-dom'
 import { cleanChildren } from '~/utils/cleanChildren'
@@ -494,7 +496,7 @@ export const Step = ({
               <Tooltip className="platform__body" label={tooltipLabel}>
                 <Text
                   {...headingStyles.h5}
-                  fontSize={2}
+                  fontSize={CapUIFontSize.BodySmall}
                   className="frise__stepItem__link__title platform__body"
                   color={getTextColor()}
                   truncate={50}
@@ -506,7 +508,7 @@ export const Step = ({
             ) : (
               <Text
                 {...headingStyles.h5}
-                fontSize={2}
+                fontSize={CapUIFontSize.BodySmall}
                 className="frise__stepItem__link__title platform__body"
                 color={getTextColor()}
                 truncate={50}
@@ -572,8 +574,8 @@ export const Step = ({
               <Text
                 className="frise__stepItem__link__title platform__body"
                 as="h5"
-                fontSize={1}
-                lineHeight="sm"
+                fontSize={CapUIFontSize.Caption}
+                lineHeight={CapUILineHeight.S}
                 fontWeight="semibold"
                 truncate={50}
                 color={getTextColor()}
@@ -582,8 +584,8 @@ export const Step = ({
               </Text>
               <Text
                 className="frise__stepItem__link__content platform__body"
-                fontSize={1}
-                lineHeight="sm"
+                fontSize={CapUIFontSize.Caption}
+                lineHeight={CapUILineHeight.S}
                 fontWeight="normal"
                 color={getTextColor()}
               >
@@ -644,8 +646,8 @@ export const Step = ({
               </Text>
               <Text
                 className="frise__stepItem__link__content platform__body"
-                fontSize={1}
-                lineHeight="sm"
+                fontSize={CapUIFontSize.Caption}
+                lineHeight={CapUILineHeight.S}
                 fontWeight="normal"
                 color={getTextColor()}
               >

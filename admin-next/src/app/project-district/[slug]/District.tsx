@@ -2,7 +2,7 @@
 
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
-import { Box, Flex, Heading, Spinner } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, Flex, Heading, Spinner } from '@cap-collectif/ui'
 import { FC, Suspense, useEffect } from 'react'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { useAppContext } from '@components/AppProvider/App.context'
@@ -87,7 +87,7 @@ export const DistrictRender: FC<Props> = ({ slug }) => {
       </Flex>
       <Flex maxWidth={pxToRem(1280)} margin="auto" mb={6} px={[4, 6]} justify="space-between">
         <Flex direction="column" minWidth={['100%', '60%']} maxWidth={['100%', '60%']}>
-          <Box maxWidth={['100%', '90%']} mb={[8, 0]} fontSize={pxToRem(16)}>
+          <Box maxWidth={['100%', '90%']} mb={[8, 0]} fontSize={CapUIFontSize.BodyLarge}>
             <WYSIWYGRender value={district.description} />
           </Box>
           {!isMobile ? (

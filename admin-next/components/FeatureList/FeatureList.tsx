@@ -2,6 +2,7 @@ import { FC, useMemo, useState } from 'react'
 import {
   Accordion,
   Box,
+  CapUIFontSize,
   CapUIFontWeight,
   CapUIIcon,
   CapUIIconSize,
@@ -91,7 +92,7 @@ const FeatureList: FC = () => {
                           </Flex>
 
                           {group.description && (
-                            <Text fontSize={2} lineHeight={CapUILineHeight.Sm} color="gray.700">
+                            <Text fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.S} color="gray.700">
                               {intl.formatMessage({
                                 id: group.description,
                               })}
@@ -105,7 +106,11 @@ const FeatureList: FC = () => {
                               <Flex key={`flag-${featureFlagName}`} direction="row" justify="space-between" spacing={6}>
                                 <Flex direction="column" spacing={1}>
                                   <Flex direction="row" spacing={1}>
-                                    <Text fontSize={3} color="gray.900" fontWeight={CapUIFontWeight.Semibold}>
+                                    <Text
+                                      fontSize={CapUIFontSize.BodyRegular}
+                                      color="gray.900"
+                                      fontWeight={CapUIFontWeight.Semibold}
+                                    >
                                       {intl.formatMessage({
                                         id: featureFlagData.title,
                                       })}
@@ -130,7 +135,11 @@ const FeatureList: FC = () => {
                                   </Flex>
 
                                   {featureFlagData.description && (
-                                    <Text fontSize={2} lineHeight={CapUILineHeight.Sm} color="gray.700">
+                                    <Text
+                                      fontSize={CapUIFontSize.BodySmall}
+                                      lineHeight={CapUILineHeight.S}
+                                      color="gray.700"
+                                    >
                                       {intl.formatMessage({
                                         id: featureFlagData.description,
                                       })}

@@ -1,6 +1,6 @@
 import { FC, useState } from 'react'
 import CardSSO from '@ui/CardSSO/CardSSO'
-import { Button, ButtonQuickAction, CapUIIcon, Switch, Text } from '@cap-collectif/ui'
+import { Button, ButtonQuickAction, CapUIFontSize, CapUIIcon, Switch, Text } from '@cap-collectif/ui'
 import logo from './Logo'
 import { graphql, useFragment } from 'react-relay'
 import type { CardFranceConnect_ssoConfiguration$key } from '@relay/CardFranceConnect_ssoConfiguration.graphql'
@@ -65,7 +65,7 @@ const CardFranceConnect: FC<CardFranceConnectProps> = ({
           )}
         </CardSSO.Header>
         <CardSSO.Body>
-          <Text as="label" color="gray.900" fontSize={3} htmlFor="sso-france-connect">
+          <Text as="label" color="gray.900" fontSize={CapUIFontSize.BodyRegular} htmlFor="sso-france-connect">
             FranceConnect
           </Text>
 
