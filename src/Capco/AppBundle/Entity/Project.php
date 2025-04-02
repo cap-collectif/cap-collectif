@@ -16,6 +16,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\OtherStep;
+use Capco\AppBundle\Entity\Steps\PresentationStep;
 use Capco\AppBundle\Entity\Steps\ProjectAbstractStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
@@ -865,6 +866,9 @@ class Project implements IndexableInterface, TimeRangeable, Ownerable, Creatable
             }
             if ($currentStep->isFuture()) {
                 foreach ($this->getRealSteps() as $step) {
+                    if (PresentationStep::TYPE === $step->getType()) {
+                        continue;
+                    }
                     /** @var AbstractStep $step */
                     if ($step->isClosed()) {
                         return self::$openingStatuses['future_with_finished_steps'];
