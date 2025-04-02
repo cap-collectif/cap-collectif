@@ -5,6 +5,7 @@ import { environment } from 'utils/relay-environement'
 import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 import { GraphQLTaggedNode, fetchQuery } from 'relay-runtime'
+import { useIntl } from 'react-intl'
 
 interface DistrictListFieldProps
   extends Omit<BaseField, 'onChange' | 'control'>,
@@ -40,6 +41,8 @@ const formatDistrictsData = (globalDistricts: DistrictListFieldQuery$data['globa
 
 export const DistrictListField: React.FC<DistrictListFieldProps> = ({ name, ...props }) => {
   const { control } = useFormContext()
+  const intl = useIntl()
+
   const loadOptions = async (term: string): Promise<DistrictListFieldValue[]> => {
     const districtsData = await fetchQuery<DistrictListFieldQuery>(environment, getDistrictList, {
       term,
@@ -52,7 +55,17 @@ export const DistrictListField: React.FC<DistrictListFieldProps> = ({ name, ...p
     return []
   }
 
-  return <FieldInput {...props} type="select" control={control} name={name} defaultOptions loadOptions={loadOptions} />
+  return (
+    <FieldInput
+      {...props}
+      type="select"
+      control={control}
+      name={name}
+      defaultOptions
+      loadOptions={loadOptions}
+      placeholder={intl.formatMessage({ id: 'select-one-or-more-zones' })}
+    />
+  )
 }
 
 export default DistrictListField

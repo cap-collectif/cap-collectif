@@ -302,6 +302,7 @@ const GeographicalAreaForm: React.FC<Props> = ({ queryValues, translations }) =>
                   size={UPLOADER_SIZE.MD}
                   uploadURI={UPLOAD_PATH}
                   showThumbnail
+                  isFullWidth
                 />
               </FormControl>
             </Box>

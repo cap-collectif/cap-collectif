@@ -5,6 +5,7 @@ import { environment } from 'utils/relay-environement'
 import { FieldInput, FieldSelect, BaseField } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
 import { fetchQuery, GraphQLTaggedNode } from 'relay-runtime'
+import { useIntl } from 'react-intl'
 
 interface ThemeListFieldProps extends Omit<BaseField, 'onChange' | 'control'>, Omit<FieldSelect, 'onChange' | 'type'> {
   id?: string
@@ -28,6 +29,7 @@ const getThemeList = graphql`
 
 export const ThemeListField: React.FC<ThemeListFieldProps> = ({ name, disabled, ...props }) => {
   const { control } = useFormContext()
+  const intl = useIntl()
 
   const loadOptions = async (term: string): Promise<ThemeListFieldValue[]> => {
     const themesData = await fetchQuery<ThemeListFieldQuery>(environment, getThemeList, {
@@ -54,6 +56,7 @@ export const ThemeListField: React.FC<ThemeListFieldProps> = ({ name, disabled, 
       loadOptions={loadOptions}
       // @ts-expect-error: todo: fix error - update expected props?
       disabled={disabled}
+      placeholder={intl.formatMessage({ id: 'select-themes' })}
     />
   )
 }
