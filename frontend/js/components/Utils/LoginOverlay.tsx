@@ -82,7 +82,7 @@ export const LoginOverlay = ({
 
   let redirectUrl: string = baseUrl
 
-  if (loginWithOpenID && byPassLoginModal) {
+  if (loginWithOpenId && byPassLoginModal) {
     const redirectUri = oauth2SwitchUser
       ? `${baseUrl}/sso/switch-user?_destination=${window && window.location.href}`
       : `${window && window.location.href}`
@@ -146,7 +146,7 @@ export const LoginOverlay = ({
               </Button>
             </VisuallyHidden>
 
-            {showRegistrationButton && !loginWithOpenId && (
+            {showRegistrationButton && (
               <Button
                 variant="secondary"
                 justifyContent="center"
@@ -166,7 +166,7 @@ export const LoginOverlay = ({
                 id: 'open.connection_modal',
               })}
               onClick={() => {
-                if (loginWithOpenID && byPassLoginModal) {
+                if (loginWithOpenId && byPassLoginModal) {
                   window.location.href = redirectUrl
                 } else {
                   dispatchEvent(new Event(openLoginModal))
