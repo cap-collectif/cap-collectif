@@ -29361,6 +29361,21 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Resolver/GlobalIdResolver.php
 
 		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\GlobalIdResolver\\:\\:getGraphQLId\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/GlobalIdResolver.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\GlobalIdResolver\\:\\:getLegacyId\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/GlobalIdResolver.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\GlobalIdResolver\\:\\:getNode\\(\\) has no return type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/GraphQL/Resolver/GlobalIdResolver.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\GlobalIdResolver\\:\\:resolve\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/GlobalIdResolver.php

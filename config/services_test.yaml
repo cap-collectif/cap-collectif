@@ -5,3 +5,9 @@ services:
 
     Capco\AppBundle\Behat\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Behat/*'
+
+    Capco\Manager\RepositoryManager:
+        calls:
+            - method: setRepositories
+              arguments:
+                  - !tagged_iterator repository.manager

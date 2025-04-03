@@ -2,577 +2,695 @@ services:
     _defaults:
         public: true
 
+    Capco\Manager\RepositoryManager:
+        calls:
+            - method: setRepositories
+              arguments:
+                  - !tagged_iterator repository.manager
+
     Capco\AppBundle\Repository\AbstractVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:AbstractVote']
 
     Capco\AppBundle\Repository\ArgumentRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Argument']
 
     Capco\AppBundle\Repository\ReplyRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Reply']
 
     Capco\AppBundle\Repository\ReplyAnonymousRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ReplyAnonymous']
 
     Capco\AppBundle\Repository\ArgumentVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ArgumentVote']
 
     Capco\AppBundle\Repository\RegistrationFormRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:RegistrationForm']
 
     Capco\AppBundle\Repository\ContactFormRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ContactForm\ContactForm']
 
     Capco\AppBundle\Repository\AbstractQuestionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Questions\AbstractQuestion']
 
     Capco\AppBundle\Repository\MultipleChoiceQuestionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Questions\MultipleChoiceQuestion']
 
     Capco\AppBundle\Repository\QuestionnaireAbstractQuestionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Questions\QuestionnaireAbstractQuestion']
 
     Capco\AppBundle\Repository\PostRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Post']
 
     Capco\AppBundle\Repository\CollectStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\CollectStep']
 
     Capco\AppBundle\Repository\DebateStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\DebateStep']
 
     Capco\AppBundle\Repository\PresentationStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\PresentationStep']
 
     Capco\AppBundle\Repository\OtherStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\OtherStep']
 
     Capco\AppBundle\Repository\ConsultationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Consultation']
 
     Capco\AppBundle\Repository\ProposalDistrictRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:District\ProposalDistrict']
 
     Capco\AppBundle\Repository\EventRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Event']
 
     Capco\AppBundle\Repository\EventRegistrationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:EventRegistration']
 
     Capco\AppBundle\Repository\HighlightedContentRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:HighlightedContent']
 
     Capco\AppBundle\Repository\MenuItemRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:MenuItem']
 
     Capco\AppBundle\Repository\OpinionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Opinion']
 
     Capco\AppBundle\Repository\OpinionVersionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OpinionVersion']
 
     Capco\AppBundle\Repository\ReportingRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Reporting']
 
     Capco\AppBundle\Repository\OpinionTypeRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OpinionType']
 
     Capco\AppBundle\Repository\CommentRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Comment']
 
     Capco\AppBundle\Repository\PostCommentRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:PostComment']
 
     Capco\AppBundle\Repository\ProposalCommentRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalComment']
 
     Capco\AppBundle\Repository\EventCommentRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:EventComment']
 
     Capco\AppBundle\Repository\CommentVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:CommentVote']
 
     Capco\AppBundle\Repository\ProposalRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Proposal']
 
     Capco\AppBundle\Repository\ProposalSelectionVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalSelectionVote']
 
     Capco\AppBundle\Repository\ProposalCollectVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalCollectVote']
 
     Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalCollectSmsVote']
 
     Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalSelectionSmsVote']
 
     Capco\AppBundle\Repository\OpinionVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OpinionVote']
 
     Capco\AppBundle\Repository\QuestionChoiceRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:QuestionChoice']
 
     Capco\AppBundle\Repository\AbstractResponseRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Responses\AbstractResponse']
 
     Capco\AppBundle\Repository\ValueResponseRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Responses\ValueResponse']
 
     Capco\AppBundle\Repository\MediaResponseRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Responses\MediaResponse']
 
     Capco\AppBundle\Repository\SectionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Section\Section']
 
     Capco\AppBundle\Repository\SelectionStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\SelectionStep']
 
     Capco\AppBundle\Repository\StatusRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Status']
 
     Capco\AppBundle\Repository\SelectionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Selection']
 
     Capco\AppBundle\Repository\SiteColorRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SiteColor']
 
     Capco\AppBundle\Repository\SiteImageRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SiteImage']
 
     Capco\AppBundle\Repository\SiteParameterRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SiteParameter']
 
     Capco\AppBundle\Repository\ThemeRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Theme']
 
     Capco\UserBundle\Repository\UserTypeRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoUserBundle:UserType']
 
     Capco\UserBundle\Repository\UserRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoUserBundle:User']
 
     Capco\AppBundle\Repository\UserNotificationsConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserNotificationsConfiguration']
 
     Capco\AppBundle\Repository\VideoRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Video']
 
     Capco\AppBundle\Repository\ProjectRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Project']
 
     Capco\AppBundle\Repository\ProjectAuthorRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProjectAuthor']
 
     Capco\AppBundle\Repository\ProjectTypeRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProjectType']
 
     Capco\AppBundle\Repository\AbstractStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\AbstractStep']
 
     Capco\AppBundle\Repository\ConsultationStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\ConsultationStep']
 
     Capco\AppBundle\Repository\ProgressStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\ProgressStep']
 
     Capco\AppBundle\Repository\ProposalCategoryRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalCategory']
 
     Capco\AppBundle\Repository\ProposalFormRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalForm']
 
     Capco\AppBundle\Repository\GroupRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Group']
 
     Capco\AppBundle\Repository\UserGroupRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserGroup']
 
     Capco\AppBundle\Repository\QuestionnaireRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Questionnaire']
 
     Capco\AppBundle\Repository\ProposalEvaluationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalEvaluation']
 
     Capco\AppBundle\Repository\SourceRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Source']
 
     Capco\AppBundle\Repository\QuestionnaireStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\QuestionnaireStep']
 
     Capco\AppBundle\Repository\FollowerRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Follower']
 
     Capco\AppBundle\Repository\SourceVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SourceVote']
 
     Capco\AppBundle\Repository\OpinionVersionVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OpinionVersionVote']
 
     Capco\AppBundle\Repository\NewsletterSubscriptionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:NewsletterSubscription']
 
     Capco\AppBundle\Repository\UserArchiveRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserArchive']
 
     Capco\AppBundle\Repository\RequirementRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Requirement']
 
     Capco\AppBundle\Repository\UserRequirementRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserRequirement']
 
     Capco\AppBundle\Repository\EmailDomainRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:EmailDomain']
 
     Capco\AppBundle\Repository\SourceCategoryRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SourceCategory']
 
     Capco\AppBundle\Repository\PublicApiTokenRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:PublicApiToken']
 
     Capco\AppBundle\Repository\GlobalDistrictRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:District\GlobalDistrict']
 
     Capco\AppBundle\Repository\FooterSocialNetworkRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:FooterSocialNetwork']
 
     Capco\AppBundle\Repository\SocialNetworkRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SocialNetwork']
 
     Capco\AppBundle\Repository\MapTokenRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:MapToken']
     Capco\AppBundle\Repository\MediaRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Media']
 
     Capco\AppBundle\Repository\AbstractSSOConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SSO\AbstractSSOConfiguration']
 
     Capco\AppBundle\Repository\Oauth2SSOConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SSO\Oauth2SSOConfiguration']
 
     Capco\AppBundle\Repository\FranceConnectSSOConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SSO\FranceConnectSSOConfiguration']
 
     Capco\AppBundle\Repository\FacebookSSOConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SSO\FacebookSSOConfiguration']
 
     Capco\AppBundle\Repository\CASSSOConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SSO\CASSSOConfiguration']
 
     Capco\AppBundle\Repository\UserConnectionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserConnection']
 
     Capco\AppBundle\Repository\ProjectDistrictPositionerRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:District\ProjectDistrictPositioner']
 
     Capco\AppBundle\Repository\CategoryImageRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:CategoryImage']
 
     Capco\AppBundle\Repository\LogicJumpRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:LogicJump']
 
     Capco\AppBundle\Repository\EventReviewRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:EventReview']
 
     Capco\AppBundle\Repository\PageRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Page']
 
     Capco\AppBundle\Repository\LocaleRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Locale']
 
     Capco\AppBundle\Repository\ThemeTranslationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ThemeTranslation']
 
     Capco\AppBundle\Repository\ProjectAbstractStepRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\ProjectAbstractStep']
 
     Capco\AppBundle\Repository\FontRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Font']
 
     Capco\AppBundle\Repository\ProposalSupervisorRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalSupervisor']
 
     Capco\AppBundle\Repository\ProposalDecisionMakerRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalDecisionMaker']
 
     Capco\AppBundle\Repository\ProposalDecisionRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalDecision']
 
     Capco\AppBundle\Repository\ProposalAnalystRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalAnalyst']
 
     Capco\AppBundle\Repository\ProposalAnalysisRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalAnalysis']
 
     Capco\AppBundle\Repository\AnalysisConfigurationRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:AnalysisConfiguration']
 
     Capco\AppBundle\Repository\OpinionModalRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OpinionModal']
 
     Capco\AppBundle\Repository\UserInviteRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserInvite']
 
     Capco\AppBundle\Repository\UserInviteEmailMessageRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserInviteEmailMessage']
 
     Capco\AppBundle\Repository\MailingListRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:MailingList']
 
     Capco\AppBundle\Repository\SimpleQuestionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SimpleQuestion']
 
     Capco\AppBundle\Repository\EmailingCampaignRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:EmailingCampaign']
 
     Capco\AppBundle\Repository\OfficialResponseRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OfficialResponse']
 
     Capco\AppBundle\Repository\DebateOpinionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateOpinion']
 
     Capco\AppBundle\Repository\DebateRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\Debate']
 
     Capco\AppBundle\Repository\DebateArgumentRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateArgument']
         calls:
             - setLogger: ['@logger']
@@ -581,6 +699,7 @@ services:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateVote']
         calls:
             - setLogger: ['@logger']
@@ -589,239 +708,275 @@ services:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateArgumentVote']
 
     Capco\AppBundle\Repository\ProposalRevisionRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalRevision']
 
     Capco\AppBundle\Repository\Debate\DebateArticleRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateArticle']
 
     Capco\AppBundle\Repository\RankingStepRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Steps\RankingStep']
 
     Capco\AppBundle\Repository\Debate\DebateAnonymousVoteRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateAnonymousVote']
 
     Capco\AppBundle\Repository\Debate\DebateVoteTokenRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateVoteToken']
 
     Capco\AppBundle\Repository\ExternalServiceConfigurationRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ExternalServiceConfiguration']
 
     Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateAnonymousArgument']
 
     Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentVoteRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Debate\DebateAnonymousArgumentVote']
 
     Capco\AppBundle\Repository\ProposalSocialNetworksRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalSocialNetworksRepository']
 
     Capco\AppBundle\Repository\ActionTokenRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ActionToken']
 
     Capco\AppBundle\Repository\SenderEmailDomainRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SenderEmailDomain']
 
     Capco\AppBundle\Repository\SenderEmailRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SenderEmail']
 
     Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Security\UserIdentificationCode']
 
     Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Security\UserIdentificationCodeList']
 
     Capco\AppBundle\Repository\UserPhoneVerificationSmsRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:UserPhoneVerificationSms']
 
     Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalStepPaperVoteCounter']
 
     Capco\AppBundle\Repository\SiteSettingsRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SiteSettings']
 
     Capco\AppBundle\Repository\SmsOrderRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SmsOrder']
 
     Capco\AppBundle\Repository\SmsCreditRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SmsCredit']
 
     Capco\AppBundle\Repository\SmsRemainingCreditEmailAlertRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:SmsRemainingCreditEmailAlert']
 
     Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:AnonymousUserProposalSmsVote']
 
     Capco\AppBundle\Repository\PhoneTokenRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:PhoneToken']
 
     Capco\AppBundle\Repository\Organization\OrganizationRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Organization\Organization']
 
     Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Organization\PendingOrganizationInvitation']
 
     Capco\AppBundle\Repository\Organization\OrganizationMemberRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Organization\OrganizationMember']
 
     Capco\AppBundle\Repository\ProposalAnalysisCommentRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ProposalAnalysisComment']
 
     Capco\AppBundle\Repository\PostAuthorRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:PostAuthor']
 
     Capco\AppBundle\Repository\OfficialResponseAuthorRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OfficialResponseAuthor']
 
     Capco\AppBundle\Repository\DistrictTranslationRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:DistrictTranslation']
 
     Capco\AppBundle\Repository\EmailingCampaignUserRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:EmailingCampaignUser']
 
     Capco\AppBundle\Repository\ParticipantRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Participant']
 
     Capco\AppBundle\Repository\MediatorRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Mediator']
 
     Capco\AppBundle\Repository\ParticipantRequirementRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:ParticipantRequirement']
 
     Capco\AppBundle\Repository\MediatorParticipantStepRepository:
         public: true
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:MediatorParticipantStep']
 
     Capco\AppBundle\Repository\EventDistrictPositionerRepository:
-        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: [ 'CapcoAppBundle:District\EventDistrictPositioner' ]
+        arguments: ['CapcoAppBundle:District\EventDistrictPositioner']
 
     Capco\AppBundle\Repository\EventDistrictRepository:
-        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: [ 'CapcoAppBundle:District\EventDistrict' ]
+        arguments: ['CapcoAppBundle:District\EventDistrict']
 
     Capco\AppBundle\Repository\SectionCarrouselElementRepository:
-        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
-        arguments: [ 'CapcoAppBundle:Section\SectionCarrouselElement' ]
-
+        arguments: ['CapcoAppBundle:Section\SectionCarrouselElement']
 
     Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OpinionTypeAppendixType']
-
 
     Capco\AppBundle\Repository\OpinionAppendixRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:OpinionAppendix']
 
     Capco\AppBundle\Repository\EventTranslationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
+        tags: ['repository.manager']
         arguments: ['CapcoAppBundle:EventTranslation']
