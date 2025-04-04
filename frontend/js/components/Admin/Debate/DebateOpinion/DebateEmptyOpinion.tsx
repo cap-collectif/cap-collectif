@@ -2,9 +2,9 @@ import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Icon, { ICON_NAME, ICON_SIZE } from '~ds/Icon/Icon'
-import Tag from '~ds/Tag/Tag'
 import type { ForOrAgainstValue } from '~relay/FaceToFace_debate.graphql'
 import '~relay/FaceToFace_debate.graphql'
+import { Tag } from '@cap-collectif/ui'
 
 type Props = {
   type: ForOrAgainstValue
@@ -22,13 +22,12 @@ const DebateEmptyOpinion = ({ type }: Props) => (
     position="relative"
   >
     <Tag
-      variant={type === 'FOR' ? 'green' : 'red'}
-      position="absolute"
+      variantColor={type === 'FOR' ? 'green' : 'red'}
+      sx={{ position: 'absolute !important' }}
       top="-1px"
       left="-1px"
       borderBottomLeftRadius={0}
       borderTopRightRadius={0}
-      interactive={false}
     >
       <FormattedMessage id={type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
     </Tag>

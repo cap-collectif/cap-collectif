@@ -55,8 +55,8 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
         <React.Fragment>
           <Text
             fontFamily="OpenSans"
-            fontSize={1}
-            lineHeight="sm"
+            fontSize="Caption"
+            lineHeight="S"
             textAlign="center"
           >
             numeric-votes-count
@@ -84,8 +84,8 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes and comment
         <React.Fragment>
           <Text
             fontFamily="OpenSans"
-            fontSize={1}
-            lineHeight="sm"
+            fontSize="Caption"
+            lineHeight="S"
             textAlign="center"
           >
             numeric-points-count
@@ -118,8 +118,8 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes counters on
         <React.Fragment>
           <Text
             fontFamily="OpenSans"
-            fontSize={1}
-            lineHeight="sm"
+            fontSize="Caption"
+            lineHeight="S"
             textAlign="center"
           >
             numeric-votes-count
@@ -147,8 +147,8 @@ exports[`<ProposalPreviewFooter /> should render a footer with votes counters on
         <React.Fragment>
           <Text
             fontFamily="OpenSans"
-            fontSize={1}
-            lineHeight="sm"
+            fontSize="Caption"
+            lineHeight="S"
             textAlign="center"
           >
             numeric-points-count

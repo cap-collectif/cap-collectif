@@ -3,18 +3,16 @@ import InfiniteScroll from 'react-infinite-scroller'
 import type { RelayPaginationProp } from 'react-relay'
 import { createPaginationContainer, graphql } from 'react-relay'
 import { useIntl } from 'react-intl'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Text from '~ui/Primitives/Text'
 import DebateArgument from '~/components/Admin/Debate/DebateArgument/DebateArgument'
 import type { ArgumentTab_debate } from '~relay/ArgumentTab_debate.graphql'
 import '~relay/ArgumentTab_debate.graphql'
-import AppBox from '~ui/Primitives/AppBox'
 import Spinner from '~ds/Spinner/Spinner'
 import NoResultArgument from '~/components/Admin/Debate/NoResultArgument/NoResultArgument'
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon'
 import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument'
 import ModalModerateArgument from '~/components/Debate/Page/Arguments/ModalModerateArgument'
 import { formatConnectionPath } from '~/shared/utils/relay'
+import { Box, Flex, Text } from '@cap-collectif/ui'
 export const ARGUMENT_PAGINATION = 10
 const MAX_HEIGHT_8_ARGUMENTS = 520
 type Props = {
@@ -30,7 +28,7 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
   return hasArguments ? (
     <Flex direction="column">
       {debateArguments.totalCount > 0 ? (
-        <AppBox
+        <Box
           as="ul"
           p={0}
           m={0}
@@ -60,12 +58,12 @@ export const ArgumentTab = ({ debate, relay }: Props) => {
               .map(edge => edge.node)
               .filter(Boolean)
               .map(argument => (
-                <AppBox as="li" key={argument.id}>
+                <Box as="li" key={argument.id}>
                   <DebateArgument argument={argument} setModerateArgumentModal={setModerateArgumentModal} />
-                </AppBox>
+                </Box>
               ))}
           </InfiniteScroll>
-        </AppBox>
+        </Box>
       ) : (
         <NoResultArgument debate={debate} />
       )}

@@ -49,7 +49,7 @@ export const DebateStepPageAbsoluteVoteAndShare = ({
             borderTopRightRadius: 'poppin',
           }
         : {
-            top: 50,
+            top: 0,
           })}
       sx={{
         marginTop: '0 !important',

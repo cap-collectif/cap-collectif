@@ -2,15 +2,12 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { GraphQLTaggedNode, useFragment } from 'react-relay'
 import { graphql, usePaginationFragment } from 'react-relay'
-import Table from '~ds/Table'
 import type { ReplyList_questionnaire$key } from '~relay/ReplyList_questionnaire.graphql'
 import ReplyItem from '~/components/Admin/Project/ReplyList/ReplyItem'
-import Menu from '../../../DesignSystem/Menu/Menu'
-import Button from '~ds/Button/Button'
-import Icon, { ICON_NAME } from '~ds/Icon/Icon'
-import Text from '~ui/Primitives/Text'
+import Icon from '~ds/Icon/Icon'
 import ReplyModalConfirmationDelete from '~/components/Admin/Project/ReplyList/ReplyModalConfirmationDelete'
 import { ReplyList_viewer$key } from '~relay/ReplyList_viewer.graphql'
+import { Button, CapUIIcon, Menu, Table, Text } from '@cap-collectif/ui'
 export const REPLY_LIST_PAGINATION = 20
 type Props = {
   readonly questionnaire: ReplyList_questionnaire$key
@@ -53,11 +50,10 @@ const VIEWER_FRAGMENT = graphql`
   }
 `
 
-
 const ReplyList = ({ questionnaire, term, resetTerm, viewer: viewerFragment }: Props): JSX.Element => {
   const intl = useIntl()
   const firstRendered = React.useRef(null)
-  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment);
+  const viewer = useFragment(VIEWER_FRAGMENT, viewerFragment)
 
   const [orderBy, setOrderBy] = React.useState({
     field: 'CREATED_AT',
@@ -81,6 +77,7 @@ const ReplyList = ({ questionnaire, term, resetTerm, viewer: viewerFragment }: P
   const connectionName = adminReplies?.__id
   return (
     <Table
+      emptyMessage=""
       selectable
       onReset={() => {
         setOrderBy({
@@ -121,148 +118,145 @@ const ReplyList = ({ questionnaire, term, resetTerm, viewer: viewerFragment }: P
             })}
           </Table.Th>
           <Table.Th>
-            {({ styles }) => (
-              <Menu>
-                <Menu.Button as={React.Fragment}>
-                  <Button rightIcon={ICON_NAME.ARROW_DOWN_O} {...styles}>
-                    {intl.formatMessage({
-                      id: 'global.status',
-                    })}
-                  </Button>
-                </Menu.Button>
-                <Menu.List>
-                  <Menu.OptionGroup
-                    value={status}
-                    onChange={setStatus}
-                    type="checkbox"
-                    title={intl.formatMessage({
-                      id: 'sort-by',
-                    })}
-                  >
-                    <Menu.OptionItem value="PUBLISHED">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'global.published',
-                        })}
-                      </Text>
-                    </Menu.OptionItem>
-                    <Menu.OptionItem value="NOT_PUBLISHED">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'global.no.published',
-                        })}
-                      </Text>
-                    </Menu.OptionItem>
-                    <Menu.OptionItem value="DRAFT">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'global-draft',
-                        })}
-                      </Text>
-                    </Menu.OptionItem>
-                    <Menu.OptionItem value="PENDING">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'waiting',
-                        })}
-                      </Text>
-                    </Menu.OptionItem>
-                  </Menu.OptionGroup>
-                </Menu.List>
-              </Menu>
-            )}
+            <Menu
+              disclosure={
+                <Button rightIcon={CapUIIcon.ArrowDownO} variantColor="hierarchy" variant="tertiary" alternative>
+                  {intl.formatMessage({
+                    id: 'global.status',
+                  })}
+                </Button>
+              }
+            >
+              <Menu.List>
+                <Menu.OptionGroup
+                  value={status}
+                  onChange={setStatus}
+                  type="checkbox"
+                  title={intl.formatMessage({
+                    id: 'sort-by',
+                  })}
+                >
+                  <Menu.OptionItem value="PUBLISHED">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'global.published',
+                      })}
+                    </Text>
+                  </Menu.OptionItem>
+                  <Menu.OptionItem value="NOT_PUBLISHED">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'global.no.published',
+                      })}
+                    </Text>
+                  </Menu.OptionItem>
+                  <Menu.OptionItem value="DRAFT">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'global-draft',
+                      })}
+                    </Text>
+                  </Menu.OptionItem>
+                  <Menu.OptionItem value="PENDING">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'waiting',
+                      })}
+                    </Text>
+                  </Menu.OptionItem>
+                </Menu.OptionGroup>
+              </Menu.List>
+            </Menu>
           </Table.Th>
           <Table.Th>
-            {({ styles }) => (
-              <Menu>
-                <Menu.Button as={React.Fragment}>
-                  <Button rightIcon={ICON_NAME.ARROW_DOWN_O} {...styles}>
-                    {intl.formatMessage({
-                      id: 'global.update',
-                    })}
-                  </Button>
-                </Menu.Button>
-                <Menu.List>
-                  <Menu.OptionGroup
-                    value={orderBy.field === 'UPDATED_AT' ? orderBy.direction : ''}
-                    onChange={direction =>
-                      setOrderBy({
-                        field: 'UPDATED_AT',
-                        direction,
-                      })
-                    }
-                    type="radio"
-                    title={intl.formatMessage({
-                      id: 'sort-by',
-                    })}
-                  >
-                    <Menu.OptionItem value="DESC">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'global.filter_last',
-                        })}
-                      </Text>
-                      <Icon ml="auto" name="ARROW_DOWN_O" />
-                    </Menu.OptionItem>
+            <Menu
+              disclosure={
+                <Button rightIcon={CapUIIcon.ArrowDownO} variantColor="hierarchy" variant="tertiary" alternative>
+                  {intl.formatMessage({
+                    id: 'global.update',
+                  })}
+                </Button>
+              }
+            >
+              <Menu.List>
+                <Menu.OptionGroup
+                  value={orderBy.field === 'UPDATED_AT' ? orderBy.direction : ''}
+                  onChange={direction =>
+                    setOrderBy({
+                      field: 'UPDATED_AT',
+                      direction,
+                    })
+                  }
+                  type="radio"
+                  title={intl.formatMessage({
+                    id: 'sort-by',
+                  })}
+                >
+                  <Menu.OptionItem value="DESC">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'global.filter_last',
+                      })}
+                    </Text>
+                    <Icon ml="auto" name="ARROW_DOWN_O" />
+                  </Menu.OptionItem>
 
-                    <Menu.OptionItem value="ASC">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'global.filter_old',
-                        })}
-                      </Text>
-                      <Icon ml="auto" name="ARROW_UP_O" />
-                    </Menu.OptionItem>
-                  </Menu.OptionGroup>
-                </Menu.List>
-              </Menu>
-            )}
+                  <Menu.OptionItem value="ASC">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'global.filter_old',
+                      })}
+                    </Text>
+                    <Icon ml="auto" name="ARROW_UP_O" />
+                  </Menu.OptionItem>
+                </Menu.OptionGroup>
+              </Menu.List>
+            </Menu>
           </Table.Th>
           <Table.Th>
-            {({ styles }) => (
-              <Menu>
-                <Menu.Button as={React.Fragment}>
-                  <Button rightIcon={ICON_NAME.ARROW_DOWN_O} {...styles}>
-                    {intl.formatMessage({
-                      id: 'creation',
-                    })}
-                  </Button>
-                </Menu.Button>
-                <Menu.List>
-                  <Menu.OptionGroup
-                    value={orderBy.field === 'CREATED_AT' ? orderBy.direction : ''}
-                    onChange={direction =>
-                      setOrderBy({
-                        field: 'CREATED_AT',
-                        direction,
-                      })
-                    }
-                    type="radio"
-                    title={intl.formatMessage({
-                      id: 'sort-by',
-                    })}
-                  >
-                    <Menu.OptionItem value="DESC">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'global.filter_last',
-                        })}
-                      </Text>
-                      <Icon ml="auto" name="ARROW_DOWN_O" />
-                    </Menu.OptionItem>
+            <Menu
+              disclosure={
+                <Button rightIcon={CapUIIcon.ArrowDownO} variantColor="hierarchy" variant="tertiary" alternative>
+                  {intl.formatMessage({
+                    id: 'creation',
+                  })}
+                </Button>
+              }
+            >
+              <Menu.List>
+                <Menu.OptionGroup
+                  value={orderBy.field === 'CREATED_AT' ? orderBy.direction : ''}
+                  onChange={direction =>
+                    setOrderBy({
+                      field: 'CREATED_AT',
+                      direction,
+                    })
+                  }
+                  type="radio"
+                  title={intl.formatMessage({
+                    id: 'sort-by',
+                  })}
+                >
+                  <Menu.OptionItem value="DESC">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'global.filter_last',
+                      })}
+                    </Text>
+                    <Icon ml="auto" name="ARROW_DOWN_O" />
+                  </Menu.OptionItem>
 
-                    <Menu.OptionItem value="ASC">
-                      <Text>
-                        {intl.formatMessage({
-                          id: 'global.filter_old',
-                        })}
-                      </Text>
-                      <Icon ml="auto" name="ARROW_UP_O" />
-                    </Menu.OptionItem>
-                  </Menu.OptionGroup>
-                </Menu.List>
-              </Menu>
-            )}
+                  <Menu.OptionItem value="ASC">
+                    <Text>
+                      {intl.formatMessage({
+                        id: 'global.filter_old',
+                      })}
+                    </Text>
+                    <Icon ml="auto" name="ARROW_UP_O" />
+                  </Menu.OptionItem>
+                </Menu.OptionGroup>
+              </Menu.List>
+            </Menu>
           </Table.Th>
           <Table.Th noPlaceholder> </Table.Th>
         </Table.Tr>

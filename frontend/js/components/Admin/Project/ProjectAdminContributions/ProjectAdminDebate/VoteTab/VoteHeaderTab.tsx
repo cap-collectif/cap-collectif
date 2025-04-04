@@ -1,13 +1,11 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
-import InlineSelect from '~ds/InlineSelect'
 import type { VoteState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Button from '~ds/Button/Button'
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context'
 import type { VoteHeaderTab_debate } from '~relay/VoteHeaderTab_debate.graphql'
 import type { VoteHeaderTab_debateStep } from '~relay/VoteHeaderTab_debateStep.graphql'
+import { Button, Flex, InlineSelect } from '@cap-collectif/ui'
 type Props = {
   debate: VoteHeaderTab_debate
   debateStep: VoteHeaderTab_debateStep

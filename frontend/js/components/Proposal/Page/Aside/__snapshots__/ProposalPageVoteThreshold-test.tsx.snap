@@ -16,8 +16,8 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
           <React.Fragment>
             <Text
               fontFamily="OpenSans"
-              fontSize={1}
-              lineHeight="sm"
+              fontSize="Caption"
+              lineHeight="S"
               textAlign="center"
             >
               numeric-votes-count
@@ -103,8 +103,8 @@ exports[`<ProposalPageVoteThreshold /> should render proposal page vote threshol
           <React.Fragment>
             <Text
               fontFamily="OpenSans"
-              fontSize={1}
-              lineHeight="sm"
+              fontSize="Caption"
+              lineHeight="S"
               textAlign="center"
             >
               numeric-votes-count

@@ -5,7 +5,7 @@ import { submit } from 'redux-form'
 import { useDispatch } from 'react-redux'
 import type { IntlShape } from 'react-intl'
 import { FormattedMessage, useIntl } from 'react-intl'
-import { toast } from '@cap-collectif/ui'
+import { CapUIModalSize, Heading, Modal, toast } from '@cap-collectif/ui'
 import CloseButton from '~/components/Form/CloseButton'
 import SubmitButton from '~/components/Form/SubmitButton'
 import TrashDebateArgumentMutation from '~/mutations/TrashDebateArgumentMutation'
@@ -14,8 +14,6 @@ import type { Dispatch } from '~/types'
 import { mediaQueryMobile } from '~/utils/sizes'
 import type { Values } from '~/components/Moderate/ModerateForm'
 import ModerateForm, { formName } from '~/components/Moderate/ModerateForm'
-import Modal from '~ds/Modal/Modal'
-import Heading from '~ui/Primitives/Heading'
 
 export type ModerateArgument = {
   id: string
@@ -84,12 +82,13 @@ export const ModalModerateArgument = (props: Props): JSX.Element => {
   const intl = useIntl()
   const dispatch = useDispatch<Dispatch>()
   return (
-    <ModalContainer show={!!argument} onHide={onClose} aria-labelledby="modal-title">
-      <Modal.Header
-        closeLabel={intl.formatMessage({
-          id: 'close.modal',
-        })}
-      >
+    <ModalContainer
+      show={!!argument}
+      onClose={onClose}
+      ariaLabel={intl.formatMessage({ id: 'moderate-argument' })}
+      size={CapUIModalSize.Md}
+    >
+      <Modal.Header>
         <Heading id="modal-title">
           <FormattedMessage id="moderate-argument" />
         </Heading>

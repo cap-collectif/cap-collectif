@@ -27,13 +27,14 @@ exports[`<CookieManagerModal /> should render correctly 1`] = `
     className="modal-cookie-manager"
     onClose={[Function]}
     show={false}
+    size="xl"
   >
-    <Modal.Header>
+    <Component>
       <Heading>
         cookies-management
       </Heading>
-    </Modal.Header>
-    <Modal.Body>
+    </Component>
+    <Component>
       <Cookie
         adJs="here your js code bullshit the users"
         analyticsJs="here your js to analyse the website"
@@ -53,8 +54,8 @@ exports[`<CookieManagerModal /> should render correctly 1`] = `
           }
         }
       />
-    </Modal.Body>
-    <Modal.Footer
+    </Component>
+    <Component
       spacing={2}
     >
       <CloseButton
@@ -70,7 +71,7 @@ exports[`<CookieManagerModal /> should render correctly 1`] = `
       >
         global.save
       </button>
-    </Modal.Footer>
+    </Component>
   </Modal>
 </div>
 `;

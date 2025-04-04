@@ -5,8 +5,7 @@ import { connect } from 'react-redux'
 import type { ProposalPreviewFooter_proposal } from '~relay/ProposalPreviewFooter_proposal.graphql'
 import type { ProposalPreviewFooter_step } from '~relay/ProposalPreviewFooter_step.graphql'
 import Card from '../../Ui/Card/Card'
-import Text from '~ui/Primitives/Text'
-import Tooltip from '~ds/Tooltip/Tooltip'
+import { Tooltip, Text, CapUIFontSize, CapUILineHeight } from '@cap-collectif/ui'
 
 type Props = {
   proposal: ProposalPreviewFooter_proposal
@@ -56,7 +55,12 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
                 label={
                   <>
                     {numericVotesTotalCount > 0 && (
-                      <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                      <Text
+                        textAlign="center"
+                        lineHeight={CapUILineHeight.S}
+                        fontSize={CapUIFontSize.Caption}
+                        fontFamily="OpenSans"
+                      >
                         {intl.formatMessage(
                           {
                             id: 'numeric-votes-count',
@@ -68,7 +72,12 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
                       </Text>
                     )}
                     {paperVotesTotalCount > 0 && (
-                      <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                      <Text
+                        textAlign="center"
+                        lineHeight={CapUILineHeight.S}
+                        fontSize={CapUIFontSize.Caption}
+                        fontFamily="OpenSans"
+                      >
                         {intl.formatMessage(
                           {
                             id: 'paper-votes-count',
@@ -107,7 +116,12 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
                   label={
                     <>
                       {numericVotesTotalPointsCount > 0 && (
-                        <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                        <Text
+                          textAlign="center"
+                          lineHeight={CapUILineHeight.S}
+                          fontSize={CapUIFontSize.Caption}
+                          fontFamily="OpenSans"
+                        >
                           {intl.formatMessage(
                             {
                               id: 'numeric-points-count',
@@ -119,7 +133,12 @@ export const ProposalPreviewFooter = ({ proposal, step }: Props) => {
                         </Text>
                       )}
                       {paperVotesTotalPointsCount > 0 && (
-                        <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                        <Text
+                          textAlign="center"
+                          lineHeight={CapUILineHeight.S}
+                          fontSize={CapUIFontSize.Caption}
+                          fontFamily="OpenSans"
+                        >
                           {intl.formatMessage(
                             {
                               id: 'paper-points-count',

@@ -18,7 +18,7 @@ const ProjectAdminApp = ({ projectId, firstCollectStepId }: ProjectAdminAppProps
   document.getElementsByTagName('html')[0].style.fontSize = '14px'
   return (
     <Suspense fallback={<Loader />}>
-      <Providers designSystem>
+      <Providers designSystem admin>
         <ProjectAdminPage projectId={projectId} firstCollectStepId={firstCollectStepId} />
       </Providers>
     </Suspense>

@@ -4,15 +4,13 @@ import { useIntl } from 'react-intl'
 
 import styled from 'styled-components'
 import { ProgressBar } from 'react-bootstrap'
-import { Box } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUILineHeight, Text, Tooltip } from '@cap-collectif/ui'
 import type { ProposalPageVoteThreshold_step } from '~relay/ProposalPageVoteThreshold_step.graphql'
 import type { ProposalPageVoteThreshold_proposal } from '~relay/ProposalPageVoteThreshold_proposal.graphql'
 import { isInterpellationContextFromProposal } from '~/utils/interpellationLabelHelper'
 import { Card, CategoryCircledIcon } from '~/components/Proposal/Page/ProposalPage.style'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
-import Tooltip from '~ds/Tooltip/Tooltip'
-import Text from '~ui/Primitives/Text'
 
 type Props = {
   proposal: ProposalPageVoteThreshold_proposal
@@ -92,7 +90,12 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
             label={
               <>
                 {numericVotesTotalCount > 0 && (
-                  <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                  <Text
+                    textAlign="center"
+                    lineHeight={CapUILineHeight.S}
+                    fontSize={CapUIFontSize.Caption}
+                    fontFamily="OpenSans"
+                  >
                     {intl.formatMessage(
                       {
                         id: 'numeric-votes-count',
@@ -104,7 +107,12 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
                   </Text>
                 )}
                 {paperVotesTotalCount > 0 && (
-                  <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                  <Text
+                    textAlign="center"
+                    lineHeight={CapUILineHeight.S}
+                    fontSize={CapUIFontSize.Caption}
+                    fontFamily="OpenSans"
+                  >
                     {intl.formatMessage(
                       {
                         id: 'paper-votes-count',
@@ -144,7 +152,12 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
                   label={
                     <>
                       {numericVotesTotalPointsCount > 0 && (
-                        <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                        <Text
+                          textAlign="center"
+                          lineHeight={CapUILineHeight.S}
+                          fontSize={CapUIFontSize.Caption}
+                          fontFamily="OpenSans"
+                        >
                           {intl.formatMessage(
                             {
                               id: 'numeric-points-count',
@@ -155,7 +168,12 @@ export const ProposalPageVoteThreshold = ({ step, proposal, showPoints }: Props)
                           )}
                         </Text>
                       )}
-                      <Text textAlign="center" lineHeight="sm" fontSize={1} fontFamily="OpenSans">
+                      <Text
+                        textAlign="center"
+                        lineHeight={CapUILineHeight.S}
+                        fontSize={CapUIFontSize.Caption}
+                        fontFamily="OpenSans"
+                      >
                         {intl.formatMessage(
                           {
                             id: 'paper-points-count',

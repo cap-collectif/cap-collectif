@@ -4,16 +4,11 @@ import type { RelayPaginationProp } from 'react-relay'
 import { createPaginationContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Text from '~ui/Primitives/Text'
 import type { ContributionOrigin, VoteTab_debate } from '~relay/VoteTab_debate.graphql'
 import type { VoteTab_debateStep } from '~relay/VoteTab_debateStep.graphql'
 import SpotIcon, { SPOT_ICON_NAME } from '~ds/SpotIcon/SpotIcon'
-import Table from '~ds/Table'
-import Link from '~ds/Link/Link'
-import Tag from '~ds/Tag/Tag'
-import Tooltip from '~ds/Tooltip/Tooltip'
 import ConditionalWrapper from '~/components/Utils/ConditionalWrapper'
+import { Flex, Link, Table, Tag, Text, Tooltip } from '@cap-collectif/ui'
 export const VOTE_PAGINATION = 10
 type Props = {
   debate: VoteTab_debate
@@ -43,7 +38,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
   const hasVotes = debateVotes.totalCount > 0
   const isStepClosed = debateStep?.timeRange?.hasEnded
   return hasVotes ? (
-    <Table>
+    <Table emptyMessage="">
       <Table.Thead>
         <Table.Tr>
           <Table.Th>
@@ -108,7 +103,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
               </Table.Td>
 
               <Table.Td>
-                <Tag variant={vote.type === 'FOR' ? 'green' : 'red'} interactive={false}>
+                <Tag variantColor={vote.type === 'FOR' ? 'green' : 'red'}>
                   {intl.formatMessage({
                     id: vote.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against',
                   })}
@@ -126,7 +121,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
                           : 'waiting-for-user-email-confirmation',
                       })}
                     >
-                      {children}
+                      {children as any}
                     </Tooltip>
                   )}
                 >

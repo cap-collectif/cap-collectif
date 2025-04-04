@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ProjectAdminDebate /> should render correctly 1`] = `
-<ForwardRef
+<Flex
   direction="column"
 >
   <Accordion
@@ -127,11 +127,11 @@ exports[`<ProjectAdminDebate /> should render correctly 1`] = `
       </AccordionPanel>
     </AccordionItem>
   </Accordion>
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<ProjectAdminDebate /> should render correctly with contributions step 1`] = `
-<ForwardRef
+<Flex
   direction="column"
 >
   <Button
@@ -269,5 +269,5 @@ exports[`<ProjectAdminDebate /> should render correctly with contributions step 
       </AccordionPanel>
     </AccordionItem>
   </Accordion>
-</ForwardRef>
+</Flex>
 `;

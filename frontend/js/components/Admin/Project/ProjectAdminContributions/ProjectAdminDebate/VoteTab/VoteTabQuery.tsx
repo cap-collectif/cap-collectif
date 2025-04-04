@@ -10,10 +10,10 @@ import VoteTab, { VOTE_PAGINATION } from './VoteTab'
 import VoteHeaderTab from './VoteHeaderTab'
 import type { ProjectAdminDebateParameters } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer'
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context'
-import Flex from '~ui/Primitives/Layout/Flex'
 import VoteHeaderTabPlaceholder from './VoteHeaderTabPlaceholder'
 import Skeleton from '~ds/Skeleton'
 import TablePlaceholder from '~ds/Table/placeholder'
+import { Flex } from '@cap-collectif/ui'
 type Props = {
   readonly debate: VoteTabQuery_debate | null | undefined
   readonly debateStep: VoteTabQuery_debateStep | null | undefined

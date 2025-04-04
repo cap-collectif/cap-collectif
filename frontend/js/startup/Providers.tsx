@@ -17,9 +17,9 @@ if (typeof window !== 'undefined' && window.sentryDsn) {
   Sentry.init({
     dsn: window.sentryDsn,
     ignoreErrors: [
-        'ResizeObserver loop limit exceeded',
-        'ResizeObserver loop completed with undelivered notifications',
-    ]
+      'ResizeObserver loop limit exceeded',
+      'ResizeObserver loop completed with undelivered notifications',
+    ],
   })
 }
 
@@ -28,9 +28,10 @@ type Props = {
   unstable__AdminNextstore?: Record<string, any>
   designSystem?: boolean
   resetCSS?: boolean
+  admin?: boolean
 }
 
-const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS }: Props) => {
+const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS, admin = false }: Props) => {
   const store = unstable__AdminNextstore ?? ReactOnRails.getStore('appStore')
   analytics.ready(() => {
     const state = store && store.getState()
@@ -62,12 +63,16 @@ const Providers = ({ children, unstable__AdminNextstore, designSystem, resetCSS 
 
   const state = store.getState()
 
-  const CapUITheme = extendTheme({
-    colors: {
-      primary: generatePalette(state.default.parameters['color.btn.primary.bg']),
-    },
-    fonts: { body: 'inherit', heading: '' },
-  })
+  const CapUITheme = extendTheme(
+    !admin
+      ? {
+          colors: {
+            primary: generatePalette(state.default.parameters['color.btn.primary.bg']),
+          },
+          fonts: { body: 'inherit', heading: '' },
+        }
+      : {},
+  )
 
   const Theme = designSystem ? CapUIProvider : ThemeProvider
   return (

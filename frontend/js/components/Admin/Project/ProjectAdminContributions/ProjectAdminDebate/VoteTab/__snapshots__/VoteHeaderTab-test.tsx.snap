@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<VoteHeaderTab /> should render correctly 1`] = `
-<ForwardRef
+<Flex
   align="center"
   direction="row"
   justify="space-between"
@@ -36,11 +36,11 @@ exports[`<VoteHeaderTab /> should render correctly 1`] = `
   >
     global.export
   </Button>
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<VoteHeaderTab /> should render correctly when no vote 1`] = `
-<ForwardRef
+<Flex
   align="center"
   direction="row"
   justify="space-between"
@@ -75,11 +75,11 @@ exports[`<VoteHeaderTab /> should render correctly when no vote 1`] = `
   >
     global.export
   </Button>
-</ForwardRef>
+</Flex>
 `;
 
 exports[`<VoteHeaderTab /> should render correctly when step closed 1`] = `
-<ForwardRef
+<Flex
   align="center"
   direction="row"
   justify="space-between"
@@ -114,5 +114,5 @@ exports[`<VoteHeaderTab /> should render correctly when step closed 1`] = `
   >
     global.export
   </Button>
-</ForwardRef>
+</Flex>
 `;

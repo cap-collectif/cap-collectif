@@ -2,18 +2,14 @@ import * as React from 'react'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import { useHistory } from 'react-router-dom'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Button from '~ds/Button/Button'
-import { ICON_NAME } from '~ds/Icon/Icon'
-import Accordion from '~ds/Accordion'
 import type { ProjectAdminDebate_debate } from '~relay/ProjectAdminDebate_debate.graphql'
 import type { ProjectAdminDebate_debateStep } from '~relay/ProjectAdminDebate_debateStep.graphql'
 import FaceToFace from './FaceToFace/FaceToFace'
 import ArgumentTabQuery from './ArgumentTab/ArgumentTabQuery'
 import VoteTabQuery from './VoteTab/VoteTabQuery'
-import Heading from '~ui/Primitives/Heading'
 import FaceToFacePlaceholder from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/FaceToFace/FaceToFacePlaceholder'
 import Skeleton from '~ds/Skeleton'
+import { Accordion, Button, CapUIIcon, Flex, Heading } from '@cap-collectif/ui'
 
 type Props = {
   hasContributionsStep: boolean
@@ -29,7 +25,7 @@ export const ProjectAdminDebate = ({ hasContributionsStep, baseUrl, debate, deba
         <Button
           variant="tertiary"
           onClick={() => history.push(baseUrl)}
-          leftIcon={ICON_NAME.LONG_ARROW_LEFT}
+          leftIcon={CapUIIcon.LongArrowLeft}
           size="small"
           mb={8}
         >

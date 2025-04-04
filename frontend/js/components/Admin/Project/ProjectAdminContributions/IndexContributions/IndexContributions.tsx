@@ -2,13 +2,11 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { Link, useRouteMatch } from 'react-router-dom'
 import { createFragmentContainer, graphql } from 'react-relay'
-import Flex from '~ui/Primitives/Layout/Flex'
 import ContributionStep from './ContributionStep'
 import type { IndexContributions_project } from '~relay/IndexContributions_project.graphql'
 import '~relay/IndexContributions_project.graphql'
-import Text from '~ui/Primitives/Text'
-import Heading from '~ui/Primitives/Heading'
 import { clearToasts } from '~ds/Toast'
+import { Flex, Heading, Text } from '@cap-collectif/ui'
 export const STEP_CONTRIBUTIONS = ['CollectStep', 'DebateStep', 'QuestionnaireStep', 'SelectionStep']
 export const getContributionsPath = (
   baseUrl: string,

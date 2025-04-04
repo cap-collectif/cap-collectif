@@ -2,15 +2,13 @@ import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import { useHistory } from 'react-router-dom'
-import Flex from '~ui/Primitives/Layout/Flex'
 import ReplyList from './ReplyList'
 import type { ReplyListPage_questionnaireStep$key } from '~relay/ReplyListPage_questionnaireStep.graphql'
 import Input from '~ui/Form/Input/Input'
-import Button from '~ds/Button/Button'
 import Loader from '~ui/FeedbacksIndicators/Loader'
 import ReplyListPlaceholder from './ReplyListPlaceholder'
-import { ICON_NAME as ICON_NAME_DS } from '~ds/Icon/Icon'
 import { ReplyListPage_viewer$key } from '~relay/ReplyListPage_viewer.graphql'
+import { Button, CapUIIcon, Flex } from '@cap-collectif/ui'
 type Props = {
   readonly questionnaireStep: ReplyListPage_questionnaireStep$key
   readonly viewer: ReplyListPage_viewer$key
@@ -50,7 +48,12 @@ const STEP_FRAGMENT = graphql`
   }
 `
 
-const ReplyListPage = ({ questionnaireStep: stepFragment, viewer: viewerFragment, hasContributionsStep, baseUrl }: Props): JSX.Element => {
+const ReplyListPage = ({
+  questionnaireStep: stepFragment,
+  viewer: viewerFragment,
+  hasContributionsStep,
+  baseUrl,
+}: Props): JSX.Element => {
   const intl = useIntl()
   const history = useHistory()
   const [term, setTerm] = React.useState<string>('')
@@ -63,7 +66,7 @@ const ReplyListPage = ({ questionnaireStep: stepFragment, viewer: viewerFragment
         <Button
           variant="tertiary"
           onClick={() => history.push(baseUrl)}
-          leftIcon={ICON_NAME_DS.LONG_ARROW_LEFT}
+          leftIcon={CapUIIcon.LongArrowLeft}
           size="small"
           ml={6}
           mb={2}

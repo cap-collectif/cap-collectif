@@ -4,19 +4,20 @@ import config, { baseUrl } from '~/config'
 import AppBox from './AppBox'
 
 export type ImageProps = BoxProps & {
-  readonly src?: string
-  readonly useDs?: boolean
-  readonly alt?: string
-  readonly sizes?: string
+  src?: string
+  useDs?: boolean
+  alt?: string
+  sizes?: string
+  preventCdn?: boolean
 }
 
-const Image = ({ src, alt = "", useDs = false, ...props }: ImageProps) => {
+const Image = ({ src, alt = '', useDs = false, preventCdn = false, ...props }: ImageProps) => {
   if (!src) {
     return null
   }
 
   if (useDs) {
-    return !config.isDevOrTest ? (
+    return !config.isDevOrTest && !preventCdn ? (
       <Box
         as="img"
         loading="lazy"
@@ -42,7 +43,7 @@ const Image = ({ src, alt = "", useDs = false, ...props }: ImageProps) => {
     )
   }
 
-  return !config.isDevOrTest ? (
+  return !config.isDevOrTest && !preventCdn ? (
     // @ts-ignore let's progressively remove old appbox for image
     <AppBox
       as="img"

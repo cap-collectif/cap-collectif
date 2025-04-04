@@ -2,9 +2,7 @@
 
 exports[`<NewExportButton/> render correctly 1`] = `
 <Menu
-  placement="bottom-start"
->
-  <Menu.Button>
+  disclosure={
     <Button
       disabled={false}
       rightIcon="ARROW_DOWN_O"
@@ -13,15 +11,17 @@ exports[`<NewExportButton/> render correctly 1`] = `
     >
       global.export
     </Button>
-  </Menu.Button>
-  <Menu.List
+  }
+  placement="bottom-start"
+>
+  <Component
     maxWidth={300}
     mt={0}
   >
-    <Menu.OptionGroup
+    <Component
       onChange={[MockFunction]}
       title={
-        <ForwardRef
+        <Flex
           direction="row"
           justify="space-between"
         >
@@ -38,7 +38,7 @@ exports[`<NewExportButton/> render correctly 1`] = `
               title="label.export.by.step"
             />
           </ExportButtonstyle__ButtonInformation>
-        </ForwardRef>
+        </Flex>
       }
       titleBackgroundColor="#ecf0f5"
       type="radio"
@@ -78,16 +78,14 @@ exports[`<NewExportButton/> render correctly 1`] = `
           list-of-contributions
         </Text>
       </NewExportButton__CustomOptionItem>
-    </Menu.OptionGroup>
-  </Menu.List>
+    </Component>
+  </Component>
 </Menu>
 `;
 
 exports[`<NewExportButton/> render disabled 1`] = `
 <Menu
-  placement="bottom-start"
->
-  <Menu.Button>
+  disclosure={
     <Button
       disabled={true}
       rightIcon="ARROW_DOWN_O"
@@ -96,15 +94,17 @@ exports[`<NewExportButton/> render disabled 1`] = `
     >
       global.export
     </Button>
-  </Menu.Button>
-  <Menu.List
+  }
+  placement="bottom-start"
+>
+  <Component
     maxWidth={300}
     mt={0}
   >
-    <Menu.OptionGroup
+    <Component
       onChange={[MockFunction]}
       title={
-        <ForwardRef
+        <Flex
           direction="row"
           justify="space-between"
         >
@@ -121,7 +121,7 @@ exports[`<NewExportButton/> render disabled 1`] = `
               title="label.export.by.step"
             />
           </ExportButtonstyle__ButtonInformation>
-        </ForwardRef>
+        </Flex>
       }
       titleBackgroundColor="#ecf0f5"
       type="radio"
@@ -161,7 +161,7 @@ exports[`<NewExportButton/> render disabled 1`] = `
           list-of-contributions
         </Text>
       </NewExportButton__CustomOptionItem>
-    </Menu.OptionGroup>
-  </Menu.List>
+    </Component>
+  </Component>
 </Menu>
 `;

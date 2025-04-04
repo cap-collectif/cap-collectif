@@ -86,7 +86,7 @@ export const Tooltip = ({
             >
               <Arrow {...tooltip} />
               {typeof label === 'string' && (
-                <Text textAlign="center" lineHeight="sm" fontSize={1}>
+                <Text textAlign="center" lineHeight="sm" fontSize="11px">
                   {label}
                 </Text>
               )}

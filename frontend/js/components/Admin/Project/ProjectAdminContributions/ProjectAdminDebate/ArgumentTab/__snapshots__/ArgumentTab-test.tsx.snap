@@ -1,10 +1,10 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArgumentTab /> should render correctly 1`] = `
-<ForwardRef
+<Flex
   direction="column"
 >
-  <ArgumentTab___StyledAppBox
+  <ArgumentTab___StyledBox
     _css="520px"
     as="ul"
     m={0}
@@ -19,14 +19,14 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
       key="infinite-scroll-argument"
       loadMore={[Function]}
       loader={
-        <ForwardRef
+        <Flex
           direction="row"
           justify="center"
         >
           <ForwardRef
             size="m"
           />
-        </ForwardRef>
+        </Flex>
       }
       pageStart={0}
       ref={null}
@@ -34,7 +34,7 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
       useCapture={false}
       useWindow={false}
     >
-      <AppBox
+      <Box
         as="li"
         key="argument123"
       >
@@ -47,8 +47,8 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
           }
           setModerateArgumentModal={[Function]}
         />
-      </AppBox>
-      <AppBox
+      </Box>
+      <Box
         as="li"
         key="argument456"
       >
@@ -61,14 +61,14 @@ exports[`<ArgumentTab /> should render correctly 1`] = `
           }
           setModerateArgumentModal={[Function]}
         />
-      </AppBox>
+      </Box>
     </InfiniteScroll>
-  </ArgumentTab___StyledAppBox>
-</ForwardRef>
+  </ArgumentTab___StyledBox>
+</Flex>
 `;
 
 exports[`<ArgumentTab /> should render correctly when no argument 1`] = `
-<ForwardRef
+<Flex
   align="center"
   direction="column"
   spacing={6}
@@ -82,5 +82,5 @@ exports[`<ArgumentTab /> should render correctly when no argument 1`] = `
   >
     debate.empty.arguments.section
   </Text>
-</ForwardRef>
+</Flex>
 `;

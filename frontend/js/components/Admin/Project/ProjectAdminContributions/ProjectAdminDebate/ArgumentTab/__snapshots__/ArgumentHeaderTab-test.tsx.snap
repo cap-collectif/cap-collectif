@@ -1,11 +1,11 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
-<ForwardRef
+<Flex
   direction="column"
   mb={4}
 >
-  <ForwardRef
+  <Flex
     align="center"
     direction="row"
     justify="space-between"
@@ -31,22 +31,23 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
         filter.count.status.trashed
       </InlineSelect.Choice>
     </InlineSelect>
-    <ForwardRef
+    <Flex
       align="center"
       direction="row"
       spacing={5}
     >
-      <Menu>
-        <Menu.Button>
+      <Menu
+        disclosure={
           <Button
             color="gray.500"
             rightIcon="ARROW_DOWN_O"
           >
             label_filters
           </Button>
-        </Menu.Button>
-        <Menu.List>
-          <Menu.OptionGroup
+        }
+      >
+        <Component>
+          <Component
             onChange={[Function]}
             title="filter-arguments"
             type="checkbox"
@@ -57,7 +58,7 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
               ]
             }
           >
-            <Menu.OptionItem
+            <Component
               value="FOR"
             >
               <Text
@@ -65,8 +66,8 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
               >
                 global.for
               </Text>
-            </Menu.OptionItem>
-            <Menu.OptionItem
+            </Component>
+            <Component
               value="AGAINST"
             >
               <Text
@@ -74,9 +75,9 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
               >
                 global.against
               </Text>
-            </Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.List>
+            </Component>
+          </Component>
+        </Component>
       </Menu>
       <Button
         aria-label="global.export"
@@ -87,17 +88,17 @@ exports[`<ArgumentHeaderTab /> should render correctly 1`] = `
       >
         global.export
       </Button>
-    </ForwardRef>
-  </ForwardRef>
-</ForwardRef>
+    </Flex>
+  </Flex>
+</Flex>
 `;
 
 exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
-<ForwardRef
+<Flex
   direction="column"
   mb={4}
 >
-  <ForwardRef
+  <Flex
     align="center"
     direction="row"
     justify="space-between"
@@ -123,22 +124,23 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
         filter.count.status.trashed
       </InlineSelect.Choice>
     </InlineSelect>
-    <ForwardRef
+    <Flex
       align="center"
       direction="row"
       spacing={5}
     >
-      <Menu>
-        <Menu.Button>
+      <Menu
+        disclosure={
           <Button
             color="gray.500"
             rightIcon="ARROW_DOWN_O"
           >
             label_filters
           </Button>
-        </Menu.Button>
-        <Menu.List>
-          <Menu.OptionGroup
+        }
+      >
+        <Component>
+          <Component
             onChange={[Function]}
             title="filter-arguments"
             type="checkbox"
@@ -149,7 +151,7 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
               ]
             }
           >
-            <Menu.OptionItem
+            <Component
               value="FOR"
             >
               <Text
@@ -157,8 +159,8 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
               >
                 global.for
               </Text>
-            </Menu.OptionItem>
-            <Menu.OptionItem
+            </Component>
+            <Component
               value="AGAINST"
             >
               <Text
@@ -166,9 +168,9 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
               >
                 global.against
               </Text>
-            </Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.List>
+            </Component>
+          </Component>
+        </Component>
       </Menu>
       <Button
         aria-label="global.export"
@@ -179,17 +181,17 @@ exports[`<ArgumentHeaderTab /> should render correctly when no vote 1`] = `
       >
         global.export
       </Button>
-    </ForwardRef>
-  </ForwardRef>
-</ForwardRef>
+    </Flex>
+  </Flex>
+</Flex>
 `;
 
 exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
-<ForwardRef
+<Flex
   direction="column"
   mb={4}
 >
-  <ForwardRef
+  <Flex
     align="center"
     direction="row"
     justify="space-between"
@@ -215,22 +217,23 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
         filter.count.status.trashed
       </InlineSelect.Choice>
     </InlineSelect>
-    <ForwardRef
+    <Flex
       align="center"
       direction="row"
       spacing={5}
     >
-      <Menu>
-        <Menu.Button>
+      <Menu
+        disclosure={
           <Button
             color="gray.500"
             rightIcon="ARROW_DOWN_O"
           >
             label_filters
           </Button>
-        </Menu.Button>
-        <Menu.List>
-          <Menu.OptionGroup
+        }
+      >
+        <Component>
+          <Component
             onChange={[Function]}
             title="filter-arguments"
             type="checkbox"
@@ -241,7 +244,7 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
               ]
             }
           >
-            <Menu.OptionItem
+            <Component
               value="FOR"
             >
               <Text
@@ -249,8 +252,8 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
               >
                 global.for
               </Text>
-            </Menu.OptionItem>
-            <Menu.OptionItem
+            </Component>
+            <Component
               value="AGAINST"
             >
               <Text
@@ -258,9 +261,9 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
               >
                 global.against
               </Text>
-            </Menu.OptionItem>
-          </Menu.OptionGroup>
-        </Menu.List>
+            </Component>
+          </Component>
+        </Component>
       </Menu>
       <Button
         aria-label="global.export"
@@ -271,7 +274,7 @@ exports[`<ArgumentHeaderTab /> should render correctly with step closed 1`] = `
       >
         global.export
       </Button>
-    </ForwardRef>
-  </ForwardRef>
-</ForwardRef>
+    </Flex>
+  </Flex>
+</Flex>
 `;

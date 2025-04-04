@@ -15,17 +15,15 @@ import '~relay/ModalDebateOpinion_opinion.graphql'
 import type { ModalDebateOpinion_debate } from '~relay/ModalDebateOpinion_debate.graphql'
 import '~relay/ModalDebateOpinion_debate.graphql'
 import UserListField from '~/components/Admin/Field/UserListField'
-import Button from '~ds/Button/Button'
 import AddDebateOpinionMutation from '~/mutations/AddDebateOpinionMutation'
 import UpdateDebateOpinionMutation from '~/mutations/UpdateDebateOpinionMutation'
 import stripHtml from '@shared/utils/stripHTML'
 import { formatConnectionPath } from '~/shared/utils/relay'
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
-import Tag from '~ds/Tag/Tag'
-import Heading from '~ui/Primitives/Heading'
 import { FontWeight } from '~ui/Primitives/constants'
 import { toast } from '~ds/Toast'
 import { ModalContainer } from './ModalDebateOpinion.style'
+import { Button, Heading, Tag } from '@cap-collectif/ui'
 
 type Props = ReduxFormFormProps & {
   intl: IntlShape
@@ -153,7 +151,7 @@ export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: 
       </Heading>
     </Modal.Header>
     <Modal.Body>
-      <Tag variant={type === 'FOR' ? 'green' : 'red'} mb={4}>
+      <Tag variantColor={type === 'FOR' ? 'green' : 'red'} mb={4}>
         <FormattedMessage id={type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
       </Tag>
 

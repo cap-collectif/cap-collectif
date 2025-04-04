@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { FormattedMessage, useIntl } from 'react-intl'
 import styled from 'styled-components'
 import tinycolor from 'tinycolor2'
-import { Box, CapUIFontSize, Link, Text } from '@cap-collectif/ui'
+import { Box, CapUIFontSize, CapUILineHeight, Link, Text } from '@cap-collectif/ui'
 import SocialIcon from '@shared/ui/LegacyIcons/SocialIcon'
 import getBaseUrl from '@shared/utils/getBaseUrl'
 
@@ -232,8 +232,8 @@ export const LoginSocialButton = ({
             // @ts-ignore rapatrier DS et fix
             textAlign={justifyContent}
             mt={1}
-            lineHeight="s"
-            fontSize={isFcRequirement ? '14px' : 2}
+            lineHeight={CapUILineHeight.S}
+            fontSize={isFcRequirement ? CapUIFontSize.BodyRegular : CapUIFontSize.BodySmall}
             color={isFcRequirement ? 'gray.700' : undefined}
           >
             <FormattedMessage tagName="p" id={fcTitle} />

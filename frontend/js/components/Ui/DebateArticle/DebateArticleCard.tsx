@@ -7,7 +7,7 @@ import Image from '~ui/Primitives/Image'
 export const DebateArticleCardTitle = styled(Heading).attrs(props => ({
   mt: 0,
   mb: 1,
-  fontSize: 3,
+  fontSize: CapUIFontSize.BodyRegular,
   truncate: props.truncate ?? 165,
   lineHeight: 'base',
   color: props.color ?? 'gray.900',
@@ -39,6 +39,7 @@ const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Pr
       <Box overflow="hidden" height={14}>
         {illustration ? (
           <Image
+            preventCdn
             src={illustration}
             width="100%"
             height="100%"

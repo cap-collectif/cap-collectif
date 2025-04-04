@@ -6,19 +6,14 @@ import { useState } from 'react'
 import type { DropzoneFile } from 'react-dropzone'
 import { submit, Field, reduxForm, getFormError, change, updateSyncErrors, reset } from 'redux-form'
 import { connect } from 'react-redux'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Modal from '~ds/Modal/Modal'
-import Text from '~ui/Primitives/Text'
 import colors, { styleGuideColors } from '~/utils/colors'
 import Icon, { ICON_NAME as ICON, ICON_SIZE } from '~ds/Icon/Icon'
-import Button from '~ds/Button/Button'
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
-import Heading from '~ui/Primitives/Heading'
 import AddProposalsFromCsvMutation from '~/mutations/AddProposalsFromCsvMutation'
 import type { AddProposalsFromCsvMutationResponse } from '~relay/AddProposalsFromCsvMutation.graphql'
 import type { Dispatch, Uuid, GlobalState } from '~/types'
 import { ProposalCsvDropZoneInput, formName } from '~/components/Utils/ProposalCsvDropZoneInput'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import { Button, ButtonGroup, CapUIModalSize, Flex, Heading, Modal, Text } from '@cap-collectif/ui'
 
 type Props = ReduxFormFormProps & {
   dispatch: Dispatch
@@ -216,7 +211,13 @@ export const ImportProposalsFromCsvModal = ({
   const [file, setFile] = useState<DropzoneFile | null | undefined>(null)
   const proposalRevisionsEnabled = useFeatureFlag('proposal_revisions')
   return (
-    <Modal hideCloseButton ariaLabel="contained-modal-title-lg" show={show} width={['100%', '555px']}>
+    <Modal
+      hideCloseButton
+      ariaLabel="contained-modal-title-lg"
+      show={show}
+      width={['100%', '555px']}
+      size={CapUIModalSize.Md}
+    >
       <Modal.Header paddingY={6} borderBottom={`1px solid ${colors.borderColor}`}>
         <Flex justifyContent="space-between" alignItems="center">
           <Heading>
@@ -300,7 +301,7 @@ export const ImportProposalsFromCsvModal = ({
               </a>
             )}
           </div>
-          <ButtonGroup flexDirection="row">
+          <ButtonGroup direction="row">
             <Button
               disabled={pristine || invalid || submitting || loading}
               onClick={() => {

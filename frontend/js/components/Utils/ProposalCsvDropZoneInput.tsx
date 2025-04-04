@@ -7,9 +7,9 @@ import { useDispatch } from 'react-redux'
 import { FormGroup } from 'react-bootstrap'
 import { FormattedHTMLMessage, useIntl } from 'react-intl'
 import FileUpload from '../Form/FileUpload'
-import InfoMessage from '~ds/InfoMessage/InfoMessage'
 import Fetcher, { json } from '~/services/Fetcher'
 import Card from '~ds/Card/Card'
+import { InfoMessage } from '@cap-collectif/ui'
 
 type FileUploadFieldProps = {
   input: {

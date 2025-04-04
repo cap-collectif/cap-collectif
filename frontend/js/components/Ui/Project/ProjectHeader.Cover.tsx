@@ -545,8 +545,8 @@ const Theme = ({ content, href, eventView, ...rest }: ThemeProps) => (
     />
     <Text
       className="platform__body"
-      fontSize={eventView ? undefined : [1, 2]}
-      lineHeight="sm"
+      fontSize={eventView ? undefined : [CapUIFontSize.Caption, CapUIFontSize.BodySmall]}
+      lineHeight={CapUILineHeight.S}
       fontWeight="normal"
       color="gray.900"
       truncate={35}

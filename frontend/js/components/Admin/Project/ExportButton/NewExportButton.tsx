@@ -5,11 +5,8 @@ import styled from 'styled-components'
 import Icon, { ICON_NAME as OLD_ICON } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import { ButtonInformation } from './ExportButton.style'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Menu from '~ds/Menu/Menu'
-import Button from '~ds/Button/Button'
-import { ICON_NAME } from '~ds/Icon/Icon'
-import Text from '~ui/Primitives/Text'
+import { Button, CapUIIcon, Flex, Menu, Text } from '@cap-collectif/ui'
+
 type Props = {
   onChange: (newValue: string | string[]) => void
   linkHelp: string
@@ -37,14 +34,16 @@ const CustomOptionItem = styled(Menu.OptionItem)`
 const NewExportButton = ({ onChange, linkHelp, exportableSteps, disabled }: Props) => {
   const intl = useIntl()
   return (
-    <Menu placement="bottom-start">
-      <Menu.Button>
-        <Button disabled={disabled} rightIcon={ICON_NAME.ARROW_DOWN_O} variantSize="small" variant="primary">
+    <Menu
+      placement="bottom-start"
+      disclosure={
+        <Button disabled={disabled} rightIcon={CapUIIcon.ArrowDownO} variantSize="small" variant="primary">
           {intl.formatMessage({
             id: 'global.export',
           })}
         </Button>
-      </Menu.Button>
+      }
+    >
       <Menu.List mt={0} maxWidth={300}>
         <Menu.OptionGroup
           onChange={onChange}

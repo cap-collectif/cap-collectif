@@ -1,17 +1,12 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
-import InlineSelect from '~ds/InlineSelect'
 import type { ArgumentState } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Menu from '~ds/Menu/Menu'
-import Button from '~ds/Button/Button'
-import { ICON_NAME } from '~ds/Icon/Icon'
 import type { ForOrAgainstValue } from '~relay/DebateArgument_argument.graphql'
-import Text from '~ui/Primitives/Text'
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context'
 import type { ArgumentHeaderTab_debate } from '~relay/ArgumentHeaderTab_debate.graphql'
 import type { ArgumentHeaderTab_debateStep } from '~relay/ArgumentHeaderTab_debateStep.graphql'
+import { CapUIIcon, Flex, Menu, Button, Text, InlineSelect } from '@cap-collectif/ui'
 type Props = {
   debate: ArgumentHeaderTab_debate
   debateStep: ArgumentHeaderTab_debateStep
@@ -69,15 +64,15 @@ export const ArgumentHeaderTab = ({ debate, debateStep }: Props) => {
         </InlineSelect>
 
         <Flex direction="row" align="center" spacing={5}>
-          <Menu>
-            <Menu.Button>
-              <Button rightIcon={ICON_NAME.ARROW_DOWN_O} color="gray.500">
+          <Menu
+            disclosure={
+              <Button rightIcon={CapUIIcon.ArrowDownO} color="gray.500">
                 {intl.formatMessage({
                   id: 'label_filters',
                 })}
               </Button>
-            </Menu.Button>
-
+            }
+          >
             <Menu.List>
               <Menu.OptionGroup
                 value={parameters.filters.argument.type as any as string[]}

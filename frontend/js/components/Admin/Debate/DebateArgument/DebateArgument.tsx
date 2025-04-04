@@ -3,9 +3,6 @@ import moment from 'moment'
 import { createFragmentContainer, graphql } from 'react-relay'
 import type { IntlShape } from 'react-intl'
 import { FormattedDate, FormattedMessage, useIntl } from 'react-intl'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Tag from '~ds/Tag/Tag'
-import Text from '~ui/Primitives/Text'
 import type { DebateArgument_argument } from '~relay/DebateArgument_argument.graphql'
 import '~relay/DebateArgument_argument.graphql'
 import { ICON_NAME } from '~ds/Icon/Icon'
@@ -13,13 +10,12 @@ import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction'
 import InlineList from '~ds/InlineList/InlineList'
 import DeleteDebateArgumentMutation from '~/mutations/DeleteDebateArgumentMutation'
 import type { ModerateArgument } from '~/components/Debate/Page/Arguments/ModalModerateArgument'
-import Button from '~ds/Button/Button'
-import { toast } from '~ds/Toast'
 import { useProjectAdminDebateContext } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.context'
 import type { FilterArgument } from '~/components/Admin/Project/ProjectAdminContributions/ProjectAdminDebate/ProjectAdminDebate.reducer'
 import { formatConnectionPath } from '~/shared/utils/relay'
 import Popover from '~ds/Popover'
 import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
+import { Flex, Tag, Text, Button, toast, CapUIIcon } from '@cap-collectif/ui'
 type Props = {
   readonly argument: DebateArgument_argument
   readonly setModerateArgumentModal: (argument: ModerateArgument) => void
@@ -111,7 +107,7 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
 
       <Flex direction="row" flex="1" align="center" justify="space-between">
         <Tag
-          variant={type === 'FOR' ? 'green' : 'red'}
+          variantColor={type === 'FOR' ? 'green' : 'red'}
           onClick={() =>
             dispatch({
               type: 'CHANGE_ARGUMENT_TYPE',
@@ -125,7 +121,9 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
         {hovering &&
           (parameters.filters.argument.state === 'PUBLISHED' || parameters.filters.argument.state === 'WAITING') && (
             <Button
-              leftIcon={ICON_NAME.MODERATE}
+              variant="tertiary"
+              variantColor="hierarchy"
+              leftIcon={CapUIIcon.Moderate}
               color="gray.500"
               onClick={() =>
                 setModerateArgumentModal({

@@ -4,10 +4,6 @@ import { FormattedHTMLMessage, useIntl } from 'react-intl'
 import { useRouteMatch } from 'react-router-dom'
 import { reset, submit } from 'redux-form'
 import css from '@styled-system/css'
-import Menu from '~ds/Menu/Menu'
-import Button from '~ds/Button/Button'
-import Text from '~ui/Primitives/Text'
-import { ICON_NAME } from '~ds/Icon/Icon'
 import type { Dispatch } from '~/types'
 import ImportProposalsFromCsvModal from '~/components/Admin/Project/ImportButton/ImportProposalsFromCsvModal'
 import { formName } from '~/components/Utils/ProposalCsvDropZoneInput'
@@ -19,6 +15,7 @@ import { toast } from '~ds/Toast'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import { useProjectAdminProposalsContext } from '~/components/Admin/Project/ProjectAdminPage.context'
 import type { StepFilter } from '~/components/Admin/Project/ProjectAdminProposals.utils'
+import { Button, CapUIIcon, Menu, Text } from '@cap-collectif/ui'
 type Props = {
   proposalFormId: string
   selectedStep: StepFilter
@@ -151,16 +148,18 @@ const ImportButton = ({ proposalFormId, selectedStep, proposals, projectId, proj
 
   return (
     <>
-      <Menu placement="bottom-start">
-        <Menu.Button>
-          <Button rightIcon={ICON_NAME.ARROW_DOWN_O} variantSize="small" variant="secondary">
+      <Menu
+        placement="bottom-start"
+        disclosure={
+          <Button rightIcon={CapUIIcon.ArrowDownO} variantSize="small" variant="secondary" variantColor="primary">
             {intl.formatMessage({
               id: 'link_action_create',
             })}
           </Button>
-        </Menu.Button>
+        }
+      >
         <Menu.List mt={0} minWidth="240px">
-          <Menu.ListItem>
+          <Menu.Item>
             <Text
               as="span"
               css={css({
@@ -176,8 +175,8 @@ const ImportButton = ({ proposalFormId, selectedStep, proposals, projectId, proj
                 })}
               </a>
             </Text>
-          </Menu.ListItem>
-          <Menu.ListItem
+          </Menu.Item>
+          <Menu.Item
             onClick={() => {
               setShowModal(true)
             }}
@@ -185,9 +184,9 @@ const ImportButton = ({ proposalFormId, selectedStep, proposals, projectId, proj
             {intl.formatMessage({
               id: 'add.proposal.csv',
             })}
-          </Menu.ListItem>
+          </Menu.Item>
           {paperVotesEnabled && selectedStep.votable && (
-            <Menu.ListItem
+            <Menu.Item
               onClick={() => {
                 setShowPaperVotesModal(true)
               }}
@@ -195,7 +194,7 @@ const ImportButton = ({ proposalFormId, selectedStep, proposals, projectId, proj
               {intl.formatMessage({
                 id: 'add.paper_votes.csv',
               })}
-            </Menu.ListItem>
+            </Menu.Item>
           )}
         </Menu.List>
       </Menu>

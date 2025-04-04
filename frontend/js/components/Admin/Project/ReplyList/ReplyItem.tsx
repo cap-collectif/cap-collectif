@@ -3,15 +3,10 @@ import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
 import { graphql, useFragment } from 'react-relay'
 import moment from 'moment'
-import Table from '~ds/Table'
 import type { ReplyItem_reply$key, ReplyItem_reply } from '~relay/ReplyItem_reply.graphql'
-import Tag from '~ds/Tag/Tag'
-import Text from '~ui/Primitives/Text'
-import Flex from '~ui/Primitives/Layout/Flex'
 import ReplyModalConfirmationDelete from './ReplyModalConfirmationDelete'
-import ButtonQuickAction from '~ds/ButtonQuickAction/ButtonQuickAction'
-import Link from '~ds/Link/Link'
 import { ReplyItem_viewer$key } from '~relay/ReplyItem_viewer.graphql'
+import { ButtonQuickAction, CapUIIcon, Flex, Link, Table, Tag, Text } from '@cap-collectif/ui'
 type Props = {
   readonly reply: ReplyItem_reply$key
   readonly viewer: ReplyItem_viewer$key
@@ -69,7 +64,7 @@ const StatusTag = ({ reply, intl }: { reply: ReplyItem_reply; intl: IntlShape })
   }
 
   return (
-    <Tag variant={variant}>
+    <Tag variantColor={variant}>
       {intl.formatMessage({
         id: message,
       })}
@@ -106,7 +101,7 @@ const ReplyItem = ({ reply: replyFragment, connectionName, viewer: viewerFragmen
   return (
     <>
       <Table.Td>
-        {(reply.adminUrl && !viewer.isOrganizationMember) ? (
+        {reply.adminUrl && !viewer.isOrganizationMember ? (
           <Link href={reply.adminUrl} target="_blank">
             {id}
           </Link>
@@ -148,7 +143,7 @@ const ReplyItem = ({ reply: replyFragment, connectionName, viewer: viewerFragmen
           connectionName={connectionName}
           disclosure={
             <ButtonQuickAction
-              icon="TRASH"
+              icon={CapUIIcon.Trash}
               label={intl.formatMessage({
                 id: 'global.delete',
               })}

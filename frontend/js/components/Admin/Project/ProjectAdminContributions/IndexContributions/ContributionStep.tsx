@@ -1,14 +1,12 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
 import { createFragmentContainer, graphql } from 'react-relay'
-import Flex from '~ui/Primitives/Layout/Flex'
-import Text from '~ui/Primitives/Text'
 import type { ContributionStep_step } from '~relay/ContributionStep_step.graphql'
 import '~relay/ContributionStep_step.graphql'
 import type { StepType } from '~/constants/StepTypeConstants'
 import { STEP_TYPES } from '~/constants/StepTypeConstants'
-import Heading from '~ui/Primitives/Heading'
 import SpotIcon, { SPOT_ICON_NAME, SPOT_ICON_SIZE } from '~ds/SpotIcon/SpotIcon'
+import { Flex, Heading, Text } from '@cap-collectif/ui'
 
 const getIllustrationStep = (
   type: string,

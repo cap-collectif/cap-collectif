@@ -1,14 +1,9 @@
 import React from 'react'
 import type { IntlShape } from 'react-intl'
 import { useIntl } from 'react-intl'
-import Modal from '~ds/Modal/Modal'
-import Heading from '~ui/Primitives/Heading'
-import Text from '~ui/Primitives/Text'
-import ButtonGroup from '~ds/ButtonGroup/ButtonGroup'
-import Button from '~ds/Button/Button'
 import DeleteRepliesMutation from '~/mutations/DeleteRepliesMutation'
-import { toast } from '~ds/Toast'
 import { mutationErrorToast } from '~/components/Utils/MutationErrorToast'
+import { Button, ButtonGroup, CapUIModalSize, Heading, Modal, Text, toast } from '@cap-collectif/ui'
 type Props = {
   readonly replyIds: string[]
   readonly connectionName: string
@@ -52,6 +47,7 @@ const ReplyModalConfirmationDelete = ({ replyIds, connectionName, disclosure }: 
   const bodyTranslation = replyIds.length > 1 ? multipleRepliesTranslation : singleReplyTranslation
   return (
     <Modal
+      size={CapUIModalSize.Md}
       ariaLabel={intl.formatMessage({
         id: 'delete-confirmation',
       })}

@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<DebateArgument /> should render correctly 1`] = `
-<ForwardRef
+<Flex
   align="center"
   borderColor="gray.150"
   borderTop="normal"
@@ -11,7 +11,7 @@ exports[`<DebateArgument /> should render correctly 1`] = `
   onMouseLeave={[Function]}
   p={2}
 >
-  <ForwardRef
+  <Flex
     direction="column"
     flex="3"
     mr={4}
@@ -50,8 +50,8 @@ exports[`<DebateArgument /> should render correctly 1`] = `
         />
       </Text>
     </InlineList>
-  </ForwardRef>
-  <ForwardRef
+  </Flex>
+  <Flex
     align="center"
     direction="row"
     flex="1"
@@ -59,19 +59,19 @@ exports[`<DebateArgument /> should render correctly 1`] = `
   >
     <Tag
       onClick={[Function]}
-      variant="green"
+      variantColor="green"
     >
       <FormattedMessage
         id="argument.show.type.for"
         values={Object {}}
       />
     </Tag>
-  </ForwardRef>
-</ForwardRef>
+  </Flex>
+</Flex>
 `;
 
 exports[`<DebateArgument /> should render correctly when no published 1`] = `
-<ForwardRef
+<Flex
   align="center"
   borderColor="gray.150"
   borderTop="normal"
@@ -81,7 +81,7 @@ exports[`<DebateArgument /> should render correctly when no published 1`] = `
   onMouseLeave={[Function]}
   p={2}
 >
-  <ForwardRef
+  <Flex
     direction="column"
     flex="3"
     mr={4}
@@ -100,8 +100,8 @@ exports[`<DebateArgument /> should render correctly when no published 1`] = `
         Vince
       </Text>
     </InlineList>
-  </ForwardRef>
-  <ForwardRef
+  </Flex>
+  <Flex
     align="center"
     direction="row"
     flex="1"
@@ -109,13 +109,13 @@ exports[`<DebateArgument /> should render correctly when no published 1`] = `
   >
     <Tag
       onClick={[Function]}
-      variant="green"
+      variantColor="green"
     >
       <FormattedMessage
         id="argument.show.type.for"
         values={Object {}}
       />
     </Tag>
-  </ForwardRef>
-</ForwardRef>
+  </Flex>
+</Flex>
 `;

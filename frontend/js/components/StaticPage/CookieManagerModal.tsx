@@ -10,8 +10,8 @@ import type { State } from '~/types'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Text from '~ui/Primitives/Text'
 import { LinkSeparator, CookieBanner, ButtonParameters, ButtonDecline, ButtonAccept } from './CookieManagerModal.style'
-import Modal from '~ds/Modal/Modal'
-import Heading from '~ui/Primitives/Heading'
+import { CapUIModalSize, Heading, Modal } from '@cap-collectif/ui'
+
 type Props = {
   readonly analyticsJs: string | null | undefined
   readonly adJs: string | null | undefined
@@ -113,6 +113,7 @@ export const CookieManagerModal = ({ isLink = false, analyticsJs, adJs, cookieTr
           id: 'cookies-management',
         })}
         className="modal-cookie-manager"
+        size={CapUIModalSize.Xl}
       >
         <Modal.Header>
           <Heading>

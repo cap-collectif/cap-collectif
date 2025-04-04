@@ -1,5 +1,5 @@
 'use client'
-import { CapUIProvider, extendTheme, generateShades } from '@cap-collectif/ui'
+import { CapUIProvider, extendTheme, generatePalette } from '@cap-collectif/ui'
 import { AppProvider } from '@components/AppProvider/AppProvider'
 import NoSSR from '@utils/NoSSR'
 import getEnvironment from '@utils/relay-environement'
@@ -53,12 +53,11 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
       )
     : []
 
-  const primary = generateShades(siteColors.primaryColor)
+  const primary = generatePalette(siteColors.primaryColor)
 
   const CapUITheme = extendTheme({
     colors: {
       primary,
-      primaryHover: primary[800],
     },
     fonts: { body: `${bodyFont.name},system-ui,sans-serif`, heading: `${titleFont.name},system-ui,sans-serif` },
   })

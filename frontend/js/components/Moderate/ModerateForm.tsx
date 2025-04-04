@@ -5,7 +5,7 @@ import toggle from '~/components/Form/Toggle'
 import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import component from '~/components/Form/Field'
-import Tooltip from '~ds/Tooltip/Tooltip'
+import { Flex, Tooltip } from '@cap-collectif/ui'
 
 export const formName = 'moderate-form'
 type Props = ReduxFormFormProps
@@ -25,11 +25,9 @@ const ModerateForm: React.StatelessFunctionalComponent<Props> = ({ handleSubmit 
         id="toggle-isVisible"
         normalize={val => !!val}
         label={
-          <div>
+          <Flex alignItems="center">
             <FormattedMessage id="toggle.hide.content" />
             <Tooltip
-              visible
-              placement="bottom"
               label={intl.formatMessage({
                 id: 'tooltip.explanation.hide.content',
               })}
@@ -43,7 +41,7 @@ const ModerateForm: React.StatelessFunctionalComponent<Props> = ({ handleSubmit 
                 <Icon name={ICON_NAME.information} size={12} color={colors.iconGrayColor} className="ml-5" />
               </div>
             </Tooltip>
-          </div>
+          </Flex>
         }
       />
 
