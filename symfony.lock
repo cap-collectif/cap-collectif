@@ -126,12 +126,12 @@
         ]
     },
     "hwi/oauth-bundle": {
-        "version": "2.3",
+        "version": "1.4",
         "recipe": {
             "repo": "github.com/symfony/recipes-contrib",
             "branch": "main",
-            "version": "2.0",
-            "ref": "20154480d558409ad3eb9de3644817c81fad2268"
+            "version": "0.6",
+            "ref": "18ce21f16066cccfa0803c9e846a2e4f4bec92ab"
         },
         "files": [
             "config/packages/hwi_oauth.yaml",

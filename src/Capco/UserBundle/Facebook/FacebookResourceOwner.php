@@ -6,6 +6,7 @@ namespace Capco\UserBundle\Facebook;
 
 use Capco\UserBundle\Hwi\FeatureChecker;
 use Capco\UserBundle\Hwi\OptionsModifierInterface;
+use Http\Client\Common\HttpMethodsClientInterface;
 use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
@@ -15,14 +16,10 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\HttpUtils;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class FacebookResourceOwner extends GenericOAuth2ResourceOwner
 {
-    /**
-     * @var array{identifier: string, nickname: string, firstname: string, lastname: string, realname: string, email: string, profilepicture: string}
-     */
-    protected array $paths = [
+    protected $paths = [
         'identifier' => 'id',
         'nickname' => 'name',
         'firstname' => 'first_name',
@@ -33,7 +30,7 @@ class FacebookResourceOwner extends GenericOAuth2ResourceOwner
     ];
 
     public function __construct(
-        HttpClientInterface $hwiHttpClient,
+        HttpMethodsClientInterface $hwiHttpClient,
         HttpUtils $httpUtils,
         array $options,
         string $name,

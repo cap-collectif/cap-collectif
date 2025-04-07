@@ -6,31 +6,28 @@ use Capco\AppBundle\Helper\EnvHelper;
 use Capco\UserBundle\Hwi\FeatureChecker;
 use Capco\UserBundle\Hwi\OptionsModifierInterface;
 use Capco\UserBundle\Security\JWT;
+use Http\Client\Common\HttpMethodsClientInterface;
 use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\OAuth\State\State;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
+use Psr\Http\Message\ResponseInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\HttpUtils;
-use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Symfony\Contracts\HttpClient\ResponseInterface;
 
 class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
 {
-    /**
-     * @var array<string, string>
-     */
-    protected array $paths = [
+    protected $paths = [
         'identifier' => 'sub',
     ];
 
     private ?string $instanceName = null;
 
     public function __construct(
-        HttpClientInterface $hwiHttpClient,
+        HttpMethodsClientInterface $hwiHttpClient,
         HttpUtils $httpUtils,
         array $options,
         string $name,
