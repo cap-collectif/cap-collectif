@@ -2,9 +2,12 @@
 
 namespace Capco\AppBundle\Command\Serializer;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Reply;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Type\FormattedValueResponseTypeResolver;
 use Capco\UserBundle\Entity\User;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
@@ -14,7 +17,8 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
 {
     public function __construct(
         TranslatorInterface $translator,
-        private readonly FormattedValueResponseTypeResolver $resolver
+        private readonly FormattedValueResponseTypeResolver $formattedValueResponseTypeResolver,
+        private readonly MediaUrlResolver $mediaUrlResolver
     ) {
         parent::__construct($translator);
     }
@@ -71,7 +75,22 @@ class ReplyNormalizer extends BaseNormalizer implements NormalizerInterface
 
         /** @var AbstractResponse $response */
         foreach ($object->getResponses() as $response) {
-            $responseArray[$response->getQuestion()->getTitle()] = $response instanceof ValueResponse ? $this->resolver->__invoke($response) : null;
+            $questionTitle = $response->getQuestion()?->getTitle();
+            if (null === $questionTitle) {
+                continue;
+            }
+
+            if ($response instanceof MediaResponse) {
+                $mediaUrls = array_map(
+                    fn (Media $media) => $this->mediaUrlResolver->__invoke($media),
+                    $response->getMedias()->toArray()
+                );
+                $responseArray[$questionTitle] = implode(', ', $mediaUrls);
+            } elseif ($response instanceof ValueResponse) {
+                $responseArray[$questionTitle] = $this->formattedValueResponseTypeResolver->__invoke($response);
+            } else {
+                $responseArray[$questionTitle] = null;
+            }
         }
 
         return $this->translateHeaders($responseArray);

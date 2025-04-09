@@ -2,9 +2,12 @@
 
 namespace Capco\AppBundle\Command\Serializer;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Responses\MediaResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\AppBundle\GraphQL\Resolver\Media\MediaUrlResolver;
 use Capco\AppBundle\GraphQL\Resolver\Type\FormattedValueResponseTypeResolver;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
@@ -13,7 +16,8 @@ class ReplyAnonymousNormalizer extends BaseNormalizer implements NormalizerInter
 {
     public function __construct(
         TranslatorInterface $translator,
-        private readonly FormattedValueResponseTypeResolver $resolver
+        private readonly FormattedValueResponseTypeResolver $formattedValueResponseTypeResolver,
+        private readonly MediaUrlResolver $mediaUrlResolver
     ) {
         parent::__construct($translator);
     }
@@ -75,17 +79,22 @@ class ReplyAnonymousNormalizer extends BaseNormalizer implements NormalizerInter
 
         /** @var AbstractResponse $response */
         foreach ($object->getResponses() as $response) {
-            $question = $response->getQuestion();
-
-            if (null === $question) {
+            $questionTitle = $response->getQuestion()?->getTitle();
+            if (null === $questionTitle) {
                 continue;
             }
 
-            $responseArray[$question->getTitle()] =
-                $response instanceof ValueResponse ?
-                    $this->resolver->__invoke($response) :
-                    null
-            ;
+            if ($response instanceof MediaResponse) {
+                $mediaUrls = array_map(
+                    fn (Media $media) => $this->mediaUrlResolver->__invoke($media),
+                    $response->getMedias()->toArray()
+                );
+                $responseArray[$questionTitle] = implode(', ', $mediaUrls);
+            } elseif ($response instanceof ValueResponse) {
+                $responseArray[$questionTitle] = $this->formattedValueResponseTypeResolver->__invoke($response);
+            } else {
+                $responseArray[$questionTitle] = null;
+            }
         }
 
         return $this->translateHeaders($responseArray);
