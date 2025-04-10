@@ -14,7 +14,6 @@ use Elastica\Query;
 use Elastica\Query\BoolQuery;
 use Elastica\Query\Exists;
 use Elastica\Query\Term;
-use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 
 class OpinionSearch extends Search
 {
@@ -45,8 +44,8 @@ class OpinionSearch extends Search
             if ($viewer->getOrganization()) {
                 $organizationFilter = (new BoolQuery())->addShould(
                     new Term([
-                        'consultation.owner.organizationId' => [
-                            'value' => GlobalId::toGlobalId('Organization', $viewer->getOrganization()->getId()),
+                        'consultation.owner.id' => [
+                            'value' => $viewer->getOrganization()->getId(),
                         ],
                     ])
                 );

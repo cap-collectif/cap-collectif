@@ -11,7 +11,6 @@ use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\OpinionTypeRepository;
-use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\ProjectVoter;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -27,7 +26,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly OpinionTypeRepository $opinionTypeRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly SettableOwnerResolver $settableOwnerResolver)
+    public function __construct(private readonly FormFactoryInterface $formFactory, private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly OpinionTypeRepository $opinionTypeRepository, private readonly AuthorizationCheckerInterface $authorizationChecker)
     {
     }
 
@@ -48,7 +47,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
 
             $consultation = $this->getConsultation($viewer, $id, $step);
             $consultation->setTitle($consultationInput['title']);
-            $consultation->setOwner($owner);
+            $consultation->setOwner($consultation->getOwner() ?? $owner);
             $this->em->flush();
 
             $this->removeSections($consultationInput['sections'], $consultation);
@@ -64,11 +63,7 @@ class CreateOrUpdateConsultationMutation implements MutationInterface
                 throw GraphQLException::fromFormErrors($form);
             }
 
-            $consultation->setCreator($viewer);
-            $consultation->setOwner(
-                $this->settableOwnerResolver->__invoke($input->offsetGet('owner'), $viewer)
-            );
-
+            $consultation->setCreator($consultation->getCreator() ?? $viewer);
             $consultations->add($consultation);
         }
 
