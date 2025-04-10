@@ -77,12 +77,23 @@ class ReplyAnonymousNormalizer extends BaseNormalizer implements NormalizerInter
             $responseArray = array_merge($responseArray, $fullUserArray);
         }
 
+        $keyCounters = [];
+
         /** @var AbstractResponse $response */
         foreach ($object->getResponses() as $response) {
             $questionTitle = $response->getQuestion()?->getTitle();
             if (null === $questionTitle) {
                 continue;
             }
+
+            if (!isset($keyCounters[$questionTitle])) {
+                $keyCounters[$questionTitle] = 0;
+            }
+
+            if ($keyCounters[$questionTitle] > 0) {
+                $questionTitle = sprintf('%s (%d)', $questionTitle, $keyCounters[$questionTitle]);
+            }
+            ++$keyCounters[$response->getQuestion()?->getTitle()];
 
             if ($response instanceof MediaResponse) {
                 $mediaUrls = array_map(

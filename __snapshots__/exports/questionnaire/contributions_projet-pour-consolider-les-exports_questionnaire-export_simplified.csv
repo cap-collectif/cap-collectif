@@ -1,8 +1,8 @@
-﻿export_contribution_type,export_contribution_id,export_contribution_author_id,export_contribution_published_at,"Décision majoritaire"
-export_contribution_type_questionnaire_reply,replyExport1,user5,"2020-03-20 00:00:00",
-export_contribution_type_questionnaire_reply,replyExport2,user5,"2020-03-20 00:00:00",global-well
-export_contribution_type_questionnaire_reply,replyExport3,user5,"2020-03-20 00:00:00",global-not-passable
-export_contribution_type_questionnaire_reply,replyExport4,user5,"2020-03-20 00:00:00",global-passable
-export_contribution_type_questionnaire_reply,replyExport5,user5,"2020-03-20 00:00:00",global-well
-export_contribution_type_questionnaire_reply,replyExport6,user5,"2020-03-20 00:00:00",global-reject
-export_contribution_type_questionnaire_reply,replyExport7,user5,"2020-03-20 00:00:00",global-well-enough
+﻿export_contribution_type,export_contribution_id,export_contribution_author_id,export_contribution_published_at,"Décision majoritaire","Décision majoritaire (1)"
+export_contribution_type_questionnaire_reply,replyExport1,user5,"2020-03-20 00:00:00",very-well,
+export_contribution_type_questionnaire_reply,replyExport2,user5,"2020-03-20 00:00:00",global-well,
+export_contribution_type_questionnaire_reply,replyExport3,user5,"2020-03-20 00:00:00",global-not-passable,
+export_contribution_type_questionnaire_reply,replyExport4,user5,"2020-03-20 00:00:00",global-passable,
+export_contribution_type_questionnaire_reply,replyExport5,user5,"2020-03-20 00:00:00",global-well,
+export_contribution_type_questionnaire_reply,replyExport6,user5,"2020-03-20 00:00:00",global-reject,
+export_contribution_type_questionnaire_reply,replyExport7,user5,"2020-03-20 00:00:00",global-well-enough,
