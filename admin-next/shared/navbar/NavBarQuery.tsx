@@ -33,8 +33,6 @@ export const QUERY = graphql`
   }
 `
 
-const isBigLogoRatio = 1.5
-
 const NavBarQueryRender: React.FC<{ children: React.ReactNode }> = ({ children }) => {
   const query = useLazyLoadQuery<NavBarQueryType>(QUERY, {})
 
@@ -48,10 +46,8 @@ const NavBarQueryRender: React.FC<{ children: React.ReactNode }> = ({ children }
       <PrivacyModal query={query} />
       <NavBar
         links={menuItems}
-        logoSrc={siteImage?.media?.url}
         theme={getTheme(siteColors)}
-        isBigLogo={(siteImage?.media?.width || 0) / (siteImage?.media?.height || 1) <= isBigLogoRatio}
-        logoWidth={siteImage?.media?.width}
+        logo={siteImage?.media}
       >
         {children}
       </NavBar>
@@ -70,10 +66,8 @@ const NavBarQuery: React.FC<{ children: React.ReactNode; SSRData?: layoutQuery$d
       <PrivacyModalQuery />
       <NavBar
         links={menuItems}
-        logoSrc={logo?.media?.url}
         theme={getTheme(siteColors)}
-        isBigLogo={(logo?.media?.width || 0) / (logo?.media?.height || 1) <= isBigLogoRatio}
-        logoWidth={logo?.media?.width}
+        logo={logo?.media}
       >
         {children}
       </NavBar>

@@ -157,17 +157,20 @@ export const NavBarLink = React.forwardRef<
 })
 NavBarLink.displayName = 'NavBarLink'
 
-export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean; logoWidth?: number }> = ({
-  src,
-  isBigLogo = false,
-  logoWidth,
+
+const IS_BIG_LOGO_RATIO = 1.5
+
+export const NavBarLogo: React.FC<{ logo?: { url: string, width: number, height: number } }> = ({
+  logo,
 }) => {
   const intl = useIntl()
-  const width = logoWidth > 180 ? 180 : logoWidth
+  const width = logo.width > 180 ? 180 : logo.width
   const {
     colors: { primary },
   } = useTheme()
   const focusColor = primary?.[700] || '#000'
+
+  const isBigLogo = (logo.width || 0) / (logo.height || 1) <= IS_BIG_LOGO_RATIO
 
   return (
     <Box
@@ -189,7 +192,7 @@ export const NavBarLogo: React.FC<{ src: string; isBigLogo?: boolean; logoWidth?
           sx={{ objectFit: 'contain' }}
           height="100%"
           loading="lazy"
-          src={src}
+          src={logo.url}
           alt={`${intl.formatMessage({ id: 'image.logo' })} - ${intl.formatMessage({
             id: 'back-to-homepage',
           })}`}

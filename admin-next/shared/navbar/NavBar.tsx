@@ -95,14 +95,16 @@ const NavBarContent = ({
 type NavBarProps = {
   children: React.ReactNode
   links: readonly LinkOrMenu[]
-  logoSrc: string
   theme: NavBarTheme
-  isBigLogo: boolean
-  logoWidth: number
+  logo: {
+    width: number
+    height: number
+    url: string
+  }
   showBorder?: boolean
 }
 
-const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth, showBorder }: NavBarProps) => {
+const NavBarWeb = ({ children, links, theme, showBorder, logo}: NavBarProps) => {
   const [isExtended] = React.useState(links.length > 6)
   const { colors } = useTheme()
 
@@ -118,7 +120,7 @@ const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth, show
         <Flex direction="column" zIndex={navBarZIndex} maxWidth={pxToRem(1280)} width="100%" margin="auto">
           <Flex px={6} justifyContent="space-between" alignItems="center" minHeight="4rem">
             <Flex alignItems="center">
-              <NavBar.Logo src={logoSrc} isBigLogo={isBigLogo} logoWidth={logoWidth} />
+              <NavBar.Logo logo={logo} />
               {isExtended ? null : <NavBar.Content links={links} isExtended={isExtended} theme={theme} />}
             </Flex>
             {children}
@@ -131,7 +133,7 @@ const NavBarWeb = ({ children, links, theme, logoSrc, isBigLogo, logoWidth, show
   )
 }
 
-const NavBarMobile = ({ children, links, theme, logoSrc, logoWidth, showBorder }: NavBarProps) => {
+const NavBarMobile = ({ children, links, theme, showBorder, logo }: NavBarProps) => {
   const [isOpen, setIsOpen] = React.useState(false)
   const intl = useIntl()
   const { colors } = useTheme()
@@ -162,7 +164,7 @@ const NavBarMobile = ({ children, links, theme, logoSrc, logoWidth, showBorder }
         minHeight="80px"
         borderBottom={isOpen ? `1px solid ${colors['neutral-gray']['150']}` : ''}
       >
-        <NavBar.Logo src={logoSrc} logoWidth={logoWidth} />
+        <NavBar.Logo logo={logo} />
         <Button
           variant={isOpen ? 'tertiary' : 'primary'}
           px={4}
