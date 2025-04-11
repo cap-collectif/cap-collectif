@@ -14,11 +14,10 @@ import EventListCounter from './List/EventListCounter'
 import EventListStatusFilter from './List/EventListStatusFilter'
 import colors from '~/utils/colors'
 import EventPreview from './EventPreview/EventPreview'
-import { toast } from '~ds/Toast'
 import { getOrderBy, ORDER_TYPE } from './Profile/EventListProfileRefetch'
 import { useSelector } from 'react-redux'
 import { GlobalState } from '~/types'
-import { Heading } from '@cap-collectif/ui'
+import { Heading, toast } from '@cap-collectif/ui'
 
 type Props = {
   readonly query: EventListPageContainer_query
