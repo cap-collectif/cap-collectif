@@ -5,7 +5,6 @@ namespace Capco\UserBundle\FranceConnect;
 use Capco\AppBundle\Cache\RedisCache;
 use Capco\UserBundle\Hwi\FeatureChecker;
 use Capco\UserBundle\Hwi\OptionsModifierInterface;
-use Http\Client\Common\HttpMethodsClientInterface;
 use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\GenericOAuth2ResourceOwner;
 use HWI\Bundle\OAuthBundle\OAuth\State\State;
@@ -16,10 +15,11 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Security\Core\Exception\AuthenticationException;
 use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
 {
-    protected $paths = [
+    protected array $paths = [
         'identifier' => 'sub',
         'email' => 'email',
         'firstname' => 'given_name',
@@ -29,7 +29,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
     ];
 
     public function __construct(
-        HttpMethodsClientInterface $hwiHttpClient,
+        HttpClientInterface $hwiHttpClient,
         HttpUtils $httpUtils,
         array $options,
         string $name,
@@ -39,10 +39,7 @@ class FranceConnectResourceOwner extends GenericOAuth2ResourceOwner
         private readonly OptionsModifierInterface $optionsModifier,
         private readonly FeatureChecker $featureChecker
     ) {
-        $this->httpClient = $hwiHttpClient;
-        $this->httpUtils = $httpUtils;
-        $this->name = $name;
-        $this->storage = $hwiStorage;
+        parent::__construct($hwiHttpClient, $httpUtils, $options, $name, $hwiStorage);
 
         $options = $this->optionsModifier->modifyOptions($options, $this);
 

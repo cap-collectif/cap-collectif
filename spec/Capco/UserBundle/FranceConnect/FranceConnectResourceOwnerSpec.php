@@ -6,18 +6,18 @@ use Capco\AppBundle\Cache\RedisCache;
 use Capco\UserBundle\FranceConnect\FranceConnectOptionsModifier;
 use Capco\UserBundle\FranceConnect\FranceConnectResourceOwner;
 use Capco\UserBundle\Hwi\FeatureChecker;
-use Http\Client\Common\HttpMethodsClientInterface;
 use HWI\Bundle\OAuthBundle\OAuth\RequestDataStorageInterface;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Symfony\Component\Cache\CacheItem;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Security\Http\HttpUtils;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class FranceConnectResourceOwnerSpec extends ObjectBehavior
 {
     public function it_is_initializable(
-        HttpMethodsClientInterface $httpClient,
+        HttpClientInterface $httpClient,
         HttpUtils $httpUtils,
         FranceConnectOptionsModifier $optionsModifier,
         RequestDataStorageInterface $storage,
@@ -44,7 +44,7 @@ class FranceConnectResourceOwnerSpec extends ObjectBehavior
     }
 
     public function it_uses_configured_scope(
-        HttpMethodsClientInterface $httpClient,
+        HttpClientInterface $httpClient,
         HttpUtils $httpUtils,
         FranceConnectOptionsModifier $optionsModifier,
         RequestDataStorageInterface $storage,
@@ -79,7 +79,7 @@ class FranceConnectResourceOwnerSpec extends ObjectBehavior
     }
 
     public function it_generates_nonce_if_it_is_not_found_in_storage(
-        HttpMethodsClientInterface $httpClient,
+        HttpClientInterface $httpClient,
         HttpUtils $httpUtils,
         FranceConnectOptionsModifier $optionsModifier,
         RequestDataStorageInterface $storage,
