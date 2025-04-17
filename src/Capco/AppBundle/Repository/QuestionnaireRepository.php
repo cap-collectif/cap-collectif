@@ -226,9 +226,13 @@ class QuestionnaireRepository extends EntityRepository
                 reply_anonymous ra ON q.id = ra.questionnaire_id
             LEFT JOIN
                 fos_user u ON r.author_id = u.id
+            LEFT JOIN
+                response resr ON r.id = resr.reply_id
+            LEFT JOIN
+                response resra ON ra.id = resra.reply_id
             WHERE
                 q.id = :questionnaireId
-                AND (r.updated_at > :date OR ra.updated_at > :date OR u.updated_at > :date)
+                AND (r.updated_at > :date OR ra.updated_at > :date OR u.updated_at > :date OR resr.updated_at > :date OR resra.updated_at > :date)
         ';
 
         $query = $this->getEntityManager()->createNativeQuery($sql, $rsm);
