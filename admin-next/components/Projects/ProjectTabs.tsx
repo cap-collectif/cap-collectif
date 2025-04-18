@@ -46,6 +46,11 @@ const FRAGMENT = graphql`
     firstQuestionnaireStep {
       id
       slug
+      questionnaire {
+        replies {
+          totalCount
+        }
+      }
     }
     firstAnalysisStep {
       proposals {
@@ -70,6 +75,11 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
 
   const consultationStep = project.steps.find(step => step.__typename === 'ConsultationStep')
   const consultationContribCount = consultationStep?.contributions?.totalCount ?? 0
+  const questionnaireAnswersTotalCount = project.firstQuestionnaireStep?.questionnaire?.replies?.totalCount
+
+  const totalCountToShow = !!project.firstCollectStep
+    ? project.proposals.totalCount + consultationContribCount
+    : questionnaireAnswersTotalCount
 
   const getLinks = project => {
     const links = []
@@ -77,7 +87,7 @@ const ProjectTabs: React.FC<ProjectTabsProps> = ({ project: projectRef }) => {
 
     links.push({
       title: 'global.contribution',
-      count: project.proposals.totalCount + consultationContribCount,
+      count: totalCountToShow,
       url: baseUrlContributions,
       to: getRouteContributionPath(
         project,

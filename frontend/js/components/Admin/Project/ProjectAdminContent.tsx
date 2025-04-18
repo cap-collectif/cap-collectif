@@ -5,7 +5,7 @@ import { formValueSelector } from 'redux-form'
 import { BrowserRouter as Router, Link, Route, Switch, useLocation } from 'react-router-dom'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
-import type { ProjectAdminContent_project } from '~relay/ProjectAdminContent_project.graphql'
+import type { ProjectAdminContent_project$data } from '~relay/ProjectAdminContent_project.graphql'
 import '~relay/ProjectAdminContent_project.graphql'
 import type { ProjectAdminContent_query } from '~relay/ProjectAdminContent_query.graphql'
 import '~relay/ProjectAdminContent_query.graphql'
@@ -39,7 +39,7 @@ import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import htmlDecode from '~/components/Utils/htmlDecode'
 type Props = {
   readonly viewerIsAdmin: boolean
-  readonly project: ProjectAdminContent_project
+  readonly project: ProjectAdminContent_project$data
   readonly query: ProjectAdminContent_query
   readonly firstCollectStepId: string | null | undefined
   readonly hasIdentificationCodeLists: boolean
@@ -53,7 +53,7 @@ type Links = Array<{
 }>
 
 const getRouteContributionPath = (
-  project: ProjectAdminContent_project,
+  project: ProjectAdminContent_project$data,
   baseUrlContributions: string,
   firstCollectStepId: string | null | undefined,
 ): string => {
@@ -95,7 +95,7 @@ const getRouteContributionPath = (
 }
 
 const formatNavbarLinks = (
-  project: ProjectAdminContent_project,
+  project: ProjectAdminContent_project$data,
   query: ProjectAdminContent_query,
   path: string,
   setTitle: (arg0: string) => void,
@@ -110,11 +110,25 @@ const formatNavbarLinks = (
   const links = []
   const baseUrlContributions = getProjectAdminPath(project._id, 'CONTRIBUTIONS', newCreateProjectFlag)
   const isCollectStepPage = location === getContributionsPath(baseUrlContributions, 'CollectStep')
+  const isQuestionnaireStepPage =
+    location ===
+    getContributionsPath(baseUrlContributions, 'QuestionnaireStep', null, project.firstQuestionnaireStep?.slug)
+
   const hasSelectionStep = project.steps.some(step => step.__typename === 'SelectionStep')
+  const replyCount = project.firstQuestionnaireStep?.questionnaire?.replies?.totalCount
+  const proposalCount = project.proposals.totalCount
+
+  const totalCountToShow = isQuestionnaireStepPage
+    ? replyCount
+    : isCollectStepPage
+    ? proposalCount
+    : hasSelectionStep
+    ? proposalCount
+    : replyCount
 
   links.push({
     title: 'global.contribution',
-    count: isCollectStepPage ? project.proposals.totalCount : undefined,
+    count: totalCountToShow,
     url: baseUrlContributions,
     to: getRouteContributionPath(project, baseUrlContributions, firstCollectStepId),
     component: () => (
@@ -386,6 +400,11 @@ export default createFragmentContainer(connect(mapStateToProps)(ProjectAdminRout
       firstQuestionnaireStep {
         id
         slug
+        questionnaire {
+          replies {
+            totalCount
+          }
+        }
       }
       firstAnalysisStep {
         proposals {
