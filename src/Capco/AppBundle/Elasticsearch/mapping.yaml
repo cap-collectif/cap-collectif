@@ -80,7 +80,7 @@ mappings:
                     properties:
                         id: { type: keyword }
                         visibility: { type: long }
-                        restrictedViewerIds: { type: keyword }
+                        restrictedGroupIds: { type: keyword }
                         authors: &Author
                             properties:
                                 id: { type: keyword }

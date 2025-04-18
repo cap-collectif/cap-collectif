@@ -4,7 +4,6 @@ namespace Capco\AppBundle\Normalizer;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\ProjectAuthor;
-use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Helper\ProjectHelper;
 use Capco\AppBundle\Repository\EventRepository;
 use Capco\AppBundle\Resolver\ContributionResolver;
@@ -43,7 +42,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             $data['contributionsCount'] = $this->contributionResolver->countProjectContributions(
                 $object
             );
-            $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
+            $data['restrictedGroupIds'] = $this->getProjectGroupIds($object);
             $data['eventCount'] = $this->eventRepository->countByProject($object->getId());
             $data['authors'] = [];
             /** @var ProjectAuthor $projectAuthor */
@@ -83,7 +82,7 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
             || \in_array('ElasticsearchProposalNestedProject', $groups, true)
             || \in_array('ElasticsearchEventNestedProject', $groups, true)
         ) {
-            $data['restrictedViewerIds'] = $this->getRestrictedViewerIds($object);
+            $data['restrictedGroupIds'] = $this->getProjectGroupIds($object);
             $data['authors'] = [];
             foreach ($object->getAuthors() as $projectAuthor) {
                 $data['authors'][] = $this->normalizer->normalize(
@@ -135,17 +134,11 @@ class ProjectNormalizer implements NormalizerInterface, SerializerAwareInterface
         return $data instanceof Project;
     }
 
-    private function getRestrictedViewerIds(Project $object): array
+    /**
+     * @return array<string>
+     */
+    private function getProjectGroupIds(Project $project): array
     {
-        $restrictedViewerIds = [];
-        // @var Group $viewerGroup
-        foreach ($object->getRestrictedViewerGroups() as $groups) {
-            /** @var UserGroup $userGroup */
-            foreach ($groups->getUserGroups() as $userGroup) {
-                $restrictedViewerIds[] = $userGroup->getUser()->getId();
-            }
-        }
-
-        return $restrictedViewerIds;
+        return array_map(fn ($group) => $group->getId(), $project->getRestrictedViewerGroups()->toArray());
     }
 }

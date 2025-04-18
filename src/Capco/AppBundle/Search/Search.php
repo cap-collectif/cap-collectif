@@ -253,9 +253,10 @@ abstract class Search
                     ])
                 )
                 ->addFilter(
-                    new Query\Terms("{$projectPath}.restrictedViewerIds", [$viewer->getId()])
+                    new Query\Terms("{$projectPath}.restrictedGroupIds", $viewer->getUserGroupIds())
                 ),
             (new BoolQuery())
+                // @phpstan-ignore-next-line
                 ->addFilter(new Query\Terms("{$projectPath}.visibility", $visibility))
                 ->addFilter(
                     new Query\Range("{$projectPath}.visibility", [
