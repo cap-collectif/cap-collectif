@@ -4,7 +4,7 @@ exports[`<ProposalNewsEditModal /> should render correctly 1`] = `
 <Modal
   animation={false}
   autoFocus={true}
-  backdrop={true}
+  backdrop="static"
   bsClass="modal"
   className={null}
   dialogClassName="modal--update"
@@ -127,7 +127,7 @@ exports[`<ProposalNewsEditModal /> should render correctly with modal open 1`] =
 <Modal
   animation={false}
   autoFocus={true}
-  backdrop={true}
+  backdrop="static"
   bsClass="modal"
   className="overflow-hidden"
   dialogClassName="modal--update"

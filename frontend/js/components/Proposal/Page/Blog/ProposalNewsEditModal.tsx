@@ -125,6 +125,7 @@ export const ProposalNewsEditModal = ({
       animation={false}
       className={show ? `overflow-hidden` : null}
       dialogClassName="modal--update"
+      backdrop="static"
     >
       <Modal.Header
         closeButton
