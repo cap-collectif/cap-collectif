@@ -20,7 +20,7 @@ Scenario: Anonymous wants to register with user type and zipcode
   And should see an "div[id^=turnstile_captcha-]" element
   And I press "global.register"
   Then I wait 6 seconds
-  Then I can see I am logged in as "Naruto42"
+  Then I can see I am logged in as "Naruto42" and I am "flaky"
 
 @database
 Scenario: Anonymous wants to register
