@@ -19,7 +19,6 @@ services:
             $hwiStorage: '@hwi_oauth.storage.session'
             $timezoneDetector: '@Capco\AdminBundle\Timezone\GlobalConfigurationTimeZoneDetector'
 
-
     Capco\AppBundle\Search\AnalyticsSearch: ~
 
     Capco\AppBundle\Import\:
@@ -359,6 +358,7 @@ services:
             $redis: '@snc_redis.session'
             $prefix: '%redis_prefix%session_json_new_%kernel.environment%_' # We add env in prefix to allow multi environments sessions in dev
             $requestStack: '@request_stack'
+            $sessionLifetime: '%session_lifetime_seconds%'
     Capco\UserBundle\Security\Core\User\CasUserProvider:
         public: true
 

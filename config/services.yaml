@@ -105,6 +105,7 @@ parameters:
     turnstile_public_key: '%env(SYMFONY_TURNSTILE_PUBLIC_KEY)%'
     turnstile_private_key: '%env(SYMFONY_TURNSTILE_PRIVATE_KEY)%'
     magiclinks_duration_in_minutes: '%env(int:SYMFONY_MAGICLINKS_DURATION_IN_MINUTES)%'
+    session_lifetime_seconds: '%env(int:SYMFONY_SESSION_TIMEOUT_SECONDS)%'
 
     #
     # Default env values :
@@ -169,7 +170,7 @@ parameters:
     env(SLACK_OMAR_DJINN): null
     env(SYMFONY_PANTHER_URL): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_PANTHER_TOKEN): 'INSERT_A_REAL_SECRET'
-    env(SYMFONY_SESSION_TIMEOUT_SECONDS): 1209600 # in seconds, 1209600 = two weeks
+    env(SYMFONY_SESSION_TIMEOUT_SECONDS): 7200 # in seconds, 7200 = two hours
     env(SYMFONY_CAS_VERIFY_URL_PROFILE): null
     # ELASTICSEARCH-LOGPUSH
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST): 'INSERT_A_REAL_SECRET'

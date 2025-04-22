@@ -28,9 +28,10 @@ class SessionWithJsonHandler extends RedisSessionHandler
         private readonly RequestStack $requestStack,
         string $prefix,
         private readonly LoggerInterface $logger,
+        int $sessionLifetime,
         array $options = []
     ) {
-        $options['ttl'] = 1209600; // This is two weeks
+        $options['ttl'] = $sessionLifetime;
         $options['prefix'] = $prefix;
         // /!\ Our session data should be "read-only" :
         // we use parallel requests and want to avoid cascading requests.
