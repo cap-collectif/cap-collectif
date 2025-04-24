@@ -146,7 +146,13 @@ Object {
             "author": Object {
               "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
               "responses": Object {
-                "edges": Array [],
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "value": "250 000 €",
+                    },
+                  },
+                ],
               },
               "userType": Object {
                 "name": "Citoyen",
@@ -314,7 +320,13 @@ Object {
             "author": Object {
               "id": "VXNlcjp1c2VyV2VsY29tYXR0aWM=",
               "responses": Object {
-                "edges": Array [],
+                "edges": Array [
+                  Object {
+                    "node": Object {
+                      "value": "250 000 €",
+                    },
+                  },
+                ],
               },
               "userType": Object {
                 "name": "Citoyen",

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\AnonymousableTrait;
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @CapcoAssert\EmailDoesNotBelongToUser(message="proposal.vote.email_belongs_to_user")
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
-class ProposalSelectionVote extends AbstractProposalVote
+class ProposalSelectionVote extends AbstractProposalVote implements ExportableContributionInterface
 {
     // Deleted because for users we have a unique constraint in db
     // * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalSelectionVote", objectPath="proposal")

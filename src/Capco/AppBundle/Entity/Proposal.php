@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\DBAL\Enum\ProposalRevisionStateType;
 use Capco\AppBundle\Entity\District\ProposalDistrict;
 use Capco\AppBundle\Entity\Interfaces\DisplayableInBOInterface;
@@ -65,7 +66,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasAddressIfMandatory()
  * @CapcoAssert\HasAuthor()
  */
-class Proposal implements Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, \Stringable
+class Proposal implements Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, ExportableContributionInterface, \Stringable
 {
     use AddressableTrait;
     use AuthorableTrait;

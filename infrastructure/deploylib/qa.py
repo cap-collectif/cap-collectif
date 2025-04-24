@@ -71,11 +71,11 @@ def snapshots(tags='false'):
         'capco:export:consultation --updateSnapshot --delimiter "," --env test',
         'capco:export:projects-contributors --updateSnapshot --delimiter "," --env test',
         'capco:export:step-contributors --updateSnapshot --delimiter "," --env test',
-        'capco:export:proposalStep --updateSnapshot --delimiter "," --env test',
         'capco:export:events:participants --updateSnapshot --delimiter "," --env test',
         'capco:export:analysis --updateSnapshot --delimiter "," --env test',
         'capco:export:analysis --only-decisions --updateSnapshot --delimiter "," --env test',
         'capco:export:projects-mediators-proposals-votes project6 --updateSnapshot --delimiter "," --env test',
+        'capco:export:collect-selection:contributions --updateSnapshot --delimiter "," --env test',
     ]
     user_archives_commands = [
         'capco:export:user userAdmin --updateSnapshot --delimiter ","',

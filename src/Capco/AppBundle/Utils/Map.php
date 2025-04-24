@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Utils;
 
 use GuzzleHttp\Client;
 
-final class Map
+class Map
 {
     public function __construct(private readonly string $apiServerKey)
     {

@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\Questions\MediaQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\MediaResponse;
+use Capco\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -29,6 +30,7 @@ class MediaResponseType extends AbstractType
                     ]),
                 ],
             ])
+            ->add('user', EntityType::class, ['class' => User::class])
         ;
 
         $builder->add('position', HiddenType::class, [

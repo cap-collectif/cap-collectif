@@ -643,7 +643,7 @@ Object {
         },
         Object {
           "key": "2016-02-01T00:00:00.000+01:00",
-          "totalCount": 5,
+          "totalCount": 10,
         },
         Object {
           "key": "2016-03-01T00:00:00.000+01:00",
@@ -1567,7 +1567,7 @@ Object {
         },
         Object {
           "key": "2015-01-01T00:00:00.000+01:00",
-          "totalCount": 60,
+          "totalCount": 65,
         },
         Object {
           "key": "2015-02-01T00:00:00.000+01:00",
@@ -3635,7 +3635,7 @@ Object {
         },
         Object {
           "key": "2015-01-01T00:00:00.000+01:00",
-          "totalCount": 131,
+          "totalCount": 136,
         },
         Object {
           "key": "2015-02-01T00:00:00.000+01:00",

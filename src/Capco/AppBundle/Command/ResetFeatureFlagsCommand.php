@@ -110,6 +110,7 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->deactivate(Manager::analytics_page);
             $this->manager->deactivate(Manager::paper_vote);
             $this->manager->deactivate(Manager::helpscout_beacon);
+            $this->manager->activate(Manager::multilangue);
         }
 
         if ('prod' === $this->env) {

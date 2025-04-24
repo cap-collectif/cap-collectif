@@ -5121,6 +5121,96 @@ Object {
         "node": Object {
           "__typename": "Comment",
           "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
             "username": "lbrunet",
           },
           "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
@@ -6825,96 +6915,6 @@ Object {
           },
           "trashedStatus": "VISIBLE",
           "updatedAt": "2018-02-01 00:21:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:22:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:22:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:23:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:23:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:24:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:24:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:25:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:25:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:26:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:26:00",
         },
       },
     ],
@@ -6934,6 +6934,96 @@ Object {
         "node": Object {
           "__typename": "Comment",
           "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
+            "username": "user6",
+          },
+          "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
+          "createdAt": "2016-02-01 00:00:00",
+          "moderationStatus": "APPROVED",
+          "publicationStatus": "PUBLISHED",
+          "related": Object {
+            "id": "UG9zdDpwb3N0MjI=",
+            "url": "",
+          },
+          "trashedStatus": null,
+          "updatedAt": "2017-02-01 00:00:00",
+        },
+      },
+      Object {
+        "node": Object {
+          "__typename": "Comment",
+          "author": Object {
             "username": "lbrunet",
           },
           "body": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.",
@@ -8638,96 +8728,6 @@ Object {
           },
           "trashedStatus": "VISIBLE",
           "updatedAt": "2018-02-01 00:21:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:22:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:22:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:23:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:23:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:24:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:24:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:25:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:25:00",
-        },
-      },
-      Object {
-        "node": Object {
-          "__typename": "Comment",
-          "author": Object {
-            "username": "lbrunet",
-          },
-          "body": "Insultes",
-          "createdAt": "2018-02-01 00:26:00",
-          "moderationStatus": "APPROVED",
-          "publicationStatus": "TRASHED",
-          "related": Object {
-            "id": "UHJvcG9zYWw6cHJvcG9zYWwx",
-            "url": "https://capco.test/project/budget-participatif-rennes/collect/collecte-des-propositions/proposals/ravalement-de-la-facade-de-la-bibliotheque-municipale?_locale=fr-FR",
-          },
-          "trashedStatus": "VISIBLE",
-          "updatedAt": "2018-02-01 00:26:00",
         },
       },
     ],

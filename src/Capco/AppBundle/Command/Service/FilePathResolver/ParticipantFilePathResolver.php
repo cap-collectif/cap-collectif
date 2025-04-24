@@ -1,13 +1,13 @@
 <?php
 
-namespace Capco\AppBundle\Command\Service;
+namespace Capco\AppBundle\Command\Service\FilePathResolver;
 
 use Capco\AppBundle\Command\CreateStepContributorsCommand;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 
-class FilePathResolver
+class ParticipantFilePathResolver extends AbstractFilePathResolver
 {
-    public function __construct(private readonly string $exportDirectory)
+    public function __construct(protected string $exportDirectory)
     {
     }
 

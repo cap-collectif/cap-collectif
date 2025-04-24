@@ -4,11 +4,13 @@ Capco\AppBundle\Entity\Responses\ValueResponse:
         question: '@simplequestion1'
         proposal: '@proposal1'
         value: souhaitable
+        user: '@userWelcomattic'
         createdAt: <(new \DateTime('2021-01-01 02:01:00'))>
     response2:
         question: '@simplequestion3'
         proposal: '@proposal1'
         value: '250 000 €'
+        user: '@userWelcomattic'
         createdAt: <(new \DateTime('2021-01-01 02:02:00'))>
     response3:
         question: '@simplequestion1'

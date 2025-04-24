@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\PositionableTrait;
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository")
  */
-class ProposalSelectionSmsVote extends AbstractProposalVote
+class ProposalSelectionSmsVote extends AbstractProposalVote implements ExportableContributionInterface
 {
     use PositionableTrait;
 

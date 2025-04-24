@@ -1,49 +1,55 @@
 Capco\AppBundle\Entity\CommentVote:
-  commentVote1:
-    id: 90001
-    comment: '@evComment1'
-    user: '@user1'
-    publishedAt: <(new \DateTime('2015-01-01 00:00:00'))>
-    createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
-  commentVote{2..50}:
-    id: 9000<current()>
-    comment: '@evComment<current()>'
-    user: '@user<current()>'
-    publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
-    createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
-  proposalCommentVote{1..50}:
-    id: 9100<current()>
-    comment: '@proposalComment<current()>'
-    user: '@user<current()>'
-    publishedAt: <((new \DateTime('2015-02-01 00:00:00'))->modify("+ $current minutes"))>
-    createdAt: <((new \DateTime('2015-02-01 00:00:00'))->modify("+ $current minutes"))>
-  proposalCommentVote51:
-    id: 910051
-    comment: '@proposalComment59'
-    user: '@user2'
-    publishedAt: <(new \DateTime('2015-01-01 05:00:00'))>
-    createdAt: <(new \DateTime('2015-01-01 05:00:00'))>
-  proposalCommentVote52:
-    id: 910052
-    comment: '@proposalComment59'
-    user: '@user4'
-    publishedAt: <(new \DateTime('2015-01-01 06:00:00'))>
-    createdAt: <(new \DateTime('2015-01-01 06:00:00'))>
-  proposalCommentVote53:
-    id: 910053
-    comment: '@proposalComment36'
-    user: '@user4'
-    publishedAt: <(new \DateTime('2015-01-01 07:00:00'))>
-    createdAt: <(new \DateTime('2015-01-01 07:00:00'))>
-  proposalCommentVote54:
-    id: 910054
-    comment: '@proposalComment36'
-    user: '@user2'
-    publishedAt: <(new \DateTime('2015-01-01 08:00:00'))>
-    createdAt: <(new \DateTime('2015-01-01 08:00:00'))>
-  proposalCommentVote55:
-    id: 910055
-    comment: '@proposalComment71'
-    user: '@user4'
-    publishedAt: <(new \DateTime('2015-01-01 09:00:00'))>
-    createdAt: <(new \DateTime('2015-01-01 09:00:00'))>
+    commentVote1:
+        id: 90001
+        comment: '@evComment1'
+        user: '@user1'
+        publishedAt: <(new \DateTime('2015-01-01 00:00:00'))>
+        createdAt: <(new \DateTime('2015-01-01 00:00:00'))>
+    commentVote{2..50}:
+        id: 9000<current()>
+        comment: '@evComment<current()>'
+        user: '@user<current()>'
+        publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+    proposalCommentVote{1..50}:
+        id: 9100<current()>
+        comment: '@proposalComment<current()>'
+        user: '@user<current()>'
+        publishedAt: <((new \DateTime('2015-02-01 00:00:00'))->modify("+ $current minutes"))>
+        createdAt: <((new \DateTime('2015-02-01 00:00:00'))->modify("+ $current minutes"))>
+    proposalCommentVote51:
+        id: 910051
+        comment: '@proposalComment59'
+        user: '@user2'
+        publishedAt: <(new \DateTime('2015-01-01 05:00:00'))>
+        createdAt: <(new \DateTime('2015-01-01 05:00:00'))>
+    proposalCommentVote52:
+        id: 910052
+        comment: '@proposalComment59'
+        user: '@user4'
+        publishedAt: <(new \DateTime('2015-01-01 06:00:00'))>
+        createdAt: <(new \DateTime('2015-01-01 06:00:00'))>
+    proposalCommentVote53:
+        id: 910053
+        comment: '@proposalComment36'
+        user: '@user4'
+        publishedAt: <(new \DateTime('2015-01-01 07:00:00'))>
+        createdAt: <(new \DateTime('2015-01-01 07:00:00'))>
+    proposalCommentVote54:
+        id: 910054
+        comment: '@proposalComment36'
+        user: '@user2'
+        publishedAt: <(new \DateTime('2015-01-01 08:00:00'))>
+        createdAt: <(new \DateTime('2015-01-01 08:00:00'))>
+    proposalCommentVote55:
+        id: 910055
+        comment: '@proposalComment71'
+        user: '@user4'
+        publishedAt: <(new \DateTime('2015-01-01 09:00:00'))>
+        createdAt: <(new \DateTime('2015-01-01 09:00:00'))>
+    commentVote{56..60}:
+        id: 9000<current()>
+        comment: '@pComment58'
+        user: '@user<current()>'
+        publishedAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>
+        createdAt: <((new \DateTime('2015-01-01 00:00:00'))->modify("+ $current minutes"))>

@@ -25,7 +25,7 @@ class ContributionExporter
     public function __construct(
         protected EntityManagerInterface $entityManager,
         protected SerializerInterface $serializer,
-        private readonly Filesystem $fileSystem,
+        protected readonly Filesystem $fileSystem,
         private readonly AbstractFilePathResolver $filePathResolverContributions
     ) {
     }
@@ -38,8 +38,12 @@ class ContributionExporter
     /**
      * @param array<ExportableContributionInterface> $opinionContributions
      */
-    protected function exportContributions(array $opinionContributions, AbstractStep $step, bool $withHeaders, bool $append = false): void
-    {
+    protected function exportContributions(
+        array $opinionContributions,
+        AbstractStep $step,
+        bool $withHeaders,
+        bool $append = false
+    ): void {
         $this->writeFiles($opinionContributions, $step, $withHeaders, $append);
     }
 
@@ -62,7 +66,7 @@ class ContributionExporter
     /**
      * @param array<ExportableContributionInterface> $contributions
      */
-    private function write(AbstractStep $step, array $contributions, bool $withHeader, bool $isFullExport, bool $append): void
+    protected function write(AbstractStep $step, array $contributions, bool $withHeader, bool $isFullExport, bool $append): void
     {
         $path = $isFullExport
             ? $this->filePathResolverContributions->getFullExportPath($step)

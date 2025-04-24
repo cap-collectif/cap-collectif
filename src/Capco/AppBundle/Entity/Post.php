@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\CreatableInterface;
@@ -28,7 +29,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface, IndexableInterface, Ownerable, TranslatableInterface, CreatableInterface, \Stringable
+class Post implements CommentableInterface, IndexableInterface, Ownerable, TranslatableInterface, CreatableInterface, \Stringable, ExportableContributionInterface
 {
     use BodyUsingJoditWysiwygTrait;
     use CommentableTrait;

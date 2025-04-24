@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Entity\Questions\SectionQuestion;
 use Capco\AppBundle\Enum\ProposalFormAffiliation;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -29,6 +30,79 @@ class ProposalFormRepository extends EntityRepository
         ;
 
         return $qb->getQuery()->getOneOrNullResult();
+    }
+
+    /**
+     * @param array<int, string> $proposalsIds
+     *
+     * @return array<int|string, array<int, mixed>>
+     */
+    public function getQuestionsResponsesByProposalsIds(array $proposalsIds): array
+    {
+        $qbAbstractQuestion = $this->_em->createQueryBuilder();
+        $qbAbstractQuestion
+            ->from('CapcoAppBundle:Questions\AbstractQuestion', 'aq')
+            ->select('q.id, q.title')
+            ->leftJoin('aq.questionnaireAbstractQuestion', 'qaq')
+            ->leftJoin('qaq.question', 'q')
+            ->leftJoin('q.responses', 'r')
+            ->leftJoin('qaq.proposalForm', 'pf')
+            ->leftJoin('pf.proposals', 'p')
+            ->where('p.id IN (:proposalsIds)')
+            ->setParameter('proposalsIds', $proposalsIds)
+            ->andWhere('q NOT INSTANCE OF :sectionQuestion')
+            ->setParameter('sectionQuestion', $this->_em->getClassMetadata(SectionQuestion::class))
+        ;
+
+        $questions = $qbAbstractQuestion->getQuery()->getResult();
+        $questionTitles = [];
+        foreach ($questions as $question) {
+            $questionTitles[$question['id']] = $question['title'];
+        }
+
+        $questionIds = array_keys($questionTitles);
+
+        $qbMediaResponse = $this->_em->createQueryBuilder();
+        $qbMediaResponse
+            ->from('CapcoAppBundle:Responses\MediaResponse', 'mr')
+            ->select('q.id as question_id', 'q.title', 'mr as responses')
+            ->leftJoin('mr.question', 'q')
+            ->where('q.id IN (:questions)')
+            ->andWhere('mr.user IS NOT NULL')
+            ->setParameter('questions', $questionIds)
+        ;
+        $mediaResponses = $qbMediaResponse->getQuery()->getResult();
+
+        $qbAbstractResponse = $this->_em->createQueryBuilder();
+        $qbAbstractResponse
+            ->from('CapcoAppBundle:Responses\ValueResponse', 'vr')
+            ->select('q.id as question_id', 'q.title', 'vr as responses')
+            ->leftJoin('vr.question', 'q')
+            ->where('q.id IN (:questions)')
+            ->andWhere('vr.user IS NOT NULL')
+            ->setParameter('questions', $questionIds)
+        ;
+        $valueResponses = $qbAbstractResponse->getQuery()->getResult();
+
+        $results = array_merge($valueResponses, $mediaResponses);
+
+        usort(
+            $results,
+            static fn ($a, $b) => strcmp(
+                $a['responses']->getQuestion()?->getTemporaryId() ?? '',
+                $b['responses']->getQuestion()?->getTemporaryId() ?? ''
+            )
+        );
+        $mappedResults = [];
+        foreach ($questionTitles as $title) {
+            $mappedResults[$title] = [];
+        }
+
+        foreach ($results as $result) {
+            $mappedResults[$result['title']][] = $result['responses'];
+        }
+
+        return $mappedResults;
     }
 
     public function searchByTerm(string $term): array

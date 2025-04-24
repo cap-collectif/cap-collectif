@@ -26,3 +26,12 @@ Capco\AppBundle\Entity\PostComment:
         publishedAt: <(new \DateTime('2016-02-01'))>
         updatedAt: <((new \DateTime('2017-02-01')))>
         moderationStatus: APPROVED
+    pComment{56..60}:
+        id: 'pComment<current()>'
+        post: '@post22'
+        author: '@user6'
+        body: Lorem ipsum dolor sit amet, consectetur adipiscing elit. In in elit eget dui bibendum luctus euismod sit amet odio. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Aliquam erat volutpat. Nulla mollis aliquam faucibus. Nullam pharetra mattis lacus. In vitae ex nisl. Integer faucibus, purus vitae egestas gravida, ante nisi semper magna, nec interdum est orci at purus.
+        createdAt: <(new \DateTime('2016-02-01'))>
+        publishedAt: <(new \DateTime('2016-02-01'))>
+        updatedAt: <((new \DateTime('2017-02-01')))>
+        moderationStatus: APPROVED

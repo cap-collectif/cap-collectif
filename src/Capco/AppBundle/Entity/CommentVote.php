@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CommentVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class CommentVote extends AbstractVote
+class CommentVote extends AbstractVote implements ExportableContributionInterface
 {
     /**
      * @ORM\ManyToOne(targetEntity="Capco\AppBundle\Entity\Comment", inversedBy="votes", cascade={"persist"})

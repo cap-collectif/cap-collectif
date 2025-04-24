@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Traits\AnonymousableTrait;
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @CapcoAssert\DidNotAlreadyVote(message="proposal.vote.already_voted", repositoryPath="CapcoAppBundle:ProposalCollectVote", objectPath="proposal")
  * @CapcoAssert\HasEnoughCreditsToVote()
  */
-class ProposalCollectVote extends AbstractProposalVote
+class ProposalCollectVote extends AbstractProposalVote implements ExportableContributionInterface
 {
     use AnonymousableTrait;
     use PositionableTrait;

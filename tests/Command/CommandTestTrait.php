@@ -13,9 +13,9 @@ trait CommandTestTrait
     /**
      * @return array<int, array<string, null|int|string>|CommandTester>
      */
-    public function executeFirstCommand(string $name): array
+    public function executeFirstCommand(string $name, string $outputDir = self::OUTPUT_DIRECTORY): array
     {
-        $this->emptyOutputDirectory();
+        $this->emptyOutputDirectory($outputDir);
 
         [$commandTester, $options] = $this->setUpCommandTester($name);
 
@@ -45,13 +45,15 @@ trait CommandTestTrait
     }
 
     /**
+     * @param array<int, string>|array<string, array<int, string>> $expectedFileNames
+     *
      * @return array<int, string>
      */
-    public static function getCompletedFileNames(string $suffix): array
+    public static function getCompletedFileNames(string $suffix, array $expectedFileNames = self::EXPECTED_FILE_NAMES): array
     {
         $completedFileNames = [];
 
-        foreach (self::EXPECTED_FILE_NAMES as $fileName) {
+        foreach ($expectedFileNames as $fileName) {
             $completedFileNames[] = $fileName . $suffix;
         }
 
@@ -79,9 +81,11 @@ trait CommandTestTrait
     }
 
     /**
+     * @param array<int, string> $outputDirs
+     *
      * @return array<string, bool|string>
      */
-    private function executeCommand(string $name): array
+    private function executeCommand(string $name, array $outputDirs = [self::OUTPUT_DIRECTORY]): array
     {
         $application = new Application(self::$kernel);
 
@@ -101,26 +105,28 @@ trait CommandTestTrait
 
         $actualOutputs = [];
 
-        $finder = new Finder();
-        $finder->files()->in(self::OUTPUT_DIRECTORY);
+        foreach ($outputDirs as $outputDir) {
+            $finder = new Finder();
+            $finder->files()->in($outputDir);
 
-        foreach ($finder as $file) {
-            $fileName = $file->getRelativePathname();
+            foreach ($finder as $file) {
+                $fileName = $file->getRelativePathname();
 
-            $isDirectory = $file->isDir();
+                $isDirectory = $file->isDir();
 
-            if (!$isDirectory) {
-                $actualOutputs[$fileName] = file_get_contents(self::OUTPUT_DIRECTORY . '/' . $fileName);
+                if (!$isDirectory) {
+                    $actualOutputs[$fileName] = file_get_contents($outputDir . '/' . $fileName);
+                }
             }
         }
 
         return $actualOutputs;
     }
 
-    private function emptyOutputDirectory(): void
+    private function emptyOutputDirectory(string $outputDir = self::OUTPUT_DIRECTORY): void
     {
         $finder = new Finder();
-        $finder->files()->in(self::OUTPUT_DIRECTORY);
+        $finder->files()->in($outputDir);
 
         foreach ($finder as $file) {
             $fileName = $file->getRelativePathname();
@@ -128,7 +134,7 @@ trait CommandTestTrait
             $isDirectory = $file->isDir();
 
             if (!$isDirectory) {
-                unlink(self::OUTPUT_DIRECTORY . '/' . $fileName);
+                unlink($outputDir . '/' . $fileName);
             }
         }
     }

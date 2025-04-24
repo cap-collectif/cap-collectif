@@ -47,3 +47,35 @@ Capco\AppBundle\Entity\Reporting:
         status: 2
         isArchived: false
         createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting8:
+        id: 8
+        body: Argument très nul
+        Reporter: '@user6'
+        proposal: '@question1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting9:
+        id: 9
+        body: Argument très nul
+        Reporter: '@user6'
+        proposal: '@question1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting10:
+        id: 10
+        body: Argument très nul
+        Reporter: '@user6'
+        proposal: '@question1'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>
+    reporting{56..60}:
+        id: <current()>
+        body: Je signale
+        Reporter: '@user100'
+        Comment: '@pComment58'
+        status: 2
+        isArchived: false
+        createdAt: <(new \DateTime('2018-03-01 00:00:00'))>

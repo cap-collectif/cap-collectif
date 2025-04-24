@@ -114,7 +114,7 @@ describe('Internal|Query.comments', () => {
   });
 
   it('fetches an empty page when offset exceeds total items', async () => {
-    let res = await graphql(CommentsQuery, { first: 1, after: "YXJyYXljb25uZWN0aW9uOjI0Ng==" }, 'internal_admin');
+    let res = await graphql(CommentsQuery, { first: 1, after: "YXJyYXljb25uZWN0aW9uOjI1MQ==" }, 'internal_admin');
     expect(res.comments.edges).toHaveLength(0);
   });
 });

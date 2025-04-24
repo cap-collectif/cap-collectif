@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Follower;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Interfaces\FollowerNotifiedOfInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
@@ -27,18 +28,30 @@ use Overblog\GraphQLBundle\Error\UserErrors;
 use Psr\Log\LoggerInterface;
 use Swarrot\Broker\Message;
 use Swarrot\SwarrotBundle\Broker\Publisher;
-use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
+use Symfony\Component\Form\FormInterface;
 
 class CreateProposalMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(protected LoggerInterface $logger, protected GlobalIdResolver $globalIdResolver, protected EntityManagerInterface $em, protected FormFactoryInterface $formFactory, protected ProposalFormRepository $proposalFormRepository, protected RedisStorageHelper $redisStorageHelper, protected ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader, protected Indexer $indexer, protected Manager $toggleManager, protected ResponsesFormatter $responsesFormatter, protected ProposalRepository $proposalRepository, protected Publisher $publisher)
-    {
+    public function __construct(
+        protected LoggerInterface $logger,
+        protected GlobalIdResolver $globalIdResolver,
+        protected EntityManagerInterface $em,
+        protected FormFactoryInterface $formFactory,
+        protected ProposalFormRepository $proposalFormRepository,
+        protected RedisStorageHelper $redisStorageHelper,
+        protected ProposalFormProposalsDataLoader $proposalFormProposalsDataLoader,
+        protected Indexer $indexer,
+        protected Manager $toggleManager,
+        protected ResponsesFormatter $responsesFormatter,
+        protected ProposalRepository $proposalRepository,
+        protected Publisher $publisher
+    ) {
     }
 
-    public function __invoke(Argument $input, $user): array
+    public function __invoke(Argument $input, User $user): array
     {
         $this->formatInput($input);
         $values = $input->getArrayCopy();
@@ -52,7 +65,7 @@ class CreateProposalMutation implements MutationInterface
 
         if (
             \count(
-                $this->proposalRepository->findCreatedSinceIntervalByAuthor($user, 'PT1M', 'author')
+                $this->proposalRepository->findCreatedSinceIntervalByAuthor($user, 'PT1M')
             ) >= 2
         ) {
             $this->logger->error('You contributed too many times.');
@@ -66,9 +79,12 @@ class CreateProposalMutation implements MutationInterface
             $proposalForm,
             $user,
             $user,
-            $draft,
-            ProposalType::class
+            $draft
         );
+
+        if (false === json_encode(['proposalId' => $proposal->getId()])) {
+            throw new UserError('Could not encode proposalId.');
+        }
 
         $this->publisher->publish(
             CapcoAppBundleMessagesTypes::PROPOSAL_CREATE,
@@ -80,14 +96,15 @@ class CreateProposalMutation implements MutationInterface
 
     protected function getProposalForm(array $values, User $user): ProposalForm
     {
-        /** @var ProposalForm $proposalForm */
+        /** @var null|ProposalForm $proposalForm */
         $proposalForm = $this->proposalFormRepository->find($values['proposalFormId']);
-        if (!$proposalForm) {
+        if (null === $proposalForm) {
             $error = sprintf('Unknown proposalForm with id "%s"', $values['proposalFormId']);
             $this->logger->error($error);
 
             throw new UserError($error);
         }
+
         if (!$proposalForm->canContribute($user) && !$user->isAdmin()) {
             throw new UserError('You can no longer contribute to this collect step.');
         }
@@ -101,7 +118,7 @@ class CreateProposalMutation implements MutationInterface
         User $user,
         User $author,
         bool $draft,
-        string $formType
+        string $formType = ProposalType::class
     ): Proposal {
         $values = $this->fixValues($values, $proposalForm);
         $proposal = new Proposal();
@@ -132,13 +149,16 @@ class CreateProposalMutation implements MutationInterface
         ) {
             $proposal->setStatus($defaultStatus);
         }
+
         $values = ProposalMutation::hydrateSocialNetworks($values, $proposal, $proposalForm, true);
+        $this->linkProposalAuthorToResponses($author, $values);
+
         $form = $this->formFactory->create($formType, $proposal, [
             'proposalForm' => $proposalForm,
             'validation_groups' => [$draft ? 'ProposalDraft' : 'Default'],
         ]);
 
-        $this->logger->info(__METHOD__ . json_encode($values, true));
+        $this->logger->info(__METHOD__ . json_encode($values));
         $form->submit($values);
 
         if (!$form->isValid()) {
@@ -188,23 +208,41 @@ class CreateProposalMutation implements MutationInterface
         return $values;
     }
 
-    protected function handleErrors(Form $form): void
+    /**
+     * @param FormInterface<Proposal> $form
+     *
+     * @throws UserErrors
+     */
+    protected function handleErrors(FormInterface $form): void
     {
         $errors = [];
         foreach ($form->getErrors(true) as $error) {
             $this->logger->error(__METHOD__ . ' : ' . $error->getMessage());
             $this->logger->error(
-                __METHOD__ .
-                    ' : ' .
-                    $form->getName() .
-                    ' ' .
-                    'Extra data: ' .
+                sprintf(
+                    '%s : %s Extra data: %s',
+                    __METHOD__,
+                    $form->getName(),
                     implode('', $form->getExtraData())
+                )
             );
             $errors[] = (string) $error->getMessage();
         }
         if (!empty($errors)) {
             throw new UserErrors($errors);
+        }
+    }
+
+    /**
+     * @param Author|User          $author
+     * @param array<string, mixed> $values
+     */
+    protected function linkProposalAuthorToResponses($author, array &$values): void
+    {
+        if (isset($values['responses'])) {
+            foreach ($values['responses'] as $key => $ignored) {
+                $values['responses'][$key]['user'] = $author->getId();
+            }
         }
     }
 }

@@ -218,3 +218,13 @@ Capco\AppBundle\Entity\Post:
         media: null
         displayedOnBlog: false
         owner: '@organization2'
+    post22:
+        id: post22
+        isPublished: true
+        createdAt: <(new \DateTime('2021-01-08 00:00:00'))>
+        publishedAt: $createdAt
+        updatedAt: $createdAt
+        creator: '@user6'
+        media: null
+        proposals: ['@lePetitCafe']
+        displayedOnBlog: false

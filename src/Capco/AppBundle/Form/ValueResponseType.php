@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Form;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Entity\Responses\ValueResponse;
+use Capco\UserBundle\Entity\User;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
@@ -19,6 +20,7 @@ class ValueResponseType extends AbstractType
         $builder
             ->add('value', TextType::class)
             ->add('question', EntityType::class, ['class' => AbstractQuestion::class])
+            ->add('user', EntityType::class, ['class' => User::class])
         ;
 
         $builder->add('position', HiddenType::class, [

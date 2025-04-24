@@ -898,6 +898,23 @@ class ProposalRepository extends EntityRepository
         }
     }
 
+    /**
+     * @param Proposal[] $proposals
+     */
+    public function hasNewContributionsForCollectOrSelectionStep(array $proposals, \DateTime $mostRecentFileModificationDate): bool
+    {
+        if ([] === $proposals) {
+            return false;
+        }
+
+        $proposalsIds = array_map(static fn (Proposal $proposal) => $proposal->getId(), $proposals);
+        $mostRecentFileModificationDate = $mostRecentFileModificationDate->format('Y-m-d H:i:s');
+
+        return $this->hasNewProposal($proposalsIds, $mostRecentFileModificationDate)
+            || $this->hasNewProposalNews($proposalsIds, $mostRecentFileModificationDate)
+            || $this->hasNewProposalComment($proposalsIds, $mostRecentFileModificationDate);
+    }
+
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
@@ -1033,5 +1050,63 @@ class ProposalRepository extends EntityRepository
             ->setParameter('form', $form)
             ->setParameter('user', $user)
         ;
+    }
+
+    /**
+     * @param array<int, string> $proposalsIds
+     */
+    private function hasNewProposal(array $proposalsIds, string $mostRecentFileModificationDate): bool
+    {
+        $queryBuilder = $this->createQueryBuilder('proposal');
+        $queryBuilder
+            ->select('COUNT(proposal.id)')
+            ->where('proposal.id IN (:proposalsIds)')
+            ->andWhere('proposal.updatedAt >= :lastCheck')
+            ->orWhere('proposal.createdAt >= :lastCheck')
+            ->setParameter('proposalsIds', $proposalsIds)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+        ;
+
+        return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+    }
+
+    /**
+     * @param array<int, string> $proposalsIds
+     */
+    private function hasNewProposalNews(array $proposalsIds, string $mostRecentFileModificationDate): bool
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->from('CapcoAppBundle:Post', 'post')
+            ->select('COUNT(post.id)')
+            ->innerJoin('post.proposals', 'proposalNews')
+            ->where('proposalNews.id IN (:proposalsIds)')
+            ->andWhere('post.updatedAt >= :lastCheck')
+            ->orWhere('post.createdAt >= :lastCheck')
+            ->setParameter('proposalsIds', $proposalsIds)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+        ;
+
+        return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+    }
+
+    /**
+     * @param array<int, string> $proposalsIds
+     */
+    private function hasNewProposalComment(array $proposalsIds, string $mostRecentFileModificationDate): bool
+    {
+        $queryBuilder = $this->_em->createQueryBuilder();
+        $queryBuilder
+            ->from('CapcoAppBundle:ProposalComment', 'proposalComment')
+            ->select('COUNT(proposalComment.id)')
+            ->innerJoin('proposalComment.proposal', 'proposalCommentProposal')
+            ->where('proposalCommentProposal.id IN (:proposalsIds)')
+            ->andWhere('proposalComment.updatedAt >= :lastCheck')
+            ->orWhere('proposalComment.createdAt >= :lastCheck')
+            ->setParameter('proposalsIds', $proposalsIds)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+        ;
+
+        return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
     }
 }

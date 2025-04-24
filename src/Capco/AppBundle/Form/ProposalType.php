@@ -16,13 +16,22 @@ use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Validator\Constraints\Valid;
 
+/**
+ * @extends AbstractType<Proposal>
+ */
 class ProposalType extends AbstractType
 {
     public function __construct(protected Manager $toggleManager)
     {
     }
 
-    public function buildForm(FormBuilderInterface $builder, array $options)
+    /**
+     * @param FormBuilderInterface<Proposal> $builder
+     * @param array<string, mixed>           $options
+     *
+     * @throws \Exception
+     */
+    public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $isDraft = $builder->getData()->isDraft();
         /** @var ?ProposalForm $form */
@@ -80,7 +89,7 @@ class ProposalType extends AbstractType
         $builder->add('media');
     }
 
-    public function configureOptions(OptionsResolver $resolver)
+    public function configureOptions(OptionsResolver $resolver): void
     {
         $resolver->setDefaults([
             'data_class' => Proposal::class,

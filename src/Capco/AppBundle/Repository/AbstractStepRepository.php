@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Doctrine\Common\Collections\Criteria;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -65,6 +66,20 @@ class AbstractStepRepository extends EntityRepository
             ->setParameter('project', $slug)
             ->addOrderBy('pas.position', 'ASC')
         ;
+
+        return $qb->getQuery()->execute();
+    }
+
+    /**
+     * @return AbstractStep[]
+     */
+    public function getAllStepsByCollectStepOrSelectionStep(): array
+    {
+        $qb = $this->getIsEnabledQueryBuilder();
+        $qb->andWhere($qb->expr()->orX(
+            $qb->expr()->isInstanceOf('s', CollectStep::class),
+            $qb->expr()->isInstanceOf('s', SelectionStep::class),
+        ));
 
         return $qb->getQuery()->execute();
     }

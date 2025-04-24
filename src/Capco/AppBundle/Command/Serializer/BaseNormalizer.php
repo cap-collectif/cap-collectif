@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command\Serializer;
 
 use Capco\AppBundle\Enum\ForOrAgainstType;
+use Capco\AppBundle\Enum\ProposalPublicationStatus;
 use Symfony\Contracts\Translation\TranslatorInterface;
 
 abstract class BaseNormalizer
@@ -12,7 +13,6 @@ abstract class BaseNormalizer
     protected const EXPORT_PARTICIPANT_USER_ID = 'export_participant_user_id';
     protected const EXPORT_CONTRIBUTION_TYPE_REPLY = 'export_contribution_type_questionnaire_reply';
     protected const EXPORT_CONTRIBUTION_TYPE_REPLY_ANONYMOUS = 'export_contribution_type_questionnaire_reply_anonymous';
-    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_ID = 'export_proposal_votes_author_id';
     protected const EXPORT_PARTICIPANT_USERNAME = 'export_participant_username';
     protected const EXPORT_PARTICIPANT_USER_EMAIL = 'export_participant_user_email';
     protected const EXPORT_PARTICIPANT_PHONE = 'export_participant_phone';
@@ -43,6 +43,128 @@ abstract class BaseNormalizer
     protected const EXPORT_PARTICIPANT_USER_GROUPS = 'export_participant_user_groups';
     protected const EXPORT_PARTICIPANT_DELETED_ACCOUNT_AT = 'export_participant_deleted_account_at';
     protected const EXPORT_PARTICIPANT_FACEBOOK_ID = 'export_participant_facebook_id';
+    protected const EXPORT_PROPOSAL_ID = 'export_proposal_id';
+    protected const EXPORT_PROPOSAL_CREATED_AT = 'export_proposal_created_at';
+    protected const EXPORT_PROPOSAL_PUBLISHED_AT = 'export_proposal_published_at';
+    protected const EXPORT_PROPOSAL_REFERENCE = 'export_proposal_reference';
+    protected const EXPORT_PROPOSAL_TITLE = 'export_proposal_title';
+    protected const EXPORT_PROPOSAL_SUMMARY = 'export_proposal_summary';
+    protected const EXPORT_PROPOSAL_DESCRIPTION = 'export_proposal_description';
+    protected const EXPORT_PROPOSAL_AUTHOR_ID = 'export_proposal_author_id';
+    protected const EXPORT_PROPOSAL_VOTES_TOTAL_COUNT = 'export_proposal_votes_total_count';
+    protected const EXPORT_PROPOSAL_VOTES_DIGITAL_COUNT = 'export_proposal_votes_digital_count';
+    protected const EXPORT_PROPOSAL_VOTES_TOTAL_PAPER_COUNT = 'export_proposal_votes_paper_count';
+    protected const EXPORT_PROPOSAL_VOTES_TOTAL_POINTS_COUNT = 'export_proposal_votes_total_points_count';
+    protected const EXPORT_PROPOSAL_VOTES_DIGITAL_POINTS_COUNT = 'export_proposal_votes_digital_points_count';
+    protected const EXPORT_PROPOSAL_VOTES_PAPER_POINTS_COUNT = 'export_proposal_votes_paper_points_count';
+    protected const EXPORT_PROPOSAL_CATEGORY_NAME = 'export_proposal_category_name';
+    protected const EXPORT_PROPOSAL_THEME_TITLE = 'export_proposal_theme_title';
+    protected const EXPORT_PROPOSAL_FORMATTED_ADDRESS = 'export_proposal_formatted_address';
+    protected const EXPORT_PROPOSAL_ADDRESS_LAT = 'export_proposal_address_lat';
+    protected const EXPORT_PROPOSAL_ADDRESS_LNG = 'export_proposal_address_lng';
+    protected const EXPORT_PROPOSAL_DISTRICT_NAME = 'export_proposal_district_name';
+    protected const EXPORT_PROPOSAL_ESTIMATION = 'export_proposal_estimation';
+    protected const EXPORT_PROPOSAL_ILLUSTRATION = 'export_proposal_illustration';
+    protected const EXPORT_PROPOSAL_LINK = 'export_proposal_link';
+    protected const EXPORT_PROPOSAL_STATUS_NAME = 'export_proposal_status_name';
+    protected const EXPORT_PROPOSAL_UPDATED_AT = 'export_proposal_updated_at';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS = 'export_proposal_publication_status';
+    protected const EXPORT_PROPOSAL_UNDRAFT_AT = 'export_proposal_undraft_at';
+    protected const EXPORT_PROPOSAL_TRASHED_AT = 'export_proposal_trashed_at';
+    protected const EXPORT_PROPOSAL_TRASHED_REASON = 'export_proposal_trashed_reason';
+    protected const EXPORT_PROPOSAL_AUTHOR_USERNAME = 'export_proposal_author_username';
+    protected const EXPORT_PROPOSAL_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_AUTHOR_EMAIL = 'export_proposal_author_email';
+    protected const EXPORT_PROPOSAL_AUTHOR_USER_TYPE_ID = 'export_proposal_author_user_type_id';
+    protected const EXPORT_PROPOSAL_AUTHOR_USER_TYPE_NAME = 'export_proposal_author_user_type_name';
+    protected const EXPORT_PROPOSAL_OFFICIAL_RESPONSE = 'export_proposal_official_response';
+    protected const EXPORT_PROPOSAL_VOTES_ID = 'export_proposal_votes_id';
+    protected const EXPORT_PROPOSAL_VOTES_RANKING = 'export_proposal_votes_ranking';
+    protected const EXPORT_PROPOSAL_VOTES_CREATED_AT = 'export_proposal_votes_created_at';
+    protected const EXPORT_PROPOSAL_VOTES_PUBLISHED_AT = 'export_proposal_votes_published_at';
+    protected const EXPORT_PROPOSAL_VOTES_PUBLISHED = 'export_proposal_votes_published';
+    protected const EXPORT_PROPOSAL_VOTES_ACCOUNTED = 'export_proposal_votes_accounted';
+    protected const EXPORT_PROPOSAL_VOTES_ANONYMOUS = 'export_proposal_votes_anonymous';
+    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_ID = 'export_proposal_votes_author_id';
+    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_USERNAME = 'export_proposal_votes_author_username';
+    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_votes_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_IS_PHONE_CONFIRMED = 'export_proposal_votes_author_is_phone_confirmed';
+    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_USER_TYPE_ID = 'export_proposal_votes_author_user_type_id';
+    protected const EXPORT_PROPOSAL_VOTES_AUTHOR_USER_TYPE_NAME = 'export_proposal_votes_author_user_type_name';
+    protected const EXPORT_PROPOSAL_COMMENTS_ID = 'export_proposal_comments_id';
+    protected const EXPORT_PROPOSAL_COMMENTS_BODY = 'export_proposal_comments_body';
+    protected const EXPORT_PROPOSAL_COMMENTS_CREATED_AT = 'export_proposal_comments_created_at';
+    protected const EXPORT_PROPOSAL_COMMENTS_PUBLISHED_AT = 'export_proposal_comments_published_at';
+    protected const EXPORT_PROPOSAL_COMMENTS_UPDATED_AT = 'export_proposal_comments_updated_at';
+    protected const EXPORT_PROPOSAL_COMMENTS_AUTHOR_ID = 'export_proposal_comments_author_id';
+    protected const EXPORT_PROPOSAL_COMMENTS_AUTHOR_USERNAME = 'export_proposal_comments_author_username';
+    protected const EXPORT_PROPOSAL_COMMENTS_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_comments_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_COMMENTS_AUTHOR_USER_TYPE_ID = 'export_proposal_comments_author_user_type_id';
+    protected const EXPORT_PROPOSAL_COMMENTS_AUTHOR_USER_TYPE_NAME = 'export_proposal_comments_author_user_type_name';
+    protected const EXPORT_PROPOSAL_COMMENTS_AUTHOR_EMAIL = 'export_proposal_comments_author_email';
+    protected const EXPORT_PROPOSAL_COMMENTS_PINNED = 'export_proposal_comments_pinned';
+    protected const EXPORT_PROPOSAL_COMMENTS_PUBLICATION_STATUS = 'export_proposal_comments_publication_status';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_ID = 'export_proposal_comments_vote_id';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_CREATED_AT = 'export_proposal_comments_vote_created_at';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_PUBLISHED_AT = 'export_proposal_comments_vote_published_at';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_ID = 'export_proposal_comments_vote_author_id';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_USERNAME = 'export_proposal_comments_vote_author_username';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_comments_vote_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_USER_TYPE_ID = 'export_proposal_comments_vote_author_user_type_id';
+    protected const EXPORT_PROPOSAL_COMMENTS_VOTE_AUTHOR_USER_TYPE_NAME = 'export_proposal_comments_vote_author_user_type_name';
+    protected const EXPORT_PROPOSAL_NEWS_ID = 'export_proposal_news_id';
+    protected const EXPORT_PROPOSAL_NEWS_TITLE = 'export_proposal_news_title';
+    protected const EXPORT_PROPOSAL_NEWS_THEMES = 'export_proposal_news_themes';
+    protected const EXPORT_PROPOSAL_NEWS_LINKED_PROJECTS = 'export_proposal_news_linked_projects';
+    protected const EXPORT_PROPOSAL_NEWS_LINKED_PROPOSAL = 'export_proposal_news_linked_proposal';
+    protected const EXPORT_PROPOSAL_NEWS_CREATED_AT = 'export_proposal_news_created_at';
+    protected const EXPORT_PROPOSAL_NEWS_UPDATED_AT = 'export_proposal_news_updated_at';
+    protected const EXPORT_PROPOSAL_NEWS_PUBLISHED_AT = 'export_proposal_news_published_at';
+    protected const EXPORT_PROPOSAL_NEWS_PUBLICATION_STATUS = 'export_proposal_news_publication_status';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTABLE = 'export_proposal_news_commentable';
+    protected const EXPORT_PROPOSAL_NEWS_DISPLAYED_ON_BLOG = 'export_proposal_news_displayed_on_blog';
+    protected const EXPORT_PROPOSAL_NEWS_AUTHORS_ID = 'export_proposal_news_authors_id';
+    protected const EXPORT_PROPOSAL_NEWS_AUTHORS_USERNAME = 'export_proposal_news_authors_username';
+    protected const EXPORT_PROPOSAL_NEWS_AUTHORS_IS_EMAIL_CONFIRMED = 'export_proposal_news_authors_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_NEWS_AUTHORS_USER_TYPE_ID = 'export_proposal_news_authors_user_type_id';
+    protected const EXPORT_PROPOSAL_NEWS_AUTHORS_USER_TYPE_NAME = 'export_proposal_news_authors_user_type_name';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_ID = 'export_proposal_news_comments_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_BODY = 'export_proposal_news_comments_body';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_PARENT = 'export_proposal_news_comments_parent';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_CREATED_AT = 'export_proposal_news_comments_created_at';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_PUBLISHED_AT = 'export_proposal_news_comments_published_at';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_UPDATED_AT = 'export_proposal_news_comments_updated_at';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_AUTHOR_ID = 'export_proposal_news_comments_author_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_AUTHOR_USERNAME = 'export_proposal_news_comments_author_username';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_news_comments_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_AUTHOR_USER_TYPE_ID = 'export_proposal_news_comments_author_user_type_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_AUTHOR_USER_TYPE_NAME = 'export_proposal_news_comments_author_user_type_name';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_AUTHOR_EMAIL = 'export_proposal_news_comments_author_email';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_PINNED = 'export_proposal_news_comments_pinned';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_PUBLICATION_STATUS = 'export_proposal_news_comments_publication_status';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_ID = 'export_proposal_news_comments_vote_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_CREATED_AT = 'export_proposal_news_comments_vote_created_at';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_PUBLISHED_AT = 'export_proposal_news_comments_vote_published_at';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_ID = 'export_proposal_news_comments_vote_author_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_USERNAME = 'export_proposal_news_comments_vote_author_username';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_news_comments_vote_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_USER_TYPE_ID = 'export_proposal_news_comments_vote_author_user_type_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_VOTE_AUTHOR_USER_TYPE_NAME = 'export_proposal_news_comments_vote_author_user_type_name';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_ID = 'export_proposal_news_comments_reportings_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_CREATED_AT = 'export_proposal_news_comments_reportings_created_at';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_ID = 'export_proposal_news_comments_reportings_author_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_USERNAME = 'export_proposal_news_comments_reportings_author_username';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_news_comments_reportings_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_USER_TYPE_ID = 'export_proposal_news_comments_reportings_author_user_type_id';
+    protected const EXPORT_PROPOSAL_NEWS_COMMENTS_REPORTINGS_AUTHOR_USER_TYPE_NAME = 'export_proposal_news_comments_reportings_author_user_type_name';
+    protected const EXPORT_PROPOSAL_REPORTINGS_ID = 'export_proposal_reportings_id';
+    protected const EXPORT_PROPOSAL_REPORTINGS_BODY = 'export_proposal_reportings_body';
+    protected const EXPORT_PROPOSAL_REPORTINGS_CREATED_AT = 'export_proposal_reportings_created_at';
+    protected const EXPORT_PROPOSAL_REPORTINGS_AUTHOR_ID = 'export_proposal_reportings_author_id';
+    protected const EXPORT_PROPOSAL_REPORTINGS_AUTHOR_USERNAME = 'export_proposal_reportings_author_username';
+    protected const EXPORT_PROPOSAL_REPORTINGS_AUTHOR_IS_EMAIL_CONFIRMED = 'export_proposal_reportings_author_is_email_confirmed';
+    protected const EXPORT_PROPOSAL_REPORTINGS_AUTHOR_USER_TYPE_ID = 'export_proposal_reportings_author_user_type_id';
+    protected const EXPORT_PROPOSAL_REPORTINGS_AUTHOR_USER_TYPE_NAME = 'export_proposal_reportings_author_user_type_name';
     protected const EXPORT_PARTICIPANT_VOTES_TOTAL_COUNT_PER_STEP = 'user_votes_total_count_per_step';
     protected const EXPORT_PARTICIPANT_PROPOSAL_COUNT_PER_STEP = 'user_proposal_count_per_step';
     protected const EXPORT_PARTICIPANT_VOTED_PROPOSAL_IDS = 'user_voted_proposal_ids';
@@ -137,6 +259,22 @@ abstract class BaseNormalizer
     protected const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL = 'export_contribution_no_account_email';
     protected const EXPORT_CONTRIBUTION_NO_ACCOUNT_EMAIL_CONFIRMED = 'export_contribution_no_account_email_confirmed';
     protected const EXPORT_CONTRIBUTION_INTERNAL_COMM = 'export_contribution_internal_comm';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS_PUBLISHED = 'export_proposal_publication_status_published';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS_TRASHED = 'export_proposal_publication_status_trashed';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS_ARCHIVED = 'export_proposal_publication_status_archived';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS_TRASHED_NOT_VISIBLE = 'export_proposal_publication_status_trashed_not_visible';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS_UNPUBLISHED = 'export_proposal_publication_status_unpublished';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS_DRAFT = 'export_proposal_publication_status_draft';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUS_DELETED = 'export_proposal_publication_status_deleted';
+    protected const EXPORT_PROPOSAL_PUBLICATION_STATUSES = [
+        ProposalPublicationStatus::PUBLISHED => self::EXPORT_PROPOSAL_PUBLICATION_STATUS_PUBLISHED,
+        ProposalPublicationStatus::TRASHED => self::EXPORT_PROPOSAL_PUBLICATION_STATUS_TRASHED,
+        ProposalPublicationStatus::ARCHIVED => self::EXPORT_PROPOSAL_PUBLICATION_STATUS_ARCHIVED,
+        ProposalPublicationStatus::TRASHED_NOT_VISIBLE => self::EXPORT_PROPOSAL_PUBLICATION_STATUS_TRASHED_NOT_VISIBLE,
+        ProposalPublicationStatus::UNPUBLISHED => self::EXPORT_PROPOSAL_PUBLICATION_STATUS_UNPUBLISHED,
+        ProposalPublicationStatus::DRAFT => self::EXPORT_PROPOSAL_PUBLICATION_STATUS_DRAFT,
+        ProposalPublicationStatus::DELETED => self::EXPORT_PROPOSAL_PUBLICATION_STATUS_DELETED,
+    ];
     protected const EXPORT_CONTRIBUTION_ARGUMENT_PUBLISHED_AT = 'export_contribution_argument_published_at';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_ID = 'export_contribution_argument_author_id';
     protected const EXPORT_CONTRIBUTION_ARGUMENT_AUTHOR_USERNAME = 'export_contribution_argument_author_username';
@@ -200,18 +338,23 @@ abstract class BaseNormalizer
 
     /**
      * @param array<mixed> $array
+     * @param array<mixed> $excludedKeys
      *
      * @return array<mixed>
      */
-    protected function translateHeaders(array $array): array
+    protected function translateHeaders(array $array, array $excludedKeys = []): array
     {
-        $keys = array_keys($array);
-        $translatedKeys = [];
+        $translatedArray = [];
+        foreach ($array as $key => $value) {
+            if (\in_array($key, $excludedKeys, true)) {
+                $translatedArray[$key] = $value;
 
-        foreach ($keys as $key) {
-            $translatedKeys[] = $this->translator->trans($key);
+                continue;
+            }
+
+            $translatedArray[$this->translator->trans($key)] = $value;
         }
 
-        return array_combine($translatedKeys, $array);
+        return $translatedArray;
     }
 }

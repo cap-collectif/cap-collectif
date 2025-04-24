@@ -933,6 +933,25 @@ class ExportController extends Controller
             }
         }
 
+        // TODO remove this if after all export contributions has been merged
+        if ($step instanceof CollectStep || $step instanceof SelectionStep) {
+            $filePath = 'true' === $request->query->get('simplified')
+                ? $this->contributionsFilePathResolver->getSimplifiedExportPath($step)
+                : $this->contributionsFilePathResolver->getFullExportPath($step);
+
+            try {
+                $response = $this->file($filePath);
+                $response->headers->set('Content-Type', 'text/csv' . '; charset=utf-8');
+
+                return $response;
+            } catch (FileNotFoundException) {
+                return new JsonResponse(
+                    ['errorTranslationKey' => $this->cronTimeInterval->getRemainingCronExecutionTime(48)],
+                    404
+                );
+            }
+        }
+
         $user = $this->getUser();
         $isProjectAdmin = $user->isOnlyProjectAdmin();
 

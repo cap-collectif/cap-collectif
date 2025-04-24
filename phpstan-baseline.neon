@@ -12721,6 +12721,31 @@ parameters:
 			path: src/Capco/AppBundle/Command/SendSmsCreditConsumptionAlertCommand.php
 
 		-
+			message: "#^Left side of && is always true\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/ProposalNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\ProposalNormalizer\\:\\:filterVisibleResponses\\(\\) has parameter \\$responses with no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/ProposalNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\ProposalNormalizer\\:\\:filterVisibleResponses\\(\\) has parameter \\$viewer with no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/ProposalNormalizer.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\ProposalNormalizer\\:\\:filterVisibleResponses\\(\\) return type has no value type specified in iterable type iterable\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Command/Serializer/ProposalNormalizer.php
+
+		-
+			message: "#^Parameter \\#1 \\$elements of class Doctrine\\\\Common\\\\Collections\\\\ArrayCollection constructor expects array\\<TKey of \\(int\\|string\\), T\\>, iterable given\\.$#"
+			count: 3
+			path: src/Capco/AppBundle/Command/Serializer/ProposalNormalizer.php
+
+		-
 			message: "#^Method Capco\\\\AppBundle\\\\Command\\\\Serializer\\\\UserNormalizer\\:\\:supportsNormalization\\(\\) has parameter \\$context with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Command/Serializer/UserNormalizer.php
@@ -24021,11 +24046,6 @@ parameters:
 			path: src/Capco/AppBundle/Form/ProjectType.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ProposalAdminType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Form/ProposalAdminType.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ProposalAnalysisType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/ProposalAnalysisType.php
@@ -24174,16 +24194,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ProposalRevisionType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/ProposalRevisionType.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ProposalType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Form/ProposalType.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\ProposalType\\:\\:configureOptions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Form/ProposalType.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\QuestionnaireAbstractQuestionType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
@@ -26366,11 +26376,6 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalFusionMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalMutation\\:\\:__invoke\\(\\) has parameter \\$user with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalMutation\\:\\:__invoke\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
@@ -26392,21 +26397,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalMutation\\:\\:getProposalForm\\(\\) has parameter \\$values with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
-
-		-
-			message: "#^Parameter \\#1 \\$body of class Swarrot\\\\Broker\\\\Message constructor expects string\\|null, string\\|false given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
-
-		-
-			message: "#^Parameter \\#1 \\$form of method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\CreateProposalMutation\\:\\:handleErrors\\(\\) expects Symfony\\\\Component\\\\Form\\\\Form, Symfony\\\\Component\\\\Form\\\\FormInterface\\<Capco\\\\AppBundle\\\\Entity\\\\Proposal\\> given\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
-
-		-
-			message: "#^Parameter \\#2 \\$flags of function json_encode expects int, true given\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/CreateProposalMutation.php
 

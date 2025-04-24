@@ -52,7 +52,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
     public function __construct(
         LoggerInterface $logger,
-        GlobalIdResolver $globalidResolver,
+        GlobalIdResolver $globalIdResolver,
         EntityManagerInterface $em,
         FormFactoryInterface $formFactory,
         ProposalFormRepository $proposalFormRepository,
@@ -68,7 +68,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
     ) {
         parent::__construct(
             $logger,
-            $globalidResolver,
+            $globalIdResolver,
             $em,
             $formFactory,
             $proposalFormRepository,
@@ -469,6 +469,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
 
         $values = $this->fixValues($values, $proposalForm);
         $values = $this::hydrateSocialNetworks($values, $proposal, $proposalForm);
+        $this->linkProposalAuthorToResponses($author, $values);
 
         /** @var Form $form */
         // delete field siret and rna from form ?

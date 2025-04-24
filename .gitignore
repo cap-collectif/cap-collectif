@@ -18,6 +18,10 @@ __snapshots-diff__/*
 /public/media/*
 /public/uploads/*
 /public/export/*
+/public/export/collect/**
+/public/export/selection/**
+!/public/export/collect/**/.gitkeep
+!/public/export/selection/**/.gitkeep
 /public/fonts/
 
 app/bootstrap.php.cache

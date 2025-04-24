@@ -2,6 +2,7 @@
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation:contributions
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:questionnaire:contributions
+#0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:steps:proposals:contributions
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:selection:participants
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:projects-contributors
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:users
@@ -12,4 +13,6 @@
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate:contributions
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate:votes
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:debate --geoip
+#0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:proposals:steps:contributions
 #0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:consultation:participants
+#0 * * * * /usr/bin/timeout 50m php -d memory_limit=2048M -d zend.enable_gc=0 /var/www/bin/console capco:export:collect-selection:contributions
