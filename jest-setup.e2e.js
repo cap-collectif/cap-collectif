@@ -16,6 +16,8 @@ const GraphQLClient = require('graphql-request').GraphQLClient;
 
 jest.setTimeout(50000);
 
+jest.spyOn(global.Date, 'now').mockImplementation(() => new Date('2025-01-01T00:00:00Z').getTime());
+
 const adminClient = new GraphQLClient(ENDPOINT, {
   headers: {
     authorization: 'Bearer iamthetokenofadmin',
@@ -181,19 +183,9 @@ global.graphql = (query, variables, client = 'anonymous') => {
         variables,
       );
     case 'internal_omar':
-      return authenticatedInternalRequest(
-        'omar@cap-collectif.com',
-        'toto',
-        query,
-        variables,
-      );
+      return authenticatedInternalRequest('omar@cap-collectif.com', 'toto', query, variables);
     case 'mediator':
-      return authenticatedInternalRequest(
-        'mediator@cap-collectif.com',
-        'toto',
-        query,
-        variables,
-      );
+      return authenticatedInternalRequest('mediator@cap-collectif.com', 'toto', query, variables);
     case 'internal':
       return internalClient.request(query, variables);
     case 'anonymous':

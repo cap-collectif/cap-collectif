@@ -1,0 +1,268 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal project status CLOSED_PARTICIPATION project 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "status": "CLOSED",
+          "title": "Débat du mois",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "CLOSED",
+          "title": "Débat Wysiwyg",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "CLOSED",
+          "title": "Débats sur la vie",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "CLOSED",
+          "title": "Solidarité Covid-19",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "CLOSED",
+          "title": "Transformation numérique des relations",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "CLOSED",
+          "title": "Projet pour le group2",
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal project status FUTURE_PARTICIPATION project 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "status": "FUTURE_WITHOUT_FINISHED_STEPS",
+          "title": "Débat sur l'Oculus Quest",
+        },
+      },
+    ],
+  },
+}
+`;
+
+exports[`Internal project status OPENED_PARTICIPATION project 1`] = `
+Object {
+  "projects": Object {
+    "edges": Array [
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "BP avec archivage des propositions",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Débats ouvert sans vote",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Budget Participatif d'organisation",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Rapport d'évaluation 6 (AR6)",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Budget Participatif IdF 3",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Food project",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet avec questionnaire anonyme",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet avec administrateur de projet",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Sauvons nos cafés",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Débat sur le cannabis",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet pour consolider les exports",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Budget Participatif IdF",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Project Analyse",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet avec un nom beaucoup trop long keLcoaTLH0H80tMrny6JEzBv7wz0n8h7ginD3N6YdY69Vay4Xcf1GXYwPNQ9TVVgZwvI2G8O8Kr4eRBTdeH5Dc7F0M4AcA8Sn9FWWDvLS8CiFx6M8N2bkXnNjec6r0rGCihR6NyLFS4GizM5uJkkd3Z8sQhxqP5lbbCWz0dFCr3t6Y549RVObvRz1YitlwMRwLk6yKICo2RKXf5w1f1cSFaZH",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet condition requise SMS",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Croissance, innovation, disruption",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Stratégie technologique de l'Etat et services publics",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet vide",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet de loi Renseignement",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Budget Participatif Rennes",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Dépot avec selection vote budget",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet avec questionnaire",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Appel à projets",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Dépôt avec selection vote simple",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Budget avec vote limité",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet avec une étape de participation en continue",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "BP avec vote classement",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Project pour La Force (visible par mauriau seulement)",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Qui doit conquérir le monde ? | Visible par les admins seulement",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Project pour la création de la capCoBeer (visible par admin seulement)",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Un avenir meilleur pour les nains de jardins (custom access)",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Questions/Responses",
+        },
+      },
+      Object {
+        "node": Object {
+          "status": "OPENED_PARTICIPATION",
+          "title": "Projet avec beaucoup d'opinions",
+        },
+      },
+    ],
+  },
+}
+`;

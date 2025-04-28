@@ -184,7 +184,6 @@ mappings:
             properties:
                 id: { type: keyword }
                 title: { type: keyword }
-        projectStatus: { type: keyword }
         contributionsCount: { type: long }
         themes:
             properties:

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Search;
 
+use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Enum\ProjectAffiliation;
 use Capco\AppBundle\Enum\ProjectSearchFields;
 use Capco\AppBundle\Enum\ProjectStatus;
@@ -111,9 +112,7 @@ class ProjectSearch extends Search
                 continue;
             }
 
-            if ('projectStatus' === $key && $value === (string) ProjectStatus::OPENED) {
-                $boolQuery->addFilter(new Query\Terms($key, [$value, (string) ProjectStatus::OPENED_PARTICIPATION]));
-
+            if ('projectStatus' === $key) {
                 continue;
             }
 
@@ -137,10 +136,17 @@ class ProjectSearch extends Search
         $this->addObjectTypeFilter($query, $this->type);
         $query->setTrackTotalHits(true);
         $resultSet = $this->index->search($query);
-        $results = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
+        $projects = $this->getHydratedResultsFromResultSet($this->projectRepo, $resultSet);
+
+        if (isset($providedFilters['projectStatus'])) {
+            $projectStatus = (int) $providedFilters['projectStatus'];
+            $projectStatuses = ProjectStatus::OPENED === (int) $providedFilters['projectStatus'] ? [ProjectStatus::OPENED, ProjectStatus::OPENED_PARTICIPATION] : [$projectStatus];
+
+            $projects = array_filter($projects, fn (Project $project) => \in_array($project->getCurrentStepState(), $projectStatuses, true));
+        }
 
         return [
-            'projects' => $results,
+            'projects' => $projects,
             'count' => $resultSet->getTotalHits(),
         ];
     }

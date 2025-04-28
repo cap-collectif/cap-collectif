@@ -292,4 +292,4 @@ InternalProject:
             status:
                 type: 'ProjectStatus!'
                 description: 'The project status.'
-                resolve: '@=value.getCurrentStepState()'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Project\\ProjectStatusResolver", value)'
