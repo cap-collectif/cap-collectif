@@ -50,6 +50,10 @@ body {
     display: none;
 }
 
+.uppy-StatusBar:not(.is-waiting) {
+    width: 340px;
+}
+
 .jodit-dialog__panel a.jodit-button[data-ref='editImage'] {
     display: none;
   }

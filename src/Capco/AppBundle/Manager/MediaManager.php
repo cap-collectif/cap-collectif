@@ -41,7 +41,8 @@ class MediaManager
         string $path,
         ?string $mediaName = null,
         bool $dryRun = false,
-        string $context = 'default'
+        string $context = 'default',
+        ?bool $createFile = true
     ): Media {
         $media = new Media();
         $media->setProviderName(MediaProvider::class);
@@ -52,10 +53,12 @@ class MediaManager
         $media->setContext($context);
         $media->setEnabled(true);
         $media->setName($mediaName);
-        $media->setProviderReference($mediaName);
+        $media->setProviderReference($this->mediaProvider->generateName($media));
         if (!$dryRun) {
             $this->entityManager->persist($media);
-            $this->mediaProvider->writeBinaryContentInFile($media);
+            if ($createFile) {
+                $this->mediaProvider->writeBinaryContentInFile($media);
+            }
         }
 
         return $media;

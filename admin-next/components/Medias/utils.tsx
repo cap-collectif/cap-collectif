@@ -19,7 +19,7 @@ export const convertFileSize = (size: number | string) => {
     [1024 * 1024 * 1024, 'Go'],
     [1024 * 1024 * 1024 * 1024, 'To'],
   ]
-
+  if (!size) return '0'
   for (let i = 0; i < formats.length; i++) {
     if (size < Number(formats[i][0])) return `${(size / Number(formats[i - 1][0])).toFixed(0)}${formats[i - 1][1]}`
   }

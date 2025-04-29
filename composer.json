@@ -27,6 +27,7 @@
         "ext-openssl": "*",
         "ext-redis": "*",
         "ext-simplexml": "*",
+        "ankitpokhrel/tus-php": "^2.3",
         "bgalati/monolog-sentry-handler": "^2.0",
         "bjeavons/zxcvbn-php": "^1.0",
         "box/spout": "^3.1",

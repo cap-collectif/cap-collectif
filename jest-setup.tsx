@@ -179,6 +179,23 @@ jest.doMock('use-analytics', () => {
     }),
   }
 })
+
+jest.doMock('@uppy/core', () => {
+  return props => (props.children ? <Mock {...props} testID="Uppy" /> : null)
+})
+jest.doMock('@uppy/status-bar', () => {
+  return props => (props.children ? <Mock {...props} testID="StatusBar" /> : null)
+})
+jest.doMock('@uppy/file-input', () => {
+    return props => (props.children ? <Mock {...props} testID="FileInput" /> : null)
+})
+jest.doMock('@uppy/tus', () => {
+  return props => (props.children ? <Mock {...props} testID="Tus" /> : null)
+})
+jest.doMock('@uppy/locales/lib/fr_FR', () => {
+  return {}
+})
+
 jest.doMock('react-on-rails', () => {
   const ReactOnRails = {
     getStore: () => {},

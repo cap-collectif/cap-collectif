@@ -25,4 +25,20 @@ export const ALLOWED_MIMETYPES = [
   'application/vnd.oasis.opendocument.spreadsheet', // .ods
 ]
 
+export const ALLOWED_MIMETYPES_WITH_ARCHIVES = [
+  ...ALLOWED_MIMETYPES,
+  'application/zip',
+  'application/x-zip-compressed',
+  'application/x-tar',
+  'application/x-7z-compressed',
+  'application/x-7z',
+  'application/x-rar-compressed',
+  'application/x-rar',
+  'application/x-bzip',
+  'application/x-bzip2',
+  'application/gzip',
+  'application/x-gzip',
+  'text/plain',
+]
+
 export const MAX_FILE_SIZE = 10000000 // 10 Mo

@@ -12,6 +12,10 @@ const GlobalCSS = createGlobalStyle`
   .beamer_defaultBeamerSelector {
       display: none;
   }
+
+  .uppy-StatusBar:not(.is-waiting) {
+      width: 340px;
+  }
 `
 
 export default GlobalCSS

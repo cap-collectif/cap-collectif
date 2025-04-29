@@ -478,7 +478,7 @@ export const EventForm = ({
           />
           <Field
             id="event_body"
-            type={isFrontendView ? 'admin-editor-ds' : 'admin-editor'}
+            type={isFrontendView ? 'editor-ds' : 'admin-editor'}
             name="body"
             component={component}
             disabled={isDisabled()}

@@ -3,7 +3,10 @@ import dynamic from 'next/dynamic'
 import { Box, CapUIFontFamily, useTheme } from '@cap-collectif/ui'
 import { getApiUrl } from 'config'
 import { IJodit } from 'jodit/types'
-import { joditFileUploader } from '@shared/utils/joditFileUploader'
+import { FILE_UPLOAD_POPUP_OPENED, joditFileUploader, linktooltip, uppyListener } from '@shared/utils/joditFileUploader'
+import '@uppy/core/dist/style.min.css'
+import '@uppy/status-bar/dist/style.min.css'
+import { IntlShape, useIntl } from 'react-intl'
 
 const Editor = dynamic(() => import('./JoditImport'), {
   ssr: false,
@@ -56,6 +59,7 @@ const getConfig = (
   placeholder: string,
   editor: { current: { component: IJodit } },
   textAreaOnly: boolean,
+  intl: IntlShape,
   limitChars?: number,
   disabled?: boolean,
 ) => {
@@ -85,7 +89,7 @@ const getConfig = (
         '|',
         'image',
         'video',
-        'file',
+        joditFileUploader,
         'link',
         'table',
         '|',
@@ -154,6 +158,10 @@ const getConfig = (
     buttonsSM: buttons,
     tabIndex: 0,
     disablePlugins: 'add-new-line',
+    events: { [FILE_UPLOAD_POPUP_OPENED]: (editor: IJodit) => uppyListener(editor, platformLanguage, intl) },
+    popup: {
+      a: linktooltip,
+    },
   }
 }
 
@@ -168,6 +176,7 @@ const Jodit = ({
   limitChars,
   disabled,
 }: Props) => {
+  const intl = useIntl()
   const { colors, radii, space } = useTheme()
   const editor = useRef<any>(null)
   const styles = textAreaOnly
@@ -195,7 +204,7 @@ const Jodit = ({
     : {}
 
   const config = useMemo(
-    () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, limitChars, disabled),
+    () => getConfig(platformLanguage, placeholder, editor, textAreaOnly, intl, limitChars, disabled),
     [platformLanguage],
   )
 

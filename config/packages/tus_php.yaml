@@ -1,0 +1,25 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+
+    TusPhp\Cache\FileStore:
+        class: TusPhp\Cache\FileStore
+        arguments:
+            $cacheDir: '%kernel.project_dir%/var/cache/'
+
+    TusPhp\Tus\Server:
+        class: TusPhp\Tus\Server
+        arguments:
+            $cacheAdapter: '@TusPhp\Cache\FileStore'
+        calls:
+            - method: setUploadDir
+              arguments:
+                  - '%kernel.project_dir%/public/media/default/0001/01'
+            - method: setApiPath
+              arguments:
+                  - '/tus-upload'
+            - method: setMaxUploadSize
+              arguments:
+                  # 100 Mo
+                  - 104857600
