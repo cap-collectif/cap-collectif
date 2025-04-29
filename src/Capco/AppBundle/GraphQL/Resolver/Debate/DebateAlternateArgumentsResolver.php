@@ -128,7 +128,7 @@ class DebateAlternateArgumentsResolver implements QueryInterface
     private static function decodeCursor(?string $cursor): array
     {
         return $cursor
-            ? unserialize(base64_decode($cursor))
+            ? unserialize(base64_decode($cursor), ['allowed_classes' => false])
             : [
                 'for' => null,
                 'against' => null,
