@@ -132,3 +132,7 @@ services:
             $translatableFetchMode: 'EAGER'
         tags:
             - { name: doctrine.event_subscriber }
+
+    Capco\AppBundle\EventListener\MediaSubscriber:
+        tags:
+            - { name: doctrine.event_subscriber }
