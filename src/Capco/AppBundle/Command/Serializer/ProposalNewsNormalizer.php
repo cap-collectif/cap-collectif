@@ -46,8 +46,12 @@ class ProposalNewsNormalizer extends BaseNormalizer implements NormalizerInterfa
         $authorsValues = [];
         /** @var PostAuthor $postAuthor */
         foreach ($postAuthors as $postAuthor) {
-            /** @var User $author */
             $author = $postAuthor->getAuthor();
+
+            if (!$author instanceof User) {
+                continue;
+            }
+
             $authorsValues['id'][] = $postAuthor->getId();
             $authorsValues['username'][] = $postAuthor->getUsername();
             $authorsValues['isEmailConfirmed'][] = $this->getReadableBoolean($author->isEmailConfirmed());

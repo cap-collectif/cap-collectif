@@ -8,6 +8,7 @@ use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\EventListener\GraphQlAclListener;
 use Capco\AppBundle\GraphQL\ConnectionTraversor;
+use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\GraphqlQueryAndCsvHeaderHelper;
 use Capco\AppBundle\Repository\AbstractStepRepository;
 use Capco\AppBundle\Toggle\Manager;
@@ -102,7 +103,7 @@ class CreateStepContributorsCommand extends BaseExportCommand
             ) {
                 $contributor = $edge['node'];
                 $row = [
-                    $contributor['id'],
+                    GlobalIdResolver::getDecodedId($contributor['id'])['id'],
                     $contributor['email'],
                     $contributor['username'] ?? null,
                     ($contributor['userType'] ?? null) ? $contributor['userType']['name'] : null,
