@@ -111,7 +111,7 @@ InternalProposalForm:
                 description: 'Proposal form is type of Proposal or Question'
             objectType:
                 type: 'ProposalFormObjectType!'
-                description: 'The kind of proposal form (Proposal/Question/Establishment)'
+                description: 'The kind of proposal form (Proposal/Question)'
             usingDescription:
                 type: 'Boolean!'
                 description: 'Proposal form using description field'

@@ -9,9 +9,6 @@ ProposalFormObjectType:
             QUESTION:
                 value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::QUESTION
                 description: 'The proposal form allows to submit questions.'
-            ESTABLISHMENT:
-                value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::ESTABLISHMENT
-                description: 'The proposal form allows to submit establishment.'
             OPINION:
                 value: !php/const Capco\AppBundle\Enum\ProposalFormObjectType::OPINION
                 description: 'The proposal form allows to submit opinions.'

@@ -61,7 +61,7 @@ InternalUpdateProposalForm:
                 type: 'Boolean'
             objectType:
                 type: 'ProposalFormObjectType'
-                description: 'Proposal form is type of Proposal or Question or Establishment'
+                description: 'Proposal form is type of Proposal or Question'
             usingDescription:
                 type: 'Boolean'
                 description: 'Proposal form using description field'

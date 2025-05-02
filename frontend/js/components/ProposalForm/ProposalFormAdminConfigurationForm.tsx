@@ -52,7 +52,6 @@ type Props = RelayProps &
 const TYPE_PROPOSAL_FORM = {
   PROPOSAL: 'PROPOSAL',
   QUESTION: 'QUESTION',
-  ESTABLISHMENT: 'ESTABLISHMENT',
   OPINION: 'OPINION',
 }
 export const formName = 'proposal-form-admin-configuration'
@@ -472,12 +471,6 @@ export const ProposalFormAdminConfigurationForm = ({
                 value: TYPE_PROPOSAL_FORM.QUESTION,
                 label: intl.formatMessage({
                   id: 'admin.fields.response.question',
-                }),
-              },
-              {
-                value: TYPE_PROPOSAL_FORM.ESTABLISHMENT,
-                label: intl.formatMessage({
-                  id: 'global.establishment',
                 }),
               },
               {

@@ -10955,7 +10955,7 @@ input PreConfigureProjectProposalFormInput {
   questions: [QuestionnaireAbstractQuestionInput!]
   allowAknowledge: Boolean
 
-  """Proposal form is type of Proposal or Question or Establishment"""
+  """Proposal form is type of Proposal or Question"""
   objectType: ProposalFormObjectType
 
   """Proposal form using description field"""
@@ -12654,7 +12654,7 @@ type ProposalForm implements Node & UniformResourceLocatable {
   """Proposal form is type of Proposal or Question"""
   isProposalForm: Boolean!
 
-  """The kind of proposal form (Proposal/Question/Establishment)"""
+  """The kind of proposal form (Proposal/Question)"""
   objectType: ProposalFormObjectType!
 
   """Proposal form using description field"""
@@ -12774,9 +12774,6 @@ enum ProposalFormObjectType {
 
   """The proposal form allows to submit questions."""
   QUESTION
-
-  """The proposal form allows to submit establishment."""
-  ESTABLISHMENT
 
   """The proposal form allows to submit opinions."""
   OPINION
@@ -19567,7 +19564,7 @@ input UpdateProposalFormInput {
   questions: [QuestionnaireAbstractQuestionInput!]
   allowAknowledge: Boolean
 
-  """Proposal form is type of Proposal or Question or Establishment"""
+  """Proposal form is type of Proposal or Question"""
   objectType: ProposalFormObjectType
 
   """Proposal form using description field"""
