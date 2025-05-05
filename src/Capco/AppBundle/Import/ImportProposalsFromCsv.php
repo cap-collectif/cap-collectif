@@ -671,7 +671,18 @@ class ImportProposalsFromCsv
             $proposal->setSummary($row['summary']);
         }
         if ($this->proposalForm->getUsingDescription() && !empty($row['body'])) {
-            $proposal->setBody($row['body']);
+            $paragraphs = explode("\n\n", (string) $row['body']);
+            $lastParagraphKey = array_key_last($paragraphs);
+            $body = '';
+            foreach ($paragraphs as $key => $paragraph) {
+                $body .= '<p>' . nl2br(trim($paragraph)) . '</p>';
+
+                if ($key !== $lastParagraphKey) {
+                    $body .= '<br> ';
+                }
+            }
+
+            $proposal->setBody($body);
         }
 
         if ($this->proposalForm->isUsingAnySocialNetworks()) {
