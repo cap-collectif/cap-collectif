@@ -4254,7 +4254,7 @@ input CreateProposalFusionInput {
   fromProposals: [ID!]!
 
   """Proposal title for newly created proposal"""
-  title: String
+  title: String!
 
   """Proposal body for newly created proposal"""
   description: String

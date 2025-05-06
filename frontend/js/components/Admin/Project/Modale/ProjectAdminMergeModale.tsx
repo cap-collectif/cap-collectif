@@ -1,22 +1,23 @@
-import * as React from 'react'
+import * as React from 'react';
 
-import styled from 'styled-components'
-import { Button, Modal } from 'react-bootstrap'
-import { connect } from 'react-redux'
-import { Field, reduxForm, SubmissionError } from 'redux-form'
-import type { IntlShape } from 'react-intl'
-import { FormattedMessage, injectIntl } from 'react-intl'
-import CloseButton from '~/components/Form/CloseButton'
-import component from '~/components/Form/Field'
-import type { Dispatch } from '~/types'
-import CreateProposalFusionMutation from '~/mutations/CreateProposalFusionMutation'
-import AlertForm from '~/components/Alert/AlertForm'
+import styled from 'styled-components';
+import { Button, Modal } from 'react-bootstrap';
+import { connect } from 'react-redux';
+import { Field, reduxForm, SubmissionError } from 'redux-form';
+import type { IntlShape } from 'react-intl';
+import { FormattedMessage, injectIntl } from 'react-intl';
+import CloseButton from '~/components/Form/CloseButton';
+import component from '~/components/Form/Field';
+import type { Dispatch } from '~/types';
+import CreateProposalFusionMutation from '~/mutations/CreateProposalFusionMutation';
+import AlertForm from '~/components/Alert/AlertForm';
+
 const ProjectAdminMergeModaleStyle = styled.div`
   ul {
     list-style: none;
     padding-left: 0;
   }
-`
+`;
 type Proposal = {
   readonly id: string
   readonly title: string
@@ -34,61 +35,80 @@ type FormValues = {
   title: string
   description: string
 }
-export const formName = 'proposal-merge-form'
+export const formName = 'proposal-merge-form';
+
+const validate = (values: FormValues) => {
+  const errors: any = {};
+  if (!values.title || values.title === '') {
+    errors.title = 'fill-field';
+  }
+  return errors;
+};
 
 const onSubmit = (values: FormValues, dispatch: Dispatch, props: Props) => {
-  const { proposalsSelected } = props
+  const errors = validate(values);
+  if (errors.title) {
+    throw new SubmissionError({
+      title: props.intl.formatMessage({
+        id: 'global.form.mandatory',
+      }),
+      _error: 'Validation error occurred',
+    });
+  }
+  if (props.errors) return;
+
+  const { proposalsSelected } = props;
   const input = {
     fromProposals: proposalsSelected.map(({ id }) => id),
     title: values.title,
     description: values.description,
-  }
+  };
   return CreateProposalFusionMutation.commit({
     input,
   })
     .then(response => {
       if (!response.createProposalFusion) {
-        throw new Error('Mutation "CreateProposalFusionMutation" failed.')
+        throw new Error('Mutation "CreateProposalFusionMutation" failed.');
       }
 
       if (response.createProposalFusion.proposal && response.createProposalFusion.proposal.adminUrl) {
-        window.location.href = response.createProposalFusion.proposal.adminUrl
+        window.location.href = response.createProposalFusion.proposal.adminUrl;
       } else {
-        window.location.reload()
+        window.location.reload();
       }
     })
     .catch(response => {
       if (response.message) {
         throw new SubmissionError({
           _error: response.message,
-        })
+        });
       } else {
         throw new SubmissionError({
           _error: props.intl.formatMessage({
             id: 'global.error.server.form',
           }),
-        })
+        });
       }
-    })
-}
+    });
+};
 
 export const ProjectAdminMergeModale = ({
-  invalid,
-  pristine,
-  submitting,
-  handleSubmit,
-  valid,
-  submitFailed,
-  submitSucceeded,
-  show,
-  proposalsSelected,
-  onClose,
-}: Props) => {
+                                          invalid,
+                                          pristine,
+                                          submitting,
+                                          handleSubmit,
+                                          valid,
+                                          submitFailed,
+                                          submitSucceeded,
+                                          show,
+                                          proposalsSelected,
+                                          onClose,
+                                        }: Props) => {
   return (
     <Modal
       show={show}
       onHide={() => {
-        onClose()
+        onClose();
       }}
       aria-labelledby="modale-title"
     >
@@ -144,13 +164,13 @@ export const ProjectAdminMergeModale = ({
             label="editor.undo"
             buttonId="merge.cancel"
             onClose={() => {
-              onClose()
+              onClose();
             }}
           />
 
           <Button
             id="merge-proposal-submit-button"
-            disabled={invalid || submitting || pristine}
+            disabled={submitting || pristine}
             type="submit"
             bsStyle="primary"
             className="ml-15"
@@ -167,18 +187,18 @@ export const ProjectAdminMergeModale = ({
         </Modal.Footer>
       </form>
     </Modal>
-  )
-}
+  );
+};
 const form = reduxForm({
   onSubmit,
   enableReinitialize: true,
   form: formName,
-})(ProjectAdminMergeModale)
+})(ProjectAdminMergeModale);
 
 const mapDispatchToProps = (dispatch: Dispatch) => {
   return {
     dispatch,
-  }
-}
+  };
+};
 
-export default connect(mapDispatchToProps)(injectIntl(form))
+export default connect(mapDispatchToProps)(injectIntl(form));

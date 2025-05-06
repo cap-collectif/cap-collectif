@@ -7,7 +7,7 @@ CreateProposalFusionInput:
                 type: '[ID!]!'
                 description: 'Proposal ids from which the fusion is created'
             title:
-                type: 'String'
+                type: 'String!'
                 description: 'Proposal title for newly created proposal'
             description:
                 type: 'String'

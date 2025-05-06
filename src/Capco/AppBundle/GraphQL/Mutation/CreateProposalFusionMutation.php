@@ -15,14 +15,19 @@ use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class CreateProposalFusionMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private EntityManagerInterface $em, private FormFactoryInterface $formFactory, private ProposalRepository $proposalRepo, private TranslatorInterface $translator, private GlobalIdResolver $globalIdResolver, private LoggerInterface $logger, private Indexer $indexer)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly ProposalRepository $proposalRepo,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly LoggerInterface $logger,
+        private readonly Indexer $indexer
+    ) {
     }
 
     public function __invoke(Argument $input, User $author): array
@@ -51,11 +56,9 @@ class CreateProposalFusionMutation implements MutationInterface
             }
         }
 
-        $defaultTitle = $this->translator->trans('untitled-proposal', [], 'CapcoAppBundle');
-
         $proposal = (new Proposal())
             ->setAuthor($author)
-            ->setTitle($title ?? $defaultTitle)
+            ->setTitle($title)
             ->setProposalForm($proposalForm)
         ;
 

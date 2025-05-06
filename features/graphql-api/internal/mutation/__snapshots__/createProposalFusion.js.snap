@@ -1,0 +1,11 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createProposalFusion admin should merge proposals. 1`] = `
+Object {
+  "createProposalFusion": Object {
+    "proposal": Object {
+      "title": "Titre de fusion",
+    },
+  },
+}
+`;

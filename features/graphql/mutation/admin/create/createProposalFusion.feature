@@ -23,7 +23,8 @@ Scenario: GraphQL client wants to create a fusion
     }",
     "variables": {
       "input": {
-        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx", "UHJvcG9zYWw6cHJvcG9zYWwy"]
+        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx", "UHJvcG9zYWw6cHJvcG9zYWwy"],
+        "title": "Test fusion"
       }
     }
   }
@@ -37,7 +38,7 @@ Scenario: GraphQL client wants to create a fusion
           "author": {
             "id": "VXNlcjp1c2VyQWRtaW4="
           },
-          "title": "untitled-proposal",
+          "title": "Test fusion",
           "adminUrl": @string@,
           "mergedFrom": [
             {
@@ -71,7 +72,8 @@ Scenario: GraphQL client wants to create a fusion with only 1 proposal
     }",
     "variables": {
       "input": {
-        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx"]
+        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx"],
+        "title": "Test fusion"
       }
     }
   }
@@ -104,7 +106,8 @@ Scenario: GraphQL client wants to create a fusion with proposals from different 
     }",
     "variables": {
       "input": {
-        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx", "UHJvcG9zYWw6cHJvcG9zYWw4"]
+        "fromProposals": ["UHJvcG9zYWw6cHJvcG9zYWwx", "UHJvcG9zYWw6cHJvcG9zYWw4"],
+        "title": "Test fusion"
       }
     }
   }
