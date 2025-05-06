@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "199de31a82ec543181c6a28f8a8f67ff",
+    "content-hash": "5407cb25066f298ee8457fa01cf6b877",
     "packages": [
         {
             "name": "ankitpokhrel/tus-php",
@@ -525,53 +525,6 @@
                 }
             ],
             "time": "2023-11-29T23:19:16+00:00"
-        },
-        {
-            "name": "cap-collectif/id-to-uuid",
-            "version": "dev-update-doctrine",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/cap-collectif/id-to-uuid.git",
-                "reference": "2bdc344b33f8fb330c9c8ba713849f00fc073bfd"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/cap-collectif/id-to-uuid/zipball/2bdc344b33f8fb330c9c8ba713849f00fc073bfd",
-                "reference": "2bdc344b33f8fb330c9c8ba713849f00fc073bfd",
-                "shasum": ""
-            },
-            "require": {
-                "doctrine/dbal": "^2.5 || ^3.0",
-                "doctrine/doctrine-migrations-bundle": "~1.1 | ~2 || ^3.0.0",
-                "doctrine/orm": "^2.5"
-            },
-            "require-dev": {
-                "friendsofphp/php-cs-fixer": "^2.3"
-            },
-            "suggest": {
-                "ramsey/uuid": "*"
-            },
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "CapCollectif\\IdToUuid\\": "src/"
-                }
-            },
-            "license": [
-                "MIT"
-            ],
-            "authors": [
-                {
-                    "name": "Aurélien David",
-                    "email": "aurelien@cap-collectif.com"
-                }
-            ],
-            "description": "Easily migrate from auto incremented id to uuid",
-            "support": {
-                "source": "https://github.com/cap-collectif/id-to-uuid/tree/update-doctrine",
-                "issues": "https://github.com/cap-collectif/id-to-uuid/issues"
-            },
-            "time": "2021-02-23T11:11:16+00:00"
         },
         {
             "name": "carbonphp/carbon-doctrine-types",
@@ -22826,47 +22779,6 @@
             "time": "2022-11-08T22:37:12+00:00"
         },
         {
-            "name": "rector/custom-phpspec-to-phpunit",
-            "version": "0.5.0",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/rectorphp/custom-phpspec-to-phpunit.git",
-                "reference": "e72300e8ad5ef33849bfe66f625720557e37f9dc"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/rectorphp/custom-phpspec-to-phpunit/zipball/e72300e8ad5ef33849bfe66f625720557e37f9dc",
-                "reference": "e72300e8ad5ef33849bfe66f625720557e37f9dc",
-                "shasum": ""
-            },
-            "require": {
-                "php": ">=7.2"
-            },
-            "bin": [
-                "bin/phpspec-to-phpunit",
-                "bin/phpspec-to-phpunit.php"
-            ],
-            "type": "library",
-            "autoload": {
-                "psr-4": {
-                    "Rector\\PhpSpecToPHPUnit\\": [
-                        "src",
-                        "rules"
-                    ]
-                }
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "Rector migration rules for PHPSpec to PHPUnit",
-            "support": {
-                "issues": "https://github.com/rectorphp/custom-phpspec-to-phpunit/issues",
-                "source": "https://github.com/rectorphp/custom-phpspec-to-phpunit/tree/0.5.0"
-            },
-            "time": "2024-11-10T15:55:02+00:00"
-        },
-        {
             "name": "rector/rector",
             "version": "1.2.10",
             "source": {
@@ -24318,9 +24230,7 @@
     ],
     "aliases": [],
     "minimum-stability": "stable",
-    "stability-flags": {
-        "cap-collectif/id-to-uuid": 20
-    },
+    "stability-flags": {},
     "prefer-stable": false,
     "prefer-lowest": false,
     "platform": {
@@ -24331,9 +24241,9 @@
         "ext-redis": "*",
         "ext-simplexml": "*"
     },
-    "platform-dev": [],
+    "platform-dev": {},
     "platform-overrides": {
         "php": "8.1"
     },
-    "plugin-api-version": "2.3.0"
+    "plugin-api-version": "2.6.0"
 }

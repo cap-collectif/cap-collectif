@@ -21,11 +21,6 @@ parameters:
 			path: src/Capco/AdminBundle/Action/RetrieveAutocompleteItemsAction.php
 
 		-
-			message: "#^Access to an undefined property Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:\\$datagridValues\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
-
-		-
 			message: "#^Class Capco\\\\AdminBundle\\\\Admin\\\\InputBag not found\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
@@ -2136,11 +2131,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheOpinionShareLinkButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheProposalFollowButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2186,11 +2176,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShareOpinionButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShareProposalButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2202,11 +2187,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShowAllOpinionVersionVotesButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShowAllOpinionVotesButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2676,11 +2656,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToARankingStepWithOpinions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToASelectionStep\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2762,16 +2737,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAnOpinionVersionWithLoadsOfVote\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAnOpinionWithLoadsOfVote\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAnOpinionWithVersions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -3216,11 +3181,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeAllOpinionVotes\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeAtLeastOneArgument\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -3372,11 +3332,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheArgumentCreationBoxesDisabled\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheOpinionShareDropdown\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -4017,7 +3972,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#3 \\$cookiesConsent of method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:visitPageWithParams\\(\\) expects bool, string given\\.$#"
-			count: 2
+			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
@@ -15141,27 +15096,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactForm.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
 
@@ -15516,27 +15451,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/District/AbstractDistrict.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
 
@@ -16016,27 +15931,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/EventReview.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/EventTranslation.php
 
@@ -16741,11 +16636,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/MenuItem.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItem\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItem.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItem\\:\\:setAssociatedFeatures\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MenuItem.php
@@ -16791,32 +16681,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/MenuItem.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:getTitle\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
 
@@ -17976,27 +17846,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationMember.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
 
@@ -18047,11 +17897,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:addMenuItem\\(\\) has parameter \\$menuItem with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Page.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Page.php
 
@@ -18126,27 +17971,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Page.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PageTranslation.php
 
@@ -18306,32 +18131,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/PostComment.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PostTranslation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:getBodyText\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PostTranslation.php
 
@@ -20141,27 +19946,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/RegistrationForm.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
 
@@ -20506,11 +20291,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/Section.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:isCustom\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Section/Section.php
@@ -20551,27 +20331,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Section/SectionProject.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
@@ -20751,11 +20511,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SiteImage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameter.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\:\\:getValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameter.php
@@ -20816,32 +20571,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SiteParameter.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:getValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
 
@@ -21151,11 +20886,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Source.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategory\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategory.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategory\\:\\:getSources\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SourceCategory.php
@@ -21186,27 +20916,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SourceCategory.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
 
@@ -21831,11 +21541,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Theme.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Theme.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:getLongDate\\(\\) has parameter \\$format with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Theme.php
@@ -21981,27 +21686,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Theme.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
 
@@ -22191,11 +21876,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Video.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Video\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Video.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Video\\:\\:setAuthor\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Video.php
@@ -22256,27 +21936,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Video.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/VideoTranslation.php
 
@@ -32046,21 +31706,6 @@ parameters:
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
@@ -32142,11 +31787,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:loopRows\\(\\) has parameter \\$rows with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 
@@ -35071,11 +34711,6 @@ parameters:
 			path: src/Capco/AppBundle/Model/ReportableInterface.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Model\\\\SonataTranslatableInterface\\:\\:setLocale\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Model/SonataTranslatableInterface.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Model\\\\Sourceable\\:\\:canContribute\\(\\) has parameter \\$user with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Model/Sourceable.php
@@ -35209,11 +34844,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\Normalizer\\\\OrganizationNormalizer\\:\\:\\$router is never read, only written\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Normalizer/OrganizationNormalizer.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Normalizer\\\\ProjectNormalizer\\:\\:getRestrictedViewerIds\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Normalizer/ProjectNormalizer.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Normalizer\\\\ProposalNormalizer\\:\\:countPointsAndVotes\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
@@ -44321,37 +43951,12 @@ parameters:
 			path: src/Capco/UserBundle/Entity/User.php
 
 		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserType\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserType.php
-
-		-
 			message: "#^Property Capco\\\\UserBundle\\\\Entity\\\\UserType\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Entity/UserType.php
 
 		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
 			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
 
@@ -44407,21 +44012,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Facebook\\\\FacebookResourceOwner\\:\\:getUserInformation\\(\\) has parameter \\$extraParameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
-
-		-
-			message: "#^Parameter \\#1 \\$httpClient of method HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:__construct\\(\\) expects Http\\\\Client\\\\Common\\\\HttpMethodsClient, Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface given\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
-
-		-
-			message: "#^Property Capco\\\\UserBundle\\\\Facebook\\\\FacebookResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
-
-		-
-			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
 
@@ -44641,16 +44231,6 @@ parameters:
 			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
 
 		-
-			message: "#^Property Capco\\\\UserBundle\\\\FranceConnect\\\\FranceConnectResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
-
-		-
-			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
-
-		-
 			message: "#^Method Capco\\\\UserBundle\\\\Handler\\\\CasHandler\\:\\:getServerUrlParts\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Handler/CasHandler.php
@@ -44792,16 +44372,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\OpenID\\\\OpenIDResourceOwner\\:\\:getUserInformation\\(\\) has parameter \\$extraParameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
-
-		-
-			message: "#^Property Capco\\\\UserBundle\\\\OpenID\\\\OpenIDResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
-
-		-
-			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
 
@@ -45459,1556 +45029,6 @@ parameters:
 			message: "#^Method Capco\\\\UserBundle\\\\Security\\\\SessionWithJsonHandler\\:\\:__construct\\(\\) has parameter \\$options with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Security/SessionWithJsonHandler.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150202184849\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150202184849.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150202184849\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150202184849.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150204171640\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150204171640.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150204171640\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150204171640.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150204171640\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150204171640.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150206153206\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150206153206.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150206171059\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150206171059.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150206171059\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150206171059.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150206171059\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150206171059.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150210172512\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150210172512.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150210172512\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150210172512.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150211121254\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150211121254.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150211121254\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150211121254.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150211123011\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150211123011.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150211123011\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150211123011.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150212164448\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150212164448.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150212164448\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150212164448.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150213174404\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150213174404.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150213174404\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150213174404.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150217160940\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150217160940.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150217160940\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150217160940.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150218103103\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150218103103.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150218103103\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150218103103.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150218164337\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150218164337.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150218164337\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150218164337.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150223175433\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150223175433.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150223175433\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150223175433.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150227184834\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150227184834.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150227184834\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150227184834.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150302153402\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150302153402.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150302153402\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150302153402.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150302191738\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150302191738.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150302191738\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150302191738.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150303135522\\:\\:resetFeatures\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150303135522.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150303135522\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150303135522.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150303135522\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150303135522.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150303192637\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150303192637.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150303192637\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150303192637.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150305181845\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150305181845.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150305181845\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150305181845.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150309171716\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150309171716.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150309171716\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150309171716.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150318180252\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150318180252.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150318180252\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150318180252.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150320104826\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150320104826.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150320104826\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150320104826.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150320170501\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150320170501.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150320170501\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150320170501.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150330130028\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150330130028.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150330130028\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150330130028.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150408151960\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150408151960.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150408151960\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150408151960.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150427184111\\:\\:\\$consultationAbstractSteps has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150427184111.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150427184111\\:\\:\\$consultationTypeOpinionTypes has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150427184111.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150427184111\\:\\:\\$opinions has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150427184111.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150427184111\\:\\:\\$steps has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150427184111.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150427184111\\:\\:\\$types has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150427184111.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150615174101\\:\\:\\$items has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150615174101.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150615174101\\:\\:\\$menus has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150615174101.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150910154228\\:\\:isSame\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150910154228.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150910154228\\:\\:isSame\\(\\) has parameter \\$array1 with no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150910154228.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150910154228\\:\\:isSame\\(\\) has parameter \\$array2 with no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150910154228.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150910154228\\:\\:\\$cts has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150910154228.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150910154228\\:\\:\\$ots has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150910154228.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150910154228\\:\\:\\$steps has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150910154228.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20150916123729\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150916123729.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150916123729\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150916123729.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20150916123729\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20150916123729.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151012111217\\:\\:\\$consultation_abstractsteps has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151012111217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151012111217\\:\\:\\$consultation_events has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151012111217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151012111217\\:\\:\\$consultation_posts has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151012111217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151012111217\\:\\:\\$consultation_types has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151012111217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151012111217\\:\\:\\$consultations has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151012111217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151012111217\\:\\:\\$theme_consultations has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151012111217.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20151022093708\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151022093708.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151022093708\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151022093708.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151022093708\\:\\:\\$parameters has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151022093708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20151026092229\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151026092229.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151026092229\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151026092229.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20151026194744\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151026194744.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151026194744\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151026194744.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151105170654\\:\\:\\$collectSteps has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151105170654.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20151125103922\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151125103922.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151125103922\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151125103922.php
-
-		-
-			message: "#^Parameter \\#1 \\$prefix of function uniqid expects string, int\\<0, max\\> given\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151204111931.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20151209165616\\:\\:\\$links has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20151209165616.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20160222000651\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160222000651.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20160222000651\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160222000651.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20160408103427\\:\\:\\$qaq has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160408103427.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20160408103427\\:\\:\\$questions has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160408103427.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20160525163818\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160525163818.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20160525163818\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160525163818.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20160525163819\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160525163819.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20160525163819\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160525163819.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20160601192422\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160601192422.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20160601192422\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160601192422.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20160623163344\\:\\:\\$selectionStepsProposals has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20160623163344.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20170208093426\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170208093426.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20170208093426\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170208093426.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20170530150306\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170530150306.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20170530150306\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170530150306.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20170613093358\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170613093358.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20170613093358\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170613093358.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20170905121057\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170905121057.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20170905121057\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170905121057.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20170905121057\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20170905121057.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20171122175657\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20171122175657.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20171122175657\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20171122175657.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20171122175657\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20171122175657.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20171122175657\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20171122175657.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180103154719\\:\\:setPosition\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180103154719.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180103154719\\:\\:setPosition\\(\\) has parameter \\$keyname with no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180103154719.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180103154719\\:\\:setPosition\\(\\) has parameter \\$position with no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180103154719.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180122115338\\:\\:\\$siteCustomCodes has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180122115338.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180122115338\\:\\:\\$siteImages has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180122115338.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180122115338\\:\\:\\$siteParameters has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180122115338.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180202163622\\:\\:\\$siteParamer has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180202163622.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180226163217\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180226163217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180226163217\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180226163217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180226163217\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180226163217.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180328092156\\:\\:\\$siteParamer has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180328092156.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180424144708\\:\\:createUserFromAnonymous\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180424144708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180424144708\\:\\:createUserFromAnonymous\\(\\) has parameter \\$votesWithoutUser with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180424144708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180424144708\\:\\:importIdeas\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180424144708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180424144708\\:\\:importIdeas\\(\\) has parameter \\$ideas with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180424144708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180424144708\\:\\:removeIdeas\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180424144708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180424144708\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180424144708.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180424144708\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180424144708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20180427094720\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180427094720.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20180427094720\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20180427094720.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20181015163020\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20181015163020.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20181015163020\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20181015163020.php
-
-		-
-			message: "#^Access to an undefined property Application\\\\Migrations\\\\Version20181203164324\\:\\:\\$em\\.$#"
-			count: 3
-			path: src/DoctrineMigrations/Version20181203164324.php
-
-		-
-			message: "#^Access to an undefined property Application\\\\Migrations\\\\Version20181203164324\\:\\:\\$generator\\.$#"
-			count: 3
-			path: src/DoctrineMigrations/Version20181203164324.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20181203164324\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20181203164324.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20190210203518\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190210203518.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190210203518\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190210203518.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20190320141742\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190320141742.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190320141742\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190320141742.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190320141742\\:\\:\\$container is unused\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190320141742.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190320141742\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190320141742.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190320141742\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190320141742.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190426160453\\:\\:\\$consultationsStepTypes has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190426160453.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20190502122156\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190502122156.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190502122156\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190502122156.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20190520093622\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190520093622.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190520093622\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190520093622.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190520093622\\:\\:\\$em is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190520093622.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190520093622\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190520093622.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190520093622\\:\\:\\$generator is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190520093622.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20190623155205\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190623155205.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190623155205\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190623155205.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190623155205\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190623155205.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190623155205\\:\\:\\$projectAuthors has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190623155205.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190730085647\\:\\:\\$consultationSteps has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190730085647.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190731085647\\:\\:\\$consultationsByStep has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190731085647.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190809085810\\:\\:\\$consultationsByStep has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190809085810.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20190911075248\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190911075248.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190911075248\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190911075248.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20190911125714\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190911125714.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20190911125714\\:\\:\\$translator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20190911125714.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191017123246\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191017123246.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191017123246\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191017123246.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191017123246\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191017123246.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191017123246\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191017123246.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191029084429\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191029084429.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191029084429\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191029084429.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191029084429\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191029084429.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191029084430\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191029084430.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191029084430\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191029084430.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191029084430\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191029084430.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191029084430\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191029084430.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191031123246\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191031123246.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191031123246\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191031123246.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191031123246\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191031123246.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191031123246\\:\\:\\$generator is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191031123246.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191105174035\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191105174035.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191105174035\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191105174035.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191105174035\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191105174035.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191105174035\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191105174035.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191105174035\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191105174035.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191114145410\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191114145410.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191114145410\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191114145410.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191114145410\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191114145410.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191114145410\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191114145410.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191125094019\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191125094019.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191125094019\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191125094019.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191125094019\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191125094019.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191125094019\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191125094019.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191127173039\\:\\:setDefaultFromPreviousConf\\(\\) has parameter \\$locales with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191127173039.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191127173039\\:\\:setDefaultFromPreviousConf\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191127173039.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20191219095408\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191219095408.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191219095408\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191219095408.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191219095408\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191219095408.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20191219095408\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20191219095408.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200106102850\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106102850.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106102850\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106102850.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106102850\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106102850.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106102850\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106102850.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106102850\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106102850.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106104037\\:\\:\\$sourceCategories has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106104037.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200106104137\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106104137.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106104137\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106104137.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106104137\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106104137.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106104137\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106104137.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200106104137\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200106104137.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200113121351\\:\\:getFieldsToTranslate\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200113121351.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200120101844\\:\\:getFieldsToTranslate\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200120101844.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200120121351\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200120121351.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200120121351\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200120121351.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200120121351\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200120121351.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200206102839\\:\\:getFieldsToTranslate\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200206102839.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200211114622\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200211114622.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200211114622\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200211114622.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200211114622\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200211114622.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200211114622\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200211114622.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200213124622\\:\\:getFieldsToTranslate\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200213124622.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200302163542\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200302163542.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200303091251\\:\\:getFieldsToTranslate\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200303091251.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200310110329\\:\\:getFieldsToTranslate\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200310110329.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200330085715\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200330085715.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200330085715\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200330085715.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200330085715\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200330085715.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200330085715\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200330085715.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200602184400\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200602184400.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200602184400\\:\\:\\$entityManager has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200602184400.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200602184400\\:\\:\\$uuidGenerator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200602184400.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200602184401\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200602184401.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200602184401\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200602184401.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20200602184401\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200602184401.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200818134317\\:\\:getDefaultValue\\(\\) has parameter \\$translations with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200818134317.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200818134317\\:\\:getExistingTranslations\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200818134317.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200818134317\\:\\:getLocales\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200818134317.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200818134317\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200818134317.php
-
-		-
-			message: "#^Variable \\$existingTranslations on left side of \\?\\? is never defined\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200818134317.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200820094734\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200820094734.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200820094734\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200820094734.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200821105044\\:\\:generateJSONFromCoordinates\\(\\) should return string but returns string\\|false\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200821105044.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20200821180648\\:\\:getCoordinatesFromJson\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20200821180648.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201012110216\\:\\:getUndraftedEntities\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201012110216.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201012110216\\:\\:setUndraftAt\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201012110216.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201130152444\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201130152444.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20201130152444\\:\\:\\$em is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201130152444.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20201130152444\\:\\:\\$generator is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201130152444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:addAuthorsToOfficialResponses\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:addOfficialResponseInProposalDecision\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:createOfficialResponseFromPostData\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:createPostFromOfficialResponseData\\(\\) has parameter \\$officialResponseData with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:getOfficialResponsesData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:getOfficialResponsesDataInPosts\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:removeDataFromPosts\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201203122444\\:\\:translatePost\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201203122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20201216122444\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201216122444.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20201216122444\\:\\:\\$manager \\(Capco\\\\AppBundle\\\\Toggle\\\\Manager\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20201216122444.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210125161924\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210125161924.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20210125161924\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210125161924.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20210125161924\\:\\:\\$container is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210125161924.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210217102221\\:\\:createProcess\\(\\) has parameter \\$processedConfiguration with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210217102221.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210217102221\\:\\:getProcessedConfigurations\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210217102221.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210217102221\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210217102221.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210312153909\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210312153909.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210610142134\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210610142134.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210628155900\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210628155900.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210913100651\\:\\:getMainData\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210913100651.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210913100651\\:\\:getMainData\\(\\) should return array but returns array\\<string, mixed\\>\\|false\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210913100651.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210913100651\\:\\:getTranslatedData\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210913100651.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210913100651\\:\\:updateMainData\\(\\) has parameter \\$value with no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210913100651.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20210927143921\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210927143921.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20210927143921\\:\\:\\$container has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210927143921.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20210927143921\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210927143921.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20210927143921\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20210927143921.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211029114734\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211029114734.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211029114734\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211029114734.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211116165925\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211116165925.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211117102457\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211117102457.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20211117102457\\:\\:\\$em has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211117102457.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20211117102457\\:\\:\\$generator has no type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211117102457.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20211201175715\\:\\:\\$invitations type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211201175715.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228111043\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228111043.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228115215\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228115215.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228115216\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228115216.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228120954\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228120954.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228140436\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228140436.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228141907\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228141907.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228144641\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228144641.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228150301\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228150301.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228150301\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228150301.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228152915\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228152915.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228152915\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228152915.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228160504\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228160504.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228160504\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228160504.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20211228180708\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20211228180708.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20220125142127\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220125142127.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20220125142127\\:\\:\\$em is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220125142127.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20220125142127\\:\\:\\$manager \\(Capco\\\\AppBundle\\\\Toggle\\\\Manager\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220125142127.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20220125142127\\:\\:\\$manager is never read, only written\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220125142127.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20220207103542\\:\\:getNewFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220207103542.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20220207103542\\:\\:getOldFlag\\(\\) never returns null so it can be removed from the return type\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220207103542.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20220905103557\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220905103557.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20220905103557\\:\\:\\$tokenGenerator \\(FOS\\\\UserBundle\\\\Util\\\\TokenGeneratorInterface\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220905103557.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20220908114036\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20220908114036.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20221012154405\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20221012154405.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20221129094125\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20221129094125.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20221202104928\\:\\:addSlugsInDatabase\\(\\) has parameter \\$slugs with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20221202104928.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20221202104928\\:\\:generateSlugs\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20221202104928.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20221202104928\\:\\:generateSlugs\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20221202104928.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20230920133435\\:\\:getLocales\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20230920133435.php
-
-		-
-			message: "#^Method Application\\\\Migrations\\\\Version20230920133435\\:\\:setContainer\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20230920133435.php
-
-		-
-			message: "#^Property Application\\\\Migrations\\\\Version20230920133435\\:\\:\\$translator \\(Symfony\\\\Contracts\\\\Translation\\\\TranslatorInterface\\) does not accept object\\|null\\.$#"
-			count: 1
-			path: src/DoctrineMigrations/Version20230920133435.php
 
 		-
 			message: "#^Trait Capco\\\\Tests\\\\phpspec\\\\MockHelper\\\\GraphQLMock is used zero times and is not analysed\\.$#"
