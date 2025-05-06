@@ -5,6 +5,14 @@
     "repositories": [
         {
             "type": "vcs",
+            "url": "https://github.com/berretes/ExcelBundle"
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/cap-collectif/id-to-uuid"
+        },
+        {
+            "type": "vcs",
             "url": "https://github.com/cap-collectif/qandidate-toggle-bundle"
         },
         {
@@ -23,6 +31,7 @@
         "bgalati/monolog-sentry-handler": "^2.0",
         "bjeavons/zxcvbn-php": "^1.0",
         "box/spout": "^3.1",
+        "cap-collectif/id-to-uuid": "dev-update-doctrine",
         "caxy/htmldiff-bundle": "~0.1.2",
         "cocur/slugify": "~4.4.0",
         "doctrine/annotations": "^1.12",
