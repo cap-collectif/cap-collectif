@@ -38,7 +38,7 @@ export const DebateStepPage = ({ stepId, fromWidget, widgetLocation, location }:
   return (
     <QueryRenderer
       fetchPolicy="store-and-network"
-      environment={environment}
+      environment={environment as any}
       query={graphql`
         query DebateStepPageQuery($stepId: ID!, $isAuthenticated: Boolean!, $isMobile: Boolean!) {
           ...DebateStepPageLogic_query

@@ -296,3 +296,7 @@ InternalProposal:
                 description: 'Number of messages sent to the proposal author.'
                 type: 'Int!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Proposal\\ProposalNumberOfMessagesSentToAuthorResolver", value)'
+            lastStepContainingProposal:
+                description: 'The last step containing this proposal.'
+                type: 'ProposalStep!'
+                resolve: '@=value.getLastStepContainingProposal()'

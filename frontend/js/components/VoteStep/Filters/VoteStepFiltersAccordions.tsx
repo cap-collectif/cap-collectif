@@ -12,6 +12,23 @@ type Props = {
 }
 
 const VoteStepFiltersAccordions = ({ filters, isMobile }: Props) => {
+
+  const getOpenAccordions = React.useCallback(()=> {
+    const currentUrl = window.location.href
+    const urlParams = new URL(currentUrl).searchParams
+    const keys = Object.keys(filters)
+    const openAccordions = keys.filter(key => urlParams.has(key))
+    return openAccordions
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [filters, window.location.href])
+  
+  const [openAccordions, setOpenAccordions] = React.useState<string[]>(() => getOpenAccordions())
+  
+  React.useEffect(() => {
+    setOpenAccordions(() => getOpenAccordions())
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [window.location.href])
+  
   return (
     <Flex direction="column" spacing={4}>
       {Object.keys(filters).map(filterName => {
@@ -21,7 +38,7 @@ const VoteStepFiltersAccordions = ({ filters, isMobile }: Props) => {
             key={filterName}
             size={CapUIAccordionSize.Sm}
             color={CapUIAccordionColor.Transparent}
-            defaultAccordion={null}
+            defaultAccordion={openAccordions}
           >
             <Accordion.Item
               id={filterName}

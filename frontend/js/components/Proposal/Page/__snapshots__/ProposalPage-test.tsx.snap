@@ -3694,6 +3694,38 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                 Object {
                   "alias": null,
                   "args": null,
+                  "concreteType": null,
+                  "kind": "LinkedField",
+                  "name": "lastStepContainingProposal",
+                  "plural": false,
+                  "selections": Array [
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "__typename",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "url",
+                      "storageKey": null,
+                    },
+                    Object {
+                      "alias": null,
+                      "args": null,
+                      "kind": "ScalarField",
+                      "name": "id",
+                      "storageKey": null,
+                    },
+                  ],
+                  "storageKey": null,
+                },
+                Object {
+                  "alias": null,
+                  "args": null,
                   "concreteType": "User",
                   "kind": "LinkedField",
                   "name": "supervisor",
@@ -8697,7 +8729,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "9dc400586594bc5d4778ad721a86ee46",
+          "cacheID": "227760f98b005d6d6b405c682bbb94e0",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -10264,6 +10296,11 @@ fragment ProposalPageHeader_proposal_2Ag0mE on Proposal {
       state
       id
     }
+    id
+  }
+  lastStepContainingProposal {
+    __typename
+    url
     id
   }
   currentVotableStep {

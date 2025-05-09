@@ -6,7 +6,7 @@ import { useDisclosure } from '@liinkiing/react-hooks'
 import moment from 'moment'
 import convertIconToDs from '@shared/utils/convertIconToDs'
 import styled from 'styled-components'
-import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize } from '@cap-collectif/ui'
+import { Button, Box, Flex, Skeleton, CapUIIcon, Icon, CapUIIconSize, Link } from '@cap-collectif/ui'
 import { useLocation, useParams } from 'react-router-dom'
 import { getBaseUrl } from '~/config'
 import colors from '~/utils/colors'
@@ -181,11 +181,25 @@ const BackUrl = ({
 
   const fullUrl = `${baseUrl}/project${!baseUrl ? `/${projectSlug || ''}` : ''}/${url}`
 
+  const handleGoBack = () => {
+    // !important: `fullUrl` won't work on mobile / mobile sized view
+    // Detect if the user is on a mobile device or a small screen
+    const isMobile = /Mobi|Android|iPhone/i.test(navigator.userAgent) || window.innerWidth < 768
+
+    // If on mobile and there is a previous page in history, use the browser's back() which works better
+    if (isMobile && window.history.length > 1) {
+      window.history.back()
+    } else {
+      // navigate to `fullUrl` as defined in the parent component
+      window.location.href = fullUrl
+    }
+  }
+
   return (
-    <a href={fullUrl}>
+    <Link onClick={handleGoBack} sx={{cursor: 'pointer'}}> 
       <Icon name={CapUIIcon.ArrowLeftO} size={CapUIIconSize.Sm} color={colors.primaryColor} />
       {tradKeyToBack && <FormattedMessage id={tradKeyToBack} />}
-    </a>
+    </Link>
   )
 }
 
@@ -203,34 +217,54 @@ export const ProposalPageHeader = ({
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4'
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const intl = useIntl()
-  const { state } = useLocation<{ stepUrl?: string; stepId?: string }>()
+  const { state } = useLocation<{ stepUrl?: string; stepId?: string, from?: string }>()
   const createdDate = (
-    <FormattedDate value={moment(date)} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
+    <FormattedDate value={moment(date) as unknown as Date} day="numeric" month="long" year="numeric" hour="numeric" minute="numeric" />
   )
   const modified = moment(proposal?.updatedAt).diff(proposal?.createdAt, 'seconds') > 1
-  const tradKeyToBack =
-    proposal?.form.objectType === 'PROPOSAL' && isInterpellationContextFromProposal(proposal)
-      ? 'interpellation.back'
-      : proposal?.form.objectType === 'PROPOSAL'
-      ? 'proposal.back'
-      : proposal?.form.objectType === 'ESTABLISHMENT'
-      ? 'establishment-back'
-      : proposal?.form.objectType === 'OPINION'
-      ? 'opinions-list'
-      : proposal?.form.objectType === 'QUESTION'
-      ? 'questions-list'
-      : null
+
+  const getGoBackButtonLabel = () => {
+    return proposal?.form.objectType === 'PROPOSAL' && isInterpellationContextFromProposal(proposal)
+    ? 'interpellation.back'
+    : proposal?.form.objectType === 'PROPOSAL'
+    ? 'proposal.back'
+    : proposal?.form.objectType === 'ESTABLISHMENT'
+    ? 'establishment-back'
+    : proposal?.form.objectType === 'OPINION'
+    ? 'opinions-list'
+    : proposal?.form.objectType === 'QUESTION'
+    ? 'questions-list'
+    : null
+  }
+
   const proposalIllustrationInitialValues = {
     media: proposal?.media || null,
   }
 
-  const originStepUrl = () => {
-    if (state?.stepUrl) {
-      return state?.stepUrl
+
+  const getGoBackUrl = (): string => {
+    const lastStepContainingProposalUrl = proposal?.lastStepContainingProposal?.url
+
+    // 1- If the user comes from the "my votes" view, we redirect them to the last step the proposal is in
+    const comesFromVotesView = (state?.from && state.from?.includes('view=votes')) || (document?.referrer && document.referrer.includes('view=votes'))
+    if (comesFromVotesView && lastStepContainingProposalUrl) {
+      return lastStepContainingProposalUrl.replace(getBaseUrl(), '') || ''
     }
 
+    // 2- If the user comes from a step, the link should redirect there
+    // this works for the new vote step ("vue IDF")
+    if (state?.from) {
+      return state.from.replace(getBaseUrl(), '')
+    }
+    // this works for the old vote step
     if (document.referrer) {
-      return new URL(document.referrer)?.pathname
+      return document.referrer.replace(getBaseUrl(), '') || ''
+       
+    }
+
+    // 3- If the user comes from a link, we want to redirect to the last step the proposal is in
+    if (lastStepContainingProposalUrl) {
+      return lastStepContainingProposalUrl.replace(getBaseUrl(), '')
     }
 
     return ''
@@ -242,9 +276,9 @@ export const ProposalPageHeader = ({
         <HeaderActions>
           <BackUrl
             currentVotableStep={proposal?.currentVotableStep?.slug}
-            originStepUrl={originStepUrl()}
+            originStepUrl={getGoBackUrl()}
             defaultStepUrl={proposal?.form?.step?.url?.replace(getBaseUrl(), '') || ''}
-            tradKeyToBack={tradKeyToBack}
+            tradKeyToBack={getGoBackButtonLabel()}
             platformLocale={platformLocale}
           />
           <div>
@@ -387,6 +421,9 @@ export default createFragmentContainer(container, {
           url
           state
         }
+      }
+      lastStepContainingProposal {
+        url
       }
       currentVotableStep {
         slug

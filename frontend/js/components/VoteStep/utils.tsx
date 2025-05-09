@@ -86,11 +86,13 @@ export const Link = ({
   href,
   stepId,
   currentVotableStepId,
+  from
 }: {
   readonly children: React.ReactElement | React.ReactElement[]
   readonly href: string
   readonly stepId: string
   readonly currentVotableStepId: string
+  readonly from: string
 }) => (
   <RouterLink
     to={{
@@ -98,6 +100,7 @@ export const Link = ({
       state: {
         stepId,
         currentVotableStepId,
+        from
       },
     }}
   >

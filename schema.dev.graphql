@@ -12174,6 +12174,9 @@ type Proposal implements Node & Publishable & UniformResourceLocatable & Trashab
 
   """Number of messages sent to the proposal author."""
   nbrOfMessagesSentToAuthor: Int!
+
+  """The last step containing this proposal."""
+  lastStepContainingProposal: ProposalStep!
 }
 
 """The affiliation of a user to a proposal"""

@@ -12,6 +12,7 @@ use Capco\AppBundle\Entity\Interfaces\SelfLinkableInterface;
 use Capco\AppBundle\Entity\Interfaces\SoftDeleteable;
 use Capco\AppBundle\Entity\Interfaces\Trashable;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
+use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProposalFormObjectType;
@@ -1766,5 +1767,16 @@ class Proposal implements Publishable, Contribution, CommentableInterface, SelfL
         }
 
         return null;
+    }
+
+    public function getLastStepContainingProposal(): AbstractStep
+    {
+        $selections = $this->getSelections();
+
+        if ($selections->isEmpty()) {
+            return $this->getStep();
+        }
+
+        return $selections->last()->getSelectionStep();
     }
 }

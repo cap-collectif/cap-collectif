@@ -214,6 +214,7 @@ export const ProposalPreviewCard = ({
             href={`${projectSlug || ''}/${url}/${proposal.slug}`}
             stepId={stepId}
             currentVotableStepId={currentVotableStep?.id || stepId}
+            from={window.location.href}
           >
             <Heading as="h4" fontSize="16px" color="neutral-gray.900" fontWeight={CapUIFontWeight.Bold}>
               {title}
@@ -224,6 +225,7 @@ export const ProposalPreviewCard = ({
           href={`${projectSlug || ''}/${url}/${proposal.slug}`}
           stepId={stepId}
           currentVotableStepId={currentVotableStep?.id || stepId}
+          from={window.location.href}
         >
           <Proposal.Content.Body fontSize="14px">
             <>
