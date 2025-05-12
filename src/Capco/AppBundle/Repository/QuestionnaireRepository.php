@@ -215,7 +215,7 @@ class QuestionnaireRepository extends EntityRepository
         $sql = '
             SELECT
                 CASE
-                    WHEN COUNT(r.id) > 0 OR COUNT(ra.id) > 0 OR COUNT(u.id) > 0 THEN TRUE
+                    WHEN COUNT(r.id) > 0 OR COUNT(ra.id) > 0 OR COUNT(u.id) > 0 OR COUNT(resr.id) > 0 OR COUNT(resra.id) > 0 THEN TRUE
                     ELSE FALSE
                 END AS hasRecentRepliesOrUpdatedUsers
             FROM
