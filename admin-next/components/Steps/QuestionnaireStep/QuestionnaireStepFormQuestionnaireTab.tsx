@@ -255,9 +255,16 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                         tooltipZIndex={2}
                         onClick={() => {
                           remove(index)
-                          const jumpIndex = questionsWithJumpsValues.findIndex(
-                            (q: QuestionIds) => q.id === questionsValues[index]?.id,
-                          )
+                            const jumpIndex = questionsWithJumpsValues.findIndex((q: QuestionIds) => {
+                              if (q.id === questionsValues[index]?.id) return true
+                              if (q?.jumps) {
+                                const isInCondition = q.jumps.some(jump => jump.conditions.some(condition => condition.question.id === questionsValues[index]?.id))
+                                if (isInCondition) return true
+                                const isInDestinationJump = q.jumps.some(jump => jump.destination.id === questionsValues[index]?.id)
+                                if (isInDestinationJump) return true
+                              }
+                              return false;
+                           })
                           if (jumpIndex !== -1)
                             dispatchEvent('removeJump', {
                               index: jumpIndex,
