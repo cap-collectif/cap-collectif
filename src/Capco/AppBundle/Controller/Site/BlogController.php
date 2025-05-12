@@ -39,6 +39,9 @@ class BlogController extends Controller
             'method' => 'POST',
         ]);
 
+        $themeObject = null;
+        $projectObject = null;
+
         if ('POST' === $request->getMethod()) {
             $form->handleRequest($request);
 
@@ -115,6 +118,6 @@ class BlogController extends Controller
 
         $viewer = $this->getUser();
 
-        return ['post' => $post, 'viewerDidAuthor' => $viewer ? $post->isAuthor($viewer) : false];
+        return ['post' => $post, 'viewerDidAuthor' => $viewer && $post->isAuthor($viewer)];
     }
 }
