@@ -95,7 +95,33 @@ export const QuestionTypes = {
 
 export type QuestionCategory = 'TEXT' | 'NUMERIC' | 'DOCUMENT' | 'UNIQUE_CHOICE' | 'MULTIPLE_CHOICE' | 'LEGAL'
 
-export type QuestionIds = { id: string | null; temporaryId: string | null; title: string }
+export type QuestionIds = {
+  id: string | null;
+  temporaryId: string | null;
+  title: string,
+  jumps: Array<{
+    conditions: Array<{
+      value: {
+        id: string;
+      };
+      question: {
+        id: string;
+      };
+      operator: string;
+    }>;
+    origin: {
+      id: string;
+    };
+    destination: {
+      title: string;
+      id: string;
+    };
+  }>;
+  alwaysJumpDestinationQuestion: {
+    id: string | null;
+  };
+}
+
 
 export const formatQuestions = (
   questionnaire: NonNullable<QuestionnaireStepFormQuery$data['step']>['questionnaire'] | any, // TODO type this better
