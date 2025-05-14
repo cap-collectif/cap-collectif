@@ -212,6 +212,7 @@ export const NavBarMenuContent = ({
               outline: 'none',
               boxShadow: `0px 0px 2px 2px ${theme.subMenuBackground}`,
             }}
+            aria-expanded={open}
           >
             <Flex
               id="navbar-username"

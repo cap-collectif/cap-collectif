@@ -67,6 +67,7 @@ export const NavBarMenu = React.forwardRef<
           py={2}
           fontSize={CapUIFontSize.BodyLarge}
           lineHeight="base"
+          className={isCurrentPage ? 'currentPage' : undefined}
         >
           {title}
         </Box>
@@ -112,6 +113,7 @@ export const NavBarMenu = React.forwardRef<
               bg={open ? bg : ''}
               _hover={{ color: hoverColor, bg: String(bg) }}
               _focus={{ color, outline: 'none', boxShadow: `0px 0px 2px 2px ${String(bg)}` }}
+              aria-expanded={open}
               {...rest}
             >
               {title}
@@ -140,7 +142,7 @@ export const NavBarLink = React.forwardRef<
     <Box
       ref={ref}
       as="a"
-      className="navLink"
+      className={`navLink${isCurrentPage ? ' currentPage' : ''}`}
       fontSize={CapUIFontSize.BodyLarge}
       href={href}
       px={2}
@@ -157,12 +159,9 @@ export const NavBarLink = React.forwardRef<
 })
 NavBarLink.displayName = 'NavBarLink'
 
-
 const IS_BIG_LOGO_RATIO = 1.5
 
-export const NavBarLogo: React.FC<{ logo?: { url: string, width: number, height: number } }> = ({
-  logo,
-}) => {
+export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height: number } }> = ({ logo }) => {
   const intl = useIntl()
   const width = logo.width > 180 ? 180 : logo.width
   const {
