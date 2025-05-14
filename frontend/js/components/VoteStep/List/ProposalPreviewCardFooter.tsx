@@ -153,7 +153,7 @@ export const ProposalPreviewCardFooter = ({
       {showVoteActions || showComplexVoteInfos ? (
         <Flex gap={6} direction={['column', 'row']} align={['center', 'stretch']}>
           {showVoteActions ? (
-            <Flex gap={6}>
+            <Flex gap={6} className={disabled ? 'disabled' : 'open'}>
               <VoteButton
                 stepId={stepId}
                 proposalId={proposal.id}
