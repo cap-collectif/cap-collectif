@@ -156,7 +156,7 @@ export const ProposalPreviewCard = ({
   const { projectSlug } = useParams<{ projectSlug?: string }>()
   if (!proposal || !step) return null
 
-  const { media, author, category, title, summary, body, status, district, theme, currentVotableStep } = proposal
+  const { media, author, category, title, summary, body, status, district, currentVotableStep } = proposal
 
   const { viewerVotes } = step
 
@@ -202,9 +202,9 @@ export const ProposalPreviewCard = ({
             {isCompleteView ? (
               <>
                 {district ? <Proposal.Content.Header.Author author={district.name} icon={CapUIIcon.PinO} /> : null}
-                {theme ? (
+                {category ? (
                   <Text color="neutral-gray.800" fontSize={CapUIFontSize.BodySmall}>
-                    {theme.title}
+                    {category.name}
                   </Text>
                 ) : null}
               </>
