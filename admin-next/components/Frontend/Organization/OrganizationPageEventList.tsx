@@ -11,7 +11,7 @@ const FRAGMENT = graphql`
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, isFuture: { type: "Boolean" })
   @refetchable(queryName: "OrganizationPageEventListPaginationQuery") {
     events(first: $count, after: $cursor, hideDeletedEvents: true, hideUnpublishedEvents: true, isFuture: $isFuture)
-      @connection(key: "OrganizationPageEventList_events", filters: ["query", "orderBy", "isFuture"]) {
+      @connection(key: "OrganizationPageEventList_events", filters: ["isFuture"]) {
       edges {
         node {
           id

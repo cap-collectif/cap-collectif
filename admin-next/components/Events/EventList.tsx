@@ -30,7 +30,7 @@ export const EventListQuery = graphql`
       affiliations: $affiliations
       orderBy: $orderBy
       status: $status
-    ) @connection(key: "EventList_events", filters: ["query", "orderBy", "status", "affiliations", "search"]) {
+    ) @connection(key: "EventList_events", filters: ["orderBy", "status", "affiliations", "search"]) {
       __id
       totalCount
       edges {

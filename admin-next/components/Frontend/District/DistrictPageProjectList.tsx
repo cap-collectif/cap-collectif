@@ -14,8 +14,7 @@ const FRAGMENT = graphql`
   fragment DistrictPageProjectList_query on Query
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, districtId: { type: "ID!" })
   @refetchable(queryName: "DistrictProjectListPaginationQuery") {
-    projects(first: $count, after: $cursor, district: $districtId)
-      @connection(key: "DistrictPage_projects", filters: ["query", "orderBy", "affiliations"]) {
+    projects(first: $count, after: $cursor, district: $districtId) @connection(key: "DistrictPage_projects") {
       totalCount
       edges {
         node {

@@ -25,7 +25,7 @@ export const ParticipantListFragment = graphql`
     id
     ...DeleteParticipantModal_mediator
     participants(first: $count, after: $cursor, fullname: $term, orderBy: $orderBy)
-      @connection(key: "ParticipantList_participants", filters: ["query", "fullname", "orderBy"]) {
+      @connection(key: "ParticipantList_participants", filters: ["fullname", "orderBy"]) {
       totalCount
       __id
       edges {

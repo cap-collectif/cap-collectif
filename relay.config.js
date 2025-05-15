@@ -20,7 +20,7 @@ module.exports = {
     '**/schema.preview.graphql',
     '**/admin-next/src/**',
   ],
-  customScalars: {
+  customScalarTypes: {
     DateTime: 'string',
     Email: 'string',
     URI: 'string',

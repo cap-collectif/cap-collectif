@@ -11,7 +11,7 @@ const FRAGMENT = graphql`
   @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" })
   @refetchable(queryName: "OrganizationPagePostListPaginationQuery") {
     posts(first: $count, after: $cursor, hideUnpublishedPosts: true)
-      @connection(key: "OrganizationPagePostList_posts", filters: ["query", "orderBy"]) {
+      @connection(key: "OrganizationPagePostList_posts") {
       edges {
         node {
           id

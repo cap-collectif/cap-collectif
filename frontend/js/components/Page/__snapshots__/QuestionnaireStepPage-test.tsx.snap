@@ -668,7 +668,6 @@ exports[`<QuestionnaireStepPage /> renders correctly 1`] = `
                                 },
                               ],
                               "filters": Array [
-                                "query",
                                 "orderBy",
                                 "isFuture",
                               ],
@@ -3290,7 +3289,6 @@ exports[`<QuestionnaireStepPage /> renders correctly when not authenticated 1`] 
                                 },
                               ],
                               "filters": Array [
-                                "query",
                                 "orderBy",
                                 "isFuture",
                               ],

@@ -45,7 +45,7 @@ const FRAGMENT = graphql`
   @refetchable(queryName: "StepEventsListRefetchQuery") {
     id
     events(first: $count, orderBy: $orderBy, isFuture: $isFuture, after: $cursor)
-      @connection(key: "StepEventsList_events", filters: ["query", "orderBy", "isFuture"]) {
+      @connection(key: "StepEventsList_events", filters: ["orderBy", "isFuture"]) {
       totalCount
       edges {
         node {
