@@ -48,7 +48,7 @@ const ToastsContainer = () => {
   return (
     <>
       <AppBox
-        className="toasts-container toasts-container--top"
+        className="toasts-container toasts-container--top old-toast-container"
         visible={toasts.length > 0}
         top={2}
         left={0}
