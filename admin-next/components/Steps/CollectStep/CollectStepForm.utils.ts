@@ -131,6 +131,7 @@ export const getInitialValues = (
     enabled: {
       labels: stepEnabledType,
     },
+    isCollectByEmailEnabled: step?.isCollectByEmailEnabled
   }
 }
 
@@ -214,6 +215,7 @@ export const getCollectStepInput = (
     isProposalSmsVoteEnabled: formValues.isProposalSmsVoteEnabled,
     allowAuthorsToAddNews: Boolean(formValues.allowAuthorsToAddNews),
     private: formValues.stepVisibilityType?.labels[0] === StepVisibilityTypeEnum.RESTRICTED,
+    isCollectByEmailEnabled: formValues.isCollectByEmailEnabled ?? false,
     ...getRequirementsInput(formValues),
     ...getVoteParameterInput(formValues),
   }

@@ -11,6 +11,7 @@ use Symfony\Component\Security\Core\Security;
 class StepVoter extends AbstractOwnerableVoter
 {
     final public const VIEW = 'view';
+    final public const EDIT = 'edit';
 
     public function __construct(private readonly Security $security)
     {
@@ -65,6 +66,7 @@ class StepVoter extends AbstractOwnerableVoter
         if (
             !\in_array($attribute, [
                 self::VIEW,
+                self::EDIT,
             ])
         ) {
             return false;
@@ -89,6 +91,7 @@ class StepVoter extends AbstractOwnerableVoter
 
         return match ($attribute) {
             self::VIEW => static::view($step, $viewer),
+            self::EDIT => static::canEdit($step->getProject(), $viewer),
             default => false,
         };
     }

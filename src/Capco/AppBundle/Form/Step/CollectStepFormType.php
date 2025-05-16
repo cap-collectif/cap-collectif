@@ -49,6 +49,7 @@ class CollectStepFormType extends AbstractStepFormType
             ->add('isProposalSmsVoteEnabled')
             ->add('proposalArchivedTime')
             ->add('proposalArchivedUnitTime')
+            ->add('isCollectByEmailEnabled')
         ;
     }
 

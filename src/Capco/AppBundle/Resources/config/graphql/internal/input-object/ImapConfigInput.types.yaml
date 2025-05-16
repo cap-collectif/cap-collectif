@@ -1,0 +1,18 @@
+ImapConfigInput:
+    type: input-object
+    config:
+        name: ImapConfigInput
+        description: 'An imap configuration'
+        fields:
+            serverUrl:
+                type: 'String!'
+                description: 'The imap server url to connect to.'
+            folder:
+                type: 'String!'
+                description: 'Which email folder to retreive the emails.'
+            email:
+                type: 'String!'
+                description: 'The email to authenticate to the mailbox.'
+            password:
+                type: 'String!'
+                description: 'The password to authenticate to the mailbox.'

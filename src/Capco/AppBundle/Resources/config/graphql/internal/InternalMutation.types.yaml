@@ -1872,3 +1872,10 @@ InternalMutation:
                     inputType: UpdateUserInput
                     payloadType: UpdateUserPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserMutation", args, getUser())'
+            saveImapConfig:
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Mutation\\SaveImapConfigMutation").isGranted(args["input"]["stepId"], getUser())'
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: SaveImapConfigInput
+                    payloadType: SaveImapConfigPayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\SaveImapConfigMutation", args["input"]["serverUrl"], args["input"]["folder"], args["input"]["email"], args["input"]["password"], args["input"]["stepId"], args["input"]["id"])'

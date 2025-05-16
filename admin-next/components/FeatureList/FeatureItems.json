@@ -105,6 +105,11 @@
                         "title": "capco.module.new_vote_step",
                         "description": "",
                         "onlySuperAdmin": true
+                    },
+                    "collect_proposals_by_email": {
+                        "title": "capco.module.collect_proposals_by_email",
+                        "description": "description.module.collect_proposals_by_email",
+                        "onlySuperAdmin": true
                     }
                 }
             }

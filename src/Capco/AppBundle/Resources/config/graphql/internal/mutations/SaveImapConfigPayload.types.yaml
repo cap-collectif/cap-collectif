@@ -1,0 +1,8 @@
+SaveImapConfigPayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            errorCode:
+                type: 'SaveImapConfigErrorCode'
+            imapConfig:
+                type: 'ImapConfig'

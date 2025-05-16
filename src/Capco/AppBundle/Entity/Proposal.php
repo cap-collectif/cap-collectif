@@ -347,6 +347,11 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
      */
     private ?ProposalStatistics $statistics = null;
 
+    /**
+     * @ORM\Column(name="consent_internal_communication_token", type="string", nullable=true)
+     */
+    private ?string $consentInternalCommunicationToken = null;
+
     public function __construct()
     {
         $this->selectionVotes = new ArrayCollection();
@@ -1768,6 +1773,18 @@ class Proposal implements EntityInterface, Publishable, Contribution, Commentabl
         }
 
         return null;
+    }
+
+    public function getConsentInternalCommunicationToken(): ?string
+    {
+        return $this->consentInternalCommunicationToken;
+    }
+
+    public function setConsentInternalCommunicationToken(?string $consentInternalCommunicationToken): self
+    {
+        $this->consentInternalCommunicationToken = $consentInternalCommunicationToken;
+
+        return $this;
     }
 
     public function getLastStepContainingProposal(): AbstractStep

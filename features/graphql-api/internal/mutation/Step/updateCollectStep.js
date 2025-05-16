@@ -98,6 +98,7 @@ const input = {
   secretBallot: false,
   proposalArchivedTime: 0,
   proposalArchivedUnitTime: 'MONTHS',
+  isCollectByEmailEnabled: false,
 };
 
 describe('mutations.updateCollectStep', () => {

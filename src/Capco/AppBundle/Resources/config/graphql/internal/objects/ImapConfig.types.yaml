@@ -1,0 +1,21 @@
+ImapConfig:
+    type: object
+    config:
+        name: ImapConfig
+        description: 'An imap configuration'
+        fields:
+            id:
+                type: 'ID'
+                description: 'The imap configuration ID.'
+            serverUrl:
+                type: 'String'
+                description: 'The imap server url to connect to.'
+            folder:
+                type: 'String'
+                description: 'Which email folder to retreive the emails.'
+            email:
+                type: 'String'
+                description: 'The email to authenticate to the mailbox.'
+            password:
+                type: 'String'
+                description: 'The password to authenticate to the mailbox.'

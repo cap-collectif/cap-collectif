@@ -976,7 +976,14 @@ services:
         arguments: ['CapcoAppBundle:OpinionAppendix']
 
     Capco\AppBundle\Repository\EventTranslationRepository:
+        factory: [ '@doctrine.orm.entity_manager', getRepository ]
+        lazy: true
+        tags: [ 'repository.manager' ]
+        arguments: [ 'CapcoAppBundle:EventTranslation' ]
+
+    Capco\AppBundle\Repository\CollectStepImapServerConfigRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
         tags: ['repository.manager']
-        arguments: ['CapcoAppBundle:EventTranslation']
+        arguments: ['CapcoAppBundle:CollectStepImapServerConfig']
+

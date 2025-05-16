@@ -64,3 +64,6 @@
 
 # Check queues with too many messages
 * * * * * /usr/local/bin/rabbitmq_queues_supervision >> /tmp/rabbitmq_queues_supervision.log
+
+# Read email inboxes to create proposals
+0 * * * * /usr/bin/timeout 50m /usr/local/bin/gosu capco php -d memory_limit=$CAPCO_CRON_EXPORT_PHP_MEMORY_LIMIT -d zend.enable_gc=0 /var/www/bin/console capco:collect-email-proposals --env=prod

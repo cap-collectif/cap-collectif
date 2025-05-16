@@ -62,6 +62,19 @@ class CollectStepRepository extends AbstractStepRepository
         return $qb->getQuery()->getResult();
     }
 
+    /**
+     * @return array<CollectStep>
+     */
+    public function findByEnabledImapConfig(): array
+    {
+        return $this->createQueryBuilder('s')
+            ->join('s.collectStepImapServerConfig', 'csi')
+            ->andWhere('s.isCollectByEmailEnabled = true')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     protected function getIsEnabledQueryBuilder()
     {
         return $this->createQueryBuilder('cs')

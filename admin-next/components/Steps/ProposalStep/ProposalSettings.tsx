@@ -6,6 +6,8 @@ import { useIntl } from 'react-intl'
 import { useFormContext } from 'react-hook-form'
 import { graphql, useFragment } from 'react-relay'
 import { ProposalSettings_step$key } from '../../../__generated__/ProposalSettings_step.graphql'
+import CollectStepImapConfig from '@components/Steps/CollectStep/CollectStepImapConfig'
+import CollectStepImapConfigForm from '@components/Steps/CollectStep/CollectStepImapConfigForm'
 
 const STEP_FRAGMENT = graphql`
   fragment ProposalSettings_step on ProposalStep {
@@ -13,6 +15,7 @@ const STEP_FRAGMENT = graphql`
       id
       name
     }
+    ...CollectStepImapConfigForm_collectStep
   }
 `
 
@@ -76,6 +79,9 @@ const ProposalSettings: React.FC<Props> = ({ step: stepRef }) => {
 
   return (
     <>
+      <CollectStepImapConfig>
+        <CollectStepImapConfigForm step={step} />
+      </CollectStepImapConfig>
       <FormControl name="allowAuthorsToAddNews" control={control} mb={6}>
         <FormLabel htmlFor="allowAuthorsToAddNews" label={intl.formatMessage({ id: 'proposal-news-label' })} />
         <FieldInput id="allowAuthorsToAddNews" name="allowAuthorsToAddNews" control={control} type="checkbox">

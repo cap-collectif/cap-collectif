@@ -96,3 +96,6 @@ UpdateCollectStepInput:
             proposalArchivedUnitTime:
                 type: 'ProposalArchivedUnitTime!'
                 description: 'The unit chosen to set the archived duration can be either MONTHS or DAYS'
+            isCollectByEmailEnabled:
+                type: 'Boolean!'
+                description: 'Whether or not collect by email is enabled.'

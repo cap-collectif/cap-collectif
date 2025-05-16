@@ -2567,6 +2567,14 @@ type CollectStep implements Node & Step & ProposalStep & RequirementStep {
   Whether or not authors can add news on proposals collected in this step
   """
   allowAuthorsToAddNews: Boolean!
+
+  """
+  When email collect is enabled, the imap config to connect to the mailbox
+  """
+  imapConfig: ImapConfig
+
+  """Whether or not collect by email is enabled."""
+  isCollectByEmailEnabled: Boolean!
 }
 
 """A color on hexadecimal format (#DDDDDD)."""
@@ -7159,6 +7167,9 @@ enum FeatureFlagType {
 
   """Whether or not the multi consultations are enabled"""
   multi_consultations
+
+  """Whether or not collect proposals by email is enabled"""
+  collect_proposals_by_email
 }
 
 """Require a firstname"""
@@ -7856,6 +7867,24 @@ type IdentificationCodeRequirement implements Node & Requirement {
     """The token associated to the Participant."""
     token: String!
   ): String
+}
+
+"""An imap configuration"""
+type ImapConfig {
+  """The imap configuration ID."""
+  id: ID
+
+  """The imap server url to connect to."""
+  serverUrl: String
+
+  """Which email folder to retreive the emails."""
+  folder: String
+
+  """The email to authenticate to the mailbox."""
+  email: String
+
+  """The password to authenticate to the mailbox."""
+  password: String
 }
 
 """Available errors for an `inviteOrganizationMember` mutation."""
@@ -9211,6 +9240,7 @@ type Mutation {
   updateVotesVisibility(input: UpdateVotesVisibilityInput!): UpdateVotesVisibilityPayload
   handleProposalFormCategoryImage(input: HandleProposalFormCategoryImageInput!): HandleProposalFormCategoryImagePayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
+  saveImapConfig(input: SaveImapConfigInput!): SaveImapConfigPayload
 }
 
 """A connection to a list of items."""
@@ -16089,6 +16119,50 @@ enum SSOType {
   CAS
 }
 
+"""Available errors for an `SaveImapConfig` mutation."""
+enum SaveImapConfigErrorCode {
+  """The targetted folder was not found."""
+  FOLDER_NOT_FOUND
+
+  """Connection to imap server failed."""
+  CONNECTION_TO_SERVER_FAILED
+
+  """
+  Connection to imap server is successful but email or password is incorrect
+  """
+  AUTHENTICATION_FAILED
+
+  """The given email is already used in another step."""
+  EMAIL_ALREADY_USED
+}
+
+input SaveImapConfigInput {
+  """The imap config id if existing."""
+  id: ID
+
+  """The step id."""
+  stepId: ID!
+
+  """The imap server url to connect to."""
+  serverUrl: String!
+
+  """Which email folder to retreive the emails."""
+  folder: String!
+
+  """The email to authenticate to the mailbox."""
+  email: String!
+
+  """The password to authenticate to the mailbox."""
+  password: String!
+  clientMutationId: String
+}
+
+type SaveImapConfigPayload {
+  errorCode: SaveImapConfigErrorCode
+  imapConfig: ImapConfig
+  clientMutationId: String
+}
+
 """A section"""
 type Section implements Node & UniformResourceLocatable {
   """The URL to this resource."""
@@ -18302,6 +18376,9 @@ input UpdateCollectStepInput {
   The unit chosen to set the archived duration can be either MONTHS or DAYS
   """
   proposalArchivedUnitTime: ProposalArchivedUnitTime!
+
+  """Whether or not collect by email is enabled."""
+  isCollectByEmailEnabled: Boolean!
   clientMutationId: String
 }
 

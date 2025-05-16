@@ -1,0 +1,24 @@
+SaveImapConfigInput:
+    type: relay-mutation-input
+    config:
+        name: SaveImapConfigInput
+        description: 'An imap configuration'
+        fields:
+            id:
+                type: 'ID'
+                description: 'The imap config id if existing.'
+            stepId:
+                type: 'ID!'
+                description: 'The step id.'
+            serverUrl:
+                type: 'String!'
+                description: 'The imap server url to connect to.'
+            folder:
+                type: 'String!'
+                description: 'Which email folder to retreive the emails.'
+            email:
+                type: 'String!'
+                description: 'The email to authenticate to the mailbox.'
+            password:
+                type: 'String!'
+                description: 'The password to authenticate to the mailbox.'

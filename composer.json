@@ -27,6 +27,7 @@
         "ext-openssl": "*",
         "ext-redis": "*",
         "ext-simplexml": "*",
+        "ext-zip": "*",
         "ankitpokhrel/tus-php": "^2.3",
         "bgalati/monolog-sentry-handler": "^2.0",
         "bjeavons/zxcvbn-php": "^1.0",
@@ -138,6 +139,7 @@
         "twig/extra-bundle": "^2.12|^3.0",
         "twig/twig": "^2.12|^3.0",
         "twilio/sdk": "^6.32",
+        "webklex/php-imap": "^6.2",
         "willdurand/geocoder": "4.4.*",
         "willdurand/negotiation": "^3.0"
     },

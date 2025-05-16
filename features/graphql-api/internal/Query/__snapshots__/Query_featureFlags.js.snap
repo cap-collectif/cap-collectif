@@ -237,6 +237,9 @@ Object {
     Object {
       "type": "multi_consultations",
     },
+    Object {
+      "type": "collect_proposals_by_email",
+    },
   ],
 }
 `;

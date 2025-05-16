@@ -64,7 +64,7 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         ProposalRepository $proposalRepository,
         Publisher $publisher,
         protected AuthorizationCheckerInterface $authorizationChecker,
-        private readonly ProposalLikersDataLoader $proposalLikersDataLoader
+        private readonly ProposalLikersDataLoader $proposalLikersDataLoader,
     ) {
         parent::__construct(
             $logger,
@@ -193,15 +193,17 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
         $proposal->setStatus($status);
         $this->em->flush();
 
-        $this->publisher->publish(
-            CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
-            new Message(
-                json_encode([
-                    'proposalId' => $proposal->getId(),
-                    'date' => new DateTime(),
-                ])
-            )
-        );
+        $body = json_encode([
+            'proposalId' => $proposal->getId(),
+            'date' => new DateTime(),
+        ]);
+
+        if ($body) {
+            $this->publisher->publish(
+                CapcoAppBundleMessagesTypes::PROPOSAL_UPDATE_STATUS,
+                new Message($body)
+            );
+        }
 
         $this->invalidateCache($proposal);
 
@@ -370,6 +372,8 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                 break;
 
             case ProposalPublicationStatus::PUBLISHED:
+                $wasDraft = $proposal->isDraft();
+
                 $proposal
                     ->setPublishedAt(new DateTime())
                     ->setDraft(false)
@@ -377,6 +381,11 @@ class ProposalMutation extends CreateProposalMutation implements ContainerAwareI
                     ->setDeletedAt(null)
                     ->setIsArchived(false)
                 ;
+
+                if ($wasDraft && $proposal->getConsentInternalCommunicationToken()) {
+                    $data = ['proposalId' => $proposal->getId()];
+                    $this->publisher->publish(CapcoAppBundleMessagesTypes::PROPOSAL_COLLECT_EMAIL_PUBLISHED, new Message(json_encode($data)));
+                }
 
                 break;
 

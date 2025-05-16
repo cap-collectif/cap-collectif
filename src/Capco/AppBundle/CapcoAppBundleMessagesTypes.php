@@ -53,4 +53,6 @@ final class CapcoAppBundleMessagesTypes
     public const ORGANIZATION_MEMBER_INVITATION = 'organization_member.invitation';
 
     public const MEDIATOR_NOTIFICATION_PUB_PARTICIPANT = 'mediator_participate_email';
+
+    public const PROPOSAL_COLLECT_EMAIL_PUBLISHED = 'proposal_collect_email_published';
 }

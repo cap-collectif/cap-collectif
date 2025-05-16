@@ -1,0 +1,18 @@
+SaveImapConfigErrorCode:
+    type: enum
+    config:
+        name: SaveImapConfigErrorCode
+        description: 'Available errors for an `SaveImapConfig` mutation.'
+        values:
+            FOLDER_NOT_FOUND:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\SaveImapConfigMutation::FOLDER_NOT_FOUND
+                description: 'The targetted folder was not found.'
+            CONNECTION_TO_SERVER_FAILED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\SaveImapConfigMutation::CONNECTION_TO_SERVER_FAILED
+                description: 'Connection to imap server failed.'
+            AUTHENTICATION_FAILED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\SaveImapConfigMutation::AUTHENTICATION_FAILED
+                description: 'Connection to imap server is successful but email or password is incorrect'
+            EMAIL_ALREADY_USED:
+                value: !php/const Capco\AppBundle\GraphQL\Mutation\SaveImapConfigMutation::EMAIL_ALREADY_USED
+                description: 'The given email is already used in another step.'

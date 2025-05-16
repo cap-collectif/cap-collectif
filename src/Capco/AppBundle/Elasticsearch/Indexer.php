@@ -138,6 +138,14 @@ class Indexer
         }
     }
 
+    public function buildDocumentAndAddToBulk(mixed $object): void
+    {
+        if ($object instanceof IndexableInterface && $object->isIndexable()) {
+            $document = $this->buildDocument($object);
+            $this->addToBulk($document);
+        }
+    }
+
     /**
      * Remove / Delete from the index.
      * You HAVE to call self::finishBulk after!

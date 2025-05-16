@@ -52,3 +52,12 @@ InternalCollectStep:
             allowAuthorsToAddNews:
                 type: 'Boolean!'
                 description: 'Whether or not authors can add news on proposals collected in this step'
+            imapConfig:
+                type: 'ImapConfig'
+                access: '@=service("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepImapConfigResolver").isGranted(value)'
+                description: 'When email collect is enabled, the imap config to connect to the mailbox'
+                resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\CollectStep\\CollectStepImapConfigResolver", value)'
+            isCollectByEmailEnabled:
+                type: 'Boolean!'
+                description: 'Whether or not collect by email is enabled.'
+

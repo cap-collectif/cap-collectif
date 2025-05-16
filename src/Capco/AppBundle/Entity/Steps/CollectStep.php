@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Steps;
 
+use Capco\AppBundle\Entity\CollectStepImapServerConfig;
 use Capco\AppBundle\Entity\Interfaces\DefaultStatusInterface;
 use Capco\AppBundle\Entity\Interfaces\ParticipativeStepInterface;
 use Capco\AppBundle\Entity\Interfaces\VotableStepInterface;
@@ -79,6 +80,16 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
      * @Assert\Choice(choices={"old","last","votes","least-votes","comments","random", "cheap", "expensive"})
      */
     private $defaultSort = ProposalSort::RANDOM;
+
+    /**
+     * @ORM\OneToOne(targetEntity=CollectStepImapServerConfig::class, mappedBy="collectStep", cascade={"persist", "remove"})
+     */
+    private ?CollectStepImapServerConfig $collectStepImapServerConfig = null;
+
+    /**
+     * @ORM\Column(name="is_collect_by_email_enabled", type="boolean", nullable=false, options={"default":0})
+     */
+    private bool $isCollectByEmailEnabled = false;
 
     public function __clone()
     {
@@ -185,5 +196,39 @@ class CollectStep extends AbstractStep implements ParticipativeStepInterface, Vo
         }
 
         return false;
+    }
+
+    public function getCollectStepImapServerConfig(): ?CollectStepImapServerConfig
+    {
+        return $this->collectStepImapServerConfig;
+    }
+
+    public function setCollectStepImapServerConfig(?CollectStepImapServerConfig $collectStepImapServerConfig): self
+    {
+        // unset the owning side of the relation if necessary
+        if (null === $collectStepImapServerConfig && null !== $this->collectStepImapServerConfig) {
+            $this->collectStepImapServerConfig->setCollectStep(null);
+        }
+
+        // set the owning side of the relation if necessary
+        if (null !== $collectStepImapServerConfig && $collectStepImapServerConfig->getCollectStep() !== $this) {
+            $collectStepImapServerConfig->setCollectStep($this);
+        }
+
+        $this->collectStepImapServerConfig = $collectStepImapServerConfig;
+
+        return $this;
+    }
+
+    public function isCollectByEmailEnabled(): bool
+    {
+        return $this->isCollectByEmailEnabled;
+    }
+
+    public function setIsCollectByEmailEnabled(bool $isCollectByEmailEnabled): self
+    {
+        $this->isCollectByEmailEnabled = $isCollectByEmailEnabled;
+
+        return $this;
     }
 }

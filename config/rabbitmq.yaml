@@ -338,6 +338,12 @@
             bindings:
                 - exchange: capco_direct_exchange
                   routing_key: mediator_participate_email
+        proposal_collect_email_published:
+            durable: true
+            retries: [25, 125, 625]
+            bindings:
+                - exchange: capco_direct_exchange
+                  routing_key: proposal_collect_email_published
 
         # QUEUE DELAYED
         # x-dead-letter-exchange: Messages are republished to an exchange after ttl

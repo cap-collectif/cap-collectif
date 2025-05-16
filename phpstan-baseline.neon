@@ -21,11 +21,6 @@ parameters:
 			path: src/Capco/AdminBundle/Action/RetrieveAutocompleteItemsAction.php
 
 		-
-			message: "#^Access to an undefined property Capco\\\\AdminBundle\\\\Admin\\\\AbstractAdmin\\:\\:\\$datagridValues\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
-
-		-
 			message: "#^Class Capco\\\\AdminBundle\\\\Admin\\\\InputBag not found\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/AbstractAdmin.php
@@ -2136,11 +2131,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheOpinionShareLinkButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheProposalFollowButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2186,11 +2176,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShareOpinionButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShareProposalButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2202,11 +2187,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShowAllOpinionVersionVotesButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iClickTheShowAllOpinionVotesButton\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -2676,11 +2656,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToARankingStepWithOpinions\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToASelectionStep\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -2762,16 +2737,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAnOpinionVersionWithLoadsOfVote\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAnOpinionWithLoadsOfVote\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iGoToAnOpinionWithVersions\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -3216,11 +3181,6 @@ parameters:
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeAllOpinionVotes\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeAtLeastOneArgument\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
@@ -3372,11 +3332,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheArgumentCreationBoxesDisabled\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/ApplicationContext.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:iShouldSeeTheOpinionShareDropdown\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
@@ -4017,7 +3972,7 @@ parameters:
 
 		-
 			message: "#^Parameter \\#3 \\$cookiesConsent of method Capco\\\\AppBundle\\\\Behat\\\\ApplicationContext\\:\\:visitPageWithParams\\(\\) expects bool, string given\\.$#"
-			count: 2
+			count: 1
 			path: src/Capco/AppBundle/Behat/ApplicationContext.php
 
 		-
@@ -14856,6 +14811,11 @@ parameters:
 			path: src/Capco/AppBundle/Entity/CategoryImage.php
 
 		-
+			message: "#^Property Capco\\\\AppBundle\\\\Entity\\\\CollectStepImapServerConfig\\:\\:\\$id has no type specified\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Entity/CollectStepImapServerConfig.php
+
+		-
 			message: "#^Call to function property_exists\\(\\) with \\$this\\(Capco\\\\AppBundle\\\\Entity\\\\Comment\\) and 'updatedAt' will always evaluate to true\\.$#"
 			count: 3
 			path: src/Capco/AppBundle/Entity/Comment.php
@@ -15141,27 +15101,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactForm.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ContactForm\\\\ContactFormTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ContactForm/ContactFormTranslation.php
 
@@ -15516,27 +15456,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/District/AbstractDistrict.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\District\\\\DistrictTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/District/DistrictTranslation.php
 
@@ -16016,27 +15936,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/EventReview.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/EventTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\EventTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/EventTranslation.php
 
@@ -16741,11 +16641,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/MenuItem.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItem\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItem.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItem\\:\\:setAssociatedFeatures\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MenuItem.php
@@ -16791,32 +16686,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/MenuItem.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:getTitle\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\MenuItemTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/MenuItemTranslation.php
 
@@ -17976,27 +17851,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationMember.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Organization\\\\OrganizationTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Organization/OrganizationTranslation.php
 
@@ -18047,11 +17902,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:addMenuItem\\(\\) has parameter \\$menuItem with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Page.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Page\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Page.php
 
@@ -18126,27 +17976,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Page.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PageTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PageTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PageTranslation.php
 
@@ -18306,32 +18136,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/PostComment.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PostTranslation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:getBodyText\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/PostTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\PostTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/PostTranslation.php
 
@@ -20141,27 +19951,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/RegistrationForm.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\RegistrationFormTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/RegistrationFormTranslation.php
 
@@ -20506,11 +20296,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Section/Section.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/Section.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\Section\\:\\:isCustom\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Section/Section.php
@@ -20551,27 +20336,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Section/SectionProject.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Section\\\\SectionTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Section/SectionTranslation.php
 
@@ -20751,11 +20516,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SiteImage.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameter.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameter\\:\\:getValue\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameter.php
@@ -20816,32 +20576,12 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SiteParameter.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:getValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SiteParameterTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SiteParameterTranslation.php
 
@@ -21151,11 +20891,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Source.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategory\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategory.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategory\\:\\:getSources\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SourceCategory.php
@@ -21186,27 +20921,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/SourceCategory.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\SourceCategoryTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/SourceCategoryTranslation.php
 
@@ -21831,11 +21546,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Theme.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Theme.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Theme\\:\\:getLongDate\\(\\) has parameter \\$format with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Theme.php
@@ -21981,27 +21691,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Theme.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\ThemeTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/ThemeTranslation.php
 
@@ -22191,11 +21881,6 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Video.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Video\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/Video.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\Video\\:\\:setAuthor\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/Video.php
@@ -22256,27 +21941,7 @@ parameters:
 			path: src/Capco/AppBundle/Entity/Video.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Entity/VideoTranslation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Entity\\\\VideoTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Entity/VideoTranslation.php
 
@@ -32046,21 +31711,6 @@ parameters:
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
@@ -32142,11 +31792,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:loopRows\\(\\) has parameter \\$rows with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Import\\\\ImportProposalsFromCsv\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Import/ImportProposalsFromCsv.php
 
@@ -33564,6 +33209,26 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalAknowledgeUpdateMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalAknowledgeUpdateMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalCollectEmailPublishedMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalCollectEmailPublishedMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalCollectEmailPublishedMessage\\:\\:getMySubjectVars\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalCollectEmailPublishedMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalCollectEmailPublishedMessage\\:\\:getMyTemplateVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalCollectEmailPublishedMessage.php
+
+		-
+			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalCollectEmailPublishedMessage\\:\\:getMyTemplateVars\\(\\) return type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Mailer/Message/Proposal/ProposalCollectEmailPublishedMessage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Mailer\\\\Message\\\\Proposal\\\\ProposalCreateAdminMessage\\:\\:getMySubjectVars\\(\\) has parameter \\$params with no value type specified in iterable type array\\.$#"
@@ -35069,11 +34734,6 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Model\\\\ReportableInterface\\:\\:removeReport\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Model/ReportableInterface.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Model\\\\SonataTranslatableInterface\\:\\:setLocale\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Model/SonataTranslatableInterface.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Model\\\\Sourceable\\:\\:canContribute\\(\\) has parameter \\$user with no type specified\\.$#"
@@ -44321,37 +43981,12 @@ parameters:
 			path: src/Capco/UserBundle/Entity/User.php
 
 		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserType\\:\\:getLocale\\(\\) should return string but returns Knp\\\\DoctrineBehaviors\\\\Model\\\\Translatable\\\\Returns\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserType.php
-
-		-
 			message: "#^Property Capco\\\\UserBundle\\\\Entity\\\\UserType\\:\\:\\$id has no type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Entity/UserType.php
 
 		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:doesTranslationExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:doesTranslationKeyExist\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:getAllTranslationKey\\(\\) has parameter \\$domain with no type specified\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
 			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:getAllTranslationKey\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
-
-		-
-			message: "#^Method Capco\\\\UserBundle\\\\Entity\\\\UserTypeTranslation\\:\\:setAsNewTranslation\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Entity/UserTypeTranslation.php
 
@@ -44407,21 +44042,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\Facebook\\\\FacebookResourceOwner\\:\\:getUserInformation\\(\\) has parameter \\$extraParameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
-
-		-
-			message: "#^Parameter \\#1 \\$httpClient of method HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:__construct\\(\\) expects Http\\\\Client\\\\Common\\\\HttpMethodsClient, Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface given\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
-
-		-
-			message: "#^Property Capco\\\\UserBundle\\\\Facebook\\\\FacebookResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
-
-		-
-			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
 
@@ -44641,16 +44261,6 @@ parameters:
 			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
 
 		-
-			message: "#^Property Capco\\\\UserBundle\\\\FranceConnect\\\\FranceConnectResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
-
-		-
-			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
-
-		-
 			message: "#^Method Capco\\\\UserBundle\\\\Handler\\\\CasHandler\\:\\:getServerUrlParts\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Handler/CasHandler.php
@@ -44792,16 +44402,6 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\OpenID\\\\OpenIDResourceOwner\\:\\:getUserInformation\\(\\) has parameter \\$extraParameters with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
-
-		-
-			message: "#^Property Capco\\\\UserBundle\\\\OpenID\\\\OpenIDResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
-
-		-
-			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
 

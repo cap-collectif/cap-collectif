@@ -183,3 +183,6 @@ InternalFeatureFlagType:
             multi_consultations:
                 value: !php/const Capco\AppBundle\Toggle\Manager::multi_consultations
                 description: 'Whether or not the multi consultations are enabled'
+            collect_proposals_by_email:
+                value: !php/const Capco\AppBundle\Toggle\Manager::collect_proposals_by_email
+                description: 'Whether or not collect proposals by email is enabled'

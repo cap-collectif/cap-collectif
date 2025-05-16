@@ -81,6 +81,7 @@ export const defaultFeatureFlags: FeatureFlags = {
   online_help: false,
   full_proposal_card: false,
   multi_consultations: false,
+  collect_proposals_by_email: false,
 }
 
 const getRedisFeatureFlagKey = (flag: string) => {

@@ -172,6 +172,7 @@ export type FormValues = {
   }
   metaDescription: string
   customCode: string
+  isCollectByEmailEnabled
 } & RequirementsFormValues
 
 const COLLECT_FRAGMENT = graphql`
@@ -369,6 +370,7 @@ const COLLECT_FRAGMENT = graphql`
         mainView
         ...ProposalStepRequirementsTabs_proposalStep
         ...ProposalStepOptionnalAccordion_step
+        isCollectByEmailEnabled
       }
     }
     ...ProposalFormForm_query
