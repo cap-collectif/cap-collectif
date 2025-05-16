@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Debate;
 use Capco\AppBundle\Repository\Debate\DebateArticleRepository;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -13,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\EntityListeners({"Capco\AppBundle\EventListener\DebateArticleListener"})
  * @ORM\Entity(repositoryClass=DebateArticleRepository::class)
  */
-class DebateArticle
+class DebateArticle implements EntityInterface
 {
     use TimestampableTrait;
     use UuidTrait;

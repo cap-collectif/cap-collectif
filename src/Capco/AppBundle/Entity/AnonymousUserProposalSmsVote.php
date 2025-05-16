@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AnonymousUserProposalSmsVoteRepository")
  */
-class AnonymousUserProposalSmsVote
+class AnonymousUserProposalSmsVote implements EntityInterface
 {
     use TimestampableTrait;
     use UuidTrait;

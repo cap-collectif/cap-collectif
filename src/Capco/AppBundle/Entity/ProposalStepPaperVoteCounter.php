@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\ProposalStepPaperVoteCounterRepository;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     )
  * @ORM\Entity(repositoryClass=ProposalStepPaperVoteCounterRepository::class)
  */
-class ProposalStepPaperVoteCounter implements ExportableContributionInterface
+class ProposalStepPaperVoteCounter implements EntityInterface, ExportableContributionInterface
 {
     private const PROPOSAL_PAPER_VOTE_STEP_NOT_ALLOWED = 'PROPOSAL_PAPER_VOTE_STEP_NOT_ALLOWED';
 

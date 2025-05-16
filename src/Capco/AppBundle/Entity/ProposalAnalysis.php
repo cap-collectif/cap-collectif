@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -21,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal_analysis")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="evaluationForm")
  */
-class ProposalAnalysis implements Timestampable, \Stringable
+class ProposalAnalysis implements EntityInterface, Timestampable, \Stringable
 {
     use HasResponsesTrait;
     use TimestampableTrait;

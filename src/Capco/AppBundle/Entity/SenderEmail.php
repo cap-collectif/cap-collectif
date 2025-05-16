@@ -4,13 +4,14 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\SenderEmailRepository;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=SenderEmailRepository::class)
  * @ORM\Table(name="sender_email", uniqueConstraints={@ORM\UniqueConstraint(columns={"locale", "domain"})})
  */
-class SenderEmail
+class SenderEmail implements EntityInterface
 {
     use UuidTrait;
 

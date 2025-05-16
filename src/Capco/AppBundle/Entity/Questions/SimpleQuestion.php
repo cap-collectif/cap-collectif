@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Entity\Questions;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SimpleQuestionRepository")
  */
-class SimpleQuestion extends AbstractQuestion
+class SimpleQuestion extends AbstractQuestion implements EntityInterface
 {
     public static $questionTypesLabels = [
         'question.types.text' => self::QUESTION_TYPE_SIMPLE_TEXT,

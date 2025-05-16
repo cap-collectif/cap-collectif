@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
@@ -22,7 +23,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FollowerRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Follower implements IndexableInterface
+class Follower implements EntityInterface, IndexableInterface
 {
     use UuidTrait;
 

@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\ConfirmableTrait;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -21,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="event_registration")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventRegistrationRepository")
  */
-class EventRegistration
+class EventRegistration implements EntityInterface
 {
     use AnonymousableTrait;
     use ConfirmableTrait;

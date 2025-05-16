@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -13,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="appendix_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AppendixRepository")
  */
-class AppendixType implements \Stringable
+class AppendixType implements EntityInterface, \Stringable
 {
     use SluggableTitleTrait;
     use TimestampableTrait;

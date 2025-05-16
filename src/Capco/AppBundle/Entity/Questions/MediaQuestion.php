@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Entity\Questions;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MediaQuestionRepository")
  */
-class MediaQuestion extends AbstractQuestion
+class MediaQuestion extends AbstractQuestion implements EntityInterface
 {
     public function __construct()
     {

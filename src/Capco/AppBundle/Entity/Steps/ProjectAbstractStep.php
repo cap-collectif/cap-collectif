@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Steps;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -16,7 +17,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAbstractStepRepository")
  * @ORM\Table(name="project_abstractstep")
  */
-class ProjectAbstractStep implements \Stringable
+class ProjectAbstractStep implements EntityInterface, \Stringable
 {
     use PositionableTrait;
     use UuidTrait;

@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -19,7 +20,7 @@ use Gedmo\Timestampable\Timestampable;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\AnalysisConfigurationRepository")
  * @ORM\Table(name="analysis_configuration")
  */
-class AnalysisConfiguration implements Timestampable
+class AnalysisConfiguration implements EntityInterface, Timestampable
 {
     use BodyUsingJoditWysiwygTrait;
     use TextableTrait;

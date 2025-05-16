@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectAuthorRepository")
  * @CapcoAssert\HasAuthor()
  */
-class ProjectAuthor implements Authorable, Author
+class ProjectAuthor implements EntityInterface, Authorable, Author
 {
     use TimestampableTrait;
     use UuidTrait;

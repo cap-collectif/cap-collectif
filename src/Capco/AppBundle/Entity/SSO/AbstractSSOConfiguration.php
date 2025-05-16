@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\SSO;
 use Capco\AppBundle\DBAL\Enum\EnumSSOEnvironmentType;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      "cas"              = "CASSSOConfiguration"
  * })
  */
-abstract class AbstractSSOConfiguration
+abstract class AbstractSSOConfiguration implements EntityInterface
 {
     use EnableTrait;
     use UuidTrait;

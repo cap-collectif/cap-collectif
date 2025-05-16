@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -12,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="site_color")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteColorRepository")
  */
-class SiteColor implements \Stringable
+class SiteColor implements EntityInterface, \Stringable
 {
     use IdTrait;
 

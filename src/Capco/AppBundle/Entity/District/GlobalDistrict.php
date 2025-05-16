@@ -8,13 +8,14 @@ use Capco\AppBundle\Traits\FollowableTrait;
 use Capco\AppBundle\Traits\Media\CoverTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\GlobalDistrictRepository")
  */
-class GlobalDistrict extends AbstractDistrict implements SluggableInterface, \Stringable
+class GlobalDistrict extends AbstractDistrict implements EntityInterface, SluggableInterface, \Stringable
 {
     use CoverTrait;
     use FollowableTrait;

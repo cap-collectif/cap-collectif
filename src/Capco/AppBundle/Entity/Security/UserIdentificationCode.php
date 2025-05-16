@@ -2,13 +2,14 @@
 
 namespace Capco\AppBundle\Entity\Security;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="user_identification_code")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Security\UserIdentificationCodeRepository")
  */
-class UserIdentificationCode
+class UserIdentificationCode implements EntityInterface
 {
     /**
      * @ORM\Id

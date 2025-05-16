@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Id;
 
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping\Id;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PhoneTokenRepository")
  * @ORM\Table(name="phone_token")
  */
-class PhoneToken
+class PhoneToken implements EntityInterface
 {
     /**
      * @Id @ORM\Column(name="phone", type="string", nullable=false)

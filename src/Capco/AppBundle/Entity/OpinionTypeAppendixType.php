@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -12,7 +13,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeAppendixTypeRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class OpinionTypeAppendixType implements \Stringable
+class OpinionTypeAppendixType implements EntityInterface, \Stringable
 {
     use PositionableTrait;
     use UuidTrait;

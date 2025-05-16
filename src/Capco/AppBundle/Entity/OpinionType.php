@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -13,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="opinion_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionTypeRepository")
  */
-class OpinionType implements \Stringable
+class OpinionType implements EntityInterface, \Stringable
 {
     use DescriptionTrait;
     use UuidTrait;

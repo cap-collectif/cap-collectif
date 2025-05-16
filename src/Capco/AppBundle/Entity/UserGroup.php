@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
@@ -16,7 +17,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints as Assert;
  *   message="user_group.not_unique"
  * )
  */
-class UserGroup
+class UserGroup implements EntityInterface
 {
     // TODO: remove this id, because it's useless, PK should be user+group
     use UuidTrait;

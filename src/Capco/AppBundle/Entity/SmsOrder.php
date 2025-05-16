@@ -5,13 +5,14 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Repository\SmsOrderRepository;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="sms_order")
  * @ORM\Entity(repositoryClass=SmsOrderRepository::class)
  */
-class SmsOrder
+class SmsOrder implements EntityInterface
 {
     use TimestampableTrait;
     use UuidTrait;

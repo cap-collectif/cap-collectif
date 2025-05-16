@@ -8,6 +8,7 @@ use Capco\AppBundle\Entity\Organization\Organization;
 use Capco\AppBundle\Traits\AuthorableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -27,7 +28,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
  *     message="This organization is already in use on that officialResponse."
  * )
  */
-class OfficialResponseAuthor implements Authorable
+class OfficialResponseAuthor implements EntityInterface, Authorable
 {
     use AuthorableTrait;
     use UuidTrait;

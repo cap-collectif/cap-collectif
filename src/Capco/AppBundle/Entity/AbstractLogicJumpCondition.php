@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -16,7 +17,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      "multiple_choice" = "MultipleChoiceQuestionLogicJumpCondition",
  * })
  */
-abstract class AbstractLogicJumpCondition
+abstract class AbstractLogicJumpCondition implements EntityInterface
 {
     use PositionableTrait;
     use UuidTrait;

@@ -6,6 +6,7 @@ use Capco\AppBundle\DBAL\Enum\EventReviewStatusType;
 use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User as Reviewer;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="event_review")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\EventReviewRepository")
  */
-class EventReview implements CreatableInterface
+class EventReview implements EntityInterface, CreatableInterface
 {
     use TimestampableTrait;
     use UuidTrait;

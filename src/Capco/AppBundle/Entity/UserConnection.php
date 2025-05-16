@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -14,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * })
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserConnectionRepository")
  */
-class UserConnection
+class UserConnection implements EntityInterface
 {
     use AuthorInformationTrait;
     use UuidTrait;

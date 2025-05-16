@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="project_type")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProjectTypeRepository")
  */
-class ProjectType implements \Stringable
+class ProjectType implements EntityInterface, \Stringable
 {
     use IdTrait;
 

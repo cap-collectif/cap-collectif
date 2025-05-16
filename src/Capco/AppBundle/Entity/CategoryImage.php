@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="category_image")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\CategoryImageRepository")
  */
-class CategoryImage
+class CategoryImage implements EntityInterface
 {
     use TimestampableTrait;
     use UuidTrait;

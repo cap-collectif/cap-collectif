@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\UserRequirementRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class UserRequirement
+class UserRequirement implements EntityInterface
 {
     /**
      * @ORM\Id

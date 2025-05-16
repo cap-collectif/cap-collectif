@@ -13,6 +13,7 @@ use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -24,7 +25,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )*
  * @ORM\Entity(repositoryClass=OrganizationRepository::class)
  */
-class Organization implements TranslatableInterface, Author, ProjectOwner, IndexableInterface, SluggableInterface
+class Organization implements EntityInterface, TranslatableInterface, Author, ProjectOwner, IndexableInterface, SluggableInterface
 {
     use SluggableTranslatableTitleTrait;
     use TimestampableTrait;

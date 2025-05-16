@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -21,7 +22,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\StatusRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Status implements \Stringable
+class Status implements EntityInterface, \Stringable
 {
     use ColorableTrait;
     use PositionableTrait;

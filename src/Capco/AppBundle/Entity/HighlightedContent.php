@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *  "event"   = "HighlightedEvent"
  * })
  */
-abstract class HighlightedContent
+abstract class HighlightedContent implements EntityInterface
 {
     use IdTrait;
 

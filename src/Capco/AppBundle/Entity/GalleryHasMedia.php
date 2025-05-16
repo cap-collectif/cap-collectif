@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="media__gallery_media")
  * @ORM\HasLifecycleCallbacks
  */
-class GalleryHasMedia implements \Stringable
+class GalleryHasMedia implements EntityInterface, \Stringable
 {
     use IdTrait;
 

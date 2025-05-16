@@ -6,6 +6,7 @@ use Capco\AdminBundle\Validator\Constraints as CapcoAdminAssert;
 use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -14,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SiteParameterRepository")
  * @CapcoAdminAssert\LessThanIfMetaDescription(max="160", message="argument.metadescription.max_length")
  */
-class SiteParameter implements TranslatableInterface, \Stringable
+class SiteParameter implements EntityInterface, TranslatableInterface, \Stringable
 {
     use TranslatableTrait;
     use UuidTrait;

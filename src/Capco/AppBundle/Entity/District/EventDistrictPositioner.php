@@ -6,6 +6,7 @@ use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *     ),
  *  })
  */
-class EventDistrictPositioner implements \Stringable
+class EventDistrictPositioner implements EntityInterface, \Stringable
 {
     use PositionableTrait;
     use TimestampableTrait;

@@ -8,6 +8,7 @@ use Capco\AppBundle\Enum\ReplyStatus;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\TokenTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyAnonymousRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class ReplyAnonymous extends AbstractReply implements ExportableContributionInterface
+class ReplyAnonymous extends AbstractReply implements EntityInterface, ExportableContributionInterface
 {
     use HasResponsesTrait;
     use TokenTrait;

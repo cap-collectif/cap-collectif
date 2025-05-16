@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\Questions\QuestionnaireAbstractQuestion;
 use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="registration_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RegistrationFormRepository")
  */
-class RegistrationForm implements QuestionnableForm, TranslatableInterface
+class RegistrationForm implements EntityInterface, QuestionnableForm, TranslatableInterface
 {
     use TranslatableTrait;
     use UuidTrait;

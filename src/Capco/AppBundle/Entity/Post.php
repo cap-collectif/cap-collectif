@@ -18,6 +18,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Utils\Text;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -29,7 +30,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PostRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Post implements CommentableInterface, IndexableInterface, Ownerable, TranslatableInterface, CreatableInterface, \Stringable, ExportableContributionInterface
+class Post implements EntityInterface, CommentableInterface, IndexableInterface, Ownerable, TranslatableInterface, CreatableInterface, \Stringable, ExportableContributionInterface
 {
     use BodyUsingJoditWysiwygTrait;
     use CommentableTrait;

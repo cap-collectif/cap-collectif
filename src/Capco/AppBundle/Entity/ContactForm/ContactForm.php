@@ -6,13 +6,14 @@ use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="contact_form")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ContactFormRepository")
  */
-class ContactForm implements TranslatableInterface
+class ContactForm implements EntityInterface, TranslatableInterface
 {
     use BodyUsingJoditWysiwygTrait;
     use TranslatableTrait;

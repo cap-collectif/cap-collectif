@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity\Debate;
 
 use Capco\AppBundle\Entity\AbstractUserToken;
 use Capco\AppBundle\Repository\Debate\DebateVoteTokenRepository;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * )
  * @ORM\Entity(repositoryClass=DebateVoteTokenRepository::class)
  */
-class DebateVoteToken extends AbstractUserToken
+class DebateVoteToken extends AbstractUserToken implements EntityInterface
 {
     public function __construct(User $user, /**
      * @ORM\ManyToOne(targetEntity=Debate::class)

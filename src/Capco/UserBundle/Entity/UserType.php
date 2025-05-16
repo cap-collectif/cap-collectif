@@ -5,6 +5,7 @@ namespace Capco\UserBundle\Entity;
 use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -12,7 +13,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_type")
  * @ORM\HasLifecycleCallbacks()
  */
-class UserType implements TranslatableInterface, \Stringable
+class UserType implements EntityInterface, TranslatableInterface, \Stringable
 {
     use TranslatableTrait;
     use UuidTrait;

@@ -4,12 +4,13 @@ namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Entity\Interfaces\CivicIAAnalyzableInterface;
 use Capco\AppBundle\Traits\CivicIATrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ValueResponseRepository")
  */
-class ValueResponse extends AbstractResponse implements CivicIAAnalyzableInterface
+class ValueResponse extends AbstractResponse implements EntityInterface, CivicIAAnalyzableInterface
 {
     use CivicIATrait;
 

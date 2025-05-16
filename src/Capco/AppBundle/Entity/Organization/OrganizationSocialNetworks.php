@@ -3,13 +3,14 @@
 namespace Capco\AppBundle\Entity\Organization;
 
 use Capco\AppBundle\Entity\AbstractSocialNetworks;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="organization_social_networks")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSocialNetworksRepository")
  */
-class OrganizationSocialNetworks extends AbstractSocialNetworks
+class OrganizationSocialNetworks extends AbstractSocialNetworks implements EntityInterface
 {
     /**
      * @ORM\Id()

@@ -8,6 +8,7 @@ use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\Map\ZoomTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="section")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\SectionRepository")
  */
-class Section implements TranslatableInterface, \Stringable
+class Section implements EntityInterface, TranslatableInterface, \Stringable
 {
     use TranslatableTrait;
     use UuidTrait;

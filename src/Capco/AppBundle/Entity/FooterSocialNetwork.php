@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PositionableTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -13,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="footer_social_network")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FooterSocialNetworkRepository")
  */
-class FooterSocialNetwork implements \Stringable
+class FooterSocialNetwork implements EntityInterface, \Stringable
 {
     use IdTrait;
     use PositionableTrait;

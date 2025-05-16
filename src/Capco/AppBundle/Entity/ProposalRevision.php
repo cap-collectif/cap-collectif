@@ -10,6 +10,7 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalRevisionRepository")
  * @CapcoAssert\HasAuthor()
  */
-class ProposalRevision implements Authorable
+class ProposalRevision implements EntityInterface, Authorable
 {
     use BodyUsingJoditWysiwygTrait;
     use TextableTrait;

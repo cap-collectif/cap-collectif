@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Security;
 use Capco\AppBundle\Entity\Interfaces\Ownerable;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -13,7 +14,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="user_identification_code_list")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Security\UserIdentificationCodeListRepository")
  */
-class UserIdentificationCodeList implements Ownerable
+class UserIdentificationCodeList implements EntityInterface, Ownerable
 {
     use OwnerableTrait;
     use UuidTrait;

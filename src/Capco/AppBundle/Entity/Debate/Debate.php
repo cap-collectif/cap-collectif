@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Debate;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\DebateStep;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateRepository")
  */
-class Debate
+class Debate implements EntityInterface
 {
     use UuidTrait;
 

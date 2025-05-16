@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\ParticipantRepository;
 use Capco\AppBundle\Traits\ContributorTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="participant")
  * @ORM\Entity(repositoryClass=ParticipantRepository::class)
  */
-class Participant implements ContributorInterface
+class Participant implements EntityInterface, ContributorInterface
 {
     use ContributorTrait;
     use TimestampableTrait;

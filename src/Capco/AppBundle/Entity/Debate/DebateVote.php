@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\AuthorInformationTrait;
 use Capco\AppBundle\Traits\ContributionOriginTrait;
 use Capco\AppBundle\Traits\DebatableTrait;
 use Capco\AppBundle\Traits\ForAgainstTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateVoteRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class DebateVote extends AbstractVote
+class DebateVote extends AbstractVote implements EntityInterface
 {
     use AuthorInformationTrait;
     use ContributionOriginTrait;

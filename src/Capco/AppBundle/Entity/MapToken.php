@@ -5,13 +5,14 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Enum\MapProviderEnum;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MapTokenRepository")
  * @ORM\Table(name="map_token")
  */
-class MapToken
+class MapToken implements EntityInterface
 {
     use TimestampableTrait;
     use UuidTrait;

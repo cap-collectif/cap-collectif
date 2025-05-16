@@ -12,6 +12,7 @@ use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -25,7 +26,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * )
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ConsultationRepository")
  */
-class Consultation implements IndexableInterface, Ownerable, CreatableInterface, \Stringable
+class Consultation implements EntityInterface, IndexableInterface, Ownerable, CreatableInterface, \Stringable
 {
     use CreatableTrait;
     use CustomCodeTrait;

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\ActionTokenRepository;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
@@ -19,7 +20,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  * )
  * @ORM\Entity(repositoryClass=ActionTokenRepository::class)
  */
-class ActionToken extends AbstractUserToken
+class ActionToken extends AbstractUserToken implements EntityInterface
 {
     final public const UNSUBSCRIBE = 'unsubscribe';
     final public const AVAILABLE_ACTIONS = [self::UNSUBSCRIBE];

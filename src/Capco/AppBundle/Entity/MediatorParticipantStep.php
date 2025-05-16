@@ -5,13 +5,14 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\MediatorParticipantStepRepository;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="mediator_participant_step")
  * @ORM\Entity(repositoryClass=MediatorParticipantStepRepository::class)
  */
-class MediatorParticipantStep
+class MediatorParticipantStep implements EntityInterface
 {
     use UuidTrait;
 

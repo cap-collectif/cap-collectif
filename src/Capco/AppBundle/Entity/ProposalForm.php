@@ -25,6 +25,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UsingSocialNetworksTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -49,7 +50,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *   message="proposal_form.reference.not_unique"
  * )
  */
-class ProposalForm implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface, \Stringable
+class ProposalForm implements EntityInterface, DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface, \Stringable
 {
     use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;

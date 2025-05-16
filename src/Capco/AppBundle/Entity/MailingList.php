@@ -8,6 +8,7 @@ use Capco\AppBundle\Repository\MailingListRepository;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=MailingListRepository::class)
  * @ORM\Table(name="mailing_list")
  */
-class MailingList implements Ownerable, CreatableInterface
+class MailingList implements EntityInterface, Ownerable, CreatableInterface
 {
     use CreatableTrait;
     use OwnerableTrait;

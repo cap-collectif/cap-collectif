@@ -3,13 +3,14 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\ExternalServiceConfigurationRepository;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="external_service_configuration")
  * @ORM\Entity(repositoryClass=ExternalServiceConfigurationRepository::class)
  */
-class ExternalServiceConfiguration
+class ExternalServiceConfiguration implements EntityInterface
 {
     final public const MAILER_MANDRILL = 'mandrill';
     final public const MAILER_MAILJET = 'mailjet';

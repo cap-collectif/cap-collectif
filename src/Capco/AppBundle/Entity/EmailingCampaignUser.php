@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Repository\EmailingCampaignUserRepository;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=EmailingCampaignUserRepository::class)
  * @ORM\Table(name="emailing_campaign_user")
  */
-class EmailingCampaignUser
+class EmailingCampaignUser implements EntityInterface
 {
     /**
      * @ORM\Id

@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity\Questions;
 
 use Capco\AppBundle\Entity\QuestionChoice;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -10,7 +11,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MultipleChoiceQuestionRepository")
  */
-class MultipleChoiceQuestion extends AbstractQuestion
+class MultipleChoiceQuestion extends AbstractQuestion implements EntityInterface
 {
     public static $questionTypesLabels = [
         'question.types.button' => self::QUESTION_TYPE_BUTTON,

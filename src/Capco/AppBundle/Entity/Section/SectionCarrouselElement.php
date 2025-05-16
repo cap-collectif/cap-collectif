@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Section;
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Repository\SectionCarrouselElementRepository;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="section_carrousel_element")
  * @ORM\Entity(repositoryClass=SectionCarrouselElementRepository::class)
  */
-class SectionCarrouselElement
+class SectionCarrouselElement implements EntityInterface
 {
     use UuidTrait;
 

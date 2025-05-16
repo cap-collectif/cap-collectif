@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\IdTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -18,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *     message="newsletter.already_subscribed"
  * )
  */
-class NewsletterSubscription implements \Stringable
+class NewsletterSubscription implements EntityInterface, \Stringable
 {
     use IdTrait;
 

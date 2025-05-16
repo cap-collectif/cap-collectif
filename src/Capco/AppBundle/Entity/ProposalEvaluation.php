@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VersionableTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="proposal_evaluation")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalEvaluationRepository")
  */
-class ProposalEvaluation
+class ProposalEvaluation implements EntityInterface
 {
     use HasResponsesTrait;
     use TimestampableTrait;

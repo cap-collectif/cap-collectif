@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\DBAL\Enum\MailerType;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -13,7 +14,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\EntityListeners({"Capco\AppBundle\EventListener\UserInviteEmailMessageListener"})
  * @ORM\Table(name="user_invite_email_message")
  */
-class UserInviteEmailMessage
+class UserInviteEmailMessage implements EntityInterface
 {
     use UuidTrait;
 

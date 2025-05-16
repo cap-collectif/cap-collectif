@@ -9,6 +9,7 @@ use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\TitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -16,7 +17,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="question_choice")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionChoiceRepository")
  */
-class QuestionChoice implements IndexableInterface, \Stringable
+class QuestionChoice implements EntityInterface, IndexableInterface, \Stringable
 {
     use DescriptionUsingJoditWysiwygTrait;
     use PositionableTrait;

@@ -9,6 +9,7 @@ use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Traits\DateTime\ExpirableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=UserInviteRepository::class)
  * @ORM\Table(name="user_invite")
  */
-class UserInvite implements Expirable, Invitation
+class UserInvite implements EntityInterface, Expirable, Invitation
 {
     use ExpirableTrait;
     use TimestampableTrait;

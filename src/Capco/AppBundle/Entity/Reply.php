@@ -12,6 +12,7 @@ use Capco\AppBundle\Traits\DraftableTrait;
 use Capco\AppBundle\Traits\HasResponsesTrait;
 use Capco\AppBundle\Traits\PrivatableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -26,7 +27,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  * @CapcoAssert\HasAuthor()
  */
-class Reply extends AbstractReply implements Publishable, DraftableInterface, ExportableContributionInterface
+class Reply extends AbstractReply implements EntityInterface, Publishable, DraftableInterface, ExportableContributionInterface
 {
     use AuthorableTrait;
     use DraftableTrait;

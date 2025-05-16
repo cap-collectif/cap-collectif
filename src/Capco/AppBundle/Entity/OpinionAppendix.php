@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -14,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="opinion_appendices")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionAppendixRepository")
  */
-class OpinionAppendix implements ExportableContributionInterface, \Stringable
+class OpinionAppendix implements EntityInterface, ExportableContributionInterface, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use TextableTrait;

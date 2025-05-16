@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -13,7 +14,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal_category")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalCategoryRepository")
  */
-class ProposalCategory implements \Stringable
+class ProposalCategory implements EntityInterface, \Stringable
 {
     use TimestampableTrait;
     use UuidTrait;

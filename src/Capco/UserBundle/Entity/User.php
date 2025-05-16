@@ -25,6 +25,7 @@ use Capco\AppBundle\Entity\UserPhoneVerificationSms;
 use Capco\AppBundle\Enum\UserRole;
 use Capco\AppBundle\Traits\ContributorTrait;
 use Capco\AppBundle\Traits\User\UserSSOTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\Capco\UserBundle\Entity\AbstractUser;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,7 +34,7 @@ use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
 
-class User extends AbstractUser implements ProjectOwner, EquatableInterface, IndexableInterface, Author, ContributorInterface
+class User extends AbstractUser implements EntityInterface, ProjectOwner, EquatableInterface, IndexableInterface, Author, ContributorInterface
 {
     use ContributorTrait;
     use UserSSOTrait;

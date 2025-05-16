@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Entity\Questions;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity
  */
-class SectionQuestion extends AbstractQuestion
+class SectionQuestion extends AbstractQuestion implements EntityInterface
 {
     /**
      * @var int

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Enum\ProposalStatementState;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -15,7 +16,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="proposal_assessment")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalAssessmentRepository")
  */
-class ProposalAssessment implements Timestampable
+class ProposalAssessment implements EntityInterface, Timestampable
 {
     use TimestampableTrait;
     use UuidTrait;

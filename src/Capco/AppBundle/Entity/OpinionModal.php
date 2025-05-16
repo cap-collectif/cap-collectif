@@ -7,13 +7,14 @@ use Capco\AppBundle\Traits\DiffableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="opinion_modals")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\OpinionModalRepository")
  */
-class OpinionModal implements HasDiffInterface
+class OpinionModal implements EntityInterface, HasDiffInterface
 {
     use DiffableTrait;
     use SluggableTitleTrait;

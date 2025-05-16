@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -14,7 +15,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="menu_item")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MenuItemRepository")
  */
-class MenuItem implements TranslatableInterface, \Stringable
+class MenuItem implements EntityInterface, TranslatableInterface, \Stringable
 {
     use IdTrait;
     use TranslatableTrait;

@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Enum\SiteSettingsStatus;
 use Capco\AppBundle\Repository\SiteSettingsRepository;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="site_settings")
  * @ORM\Entity(repositoryClass=SiteSettingsRepository::class)
  */
-class SiteSettings
+class SiteSettings implements EntityInterface
 {
     use UuidTrait;
 

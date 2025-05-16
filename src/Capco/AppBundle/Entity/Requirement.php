@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Traits\PositionableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 
@@ -12,7 +13,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="requirement")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\RequirementRepository")
  */
-class Requirement
+class Requirement implements EntityInterface
 {
     use PositionableTrait;
     use UuidTrait;

@@ -6,6 +6,7 @@ use Capco\AppBundle\DBAL\Enum\OrganizationMemberRoleType;
 use Capco\AppBundle\Repository\Organization\OrganizationMemberRepository;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\UniqueConstraint;
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *  )
  * @ORM\Entity(repositoryClass=OrganizationMemberRepository::class)
  */
-class OrganizationMember
+class OrganizationMember implements EntityInterface
 {
     use TimestampableTrait;
     use UuidTrait;

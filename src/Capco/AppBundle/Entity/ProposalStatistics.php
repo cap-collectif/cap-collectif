@@ -4,13 +4,14 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Elasticsearch\IndexableInterface;
 use Capco\AppBundle\Repository\ProposalStatisticsRepository;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="proposal_statistics")
  * @ORM\Entity(repositoryClass=ProposalStatisticsRepository::class)
  */
-class ProposalStatistics extends AbstractStatistics implements IndexableInterface
+class ProposalStatistics extends AbstractStatistics implements EntityInterface, IndexableInterface
 {
     /**
      * @ORM\OneToOne(targetEntity="Capco\AppBundle\Entity\Proposal", inversedBy="statistics", cascade={"persist"})

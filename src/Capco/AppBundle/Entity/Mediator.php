@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Repository\MediatorRepository;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="mediator")
  * @ORM\Entity(repositoryClass=MediatorRepository::class)
  */
-class Mediator
+class Mediator implements EntityInterface
 {
     use UuidTrait;
 

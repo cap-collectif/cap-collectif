@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -19,7 +20,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity()
  * @CapcoAssert\HasAuthor()
  */
-class Answer implements Authorable, \Stringable
+class Answer implements EntityInterface, Authorable, \Stringable
 {
     use AuthorableTrait;
     use IdTrait;

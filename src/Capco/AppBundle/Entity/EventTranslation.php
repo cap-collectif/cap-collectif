@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 use Symfony\Component\Validator\Constraints as Assert;
@@ -23,7 +24,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *    )
  * })
  */
-class EventTranslation implements TranslationInterface, \Stringable
+class EventTranslation implements EntityInterface, TranslationInterface, \Stringable
 {
     use MetaDescriptionTrait;
     use SluggableTitleTrait;

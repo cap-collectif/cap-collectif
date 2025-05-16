@@ -4,6 +4,7 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Provider\AllowedExtensions;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -14,7 +15,7 @@ use Symfony\Component\HttpFoundation\File\File;
  * @ORM\Table(name="media__media")
  * @ORM\HasLifecycleCallbacks
  */
-class Media implements \Stringable
+class Media implements EntityInterface, \Stringable
 {
     use UuidTrait;
 

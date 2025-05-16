@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -12,7 +13,7 @@ use Gedmo\Timestampable\Timestampable;
  * @ORM\Table(name="proposal_supervisor")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalSupervisorRepository")
  */
-class ProposalSupervisor implements Timestampable
+class ProposalSupervisor implements EntityInterface, Timestampable
 {
     use TimestampableTrait;
 

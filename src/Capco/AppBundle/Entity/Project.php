@@ -35,6 +35,7 @@ use Capco\AppBundle\Traits\ProjectVisibilityTrait;
 use Capco\AppBundle\Traits\TimeRangeableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -51,7 +52,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasUserGroupIdVisibilityGroup()
  */
-class Project implements IndexableInterface, TimeRangeable, Ownerable, CreatableInterface, \Stringable
+class Project implements EntityInterface, IndexableInterface, TimeRangeable, Ownerable, CreatableInterface, \Stringable
 {
     use AddressableTrait;
     use CoverTrait;

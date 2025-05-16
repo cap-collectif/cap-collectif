@@ -9,6 +9,7 @@ use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -22,7 +23,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *      "global"         = "GlobalDistrict"
  * })
  */
-abstract class AbstractDistrict implements IndexableInterface, TranslatableInterface
+abstract class AbstractDistrict implements EntityInterface, IndexableInterface, TranslatableInterface
 {
     use TimestampableTrait;
     use TranslatableTrait;

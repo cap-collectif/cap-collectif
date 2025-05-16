@@ -21,6 +21,7 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -47,7 +48,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateArgumentRepository")
  * @CapcoAssert\HasAuthor()
  */
-class DebateArgument implements DebateArgumentInterface, Publishable, ExportableDebateContributionInterface, \Stringable
+class DebateArgument implements EntityInterface, DebateArgumentInterface, Publishable, ExportableDebateContributionInterface, \Stringable
 {
     use AuthorableTrait;
     use AuthorInformationTrait;

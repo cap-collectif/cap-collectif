@@ -10,6 +10,7 @@ use Capco\AppBundle\Model\CreatableInterface;
 use Capco\AppBundle\Model\ReportableInterface;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\TextableTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -20,7 +21,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReportingRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Reporting implements CreatableInterface, ExportableContributionInterface, \Stringable
+class Reporting implements EntityInterface, CreatableInterface, ExportableContributionInterface, \Stringable
 {
     use IdTrait;
     use ReportingStatus;

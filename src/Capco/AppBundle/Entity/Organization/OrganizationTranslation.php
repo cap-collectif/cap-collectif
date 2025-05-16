@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Utils\Text;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class OrganizationTranslation implements TranslationInterface
+class OrganizationTranslation implements EntityInterface, TranslationInterface
 {
     use SluggableTitleTrait;
     use TranslationTrait;

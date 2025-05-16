@@ -3,13 +3,14 @@
 namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="progress_step")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProgressStepRepository")
  */
-class ProgressStep
+class ProgressStep implements EntityInterface
 {
     use UuidTrait;
 

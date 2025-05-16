@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -20,7 +21,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class VideoTranslation implements TranslationInterface
+class VideoTranslation implements EntityInterface, TranslationInterface
 {
     use SluggableTitleTrait;
     use TextableTrait;

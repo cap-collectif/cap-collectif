@@ -4,13 +4,14 @@ namespace Capco\AppBundle\Entity\Section;
 
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Repository\SectionProjectRepository;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="section_project")
  * @ORM\Entity(repositoryClass=SectionProjectRepository::class)
  */
-class SectionProject
+class SectionProject implements EntityInterface
 {
     /**
      * @ORM\Id

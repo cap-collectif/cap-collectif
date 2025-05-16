@@ -42,6 +42,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -67,7 +68,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\HasAddressIfMandatory()
  * @CapcoAssert\HasAuthor()
  */
-class Proposal implements Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, ExportableContributionInterface, \Stringable
+class Proposal implements EntityInterface, Publishable, Contribution, CommentableInterface, SelfLinkableInterface, SoftDeleteable, DisplayableInBOInterface, DraftableInterface, ReportableInterface, ExportableContributionInterface, \Stringable
 {
     use AddressableTrait;
     use AuthorableTrait;

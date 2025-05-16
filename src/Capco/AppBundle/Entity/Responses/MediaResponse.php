@@ -3,13 +3,14 @@
 namespace Capco\AppBundle\Entity\Responses;
 
 use Capco\AppBundle\Entity\Media;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\MediaResponseRepository")
  */
-class MediaResponse extends AbstractResponse
+class MediaResponse extends AbstractResponse implements EntityInterface
 {
     /**
      * @ORM\ManyToMany(

@@ -21,6 +21,7 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -50,7 +51,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * })
  * @CapcoAssert\CommentHasAuthor
  */
-abstract class Comment implements Publishable, Trashable, Contribution, VotableInterface, CommentableInterface, ReportableInterface, \Stringable
+abstract class Comment implements EntityInterface, Publishable, Trashable, Contribution, VotableInterface, CommentableInterface, ReportableInterface, \Stringable
 {
     use AuthorableTrait;
     use ModerableTrait;

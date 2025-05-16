@@ -6,6 +6,7 @@ use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
 
@@ -21,7 +22,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  *    )
  * })
  */
-class DistrictTranslation implements TranslationInterface
+class DistrictTranslation implements EntityInterface, TranslationInterface
 {
     use DescriptionTrait;
     use TranslationTrait;

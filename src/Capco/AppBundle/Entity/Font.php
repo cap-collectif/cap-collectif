@@ -4,13 +4,14 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\FontRepository")
  * @ORM\Table(name="font")
  */
-class Font
+class Font implements EntityInterface
 {
     use TimestampableTrait;
     use UuidTrait;

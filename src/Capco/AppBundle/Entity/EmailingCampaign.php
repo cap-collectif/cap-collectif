@@ -10,6 +10,7 @@ use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Traits\CreatableTrait;
 use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -18,7 +19,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass=EmailingCampaignRepository::class)
  * @ORM\Table(name="emailing_campaign")
  */
-class EmailingCampaign implements Ownerable, CreatableInterface
+class EmailingCampaign implements EntityInterface, Ownerable, CreatableInterface
 {
     use CreatableTrait;
     use OwnerableTrait;

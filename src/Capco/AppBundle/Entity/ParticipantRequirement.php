@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ParticipantRequirementRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class ParticipantRequirement
+class ParticipantRequirement implements EntityInterface
 {
     public function __construct(
         /**

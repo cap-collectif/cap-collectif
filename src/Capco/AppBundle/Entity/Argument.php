@@ -14,6 +14,7 @@ use Capco\AppBundle\Traits\TextableTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
@@ -27,7 +28,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ArgumentRepository")
  * @ORM\HasLifecycleCallbacks()
  */
-class Argument implements Contribution, VotableInterface, Publishable, ReportableInterface, ExportableContributionInterface, \Stringable
+class Argument implements EntityInterface, Contribution, VotableInterface, Publishable, ReportableInterface, ExportableContributionInterface, \Stringable
 {
     use ModerableTrait;
     use PublishableTrait;

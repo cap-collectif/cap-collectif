@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -9,7 +10,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="classification__context")
  * @ORM\HasLifecycleCallbacks
  */
-class Context implements \Stringable
+class Context implements EntityInterface, \Stringable
 {
     /**
      * @ORM\Id

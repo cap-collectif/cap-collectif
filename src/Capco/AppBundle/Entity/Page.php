@@ -7,6 +7,7 @@ use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -14,7 +15,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="page")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PageRepository")
  */
-class Page implements TranslatableInterface, \Stringable
+class Page implements EntityInterface, TranslatableInterface, \Stringable
 {
     use CustomCodeTrait;
     use TimestampableTrait;

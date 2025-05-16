@@ -12,6 +12,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TitleTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -25,7 +26,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\DebateOpinionRepository")
  * @CapcoAssert\HasAuthor
  */
-class DebateOpinion implements Authorable
+class DebateOpinion implements EntityInterface, Authorable
 {
     use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;

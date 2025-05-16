@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\DateTime\ExpirableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -22,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @CapcoAssert\PendingOrganizationInvitation
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository")
  */
-class PendingOrganizationInvitation implements Expirable, Invitation
+class PendingOrganizationInvitation implements EntityInterface, Expirable, Invitation
 {
     use ExpirableTrait;
     use TimestampableTrait;

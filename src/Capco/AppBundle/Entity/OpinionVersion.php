@@ -20,6 +20,7 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -34,7 +35,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\HasLifecycleCallbacks()
  * @CapcoAssert\HasAuthor()
  */
-class OpinionVersion implements OpinionContributionInterface, HasDiffInterface, ExportableContributionInterface, \Stringable
+class OpinionVersion implements EntityInterface, OpinionContributionInterface, HasDiffInterface, ExportableContributionInterface, \Stringable
 {
     use AnswerableTrait;
     use AuthorableTrait;

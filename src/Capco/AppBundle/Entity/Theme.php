@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\CustomCodeTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
@@ -17,7 +18,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="theme")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ThemeRepository")
  */
-class Theme implements IndexableInterface, TranslatableInterface, \Stringable
+class Theme implements EntityInterface, IndexableInterface, TranslatableInterface, \Stringable
 {
     use CustomCodeTrait;
     use TimestampableTrait;

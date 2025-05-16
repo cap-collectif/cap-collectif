@@ -22,6 +22,7 @@ use Capco\AppBundle\Traits\TokenTrait;
 use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -33,7 +34,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass=DebateAnonymousArgumentRepository::class)
  * @ORM\Table(name="debate_anonymous_argument")
  */
-class DebateAnonymousArgument implements DebateArgumentInterface, AnonymousParticipationInterface, ExportableDebateContributionInterface
+class DebateAnonymousArgument implements EntityInterface, DebateArgumentInterface, AnonymousParticipationInterface, ExportableDebateContributionInterface
 {
     use AuthorInformationTrait;
     use ContributionOriginTrait;

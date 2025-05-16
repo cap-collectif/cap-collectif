@@ -14,13 +14,14 @@ use Capco\AppBundle\Traits\ForAgainstTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TokenTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=DebateAnonymousVoteRepository::class)
  * @ORM\Table(name="debate_anonymous_vote")
  */
-class DebateAnonymousVote implements IndexableInterface, AnonymousParticipationInterface
+class DebateAnonymousVote implements EntityInterface, IndexableInterface, AnonymousParticipationInterface
 {
     use AuthorInformationTrait;
     use ContributionOriginTrait;

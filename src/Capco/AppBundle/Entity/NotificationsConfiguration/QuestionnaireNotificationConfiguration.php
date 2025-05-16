@@ -2,12 +2,13 @@
 
 namespace Capco\AppBundle\Entity\NotificationsConfiguration;
 
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  */
-class QuestionnaireNotificationConfiguration extends AbstractNotificationConfiguration
+class QuestionnaireNotificationConfiguration extends AbstractNotificationConfiguration implements EntityInterface
 {
     /**
      * @ORM\Column(name="on_questionnaire_reply_create", type="boolean", options={"default": false})

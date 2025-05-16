@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Entity\Styles;
 use Capco\AppBundle\Traits\ColorableTrait;
 use Capco\AppBundle\Traits\EnableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -17,7 +18,7 @@ use Doctrine\ORM\Mapping as ORM;
  *      "background"  = "BackgroundStyle",
  * })
  */
-abstract class AbstractStyle
+abstract class AbstractStyle implements EntityInterface
 {
     use ColorableTrait;
     use EnableTrait;

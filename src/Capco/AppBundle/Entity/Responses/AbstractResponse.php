@@ -13,6 +13,7 @@ use Capco\AppBundle\Entity\ReplyAnonymous;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -43,7 +44,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  *      "media"  = "MediaResponse",
  * })
  */
-abstract class AbstractResponse implements IndexableInterface
+abstract class AbstractResponse implements EntityInterface, IndexableInterface
 {
     use TimestampableTrait;
     use UuidTrait;

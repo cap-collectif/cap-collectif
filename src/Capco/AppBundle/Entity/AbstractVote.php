@@ -10,6 +10,7 @@ use Capco\AppBundle\Model\VoteContribution;
 use Capco\AppBundle\Traits\IdTrait;
 use Capco\AppBundle\Traits\PublishableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\Mapping as ORM;
 use Doctrine\ORM\Mapping\Index;
@@ -96,7 +97,7 @@ use Doctrine\ORM\Mapping\UniqueConstraint;
  *      "proposalCollectSms"        = "ProposalCollectSmsVote",
  * })
  */
-abstract class AbstractVote implements Publishable, VoteContribution, IndexableInterface
+abstract class AbstractVote implements EntityInterface, Publishable, VoteContribution, IndexableInterface
 {
     use IdTrait;
     use PublishableTrait;

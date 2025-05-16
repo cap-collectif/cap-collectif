@@ -8,6 +8,7 @@ use Capco\AppBundle\Traits\BodyUsingJoditWysiwygTrait;
 use Capco\AppBundle\Traits\NullableTextableTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +18,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="official_response")
  * @ORM\Entity(repositoryClass=OfficialResponseRepository::class)
  */
-class OfficialResponse implements \Stringable
+class OfficialResponse implements EntityInterface, \Stringable
 {
     use BodyUsingJoditWysiwygTrait;
     use NullableTextableTrait;

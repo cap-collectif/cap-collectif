@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\Capco\Facade\EntityInterface;
 use Cocur\Slugify\Slugify;
 use Doctrine\ORM\Mapping as ORM;
 
@@ -15,7 +16,7 @@ use Doctrine\ORM\Mapping as ORM;
  * )
  * @ORM\HasLifecycleCallbacks
  */
-class Collection implements \Stringable
+class Collection implements EntityInterface, \Stringable
 {
     /**
      * @ORM\Id

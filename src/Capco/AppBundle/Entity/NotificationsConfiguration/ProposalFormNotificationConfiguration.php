@@ -3,12 +3,13 @@
 namespace Capco\AppBundle\Entity\NotificationsConfiguration;
 
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity()
  */
-class ProposalFormNotificationConfiguration extends AbstractNotificationConfiguration
+class ProposalFormNotificationConfiguration extends AbstractNotificationConfiguration implements EntityInterface
 {
     /**
      * @ORM\Column(name="on_create", type="boolean", options={"default": false})

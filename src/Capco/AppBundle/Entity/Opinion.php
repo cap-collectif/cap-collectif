@@ -20,6 +20,7 @@ use Capco\AppBundle\Traits\TrashableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Traits\VotableOkNokMitigeTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -37,7 +38,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\AppendicesCorrespondToOpinionType()
  * @CapcoAssert\HasAuthor()
  */
-class Opinion implements OpinionContributionInterface, DisplayableInBOInterface, ExportableContributionInterface, \Stringable
+class Opinion implements EntityInterface, OpinionContributionInterface, DisplayableInBOInterface, ExportableContributionInterface, \Stringable
 {
     use AnswerableTrait;
     use AuthorableTrait;

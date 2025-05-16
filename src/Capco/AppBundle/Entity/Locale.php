@@ -4,13 +4,14 @@ namespace Capco\AppBundle\Entity;
 
 use Capco\AppBundle\Exception\LocaleConfigurationException;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Table(name="locale")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\LocaleRepository")
  */
-class Locale implements \Stringable
+class Locale implements EntityInterface, \Stringable
 {
     use UuidTrait;
 

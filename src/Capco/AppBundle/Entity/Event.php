@@ -25,6 +25,7 @@ use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\AppBundle\Validator\Constraints as CapcoAssert;
+use Capco\Capco\Facade\EntityInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
@@ -44,7 +45,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @CapcoAssert\CheckRegister()
  * @CapcoAssert\HasAuthor()
  */
-class Event implements CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, TranslatableInterface, Ownerable, CreatableInterface, \Stringable
+class Event implements EntityInterface, CommentableInterface, IndexableInterface, DisplayableInBOInterface, TimeRangeable, Authorable, TranslatableInterface, Ownerable, CreatableInterface, \Stringable
 {
     use AuthorableTrait;
     use BodyUsingJoditWysiwygTrait;

@@ -19,6 +19,7 @@ use Capco\AppBundle\Traits\OwnerableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
+use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -29,7 +30,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Table(name="questionnaire")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\QuestionnaireRepository")
  */
-class Questionnaire implements DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface, \Stringable
+class Questionnaire implements EntityInterface, DisplayableInBOInterface, QuestionnableForm, Ownerable, CreatableInterface, QuestionsInterface, \Stringable
 {
     use CreatableTrait;
     use DescriptionUsingJoditWysiwygTrait;
