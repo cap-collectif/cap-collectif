@@ -180,7 +180,7 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
       </ParticipantInfo>
 
       {__typename === 'Participant' ? (
-        <Avatar size="lg" name={participant.firstname} mr={2} />
+        <Avatar size="lg" name={participant.firstname || ""} mr={2} />
       ) : (
         <UserAvatar user={participant} size="lg" />
       )}
