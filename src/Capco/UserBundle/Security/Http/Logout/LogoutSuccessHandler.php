@@ -58,7 +58,7 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             && null === $currentToken->getResourceOwnerName()
             && $theToken
         ) {
-            $data = unserialize($theToken, ['allowed_class' => false]);
+            $data = unserialize($theToken, ['allowed_classes' => false]);
             $currentToken->setResourceOwnerName($data[5]);
             $currentToken->setRawToken($data[1]);
         }

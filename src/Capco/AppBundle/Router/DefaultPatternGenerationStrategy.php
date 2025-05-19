@@ -76,7 +76,7 @@ class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInter
                     $metadata = $this->cacheDir . '/translations/catalogue.' . $locale . '.php.meta'
                 )
             ) {
-                foreach (unserialize(file_get_contents($metadata), ['allowed_class' => false]) as $resource) {
+                foreach (unserialize(file_get_contents($metadata), ['allowed_classes' => false]) as $resource) {
                     $i18nCollection->addResource($resource);
                 }
             }
