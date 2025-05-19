@@ -1063,6 +1063,7 @@ class ProposalRepository extends EntityRepository
             ->where('proposal.id IN (:proposalsIds)')
             ->andWhere('proposal.updatedAt >= :lastCheck')
             ->orWhere('proposal.createdAt >= :lastCheck')
+            ->orWhere('proposal.publishedAt >= :lastCheck')
             ->setParameter('proposalsIds', $proposalsIds)
             ->setParameter('lastCheck', $mostRecentFileModificationDate)
         ;
