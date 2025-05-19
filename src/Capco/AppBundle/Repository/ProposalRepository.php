@@ -846,7 +846,7 @@ class ProposalRepository extends EntityRepository
             ->where('s.id = :step')
             ->andWhere('p.isArchived = false')
             ->groupBy('p.id')
-            ->having('(COUNT(v.id) + paperVotes.totalCount) < :voteThreshold')
+            ->having('(COUNT(v.id) + COALESCE(paperVotes.totalCount, 0)) < :voteThreshold')
             ->setParameter('step', $step->getId())
             ->setParameter('voteThreshold', $voteThreshold)
         ;
