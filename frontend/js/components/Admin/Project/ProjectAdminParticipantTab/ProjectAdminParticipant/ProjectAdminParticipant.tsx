@@ -13,6 +13,7 @@ import { useProjectAdminParticipantsContext } from '~/components/Admin/Project/P
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Text from '~ui/Primitives/Text'
+import { Avatar } from '@cap-collectif/ui'
 export type OwnProps = {
   readonly rowId: string
   readonly selected: boolean
@@ -40,10 +41,12 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
     userType,
     isEmailConfirmed,
     consentInternalCommunication,
+    __typename,
   } = participant
 
   const hasCompleteName = !!firstname && !!lastname
   const hasAccountDeleted = username === 'deleted-user'
+
   return (
     <Container rowId={id} selected={selected} isSelectable={hasFeatureEmail}>
       <ParticipantInfo>
@@ -176,7 +179,11 @@ const ProjectAdminParticipant = ({ participant, selected }: Props) => {
         </InlineList>
       </ParticipantInfo>
 
-      <UserAvatar user={participant} size="lg" />
+      {__typename === 'Participant' ? (
+        <Avatar size="lg" name={participant.firstname} mr={2} />
+      ) : (
+        <UserAvatar user={participant} size="lg" />
+      )}
     </Container>
   )
 }
