@@ -12861,16 +12861,6 @@ parameters:
 			path: src/Capco/AppBundle/Controller/Site/BlogController.php
 
 		-
-			message: "#^Variable \\$projectObject might not be defined\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/BlogController.php
-
-		-
-			message: "#^Variable \\$themeObject might not be defined\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Controller/Site/BlogController.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Controller\\\\Site\\\\CommentController\\:\\:deleteCommentAction\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Controller/Site/CommentController.php
@@ -34871,11 +34861,6 @@ parameters:
 			path: src/Capco/AppBundle/Normalizer/OrganizationNormalizer.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Normalizer\\\\ProjectNormalizer\\:\\:getRestrictedViewerIds\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Normalizer/ProjectNormalizer.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Normalizer\\\\ProposalNormalizer\\:\\:countPointsAndVotes\\(\\) has parameter \\$data with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Normalizer/ProposalNormalizer.php
@@ -41594,6 +41579,11 @@ parameters:
 			message: "#^Method Capco\\\\AppBundle\\\\Security\\\\SettingsVoter\\:\\:supports\\(\\) has parameter \\$attribute with no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Security/SettingsVoter.php
+
+		-
+			message: "#^Parameter \\#2 \\$viewer of static method Capco\\\\AppBundle\\\\Security\\\\StepVoter\\:\\:view\\(\\) expects Capco\\\\UserBundle\\\\Entity\\\\User\\|null, Symfony\\\\Component\\\\Security\\\\Core\\\\User\\\\UserInterface\\|null given\\.$#"
+			count: 1
+			path: src/Capco/AppBundle/Security/StepVoter.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Service\\\\AddStepService\\:\\:addStep\\(\\) return type has no value type specified in iterable type array\\.$#"

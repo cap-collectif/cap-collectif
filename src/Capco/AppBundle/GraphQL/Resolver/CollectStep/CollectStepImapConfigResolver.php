@@ -21,11 +21,15 @@ class CollectStepImapConfigResolver implements QueryInterface
      *     folder: string|null,
      *     email: string|null,
      *     password: string|null
-     * }
+     * } | null
      */
-    public function __invoke(CollectStep $collectStep): array
+    public function __invoke(CollectStep $collectStep): ?array
     {
         $config = $collectStep->getCollectStepImapServerConfig();
+
+        if (!$config) {
+            return null;
+        }
 
         return [
             'id' => $config->getId(),

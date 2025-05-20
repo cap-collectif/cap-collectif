@@ -82,17 +82,22 @@ class StepVoter extends AbstractOwnerableVoter
     {
         $viewer = $this->security->getUser();
 
-        if (!$viewer instanceof User && null !== $viewer) {
-            return false;
-        }
-
         /** @var AbstractStep $step */
         $step = $subject;
 
-        return match ($attribute) {
-            self::VIEW => static::view($step, $viewer),
-            self::EDIT => static::canEdit($step->getProject(), $viewer),
-            default => false,
-        };
+        switch ($attribute) {
+            case self::VIEW:
+                return static::view($step, $viewer);
+
+            case self::EDIT:
+                if (!$viewer instanceof User) {
+                    return false;
+                }
+
+                return static::canEdit($step->getProject(), $viewer);
+
+            default:
+                return false;
+        }
     }
 }
