@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Router;
 
+use Capco\AppBundle\Exception\UnserializableException;
 use JMS\I18nRoutingBundle\Router\PatternGenerationStrategyInterface;
 use Symfony\Component\Routing\Route;
 use Symfony\Component\Routing\RouteCollection;
@@ -76,7 +77,12 @@ class DefaultPatternGenerationStrategy implements PatternGenerationStrategyInter
                     $metadata = $this->cacheDir . '/translations/catalogue.' . $locale . '.php.meta'
                 )
             ) {
-                foreach (unserialize(file_get_contents($metadata), ['allowed_classes' => false]) as $resource) {
+                try {
+                    $resources = unserialize(file_get_contents($metadata), ['allowed_classes' => false]);
+                } catch (\Exception) {
+                    throw new UnserializableException();
+                }
+                foreach ($resources as $resource) {
                     $i18nCollection->addResource($resource);
                 }
             }

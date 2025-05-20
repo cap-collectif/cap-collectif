@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Security\Http\Logout;
 
+use Capco\AppBundle\Exception\UnserializableException;
 use Capco\UserBundle\Security\Http\Logout\Handler\LogoutHandlerInterface;
 use Capco\UserBundle\Security\Http\Logout\Handler\RedirectResponseWithRequest;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
@@ -58,7 +59,11 @@ class LogoutSuccessHandler implements LogoutSuccessHandlerInterface
             && null === $currentToken->getResourceOwnerName()
             && $theToken
         ) {
-            $data = unserialize($theToken, ['allowed_classes' => false]);
+            try {
+                $data = unserialize($theToken, ['allowed_classes' => false]);
+            } catch (\Exception) {
+                throw new UnserializableException();
+            }
             $currentToken->setResourceOwnerName($data[5]);
             $currentToken->setRawToken($data[1]);
         }

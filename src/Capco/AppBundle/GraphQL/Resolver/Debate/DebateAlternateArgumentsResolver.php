@@ -6,6 +6,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginatedResult;
 use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Interfaces\DebateArgumentInterface;
+use Capco\AppBundle\Exception\UnserializableException;
 use Capco\AppBundle\Search\DebateSearch;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -58,6 +59,20 @@ class DebateAlternateArgumentsResolver implements QueryInterface
         $connection->setTotalCount($totalCount);
 
         return $connection;
+    }
+
+    public static function decodeCursor(?string $cursor): array
+    {
+        try {
+            return $cursor
+                ? unserialize(base64_decode($cursor), ['allowed_classes' => false])
+                : [
+                    'for' => null,
+                    'against' => null,
+                ];
+        } catch (\Exception) {
+            throw new UnserializableException();
+        }
     }
 
     private function getTotalCount(Debate $debate, Argument $args, ?User $viewer): int
@@ -123,15 +138,5 @@ class DebateAlternateArgumentsResolver implements QueryInterface
         return base64_encode(
             serialize([$argument->getCreatedAt()->getTimestamp() * 1000, $argument->getId()])
         );
-    }
-
-    private static function decodeCursor(?string $cursor): array
-    {
-        return $cursor
-            ? unserialize(base64_decode($cursor), ['allowed_classes' => false])
-            : [
-                'for' => null,
-                'against' => null,
-            ];
     }
 }
