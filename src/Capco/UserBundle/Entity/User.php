@@ -107,7 +107,7 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     protected Collection $responses;
     protected bool $profilePageIndexed = false;
     protected ?string $websiteUrl = null;
-    protected array $openIdSessionsId = [];
+    protected ?array $openIdSessionsId = [];
     protected Collection $memberOfOrganizations;
     private Collection $userGroups;
     private ?string $resetPasswordToken = null;
