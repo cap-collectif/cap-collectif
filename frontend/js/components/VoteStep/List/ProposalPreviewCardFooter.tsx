@@ -151,7 +151,7 @@ export const ProposalPreviewCardFooter = ({
   return (
     <Proposal.Content.Footer display="flex" justify={['center', 'normal']} wrap="wrap">
       {showVoteActions || showComplexVoteInfos ? (
-        <Flex gap={6} direction={['column', 'row']} align={['center', 'stretch']}>
+        <Flex gap={6} direction={['column', 'row']} align={['center', 'stretch']} zIndex={2}>
           {showVoteActions ? (
             <Flex gap={6} className={disabled ? 'disabled' : 'open'}>
               <VoteButton

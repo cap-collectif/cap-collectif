@@ -35,6 +35,7 @@ const FRAGMENT = graphql`
   @argumentDefinitions(stepId: { type: "ID!" }, isAuthenticated: { type: "Boolean!" }) {
     id
     estimation
+    title
     ...ProposalPreviewVote_proposal @arguments(isAuthenticated: $isAuthenticated, stepId: $stepId)
     ...ProposalVoteModal_proposal
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
@@ -300,6 +301,7 @@ const VoteButton = ({
             totalCount={totalCount}
             paperVotesTotalCount={paperVotesTotalCount}
             hasVoted={hasVoted}
+            title={proposal.title}
           />
         )
       }

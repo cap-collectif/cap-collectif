@@ -909,3 +909,18 @@ body[class*='app_project_show'] #details {
     width: auto !important;
     white-space: normal !important;
 }
+
+/* ======================= TMP - new vote step =======================*/
+
+.voteStep-link {
+    z-index: 1;
+}
+
+.voteStep-link::before {
+    position: absolute;
+    content: '';
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+}

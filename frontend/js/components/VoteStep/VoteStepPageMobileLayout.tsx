@@ -109,7 +109,7 @@ export const VoteStepPageMobileLayout = ({ query: queryKey, stepId, isMapView }:
           maxWidth={'-webkit-fill-available'}
           bg={view === View.Map ? 'unset' : 'neutral-gray.100'}
           position={view === View.Map ? 'absolute' : 'sticky'}
-          top={view === View.Map ? 'unset' : '50px'}
+          top={view === View.Map ? 'unset' : '0px'}
           pt={6}
           pb={view === View.Map ? 0 : 6}
           left={0}

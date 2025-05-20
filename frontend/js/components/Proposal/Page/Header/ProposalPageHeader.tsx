@@ -22,6 +22,7 @@ import CategoryBackground from '~/components/Ui/Medias/CategoryBackground'
 import { getBaseLocale, getBaseUrlFromStepUrl } from '~/utils/router'
 import ModalProposalIllustration from '~/components/Proposal/Page/Header/ModalProposalIllustration'
 import Image from '~ui/Primitives/Image'
+import useIsMobile from '@shared/hooks/useIsMobile'
 
 type Props = {
   title: string | null | undefined
@@ -51,7 +52,7 @@ const Header = styled.header`
       height: 310px;
       position: relative;
 
-      svg {
+      > svg {
         position: absolute;
         left: calc(50% - 32px);
         top: calc(50% - 32px);
@@ -212,6 +213,7 @@ export const ProposalPageHeader = ({
   shouldDisplayPictures,
   platformLocale,
 }: Props) => {
+  const isMobile = useIsMobile()
   const date = proposal?.publishedAt ? proposal?.publishedAt : proposal?.createdAt
   const icon = shouldDisplayPictures ? proposal?.category?.icon : null
   const color = shouldDisplayPictures ? proposal?.category?.color || '#1E88E5' : '#C4C4C4'
@@ -331,7 +333,7 @@ export const ProposalPageHeader = ({
                 focusable={false}
               />
             )}
-            <CategoryBackground color={color} viewBox="0 0 230 75" />
+            <CategoryBackground color={color} viewBox={isMobile? "0 0 75 75" :"0 0 230 75"} />
           </div>
         )}
         <Informations>

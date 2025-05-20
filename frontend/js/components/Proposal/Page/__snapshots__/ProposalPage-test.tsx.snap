@@ -3226,6 +3226,13 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   "storageKey": null,
                 },
                 Object {
+                  "alias": null,
+                  "args": null,
+                  "kind": "ScalarField",
+                  "name": "title",
+                  "storageKey": null,
+                },
+                Object {
                   "alias": "paper",
                   "args": Array [
                     Object {
@@ -3608,13 +3615,6 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
                   "args": null,
                   "kind": "ScalarField",
                   "name": "url",
-                  "storageKey": null,
-                },
-                Object {
-                  "alias": null,
-                  "args": null,
-                  "kind": "ScalarField",
-                  "name": "title",
                   "storageKey": null,
                 },
                 Object {
@@ -8729,7 +8729,7 @@ exports[`<ProposalPage /> should render a proposal page 1`] = `
           ],
         },
         "params": Object {
-          "cacheID": "227760f98b005d6d6b405c682bbb94e0",
+          "cacheID": "4e38427b63848f1f076e2f04a47412e9",
           "id": null,
           "metadata": Object {},
           "name": "ProposalPageQuery",
@@ -11032,6 +11032,7 @@ fragment ProposalVoteBasketWidget_viewer_2r3fA4 on User {
 
 fragment ProposalVoteButtonWrapperFragment_proposal_Q37Wz on Proposal {
   id
+  title
   estimation
   votes(stepId: $stepId, first: 0) {
     totalCount
@@ -11086,6 +11087,7 @@ fragment ProposalVoteButtonWrapperFragment_viewer_Q37Wz on User {
 
 fragment ProposalVoteButton_proposal_Q37Wz on Proposal {
   id
+  title
   project {
     type {
       title

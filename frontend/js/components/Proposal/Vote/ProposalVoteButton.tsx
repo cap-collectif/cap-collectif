@@ -41,6 +41,7 @@ const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalVoteButton_proposal on Proposal
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
     id
+    title
     ...interpellationLabelHelper_proposal @relay(mask: false)
     viewerHasVote(step: $stepId) @include(if: $isAuthenticated)
     paper: paperVotesTotalCount(stepId: $stepId)
@@ -313,6 +314,7 @@ const ProposalVoteButton = ({
         paperVotesTotalCount={proposal?.paper}
         hasVoted={hasVoted}
         noOverlay
+        title={proposal.title}
       />
     )
 

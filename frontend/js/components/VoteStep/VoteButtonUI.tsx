@@ -14,6 +14,7 @@ type Props = {
   onClick: () => void
   id: string
   noOverlay?: boolean
+  title?: string
 }
 
 const VoteButtonUI = ({
@@ -24,6 +25,7 @@ const VoteButtonUI = ({
   id,
   noOverlay = false,
   paperVotesTotalCount,
+  title,
 }: Props) => {
   const isAuthenticated = useSelector((state: GlobalState) => state.user.user) !== null
   const intl = useIntl()
@@ -73,7 +75,9 @@ const VoteButtonUI = ({
           id={id}
           onClick={onClick}
           disabled={disabled}
-          aria-label={intl.formatMessage({ id: hasVoted ? 'delete-vote' : 'vote.add' })}
+          aria-label={`${
+            hasVoted ? intl.formatMessage({ id: 'delete-vote' }) : intl.formatMessage({ id: 'vote.add' })
+          } ${intl.formatMessage({ id: 'global.for_entity' }, { entity: title })}`}
         >
           <Flex direction="column" align="flex-start">
             <Text fontWeight={CapUIFontWeight.Semibold}>{totalCount}</Text>

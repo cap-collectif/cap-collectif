@@ -86,7 +86,7 @@ export const Link = ({
   href,
   stepId,
   currentVotableStepId,
-  from
+  from,
 }: {
   readonly children: React.ReactElement | React.ReactElement[]
   readonly href: string
@@ -100,9 +100,10 @@ export const Link = ({
       state: {
         stepId,
         currentVotableStepId,
-        from
+        from,
       },
     }}
+    className={from ? 'voteStep-link' : undefined}
   >
     {children}
   </RouterLink>

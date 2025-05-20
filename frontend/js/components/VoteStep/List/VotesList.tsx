@@ -102,7 +102,7 @@ export const VotesList = ({ stepId, showImages = false }: Props) => {
     <List hasNext={hasNext} loadNext={loadNext} id="votes-list" loadCount={LOAD_PROPOSAL_COUNT}>
       <AnimatePresence initial={false}>
         {viewerVotes.map(proposal => (
-          <motion.div
+          <motion.li
             key={`${proposal.id}-voteList`}
             initial={{
               opacity: 1,
@@ -134,7 +134,7 @@ export const VotesList = ({ stepId, showImages = false }: Props) => {
               disabled={!query?.voteStep?.open}
               fullSize
             />
-          </motion.div>
+          </motion.li>
         ))}
       </AnimatePresence>
     </List>

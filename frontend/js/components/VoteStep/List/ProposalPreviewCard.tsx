@@ -187,6 +187,7 @@ export const ProposalPreviewCard = ({
           textDecoration: 'none !important',
         },
       }}
+      position="relative"
       boxShadow={['small', isHighlighted ? '0 10px 30px rgba(0, 0, 0, 0.15)' : 'unset']}
     >
       <Proposal.Content width={['100%', isCompleteView ? '100%' : 'unset']}>
@@ -221,28 +222,21 @@ export const ProposalPreviewCard = ({
             </Heading>
           </Link>
         </Proposal.Content.Header>
-        <Link
-          href={`${projectSlug || ''}/${url}/${proposal.slug}`}
-          stepId={stepId}
-          currentVotableStepId={currentVotableStep?.id || stepId}
-          from={window.location.href}
-        >
-          <Proposal.Content.Body fontSize="14px">
-            <>
-              {summaryOrBodyExcerpt.slice(0, TRUNCATE)}
-              {summaryOrBodyExcerpt.length > TRUNCATE ? (
-                <>
-                  {'... '}
-                  <span style={{ textDecoration: 'underline' }}>
-                    {intl.formatMessage({
-                      id: 'capco.module.read_more',
-                    })}
-                  </span>
-                </>
-              ) : null}
-            </>
-          </Proposal.Content.Body>
-        </Link>
+        <Proposal.Content.Body fontSize="14px">
+          <>
+            {summaryOrBodyExcerpt.slice(0, TRUNCATE)}
+            {summaryOrBodyExcerpt.length > TRUNCATE ? (
+              <>
+                {'... '}
+                <span style={{ textDecoration: 'underline' }}>
+                  {intl.formatMessage({
+                    id: 'capco.module.read_more',
+                  })}
+                </span>
+              </>
+            ) : null}
+          </>
+        </Proposal.Content.Body>
         <Flex justifyContent="space-between" alignItems="center" direction={['column', 'row']}>
           <ProposalPreviewCardFooter
             disabled={disabled}
@@ -255,11 +249,7 @@ export const ProposalPreviewCard = ({
         </Flex>
       </Proposal.Content>
       {showImage ? (
-        <Link
-          href={`${projectSlug || ''}/${url}/${proposal.slug}`}
-          stepId={stepId}
-          currentVotableStepId={currentVotableStep?.id || stepId}
-        >
+        <div>
           {media ? (
             <Box sx={{ '.cap-tag': { maxWidth: 'unset !important' } }}>
               <Proposal.Cover
@@ -290,7 +280,7 @@ export const ProposalPreviewCard = ({
               <CategoryBackground color={category?.color || ACTIVE_COLOR} viewBox="5 0 240 80" height="200px" />
             </ImageContainer>
           )}
-        </Link>
+        </div>
       ) : null}
     </Proposal>
   )

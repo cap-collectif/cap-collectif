@@ -11,18 +11,19 @@ Array [
     <div
       className="sc-bcXGCL cklhXU"
     >
-      <div
-        className="sc-bcXGCL fAcgUi cap-text"
+      <h2
+        className="sc-bcXGCL gbtFdJ cap-text"
+        role="status"
       >
         no-result-on-search
-      </div>
-      <div
-        className="sc-bcXGCL vxPNh cap-text"
+      </h2>
+      <p
+        className="sc-bcXGCL bIufIz cap-text"
       >
         try-new-keywords
-      </div>
+      </p>
       <button
-        className="sc-bcXGCL sc-laZSpB hNZJwh ietVcX cap-button"
+        className="sc-bcXGCL sc-laZSpB jeHjqj ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >

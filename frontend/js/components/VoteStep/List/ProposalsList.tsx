@@ -142,9 +142,11 @@ export const List = ({
       id={id}
       pr={[4, 4, 8]}
       pl={[4, 2, 6]}
+      sx={{ 'li': { listStyle: 'none' } }}
     >
       <InfiniteScroll
         key="infinite-scroll-proposals"
+        element="ul"
         initialLoad={false}
         pageStart={0}
         loadMore={() => {
@@ -278,7 +280,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
       {/** @ts-ignore MAJ framer-motion */}
       <AnimatePresence initial={false}>
         {proposals.map(proposal => (
-          <motion.div
+          <motion.li
             className={`motion-${view}`}
             key={`${proposal.id}-proposalList`}
             initial={{
@@ -311,7 +313,7 @@ export const ProposalsList = ({ stepId, showImages }: Props) => {
               disabled={!query?.voteStep?.open}
               fullSize={showImages}
             />
-          </motion.div>
+          </motion.li>
         ))}
       </AnimatePresence>
     </List>

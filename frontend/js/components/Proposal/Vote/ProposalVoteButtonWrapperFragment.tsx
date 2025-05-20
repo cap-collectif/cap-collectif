@@ -36,6 +36,7 @@ const PROPOSAL_FRAGMENT = graphql`
   fragment ProposalVoteButtonWrapperFragment_proposal on Proposal
   @argumentDefinitions(isAuthenticated: { type: "Boolean!" }, stepId: { type: "ID!" }) {
     id
+    title
     estimation
     votes(stepId: $stepId, first: 0) {
       totalCount
@@ -136,6 +137,7 @@ export const ProposalVoteButtonWrapperFragment = ({
             onClick={() => {}}
             totalCount={proposal.votes.totalCount}
             paperVotesTotalCount={proposal.paper}
+            title={proposal.title}
           />
         ) : (
           <button type="button" disabled={disabled} id={id} className={cn('btn btn-success mr-10', className)}>

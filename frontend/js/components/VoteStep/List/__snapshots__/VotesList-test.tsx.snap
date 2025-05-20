@@ -6,14 +6,14 @@ Array [
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL jJlFXL"
+    className="sc-bcXGCL gdzZUX"
     id="votes-list"
   >
-    <div>
+    <ul>
       <div
         data-testid="AnimatePresence"
       >
-        <div
+        <li
           style={
             Object {
               "height": "auto",
@@ -23,7 +23,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL bEYgcX"
+            className="sc-bcXGCL beYXxz"
             id="proposal-<Proposal-mock-id-3>"
             onMouseEnter={[Function]}
             onMouseLeave={[Function]}
@@ -69,6 +69,7 @@ Array [
                   </div>
                 </div>
                 <a
+                  className="voteStep-link"
                   href="/project///<mock-value-for-field-\\"slug\\">"
                   onClick={[Function]}
                 >
@@ -79,14 +80,9 @@ Array [
                   </h4>
                 </a>
               </div>
-              <a
-                href="/project///<mock-value-for-field-\\"slug\\">"
-                onClick={[Function]}
-              >
-                <p
-                  className="sc-bcXGCL eKXGuF"
-                />
-              </a>
+              <p
+                className="sc-bcXGCL eKXGuF"
+              />
               <div
                 className="sc-bcXGCL eKhpxm"
               >
@@ -94,7 +90,7 @@ Array [
                   className="sc-bcXGCL kNrudi"
                 >
                   <div
-                    className="sc-bcXGCL jKmTdL"
+                    className="sc-bcXGCL fcCuvN"
                   >
                     <div
                       className="sc-bcXGCL gtMDQe"
@@ -238,10 +234,7 @@ Array [
                 </div>
               </div>
             </div>
-            <a
-              href="/project///<mock-value-for-field-\\"slug\\">"
-              onClick={[Function]}
-            >
+            <div>
               <div
                 className="sc-bcXGCL iiMaTZ"
               >
@@ -268,11 +261,11 @@ Array [
                   />
                 </div>
               </div>
-            </a>
+            </div>
           </div>
-        </div>
+        </li>
       </div>
-    </div>
+    </ul>
   </div>,
 ]
 `;

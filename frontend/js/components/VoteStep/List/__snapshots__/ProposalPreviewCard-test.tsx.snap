@@ -9,7 +9,7 @@ Array [
     className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL irWAkT"
+    className="sc-bcXGCL hZkHWP"
     id="proposal-<Node-mock-id-1>"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
@@ -55,6 +55,7 @@ Array [
           </div>
         </div>
         <a
+          className="voteStep-link"
           href="/project///<mock-value-for-field-\\"slug\\">"
           onClick={[Function]}
         >
@@ -65,14 +66,9 @@ Array [
           </h4>
         </a>
       </div>
-      <a
-        href="/project///<mock-value-for-field-\\"slug\\">"
-        onClick={[Function]}
-      >
-        <p
-          className="sc-bcXGCL eKXGuF"
-        />
-      </a>
+      <p
+        className="sc-bcXGCL eKXGuF"
+      />
       <div
         className="sc-bcXGCL eKhpxm"
       />

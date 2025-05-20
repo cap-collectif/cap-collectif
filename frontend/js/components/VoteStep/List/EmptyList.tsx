@@ -50,14 +50,14 @@ const EmptyList = ({
       zIndex={1}
     >
       <Box width={noData ? '100%' : ''}>
-        <Text as="div" mb={1} fontSize={CapUIFontSize.Headline} fontWeight="700">
+        <Text as="h2" role="status" mb={1} fontSize={CapUIFontSize.Headline} fontWeight="700" color='neutral-gray.900'>
           {intl.formatMessage({
             id: noData ? 'proposal.empty' : isVotesView ? 'you-did-not-vote' : 'no-result-on-search',
           })}
         </Text>
         {!noData ? (
           <>
-            <Text as="div" mb={5} fontSize={CapUIFontSize.BodyRegular}>
+            <Text as="p" fontSize={CapUIFontSize.BodyRegular}>
               {intl.formatMessage({
                 id: isVotesView ? 'vote-is-a-way' : 'try-new-keywords',
               })}
@@ -66,6 +66,7 @@ const EmptyList = ({
               type="button"
               onClick={() => (isVotesView ? setView(View.List) : resetFilters())}
               py={[3, isMapMobileView ? 3 : 1]}
+              mt={5}
               variant="primary"
               variantColor="primary"
               width={['100%', isMapMobileView ? '100%' : 'unset']}
