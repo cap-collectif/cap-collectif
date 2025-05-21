@@ -93,16 +93,16 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
         return $this;
     }
 
-    protected function getOldestUpdateDate(string $simplifiedPath, string $fullPath): \DateTime
+    protected function getOldestUpdateDate(string $simplifiedPath, string $fullPath): \DateTimeImmutable
     {
         $fullFileDate = filemtime($fullPath);
         if (file_exists($simplifiedPath)) {
             $simplifiedFileDate = filemtime($simplifiedPath);
 
-            return (new \DateTime())->setTimestamp(min($simplifiedFileDate, $fullFileDate));
+            return (new \DateTimeImmutable())->setTimestamp(min($simplifiedFileDate, $fullFileDate));
         }
 
-        return (new \DateTime())->setTimestamp($fullFileDate);
+        return (new \DateTimeImmutable())->setTimestamp($fullFileDate);
     }
 
     /**

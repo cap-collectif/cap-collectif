@@ -11,6 +11,7 @@ use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\AppBundle\Traits\ContributionRepositoryTrait;
 use Capco\UserBundle\Entity\User;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\ResultSetMapping;
@@ -901,14 +902,13 @@ class ProposalRepository extends EntityRepository
     /**
      * @param Proposal[] $proposals
      */
-    public function hasNewContributionsForCollectOrSelectionStep(array $proposals, \DateTime $mostRecentFileModificationDate): bool
+    public function hasNewContributionsForCollectOrSelectionStep(array $proposals, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         if ([] === $proposals) {
             return false;
         }
 
         $proposalsIds = array_map(static fn (Proposal $proposal) => $proposal->getId(), $proposals);
-        $mostRecentFileModificationDate = $mostRecentFileModificationDate->format('Y-m-d H:i:s');
 
         return $this->hasNewProposal($proposalsIds, $mostRecentFileModificationDate)
             || $this->hasNewProposalNews($proposalsIds, $mostRecentFileModificationDate)
@@ -1055,17 +1055,21 @@ class ProposalRepository extends EntityRepository
     /**
      * @param array<int, string> $proposalsIds
      */
-    private function hasNewProposal(array $proposalsIds, string $mostRecentFileModificationDate): bool
+    private function hasNewProposal(array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         $queryBuilder = $this->createQueryBuilder('proposal');
         $queryBuilder
             ->select('COUNT(proposal.id)')
             ->where('proposal.id IN (:proposalsIds)')
-            ->andWhere('proposal.updatedAt >= :lastCheck')
-            ->orWhere('proposal.createdAt >= :lastCheck')
-            ->orWhere('proposal.publishedAt >= :lastCheck')
+            ->andWhere(
+                $queryBuilder->expr()->orX(
+                    'proposal.updatedAt >= :lastCheck',
+                    'proposal.createdAt >= :lastCheck',
+                    'proposal.publishedAt >= :lastCheck'
+                )
+            )
             ->setParameter('proposalsIds', $proposalsIds)
-            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate, Types::DATETIME_IMMUTABLE)
         ;
 
         return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
@@ -1074,7 +1078,7 @@ class ProposalRepository extends EntityRepository
     /**
      * @param array<int, string> $proposalsIds
      */
-    private function hasNewProposalNews(array $proposalsIds, string $mostRecentFileModificationDate): bool
+    private function hasNewProposalNews(array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         $queryBuilder = $this->_em->createQueryBuilder();
         $queryBuilder
@@ -1085,7 +1089,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('post.updatedAt >= :lastCheck')
             ->orWhere('post.createdAt >= :lastCheck')
             ->setParameter('proposalsIds', $proposalsIds)
-            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate, Types::DATETIME_IMMUTABLE)
         ;
 
         return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
@@ -1094,7 +1098,7 @@ class ProposalRepository extends EntityRepository
     /**
      * @param array<int, string> $proposalsIds
      */
-    private function hasNewProposalComment(array $proposalsIds, string $mostRecentFileModificationDate): bool
+    private function hasNewProposalComment(array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         $queryBuilder = $this->_em->createQueryBuilder();
         $queryBuilder
@@ -1105,7 +1109,7 @@ class ProposalRepository extends EntityRepository
             ->andWhere('proposalComment.updatedAt >= :lastCheck')
             ->orWhere('proposalComment.createdAt >= :lastCheck')
             ->setParameter('proposalsIds', $proposalsIds)
-            ->setParameter('lastCheck', $mostRecentFileModificationDate)
+            ->setParameter('lastCheck', $mostRecentFileModificationDate, Types::DATETIME_IMMUTABLE)
         ;
 
         return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
