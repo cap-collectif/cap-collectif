@@ -40,6 +40,7 @@ const CategoryBackground = ({
           width,
         }}
         preserveAspectRatio={preserveAspectRatio}
+        aria-hidden="true"
       >
         <defs>
           <filter

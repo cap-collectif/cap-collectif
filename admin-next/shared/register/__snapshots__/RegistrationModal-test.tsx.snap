@@ -101,7 +101,6 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
@@ -145,7 +144,6 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           >
             <div
               className="sc-bcXGCL bnGCIW cap-form-control"
-              role="group"
             >
               <label
                 className="sc-bcXGCL kossJj cap-form-label"
@@ -187,7 +185,6 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
@@ -229,7 +226,6 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
@@ -280,7 +276,6 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL bHapUX"
@@ -454,7 +449,6 @@ exports[`<RegistrationModal /> renders only form 1`] = `
         >
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
@@ -498,7 +492,6 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           >
             <div
               className="sc-bcXGCL bnGCIW cap-form-control"
-              role="group"
             >
               <label
                 className="sc-bcXGCL kossJj cap-form-label"
@@ -540,7 +533,6 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </div>
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
@@ -582,7 +574,6 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </div>
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
@@ -633,7 +624,6 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </div>
           <div
             className="sc-bcXGCL kxTfnk cap-form-control"
-            role="group"
           >
             <label
               className="sc-bcXGCL bHapUX"

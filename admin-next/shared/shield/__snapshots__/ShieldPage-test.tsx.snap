@@ -24,7 +24,6 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
       </div>
       <div
         className="sc-bcXGCL kxTfnk cap-form-control"
-        role="group"
       >
         <label
           className="sc-bcXGCL kossJj cap-form-label"
@@ -65,7 +64,6 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
       </div>
       <div
         className="sc-bcXGCL kxTfnk cap-form-control"
-        role="group"
       >
         <label
           className="sc-bcXGCL kossJj cap-form-label"

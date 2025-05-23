@@ -7,7 +7,6 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
   />,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -48,7 +47,6 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"

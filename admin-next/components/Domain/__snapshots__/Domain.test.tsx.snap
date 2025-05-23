@@ -38,7 +38,6 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
       </div>
       <div
         className="sc-bcXGCL eLnDpj cap-form-control"
-        role="group"
       >
         <label
           className="sc-bcXGCL hiAOoW cap-form-label"
@@ -104,7 +103,6 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
       >
         <div
           className="sc-bcXGCL eLnDpj cap-form-control"
-          role="group"
         >
           <label
             className="sc-bcXGCL hiAOoW cap-form-label"
@@ -248,7 +246,6 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
       </div>
       <div
         className="sc-bcXGCL eLnDpj cap-form-control"
-        role="group"
       >
         <label
           className="sc-bcXGCL hiAOoW cap-form-label"
@@ -314,7 +311,6 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
       >
         <div
           className="sc-bcXGCL eLnDpj cap-form-control"
-          role="group"
         >
           <label
             className="sc-bcXGCL hiAOoW cap-form-label"

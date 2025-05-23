@@ -7,7 +7,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   />,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -51,7 +50,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   >
     <div
       className="sc-bcXGCL bnGCIW cap-form-control"
-      role="group"
     >
       <label
         className="sc-bcXGCL kossJj cap-form-label"
@@ -93,7 +91,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -135,7 +132,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -186,7 +182,6 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL bHapUX"
@@ -253,7 +248,6 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   />,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -297,7 +291,6 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   >
     <div
       className="sc-bcXGCL bnGCIW cap-form-control"
-      role="group"
     >
       <label
         className="sc-bcXGCL kossJj cap-form-label"
@@ -339,7 +332,6 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -381,7 +373,6 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -513,7 +504,6 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -564,7 +554,6 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL bHapUX"
@@ -622,7 +611,6 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   />,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -666,7 +654,6 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   >
     <div
       className="sc-bcXGCL bnGCIW cap-form-control"
-      role="group"
     >
       <label
         className="sc-bcXGCL kossJj cap-form-label"
@@ -708,7 +695,6 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -750,7 +736,6 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -793,7 +778,6 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
@@ -844,7 +828,6 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   </div>,
   <div
     className="sc-bcXGCL kxTfnk cap-form-control"
-    role="group"
   >
     <label
       className="sc-bcXGCL bHapUX"

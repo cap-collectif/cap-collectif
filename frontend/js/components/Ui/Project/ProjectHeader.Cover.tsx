@@ -98,7 +98,7 @@ export const Title = ({ children, ...rest }: TitleProps) => {
     <Text
       className="projectHeader__title platform__title"
       width="100%"
-      as="h3"
+      as="h1"
       mb={0}
       fontSize={[CapUIFontSize.Headline, CapUIFontSize.DisplayMedium]}
       lineHeight="initial" // {['base', 'l']}
@@ -381,42 +381,45 @@ type BlockProps = {
 export const Block = ({ title, content, contentId, tooltipLabel, ...rest }: BlockProps) => {
   if (tooltipLabel) {
     return (
-      // @ts-ignore delay
-      <Tooltip label={tooltipLabel} delay={[200, 500]} zIndex={10}>
-        <Box
-          className="projectHeader__block"
-          display="flex"
-          flexDirection="column"
-          justifyContent="flex-start"
-          marginRight={[6, 8]}
-          marginBottom={[2, 0]}
-          maxHeight={10}
-          as="li"
-          {...rest}
-        >
-          <Text
-            className="projectHeader__block__content platform__body"
-            id={contentId || ''}
-            fontSize={[CapUIFontSize.BodySmall, CapUIFontSize.Headline]}
-            lineHeight={CapUILineHeight.M}
-            fontWeight="semibold"
-            height={[4, 6]}
-            color="neutral-gray.900"
+      <Box as="li" sx={{ listStyle: 'none' }}>
+        {/* @ts-ignore delay */}
+        <Tooltip label={tooltipLabel} delay={[200, 500]} zIndex={10}>
+          <Box
+            className="projectHeader__block"
+            display="flex"
+            flexDirection="column"
+            justifyContent="flex-start"
+            alignItems="start"
+            marginRight={[6, 8]}
+            marginBottom={[2, 0]}
+            maxHeight={10}
+            as="button"
+            {...rest}
           >
-            {typeof content === 'number' ? formatBigNumber(content) : content}
-          </Text>
-          <Text
-            className="projectHeader__block__title platform__body"
-            color="neutral-gray.900"
-            fontSize={[CapUIFontSize.Caption, CapUIFontSize.Headline]}
-            lineHeight={CapUILineHeight.M}
-            fontWeight="normal"
-            height={[4, 6]}
-          >
-            {title.charAt(0).toUpperCase() + title.slice(1)}
-          </Text>
-        </Box>
-      </Tooltip>
+            <Text
+              className="projectHeader__block__content platform__body"
+              id={contentId || ''}
+              fontSize={[CapUIFontSize.BodySmall, CapUIFontSize.Headline]}
+              lineHeight={CapUILineHeight.M}
+              fontWeight="semibold"
+              height={[4, 6]}
+              color="neutral-gray.900"
+            >
+              {typeof content === 'number' ? formatBigNumber(content) : content}
+            </Text>
+            <Text
+              className="projectHeader__block__title platform__body"
+              color="neutral-gray.900"
+              fontSize={[CapUIFontSize.Caption, CapUIFontSize.Headline]}
+              lineHeight={CapUILineHeight.M}
+              fontWeight="normal"
+              height={[4, 6]}
+            >
+              {title.charAt(0).toUpperCase() + title.slice(1)}
+            </Text>
+          </Box>
+        </Tooltip>
+      </Box>
     )
   }
 

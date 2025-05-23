@@ -77,7 +77,10 @@ const VoteButtonUI = ({
           disabled={disabled}
           aria-label={`${
             hasVoted ? intl.formatMessage({ id: 'delete-vote' }) : intl.formatMessage({ id: 'vote.add' })
-          } ${intl.formatMessage({ id: 'global.for_entity' }, { entity: title })}`}
+          } ${intl.formatMessage({ id: 'global.for_entity' }, { entity: title })} - ${intl.formatMessage(
+            { id: 'votes_registered' },
+            { count: totalCount },
+          )}`}
         >
           <Flex direction="column" align="flex-start">
             <Text fontWeight={CapUIFontWeight.Semibold}>{totalCount}</Text>

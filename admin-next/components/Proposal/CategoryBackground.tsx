@@ -7,7 +7,7 @@ type Props = {
 }
 
 const CategoryBackground = ({ color, viewBox, height = 'auto' }: Props) => (
-  <svg id="background" viewBox={viewBox || '0 0 260 75'} style={{ height }}>
+  <svg id="background" viewBox={viewBox || '0 0 260 75'} style={{ height }} aria-hidden="true">
     <defs>
       <filter
         x="-4.6%"

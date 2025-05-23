@@ -8,145 +8,157 @@ Array [
   <ul
     className="sc-bcXGCL eSSFGV projectHeader__blocks"
   >
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
-          >
-            proposal-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            amendment-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            argument-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            source-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            answer-count
-          </Text>
-        </Box>
-      }
-      zIndex={10}
+    <li
+      className="sc-bcXGCL kRiKrn"
     >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
+          >
+            <Text
+              marginBottom="0px !important"
+            >
+              proposal-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              amendment-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              argument-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              source-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              answer-count
+            </Text>
+          </Box>
+        }
+        zIndex={10}
       >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id=""
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          16
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
-        >
-          Contribution-plural
-        </p>
-      </li>
-    </div>
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id=""
           >
-            numeric-votes-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
+            16
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
           >
-            paper-votes-count
-          </Text>
-        </Box>
-      }
-      zIndex={10}
+            Contribution-plural
+          </p>
+        </button>
+      </div>
+    </li>
+    <li
+      className="sc-bcXGCL kRiKrn"
     >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
-      >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id="votes-counter-pill"
-        >
-          47
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
-        >
-          Vote-plural
-        </p>
-      </li>
-    </div>
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
           >
-            online-contributors
-          </Text>
-        </Box>
-      }
-      zIndex={10}
-    >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
+            <Text
+              marginBottom="0px !important"
+            >
+              numeric-votes-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              paper-votes-count
+            </Text>
+          </Box>
+        }
+        zIndex={10}
       >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id=""
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          88
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id="votes-counter-pill"
+          >
+            47
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          >
+            Vote-plural
+          </p>
+        </button>
+      </div>
+    </li>
+    <li
+      className="sc-bcXGCL kRiKrn"
+    >
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
+          >
+            <Text
+              marginBottom="0px !important"
+            >
+              online-contributors
+            </Text>
+          </Box>
+        }
+        zIndex={10}
+      >
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          Project.preview.counters.contributors
-        </p>
-      </li>
-    </div>
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id=""
+          >
+            88
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          >
+            Project.preview.counters.contributors
+          </p>
+        </button>
+      </div>
+    </li>
   </ul>,
 ]
 `;
@@ -159,145 +171,157 @@ Array [
   <ul
     className="sc-bcXGCL eSSFGV projectHeader__blocks"
   >
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
-          >
-            proposal-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            amendment-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            argument-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            source-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            answer-count
-          </Text>
-        </Box>
-      }
-      zIndex={10}
+    <li
+      className="sc-bcXGCL kRiKrn"
     >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
+          >
+            <Text
+              marginBottom="0px !important"
+            >
+              proposal-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              amendment-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              argument-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              source-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              answer-count
+            </Text>
+          </Box>
+        }
+        zIndex={10}
       >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id=""
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          16
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
-        >
-          Contribution-plural
-        </p>
-      </li>
-    </div>
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id=""
           >
-            numeric-votes-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
+            16
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
           >
-            paper-votes-count
-          </Text>
-        </Box>
-      }
-      zIndex={10}
+            Contribution-plural
+          </p>
+        </button>
+      </div>
+    </li>
+    <li
+      className="sc-bcXGCL kRiKrn"
     >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
-      >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id="votes-counter-pill"
-        >
-          47
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
-        >
-          Vote-plural
-        </p>
-      </li>
-    </div>
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
           >
-            online-contributors
-          </Text>
-        </Box>
-      }
-      zIndex={10}
-    >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
+            <Text
+              marginBottom="0px !important"
+            >
+              numeric-votes-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              paper-votes-count
+            </Text>
+          </Box>
+        }
+        zIndex={10}
       >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id=""
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          88
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id="votes-counter-pill"
+          >
+            47
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          >
+            Vote-plural
+          </p>
+        </button>
+      </div>
+    </li>
+    <li
+      className="sc-bcXGCL kRiKrn"
+    >
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
+          >
+            <Text
+              marginBottom="0px !important"
+            >
+              online-contributors
+            </Text>
+          </Box>
+        }
+        zIndex={10}
+      >
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          Project.preview.counters.contributors
-        </p>
-      </li>
-    </div>
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id=""
+          >
+            88
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          >
+            Project.preview.counters.contributors
+          </p>
+        </button>
+      </div>
+    </li>
   </ul>,
 ]
 `;
@@ -310,145 +334,157 @@ Array [
   <ul
     className="sc-bcXGCL eSSFGV projectHeader__blocks"
   >
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
-          >
-            proposal-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            amendment-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            argument-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            source-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
-          >
-            answer-count
-          </Text>
-        </Box>
-      }
-      zIndex={10}
+    <li
+      className="sc-bcXGCL kRiKrn"
     >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
+          >
+            <Text
+              marginBottom="0px !important"
+            >
+              proposal-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              amendment-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              argument-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              source-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              answer-count
+            </Text>
+          </Box>
+        }
+        zIndex={10}
       >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id=""
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          16
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
-        >
-          Contribution-plural
-        </p>
-      </li>
-    </div>
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id=""
           >
-            numeric-votes-count
-          </Text>
-          <Text
-            marginBottom="0px !important"
+            16
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
           >
-            paper-votes-count
-          </Text>
-        </Box>
-      }
-      zIndex={10}
+            Contribution-plural
+          </p>
+        </button>
+      </div>
+    </li>
+    <li
+      className="sc-bcXGCL kRiKrn"
     >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
-      >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id="votes-counter-pill"
-        >
-          47
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
-        >
-          Vote-plural
-        </p>
-      </li>
-    </div>
-    <div
-      data-testid="Tooltip"
-      delay={
-        Array [
-          200,
-          500,
-        ]
-      }
-      label={
-        <Box
-          padding={1}
-          textAlign="center"
-        >
-          <Text
-            marginBottom="0px !important"
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
           >
-            online-contributors
-          </Text>
-        </Box>
-      }
-      zIndex={10}
-    >
-      <li
-        className="sc-bcXGCL bfgKKP projectHeader__block"
+            <Text
+              marginBottom="0px !important"
+            >
+              numeric-votes-count
+            </Text>
+            <Text
+              marginBottom="0px !important"
+            >
+              paper-votes-count
+            </Text>
+          </Box>
+        }
+        zIndex={10}
       >
-        <p
-          className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
-          id=""
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          88
-        </p>
-        <p
-          className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id="votes-counter-pill"
+          >
+            47
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          >
+            Vote-plural
+          </p>
+        </button>
+      </div>
+    </li>
+    <li
+      className="sc-bcXGCL kRiKrn"
+    >
+      <div
+        data-testid="Tooltip"
+        delay={
+          Array [
+            200,
+            500,
+          ]
+        }
+        label={
+          <Box
+            padding={1}
+            textAlign="center"
+          >
+            <Text
+              marginBottom="0px !important"
+            >
+              online-contributors
+            </Text>
+          </Box>
+        }
+        zIndex={10}
+      >
+        <button
+          className="sc-bcXGCL iOzwdI projectHeader__block"
         >
-          Project.preview.counters.contributors
-        </p>
-      </li>
-    </div>
+          <p
+            className="sc-bcXGCL jiREto cap-text projectHeader__block__content platform__body"
+            id=""
+          >
+            88
+          </p>
+          <p
+            className="sc-bcXGCL bdwHCm cap-text projectHeader__block__title platform__body"
+          >
+            Project.preview.counters.contributors
+          </p>
+        </button>
+      </div>
+    </li>
   </ul>,
 ]
 `;

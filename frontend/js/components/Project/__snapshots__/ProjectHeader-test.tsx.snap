@@ -55,13 +55,13 @@ Array [
             Vince
           </p>
         </div>
-        <h3
+        <h1
           className="sc-bcXGCL kgGGpS cap-text projectHeader__title platform__title"
           title="Food project "
         >
           Food project
            
-        </h3>
+        </h1>
       </div>
       <div
         className="sc-bcXGCL iIrzUR projectHeader__coverVideo"

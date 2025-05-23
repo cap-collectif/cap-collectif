@@ -98,7 +98,6 @@ exports[`<LoginModal /> render correctly 1`] = `
             </div>
             <div
               className="sc-bcXGCL kxTfnk cap-form-control"
-              role="group"
             >
               <label
                 className="sc-bcXGCL kossJj cap-form-label"
@@ -139,7 +138,6 @@ exports[`<LoginModal /> render correctly 1`] = `
             </div>
             <div
               className="sc-bcXGCL kxTfnk cap-form-control"
-              role="group"
             >
               <label
                 className="sc-bcXGCL kossJj cap-form-label"
