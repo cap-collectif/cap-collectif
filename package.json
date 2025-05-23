@@ -424,7 +424,7 @@
         "identity-obj-proxy": "^3.0.0",
         "jest-junit": "^16.0.0",
         "typescript": "^4.9.4",
-        "yarn-audit-fix": "^10.0.7",
+        "yarn-audit-fix": "^10.1.1",
         "vscode-apollo-relay": "^1.5.2"
     }
 }
