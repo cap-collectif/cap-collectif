@@ -63,7 +63,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
           <ButtonQuickAction
             className="NeededInfo_title_delete"
             isDisabled
-            variantColor="red"
+            variantColor="danger"
             icon={CapUIIcon.Trash}
             label={intl.formatMessage({ id: 'global.delete' })}
             disabled
@@ -97,7 +97,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
             />
             <ButtonQuickAction
               className="NeededInfo_summary_delete"
-              variantColor="red"
+              variantColor="danger"
               icon={CapUIIcon.Trash}
               label={intl.formatMessage({ id: 'global.delete' })}
               onClick={() => {
@@ -135,7 +135,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
             />
             <ButtonQuickAction
               className="NeededInfo_description_delete"
-              variantColor="red"
+              variantColor="danger"
               icon={CapUIIcon.Trash}
               label={intl.formatMessage({ id: 'global.delete' })}
               onClick={() => {
@@ -170,7 +170,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
             />
             <ButtonQuickAction
               className="NeededInfo_themes_delete"
-              variantColor="red"
+              variantColor="danger"
               icon={CapUIIcon.Trash}
               label={intl.formatMessage({ id: 'global.delete' })}
               onClick={() => {
@@ -207,7 +207,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
                 />
                 <ButtonQuickAction
                   className="NeededInfo_categories_delete"
-                  variantColor="red"
+                  variantColor="danger"
                   icon={CapUIIcon.Trash}
                   label={intl.formatMessage({ id: 'global.delete' })}
                   onClick={() => {
@@ -249,7 +249,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
               className="NeededInfo_address_delete"
               isDisabled={isMapViewEnabled}
               disabled={isMapViewEnabled}
-              variantColor="red"
+              variantColor="danger"
               icon={CapUIIcon.Trash}
               label={intl.formatMessage({ id: 'global.delete' })}
               onClick={() => {
@@ -297,7 +297,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
                 />
                 <ButtonQuickAction
                   className="NeededInfo_district_delete"
-                  variantColor="red"
+                  variantColor="danger"
                   icon={CapUIIcon.Trash}
                   label={intl.formatMessage({ id: 'global.delete' })}
                   onClick={() => {
@@ -338,7 +338,7 @@ const ProposalFormFormNeededInfoList: React.FC<ProposalFormFormNeededInfoListPro
             />
             <ButtonQuickAction
               className="NeededInfo_illustration_delete"
-              variantColor="red"
+              variantColor="danger"
               icon={CapUIIcon.Trash}
               label={intl.formatMessage({ id: 'global.delete' })}
               onClick={() => {

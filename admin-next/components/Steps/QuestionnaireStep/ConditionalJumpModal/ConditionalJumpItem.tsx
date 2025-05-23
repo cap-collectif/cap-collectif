@@ -47,7 +47,7 @@ export const ConditionalJumpItem: React.FC<Props> = ({
     <Box bg="gray.100" p={6} borderRadius="accordion" mb={4} position="relative">
       {onRemove ? (
         <ButtonQuickAction
-          variantColor="red"
+          variantColor="danger"
           icon={CapUIIcon.Trash}
           label={intl.formatMessage({ id: 'action_delete' })}
           onClick={onRemove}

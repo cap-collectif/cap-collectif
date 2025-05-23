@@ -1,13 +1,14 @@
-import { Box, BoxProps, CapUIIcon, Flex } from '@cap-collectif/ui'
+import { Box, BoxProps, ButtonQuickAction, CapUIIcon, CapUIIconSize, Flex } from '@cap-collectif/ui'
 import React, { useCallback, useEffect, useRef, useState } from 'react'
 import { FC } from 'react'
-import CarrouselButton, { Mode } from './CarrouselButton'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { useIntl } from 'react-intl'
 import CarrouselItem, { BIG_SCREEN_BAND_HEIGHT, Item, RATIO, SMALL_SCREEN_BAND_HEIGHT } from './CarrouselItem'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { CarrouselQuery } from '@relay/CarrouselQuery.graphql'
 import WhatsNew from './WhatsNew'
+
+export type Mode = 'inside' | 'below'
 
 const duration = 3500
 
@@ -95,21 +96,21 @@ const CarrouselFullView: FC<{ mode?: Mode; items: Item[] } & BoxProps> = ({ mode
             left={[`calc(50% - ${pxToRem(52)})`, 'unset', 'unset', `calc(50vw + ${pxToRem(512)})`]}
             right={['', 8, 8, 'unset']}
           >
-            <CarrouselButton
-              mode={mode}
-              variantColor="neutral-gray"
+            <ButtonQuickAction
               icon={CapUIIcon.ArrowLeft}
               aria-controls="carrousel-items"
               label={intl.formatMessage({ id: 'carrousel.prev_slide' })}
               onClick={prev}
+              variantColor="hierarchy"
+              size={CapUIIconSize.Md}
             />
-            <CarrouselButton
-              mode={mode}
-              variantColor="neutral-gray"
+            <ButtonQuickAction
               icon={CapUIIcon.ArrowRight}
               aria-controls="carrousel-items"
               label={intl.formatMessage({ id: 'carrousel.next_slide' })}
               onClick={next}
+              variantColor="hierarchy"
+              size={CapUIIconSize.Md}
             />
           </Flex>
         ) : null}

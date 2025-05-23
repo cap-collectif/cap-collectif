@@ -47,7 +47,7 @@ const ProposalFormAdminDistricts: React.FC<ProposalFormAdminDistrictsProps> = ({
                 />
                 <ButtonQuickAction
                   className={`NeededInfo_districts_item_delete_${index}`}
-                  variantColor="red"
+                  variantColor="danger"
                   icon={CapUIIcon.Trash}
                   label={intl.formatMessage({ id: 'action_delete' })}
                   onClick={() => {

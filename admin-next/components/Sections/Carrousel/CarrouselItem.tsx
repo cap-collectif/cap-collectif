@@ -185,7 +185,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
         <ButtonQuickAction
           type="button"
           icon={CapUIIcon.ArrowUp}
-          variantColor="gray"
+          variantColor="hierarchy"
           onClick={() => setIsOpen(false)}
           label={intl.formatMessage({ id: 'global.close' })}
         />
@@ -229,7 +229,7 @@ export const CarrouselItem: FC<{ fieldBaseName: string; onDelete: () => void; ty
       </Flex>
       <ButtonQuickAction
         icon={CapUIIcon.ArrowDown}
-        variantColor="gray"
+        variantColor="hierarchy"
         onClick={() => setIsOpen(true)}
         label={intl.formatMessage({ id: 'global.edit' })}
         type="button"

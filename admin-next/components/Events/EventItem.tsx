@@ -170,12 +170,12 @@ const EventItem: React.FC<Props> = ({ event: eventFragment, viewer: viewerFragme
           })}
       </Table.Td>
       <Table.Td>
-        <Flex direction="row" justify="space-evenly">
+        <Flex direction="row" justify="space-evenly" gap={2}>
           {!!event.exportParticipantsUrl && event.guestListEnabled && (
             <ButtonQuickAction
               icon={CapUIIcon.Download}
               size={CapUIIconSize.Md}
-              variantColor="blue"
+              variantColor="primary"
               label={intl.formatMessage({ id: 'global.download' })}
               href={event?.exportParticipantsUrl || ''}
               onClick={async () => {

@@ -26,7 +26,7 @@ export const ModalArgumentAuthorMenu = ({ argument, hasViewer = true }: Props): 
           label={intl.formatMessage({
             id: 'global.menu',
           })}
-          variantColor="gray"
+          variantColor="hierarchy"
           border="none"
           height="32px"
         />

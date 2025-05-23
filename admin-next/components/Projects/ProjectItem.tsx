@@ -190,7 +190,7 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
             <ButtonQuickAction
               icon={CapUIIcon.More}
               size={CapUIIconSize.Md}
-              variantColor="blue"
+              variantColor="primary"
               label={intl.formatMessage({ id: 'global.plus' })}
             />
           }

@@ -47,7 +47,7 @@ const IdentificationCodesListsTableLine: FC<IdentificationCodesListsTableLinePro
             }}
             icon={CapUIIcon.Download}
             label={intl.formatMessage({ id: 'global.download' })}
-            variantColor="blue"
+            variantColor="primary"
           />
           <IdentificationCodesListDeleteModal
             userIdentificationCodeList={userIdentificationCodeList}

@@ -45,19 +45,12 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL jLhUPI sc-ckEbfr hrpVbi cap-avatar"
-              title="Agui le penseur"
+              className="sc-bcXGCL cgjYsp sc-ckEbfr hrpVbi cap-avatar"
             >
               <img
                 alt="Agui le penseur"
-                className="sc-bcXGCL fHacA-d"
+                className="sc-bcXGCL dnFBwC"
                 src="<mock-value-for-field-\\"avatarUrl\\">"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                title="Agui le penseur"
               />
             </div>
           </span>
@@ -159,19 +152,12 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL jLhUPI sc-ckEbfr hrpVbi cap-avatar"
-              title="Agui le penseur"
+              className="sc-bcXGCL cgjYsp sc-ckEbfr hrpVbi cap-avatar"
             >
               <img
                 alt="Agui le penseur"
-                className="sc-bcXGCL fHacA-d"
+                className="sc-bcXGCL dnFBwC"
                 src="<mock-value-for-field-\\"avatarUrl\\">"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                title="Agui le penseur"
               />
             </div>
           </span>

@@ -45,8 +45,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="admin"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -78,19 +77,12 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="welcomattic"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL fHacA-d"
+                  className="sc-bcXGCL dnFBwC"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-                  style={
-                    Object {
-                      "objectFit": "cover",
-                    }
-                  }
-                  title="welcomattic"
                 />
               </div>
             </span>
@@ -147,8 +139,7 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="admin"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
@@ -162,19 +153,12 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="welcomattic"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL fHacA-d"
+              className="sc-bcXGCL dnFBwC"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              title="welcomattic"
             />
           </div>
         </span>
@@ -236,8 +220,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="admin"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -269,19 +252,12 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="welcomattic"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL fHacA-d"
+                  className="sc-bcXGCL dnFBwC"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-                  style={
-                    Object {
-                      "objectFit": "cover",
-                    }
-                  }
-                  title="welcomattic"
                 />
               </div>
             </span>
@@ -338,8 +314,7 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="admin"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
@@ -353,19 +328,12 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="welcomattic"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL fHacA-d"
+              className="sc-bcXGCL dnFBwC"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              title="welcomattic"
             />
           </div>
         </span>
@@ -427,8 +395,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="admin"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -460,19 +427,12 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="welcomattic"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL fHacA-d"
+                  className="sc-bcXGCL dnFBwC"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-                  style={
-                    Object {
-                      "objectFit": "cover",
-                    }
-                  }
-                  title="welcomattic"
                 />
               </div>
             </span>
@@ -529,8 +489,7 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="admin"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
@@ -544,19 +503,12 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="welcomattic"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL fHacA-d"
+              className="sc-bcXGCL dnFBwC"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              title="welcomattic"
             />
           </div>
         </span>
@@ -618,8 +570,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="admin"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -651,19 +602,12 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-                title="welcomattic"
+                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL fHacA-d"
+                  className="sc-bcXGCL dnFBwC"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-                  style={
-                    Object {
-                      "objectFit": "cover",
-                    }
-                  }
-                  title="welcomattic"
                 />
               </div>
             </span>
@@ -720,8 +664,7 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="admin"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
@@ -735,19 +678,12 @@ Array [
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL gogSYT sc-ckEbfr gIIayp cap-avatar"
-            title="welcomattic"
+            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL fHacA-d"
+              className="sc-bcXGCL dnFBwC"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
-              style={
-                Object {
-                  "objectFit": "cover",
-                }
-              }
-              title="welcomattic"
             />
           </div>
         </span>

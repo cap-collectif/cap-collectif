@@ -184,7 +184,7 @@ export const UserInviteList = ({ query: queryFragment, status, setStatus, term, 
                   label={intl.formatMessage({
                     id: 'global.delete',
                   })}
-                  variantColor={'red'}
+                  variantColor="danger"
                   onClick={() => cancelInvite([userInvite?.email])}
                 />
               </ButtonGroup>

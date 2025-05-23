@@ -91,12 +91,12 @@ exports[`<PostItem /> should render correctly 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL chOglo"
+      className="sc-bcXGCL dYXxTI"
     >
       <button
         aria-describedby="id-g"
         aria-label="global.preview"
-        className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+        className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -106,7 +106,7 @@ exports[`<PostItem /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
           fill="none"
           viewBox="0 0 12 12"
           xmlns="http://www.w3.org/2000/svg"
@@ -148,7 +148,7 @@ exports[`<PostItem /> should render correctly 1`] = `
         aria-expanded={false}
         aria-haspopup="dialog"
         aria-label="admin.global.delete"
-        className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+        className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
@@ -165,7 +165,7 @@ exports[`<PostItem /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
           fill="none"
           viewBox="0 0 12 12"
           xmlns="http://www.w3.org/2000/svg"
@@ -308,12 +308,12 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL chOglo"
+      className="sc-bcXGCL dYXxTI"
     >
       <button
         aria-describedby="id-g"
         aria-label="global.preview"
-        className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+        className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -323,7 +323,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
           fill="none"
           viewBox="0 0 12 12"
           xmlns="http://www.w3.org/2000/svg"
@@ -365,7 +365,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
         aria-expanded={false}
         aria-haspopup="dialog"
         aria-label="admin.global.delete"
-        className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+        className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
@@ -382,7 +382,7 @@ exports[`<PostItem /> should render correctly without authors 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
           fill="none"
           viewBox="0 0 12 12"
           xmlns="http://www.w3.org/2000/svg"

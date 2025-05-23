@@ -6,19 +6,12 @@ exports[`<UserAvatar /> renders correctly 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL hSKkNE sc-ckEbfr bTnJLR cap-avatar"
-    title="toto"
+    className="sc-bcXGCL drTdfa sc-ckEbfr bTnJLR cap-avatar"
   >
     <img
       alt="toto"
-      className="sc-bcXGCL dJhUBQ"
+      className="sc-bcXGCL iueYhD"
       src="http://media12/profileAvatar.jpg"
-      style={
-        Object {
-          "objectFit": "cover",
-        }
-      }
-      title="toto"
     />
   </div>
 </span>
@@ -30,8 +23,7 @@ exports[`<UserAvatar /> renders correctly user without avatar 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL hSKkNE sc-ckEbfr bTnJLR cap-avatar"
-    title="toto"
+    className="sc-bcXGCL drTdfa sc-ckEbfr bTnJLR cap-avatar"
   >
     t
   </div>
@@ -44,8 +36,7 @@ exports[`<UserAvatar /> renders correctly with custom default avatar 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL hSKkNE sc-ckEbfr bCwZSC cap-avatar"
-    title="toto"
+    className="sc-bcXGCL drTdfa sc-ckEbfr bCwZSC cap-avatar"
   >
     t
   </div>
@@ -58,19 +49,12 @@ exports[`<UserAvatar /> renders correctly with default avatar needed 1`] = `
   hasBadge={false}
 >
   <div
-    className="sc-bcXGCL hSKkNE sc-ckEbfr bTnJLR cap-avatar"
-    title="toto"
+    className="sc-bcXGCL drTdfa sc-ckEbfr bTnJLR cap-avatar"
   >
     <img
       alt="toto"
-      className="sc-bcXGCL dJhUBQ"
+      className="sc-bcXGCL iueYhD"
       src="http://media12/profileAvatar.jpg"
-      style={
-        Object {
-          "objectFit": "cover",
-        }
-      }
-      title="toto"
     />
   </div>
 </span>

@@ -1,11 +1,11 @@
 import { FC } from 'react'
-import { Mode } from './CarrouselButton'
 import { Box, BoxProps, CapUIFontSize, Flex, Heading } from '@cap-collectif/ui'
 import useIsMobile from '@shared/hooks/useIsMobile'
 import { useIntl } from 'react-intl'
 import { pxToRem } from '@shared/utils/pxToRem'
 import Image from '@shared/ui/Image'
 import { CarrouselQuery$data } from '@relay/CarrouselQuery.graphql'
+import { Mode } from './Carrousel'
 
 const TITLE_MAX_LENGTH = 50
 const LABEL_MAX_LENGTH = 20

@@ -188,7 +188,7 @@ export const ModalModerateArgumentMobile = ({ argument }: Props): JSX.Element =>
       hideCloseButton
       variantSize={CapUIModalSize.Xl}
       alwaysOpenInPortal
-      disclosure={<ButtonQuickAction icon={CapUIIcon.Moderate} variantColor="gray" height="32px" border="none" />}
+      disclosure={<ButtonQuickAction icon={CapUIIcon.Moderate} variantColor="hierarchy" height="32px" border="none" />}
       ariaLabel={intl.formatMessage({
         id: 'global.report.submit',
       })}

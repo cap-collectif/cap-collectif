@@ -29,7 +29,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby="id-g"
                 aria-label="global.more"
-                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -45,7 +45,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   viewBox="0 0 10 6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -79,7 +79,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby="id-g"
                 aria-label="copy-link"
-                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -89,7 +89,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -124,7 +124,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby="id-g"
                 aria-label="global.delete"
-                className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+                className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -134,7 +134,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -221,7 +221,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby="id-g"
                 aria-label="global.more"
-                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -237,7 +237,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   viewBox="0 0 10 6"
                   xmlns="http://www.w3.org/2000/svg"
@@ -271,7 +271,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby="id-g"
                 aria-label="copy-link"
-                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -281,7 +281,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -316,7 +316,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               <button
                 aria-describedby="id-g"
                 aria-label="global.delete"
-                className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+                className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
                 onFocus={[Function]}
@@ -326,7 +326,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   viewBox="0 0 12 12"
                   xmlns="http://www.w3.org/2000/svg"
@@ -587,7 +587,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby="id-g"
                   aria-label="copy-link"
-                  className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                  className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -603,7 +603,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     viewBox="0 0 12 12"
                     xmlns="http://www.w3.org/2000/svg"
@@ -638,7 +638,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby="id-g"
                   aria-label="global.delete"
-                  className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+                  className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -648,7 +648,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     viewBox="0 0 12 12"
                     xmlns="http://www.w3.org/2000/svg"
@@ -792,7 +792,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby="id-g"
                   aria-label="copy-link"
-                  className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                  className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -808,7 +808,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     viewBox="0 0 12 12"
                     xmlns="http://www.w3.org/2000/svg"
@@ -843,7 +843,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 <button
                   aria-describedby="id-g"
                   aria-label="global.delete"
-                  className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+                  className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
                   onFocus={[Function]}
@@ -853,7 +853,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     viewBox="0 0 12 12"
                     xmlns="http://www.w3.org/2000/svg"

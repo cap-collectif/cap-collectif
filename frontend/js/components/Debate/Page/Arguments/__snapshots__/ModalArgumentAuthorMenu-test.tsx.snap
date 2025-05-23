@@ -10,7 +10,7 @@ exports[`<ModalArgumentAuthorMenu /> should renders correcty 1`] = `
       height="32px"
       icon="MORE"
       label="global.menu"
-      variantColor="gray"
+      variantColor="hierarchy"
     />
   }
   hideCloseButton={true}

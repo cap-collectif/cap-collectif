@@ -46,13 +46,13 @@ const CardCAS: FC<CardCASProps> = ({ ssoConfiguration: ssoConfigurationFragment,
           {hover ? (
             <ButtonGroup>
               <ButtonQuickAction
-                variantColor="blue"
+                variantColor="primary"
                 icon={CapUIIcon.Pencil}
                 label={intl.formatMessage({ id: 'action_edit' })}
                 onClick={onOpen('cas-configuration')}
               />
               <ButtonQuickAction
-                variantColor="red"
+                variantColor="danger"
                 icon={CapUIIcon.Trash}
                 label={intl.formatMessage({ id: 'action_delete' })}
                 onClick={onOpen('cas-delete')}

@@ -50,7 +50,7 @@ const DeleteParticipantModal = ({ mediator: mediatorRef, participant: participan
       })}
       disclosure={
         <ButtonQuickAction
-          variantColor="red"
+          variantColor="danger"
           icon={CapUIIcon.Trash}
           label={intl.formatMessage({ id: 'global.remove' })}
         />

@@ -1,8 +1,17 @@
-import { Box, CapUIFontSize, CapUIIcon, Flex, Heading, Text, useTheme } from '@cap-collectif/ui'
+import {
+  Box,
+  ButtonQuickAction,
+  CapUIFontSize,
+  CapUIIcon,
+  CapUIIconSize,
+  Flex,
+  Heading,
+  Text,
+  useTheme,
+} from '@cap-collectif/ui'
 import React, { FC, useRef } from 'react'
 import Slider from 'react-slick'
 import { pxToRem } from '@shared/utils/pxToRem'
-import CarrouselButton from './CarrouselButton'
 import { useIntl } from 'react-intl'
 import Image from '@shared/ui/Image'
 import { Item } from './CarrouselItem'
@@ -166,17 +175,19 @@ const WhatsNewMobile: FC<{ items: Item[]; title: string }> = ({ items, title }) 
       </Slider>
       {items.length > 1 ? (
         <Flex zIndex={1} gap={4} justifyContent="center" mt={4}>
-          <CarrouselButton
-            variantColor="neutral-gray"
+          <ButtonQuickAction
             icon={CapUIIcon.ArrowLeft}
             label={intl.formatMessage({ id: 'carrousel.prev_slide' })}
             onClick={prev}
+            variantColor="hierarchy"
+            size={CapUIIconSize.Md}
           />
-          <CarrouselButton
-            variantColor="neutral-gray"
+          <ButtonQuickAction
             icon={CapUIIcon.ArrowRight}
             label={intl.formatMessage({ id: 'carrousel.next_slide' })}
             onClick={next}
+            variantColor="hierarchy"
+            size={CapUIIconSize.Md}
           />
         </Flex>
       ) : null}

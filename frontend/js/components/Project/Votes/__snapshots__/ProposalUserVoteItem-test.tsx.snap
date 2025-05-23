@@ -80,7 +80,7 @@ exports[`<ProposalUserVoteItem /> should render a support item 1`] = `
           icon="TRASH"
           id="1-proposal-vote__private-delete"
           label="aria.label.delete-support"
-          variantColor="red"
+          variantColor="danger"
         />
       }
       id="popover-positioned-right"
@@ -163,7 +163,7 @@ exports[`<ProposalUserVoteItem /> should render a support item without createdAt
           icon="TRASH"
           id="1-proposal-vote__private-delete"
           label="aria.label.delete-support"
-          variantColor="red"
+          variantColor="danger"
         />
       }
       id="popover-positioned-right"
@@ -260,7 +260,7 @@ exports[`<ProposalUserVoteItem /> should render a vote item 1`] = `
           icon="TRASH"
           id="1-proposal-vote__private-delete"
           label="aria-label-delete-vote"
-          variantColor="red"
+          variantColor="danger"
         />
       }
       id="popover-positioned-right"

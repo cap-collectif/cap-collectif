@@ -70,14 +70,14 @@ const DebateOpinion = ({ debateOpinion: debateOpinionRef, onEdit, onDelete }: Pr
             icon={CapUIIcon.Pencil}
             label={<FormattedMessage id="global.change" />}
             onClick={onEdit}
-            variantColor="green"
+            variantColor="primary"
           />
           <ButtonQuickAction
             type="button"
             icon={CapUIIcon.Trash}
             label={<FormattedMessage id="global.delete" />}
             onClick={onDelete}
-            variantColor="red"
+            variantColor="danger"
           />
         </Flex>
       )}

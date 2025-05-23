@@ -115,7 +115,7 @@ const MediatorList: React.FC<MediatorListProps> = ({ project: projectRef, resetT
               <Table.Td>{mediator.totalParticipantsOptIn || '0'}</Table.Td>
               <Table.Td>
                 <ButtonQuickAction
-                  variantColor="red"
+                  variantColor="danger"
                   icon={CapUIIcon.Trash}
                   label={intl.formatMessage({ id: 'action_delete' })}
                   onClick={() =>

@@ -237,7 +237,7 @@ const ProposalFormAdminCategoriesModal: React.FC<ProposalFormAdminCategoriesModa
       disclosure={
         isUpdating ? (
           <ButtonQuickAction
-            variantColor="blue"
+            variantColor="primary"
             icon={CapUIIcon.Pencil}
             label={intl.formatMessage({ id: 'action_edit' })}
             className={`NeededInfo_categories_item_edit_${index}`}

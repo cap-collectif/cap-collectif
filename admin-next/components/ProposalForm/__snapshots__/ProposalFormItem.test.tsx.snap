@@ -74,7 +74,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
       <button
         aria-describedby="id-g"
         aria-label="duplicate"
-        className="sc-bcXGCL ePnELy cap-buttonQuickAction btn-duplicate"
+        className="sc-bcXGCL ezspYQ cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -90,7 +90,7 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
           fill="none"
           viewBox="0 0 10 12"
           xmlns="http://www.w3.org/2000/svg"
@@ -202,7 +202,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
       <button
         aria-describedby="id-g"
         aria-label="duplicate"
-        className="sc-bcXGCL ePnELy cap-buttonQuickAction btn-duplicate"
+        className="sc-bcXGCL ezspYQ cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
         onFocus={[Function]}
@@ -218,7 +218,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
           fill="none"
           viewBox="0 0 10 12"
           xmlns="http://www.w3.org/2000/svg"
@@ -257,7 +257,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
         aria-expanded={false}
         aria-haspopup="dialog"
         aria-label="global.delete"
-        className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+        className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
@@ -274,7 +274,7 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+          className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
           fill="none"
           viewBox="0 0 12 12"
           xmlns="http://www.w3.org/2000/svg"

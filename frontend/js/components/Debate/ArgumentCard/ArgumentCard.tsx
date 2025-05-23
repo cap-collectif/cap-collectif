@@ -238,7 +238,7 @@ export const ArgumentCard = ({
                       label={intl.formatMessage({
                         id: 'global.menu',
                       })}
-                      variantColor="gray"
+                      variantColor="hierarchy"
                       border="none"
                       height="32px"
                     />
@@ -269,7 +269,7 @@ export const ArgumentCard = ({
                   label={intl.formatMessage({
                     id: 'global.menu',
                   })}
-                  variantColor="gray"
+                  variantColor="hierarchy"
                   onClick={onOpen}
                   border="none"
                   height="32px"

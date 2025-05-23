@@ -152,7 +152,7 @@ export const ProposalUserVoteItem = ({
             placement="bottom"
             disclosure={
               <ButtonQuickAction
-                variantColor="red"
+                variantColor="danger"
                 border="none"
                 label={intl.formatMessage(
                   isInterpellationContextFromStep(step)

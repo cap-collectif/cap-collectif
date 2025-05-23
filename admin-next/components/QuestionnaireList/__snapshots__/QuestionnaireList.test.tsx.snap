@@ -308,7 +308,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
               aria-expanded={false}
               aria-haspopup="dialog"
               aria-label="global.delete"
-              className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+              className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -325,7 +325,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                 fill="none"
                 viewBox="0 0 12 12"
                 xmlns="http://www.w3.org/2000/svg"
@@ -463,7 +463,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
               aria-expanded={false}
               aria-haspopup="dialog"
               aria-label="global.delete"
-              className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+              className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -480,7 +480,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon cap-buttonQuickAction-icon"
                 fill="none"
                 viewBox="0 0 12 12"
                 xmlns="http://www.w3.org/2000/svg"

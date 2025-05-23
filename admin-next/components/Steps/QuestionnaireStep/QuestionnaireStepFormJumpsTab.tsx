@@ -127,7 +127,7 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
                 <ButtonGroup>
                   <ButtonQuickAction
                     tooltipZIndex={2}
-                    variantColor="blue"
+                    variantColor="primary"
                     icon={CapUIIcon.Pencil}
                     label={intl.formatMessage({
                       id: 'global.edit',
@@ -142,7 +142,7 @@ const QuestionnaireStepFormJumpsTab: React.FC<{ fieldName: string }> = ({ fieldN
                   <ButtonQuickAction
                     tooltipZIndex={2}
                     onClick={() => remove(index)}
-                    variantColor="red"
+                    variantColor="danger"
                     icon={CapUIIcon.Trash}
                     label={intl.formatMessage({
                       id: 'global.delete',

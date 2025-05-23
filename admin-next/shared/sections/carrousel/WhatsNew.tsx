@@ -1,9 +1,18 @@
-import { Box, CapUIIcon, Flex, Heading, Link, Text, useTheme } from '@cap-collectif/ui'
+import {
+  Box,
+  ButtonQuickAction,
+  CapUIIcon,
+  CapUIIconSize,
+  Flex,
+  Heading,
+  Link,
+  Text,
+  useTheme,
+} from '@cap-collectif/ui'
 import React, { useState } from 'react'
 import { FC } from 'react'
 import { pxToRem } from '@shared/utils/pxToRem'
 import useIsMobile from '@shared/hooks/useIsMobile'
-import CarrouselButton from './CarrouselButton'
 import { useIntl } from 'react-intl'
 import Image from '@shared/ui/Image'
 import WhatsNewMobile, { DateItem, getCardLabel, getPlaceholder, SECTION_TITLE_MAX_LENGTH } from './WhatsNewMobile'
@@ -23,9 +32,6 @@ const WhatsNew: FC<{ items: Item[]; title: string; backgroundColor: 'WHITE' | 'G
   const intl = useIntl()
   const isMobile = useIsMobile()
   const { colors } = useTheme()
-
-  const sx = { svg: { color: 'neutral-gray.700' } }
-  const bg = `${colors['neutral-gray'][backgroundColor === 'WHITE' ? 100 : 150]} !important`
 
   const scroll = (e: HTMLElement | null) => {
     if (e) e.scrollIntoView({ block: 'nearest', inline: 'nearest' })
@@ -59,27 +65,23 @@ const WhatsNew: FC<{ items: Item[]; title: string; backgroundColor: 'WHITE' | 'G
               <Heading as="h3">{title.slice(0, SECTION_TITLE_MAX_LENGTH)}</Heading>
               {length > 1 ? (
                 <Flex zIndex={1} gap={4}>
-                  <CarrouselButton
-                    variantColor="neutral-gray"
+                  <ButtonQuickAction
+                    variantColor="hierarchy"
                     icon={CapUIIcon.ArrowUp}
                     aria-controls="whats-new-items"
                     label={intl.formatMessage({ id: 'carrousel.prev_slide' })}
                     onClick={prev}
-                    disabled={!currentIndex}
-                    boxShadow={null}
-                    sx={sx}
-                    backgroundColor={bg}
+                    disabled={!currentIndex || currentIndex === 0}
+                    size={CapUIIconSize.Md}
                   />
-                  <CarrouselButton
-                    variantColor="neutral-gray"
+                  <ButtonQuickAction
+                    variantColor="hierarchy"
                     icon={CapUIIcon.ArrowDown}
                     aria-controls="whats-new-items"
                     label={intl.formatMessage({ id: 'carrousel.next_slide' })}
                     onClick={next}
                     disabled={currentIndex === items.length - 1}
-                    boxShadow={null}
-                    sx={sx}
-                    backgroundColor={bg}
+                    size={CapUIIconSize.Md}
                   />
                 </Flex>
               ) : null}

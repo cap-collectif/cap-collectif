@@ -79,7 +79,7 @@ const ModalConfirmationDelete: React.FC<Props> = ({ questionnaire: questionnaire
         <ButtonQuickAction
           icon={CapUIIcon.Trash}
           label={intl.formatMessage({ id: 'global.delete' })}
-          variantColor="red"
+          variantColor="danger"
         />
       }
       size={CapUIModalSize.Md}

@@ -55,7 +55,7 @@ const CardFranceConnect: FC<CardFranceConnectProps> = ({
         <CardSSO.Header>
           {hover ? (
             <ButtonQuickAction
-              variantColor="blue"
+              variantColor="primary"
               icon={CapUIIcon.Pencil}
               label={intl.formatMessage({ id: 'action_edit' })}
               onClick={onOpen('franceConnect-configuration-editing')}

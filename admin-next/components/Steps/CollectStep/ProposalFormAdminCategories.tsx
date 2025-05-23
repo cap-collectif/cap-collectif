@@ -38,7 +38,7 @@ export const getFormattedCategories = (categories: FormValues['form']['categorie
       color: !!category.color ? category.color.replace('#', 'COLOR_').toUpperCase() : 'COLOR_EF5350',
       icon: !!category.icon ? category.icon.toUpperCase().replace(/-/g, '_') : null,
       categoryImage: !!category.categoryImage ? category.categoryImage.id : null,
-      newCategoryImagePreview: undefined
+      newCategoryImagePreview: undefined,
     })) ?? []
   )
 }
@@ -130,7 +130,7 @@ const ProposalFormAdminCategories: React.FC<ProposalFormAdminCategoriesProps> = 
                 />
                 <ButtonQuickAction
                   className={`NeededInfo_categories_item_delete_${index}`}
-                  variantColor="red"
+                  variantColor="danger"
                   icon={CapUIIcon.Trash}
                   label={intl.formatMessage({ id: 'action_delete' })}
                   onClick={() => remove(index)}

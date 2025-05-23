@@ -68,7 +68,7 @@ const OrganizationConfigFormDeleteMemberModal: React.FC<OrganizationConfigFormDe
       disclosure={
         <ButtonQuickAction
           icon={CapUIIcon.Trash}
-          variantColor="red"
+          variantColor="danger"
           label={intl.formatMessage({ id: 'global.delete' })}
         />
       }

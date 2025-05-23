@@ -119,7 +119,7 @@ const GeographicalAreasList = () => {
                   <ButtonQuickAction
                     as="a"
                     href={`/admin-next/geographicalArea?id=${area?.id}`}
-                    variantColor="blue"
+                    variantColor="primary"
                     icon={CapUIIcon.Pencil}
                     label={intl.formatMessage({ id: 'global.edit' })}
                   />
@@ -128,7 +128,7 @@ const GeographicalAreasList = () => {
                       setGeographicalAreaId(area?.id || null)
                       onOpen()
                     }}
-                    variantColor="red"
+                    variantColor="danger"
                     icon={CapUIIcon.Trash}
                     label={intl.formatMessage({ id: 'global.delete' })}
                   />

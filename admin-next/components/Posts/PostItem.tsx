@@ -146,11 +146,11 @@ const PostItem: React.FC<PostItemProps> = ({ post: postFragment, viewer: viewerF
           })}
       </Table.Td>
       <Table.Td visibleOnHover>
-        <Flex direction="row" justify="space-evenly">
+        <Flex direction="row" justify="space-evenly" gap={2}>
           <ButtonQuickAction
             icon={CapUIIcon.Preview}
             size={CapUIIconSize.Md}
-            variantColor="blue"
+            variantColor="primary"
             label={intl.formatMessage({ id: 'global.preview' })}
             onClick={() => window.open(post.url, '_self')}
           />

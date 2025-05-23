@@ -223,7 +223,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                       {isSection || isSubSection ? null : (
                         <ButtonQuickAction
                           tooltipZIndex={2}
-                          variantColor="blue"
+                          variantColor="primary"
                           icon={CapUIIcon.Duplicate}
                           label={intl.formatMessage({
                             id: 'duplicate',
@@ -236,7 +236,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                       )}
                       <ButtonQuickAction
                         tooltipZIndex={2}
-                        variantColor="blue"
+                        variantColor="primary"
                         icon={CapUIIcon.Pencil}
                         label={intl.formatMessage({
                           id: 'global.edit',
@@ -270,7 +270,7 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
                               index: jumpIndex,
                             })
                         }}
-                        variantColor="red"
+                        variantColor="danger"
                         icon={CapUIIcon.Trash}
                         label={intl.formatMessage({
                           id: 'global.delete',

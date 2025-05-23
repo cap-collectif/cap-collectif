@@ -14,7 +14,7 @@ Array [
         icon="MORE"
         label="global.plus"
         size="md"
-        variantColor="blue"
+        variantColor="primary"
       />
     }
   >

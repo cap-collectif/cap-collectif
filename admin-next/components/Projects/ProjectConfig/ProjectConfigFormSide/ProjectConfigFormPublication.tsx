@@ -83,7 +83,7 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
             <Text truncate={30}>{url}</Text>
             <ButtonQuickAction
               id="edit-slug"
-              variantColor="blue"
+              variantColor="primary"
               icon={CapUIIcon.Pencil}
               label={intl.formatMessage({
                 id: 'global.edit',
@@ -94,17 +94,10 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
           </Flex>
         </Box>
         <FormControl name="archived" control={control} width="100%">
-          <FieldInput
-            type="checkbox"
-            name="archived"
-            control={control}
-            options={locales}
-            id="archived"
-          >
+          <FieldInput type="checkbox" name="archived" control={control} options={locales} id="archived">
             {intl.formatMessage({ id: 'archive.project' })}
           </FieldInput>
         </FormControl>
-
       </Accordion.Panel>
     </>
   )

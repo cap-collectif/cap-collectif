@@ -11,7 +11,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
     aria-expanded={false}
     aria-haspopup="dialog"
     aria-label="global.delete"
-    className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+    className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -28,7 +28,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
   >
     <svg
       aria-hidden="true"
-      className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+      className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"
@@ -89,7 +89,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
     aria-expanded={true}
     aria-haspopup="dialog"
     aria-label="global.delete"
-    className="sc-bcXGCL kzOulV cap-buttonQuickAction"
+    className="sc-bcXGCL bsxzJl cap-buttonQuickAction"
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
@@ -106,7 +106,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
   >
     <svg
       aria-hidden="true"
-      className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+      className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
       fill="none"
       viewBox="0 0 12 12"
       xmlns="http://www.w3.org/2000/svg"

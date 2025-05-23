@@ -39,7 +39,7 @@ const CardFacebook: FC<CardFacebookProps> = ({ ssoConfiguration: ssoConfiguratio
         <CardSSO.Header>
           {hover ? (
             <ButtonQuickAction
-              variantColor="blue"
+              variantColor="primary"
               icon={CapUIIcon.Pencil}
               label={intl.formatMessage({ id: 'action_edit' })}
               onClick={onOpen('facebook-configuration-editing')}

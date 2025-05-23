@@ -42,13 +42,13 @@ const CardOpenID: FC<CardOpenIDProps> = ({ ssoConfiguration: ssoConfigurationFra
           {hover ? (
             <ButtonGroup>
               <ButtonQuickAction
-                variantColor="blue"
+                variantColor="primary"
                 icon={CapUIIcon.Pencil}
                 label={intl.formatMessage({ id: 'action_edit' })}
                 onClick={onOpen('openID-configuration')}
               />
               <ButtonQuickAction
-                variantColor="red"
+                variantColor="danger"
                 icon={CapUIIcon.Trash}
                 label={intl.formatMessage({ id: 'action_delete' })}
                 onClick={onOpen('openID-delete')}

@@ -98,7 +98,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ePnELy cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -115,7 +115,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"
@@ -396,7 +396,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ePnELy cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -413,7 +413,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"
@@ -694,7 +694,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ePnELy cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -711,7 +711,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"
@@ -928,7 +928,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ePnELy cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -945,7 +945,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         viewBox="0 0 12 4"
         xmlns="http://www.w3.org/2000/svg"

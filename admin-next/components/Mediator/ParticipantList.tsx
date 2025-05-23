@@ -182,7 +182,7 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
                 <Table.Td>{moment(participant.createdAt).format('DD/MM/YYYY')}</Table.Td>
                 <Table.Td>
                   <ButtonQuickAction
-                    variantColor="blue"
+                    variantColor="primary"
                     icon={CapUIIcon.Pencil}
                     label={intl.formatMessage({ id: 'comment.update.button' })}
                     onClick={() => {

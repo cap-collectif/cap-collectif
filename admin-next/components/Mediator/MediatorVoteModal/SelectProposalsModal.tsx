@@ -83,7 +83,7 @@ const SelectProposalsModal: FC<SelectProposalsModalProps> = ({ onCancel, stepId,
                 </Text>
               </Flex>
               <ButtonQuickAction
-                variantColor="red"
+                variantColor="danger"
                 icon={CapUIIcon.Trash}
                 label={intl.formatMessage({ id: 'action_delete' })}
                 onClick={() => remove(index)}

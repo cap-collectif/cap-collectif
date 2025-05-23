@@ -105,7 +105,7 @@ const ProposalAnalysisCommentListItem = ({ comment: commentRef, viewer: viewerRe
             label={intl.formatMessage({
               id: 'global.delete',
             })}
-            variantColor="red"
+            variantColor="danger"
             onClick={onClick}
             opacity={showDeleteButton ? 1 : 0}
           />

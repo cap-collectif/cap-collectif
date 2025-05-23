@@ -137,7 +137,7 @@ const ProposalFormItem: React.FC<ProposalFormItemProps> = ({
           <ButtonQuickAction
             icon={CapUIIcon.Duplicate}
             label={intl.formatMessage({ id: 'duplicate' })}
-            variantColor="blue"
+            variantColor="primary"
             onClick={() =>
               duplicateProposalForm(proposalForm, intl, proposalForm.owner, proposalForm.creator, connectionName)
             }

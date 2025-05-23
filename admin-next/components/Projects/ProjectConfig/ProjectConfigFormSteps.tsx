@@ -114,7 +114,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                         <ButtonGroup>
                           <ButtonQuickAction
                             id={`edit-step-${stepsValues[index].label}`}
-                            variantColor="blue"
+                            variantColor="primary"
                             icon={CapUIIcon.Pencil}
                             label={intl.formatMessage({
                               id: 'global.edit',
@@ -132,7 +132,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                               setIndexToDelete(index)
                               onOpen()
                             }}
-                            variantColor="red"
+                            variantColor="danger"
                             icon={CapUIIcon.Trash}
                             label={intl.formatMessage({
                               id: 'global.delete',

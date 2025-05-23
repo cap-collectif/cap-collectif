@@ -73,7 +73,7 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
             <ButtonQuickAction
               tooltipZIndex={2}
               data-cy={`${sectionFormKey}-edit-button`}
-              variantColor="blue"
+              variantColor="primary"
               icon={CapUIIcon.Pencil}
               label={intl.formatMessage({
                 id: 'global.edit',
@@ -89,7 +89,7 @@ const SectionListItem: React.FC<Props> = ({ depth = 0, index, removeSection, sec
             onClick={() => {
               removeSection(index)
             }}
-            variantColor="red"
+            variantColor="danger"
             icon={CapUIIcon.Trash}
             label={intl.formatMessage({
               id: 'global.delete',

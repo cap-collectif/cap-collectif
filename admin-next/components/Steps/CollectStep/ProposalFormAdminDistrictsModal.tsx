@@ -167,7 +167,7 @@ const ProposalFormAdminDistrictsModal: React.FC<ProposalFormAdminDistrictsModalP
           </Button>
         ) : (
           <ButtonQuickAction
-            variantColor="blue"
+            variantColor="primary"
             icon={CapUIIcon.Pencil}
             label={intl.formatMessage({ id: 'action_edit' })}
             className={`NeededInfo_districts_item_edit_${index}`}

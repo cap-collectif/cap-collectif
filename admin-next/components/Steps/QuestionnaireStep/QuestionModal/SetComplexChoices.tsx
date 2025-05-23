@@ -52,7 +52,7 @@ const SetComplexChoices: React.FC<{ defaultLocale?: string }> = ({ defaultLocale
               borderRadius="accordion"
             >
               <ButtonQuickAction
-                variantColor="red"
+                variantColor="danger"
                 icon={CapUIIcon.Trash}
                 label={intl.formatMessage({ id: 'action_delete' })}
                 onClick={() => remove(index)}

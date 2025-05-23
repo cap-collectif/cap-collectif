@@ -333,12 +333,12 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL chOglo"
+              className="sc-bcXGCL dYXxTI"
             >
               <button
                 aria-describedby="id-g"
                 aria-label="global.download"
-                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                 href="https://capco.dev/export-event-participants/event3?_locale=fr-FR"
                 onBlur={[Function]}
                 onClick={[Function]}
@@ -349,7 +349,7 @@ exports[`<EventList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"
@@ -502,7 +502,7 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL chOglo"
+              className="sc-bcXGCL dYXxTI"
             />
           </td>
         </tr>
@@ -603,12 +603,12 @@ exports[`<EventList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL chOglo"
+              className="sc-bcXGCL dYXxTI"
             >
               <button
                 aria-describedby="id-g"
                 aria-label="global.download"
-                className="sc-bcXGCL ePnELy cap-buttonQuickAction"
+                className="sc-bcXGCL ezspYQ cap-buttonQuickAction"
                 href="<mock-value-for-field-"exportParticipantsUrl">"
                 onBlur={[Function]}
                 onClick={[Function]}
@@ -619,7 +619,7 @@ exports[`<EventList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud exufqf hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                   fill="currentColor"
                   viewBox="0 0 24 24"
                   xmlns="http://www.w3.org/2000/svg"

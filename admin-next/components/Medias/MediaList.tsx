@@ -194,7 +194,7 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                             copy(media.url)
                             setIsCopied(true)
                           }}
-                          variantColor="blue"
+                          variantColor="primary"
                           icon={CapUIIcon.Link}
                           label={intl.formatMessage({ id: isCopied ? 'copied-link' : 'copy-link' })}
                         />
@@ -202,7 +202,7 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                           onClick={() => {
                             setSelectedMediasToDelete([media.id])
                           }}
-                          variantColor="red"
+                          variantColor="danger"
                           icon={CapUIIcon.Trash}
                           label={intl.formatMessage({ id: 'global.delete' })}
                         />
@@ -283,7 +283,7 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                         {isImage(media.providerReference) ? (
                           <ButtonQuickAction
                             onClick={() => setSelectedMediaToShow(media)}
-                            variantColor="blue"
+                            variantColor="primary"
                             icon={CapUIIcon.Eye}
                             label={intl.formatMessage({ id: 'global.more' })}
                           />
@@ -293,13 +293,13 @@ const MediaList: React.FC<MediaListProps> = ({ query: queryRef, onReset, view, t
                             copy(media.url)
                             setIsCopied(true)
                           }}
-                          variantColor="blue"
+                          variantColor="primary"
                           icon={CapUIIcon.Link}
                           label={intl.formatMessage({ id: isCopied ? 'copied-link' : 'copy-link' })}
                         />
                         <ButtonQuickAction
                           onClick={() => setSelectedMediasToDelete([media.id])}
-                          variantColor="red"
+                          variantColor="danger"
                           icon={CapUIIcon.Trash}
                           label={intl.formatMessage({ id: 'global.delete' })}
                         />

@@ -63,7 +63,7 @@ const InfoModal: React.FC<InfoModalProps> = ({ title, name, initialValues, setVa
     <Modal
       disclosure={
         <ButtonQuickAction
-          variantColor="blue"
+          variantColor="primary"
           icon={CapUIIcon.Pencil}
           label={intl.formatMessage({ id: 'action_edit' })}
           className={cn('disclosure', className)}

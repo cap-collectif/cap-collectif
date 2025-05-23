@@ -59,7 +59,7 @@ const PostListModalConfirmationDelete: React.FC<PostListModalConfirmationDeleteP
         <ButtonQuickAction
           icon={CapUIIcon.Trash}
           size={CapUIIconSize.Md}
-          variantColor="red"
+          variantColor="danger"
           label={intl.formatMessage({ id: 'admin.global.delete' })}
         />
       }

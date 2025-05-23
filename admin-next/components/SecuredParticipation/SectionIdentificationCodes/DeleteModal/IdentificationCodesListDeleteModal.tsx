@@ -62,7 +62,7 @@ const IdentificationCodesListDeleteModal: FC<IdentificationCodesListDeleteModalP
         <ButtonQuickAction
           icon={CapUIIcon.Trash}
           label={intl.formatMessage({ id: 'action_delete' })}
-          variantColor="red"
+          variantColor="danger"
         />
       }
     >

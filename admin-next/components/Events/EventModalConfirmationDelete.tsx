@@ -73,7 +73,7 @@ export const EventModalConfirmationDelete: React.FC<Props & { id: string; title:
           <ButtonQuickAction
             icon={CapUIIcon.Trash}
             size={CapUIIconSize.Md}
-            variantColor="red"
+            variantColor="danger"
             label={intl.formatMessage({ id: 'global.delete' })}
           />
         )

@@ -47,19 +47,12 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-              title="<mock-value-for-field-\\"username\\">"
+              className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
             >
               <img
                 alt="<mock-value-for-field-\\"username\\">"
-                className="sc-bcXGCL fHacA-d"
+                className="sc-bcXGCL dnFBwC"
                 src="<mock-value-for-field-\\"avatarUrl\\">"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                title="<mock-value-for-field-\\"username\\">"
               />
             </div>
           </span>
@@ -135,19 +128,12 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-              title="<mock-value-for-field-\\"username\\">"
+              className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
             >
               <img
                 alt="<mock-value-for-field-\\"username\\">"
-                className="sc-bcXGCL fHacA-d"
+                className="sc-bcXGCL dnFBwC"
                 src="<mock-value-for-field-\\"avatarUrl\\">"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                title="<mock-value-for-field-\\"username\\">"
               />
             </div>
           </span>
@@ -223,19 +209,12 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL iLOWAE sc-ckEbfr gIIayp cap-avatar"
-              title="<mock-value-for-field-\\"username\\">"
+              className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
             >
               <img
                 alt="<mock-value-for-field-\\"username\\">"
-                className="sc-bcXGCL fHacA-d"
+                className="sc-bcXGCL dnFBwC"
                 src="<mock-value-for-field-\\"avatarUrl\\">"
-                style={
-                  Object {
-                    "objectFit": "cover",
-                  }
-                }
-                title="<mock-value-for-field-\\"username\\">"
               />
             </div>
           </span>
