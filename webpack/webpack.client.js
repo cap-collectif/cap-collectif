@@ -35,6 +35,7 @@ const devConf = {
       '@mutations': path.resolve(__dirname, '../frontend/js/mutations'),
       '~ui': path.resolve(__dirname, '../frontend/js/components/Ui'),
       '@shared': path.resolve(__dirname, '../admin-next/shared'),
+      '@cap-collectif/form$': path.resolve(__dirname, '../admin-next/shared/cap-collectif/form/src'),
       '~ds': path.resolve(__dirname, '../frontend/js/components/DesignSystem'),
       '~': path.resolve(__dirname, '../frontend/js'),
       '~fonts': path.resolve(__dirname, '../public/fonts'),

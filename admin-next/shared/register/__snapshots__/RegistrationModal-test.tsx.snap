@@ -104,7 +104,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
-              htmlFor="email"
+              htmlFor=":r0:"
               style={
                 {
                   "marginLeft": 0,
@@ -130,6 +130,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               autoFocus={true}
               className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
+              id=":r0:"
               name="email"
               onBlur={[Function]}
               onChange={[Function]}
@@ -147,7 +148,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             >
               <label
                 className="sc-bcXGCL kossJj cap-form-label"
-                htmlFor="plainPassword"
+                htmlFor=":r1:"
                 style={
                   {
                     "marginLeft": 0,
@@ -173,7 +174,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 autoFocus={true}
                 className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
                 disabled={false}
-                id="password"
+                id=":r1:"
                 name="plainPassword"
                 onBlur={[Function]}
                 onChange={[Function]}
@@ -452,7 +453,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           >
             <label
               className="sc-bcXGCL kossJj cap-form-label"
-              htmlFor="email"
+              htmlFor=":r5:"
               style={
                 {
                   "marginLeft": 0,
@@ -478,6 +479,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               autoFocus={true}
               className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
               disabled={false}
+              id=":r5:"
               name="email"
               onBlur={[Function]}
               onChange={[Function]}
@@ -495,7 +497,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             >
               <label
                 className="sc-bcXGCL kossJj cap-form-label"
-                htmlFor="plainPassword"
+                htmlFor=":r6:"
                 style={
                   {
                     "marginLeft": 0,
@@ -521,7 +523,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 autoFocus={true}
                 className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
                 disabled={false}
-                id="password"
+                id=":r6:"
                 name="plainPassword"
                 onBlur={[Function]}
                 onChange={[Function]}

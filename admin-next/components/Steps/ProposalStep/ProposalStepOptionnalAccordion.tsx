@@ -278,6 +278,7 @@ const ProposalStepOptionnalAccordion: React.FC<Props> = ({ step: stepRef, formMe
                         label={intl.formatMessage({
                           id: 'proposal_form.zoom',
                         })}
+                        htmlFor="zoomMap"
                       />
                       <FieldInput
                         id="zoomMap"

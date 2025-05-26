@@ -20,6 +20,7 @@ module.exports = {
     '~ui(.*)$': '<rootDir>/frontend/js/components/Ui/$1',
     '~ds(.*)$': '<rootDir>/frontend/js/components/DesignSystem/$1',
     '@shared(.*)$': '<rootDir>/admin-next/shared/$1',
+    '@cap-collectif/form(.*)$': '<rootDir>/admin-next/shared/cap-collectif/form/src/$1',
     '~(.*)$': '<rootDir>/frontend/js/$1',
     '~svg(.*)$': '<rootDir>/public/svg/$1',
     '~image(.*)$': '<rootDir>/public/image/$1',

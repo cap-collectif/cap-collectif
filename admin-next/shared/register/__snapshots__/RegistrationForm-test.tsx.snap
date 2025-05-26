@@ -10,7 +10,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
-      htmlFor="email"
+      htmlFor=":r0:"
       style={
         {
           "marginLeft": 0,
@@ -36,6 +36,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
       autoFocus={true}
       className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
+      id=":r0:"
       name="email"
       onBlur={[Function]}
       onChange={[Function]}
@@ -53,7 +54,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     >
       <label
         className="sc-bcXGCL kossJj cap-form-label"
-        htmlFor="plainPassword"
+        htmlFor=":r1:"
         style={
           {
             "marginLeft": 0,
@@ -79,7 +80,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         autoFocus={true}
         className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
         disabled={false}
-        id="password"
+        id=":r1:"
         name="plainPassword"
         onBlur={[Function]}
         onChange={[Function]}
@@ -251,7 +252,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
-      htmlFor="email"
+      htmlFor=":r5:"
       style={
         {
           "marginLeft": 0,
@@ -277,6 +278,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
       autoFocus={true}
       className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
+      id=":r5:"
       name="email"
       onBlur={[Function]}
       onChange={[Function]}
@@ -294,7 +296,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     >
       <label
         className="sc-bcXGCL kossJj cap-form-label"
-        htmlFor="plainPassword"
+        htmlFor=":r6:"
         style={
           {
             "marginLeft": 0,
@@ -320,7 +322,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         autoFocus={true}
         className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
         disabled={false}
-        id="password"
+        id=":r6:"
         name="plainPassword"
         onBlur={[Function]}
         onChange={[Function]}
@@ -376,7 +378,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
-      htmlFor="userType"
+      htmlFor=":r8:"
       style={
         {
           "marginLeft": 0,
@@ -406,6 +408,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     >
       <div
         className="cap-select css-b62m3t-container"
+        id=":r8:"
         onKeyDown={[Function]}
       >
         <span
@@ -614,7 +617,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
-      htmlFor="email"
+      htmlFor=":rb:"
       style={
         {
           "marginLeft": 0,
@@ -640,6 +643,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
       autoFocus={true}
       className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
+      id=":rb:"
       name="email"
       onBlur={[Function]}
       onChange={[Function]}
@@ -657,7 +661,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     >
       <label
         className="sc-bcXGCL kossJj cap-form-label"
-        htmlFor="plainPassword"
+        htmlFor=":rc:"
         style={
           {
             "marginLeft": 0,
@@ -683,7 +687,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         autoFocus={true}
         className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
         disabled={false}
-        id="password"
+        id=":rc:"
         name="plainPassword"
         onBlur={[Function]}
         onChange={[Function]}
@@ -739,7 +743,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
-      htmlFor="zipcode"
+      htmlFor=":re:"
       style={
         {
           "marginLeft": 0,
@@ -768,6 +772,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
       autoComplete="postal-code"
       className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
+      id=":re:"
       name="zipcode"
       onBlur={[Function]}
       onChange={[Function]}

@@ -188,9 +188,9 @@ export default new (class AdminCollectStepPage {
 
   selectDefaultView(view: View) {
     const selector: Record<View, string> = {
-      map: '#mainView_choice-MAP',
-      grid: '#mainView_choice-GRID',
-      list: '#mainView_choice-LIST',
+      map: 'input[id*="_choice-MAP"]',
+      grid: 'input[id*="_choice-GRID"]',
+      list: 'input[id*="_choice-LIST"]',
     }
 
     return cy.get(selector[view]).check({ force: true })
@@ -215,8 +215,8 @@ export default new (class AdminCollectStepPage {
 
   selectPublication(publication: Publication) {
     const selector: Record<Publication, string> = {
-      published: '#enabled_choice-PUBLISHED',
-      draft: '#enabled_choice-DRAFT',
+      published: 'input[id*="choice-PUBLISHED"]',
+      draft: 'input[id*="choice-DRAFT"]',
     }
 
     return cy.get(selector[publication]).check({ force: true })

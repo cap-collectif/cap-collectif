@@ -42,6 +42,9 @@
       ],
       "@shared/*": [
         "./admin-next/shared/*"
+      ],
+      "@cap-collectif/form": [
+        "./admin-next/shared/cap-collectif/form/src"
       ]
     },
     "incremental": true

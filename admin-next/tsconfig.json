@@ -43,6 +43,9 @@
       ],
       "@shared/*": [
         "./shared/*"
+      ],
+      "@cap-collectif/form": [
+        "./shared/cap-collectif/form/src"
       ]
     },
     "incremental": true,

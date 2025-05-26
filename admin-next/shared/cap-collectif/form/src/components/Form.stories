@@ -1,0 +1,398 @@
+import {
+  Box,
+  Flex,
+  FormLabel,
+  FormGuideline,
+  InputGroup,
+  Button,
+} from '@cap-collectif/ui'
+import { Meta } from '@storybook/react'
+import { useForm } from 'react-hook-form'
+
+import FormControl from './FormControl'
+import { FieldInput } from './fieldInput'
+import { COUNTRY_CODES } from './flagSelect'
+
+const meta: Meta = {
+  title: 'Example',
+  parameters: {
+    controls: { expanded: true },
+  },
+}
+
+export default meta
+
+export const Default = () => {
+  const { control, handleSubmit, watch } = useForm({
+    mode: 'onChange',
+  })
+  const onSubmit = (data: any) => console.log(data)
+
+  return (
+    <Box
+      as="form"
+      maxWidth="40%"
+      margin="auto"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormControl name="firstName" control={control} isRequired>
+        <div>
+          <FormLabel label="Firstname" />
+        </div>
+        <FieldInput
+          type="text"
+          minLength={4}
+          name="firstName"
+          id="firstName"
+          control={control}
+          defaultValue="Patrick"
+          placeholder="Jean"
+          rules={{
+            pattern: {
+              value: /^[a-zA-Z]+$/,
+              message: 'Uniquement des lettres',
+            },
+          }}
+        />
+      </FormControl>
+      <FormControl name="firstName" control={control} isRequired>
+        <FormLabel label="Firstname" />
+        <FieldInput
+          type="text"
+          minLength={4}
+          name="firstName"
+          id="firstName"
+          control={control}
+          defaultValue="Patrick"
+          placeholder="Jean"
+          rules={{
+            pattern: {
+              value: /^[a-zA-Z]+$/,
+              message: 'Uniquement des lettres',
+            },
+          }}
+        />
+      </FormControl>
+      <FormControl name="fingers" control={control} isRequired>
+        <FormLabel label="Number of finger" />
+        <FieldInput type="number" name="fingers" control={control} />
+      </FormControl>
+      <FormControl name="description" control={control} isRequired>
+        <FormLabel label="Description" />
+        <FormGuideline>Tell us about you</FormGuideline>
+        <FieldInput
+          type="textarea"
+          name="description"
+          control={control}
+          placeholder="Je suis heureux"
+          rules={{
+            pattern: {
+              value: /^[a-zA-Z]+$/,
+              message: 'Uniquement des lettres',
+            },
+          }}
+        />
+      </FormControl>
+      <FormControl name="drink" control={control} isRequired>
+        <FormLabel label="Drink" />
+        <FormGuideline>Choose your drink(s)</FormGuideline>
+        <FieldInput
+          type="checkbox"
+          name="drink"
+          id="drink"
+          control={control}
+          choices={[
+            {
+              id: 'coca',
+              useIdAsValue: false,
+              label: 'Coca cola',
+            },
+            {
+              id: 'pepsi',
+              useIdAsValue: false,
+              label: 'Pepsi',
+            },
+          ]}
+        />
+      </FormControl>
+      <FormControl name="country" control={control} isRequired>
+        <FormLabel label="Country" />
+        <FormGuideline>Choose your country</FormGuideline>
+        <FieldInput
+          type="radio"
+          name="country"
+          id="country"
+          control={control}
+          choices={[
+            {
+              id: 'france',
+              useIdAsValue: false,
+              label: 'France',
+              disabled: true,
+            },
+            {
+              id: 'australia',
+              useIdAsValue: false,
+              label: 'Australia',
+              disabled: false,
+            },
+          ]}
+        />
+      </FormControl>
+      <FormControl name="logo" control={control} isRequired>
+        <FormLabel label="Logo" />
+        <FormGuideline>Accepted type: jpg, png, svg.</FormGuideline>
+        <FieldInput
+          type="uploader"
+          name="logo"
+          control={control}
+          showThumbnail
+          format="image/*"
+          onChange={value => {
+            console.log(value)
+          }}
+        />
+      </FormControl>
+      <FormControl name="holiday-pictures" control={control} isRequired>
+        <FormLabel label="Holiday Pictures" />
+        <FieldInput
+          type="uploader"
+          name="holiday-pictures"
+          control={control}
+          multiple
+        />
+      </FormControl>
+      <FormControl name="picture" control={control} isRequired>
+        <FormLabel label="Picture pour tester la max size" />
+        <FormGuideline>Accepted type: jpg, png, svg.</FormGuideline>
+        <FieldInput
+          type="uploader"
+          name="picture"
+          control={control}
+          showThumbnail
+          maxSize={100000}
+          format="image/*"
+        />
+      </FormControl>
+      <FormControl name="sober" control={control} isRequired>
+        <FieldInput
+          type="checkbox"
+          name="sober"
+          control={control}
+          id="sober-checkbox"
+        >
+          Are you sober ?
+        </FieldInput>
+      </FormControl>
+      <FormControl name="happy" control={control} isRequired>
+        <Flex direction="row" align="center">
+          <FieldInput
+            type="switch"
+            name="happy"
+            control={control}
+            id="happy-switch"
+          >
+            Are you happy ?
+          </FieldInput>
+        </Flex>
+      </FormControl>
+      <FormControl name="fastFood" control={control} isRequired>
+        <FormLabel label="Fast food" />
+        <FieldInput
+          type="select"
+          name="fastFood"
+          control={control}
+          placeholder="Choisir une option"
+          options={[
+            {
+              value: 'mcdo',
+              label: 'Mcdonald',
+            },
+            {
+              value: 'bk',
+              label: 'Burger king',
+            },
+          ]}
+          clearable
+        />
+      </FormControl>
+      <FormControl name="codeInput" control={control} isRequired>
+        <FormLabel label="Code Input" />
+        <FieldInput type="codeInput" name="codeInput" control={control} />
+      </FormControl>
+      <InputGroup>
+        <FormLabel label="Choisissez une couleur :" />
+        <FormGuideline>Tell us about you</FormGuideline>
+        <FormControl
+          name="phone.countryCode"
+          control={control}
+          isRequired
+          style={{ flex: '50%' }}
+        >
+          <FieldInput
+            type="flagSelect"
+            name="phone.countryCode"
+            control={control}
+            placeholder="Choisir un pays"
+          />
+        </FormControl>
+        <FormControl
+          name="phone.phoneNumber"
+          control={control}
+          isRequired
+          style={{ flex: '50%' }}
+        >
+          <FieldInput
+            type="tel"
+            name="phone.phoneNumber"
+            maxLength={10}
+            minLength={2}
+            control={control}
+          />
+        </FormControl>
+      </InputGroup>
+      <FormControl name="birth-date" control={control} isRequired>
+        <FormLabel label="Birth date" />
+        <FieldInput type="date" name="birth-date" control={control} />
+      </FormControl>
+      <FormControl name="hour" control={control} isRequired>
+        <FormLabel label="Hour" />
+        <FieldInput type="hour" name="hour" control={control} />
+      </FormControl>
+      <FormControl name="dateHour" control={control} isRequired>
+        <FormLabel label="Date With Hour" />
+        <FieldInput type="dateHour" name="dateHour" control={control} />
+      </FormControl>
+      <FormControl name="color" control={control} isRequired>
+        <FormLabel label="Color" />
+        <FieldInput type="colorPicker" name="color" control={control} />
+      </FormControl>
+      <InputGroup>
+        <FormLabel label="" />
+        <FormControl
+          name="PhoneVerifiedRequirement.CountryCode"
+          control={control}
+          isDisabled
+        >
+          <FieldInput
+            uniqueCountry={COUNTRY_CODES.FR}
+            type="flagSelect"
+            name="PhoneVerifiedRequirement.CountryCode"
+            control={control}
+            placeholder={'ko'}
+          />
+        </FormControl>
+        <FormControl
+          name="PhoneVerifiedRequirement.phoneNumber"
+          control={control}
+        >
+          <FieldInput
+            type="tel"
+            name="PhoneVerifiedRequirement.phoneNumber"
+            control={control}
+          />
+        </FormControl>
+      </InputGroup>
+      <pre>{JSON.stringify(watch(), null, 2)}</pre>
+    </Box>
+  )
+}
+
+export const Focus = () => {
+  const { control, handleSubmit, formState } = useForm({
+    mode: 'onChange',
+  })
+
+  const { errors, isValid } = formState
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
+  return (
+    <Box
+      as="form"
+      maxWidth="40%"
+      margin="auto"
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormControl name="firstName" control={control} isRequired>
+        <FormLabel label="Firstname" />
+        <FieldInput
+          type="text"
+          minLength={4}
+          name="firstName"
+          control={control}
+          placeholder="Jean"
+          defaultValue="Jean123"
+          rules={{
+            pattern: {
+              value: /^[a-zA-Z]+$/,
+              message: 'Uniquement des lettres',
+            },
+          }}
+        />
+      </FormControl>
+
+      <button type="submit">Submit</button>
+      <pre>{JSON.stringify({ isValid }, null, 2)}</pre>
+      <pre>{JSON.stringify({ errors }, null, 2)}</pre>
+    </Box>
+  )
+}
+
+export const TriggerAllErrorsOnSubmit = () => {
+  const { control, handleSubmit, formState } = useForm({
+    mode: 'onSubmit',
+  })
+
+  const { errors, isValid } = formState
+
+  const onSubmit = (data: any) => {
+    console.log(data)
+  }
+
+  return (
+    <Box
+      as="form"
+      maxWidth="40%"
+      margin="auto"
+      noValidate
+      onSubmit={handleSubmit(onSubmit)}
+    >
+      <FormControl name="firstName" control={control} isRequired>
+        <FormLabel label="Firstname" />
+        <FieldInput
+          type="text"
+          minLength={4}
+          name="firstName"
+          control={control}
+        />
+      </FormControl>
+      <FormControl name="lastName" control={control} isRequired>
+        <FormLabel label="lastName" />
+        <FieldInput
+          type="text"
+          minLength={4}
+          name="lastName"
+          control={control}
+        />
+      </FormControl>
+      <FormControl name="condition" control={control} isRequired>
+        <FormLabel label="condition" />
+        <FieldInput
+          id="condition"
+          type="checkbox"
+          name="condition"
+          control={control}
+          placeholder="Jean"
+        />
+      </FormControl>
+      <Button mb={4} type="submit">
+        Submit
+      </Button>
+      <pre>{JSON.stringify({ isValid }, null, 2)}</pre>
+      <pre>{JSON.stringify({ errors }, null, 2)}</pre>
+    </Box>
+  )
+}

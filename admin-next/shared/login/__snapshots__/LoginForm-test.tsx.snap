@@ -10,7 +10,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
-      htmlFor="username"
+      htmlFor=":r0:"
       style={
         {
           "marginLeft": 0,
@@ -36,6 +36,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       autoFocus={true}
       className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
+      id=":r0:"
       name="username"
       onBlur={[Function]}
       onChange={[Function]}
@@ -50,7 +51,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
   >
     <label
       className="sc-bcXGCL kossJj cap-form-label"
-      htmlFor="password"
+      htmlFor=":r1:"
       style={
         {
           "marginLeft": 0,
@@ -75,6 +76,7 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       autoComplete="off"
       className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
       disabled={false}
+      id=":r1:"
       name="password"
       onBlur={[Function]}
       onChange={[Function]}

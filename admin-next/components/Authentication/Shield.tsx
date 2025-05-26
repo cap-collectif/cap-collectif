@@ -29,7 +29,7 @@ import { useFeatureFlags } from '@shared/hooks/useFeatureFlag'
 import { useNavBarContext } from '../NavBar/NavBar.context'
 import { UPLOAD_PATH } from '@utils/config'
 import { useAppContext } from '../AppProvider/App.context'
-import { UploaderValue } from '@cap-collectif/form/dist/components/uploader/Uploader.utils'
+import { UploaderValue } from '@cap-collectif/form'
 
 type MenuLocaleValue = {
   label: string

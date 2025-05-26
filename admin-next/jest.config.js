@@ -13,6 +13,7 @@ const customJestConfig = {
     '^@ui/(.*)$': '<rootDir>/components/UI/$1',
     '^@utils/(.*)$': '<rootDir>/utils/$1',
     '^@shared/(.*)$': '<rootDir>/shared/$1',
+    '^@cap-collectif/form/(.*)$': '<rootDir>/shared/cap-collectif/form/src/$1',
     '^network/(.*)$': '<rootDir>/network/$1',
     '^mutations/(.*)$': '<rootDir>/mutations/$1',
     '^styles/(.*)$': '<rootDir>/styles/$1',
