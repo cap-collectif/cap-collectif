@@ -13,12 +13,14 @@ Array [
       aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud fspuzM hEjMCZ cap-icon"
       fill="none"
+      height="1em"
       viewBox="0 0 12 10"
+      width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         clipRule="evenodd"
-        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -119,12 +121,14 @@ Array [
       aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud fspuzM hEjMCZ cap-icon"
       fill="none"
+      height="1em"
       viewBox="0 0 12 10"
+      width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         clipRule="evenodd"
-        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -225,12 +229,14 @@ Array [
       aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud fspuzM hEjMCZ cap-icon"
       fill="none"
+      height="1em"
       viewBox="0 0 12 10"
+      width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
         clipRule="evenodd"
-        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+        d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"

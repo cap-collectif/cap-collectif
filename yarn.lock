@@ -2964,10 +2964,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/ui@^3.0.2":
-  version "3.0.2"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-3.0.2.tgz#038cf951e81258ff1df019dc96c68694314590da"
-  integrity sha512-el5M/KWwXj1dpA7e+PdrG5+D6nTpZTGjPvm2XdUVhHtgJ688I7ZwsohXaHGKTpA+8xAbwq1KFEi7Q7WQabwUxA==
+"@cap-collectif/ui@^3.0.4":
+  version "3.0.4"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-3.0.4.tgz#1283d0677b591d9212b36059a52029e0ed0783f6"
+  integrity sha512-6unuxAtJKhd386EJ0sM70f1tju1bbEl0flrwUz6AYhW6cnZBtdgBDvYkf646Thp7mKQXqpTXSk95BhN/JWHT4w==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
@@ -2985,7 +2985,6 @@
     react-select "^5.2.1"
     react-with-direction "^1.3.1"
     reakit "1.3.10"
-    styled-components "^6.1.1"
 
 "@cfaester/enzyme-adapter-react-18@0.7.1":
   version "0.7.1"

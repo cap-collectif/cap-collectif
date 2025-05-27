@@ -25,12 +25,14 @@ Array [
           aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
+          height="1em"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
+          width="1em"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+            d="M11 3H1M2.667 4.667 1 3l1.667-1.667"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"
@@ -132,12 +134,14 @@ Array [
           aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
+          height="1em"
           onClick={[MockFunction]}
           viewBox="0 0 12 6"
+          width="1em"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M11 3H1M2.667 4.667L1 3l1.667-1.667"
+            d="M11 3H1M2.667 4.667 1 3l1.667-1.667"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"

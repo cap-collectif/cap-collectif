@@ -110,18 +110,19 @@ exports[`<ProjectItem /> should render correctly 1`] = `
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      tabIndex={0}
       type="button"
     >
       <svg
         aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
+        height="1em"
         viewBox="0 0 12 4"
+        width="1em"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+          d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
         />
       </svg>
     </button>
@@ -408,18 +409,19 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      tabIndex={0}
       type="button"
     >
       <svg
         aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
+        height="1em"
         viewBox="0 0 12 4"
+        width="1em"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+          d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
         />
       </svg>
     </button>
@@ -706,18 +708,19 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      tabIndex={0}
       type="button"
     >
       <svg
         aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
+        height="1em"
         viewBox="0 0 12 4"
+        width="1em"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+          d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
         />
       </svg>
     </button>
@@ -940,18 +943,19 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
       onMouseLeave={[Function]}
-      tabIndex={0}
       type="button"
     >
       <svg
         aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
+        height="1em"
         viewBox="0 0 12 4"
+        width="1em"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+          d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
         />
       </svg>
     </button>

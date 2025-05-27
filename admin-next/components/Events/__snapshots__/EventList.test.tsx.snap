@@ -62,11 +62,13 @@ exports[`<EventList /> should render correctly 1`] = `
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
                 fill="none"
+                height="1em"
                 viewBox="0 0 12 7"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+                  d="m1 1 4.837 4.934q.03.03.073.049a.24.24 0 0 0 .253-.05L11 1"
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -143,11 +145,13 @@ exports[`<EventList /> should render correctly 1`] = `
                     aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
+                    height="1em"
                     viewBox="0 0 12 7"
+                    width="1em"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+                      d="m1 1 4.837 4.934q.03.03.073.049a.24.24 0 0 0 .253-.05L11 1"
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -188,11 +192,13 @@ exports[`<EventList /> should render correctly 1`] = `
                     aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
+                    height="1em"
                     viewBox="0 0 12 7"
+                    width="1em"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M11 6L6.163 1.066a.217.217 0 00-.074-.049.237.237 0 00-.252.05L1 6"
+                      d="M11 6 6.163 1.066a.2.2 0 0 0-.074-.049.24.24 0 0 0-.252.05L1 6"
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -345,20 +351,21 @@ exports[`<EventList /> should render correctly 1`] = `
                 onFocus={[Function]}
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
-                tabIndex={0}
               >
                 <svg
                   aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                   fill="currentColor"
+                  height="1em"
                   viewBox="0 0 24 24"
+                  width="1em"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.572 1.572 0 01-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 10-2.424 0v1.855a4 4 0 003.995 4h15.768a4 4 0 004-4V18.15a1.212 1.212 0 00-1.217-1.212z"
+                    d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.57 1.57 0 0 1-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 1 0-2.424 0v1.855a4 4 0 0 0 3.995 4h15.768a4 4 0 0 0 4-4V18.15a1.21 1.21 0 0 0-1.217-1.212"
                   />
                   <path
-                    d="M11.879 0A1.94 1.94 0 009.94 1.939v9.066a.25.25 0 01-.25.25H7.031a.97.97 0 00-.732 1.606l4.848 5.576a.969.969 0 001.464 0l4.848-5.576a.97.97 0 00-.732-1.606h-2.659a.25.25 0 01-.25-.25V1.939A1.94 1.94 0 0011.879 0z"
+                    d="M11.879 0A1.94 1.94 0 0 0 9.94 1.939v9.066a.25.25 0 0 1-.25.25H7.031a.97.97 0 0 0-.732 1.606l4.848 5.576a.97.97 0 0 0 1.464 0l4.848-5.576a.97.97 0 0 0-.732-1.606h-2.659a.25.25 0 0 1-.25-.25V1.939A1.94 1.94 0 0 0 11.879 0"
                   />
                 </svg>
               </button>
@@ -615,20 +622,21 @@ exports[`<EventList /> should render correctly 1`] = `
                 onFocus={[Function]}
                 onMouseEnter={[Function]}
                 onMouseLeave={[Function]}
-                tabIndex={0}
               >
                 <svg
                   aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                   fill="currentColor"
+                  height="1em"
                   viewBox="0 0 24 24"
+                  width="1em"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.572 1.572 0 01-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 10-2.424 0v1.855a4 4 0 003.995 4h15.768a4 4 0 004-4V18.15a1.212 1.212 0 00-1.217-1.212z"
+                    d="M22.546 16.938c-.67 0-1.212.543-1.212 1.212v1.855a1.57 1.57 0 0 1-1.571 1.57H3.995c-.867 0-1.57-.703-1.571-1.57V18.15a1.212 1.212 0 1 0-2.424 0v1.855a4 4 0 0 0 3.995 4h15.768a4 4 0 0 0 4-4V18.15a1.21 1.21 0 0 0-1.217-1.212"
                   />
                   <path
-                    d="M11.879 0A1.94 1.94 0 009.94 1.939v9.066a.25.25 0 01-.25.25H7.031a.97.97 0 00-.732 1.606l4.848 5.576a.969.969 0 001.464 0l4.848-5.576a.97.97 0 00-.732-1.606h-2.659a.25.25 0 01-.25-.25V1.939A1.94 1.94 0 0011.879 0z"
+                    d="M11.879 0A1.94 1.94 0 0 0 9.94 1.939v9.066a.25.25 0 0 1-.25.25H7.031a.97.97 0 0 0-.732 1.606l4.848 5.576a.97.97 0 0 0 1.464 0l4.848-5.576a.97.97 0 0 0-.732-1.606h-2.659a.25.25 0 0 1-.25-.25V1.939A1.94 1.94 0 0 0 11.879 0"
                   />
                 </svg>
               </button>

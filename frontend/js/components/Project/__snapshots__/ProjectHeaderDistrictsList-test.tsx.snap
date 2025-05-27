@@ -13,18 +13,20 @@ Array [
       aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
+      height="1em"
       viewBox="0 0 9 12"
+      width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+        d="M4.321 1a3.32 3.32 0 0 1 3.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 0 1-.373 0C3.435 9.805 1 5.892 1 4.321A3.32 3.32 0 0 1 4.321 1"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={0.8}
       />
       <path
-        d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+        d="M4.322 5.65a1.329 1.329 0 1 0 0-2.657 1.329 1.329 0 0 0 0 2.657"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -119,18 +121,20 @@ Array [
       aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
+      height="1em"
       viewBox="0 0 9 12"
+      width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+        d="M4.321 1a3.32 3.32 0 0 1 3.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 0 1-.373 0C3.435 9.805 1 5.892 1 4.321A3.32 3.32 0 0 1 4.321 1"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={0.8}
       />
       <path
-        d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+        d="M4.322 5.65a1.329 1.329 0 1 0 0-2.657 1.329 1.329 0 0 0 0 2.657"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -225,18 +229,20 @@ Array [
       aria-hidden="true"
       className="sc-bcXGCL sc-eJDTud jXjPim hEjMCZ cap-icon"
       fill="none"
+      height="1em"
       viewBox="0 0 9 12"
+      width="1em"
       xmlns="http://www.w3.org/2000/svg"
     >
       <path
-        d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+        d="M4.321 1a3.32 3.32 0 0 1 3.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 0 1-.373 0C3.435 9.805 1 5.892 1 4.321A3.32 3.32 0 0 1 4.321 1"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={0.8}
       />
       <path
-        d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+        d="M4.322 5.65a1.329 1.329 0 1 0 0-2.657 1.329 1.329 0 0 0 0 2.657"
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"

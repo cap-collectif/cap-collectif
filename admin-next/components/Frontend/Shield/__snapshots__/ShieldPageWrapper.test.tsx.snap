@@ -36,11 +36,13 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
           aria-hidden="true"
           className="sc-bcXGCL sc-eJDTud erCMMd hEjMCZ cap-icon sc-oZHua kslOoH"
           fill="none"
+          height="1em"
           viewBox="0 0 12 12"
+          width="1em"
           xmlns="http://www.w3.org/2000/svg"
         >
           <path
-            d="M11 6a5 5 0 11-5-5"
+            d="M11 6a5 5 0 1 1-5-5"
             stroke="currentColor"
             strokeLinecap="round"
             strokeLinejoin="round"

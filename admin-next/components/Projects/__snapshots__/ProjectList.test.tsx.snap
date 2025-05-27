@@ -81,11 +81,13 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
                 fill="none"
+                height="1em"
                 viewBox="0 0 12 7"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+                  d="m1 1 4.837 4.934q.03.03.073.049a.24.24 0 0 0 .253-.05L11 1"
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -162,11 +164,13 @@ exports[`<ProjectList /> should render correctly 1`] = `
                     aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
+                    height="1em"
                     viewBox="0 0 12 7"
+                    width="1em"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+                      d="m1 1 4.837 4.934q.03.03.073.049a.24.24 0 0 0 .253-.05L11 1"
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -207,11 +211,13 @@ exports[`<ProjectList /> should render correctly 1`] = `
                     aria-hidden="true"
                     className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
                     fill="none"
+                    height="1em"
                     viewBox="0 0 12 7"
+                    width="1em"
                     xmlns="http://www.w3.org/2000/svg"
                   >
                     <path
-                      d="M11 6L6.163 1.066a.217.217 0 00-.074-.049.237.237 0 00-.252.05L1 6"
+                      d="M11 6 6.163 1.066a.2.2 0 0 0-.074-.049.24.24 0 0 0-.252.05L1 6"
                       stroke="currentColor"
                       strokeLinecap="round"
                       strokeLinejoin="round"
@@ -339,18 +345,19 @@ exports[`<ProjectList /> should render correctly 1`] = `
               onMouseDownCapture={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              tabIndex={0}
               type="button"
             >
               <svg
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
+                height="1em"
                 viewBox="0 0 12 4"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+                  d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
                 />
               </svg>
             </button>
@@ -661,18 +668,19 @@ exports[`<ProjectList /> should render correctly 1`] = `
               onMouseDownCapture={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              tabIndex={0}
               type="button"
             >
               <svg
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
+                height="1em"
                 viewBox="0 0 12 4"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+                  d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
                 />
               </svg>
             </button>
@@ -983,18 +991,19 @@ exports[`<ProjectList /> should render correctly 1`] = `
               onMouseDownCapture={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              tabIndex={0}
               type="button"
             >
               <svg
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
+                height="1em"
                 viewBox="0 0 12 4"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+                  d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
                 />
               </svg>
             </button>
@@ -1305,18 +1314,19 @@ exports[`<ProjectList /> should render correctly 1`] = `
               onMouseDownCapture={[Function]}
               onMouseEnter={[Function]}
               onMouseLeave={[Function]}
-              tabIndex={0}
               type="button"
             >
               <svg
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
+                height="1em"
                 viewBox="0 0 12 4"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M0 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.609 0zM4.696 2.087a1.304 1.304 0 102.609 0 1.304 1.304 0 00-2.61 0zM9.391 2.087a1.304 1.304 0 102.61 0 1.304 1.304 0 00-2.61 0z"
+                  d="M0 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.609 0M4.696 2.087a1.304 1.304 0 1 0 2.609 0 1.304 1.304 0 0 0-2.61 0M9.391 2.087a1.304 1.304 0 1 0 2.61 0 1.304 1.304 0 0 0-2.61 0"
                 />
               </svg>
             </button>

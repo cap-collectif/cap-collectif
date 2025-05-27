@@ -25,18 +25,20 @@ Array [
               aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud bJkauI hEjMCZ cap-icon"
               fill="none"
+              height="1em"
               viewBox="0 0 12 12"
+              width="1em"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M6 1v1.667M6 9.333V11M1 6h1.667M9.333 6H11M6 9.333a3.333 3.333 0 100-6.666 3.333 3.333 0 000 6.666z"
+                d="M6 1v1.667M6 9.333V11M1 6h1.667M9.333 6H11M6 9.333a3.333 3.333 0 1 0 0-6.666 3.333 3.333 0 0 0 0 6.666"
                 stroke="currentColor"
                 strokeLinecap="round"
                 strokeLinejoin="round"
                 strokeWidth={0.8}
               />
               <path
-                d="M6 4.333a1.667 1.667 0 110 3.334 1.667 1.667 0 010-3.334z"
+                d="M6 4.333a1.667 1.667 0 1 1 0 3.334 1.667 1.667 0 0 1 0-3.334"
                 fill="currentColor"
               />
             </svg>
@@ -49,7 +51,9 @@ Array [
               aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud bJkauI hEjMCZ cap-icon"
               fill="none"
+              height="1em"
               viewBox="0 0 12 12"
+              width="1em"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
@@ -69,7 +73,9 @@ Array [
               aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud bJkauI hEjMCZ cap-icon"
               fill="none"
+              height="1em"
               viewBox="0 0 12 2"
+              width="1em"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path

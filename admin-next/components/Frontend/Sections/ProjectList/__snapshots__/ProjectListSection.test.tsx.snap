@@ -94,16 +94,18 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   aria-hidden="true"
                   className="sc-bcXGCL sc-eJDTud jThTHJ knzWyK cap-icon"
                   fill="none"
+                  height="1em"
                   style={
                     {
                       "cursor": "pointer",
                     }
                   }
                   viewBox="0 0 12 7"
+                  width="1em"
                   xmlns="http://www.w3.org/2000/svg"
                 >
                   <path
-                    d="M6 7c.164 0 .326-.032.475-.095.15-.063.283-.155.392-.27l4.916-5.216a.827.827 0 00.214-.62.845.845 0 00-.311-.584.968.968 0 00-.66-.214.954.954 0 00-.632.277l-4.3 4.562a.133.133 0 01-.188 0L1.606.278A.954.954 0 00.974.001a.967.967 0 00-.66.214A.845.845 0 00.003.8a.827.827 0 00.214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097z"
+                    d="M6 7c.164 0 .326-.032.475-.095q.227-.096.392-.27l4.916-5.216a.83.83 0 0 0 .214-.62.85.85 0 0 0-.311-.584.97.97 0 0 0-.66-.214.95.95 0 0 0-.632.277l-4.3 4.562a.133.133 0 0 1-.188 0L1.606.278A.95.95 0 0 0 .974.001a.97.97 0 0 0-.66.214A.85.85 0 0 0 .003.8a.83.83 0 0 0 .214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097"
                     fill="currentColor"
                   />
                 </svg>
@@ -139,11 +141,13 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               aria-hidden="true"
               className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
               fill="none"
+              height="1em"
               viewBox="0 0 12 7"
+              width="1em"
               xmlns="http://www.w3.org/2000/svg"
             >
               <path
-                d="M6 7c.164 0 .326-.032.475-.095.15-.063.283-.155.392-.27l4.916-5.216a.827.827 0 00.214-.62.845.845 0 00-.311-.584.968.968 0 00-.66-.214.954.954 0 00-.632.277l-4.3 4.562a.133.133 0 01-.188 0L1.606.278A.954.954 0 00.974.001a.967.967 0 00-.66.214A.845.845 0 00.003.8a.827.827 0 00.214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097z"
+                d="M6 7c.164 0 .326-.032.475-.095q.227-.096.392-.27l4.916-5.216a.83.83 0 0 0 .214-.62.85.85 0 0 0-.311-.584.97.97 0 0 0-.66-.214.95.95 0 0 0-.632.277l-4.3 4.562a.133.133 0 0 1-.188 0L1.606.278A.95.95 0 0 0 .974.001a.97.97 0 0 0-.66.214A.85.85 0 0 0 .003.8a.83.83 0 0 0 .214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097"
                 fill="currentColor"
               />
             </svg>
@@ -196,11 +200,13 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud bvvUsr hEjMCZ cap-icon"
                 fill="none"
+                height="1em"
                 viewBox="0 0 11 11"
+                width="1em"
                 xmlns="http://www.w3.org/2000/svg"
               >
                 <path
-                  d="M4.333 7.667a3.333 3.333 0 100-6.667 3.333 3.333 0 000 6.667zM6.69 6.69l3.893 3.893"
+                  d="M4.333 7.667a3.333 3.333 0 1 0 0-6.667 3.333 3.333 0 0 0 0 6.667M6.69 6.69l3.893 3.893"
                   stroke="currentColor"
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -318,11 +324,13 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                       aria-hidden="true"
                       className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
                       fill="none"
+                      height="1em"
                       viewBox="0 0 10 12"
+                      width="1em"
                       xmlns="http://www.w3.org/2000/svg"
                     >
                       <path
-                        d="M8.5 4.75h-.375V3.375a3.375 3.375 0 10-6.75 0V4.75H1a1 1 0 00-1 1V11a1 1 0 001 1h7.5a1 1 0 001-1V5.75a1 1 0 00-1-1zm-4.75 3a1 1 0 111.5.861V9.75a.5.5 0 01-1 0V8.611a.997.997 0 01-.5-.861zM2.625 3.375a2.125 2.125 0 114.25 0V4.5a.25.25 0 01-.25.25h-3.75a.25.25 0 01-.25-.25V3.375z"
+                        d="M8.5 4.75h-.375V3.375a3.375 3.375 0 1 0-6.75 0V4.75H1a1 1 0 0 0-1 1V11a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5.75a1 1 0 0 0-1-1m-4.75 3a1 1 0 1 1 1.5.861V9.75a.5.5 0 0 1-1 0V8.611a1 1 0 0 1-.5-.861M2.625 3.375a2.125 2.125 0 1 1 4.25 0V4.5a.25.25 0 0 1-.25.25h-3.75a.25.25 0 0 1-.25-.25z"
                         fill="currentColor"
                       />
                     </svg>
@@ -350,11 +358,20 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
+                          height="1em"
                           viewBox="0 0 11 12"
+                          width="1em"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M4.333 11.334H2a1 1 0 01-1-1M9 5V1.667a.333.333 0 00-.333-.334H2.333C1.597 1.333 1 1.93 1 2.667v7.667a1 1 0 011-1h2.333"
+                            d="M4.333 11.334H2a1 1 0 0 1-1-1"
+                            stroke="currentColor"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                            strokeWidth={0.8}
+                          />
+                          <path
+                            d="M9 5V1.667a.333.333 0 0 0-.333-.334H2.333C1.597 1.334 1 1.93 1 2.668v7.667a1 1 0 0 1 1-1h2.333"
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -362,7 +379,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           />
                           <path
                             clipRule="evenodd"
-                            d="M7.978 6.191l.684 1.476h1.333a.327.327 0 01.23.57L9.07 9.376l.641 1.474a.35.35 0 01-.497.436l-1.552-.871-1.55.871a.35.35 0 01-.498-.436l.641-1.473L5.1 8.238a.326.326 0 01.228-.571h1.334l.686-1.477a.356.356 0 01.63.001z"
+                            d="m7.978 6.191.684 1.476h1.333a.327.327 0 0 1 .23.57L9.07 9.376l.641 1.474a.35.35 0 0 1-.497.436l-1.552-.871-1.55.871a.35.35 0 0 1-.498-.436l.641-1.473L5.1 8.238a.326.326 0 0 1 .228-.571h1.334l.686-1.477a.356.356 0 0 1 .63.001"
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -383,18 +400,20 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
+                          height="1em"
                           viewBox="0 0 9 12"
+                          width="1em"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
-                            d="M4.321 1a3.321 3.321 0 013.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 01-.373 0C3.435 9.805 1 5.892 1 4.321A3.321 3.321 0 014.321 1v0z"
+                            d="M4.321 1a3.32 3.32 0 0 1 3.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 0 1-.373 0C3.435 9.805 1 5.892 1 4.321A3.32 3.32 0 0 1 4.321 1"
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeLinejoin="round"
                             strokeWidth={0.8}
                           />
                           <path
-                            d="M4.322 5.65a1.329 1.329 0 100-2.657 1.329 1.329 0 000 2.657z"
+                            d="M4.322 5.65a1.329 1.329 0 1 0 0-2.657 1.329 1.329 0 0 0 0 2.657"
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeLinejoin="round"
@@ -414,12 +433,14 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           aria-hidden="true"
                           className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
                           fill="none"
+                          height="1em"
                           viewBox="0 0 12 10"
+                          width="1em"
                           xmlns="http://www.w3.org/2000/svg"
                         >
                           <path
                             clipRule="evenodd"
-                            d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.785.785 0 003.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727V3.182z"
+                            d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
                             stroke="currentColor"
                             strokeLinecap="round"
                             strokeLinejoin="round"

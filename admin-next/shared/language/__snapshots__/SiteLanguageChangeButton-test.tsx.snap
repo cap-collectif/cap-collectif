@@ -19,11 +19,13 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
         aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud jCBnIZ hEjMCZ cap-icon"
         fill="none"
+        height="1em"
         viewBox="0 0 24 24"
+        width="1em"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M24 12a12 12 0 10-12 12h.125A11.888 11.888 0 0024 12.125V12zm-2 0c0 .89-.12 1.776-.36 2.633a.499.499 0 01-.68.326 3.485 3.485 0 01-1.517-1.267l-2.216-3.33a2.5 2.5 0 00-2.08-1.114h-.434a2.75 2.75 0 010-5.5h2.772c.104 0 .204.033.29.093A9.995 9.995 0 0122 12zM2.179 10.155a.501.501 0 01.492-.4h4.336a3.478 3.478 0 012.476 1.025L10.6 11.9a3.5 3.5 0 01.14 4.8l-1.36 1.53a2.5 2.5 0 00-.63 1.66v.827a.5.5 0 01-.7.459A10 10 0 012 12c0-.619.061-1.237.179-1.845z"
+          d="M24 12a12 12 0 1 0-12 12h.125A11.89 11.89 0 0 0 24 12.125zm-2 0c0 .89-.12 1.776-.36 2.633a.5.5 0 0 1-.68.326 3.5 3.5 0 0 1-1.517-1.267l-2.216-3.33a2.5 2.5 0 0 0-2.08-1.114h-.434a2.75 2.75 0 0 1 0-5.5h2.772c.104 0 .204.033.29.093A10 10 0 0 1 22 12M2.179 10.155a.5.5 0 0 1 .492-.4h4.336a3.48 3.48 0 0 1 2.476 1.025L10.6 11.9a3.5 3.5 0 0 1 .14 4.8l-1.36 1.53a2.5 2.5 0 0 0-.63 1.66v.827a.5.5 0 0 1-.7.459A10 10 0 0 1 2 12c0-.619.061-1.237.179-1.845"
           fill="currentColor"
         />
       </svg>
@@ -42,11 +44,13 @@ exports[`<SiteLanguageChangeButton /> renders correctly 1`] = `
         aria-hidden="true"
         className="sc-bcXGCL sc-eJDTud jCBnIZ hEjMCZ cap-icon"
         fill="none"
+        height="1em"
         viewBox="0 0 12 7"
+        width="1em"
         xmlns="http://www.w3.org/2000/svg"
       >
         <path
-          d="M1 1l4.837 4.934c.02.02.045.037.073.049a.237.237 0 00.253-.05L11 1"
+          d="m1 1 4.837 4.934q.03.03.073.049a.24.24 0 0 0 .253-.05L11 1"
           stroke="currentColor"
           strokeLinecap="round"
           strokeLinejoin="round"
