@@ -10,6 +10,7 @@ exercise_html_purifier:
                 HTML.SafeIframe: true
                 HTML.Trusted: true
                 Attr.AllowedFrameTargets: ['_blank']
+                Attr.EnableID: true
                 URI.SafeIframeRegexp: "#^(https?:)?//([-\\w\\.]+)+(:\\d+)?(/([\\w/_\\.]*(\\?\\S+)?)?)?#"
                 CSS.AllowTricky: true
                 CSS.Trusted: true
