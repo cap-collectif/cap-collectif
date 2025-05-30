@@ -104,8 +104,6 @@ export const FieldInput: FC<FieldInputProps> = forwardRef(
       field.onBlur(e)
     }
 
-    console.log(type,id)
-
     switch (type) {
       default:
       case 'hidden':
