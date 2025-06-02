@@ -9,9 +9,12 @@ use Capco\UserBundle\Repository\UserRepository;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 use Sonata\AdminBundle\Admin\BreadcrumbsBuilderInterface;
 use Sonata\AdminBundle\Admin\Pool;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+use Symfony\Component\HttpKernel\KernelInterface;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 
 /**
@@ -19,11 +22,17 @@ use Symfony\Component\Security\Core\Exception\AccessDeniedException;
  */
 class UserController extends CRUDController
 {
+    private const USER_THRESHOLD = 15000;
+    private const CRON_TRIGGER_MINUTE_EARLY = 23;
+    private const CRON_TRIGGER_MINUTE_LATE = 53;
+
     public function __construct(
         BreadcrumbsBuilderInterface $breadcrumbsBuilder,
         Pool $pool,
         private readonly CronTimeInterval $cronTimeInterval,
-        private readonly SessionInterface $session
+        private readonly SessionInterface $session,
+        private readonly KernelInterface $kernel,
+        private readonly UserRepository $userRepository
     ) {
         parent::__construct($breadcrumbsBuilder, $pool);
     }
@@ -56,13 +65,27 @@ class UserController extends CRUDController
         $filename = 'users.csv';
         $absolutePath = $path . $filename;
 
-        if (!file_exists($absolutePath)) {
+        $usersCount = $this->userRepository->count([]);
+
+        if (($usersCount > self::USER_THRESHOLD) && !file_exists($absolutePath)) {
+            $cronExecutionTime = ((int) (new \DateTime())->format('i') > self::CRON_TRIGGER_MINUTE_EARLY)
+                ? self::CRON_TRIGGER_MINUTE_LATE
+                : self::CRON_TRIGGER_MINUTE_EARLY;
+
             $this->session
                 ->getFlashBag()
-                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime(23))
+                ->add('danger', $this->cronTimeInterval->getRemainingCronExecutionTime($cronExecutionTime))
             ;
 
             return $this->redirect($request->headers->get('referer'));
+        }
+
+        if ($usersCount < self::USER_THRESHOLD) {
+            $application = new Application($this->kernel);
+            $application->setAutoExit(false);
+
+            $input = new ArrayInput(['command' => 'capco:export:users']);
+            $application->run($input);
         }
 
         $contentType = 'text/csv';
