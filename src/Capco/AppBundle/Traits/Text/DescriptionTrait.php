@@ -9,7 +9,7 @@ trait DescriptionTrait
     /**
      * @ORM\Column(name="description", type="text", nullable=true)
      */
-    private ?string $description;
+    private ?string $description = null;
 
     public function getDescription(): ?string
     {

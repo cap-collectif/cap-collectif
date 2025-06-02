@@ -77,8 +77,6 @@ services:
 
     Capco\AppBundle\GraphQL\Mutation\GroupMutation:
         tags:
-            - { name: overblog_graphql.mutation, alias: 'createGroup', method: 'create' }
-            - { name: overblog_graphql.mutation, alias: 'updateGroup', method: 'update' }
             - { name: overblog_graphql.mutation, alias: 'deleteGroup', method: 'delete' }
             - {
                   name: overblog_graphql.mutation,

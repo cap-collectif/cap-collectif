@@ -1,6 +1,8 @@
-export const EMAIL_SEPARATOR = ','
+export const EMAIL_SEPARATOR: string = ','
 
 export const CONNECTION_NODES_PER_PAGE: number = 50
+
+export const helpLinkTranslationKey: string = 'csv-import-help-link'
 
 export type EmailInput = {
   email: string
@@ -15,6 +17,12 @@ export type EmailInput = {
 export const getListAsString = (array: string[]): string => {
   if (array.length === 0) return ''
   return array.join(', ') + '.'
+  /**
+   * Splits CSV content passed as a string into an array of lines.
+   *
+   * @param {string} content - The CSV content as a string.
+   * @returns {string[]} An array of lines from the CSV content.
+   */
 }
 
 /**
@@ -23,18 +31,5 @@ export const getListAsString = (array: string[]): string => {
  * @returns {string[]} An array of line numbers, indicating which lines met a specific condition in the imported .csv file.
  */
 export const getLineNumbers = (lines: EmailInput[]): string[] => {
-  return lines.map(item => item.line)
-}
-
-/**
- * Splits a string into elements (emails), separated by a predefined separator
- *
- * @param {string} string - A string containing email addresses separated by the separator.
- * @returns {string[]} An array of email addresses.
- */
-export const splitEmailsFromString = (string: string, separator: string = EMAIL_SEPARATOR): string[] => {
-  if (string === '') {
-    return []
-  }
-  return string?.split(separator)
+  return lines.map(item => item.line) || []
 }

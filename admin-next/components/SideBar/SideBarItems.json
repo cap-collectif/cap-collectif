@@ -155,7 +155,7 @@
             },
             {
                 "title": "admin.label.group",
-                "href": "/admin/capco/app/group/list",
+                "href": "/admin-next/groups",
                 "rolesRequired": [],
                 "featuresRequired": []
             },

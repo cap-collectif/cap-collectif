@@ -17,10 +17,10 @@ services:
             $locale: '%locale%'
             $env: '%kernel.environment%'
             $sendInBlueSecret: '%sendinblue_secret%'
+            $exportDir: '%kernel.project_dir%/public/export/'
 
     Capco\AppBundle\Controller\Site\:
         resource: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/'
-        exclude: '%kernel.project_dir%/src/Capco/AppBundle/Controller/Site/{ExportController.php}'
         calls:
             - [setContainer, ['@service_container']]
 
@@ -38,6 +38,11 @@ services:
     Capco\AppBundle\Controller\Site\EventController:
         arguments:
             $formFactory: '@form.factory'
+
+    Capco\AdminBundle\Controller\GroupController:
+        autowire: true
+        arguments:
+            $userGroupsFilePathResolver: '@Capco\AppBundle\Command\Service\FilePathResolver\UserGroupsFilePathResolver'
 
     ###################### USER BUNDLE #############################
 
@@ -62,10 +67,6 @@ services:
     Capco\AppBundle\Controller\Api\GraphiQLController:
         public: true
 
-    Capco\AppBundle\Controller\Site\ExportController:
-        arguments:
-            $exportDir: '%kernel.project_dir%/public/export/'
-
     Capco\AppBundle\Controller\Site\DeveloperController:
         public: true
 
@@ -79,9 +80,3 @@ services:
 
     Capco\AdminBundle\Controller\SectionController:
         public: true
-
-    Capco\AppBundle\Controller\Site\ProjectController:
-        public: true
-        autowire: true
-        arguments:
-            $exportDir: '%kernel.project_dir%/public/export/'

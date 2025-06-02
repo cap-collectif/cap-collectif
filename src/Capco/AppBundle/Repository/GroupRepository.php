@@ -93,13 +93,13 @@ class GroupRepository extends EntityRepository
     {
         $conn = $this->_em->getConnection();
         $sql = <<<'SQL'
-                        SELECT u1.email AS email, u1.username AS username, 'MEMBER' AS type
+                        SELECT TO_BASE64(CONCAT('User:', u1.id)) AS userId, u1.email AS email, u1.username AS username, 'MEMBER' AS type
                         FROM user_group g
                         LEFT JOIN user_in_group uig ON uig.group_id = g.id
                         LEFT JOIN fos_user u1 ON u1.id = uig.user_id
                         WHERE g.id = :groupId and (u1.email like :term OR u1.username like :term)
                         UNION
-                        SELECT user_invite.email, '' AS username, 'INVITATION' AS type
+                        SELECT null as id, user_invite.email, '' AS username, 'INVITATION' AS type
                         FROM user_invite_groups
                         LEFT JOIN user_invite ON user_invite.id = user_invite_groups.user_invite_id
                         WHERE user_invite_groups.group_id = :groupId AND user_invite.email LIKE :term

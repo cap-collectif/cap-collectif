@@ -170,6 +170,26 @@ class UserRepository extends EntityRepository
         ;
     }
 
+    /**
+     * @param string[] $userIds
+     *
+     * @return User[]
+     */
+    public function findUsersNotInGroup(array $userIds, string $groupId): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->leftJoin('u.userGroups', 'uig', Expr\Join::WITH, 'uig.group = :groupId')
+            ->where('u.id IN (:userIds)')
+            ->andWhere('uig.group IS NULL')
+            ->setParameters([
+                'userIds' => $userIds,
+                'groupId' => $groupId,
+            ])
+        ;
+
+        return $qb->getQuery()->getResult();
+    }
+
     public function getRegisteredNotConfirmedByEmailCount(): int
     {
         // TODO why do we need DISTINCT ?

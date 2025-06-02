@@ -4,7 +4,7 @@ import { useIntl } from 'react-intl'
 import { CsvEmails, EmailAvailabilities } from '@components/UserInvitation/UserInvite.type'
 import { filterAvailableEmails } from '@components/UserInvitation/utils'
 import BannersContainer, { Banner, BannerProps } from '@components/BannersContainer/BannersContainer'
-import { getLineNumbers, getListAsString } from '@shared/utils/csvUpload'
+import { getLineNumbers, getListAsString, helpLinkTranslationKey } from '@shared/utils/csvUpload'
 
 type Props = {
   csvEmails: CsvEmails
@@ -35,10 +35,8 @@ export const CsvImportResult = ({ csvEmails, emailAvailabilities, isCorrectForma
   const invalidEmailsLineNumbers = getLineNumbers(invalidLines)
   const duplicateEmailsLineNumbers = getLineNumbers(duplicateLines)
 
-  const helpLink = 'https://aide.cap-collectif.com/article/254-importer-des-propositions'
-
   const getBanners = (): Array<BannerProps> => {
-    const banners = []
+    const banners: Array<BannerProps> = []
 
     //  email already linked to an account
     if (alreadyRegistered.length > 0) {
@@ -130,7 +128,7 @@ export const CsvImportResult = ({ csvEmails, emailAvailabilities, isCorrectForma
             count: invalidLines.length,
             // eslint-disable-next-line react/display-name
             a: (...chunks) => (
-              <Link href={helpLink} color="primary.base">
+              <Link href={intl.formatMessage({ id: helpLinkTranslationKey })} color="primary.base">
                 {chunks}
               </Link>
             ),

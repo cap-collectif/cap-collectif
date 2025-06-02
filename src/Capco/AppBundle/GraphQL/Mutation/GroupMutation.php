@@ -3,17 +3,14 @@
 namespace Capco\AppBundle\GraphQL\Mutation;
 
 use Capco\AppBundle\Entity\Group;
-use Capco\AppBundle\Entity\UserGroup;
 use Capco\AppBundle\Form\GroupCreateType;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\EmailingCampaignRepository;
 use Capco\AppBundle\Repository\GroupRepository;
-use Capco\AppBundle\Repository\UserGroupRepository;
+use Capco\AppBundle\Service\GroupService;
 use Capco\UserBundle\Entity\User;
-use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
-use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
 use Overblog\GraphQLBundle\Error\UserError;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
@@ -24,18 +21,29 @@ class GroupMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly LoggerInterface $logger, private readonly EntityManagerInterface $entityManager, private readonly FormFactoryInterface $formFactory, private readonly UserRepository $userRepository, private readonly UserGroupRepository $userGroupRepository, private readonly GroupRepository $groupRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly EmailingCampaignRepository $emailingCampaignRepository)
-    {
+    public function __construct(
+        private readonly LoggerInterface $logger,
+        private readonly EntityManagerInterface $entityManager,
+        private readonly FormFactoryInterface $formFactory,
+        private readonly GroupRepository $groupRepository,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly EmailingCampaignRepository $emailingCampaignRepository,
+        private readonly GroupService $groupService
+    ) {
     }
 
-    public function create(Argument $input): array
+    /**
+     * @param string[] $emails
+     *
+     * @return array{group: Group, importedUsers: User[], notFoundEmails: string[], alreadyImportedUsers: User[]}
+     */
+    public function create(array $emails, bool $dryRun, string $title, ?string $description): array
     {
-        $this->formatInput($input);
         $group = new Group();
 
         $form = $this->formFactory->create(GroupCreateType::class, $group);
 
-        $form->submit($input->getArrayCopy(), false);
+        $form->submit(['title' => $title, 'description' => $description], false);
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' create: ' . (string) $form->getErrors(true, false));
@@ -43,26 +51,48 @@ class GroupMutation implements MutationInterface
             throw new UserError('Can\'t create this group.');
         }
 
-        $this->entityManager->persist($group);
-        $this->entityManager->flush();
-
-        return ['group' => $group];
-    }
-
-    public function update(Argument $input, User $user): array
-    {
-        $this->formatInput($input);
-        $arguments = $input->getArrayCopy();
-        $group = $this->globalIdResolver->resolve($arguments['groupId'], $user);
-
-        if (!$group) {
-            throw new UserError(sprintf('Unknown group with id "%d"', $arguments['groupId']));
+        if (!$dryRun) {
+            $this->entityManager->persist($group);
         }
 
-        unset($arguments['groupId']);
+        [$importedUsers, $notFoundEmails, $alreadyImportedUsers] = $this->groupService->addUsersToGroupFromEmail($emails, $group, $dryRun, true);
+
+        if (!$dryRun) {
+            $this->entityManager->flush();
+        }
+
+        return [
+            'group' => $group,
+            'importedUsers' => $importedUsers,
+            'notFoundEmails' => $notFoundEmails,
+            'alreadyImportedUsers' => $alreadyImportedUsers,
+        ];
+    }
+
+    /**
+     * @param string[] $emails
+     * @param string[] $toAddUserIds
+     * @param string[] $toRemoveUserIds
+     *
+     * @return array{group: Group, importedUsers: User[], notFoundEmails: string[], alreadyImportedUsers: User[]}
+     */
+    public function update(
+        string $groupId,
+        array $emails,
+        array $toAddUserIds,
+        string $title,
+        ?string $description,
+        array $toRemoveUserIds,
+        User $user
+    ): array {
+        $group = $this->globalIdResolver->resolve($groupId, $user);
+
+        if (!$group) {
+            throw new UserError(sprintf('Unknown group with id "%d"', $groupId));
+        }
 
         $form = $this->formFactory->create(GroupCreateType::class, $group);
-        $form->submit($arguments, false);
+        $form->submit(['title' => $title, 'description' => $description], false);
 
         if (!$form->isValid()) {
             $this->logger->error(__METHOD__ . ' update: ' . (string) $form->getErrors(true, false));
@@ -70,9 +100,22 @@ class GroupMutation implements MutationInterface
             throw new UserError('Can\'t update this group.');
         }
 
+        [$importedUsers, $notFoundEmails, $alreadyImportedUsers] = $this->groupService->addUsersToGroupFromEmail($emails, $group);
+
+        if ([] !== $toAddUserIds) {
+            $this->groupService->addUsersInGroupFromIds($toAddUserIds, $group);
+        }
+
+        $this->groupService->deleteUsersInGroup($toRemoveUserIds, $group);
+
         $this->entityManager->flush();
 
-        return ['group' => $group];
+        return [
+            'group' => $group,
+            'importedUsers' => $importedUsers,
+            'notFoundEmails' => $notFoundEmails,
+            'alreadyImportedUsers' => $alreadyImportedUsers,
+        ];
     }
 
     public function delete(string $groupId, User $user): array
@@ -90,6 +133,8 @@ class GroupMutation implements MutationInterface
             throw new UserError(sprintf('This group can\'t be deleted because it\'s protected "%s"', $groupId));
         }
 
+        $groupId = $group->getId();
+
         try {
             $this->entityManager->remove($group);
             $this->entityManager->flush();
@@ -100,29 +145,18 @@ class GroupMutation implements MutationInterface
             throw new UserError('Can\'t delete this group.');
         }
 
-        return ['deletedGroupTitle' => $group->getTitle()];
+        return ['deletedGroupId' => $groupId];
     }
 
-    public function deleteUserInGroup(string $userId, string $groupId, $viewer): array
+    /**
+     * @return array{group: Group}
+     */
+    public function deleteUserInGroup(string $userId, string $groupId, mixed $viewer): array
     {
-        $userId = GlobalId::fromGlobalId($userId)['id'];
         $group = $this->globalIdResolver->resolve($groupId, $viewer);
-        $userGroup = $this->userGroupRepository->findOneBy([
-            'user' => $userId,
-            'group' => $group->getId(),
-        ]);
 
-        if (!$userGroup) {
-            $error = sprintf('Cannot find the user "%u" in group "%g"', $userId, $groupId);
+        $this->groupService->deleteUsersInGroup([$userId], $group);
 
-            $this->logger->error(__METHOD__ . ' deleteUserInGroup: ' . $error);
-
-            throw new UserError('Can\'t delete this user in group.');
-        }
-
-        $group = $userGroup->getGroup();
-
-        $this->entityManager->remove($userGroup);
         $this->entityManager->flush();
 
         return ['group' => $group];
@@ -143,20 +177,12 @@ class GroupMutation implements MutationInterface
             ;
 
             $this->entityManager->persist($group);
-            $this->entityManager->flush();
         }
 
-        $this->addUsersInGroup(
-            [GlobalId::toGlobalId('User', $user->getId())],
-            GlobalId::toGlobalId('Group', $group->getId()),
-            '.anon'
-        );
-    }
+        $groupId = GlobalId::toGlobalId('Group', $group->getId());
 
-    public function addUsersInGroup(array $users, string $groupId, $viewer): array
-    {
         /** @var Group $group */
-        $group = $this->globalIdResolver->resolve($groupId, $viewer);
+        $group = $this->globalIdResolver->resolve($groupId, $user);
 
         if (!$group) {
             $error = sprintf('Cannot find the group "%g"', $groupId);
@@ -165,42 +191,11 @@ class GroupMutation implements MutationInterface
             throw new UserError($error);
         }
 
-        try {
-            foreach ($users as $userId) {
-                $userId = GlobalId::fromGlobalId($userId)['id'];
-                /** @var User $user */
-                $user = $this->userRepository->find($userId);
+        $this->groupService->addUsersInGroupFromIds(
+            [GlobalId::toGlobalId('User', $user->getId())],
+            $group
+        );
 
-                if ($user) {
-                    $userGroup = $this->userGroupRepository->findOneBy([
-                        'user' => $user,
-                        'group' => $group,
-                    ]);
-
-                    if (!$userGroup) {
-                        $userGroup = new UserGroup();
-                        $userGroup->setUser($user)->setGroup($group);
-
-                        $this->entityManager->persist($userGroup);
-                    }
-                }
-            }
-
-            $this->entityManager->flush();
-
-            return ['group' => $group];
-        } catch (\Exception $e) {
-            $this->logger->error(
-                __METHOD__ .
-                    ' addUsersInGroup: ' .
-                    sprintf(
-                        'Cannot add users in group with id "%g. Cause : %s"',
-                        $groupId,
-                        $e->getMessage()
-                    )
-            );
-
-            throw new UserError('Can\'t add users in group.');
-        }
+        $this->entityManager->flush();
     }
 }

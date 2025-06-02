@@ -4,6 +4,9 @@ InternalGroupMember:
         name: GroupMember
         description: 'A user invitation'
         fields:
+            userId:
+                type: 'String'
+                description: 'The id of the user when they have an account'
             username:
                 type: 'String!'
                 description: 'The user username if already registered otherwise empty string.'

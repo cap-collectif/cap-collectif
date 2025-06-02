@@ -2,5 +2,5 @@ DeleteGroupPayload:
     type: relay-mutation-payload
     config:
         fields:
-            deletedGroupTitle:
-                type: 'String!'
+            deletedGroupId:
+                type: 'ID!'

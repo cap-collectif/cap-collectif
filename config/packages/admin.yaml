@@ -812,19 +812,6 @@ services:
         calls:
             - [setTranslationDomain, [CapcoAppBundle]]
 
-    Capco\AdminBundle\Admin\GroupAdmin:
-        arguments: [~, Capco\AppBundle\Entity\Group, Capco\AdminBundle\Controller\CRUDController]
-        tags:
-            - {
-                  name: sonata.admin,
-                  manager_type: orm,
-                  group: sonata.admin.group.user,
-                  label: admin.label.group,
-                  label_translator_strategy: 'sonata.admin.label.strategy.noop',
-              }
-        calls:
-            - [setTranslationDomain, [CapcoAppBundle]]
-
     sonata.admin.action.retrieve_autocomplete_items:
         class: Capco\AdminBundle\Action\RetrieveAutocompleteItemsAction
         autowire: true

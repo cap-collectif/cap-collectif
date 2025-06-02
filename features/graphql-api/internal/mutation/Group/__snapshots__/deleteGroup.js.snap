@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations|deleteGroup admin should be able to delete a group. 1`] = `
+Object {
+  "deleteGroup": Object {
+    "deletedGroupId": "group2",
+  },
+}
+`;

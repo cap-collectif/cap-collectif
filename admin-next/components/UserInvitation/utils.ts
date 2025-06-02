@@ -1,5 +1,5 @@
 import { IntlShape } from 'react-intl'
-import { isEmail } from '../../../frontend/js/services/Validator'
+import { isEmail } from '@shared/utils/validators'
 import { environment } from '@utils/relay-environement'
 import { fetchQuery, GraphQLTaggedNode } from 'react-relay'
 import { CsvEmails, EmailAvailabilities } from '@components/UserInvitation/UserInvite.type'

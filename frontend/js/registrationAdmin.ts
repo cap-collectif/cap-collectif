@@ -3,8 +3,6 @@ import AdminRightNavbarApp from '~/startup/AdminRightNavbarApp'
 import SiteFaviconAdminPageApp from '~/startup/SiteFaviconAdminPageApp'
 import ProposalFormAdminPageApp from '~/startup/ProposalFormAdminPageApp'
 import QuestionnaireAdminPageApp from '~/startup/QuestionnaireAdminPageApp'
-import GroupAdminPageApp from '~/startup/GroupAdminPageApp'
-import GroupCreateButtonApp from '~/startup/GroupCreateButtonApp'
 import UserAdminCreateButtonApp from '~/startup/UserAdminCreateButtonApp'
 import ContactAdminPageApp from '~/startup/ContactAdminPageApp'
 import RegistrationAdminApp from '~/startup/RegistrationAdminApp'
@@ -38,8 +36,6 @@ ReactOnRails.register({
   AdminRightNavbarApp,
   ProposalFormAdminPageApp,
   QuestionnaireAdminPageApp,
-  GroupAdminPageApp,
-  GroupCreateButtonApp,
   UserAdminCreateButtonApp,
   ContactAdminPageApp,
   RegistrationAdminApp,

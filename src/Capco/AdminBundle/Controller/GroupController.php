@@ -2,37 +2,43 @@
 
 namespace Capco\AdminBundle\Controller;
 
-use Sonata\AdminBundle\Controller\CRUDController as Controller;
+use Capco\AppBundle\Command\Service\FilePathResolver\UserGroupsFilePathResolver;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
+use Symfony\Bundle\FrameworkBundle\Console\Application;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\Console\Input\ArrayInput;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\KernelInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
-class GroupController extends Controller
+class GroupController extends AbstractController
 {
+    public function __construct(
+        private readonly KernelInterface $kernel,
+        private readonly UserGroupsFilePathResolver $userGroupsFilePathResolver
+    ) {
+    }
+
+    /**
+     * @Route("/export-user-groups", name="app_user_groups_export")
+     * @Security("is_granted('ROLE_ADMIN')")
+     */
     public function exportAction(Request $request): Response
     {
-        $this->admin->checkAccess('export');
-        $trans = $this->get('translator');
+        $exportPath = $this->userGroupsFilePathResolver->getExportPath();
+        $filename = 'user_groups.csv';
 
-        $path = $this->container->getParameter('kernel.project_dir') . '/public/export/';
-        $filename = 'users.csv';
+        $application = new Application($this->kernel);
+        $application->setAutoExit(false);
 
-        if (!file_exists($path . $filename)) {
-            // We create a session for flashBag
-            $flashBag = $this->get('session')->getFlashBag();
-            $flashBag->add(
-                'danger',
-                $trans->trans('project.download.not_yet_generated', [], 'CapcoAppBundle')
-            );
+        $input = new ArrayInput(['command' => 'capco:export:user-groups']);
+        $application->run($input);
 
-            return $this->redirect($request->headers->get('referer'));
-        }
-
-        $absolutePath = $path . $filename;
+        $absolutePath = $exportPath;
         $contentType = 'text/csv';
 
-        $date = date('Y-m-d');
-
-        $response = $this->file($absolutePath, $date . '_' . $filename);
+        $response = $this->file($absolutePath, $filename);
         $response->headers->set('Content-Type', $contentType . '; charset=utf-8');
 
         return $response;

@@ -1,0 +1,8 @@
+﻿export_user_groups_title,export_user_groups_description,export_user_groups_count_user_groups,export_user_groups_created_at,export_user_groups_updated_at
+Super-administrateur,"Droits d'administration complet",6,"2017-01-01 00:00:00","2017-01-01 00:00:00"
+"Agent de la ville","Lorem ipsum dolor sit amet sapien estiam",3,"2017-01-02 00:00:00","2017-01-02 00:00:00"
+Utilisateurs,"Lorem ipsum dolor sit amet sapien estiam",129,"2017-01-03 00:00:00","2017-01-03 00:00:00"
+"Comité de suvi","Lorem ipsum dolor sit amet sapien estiam",1,"2017-01-04 00:00:00","2017-01-04 00:00:00"
+"Projet 2","Droits sur le projet 2",2,"2017-01-06 00:00:00","2017-01-06 00:00:00"
+"Evaluers on proposal2","Evaluers on proposal2",1,"2017-01-06 00:00:00","2017-01-06 00:00:00"
+"Evaluers on proposal3","Evaluers on proposal3",2,"2017-01-06 00:00:00","2017-01-06 00:00:00"

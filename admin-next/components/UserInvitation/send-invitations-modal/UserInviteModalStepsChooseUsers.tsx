@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useIntl } from 'react-intl'
-import { isEmail } from '@shared/utils/validator'
+import { isEmail } from '@shared/utils/validators'
 import {
   Button,
   CapUIIcon,
@@ -13,9 +13,9 @@ import {
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
-import { MAX_EMAILS } from '@components/UserInvitation/utils'
+import { MAX_EMAILS } from '../utils'
 import { CsvEmails } from '@components/UserInvitation/UserInvite.type'
-import { splitEmailsFromString } from '@shared/utils/csvUpload'
+import { splitEmailsFromString } from '@shared/utils/emailsInput'
 import ImportMembersUploader from './ImportMembersUploader'
 
 type Props = {

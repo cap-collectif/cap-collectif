@@ -3,9 +3,15 @@ CreateGroupInput:
     config:
         description: 'Create a group'
         fields:
-            title:
-                type: 'String!'
-                description: 'The title of the group'
             description:
                 type: 'String'
                 description: 'The description of the group'
+            dryRun:
+                type: 'Boolean!'
+                description: 'This option is useful if you want to test your emails list. Set it to true if you want to actually perform the import.'
+            emails:
+                type: '[Email!]!'
+                description: 'A list of email(s).'
+            title:
+                type: 'String!'
+                description: 'The title of the group'

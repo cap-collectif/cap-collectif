@@ -3,9 +3,21 @@ UpdateGroupInput:
     config:
         description: ''
         fields:
+            description:
+                type: 'String'
+            emails:
+                type: '[Email!]'
+                description: 'Users that will be added to the group by email.'
+                defaultValue: []
             groupId:
                 type: 'ID!'
             title:
                 type: 'String!'
-            description:
-                type: 'String'
+            toAddUserIds:
+                type: '[ID!]'
+                description: 'Users that will be added to the group.'
+                defaultValue: []
+            toRemoveUserIds:
+                type: '[ID!]'
+                description: 'Users that will be removed from the group.'
+                defaultValue: []

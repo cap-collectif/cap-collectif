@@ -317,6 +317,11 @@ abstract class BaseNormalizer
     protected const EXPORT_VOTE_GEOIP_CITY_NAME = 'export_vote_geoip_city_name';
     protected const EXPORT_VOTE_TYPE_FOR = 'export_vote_type_for';
     protected const EXPORT_VOTE_TYPE_AGAINST = 'export_vote_type_against';
+    protected const EXPORT_USER_GROUPS_TITLE = 'export_user_groups_title';
+    protected const EXPORT_USER_GROUPS_DESCRIPTION = 'export_user_groups_description';
+    protected const EXPORT_USER_GROUPS_COUNT_USER_GROUPS = 'export_user_groups_count_user_groups';
+    protected const EXPORT_USER_GROUPS_CREATED_AT = 'export_user_groups_created_at';
+    protected const EXPORT_USER_GROUPS_UPDATED_AT = 'export_user_groups_updated_at';
     protected const EXPORT_VOTE_TYPES = [
         ForOrAgainstType::FOR => self::EXPORT_VOTE_TYPE_FOR,
         ForOrAgainstType::AGAINST => self::EXPORT_VOTE_TYPE_AGAINST,

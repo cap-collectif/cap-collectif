@@ -651,14 +651,14 @@ InternalMutation:
                 builderConfig:
                     inputType: CreateGroupInput
                     payloadType: CreateGroupPayload
-                    mutateAndGetPayload: "@=mutation('createGroup', args)"
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\GroupMutation::create", value["emails"], value["dryRun"], value["title"], value["description"])'
             updateGroup:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
                 builderConfig:
                     inputType: UpdateGroupInput
                     payloadType: UpdateGroupPayload
-                    mutateAndGetPayload: "@=mutation('updateGroup', args, getUser())"
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\GroupMutation::update", value["groupId"], value["emails"], value["toAddUserIds"], value["title"], value["description"], value["toRemoveUserIds"], getUser())'
             deleteGroup:
                 access: "@=hasRole('ROLE_ADMIN')"
                 builder: 'Relay::Mutation'
@@ -673,13 +673,6 @@ InternalMutation:
                     inputType: DeleteUserInGroupInput
                     payloadType: DeleteUserInGroupPayload
                     mutateAndGetPayload: "@=mutation('deleteUserInGroup', value['userId'], value['groupId'], getUser())"
-            addUsersInGroup:
-                access: "@=hasRole('ROLE_ADMIN')"
-                builder: 'Relay::Mutation'
-                builderConfig:
-                    inputType: AddUsersInGroupInput
-                    payloadType: AddUsersInGroupPayload
-                    mutateAndGetPayload: "@=mutation('addUsersInGroup', value['users'], value['groupId'], getUser())"
             updateUsername:
                 access: "@=hasRole('ROLE_USER')"
                 builder: 'Relay::Mutation'

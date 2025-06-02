@@ -135,6 +135,7 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
               size={UPLOADER_SIZE.SM}
               uploadURI={UPLOAD_PATH}
               showThumbnail
+              isFullWidth
             />
           </FormControl>
         </Flex>

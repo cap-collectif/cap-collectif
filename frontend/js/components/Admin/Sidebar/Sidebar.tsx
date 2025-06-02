@@ -220,8 +220,8 @@ export const Sidebar = ({ appVersion, defaultAccordeon, designSystem }: Props): 
                 <SidebarButton icon={ICON_NAME.USER_O} text="sonata.admin.group.user" isOpen={isOpen} />
                 <SidebarAccordionPanel isOpen={isOpen} isFirstRender={isFirstRender}>
                   <SidebarLink text="global.select_user.type" href="/admin/capco/user/user/list" />
-                  <SidebarLink text={'admin-menu-invite-users-label'} href="/admin-next/invite" />
-                  <SidebarLink text="admin.label.group" href="/admin/capco/app/group/list" />
+                  <SidebarLink text="admin-menu-invite-users-label" href="/admin-next/invite" />
+                  <SidebarLink text="admin.label.group" href="/admin-next/groups" />
                   <SidebarLink text="admin.label.user_type" href="/admin/capco/user/usertype/list" />
                   <SidebarLink
                     text="admin.label.newsletter_subscription"

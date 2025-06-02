@@ -1,22 +1,23 @@
 /* eslint-env jest */
 
 const GroupMembersQuery = /* GraphQL */ `
-    query GroupMembersQuery($groupId: ID!, $first: Int, $after: String, $term: String) {
-        node(id: $groupId) {
-            ...on Group {
-                members(first: $first, after: $after, term: $term) {
-                    totalCount
-                    edges {
-                        node {
-                            email
-                            username
-                            type
-                        }
-                    }
-                }
+  query GroupMembersQuery($groupId: ID!, $first: Int, $after: String, $term: String) {
+    node(id: $groupId) {
+      ... on Group {
+        members(first: $first, after: $after, term: $term) {
+          totalCount
+          edges {
+            node {
+              userId
+              email
+              username
+              type
             }
+          }
         }
+      }
     }
+  }
 `;
 
 describe('Internal.Group.members', () => {
@@ -28,7 +29,7 @@ describe('Internal.Group.members', () => {
           groupId: toGlobalId('Group', 'group1'),
           first: 100,
           after: null,
-          term: null
+          term: null,
         },
         'internal_admin',
       ),
@@ -42,7 +43,7 @@ describe('Internal.Group.members', () => {
           groupId: toGlobalId('Group', 'group1'),
           first: 2,
           after: null,
-          term: null
+          term: null,
         },
         'internal_admin',
       ),
@@ -56,7 +57,7 @@ describe('Internal.Group.members', () => {
           groupId: toGlobalId('Group', 'group1'),
           first: 100,
           after: null,
-          term: "spyl"
+          term: 'spyl',
         },
         'internal_admin',
       ),
@@ -70,7 +71,7 @@ describe('Internal.Group.members', () => {
           groupId: toGlobalId('Group', 'group1'),
           first: 100,
           after: null,
-          term: "msantostefano@cap-collectif.com"
+          term: 'msantostefano@cap-collectif.com',
         },
         'internal_admin',
       ),
@@ -83,8 +84,8 @@ describe('Internal.Group.members', () => {
         {
           groupId: toGlobalId('Group', 'group1'),
           first: 100,
-          after: "YXJyYXljb25uZWN0aW9uOjA=",
-          term: null
+          after: 'YXJyYXljb25uZWN0aW9uOjA=',
+          term: null,
         },
         'internal_admin',
       ),
