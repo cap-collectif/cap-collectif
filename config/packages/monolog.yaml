@@ -1,0 +1,9 @@
+monolog:
+    channels:
+        - export
+    handlers:
+        export:
+            type: stream
+            path: '%kernel.logs_dir%/export.log'
+            level: info
+            channels: ['export']

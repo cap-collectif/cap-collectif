@@ -78,7 +78,7 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
     ): void {
         $this->setDelimiter($delimiter);
 
-        if ($this->shouldExport($proposals, $filePaths, $append)) {
+        if ($this->shouldExport($step, $proposals, $filePaths, $append)) {
             $this->exportContributionsInBatches($proposals, $step, $append);
         }
     }
@@ -179,7 +179,7 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
      * @param Proposal[]            $proposals
      * @param array<string, string> $filePaths
      */
-    private function shouldExport(array $proposals, array $filePaths, bool $append): bool
+    private function shouldExport(AbstractStep $step, array $proposals, array $filePaths, bool $append): bool
     {
         if ($append || !file_exists($filePaths['full'])) {
             return true;
@@ -188,7 +188,7 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($filePaths['simplified'], $filePaths['full']);
 
         try {
-            return $this->proposalRepository->hasNewContributionsForCollectOrSelectionStep($proposals, $oldestUpdateDate);
+            return $this->proposalRepository->hasNewContributionsForCollectOrSelectionStep($step, $proposals, $oldestUpdateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
 

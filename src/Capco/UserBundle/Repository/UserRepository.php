@@ -30,6 +30,7 @@ use Doctrine\ORM\Query\Expr;
 use Doctrine\ORM\Query\ResultSetMappingBuilder;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Psr\Log\LoggerInterface;
 use ReflectionClass;
 
 /**
@@ -41,6 +42,13 @@ use ReflectionClass;
 class UserRepository extends EntityRepository
 {
     use LocaleRepositoryTrait;
+
+    private LoggerInterface $logger;
+
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
+    }
 
     public function findFacebookUsers(): array
     {
@@ -1807,7 +1815,19 @@ class UserRepository extends EntityRepository
             ->setParameter('date', $mostRecentFileModificationDate)
         ;
 
-        return $qb->getQuery()->getSingleScalarResult() > 0;
+        $hasNewParticipantsForACollectStep = $qb->getQuery()->getSingleScalarResult() > 0;
+        $this->logger->info(
+            sprintf(
+                'Export command: capco:export:collect:participants, checking for new participants since the last export generation %s',
+                $mostRecentFileModificationDate->format('d-m-Y H:i:s')
+            ),
+            [
+                'hasNewParticipantsForACollectStep' => $hasNewParticipantsForACollectStep,
+                'stepSlug' => $collectStep->getSlug(),
+            ]
+        );
+
+        return $hasNewParticipantsForACollectStep;
     }
 
     public function hasNewParticipantsForASelectionStep(SelectionStep $selectionStep, \DateTime $mostRecentFileModificationDate): bool
@@ -1823,7 +1843,19 @@ class UserRepository extends EntityRepository
             ->setParameter('date', $mostRecentFileModificationDate)
         ;
 
-        return $qb->getQuery()->getSingleScalarResult() > 0;
+        $hasNewParticipantsForASelectionStep = $qb->getQuery()->getSingleScalarResult() > 0;
+        $this->logger->info(
+            sprintf(
+                'Export command: capco:export:selection:participants, checking for new participants since the last export generation %s',
+                $mostRecentFileModificationDate->format('d-m-Y H:i:s')
+            ),
+            [
+                'hasNewParticipantsForACollectStep' => $hasNewParticipantsForASelectionStep,
+                'stepSlug' => $selectionStep->getSlug(),
+            ]
+        );
+
+        return $hasNewParticipantsForASelectionStep;
     }
 
     /**

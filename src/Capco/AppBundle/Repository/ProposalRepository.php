@@ -17,10 +17,18 @@ use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\Query\ResultSetMapping;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
+use Psr\Log\LoggerInterface;
 
 class ProposalRepository extends EntityRepository
 {
     use ContributionRepositoryTrait;
+
+    private LoggerInterface $logger;
+
+    public function setLogger(LoggerInterface $logger): void
+    {
+        $this->logger = $logger;
+    }
 
     public function hydrateFromIds(array $ids): array
     {
@@ -902,7 +910,7 @@ class ProposalRepository extends EntityRepository
     /**
      * @param Proposal[] $proposals
      */
-    public function hasNewContributionsForCollectOrSelectionStep(array $proposals, \DateTimeImmutable $mostRecentFileModificationDate): bool
+    public function hasNewContributionsForCollectOrSelectionStep(AbstractStep $step, array $proposals, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         if ([] === $proposals) {
             return false;
@@ -910,9 +918,9 @@ class ProposalRepository extends EntityRepository
 
         $proposalsIds = array_map(static fn (Proposal $proposal) => $proposal->getId(), $proposals);
 
-        return $this->hasNewProposal($proposalsIds, $mostRecentFileModificationDate)
-            || $this->hasNewProposalNews($proposalsIds, $mostRecentFileModificationDate)
-            || $this->hasNewProposalComment($proposalsIds, $mostRecentFileModificationDate);
+        return $this->hasNewProposal($step, $proposalsIds, $mostRecentFileModificationDate)
+            || $this->hasNewProposalNews($step, $proposalsIds, $mostRecentFileModificationDate)
+            || $this->hasNewProposalComment($step, $proposalsIds, $mostRecentFileModificationDate);
     }
 
     protected function getIsEnabledQueryBuilder(string $alias = 'proposal'): QueryBuilder
@@ -1055,7 +1063,7 @@ class ProposalRepository extends EntityRepository
     /**
      * @param array<int, string> $proposalsIds
      */
-    private function hasNewProposal(array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
+    private function hasNewProposal(AbstractStep $step, array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         $queryBuilder = $this->createQueryBuilder('proposal');
         $queryBuilder
@@ -1065,20 +1073,34 @@ class ProposalRepository extends EntityRepository
                 $queryBuilder->expr()->orX(
                     'proposal.updatedAt >= :lastCheck',
                     'proposal.createdAt >= :lastCheck',
-                    'proposal.publishedAt >= :lastCheck'
+                    'proposal.publishedAt >= :lastCheck',
+                    'proposal.trashedAt >= :lastCheck',
+                    'proposal.undraftAt >= :lastCheck'
                 )
             )
             ->setParameter('proposalsIds', $proposalsIds)
             ->setParameter('lastCheck', $mostRecentFileModificationDate, Types::DATETIME_IMMUTABLE)
         ;
 
-        return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+        $hasNewProposal = $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+        $this->logger->info(
+            sprintf(
+                'Export command: capco:export:collect-selection:contributions, checking for new proposals since the last export generation %s',
+                $mostRecentFileModificationDate->format('d-m-Y H:i:s')
+            ),
+            [
+                'hasNewProposal' => $hasNewProposal,
+                'stepSlug' => $step->getSlug(),
+            ]
+        );
+
+        return $hasNewProposal;
     }
 
     /**
      * @param array<int, string> $proposalsIds
      */
-    private function hasNewProposalNews(array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
+    private function hasNewProposalNews(AbstractStep $step, array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         $queryBuilder = $this->_em->createQueryBuilder();
         $queryBuilder
@@ -1086,19 +1108,36 @@ class ProposalRepository extends EntityRepository
             ->select('COUNT(post.id)')
             ->innerJoin('post.proposals', 'proposalNews')
             ->where('proposalNews.id IN (:proposalsIds)')
-            ->andWhere('post.updatedAt >= :lastCheck')
-            ->orWhere('post.createdAt >= :lastCheck')
+            ->andWhere(
+                $queryBuilder->expr()->orX(
+                    'post.updatedAt >= :lastCheck',
+                    'post.createdAt >= :lastCheck',
+                    'post.publishedAt >= :lastCheck'
+                )
+            )
             ->setParameter('proposalsIds', $proposalsIds)
             ->setParameter('lastCheck', $mostRecentFileModificationDate, Types::DATETIME_IMMUTABLE)
         ;
 
-        return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+        $hasNewProposalNews = $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+        $this->logger->info(
+            sprintf(
+                'Export command: capco:export:collect-selection:contributions, checking for new proposals news since the last export generation %s',
+                $mostRecentFileModificationDate->format('d-m-Y H:i:s')
+            ),
+            [
+                'hasNewProposalNews' => $hasNewProposalNews,
+                'stepSlug' => $step->getSlug(),
+            ]
+        );
+
+        return $hasNewProposalNews;
     }
 
     /**
      * @param array<int, string> $proposalsIds
      */
-    private function hasNewProposalComment(array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
+    private function hasNewProposalComment(AbstractStep $step, array $proposalsIds, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
         $queryBuilder = $this->_em->createQueryBuilder();
         $queryBuilder
@@ -1106,12 +1145,29 @@ class ProposalRepository extends EntityRepository
             ->select('COUNT(proposalComment.id)')
             ->innerJoin('proposalComment.proposal', 'proposalCommentProposal')
             ->where('proposalCommentProposal.id IN (:proposalsIds)')
-            ->andWhere('proposalComment.updatedAt >= :lastCheck')
-            ->orWhere('proposalComment.createdAt >= :lastCheck')
+            ->andWhere(
+                $queryBuilder->expr()->orX(
+                    'proposalComment.updatedAt >= :lastCheck',
+                    'proposalComment.createdAt >= :lastCheck',
+                    'proposalComment.publishedAt >= :lastCheck'
+                )
+            )
             ->setParameter('proposalsIds', $proposalsIds)
             ->setParameter('lastCheck', $mostRecentFileModificationDate, Types::DATETIME_IMMUTABLE)
         ;
 
-        return $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+        $hasNewProposalComment = $queryBuilder->getQuery()->getSingleScalarResult() > 0;
+        $this->logger->info(
+            sprintf(
+                'Export command: capco:export:collect-selection:contributions, checking for new proposals news since the last export generation %s',
+                $mostRecentFileModificationDate->format('d-m-Y H:i:s')
+            ),
+            [
+                'hasNewProposalComment' => $hasNewProposalComment,
+                'stepSlug' => $step->getSlug(),
+            ]
+        );
+
+        return $hasNewProposalComment;
     }
 }

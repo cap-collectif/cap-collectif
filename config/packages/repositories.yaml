@@ -196,6 +196,10 @@ services:
         lazy: true
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Proposal']
+        calls:
+            -   method: setLogger
+                arguments:
+                    - '@monolog.logger.export'
 
     Capco\AppBundle\Repository\ProposalSelectionVoteRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
@@ -310,6 +314,10 @@ services:
         lazy: true
         tags: ['repository.manager']
         arguments: ['CapcoUserBundle:User']
+        calls:
+            -   method: setLogger
+                arguments:
+                    - '@monolog.logger.export'
 
     Capco\AppBundle\Repository\UserNotificationsConfigurationRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
