@@ -38,6 +38,12 @@ export const getDefaultValues = (
       canContact: step?.form?.canContact,
       // @ts-ignore should work wtf relay
       usingAddress: step?.form?.usingAddress,
+      usingWebPage: step?.form?.usingWebPage,
+      usingFacebook: step?.form?.usingFacebook,
+      usingTwitter: step?.form?.usingTwitter,
+      usingInstagram: step?.form?.usingInstagram,
+      usingYoutube: step?.form?.usingYoutube,
+      usingLinkedIn: step?.form?.usingLinkedIn,
     },
     voteType: step?.voteType,
     _voteTypeForTabs: voteTypeForTabs(step),

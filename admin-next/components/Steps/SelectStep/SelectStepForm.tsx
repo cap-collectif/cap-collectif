@@ -75,6 +75,12 @@ export type FormValues = {
     } | null
     zoomMap?: string | null
     canContact?: boolean | null | undefined
+    usingWebPage: boolean
+    usingFacebook: boolean
+    usingTwitter: boolean
+    usingInstagram: boolean
+    usingYoutube: boolean
+    usingLinkedIn: boolean
   }
   stepDurationType?: {
     labels: Array<string>
@@ -150,6 +156,12 @@ const SELECTION_QUERY = graphql`
           nbrOfMessagesSent
           usingAddress
           canContact
+          usingWebPage
+          usingFacebook
+          usingTwitter
+          usingInstagram
+          usingYoutube
+          usingLinkedIn
         }
         project {
           id
@@ -285,12 +297,12 @@ const SelectStepForm: React.FC<SelectStepFormProps> = ({ stepId, setHelpMessage 
         isGridViewEnabled: values.form.isGridViewEnabled,
         isMapViewEnabled: values.form.isMapViewEnabled,
         isListViewEnabled: values.form.isListViewEnabled,
-        usingWebPage: false,
-        usingFacebook: false,
-        usingTwitter: false,
-        usingInstagram: false,
-        usingYoutube: false,
-        usingLinkedIn: false,
+        usingWebPage: values.form.usingWebPage,
+        usingFacebook: values.form.usingFacebook,
+        usingTwitter: values.form.usingTwitter,
+        usingInstagram: values.form.usingInstagram,
+        usingYoutube: values.form.usingYoutube,
+        usingLinkedIn: values.form.usingLinkedIn,
       }
       const proposalFormUpdateResponse = await UpdateProposalFormMutation.commit({
         input: {
