@@ -3,8 +3,9 @@
 namespace Capco\AppBundle\Client;
 
 use GuzzleHttp\Client;
+use GuzzleHttp\Exception\GuzzleException;
 
-class OccitanieClient
+class OccitaniePreprodClient
 {
     protected string $base_url;
     protected string $token_url;
@@ -34,6 +35,13 @@ class OccitanieClient
         return json_decode((string) $response->getBody(), true);
     }
 
+    /**
+     * @param array{grant_type: 'password', username: string, password: string, client_id: string, client_secret: string} $data
+     *
+     *@throws GuzzleException
+     *
+     * @return array{mixed}
+     */
     public function post(string $uri, array $data): array
     {
         $client = new Client([

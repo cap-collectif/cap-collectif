@@ -24,7 +24,7 @@ class OpenIDPathMapper
     {
         $this->instanceMapper = match ($instance) {
             'parlons-energies', 'pe' => new EdfMapping(),
-            'occitanie', 'occitanie-dedicated' => new OccitanieMapping(),
+            'occitanie', 'occitanie-dedicated', 'occitanie-preprod' => new OccitanieMapping(),
             'nantes' => new NantesMapping(),
             'decathlon-preprod', 'nl-decathlon', 'decathlon' => new DecathlonMapping(),
             'grand-lyon', 'grand-lyon-preprod' => new GrandLyonMapping(),

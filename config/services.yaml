@@ -82,6 +82,7 @@ parameters:
     occitanie_password: '%env(SYMFONY_OCCITANIE_PASSWORD)%'
     occitanie_client_id: '%env(SYMFONY_OCCITANIE_CLIENT_ID)%'
     occitanie_client_secret: '%env(SYMFONY_OCCITANIE_CLIENT_SECRET)%'
+    occitanie_base_url: '%env(SYMFONY_OCCITANIE_BASE_URL)%'
     slack_jpec_ghost: '%env(SLACK_JPEC_GHOST)%'
     slack_omar_djinn: '%env(SLACK_OMAR_DJINN)%'
     panther_url: '%env(SYMFONY_PANTHER_URL)%'
@@ -160,6 +161,7 @@ parameters:
     env(SYMFONY_OCCITANIE_PASSWORD): INSERT_A_REAL_SECRET
     env(SYMFONY_OCCITANIE_CLIENT_ID): INSERT_A_REAL_SECRET
     env(SYMFONY_OCCITANIE_CLIENT_SECRET): INSERT_A_REAL_SECRET
+    env(SYMFONY_OCCITANIE_BASE_URL): INSERT_A_REAL_SECRET
     # Sentry is disabled in dev
     env(SYMFONY_SENTRY_DSN): null
     env(SYMFONY_SENTRY_LOG_LEVEL): 'error'

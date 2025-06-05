@@ -33,6 +33,7 @@ type Props = ReduxFormFormProps &
   }
 const formName = 'profilePersonalData'
 export const occitanieUrl = 'jeparticipe.laregioncitoyenne.fr'
+export const occitaniePreprodUrl = 'occitanie-preprod.cap-collectif.com'
 
 const hasAddressData = (viewer: PersonalData_viewer, value: Record<string, any> | null | undefined) => {
   if (!viewer.address && !viewer.zipCode && !viewer.city) {
@@ -254,14 +255,14 @@ type PersonalDataState = {
   day: number | null | undefined
 }
 export const getSsoTradKey = (): string => {
-  if (window.location.hostname === occitanieUrl) {
+  if (window.location.hostname === occitanieUrl || window.location.hostname === occitaniePreprodUrl){
     return 'data-sso-occitanie'
   }
 
   return 'data-from-FranceConnect'
 }
 export const isSsoFcOrOccitanie = (isFranceConnectAccount: boolean) => {
-  return window.location.hostname === occitanieUrl || isFranceConnectAccount
+  return (window.location.hostname === occitanieUrl || window.location.hostname === occitaniePreprodUrl) || isFranceConnectAccount
 }
 export class PersonalData extends Component<Props, PersonalDataState> {
   deleteField = (target: string): void => {

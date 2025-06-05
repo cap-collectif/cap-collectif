@@ -181,6 +181,16 @@ services:
             $password: '%occitanie_password%'
             $clientId: '%occitanie_client_id%'
             $clientSecret: '%occitanie_client_secret%'
+            $baseUrl: '%occitanie_base_url%'
+
+    Capco\AppBundle\Client\OccitaniePreprodClient:
+        autowire: true
+        arguments:
+            $username: '%occitanie_username%'
+            $password: '%occitanie_password%'
+            $clientId: '%occitanie_client_id%'
+            $clientSecret: '%occitanie_client_secret%'
+            $baseUrl: '%occitanie_base_url%'
 
     Capco\AppBundle\Client\CloudflareElasticClient:
         autowire: true

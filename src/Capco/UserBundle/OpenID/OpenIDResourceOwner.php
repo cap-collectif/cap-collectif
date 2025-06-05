@@ -64,7 +64,7 @@ class OpenIDResourceOwner extends GenericOAuth2ResourceOwner
     public function isRefreshingUserInformationsAtEveryLogin(): bool
     {
         return match ($this->getInstanceName()) {
-            'occitanie', 'occitanie-dedicated' => true,
+            'occitanie', 'occitanie-dedicated', 'occitanie-preprod' => true,
             default => false,
         };
     }

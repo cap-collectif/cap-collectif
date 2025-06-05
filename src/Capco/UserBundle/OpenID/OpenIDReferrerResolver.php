@@ -17,6 +17,7 @@ class OpenIDReferrerResolver
         switch ($instanceName) {
             case 'occitanie':
             case 'occitanie-dedicated':
+            case 'occitanie-preprod':
                 $this->refererResolver = new OccitanieReferrerResolver();
 
                 break;

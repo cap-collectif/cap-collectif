@@ -14,7 +14,7 @@ import '~relay/EditProfileTabs_viewer.graphql'
 import UserAvatar from '~/components/User/UserAvatar'
 import UserLink from '../UserLink'
 import ChangePasswordForm from './ChangePasswordForm'
-import PersonalData, { occitanieUrl } from './PersonalData'
+import PersonalData, { occitanieUrl, occitaniePreprodUrl } from './PersonalData'
 import Profile from './Profile'
 import ChangeUsername from './ChangeUsername'
 import Media from '../../Ui/Medias/Media/Media'
@@ -74,7 +74,7 @@ export class EditProfileTabs extends Component<Props> {
   render() {
     const { viewer, features, loginWithOpenId, languageList } = this.props
     // TODO this will be added to API, one day.
-    const viewerSsoAllowToUpdateUsername = window.location.hostname !== occitanieUrl
+    const viewerSsoAllowToUpdateUsername = window.location.hostname !== occitanieUrl && window.location.hostname !== occitaniePreprodUrl
     // TODO this will be added to API, one day.
     const viewerSsoAllowToUpdatePassword = !loginWithOpenId && viewer.hasPassword
     return (
