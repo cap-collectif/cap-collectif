@@ -50,9 +50,9 @@ const ProjectConfigFormSteps: React.FC = () => {
 
   const hasSelectionStep = stepsValues.some(s => s.__typename === 'SelectionStep')
 
-  const collectStepsCount = stepsValues.filter(s => s.__typename === 'CollectStep').length
-
-  const enableCollectStepDeletion = viewerSession.isSuperAdmin && collectStepsCount > 1 && hasSelectionStep
+  // Super admins can always delete collect steps
+  // Non-super admins can delete collect steps **only** if there is no selection step in the project
+  const canDeleteCollectStep = viewerSession.isSuperAdmin || !hasSelectionStep
 
   return (
     <>
@@ -75,7 +75,7 @@ const ProjectConfigFormSteps: React.FC = () => {
             <DragnDrop onDragEnd={onDragEnd}>
               <DragnDrop.List droppableId="steps">
                 {steps.map((step, index) => {
-                  const disabledDelete = !enableCollectStepDeletion && step.__typename === 'CollectStep'
+                  const disableDelete = !canDeleteCollectStep && step.__typename === 'CollectStep'
                   return (
                     // @ts-ignore https://github.com/cap-collectif/ui/issues/367
                     <DragnDrop.Item draggableId={step.id} index={index} key={step.id}>
@@ -139,7 +139,7 @@ const ProjectConfigFormSteps: React.FC = () => {
                             })}
                             type="button"
                             _disabled={{ cursor: 'not-allowed', opacity: '.5' }}
-                            disabled={disabledDelete}
+                            disabled={disableDelete}
                           />
                         </ButtonGroup>
                       </ListCard.Item>
