@@ -16,7 +16,7 @@ class GlobalDistrictsPersister
     {
     }
 
-    public function persist(array $districtsIds, Project $project)
+    public function persist(array $districtsIds, Project $project): void
     {
         $districtsIds = array_map(
             fn ($districtGlobalId) => GlobalIdResolver::getDecodedId($districtGlobalId, true),
@@ -28,6 +28,14 @@ class GlobalDistrictsPersister
             'project' => $project,
         ]);
 
+        if (
+            [] === $districtsIds
+            && [] === $districtEntities
+            && [] === $oldPositioners
+        ) {
+            return;
+        }
+
         foreach ($oldPositioners as $key => $oldPositioner) {
             if (!\in_array($oldPositioner->getDistrict()->getId(), $districtsIds, true)) {
                 $oldPositioner->setProject(null);
@@ -36,7 +44,11 @@ class GlobalDistrictsPersister
                 unset($oldPositioners[$key]);
             }
         }
-        $project->setProjectDistrictPositioners(new ArrayCollection($oldPositioners));
+
+        if ([] !== $oldPositioners) {
+            $project->setProjectDistrictPositioners(new ArrayCollection($oldPositioners));
+        }
+
         $this->recomputePositions($oldPositioners);
 
         $nextPosition = $this->districtPositionerRepository->getNextAvailablePosition($project);
@@ -57,7 +69,6 @@ class GlobalDistrictsPersister
                 ->setPosition($nextPosition++)
             ;
 
-            $updatedPositioners[] = $positioner;
             $this->em->persist($positioner);
         }
     }
