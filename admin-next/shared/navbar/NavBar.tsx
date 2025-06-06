@@ -51,6 +51,7 @@ const NavBarContent = ({
 
   return (
     <Flex
+      as="nav"
       px={[0, 0, isExtended ? 4 : 8]}
       ref={containerRef}
       flex={1}
@@ -104,12 +105,13 @@ type NavBarProps = {
   showBorder?: boolean
 }
 
-const NavBarWeb = ({ children, links, theme, showBorder, logo}: NavBarProps) => {
+const NavBarWeb = ({ children, links, theme, showBorder, logo }: NavBarProps) => {
   const [isExtended] = React.useState(links.length > 6)
   const { colors } = useTheme()
 
   return (
     <Flex
+      as="header"
       justifyContent="center"
       bg={theme.menuBackground}
       width="100%"
@@ -147,6 +149,7 @@ const NavBarMobile = ({ children, links, theme, showBorder, logo }: NavBarProps)
   return (
     <Flex
       id="main_navbar"
+      as="header"
       direction="column"
       bg={theme.menuBackground}
       overflow="visible"

@@ -7,6 +7,7 @@ use Capco\AppBundle\Entity\District\GlobalDistrict;
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Interfaces\Owner;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
+use Capco\AppBundle\Enum\EventOrderField;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
@@ -242,6 +243,14 @@ class EventRepository extends EntityRepository
 
         if ($options['hideUnpublishedEvents'] ?? false) {
             $qb->andWhere('e.enabled = true');
+        }
+        if ($options['orderBy'] ?? false) {
+            $field = match ($options['orderBy']['field']) {
+                EventOrderField::START_AT => 'startAt',
+                EventOrderField::END_AT => 'endAt',
+                default => throw new \RuntimeException("Unknown order: {$options['orderBy']['field']}"),
+            };
+            $qb->orderBy('e.' . $field, $options['orderBy']['direction']);
         }
 
         $this->applyEventStatus($qb, $options);

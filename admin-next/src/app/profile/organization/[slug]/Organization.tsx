@@ -60,7 +60,7 @@ export const OrganizationRender: FC<Props> = ({ slug }) => {
     cursorProjects: null,
     cursorPosts: null,
     cursorEvents: null,
-    isFuture: undefined,
+    isFuture: true,
   })
 
   const { organization } = query

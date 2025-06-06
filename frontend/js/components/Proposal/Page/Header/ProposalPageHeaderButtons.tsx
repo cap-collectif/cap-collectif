@@ -58,7 +58,7 @@ const Buttons = styled.div`
   }
 `
 const FixedButtons = styled.div`
-  display: inline-block;
+  display: flex;
 
   @media (max-width: ${mediaQueryMobile.maxWidth}) {
     width: 100%;
@@ -71,6 +71,8 @@ const FixedButtons = styled.div`
     height: 63px;
     padding: 15px;
     border-top: 1px solid ${colors.lightGray};
+    align-items: center;
+    justify-content: center;
   }
 
   /** Boostrap for now until "Epurer" ticket */

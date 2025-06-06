@@ -8,10 +8,21 @@ import { Button, Flex } from '@cap-collectif/ui'
 
 const FRAGMENT = graphql`
   fragment OrganizationPageEventList_organization on Organization
-  @argumentDefinitions(count: { type: "Int!" }, cursor: { type: "String" }, isFuture: { type: "Boolean" })
+  @argumentDefinitions(
+    count: { type: "Int!" }
+    cursor: { type: "String" }
+    isFuture: { type: "Boolean" }
+    orderBy: { type: "EventOrder" }
+  )
   @refetchable(queryName: "OrganizationPageEventListPaginationQuery") {
-    events(first: $count, after: $cursor, hideDeletedEvents: true, hideUnpublishedEvents: true, isFuture: $isFuture)
-      @connection(key: "OrganizationPageEventList_events", filters: ["isFuture"]) {
+    events(
+      first: $count
+      after: $cursor
+      hideDeletedEvents: true
+      hideUnpublishedEvents: true
+      isFuture: $isFuture
+      orderBy: $orderBy
+    ) @connection(key: "OrganizationPageEventList_events", filters: ["isFuture", "orderBy"]) {
       edges {
         node {
           id
@@ -30,7 +41,9 @@ export const OrganizationPageEventList = ({ organization, filter }: Props) => {
   const { data, loadNext, hasNext, refetch } = usePaginationFragment(FRAGMENT, organization)
 
   useEffect(() => {
-    filter === 'theme.show.status.future' ? refetch({ isFuture: true }) : refetch({ isFuture: false })
+    filter === 'theme.show.status.future'
+      ? refetch({ isFuture: true, orderBy: { field: 'START_AT', direction: 'ASC' } })
+      : refetch({ isFuture: false })
   }, [filter, refetch])
 
   if (!data) return null

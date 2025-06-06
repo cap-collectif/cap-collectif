@@ -20,6 +20,7 @@ class OwnerEventsResolver implements QueryInterface
     {
         $status = $args->offsetGet('status');
         $query = $args->offsetGet('search');
+        $orderBy = $args->offsetGet('orderBy');
         $hideDeletedEvents = $args->offsetGet('hideDeletedEvents');
         $hideUnpublishedEvents = $args->offsetGet('hideUnpublishedEvents');
         $isFuture = $args->offsetGet('isFuture');
@@ -35,6 +36,9 @@ class OwnerEventsResolver implements QueryInterface
         }
         if ($query) {
             $options['query'] = $query;
+        }
+        if (isset($orderBy['field'], $orderBy['direction'])) {
+            $options['orderBy'] = $orderBy;
         }
         if ($hideUnpublishedEvents) {
             $options['hideUnpublishedEvents'] = $hideUnpublishedEvents;

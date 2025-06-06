@@ -5,6 +5,7 @@ import { Flex, Box, CapUIIcon, Heading, Text, Icon, CapUIIconSize, CapUIFontSize
 import Image from '@shared/ui/Image'
 import { OrganizationPageHeader_organization$key } from '@relay/OrganizationPageHeader_organization.graphql'
 import { pxToRem } from '@shared/utils/pxToRem'
+import { useIntl } from 'react-intl'
 
 const FRAGMENT = graphql`
   fragment OrganizationPageHeader_organization on Organization {
@@ -24,8 +25,9 @@ const FRAGMENT = graphql`
   }
 `
 
-const SocialIconLink = ({ icon, href }: { icon: CapUIIcon; href: string }) => (
+const SocialIconLink = ({ icon, href, socialNetwork }: { icon: CapUIIcon; href: string; socialNetwork: string }) => (
   <a href={href}>
+    <span className="sr-only">{socialNetwork}</span>
     <Icon name={icon} size={CapUIIconSize.Md} color="neutral-gray.600" />
   </a>
 )
@@ -34,7 +36,7 @@ export const OrganizationPageHeader: React.FC<{ organization: OrganizationPageHe
   organization: organizationKey,
 }) => {
   const organization = useFragment(FRAGMENT, organizationKey)
-
+  const intl = useIntl()
   const { socialNetworks, title, body } = organization
   const cover = organization.banner?.url
   const logo = organization.media?.url
@@ -70,13 +72,17 @@ export const OrganizationPageHeader: React.FC<{ organization: OrganizationPageHe
               marginTop={[9, 6]}
             >
               {socialNetworks.facebookUrl ? (
-                <SocialIconLink href={socialNetworks.facebookUrl} icon={CapUIIcon.Facebook} />
+                <SocialIconLink href={socialNetworks.facebookUrl} icon={CapUIIcon.Facebook} socialNetwork="Facebook" />
               ) : null}
               {socialNetworks.twitterUrl ? (
-                <SocialIconLink href={socialNetworks.twitterUrl} icon={CapUIIcon.X} />
+                <SocialIconLink href={socialNetworks.twitterUrl} icon={CapUIIcon.X} socialNetwork="X" />
               ) : null}
               {socialNetworks.webPageUrl ? (
-                <SocialIconLink href={socialNetworks.webPageUrl} icon={CapUIIcon.Link} />
+                <SocialIconLink
+                  href={socialNetworks.webPageUrl}
+                  icon={CapUIIcon.Link}
+                  socialNetwork={intl.formatMessage({ id: 'user_websiteUrl' })}
+                />
               ) : null}
             </Flex>
           ) : null}

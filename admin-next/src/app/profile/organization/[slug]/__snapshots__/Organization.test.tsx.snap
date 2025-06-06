@@ -41,6 +41,11 @@ exports[`<Organization /> renders correctly 1`] = `
             <a
               href="<mock-value-for-field-"facebookUrl">"
             >
+              <span
+                className="sr-only"
+              >
+                Facebook
+              </span>
               <svg
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fFdUdM hEjMCZ cap-icon"
@@ -59,6 +64,11 @@ exports[`<Organization /> renders correctly 1`] = `
             <a
               href="<mock-value-for-field-"twitterUrl">"
             >
+              <span
+                className="sr-only"
+              >
+                X
+              </span>
               <svg
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fFdUdM hEjMCZ cap-icon"
@@ -77,6 +87,11 @@ exports[`<Organization /> renders correctly 1`] = `
             <a
               href="<mock-value-for-field-"webPageUrl">"
             >
+              <span
+                className="sr-only"
+              >
+                user_websiteUrl
+              </span>
               <svg
                 aria-hidden="true"
                 className="sc-bcXGCL sc-eJDTud fFdUdM hEjMCZ cap-icon"
@@ -98,11 +113,11 @@ exports[`<Organization /> renders correctly 1`] = `
           </div>
         </div>
         <div
-          className="sc-bcXGCL sc-f82ad81-1 bfFtvn dCzckY"
+          className="sc-bcXGCL sc-c3e74c18-1 bfFtvn nVYgo"
         >
           <img
             alt="banner"
-            className="sc-bcXGCL fXrpKJ sc-f82ad81-2 bmPesb"
+            className="sc-bcXGCL fXrpKJ sc-c3e74c18-2 MYQWv"
             loading="eager"
             sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
             srcSet="
@@ -116,11 +131,11 @@ exports[`<Organization /> renders correctly 1`] = `
          "
           />
           <div
-            className="sc-bcXGCL sc-f82ad81-0 beCgXo eNaLe"
+            className="sc-bcXGCL sc-c3e74c18-0 beCgXo iaveFi"
           >
             <img
               alt="logo"
-              className="sc-bcXGCL eQCwXW sc-f82ad81-3 dhiRjH"
+              className="sc-bcXGCL eQCwXW sc-c3e74c18-3 hIjihT"
               loading="eager"
               sizes="(max-width: 320px) 320px, (max-width: 640px) 320px, (max-width: 960px) 320px, (max-width: 1280px) 320px, (max-width: 2560px) 320px,"
               srcSet="

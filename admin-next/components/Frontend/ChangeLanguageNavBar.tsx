@@ -82,7 +82,17 @@ const ChangeLanguageNavBar: React.FC<{ locales: layoutQuery$data['locales'] }> =
                 </Box>
               </Flex>
             </Flex>
-            <Box as="button" onClick={onClose} position="absolute" right={4} top={[2, 7]}>
+            <Box
+              as="button"
+              onClick={onClose}
+              position="absolute"
+              right={4}
+              top={[2, 7]}
+              aria-label={intl.formatMessage(
+                { id: 'close-multilangue-band' },
+                { locale: intl.formatMessage({ id: defaultLanguage.translationKey }) },
+              )}
+            >
               <Icon name={CapUIIcon.CrossO} color="white" size={CapUIIconSize.Md} />
             </Box>
           </Box>
