@@ -303,14 +303,28 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
         }
 
         $formattedQuestionsResponses = [];
+        $keyCounters = [];
+
         foreach ($proposalResponses as $proposalResponse) {
             $questionTitle = $proposalResponse->getQuestion()?->getTitle();
             if (empty($questionsResponses)) {
                 continue;
             }
 
+            if (!isset($keyCounters[$questionTitle])) {
+                $keyCounters[$questionTitle] = 0;
+            }
+
+            $formattedKey = $questionTitle;
+
+            if ($keyCounters[$questionTitle] > 0) {
+                $formattedKey = sprintf('%s (%s)', $formattedKey, $keyCounters[$questionTitle]);
+            }
+
+            ++$keyCounters[$questionTitle];
+
             if ($proposalResponse instanceof ValueResponse) {
-                $formattedQuestionsResponses[$questionTitle] = $this->formattedValueResponseTypeResolver->__invoke(
+                $formattedQuestionsResponses[$formattedKey] = $this->formattedValueResponseTypeResolver->__invoke(
                     $proposalResponse
                 );
 
@@ -318,7 +332,7 @@ class ProposalNormalizer extends BaseNormalizer implements NormalizerInterface
             }
 
             if ($proposalResponse instanceof MediaResponse) {
-                $formattedQuestionsResponses[$questionTitle] = implode(
+                $formattedQuestionsResponses[$formattedKey] = implode(
                     ', ',
                     $proposalResponse->getMedias()
                         ->map(fn (Media $media) => $this->mediaUrlResolver->__invoke($media))
