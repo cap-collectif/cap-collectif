@@ -102,7 +102,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
             $paths['full'] = $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
 
             $this->questionnaireContributionExporter->exportQuestionnaireContributions(
-                $questionnaireStep->getQuestionnaire(),
+                $questionnaireStep,
                 $input->getOption('delimiter'),
                 $paths
             );

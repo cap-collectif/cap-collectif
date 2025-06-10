@@ -912,10 +912,6 @@ class ProposalRepository extends EntityRepository
      */
     public function hasNewContributionsForCollectOrSelectionStep(AbstractStep $step, array $proposals, \DateTimeImmutable $mostRecentFileModificationDate): bool
     {
-        if ([] === $proposals) {
-            return false;
-        }
-
         $proposalsIds = array_map(static fn (Proposal $proposal) => $proposal->getId(), $proposals);
 
         return $this->hasNewProposal($step, $proposalsIds, $mostRecentFileModificationDate)

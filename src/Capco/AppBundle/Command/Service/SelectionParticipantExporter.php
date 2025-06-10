@@ -12,6 +12,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class SelectionParticipantExporter extends ParticipantExporter
 {
@@ -23,7 +24,8 @@ class SelectionParticipantExporter extends ParticipantExporter
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly CacheInterface $cache
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -45,7 +47,7 @@ class SelectionParticipantExporter extends ParticipantExporter
         $paths['simplified'] = $this->participantsFilePathResolver->getSimplifiedExportPath($selectionStep);
         $paths['full'] = $this->participantsFilePathResolver->getFullExportPath($selectionStep);
 
-        if ($this->shouldExportParticipant($selectionStep, $paths, $append)) {
+        if ($this->shouldExportParticipant($selectionStep, $participants, $paths, $append)) {
             $this->setStep($selectionStep);
             $this->exportParticipants($participants, $paths, $withHeaders, $append);
         }
@@ -53,8 +55,9 @@ class SelectionParticipantExporter extends ParticipantExporter
 
     /**
      * @param array<string, string> $paths
+     * @param array<User>           $participants
      */
-    private function shouldExportParticipant(SelectionStep $selectionStep, array $paths, bool $append): bool
+    private function shouldExportParticipant(SelectionStep $selectionStep, array $participants, array $paths, bool $append): bool
     {
         if ($append || !file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
@@ -63,6 +66,17 @@ class SelectionParticipantExporter extends ParticipantExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         try {
+            $cacheKey = sprintf('%s-selection-participants-count', $selectionStep->getSlug());
+            $currentCount = \count($participants);
+            $lastParticipantsCount = $this->cache->get($cacheKey, fn () => 0);
+
+            if ($currentCount !== $lastParticipantsCount) {
+                $this->cache->delete($cacheKey);
+                $this->cache->get($cacheKey, fn () => $currentCount);
+
+                return true;
+            }
+
             return $this->userRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());

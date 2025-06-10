@@ -6,6 +6,7 @@ use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
 use Capco\AppBundle\Command\Serializer\ReplyNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Entity\Questionnaire;
+use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
 use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Repository\ReplyRepository;
@@ -15,6 +16,7 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class QuestionnaireContributionExporter extends ContributionExporter
 {
@@ -31,7 +33,8 @@ class QuestionnaireContributionExporter extends ContributionExporter
         private readonly ReplyAnonymousNormalizer $anonymousReplyNormalizer,
         protected ContributionsFilePathResolver $contributionsFilePathResolver,
         Filesystem $fileSystem,
-        private readonly LoggerInterface $logger
+        private readonly LoggerInterface $logger,
+        private readonly CacheInterface $cache
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -42,13 +45,16 @@ class QuestionnaireContributionExporter extends ContributionExporter
      * @param array<string, string> $paths
      */
     public function exportQuestionnaireContributions(
-        Questionnaire $questionnaire,
+        QuestionnaireStep $questionnaireStep,
         ?string $delimiter,
         array $paths
     ): void {
-        $questionnaireId = $questionnaire->getId();
+        $questionnaire = $questionnaireStep->getQuestionnaire();
+        if (null === $questionnaire) {
+            return;
+        }
 
-        if ($this->shouldExport($questionnaireId, $paths)) {
+        if ($this->shouldExport($questionnaireStep, $questionnaire, $paths)) {
             $this->setDelimiter($delimiter);
 
             $this->exportQuestionnaireRepliesInBatches($questionnaire);
@@ -74,7 +80,7 @@ class QuestionnaireContributionExporter extends ContributionExporter
     /**
      * @param array<string, string> $paths
      */
-    private function shouldExport(string $questionnaireId, array $paths): bool
+    private function shouldExport(QuestionnaireStep $questionnaireStep, string $questionnaireId, array $paths): bool
     {
         if (!file_exists($paths['simplified']) || !file_exists($paths['full'])) {
             return true;
@@ -83,6 +89,24 @@ class QuestionnaireContributionExporter extends ContributionExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($paths['simplified'], $paths['full']);
 
         try {
+            $questionnaire = $questionnaireStep->getQuestionnaire();
+            if (null === $questionnaire) {
+                return false;
+            }
+
+            $repliesCount = $questionnaire->getReplies()->count();
+            $anonymousRepliesCount = \count($this->anonymousReplyRepository->findBy(['questionnaireId' => $questionnaire->getId()]));
+            $cacheKey = sprintf('%s-questionnnaire-contributions-count', $questionnaireStep->getSlug());
+            $currentCount = $repliesCount + $anonymousRepliesCount;
+            $lastRepliesCount = $this->cache->get($cacheKey, fn () => 0);
+
+            if ($currentCount !== $lastRepliesCount) {
+                $this->cache->delete($cacheKey);
+                $this->cache->get($cacheKey, fn () => $currentCount);
+
+                return true;
+            }
+
             return $this->questionnaireRepository->hasRecentRepliesOrUpdatedUsers($questionnaireId, $oldestUpdateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());

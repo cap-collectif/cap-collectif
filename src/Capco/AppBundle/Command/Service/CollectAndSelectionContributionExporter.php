@@ -33,6 +33,7 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
+use Symfony\Contracts\Cache\CacheInterface;
 
 class CollectAndSelectionContributionExporter extends ContributionExporter
 {
@@ -58,7 +59,8 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
         Filesystem $fileSystem,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly ProposalRepository $proposalRepository,
-        private readonly BatchProcessor $batchProcessor
+        private readonly BatchProcessor $batchProcessor,
+        private readonly CacheInterface $cache
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -188,6 +190,21 @@ class CollectAndSelectionContributionExporter extends ContributionExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($filePaths['simplified'], $filePaths['full']);
 
         try {
+            if ([] === $proposals) {
+                return false;
+            }
+
+            $cacheKey = sprintf('%s-collect-selection-contributions-count', $step->getSlug());
+            $currentCount = \count($proposals);
+            $lastProposalCount = $this->cache->get($cacheKey, fn () => 0);
+
+            if ($currentCount !== $lastProposalCount) {
+                $this->cache->delete($cacheKey);
+                $this->cache->get($cacheKey, fn () => $currentCount);
+
+                return true;
+            }
+
             return $this->proposalRepository->hasNewContributionsForCollectOrSelectionStep($step, $proposals, $oldestUpdateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());
