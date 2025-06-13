@@ -47,7 +47,7 @@ exports[`<LoginBox /> renders 1`] = `
         aria-required={true}
         autoComplete="email"
         autoFocus={true}
-        className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
         disabled={false}
         id=":r0:"
         name="username"
@@ -87,7 +87,7 @@ exports[`<LoginBox /> renders 1`] = `
       <input
         aria-required={true}
         autoComplete="off"
-        className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
         disabled={false}
         id=":r1:"
         name="password"

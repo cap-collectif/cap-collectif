@@ -175,27 +175,37 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               className="sc-bcXGCL kzRATa"
             >
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
+                aria-label="Tag 200x200px"
+                className="sc-bcXGCL UwUoA cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
                 style={
                   {
                     "marginLeft": 0,
                     "marginTop": 0,
                   }
                 }
+                tabIndex={-1}
                 title="200x200px"
               >
                 200x200px
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
-                style={{}}
+                aria-label="Tag 39ko"
+                className="sc-bcXGCL UwUoA cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
                 title="39ko"
               >
                 39ko
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
-                style={{}}
+                aria-label="Tag png"
+                className="sc-bcXGCL UwUoA cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
                 title="png"
               >
                 png
@@ -370,27 +380,37 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               className="sc-bcXGCL kzRATa"
             >
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
+                aria-label="Tag 100x300px"
+                className="sc-bcXGCL UwUoA cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
                 style={
                   {
                     "marginLeft": 0,
                     "marginTop": 0,
                   }
                 }
+                tabIndex={-1}
                 title="100x300px"
               >
                 100x300px
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
-                style={{}}
+                aria-label="Tag 29ko"
+                className="sc-bcXGCL UwUoA cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
                 title="29ko"
               >
                 29ko
               </div>
               <div
-                className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
-                style={{}}
+                aria-label="Tag png"
+                className="sc-bcXGCL UwUoA cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
                 title="png"
               >
                 png

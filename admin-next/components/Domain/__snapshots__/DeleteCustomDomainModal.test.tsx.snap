@@ -19,7 +19,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<DeleteCustomDomainModal /> <TestDeleteCustomDomainModal /> should rend
       }
     >
       <div
-        className="sc-bcXGCL BwvOS sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL BwvOS sc-GKYOR dCANLh cap-modal"
         style={
           {
             "opacity": 0,

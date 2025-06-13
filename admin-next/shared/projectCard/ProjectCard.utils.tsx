@@ -65,7 +65,7 @@ const getIsFutureStep = (steps: Steps): boolean => {
 export const renderTag = (project: ProjectCardshared_project$data, intl: IntlShape) => {
   const restrictedTag = () => (
     <Tag
-      variantColor="neutral-gray"
+      variantColor="infoGray"
       css={css({
         p: {
           lineHeight: 1,
@@ -95,7 +95,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
 
   if (project.archived)
     return tag(
-      'neutral-gray',
+      'infoGray',
       intl.formatMessage({
         id: 'global-archived',
       }),
@@ -106,7 +106,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
   const isFutureStep = project.steps ? getIsFutureStep(project.steps) : null
   if (isFutureStep)
     return tag(
-      'aqua',
+      'info',
       intl.formatMessage({
         id: 'step.status.future',
       }),
@@ -116,7 +116,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
   const isStepFinished = project.currentStep.state === 'CLOSED'
   if (isStepFinished)
     return tag(
-      'neutral-gray',
+      'infoGray',
       intl.formatMessage({
         id: 'global.ended',
       }),
@@ -125,7 +125,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
   const hoursLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'hours')
   if (hoursLeft > -48 && project.currentStep)
     return tag(
-      'red',
+      'danger',
       `${-hoursLeft} ${intl.formatMessage(
         {
           id: 'count.hoursLeft',
@@ -139,7 +139,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
   const daysLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'days')
   if (daysLeft > -7 && project.currentStep)
     return tag(
-      'orange',
+      'warning',
       `${-daysLeft} ${intl.formatMessage(
         {
           id: 'count.daysLeft',
@@ -152,7 +152,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
     )
   if (publishedTime < 48)
     return tag(
-      'green',
+      'success',
       intl.formatMessage({
         id: 'global.new',
       }),

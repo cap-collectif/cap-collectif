@@ -62,7 +62,7 @@ export const MemberCard = ({
       </Flex>
 
       {existingMember?.type === 'INVITATION' && (
-        <Tag variantColor={'yellow'}>{intl.formatMessage({ id: 'status-invitation-pending' })}</Tag>
+        <Tag variantColor="warning">{intl.formatMessage({ id: 'status-invitation-pending' })}</Tag>
       )}
 
       {(existingMember?.type === 'MEMBER' || isPendingMember) && (

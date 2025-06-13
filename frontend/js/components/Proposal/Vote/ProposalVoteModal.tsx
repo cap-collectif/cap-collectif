@@ -521,7 +521,7 @@ export const ProposalVoteModal = ({ proposal: proposalRef, step: stepRef, viewer
         <Modal.Body>
           <Flex direction="column" align="flex-start" spacing={6}>
             {requirements?.length ? (
-              <Tag variantColor="green">
+              <Tag variantColor="success">
                 <Tag.LeftIcon name={CapUIIcon.Check} />
                 <Tag.Label>
                   {intl.formatMessage({

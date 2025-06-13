@@ -267,7 +267,7 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
                           </Tooltip>
                         )}
                         {invite?.status === StatusEnum.PENDING && (
-                          <Tag variantColor="orange">{intl.formatMessage({ id: 'waiting' })}</Tag>
+                          <Tag variantColor="warning">{intl.formatMessage({ id: 'waiting' })}</Tag>
                         )}
                       </Flex>
                     </Table.Td>

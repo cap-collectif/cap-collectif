@@ -16,8 +16,12 @@ Array [
     placement="top"
   >
     <div
-      className="sc-bcXGCL cokLsN sc-fXqqsB gKbWOe cap-tag"
+      aria-label="Tag "
+      className="sc-bcXGCL jKDIYi cap-tag"
       id="restricted-access"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={-1}
       title=""
     >
       <svg
@@ -56,8 +60,12 @@ Array [
     placement="top"
   >
     <div
-      className="sc-bcXGCL cokLsN sc-fXqqsB gKbWOe cap-tag"
+      aria-label="Tag "
+      className="sc-bcXGCL jKDIYi cap-tag"
       id="restricted-access"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={-1}
       title=""
     >
       <svg

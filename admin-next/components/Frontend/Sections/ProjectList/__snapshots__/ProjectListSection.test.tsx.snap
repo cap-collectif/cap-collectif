@@ -302,11 +302,14 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
          "
                 />
                 <div
-                  className="sc-bcXGCL bHUozq sc-f7db5058-0 kWsBHq"
+                  className="sc-bcXGCL bHUozq sc-987cf8f3-0 kzlLnb"
                 >
                   <div
-                    className="sc-bcXGCL bBcjNr sc-fXqqsB gKbWOe cap-tag"
-                    style={{}}
+                    aria-label="Tag step.status.future"
+                    className="sc-bcXGCL kMtquX cap-tag"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    tabIndex={-1}
                     title="step.status.future"
                   >
                     <span
@@ -316,8 +319,11 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                     </span>
                   </div>
                   <div
-                    className="sc-bcXGCL fnmjmD sc-fXqqsB gKbWOe cap-tag sc-f7db5058-2 ksGEYB"
-                    style={{}}
+                    aria-label="Tag "
+                    className="sc-bcXGCL UwUoA cap-tag sc-987cf8f3-2 dTUDIQ"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    tabIndex={-1}
                     title=""
                   >
                     <svg
@@ -387,7 +393,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-f7db5058-3 fOCVHs"
+                          className="sc-987cf8f3-3 ikAnXZ"
                         >
                           &lt;mock-value-for-field-"title"&gt;
                         </span>
@@ -421,7 +427,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-f7db5058-3 iaSLa-D"
+                          className="sc-987cf8f3-3 kHVPqC"
                         >
                           &lt;mock-value-for-field-"name"&gt;
                         </span>
@@ -448,7 +454,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                           />
                         </svg>
                         <span
-                          className="sc-f7db5058-3 iaSLa-D"
+                          className="sc-987cf8f3-3 kHVPqC"
                         >
                           &lt;mock-value-for-field-"title"&gt;
                         </span>

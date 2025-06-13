@@ -46,7 +46,7 @@ const CommentInfos = ({ comment: commentRef }: Props) => {
       <PinnedLabel show={comment?.pinned} type="comment" />
       {!moderationEnabled && <UnpublishedLabel publishable={comment} />}
       {comment?.moderationStatus === 'PENDING' && (
-        <Tag variantColor="orange" variant="badge" maxWidth="none !important" ml={2}>
+        <Tag variantColor="warning" variant="badge" maxWidth="none !important" ml={2}>
           <Tag.LeftIcon name={CapUIIcon.Clock} mr="4px !important" />
           <Tag.Label
             margin="0 !important"

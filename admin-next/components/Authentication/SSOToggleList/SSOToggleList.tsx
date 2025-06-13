@@ -60,7 +60,7 @@ const SSOToggleList: FC = () => {
           {intl.formatMessage({ id: 'activate-custom-authentication-method' })}
         </Text>
 
-        <Tag variantColor="gray">
+        <Tag variantColor="infoGray">
           <Tag.LeftIcon name={CapUIIcon.LockOpen} size={CapUIIconSize.Sm} mr={0} />
         </Tag>
       </Flex>

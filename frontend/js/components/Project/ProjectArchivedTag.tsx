@@ -6,7 +6,7 @@ const ProjectArchivedTag = () => {
   const intl = useIntl()
   return (
     <Box position="absolute" top="12px" right="10px">
-      <Tag id="archived-tag" variantColor="neutral-gray" color="neutral-gray.500" as="Flex">
+      <Tag id="archived-tag" variantColor="infoGray" color="neutral-gray.500" as="Flex">
         <Flex>
           <Icon name={CapUIIcon.FolderO} />
           <Text color="neutral-gray.800" fontWeight={600}>

@@ -43,8 +43,8 @@ export const TableHead = () => {
 
 export const MediaTags = ({ media }: { media: Media }) => (
   <Flex spacing={2}>
-    {media.width && media.height ? <Tag variantColor="gray">{`${media.width}x${media.height}px`}</Tag> : null}
-    <Tag variantColor="gray">{convertFileSize(media.size)}</Tag>
-    <Tag variantColor="gray">{getFileExtension(media.providerReference)}</Tag>
+    {media.width && media.height ? <Tag variantColor="infoGray">{`${media.width}x${media.height}px`}</Tag> : null}
+    <Tag variantColor="infoGray">{convertFileSize(media.size)}</Tag>
+    <Tag variantColor="infoGray">{getFileExtension(media.providerReference)}</Tag>
   </Flex>
 )

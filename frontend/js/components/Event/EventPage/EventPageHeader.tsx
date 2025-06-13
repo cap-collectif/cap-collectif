@@ -205,13 +205,13 @@ export const Header = ({ children }: { children: JSX.Element | JSX.Element[] | s
 const getLabelColor = (status: EventReviewStatus | null | undefined) => {
   switch (status) {
     case 'APPROVED':
-      return 'green'
+      return 'success'
 
     case 'AWAITING':
-      return 'orange'
+      return 'warning'
 
     default:
-      return 'red'
+      return 'danger'
   }
 }
 

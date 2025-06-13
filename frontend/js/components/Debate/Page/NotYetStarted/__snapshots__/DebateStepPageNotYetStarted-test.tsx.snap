@@ -13,7 +13,17 @@ Array [
       className="sc-bcXGCL kbtrck"
     >
       <div
-        className="sc-bcXGCL bFhoSS sc-fXqqsB ewilwr cap-tag"
+        aria-label="Tag "
+        className="sc-bcXGCL cumSym cap-tag"
+        onBlur={[Function]}
+        onFocus={[Function]}
+        style={
+          Object {
+            "marginLeft": 0,
+            "marginTop": 0,
+          }
+        }
+        tabIndex={-1}
         title=""
       >
         count.daysUntil {"count":725}

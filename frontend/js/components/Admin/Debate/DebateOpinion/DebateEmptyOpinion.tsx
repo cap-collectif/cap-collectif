@@ -22,7 +22,7 @@ const DebateEmptyOpinion = ({ type }: Props) => (
     position="relative"
   >
     <Tag
-      variantColor={type === 'FOR' ? 'green' : 'red'}
+      variantColor={type === 'FOR' ? 'success' : 'danger'}
       sx={{ position: 'absolute !important' }}
       top="-1px"
       left="-1px"

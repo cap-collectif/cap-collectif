@@ -30,8 +30,10 @@ export const DebateVoteItem = ({ vote }: Props) => (
       <Text fontSize={14} fontWeight={600} color="gray.900" as="div">
         <FormattedMessage id="i-voted" />
       </Text>
-      <Tag variantColor={vote.type === 'FOR' ? 'green' : 'red'}>
-        <FormattedMessage id={vote.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against'} />
+      <Tag variantColor={vote.type === 'FOR' ? 'success' : 'danger'}>
+        <FormattedMessage
+          id={vote.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against'}
+        />
       </Tag>
       <Text
         as="div"

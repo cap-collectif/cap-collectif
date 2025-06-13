@@ -53,7 +53,11 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL kcdSuz sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag "
+            className="sc-bcXGCL iXAWoJ cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title=""
           >
             <h5
@@ -173,7 +177,11 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL kcdSuz sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag "
+            className="sc-bcXGCL iXAWoJ cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title=""
           >
             <h5
@@ -293,7 +301,11 @@ Array [
             Agui le penseur
           </p>
           <div
-            className="sc-bcXGCL kcdSuz sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag "
+            className="sc-bcXGCL iXAWoJ cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title=""
           >
             <h5

@@ -19,7 +19,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<PrivacyModal /> renders correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL BwvOS sc-gsGkXq bMdHnV cap-modal privacy-policy"
+        className="sc-bcXGCL BwvOS sc-GKYOR htNobg cap-modal privacy-policy"
         id="privacy-modal"
         style={
           {

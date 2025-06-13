@@ -253,7 +253,11 @@ Array [
                   className="sc-bcXGCL drdikR"
                 >
                   <div
-                    className="sc-bcXGCL fnmjmD sc-fXqqsB gKbWOe cap-tag"
+                    aria-label="Tag <mock-value-for-field-\\"name\\">"
+                    className="sc-bcXGCL UwUoA cap-tag"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    tabIndex={-1}
                     title="<mock-value-for-field-\\"name\\">"
                   >
                     &lt;mock-value-for-field-"name"&gt;

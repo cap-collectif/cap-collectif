@@ -196,7 +196,7 @@ const Domain: FC = () => {
                   py={1}
                 >
                   <Tag
-                    variantColor="yellow"
+                    variantColor="warning"
                     onRemove={() => {
                       handleSubmit((data: FormValues) => {
                         data.customDomain = undefined
@@ -218,7 +218,7 @@ const Domain: FC = () => {
                   px={3}
                   py={1}
                 >
-                  <Tag variantColor="green" onRemove={onOpen}>
+                  <Tag variantColor="success" onRemove={onOpen}>
                     <Tag.Label>{customDomain}</Tag.Label>
                   </Tag>
                 </Box>

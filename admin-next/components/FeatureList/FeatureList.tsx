@@ -85,7 +85,7 @@ const FeatureList: FC = () => {
                             </Text>
 
                             {group.onlySuperAdmin && (
-                              <Tag variantColor="gray">
+                              <Tag variantColor="infoGray">
                                 <Tag.LeftIcon name={CapUIIcon.Lock} size={CapUIIconSize.Sm} mr={0} />
                               </Tag>
                             )}
@@ -116,13 +116,13 @@ const FeatureList: FC = () => {
                                       })}
                                     </Text>
                                     {featureFlagData.onlySuperAdmin && (
-                                      <Tag variantColor="gray">
+                                      <Tag variantColor="infoGray">
                                         <Tag.LeftIcon name={CapUIIcon.Lock} size={CapUIIconSize.Sm} mr={0} />
                                       </Tag>
                                     )}
 
                                     {(featureFlagName.includes('unstable__') || featureFlagName.includes('beta__')) && (
-                                      <Tag variantColor={featureFlagName.includes('unstable__') ? 'red' : 'yellow'}>
+                                      <Tag variantColor={featureFlagName.includes('unstable__') ? 'danger' : 'warning'}>
                                         <Tag.Label>
                                           {intl.formatMessage({
                                             id: featureFlagName.includes('unstable__')

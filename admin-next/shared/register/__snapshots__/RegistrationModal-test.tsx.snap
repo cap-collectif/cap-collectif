@@ -24,7 +24,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -33,7 +33,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL bOJnrx sc-gsGkXq gTDlYD cap-modal"
+        className="sc-bcXGCL bOJnrx sc-GKYOR djSaGS cap-modal"
         style={
           {
             "opacity": 0,
@@ -130,7 +130,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
               disabled={false}
               id=":r0:"
               name="email"
@@ -174,7 +174,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
                 disabled={false}
                 id=":r1:"
                 name="plainPassword"
@@ -214,7 +214,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -266,7 +266,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"
@@ -387,7 +387,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -396,7 +396,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL bOJnrx sc-gsGkXq gTDlYD cap-modal"
+        className="sc-bcXGCL bOJnrx sc-GKYOR djSaGS cap-modal"
         style={
           {
             "opacity": 0,
@@ -481,7 +481,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
               disabled={false}
               id=":r5:"
               name="email"
@@ -525,7 +525,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
                 disabled={false}
                 id=":r6:"
                 name="plainPassword"
@@ -565,7 +565,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -617,7 +617,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"

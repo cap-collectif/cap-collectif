@@ -122,7 +122,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-fvEvfv cap-menu__list"
+              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"

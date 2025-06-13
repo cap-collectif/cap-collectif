@@ -29,7 +29,7 @@ exports[`<ModalDebateOpinion /> should render correctly when creating opinion 1`
   >
     <Tag
       mb={4}
-      variantColor="green"
+      variantColor="success"
     >
       <FormattedMessage
         id="opinion.for"
@@ -140,7 +140,7 @@ exports[`<ModalDebateOpinion /> should render correctly when editing opinion 1`]
   >
     <Tag
       mb={4}
-      variantColor="green"
+      variantColor="success"
     >
       <FormattedMessage
         id="opinion.for"

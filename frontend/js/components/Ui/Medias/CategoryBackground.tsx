@@ -23,7 +23,7 @@ const CategoryBackground = ({
     <Box position="relative">
       {isArchived && (
         <Box position="absolute" top={2} right={2}>
-          <Tag variantColor="neutral-gray" mr={1}>
+          <Tag variantColor="infoGray" mr={1}>
             <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} fontWeight="700">
               {intl.formatMessage({
                 id: 'global-archived',

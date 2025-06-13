@@ -81,11 +81,14 @@ exports[`<District /> renders correctly 1`] = `
          "
               />
               <div
-                className="sc-bcXGCL bHUozq sc-f7db5058-0 kWsBHq"
+                className="sc-bcXGCL bHUozq sc-987cf8f3-0 kzlLnb"
               >
                 <div
-                  className="sc-bcXGCL sOGfP sc-fXqqsB gKbWOe cap-tag"
-                  style={{}}
+                  aria-label="Tag global-archived"
+                  className="sc-bcXGCL hserNM cap-tag"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  tabIndex={-1}
                   title="global-archived"
                 >
                   <span
@@ -146,7 +149,7 @@ exports[`<District /> renders correctly 1`] = `
                         />
                       </svg>
                       <span
-                        className="sc-f7db5058-3 kGTCBj"
+                        className="sc-987cf8f3-3 fbtCBi"
                       >
                         &lt;mock-value-for-field-"title"&gt;
                       </span>
@@ -174,7 +177,7 @@ exports[`<District /> renders correctly 1`] = `
                         />
                       </svg>
                       <span
-                        className="sc-f7db5058-3 kGTCBj"
+                        className="sc-987cf8f3-3 fbtCBi"
                       >
                         &lt;mock-value-for-field-"title"&gt;
                       </span>

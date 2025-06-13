@@ -42,7 +42,7 @@ const DebateOpinion = ({ debateOpinion: debateOpinionRef, onEdit, onDelete }: Pr
       onMouseLeave={() => setHovering(false)}
     >
       <Tag
-        variantColor={type === 'FOR' ? 'green' : 'red'}
+        variantColor={type === 'FOR' ? 'success' : 'danger'}
         sx={{
           position: 'absolute',
           top: '-1px',

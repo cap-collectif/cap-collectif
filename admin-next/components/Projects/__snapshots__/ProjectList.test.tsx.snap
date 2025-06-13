@@ -97,7 +97,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-fvEvfv cap-menu__list"
+              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -302,8 +302,11 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
-              style={{}}
+              aria-label="Tag public-everybody"
+              className="sc-bcXGCL iALMlr cap-tag"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              tabIndex={-1}
               title="public-everybody"
             >
               public-everybody
@@ -381,7 +384,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-fvEvfv cap-menu__list"
+              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -625,8 +628,11 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
-              style={{}}
+              aria-label="Tag public-everybody"
+              className="sc-bcXGCL iALMlr cap-tag"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              tabIndex={-1}
               title="public-everybody"
             >
               public-everybody
@@ -704,7 +710,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-fvEvfv cap-menu__list"
+              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -948,8 +954,11 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
-              style={{}}
+              aria-label="Tag public-everybody"
+              className="sc-bcXGCL iALMlr cap-tag"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              tabIndex={-1}
               title="public-everybody"
             >
               public-everybody
@@ -1027,7 +1036,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-fvEvfv cap-menu__list"
+              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -1271,8 +1280,11 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL enkkoh sc-fXqqsB gKbWOe cap-tag"
-              style={{}}
+              aria-label="Tag public-everybody"
+              className="sc-bcXGCL iALMlr cap-tag"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              tabIndex={-1}
               title="public-everybody"
             >
               public-everybody
@@ -1350,7 +1362,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-fvEvfv cap-menu__list"
+              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"

@@ -19,7 +19,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL cMMHFL sc-gsGkXq bMdHnV cap-modal"
+        className="sc-bcXGCL cMMHFL sc-GKYOR htNobg cap-modal"
         style={
           {
             "opacity": 0,
@@ -96,27 +96,37 @@ exports[`<MediaModal /> should render correctly 1`] = `
             className="sc-bcXGCL kzRATa"
           >
             <div
-              className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
+              aria-label="Tag 200x200px"
+              className="sc-bcXGCL UwUoA cap-tag"
+              onBlur={[Function]}
+              onFocus={[Function]}
               style={
                 {
                   "marginLeft": 0,
                   "marginTop": 0,
                 }
               }
+              tabIndex={-1}
               title="200x200px"
             >
               200x200px
             </div>
             <div
-              className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
-              style={{}}
+              aria-label="Tag 977ko"
+              className="sc-bcXGCL UwUoA cap-tag"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              tabIndex={-1}
               title="977ko"
             >
               977ko
             </div>
             <div
-              className="sc-bcXGCL jZwtPn sc-fXqqsB gKbWOe cap-tag"
-              style={{}}
+              aria-label="Tag png"
+              className="sc-bcXGCL UwUoA cap-tag"
+              onBlur={[Function]}
+              onFocus={[Function]}
+              tabIndex={-1}
               title="png"
             >
               png

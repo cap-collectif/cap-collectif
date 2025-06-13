@@ -31,7 +31,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({ children, selected, hr
       {selected && <Icon name={CapUIIcon.MenuArrow} size={CapUIIconSize.Xs} />}
       {children}
       {beta && (
-        <Tag variantColor="aqua">
+        <Tag variantColor="info">
           <Tag.Label>{intl.formatMessage({ id: 'global.beta' })}</Tag.Label>
         </Tag>
       )}

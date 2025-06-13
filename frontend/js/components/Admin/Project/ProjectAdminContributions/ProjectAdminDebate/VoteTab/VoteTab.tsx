@@ -103,7 +103,7 @@ export const VoteTab = ({ debate, debateStep, relay }: Props) => {
               </Table.Td>
 
               <Table.Td>
-                <Tag variantColor={vote.type === 'FOR' ? 'green' : 'red'}>
+                <Tag variantColor={vote.type === 'FOR' ? 'success' : 'danger'}>
                   {intl.formatMessage({
                     id: vote.type === 'FOR' ? 'argument.show.type.for' : 'argument.show.type.against',
                   })}

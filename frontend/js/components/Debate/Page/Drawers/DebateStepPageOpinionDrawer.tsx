@@ -51,7 +51,7 @@ const DebateStepPageOpinionDrawer = ({ opinion: opinionFragment, ...drawerProps 
           <Text mt={2} fontSize={CapUIFontSize.Headline} fontWeight="600">
             {opinion.author.username}
           </Text>
-          <Tag mt={1} variantColor={opinion.type === 'FOR' ? 'green' : 'red'}>
+          <Tag mt={1} variantColor={opinion.type === 'FOR' ? 'success' : 'danger'}>
             <Heading as="h5" fontWeight="700" uppercase>
               <FormattedMessage id={opinion.type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
             </Heading>

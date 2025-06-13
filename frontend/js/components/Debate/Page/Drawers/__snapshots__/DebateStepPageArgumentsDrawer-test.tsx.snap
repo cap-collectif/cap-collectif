@@ -98,7 +98,11 @@ Array [
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL yRLQM sc-fXqqsB gKbWOe cap-tag"
+                        aria-label="Tag "
+                        className="sc-bcXGCL dRIBFL cap-tag"
+                        onBlur={[Function]}
+                        onFocus={[Function]}
+                        tabIndex={-1}
                         title=""
                       >
                         <span
@@ -112,7 +116,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kRFCoC sc-fXqqsB gKbWOe cap-tag"
+                          aria-label="Tag "
+                          className="sc-bcXGCL wyqql cap-tag"
+                          onBlur={[Function]}
+                          onFocus={[Function]}
+                          tabIndex={-1}
                           title=""
                         >
                           <span
@@ -206,7 +214,11 @@ Array [
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL yRLQM sc-fXqqsB gKbWOe cap-tag"
+                        aria-label="Tag "
+                        className="sc-bcXGCL dRIBFL cap-tag"
+                        onBlur={[Function]}
+                        onFocus={[Function]}
+                        tabIndex={-1}
                         title=""
                       >
                         <span
@@ -220,7 +232,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kRFCoC sc-fXqqsB gKbWOe cap-tag"
+                          aria-label="Tag "
+                          className="sc-bcXGCL wyqql cap-tag"
+                          onBlur={[Function]}
+                          onFocus={[Function]}
+                          tabIndex={-1}
                           title=""
                         >
                           <span
@@ -314,7 +330,11 @@ Array [
                         &lt;mock-value-for-field-"username"&gt;
                       </p>
                       <div
-                        className="sc-bcXGCL yRLQM sc-fXqqsB gKbWOe cap-tag"
+                        aria-label="Tag "
+                        className="sc-bcXGCL dRIBFL cap-tag"
+                        onBlur={[Function]}
+                        onFocus={[Function]}
+                        tabIndex={-1}
                         title=""
                       >
                         <span
@@ -328,7 +348,11 @@ Array [
                         label="account-not-confirmed-end-step"
                       >
                         <div
-                          className="sc-bcXGCL kRFCoC sc-fXqqsB gKbWOe cap-tag"
+                          aria-label="Tag "
+                          className="sc-bcXGCL wyqql cap-tag"
+                          onBlur={[Function]}
+                          onFocus={[Function]}
+                          tabIndex={-1}
                           title=""
                         >
                           <span

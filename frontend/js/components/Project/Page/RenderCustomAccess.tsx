@@ -45,7 +45,7 @@ const RenderCustomAccess = ({ project, isOnProjectCard = false }: Props): JSX.El
       >
         <Tag
           id="restricted-access"
-          variantColor={data.archived ? 'gray' : 'neutral-gray'}
+          variantColor="infoGray"
           onClick={onOpen}
           mr={isOnProjectCard ? 4 : 0}
         >

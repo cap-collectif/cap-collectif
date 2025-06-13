@@ -114,7 +114,7 @@ const ModalCreditRefill: FC<ModalCreditRefillProps> = ({ firstRequest }) => {
                 </Text>
               </Text>
 
-              <Tag variantColor="green" maxWidth="100% !important">
+              <Tag variantColor="success" maxWidth="100% !important">
                 <Tag.Label>
                   {`${unitPriceSms}
                                     € / ${intl.formatMessage({ id: 'verified-participant' }).toLowerCase()} 

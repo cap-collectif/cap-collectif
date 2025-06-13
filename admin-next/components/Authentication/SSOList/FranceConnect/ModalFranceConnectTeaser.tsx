@@ -62,7 +62,7 @@ const ModalFranceConnectTeaser: FC<ModalFranceConnectTeaserProps> = ({ organizat
             </Text>
           </Text>
 
-          <Tag variantColor="green">
+          <Tag variantColor="success">
             <Tag.Label>{intl.formatMessage({ id: 'france.connect.discount' })}</Tag.Label>
           </Tag>
 

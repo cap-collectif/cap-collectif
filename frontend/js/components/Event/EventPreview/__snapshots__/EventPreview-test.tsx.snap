@@ -431,7 +431,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag com
   />
   <Tag
     className="eventTag"
-    variantColor="red"
+    variantColor="danger"
   >
     <Tag.Label>
       complete
@@ -578,7 +578,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag reg
   />
   <Tag
     className="eventTag"
-    variantColor="green"
+    variantColor="success"
   >
     <Tag.Label>
       admin.fields.event_registration.registered
@@ -725,7 +725,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag res
   />
   <Tag
     className="eventTag"
-    variantColor="green"
+    variantColor="success"
   >
     <Tag.Label>
       admin.fields.event_registration.registered

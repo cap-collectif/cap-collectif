@@ -137,7 +137,7 @@ export const ArgumentCard = ({
                     id: 'global.anonymous',
                   })}
             </Text>
-            <Tag mb={2} variantColor={argument.type === 'FOR' ? 'green' : 'red'} interactive={false} mr={2}>
+            <Tag mb={2} variantColor={argument.type === 'FOR' ? 'success' : 'danger'} interactive={false} mr={2}>
               <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
                 <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
               </Text>
@@ -156,7 +156,7 @@ export const ArgumentCard = ({
                 <Tag
                   mb={2}
                   maxWidth="none !important"
-                  variantColor={stepClosed ? 'red' : 'orange'}
+                  variantColor={stepClosed ? 'danger' : 'warning'}
                   interactive={false}
                   icon={stepClosed ? CapUIIcon.Cross : CapUIIcon.Clock}
                 >

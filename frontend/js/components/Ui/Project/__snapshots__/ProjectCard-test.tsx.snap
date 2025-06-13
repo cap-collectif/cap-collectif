@@ -34,7 +34,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag step.status.open.participation"
+            className="sc-bcXGCL ksPOMf cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="step.status.open.participation"
           >
             <svg
@@ -283,7 +287,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag step.status.open.participation"
+            className="sc-bcXGCL ksPOMf cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="step.status.open.participation"
           >
             <svg
@@ -532,7 +540,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL iIhamD sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag global-archived"
+            className="sc-bcXGCL grAOxw cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="global-archived"
           >
             <span
@@ -765,7 +777,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag step.status.open.participation"
+            className="sc-bcXGCL ksPOMf cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="step.status.open.participation"
           >
             <svg
@@ -1014,7 +1030,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag step.status.open.participation"
+            className="sc-bcXGCL ksPOMf cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="step.status.open.participation"
           >
             <svg
@@ -1263,7 +1283,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag step.status.open.participation"
+            className="sc-bcXGCL ksPOMf cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="step.status.open.participation"
           >
             <svg
@@ -1602,7 +1626,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag step.status.open.participation"
+            className="sc-bcXGCL ksPOMf cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="step.status.open.participation"
           >
             <svg
@@ -1851,7 +1879,11 @@ Array [
           className="sc-bcXGCL jesjSY"
         >
           <div
-            className="sc-bcXGCL cjeGsh sc-fXqqsB gKbWOe cap-tag"
+            aria-label="Tag step.status.open.participation"
+            className="sc-bcXGCL ksPOMf cap-tag"
+            onBlur={[Function]}
+            onFocus={[Function]}
+            tabIndex={-1}
             title="step.status.open.participation"
           >
             <svg

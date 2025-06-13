@@ -40,22 +40,22 @@ const StatusTag = ({ reply, intl }: { reply: ReplyItem_reply; intl: IntlShape })
 
   switch (reply.status) {
     case 'DRAFT':
-      variant = 'gray'
+      variant = 'infoGray'
       message = 'global-draft'
       break
 
     case 'PUBLISHED':
-      variant = 'green'
+      variant = 'success'
       message = 'global.published'
       break
 
     case 'PENDING':
-      variant = 'orange'
+      variant = 'warning'
       message = 'waiting'
       break
 
     case 'NOT_PUBLISHED':
-      variant = 'red'
+      variant = 'danger'
       message = 'global.no.published'
       break
 

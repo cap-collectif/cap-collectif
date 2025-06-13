@@ -166,13 +166,13 @@ const ProjectItem: React.FC<ProjectItemProps> = ({
       ) : null}
       <Table.Td>
         {project.visibility === 'PUBLIC' && (
-          <Tag variantColor="green">{intl.formatMessage({ id: 'public-everybody' })}</Tag>
+          <Tag variantColor="success">{intl.formatMessage({ id: 'public-everybody' })}</Tag>
         )}
         {project.visibility === 'CUSTOM' && (
-          <Tag variantColor="aqua">{intl.formatMessage({ id: 'global.customized' })}</Tag>
+          <Tag variantColor="info">{intl.formatMessage({ id: 'global.customized' })}</Tag>
         )}
         {(project.visibility === 'ME' || project.visibility === 'ADMIN') && (
-          <Tag variantColor="gray">{intl.formatMessage({ id: 'private' })}</Tag>
+          <Tag variantColor="infoGray">{intl.formatMessage({ id: 'private' })}</Tag>
         )}
       </Table.Td>
 

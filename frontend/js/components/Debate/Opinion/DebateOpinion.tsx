@@ -53,7 +53,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
       position="relative"
     >
       <Tag
-        variantColor={opinion.type === 'FOR' ? 'green' : 'red'}
+        variantColor={opinion.type === 'FOR' ? 'success' : 'danger'}
         variantType="tag"
         borderBottomLeftRadius={0}
         borderTopLeftRadius={0}

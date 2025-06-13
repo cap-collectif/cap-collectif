@@ -12,7 +12,11 @@ Array [
     className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
+      aria-label="Tag "
+      className="sc-bcXGCL dIIYut cap-tag"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={-1}
       title=""
     >
       <span
@@ -112,7 +116,11 @@ Array [
     className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
+      aria-label="Tag "
+      className="sc-bcXGCL dIIYut cap-tag"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={-1}
       title=""
     >
       <span
@@ -212,7 +220,11 @@ Array [
     className="sc-bcXGCL ktIMbs cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
+      aria-label="Tag "
+      className="sc-bcXGCL dIIYut cap-tag"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={-1}
       title=""
     >
       <span
@@ -309,7 +321,11 @@ Array [
     className="sc-bcXGCL bnUGuG cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
+      aria-label="Tag "
+      className="sc-bcXGCL dIIYut cap-tag"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={-1}
       title=""
     >
       <span
@@ -416,7 +432,11 @@ Array [
     className="sc-bcXGCL ktIMbs cap-card"
   >
     <div
-      className="sc-bcXGCL bruSHA sc-fXqqsB gKbWOe cap-tag"
+      aria-label="Tag "
+      className="sc-bcXGCL dIIYut cap-tag"
+      onBlur={[Function]}
+      onFocus={[Function]}
+      tabIndex={-1}
       title=""
     >
       <span

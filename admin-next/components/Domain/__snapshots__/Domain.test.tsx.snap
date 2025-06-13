@@ -63,7 +63,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH bzZHnn cvFBmb cap-input"
+          className="sc-bcXGCL sc-dwnPIk bzZHnn bmynOz cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -143,26 +143,25 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
               className="sc-bcXGCL fDqpkd"
             >
               <div
-                className="sc-bcXGCL hRSTkl sc-fXqqsB gKbWOe cap-tag"
-                style={{}}
+                aria-label="Tag custom.domain.com"
+                className="sc-bcXGCL fnXYCb cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
                 title="custom.domain.com"
               >
-                <p
-                  className="sc-bcXGCL NFByR cap-text cap-tag__label"
+                <span
+                  className="sc-bcXGCL cknzsH cap-tag__label"
                 >
                   custom.domain.com
-                </p>
-                <div
-                  aria-label="close"
-                  className="sc-bcXGCL da-DdJX cap-tag__closeButton"
+                </span>
+                <button
+                  aria-label="Remove custom.domain.com"
+                  className="sc-bcXGCL sc-laZSpB gHFgbR gDuqin cap-button cap-tag__closeButton"
                   onClick={[Function]}
-                  role="button"
-                  style={
-                    {
-                      "opacity": 0,
-                      "right": "0rem",
-                    }
-                  }
+                  onKeyDown={[Function]}
+                  tabIndex={0}
+                  type="button"
                 >
                   <svg
                     aria-hidden="true"
@@ -181,7 +180,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
                       strokeWidth={0.8}
                     />
                   </svg>
-                </div>
+                </button>
               </div>
             </div>
           </div>
@@ -273,7 +272,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH bzZHnn cvFBmb cap-input"
+          className="sc-bcXGCL sc-dwnPIk bzZHnn bmynOz cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -350,7 +349,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
             className="sc-bcXGCL ciCehw cap-input-group"
           >
             <input
-              className="sc-bcXGCL sc-UpCiH bzZHnn cvFBmb cap-input"
+              className="sc-bcXGCL sc-dwnPIk bzZHnn bmynOz cap-input"
               disabled={false}
               id="customDomain"
               name="customDomain"

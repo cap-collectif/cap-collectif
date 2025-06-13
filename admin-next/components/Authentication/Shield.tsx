@@ -254,7 +254,7 @@ const Shield: FC = () => {
                     <Text color="gray.900" fontSize={CapUIFontSize.BodyRegular} fontWeight={CapUIFontWeight.Semibold}>
                       {intl.formatMessage({ id: 'instant-authentication' })}
                     </Text>
-                    <Tag variantColor="gray">
+                    <Tag variantColor="infoGray">
                       <Tag.LeftIcon name={CapUIIcon.LockOpen} size={CapUIIconSize.Sm} mr={0} />
                     </Tag>
                   </Flex>
@@ -280,7 +280,7 @@ const Shield: FC = () => {
                         id: 'capco.module.remind_user_account_confirmation',
                       })}
                     </Text>
-                    <Tag variantColor="gray">
+                    <Tag variantColor="infoGray">
                       <Tag.LeftIcon name={CapUIIcon.LockOpen} size={CapUIIconSize.Sm} mr={0} />
                     </Tag>
                   </Flex>

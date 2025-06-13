@@ -33,13 +33,13 @@ type Props = {
 }
 
 const getTagLabel = (intl, availableRegistration, tagColor: string | null | undefined) => {
-  if (tagColor === 'red') {
+  if (tagColor === 'danger') {
     return intl.formatMessage({
       id: 'complete',
     })
   }
 
-  if (tagColor === 'yellow') {
+  if (tagColor === 'warning') {
     return intl.formatMessage(
       {
         id: 'x-available-registration',
@@ -50,7 +50,7 @@ const getTagLabel = (intl, availableRegistration, tagColor: string | null | unde
     )
   }
 
-  if (tagColor === 'green') {
+  if (tagColor === 'success') {
     return intl.formatMessage({
       id: 'admin.fields.event_registration.registered',
     })
@@ -67,17 +67,17 @@ const getTagColor = (
   isViewerParticipatingAtEvent,
 ) => {
   if (isViewerParticipatingAtEvent) {
-    return 'green'
+    return 'success'
   }
 
   if (isCompleteAndRegistrationPossibleResolver) {
-    return 'red'
+    return 'danger'
   }
 
   const isRegistrationMeasurable = isMeasurable || guestListEnabled
 
   if (availableRegistration && isRegistrationMeasurable && availableRegistration < 4 && availableRegistration > 0) {
-    return 'yellow'
+    return 'warning'
   }
 
   return null

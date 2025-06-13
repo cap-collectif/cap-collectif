@@ -34,7 +34,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id=":r0:"
       name="email"
@@ -78,7 +78,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         aria-required={true}
         autoComplete="off"
         autoFocus={true}
-        className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
         disabled={false}
         id=":r1:"
         name="plainPassword"
@@ -118,7 +118,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     <input
       aria-required={true}
       autoComplete="username"
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id="username"
       minLength={2}
@@ -170,7 +170,7 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     />
     <input
       aria-required={false}
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id="responses.0.value"
       name="responses.0.value"
@@ -276,7 +276,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id=":r5:"
       name="email"
@@ -320,7 +320,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         aria-required={true}
         autoComplete="off"
         autoFocus={true}
-        className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
         disabled={false}
         id=":r6:"
         name="plainPassword"
@@ -360,7 +360,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     <input
       aria-required={true}
       autoComplete="username"
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id="username"
       minLength={2}
@@ -546,7 +546,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     />
     <input
       aria-required={false}
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id="responses.0.value"
       name="responses.0.value"
@@ -643,7 +643,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id=":rb:"
       name="email"
@@ -687,7 +687,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         aria-required={true}
         autoComplete="off"
         autoFocus={true}
-        className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
         disabled={false}
         id=":rc:"
         name="plainPassword"
@@ -727,7 +727,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     <input
       aria-required={true}
       autoComplete="username"
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id="username"
       minLength={2}
@@ -772,7 +772,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     </label>
     <input
       autoComplete="postal-code"
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id=":re:"
       name="zipcode"
@@ -822,7 +822,7 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     />
     <input
       aria-required={false}
-      className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
       disabled={false}
       id="responses.0.value"
       name="responses.0.value"

@@ -18,7 +18,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     >
       <div
         autoFocus={true}
-        className="sc-bcXGCL bOJnrx sc-gsGkXq gTDlYD cap-modal"
+        className="sc-bcXGCL bOJnrx sc-GKYOR djSaGS cap-modal"
         style={
           {
             "opacity": 0,
@@ -127,7 +127,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                 aria-required={true}
                 autoComplete="email"
                 autoFocus={true}
-                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
                 disabled={false}
                 id=":r0:"
                 name="username"
@@ -167,7 +167,7 @@ exports[`<LoginModal /> render correctly 1`] = `
               <input
                 aria-required={true}
                 autoComplete="off"
-                className="sc-bcXGCL sc-UpCiH bzZHnn eVENPD cap-input"
+                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
                 disabled={false}
                 id=":r1:"
                 name="password"

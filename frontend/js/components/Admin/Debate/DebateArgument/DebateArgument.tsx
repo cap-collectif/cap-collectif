@@ -107,7 +107,7 @@ export const DebateArgument = ({ argument, setModerateArgumentModal }: Props) =>
 
       <Flex direction="row" flex="1" align="center" justify="space-between">
         <Tag
-          variantColor={type === 'FOR' ? 'green' : 'red'}
+          variantColor={type === 'FOR' ? 'success' : 'danger'}
           onClick={() =>
             dispatch({
               type: 'CHANGE_ARGUMENT_TYPE',

@@ -8,19 +8,19 @@ const StatusTag = ({ status }: { status: UserInviteStatus | null | undefined }) 
 
   const statuses = {
     PENDING: {
-      color: 'orange',
+      color: 'warning',
       messageId: 'waiting',
     },
     EXPIRED: {
-      color: 'gray',
+      color: 'infoGray',
       messageId: 'global.expired.feminine',
     },
     FAILED: {
-      color: 'red',
+      color: 'danger',
       messageId: 'sending.failure',
     },
     ACCEPTED: {
-      color: 'green',
+      color: 'success',
       messageId: 'global.accepted.feminine',
     },
   }

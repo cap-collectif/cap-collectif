@@ -43,7 +43,7 @@ export const DebateStepPageNotYetStarted = ({ step }: Props): JSX.Element => {
   return (
     <Box id="DebateStepPageNotYetStarted">
       <Flex direction="column" alignItems="center" spacing={4}>
-        <Tag variantType="badge" variantColor="blue" icon="CLOCK">
+        <Tag variantType="badge" variantColor="info" icon="CLOCK">
           {timeUntil}
         </Tag>
         <Heading as="h2" fontWeight="400" mb={2} textAlign="center" color="gray.900">

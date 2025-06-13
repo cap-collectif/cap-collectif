@@ -65,7 +65,7 @@ export const SideBarItem: React.FC<SideBarItemProps> = ({ id, title, icon, href,
       </Flex>
 
       {beta && fold && (
-        <Tag variantColor="aqua">
+        <Tag variantColor="info">
           <Tag.Label>{intl.formatMessage({ id: 'global.beta' })}</Tag.Label>
         </Tag>
       )}

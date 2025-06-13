@@ -48,7 +48,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="green"
+          variantColor="success"
         >
           argument.show.type.for
         </Tag>
@@ -94,7 +94,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="red"
+          variantColor="danger"
         >
           argument.show.type.against
         </Tag>
@@ -140,7 +140,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="red"
+          variantColor="danger"
         >
           argument.show.type.against
         </Tag>
@@ -183,7 +183,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="red"
+          variantColor="danger"
         >
           argument.show.type.against
         </Tag>
@@ -229,7 +229,7 @@ exports[`<VoteTab /> should render correctly 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="green"
+          variantColor="success"
         >
           argument.show.type.for
         </Tag>
@@ -322,7 +322,7 @@ exports[`<VoteTab /> should render correctly when step closed 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="green"
+          variantColor="success"
         >
           argument.show.type.for
         </Tag>
@@ -368,7 +368,7 @@ exports[`<VoteTab /> should render correctly when step closed 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="red"
+          variantColor="danger"
         >
           argument.show.type.against
         </Tag>
@@ -414,7 +414,7 @@ exports[`<VoteTab /> should render correctly when step closed 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="red"
+          variantColor="danger"
         >
           argument.show.type.against
         </Tag>
@@ -457,7 +457,7 @@ exports[`<VoteTab /> should render correctly when step closed 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="red"
+          variantColor="danger"
         >
           argument.show.type.against
         </Tag>
@@ -503,7 +503,7 @@ exports[`<VoteTab /> should render correctly when step closed 1`] = `
       </Table.Td>
       <Table.Td>
         <Tag
-          variantColor="green"
+          variantColor="success"
         >
           argument.show.type.for
         </Tag>

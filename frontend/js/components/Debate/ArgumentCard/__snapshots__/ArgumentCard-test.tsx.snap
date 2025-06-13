@@ -32,7 +32,7 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variantColor="green"
+          variantColor="success"
         >
           <Text
             as="span"
@@ -175,7 +175,7 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variantColor="green"
+          variantColor="success"
         >
           <Text
             as="span"
@@ -318,7 +318,7 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variantColor="green"
+          variantColor="success"
         >
           <Text
             as="span"
@@ -461,7 +461,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
           interactive={false}
           mb={2}
           mr={2}
-          variantColor="green"
+          variantColor="success"
         >
           <Text
             as="span"
@@ -604,7 +604,7 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
           interactive={false}
           mb={2}
           mr={2}
-          variantColor="green"
+          variantColor="success"
         >
           <Text
             as="span"

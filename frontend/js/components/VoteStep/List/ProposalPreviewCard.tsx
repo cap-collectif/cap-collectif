@@ -195,7 +195,7 @@ export const ProposalPreviewCard = ({
           <Flex spacing={isCompleteView ? 2 : 0} flexWrap="wrap">
             {isCompleteView && !!status ? (
               // @ts-ignore fix DS
-              <Tag variantColor="neutral-gray" sx={{ maxWidth: 'unset !important' }}>
+              <Tag variantColor="infoGray" sx={{ maxWidth: 'unset !important' }}>
                 {status?.name}
               </Tag>
             ) : null}
@@ -267,7 +267,7 @@ export const ProposalPreviewCard = ({
                   top={2}
                   right={2}
                   zIndex={2}
-                  variantColor="neutral-gray"
+                  variantColor="infoGray"
                 >
                   {status?.name}
                 </Tag>

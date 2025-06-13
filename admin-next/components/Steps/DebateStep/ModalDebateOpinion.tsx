@@ -172,7 +172,7 @@ export const ModalDebateOpinion: React.FC<Props> = ({ onClose, type, opinion: op
         <Heading>{intl.formatMessage({ id: getTitle(type, isCreating) })}</Heading>
       </Modal.Header>
       <Modal.Body>
-        <Tag variantColor={type === 'FOR' ? 'green' : 'red'} mb={4} width="max-content">
+        <Tag variantColor={type === 'FOR' ? 'success' : 'danger'} mb={4} width="max-content">
           {intl.formatMessage({ id: type === 'FOR' ? 'opinion.for' : 'opinion.against' })}
         </Tag>
 

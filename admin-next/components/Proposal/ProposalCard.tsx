@@ -197,13 +197,13 @@ export const ProposalCard = ({
             <Flex alignItems="center" spacing={4} justifyContent="start" flex="none">
               <Flex alignItems="center" spacing={2}>
                 {estimation !== null && typeof estimation !== 'undefined' ? (
-                  <Tag variantColor="neutral-gray" mr={4} sx={tagSx}>
+                  <Tag variantColor="infoGray" mr={4} sx={tagSx}>
                     <Icon size={CapUIIconSize.Md} name={CapUIIcon.CoinO} color="neutral-gray.900" />
                     {intl.formatNumber(estimation, { currency: 'EUR' })}€
                   </Tag>
                 ) : null}
                 {reference ? (
-                  <Tag variantColor="neutral-gray" mr={4} sx={tagSx}>
+                  <Tag variantColor="infoGray" mr={4} sx={tagSx}>
                     <Icon size={CapUIIconSize.Md} name={CapUIIcon.TagO} color="neutral-gray.900" />
                     REF: {reference}
                   </Tag>

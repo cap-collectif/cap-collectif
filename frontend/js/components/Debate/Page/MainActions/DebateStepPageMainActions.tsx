@@ -20,7 +20,7 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props): JSX.Elemen
       <Skeleton isLoaded={!!step} placeholder={<DebateStepPageMainActionsPlaceholder />}>
         <Flex direction="column" alignItems="center" spacing={4}>
           {stepClosed && (
-            <Tag variantType="badge" variantColor="neutral-gray" icon="CLOCK">
+            <Tag variantType="badge" variantColor="infoGray" icon="CLOCK">
               {intl.formatMessage({
                 id: 'global.ended',
               })}
@@ -28,7 +28,7 @@ export const DebateStepPageMainActions = ({ step, isMobile }: Props): JSX.Elemen
           )}
 
           {!stepClosed && step?.timeRange?.endAt && (
-            <Tag variantType="badge" variantColor="yellow" icon="CLOCK">
+            <Tag variantType="badge" variantColor="warning" icon="CLOCK">
               <RemainingTime noStyle endAt={step?.timeRange?.endAt} />
             </Tag>
           )}

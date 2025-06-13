@@ -165,7 +165,7 @@ const ParticipantList: React.FC<ParticipantListProps> = ({
                   </Text>
                 </Table.Td>
                 <Table.Td>
-                  <Tag variantColor={isAccounted ? 'green' : 'red'}>
+                  <Tag variantColor={isAccounted ? 'success' : 'danger'}>
                     {intl.formatMessage({
                       id: isAccounted
                         ? 'mediator.participation_status.complete'

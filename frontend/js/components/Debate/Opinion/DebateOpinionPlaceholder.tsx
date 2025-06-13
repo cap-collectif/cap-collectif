@@ -8,7 +8,7 @@ type Props = {
 export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props): JSX.Element => (
   <Card p={0} bg="white" width="100%">
     <Tag
-      variantColor={debateOpinionStatus === 'FOR' ? 'green' : 'red'}
+      variantColor={debateOpinionStatus === 'FOR' ? 'success' : 'danger'}
       sx={{
         position: 'absolute',
       }}

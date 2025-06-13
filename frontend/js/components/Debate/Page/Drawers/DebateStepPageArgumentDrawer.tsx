@@ -68,7 +68,7 @@ const DebateStepPageArgumentDrawer = ({
               })}
           </Text>
 
-          <Tag variantColor={argument.type === 'FOR' ? 'green' : 'red'} interactive={false} alignSelf="center">
+          <Tag variantColor={argument.type === 'FOR' ? 'success' : 'danger'} interactive={false} alignSelf="center">
             <Heading as="h5" fontWeight="700" uppercase>
               <FormattedMessage id={argument.type === 'FOR' ? 'global.for' : 'global.against'} />
             </Heading>

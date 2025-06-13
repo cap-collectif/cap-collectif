@@ -36,7 +36,7 @@ exports[`<DebateVoteItem /> renders correcty for vote against 1`] = `
       />
     </Text>
     <Tag
-      variantColor="red"
+      variantColor="danger"
     >
       <FormattedMessage
         id="argument.show.type.against"
@@ -107,7 +107,7 @@ exports[`<DebateVoteItem /> renders correcty for vote for 1`] = `
       />
     </Text>
     <Tag
-      variantColor="green"
+      variantColor="success"
     >
       <FormattedMessage
         id="argument.show.type.for"

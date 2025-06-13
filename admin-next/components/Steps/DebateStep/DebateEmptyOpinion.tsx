@@ -23,7 +23,7 @@ const DebateEmptyOpinion = ({ type }: Props) => {
       bg="white"
     >
       <Tag
-        variantColor={type === 'FOR' ? 'green' : 'red'}
+        variantColor={type === 'FOR' ? 'success' : 'danger'}
         sx={{
           position: 'absolute !important' as SystemStyleObject,
         }}

@@ -25,7 +25,7 @@ const RenderPrivateAccess = ({ project, isOnProjectCard = false }: Props): JSX.E
 
   return (
     <Tooltip placement="top" label={<FormattedMessage id={visibleBy} />}>
-      <Tag id="restricted-access" variantColor={data.archived ? 'gray' : 'neutral-gray'} mr={isOnProjectCard ? 4 : 0}>
+      <Tag id="restricted-access" variantColor="infoGray" mr={isOnProjectCard ? 4 : 0}>
         <Icon name={CapUIIcon.Lock} />
         <FormattedMessage id="restrictedaccess" />
       </Tag>

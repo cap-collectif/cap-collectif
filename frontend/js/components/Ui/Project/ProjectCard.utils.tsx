@@ -73,7 +73,7 @@ export const renderTag = (
 ) => {
     const restrictedTag = () => (
         <Tag
-            variantColor="neutral-gray"
+            variantColor="infoGray"
             css={css({
                 p: {
                     lineHeight: 1,
@@ -110,7 +110,7 @@ export const renderTag = (
     if (project.archived)
         return tag(
             null,
-            'neutral-gray',
+            'infoGray',
             intl.formatMessage({
                 id: 'global-archived',
             }),
@@ -123,7 +123,7 @@ export const renderTag = (
     if (project.status === 'FUTURE_WITHOUT_FINISHED_STEPS')
         return tag(
             CapUIIcon.CalendarO,
-            'aqua',
+            'info',
             intl.formatMessage({
                 id: 'step.status.future',
             }),
@@ -133,7 +133,7 @@ export const renderTag = (
     if (isClosed)
         return tag(
             null,
-            'neutral-gray',
+            'infoGray',
             intl.formatMessage({
                 id: 'global.ended',
             }),
@@ -143,7 +143,7 @@ export const renderTag = (
     if (hoursLeft > -48 && project.currentStep)
         return tag(
             CapUIIcon.ClockO,
-            'red',
+            'danger',
             `${-hoursLeft} ${intl.formatMessage(
                 {
                     id: 'count.hoursLeft',
@@ -158,7 +158,7 @@ export const renderTag = (
     if (daysLeft > -7 && project.currentStep)
         return tag(
             CapUIIcon.ClockO,
-            'orange',
+            'warning',
             `${-daysLeft} ${intl.formatMessage(
                 {
                     id: 'count.daysLeft',
@@ -172,7 +172,7 @@ export const renderTag = (
     if (project.status === 'OPENED')
         return tag(
             CapUIIcon.HourglassO,
-            'green',
+            'success',
             intl.formatMessage({
                 id: 'global.in-progress',
             }),
@@ -181,7 +181,7 @@ export const renderTag = (
     if (project.status === 'OPENED_PARTICIPATION')
         return tag(
             CapUIIcon.BubbleO,
-            'green',
+            'success',
             intl.formatMessage({
                 id: 'step.status.open.participation',
             }),

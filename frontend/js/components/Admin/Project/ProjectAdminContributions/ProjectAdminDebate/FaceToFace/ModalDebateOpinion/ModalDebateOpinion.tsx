@@ -151,7 +151,7 @@ export const ModalDebateOpinion = ({ isCreating, onClose, type, handleSubmit }: 
       </Heading>
     </Modal.Header>
     <Modal.Body>
-      <Tag variantColor={type === 'FOR' ? 'green' : 'red'} mb={4}>
+      <Tag variantColor={type === 'FOR' ? 'success' : 'danger'} mb={4}>
         <FormattedMessage id={type === 'FOR' ? 'opinion.for' : 'opinion.against'} />
       </Tag>
 

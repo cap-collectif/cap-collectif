@@ -59,7 +59,7 @@ exports[`<DebateArgument /> should render correctly 1`] = `
   >
     <Tag
       onClick={[Function]}
-      variantColor="green"
+      variantColor="success"
     >
       <FormattedMessage
         id="argument.show.type.for"
@@ -109,7 +109,7 @@ exports[`<DebateArgument /> should render correctly when no published 1`] = `
   >
     <Tag
       onClick={[Function]}
-      variantColor="green"
+      variantColor="success"
     >
       <FormattedMessage
         id="argument.show.type.for"

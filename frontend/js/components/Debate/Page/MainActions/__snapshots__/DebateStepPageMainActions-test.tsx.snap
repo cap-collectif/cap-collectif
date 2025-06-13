@@ -15,7 +15,7 @@ exports[`<DebateStepPageMainActions/> renders correctly 1`] = `
     >
       <Tag
         icon="CLOCK"
-        variantColor="neutral-gray"
+        variantColor="infoGray"
         variantType="badge"
       >
         global.ended
@@ -61,7 +61,7 @@ exports[`<DebateStepPageMainActions/> renders correctly on mobile 1`] = `
     >
       <Tag
         icon="CLOCK"
-        variantColor="neutral-gray"
+        variantColor="infoGray"
         variantType="badge"
       >
         global.ended

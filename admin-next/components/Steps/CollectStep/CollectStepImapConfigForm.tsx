@@ -56,7 +56,7 @@ const CollectStepImapConfigForm: React.FC<Props> = ({ step: stepRef }) => {
     email: step?.imapConfig?.email,
     password: step?.imapConfig ? '****' : null,
   }
-  
+
   const formMethods = useForm<FormValues>({
     mode: 'onChange',
     defaultValues,
@@ -86,7 +86,7 @@ const CollectStepImapConfigForm: React.FC<Props> = ({ step: stepRef }) => {
     return 'IDLE'
   })
 
-  const [validConfig, setValidConfig] = useState<FormValues | null>(null);
+  const [validConfig, setValidConfig] = useState<FormValues | null>(null)
 
   const emptyFields = () => {
     setValue('serverUrl', '')
@@ -131,7 +131,7 @@ const CollectStepImapConfigForm: React.FC<Props> = ({ step: stepRef }) => {
           setStatus('SAVED')
           setValidConfig({
             ...values,
-            id: imapConfig.id
+            id: imapConfig.id,
           })
           return
         }
@@ -172,7 +172,7 @@ const CollectStepImapConfigForm: React.FC<Props> = ({ step: stepRef }) => {
         </Flex>
         <Flex justifyContent={responseOutput !== null ? 'space-between' : 'right'} alignItems="center">
           {responseOutput !== null ? (
-            <Tag variantColor={responseOutput.type === 'success' ? 'green' : 'red'}>
+            <Tag variantColor={responseOutput.type === 'success' ? 'success' : 'danger'}>
               <Tag.Label>{responseOutput.message}</Tag.Label>
             </Tag>
           ) : null}
@@ -185,9 +185,12 @@ const CollectStepImapConfigForm: React.FC<Props> = ({ step: stepRef }) => {
           ) : (
             <Flex gap={4}>
               {status === 'EDIT' && !isLoading ? (
-                <Button onClick={() => {
-                  reset(validConfig ?? defaultValues)
-                }} variant="secondary">
+                <Button
+                  onClick={() => {
+                    reset(validConfig ?? defaultValues)
+                  }}
+                  variant="secondary"
+                >
                   {intl.formatMessage({ id: 'global.cancel' })}
                 </Button>
               ) : null}
