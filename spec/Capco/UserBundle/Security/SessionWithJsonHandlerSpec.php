@@ -23,7 +23,7 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
 
     public function let(\Redis $redis, SymfonySecurity $security, RequestStack $requestStack, LoggerInterface $logger): void
     {
-        $this->beConstructedWith($redis, $security, $requestStack, '', $logger, 7200, []);
+        $this->beConstructedWith($redis, $security, $requestStack, '', $logger, 7200, 7200, []);
     }
 
     public function it_match_symfony_session_after_decode(User $viewer, OrganizationMember $organizationMember, Organization $organization): void
@@ -36,10 +36,11 @@ class SessionWithJsonHandlerSpec extends ObjectBehavior
     public function it_encode_correctly_with_json_separator(User $viewer, OrganizationMember $organizationMember, Organization $organization): void
     {
         $this->mockViewerJsonSessionData($viewer, $organizationMember, $organization);
-        $this->encode(self::$symfonySession, $viewer)->shouldBe(
+
+        $this->encode(self::$symfonySession, $viewer)->shouldContain(
             self::$symfonySession .
             '___JSON_SESSION_SEPARATOR__' .
-            '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true,"isAdminOrganization":true,"isOrganizationMember":true,"isMediator":true,"organization":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbklk"}}'
+            '{"viewer":{"email":"user@email.com","username":"user","id":"VXNlcjoxMjM0","isAdmin":true,"isSuperAdmin":true,"isProjectAdmin":true,"isAdminOrganization":true,"isOrganizationMember":true,"isMediator":true,"organization":"T3JnYW5pemF0aW9uOm9yZ2FuaXphdGlvbklk"},"last_user_activity":'
         );
     }
 

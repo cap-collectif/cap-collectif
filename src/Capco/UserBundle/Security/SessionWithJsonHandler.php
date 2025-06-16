@@ -29,6 +29,8 @@ class SessionWithJsonHandler extends RedisSessionHandler
         string $prefix,
         private readonly LoggerInterface $logger,
         int $sessionLifetime,
+        // @phpstan-ignore-next-line
+        private readonly int $sessionTimeout,
         array $options = []
     ) {
         $options['ttl'] = $sessionLifetime;
@@ -71,6 +73,21 @@ class SessionWithJsonHandler extends RedisSessionHandler
         $this->acquireLock($sessionId);
 
         $encodedSession = parent::read($sessionId);
+
+        // @regex https://regex101.com/r/MCcyPm/1
+        $pattern = '/"last_user_activity":(\d+)/';
+
+        if (preg_match($pattern, $encodedSession, $matches)) {
+            $currentTime = time();
+
+            if ($currentTime - (int) $matches[1] > $this->sessionTimeout) {
+                $this->destroy($sessionId);
+                $this->doDestroy($sessionId);
+
+                return '';
+            }
+        }
+
         $decodedSession = $this->decode($encodedSession);
 
         $this->releaseLock($sessionId);
@@ -101,7 +118,7 @@ class SessionWithJsonHandler extends RedisSessionHandler
                     ),
             ];
 
-            $encodedSession .= json_encode(['viewer' => $viewerData], \JSON_THROW_ON_ERROR);
+            $encodedSession .= json_encode(['viewer' => $viewerData, 'last_user_activity' => time()], \JSON_THROW_ON_ERROR);
         }
 
         return $encodedSession;

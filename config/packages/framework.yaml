@@ -15,7 +15,7 @@ framework:
         handler_id: Capco\UserBundle\Security\SessionWithJsonHandler
         # /!\ Updating this is a BC /!\
         name: PHPSESSID
-        cookie_lifetime: '%env(int:SYMFONY_SESSION_TIMEOUT_SECONDS)%'
+        cookie_lifetime: '%env(int:SYMFONY_SESSION_LIFETIME_SECONDS)%'
         cookie_domain: '' # By default, it’s blank, meaning the host name of the server which generated the cookie according to the cookie specification.
         cookie_httponly: true
         cookie_secure: true
