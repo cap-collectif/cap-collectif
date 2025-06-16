@@ -181,16 +181,6 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
             className="cap-search css-b62m3t-container"
             onKeyDown={[Function]}
           >
-            <span
-              className="css-1f43avz-a11yText-A11yText"
-              id="react-select-3-live-region"
-            />
-            <span
-              aria-atomic="false"
-              aria-live="polite"
-              aria-relevant="additions text"
-              className="css-1f43avz-a11yText-A11yText"
-            />
             <div
               className="cap-search__control css-djxupi-control"
               onMouseDown={[Function]}
@@ -227,12 +217,6 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   data-value=""
                 >
                   <input
-                    aria-autocomplete="list"
-                    aria-controls="react-select-3-listbox"
-                    aria-describedby="react-select-3-placeholder"
-                    aria-expanded={false}
-                    aria-haspopup={true}
-                    aria-owns="react-select-3-listbox"
                     autoCapitalize="none"
                     autoComplete="off"
                     autoCorrect="off"
@@ -242,7 +226,6 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                     onBlur={[Function]}
                     onChange={[Function]}
                     onFocus={[Function]}
-                    role="combobox"
                     spellCheck="false"
                     style={
                       {
