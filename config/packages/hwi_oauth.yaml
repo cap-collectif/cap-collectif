@@ -1,8 +1,14 @@
 hwi_oauth:
+    http:
+        client: httplug.client.hwi
     connect:
         account_connector: Capco\UserBundle\Security\Core\User\OauthUserProvider
     firewall_names: [main]
     target_path_parameter: _destination
+    fosub:
+        username_iterations: 30
+        properties:
+            facebook: facebook_id
     resource_owners:
         facebook:
             class: Capco\UserBundle\Facebook\FacebookResourceOwner

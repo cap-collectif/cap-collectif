@@ -281,11 +281,6 @@ parameters:
 			path: src/Capco/AdminBundle/Admin/GlobalDistrictAdmin.php
 
 		-
-			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\GroupAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AdminBundle/Admin/GroupAdmin.php
-
-		-
 			message: "#^Property Capco\\\\AdminBundle\\\\Admin\\\\HighlightedContentAdmin\\:\\:\\$datagridValues type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AdminBundle/Admin/HighlightedContentAdmin.php
@@ -5334,61 +5329,6 @@ parameters:
 			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
 			count: 3
 			path: src/Capco/AppBundle/Behat/Page/AdminGeneralListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:clickOnButton\\(\\) has parameter \\$button with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:clickOnTab\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:clickOnTab\\(\\) has parameter \\$tab with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:containsElement\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:containsElement\\(\\) has parameter \\$element with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:fillElementWithValue\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:getSelector\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminGroupListPage\\:\\:getSelector\\(\\) has parameter \\$name with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Parameter \\#1 \\$name of method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\) expects class\\-string\\<SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Element\\>, string given\\.$#"
-			count: 2
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
-
-		-
-			message: "#^Unable to resolve the template type TElement in call to method SensioLabs\\\\Behat\\\\PageObjectExtension\\\\PageObject\\\\Page\\:\\:getElement\\(\\)$#"
-			count: 3
-			path: src/Capco/AppBundle/Behat/Page/AdminGroupListPage.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\Behat\\\\Page\\\\AdminOpinionListPage\\:\\:clickOnButton\\(\\) has no return type specified\\.$#"
@@ -23376,11 +23316,6 @@ parameters:
 			path: src/Capco/AppBundle/Form/Persister/EventDistrictsPersister.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\Persister\\\\GlobalDistrictsPersister\\:\\:persist\\(\\) has no return type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/Form/Persister/GlobalDistrictsPersister.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\Form\\\\Persister\\\\GlobalDistrictsPersister\\:\\:persist\\(\\) has parameter \\$districtsIds with no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/Form/Persister/GlobalDistrictsPersister.php
@@ -26596,42 +26531,7 @@ parameters:
 			path: src/Capco/AppBundle/GraphQL/Mutation/Font/ChangeFontMutation.php
 
 		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:addUsersInGroup\\(\\) has parameter \\$users with no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:addUsersInGroup\\(\\) has parameter \\$viewer with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:addUsersInGroup\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:create\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:delete\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:deleteUserInGroup\\(\\) has parameter \\$viewer with no type specified\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:deleteUserInGroup\\(\\) return type has no value type specified in iterable type array\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Mutation\\\\GroupMutation\\:\\:update\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Mutation/GroupMutation.php
 
@@ -30899,11 +30799,6 @@ parameters:
 			message: "#^Property Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\User\\\\UserEventCommentsCountResolver\\:\\:\\$redisCache has no type specified\\.$#"
 			count: 1
 			path: src/Capco/AppBundle/GraphQL/Resolver/User/UserEventCommentsCountResolver.php
-
-		-
-			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\User\\\\UserGroupsResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\.$#"
-			count: 1
-			path: src/Capco/AppBundle/GraphQL/Resolver/User/UserGroupsResolver.php
 
 		-
 			message: "#^Method Capco\\\\AppBundle\\\\GraphQL\\\\Resolver\\\\User\\\\UserIdentificationCodeListResolver\\:\\:__invoke\\(\\) should return Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\ConnectionInterface but returns GraphQL\\\\Executor\\\\Promise\\\\Promise\\|Overblog\\\\GraphQLBundle\\\\Relay\\\\Connection\\\\Output\\\\Connection\\.$#"
@@ -44036,6 +43931,21 @@ parameters:
 			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
 
 		-
+			message: "#^Parameter \\#1 \\$httpClient of method HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:__construct\\(\\) expects Http\\\\Client\\\\Common\\\\HttpMethodsClient, Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface given\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
+
+		-
+			message: "#^Property Capco\\\\UserBundle\\\\Facebook\\\\FacebookResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
+
+		-
+			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/Facebook/FacebookResourceOwner.php
+
+		-
 			message: "#^Method Capco\\\\UserBundle\\\\Form\\\\Type\\\\AdminConfigureRegistrationType\\:\\:buildForm\\(\\) has no return type specified\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Form/Type/AdminConfigureRegistrationType.php
@@ -44251,6 +44161,16 @@ parameters:
 			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
 
 		-
+			message: "#^Property Capco\\\\UserBundle\\\\FranceConnect\\\\FranceConnectResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
+
+		-
+			message: "#^Property HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:\\$httpClient \\(Http\\\\Client\\\\Common\\\\HttpMethodsClient\\) does not accept Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/FranceConnect/FranceConnectResourceOwner.php
+
+		-
 			message: "#^Method Capco\\\\UserBundle\\\\Handler\\\\CasHandler\\:\\:getServerUrlParts\\(\\) return type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/Handler/CasHandler.php
@@ -44392,6 +44312,16 @@ parameters:
 
 		-
 			message: "#^Method Capco\\\\UserBundle\\\\OpenID\\\\OpenIDResourceOwner\\:\\:getUserInformation\\(\\) has parameter \\$extraParameters with no value type specified in iterable type array\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
+
+		-
+			message: "#^Parameter \\#1 \\$httpClient of method HWI\\\\Bundle\\\\OAuthBundle\\\\OAuth\\\\ResourceOwner\\\\AbstractResourceOwner\\:\\:__construct\\(\\) expects Http\\\\Client\\\\Common\\\\HttpMethodsClient, Http\\\\Client\\\\Common\\\\HttpMethodsClientInterface given\\.$#"
+			count: 1
+			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
+
+		-
+			message: "#^Property Capco\\\\UserBundle\\\\OpenID\\\\OpenIDResourceOwner\\:\\:\\$paths type has no value type specified in iterable type array\\.$#"
 			count: 1
 			path: src/Capco/UserBundle/OpenID/OpenIDResourceOwner.php
 
