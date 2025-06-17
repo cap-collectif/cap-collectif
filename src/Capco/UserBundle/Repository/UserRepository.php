@@ -1747,6 +1747,27 @@ class UserRepository extends EntityRepository
         return $qb->getQuery()->getResult();
     }
 
+    public function countCollectConfirmedParticipants(CollectStep $step): int
+    {
+        $qb = $this->createQueryBuilder('user');
+        $qb
+            ->select('COUNT(DISTINCT user.id)')
+            ->leftJoin('CapcoAppBundle:ProposalCollectVote', 'vote', 'WITH', 'vote.user = user.id')
+            ->leftJoin('user.proposals', 'proposal')
+            ->leftJoin('proposal.proposalForm', 'proposalForm')
+            ->where(
+                $qb->expr()->orX(
+                    'vote.collectStep = :collectStep',
+                    'proposalForm.step = :collectStep'
+                )
+            )
+            ->andWhere('user.confirmationToken IS NULL')
+            ->setParameter('collectStep', $step)
+    ;
+
+        return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
     public function getDebateParticipantsCombined(Debate $debate, int $offset, int $limit): array
     {
         $userIdsFromArguments = $this->createQueryBuilder('u')
@@ -2186,6 +2207,29 @@ class UserRepository extends EntityRepository
         ;
 
         return $query->getResult();
+    }
+
+    public function countSelectionConfirmedParticipants(SelectionStep $selectionStep): int
+    {
+        $subQueryBuilder = $this->createQueryBuilder('uv');
+        $subQuery = $subQueryBuilder->select('IDENTITY(userVote.user)')
+            ->from('CapcoAppBundle:ProposalSelectionVote', 'userVote')
+            ->where('userVote.selectionStep = :selectionStep')
+            ->andWhere('userVote.isAccounted = 1')
+            ->getDQL()
+        ;
+
+        $countBuilder = $this->createQueryBuilder('u');
+        $total = $countBuilder->select('COUNT(user.id)')
+            ->from('CapcoUserBundle:User', 'user')
+            ->where($countBuilder->expr()->in('user.id', $subQuery))
+            ->andWhere('user.confirmationToken IS NULL')
+            ->setParameter('selectionStep', $selectionStep)
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+
+        return (int) $total;
     }
 
     /**

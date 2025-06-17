@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\Service\CollectAndSelectionContributionExporter;
+use Capco\AppBundle\Command\Service\ExportRegenerationService;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
@@ -42,7 +43,8 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         private readonly Stopwatch $stopwatch,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly EntityManagerInterface $entityManager,
-        private readonly string $exportDirectory
+        private readonly string $exportDirectory,
+        private readonly ExportRegenerationService $exportRegenerationService
     ) {
         parent::__construct($exportUtils);
         $this->projectRootDir = $projectRootDir;
@@ -143,6 +145,12 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         $proposalsIds = $this->proposalRepository->getProposalsByCollectStepOrSelectionStep($step->getId(), $stepClass);
         $questionsResponses = $this->proposalFormRepository->getQuestionsResponsesByProposalsIds($proposalsIds);
         $this->collectAndSelectionContributionExporter->setQuestionsResponses($questionsResponses);
+        $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
+            $proposalsIds,
+            $step,
+            'collect-selection-contributions-count',
+            $this->contributionsFilePathResolver
+        );
 
         do {
             $proposals = $this->proposalRepository->getProposalsByCollectStepOrSelectionStep(

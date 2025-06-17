@@ -4,7 +4,7 @@ namespace Capco\AppBundle\Command\Service\FilePathResolver;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 
-abstract class AbstractFilePathResolver
+abstract class AbstractFilePathResolver implements FilePathResolverInterface
 {
     public function __construct(protected string $exportDirectory)
     {

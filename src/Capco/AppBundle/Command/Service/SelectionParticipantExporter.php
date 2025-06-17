@@ -12,7 +12,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Contracts\Cache\CacheInterface;
 
 class SelectionParticipantExporter extends ParticipantExporter
 {
@@ -24,8 +23,7 @@ class SelectionParticipantExporter extends ParticipantExporter
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
-        private readonly LoggerInterface $logger,
-        private readonly CacheInterface $cache
+        private readonly LoggerInterface $logger
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -66,17 +64,6 @@ class SelectionParticipantExporter extends ParticipantExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         try {
-            $cacheKey = sprintf('%s-selection-participants-count', $selectionStep->getSlug());
-            $currentCount = \count($participants);
-            $lastParticipantsCount = $this->cache->get($cacheKey, fn () => 0);
-
-            if ($currentCount !== $lastParticipantsCount) {
-                $this->cache->delete($cacheKey);
-                $this->cache->get($cacheKey, fn () => $currentCount);
-
-                return true;
-            }
-
             return $this->userRepository->hasNewParticipantsForASelectionStep($selectionStep, $oldestUpdateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());

@@ -10,3 +10,5 @@ framework:
             doctrine.system_cache_pool:
                 adapter: cache.adapter.redis
                 default_lifetime: 25200 # 1week
+            export.redis_cache_pool:
+                adapter: cache.adapter.redis

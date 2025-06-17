@@ -2,11 +2,13 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Command\Service\ExportRegenerationService;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
 use Capco\AppBundle\Command\Service\QuestionnaireContributionExporter;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Repository\QuestionnaireStepRepository;
+use Capco\AppBundle\Repository\ReplyAnonymousRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Symfony\Component\Console\Input\InputInterface;
@@ -26,12 +28,14 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
     public function __construct(
         ExportUtils $exportUtils,
         private readonly QuestionnaireStepRepository $questionnaireStepRepository,
+        private readonly ReplyAnonymousRepository $replyAnonymousRepository,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
         private readonly QuestionnaireContributionExporter $questionnaireContributionExporter,
         private readonly Stopwatch $stopwatch,
         private readonly Manager $toggleManager,
         protected TranslatorInterface $translator,
         string $projectRootDir,
+        private readonly ExportRegenerationService $exportRegenerationService,
     ) {
         $this->projectRootDir = $projectRootDir;
 
@@ -96,11 +100,24 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
         $style->note('Starting the export.');
 
         foreach ($questionnaireSteps as $questionnaireStep) {
+            $questionnaire = $questionnaireStep->getQuestionnaire();
+            if (null === $questionnaire) {
+                continue;
+            }
+
             $this->questionnaireContributionExporter->initializeStyle($style);
 
             $paths['simplified'] = $this->contributionsFilePathResolver->getSimplifiedExportPath($questionnaireStep);
             $paths['full'] = $this->contributionsFilePathResolver->getFullExportPath($questionnaireStep);
 
+            $replies = $questionnaire->getReplies();
+            $repliesAnonymous = $this->replyAnonymousRepository->findBy(['questionnaire' => $questionnaire]);
+            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
+                [$replies, $repliesAnonymous],
+                $questionnaireStep,
+                'questionnaire-contributions-count',
+                $this->contributionsFilePathResolver
+            );
             $this->questionnaireContributionExporter->exportQuestionnaireContributions(
                 $questionnaireStep,
                 $input->getOption('delimiter'),

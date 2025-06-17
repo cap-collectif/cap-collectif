@@ -16,7 +16,6 @@ use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
-use Symfony\Contracts\Cache\CacheInterface;
 
 class QuestionnaireContributionExporter extends ContributionExporter
 {
@@ -33,8 +32,7 @@ class QuestionnaireContributionExporter extends ContributionExporter
         private readonly ReplyAnonymousNormalizer $anonymousReplyNormalizer,
         protected ContributionsFilePathResolver $contributionsFilePathResolver,
         Filesystem $fileSystem,
-        private readonly LoggerInterface $logger,
-        private readonly CacheInterface $cache
+        private readonly LoggerInterface $logger
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -89,24 +87,6 @@ class QuestionnaireContributionExporter extends ContributionExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($paths['simplified'], $paths['full']);
 
         try {
-            $questionnaire = $questionnaireStep->getQuestionnaire();
-            if (null === $questionnaire) {
-                return false;
-            }
-
-            $repliesCount = $questionnaire->getReplies()->count();
-            $anonymousRepliesCount = \count($this->anonymousReplyRepository->findBy(['questionnaireId' => $questionnaire->getId()]));
-            $cacheKey = sprintf('%s-questionnnaire-contributions-count', $questionnaireStep->getSlug());
-            $currentCount = $repliesCount + $anonymousRepliesCount;
-            $lastRepliesCount = $this->cache->get($cacheKey, fn () => 0);
-
-            if ($currentCount !== $lastRepliesCount) {
-                $this->cache->delete($cacheKey);
-                $this->cache->get($cacheKey, fn () => $currentCount);
-
-                return true;
-            }
-
             return $this->questionnaireRepository->hasRecentRepliesOrUpdatedUsers($questionnaireId, $oldestUpdateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());

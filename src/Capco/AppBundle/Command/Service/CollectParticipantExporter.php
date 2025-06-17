@@ -14,7 +14,6 @@ use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Filesystem\Filesystem;
 use Symfony\Component\Serializer\Encoder\CsvEncoder;
 use Symfony\Component\Serializer\Serializer;
-use Symfony\Contracts\Cache\CacheInterface;
 
 class CollectParticipantExporter extends ParticipantExporter
 {
@@ -26,8 +25,7 @@ class CollectParticipantExporter extends ParticipantExporter
         EntityManagerInterface $entityManager,
         Filesystem $fileSystem,
         private readonly ParticipantsFilePathResolver $participantsFilePathResolver,
-        private readonly LoggerInterface $logger,
-        private readonly CacheInterface $cache
+        private readonly LoggerInterface $logger
     ) {
         $this->serializer = $this->initializeSerializer();
 
@@ -123,17 +121,6 @@ class CollectParticipantExporter extends ParticipantExporter
         $oldestUpdateDate = $this->getOldestUpdateDate($paths);
 
         try {
-            $cacheKey = sprintf('%s-collect-participants-count', $collectStep->getSlug());
-            $currentCount = \count($participants);
-            $lastParticipantsCount = $this->cache->get($cacheKey, fn () => 0);
-
-            if ($currentCount !== $lastParticipantsCount) {
-                $this->cache->delete($cacheKey);
-                $this->cache->get($cacheKey, fn () => $currentCount);
-
-                return true;
-            }
-
             return $this->userRepository->hasNewParticipantsForACollectStep($collectStep, $oldestUpdateDate);
         } catch (\Exception $e) {
             $this->logger->error($e->getMessage());

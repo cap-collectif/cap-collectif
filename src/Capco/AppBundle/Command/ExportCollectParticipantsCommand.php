@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Command;
 
 use Capco\AppBundle\Command\Service\CollectParticipantExporter;
+use Capco\AppBundle\Command\Service\ExportRegenerationService;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\CollectStep;
@@ -33,11 +34,12 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
         string $projectRootDir,
         private readonly CollectStepRepository $stepRepository,
         private readonly CollectParticipantExporter $stepParticipantExporter,
-        private readonly ParticipantsFilePathResolver $filePathResolver,
+        private readonly ParticipantsFilePathResolver $participantFilePathResolver,
         private readonly UserRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly Stopwatch $stopwatch,
-        private readonly string $exportDirectory
+        private readonly string $exportDirectory,
+        private readonly ExportRegenerationService $exportRegenerationService
     ) {
         parent::__construct($exportUtils);
         $this->projectRootDir = $projectRootDir;
@@ -85,6 +87,13 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
             $this->stepParticipantExporter->initializeStyle($style);
 
             $filePaths = $this->getFilePaths($collectStep);
+            $participants = $this->userRepository->countCollectConfirmedParticipants($collectStep);
+            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
+                [$participants],
+                $collectStep,
+                'collect-participants-count',
+                $this->participantFilePathResolver
+            );
             $participantsExported = $this->exportParticipantsByBatch($input, $collectStep, $output);
 
             $totalParticipants += $participantsExported;
@@ -121,8 +130,8 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
     private function getFilePaths(CollectStep $step): array
     {
         return [
-            'full' => $this->filePathResolver->getFullExportPath($step),
-            'simplified' => $this->filePathResolver->getSimplifiedExportPath($step),
+            'full' => $this->participantFilePathResolver->getFullExportPath($step),
+            'simplified' => $this->participantFilePathResolver->getSimplifiedExportPath($step),
         ];
     }
 
@@ -188,7 +197,7 @@ class ExportCollectParticipantsCommand extends BaseExportCommand
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    $step->getType() . '/' . $this->filePathResolver->getFileName($step, $isSimplified)
+                    $step->getType() . '/' . $this->participantFilePathResolver->getFileName($step, $isSimplified)
                 );
             }
         }

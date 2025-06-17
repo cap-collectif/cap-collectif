@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Command;
 
+use Capco\AppBundle\Command\Service\ExportRegenerationService;
 use Capco\AppBundle\Command\Service\FilePathResolver\ParticipantsFilePathResolver;
 use Capco\AppBundle\Command\Service\SelectionParticipantExporter;
 use Capco\AppBundle\Command\Utils\ExportUtils;
@@ -33,11 +34,12 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
         string $projectRootDir,
         private readonly SelectionStepRepository $selectionStepRepository,
         private readonly SelectionParticipantExporter $selectionParticipantExporter,
-        private readonly ParticipantsFilePathResolver $filePathResolver,
+        private readonly ParticipantsFilePathResolver $participantFilePathResolver,
         private readonly UserRepository $userRepository,
         private readonly EntityManagerInterface $entityManager,
         private readonly Stopwatch $stopwatch,
-        private readonly string $exportDirectory
+        private readonly string $exportDirectory,
+        private readonly ExportRegenerationService $exportRegenerationService
     ) {
         parent::__construct($exportUtils);
         $this->projectRootDir = $projectRootDir;
@@ -85,6 +87,13 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
             $this->selectionParticipantExporter->initializeStyle($style);
 
             $filePaths = $this->getFilePaths($selectionStep);
+            $participants = $this->userRepository->countSelectionConfirmedParticipants($selectionStep);
+            $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
+                [$participants],
+                $selectionStep,
+                'selection-participants-count',
+                $this->participantFilePathResolver
+            );
             $participantsExported = $this->exportParticipantsByBatch($input, $selectionStep);
 
             $totalParticipants += $participantsExported;
@@ -121,8 +130,8 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
     private function getFilePaths(SelectionStep $step): array
     {
         return [
-            'full' => $this->filePathResolver->getFullExportPath($step),
-            'simplified' => $this->filePathResolver->getSimplifiedExportPath($step),
+            'full' => $this->participantFilePathResolver->getFullExportPath($step),
+            'simplified' => $this->participantFilePathResolver->getSimplifiedExportPath($step),
         ];
     }
 
@@ -187,7 +196,7 @@ class ExportSelectionParticipantsCommand extends BaseExportCommand
                 $this->executeSnapshot(
                     $input,
                     $output,
-                    $step->getType() . '/' . $this->filePathResolver->getFileName($step, $isSimplified)
+                    $step->getType() . '/' . $this->participantFilePathResolver->getFileName($step, $isSimplified)
                 );
             }
         }
