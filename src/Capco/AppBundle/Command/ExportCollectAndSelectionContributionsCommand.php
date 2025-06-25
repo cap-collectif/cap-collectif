@@ -8,9 +8,12 @@ use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolv
 use Capco\AppBundle\Command\Utils\ExportUtils;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
+use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Repository\AbstractStepRepository;
+use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
+use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Toggle\Manager;
 use Capco\AppBundle\Traits\SnapshotCommandTrait;
 use Doctrine\ORM\EntityManagerInterface;
@@ -39,6 +42,8 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         string $projectRootDir,
         private readonly CollectAndSelectionContributionExporter $collectAndSelectionContributionExporter,
         private readonly AbstractStepRepository $abstractStepRepository,
+        private readonly ProposalSelectionVoteRepository $proposalSelectionVote,
+        private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository,
         private readonly ProposalFormRepository $proposalFormRepository,
         private readonly Stopwatch $stopwatch,
         private readonly ContributionsFilePathResolver $contributionsFilePathResolver,
@@ -143,10 +148,14 @@ class ExportCollectAndSelectionContributionsCommand extends BaseExportCommand
         $append = false;
         $stepClass = $step::class;
         $proposalsIds = $this->proposalRepository->getProposalsByCollectStepOrSelectionStep($step->getId(), $stepClass);
+        $votesCount = $step instanceof SelectionStep
+            ? $this->proposalSelectionVote->findPublishedSelectionVoteIdsByStep($step)
+            : $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep($step, true, true);
+
         $questionsResponses = $this->proposalFormRepository->getQuestionsResponsesByProposalsIds($proposalsIds);
         $this->collectAndSelectionContributionExporter->setQuestionsResponses($questionsResponses);
         $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
-            $proposalsIds,
+            [...$proposalsIds, ...$votesCount],
             $step,
             'collect-selection-contributions-count',
             $this->contributionsFilePathResolver

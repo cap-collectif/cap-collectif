@@ -486,6 +486,33 @@ class ProposalSelectionVoteRepository extends EntityRepository
             ->getSingleScalarResult() ?? 0;
     }
 
+    /** @return array<int, string> */
+    public function findPublishedSelectionVoteIdsByStep(
+        SelectionStep $step,
+        bool $onlyAccounted = true
+    ): array {
+        $qb = $this->createQueryBuilder('pv')
+            ->select('pv.id')
+            ->andWhere('pv.selectionStep = :step')
+            ->innerJoin('pv.proposal', 'proposal')
+            ->andWhere('proposal.deletedAt IS NULL')
+            ->andWhere('pv.published = 1')
+        ;
+        if ($onlyAccounted) {
+            $qb->andWhere('pv.isAccounted = 1');
+        }
+
+        return $qb
+            ->andWhere('pv.isAccounted = 1')
+            ->andWhere('proposal.draft = 0')
+            ->andWhere('proposal.trashedAt IS NULL')
+            ->andWhere('proposal.published = 1')
+            ->setParameter('step', $step)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     private function findByParticipantQueryBuilder(
         Participant $participant,
         ?Mediator $mediator = null,

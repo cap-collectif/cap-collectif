@@ -73,6 +73,7 @@ class StepVotesCountDataLoader extends BatchDataLoader
             if ($anonymous) {
                 return $this->proposalCollectSmsVoteRepository->countDistinctPhonePublishedCollectVoteByStep($step, $onlyAccounted);
             }
+            /** @var int $votes */
             $votes = $this->proposalCollectVoteRepository->countPublishedCollectVoteByStep(
                 $step,
                 $onlyAccounted

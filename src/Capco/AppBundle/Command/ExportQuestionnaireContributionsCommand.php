@@ -113,7 +113,7 @@ class ExportQuestionnaireContributionsCommand extends BaseExportCommand
             $replies = $questionnaire->getReplies();
             $repliesAnonymous = $this->replyAnonymousRepository->findBy(['questionnaire' => $questionnaire]);
             $this->exportRegenerationService->regenerateCsvIfCachedRowsCountMismatch(
-                [$replies, $repliesAnonymous],
+                [...$replies, ...$repliesAnonymous],
                 $questionnaireStep,
                 'questionnaire-contributions-count',
                 $this->contributionsFilePathResolver
