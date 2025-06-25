@@ -68,7 +68,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-hidden="false"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               height="1em"
@@ -431,7 +431,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-hidden="false"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               height="1em"

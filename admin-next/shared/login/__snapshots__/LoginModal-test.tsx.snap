@@ -64,7 +64,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             type="button"
           >
             <svg
-              aria-hidden="true"
+              aria-hidden="false"
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               height="1em"
