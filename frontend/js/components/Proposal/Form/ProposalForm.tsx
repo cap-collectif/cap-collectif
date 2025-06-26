@@ -494,16 +494,12 @@ export class ProposalForm extends React.Component<Props, State> {
     const titleFieldTradKey =
       proposalForm.objectType === 'PROPOSAL'
         ? 'global.title'
-        : proposalForm.objectType === 'ESTABLISHMENT'
-        ? 'establishment-name'
         : proposalForm.objectType === 'OPINION'
         ? 'opinion-title'
         : 'title'
     const titleSuggestHeader =
       proposalForm.objectType === 'QUESTION'
         ? 'question.suggest_header'
-        : proposalForm.objectType === 'ESTABLISHMENT'
-        ? 'establishment-suggest_header'
         : proposalForm.objectType === 'OPINION'
         ? 'opinion.suggest_header'
         : proposalForm.step && isInterpellationContextFromStep(proposalForm.step)

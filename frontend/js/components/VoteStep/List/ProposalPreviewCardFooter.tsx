@@ -139,7 +139,6 @@ export const ProposalPreviewCardFooter = ({
     step &&
     proposal.currentVotableStep &&
     step.id === proposal.currentVotableStep.id &&
-    proposal.form.objectType !== 'ESTABLISHMENT' &&
     !proposal.isArchived
 
   const votesTotalPointsCount = votes.totalPointsCount + paperVotesTotalPointsCount

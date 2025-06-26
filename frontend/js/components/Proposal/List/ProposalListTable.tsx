@@ -76,9 +76,7 @@ export class ProposalListTable extends React.Component<Props, State> {
                   ? 'admin.fields.selection.proposal'
                   : step.form?.objectType === 'QUESTION'
                   ? 'question-title'
-                  : step.form?.objectType === 'OPINION'
-                  ? 'opinion-title'
-                  : 'establishment-name',
+                  : 'opinion-title',
               value: {
                 displayTitle: getProposalTitle,
                 url: node.url && node.url,

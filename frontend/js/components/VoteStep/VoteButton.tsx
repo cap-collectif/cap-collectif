@@ -257,7 +257,6 @@ const VoteButton = ({
     step &&
     proposal.currentVotableStep &&
     step.id === proposal.currentVotableStep.id &&
-    proposal.form.objectType !== 'ESTABLISHMENT' &&
     !proposal.isArchived
 
   if (!showVoteButton) {

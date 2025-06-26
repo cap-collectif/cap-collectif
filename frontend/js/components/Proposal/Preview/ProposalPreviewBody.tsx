@@ -2,7 +2,6 @@ import * as React from 'react'
 import Truncate from 'react-truncate'
 import { FormattedMessage, useIntl } from 'react-intl'
 import { graphql, createFragmentContainer } from 'react-relay'
-import { Button } from 'react-bootstrap'
 import { Link, useParams } from 'react-router-dom'
 import { Flex } from '@cap-collectif/ui'
 import ProposalPreviewVote from './ProposalPreviewVote'
@@ -118,20 +117,10 @@ export const ProposalPreviewBody = ({ proposal, step, viewer, isSPA }: Props) =>
         {step &&
           proposal.currentVotableStep &&
           step.id === proposal.currentVotableStep.id &&
-          proposal.form.objectType !== 'ESTABLISHMENT' &&
           !proposal.isArchived && <ProposalPreviewVote step={step} viewer={viewer} proposal={proposal} />}
-        {step && step.project && step.project.opinionCanBeFollowed && proposal.form.objectType !== 'ESTABLISHMENT' ? (
+        {step && step.project && step.project.opinionCanBeFollowed ? (
           <ProposalFollowButton proposal={proposal} isAuthenticated={!!viewer} />
         ) : null}
-        {proposal.form.objectType === 'ESTABLISHMENT' && (
-          <Button
-            href={proposal.url}
-            className="btn btn-default proposal__establishment"
-            id="proposal-support-btn-placeholder"
-          >
-            <FormattedMessage id="support" />
-          </Button>
-        )}
       </Flex>
       {step &&
         step.canDisplayBallot &&

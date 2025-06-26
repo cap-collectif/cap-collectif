@@ -472,14 +472,10 @@ export class ProposalFormLegacy extends React.Component<Props, State> {
     const titleFieldTradKey =
       proposalForm.objectType === 'PROPOSAL'
         ? 'global.title'
-        : proposalForm.objectType === 'ESTABLISHMENT'
-        ? 'establishment-name'
         : 'title'
     const titleSuggestHeader =
       proposalForm.objectType === 'PROPOSAL'
         ? 'proposal.suggest_header'
-        : proposalForm.objectType === 'ESTABLISHMENT'
-        ? 'establishment-suggest_header'
         : proposalForm.step && isInterpellationContextFromStep(proposalForm.step)
         ? 'interpellation.suggest_header'
         : 'question.suggest_header'

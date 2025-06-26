@@ -63,13 +63,6 @@ describe('<ProposalPreviewFooter />', () => {
       objectType: 'PROPOSAL' as ProposalStepVoteType,
     },
   }
-  const proposalWithDonations = {
-    ...proposal,
-    form: {
-      commentable: false,
-      objectType: 'ESTABLISHMENT' as ProposalStepVoteType,
-    },
-  }
   it('should render a footer with votes and comments counters', () => {
     const wrapper = shallow(<ProposalPreviewFooter step={stepWithVoteActive} proposal={proposal} />)
     expect(wrapper).toMatchSnapshot()
@@ -88,10 +81,6 @@ describe('<ProposalPreviewFooter />', () => {
   })
   it('should render a footer without counters', () => {
     const wrapper = shallow(<ProposalPreviewFooter step={stepWithVoteDisabled} proposal={proposalNotCommentable} />)
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render a footer with donation infos', () => {
-    const wrapper = shallow(<ProposalPreviewFooter proposal={proposalWithDonations} step={stepWithVoteDisabled} />)
     expect(wrapper).toMatchSnapshot()
   })
 })

@@ -1,8 +1,7 @@
 /* eslint-env jest */
-import React from 'react'
-import { shallow } from 'enzyme'
-import { ProposalPageHeader } from './ProposalPageHeader'
-import { $refType, $fragmentRefs } from '~/mocks'
+import { shallow } from 'enzyme';
+import { $fragmentRefs, $refType } from '~/mocks';
+import { ProposalPageHeader } from './ProposalPageHeader';
 
 describe('<ProposalPageHeader />', () => {
   const proposal = {
@@ -162,42 +161,8 @@ describe('<ProposalPageHeader />', () => {
     category: null,
     currentVotableStep: null,
   }
-  const establishment = {
-    ' $refType': $refType,
-    ' $fragmentRefs': $fragmentRefs,
-    id: '1',
-    title: 'titre',
-    author: {
-      ' $fragmentRefs': $fragmentRefs,
-      username: 'userAdmin',
-    },
-    publishedAt: '2015-01-01 00:00:00',
-    createdAt: '2015-01-01 00:00:00',
-    updatedAt: '2015-01-05 00:00:00',
-    url: 'true',
-    project: {
-      type: {
-        title: 'project.types.establishment',
-      },
-    },
-    form: {
-      objectType: 'ESTABLISHMENT',
-      usingIllustration: true,
-      step: {
-        state: 'CLOSED',
-        url: '/step',
-      },
-    },
-    media: null,
-    category: null,
-    currentVotableStep: null,
-  }
   it('should render an interpellation', () => {
     const wrapper = shallow(<ProposalPageHeader proposal={interpellation} step={null} viewer={null} {...props} />)
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render an establishment', () => {
-    const wrapper = shallow(<ProposalPageHeader proposal={establishment} step={null} viewer={null} {...props} />)
     expect(wrapper).toMatchSnapshot()
   })
 })

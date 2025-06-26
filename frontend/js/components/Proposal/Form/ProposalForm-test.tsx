@@ -290,14 +290,4 @@ describe('<ProposalForm />', () => {
     const wrapper = shallow(<ProposalForm {...questionProps} proposal={null} />)
     expect(wrapper).toMatchSnapshot()
   })
-  it('should render a create ESTABLISHMENT form ', () => {
-    const establishmentProps = {
-      ...props,
-      features: { ...features, themes: true, districts: true },
-      proposalForm: { ...proposalForm, $refType, objectType: 'ESTABLISHMENT' },
-      isBackOfficeInput: false,
-    }
-    const wrapper = shallow(<ProposalForm {...establishmentProps} proposal={null} />)
-    expect(wrapper).toMatchSnapshot()
-  })
 })

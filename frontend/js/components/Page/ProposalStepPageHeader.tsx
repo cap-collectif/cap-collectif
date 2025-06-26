@@ -7,7 +7,6 @@ import { reset } from 'redux-form'
 import { Box, Button } from '@cap-collectif/ui'
 import {
   isInterpellationContextFromStep,
-  isEstablishmentFormStep,
   getProposalLabelByType,
   isOpinionFormStep,
 } from '~/utils/interpellationLabelHelper'
@@ -37,20 +36,15 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
   const total = step.allProposals.totalCount
   const { fusionCount } = step.allProposals
   const isInterpellation = isInterpellationContextFromStep(step)
-  const isEstablishment = isEstablishmentFormStep(step)
   const isOpinion = isOpinionFormStep(step)
   const isProposalForm = step.form && step.form.objectType === 'PROPOSAL'
-  const titleTradKey = isEstablishment
-    ? getProposalLabelByType(projectType, 'add-establishment')
-    : step.form?.objectType === 'QUESTION'
+  const titleTradKey = step.form?.objectType === 'QUESTION'
     ? 'submit-a-question'
     : isOpinion
     ? 'submit-opinion'
     : getProposalLabelByType(projectType, 'add')
   const tradKeyForTotalCount = isInterpellation
     ? 'interpellation.count_with_total'
-    : isEstablishment
-    ? 'establishment.count_with_total'
     : isOpinion
     ? 'opinion.count_with_total'
     : isProposalForm
@@ -58,15 +52,13 @@ export const ProposalStepPageHeader = ({ step, displayMode }: Props) => {
     : 'question-total-count'
   const tradKeyForCount = isInterpellation
     ? 'interpellation.count'
-    : isEstablishment
-    ? 'establishment.count'
     : isOpinion
     ? 'opinion.count'
     : isProposalForm
     ? 'proposal.count'
     : 'count-questions'
   const tradKeyForFusion =
-    isInterpellation || isEstablishment
+    isInterpellation
       ? 'interpellation.count_fusions'
       : isOpinion
       ? 'opinion.count_fusions'

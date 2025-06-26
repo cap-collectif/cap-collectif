@@ -149,10 +149,7 @@ export const ProposalLeafletMap = ({
 }: Props) => {
   const { isOpen, onOpen, onClose } = useDisclosure(false)
   const intl = useIntl()
-  const titleTradKey =
-    proposalForm?.objectType === 'ESTABLISHMENT'
-      ? getProposalLabelByType(projectType, 'add-establishment')
-      : proposalForm?.objectType === 'QUESTION'
+  const titleTradKey = proposalForm?.objectType === 'QUESTION'
       ? 'submit-a-question'
       : proposalForm?.objectType === 'OPINION'
       ? 'submit-opinion'

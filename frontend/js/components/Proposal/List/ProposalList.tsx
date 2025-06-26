@@ -40,7 +40,6 @@ const renderProposalListTableView = (proposals, step) => <ProposalListTable step
 
 const getEmptyWordingProposalList = (step: ProposalList_step$data | null | undefined): string => {
   if (step && step.form) {
-    if (step.form.objectType === 'ESTABLISHMENT') return 'establishment.empty'
     if (step.form.objectType === 'QUESTION') return 'question.empty'
     if (step.form.objectType === 'OPINION') return 'opinion.empty'
     if (step.form.objectType === 'PROPOSAL' && step.project?.type?.title === 'project.types.interpellation')

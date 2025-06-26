@@ -11,49 +11,6 @@ exports[`<ProposalList /> should not render list if proposal is not provided 1`]
 </p>
 `;
 
-exports[`<ProposalList /> should render a collectStep establishment list 1`] = `
-<Fragment>
-  <Relay(ProposalListTable)
-    proposals={
-      Object {
-        " $fragmentRefs": null,
-        " $refType": null,
-        "edges": Array [
-          Object {
-            "node": Object {
-              " $fragmentRefs": null,
-              "id": "1",
-            },
-          },
-          Object {
-            "node": Object {
-              " $fragmentRefs": null,
-              "id": "2",
-            },
-          },
-        ],
-        "totalCount": 2,
-      }
-    }
-    step={
-      Object {
-        " $fragmentRefs": null,
-        " $refType": null,
-        "form": Object {
-          "objectType": "ESTABLISHMENT",
-        },
-        "id": "1",
-        "project": Object {
-          "type": Object {
-            "title": "global.consultation",
-          },
-        },
-      }
-    }
-  />
-</Fragment>
-`;
-
 exports[`<ProposalList /> should render a collectStep interpellation list 1`] = `
 <Fragment>
   <Relay(ProposalListTable)

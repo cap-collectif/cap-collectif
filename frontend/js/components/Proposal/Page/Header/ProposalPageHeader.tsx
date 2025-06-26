@@ -230,8 +230,6 @@ export const ProposalPageHeader = ({
     ? 'interpellation.back'
     : proposal?.form.objectType === 'PROPOSAL'
     ? 'proposal.back'
-    : proposal?.form.objectType === 'ESTABLISHMENT'
-    ? 'establishment-back'
     : proposal?.form.objectType === 'OPINION'
     ? 'opinions-list'
     : proposal?.form.objectType === 'QUESTION'
