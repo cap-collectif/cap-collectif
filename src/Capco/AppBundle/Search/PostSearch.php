@@ -11,7 +11,6 @@ use Capco\AppBundle\Repository\PostRepository;
 use Elastica\Index;
 use Elastica\Query;
 use Elastica\Query\BoolQuery;
-use Elastica\Query\QueryString;
 use Elastica\Query\Term;
 
 class PostSearch extends Search
@@ -34,7 +33,7 @@ class PostSearch extends Search
         $boolQuery = new BoolQuery();
 
         if ($searchQuery) {
-            $queryString = new QueryString();
+            $queryString = new Query\MultiMatch();
             $queryString->setQuery($searchQuery);
             $queryString->setFields(['title', 'body', 'abstract']);
             $boolQuery->addMust($queryString);

@@ -1,0 +1,156 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Internal|Query posts search post by title 1`] = `
+Object {
+  "node": Object {
+    "__isPostOwner": "User",
+    "__typename": "User",
+    "id": "VXNlcjp1c2VyMQ==",
+    "posts": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MQ==",
+            "title": "Post FR 1",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTA=",
+            "title": "Post FR 10",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTI=",
+            "title": "Post FR 12",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTM=",
+            "title": "Post FR 13",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTQ=",
+            "title": "Post FR 14",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTU=",
+            "title": "Post FR 15",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0Mg==",
+            "title": "Post FR 2",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0Mw==",
+            "title": "Post FR 3",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0NA==",
+            "title": "Post FR 4",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0NQ==",
+            "title": "Post FR 5",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0Ng==",
+            "title": "Post FR 6",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0Nw==",
+            "title": "Post FR 7",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0OA==",
+            "title": "Post FR 8",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0OQ==",
+            "title": "Post FR 9",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTc=",
+            "title": "Post d'un utilisateur sur sa proposition",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTg=",
+            "title": "Post de welcomatic sur sa proposition",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTk=",
+            "title": "Post de user4 sur sa proposition",
+          },
+        },
+        Object {
+          "node": Object {
+            "__typename": "Post",
+            "id": "UG9zdDpwb3N0MTY=",
+            "title": "Post d'un projet privé pour admin@test.com",
+          },
+        },
+      ],
+      "totalCount": 18,
+    },
+  },
+}
+`;
+
+exports[`Internal|Query posts search post with wildcard 1`] = `
+Object {
+  "node": Object {
+    "__isPostOwner": "User",
+    "__typename": "User",
+    "id": "VXNlcjp1c2VyMQ==",
+    "posts": Object {
+      "edges": Array [],
+      "totalCount": 0,
+    },
+  },
+}
+`;
