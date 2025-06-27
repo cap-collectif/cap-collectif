@@ -72,6 +72,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               height="1em"
+              role="img"
               viewBox="0 0 12 12"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"
@@ -86,7 +87,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             </svg>
           </button>
         </header>
-        <main
+        <div
           className="sc-bcXGCL laGNWx cap-modal__body"
         >
           <div
@@ -338,7 +339,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               }
             />
           </div>
-        </main>
+        </div>
         <footer
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >
@@ -435,6 +436,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               height="1em"
+              role="img"
               viewBox="0 0 12 12"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"
@@ -449,7 +451,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             </svg>
           </button>
         </header>
-        <main
+        <div
           className="sc-bcXGCL laGNWx cap-modal__body"
         >
           <div
@@ -677,7 +679,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               </span>
             </label>
           </div>
-        </main>
+        </div>
         <footer
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >

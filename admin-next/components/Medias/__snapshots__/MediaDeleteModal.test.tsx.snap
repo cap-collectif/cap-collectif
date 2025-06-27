@@ -66,6 +66,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               height="1em"
+              role="img"
               viewBox="0 0 12 12"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"
@@ -80,7 +81,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
             </svg>
           </button>
         </header>
-        <main
+        <div
           className="sc-bcXGCL laGNWx cap-modal__body"
         >
           <p
@@ -88,7 +89,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
           >
             media-delete-helptext {"num":3}
           </p>
-        </main>
+        </div>
         <footer
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >

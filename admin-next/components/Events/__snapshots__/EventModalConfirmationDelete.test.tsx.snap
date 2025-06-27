@@ -198,6 +198,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
               className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
               fill="none"
               height="1em"
+              role="img"
               viewBox="0 0 12 12"
               width="1em"
               xmlns="http://www.w3.org/2000/svg"
@@ -212,7 +213,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
             </svg>
           </button>
         </header>
-        <main
+        <div
           className="sc-bcXGCL laGNWx cap-modal__body"
         >
           <p
@@ -220,7 +221,7 @@ exports[`<EventModalConfirmationDelete /> <TestEventModalConfirmationDelete /> s
           >
             are-you-sure-to-delete-something {"element":"&lt;mock-value-for-field-\\"title\\"&gt;"}
           </p>
-        </main>
+        </div>
         <footer
           className="sc-bcXGCL bzOqHT cap-modal__footer"
         >
