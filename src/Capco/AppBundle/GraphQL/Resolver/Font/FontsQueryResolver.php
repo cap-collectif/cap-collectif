@@ -17,6 +17,12 @@ class FontsQueryResolver implements QueryInterface
 
     public function __invoke(Argument $args): iterable
     {
+        $splitFontsFromSameFile = $args->offsetGet('splitFontsFromSameFile') ?? false;
+
+        if ($splitFontsFromSameFile) {
+            return $this->repository->findBy([], ['isCustom' => 'ASC', 'name' => 'ASC']);
+        }
+
         return $this->repository->findAllGroupedByName();
     }
 }

@@ -7322,6 +7322,8 @@ type Font {
 
   """Is the font uploaded by user?"""
   isCustom: Boolean!
+  weight: String
+  style: String
 }
 
 """An object containing footer data."""
@@ -14132,7 +14134,10 @@ type Query {
   defaultLocale: Locale!
 
   """List all available fonts on the platform."""
-  fonts: [Font!]!
+  fonts(
+    """If true, get all fonts uploaded from a same file"""
+    splitFontsFromSameFile: Boolean = false
+  ): [Font!]!
 
   """Retrieve the configured notifications from email."""
   notificationsFromEmail: Email

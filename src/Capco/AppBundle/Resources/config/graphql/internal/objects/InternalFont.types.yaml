@@ -25,3 +25,9 @@ InternalFont:
             isCustom:
                 type: 'Boolean!'
                 description: 'Is the font uploaded by user?'
+            weight:
+                type: 'String'
+                resolve: '@=value.getWeight()'
+            style:
+                type: 'String'
+                resolve: '@=value.getStyle()'

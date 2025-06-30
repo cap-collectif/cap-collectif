@@ -47,7 +47,8 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
         f => `@font-face {
             font-family: ${f.name};
             src: url("${f.file?.url}");
-            font-style: normal;
+            font-weight: ${f.weight};
+            font-style: ${f.style || 'normal'};
             font-display: swap;
         }`,
       )

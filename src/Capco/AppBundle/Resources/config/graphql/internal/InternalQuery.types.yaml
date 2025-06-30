@@ -407,6 +407,11 @@ InternalQuery:
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Locale\\DefaultLocaleQueryResolver")'
             fonts:
                 description: 'List all available fonts on the platform.'
+                args:
+                    splitFontsFromSameFile:
+                        type: 'Boolean'
+                        defaultValue: false
+                        description: 'If true, get all fonts uploaded from a same file'
                 type: '[InternalFont!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Font\\FontsQueryResolver", args)'
             notificationsFromEmail:

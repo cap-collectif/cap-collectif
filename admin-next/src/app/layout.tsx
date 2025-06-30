@@ -26,11 +26,13 @@ export const layoutQuery = graphql`
         url(format: "relative")
       }
     }
-    fonts {
+    fonts(splitFontsFromSameFile: true) {
       name
       useAsBody
       useAsHeading
       isCustom
+      weight
+      style
       file {
         url(format: "relative")
       }
