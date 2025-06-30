@@ -1,0 +1,40 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<PageRender /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL cklhXU"
+  >
+    <div>
+      <div
+        className="sc-bcXGCL eqHHMd"
+      >
+        <div
+          className="sc-bcXGCL iuEEBz"
+        >
+          <h1
+            className="sc-bcXGCL iAowZy cap-heading"
+          >
+            My custom page
+          </h1>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <div
+    className="sc-bcXGCL dChCOP"
+  >
+    <div
+      className="old-editor ql-editor wysiwyg-render"
+      dangerouslySetInnerHTML={
+        {
+          "__html": "Lorem ipsum",
+        }
+      }
+    />
+  </div>,
+]
+`;

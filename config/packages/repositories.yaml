@@ -570,6 +570,12 @@ services:
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Page']
 
+    Capco\AppBundle\Repository\PageTranslationRepository:
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:PageTranslation']
+
     Capco\AppBundle\Repository\LocaleRepository:
         factory: ['@doctrine.orm.entity_manager', getRepository]
         lazy: true
@@ -879,6 +885,13 @@ services:
         lazy: true
         tags: ['repository.manager']
         arguments: ['CapcoAppBundle:Organization\Organization']
+
+    Capco\AppBundle\Repository\Organization\OrganizationTranslationRepository:
+        public: true
+        factory: ['@doctrine.orm.entity_manager', getRepository]
+        lazy: true
+        tags: ['repository.manager']
+        arguments: ['CapcoAppBundle:Organization\OrganizationTranslation']
 
     Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationRepository:
         public: true

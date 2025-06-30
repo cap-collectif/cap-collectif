@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\MetaDescriptionTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
@@ -22,7 +23,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class PageTranslation implements EntityInterface, TranslationInterface
+class PageTranslation implements EntityInterface, SluggableInterface, TranslationInterface
 {
     use MetaDescriptionTrait;
     use SluggableTitleTrait;

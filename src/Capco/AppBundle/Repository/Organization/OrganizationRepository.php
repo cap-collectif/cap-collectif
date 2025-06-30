@@ -111,4 +111,15 @@ class OrganizationRepository extends EntityRepository
 
         return (int) $qb->getQuery()->getSingleScalarResult() ?? 0;
     }
+
+    public function getBySlug(string $slug): ?Organization
+    {
+        $qb = $this->createQueryBuilder('o')
+            ->leftJoin('o.translations', 'ot')
+            ->andWhere('ot.slug = :slug')
+            ->setParameter('slug', $slug)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

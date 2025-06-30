@@ -1,0 +1,19 @@
+InternalOrganizationTranslation:
+    type: object
+    inherits:
+        - NodeSlug
+    config:
+        name: OrganizationTranslation
+        interfaces:
+            - NodeSlug
+        description: 'A translation organization.'
+        fields:
+            locale:
+                type: 'String!'
+            title:
+                type: 'String!'
+            body:
+                type: 'String!'
+            translatable:
+                type: 'InternalOrganization'
+                resolve: '@=value.getTranslatable()'

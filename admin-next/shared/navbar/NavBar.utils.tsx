@@ -40,6 +40,7 @@ export type NavBarTheme = {
 export type GlobalTheme = NavBarTheme & {
   textHoverColor: string
   primaryColor: string
+  primaryTransparentColor: string
   primaryHoverColor: string
   primaryLabel: string
   pageTitleColor: string
@@ -77,6 +78,7 @@ export const getTheme = (
     textActiveColor: siteColors.find(c => c.keyname === 'color.main_menu.text_active')?.value || '#777777',
     textHoverColor: siteColors.find(c => c.keyname === 'color.main_menu.text_hover')?.value || '#777777',
     primaryColor: siteColors.find(c => c.keyname === 'color.btn.primary.bg')?.value || '#777777',
+    primaryTransparentColor: siteColors.find(c => c.keyname === 'color.btn.ghost.base')?.value || '#777777',
     primaryHoverColor: siteColors.find(c => c.keyname === 'color.btn.ghost.hover')?.value || '#777777',
     primaryLabel: siteColors.find(c => c.keyname === 'color.btn.primary.text')?.value || '#777',
     pageTitleColor: siteColors.find(c => c.keyname === 'color.header.title')?.value || '#fff',

@@ -41,3 +41,8 @@ PreviewDistrict:
                 type: 'Style'
             translations:
                 type: '[PreviewDistrictTranslation!]!'
+            translationBySlug:
+                type: 'PreviewDistrictTranslation!'
+                args:
+                    slug: 'String!'
+                resolve: '@=value.getTranslationBySlug(args["slug"])'

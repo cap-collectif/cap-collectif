@@ -18,10 +18,15 @@ export const PageHeading: FC<BoxProps & { title?: string; subtitle?: string; bod
     <Box {...rest}>
       <div>
         {title || subtitle ? (
-          <Box textAlign="center" backgroundColor={siteColors.pageBackgroundHeaderColor} py={[4, 4, 8]}>
-            <Box mx="auto" maxWidth={pxToRem(1280)} px={[4, 6]}>
+          <Box backgroundColor={siteColors.pageBackgroundHeaderColor} py={[8, 'xxl']}>
+            <Box maxWidth={pxToRem(1280)} px={[4, 6]} mx="auto">
               {title ? (
-                <Heading as="h1" mb={2} fontWeight={500} color={siteColors.pageTitleColor}>
+                <Heading
+                  as="h1"
+                  fontWeight={600}
+                  color={siteColors.pageTitleColor}
+                  fontSize={[CapUIFontSize.DisplaySmall, CapUIFontSize.DisplayMedium]}
+                >
                   {title}
                 </Heading>
               ) : null}

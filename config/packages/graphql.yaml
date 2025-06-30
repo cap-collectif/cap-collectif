@@ -109,6 +109,7 @@ overblog_graphql:
                     - InternalProposalVoteConnection
                     - InternalAnonymousReply
                     - InternalOrganization
+                    - InternalOrganizationTranslation
                     - InternalParticipant
                     - InternalMenuItem
                     # Requirement
@@ -156,6 +157,7 @@ overblog_graphql:
                     - InternalProposalVoteConnection
                     - InternalAnonymousReply
                     - InternalOrganization
+                    - InternalOrganizationTranslation
                     # Requirement
                     - CheckboxRequirement
                     - FirstnameRequirement

@@ -10,13 +10,13 @@ exports[`<PageHeading /> renders correctly 1`] = `
   >
     <div>
       <div
-        className="sc-bcXGCL iFPupd"
+        className="sc-bcXGCL eqHHMd"
       >
         <div
-          className="sc-bcXGCL dWgdoT"
+          className="sc-bcXGCL iuEEBz"
         >
           <h1
-            className="sc-bcXGCL fxmFLb cap-heading"
+            className="sc-bcXGCL iAowZy cap-heading"
           >
             Liste des projets
           </h1>

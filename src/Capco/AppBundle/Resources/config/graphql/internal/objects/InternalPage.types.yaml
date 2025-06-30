@@ -1,10 +1,12 @@
 InternalPage:
     type: object
     inherits:
+        - NodeSlug
         - UniformResourceLocatable
     config:
         name: Page
         interfaces:
+            - NodeSlug
             - UniformResourceLocatable
         description: 'A page.'
         fields:
@@ -23,3 +25,20 @@ InternalPage:
                 resolve: '@=value.getBody(args["locale"])'
             translations:
                 type: '[InternalPageTranslation!]!'
+            media:
+                type: 'InternalMedia'
+                resolve: '@=value.getMedia()'
+            cover:
+                type: 'InternalMedia'
+                resolve: '@=value.getCover()'
+            metaDescription:
+                type: 'String'
+                resolve: '@=value.getMetaDescription(args["locale"])'
+            customCode:
+                type: 'String'
+                resolve: '@=value.getCustomCode()'
+            translationBySlug:
+                type: 'InternalPageTranslation!'
+                args:
+                    slug: 'String!'
+                resolve: '@=value.getTranslationBySlug(args["slug"])'

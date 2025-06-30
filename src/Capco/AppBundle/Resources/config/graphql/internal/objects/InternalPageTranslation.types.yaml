@@ -10,3 +10,5 @@ InternalPageTranslation:
                 type: 'String'
             body:
                 type: 'String'
+            metaDescription:
+                type: 'String'

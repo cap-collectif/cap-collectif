@@ -184,6 +184,12 @@ Capco\AppBundle\Entity\District\DistrictTranslation:
         locale: fr-FR
         name: Paris - 1ière arrondissement
         slug: 'paris-1iere-arrondissement'
+    proposalDistrictParis1En:
+        translatable: '@paris1'
+        id: proposalDistrictParis1En
+        locale: en-EN
+        name: Paris - 1st arrondissement
+        slug: 'paris-1st-arrondissement'
     proposalDistrictParis2:
         translatable: '@paris2'
         id: proposalDistrictParis2

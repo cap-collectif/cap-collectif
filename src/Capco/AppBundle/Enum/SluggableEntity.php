@@ -6,4 +6,6 @@ final class SluggableEntity
 {
     public const ORGANIZATION = 'ORGANIZATION';
     public const DISTRICT = 'DISTRICT';
+    public const PROPOSAL_DISTRICT = 'PROPOSAL_DISTRICT';
+    public const PAGE = 'PAGE';
 }

@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity\Organization;
 
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Model\TranslationInterface;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\TranslationTrait;
@@ -21,7 +22,7 @@ use Doctrine\ORM\Mapping as ORM;
  *    )
  * })
  */
-class OrganizationTranslation implements EntityInterface, TranslationInterface
+class OrganizationTranslation implements EntityInterface, SluggableInterface, TranslationInterface
 {
     use SluggableTitleTrait;
     use TranslationTrait;

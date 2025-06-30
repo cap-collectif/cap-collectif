@@ -6149,6 +6149,7 @@ interface District {
   border: Style
   background: Style
   translations: [DistrictTranslation!]!
+  translationBySlug(slug: String!): DistrictTranslation!
 }
 
 input DistrictInput {
@@ -7515,6 +7516,7 @@ type GlobalDistrict implements District & Node & NodeSlug {
   border: Style
   background: Style
   translations: [DistrictTranslation!]!
+  translationBySlug(slug: String!): DistrictTranslation!
 
   """The list of followers of the district"""
   followers(
@@ -10096,6 +10098,7 @@ type Organization implements Node & Author & PostOwner & EventOwner & ProjectOwn
 
   """The date when the organization was deleted."""
   deletedAt: DateTime
+  translationBySlug(slug: String!): OrganizationTranslation!
 }
 
 """The affiliation of a user to an Organization"""
@@ -10193,6 +10196,15 @@ type OrganizationSocialNetworks {
   youtubeUrl: URI
 }
 
+"""A translation organization."""
+type OrganizationTranslation implements NodeSlug {
+  slug: String!
+  locale: String!
+  title: String!
+  body: String!
+  translatable: Organization
+}
+
 """A step inside a project."""
 type OtherStep implements Node & Step {
   """The ID of an object"""
@@ -10275,7 +10287,9 @@ type OtherStep implements Node & Step {
 }
 
 """A page."""
-type Page implements UniformResourceLocatable {
+type Page implements NodeSlug & UniformResourceLocatable {
+  slug: String!
+
   """The URL to this resource."""
   url: URI!
 
@@ -10290,6 +10304,11 @@ type Page implements UniformResourceLocatable {
     locale: TranslationLocale
   ): String
   translations: [PageTranslation!]!
+  media: Media
+  cover: Media
+  metaDescription: String
+  customCode: String
+  translationBySlug(slug: String!): PageTranslation!
 }
 
 """Information about pagination in a connection."""
@@ -10312,6 +10331,7 @@ type PageTranslation {
   locale: String!
   title: String
   body: String
+  metaDescription: String
 }
 
 """One participant"""
@@ -12492,7 +12512,7 @@ enum ProposalDecisionState {
 }
 
 """A proposal district"""
-type ProposalDistrict implements District & Node {
+type ProposalDistrict implements District & Node & NodeSlug {
   """The ID of an object"""
   id: ID!
   name(
@@ -12517,6 +12537,8 @@ type ProposalDistrict implements District & Node {
   border: Style
   background: Style
   translations: [DistrictTranslation!]!
+  translationBySlug(slug: String!): DistrictTranslation!
+  cover: Media
 }
 
 """An edge in a connection."""
@@ -17217,6 +17239,8 @@ enum SiteSettingsStatus {
 enum SluggableEntity {
   ORGANIZATION
   DISTRICT
+  PROPOSAL_DISTRICT
+  PAGE
 }
 
 """Sms analytics."""

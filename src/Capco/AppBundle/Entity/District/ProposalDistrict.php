@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Entity\District;
 
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalForm;
+use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\Capco\Facade\EntityInterface;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -12,8 +14,9 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ProposalDistrictRepository")
  */
-class ProposalDistrict extends AbstractDistrict implements EntityInterface, \Stringable
+class ProposalDistrict extends AbstractDistrict implements EntityInterface, SluggableInterface, \Stringable
 {
+    use SluggableTranslatableTitleTrait;
     use TranslatableTrait;
 
     /**

@@ -88,6 +88,7 @@ export const mockedGlobalTheme = {
   textActiveColor: 'color.main_menu.text_active',
   textHoverColor: 'color.main_menu.text_hover',
   primaryColor: 'color.btn.primary.bg',
+  primaryTransparentColor: 'color.btn.ghost.base',
   primaryHoverColor: 'color.btn.ghost.hover',
   primaryLabel: 'color.btn.primary.text',
   pageTitleColor: 'color.header.title',

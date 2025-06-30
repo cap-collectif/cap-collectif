@@ -8,3 +8,7 @@ SluggableEntity:
                 value: !php/const Capco\AppBundle\Enum\SluggableEntity::ORGANIZATION
             DISTRICT:
                 value: !php/const Capco\AppBundle\Enum\SluggableEntity::DISTRICT
+            PROPOSAL_DISTRICT:
+                value: !php/const Capco\AppBundle\Enum\SluggableEntity::PROPOSAL_DISTRICT
+            PAGE:
+                value: !php/const Capco\AppBundle\Enum\SluggableEntity::PAGE

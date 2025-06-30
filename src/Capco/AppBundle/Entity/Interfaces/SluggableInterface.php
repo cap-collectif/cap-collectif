@@ -4,5 +4,5 @@ namespace Capco\AppBundle\Entity\Interfaces;
 
 interface SluggableInterface
 {
-    public function getSlug(?string $locale = null, ?bool $fallbackToDefault = false): ?string;
+    public function getSlug(): ?string;
 }

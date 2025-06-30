@@ -57,4 +57,15 @@ class ProposalDistrictRepository extends EntityRepository
 
         return $builder->getQuery()->getOneOrNullResult();
     }
+
+    public function getBySlug(string $slug): ?ProposalDistrict
+    {
+        $qb = $this->createQueryBuilder('pd')
+            ->leftJoin('pd.translations', 'pdt')
+            ->andWhere('pdt.slug = :slug')
+            ->setParameter('slug', $slug)
+        ;
+
+        return $qb->getQuery()->getOneOrNullResult();
+    }
 }

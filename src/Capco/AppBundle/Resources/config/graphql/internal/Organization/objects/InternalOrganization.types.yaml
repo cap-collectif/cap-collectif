@@ -144,3 +144,8 @@ InternalOrganization:
                 description: 'Get all consultations that the organization owns.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Consultation\\OrganizationConsultationsResolver", value, args)'
                 argsBuilder: 'Relay::ForwardConnection'
+            translationBySlug:
+                type: 'InternalOrganizationTranslation!'
+                args:
+                    slug: 'String!'
+                resolve: '@=value.getTranslationBySlug(args["slug"])'

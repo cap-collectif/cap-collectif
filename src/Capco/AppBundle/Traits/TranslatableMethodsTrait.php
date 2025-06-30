@@ -126,6 +126,19 @@ trait TranslatableMethodsTrait
         return static::class . 'Translation';
     }
 
+    public function getTranslationBySlug(string $slug): TranslationInterface
+    {
+        $translation = $this->getTranslations()->filter(
+            fn (TranslationInterface $translation) => $translation->getSlug() === $slug
+        )->first();
+
+        if (false === $translation) {
+            throw new \InvalidArgumentException('Translation not found with slug: ' . $slug);
+        }
+
+        return $translation;
+    }
+
     /**
      * Returns translation for specific locale (creates new one if doesn't exists). If requested translation doesn't
      * exist, it will first try to fallback default locale If any translation doesn't exist, it will be added to

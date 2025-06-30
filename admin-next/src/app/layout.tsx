@@ -13,6 +13,7 @@ import { getTheme } from '@shared/navbar/NavBar.utils'
 import { graphql } from 'relay-runtime'
 import Fetcher from '@utils/fetch'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
+import { formatCookiesForServer } from '@shared/utils/cookies'
 
 export const layoutQuery = graphql`
   query layoutQuery {
@@ -128,14 +129,7 @@ export default async function RootLayout({
     messages: __isTest__ ? {} : messages[locale] || messages[Locale.frFR],
   }
 
-  const SSRData = await Fetcher.ssrGraphql<layoutQuery$data>(
-    layoutQuery,
-    null,
-    cookieStore
-      .getAll()
-      .map(({ name, value }) => `${encodeURIComponent(name)}=${encodeURIComponent(value)}`)
-      .join('; '),
-  )
+  const SSRData = await Fetcher.ssrGraphql<layoutQuery$data>(layoutQuery, null, formatCookiesForServer(cookieStore))
 
   if (!SSRData) throw new Error('Something went wrong')
 

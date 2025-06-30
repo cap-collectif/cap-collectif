@@ -371,6 +371,7 @@ interface District {
   border: Style
   background: Style
   translations: [DistrictTranslation!]!
+  translationBySlug(slug: String!): DistrictTranslation!
 }
 
 """A translation of a District."""
@@ -578,6 +579,7 @@ type GlobalDistrict implements District & Node {
   border: Style
   background: Style
   translations: [DistrictTranslation!]!
+  translationBySlug(slug: String!): DistrictTranslation!
 
   """The list of followers of the district"""
   followers(

@@ -7,12 +7,14 @@ Capco\AppBundle\Entity\PageTranslation:
         #TODO Fix Fixture Body without segFaulting on M1 configuration
         body: 'Insert Long Text here'
         locale: fr-FR
+        metaDescription: 'Meta description'
     page1en:
         translatable: '@page1'
         title: FAQ EN
         slug: faq-en
         body: any questions ?
         locale: en-GB
+        metaDescription: 'Meta description'
     page2fr:
         translatable: '@page2'
         title: Comment ça marche ?

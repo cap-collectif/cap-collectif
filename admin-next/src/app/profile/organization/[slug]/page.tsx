@@ -3,6 +3,7 @@ import Organization from './Organization'
 import Fetcher from '@utils/fetch'
 import { Metadata } from 'next'
 import { pageOrganizationMetadataQuery$data } from '@relay/pageOrganizationMetadataQuery.graphql'
+import { notFound } from 'next/navigation'
 
 const METADATA_QUERY = graphql`
   query pageOrganizationMetadataQuery($organizationSlug: String!) {
@@ -57,7 +58,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default function Page({ params }: Params) {
   const { slug } = params
 
-  if (!slug) return null
+  if (!slug) return notFound()
 
   return (
     <main id="organization-page">

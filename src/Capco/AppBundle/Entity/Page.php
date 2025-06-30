@@ -2,8 +2,10 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\SluggableInterface;
 use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\CustomCodeTrait;
+use Capco\AppBundle\Traits\SluggableTranslatableTitleTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -15,9 +17,10 @@ use Doctrine\ORM\Mapping as ORM;
  * @ORM\Table(name="page")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\PageRepository")
  */
-class Page implements EntityInterface, TranslatableInterface, \Stringable
+class Page implements EntityInterface, SluggableInterface, TranslatableInterface, \Stringable
 {
     use CustomCodeTrait;
+    use SluggableTranslatableTitleTrait;
     use TimestampableTrait;
     use TranslatableTrait;
     use UuidTrait;
@@ -79,19 +82,6 @@ class Page implements EntityInterface, TranslatableInterface, \Stringable
     public function getTitle(?string $locale = null): ?string
     {
         return $this->translate($locale, false)->getTitle();
-    }
-
-    // Make sure to use nullable typehint in case field is not translated yet.
-    public function getSlug(?string $locale = null): ?string
-    {
-        return $this->translate($locale, false)->getSlug();
-    }
-
-    public function setSlug(string $slug): self
-    {
-        $this->translate(null, false)->setSlug($slug);
-
-        return $this;
     }
 
     // Make sure to use nullable typehint in case field is not translated yet.

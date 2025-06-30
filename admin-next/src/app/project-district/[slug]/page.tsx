@@ -3,6 +3,7 @@ import District from './District'
 import { graphql } from 'relay-runtime'
 import Fetcher from '@utils/fetch'
 import { pageDistrictMetadataQuery$data } from '@relay/pageDistrictMetadataQuery.graphql'
+import { notFound } from 'next/navigation'
 
 const METADATA_QUERY = graphql`
   query pageDistrictMetadataQuery($districtSlug: String!) {
@@ -54,7 +55,7 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 export default function Page({ params }: Params) {
   const { slug } = params
 
-  if (!slug) return null
+  if (!slug) return notFound()
 
   return (
     <main id="district-page">

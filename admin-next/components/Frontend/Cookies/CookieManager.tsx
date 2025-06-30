@@ -140,6 +140,7 @@ export const CookieManager: React.FC<BoxProps & Props> = ({
 
       {isOpen ? (
         <Modal
+          hideOnClickOutside={false}
           size={CapUIModalSize.Lg}
           show={isOpen}
           onClose={onClose}

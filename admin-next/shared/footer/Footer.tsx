@@ -19,6 +19,10 @@ export const LinkSeparator = () => (
   </Box>
 )
 
+const getIconName = (item: string): string => {
+  return item === 'link-1' ? 'HYPERLINK' : item ? item.toUpperCase() : null
+}
+
 export const Footer: FC<{
   SSRData: layoutQuery$data
 }> = ({ SSRData }) => {
@@ -89,9 +93,7 @@ export const Footer: FC<{
                 {socialNetworks.map(socialNetwork => (
                   <li key={socialNetwork.title}>
                     <Flex>
-                      <Icon
-                        name={CapUIIcon[socialNetwork.style.charAt(0).toUpperCase() + socialNetwork.style.slice(1)]}
-                      />
+                      <Icon name={getIconName(socialNetwork.style) as CapUIIcon} />
                       <a href={socialNetwork.link}>
                         <span>{` ${socialNetwork.title}`}</span>
                       </a>
