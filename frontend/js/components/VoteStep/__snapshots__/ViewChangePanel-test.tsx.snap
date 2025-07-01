@@ -3,22 +3,22 @@
 exports[`<ViewChangePanel /> should render correctly on mobile 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL iYTFoC"
+    className="sc-bcXGCL gGvShO"
     id="view-change-panel"
   >
     <button
       aria-current={false}
       aria-label="global.list"
-      className="sc-bcXGCL jPBKtr"
+      className="sc-bcXGCL kJgaqD"
       id="change-to-list-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cjBonp hEjMCZ cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -62,24 +62,24 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL iNrrHM cap-text"
+        className="sc-bcXGCL hccmEc cap-text"
       >
         global.list
       </span>
     </button>
     <div
-      className="sc-bcXGCL jMXjzD"
+      className="sc-bcXGCL kypOnn"
     />
     <button
       aria-current={false}
       aria-label="global.card"
-      className="sc-bcXGCL vWvVC"
+      className="sc-bcXGCL hvQAKy"
       id="change-to-map-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cjBonp hEjMCZ cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -93,25 +93,25 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL iNrrHM cap-text"
+        className="sc-bcXGCL hccmEc cap-text"
       >
         global.card
       </span>
     </button>
     <div
-      className="sc-bcXGCL jMXjzD"
+      className="sc-bcXGCL kypOnn"
     />
     <button
       aria-current={false}
       aria-label="project.votes.title"
-      className="sc-bcXGCL eawXRk"
+      className="sc-bcXGCL iLTEMo"
       disabled={true}
       id="change-to-votes-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-eJDTud hkLsVD hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud ceqtHv hEjMCZ cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -125,7 +125,7 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL eSGgYy cap-text"
+        className="sc-bcXGCL iuhMWW cap-text"
       >
         project.votes.title
       </span>
@@ -137,22 +137,22 @@ Array [
 exports[`<ViewChangePanel /> should render correctly on web 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL iYTFoC"
+    className="sc-bcXGCL gGvShO"
     id="view-change-panel"
   >
     <button
       aria-current={false}
       aria-label="global.list"
-      className="sc-bcXGCL jPBKtr"
+      className="sc-bcXGCL kJgaqD"
       id="change-to-list-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cjBonp hEjMCZ cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -196,24 +196,24 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL iNrrHM cap-text"
+        className="sc-bcXGCL hccmEc cap-text"
       >
         global.list
       </span>
     </button>
     <div
-      className="sc-bcXGCL jMXjzD"
+      className="sc-bcXGCL kypOnn"
     />
     <button
       aria-current={false}
       aria-label="global.card"
-      className="sc-bcXGCL vWvVC"
+      className="sc-bcXGCL hvQAKy"
       id="change-to-map-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-eJDTud wobIR hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud cjBonp hEjMCZ cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -227,25 +227,25 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL iNrrHM cap-text"
+        className="sc-bcXGCL hccmEc cap-text"
       >
         global.card
       </span>
     </button>
     <div
-      className="sc-bcXGCL jMXjzD"
+      className="sc-bcXGCL kypOnn"
     />
     <button
       aria-current={false}
       aria-label="project.votes.title"
-      className="sc-bcXGCL eawXRk"
+      className="sc-bcXGCL iLTEMo"
       disabled={true}
       id="change-to-votes-view"
       onClick={[Function]}
     >
       <svg
         aria-hidden={true}
-        className="sc-bcXGCL sc-eJDTud hkLsVD hEjMCZ cap-icon"
+        className="sc-bcXGCL sc-eJDTud ceqtHv hEjMCZ cap-icon"
         fill="none"
         focusable={false}
         height="1em"
@@ -259,7 +259,7 @@ Array [
         />
       </svg>
       <span
-        className="sc-bcXGCL eSGgYy cap-text"
+        className="sc-bcXGCL iuhMWW cap-text"
       >
         project.votes.title
       </span>

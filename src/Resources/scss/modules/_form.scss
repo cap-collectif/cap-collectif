@@ -26,7 +26,7 @@ form {
         }
     }
 
-    input, textarea, select, .form-control, .Select-control {
+    input:not(.cap-input), textarea, select, .form-control, .Select-control {
         background-color: $form-bgc;
         border-color: $border-color;
         color: $dark;

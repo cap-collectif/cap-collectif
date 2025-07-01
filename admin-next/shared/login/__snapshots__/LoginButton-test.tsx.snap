@@ -3,7 +3,7 @@
 exports[`<LoginButton /> renders a button 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <form
     id="login-form"
@@ -11,7 +11,7 @@ exports[`<LoginButton /> renders a button 1`] = `
   />,
   <button
     aria-label="open.connection_modal"
-    className="sc-bcXGCL sc-laZSpB lhGzSd ietVcX cap-button"
+    className="sc-bcXGCL sc-laZSpB juTTmZ ietVcX cap-button"
     id="login-button"
     onClick={[Function]}
     type="button"

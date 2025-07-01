@@ -331,6 +331,7 @@ const ProposalStepVoteTabsForm: React.FC<ProposalStepVoteTabsFormProps> = ({ for
             </ListCard.Item>
             <FormProvider {...formMethods}>
               <TextEditor
+                variantColor="hierarchy"
                 name="votesHelpText"
                 label={intl.formatMessage({
                   id: 'admin.fields.step.votesHelpText',

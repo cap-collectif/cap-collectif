@@ -126,6 +126,7 @@ const DebateWidgetIntegrationForm: React.FC<Props> = ({ debate: debateRef }) => 
                       content: intl.formatMessage({ id: 'copied-link' }),
                     })
                   }),
+                label: intl.formatMessage({ id: 'copy-link' }),
               },
             ]}
           />

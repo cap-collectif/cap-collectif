@@ -3,7 +3,7 @@
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render facebook sso button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="sc-csDjRa Flex___StyledAppBox-SiGEY jwKotA UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
@@ -18,7 +18,7 @@ Array [
           className="sc-csDjRa UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ cnlZmQ dPMeBO"
         >
           <h2
-            className="sc-bcXGCL ctPbQT cap-heading"
+            className="sc-bcXGCL ethVoT cap-heading"
           >
             global-welcome
              
@@ -30,7 +30,7 @@ Array [
             </span>
           </h2>
           <p
-            className="sc-bcXGCL llljjX cap-text"
+            className="sc-bcXGCL iRcref cap-text"
           >
             invite-join-platform
           </p>
@@ -65,13 +65,13 @@ Array [
             </a>
           </div>
           <div
-            className="sc-bcXGCL yRCOB"
+            className="sc-bcXGCL fHDDQZ"
           >
             <div
               className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
             />
             <p
-              className="sc-bcXGCL dGJZJK cap-text"
+              className="sc-bcXGCL bmcaZK cap-text"
             >
               global-or
             </p>
@@ -110,7 +110,7 @@ Array [
 exports[`<UserInvitationSSOPage /> <TestUserInvitationSSOPage /> should render franceConnect sso button 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="sc-csDjRa Flex___StyledAppBox-SiGEY jwKotA UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
@@ -125,7 +125,7 @@ Array [
           className="sc-csDjRa UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ cnlZmQ dPMeBO"
         >
           <h2
-            className="sc-bcXGCL ctPbQT cap-heading"
+            className="sc-bcXGCL ethVoT cap-heading"
           >
             global-welcome
              
@@ -137,7 +137,7 @@ Array [
             </span>
           </h2>
           <p
-            className="sc-bcXGCL llljjX cap-text"
+            className="sc-bcXGCL iRcref cap-text"
           >
             invite-join-platform
           </p>
@@ -167,13 +167,13 @@ Array [
             </a>
           </div>
           <div
-            className="sc-bcXGCL yRCOB"
+            className="sc-bcXGCL fHDDQZ"
           >
             <div
               className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
             />
             <p
-              className="sc-bcXGCL dGJZJK cap-text"
+              className="sc-bcXGCL bmcaZK cap-text"
             >
               global-or
             </p>

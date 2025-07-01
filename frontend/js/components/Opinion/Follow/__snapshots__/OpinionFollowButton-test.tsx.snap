@@ -3,10 +3,10 @@
 exports[`<OpinionFollowButton /> <TestOpinionFollowButton /> should render a button to follow a proposal when viewer is not following. 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     aria-controls="popover-overlay"
@@ -105,15 +105,15 @@ Array [
           value="MINIMAL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               essential
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-and-news
             </p>
@@ -137,15 +137,15 @@ Array [
           value="ESSENTIAL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               intermediate
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-news-and-new-contributions
             </p>
@@ -169,15 +169,15 @@ Array [
           value="ALL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               complete
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-news-new-contributions-votes-and-subscriptions
                
@@ -194,7 +194,7 @@ Array [
         onClick={[Function]}
       >
         <p
-          className="sc-bcXGCL kvdFZU cap-text"
+          className="sc-bcXGCL gZXNQs cap-text"
         >
           unfollow
         </p>
@@ -299,7 +299,7 @@ Array [
     visible={false}
   >
     <div
-      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf bctbXb csqehL"
+      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fptTZj csqehL"
       style={
         Object {
           "auto": "100%",
@@ -329,18 +329,18 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bcXGCL rfkcq"
+      className="sc-bcXGCL irbWaO"
     >
       <p
-        className="sc-bcXGCL yBlZV cap-text"
+        className="sc-bcXGCL jEiGcJ cap-text"
       >
         vote.popover.title
       </p>
       <div
-        className="sc-bcXGCL ecTirb"
+        className="sc-bcXGCL idhYbX"
       >
         <p
-          className="sc-bcXGCL bMwsnA cap-text"
+          className="sc-bcXGCL gwOTQw cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -355,7 +355,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
+            className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -364,7 +364,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
+          className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -380,10 +380,10 @@ Array [
 exports[`<OpinionFollowButton /> <TestOpinionFollowButton /> should render a button to unfollow a proposal when viewer is following  1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     aria-controls="popover-overlay"
@@ -482,15 +482,15 @@ Array [
           value="MINIMAL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               essential
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-and-news
             </p>
@@ -514,15 +514,15 @@ Array [
           value="ESSENTIAL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               intermediate
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-news-and-new-contributions
             </p>
@@ -546,15 +546,15 @@ Array [
           value="ALL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               complete
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-news-new-contributions-votes-and-subscriptions
                
@@ -571,7 +571,7 @@ Array [
         onClick={[Function]}
       >
         <p
-          className="sc-bcXGCL kvdFZU cap-text"
+          className="sc-bcXGCL gZXNQs cap-text"
         >
           unfollow
         </p>
@@ -676,7 +676,7 @@ Array [
     visible={false}
   >
     <div
-      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf bctbXb csqehL"
+      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fptTZj csqehL"
       style={
         Object {
           "auto": "100%",
@@ -706,18 +706,18 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bcXGCL rfkcq"
+      className="sc-bcXGCL irbWaO"
     >
       <p
-        className="sc-bcXGCL yBlZV cap-text"
+        className="sc-bcXGCL jEiGcJ cap-text"
       >
         vote.popover.title
       </p>
       <div
-        className="sc-bcXGCL ecTirb"
+        className="sc-bcXGCL idhYbX"
       >
         <p
-          className="sc-bcXGCL bMwsnA cap-text"
+          className="sc-bcXGCL gwOTQw cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -732,7 +732,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
+            className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -741,7 +741,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
+          className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -757,10 +757,10 @@ Array [
 exports[`<OpinionFollowButton /> <TestOpinionFollowButton /> should render correctly when not authenticated 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     aria-controls="popover-overlay"
@@ -859,15 +859,15 @@ Array [
           value="MINIMAL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               essential
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-and-news
             </p>
@@ -891,15 +891,15 @@ Array [
           value="ESSENTIAL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               intermediate
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-news-and-new-contributions
             </p>
@@ -923,15 +923,15 @@ Array [
           value="ALL"
         >
           <div
-            className="sc-bcXGCL bIeMkt"
+            className="sc-bcXGCL eBUCyR"
           >
             <p
-              className="sc-bcXGCL cFCfQA cap-text"
+              className="sc-bcXGCL dwGNgA cap-text"
             >
               complete
             </p>
             <p
-              className="sc-bcXGCL kvdFZU cap-text"
+              className="sc-bcXGCL gZXNQs cap-text"
             >
               updates-news-new-contributions-votes-and-subscriptions
                
@@ -948,7 +948,7 @@ Array [
         onClick={[Function]}
       >
         <p
-          className="sc-bcXGCL kvdFZU cap-text"
+          className="sc-bcXGCL gZXNQs cap-text"
         >
           unfollow
         </p>
@@ -1053,7 +1053,7 @@ Array [
     visible={false}
   >
     <div
-      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf bctbXb csqehL"
+      className="sc-bcXGCL LoginOverlay__Arrow-jnwUOf fptTZj csqehL"
       style={
         Object {
           "auto": "100%",
@@ -1083,18 +1083,18 @@ Array [
       </svg>
     </div>
     <div
-      className="sc-bcXGCL rfkcq"
+      className="sc-bcXGCL irbWaO"
     >
       <p
-        className="sc-bcXGCL yBlZV cap-text"
+        className="sc-bcXGCL jEiGcJ cap-text"
       >
         vote.popover.title
       </p>
       <div
-        className="sc-bcXGCL ecTirb"
+        className="sc-bcXGCL idhYbX"
       >
         <p
-          className="sc-bcXGCL bMwsnA cap-text"
+          className="sc-bcXGCL gwOTQw cap-text"
           style={
             Object {
               "marginLeft": 0,
@@ -1109,7 +1109,7 @@ Array [
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB cDseqh ietVcX cap-button"
+            className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1118,7 +1118,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB fQxOmx ietVcX cap-button"
+          className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"

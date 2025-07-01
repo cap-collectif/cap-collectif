@@ -207,7 +207,6 @@ const PostFormSide: React.FC<PostFormSideProps> = ({
               name="customCode"
               placeholder={intl.formatMessage({ id: 'admin.customcode.placeholder' })}
               control={control}
-              variantSize={CapInputSize.Md}
               id="customCode"
             />
           </FormControl>

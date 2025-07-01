@@ -9,6 +9,7 @@ import {
   FlexProps,
   FormLabel,
   Heading,
+  InputProps,
   Modal,
   Text,
 } from '@cap-collectif/ui'
@@ -30,6 +31,7 @@ export type TextEditorProps = FlexProps & {
   limitChars?: number
   advancedEditor?: boolean
   noModalAdvancedEditor?: boolean
+  variantColor?: InputProps['variantColor']
 }
 
 const TextEditor: React.FC<TextEditorProps> = ({
@@ -44,6 +46,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
   advancedEditor = true,
   noModalAdvancedEditor = false,
   disabled,
+  variantColor = 'default',
   ...rest
 }) => {
   const intl = useIntl()
@@ -173,6 +176,7 @@ const TextEditor: React.FC<TextEditorProps> = ({
                   platformLanguage={platformLanguage}
                   limitChars={limitChars}
                   disabled={disabled}
+                  variantColor={variantColor}
                 />
               )
             }}

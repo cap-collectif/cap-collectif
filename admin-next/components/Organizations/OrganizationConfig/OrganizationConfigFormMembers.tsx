@@ -225,7 +225,7 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
               onClick={e => {
                 handleSubmit(onSubmit)(e)
               }}
-              style={{ flexBasis: '10%', justifyContent: 'center', height: '34px' }}
+              style={{ flexBasis: '10%', justifyContent: 'center' }}
             >
               {intl.formatMessage({ id: 'organization.invite' })}
             </Button>

@@ -216,7 +216,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
           {intl.formatMessage({ id: 'create-project-help-text' })}
         </Text>
         <Box mt={5} as="form" onSubmit={handleSubmit(onSubmit)}>
-          <FormControl name="title" control={control} isRequired>
+          <FormControl name="title" control={control} isRequired variantColor="hierarchy">
             <FormLabel htmlFor="title" label={intl.formatMessage({ id: 'global.project.name' })} />
             <FieldInput
               ref={inputTitleRef}
@@ -234,6 +234,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             />
           </FormControl>
           <FormControl
+            variantColor="hierarchy"
             name="authors"
             control={control}
             isRequired
@@ -243,7 +244,7 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
             <FormLabel htmlFor="authors" label={intl.formatMessage({ id: 'project.owner' })} />
             <UserListField name="authors" control={control} isMulti />
           </FormControl>
-          <FormControl name="model" control={control}>
+          <FormControl name="model" control={control} variantColor="hierarchy">
             <FormLabel htmlFor="model" label={intl.formatMessage({ id: 'global.model' })}>
               <Text color="gray.500">{intl.formatMessage({ id: 'global.optional' })}</Text>
             </FormLabel>

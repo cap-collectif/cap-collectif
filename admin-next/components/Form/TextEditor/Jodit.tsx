@@ -1,6 +1,6 @@
 import React, { useRef, useMemo, forwardRef } from 'react'
 import dynamic from 'next/dynamic'
-import { Box, CapUIFontFamily, useTheme } from '@cap-collectif/ui'
+import { Box, InputProps, useTheme } from '@cap-collectif/ui'
 import { getApiUrl } from 'config'
 import { IJodit } from 'jodit/types'
 import { FILE_UPLOAD_POPUP_OPENED, joditFileUploader, linktooltip, uppyListener } from '@shared/utils/joditFileUploader'
@@ -24,6 +24,7 @@ type Props = {
   selectedLanguage?: string
   placeholder?: string
   limitChars?: number
+  variantColor?: InputProps['variantColor']
 }
 
 const limitedConf = [
@@ -175,6 +176,7 @@ const Jodit = ({
   placeholder = '',
   limitChars,
   disabled,
+  variantColor = 'default',
 }: Props) => {
   const intl = useIntl()
   const { colors, radii, space } = useTheme()
@@ -182,23 +184,29 @@ const Jodit = ({
   const styles = textAreaOnly
     ? {
         '.jodit-status-bar,.jodit-ui-group,.jodit-toolbar__box': { display: 'none' },
-        '.jodit-workplace': { borderRadius: radii.normal },
+        '.jodit-workplace': { borderTopLeftRadius: radii.normal, borderTopRightRadius: radii.normal },
         '.jodit-wysiwyg': {
-          padding: `${space[3]} !important`,
-          paddingTop: `${space[1]} !important`,
-          paddingBottom: `${space[1]} !important`,
+          padding: `${space.sm} !important`,
+          paddingTop: `${space.xxs} !important`,
+          paddingBottom: `${space.xxs} !important`,
           maxHeight: '100px',
+          background: `${colors.input[variantColor].background.default} !important`,
         },
         'span.jodit-placeholder': {
-          color: colors.gray[500],
-          fontFamily: CapUIFontFamily.Input,
-          padding: `${space[4]} !important`,
-          paddingTop: `${space[2]} !important`,
+          color: colors.text.tertiary,
+          padding: `${space.sm} !important`,
+          paddingTop: `${space.xxs} !important`,
         },
         '.jodit-container.jodit': {
-          border: `1px solid ${colors.gray[300]}`,
-          borderRadius: radii.normal,
-          '&:focus-within': { border: `1px solid ${colors.blue[500]}` },
+          border: 'unset',
+          borderRadius: 'unset',
+          borderBottom: `1px solid ${colors.input[variantColor].border.default}`,
+          borderTopLeftRadius: radii.normal,
+          borderTopRightRadius: radii.normal,
+          '&:focus-within': {
+            borderBottom: `1px solid ${colors.input[variantColor].border.selected}`,
+            '.jodit-wysiwyg': { background: `${colors.input[variantColor].background.selected} !important` },
+          },
         },
       }
     : {}

@@ -3,17 +3,17 @@
 exports[`<StepEvents /> <TestStepEvents /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="StepEventsstyle__Container-jvrJbu dRuOvl block"
     id="StepEvents"
   >
     <div
-      className="sc-bcXGCL foQVaX"
+      className="sc-bcXGCL kyCDBf"
     >
       <h2
-        className="sc-bcXGCL mbbHE cap-heading"
+        className="sc-bcXGCL elTwUA cap-heading"
       >
         global.events
          
@@ -43,7 +43,7 @@ Array [
             onClick={[Function]}
           >
             <p
-              className="sc-bcXGCL jKVAiN cap-text"
+              className="sc-bcXGCL iqqNFB cap-text"
             >
               theme.show.status.future
             </p>
@@ -54,7 +54,7 @@ Array [
             onClick={[Function]}
           >
             <p
-              className="sc-bcXGCL jKVAiN cap-text"
+              className="sc-bcXGCL iqqNFB cap-text"
             >
               finished
             </p>

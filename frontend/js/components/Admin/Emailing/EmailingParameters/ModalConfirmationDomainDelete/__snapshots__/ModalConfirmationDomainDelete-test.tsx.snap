@@ -3,7 +3,7 @@
 exports[`<ModalConfirmationDomainDelete /> <TestModalConfirmationDomainDelete /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-1"
@@ -71,7 +71,7 @@ Array [
 exports[`<ModalConfirmationDomainDelete /> <TestModalConfirmationDomainDelete /> should render modal open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-1"

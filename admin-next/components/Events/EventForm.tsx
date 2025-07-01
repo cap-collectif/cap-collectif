@@ -208,7 +208,7 @@ const EventForm: React.FC<EventFormProps> = ({ eventId, defaultLocale = 'FR_FR',
                   </Flex>
                 </Tabs.Panel>
                 <Tabs.Panel>
-                  <FormControl name={`${currentLocale}-link`} control={control}>
+                  <FormControl name={`${currentLocale}-link`} control={control} variantColor="hierarchy">
                     <FieldInput
                       name={`${currentLocale}-link`}
                       id={`${currentLocale}-link`}

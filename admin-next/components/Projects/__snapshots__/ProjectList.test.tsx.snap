@@ -3,64 +3,64 @@
 exports[`<ProjectList /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eOdAxI"
+    className="sc-bcXGCL egjkRc"
   >
     <table
-      className="sc-bcXGCL fdnEwv"
+      className="sc-bcXGCL dCIzNH"
     >
       <thead
-        className="sc-bcXGCL ieyhyf"
+        className="sc-bcXGCL iKYZOv"
       >
         <tr
-          className="sc-bcXGCL fBvmdL cap-table__tr"
+          className="sc-bcXGCL jgOjXT cap-table__tr"
         >
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL diEcAl cap-table__th"
           >
             <p
-              className="sc-bcXGCL bTjUUg cap-text"
+              className="sc-bcXGCL wTiDQ cap-text"
             >
               admin.fields.proposal.project
             </p>
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL diEcAl cap-table__th"
           >
             <p
-              className="sc-bcXGCL bTjUUg cap-text"
+              className="sc-bcXGCL wTiDQ cap-text"
             >
               admin.projects.list.author
             </p>
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL diEcAl cap-table__th"
           >
             <p
-              className="sc-bcXGCL bTjUUg cap-text"
+              className="sc-bcXGCL wTiDQ cap-text"
             >
               global.owner
             </p>
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL diEcAl cap-table__th"
           >
             <p
-              className="sc-bcXGCL bTjUUg cap-text"
+              className="sc-bcXGCL wTiDQ cap-text"
             >
               admin.settings.header.access
             </p>
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL diEcAl cap-table__th"
           >
             <button
               aria-controls="id-g"
               aria-expanded={false}
               aria-haspopup="menu"
-              className="sc-bcXGCL cQSKSn cap-menu__disclosure"
+              className="sc-bcXGCL iWkrtH cap-menu__disclosure"
               onClick={[Function]}
               onClickCapture={[Function]}
               onFocus={[Function]}
@@ -73,13 +73,13 @@ exports[`<ProjectList /> should render correctly 1`] = `
               type="button"
             >
               <p
-                className="sc-bcXGCL kfReJI cap-text"
+                className="sc-bcXGCL bmDZtc cap-text"
               >
                 global.publication
               </p>
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 7"
@@ -97,7 +97,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -123,16 +123,16 @@ exports[`<ProjectList /> should render correctly 1`] = `
               tabIndex={-1}
             >
               <div
-                className="sc-bcXGCL cKgfLw cap-menu__optionGroup"
+                className="sc-bcXGCL iLFCCQ cap-menu__optionGroup"
                 role="group"
               >
                 <p
-                  className="sc-bcXGCL icaQDc cap-text cap-menu__optionGroup--title"
+                  className="sc-bcXGCL gUzEFk cap-text cap-menu__optionGroup--title"
                 >
                   sort-by
                 </p>
                 <button
-                  className="sc-bcXGCL jXoSTv cap-menu__item cap-menu__optionItem"
+                  className="sc-bcXGCL TXmLf cap-menu__item cap-menu__optionItem"
                   id="id-g"
                   onBlurCapture={[Function]}
                   onClick={[Function]}
@@ -152,17 +152,17 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 >
                   <input
                     checked={true}
-                    className="sc-bcXGCL gIaEVQ"
+                    className="sc-bcXGCL bVZPFk"
                     type="radio"
                   />
                   <p
-                    className="sc-bcXGCL jMALnA cap-text"
+                    className="sc-bcXGCL cvCRpc cap-text"
                   >
                     global.filter_last
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -179,7 +179,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                   </svg>
                 </button>
                 <button
-                  className="sc-bcXGCL jXoSTv cap-menu__item cap-menu__optionItem"
+                  className="sc-bcXGCL TXmLf cap-menu__item cap-menu__optionItem"
                   id="id-g"
                   onBlurCapture={[Function]}
                   onClick={[Function]}
@@ -199,17 +199,17 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 >
                   <input
                     checked={false}
-                    className="sc-bcXGCL gIaEVQ"
+                    className="sc-bcXGCL bVZPFk"
                     type="radio"
                   />
                   <p
-                    className="sc-bcXGCL jMALnA cap-text"
+                    className="sc-bcXGCL cvCRpc cap-text"
                   >
                     global.filter_old
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud iPtlPP hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -229,20 +229,20 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </th>
           <th
-            className="sc-bcXGCL jpIMR cap-table__th"
+            className="sc-bcXGCL diEcAl cap-table__th"
           />
         </tr>
       </thead>
       <tbody
-        className="sc-bcXGCL iLxPWX cap-table__tbody"
+        className="sc-bcXGCL bTSluX cap-table__tbody"
       >
         <tr
-          className="sc-bcXGCL iNielt cap-table__tr"
+          className="sc-bcXGCL iBjnpJ cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0SWRmMw=="
         >
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -250,21 +250,21 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL cBwqzf"
+              className="sc-bcXGCL eQUJjL"
             >
               <a
-                className="sc-bcXGCL bYDxrx cap-link"
+                className="sc-bcXGCL cwEAzx cap-link"
                 href="https://capco.dev/admin/alpha/project/projectIdf3/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Budget Participatif IdF 3
               </a>
               <div
-                className="sc-bcXGCL doeSPo"
+                className="sc-bcXGCL hxRyWs"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -272,14 +272,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -287,14 +287,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -303,7 +303,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL iALMlr cap-tag"
+              className="sc-bcXGCL frEEJM cap-tag"
               onBlur={[Function]}
               onFocus={[Function]}
               tabIndex={-1}
@@ -313,7 +313,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -323,7 +323,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             01/05/2021
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -336,7 +336,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -352,7 +352,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -384,7 +384,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -410,7 +410,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               tabIndex={-1}
             >
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -429,7 +429,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   action_show
@@ -440,7 +440,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -459,7 +459,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   project.download.button
@@ -485,7 +485,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabIndex={-1}
               />
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -504,7 +504,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   duplicate
@@ -515,7 +515,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -534,7 +534,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   admin.global.delete
@@ -563,12 +563,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL iNielt cap-table__tr"
+          className="sc-bcXGCL iBjnpJ cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0Rm9vZA=="
         >
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -576,21 +576,21 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL cBwqzf"
+              className="sc-bcXGCL eQUJjL"
             >
               <a
-                className="sc-bcXGCL bYDxrx cap-link"
+                className="sc-bcXGCL cwEAzx cap-link"
                 href="https://capco.dev/admin/alpha/project/projectFood/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Food project
               </a>
               <div
-                className="sc-bcXGCL doeSPo"
+                className="sc-bcXGCL hxRyWs"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -598,14 +598,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -613,14 +613,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -629,7 +629,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL iALMlr cap-tag"
+              className="sc-bcXGCL frEEJM cap-tag"
               onBlur={[Function]}
               onFocus={[Function]}
               tabIndex={-1}
@@ -639,7 +639,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -649,7 +649,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             15/09/2020
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -662,7 +662,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -678,7 +678,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -710,7 +710,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -736,7 +736,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               tabIndex={-1}
             >
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -755,7 +755,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   action_show
@@ -766,7 +766,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -785,7 +785,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   project.download.button
@@ -811,7 +811,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabIndex={-1}
               />
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -830,7 +830,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   duplicate
@@ -841,7 +841,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -860,7 +860,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   admin.global.delete
@@ -889,12 +889,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL iNielt cap-table__tr"
+          className="sc-bcXGCL iBjnpJ cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0QXJjaGl2ZWQ="
         >
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -902,21 +902,21 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL cBwqzf"
+              className="sc-bcXGCL eQUJjL"
             >
               <a
-                className="sc-bcXGCL bYDxrx cap-link"
+                className="sc-bcXGCL cwEAzx cap-link"
                 href="https://capco.dev/admin/alpha/project/projectArchived/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Projet Archivé
               </a>
               <div
-                className="sc-bcXGCL doeSPo"
+                className="sc-bcXGCL hxRyWs"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -924,14 +924,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -939,14 +939,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -955,7 +955,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL iALMlr cap-tag"
+              className="sc-bcXGCL frEEJM cap-tag"
               onBlur={[Function]}
               onFocus={[Function]}
               tabIndex={-1}
@@ -965,7 +965,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -975,7 +975,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             19/06/2020
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -988,7 +988,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -1004,7 +1004,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -1036,7 +1036,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -1062,7 +1062,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               tabIndex={-1}
             >
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1081,7 +1081,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   action_show
@@ -1092,7 +1092,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1111,7 +1111,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   project.download.button
@@ -1137,7 +1137,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabIndex={-1}
               />
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1156,7 +1156,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   duplicate
@@ -1167,7 +1167,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1186,7 +1186,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   admin.global.delete
@@ -1215,12 +1215,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
           </td>
         </tr>
         <tr
-          className="sc-bcXGCL iNielt cap-table__tr"
+          className="sc-bcXGCL iBjnpJ cap-table__tr"
           data-cy="project-item"
           id="UHJvamVjdDpwcm9qZWN0Q29uZmluZW1lbnQ="
         >
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1228,21 +1228,21 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <div
-              className="sc-bcXGCL cBwqzf"
+              className="sc-bcXGCL eQUJjL"
             >
               <a
-                className="sc-bcXGCL bYDxrx cap-link"
+                className="sc-bcXGCL cwEAzx cap-link"
                 href="https://capco.dev/admin/alpha/project/projectConfinement/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
               >
                 Débat du mois
               </a>
               <div
-                className="sc-bcXGCL doeSPo"
+                className="sc-bcXGCL hxRyWs"
               />
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1250,14 +1250,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1265,14 +1265,14 @@ exports[`<ProjectList /> should render correctly 1`] = `
             }
           >
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="<mock-value-for-field-"url">"
             >
               &lt;mock-value-for-field-"username"&gt;
             </a>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1281,7 +1281,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
           >
             <div
               aria-label="Tag public-everybody"
-              className="sc-bcXGCL iALMlr cap-tag"
+              className="sc-bcXGCL frEEJM cap-tag"
               onBlur={[Function]}
               onFocus={[Function]}
               tabIndex={-1}
@@ -1291,7 +1291,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             </div>
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1301,7 +1301,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             19/06/2020
           </td>
           <td
-            className="sc-bcXGCL phWty cap-table__td"
+            className="sc-bcXGCL lpgNFi cap-table__td"
             style={
               {
                 "whiteSpace": "initial",
@@ -1314,7 +1314,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               aria-expanded={false}
               aria-haspopup="menu"
               aria-label="global.plus"
-              className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+              className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
               onBlur={[Function]}
               onClick={[Function]}
               onClickCapture={[Function]}
@@ -1330,7 +1330,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
                 fill="currentColor"
                 height="1em"
                 viewBox="0 0 12 4"
@@ -1362,7 +1362,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
             />
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -1388,7 +1388,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
               tabIndex={-1}
             >
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1407,7 +1407,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   action_show
@@ -1418,7 +1418,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1437,7 +1437,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   project.download.button
@@ -1463,7 +1463,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 tabIndex={-1}
               />
               <button
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1482,7 +1482,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   duplicate
@@ -1493,7 +1493,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="dialog"
-                className="sc-bcXGCL jXoSTv cap-menu__item"
+                className="sc-bcXGCL TXmLf cap-menu__item"
                 id="id-g"
                 onBlurCapture={[Function]}
                 onClick={[Function]}
@@ -1512,7 +1512,7 @@ exports[`<ProjectList /> should render correctly 1`] = `
                 type="button"
               >
                 <p
-                  className="sc-bcXGCL jMALnA cap-text"
+                  className="sc-bcXGCL cvCRpc cap-text"
                 >
                    
                   admin.global.delete
@@ -1543,10 +1543,10 @@ exports[`<ProjectList /> should render correctly 1`] = `
       </tbody>
     </table>
     <div
-      className="sc-bcXGCL jRRxOu"
+      className="sc-bcXGCL hlZNwS"
     >
       <p
-        className="sc-bcXGCL gQHGyA cap-text"
+        className="sc-bcXGCL cuALoI cap-text"
         style={
           {
             "marginLeft": 0,
@@ -1557,12 +1557,12 @@ exports[`<ProjectList /> should render correctly 1`] = `
         no-result-found
       </p>
       <p
-        className="sc-bcXGCL gPUJPx cap-text"
+        className="sc-bcXGCL egaKeB cap-text"
       >
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB cDseqh dUpIgt cap-button"
+        className="sc-bcXGCL sc-laZSpB kkwMkp dUpIgt cap-button"
         onClick={[Function]}
         type="button"
       >

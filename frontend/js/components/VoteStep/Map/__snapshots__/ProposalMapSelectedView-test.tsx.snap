@@ -3,50 +3,50 @@
 exports[`<ProposalMapSelectedView /> <TestProposalMapSelectedView /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL ixOQLV"
+    className="sc-bcXGCL buVuol"
     onTouchEnd={[Function]}
     onTouchStart={[Function]}
   >
     <div
-      className="sc-bcXGCL ectsyw"
+      className="sc-bcXGCL etSCPs"
     >
       <div
-        className="sc-bcXGCL eHKkce"
+        className="sc-bcXGCL gNldIK"
       />
     </div>
     <div
-      className="sc-bcXGCL eycnJE"
+      className="sc-bcXGCL htIsrM"
     >
       <a
         href="/project///votez-pour-vos-projets"
         onClick={[Function]}
       >
         <h3
-          className="sc-bcXGCL ia-dLpc cap-heading"
+          className="sc-bcXGCL cYfTog cap-heading"
           title="Votez pour vos projets favoris"
         >
           Votez pour vos projets favoris
         </h3>
         <div
-          className="sc-bcXGCL ebNHa cap-text"
+          className="sc-bcXGCL eulfzW cap-text"
         >
           Lorem ipsum
         </div>
       </a>
       <div
-        className="sc-bcXGCL kNlTtw"
+        className="sc-bcXGCL eATxDE"
       >
         <div
-          className="sc-bcXGCL ktrPkW"
+          className="sc-bcXGCL iHLdNC"
         >
           <div
-            className="sc-bcXGCL bDsitk sc-ckEbfr gPtdgb cap-avatar"
+            className="sc-bcXGCL fhIbDI sc-ckEbfr gPtdgb cap-avatar"
             style={
               Object {
                 "marginLeft": 0,
@@ -55,11 +55,11 @@ Array [
             }
           />
           <span
-            className="sc-bcXGCL bfmZCW cap-text"
+            className="sc-bcXGCL hgmQxu cap-text"
           />
         </div>
         <div
-          className="sc-bcXGCL jTfUQr"
+          className="sc-bcXGCL hVjuRn"
         />
       </div>
     </div>

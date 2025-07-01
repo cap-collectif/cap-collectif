@@ -3,13 +3,13 @@
 exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor=":r0:"
       style={
         {
@@ -18,8 +18,8 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -28,13 +28,13 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         }
       >
         global.email
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id=":r0:"
       name="email"
@@ -42,18 +42,19 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="email.placeholder"
+      readOnly={false}
       required={true}
       type="email"
     />
   </div>,
   <div
-    className="sc-bcXGCL cyrAGK"
+    className="sc-bcXGCL jAguPG"
   >
     <div
-      className="sc-bcXGCL bnGCIW cap-form-control"
+      className="sc-bcXGCL dAxZoG cap-form-control"
     >
       <label
-        className="sc-bcXGCL kossJj cap-form-label"
+        className="sc-bcXGCL egOoIT cap-form-label"
         htmlFor=":r1:"
         style={
           {
@@ -62,8 +63,8 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
           }
         }
       >
-        <p
-          className="sc-bcXGCL gUkIhr cap-text"
+        <span
+          className="sc-bcXGCL dRxVYq cap-text"
           style={
             {
               "marginLeft": 0,
@@ -72,29 +73,30 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
           }
         >
           registration.password
-        </p>
+        </span>
       </label>
       <input
         aria-required={true}
         autoComplete="off"
         autoFocus={true}
-        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+        className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
         disabled={false}
         id=":r1:"
         name="plainPassword"
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        readOnly={false}
         required={true}
         type="password"
       />
     </div>
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor="username"
       style={
         {
@@ -103,8 +105,8 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -113,12 +115,12 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         }
       >
         global.fullname
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="username"
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id="username"
       minLength={2}
@@ -127,19 +129,20 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="global.placeholder.name"
+      readOnly={false}
       required={true}
       type="text"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor="responses.0.value"
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -148,15 +151,15 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
         }
       >
         &lt;mock-value-for-field-"title"&gt;
-      </p>
+      </span>
       <p
-        className="sc-bcXGCL dYriFV cap-text"
+        className="sc-bcXGCL ayaql cap-text"
       >
         global.optional
       </p>
     </label>
     <span
-      className="sc-bcXGCL daHHgd cap-form-guideline"
+      className="sc-bcXGCL cqMoEC cap-form-guideline"
     >
       &lt;mock-value-for-field-"helpText"&gt;
     </span>
@@ -170,26 +173,27 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
     />
     <input
       aria-required={false}
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id="responses.0.value"
       name="responses.0.value"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
+      readOnly={false}
       required={false}
       type="text"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL bHapUX"
+      className="sc-bcXGCL hcROMr"
       htmlFor="charte"
     >
       <div
-        className="sc-bcXGCL NioVD cap-checkbox"
+        className="sc-bcXGCL fMWewb cap-checkbox"
         style={
           {
             "marginLeft": 0,
@@ -199,13 +203,14 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
       >
         <input
           aria-required={true}
-          className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+          className="sc-bcXGCL kwwjrp cap-checkbox__input"
           disabled={false}
           id="charte"
           name="charte"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
+          readOnly={false}
           required={true}
           style={
             {
@@ -216,14 +221,14 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
           type="checkbox"
         />
         <div
-          className="sc-bcXGCL jQxaYd cap-checkbox__box"
+          className="sc-bcXGCL isUvxF cap-checkbox__box"
         />
       </div>
       <span
-        className="sc-bcXGCL liyRZE"
+        className="sc-bcXGCL gXHFMY"
       >
         <span
-          className="sc-bcXGCL sc-cc425a65-0 cklhXU hMXkYl"
+          className="sc-bcXGCL sc-cc425a65-0 gjsubU hMXkYl"
         >
           registration.charte
         </span>
@@ -245,13 +250,13 @@ exports[`<RegistrationForm /> renders a form with inputs and a captcha 1`] = `
 exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor=":r5:"
       style={
         {
@@ -260,8 +265,8 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -270,13 +275,13 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         }
       >
         global.email
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id=":r5:"
       name="email"
@@ -284,18 +289,19 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="email.placeholder"
+      readOnly={false}
       required={true}
       type="email"
     />
   </div>,
   <div
-    className="sc-bcXGCL cyrAGK"
+    className="sc-bcXGCL jAguPG"
   >
     <div
-      className="sc-bcXGCL bnGCIW cap-form-control"
+      className="sc-bcXGCL dAxZoG cap-form-control"
     >
       <label
-        className="sc-bcXGCL kossJj cap-form-label"
+        className="sc-bcXGCL egOoIT cap-form-label"
         htmlFor=":r6:"
         style={
           {
@@ -304,8 +310,8 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           }
         }
       >
-        <p
-          className="sc-bcXGCL gUkIhr cap-text"
+        <span
+          className="sc-bcXGCL dRxVYq cap-text"
           style={
             {
               "marginLeft": 0,
@@ -314,29 +320,30 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           }
         >
           registration.password
-        </p>
+        </span>
       </label>
       <input
         aria-required={true}
         autoComplete="off"
         autoFocus={true}
-        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+        className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
         disabled={false}
         id=":r6:"
         name="plainPassword"
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        readOnly={false}
         required={true}
         type="password"
       />
     </div>
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor="username"
       style={
         {
@@ -345,8 +352,8 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -355,12 +362,12 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         }
       >
         global.fullname
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="username"
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id="username"
       minLength={2}
@@ -369,15 +376,16 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="global.placeholder.name"
+      readOnly={false}
       required={true}
       type="text"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor=":r8:"
       style={
         {
@@ -386,8 +394,8 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -396,15 +404,15 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         }
       >
         registration.type
-      </p>
+      </span>
       <p
-        className="sc-bcXGCL dYriFV cap-text"
+        className="sc-bcXGCL ayaql cap-text"
       >
         global.optional
       </p>
     </label>
     <div
-      className="sc-bcXGCL gLAKX"
+      className="sc-bcXGCL cKgHWb"
     >
       <div
         className="cap-select css-b62m3t-container"
@@ -420,32 +428,32 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           aria-live="polite"
           aria-relevant="additions text"
           className="css-1f43avz-a11yText-A11yText"
+          role="log"
         />
         <div
-          className="cap-select__control css-17ru8n9-control"
+          className="cap-select__control css-1qmtci6-control"
           onMouseDown={[Function]}
           onTouchEnd={[Function]}
         >
           <div
-            className="cap-select__value-container css-1gsi9wd-ValueContainer"
+            className="cap-select__value-container css-206zzd"
           >
             <div
-              className="cap-select__placeholder css-1crio4g-placeholder"
+              className="cap-select__placeholder css-rf6qli-placeholder"
               id="react-select-2-placeholder"
             >
               registration.type
             </div>
             <div
-              className="cap-select__input-container css-nplzcd-Input"
+              className="cap-select__input-container css-1uvadrb"
               data-value=""
             >
               <input
+                aria-activedescendant=""
                 aria-autocomplete="list"
-                aria-controls="react-select-2-listbox"
                 aria-describedby="react-select-2-placeholder"
                 aria-expanded={false}
                 aria-haspopup={true}
-                aria-owns="react-select-2-listbox"
                 autoCapitalize="none"
                 autoComplete="off"
                 autoCorrect="off"
@@ -481,7 +489,7 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           </div>
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-eJDTud jThTHJ knzWyK cap-icon"
+            className="sc-bcXGCL sc-eJDTud kviGeh knzWyK cap-icon"
             fill="none"
             height="1em"
             style={
@@ -508,14 +516,14 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     </div>
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor="responses.0.value"
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -524,15 +532,15 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
         }
       >
         &lt;mock-value-for-field-"title"&gt;
-      </p>
+      </span>
       <p
-        className="sc-bcXGCL dYriFV cap-text"
+        className="sc-bcXGCL ayaql cap-text"
       >
         global.optional
       </p>
     </label>
     <span
-      className="sc-bcXGCL daHHgd cap-form-guideline"
+      className="sc-bcXGCL cqMoEC cap-form-guideline"
     >
       &lt;mock-value-for-field-"helpText"&gt;
     </span>
@@ -546,26 +554,27 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
     />
     <input
       aria-required={false}
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id="responses.0.value"
       name="responses.0.value"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
+      readOnly={false}
       required={false}
       type="text"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL bHapUX"
+      className="sc-bcXGCL hcROMr"
       htmlFor="charte"
     >
       <div
-        className="sc-bcXGCL NioVD cap-checkbox"
+        className="sc-bcXGCL fMWewb cap-checkbox"
         style={
           {
             "marginLeft": 0,
@@ -575,13 +584,14 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
       >
         <input
           aria-required={true}
-          className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+          className="sc-bcXGCL kwwjrp cap-checkbox__input"
           disabled={false}
           id="charte"
           name="charte"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
+          readOnly={false}
           required={true}
           style={
             {
@@ -592,14 +602,14 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
           type="checkbox"
         />
         <div
-          className="sc-bcXGCL jQxaYd cap-checkbox__box"
+          className="sc-bcXGCL isUvxF cap-checkbox__box"
         />
       </div>
       <span
-        className="sc-bcXGCL liyRZE"
+        className="sc-bcXGCL gXHFMY"
       >
         <span
-          className="sc-bcXGCL sc-cc425a65-0 cklhXU hMXkYl"
+          className="sc-bcXGCL sc-cc425a65-0 gjsubU hMXkYl"
         >
           registration.charte
         </span>
@@ -612,13 +622,13 @@ exports[`<RegistrationForm /> renders a form with user_type enabled 1`] = `
 exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor=":rb:"
       style={
         {
@@ -627,8 +637,8 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -637,13 +647,13 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         }
       >
         global.email
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id=":rb:"
       name="email"
@@ -651,18 +661,19 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="email.placeholder"
+      readOnly={false}
       required={true}
       type="email"
     />
   </div>,
   <div
-    className="sc-bcXGCL cyrAGK"
+    className="sc-bcXGCL jAguPG"
   >
     <div
-      className="sc-bcXGCL bnGCIW cap-form-control"
+      className="sc-bcXGCL dAxZoG cap-form-control"
     >
       <label
-        className="sc-bcXGCL kossJj cap-form-label"
+        className="sc-bcXGCL egOoIT cap-form-label"
         htmlFor=":rc:"
         style={
           {
@@ -671,8 +682,8 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
           }
         }
       >
-        <p
-          className="sc-bcXGCL gUkIhr cap-text"
+        <span
+          className="sc-bcXGCL dRxVYq cap-text"
           style={
             {
               "marginLeft": 0,
@@ -681,29 +692,30 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
           }
         >
           registration.password
-        </p>
+        </span>
       </label>
       <input
         aria-required={true}
         autoComplete="off"
         autoFocus={true}
-        className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+        className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
         disabled={false}
         id=":rc:"
         name="plainPassword"
         onBlur={[Function]}
         onChange={[Function]}
         onFocus={[Function]}
+        readOnly={false}
         required={true}
         type="password"
       />
     </div>
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor="username"
       style={
         {
@@ -712,8 +724,8 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -722,12 +734,12 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         }
       >
         global.fullname
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="username"
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id="username"
       minLength={2}
@@ -736,15 +748,16 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="global.placeholder.name"
+      readOnly={false}
       required={true}
       type="text"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor=":re:"
       style={
         {
@@ -753,8 +766,8 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -763,35 +776,36 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         }
       >
         user.register.zipcode
-      </p>
+      </span>
       <p
-        className="sc-bcXGCL dYriFV cap-text"
+        className="sc-bcXGCL ayaql cap-text"
       >
         global.optional
       </p>
     </label>
     <input
       autoComplete="postal-code"
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id=":re:"
       name="zipcode"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
+      readOnly={false}
       required={false}
       type="text"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor="responses.0.value"
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -800,15 +814,15 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
         }
       >
         &lt;mock-value-for-field-"title"&gt;
-      </p>
+      </span>
       <p
-        className="sc-bcXGCL dYriFV cap-text"
+        className="sc-bcXGCL ayaql cap-text"
       >
         global.optional
       </p>
     </label>
     <span
-      className="sc-bcXGCL daHHgd cap-form-guideline"
+      className="sc-bcXGCL cqMoEC cap-form-guideline"
     >
       &lt;mock-value-for-field-"helpText"&gt;
     </span>
@@ -822,26 +836,27 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
     />
     <input
       aria-required={false}
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id="responses.0.value"
       name="responses.0.value"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
+      readOnly={false}
       required={false}
       type="text"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL bHapUX"
+      className="sc-bcXGCL hcROMr"
       htmlFor="charte"
     >
       <div
-        className="sc-bcXGCL NioVD cap-checkbox"
+        className="sc-bcXGCL fMWewb cap-checkbox"
         style={
           {
             "marginLeft": 0,
@@ -851,13 +866,14 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
       >
         <input
           aria-required={true}
-          className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+          className="sc-bcXGCL kwwjrp cap-checkbox__input"
           disabled={false}
           id="charte"
           name="charte"
           onBlur={[Function]}
           onChange={[Function]}
           onFocus={[Function]}
+          readOnly={false}
           required={true}
           style={
             {
@@ -868,14 +884,14 @@ exports[`<RegistrationForm /> renders a form with zipcode enabled 1`] = `
           type="checkbox"
         />
         <div
-          className="sc-bcXGCL jQxaYd cap-checkbox__box"
+          className="sc-bcXGCL isUvxF cap-checkbox__box"
         />
       </div>
       <span
-        className="sc-bcXGCL liyRZE"
+        className="sc-bcXGCL gXHFMY"
       >
         <span
-          className="sc-bcXGCL sc-cc425a65-0 cklhXU hMXkYl"
+          className="sc-bcXGCL sc-cc425a65-0 gjsubU hMXkYl"
         >
           registration.charte
         </span>

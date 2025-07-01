@@ -3,7 +3,7 @@
 exports[`<EyeBar /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <svg
     className="eye-bar"

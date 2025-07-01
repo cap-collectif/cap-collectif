@@ -3,13 +3,13 @@
 exports[`<ProjectStepTabs /> should render correctly without arrow & with active tab 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL fqKcmh frise"
+    className="sc-bcXGCL gsuaMV frise"
   >
     <ul
-      className="sc-bcXGCL gDWexJ frise__stepList"
+      className="sc-bcXGCL haunFJ frise__stepList"
     >
       <div
         className="slick-slider ProjectHeaderFrise__StepsContainer-fgcnkk iVtTWr slick-initialized"
@@ -52,7 +52,7 @@ Array [
                   onClick={[Function]}
                 >
                   <li
-                    className="sc-bcXGCL iOzTPL frise__stepItem"
+                    className="sc-bcXGCL eERYzf frise__stepItem"
                     onClick={[Function]}
                     style={
                       Object {
@@ -85,7 +85,7 @@ Array [
                       />
                     </svg>
                     <a
-                      className="sc-bcXGCL jteuBq frise__stepItem__link"
+                      className="sc-bcXGCL ieZtYK frise__stepItem__link"
                       style={
                         Object {
                           "transform": "translate(-45%,-50%)",
@@ -93,13 +93,13 @@ Array [
                       }
                     >
                       <p
-                        className="sc-bcXGCL kFDkCc cap-text frise__stepItem__link__title platform__body"
+                        className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Présentation"
                       >
                         Présentation
                       </p>
                       <p
-                        className="sc-bcXGCL dmUmYm cap-text frise__stepItem__link__content platform__body"
+                        className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       />
                     </a>
                   </li>
@@ -121,7 +121,7 @@ Array [
             >
               <div>
                 <li
-                  className="sc-bcXGCL fndgSg frise__stepItem"
+                  className="sc-bcXGCL kHFTWw frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -155,7 +155,7 @@ Array [
                     />
                   </svg>
                   <a
-                    className="sc-bcXGCL jteuBq frise__stepItem__link"
+                    className="sc-bcXGCL ieZtYK frise__stepItem__link"
                     href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                     style={
                       Object {
@@ -164,13 +164,13 @@ Array [
                     }
                   >
                     <p
-                      className="sc-bcXGCL hDBcYE cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bcXGCL gmSubI cap-text frise__stepItem__link__title platform__body"
                       title="Consultation"
                     >
                       Consultation
                     </p>
                     <p
-                      className="sc-bcXGCL dbVtQi cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bcXGCL cMvEYO cap-text frise__stepItem__link__content platform__body"
                     >
                       step.status.closed
                     </p>
@@ -197,7 +197,7 @@ Array [
                   onClick={[Function]}
                 >
                   <li
-                    className="sc-bcXGCL kJtmsl frise__stepItem"
+                    className="sc-bcXGCL bpHKER frise__stepItem"
                     onClick={[Function]}
                     style={
                       Object {
@@ -231,7 +231,7 @@ Array [
                       />
                     </svg>
                     <a
-                      className="sc-bcXGCL jteuBq frise__stepItem__link"
+                      className="sc-bcXGCL ieZtYK frise__stepItem__link"
                       style={
                         Object {
                           "transform": "translate(-45%,-50%)",
@@ -239,13 +239,13 @@ Array [
                       }
                     >
                       <p
-                        className="sc-bcXGCL kFDkCc cap-text frise__stepItem__link__title platform__body"
+                        className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Dépôt"
                       >
                         Dépôt
                       </p>
                       <p
-                        className="sc-bcXGCL dmUmYm cap-text frise__stepItem__link__content platform__body"
+                        className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       >
                         <div
                           data-testid="Tooltip"
@@ -280,7 +280,7 @@ Array [
                   onClick={[Function]}
                 >
                   <li
-                    className="sc-bcXGCL hGdvYd frise__stepItem"
+                    className="sc-bcXGCL iQNnPN frise__stepItem"
                     onClick={[Function]}
                     style={
                       Object {
@@ -308,7 +308,7 @@ Array [
                       />
                     </svg>
                     <a
-                      className="sc-bcXGCL jteuBq frise__stepItem__link"
+                      className="sc-bcXGCL ieZtYK frise__stepItem__link"
                       style={
                         Object {
                           "transform": "translate(-45%,-50%)",
@@ -321,14 +321,14 @@ Array [
                         label="frise-tooltip-text"
                       >
                         <p
-                          className="sc-bcXGCL brdPUI cap-text frise__stepItem__link__title platform__body"
+                          className="sc-bcXGCL bEANMs cap-text frise__stepItem__link__title platform__body"
                           title="Questionnaire qui dénonce"
                         >
                           Questionnaire qui dénonce
                         </p>
                       </div>
                       <p
-                        className="sc-bcXGCL iPgNCm cap-text frise__stepItem__link__content platform__body"
+                        className="sc-bcXGCL kfrnwu cap-text frise__stepItem__link__content platform__body"
                       />
                     </a>
                   </li>
@@ -346,13 +346,13 @@ Array [
 exports[`<ProjectStepTabs /> should render null when there is only one step 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL fqKcmh frise"
+    className="sc-bcXGCL gsuaMV frise"
   >
     <ul
-      className="sc-bcXGCL gDWexJ frise__stepList"
+      className="sc-bcXGCL haunFJ frise__stepList"
     >
       <div
         className="slick-slider ProjectHeaderFrise__StepsContainer-fgcnkk iVtTWr slick-initialized"
@@ -395,7 +395,7 @@ Array [
                   onClick={[Function]}
                 >
                   <li
-                    className="sc-bcXGCL iOzTPL frise__stepItem"
+                    className="sc-bcXGCL eERYzf frise__stepItem"
                     onClick={[Function]}
                     style={
                       Object {
@@ -428,7 +428,7 @@ Array [
                       />
                     </svg>
                     <a
-                      className="sc-bcXGCL jteuBq frise__stepItem__link"
+                      className="sc-bcXGCL ieZtYK frise__stepItem__link"
                       style={
                         Object {
                           "transform": "translate(-45%,-50%)",
@@ -436,13 +436,13 @@ Array [
                       }
                     >
                       <p
-                        className="sc-bcXGCL kFDkCc cap-text frise__stepItem__link__title platform__body"
+                        className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Présentation"
                       >
                         Présentation
                       </p>
                       <p
-                        className="sc-bcXGCL dmUmYm cap-text frise__stepItem__link__content platform__body"
+                        className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       />
                     </a>
                   </li>
@@ -464,7 +464,7 @@ Array [
             >
               <div>
                 <li
-                  className="sc-bcXGCL fndgSg frise__stepItem"
+                  className="sc-bcXGCL kHFTWw frise__stepItem"
                   onClick={[Function]}
                   style={
                     Object {
@@ -498,7 +498,7 @@ Array [
                     />
                   </svg>
                   <a
-                    className="sc-bcXGCL jteuBq frise__stepItem__link"
+                    className="sc-bcXGCL ieZtYK frise__stepItem__link"
                     href="https://capco.dev/project/projet-avec-administrateur-de-projet/consultation/etape-de-consultation-dans-un-projet-avec-administrateur-de-projet"
                     style={
                       Object {
@@ -507,13 +507,13 @@ Array [
                     }
                   >
                     <p
-                      className="sc-bcXGCL hDBcYE cap-text frise__stepItem__link__title platform__body"
+                      className="sc-bcXGCL gmSubI cap-text frise__stepItem__link__title platform__body"
                       title="Consultation"
                     >
                       Consultation
                     </p>
                     <p
-                      className="sc-bcXGCL dbVtQi cap-text frise__stepItem__link__content platform__body"
+                      className="sc-bcXGCL cMvEYO cap-text frise__stepItem__link__content platform__body"
                     >
                       step.status.closed
                     </p>
@@ -540,7 +540,7 @@ Array [
                   onClick={[Function]}
                 >
                   <li
-                    className="sc-bcXGCL kJtmsl frise__stepItem"
+                    className="sc-bcXGCL bpHKER frise__stepItem"
                     onClick={[Function]}
                     style={
                       Object {
@@ -574,7 +574,7 @@ Array [
                       />
                     </svg>
                     <a
-                      className="sc-bcXGCL jteuBq frise__stepItem__link"
+                      className="sc-bcXGCL ieZtYK frise__stepItem__link"
                       style={
                         Object {
                           "transform": "translate(-45%,-50%)",
@@ -582,13 +582,13 @@ Array [
                       }
                     >
                       <p
-                        className="sc-bcXGCL kFDkCc cap-text frise__stepItem__link__title platform__body"
+                        className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Dépôt"
                       >
                         Dépôt
                       </p>
                       <p
-                        className="sc-bcXGCL dmUmYm cap-text frise__stepItem__link__content platform__body"
+                        className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       >
                         <div
                           data-testid="Tooltip"
@@ -623,7 +623,7 @@ Array [
                   onClick={[Function]}
                 >
                   <li
-                    className="sc-bcXGCL hGdvYd frise__stepItem"
+                    className="sc-bcXGCL iQNnPN frise__stepItem"
                     onClick={[Function]}
                     style={
                       Object {
@@ -651,7 +651,7 @@ Array [
                       />
                     </svg>
                     <a
-                      className="sc-bcXGCL jteuBq frise__stepItem__link"
+                      className="sc-bcXGCL ieZtYK frise__stepItem__link"
                       style={
                         Object {
                           "transform": "translate(-45%,-50%)",
@@ -664,14 +664,14 @@ Array [
                         label="frise-tooltip-text"
                       >
                         <p
-                          className="sc-bcXGCL brdPUI cap-text frise__stepItem__link__title platform__body"
+                          className="sc-bcXGCL bEANMs cap-text frise__stepItem__link__title platform__body"
                           title="Questionnaire qui dénonce"
                         >
                           Questionnaire qui dénonce
                         </p>
                       </div>
                       <p
-                        className="sc-bcXGCL iPgNCm cap-text frise__stepItem__link__content platform__body"
+                        className="sc-bcXGCL kfrnwu cap-text frise__stepItem__link__content platform__body"
                       />
                     </a>
                   </li>

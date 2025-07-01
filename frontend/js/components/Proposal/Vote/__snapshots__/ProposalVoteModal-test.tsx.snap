@@ -2,6 +2,6 @@
 
 exports[`<ProposalVoteModal /> should render correctly 1`] = `
 <div
-  className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
 />
 `;

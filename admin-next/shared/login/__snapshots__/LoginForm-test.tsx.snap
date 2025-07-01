@@ -3,13 +3,13 @@
 exports[`<LoginForm /> renders a form with inputs 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor=":r0:"
       style={
         {
@@ -18,8 +18,8 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -28,13 +28,13 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
         }
       >
         global.email
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="email"
       autoFocus={true}
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id=":r0:"
       name="username"
@@ -42,15 +42,16 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
       onChange={[Function]}
       onFocus={[Function]}
       placeholder="email.placeholder"
+      readOnly={false}
       required={true}
       type="email"
     />
   </div>,
   <div
-    className="sc-bcXGCL kxTfnk cap-form-control"
+    className="sc-bcXGCL hOBcKE cap-form-control"
   >
     <label
-      className="sc-bcXGCL kossJj cap-form-label"
+      className="sc-bcXGCL egOoIT cap-form-label"
       htmlFor=":r1:"
       style={
         {
@@ -59,8 +60,8 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
         }
       }
     >
-      <p
-        className="sc-bcXGCL gUkIhr cap-text"
+      <span
+        className="sc-bcXGCL dRxVYq cap-text"
         style={
           {
             "marginLeft": 0,
@@ -69,24 +70,25 @@ exports[`<LoginForm /> renders a form with inputs 1`] = `
         }
       >
         global.password
-      </p>
+      </span>
     </label>
     <input
       aria-required={true}
       autoComplete="off"
-      className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
       disabled={false}
       id=":r1:"
       name="password"
       onBlur={[Function]}
       onChange={[Function]}
       onFocus={[Function]}
+      readOnly={false}
       required={true}
       type="password"
     />
   </div>,
   <a
-    className="sc-bcXGCL bYDxrx cap-link"
+    className="sc-bcXGCL cwEAzx cap-link"
     href="/resetting/request"
   >
     global.forgot_password

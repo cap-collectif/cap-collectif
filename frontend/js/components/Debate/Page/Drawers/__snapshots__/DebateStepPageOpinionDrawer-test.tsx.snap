@@ -3,13 +3,13 @@
 exports[`<DebateStepPageOpinionDrawer /> should render a FOR opinion when open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL iLDPSx DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL fbodrd DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -18,12 +18,12 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL dQQNll"
+        className="sc-bcXGCL hTpgVB"
         onClose={[MockFunction]}
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud jGMUdI cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -40,52 +40,52 @@ Array [
           />
         </svg>
         <div
-          className="sc-bcXGCL YwtnU"
+          className="sc-bcXGCL gvaiEA"
         >
           <span
             className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL cgjYsp sc-ckEbfr hrpVbi cap-avatar"
+              className="sc-bcXGCL eLTTRB sc-ckEbfr hrpVbi cap-avatar"
             >
               <img
                 alt="Agui le penseur"
-                className="sc-bcXGCL dnFBwC"
+                className="sc-bcXGCL gCRbeu"
                 src="<mock-value-for-field-\\"avatarUrl\\">"
               />
             </div>
           </span>
           <p
-            className="sc-bcXGCL wDUou cap-text"
+            className="sc-bcXGCL cAUKFW cap-text"
           >
             Agui le penseur
           </p>
           <div
             aria-label="Tag "
-            className="sc-bcXGCL kXjySM cap-tag"
+            className="sc-bcXGCL loCcAr cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
             title=""
           >
             <h5
-              className="sc-bcXGCL dUdqFq cap-heading"
+              className="sc-bcXGCL fYhHfy cap-heading"
             >
               opinion.for
             </h5>
           </div>
           <p
-            className="sc-bcXGCL hBZVQu cap-text"
+            className="sc-bcXGCL caidGm cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
         <div
-          className="sc-bcXGCL lmhvMr"
+          className="sc-bcXGCL hWzXPf"
         >
           <h4
-            className="sc-bcXGCL gcgTEP cap-heading"
+            className="sc-bcXGCL bXZVvT cap-heading"
             style={
               Object {
                 "marginLeft": 0,
@@ -116,13 +116,13 @@ Array [
 exports[`<DebateStepPageOpinionDrawer /> should render an AGAINST opinion when open 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     data-testid="AnimatePresence"
   >
     <div
-      className="sc-bcXGCL iLDPSx DetailDrawer__DetailDrawerInner-iBGoKl"
+      className="sc-bcXGCL fbodrd DetailDrawer__DetailDrawerInner-iBGoKl"
       style={
         Object {
           "opacity": 0,
@@ -131,12 +131,12 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL dQQNll"
+        className="sc-bcXGCL hTpgVB"
         onClose={[MockFunction]}
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud dDappY cpMilg cap-icon detail__drawer--back-arow"
+          className="sc-bcXGCL sc-eJDTud jGMUdI cpMilg cap-icon detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -153,52 +153,52 @@ Array [
           />
         </svg>
         <div
-          className="sc-bcXGCL YwtnU"
+          className="sc-bcXGCL gvaiEA"
         >
           <span
             className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL cgjYsp sc-ckEbfr hrpVbi cap-avatar"
+              className="sc-bcXGCL eLTTRB sc-ckEbfr hrpVbi cap-avatar"
             >
               <img
                 alt="Agui le penseur"
-                className="sc-bcXGCL dnFBwC"
+                className="sc-bcXGCL gCRbeu"
                 src="<mock-value-for-field-\\"avatarUrl\\">"
               />
             </div>
           </span>
           <p
-            className="sc-bcXGCL wDUou cap-text"
+            className="sc-bcXGCL cAUKFW cap-text"
           >
             Agui le penseur
           </p>
           <div
             aria-label="Tag "
-            className="sc-bcXGCL kXjySM cap-tag"
+            className="sc-bcXGCL loCcAr cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
             title=""
           >
             <h5
-              className="sc-bcXGCL dUdqFq cap-heading"
+              className="sc-bcXGCL fYhHfy cap-heading"
             >
               opinion.for
             </h5>
           </div>
           <p
-            className="sc-bcXGCL hBZVQu cap-text"
+            className="sc-bcXGCL caidGm cap-text"
           >
             Jsuis né dans les favela au brésil
           </p>
         </div>
         <div
-          className="sc-bcXGCL lmhvMr"
+          className="sc-bcXGCL hWzXPf"
         >
           <h4
-            className="sc-bcXGCL gcgTEP cap-heading"
+            className="sc-bcXGCL bXZVvT cap-heading"
             style={
               Object {
                 "marginLeft": 0,

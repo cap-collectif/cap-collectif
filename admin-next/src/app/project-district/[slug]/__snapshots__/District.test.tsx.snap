@@ -3,32 +3,32 @@
 exports[`<District /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL bODTYu sc-b2c48d89-1 eAriAb"
+    className="sc-bcXGCL eBHnuC sc-b2c48d89-1 eAriAb"
   >
     <div
-      className="sc-bcXGCL sc-b2c48d89-0 boVsdg hDIJfD"
+      className="sc-bcXGCL sc-b2c48d89-0 dtmyTo hDIJfD"
     />
     <div
-      className="sc-bcXGCL eeSIyd"
+      className="sc-bcXGCL jFlYXF"
     >
       <h2
-        className="sc-bcXGCL cHKsxO cap-heading"
+        className="sc-bcXGCL hUDYie cap-heading"
       >
         Nice District
       </h2>
     </div>
   </div>,
   <div
-    className="sc-bcXGCL hLcdAA"
+    className="sc-bcXGCL jrELcQ"
   >
     <div
-      className="sc-bcXGCL jdrIpS"
+      className="sc-bcXGCL dTITPe"
     >
       <div
-        className="sc-bcXGCL iwixum"
+        className="sc-bcXGCL filejO"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -42,32 +42,32 @@ exports[`<District /> renders correctly 1`] = `
     </div>
   </div>,
   <div
-    className="sc-bcXGCL jxEIRI"
+    className="sc-bcXGCL jOefUM"
   >
     <div
-      className="sc-bcXGCL iUMHni"
+      className="sc-bcXGCL eKZdji"
     >
       <h4
-        className="sc-bcXGCL lffKyx cap-heading"
+        className="sc-bcXGCL bSNSwp cap-heading"
       >
         n_projects {"num":1}
       </h4>
       <div
-        className="sc-bcXGCL eOqaUo"
+        className="sc-bcXGCL hyOupk"
       >
         <div
-          className="sc-bcXGCL bczKGA"
+          className="sc-bcXGCL fMnUYI"
         >
           <a
-            className="sc-bcXGCL sc-6287370a-1 gXbnnu ajINc project-card"
+            className="sc-bcXGCL sc-6287370a-1 jFUZJS ajINc project-card"
             href="<mock-value-for-field-"externalLink">"
           >
             <div
-              className="sc-bcXGCL cgbMqJ cap-card"
+              className="sc-bcXGCL liuoSJ cap-card"
             >
               <img
                 alt=""
-                className="sc-bcXGCL gZzpjw sc-6287370a-2 ikuzkq"
+                className="sc-bcXGCL Wzpgc sc-6287370a-2 ikuzkq"
                 loading="lazy"
                 sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
                 srcSet="
@@ -81,44 +81,44 @@ exports[`<District /> renders correctly 1`] = `
          "
               />
               <div
-                className="sc-bcXGCL bHUozq sc-987cf8f3-0 kzlLnb"
+                className="sc-bcXGCL jeGsly sc-987cf8f3-0 kzlLnb"
               >
                 <div
                   aria-label="Tag global-archived"
-                  className="sc-bcXGCL hserNM cap-tag"
+                  className="sc-bcXGCL fTvKDP cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
                   tabIndex={-1}
                   title="global-archived"
                 >
                   <span
-                    className="sc-bcXGCL gmgVsa cap-text"
+                    className="sc-bcXGCL jqGkka cap-text"
                   >
                     global-archived
                   </span>
                 </div>
               </div>
               <div
-                className="sc-bcXGCL dxmZfn"
+                className="sc-bcXGCL dIXTAz"
               >
                 <h4
-                  className="sc-bcXGCL jsRpSD cap-heading"
+                  className="sc-bcXGCL iPMsnj cap-heading"
                   title="Nice project"
                 >
                   Nice project
                 </h4>
                 <div
-                  className="sc-bcXGCL ffElEZ"
+                  className="sc-bcXGCL dKkhaB"
                 >
                   <div
-                    className="sc-bcXGCL iSWnwP"
+                    className="sc-bcXGCL drYXzD"
                   >
                     <div
-                      className="sc-bcXGCL bLXbAu"
+                      className="sc-bcXGCL gumXnO"
                     >
                       <svg
                         aria-hidden="true"
-                        className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                        className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                         fill="none"
                         height="1em"
                         viewBox="0 0 11 12"
@@ -156,11 +156,11 @@ exports[`<District /> renders correctly 1`] = `
                     </div>
                      
                     <div
-                      className="sc-bcXGCL bLXbAu"
+                      className="sc-bcXGCL gumXnO"
                     >
                       <svg
                         aria-hidden="true"
-                        className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                        className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                         fill="none"
                         height="1em"
                         viewBox="0 0 12 10"
@@ -184,10 +184,10 @@ exports[`<District /> renders correctly 1`] = `
                     </div>
                   </div>
                   <div
-                    className="sc-bcXGCL vjBRp"
+                    className="sc-bcXGCL klUceB"
                   >
                     <div
-                      className="sc-bcXGCL eFHuff"
+                      className="sc-bcXGCL dcPIb"
                       style={
                         {
                           "marginLeft": 0,
@@ -197,7 +197,7 @@ exports[`<District /> renders correctly 1`] = `
                     >
                       <svg
                         aria-hidden="true"
-                        className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
+                        className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
                         fill="none"
                         height="1em"
                         viewBox="0 0 32 28"
@@ -231,7 +231,7 @@ exports[`<District /> renders correctly 1`] = `
                         />
                       </svg>
                       <div
-                        className="sc-bcXGCL gTlxNI cap-text"
+                        className="sc-bcXGCL fPltPk cap-text"
                       >
                         0
                         <span
@@ -242,11 +242,11 @@ exports[`<District /> renders correctly 1`] = `
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL eFHuff"
+                      className="sc-bcXGCL dcPIb"
                     >
                       <svg
                         aria-hidden="true"
-                        className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
+                        className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
                         fill="none"
                         height="1em"
                         viewBox="0 0 14 13"
@@ -261,7 +261,7 @@ exports[`<District /> renders correctly 1`] = `
                         />
                       </svg>
                       <div
-                        className="sc-bcXGCL gTlxNI cap-text"
+                        className="sc-bcXGCL fPltPk cap-text"
                       >
                         0
                         <span
@@ -272,11 +272,11 @@ exports[`<District /> renders correctly 1`] = `
                       </div>
                     </div>
                     <div
-                      className="sc-bcXGCL eFHuff"
+                      className="sc-bcXGCL dcPIb"
                     >
                       <svg
                         aria-hidden="true"
-                        className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
+                        className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
                         fill="none"
                         height="1em"
                         viewBox="0 0 13 14"
@@ -298,7 +298,7 @@ exports[`<District /> renders correctly 1`] = `
                         />
                       </svg>
                       <div
-                        className="sc-bcXGCL gTlxNI cap-text"
+                        className="sc-bcXGCL fPltPk cap-text"
                       >
                         0
                         <span

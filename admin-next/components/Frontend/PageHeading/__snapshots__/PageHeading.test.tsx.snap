@@ -3,38 +3,38 @@
 exports[`<PageHeading /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cklhXU"
+    className="sc-bcXGCL gjsubU"
   >
     <div>
       <div
-        className="sc-bcXGCL eqHHMd"
+        className="sc-bcXGCL ctOvVF"
       >
         <div
-          className="sc-bcXGCL iuEEBz"
+          className="sc-bcXGCL icDYev"
         >
           <h1
-            className="sc-bcXGCL iAowZy cap-heading"
+            className="sc-bcXGCL iHMoWe cap-heading"
           >
             Liste des projets
           </h1>
           <div
-            className="sc-bcXGCL khAxBU cap-text"
+            className="sc-bcXGCL egKDCQ cap-text"
           >
             Une belle liste
           </div>
         </div>
       </div>
       <div
-        className="sc-bcXGCL dBhpYb"
+        className="sc-bcXGCL WOzuj"
       >
         <div
-          className="sc-bcXGCL dWgdoT"
+          className="sc-bcXGCL itrdpj"
         >
           <div
-            className="sc-bcXGCL dGojSv cap-text"
+            className="sc-bcXGCL egCEHr cap-text"
           >
             <div
               className=" ql-editor wysiwyg-render"

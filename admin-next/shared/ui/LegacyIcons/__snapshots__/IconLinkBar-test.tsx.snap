@@ -3,7 +3,7 @@
 exports[`<IconLinkBar /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="sc-1bcb0ecb-0 bcWIho"

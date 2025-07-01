@@ -2,14 +2,14 @@
 
 exports[`<RegistrationModal /> renders closed modal 1`] = `
 <div
-  className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+  className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
 />
 `;
 
 exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     aria-label="global.register"
@@ -24,7 +24,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -33,7 +33,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL bOJnrx sc-GKYOR djSaGS cap-modal"
+        className="sc-bcXGCL hANKWR sc-GKYOR djSaGS cap-modal"
         style={
           {
             "opacity": 0,
@@ -43,13 +43,13 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL gUHbRp cap-modal__header"
+          className="sc-bcXGCL jMEcWl cap-modal__header"
         >
           <div
-            className="sc-bcXGCL iRyhmE"
+            className="sc-bcXGCL ejBfRc"
           >
             <h4
-              className="sc-bcXGCL jraRHV cap-heading"
+              className="sc-bcXGCL osejp cap-heading"
               id="modal-title"
               style={
                 {
@@ -63,13 +63,13 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL gBxHlP"
+            className="sc-bcXGCL dCLTmf"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -88,10 +88,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL laGNWx cap-modal__body"
+          className="sc-bcXGCL hsPaVR cap-modal__body"
         >
           <div
-            className="sc-bcXGCL gMOsyY"
+            className="sc-bcXGCL kfmAic"
           >
             <div
               className=" ql-editor wysiwyg-render"
@@ -103,10 +103,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
           </div>
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL kossJj cap-form-label"
+              className="sc-bcXGCL egOoIT cap-form-label"
               htmlFor=":r0:"
               style={
                 {
@@ -115,8 +115,8 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 }
               }
             >
-              <p
-                className="sc-bcXGCL gUkIhr cap-text"
+              <span
+                className="sc-bcXGCL dRxVYq cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -125,13 +125,13 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 }
               >
                 global.email
-              </p>
+              </span>
             </label>
             <input
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
               disabled={false}
               id=":r0:"
               name="email"
@@ -139,18 +139,19 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               onChange={[Function]}
               onFocus={[Function]}
               placeholder="email.placeholder"
+              readOnly={false}
               required={true}
               type="email"
             />
           </div>
           <div
-            className="sc-bcXGCL cyrAGK"
+            className="sc-bcXGCL jAguPG"
           >
             <div
-              className="sc-bcXGCL bnGCIW cap-form-control"
+              className="sc-bcXGCL dAxZoG cap-form-control"
             >
               <label
-                className="sc-bcXGCL kossJj cap-form-label"
+                className="sc-bcXGCL egOoIT cap-form-label"
                 htmlFor=":r1:"
                 style={
                   {
@@ -159,8 +160,8 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                   }
                 }
               >
-                <p
-                  className="sc-bcXGCL gUkIhr cap-text"
+                <span
+                  className="sc-bcXGCL dRxVYq cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -169,29 +170,30 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                   }
                 >
                   registration.password
-                </p>
+                </span>
               </label>
               <input
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
                 disabled={false}
                 id=":r1:"
                 name="plainPassword"
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
+                readOnly={false}
                 required={true}
                 type="password"
               />
             </div>
           </div>
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL kossJj cap-form-label"
+              className="sc-bcXGCL egOoIT cap-form-label"
               htmlFor="username"
               style={
                 {
@@ -200,8 +202,8 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 }
               }
             >
-              <p
-                className="sc-bcXGCL gUkIhr cap-text"
+              <span
+                className="sc-bcXGCL dRxVYq cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -210,12 +212,12 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 }
               >
                 global.fullname
-              </p>
+              </span>
             </label>
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -224,19 +226,20 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               onChange={[Function]}
               onFocus={[Function]}
               placeholder="global.placeholder.name"
+              readOnly={false}
               required={true}
               type="text"
             />
           </div>
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL kossJj cap-form-label"
+              className="sc-bcXGCL egOoIT cap-form-label"
               htmlFor="responses.0.value"
             >
-              <p
-                className="sc-bcXGCL gUkIhr cap-text"
+              <span
+                className="sc-bcXGCL dRxVYq cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -245,15 +248,15 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                 }
               >
                 &lt;mock-value-for-field-"title"&gt;
-              </p>
+              </span>
               <p
-                className="sc-bcXGCL dYriFV cap-text"
+                className="sc-bcXGCL ayaql cap-text"
               >
                 global.optional
               </p>
             </label>
             <span
-              className="sc-bcXGCL daHHgd cap-form-guideline"
+              className="sc-bcXGCL cqMoEC cap-form-guideline"
             >
               &lt;mock-value-for-field-"helpText"&gt;
             </span>
@@ -267,26 +270,27 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
+              readOnly={false}
               required={false}
               type="text"
             />
           </div>
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL bHapUX"
+              className="sc-bcXGCL hcROMr"
               htmlFor="charte"
             >
               <div
-                className="sc-bcXGCL NioVD cap-checkbox"
+                className="sc-bcXGCL fMWewb cap-checkbox"
                 style={
                   {
                     "marginLeft": 0,
@@ -296,13 +300,14 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
               >
                 <input
                   aria-required={true}
-                  className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+                  className="sc-bcXGCL kwwjrp cap-checkbox__input"
                   disabled={false}
                   id="charte"
                   name="charte"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
+                  readOnly={false}
                   required={true}
                   style={
                     {
@@ -313,14 +318,14 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
                   type="checkbox"
                 />
                 <div
-                  className="sc-bcXGCL jQxaYd cap-checkbox__box"
+                  className="sc-bcXGCL isUvxF cap-checkbox__box"
                 />
               </div>
               <span
-                className="sc-bcXGCL liyRZE"
+                className="sc-bcXGCL gXHFMY"
               >
                 <span
-                  className="sc-bcXGCL sc-cc425a65-0 cklhXU hMXkYl"
+                  className="sc-bcXGCL sc-cc425a65-0 gjsubU hMXkYl"
                 >
                   registration.charte
                 </span>
@@ -328,7 +333,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             </label>
           </div>
           <div
-            className="sc-bcXGCL kOyILu"
+            className="sc-bcXGCL dCOQzu"
           >
             <div
               className=" ql-editor wysiwyg-render"
@@ -341,10 +346,10 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
           </div>
         </div>
         <footer
-          className="sc-bcXGCL bzOqHT cap-modal__footer"
+          className="sc-bcXGCL gthNCX cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR dUpIgt cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ dUpIgt cap-button"
             onClick={[Function]}
             style={
               {
@@ -357,7 +362,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ ietVcX cap-button"
             id="confirm-login"
             type="submit"
           >
@@ -373,7 +378,7 @@ exports[`<RegistrationModal /> renders modal with top and bottom text 1`] = `
 exports[`<RegistrationModal /> renders only form 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     aria-label="global.register"
@@ -388,7 +393,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -397,7 +402,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL bOJnrx sc-GKYOR djSaGS cap-modal"
+        className="sc-bcXGCL hANKWR sc-GKYOR djSaGS cap-modal"
         style={
           {
             "opacity": 0,
@@ -407,13 +412,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL gUHbRp cap-modal__header"
+          className="sc-bcXGCL jMEcWl cap-modal__header"
         >
           <div
-            className="sc-bcXGCL iRyhmE"
+            className="sc-bcXGCL ejBfRc"
           >
             <h4
-              className="sc-bcXGCL jraRHV cap-heading"
+              className="sc-bcXGCL osejp cap-heading"
               id="modal-title"
               style={
                 {
@@ -427,13 +432,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL gBxHlP"
+            className="sc-bcXGCL dCLTmf"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -452,13 +457,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL laGNWx cap-modal__body"
+          className="sc-bcXGCL hsPaVR cap-modal__body"
         >
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL kossJj cap-form-label"
+              className="sc-bcXGCL egOoIT cap-form-label"
               htmlFor=":r5:"
               style={
                 {
@@ -467,8 +472,8 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 }
               }
             >
-              <p
-                className="sc-bcXGCL gUkIhr cap-text"
+              <span
+                className="sc-bcXGCL dRxVYq cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -477,13 +482,13 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 }
               >
                 global.email
-              </p>
+              </span>
             </label>
             <input
               aria-required={true}
               autoComplete="email"
               autoFocus={true}
-              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
               disabled={false}
               id=":r5:"
               name="email"
@@ -491,18 +496,19 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               onChange={[Function]}
               onFocus={[Function]}
               placeholder="email.placeholder"
+              readOnly={false}
               required={true}
               type="email"
             />
           </div>
           <div
-            className="sc-bcXGCL cyrAGK"
+            className="sc-bcXGCL jAguPG"
           >
             <div
-              className="sc-bcXGCL bnGCIW cap-form-control"
+              className="sc-bcXGCL dAxZoG cap-form-control"
             >
               <label
-                className="sc-bcXGCL kossJj cap-form-label"
+                className="sc-bcXGCL egOoIT cap-form-label"
                 htmlFor=":r6:"
                 style={
                   {
@@ -511,8 +517,8 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                   }
                 }
               >
-                <p
-                  className="sc-bcXGCL gUkIhr cap-text"
+                <span
+                  className="sc-bcXGCL dRxVYq cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -521,29 +527,30 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                   }
                 >
                   registration.password
-                </p>
+                </span>
               </label>
               <input
                 aria-required={true}
                 autoComplete="off"
                 autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
                 disabled={false}
                 id=":r6:"
                 name="plainPassword"
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
+                readOnly={false}
                 required={true}
                 type="password"
               />
             </div>
           </div>
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL kossJj cap-form-label"
+              className="sc-bcXGCL egOoIT cap-form-label"
               htmlFor="username"
               style={
                 {
@@ -552,8 +559,8 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 }
               }
             >
-              <p
-                className="sc-bcXGCL gUkIhr cap-text"
+              <span
+                className="sc-bcXGCL dRxVYq cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -562,12 +569,12 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 }
               >
                 global.fullname
-              </p>
+              </span>
             </label>
             <input
               aria-required={true}
               autoComplete="username"
-              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
               disabled={false}
               id="username"
               minLength={2}
@@ -576,19 +583,20 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               onChange={[Function]}
               onFocus={[Function]}
               placeholder="global.placeholder.name"
+              readOnly={false}
               required={true}
               type="text"
             />
           </div>
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL kossJj cap-form-label"
+              className="sc-bcXGCL egOoIT cap-form-label"
               htmlFor="responses.0.value"
             >
-              <p
-                className="sc-bcXGCL gUkIhr cap-text"
+              <span
+                className="sc-bcXGCL dRxVYq cap-text"
                 style={
                   {
                     "marginLeft": 0,
@@ -597,15 +605,15 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                 }
               >
                 &lt;mock-value-for-field-"title"&gt;
-              </p>
+              </span>
               <p
-                className="sc-bcXGCL dYriFV cap-text"
+                className="sc-bcXGCL ayaql cap-text"
               >
                 global.optional
               </p>
             </label>
             <span
-              className="sc-bcXGCL daHHgd cap-form-guideline"
+              className="sc-bcXGCL cqMoEC cap-form-guideline"
             >
               &lt;mock-value-for-field-"helpText"&gt;
             </span>
@@ -619,26 +627,27 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             />
             <input
               aria-required={false}
-              className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+              className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
               disabled={false}
               id="responses.0.value"
               name="responses.0.value"
               onBlur={[Function]}
               onChange={[Function]}
               onFocus={[Function]}
+              readOnly={false}
               required={false}
               type="text"
             />
           </div>
           <div
-            className="sc-bcXGCL kxTfnk cap-form-control"
+            className="sc-bcXGCL hOBcKE cap-form-control"
           >
             <label
-              className="sc-bcXGCL bHapUX"
+              className="sc-bcXGCL hcROMr"
               htmlFor="charte"
             >
               <div
-                className="sc-bcXGCL NioVD cap-checkbox"
+                className="sc-bcXGCL fMWewb cap-checkbox"
                 style={
                   {
                     "marginLeft": 0,
@@ -648,13 +657,14 @@ exports[`<RegistrationModal /> renders only form 1`] = `
               >
                 <input
                   aria-required={true}
-                  className="sc-bcXGCL jVBfSJ cap-checkbox__input"
+                  className="sc-bcXGCL kwwjrp cap-checkbox__input"
                   disabled={false}
                   id="charte"
                   name="charte"
                   onBlur={[Function]}
                   onChange={[Function]}
                   onFocus={[Function]}
+                  readOnly={false}
                   required={true}
                   style={
                     {
@@ -665,14 +675,14 @@ exports[`<RegistrationModal /> renders only form 1`] = `
                   type="checkbox"
                 />
                 <div
-                  className="sc-bcXGCL jQxaYd cap-checkbox__box"
+                  className="sc-bcXGCL isUvxF cap-checkbox__box"
                 />
               </div>
               <span
-                className="sc-bcXGCL liyRZE"
+                className="sc-bcXGCL gXHFMY"
               >
                 <span
-                  className="sc-bcXGCL sc-cc425a65-0 cklhXU hMXkYl"
+                  className="sc-bcXGCL sc-cc425a65-0 gjsubU hMXkYl"
                 >
                   registration.charte
                 </span>
@@ -681,10 +691,10 @@ exports[`<RegistrationModal /> renders only form 1`] = `
           </div>
         </div>
         <footer
-          className="sc-bcXGCL bzOqHT cap-modal__footer"
+          className="sc-bcXGCL gthNCX cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR dUpIgt cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ dUpIgt cap-button"
             onClick={[Function]}
             style={
               {
@@ -697,7 +707,7 @@ exports[`<RegistrationModal /> renders only form 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ ietVcX cap-button"
             id="confirm-login"
             type="submit"
           >

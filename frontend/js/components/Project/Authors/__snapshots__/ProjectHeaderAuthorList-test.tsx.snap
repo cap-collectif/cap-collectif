@@ -3,7 +3,7 @@
 exports[`<ProjectHeaderAuthorList /> renders correctly with one author 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="project.authors"
@@ -21,7 +21,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL czxWiY cap-heading"
+          className="sc-bcXGCL dIdmc cap-heading"
         >
           number-of-authors
         </h2>
@@ -45,7 +45,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -77,11 +77,11 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL dnFBwC"
+                  className="sc-bcXGCL gCRbeu"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
                 />
               </div>
@@ -109,7 +109,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
+        className="sc-bcXGCL sc-laZSpB fnqecp ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -118,10 +118,10 @@ Array [
     </div>
   </div>,
   <div
-    className="sc-bcXGCL ptefd"
+    className="sc-bcXGCL gRmRnJ"
   >
     <div
-      className="sc-bcXGCL iOirtd cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL geLYcx cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -132,32 +132,32 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
         </span>
       </div>
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL dnFBwC"
+              className="sc-bcXGCL gCRbeu"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             />
           </div>
@@ -165,7 +165,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bcXGCL clapXk cap-text platform__body"
+      className="sc-bcXGCL lovKkw cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >
@@ -178,7 +178,7 @@ Array [
 exports[`<ProjectHeaderAuthorList /> renders correctly with two authors but profiles are disabled 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="project.authors"
@@ -196,7 +196,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL czxWiY cap-heading"
+          className="sc-bcXGCL dIdmc cap-heading"
         >
           number-of-authors
         </h2>
@@ -220,7 +220,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -252,11 +252,11 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL dnFBwC"
+                  className="sc-bcXGCL gCRbeu"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
                 />
               </div>
@@ -284,7 +284,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
+        className="sc-bcXGCL sc-laZSpB fnqecp ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -293,10 +293,10 @@ Array [
     </div>
   </div>,
   <div
-    className="sc-bcXGCL ptefd"
+    className="sc-bcXGCL gRmRnJ"
   >
     <div
-      className="sc-bcXGCL iOirtd cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL geLYcx cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -307,32 +307,32 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
         </span>
       </div>
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL dnFBwC"
+              className="sc-bcXGCL gCRbeu"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             />
           </div>
@@ -340,7 +340,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bcXGCL clapXk cap-text platform__body"
+      className="sc-bcXGCL lovKkw cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >
@@ -353,7 +353,7 @@ Array [
 exports[`<ProjectHeaderAuthorList /> renders correctly without authors 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="project.authors"
@@ -371,7 +371,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL czxWiY cap-heading"
+          className="sc-bcXGCL dIdmc cap-heading"
         >
           number-of-authors
         </h2>
@@ -395,7 +395,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -427,11 +427,11 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL dnFBwC"
+                  className="sc-bcXGCL gCRbeu"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
                 />
               </div>
@@ -459,7 +459,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
+        className="sc-bcXGCL sc-laZSpB fnqecp ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -468,10 +468,10 @@ Array [
     </div>
   </div>,
   <div
-    className="sc-bcXGCL ptefd"
+    className="sc-bcXGCL gRmRnJ"
   >
     <div
-      className="sc-bcXGCL iOirtd cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL geLYcx cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -482,32 +482,32 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
         </span>
       </div>
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL dnFBwC"
+              className="sc-bcXGCL gCRbeu"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             />
           </div>
@@ -515,7 +515,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bcXGCL clapXk cap-text platform__body"
+      className="sc-bcXGCL lovKkw cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >
@@ -528,7 +528,7 @@ Array [
 exports[`<ProjectHeaderAuthorList /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     ariaLabel="project.authors"
@@ -546,7 +546,7 @@ Array [
         data-testid="Header"
       >
         <h2
-          className="sc-bcXGCL czxWiY cap-heading"
+          className="sc-bcXGCL dIdmc cap-heading"
         >
           number-of-authors
         </h2>
@@ -570,7 +570,7 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 a
               </div>
@@ -602,11 +602,11 @@ Array [
               hasBadge={false}
             >
               <div
-                className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+                className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
               >
                 <img
                   alt="welcomattic"
-                  className="sc-bcXGCL dnFBwC"
+                  className="sc-bcXGCL gCRbeu"
                   src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
                 />
               </div>
@@ -634,7 +634,7 @@ Array [
       spacing={2}
     >
       <button
-        className="sc-bcXGCL sc-laZSpB jXBoaN ietVcX cap-button"
+        className="sc-bcXGCL sc-laZSpB fnqecp ietVcX cap-button"
         onClick={[Function]}
         type="button"
       >
@@ -643,10 +643,10 @@ Array [
     </div>
   </div>,
   <div
-    className="sc-bcXGCL ptefd"
+    className="sc-bcXGCL gRmRnJ"
   >
     <div
-      className="sc-bcXGCL iOirtd cap-avatar-group projectHeader__authors platform__body"
+      className="sc-bcXGCL geLYcx cap-avatar-group projectHeader__authors platform__body"
       id="project-header"
       onClick={[Function]}
       role="group"
@@ -657,32 +657,32 @@ Array [
       }
     >
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             a
           </div>
         </span>
       </div>
       <div
-        className="sc-bcXGCL fypjYO"
+        className="sc-bcXGCL cVFHrm"
       >
         <span
           className="UserAvatar__UserAvatarContainer-jxoNlw imfDjz"
           hasBadge={false}
         >
           <div
-            className="sc-bcXGCL hzUfZj sc-ckEbfr gIIayp cap-avatar"
+            className="sc-bcXGCL imHdYT sc-ckEbfr gIIayp cap-avatar"
           >
             <img
               alt="welcomattic"
-              className="sc-bcXGCL dnFBwC"
+              className="sc-bcXGCL gCRbeu"
               src="https://assets.cap.co/media/default/0001/01/providerReference12.jpg"
             />
           </div>
@@ -690,7 +690,7 @@ Array [
       </div>
     </div>
     <p
-      className="sc-bcXGCL clapXk cap-text platform__body"
+      className="sc-bcXGCL lovKkw cap-text platform__body"
       id="authors-credit"
       onClick={[Function]}
     >

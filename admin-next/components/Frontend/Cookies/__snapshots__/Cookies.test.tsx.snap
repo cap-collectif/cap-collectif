@@ -3,17 +3,17 @@
 exports[`<CookieBanner /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL kDQdFj cookie-banner"
+    className="sc-bcXGCL gopvOf cookie-banner"
     id="cookie-banner"
   >
     <div
-      className="sc-bcXGCL cYihwT cookie-text-wrapper"
+      className="sc-bcXGCL cjghyv cookie-text-wrapper"
     >
       <p
-        className="sc-bcXGCL cPAipC cap-text"
+        className="sc-bcXGCL fkmZMW cap-text"
         style={
           {
             "marginLeft": 0,
@@ -24,7 +24,7 @@ exports[`<CookieBanner /> renders correctly 1`] = `
         cookies-text
       </p>
       <button
-        className="sc-bcXGCL jQoihB"
+        className="sc-bcXGCL keVoGx"
         id="cookies-parameters"
         onClick={[Function]}
         type="button"
@@ -33,10 +33,10 @@ exports[`<CookieBanner /> renders correctly 1`] = `
       </button>
     </div>
     <div
-      className="sc-bcXGCL OdDzF cookie-button"
+      className="sc-bcXGCL hrHryd cookie-button"
     >
       <button
-        className="sc-bcXGCL PUQzN"
+        className="sc-bcXGCL eHMgkd"
         id="cookie-decline-button"
         onClick={[Function]}
         type="button"
@@ -44,7 +44,7 @@ exports[`<CookieBanner /> renders correctly 1`] = `
         decline-optional-cookies
       </button>
       <button
-        className="sc-bcXGCL jXSoef btn-cookie-consent"
+        className="sc-bcXGCL biQhHH btn-cookie-consent"
         id="cookie-consent"
         onClick={[Function]}
         type="button"
@@ -59,7 +59,7 @@ exports[`<CookieBanner /> renders correctly 1`] = `
 exports[`<CookieContent /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div>
     <div>
@@ -111,20 +111,20 @@ exports[`<CookieContent /> renders correctly 1`] = `
 exports[`<CookieManager /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cklhXU"
+    className="sc-bcXGCL gjsubU"
   >
     <div
-      className="sc-bcXGCL kDQdFj cookie-banner"
+      className="sc-bcXGCL gopvOf cookie-banner"
       id="cookie-banner"
     >
       <div
-        className="sc-bcXGCL cYihwT cookie-text-wrapper"
+        className="sc-bcXGCL cjghyv cookie-text-wrapper"
       >
         <p
-          className="sc-bcXGCL cPAipC cap-text"
+          className="sc-bcXGCL fkmZMW cap-text"
           style={
             {
               "marginLeft": 0,
@@ -135,7 +135,7 @@ exports[`<CookieManager /> renders correctly 1`] = `
           cookies-text
         </p>
         <button
-          className="sc-bcXGCL jQoihB"
+          className="sc-bcXGCL keVoGx"
           id="cookies-parameters"
           onClick={[Function]}
           type="button"
@@ -144,10 +144,10 @@ exports[`<CookieManager /> renders correctly 1`] = `
         </button>
       </div>
       <div
-        className="sc-bcXGCL OdDzF cookie-button"
+        className="sc-bcXGCL hrHryd cookie-button"
       >
         <button
-          className="sc-bcXGCL PUQzN"
+          className="sc-bcXGCL eHMgkd"
           id="cookie-decline-button"
           onClick={[Function]}
           type="button"
@@ -155,7 +155,7 @@ exports[`<CookieManager /> renders correctly 1`] = `
           decline-optional-cookies
         </button>
         <button
-          className="sc-bcXGCL jXSoef btn-cookie-consent"
+          className="sc-bcXGCL biQhHH btn-cookie-consent"
           id="cookie-consent"
           onClick={[Function]}
           type="button"
@@ -171,13 +171,13 @@ exports[`<CookieManager /> renders correctly 1`] = `
 exports[`<CookieModal /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="cookie-policy"
   >
     <button
-      className="sc-bcXGCL cklhXU"
+      className="sc-bcXGCL gjsubU"
       id="cookies-modal-button"
       onClick={[Function]}
       type="button"

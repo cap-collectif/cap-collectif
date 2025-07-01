@@ -3,7 +3,7 @@
 exports[`<LoginSocialButton /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div>
     <div
@@ -38,11 +38,11 @@ exports[`<LoginSocialButton /> should render correctly 1`] = `
 exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div>
     <p
-      className="sc-bcXGCL gAoNqi cap-text"
+      className="sc-bcXGCL hrBWZS cap-text"
     >
       <p>
         fc-title
@@ -73,10 +73,10 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
       </a>
     </div>
     <div
-      className="sc-bcXGCL hthoxn"
+      className="sc-bcXGCL lhlJyz"
     >
       <a
-        className="sc-bcXGCL ddVvfA cap-link"
+        className="sc-bcXGCL hpjBkM cap-link"
         href="https://franceconnect.gouv.fr/"
         rel="noreferrer"
         target="_blank"
@@ -84,7 +84,7 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
         what-is-fc
       </a>
       <div
-        className="sc-bcXGCL gtydaQ cap-text"
+        className="sc-bcXGCL kBGUAc cap-text"
       >
         login.or
       </div>
@@ -96,7 +96,7 @@ exports[`<LoginSocialButton /> should render correctly franceConnect 1`] = `
 exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="sc-a69c970d-2 ggXlew"
@@ -125,7 +125,7 @@ exports[`<LoginSocialButton /> should render correctly with grandLyonConnect 1`]
 exports[`<LoginSocialButton /> should render correctly with switchusermode 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div>
     <div

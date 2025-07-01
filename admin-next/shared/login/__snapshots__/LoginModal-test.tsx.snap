@@ -3,7 +3,7 @@
 exports[`<LoginModal /> render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     aria-label="login.with"
@@ -18,7 +18,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     >
       <div
         autoFocus={true}
-        className="sc-bcXGCL bOJnrx sc-GKYOR djSaGS cap-modal"
+        className="sc-bcXGCL hANKWR sc-GKYOR djSaGS cap-modal"
         style={
           {
             "opacity": 0,
@@ -38,14 +38,14 @@ exports[`<LoginModal /> render correctly 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL gUHbRp cap-modal__header"
+          className="sc-bcXGCL jMEcWl cap-modal__header"
           id="contained-modal-title-lg"
         >
           <div
-            className="sc-bcXGCL iRyhmE"
+            className="sc-bcXGCL ejBfRc"
           >
             <h4
-              className="sc-bcXGCL jraRHV cap-heading"
+              className="sc-bcXGCL osejp cap-heading"
               id="modal-title"
               style={
                 {
@@ -59,13 +59,13 @@ exports[`<LoginModal /> render correctly 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL gBxHlP"
+            className="sc-bcXGCL dCLTmf"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -84,11 +84,11 @@ exports[`<LoginModal /> render correctly 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL laGNWx cap-modal__body"
+          className="sc-bcXGCL hsPaVR cap-modal__body"
         >
           <div>
             <div
-              className="sc-bcXGCL gMOsyY"
+              className="sc-bcXGCL kfmAic"
             >
               <div
                 className=" ql-editor wysiwyg-render"
@@ -100,10 +100,10 @@ exports[`<LoginModal /> render correctly 1`] = `
               />
             </div>
             <div
-              className="sc-bcXGCL kxTfnk cap-form-control"
+              className="sc-bcXGCL hOBcKE cap-form-control"
             >
               <label
-                className="sc-bcXGCL kossJj cap-form-label"
+                className="sc-bcXGCL egOoIT cap-form-label"
                 htmlFor=":r0:"
                 style={
                   {
@@ -112,8 +112,8 @@ exports[`<LoginModal /> render correctly 1`] = `
                   }
                 }
               >
-                <p
-                  className="sc-bcXGCL gUkIhr cap-text"
+                <span
+                  className="sc-bcXGCL dRxVYq cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -122,13 +122,13 @@ exports[`<LoginModal /> render correctly 1`] = `
                   }
                 >
                   global.email
-                </p>
+                </span>
               </label>
               <input
                 aria-required={true}
                 autoComplete="email"
                 autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
                 disabled={false}
                 id=":r0:"
                 name="username"
@@ -136,15 +136,16 @@ exports[`<LoginModal /> render correctly 1`] = `
                 onChange={[Function]}
                 onFocus={[Function]}
                 placeholder="email.placeholder"
+                readOnly={false}
                 required={true}
                 type="email"
               />
             </div>
             <div
-              className="sc-bcXGCL kxTfnk cap-form-control"
+              className="sc-bcXGCL hOBcKE cap-form-control"
             >
               <label
-                className="sc-bcXGCL kossJj cap-form-label"
+                className="sc-bcXGCL egOoIT cap-form-label"
                 htmlFor=":r1:"
                 style={
                   {
@@ -153,8 +154,8 @@ exports[`<LoginModal /> render correctly 1`] = `
                   }
                 }
               >
-                <p
-                  className="sc-bcXGCL gUkIhr cap-text"
+                <span
+                  className="sc-bcXGCL dRxVYq cap-text"
                   style={
                     {
                       "marginLeft": 0,
@@ -163,30 +164,31 @@ exports[`<LoginModal /> render correctly 1`] = `
                   }
                 >
                   global.password
-                </p>
+                </span>
               </label>
               <input
                 aria-required={true}
                 autoComplete="off"
-                className="sc-bcXGCL sc-dwnPIk bzZHnn eNZpxT cap-input"
+                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
                 disabled={false}
                 id=":r1:"
                 name="password"
                 onBlur={[Function]}
                 onChange={[Function]}
                 onFocus={[Function]}
+                readOnly={false}
                 required={true}
                 type="password"
               />
             </div>
             <a
-              className="sc-bcXGCL bYDxrx cap-link"
+              className="sc-bcXGCL cwEAzx cap-link"
               href="/resetting/request"
             >
               global.forgot_password
             </a>
             <div
-              className="sc-bcXGCL ijIkBL"
+              className="sc-bcXGCL jITGqX"
             >
               <div
                 className=" ql-editor wysiwyg-render"
@@ -200,10 +202,10 @@ exports[`<LoginModal /> render correctly 1`] = `
           </div>
         </div>
         <footer
-          className="sc-bcXGCL bzOqHT cap-modal__footer"
+          className="sc-bcXGCL gthNCX cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR dUpIgt cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ dUpIgt cap-button"
             style={
               {
                 "marginLeft": 0,
@@ -215,7 +217,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR ietVcX cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ ietVcX cap-button"
             id="confirm-login"
             type="submit"
           >

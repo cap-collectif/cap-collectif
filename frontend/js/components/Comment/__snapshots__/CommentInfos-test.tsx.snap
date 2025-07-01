@@ -3,10 +3,10 @@
 exports[`<CommentInfos /> <TestCommentInfos /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL fPsGIr opinion__user"
+    className="sc-bcXGCL jaoBRD opinion__user"
   >
     <span
       title="Toto"
@@ -87,7 +87,7 @@ Array [
         data-testid="Header"
       >
         <p
-          className="sc-bcXGCL kDWGdD cap-text excerpt_dark"
+          className="sc-bcXGCL ePLCdT cap-text excerpt_dark"
         >
           account-confirmed-too-late
         </p>
@@ -97,7 +97,7 @@ Array [
         marginBottom={0}
       >
         <p
-          className="sc-bcXGCL bIufIz cap-text"
+          className="sc-bcXGCL hQvDkj cap-text"
         >
           account-confirmed-too-late-message
         </p>
@@ -110,10 +110,10 @@ Array [
 exports[`<CommentInfos /> <TestCommentInfos /> should render correctly with no author 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL fPsGIr opinion__user"
+    className="sc-bcXGCL jaoBRD opinion__user"
   >
     <span
       title="Toto"
@@ -194,7 +194,7 @@ Array [
         data-testid="Header"
       >
         <p
-          className="sc-bcXGCL kDWGdD cap-text excerpt_dark"
+          className="sc-bcXGCL ePLCdT cap-text excerpt_dark"
         >
           account-confirmed-too-late
         </p>
@@ -204,7 +204,7 @@ Array [
         marginBottom={0}
       >
         <p
-          className="sc-bcXGCL bIufIz cap-text"
+          className="sc-bcXGCL hQvDkj cap-text"
         >
           account-confirmed-too-late-message
         </p>

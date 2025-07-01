@@ -3,10 +3,10 @@
 exports[`<ProjectItem /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -14,19 +14,19 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL cBwqzf"
+      className="sc-bcXGCL eQUJjL"
     >
       <a
-        className="sc-bcXGCL bYDxrx cap-link"
+        className="sc-bcXGCL cwEAzx cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bcXGCL doeSPo"
+        className="sc-bcXGCL hxRyWs"
       >
         <a
-          className="sc-bcXGCL jyrCCm cap-link"
+          className="sc-bcXGCL fOKoDi cap-link"
           href="https://capco.dev/themes/immobilier?_locale=fr-FR"
         >
           Immobilier
@@ -35,7 +35,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
           ,   
         </span>
         <a
-          className="sc-bcXGCL jyrCCm cap-link"
+          className="sc-bcXGCL fOKoDi cap-link"
           href="https://capco.dev/themes/transport?_locale=fr-FR"
         >
           Transport
@@ -44,7 +44,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -52,14 +52,14 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL bYDxrx cap-link"
+      className="sc-bcXGCL cwEAzx cap-link"
       href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -68,7 +68,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
   >
     <div
       aria-label="Tag public-everybody"
-      className="sc-bcXGCL iALMlr cap-tag"
+      className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       tabIndex={-1}
@@ -78,7 +78,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -88,7 +88,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     30/12/2014
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -101,7 +101,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -117,7 +117,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+        className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         height="1em"
         viewBox="0 0 12 4"
@@ -149,7 +149,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -175,7 +175,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
       tabIndex={-1}
     >
       <button
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -194,7 +194,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           action_show
@@ -205,7 +205,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -224,7 +224,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           project.download.button
@@ -253,7 +253,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -272,7 +272,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           admin.global.delete
@@ -305,10 +305,10 @@ exports[`<ProjectItem /> should render correctly 1`] = `
 exports[`<ProjectItem /> should render correctly without authors 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -316,19 +316,19 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL cBwqzf"
+      className="sc-bcXGCL eQUJjL"
     >
       <a
-        className="sc-bcXGCL bYDxrx cap-link"
+        className="sc-bcXGCL cwEAzx cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bcXGCL doeSPo"
+        className="sc-bcXGCL hxRyWs"
       >
         <a
-          className="sc-bcXGCL jyrCCm cap-link"
+          className="sc-bcXGCL fOKoDi cap-link"
           href="https://capco.dev/themes/immobilier?_locale=fr-FR"
         >
           Immobilier
@@ -337,7 +337,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
           ,   
         </span>
         <a
-          className="sc-bcXGCL jyrCCm cap-link"
+          className="sc-bcXGCL fOKoDi cap-link"
           href="https://capco.dev/themes/transport?_locale=fr-FR"
         >
           Transport
@@ -346,7 +346,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -354,14 +354,14 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL bYDxrx cap-link"
+      className="sc-bcXGCL cwEAzx cap-link"
       href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -370,7 +370,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
   >
     <div
       aria-label="Tag public-everybody"
-      className="sc-bcXGCL iALMlr cap-tag"
+      className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       tabIndex={-1}
@@ -380,7 +380,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -390,7 +390,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     30/12/2014
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -403,7 +403,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -419,7 +419,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+        className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         height="1em"
         viewBox="0 0 12 4"
@@ -451,7 +451,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -477,7 +477,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
       tabIndex={-1}
     >
       <button
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -496,7 +496,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           action_show
@@ -507,7 +507,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -526,7 +526,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           project.download.button
@@ -555,7 +555,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -574,7 +574,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           admin.global.delete
@@ -607,10 +607,10 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
 exports[`<ProjectItem /> should render correctly without exportable steps 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -618,19 +618,19 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     }
   >
     <div
-      className="sc-bcXGCL cBwqzf"
+      className="sc-bcXGCL eQUJjL"
     >
       <a
-        className="sc-bcXGCL bYDxrx cap-link"
+        className="sc-bcXGCL cwEAzx cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bcXGCL doeSPo"
+        className="sc-bcXGCL hxRyWs"
       >
         <a
-          className="sc-bcXGCL jyrCCm cap-link"
+          className="sc-bcXGCL fOKoDi cap-link"
           href="https://capco.dev/themes/immobilier?_locale=fr-FR"
         >
           Immobilier
@@ -639,7 +639,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
           ,   
         </span>
         <a
-          className="sc-bcXGCL jyrCCm cap-link"
+          className="sc-bcXGCL fOKoDi cap-link"
           href="https://capco.dev/themes/transport?_locale=fr-FR"
         >
           Transport
@@ -648,7 +648,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -656,14 +656,14 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     }
   >
     <a
-      className="sc-bcXGCL bYDxrx cap-link"
+      className="sc-bcXGCL cwEAzx cap-link"
       href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -672,7 +672,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
   >
     <div
       aria-label="Tag public-everybody"
-      className="sc-bcXGCL iALMlr cap-tag"
+      className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       tabIndex={-1}
@@ -682,7 +682,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -692,7 +692,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     30/12/2014
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -705,7 +705,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -721,7 +721,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+        className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         height="1em"
         viewBox="0 0 12 4"
@@ -753,7 +753,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -779,7 +779,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
       tabIndex={-1}
     >
       <button
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -798,7 +798,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           action_show
@@ -809,7 +809,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -828,7 +828,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           admin.global.delete
@@ -861,10 +861,10 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
 exports[`<ProjectItem /> should render correctly without themes 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -872,21 +872,21 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     }
   >
     <div
-      className="sc-bcXGCL cBwqzf"
+      className="sc-bcXGCL eQUJjL"
     >
       <a
-        className="sc-bcXGCL bYDxrx cap-link"
+        className="sc-bcXGCL cwEAzx cap-link"
         href="https://capco.dev/admin/alpha/project/project2/edit?_sonata_admin=capco_admin.admin.project&_sonata_name=admin_capco_app_project_edit&_locale=fr-FR"
       >
         Stratégie technologique de l'Etat et services publics
       </a>
       <div
-        className="sc-bcXGCL doeSPo"
+        className="sc-bcXGCL hxRyWs"
       />
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -894,14 +894,14 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     }
   >
     <a
-      className="sc-bcXGCL bYDxrx cap-link"
+      className="sc-bcXGCL cwEAzx cap-link"
       href="<mock-value-for-field-"url">"
     >
       &lt;mock-value-for-field-"username"&gt;
     </a>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -910,7 +910,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
   >
     <div
       aria-label="Tag public-everybody"
-      className="sc-bcXGCL iALMlr cap-tag"
+      className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
       tabIndex={-1}
@@ -920,7 +920,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     </div>
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -930,7 +930,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     30/12/2014
   </td>,
   <td
-    className="sc-bcXGCL phWty cap-table__td"
+    className="sc-bcXGCL lpgNFi cap-table__td"
     style={
       {
         "whiteSpace": "initial",
@@ -943,7 +943,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
-      className="sc-bcXGCL ezspYQ cap-buttonQuickAction cap-menu__disclosure"
+      className="sc-bcXGCL hluKno cap-buttonQuickAction cap-menu__disclosure"
       onBlur={[Function]}
       onClick={[Function]}
       onClickCapture={[Function]}
@@ -959,7 +959,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     >
       <svg
         aria-hidden="true"
-        className="sc-bcXGCL sc-eJDTud cRRiuB hEjMCZ cap-icon cap-buttonQuickAction-icon"
+        className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
         fill="currentColor"
         height="1em"
         viewBox="0 0 12 4"
@@ -991,7 +991,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -1017,7 +1017,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
       tabIndex={-1}
     >
       <button
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -1036,7 +1036,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           action_show
@@ -1047,7 +1047,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -1066,7 +1066,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           project.download.button
@@ -1095,7 +1095,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         aria-controls="id-g"
         aria-expanded={false}
         aria-haspopup="dialog"
-        className="sc-bcXGCL jXoSTv cap-menu__item"
+        className="sc-bcXGCL TXmLf cap-menu__item"
         id="id-g"
         onBlurCapture={[Function]}
         onClick={[Function]}
@@ -1114,7 +1114,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         type="button"
       >
         <p
-          className="sc-bcXGCL jMALnA cap-text"
+          className="sc-bcXGCL cvCRpc cap-text"
         >
            
           admin.global.delete

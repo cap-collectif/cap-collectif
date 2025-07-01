@@ -3,22 +3,22 @@
 exports[`<ProjectListSection /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <section
-    className="sc-bcXGCL cklhXU project-list-section"
+    className="sc-bcXGCL gjsubU project-list-section"
   >
     <div
-      className="sc-bcXGCL dWgdoT"
+      className="sc-bcXGCL itrdpj"
     >
       <div
-        className="sc-bcXGCL bvdqCM project-list-section-filters"
+        className="sc-bcXGCL eFdmaM project-list-section-filters"
       >
         <div
-          className="sc-bcXGCL eSlAOy"
+          className="sc-bcXGCL djDjxS"
         >
           <div
-            className="sc-bcXGCL dRLzSk"
+            className="sc-bcXGCL eIdcks"
           >
             <div
               className="cap-select css-b62m3t-container"
@@ -33,30 +33,30 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                 aria-live="polite"
                 aria-relevant="additions text"
                 className="css-1f43avz-a11yText-A11yText"
+                role="log"
               />
               <div
-                className="cap-select__control css-17ru8n9-control"
+                className="cap-select__control css-1qmtci6-control"
                 onMouseDown={[Function]}
                 onTouchEnd={[Function]}
               >
                 <div
-                  className="cap-select__value-container cap-select__value-container--has-value css-n2ktue-ValueContainer"
+                  className="cap-select__value-container cap-select__value-container--has-value css-wc641m"
                 >
                   <div
-                    className="cap-select__single-value css-93q9sa-singleValue"
+                    className="cap-select__single-value css-mlcseb-singleValue"
                   >
                     opinion.sort.last
                   </div>
                   <div
-                    className="cap-select__input-container css-nplzcd-Input"
+                    className="cap-select__input-container css-122h6g6"
                     data-value=""
                   >
                     <input
+                      aria-activedescendant=""
                       aria-autocomplete="list"
-                      aria-controls="react-select-2-listbox"
                       aria-expanded={false}
                       aria-haspopup={true}
-                      aria-owns="react-select-2-listbox"
                       autoCapitalize="none"
                       autoComplete="off"
                       autoCorrect="off"
@@ -92,7 +92,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                 </div>
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud jThTHJ knzWyK cap-icon"
+                  className="sc-bcXGCL sc-eJDTud kviGeh knzWyK cap-icon"
                   fill="none"
                   height="1em"
                   style={
@@ -116,7 +116,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
             aria-controls="id-g"
             aria-expanded={false}
             aria-haspopup="dialog"
-            className="sc-bcXGCL jwfTRn cap-popover__disclosure"
+            className="sc-bcXGCL kLQDgH cap-popover__disclosure"
             id="project-button-filter"
             onClick={[Function]}
             onClickCapture={[Function]}
@@ -139,7 +139,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
             </div>
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud dzHtSI knzWyK cap-icon"
               fill="none"
               height="1em"
               viewBox="0 0 12 7"
@@ -175,20 +175,20 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
           />
         </div>
         <div
-          className="sc-bcXGCL cuMCth"
+          className="sc-bcXGCL eRjUtx"
         >
           <div
             className="cap-search css-b62m3t-container"
             onKeyDown={[Function]}
           >
             <div
-              className="cap-search__control css-djxupi-control"
+              className="cap-search__control css-1qmtci6-control"
               onMouseDown={[Function]}
               onTouchEnd={[Function]}
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud bvvUsr hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud hlFaFu hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 11"
@@ -204,19 +204,20 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                 />
               </svg>
               <div
-                className="cap-search__value-container css-wcwe9b-ValueContainer"
+                className="cap-search__value-container css-1hibbf2"
               >
                 <div
-                  className="cap-search__placeholder css-1crio4g-placeholder"
+                  className="cap-search__placeholder css-1sh1d38-placeholder"
                   id="react-select-3-placeholder"
                 >
                   global.menu.search
                 </div>
                 <div
-                  className="cap-search__input-container css-nplzcd-Input"
+                  className="cap-search__input-container css-122h6g6"
                   data-value=""
                 >
                   <input
+                    aria-activedescendant=""
                     autoCapitalize="none"
                     autoComplete="off"
                     autoCorrect="off"
@@ -254,24 +255,24 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
         </div>
       </div>
       <div
-        className="sc-bcXGCL fEyafm project-list-section-projects"
+        className="sc-bcXGCL iprxGW project-list-section-projects"
       >
         <div
-          className="sc-bcXGCL iNMwnq"
+          className="sc-bcXGCL dWXqzq"
         >
           <div
-            className="sc-bcXGCL gdJCyL"
+            className="sc-bcXGCL kVLURz"
           >
             <a
-              className="sc-bcXGCL sc-6287370a-1 gXbnnu ajINc project-card"
+              className="sc-bcXGCL sc-6287370a-1 jFUZJS ajINc project-card"
               href="site.com/BPH"
             >
               <div
-                className="sc-bcXGCL cgbMqJ cap-card"
+                className="sc-bcXGCL liuoSJ cap-card"
               >
                 <img
                   alt=""
-                  className="sc-bcXGCL gZzpjw sc-6287370a-2 eLAgCe"
+                  className="sc-bcXGCL Wzpgc sc-6287370a-2 eLAgCe"
                   loading="lazy"
                   sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
                   srcSet="
@@ -285,25 +286,25 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
          "
                 />
                 <div
-                  className="sc-bcXGCL bHUozq sc-987cf8f3-0 kzlLnb"
+                  className="sc-bcXGCL jeGsly sc-987cf8f3-0 kzlLnb"
                 >
                   <div
                     aria-label="Tag step.status.future"
-                    className="sc-bcXGCL kMtquX cap-tag"
+                    className="sc-bcXGCL hUGgqU cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     tabIndex={-1}
                     title="step.status.future"
                   >
                     <span
-                      className="sc-bcXGCL gmgVsa cap-text"
+                      className="sc-bcXGCL jqGkka cap-text"
                     >
                       step.status.future
                     </span>
                   </div>
                   <div
                     aria-label="Tag "
-                    className="sc-bcXGCL UwUoA cap-tag sc-987cf8f3-2 dTUDIQ"
+                    className="sc-bcXGCL jDGtwv cap-tag sc-987cf8f3-2 dTUDIQ"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     tabIndex={-1}
@@ -311,7 +312,7 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   >
                     <svg
                       aria-hidden="true"
-                      className="sc-bcXGCL sc-eJDTud fdYuZw knzWyK cap-icon"
+                      className="sc-bcXGCL sc-eJDTud dzHtSI knzWyK cap-icon"
                       fill="none"
                       height="1em"
                       viewBox="0 0 10 12"
@@ -326,26 +327,26 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                   </div>
                 </div>
                 <div
-                  className="sc-bcXGCL dxmZfn"
+                  className="sc-bcXGCL dIXTAz"
                 >
                   <h4
-                    className="sc-bcXGCL jwRHWd cap-heading"
+                    className="sc-bcXGCL kDiWaJ cap-heading"
                     title="BPH"
                   >
                     BPH
                   </h4>
                   <div
-                    className="sc-bcXGCL ffElEZ"
+                    className="sc-bcXGCL dKkhaB"
                   >
                     <div
-                      className="sc-bcXGCL iSWnwP"
+                      className="sc-bcXGCL drYXzD"
                     >
                       <div
-                        className="sc-bcXGCL bLXbAu"
+                        className="sc-bcXGCL gumXnO"
                       >
                         <svg
                           aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                           fill="none"
                           height="1em"
                           viewBox="0 0 11 12"
@@ -383,11 +384,11 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                       </div>
                        
                       <div
-                        className="sc-bcXGCL bLXbAu"
+                        className="sc-bcXGCL gumXnO"
                       >
                         <svg
                           aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                           fill="none"
                           height="1em"
                           viewBox="0 0 9 12"
@@ -416,11 +417,11 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                         </span>
                       </div>
                       <div
-                        className="sc-bcXGCL bLXbAu"
+                        className="sc-bcXGCL gumXnO"
                       >
                         <svg
                           aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                           fill="none"
                           height="1em"
                           viewBox="0 0 12 10"

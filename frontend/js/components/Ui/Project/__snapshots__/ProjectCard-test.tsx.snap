@@ -3,18 +3,18 @@
 exports[`<ProjectCard /> <TestProjectCard /> should render a project with paper votes 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="http://capco/project1"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <img
         alt=""
-        className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
+        className="sc-bcXGCL Wzpgc ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
         srcSet="
@@ -28,14 +28,14 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag step.status.open.participation"
-            className="sc-bcXGCL ksPOMf cap-tag"
+            className="sc-bcXGCL kpGDHU cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
@@ -43,7 +43,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               height="1em"
               viewBox="0 0 14 13"
@@ -58,30 +58,30 @@ Array [
               />
             </svg>
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               step.status.open.participation
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL cgpuMW cap-heading"
+          className="sc-bcXGCL dKEaxS cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"
@@ -121,10 +121,10 @@ Array [
              
           </div>
           <div
-            className="sc-bcXGCL vjBRp"
+            className="sc-bcXGCL klUceB"
           >
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
               style={
                 Object {
                   "marginLeft": 0,
@@ -134,7 +134,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 28"
@@ -168,7 +168,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 42
                 <span
@@ -179,11 +179,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 14 13"
@@ -198,7 +198,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 10
                 <span
@@ -209,11 +209,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 13 14"
@@ -235,7 +235,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 27
                 <span
@@ -256,18 +256,18 @@ Array [
 exports[`<ProjectCard /> <TestProjectCard /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="http://capco/project1"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <img
         alt=""
-        className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
+        className="sc-bcXGCL Wzpgc ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
         srcSet="
@@ -281,14 +281,14 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag step.status.open.participation"
-            className="sc-bcXGCL ksPOMf cap-tag"
+            className="sc-bcXGCL kpGDHU cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
@@ -296,7 +296,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               height="1em"
               viewBox="0 0 14 13"
@@ -311,30 +311,30 @@ Array [
               />
             </svg>
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               step.status.open.participation
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL cgpuMW cap-heading"
+          className="sc-bcXGCL dKEaxS cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"
@@ -374,10 +374,10 @@ Array [
              
           </div>
           <div
-            className="sc-bcXGCL vjBRp"
+            className="sc-bcXGCL klUceB"
           >
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
               style={
                 Object {
                   "marginLeft": 0,
@@ -387,7 +387,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 28"
@@ -421,7 +421,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 32
                 <span
@@ -432,11 +432,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 14 13"
@@ -451,7 +451,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 10
                 <span
@@ -462,11 +462,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 13 14"
@@ -488,7 +488,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 27
                 <span
@@ -509,18 +509,18 @@ Array [
 exports[`<ProjectCard /> <TestProjectCard /> should render correctly an archived project 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="http://capco/project1"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <img
         alt=""
-        className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh fXeLyi"
+        className="sc-bcXGCL Wzpgc ProjectCard___StyledImage-ircVMh fXeLyi"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
         srcSet="
@@ -534,44 +534,44 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag global-archived"
-            className="sc-bcXGCL grAOxw cap-tag"
+            className="sc-bcXGCL ihxLXP cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
             title="global-archived"
           >
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               global-archived
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL hMumCw cap-heading"
+          className="sc-bcXGCL dreVwo cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"
@@ -611,10 +611,10 @@ Array [
              
           </div>
           <div
-            className="sc-bcXGCL vjBRp"
+            className="sc-bcXGCL klUceB"
           >
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
               style={
                 Object {
                   "marginLeft": 0,
@@ -624,7 +624,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 28"
@@ -658,7 +658,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL gTlxNI cap-text"
+                className="sc-bcXGCL fPltPk cap-text"
               >
                 32
                 <span
@@ -669,11 +669,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 14 13"
@@ -688,7 +688,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL gTlxNI cap-text"
+                className="sc-bcXGCL fPltPk cap-text"
               >
                 10
                 <span
@@ -699,11 +699,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud SVRAT hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 13 14"
@@ -725,7 +725,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL gTlxNI cap-text"
+                className="sc-bcXGCL fPltPk cap-text"
               >
                 27
                 <span
@@ -746,18 +746,18 @@ Array [
 exports[`<ProjectCard /> <TestProjectCard /> should render correctly an external project 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="www.autre-site.com"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <img
         alt=""
-        className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
+        className="sc-bcXGCL Wzpgc ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
         srcSet="
@@ -771,14 +771,14 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag step.status.open.participation"
-            className="sc-bcXGCL ksPOMf cap-tag"
+            className="sc-bcXGCL kpGDHU cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
@@ -786,7 +786,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               height="1em"
               viewBox="0 0 14 13"
@@ -801,30 +801,30 @@ Array [
               />
             </svg>
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               step.status.open.participation
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL cgpuMW cap-heading"
+          className="sc-bcXGCL dKEaxS cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"
@@ -864,10 +864,10 @@ Array [
              
           </div>
           <div
-            className="sc-bcXGCL vjBRp"
+            className="sc-bcXGCL klUceB"
           >
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
               style={
                 Object {
                   "marginLeft": 0,
@@ -877,7 +877,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 28"
@@ -911,7 +911,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 41
                 <span
@@ -922,11 +922,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 14 13"
@@ -941,7 +941,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 34
                 <span
@@ -952,11 +952,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 13 14"
@@ -978,7 +978,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 20
                 <span
@@ -999,18 +999,18 @@ Array [
 exports[`<ProjectCard /> <TestProjectCard /> should render correctly on project page 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="http://capco/project1"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <img
         alt=""
-        className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
+        className="sc-bcXGCL Wzpgc ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
         srcSet="
@@ -1024,14 +1024,14 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag step.status.open.participation"
-            className="sc-bcXGCL ksPOMf cap-tag"
+            className="sc-bcXGCL kpGDHU cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
@@ -1039,7 +1039,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               height="1em"
               viewBox="0 0 14 13"
@@ -1054,30 +1054,30 @@ Array [
               />
             </svg>
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               step.status.open.participation
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL cgpuMW cap-heading"
+          className="sc-bcXGCL dKEaxS cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"
@@ -1117,10 +1117,10 @@ Array [
              
           </div>
           <div
-            className="sc-bcXGCL vjBRp"
+            className="sc-bcXGCL klUceB"
           >
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
               style={
                 Object {
                   "marginLeft": 0,
@@ -1130,7 +1130,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 28"
@@ -1164,7 +1164,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 32
                 <span
@@ -1175,11 +1175,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 14 13"
@@ -1194,7 +1194,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 10
                 <span
@@ -1205,11 +1205,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 13 14"
@@ -1231,7 +1231,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 27
                 <span
@@ -1252,18 +1252,18 @@ Array [
 exports[`<ProjectCard /> <TestProjectCard /> should render correctly with themes and districts 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="http://capco/project1"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <img
         alt=""
-        className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
+        className="sc-bcXGCL Wzpgc ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
         srcSet="
@@ -1277,14 +1277,14 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag step.status.open.participation"
-            className="sc-bcXGCL ksPOMf cap-tag"
+            className="sc-bcXGCL kpGDHU cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
@@ -1292,7 +1292,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               height="1em"
               viewBox="0 0 14 13"
@@ -1307,30 +1307,30 @@ Array [
               />
             </svg>
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               step.status.open.participation
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL cgpuMW cap-heading"
+          className="sc-bcXGCL dKEaxS cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"
@@ -1369,11 +1369,11 @@ Array [
             </div>
              
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 9 12"
@@ -1402,11 +1402,11 @@ Array [
               </span>
             </div>
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 10"
@@ -1431,10 +1431,10 @@ Array [
             </div>
           </div>
           <div
-            className="sc-bcXGCL vjBRp"
+            className="sc-bcXGCL klUceB"
           >
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
               style={
                 Object {
                   "marginLeft": 0,
@@ -1444,7 +1444,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 28"
@@ -1478,7 +1478,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 32
                 <span
@@ -1489,11 +1489,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 14 13"
@@ -1508,7 +1508,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 10
                 <span
@@ -1519,11 +1519,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 13 14"
@@ -1545,7 +1545,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 27
                 <span
@@ -1566,17 +1566,17 @@ Array [
 exports[`<ProjectCard /> <TestProjectCard /> should render correctly without cover 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="http://capco/project1"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <div
-        className="sc-bcXGCL ProjectCard___StyledBox2-bXmNrl kKZuhB fCqyfQ"
+        className="sc-bcXGCL ProjectCard___StyledBox2-bXmNrl bPjDPt fCqyfQ"
       >
         <svg
           aria-hidden={true}
@@ -1620,14 +1620,14 @@ Array [
         </svg>
       </div>
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag step.status.open.participation"
-            className="sc-bcXGCL ksPOMf cap-tag"
+            className="sc-bcXGCL kpGDHU cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
@@ -1635,7 +1635,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               height="1em"
               viewBox="0 0 14 13"
@@ -1650,30 +1650,30 @@ Array [
               />
             </svg>
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               step.status.open.participation
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL cgpuMW cap-heading"
+          className="sc-bcXGCL dKEaxS cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"
@@ -1713,10 +1713,10 @@ Array [
              
           </div>
           <div
-            className="sc-bcXGCL vjBRp"
+            className="sc-bcXGCL klUceB"
           >
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
               style={
                 Object {
                   "marginLeft": 0,
@@ -1726,7 +1726,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 28"
@@ -1760,7 +1760,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 32
                 <span
@@ -1771,11 +1771,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 14 13"
@@ -1790,7 +1790,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 10
                 <span
@@ -1801,11 +1801,11 @@ Array [
               </div>
             </div>
             <div
-              className="sc-bcXGCL eFHuff"
+              className="sc-bcXGCL dcPIb"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hCLuI hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 13 14"
@@ -1827,7 +1827,7 @@ Array [
                 />
               </svg>
               <div
-                className="sc-bcXGCL fXBhvC cap-text"
+                className="sc-bcXGCL huGUHm cap-text"
               >
                 27
                 <span
@@ -1848,18 +1848,18 @@ Array [
 exports[`<ProjectCard /> <TestProjectCard /> should render correctly without participative step 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <a
-    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT gXbnnu hGumuw"
+    className="sc-bcXGCL ProjectCard___StyledBox-ijRHOT jFUZJS hGumuw"
     href="http://capco/project1"
   >
     <div
-      className="sc-bcXGCL cgbMqJ cap-card"
+      className="sc-bcXGCL liuoSJ cap-card"
     >
       <img
         alt=""
-        className="sc-bcXGCL gZzpjw ProjectCard___StyledImage-ircVMh eHMDOu"
+        className="sc-bcXGCL Wzpgc ProjectCard___StyledImage-ircVMh eHMDOu"
         loading="lazy"
         sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
         srcSet="
@@ -1873,14 +1873,14 @@ Array [
          "
       />
       <div
-        className="sc-bcXGCL dzaJVB"
+        className="sc-bcXGCL gBNeyh"
       >
         <div
-          className="sc-bcXGCL jesjSY"
+          className="sc-bcXGCL cdfnys"
         >
           <div
             aria-label="Tag step.status.open.participation"
-            className="sc-bcXGCL ksPOMf cap-tag"
+            className="sc-bcXGCL kpGDHU cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
             tabIndex={-1}
@@ -1888,7 +1888,7 @@ Array [
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud fpzUrh knzWyK cap-icon cap-tag__leftIcon"
+              className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon cap-tag__leftIcon"
               fill="none"
               height="1em"
               viewBox="0 0 14 13"
@@ -1903,30 +1903,30 @@ Array [
               />
             </svg>
             <span
-              className="sc-bcXGCL duJDym cap-text"
+              className="sc-bcXGCL cQtSGm cap-text"
             >
               step.status.open.participation
             </span>
           </div>
         </div>
         <h4
-          className="sc-bcXGCL cgpuMW cap-heading"
+          className="sc-bcXGCL dKEaxS cap-heading"
           title="Name of my project"
         >
           Name of my project
         </h4>
         <div
-          className="sc-bcXGCL ffElEZ"
+          className="sc-bcXGCL dKkhaB"
         >
           <div
-            className="sc-bcXGCL iSWnwP"
+            className="sc-bcXGCL drYXzD"
           >
             <div
-              className="sc-bcXGCL bLXbAu"
+              className="sc-bcXGCL gumXnO"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud fBGKel hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 11 12"

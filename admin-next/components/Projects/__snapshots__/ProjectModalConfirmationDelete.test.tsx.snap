@@ -3,7 +3,7 @@
 exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <button
     aria-controls="id-g"
@@ -25,7 +25,7 @@ exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> shou
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bcXGCL bNrqDF sc-jRwapC cap-menu__list"
+    className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"
@@ -54,7 +54,7 @@ exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> shou
       aria-controls="id-g"
       aria-expanded={false}
       aria-haspopup="dialog"
-      className="sc-bcXGCL jXoSTv cap-menu__item"
+      className="sc-bcXGCL TXmLf cap-menu__item"
       id="id-g"
       onBlurCapture={[Function]}
       onClick={[Function]}
@@ -73,7 +73,7 @@ exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> shou
       type="button"
     >
       <p
-        className="sc-bcXGCL jMALnA cap-text"
+        className="sc-bcXGCL cvCRpc cap-text"
       >
          
         admin.global.delete

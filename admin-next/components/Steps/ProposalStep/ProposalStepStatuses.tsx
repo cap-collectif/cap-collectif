@@ -6,8 +6,17 @@ import { Button, CapColorPickerVariant, CapUIIcon, Flex, InputGroup } from '@cap
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { FormValues } from '@components/Steps/SelectStep/SelectStepForm'
 import { ProposalStepStatuses_query$key } from '@relay/ProposalStepStatuses_query.graphql'
+import { pxToRem } from '@shared/utils/pxToRem'
 
-type ProposalStepStatusesColor = "CAUTION" | "DANGER" | "DEFAULT" | "INFO" | "PRIMARY" | "SUCCESS" | "WARNING" | "%future added value"
+type ProposalStepStatusesColor =
+  | 'CAUTION'
+  | 'DANGER'
+  | 'DEFAULT'
+  | 'INFO'
+  | 'PRIMARY'
+  | 'SUCCESS'
+  | 'WARNING'
+  | '%future added value'
 
 export interface ProposalStepStatusesProps {
   readonly formMethods: UseFormReturn<any>
@@ -91,7 +100,7 @@ const ProposalStepStatuses: React.FC<ProposalStepStatusesProps> = ({ formMethods
           wrap="nowrap"
           sx={{
             '.cap-form-control:last-child': { width: '100% !important' },
-            '.cap-color-picker_container': { marginTop: '0 !important', 'width': '34px', 'height': '34px' },
+            '.cap-color-picker_container': { marginTop: '0 !important', width: pxToRem(32), height: pxToRem(32) },
           }}
         >
           <FormControl name={`statuses[${index}].color`} control={control} position="relative">
@@ -110,13 +119,19 @@ const ProposalStepStatuses: React.FC<ProposalStepStatusesProps> = ({ formMethods
           </FormControl>
           <FormControl name={`statuses[${index}].name`} control={control} sx={{ width: '100% !important' }}>
             <FieldInput
-              data-cy={`statuses_${index}_name`}  
+              data-cy={`statuses_${index}_name`}
               id={`statuses[${index}].name`}
               name={`statuses[${index}].name`}
               control={control}
               type="text"
               placeholder={intl.formatMessage({ id: 'enter-label' })}
-              onClickActions={[{ icon: CapUIIcon.Trash, onClick: () => remove(index) }]}
+              onClickActions={[
+                {
+                  icon: CapUIIcon.Trash,
+                  onClick: () => remove(index),
+                  label: intl.formatMessage({ id: 'global.delete' }),
+                },
+              ]}
             />
           </FormControl>
         </InputGroup>

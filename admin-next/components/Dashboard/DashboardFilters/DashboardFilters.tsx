@@ -34,21 +34,21 @@ const FRAGMENT = graphql`
       }
     }
     organizations {
-        projects(first: $count, after: $cursor) {
-            totalCount
-            edges {
-                node {
-                    id
-                    title
-                    createdAt
-                    timeRange {
-                        isTimeless
-                        startAt
-                        endAt
-                    }
-                }
+      projects(first: $count, after: $cursor) {
+        totalCount
+        edges {
+          node {
+            id
+            title
+            createdAt
+            timeRange {
+              isTimeless
+              startAt
+              endAt
             }
+          }
         }
+      }
     }
   }
 `
@@ -59,7 +59,6 @@ const getDateRangeProject = (projects: DashboardFilters_viewer$data['projects'],
     .map(edge => edge?.node)
     .filter(Boolean)
     .find(project => project && project.id === projectIdSelected)
-
 
   if (!projectSelected) {
     return {
@@ -100,17 +99,17 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
   const { setFilters, filters } = useDashboard()
 
   const minStartedAt = new Date('2014-01-01')
-  const today = new Date();
+  const today = new Date()
   if (new Date(filters.dateRange.startAt) < minStartedAt) {
-      filters.dateRange.startAt = minStartedAt.toISOString();
+    filters.dateRange.startAt = minStartedAt.toISOString()
   }
 
   if (new Date(filters.dateRange.endAt) > today) {
-      filters.dateRange.endAt = today.toISOString();
+    filters.dateRange.endAt = today.toISOString()
   }
 
-  const organization = viewer?.organizations?.[0];
-  const projects = organization?.projects ?? viewer.projects;
+  const organization = viewer?.organizations?.[0]
+  const projects = organization?.projects ?? viewer.projects
 
   const [dateRange, setDateRange] = useState({
     startDate: moment(filters.dateRange.startAt),
@@ -168,6 +167,7 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
   return (
     <Flex direction="row" align="center" spacing={2}>
       <Select
+        variantColor="hierarchy"
         onChange={optionSelected => setFilters(FilterKey.PROJECT, optionSelected.value)}
         defaultValue={defaultValueFormatted}
         width="20%"
@@ -201,6 +201,7 @@ const DashboardFilters: FC<DashboardFiltersProps> = ({ viewer: viewerFragment })
       />
 
       <DateRange
+        variantColor="hierarchy"
         isOutsideRange
         value={dateRange}
         onChange={({ startDate, endDate }) => {

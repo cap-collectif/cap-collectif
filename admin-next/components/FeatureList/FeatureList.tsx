@@ -54,6 +54,7 @@ const FeatureList: FC = () => {
   return (
     <Flex direction="column" spacing={6}>
       <Search
+        variantColor="hierarchy"
         value={term}
         inputId="term"
         onChange={setTerm}

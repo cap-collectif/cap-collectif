@@ -3,7 +3,7 @@
 exports[`<SectionSendingDomains /> <TestSectionSendingDomains /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="sc-csDjRa Flex___StyledAppBox-SiGEY gTAar crLbTm"

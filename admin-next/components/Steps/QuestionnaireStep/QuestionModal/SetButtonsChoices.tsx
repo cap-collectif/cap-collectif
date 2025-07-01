@@ -31,6 +31,7 @@ const Wrapper = ({
             id={`${formFieldName}.color`}
             name={`${formFieldName}.color`}
             control={control}
+            variantColor="hierarchy"
           />
         </FormControl>
         {children}
@@ -75,12 +76,19 @@ const SetButtonsChoices: React.FC = () => {
                   }}
                 >
                   <FieldInput
+                    variantColor="hierarchy"
                     id={`${formFieldName}.title`}
                     name={`${formFieldName}.title`}
                     control={control}
                     type="text"
                     width="100%"
-                    onClickActions={[{ icon: CapUIIcon.Trash, onClick: () => remove(index) }]}
+                    onClickActions={[
+                      {
+                        icon: CapUIIcon.Trash,
+                        onClick: () => remove(index),
+                        label: intl.formatMessage({ id: 'global.delete' }),
+                      },
+                    ]}
                   />
                 </FormControl>
               </Wrapper>

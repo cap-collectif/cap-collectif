@@ -3,32 +3,32 @@
 exports[`<ProposalPreviewCard /> <TestProposalPreviewCard /> should render correctly 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL hZkHWP"
+    className="sc-bcXGCL Tnawr"
     id="proposal-<Node-mock-id-1>"
     onMouseEnter={[Function]}
     onMouseLeave={[Function]}
   >
     <div
-      className="sc-bcXGCL bVGmWY"
+      className="sc-bcXGCL hpLDis"
     >
       <div
-        className="sc-bcXGCL eaOiYD"
+        className="sc-bcXGCL Ggrpz"
       >
         <div
-          className="sc-bcXGCL gcrvYg"
+          className="sc-bcXGCL Zpuao"
         >
           <div
-            className="sc-bcXGCL eJjsxH"
+            className="sc-bcXGCL diHamT"
           >
             <svg
               aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud jQjKpa knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud bgOOdG knzWyK cap-icon"
               fill="none"
               height="1em"
               viewBox="0 0 13 14"
@@ -50,7 +50,7 @@ Array [
               />
             </svg>
             <p
-              className="sc-bcXGCL foSpZD cap-text"
+              className="sc-bcXGCL kCiXtT cap-text"
             >
               Jane Doe
             </p>
@@ -62,17 +62,17 @@ Array [
           onClick={[Function]}
         >
           <h4
-            className="sc-bcXGCL dcpbiJ cap-heading"
+            className="sc-bcXGCL dIgeJh cap-heading"
           >
             Installation d'une serre dans le Jardin partagé du Val des Oiseaux - Argenteuil
           </h4>
         </a>
       </div>
       <p
-        className="sc-bcXGCL eKXGuF"
+        className="sc-bcXGCL frSVvR"
       />
       <div
-        className="sc-bcXGCL eKhpxm"
+        className="sc-bcXGCL ACOWy"
       />
     </div>
   </div>,

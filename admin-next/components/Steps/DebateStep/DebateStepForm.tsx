@@ -305,6 +305,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
               <Tabs.Panel>
                 <FormProvider {...formMethods}>
                   <TextEditor
+                    variantColor="hierarchy"
                     name="debateContent"
                     label={intl.formatMessage({ id: 'debate-presentation' })}
                     platformLanguage={defaultLocale}
@@ -331,7 +332,7 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
                           htmlFor={`articles.${index}.url`}
                           label={intl.formatMessage({ id: 'article-link' })}
                         />
-                        <Input type="text" {...register(`articles.${index}.url`)} />
+                        <Input type="text" {...register(`articles.${index}.url`)} variantColor="hierarchy" />
                       </Box>
                     )
                   })}

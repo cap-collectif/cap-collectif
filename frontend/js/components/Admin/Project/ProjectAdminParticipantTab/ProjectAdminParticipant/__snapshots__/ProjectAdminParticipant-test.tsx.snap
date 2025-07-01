@@ -3,7 +3,7 @@
 exports[`<ProjectAdminParticipant /> should render a non-selectable list when "emailing" is disabled 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="styles__Container-fmDIgl iKKqeY pickableList-row ProjectAdminParticipantstyle__Container-gBxtgi eWyfNu"
@@ -126,11 +126,11 @@ Array [
         hasBadge={false}
       >
         <div
-          className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+          className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
         >
           <img
             alt="<mock-value-for-field-\\"username\\">"
-            className="sc-bcXGCL dnFBwC"
+            className="sc-bcXGCL gCRbeu"
             src="<mock-value-for-field-\\"avatarUrl\\">"
           />
         </div>
@@ -143,7 +143,7 @@ Array [
 exports[`<ProjectAdminParticipant /> should render a selectable list when "emailing" is enabled 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="styles__Container-fmDIgl iKKqeY pickableList-row ProjectAdminParticipantstyle__Container-gBxtgi eWyfNu"
@@ -271,11 +271,11 @@ Array [
         hasBadge={false}
       >
         <div
-          className="sc-bcXGCL kQKrQN sc-ckEbfr gIIayp cap-avatar"
+          className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
         >
           <img
             alt="<mock-value-for-field-\\"username\\">"
-            className="sc-bcXGCL dnFBwC"
+            className="sc-bcXGCL gCRbeu"
             src="<mock-value-for-field-\\"avatarUrl\\">"
           />
         </div>

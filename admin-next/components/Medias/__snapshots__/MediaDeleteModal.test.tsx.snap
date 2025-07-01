@@ -3,7 +3,7 @@
 exports[`<MediaDeleteModal /> should render correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     aria-label="global.image_uploader.image.preview"
@@ -19,7 +19,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL kmvLIA sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL BwvOS sc-GKYOR dCANLh cap-modal"
+        className="sc-bcXGCL JcTvy sc-GKYOR dCANLh cap-modal"
         style={
           {
             "opacity": 0,
@@ -37,13 +37,13 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
         }
       >
         <header
-          className="sc-bcXGCL gUHbRp cap-modal__header"
+          className="sc-bcXGCL jMEcWl cap-modal__header"
         >
           <div
-            className="sc-bcXGCL iRyhmE"
+            className="sc-bcXGCL ejBfRc"
           >
             <h2
-              className="sc-bcXGCL czxWiY cap-heading"
+              className="sc-bcXGCL dIdmc cap-heading"
               id="modal-title"
               style={
                 {
@@ -57,13 +57,13 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
           </div>
           <button
             aria-describedby="modal-title"
-            className="sc-bcXGCL gBxHlP"
+            className="sc-bcXGCL dCLTmf"
             onClick={[Function]}
             type="button"
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud gmFCZp knzWyK cap-icon"
+              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -82,19 +82,19 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
           </button>
         </header>
         <div
-          className="sc-bcXGCL laGNWx cap-modal__body"
+          className="sc-bcXGCL hsPaVR cap-modal__body"
         >
           <p
-            className="sc-bcXGCL jMALnA cap-text"
+            className="sc-bcXGCL cvCRpc cap-text"
           >
             media-delete-helptext {"num":3}
           </p>
         </div>
         <footer
-          className="sc-bcXGCL bzOqHT cap-modal__footer"
+          className="sc-bcXGCL gthNCX cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR dsOIMI cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ dsOIMI cap-button"
             onClick={[Function]}
             style={
               {
@@ -107,7 +107,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB dNMLhR dOPPpN cap-button"
+            className="sc-bcXGCL sc-laZSpB fzdPDJ dOPPpN cap-button"
             onClick={[Function]}
             type="button"
           >

@@ -3,18 +3,18 @@
 exports[`<DebateStepPageNotYetStarted /> should render when step is future 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cklhXU"
+    className="sc-bcXGCL gjsubU"
     id="DebateStepPageNotYetStarted"
   >
     <div
-      className="sc-bcXGCL kbtrck"
+      className="sc-bcXGCL blfOvU"
     >
       <div
         aria-label="Tag "
-        className="sc-bcXGCL cumSym cap-tag"
+        className="sc-bcXGCL gpwAph cap-tag"
         onBlur={[Function]}
         onFocus={[Function]}
         style={
@@ -29,7 +29,7 @@ Array [
         count.daysUntil {"count":725}
       </div>
       <h2
-        className="sc-bcXGCL cuNtfK cap-heading"
+        className="sc-bcXGCL hSXtVS cap-heading"
       >
         &lt;mock-value-for-field-"title"&gt;
       </h2>

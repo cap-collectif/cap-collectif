@@ -43,7 +43,7 @@ const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQue
         <Heading>{intl.formatMessage({ id: 'customize-your-question' })}</Heading>
       </MultiStepModal.Header>
       <Modal.Body bg="gray.100">
-        <FormControl name={`temporaryQuestion.title`} control={control}>
+        <FormControl name={`temporaryQuestion.title`} control={control} variantColor="hierarchy">
           <FormLabel htmlFor={`temporaryQuestion.title`} label={intl.formatMessage({ id: 'your-question' })} />
           <FieldInput id={`temporaryQuestion.title`} name={`temporaryQuestion.title`} control={control} type="text" />
         </FormControl>
@@ -52,8 +52,9 @@ const CustomizeQuestionModal: FC<CustomizeQuestionProps> = ({ onCancel, isNewQue
           label={intl.formatMessage({ id: 'global.description' })}
           platformLanguage={defaultLocale}
           selectedLanguage={defaultLocale}
+          variantColor="hierarchy"
         />
-        <FormControl name={`temporaryQuestion.helpText`} control={control}>
+        <FormControl name={`temporaryQuestion.helpText`} control={control} variantColor="hierarchy">
           <FormLabel htmlFor={`temporaryQuestion.helpText`} label={intl.formatMessage({ id: 'global.help.text' })}>
             <Text color="gray.500">{intl.formatMessage({ id: 'global.optional' })}</Text>
           </FormLabel>

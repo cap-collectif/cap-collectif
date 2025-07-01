@@ -59,7 +59,6 @@ const AdvancedSidePanel: React.FC<Props> = ({ currentLocale, showTransfer = fals
             name="customCode"
             placeholder={intl.formatMessage({ id: 'admin.customcode.placeholder' })}
             control={control}
-            variantSize={CapInputSize.Md}
             id="customCode"
             disabled={isDisabledExceptForAdmin}
           />

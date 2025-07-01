@@ -3,7 +3,7 @@
 exports[`<StepPageHeader /> should render correctly a consultationStep 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
@@ -33,7 +33,7 @@ Array [
 exports[`<StepPageHeader /> should render correctly a consultationStep with a description 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
@@ -63,7 +63,7 @@ Array [
 exports[`<StepPageHeader /> should render correctly a questionnaireStep 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
@@ -93,7 +93,7 @@ Array [
 exports[`<StepPageHeader /> should render correctly a selectionStep 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"
@@ -123,7 +123,7 @@ Array [
 exports[`<StepPageHeader /> should render correctly a selectionStep with interpellation 1`] = `
 Array [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
     className="StepPageHeaderstyle__StepPageHeaderContainer-dTudfb dwOCJr"

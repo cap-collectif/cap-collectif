@@ -3,14 +3,14 @@
 exports[`<ShieldPageWrapper /> renders correctly 1`] = `
 [
   <div
-    className="sc-bcXGCL cgAMhb toasts-container toasts-container--top"
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL cjQnaf"
+    className="sc-bcXGCL blDOzr"
     id="shield-mode"
   >
     <div
-      className="sc-bcXGCL eDiNZZ"
+      className="sc-bcXGCL eEeLtJ"
     >
       <img
         alt="logo"
@@ -18,7 +18,7 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         src="shield.jpg"
       />
       <div
-        className="sc-bcXGCL ikLmPK"
+        className="sc-bcXGCL eZwJBC"
       >
         <div
           className=" ql-editor wysiwyg-render"
@@ -30,11 +30,11 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         />
       </div>
       <div
-        className="sc-bcXGCL jhkeIQ"
+        className="sc-bcXGCL jjFUro"
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud erCMMd hEjMCZ cap-icon sc-oZHua kslOoH"
+          className="sc-bcXGCL sc-eJDTud cQOqtp hEjMCZ cap-icon sc-oZHua kslOoH"
           fill="none"
           height="1em"
           viewBox="0 0 12 12"
@@ -51,14 +51,14 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         </svg>
       </div>
       <div
-        className="sc-bcXGCL bcWkfs"
+        className="sc-bcXGCL kwgIPs"
         id="shield-links"
       >
         <span
-          className="sc-bcXGCL eSQmKM"
+          className="sc-bcXGCL ilOfc"
         >
           <button
-            className="sc-bcXGCL cNTyyn"
+            className="sc-bcXGCL jFTGun"
             id="privacy-policy"
             name="privacy"
             onClick={[Function]}
@@ -74,7 +74,7 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
           className="cookie-policy"
         >
           <button
-            className="sc-bcXGCL cklhXU"
+            className="sc-bcXGCL gjsubU"
             id="cookies-modal-button"
             onClick={[Function]}
             type="button"
@@ -86,10 +86,10 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
           •
         </span>
         <div
-          className="sc-bcXGCL cklhXU"
+          className="sc-bcXGCL gjsubU"
         >
           <button
-            className="sc-bcXGCL cklhXU"
+            className="sc-bcXGCL gjsubU"
             id="cookies-management"
             onClick={[Function]}
             type="button"
@@ -99,7 +99,7 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
         </div>
       </div>
       <div
-        className="sc-bcXGCL SIuho capco-powered"
+        className="sc-bcXGCL ikyfZE capco-powered"
       >
         <div
           className=" ql-editor wysiwyg-render"

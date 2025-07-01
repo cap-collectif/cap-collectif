@@ -40,6 +40,7 @@ const ProposalForm: React.FC<Props> = ({ defaultLocale, query: queryRef }) => {
   return (
     <>
       <TextEditor
+        variantColor="hierarchy"
         name={`${proposalFormKey}.description`}
         label={intl.formatMessage({
           id: 'admin.fields.proposal_form.introduction',
