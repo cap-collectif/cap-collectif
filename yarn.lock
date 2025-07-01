@@ -2964,10 +2964,10 @@
   resolved "https://registry.yarnpkg.com/@bcoe/v8-coverage/-/v8-coverage-0.2.3.tgz#75a2e8b51cb758a7553d6804a5932d7aace75c39"
   integrity sha512-0hYQ8SB4Db5zvZB4axdMHGwEaQjkZzFjQiN9LVYvIFB2nSUHW9tYpxWriPrWDASIxiaXax83REcLxuSdnGPZtw==
 
-"@cap-collectif/ui@^5.0.0":
-  version "5.0.0"
-  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-5.0.0.tgz#235bcaeeaa303a9186b4231042f1ff892de91942"
-  integrity sha512-eZ78h2fC7ch4v1LIDeBjtnPyqFHb0ZZLyXnJH76RlvHu3uWX4BY63rcMAgDzDs8KyjtOJrvMwR+umJalvf88jw==
+"@cap-collectif/ui@^5.0.1":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@cap-collectif/ui/-/ui-5.0.1.tgz#95aad6d7f9c008d82d19796bc71a3a6cb4337066"
+  integrity sha512-ubVl9w0ln1y+p1wd7K0SynrYZI+6r/N4HwgGxyY1l8jXC+YQTvZA3L72TXgAt7cMSjXDaTLWg7cbslswLmyDKw==
   dependencies:
     "@styled-system/css" "^5.1.5"
     "@styled-system/should-forward-prop" "^5.1.5"
