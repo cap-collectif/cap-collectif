@@ -315,6 +315,9 @@ export const EventListFilters = ({
               return false
             }}
           >
+          <label className='sr-only' htmlFor="event-search-input">{intl.formatMessage({
+            id: 'search.form.placeholder.term',
+          })}</label>
             <Field
               id="event-search-input"
               name="search"

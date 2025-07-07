@@ -118,7 +118,7 @@ export const Title = ({ children }: { children: JSX.Element | JSX.Element[] | st
   <Text
     className="eventHeader__title"
     width="100%"
-    as="h3"
+    as="h1"
     fontSize={[CapUIFontSize.DisplaySmall, CapUIFontSize.DisplayMedium]}
     lineHeight="initial"
     fontWeight="semibold"

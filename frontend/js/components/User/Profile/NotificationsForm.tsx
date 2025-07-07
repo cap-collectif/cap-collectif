@@ -9,6 +9,7 @@ import { AlertForm } from '../../Alert/AlertForm'
 import ChangeUserNotificationsConfigurationMutation from '../../../mutations/ChangeUserNotificationsConfigurationMutation'
 import type { NotificationsForm_viewer } from '~relay/NotificationsForm_viewer.graphql'
 import type { State } from '../../../types'
+import { colors } from '~/utils/colors'
 
 type RelayProps = {
   viewer: NotificationsForm_viewer
@@ -66,9 +67,9 @@ export class NotificationsForm extends Component<Props> {
           <Panel.Body>
             {(consent_external_communication || consent_internal_communication) && (
               <React.Fragment>
-                <p className="notifications-app-title">
+                <h3 className="notifications-app-title">
                   <FormattedMessage id="global.general" />
-                </p>
+                </h3>
                 <Table className="notifications-table" striped>
                   <thead>
                     <tr>
@@ -84,12 +85,14 @@ export class NotificationsForm extends Component<Props> {
                     {consent_internal_communication && (
                       <tr>
                         <td>
-                          <FormattedMessage
-                            id="platform-news"
-                            values={{
-                              from: parameters['global.site.communication_from'],
-                            }}
-                          />
+                          <label htmlFor="internal-platform-news" style={{ fontWeight: 'normal' }}>
+                            <FormattedMessage
+                              id="platform-news"
+                              values={{
+                                from: parameters['global.site.communication_from'],
+                              }}
+                              />
+                          </label>
                         </td>
                         <td>
                           <Field
@@ -104,12 +107,14 @@ export class NotificationsForm extends Component<Props> {
                     {consent_external_communication && (
                       <tr>
                         <td>
-                          <FormattedMessage
-                            id="information-related-to-other-activities-of"
-                            values={{
-                              organizationName: parameters['global.site.organization_name'],
-                            }}
-                          />
+                          <label htmlFor="external-platform-news" style={{ fontWeight: 'normal' }}>
+                            <FormattedMessage
+                              id="information-related-to-other-activities-of"
+                              values={{
+                                organizationName: parameters['global.site.organization_name'],
+                              }}
+                              />
+                          </label>
                         </td>
                         <td>
                           <Field
@@ -125,9 +130,9 @@ export class NotificationsForm extends Component<Props> {
                 </Table>
               </React.Fragment>
             )}
-            <p className="notifications-app-title">
+            <h3 className="notifications-app-title" color={colors.darkGray}>
               <FormattedMessage id="profile.account.notifications.app.collectstep" />
-            </p>
+            </h3>
             <Table className="notifications-table" striped>
               <thead>
                 <tr>
@@ -142,7 +147,9 @@ export class NotificationsForm extends Component<Props> {
               <tbody>
                 <tr>
                   <td>
+                    <label htmlFor="proposal-comment-mail" style={{ fontWeight: 'normal' }}>
                     <FormattedMessage id="profile.account.notifications.proposal_comment" />
+                    </label>
                   </td>
                   <td>
                     <Field

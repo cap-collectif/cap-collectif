@@ -21,6 +21,9 @@ import Media from '../../Ui/Medias/Media/Media'
 import { loginWithOpenID } from '~/redux/modules/default'
 import type { LocaleMap } from '@shared/language/SiteLanguageChangeButton'
 import config from '~/config'
+import { Text } from '@cap-collectif/ui'
+import { colors } from '~/utils/colors'
+
 type Props = {
   readonly features: FeatureToggles
   readonly loginWithOpenId: boolean
@@ -96,42 +99,42 @@ export class EditProfileTabs extends Component<Props> {
                 <Nav bsStyle="pills" stacked>
                   {viewerSsoAllowToUpdateUsername && (
                     <NavItem eventKey="profile" href="#profile">
-                      <ListGroupItem>
+                      <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
                         <span className="icon cap-id-8" />
-                        <FormattedMessage id="user.profile.title" />
+                        <Text as="h2" color={colors.primaryColor}><FormattedMessage id="user.profile.title"/></Text>
                       </ListGroupItem>
                     </NavItem>
                   )}
                   <NavItem eventKey="account" href="#account">
-                    <ListGroupItem>
+                    <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
                       <span className="icon cap-setting-gear" />
-                      <FormattedMessage id="user.profile.edit.account" />
+                      <Text as="h2" color={colors.primaryColor}><FormattedMessage id="user.profile.edit.account"/></Text>
                     </ListGroupItem>
                   </NavItem>
                   <NavItem eventKey="personal-data" href="#personal-data">
-                    <ListGroupItem>
+                    <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
                       <span className="icon cap-id-1" />
-                      <FormattedMessage id="data" />
+                      <Text as="h2" color={colors.primaryColor}><FormattedMessage id="data"/></Text>
                     </ListGroupItem>
                   </NavItem>
                   {viewerSsoAllowToUpdatePassword && (
                     <NavItem eventKey="password" href="#password">
-                      <ListGroupItem>
+                      <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
                         <span className="icon cap-key-1" />
-                        <FormattedMessage id="global.password" />
+                        <Text as="h2" color={colors.primaryColor}><FormattedMessage id="global.password"/></Text>
                       </ListGroupItem>
                     </NavItem>
                   )}
                   <NavItem href="#notifications" eventKey="notifications" className="tab">
-                    <ListGroupItem>
+                    <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
                       <span className="icon cap-bell" />
-                      <FormattedMessage id="global.notifications" />
+                      <Text as="h2" color={colors.primaryColor}><FormattedMessage id="global.notifications"/></Text>
                     </ListGroupItem>
                   </NavItem>
                   <NavItem eventKey="followings" href="#followings" className="tab">
-                    <ListGroupItem>
+                    <ListGroupItem style={{ display: 'flex', alignItems: 'center' }}>
                       <span className="icon cap-rss-2" />
-                      <FormattedMessage id="followings" />
+                      <Text as="h2" color={colors.primaryColor}><FormattedMessage id="followings"/></Text>
                     </ListGroupItem>
                   </NavItem>
                 </Nav>

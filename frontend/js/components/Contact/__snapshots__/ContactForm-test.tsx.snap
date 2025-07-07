@@ -13,7 +13,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
     />
     <Field
       component={[Function]}
-      id="group_name"
+      id="group_namecontactForm1"
       label={
         <span>
           <FormattedMessage
@@ -37,7 +37,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
     <Field
       component={[Function]}
       help="global.email.format"
-      id="group_email"
+      id="group_emailcontactForm1"
       label={
         <FormattedMessage
           id="global.email"
@@ -49,7 +49,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
     />
     <Field
       component={[Function]}
-      id="group_object"
+      id="group_objectcontactForm1"
       label={
         <FormattedMessage
           id="object"
@@ -63,7 +63,7 @@ exports[`<ContactForm /> should render correctly 1`] = `
       autosize={false}
       component={[Function]}
       divClassName="contact-form_textarea"
-      id="global.description"
+      id="global.descriptioncontactForm1"
       label={
         <FormattedMessage
           id="contact.your-message"
@@ -113,7 +113,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
     />
     <Field
       component={[Function]}
-      id="group_name"
+      id="group_namecontactForm1"
       label={
         <span>
           <FormattedMessage
@@ -137,7 +137,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
     <Field
       component={[Function]}
       help="global.email.format"
-      id="group_email"
+      id="group_emailcontactForm1"
       label={
         <FormattedMessage
           id="global.email"
@@ -149,7 +149,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
     />
     <Field
       component={[Function]}
-      id="group_object"
+      id="group_objectcontactForm1"
       label={
         <FormattedMessage
           id="object"
@@ -163,7 +163,7 @@ exports[`<ContactForm /> should render correctly with a captcha 1`] = `
       autosize={false}
       component={[Function]}
       divClassName="contact-form_textarea"
-      id="global.description"
+      id="global.descriptioncontactForm1"
       label={
         <FormattedMessage
           id="contact.your-message"
@@ -219,7 +219,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
     />
     <Field
       component={[Function]}
-      id="group_name"
+      id="group_namecontactForm1"
       label={
         <span>
           <FormattedMessage
@@ -243,7 +243,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
     <Field
       component={[Function]}
       help="global.email.format"
-      id="group_email"
+      id="group_emailcontactForm1"
       label={
         <FormattedMessage
           id="global.email"
@@ -255,7 +255,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
     />
     <Field
       component={[Function]}
-      id="group_object"
+      id="group_objectcontactForm1"
       label={
         <FormattedMessage
           id="object"
@@ -269,7 +269,7 @@ exports[`<ContactForm /> should render correctly with a connected user 1`] = `
       autosize={false}
       component={[Function]}
       divClassName="contact-form_textarea"
-      id="global.description"
+      id="global.descriptioncontactForm1"
       label={
         <FormattedMessage
           id="contact.your-message"

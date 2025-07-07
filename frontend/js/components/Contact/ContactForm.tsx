@@ -86,6 +86,9 @@ export class ContactForm extends React.Component<Props> {
       </span>
     )
     const { dispatch, contactForm, addCaptchaField, submitting, intl } = this.props
+    
+    // get unique IDs even if the form is used multiple times on the same page
+    const { contactForm: { id: contactFormId } } = this.props
     return (
       <div className="contact__form">
         <div className="block--bordered p-10">
@@ -99,7 +102,7 @@ export class ContactForm extends React.Component<Props> {
             }
             component={component}
             type="text"
-            id="group_name"
+            id={"group_name" + contactFormId}
           />
           <Field
             name="email"
@@ -109,14 +112,14 @@ export class ContactForm extends React.Component<Props> {
             })}
             component={component}
             type="email"
-            id="group_email"
+            id={"group_email" + contactFormId}
           />
           <Field
             name="title"
             label={<FormattedMessage id="object" />}
             component={component}
             type="text"
-            id="group_object"
+            id={"group_object" + contactFormId}
           />
           <Field
             name="body"
@@ -125,7 +128,7 @@ export class ContactForm extends React.Component<Props> {
             component={component}
             autosize={false}
             type="textarea"
-            id="global.description"
+            id={"global.description" + contactFormId}
           />
           {addCaptchaField && <Field id="captcha" component={component} name="captcha" type="captcha" />}
           <SubmitButton

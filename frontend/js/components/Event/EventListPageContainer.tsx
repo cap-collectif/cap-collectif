@@ -17,7 +17,7 @@ import EventPreview from './EventPreview/EventPreview'
 import { getOrderBy, ORDER_TYPE } from './Profile/EventListProfileRefetch'
 import { useSelector } from 'react-redux'
 import { GlobalState } from '~/types'
-import { Heading, toast } from '@cap-collectif/ui'
+import { CapUIFontSize, Heading, toast } from '@cap-collectif/ui'
 
 type Props = {
   readonly query: EventListPageContainer_query
@@ -137,7 +137,7 @@ export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }
       </EventFiltersContainer>
       <div id="event-page-rendered">
         {status === 'all' ? (
-          <Heading as="h4" mb={2} fontWeight={600}>
+          <Heading as="h3" mb={2} fontWeight={600} fontSize={CapUIFontSize.Headline}>
             {intl.formatMessage({ id: 'theme.show.status.future' })}
           </Heading>
         ) : null}
@@ -149,7 +149,7 @@ export const EventListPageContainer = ({ eventPageBody, query, backgroundColor }
           hide={status === 'finished'}
         />
         {status === 'all' ? (
-          <Heading as="h4" mb={2} mt={5} fontWeight={600}>
+          <Heading as="h3" mb={2} fontWeight={600} fontSize={CapUIFontSize.Headline}>
             {intl.formatMessage({ id: 'finished' })}
           </Heading>
         ) : null}

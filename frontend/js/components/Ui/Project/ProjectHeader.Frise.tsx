@@ -513,6 +513,7 @@ export const Step = ({
                 color={getTextColor()}
                 truncate={50}
                 fontWeight="semibold"
+                as="h2"
               >
                 {title}
               </Text>
@@ -573,7 +574,7 @@ export const Step = ({
             >
               <Text
                 className="frise__stepItem__link__title platform__body"
-                as="h5"
+                as="h2"
                 fontSize={CapUIFontSize.Caption}
                 lineHeight={CapUILineHeight.S}
                 fontWeight="semibold"

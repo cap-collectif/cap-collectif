@@ -101,45 +101,55 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
                   <form
                     onChange={[Function]}
                   >
-                    <Field
-                      checked={true}
-                      component={[Function]}
-                      id="all-events"
-                      name="status"
-                      type="radio"
-                      value="all"
-                    >
-                      <FormattedMessage
-                        id="global.all"
-                        values={Object {}}
-                      />
-                    </Field>
-                    <Field
-                      checked={false}
-                      component={[Function]}
-                      id="ongoing-and-future-events"
-                      name="status"
-                      type="radio"
-                      value="ongoing-and-future"
-                    >
-                      <FormattedMessage
-                        id="theme.show.status.future"
-                        values={Object {}}
-                      />
-                    </Field>
-                    <Field
-                      checked={false}
-                      component={[Function]}
-                      id="finished-events"
-                      name="status"
-                      type="radio"
-                      value="finished"
-                    >
-                      <FormattedMessage
-                        id="finished"
-                        values={Object {}}
-                      />
-                    </Field>
+                    <fieldset>
+                      <legend
+                        className="sr-only"
+                      >
+                        <FormattedMessage
+                          id="filter-by"
+                          values={Object {}}
+                        />
+                      </legend>
+                      <Field
+                        checked={true}
+                        component={[Function]}
+                        id="all-events"
+                        name="status"
+                        type="radio"
+                        value="all"
+                      >
+                        <FormattedMessage
+                          id="global.all"
+                          values={Object {}}
+                        />
+                      </Field>
+                      <Field
+                        checked={false}
+                        component={[Function]}
+                        id="ongoing-and-future-events"
+                        name="status"
+                        type="radio"
+                        value="ongoing-and-future"
+                      >
+                        <FormattedMessage
+                          id="theme.show.status.future"
+                          values={Object {}}
+                        />
+                      </Field>
+                      <Field
+                        checked={false}
+                        component={[Function]}
+                        id="finished-events"
+                        name="status"
+                        type="radio"
+                        value="finished"
+                      >
+                        <FormattedMessage
+                          id="finished"
+                          values={Object {}}
+                        />
+                      </Field>
+                    </fieldset>
                   </form>
                 </EventListStatusFilter__StatusPopover>
               </Overlay>
@@ -160,45 +170,55 @@ exports[`<EventListStatusFilters /> renders correctly with all status 1`] = `
       <form
         onChange={[Function]}
       >
-        <Field
-          checked={true}
-          component={[Function]}
-          id="all-events"
-          name="status"
-          type="radio"
-          value="all"
-        >
-          <FormattedMessage
-            id="global.all"
-            values={Object {}}
-          />
-        </Field>
-        <Field
-          checked={false}
-          component={[Function]}
-          id="ongoing-and-future-events"
-          name="status"
-          type="radio"
-          value="ongoing-and-future"
-        >
-          <FormattedMessage
-            id="theme.show.status.future"
-            values={Object {}}
-          />
-        </Field>
-        <Field
-          checked={false}
-          component={[Function]}
-          id="finished-events"
-          name="status"
-          type="radio"
-          value="finished"
-        >
-          <FormattedMessage
-            id="finished"
-            values={Object {}}
-          />
-        </Field>
+        <fieldset>
+          <legend
+            className="sr-only"
+          >
+            <FormattedMessage
+              id="filter-by"
+              values={Object {}}
+            />
+          </legend>
+          <Field
+            checked={true}
+            component={[Function]}
+            id="all-events"
+            name="status"
+            type="radio"
+            value="all"
+          >
+            <FormattedMessage
+              id="global.all"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            checked={false}
+            component={[Function]}
+            id="ongoing-and-future-events"
+            name="status"
+            type="radio"
+            value="ongoing-and-future"
+          >
+            <FormattedMessage
+              id="theme.show.status.future"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            checked={false}
+            component={[Function]}
+            id="finished-events"
+            name="status"
+            type="radio"
+            value="finished"
+          >
+            <FormattedMessage
+              id="finished"
+              values={Object {}}
+            />
+          </Field>
+        </fieldset>
       </form>
     </EventListStatusFilter__StatusPopover>
   </Overlay>
@@ -296,45 +316,55 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
                   <form
                     onChange={[Function]}
                   >
-                    <Field
-                      checked={false}
-                      component={[Function]}
-                      id="all-events"
-                      name="status"
-                      type="radio"
-                      value="all"
-                    >
-                      <FormattedMessage
-                        id="global.all"
-                        values={Object {}}
-                      />
-                    </Field>
-                    <Field
-                      checked={false}
-                      component={[Function]}
-                      id="ongoing-and-future-events"
-                      name="status"
-                      type="radio"
-                      value="ongoing-and-future"
-                    >
-                      <FormattedMessage
-                        id="theme.show.status.future"
-                        values={Object {}}
-                      />
-                    </Field>
-                    <Field
-                      checked={true}
-                      component={[Function]}
-                      id="finished-events"
-                      name="status"
-                      type="radio"
-                      value="finished"
-                    >
-                      <FormattedMessage
-                        id="finished"
-                        values={Object {}}
-                      />
-                    </Field>
+                    <fieldset>
+                      <legend
+                        className="sr-only"
+                      >
+                        <FormattedMessage
+                          id="filter-by"
+                          values={Object {}}
+                        />
+                      </legend>
+                      <Field
+                        checked={false}
+                        component={[Function]}
+                        id="all-events"
+                        name="status"
+                        type="radio"
+                        value="all"
+                      >
+                        <FormattedMessage
+                          id="global.all"
+                          values={Object {}}
+                        />
+                      </Field>
+                      <Field
+                        checked={false}
+                        component={[Function]}
+                        id="ongoing-and-future-events"
+                        name="status"
+                        type="radio"
+                        value="ongoing-and-future"
+                      >
+                        <FormattedMessage
+                          id="theme.show.status.future"
+                          values={Object {}}
+                        />
+                      </Field>
+                      <Field
+                        checked={true}
+                        component={[Function]}
+                        id="finished-events"
+                        name="status"
+                        type="radio"
+                        value="finished"
+                      >
+                        <FormattedMessage
+                          id="finished"
+                          values={Object {}}
+                        />
+                      </Field>
+                    </fieldset>
                   </form>
                 </EventListStatusFilter__StatusPopover>
               </Overlay>
@@ -355,45 +385,55 @@ exports[`<EventListStatusFilters /> renders correctly with finished status & tru
       <form
         onChange={[Function]}
       >
-        <Field
-          checked={false}
-          component={[Function]}
-          id="all-events"
-          name="status"
-          type="radio"
-          value="all"
-        >
-          <FormattedMessage
-            id="global.all"
-            values={Object {}}
-          />
-        </Field>
-        <Field
-          checked={false}
-          component={[Function]}
-          id="ongoing-and-future-events"
-          name="status"
-          type="radio"
-          value="ongoing-and-future"
-        >
-          <FormattedMessage
-            id="theme.show.status.future"
-            values={Object {}}
-          />
-        </Field>
-        <Field
-          checked={true}
-          component={[Function]}
-          id="finished-events"
-          name="status"
-          type="radio"
-          value="finished"
-        >
-          <FormattedMessage
-            id="finished"
-            values={Object {}}
-          />
-        </Field>
+        <fieldset>
+          <legend
+            className="sr-only"
+          >
+            <FormattedMessage
+              id="filter-by"
+              values={Object {}}
+            />
+          </legend>
+          <Field
+            checked={false}
+            component={[Function]}
+            id="all-events"
+            name="status"
+            type="radio"
+            value="all"
+          >
+            <FormattedMessage
+              id="global.all"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            checked={false}
+            component={[Function]}
+            id="ongoing-and-future-events"
+            name="status"
+            type="radio"
+            value="ongoing-and-future"
+          >
+            <FormattedMessage
+              id="theme.show.status.future"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            checked={true}
+            component={[Function]}
+            id="finished-events"
+            name="status"
+            type="radio"
+            value="finished"
+          >
+            <FormattedMessage
+              id="finished"
+              values={Object {}}
+            />
+          </Field>
+        </fieldset>
       </form>
     </EventListStatusFilter__StatusPopover>
   </Overlay>
@@ -495,45 +535,55 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
                   <form
                     onChange={[Function]}
                   >
-                    <Field
-                      checked={false}
-                      component={[Function]}
-                      id="all-events"
-                      name="status"
-                      type="radio"
-                      value="all"
-                    >
-                      <FormattedMessage
-                        id="global.all"
-                        values={Object {}}
-                      />
-                    </Field>
-                    <Field
-                      checked={true}
-                      component={[Function]}
-                      id="ongoing-and-future-events"
-                      name="status"
-                      type="radio"
-                      value="ongoing-and-future"
-                    >
-                      <FormattedMessage
-                        id="theme.show.status.future"
-                        values={Object {}}
-                      />
-                    </Field>
-                    <Field
-                      checked={false}
-                      component={[Function]}
-                      id="finished-events"
-                      name="status"
-                      type="radio"
-                      value="finished"
-                    >
-                      <FormattedMessage
-                        id="finished"
-                        values={Object {}}
-                      />
-                    </Field>
+                    <fieldset>
+                      <legend
+                        className="sr-only"
+                      >
+                        <FormattedMessage
+                          id="filter-by"
+                          values={Object {}}
+                        />
+                      </legend>
+                      <Field
+                        checked={false}
+                        component={[Function]}
+                        id="all-events"
+                        name="status"
+                        type="radio"
+                        value="all"
+                      >
+                        <FormattedMessage
+                          id="global.all"
+                          values={Object {}}
+                        />
+                      </Field>
+                      <Field
+                        checked={true}
+                        component={[Function]}
+                        id="ongoing-and-future-events"
+                        name="status"
+                        type="radio"
+                        value="ongoing-and-future"
+                      >
+                        <FormattedMessage
+                          id="theme.show.status.future"
+                          values={Object {}}
+                        />
+                      </Field>
+                      <Field
+                        checked={false}
+                        component={[Function]}
+                        id="finished-events"
+                        name="status"
+                        type="radio"
+                        value="finished"
+                      >
+                        <FormattedMessage
+                          id="finished"
+                          values={Object {}}
+                        />
+                      </Field>
+                    </fieldset>
                   </form>
                 </EventListStatusFilter__StatusPopover>
               </Overlay>
@@ -554,45 +604,55 @@ exports[`<EventListStatusFilters /> renders correctly with ongoing-and-future st
       <form
         onChange={[Function]}
       >
-        <Field
-          checked={false}
-          component={[Function]}
-          id="all-events"
-          name="status"
-          type="radio"
-          value="all"
-        >
-          <FormattedMessage
-            id="global.all"
-            values={Object {}}
-          />
-        </Field>
-        <Field
-          checked={true}
-          component={[Function]}
-          id="ongoing-and-future-events"
-          name="status"
-          type="radio"
-          value="ongoing-and-future"
-        >
-          <FormattedMessage
-            id="theme.show.status.future"
-            values={Object {}}
-          />
-        </Field>
-        <Field
-          checked={false}
-          component={[Function]}
-          id="finished-events"
-          name="status"
-          type="radio"
-          value="finished"
-        >
-          <FormattedMessage
-            id="finished"
-            values={Object {}}
-          />
-        </Field>
+        <fieldset>
+          <legend
+            className="sr-only"
+          >
+            <FormattedMessage
+              id="filter-by"
+              values={Object {}}
+            />
+          </legend>
+          <Field
+            checked={false}
+            component={[Function]}
+            id="all-events"
+            name="status"
+            type="radio"
+            value="all"
+          >
+            <FormattedMessage
+              id="global.all"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            checked={true}
+            component={[Function]}
+            id="ongoing-and-future-events"
+            name="status"
+            type="radio"
+            value="ongoing-and-future"
+          >
+            <FormattedMessage
+              id="theme.show.status.future"
+              values={Object {}}
+            />
+          </Field>
+          <Field
+            checked={false}
+            component={[Function]}
+            id="finished-events"
+            name="status"
+            type="radio"
+            value="finished"
+          >
+            <FormattedMessage
+              id="finished"
+              values={Object {}}
+            />
+          </Field>
+        </fieldset>
       </form>
     </EventListStatusFilter__StatusPopover>
   </Overlay>

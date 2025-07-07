@@ -152,8 +152,17 @@ export const SelectContainer = styled.div.attrs({
         border-radius: 0 4px 4px 0;
         padding: 0 8px;
       }
-    `}
-`
+    `};
+      .react-select__indicator svg {
+        fill: ${colors.gray['700']};
+        &:hover {
+          fill: ${colors.gray['800']};
+        }
+      }
+      .react-select__placeholder {
+        color: ${colors.gray['700']};
+      }
+    `
 
 // Accessibility message
 const ariaLiveMessage = (intl: IntlShape): AriaLiveMessage => ({

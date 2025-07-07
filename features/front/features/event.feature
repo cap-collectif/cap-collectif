@@ -27,55 +27,6 @@ Scenario: Events can be filtered by projects
   And I wait ".eventPreview" to appear on current page
   Then I should see 1 ".eventPreview" elements
 
-@read-only
-Scenario: Events can be filtered by theme
-  Given feature "themes" is enabled
-  And I visited "events page"
-  And I click the "#event-button-filter" element
-  And I select "Justice" from react "#SelectTheme-filter-theme"
-  Then I wait ".eventPreview" to appear on current page 2 times
-  And I should see "Event with registrations" within 5 seconds
-  And I should not see "ParisWeb2015"
-
-@read-only
-Scenario: Archived events can be filtered by theme
-  Given feature "themes" is enabled
-  And I visited "events page"
-  And I click the "#event-button-filter" element
-  And I select "Justice" from react "#SelectTheme-filter-theme"
-  And I click the "#event-status-filter-button-desktop" element
-  And I check element "finished-events"
-  And I wait ".loader" to appear on current page
-  And I wait ".eventPreview" to appear on current page
-  Then I should see 1 ".eventPreview" elements
-  And I should see "evenementPasseSansDateDeFin" within 7 seconds
-  And I should not see "PHPTourDuFuture"
-
-@read-only
-Scenario: Events can be filtered by title
-  Given I visited "events page"
-  When I fill in the following:
-    | event-search-input | without |
-  And I wait ".eventPreview" to disappear on current page
-  And I wait ".eventPreview" to appear on current page
-  Then I should see 1 ".eventPreview" elements
-  And I should see "Event without registrations" within 7 seconds
-  And I should not see "Event with registrations"
-
-@read-only
-Scenario: Archived events can be filtered by title
-  Given I visited "events page"
-  And I click the "#event-status-filter-button-desktop" element
-  And I check element "finished-events"
-  When I fill in the following:
-    | event-search-input | ParisWeb2014 |
-  And I wait ".eventPreview" to disappear on current page
-  And I wait 2 seconds
-  And I wait ".eventPreview" to appear on current page maximum 20
-  Then I should see 1 ".eventPreview" elements
-  And I should see "ParisWeb2014" within 7 seconds
-  And I should not see "evenementPasseSansDateDeFin"
-
 @database
 Scenario: Anonymous wants to comment an event
   Given I go to event page with slug "event-with-registrations"

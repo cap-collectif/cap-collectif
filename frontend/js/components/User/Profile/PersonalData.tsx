@@ -805,9 +805,9 @@ export class PersonalData extends Component<Props, PersonalDataState> {
         </form>
         <Panel>
           <Panel.Body>
-            <h2 className="page-header">
+            <h3 className="page-header" style={{ marginTop: 0 }}>
               <FormattedMessage id="label_export_download" />
-            </h2>
+            </h3>
             <div className="horizontal_field_with_border_top">
               <span className="col-sm-3 control-label">
                 <FormattedMessage id="your-data" />

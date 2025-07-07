@@ -46,7 +46,7 @@ export const LoginModal = ({ query: queryFragment, show, onClose }: Props) => {
       hideOnClickOutside={false}
     >
       <Modal.Header id="contained-modal-title-lg">
-        <Heading as="h4">{intl.formatMessage({ id: 'login.with' })}</Heading>
+        <Heading as="h2">{intl.formatMessage({ id: 'login.with' })}</Heading>
       </Modal.Header>
       <Modal.Body>
         <LoginBox query={query} />

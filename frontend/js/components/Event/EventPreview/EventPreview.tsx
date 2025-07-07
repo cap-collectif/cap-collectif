@@ -169,7 +169,7 @@ export const EventPreview = ({
         <Content>
           <TitleContainer>
             <Icon name={ICON_NAME.eventPhysical} size={17} color={colors.lightBlue} />
-            <Card.Title>
+            <Card.Title tagName='h4'>
               <a href={url} title={title}>
                 <Truncate lines={2}>{title}</Truncate>
               </a>

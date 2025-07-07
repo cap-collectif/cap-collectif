@@ -27,7 +27,7 @@ exports[`<CommentDate /> should render correctly 1`] = `
     }
   >
     <span>
-      il y a 7 ans
+      il y a 8 ans
     </span>
   </Tooltip>
   <span>
@@ -67,7 +67,7 @@ exports[`<CommentDate /> should render correctly with trashed false 1`] = `
     }
   >
     <span>
-      il y a 7 ans
+      il y a 8 ans
     </span>
   </Tooltip>
   <span>

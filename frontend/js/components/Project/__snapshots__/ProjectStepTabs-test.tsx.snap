@@ -92,12 +92,12 @@ Array [
                         }
                       }
                     >
-                      <p
+                      <h2
                         className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Présentation"
                       >
                         Présentation
-                      </p>
+                      </h2>
                       <p
                         className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       />
@@ -163,12 +163,12 @@ Array [
                       }
                     }
                   >
-                    <p
+                    <h2
                       className="sc-bcXGCL gmSubI cap-text frise__stepItem__link__title platform__body"
                       title="Consultation"
                     >
                       Consultation
-                    </p>
+                    </h2>
                     <p
                       className="sc-bcXGCL cMvEYO cap-text frise__stepItem__link__content platform__body"
                     >
@@ -238,12 +238,12 @@ Array [
                         }
                       }
                     >
-                      <p
+                      <h2
                         className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Dépôt"
                       >
                         Dépôt
-                      </p>
+                      </h2>
                       <p
                         className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       >
@@ -435,12 +435,12 @@ Array [
                         }
                       }
                     >
-                      <p
+                      <h2
                         className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Présentation"
                       >
                         Présentation
-                      </p>
+                      </h2>
                       <p
                         className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       />
@@ -506,12 +506,12 @@ Array [
                       }
                     }
                   >
-                    <p
+                    <h2
                       className="sc-bcXGCL gmSubI cap-text frise__stepItem__link__title platform__body"
                       title="Consultation"
                     >
                       Consultation
-                    </p>
+                    </h2>
                     <p
                       className="sc-bcXGCL cMvEYO cap-text frise__stepItem__link__content platform__body"
                     >
@@ -581,12 +581,12 @@ Array [
                         }
                       }
                     >
-                      <p
+                      <h2
                         className="sc-bcXGCL ldvsbo cap-text frise__stepItem__link__title platform__body"
                         title="Dépôt"
                       >
                         Dépôt
-                      </p>
+                      </h2>
                       <p
                         className="sc-bcXGCL cJDArW cap-text frise__stepItem__link__content platform__body"
                       >

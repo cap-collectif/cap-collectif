@@ -38,12 +38,19 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
         componentClass="h4"
         id="contained-modal-title-lg"
       >
-        <b>
+        <h2
+          style={
+            Object {
+              "color": "#000000",
+              "fontWeight": "bold",
+            }
+          }
+        >
           <FormattedMessage
             id="account-delete-confirmation"
             values={Object {}}
           />
-        </b>
+        </h2>
       </ModalTitle>
     </ModalHeader>
     <ModalBody
@@ -122,7 +129,15 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
             />
           </b>
         </p>
-        <div>
+        <fieldset>
+          <legend
+            className="sr-only"
+          >
+            <FormattedMessage
+              id="deleting-options"
+              values={Object {}}
+            />
+          </legend>
           <Uncontrolled(Panel)
             bsStyle="primary"
             className="delete__panel__checked"
@@ -323,7 +338,7 @@ exports[`<DeleteAccountModal /> should render an hidden modal 1`] = `
               </div>
             </PanelBody>
           </Uncontrolled(Panel)>
-        </div>
+        </fieldset>
       </form>
     </ModalBody>
     <ModalFooter
@@ -400,12 +415,19 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
         componentClass="h4"
         id="contained-modal-title-lg"
       >
-        <b>
+        <h2
+          style={
+            Object {
+              "color": "#000000",
+              "fontWeight": "bold",
+            }
+          }
+        >
           <FormattedMessage
             id="account-delete-confirmation"
             values={Object {}}
           />
-        </b>
+        </h2>
       </ModalTitle>
     </ModalHeader>
     <ModalBody
@@ -484,7 +506,15 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
             />
           </b>
         </p>
-        <div>
+        <fieldset>
+          <legend
+            className="sr-only"
+          >
+            <FormattedMessage
+              id="deleting-options"
+              values={Object {}}
+            />
+          </legend>
           <Uncontrolled(Panel)
             bsStyle="primary"
             className="delete__panel__checked"
@@ -685,7 +715,7 @@ exports[`<DeleteAccountModal /> should render an visible modal 1`] = `
               </div>
             </PanelBody>
           </Uncontrolled(Panel)>
-        </div>
+        </fieldset>
       </form>
     </ModalBody>
     <ModalFooter

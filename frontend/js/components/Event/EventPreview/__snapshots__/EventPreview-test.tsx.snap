@@ -62,7 +62,7 @@ exports[`<EventPreview /> should render  when illustration not displayed 1`] = `
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -185,7 +185,7 @@ exports[`<EventPreview /> should render correctly 1`] = `
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -323,7 +323,7 @@ exports[`<EventPreview /> should render correctly when guest enabled 1`] = `
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -469,7 +469,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag com
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -616,7 +616,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag reg
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -763,7 +763,7 @@ exports[`<EventPreview /> should render correctly when guest enabled and tag res
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -881,7 +881,7 @@ exports[`<EventPreview /> should render correctly when no date 1`] = `
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -1001,7 +1001,7 @@ exports[`<EventPreview /> should render correctly when no googleMapsAddress 1`] 
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"
@@ -1110,7 +1110,7 @@ exports[`<EventPreview /> should render correctly when no themes 1`] = `
           size={17}
         />
         <Title
-          tagName="h3"
+          tagName="h4"
         >
           <a
             href="#"

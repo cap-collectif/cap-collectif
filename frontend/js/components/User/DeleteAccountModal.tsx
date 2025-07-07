@@ -9,6 +9,7 @@ import type { DeleteAccountType } from '~relay/DeleteAccountMutation.graphql'
 import DefaultAvatar from './DefaultAvatar'
 import CloseButton from '../Form/CloseButton'
 import DeleteAccountMutation from '../../mutations/DeleteAccountMutation'
+import { colors } from '~/utils/colors'
 
 const formName = 'delete-user'
 type RelayProps = {
@@ -80,9 +81,9 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
         >
           <Modal.Header closeButton>
             <Modal.Title id="contained-modal-title-lg">
-              <b>
+              <h2 style={{ color: colors.black, fontWeight: 'bold' }}>
                 <FormattedMessage id="account-delete-confirmation" />
-              </b>
+              </h2>
             </Modal.Title>
           </Modal.Header>
           <Modal.Body>
@@ -128,7 +129,10 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                   <FormattedMessage id="deleting-options" />
                 </b>
               </p>
-              <div>
+              <fieldset>
+                <legend className="sr-only">
+                  <FormattedMessage id="deleting-options" />
+                </legend>
                 <Panel
                   bsStyle={softPanelChecked ? 'primary' : 'default'}
                   className={softPanelChecked}
@@ -238,7 +242,8 @@ export class DeleteAccountModal extends Component<Props, ModalState> {
                     </div>
                   </Panel.Body>
                 </Panel>
-              </div>
+              </fieldset>
+
             </form>
           </Modal.Body>
           <Modal.Footer>

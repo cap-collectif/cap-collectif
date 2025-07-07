@@ -79,36 +79,41 @@ export class EventListStatusFilter extends React.Component<Props, State> {
     return (
       <StatusPopover>
         <form onChange={this.handleToggle}>
-          <Field
-            component={fieldComponent}
-            id="all-events"
-            name="status"
-            type="radio"
-            value="all"
-            checked={status === 'all'}
-          >
-            <FormattedMessage id="global.all" />
-          </Field>
-          <Field
-            component={fieldComponent}
-            id="ongoing-and-future-events"
-            name="status"
-            type="radio"
-            value="ongoing-and-future"
-            checked={status === 'ongoing-and-future'}
-          >
-            <FormattedMessage id="theme.show.status.future" />
-          </Field>
-          <Field
-            component={fieldComponent}
-            id="finished-events"
-            name="status"
-            type="radio"
-            value="finished"
-            checked={status === 'finished'}
-          >
-            <FormattedMessage id="finished" />
-          </Field>
+          <fieldset>
+            <legend className="sr-only">
+              <FormattedMessage id="filter-by" />
+            </legend>
+            <Field
+              component={fieldComponent}
+              id="all-events"
+              name="status"
+              type="radio"
+              value="all"
+              checked={status === 'all'}
+              >
+              <FormattedMessage id="global.all" />
+            </Field>
+            <Field
+              component={fieldComponent}
+              id="ongoing-and-future-events"
+              name="status"
+              type="radio"
+              value="ongoing-and-future"
+              checked={status === 'ongoing-and-future'}
+              >
+              <FormattedMessage id="theme.show.status.future" />
+            </Field>
+            <Field
+              component={fieldComponent}
+              id="finished-events"
+              name="status"
+              type="radio"
+              value="finished"
+              checked={status === 'finished'}
+              >
+              <FormattedMessage id="finished" />
+            </Field>
+          </fieldset>
         </form>
       </StatusPopover>
     )

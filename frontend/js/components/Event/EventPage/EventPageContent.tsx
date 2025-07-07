@@ -79,7 +79,7 @@ export const About = ({ children }: { children?: JSX.Element | JSX.Element[] | s
   if (!children) return null
   return (
     <>
-      <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} lineHeight="initial" mb={4}>
+      <Text as="h2" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} lineHeight="initial" mb={4}>
         {intl.formatMessage({
           id: 'about-that-event',
         })}
@@ -106,7 +106,7 @@ const renderDate = (startAt: string, endAt: string | null | undefined, intl: Int
 
   return (
     <>
-      <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mb={2}>
+      <Text as="h2" color="neutral-gray.900" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mb={2}>
         {intl.formatMessage({
           id: 'global.admin.published_at',
         })}
@@ -185,7 +185,7 @@ export const EventPageContent = ({ queryRef }: Props) => {
               : null}
             {googleMapsAddress && (
               <>
-                <Text as="span" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mt={8} mb={2}>
+                <Text as="h2" color="neutral-gray.900" fontWeight={600} fontSize={CapUIFontSize.DisplaySmall} mt={8} mb={2}>
                   {intl.formatMessage({
                     id: 'admin.fields.event.group_address',
                   })}

@@ -72,14 +72,25 @@ exports[`<EditProfileTabs /> should not render profile tab, if sso doesn't allow
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-setting-gear"
                 />
-                <FormattedMessage
-                  id="user.profile.edit.account"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="user.profile.edit.account"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -91,14 +102,25 @@ exports[`<EditProfileTabs /> should not render profile tab, if sso doesn't allow
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-id-1"
                 />
-                <FormattedMessage
-                  id="data"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="data"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -110,14 +132,25 @@ exports[`<EditProfileTabs /> should not render profile tab, if sso doesn't allow
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-key-1"
                 />
-                <FormattedMessage
-                  id="global.password"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="global.password"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -130,14 +163,25 @@ exports[`<EditProfileTabs /> should not render profile tab, if sso doesn't allow
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-bell"
                 />
-                <FormattedMessage
-                  id="global.notifications"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="global.notifications"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -150,14 +194,25 @@ exports[`<EditProfileTabs /> should not render profile tab, if sso doesn't allow
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-rss-2"
                 />
-                <FormattedMessage
-                  id="followings"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="followings"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
           </Nav>
@@ -357,14 +412,25 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-id-8"
                 />
-                <FormattedMessage
-                  id="user.profile.title"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="user.profile.title"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -376,14 +442,25 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-setting-gear"
                 />
-                <FormattedMessage
-                  id="user.profile.edit.account"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="user.profile.edit.account"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -395,14 +472,25 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-id-1"
                 />
-                <FormattedMessage
-                  id="data"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="data"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -414,14 +502,25 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-key-1"
                 />
-                <FormattedMessage
-                  id="global.password"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="global.password"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -434,14 +533,25 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-bell"
                 />
-                <FormattedMessage
-                  id="global.notifications"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="global.notifications"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -454,14 +564,25 @@ exports[`<EditProfileTabs /> should render all tabs 1`] = `
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-rss-2"
                 />
-                <FormattedMessage
-                  id="followings"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="followings"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
           </Nav>
@@ -661,14 +782,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-id-8"
                 />
-                <FormattedMessage
-                  id="user.profile.title"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="user.profile.title"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -680,14 +812,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-setting-gear"
                 />
-                <FormattedMessage
-                  id="user.profile.edit.account"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="user.profile.edit.account"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -699,14 +842,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-id-1"
                 />
-                <FormattedMessage
-                  id="data"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="data"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -719,14 +873,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-bell"
                 />
-                <FormattedMessage
-                  id="global.notifications"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="global.notifications"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
             <NavItem
@@ -739,14 +904,25 @@ exports[`<EditProfileTabs /> should render all tabs except profile, password and
               <ListGroupItem
                 bsClass="list-group-item"
                 listItem={false}
+                style={
+                  Object {
+                    "alignItems": "center",
+                    "display": "flex",
+                  }
+                }
               >
                 <span
                   className="icon cap-rss-2"
                 />
-                <FormattedMessage
-                  id="followings"
-                  values={Object {}}
-                />
+                <Text
+                  as="h2"
+                  color="#0388cc"
+                >
+                  <FormattedMessage
+                    id="followings"
+                    values={Object {}}
+                  />
+                </Text>
               </ListGroupItem>
             </NavItem>
           </Nav>

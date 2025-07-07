@@ -44,8 +44,8 @@ exports[`<LoginModal /> render correctly 1`] = `
           <div
             className="sc-bcXGCL ejBfRc"
           >
-            <h4
-              className="sc-bcXGCL osejp cap-heading"
+            <h2
+              className="sc-bcXGCL dIdmc cap-heading"
               id="modal-title"
               style={
                 {
@@ -55,7 +55,7 @@ exports[`<LoginModal /> render correctly 1`] = `
               }
             >
               login.with
-            </h4>
+            </h2>
           </div>
           <button
             aria-describedby="modal-title"

@@ -42,6 +42,7 @@ const ProjectListSearch: FC<Props> = ({ dispatch }) => {
         groupClassName="project-search-group pull-right w-100"
         value={termInputValue}
         onChange={handleChangeTermInput}
+        aria-invalid={undefined}
       />
     </form>
   )
