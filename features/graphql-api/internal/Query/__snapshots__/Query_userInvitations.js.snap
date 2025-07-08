@@ -30,6 +30,14 @@ Object {
       },
       Object {
         "node": Object {
+          "email": "myriam@cap-collectif.com",
+          "id": "VXNlckludml0ZTphbm90aGVyQWNjZXB0ZWRJbnZpdGF0aW9u",
+          "isAdmin": true,
+          "isProjectAdmin": true,
+        },
+      },
+      Object {
+        "node": Object {
           "email": "failed@invitation.com",
           "id": "VXNlckludml0ZTpmYWlsZWRJbnZpdGF0aW9u",
           "isAdmin": false,

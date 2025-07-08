@@ -108,10 +108,10 @@ describe('User invitation as admin', () => {
     cy.directLoginAs('admin')
     UserInvitePage.visitInviteUser()
     cy.wait('@inviteQuery', { timeout: 5000 })
-    UserInvitePage.getInvitationRows().should('have.length', 13)
+    UserInvitePage.getInvitationRows().should('have.length', 14)
     UserInvitePage.getQuickActionDeleteButton().click()
     cy.wait('@CancelUserInvitationsMutation', { timeout: 5000 })
-    UserInvitePage.getInvitationRows().should('have.length', 12)
+    UserInvitePage.getInvitationRows().should('have.length', 13)
   })
 
   it('deletes invitations by checking boxes and clicking the delete button', () => {
@@ -121,7 +121,7 @@ describe('User invitation as admin', () => {
     UserInvitePage.visitInviteUser()
     UserInvitePage.getDeleteButton().should('not.exist')
     UserInvitePage.clickAllRowsCheckbox('check')
-    UserInvitePage.getInvitationRows().should('have.length', 12)
+    UserInvitePage.getInvitationRows().should('have.length', 13)
     UserInvitePage.getDeleteButton().should('exist').click()
     UserInvitePage.confirmDelete()
     // eslint-disable-next-line jest/valid-expect-in-promise

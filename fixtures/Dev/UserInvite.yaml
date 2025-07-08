@@ -64,6 +64,14 @@ Capco\AppBundle\Entity\UserInvite:
         isAdmin: true
         isProjectAdmin: true
         token: 'acceptedtoken'
+    anotherAcceptedInvitation:
+        id: 'anotherAcceptedInvitation'
+        createdAt: <(new \DateTime('2020-03-04 00:00:51'))>
+        email: 'myriam@cap-collectif.com'
+        expiresAt: <(new \DateTime('2030-01-01 00:00:10'))>
+        isAdmin: true
+        isProjectAdmin: true
+        token: 'acceptedtoken666'
     failedInvitation:
         id: 'failedInvitation'
         createdAt: <(new \DateTime('2020-03-04 00:00:51'))>

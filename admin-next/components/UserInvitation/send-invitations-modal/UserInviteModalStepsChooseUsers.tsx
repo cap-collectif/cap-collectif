@@ -10,6 +10,9 @@ import {
   Heading,
   MultiStepModal,
   useMultiStepModal,
+  Text,
+  CapUIFontSize,
+  CapUILineHeight,
 } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useFormContext } from 'react-hook-form'
@@ -17,6 +20,24 @@ import { MAX_EMAILS } from '../utils'
 import { CsvEmails } from '@components/UserInvitation/UserInvite.type'
 import { splitEmailsFromString } from '@shared/utils/emailsInput'
 import ImportMembersUploader from './ImportMembersUploader'
+import { graphql } from 'react-relay'
+import { getInvitationsAvailability } from '@components/UserInvitation/utils'
+import { emailAvailabilitiesDefault } from '@components/UserInvitation/utils'
+
+const USER_FETCH_QUERY = graphql`
+  query UserInviteModalStepsChooseUsers_UsersAvailabilityQuery($emails: [String!]!) {
+    userInvitationsAvailabilitySearch(emails: $emails) {
+      totalCount
+      edges {
+        node {
+          email
+          availableForUser
+          availableForInvitation
+        }
+      }
+    }
+  }
+`
 
 type Props = {
   id: string
@@ -40,6 +61,45 @@ export const UserInviteModalStepsChooseUsers = ({ id, label }: Props): JSX.Eleme
 
   const inputEmails: string = watch('inputEmails')
   const csvEmails: CsvEmails = watch('csvEmails')
+
+  const [inputEmailsAvailability, setInputEmailsAvailability] = React.useState(emailAvailabilitiesDefault)
+
+  const checkInputEmailsAvailability = async () => {
+    const emails = splitEmailsFromString(inputEmails).filter(isEmail)
+    if (emails.length === 0) {
+      setInputEmailsAvailability(emailAvailabilitiesDefault)
+      return
+    }
+    const availability = await getInvitationsAvailability('', emails, USER_FETCH_QUERY)
+    setInputEmailsAvailability(availability ?? emailAvailabilitiesDefault)
+  }
+
+  const renderInputEmailsAvailabilityMessages = () => {
+    if (inputEmails === '') return null
+    const alreadyRegistered = inputEmailsAvailability?.alreadyRegistered ?? []
+    const alreadyRegisteredCount = alreadyRegistered.length
+
+    return (
+      <Flex direction="column">
+        {alreadyRegisteredCount === 1 && (
+          <Text color="neutral-gray.700" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.Normal}>
+            {intl.formatMessage({ id: 'invitations.already-used-email' }, { email: alreadyRegistered[0] })}
+          </Text>
+        )}
+        {alreadyRegisteredCount > 1 && (
+          <Text color="neutral-gray.700" fontSize={CapUIFontSize.BodySmall} lineHeight={CapUILineHeight.Normal}>
+            {intl.formatMessage({ id: 'invitations.already-used-emails' })}
+            {alreadyRegistered.map((email, index) => (
+              <Text key={email}>
+                {email}
+                {index < alreadyRegisteredCount - 1 ? ', ' : ''}
+              </Text>
+            ))}
+          </Text>
+        )}
+      </Flex>
+    )
+  }
 
   const validateInputEmailsFormat = () => {
     if (inputEmails === '') {
@@ -102,22 +162,28 @@ export const UserInviteModalStepsChooseUsers = ({ id, label }: Props): JSX.Eleme
 
       <MultiStepModal.Body>
         <Flex direction="column" spacing={4}>
-          <FormControl name="inputEmails" key="inputEmails" control={control}>
-            <FormLabel
-              htmlFor="inputEmails"
-              label={intl.formatMessage({
-                id: 'entering-email-addresses',
-              })}
-            />
-            <FormGuideline>{intl.formatMessage({ id: 'enter-email-address' })}</FormGuideline>
-            <FieldInput
-              control={control}
-              type="text"
-              id="inputEmails"
-              name="inputEmails"
-              onBlur={validateInputEmailsFormat}
-            />
-          </FormControl>
+          <Flex direction="column" spacing={1}>
+            <FormControl name="inputEmails" key="inputEmails" control={control}>
+              <FormLabel
+                htmlFor="inputEmails"
+                label={intl.formatMessage({
+                  id: 'entering-email-addresses',
+                })}
+              />
+              <FormGuideline>{intl.formatMessage({ id: 'enter-email-address' })}</FormGuideline>
+              <FieldInput
+                control={control}
+                type="text"
+                id="inputEmails"
+                name="inputEmails"
+                onBlur={() => {
+                  validateInputEmailsFormat()
+                  checkInputEmailsAvailability()
+                }}
+              />
+            </FormControl>
+            {renderInputEmailsAvailabilityMessages()}
+          </Flex>
 
           <ImportMembersUploader />
         </Flex>
@@ -152,4 +218,5 @@ export const UserInviteModalStepsChooseUsers = ({ id, label }: Props): JSX.Eleme
     </>
   )
 }
+
 export default UserInviteModalStepsChooseUsers
