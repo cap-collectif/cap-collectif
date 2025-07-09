@@ -85,7 +85,6 @@
         "php-http/httplug-bundle": "^1.7",
         "php-translation/loco-adapter": "^0.11",
         "php-translation/symfony-bundle": "^0.12",
-        "phpoffice/phpspreadsheet": "^1.29",
         "pmill/doctrine-array-hydrator": "^0.1.2",
         "predis/predis": "^1.0",
         "qandidate/toggle-bundle": "^1.5",

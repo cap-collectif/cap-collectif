@@ -331,9 +331,6 @@ services:
 
     Capco\AppBundle\Mailer\EmailingCampaignSender: ~
 
-    PhpOffice\PhpSpreadsheet\Spreadsheet:
-        public: true
-
     Doctrine\Migrations\Version\DbalMigrationFactory: ~
 
     Capco\AppBundle\MigrationHelper\MigrationFactoryDecorator:

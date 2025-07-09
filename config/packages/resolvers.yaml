@@ -30,9 +30,6 @@ services:
     Capco\AppBundle\Manager\LogManager:
         public: true
 
-    Capco\AppBundle\Resolver\ProjectDownloadResolver:
-        public: true
-
     Capco\AppBundle\Resolver\ContributionResolver:
         public: true
 
