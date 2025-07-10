@@ -219,7 +219,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     questionnaireModel,
     ...values
   }: FormValues) => {
-    const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
+    const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
     delete values.temporaryQuestion
     delete values.temporaryJump
@@ -232,7 +232,7 @@ const QuestionnaireStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
       timeless,
       endAt: timeless ? null : values.endAt,
       startAt: timeless ? null : values.startAt,
-      isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
+      isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
       questionnaire: CURRENTquestionnaire.questionnaireId,
       ...getRequirementsInput(values),
     }

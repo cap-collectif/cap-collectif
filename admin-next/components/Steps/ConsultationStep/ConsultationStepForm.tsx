@@ -291,7 +291,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const { isSubmitting, isValid } = formState
 
   const onSubmit = async (values: FormValues) => {
-    const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
+    const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
 
     const consultations = values.consultations.map((consultation, consultationIndex) => {
@@ -331,7 +331,7 @@ const ConsultationStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
 
       const updateStepInput: UpdateConsultationStepInput = {
         ...values,
-        isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
+        isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
         timeless,
         endAt: timeless ? null : values.endAt,
         startAt: timeless ? null : values.startAt,

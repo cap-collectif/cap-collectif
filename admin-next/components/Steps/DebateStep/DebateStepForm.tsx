@@ -216,13 +216,13 @@ const DebateStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
     : ParticipationTypeEnum.WITH_ACCOUNT
 
   const onSubmit = async (values: FormValues) => {
-    const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
+    const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
     const articles = values.articles.filter(article => !!article.url)
 
     const input: UpdateDebateStepInput = {
       ...values,
-      isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
+      isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
       timeless,
       articles,
     }

@@ -148,13 +148,13 @@ const OtherStepForm: React.FC<Props> = ({ stepId, setHelpMessage }) => {
   const { handleSubmit, formState, control } = formMethods
   const { isSubmitting } = formState
   const onSubmit = async (values: FormValues) => {
-    const timeless = values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS ?? false
+    const timeless = !!(values?.stepDurationType?.labels?.[0] === StepDurationTypeEnum.TIMELESS)
     delete values.stepDurationType
 
     const input = {
       ...values,
       stepId,
-      isEnabled: values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED ?? false,
+      isEnabled: !!(values.isEnabled.labels?.[0] === EnabledEnum.PUBLISHED),
       timeless,
       endAt: timeless ? null : values?.endAt,
       startAt: timeless ? null : values?.startAt,

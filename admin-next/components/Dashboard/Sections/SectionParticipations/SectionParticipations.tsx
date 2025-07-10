@@ -65,28 +65,28 @@ const SectionParticipations: FC<SectionParticipationsProps> = ({ queryOptions })
           id="vote"
           label={intl.formatMessage({ id: 'vote-plural' }, { num: votes?.totalCount ?? 0 })}
           count={votes?.totalCount ?? 0}
-          disabled={votes?.totalCount === 0 ?? true}
+          disabled={votes?.totalCount === 0}
           data={votes ? formatValues(votes.values, intl) : []}
         />
         <TabsChart.Tab
           id="comment"
           label={intl.formatMessage({ id: 'comment.dynamic' }, { num: comments?.totalCount ?? 0 })}
           count={comments?.totalCount ?? 0}
-          disabled={comments?.totalCount === 0 ?? true}
+          disabled={comments?.totalCount === 0}
           data={comments ? formatValues(comments.values, intl) : []}
         />
         <TabsChart.Tab
           id="contribution"
           label={intl.formatMessage({ id: 'contribution-plural' }, { num: contributions?.totalCount ?? 0 })}
           count={contributions?.totalCount ?? 0}
-          disabled={contributions?.totalCount === 0 ?? true}
+          disabled={contributions?.totalCount === 0}
           data={contributions ? formatValues(contributions.values, intl) : []}
         />
         <TabsChart.Tab
           id="follower"
           label={intl.formatMessage({ id: 'subscription.dynamic' }, { num: followers?.totalCount ?? 0 })}
           count={followers?.totalCount ?? 0}
-          disabled={followers?.totalCount === 0 ?? true}
+          disabled={followers?.totalCount === 0}
           data={followers ? formatValues(followers.values, intl) : []}
         />
       </TabsChart>

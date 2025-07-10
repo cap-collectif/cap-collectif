@@ -88,7 +88,7 @@ const ProjectConfigFormPublication: React.FC<ProjectConfigFormPublicationProps> 
           />
         </Box>
         <FormControl name="archived" control={control} width="100%">
-          <FieldInput type="checkbox" name="archived" control={control} options={locales} id="archived">
+          <FieldInput type="checkbox" name="archived" control={control} id="archived">
             {intl.formatMessage({ id: 'archive.project' })}
           </FieldInput>
         </FormControl>

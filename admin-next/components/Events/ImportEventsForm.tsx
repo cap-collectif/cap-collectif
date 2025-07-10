@@ -145,7 +145,7 @@ const ImportEventsForm: React.FC<ImportEventsFormProps> = ({ setData }) => {
               const reader = new FileReader()
               reader.readAsBinaryString(file)
               reader.onload = () => {
-                const encoding = jschardet.detect(reader.result as Buffer)
+                const encoding = jschardet.detect(reader.result as unknown as Buffer)
                 reader.readAsText(file, encoding.encoding)
                 setLoading(true)
                 reader.onload = () => {

@@ -1,4 +1,4 @@
-import { IJodit } from 'jodit/types'
+import { Jodit } from 'jodit/types'
 import Uppy from '@uppy/core'
 import Tus from '@uppy/tus'
 import StatusBar from '@uppy/status-bar'
@@ -24,7 +24,7 @@ export const joditFileUploader = {
   tooltip: 'Insert file',
   icon: 'file',
   name: 'uppyFileUpload',
-  popup: (editor: IJodit) => {
+  popup: (editor: Jodit) => {
     editor.s.save()
     const dragBox = editor.c.fromHTML(
       `<div id="${barTarget}"></div><div id="${fileInput}" style="opacity:0;height:0;width:0;"></div>`,
@@ -34,7 +34,7 @@ export const joditFileUploader = {
   },
 }
 
-export const uppyListener = (editor: IJodit, platformLanguage: string, intl: IntlShape) => {
+export const uppyListener = (editor: Jodit, platformLanguage: string, intl: IntlShape) => {
   onElementAvailable(`#${fileInput}`, () => {
     editor.s.save()
     new Uppy({
@@ -113,7 +113,7 @@ export const linktooltip = markAsAtomic([
   {
     name: 'eye',
     tooltip: 'Open link',
-    exec: (editor: IJodit, current): void => {
+    exec: (editor: Jodit, current): void => {
       const href = current?.href
 
       if (current && href) {
