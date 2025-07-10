@@ -16,7 +16,7 @@ const mutation = graphql`
         description
         title
         # update modal members list
-        ...MembersList_UsersFragment @arguments(countUsers: 50, term: "") 
+        ...MembersList_UsersFragment @arguments(countUsers: 50, term: "")
       }
     }
   }
@@ -33,13 +33,13 @@ const commit = (variables: UpdateGroupMutation$variables): Promise<UpdateGroupMu
       const members = group.getLinkedRecord('members', { first: 50, term: '' })
       const totalCount = members.getValue('totalCount')
 
-      const groupId = group.getValue('id') as string;
+      const groupId = group.getValue('id') as string
 
       const connectionID = `client:${groupId}:members`
 
-      const connectionRecord = store.get(connectionID);
-      connectionRecord.setValue(totalCount, 'totalCount');
-    }
+      const connectionRecord = store.get(connectionID)
+      connectionRecord.setValue(totalCount, 'totalCount')
+    },
   })
 
 export default { commit }

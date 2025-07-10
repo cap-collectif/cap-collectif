@@ -130,7 +130,7 @@ const Layout: React.FC<LayoutProps> = ({ children, navTitle, navData, title, hid
                 overflowY="scroll"
                 ref={contentRef}
                 position="relative"
-                minHeight="32rem"
+                height={'max(100%, 32rem)'}
               >
                 {children}
               </Box>

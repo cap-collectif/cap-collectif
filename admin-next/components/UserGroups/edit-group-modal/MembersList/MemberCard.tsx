@@ -8,9 +8,7 @@ type Props = {
   isPendingMember?: boolean
   pendingMember?: string
   existingMember?: MembersList_UsersFragment$data['members']['edges'][number]['node']
-  setMembersToRemoveIds?: React.Dispatch<React.SetStateAction<string[]>>
-  membersToRemoveIds: string[]
-  removePendingMember?: (email: string) => void
+  onRemove: () => void
 }
 
 export const MemberCard = ({
@@ -18,9 +16,7 @@ export const MemberCard = ({
   isPendingMember = false,
   pendingMember,
   existingMember,
-  setMembersToRemoveIds,
-  membersToRemoveIds,
-  removePendingMember,
+  onRemove,
 }: Props): JSX.Element => {
   const intl = useIntl()
 
@@ -73,11 +69,7 @@ export const MemberCard = ({
             id: 'global.delete',
           })}
           variantColor={'danger'}
-          onClick={() =>
-            isPendingMember
-              ? removePendingMember(pendingMember)
-              : setMembersToRemoveIds([...membersToRemoveIds, existingMember.userId])
-          }
+          onClick={onRemove}
         />
       )}
     </Card>

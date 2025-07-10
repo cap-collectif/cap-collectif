@@ -30,7 +30,7 @@ export const ImportMembersModal = ({ groupTitle, groupId, setUsersToAddFromCsvEm
     const checkAvailabilityInput = {
       input: {
         dryRun: true,
-        emails: csvEmails.uniqueAndValid?.map(user => user.email) || [],
+        emails: csvEmails?.uniqueAndValid?.map(user => user.email) || [],
         groupId: groupId,
       },
     }

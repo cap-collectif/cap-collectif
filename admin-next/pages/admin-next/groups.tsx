@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Button, CapUIIcon, Flex, Search } from '@cap-collectif/ui'
+import { Button, CapUIBorder, CapUIIcon, CapUIIconSize, Flex, Search, Spinner } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { pxToRem } from '@shared/utils/pxToRem'
 import CreateGroupModal from '@components/UserGroups/create-group-modal/CreateGroupModal'
@@ -8,56 +8,48 @@ import type { groups_Query as groupsQueryType } from '__generated__/groups_Query
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { CONNECTION_NODES_PER_PAGE } from '@components/UserInvitation/utils'
 import Layout from '@components/Layout/Layout'
-import UserGroupsList from '@components/UserGroups/UserGroupsList'
+import UserGroupsList, { UserGroupsListHandle } from '@components/UserGroups/UserGroupsList'
 import debounce from '@shared/utils/debounce-promise'
-
-type Props = {
-  queryReference: PreloadedQuery<groupsQueryType>
-}
+import TablePlaceholder from '@ui/Table/TablePlaceholder'
 
 const groupsQuery: GraphQLTaggedNode = graphql`
-  query groups_Query($search: String, $first: Int) {
-    ...UserGroupsList_Fragment @arguments(search: $search, first: $first)
+  query groups_Query($term: String, $first: Int) {
+    ...UserGroupsList_Fragment @arguments(term: $term, first: $first)
   }
 `
 
-const UsersGroupsTab = ({ queryReference }: Props): React.JSX.Element => {
+const UserGroupsTab = ({ queryReference }: { queryReference: PreloadedQuery<groupsQueryType> }): React.JSX.Element => {
   const intl = useIntl()
 
   const query = usePreloadedQuery<groupsQueryType>(groupsQuery, queryReference)
+  const listRef = React.useRef<UserGroupsListHandle>(null)
+
   const [term, setTerm] = React.useState<string>('')
   const [connectionId, setConnectionId] = React.useState<string>('')
   const [isLoading, setIsLoading] = React.useState<boolean>(false)
 
-  const onTermChange = React.useCallback(
+  const onTermChange = React.useRef(
     debounce((value: string) => {
       setTerm(value)
       setIsLoading(false)
-    }, 1000),
-    [],
-  )
+      listRef.current?.refetchForTerm(value)
+    }, 400),
+  ).current
 
   const handleTermChange = (value: string) => {
-    setIsLoading(true)
-    if (value === '') {
-      setIsLoading(false)
-    }
+    setIsLoading(Boolean(value))
     onTermChange(value)
   }
 
   return (
-    <Layout
-      navTitle={intl.formatMessage({
-        id: 'group_list',
-      })}
-    >
+    <Flex direction="column" spacing={6} height="100%" justify="flex-start">
       <Flex
         direction="column"
         width="100%"
         spacing={6}
         bg="white"
-        borderRadius="accordion"
-        p={6}
+        borderRadius={CapUIBorder.Card}
+        p={8}
         justify="flex-start"
         height="100%"
         overflow="scroll"
@@ -83,20 +75,23 @@ const UsersGroupsTab = ({ queryReference }: Props): React.JSX.Element => {
           />
         </Flex>
 
-        <UserGroupsList queryReference={query} term={term} setTerm={setTerm} setConnectionId={setConnectionId} />
+        <React.Suspense fallback={<TablePlaceholder rowsCount={20} columnsCount={4} />}>
+          <UserGroupsList ref={listRef} queryReference={query} setConnectionId={setConnectionId} />
+        </React.Suspense>
       </Flex>
-    </Layout>
+    </Flex>
   )
 }
 
 export const getServerSideProps = withPageAuthRequired
 
-const UsersGroupsAdminPageQueryRender = (): JSX.Element => {
+const UserGroupsAdminPageQueryRender = (): JSX.Element => {
   const [queryReference, loadQuery, disposeQuery] = useQueryLoader<groupsQueryType>(groupsQuery)
+  const intl = useIntl()
 
   React.useEffect(() => {
     loadQuery({
-      search: null,
+      term: null,
       first: CONNECTION_NODES_PER_PAGE,
     })
     return () => {
@@ -106,7 +101,25 @@ const UsersGroupsAdminPageQueryRender = (): JSX.Element => {
     }
   }, [loadQuery, disposeQuery])
 
-  return queryReference ? <UsersGroupsTab queryReference={queryReference} /> : null
+  return (
+    <Layout
+      navTitle={intl.formatMessage({
+        id: 'group_list',
+      })}
+    >
+      {queryReference ? (
+        <React.Suspense
+          fallback={
+            <Flex alignItems="center" justifyContent="center">
+              <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
+            </Flex>
+          }
+        >
+          <UserGroupsTab queryReference={queryReference} />
+        </React.Suspense>
+      ) : null}
+    </Layout>
+  )
 }
 
-export default UsersGroupsAdminPageQueryRender
+export default UserGroupsAdminPageQueryRender

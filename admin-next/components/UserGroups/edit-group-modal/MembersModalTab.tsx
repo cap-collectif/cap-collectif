@@ -1,41 +1,12 @@
 /* eslint-disable relay/unused-fields */
 import * as React from 'react'
-import { Flex, FormLabel, Modal, Search } from '@cap-collectif/ui'
+import { CapUIIconSize, Flex, FormLabel, Modal, Search, Spinner } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { FormControl } from '@cap-collectif/form'
 import ImportMembersModal from './ImportMembersModal'
 import UserListField from '@components/Form/UserListField'
-import { graphql, useLazyLoadQuery } from 'react-relay'
 import { useFormContext } from 'react-hook-form'
-import debounce from '@shared/utils/debounce-promise'
-import { MembersModalTab_Query as MembersModalTab_QueryType } from '@relay/MembersModalTab_Query.graphql'
-import { CONNECTION_NODES_PER_PAGE } from '../utils'
 import MembersList from './MembersList/MembersList'
-
-const QUERY = graphql`
-  query MembersModalTab_Query($groupId: ID!, $first: Int!, $term: String) {
-    node(id: $groupId) {
-      ... on Group {
-        ...MembersList_UsersFragment @arguments(countUsers: $first, term: $term)
-        members(first: $first, term: $term) {
-          totalCount
-          pageInfo {
-            hasNextPage
-          }
-          edges {
-            node {
-              __typename
-              userId
-              username
-              email
-              type
-            }
-          }
-        }
-      }
-    }
-  }
-`
 
 type Props = {
   groupTitle: string
@@ -55,38 +26,25 @@ export const MembersModalTab = ({
   setUsersToAddFromCsvEmails,
 }: Props): JSX.Element => {
   const intl = useIntl()
+  const [membersSearchTerm, setMembersSearchTerm] = React.useState<string>('')
+  const [userIdsToNotSearch, setUserIdsToNotSearch] = React.useState<string[]>([])
+  const [pendingMembersToRemove, setPendingMembersToRemove] = React.useState<string[]>([])
 
-  const [term, setTerm] = React.useState<string>('')
-  const [isLoading, setIsLoading] = React.useState<boolean>(false)
+  const handleMemberRemoval = (id: string, isEmail = false) => {
+    if (isEmail) {
+      setPendingMembersToRemove(prev => [...prev, id.toLowerCase()])
+      setUsersToAddFromCsvEmails(prev => prev.filter(email => email.toLowerCase() !== id.toLowerCase()))
+    } else {
+      setMembersToRemoveIds(prev => [...prev, id])
+    }
+  }
 
-  const query = useLazyLoadQuery<MembersModalTab_QueryType>(QUERY, { groupId, first: CONNECTION_NODES_PER_PAGE, term })
-
-  const { members } = query.node
+  const getUsersToAddFromCsvEmails = () => {
+    return usersToAddFromCsvEmails.filter(email => !pendingMembersToRemove.includes(email.toLowerCase()))
+  }
 
   const methods = useFormContext()
   const { control } = methods
-
-  const onTermChange = React.useCallback(
-    debounce((value: string) => {
-      setTerm(value)
-      setIsLoading(false)
-    }, 1000),
-    [],
-  )
-
-  const handleTermChange = (value: string) => {
-    setIsLoading(true)
-    if (value === '') {
-      setIsLoading(false)
-    }
-    onTermChange(value)
-  }
-
-  const userIdsToNotSearch =
-    members.edges.reduce((acc, user) => {
-      acc.push(user.node.userId)
-      return acc
-    }, []) || []
 
   return (
     <Modal.Body width={'100%'}>
@@ -121,19 +79,21 @@ export const MembersModalTab = ({
           <FormLabel htmlFor="membersSearch" label={intl.formatMessage({ id: 'admin.groups.list' })} />
           <Search
             placeholder={intl.formatMessage({ id: 'global.search' })}
-            value={term}
-            onChange={handleTermChange}
-            isLoading={isLoading}
+            value={membersSearchTerm}
+            onChange={setMembersSearchTerm}
           />
         </FormControl>
 
-        <MembersList
-          queryReference={query}
-          membersToRemoveIds={membersToRemoveIds}
-          setMembersToRemoveIds={setMembersToRemoveIds}
-          usersToAddFromCsvEmails={usersToAddFromCsvEmails}
-          setUsersToAddFromCsvEmails={setUsersToAddFromCsvEmails}
-        />
+        <React.Suspense fallback={<Spinner size={CapUIIconSize.Md} mx="auto" />}>
+          <MembersList
+            groupId={groupId}
+            term={membersSearchTerm}
+            membersToRemoveIds={membersToRemoveIds}
+            onMemberRemoval={handleMemberRemoval}
+            usersToAddFromCsvEmails={getUsersToAddFromCsvEmails()}
+            onMembersLoaded={setUserIdsToNotSearch}
+          />
+        </React.Suspense>
       </Flex>
     </Modal.Body>
   )

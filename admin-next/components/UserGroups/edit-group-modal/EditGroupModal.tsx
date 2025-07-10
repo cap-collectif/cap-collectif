@@ -22,11 +22,11 @@ type Props = {
 }
 
 const GROUP_FRAGMENT = graphql`
-    fragment EditGroupModal_group on Group {
-        id
-        title
-        description
-    }
+  fragment EditGroupModal_group on Group {
+    id
+    title
+    description
+  }
 `
 
 export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.Element => {
@@ -52,15 +52,17 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
   } = methods
 
   const onSubmit = async (data: UpdateGroupFormProps) => {
-
     const usersToAddToGroupFromInputIds = data.users?.map(user => user.value) || []
+
+    const existingUserEmails = new Set(data.users?.map(user => user.value?.toLowerCase()).filter(Boolean) || [])
+    const uniqueEmails = usersToAddFromCsvEmails.filter(email => !existingUserEmails.has(email.toLowerCase()))
 
     const updateGroupInfoInput = {
       input: {
         groupId: group.id,
         title: data.title,
         description: data.description,
-        emails: usersToAddFromCsvEmails,
+        emails: uniqueEmails,
         toAddUserIds: usersToAddToGroupFromInputIds,
         toRemoveUserIds: membersToRemoveIds,
       },
@@ -79,7 +81,7 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
         })
 
         setMembersToRemoveIds([])
-
+        setUsersToAddFromCsvEmails([])
         onClose()
       })
       .catch(() => {
@@ -89,7 +91,20 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
 
   return (
     <>
-      <Table.Td position={'relative'} tabIndex={0} onClick={onOpen}>
+      <Table.Td
+        position={'relative'}
+        tabIndex={0}
+        onClick={onOpen}
+        onKeyDown={e => e.key === 'Enter' && onOpen()}
+        sx={{
+          '&:focus-visible': {
+            a: {
+              textDecoration: 'underline',
+              color: 'primary.base',
+            },
+          },
+        }}
+      >
         <Box
           as="a"
           href={null}
@@ -170,6 +185,7 @@ export const EditGroupModal = ({ group: groupRef, refetch, term }: Props): JSX.E
                       reset()
                       hide()
                       setMembersToRemoveIds([])
+                      setUsersToAddFromCsvEmails([])
                     }}
                   >
                     {intl.formatMessage({ id: 'global.cancel' })}

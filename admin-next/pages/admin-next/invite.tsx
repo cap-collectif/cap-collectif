@@ -1,6 +1,6 @@
 import * as React from 'react'
 import Layout from '@components/Layout/Layout'
-import { Flex } from '@cap-collectif/ui'
+import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useIntl } from 'react-intl'
 import { FormProvider, useForm } from 'react-hook-form'
@@ -32,7 +32,6 @@ export const inviteQuery: GraphQLTaggedNode = graphql`
 `
 
 const InvitePage = ({ queryReference }: Props): React.JSX.Element => {
-  const intl = useIntl()
   const methods = useForm()
   const [term, setTerm] = React.useState<string>('')
   const [status, setStatus] = React.useState<Status>('ALL')
@@ -42,19 +41,16 @@ const InvitePage = ({ queryReference }: Props): React.JSX.Element => {
   const { allInvitations, pendingInvitations, acceptedInvitations } = query
 
   return (
-    <Layout
-      navTitle={intl.formatMessage({
-        id: 'user-invite-admin-page-title',
-      })}
-    >
+    <Flex direction="column" spacing={6} height="100%" justify="flex-start">
       <Flex
         direction="column"
         spacing={6}
         bg="white"
         borderRadius="accordion"
         p={6}
-        justify="space-between"
+        justify="flex-start"
         width={'100%'}
+        height={'100%'}
       >
         <FormProvider {...methods}>
           <UserInviteAdminPageHeader
@@ -70,7 +66,7 @@ const InvitePage = ({ queryReference }: Props): React.JSX.Element => {
           <UserInviteList query={query} status={status as Status} setStatus={setStatus} term={term} setTerm={setTerm} />
         </FormProvider>
       </Flex>
-    </Layout>
+    </Flex>
   )
 }
 
@@ -78,6 +74,8 @@ export const getServerSideProps = withPageAuthRequired
 
 const UserInviteAdminPageQueryRender = (): JSX.Element => {
   const [queryReference, loadQuery, disposeQuery] = useQueryLoader<inviteQueryType>(inviteQuery)
+  const intl = useIntl()
+
   React.useEffect(() => {
     loadQuery({
       first: CONNECTION_NODES_PER_PAGE,
@@ -91,7 +89,26 @@ const UserInviteAdminPageQueryRender = (): JSX.Element => {
       }
     }
   }, [loadQuery, disposeQuery])
-  return queryReference ? <InvitePage queryReference={queryReference} /> : null
+
+  return (
+    <Layout
+      navTitle={intl.formatMessage({
+        id: 'user-invite-admin-page-title',
+      })}
+    >
+      {queryReference ? (
+        <React.Suspense
+          fallback={
+            <Flex alignItems="center" justifyContent="center">
+              <Spinner size={CapUIIconSize.Xxl} color="gray.150" />
+            </Flex>
+          }
+        >
+          <InvitePage queryReference={queryReference} />
+        </React.Suspense>
+      ) : null}
+    </Layout>
+  )
 }
 
 export default UserInviteAdminPageQueryRender

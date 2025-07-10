@@ -1,17 +1,17 @@
 /* eslint-disable relay/unused-fields */
 import * as React from 'react'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import { graphql, usePaginationFragment } from 'react-relay'
+import { graphql, useLazyLoadQuery, usePaginationFragment } from 'react-relay'
 import { MembersList_UsersFragment$key } from '@relay/MembersList_UsersFragment.graphql'
+import { MembersList_Query } from '@relay/MembersList_Query.graphql'
+import { MembersList_MembersQuery } from '@relay/MembersList_MembersQuery.graphql'
 import { CONNECTION_NODES_PER_PAGE } from '../../utils'
 import InfiniteScroll from 'react-infinite-scroller'
-import { MembersModalTab_Query$data } from '@relay/MembersModalTab_Query.graphql'
-import { MembersList_Query } from '@relay/MembersList_Query.graphql'
 import MemberCard from './MemberCard'
 
 const USERS_FRAGMENT = graphql`
   fragment MembersList_UsersFragment on Group
-  @argumentDefinitions(countUsers: { type: "Int!" }, cursorUsers: { type: "String" }, term: {type: "String"})
+  @argumentDefinitions(countUsers: { type: "Int!" }, cursorUsers: { type: "String" }, term: { type: "String!" })
   @refetchable(queryName: "MembersList_Query") {
     id
     title
@@ -31,33 +31,69 @@ const USERS_FRAGMENT = graphql`
   }
 `
 
+const MEMBERS_QUERY = graphql`
+  query MembersList_MembersQuery($groupId: ID!, $first: Int!, $term: String!) {
+    node(id: $groupId) {
+      ... on Group {
+        ...MembersList_UsersFragment @arguments(countUsers: $first, term: $term)
+        members(first: $first, term: $term) {
+          totalCount
+          pageInfo {
+            hasNextPage
+          }
+          edges {
+            node {
+              __typename
+              userId
+              username
+              email
+              type
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
 type Props = {
-  queryReference: MembersModalTab_Query$data
+  groupId: string
+  term: string
   membersToRemoveIds: string[]
-  setMembersToRemoveIds: React.Dispatch<React.SetStateAction<string[]>>
+  onMemberRemoval: (id: string, isEmail?: boolean) => void
   usersToAddFromCsvEmails: Array<string>
-  setUsersToAddFromCsvEmails: React.Dispatch<React.SetStateAction<string[]>>
+  onMembersLoaded?: (memberIds: string[]) => void
 }
 
 export const MembersList = ({
-  queryReference,
+  groupId,
+  term,
   membersToRemoveIds,
-  setMembersToRemoveIds,
+  onMemberRemoval,
   usersToAddFromCsvEmails,
-  setUsersToAddFromCsvEmails,
+  onMembersLoaded,
 }: Props): JSX.Element => {
   const ref = React.useRef<null | boolean>(null)
+
+  const queryData = useLazyLoadQuery<MembersList_MembersQuery>(MEMBERS_QUERY, {
+    groupId,
+    first: CONNECTION_NODES_PER_PAGE,
+    term,
+  })
 
   const { data, hasNext, loadNext, isLoadingNext } = usePaginationFragment<
     MembersList_Query,
     MembersList_UsersFragment$key
-  >(USERS_FRAGMENT, queryReference.node)
+  >(USERS_FRAGMENT, queryData.node)
 
   const { members } = data
 
-  const removePendingMember = email => {
-    setUsersToAddFromCsvEmails(prevEmails => prevEmails.filter(item => item !== email))
-  }
+  React.useEffect(() => {
+    if (members?.edges) {
+      const memberIds = members.edges.map(edge => edge.node.userId)
+      onMembersLoaded?.(memberIds)
+    }
+  }, [members?.edges, onMembersLoaded])
 
   return (
     <Flex
@@ -82,30 +118,24 @@ export const MembersList = ({
         getScrollParent={() => ref.current}
       >
         <Flex direction={'column'} gap={2}>
-          {usersToAddFromCsvEmails.map(user => {
-            return (
-              <MemberCard
-                isPendingMember
-                pendingMember={user}
-                cardKey={user}
-                key={user}
-                setMembersToRemoveIds={setMembersToRemoveIds}
-                membersToRemoveIds={membersToRemoveIds}
-                removePendingMember={removePendingMember}
-              />
-            )
-          })}
+          {usersToAddFromCsvEmails.map(email => (
+            <MemberCard
+              isPendingMember
+              pendingMember={email}
+              cardKey={email}
+              key={email}
+              onRemove={() => onMemberRemoval(email, true)}
+            />
+          ))}
 
           {members.edges.map(member => {
             const currentMember = member.node
-
             return membersToRemoveIds.includes(currentMember.userId) ? null : (
               <MemberCard
                 existingMember={currentMember}
                 cardKey={currentMember.userId}
                 key={currentMember.userId}
-                setMembersToRemoveIds={setMembersToRemoveIds}
-                membersToRemoveIds={membersToRemoveIds}
+                onRemove={() => onMemberRemoval(currentMember.userId)}
               />
             )
           })}
