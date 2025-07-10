@@ -16,7 +16,7 @@ const defaultProps = {
   trashed: false,
 }
 beforeEach(() => {
-  jest.useFakeTimers().setSystemTime(new Date('2025-01-01T12:00:00Z'))
+  jest.useFakeTimers().setSystemTime(new Date('2023-01-01T12:00:00Z'))
 })
 describe('<CommentDate />', () => {
   it('should render correctly', () => {
