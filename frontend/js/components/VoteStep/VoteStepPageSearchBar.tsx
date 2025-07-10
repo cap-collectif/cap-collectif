@@ -1,4 +1,4 @@
-import { Search } from '@cap-collectif/ui'
+import { CapInputSize, Search } from '@cap-collectif/ui'
 import * as React from 'react'
 import { useIntl } from 'react-intl'
 import debounce from '@shared/utils/debounce-promise'
@@ -11,6 +11,8 @@ const VoteStepPageSearchBar = () => {
   const onTermChange = debounce((value: string) => setFilters('term', value || ''), 400)
   return (
     <Search
+      variantSize={CapInputSize.Md}
+      variantColor="hierarchy"
       id="search-vote-step"
       width="100%"
       onChange={onTermChange}

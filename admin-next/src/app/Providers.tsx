@@ -60,7 +60,7 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
     colors: {
       primary,
     },
-    fonts: { body: `${bodyFont.name},system-ui,sans-serif`, heading: `${titleFont.name},system-ui,sans-serif` },
+    fonts: { body: `${bodyFont?.name},system-ui,sans-serif`, heading: `${titleFont?.name},system-ui,sans-serif` },
   })
 
   // @ts-expect-error TURNSTILE_PUBLIC_KEY doesn't exist on generic window type

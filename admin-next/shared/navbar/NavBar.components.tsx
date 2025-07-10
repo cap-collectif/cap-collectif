@@ -163,11 +163,13 @@ const IS_BIG_LOGO_RATIO = 1.5
 
 export const NavBarLogo: React.FC<{ logo?: { url: string; width: number; height: number } }> = ({ logo }) => {
   const intl = useIntl()
-  const width = logo.width > 180 ? 180 : logo.width
+  const width = logo?.width > 180 ? 180 : logo?.width
   const {
     colors: { primary },
   } = useTheme()
   const focusColor = primary?.[700] || '#000'
+
+  if (!logo) return null
 
   const isBigLogo = (logo.width || 0) / (logo.height || 1) <= IS_BIG_LOGO_RATIO
 
