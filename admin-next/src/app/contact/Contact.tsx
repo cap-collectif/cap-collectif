@@ -39,9 +39,9 @@ export const Contact: FC<Props> = ({ data }) => {
         <PageHeading
           display="flex"
           mode="large"
-          title={contactPageTitle.value}
+          title={contactPageTitle?.value}
           flex="1 1 0"
-          subtitle={description.value}
+          subtitle={description?.value}
         />
         <Box flex="1 1 0">
           <Flex px={['md', 'xxl']} py={['xl', 'xxl']} direction="column" gap="lg">
