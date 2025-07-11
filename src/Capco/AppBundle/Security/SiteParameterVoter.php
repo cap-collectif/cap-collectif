@@ -69,6 +69,10 @@ class SiteParameterVoter extends Voter
             'footer.text.title',
             'footer.text.body',
             'homepage.metadescription',
+            'contact.title',
+            'contact.metadescription',
+            'contact.content.body',
+            'contact.customcode',
         ];
         $key = $siteParameter->getKeyname();
 

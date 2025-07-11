@@ -1,0 +1,347 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Contact /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL kzYcKZ"
+  >
+    <div
+      className="sc-bcXGCL jkMDXM"
+    >
+      <div
+        className="sc-bcXGCL ifGhhS"
+      >
+        <div
+          className="sc-bcXGCL ifGhhS"
+        >
+          <div
+            className="sc-bcXGCL bJaWaO"
+          >
+            <div
+              className="sc-bcXGCL cvZLAn"
+            >
+              <h1
+                className="sc-bcXGCL iHMoWe cap-heading"
+              >
+                Contact us
+              </h1>
+              <p
+                className="sc-bcXGCL egKDCQ cap-text"
+              >
+                <div
+                  className=" ql-editor wysiwyg-render"
+                  dangerouslySetInnerHTML={
+                    {
+                      "__html": "Lorem ipsum",
+                    }
+                  }
+                />
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bcXGCL ggwuDG"
+      >
+        <div
+          className="sc-bcXGCL gdTSGr"
+        >
+          <div
+            className="sc-bcXGCL eQUJjL"
+          >
+            <div
+              className="sc-bcXGCL dDfCSY cap-accordion__item"
+              id="contactForm1"
+            >
+              <button
+                aria-controls="accordion-panel-contactForm1"
+                aria-expanded={true}
+                className="sc-bcXGCL lkvxTQ cap-accordion__button"
+                id="accordion-button-contactForm1"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="sc-bcXGCL sc-eJDTud dAsYTG hEjMCZ cap-icon"
+                  fill="none"
+                  height="1em"
+                  viewBox="0 0 12 7"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M6 7c.164 0 .326-.032.475-.095q.227-.096.392-.27l4.916-5.216a.83.83 0 0 0 .214-.62.85.85 0 0 0-.311-.584.97.97 0 0 0-.66-.214.95.95 0 0 0-.632.277l-4.3 4.562a.133.133 0 0 1-.188 0L1.606.278A.95.95 0 0 0 .974.001a.97.97 0 0 0-.66.214A.85.85 0 0 0 .003.8a.83.83 0 0 0 .214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097"
+                    fill="currentColor"
+                  />
+                </svg>
+                <p
+                  className="sc-bcXGCL gboujX cap-text"
+                >
+                  For a project
+                </p>
+              </button>
+              <div
+                aria-labelledby="accordion-button-contactForm1"
+                className="sc-bcXGCL hopKiY cap-accordion__panel"
+                id="accordion-panel-contactForm1"
+                role="group"
+                style={
+                  {
+                    "height": "0px",
+                    "opacity": 0,
+                  }
+                }
+              >
+                <div
+                  className="sc-bcXGCL loEQdu cap-text"
+                >
+                  <div
+                    className=" ql-editor wysiwyg-render"
+                    dangerouslySetInnerHTML={
+                      {
+                        "__html": "blablabla nice project nice collab",
+                      }
+                    }
+                  />
+                </div>
+                <div
+                  className="sc-bcXGCL gsVzAx"
+                >
+                  form.fields_mandatory_without_mention
+                </div>
+                <form
+                  id="contact-form-contactForm1"
+                  noValidate={true}
+                  onSubmit={[Function]}
+                >
+                  <div
+                    className="sc-bcXGCL brfJeR cap-form-control"
+                  >
+                    <label
+                      className="sc-bcXGCL erDWnu cap-form-label"
+                      htmlFor=":r0:"
+                      style={
+                        {
+                          "marginLeft": 0,
+                          "marginTop": 0,
+                        }
+                      }
+                    >
+                      <span
+                        className="sc-bcXGCL dRxVYq cap-text"
+                        style={
+                          {
+                            "marginLeft": 0,
+                            "marginTop": 0,
+                          }
+                        }
+                      >
+                        global.name
+                      </span>
+                      <p
+                        className="sc-bcXGCL tOsF cap-text"
+                      >
+                        global.optional
+                      </p>
+                    </label>
+                    <input
+                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      disabled={false}
+                      id=":r0:"
+                      minLength={2}
+                      name="name"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      readOnly={false}
+                      required={false}
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="sc-bcXGCL brfJeR cap-form-control"
+                  >
+                    <label
+                      className="sc-bcXGCL erDWnu cap-form-label"
+                      htmlFor=":r1:"
+                      style={
+                        {
+                          "marginLeft": 0,
+                          "marginTop": 0,
+                        }
+                      }
+                    >
+                      <span
+                        className="sc-bcXGCL dRxVYq cap-text"
+                        style={
+                          {
+                            "marginLeft": 0,
+                            "marginTop": 0,
+                          }
+                        }
+                      >
+                        global.email
+                      </span>
+                    </label>
+                    <input
+                      aria-required={true}
+                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      disabled={false}
+                      id=":r1:"
+                      name="email"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      placeholder="email.placeholder"
+                      readOnly={false}
+                      required={true}
+                      type="email"
+                    />
+                  </div>
+                  <div
+                    className="sc-bcXGCL brfJeR cap-form-control"
+                  >
+                    <label
+                      className="sc-bcXGCL erDWnu cap-form-label"
+                      htmlFor=":r2:"
+                      style={
+                        {
+                          "marginLeft": 0,
+                          "marginTop": 0,
+                        }
+                      }
+                    >
+                      <span
+                        className="sc-bcXGCL dRxVYq cap-text"
+                        style={
+                          {
+                            "marginLeft": 0,
+                            "marginTop": 0,
+                          }
+                        }
+                      >
+                        object
+                      </span>
+                    </label>
+                    <input
+                      aria-required={true}
+                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      disabled={false}
+                      id=":r2:"
+                      minLength={2}
+                      name="title"
+                      onBlur={[Function]}
+                      onChange={[Function]}
+                      onFocus={[Function]}
+                      placeholder="placeholder.object"
+                      readOnly={false}
+                      required={true}
+                      type="text"
+                      value=""
+                    />
+                  </div>
+                  <div
+                    className="sc-bcXGCL dAxZoG cap-form-control"
+                  >
+                    <label
+                      className="sc-bcXGCL erDWnu cap-form-label"
+                      htmlFor=":r3:"
+                      style={
+                        {
+                          "marginLeft": 0,
+                          "marginTop": 0,
+                        }
+                      }
+                    >
+                      <span
+                        className="sc-bcXGCL dRxVYq cap-text"
+                        style={
+                          {
+                            "marginLeft": 0,
+                            "marginTop": 0,
+                          }
+                        }
+                      >
+                        contact.your-message
+                      </span>
+                    </label>
+                    <div
+                      className="sc-bcXGCL dByCbc"
+                    >
+                      <textarea
+                        aria-required={true}
+                        className="sc-bcXGCL sc-dwnPIk lnUMOb eCNeCU cap-textarea"
+                        disabled={false}
+                        id=":r3:"
+                        minLength={2}
+                        name="body"
+                        onBlur={[Function]}
+                        onChange={[Function]}
+                        onFocus={[Function]}
+                        placeholder="contact_form.message"
+                        readOnly={false}
+                        required={true}
+                        rows={3}
+                        value=""
+                      />
+                    </div>
+                  </div>
+                  <button
+                    className="sc-bcXGCL sc-laZSpB fYBGhH ietVcX cap-button"
+                    type="submit"
+                  >
+                    global.send
+                  </button>
+                </form>
+              </div>
+            </div>
+          </div>
+          <div
+            className="sc-bcXGCL eQUJjL"
+          >
+            <div
+              className="sc-bcXGCL cvULpZ cap-accordion__item"
+              id="contactForm2"
+            >
+              <button
+                aria-controls="accordion-panel-contactForm2"
+                aria-expanded={false}
+                className="sc-bcXGCL lkvxTQ cap-accordion__button"
+                id="accordion-button-contactForm2"
+                onClick={[Function]}
+                type="button"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="sc-bcXGCL sc-eJDTud fNywAu hEjMCZ cap-icon"
+                  fill="none"
+                  height="1em"
+                  viewBox="0 0 8 12"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M7.5 6c0-.164-.032-.326-.095-.475a1.15 1.15 0 0 0-.27-.392L1.92.217A.83.83 0 0 0 1.3.003a.85.85 0 0 0-.584.311.97.97 0 0 0-.214.66.95.95 0 0 0 .277.632l4.562 4.3a.133.133 0 0 1 0 .188l-4.562 4.3a.95.95 0 0 0-.277.632.97.97 0 0 0 .214.66.85.85 0 0 0 .584.311.83.83 0 0 0 .62-.214l5.214-4.915c.115-.109.208-.242.27-.392.064-.15.097-.312.097-.476"
+                    fill="currentColor"
+                  />
+                </svg>
+                <p
+                  className="sc-bcXGCL gboujX cap-text"
+                >
+                  For another request
+                </p>
+              </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+]
+`;

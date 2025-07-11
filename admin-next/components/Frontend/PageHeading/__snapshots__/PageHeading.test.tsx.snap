@@ -8,7 +8,9 @@ exports[`<PageHeading /> renders correctly 1`] = `
   <div
     className="sc-bcXGCL gjsubU"
   >
-    <div>
+    <div
+      className="sc-bcXGCL jPDNqg"
+    >
       <div
         className="sc-bcXGCL ctOvVF"
       >
@@ -23,7 +25,14 @@ exports[`<PageHeading /> renders correctly 1`] = `
           <div
             className="sc-bcXGCL egKDCQ cap-text"
           >
-            Une belle liste
+            <div
+              className=" ql-editor wysiwyg-render"
+              dangerouslySetInnerHTML={
+                {
+                  "__html": "Une belle liste",
+                }
+              }
+            />
           </div>
         </div>
       </div>

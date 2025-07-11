@@ -28,7 +28,7 @@ export const evalCustomCode = (code?: string | null | undefined) => {
     }
   } catch (e) {
     // eslint-disable-next-line no-console
-    console.error('Invalid custom code', code)
+    console.error('Invalid custom code :', code)
   }
 }
 

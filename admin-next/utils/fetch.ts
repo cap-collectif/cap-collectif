@@ -46,7 +46,12 @@ const Fetcher = {
       .then(json)
   },
 
-  ssrGraphql<T, U = any>(request: GraphQLTaggedNode, variables?: U, Cookie: string = ''): Promise<T> {
+  ssrGraphql<T, U = any>(
+    request: GraphQLTaggedNode,
+    variables?: U,
+    Cookie: string = '',
+    cache: RequestCache = 'no-store',
+  ): Promise<T> {
     const ENV = process.env.NEXT_PUBLIC_SYMFONY_ENV || process.env.SYMFONY_ENV
     const isProd = ENV === 'prod'
     const URL = isProd
@@ -54,6 +59,7 @@ const Fetcher = {
       : `http://capco.${ENV === 'dev' ? 'dev' : 'test'}:8080/graphql/internal`
 
     return fetch(URL, {
+      cache,
       method: 'POST',
       credentials: 'same-origin',
       headers: createHeaders({

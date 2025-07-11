@@ -6,20 +6,21 @@ import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { FC } from 'react'
 
-export const PageHeading: FC<BoxProps & { title?: string; subtitle?: string; body?: string }> = ({
-  title,
-  subtitle,
-  body,
-  ...rest
-}) => {
+type PageHeadingProps = { title?: string; subtitle?: string; body?: string; mode?: 'default' | 'large' }
+
+export const PageHeading: FC<BoxProps & PageHeadingProps> = ({ title, subtitle, body, mode = 'default', ...rest }) => {
   const { siteColors } = useAppContext()
 
   return (
     <Box {...rest}>
-      <div>
+      <Box display={mode === 'default' ? 'block' : 'flex'} flex="1 1 0">
         {title || subtitle ? (
-          <Box backgroundColor={siteColors.pageBackgroundHeaderColor} py={[8, 'xxl']}>
-            <Box maxWidth={pxToRem(1280)} px={[4, 6]} mx="auto">
+          <Box
+            backgroundColor={siteColors.pageBackgroundHeaderColor}
+            py={[8, 'xxl']}
+            width={mode === 'large' ? '100%' : null}
+          >
+            <Box maxWidth={pxToRem(1280)} px={[4, mode === 'large' ? 'xxl' : 'lg']} mx="auto">
               {title ? (
                 <Heading
                   as="h1"
@@ -31,8 +32,12 @@ export const PageHeading: FC<BoxProps & { title?: string; subtitle?: string; bod
                 </Heading>
               ) : null}
               {subtitle ? (
-                <Text as="div" fontSize={CapUIFontSize.BodyLarge} color={siteColors.pageSubTitleColor}>
-                  {subtitle}
+                <Text
+                  as={mode === 'default' ? 'div' : 'p'}
+                  fontSize={CapUIFontSize.BodyLarge}
+                  color={siteColors.pageSubTitleColor}
+                >
+                  <WYSIWYGRender value={subtitle} />
                 </Text>
               ) : null}
             </Box>
@@ -47,7 +52,7 @@ export const PageHeading: FC<BoxProps & { title?: string; subtitle?: string; bod
             </Box>
           </Box>
         ) : null}
-      </div>
+      </Box>
     </Box>
   )
 }

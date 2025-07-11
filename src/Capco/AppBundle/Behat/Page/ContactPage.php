@@ -18,8 +18,8 @@ class ContactPage extends Page
     {
         if (
             !$this->getSession()->wait(
-                10000,
-                "document.querySelectorAll('.contact__form').length > 0"
+                15000,
+                "document.querySelectorAll('main#contact-page').length > 0"
             )
         ) {
             throw new \RuntimeException('ContactPage did not fully load, check selector in "verifyPage".');

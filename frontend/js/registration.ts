@@ -39,7 +39,6 @@ import ProjectTrashProposalApp from './startup/ProjectTrashProposalApp'
 import EventListApp from './startup/EventListApp'
 import ContactsListPage from './startup/ContactsListPage'
 import ReplyPageApp from './startup/ReplyPageApp'
-import ContactPage from './startup/ContactPage'
 import SectionPageApp from './startup/SectionPageApp'
 import OpinionVersionListPageApp from './startup/OpinionVersionListPageApp'
 import SSOSwitchUserApp from './startup/SSOSwitchUserApp'
@@ -94,7 +93,6 @@ ReactOnRails.register({
   LastProposalsApp,
   AccountProfileFollowingsApp,
   ContactsListPage,
-  ContactPage,
   ChooseAUsernameApp,
   ParisUserNotValidApp,
   CasUserNotValidApp,
