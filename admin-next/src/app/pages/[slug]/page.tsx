@@ -9,6 +9,7 @@ import { messages } from '@utils/withPageAuthRequired'
 import { pagePageCharteQuery$data } from '@relay/pagePageCharteQuery.graphql'
 import { formatCodeToLocale } from '@utils/locale-helper'
 import { formatCookiesForServer } from '@shared/utils/cookies'
+import { removeAccents } from '@shared/utils/removeAccents'
 
 const METADATA_QUERY = graphql`
   query pagePageMetadataQuery($pageSlug: String!) {
@@ -49,7 +50,8 @@ type Params = { params: { slug: string } }
 
 export async function generateMetadata({ params }: Params, parent: ResolvedMetadata): Promise<Metadata> {
   const cookieStore = cookies()
-  const slug = (await params).slug
+  const initialSlug = (await params).slug
+  const slug = removeAccents(decodeURI(initialSlug))
   const baseTitle = (await parent).title ?? 'Cap Collectif'
   const charterSlugs = getCharterSlugs()
 
@@ -94,8 +96,12 @@ export async function generateMetadata({ params }: Params, parent: ResolvedMetad
 
 export default async function Page({ params }: Params) {
   const cookieStore = cookies()
-  const { slug } = params
+  const { slug: initialSlug } = params
   const charterSlugs = getCharterSlugs()
+
+  if (!initialSlug) return notFound()
+
+  const slug = removeAccents(decodeURI(initialSlug))
 
   if (!slug) return notFound()
 

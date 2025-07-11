@@ -4,6 +4,7 @@ import Fetcher from '@utils/fetch'
 import { Metadata } from 'next'
 import { pageOrganizationMetadataQuery$data } from '@relay/pageOrganizationMetadataQuery.graphql'
 import { notFound } from 'next/navigation'
+import { removeAccents } from '@shared/utils/removeAccents'
 
 const METADATA_QUERY = graphql`
   query pageOrganizationMetadataQuery($organizationSlug: String!) {
@@ -25,7 +26,10 @@ const METADATA_QUERY = graphql`
 type Params = { params: { slug: string } }
 
 export async function generateMetadata({ params }: Params): Promise<Metadata> {
-  const slug = (await params).slug
+  const initialSlug = (await params).slug
+
+  const slug = removeAccents(decodeURI(initialSlug))
+
   const { organization, title: siteTitle } = await Fetcher.ssrGraphql<pageOrganizationMetadataQuery$data>(
     METADATA_QUERY,
     {
@@ -56,9 +60,11 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
 }
 
 export default function Page({ params }: Params) {
-  const { slug } = params
+  const { slug: initialSlug } = params
 
-  if (!slug) return notFound()
+  if (!initialSlug) return notFound()
+
+  const slug = removeAccents(decodeURI(initialSlug))
 
   return (
     <main id="organization-page">
