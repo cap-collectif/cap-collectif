@@ -57,8 +57,13 @@ class SessionWithJsonHandler extends RedisSessionHandler
             return true;
         }
 
-        $this->acquireLock($sessionId);
         $viewer = $this->getUser();
+
+        if (null === $viewer) {
+            return parent::write($sessionId, $data);
+        }
+
+        $this->acquireLock($sessionId);
 
         $encodedData = $this->encode($data, $viewer);
         $result = parent::write($sessionId, $encodedData);
