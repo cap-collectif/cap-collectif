@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Enum\ReplyStatus;
 use Capco\AppBundle\Traits\HasResponsesTrait;
@@ -20,7 +19,7 @@ use Symfony\Component\Validator\Constraints as Assert;
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\ReplyAnonymousRepository")
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  */
-class ReplyAnonymous extends AbstractReply implements EntityInterface, ExportableContributionInterface
+class ReplyAnonymous extends AbstractReply implements EntityInterface
 {
     use HasResponsesTrait;
     use TokenTrait;

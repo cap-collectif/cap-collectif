@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\Entity;
 
-use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Interfaces\DraftableInterface;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
 use Capco\AppBundle\Enum\ReplyStatus;
@@ -27,7 +26,7 @@ use Doctrine\ORM\Mapping as ORM;
  * @CapcoAssert\HasResponsesToRequiredQuestions(message="reply.missing_required_responses", formField="questionnaire")
  * @CapcoAssert\HasAuthor()
  */
-class Reply extends AbstractReply implements EntityInterface, Publishable, DraftableInterface, ExportableContributionInterface
+class Reply extends AbstractReply implements EntityInterface, Publishable, DraftableInterface
 {
     use AuthorableTrait;
     use DraftableTrait;

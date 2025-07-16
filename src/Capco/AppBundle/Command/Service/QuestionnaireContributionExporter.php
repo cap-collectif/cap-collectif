@@ -5,6 +5,7 @@ namespace Capco\AppBundle\Command\Service;
 use Capco\AppBundle\Command\Serializer\ReplyAnonymousNormalizer;
 use Capco\AppBundle\Command\Serializer\ReplyNormalizer;
 use Capco\AppBundle\Command\Service\FilePathResolver\ContributionsFilePathResolver;
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Questionnaire;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Repository\QuestionnaireRepository;
@@ -114,7 +115,7 @@ class QuestionnaireContributionExporter extends ContributionExporter
             }
 
             $this->exportContributions(
-                $replies,
+                $this->sortQuestionsByResponsesPosition($replies),
                 $questionnaire->getStep(),
                 0 === $replyOffset
             );
@@ -155,7 +156,7 @@ class QuestionnaireContributionExporter extends ContributionExporter
             }
 
             $this->exportContributions(
-                $anonymousReplies,
+                $this->sortQuestionsByResponsesPosition($anonymousReplies),
                 $questionnaire->getStep(),
                 $this->withHeaders
             );
@@ -164,5 +165,44 @@ class QuestionnaireContributionExporter extends ContributionExporter
             $anonymousRepliesOffset += self::BATCH_SIZE;
             $this->entityManager->clear();
         } while (self::BATCH_SIZE === \count($anonymousReplies));
+    }
+
+    /**
+     * @param AbstractReply[] $replies
+     *
+     * @return AbstractReply[]
+     */
+    private function sortQuestionsByResponsesPosition(array $replies): array
+    {
+        $sortedReplies = [];
+
+        foreach ($replies as $reply) {
+            $response = $reply->getResponses()[0];
+
+            $position = $response->getPosition();
+
+            if (!isset($sortedReplies[$position])) {
+                $sortedReplies[$position] = [];
+            }
+
+            $sortedReplies[$position][] = $reply;
+        }
+
+        ksort($sortedReplies);
+
+        $flattenedReplies = [];
+        $seenIds = [];
+
+        foreach ($sortedReplies as $repliesAtPosition) {
+            foreach ($repliesAtPosition as $reply) {
+                $id = $reply->getId();
+                if (!isset($seenIds[$id])) {
+                    $flattenedReplies[] = $reply;
+                    $seenIds[$id] = true;
+                }
+            }
+        }
+
+        return $flattenedReplies;
     }
 }

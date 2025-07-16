@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Command\Service\ExportInterface\ExportableContributionInterface;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Model\Contribution;
 use Capco\AppBundle\Model\VoteContribution;
@@ -19,7 +20,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\MappedSuperclass
  */
-abstract class AbstractReply implements Contribution, VoteContribution, \Stringable
+abstract class AbstractReply implements Contribution, VoteContribution, \Stringable, ExportableContributionInterface
 {
     use AuthorInformationTrait;
     use PublishableTrait;

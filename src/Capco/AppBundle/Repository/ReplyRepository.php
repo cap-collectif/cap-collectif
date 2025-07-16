@@ -2,6 +2,7 @@
 
 namespace Capco\AppBundle\Repository;
 
+use Capco\AppBundle\Entity\AbstractReply;
 use Capco\AppBundle\Entity\Participant;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Questionnaire;
@@ -320,7 +321,7 @@ class ReplyRepository extends EntityRepository
     }
 
     /**
-     * @return array<Reply>
+     * @return AbstractReply[]
      */
     public function getBatchOfPublishedReplies(string $questionnaireId, int $offset, int $limit): array
     {
