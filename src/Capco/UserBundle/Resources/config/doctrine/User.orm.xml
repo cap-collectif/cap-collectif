@@ -209,6 +209,10 @@
                 <cascade-remove/>
             </cascade>
         </one-to-many>
+
+        <field name="anonymizationReminderEmailSentAt" column="anonymization_reminder_email_sent_at" type="datetime" nullable="true"/>
+        <field name="anonymizationReminderEmailToken" column="anonymization_reminder_email_token" type="string" length="255" nullable="true"/>
+
     </entity>
 
 </doctrine-mapping>

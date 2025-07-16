@@ -387,6 +387,11 @@
                         "title": "capco.module.full_proposal_card",
                         "description": "description.module.full_proposal_card",
                         "onlySuperAdmin": true
+                    },
+                    "user_anonymization_automated": {
+                        "title": "capco.module.user_anonymization_automated",
+                        "description": "description.module.user_anonymization_automated",
+                        "onlySuperAdmin": true
                     }
                 }
             }

@@ -109,3 +109,14 @@ services:
     Capco\AppBundle\Command\UnsubscribeUserFromCsvCommand:
         arguments:
             $name: 'capco:user:unsubscribe'
+
+    Capco\AppBundle\Command\AnonymizeUsersAutomatedCommand:
+        arguments:
+            $anonymizationInactivityDays: '%anonymization_inactivity_days%'
+            $anonymizationInactivityEmailReminderDays: '%anonymization_inactivity_email_reminder_days%'
+
+    Capco\AppBundle\Command\SendAnonymizeUsersReminderEmailCommand:
+        arguments:
+            $anonymizationInactivityDays: '%anonymization_inactivity_days%'
+            $anonymizationInactivityEmailReminderDays: '%anonymization_inactivity_email_reminder_days%'
+

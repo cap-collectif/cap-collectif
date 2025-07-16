@@ -240,6 +240,9 @@ Object {
     Object {
       "type": "collect_proposals_by_email",
     },
+    Object {
+      "type": "user_anonymization_automated",
+    },
   ],
 }
 `;

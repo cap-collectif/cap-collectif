@@ -186,3 +186,6 @@ InternalFeatureFlagType:
             collect_proposals_by_email:
                 value: !php/const Capco\AppBundle\Toggle\Manager::collect_proposals_by_email
                 description: 'Whether or not collect proposals by email is enabled'
+            user_anonymization_automated:
+                value: !php/const Capco\AppBundle\Toggle\Manager::user_anonymization_automated
+                description: 'Whether or not user anonymization automated is enabled'

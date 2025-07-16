@@ -202,7 +202,10 @@ class AnonymizeUsersFromCsvCommand extends Command
                             openid_sessions_id = null,
                             consent_external_communication = FALSE,
                             consent_internal_communication = FALSE,
-                            email_confirmation_sent_at = NULL
+                            email_confirmation_sent_at = NULL,
+                            username_canonical = 'Utilisateur supprimé',
+                            slug = CONCAT('utilisateursupprime-', UUID()),
+                            updated_at = NOW()
                         WHERE id in (SELECT id FROM matching_users)
             SQL;
 

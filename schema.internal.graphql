@@ -7176,6 +7176,9 @@ enum FeatureFlagType {
 
   """Whether or not collect proposals by email is enabled"""
   collect_proposals_by_email
+
+  """Whether or not user anonymization automated is enabled"""
+  user_anonymization_automated
 }
 
 """Require a firstname"""

@@ -91,6 +91,7 @@ class Manager
     final public const full_proposal_card = 'full_proposal_card';
     final public const multi_consultations = 'multi_consultations';
     final public const collect_proposals_by_email = 'collect_proposals_by_email';
+    final public const user_anonymization_automated = 'user_anonymization_automated';
 
     final public const ADMIN_ALLOWED_FEATURES = [
         self::blog,
@@ -125,6 +126,7 @@ class Manager
         self::full_proposal_card,
         self::multi_consultations,
         self::collect_proposals_by_email,
+        self::user_anonymization_automated,
     ];
 
     public static $toggles = [
@@ -207,6 +209,7 @@ class Manager
         self::full_proposal_card,
         self::multi_consultations,
         self::collect_proposals_by_email,
+        self::user_anonymization_automated,
     ];
 
     protected Context $context;

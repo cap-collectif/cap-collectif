@@ -1763,7 +1763,7 @@ class UserRepository extends EntityRepository
             )
             ->andWhere('user.confirmationToken IS NULL')
             ->setParameter('collectStep', $step)
-    ;
+        ;
 
         return (int) $qb->getQuery()->getSingleScalarResult();
     }
@@ -2280,6 +2280,43 @@ class UserRepository extends EntityRepository
         return array_unique(array_column($participants, 'id'));
     }
 
+    /**
+     * @return User[]
+     */
+    public function findInactiveUsersEmailAndAnonToken(\DatetimeInterface $inactivityLimitDate, int $limit): array
+    {
+        $qb = $this->createQueryBuilder('u')
+            ->select('PARTIAL u.{id, email, anonymizationReminderEmailToken}')
+            ->leftJoin('u.memberOfOrganizations', 'om')
+            ->where("(u.roles NOT LIKE '%ADMIN%' AND u.roles NOT LIKE '%MEDIATOR%')
+                AND om IS NULL
+                AND u.lastLogin < :inactivityLimitDate
+                AND u.email IS NOT NULL
+                AND u.anonymizationReminderEmailSentAt IS NULL")
+            ->setMaxResults($limit)
+        ;
+
+        $qb->setParameters([
+            'inactivityLimitDate' => $inactivityLimitDate->format('Y-m-d H:i:s'),
+        ]);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @param string[] $emails
+     */
+    public function updateAnonymizationReminderEmailSentAt(array $emails): void
+    {
+        $conn = $this->getEntityManager()->getConnection();
+        $placeholders = array_map(fn ($i) => ":email{$i}", array_keys($emails));
+        $params = array_combine($placeholders, $emails);
+
+        $sql = 'UPDATE fos_user SET anonymization_reminder_email_sent_at = NOW() WHERE email IN (' . implode(', ', $placeholders) . ')';
+
+        $conn->executeStatement($sql, $params);
+    }
+
     protected function getIsEnabledQueryBuilder(): QueryBuilder
     {
         return $this->createQueryBuilder('u')->andWhere('u.enabled = true');
@@ -2309,6 +2346,6 @@ class UserRepository extends EntityRepository
             ->leftJoin('postComment.Reports', 'postCommentReport')
             ->leftJoin('postCommentReport.Reporter', 'postCommentReportUser', 'WITH', 'postCommentReportUser.confirmationToken IS NULL')
             ->leftJoin(sprintf('proposal.%s', $accessToStepProperty), $accessToStepProperty, !$isCollectStep ? 'WITH' : null, !$isCollectStep ? sprintf('%s.selectionStep = :step', $accessToStepProperty) : null)
-            ;
+        ;
     }
 }

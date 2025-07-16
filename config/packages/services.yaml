@@ -502,3 +502,12 @@ services:
             $redisExpirationTime: '%sms_orange_request_id_expiration_time%'
 
     Capco\AppBundle\Controller\Command\Service\FilePathResolver\UserGroupsFilePathResolver: ~
+
+    Capco\AppBundle\Service\MailChimpClient:
+        arguments:
+            $mandrillApiKey: '%mandrill_api_key%'
+
+    Capco\AppBundle\MessageHandler\MailSingleRecipientMessageHandler:
+        tags:
+            name: messenger.message_handler
+            handles: Capco\AppBundle\Message\MailSingleRecipientMessage

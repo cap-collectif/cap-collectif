@@ -1,0 +1,52 @@
+{% extends "@CapcoMail/standardLayoutNew.html.twig" %}
+
+{% set logo = app_logo_url() %}
+
+{% set btnBg = capco_site_color_value('color.btn.primary.bg') %}
+{% if null == btnBg %}{% set btnBg = '#1ABC9C' %}{% endif %}
+{% set btnText = capco_site_color_value('color.btn.primary.text') %}
+{% if null == btnText %}{% set btnText = '#FFF' %}{% endif %}
+{% set linkText = capco_site_color_value('color.link.default') %}
+{% if null == linkText %}{% set linkText = '#16a085' %}{% endif %}
+
+{% block core_mail %}
+<div>
+    {% if logo is not null %}
+        <img style="margin-bottom: 20px;" src="{{ logo }}" alt="logo {{ siteName }}"/>
+    {% else %}
+        <img style="margin-bottom: 20px;" src="{{ baseUrl ~ asset('apple-icon-76x76.png') }}" alt=""/>
+    {% endif %}
+
+    <h1 style="font-size: 1.5rem; font-weight: 600; margin: 0 0 25px 0; color: #2B2B2B">
+        {{ 'action-required-to-preserve-data'|trans({}, 'CapcoAppBundle', user_locale) }}
+    </h1>
+
+    <p style="line-height: 22px; color: #5E5E5E">
+        {{ 'anonymization_email_reminder_body_part_1'|trans({'{day}': day}, 'CapcoAppBundle', user_locale) |raw }}
+    </p>
+
+    <p style="margin: 20px 0">
+        <a href="{{ preserveDataUrl }}"
+           style="display: inline-block;color:{{ btnText }};padding:18px 24px;border-radius:4px;background-color: {{ btnBg }};font-weight: bold;">{{ 'i-preserve-my-data'|trans({}, 'CapcoAppBundle', user_locale) | raw }}</a>
+    </p>
+
+
+
+    <p style="line-height: 22px; color: #5E5E5E">
+        {{ 'anonymization_email_reminder_body_part_2'|trans({'{day}': day, '{platformName}': siteName}, 'CapcoAppBundle', user_locale) |raw }}
+    </p>
+
+    {% endblock %}
+
+    {% block footer_mail %}
+        <div style="margin: 0; text-align: left">
+            <p style="margin: 0; text-align: left">{{ 'notification.pub.participation'|trans({'{siteName}': siteName}, 'CapcoAppBundle', user_locale) | raw }}</p>
+
+            <p style="text-align: left;">
+                {{ 'email.propulsed.by'|trans({'{platformName}': siteName}, 'CapcoAppBundle', user_locale) | raw }}
+                <img src="{{ baseUrl ~ asset("capco-logo-mail.png") }}" alt="logo cap collectif"
+                     style="width: 15px;height: 15px;margin: 0 2px 0 4px;"/>
+                Cap Collectif
+            </p>
+        </div>
+    {% endblock %}

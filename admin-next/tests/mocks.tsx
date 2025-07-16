@@ -99,7 +99,8 @@ export const features: FeatureFlags = {
   online_help: false,
   multi_consultations: false,
   full_proposal_card: false,
-  collect_proposals_by_email: false
+  collect_proposals_by_email: false,
+  user_anonymization_automated: false
 }
 
 const environment = {

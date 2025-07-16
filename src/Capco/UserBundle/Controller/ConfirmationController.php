@@ -198,6 +198,45 @@ class ConfirmationController extends Controller
         return $response;
     }
 
+    /**
+     * @Route("/preserve_account_data/{token}", name="preserve_account_data", options={"i18n" = false})
+     */
+    public function preserveAccountData(string $token): RedirectResponse
+    {
+        $response = new RedirectResponse($this->router->generate('app_homepage'));
+        $flashBag = $this->session->getFlashBag();
+
+        $user = $this->userRepo->findOneBy(['anonymizationReminderEmailToken' => $token]);
+
+        if (!$user) {
+            $flashBag->add(
+                'danger',
+                $this->translator->trans(
+                    'invalid-token',
+                    [],
+                    'CapcoAppBundle'
+                )
+            );
+
+            return $response;
+        }
+
+        $user->setLastLogin(new \DateTime());
+        $user->setAnonymizationReminderEmailSentAt(null);
+        $this->em->flush();
+
+        $flashBag->add(
+            'success',
+            $this->translator->trans(
+                'preserve-data-toast-message',
+                [],
+                'CapcoAppBundle'
+            )
+        );
+
+        return $response;
+    }
+
     private function addConfirmationMessageToFlashbag(?AbstractStep $step, bool $hasPublishedContributions): void
     {
         $type = ($step && $step->isClosed()) ? 'danger' : 'success';

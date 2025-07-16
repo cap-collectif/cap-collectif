@@ -108,6 +108,8 @@ parameters:
     magiclinks_duration_in_minutes: '%env(int:SYMFONY_MAGICLINKS_DURATION_IN_MINUTES)%'
     session_lifetime_seconds: '%env(int:SYMFONY_SESSION_LIFETIME_SECONDS)%'
     session_timeout_seconds: '%env(int:SYMFONY_SESSION_TIMEOUT_SECONDS)%'
+    anonymization_inactivity_days: '%env(int:SYMFONY_ANONYMIZATION_INACTIVITY_DAYS)%'
+    anonymization_inactivity_email_reminder_days: '%env(int:SYMFONY_ANONYMIZATION_INACTIVITY_EMAIL_REMINDER_DAYS)%'
 
     #
     # Default env values :
@@ -144,7 +146,7 @@ parameters:
     env(SYMFONY_ASSETS_VERSION): v1
     env(SYMFONY_DISABLE_MAIL_DELIVERY): false
     env(SYMFONY_RABBITMQ_HOST): 127.0.0.1
-    env(SYMFONY_RABBITMQ_PORT): 5672
+    env(SYMFONY_RABBITMQ_PORT): '5672'
     env(SYMFONY_RABBITMQ_NODENAME): rabbit
     env(SYMFONY_ASSETS_HOST): null
     env(SYMFONY_INSTANCE_DEFAULT_ADMIN_PASSWORD): admin
@@ -175,6 +177,8 @@ parameters:
     env(SYMFONY_PANTHER_TOKEN): 'INSERT_A_REAL_SECRET'
     env(SYMFONY_SESSION_LIFETIME_SECONDS): 86400 # in seconds, 86400 = 24 hours
     env(SYMFONY_SESSION_TIMEOUT_SECONDS): 7200 # in seconds, 7200 = two hours
+    env(SYMFONY_ANONYMIZATION_INACTIVITY_DAYS): 365 # 1 year
+    env(SYMFONY_ANONYMIZATION_INACTIVITY_EMAIL_REMINDER_DAYS): 7
     env(SYMFONY_CAS_VERIFY_URL_PROFILE): null
     # ELASTICSEARCH-LOGPUSH
     env(SYMFONY_LOGPUSH_ELASTICSEARCH_HOST): 'INSERT_A_REAL_SECRET'

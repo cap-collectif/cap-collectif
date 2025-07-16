@@ -33,6 +33,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use Symfony\Component\Security\Core\User\EquatableInterface;
 use Symfony\Component\Security\Core\User\UserInterface as RealUserInterface;
+use Symfony\Component\Uid\Uuid;
 
 class User extends AbstractUser implements EntityInterface, ProjectOwner, EquatableInterface, IndexableInterface, Author, ContributorInterface
 {
@@ -130,6 +131,10 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
 
     private Collection $mediators;
 
+    private ?\Datetime $anonymizationReminderEmailSentAt = null;
+
+    private ?string $anonymizationReminderEmailToken = null;
+
     public function __construct()
     {
         parent::__construct();
@@ -154,6 +159,7 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
         $this->memberOfOrganizations = new ArrayCollection();
         $this->emailingCampaignUsers = new ArrayCollection();
         $this->mediators = new ArrayCollection();
+        $this->anonymizationReminderEmailToken = Uuid::v4()->toRfc4122();
     }
 
     public function isAdminOrganization(): bool
@@ -1270,5 +1276,29 @@ class User extends AbstractUser implements EntityInterface, ProjectOwner, Equata
     public function hasBackOfficeAccess(): bool
     {
         return $this->isOrganizationMember() || $this->hasRole(UserRole::ROLE_PROJECT_ADMIN) || $this->hasRole(UserRole::ROLE_ADMIN) || $this->hasRole(UserRole::ROLE_SUPER_ADMIN);
+    }
+
+    public function getAnonymizationReminderEmailSentAt(): ?\Datetime
+    {
+        return $this->anonymizationReminderEmailSentAt;
+    }
+
+    public function setAnonymizationReminderEmailSentAt(?\Datetime $anonymizationReminderEmailSentAt): self
+    {
+        $this->anonymizationReminderEmailSentAt = $anonymizationReminderEmailSentAt;
+
+        return $this;
+    }
+
+    public function getAnonymizationReminderEmailToken(): ?string
+    {
+        return $this->anonymizationReminderEmailToken;
+    }
+
+    public function setAnonymizationReminderEmailToken(?string $anonymizationReminderEmailToken): self
+    {
+        $this->anonymizationReminderEmailToken = $anonymizationReminderEmailToken;
+
+        return $this;
     }
 }
