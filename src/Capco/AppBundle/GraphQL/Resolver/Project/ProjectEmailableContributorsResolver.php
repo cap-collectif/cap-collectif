@@ -20,77 +20,77 @@ class ProjectEmailableContributorsResolver implements QueryInterface
     private const SQL_SELECT_USER = 'SELECT u.username, u.email, project_abstractstep.project_id, null as token ';
     private const SQL_FROM_PAS = 'FROM project_abstractstep ';
     private const SQL_JOIN_STEP =
-        self::SQL_FROM_PAS . 'RIGHT JOIN step ON step.id = project_abstractstep.step_id ';
+        self::SQL_FROM_PAS . 'JOIN step ON step.id = project_abstractstep.step_id ';
     private const SQL_JOIN_QUESTIONNAIRE =
-        self::SQL_JOIN_STEP . 'RIGHT JOIN questionnaire ON questionnaire.step_id = step.id ';
+        self::SQL_JOIN_STEP . 'JOIN questionnaire ON questionnaire.step_id = step.id ';
     private const SQL_JOIN_CONSULTATION =
-        self::SQL_JOIN_STEP . 'RIGHT JOIN consultation ON consultation.step_id = step.id ';
+        self::SQL_JOIN_STEP . 'JOIN consultation ON consultation.step_id = step.id ';
     private const SQL_JOIN_OPINION =
         self::SQL_JOIN_CONSULTATION .
-        'RIGHT JOIN opinion ON opinion.consultation_id = consultation.id ';
+        'JOIN opinion ON opinion.consultation_id = consultation.id ';
     private const SQL_JOIN_PROPOSAL_FORM =
-        self::SQL_JOIN_STEP . 'RIGHT JOIN proposal_form ON proposal_form.step_id = step.id ';
+        self::SQL_JOIN_STEP . 'JOIN proposal_form ON proposal_form.step_id = step.id ';
     private const SQL_JOIN_PROPOSAL =
         self::SQL_JOIN_PROPOSAL_FORM .
-        'RIGHT JOIN proposal ON proposal.proposal_form_id = proposal_form.id ';
+        'JOIN proposal ON proposal.proposal_form_id = proposal_form.id ';
     private const SQL_JOIN_DEBATE =
-        self::SQL_JOIN_STEP . 'RIGHT JOIN debate ON debate.step_id = step.id ';
+        self::SQL_JOIN_STEP . 'JOIN debate ON debate.step_id = step.id ';
 
     private const SQL_CONTRIBUTORS_REPLY =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_QUESTIONNAIRE .
-        'RIGHT JOIN reply ON reply.questionnaire_id = questionnaire.id ' .
-        'RIGHT JOIN fos_user u ON u.id = reply.author_id ' .
+        'JOIN reply ON reply.questionnaire_id = questionnaire.id ' .
+        'JOIN fos_user u ON u.id = reply.author_id ' .
         self::SQL_FILTER_USER;
     private const SQL_CONTRIBUTORS_OPINION =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_OPINION .
-        'RIGHT JOIN fos_user u ON u.id = opinion.author_id ' .
+        'JOIN fos_user u ON u.id = opinion.author_id ' .
         self::SQL_FILTER_USER;
     private const SQL_CONTRIBUTORS_ARGUMENT =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_OPINION .
-        'RIGHT JOIN argument ON argument.opinion_id = opinion.id ' .
-        'RIGHT JOIN fos_user u ON u.id = argument.author_id ' .
+        'JOIN argument ON argument.opinion_id = opinion.id ' .
+        'JOIN fos_user u ON u.id = argument.author_id ' .
         self::SQL_FILTER_USER;
     private const SQL_CONTRIBUTORS_SOURCE =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_OPINION .
-        'RIGHT JOIN source ON source.opinion_id = opinion.id ' .
-        'RIGHT JOIN fos_user u ON u.id = source.author_id ' .
+        'JOIN source ON source.opinion_id = opinion.id ' .
+        'JOIN fos_user u ON u.id = source.author_id ' .
         self::SQL_FILTER_USER;
     private const SQL_CONTRIBUTORS_PROPOSAL =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_PROPOSAL .
-        'RIGHT JOIN fos_user u ON u.id = proposal.author_id ' .
+        'JOIN fos_user u ON u.id = proposal.author_id ' .
         self::SQL_FILTER_USER;
     private const SQL_CONTRIBUTORS_COMMENT =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_PROPOSAL .
-        'RIGHT JOIN comment ON comment.proposal_id = proposal.id ' .
-        'RIGHT JOIN fos_user u ON u.id = comment.author_id ' .
+        'JOIN comment ON comment.proposal_id = proposal.id ' .
+        'JOIN fos_user u ON u.id = comment.author_id ' .
         self::SQL_FILTER_USER;
     private const SQL_CONTRIBUTORS_DEBATE_ARGUMENT =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_DEBATE .
-        'RIGHT JOIN debate_argument ON debate_argument.debate_id = debate.id ' .
-        'RIGHT JOIN fos_user u ON u.id = debate_argument.author_id ' .
+        'JOIN debate_argument ON debate_argument.debate_id = debate.id ' .
+        'JOIN fos_user u ON u.id = debate_argument.author_id ' .
         self::SQL_FILTER_USER;
     private const SQL_CONTRIBUTORS_DEBATE_VOTE =
         self::SQL_SELECT_USER .
         self::SQL_JOIN_DEBATE .
-        'RIGHT JOIN votes ON votes.debate_id = debate.id ' .
-        'RIGHT JOIN fos_user u ON u.id = votes.voter_id ' .
+        'JOIN votes ON votes.debate_id = debate.id ' .
+        'JOIN fos_user u ON u.id = votes.voter_id ' .
         self::SQL_FILTER_USER;
     private const SQL_ANONYMOUS_REPLY =
         'SELECT null as username, reply_anonymous.participant_email as email, project_abstractstep.project_id, token ' .
         self::SQL_JOIN_QUESTIONNAIRE .
-        'RIGHT JOIN reply_anonymous on reply_anonymous.questionnaire_id = questionnaire.id ' .
+        'JOIN reply_anonymous on reply_anonymous.questionnaire_id = questionnaire.id ' .
         'WHERE reply_anonymous.participant_email IS NOT NULL AND email_confirmed = :consent ';
     private const SQL_ANONYMOUS_DEBATE_ARGUMENT =
         'SELECT null as username, email, project_abstractstep.project_id, token ' .
         self::SQL_JOIN_DEBATE .
-        'RIGHT JOIN debate_anonymous_argument ON debate_anonymous_argument.debate_id = debate.id ' .
+        'JOIN debate_anonymous_argument ON debate_anonymous_argument.debate_id = debate.id ' .
         'WHERE consent_internal_communication = :consent ';
 
     private const SQL_UNION =

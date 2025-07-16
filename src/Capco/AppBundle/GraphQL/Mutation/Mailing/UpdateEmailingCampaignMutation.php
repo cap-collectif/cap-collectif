@@ -45,7 +45,9 @@ class UpdateEmailingCampaignMutation extends AbstractEmailingCampaignMutation
             self::handleSendAt($input, $emailingCampaign);
 
             $form = $this->formFactory->create(EmailingCampaignType::class, $emailingCampaign);
-            $form->submit($input->getArrayCopy());
+            $data = $input->getArrayCopy();
+            unset($data['id']);
+            $form->submit($data);
 
             $this->entityManager->flush();
         } catch (UserError $exception) {
