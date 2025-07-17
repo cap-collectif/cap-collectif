@@ -28,7 +28,12 @@ class QueryContributorsResolver implements QueryInterface
             $value = $this->userSearch->getAllContributors($offset, $limit);
             $totalCount = (int) $value['totalCount'];
 
-            if (str_contains(getenv('SYMFONY_INSTANCE_NAME'), 'occitanie')) {
+            $instanceName = getenv('SYMFONY_INSTANCE_NAME');
+
+            if (
+                'occitanie-preprod' !== $instanceName
+                && str_contains($instanceName, 'occitanie')
+            ) {
                 $totalCount = $this->occitanieClient->getUserCounters();
             }
 
