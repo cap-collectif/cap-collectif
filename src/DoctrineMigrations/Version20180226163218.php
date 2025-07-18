@@ -2,7 +2,7 @@
 
 namespace Application\Migrations;
 
-use CapCollectif\IdToUuid\IdToUuidMigration;
+use Capco\DoctrineMigrations\IdToUuidMigration;
 use Doctrine\DBAL\Schema\Schema;
 
 class Version20180226163218 extends IdToUuidMigration
