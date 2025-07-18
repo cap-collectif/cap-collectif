@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalDecisionMaker;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
@@ -25,7 +25,7 @@ class AssignDecisionMakerToProposalsMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilder $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalDecisionMakerRepository $proposalDecisionMakerRepository, private readonly Publisher $publisher)
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilderInterface $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalDecisionMakerRepository $proposalDecisionMakerRepository, private readonly Publisher $publisher)
     {
     }
 

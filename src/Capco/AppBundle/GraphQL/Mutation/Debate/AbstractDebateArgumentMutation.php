@@ -13,7 +13,7 @@ use Capco\AppBundle\Notifier\DebateNotifier;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
 use Capco\AppBundle\Security\DebateArgumentVoter;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\AppBundle\Validator\Constraints\CheckDebateAnonymousParticipationHashConstraint;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -34,7 +34,7 @@ class AbstractDebateArgumentMutation
     final public const ALREADY_HAS_ARGUMENT = 'ALREADY_HAS_ARGUMENT';
     final public const INVALID_HASH = 'INVALID_HASH';
 
-    public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected DebateArgumentRepository $repository, protected DebateAnonymousArgumentRepository $anonymousRepository, protected AuthorizationCheckerInterface $authorizationChecker, protected Indexer $indexer, protected ValidatorInterface $validator, protected TokenGeneratorInterface $tokenGenerator, protected DebateNotifier $debateNotifier, protected RequestGuesser $requestGuesser)
+    public function __construct(protected EntityManagerInterface $em, protected GlobalIdResolver $globalIdResolver, protected DebateArgumentRepository $repository, protected DebateAnonymousArgumentRepository $anonymousRepository, protected AuthorizationCheckerInterface $authorizationChecker, protected Indexer $indexer, protected ValidatorInterface $validator, protected TokenGeneratorInterface $tokenGenerator, protected DebateNotifier $debateNotifier, protected RequestGuesserInterface $requestGuesser)
     {
     }
 

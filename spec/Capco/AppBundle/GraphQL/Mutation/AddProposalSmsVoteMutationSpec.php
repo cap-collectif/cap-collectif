@@ -19,7 +19,7 @@ use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Service\ContributionValidator;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\ORM\Tools\Pagination\Paginator;
@@ -47,7 +47,7 @@ class AddProposalSmsVoteMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository,
         ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         PhoneTokenRepository $phoneTokenRepository,
         ProposalVoteAccountHandler $proposalVoteAccountHandler,
         ContributionValidator $contributionValidator

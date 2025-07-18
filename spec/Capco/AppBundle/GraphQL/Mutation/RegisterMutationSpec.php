@@ -12,13 +12,12 @@ use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationReposit
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Doctrine\UserManager;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Handler\UserInvitationHandler;
-use DG\BypassFinals;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Model\UserManagerInterface;
@@ -31,8 +30,6 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-
-BypassFinals::enable();
 
 /**
  * @extends ObjectBehavior<string, string>
@@ -55,7 +52,7 @@ class RegisterMutationSpec extends ObjectBehavior
         PendingOrganizationInvitationRepository $organizationInvitationRepository,
         EntityManagerInterface $em,
         RateLimiter $rateLimiter,
-        RequestGuesser $requestGuesser
+        RequestGuesserInterface $requestGuesser
     ): void {
         $this->beConstructedWith(
             $toggleManager,
@@ -83,7 +80,7 @@ class RegisterMutationSpec extends ObjectBehavior
     public function it_should_check_rate_limit(
         Arg $args,
         RateLimiter $rateLimiter,
-        RequestGuesser $requestGuesser
+        RequestGuesserInterface $requestGuesser
     ): void {
         $args->getArrayCopy()->willReturn([
             'invitationToken' => 'theToken',
@@ -124,7 +121,7 @@ class RegisterMutationSpec extends ObjectBehavior
         PendingOrganizationInvitationRepository $organizationInvitationRepository,
         UserInvitationHandler $userInvitationHandler,
         RateLimiter $rateLimiter,
-        RequestGuesser $requestGuesser
+        RequestGuesserInterface $requestGuesser
     ): void {
         $args->getArrayCopy()->willReturn([
             'invitationToken' => 'theToken',

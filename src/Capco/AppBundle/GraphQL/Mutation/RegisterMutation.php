@@ -12,7 +12,7 @@ use Capco\AppBundle\Repository\Organization\PendingOrganizationInvitationReposit
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Form\Type\ApiRegistrationFormType;
 use Capco\UserBundle\Handler\UserInvitationHandler;
@@ -41,7 +41,7 @@ class RegisterMutation implements MutationInterface
     final public const RATE_LIMITER_ACTION = 'RegisterMutation';
     final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    public function __construct(private readonly Manager $toggleManager, private readonly UserInviteRepository $userInviteRepository, private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator, private readonly UserManagerInterface $userManager, private readonly TokenGeneratorInterface $tokenGenerator, private readonly FOSNotifier $notifier, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly UserInvitationHandler $userInvitationHandler, private readonly PendingOrganizationInvitationRepository $organizationInvitationRepository, private readonly EntityManagerInterface $em, private readonly RateLimiter $rateLimiter, private readonly RequestGuesser $requestGuesser)
+    public function __construct(private readonly Manager $toggleManager, private readonly UserInviteRepository $userInviteRepository, private readonly LoggerInterface $logger, private readonly TranslatorInterface $translator, private readonly UserManagerInterface $userManager, private readonly TokenGeneratorInterface $tokenGenerator, private readonly FOSNotifier $notifier, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly UserInvitationHandler $userInvitationHandler, private readonly PendingOrganizationInvitationRepository $organizationInvitationRepository, private readonly EntityManagerInterface $em, private readonly RateLimiter $rateLimiter, private readonly RequestGuesserInterface $requestGuesser)
     {
     }
 

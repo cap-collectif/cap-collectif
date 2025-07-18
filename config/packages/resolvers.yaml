@@ -80,7 +80,13 @@ services:
         public: true
         lazy: true
 
-    Capco\AppBundle\GraphQL\ConnectionBuilder: ~
+    Capco\AppBundle\GraphQL\ConnectionBuilder:
+        class: Capco\AppBundle\GraphQL\ConnectionBuilder
+        public: true
+
+    Capco\AppBundle\GraphQL\ConnectionBuilderInterface:
+        alias: Capco\AppBundle\GraphQL\ConnectionBuilder
+
     Capco\AppBundle\GraphQL\QueryAnalyzer: ~
     Capco\AppBundle\Resolver\LocaleResolver:
         public: true

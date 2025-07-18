@@ -9,7 +9,7 @@ use Capco\AppBundle\Mailer\SendInBlue\SendInBluePublisher;
 use Capco\AppBundle\Notifier\DebateNotifier;
 use Capco\AppBundle\Repository\Debate\DebateAnonymousArgumentRepository;
 use Capco\AppBundle\Repository\DebateArgumentRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -30,7 +30,7 @@ class CreateDebateAnonymousArgumentMutation extends CreateDebateArgumentMutation
         ValidatorInterface $validator,
         TokenGeneratorInterface $tokenGenerator,
         DebateNotifier $debateNotifier,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         private readonly SendInBluePublisher $sendInBluePublisher
     ) {
         parent::__construct(

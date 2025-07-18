@@ -11,7 +11,7 @@ use Capco\AppBundle\Repository\NewsletterSubscriptionRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -30,7 +30,7 @@ class SubscribeNewsletterMutation implements MutationInterface
     final public const RATE_LIMITER_ACTION = 'RegisterMutation';
     final public const RATE_LIMIT_REACHED = 'RATE_LIMIT_REACHED';
 
-    public function __construct(private readonly Manager $toggleManager, private readonly LoggerInterface $logger, private readonly CaptchaChecker $captchaChecker, private readonly RequestGuesser $requestGuesser, private readonly FormFactoryInterface $formFactory, private EntityManagerInterface $entityManager, private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly UserRepository $userRepository, private readonly RateLimiter $rateLimiter, private readonly SendInBluePublisher $sendInBluePublisher)
+    public function __construct(private readonly Manager $toggleManager, private readonly LoggerInterface $logger, private readonly CaptchaChecker $captchaChecker, private readonly RequestGuesserInterface $requestGuesser, private readonly FormFactoryInterface $formFactory, private EntityManagerInterface $entityManager, private readonly NewsletterSubscriptionRepository $newsletterSubscriptionRepository, private readonly UserRepository $userRepository, private readonly RateLimiter $rateLimiter, private readonly SendInBluePublisher $sendInBluePublisher)
     {
     }
 

@@ -16,7 +16,7 @@ use Capco\UserBundle\OpenID\OpenIDResourceOwner;
 use Capco\UserBundle\Repository\UserRepository;
 use Capco\UserBundle\Security\Core\User\OauthUserProvider;
 use FOS\UserBundle\Model\UserManagerInterface;
-use HWI\Bundle\OAuthBundle\OAuth\ResourceOwner\FacebookResourceOwner;
+use HWI\Bundle\OAuthBundle\OAuth\ResourceOwnerInterface;
 use HWI\Bundle\OAuthBundle\OAuth\Response\UserResponseInterface;
 use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PhpSpec\ObjectBehavior;
@@ -209,7 +209,7 @@ class OauthUserProviderSpec extends ObjectBehavior
     public function it_loads_new_facebook_user(
         UserResponseInterface $response,
         UserRepository $userRepository,
-        FacebookResourceOwner $ressourceOwner,
+        ResourceOwnerInterface $ressourceOwner,
         UserManagerInterface $userManager,
         User $user,
         TokenStorageInterface $tokenStorage,
@@ -580,7 +580,7 @@ class OauthUserProviderSpec extends ObjectBehavior
 
     private function generateGenericFacebookResponse(
         UserResponseInterface $response,
-        FacebookResourceOwner $ressourceOwner
+        ResourceOwnerInterface $ressourceOwner
     ) {
         $ressourceOwner->getName()->willReturn('facebook');
         $response->getEmail()->willReturn(null);

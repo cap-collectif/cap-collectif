@@ -18,7 +18,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdatePostMutationSpec extends ObjectBehavior
@@ -164,11 +163,11 @@ class UpdatePostMutationSpec extends ObjectBehavior
         User $viewer,
         GlobalIdResolver $globalIdResolver,
         Post $post,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $postId = 'abc';
         $globalIdResolver->resolve($postId, $viewer)->willReturn($post);
-        $authorizationChecker->isGranted(PostVoter::EDIT, $post)->shouldBeCalled();
+        $authorizationChecker->isGranted(PostVoter::EDIT, $post)->shouldBeCalled()->willReturn(true);
 
         $this->isGranted($postId, $viewer);
     }

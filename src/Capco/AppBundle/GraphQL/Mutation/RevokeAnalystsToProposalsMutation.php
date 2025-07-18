@@ -6,7 +6,7 @@ use Capco\AppBundle\CapcoAppBundleMessagesTypes;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalAnalysis;
 use Capco\AppBundle\Enum\ProposalAssignmentErrorCode;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
@@ -29,7 +29,7 @@ class RevokeAnalystsToProposalsMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilder $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalAnalystRepository $proposalAnalystRepository, private readonly ProposalAnalysisRepository $proposalAnalysisRepository, private readonly LoggerInterface $logger, private readonly Publisher $publisher)
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilderInterface $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ProposalAnalystRepository $proposalAnalystRepository, private readonly ProposalAnalysisRepository $proposalAnalysisRepository, private readonly LoggerInterface $logger, private readonly Publisher $publisher)
     {
     }
 

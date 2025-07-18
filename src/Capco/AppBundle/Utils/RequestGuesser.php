@@ -5,15 +5,7 @@ namespace Capco\AppBundle\Utils;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 
-/**
- * Please use this service every time you want to retrieve an IP or a User Agent.
- *
- * This service make sure we see the end-user IP addresses in origin requests with Cloudflare's True-Client-IP Header.
- * https://support.cloudflare.com/hc/en-us/articles/206776727-Understanding-the-True-Client-IP-Header
- *
- * In case we don't have this header, it fallback to the request IP.
- */
-final class RequestGuesser
+final class RequestGuesser implements RequestGuesserInterface
 {
     public function __construct(private readonly RequestStack $requestStack)
     {
@@ -33,6 +25,9 @@ final class RequestGuesser
         return $request ? self::getUserAgentFromRequest($request) : null;
     }
 
+    /**
+     * {@inheritdoc}
+     */
     public function getJsonContent(): ?array
     {
         $request = $this->getCurrentRequest();

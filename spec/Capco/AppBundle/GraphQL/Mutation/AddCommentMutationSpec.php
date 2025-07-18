@@ -11,7 +11,7 @@ use Capco\AppBundle\GraphQL\Mutation\AddCommentMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Model\CommentableInterface;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -35,7 +35,7 @@ class AddCommentMutationSpec extends ObjectBehavior
         LoggerInterface $logger,
         EventDispatcherInterface $dispatcher,
         CommentableCommentsDataLoader $commentableCommentsDataLoader,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         Manager $manager,
         TokenGeneratorInterface $tokenGenerator
     ) {

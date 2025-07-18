@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Mediator;
 
 use Capco\AppBundle\Entity\Mediator;
 use Capco\AppBundle\Enum\ParticipantOrderField;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\Repository\ParticipantRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class MediatorParticipantsResolver implements QueryInterface
 {
-    public function __construct(private readonly ConnectionBuilder $connectionBuilder, private readonly ParticipantRepository $participantRepository)
+    public function __construct(private readonly ConnectionBuilderInterface $connectionBuilder, private readonly ParticipantRepository $participantRepository)
     {
     }
 

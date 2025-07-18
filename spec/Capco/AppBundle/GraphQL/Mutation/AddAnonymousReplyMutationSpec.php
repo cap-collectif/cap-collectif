@@ -9,7 +9,7 @@ use Capco\AppBundle\Form\ReplyAnonymousType;
 use Capco\AppBundle\GraphQL\Mutation\AddAnonymousReplyMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGenerator;
@@ -32,7 +32,7 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         FormFactoryInterface $formFactory,
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         TokenGeneratorInterface $tokenGenerator,
         GlobalIdResolver $globalIdResolver,
         Publisher $publisher,
@@ -60,7 +60,7 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         Arg $input,
         GlobalIdResolver $globalIdResolver,
         Questionnaire $questionnaire,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         TokenGenerator $tokenGenerator,
         ResponsesFormatter $responsesFormatter,
         FormFactoryInterface $formFactory,
@@ -160,7 +160,7 @@ class AddAnonymousReplyMutationSpec extends ObjectBehavior
         Arg $input,
         GlobalIdResolver $globalIdResolver,
         Questionnaire $questionnaire,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         TokenGenerator $tokenGenerator,
         ResponsesFormatter $responsesFormatter,
         FormFactoryInterface $formFactory,

@@ -12,18 +12,15 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
-use DG\BypassFinals;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Node\GlobalId;
 use PhpSpec\ObjectBehavior;
 use PhpSpec\Wrapper\Collaborator;
-
-BypassFinals::enable();
 
 class ContactProposalAuthorMutationSpec extends ObjectBehavior
 {
@@ -34,7 +31,7 @@ class ContactProposalAuthorMutationSpec extends ObjectBehavior
         MailerService $mailerService,
         CaptchaChecker $captchaChecker,
         EmailValidator $emailValidator,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         ProposalForm $form,
         Proposal $proposal,
         User $user

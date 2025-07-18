@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\Repository\MediatorRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class StepMediatorsResolver implements QueryInterface
 {
-    public function __construct(private readonly ConnectionBuilder $connectionBuilder, private readonly MediatorRepository $mediatorRepository)
+    public function __construct(private readonly ConnectionBuilderInterface $connectionBuilder, private readonly MediatorRepository $mediatorRepository)
     {
     }
 

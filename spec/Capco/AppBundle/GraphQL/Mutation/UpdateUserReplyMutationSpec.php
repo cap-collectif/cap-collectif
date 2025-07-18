@@ -14,7 +14,6 @@ use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
-use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
 use GraphQL\Error\UserError;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -26,8 +25,6 @@ use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactory;
 use Symfony\Component\Form\FormFactoryInterface;
 use Symfony\Component\Form\FormInterface;
-
-BypassFinals::enable();
 
 class UpdateUserReplyMutationSpec extends ObjectBehavior
 {

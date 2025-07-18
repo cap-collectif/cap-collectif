@@ -19,7 +19,7 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\ProposalCollectVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionVoteRepository;
 use Capco\AppBundle\Service\ContributionValidator;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -36,7 +36,7 @@ class AddProposalVoteMutation implements MutationInterface
 
     final public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ValidatorInterface $validator, private readonly LoggerInterface $logger, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly StepRequirementsResolver $resolver, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly GlobalIdResolver $globalIdResolver, private readonly RequestGuesser $requestGuesser, private readonly ContributionValidator $contributionValidator)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ValidatorInterface $validator, private readonly LoggerInterface $logger, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly StepRequirementsResolver $resolver, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly GlobalIdResolver $globalIdResolver, private readonly RequestGuesserInterface $requestGuesser, private readonly ContributionValidator $contributionValidator)
     {
     }
 

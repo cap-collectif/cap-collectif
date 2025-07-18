@@ -11,7 +11,7 @@ use Capco\AppBundle\Entity\Status;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\ProposalStepErrorCode;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\SelectionRepository;
 use Capco\UserBundle\Entity\User;
@@ -29,7 +29,7 @@ abstract class AbstractProposalStepMutation
     protected ?Project $project = null;
     protected ?AbstractStep $step = null;
 
-    public function __construct(protected EntityManagerInterface $entityManager, protected GlobalIdResolver $globalIdResolver, private readonly SelectionRepository $selectionRepository, private readonly ConnectionBuilder $connectionBuilder, private readonly Publisher $publisher, private readonly Indexer $indexer, protected AuthorizationCheckerInterface $authorizationChecker)
+    public function __construct(protected EntityManagerInterface $entityManager, protected GlobalIdResolver $globalIdResolver, private readonly SelectionRepository $selectionRepository, private readonly ConnectionBuilderInterface $connectionBuilder, private readonly Publisher $publisher, private readonly Indexer $indexer, protected AuthorizationCheckerInterface $authorizationChecker)
     {
     }
 

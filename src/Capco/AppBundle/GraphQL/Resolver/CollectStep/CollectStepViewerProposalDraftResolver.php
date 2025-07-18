@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\CollectStep;
 
 use Capco\AppBundle\Entity\Steps\CollectStep;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalFormRepository;
 use Capco\AppBundle\Repository\ProposalRepository;
@@ -16,7 +16,7 @@ class CollectStepViewerProposalDraftResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private ProposalFormRepository $proposalFormRepository, private ProposalRepository $proposalRepository, private ConnectionBuilder $builder)
+    public function __construct(private ProposalFormRepository $proposalFormRepository, private ProposalRepository $proposalRepository, private readonly ConnectionBuilderInterface $builder)
     {
     }
 

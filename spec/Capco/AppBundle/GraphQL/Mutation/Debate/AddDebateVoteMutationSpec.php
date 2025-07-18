@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\GraphQL\Mutation\Debate\AddDebateVoteMutation;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\Repository\DebateVoteRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Driver\DriverException;
@@ -29,7 +29,7 @@ class AddDebateVoteMutationSpec extends ObjectBehavior
         GlobalIdResolver $globalIdResolver,
         DebateVoteRepository $repository,
         Indexer $indexer,
-        RequestGuesser $requestGuesser
+        RequestGuesserInterface $requestGuesser
     ) {
         $requestGuesser->getClientIp()->willReturn('1.2.3.4');
         $requestGuesser->getUserAgent()->willReturn('UserAgent');

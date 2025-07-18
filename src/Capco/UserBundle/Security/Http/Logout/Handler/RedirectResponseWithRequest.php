@@ -5,7 +5,7 @@ namespace Capco\UserBundle\Security\Http\Logout\Handler;
 use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
 
-final class RedirectResponseWithRequest
+final class RedirectResponseWithRequest implements RedirectResponseWithRequestInterface
 {
     public function __construct(private Request $request, private RedirectResponse $response)
     {

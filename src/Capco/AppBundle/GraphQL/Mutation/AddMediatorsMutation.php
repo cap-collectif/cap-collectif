@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Steps\AbstractStep;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
 use Capco\AppBundle\Enum\UserRole;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\MediatorRepository;
@@ -25,7 +25,7 @@ class AddMediatorsMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly MediatorRepository $mediatorRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ConnectionBuilder $connectionBuilder, private readonly Manager $manager, private readonly Indexer $indexer)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly MediatorRepository $mediatorRepository, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly ConnectionBuilderInterface $connectionBuilder, private readonly Manager $manager, private readonly Indexer $indexer)
     {
     }
 

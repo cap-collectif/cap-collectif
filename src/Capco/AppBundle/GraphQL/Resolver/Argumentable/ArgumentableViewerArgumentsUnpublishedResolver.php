@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Argumentable;
 
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Model\Argumentable;
 use Capco\AppBundle\Repository\ArgumentRepository;
@@ -14,7 +14,7 @@ class ArgumentableViewerArgumentsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private ArgumentRepository $argumentRepository, private ConnectionBuilder $builder)
+    public function __construct(private ArgumentRepository $argumentRepository, private readonly ConnectionBuilderInterface $builder)
     {
     }
 

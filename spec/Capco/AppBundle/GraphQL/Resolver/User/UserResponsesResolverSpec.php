@@ -4,7 +4,7 @@ namespace spec\Capco\AppBundle\GraphQL\Resolver\User;
 
 use Capco\AppBundle\Entity\Questions\AbstractQuestion;
 use Capco\AppBundle\Entity\Responses\AbstractResponse;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\User\UserResponsesResolver;
 use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
@@ -13,7 +13,7 @@ use PhpSpec\ObjectBehavior;
 
 class UserResponsesResolverSpec extends ObjectBehavior
 {
-    public function let(ConnectionBuilder $builder)
+    public function let(ConnectionBuilderInterface $builder)
     {
         $this->beConstructedWith($builder);
     }
@@ -27,7 +27,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         User $subject,
         AbstractResponse $response,
         AbstractQuestion $question,
-        ConnectionBuilder $builder,
+        ConnectionBuilderInterface $builder,
         ConnectionInterface $connection
     ): void {
         $viewer = null;
@@ -50,7 +50,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         User $subject,
         AbstractResponse $response,
         AbstractQuestion $question,
-        ConnectionBuilder $builder,
+        ConnectionBuilderInterface $builder,
         ConnectionInterface $connection
     ): void {
         $viewer = $subject;
@@ -74,7 +74,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         User $subject,
         AbstractResponse $response,
         AbstractQuestion $question,
-        ConnectionBuilder $builder,
+        ConnectionBuilderInterface $builder,
         ConnectionInterface $emptyConnection
     ): void {
         $viewer = $subject;
@@ -98,7 +98,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         User $subject,
         AbstractResponse $response,
         AbstractQuestion $question,
-        ConnectionBuilder $builder,
+        ConnectionBuilderInterface $builder,
         ConnectionInterface $emptyConnection
     ): void {
         $viewer = null;
@@ -122,7 +122,7 @@ class UserResponsesResolverSpec extends ObjectBehavior
         User $viewer,
         AbstractResponse $response,
         AbstractQuestion $question,
-        ConnectionBuilder $builder,
+        ConnectionBuilderInterface $builder,
         ConnectionInterface $emptyConnection
     ): void {
         $context = new \ArrayObject(['disable_acl' => false]);

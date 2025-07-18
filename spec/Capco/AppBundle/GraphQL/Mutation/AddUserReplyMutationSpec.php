@@ -12,7 +12,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Requirement\StepRequirementsResolver;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
@@ -37,7 +37,7 @@ class AddUserReplyMutationSpec extends ObjectBehavior
         ResponsesFormatter $responsesFormatter,
         LoggerInterface $logger,
         Publisher $publisher,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         StepRequirementsResolver $stepRequirementsResolver,
         Indexer $indexer
     ) {

@@ -17,8 +17,8 @@ class FranceConnectLogoutHandler implements LogoutHandlerInterface
     }
 
     public function handle(
-        RedirectResponseWithRequest $responseWithRequest
-    ): RedirectResponseWithRequest {
+        RedirectResponseWithRequestInterface $responseWithRequest
+    ): RedirectResponseWithRequestInterface {
         $token = $this->tokenStorage->getToken();
         // This if statement help to not trigger France Connect logout redirection
         // when a user was logged in with another workflow (classic auth, facebook, etc...).

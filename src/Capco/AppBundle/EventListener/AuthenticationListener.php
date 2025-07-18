@@ -4,23 +4,26 @@ namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Entity\UserConnection;
 use Capco\AppBundle\Service\OpenIDBackchannel;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\AuthenticationEvents;
-use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
+use Symfony\Component\Security\Http\Event\LoginFailureEvent;
+use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly RequestGuesser $requestGuesser, private readonly OpenIDBackchannel $openIDBackchannel, private readonly LoggerInterface $logger)
-    {
+    public function __construct(
+        private readonly EntityManagerInterface $em,
+        private readonly RequestGuesserInterface $requestGuesser,
+        private readonly OpenIDBackchannel $openIDBackchannel,
+        private readonly LoggerInterface $logger
+    ) {
     }
 
-    public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
+    public function onAuthenticationFailure(LoginFailureEvent $event): void
     {
         // Save an unsuccessfull user login.
         $data = $this->requestGuesser->getJsonContent();
@@ -36,13 +39,13 @@ class AuthenticationListener implements EventSubscriberInterface
         $this->em->flush();
     }
 
-    public function onAuthenticationSuccess(InteractiveLoginEvent $event): void
+    public function onAuthenticationSuccess(LoginSuccessEvent $event): void
     {
         $request = $event->getRequest();
         $session = $request->getSession();
 
         // Authentication
-        $authenticationToken = $event->getAuthenticationToken();
+        $authenticationToken = $event->getAuthenticatedToken();
         $serialized = $authenticationToken->serialize();
         $session->set('theToken', $serialized);
 
@@ -70,8 +73,8 @@ class AuthenticationListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            AuthenticationEvents::AUTHENTICATION_FAILURE => 'onAuthenticationFailure',
-            AuthenticationEvents::AUTHENTICATION_SUCCESS => 'onAuthenticationSuccess',
+            LoginFailureEvent::class => 'onAuthenticationFailure',
+            LoginSuccessEvent::class => 'onAuthenticationSuccess',
         ];
     }
 

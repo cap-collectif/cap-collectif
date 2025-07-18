@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\ProposalForm;
 
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -14,7 +14,7 @@ class ProposalFormViewerProposalsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private ProposalRepository $proposalRepo, private ConnectionBuilder $builder)
+    public function __construct(private ProposalRepository $proposalRepo, private readonly ConnectionBuilderInterface $builder)
     {
     }
 

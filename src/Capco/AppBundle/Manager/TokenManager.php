@@ -7,14 +7,14 @@ use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\Entity\Debate\DebateVoteToken;
 use Capco\AppBundle\Enum\ForOrAgainstType;
 use Capco\AppBundle\Repository\ActionTokenRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 
 class TokenManager
 {
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ActionTokenRepository $repository, private readonly LoggerInterface $logger, private readonly RequestGuesser $requestGuesser)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ActionTokenRepository $repository, private readonly LoggerInterface $logger, private readonly RequestGuesserInterface $requestGuesser)
     {
     }
 

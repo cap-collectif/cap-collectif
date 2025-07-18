@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\EventRegistration;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\EventRegistrationRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
@@ -19,7 +19,7 @@ class SubscribeToEventAsRegisteredMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly RequestGuesser $requestGuesser)
+    public function __construct(private readonly EventRegistrationRepository $eventRegistrationRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $entityManager, private readonly RequestGuesserInterface $requestGuesser)
     {
     }
 

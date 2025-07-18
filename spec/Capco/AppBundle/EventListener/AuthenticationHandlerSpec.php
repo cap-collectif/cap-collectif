@@ -4,7 +4,7 @@ namespace spec\Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\EventListener\AuthenticationHandler;
 use Capco\AppBundle\Repository\UserConnectionRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
@@ -16,7 +16,7 @@ class AuthenticationHandlerSpec extends ObjectBehavior
     public function let(
         UserConnectionRepository $userConnectionRepository,
         LoggerInterface $logger,
-        RequestGuesser $requestGuesser
+        RequestGuesserInterface $requestGuesser
     ) {
         $this->beConstructedWith($userConnectionRepository, $logger, $requestGuesser);
     }
@@ -29,7 +29,7 @@ class AuthenticationHandlerSpec extends ObjectBehavior
     public function it_should_failed_with_password_error(
         UserConnectionRepository $userConnectionRepository,
         Request $request,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         AuthenticationException $exception
     ) {
         $requestGuesser

@@ -10,7 +10,7 @@ use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -26,7 +26,7 @@ class AddAnonymousReplyMutation implements MutationInterface
 
     final public const INVALID_FORM = 'INVALID_FORM';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly LoggerInterface $logger, private readonly RequestGuesser $requestGuesser, private readonly TokenGeneratorInterface $tokenGenerator, private readonly GlobalIdResolver $globalIdResolver, private readonly Publisher $publisher, private readonly Indexer $indexer)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ResponsesFormatter $responsesFormatter, private readonly LoggerInterface $logger, private readonly RequestGuesserInterface $requestGuesser, private readonly TokenGeneratorInterface $tokenGenerator, private readonly GlobalIdResolver $globalIdResolver, private readonly Publisher $publisher, private readonly Indexer $indexer)
     {
     }
 

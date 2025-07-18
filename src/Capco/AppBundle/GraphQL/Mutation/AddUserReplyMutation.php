@@ -12,7 +12,7 @@ use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Helper\ResponsesFormatter;
 use Capco\AppBundle\Notifier\QuestionnaireReplyNotifier;
 use Capco\AppBundle\Repository\ReplyRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -31,7 +31,7 @@ class AddUserReplyMutation implements MutationInterface
 
     final public const REQUIREMENTS_NOT_MET = 'REQUIREMENTS_NOT_MET';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ReplyRepository $replyRepo, private readonly GlobalIdResolver $globalIdResolver, private readonly ResponsesFormatter $responsesFormatter, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly RequestGuesser $requestGuesser, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly FormFactoryInterface $formFactory, private readonly ReplyRepository $replyRepo, private readonly GlobalIdResolver $globalIdResolver, private readonly ResponsesFormatter $responsesFormatter, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly RequestGuesserInterface $requestGuesser, private readonly StepRequirementsResolver $stepRequirementsResolver, private readonly Indexer $indexer)
     {
     }
 

@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\DataLoader\User\ViewerProposalVotesDataLoader;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -25,7 +25,7 @@ class UpdateProposalVotesMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly AbstractStepRepository $stepRepo, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly Indexer $indexer, private readonly ConnectionBuilder $connectionBuilder)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly AbstractStepRepository $stepRepo, private readonly ViewerProposalVotesDataLoader $viewerProposalVotesDataLoader, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly Indexer $indexer, private readonly ConnectionBuilderInterface $connectionBuilder)
     {
     }
 

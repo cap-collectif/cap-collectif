@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Opinion;
 
 use Capco\AppBundle\Entity\Opinion;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\OpinionVersionRepository;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -15,7 +15,7 @@ class OpinionViewerVersionsUnpublishedResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private OpinionVersionRepository $versionRepository, private LoggerInterface $logger, private ConnectionBuilder $builder)
+    public function __construct(private OpinionVersionRepository $versionRepository, private LoggerInterface $logger, private readonly ConnectionBuilderInterface $builder)
     {
     }
 

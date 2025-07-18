@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
 use Capco\AppBundle\Entity\UserInvite;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\Repository\UserInviteRepository;
 use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\Repository\UserRepository;
@@ -13,7 +13,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class UserInvitationsAvailabilitySearchQueryResolver implements QueryInterface
 {
-    public function __construct(private readonly ConnectionBuilder $builder, private readonly UserRepository $userRepository, private readonly UserInviteRepository $userInviteRepository)
+    public function __construct(private readonly ConnectionBuilderInterface $builder, private readonly UserRepository $userRepository, private readonly UserInviteRepository $userInviteRepository)
     {
     }
 

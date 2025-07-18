@@ -4,7 +4,7 @@ namespace Capco\AppBundle\GraphQL\Resolver\Step;
 
 use Capco\AppBundle\Entity\Event;
 use Capco\AppBundle\Entity\Steps\AbstractStep;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\Repository\EventRepository;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
@@ -12,7 +12,7 @@ use Overblog\GraphQLBundle\Relay\Connection\Output\Connection;
 
 class StepEventsResolver implements QueryInterface
 {
-    public function __construct(private readonly ConnectionBuilder $builder, private readonly EventRepository $repository)
+    public function __construct(private readonly ConnectionBuilderInterface $builder, private readonly EventRepository $repository)
     {
     }
 

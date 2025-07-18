@@ -4,13 +4,13 @@ namespace Capco\AppBundle\Validator\Constraints;
 
 use Capco\AppBundle\Security\CaptchaChecker;
 use Capco\AppBundle\Toggle\Manager;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 
 class CaptchaValidator extends ConstraintValidator
 {
-    public function __construct(protected RequestGuesser $requestGuesser, protected Manager $toggle, protected CaptchaChecker $captchaChecker, protected bool $enabled = true)
+    public function __construct(protected RequestGuesserInterface $requestGuesser, protected Manager $toggle, protected CaptchaChecker $captchaChecker, protected bool $enabled = true)
     {
     }
 

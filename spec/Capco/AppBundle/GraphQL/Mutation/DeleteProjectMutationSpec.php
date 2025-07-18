@@ -13,7 +13,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteProjectMutationSpec extends ObjectBehavior
@@ -68,11 +67,11 @@ class DeleteProjectMutationSpec extends ObjectBehavior
         User $viewer,
         GlobalIdResolver $globalIdResolver,
         Project $project,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $projectId = 'abc';
         $globalIdResolver->resolve($projectId, $viewer)->willReturn($project);
-        $authorizationChecker->isGranted(ProjectVoter::DELETE, $project)->shouldBeCalled();
+        $authorizationChecker->isGranted(ProjectVoter::DELETE, $project)->shouldBeCalled()->willReturn(true);
 
         $this->isGranted($projectId, $viewer);
     }

@@ -17,7 +17,7 @@ use Capco\AppBundle\Repository\PhoneTokenRepository;
 use Capco\AppBundle\Repository\ProposalCollectSmsVoteRepository;
 use Capco\AppBundle\Repository\ProposalSelectionSmsVoteRepository;
 use Capco\AppBundle\Service\ContributionValidator;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Doctrine\DBAL\Exception\UniqueConstraintViolationException;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -37,7 +37,7 @@ class AddProposalSmsVoteMutation implements MutationInterface
     final public const PHONE_NOT_FOUND = 'PHONE_NOT_FOUND';
     final public const PHONE_ALREADY_USED = 'PHONE_ALREADY_USED';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly ValidatorInterface $validator, private readonly LoggerInterface $logger, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository, private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository, private readonly RequestGuesser $requestGuesser, private readonly PhoneTokenRepository $phoneTokenRepository, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly ContributionValidator $contributionValidator)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly ValidatorInterface $validator, private readonly LoggerInterface $logger, private readonly ProposalVotesDataLoader $proposalVotesDataLoader, private readonly ProposalViewerVoteDataLoader $proposalViewerVoteDataLoader, private readonly ProposalViewerHasVoteDataLoader $proposalViewerHasVoteDataLoader, private readonly GlobalIdResolver $globalIdResolver, private readonly ProposalCollectSmsVoteRepository $proposalCollectSmsVoteRepository, private readonly ProposalSelectionSmsVoteRepository $proposalSelectionSmsVoteRepository, private readonly RequestGuesserInterface $requestGuesser, private readonly PhoneTokenRepository $phoneTokenRepository, private readonly ProposalVoteAccountHandler $proposalVoteAccountHandler, private readonly ContributionValidator $contributionValidator)
     {
     }
 

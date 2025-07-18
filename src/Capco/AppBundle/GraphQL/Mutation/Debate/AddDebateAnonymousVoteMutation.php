@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Debate\Debate;
 use Capco\AppBundle\Entity\Debate\DebateAnonymousVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\AppBundle\Validator\Constraints\CaptchaConstraint;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -26,7 +26,7 @@ class AddDebateAnonymousVoteMutation implements MutationInterface
     final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
     final public const INVALID_CAPTCHA = 'INVALID_CAPTCHA';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ValidatorInterface $validator, private readonly TokenGeneratorInterface $tokenGenerator, private readonly Indexer $indexer, private readonly RequestGuesser $requestGuesser)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly ValidatorInterface $validator, private readonly TokenGeneratorInterface $tokenGenerator, private readonly Indexer $indexer, private readonly RequestGuesserInterface $requestGuesser)
     {
     }
 

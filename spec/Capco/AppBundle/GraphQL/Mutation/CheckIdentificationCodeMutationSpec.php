@@ -9,7 +9,6 @@ use Capco\AppBundle\Security\RateLimiter;
 use Capco\AppBundle\Validator\Constraints\CheckIdentificationCode;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
-use DG\BypassFinals;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
@@ -17,8 +16,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-
-BypassFinals::enable();
 
 class CheckIdentificationCodeMutationSpec extends ObjectBehavior
 {

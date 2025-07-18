@@ -7,7 +7,7 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\ConsultationStep;
 use Capco\AppBundle\Entity\Steps\QuestionnaireStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\Repository\RequirementRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -16,7 +16,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class StepRequirementsResolver implements QueryInterface
 {
-    public function __construct(private readonly RequirementRepository $repository, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver, private readonly ConnectionBuilder $builder)
+    public function __construct(private readonly RequirementRepository $repository, private readonly ViewerMeetsTheRequirementResolver $viewerMeetsTheRequirementResolver, private readonly ConnectionBuilderInterface $builder)
     {
     }
 

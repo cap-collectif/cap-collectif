@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\ProposalRevision;
 use Capco\AppBundle\Enum\ProposalStatementErrorCode;
 use Capco\AppBundle\Form\ProposalRevisionType;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Exceptions\GraphQLException;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
@@ -28,7 +28,7 @@ class AskProposalRevisionMutation implements MutationInterface
     use MutationTrait;
     use ResolverTrait;
 
-    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilder $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly Indexer $indexer)
+    public function __construct(private readonly GlobalIdResolver $globalIdResolver, private readonly EntityManagerInterface $em, private readonly ConnectionBuilderInterface $builder, private readonly AuthorizationCheckerInterface $authorizationChecker, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly Publisher $publisher, private readonly Indexer $indexer)
     {
     }
 

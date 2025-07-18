@@ -5,7 +5,7 @@ namespace Capco\AppBundle\GraphQL\Mutation;
 use Capco\AppBundle\Elasticsearch\Indexer;
 use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Entity\ProposalForm;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Import\ImportProposalsFromCsv;
@@ -53,8 +53,16 @@ class AddProposalsFromCsvMutation implements MutationInterface
     protected ThemeRepository $themeRepository;
     protected Indexer $indexer;
 
-    public function __construct(protected ProposalFormRepository $proposalFormRepository, protected LoggerInterface $logger, protected ImportProposalsFromCsv $importProposalsFromCsv, private readonly ConnectionBuilder $connectionBuilder, private readonly MediaRepository $mediaRepository, private readonly EntityManagerInterface $em, private readonly GlobalIdResolver $globalIdResolver, private readonly AuthorizationCheckerInterface $authorizationChecker)
-    {
+    public function __construct(
+        protected ProposalFormRepository $proposalFormRepository,
+        protected LoggerInterface $logger,
+        protected ImportProposalsFromCsv $importProposalsFromCsv,
+        private readonly ConnectionBuilderInterface $connectionBuilder,
+        private readonly MediaRepository $mediaRepository,
+        private readonly EntityManagerInterface $em,
+        private readonly GlobalIdResolver $globalIdResolver,
+        private readonly AuthorizationCheckerInterface $authorizationChecker
+    ) {
     }
 
     public function __invoke(Arg $input, User $viewer): array

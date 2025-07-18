@@ -2,7 +2,7 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\User;
 
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\Repository\ProjectRepository;
 use Capco\UserBundle\Entity\User;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -11,7 +11,7 @@ use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
 class ProjectsMediatorResolver implements QueryInterface
 {
-    public function __construct(private readonly ProjectRepository $projectRepository, private readonly ConnectionBuilder $connectionBuilder)
+    public function __construct(private readonly ProjectRepository $projectRepository, private readonly ConnectionBuilderInterface $connectionBuilder)
     {
     }
 

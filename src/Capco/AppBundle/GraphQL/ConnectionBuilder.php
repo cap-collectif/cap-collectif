@@ -6,7 +6,7 @@ use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionBuilder as ParentBuilder;
 use Overblog\GraphQLBundle\Relay\Connection\ConnectionInterface;
 
-final class ConnectionBuilder
+final class ConnectionBuilder implements ConnectionBuilderInterface
 {
     public static function empty(array $extraFields = []): ConnectionInterface
     {

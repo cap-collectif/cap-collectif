@@ -154,7 +154,6 @@
         "bex/behat-step-time-logger": "^2.0",
         "coduo/php-matcher": "^6.0",
         "dealerdirect/phpcodesniffer-composer-installer": "^1.0",
-        "dg/bypass-finals": "^1.1",
         "friends-of-phpspec/phpspec-code-coverage": "^6.0",
         "friendsofphp/php-cs-fixer": "^3",
         "icanhazstring/composer-unused": "^0.8.9",

@@ -18,7 +18,6 @@ use Capco\AppBundle\Repository\ThemeRepository;
 use Capco\AppBundle\Service\SocialNetworksUrlSanitizer;
 use Capco\AppBundle\Utils\Map;
 use Capco\UserBundle\Repository\UserRepository;
-use DG\BypassFinals;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\EntityManagerInterface;
 use FOS\UserBundle\Util\TokenGeneratorInterface;
@@ -26,8 +25,6 @@ use PhpSpec\ObjectBehavior;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use Symfony\Contracts\Translation\TranslatorInterface;
-
-BypassFinals::enable();
 
 class ImportProposalsFromCsvSpec extends ObjectBehavior
 {

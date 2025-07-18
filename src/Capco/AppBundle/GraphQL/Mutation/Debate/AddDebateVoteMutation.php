@@ -8,7 +8,7 @@ use Capco\AppBundle\Entity\Debate\DebateVote;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\DebateVoteRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
 use Doctrine\DBAL\Driver\DriverException;
 use Doctrine\ORM\EntityManagerInterface;
@@ -25,7 +25,7 @@ class AddDebateVoteMutation implements MutationInterface
     final public const UNKNOWN_DEBATE = 'UNKNOWN_DEBATE';
     final public const CLOSED_DEBATE = 'CLOSED_DEBATE';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly DebateVoteRepository $repository, private readonly Indexer $indexer, private readonly RequestGuesser $requestGuesser)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly LoggerInterface $logger, private readonly GlobalIdResolver $globalIdResolver, private readonly DebateVoteRepository $repository, private readonly Indexer $indexer, private readonly RequestGuesserInterface $requestGuesser)
     {
     }
 

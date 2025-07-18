@@ -20,8 +20,8 @@ class OpenIDLogoutHandler implements LogoutHandlerInterface
     }
 
     public function handle(
-        RedirectResponseWithRequest $responseWithRequest
-    ): RedirectResponseWithRequest {
+        RedirectResponseWithRequestInterface $responseWithRequest
+    ): RedirectResponseWithRequestInterface {
         $token = $this->tokenStorage->getToken();
         $user = $this->tokenStorage->getToken()->getUser();
         $sessionId = $responseWithRequest

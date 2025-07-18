@@ -3,7 +3,7 @@
 namespace Capco\AppBundle\EventListener;
 
 use Capco\AppBundle\Repository\UserConnectionRepository;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,7 +14,7 @@ class AuthenticationHandler implements AuthenticationFailureHandlerInterface
 {
     final public const BAD_CREDENTIALS = 'Bad credentials.';
 
-    public function __construct(private readonly UserConnectionRepository $userConnectionRepository, private readonly LoggerInterface $logger, private readonly RequestGuesser $requestGuesser)
+    public function __construct(private readonly UserConnectionRepository $userConnectionRepository, private readonly LoggerInterface $logger, private readonly RequestGuesserInterface $requestGuesser)
     {
     }
 

@@ -19,7 +19,6 @@ use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormErrorIterator;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
@@ -160,7 +159,7 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
     public function it_should_call_is_granted_if_questionnaire_is_found(
         GlobalIdResolver $globalIdResolver,
         User $viewer,
-        AuthorizationChecker $authorizationChecker,
+        AuthorizationCheckerInterface $authorizationChecker,
         Questionnaire $questionnaire
     ) {
         $id = 'abc';
@@ -169,6 +168,7 @@ class UpdateQuestionnaireNotificationConfigurationSpec extends ObjectBehavior
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::EDIT, $questionnaire)
             ->shouldBeCalled()
+            ->willReturn(true)
         ;
 
         $this->isGranted($id, $viewer);

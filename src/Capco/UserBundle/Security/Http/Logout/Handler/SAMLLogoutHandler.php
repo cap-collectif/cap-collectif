@@ -13,8 +13,8 @@ class SAMLLogoutHandler implements LogoutHandlerInterface
     }
 
     public function handle(
-        RedirectResponseWithRequest $responseWithRequest
-    ): RedirectResponseWithRequest {
+        RedirectResponseWithRequestInterface $responseWithRequest
+    ): RedirectResponseWithRequestInterface {
         if ($this->samlClient && $this->toggleManager->isActive('login_saml')) {
             $responseWithRequest
                 ->getRequest()

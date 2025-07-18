@@ -12,8 +12,8 @@ class BasicAuthLogoutHandler implements LogoutHandlerInterface
     }
 
     public function handle(
-        RedirectResponseWithRequest $responseWithRequest
-    ): RedirectResponseWithRequest {
+        RedirectResponseWithRequestInterface $responseWithRequest
+    ): RedirectResponseWithRequestInterface {
         $deleteType = $responseWithRequest->getRequest()->get('deleteType');
         if ($deleteType) {
             $returnTo =

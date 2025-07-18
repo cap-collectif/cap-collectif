@@ -11,7 +11,7 @@ use Capco\AppBundle\Mailer\MailerService;
 use Capco\AppBundle\Mailer\Message\Proposal\ContactProposalAuthorMessage;
 use Capco\AppBundle\Repository\ProposalRepository;
 use Capco\AppBundle\Security\CaptchaChecker;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Egulias\EmailValidator\EmailValidator;
 use Egulias\EmailValidator\Validation\RFCValidation;
 use Overblog\GraphQLBundle\Definition\Argument;
@@ -22,7 +22,7 @@ class ContactProposalAuthorMutation implements MutationInterface
 {
     use MutationTrait;
 
-    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly MailerService $mailerService, private readonly CaptchaChecker $captchaChecker, private readonly EmailValidator $emailValidator, private readonly RequestGuesser $requestGuesser)
+    public function __construct(private readonly ProposalRepository $proposalRepository, private readonly MailerService $mailerService, private readonly CaptchaChecker $captchaChecker, private readonly EmailValidator $emailValidator, private readonly RequestGuesserInterface $requestGuesser)
     {
     }
 

@@ -12,7 +12,6 @@ use Capco\AppBundle\Resolver\SettableOwnerResolver;
 use Capco\AppBundle\Security\PostVoter;
 use Capco\Tests\phpspec\MockHelper\GraphQLMock;
 use Capco\UserBundle\Entity\User;
-use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
@@ -20,10 +19,7 @@ use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\Form\Form;
 use Symfony\Component\Form\FormFactoryInterface;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
-
-BypassFinals::enable();
 
 class CreatePostMutationSpec extends ObjectBehavior
 {
@@ -279,11 +275,12 @@ class CreatePostMutationSpec extends ObjectBehavior
         $payload['errorCode']->shouldBe(null);
     }
 
-    public function it_should_call_voter(AuthorizationChecker $authorizationChecker)
+    public function it_should_call_voter(AuthorizationCheckerInterface $authorizationChecker)
     {
         $authorizationChecker
             ->isGranted(PostVoter::CREATE, Argument::type(Post::class))
             ->shouldBeCalled()
+            ->willReturn(true)
         ;
         $this->isGranted();
     }

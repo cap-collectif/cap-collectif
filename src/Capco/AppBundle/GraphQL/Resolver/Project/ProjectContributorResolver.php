@@ -6,7 +6,7 @@ use Capco\AppBundle\Elasticsearch\ElasticsearchPaginator;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Entity\Steps\SelectionStep;
-use Capco\AppBundle\GraphQL\ConnectionBuilder;
+use Capco\AppBundle\GraphQL\ConnectionBuilderInterface;
 use Capco\AppBundle\GraphQL\Resolver\GlobalIdResolver;
 use Capco\AppBundle\GraphQL\Resolver\Traits\ResolverTrait;
 use Capco\AppBundle\Repository\AbstractStepRepository;
@@ -25,7 +25,7 @@ class ProjectContributorResolver implements QueryInterface
 {
     use ResolverTrait;
 
-    public function __construct(private readonly UserSearch $userSearch, private readonly LoggerInterface $logger, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly AbstractStepRepository $stepRepository, private readonly ConnectionBuilder $connectionBuilder, private readonly ParticipantRepository $participantRepository)
+    public function __construct(private readonly UserSearch $userSearch, private readonly LoggerInterface $logger, private readonly ProposalSelectionVoteRepository $proposalSelectionVoteRepository, private readonly ProposalCollectVoteRepository $proposalCollectVoteRepository, private readonly GlobalIdResolver $globalIdResolver, private readonly AbstractStepRepository $stepRepository, private readonly ConnectionBuilderInterface $connectionBuilder, private readonly ParticipantRepository $participantRepository)
     {
     }
 

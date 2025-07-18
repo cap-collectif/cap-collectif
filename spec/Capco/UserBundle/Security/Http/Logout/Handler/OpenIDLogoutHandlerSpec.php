@@ -8,8 +8,7 @@ use Capco\UserBundle\Entity\User;
 use Capco\UserBundle\OpenID\OpenIDReferrerResolver;
 use Capco\UserBundle\OpenID\OpenIDResourceOwner;
 use Capco\UserBundle\Security\Http\Logout\Handler\OpenIDLogoutHandler;
-use Capco\UserBundle\Security\Http\Logout\Handler\RedirectResponseWithRequest;
-use DG\BypassFinals;
+use Capco\UserBundle\Security\Http\Logout\Handler\RedirectResponseWithRequestInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use PhpSpec\ObjectBehavior;
 use Symfony\Component\HttpFoundation\RedirectResponse;
@@ -18,8 +17,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Security\Core\Authentication\Token\Storage\TokenStorageInterface;
 use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
-
-BypassFinals::enable();
 
 class OpenIDLogoutHandlerSpec extends ObjectBehavior
 {
@@ -55,7 +52,7 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         Session $session,
-        RedirectResponseWithRequest $dummyRedirectResponseWithRequest,
+        RedirectResponseWithRequestInterface $dummyRedirectResponseWithRequest,
         RedirectResponse $redirectResponse,
         Request $request
     ) {
@@ -106,7 +103,7 @@ class OpenIDLogoutHandlerSpec extends ObjectBehavior
         TokenInterface $token,
         User $user,
         Session $session,
-        RedirectResponseWithRequest $dummyRedirectResponseWithRequest,
+        RedirectResponseWithRequestInterface $dummyRedirectResponseWithRequest,
         RedirectResponse $redirectResponse,
         Request $request
     ) {

@@ -16,7 +16,6 @@ use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument as Arg;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
-use Symfony\Component\Security\Core\Authorization\AuthorizationChecker;
 use Symfony\Component\Security\Core\Authorization\AuthorizationCheckerInterface;
 
 class DeleteQuestionnaireMutationSpec extends ObjectBehavior
@@ -132,13 +131,14 @@ class DeleteQuestionnaireMutationSpec extends ObjectBehavior
         User $viewer,
         GlobalIdResolver $globalIdResolver,
         Questionnaire $questionnaire,
-        AuthorizationChecker $authorizationChecker
+        AuthorizationCheckerInterface $authorizationChecker
     ) {
         $postId = 'abc';
         $globalIdResolver->resolve($postId, $viewer)->willReturn($questionnaire);
         $authorizationChecker
             ->isGranted(QuestionnaireVoter::DELETE, $questionnaire)
             ->shouldBeCalled()
+            ->willReturn(true)
         ;
 
         $this->isGranted($postId, $viewer);

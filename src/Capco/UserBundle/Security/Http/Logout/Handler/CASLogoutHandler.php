@@ -26,8 +26,8 @@ class CASLogoutHandler implements LogoutHandlerInterface
      * @throws \Exception
      */
     public function handle(
-        RedirectResponseWithRequest $responseWithRequest
-    ): RedirectResponseWithRequest {
+        RedirectResponseWithRequestInterface $responseWithRequest
+    ): RedirectResponseWithRequestInterface {
         if (
             $this->toggleManager->isActive('login_cas')
             && $this->configuration

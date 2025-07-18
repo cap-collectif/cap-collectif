@@ -5,27 +5,24 @@ namespace spec\Capco\AppBundle\EventListener;
 use Capco\AppBundle\Entity\UserConnection;
 use Capco\AppBundle\EventListener\AuthenticationListener;
 use Capco\AppBundle\Service\OpenIDBackchannel;
-use Capco\AppBundle\Utils\RequestGuesser;
+use Capco\AppBundle\Utils\RequestGuesserInterface;
 use Capco\UserBundle\Entity\User;
-use DG\BypassFinals;
 use Doctrine\ORM\EntityManagerInterface;
-use HWI\Bundle\OAuthBundle\Security\Core\Authentication\Token\OAuthToken;
 use PhpSpec\ObjectBehavior;
 use Prophecy\Argument;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\HttpFoundation\ParameterBag;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
-use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
-use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
-
-BypassFinals::enable();
+use Symfony\Component\Security\Core\Authentication\Token\TokenInterface;
+use Symfony\Component\Security\Http\Event\LoginFailureEvent;
+use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
 
 class AuthenticationListenerSpec extends ObjectBehavior
 {
     public function let(
         EntityManagerInterface $em,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         OpenIDBackchannel $openIDBackchannel,
         LoggerInterface $logger
     ) {
@@ -39,8 +36,8 @@ class AuthenticationListenerSpec extends ObjectBehavior
 
     public function it_should_saved_failed_connection_attempt(
         EntityManagerInterface $em,
-        AuthenticationFailureEvent $event,
-        RequestGuesser $requestGuesser
+        LoginFailureEvent $event,
+        RequestGuesserInterface $requestGuesser
     ) {
         $requestGuesser
             ->getJsonContent()
@@ -73,12 +70,12 @@ class AuthenticationListenerSpec extends ObjectBehavior
 
     public function it_should_saved_successful_connection_attempt(
         EntityManagerInterface $em,
-        InteractiveLoginEvent $event,
+        LoginSuccessEvent $event,
         Request $request,
-        RequestGuesser $requestGuesser,
+        RequestGuesserInterface $requestGuesser,
         User $user,
         Session $session,
-        OAuthToken $tokenInterface,
+        TokenInterface $tokenInterface,
         ParameterBag $query
     ) {
         $event
@@ -95,7 +92,7 @@ class AuthenticationListenerSpec extends ObjectBehavior
             )
         ;
         $event
-            ->getAuthenticationToken()
+            ->getAuthenticatedToken()
             ->shouldBeCalled()
             ->willReturn($tokenInterface)
         ;
