@@ -49,7 +49,7 @@ export const Contact: FC<Props> = ({ data }) => {
               const renderForm = () => (
                 <>
                   {contactForm.body ? (
-                    <Text fontSize={CapUIFontSize.BodyRegular} lineHeight={CapUILineHeight.S} mt="xs" as="div">
+                    <Text fontSize={CapUIFontSize.BodyRegular} mt="xs" as="div">
                       <WYSIWYGRender value={contactForm.body} />
                     </Text>
                   ) : null}

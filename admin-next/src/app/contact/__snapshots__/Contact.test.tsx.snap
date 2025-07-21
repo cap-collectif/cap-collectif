@@ -98,7 +98,7 @@ exports[`<Contact /> renders correctly 1`] = `
                 }
               >
                 <div
-                  className="sc-bcXGCL loEQdu cap-text"
+                  className="sc-bcXGCL dJWBlh cap-text"
                 >
                   <div
                     className=" ql-editor wysiwyg-render"

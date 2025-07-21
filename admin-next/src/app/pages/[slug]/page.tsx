@@ -1,6 +1,6 @@
 import { graphql } from 'relay-runtime'
 import Fetcher from '@utils/fetch'
-import { Metadata, ResolvedMetadata } from 'next'
+import { Metadata } from 'next'
 import { pagePageMetadataQuery$data } from '@relay/pagePageMetadataQuery.graphql'
 import PageRender from './PageRender'
 import { notFound } from 'next/navigation'
@@ -13,6 +13,9 @@ import { removeAccents } from '@shared/utils/removeAccents'
 
 const METADATA_QUERY = graphql`
   query pagePageMetadataQuery($pageSlug: String!) {
+    siteTitle: siteParameter(keyname: "global.site.fullname") {
+      value
+    }
     page: nodeSlug(entity: PAGE, slug: $pageSlug) {
       ... on Page {
         media {
@@ -31,6 +34,9 @@ const METADATA_QUERY = graphql`
 
 const CHARTE_QUERY = graphql`
   query pagePageCharteQuery {
+    siteTitle: siteParameter(keyname: "global.site.fullname") {
+      value
+    }
     charter: siteParameter(keyname: "charter.body") {
       value
     }
@@ -48,20 +54,22 @@ const getCharterSlugs = () => {
 
 type Params = { params: { slug: string } }
 
-export async function generateMetadata({ params }: Params, parent: ResolvedMetadata): Promise<Metadata> {
+export async function generateMetadata({ params }: Params): Promise<Metadata> {
   const cookieStore = cookies()
   const initialSlug = (await params).slug
   const slug = removeAccents(decodeURI(initialSlug))
-  const baseTitle = (await parent).title ?? 'Cap Collectif'
+
   const charterSlugs = getCharterSlugs()
 
   if (charterSlugs?.includes(slug)) {
     const locale = cookieStore.get('locale')?.value
-    const { locales } = await Fetcher.ssrGraphql<pagePageCharteQuery$data>(
+    const { locales, siteTitle } = await Fetcher.ssrGraphql<pagePageCharteQuery$data>(
       CHARTE_QUERY,
       {},
       formatCookiesForServer(cookieStore),
     )
+
+    const baseTitle = siteTitle?.value ?? 'Cap Collectif'
 
     const title = messages[locale || formatCodeToLocale(locales.find(l => l.isDefault)?.code) || 'fr-FR']?.charter
     return {
@@ -69,9 +77,11 @@ export async function generateMetadata({ params }: Params, parent: ResolvedMetad
     }
   }
 
-  const { page } = await Fetcher.ssrGraphql<pagePageMetadataQuery$data>(METADATA_QUERY, {
+  const { page, siteTitle } = await Fetcher.ssrGraphql<pagePageMetadataQuery$data>(METADATA_QUERY, {
     pageSlug: slug,
   })
+
+  const baseTitle = siteTitle?.value ?? 'Cap Collectif'
 
   if (!page)
     return {

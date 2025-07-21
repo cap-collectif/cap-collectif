@@ -2,7 +2,13 @@ import { GlobalTheme } from '@shared/navbar/NavBar.utils'
 import { createGlobalStyle, css } from 'styled-components'
 
 export const GlobalFrontOfficeStyles = createGlobalStyle<GlobalTheme>`
-  ${({ h1Color, h2Color, h3Color, h4Color, h5Color, linkColor, linkHoverColor }) => css`
+  ${({ h1Color, h2Color, h3Color, h4Color, h5Color, linkColor, linkHoverColor, footerBottomBackgroundColor }) => css`
+    body {
+      background-color: ${footerBottomBackgroundColor};
+    }
+    main {
+      background-color: white;
+    }
     h1 {
       color: ${h1Color};
       font-size: ${36 / 14}rem;
