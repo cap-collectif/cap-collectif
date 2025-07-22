@@ -276,7 +276,7 @@ class CapcoCollectEmailProposalsCommand extends Command
 
                 $this->em->persist($mediaResponse);
 
-                return;
+                break;
             }
         }
 
