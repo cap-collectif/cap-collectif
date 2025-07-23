@@ -10,8 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 use Psr\Log\LoggerInterface;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Http\Event\LoginFailureEvent;
-use Symfony\Component\Security\Http\Event\LoginSuccessEvent;
+use Symfony\Component\Security\Core\AuthenticationEvents;
+use Symfony\Component\Security\Core\Event\AuthenticationFailureEvent;
+use Symfony\Component\Security\Http\Event\InteractiveLoginEvent;
 
 class AuthenticationListener implements EventSubscriberInterface
 {
@@ -23,7 +24,7 @@ class AuthenticationListener implements EventSubscriberInterface
     ) {
     }
 
-    public function onAuthenticationFailure(LoginFailureEvent $event): void
+    public function onAuthenticationFailure(AuthenticationFailureEvent $event): void
     {
         // Save an unsuccessfull user login.
         $data = $this->requestGuesser->getJsonContent();
@@ -39,13 +40,13 @@ class AuthenticationListener implements EventSubscriberInterface
         $this->em->flush();
     }
 
-    public function onAuthenticationSuccess(LoginSuccessEvent $event): void
+    public function onAuthenticationSuccess(InteractiveLoginEvent $event): void
     {
         $request = $event->getRequest();
         $session = $request->getSession();
 
         // Authentication
-        $authenticationToken = $event->getAuthenticatedToken();
+        $authenticationToken = $event->getAuthenticationToken();
         $serialized = $authenticationToken->serialize();
         $session->set('theToken', $serialized);
 
@@ -73,8 +74,8 @@ class AuthenticationListener implements EventSubscriberInterface
     public static function getSubscribedEvents(): array
     {
         return [
-            LoginFailureEvent::class => 'onAuthenticationFailure',
-            LoginSuccessEvent::class => 'onAuthenticationSuccess',
+            AuthenticationEvents::AUTHENTICATION_FAILURE => 'onAuthenticationFailure',
+            AuthenticationEvents::AUTHENTICATION_SUCCESS => 'onAuthenticationSuccess',
         ];
     }
 
