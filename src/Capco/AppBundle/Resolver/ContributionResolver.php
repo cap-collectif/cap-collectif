@@ -129,7 +129,7 @@ class ContributionResolver
             $contributor['votes'] += $contributor['proposals_votes'] ?? 0;
         }
 
-        usort($contributors, fn ($a, $b) => $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes']);
+        uasort($contributors, fn ($a, $b) => $b['contributions'] + $b['votes'] - $a['contributions'] - $a['votes']);
 
         if ($pagination && $page) {
             $contributorsPage = \array_slice(
