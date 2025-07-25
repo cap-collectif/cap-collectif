@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionType;
 use Capco\AppBundle\Entity\Project;
@@ -496,6 +497,56 @@ class OpinionRepository extends EntityRepository
         ;
 
         return (int) $query->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @return array<Opinion>|Paginator<Opinion>
+     */
+    public function getEnabledByProject(
+        Project $project,
+        ?Author $excludedAuthor = null,
+        bool $orderByRanking = false,
+        ?int $limit = null,
+        int $page = 1
+    ): array|Paginator {
+        $qb = $this->getIsEnabledQueryBuilder()
+            ->addSelect('ot', 'oc', 's', 'aut', 'm')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('o.Author', 'aut')
+            ->leftJoin('aut.media', 'm')
+            ->leftJoin('o.consultation', 'oc')
+            ->leftJoin('oc.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->andWhere('cas.project = :project')
+            ->andWhere('o.trashedAt IS NULL')
+            ->setParameter('project', $project)
+        ;
+        if (null !== $excludedAuthor) {
+            $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
+        }
+
+        if ($orderByRanking) {
+            $qb
+                ->orderBy('o.ranking', 'ASC')
+                ->addOrderBy('o.votesCountOk', 'DESC')
+                ->addOrderBy('o.votesCountNok', 'ASC')
+                ->addOrderBy('o.updatedAt', 'DESC')
+            ;
+        }
+
+        $qb->addOrderBy('o.updatedAt', 'DESC');
+
+        if (null !== $limit && 0 < $limit) {
+            $query = $qb
+                ->getQuery()
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit)
+            ;
+
+            return new Paginator($query);
+        }
+
+        return $qb->getQuery()->getResult();
     }
 
     protected function getIsEnabledQueryBuilder($alias = 'o'): QueryBuilder

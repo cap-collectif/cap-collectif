@@ -3,6 +3,7 @@
 namespace Capco\AppBundle\Repository;
 
 use Capco\AppBundle\Entity\Consultation;
+use Capco\AppBundle\Entity\Interfaces\Author;
 use Capco\AppBundle\Entity\Opinion;
 use Capco\AppBundle\Entity\OpinionVersion;
 use Capco\AppBundle\Entity\Project;
@@ -13,6 +14,7 @@ use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Query;
 use Doctrine\ORM\QueryBuilder;
+use Doctrine\ORM\Tools\Pagination\Paginator;
 
 /**
  * @method find($id, $lockMode = null, $lockVersion = null): OpinionVersion
@@ -396,6 +398,57 @@ class OpinionVersionRepository extends EntityRepository
     {
         $qb = $this->createQueryBuilder('a');
         $qb->where('a.id IN (:ids)')->setParameter('ids', $ids);
+
+        return $qb->getQuery()->getResult();
+    }
+
+    /**
+     * @return array<Opinion>|Paginator<Opinion>
+     */
+    public function getEnabledByProject(
+        Project $project,
+        ?Author $excludedAuthor = null,
+        bool $orderByRanking = false,
+        ?int $limit = null,
+        int $page = 1
+    ): array|Paginator {
+        /*: array|Paginator*/ $qb = $this->getIsEnabledQueryBuilder('ov')
+            ->addSelect('o', 'ot', 's', 'aut', 'm', 'oc')
+            ->leftJoin('ov.parent', 'o')
+            ->leftJoin('o.OpinionType', 'ot')
+            ->leftJoin('ov.author', 'aut')
+            ->leftJoin('aut.media', 'm')
+            ->innerJoin('o.consultation', 'oc')
+            ->innerJoin('oc.step', 's')
+            ->leftJoin('s.projectAbstractStep', 'cas')
+            ->andWhere('cas.project = :project')
+            ->andWhere('ov.trashedAt IS NULL')
+            ->setParameter('project', $project)
+        ;
+        if (null !== $excludedAuthor) {
+            $qb->andWhere('aut.id != :author')->setParameter('author', $excludedAuthor);
+        }
+
+        if ($orderByRanking) {
+            $qb
+                ->orderBy('ov.ranking', 'ASC')
+                ->addOrderBy('ov.votesCountOk', 'DESC')
+                ->addOrderBy('ov.votesCountNok', 'ASC')
+                ->addOrderBy('ov.updatedAt', 'DESC')
+            ;
+        }
+
+        $qb->addOrderBy('ov.updatedAt', 'DESC');
+
+        if (null !== $limit && 0 < $limit) {
+            $query = $qb
+                ->getQuery()
+                ->setFirstResult(($page - 1) * $limit)
+                ->setMaxResults($limit)
+            ;
+
+            return new Paginator($query);
+        }
 
         return $qb->getQuery()->getResult();
     }
