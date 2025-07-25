@@ -91,10 +91,9 @@ class AnonymizeUsersAutomatedCommand extends Command
 
     private function deleteMedias(): void
     {
-        $sql = 'DELETE m
-                FROM media__media m
-                JOIN fos_user u ON m.id = u.media_id
-                JOIN matching_users mu ON u.id = mu.id';
+        $sql = 'UPDATE fos_user u
+                JOIN matching_users mu ON u.id = mu.id
+                SET u.media_id = null';
         $this->connection->executeStatement($sql);
     }
 
