@@ -1,5 +1,14 @@
 import * as React from 'react'
-import { ButtonQuickAction, CapUIBorder, CapUIFontWeight, CapUIIcon, Card, Flex, Tag, Text } from '@cap-collectif/ui'
+import {
+  ButtonQuickAction,
+  CapUIBorder,
+  CapUIFontWeight,
+  CapUIIcon,
+  AbstractCard,
+  Flex,
+  Tag,
+  Text,
+} from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { MembersList_UsersFragment$data } from '@relay/MembersList_UsersFragment.graphql'
 
@@ -21,7 +30,7 @@ export const MemberCard = ({
   const intl = useIntl()
 
   return (
-    <Card
+    <AbstractCard
       key={cardKey}
       display={'flex'}
       gap={2}
@@ -72,7 +81,7 @@ export const MemberCard = ({
           onClick={onRemove}
         />
       )}
-    </Card>
+    </AbstractCard>
   )
 }
 

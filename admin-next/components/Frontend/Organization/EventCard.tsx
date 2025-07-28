@@ -2,9 +2,7 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import moment from 'moment'
 import type { EventCard_event$key } from '@relay/EventCard_event.graphql'
-import { Box, BoxProps, CapUIFontSize, CapUIIcon, Card, Flex, Heading, Text } from '@cap-collectif/ui'
-import { formatInfo } from '@shared/projectCard/ProjectCard.utils'
-import { pxToRem } from '@shared/utils/pxToRem'
+import { Box, BoxProps, CapUIFontSize, Card, CardContent, CardCover, Flex } from '@cap-collectif/ui'
 
 const FRAGMENT = graphql`
   fragment EventCard_event on Event {
@@ -28,61 +26,19 @@ export const EventCard: React.FC<BoxProps & { event: EventCard_event$key }> = ({
 }) => {
   const event = useFragment(FRAGMENT, eventQuery)
   return (
-    <Box
-      as="a"
-      href={event.url}
-      display="grid"
-      width="100%"
-      css={{
-        '&:hover': {
-          textDecoration: 'none',
-        },
-      }}
-    >
-      <Card
-        bg="white"
-        p={3}
-        flexDirection="row"
-        overflow="hidden"
-        display="flex"
-        border="normal"
-        position="relative"
-        alignItems="start"
-        {...props}
-      >
-        <Card
-          flexDirection="row"
-          bg="neutral-gray.100"
-          p={0}
-          width={pxToRem(64)}
-          mr={4}
-          border="unset"
-          overflow="hidden"
-          borderRadius="accordion"
-          flexShrink={0}
-        >
-          <Flex justify="center" bg="red.600" py={1}>
-            <Text fontSize={CapUIFontSize.BodySmall} as="div" color="white" fontWeight={700} uppercase>
-              {moment(event.timeRange?.startAt).format('MMM')}
-            </Text>
+    <Card {...props} format="horizontal">
+      <CardCover overflow="hidden">
+        <Box width="100%" color="neutral-gray.darker" fontSize={CapUIFontSize.BodySmall} fontWeight={700}>
+          <Flex justify="center" bg="red.600" py="xs" color="white" uppercase>
+            {moment(event.timeRange?.startAt).format('MMM')}
           </Flex>
-          <Flex justify="center" alignItems="center" py={2}>
-            <Text fontSize={CapUIFontSize.DisplaySmall} as="div" color="gray.900" fontWeight={600}>
-              {moment(event.timeRange?.startAt).format('DD')}
-            </Text>
+          <Flex justify="center" alignItems="center" py="xxs" fontSize={CapUIFontSize.BodyLarge} fontWeight={600}>
+            {moment(event.timeRange?.startAt).format('DD')}
           </Flex>
-        </Card>
-        <Flex direction="column" overflow="hidden" justify="space-between">
-          <Heading as="h4" mb={2} color="gray.900">
-            {event.title}
-          </Heading>
-          <Box color="neutral-gray.700">
-            {event.themes.length > 0 &&
-              formatInfo(CapUIIcon.FolderO, event.themes?.map(({ title }) => title).join(', ') || '', false)}
-          </Box>
-        </Flex>
-      </Card>
-    </Box>
+        </Box>
+      </CardCover>
+      <CardContent primaryInfo={event.title} href={event.url} />
+    </Card>
   )
 }
 

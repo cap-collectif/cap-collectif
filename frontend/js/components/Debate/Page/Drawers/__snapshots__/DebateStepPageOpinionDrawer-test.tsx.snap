@@ -23,7 +23,7 @@ Array [
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud jGMUdI cpMilg cap-icon detail__drawer--back-arow"
+          className="sc-bcXGCL sc-oZHua jGMUdI fzfEdP cap-icon detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -47,7 +47,7 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL eLTTRB sc-ckEbfr hrpVbi cap-avatar"
+              className="sc-bcXGCL eLTTRB sc-fbYNKQ qltGU cap-avatar"
             >
               <img
                 alt="Agui le penseur"
@@ -136,7 +136,7 @@ Array [
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud jGMUdI cpMilg cap-icon detail__drawer--back-arow"
+          className="sc-bcXGCL sc-oZHua jGMUdI fzfEdP cap-icon detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -160,7 +160,7 @@ Array [
             hasBadge={false}
           >
             <div
-              className="sc-bcXGCL eLTTRB sc-ckEbfr hrpVbi cap-avatar"
+              className="sc-bcXGCL eLTTRB sc-fbYNKQ qltGU cap-avatar"
             >
               <img
                 alt="Agui le penseur"

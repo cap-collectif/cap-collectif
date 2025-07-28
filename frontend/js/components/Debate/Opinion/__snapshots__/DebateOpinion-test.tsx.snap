@@ -9,7 +9,7 @@ Array [
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL dQYQCW cap-card"
+    className="sc-bcXGCL dQYQCW cap-abstract-card"
   >
     <div
       aria-label="Tag "
@@ -45,7 +45,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-ckEbfr hrpVbi cap-avatar"
+            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
@@ -113,7 +113,7 @@ Array [
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL dQYQCW cap-card"
+    className="sc-bcXGCL dQYQCW cap-abstract-card"
   >
     <div
       aria-label="Tag "
@@ -149,7 +149,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-ckEbfr hrpVbi cap-avatar"
+            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
@@ -217,7 +217,7 @@ Array [
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL gMthXY cap-card"
+    className="sc-bcXGCL gMthXY cap-abstract-card"
   >
     <div
       aria-label="Tag "
@@ -250,7 +250,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-ckEbfr hrpVbi cap-avatar"
+            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
@@ -318,7 +318,7 @@ Array [
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL dQYQCW cap-card"
+    className="sc-bcXGCL dQYQCW cap-abstract-card"
   >
     <div
       aria-label="Tag "
@@ -354,7 +354,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-ckEbfr hrpVbi cap-avatar"
+            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
@@ -408,7 +408,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-laZSpB biUlLS gDuqin cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-gGvGpy biUlLS cITHqt cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >
@@ -429,7 +429,7 @@ Array [
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL gMthXY cap-card"
+    className="sc-bcXGCL gMthXY cap-abstract-card"
   >
     <div
       aria-label="Tag "
@@ -462,7 +462,7 @@ Array [
           }
         >
           <div
-            className="sc-bcXGCL gwMIqG sc-ckEbfr hrpVbi cap-avatar"
+            className="sc-bcXGCL gwMIqG sc-fbYNKQ qltGU cap-avatar"
           >
             <img
               alt="Agui le penseur"
@@ -516,7 +516,7 @@ Array [
           />
         </p>
         <button
-          className="sc-bcXGCL sc-laZSpB biUlLS gDuqin cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
+          className="sc-bcXGCL sc-gGvGpy biUlLS cITHqt cap-button DebateOpinion___StyledButton-eaqExq bkrrPY"
           onClick={[Function]}
           type="button"
         >

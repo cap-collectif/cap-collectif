@@ -1,12 +1,12 @@
 'use client'
 
-import { Button, CapUIIcon, Flex, Heading, Menu, Spinner, Text } from '@cap-collectif/ui'
+import { Button, CapUIFontSize, CapUIIcon, Flex, Heading, Menu, Spinner, Text } from '@cap-collectif/ui'
 import OrganizationPageEventList from '@components/Frontend/Organization/OrganizationPageEventList'
 import OrganizationPageHeader from '@components/Frontend/Organization/OrganizationPageHeader'
-import OrganizationPagePlaceholder from '@components/Frontend/Organization/OrganizationPagePlaceholder'
 import OrganizationPagePostList from '@components/Frontend/Organization/OrganizationPagePostList'
 import OrganizationPageProjectList from '@components/Frontend/Organization/OrganizationPageProjectList'
 import { OrganizationQuery } from '@relay/OrganizationQuery.graphql'
+import { pageOrganizationMetadataQuery$data } from '@relay/pageOrganizationMetadataQuery.graphql'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { FC, Suspense, useEffect, useState } from 'react'
@@ -28,7 +28,6 @@ const organizationQuery = graphql`
   ) {
     organization: nodeSlug(entity: ORGANIZATION, slug: $organizationSlug) {
       ... on Organization {
-        ...OrganizationPageHeader_organization
         id
         title
         projectsCount: projects {
@@ -81,74 +80,77 @@ export const OrganizationRender: FC<Props> = ({ slug }) => {
   const [filter, setFilter] = useState(statusFilter)
 
   return (
-    <Flex direction="column">
-      <OrganizationPageHeader organization={organization} />
-      <Flex as="section" id="organizationContent" bg="neutral-gray.50">
-        <Flex
-          maxWidth={pxToRem(1280)}
-          width="100%"
-          margin="auto"
-          justify="space-between"
-          py={8}
-          px={[4, 6]}
-          direction={['column', 'row']}
-        >
-          {hasProjects ? (
-            <OrganizationPageProjectList organization={organization} fullSizeLayout={fullSizeLayout} />
-          ) : null}
-          {!fullSizeLayout ? (
-            <Flex direction="column" width={['100%', '30%']}>
-              {hasPosts ? <OrganizationPagePostList organization={organization} /> : null}
-              {hasEvents ? (
-                <Flex direction="column" maxWidth={['100%', pxToRem(380)]} width="100%">
-                  <Flex direction="row" justify="space-between" mb={4}>
-                    <Heading as="h4">
-                      {intl.formatMessage({
-                        id: 'homepage.section.events',
-                      })}
-                    </Heading>
-                    <Menu
-                      disclosure={
-                        <Button rightIcon={CapUIIcon.ArrowDown} variant="tertiary">
-                          {intl.formatMessage({ id: filter })}
-                        </Button>
-                      }
-                    >
-                      <Menu.List>
-                        <Menu.Item
-                          onClick={() => {
-                            setFilter('theme.show.status.future')
-                          }}
-                        >
-                          <Text color="gray.900">{intl.formatMessage({ id: 'theme.show.status.future' })}</Text>
-                        </Menu.Item>
-                        <Menu.Item
-                          onClick={() => {
-                            setFilter('finished')
-                          }}
-                        >
-                          <Text color="gray.900">{intl.formatMessage({ id: 'finished' })}</Text>
-                        </Menu.Item>
-                      </Menu.List>
-                    </Menu>
-                  </Flex>
-                  <Suspense fallback={<Spinner mx="auto" />}>
-                    <OrganizationPageEventList organization={organization} filter={filter} />
-                  </Suspense>
+    <Flex as="section" id="organizationContent" bg="neutral-gray.50">
+      <Flex
+        maxWidth={pxToRem(1280)}
+        width="100%"
+        margin="auto"
+        justify="space-between"
+        py={8}
+        px={[4, 6]}
+        direction={['column', 'row']}
+      >
+        {hasProjects ? (
+          <OrganizationPageProjectList organization={organization} fullSizeLayout={fullSizeLayout} />
+        ) : null}
+        {!fullSizeLayout ? (
+          <Flex direction="column" width={['100%', '30%']}>
+            {hasPosts ? <OrganizationPagePostList organization={organization} /> : null}
+            {hasEvents ? (
+              <Flex direction="column" maxWidth={['100%', pxToRem(380)]} width="100%">
+                <Flex direction="row" justify="space-between" mb={4}>
+                  <Heading as="h2" color="neutral-gray.darker" fontSize={CapUIFontSize.BodyLarge}>
+                    {intl.formatMessage({
+                      id: 'homepage.section.events',
+                    })}
+                  </Heading>
+                  <Menu
+                    disclosure={
+                      <Button rightIcon={CapUIIcon.ArrowDown} variant="tertiary">
+                        {intl.formatMessage({ id: filter })}
+                      </Button>
+                    }
+                  >
+                    <Menu.List>
+                      <Menu.Item
+                        onClick={() => {
+                          setFilter('theme.show.status.future')
+                        }}
+                      >
+                        <Text color="gray.900">{intl.formatMessage({ id: 'theme.show.status.future' })}</Text>
+                      </Menu.Item>
+                      <Menu.Item
+                        onClick={() => {
+                          setFilter('finished')
+                        }}
+                      >
+                        <Text color="gray.900">{intl.formatMessage({ id: 'finished' })}</Text>
+                      </Menu.Item>
+                    </Menu.List>
+                  </Menu>
                 </Flex>
-              ) : null}
-            </Flex>
-          ) : null}
-        </Flex>
+                <Suspense fallback={<Spinner mx="auto" />}>
+                  <OrganizationPageEventList organization={organization} filter={filter} />
+                </Suspense>
+              </Flex>
+            ) : null}
+          </Flex>
+        ) : null}
       </Flex>
     </Flex>
   )
 }
 
-export const Organization: FC<Props> = ({ slug }) => (
-  <Suspense fallback={<OrganizationPagePlaceholder />}>
-    <OrganizationRender slug={slug} />
-  </Suspense>
+export const Organization: FC<Props & { organization: pageOrganizationMetadataQuery$data['organization'] }> = ({
+  slug,
+  organization,
+}) => (
+  <Flex direction="column">
+    <OrganizationPageHeader organization={organization} />
+    <Suspense fallback={<Spinner m="auto" my="10rem" />}>
+      <OrganizationRender slug={slug} />
+    </Suspense>
+  </Flex>
 )
 
 export default Organization

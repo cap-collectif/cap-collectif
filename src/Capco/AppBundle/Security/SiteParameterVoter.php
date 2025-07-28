@@ -73,6 +73,7 @@ class SiteParameterVoter extends Voter
             'contact.metadescription',
             'contact.content.body',
             'contact.customcode',
+            'projects.pagination',
         ];
         $key = $siteParameter->getKeyname();
 

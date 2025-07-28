@@ -13,7 +13,7 @@ import { useAnalytics } from 'use-analytics'
 import styled from 'styled-components'
 import { useActor } from '@xstate/react'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { Flex, Button, Icon, Card, Tooltip, Text, Popover, ButtonGroup, toast } from '@cap-collectif/ui'
+import { Flex, Button, Icon, AbstractCard, Tooltip, Text, Popover, ButtonGroup, toast } from '@cap-collectif/ui'
 import colors from '~/styles/modules/colors'
 import ResetCss from '~/utils/ResetCss'
 import type { DebateStepPageVoteForm_debate } from '~relay/DebateStepPageVoteForm_debate.graphql'
@@ -538,7 +538,7 @@ export const DebateStepPageVoteForm = ({
       )}
 
       {showArgumentForm && !isMobile && !widgetLocation && (
-        <Card
+        <AbstractCard
           borderRadius="8px"
           width="100%"
           bg="white"
@@ -595,7 +595,7 @@ export const DebateStepPageVoteForm = ({
               </Flex>
             )}
           </Form>
-        </Card>
+        </AbstractCard>
       )}
 
       {showArgumentForm && (isMobile || widgetLocation) && (

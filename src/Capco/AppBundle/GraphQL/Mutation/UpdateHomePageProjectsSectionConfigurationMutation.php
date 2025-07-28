@@ -7,7 +7,6 @@ use Capco\AppBundle\Form\SectionType;
 use Capco\AppBundle\GraphQL\Mutation\Locale\LocaleUtils;
 use Capco\AppBundle\GraphQL\Resolver\Traits\MutationTrait;
 use Capco\AppBundle\Repository\SectionRepository;
-use Capco\AppBundle\Toggle\Manager;
 use Doctrine\ORM\EntityManagerInterface;
 use Overblog\GraphQLBundle\Definition\Argument;
 use Overblog\GraphQLBundle\Definition\Resolver\MutationInterface;
@@ -21,7 +20,7 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
     final public const TOO_MANY_PROJECTS = 'TOO_MANY_PROJECTS';
     final public const INVALID_FORM = 'INVALID_FORM';
 
-    public function __construct(private readonly EntityManagerInterface $em, private readonly SectionRepository $sectionRepository, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger, private readonly Manager $manager)
+    public function __construct(private readonly EntityManagerInterface $em, private readonly SectionRepository $sectionRepository, private readonly FormFactoryInterface $formFactory, private readonly LoggerInterface $logger)
     {
     }
 
@@ -50,7 +49,7 @@ class UpdateHomePageProjectsSectionConfigurationMutation implements MutationInte
         $arguments['sectionProjects'] = $sectionProjectsFormInput;
         LocaleUtils::indexTranslations($arguments);
 
-        $maxProjectsDisplay = true === $this->manager->isActive(Manager::new_project_card) ? 9 : 8;
+        $maxProjectsDisplay = 9;
 
         if ($nbObjects > $maxProjectsDisplay) {
             return [

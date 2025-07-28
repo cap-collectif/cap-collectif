@@ -60,7 +60,7 @@ exports[`<EventList /> should render correctly 1`] = `
               </p>
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 7"
@@ -78,7 +78,7 @@ exports[`<EventList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -143,7 +143,7 @@ exports[`<EventList /> should render correctly 1`] = `
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -190,7 +190,7 @@ exports[`<EventList /> should render correctly 1`] = `
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -354,7 +354,7 @@ exports[`<EventList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="currentColor"
                   height="1em"
                   viewBox="0 0 24 24"
@@ -625,7 +625,7 @@ exports[`<EventList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="currentColor"
                   height="1em"
                   viewBox="0 0 24 24"
@@ -683,7 +683,7 @@ exports[`<EventList /> should render correctly 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB kkwMkp dUpIgt cap-button"
+        className="sc-bcXGCL sc-gGvGpy kkwMkp iCdXwD cap-button"
         onClick={[Function]}
         type="button"
       >

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom'
 import { useIntl } from 'react-intl'
 import {
   Box,
-  Card as DsCard,
+  AbstractCard as DsCard,
   Flex,
   Heading,
   Icon,

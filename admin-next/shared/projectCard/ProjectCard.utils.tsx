@@ -2,34 +2,27 @@ import * as React from 'react'
 import type { IntlShape } from 'react-intl'
 import 'react-intl'
 import moment from 'moment'
-import css from '@styled-system/css'
-import type { ProjectCardshared_project$data, StepState } from '@relay/ProjectCardshared_project.graphql'
+import type { ProjectCardshared_project$data } from '@relay/ProjectCardshared_project.graphql'
 import {
   Flex,
   Text,
-  Tag,
   TagProps,
   Icon as DSIcon,
   CapUIIconSize,
   CapUIIcon,
-  CapUILineHeight,
-  CapUIFontSize,
+  CardStatusTag,
+  CardTagLeftIcon,
+  CardTagLabel,
+  CardTag,
+  CardRestricted,
 } from '@cap-collectif/ui'
-import FormattedNumber from '@shared/utils/FormattedNumber'
+import { formatNumber } from '@shared/utils/FormattedNumber'
 
-type Steps = ReadonlyArray<{
-  readonly state: StepState
-  readonly __typename: string
-}>
-
-export const formatCounter = (iconName: CapUIIcon, count: number, archived: boolean, label: string) => (
-  <Flex direction="row" alignItems="center">
-    <DSIcon size={CapUIIconSize.Md} color={archived ? 'gray.500' : 'gray.700'} mr={1} name={iconName} />
-    <Text fontSize={14} color={archived ? 'gray.500' : 'gray.900'} as="div">
-      <FormattedNumber number={count} />
-      <span className="sr-only">{label}</span>
-    </Text>
-  </Flex>
+export const formatCounter = (iconName: CapUIIcon, count: number, label: string) => (
+  <CardTag srOnlyText={label}>
+    <CardTagLeftIcon name={iconName} />
+    <CardTagLabel>{formatNumber(count)}</CardTagLabel>
+  </CardTag>
 )
 
 export const formatInfo = (iconName: CapUIIcon, text: string | null | undefined, archived: boolean, color?: string) => {
@@ -55,46 +48,22 @@ export const formatInfo = (iconName: CapUIIcon, text: string | null | undefined,
   )
 }
 
-const getIsFutureStep = (steps: Steps): boolean => {
-  const openedSteps = steps.filter(step => step.state === 'OPENED' && step.__typename !== 'PresentationStep')
-  const futureSteps = steps.filter(step => step.state === 'FUTURE' && step.__typename !== 'PresentationStep')
-  const closedSteps = steps.filter(step => step.state === 'CLOSED' && step.__typename !== 'PresentationStep')
-  return futureSteps.length > 0 && openedSteps.length === 0 && closedSteps.length === 0
-}
-
 export const renderTag = (project: ProjectCardshared_project$data, intl: IntlShape) => {
-  const restrictedTag = () => (
-    <Tag
-      variantColor="infoGray"
-      css={css({
-        p: {
-          lineHeight: 1,
-        },
-      })}
-    >
-      <DSIcon size={CapUIIconSize.Sm} name={CapUIIcon.Lock} color="gray.700" />
-    </Tag>
-  )
+  const restrictedTag = () => <CardRestricted srOnlyText={intl.formatMessage({ id: 'restrictedaccess' })} />
 
-  const tag = (variant: TagProps['variantColor'], message: string, isRestricted?: boolean) => (
-    <Flex
-      top={[2, 4]}
-      left={[2, 4]}
-      css={css({
-        position: 'absolute',
-      })}
-    >
-      <Tag variantColor={variant} mr={1}>
-        <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={CapUILineHeight.S} fontWeight="700">
-          {message}
-        </Text>
-      </Tag>
+  const tag = (icon: CapUIIcon | null, variant: TagProps['variantColor'], message: string, isRestricted?: boolean) => (
+    <>
+      <CardStatusTag variantColor={variant} mr={1}>
+        {icon ? <CardTagLeftIcon name={icon || CapUIIcon.Add} /> : null}
+        <CardTagLabel> {message}</CardTagLabel>
+      </CardStatusTag>
       {isRestricted && restrictedTag()}
-    </Flex>
+    </>
   )
 
   if (project.archived)
     return tag(
+      null,
       'infoGray',
       intl.formatMessage({
         id: 'global-archived',
@@ -103,19 +72,21 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
   const isRestricted = project.visibility !== 'PUBLIC'
   const now = moment()
   const publishedTime = now.diff(moment(project.publishedAt), 'hours')
-  const isFutureStep = project.steps ? getIsFutureStep(project.steps) : null
-  if (isFutureStep)
+
+  if (project.status === 'UNKNOWN') return null
+  if (project.status === 'FUTURE_WITHOUT_FINISHED_STEPS')
     return tag(
+      CapUIIcon.CalendarO,
       'info',
       intl.formatMessage({
         id: 'step.status.future',
       }),
       isRestricted,
     )
-  if (!project.currentStep) return null
-  const isStepFinished = project.currentStep.state === 'CLOSED'
-  if (isStepFinished)
+  const isClosed = project.status === 'CLOSED'
+  if (isClosed)
     return tag(
+      null,
       'infoGray',
       intl.formatMessage({
         id: 'global.ended',
@@ -125,6 +96,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
   const hoursLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'hours')
   if (hoursLeft > -48 && project.currentStep)
     return tag(
+      CapUIIcon.ClockO,
       'danger',
       `${-hoursLeft} ${intl.formatMessage(
         {
@@ -139,6 +111,7 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
   const daysLeft = now.diff(moment(project.currentStep?.timeRange.endAt), 'days')
   if (daysLeft > -7 && project.currentStep)
     return tag(
+      CapUIIcon.ClockO,
       'warning',
       `${-daysLeft} ${intl.formatMessage(
         {
@@ -150,27 +123,24 @@ export const renderTag = (project: ProjectCardshared_project$data, intl: IntlSha
       )}`,
       isRestricted,
     )
-  if (publishedTime < 48)
+  if (project.status === 'OPENED')
     return tag(
+      CapUIIcon.HourglassO,
       'success',
       intl.formatMessage({
-        id: 'global.new',
+        id: 'global.in-progress',
       }),
       isRestricted,
     )
-  if (
-    (isRestricted && !isStepFinished && !(daysLeft > -7) && !(hoursLeft > -48) && !(publishedTime < 48)) ||
-    isRestricted
-  )
-    return (
-      <Flex
-        top={[2, 4]}
-        left={[2, 4]}
-        css={css({
-          position: 'absolute',
-        })}
-      >
-        {restrictedTag()}
-      </Flex>
+  if (project.status === 'OPENED_PARTICIPATION')
+    return tag(
+      CapUIIcon.BubbleO,
+      'success',
+      intl.formatMessage({
+        id: 'step.status.open.participation',
+      }),
+      isRestricted,
     )
+  if ((isRestricted && !isClosed && !(daysLeft > -7) && !(hoursLeft > -48) && !(publishedTime < 48)) || isRestricted)
+    return restrictedTag()
 }

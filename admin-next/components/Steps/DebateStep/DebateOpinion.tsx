@@ -3,7 +3,7 @@ import { graphql, useFragment } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import UserAvatar from '@components/UserAvatar/UserAvatar'
-import { Flex, Card, Tag, Text, ButtonQuickAction, CapUIIcon, CapUIFontSize } from '@cap-collectif/ui'
+import { Flex, AbstractCard, Tag, Text, ButtonQuickAction, CapUIIcon, CapUIFontSize } from '@cap-collectif/ui'
 import { DebateOpinion_debateOpinion$key } from '@relay/DebateOpinion_debateOpinion.graphql'
 
 type Props = {
@@ -31,7 +31,7 @@ const DebateOpinion = ({ debateOpinion: debateOpinionRef, onEdit, onDelete }: Pr
   const [hovering, setHovering] = React.useState<boolean>(false)
 
   return (
-    <Card
+    <AbstractCard
       p={0}
       bg="white"
       flex="1"
@@ -94,7 +94,7 @@ const DebateOpinion = ({ debateOpinion: debateOpinionRef, onEdit, onDelete }: Pr
           <WYSIWYGRender value={body} />
         </Flex>
       </Flex>
-    </Card>
+    </AbstractCard>
   )
 }
 

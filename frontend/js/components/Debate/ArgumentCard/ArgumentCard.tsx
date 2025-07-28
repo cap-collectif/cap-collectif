@@ -12,7 +12,7 @@ import {
   Menu,
   Button,
   Flex,
-  Card,
+  AbstractCard,
   Tag,
   Text,
   CapUIIconSize,
@@ -124,7 +124,7 @@ export const ArgumentCard = ({
   const anonymousArgumentHash = CookieMonster.getHashedDebateAnonymousArgumentCookie(argument.debate?.id)
   const isAuthor = argument.viewerDidAuthor || (anonymousArgument?.id === argument.id && !viewer)
   return (
-    <Card p={6} bg="white" {...props}>
+    <AbstractCard p={6} bg="white" {...props}>
       <Flex height="100%" direction="column">
         <Flex mb={2} direction="row" justify="space-between" align="start">
           <Flex direction="row" align="center" flexWrap="wrap">
@@ -160,7 +160,13 @@ export const ArgumentCard = ({
                   interactive={false}
                   icon={stepClosed ? CapUIIcon.Cross : CapUIIcon.Clock}
                 >
-                  <Text as="span" fontSize={CapUIFontSize.Caption} lineHeight={LineHeight.SM} fontWeight="700" uppercase>
+                  <Text
+                    as="span"
+                    fontSize={CapUIFontSize.Caption}
+                    lineHeight={LineHeight.SM}
+                    fontWeight="700"
+                    uppercase
+                  >
                     <FormattedMessage id={stepClosed ? 'post_is_not_public' : 'publish.wait'} />
                   </Text>
                 </Tag>
@@ -343,7 +349,12 @@ export const ArgumentCard = ({
                 />
               </LoginOverlay>
             </ConditionalWrapper>
-            <Text ml={[1, 0]} as="span" fontSize={[CapUIFontSize.Headline, CapUIFontSize.BodyRegular]} color="neutral-gray.900">
+            <Text
+              ml={[1, 0]}
+              as="span"
+              fontSize={[CapUIFontSize.Headline, CapUIFontSize.BodyRegular]}
+              color="neutral-gray.900"
+            >
               {argument.votes.totalCount}
             </Text>
           </Flex>
@@ -351,7 +362,7 @@ export const ArgumentCard = ({
       </Flex>
 
       <ModalReportArgumentMobile show={isOpen} argument={argument} onClose={onClose} />
-    </Card>
+    </AbstractCard>
   )
 }
 export default createFragmentContainer(ArgumentCard, {

@@ -55,13 +55,7 @@ const MenuAvatar = ({
   defaultImage,
   ...rest
 }: { user: NavBarMenuQuery$data['viewer']; defaultImage: string | null } & Pick<BoxProps, 'mr'>) => (
-  <Avatar
-    size="md"
-    name={user.username}
-    src={user.media?.url ? user.media?.url : defaultImage}
-    alt={user.username}
-    {...rest}
-  />
+  <Avatar size="md" name={user.username} src={user.media?.url ? user.media?.url : defaultImage} alt="" {...rest} />
 )
 
 const MenuItem = ({

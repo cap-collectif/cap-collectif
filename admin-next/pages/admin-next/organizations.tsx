@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { NextPage } from 'next'
-import { Flex, Spinner, CapUIIconSize, Card, Heading, Text, Box, Search } from '@cap-collectif/ui'
+import { Flex, Spinner, CapUIIconSize, AbstractCard, Heading, Text, Box, Search } from '@cap-collectif/ui'
 import { PageProps } from 'types'
 import Layout from '@components/Layout/Layout'
 import { useIntl } from 'react-intl'
@@ -44,7 +44,7 @@ const OrganizationPage: React.FC<OrganizationPageProps> = () => {
 
   return (
     <Flex direction="column" spacing={6}>
-      <Flex as={Card} direction="column" spacing={8} backgroundColor="white" borderRadius="8px">
+      <Flex as={AbstractCard} direction="column" spacing={8} backgroundColor="white" borderRadius="8px">
         <Flex direction="column">
           <Flex justifyContent="space-between" alignItems="center">
             <Box>

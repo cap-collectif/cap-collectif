@@ -4,8 +4,9 @@ import * as React from 'react'
 type Props = {
   number: number
 }
+
 // Nice tool to have the 10K  or 2.4M number format
-export const FormattedNumber = ({ number }: Props) => {
+export const formatNumber = (number: number) => {
   let formattedNumber: any = 0
 
   if (number <= 999) {
@@ -18,5 +19,7 @@ export const FormattedNumber = ({ number }: Props) => {
 
   return formattedNumber
 }
+
+export const FormattedNumber = ({ number }: Props) => formatNumber(number)
 
 export default FormattedNumber

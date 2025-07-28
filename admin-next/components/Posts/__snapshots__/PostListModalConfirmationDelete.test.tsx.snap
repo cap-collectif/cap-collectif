@@ -27,7 +27,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
   >
     <svg
       aria-hidden="true"
-      className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+      className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
       fill="none"
       height="1em"
       viewBox="0 0 12 12"
@@ -106,7 +106,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
   >
     <svg
       aria-hidden="true"
-      className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+      className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
       fill="none"
       height="1em"
       viewBox="0 0 12 12"
@@ -151,7 +151,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-GKYOR cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -160,7 +160,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
       }
     >
       <div
-        className="sc-bcXGCL JcTvy sc-GKYOR dCANLh cap-modal"
+        className="sc-bcXGCL JcTvy sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -195,7 +195,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
+              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -235,7 +235,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
             }
           >
             <button
-              className="sc-bcXGCL sc-laZSpB fnqecp dsOIMI cap-button"
+              className="sc-bcXGCL sc-gGvGpy fnqecp kpqYfq cap-button"
               onClick={[Function]}
               style={
                 {
@@ -248,7 +248,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
               cancel
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB fnqecp dOPPpN cap-button"
+              className="sc-bcXGCL sc-gGvGpy fnqecp qZtxX cap-button"
               onClick={[Function]}
               type="button"
             >

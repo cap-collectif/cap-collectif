@@ -1,7 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`<ArgumentCard /> renders correctly 1`] = `
-<Card
+<AbstractCard
   bg="white"
   p={6}
 >
@@ -140,11 +140,11 @@ exports[`<ArgumentCard /> renders correctly 1`] = `
     onClose={[Function]}
     show={false}
   />
-</Card>
+</AbstractCard>
 `;
 
 exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
-<Card
+<AbstractCard
   bg="white"
   p={6}
 >
@@ -283,11 +283,11 @@ exports[`<ArgumentCard /> renders correctly on mobile 1`] = `
     onClose={[Function]}
     show={false}
   />
-</Card>
+</AbstractCard>
 `;
 
 exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
-<Card
+<AbstractCard
   bg="white"
   p={6}
 >
@@ -426,11 +426,11 @@ exports[`<ArgumentCard /> renders correctly when connected as admin 1`] = `
     onClose={[Function]}
     show={false}
   />
-</Card>
+</AbstractCard>
 `;
 
 exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
-<Card
+<AbstractCard
   bg="white"
   p={6}
 >
@@ -569,11 +569,11 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer 1`] = `
     onClose={[Function]}
     show={false}
   />
-</Card>
+</AbstractCard>
 `;
 
 exports[`<ArgumentCard /> renders correctly when connected as viewer not confirmed 1`] = `
-<Card
+<AbstractCard
   bg="white"
   p={6}
 >
@@ -712,5 +712,5 @@ exports[`<ArgumentCard /> renders correctly when connected as viewer not confirm
     onClose={[Function]}
     show={false}
   />
-</Card>
+</AbstractCard>
 `;

@@ -9,273 +9,71 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
     className="sc-bcXGCL gjsubU project-list-section"
   >
     <div
-      className="sc-bcXGCL itrdpj"
+      className="sc-bcXGCL jYYNjb"
     >
       <div
-        className="sc-bcXGCL eFdmaM project-list-section-filters"
+        className="sc-bcXGCL eYRiRd"
       >
         <div
-          className="sc-bcXGCL djDjxS"
+          className="sc-bcXGCL gCiHVh"
         >
           <div
-            className="sc-bcXGCL eIdcks"
+            className="sc-bcXGCL bLdUPi"
           >
             <div
-              className="cap-select css-b62m3t-container"
-              onKeyDown={[Function]}
-            >
-              <span
-                className="css-1f43avz-a11yText-A11yText"
-                id="react-select-2-live-region"
-              />
-              <span
-                aria-atomic="false"
-                aria-live="polite"
-                aria-relevant="additions text"
-                className="css-1f43avz-a11yText-A11yText"
-                role="log"
-              />
-              <div
-                className="cap-select__control css-1qmtci6-control"
-                onMouseDown={[Function]}
-                onTouchEnd={[Function]}
-              >
-                <div
-                  className="cap-select__value-container cap-select__value-container--has-value css-wc641m"
-                >
-                  <div
-                    className="cap-select__single-value css-mlcseb-singleValue"
-                  >
-                    opinion.sort.last
-                  </div>
-                  <div
-                    className="cap-select__input-container css-122h6g6"
-                    data-value=""
-                  >
-                    <input
-                      aria-activedescendant=""
-                      aria-autocomplete="list"
-                      aria-expanded={false}
-                      aria-haspopup={true}
-                      autoCapitalize="none"
-                      autoComplete="off"
-                      autoCorrect="off"
-                      className="cap-select__input"
-                      disabled={false}
-                      id="react-select-2-input"
-                      onBlur={[Function]}
-                      onChange={[Function]}
-                      onFocus={[Function]}
-                      role="combobox"
-                      spellCheck="false"
-                      style={
-                        {
-                          "background": 0,
-                          "border": 0,
-                          "color": "inherit",
-                          "font": "inherit",
-                          "gridArea": "1 / 2",
-                          "label": "input",
-                          "margin": 0,
-                          "minWidth": "2px",
-                          "opacity": 1,
-                          "outline": 0,
-                          "padding": 0,
-                          "width": "100%",
-                        }
-                      }
-                      tabIndex={0}
-                      type="text"
-                      value=""
-                    />
-                  </div>
-                </div>
-                <svg
-                  aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud kviGeh knzWyK cap-icon"
-                  fill="none"
-                  height="1em"
-                  style={
-                    {
-                      "cursor": "pointer",
-                    }
-                  }
-                  viewBox="0 0 12 7"
-                  width="1em"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M6 7c.164 0 .326-.032.475-.095q.227-.096.392-.27l4.916-5.216a.83.83 0 0 0 .214-.62.85.85 0 0 0-.311-.584.97.97 0 0 0-.66-.214.95.95 0 0 0-.632.277l-4.3 4.562a.133.133 0 0 1-.188 0L1.606.278A.95.95 0 0 0 .974.001a.97.97 0 0 0-.66.214A.85.85 0 0 0 .003.8a.83.83 0 0 0 .214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097"
-                    fill="currentColor"
-                  />
-                </svg>
-              </div>
-            </div>
+              className="sc-bcXGCL isbCvH sc-jRwapC"
+              style={{}}
+            />
+            <div
+              className="sc-bcXGCL fpCAzA sc-jRwapC"
+              style={{}}
+            />
           </div>
-          <button
-            aria-controls="id-g"
-            aria-expanded={false}
-            aria-haspopup="dialog"
-            className="sc-bcXGCL kLQDgH cap-popover__disclosure"
-            id="project-button-filter"
-            onClick={[Function]}
-            onClickCapture={[Function]}
-            onKeyDown={[Function]}
-            onKeyPressCapture={[Function]}
-            onKeyUp={[Function]}
-            onMouseDown={[Function]}
-            onMouseDownCapture={[Function]}
-            type="button"
+          <div
+            className="sc-bcXGCL bLdUPi"
           >
             <div
-              style={
-                {
-                  "marginLeft": 0,
-                  "marginTop": 0,
-                }
-              }
-            >
-              label_filters
-            </div>
-            <svg
-              aria-hidden="true"
-              className="sc-bcXGCL sc-eJDTud dzHtSI knzWyK cap-icon"
-              fill="none"
-              height="1em"
-              viewBox="0 0 12 7"
-              width="1em"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M6 7c.164 0 .326-.032.475-.095q.227-.096.392-.27l4.916-5.216a.83.83 0 0 0 .214-.62.85.85 0 0 0-.311-.584.97.97 0 0 0-.66-.214.95.95 0 0 0-.632.277l-4.3 4.562a.133.133 0 0 1-.188 0L1.606.278A.95.95 0 0 0 .974.001a.97.97 0 0 0-.66.214A.85.85 0 0 0 .003.8a.83.83 0 0 0 .214.62l4.915 5.214c.109.115.242.208.392.27.15.064.312.097.476.097"
-                fill="currentColor"
-              />
-            </svg>
-          </button>
+              className="sc-bcXGCL isbCvH sc-jRwapC"
+              style={{}}
+            />
+            <div
+              className="sc-bcXGCL fpCAzA sc-jRwapC"
+              style={{}}
+            />
+          </div>
           <div
-            className="sc-GhiAJ cJIEss"
-            data-dialog={true}
-            hidden={true}
-            id="id-g"
-            onAnimationEnd={[Function]}
-            onBlur={[Function]}
-            onKeyDown={[Function]}
-            onTransitionEnd={[Function]}
-            role="dialog"
-            style={
-              {
-                "display": "none",
-                "left": "100%",
-                "position": "fixed",
-                "top": "100%",
-                "zIndex": 1000,
-              }
-            }
-            tabIndex={0}
-          />
-        </div>
-        <div
-          className="sc-bcXGCL eRjUtx"
-        >
-          <div
-            className="cap-search css-b62m3t-container"
-            onKeyDown={[Function]}
+            className="sc-bcXGCL bLdUPi"
           >
             <div
-              className="cap-search__control css-1qmtci6-control"
-              onMouseDown={[Function]}
-              onTouchEnd={[Function]}
-            >
-              <svg
-                aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud hlFaFu hEjMCZ cap-icon"
-                fill="none"
-                height="1em"
-                viewBox="0 0 11 11"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M4.333 7.667a3.333 3.333 0 1 0 0-6.667 3.333 3.333 0 0 0 0 6.667M6.69 6.69l3.893 3.893"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-              <div
-                className="cap-search__value-container css-1hibbf2"
-              >
-                <div
-                  className="cap-search__placeholder css-1sh1d38-placeholder"
-                  id="react-select-3-placeholder"
-                >
-                  global.menu.search
-                </div>
-                <div
-                  className="cap-search__input-container css-122h6g6"
-                  data-value=""
-                >
-                  <input
-                    aria-activedescendant=""
-                    autoCapitalize="none"
-                    autoComplete="off"
-                    autoCorrect="off"
-                    className="cap-search__input"
-                    disabled={false}
-                    id="react-select-3-input"
-                    onBlur={[Function]}
-                    onChange={[Function]}
-                    onFocus={[Function]}
-                    spellCheck="false"
-                    style={
-                      {
-                        "background": 0,
-                        "border": 0,
-                        "color": "inherit",
-                        "font": "inherit",
-                        "gridArea": "1 / 2",
-                        "label": "input",
-                        "margin": 0,
-                        "minWidth": "2px",
-                        "opacity": 1,
-                        "outline": 0,
-                        "padding": 0,
-                        "width": "100%",
-                      }
-                    }
-                    tabIndex={0}
-                    type="text"
-                    value=""
-                  />
-                </div>
-              </div>
-            </div>
+              className="sc-bcXGCL isbCvH sc-jRwapC"
+              style={{}}
+            />
+            <div
+              className="sc-bcXGCL fpCAzA sc-jRwapC"
+              style={{}}
+            />
           </div>
         </div>
       </div>
       <div
-        className="sc-bcXGCL iprxGW project-list-section-projects"
+        className="sc-bcXGCL gjsubU project-list-section-projects"
       >
         <div
-          className="sc-bcXGCL dWXqzq"
+          className="sc-bcXGCL bezsBU"
         >
           <div
-            className="sc-bcXGCL kVLURz"
+            className="sc-bcXGCL cYlyPw cap-card cap-project-card"
+            id="cap-project-card-project1"
           >
-            <a
-              className="sc-bcXGCL sc-6287370a-1 jFUZJS ajINc project-card"
-              href="site.com/BPH"
+            <div
+              className="sc-bcXGCL eHlVFt cap-card-cover"
             >
-              <div
-                className="sc-bcXGCL liuoSJ cap-card"
-              >
-                <img
-                  alt=""
-                  className="sc-bcXGCL Wzpgc sc-6287370a-2 eLAgCe"
-                  loading="lazy"
-                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
-                  srcSet="
+              <img
+                alt=""
+                className="sc-bcXGCL jqlklV"
+                loading="lazy"
+                sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
+                srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
          http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
@@ -284,170 +82,95 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
          "
-                />
-                <div
-                  className="sc-bcXGCL jeGsly sc-987cf8f3-0 kzlLnb"
+                style={
+                  {
+                    "aspectRatio": "3 / 2",
+                    "filter": undefined,
+                    "objectFit": "cover",
+                    "opacity": undefined,
+                  }
+                }
+              />
+              <div
+                aria-label="Tag  step.status.future"
+                className="sc-bcXGCL hLIoKi cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
+                title=" step.status.future"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                  fill="none"
+                  height="1em"
+                  viewBox="0 0 12 12"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
                 >
-                  <div
-                    aria-label="Tag step.status.future"
-                    className="sc-bcXGCL hUGgqU cap-tag"
-                    onBlur={[Function]}
-                    onFocus={[Function]}
-                    tabIndex={-1}
-                    title="step.status.future"
-                  >
-                    <span
-                      className="sc-bcXGCL jqGkka cap-text"
-                    >
-                      step.status.future
-                    </span>
-                  </div>
-                  <div
-                    aria-label="Tag "
-                    className="sc-bcXGCL jDGtwv cap-tag sc-987cf8f3-2 dTUDIQ"
-                    onBlur={[Function]}
-                    onFocus={[Function]}
-                    tabIndex={-1}
-                    title=""
-                  >
-                    <svg
-                      aria-hidden="true"
-                      className="sc-bcXGCL sc-eJDTud dzHtSI knzWyK cap-icon"
-                      fill="none"
-                      height="1em"
-                      viewBox="0 0 10 12"
-                      width="1em"
-                      xmlns="http://www.w3.org/2000/svg"
-                    >
-                      <path
-                        d="M8.5 4.75h-.375V3.375a3.375 3.375 0 1 0-6.75 0V4.75H1a1 1 0 0 0-1 1V11a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5.75a1 1 0 0 0-1-1m-4.75 3a1 1 0 1 1 1.5.861V9.75a.5.5 0 0 1-1 0V8.611a1 1 0 0 1-.5-.861M2.625 3.375a2.125 2.125 0 1 1 4.25 0V4.5a.25.25 0 0 1-.25.25h-3.75a.25.25 0 0 1-.25-.25z"
-                        fill="currentColor"
-                      />
-                    </svg>
-                  </div>
-                </div>
-                <div
-                  className="sc-bcXGCL dIXTAz"
+                  <path
+                    d="M10.333 2.333H1.667A.667.667 0 0 0 1 3v7.333c0 .368.298.667.667.667h8.666a.667.667 0 0 0 .667-.667V3a.667.667 0 0 0-.667-.667M1 5h10M3.667 3.333V1M8.334 3.333V1"
+                    stroke="currentColor"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    strokeWidth={0.8}
+                  />
+                </svg>
+                <span
+                  className="sc-bcXGCL gGmAkb cap-tag__label"
                 >
-                  <h4
-                    className="sc-bcXGCL kDiWaJ cap-heading"
-                    title="BPH"
+                   
+                  step.status.future
+                </span>
+              </div>
+              <div
+                aria-label="Tag  restrictedaccess"
+                className="sc-bcXGCL fWdKQe cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
+                title=" restrictedaccess"
+              >
+                <svg
+                  aria-hidden="true"
+                  className="sc-bcXGCL sc-oZHua btYBPG cCzERh cap-icon cap-tag__leftIcon"
+                  fill="none"
+                  height="1em"
+                  viewBox="0 0 10 12"
+                  width="1em"
+                  xmlns="http://www.w3.org/2000/svg"
+                >
+                  <path
+                    d="M8.5 4.75h-.375V3.375a3.375 3.375 0 1 0-6.75 0V4.75H1a1 1 0 0 0-1 1V11a1 1 0 0 0 1 1h7.5a1 1 0 0 0 1-1V5.75a1 1 0 0 0-1-1m-4.75 3a1 1 0 1 1 1.5.861V9.75a.5.5 0 0 1-1 0V8.611a1 1 0 0 1-.5-.861M2.625 3.375a2.125 2.125 0 1 1 4.25 0V4.5a.25.25 0 0 1-.25.25h-3.75a.25.25 0 0 1-.25-.25z"
+                    fill="currentColor"
+                  />
+                </svg>
+                <span
+                  className="sc-bcXGCL kIAgwG"
+                >
+                   
+                  restrictedaccess
+                </span>
+              </div>
+            </div>
+            <div
+              className="sc-bcXGCL fwgwMu cap-card-content"
+            >
+              <div
+                className="sc-bcXGCL crFwrP"
+              >
+                <h2
+                  className="sc-bcXGCL fyvWHu cap-card-primaryInfo"
+                >
+                  <a
+                    className="sc-bcXGCL heYhqG cap-card-link"
+                    href="site.com/BPH"
                   >
                     BPH
-                  </h4>
-                  <div
-                    className="sc-bcXGCL dKkhaB"
-                  >
-                    <div
-                      className="sc-bcXGCL drYXzD"
-                    >
-                      <div
-                        className="sc-bcXGCL gumXnO"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 11 12"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M4.333 11.334H2a1 1 0 0 1-1-1"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                          <path
-                            d="M9 5V1.667a.333.333 0 0 0-.333-.334H2.333C1.597 1.334 1 1.93 1 2.668v7.667a1 1 0 0 1 1-1h2.333"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                          <path
-                            clipRule="evenodd"
-                            d="m7.978 6.191.684 1.476h1.333a.327.327 0 0 1 .23.57L9.07 9.376l.641 1.474a.35.35 0 0 1-.497.436l-1.552-.871-1.55.871a.35.35 0 0 1-.498-.436l.641-1.473L5.1 8.238a.326.326 0 0 1 .228-.571h1.334l.686-1.477a.356.356 0 0 1 .63.001"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                        </svg>
-                        <span
-                          className="sc-987cf8f3-3 ikAnXZ"
-                        >
-                          &lt;mock-value-for-field-"title"&gt;
-                        </span>
-                      </div>
-                       
-                      <div
-                        className="sc-bcXGCL gumXnO"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 9 12"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M4.321 1a3.32 3.32 0 0 1 3.322 3.321c0 1.571-2.436 5.484-3.135 6.577a.22.22 0 0 1-.373 0C3.435 9.805 1 5.892 1 4.321A3.32 3.32 0 0 1 4.321 1"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                          <path
-                            d="M4.322 5.65a1.329 1.329 0 1 0 0-2.657 1.329 1.329 0 0 0 0 2.657"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                        </svg>
-                        <span
-                          className="sc-987cf8f3-3 kHVPqC"
-                        >
-                          &lt;mock-value-for-field-"name"&gt;
-                        </span>
-                      </div>
-                      <div
-                        className="sc-bcXGCL gumXnO"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 12 10"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            clipRule="evenodd"
-                            d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                        </svg>
-                        <span
-                          className="sc-987cf8f3-3 kHVPqC"
-                        >
-                          &lt;mock-value-for-field-"title"&gt;
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+                  </a>
+                </h2>
               </div>
-            </a>
+            </div>
           </div>
         </div>
       </div>

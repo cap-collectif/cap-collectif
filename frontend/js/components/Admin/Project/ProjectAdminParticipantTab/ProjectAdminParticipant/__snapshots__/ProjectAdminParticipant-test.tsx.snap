@@ -126,7 +126,7 @@ Array [
         hasBadge={false}
       >
         <div
-          className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
+          className="sc-bcXGCL KmVep sc-fbYNKQ fEcFBX cap-avatar"
         >
           <img
             alt="<mock-value-for-field-\\"username\\">"
@@ -271,7 +271,7 @@ Array [
         hasBadge={false}
       >
         <div
-          className="sc-bcXGCL KmVep sc-ckEbfr gIIayp cap-avatar"
+          className="sc-bcXGCL KmVep sc-fbYNKQ fEcFBX cap-avatar"
         >
           <img
             alt="<mock-value-for-field-\\"username\\">"

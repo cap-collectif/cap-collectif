@@ -90,7 +90,6 @@ class ResetFeatureFlagsCommand extends Command
         $this->manager->deactivate(Manager::emailing);
         $this->manager->deactivate(Manager::emailing_parameters);
         $this->manager->activate(Manager::proposal_revisions);
-        $this->manager->activate(Manager::new_project_card);
         $this->manager->deactivate(Manager::export_legacy_users);
         $this->manager->activate(Manager::import_proposals);
         $this->manager->activate(Manager::analytics_page);
@@ -142,7 +141,6 @@ class ResetFeatureFlagsCommand extends Command
             $this->manager->activate(Manager::emailing);
             $this->manager->activate(Manager::emailing_parameters);
             $this->manager->activate(Manager::proposal_revisions);
-            $this->manager->activate(Manager::new_project_card);
             $this->manager->activate(Manager::anonymous_questionnaire);
             $this->manager->deactivate(Manager::user_type);
             $this->manager->activate(Manager::helpscout_beacon);

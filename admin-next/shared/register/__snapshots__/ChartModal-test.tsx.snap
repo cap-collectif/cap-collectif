@@ -19,7 +19,7 @@ exports[`<ChartModal /> renders correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-GKYOR cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<ChartModal /> renders correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL JcTvy sc-GKYOR dCANLh cap-modal"
+        className="sc-bcXGCL JcTvy sc-gsGkXq fDqhDU cap-modal"
         style={
           {
             "opacity": 0,
@@ -63,7 +63,7 @@ exports[`<ChartModal /> renders correctly 1`] = `
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
+              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -97,7 +97,7 @@ exports[`<ChartModal /> renders correctly 1`] = `
           className="sc-bcXGCL gthNCX cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB fzdPDJ cXaElS cap-button"
+            className="sc-bcXGCL sc-gGvGpy fzdPDJ dmtkzs cap-button"
             onClick={[Function]}
             style={
               {

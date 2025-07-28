@@ -71,7 +71,11 @@ export default async function Page() {
   return (
     <>
       {data?.customCode ? (
-        <div id="contact-page-code" dangerouslySetInnerHTML={{ __html: data?.customCode?.value }} />
+        <div
+          id="contact-page-code"
+          className="cap-custom-code"
+          dangerouslySetInnerHTML={{ __html: data?.customCode?.value }}
+        />
       ) : null}
       <main id="contact-page">
         <Contact data={data} />

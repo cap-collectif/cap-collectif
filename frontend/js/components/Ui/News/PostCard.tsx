@@ -2,10 +2,10 @@ import * as React from 'react'
 import { graphql, useFragment } from 'react-relay'
 import { useSelector } from 'react-redux'
 import type { PostCard_post$key } from '~relay/PostCard_post.graphql'
-import { formatInfo } from '../Project/ProjectCard.utils'
 import Image from '~ui/Primitives/Image'
-import { Box, BoxProps, CapUIIcon, Card, Flex, Heading } from '@cap-collectif/ui'
+import { Box, BoxProps, CapUIIcon, AbstractCard, Flex, Heading } from '@cap-collectif/ui'
 import { GlobalState } from '~/types'
+import { formatInfo } from '@shared/projectCard/ProjectCard.utils'
 
 type Props = BoxProps & {
   readonly post: PostCard_post$key
@@ -27,7 +27,7 @@ const FRAGMENT = graphql`
 `
 
 const PostCoverPlaceholder = ({ backgroundColor }: { backgroundColor: string }) => (
-  <Card
+  <AbstractCard
     width="112px"
     borderRadius="accordion"
     overflow="hidden"
@@ -190,7 +190,7 @@ const PostCoverPlaceholder = ({ backgroundColor }: { backgroundColor: string }) 
         d="M107.673-35.707h15.937v151.343c0,4.403-3.576,7.973-7.973,7.973s-7.964-3.569-7.964-7.973V-67.568H83.777"
       />
     </svg>
-  </Card>
+  </AbstractCard>
 )
 
 export const PostCard = ({ post: postQuery, ...props }: Props) => {
@@ -208,7 +208,7 @@ export const PostCard = ({ post: postQuery, ...props }: Props) => {
         },
       }}
     >
-      <Card
+      <AbstractCard
         bg="white"
         p={2}
         flexDirection="row"
@@ -243,7 +243,7 @@ export const PostCard = ({ post: postQuery, ...props }: Props) => {
               formatInfo(CapUIIcon.FolderO, post.themes?.map(({ title }) => title).join(', ') || '', false)}
           </Box>
         </Flex>
-      </Card>
+      </AbstractCard>
     </Box>
   )
 }

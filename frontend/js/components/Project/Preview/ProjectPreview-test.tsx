@@ -15,12 +15,8 @@ const defaultProject = {
   isProjectsPage: false,
 }
 describe('<ProjectPreview />', () => {
-  it('should render correctly project with participative step, without type', () => {
+  it('should render correctly', () => {
     const wrapper = shallow(<ProjectPreview {...defaultProject} />)
-    expect(wrapper).toMatchSnapshot()
-  })
-  it('should render correctly with the new card type', () => {
-    const wrapper = shallow(<ProjectPreview {...defaultProject} features={{ ...features, new_project_card: true }} />)
     expect(wrapper).toMatchSnapshot()
   })
 })

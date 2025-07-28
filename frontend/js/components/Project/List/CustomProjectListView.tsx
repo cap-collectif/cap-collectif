@@ -1,4 +1,4 @@
-import { Flex, Grid } from '@cap-collectif/ui'
+import { Grid } from '@cap-collectif/ui'
 import * as React from 'react'
 import ProjectPreview from '~/components/Project/Preview/ProjectPreview'
 import type { FeatureToggles } from '~/types'
@@ -38,17 +38,11 @@ const renderPreview = homePageProjectsSectionConfiguration => {
   })
 }
 
-const CustomProjectListView = ({ homePageProjectsSectionConfiguration, features }: Props) => {
+const CustomProjectListView = ({ homePageProjectsSectionConfiguration }: Props) => {
   return (
-    <>
-      {features.new_project_card ? (
-        <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
-          {renderPreview(homePageProjectsSectionConfiguration)}
-        </Grid>
-      ) : (
-        <Flex wrap="wrap">{renderPreview(homePageProjectsSectionConfiguration)}</Flex>
-      )}
-    </>
+    <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
+      {renderPreview(homePageProjectsSectionConfiguration)}
+    </Grid>
   )
 }
 

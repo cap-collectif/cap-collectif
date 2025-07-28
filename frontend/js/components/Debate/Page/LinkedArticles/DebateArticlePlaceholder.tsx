@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Flex, Card, Skeleton, Box } from '@cap-collectif/ui'
+import { Flex, AbstractCard, Skeleton, Box } from '@cap-collectif/ui'
 
 const DebateArticleCard = (): JSX.Element => (
-  <Card bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" flex={1}>
+  <AbstractCard bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" flex={1}>
     <Box width="100%" bg="gray.150" height="135px" />
 
     <Flex direction="column" p={4} bg="white" flex={1}>
@@ -10,7 +10,7 @@ const DebateArticleCard = (): JSX.Element => (
       <Skeleton.Text size="sm" width="50%" my={2} />
       <Skeleton.Text size="sm" width="50%" />
     </Flex>
-  </Card>
+  </AbstractCard>
 )
 
 export default DebateArticleCard

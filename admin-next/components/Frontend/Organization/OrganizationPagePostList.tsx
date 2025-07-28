@@ -2,7 +2,7 @@ import * as React from 'react'
 import { graphql, usePaginationFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import type { OrganizationPagePostList_organization$key } from '@relay/OrganizationPagePostList_organization.graphql'
-import { Flex, Heading, Button } from '@cap-collectif/ui'
+import { Flex, Heading, Button, CapUIFontSize } from '@cap-collectif/ui'
 import PostCard from './PostCard'
 import { pxToRem } from '@shared/utils/pxToRem'
 
@@ -32,8 +32,8 @@ export const OrganizationPagePostList = ({ organization }: Props) => {
   if (!data) return null
   const { posts } = data
   return (
-    <Flex direction="column" maxWidth={['100%', pxToRem(380)]} width="100%" mb={4}>
-      <Heading as="h4" mb={4}>
+    <Flex direction="column" maxWidth={['100%', pxToRem(380)]} width="100%" mb={4} mt={['lg', 0]}>
+      <Heading as="h2" mb={4} color="neutral-gray.darker" fontSize={CapUIFontSize.BodyLarge}>
         {intl.formatMessage({
           id: 'menu.news',
         })}

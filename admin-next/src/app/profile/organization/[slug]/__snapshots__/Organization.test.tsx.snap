@@ -25,130 +25,7 @@ exports[`<Organization /> renders correctly 1`] = `
           </h1>
           <div
             className="sc-bcXGCL gGEetT cap-text"
-          >
-            <div
-              className=" ql-editor wysiwyg-render"
-              dangerouslySetInnerHTML={
-                {
-                  "__html": "<mock-value-for-field-"body">",
-                }
-              }
-            />
-          </div>
-          <div
-            className="sc-bcXGCL ebXvUe"
-          >
-            <a
-              href="<mock-value-for-field-"facebookUrl">"
-            >
-              <span
-                className="sr-only"
-              >
-                Facebook
-              </span>
-              <svg
-                aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud kvhCrE hEjMCZ cap-icon"
-                fill="none"
-                height="1em"
-                viewBox="0 0 17 32"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M10.751 31.975c-.158.006-.26.019-.362.019-2.171 0-4.337-.007-6.509.006-.305 0-.387-.083-.387-.387.006-5.055.006-10.117.006-15.172v-.438H0v-5.398h.343c.952 0 1.905-.006 2.858.007.24 0 .304-.07.304-.305a237 237 0 0 1 0-4.255c.007-.99.166-1.956.623-2.851C4.782 1.937 5.817 1.118 7.125.61 8.192.19 9.316.038 10.447.02 12.288-.007 14.13.005 15.97 0c.172 0 .312-.006.312.235q-.009 2.62-.007 5.24c0 .018-.006.037-.032.12h-.349c-1.143 0-2.286-.007-3.429 0-.66 0-1.194.266-1.53.844a1.2 1.2 0 0 0-.166.597c-.019 1.08 0 2.16-.012 3.24 0 .253.076.323.324.323 1.587-.013 3.175-.006 4.762-.006h.464c-.222 1.816-.438 3.594-.66 5.391H10.75z"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
-            <a
-              href="<mock-value-for-field-"twitterUrl">"
-            >
-              <span
-                className="sr-only"
-              >
-                X
-              </span>
-              <svg
-                aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud kvhCrE hEjMCZ cap-icon"
-                fill="none"
-                height="1em"
-                viewBox="0 0 14 14"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="M8.332 5.928 13.544 0h-1.235L7.783 5.147 4.17 0H0l5.466 7.784L0 14h1.235l4.78-5.436L9.83 14H14zM6.64 7.852l-.554-.775L1.68.91h1.897l3.556 4.977.554.775 4.622 6.47h-1.897z"
-                  fill="currentColor"
-                />
-              </svg>
-            </a>
-            <a
-              href="<mock-value-for-field-"webPageUrl">"
-            >
-              <span
-                className="sr-only"
-              >
-                user_websiteUrl
-              </span>
-              <svg
-                aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud kvhCrE hEjMCZ cap-icon"
-                fill="none"
-                height="1em"
-                viewBox="0 0 12 12"
-                width="1em"
-                xmlns="http://www.w3.org/2000/svg"
-              >
-                <path
-                  d="m3.666 8.333 4.665-4.665M4.103 6.01a1.99 1.99 0 0 0-1.518.578l-1 1a2 2 0 0 0 2.828 2.827l1-1a1.99 1.99 0 0 0 .577-1.518M7.892 5.99a1.99 1.99 0 0 0 1.518-.577l1-1a2 2 0 0 0-2.827-2.827l-1 1a1.99 1.99 0 0 0-.575 1.517"
-                  stroke="currentColor"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={0.8}
-                />
-              </svg>
-            </a>
-          </div>
-        </div>
-        <div
-          className="sc-bcXGCL sc-c3e74c18-1 fUxYfn nVYgo"
-        >
-          <img
-            alt="banner"
-            className="sc-bcXGCL kaMRKt sc-c3e74c18-2 MYQWv"
-            loading="eager"
-            sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
-            srcSet="
-        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
-         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
-         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
-         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-"url"> 1280w,
-         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-"url"> 2560w,
-         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
-         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
-         "
           />
-          <div
-            className="sc-bcXGCL sc-c3e74c18-0 kAmRrU iaveFi"
-          >
-            <img
-              alt="logo"
-              className="sc-bcXGCL llYOQS sc-c3e74c18-3 hIjihT"
-              loading="eager"
-              sizes="(max-width: 320px) 320px, (max-width: 640px) 320px, (max-width: 960px) 320px, (max-width: 1280px) 320px, (max-width: 2560px) 320px,"
-              srcSet="
-        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
-         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
-         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
-         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-"url"> 1280w,
-         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-"url"> 2560w,
-         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
-         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
-         "
-            />
-          </div>
         </div>
       </div>
     </section>
@@ -162,26 +39,26 @@ exports[`<Organization /> renders correctly 1`] = `
         <div
           className="sc-bcXGCL ksSRBa"
         >
-          <h4
-            className="sc-bcXGCL ldwstx cap-heading"
+          <h2
+            className="sc-bcXGCL dFUlYh cap-heading"
           >
             project.title
-          </h4>
+          </h2>
           <div
-            className="sc-bcXGCL fwvqrs"
+            className="sc-bcXGCL iBxTcw"
           >
-            <a
-              className="sc-bcXGCL sc-6287370a-1 iMPMJk ajINc project-card"
-              href="<mock-value-for-field-"externalLink">"
+            <div
+              className="sc-bcXGCL eREZgi cap-card cap-project-card"
+              id="cap-project-card-project-id-1"
             >
               <div
-                className="sc-bcXGCL liuoSJ cap-card"
+                className="sc-bcXGCL eHlVFt cap-card-cover"
               >
                 <img
                   alt=""
-                  className="sc-bcXGCL Wzpgc sc-6287370a-2 ikuzkq"
+                  className="sc-bcXGCL jqlklV"
                   loading="lazy"
-                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 960px, (max-width: 2560px) 960px,"
+                  sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
                   srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
@@ -191,265 +68,212 @@ exports[`<Organization /> renders correctly 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
          "
+                  style={
+                    {
+                      "aspectRatio": "3 / 2",
+                      "filter": "grayscale(1)",
+                      "objectFit": "cover",
+                      "opacity": "50%",
+                    }
+                  }
                 />
                 <div
-                  className="sc-bcXGCL jeGsly sc-987cf8f3-0 kzlLnb"
+                  aria-label="Tag  global-archived"
+                  className="sc-bcXGCL gvYJvN cap-tag"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  tabIndex={-1}
+                  title=" global-archived"
+                >
+                  <span
+                    className="sc-bcXGCL gGmAkb cap-tag__label"
+                  >
+                     
+                    global-archived
+                  </span>
+                </div>
+              </div>
+              <div
+                className="sc-bcXGCL fwgwMu cap-card-content"
+              >
+                <div
+                  className="sc-bcXGCL crFwrP"
+                >
+                  <h3
+                    className="sc-bcXGCL fyvWHu cap-card-primaryInfo"
+                  >
+                    <a
+                      className="sc-bcXGCL heYhqG cap-card-link"
+                      href="<mock-value-for-field-"externalLink">"
+                    >
+                      My nice project
+                    </a>
+                  </h3>
+                </div>
+                <div
+                  className="sc-bcXGCL eHGlhC"
                 >
                   <div
-                    aria-label="Tag global-archived"
-                    className="sc-bcXGCL fTvKDP cap-tag"
+                    aria-label="Tag 0 project.votes.widget.votes"
+                    className="sc-bcXGCL kWsHud cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
                     tabIndex={-1}
-                    title="global-archived"
+                    title="0 project.votes.widget.votes"
                   >
-                    <span
-                      className="sc-bcXGCL jqGkka cap-text"
+                    <svg
+                      aria-hidden="true"
+                      className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                      fill="none"
+                      height="1em"
+                      viewBox="0 0 32 28"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
                     >
-                      global-archived
+                      <mask
+                        fill="#fff"
+                        id="thumb-up-o_svg__a"
+                      >
+                        <path
+                          d="M31.157 12.746A3.246 3.246 0 0 0 27.912 9.5h-8.193a.325.325 0 0 1-.308-.425c.716-1.817.95-3.788.675-5.722C19.323.627 17.705-.152 16.44.023a2.596 2.596 0 0 0-2.16 2.662c0 3.565-2.765 7.46-5.238 9.166a.65.65 0 0 0-.28.535V25.52a.65.65 0 0 0 .526.637c.463.089.884.176 1.281.26 1.747.416 3.537.62 5.333.611h8.439c2.541 0 2.92-1.428 2.92-2.271.001-.448-.102-.89-.3-1.292a2.92 2.92 0 0 0 1.299-3.895 2.92 2.92 0 0 0 1.245-3.996 3.25 3.25 0 0 0 1.651-2.827"
+                        />
+                      </mask>
+                      <path
+                        className="thumb-up-o_svg__fillMeUp"
+                        d="M31.157 12.746A3.246 3.246 0 0 0 27.912 9.5h-8.193a.325.325 0 0 1-.308-.425c.716-1.817.95-3.788.675-5.722C19.323.627 17.705-.152 16.44.023a2.596 2.596 0 0 0-2.16 2.662c0 3.565-2.765 7.46-5.238 9.166a.65.65 0 0 0-.28.535V25.52a.65.65 0 0 0 .526.637c.463.089.884.176 1.281.26 1.747.416 3.537.62 5.333.611h8.439c2.541 0 2.92-1.428 2.92-2.271.001-.448-.102-.89-.3-1.292a2.92 2.92 0 0 0 1.299-3.895 2.92 2.92 0 0 0 1.245-3.996 3.25 3.25 0 0 0 1.651-2.827"
+                        fill="transparent"
+                      />
+                      <path
+                        d="m19.719 9.5-.004 1.7h.004zm-.308-.425-1.582-.624-.018.046-.015.047zm.675-5.722 1.683-.238-.016-.112-.03-.108zM16.44.023l-.234-1.683-.025.003-.026.004zm-2.16 2.662h1.7v-.033l-.002-.034zM9.042 11.85l.966 1.4zm-.28.535h1.7v-.001zm0 13.133h1.7zm.526.637-.323 1.67h.005zm1.281.26.393-1.654-.02-.005-.02-.004zm5.333.611v-1.7h-.009zm11.36-2.271-1.7-.002v.002zm-.3-1.292-.77-1.515-1.497.76.741 1.506zm1.298-3.895-.77-1.515-1.496.76.74 1.506zm1.245-3.996-.835-1.48-1.456.82.796 1.47zm1.651-2.827h-1.7zm1.7 0c0-.65-.128-1.293-.376-1.893l-3.142 1.302c.078.187.118.388.118.59zm-.376-1.893a4.95 4.95 0 0 0-1.072-1.604l-2.405 2.404q.218.218.335.502zM31.409 9.25a4.95 4.95 0 0 0-1.605-1.072l-1.301 3.141c.188.078.358.191.501.335zm-1.605-1.072a4.95 4.95 0 0 0-1.892-.377v3.4c.203 0 .404.04.591.118zM27.912 7.8h-8.193v3.4h8.193zm-8.19 0c.217 0 .431.053.624.152l-1.55 3.026c.284.145.6.222.919.222zm.624.152c.194.099.36.242.488.418l-2.756 1.992c.188.259.433.47.718.616zm.488.418c.127.176.211.38.244.595l-3.36.522c.05.316.173.615.36.874zm.244.595c.034.214.016.434-.052.64l-3.23-1.06c-.1.303-.126.626-.077.942zm-.086.733a13 13 0 0 0 .777-6.583l-3.366.477a9.6 9.6 0 0 1-.573 4.859zm.731-6.803C21.27 1.279 20.511.052 19.497-.74c-1.024-.8-2.207-1.07-3.29-.92l.467 3.367c.182-.025.44.006.731.233.302.236.733.762 1.044 1.872zm-5.567-4.548A4.3 4.3 0 0 0 13.54-.124l2.64 2.142a.9.9 0 0 1 .546-.319zM13.54-.124a4.3 4.3 0 0 0-.957 2.875l3.397-.133a.9.9 0 0 1 .2-.6zm-.959 2.809c0 1.367-.541 2.924-1.44 4.392-.896 1.461-2.05 2.676-3.062 3.375l1.931 2.799c1.46-1.008 2.925-2.595 4.03-4.398 1.101-1.798 1.941-3.971 1.941-6.168zm-4.502 7.767c-.314.216-.57.506-.746.843l3.01 1.579c-.078.15-.193.28-.333.377zm-.746.843a2.35 2.35 0 0 0-.27 1.093l3.4-.003c.001.17-.04.338-.12.489zm-.27 1.091V25.52h3.4V12.386zm0 13.133c0 .545.19 1.074.538 1.495l2.623-2.163c.155.188.24.424.24.668zm.538 1.495c.347.42.83.708 1.366.812l.646-3.339c.24.047.455.175.61.364zm1.37.812c.448.086.856.17 1.247.253l.706-3.326a62 62 0 0 0-1.316-.267zm1.207.244c1.878.447 3.804.668 5.735.657l-.018-3.4a20.8 20.8 0 0 1-4.93-.565zm5.726.657h8.439v-3.4h-8.439zm8.439 0c1.587 0 2.85-.454 3.682-1.387.799-.896.938-1.943.938-2.584h-3.4c0 .203-.05.291-.076.32a.5.5 0 0 1-.212.123c-.161.06-.452.128-.933.128zm4.62-3.97c.001-.708-.161-1.408-.474-2.044l-3.05 1.502c.082.167.125.352.125.539zm-1.23.222a4.62 4.62 0 0 0 2.291-2.658l-3.225-1.076c-.102.305-.32.558-.606.703zm2.291-2.658c.385-1.153.3-2.411-.237-3.502l-3.05 1.5c.141.289.164.622.062.926zm-.992-1.236a4.6 4.6 0 0 0 1.437-1.138l-2.597-2.194a1.2 1.2 0 0 1-.38.3zm1.437-1.138a4.6 4.6 0 0 0 .881-1.607l-3.246-1.012a1.2 1.2 0 0 1-.233.425zm.881-1.607a4.6 4.6 0 0 0 .188-1.824l-3.384.33c.016.163-.001.327-.05.482zm.188-1.824A4.6 4.6 0 0 0 31 14.763l-2.989 1.62q.117.218.142.464zm-1.196.538a4.95 4.95 0 0 0 1.841-1.813l-2.936-1.715a1.55 1.55 0 0 1-.575.567zm1.841-1.813a4.95 4.95 0 0 0 .675-2.495h-3.4c0 .274-.073.543-.21.78z"
+                        fill="currentColor"
+                        mask="url(#thumb-up-o_svg__a)"
+                      />
+                      <path
+                        className="thumb-up-o_svg__fillMeUp"
+                        d="M5.834 12.105a.45.45 0 0 1 .132.316v14.28a.45.45 0 0 1-.449.45H1.298a.45.45 0 0 1-.448-.45v-14.28a.45.45 0 0 1 .448-.448h4.22c.118 0 .232.047.316.132Z"
+                        fill="transparent"
+                        stroke="currentColor"
+                        strokeWidth={1.7}
+                      />
+                    </svg>
+                    <span
+                      className="sc-bcXGCL gGmAkb cap-tag__label"
+                    >
+                      0
+                    </span>
+                    <span
+                      className="sc-bcXGCL kIAgwG"
+                    >
+                       
+                      project.votes.widget.votes
+                    </span>
+                  </div>
+                  <div
+                    aria-label="Tag 0 global.contribution"
+                    className="sc-bcXGCL kWsHud cap-tag"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    tabIndex={-1}
+                    title="0 global.contribution"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                      fill="none"
+                      height="1em"
+                      viewBox="0 0 14 13"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        d="M7 .511c-3.314 0-6 2.22-6 4.957a4.56 4.56 0 0 0 1.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 0 0 7 10.424c3.314 0 6-2.219 6-4.956S10.314.51 7 .51"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span
+                      className="sc-bcXGCL gGmAkb cap-tag__label"
+                    >
+                      0
+                    </span>
+                    <span
+                      className="sc-bcXGCL kIAgwG"
+                    >
+                       
+                      global.contribution
+                    </span>
+                  </div>
+                  <div
+                    aria-label="Tag 0 capco.section.metrics.participants"
+                    className="sc-bcXGCL kWsHud cap-tag"
+                    onBlur={[Function]}
+                    onFocus={[Function]}
+                    tabIndex={-1}
+                    title="0 capco.section.metrics.participants"
+                  >
+                    <svg
+                      aria-hidden="true"
+                      className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                      fill="none"
+                      height="1em"
+                      viewBox="0 0 13 14"
+                      width="1em"
+                      xmlns="http://www.w3.org/2000/svg"
+                    >
+                      <path
+                        clipRule="evenodd"
+                        d="M3.75 3.261a2.75 2.75 0 1 0 5.5 0 2.75 2.75 0 0 0-5.5 0"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M1 12.611a5.5 5.5 0 0 1 11 0"
+                        stroke="currentColor"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                    <span
+                      className="sc-bcXGCL gGmAkb cap-tag__label"
+                    >
+                      0
+                    </span>
+                    <span
+                      className="sc-bcXGCL kIAgwG"
+                    >
+                       
+                      capco.section.metrics.participants
                     </span>
                   </div>
                 </div>
-                <div
-                  className="sc-bcXGCL dIXTAz"
-                >
-                  <h4
-                    className="sc-bcXGCL iPMsnj cap-heading"
-                    title="My nice project"
-                  >
-                    My nice project
-                  </h4>
-                  <div
-                    className="sc-bcXGCL dKkhaB"
-                  >
-                    <div
-                      className="sc-bcXGCL drYXzD"
-                    >
-                      <div
-                        className="sc-bcXGCL gumXnO"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 11 12"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M4.333 11.334H2a1 1 0 0 1-1-1"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                          <path
-                            d="M9 5V1.667a.333.333 0 0 0-.333-.334H2.333C1.597 1.334 1 1.93 1 2.668v7.667a1 1 0 0 1 1-1h2.333"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                          <path
-                            clipRule="evenodd"
-                            d="m7.978 6.191.684 1.476h1.333a.327.327 0 0 1 .23.57L9.07 9.376l.641 1.474a.35.35 0 0 1-.497.436l-1.552-.871-1.55.871a.35.35 0 0 1-.498-.436l.641-1.473L5.1 8.238a.326.326 0 0 1 .228-.571h1.334l.686-1.477a.356.356 0 0 1 .63.001"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                        </svg>
-                        <span
-                          className="sc-987cf8f3-3 fbtCBi"
-                        >
-                          &lt;mock-value-for-field-"title"&gt;
-                        </span>
-                      </div>
-                       
-                      <div
-                        className="sc-bcXGCL gumXnO"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 12 10"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            clipRule="evenodd"
-                            d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                            strokeWidth={0.8}
-                          />
-                        </svg>
-                        <span
-                          className="sc-987cf8f3-3 fbtCBi"
-                        >
-                          &lt;mock-value-for-field-"title"&gt;
-                        </span>
-                      </div>
-                    </div>
-                    <div
-                      className="sc-bcXGCL klUceB"
-                    >
-                      <div
-                        className="sc-bcXGCL dcPIb"
-                        style={
-                          {
-                            "marginLeft": 0,
-                            "marginTop": 0,
-                          }
-                        }
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 32 28"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <mask
-                            fill="#fff"
-                            id="thumb-up-o_svg__a"
-                          >
-                            <path
-                              d="M31.157 12.746A3.246 3.246 0 0 0 27.912 9.5h-8.193a.325.325 0 0 1-.308-.425c.716-1.817.95-3.788.675-5.722C19.323.627 17.705-.152 16.44.023a2.596 2.596 0 0 0-2.16 2.662c0 3.565-2.765 7.46-5.238 9.166a.65.65 0 0 0-.28.535V25.52a.65.65 0 0 0 .526.637c.463.089.884.176 1.281.26 1.747.416 3.537.62 5.333.611h8.439c2.541 0 2.92-1.428 2.92-2.271.001-.448-.102-.89-.3-1.292a2.92 2.92 0 0 0 1.299-3.895 2.92 2.92 0 0 0 1.245-3.996 3.25 3.25 0 0 0 1.651-2.827"
-                            />
-                          </mask>
-                          <path
-                            className="thumb-up-o_svg__fillMeUp"
-                            d="M31.157 12.746A3.246 3.246 0 0 0 27.912 9.5h-8.193a.325.325 0 0 1-.308-.425c.716-1.817.95-3.788.675-5.722C19.323.627 17.705-.152 16.44.023a2.596 2.596 0 0 0-2.16 2.662c0 3.565-2.765 7.46-5.238 9.166a.65.65 0 0 0-.28.535V25.52a.65.65 0 0 0 .526.637c.463.089.884.176 1.281.26 1.747.416 3.537.62 5.333.611h8.439c2.541 0 2.92-1.428 2.92-2.271.001-.448-.102-.89-.3-1.292a2.92 2.92 0 0 0 1.299-3.895 2.92 2.92 0 0 0 1.245-3.996 3.25 3.25 0 0 0 1.651-2.827"
-                            fill="transparent"
-                          />
-                          <path
-                            d="m19.719 9.5-.004 1.7h.004zm-.308-.425-1.582-.624-.018.046-.015.047zm.675-5.722 1.683-.238-.016-.112-.03-.108zM16.44.023l-.234-1.683-.025.003-.026.004zm-2.16 2.662h1.7v-.033l-.002-.034zM9.042 11.85l.966 1.4zm-.28.535h1.7v-.001zm0 13.133h1.7zm.526.637-.323 1.67h.005zm1.281.26.393-1.654-.02-.005-.02-.004zm5.333.611v-1.7h-.009zm11.36-2.271-1.7-.002v.002zm-.3-1.292-.77-1.515-1.497.76.741 1.506zm1.298-3.895-.77-1.515-1.496.76.74 1.506zm1.245-3.996-.835-1.48-1.456.82.796 1.47zm1.651-2.827h-1.7zm1.7 0c0-.65-.128-1.293-.376-1.893l-3.142 1.302c.078.187.118.388.118.59zm-.376-1.893a4.95 4.95 0 0 0-1.072-1.604l-2.405 2.404q.218.218.335.502zM31.409 9.25a4.95 4.95 0 0 0-1.605-1.072l-1.301 3.141c.188.078.358.191.501.335zm-1.605-1.072a4.95 4.95 0 0 0-1.892-.377v3.4c.203 0 .404.04.591.118zM27.912 7.8h-8.193v3.4h8.193zm-8.19 0c.217 0 .431.053.624.152l-1.55 3.026c.284.145.6.222.919.222zm.624.152c.194.099.36.242.488.418l-2.756 1.992c.188.259.433.47.718.616zm.488.418c.127.176.211.38.244.595l-3.36.522c.05.316.173.615.36.874zm.244.595c.034.214.016.434-.052.64l-3.23-1.06c-.1.303-.126.626-.077.942zm-.086.733a13 13 0 0 0 .777-6.583l-3.366.477a9.6 9.6 0 0 1-.573 4.859zm.731-6.803C21.27 1.279 20.511.052 19.497-.74c-1.024-.8-2.207-1.07-3.29-.92l.467 3.367c.182-.025.44.006.731.233.302.236.733.762 1.044 1.872zm-5.567-4.548A4.3 4.3 0 0 0 13.54-.124l2.64 2.142a.9.9 0 0 1 .546-.319zM13.54-.124a4.3 4.3 0 0 0-.957 2.875l3.397-.133a.9.9 0 0 1 .2-.6zm-.959 2.809c0 1.367-.541 2.924-1.44 4.392-.896 1.461-2.05 2.676-3.062 3.375l1.931 2.799c1.46-1.008 2.925-2.595 4.03-4.398 1.101-1.798 1.941-3.971 1.941-6.168zm-4.502 7.767c-.314.216-.57.506-.746.843l3.01 1.579c-.078.15-.193.28-.333.377zm-.746.843a2.35 2.35 0 0 0-.27 1.093l3.4-.003c.001.17-.04.338-.12.489zm-.27 1.091V25.52h3.4V12.386zm0 13.133c0 .545.19 1.074.538 1.495l2.623-2.163c.155.188.24.424.24.668zm.538 1.495c.347.42.83.708 1.366.812l.646-3.339c.24.047.455.175.61.364zm1.37.812c.448.086.856.17 1.247.253l.706-3.326a62 62 0 0 0-1.316-.267zm1.207.244c1.878.447 3.804.668 5.735.657l-.018-3.4a20.8 20.8 0 0 1-4.93-.565zm5.726.657h8.439v-3.4h-8.439zm8.439 0c1.587 0 2.85-.454 3.682-1.387.799-.896.938-1.943.938-2.584h-3.4c0 .203-.05.291-.076.32a.5.5 0 0 1-.212.123c-.161.06-.452.128-.933.128zm4.62-3.97c.001-.708-.161-1.408-.474-2.044l-3.05 1.502c.082.167.125.352.125.539zm-1.23.222a4.62 4.62 0 0 0 2.291-2.658l-3.225-1.076c-.102.305-.32.558-.606.703zm2.291-2.658c.385-1.153.3-2.411-.237-3.502l-3.05 1.5c.141.289.164.622.062.926zm-.992-1.236a4.6 4.6 0 0 0 1.437-1.138l-2.597-2.194a1.2 1.2 0 0 1-.38.3zm1.437-1.138a4.6 4.6 0 0 0 .881-1.607l-3.246-1.012a1.2 1.2 0 0 1-.233.425zm.881-1.607a4.6 4.6 0 0 0 .188-1.824l-3.384.33c.016.163-.001.327-.05.482zm.188-1.824A4.6 4.6 0 0 0 31 14.763l-2.989 1.62q.117.218.142.464zm-1.196.538a4.95 4.95 0 0 0 1.841-1.813l-2.936-1.715a1.55 1.55 0 0 1-.575.567zm1.841-1.813a4.95 4.95 0 0 0 .675-2.495h-3.4c0 .274-.073.543-.21.78z"
-                            fill="currentColor"
-                            mask="url(#thumb-up-o_svg__a)"
-                          />
-                          <path
-                            className="thumb-up-o_svg__fillMeUp"
-                            d="M5.834 12.105a.45.45 0 0 1 .132.316v14.28a.45.45 0 0 1-.449.45H1.298a.45.45 0 0 1-.448-.45v-14.28a.45.45 0 0 1 .448-.448h4.22c.118 0 .232.047.316.132Z"
-                            fill="transparent"
-                            stroke="currentColor"
-                            strokeWidth={1.7}
-                          />
-                        </svg>
-                        <div
-                          className="sc-bcXGCL fPltPk cap-text"
-                        >
-                          0
-                          <span
-                            className="sr-only"
-                          >
-                            project.votes.widget.votes
-                          </span>
-                        </div>
-                      </div>
-                      <div
-                        className="sc-bcXGCL dcPIb"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 14 13"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            d="M7 .511c-3.314 0-6 2.22-6 4.957a4.56 4.56 0 0 0 1.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 0 0 7 10.424c3.314 0 6-2.219 6-4.956S10.314.51 7 .51"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <div
-                          className="sc-bcXGCL fPltPk cap-text"
-                        >
-                          0
-                          <span
-                            className="sr-only"
-                          >
-                            global.contribution
-                          </span>
-                        </div>
-                      </div>
-                      <div
-                        className="sc-bcXGCL dcPIb"
-                      >
-                        <svg
-                          aria-hidden="true"
-                          className="sc-bcXGCL sc-eJDTud gOYgZz hEjMCZ cap-icon"
-                          fill="none"
-                          height="1em"
-                          viewBox="0 0 13 14"
-                          width="1em"
-                          xmlns="http://www.w3.org/2000/svg"
-                        >
-                          <path
-                            clipRule="evenodd"
-                            d="M3.75 3.261a2.75 2.75 0 1 0 5.5 0 2.75 2.75 0 0 0-5.5 0"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                          <path
-                            d="M1 12.611a5.5 5.5 0 0 1 11 0"
-                            stroke="currentColor"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          />
-                        </svg>
-                        <div
-                          className="sc-bcXGCL fPltPk cap-text"
-                        >
-                          0
-                          <span
-                            className="sr-only"
-                          >
-                            capco.section.metrics.participants
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
-            </a>
+            </div>
           </div>
         </div>
         <div
           className="sc-bcXGCL epvCqA"
         >
           <div
-            className="sc-bcXGCL hQQLca"
+            className="sc-bcXGCL dSHcfc"
           >
-            <h4
-              className="sc-bcXGCL ldwstx cap-heading"
+            <h2
+              className="sc-bcXGCL kIvZbl cap-heading"
             >
               menu.news
-            </h4>
-            <a
-              className="sc-bcXGCL sc-1eb458c-0 eHtSEA gKXqhX"
-              href="<mock-value-for-field-"url">"
+            </h2>
+            <div
+              className="sc-bcXGCL hkDKWl cap-card"
             >
               <div
-                className="sc-bcXGCL guaMMG cap-card"
+                className="sc-bcXGCL jGNocB cap-card-cover"
               >
                 <img
-                  alt="banner"
-                  className="sc-bcXGCL bhjGhB"
+                  alt=""
+                  className="sc-bcXGCL jqlklV"
                   loading="lazy"
-                  sizes="(max-width: 320px) 320px, (max-width: 640px) 640px, (max-width: 960px) 960px, (max-width: 1280px) 1280px, (max-width: 2560px) 2560px,"
+                  sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
                   srcSet="
         http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
          http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
@@ -459,49 +283,35 @@ exports[`<Organization /> renders correctly 1`] = `
          http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
          http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
          "
+                  style={
+                    {
+                      "aspectRatio": "3 / 2",
+                      "filter": undefined,
+                      "objectFit": "cover",
+                      "opacity": undefined,
+                    }
+                  }
                 />
+              </div>
+              <div
+                className="sc-bcXGCL bduQpG cap-card-content"
+              >
                 <div
-                  className="sc-bcXGCL fJUDQE"
+                  className="sc-bcXGCL crFwrP"
                 >
-                  <h4
-                    className="sc-bcXGCL iZiAbO cap-heading"
+                  <h3
+                    className="sc-bcXGCL lmovIw cap-card-primaryInfo"
                   >
-                    My nice post
-                  </h4>
-                  <div
-                    className="sc-bcXGCL cCIxoL"
-                  >
-                    <div
-                      className="sc-bcXGCL gumXnO"
+                    <a
+                      className="sc-bcXGCL heYhqG cap-card-link"
+                      href="<mock-value-for-field-"url">"
                     >
-                      <svg
-                        aria-hidden="true"
-                        className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
-                        fill="none"
-                        height="1em"
-                        viewBox="0 0 12 10"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          clipRule="evenodd"
-                          d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={0.8}
-                        />
-                      </svg>
-                      <span
-                        className="sc-987cf8f3-3 kHVPqC"
-                      >
-                        &lt;mock-value-for-field-"title"&gt;
-                      </span>
-                    </div>
-                  </div>
+                      My nice post
+                    </a>
+                  </h3>
                 </div>
               </div>
-            </a>
+            </div>
           </div>
           <div
             className="sc-bcXGCL kbKjwa"
@@ -509,16 +319,16 @@ exports[`<Organization /> renders correctly 1`] = `
             <div
               className="sc-bcXGCL cfomeD"
             >
-              <h4
-                className="sc-bcXGCL osejp cap-heading"
+              <h2
+                className="sc-bcXGCL dFUlYh cap-heading"
               >
                 homepage.section.events
-              </h4>
+              </h2>
               <button
                 aria-controls="id-g"
                 aria-expanded={false}
                 aria-haspopup="menu"
-                className="sc-bcXGCL sc-laZSpB kkwMkp dUpIgt cap-button cap-menu__disclosure"
+                className="sc-bcXGCL sc-gGvGpy kkwMkp iCdXwD cap-button cap-menu__disclosure"
                 onClick={[Function]}
                 onClickCapture={[Function]}
                 onFocus={[Function]}
@@ -533,7 +343,7 @@ exports[`<Organization /> renders correctly 1`] = `
                 finished
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-button-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-button-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 7"
@@ -548,7 +358,7 @@ exports[`<Organization /> renders correctly 1`] = `
               </button>
               <div
                 aria-orientation="vertical"
-                className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
+                className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
                 data-dialog={true}
                 hidden={true}
                 id="id-g"
@@ -625,77 +435,46 @@ exports[`<Organization /> renders correctly 1`] = `
                 </button>
               </div>
             </div>
-            <a
-              className="sc-bcXGCL sc-f979359f-0 eHtSEA jdnqj"
-              href="<mock-value-for-field-"url">"
+            <div
+              className="sc-bcXGCL hkDKWl cap-card"
             >
               <div
-                className="sc-bcXGCL hnRNZh cap-card"
+                className="sc-bcXGCL hYTUzG cap-card-cover"
               >
                 <div
-                  className="sc-bcXGCL iiICea cap-card"
+                  className="sc-bcXGCL jIdXnk"
                 >
                   <div
-                    className="sc-bcXGCL FQwAJ"
+                    className="sc-bcXGCL hpEuWz"
                   >
-                    <div
-                      className="sc-bcXGCL bgUVUv cap-text"
-                    >
-                      Invalid date
-                    </div>
+                    Invalid date
                   </div>
                   <div
-                    className="sc-bcXGCL dDKvYL"
+                    className="sc-bcXGCL iCCzed"
                   >
-                    <div
-                      className="sc-bcXGCL gPTvpo cap-text"
-                    >
-                      Invalid date
-                    </div>
-                  </div>
-                </div>
-                <div
-                  className="sc-bcXGCL fJUDQE"
-                >
-                  <h4
-                    className="sc-bcXGCL iZiAbO cap-heading"
-                  >
-                    My nice event
-                  </h4>
-                  <div
-                    className="sc-bcXGCL cCIxoL"
-                  >
-                    <div
-                      className="sc-bcXGCL gumXnO"
-                    >
-                      <svg
-                        aria-hidden="true"
-                        className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
-                        fill="none"
-                        height="1em"
-                        viewBox="0 0 12 10"
-                        width="1em"
-                        xmlns="http://www.w3.org/2000/svg"
-                      >
-                        <path
-                          clipRule="evenodd"
-                          d="M11 3.182c0-.402-.344-.727-.77-.727h-5L4.309 1.29A.79.79 0 0 0 3.692 1H1.77C1.344 1 1 1.326 1 1.727v6.546c0 .401.344.727.77.727h8.46c.426 0 .77-.326.77-.727z"
-                          stroke="currentColor"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                          strokeWidth={0.8}
-                        />
-                      </svg>
-                      <span
-                        className="sc-987cf8f3-3 kHVPqC"
-                      >
-                        &lt;mock-value-for-field-"title"&gt;
-                      </span>
-                    </div>
+                    Invalid date
                   </div>
                 </div>
               </div>
-            </a>
+              <div
+                className="sc-bcXGCL bduQpG cap-card-content"
+              >
+                <div
+                  className="sc-bcXGCL crFwrP"
+                >
+                  <h3
+                    className="sc-bcXGCL lmovIw cap-card-primaryInfo"
+                  >
+                    <a
+                      className="sc-bcXGCL heYhqG cap-card-link"
+                      href="<mock-value-for-field-"url">"
+                    >
+                      My nice event
+                    </a>
+                  </h3>
+                </div>
+              </div>
+            </div>
           </div>
         </div>
       </div>

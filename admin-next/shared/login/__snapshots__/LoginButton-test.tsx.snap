@@ -11,7 +11,7 @@ exports[`<LoginButton /> renders a button 1`] = `
   />,
   <button
     aria-label="open.connection_modal"
-    className="sc-bcXGCL sc-laZSpB juTTmZ ietVcX cap-button"
+    className="sc-bcXGCL sc-gGvGpy juTTmZ jrAhSN cap-button"
     id="login-button"
     onClick={[Function]}
     type="button"

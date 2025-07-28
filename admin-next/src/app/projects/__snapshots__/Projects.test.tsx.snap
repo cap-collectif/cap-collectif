@@ -1,0 +1,305 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`<Projects /> renders correctly 1`] = `
+[
+  <div
+    className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
+  />,
+  <div
+    className="sc-bcXGCL xXAWG"
+  >
+    <div
+      className="sc-bcXGCL jPDNqg"
+    >
+      <div
+        className="sc-bcXGCL ctOvVF"
+      >
+        <div
+          className="sc-bcXGCL icDYev"
+        >
+          <h1
+            className="sc-bcXGCL iHMoWe cap-heading"
+          >
+            Liste des projets
+          </h1>
+          <div
+            className="sc-bcXGCL egKDCQ cap-text"
+          >
+            <div
+              className=" ql-editor wysiwyg-render"
+              dangerouslySetInnerHTML={
+                {
+                  "__html": "Lorem ipsum",
+                }
+              }
+            />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>,
+  <section
+    className="sc-bcXGCL gjsubU project-list-section"
+  >
+    <div
+      className="sc-bcXGCL jYYNjb"
+    >
+      <div
+        className="sc-bcXGCL eYRiRd"
+      >
+        <div
+          className="sc-bcXGCL gCiHVh"
+        >
+          <div
+            className="sc-bcXGCL bLdUPi"
+          >
+            <div
+              className="sc-bcXGCL isbCvH sc-jRwapC"
+              style={{}}
+            />
+            <div
+              className="sc-bcXGCL fpCAzA sc-jRwapC"
+              style={{}}
+            />
+          </div>
+          <div
+            className="sc-bcXGCL bLdUPi"
+          >
+            <div
+              className="sc-bcXGCL isbCvH sc-jRwapC"
+              style={{}}
+            />
+            <div
+              className="sc-bcXGCL fpCAzA sc-jRwapC"
+              style={{}}
+            />
+          </div>
+          <div
+            className="sc-bcXGCL bLdUPi"
+          >
+            <div
+              className="sc-bcXGCL isbCvH sc-jRwapC"
+              style={{}}
+            />
+            <div
+              className="sc-bcXGCL fpCAzA sc-jRwapC"
+              style={{}}
+            />
+          </div>
+        </div>
+      </div>
+      <div
+        className="sc-bcXGCL gjsubU project-list-section-projects"
+      >
+        <div
+          className="sc-bcXGCL bezsBU"
+        >
+          <div
+            className="sc-bcXGCL cYlyPw cap-card cap-project-card"
+            id="cap-project-card-project-id-1"
+          >
+            <div
+              className="sc-bcXGCL eHlVFt cap-card-cover"
+            >
+              <img
+                alt=""
+                className="sc-bcXGCL jqlklV"
+                loading="lazy"
+                sizes="(max-width: 320px) 320px,(max-width: 640px) 640px,(max-width: 960px) 960px,(max-width: 1280px) 960px,(max-width: 2560px) 960px,"
+                srcSet="
+        http://localhost/cdn-cgi/image/width=320,format=auto/<mock-value-for-field-"url">   320w,
+         http://localhost/cdn-cgi/image/width=640,format=auto/<mock-value-for-field-"url">   640w,
+         http://localhost/cdn-cgi/image/width=960,format=auto/<mock-value-for-field-"url">   960w,
+         http://localhost/cdn-cgi/image/width=1280,format=auto/<mock-value-for-field-"url"> 1280w,
+         http://localhost/cdn-cgi/image/width=2560,format=auto/<mock-value-for-field-"url"> 2560w,
+         http://localhost/cdn-cgi/image/dpr=2,format=auto/<mock-value-for-field-"url"> 2x,
+         http://localhost/cdn-cgi/image/dpr=3,format=auto/<mock-value-for-field-"url"> 3x,
+         "
+                style={
+                  {
+                    "aspectRatio": "3 / 2",
+                    "filter": "grayscale(1)",
+                    "objectFit": "cover",
+                    "opacity": "50%",
+                  }
+                }
+              />
+              <div
+                aria-label="Tag  global-archived"
+                className="sc-bcXGCL gvYJvN cap-tag"
+                onBlur={[Function]}
+                onFocus={[Function]}
+                tabIndex={-1}
+                title=" global-archived"
+              >
+                <span
+                  className="sc-bcXGCL gGmAkb cap-tag__label"
+                >
+                   
+                  global-archived
+                </span>
+              </div>
+            </div>
+            <div
+              className="sc-bcXGCL fwgwMu cap-card-content"
+            >
+              <div
+                className="sc-bcXGCL crFwrP"
+              >
+                <h2
+                  className="sc-bcXGCL fyvWHu cap-card-primaryInfo"
+                >
+                  <a
+                    className="sc-bcXGCL heYhqG cap-card-link"
+                    href="<mock-value-for-field-"externalLink">"
+                  >
+                    Nice project
+                  </a>
+                </h2>
+              </div>
+              <div
+                className="sc-bcXGCL eHGlhC"
+              >
+                <div
+                  aria-label="Tag 0 project.votes.widget.votes"
+                  className="sc-bcXGCL kWsHud cap-tag"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  tabIndex={-1}
+                  title="0 project.votes.widget.votes"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                    fill="none"
+                    height="1em"
+                    viewBox="0 0 32 28"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <mask
+                      fill="#fff"
+                      id="thumb-up-o_svg__a"
+                    >
+                      <path
+                        d="M31.157 12.746A3.246 3.246 0 0 0 27.912 9.5h-8.193a.325.325 0 0 1-.308-.425c.716-1.817.95-3.788.675-5.722C19.323.627 17.705-.152 16.44.023a2.596 2.596 0 0 0-2.16 2.662c0 3.565-2.765 7.46-5.238 9.166a.65.65 0 0 0-.28.535V25.52a.65.65 0 0 0 .526.637c.463.089.884.176 1.281.26 1.747.416 3.537.62 5.333.611h8.439c2.541 0 2.92-1.428 2.92-2.271.001-.448-.102-.89-.3-1.292a2.92 2.92 0 0 0 1.299-3.895 2.92 2.92 0 0 0 1.245-3.996 3.25 3.25 0 0 0 1.651-2.827"
+                      />
+                    </mask>
+                    <path
+                      className="thumb-up-o_svg__fillMeUp"
+                      d="M31.157 12.746A3.246 3.246 0 0 0 27.912 9.5h-8.193a.325.325 0 0 1-.308-.425c.716-1.817.95-3.788.675-5.722C19.323.627 17.705-.152 16.44.023a2.596 2.596 0 0 0-2.16 2.662c0 3.565-2.765 7.46-5.238 9.166a.65.65 0 0 0-.28.535V25.52a.65.65 0 0 0 .526.637c.463.089.884.176 1.281.26 1.747.416 3.537.62 5.333.611h8.439c2.541 0 2.92-1.428 2.92-2.271.001-.448-.102-.89-.3-1.292a2.92 2.92 0 0 0 1.299-3.895 2.92 2.92 0 0 0 1.245-3.996 3.25 3.25 0 0 0 1.651-2.827"
+                      fill="transparent"
+                    />
+                    <path
+                      d="m19.719 9.5-.004 1.7h.004zm-.308-.425-1.582-.624-.018.046-.015.047zm.675-5.722 1.683-.238-.016-.112-.03-.108zM16.44.023l-.234-1.683-.025.003-.026.004zm-2.16 2.662h1.7v-.033l-.002-.034zM9.042 11.85l.966 1.4zm-.28.535h1.7v-.001zm0 13.133h1.7zm.526.637-.323 1.67h.005zm1.281.26.393-1.654-.02-.005-.02-.004zm5.333.611v-1.7h-.009zm11.36-2.271-1.7-.002v.002zm-.3-1.292-.77-1.515-1.497.76.741 1.506zm1.298-3.895-.77-1.515-1.496.76.74 1.506zm1.245-3.996-.835-1.48-1.456.82.796 1.47zm1.651-2.827h-1.7zm1.7 0c0-.65-.128-1.293-.376-1.893l-3.142 1.302c.078.187.118.388.118.59zm-.376-1.893a4.95 4.95 0 0 0-1.072-1.604l-2.405 2.404q.218.218.335.502zM31.409 9.25a4.95 4.95 0 0 0-1.605-1.072l-1.301 3.141c.188.078.358.191.501.335zm-1.605-1.072a4.95 4.95 0 0 0-1.892-.377v3.4c.203 0 .404.04.591.118zM27.912 7.8h-8.193v3.4h8.193zm-8.19 0c.217 0 .431.053.624.152l-1.55 3.026c.284.145.6.222.919.222zm.624.152c.194.099.36.242.488.418l-2.756 1.992c.188.259.433.47.718.616zm.488.418c.127.176.211.38.244.595l-3.36.522c.05.316.173.615.36.874zm.244.595c.034.214.016.434-.052.64l-3.23-1.06c-.1.303-.126.626-.077.942zm-.086.733a13 13 0 0 0 .777-6.583l-3.366.477a9.6 9.6 0 0 1-.573 4.859zm.731-6.803C21.27 1.279 20.511.052 19.497-.74c-1.024-.8-2.207-1.07-3.29-.92l.467 3.367c.182-.025.44.006.731.233.302.236.733.762 1.044 1.872zm-5.567-4.548A4.3 4.3 0 0 0 13.54-.124l2.64 2.142a.9.9 0 0 1 .546-.319zM13.54-.124a4.3 4.3 0 0 0-.957 2.875l3.397-.133a.9.9 0 0 1 .2-.6zm-.959 2.809c0 1.367-.541 2.924-1.44 4.392-.896 1.461-2.05 2.676-3.062 3.375l1.931 2.799c1.46-1.008 2.925-2.595 4.03-4.398 1.101-1.798 1.941-3.971 1.941-6.168zm-4.502 7.767c-.314.216-.57.506-.746.843l3.01 1.579c-.078.15-.193.28-.333.377zm-.746.843a2.35 2.35 0 0 0-.27 1.093l3.4-.003c.001.17-.04.338-.12.489zm-.27 1.091V25.52h3.4V12.386zm0 13.133c0 .545.19 1.074.538 1.495l2.623-2.163c.155.188.24.424.24.668zm.538 1.495c.347.42.83.708 1.366.812l.646-3.339c.24.047.455.175.61.364zm1.37.812c.448.086.856.17 1.247.253l.706-3.326a62 62 0 0 0-1.316-.267zm1.207.244c1.878.447 3.804.668 5.735.657l-.018-3.4a20.8 20.8 0 0 1-4.93-.565zm5.726.657h8.439v-3.4h-8.439zm8.439 0c1.587 0 2.85-.454 3.682-1.387.799-.896.938-1.943.938-2.584h-3.4c0 .203-.05.291-.076.32a.5.5 0 0 1-.212.123c-.161.06-.452.128-.933.128zm4.62-3.97c.001-.708-.161-1.408-.474-2.044l-3.05 1.502c.082.167.125.352.125.539zm-1.23.222a4.62 4.62 0 0 0 2.291-2.658l-3.225-1.076c-.102.305-.32.558-.606.703zm2.291-2.658c.385-1.153.3-2.411-.237-3.502l-3.05 1.5c.141.289.164.622.062.926zm-.992-1.236a4.6 4.6 0 0 0 1.437-1.138l-2.597-2.194a1.2 1.2 0 0 1-.38.3zm1.437-1.138a4.6 4.6 0 0 0 .881-1.607l-3.246-1.012a1.2 1.2 0 0 1-.233.425zm.881-1.607a4.6 4.6 0 0 0 .188-1.824l-3.384.33c.016.163-.001.327-.05.482zm.188-1.824A4.6 4.6 0 0 0 31 14.763l-2.989 1.62q.117.218.142.464zm-1.196.538a4.95 4.95 0 0 0 1.841-1.813l-2.936-1.715a1.55 1.55 0 0 1-.575.567zm1.841-1.813a4.95 4.95 0 0 0 .675-2.495h-3.4c0 .274-.073.543-.21.78z"
+                      fill="currentColor"
+                      mask="url(#thumb-up-o_svg__a)"
+                    />
+                    <path
+                      className="thumb-up-o_svg__fillMeUp"
+                      d="M5.834 12.105a.45.45 0 0 1 .132.316v14.28a.45.45 0 0 1-.449.45H1.298a.45.45 0 0 1-.448-.45v-14.28a.45.45 0 0 1 .448-.448h4.22c.118 0 .232.047.316.132Z"
+                      fill="transparent"
+                      stroke="currentColor"
+                      strokeWidth={1.7}
+                    />
+                  </svg>
+                  <span
+                    className="sc-bcXGCL gGmAkb cap-tag__label"
+                  >
+                    0
+                  </span>
+                  <span
+                    className="sc-bcXGCL kIAgwG"
+                  >
+                     
+                    project.votes.widget.votes
+                  </span>
+                </div>
+                <div
+                  aria-label="Tag 0 global.contribution"
+                  className="sc-bcXGCL kWsHud cap-tag"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  tabIndex={-1}
+                  title="0 global.contribution"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                    fill="none"
+                    height="1em"
+                    viewBox="0 0 14 13"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M7 .511c-3.314 0-6 2.22-6 4.957a4.56 4.56 0 0 0 1.774 3.517L1.522 11.99l3.324-1.9A7.1 7.1 0 0 0 7 10.424c3.314 0 6-2.219 6-4.956S10.314.51 7 .51"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span
+                    className="sc-bcXGCL gGmAkb cap-tag__label"
+                  >
+                    0
+                  </span>
+                  <span
+                    className="sc-bcXGCL kIAgwG"
+                  >
+                     
+                    global.contribution
+                  </span>
+                </div>
+                <div
+                  aria-label="Tag 0 capco.section.metrics.participants"
+                  className="sc-bcXGCL kWsHud cap-tag"
+                  onBlur={[Function]}
+                  onFocus={[Function]}
+                  tabIndex={-1}
+                  title="0 capco.section.metrics.participants"
+                >
+                  <svg
+                    aria-hidden="true"
+                    className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon cap-tag__leftIcon"
+                    fill="none"
+                    height="1em"
+                    viewBox="0 0 13 14"
+                    width="1em"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      clipRule="evenodd"
+                      d="M3.75 3.261a2.75 2.75 0 1 0 5.5 0 2.75 2.75 0 0 0-5.5 0"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M1 12.611a5.5 5.5 0 0 1 11 0"
+                      stroke="currentColor"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span
+                    className="sc-bcXGCL gGmAkb cap-tag__label"
+                  >
+                    0
+                  </span>
+                  <span
+                    className="sc-bcXGCL kIAgwG"
+                  >
+                     
+                    capco.section.metrics.participants
+                  </span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>,
+]
+`;

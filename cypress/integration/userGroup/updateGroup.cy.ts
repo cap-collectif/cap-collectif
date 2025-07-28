@@ -19,7 +19,7 @@ describe("Update a group's info and members", () => {
       // workaround to make the button visible
       // to this day, cypress does not have a built-in way to trigger hover events
       .invoke('css', 'visibility', 'visible')
-    cy.get('.cap-card .cap-buttonQuickAction').first().click({ force: true })
+    cy.get('.cap-abstract-card .cap-buttonQuickAction').first().click({ force: true })
     AdminGroupsPage.getMemberCard().first().find('.cap-buttonQuickAction').click({ force: true })
     AdminGroupsPage.getMemberCard().first().should('not.contain', 'sfavot')
 

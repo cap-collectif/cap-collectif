@@ -3,7 +3,7 @@ import {
   Button,
   CapUISpotIcon,
   CapUISpotIconSize,
-  Card,
+  AbstractCard,
   Flex,
   Heading,
   InputGroup,
@@ -167,7 +167,7 @@ const OrganizationConfigFormMembers: React.FC<OrganizationConfigFormMembersProps
 
   return (
     <Flex
-      as={Card}
+      as={AbstractCard}
       direction="column"
       spacing={8}
       backgroundColor="white"

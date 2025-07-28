@@ -26,3 +26,7 @@ Cypress.Commands.add('openDSSelect', (selector: string, async?: boolean) => {
     force: true,
   })
 })
+
+Cypress.Commands.add('dsSelectSetOption', (selector: string, query: string) => {
+  cy.get(`${selector} input.cap-select__input`).focus().type(`${query} {enter}`, { force: true })
+})

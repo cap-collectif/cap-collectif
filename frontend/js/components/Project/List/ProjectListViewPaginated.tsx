@@ -26,27 +26,24 @@ const renderPreview = (query: ProjectListViewPaginated_query$data, isProjectsPag
     .map((node, index) => <ProjectPreview key={index} project={node} isProjectsPage={isProjectsPage} />)
 }
 
-export const ProjectListViewPaginated = ({ relay, query, limit, paginate, features, isProjectsPage }: Props) => {
+export const ProjectListViewPaginated = ({ relay, query, limit, paginate, isProjectsPage }: Props) => {
   const [loading, setLoading] = useState<boolean>(false)
 
   if (query.projects && query.projects.edges) {
     if (query.projects.edges.length > 0) {
       return (
         <div>
-          {features.new_project_card ? (
-            <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
-              {renderPreview(query, isProjectsPage)}
-            </Grid>
-          ) : (
-            <div className="d-flex flex-wrap">{renderPreview(query)}</div>
-          )}
+          <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}>
+            {renderPreview(query, isProjectsPage)}
+          </Grid>
+
           {paginate && relay.hasMore() && (
             <Box width="100%">
               <Button
                 className="see-more-projects-button ml-15"
                 disabled={loading}
                 css={{
-                  margin: features.new_project_card ? 'auto' : '',
+                  margin: 'auto',
                   display: 'block',
                 }}
                 onClick={() => {

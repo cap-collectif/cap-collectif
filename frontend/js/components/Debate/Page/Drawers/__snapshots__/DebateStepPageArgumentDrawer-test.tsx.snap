@@ -22,7 +22,7 @@ Array [
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud bhFHKT cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
+          className="sc-bcXGCL sc-oZHua bhFHKT fzfEdP cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -84,14 +84,14 @@ Array [
       >
         <button
           aria-label="vote.add"
-          className="sc-bcXGCL sc-laZSpB hiQVXC bGltjj cap-button"
+          className="sc-bcXGCL sc-gGvGpy hiQVXC kUJvaZ cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-eJDTud fhIYtV cpMilg cap-icon"
+            className="sc-bcXGCL sc-oZHua fhIYtV fzfEdP cap-icon"
             fill="none"
             height="1em"
             viewBox="0 0 10 12"
@@ -146,7 +146,7 @@ Array [
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud bhFHKT cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
+          className="sc-bcXGCL sc-oZHua bhFHKT fzfEdP cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -208,14 +208,14 @@ Array [
       >
         <button
           aria-label="vote.add"
-          className="sc-bcXGCL sc-laZSpB hiQVXC bGltjj cap-button"
+          className="sc-bcXGCL sc-gGvGpy hiQVXC kUJvaZ cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-eJDTud fhIYtV cpMilg cap-icon"
+            className="sc-bcXGCL sc-oZHua fhIYtV fzfEdP cap-icon"
             fill="none"
             height="1em"
             viewBox="0 0 10 12"
@@ -270,7 +270,7 @@ Array [
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud bhFHKT cpMilg cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
+          className="sc-bcXGCL sc-oZHua bhFHKT fzfEdP cap-icon DetailDrawerHeader___StyledIcon-dNiWSR igkLcM detail__drawer--back-arow"
           fill="none"
           height="1em"
           onClick={[MockFunction]}
@@ -332,14 +332,14 @@ Array [
       >
         <button
           aria-label="vote.add"
-          className="sc-bcXGCL sc-laZSpB hiQVXC bGltjj cap-button"
+          className="sc-bcXGCL sc-gGvGpy hiQVXC kUJvaZ cap-button"
           disabled={true}
           onClick={[Function]}
           type="button"
         >
           <svg
             aria-hidden="true"
-            className="sc-bcXGCL sc-eJDTud fhIYtV cpMilg cap-icon"
+            className="sc-bcXGCL sc-oZHua fhIYtV fzfEdP cap-icon"
             fill="none"
             height="1em"
             viewBox="0 0 10 12"

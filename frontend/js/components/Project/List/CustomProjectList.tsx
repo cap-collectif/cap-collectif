@@ -2,7 +2,6 @@ import * as React from 'react'
 import { QueryRenderer, graphql } from 'react-relay'
 import { connect } from 'react-redux'
 import environment, { graphqlError } from '~/createRelayEnvironment'
-import Loader from '~ui/FeedbacksIndicators/Loader'
 import CustomProjectListView from './CustomProjectListView'
 import ProjectsListPlaceholder from '~/components/Project/List/ProjectsListPlaceholder'
 import type { FeatureToggles, GlobalState } from '~/types'
@@ -54,7 +53,7 @@ const CustomProjectList = ({ projectsCount, features }: Props) => {
           )
         }
 
-        return features.new_project_card ? <ProjectsListPlaceholder count={projectsCount} /> : <Loader />
+        return <ProjectsListPlaceholder count={projectsCount} />
       }}
     />
   )

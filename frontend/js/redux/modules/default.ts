@@ -89,7 +89,6 @@ export const features: FeatureToggles = {
   emailing: false,
   emailing_parameters: false,
   proposal_revisions: false,
-  new_project_card: false,
   import_proposals: false,
   analytics_page: false,
   http_redirects: false,

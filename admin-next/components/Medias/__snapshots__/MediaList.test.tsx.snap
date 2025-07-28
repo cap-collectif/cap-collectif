@@ -44,7 +44,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 10 6"
@@ -89,7 +89,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -135,7 +135,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -249,7 +249,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 10 6"
@@ -294,7 +294,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -340,7 +340,7 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -553,7 +553,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud hZJszj hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua hZJszj hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 10 6"
@@ -630,7 +630,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                    className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -676,7 +676,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                    className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -762,7 +762,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud hZJszj hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua hZJszj hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 10 6"
@@ -839,7 +839,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                    className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"
@@ -885,7 +885,7 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 >
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                    className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 12"

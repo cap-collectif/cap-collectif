@@ -4,7 +4,7 @@ import { FormattedMessage } from 'react-intl'
 import { NavItem } from 'react-bootstrap'
 
 import styled from 'styled-components'
-import { Button, Box, Flex, Card, Text, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui'
+import { Button, Box, Flex, AbstractCard, Text, Icon, CapUIIcon, CapUIIconSize } from '@cap-collectif/ui'
 import colors from '~/utils/colors'
 import NewsCard from '~/components/Ui/News/NewsCard'
 import type { ProposalPageNews_proposal$data } from '~relay/ProposalPageNews_proposal.graphql'
@@ -101,7 +101,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
           ) : null}
           {!news ||
             (news.length === 0 && proposal.isProposalAuthorAllowedToAddNews && viewerIsAuthor && (
-              <Card
+              <AbstractCard
                 // @ts-ignore Polymorphic stuff
                 as={Flex}
                 flexDirection="column"
@@ -136,7 +136,7 @@ export const ProposalPageNews = ({ proposal, goToBlog }: Props) => {
                 >
                   <FormattedMessage id="global.add" />
                 </Button>
-              </Card>
+              </AbstractCard>
             ))}
         </NewsCardHolder>
       </CategoryContainer>

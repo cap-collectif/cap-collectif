@@ -4,12 +4,12 @@ import moment from 'moment'
 import type { EventCard_event$key } from '~relay/EventCard_event.graphql'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import AppBox from '~ui/Primitives/AppBox'
-import { ICON_NAME } from '~ds/Icon/Icon'
 import Card from '~ds/Card/Card'
 import Flex from '../Primitives/Layout/Flex'
 import Heading from '../Primitives/Heading'
 import Text from '../Primitives/Text'
-import { formatInfo } from '../Project/ProjectCard.utils'
+import { formatInfo } from '@shared/projectCard/ProjectCard.utils'
+import { CapUIIcon } from '@cap-collectif/ui'
 type Props = AppBoxProps & {
   readonly event: EventCard_event$key
 }
@@ -80,7 +80,7 @@ export const EventCard = ({ event: eventQuery, backgroundColor, ...props }: Prop
           </Heading>
           <AppBox color="neutral-gray.700">
             {event.themes.length > 0 &&
-              formatInfo(ICON_NAME.FOLDER_O, event.themes?.map(({ title }) => title).join(', ') || '', false)}
+              formatInfo(CapUIIcon.FolderO, event.themes?.map(({ title }) => title).join(', ') || '', false)}
           </AppBox>
         </Flex>
       </Card>

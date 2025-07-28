@@ -4,7 +4,7 @@ import QRCode from 'react-qr-code'
 import {
   Box,
   Text,
-  Card as DsCard,
+  AbstractCard as DsCard,
   Flex,
   Heading,
   Icon,

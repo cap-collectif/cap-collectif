@@ -18,7 +18,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-GKYOR cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<LoginModal /> render correctly 1`] = `
     >
       <div
         autoFocus={true}
-        className="sc-bcXGCL hANKWR sc-GKYOR djSaGS cap-modal"
+        className="sc-bcXGCL hANKWR sc-gsGkXq gTDlYD cap-modal"
         style={
           {
             "opacity": 0,
@@ -65,7 +65,7 @@ exports[`<LoginModal /> render correctly 1`] = `
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
+              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -128,7 +128,7 @@ exports[`<LoginModal /> render correctly 1`] = `
                 aria-required={true}
                 autoComplete="email"
                 autoFocus={true}
-                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
                 disabled={false}
                 id=":r0:"
                 name="username"
@@ -169,7 +169,7 @@ exports[`<LoginModal /> render correctly 1`] = `
               <input
                 aria-required={true}
                 autoComplete="off"
-                className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
                 disabled={false}
                 id=":r1:"
                 name="password"
@@ -205,7 +205,7 @@ exports[`<LoginModal /> render correctly 1`] = `
           className="sc-bcXGCL gthNCX cap-modal__footer"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB fzdPDJ dUpIgt cap-button"
+            className="sc-bcXGCL sc-gGvGpy fzdPDJ iCdXwD cap-button"
             style={
               {
                 "marginLeft": 0,
@@ -217,7 +217,7 @@ exports[`<LoginModal /> render correctly 1`] = `
             global.cancel
           </button>
           <button
-            className="sc-bcXGCL sc-laZSpB fzdPDJ ietVcX cap-button"
+            className="sc-bcXGCL sc-gGvGpy fzdPDJ jrAhSN cap-button"
             id="confirm-login"
             type="submit"
           >

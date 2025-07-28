@@ -57,7 +57,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 29"
@@ -226,11 +226,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-csDjRa jLjtIq"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
+                    className="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -239,7 +239,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
+                  className="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -270,7 +270,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 29"
@@ -439,11 +439,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-csDjRa jLjtIq"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
+                    className="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -452,7 +452,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
+                  className="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -509,7 +509,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB aEwVP bGltjj cap-button"
+            className="sc-bcXGCL sc-gGvGpy aEwVP kUJvaZ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -547,13 +547,13 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hSLeio jFPqgL cap-button"
+              className="sc-bcXGCL sc-gGvGpy hSLeio diblCZ cap-button"
               onClick={[Function]}
               type="button"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon"
+                className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 32"
@@ -619,7 +619,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB aEwVP bGltjj cap-button"
+            className="sc-bcXGCL sc-gGvGpy aEwVP kUJvaZ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -627,7 +627,7 @@ Array [
           </button>
         </div>
         <div
-          className="sc-bcXGCL hFJjgZ cap-card DebateStepPageVoteForm___StyledCard-fhHJyb kRMgRs"
+          className="sc-bcXGCL hFJjgZ cap-abstract-card DebateStepPageVoteForm___StyledAbstractCard-fHfhKr hKnIyG"
         >
           <form
             className="DebateStepPageVoteForm__Form-kprBSF GzXgt"
@@ -742,7 +742,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 29"
@@ -911,11 +911,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-csDjRa jLjtIq"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
+                    className="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -924,7 +924,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
+                  className="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -955,7 +955,7 @@ Array [
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud llPijx hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-oZHua llPijx hQQZty cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 29"
@@ -1124,11 +1124,11 @@ Array [
                   vote.popover.body
                 </p>
                 <span
-                  className="sc-csDjRa jLjtIq"
+                  className="sc-dEVMhd gAPqvV"
                   clip="rect(0px, 0px, 0px, 0px)"
                 >
                   <button
-                    className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
+                    className="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
                     onClick={[Function]}
                     type="button"
                   >
@@ -1137,7 +1137,7 @@ Array [
                 </span>
                 <button
                   aria-label="open.connection_modal"
-                  className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
+                  className="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
                   id="login-button"
                   onClick={[Function]}
                   type="button"
@@ -1194,7 +1194,7 @@ Array [
             }
           />
           <button
-            className="sc-bcXGCL sc-laZSpB aEwVP bGltjj cap-button"
+            className="sc-bcXGCL sc-gGvGpy aEwVP kUJvaZ cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1232,13 +1232,13 @@ Array [
             label="copied-link"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB hSLeio jFPqgL cap-button"
+              className="sc-bcXGCL sc-gGvGpy hSLeio diblCZ cap-button"
               onClick={[Function]}
               type="button"
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud uugnN knzWyK cap-icon"
+                className="sc-bcXGCL sc-oZHua uugnN cCzERh cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 32 32"
@@ -1309,7 +1309,7 @@ Array [
           </p>
         </div>
         <button
-          className="sc-bcXGCL sc-laZSpB bEQTos ietVcX cap-button"
+          className="sc-bcXGCL sc-gGvGpy bEQTos jrAhSN cap-button"
           onClick={[Function]}
           type="button"
         >

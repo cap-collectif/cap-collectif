@@ -25,7 +25,7 @@ trait UserProfileTrait
      */
     public function iShouldSeeAtLeastOneProject()
     {
-        $this->waitAndThrowOnFailure(3000, "$('#profile-project .project-preview').length > 0");
+        $this->waitAndThrowOnFailure(3000, "$('#profile-project .cap-project-card').length > 0");
     }
 
     /**

@@ -1,144 +1,12 @@
 @core @project
 Feature: Project
 
-Scenario: Can not sort or filter if feature projects_form is disabled
-  Given I visited "projects page"
-  Then I should not see "project-theme"
-
-@elasticsearch
-Scenario: Project can be sorted by published date
-  Given feature "projects_form" is enabled
-  And I visited "projects page"
-  And I click the ".see-more-projects-button.ml-15" element
-  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MjY=']" to appear on current page
-  And I select "opinion.sort.last" from "project-sorting"
-  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MjY=']" to appear on current page
-  And I click the ".see-more-projects-button.ml-15" element
-  And I wait 2 seconds
-  Then "Transformation numérique des relations" should be before "Projet vide" for selector ".project-preview .card__title a"
-  Then "Projet vide" should be before "Projet de loi Renseignement" for selector ".project-preview .card__title a"
-
-@elasticsearch
-Scenario: Project can be sorted by contributions number
-  Given feature "projects_form" is enabled
-  And I visited "projects page"
-  And I click the ".see-more-projects-button.ml-15" element
-  And I select "opinion.sort.last" from "project-sorting"
-  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0MjY=']" to appear on current page
-  And I select "argument.sort.popularity" from "project-sorting"
-  And I wait "[id='project-preview-UHJvamVjdDpwcm9qZWN0NQ==']" to appear on current page
-  And I click the ".see-more-projects-button.ml-15" element
-  And I wait 2 seconds
-  Then "Croissance, innovation, disruption" should be before "Projet de loi Renseignement" for selector ".project-preview .card__title a"
-
-Scenario: Project can be filtered by theme
-  Given feature "themes" is enabled
-  And feature "projects_form" is enabled
-  And I visited "projects page"
-  And I wait ".project-preview" to appear on current page
-  # /!\ this test the number of projects visible set in the admin.
-  Then I should see 16 ".project-preview" elements
-  Then I should see 15 ".progress" elements
-  And I should see "project.preview.action.participe"
-  And I should see "project.preview.action.seeResult"
-  And I click the "#project-button-filter" element
-  And I wait "#project-theme" to appear on current page
-  And I select "Transport" from react "#project-theme"
-  And I wait ".project-preview" to appear on current page
-  Then I should see 11 ".project-preview" elements
-  And I should see "Projet vide"
-  And I should see "Dépot avec selection vote budget"
-  And I should not see "Croissance, innovation, disruption"
-
 Scenario: Project can be filtered with theme page
   Given feature "themes" is enabled
   And feature "projects_form" is enabled
   When I go to a theme page
-  And I wait ".project-preview" to appear on current page
-  Then I should see 7 ".project-preview" element
-
-Scenario: Project can be filtered by theme and sorted by contributions number at the same time
-  Given feature "themes" is enabled
-  And feature "projects_form" is enabled
-  And I visited "projects page"
-  And I wait "#project-button-filter" to appear on current page
-  And I click the "#project-button-filter" element
-  And I wait "#project-theme" to appear on current page
-  And I select "Transport" from react "#project-theme"
-  And I wait ".project-preview" to appear on current page
-  And I select "argument.sort.popularity" from "project-sorting"
-  And I wait ".project-preview" to appear on current page
-  Then I should see 11 ".project-preview" elements
-  And I should see "Projet de loi Renseignement"
-  And I should see "Budget Participatif Rennes"
-  And I should not see "Croissance, innovation, disruption"
-  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
-
-Scenario: Project can be filtered by type and sorted by contributions number at the same time
-  And feature "projects_form" is enabled
-  And I visited "projects page"
-  And I wait "#project-button-filter" to appear on current page
-  And I click the "#project-button-filter" element
-  And I wait "#project-type" to appear on current page
-  And I select "global.consultation" from react "#project-type"
-  And I wait ".project-preview" to appear on current page
-  And I select "argument.sort.popularity" from "project-sorting"
-  And I wait ".project-preview" to appear on current page
-  Then I should see 8 ".project-preview" elements
-  And I should see "Projet de loi Renseignement"
-  And I should see "Stratégie technologique de l'Etat et services publics"
-  And I should not see "Croissance, innovation, disruption"
-  And "Stratégie technologique de l'Etat et services publics" should be before "Projet vide" for selector ".project-preview .card__title a"
-
-Scenario: Project can be filtered by title
-  Given feature "projects_form" is enabled
-  And I visited "projects page"
-  And I wait "#project-search-button" to appear on current page
-  When I fill in the following:
-    | project-search-input | innovation |
-  And I wait ".project-preview" to appear on current page
-  And I click on button "#project-search-button"
-  And I wait "Projet vide" to disappear on current page
-  And I wait ".project-preview" to appear on current page 1 times
-  Then I should see "Croissance, innovation, disruption"
-  And I should not see "Stratégie technologique de l'Etat et services publics"
-  And I should not see "Projet vide"
-
-Scenario: Project can be filtered by status
-  And feature "projects_form" is enabled
-  And I visited "projects page"
-  And I wait "#project-button-filter" to appear on current page
-  And I click the "#project-button-filter" element
-  And I wait "#project-status" to appear on current page
-  And I select "step.status.open" from react "#project-status"
-  And I wait ".project-preview" to appear on current page
-  Then I should see 16 ".project-preview" elements
-  And I select "step.status.closed" from react "#project-status"
-  And I wait ".project-preview" to appear on current page
-  Then I should see 5 ".project-preview" elements
-  And I select "ongoing-and-future" from react "#project-status"
-  And I wait "#project-list .loader" to disappear on current page
-  Then I should see 1 ".project-preview" elements
-
-@read-only
-Scenario: Restricted project should display in projects list
-  Given feature "projects_form" is enabled
-  And I am logged in as super admin
-  And I visited "projects page"
-  And I wait "#project-search-button" to appear on current page
-  And I wait "#project-button-filter" to appear on current page
-  And I wait ".loader" to disappear on current page
-  When I fill in the following:
-    | project-search-input | custom |
-  And I focus the "#project-search-input" element
-  And I click the "#project-search-input" element
-  And I click the "#project-search-button" element
-  And I wait ".loader" to appear on current page
-  And I wait ".project-preview" to appear on current page
-  Then I should see 1 ".project-preview" elements
-  And I should see "Un avenir meilleur pour les nains de jardins (custom access)"
-  And I should not see "Stratégie technologique de l'Etat et services publics"
-  And I should not see "Croissance, innovation, disruption"
+  And I wait ".cap-project-card" to appear on current page
+  Then I should see 7 ".cap-project-card" element
 
 Scenario: Presentation step should display correct number of element
   And feature "blog" is enabled
@@ -174,11 +42,6 @@ Scenario: Can not access trash if feature is disabled
     | projectSlug | croissance-innovation-disruption |
     | stepSlug    | collecte-des-avis                |
   Then I should not see "project.trash" in the "#main" element
-
-Scenario: Users can't see privates project
-  Given feature "projects_form" is enabled
-  And I visited "projects page"
-  Then I should not see "Qui doit conquérir le monde ? | Visible par les admins seulement"
 
 Scenario: Anonymous can't access to a private project and should see login modal
   Given I go to "https://capco.test/project/qui-doit-conquerir-le-monde-visible-par-les-admins-seulement/collect/collecte-des-propositions-pour-conquerir-le-monde"

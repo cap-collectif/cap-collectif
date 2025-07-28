@@ -143,7 +143,9 @@ export default async function Page({ params }: Params) {
 
   return (
     <>
-      {customCode ? <div id="custom-page-code" dangerouslySetInnerHTML={{ __html: customCode }} /> : null}
+      {customCode ? (
+        <div id="custom-page-code" className="cap-custom-code" dangerouslySetInnerHTML={{ __html: customCode }} />
+      ) : null}
       <main id="custom-page">
         <PageRender title={title} body={body} customCode={customCode} />
       </main>

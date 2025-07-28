@@ -51,7 +51,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
           aria-required={true}
           autoComplete="email"
           autoFocus={true}
-          className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+          className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
           disabled={false}
           id=":r0:"
           name="username"
@@ -92,7 +92,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
         <input
           aria-required={true}
           autoComplete="off"
-          className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+          className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
           disabled={false}
           id=":r1:"
           name="password"
@@ -124,7 +124,7 @@ exports[`<ShieldPage /> renders with registration disabled 1`] = `
       </div>
     </div>
     <button
-      className="sc-bcXGCL sc-laZSpB dSdoNK ietVcX cap-button"
+      className="sc-bcXGCL sc-gGvGpy dSdoNK jrAhSN cap-button"
       id="confirm-login"
       type="submit"
     >

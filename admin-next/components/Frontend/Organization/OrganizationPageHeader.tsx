@@ -1,29 +1,10 @@
 import * as React from 'react'
-import { graphql, useFragment } from 'react-relay'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { Flex, Box, CapUIIcon, Heading, Text, Icon, CapUIIconSize, CapUIFontSize } from '@cap-collectif/ui'
 import Image from '@shared/ui/Image'
-import { OrganizationPageHeader_organization$key } from '@relay/OrganizationPageHeader_organization.graphql'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { useIntl } from 'react-intl'
-
-const FRAGMENT = graphql`
-  fragment OrganizationPageHeader_organization on Organization {
-    title
-    body
-    banner {
-      url
-    }
-    media {
-      url
-    }
-    socialNetworks {
-      webPageUrl
-      facebookUrl
-      twitterUrl
-    }
-  }
-`
+import { pageOrganizationMetadataQuery$data } from '@relay/pageOrganizationMetadataQuery.graphql'
 
 const SocialIconLink = ({ icon, href, socialNetwork }: { icon: CapUIIcon; href: string; socialNetwork: string }) => (
   <a href={href}>
@@ -32,16 +13,13 @@ const SocialIconLink = ({ icon, href, socialNetwork }: { icon: CapUIIcon; href: 
   </a>
 )
 
-export const OrganizationPageHeader: React.FC<{ organization: OrganizationPageHeader_organization$key }> = ({
-  organization: organizationKey,
-}) => {
-  const organization = useFragment(FRAGMENT, organizationKey)
+export const OrganizationPageHeader: React.FC<{
+  organization: pageOrganizationMetadataQuery$data['organization']
+}> = ({ organization }) => {
   const intl = useIntl()
   const { socialNetworks, title, body } = organization
   const cover = organization.banner?.url
   const logo = organization.media?.url
-
-  if (!organization) return null
 
   return (
     <Flex as="section" id="organizationHeader" bg="white">

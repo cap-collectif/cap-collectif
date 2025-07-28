@@ -4,7 +4,7 @@ import {
   Flex,
   Text,
   Box,
-  Card,
+  AbstractCard,
   Heading,
   CapUIIcon,
   Icon,
@@ -129,7 +129,7 @@ const EventPageProjectList = ({ eventRef }: Props) => {
               textDecoration: 'none',
             }}
           >
-            <Card
+            <AbstractCard
               bg="white"
               p={isMobile ? 0 : 2}
               height="94px"
@@ -302,7 +302,7 @@ const EventPageProjectList = ({ eventRef }: Props) => {
                   </Flex>
                 )}
               </Flex>
-            </Card>
+            </AbstractCard>
           </Box>
         ))}
       </Box>

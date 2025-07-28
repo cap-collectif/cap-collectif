@@ -1,4 +1,4 @@
-import { CapUIFontSize, Card, Heading, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, AbstractCard, Heading, Text } from '@cap-collectif/ui'
 import * as React from 'react'
 
 import DatesInterval from '../Utils/DatesInterval'
@@ -13,7 +13,15 @@ type Props = {
 export const VoteStepPageDescription = ({ title, body, timeRange }: Props) => {
   return (
     // We use className="container" to match the old bootstrap style. Not a huge fan, but for now it'll work
-    <Card border="none" bg="white" m={[0, 8]} p={8} mb={[0, 0]} fontSize={CapUIFontSize.BodyRegular} className="container">
+    <AbstractCard
+      border="none"
+      bg="white"
+      m={[0, 8]}
+      p={8}
+      mb={[0, 0]}
+      fontSize={CapUIFontSize.BodyRegular}
+      className="container"
+    >
       <Heading as="h3" mb={2}>
         {title}
       </Heading>
@@ -23,7 +31,7 @@ export const VoteStepPageDescription = ({ title, body, timeRange }: Props) => {
       <Text lineHeight="initial" mt={2}>
         <WYSIWYGRender value={body} />
       </Text>
-    </Card>
+    </AbstractCard>
   )
 }
 export default VoteStepPageDescription

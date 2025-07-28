@@ -26,7 +26,7 @@ Array [
         }
       >
         <div
-          className="sc-bcXGCL fsrian cap-card"
+          className="sc-bcXGCL fsrian cap-abstract-card"
           style={
             Object {
               "borderRadius": "8px",
@@ -63,7 +63,7 @@ Array [
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 9 12"
@@ -105,7 +105,7 @@ Array [
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 11 12"
@@ -155,7 +155,7 @@ Array [
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
+                  className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 10"
@@ -201,7 +201,7 @@ Array [
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-oZHua cTElbo hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 32 28"
@@ -245,7 +245,7 @@ Array [
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-oZHua cTElbo hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 14 13"
@@ -270,7 +270,7 @@ Array [
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud cTElbo hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-oZHua cTElbo hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 13 14"

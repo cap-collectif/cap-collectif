@@ -1,12 +1,12 @@
 import * as React from 'react'
 import { FormattedMessage } from 'react-intl'
-import { Flex, Card, Tag, Text, Skeleton, CapUIFontSize, CapUILineHeight } from '@cap-collectif/ui'
+import { Flex, AbstractCard, Tag, Text, Skeleton, CapUIFontSize, CapUILineHeight } from '@cap-collectif/ui'
 export type DebateOpinionStatus = 'FOR' | 'AGAINST'
 type Props = {
   readonly debateOpinionStatus: DebateOpinionStatus
 }
 export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props): JSX.Element => (
-  <Card p={0} bg="white" width="100%">
+  <AbstractCard p={0} bg="white" width="100%">
     <Tag
       variantColor={debateOpinionStatus === 'FOR' ? 'success' : 'danger'}
       sx={{
@@ -34,6 +34,6 @@ export const DebateOpinionPlaceholder = ({ debateOpinionStatus = 'FOR' }: Props)
         </Flex>
       </Flex>
     </Flex>
-  </Card>
+  </AbstractCard>
 )
 export default DebateOpinionPlaceholder

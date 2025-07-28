@@ -1,5 +1,5 @@
 import type { FC } from 'react'
-import { CapUIFontSize, CapUIFontWeight, CapUILineHeight, Card, Flex, Text } from '@cap-collectif/ui'
+import { CapUIFontSize, CapUIFontWeight, CapUILineHeight, AbstractCard, Flex, Text } from '@cap-collectif/ui'
 import { formatBigNumber } from '@utils/format-number'
 import ModalProcessRequest from '../ModalProcessRequest/ModalProcessRequest'
 import { graphql, useFragment } from 'react-relay'
@@ -26,7 +26,7 @@ const SmsOrderItem: FC<SmsOrderItemProps> = ({ smsOrder: smsOrderFragment, conne
   const smsOrder = useFragment(FRAGMENT, smsOrderFragment)
 
   return (
-    <Card display="flex" justifyContent="space-between" key={smsOrder.id}>
+    <AbstractCard display="flex" justifyContent="space-between" key={smsOrder.id}>
       <Flex direction="column" mr={2}>
         <Text
           fontWeight={CapUIFontWeight.Semibold}
@@ -52,7 +52,7 @@ const SmsOrderItem: FC<SmsOrderItemProps> = ({ smsOrder: smsOrderFragment, conne
       </Flex>
 
       <ModalProcessRequest smsOrder={smsOrder} connectionName={connectionName} />
-    </Card>
+    </AbstractCard>
   )
 }
 

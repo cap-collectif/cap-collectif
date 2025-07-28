@@ -16,6 +16,7 @@ import { GlobalTheme } from '@shared/navbar/NavBar.utils'
 import { layoutQuery$data } from '@relay/layoutQuery.graphql'
 import { ADS_COOKIE, ANALYTICS_COOKIE } from '@shared/utils/cookies'
 import { evalCustomCode, formatCustomCode } from './custom-code'
+import moment from 'moment'
 
 /**
  * Ce compo injecte tout ce qui est configurable à l'échelle globale d'une plateforme dans le BO, à savoir
@@ -106,6 +107,7 @@ export default function Providers({
   SSRData: layoutQuery$data
   captchaKey: string
 }>) {
+  moment.locale(intl.locale)
   return (
     // @ts-expect-error types inconsistencies between react-relay and relay-runtime
     <RelayEnvironmentProvider environment={getEnvironment(featureFlags)}>

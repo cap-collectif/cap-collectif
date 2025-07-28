@@ -1,7 +1,17 @@
 import * as React from 'react'
 
 import styled from 'styled-components'
-import { Card, Icon, CapUIIcon, CapUIIconSize, Text, Box, Heading, Flex, CapUIFontSize } from '@cap-collectif/ui'
+import {
+  AbstractCard,
+  Icon,
+  CapUIIcon,
+  CapUIIconSize,
+  Text,
+  Box,
+  Heading,
+  Flex,
+  CapUIFontSize,
+} from '@cap-collectif/ui'
 import type { AppBoxProps } from '~ui/Primitives/AppBox.type'
 import Image from '~ui/Primitives/Image'
 export const DebateArticleCardTitle = styled(Heading).attrs(props => ({
@@ -35,7 +45,7 @@ type Props = AppBoxProps & {
 const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Props) => {
   return (
     /** @ts-ignore */
-    <Card bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" {...props}>
+    <AbstractCard bg="white" p={0} flexDirection="column" overflow="hidden" display="flex" {...props}>
       <Box overflow="hidden" height={14}>
         {illustration ? (
           <Image
@@ -61,7 +71,7 @@ const DebateArticleCard = ({ children, illustration, publishedAt, ...props }: Pr
           </Text>
         )}
       </Flex>
-    </Card>
+    </AbstractCard>
   )
 }
 

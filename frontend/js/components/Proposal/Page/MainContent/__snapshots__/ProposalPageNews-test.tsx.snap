@@ -289,7 +289,7 @@ exports[`<ProposalPageNews /> should render correctly without news and  with vie
       <Box />
     </Flex>
     <ProposalPageNews__NewsCardHolder>
-      <Card
+      <AbstractCard
         alignContent="center"
         as={
           Object {
@@ -345,7 +345,7 @@ exports[`<ProposalPageNews /> should render correctly without news and  with vie
             values={Object {}}
           />
         </Button>
-      </Card>
+      </AbstractCard>
     </ProposalPageNews__NewsCardHolder>
   </ProposalPagestyle__CategoryContainer>
 </ProposalPagestyle__Card>

@@ -34,7 +34,7 @@ describe('<Organization />', () => {
 
     TestComponent = () => (
       <RelaySuspensFragmentTest environment={environment}>
-        <Organization slug="nice-org" />
+        <Organization slug="nice-org" organization={{ title }} />
       </RelaySuspensFragmentTest>
     )
   })

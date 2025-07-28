@@ -134,11 +134,6 @@
                         "description": "description.module.pictures_events",
                         "onlySuperAdmin": false
                     },
-                    "new_project_card": {
-                        "title": "capco.module.new_project_card",
-                        "description": "description.module.new_project_card",
-                        "onlySuperAdmin": false
-                    },
                     "display_map": {
                         "title": "capco.module.display_map",
                         "description": "description.module.display_map",

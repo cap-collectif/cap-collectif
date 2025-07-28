@@ -93,7 +93,6 @@ export type FeatureToggles = {
   emailing: boolean | null | undefined
   emailing_parameters: boolean | null | undefined
   proposal_revisions: boolean | null | undefined
-  new_project_card: boolean | null | undefined
   import_proposals: boolean | null | undefined
   analytics_page: boolean | null | undefined
   project_admin: boolean | null | undefined

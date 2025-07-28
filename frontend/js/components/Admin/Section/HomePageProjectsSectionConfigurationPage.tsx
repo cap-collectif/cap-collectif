@@ -337,7 +337,7 @@ const mapStateToProps = (state: GlobalState, { homePageProjectsSectionConfigurat
       initialValues,
       displayMode: formValueSelector(formName)(state, 'displayMode'),
       currentLanguage: state.language.currentLanguage,
-      maxProjectsDisplay: state.default.features.new_project_card === true ? 9 : 8,
+      maxProjectsDisplay: 9,
     }
   }
 }

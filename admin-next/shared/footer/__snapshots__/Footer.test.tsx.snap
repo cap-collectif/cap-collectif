@@ -44,7 +44,7 @@ exports[`<Footer /> renders correctly 1`] = `
               >
                 <div
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon"
                 />
                 <a
                   href="x.com/cap-collectif"

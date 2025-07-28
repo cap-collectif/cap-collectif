@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Control } from 'react-hook-form'
 import { FormValues } from './OrganizationConfigForm'
-import { CapUIIcon, Card, Flex, FormLabel, Heading, Icon, Link } from '@cap-collectif/ui'
+import { CapUIIcon, AbstractCard, Flex, FormLabel, Heading, Icon, Link } from '@cap-collectif/ui'
 import { FieldInput, FormControl } from '@cap-collectif/form'
 import { useIntl } from 'react-intl'
 import debounce from '@shared/utils/debounce-promise'
@@ -60,7 +60,7 @@ const OrganizationConfigFormGeneral: React.FC<OrganizationConfigFormGeneralProps
 
   return (
     <Flex
-      as={Card}
+      as={AbstractCard}
       direction="column"
       spacing={8}
       style={{

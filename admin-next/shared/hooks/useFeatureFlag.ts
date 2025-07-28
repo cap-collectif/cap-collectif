@@ -59,7 +59,6 @@ export const defaultFeatureFlags: FeatureFlags = {
   export_legacy_users: false,
   graphql_query_analytics: false,
   noindex_on_profiles: false,
-  new_project_card: false,
   indexation: false,
   twilio: false,
   remind_user_account_confirmation: false,
@@ -84,6 +83,7 @@ export const defaultFeatureFlags: FeatureFlags = {
   multi_consultations: false,
   collect_proposals_by_email: false,
   user_anonymization_automated: false,
+  new_project_card: false,
 }
 
 type FeatureFlags = Omit<

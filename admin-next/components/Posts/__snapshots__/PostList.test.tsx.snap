@@ -80,7 +80,7 @@ exports[`<PostList /> should render correctly 1`] = `
               aria-controls="id-g"
               aria-expanded={false}
               aria-haspopup="menu"
-              className="sc-bcXGCL sc-laZSpB bIdQns eeBSwt cap-button cap-menu__disclosure"
+              className="sc-bcXGCL sc-gGvGpy bIdQns haoZBz cap-button cap-menu__disclosure"
               onClick={[Function]}
               onClickCapture={[Function]}
               onFocus={[Function]}
@@ -104,7 +104,7 @@ exports[`<PostList /> should render correctly 1`] = `
               </p>
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-button-icon"
+                className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-button-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 7"
@@ -122,7 +122,7 @@ exports[`<PostList /> should render correctly 1`] = `
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -187,7 +187,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -234,7 +234,7 @@ exports[`<PostList /> should render correctly 1`] = `
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -382,7 +382,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -442,7 +442,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -615,7 +615,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -675,7 +675,7 @@ exports[`<PostList /> should render correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon cap-buttonQuickAction-icon"
+                  className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon cap-buttonQuickAction-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 12"
@@ -749,7 +749,7 @@ exports[`<PostList /> should render correctly 1`] = `
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB kkwMkp dUpIgt cap-button"
+        className="sc-bcXGCL sc-gGvGpy kkwMkp iCdXwD cap-button"
         onClick={[Function]}
         type="button"
       >

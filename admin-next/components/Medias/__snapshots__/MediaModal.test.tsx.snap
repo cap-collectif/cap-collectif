@@ -19,7 +19,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-GKYOR cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL gqJtmr sc-GKYOR htNobg cap-modal"
+        className="sc-bcXGCL gqJtmr sc-gsGkXq bMdHnV cap-modal"
         style={
           {
             "opacity": 0,
@@ -63,7 +63,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
           >
             <svg
               aria-hidden="false"
-              className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon"
+              className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon"
               fill="none"
               height="1em"
               role="img"
@@ -137,7 +137,7 @@ exports[`<MediaModal /> should render correctly 1`] = `
             className="sc-bcXGCL rTUdv"
           >
             <button
-              className="sc-bcXGCL sc-laZSpB fzdPDJ hplCgZ cap-button"
+              className="sc-bcXGCL sc-gGvGpy fzdPDJ hRxmzr cap-button"
               onClick={[Function]}
               style={
                 {
@@ -150,14 +150,14 @@ exports[`<MediaModal /> should render correctly 1`] = `
               global.delete
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB fzdPDJ cXaElS cap-button"
+              className="sc-bcXGCL sc-gGvGpy fzdPDJ dmtkzs cap-button"
               onClick={[Function]}
               type="button"
             >
               copy-link
             </button>
             <button
-              className="sc-bcXGCL sc-laZSpB fzdPDJ ietVcX cap-button"
+              className="sc-bcXGCL sc-gGvGpy fzdPDJ jrAhSN cap-button"
               onClick={[Function]}
               type="button"
             >

@@ -12,7 +12,7 @@ exports[`<Contact /> renders correctly 1`] = `
       className="sc-bcXGCL jkMDXM"
     >
       <div
-        className="sc-bcXGCL ifGhhS"
+        className="sc-bcXGCL hxkawY"
       >
         <div
           className="sc-bcXGCL ifGhhS"
@@ -67,7 +67,7 @@ exports[`<Contact /> renders correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud dAsYTG hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-oZHua dAsYTG hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 12 7"
@@ -150,7 +150,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       </p>
                     </label>
                     <input
-                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
                       disabled={false}
                       id=":r0:"
                       minLength={2}
@@ -191,7 +191,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required={true}
-                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
                       disabled={false}
                       id=":r1:"
                       name="email"
@@ -231,7 +231,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required={true}
-                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
+                      className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
                       disabled={false}
                       id=":r2:"
                       minLength={2}
@@ -276,7 +276,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     >
                       <textarea
                         aria-required={true}
-                        className="sc-bcXGCL sc-dwnPIk lnUMOb eCNeCU cap-textarea"
+                        className="sc-bcXGCL sc-UpCiH lnUMOb fVmBzY cap-textarea"
                         disabled={false}
                         id=":r3:"
                         minLength={2}
@@ -293,7 +293,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </div>
                   </div>
                   <button
-                    className="sc-bcXGCL sc-laZSpB fYBGhH ietVcX cap-button"
+                    className="sc-bcXGCL sc-gGvGpy fYBGhH jrAhSN cap-button"
                     type="submit"
                   >
                     global.send
@@ -319,7 +319,7 @@ exports[`<Contact /> renders correctly 1`] = `
               >
                 <svg
                   aria-hidden="true"
-                  className="sc-bcXGCL sc-eJDTud fNywAu hEjMCZ cap-icon"
+                  className="sc-bcXGCL sc-oZHua fNywAu hQQZty cap-icon"
                   fill="none"
                   height="1em"
                   viewBox="0 0 8 12"

@@ -6,7 +6,7 @@ import {
   ButtonQuickAction,
   CapUIFontSize,
   CapUIIcon,
-  Card,
+  AbstractCard,
   Flex,
   FormLabel,
   Heading,
@@ -42,7 +42,7 @@ const SetComplexChoices: React.FC<{ defaultLocale?: string }> = ({ defaultLocale
         {choices.map((choice, index) => {
           const formFieldName = `temporaryQuestion.choices.${index}`
           return (
-            <Card
+            <AbstractCard
               key={choice.id}
               mt={4}
               display="flex"
@@ -97,7 +97,7 @@ const SetComplexChoices: React.FC<{ defaultLocale?: string }> = ({ defaultLocale
                   uploadURI={UPLOAD_PATH}
                 />
               </FormControl>
-            </Card>
+            </AbstractCard>
           )
         })}
         <Button

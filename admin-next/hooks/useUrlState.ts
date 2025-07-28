@@ -13,8 +13,9 @@ export function useUrlState(key: string, defaultValue: string): UseStateQueryRes
   const [value, setValue] = useState(initialValue || defaultValue)
 
   const handleValue = (value: string) => {
-    url.searchParams.set(key, value)
-    window.history.replaceState(null, '', url.toString())
+    const currentUrl = new URL(window.location.href)
+    currentUrl.searchParams.set(key, value)
+    window.history.replaceState(null, '', currentUrl.toString())
     setValue(value)
   }
 

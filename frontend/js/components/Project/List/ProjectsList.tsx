@@ -2,7 +2,6 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { QueryRenderer, graphql } from 'react-relay'
 import environment, { graphqlError } from '../../../createRelayEnvironment'
-import Loader from '../../Ui/FeedbacksIndicators/Loader'
 import type { ProjectsListQuery$data } from '~relay/ProjectsListQuery.graphql'
 import type { GlobalState, FeatureToggles } from '../../../types'
 import '../../../types'
@@ -58,7 +57,7 @@ class ProjectsList extends React.Component<Props> {
   }: ReactRelayReadyState & {
     props: ProjectsListQuery$data | null | undefined
   }) => {
-    const { limit, paginate, isProjectsPage, features } = this.props
+    const { limit, paginate, isProjectsPage } = this.props
 
     if (error) {
       console.log(error) // eslint-disable-line no-console
@@ -70,7 +69,7 @@ class ProjectsList extends React.Component<Props> {
       return <ProjectListView query={props} limit={limit} paginate={paginate} isProjectsPage={isProjectsPage} />
     }
 
-    return features.new_project_card ? <ProjectsListPlaceholder count={limit} /> : <Loader />
+    return <ProjectsListPlaceholder count={limit} />
   }
 
   render() {

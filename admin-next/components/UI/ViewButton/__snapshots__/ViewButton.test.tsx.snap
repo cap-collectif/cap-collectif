@@ -12,7 +12,7 @@ exports[`<ViewButton /> should render correctly 1`] = `
   >
     <svg
       aria-hidden={true}
-      className="sc-bcXGCL sc-eJDTud iYuClr hEjMCZ cap-icon"
+      className="sc-bcXGCL sc-oZHua iYuClr hQQZty cap-icon"
       fill="none"
       focusable={false}
       height="1em"

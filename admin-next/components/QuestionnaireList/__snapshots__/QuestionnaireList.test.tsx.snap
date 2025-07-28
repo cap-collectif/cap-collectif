@@ -68,7 +68,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
               </p>
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud WsfA-d hEjMCZ cap-icon"
+                className="sc-bcXGCL sc-oZHua WsfA-d hQQZty cap-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 7"
@@ -86,7 +86,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             </button>
             <div
               aria-orientation="vertical"
-              className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
+              className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
               data-dialog={true}
               hidden={true}
               id="id-g"
@@ -151,7 +151,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -198,7 +198,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
                   </p>
                   <svg
                     aria-hidden="true"
-                    className="sc-bcXGCL sc-eJDTud dMHpyn hEjMCZ cap-icon"
+                    className="sc-bcXGCL sc-oZHua dMHpyn hQQZty cap-icon"
                     fill="none"
                     height="1em"
                     viewBox="0 0 12 7"
@@ -330,7 +330,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 12"
@@ -486,7 +486,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
             >
               <svg
                 aria-hidden="true"
-                className="sc-bcXGCL sc-eJDTud iTLsCl knzWyK cap-icon cap-buttonQuickAction-icon"
+                className="sc-bcXGCL sc-oZHua iTLsCl cCzERh cap-icon cap-buttonQuickAction-icon"
                 fill="none"
                 height="1em"
                 viewBox="0 0 12 12"
@@ -559,7 +559,7 @@ exports[`<QuestionnaireList /> <TestQuestionnaireList /> should render correctly
         adjust-search-filters-to-find
       </p>
       <button
-        className="sc-bcXGCL sc-laZSpB kkwMkp dUpIgt cap-button"
+        className="sc-bcXGCL sc-gGvGpy kkwMkp iCdXwD cap-button"
         onClick={[Function]}
         type="button"
       >

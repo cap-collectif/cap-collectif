@@ -16,7 +16,15 @@ const METADATA_QUERY = graphql`
         title
         body
         media {
-          url(format: "reference")
+          url(format: "relative")
+        }
+        banner {
+          url(format: "relative")
+        }
+        socialNetworks {
+          webPageUrl
+          facebookUrl
+          twitterUrl
         }
       }
     }
@@ -59,16 +67,22 @@ export async function generateMetadata({ params }: Params): Promise<Metadata> {
   }
 }
 
-export default function Page({ params }: Params) {
+export default async function Page({ params }: Params) {
   const { slug: initialSlug } = params
 
   if (!initialSlug) return notFound()
 
   const slug = removeAccents(decodeURI(initialSlug))
 
+  const { organization } = await Fetcher.ssrGraphql<pageOrganizationMetadataQuery$data>(METADATA_QUERY, {
+    organizationSlug: slug,
+  })
+
+  if (!organization) return notFound()
+
   return (
     <main id="organization-page">
-      <Organization slug={slug} />
+      <Organization slug={slug} organization={organization} />
     </main>
   )
 }

@@ -10,8 +10,8 @@ Scenario: Can see sections
 Scenario: Can see limited projects with button more projects
   Given feature "themes" is enabled
   Given I visited "home page"
-  And I wait ".project-preview" to appear on current page
-  Then I should see 4 ".project-preview" elements
+  And I wait ".cap-project-card" to appear on current page
+  Then I should see 4 ".cap-project-card" elements
   And I should see 1 ".see-more-projects-button" elements
 
 @database

@@ -351,11 +351,11 @@ Array [
           vote.popover.body
         </p>
         <span
-          className="sc-csDjRa jLjtIq"
+          className="sc-dEVMhd gAPqvV"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
+            className="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -364,7 +364,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
+          className="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -728,11 +728,11 @@ Array [
           vote.popover.body
         </p>
         <span
-          className="sc-csDjRa jLjtIq"
+          className="sc-dEVMhd gAPqvV"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
+            className="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -741,7 +741,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
+          className="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"
@@ -1105,11 +1105,11 @@ Array [
           vote.popover.body
         </p>
         <span
-          className="sc-csDjRa jLjtIq"
+          className="sc-dEVMhd gAPqvV"
           clip="rect(0px, 0px, 0px, 0px)"
         >
           <button
-            className="sc-bcXGCL sc-laZSpB kkwMkp ietVcX cap-button"
+            className="sc-bcXGCL sc-gGvGpy kkwMkp jrAhSN cap-button"
             onClick={[Function]}
             type="button"
           >
@@ -1118,7 +1118,7 @@ Array [
         </span>
         <button
           aria-label="open.connection_modal"
-          className="sc-bcXGCL sc-laZSpB fksvDd ietVcX cap-button"
+          className="sc-bcXGCL sc-gGvGpy fksvDd jrAhSN cap-button"
           id="login-button"
           onClick={[Function]}
           type="button"

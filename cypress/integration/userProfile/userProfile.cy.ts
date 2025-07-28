@@ -2,7 +2,6 @@ describe('Anonymous wants to see the profile of a user', () => {
   beforeEach(() => {
     cy.task('db:restore')
     cy.task('enable:feature', 'profiles')
-    cy.task('enable:feature', 'new_project_card')
 
     // TODO: investigate why when logged in as user, the #profile-source section is not displayed
     // cy.directLoginAs('user')

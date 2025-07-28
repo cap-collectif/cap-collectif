@@ -3,7 +3,7 @@ import { useFragment, graphql } from 'react-relay'
 import { FormattedMessage } from 'react-intl'
 import css from '@styled-system/css'
 import { useDisclosure } from '@liinkiing/react-hooks'
-import { Box, Button, Heading, Text, Tag, Card, Flex, CapUIFontSize } from '@cap-collectif/ui'
+import { Box, Button, Heading, Text, Tag, AbstractCard, Flex, CapUIFontSize } from '@cap-collectif/ui'
 import type { DebateOpinion_opinion$key } from '~relay/DebateOpinion_opinion.graphql'
 import { LineHeight } from '~ui/Primitives/constants'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
@@ -37,7 +37,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
     props.opinion,
   )
   return (
-    <Card
+    <AbstractCard
       p={0}
       bg="white"
       flex="1" // we have to manually set a max height in px for the transition to work
@@ -132,7 +132,7 @@ const DebateOpinion = ({ isMobile = false, readMore = false, ...props }: Props):
         </Flex>
       </Flex>
       {isMobile && <DebateStepPageOpinionDrawer onClose={onClose} isOpen={isOpen} opinion={opinion} />}
-    </Card>
+    </AbstractCard>
   )
 }
 

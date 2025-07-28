@@ -16,7 +16,7 @@
                 {{ react_render_component('CustomProjectsListApp', { 'props': { 'projectsCount': projectsCount } }) }}
             </div>
 
-            <div style={{is_feature_enabled('new_project_card') ? 'text-align:center;width:100%;' : ''}}>
+            <div style='text-align:center;width:100%;'>
                 <a href="{{ path('app_project', {'_locale': locale}) }}" class="btn btn-primary btn--outline
                     see-more-projects-button">{{ 'project.see_all'|trans({}, 'CapcoAppBundle') }}</a>
             </div>

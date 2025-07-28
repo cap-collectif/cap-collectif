@@ -2,8 +2,7 @@ import * as React from 'react'
 import { graphql, usePaginationFragment } from 'react-relay'
 import { useIntl } from 'react-intl'
 import type { OrganizationPageProjectList_organization$key } from '@relay/OrganizationPageProjectList_organization.graphql'
-import { Flex, Button, Heading } from '@cap-collectif/ui'
-import useIsMobile from '@shared/hooks/useIsMobile'
+import { Flex, Button, Heading, Grid, CapUIFontSize } from '@cap-collectif/ui'
 import ProjectCard from '@shared/projectCard/ProjectCard'
 import { pxToRem } from '@shared/utils/pxToRem'
 
@@ -23,73 +22,37 @@ const FRAGMENT = graphql`
   }
 `
 
-const getItemStyles = (position: number, fullSizeLayout: boolean, isMobile: boolean) => {
-  if (isMobile)
-    return {
-      width: '100%',
-      variantSize: undefined,
-    }
-
-  if (fullSizeLayout) {
-    if (!position)
-      return {
-        width: '100%',
-        variantSize: 'L',
-      }
-    if (position < 3)
-      return {
-        width: '50%',
-        variantSize: 'M',
-      }
-    return {
-      width: '33.33%',
-      variantSize: undefined,
-    }
-  }
-
-  if (!position)
-    return {
-      width: '100%',
-      variantSize: 'M',
-    }
-  return {
-    width: '50%',
-    variantSize: undefined,
-  }
-}
-
 export type Props = {
-  readonly organization: OrganizationPageProjectList_organization$key
-  readonly fullSizeLayout: boolean
+  organization: OrganizationPageProjectList_organization$key
+  fullSizeLayout: boolean
 }
 export const OrganizationPageProjectList = ({ organization, fullSizeLayout }: Props) => {
   const intl = useIntl()
   const { data, loadNext, hasNext } = usePaginationFragment(FRAGMENT, organization)
-  const isMobile = useIsMobile()
+
   if (!data) return null
   const { projects } = data
+
   return (
     <Flex direction="column" width={['100%', fullSizeLayout ? '100%' : `calc(70% - ${pxToRem(16)})`]}>
-      <Heading as="h4" mb={4}>
+      <Heading as="h2" color="neutral-gray.darker" fontSize={CapUIFontSize.BodyLarge}>
         {intl.formatMessage({
           id: 'project.title',
         })}
       </Heading>
-      <Flex flexWrap="wrap" mt={-4} ml={[0, -4]}>
+      <Grid
+        templateColumns={[
+          '1fr',
+          fullSizeLayout ? 'repeat(2, 1fr)' : '1fr',
+          fullSizeLayout ? 'repeat(3, 1fr)' : 'repeat(2, 1fr)',
+        ]}
+        gap="lg"
+        mt="md"
+      >
         {projects?.edges?.map((edge, index) => (
-          <ProjectCard
-            project={edge?.node}
-            key={index}
-            {...(getItemStyles(index, fullSizeLayout, isMobile) as {
-              width: string
-              variantSize?: 'L' | 'M'
-            })}
-            height="auto"
-            px={[0, 4]}
-            py={4}
-          />
+          <ProjectCard project={edge?.node} key={index} mx="auto" />
         ))}
-      </Flex>
+      </Grid>
       {hasNext ? (
         <Flex mt={2} width="100%">
           <Button variant="tertiary" margin="auto" onClick={() => loadNext(20)}>

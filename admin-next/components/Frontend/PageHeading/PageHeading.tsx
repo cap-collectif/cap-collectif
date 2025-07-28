@@ -12,7 +12,7 @@ export const PageHeading: FC<BoxProps & PageHeadingProps> = ({ title, subtitle, 
   const { siteColors } = useAppContext()
 
   return (
-    <Box {...rest}>
+    <Box overflowX="hidden" {...rest}>
       <Box display={mode === 'default' ? 'block' : 'flex'} flex="1 1 0">
         {title || subtitle ? (
           <Box

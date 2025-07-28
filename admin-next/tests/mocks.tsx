@@ -74,7 +74,6 @@ export const features: FeatureFlags = {
   proposal_sms_vote: false,
   unstable__new_create_project: false,
   organizations: false,
-  new_project_card: false,
   import_proposals: false,
   analytics_page: false,
   http_redirects: false,
@@ -100,7 +99,8 @@ export const features: FeatureFlags = {
   multi_consultations: false,
   full_proposal_card: false,
   collect_proposals_by_email: false,
-  user_anonymization_automated: false
+  user_anonymization_automated: false,
+  new_project_card: false,
 }
 
 const environment = {

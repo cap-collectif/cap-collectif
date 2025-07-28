@@ -20,13 +20,13 @@ import typography from '~/styles/theme/typography'
 import Address from '~/components/Form/Address/Address'
 import type { AddressComplete } from '~/components/Form/Address/Address.type'
 import Text from '~/components/Ui/Primitives/Text'
-import { formatCounter } from '~/components/Ui/Project/ProjectCard.utils'
 import { flyToPosition } from '~/components/Proposal/Map/ProposalLeafletMap'
 import Image from '~ui/Primitives/Image'
 import GeoJSONView from './GeoJSONView'
 import { CapUIIcon, Flex, Link, Icon, CapUIIconSize } from '@cap-collectif/ui'
 import type { ProjectsMapViewQuery } from '~relay/ProjectsMapViewQuery.graphql'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
+import FormattedNumber from '@shared/utils/FormattedNumber'
 
 const QUERY = graphql`
   query ProjectsMapViewQuery {
@@ -99,6 +99,17 @@ const QUERY = graphql`
     }
   }
 `
+
+export const formatCounter = (iconName: CapUIIcon, count: number, archived: boolean, label: string) => (
+  <Flex direction="row" alignItems="center">
+    <Icon size={CapUIIconSize.Md} color={archived ? 'gray.500' : 'gray.700'} mr={1} name={iconName} />
+    <Text fontSize={14} color={archived ? 'gray.500' : 'gray.900'} as="div">
+      <FormattedNumber number={count} />
+      <span className="sr-only">{label}</span>
+    </Text>
+  </Flex>
+)
+
 export const ProjectsMapView = ({
   linkColor,
   linkHoverColor,
@@ -286,6 +297,7 @@ export const ProjectsMapView = ({
                                         ? mark.externalContributionsCount || 0
                                         : mark.contributions.totalCount,
                                       mark.archived,
+                                      intl.formatMessage({ id: 'global.contribution' }),
                                     )) ||
                                     null}
                                   {(mark.isParticipantsCounterDisplayable &&
@@ -297,6 +309,7 @@ export const ProjectsMapView = ({
                                             mark.anonymousVotes.totalCount +
                                             mark.anonymousReplies?.totalCount,
                                       mark.archived,
+                                      intl.formatMessage({ id: 'capco.section.metrics.participants' }),
                                     )) ||
                                     null}
                                 </Flex>

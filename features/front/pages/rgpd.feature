@@ -41,7 +41,7 @@ Scenario: An anonymous accept cookies then change is mind and the cookies should
   And I should not see "cookies-text"
   And I should see a cookie named "hasFullConsent"
   And I create a cookie named "_pk_id.2733"
-  And I visited "projects page"
+  And I visited "blog page"
   When I click on button "#cookies-management"
   Then I check element "cookies-enable-analytic"
   And I click on button "#cookies-save"
@@ -103,7 +103,7 @@ Scenario: An anonymous wants to change locale through footer
   And I should not see a cookie named "locale"
   And I should see "french" within 5 seconds in the "#footer-links" element
   # On attend que le contenu asynchrone soit chargé sinon le test est flaky
-  And I wait "#projects .row .card__title" to appear on current page
+  And I wait "#projects .cap-project-card" to appear on current page
   And I wait "#proposals .row .card__title" to appear on current page
   And I scroll to the bottom
   And I select "de-DE" in the language footer

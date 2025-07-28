@@ -1,5 +1,5 @@
 import { Box } from '@cap-collectif/ui'
-import DefaultProjectImage from '@shared/projectCard/DefaultProjectImage'
+import DefaultProjectImage from './DefaultProjectImage'
 import { pxToRem } from '@shared/utils/pxToRem'
 
 export const DefaultEventCover = () => (

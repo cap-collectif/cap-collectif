@@ -34,7 +34,7 @@ exports[`<ShieldPageWrapper /> renders correctly 1`] = `
       >
         <svg
           aria-hidden="true"
-          className="sc-bcXGCL sc-eJDTud cQOqtp hEjMCZ cap-icon sc-oZHua kslOoH"
+          className="sc-bcXGCL sc-oZHua cQOqtp hQQZty cap-icon sc-hiDLIP exOZhK"
           fill="none"
           height="1em"
           viewBox="0 0 12 12"
