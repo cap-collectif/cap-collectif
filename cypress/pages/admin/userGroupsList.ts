@@ -160,7 +160,7 @@ export default new (class AdminUserGroupsListPage {
     return this.cy.get('button').contains('global.cancel')
   }
   getMemberCard() {
-    return this.cy.get('.cap-card')
+    return this.cy.get('.cap-abstract-card')
   }
   getToast() {
     return this.cy.get('.cap-toast', { timeout: 5000 }).should('exist').and('be.visible')
