@@ -272,59 +272,19 @@ Object {
         Object {
           "cursor": "YXJyYXljb25uZWN0aW9uOjA=",
           "node": Object {
-            "createdAt": "2018-01-03 00:00:00",
-            "id": "VmVyc2lvbjp2ZXJzaW9uMTY=",
+            "createdAt": "2019-01-03 00:00:00",
+            "id": "VmVyc2lvbjp2ZXJzaW9uNDU=",
             "project": Object {
-              "visibility": "ME",
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjE=",
-          "node": Object {
-            "createdAt": "2018-03-07 00:00:00",
-            "id": "VmVyc2lvbjp2ZXJzaW9uMTk=",
-            "project": Object {
-              "visibility": "ME",
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjI=",
-          "node": Object {
-            "createdAt": "2018-03-08 00:00:00",
-            "id": "VmVyc2lvbjp2ZXJzaW9uMjA=",
-            "project": Object {
-              "visibility": "ME",
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjM=",
-          "node": Object {
-            "createdAt": "2018-03-09 00:00:00",
-            "id": "VmVyc2lvbjp2ZXJzaW9uMjE=",
-            "project": Object {
-              "visibility": "ME",
-            },
-          },
-        },
-        Object {
-          "cursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-          "node": Object {
-            "createdAt": "2018-03-10 00:00:00",
-            "id": "VmVyc2lvbjp2ZXJzaW9uMjI=",
-            "project": Object {
-              "visibility": "ME",
+              "visibility": "PUBLIC",
             },
           },
         },
       ],
       "pageInfo": Object {
-        "endCursor": "YXJyYXljb25uZWN0aW9uOjQ=",
-        "hasNextPage": true,
+        "endCursor": "YXJyYXljb25uZWN0aW9uOjA=",
+        "hasNextPage": false,
       },
-      "totalCount": 28,
+      "totalCount": 1,
     },
   },
 }

@@ -65,7 +65,7 @@ describe('Internal|Query.sources', () => {
         {
           orderBy: { field: 'CREATED_AT', direction: 'DESC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });
@@ -77,7 +77,7 @@ describe('Internal|Query.sources', () => {
         {
           orderBy: { field: 'UPDATED_AT', direction: 'DESC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });
@@ -89,7 +89,7 @@ describe('Internal|Query.sources', () => {
         {
           orderBy: { field: 'CREATED_AT', direction: 'ASC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });
@@ -101,7 +101,7 @@ describe('Internal|Query.sources', () => {
         {
           orderBy: { field: 'UPDATED_AT', direction: 'ASC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });

@@ -72,7 +72,7 @@ describe('Internal|Query.comments', () => {
         {
           orderBy: { field: 'CREATED_AT', direction: 'DESC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });
@@ -84,7 +84,7 @@ describe('Internal|Query.comments', () => {
         {
           orderBy: { field: 'UPDATED_AT', direction: 'DESC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });
@@ -96,7 +96,7 @@ describe('Internal|Query.comments', () => {
         {
           orderBy: { field: 'CREATED_AT', direction: 'ASC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });
@@ -108,7 +108,7 @@ describe('Internal|Query.comments', () => {
         {
           orderBy: { field: 'UPDATED_AT', direction: 'ASC' }
         },
-        'internal',
+        'internal_admin',
       ),
     ).resolves.toMatchSnapshot();
   });

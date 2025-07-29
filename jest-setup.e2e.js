@@ -67,6 +67,15 @@ const authenticatedInternalRequest = (username, password, query, variables) => {
   }).then(r => (r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request')));
 };
 
+const unAuthenticatedInternalRequest = (query, variables) => {
+  return fetch(HOSTNAME + '/logout', {
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    method: 'POST',
+  }).then(r => (r.ok ? internalClient.request(query, variables) : Promise.reject('Bad request')));
+};
+
 global.enableFeatureFlag = async name => {
   console.log(`Enabling feature flag "${name}"...`);
   await exec(`fab ${env}.app.toggle-enable --toggle=${name} --environment=test`);
@@ -187,7 +196,7 @@ global.graphql = (query, variables, client = 'anonymous') => {
     case 'mediator':
       return authenticatedInternalRequest('mediator@cap-collectif.com', 'toto', query, variables);
     case 'internal':
-      return internalClient.request(query, variables);
+      return unAuthenticatedInternalRequest(query, variables);
     case 'anonymous':
     default:
   }

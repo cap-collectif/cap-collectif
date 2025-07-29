@@ -128,21 +128,6 @@ Object {
           },
         },
         Object {
-          "cursor": "YToyOntpOjA7aToxNDg3NjQ2MDAwMDAwO2k6MTtzOjU6IjYwMDA1Ijt9",
-          "node": Object {
-            "id": "60005",
-            "related": Object {
-              "id": "U291cmNlOnNvdXJjZTQ1",
-              "related": Object {
-                "nullable": Object {
-                  "_id": "ProjectAccessibleForAdminOnly",
-                  "visibility": "ADMIN",
-                },
-              },
-            },
-          },
-        },
-        Object {
           "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
           "node": Object {
             "id": "1001",
@@ -155,12 +140,25 @@ Object {
             },
           },
         },
+        Object {
+          "cursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
+          "node": Object {
+            "id": "2003",
+            "related": Object {
+              "id": "UHJvcG9zYWw6cHJvcG9zYWwxNA==",
+              "project": Object {
+                "_id": "project9",
+                "visibility": "PUBLIC",
+              },
+            },
+          },
+        },
       ],
       "pageInfo": Object {
-        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjEwMDEiO30=",
+        "endCursor": "YToyOntpOjA7aToxNDg1OTAzODQwMDAwO2k6MTtzOjQ6IjIwMDMiO30=",
         "hasNextPage": true,
       },
-      "totalCount": 21,
+      "totalCount": 17,
     },
   },
 }
@@ -361,8 +359,164 @@ Object {
         },
         Object {
           "node": Object {
-            "id": "2056",
+            "id": "T3BpbmlvblZvdGU6ODY=",
             "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "60003",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1002",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2004",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1061",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1060",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1059",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1058",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1053",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1062",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2055",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2054",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2053",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2052",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2051",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6NQ==",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "91005",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "VmVyc2lvblZvdGU6NzAwMDU=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "90005",
+            "isAccounted": true,
+          },
+        },
+      ],
+      "totalCount": 24,
+    },
+  },
+}
+`;
+
+exports[`User.votes connection fetches user votes including some not accounted 1`] = `
+Object {
+  "node": Object {
+    "votes": Object {
+      "edges": Array [
+        Object {
+          "node": Object {
+            "id": "1063",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "1064",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTE=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "T3BpbmlvblZvdGU6OTA=",
+            "isAccounted": true,
+          },
+        },
+        Object {
+          "node": Object {
+            "id": "2058",
+            "isAccounted": false,
           },
         },
         Object {
@@ -487,174 +641,6 @@ Object {
         },
       ],
       "totalCount": 25,
-    },
-  },
-}
-`;
-
-exports[`User.votes connection fetches user votes including some not accounted 1`] = `
-Object {
-  "node": Object {
-    "votes": Object {
-      "edges": Array [
-        Object {
-          "node": Object {
-            "id": "1063",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1064",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "T3BpbmlvblZvdGU6OTE=",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "T3BpbmlvblZvdGU6OTA=",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2058",
-            "isAccounted": false,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2056",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "T3BpbmlvblZvdGU6ODY=",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "60003",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1002",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2004",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1061",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1060",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1059",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1058",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1053",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "1062",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2055",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2054",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2053",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2052",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "2051",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "T3BpbmlvblZvdGU6NQ==",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "91005",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "RGViYXRlQXJndW1lbnRWb3RlOjEyMDAx",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "VmVyc2lvblZvdGU6NzAwMDU=",
-            "isAccounted": true,
-          },
-        },
-        Object {
-          "node": Object {
-            "id": "90005",
-            "isAccounted": true,
-          },
-        },
-      ],
-      "totalCount": 26,
     },
   },
 }
