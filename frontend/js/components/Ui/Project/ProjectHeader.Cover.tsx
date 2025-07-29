@@ -601,14 +601,12 @@ export const Social = ({ onClick, ariaLabel, name, ...rest }: SocialProps) => (
     width={6}
     aria-label={ariaLabel}
     sx={{
-      boxShadow: 'none !important',
       cursor: 'pointer',
       '&:hover': {
         color: 'neutral-gray.700',
       },
       '&:focus': {
         color: 'neutral-gray.700',
-        outline: 'none',
       },
     }}
     onClick={onClick}

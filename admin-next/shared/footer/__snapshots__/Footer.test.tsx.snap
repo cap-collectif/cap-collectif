@@ -153,7 +153,7 @@ exports[`<Footer /> renders correctly 1`] = `
       >
         powered_by
         <img
-          alt="cap collectif logo"
+          alt=""
           className="sc-bcXGCL iteBAi"
           src="/favicon-64x64.png"
         />

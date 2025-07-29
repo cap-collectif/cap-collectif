@@ -51,18 +51,6 @@ exports[`<FooterAbout /> renders correcty 1`] = `
       />
     </Flex>
   </Flex>
-  <Flex
-    alignSelf="center"
-    as="ul"
-    flexWrap="wrap"
-    gap={6}
-    id="footer-social-networks"
-    justifyContent="center"
-    maxWidth="100%"
-    ml="auto"
-    mr="auto"
-    px={4}
-  />
 </Flex>
 `;
 

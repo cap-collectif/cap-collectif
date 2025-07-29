@@ -76,12 +76,14 @@ export const Footer: FC<{
       >
         <Box maxWidth={pxToRem(1280)} px={[4, 6]} margin="auto">
           <Box textAlign="center" sx={{ a: { fontWeight: 'bold', cursor: 'pointer', color: 'inherit' } }}>
-            <Heading as="h3" color={footerTitleColor} mb={2}>
-              {footerTitle?.value}
-            </Heading>
+            {footerTitle?.value ? (
+              <Heading as="h3" color={footerTitleColor} mb={2}>
+                {footerTitle?.value}
+              </Heading>
+            ) : null}
             <WYSIWYGRender value={footerBody?.value} />
           </Box>
-          {socialNetworks ? (
+          {socialNetworks?.length ? (
             <Flex justifyContent="center" mt={4}>
               <Flex
                 as="ul"
@@ -171,7 +173,7 @@ export const Footer: FC<{
         <Box as="hr" mx="auto" my={[4, 6]} borderColor="neutral-gray.500" maxWidth={pxToRem(1280)} />
         <Flex alignItems="center" justifyContent="center">
           {intl.formatMessage({ id: 'powered_by' })}
-          <Box as="img" src="/favicon-64x64.png" alt="cap collectif logo" width={5} height={5} mx={2} />
+          <Box as="img" src="/favicon-64x64.png" alt="" width={5} height={5} mx={2} />
           <Box as="a" color={footerLinksColor} href="https://cap-collectif.com" fontWeight="bold">
             <span>Cap Collectif</span>
           </Box>

@@ -141,7 +141,7 @@ export const GlobalFrontOfficeCKEDITORStyles = createGlobalStyle<GlobalTheme>`
       margin-bottom: 0;
       font-weight: 400;
       text-align: center;
-      white-space: nowrap;
+      white-space: normal;
       vertical-align: middle;
       touch-action: manipulation;
       cursor: pointer;

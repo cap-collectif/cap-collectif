@@ -29,17 +29,19 @@ const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColo
       gap={8}
     >
       <Flex direction={'column'} gap={4} maxWidth={pxToRem(960)} margin="auto">
-        <Heading
-          as="h2"
-          color={titleColor}
-          fontSize={pxToRem(12)}
-          margin={'0 auto'}
-          px={4}
-          lineHeight={'unset'}
-          textAlign={'center'}
-        >
-          {textTitle}
-        </Heading>
+        {textTitle ? (
+          <Heading
+            as="h2"
+            color={titleColor}
+            fontSize={pxToRem(12)}
+            margin={'0 auto'}
+            px={4}
+            lineHeight={'unset'}
+            textAlign={'center'}
+          >
+            {textTitle}
+          </Heading>
+        ) : null}
         <Flex
           justifyContent={'center'}
           maxWidth={'100vw'}
@@ -55,7 +57,7 @@ const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColo
         </Flex>
       </Flex>
 
-      {socialNetworks && (
+      {socialNetworks?.length ? (
         <Flex
           as="ul"
           gap={6}
@@ -88,7 +90,7 @@ const FooterAbout = ({ textBody, textTitle, socialNetworks, titleColor, textColo
             </Flex>
           ))}
         </Flex>
-      )}
+      ) : null}
     </Flex>
   )
 }

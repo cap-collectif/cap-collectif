@@ -27,7 +27,7 @@ const CapcoPowered = ({ textColor }: Props): JSX.Element => {
   return (
     <Flex alignItems="center" justifyContent="center">
       {intl.formatMessage({ id: 'powered_by' })}
-      <CapcoLogo src="/favicon-64x64.png" alt="cap collectif logo" />
+      <CapcoLogo src="/favicon-64x64.png" alt="" />
       <CapcoLink textColor={textColor} href="https://cap-collectif.com">
         <span>Cap Collectif</span>
       </CapcoLink>

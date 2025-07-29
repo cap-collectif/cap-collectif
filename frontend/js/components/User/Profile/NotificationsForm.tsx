@@ -67,9 +67,9 @@ export class NotificationsForm extends Component<Props> {
           <Panel.Body>
             {(consent_external_communication || consent_internal_communication) && (
               <React.Fragment>
-                <h3 className="notifications-app-title">
+                <h2 className="notifications-app-title">
                   <FormattedMessage id="global.general" />
-                </h3>
+                </h2>
                 <Table className="notifications-table" striped>
                   <thead>
                     <tr>
@@ -91,7 +91,7 @@ export class NotificationsForm extends Component<Props> {
                               values={{
                                 from: parameters['global.site.communication_from'],
                               }}
-                              />
+                            />
                           </label>
                         </td>
                         <td>
@@ -113,7 +113,7 @@ export class NotificationsForm extends Component<Props> {
                               values={{
                                 organizationName: parameters['global.site.organization_name'],
                               }}
-                              />
+                            />
                           </label>
                         </td>
                         <td>
@@ -130,9 +130,9 @@ export class NotificationsForm extends Component<Props> {
                 </Table>
               </React.Fragment>
             )}
-            <h3 className="notifications-app-title" color={colors.darkGray}>
+            <h2 className="notifications-app-title" color={colors.darkGray}>
               <FormattedMessage id="profile.account.notifications.app.collectstep" />
-            </h3>
+            </h2>
             <Table className="notifications-table" striped>
               <thead>
                 <tr>
@@ -148,7 +148,7 @@ export class NotificationsForm extends Component<Props> {
                 <tr>
                   <td>
                     <label htmlFor="proposal-comment-mail" style={{ fontWeight: 'normal' }}>
-                    <FormattedMessage id="profile.account.notifications.proposal_comment" />
+                      <FormattedMessage id="profile.account.notifications.proposal_comment" />
                     </label>
                   </td>
                   <td>

@@ -192,6 +192,14 @@ form {
     }
 }
 
+body.capco_profile_edit {
+    .form-control:focus, button#profile-form-save:not(:disabled):focus {
+        outline: white solid 2px !important;
+        outline-offset: 0px;
+        box-shadow: $primary-color 0px 0px 0px 4px !important;
+    }
+}
+
 .has-error .error-block {
     display: block;
     color: $danger-color;
