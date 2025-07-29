@@ -1,8 +1,8 @@
 import * as React from 'react'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { Flex, Spinner, CapUIIconSize } from '@cap-collectif/ui'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import PostFormWrapper, { PostFormWrapperWithData } from '@components/Posts/PostFormWrapper'
+import PostFormWrapper, { PostFormWrapperWithData } from '@components/BackOffice/Posts/PostFormWrapper'
 import useUrlState from '@hooks/useUrlState'
 
 const Post = (): React.JSX.Element => {

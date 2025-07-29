@@ -7,8 +7,8 @@ import { pxToRem } from '@shared/utils/pxToRem'
 import { FC, useEffect } from 'react'
 import { useIntl } from 'react-intl'
 import { evalCustomCode } from '../custom-code'
-import PageHeading from '@components/Frontend/PageHeading/PageHeading'
-import ContactForm from '@components/Frontend/Contact/ContactForm'
+import PageHeading from '@components/FrontOffice/PageHeading/PageHeading'
+import ContactForm from '@components/FrontOffice/Contact/ContactForm'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 
 type Props = {

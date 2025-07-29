@@ -1,11 +1,11 @@
 import React from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useRouter } from 'next/router'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import CollectStepForm from '@components/Steps/CollectStep/CollectStepForm'
-import StepCreationSide from '@components/StepCreationSide/StepCreationSide'
-import { CollectStepContextProvider } from '@components/Steps/CollectStep/CollectStepContext'
+import CollectStepForm from '@components/BackOffice/Steps/CollectStep/CollectStepForm'
+import StepCreationSide from '@components/BackOffice/StepCreationSide/StepCreationSide'
+import { CollectStepContextProvider } from '@components/BackOffice/Steps/CollectStep/CollectStepContext'
 
 const UpdateCollectStepWrapper = () => {
   const router = useRouter()

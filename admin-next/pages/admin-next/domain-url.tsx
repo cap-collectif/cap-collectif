@@ -1,10 +1,10 @@
 import { FC } from 'react'
 import { useIntl } from 'react-intl'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { Suspense } from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import RedirectionIO from '@components/RedirectionIO/RedirectionIO'
-import Domain from '@components/Domain/Domain'
+import RedirectionIO from '@components/BackOffice/RedirectionIO/RedirectionIO'
+import Domain from '@components/BackOffice/Domain/Domain'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 
 const DomainUrl: FC = () => {

@@ -2,11 +2,11 @@ import { NextPage } from 'next'
 import { PageProps } from 'types'
 import React, { Suspense } from 'react'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { useIntl } from 'react-intl'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import SectionSms from '@components/SecuredParticipation/SectionSMS/SectionSms'
-import SectionIdentificationCodes from '@components/SecuredParticipation/SectionIdentificationCodes/SectionIdentificationCodes'
+import SectionSms from '@components/BackOffice/SecuredParticipation/SectionSMS/SectionSms'
+import SectionIdentificationCodes from '@components/BackOffice/SecuredParticipation/SectionIdentificationCodes/SectionIdentificationCodes'
 
 const SecuredParticipation: NextPage<PageProps> = () => {
   const intl = useIntl()

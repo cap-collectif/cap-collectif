@@ -1,15 +1,15 @@
 import * as React from 'react'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useIntl } from 'react-intl'
 import { FormProvider, useForm } from 'react-hook-form'
 import { graphql, GraphQLTaggedNode, PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay'
 import type { inviteQuery as inviteQueryType } from '@relay/inviteQuery.graphql'
-import { CONNECTION_NODES_PER_PAGE } from '@components/UserInvitation/utils'
-import UserInviteAdminPageHeader from '@components/UserInvitation/UserInviteAdminPageHeader'
-import UserInviteList from '@components/UserInvitation/UserInviteList'
-import { Status } from '@components/UserInvitation/UserInvite.type'
+import { CONNECTION_NODES_PER_PAGE } from '@components/BackOffice/UserInvitation/utils'
+import UserInviteAdminPageHeader from '@components/BackOffice/UserInvitation/UserInviteAdminPageHeader'
+import UserInviteList from '@components/BackOffice/UserInvitation/UserInviteList'
+import { Status } from '@components/BackOffice/UserInvitation/UserInvite.type'
 
 type Props = {
   queryReference: PreloadedQuery<inviteQueryType>

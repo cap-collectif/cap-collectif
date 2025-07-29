@@ -1,12 +1,12 @@
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { useIntl } from 'react-intl'
 import { Suspense } from 'react'
-import AuthenticationMethods from '@components/Authentication/AuthenticationMethods'
+import AuthenticationMethods from '@components/BackOffice/Authentication/AuthenticationMethods'
 import { Flex } from '@cap-collectif/ui'
-import Shield from '@components/Authentication/Shield'
+import Shield from '@components/BackOffice/Authentication/Shield'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import AuthenticationMethodsPlaceholder from '@components/Authentication/AuthenticationMethodsPlaceholder'
-import ShieldPlaceholder from '@components/Authentication/ShieldPlaceholder'
+import AuthenticationMethodsPlaceholder from '@components/BackOffice/Authentication/AuthenticationMethodsPlaceholder'
+import ShieldPlaceholder from '@components/BackOffice/Authentication/ShieldPlaceholder'
 
 const Authentification = () => {
   const intl = useIntl()

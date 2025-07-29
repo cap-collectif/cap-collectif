@@ -3,9 +3,9 @@ import { PageProps } from 'types'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { Suspense } from 'react'
-import DashboardContainer from '@components/Dashboard/DashboardContainer'
+import DashboardContainer from '@components/BackOffice/Dashboard/DashboardContainer'
 import { ErrorBoundary } from 'react-error-boundary'
-import DashboardError from '@components/Dashboard/DashboardError/DashboardError'
+import DashboardError from '@components/BackOffice/Dashboard/DashboardError/DashboardError'
 
 const Dashboard: NextPage<PageProps> = () => (
   <Suspense

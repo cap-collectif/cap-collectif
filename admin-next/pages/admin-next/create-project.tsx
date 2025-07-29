@@ -1,13 +1,13 @@
 import React from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { graphql, PreloadedQuery, usePreloadedQuery, useQueryLoader } from 'react-relay'
 import { NextPage } from 'next'
 import { PageProps } from 'types'
 import type { createProjectQuery as createProjectQueryType } from '@relay/createProjectQuery.graphql'
-import CreateProject from '@components/Projects/CreateProject/CreateProject'
+import CreateProject from '@components/BackOffice/Projects/CreateProject/CreateProject'
 
 export const CreateProjectQuery = graphql`
   query createProjectQuery {

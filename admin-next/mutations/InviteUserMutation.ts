@@ -4,7 +4,7 @@ import { ConnectionHandler } from 'relay-runtime'
 import commitMutation from './commitMutation'
 import { environment } from '@utils/relay-environement'
 import type { InviteUserMutation$data, InviteUserMutation$variables } from '@relay/InviteUserMutation.graphql'
-import { CONNECTION_NODES_PER_PAGE } from '@components/UserInvitation/utils'
+import { CONNECTION_NODES_PER_PAGE } from '@components/BackOffice/UserInvitation/utils'
 
 export const INVITE_USERS_MAX_RESULTS = 100
 const mutation = graphql`

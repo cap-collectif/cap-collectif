@@ -1,6 +1,6 @@
 import { NextPage } from 'next'
 import { PageProps } from 'types'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { Text } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import withPageAuthRequired from '@utils/withPageAuthRequired'

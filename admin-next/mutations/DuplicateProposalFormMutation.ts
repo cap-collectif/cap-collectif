@@ -9,7 +9,7 @@ import type {
 } from '@relay/DuplicateProposalFormMutation.graphql'
 import type { ProposalFormItem_proposalForm$data } from '@relay/ProposalFormItem_proposalForm.graphql'
 import commitMutation from './commitMutation'
-import { Creator, Viewer } from '../components/ProposalForm/ProposalFormItem'
+import { Creator, Viewer } from '@components/BackOffice/ProposalForm/ProposalFormItem'
 
 const mutation = graphql`
   mutation DuplicateProposalFormMutation($input: DuplicateProposalFormInput!, $connections: [ID!]!) @raw_response_type {

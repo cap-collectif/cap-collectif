@@ -9,9 +9,9 @@ import debounce from '@shared/utils/debounce-promise'
 import TablePlaceholder from '@ui/Table/TablePlaceholder'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import type { postsQuery as postsQueryType } from '@relay/postsQuery.graphql'
-import PostList, { POST_LIST_PAGINATION } from '@components/Posts/PostList'
-import PostListNoResult from '@components/Posts/PostListNoResult'
-import Layout from '@components/Layout/Layout'
+import PostList, { POST_LIST_PAGINATION } from '@components/BackOffice/Posts/PostList'
+import PostListNoResult from '@components/BackOffice/Posts/PostListNoResult'
+import Layout from '@components/BackOffice/Layout/Layout'
 
 export interface PostListPageProps {
   queryReference: PreloadedQuery<postsQueryType>

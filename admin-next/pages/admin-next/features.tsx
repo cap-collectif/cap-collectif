@@ -1,6 +1,6 @@
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { useIntl } from 'react-intl'
-import FeatureList from '@components/FeatureList/FeatureList'
+import FeatureList from '@components/BackOffice/FeatureList/FeatureList'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 
 const Features = () => {

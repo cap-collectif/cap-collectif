@@ -7,7 +7,7 @@ import { useRouter } from 'next/router'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { StepIdQuery } from '@relay/StepIdQuery.graphql'
 import { Flex, Spinner, CapUIIconSize, Box, Button, CapUIIcon, Heading, Icon } from '@cap-collectif/ui'
-import ProposalCard from '@components/Proposal/ProposalCard'
+import ProposalCard from '@components/BackOffice/Proposal/ProposalCard'
 import styled from 'styled-components'
 import { ProposalCard_proposal$key } from '@relay/ProposalCard_proposal.graphql'
 

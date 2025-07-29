@@ -4,9 +4,9 @@ import { FormProvider, useForm } from 'react-hook-form'
 import { useIntl } from 'react-intl'
 import debounce from '@shared/utils/debounce-promise'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import Layout from '@components/Layout/Layout'
-import { useNavBarContext } from '@components/NavBar/NavBar.context'
-import CarrouselContent from '@components/Sections/Carrousel/CarrouselContent'
+import Layout from '@components/BackOffice/Layout/Layout'
+import { useNavBarContext } from '@components/BackOffice/NavBar/NavBar.context'
+import CarrouselContent from '@components/BackOffice/Sections/Carrousel/CarrouselContent'
 import {
   FormValues,
   getInitialValues,
@@ -17,8 +17,8 @@ import {
   MAX_LABEL_LENGTH,
   MAX_TITLE_LENGTH,
   SectionType,
-} from '@components/Sections/Carrousel/Carrousel.utils'
-import CarrouselParameters from '@components/Sections/Carrousel/CarrouselParameters'
+} from '@components/BackOffice/Sections/Carrousel/Carrousel.utils'
+import CarrouselParameters from '@components/BackOffice/Sections/Carrousel/CarrouselParameters'
 import { SectionIdCarrouselQuery } from '@relay/SectionIdCarrouselQuery.graphql'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import DeleteCarrouselElement from '@mutations/DeleteCarrouselElement'

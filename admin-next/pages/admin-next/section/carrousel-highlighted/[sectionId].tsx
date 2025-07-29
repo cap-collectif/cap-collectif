@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 
 import { HomePageCarrouselSectionConfigurationPage } from '../carrousel/[sectionId]'
 

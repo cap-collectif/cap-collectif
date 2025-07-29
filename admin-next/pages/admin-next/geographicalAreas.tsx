@@ -1,8 +1,8 @@
 import { Suspense } from 'react'
 import { useIntl } from 'react-intl'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
-import GeographicalAreasList from 'components/GeographicalAreasList/GeographicalAreasList'
+import GeographicalAreasList from 'components/BackOffice/GeographicalAreasList/GeographicalAreasList'
 import { Flex, Spinner, CapUIIconSize } from '@cap-collectif/ui'
 
 const GeographicalAreas = () => {

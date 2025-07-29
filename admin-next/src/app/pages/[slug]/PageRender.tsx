@@ -1,8 +1,8 @@
 'use client'
 
 import { Box } from '@cap-collectif/ui'
-import { useAppContext } from '@components/AppProvider/App.context'
-import PageHeading from '@components/Frontend/PageHeading/PageHeading'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import PageHeading from '@components/FrontOffice/PageHeading/PageHeading'
 import WYSIWYGRender from '@shared/form/WYSIWYGRender'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { pxToRem } from '@shared/utils/pxToRem'

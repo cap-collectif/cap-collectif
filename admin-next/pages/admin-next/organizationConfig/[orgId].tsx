@@ -3,12 +3,12 @@ import { NextPage } from 'next'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
 import { useIntl } from 'react-intl'
 import { PageProps } from 'types'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useRouter } from 'next/router'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { OrgIdQuery } from '@relay/OrgIdQuery.graphql'
-import OrganizationConfigForm from '@components/Organizations/OrganizationConfig/OrganizationConfigForm'
+import OrganizationConfigForm from '@components/BackOffice/Organizations/OrganizationConfig/OrganizationConfigForm'
 
 export interface OrganisationConfigPageProps {
   orgId: string

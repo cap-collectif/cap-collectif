@@ -27,7 +27,7 @@
         "./__generated__/*"
       ],
       "@ui/*": [
-        "./components/UI/*"
+        "./components/BackOffice/UI/*"
       ],
       "@utils/*": [
         "./utils/*"

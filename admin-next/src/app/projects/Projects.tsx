@@ -1,8 +1,8 @@
 'use client'
 
-import { useAppContext } from '@components/AppProvider/App.context'
-import PageHeading from '@components/Frontend/PageHeading/PageHeading'
-import ProjectListSection from '@components/Frontend/Sections/ProjectList/ProjectListSection'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+import PageHeading from '@components/FrontOffice/PageHeading/PageHeading'
+import ProjectListSection from '@components/FrontOffice/Sections/ProjectList/ProjectListSection'
 import { useNavBarContext } from '@shared/navbar/NavBar.context'
 import { FC, Suspense, useEffect } from 'react'
 import { useIntl } from 'react-intl'

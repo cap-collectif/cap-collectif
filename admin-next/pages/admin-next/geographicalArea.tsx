@@ -2,13 +2,13 @@ import { Suspense } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import { geographicalAreaQuery } from '@relay/geographicalAreaQuery.graphql'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { Flex, Spinner, CapUIIconSize } from '@cap-collectif/ui'
 import useUrlState from '@hooks/useUrlState'
 import dynamic from 'next/dynamic'
 
-const GeographicalAreaForm = dynamic(() => import('@components/GeographicalArea/GeographicalAreaForm'), {
+const GeographicalAreaForm = dynamic(() => import('@components/BackOffice/GeographicalArea/GeographicalAreaForm'), {
   ssr: false,
 })
 

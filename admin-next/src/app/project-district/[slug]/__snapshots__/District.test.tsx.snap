@@ -6,10 +6,10 @@ exports[`<District /> renders correctly 1`] = `
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-bcXGCL eBHnuC sc-b2c48d89-1 eAriAb"
+    className="sc-bcXGCL eBHnuC sc-b4d5bec3-1 ggMSJN"
   >
     <div
-      className="sc-bcXGCL sc-b2c48d89-0 dtmyTo hDIJfD"
+      className="sc-bcXGCL sc-b4d5bec3-0 dtmyTo brnRnh"
     />
     <div
       className="sc-bcXGCL jFlYXF"

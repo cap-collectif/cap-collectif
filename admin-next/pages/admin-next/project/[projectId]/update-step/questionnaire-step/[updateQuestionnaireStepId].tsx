@@ -1,10 +1,10 @@
 import React from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useRouter } from 'next/router'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import QuestionnaireStepForm from '@components/Steps/QuestionnaireStep/QuestionnaireStepForm'
-import StepCreationSide from '@components/StepCreationSide/StepCreationSide'
+import QuestionnaireStepForm from '@components/BackOffice/Steps/QuestionnaireStep/QuestionnaireStepForm'
+import StepCreationSide from '@components/BackOffice/StepCreationSide/StepCreationSide'
 
 const UpdateQuestionnaireStepWrapper = () => {
   const router = useRouter()

@@ -1,11 +1,11 @@
 import React from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useRouter } from 'next/router'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import DebateStepForm from '@components/Steps/DebateStep/DebateStepForm'
-import StepCreationSide from '@components/StepCreationSide/StepCreationSide'
-import { DebateStepContextProvider } from '@components/Steps/DebateStep/DebateStepContext'
+import DebateStepForm from '@components/BackOffice/Steps/DebateStep/DebateStepForm'
+import StepCreationSide from '@components/BackOffice/StepCreationSide/StepCreationSide'
+import { DebateStepContextProvider } from '@components/BackOffice/Steps/DebateStep/DebateStepContext'
 
 const UpdateDebateStepWrapper = () => {
   const router = useRouter()

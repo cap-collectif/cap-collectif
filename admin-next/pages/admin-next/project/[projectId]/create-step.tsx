@@ -2,9 +2,9 @@ import React from 'react'
 import withPageAuthRequired from '@utils/withPageAuthRequired'
 import { useRouter } from 'next/router'
 import { CapUIIconSize, Flex, Spinner } from '@cap-collectif/ui'
-import Layout from '@components/Layout/Layout'
+import Layout from '@components/BackOffice/Layout/Layout'
 import useFeatureFlag from '@shared/hooks/useFeatureFlag'
-import CreateStepPage from '@components/CreateStep/CreateStepPage'
+import CreateStepPage from '@components/BackOffice/CreateStep/CreateStepPage'
 
 const CreateStepWrapper = () => {
   const router = useRouter()
