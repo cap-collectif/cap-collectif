@@ -4,19 +4,19 @@ export default new (class PostFormPage {
   }
 
   get frTitle() {
-    return this.cy.get('input[type="text"]#FR_FR-title')
+    return this.cy.get('input[type="text"]#FR_FR-title').should('exist').and('be.visible')
   }
   get frBody() {
-    return this.cy.get('#FR_FR-body')
+    return this.cy.get('[data-cy="FR_FR-body"]').should('exist').and('be.visible')
   }
   get enTitle() {
     return this.cy.get('#EN_GB-title')
   }
   get enBody() {
-    return this.cy.get('#EN_GB-body')
+    return this.cy.get('[data-cy="EN_GB-body"]')
   }
   get selectLocale() {
-    return this.cy.get('#currentLocale')
+    return this.cy.get('#currentLocale', { timeout: 10000 })
   }
 
   getInput(id: string) {
@@ -35,7 +35,13 @@ export default new (class PostFormPage {
     this.cy.getByDataCy('create-post-button').click()
   }
   clickCreateAndPublishButton() {
-    this.cy.get('button').contains('admin.post.createAndPublish').click()
+    this.cy
+      .get('button')
+      .contains('admin.post.createAndPublish')
+      .should('exist')
+      .and('be.visible')
+      .and('not.be.disabled')
+      .click()
   }
   checkCreateButtonState(state: 'enabled' | 'disabled') {
     if (state === 'enabled') {
@@ -63,10 +69,13 @@ export default new (class PostFormPage {
     this.cy.get('[id^="react-select"][id*="option"]').contains(projectTitleElement).click()
   }
   switchToEnglish() {
-    this.cy.get('button').contains('capco.module.multilangue').click()
-    this.cy.wait(50)
-    this.selectLocale.click()
-    this.cy.get('.cap-select__option').contains('english').click()
+    this.cy.get('button').contains('capco.module.multilangue').should('be.visible').click()
+    this.cy.wait(100)
+    this.selectLocale.should('exist').and('be.visible').click()
+    this.cy.get('.cap-select__option', { timeout: 4000 }).contains('english').should('be.visible').click()
+    // Wait for English fields to appear
+    this.enTitle.should('be.visible')
+    this.enBody.should('be.visible')
   }
   checkLinkedProposalInputDoesNotExist() {
     this.cy.get('#accordion-panel-place')
@@ -80,8 +89,8 @@ export default new (class PostFormPage {
   }
   addEnglishTranslation() {
     this.switchToEnglish()
-    this.enTitle.type('A title in English')
-    this.enBody.type('I love cats!')
+    this.enTitle.should('exist').and('be.visible').type('English title')
+    this.enBody.should('exist').and('be.visible').type('I love cats!')
   }
   openDeleteModal() {
     this.cy.contains('admin.global.delete').click()
@@ -100,10 +109,10 @@ export default new (class PostFormPage {
     this.updateBody(body)
   }
   articleShouldExist(title: string) {
-    this.cy.contains(title).should('exist')
+    this.cy.contains(title, { timeout: 1000 }).should('exist').and('be.visible')
   }
   updateSuccessToastAppears() {
-    this.cy.contains('post-successfully-updated')
+    cy.contains('post-successfully-updated', { timeout: 10000 }).should('be.visible')
   }
 
   checkInputProperties(inputId: string, shouldExist: 'exist' | 'not.exist', disabled?: boolean, value?: string | null) {

@@ -129,10 +129,14 @@ describe('CRUD', () => {
     cy.wait('@postsQuery', { timeout: 15000 })
     PostFormPage.clickNewArticleButton()
     cy.wait('@UserListFieldQuery', { timeout: 20000 })
+    PostFormPage.frTitle.should('be.visible').and('not.be.disabled')
+    PostFormPage.frBody.should('be.visible').and('not.be.disabled')
     PostFormPage.updateTitle(postTitle)
+    PostFormPage.frTitle.should('have.value', postTitle)
     PostFormPage.updateBody(postContent)
+    PostFormPage.frBody.should('contain', postContent)
     PostFormPage.checkLinkedProposalInputDoesNotExist()
-    // PostFormPage.checkCreateButtonState('enabled')
+    PostFormPage.checkCreateButtonState('enabled')
     PostFormPage.clickSelectProject()
     cy.wait('@ProjectListFieldQuery', { timeout: 15000 })
     PostFormPage.selectProject('Débat')
@@ -165,7 +169,11 @@ describe('CRUD', () => {
     cy.interceptGraphQLOperation({ operationName: 'ProjectListFieldQuery' })
     PostFormPage.visitPostWithId(postId)
     cy.wait('@UserListFieldQuery', { timeout: 20000 })
-    PostFormPage.updateArticle('edited', 'edited')
+    PostFormPage.frTitle.should('be.visible').and('not.be.disabled')
+    PostFormPage.frBody.should('be.visible').and('not.be.disabled')
+    PostFormPage.updateArticle(' edited', 'edited')
+    PostFormPage.frTitle.should('have.value', 'Deuxieme article edited')
+    PostFormPage.frBody.should('contain', 'edited')
     PostFormPage.clickSelectProject()
     cy.wait('@ProjectListFieldQuery', { timeout: 15000 })
     PostFormPage.selectProject('Débats')
@@ -173,10 +181,12 @@ describe('CRUD', () => {
     PostFormPage.selectAuthor('admin')
     PostFormPage.clickUpdateButton()
     PostFormPage.addEnglishTranslation()
+    PostFormPage.enTitle.should('have.value', 'English title', { timeout: 4000 })
+    PostFormPage.enBody.should('contain', englishBody, { timeout: 4000 })
     // eslint-disable-next-line jest/valid-expect-in-promise
-    cy.wait('@UpdatePostMutation').then(interception => {
+    cy.wait('@UpdatePostMutation', { timeout: 10000 }).then(interception => {
       // eslint-disable-next-line jest/valid-expect
-      expect(interception?.response?.body.data.updatePost.post.title).to.equal(`Deuxieme articleedited`)
+      expect(interception?.response?.body.data.updatePost.post.title).to.equal(`Deuxieme article edited`)
     })
     PostFormPage.updateSuccessToastAppears()
   })
@@ -189,6 +199,7 @@ describe('CRUD', () => {
     PostFormPage.visitPostWithId(postId)
     cy.wait('@UserListFieldQuery', { timeout: 20000 })
     PostFormPage.openDeleteModal()
+    cy.getByDataCy('deletion-confirmation').should('be.visible').and('not.be.disabled')
     PostFormPage.clickDeleteConfirmationButton()
     // eslint-disable-next-line jest/valid-expect-in-promise
     cy.wait('@DeletePostMutation').then(interception => {

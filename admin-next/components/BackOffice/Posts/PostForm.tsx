@@ -81,18 +81,8 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
     >
       <Flex direction={'row'} alignItems="flex-start" spacing={6} justify="space-between">
         <Flex direction={'column'} width={'70%'}>
-          <FormControl
-            name={`${currentLocale}-title`}
-            id={`${currentLocale}-title`}
-            control={control}
-            key={`${currentLocale}-title`}
-            isRequired
-          >
-            <FormLabel
-              htmlFor={`${currentLocale}-title`}
-              id={`${currentLocale}-title`}
-              label={intl.formatMessage({ id: 'global.title' })}
-            />
+          <FormControl name={`${currentLocale}-title`} control={control} key={`${currentLocale}-title`} isRequired>
+            <FormLabel htmlFor={`${currentLocale}-title`} label={intl.formatMessage({ id: 'global.title' })} />
             <FieldInput
               type="text"
               id={`${currentLocale}-title`}
@@ -102,8 +92,8 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
             />
           </FormControl>
 
-          <FormControl name="authors" id="authors" control={control} isRequired>
-            <FormLabel htmlFor="authors" id="authors" label={intl.formatMessage({ id: 'global.author' })} />
+          <FormControl name="authors" control={control} isRequired>
+            <FormLabel htmlFor="authors" label={intl.formatMessage({ id: 'global.author' })} />
             <UserListField
               clearable={false}
               control={control}
@@ -121,17 +111,8 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
             />
           </FormControl>
 
-          <FormControl
-            name={`${currentLocale}-abstract`}
-            id={`${currentLocale}-abstract`}
-            control={control}
-            key={`${currentLocale}-abstract`}
-          >
-            <FormLabel
-              htmlFor={`${currentLocale}-abstract`}
-              label={intl.formatMessage({ id: 'global.summary' })}
-              id={`${currentLocale}-abstract`}
-            >
+          <FormControl name={`${currentLocale}-abstract`} control={control} key={`${currentLocale}-abstract`}>
+            <FormLabel htmlFor={`${currentLocale}-abstract`} label={intl.formatMessage({ id: 'global.summary' })}>
               <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
@@ -148,7 +129,6 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
         <Flex width={'30%'}>
           <FormControl
             name="media"
-            id="media"
             control={control}
             width="100%"
             mt={-1}
@@ -157,7 +137,7 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
               '.cap-uploader > div ': { width: '100%' },
             }}
           >
-            <FormLabel htmlFor="media" id="media" label={intl.formatMessage({ id: 'cover-image' })}>
+            <FormLabel htmlFor="media" label={intl.formatMessage({ id: 'cover-image' })}>
               <Text fontSize={CapUIFontSize.BodySmall} color="gray.500">
                 {intl.formatMessage({ id: 'global.optional' })}
               </Text>
@@ -182,17 +162,12 @@ const PostForm = ({ isNewPost, postId, onSubmit, defaultLocale = 'FR_FR', isLoad
         </Flex>
       </Flex>
 
-      <FormControl
-        id={`${currentLocale}-body`}
-        name={`${currentLocale}-body`}
-        key={`${currentLocale}-body`}
-        control={control}
-        isRequired
-      >
+      <FormControl name={`${currentLocale}-body`} key={`${currentLocale}-body`} control={control} isRequired>
         <TextEditor
           label={intl.formatMessage({ id: 'admin.general.content' })}
           name={`${currentLocale}-body`}
           id={`${currentLocale}-body`}
+          data-cy={`${currentLocale}-body`}
           placeholder={intl.formatMessage({
             id: 'admin.content.start-writing',
           })}
