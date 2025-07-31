@@ -55,13 +55,16 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
       )
     : []
 
+  const bodyFonts = `${bodyFont?.name},system-ui,sans-serif`
+  const titleFonts = `${titleFont?.name},system-ui,sans-serif`
+
   const primary = generatePalette(siteColors.primaryColor)
 
   const CapUITheme = extendTheme({
     colors: {
       primary,
     },
-    fonts: { body: `${bodyFont?.name},system-ui,sans-serif`, heading: `${titleFont?.name},system-ui,sans-serif` },
+    fonts: { body: bodyFonts, heading: titleFonts },
   })
 
   // @ts-expect-error TURNSTILE_PUBLIC_KEY doesn't exist on generic window type
@@ -80,7 +83,7 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
         {customCode?.value ? <div id="custom-code" dangerouslySetInnerHTML={{ __html: customCode?.value }} /> : null}
         {executeAnalytics ? <div id="analytics-code" dangerouslySetInnerHTML={{ __html: analyticsScript }} /> : null}
         {executeAds ? <div id="ads-code" dangerouslySetInnerHTML={{ __html: adsScript }} /> : null}
-        <GlobalFrontOfficeStyles {...siteColors} />
+        <GlobalFrontOfficeStyles {...siteColors} bodyFonts={bodyFonts} titleFonts={titleFonts} />
         {cssForCustomFonts.length ? <style dangerouslySetInnerHTML={{ __html: cssForCustomFonts.join('\n') }} /> : null}
         {children}
       </LazyMotion>

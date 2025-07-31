@@ -1,4 +1,4 @@
-import { FC, Suspense } from 'react'
+import { FC, Suspense, useEffect } from 'react'
 import NavBarQuery from '@shared/navbar/NavBarQuery'
 import { Flex, Spinner } from '@cap-collectif/ui'
 import NavBarMenu from '@shared/navbar/menu/NavBarMenu'
@@ -22,6 +22,15 @@ const MainLayout: FC<{ SSRData: layoutQuery$data; children: React.ReactNode }> =
   const cookies = useCookies()
   const { locales } = SSRData
   const cookiesLocale = cookies?.get(LOCALE_COOKIE)
+
+  // See this https://github.com/vercel/next.js/issues/11109
+  useEffect(() => {
+    const hash = window.location.hash
+    if (hash.length > 0) {
+      window.location.hash = ''
+      window.location.hash = hash
+    }
+  }, [])
 
   if (shield_mode && !session?.viewerSession)
     return (

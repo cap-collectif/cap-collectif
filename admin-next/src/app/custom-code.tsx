@@ -34,7 +34,7 @@ export const evalCustomCode = (code?: string | null | undefined) => {
 
 export const formatCustomCode = (code?: string | null | undefined) => {
   if (!code || !code?.length) return null
-  if (code.includes('<script>')) {
+  if (code.includes('<script')) {
     return code
   } else return `<script>${code}</script>`
 }
