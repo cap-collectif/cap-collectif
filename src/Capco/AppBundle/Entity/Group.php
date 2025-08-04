@@ -2,12 +2,14 @@
 
 namespace Capco\AppBundle\Entity;
 
+use Capco\AppBundle\Entity\Interfaces\ViewerPermissionInterface;
 use Capco\AppBundle\Traits\BlameableTrait;
 use Capco\AppBundle\Traits\SluggableTitleTrait;
 use Capco\AppBundle\Traits\Text\DescriptionTrait;
 use Capco\AppBundle\Traits\TimestampableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
 use Capco\Capco\Facade\EntityInterface;
+use Capco\UserBundle\Entity\User;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
@@ -17,7 +19,7 @@ use Gedmo\Mapping\Annotation as Gedmo;
  * @ORM\Table(name="user_group")
  * @ORM\Entity(repositoryClass="Capco\AppBundle\Repository\GroupRepository")
  */
-class Group implements EntityInterface, \Stringable
+class Group implements EntityInterface, \Stringable, ViewerPermissionInterface
 {
     use BlameableTrait;
     use DescriptionTrait;
@@ -205,5 +207,14 @@ class Group implements EntityInterface, \Stringable
         $this->emailingCampaigns = $emailingCampaigns;
 
         return $this;
+    }
+
+    public function viewerCanSee(?User $user = null): bool
+    {
+        if (!$user) {
+            return false;
+        }
+
+        return $user->isAdmin();
     }
 }

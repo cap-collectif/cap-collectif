@@ -177,15 +177,11 @@ class GroupMutation implements MutationInterface
             ;
 
             $this->entityManager->persist($group);
+            $this->entityManager->flush();
         }
 
-        $groupId = GlobalId::toGlobalId('Group', $group->getId());
-
-        /** @var Group $group */
-        $group = $this->globalIdResolver->resolve($groupId, $user);
-
         if (!$group) {
-            $error = sprintf('Cannot find the group "%g"', $groupId);
+            $error = sprintf('Cannot find the group "%g"', $group->getId());
             $this->logger->error(__METHOD__ . ' addUsersInGroup: ' . $error);
 
             throw new UserError($error);

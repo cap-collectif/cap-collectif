@@ -99,9 +99,7 @@ Scenario: GraphQL client want to get a node of all available types
         "project":{
            "title":"Croissance, innovation, disruption"
         },
-        "group":{
-           "title":"Super-administrateur"
-        },
+        "group":null,
         "form":{
            "title":"Collecte des propositions pour le budget 2016 de la Ville de Rennes"
         },

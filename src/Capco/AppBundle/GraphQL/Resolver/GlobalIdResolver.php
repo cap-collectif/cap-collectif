@@ -5,6 +5,7 @@ namespace Capco\AppBundle\GraphQL\Resolver;
 use Capco\AppBundle\Entity\Argument;
 use Capco\AppBundle\Entity\Comment;
 use Capco\AppBundle\Entity\Event;
+use Capco\AppBundle\Entity\Interfaces\ViewerPermissionInterface;
 use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
@@ -320,6 +321,10 @@ class GlobalIdResolver
             if ($node instanceof $object) {
                 return $node->canDisplay($user);
             }
+        }
+
+        if ($node instanceof ViewerPermissionInterface) {
+            return $node->viewerCanSee($user);
         }
 
         return true;
