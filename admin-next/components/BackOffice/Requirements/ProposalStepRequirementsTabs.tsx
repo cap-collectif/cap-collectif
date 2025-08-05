@@ -25,11 +25,10 @@ const COLLECT_STEP_FRAGMENT = graphql`
 const ProposalStepRequirementsTabs: React.FC<Props> = ({ proposalStep: proposalStepRef, formMethods }) => {
   const intl = useIntl()
   const proposalStep = useFragment(COLLECT_STEP_FRAGMENT, proposalStepRef)
-  const isSelectionStep = proposalStep.__typename === 'SelectionStep'
 
   const isTwilioEnabled = useFeatureFlag('twilio')
   const isProposalSmsVoteFeature = useFeatureFlag('proposal_sms_vote')
-  const canVoteAnonymously = isSelectionStep ? isTwilioEnabled && isProposalSmsVoteFeature : false
+  const canVoteAnonymously = isTwilioEnabled && isProposalSmsVoteFeature;
 
   const { watch, setValue } = formMethods
 
@@ -60,7 +59,7 @@ const ProposalStepRequirementsTabs: React.FC<Props> = ({ proposalStep: proposalS
           <Tabs.Panel>
             <Requirements requirementStep={proposalStep} />
           </Tabs.Panel>
-          <Tabs.Panel>{isSelectionStep && <ProposalStepWithoutAccountRequirements />}</Tabs.Panel>
+          <Tabs.Panel>{<ProposalStepWithoutAccountRequirements />}</Tabs.Panel>
         </Tabs.PanelList>
       </Tabs>
     </FormProvider>
