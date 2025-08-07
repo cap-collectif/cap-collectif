@@ -29,7 +29,6 @@ export const ColorRow = styled.div.attrs({
 
   .answer-option {
     height: 30px;
-    min-width: ${({ isMobile }) => (isMobile ? '20px' : '50px')};
     color: #fff;
     margin-top: 30px;
     display: flex;
