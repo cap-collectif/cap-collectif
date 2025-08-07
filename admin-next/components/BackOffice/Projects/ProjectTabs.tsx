@@ -1,3 +1,4 @@
+// TODO ---- REFACTOR ME TO USE TABBAR COMPONENT ----
 import * as React from 'react'
 import { Box, CapUIFontSize, CapUIFontWeight, CapUIShadow, Flex, FlexProps } from '@cap-collectif/ui'
 import { useRouter } from 'next/router'

@@ -1,4 +1,4 @@
-import { ProjectTabs_project$data } from '@relay/ProjectTabs_project.graphql'
+import { ProjectIdQuery$data } from '@relay/ProjectIdQuery.graphql'
 import { fromGlobalId } from '@shared/utils/fromGlobalId'
 
 const getProjectAdminBaseUrl = (projectId: string, isAdminNext: boolean = false) =>
@@ -61,7 +61,7 @@ export const getContributionsPath = (baseUrl: string, type: string, stepId?: str
   }
 }
 export const getRouteContributionPath = (
-  project: ProjectTabs_project$data,
+  project: ProjectIdQuery$data['node'],
   baseUrlContributions: string,
   firstCollectStepId?: string,
 ): string => {
@@ -71,11 +71,11 @@ export const getRouteContributionPath = (
 
   const hasCollectStep = collectSteps.length > 0
   const hasDebateStep = debateSteps.length > 0
-  const hasquestionnaireSteps = questionnaireSteps.length > 0
+  const hasQuestionnaireSteps = questionnaireSteps.length > 0
 
   const onlyDebateStep =
-    !hasCollectStep && !hasquestionnaireSteps && debateSteps.length === 1 && !!project.firstDebateStep
-  const onlyCollectStep = !hasDebateStep && !hasquestionnaireSteps && collectSteps.length === 1 && firstCollectStepId
+    !hasCollectStep && !hasQuestionnaireSteps && debateSteps.length === 1 && !!project.firstDebateStep
+  const onlyCollectStep = !hasDebateStep && !hasQuestionnaireSteps && collectSteps.length === 1 && firstCollectStepId
   const onlyQuestionnaireStep =
     !hasCollectStep && !hasDebateStep && questionnaireSteps.length === 1 && !!project.firstQuestionnaireStep
 

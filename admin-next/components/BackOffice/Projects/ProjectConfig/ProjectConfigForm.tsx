@@ -17,7 +17,6 @@ import { mutationErrorToast } from '@shared/utils/mutation-error-toast'
 import moment from 'moment'
 import { ProjectVisibility } from '@relay/CreateProjectMutation.graphql'
 import { yupResolver } from '@hookform/resolvers/yup'
-import ProjectTabs from '@components/BackOffice/Projects/ProjectTabs'
 
 export type ProjectConfigFormProps = {
   project: ProjectConfigForm_project$key
@@ -234,7 +233,6 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
 
   return (
     <>
-      <ProjectTabs project={project} />
       <Flex
         marginTop="48px"
         as="form"
@@ -242,6 +240,7 @@ const ProjectConfigForm: React.FC<ProjectConfigFormProps> = ({ project: projectR
         onSubmit={handleSubmit(onSubmit)}
         direction="column"
         alignItems="flex-start"
+        width={'100%'}
         spacing={6}
       >
         <FormProvider {...methods}>
