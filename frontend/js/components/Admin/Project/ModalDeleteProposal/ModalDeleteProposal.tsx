@@ -4,6 +4,7 @@ import { Field, reduxForm, submit } from 'redux-form'
 import { createFragmentContainer, graphql } from 'react-relay'
 import { FormattedMessage, useIntl } from 'react-intl'
 import Modal from '~ds/Modal/Modal'
+import { Heading } from '@cap-collectif/ui'
 import CloseButton from '~/components/Form/CloseButton'
 import toggle from '~/components/Form/Toggle'
 import renderInput from '~/components/Form/Field'
@@ -13,7 +14,6 @@ import Icon, { ICON_NAME } from '@shared/ui/LegacyIcons/Icon'
 import colors from '~/utils/colors'
 import type { ProjectAdminPageParameters } from '~/components/Admin/Project/ProjectAdminPage.reducer'
 import type { ModalDeleteProposal_proposal } from '~relay/ModalDeleteProposal_proposal.graphql'
-import Heading from '~ui/Primitives/Heading'
 import Tooltip from '~ds/Tooltip/Tooltip'
 import Flex from '~ui/Primitives/Layout/Flex'
 import { ProposalPublicationStatus } from '~relay/DeleteProposalMutation.graphql'
@@ -65,7 +65,7 @@ const ModalDeleteProposal = ({ onClose, show, handleSubmit, dispatch }: Props) =
       })}
     >
       <Modal.Header>
-        <Heading id="contained-modal-title-lg">
+        <Heading id="contained-modal-title-lg" fontSize="18px !important">
           <FormattedMessage id="move.contribution.to.trash" />
         </Heading>
       </Modal.Header>

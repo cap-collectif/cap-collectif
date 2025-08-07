@@ -3,13 +3,12 @@ import { FormattedHTMLMessage, useIntl } from 'react-intl'
 import { HelpBlock } from 'react-bootstrap'
 import { useState } from 'react'
 import type { DropzoneFile } from 'react-dropzone'
-import { Heading } from '@cap-collectif/ui'
+import { Heading, Button } from '@cap-collectif/ui'
 import Flex from '~ui/Primitives/Layout/Flex'
 import Modal from '~ds/Modal/Modal'
 import Text from '~ui/Primitives/Text'
 import colors, { styleGuideColors } from '~/utils/colors'
 import Icon, { ICON_NAME as ICON, ICON_SIZE } from '~ds/Icon/Icon'
-import Button from '~ds/Button/Button'
 import type { Uuid } from '~/types'
 import FileUpload from '~/components/Form/FileUpload'
 import UpdatePaperVoteMutation from '~/mutations/UpdatePaperVoteMutation'
@@ -167,7 +166,7 @@ export const ImportPaperVotesFromCsvModal = ({
     >
       <Modal.Header paddingY={6} borderBottom={`1px solid ${colors.borderColor}`}>
         <Flex justifyContent="space-between" alignItems="center">
-          <Heading>
+          <Heading fontSize="18px !important">
             {intl.formatMessage({
               id: 'add-paper-votes',
             })}
@@ -291,14 +290,14 @@ export const ImportPaperVotesFromCsvModal = ({
             target="_blank"
             rel="noreferrer"
           >
-            <Text color={styleGuideColors.blue500} fontWeight="600">
+            <Flex color={styleGuideColors.blue500} fontWeight="600" alignItems="center">
               <Icon name={ICON.CIRCLE_INFO} size={ICON_SIZE.MD} verticalAlign="-7px" marginRight="4px" />
               <Text as="span" fontWeight={600} className="ml-10">
                 {intl.formatMessage({
                   id: 'information',
                 })}
               </Text>
-            </Text>
+            </Flex>
           </a>
           <Button
             disabled={inputData.length === 0}
