@@ -7,9 +7,13 @@ use Capco\AppBundle\Entity\Post;
 use Capco\AppBundle\Entity\Project;
 use Capco\AppBundle\Entity\Proposal;
 use Capco\AppBundle\Entity\Theme;
+use Capco\AppBundle\Enum\OrderDirection;
+use Capco\AppBundle\Enum\PostOrderField;
 use Capco\AppBundle\Enum\ProjectVisibilityMode;
 use Capco\UserBundle\Entity\User;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\NonUniqueResultException;
+use Doctrine\ORM\NoResultException;
 use Doctrine\ORM\QueryBuilder;
 use Doctrine\ORM\Tools\Pagination\Paginator;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -350,6 +354,56 @@ class PostRepository extends EntityRepository
         ;
     }
 
+    /**
+     * @throws NonUniqueResultException
+     * @throws NoResultException
+     */
+    public function countPublicPosts(
+        ?string $themeId = null,
+        ?string $projectId = null,
+    ): int {
+        $qb = $this->getPublicPostsQueryBuilder($themeId, $projectId);
+
+        return (int) $qb->select('count(p.id)')
+            ->getQuery()
+            ->getSingleScalarResult()
+        ;
+    }
+
+    /**
+     * @param array{field: string, direction: string} $orderBy
+     *
+     * @return Post[]
+     */
+    public function getPublicPosts(
+        ?string $themeId = null,
+        ?string $projectId = null,
+        int $offset = 0,
+        int $limit = 50,
+        array $orderBy = ['field' => 'publishedAt', 'direction' => 'DESC'],
+    ): array {
+        $qb = $this->getPublicPostsQueryBuilder($themeId, $projectId);
+
+        if (
+            [] !== $orderBy
+            && \array_key_exists('field', $orderBy)
+            && \array_key_exists('direction', $orderBy)
+            && \array_key_exists($orderBy['field'], PostOrderField::SORT_FIELD)
+            && \array_key_exists($orderBy['direction'], OrderDirection::SORT_DIRECTION)
+        ) {
+            $field = PostOrderField::SORT_FIELD[$orderBy['field']];
+            $direction = OrderDirection::SORT_DIRECTION[$orderBy['direction']];
+            $qb->orderBy("p.{$field}", $direction);
+        }
+
+        return $qb
+            ->setFirstResult($offset)
+            ->setMaxResults($limit)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     protected function getIsPublishedQueryBuilder(string $alias = 'p'): QueryBuilder
     {
         return $this->createQueryBuilder($alias)
@@ -357,6 +411,31 @@ class PostRepository extends EntityRepository
             ->andWhere($alias . '.publishedAt <= :now')
             ->setParameter('now', new \DateTime())
         ;
+    }
+
+    private function getPublicPostsQueryBuilder(
+        ?string $themeId = null,
+        ?string $projectId = null
+    ): QueryBuilder {
+        $qb = $this->getIsPublishedQueryBuilder()
+            ->andWhere('p.displayedOnBlog = true')
+        ;
+
+        if (null !== $themeId) {
+            $qb->leftJoin('p.themes', 't')
+                ->andWhere('t.id = :themeId')
+                ->setParameter('themeId', $themeId)
+            ;
+        }
+
+        if (null !== $projectId) {
+            $qb->leftJoin('p.projects', 'c')
+                ->andWhere('c.id = :projectId')
+                ->setParameter('projectId', $projectId)
+            ;
+        }
+
+        return $qb;
     }
 
     private function createPublishedPostsByProposalQB(Proposal $proposal): QueryBuilder

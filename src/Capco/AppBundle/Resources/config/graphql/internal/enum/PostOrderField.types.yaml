@@ -9,3 +9,6 @@ PostOrderField:
             CREATED_AT:
                 value: !php/const Capco\AppBundle\Enum\PostOrderField::CREATED_AT
                 description: 'Allows ordering a list of posts by when they have been created.'
+            PUBLISHED_AT:
+                value: !php/const Capco\AppBundle\Enum\PostOrderField::PUBLISHED_AT
+                description: 'Allows ordering a list of posts by when they were published.'

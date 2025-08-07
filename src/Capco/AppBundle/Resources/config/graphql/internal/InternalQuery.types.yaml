@@ -18,9 +18,19 @@ InternalQuery:
                 type: '[InternalPage!]!'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPagesResolver", args)'
             posts:
+                type: 'InternalPostConnection!'
                 description: 'Lookup blog posts.'
-                type: '[InternalPost!]!'
+                argsBuilder: 'Relay::ForwardConnection'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryPostsResolver", args)'
+                args:
+                    theme:
+                        type: 'ID'
+                    project:
+                        type: 'ID'
+                    orderBy:
+                        type: 'PostOrder'
+                        defaultValue: { field: PUBLISHED_AT, direction: DESC }
+                        description: 'Ordering options for posts returning from the connection.'
             viewer:
                 type: 'InternalUser!'
             themes:

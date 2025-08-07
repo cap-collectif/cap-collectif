@@ -10822,6 +10822,7 @@ type Post implements Node & UniformResourceLocatable & UniformResourceAdminLocat
   related: Contribution
   displayedOnBlog: Boolean!
   relatedContent: [PostRelatedContent!]!
+  projects: [Project!]!
   viewerDidAuthor: Boolean!
   customCode: String
   isPublished: Boolean!
@@ -10879,6 +10880,9 @@ enum PostOrderField {
 
   """Allows ordering a list of posts by when they have been created."""
   CREATED_AT
+
+  """Allows ordering a list of posts by when they were published."""
+  PUBLISHED_AT
 }
 
 """Represent an owner of a post."""
@@ -13915,7 +13919,20 @@ type Query {
   pages: [Page!]!
 
   """Lookup blog posts."""
-  posts: [Post!]!
+  posts(
+    """
+    Returns the elements in the list that come after the specified cursor.
+    """
+    after: String
+
+    """Returns the first `n` elements from the list."""
+    first: Int = 100
+    theme: ID
+    project: ID
+
+    """Ordering options for posts returning from the connection."""
+    orderBy: PostOrder = {field: PUBLISHED_AT, direction: DESC}
+  ): PostConnection!
 
   """Lookup themes."""
   themes(
