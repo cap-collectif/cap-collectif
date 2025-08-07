@@ -52,6 +52,7 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
   const intl = useIntl()
   const query = useLazyLoadQuery<CreateStepPageQuery>(PROJECT_QUERY, { id: projectId })
   const { setBreadCrumbItems } = useNavBarContext()
+  const [disableStepCreation, setDisableStepCreation] = useState<boolean>(false)
   const project = query?.project
 
   const steps = project?.steps
@@ -108,6 +109,12 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
     return null
   }
 
+  const handleStepCreation = async (stepType: StepType) => {
+    if (disableStepCreation) return
+    setDisableStepCreation(true)
+    await createStep(projectId, stepType)
+  }
+
   return (
     <Flex>
       <Box bg="white" width="70%" p={6} height="100%" borderRadius="8px">
@@ -120,7 +127,7 @@ const CreateStepPage: React.FC<Props> = ({ projectId }) => {
               <Flex
                 onMouseEnter={() => setStepHovered(step.type)}
                 onMouseLeave={() => setStepHovered(null)}
-                onClick={() => createStep(projectId, step.type)}
+                onClick={() => handleStepCreation(step.type)}
                 key={step.type}
                 p={4}
                 borderColor={stepHovered === step.type ? 'blue.200' : ''}
