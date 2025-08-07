@@ -57,7 +57,7 @@ const FRAGMENT = graphql`
 
 export const FilterRadioGroup = ({ options, name, label, value, setValue }) => {
   return (
-    <Flex direction="column" gap="sm">
+    <Flex direction="column" gap="xs">
       <FormLabel label={label} />
       <RadioGroup>
         {options.map(choice => (
