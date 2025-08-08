@@ -323,12 +323,11 @@ class ReplyRepository extends EntityRepository
     /**
      * @return AbstractReply[]
      */
-    public function getBatchOfPublishedReplies(string $questionnaireId, int $offset, int $limit): array
+    public function getBatchOfReplies(string $questionnaireId, int $offset, int $limit): array
     {
         $qb = $this->createQueryBuilder('reply')
             ->select('reply')
             ->where('reply.questionnaire = :questionnaireId')
-            ->andWhere('reply.published = true')
             ->setParameter('questionnaireId', $questionnaireId)
             ->setMaxResults($limit)
             ->setFirstResult($offset)

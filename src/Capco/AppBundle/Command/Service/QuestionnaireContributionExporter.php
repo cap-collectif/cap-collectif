@@ -104,7 +104,7 @@ class QuestionnaireContributionExporter extends ContributionExporter
         }
 
         do {
-            $replies = $this->replyRepository->getBatchOfPublishedReplies(
+            $replies = $this->replyRepository->getBatchOfReplies(
                 $questionnaire->getId(),
                 $replyOffset,
                 self::BATCH_SIZE

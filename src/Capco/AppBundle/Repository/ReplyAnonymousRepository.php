@@ -52,7 +52,6 @@ class ReplyAnonymousRepository extends EntityRepository
 
         $qb
             ->andWhere('replyAnonymous.questionnaire = :questionnaire')
-            ->andWhere('replyAnonymous.published = 1')
             ->setParameter('questionnaire', $questionnaire)
             ->setFirstResult($offset)
             ->setMaxResults($limit)
