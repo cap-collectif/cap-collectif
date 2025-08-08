@@ -1,10 +1,13 @@
 Capco\UserBundle\Entity\UserType:
     UserType1:
         id: 1
+        media: '@UserTypeCitizen'
     UserType2:
         id: 2
+        media: '@UserTypeBusiness'
     UserType3:
         id: 3
+        media: '@UserTypeNonprofit'
     UserType4:
         id: 4
     UserType5:

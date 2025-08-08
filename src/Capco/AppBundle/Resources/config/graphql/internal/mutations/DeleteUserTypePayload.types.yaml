@@ -1,0 +1,6 @@
+DeleteUserTypePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            deletedUserTypeId:
+                type: 'ID!'

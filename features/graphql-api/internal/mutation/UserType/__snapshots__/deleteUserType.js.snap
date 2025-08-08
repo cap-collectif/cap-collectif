@@ -1,0 +1,9 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.deleteUserType deletes an existing user type 1`] = `
+Object {
+  "deleteUserType": Object {
+    "deletedUserTypeId": "1",
+  },
+}
+`;

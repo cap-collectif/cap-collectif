@@ -4499,6 +4499,26 @@ type CreateUserPayload {
   clientMutationId: String
 }
 
+input CreateUserTypeInput {
+  translations: [CreateUserTypeTranslationInput!]!
+  media: ID
+  clientMutationId: String
+}
+
+type CreateUserTypePayload {
+  """User type created successfully !"""
+  userType: UserType!
+  clientMutationId: String
+}
+
+input CreateUserTypeTranslationInput {
+  name: String!
+
+  """the locale of the translation"""
+  locale: TranslationLocale!
+  clientMutationId: String
+}
+
 input CropMediaInput {
   """The media id."""
   mediaId: ID!
@@ -6105,6 +6125,17 @@ input DeleteUserReplyInput {
 type DeleteUserReplyPayload {
   questionnaire: Questionnaire!
   replyId: ID!
+  clientMutationId: String
+}
+
+input DeleteUserTypeInput {
+  """The ID of the user Type"""
+  id: ID!
+  clientMutationId: String
+}
+
+type DeleteUserTypePayload {
+  deletedUserTypeId: ID!
   clientMutationId: String
 }
 
@@ -9255,6 +9286,9 @@ type Mutation {
   handleProposalFormCategoryImage(input: HandleProposalFormCategoryImageInput!): HandleProposalFormCategoryImagePayload
   updateUser(input: UpdateUserInput!): UpdateUserPayload
   saveImapConfig(input: SaveImapConfigInput!): SaveImapConfigPayload
+  createUserType(input: CreateUserTypeInput!): CreateUserTypePayload
+  updateUserType(input: UpdateUserTypeInput!): UpdateUserTypePayload
+  deleteUserType(input: DeleteUserTypeInput!): DeleteUserTypePayload
 }
 
 """A connection to a list of items."""
@@ -20465,6 +20499,19 @@ type UpdateUserReplyPayload {
   clientMutationId: String
 }
 
+input UpdateUserTypeInput {
+  id: ID!
+  translations: [CreateUserTypeTranslationInput!]
+  media: ID
+  clientMutationId: String
+}
+
+type UpdateUserTypePayload {
+  """User type update successfully !"""
+  userType: UserType!
+  clientMutationId: String
+}
+
 input UpdateUsernameInput {
   username: String
   clientMutationId: String
@@ -21531,6 +21578,9 @@ type UserType implements Node {
 
   """The name of the type."""
   name: String!
+
+  """The media associated with this type"""
+  media: Media
 }
 
 """A response"""

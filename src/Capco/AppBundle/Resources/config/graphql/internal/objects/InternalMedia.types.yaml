@@ -1,11 +1,9 @@
 InternalMedia:
     type: object
     inherits:
-        - UniformResourceLocatable
+        - PreviewMedia
     config:
         name: Media
-        interfaces:
-            - UniformResourceLocatable
         description: 'A media'
         fields:
             id:

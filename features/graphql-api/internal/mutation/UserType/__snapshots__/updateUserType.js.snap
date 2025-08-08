@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.updateUserType updates a user type 1`] = `
+Object {
+  "updateUserType": Object {
+    "userType": Object {
+      "id": "4",
+      "media": Object {
+        "id": "user-type-nonprofit",
+      },
+      "name": "Institution avec media",
+    },
+  },
+}
+`;

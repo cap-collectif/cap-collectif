@@ -1,0 +1,11 @@
+UpdateUserTypeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Updates a user type'
+        fields:
+            id:
+                type: 'ID!'
+            translations:
+                type: '[CreateUserTypeTranslationInput!]'
+            media:
+                type: 'ID'

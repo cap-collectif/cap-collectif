@@ -2,6 +2,7 @@
 
 namespace Capco\UserBundle\Entity;
 
+use Capco\AppBundle\Entity\Media;
 use Capco\AppBundle\Model\TranslatableInterface;
 use Capco\AppBundle\Traits\TranslatableTrait;
 use Capco\AppBundle\Traits\UuidTrait;
@@ -19,6 +20,8 @@ class UserType implements EntityInterface, TranslatableInterface, \Stringable
     use UuidTrait;
 
     final public const FILTER_ALL = 'all';
+
+    private ?Media $media = null;
 
     /**
      * @var \DateTime
@@ -86,6 +89,18 @@ class UserType implements EntityInterface, TranslatableInterface, \Stringable
     public function setUpdatedAt(\DateTime $updatedAt): self
     {
         $this->updatedAt = $updatedAt;
+
+        return $this;
+    }
+
+    public function getMedia(): ?Media
+    {
+        return $this->media;
+    }
+
+    public function setMedia(?Media $media): self
+    {
+        $this->media = $media;
 
         return $this;
     }

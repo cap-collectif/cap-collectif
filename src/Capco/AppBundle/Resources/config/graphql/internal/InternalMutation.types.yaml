@@ -1872,3 +1872,26 @@ InternalMutation:
                     inputType: SaveImapConfigInput
                     payloadType: SaveImapConfigPayload
                     mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\SaveImapConfigMutation", args["input"]["serverUrl"], args["input"]["folder"], args["input"]["email"], args["input"]["password"], args["input"]["stepId"], args["input"]["id"])'
+
+            # UserType
+            createUserType:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: CreateUserTypeInput
+                    payloadType: CreateUserTypePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\CreateUserTypeMutation", args)'
+            updateUserType:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: UpdateUserTypeInput
+                    payloadType: UpdateUserTypePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\UpdateUserTypeMutation", args)'
+            deleteUserType:
+                access: "@=hasRole('ROLE_ADMIN')"
+                builder: 'Relay::Mutation'
+                builderConfig:
+                    inputType: DeleteUserTypeInput
+                    payloadType: DeleteUserTypePayload
+                    mutateAndGetPayload: '@=mutation("Capco\\AppBundle\\GraphQL\\Mutation\\DeleteUserTypeMutation", value["id"])'

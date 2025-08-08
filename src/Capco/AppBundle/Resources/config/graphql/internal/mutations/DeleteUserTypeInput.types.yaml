@@ -1,0 +1,8 @@
+DeleteUserTypeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Deletes a user type'
+        fields:
+            id:
+                type: 'ID!'
+                description: 'The ID of the user Type'

@@ -1,0 +1,7 @@
+UpdateUserTypePayload:
+    type: relay-mutation-payload
+    config:
+        fields:
+            userType:
+                type: 'InternalUserType!'
+                description: 'User type update successfully !'

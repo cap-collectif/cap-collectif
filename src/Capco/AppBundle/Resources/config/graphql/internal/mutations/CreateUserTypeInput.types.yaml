@@ -1,0 +1,9 @@
+CreateUserTypeInput:
+    type: relay-mutation-input
+    config:
+        description: 'Creates a user type'
+        fields:
+            translations:
+                type: '[CreateUserTypeTranslationInput!]!'
+            media:
+                type: 'ID'

@@ -2198,6 +2198,9 @@ type UserType implements Node {
 
   """The name of the type."""
   name: String!
+
+  """The media associated with this type"""
+  media: Media
 }
 
 """A value response."""

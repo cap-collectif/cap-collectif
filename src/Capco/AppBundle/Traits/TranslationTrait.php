@@ -61,6 +61,7 @@ trait TranslationTrait
         return true;
     }
 
+    // todo this method is used once and its behavior is weird, maybe rework this in the Translatable instead of the Translation
     public function setAsNewTranslation(TranslatableInterface $parent, TranslationInterface $translation): self
     {
         $parent->getNewTranslations()->set((string) $translation->getLocale(), $translation);

@@ -1,10 +1,9 @@
-UserType:
+InternalUserType:
     type: object
     inherits:
-        - Node
+        - PreviewUserType
     config:
-        interfaces:
-            - Node
+        name: UserType
         description: 'A type of person'
         fields:
             id:
@@ -13,3 +12,6 @@ UserType:
             name:
                 type: 'String!'
                 description: 'The name of the type.'
+            media:
+                type: 'InternalMedia'
+                description: 'The media associated with this type'

@@ -37,4 +37,4 @@ Author:
             isProjectAdmin:
                 type: 'Boolean!'
             userType:
-                type: 'UserType'
+                type: 'InternalUserType'

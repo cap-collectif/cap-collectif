@@ -458,3 +458,27 @@ Capco\AppBundle\Entity\Media:
         name: IlesDeNantes
         category: '@MediaCategory1'
         providerReference: ile_de_nantes.jpeg
+    UserTypeCitizen:
+        id: 'user-type-citizen'
+        binaryContentPath: user_type/citizen_kane.jpeg
+        name: CitizenKane
+        category: '@MediaCategory1'
+        providerReference: citizen_kane.jpeg
+    UserTypeBusiness:
+        id: 'user-type-business'
+        binaryContentPath: user_type/abba_money.jpg
+        name: AbbaMoney
+        category: '@MediaCategory1'
+        providerReference: abba_money.jpg
+    UserTypeNonprofit:
+        id: 'user-type-nonprofit'
+        binaryContentPath: user_type/nonprofit.jpg
+        name: Nonprofit
+        category: '@MediaCategory1'
+        providerReference: nonprofit.jpg
+    UserTypeInstitution:
+        id: 'user-type-institution'
+        binaryContentPath: user_type/institution.jpg
+        name: Institution
+        category: '@MediaCategory1'
+        providerReference: institution.jpg

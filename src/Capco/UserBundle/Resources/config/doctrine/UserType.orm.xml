@@ -22,6 +22,10 @@
             <gedmo:timestampable on="change" field="slug" />
         </field>
 
+        <many-to-one field="media" target-entity="Capco\AppBundle\Entity\Media">
+            <join-column name="media_id" on-delete="SET NULL" />
+        </many-to-one>
+
     </entity>
 
 </doctrine-mapping>

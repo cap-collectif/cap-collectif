@@ -6,6 +6,9 @@ use Capco\AppBundle\Entity\Steps\CollectStep;
 use Capco\AppBundle\Traits\LocaleRepositoryTrait;
 use Capco\UserBundle\Entity\UserType;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Doctrine\ORM\QueryBuilder;
 
 /**
  * @method null|UserType find($id, $lockMode = null, $lockVersion = null)
@@ -17,18 +20,29 @@ class UserTypeRepository extends EntityRepository
 {
     use LocaleRepositoryTrait;
 
-    public function findAllToArray(?string $locale = null)
+    /**
+     * @return array<int, mixed>
+     */
+    public function findAllToArray(?string $locale = null): array
     {
-        $locale = $this->getLocale($locale);
-
-        $qb = $this->createQueryBuilder('ut')
+        return $this->findAllQueryBuilder($locale)
             ->select('utt.name as name, ut.id as id')
-            ->leftJoin('ut.translations', 'utt')
-            ->where('utt.locale = :locale')
-            ->setParameter('locale', $locale)
+            ->getQuery()
+            ->getArrayResult()
         ;
+    }
 
-        return $qb->getQuery()->getArrayResult();
+    /**
+     * @return array<int, mixed>
+     */
+    public function findAllWithMediaToArray(?string $locale = null): array
+    {
+        return $this->findAllQueryBuilder($locale)
+            ->select('ut', 'utt', 'utm')
+            ->leftJoin('ut.media', 'utm')
+            ->getQuery()
+            ->getArrayResult()
+        ;
     }
 
     public function findOneBySlug(?string $slug): ?UserType
@@ -82,5 +96,28 @@ class UserTypeRepository extends EntityRepository
         $qb = $this->createQueryBuilder('ut')->select('COUNT(ut.id)');
 
         return (int) $qb->getQuery()->getSingleScalarResult();
+    }
+
+    /**
+     * @throws OptimisticLockException
+     * @throws ORMException
+     */
+    public function remove(UserType $entity, bool $flush = true): void
+    {
+        $this->_em->remove($entity);
+        if ($flush) {
+            $this->_em->flush();
+        }
+    }
+
+    private function findAllQueryBuilder(?string $locale = null): QueryBuilder
+    {
+        $locale = $this->getLocale($locale);
+
+        return $this->createQueryBuilder('ut')
+            ->leftJoin('ut.translations', 'utt')
+            ->where('utt.locale = :locale')
+            ->setParameter('locale', $locale)
+        ;
     }
 }

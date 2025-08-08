@@ -7,7 +7,7 @@ PreviewUser:
         name: User
         fields:
             userType:
-                type: 'UserType'
+                type: 'PreviewUserType'
                 description: 'The type of the person.'
             # This is currently a connection
             # But in Proposal and Reply we use a simple array

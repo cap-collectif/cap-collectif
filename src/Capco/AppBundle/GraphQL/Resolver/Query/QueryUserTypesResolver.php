@@ -2,7 +2,6 @@
 
 namespace Capco\AppBundle\GraphQL\Resolver\Query;
 
-use Capco\UserBundle\Entity\UserType;
 use Capco\UserBundle\Repository\UserTypeRepository;
 use Overblog\GraphQLBundle\Definition\Resolver\QueryInterface;
 
@@ -13,10 +12,24 @@ class QueryUserTypesResolver implements QueryInterface
     }
 
     /**
-     * @return array<int, UserType>
+     * @return array<int, array<string, mixed>>
      */
     public function __invoke(): array
     {
-        return $this->userTypeRepository->findAllToArray();
+        $queryResult = $this->userTypeRepository->findAllWithMediaToArray();
+
+        $result = [];
+        foreach ($queryResult as $row) {
+            $formattedRow = [
+                'id' => $row['id'],
+                'name' => array_shift($row['translations'])['name'],
+            ];
+
+            $formattedRow['media'] = $row['media'] ?? null;
+
+            $result[] = $formattedRow;
+        }
+
+        return $result;
     }
 }

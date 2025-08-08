@@ -671,7 +671,7 @@ InternalQuery:
                         type: 'String'
                         description: 'The term to filter comments on the body or the author username.'
             userTypes:
-                type: '[UserType!]!'
+                type: '[InternalUserType!]!'
                 description: 'List of user types.'
                 resolve: '@=query("Capco\\AppBundle\\GraphQL\\Resolver\\Query\\QueryUserTypesResolver")'
             sources:

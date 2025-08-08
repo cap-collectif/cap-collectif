@@ -1,0 +1,10 @@
+CreateUserTypeTranslationInput:
+    type: relay-mutation-input
+    config:
+        description: 'Creates a user type translation'
+        fields:
+            name:
+                type: 'String!'
+            locale:
+                type: 'TranslationLocale!'
+                description: 'the locale of the translation'

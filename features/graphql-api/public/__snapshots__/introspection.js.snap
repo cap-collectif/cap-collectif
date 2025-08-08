@@ -35,6 +35,9 @@ Object {
         "name": "UserType",
       },
       Object {
+        "name": "Media",
+      },
+      Object {
         "name": "Int",
       },
       Object {
@@ -102,9 +105,6 @@ Object {
       },
       Object {
         "name": "Contribution",
-      },
-      Object {
-        "name": "Media",
       },
       Object {
         "name": "ProjectType",

@@ -1,0 +1,27 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`mutations.createUserType creates a new user type 1`] = `
+Object {
+  "createUserType": Object {
+    "userType": Object {
+      "id": Any<String>,
+      "media": null,
+      "name": "ONG",
+    },
+  },
+}
+`;
+
+exports[`mutations.createUserType creates a new user type with a media 1`] = `
+Object {
+  "createUserType": Object {
+    "userType": Object {
+      "id": Any<String>,
+      "media": Object {
+        "id": "user-type-nonprofit",
+      },
+      "name": "Licorne",
+    },
+  },
+}
+`;

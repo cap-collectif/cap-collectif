@@ -103,11 +103,15 @@ const ProposalsWithDraftQuery = /* GraphQL */ `
 describe('Preview|Query.proposals connection', () => {
   it('fetches the first hundred proposals with a cursor', async () => {
     await expect(
-      graphql(OpenDataProposalsQuery, {
-        id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
-        count: 100,
-        orderBy: [{ field: 'PUBLISHED_AT', direction: 'ASC' }],
-      }),
+      graphql(
+        OpenDataProposalsQuery,
+        {
+          id: 'Q29sbGVjdFN0ZXA6Y29sbGVjdHN0ZXAx',
+          count: 100,
+          orderBy: [{ field: 'PUBLISHED_AT', direction: 'ASC' }],
+        },
+        'internal',
+      ),
     ).resolves.toMatchSnapshot();
   });
 
