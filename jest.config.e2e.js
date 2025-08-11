@@ -1,12 +1,19 @@
 module.exports = {
   roots: ['features/graphql-api'],
-  testPathIgnorePatterns: ['<rootDir>/features/graphql-api/_setup.js', '<rootDir>/features/graphql-api/resetDatabaseBeforeEach.js'],
+  testPathIgnorePatterns: [
+    '<rootDir>/features/graphql-api/_setup.js',
+    '<rootDir>/features/graphql-api/resetDatabaseBeforeEach.js',
+    '<rootDir>/features/graphql-api/enablePublicApi.js'
+  ],
   testEnvironment: 'node',
   testMatch: ['**/*.js'],
   transform: {
     '.*': 'babel-jest',
   },
-  setupFilesAfterEnv: ['<rootDir>/jest-setup.e2e.js'],
+  setupFilesAfterEnv: [
+    '<rootDir>/jest-setup.e2e.js',
+    '<rootDir>/features/graphql-api/enablePublicApi.js'
+  ],
   globalSetup: '<rootDir>/jest-setup-global.e2e.js',
   snapshotFormat: {
     escapeString: true,
