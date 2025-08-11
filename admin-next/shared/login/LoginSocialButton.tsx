@@ -181,8 +181,8 @@ export const FranceConnectButton = styled.div<{
   }
   .loginIcon {
     & > svg {
-      height: 60px;
-      width: 228px;
+      height: 56px;
+      width: 209px;
     }
   }
 `
