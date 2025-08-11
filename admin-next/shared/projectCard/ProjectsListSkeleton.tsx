@@ -1,14 +1,20 @@
 import * as React from 'react'
-import { Box, Flex, Grid, AbstractCard, Skeleton } from '@cap-collectif/ui'
+import { Box, Flex, Grid, AbstractCard, Skeleton, GridProps } from '@cap-collectif/ui'
 import { pxToRem } from '@shared/utils/pxToRem'
 
 type Props = {
   count: number
   templateColumns?: string | Array<string>
-}
+} & GridProps
 
-const ProjectsListPlaceholder = ({ count, templateColumns }: Props) => (
-  <Grid templateColumns={templateColumns || ['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap="lg" mt={8} px={['md', 0]}>
+const ProjectsListPlaceholder = ({ count, templateColumns, ...props }: Props) => (
+  <Grid
+    templateColumns={templateColumns || ['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']}
+    gap="lg"
+    mt={8}
+    px={['md', 0]}
+    {...props}
+  >
     {[...Array(count)].map((_, index) => (
       <Flex key={index}>
         <AbstractCard width="100%" bg="white" p={4} flexDirection="column" display="flex" border="unset">

@@ -1,7 +1,6 @@
 import {
   Button,
   CapUIIcon,
-  CapUIIconSize,
   CapUIModalSize,
   Flex,
   FormLabel,
@@ -174,25 +173,17 @@ const ProjectListSectionFiltersModal: FC<
         setStatusInternal(status)
       }}
       disclosure={
-        <Flex
+        <Button
+          variant="secondary"
           id="project-button-filter"
-          as="button"
           type="button"
-          pl={3}
-          pr={2}
           py="xs"
-          alignItems="center"
-          borderRadius="button"
-          border="button"
-          borderColor="gray.300"
-          spacing={1}
           justifyContent="center"
-          color="gray.900"
           width={['100%', 'auto']}
+          rightIcon={<Icon name={CapUIIcon.ArrowDown} />}
         >
-          <div>{intl.formatMessage({ id: 'global.more_filters' })}</div>
-          <Icon name={CapUIIcon.ArrowDown} size={CapUIIconSize.Sm} color="gray.700" />
-        </Flex>
+          {intl.formatMessage({ id: 'global.more_filters' })}
+        </Button>
       }
     >
       {({ hide }) => (

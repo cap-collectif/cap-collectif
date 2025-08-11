@@ -42,54 +42,62 @@ exports[`<Projects /> renders correctly 1`] = `
     className="sc-bcXGCL gjsubU project-list-section"
   >
     <div
-      className="sc-bcXGCL jYYNjb"
+      className="sc-bcXGCL hiMfFf"
     >
       <div
-        className="sc-bcXGCL eYRiRd"
+        className="sc-bcXGCL jYJXfX"
       >
         <div
-          className="sc-bcXGCL gCiHVh"
+          className="sc-bcXGCL eYRiRd"
         >
           <div
-            className="sc-bcXGCL bLdUPi"
+            className="sc-bcXGCL gCiHVh"
           >
             <div
-              className="sc-bcXGCL isbCvH sc-jRwapC"
-              style={{}}
-            />
+              className="sc-bcXGCL bLdUPi"
+            >
+              <div
+                className="sc-bcXGCL isbCvH sc-jRwapC"
+                style={{}}
+              />
+              <div
+                className="sc-bcXGCL fpCAzA sc-jRwapC"
+                style={{}}
+              />
+            </div>
             <div
-              className="sc-bcXGCL fpCAzA sc-jRwapC"
-              style={{}}
-            />
-          </div>
-          <div
-            className="sc-bcXGCL bLdUPi"
-          >
+              className="sc-bcXGCL bLdUPi"
+            >
+              <div
+                className="sc-bcXGCL isbCvH sc-jRwapC"
+                style={{}}
+              />
+              <div
+                className="sc-bcXGCL fpCAzA sc-jRwapC"
+                style={{}}
+              />
+            </div>
             <div
-              className="sc-bcXGCL isbCvH sc-jRwapC"
-              style={{}}
-            />
-            <div
-              className="sc-bcXGCL fpCAzA sc-jRwapC"
-              style={{}}
-            />
-          </div>
-          <div
-            className="sc-bcXGCL bLdUPi"
-          >
-            <div
-              className="sc-bcXGCL isbCvH sc-jRwapC"
-              style={{}}
-            />
-            <div
-              className="sc-bcXGCL fpCAzA sc-jRwapC"
-              style={{}}
-            />
+              className="sc-bcXGCL bLdUPi"
+            >
+              <div
+                className="sc-bcXGCL isbCvH sc-jRwapC"
+                style={{}}
+              />
+              <div
+                className="sc-bcXGCL fpCAzA sc-jRwapC"
+                style={{}}
+              />
+            </div>
           </div>
         </div>
       </div>
+    </div>
+    <div
+      className="sc-bcXGCL jYYNjb"
+    >
       <div
-        className="sc-bcXGCL gjsubU project-list-section-projects"
+        className="sc-bcXGCL fQBHfk project-list-section-projects"
       >
         <div
           className="sc-bcXGCL bezsBU"

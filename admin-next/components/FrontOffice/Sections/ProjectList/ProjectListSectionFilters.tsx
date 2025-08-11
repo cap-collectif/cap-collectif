@@ -7,6 +7,7 @@ import { FC, useId } from 'react'
 import { useIntl } from 'react-intl'
 import { graphql, useLazyLoadQuery } from 'react-relay'
 import ProjectListSectionFiltersModal from './ProjectListSectionFiltersModal'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
 
 type FiltersProps = {
   type: string
@@ -63,10 +64,14 @@ export const ProjectListSectionFilters: FC<BoxProps & ProjectListSectionFiltersP
   setStatus,
   ...rest
 }) => {
+  const { siteColors } = useAppContext()
+  const { pageTitleColor } = siteColors
   const searchID = useId()
   const themeID = useId()
   const authorID = useId()
   const isMobile = useIsMobile()
+
+  const labelSx = { span: { color: pageTitleColor } }
 
   const query = useLazyLoadQuery<ProjectListSectionFiltersQuery>(FILTERS_QUERY, {})
   const { themes, projectAuthors } = query
@@ -106,7 +111,7 @@ export const ProjectListSectionFilters: FC<BoxProps & ProjectListSectionFiltersP
     >
       <Flex gap={4} mb={['lg', 0]} flexWrap="wrap" alignItems="end">
         <Flex direction="column" gap="xxs" width={['100%', 'unset']}>
-          <FormLabel label={intl.formatMessage({ id: 'global.menu.search' })} htmlFor={searchID} />
+          <FormLabel label={intl.formatMessage({ id: 'global.menu.search' })} htmlFor={searchID} sx={labelSx} />
           <Search
             id="search-in-project-list-by-title"
             variantSize={CapInputSize.Md}
@@ -119,7 +124,7 @@ export const ProjectListSectionFilters: FC<BoxProps & ProjectListSectionFiltersP
         </Flex>
         {hasThemes ? (
           <Flex direction="column" gap="xxs" width={['100%', 'unset']}>
-            <FormLabel label={intl.formatMessage({ id: 'admin.label.theme' })} htmlFor={themeID} />
+            <FormLabel label={intl.formatMessage({ id: 'admin.label.theme' })} htmlFor={themeID} sx={labelSx} />
             <Select
               variantSize={CapInputSize.Md}
               isClearable
@@ -137,7 +142,7 @@ export const ProjectListSectionFilters: FC<BoxProps & ProjectListSectionFiltersP
         ) : null}
         {hasAuthors ? (
           <Flex direction="column" gap="xxs" width={['100%', 'unset']}>
-            <FormLabel label={intl.formatMessage({ id: 'global.author' })} htmlFor={authorID} />
+            <FormLabel label={intl.formatMessage({ id: 'global.author' })} htmlFor={authorID} sx={labelSx} />
             <Select
               variantSize={CapInputSize.Md}
               isClearable

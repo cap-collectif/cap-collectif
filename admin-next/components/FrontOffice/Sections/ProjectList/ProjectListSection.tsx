@@ -11,6 +11,9 @@ import { ProjectListSectionFilters, ProjectListSectionFiltersProps } from './Pro
 import ProjectsListPlaceholder, { ProjectsListFiltersPlaceholder } from '@shared/projectCard/ProjectsListSkeleton'
 import { pxToRem } from '@shared/utils/pxToRem'
 import { ProjectOrderField } from '@relay/ProjectListSectionQuery.graphql'
+import { useAppContext } from '@components/BackOffice/AppProvider/App.context'
+
+const OVERFLOW_HEIGHT = 184
 
 export const ProjectListSectionListQuery = graphql`
   # on Query for now - maybe on Section later 😇
@@ -64,7 +67,7 @@ export const ProjectListSectionList: FC<{
   const { data, loadNext, hasNext, isLoadingNext } = usePaginationFragment(ProjectListSectionListQuery, queryKey)
 
   return (
-    <Box className="project-list-section-projects">
+    <Box className="project-list-section-projects" mt={[0, pxToRem(-OVERFLOW_HEIGHT)]}>
       {data.projects?.totalCount ? (
         <>
           <Grid templateColumns={['1fr', 'repeat(2, 1fr)', 'repeat(3, 1fr)']} gap="lg" mt={8}>
@@ -150,32 +153,39 @@ export const ProjectListSection: FC<
   orderByFilter,
   ...rest
 }) => {
+  const { siteColors } = useAppContext()
   const query = useFragment(FRAGMENT, queryKey)
 
   return (
     <Box as="section" className="project-list-section" {...rest}>
+      <Box mx="auto" bg={siteColors.pageBackgroundHeaderColor}>
+        <Box mx="auto" maxWidth={pxToRem(1280)} px={[0, 6]} pb={['xl', pxToRem(OVERFLOW_HEIGHT)]}>
+          <Suspense fallback={<ProjectsListFiltersPlaceholder />}>
+            <ProjectListSectionFilters
+              term={term}
+              setTerm={setTerm}
+              orderBy={orderBy || 'PUBLISHED_AT'}
+              setOrderBy={setOrderBy}
+              author={author}
+              setAuthor={setAuthor}
+              type={type}
+              setType={setType}
+              state={state}
+              setState={setState}
+              theme={theme}
+              setTheme={setTheme}
+              district={district}
+              setDistrict={setDistrict}
+              status={status}
+              setStatus={setStatus}
+            />
+          </Suspense>
+        </Box>
+      </Box>
       <Box mx="auto" maxWidth={pxToRem(1280)} px={[0, 6]} mt={['xl', 'xxl']} pb={['xl', 'xxl']}>
-        <Suspense fallback={<ProjectsListFiltersPlaceholder />}>
-          <ProjectListSectionFilters
-            term={term}
-            setTerm={setTerm}
-            orderBy={orderBy || 'PUBLISHED_AT'}
-            setOrderBy={setOrderBy}
-            author={author}
-            setAuthor={setAuthor}
-            type={type}
-            setType={setType}
-            state={state}
-            setState={setState}
-            theme={theme}
-            setTheme={setTheme}
-            district={district}
-            setDistrict={setDistrict}
-            status={status}
-            setStatus={setStatus}
-          />
-        </Suspense>
-        <Suspense fallback={<ProjectsListPlaceholder count={10} />}>
+        <Suspense
+          fallback={<ProjectsListPlaceholder count={10} mt={[0, pxToRem(-OVERFLOW_HEIGHT)]}></ProjectsListPlaceholder>}
+        >
           <ProjectListSectionList query={query} />
         </Suspense>
       </Box>
