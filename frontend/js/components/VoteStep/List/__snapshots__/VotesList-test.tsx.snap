@@ -256,7 +256,6 @@ Array [
                     className="sc-bcXGCL jDGtwv cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
-                    tabIndex={-1}
                     title="<mock-value-for-field-\\"name\\">"
                   >
                     &lt;mock-value-for-field-"name"&gt;

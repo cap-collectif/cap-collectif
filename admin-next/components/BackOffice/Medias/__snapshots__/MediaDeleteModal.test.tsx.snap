@@ -19,7 +19,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -28,7 +28,7 @@ exports[`<MediaDeleteModal /> should render correctly 1`] = `
       }
     >
       <div
-        className="sc-bcXGCL JcTvy sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL JcTvy sc-GKYOR dCANLh cap-modal"
         style={
           {
             "opacity": 0,

@@ -188,7 +188,6 @@ export const QuestionnaireStepFormQuestionnaire: React.FC<{
               const isSection = type === 'section'
               const isSubSection = questionsValues[index]?.level
               return (
-                // @ts-expect-error MAJ DS Props
                 <DragnDrop.Item draggableId={question.id} index={index} key={question.id}>
                   <ListCard.Item
                     bg="white"

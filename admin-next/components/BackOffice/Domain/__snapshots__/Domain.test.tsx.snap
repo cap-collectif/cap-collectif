@@ -63,7 +63,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH cmIMrK ffwPGo cap-input"
+          className="sc-bcXGCL sc-dwnPIk cmIMrK euPyfY cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -148,7 +148,6 @@ exports[`<Domain /> <TestDomain /> should render correctly with ACTIVE status 1`
                 className="sc-bcXGCL dezjdY cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title="custom.domain.com"
               >
                 <span
@@ -273,7 +272,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
         </label>
         <input
           aria-required={true}
-          className="sc-bcXGCL sc-UpCiH cmIMrK ffwPGo cap-input"
+          className="sc-bcXGCL sc-dwnPIk cmIMrK euPyfY cap-input"
           disabled={true}
           id="subDomain"
           name="subDomain"
@@ -351,7 +350,7 @@ exports[`<Domain /> <TestDomain /> should render correctly with IDLE status 1`] 
             className="sc-bcXGCL kjyNhh cap-input-group"
           >
             <input
-              className="sc-bcXGCL sc-UpCiH cmIMrK ffwPGo cap-input"
+              className="sc-bcXGCL sc-dwnPIk cmIMrK euPyfY cap-input"
               disabled={false}
               id="customDomain"
               name="customDomain"

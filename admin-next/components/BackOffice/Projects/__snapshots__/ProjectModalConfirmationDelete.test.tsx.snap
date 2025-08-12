@@ -25,7 +25,7 @@ exports[`<ProjectModalConfirmationDelete /> <TestModalConfirmationDelete /> shou
   </button>,
   <div
     aria-orientation="vertical"
-    className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
+    className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
     data-dialog={true}
     hidden={true}
     id="id-g"

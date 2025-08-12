@@ -77,7 +77,6 @@ const UIProviderWithTheme: FC<{ SSRData: layoutQuery$data; children: React.React
   }, [customCode, executeAnalytics, analyticsScript, executeAds, adsScript])
 
   return (
-    /** @ts-expect-error MAJ DS to make CapUIProvider have valid children props */
     <CapUIProvider theme={CapUITheme} resetCSS>
       <LazyMotion features={domAnimation}>
         {customCode?.value ? <div id="custom-code" dangerouslySetInnerHTML={{ __html: customCode?.value }} /> : null}

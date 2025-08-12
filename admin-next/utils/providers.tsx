@@ -33,7 +33,6 @@ const Providers: React.FC<ProvidersProps> = ({
       {/** @ts-expect-error MAJ react-intl */}
       <IntlProvider locale={intl.locale} messages={intl.messages}>
         <NoSSR>
-          {/** @ts-expect-error MAJ DS to make CapUIProvider have valid children props */}
           <CapUIProvider>
             <AppProvider viewerSession={viewerSession} appVersion={appVersion} siteColors={siteColors}>
               <LazyMotion features={domAnimation}>{children}</LazyMotion>

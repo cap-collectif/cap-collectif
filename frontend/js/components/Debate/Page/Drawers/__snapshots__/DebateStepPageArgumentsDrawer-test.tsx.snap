@@ -102,7 +102,6 @@ Array [
                         className="sc-bcXGCL cVUbaE cap-tag"
                         onBlur={[Function]}
                         onFocus={[Function]}
-                        tabIndex={-1}
                         title=""
                       >
                         <span
@@ -120,7 +119,6 @@ Array [
                           className="sc-bcXGCL bOZdHG cap-tag"
                           onBlur={[Function]}
                           onFocus={[Function]}
-                          tabIndex={-1}
                           title=""
                         >
                           <span
@@ -218,7 +216,6 @@ Array [
                         className="sc-bcXGCL cVUbaE cap-tag"
                         onBlur={[Function]}
                         onFocus={[Function]}
-                        tabIndex={-1}
                         title=""
                       >
                         <span
@@ -236,7 +233,6 @@ Array [
                           className="sc-bcXGCL bOZdHG cap-tag"
                           onBlur={[Function]}
                           onFocus={[Function]}
-                          tabIndex={-1}
                           title=""
                         >
                           <span
@@ -334,7 +330,6 @@ Array [
                         className="sc-bcXGCL cVUbaE cap-tag"
                         onBlur={[Function]}
                         onFocus={[Function]}
-                        tabIndex={-1}
                         title=""
                       >
                         <span
@@ -352,7 +347,6 @@ Array [
                           className="sc-bcXGCL bOZdHG cap-tag"
                           onBlur={[Function]}
                           onFocus={[Function]}
-                          tabIndex={-1}
                           title=""
                         >
                           <span

@@ -17,7 +17,6 @@ Array [
       onBlur={[Function]}
       onClick={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title=""
     >
       <svg

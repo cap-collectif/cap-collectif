@@ -82,7 +82,6 @@ exports[`<Organization /> renders correctly 1`] = `
                   className="sc-bcXGCL gvYJvN cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
-                  tabIndex={-1}
                   title=" global-archived"
                 >
                   <span
@@ -118,7 +117,6 @@ exports[`<Organization /> renders correctly 1`] = `
                     className="sc-bcXGCL kWsHud cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
-                    tabIndex={-1}
                     title="0 project.votes.widget.votes"
                   >
                     <svg
@@ -173,7 +171,6 @@ exports[`<Organization /> renders correctly 1`] = `
                     className="sc-bcXGCL kWsHud cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
-                    tabIndex={-1}
                     title="0 global.contribution"
                   >
                     <svg
@@ -209,7 +206,6 @@ exports[`<Organization /> renders correctly 1`] = `
                     className="sc-bcXGCL kWsHud cap-tag"
                     onBlur={[Function]}
                     onFocus={[Function]}
-                    tabIndex={-1}
                     title="0 capco.section.metrics.participants"
                   >
                     <svg
@@ -264,7 +260,7 @@ exports[`<Organization /> renders correctly 1`] = `
               menu.news
             </h2>
             <div
-              className="sc-bcXGCL hkDKWl cap-card"
+              className="sc-bcXGCL bQYxRB cap-card"
             >
               <div
                 className="sc-bcXGCL jGNocB cap-card-cover"
@@ -358,7 +354,7 @@ exports[`<Organization /> renders correctly 1`] = `
               </button>
               <div
                 aria-orientation="vertical"
-                className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
+                className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
                 data-dialog={true}
                 hidden={true}
                 id="id-g"
@@ -436,7 +432,7 @@ exports[`<Organization /> renders correctly 1`] = `
               </div>
             </div>
             <div
-              className="sc-bcXGCL hkDKWl cap-card"
+              className="sc-bcXGCL bQYxRB cap-card"
             >
               <div
                 className="sc-bcXGCL hYTUzG cap-card-cover"

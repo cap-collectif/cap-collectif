@@ -51,7 +51,6 @@ export const CarrouselContent: FC<{ onDelete: (id: string) => void; title?: stri
         <DragnDrop onDragEnd={onDragEnd} backgroundColor="red">
           <DragnDrop.List droppableId="carrouselElements">
             {controlledFields.map((element, index) => (
-              // @ts-expect-error MAJ DS Props
               <DragnDrop.Item draggableId={element.id} index={index} key={element.id}>
                 <CarrouselItem
                   fieldBaseName={`carrouselElements.${index}`}

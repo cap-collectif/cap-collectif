@@ -45,7 +45,6 @@ const SectionsRecursive: React.FC<Props> = ({ sectionsFormKey, depth = 0, index 
             {sections.map((section, index) => {
               const hasSubSections = (section?.sections?.length ?? 0) > 0
               return (
-                // @ts-expect-error MAJ DS Props
                 <DragnDrop.Item draggableId={section.id} index={index} key={section.id}>
                   <SectionListItem
                     sectionsFormKey={formKey}

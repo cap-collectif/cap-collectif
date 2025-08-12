@@ -16,7 +16,6 @@ Array [
       className="sc-bcXGCL ixtUuC cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title=""
     >
       <span
@@ -120,7 +119,6 @@ Array [
       className="sc-bcXGCL ixtUuC cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title=""
     >
       <span
@@ -224,7 +222,6 @@ Array [
       className="sc-bcXGCL ixtUuC cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title=""
     >
       <span
@@ -325,7 +322,6 @@ Array [
       className="sc-bcXGCL ixtUuC cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title=""
     >
       <span
@@ -436,7 +432,6 @@ Array [
       className="sc-bcXGCL ixtUuC cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title=""
     >
       <span

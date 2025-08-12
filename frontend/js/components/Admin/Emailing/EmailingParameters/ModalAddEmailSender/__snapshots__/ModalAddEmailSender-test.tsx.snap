@@ -9,7 +9,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={false}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ LXlfG egpGUm"
+    className="sc-csDjRa Button__ButtonInner-dXfNcJ bOsCyV egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -51,7 +51,7 @@ Array [
     aria-controls="id-1"
     aria-expanded={true}
     aria-haspopup="dialog"
-    className="sc-dEVMhd Button__ButtonInner-dXfNcJ LXlfG egpGUm"
+    className="sc-csDjRa Button__ButtonInner-dXfNcJ bOsCyV egpGUm"
     onClick={[Function]}
     onClickCapture={[Function]}
     onKeyDown={[Function]}
@@ -80,7 +80,7 @@ Array [
       data-testid="AnimatePresence"
     >
       <div
-        className="sc-dEVMhd bjEjhK Modal__ModalContainerInner-gRvBLO"
+        className="sc-csDjRa cLNFbx Modal__ModalContainerInner-gRvBLO"
         onClick={[Function]}
         style={
           Object {
@@ -89,7 +89,7 @@ Array [
         }
       >
         <div
-          className="sc-dEVMhd fwBdND Modal__ModalInner-fNGFsd"
+          className="sc-csDjRa eKeibo Modal__ModalInner-fNGFsd"
           style={
             Object {
               "opacity": 0,
@@ -98,37 +98,37 @@ Array [
           }
         >
           <header
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY bGRJMU"
+            className="sc-csDjRa Flex___StyledAppBox-SiGEY bGPrlH"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fpKlVH ModalHeader___StyledFlex-hKIJSk YmlkP"
+              className="sc-csDjRa Flex___StyledAppBox-SiGEY dBMbGw ModalHeader___StyledFlex-hKIJSk YmlkP"
             >
               <p
-                className="sc-dEVMhd cplCPg"
+                className="sc-csDjRa jMyGaH"
               >
                 notification-email
               </p>
               <h2
-                className="sc-dEVMhd iTmdUA"
+                className="sc-csDjRa gOMzoX"
               >
                 add-sender-email-address
               </h2>
             </div>
             <button
-              className="sc-dEVMhd Button__ButtonInner-dXfNcJ kDftUS iWxcUO"
+              className="sc-csDjRa Button__ButtonInner-dXfNcJ liVenR iWxcUO"
               onClick={[Function]}
               type="button"
             >
               <IconMock
-                className="sc-dEVMhd Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ bklSCx dpibyo AjyOr icon"
+                className="sc-csDjRa Icon__IconInner-dszKAZ Icon___StyledIconInner-cDUvPZ yOzEu dpibyo AjyOr icon"
               />
             </button>
           </header>
           <main
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY aMkAC"
+            className="sc-csDjRa Flex___StyledAppBox-SiGEY eABYsx"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY gucHrW ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
+              className="sc-csDjRa Flex___StyledAppBox-SiGEY iQMLBJ ModalAddEmailSender__FieldContainer-dCTGYL jjVKV"
             >
               <div
                 className="form-group"
@@ -290,20 +290,20 @@ Array [
             </div>
           </main>
           <footer
-            className="sc-dEVMhd Flex___StyledAppBox-SiGEY evqvO"
+            className="sc-csDjRa Flex___StyledAppBox-SiGEY kKzyHd"
           >
             <div
-              className="sc-dEVMhd Flex___StyledAppBox-SiGEY fOAaig crLbTm"
+              className="sc-csDjRa Flex___StyledAppBox-SiGEY bwea-Dz crLbTm"
             >
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ LXlfG jzOsGm"
+                className="sc-csDjRa Button__ButtonInner-dXfNcJ bOsCyV jzOsGm"
                 onClick={[Function]}
                 type="button"
               >
                 cancel
               </button>
               <button
-                className="sc-dEVMhd Button__ButtonInner-dXfNcJ gnQlZi erDeRS"
+                className="sc-csDjRa Button__ButtonInner-dXfNcJ fLURBJ erDeRS"
                 onClick={[Function]}
                 type="button"
               >

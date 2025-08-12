@@ -66,7 +66,6 @@ Array [
             className="sc-bcXGCL loCcAr cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
-            tabIndex={-1}
             title=""
           >
             <h5
@@ -179,7 +178,6 @@ Array [
             className="sc-bcXGCL loCcAr cap-tag"
             onBlur={[Function]}
             onFocus={[Function]}
-            tabIndex={-1}
             title=""
           >
             <h5

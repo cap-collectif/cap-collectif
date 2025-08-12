@@ -24,23 +24,11 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               className="sc-bcXGCL bLdUPi"
             >
               <div
-                className="sc-bcXGCL isbCvH sc-jRwapC"
+                className="sc-bcXGCL isbCvH sc-jTjVHl"
                 style={{}}
               />
               <div
-                className="sc-bcXGCL fpCAzA sc-jRwapC"
-                style={{}}
-              />
-            </div>
-            <div
-              className="sc-bcXGCL bLdUPi"
-            >
-              <div
-                className="sc-bcXGCL isbCvH sc-jRwapC"
-                style={{}}
-              />
-              <div
-                className="sc-bcXGCL fpCAzA sc-jRwapC"
+                className="sc-bcXGCL fpCAzA sc-jTjVHl"
                 style={{}}
               />
             </div>
@@ -48,11 +36,23 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
               className="sc-bcXGCL bLdUPi"
             >
               <div
-                className="sc-bcXGCL isbCvH sc-jRwapC"
+                className="sc-bcXGCL isbCvH sc-jTjVHl"
                 style={{}}
               />
               <div
-                className="sc-bcXGCL fpCAzA sc-jRwapC"
+                className="sc-bcXGCL fpCAzA sc-jTjVHl"
+                style={{}}
+              />
+            </div>
+            <div
+              className="sc-bcXGCL bLdUPi"
+            >
+              <div
+                className="sc-bcXGCL isbCvH sc-jTjVHl"
+                style={{}}
+              />
+              <div
+                className="sc-bcXGCL fpCAzA sc-jTjVHl"
                 style={{}}
               />
             </div>
@@ -104,7 +104,6 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                 className="sc-bcXGCL hLIoKi cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title=" step.status.future"
               >
                 <svg
@@ -136,7 +135,6 @@ exports[`<ProjectListSection /> should render correctly 1`] = `
                 className="sc-bcXGCL fWdKQe cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title=" restrictedaccess"
               >
                 <svg

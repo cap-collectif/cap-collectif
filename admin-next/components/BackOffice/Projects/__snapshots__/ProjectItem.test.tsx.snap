@@ -71,7 +71,6 @@ exports[`<ProjectItem /> should render correctly 1`] = `
       className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title="public-everybody"
     >
       public-everybody
@@ -97,7 +96,7 @@ exports[`<ProjectItem /> should render correctly 1`] = `
   >
     <button
       aria-controls="id-g"
-      aria-describedby="id-g"
+      aria-describedby=":r0:"
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
@@ -106,13 +105,15 @@ exports[`<ProjectItem /> should render correctly 1`] = `
       onClick={[Function]}
       onClickCapture={[Function]}
       onFocus={[Function]}
+      onFocusCapture={[Function]}
       onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
       onKeyPressCapture={[Function]}
       onKeyUp={[Function]}
       onMouseDown={[Function]}
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
       type="button"
     >
       <svg
@@ -129,27 +130,18 @@ exports[`<ProjectItem /> should render correctly 1`] = `
         />
       </svg>
     </button>
-    <div
-      className="cap-tooltip-container"
+    <span
       hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onTransitionEnd={[Function]}
-      role="tooltip"
+      id=":r0:"
       style={
         {
-          "display": "none",
-          "left": "100%",
-          "pointerEvents": "none",
           "position": "fixed",
-          "top": "100%",
-          "zIndex": 1800,
         }
       }
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -373,7 +365,6 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
       className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title="public-everybody"
     >
       public-everybody
@@ -399,7 +390,7 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
   >
     <button
       aria-controls="id-g"
-      aria-describedby="id-g"
+      aria-describedby=":r3:"
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
@@ -408,13 +399,15 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
       onClick={[Function]}
       onClickCapture={[Function]}
       onFocus={[Function]}
+      onFocusCapture={[Function]}
       onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
       onKeyPressCapture={[Function]}
       onKeyUp={[Function]}
       onMouseDown={[Function]}
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
       type="button"
     >
       <svg
@@ -431,27 +424,18 @@ exports[`<ProjectItem /> should render correctly without authors 1`] = `
         />
       </svg>
     </button>
-    <div
-      className="cap-tooltip-container"
+    <span
       hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onTransitionEnd={[Function]}
-      role="tooltip"
+      id=":r3:"
       style={
         {
-          "display": "none",
-          "left": "100%",
-          "pointerEvents": "none",
           "position": "fixed",
-          "top": "100%",
-          "zIndex": 1800,
         }
       }
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -675,7 +659,6 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
       className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title="public-everybody"
     >
       public-everybody
@@ -701,7 +684,7 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
   >
     <button
       aria-controls="id-g"
-      aria-describedby="id-g"
+      aria-describedby=":r9:"
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
@@ -710,13 +693,15 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
       onClick={[Function]}
       onClickCapture={[Function]}
       onFocus={[Function]}
+      onFocusCapture={[Function]}
       onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
       onKeyPressCapture={[Function]}
       onKeyUp={[Function]}
       onMouseDown={[Function]}
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
       type="button"
     >
       <svg
@@ -733,27 +718,18 @@ exports[`<ProjectItem /> should render correctly without exportable steps 1`] = 
         />
       </svg>
     </button>
-    <div
-      className="cap-tooltip-container"
+    <span
       hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onTransitionEnd={[Function]}
-      role="tooltip"
+      id=":r9:"
       style={
         {
-          "display": "none",
-          "left": "100%",
-          "pointerEvents": "none",
           "position": "fixed",
-          "top": "100%",
-          "zIndex": 1800,
         }
       }
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"
@@ -913,7 +889,6 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
       className="sc-bcXGCL frEEJM cap-tag"
       onBlur={[Function]}
       onFocus={[Function]}
-      tabIndex={-1}
       title="public-everybody"
     >
       public-everybody
@@ -939,7 +914,7 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
   >
     <button
       aria-controls="id-g"
-      aria-describedby="id-g"
+      aria-describedby=":r6:"
       aria-expanded={false}
       aria-haspopup="menu"
       aria-label="global.plus"
@@ -948,13 +923,15 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
       onClick={[Function]}
       onClickCapture={[Function]}
       onFocus={[Function]}
+      onFocusCapture={[Function]}
       onKeyDown={[Function]}
+      onKeyDownCapture={[Function]}
       onKeyPressCapture={[Function]}
       onKeyUp={[Function]}
       onMouseDown={[Function]}
       onMouseDownCapture={[Function]}
       onMouseEnter={[Function]}
-      onMouseLeave={[Function]}
+      onMouseMove={[Function]}
       type="button"
     >
       <svg
@@ -971,27 +948,18 @@ exports[`<ProjectItem /> should render correctly without themes 1`] = `
         />
       </svg>
     </button>
-    <div
-      className="cap-tooltip-container"
+    <span
       hidden={true}
-      id="id-g"
-      onAnimationEnd={[Function]}
-      onTransitionEnd={[Function]}
-      role="tooltip"
+      id=":r6:"
       style={
         {
-          "display": "none",
-          "left": "100%",
-          "pointerEvents": "none",
           "position": "fixed",
-          "top": "100%",
-          "zIndex": 1800,
         }
       }
     />
     <div
       aria-orientation="vertical"
-      className="sc-bcXGCL bVeduZ sc-fvEvfv cap-menu__list"
+      className="sc-bcXGCL bVeduZ sc-jRwapC cap-menu__list"
       data-dialog={true}
       hidden={true}
       id="id-g"

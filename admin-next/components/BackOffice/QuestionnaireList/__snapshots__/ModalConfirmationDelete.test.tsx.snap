@@ -7,7 +7,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
   />,
   <button
     aria-controls="id-g"
-    aria-describedby="id-g"
+    aria-describedby=":r0:"
     aria-expanded={false}
     aria-haspopup="dialog"
     aria-label="global.delete"
@@ -15,14 +15,15 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
-    onFocus={[Function]}
+    onFocusCapture={[Function]}
     onKeyDown={[Function]}
+    onKeyDownCapture={[Function]}
     onKeyPressCapture={[Function]}
     onKeyUp={[Function]}
     onMouseDown={[Function]}
     onMouseDownCapture={[Function]}
     onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
     type="button"
   >
     <svg
@@ -40,21 +41,12 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
       />
     </svg>
   </button>,
-  <div
-    className="cap-tooltip-container"
+  <span
     hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
+    id=":r0:"
     style={
       {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
         "position": "fixed",
-        "top": "100%",
-        "zIndex": 1800,
       }
     }
   />,
@@ -86,7 +78,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
   />,
   <button
     aria-controls="id-g"
-    aria-describedby="id-g"
+    aria-describedby=":r3:"
     aria-expanded={true}
     aria-haspopup="dialog"
     aria-label="global.delete"
@@ -94,14 +86,15 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     onBlur={[Function]}
     onClick={[Function]}
     onClickCapture={[Function]}
-    onFocus={[Function]}
+    onFocusCapture={[Function]}
     onKeyDown={[Function]}
+    onKeyDownCapture={[Function]}
     onKeyPressCapture={[Function]}
     onKeyUp={[Function]}
     onMouseDown={[Function]}
     onMouseDownCapture={[Function]}
     onMouseEnter={[Function]}
-    onMouseLeave={[Function]}
+    onMouseMove={[Function]}
     type="button"
   >
     <svg
@@ -119,21 +112,12 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
       />
     </svg>
   </button>,
-  <div
-    className="cap-tooltip-container"
+  <span
     hidden={true}
-    id="id-g"
-    onAnimationEnd={[Function]}
-    onTransitionEnd={[Function]}
-    role="tooltip"
+    id=":r3:"
     style={
       {
-        "display": "none",
-        "left": "100%",
-        "pointerEvents": "none",
         "position": "fixed",
-        "top": "100%",
-        "zIndex": 1800,
       }
     }
   />,
@@ -151,7 +135,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
     tabIndex={-1}
   >
     <div
-      className="sc-bcXGCL jRSyOc sc-GKYOR cap-modal__overlay"
+      className="sc-bcXGCL jRSyOc sc-fcCDYY cap-modal__overlay"
       onClick={[Function]}
       style={
         {
@@ -160,7 +144,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
       }
     >
       <div
-        className="sc-bcXGCL JcTvy sc-gsGkXq fDqhDU cap-modal"
+        className="sc-bcXGCL JcTvy sc-GKYOR dCANLh cap-modal"
         style={
           {
             "opacity": 0,
@@ -217,7 +201,7 @@ exports[`<ModalConfirmationDelete /> <TestModalConfirmationDelete /> should rend
           className="sc-bcXGCL hsPaVR cap-modal__body"
         >
           <div
-            className="sc-bcXGCL hoDuix sc-fcCDYY cap-info-message"
+            className="sc-bcXGCL hoDuix sc-fvEvfv cap-info-message"
           >
             <div
               className="sc-bcXGCL csyhgC cap-info-message__content"

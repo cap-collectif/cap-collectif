@@ -150,7 +150,7 @@ exports[`<Contact /> renders correctly 1`] = `
                       </p>
                     </label>
                     <input
-                      className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
+                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
                       disabled={false}
                       id=":r0:"
                       minLength={2}
@@ -191,7 +191,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required={true}
-                      className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
+                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
                       disabled={false}
                       id=":r1:"
                       name="email"
@@ -231,7 +231,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     </label>
                     <input
                       aria-required={true}
-                      className="sc-bcXGCL sc-UpCiH cmIMrK fVmBzY cap-input"
+                      className="sc-bcXGCL sc-dwnPIk cmIMrK eCNeCU cap-input"
                       disabled={false}
                       id=":r2:"
                       minLength={2}
@@ -276,7 +276,7 @@ exports[`<Contact /> renders correctly 1`] = `
                     >
                       <textarea
                         aria-required={true}
-                        className="sc-bcXGCL sc-UpCiH lnUMOb fVmBzY cap-textarea"
+                        className="sc-bcXGCL sc-dwnPIk lnUMOb eCNeCU cap-textarea"
                         disabled={false}
                         id=":r3:"
                         minLength={2}

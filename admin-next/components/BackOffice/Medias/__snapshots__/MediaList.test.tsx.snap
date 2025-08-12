@@ -27,14 +27,19 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               onMouseLeave={[Function]}
             >
               <button
-                aria-describedby="id-g"
+                aria-describedby=":rc:"
                 aria-label="global.more"
                 className="sc-bcXGCL hluKno cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
-                onFocus={[Function]}
+                onClickCapture={[Function]}
+                onFocusCapture={[Function]}
+                onKeyDownCapture={[Function]}
+                onKeyPressCapture={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
                 onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
                 style={
                   {
                     "marginLeft": 0,
@@ -59,33 +64,29 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <div
-                className="cap-tooltip-container"
+              <span
                 hidden={true}
-                id="id-g"
-                onAnimationEnd={[Function]}
-                onTransitionEnd={[Function]}
-                role="tooltip"
+                id=":rc:"
                 style={
                   {
-                    "display": "none",
-                    "left": "100%",
-                    "pointerEvents": "none",
                     "position": "fixed",
-                    "top": "100%",
-                    "zIndex": 1800,
                   }
                 }
               />
               <button
-                aria-describedby="id-g"
+                aria-describedby=":rf:"
                 aria-label="copy-link"
                 className="sc-bcXGCL hluKno cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
-                onFocus={[Function]}
+                onClickCapture={[Function]}
+                onFocusCapture={[Function]}
+                onKeyDownCapture={[Function]}
+                onKeyPressCapture={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
                 onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
               >
                 <svg
                   aria-hidden="true"
@@ -105,33 +106,29 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <div
-                className="cap-tooltip-container"
+              <span
                 hidden={true}
-                id="id-g"
-                onAnimationEnd={[Function]}
-                onTransitionEnd={[Function]}
-                role="tooltip"
+                id=":rf:"
                 style={
                   {
-                    "display": "none",
-                    "left": "100%",
-                    "pointerEvents": "none",
                     "position": "fixed",
-                    "top": "100%",
-                    "zIndex": 1800,
                   }
                 }
               />
               <button
-                aria-describedby="id-g"
+                aria-describedby=":ri:"
                 aria-label="global.delete"
                 className="sc-bcXGCL kTKobZ cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
-                onFocus={[Function]}
+                onClickCapture={[Function]}
+                onFocusCapture={[Function]}
+                onKeyDownCapture={[Function]}
+                onKeyPressCapture={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
                 onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
               >
                 <svg
                   aria-hidden="true"
@@ -148,21 +145,12 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <div
-                className="cap-tooltip-container"
+              <span
                 hidden={true}
-                id="id-g"
-                onAnimationEnd={[Function]}
-                onTransitionEnd={[Function]}
-                role="tooltip"
+                id=":ri:"
                 style={
                   {
-                    "display": "none",
-                    "left": "100%",
-                    "pointerEvents": "none",
                     "position": "fixed",
-                    "top": "100%",
-                    "zIndex": 1800,
                   }
                 }
               />
@@ -185,7 +173,6 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     "marginTop": 0,
                   }
                 }
-                tabIndex={-1}
                 title="200x200px"
               >
                 200x200px
@@ -195,7 +182,6 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 className="sc-bcXGCL jDGtwv cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title="39ko"
               >
                 39ko
@@ -205,7 +191,6 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 className="sc-bcXGCL jDGtwv cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title="png"
               >
                 png
@@ -232,14 +217,19 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
               onMouseLeave={[Function]}
             >
               <button
-                aria-describedby="id-g"
+                aria-describedby=":rl:"
                 aria-label="global.more"
                 className="sc-bcXGCL hluKno cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
-                onFocus={[Function]}
+                onClickCapture={[Function]}
+                onFocusCapture={[Function]}
+                onKeyDownCapture={[Function]}
+                onKeyPressCapture={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
                 onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
                 style={
                   {
                     "marginLeft": 0,
@@ -264,33 +254,29 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <div
-                className="cap-tooltip-container"
+              <span
                 hidden={true}
-                id="id-g"
-                onAnimationEnd={[Function]}
-                onTransitionEnd={[Function]}
-                role="tooltip"
+                id=":rl:"
                 style={
                   {
-                    "display": "none",
-                    "left": "100%",
-                    "pointerEvents": "none",
                     "position": "fixed",
-                    "top": "100%",
-                    "zIndex": 1800,
                   }
                 }
               />
               <button
-                aria-describedby="id-g"
+                aria-describedby=":ro:"
                 aria-label="copy-link"
                 className="sc-bcXGCL hluKno cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
-                onFocus={[Function]}
+                onClickCapture={[Function]}
+                onFocusCapture={[Function]}
+                onKeyDownCapture={[Function]}
+                onKeyPressCapture={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
                 onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
               >
                 <svg
                   aria-hidden="true"
@@ -310,33 +296,29 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <div
-                className="cap-tooltip-container"
+              <span
                 hidden={true}
-                id="id-g"
-                onAnimationEnd={[Function]}
-                onTransitionEnd={[Function]}
-                role="tooltip"
+                id=":ro:"
                 style={
                   {
-                    "display": "none",
-                    "left": "100%",
-                    "pointerEvents": "none",
                     "position": "fixed",
-                    "top": "100%",
-                    "zIndex": 1800,
                   }
                 }
               />
               <button
-                aria-describedby="id-g"
+                aria-describedby=":rr:"
                 aria-label="global.delete"
                 className="sc-bcXGCL kTKobZ cap-buttonQuickAction"
                 onBlur={[Function]}
                 onClick={[Function]}
-                onFocus={[Function]}
+                onClickCapture={[Function]}
+                onFocusCapture={[Function]}
+                onKeyDownCapture={[Function]}
+                onKeyPressCapture={[Function]}
+                onMouseDown={[Function]}
+                onMouseDownCapture={[Function]}
                 onMouseEnter={[Function]}
-                onMouseLeave={[Function]}
+                onMouseMove={[Function]}
               >
                 <svg
                   aria-hidden="true"
@@ -353,21 +335,12 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                   />
                 </svg>
               </button>
-              <div
-                className="cap-tooltip-container"
+              <span
                 hidden={true}
-                id="id-g"
-                onAnimationEnd={[Function]}
-                onTransitionEnd={[Function]}
-                role="tooltip"
+                id=":rr:"
                 style={
                   {
-                    "display": "none",
-                    "left": "100%",
-                    "pointerEvents": "none",
                     "position": "fixed",
-                    "top": "100%",
-                    "zIndex": 1800,
                   }
                 }
               />
@@ -390,7 +363,6 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                     "marginTop": 0,
                   }
                 }
-                tabIndex={-1}
                 title="100x300px"
               >
                 100x300px
@@ -400,7 +372,6 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 className="sc-bcXGCL jDGtwv cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title="29ko"
               >
                 29ko
@@ -410,7 +381,6 @@ exports[`<MediaList /> should render correctly in grid view 1`] = `
                 className="sc-bcXGCL jDGtwv cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title="png"
               >
                 png
@@ -613,14 +583,19 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 className="sc-bcXGCL skEPE cap-buttonGroup"
               >
                 <button
-                  aria-describedby="id-g"
+                  aria-describedby=":r0:"
                   aria-label="copy-link"
                   className="sc-bcXGCL hluKno cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
-                  onFocus={[Function]}
+                  onClickCapture={[Function]}
+                  onFocusCapture={[Function]}
+                  onKeyDownCapture={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
                   onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
                   style={
                     {
                       "marginLeft": 0,
@@ -646,33 +621,29 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     />
                   </svg>
                 </button>
-                <div
-                  className="cap-tooltip-container"
+                <span
                   hidden={true}
-                  id="id-g"
-                  onAnimationEnd={[Function]}
-                  onTransitionEnd={[Function]}
-                  role="tooltip"
+                  id=":r0:"
                   style={
                     {
-                      "display": "none",
-                      "left": "100%",
-                      "pointerEvents": "none",
                       "position": "fixed",
-                      "top": "100%",
-                      "zIndex": 1800,
                     }
                   }
                 />
                 <button
-                  aria-describedby="id-g"
+                  aria-describedby=":r3:"
                   aria-label="global.delete"
                   className="sc-bcXGCL kTKobZ cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
-                  onFocus={[Function]}
+                  onClickCapture={[Function]}
+                  onFocusCapture={[Function]}
+                  onKeyDownCapture={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
                   onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
                 >
                   <svg
                     aria-hidden="true"
@@ -689,21 +660,12 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     />
                   </svg>
                 </button>
-                <div
-                  className="cap-tooltip-container"
+                <span
                   hidden={true}
-                  id="id-g"
-                  onAnimationEnd={[Function]}
-                  onTransitionEnd={[Function]}
-                  role="tooltip"
+                  id=":r3:"
                   style={
                     {
-                      "display": "none",
-                      "left": "100%",
-                      "pointerEvents": "none",
                       "position": "fixed",
-                      "top": "100%",
-                      "zIndex": 1800,
                     }
                   }
                 />
@@ -822,14 +784,19 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                 className="sc-bcXGCL skEPE cap-buttonGroup"
               >
                 <button
-                  aria-describedby="id-g"
+                  aria-describedby=":r6:"
                   aria-label="copy-link"
                   className="sc-bcXGCL hluKno cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
-                  onFocus={[Function]}
+                  onClickCapture={[Function]}
+                  onFocusCapture={[Function]}
+                  onKeyDownCapture={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
                   onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
                   style={
                     {
                       "marginLeft": 0,
@@ -855,33 +822,29 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     />
                   </svg>
                 </button>
-                <div
-                  className="cap-tooltip-container"
+                <span
                   hidden={true}
-                  id="id-g"
-                  onAnimationEnd={[Function]}
-                  onTransitionEnd={[Function]}
-                  role="tooltip"
+                  id=":r6:"
                   style={
                     {
-                      "display": "none",
-                      "left": "100%",
-                      "pointerEvents": "none",
                       "position": "fixed",
-                      "top": "100%",
-                      "zIndex": 1800,
                     }
                   }
                 />
                 <button
-                  aria-describedby="id-g"
+                  aria-describedby=":r9:"
                   aria-label="global.delete"
                   className="sc-bcXGCL kTKobZ cap-buttonQuickAction"
                   onBlur={[Function]}
                   onClick={[Function]}
-                  onFocus={[Function]}
+                  onClickCapture={[Function]}
+                  onFocusCapture={[Function]}
+                  onKeyDownCapture={[Function]}
+                  onKeyPressCapture={[Function]}
+                  onMouseDown={[Function]}
+                  onMouseDownCapture={[Function]}
                   onMouseEnter={[Function]}
-                  onMouseLeave={[Function]}
+                  onMouseMove={[Function]}
                 >
                   <svg
                     aria-hidden="true"
@@ -898,21 +861,12 @@ exports[`<MediaList /> should render correctly in list view 1`] = `
                     />
                   </svg>
                 </button>
-                <div
-                  className="cap-tooltip-container"
+                <span
                   hidden={true}
-                  id="id-g"
-                  onAnimationEnd={[Function]}
-                  onTransitionEnd={[Function]}
-                  role="tooltip"
+                  id=":r9:"
                   style={
                     {
-                      "display": "none",
-                      "left": "100%",
-                      "pointerEvents": "none",
                       "position": "fixed",
-                      "top": "100%",
-                      "zIndex": 1800,
                     }
                   }
                 />

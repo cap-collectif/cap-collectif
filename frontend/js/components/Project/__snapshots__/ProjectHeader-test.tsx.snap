@@ -133,7 +133,6 @@ Array [
             id="restricted-access"
             onBlur={[Function]}
             onFocus={[Function]}
-            tabIndex={-1}
             title=""
           >
             <svg

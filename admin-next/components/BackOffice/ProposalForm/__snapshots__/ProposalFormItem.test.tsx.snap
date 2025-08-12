@@ -72,14 +72,19 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
       className="sc-bcXGCL skEPE cap-buttonGroup"
     >
       <button
-        aria-describedby="id-g"
+        aria-describedby=":r6:"
         aria-label="duplicate"
         className="sc-bcXGCL hluKno cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
-        onFocus={[Function]}
+        onClickCapture={[Function]}
+        onFocusCapture={[Function]}
+        onKeyDownCapture={[Function]}
+        onKeyPressCapture={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
         onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
         style={
           {
             "marginLeft": 0,
@@ -106,21 +111,12 @@ exports[`<ProposalFormItem /> should hide delete button when viewer belongs to a
           />
         </svg>
       </button>
-      <div
-        className="cap-tooltip-container"
+      <span
         hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onTransitionEnd={[Function]}
-        role="tooltip"
+        id=":r6:"
         style={
           {
-            "display": "none",
-            "left": "100%",
-            "pointerEvents": "none",
             "position": "fixed",
-            "top": "100%",
-            "zIndex": 1800,
           }
         }
       />
@@ -201,14 +197,19 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
       className="sc-bcXGCL skEPE cap-buttonGroup"
     >
       <button
-        aria-describedby="id-g"
+        aria-describedby=":r0:"
         aria-label="duplicate"
         className="sc-bcXGCL hluKno cap-buttonQuickAction btn-duplicate"
         onBlur={[Function]}
         onClick={[Function]}
-        onFocus={[Function]}
+        onClickCapture={[Function]}
+        onFocusCapture={[Function]}
+        onKeyDownCapture={[Function]}
+        onKeyPressCapture={[Function]}
+        onMouseDown={[Function]}
+        onMouseDownCapture={[Function]}
         onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
         style={
           {
             "marginLeft": 0,
@@ -235,27 +236,18 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
           />
         </svg>
       </button>
-      <div
-        className="cap-tooltip-container"
+      <span
         hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onTransitionEnd={[Function]}
-        role="tooltip"
+        id=":r0:"
         style={
           {
-            "display": "none",
-            "left": "100%",
-            "pointerEvents": "none",
             "position": "fixed",
-            "top": "100%",
-            "zIndex": 1800,
           }
         }
       />
       <button
         aria-controls="id-g"
-        aria-describedby="id-g"
+        aria-describedby=":r3:"
         aria-expanded={false}
         aria-haspopup="dialog"
         aria-label="global.delete"
@@ -263,14 +255,15 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
         onBlur={[Function]}
         onClick={[Function]}
         onClickCapture={[Function]}
-        onFocus={[Function]}
+        onFocusCapture={[Function]}
         onKeyDown={[Function]}
+        onKeyDownCapture={[Function]}
         onKeyPressCapture={[Function]}
         onKeyUp={[Function]}
         onMouseDown={[Function]}
         onMouseDownCapture={[Function]}
         onMouseEnter={[Function]}
-        onMouseLeave={[Function]}
+        onMouseMove={[Function]}
         type="button"
       >
         <svg
@@ -288,21 +281,12 @@ exports[`<ProposalFormItem /> should render correctly 1`] = `
           />
         </svg>
       </button>
-      <div
-        className="cap-tooltip-container"
+      <span
         hidden={true}
-        id="id-g"
-        onAnimationEnd={[Function]}
-        onTransitionEnd={[Function]}
-        role="tooltip"
+        id=":r3:"
         style={
           {
-            "display": "none",
-            "left": "100%",
-            "pointerEvents": "none",
             "position": "fixed",
-            "top": "100%",
-            "zIndex": 1800,
           }
         }
       />

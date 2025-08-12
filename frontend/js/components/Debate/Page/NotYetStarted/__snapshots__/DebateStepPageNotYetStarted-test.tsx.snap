@@ -23,7 +23,6 @@ Array [
             "marginTop": 0,
           }
         }
-        tabIndex={-1}
         title=""
       >
         count.daysUntil {"count":725}

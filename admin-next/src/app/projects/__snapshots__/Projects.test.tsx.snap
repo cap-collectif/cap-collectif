@@ -57,23 +57,11 @@ exports[`<Projects /> renders correctly 1`] = `
               className="sc-bcXGCL bLdUPi"
             >
               <div
-                className="sc-bcXGCL isbCvH sc-jRwapC"
+                className="sc-bcXGCL isbCvH sc-jTjVHl"
                 style={{}}
               />
               <div
-                className="sc-bcXGCL fpCAzA sc-jRwapC"
-                style={{}}
-              />
-            </div>
-            <div
-              className="sc-bcXGCL bLdUPi"
-            >
-              <div
-                className="sc-bcXGCL isbCvH sc-jRwapC"
-                style={{}}
-              />
-              <div
-                className="sc-bcXGCL fpCAzA sc-jRwapC"
+                className="sc-bcXGCL fpCAzA sc-jTjVHl"
                 style={{}}
               />
             </div>
@@ -81,11 +69,23 @@ exports[`<Projects /> renders correctly 1`] = `
               className="sc-bcXGCL bLdUPi"
             >
               <div
-                className="sc-bcXGCL isbCvH sc-jRwapC"
+                className="sc-bcXGCL isbCvH sc-jTjVHl"
                 style={{}}
               />
               <div
-                className="sc-bcXGCL fpCAzA sc-jRwapC"
+                className="sc-bcXGCL fpCAzA sc-jTjVHl"
+                style={{}}
+              />
+            </div>
+            <div
+              className="sc-bcXGCL bLdUPi"
+            >
+              <div
+                className="sc-bcXGCL isbCvH sc-jTjVHl"
+                style={{}}
+              />
+              <div
+                className="sc-bcXGCL fpCAzA sc-jTjVHl"
                 style={{}}
               />
             </div>
@@ -137,7 +137,6 @@ exports[`<Projects /> renders correctly 1`] = `
                 className="sc-bcXGCL gvYJvN cap-tag"
                 onBlur={[Function]}
                 onFocus={[Function]}
-                tabIndex={-1}
                 title=" global-archived"
               >
                 <span
@@ -173,7 +172,6 @@ exports[`<Projects /> renders correctly 1`] = `
                   className="sc-bcXGCL kWsHud cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
-                  tabIndex={-1}
                   title="0 project.votes.widget.votes"
                 >
                   <svg
@@ -228,7 +226,6 @@ exports[`<Projects /> renders correctly 1`] = `
                   className="sc-bcXGCL kWsHud cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
-                  tabIndex={-1}
                   title="0 global.contribution"
                 >
                   <svg
@@ -264,7 +261,6 @@ exports[`<Projects /> renders correctly 1`] = `
                   className="sc-bcXGCL kWsHud cap-tag"
                   onBlur={[Function]}
                   onFocus={[Function]}
-                  tabIndex={-1}
                   title="0 capco.section.metrics.participants"
                 >
                   <svg

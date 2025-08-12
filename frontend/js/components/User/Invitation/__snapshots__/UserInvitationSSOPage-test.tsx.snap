@@ -6,16 +6,16 @@ Array [
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY lgagqn UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
+    className="sc-csDjRa Flex___StyledAppBox-SiGEY jwKotA UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
   >
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY deRCsk UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
+      className="sc-csDjRa Flex___StyledAppBox-SiGEY llwhtD UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
     >
       <div
-        className="sc-dEVMhd Flex___StyledAppBox-SiGEY ielunv UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
+        className="sc-csDjRa Flex___StyledAppBox-SiGEY ehNxxg UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
       >
         <div
-          className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
+          className="sc-csDjRa UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ cnlZmQ dPMeBO"
         >
           <h2
             className="sc-bcXGCL ethVoT cap-heading"
@@ -36,7 +36,7 @@ Array [
           </p>
         </div>
         <div
-          className="sc-dEVMhd Flex___StyledAppBox-SiGEY gkTRDr UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
+          className="sc-csDjRa Flex___StyledAppBox-SiGEY egLFRY UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
         >
           <div
             className="SSOButtonstyle__LinkButton-imVlRX dgSBwV"
@@ -68,7 +68,7 @@ Array [
             className="sc-bcXGCL fHDDQZ"
           >
             <div
-              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
             />
             <p
               className="sc-bcXGCL bmcaZK cap-text"
@@ -76,7 +76,7 @@ Array [
               global-or
             </p>
             <div
-              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
             />
           </div>
           <a
@@ -92,7 +92,7 @@ Array [
       </div>
     </div>
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY gHJzlp UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
+      className="sc-csDjRa Flex___StyledAppBox-SiGEY kSGgXm UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
     >
       <div
         className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
@@ -113,16 +113,16 @@ Array [
     className="sc-bcXGCL eEZeZH toasts-container toasts-container--top"
   />,
   <div
-    className="sc-dEVMhd Flex___StyledAppBox-SiGEY lgagqn UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
+    className="sc-csDjRa Flex___StyledAppBox-SiGEY jwKotA UserInvitationSSOPagestyle__Container-dqXVfv fkvEqx"
   >
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY deRCsk UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
+      className="sc-csDjRa Flex___StyledAppBox-SiGEY llwhtD UserInvitationSSOPagestyle__LeftSide-hwYfPk kGvogW"
     >
       <div
-        className="sc-dEVMhd Flex___StyledAppBox-SiGEY ielunv UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
+        className="sc-csDjRa Flex___StyledAppBox-SiGEY ehNxxg UserInvitationSSOPagestyle__LeftSideInner-jeevrm ldiJwX"
       >
         <div
-          className="sc-dEVMhd UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ dgbxgP dPMeBO"
+          className="sc-csDjRa UserInvitationSSOPagestyle__WelcomeMessage-hrwgdJ cnlZmQ dPMeBO"
         >
           <h2
             className="sc-bcXGCL ethVoT cap-heading"
@@ -143,13 +143,13 @@ Array [
           </p>
         </div>
         <div
-          className="sc-dEVMhd Flex___StyledAppBox-SiGEY gkTRDr UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
+          className="sc-csDjRa Flex___StyledAppBox-SiGEY egLFRY UserInvitationSSOPagestyle__ButtonsContainer-ejOutq bnfHaO"
         >
           <div
             className="SSOButtonstyle__FranceConnectButton-iIoYOE cQSpVd"
           >
             <a
-              className="sc-dEVMhd Link__LinkInner-jUMeyB cxqOkf jQFfTS"
+              className="sc-csDjRa Link__LinkInner-jUMeyB jTtoDs jQFfTS"
               href="/login/franceconnect?_destination=http://localhost"
               target="_blank"
             >
@@ -170,7 +170,7 @@ Array [
             className="sc-bcXGCL fHDDQZ"
           >
             <div
-              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
             />
             <p
               className="sc-bcXGCL bmcaZK cap-text"
@@ -178,7 +178,7 @@ Array [
               global-or
             </p>
             <div
-              className="sc-dEVMhd UserInvitationSSOPagestyle__Line-eEMwHm ellSjn hPTlau"
+              className="sc-csDjRa UserInvitationSSOPagestyle__Line-eEMwHm bOeMlE hPTlau"
             />
           </div>
           <a
@@ -194,7 +194,7 @@ Array [
       </div>
     </div>
     <div
-      className="sc-dEVMhd Flex___StyledAppBox-SiGEY gHJzlp UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
+      className="sc-csDjRa Flex___StyledAppBox-SiGEY kSGgXm UserInvitationSSOPagestyle__RigthSide-icDiDX bLaseu"
     >
       <div
         className="UserInvitationPagestyle__Symbols-eemyjG kKYEMo"
