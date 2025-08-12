@@ -26,8 +26,8 @@ const QUERY = graphql`
     $isTheme: Boolean!
     $isPost: Boolean!
   ) {
-    viewer @include(if: $isPost) {
-      posts(query: $term) {
+    viewer {
+      posts(query: $term) @include(if: $isPost) {
         edges {
           node {
             value: id
@@ -43,26 +43,27 @@ const QUERY = graphql`
           }
         }
       }
-    }
-    events(search: $term) @include(if: $isEvent) {
-      edges {
-        node {
-          value: id
-          label: title
-          description: body
-          url
-          media {
-            id
-            type: contentType
-            url(format: "reference")
-          }
-          extraData: timeRange {
-            startAt
-            endAt
+      events(search: $term) @include(if: $isEvent) {
+        edges {
+          node {
+            value: id
+            label: title
+            description: body
+            url
+            media {
+              id
+              type: contentType
+              url(format: "reference")
+            }
+            extraData: timeRange {
+              startAt
+              endAt
+            }
           }
         }
       }
     }
+
     projects(term: $term) @include(if: $isProject) {
       edges {
         node {
@@ -96,7 +97,7 @@ const QUERY = graphql`
 const formatData = (data: CarrouselSelectsQuery$data, type: CarrouselElementType): PrefillEntity[] => {
   if (!data) return []
   if (type === 'PROJECT') return data.projects?.edges?.map(({ node }) => node)
-  if (type === 'EVENT') return data.events?.edges?.map(({ node }) => node)
+  if (type === 'EVENT') return data.viewer?.events?.edges?.map(({ node }) => node)
   if (type === 'THEME')
     return data.themes?.map(t => ({ ...t, description: t?.teaser ?? t.description, teaser: undefined }))
   if (type === 'ARTICLE')
@@ -140,33 +141,36 @@ export const CarrouselSelects: FC<{ fieldBaseName: string; sectionType: SectionT
   return (
     <Box mb={4}>
       <FormLabel label={intl.formatMessage({ id: label })} mb={1} />
-      <AsyncSelect
-        autoFocus
-        placeholder={intl.formatMessage({ id: 'section.search_title' })}
-        loadOptions={loadOptions}
-        defaultOptions
-        loadingMessage={() => intl.formatMessage({ id: 'global.loading' })}
-        noOptionsMessage={() => intl.formatMessage({ id: 'result-not-found' })}
-        isClearable
-        onChange={value => {
-          if (value) {
-            setValue(
-              `${fieldBaseName}.title`,
-              value.label?.slice(0, sectionType === 'carrousel' ? MAX_TITLE_LENGTH : MAX_HIGHLIGHTED_TITLE_LENGTH),
-            )
-            setValue(
-              `${fieldBaseName}.description`,
-              stripHTML(value.description)?.slice(
-                0,
-                sectionType === 'carrousel' ? MAX_DESC_LENGTH : MAX_HIGHLIGHTED_DESC_LENGTH,
-              ),
-            )
-            setValue(`${fieldBaseName}.redirectLink`, value.url)
-            setValue(`${fieldBaseName}.image`, value.media)
-            setValue(`${fieldBaseName}.extraData`, type === 'EVENT' ? value.extraData : undefined)
-          }
-        }}
-      />
+      {/** neat trick to tell the drag'n'drop lib to allow click inside */}
+      <Box contentEditable suppressContentEditableWarning>
+        <AsyncSelect
+          autoFocus
+          placeholder={intl.formatMessage({ id: 'section.search_title' })}
+          loadOptions={loadOptions}
+          defaultOptions
+          loadingMessage={() => intl.formatMessage({ id: 'global.loading' })}
+          noOptionsMessage={() => intl.formatMessage({ id: 'result-not-found' })}
+          isClearable
+          onChange={value => {
+            if (value) {
+              setValue(
+                `${fieldBaseName}.title`,
+                value.label?.slice(0, sectionType === 'carrousel' ? MAX_TITLE_LENGTH : MAX_HIGHLIGHTED_TITLE_LENGTH),
+              )
+              setValue(
+                `${fieldBaseName}.description`,
+                stripHTML(value.description)?.slice(
+                  0,
+                  sectionType === 'carrousel' ? MAX_DESC_LENGTH : MAX_HIGHLIGHTED_DESC_LENGTH,
+                ),
+              )
+              setValue(`${fieldBaseName}.redirectLink`, value.url)
+              setValue(`${fieldBaseName}.image`, value.media)
+              setValue(`${fieldBaseName}.extraData`, type === 'EVENT' ? value.extraData : undefined)
+            }
+          }}
+        />
+      </Box>
     </Box>
   )
 }
