@@ -29,7 +29,7 @@ class CloudflareElasticClient
     public function __construct(
         private readonly LoggerInterface $logger,
         LoggerInterface $esLoggerCollector,
-        private readonly string $hostname,
+        private string $hostname,
         string $environment,
         string $elasticsearchHost,
         string $logpushElasticsearchHost,
@@ -39,6 +39,7 @@ class CloudflareElasticClient
         string $logpushElasticsearchPort,
         private readonly GlobalConfigurationTimeZoneDetector $timezoneDetector
     ) {
+        $this->hostname = strtolower($hostname);
         $this->esClient = $this->createEsClient(
             $environment,
             $elasticsearchHost,
