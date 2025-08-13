@@ -17,12 +17,15 @@ import { getPublicInquiryInput } from './ConfigurePublicInquiryInput'
 import PreConfigureProjectMutation from '@mutations/PreConfigureProjectMutation'
 import { CreateProjectMutation$data } from '@relay/CreateProjectMutation.graphql'
 import { PreConfigureProjectMutation$data, ProjectVisibility } from '@relay/PreConfigureProjectMutation.graphql'
+import { getPublicConsultationInput } from './ConfigurePublicConsultationInput'
 
 type ParticipatoryBudget = 'PARTICIPATORY_BUDGET'
 
 type ParticipatoryBudgetAnalysis = 'PARTICIPATORY_BUDGET_ANALYSIS'
 
 type PublicInquiry = 'PUBLIC_INQUIRY'
+
+type PublicConsultation = 'PUBLIC_CONSULTATION'
 
 type Props = {
   viewer: CreateProjectForm_viewer$key
@@ -36,7 +39,7 @@ type Mutation$data = CreateProjectMutation$data | PreConfigureProjectMutation$da
 type FormValues = {
   title: string
   authors: Array<{ label: string; value: string }>
-  model: ParticipatoryBudget | ParticipatoryBudgetAnalysis | PublicInquiry | null
+  model: ParticipatoryBudget | ParticipatoryBudgetAnalysis | PublicInquiry | PublicConsultation | null
 }
 
 const VIEWER_FRAGMENT = graphql`
@@ -79,6 +82,10 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
     {
       value: 'PUBLIC_INQUIRY',
       label: intl.formatMessage({ id: 'project.types.publicInquiry' }),
+    },
+    {
+      value: 'PUBLIC_CONSULTATION',
+      label: intl.formatMessage({ id: 'project.types.publicConsultation' }),
     },
     {
       value: 'NONE',
@@ -177,6 +184,20 @@ const CreateProjectForm: React.FC<Props> = ({ viewer: viewerFragment, setShowHel
 
           response = await PreConfigureProjectMutation.commit({
             input: publicInquiryInput,
+          })
+          project = response.preConfigureProject?.project
+          break
+        case 'PUBLIC_CONSULTATION':
+          const publicConsultationInput = getPublicConsultationInput({
+            projectTitle: title,
+            authors,
+            intl,
+            isNewBackOfficeEnabled,
+            visibility: isAdmin || isSuperAdmin ? ('ADMIN' as ProjectVisibility) : ('ME' as ProjectVisibility),
+          })
+
+          response = await PreConfigureProjectMutation.commit({
+            input: publicConsultationInput,
           })
           project = response.preConfigureProject?.project
           break

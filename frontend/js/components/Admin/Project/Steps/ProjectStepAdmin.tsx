@@ -14,6 +14,7 @@ import type { ProjectStepAdmin_query } from '~relay/ProjectStepAdmin_query.graph
 import Menu from '../../../DesignSystem/Menu/Menu'
 import Button from '~ds/Button/Button'
 import Text from '~ui/Primitives/Text'
+import { CapUIFontSize } from '@cap-collectif/ui'
 
 type Props = ReduxFormFormProps & {
   form: string
@@ -104,7 +105,9 @@ export const ProjectStepAdmin = ({ form, project, viewerIsAdmin, hasIdentificati
                         marginRight: '4px',
                       }}
                     />
-                    <FormattedMessage id="global.add" />
+                    <Text fontSize={CapUIFontSize.BodyRegular}>
+                      {intl.formatMessage({ id: 'global.add' })}
+                    </Text>
                   </Button>
                 </Menu.Button>
 

@@ -99,10 +99,11 @@ exports[`<ProjectStepAdmin /> renders correctly 1`] = `
                     }
                   }
                 />
-                <FormattedMessage
-                  id="global.add"
-                  values={Object {}}
-                />
+                <Text
+                  fontSize="BodyRegular"
+                >
+                  global.add
+                </Text>
               </Button>
             </Menu.Button>
             <Menu.List
@@ -293,10 +294,11 @@ exports[`<ProjectStepAdmin /> renders correctly with isAdmin false 1`] = `
                     }
                   }
                 />
-                <FormattedMessage
-                  id="global.add"
-                  values={Object {}}
-                />
+                <Text
+                  fontSize="BodyRegular"
+                >
+                  global.add
+                </Text>
               </Button>
             </Menu.Button>
             <Menu.List
@@ -472,10 +474,11 @@ exports[`<ProjectStepAdmin /> renders list step without selection step when no c
                     }
                   }
                 />
-                <FormattedMessage
-                  id="global.add"
-                  values={Object {}}
-                />
+                <Text
+                  fontSize="BodyRegular"
+                >
+                  global.add
+                </Text>
               </Button>
             </Menu.Button>
             <Menu.List
