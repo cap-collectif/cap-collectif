@@ -254,7 +254,7 @@ class Post implements EntityInterface, CommentableInterface, IndexableInterface,
         return $this;
     }
 
-    public function getUpdatedAt()
+    public function getUpdatedAt(): \DateTime
     {
         return $this->updatedAt;
     }
@@ -363,14 +363,7 @@ class Post implements EntityInterface, CommentableInterface, IndexableInterface,
         return $this;
     }
 
-    /**
-     * Remove theme.
-     *
-     * @param \Capco\AppBundle\Entity\Theme $theme
-     *
-     * @return $this
-     */
-    public function removeTheme(Theme $theme)
+    public function removeTheme(Theme $theme): self
     {
         $this->themes->removeElement($theme);
         $theme->removePost($this);
@@ -378,24 +371,12 @@ class Post implements EntityInterface, CommentableInterface, IndexableInterface,
         return $this;
     }
 
-    /**
-     * Get projects.
-     *
-     * @return \Doctrine\Common\Collections\Collection
-     */
-    public function getProjects()
+    public function getProjects(): Collection
     {
         return $this->projects;
     }
 
-    /**
-     * Add project.
-     *
-     * @param \Capco\AppBundle\Entity\Project $project
-     *
-     * @return $this
-     */
-    public function addProject(Project $project)
+    public function addProject(Project $project): self
     {
         if (!$this->projects->contains($project)) {
             $this->projects->add($project);
@@ -406,13 +387,9 @@ class Post implements EntityInterface, CommentableInterface, IndexableInterface,
     }
 
     /**
-     * Remove project.
-     *
-     * @param \Capco\AppBundle\Entity\Project $project
-     *
      * @return $this
      */
-    public function removeProject(Project $project)
+    public function removeProject(Project $project): self
     {
         $this->projects->removeElement($project);
         $project->removePost($this);
